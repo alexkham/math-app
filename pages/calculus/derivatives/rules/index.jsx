@@ -12,6 +12,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionMVTDiagrams from '@/app/components/functions/mvt/functionMVTDiagrams'
 
 
 export async function getStaticProps(){
@@ -792,8 +794,24 @@ const schemas = {
 
  
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    mvt: demoUnitFrame({
+      svg: functionMVTDiagrams.quadratic,
+      caption: 'Secant over [a, b] and the parallel tangent at c',
+      text: 'The dashed line joins the endpoints of the interval and has slope (f(b) &#8722; f(a))/(b &#8722; a); the solid tangent at the marked c has the same slope, so the two lines are parallel. The theorem promises such a c on any interval where the function is smooth, and for the parabola there is exactly one. Change the interval and watch c move to keep the tangent parallel on the',
+      href: '/calculus/visual-tools/mean-value-theorem',
+      linkText: 'mean value theorem visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     theoremsTable,
@@ -818,7 +836,7 @@ export default function RulesPage({
   theoremsTable,
   overviewTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -886,6 +904,8 @@ export default function RulesPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-mvt'} dangerouslySetInnerHTML={{ __html: demoUnits.mvt }} />,
+          `Somewhere the instantaneous rate equals the average rate: that is the whole theorem, and Rolle&#8217;s is its level special case.`,
         ]
     },
     {

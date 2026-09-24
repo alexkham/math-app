@@ -10,6 +10,8 @@ import ExplanationDetails from '../../../../app/components/ExplanationDetails'
 import InclusionExclusionExplorer from '../../../../app/components/diagrams/set-theory/InclusionExclusionExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import inclusionExclusionDiagrams from '../../../../app/components/diagrams/set-theory/inclusionExclusionDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -65,9 +67,9 @@ Enter the sizes on the right — $|A|$, $|B|$, and the overlaps — then press *
 Two numbers sit in each region, and mixing them up makes the whole display confusing:
 
 • The **large number** is how many times that region has been counted so far.
-• The **small grey number** underneath is how many elements the region actually holds.
+• The **small grey number** underneath is how many [elements](!/set-theory/basics#4) the region actually holds.
 
-The large numbers all start at $0$ and the entire job of the formula is to get every one of them to exactly $1$. When that happens, each element of the union has been counted once and the running total is the answer.
+The large numbers all start at $0$ and the entire job of the formula is to get every one of them to exactly $1$. When that happens, each element of the [union](!/set-theory/operations#1) has been counted once and the running total is the answer.
 
 **Play** runs the whole sequence, **Previous** steps back, and **Reset** returns to the beginning — which is [the state before any term is applied](!#nothing-counted-yet).`,
       before:``,
@@ -78,7 +80,7 @@ The large numbers all start at $0$ and the entire job of the formula is to get e
 
     obj2:{
       title:`Entering the Sizes`,
-      content:`The right-hand panel takes the sizes, and with three sets there are seven of them: the three set sizes, the three pairwise intersections, and the triple intersection.
+      content:`The right-hand panel takes the sizes, and with three [sets](!/set-theory/basics#1) there are seven of them: the three set sizes, the three pairwise [intersections](!/set-theory/operations#2), and the triple intersection.
 
 Those seven numbers determine everything else. The tool works backwards from them to the size of each region, which is why the small grey numbers change as soon as you type.
 
@@ -238,7 +240,13 @@ All three are easy to catch by the same habit: step through and check that every
 
 **Combinatorics** — counting problems where the principle does the heavy lifting.
 
-**Venn Diagram Generator** — for shading expressions rather than counting them.`,
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — for shading expressions rather than counting them.
+
+[Two-Set Venn Diagram](!/set-theory/visual-tools/two-sets-basic-venn) — the four-region picture behind $|A \\cup B| = |A| + |B| - |A \\cap B|$.
+
+[Three-Set Venn Diagram](!/set-theory/visual-tools/three-sets-basic-venn) — the eight regions whose counts the three-set formula adds and subtracts.
+
+[Indexed Union and Intersection Explorer](!/set-theory/visual-tools/union-intersection) — unions over whole families of sets, whose sizes the general formula counts.`,
       before:``,
       after:``,
       link:'',
@@ -551,6 +559,7 @@ The general lesson is one worth carrying beyond this tool: a counting formula ap
 
    return {
       props:{
+        relatedTools: getRelatedTools('inclusion-exclusion'),
          sectionsContent,
          introContent,
          instructions,
@@ -563,7 +572,7 @@ The general lesson is one worth carrying beyond this tool: a counting formula ap
     }
    }
 
-export default function InclusionExclusionPage({seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+export default function InclusionExclusionPage({relatedTools, seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
 
   // Slug ids (Line 1). obj0 is the Key Terms slot, unused on tool pages, so it
   // never reaches this list. A per-state row carries its frozen unit between
@@ -708,6 +717,7 @@ export default function InclusionExclusionPage({seoData, sectionsContent, introC
    />
    <br/>
    */}
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

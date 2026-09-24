@@ -12,6 +12,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import { renderDigitRule } from '../../../../app/utils/illustrations/arithmetic/divisibility/digitRule'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import divisibilityTableDiagrams from '@/app/components/divisibility/divisibilityTableDiagrams'
+import divisibilityTreeDiagrams from '@/app/components/divisibility/divisibilityTreeDiagrams'
 
 
 export async function getStaticProps(){
@@ -785,8 +788,38 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    byTwo: demoUnitFrame({
+      svg: divisibilityTableDiagrams.d2,
+      caption: 'The &#247;2 column: every other number',
+      text: 'Down the highlighted column every second number is marked, and their last digits run 0, 2, 4, 6, 8 and repeat: the rule for 2 is the pattern of that column read off the ones place. Nothing about the higher digits matters. Scan the column for any range of numbers on the',
+      href: '/arithmetic/visual-tools/divisibility-table',
+      linkText: 'interactive divisibility table',
+    }),
+    byThree: demoUnitFrame({
+      svg: divisibilityTreeDiagrams.threePass,
+      caption: '126: digit sum 9, so divisible by 3 and by 9',
+      text: 'The tree tests 126 rule by rule: even, so &#247;2 passes; 26 is not a multiple of 4, so &#247;4 fails; the digit sum 1 + 2 + 6 = 9 is divisible by 3 and by 9, so both of those tests pass. The digit-sum test is the rule of this section carried out as one branch. Send any number down the tree on the',
+      href: '/arithmetic/visual-tools/divisibility-tree',
+      linkText: 'divisibility decision tree',
+    }),
+    byFour: demoUnitFrame({
+      svg: divisibilityTableDiagrams.d4,
+      caption: 'The &#247;4 column: every fourth number',
+      text: 'The highlighted column marks every fourth number, and the marks depend only on the last two digits: 12, 16, 112 and 116 are all marked because 12 and 16 are multiples of 4, while the hundreds digit changes nothing. That is the rule for 4 as a column pattern. Check the last-two-digits rule against the column on the',
+      href: '/arithmetic/visual-tools/divisibility-table',
+      linkText: 'interactive divisibility table',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj11Table,
@@ -823,7 +856,7 @@ drObj5,
 drObj7,
 drObj8,
 drObj9,
-drObj10,}) {
+drObj10, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -871,7 +904,9 @@ drObj10,}) {
       <div key={'obj2-svg'} style={{ maxWidth: '700px', margin: '20px auto' }}
            dangerouslySetInnerHTML={{ __html: drObj2 }} />,
       sectionsContent.obj2.afterFigure,
-    ]
+              <div key={'unit-byTwo'} dangerouslySetInnerHTML={{ __html: demoUnits.byTwo }} />,
+          `The rule for 5 and the rule for 10 read the same digit in the same way.`,
+        ]
 },
 {
     id:'3',
@@ -882,7 +917,9 @@ drObj10,}) {
       <div key={'obj3-svg'} style={{ maxWidth: '700px', margin: '20px auto' }}
            dangerouslySetInnerHTML={{ __html: drObj3 }} />,
       sectionsContent.obj3.afterFigure,
-    ]
+              <div key={'unit-byThree'} dangerouslySetInnerHTML={{ __html: demoUnits.byThree }} />,
+          `The rule for 9 is the same test with a stricter target, as the tree&#8217;s next question shows.`,
+        ]
 },
     // {
     //     id:'4',
@@ -903,7 +940,9 @@ drObj10,}) {
       <div key={'obj4-svg'} style={{ maxWidth: '700px', margin: '20px auto' }}
            dangerouslySetInnerHTML={{ __html: drObj4 }} />,
       sectionsContent.obj4.afterFigure,
-    ]
+              <div key={'unit-byFour'} dangerouslySetInnerHTML={{ __html: demoUnits.byFour }} />,
+          `The rule for 8, three digits instead of two, follows the identical logic one power of ten higher.`,
+        ]
 },
     // {
     //     id:'5',

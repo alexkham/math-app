@@ -498,6 +498,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import ModPieWheel from '../../../../app/components/arithmetic/visualizers/ModPieWheel'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -524,17 +526,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Modular arithmetic** — arithmetic on remainders. Given a divisor (or modulus) $n$, every integer is replaced by its remainder when divided by $n$, an integer in the range $\\{0, 1, \\dots, n - 1\\}$.
+      content: `[Modular arithmetic](!/arithmetic/modulo#1) — arithmetic on [remainders](!/arithmetic/modulo#1). Given a divisor (or [modulus](!/arithmetic/modulo#1)) $n$, every integer is replaced by its remainder when divided by $n$, an integer in the range $\\{0, 1, \\dots, n - 1\\}$.
 
-**Modulus / divisor** $n$ — the integer you divide by. On this tool, $n$ ranges from $2$ to $9$ (the slice count).
+[Modulus / divisor](!/arithmetic/definitions#modulus) $n$ — the integer you divide by. On this tool, $n$ ranges from $2$ to $9$ (the slice count).
 
-**Remainder** — the leftover after integer division. For $a = qn + r$ with $0 \\leq r < n$, the remainder is $r$, written $a \\bmod n = r$.
+[Remainder](!/arithmetic/definitions#remainder) — the leftover after integer division. For $a = qn + r$ with $0 \\leq r < n$, the remainder is $r$, written $a \\bmod n = r$.
 
-**Congruence** $a \\equiv b \\pmod n$ — read $a$ **is congruent to** $b$ **modulo** $n$. True when $a$ and $b$ leave the same remainder when divided by $n$, equivalently when $n$ divides $a - b$.
+[Congruence](!/arithmetic/definitions#congruence) $a \\equiv b \\pmod n$ — read $a$ **is congruent to** $b$ **modulo** $n$. True when $a$ and $b$ leave the same remainder when divided by $n$, equivalently when $n$ divides $a - b$.
 
-**Equivalence class / residue class** — the set of all integers sharing the same remainder. There are exactly $n$ classes mod $n$, labeled $[0], [1], \\dots, [n - 1]$.
+[Equivalence class / residue class](!/arithmetic/definitions#residue_class) — the set of all integers sharing the same remainder. There are exactly $n$ classes mod $n$, labeled $[0], [1], \\dots, [n - 1]$.
 
-**Zero class (principal class)** — the class $[0]$, containing $0$ and all multiples of $n$. It's the identity element of the ring $\\mathbb{Z}/n\\mathbb{Z}$ and corresponds to the principal ideal $n\\mathbb{Z}$. The tool highlights this class with a [gold star and warm color](!#the-zero-class-why-its-special).
+**Zero class (principal class)** — the class $[0]$, containing $0$ and all [multiples](!/arithmetic/divisibility/factors#5) of $n$. It's the identity element of the ring $\\mathbb{Z}/n\\mathbb{Z}$ and corresponds to the principal ideal $n\\mathbb{Z}$. The tool highlights this class with a [gold star and warm color](!#the-zero-class-why-its-special).
 
 $\\mathbb{Z}/n\\mathbb{Z}$ — the integers mod $n$, the set of $n$ equivalence classes with addition and multiplication inherited from $\\mathbb{Z}$.`,
       before: ``,
@@ -768,7 +770,7 @@ Each class $[r]$ is the set $\\{r + kn : k \\in \\mathbb{Z}\\}$ — an infinite 
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Greatest common divisor (gcd)** — closely tied to modular arithmetic. The Euclidean algorithm computes $\\gcd(a, b)$ using repeated modular reduction. An integer $a$ has a multiplicative inverse mod $n$ iff $\\gcd(a, n) = 1$.
+      content: `**Greatest common divisor (gcd)** — closely tied to modular arithmetic. The [Euclidean algorithm](!/arithmetic/visual-tools/euclidean-algorithm) computes $\\gcd(a, b)$ using repeated modular reduction. An integer $a$ has a multiplicative inverse mod $n$ iff $\\gcd(a, n) = 1$.
 
 **Euler's totient** $\\varphi(n)$ — counts integers in $\\{1, \\dots, n - 1\\}$ that are coprime to $n$. Equivalently, the number of invertible classes in $\\mathbb{Z}/n\\mathbb{Z}$. For prime $n$, $\\varphi(n) = n - 1$.
 
@@ -784,7 +786,13 @@ Each class $[r]$ is the set $\\{r + kn : k \\in \\mathbb{Z}\\}$ — an infinite 
 
 **Congruence equations** — solving $ax \\equiv b \\pmod n$. Has a solution iff $\\gcd(a, n)$ divides $b$.
 
-**Modulo calculator** — to compute $a \\bmod n$ for arbitrary integers, see the **modulo calculator**.`,
+**Modulo calculator** — to compute $a \\bmod n$ for arbitrary integers, see the **modulo calculator**.
+
+[Base Converter](!/arithmetic/visual-tools/base-converter) — the units digit of $N$ in base $b$ is $N \\bmod b$, the position $N$ lands on around a wheel of $b$ slots.
+
+[Divisibility Table](!/arithmetic/visual-tools/divisibility-table) — the divisibility rules are the statement that a number lands on position $0$ of the wheel.
+
+[Divisibility Tiles](!/arithmetic/visual-tools/divisibility-tiles) — a remainder drawn as the tiles left over after filling complete rows.`,
       before: ``,
       after: ``,
       link: '',
@@ -955,6 +963,7 @@ This is the pigeonhole picture of [equivalence classes](!#equivalence-classes-an
 
   return {
     props: {
+      relatedTools: getRelatedTools('modular-wheel'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -977,7 +986,7 @@ This is the pigeonhole picture of [equivalence classes](!#equivalence-classes-an
   }
 }
 
-export default function ModularWheelVisualizer({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function ModularWheelVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1095,6 +1104,7 @@ export default function ModularWheelVisualizer({seoData, sectionsContent, introC
         variant="light"
       />
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

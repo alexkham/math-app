@@ -1282,6 +1282,11 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiagrams'
+import quadrantSignsDiagrams from '@/app/components/trigonometry/quadrantSignsDiagrams'
+import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
+import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
 
 
 export async function getStaticProps(){
@@ -2212,8 +2217,52 @@ The unit circle reveals structure that [right triangle trigonometry](!/trigonome
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    coordinates: demoUnitFrame({
+      svg: unitCircleDiagrams.quadrants[1],
+      caption: '&#952; = 50&#176;: the point is (cos &#952;, sin &#952;)',
+      text: 'The terminal side meets the circle at one point, and the two legs dropped from it are the two coordinates: the red horizontal leg is cos&#8201;&#952; &#8776; 0.643 and the blue vertical leg is sin&#8201;&#952; &#8776; 0.766, exactly the first two entries of the value row underneath. Nothing is being computed from a triangle; the coordinates are the definition. Drag the point to any angle and read both coordinates off the',
+      href: '/visual-tools/unit-circle',
+      linkText: 'unit circle visualizer',
+    }),
+    quadrantSigns: demoUnitFrame({
+      svg: quadrantSignsDiagrams.quadrants[2],
+      caption: 'Quadrant II: x &lt; 0, y &gt; 0',
+      text: 'The shaded quadrant holds an angle of 135&#176;; its x-coordinate is negative and its y-coordinate positive, so sine and cosecant come out positive while cosine, secant, tangent and cotangent come out negative, as the sign column beside the circle records. The pattern is decided by the two coordinate signs alone, never by the size of the angle. Step through all four quadrants and every one of the six functions on the',
+      href: '/trigonometry/visual-tools/functions-signs',
+      linkText: 'function signs by quadrant tool',
+    }),
+    referenceAngle: demoUnitFrame({
+      svg: angleExplorerDiagrams.concepts.reference,
+      caption: '140&#176; with its reference angle of 40&#176;',
+      text: 'The blue arc is the angle itself, 140&#176; swept from the positive x-axis; the orange arc is its reference angle, the 40&#176; between the terminal side and the nearest part of the x-axis, here the negative half. The reference angle fixes the magnitudes of the trigonometric values and the quadrant fixes their signs, which is the two-step evaluation this section describes. Move the terminal side into any quadrant and watch the reference angle recomputed on the',
+      href: '/trigonometry/visual-tools/angle-explorer',
+      linkText: 'angle explorer',
+    }),
+    coterminal: demoUnitFrame({
+      svg: angleExplorerDiagrams.concepts.coterminal,
+      caption: '45&#176; and &#8722;315&#176;: one terminal side',
+      text: 'The solid blue arc reaches the terminal side by turning 45&#176; counterclockwise; the dashed purple arc reaches the same ray by turning 315&#176; the other way. The two angles differ by a full rotation and share every trigonometric value, which is why 400&#176; behaves as 40&#176; and &#8722;150&#176; as 210&#176;. Add or subtract full turns and watch the terminal side stay put on the',
+      href: '/trigonometry/visual-tools/angle-explorer',
+      linkText: 'angle explorer',
+    }),
+    sineWave: demoUnitFrame({
+      svg: trigFunctionsGraphDiagrams.sin,
+      caption: 'y = sin &#952;, marker at &#952; = 60&#176;',
+      text: 'This curve is the y-coordinate of the moving point, plotted against the angle it has swept: it starts at 0, reaches 1 at 90&#176;, returns to 0 at 180&#176;, falls to &#8722;1 at 270&#176; and closes the cycle at 360&#176;. The marker sits at 60&#176;, where the height is &#8730;3/2 &#8776; 0.866, the same number the unit circle gives for that angle. Follow the marker around one full period on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj4Table,
@@ -2255,7 +2304,7 @@ export default function UnitCirclePage({
   obj5Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2284,6 +2333,8 @@ export default function UnitCirclePage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-coordinates'} dangerouslySetInnerHTML={{ __html: demoUnits.coordinates }} />,
+          `Every trigonometric statement about an angle is therefore a statement about the position of one point on this circle.`,
         ]
     },
     {
@@ -2302,6 +2353,8 @@ export default function UnitCirclePage({
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+                  <div key={'unit-quadrantSigns'} dangerouslySetInnerHTML={{ __html: demoUnits.quadrantSigns }} />,
+          `The mnemonic is a convenience; the coordinate signs are the reason.`,
         ]
     },
     {
@@ -2331,6 +2384,8 @@ export default function UnitCirclePage({
           sectionsContent.obj5.content,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+                  <div key={'unit-referenceAngle'} dangerouslySetInnerHTML={{ __html: demoUnits.referenceAngle }} />,
+          `Reference angles reduce every evaluation to a first-quadrant angle plus a sign, which is the whole strategy of the next section.`,
         ]
     },
     {
@@ -2355,6 +2410,8 @@ export default function UnitCirclePage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-coterminal'} dangerouslySetInnerHTML={{ __html: demoUnits.coterminal }} />,
+          `Every trigonometric function is therefore periodic, and the period of sine and cosine is one full rotation.`,
         ]
     },
     {
@@ -2363,6 +2420,8 @@ export default function UnitCirclePage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+                  <div key={'unit-sineWave'} dangerouslySetInnerHTML={{ __html: demoUnits.sineWave }} />,
+          `The other five functions arise the same way, each from a different quantity read off the same rotating point.`,
         ]
     },
     // NEW capstone section: obj10

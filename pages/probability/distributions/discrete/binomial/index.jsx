@@ -20,6 +20,10 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
+import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 
 
 export async function getStaticProps(){
@@ -672,8 +676,38 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
   }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_4_0: demoUnitFrame({
+      svg: discretePmfDiagrams.binomial,
+      caption: 'Binomial PMF, n = 10, p = 0.5',
+      text: 'The bars run from 0 to 10 successes and peak at 5, the value of np; with p equal to one half the pattern is symmetric, and each height is the binomial coefficient times p to the k times (1 minus p) to the n minus k. Move p away from one half and watch the peak slide and the bars lean on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+    u_5_1: demoUnitFrame({
+      svg: discreteCdfDiagrams.binomial,
+      caption: 'Binomial CDF, n = 10, p = 0.5',
+      text: 'The staircase adds the PMF bars from the left: each step at k rises by P(X = k), so F(k) is the probability of at most k successes and reaches 1 at k equal to n. The steps are largest around the mean, where the PMF peaks. Read P(X &le; k) at any step on the',
+      href: '/probability/visual-tools/cdf/discrete',
+      linkText: 'discrete CDF explorer',
+    }),
+    u_11_2: demoUnitFrame({
+      svg: coinSampleSpaceDiagrams.none,
+      caption: 'Three tosses: eight sequences grouped by number of heads',
+      text: 'A run of coin flips is a binomial experiment: with three tosses the eight equally likely sequences group into one way to get 0 heads, three ways for 1, three for 2 and one for 3, which are the binomial coefficients. The probability of exactly two heads is 3 over 8. Select a number of heads and count the matching sequences on the',
+      href: '/probability/visual-tools/coin-toss',
+      linkText: 'coin toss sample space explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          binomialExplanations,
@@ -699,7 +733,7 @@ export default function BinomialDistributionPage({
   binomialExplanations,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -766,7 +800,9 @@ export default function BinomialDistributionPage({
                   </div>,
                   <div key={'binomial-pmf-visualization'} style={{transform:'scale(0.8)'}}>
                   <BinomialDistribution/>
-                  </div>
+                  </div>,
+                  <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
+          `Summing these bars from the left gives the CDF.`,
         ]
     },
     {
@@ -778,7 +814,9 @@ export default function BinomialDistributionPage({
            <div key={'binomial-cdf-visualization'} style={{transform:'scale(0.8)'}}>
                   
                   <BinomialDistributionCDF/>
-                  </div>
+                  </div>,
+                  <div key={'unit-u_5_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_1 }} />,
+          `The expected value comes from the same bars.`,
         ]
     },
     {
@@ -811,6 +849,8 @@ export default function BinomialDistributionPage({
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+                  <div key={'unit-u_11_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_11_2 }} />,
+          `The calculator below handles any n and p.`,
         ]
     },
     {

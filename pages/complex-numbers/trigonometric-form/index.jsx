@@ -1545,6 +1545,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import polarRectangularDiagrams from '@/app/components/calculators/complex-numbers/polarRectangularDiagrams'
+import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 
 
 export async function getStaticProps(){
@@ -2725,8 +2728,45 @@ const schemas = {
 
   
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    modulus: demoUnitFrame({
+      svg: polarRectangularDiagrams.qi,
+      caption: 'z = 3 + 2i: r = &#8730;13 &#8776; 3.61',
+      text: 'The modulus is the length of the arrow from the origin, the hypotenuse of the right triangle with legs a = 3 and b = 2, so r = &#8730;(9 + 4). It is the first of the two polar coordinates. Read r and &#952; for any point on the',
+      href: '/complex-numbers/visual-tools/polar-rectangular',
+      linkText: 'polar and rectangular form converter',
+    }),
+    argument: demoUnitFrame({
+      svg: polarRectangularDiagrams.qii,
+      caption: 'z = &#8722;4 + 3i: the angle &#952; measured from the positive real axis',
+      text: 'The argument is the counterclockwise angle from the positive real axis to the arrow; for this point in the second quadrant it lies between 90&#176; and 180&#176;, about 143&#176;. Any angle differing from it by a full turn names the same point. Watch &#952; change as the point moves on the',
+      href: '/complex-numbers/visual-tools/polar-rectangular',
+      linkText: 'polar and rectangular form converter',
+    }),
+    quadrant: demoUnitFrame({
+      svg: polarRectangularDiagrams.qiii,
+      caption: 'z = &#8722;3 &#8722; 4i: arctan(b/a) alone gives the wrong angle',
+      text: 'Both parts are negative, so arctan(&#8722;4/&#8722;3) = arctan(4/3) &#8776; 53&#176; points into the first quadrant, while the arrow plainly lies in the third; adding 180&#176; gives the correct argument of about 233&#176;. The quadrant of the point, not the formula, decides. Move the point between quadrants II and III on the',
+      href: '/complex-numbers/visual-tools/polar-rectangular',
+      linkText: 'polar and rectangular form converter',
+    }),
+    mult: demoUnitFrame({
+      svg: complexMultiplicationDiagrams.general,
+      caption: 'z&#8321;z&#8322;: arguments add, moduli multiply',
+      text: 'The product sits at the angle &#952;&#8321; + &#952;&#8322; marked in the picture and at distance |z&#8321;||z&#8322;| from the origin: multiplying by a complex number rotates by its argument and scales by its modulus. Nothing in the algebraic expansion shows this; the picture does. Turn one factor and watch the product swing round on the',
+      href: '/complex-numbers/visual-tools/multiplication',
+      linkText: 'complex multiplication tool',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj5Table,
@@ -2745,7 +2785,7 @@ const schemas = {
 }
    }
 
-export default function TrigoFormPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas}) {
+export default function TrigoFormPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2773,6 +2813,8 @@ export default function TrigoFormPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-modulus'} dangerouslySetInnerHTML={{ __html: demoUnits.modulus }} />,
+          `Every complex number except zero has a positive modulus, and zero alone has no direction.`,
         ]
     },
     {
@@ -2781,6 +2823,8 @@ export default function TrigoFormPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-argument'} dangerouslySetInnerHTML={{ __html: demoUnits.argument }} />,
+          `The principal argument, treated next, picks one representative from this infinite family.`,
         ]
     },
     {
@@ -2802,6 +2846,8 @@ export default function TrigoFormPage({seoData, sectionsContent, introContent, o
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+                  <div key={'unit-quadrant'} dangerouslySetInnerHTML={{ __html: demoUnits.quadrant }} />,
+          `The rule is simple: compute the reference angle, then place it in the quadrant the signs of a and b dictate.`,
         ]
     },
     {
@@ -2866,6 +2912,8 @@ export default function TrigoFormPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+                  <div key={'unit-mult'} dangerouslySetInnerHTML={{ __html: demoUnits.mult }} />,
+          `This is the payoff of the trigonometric form: multiplication becomes a rotation and a scaling.`,
         ]
     },
     {

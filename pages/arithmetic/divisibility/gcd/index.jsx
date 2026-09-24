@@ -15,6 +15,8 @@ import { renderFactorSet } from '../../../../app/utils/illustrations/arithmetic/
 import { renderEuclideanChain } from '../../../../app/utils/illustrations/arithmetic/divisibility/euclideanChain'
 import { renderPrimeFactorization } from '../../../../app/utils/illustrations/arithmetic/divisibility/primeFactorization'
 import { renderRectangleTile } from '../../../../app/utils/illustrations/arithmetic/divisibility/rectangleTile'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
 
 
 export async function getStaticProps(){
@@ -723,8 +725,24 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    euclid: demoUnitFrame({
+      svg: euclideanVisualizerDiagrams.classic,
+      caption: 'gcd(252, 105) = 21 in three divisions',
+      text: 'Each line replaces the pair (a, b) by (b, a mod b): the remainder 42 becomes the new divisor, then 21, and when the remainder reaches 0 the divisor standing there, 21, is the answer. Three divisions did the work that factoring 252 and 105 would have taken much longer to do. Watch the pairs shrink for any two numbers on the',
+      href: '/arithmetic/visual-tools/euclidean-algorithm',
+      linkText: 'Euclidean algorithm visualizer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -760,7 +778,7 @@ fsGcdObj3,ecGcdObj5,
 ecGcdObj6a,
 ecGcdObj6b,pfGcdObj4,
 rtGcdObj10Ratio,
-rtGcdObj10Tiles,}) {
+rtGcdObj10Tiles, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -893,7 +911,9 @@ rtGcdObj10Tiles,}) {
       <div key={'obj5-svg'} style={{ maxWidth: '800px', margin: '20px auto' }}
            dangerouslySetInnerHTML={{ __html: ecGcdObj5 }} />,
       sectionsContent.obj5.afterFigure,
-    ]
+              <div key={'unit-euclid'} dangerouslySetInnerHTML={{ __html: demoUnits.euclid }} />,
+          `The next section writes the same steps out as a procedure to follow by hand.`,
+        ]
 },
 
 {

@@ -230,7 +230,7 @@ export default function SetTheoryRulesPage({sectionsContent,setAlgebraLawsData,i
     
   const setTheoryRulesSections=[
     {
-        id:' idempotent',
+        id:'idempotent',
         title:sectionsContent.idempotent.title,
         link:'',
         content:[

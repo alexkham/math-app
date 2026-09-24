@@ -10,6 +10,8 @@ import Head from 'next/head'
 import ContinuousCDFVisualizer from '@/app/components/visualizations/probability/continuous-distribution/CDF/ContinuousCDFVisualizer'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -35,7 +37,7 @@ export async function getStaticProps(){
   const sectionsContent = {
     obj1: {
       title: `Selecting a Distribution`,
-      content: `The visualizer displays three continuous probability distributions in tabs at the top. Click any tab to switch between **Continuous Uniform**, **Normal (Gaussian)**, and **Exponential** distributions. Each distribution models different continuous phenomena: uniform for equal likelihood across an interval, normal for bell-curved symmetric data, and exponential for waiting times or decay processes. The active tab highlights in blue, and the chart immediately updates to show a smooth cumulative distribution function curve with default parameter values.`,
+      content: `The visualizer displays three continuous [probability](!/probability/axioms) distributions in tabs at the top. Click any tab to switch between **Continuous Uniform**, **Normal (Gaussian)**, and **Exponential** distributions. Each distribution models different continuous phenomena: uniform for equal likelihood across an interval, normal for bell-curved symmetric data, and exponential for waiting times or decay processes. The active tab highlights in blue, and the chart immediately updates to show a smooth [cumulative distribution function](!/probability/cdf) curve with default parameter values.`,
       before: ``,
       after: ``,
       link: '',
@@ -47,7 +49,7 @@ export async function getStaticProps(){
 
 **Continuous Uniform** uses lower bound (a) and upper bound (b) sliders to define the interval endpoints.
 
-**Normal** adjusts mean (μ) to shift the center and standard deviation (σ) to control spread.
+**Normal** adjusts mean (μ) to shift the center and [standard deviation](!/probability/variance) (σ) to control spread.
 
 **Exponential** controls the rate parameter lambda (λ) which determines how quickly probability accumulates.
 
@@ -69,7 +71,7 @@ The curve's steepness indicates where probability density concentrates. Steeper 
 
     obj4: {
       title: `Understanding Continuous vs Discrete CDFs`,
-      content: `Continuous CDFs form smooth curves because probability spreads continuously across intervals rather than concentrating at specific points. In discrete distributions, probability jumps occur at countable values, creating step functions. In continuous distributions, $P(X = k) = 0$ for any exact value k—probability only exists for intervals. This is why the CDF rises smoothly: you're always accumulating infinitesimally small amounts of probability density as x increases.
+      content: `Continuous CDFs form smooth curves because probability spreads continuously across intervals rather than concentrating at specific points. In discrete distributions, probability jumps occur at countable values, creating step functions. In [continuous distributions](!/probability/random-variables), $P(X = k) = 0$ for any exact value k—probability only exists for intervals. This is why the CDF rises smoothly: you're always accumulating infinitesimally small amounts of probability density as x increases.
 
 The smooth curve reflects integration of the **probability density function** (PDF) from negative infinity up to x. The derivative of the CDF gives the PDF, showing the relationship between accumulation (CDF) and density (PDF). The CDF never decreases and has no discontinuous jumps in continuous distributions.`,
       before: ``,
@@ -79,7 +81,7 @@ The smooth curve reflects integration of the **probability density function** (P
 
     obj5: {
       title: `Finding Cumulative Probabilities`,
-      content: `To find $P(X \\leq a)$ for any value a, locate a on the x-axis and read upward to where it intersects the curve. The y-coordinate at that intersection gives the cumulative probability. For example, if the curve shows 0.8413 at $x = 1$ for a standard normal distribution, there's an 84.13% chance the variable is 1 or less.
+      content: `To find $P(X \\leq a)$ for any value a, locate a on the x-axis and read upward to where it intersects the curve. The y-coordinate at that intersection gives the cumulative probability. For example, if the curve shows 0.8413 at $x = 1$ for a standard [normal distribution](!/probability/distributions/continuous/normal), there's an 84.13% chance the variable is 1 or less.
 
 Calculate interval probabilities $P(a < X \\leq b)$ by subtracting CDF values: $F(b) - F(a)$. Hover over both endpoints to read their cumulative probabilities, then compute the difference. The vertical distance between the curve at point b and point a represents this interval probability visually.`,
       before: ``,
@@ -125,7 +127,7 @@ For comprehensive theory on cumulative distribution functions including mathemat
 
 Use PDF to see where values are most likely. Use CDF to calculate probabilities for ranges. The CDF always increases smoothly, while PDF can have multiple peaks, valleys, or asymmetry.
 
-For detailed comparison of probability functions including integration and differentiation relationships, see **probability density function vs cumulative distribution function**.`,
+For detailed comparison of [probability functions](!/probability/random-variables) including integration and differentiation relationships, see **probability density function vs cumulative distribution function**.`,
       before: ``,
       after: ``,
       link: '',
@@ -133,17 +135,21 @@ For detailed comparison of probability functions including integration and diffe
 
     obj10: {
       title: `Related Probability Tools and Concepts`,
-      content: `**Continuous Distribution Calculators** - Compute exact probabilities, quantiles, means, and variances for normal, exponential, uniform, and other continuous distributions.
+      content: `**Continuous Distribution Calculators** - Compute exact probabilities, quantiles, means, and [variances](!/probability/variance) for normal, exponential, uniform, and other continuous distributions.
 
-**PDF Visualizers** - Display probability density functions as curves showing where values are most likely rather than cumulative probability.
+[PDF Visualizers](!/probability/visual-tools/probability-function) - Display probability density functions as curves showing where values are most likely rather than cumulative probability.
 
-**Discrete Distribution CDFs** - Explore cumulative distribution functions for discrete random variables where CDFs are step functions instead of smooth curves.
+[Discrete Distribution CDFs](!/probability/visual-tools/cdf/discrete) - Explore cumulative distribution functions for [discrete random variables](!/probability/random-variables) where CDFs are step functions instead of smooth curves.
 
 **Normal Distribution Tables** - Standard normal (Z) tables showing cumulative probabilities for the standard normal distribution.
 
 **Probability Density Function Theory** - Understand the mathematical foundation of continuous probability functions and integration.
 
-**Continuous Distributions Overview** - Comprehensive guide to continuous probability distributions including when to use each type.`,
+**Continuous Distributions Overview** - Comprehensive guide to continuous probability distributions including when to use each type.
+
+[Distribution Explorers](!/probability/visual-tools/distributions) - Each continuous family with its density and parameters, the curves these CDFs accumulate.
+
+[Variance Visualizer](!/probability/visual-tools/variance) - The spread parameter that stretches or squeezes every one of these curves.`,
       before: ``,
       after: ``,
       link: '',
@@ -343,6 +349,7 @@ The memoryless property is what the shape encodes: $P(X > s + t \\mid X > s) = P
 
   return {
     props: {
+      relatedTools: getRelatedTools('probability-cdf-continuous'),
       sectionsContent,
       stateUnits,
       explanationsAppend,
@@ -362,7 +369,7 @@ The memoryless property is what the shape encodes: $P(X > s + t \\mid X > s) = P
   }
 }
 
-export default function CDFContinuousVisualizerPage({seoData, sectionsContent, stateUnits, explanationsAppend, introContent, faqQuestions, schemas}) {
+export default function CDFContinuousVisualizerPage({relatedTools, seoData, sectionsContent, stateUnits, explanationsAppend, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -471,6 +478,7 @@ export default function CDFContinuousVisualizerPage({seoData, sectionsContent, s
       /> */}
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

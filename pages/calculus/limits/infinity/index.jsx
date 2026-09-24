@@ -11,6 +11,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 
 
 export async function getStaticProps(){
@@ -666,8 +668,31 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    vertical: demoUnitFrame({
+      svg: functionLimitDiagrams['infinite-pos'],
+      caption: '1/x&#178;: a vertical asymptote at x = 0',
+      text: 'Both probes read 4 at &#177;0.5 and grow without bound as they move in: both one-sided limits are +&#8734;, which is the condition for a vertical asymptote at x = 0. The curve approaches the line without ever reaching it. Move the probes inward and watch the readings climb on the',
+      href: '/calculus/visual-tools/limit',
+      linkText: 'limit explorer',
+    }),
+    opposite: demoUnitFrame({
+      svg: functionLimitDiagrams['infinite-jump'],
+      caption: '1/x near 0: &#8722;&#8734; from the left, +&#8734; from the right',
+      text: 'The left probe reads &#8722;2 and the right one 2, and moving inward they diverge in opposite directions: the two one-sided infinite limits have opposite signs, so the curve leaves the picture downward on one side of the asymptote and upward on the other. The two-sided limit does not exist even as an infinite limit. Compare the two signs on the',
+      href: '/calculus/visual-tools/limit',
+      linkText: 'limit explorer',
+    }),
+  };
+
 return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj5Table,
@@ -687,7 +712,7 @@ return {
 }
    }
 
-export default function InfinityPage({seoData, sectionsContent, introContent, obj5Table, obj10Table, obj12Table, summaryTable, faqQuestions, schemas}) {
+export default function InfinityPage({seoData, sectionsContent, introContent, obj5Table, obj10Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -756,6 +781,8 @@ export default function InfinityPage({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-vertical'} dangerouslySetInnerHTML={{ __html: demoUnits.vertical }} />,
+          `A vertical asymptote is thus an infinite limit drawn as a line.`,
         ]
     },
     {
@@ -774,6 +801,8 @@ export default function InfinityPage({seoData, sectionsContent, introContent, ob
           sectionsContent.obj10.content,
           <div key={'obj10-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+                  <div key={'unit-opposite'} dangerouslySetInnerHTML={{ __html: demoUnits.opposite }} />,
+          `Sign analysis decides which direction each side takes; the asymptote itself is the same line either way.`,
         ]
     },
     {

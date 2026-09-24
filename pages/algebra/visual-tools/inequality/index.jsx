@@ -9,6 +9,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import InequalityVisualizer from '../../../../app/components/algebra/inequalities/visualizer/InequalityVisualizer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '../../../../app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -37,15 +39,15 @@ export async function getStaticProps(){
       title: `Key Terms`,
       content: `
 - **Inequality** $f(x) > 0$ (or $<, \\geq, \\leq$) — a statement asking which $x$ make $f(x)$ positive, negative, non-negative, or non-positive
-- **Solution set** — the set of all $x$ satisfying the inequality, typically a union of intervals on the real line
-- **Direction** — which comparison the inequality uses: $>$, $<$, $\\geq$, or $\\leq$
+- [Solution set](!/algebra/definitions#solution_set) — the set of all $x$ satisfying the [inequality](!/algebra/inequalities), typically a union of intervals on the real line
+- [Direction](!/algebra/inequalities#5) — which comparison the inequality uses: $>$, $<$, $\\geq$, or $\\leq$
 - **Strictness** — whether the inequality is strict ($>$, $<$) or non-strict ($\\geq$, $\\leq$); affects whether boundary points belong to the solution
-- **Sign chart** — a table tracking the sign of $f(x)$ across intervals separated by its zeros and undefined points
-- **Critical point** — a zero of $f(x)$ or a point where $f$ is undefined; the only places the sign of $f(x)$ can change
-- **Factor** — one of the building blocks of $f(x)$ when written as a product; each gets its own row in the sign chart
-- **Interval** — a maximal piece of the real line on which $f(x)$ has constant sign
+- [Sign chart](!/algebra/inequalities/polynomial#2) — a table tracking the sign of $f(x)$ across intervals separated by its zeros and undefined points
+- [Critical point](!/algebra/definitions#critical_point) — a zero of $f(x)$ or a point where $f$ is undefined; the only places the sign of $f(x)$ can change
+- [Factor](!/algebra/polynomials#8) — one of the building blocks of $f(x)$ when written as a product; each gets its own row in the sign chart
+- [Interval](!/algebra/inequalities#3) — a maximal piece of the real line on which $f(x)$ has constant sign
 - **Marble** — the draggable probe positioned at some $x$ in the visualizer; lets you read off the sign of $f(x)$ at that point
-- **Pole** — a point where $f$ is undefined (typically a denominator zero); excluded from the solution set regardless of strictness
+- [Pole](!/algebra/inequalities/rational#2) — a point where $f$ is undefined (typically a denominator zero); excluded from the [solution set](!/algebra/equations) regardless of strictness
 `,
       before: ``,
       after: ``,
@@ -74,7 +76,7 @@ Switching the type does three things at once:
 • The parameter sliders below reconfigure to match the new family's parameters
 • The sign chart rebuilds with a new set of factors and intervals
 
-The currently active type is highlighted in blue. The five families are [polynomial](!#polynomial-inequalities-in-the-explorer), [quadratic](!#quadratic-inequalities-in-the-explorer), [absolute value](!#absolute-value-inequalities-in-the-explorer), [rational](!#rational-inequalities-in-the-explorer), and [radical](!#radical-inequalities-in-the-explorer) — each leading to a different sign-chart structure. Higher-degree types produce more factors and more critical points, but the solution-set logic is identical across all of them.`,
+The currently active type is highlighted in blue. The five families are [polynomial](!#polynomial-inequalities-in-the-explorer), [quadratic](!#quadratic-inequalities-in-the-explorer), [absolute value](!#absolute-value-inequalities-in-the-explorer), [rational](!#rational-inequalities-in-the-explorer), and [radical](!#radical-inequalities-in-the-explorer) — each leading to a different sign-chart structure. Higher-degree types produce more factors and more critical points, but the [solution](!/algebra/equations)-set logic is identical across all of them.`,
       before: ``,
       after: ``,
       link: '',
@@ -156,7 +158,7 @@ If the marble sits at a pole, the Live tab flags $f(x)$ as undefined and notes t
       title: `What an Inequality Means Geometrically`,
       content: `The inequality $f(x) > 0$ asks for every $x$ at which the graph $y = f(x)$ sits **above** the $x$-axis. The inequality $f(x) < 0$ asks for every $x$ where the graph sits **below**. The non-strict versions $\\geq$ and $\\leq$ include the boundary points where the graph touches the $x$-axis.
 
-Unlike equations — whose solutions are typically isolated points where the curve crosses a level — inequalities have solution sets that are **regions** of the real line, almost always unions of intervals. A linear inequality has one half-line as its solution; a quadratic produces either a bounded interval, two unbounded intervals, an empty set, or the whole real line; rational inequalities can have arbitrarily many disjoint pieces.
+Unlike [equations](!/algebra/equations) — whose solutions are typically isolated points where the curve crosses a level — inequalities have solution sets that are **regions** of the real line, almost always unions of intervals. A [linear inequality](!/algebra/inequalities/linear) has one half-line as its solution; a quadratic produces either a bounded interval, two unbounded intervals, an empty set, or the whole real line; [rational inequalities](!/algebra/inequalities/rational) can have arbitrarily many disjoint pieces.
 
 The solution set changes whenever the sign of $f(x)$ changes, which happens only at zeros or poles. That is why the sign chart, which catalogs those exact points, is the natural tool for solving any inequality.
 
@@ -173,7 +175,7 @@ For comprehensive theory on inequalities, see **inequalities theory**.`,
 1. **Pick the rows matching the direction**. For $f(x) > 0$ or $f(x) \\geq 0$, look at intervals where the product row is $+$. For $f(x) < 0$ or $f(x) \\leq 0$, look where it is $-$.
 2. **Include or exclude boundary zeros** based on strictness. Strict comparisons exclude zeros (open intervals); non-strict comparisons include them (closed intervals).
 3. **Always exclude poles**. Even with non-strict comparisons, points where $f$ is undefined cannot be in the solution.
-4. **Take the union** of all qualifying intervals. The result is the solution set, written in interval notation.
+4. **Take the union** of all qualifying intervals. The result is the solution set, written in [interval notation](!/algebra/inequalities#3).
 
 Every inequality of this kind reduces to this procedure once the sign chart is built. The visualizer carries out each step on screen — colored intervals on the curve, highlighted columns in the chart, and a final interval-notation summary in the explanation panel.
 
@@ -187,7 +189,7 @@ For the companion equation case, see **equations visualizer**.`,
       title: `Related Concepts and Tools`,
       content: `**Inequalities** — the general theory of inequalities, methods of solution, and classification by type.
 
-**Equation Visualizer** — the companion tool for $f(x) = n$; uses the same marble-and-sign-chart layout but solves for discrete points rather than interval sets.
+[Equation Visualizer](!/algebra/visual-tools/equation) — the companion tool for $f(x) = n$; uses the same marble-and-sign-chart layout but solves for discrete points rather than interval sets.
 
 **Linear Inequalities** — the simplest case, where $f$ is degree one and the solution is a single half-line.
 
@@ -199,7 +201,11 @@ For the companion equation case, see **equations visualizer**.`,
 
 **Sign Charts** — the general technique for tracking the sign of a function across intervals.
 
-**Interval Notation** — the standard notation for expressing inequality solution sets as unions of intervals.`,
+**Interval Notation** — the standard notation for expressing inequality solution sets as unions of intervals.
+
+[Completing the Square Visualizer](!/algebra/visual-tools/completing-square) — vertex form shows at once where a quadratic is positive or negative.
+
+[Polynomial Multiplication Visualizer](!/algebra/visual-tools/polynomial-multiplication) — from factored form to the polynomial whose sign chart is drawn here.`,
       before: ``,
       after: ``,
       link: '',
@@ -219,7 +225,7 @@ Factored form is the pedagogical gift of this tab: the sign chart's factor rows 
 
     obj12: {
       title: `Quadratic Inequalities in the Explorer`,
-      content: `The Quadratic tab works in standard form $ax^2 + bx + c$, where the roots must be **earned** — the tool computes them from the discriminant before it can chart signs. The templates hit the three signature configurations: [two roots](!#a-quadratic-with-two-roots), [no real roots](!#a-quadratic-with-no-real-roots), and [an opens-down parabola](!#a-downward-parabola).
+      content: `The Quadratic tab works in [standard form](!/algebra/equations) $ax^2 + bx + c$, where the roots must be **earned** — the tool computes them from the [discriminant](!/algebra/equations/quadratic) before it can chart signs. The templates hit the three signature configurations: [two roots](!#a-quadratic-with-two-roots), [no real roots](!#a-quadratic-with-no-real-roots), and [an opens-down parabola](!#a-downward-parabola).
 
 The family adds one twist the factored cubic cannot show: an irreducible quadratic, whose sign never changes. When the discriminant goes negative, the whole parabola sits on one side of zero and the inequality's answer is everything or nothing.`,
       before: ``,
@@ -229,7 +235,7 @@ The family adds one twist the factored cubic cannot show: an irreducible quadrat
 
     obj13: {
       title: `Absolute-Value Inequalities in the Explorer`,
-      content: `The Absolute value tab solves $|x - h| - k < 0$ — distance inequalities in disguise. The templates: [the centered V](!#the-centered-v), [a shifted V](!#the-shifted-v), and [the V at zero level](!#the-v-at-zero-level), where the vertex itself touches the axis.
+      content: `The [Absolute value](!/algebra/equations/absolute-value) tab solves $|x - h| - k < 0$ — distance inequalities in disguise. The templates: [the centered V](!#the-centered-v), [a shifted V](!#the-shifted-v), and [the V at zero level](!#the-v-at-zero-level), where the vertex itself touches the axis.
 
 The distance reading turns each solution into a sentence: $|x - h| < k$ means "within $k$ of $h$" — an interval centered at $h$ — while the $>$ version means "farther than $k$ from $h$", the two outer rays. The V's two arms are the two linear cases of the definition, drawn simultaneously.`,
       before: ``,
@@ -249,7 +255,7 @@ The family exists to break a bad habit: multiplying both sides by $(x - b)$ flip
 
     obj15: {
       title: `Radical Inequalities in the Explorer`,
-      content: `The Radical tab solves $\\sqrt{x - a} - k < 0$ and brings the last complication: a **restricted domain**. Nothing exists left of $x = a$; the region is shaded out in red before any sign question can even be asked. The templates: [the basic radical](!#the-basic-radical), [a shifted start](!#the-shifted-radical), and [a high level](!#the-high-level-radical) pushing the zero far to the right.
+      content: `The [Radical](!/algebra/roots) tab solves $\\sqrt{x - a} - k < 0$ and brings the last complication: a **restricted domain**. Nothing exists left of $x = a$; the region is shaded out in red before any sign question can even be asked. The templates: [the basic radical](!#the-basic-radical), [a shifted start](!#the-shifted-radical), and [a high level](!#the-high-level-radical) pushing the zero far to the right.
 
 The standing lesson: a solution set lives **inside** the domain. Every radical answer is the intersection of an interval with $[a, \\infty)$, and forgetting that intersection is the classic radical-inequality error the red shading makes impossible to commit.`,
       before: ``,
@@ -421,7 +427,7 @@ Sixteen units of solution from one small parameter change (compare [the basic ra
 
     obj31: {
       title: `Strictly Less Than Zero`,
-      content: `The default comparison, frozen on the default polynomial: $(x + 2)(x - 1)(x - 5) < 0$. Two open-ended bars — $(-\\infty, -2)$ and $(1, 5)$ — with every boundary dot drawn open.`,
+      content: `The default comparison, frozen on the default [polynomial](!/algebra/polynomials): $(x + 2)(x - 1)(x - 5) < 0$. Two open-ended bars — $(-\\infty, -2)$ and $(1, 5)$ — with every boundary dot drawn open.`,
       before: ``,
       after: `Strict less-than is the reference state the other three operators perturb. Its signature is the open circles: the roots themselves give $f(x) = 0$, and zero is not less than zero, so all three boundary points are excluded.
 
@@ -431,7 +437,7 @@ The four operator states share one curve and one set of critical points; only me
 
     obj32: {
       title: `At Most Zero`,
-      content: `The same polynomial under $\\leq$: identical bars, but the three boundary dots at $-2$, $1$, $5$ now render filled — the roots joined the solution set.`,
+      content: `The same polynomial under $\\leq$: identical bars, but the three boundary dots at $-2$, $1$, $5$ now render filled — the [roots](!/algebra/roots) joined the solution set.`,
       before: ``,
       after: `Non-strict comparison admits equality, and equality happens exactly at the zeros of $f$. The solution grows by precisely three points: $(-\\infty, -2] \\cup [1, 5]$. Nothing else moves — the interiors of the intervals were already decided by the sign chart.
 
@@ -648,6 +654,7 @@ Frozen side by side, the four frames are a truth table for the operator pair —
 
   return {
     props: {
+      relatedTools: getRelatedTools('algebra-inequality'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -675,7 +682,7 @@ Frozen side by side, the four frames are a truth table for the operator pair —
 }
 
 
-export default function InequalityVisualExplorerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function InequalityVisualExplorerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / section with after-text / per-state section
   // carrying its frozen unit as [content, unit, after].
@@ -831,6 +838,7 @@ export default function InequalityVisualExplorerPage({seoData, sectionsContent, 
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

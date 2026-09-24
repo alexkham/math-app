@@ -473,6 +473,8 @@ import Head from 'next/head'
 import DivisibilityTreeSVG from '@/app/components/divisibility/divisibility-tree'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import divisibilityTreeDiagrams from '@/app/components/divisibility/divisibilityTreeDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -634,7 +636,7 @@ For ÷2 and ÷5, the last digit suffices because 10 is divisible by both. All hi
 
 For ÷3 and ÷9, digit sums work because $10 \\equiv 1 \\pmod{3}$ and $10 \\equiv 1 \\pmod{9}$. Each digit's contribution equals just the digit itself, regardless of its position.
 
-For ÷4 and ÷8, the last two or three digits work because $100 \\equiv 0 \\pmod{4}$ and $1000 \\equiv 0 \\pmod{8}$. Higher place values contribute nothing to the remainder.
+For ÷4 and ÷8, the last two or three digits work because $100 \\equiv 0 \\pmod{4}$ and $1000 \\equiv 0 \\pmod{8}$. Higher place values contribute nothing to the [remainder](!/arithmetic/modulo#1).
 
 The decision tree's structure reflects these mathematical relationships, grouping related tests and showing logical dependencies.`,
       before: ``,
@@ -654,7 +656,15 @@ The decision tree's structure reflects these mathematical relationships, groupin
 
 **Least Common Multiple (LCM)**: The smallest number divisible by two given integers. Understanding divisibility simplifies LCM calculations.
 
-**Modular Arithmetic**: The remainder operation generalizes divisibility. A number is divisible by $n$ when its remainder modulo $n$ equals zero.`,
+**Modular Arithmetic**: The remainder operation generalizes divisibility. A number is divisible by $n$ when its remainder modulo $n$ equals zero.
+
+[Divisibility Table](!/arithmetic/visual-tools/divisibility-table): Every rule tested at once for one number, instead of one branch at a time.
+
+[Divisibility Tiles](!/arithmetic/visual-tools/divisibility-tiles): A divisibility test drawn as tiles filling rows, remainder and all.
+
+[Sieve of Eratosthenes](!/arithmetic/visual-tools/eratosthenes-sieve): Where the primes come from, the numbers this tree can never split.
+
+[Modular Arithmetic Wheel](!/arithmetic/visual-tools/modular-wheel): Each branch asks whether the remainder modulo n is zero; the wheel shows that remainder.`,
       before: ``,
       after: ``,
       link: '',
@@ -664,7 +674,7 @@ The decision tree's structure reflects these mathematical relationships, groupin
       title: `The Odd Shortcut`,
       content: `When the [even/odd check](!#the-even-odd-split) comes back odd, the tree does something dramatic: a single node declares ÷2, ÷4, ÷6, ÷8, ÷10, and ÷12 all failed at once, and the entire left branch stays gray.
 
-The logic is airtight. Every multiple of an even number is itself even—a multiple of 4 is $4k = 2(2k)$, a multiple of 6 is $6k = 2(3k)$, and so on. An odd number therefore cannot be a multiple of any of them, and no calculation is needed to know it.
+The logic is airtight. Every [multiple](!/arithmetic/divisibility/factors#5) of an even number is itself even—a multiple of 4 is $4k = 2(2k)$, a multiple of 6 is $6k = 2(3k)$, and so on. An odd number therefore cannot be a multiple of any of them, and no calculation is needed to know it.
 
 Try 45: it ends in 5, so it is odd, and six divisors vanish immediately. The tests that remain—3, 5, 7, 9, 11—are exactly the odd divisors, and 45 still collects three of them (3, 5, and 9).`,
       before: ``,
@@ -704,7 +714,7 @@ There is a quiet completeness fact here too: the digit sum of any number is cong
 
     obj14: {
       title: `Only Divisible by 1: Prime Suspects`,
-      content: `Enter 13 and watch every test from 2 to 12 fail: odd, digit sum 4, ends in 3, no direct hit at 7, alternating sum −2. The summary panel then shows a special yellow note: only divisible by 1—this might be a prime number, or divisible by something larger than 12.
+      content: `Enter 13 and watch every test from 2 to 12 fail: odd, digit sum 4, ends in 3, no direct hit at 7, alternating sum −2. The summary panel then shows a special yellow note: only divisible by 1—this might be a [prime number](!/arithmetic/divisibility#7), or divisible by something larger than 12.
 
 The hedge in that wording is honest. The tree only tests divisors up to 12, so it can suspect primality but never prove it. 13 happens to be prime; 169 = 13 × 13 produces exactly the same all-red display and is not prime, because its smallest factor is beyond the tree's reach.
 
@@ -850,6 +860,7 @@ A good exercise: hunt for the smallest impostor. A composite number always has a
 
   return {
     props: {
+      relatedTools: getRelatedTools('divisibility-tree'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -862,7 +873,7 @@ A good exercise: hunt for the smallest impostor. A composite number always has a
 }
 
 export default function DivisibilityTreePage({
-  seoData,
+  relatedTools, seoData,
   sectionsContent,
   introContent,
   faqQuestions,
@@ -973,6 +984,7 @@ export default function DivisibilityTreePage({
       <br/>
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

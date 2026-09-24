@@ -1047,6 +1047,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoivreDiagrams'
 
 
 export async function getStaticProps(){
@@ -1757,8 +1759,31 @@ const schemas = {
 
  
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    formula: demoUnitFrame({
+      svg: deMoivreDiagrams.squared,
+      caption: 'z and z&#178;: the argument doubles',
+      text: 'Squaring the arrow turns it through its own angle a second time and squares its length: z&#178; sits at angle 2&#952; and distance r&#178;, which for a point on the unit circle is the statement (cos &#952; + i sin &#952;)&#178; = cos 2&#952; + i sin 2&#952;. Raise the power and watch the angle keep multiplying on the',
+      href: '/complex-numbers/visual-tools/demoivre-visualizer',
+      linkText: 'De Moivre visualizer',
+    }),
+    power: demoUnitFrame({
+      svg: deMoivreDiagrams.twoTen,
+      caption: 'z through z&#185;&#8304;: a spiral of powers',
+      text: 'The ten arrows step round by the same angle each time while their lengths grow geometrically, and the tenth lands where the theorem says: argument 10&#952;, modulus r&#185;&#8304;. The algebraic expansion of a tenth power would take dozens of terms; the picture takes ten turns. Follow the spiral for any base on the',
+      href: '/complex-numbers/visual-tools/demoivre-visualizer',
+      linkText: 'De Moivre visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1789,7 +1814,7 @@ export default function DeMoivreTheoremPage({
   obj8Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1818,6 +1843,8 @@ export default function DeMoivreTheoremPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-formula'} dangerouslySetInnerHTML={{ __html: demoUnits.formula }} />,
+          `Multiplying the angle is the entire content of the theorem; the modulus behaves as it does for any real power.`,
         ]
     },
     {
@@ -1839,6 +1866,8 @@ export default function DeMoivreTheoremPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+                  <div key={'unit-power'} dangerouslySetInnerHTML={{ __html: demoUnits.power }} />,
+          `Converting back to algebraic form is the only step with any arithmetic in it.`,
         ]
     },
     {

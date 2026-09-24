@@ -11,6 +11,8 @@ import Head from 'next/head'
 import EratosthenesSieve from '../../../../app/components/visualizations/arithmetic/EratosthenesSieve'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import eratosthenesSieveDiagrams from '@/app/components/visualizations/arithmetic/eratosthenesSieveDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -62,7 +64,7 @@ export async function getStaticProps(){
       title: `How to Use the Sieve Visualization`,
       content: `This interactive tool demonstrates the Sieve of Eratosthenes algorithm on numbers from 1 to 100. Press the **Start** button to run the animation automatically, watching as primes emerge and [composites get crossed out](!#what-is-the-sieve-of-eratosthenes).
 
-Use the **Step** button to advance one action at a time for closer study. Each step either identifies a new prime or crosses out one of its multiples. The **Reset** button clears the grid and returns to the initial state.
+Use the **Step** button to advance one action at a time for closer study. Each step either identifies a new prime or crosses out one of its [multiples](!/arithmetic/divisibility/factors#5). The **Reset** button clears the grid and returns to the initial state.
 
 The **Speed** slider controls how fast the animation runs. Slide left for slower, more detailed observation; slide right for faster execution. Even at maximum speed, each crossing is visible so you can follow the pattern.`,
       before: ``,
@@ -78,7 +80,7 @@ That neutrality is the honest starting point of the sieve: it assumes nothing an
 
 As the algorithm runs, primes light up in solid colors: **blue** for 2, **green** for 3, **purple** for 5, and **orange** for 7. These are the only primes whose multiples need crossing within 100, since the next prime (11) has 11² = 121 > 100.
 
-Composite numbers show tinted backgrounds indicating which prime(s) crossed them out. Numbers divisible by multiple small primes display [striped patterns](!#the-second-pass-multiples-of-3) combining those colors. This color coding reveals divisibility relationships at a glance.`,
+[Composite numbers](!/arithmetic/divisibility#7) show tinted backgrounds indicating which prime(s) crossed them out. Numbers divisible by multiple small primes display [striped patterns](!#the-second-pass-multiples-of-3) combining those colors. This color coding reveals divisibility relationships at a glance.`,
       before: ``,
       after: `The finished grid above is the whole story in one frame: 25 solid primes, 74 tinted composites, and gray 1. Read any composite's tint as a partial factorization—66 wears the stripes of 2 and 3, 70 of 2, 5, and 7. Only factors up to 7 are recorded; 94 = 2 × 47 shows pure blue because 47 lies beyond the sieve's palette.
 
@@ -112,7 +114,7 @@ Below the header, crossed numbers appear as colored badges. The count at the bot
 
     obj5: {
       title: `Tracking Statistics`,
-      content: `Three statistics cards at the top of the right panel show running totals. **Primes** counts how many prime numbers have been confirmed. **Composites** counts how many numbers have been crossed out. **Current** displays the prime currently being processed.
+      content: `Three statistics cards at the top of the right panel show running totals. **Primes** counts how many [prime numbers](!/arithmetic/divisibility#7) have been confirmed. **Composites** counts how many numbers have been crossed out. **Current** displays the prime currently being processed.
 
 Watch these numbers change as the algorithm progresses. By completion, you'll see 25 primes and 74 composites (plus 1, which is neither). The Current indicator shows "—" when the sieve finishes.
 
@@ -194,11 +196,17 @@ Twin primes — pairs differing by 2 like (11,13) and (17,19) — appear scatter
 
 **Divisibility**: The sieve visually demonstrates divisibility — colored stripes show which small primes divide each composite.
 
-**GCD and LCM**: Finding greatest common divisors and least common multiples relies on prime factorizations that the sieve helps identify.
+**GCD and LCM**: Finding greatest common divisors and least common multiples relies on [prime factorizations](!/arithmetic/divisibility#8) that the sieve helps identify.
 
 **Cryptography**: Large primes are essential for RSA encryption. While the basic sieve handles small ranges, related algorithms generate the massive primes used in security.
 
-**Computational Number Theory**: Modern variants like the Sieve of Atkin and segmented sieves extend these ideas to find primes among billions.`,
+**Computational Number Theory**: Modern variants like the Sieve of Atkin and segmented sieves extend these ideas to find primes among billions.
+
+[Divisibility Table](!/arithmetic/visual-tools/divisibility-table): The rules that decide, for one number at a time, which small primes divide it.
+
+[Divisibility Tiles](!/arithmetic/visual-tools/divisibility-tiles): A single division shown as tiles, the picture behind each crossing-out.
+
+[Euclidean Algorithm Visualizer](!/arithmetic/visual-tools/euclidean-algorithm): The GCD of two numbers computed without factoring them at all.`,
       before: ``,
       after: ``,
       link: '',
@@ -376,6 +384,7 @@ Fittingly, the last pass is also the smallest — three new crossings against th
 
   return {
     props: {
+      relatedTools: getRelatedTools('eratosthenes-sieve'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -388,7 +397,7 @@ Fittingly, the last pass is also the smallest — three new crossings against th
 }
 
 export default function SievePage({
-  seoData,
+  relatedTools, seoData,
   sectionsContent,
   introContent,
   faqQuestions,
@@ -497,6 +506,7 @@ export default function SievePage({
       <br/>
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

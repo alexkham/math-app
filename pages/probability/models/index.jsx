@@ -743,6 +743,10 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 
 
 export async function getStaticProps(){
@@ -1312,8 +1316,38 @@ They provide a controlled setting in which randomness can be analyzed, compared,
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_1_0: demoUnitFrame({
+      svg: coinSampleSpaceDiagrams.none,
+      caption: 'A probability model: three tosses, eight outcomes, each 1/8',
+      text: 'This grid is a complete probability model: a list of outcomes, the events formed by grouping them, and a rule that gives each outcome the same probability 1/8. Nothing about the physical coin appears, only the random mechanism. Highlight groups of cells to form events on the',
+      href: '/probability/visual-tools/coin-toss',
+      linkText: 'coin toss sample space explorer',
+    }),
+    u_4_1: demoUnitFrame({
+      svg: discretePmfDiagrams.discreteUniform,
+      caption: 'Discrete uniform PMF, values 1 to 6',
+      text: 'A random variable maps outcomes to numbers and its distribution is what remains once the outcomes themselves are forgotten: six equally likely faces become six bars of height 1/6. The distribution is a summary of the model, not the model itself. Compare the distributions of other families on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+    u_8_2: demoUnitFrame({
+      svg: diceSampleSpaceDiagrams.none,
+      caption: 'Two dice: a finite model with 36 outcomes',
+      text: 'A simple discrete model lists every outcome explicitly: 36 ordered pairs, each with probability 1/36, and every event is a group of cells whose probability is a count over 36. Everything about the model can be checked by counting. Highlight events and count their cells on the',
+      href: '/probability/visual-tools/dice-roll',
+      linkText: 'dice roll sample space explorer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1340,7 +1374,7 @@ export default function ModelsPage({
   schemas,
   componentsTable,
   hierarchyTable,
-  summaryTable,
+  summaryTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1361,6 +1395,8 @@ export default function ModelsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
+          `Why probability works through such models is the next question.`,
         ]
     },
     {
@@ -1389,6 +1425,8 @@ export default function ModelsPage({
           sectionsContent.obj4.content,
           <div key={'hierarchy-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: hierarchyTable }} />,
+                  <div key={'unit-u_4_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_1 }} />,
+          `The next two sections show that this summary loses information in both directions.`,
         ]
     },
     {
@@ -1421,6 +1459,8 @@ export default function ModelsPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-u_8_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_8_2 }} />,
+          `Richer models grow out of this one by repetition and dependence.`,
         ]
     },
     {

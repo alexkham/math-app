@@ -1344,6 +1344,9 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
+import polarRectangularDiagrams from '@/app/components/calculators/complex-numbers/polarRectangularDiagrams'
 
 
 export async function getStaticProps(){
@@ -2396,8 +2399,31 @@ const schemas = {
 
  
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    modulus: demoUnitFrame({
+      svg: conjugateModulusDiagrams.start,
+      caption: '|z| = |z&#772;| = 3.6',
+      text: 'The modulus is a distance, so it is never negative and it is unchanged by conjugation, as the two equal arrows show; it is zero only for the origin. The multiplicativity |z&#8321;z&#8322;| = |z&#8321;||z&#8322;| is the scaling half of the multiplication picture. Check the properties on a moving point on the',
+      href: '/complex-numbers/visual-tools/complex-conjugate',
+      linkText: 'conjugate and modulus tool',
+    }),
+    argument: demoUnitFrame({
+      svg: polarRectangularDiagrams.qii,
+      caption: 'z = &#8722;4 + 3i: r = 5, argument in the second quadrant',
+      text: 'The argument is the angle from the positive real axis to the arrow, here past 90&#176; because the point lies in the second quadrant; a calculator&#8217;s arctan(3/&#8722;4) would report the wrong quadrant, and the picture is the check. Adding 2&#960; to the angle changes nothing about the point. Move the point across a quadrant boundary on the',
+      href: '/complex-numbers/visual-tools/polar-rectangular',
+      linkText: 'polar and rectangular form converter',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -2425,7 +2451,7 @@ export default function PropertiesPage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2483,6 +2509,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-modulus'} dangerouslySetInnerHTML={{ __html: demoUnits.modulus }} />,
+          `Each property of the modulus is a statement about lengths in the plane.`,
         ]
     },
     {
@@ -2491,6 +2519,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-argument'} dangerouslySetInnerHTML={{ __html: demoUnits.argument }} />,
+          `The argument of a product is the sum of the arguments, which is the rotation rule of multiplication.`,
         ]
     },
     {

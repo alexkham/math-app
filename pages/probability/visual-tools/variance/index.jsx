@@ -10,6 +10,8 @@ import Head from 'next/head'
 import VarianceVisualizer from '@/app/components/probability/variance/VarianceVisualizer'
 import varianceDiagrams from '@/app/components/probability/variance/varianceDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 // Surfaced on the /probability hub via buildSectionData extraction
@@ -42,11 +44,11 @@ export async function getStaticProps(){
   const sectionsContent = {
     obj1: {
       title: `What is Variance?`,
-      content: `Variance is a statistical measure that quantifies how much individual values in a dataset differ from the mean. It answers the question: **how spread out are the data points?**
+      content: `[Variance](!/probability/variance) is a statistical measure that quantifies how much individual values in a dataset differ from the mean. It answers the question: **how spread out are the data points?**
 
 In simple terms, variance tells you whether your data points cluster tightly around the average or scatter widely across different values. A **low variance** means data points are similar and close to the mean. A **high variance** indicates greater diversity and spread in the data.
 
-Variance is calculated by taking the average of the squared differences from the mean. It's measured in squared units (like dollars² or meters²), which is why we often use its square root—the standard deviation—for easier interpretation.`,
+Variance is calculated by taking the average of the squared differences from the mean. It's measured in squared units (like dollars² or meters²), which is why we often use its square root—the [standard deviation](!/probability/variance)—for easier interpretation.`,
       before: ``,
       after: ``,
       link: '',
@@ -198,7 +200,15 @@ The visualizer shows both so you can see their relationship: $\\sigma = \\sqrt{\
 
 **Probability Distributions** — Many distributions are characterized by their variance parameters.
 
-Variance is a fundamental building block in statistics. Mastering it through interactive exploration prepares you for more advanced topics in probability, hypothesis testing, and data analysis.`,
+Variance is a fundamental building block in statistics. Mastering it through interactive exploration prepares you for more advanced topics in [probability](!/probability/axioms), hypothesis testing, and data analysis.
+
+[Expected Value Visualizers](!/probability/visual-tools/expected-value) — the mean that variance is measured around, built up from probability weights.
+
+[Dice Roll Simulator](!/probability/visual-tools/dice-roll) — a concrete distribution whose variance can be computed from its sample space.
+
+[Coin Toss Simulator](!/probability/visual-tools/coin-toss) — the number of heads in $n$ tosses, with variance $np(1 - p)$.
+
+[Distribution Explorers](!/probability/visual-tools/distributions) — each family's variance as a function of its parameters.`,
       before: ``,
       after: ``,
       link: '',
@@ -420,6 +430,7 @@ The tool displays everything simultaneously: the visual distribution, the data t
 
   return {
     props: {
+      relatedTools: getRelatedTools('probability-variance'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -439,7 +450,7 @@ The tool displays everything simultaneously: the visual distribution, the data t
   }
 }
 
-export default function VarianceVisualizerPage({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function VarianceVisualizerPage({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -566,6 +577,7 @@ export default function VarianceVisualizerPage({seoData, sectionsContent, stateU
       <br/>
       <br/>
 
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       
       <br/>

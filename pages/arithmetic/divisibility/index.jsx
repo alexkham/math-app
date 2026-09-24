@@ -15,6 +15,10 @@ import { tableHeaders } from '@/app/styles/theme'
 // import { renderMultiplesLine } from '../../../app/utils/illustrations/multiplesLine'
 import {renderMultiplesLine} from '../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
 import { renderFactorSet } from '../../../app/utils/illustrations/arithmetic/divisibility/factorSet'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import divisibilityTilesDiagrams from '@/app/components/divisibility/divisibilityTilesDiagrams'
+import eratosthenesSieveDiagrams from '@/app/components/visualizations/arithmetic/eratosthenesSieveDiagrams'
+import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
 
 export async function getStaticProps(){
 
@@ -612,8 +616,45 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    divisible: demoUnitFrame({
+      svg: divisibilityTilesDiagrams.divisible,
+      caption: '20 tiles in 4 groups of 5: divisible',
+      text: 'Twenty tiles fill four complete rows of five with nothing left over, so 5 divides 20 and 20 = 5 &#183; 4 with k = 4: the definition a | b drawn as a full rectangle. A single leftover tile would break the rectangle and the divisibility with it. Change the number or the divisor and watch the rows fill or fail on the',
+      href: '/arithmetic/visual-tools/divisibility-tiles',
+      linkText: 'divisibility tiles visualizer',
+    }),
+    remainder: demoUnitFrame({
+      svg: divisibilityTilesDiagrams.remainder,
+      caption: '23 = 5 &#183; 4 + 3: four full rows and three left over',
+      text: 'The four complete rows are the quotient q = 4 and the three tiles that could not start a fifth row are the remainder r = 3, with 0 &#8804; 3 &lt; 5 exactly as the division algorithm requires. The remainder is what stands between a number and the next multiple below it. Slide the number up by one tile at a time and watch the remainder cycle on the',
+      href: '/arithmetic/visual-tools/divisibility-tiles',
+      linkText: 'divisibility tiles visualizer',
+    }),
+    primes: demoUnitFrame({
+      svg: eratosthenesSieveDiagrams.done,
+      caption: 'The sieve finished: only the primes remain unmarked',
+      text: 'Every multiple of 2, 3, 5 and 7 has been struck out in turn, and the numbers still standing are exactly those with no divisor other than 1 and themselves. A prime is what the sieve cannot remove. Run the crossing-out one prime at a time on the',
+      href: '/arithmetic/visual-tools/eratosthenes-sieve',
+      linkText: 'Sieve of Eratosthenes visualizer',
+    }),
+    gcd: demoUnitFrame({
+      svg: euclideanVisualizerDiagrams.classic,
+      caption: 'gcd(252, 105) = 21 by repeated division',
+      text: 'Each row divides the previous divisor by the previous remainder: 252 = 105 &#183; 2 + 42, then 105 = 42 &#183; 2 + 21, then 42 = 21 &#183; 2 + 0. The last nonzero remainder, 21, is the greatest common divisor, found without factoring either number. Enter any pair and watch the remainders shrink to zero on the',
+      href: '/arithmetic/visual-tools/euclidean-algorithm',
+      linkText: 'Euclidean algorithm visualizer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -641,7 +682,7 @@ fsMainObj6,
 
 export default function DivisibilityPage({seoData, sectionsContent, introContent, obj2Table, 
   obj3Table, summaryTable, obj1SvgExact, obj1SvgFails, obj3SvgScale, 
-  obj4SvgRemainder, faqQuestions, schemas,fsMainObj6,}) {
+  obj4SvgRemainder, faqQuestions, schemas,fsMainObj6, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -676,7 +717,9 @@ export default function DivisibilityPage({seoData, sectionsContent, introContent
            dangerouslySetInnerHTML={{ __html: obj1SvgExact }} />,
       <div key={'obj1-svg-fails'} style={tableWrapStyle}
            dangerouslySetInnerHTML={{ __html: obj1SvgFails }} />,
-    ]
+              <div key={'unit-divisible'} dangerouslySetInnerHTML={{ __html: demoUnits.divisible }} />,
+          `Divisibility is a statement about rectangles: b tiles can be arranged in rows of exactly a.`,
+        ]
 },
     {
         id:'2',
@@ -740,7 +783,9 @@ export default function DivisibilityPage({seoData, sectionsContent, introContent
       sectionsContent.obj4.content,
       <div key={'obj4-svg-remainder'} style={tableWrapStyle}
            dangerouslySetInnerHTML={{ __html: obj4SvgRemainder }} />,
-    ]
+              <div key={'unit-remainder'} dangerouslySetInnerHTML={{ __html: demoUnits.remainder }} />,
+          `Modulo arithmetic, treated on its own page, is the study of this leftover on its own.`,
+        ]
 },
     {
         id:'5',
@@ -777,6 +822,8 @@ export default function DivisibilityPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-primes'} dangerouslySetInnerHTML={{ __html: demoUnits.primes }} />,
+          `Primes are the atoms the next section builds every other integer from.`,
         ]
     },
     {
@@ -793,6 +840,8 @@ export default function DivisibilityPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+                  <div key={'unit-gcd'} dangerouslySetInnerHTML={{ __html: demoUnits.gcd }} />,
+          `The GCD and LCM pages develop each method in full, including the one this picture runs.`,
         ]
     },
     {

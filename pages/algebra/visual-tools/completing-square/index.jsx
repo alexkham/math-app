@@ -496,6 +496,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import CompletingTheSquare from '../../../../app/components/algebra/visualizers/equations/CompleteTheSquare'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import completeTheSquareDiagrams from '../../../../app/components/algebra/visualizers/equations/completeTheSquareDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -522,17 +524,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Completing the square** — a technique for rewriting a quadratic expression $ax^2 + bx + c$ as $a(x - h)^2 + k$, a perfect square plus a constant. Used to derive the vertex form, solve quadratics, and prove the quadratic formula.
+      content: `[Completing the square](!/algebra/equations/quadratic#3) — a technique for rewriting a quadratic expression $ax^2 + bx + c$ as $a(x - h)^2 + k$, a [perfect square](!/algebra/roots/simplifying) plus a constant. Used to derive the vertex form, solve quadratics, and prove the [quadratic formula](!/algebra/equations/quadratic#4).
 
-**Vertex form** — the rewriting $y = a(x - h)^2 + k$ of a quadratic, in which the vertex of the parabola sits at the point $(h, k)$.
+[Vertex form](!/algebra/equations/quadratic#8) — the rewriting $y = a(x - h)^2 + k$ of a quadratic, in which the vertex of the parabola sits at the point $(h, k)$.
 
-**Perfect square trinomial** — a trinomial of the form $x^2 + 2px + p^2$ that factors as $(x + p)^2$. Completing the square produces exactly this pattern inside the parentheses.
+[Perfect square trinomial](!/algebra/definitions#perfect_square_trinomial) — a trinomial of the form $x^2 + 2px + p^2$ that factors as $(x + p)^2$. [Completing the square](!/algebra/equations/quadratic#3) produces exactly this pattern inside the parentheses.
 
-**The $(b/2)^2$ rule** — for the monic case $x^2 + bx + c$, the constant needed to complete the square is $(b/2)^2$. Geometrically, this is the area of the corner that turns the two half-strips into a full square.
+[The  rule](!/algebra/equations/quadratic#3) — for the monic case $x^2 + bx + c$, the constant needed to complete the square is $(b/2)^2$. Geometrically, this is the area of the corner that turns the two half-strips into a full square.
 
-**Vertex** — the turning point of a parabola: $(h, k)$ in vertex form. The minimum (if $a > 0$) or maximum (if $a < 0$) point of the quadratic.
+[Vertex](!/algebra/equations/quadratic#8) — the [turning point](!/algebra/polynomials/graphing#4) of a parabola: $(h, k)$ in vertex form. The minimum (if $a > 0$) or maximum (if $a < 0$) point of the quadratic.
 
-**Discriminant connection** — the constant adjustment after completing the square is $c - b^2/(4a)$, which leads directly to the quadratic formula and the discriminant $b^2 - 4ac$.`,
+[Discriminant connection](!/algebra/equations/quadratic#5) — the constant adjustment after completing the square is $c - b^2/(4a)$, which leads directly to the quadratic formula and the [discriminant](!/algebra/equations/quadratic) $b^2 - 4ac$.`,
       before: ``,
       after: ``,
       link: '',
@@ -552,7 +554,7 @@ export async function getStaticProps(){
 
 To explore:
 
-• Edit any of the three coefficient inputs to change the quadratic.
+• Edit any of the three [coefficient](!/algebra/equations) inputs to change the quadratic.
 
 • Click a preset button to load a curated example.
 
@@ -568,9 +570,9 @@ The final box at the bottom of the right panel always shows the resulting vertex
 
     obj2: {
       title: `Entering Coefficients`,
-      content: `The blue input row at the top is where you set the quadratic. Three editable fields for $a$, $b$, and $c$ in the standard form $ax^2 + bx + c = 0$:
+      content: `The blue input row at the top is where you set the quadratic. Three editable fields for $a$, $b$, and $c$ in the [standard form](!/algebra/equations) $ax^2 + bx + c = 0$:
 
-• **$a$** — the leading coefficient. Defaults to $1$. The tool handles any nonzero value, including negative numbers and decimals. If $a \\neq 1$, an extra step appears that factors $a$ out of the $x^2$ and $x$ terms.
+• **$a$** — the [leading coefficient](!/algebra/polynomials#2). Defaults to $1$. The tool handles any nonzero value, including negative numbers and decimals. If $a \\neq 1$, an extra step appears that factors $a$ out of the $x^2$ and $x$ terms.
 
 • **$b$** — the linear coefficient. This is the value that gets halved to find the side of the strips. The geometric diagram splits the $bx$ rectangle into two equal strips of size $x \\times b/2$.
 
@@ -594,7 +596,7 @@ Edits update the diagram and the step list immediately. There is no apply button
 
 • **$x^2 + 5x + 2$** — [the fractional half](!#the-fractional-half), $b/2 = 2.5$. Demonstrates that the method works for non-integer halves.
 
-• **$3x^2 + 12x + 7$** — non-monic, with [a leading coefficient of three](!#a-leading-coefficient-of-three). Combines factoring and a non-trivial gap.
+• **$3x^2 + 12x + 7$** — non-monic, with [a leading coefficient of three](!#a-leading-coefficient-of-three). Combines [factoring](!/algebra/polynomials/factoring) and a non-trivial gap.
 
 Click any preset to load it; the inputs, diagram, and step list all refresh.`,
       before: ``,
@@ -618,7 +620,7 @@ Click any preset to load it; the inputs, diagram, and step list all refresh.`,
 
 • [The gap or excess](!#the-gap-in-the-corner) — if $c < (b/2)^2$, a pulsing red block highlights the missing area equal to $(b/2)^2 - c$. If $c > (b/2)^2$, an overflow note appears instead.
 
-• [Complete the square](!#reading-off-the-vertex-form) — the full $(x + b/2) \\times (x + b/2)$ square is shown with dimension bars on the outside and the final vertex-form equation below, ready for [the solving step](!#solving-for-x).`,
+• [Complete the square](!#reading-off-the-vertex-form) — the full $(x + b/2) \\times (x + b/2)$ square is shown with dimension bars on the outside and the final vertex-form [equation](!/algebra/equations) below, ready for [the solving step](!#solving-for-x).`,
       before: ``,
       after: ``,
       link: '',
@@ -708,7 +710,7 @@ For deeper coverage, see the **completing the square** section in the quadratics
 
 Compare $x^2 + bx + ?$ to the expansion $(x + p)^2 = x^2 + 2px + p^2$. Matching the linear terms: $2p = b$, so $p = b/2$. Matching the constant: the constant must be $p^2 = (b/2)^2$.
 
-So $(b/2)^2$ is the unique value that makes the trinomial a perfect square. If the original expression has a different constant $c$, you account for the gap or excess:
+So $(b/2)^2$ is the unique value that makes the [trinomial](!/algebra/polynomials#2) a perfect square. If the original expression has a different constant $c$, you account for the gap or excess:
 
 $$x^2 + bx + c = \\left(x + \\frac{b}{2}\\right)^2 + \\left(c - \\frac{b^2}{4}\\right)$$
 
@@ -726,13 +728,19 @@ For the general $ax^2 + bx + c$, first factor $a$ out of the $x^2$ and $x$ terms
 
 **Vertex form** — the rewriting $y = a(x - h)^2 + k$ that completing the square produces. Makes the vertex and axis of symmetry immediately readable.
 
-**Standard form** — the alternative $y = ax^2 + bx + c$. Useful for identifying intercepts and applying the quadratic formula, less convenient for graphing the vertex.
+**Standard form** — the alternative $y = ax^2 + bx + c$. Useful for identifying [intercepts](!/algebra/polynomials#2) and applying the quadratic formula, less convenient for graphing the vertex.
 
 **Factored form** — $y = a(x - r_1)(x - r_2)$, where $r_1$ and $r_2$ are the roots. Useful when the quadratic factors over the rationals; not always available.
 
 **Parabola** — the graph of a quadratic. The vertex form makes its shape, vertex, and orientation directly visible.
 
-**Algebra calculator** — for symbolic completion of the square on more complex expressions, see the dedicated **completing the square calculator** in the algebra calculators section.`,
+**Algebra calculator** — for symbolic completion of the square on more complex expressions, see the dedicated **completing the square calculator** in the algebra calculators section.
+
+[Equation Visual Explorer](!/algebra/visual-tools/equation) — solve $ax^2 + bx + c = n$ on a sign chart, the same roots the completed square hands you.
+
+[Inequality Visual Explorer](!/algebra/visual-tools/inequality) — where a quadratic is positive or negative, read straight off its vertex form.
+
+[Polynomial Multiplication Visualizer](!/algebra/visual-tools/polynomial-multiplication) — expand $(x + h)^2$ back into standard form on the multiplication grid.`,
       before: ``,
       after: ``,
       link: '',
@@ -812,7 +820,7 @@ From here the vertex coordinates fall out: $h = -3$ (the sign flips because the 
 
     obj18: {
       title: `Solving for x`,
-      content: `The final step keeps the completed-square picture and turns it into roots: move the $4$ across, take square roots, and $x = -3 \\pm 2$ — the solutions $-1$ and $-5$.`,
+      content: `The final step keeps the completed-square picture and turns it into [roots](!/algebra/roots): move the $4$ across, take [square roots](!/algebra/roots), and $x = -3 \\pm 2$ — the solutions $-1$ and $-5$.`,
       before: ``,
       after: `The solving step is deliberately anticlimactic — the hard work was geometric, and what remains is two lines of algebra on the vertex form: $(x+3)^2 = 4$, so $x + 3 = \\pm 2$. The $\\pm$ is where the parabola's symmetry re-enters: two points at equal distance from the axis $x = -3$.
 
@@ -1036,6 +1044,7 @@ Restoring the factor gives $3(x + 2)^2 - 5$, vertex $(-2, -5)$ — coincidentall
 
   return {
     props: {
+      relatedTools: getRelatedTools('algebra-completing-square'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1090,7 +1099,7 @@ Restoring the factor gives $3(x + 2)^2 - 5$, vertex $(-2, -5)$ — coincidentall
   }
 }
 
-export default function CompletingTheSquareCalculator({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function CompletingTheSquareCalculator({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after].
@@ -1271,6 +1280,7 @@ export default function CompletingTheSquareCalculator({seoData, sectionsContent,
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

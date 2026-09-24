@@ -837,6 +837,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 
 
 export async function getStaticProps(){
@@ -1381,8 +1383,24 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    within: demoUnitFrame({
+      svg: modPieWheelDiagrams.idle,
+      caption: 'The playing field mod 6: slots 0 to 5',
+      text: 'Every number, however large, is reduced to one of the six slots on the wheel, and every operation is carried out slot by slot: adding 4 to a number moves its slot four places round, and the result never leaves the wheel. That is the finite arithmetic this page builds. Watch sums and products stay on the wheel on the',
+      href: '/arithmetic/visual-tools/modular-wheel',
+      linkText: 'modular arithmetic wheel',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj7Table,
@@ -1403,7 +1421,7 @@ return {
 
 
 
-export default function OperationsPage({seoData, sectionsContent, introContent, obj7Table, obj9Table, summaryTable, faqQuestions, schemas}) {
+export default function OperationsPage({seoData, sectionsContent, introContent, obj7Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1422,6 +1440,8 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-within'} dangerouslySetInnerHTML={{ __html: demoUnits.within }} />,
+          `The core principle in the next section is why reducing early and reducing late give the same slot.`,
         ]
     },
     {

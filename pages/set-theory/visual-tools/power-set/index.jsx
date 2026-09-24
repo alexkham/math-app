@@ -10,6 +10,8 @@ import ExplanationDetails from '../../../../app/components/ExplanationDetails'
 import PowerSetExplorer from '../../../../app/components/diagrams/set-theory/PowerSetExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import powerSetExplorerDiagrams from '../../../../app/components/diagrams/set-theory/powerSetExplorerDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -57,17 +59,17 @@ export async function getStaticProps(){
 
     obj1:{
       title:`Getting Started`,
-      content:`The explorer draws the power set of whatever set you hand it, so the first move is to define that set.
+      content:`The explorer draws the [power set](!/set-theory/subsets#5) of whatever set you hand it, so the first move is to define that set.
 
-Type the members into the **Elements** box, separated by commas or spaces. Anything works as an element: letters, numbers, words. Two rules are enforced as you type, and both of them are facts about sets rather than quirks of the tool. Repeats are dropped, because a set has no duplicates. Order is ignored, because $\\{a, b\\}$ and $\\{b, a\\}$ are the same set.
+Type the members into the **Elements** box, separated by commas or spaces. Anything works as an element: letters, numbers, words. Two rules are enforced as you type, and both of them are facts about [sets](!/set-theory/basics#1) rather than quirks of the tool. Repeats are dropped, because a set has no duplicates. Order is ignored, because $\\{a, b\\}$ and $\\{b, a\\}$ are the same set.
 
 Three shortcuts save you the typing:
 
-• The **Size** buttons, 1 through 5, rebuild the set at that many elements.
+• The **Size** buttons, 1 through 5, rebuild the set at that many [elements](!/set-theory/basics#4).
 • The preset buttons load ready-made sets — letters, numbers, a two-element set, and color names.
 • The **Empty set** toggle decides whether the empty subset is drawn as $\\emptyset$ or as an empty pair of braces.
 
-Five elements is the ceiling, and the reason is the doubling rather than an arbitrary limit: five elements already produce 32 subsets, and six would produce 64. The picture stops being readable well before the mathematics stops being correct.
+Five elements is the ceiling, and the reason is the doubling rather than an arbitrary limit: five elements already produce 32 [subsets](!/set-theory/subsets#1), and six would produce 64. The picture stops being readable well before the mathematics stops being correct.
 
 Three things the box can be told will change what you see rather than draw a lattice: leaving it [empty](!#an-empty-elements-box), listing [a repeated element](!#a-repeated-element), or going [past five elements](!#past-five-elements). Each has its own frozen frame below.`,
       before:``,
@@ -103,7 +105,7 @@ Selection splits the diagram into three colors, named in the legend under the pi
 
 • The selected subset itself.
 • Everything **below** it that it contains — its own subsets.
-• Everything **above** it that contains it — its supersets.
+• Everything **above** it that contains it — its [supersets](!/set-theory/subsets#3).
 
 Anything left pale is incomparable to your selection: it neither contains the subset nor sits inside it.
 
@@ -234,7 +236,7 @@ In **combinatorics**, counting subsets by size is counting combinations, and the
 
 In logic and computing, a subset of $n$ items is a string of $n$ bits, so power sets are the natural model for flag sets, feature toggles, and truth assignments over $n$ variables.
 
-In **set theory** proper, the power set drives Cantor’s theorem: $|P(A)|$ is always strictly larger than $|A|$, even for infinite sets. That single result is what produces different sizes of infinity, and it starts from the diagram on this page.`,
+In **set theory** proper, the power set drives Cantor’s theorem: $|P(A)|$ is always strictly larger than $|A|$, even for [infinite sets](!/set-theory/cardinality#3). That single result is what produces different sizes of infinity, and it starts from the diagram on this page.`,
       before:``,
       after:``,
       link:'',
@@ -247,7 +249,7 @@ In **set theory** proper, the power set drives Cantor’s theorem: $|P(A)|$ is a
 
 **Subsets** — the containment relation, proper subsets, and how to prove one set sits inside another.
 
-**Set Operations** — union, intersection, difference, and complement, defined on the same sets whose subsets are drawn here.
+**Set Operations** — [union](!/set-theory/operations#1), [intersection](!/set-theory/operations#2), difference, and [complement](!/set-theory/operations#3), defined on the same sets whose subsets are drawn here.
 
 **Cardinality** — sizes of sets, finite and infinite, and Cantor’s theorem about the power set.
 
@@ -255,7 +257,11 @@ In **set theory** proper, the power set drives Cantor’s theorem: $|P(A)|$ is a
 
 **Pascal’s Triangle** — where those level counts come from, and why they are symmetric.
 
-**Venn Diagram Generator** — the companion tool for shading set expressions rather than enumerating subsets.`,
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — the companion tool for shading set expressions rather than enumerating subsets.
+
+[Set-Builder Notation Explorer](!/set-theory/visual-tools/set-builder) — describe a subset by a condition instead of listing its elements.
+
+[Indexed Union and Intersection Explorer](!/set-theory/visual-tools/union-intersection) — monotone families of subsets, walked up and down the same lattice.`,
       before:``,
       after:``,
       link:'',
@@ -562,6 +568,7 @@ Selecting a smaller subset trades one cone for the other, most sharply at [a sin
 
    return {
       props:{
+        relatedTools: getRelatedTools('power-set'),
          sectionsContent,
          introContent,
          instructions,
@@ -574,7 +581,7 @@ Selecting a smaller subset trades one cone for the other, most sharply at [a sin
     }
    }
 
-export default function PowerSetPage({seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+export default function PowerSetPage({relatedTools, seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
 
   // Slug ids (Line 1). obj0 is the Key Terms slot, unused on tool pages, so it
   // never reaches this list. A per-state row carries its frozen unit between
@@ -718,6 +725,7 @@ export default function PowerSetPage({seoData, sectionsContent, introContent, in
    />
    <br/>
    */}
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

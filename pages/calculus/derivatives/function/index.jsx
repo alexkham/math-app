@@ -11,6 +11,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
 
 
 export async function getStaticProps(){
@@ -621,8 +623,24 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    fAndFp: demoUnitFrame({
+      svg: functionDerivativeDiagrams.cubic,
+      caption: 'f(x) = x&#179; above, f&#8242;(x) = 3x&#178; below',
+      text: 'Wherever the cubic rises its derivative sits above the axis, and at x = 0, where the cubic flattens for an instant, the derivative touches zero without crossing: the graph of f&#8242; is read off the slopes of f. At the marker, x = 1, the cubic has slope 3 and the parabola has height 3. Slide the marker and watch height below follow slope above on the',
+      href: '/calculus/visual-tools/derivative',
+      linkText: 'derivative explorer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj6Table,
@@ -641,7 +659,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -679,6 +697,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-fAndFp'} dangerouslySetInnerHTML={{ __html: demoUnits.fAndFp }} />,
+          `The reverse reading, from f&#8242; back to f, uses the same dictionary in the other direction.`,
         ]
     },
     {

@@ -1633,6 +1633,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionTypesDiagrams from '@/app/components/functions/types/functionTypesDiagrams'
 
 
 export async function getStaticProps(){
@@ -2926,8 +2928,52 @@ const faqQuestions = {
     },
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    quadratic: demoUnitFrame({
+      svg: functionTypesDiagrams.quadratic,
+      caption: 'f(x) = 0.3x&#178; &#8722; 3: a parabola',
+      text: 'The U-shape opens upward because the leading coefficient is positive, the vertex sits at the minimum on the axis of symmetry x = 0, and the two x-intercepts are where the curve crosses the axis. Every quadratic has this shape, stretched, flipped or shifted. Change the coefficients and watch the vertex and intercepts move on the',
+      href: '/functions/visual-tools/types',
+      linkText: 'function types explorer',
+    }),
+    rational: demoUnitFrame({
+      svg: functionTypesDiagrams.rational,
+      caption: 'f(x) = 1/x: two branches and two asymptotes',
+      text: 'The graph breaks at x = 0, where the denominator is zero, into two branches that hug the axes without touching them: the vertical asymptote x = 0 and the horizontal asymptote y = 0. Both are marked. Rational functions are the family where asymptotes are the rule rather than the exception. Compare it with the other families on the',
+      href: '/functions/visual-tools/types',
+      linkText: 'function types explorer',
+    }),
+    absolute: demoUnitFrame({
+      svg: functionTypesDiagrams.absolute,
+      caption: 'f(x) = |x|: a V with its corner at the origin',
+      text: 'Two straight rays of slopes &#8722;1 and 1 meet at a corner: the graph is the distance from zero, never negative, and symmetric about the y-axis. The corner is the one point with no tangent line. Set it beside the parabola, which it resembles from afar, on the',
+      href: '/functions/visual-tools/types',
+      linkText: 'function types explorer',
+    }),
+    exponential: demoUnitFrame({
+      svg: functionTypesDiagrams.exponential,
+      caption: 'f(x) = 2&#710;x: doubling with each unit step',
+      text: 'The curve hugs the x-axis on the left, passes through (0, 1), and climbs faster and faster to the right: each unit step in x doubles the height. It never reaches zero and has no maximum. Change the base to see growth turn into decay on the',
+      href: '/functions/visual-tools/types',
+      linkText: 'function types explorer',
+    }),
+    sine: demoUnitFrame({
+      svg: functionTypesDiagrams.sine,
+      caption: 'f(x) = sin x: a wave of period 2&#960;',
+      text: 'The curve oscillates between &#8722;1 and 1 and repeats every 2&#960;, crossing the axis at every multiple of &#960;. It is the model of periodic behaviour, and the cosine beside it is the same wave shifted a quarter period. Compare the trigonometric family with the others on the',
+      href: '/functions/visual-tools/types',
+      linkText: 'function types explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj2Table,
@@ -2956,7 +3002,7 @@ export default function FamiliesPage({
   obj17Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -3013,6 +3059,8 @@ export default function FamiliesPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-quadratic'} dangerouslySetInnerHTML={{ __html: demoUnits.quadratic }} />,
+          `The vertex form makes the axis of symmetry and the extreme value visible in the formula itself.`,
         ]
     },
     {
@@ -3037,6 +3085,8 @@ export default function FamiliesPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-rational'} dangerouslySetInnerHTML={{ __html: demoUnits.rational }} />,
+          `Where the denominator has a root, the graph either breaks or has a hole; nothing else in the family list does this.`,
         ]
     },
     {
@@ -3074,6 +3124,8 @@ export default function FamiliesPage({
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+                  <div key={'unit-absolute'} dangerouslySetInnerHTML={{ __html: demoUnits.absolute }} />,
+          `The corner is why absolute value is treated as a piecewise function rather than a smooth one.`,
         ]
     },
     {
@@ -3090,6 +3142,8 @@ export default function FamiliesPage({
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+                  <div key={'unit-exponential'} dangerouslySetInnerHTML={{ __html: demoUnits.exponential }} />,
+          `The base decides everything: above 1 growth, between 0 and 1 decay.`,
         ]
     },
     {
@@ -3106,6 +3160,8 @@ export default function FamiliesPage({
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+                  <div key={'unit-sine'} dangerouslySetInnerHTML={{ __html: demoUnits.sine }} />,
+          `Periodicity separates this family from every other on the page.`,
         ]
     },
     {

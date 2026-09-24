@@ -1125,6 +1125,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
+import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 
 
 export async function getStaticProps(){
@@ -2051,8 +2054,31 @@ The sum of $n$ independent $\\text{Exp}(\\lambda)$ variables follows a Gamma$(n,
   }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_5_0: demoUnitFrame({
+      svg: continuousPdfDiagrams['exponential-pdf'],
+      caption: 'Exponential density, lambda = 1',
+      text: 'The density starts at height lambda at zero and decays geometrically: short waiting times are the most likely and long ones become rare at a constant relative rate. The area under the whole curve is 1 although the curve never touches the axis. Change lambda and watch the starting height and the decay trade off on the',
+      href: '/probability/visual-tools/probability-function/continuous',
+      linkText: 'PDF visualizer',
+    }),
+    u_6_1: demoUnitFrame({
+      svg: continuousCdfDiagrams.exponential,
+      caption: 'Exponential CDF, lambda = 1',
+      text: 'The cumulative probability rises fastest at zero and flattens toward 1, mirroring the decaying density above it; F(x) is 1 minus e to the minus lambda x, so the median sits where the curve crosses one half. The gap between the curve and 1 is the survival probability that drives the memoryless property. Read the probability of waiting at most x on the',
+      href: '/probability/visual-tools/cdf/continuous',
+      linkText: 'continuous CDF visualizer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          summaryTable,
@@ -2076,7 +2102,7 @@ export default function ExponentialDistributionPage({
   introContent,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2140,6 +2166,8 @@ export default function ExponentialDistributionPage({
                    
                     <ExponentialDistribution/>
                     </div>,
+                  <div key={'unit-u_5_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_0 }} />,
+          `Accumulating this density gives the CDF below.`,
         ]
     },
     {
@@ -2152,6 +2180,8 @@ export default function ExponentialDistributionPage({
                    
                     <ExponentialDistributionCDF/>
                     </div>,
+                  <div key={'unit-u_6_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_6_1 }} />,
+          `The expected value follows from integrating this same density.`,
         ]
     },
     {

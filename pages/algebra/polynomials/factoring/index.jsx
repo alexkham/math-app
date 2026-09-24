@@ -9,6 +9,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import completeTheSquareDiagrams from '@/app/components/algebra/visualizers/equations/completeTheSquareDiagrams'
 
 
 
@@ -953,8 +955,24 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    perfect: demoUnitFrame({
+      svg: completeTheSquareDiagrams['step-corner'],
+      caption: 'x&#178; + 6x + 9: the corner that completes the square',
+      text: 'The x&#178; block and two 3x strips leave a square-shaped hole at the corner, and the constant 9 = 3 &#215; 3 fills it exactly: the trinomial is a perfect square, (x + 3)&#178;, because its constant is the square of half the middle coefficient. A different constant leaves a gap or an overflow instead. Test any trinomial for the corner fit on the',
+      href: '/algebra/visual-tools/completing-square',
+      linkText: 'completing the square visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -974,7 +992,7 @@ const schemas = {
 }
    }
 
-export default function FactoringPage({seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas}) {
+export default function FactoringPage({seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -1050,6 +1068,8 @@ export default function FactoringPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-perfect'} dangerouslySetInnerHTML={{ __html: demoUnits.perfect }} />,
+          `The test in the text is the algebraic form of checking whether the corner fits.`,
         ]
     },
 

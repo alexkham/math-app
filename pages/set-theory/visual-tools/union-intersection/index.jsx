@@ -10,6 +10,8 @@ import ExplanationDetails from '../../../../app/components/ExplanationDetails'
 import IndexedUnionIntersectionExplorer from '../../../../app/components/diagrams/set-theory/IndexedUnionIntersectionExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import indexedUnionIntersectionDiagrams from '../../../../app/components/diagrams/set-theory/indexedUnionIntersectionDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -58,7 +60,7 @@ export async function getStaticProps(){
 
     obj1:{
       title:`Getting Started`,
-      content:`The tool takes an **indexed family** of sets — $A_1, A_2, A_3, \\ldots$ — and accumulates the two big operators over it as you raise the index.
+      content:`The tool takes an **indexed family** of [sets](!/set-theory/basics#1) — $A_1, A_2, A_3, \\ldots$ — and accumulates the two big operators over it as you raise the index.
 
 Choose a family, then push the index up. Three things move together:
 
@@ -66,7 +68,7 @@ Choose a family, then push the index up. Three things move together:
 • The **union bar**, in blue, holding everything in at least one of them.
 • The **intersection bar**, in amber, holding everything in all of them.
 
-The union can only grow as the index rises and the intersection can only shrink. Watching them move in opposite directions is the point of the display, and it is the first thing to look for.
+The [union](!/set-theory/operations#1) can only grow as the index rises and the [intersection](!/set-theory/operations#2) can only shrink. Watching them move in opposite directions is the point of the display, and it is the first thing to look for.
 
 At index $1$ there is nothing to accumulate — both operators simply return $A_1$, which is [where every family starts](!#one-set-is-not-a-family). Raise it and they begin to separate.
 
@@ -142,7 +144,7 @@ The tick labels are the coordinates, and they rescale when a family needs a wide
 
 **Venn families** are different in kind: they show a finite family rather than an infinite one, side by side, one panel shading the union and one the intersection. With only two or three sets the big operators are just $\\cup$ and $\\cap$ written once instead of repeatedly, which is [the finite chain](!#the-finite-chain).
 
-A Venn diagram can only ever show a small finite family, because it needs a separate region for every combination of memberships and there are $2^n$ of those.`,
+A [Venn diagram](!/set-theory/venn-diagrams) can only ever show a small finite family, because it needs a separate region for every combination of memberships and there are $2^n$ of those.`,
       before:``,
       after:``,
       link:'',
@@ -197,7 +199,7 @@ Nested downward — each $A_{i+1} \\subseteq A_i$ — and the union settles imme
 
 Nested upward — each $A_i \\subseteq A_{i+1}$ — and the mirror image happens: the intersection settles at $A_1$ and the union grows, which is [a stalled intersection](!#when-the-intersection-stops-shrinking). The growing-intervals family is the clean case, and it also shows [bounded sets with an unbounded union](!#bounded-sets-unbounded-union).
 
-Neither stall is a failure. A union takes each element once however many sets contain it, so a term already covered contributes nothing, and the operator is behaving exactly as defined.
+Neither stall is a failure. A union takes each [element](!/set-theory/basics#4) once however many sets contain it, so a term already covered contributes nothing, and the operator is behaving exactly as defined.
 
 Families that are not nested in either direction do both things at once — the union grows and the intersection shrinks on the same step, which is [the general case](!#the-general-case).`,
       before:``,
@@ -233,7 +235,7 @@ In the closed version $0$ belongs to every set in the family, so it survives eve
 
 $$\\bigcap_{i=1}^{\\infty} \\left(0, \\tfrac{1}{i}\\right] = \\varnothing \\qquad \\bigcap_{i=1}^{\\infty} \\left[0, \\tfrac{1}{i}\\right] = \\{0\\}$$
 
-This is worth doing by hand once, because it is the cleanest demonstration that open and closed are not a formality of notation. The bracket is carrying real information, and here it is the difference between an empty set and a point.
+This is worth doing by hand once, because it is the cleanest demonstration that open and closed are not a formality of notation. The bracket is carrying real information, and here it is the difference between an [empty set](!/set-theory/basics#3) and a point.
 
 The unions are worth comparing too, and they are less dramatic: $(0, 1]$ against $[0, 1]$, differing by the same single point. Union is the forgiving operator — one set containing an element is enough to keep it — while intersection demands unanimity, which is why it is the one that notices a bracket. For the underlying vocabulary, see **interval notation**.`,
       before:``,
@@ -254,9 +256,13 @@ The unions are worth comparing too, and they are less dramatic: $(0, 1]$ against
 
 **Propositional Logic** — the existential and universal quantifiers the operators translate into.
 
-**Venn Diagram Generator** — for the finite case, with expressions rather than families.
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — for the finite case, with expressions rather than families.
 
-**Power Set Explorer** — every subset of a small set, arranged by containment.`,
+[Power Set Explorer](!/set-theory/visual-tools/power-set) — every [subset](!/set-theory/subsets#1) of a small set, arranged by containment.
+
+[Inclusion-Exclusion Principle Explorer](!/set-theory/visual-tools/inclusion-exclusion) — the size of a union of finitely many sets.
+
+[Two-Set Venn Diagram](!/set-theory/visual-tools/two-sets-basic-venn) — union and intersection of two sets, region by region.`,
       before:``,
       after:``,
       link:'',
@@ -587,6 +593,7 @@ With the families this tool ships, the panel always finds a sharper description 
 
    return {
       props:{
+        relatedTools: getRelatedTools('union-intersection'),
          sectionsContent,
          introContent,
          instructions,
@@ -599,7 +606,7 @@ With the families this tool ships, the panel always finds a sharper description 
     }
    }
 
-export default function UnionIntersectionPage({seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+export default function UnionIntersectionPage({relatedTools, seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
 
   // Slug ids (Line 1). obj0 is the Key Terms slot, unused on tool pages, so it
   // never reaches this list. A per-state row carries its frozen unit between
@@ -750,6 +757,7 @@ export default function UnionIntersectionPage({seoData, sectionsContent, introCo
    />
    <br/>
    */}
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

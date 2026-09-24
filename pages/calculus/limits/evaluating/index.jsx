@@ -11,6 +11,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 
 
 export async function getStaticProps(){
@@ -621,8 +623,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    onesided: demoUnitFrame({
+      svg: functionLimitDiagrams.jump,
+      caption: 'Step at x = 0: left limit 0, right limit 1',
+      text: 'Evaluated from the left the probe heads to 0, from the right to 1; the two one-sided limits are perfectly well defined and simply differ, so the two-sided limit does not exist. Any expression that changes formula at a point, like |x|/x, has to be evaluated this way. Read each side separately on the',
+      href: '/calculus/visual-tools/limit',
+      linkText: 'limit explorer',
+    }),
+  };
+
 return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj1Table,
@@ -641,7 +659,7 @@ return {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj1Table, obj11Table, summaryTable, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj1Table, obj11Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -745,6 +763,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+                  <div key={'unit-onesided'} dangerouslySetInnerHTML={{ __html: demoUnits.onesided }} />,
+          `When the two sides agree the one-sided evaluation was unnecessary; when they differ it was the whole answer.`,
         ]
     },
     {

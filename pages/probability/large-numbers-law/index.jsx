@@ -720,6 +720,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 
 
 export async function getStaticProps(){
@@ -1424,8 +1426,24 @@ This page presents the formal statement of the theorem, clarifies what kind of c
   }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_8_0: demoUnitFrame({
+      svg: distributionExplorerDiagrams['normal-pdf'],
+      caption: 'Standard normal density: the shape the central limit theorem adds',
+      text: 'The law of large numbers says the sample mean settles at a single value; the central limit theorem adds the shape of the remaining fluctuation around that value, this bell curve, once the deviations are scaled up by the square root of n. Without the scaling the bell would shrink to a spike, which is the law itself. Compare the bell with other density shapes on the',
+      href: '/probability/visual-tools/distributions/normal',
+      linkText: 'distribution explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj5Table,
@@ -1455,7 +1473,7 @@ export default function LargeNumbersLawPage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1558,6 +1576,8 @@ export default function LargeNumbersLawPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-u_8_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_8_0 }} />,
+          `Why the law matters is set out next.`,
         ]
     },
     {

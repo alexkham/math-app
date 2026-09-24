@@ -1225,6 +1225,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
 
 
 export async function getStaticProps(){
@@ -2102,8 +2104,24 @@ const schemas = {
   //      }
   //   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    second: demoUnitFrame({
+      svg: functionConcavityDiagrams.up,
+      caption: 'f&#8243;(c) = 2.60: the slope is increasing',
+      text: 'The first derivative says whether the curve rises; the second says whether the rise is speeding up. At the marker the tangent slopes are growing as x increases, the curve bends upward, and the readout f&#8243;(c) = 2.60 records how fast. Where the readout turns negative the bend has flipped. Watch the number and the bend change together on the',
+      href: '/calculus/visual-tools/inflection-points',
+      linkText: 'concavity and inflection points tool',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj1Table,
@@ -2133,7 +2151,7 @@ export default function PageTemplate({
   obj9Table,
   overviewTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2165,6 +2183,8 @@ export default function PageTemplate({
             theme={'navy'}
           />,
           <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj1Table}}/>,
+                  <div key={'unit-second'} dangerouslySetInnerHTML={{ __html: demoUnits.second }} />,
+          `The second derivative is the first one whose sign has a shape of its own on the graph.`,
         ]
     },
     {

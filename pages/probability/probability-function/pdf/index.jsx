@@ -8,6 +8,10 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
+import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
+import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 
 
 export async function getStaticProps(){
@@ -967,8 +971,38 @@ const schemas = {
   }
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_1_0: demoUnitFrame({
+      svg: continuousPdfDiagrams['normal-pdf'],
+      caption: 'Normal density, mean 0, standard deviation 1',
+      text: 'Density is probability per unit length: the curve is highest at the mean, where a small interval captures the most probability, and the probability of any interval is the area above it. The height 0.4 at the centre is not itself a probability. Toggle to the CDF view and see the accumulated area on the',
+      href: '/probability/visual-tools/probability-function/continuous',
+      linkText: 'PDF visualizer',
+    }),
+    u_12_1: demoUnitFrame({
+      svg: continuousCdfDiagrams.normal,
+      caption: 'Normal CDF, mean 0, standard deviation 1',
+      text: 'The CDF is the running area under the density, so its slope at any point is the density there: the S-curve is steepest at the mean where the bell is highest and flattens in the tails where the bell is low. Differentiating F recovers f and integrating f recovers F. Move along the curve and compare slope with density on the',
+      href: '/probability/visual-tools/cdf/continuous',
+      linkText: 'continuous CDF visualizer',
+    }),
+    u_13_2: demoUnitFrame({
+      svg: distributionExplorerDiagrams['exponential-pdf'],
+      caption: 'Exponential density, lambda = 1, with the mean marked',
+      text: 'The catalogue of continuous densities includes this decaying curve for waiting times, the flat uniform density and the normal bell; each is a different rule for spreading unit area over the line. The explorer marks the mean on each, here at 1 over lambda. Compare the three shapes and their parameters on the',
+      href: '/probability/visual-tools/distributions/exponential',
+      linkText: 'distribution explorer',
+    }),
+  };
+
    return {
   props:{
+    demoUnits,
      sectionsContent,
      introContent,
      faqQuestions,
@@ -984,7 +1018,7 @@ const schemas = {
 }
    }
 
-export default function PDFPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PDFPage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
     
   const genericSections=[
      {
@@ -1002,6 +1036,8 @@ export default function PDFPage({seoData, sectionsContent, introContent, faqQues
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
+          `The notation for all of this is fixed next.`,
         ]
     },
     // {
@@ -1090,6 +1126,8 @@ export default function PDFPage({seoData, sectionsContent, introContent, faqQues
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+                  <div key={'unit-u_12_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_12_1 }} />,
+          `The named continuous families are catalogued next.`,
         ]
     },
     {
@@ -1098,6 +1136,8 @@ export default function PDFPage({seoData, sectionsContent, introContent, faqQues
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+                  <div key={'unit-u_13_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_13_2 }} />,
+          `Each family has its own page with parameters, moments and applications.`,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

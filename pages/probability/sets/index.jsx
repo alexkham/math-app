@@ -504,6 +504,9 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import vennTwoSetDiagrams from '@/app/components/probability/venn-explorer/vennTwoSetDiagrams'
+import vennThreeSetDiagrams from '@/app/components/probability/venn-explorer/vennThreeSetDiagrams'
 
 
 export async function getStaticProps(){
@@ -915,8 +918,31 @@ The page has shown that sets are not just background scaffolding — they are th
 Probability starts with sets. Before we talk about events, sample spaces, random variables, or probability functions, we first need a way to describe "what can happen." Sets give us that language. They let us collect outcomes, group them into meaningful events, combine them, compare them, and build the entire structure of probability on top of them. Once sets are in place, everything else in probability becomes much easier to define and understand.`
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_operations_0: demoUnitFrame({
+      svg: vennTwoSetDiagrams.intersectionSelected,
+      caption: 'Two events with their intersection selected',
+      text: 'Union, intersection and complement act on events exactly as on sets, and the Venn diagram shows them as regions: the selected overlap is A and B, both circles together are A or B, and the outside is the complement of their union. Each region carries a probability and the four regions add to 1. Click a region and read its probability on the',
+      href: '/probability/visual-tools/venn-diagrams/two-sets',
+      linkText: 'two-set Venn diagram tool',
+    }),
+    u_events_1: demoUnitFrame({
+      svg: vennThreeSetDiagrams.outsideRegionSelected,
+      caption: 'Three events inside a sample space, the outside region selected',
+      text: 'The rectangle is the sample space and the circles are events inside it; the selected region holds the outcomes that belong to none of the three events, and its probability is what remains after the seven inner regions are accounted for. Every region is itself an event. Select regions and add their probabilities on the',
+      href: '/probability/visual-tools/venn-diagrams/three-sets',
+      linkText: 'three-set Venn diagram tool',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -943,7 +969,7 @@ export default function SetsInProbabilityPage({
   schemas,
   operationsTable,
   mistakesTable,
-  summaryTable,
+  summaryTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -998,6 +1024,8 @@ export default function SetsInProbabilityPage({
           sectionsContent.operations.content,
           <div key={'operations-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: operationsTable }} />,
+                  <div key={'unit-u_operations_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_operations_0 }} />,
+          `These regions are what turn sets into events.`,
         ]
     },
     {
@@ -1006,6 +1034,8 @@ export default function SetsInProbabilityPage({
         link:'',
         content:[
           sectionsContent.events.content,
+                  <div key={'unit-u_events_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_events_1 }} />,
+          `Probability models are built from exactly these sets.`,
         ]
     },
     {

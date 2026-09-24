@@ -1304,6 +1304,8 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import angleDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import trigoAngleTypesDiagrams from '@/app/components/trigonometry/angle/types/trigoAngleTypesDiagrams'
+import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
 
 
 export async function getStaticProps(){
@@ -2225,6 +2227,14 @@ For example, the angles $40°$ and $50°$ are complementary ($40° + 50° = 90°
   // Operation A demonstration units: frozen tool state + attached explanation
   // panel + tool link, one frame. Rendered as content-array items.
   const demoUnits = {
+    compSupp: demoUnitFrame({
+      svg: [angleExplorerDiagrams.concepts.complementary, angleExplorerDiagrams.concepts.supplementary],
+      caption: 'Complementary 35&#176; + 55&#176;; supplementary 110&#176; + 70&#176;',
+      text: 'In the first picture the green overlay completes the 35&#176; angle to a right angle, so its complement is 55&#176;; in the second the red overlay completes the 110&#176; angle to a straight angle, so its supplement is 70&#176;. The complement lives only for acute angles, the supplement for anything below 180&#176;, and both are read as the gap left to the axis. Toggle either overlay for any angle on the',
+      href: '/trigonometry/visual-tools/angle-explorer',
+      linkText: 'angle explorer',
+    }),
+  
     standardPosition: demoUnitFrame({
       svg: angleDiagrams.types.obtuse,
       caption: 'Standard position',
@@ -2388,6 +2398,8 @@ export default function DegreesRadiansPage({seoData,sectionsContent , introConte
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
           />,
+                  <div key={'unit-compSupp'} dangerouslySetInnerHTML={{ __html: demoUnits.compSupp }} />,
+          `The cofunction identities below are these two relationships written in the language of the trigonometric functions.`,
         ]
     },
 

@@ -11,6 +11,10 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionDerivativeLocalDiagrams from '@/app/components/calculus/visualizers/functionDerivativeLocalDiagrams'
+import functionTangentLineDiagrams from '@/app/components/calculus/visualizers/functionTangentLineDiagrams'
+import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
 
 
 export async function getStaticProps(){
@@ -524,8 +528,38 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    secant: demoUnitFrame({
+      svg: functionDerivativeLocalDiagrams.asc,
+      caption: 'Secant through P&#8321; and P&#8322;: m = &#916;y/&#916;x = 1.93',
+      text: 'The two marked points are a and a + h on the curve; the rise &#916;y over the run &#916;x is the difference quotient, drawn as the slope of the secant line through them, 1.93 here. Slide P&#8322; toward P&#8321; and the secant turns into the tangent while its slope settles on the derivative. Drag the second point in on the',
+      href: '/calculus/visual-tools/average-rate-of-change',
+      linkText: 'average rate of change visualizer',
+    }),
+    critical: demoUnitFrame({
+      svg: functionTangentLineDiagrams.max,
+      caption: 'Horizontal tangent: slope = 0.00 at a local maximum',
+      text: 'At the marked point the tangent line is level and the slope readout is exactly zero: the function has stopped rising and is about to fall, which is what a critical point looks like on the graph. To the left the tangents tilt up, to the right they tilt down, the sign change the first derivative test reads. Slide the point across the hilltop on the',
+      href: '/calculus/visual-tools/tangent-line',
+      linkText: 'tangent line at a point tool',
+    }),
+    concavity: demoUnitFrame({
+      svg: functionConcavityDiagrams.infl,
+      caption: 'f&#8243;(c) = 0.00 at an inflection point',
+      text: 'The second derivative is read off the bend of the curve: positive where it cups upward, negative where it cups downward, and zero at the marked point where the bending switches sides. That switch is the inflection point, and f&#8243; changes sign through it. Move the marker into either bend and watch f&#8243;(c) leave zero on the',
+      href: '/calculus/visual-tools/inflection-points',
+      linkText: 'concavity and inflection points tool',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -551,7 +585,7 @@ const schemas = {
      obj2Table,
      roadmapTable,
      faqQuestions,
-     schemas
+     schemas, demoUnits
    }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -571,6 +605,8 @@ const schemas = {
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-secant'} dangerouslySetInnerHTML={{ __html: demoUnits.secant }} />,
+          `The derivative is the number this slope approaches, and every later rule is a shortcut for computing it.`,
         ]
     },
     {
@@ -588,6 +624,8 @@ const schemas = {
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-critical'} dangerouslySetInnerHTML={{ __html: demoUnits.critical }} />,
+          `The critical points are where the analysis starts; the sign of the derivative on either side finishes it.`,
         ]
     },
     {
@@ -644,6 +682,8 @@ const schemas = {
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+                  <div key={'unit-concavity'} dangerouslySetInnerHTML={{ __html: demoUnits.concavity }} />,
+          `Each further derivative describes a finer feature of the graph, but the second is the last one with a shape of its own.`,
         ]
     },
     {

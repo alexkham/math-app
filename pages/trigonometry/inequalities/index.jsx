@@ -873,6 +873,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
 
 
 export async function getStaticProps(){
@@ -1427,8 +1429,31 @@ Two methods dominate. The graphical approach plots the function and a horizontal
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    graphical: demoUnitFrame({
+      svg: trigFunctionsGraphDiagrams.sin,
+      caption: 'y = sin x: where the curve sits above a level',
+      text: 'Where the wave lies above a chosen height is an interval, not a point: for the level 1/2 the curve is above it from 30&#176; to 150&#176; and then again one period later, and below it everywhere else in the cycle. The marker at 60&#176; sits inside that interval, at height 0.866. Move the marker along the curve and watch it enter and leave the solution set on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+    secDomain: demoUnitFrame({
+      svg: trigFunctionsGraphDiagrams.sec,
+      caption: 'y = sec x: asymptotes at every zero of cosine',
+      text: 'The upward branches of the secant curve sit only where the cosine is positive and never dip below 1, so sec&#8201;x &#8805; 2 is solved on those branches alone, between the asymptotes at 90&#176; and 270&#176; that must be excluded from any solution set. The marker at 60&#176; reads exactly 2, an endpoint of the answer. Trace a branch out to its asymptote on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj1Table,
@@ -1458,7 +1483,7 @@ export default function InequalitiesPage({
   obj4Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1489,6 +1514,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-graphical'} dangerouslySetInnerHTML={{ __html: demoUnits.graphical }} />,
+          `The method turns every inequality into a question about where a familiar curve lies relative to a line.`,
         ]
     },
     {
@@ -1541,6 +1568,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-secDomain'} dangerouslySetInnerHTML={{ __html: demoUnits.secDomain }} />,
+          `Excluding the asymptotes is not a technicality: at those angles the inequality has no left-hand side at all.`,
         ]
     },
     // NEW capstone section: obj9

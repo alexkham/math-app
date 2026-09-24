@@ -979,6 +979,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionPiecewiseDiagrams from '@/app/components/functions/piecewise/functionPiecewiseDiagrams'
 
 
 export async function getStaticProps(){
@@ -1616,8 +1618,38 @@ const faqQuestions = {
     },
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    jump: demoUnitFrame({
+      svg: functionPiecewiseDiagrams.jump,
+      caption: 'x + 1 for x &lt; 0, x &#8722; 1 for x &#8805; 0: a jump at 0',
+      text: 'The two pieces meet the boundary x = 0 at different heights, 1 from the left and &#8722;1 from the right, so the graph jumps; the open dot marks the value the left piece approaches but does not take, the closed dot the value the function actually has. Continuity at the boundary would need the two dots to coincide. Move the pieces until they meet on the',
+      href: '/functions/visual-tools/piecewise',
+      linkText: 'piecewise function explorer',
+    }),
+    abs: demoUnitFrame({
+      svg: functionPiecewiseDiagrams.absvalue,
+      caption: '|x| as two pieces: &#8722;x then x',
+      text: 'The left ray is the line y = &#8722;x on x &lt; 0 and the right ray is y = x on x &#8805; 0; the two pieces meet at the origin at the same height, so the V is continuous even though its formula changes there. The closed dot at 0 belongs to the right piece. Rebuild the V from its two pieces on the',
+      href: '/functions/visual-tools/piecewise',
+      linkText: 'piecewise function explorer',
+    }),
+    step: demoUnitFrame({
+      svg: functionPiecewiseDiagrams.heaviside,
+      caption: 'The Heaviside step: &#8722;1 then 1',
+      text: 'Each piece is a constant, so the graph is two horizontal segments with a jump of 2 at x = 0; the open and closed dots record which piece owns the boundary. Every step function is built this way, one flat piece per interval. Try the three-piece sign function on the',
+      href: '/functions/visual-tools/piecewise',
+      linkText: 'piecewise function explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj7Table,
@@ -1648,7 +1680,7 @@ export default function PiecewisePage({
   obj12Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1732,6 +1764,8 @@ export default function PiecewisePage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+                  <div key={'unit-jump'} dangerouslySetInnerHTML={{ __html: demoUnits.jump }} />,
+          `Checking continuity at a boundary is therefore a matter of comparing two limits with one value.`,
         ]
     },
     {
@@ -1740,6 +1774,8 @@ export default function PiecewisePage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-abs'} dangerouslySetInnerHTML={{ __html: demoUnits.abs }} />,
+          `Most functions with a corner are piecewise in this same quiet way.`,
         ]
     },
     {
@@ -1753,6 +1789,8 @@ export default function PiecewisePage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj9Table }}
           />,
+                  <div key={'unit-step'} dangerouslySetInnerHTML={{ __html: demoUnits.step }} />,
+          `Step functions model anything that changes only at thresholds.`,
         ]
     },
     {

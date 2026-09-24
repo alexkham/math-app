@@ -666,6 +666,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
+import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
 
 
 export async function getStaticProps(){
@@ -1276,8 +1279,31 @@ Because of this, probability must describe not only individual outcomes but the 
 The sections below outline how joint probability is represented, how it connects to marginals and [conditionals](!/probability/conditional-probability), and how it forms the foundation for analysing relationships between [random variables](!/probability/random-variables).`
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_notation_0: demoUnitFrame({
+      svg: contingencyTableDiagrams['2x3'],
+      caption: 'A 2 by 3 contingency table with marginal totals',
+      text: 'Each cell holds the joint probability of one row outcome and one column outcome; the rows sum to the marginal probabilities of the first variable and the columns to those of the second, and the grand total is 1. Every joint, marginal and conditional probability of the two variables can be read from this one table. Edit the cells and watch the margins update on the',
+      href: '/probability/visual-tools/contingency-tables',
+      linkText: 'contingency tables explorer',
+    }),
+    u_conditional_1: demoUnitFrame({
+      svg: conditionalTreeDiagrams.leafPath,
+      caption: 'One path through the tree: the joint probability of A and B',
+      text: 'The joint probability of the highlighted leaf is the product along its path, P(A) times P(B given A), so conditional probability is the joint divided by the marginal of the conditioning event. The same leaf reached from the other variable first gives the same product. Follow other paths and multiply on the',
+      href: '/probability/visual-tools/conditional-probability/tree-diagram',
+      linkText: 'conditional probability tree diagram',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       calculateTable,
@@ -1306,7 +1332,7 @@ export default function JointProbabilityPage({
   mistakesTable,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1346,6 +1372,8 @@ export default function JointProbabilityPage({
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-u_notation_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_notation_0 }} />,
+          `Several methods of computing the entries follow.`,
         ]
     },
     {
@@ -1396,6 +1424,8 @@ export default function JointProbabilityPage({
         link:'',
         content:[
           sectionsContent.conditional.content,
+                  <div key={'unit-u_conditional_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_conditional_1 }} />,
+          `Named joint distributions organise such tables at scale.`,
         ]
     },
     {

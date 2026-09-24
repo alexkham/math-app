@@ -11,6 +11,8 @@ import DiceRollSimulator from '@/app/components/probability/dice-roll/DiceRollSi
 import DiceSampleSpaceVisualizer from '@/app/components/probability/sampleSpace/DiceSampleSpaceVisualizer'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 // Surfaced on the /probability hub via buildSectionData extraction
@@ -43,11 +45,11 @@ export async function getStaticProps(){
   const sectionsContent = {
     obj1: {
       title: `The Dice Roll Probability Model`,
-      content: `A standard six-sided die represents a discrete uniform distribution where each face (1, 2, 3, 4, 5, 6) has equal probability $1/6 \\approx 0.167$. Each roll is independent—previous outcomes don't affect future results—making dice the classic example of memoryless random processes.
+      content: `A standard six-sided die represents a [discrete uniform distribution](!/probability/distributions/discrete/uniform) where each face (1, 2, 3, 4, 5, 6) has equal probability $1/6 \\approx 0.167$. Each roll is independent—previous [outcomes](!/probability/sample-space) don't affect future results—making dice the classic example of memoryless random processes.
 
-When rolling multiple dice, outcomes combine multiplicatively. Two dice produce $6^2 = 36$ possible outcomes, three dice yield $6^3 = 216$ possibilities, and so on. The sample space grows exponentially while individual outcome probabilities shrink: each specific combination has probability $1/6^n$ for n dice.
+When rolling multiple dice, outcomes combine multiplicatively. Two dice produce $6^2 = 36$ possible outcomes, three dice yield $6^3 = 216$ possibilities, and so on. The [sample space](!/probability/sample-space) grows exponentially while individual outcome [probabilities](!/probability/axioms) shrink: each specific combination has probability $1/6^n$ for n dice.
 
-Sum distributions, however, are not uniform. Rolling two dice, a sum of 7 occurs more frequently (6 ways: 1+6, 2+5, 3+4, 4+3, 5+2, 6+1) than a sum of 2 (only one way: 1+1). This creates the characteristic bell curve in sum distributions—middle values have more combinations than extremes. The expected value for a single die is 3.5, and for n dice it's $3.5n$.
+Sum distributions, however, are not uniform. Rolling two dice, a sum of 7 occurs more frequently (6 ways: 1+6, 2+5, 3+4, 4+3, 5+2, 6+1) than a sum of 2 (only one way: 1+1). This creates the characteristic bell curve in sum distributions—middle values have more combinations than extremes. The [expected value](!/probability/expected-value) for a single die is 3.5, and for n dice it's $3.5n$.
 
 For comprehensive theory on dice probability including combinatorics and distribution calculations, see **dice roll probability model**.`,
       before: ``,
@@ -61,7 +63,7 @@ For comprehensive theory on dice probability including combinatorics and distrib
 
 Use the roll buttons to run simulations. "Roll 1" shows individual dice animations. "Roll 10" through "Roll 10K" batch-process rolls instantly for statistical analysis. Two tabs organize visualizations: "Sum Distribution" shows a histogram comparing actual frequencies to expected theoretical values, while "Convergence" plots how the average sum approaches the theoretical expected value.
 
-Recent rolls display in the left panel showing the last 20 outcomes with individual die faces and their sums. Statistics update in real-time, calculating total rolls, actual average, variance, standard deviation, and z-scores.`,
+Recent rolls display in the left panel showing the last 20 outcomes with individual die faces and their sums. Statistics update in real-time, calculating total rolls, actual average, [variance](!/probability/variance), [standard deviation](!/probability/variance), and z-scores.`,
       before: ``,
       after: ``,
       link: '',
@@ -73,7 +75,7 @@ Recent rolls display in the left panel showing the last 20 outcomes with individ
 
 The bell-curve shape emerges naturally. For two dice, sum 7 is most probable (6 ways out of 36 possible outcomes), while extreme sums 2 and 12 are rarest (1 way each). This asymmetry explains why 7 appears roughly six times more often than snake eyes (double 1s) in large samples.
 
-Watch the histogram evolve. After 100 rolls, you'll see rough patterns. After 10,000 rolls, the match between actual and expected becomes striking—demonstrating the Law of Large Numbers visually through the alignment of blue and red bars.`,
+Watch the histogram evolve. After 100 rolls, you'll see rough patterns. After 10,000 rolls, the match between actual and expected becomes striking—demonstrating the [Law of Large Numbers](!/probability/axioms) visually through the alignment of blue and red bars.`,
       before: ``,
       after: ``,
       link: '',
@@ -155,19 +157,25 @@ For mathematical foundations of convergence and the Law of Large Numbers, see **
 
     obj10: {
       title: `Related Probability Tools and Concepts`,
-      content: `**Coin Toss Simulators** - Explore probability with binary outcomes, including Law of Large Numbers demonstrations and sample space analysis.
+      content: `[Coin Toss Simulators](!/probability/visual-tools/coin-toss) - Explore probability with binary outcomes, including Law of Large Numbers demonstrations and sample space analysis.
 
 **Discrete Uniform Distribution Calculators** - Calculate exact probabilities for uniform distributions like fair dice with equal outcome probabilities.
 
 **Binomial Distribution Calculators** - Analyze repeated independent trials, which dice rolls exemplify when tracking specific outcomes.
 
-**Discrete Distribution Visualizers** - Compare probability mass functions across different discrete probability models.
+**Discrete Distribution Visualizers** - Compare [probability mass functions](!/probability/probability-function) across different discrete probability models.
 
 **Expected Value Calculators** - Compute weighted averages for games, bets, and random processes involving dice.
 
 **Combinatorics Tools** - Understand how to count dice outcomes and calculate probabilities through permutations and combinations.
 
-**Sample Space Calculators** - Explore sample spaces for various probability experiments beyond dice rolling.`,
+**Sample Space Calculators** - Explore sample spaces for various probability experiments beyond dice rolling.
+
+[Discrete CDF Explorer](!/probability/visual-tools/cdf/discrete) - The running total of the sum distribution's probabilities, a step at each face or sum.
+
+[Variance Visualizer](!/probability/visual-tools/variance) - How spread out the dice outcomes are around their mean.
+
+[Expected Value Visualizers](!/probability/visual-tools/expected-value) - The long-run average of a roll, built from the sample space shown here.`,
       before: ``,
       after: ``,
       link: '',
@@ -383,6 +391,7 @@ That parity argument is worth more than the count, because it survives changes t
 
   return {
     props: {
+      relatedTools: getRelatedTools('probability-dice-roll'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -401,7 +410,7 @@ That parity argument is worth more than the count, because it survives changes t
   }
 }
 
-export default function DiceRollVisualizersPage({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function DiceRollVisualizersPage({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -519,6 +528,7 @@ export default function DiceRollVisualizersPage({seoData, sectionsContent, state
       /> */}
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

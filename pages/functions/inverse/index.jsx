@@ -1363,6 +1363,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionInverseDiagrams from '@/app/components/functions/inverse/functionInverseDiagrams'
 
 
 export async function getStaticProps(){
@@ -2402,8 +2404,38 @@ const faqQuestions = {
     },
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    reflection: demoUnitFrame({
+      svg: functionInverseDiagrams.cubic,
+      caption: 'f(x) = x&#179; and f&#8315;&#185;(x) = &#8731;x, mirrored in y = x',
+      text: 'The cube and the cube root are drawn together with the dashed line y = x between them, and each is the other&#8217;s mirror image across that line: the point (2, 8) on one becomes (8, 2) on the other. Swapping input and output is a reflection. Pick any pair and watch the mirror on the',
+      href: '/functions/visual-tools/inverse-function',
+      linkText: 'inverse function explorer',
+    }),
+    restrict: demoUnitFrame({
+      svg: functionInverseDiagrams.quadratic,
+      caption: 'f(x) = x&#178; restricted to x &#8805; 0: inverse &#8730;x',
+      text: 'The full parabola fails the horizontal line test, so only its right half is kept, drawn solid; that half is one-to-one and its reflection in y = x is the square root. The left half, faint, is the part given up to make the inverse exist. See the restriction and the resulting inverse on the',
+      href: '/functions/visual-tools/inverse-function',
+      linkText: 'inverse function explorer',
+    }),
+    expLog: demoUnitFrame({
+      svg: functionInverseDiagrams.exponential,
+      caption: 'f(x) = e&#710;x and f&#8315;&#185;(x) = ln x',
+      text: 'The exponential and the logarithm are mirror images in y = x: the exponential&#8217;s horizontal asymptote y = 0 becomes the logarithm&#8217;s vertical asymptote x = 0, and the point (0, 1) becomes (1, 0). Domain and range have traded places. Compare the other classic pairs on the',
+      href: '/functions/visual-tools/inverse-function',
+      linkText: 'inverse function explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj2Table,
@@ -2436,7 +2468,7 @@ export default function InversePage({
   faqQuestions,
   schemas,
    obj11InverseTable,
-         obj11OriginalTable,
+         obj11OriginalTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2480,6 +2512,8 @@ export default function InversePage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
+                  <div key={'unit-reflection'} dangerouslySetInnerHTML={{ __html: demoUnits.reflection }} />,
+          `Every algebraic fact about inverses has a mirror-image counterpart in this picture.`,
         ]
     },
     {
@@ -2541,6 +2575,8 @@ export default function InversePage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj9Table }}
           />,
+                  <div key={'unit-restrict'} dangerouslySetInnerHTML={{ __html: demoUnits.restrict }} />,
+          `The restriction is a choice, and the conventional choice is the one that keeps the principal branch.`,
         ]
     },
     {
@@ -2586,6 +2622,8 @@ export default function InversePage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj12Table }}
           />,
+                  <div key={'unit-expLog'} dangerouslySetInnerHTML={{ __html: demoUnits.expLog }} />,
+          `Each pair in the list is a reflection in the same line.`,
         ]
     },
     {

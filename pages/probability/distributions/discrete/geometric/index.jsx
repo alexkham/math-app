@@ -860,6 +860,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 
 
 export async function getStaticProps(){
@@ -1504,8 +1507,31 @@ const geometricExplanations = {
   }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_4_0: demoUnitFrame({
+      svg: discretePmfDiagrams.geometric,
+      caption: 'Geometric PMF, p = 0.3',
+      text: 'The tallest bar is at 1, the first trial, and every later bar is the previous one scaled by 1 minus p: the probability of needing k trials decays geometrically, which gives the distribution its name. The bars continue forever but their total is 1. Change p and watch the decay speed up or slow down on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+    u_5_1: demoUnitFrame({
+      svg: discreteCdfDiagrams.geometric,
+      caption: 'Geometric CDF, p = 0.3',
+      text: 'The event that the first success comes within k trials has probability 1 minus (1 minus p) to the k, the complement of k straight failures. The staircase climbs quickly at first and then flattens as that complement approaches 1. Read the probability of the event X &le; k at any step on the',
+      href: '/probability/visual-tools/cdf/discrete',
+      linkText: 'discrete CDF explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          geometricExplanations,
@@ -1531,7 +1557,7 @@ export default function GeometricDistributionPage({
   geometricExplanations,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1598,7 +1624,9 @@ export default function GeometricDistributionPage({
           <div key={'pmf-visualization-geometric'} style={{transform:'scale(0.8)'}}>
            <GeometricDistribution/>
 
-          </div>        
+          </div>,        
+                  <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
+          `Accumulating the bars gives a closed-form CDF.`,
         ]
     },
     {
@@ -1611,7 +1639,9 @@ export default function GeometricDistributionPage({
            
            <GeometricDistributionCDF/>
 
-          </div>    
+          </div>,    
+                  <div key={'unit-u_5_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_1 }} />,
+          `The mean of the distribution is derived next.`,
         ]
     },
     {

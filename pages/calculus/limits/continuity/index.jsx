@@ -11,6 +11,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
+import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 
 
 export async function getStaticProps(){
@@ -818,8 +821,52 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    three: demoUnitFrame({
+      svg: functionContinuityDiagrams.wrongvalue,
+      caption: 'Condition 3 fails: lim f(x) &#8800; f(1)',
+      text: 'The checker tests the three conditions in order: here f(1) is defined and the two-sided limit exists, but the marked point sits away from the limit, so the equality in condition 3 fails and the verdict is discontinuous. One relocated point would make the function continuous. Run the three-step check on any example on the',
+      href: '/calculus/visual-tools/continuity',
+      linkText: 'continuity checker',
+    }),
+    removable: demoUnitFrame({
+      svg: functionContinuityDiagrams.hole,
+      caption: 'Hole at x = 1: removable',
+      text: 'The limit at 1 exists and equals 2, but the function has no value there; filling the single missing point would make the curve continuous, which is why the discontinuity is called removable. The simplified formula x + 1 is exactly that repaired function. Compare the hole with the repaired curve on the',
+      href: '/calculus/visual-tools/continuity',
+      linkText: 'continuity checker',
+    }),
+    jump: demoUnitFrame({
+      svg: functionContinuityDiagrams.jump,
+      caption: 'Jump at x = 0: left limit 0, right limit 1',
+      text: 'From the left the function approaches 0, from the right it approaches 1, and no single value could bridge the gap: the two-sided limit does not exist, so condition 2 fails. The size of the jump is the difference of the two one-sided limits. Read the two one-sided values on the',
+      href: '/calculus/visual-tools/continuity',
+      linkText: 'continuity checker',
+    }),
+    infinite: demoUnitFrame({
+      svg: functionContinuityDiagrams.asymptote,
+      caption: 'Asymptote at x = 0: the limit is infinite',
+      text: 'Approaching 0 the function runs off the top or bottom of the picture: at least one one-sided limit is infinite, so there is no finite limit and no value that could be assigned. The vertical line x = 0 is the asymptote the curve hugs. Watch the readings blow up on the',
+      href: '/calculus/visual-tools/continuity',
+      linkText: 'continuity checker',
+    }),
+    oscillating: demoUnitFrame({
+      svg: functionLimitDiagrams.oscillating,
+      caption: 'sin(1/x) near 0: no limit at all',
+      text: 'The probes at &#177;0.5 read sin 2 &#8776; 0.91, but moving them inward the readings swing between &#8722;1 and 1 faster and faster, never settling: the limit fails to exist not by running away but by refusing to choose. No value of f(0) could make this continuous. Squeeze the probes and watch the readings swing on the',
+      href: '/calculus/visual-tools/limit',
+      linkText: 'limit explorer',
+    }),
+  };
+
 return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj8Table,
@@ -838,7 +885,7 @@ return {
 }
    }
 
-export default function ContinuityPage({seoData, sectionsContent, introContent, obj8Table, obj9Table, summaryTable, faqQuestions, schemas}) {
+export default function ContinuityPage({seoData, sectionsContent, introContent, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -857,6 +904,8 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-three'} dangerouslySetInnerHTML={{ __html: demoUnits.three }} />,
+          `Each way the three conditions can fail has a name, and the next sections take them in turn.`,
         ]
     },
     {
@@ -900,6 +949,8 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-removable'} dangerouslySetInnerHTML={{ __html: demoUnits.removable }} />,
+          `Removable discontinuities are the mild case: the function is continuous except for a bookkeeping error at one point.`,
         ]
     },
     {
@@ -908,6 +959,8 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-jump'} dangerouslySetInnerHTML={{ __html: demoUnits.jump }} />,
+          `Jumps are the natural discontinuities of piecewise definitions and of the floor and ceiling functions.`,
         ]
     },
     {
@@ -916,6 +969,8 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-infinite'} dangerouslySetInnerHTML={{ __html: demoUnits.infinite }} />,
+          `Infinite discontinuities mark the vertical asymptotes of rational functions.`,
         ]
     },
     {
@@ -926,6 +981,8 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
           sectionsContent.obj8.content,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+                  <div key={'unit-oscillating'} dangerouslySetInnerHTML={{ __html: demoUnits.oscillating }} />,
+          `Oscillating discontinuities are rare in practice but show that the limit can fail without any value being infinite.`,
         ]
     },
     {

@@ -667,6 +667,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import markovDiagrams from '@/app/components/probability/inequalities/markovDiagrams'
 
 
 export async function getStaticProps(){
@@ -1137,8 +1139,31 @@ The result is deliberately simple and broadly applicable. It trades precision fo
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_2_0: demoUnitFrame({
+      svg: markovDiagrams['markov-exponential'],
+      caption: 'Markov bound for an exponential variable, mean 10, threshold 15',
+      text: 'The bound is the mean over the threshold, 10 over 15, and the shaded tail is the true probability of exceeding 15, which for the exponential family is e to the minus 1.5, about 0.22. The inequality holds for any non-negative variable with that mean, whatever its shape. Slide the threshold and watch bound and tail move on the',
+      href: '/probability/visual-tools/inequalities/markov',
+      linkText: 'Markov inequality visualizer',
+    }),
+    u_7_1: demoUnitFrame({
+      svg: markovDiagrams['bound-exceeds-one'],
+      caption: 'A threshold below the mean: the bound exceeds 1 and says nothing',
+      text: 'When the threshold is smaller than the mean the ratio is larger than 1, and a probability bound above 1 carries no information. Even for thresholds above the mean the bound is usually far from the truth because it ignores everything except the expected value. Move the threshold across the mean and watch the bound become useless on the',
+      href: '/probability/visual-tools/inequalities/markov',
+      linkText: 'Markov inequality visualizer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       summaryTable,
@@ -1161,7 +1186,7 @@ export default function MarkovInequalityPage({
   introContent,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1190,6 +1215,8 @@ export default function MarkovInequalityPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-u_2_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_2_0 }} />,
+          `What the inequality says in words is spelled out next.`,
         ]
     },
     {
@@ -1249,6 +1276,8 @@ export default function MarkovInequalityPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-u_7_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_7_1 }} />,
+          `Its importance lies elsewhere, as the next section argues.`,
         ]
     },
     {

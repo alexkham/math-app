@@ -10,6 +10,8 @@ import ExplanationDetails from '../../../../app/components/ExplanationDetails'
 import VennTruthTableExplorer from '../../../../app/components/diagrams/set-theory/VennTruthTableExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import vennTruthTableDiagrams from '../../../../app/components/diagrams/set-theory/vennTruthTableDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -60,7 +62,7 @@ export async function getStaticProps(){
       title:`Getting Started`,
       content:`The tool holds one expression and draws it twice, so the first thing to do is give it an expression.
 
-Type into the **Expression** box, or assemble it from the symbol buttons underneath: the set letters first, then the operators — intersection, union, difference, symmetric difference, the complement mark, brackets, the empty set and the universe.
+Type into the **Expression** box, or assemble it from the symbol buttons underneath: the set letters first, then the operators — [intersection](!/set-theory/operations#2), [union](!/set-theory/operations#1), difference, [symmetric difference](!/set-theory/operations#5), the [complement](!/set-theory/operations#3) mark, brackets, the [empty set](!/set-theory/basics#3) and the universe.
 
 Two choices shape everything else:
 
@@ -112,7 +114,7 @@ The deeper point is that every point of the universe lies in exactly one region,
 
     obj4:{
       title:`Writing Expressions the Parser Accepts`,
-      content:`The parser is the same one the Venn diagram generator uses, so the notation carries over.
+      content:`The parser is the same one the [Venn diagram](!/set-theory/venn-diagrams) generator uses, so the notation carries over.
 
 Operators need something on both sides, and the complement mark goes **after** what it negates: $A^c$, not a prefix. Brackets group exactly as they do in arithmetic, and nesting is allowed, so $((A \\cap B) \\setminus C)^c$ is a single valid expression.
 
@@ -256,7 +258,13 @@ The diagram shows the same fact geometrically. If an expression ignores $B$, its
 
 **Venn Diagrams** — the diagram side on its own, for two and three sets.
 
-**Venn Diagram Generator** — the companion tool, which shades expressions on up to five sets but does not build the table.`,
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — the companion tool, which shades expressions on up to five sets but does not build the table.
+
+[Two-Set Venn Diagram](!/set-theory/visual-tools/two-sets-basic-venn) — the four regions, one operation at a time.
+
+[Three-Set Venn Diagram](!/set-theory/visual-tools/three-sets-basic-venn) — the eight regions and the identities on them.
+
+[Two-Set Laws and Identities Explorer](!/set-theory/visual-tools/two-sets-laws-venn) — the identity catalogue these columns verify.`,
       before:``,
       after:``,
       link:'',
@@ -561,6 +569,7 @@ Underneath this is the fact that makes the whole tool work: every point of the u
 
    return {
       props:{
+        relatedTools: getRelatedTools('venn-truth-table'),
          sectionsContent,
          introContent,
          instructions,
@@ -573,7 +582,7 @@ Underneath this is the fact that makes the whole tool work: every point of the u
     }
    }
 
-export default function VennTruthTablePage({seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+export default function VennTruthTablePage({relatedTools, seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
 
   // Slug ids (Line 1). obj0 is the Key Terms slot, unused on tool pages, so it
   // never reaches this list. A per-state row carries its frozen unit between
@@ -722,6 +731,7 @@ export default function VennTruthTablePage({seoData, sectionsContent, introConte
    />
    <br/>
    */}
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

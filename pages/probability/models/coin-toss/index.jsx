@@ -716,6 +716,9 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 
 
 export async function getStaticProps(){
@@ -1266,8 +1269,38 @@ From this basic source of randomness, more complex experiments can be constructe
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_2_0: demoUnitFrame({
+      svg: coinSampleSpaceDiagrams.none,
+      caption: 'Three tosses: the eight outcomes',
+      text: 'For a single toss the outcome space has two elements; repeating the toss three times gives the eight ordered sequences shown here, each equally likely under the fair-coin assignment. The labels are conveniences and could be replaced by any two symbols. Select events and count their sequences on the',
+      href: '/probability/visual-tools/coin-toss',
+      linkText: 'coin toss sample space explorer',
+    }),
+    u_3_1: demoUnitFrame({
+      svg: coinSampleSpaceDiagrams.majority,
+      caption: 'Majority heads: four of the eight sequences',
+      text: 'An event is a collection of outcomes: the highlighted sequences are those with at least two heads, and its probability is the count 4 over 8. Any subset of the grid, including the empty set and the whole grid, is an event. Highlight other collections on the',
+      href: '/probability/visual-tools/coin-toss',
+      linkText: 'coin toss sample space explorer',
+    }),
+    u_8_2: demoUnitFrame({
+      svg: discretePmfDiagrams.binomial,
+      caption: 'Binomial PMF, n = 10, p = 0.5: heads in ten tosses',
+      text: 'Repeating the toss and counting heads produces the binomial distribution: ten tosses give eleven possible counts with the bars peaking at 5. Each bar collects all the sequences with the same number of heads. Change n and p and watch the pattern of bars respond on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1294,7 +1327,7 @@ export default function CoinTossPage({
   schemas,
   assumptionsTable,
   constructionsTable,
-  summaryTable,
+  summaryTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1323,6 +1356,8 @@ export default function CoinTossPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-u_2_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_2_0 }} />,
+          `Events in this model are exactly the groups of such sequences.`,
         ]
     },
     {
@@ -1331,6 +1366,8 @@ export default function CoinTossPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-u_3_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_3_1 }} />,
+          `The probability assignment is what turns these counts into probabilities.`,
         ]
     },
     {
@@ -1375,6 +1412,8 @@ export default function CoinTossPage({
           sectionsContent.obj8.content,
           <div key={'constructions-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: constructionsTable }} />,
+                  <div key={'unit-u_8_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_8_2 }} />,
+          `Longer runs approximate continuous behaviour, as the next section shows.`,
         ]
     },
     {

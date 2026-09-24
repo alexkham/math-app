@@ -13,6 +13,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionRiemannDiagrams from '@/app/components/functions/riemann/functionRiemannDiagrams'
+import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagrams'
 
 
 export async function getStaticProps(){
@@ -605,8 +608,38 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    construction: demoUnitFrame({
+      svg: functionRiemannDiagrams.left,
+      caption: 'Left-endpoint sum for x&#178; on [0, 3], n = 8',
+      text: 'The interval is cut into eight strips of width &#916;x = 3/8 and each rectangle takes the height of the curve at the left end of its strip; because the parabola rises, every rectangle falls short and the sum underestimates the area, 9. Choose the right endpoints instead and every rectangle overshoots. Switch the sample point and increase n on the',
+      href: '/calculus/visual-tools/riemann-sum',
+      linkText: 'Riemann sum visualizer',
+    }),
+    signed: demoUnitFrame({
+      svg: functionFTCDiagrams.sine,
+      caption: 'sin t from 0 to 2: area counted with sign',
+      text: 'The shading follows the curve above the axis, and if the right edge were pushed past &#960; the shading below the axis would count as negative: the accumulated value rises while the curve is above the axis and falls while it is below. Here, from 0 to 2, the total is 1 &#8722; cos 2 &#8776; 1.42. Push the right edge past &#960; and watch the total start to shrink on the',
+      href: '/calculus/visual-tools/fundamental-theorem',
+      linkText: 'fundamental theorem of calculus visualizer',
+    }),
+    ftc: demoUnitFrame({
+      svg: functionFTCDiagrams.quadratic,
+      caption: '&#8747;&#8320;&#178; t&#178; dt = F(2) &#8722; F(0) = 8/3',
+      text: 'The shaded area is the definite integral, and the accumulation curve above it reads F(2) = 8/3 exactly: the antiderivative t&#179;/3 evaluated at the right edge minus its value at the left. No rectangles were summed to get the number. Move the right edge and read the area straight off the antiderivative on the',
+      href: '/calculus/visual-tools/fundamental-theorem',
+      linkText: 'fundamental theorem of calculus visualizer',
+    }),
+  };
+
     return {
       props: {
+    demoUnits,
         sectionsContent,
         introContent,
         obj1Table,
@@ -624,7 +657,7 @@ const schemas = {
     }
 
    }
-export default function PageTemplate({seoData, sectionsContent, introContent, obj1Table, summaryTable, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj1Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -637,6 +670,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj1.content,
           <div key={'obj1-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+                  <div key={'unit-construction'} dangerouslySetInnerHTML={{ __html: demoUnits.construction }} />,
+          `The definite integral is the value all of these sums share once n grows without bound.`,
         ]
     },
     {
@@ -656,6 +691,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-signed'} dangerouslySetInnerHTML={{ __html: demoUnits.signed }} />,
+          `Total unsigned area needs the integrand split at its zeros; the integral itself does not.`,
         ]
     },
     {
@@ -688,6 +725,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-ftc'} dangerouslySetInnerHTML={{ __html: demoUnits.ftc }} />,
+          `This is why antiderivatives, not rectangles, do the computing in practice.`,
         ]
     },
     {

@@ -469,6 +469,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import ThreeSetsLawsExplorer from '../../../../app/components/venn-diagrams/3-sets/ThreeSetsLawsExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import threeSetsLawsVennDiagrams from '../../../../app/components/venn-diagrams/3-sets/threeSetsLawsVennDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
 
@@ -494,15 +496,15 @@ export async function getStaticProps(){
     obj0: {
       title: `Key Terms`,
       content: `
-- **Set identity** — an equation between two set expressions that holds for all sets
-- **Associative law** — $(A \\cup B) \\cup C = A \\cup (B \\cup C)$, also for $\\cap$ and $\\triangle$
-- **Distributive law** — $A \\cap (B \\cup C) = (A \\cap B) \\cup (A \\cap C)$ and its dual
-- **De Morgan's laws (three sets)** — $(A \\cup B \\cup C)' = A' \\cap B' \\cap C'$ and $(A \\cap B \\cap C)' = A' \\cup B' \\cup C'$
-- **Symmetric difference** — $A \\triangle B$, elements in exactly one of $A$ or $B$; extends to $A \\triangle B \\triangle C$
+- [Set identity](!/set-theory/venn-diagrams#5) — an equation between two set expressions that holds for all [sets](!/set-theory/basics#1)
+- [Associative law](!/set-theory/rules#associative) — $(A \\cup B) \\cup C = A \\cup (B \\cup C)$, also for $\\cap$ and $\\triangle$
+- [Distributive law](!/set-theory/rules#distributive) — $A \\cap (B \\cup C) = (A \\cap B) \\cup (A \\cap C)$ and its dual
+- [De Morgan's laws (three sets)](!/set-theory/rules#de_morgan) — $(A \\cup B \\cup C)' = A' \\cap B' \\cap C'$ and $(A \\cap B \\cap C)' = A' \\cup B' \\cup C'$
+- [Symmetric difference](!/set-theory/definitions#symmetric_difference) — $A \\triangle B$, [elements](!/set-theory/basics#4) in exactly one of $A$ or $B$; extends to $A \\triangle B \\triangle C$
 - **Difference distribution** — $A \\setminus (B \\cup C) = (A \\setminus B) \\cap (A \\setminus C)$ and $A \\setminus (B \\cap C) = (A \\setminus B) \\cup (A \\setminus C)$
 - **Nested difference** — $(A \\setminus B) \\setminus C = A \\setminus (B \\cup C)$
-- **Visual proof** — two diagrams shading the same eight regions confirm an identity
-- **Eight regions** — the disjoint pieces a three-circle Venn diagram divides the universe into
+- [Visual proof](!/set-theory/venn-diagrams#5) — two diagrams shading the same eight regions confirm an identity
+- [Eight regions](!/set-theory/venn-diagrams#3) — the disjoint pieces a three-circle [Venn diagram](!/set-theory/venn-diagrams) divides the universe into
 `,
       before: ``,
       after: `
@@ -527,9 +529,9 @@ The interface has three control areas: the **category tabs** at the top, the **f
       content: `The four category tabs group the 12 laws by structural type:
 
 • [Associative](!#associative-and-distributive-laws) — grouping does not matter for repeated $\\cup$, $\\cap$, or $\\triangle$ (three identities)
-• [Distributive](!#associative-and-distributive-laws) — intersection distributes over union and union distributes over intersection (two identities)
-• [De Morgan's Laws](!#de-morgans-laws-for-three-sets) — the complement of a triple union or triple intersection (two identities)
-• [Difference](!#difference-identities-in-three-sets) — five identities showing how set difference interacts with union, intersection, and itself, including nested differences
+• [Distributive](!#associative-and-distributive-laws) — [intersection](!/set-theory/operations#2) distributes over [union](!/set-theory/operations#1) and union distributes over intersection (two identities)
+• [De Morgan's Laws](!#de-morgans-laws-for-three-sets) — the [complement](!/set-theory/operations#3) of a triple union or triple intersection (two identities)
+• [Difference](!#difference-identities-in-three-sets) — five identities showing how [set difference](!/set-theory/operations#4) interacts with union, intersection, and itself, including nested differences
 
 Click a tab to switch the row of formula buttons below it. The current identity stays selected across tab switches, so you can browse other groups without losing context. The active tab updates automatically when you use Previous/Next.`,
       before: ``,
@@ -663,9 +665,9 @@ These laws are essentially the De Morgan and distributive laws translated into d
 
     obj11: {
       title: `Related Concepts and Tools`,
-      content: `**Two-Set Laws and Identities** — the companion explorer for 27 two-set laws across categories like idempotent, commutative, absorption, and compound complements.
+      content: `[Two-Set Laws and Identities](!/set-theory/visual-tools/two-sets-laws-venn) — the companion explorer for 27 two-set laws across categories like idempotent, commutative, absorption, and compound complements.
 
-**Three-Set Basic Identities** — the companion explorer for shading individual three-set expressions (triple union, triple intersection, "exactly two", and so on) rather than identity equations.
+[Three-Set Basic Identities](!/set-theory/visual-tools/three-sets-basic-venn) — the companion explorer for shading individual three-set expressions (triple union, triple intersection, "exactly two", and so on) rather than identity equations.
 
 **Set Operations** — formal definitions of union, intersection, complement, difference, and symmetric difference.
 
@@ -675,7 +677,11 @@ These laws are essentially the De Morgan and distributive laws translated into d
 
 **Set Laws and Identities** — the full algebraic catalog including associativity, distributivity, and absorption.
 
-**Set Theory Definitions** — glossary of foundational terms used throughout set algebra.`,
+**Set Theory Definitions** — glossary of foundational terms used throughout set algebra.
+
+[Venn Diagram and Truth Table Explorer](!/set-theory/visual-tools/venn-truth-table) — the same identities verified as matching truth-table columns.
+
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — shade the two sides of any identity yourself, on up to five sets.`,
       before: ``,
       after: ``,
       link: '',
@@ -986,6 +992,7 @@ The law generalizes into a habit worth keeping: a chain of subtractions can alwa
 
   return {
     props: {
+      relatedTools: getRelatedTools('three-sets-laws-venn'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1007,7 +1014,7 @@ The law generalizes into a habit worth keeping: a chain of subtractions can alwa
   }
 }
 
-export default function ThreeSetsLawsVennPage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function ThreeSetsLawsVennPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / section with after-text / per-state section
   // carrying its frozen LHS=RHS unit as [content, unit, after].
@@ -1155,6 +1162,7 @@ export default function ThreeSetsLawsVennPage({seoData, sectionsContent, introCo
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

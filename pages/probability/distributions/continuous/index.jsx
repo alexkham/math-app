@@ -10,6 +10,10 @@ import { distributionsDiagramsData } from '@/app/api/db/diagrams/probability/dis
 import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
 import { processContent } from '@/app/utils/contentProcessor'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
+import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
+import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 
 
 export async function getStaticProps(){
@@ -1012,8 +1016,38 @@ This section organizes continuous distributions, highlights their shared structu
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_vs_0: demoUnitFrame({
+      svg: continuousPdfDiagrams['uniform-pdf'],
+      caption: 'Continuous uniform density, a = 0, b = 10',
+      text: 'A continuous distribution has a density instead of probabilities at points: the flat line at height 1/10 is not a probability, and the probability of an interval is the area above it. A discrete variable would show separate bars whose heights are probabilities. Toggle to the CDF view and see the ramp that the area produces on the',
+      href: '/probability/visual-tools/probability-function/continuous',
+      linkText: 'PDF visualizer',
+    }),
+    u_types_1: demoUnitFrame({
+      svg: distributionExplorerDiagrams['normal-pdf'],
+      caption: 'Standard normal density',
+      text: 'The bell curve is the most used continuous family: symmetric about its mean, with a spread set by the standard deviation and tails that fall off quickly. The exponential and uniform families in the same explorer show a skewed and a flat alternative. Change the parameters and watch the bell move and widen on the',
+      href: '/probability/visual-tools/distributions/normal',
+      linkText: 'distribution explorer',
+    }),
+    u_working_2: demoUnitFrame({
+      svg: continuousCdfDiagrams.exponential,
+      caption: 'Exponential CDF, lambda = 1',
+      text: 'Calculations with a continuous distribution go through the CDF: the probability of an interval is F at its right end minus F at its left end, so the area under the density never has to be integrated by hand once F is known. For the exponential family F(x) equals 1 minus e to the minus lambda x, which the curve traces. Pick an interval and read the difference on the',
+      href: '/probability/visual-tools/cdf/continuous',
+      linkText: 'continuous CDF visualizer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          normalTable,
@@ -1034,7 +1068,7 @@ This section organizes continuous distributions, highlights their shared structu
 export default function ContinuousDistributionsPage({seoData,sectionsContent , introContent,
     normalTable,
          exponentialTable,
-         continuousUniformTable,
+         continuousUniformTable, demoUnits
 }) {
 
     
@@ -1063,6 +1097,8 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
         link:'',
         content:[
           sectionsContent.vs.content,
+                  <div key={'unit-u_vs_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_vs_0 }} />,
+          `The named families differ in the shape of that density.`,
         ]
     },
     {
@@ -1071,6 +1107,8 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
         link:'',
         content:[
           sectionsContent.types.content,
+                  <div key={'unit-u_types_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_types_1 }} />,
+          `All these families share the properties listed next.`,
         ]
     },
      {
@@ -1298,6 +1336,8 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
         link:'',
         content:[
           sectionsContent.working.content,
+                  <div key={'unit-u_working_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_working_2 }} />,
+          `Fitting the parameters to data comes next.`,
         ]
     },
     {

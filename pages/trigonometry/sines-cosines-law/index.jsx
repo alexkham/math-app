@@ -911,6 +911,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import triangleDiagrams from '@/app/components/trigonometry/triangle/triangleDiagrams'
 
 
 export async function getStaticProps(){
@@ -1492,8 +1494,31 @@ The Law of Sines and the Law of Cosines are those tools. Together, they provide 
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    lawSines: demoUnitFrame({
+      svg: triangleDiagrams['law-of-sines'],
+      caption: 'Law of Sines: a/sin A = b/sin B = c/sin C',
+      text: 'In this oblique triangle each side is paired with the angle opposite it, and the three ratios side over sine of opposite angle come out equal, which the tool&#8217;s stats bar reports beside the picture. The largest side faces the largest angle for exactly this reason. Drag any vertex and watch the three ratios move together on the',
+      href: '/trigonometry/visual-tools/triangle-explorer',
+      linkText: 'triangle explorer',
+    }),
+    lawCosines: demoUnitFrame({
+      svg: triangleDiagrams['law-of-cosines'],
+      caption: 'Law of Cosines: c&#178; = a&#178; + b&#178; &#8722; 2ab cos C',
+      text: 'The side c is computed from the two sides that enclose the angle C and from cos&#8201;C; when C is a right angle the correction term vanishes and the statement is the Pythagorean theorem. Make C acute and c shrinks below the Pythagorean value, make it obtuse and c grows past it. Open the angle C and watch the correction term change sign on the',
+      href: '/trigonometry/visual-tools/triangle-explorer',
+      linkText: 'triangle explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj4Table,
@@ -1521,7 +1546,7 @@ export default function SinesCosinesLawPage({
   obj9Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1554,6 +1579,8 @@ export default function SinesCosinesLawPage({
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-lawSines'} dangerouslySetInnerHTML={{ __html: demoUnits.lawSines }} />,
+          `The constant ratio is the diameter of the triangle&#8217;s circumscribed circle, which is why it is the same for all three pairs.`,
         ]
     },
     {
@@ -1588,6 +1615,8 @@ export default function SinesCosinesLawPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-lawCosines'} dangerouslySetInnerHTML={{ __html: demoUnits.lawCosines }} />,
+          `The law is thus the Pythagorean theorem with a correction for the angle not being right.`,
         ]
     },
     {

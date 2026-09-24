@@ -11,6 +11,8 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import twoSetsVennDiagrams from '../../../../app/components/venn-diagrams/twoSetsVennDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
 
@@ -36,16 +38,16 @@ export async function getStaticProps(){
     obj0: {
       title: `Key Terms`,
       content: `
-- **Set** — a collection of distinct elements
-- **Universal set** — the set containing every element under consideration, denoted $U$
-- **Union** — $A \\cup B$, elements in $A$, in $B$, or in both
-- **Intersection** — $A \\cap B$, elements in both $A$ and $B$
-- **Complement** — $A'$, elements in $U$ but not in $A$
-- **Set difference** — $A \\setminus B$, elements in $A$ but not in $B$
-- **Symmetric difference** — $A \\triangle B$, elements in exactly one of $A$ or $B$
-- **Subset** — $A \\subseteq B$ when every element of $A$ is also in $B$
-- **Disjoint sets** — sets that share no elements, $A \\cap B = \\emptyset$
-- **De Morgan's laws** — $(A \\cup B)' = A' \\cap B'$ and $(A \\cap B)' = A' \\cup B'$
+- [Set](!/set-theory/definitions#set) — a collection of distinct [elements](!/set-theory/basics#4)
+- [Universal set](!/set-theory/definitions#universal_set) — the set containing every element under consideration, denoted $U$
+- [Union](!/set-theory/definitions#union) — $A \\cup B$, elements in $A$, in $B$, or in both
+- [Intersection](!/set-theory/definitions#intersection) — $A \\cap B$, elements in both $A$ and $B$
+- [Complement](!/set-theory/definitions#complement) — $A'$, elements in $U$ but not in $A$
+- [Set difference](!/set-theory/definitions#set_difference) — $A \\setminus B$, elements in $A$ but not in $B$
+- [Symmetric difference](!/set-theory/definitions#symmetric_difference) — $A \\triangle B$, elements in exactly one of $A$ or $B$
+- [Subset](!/set-theory/definitions#subset) — $A \\subseteq B$ when every element of $A$ is also in $B$
+- [Disjoint sets](!/set-theory/definitions#disjoint_sets) — sets that share no elements, $A \\cap B = \\emptyset$
+- [De Morgan's laws](!/set-theory/rules#de_morgan) — $(A \\cup B)' = A' \\cap B'$ and $(A \\cap B)' = A' \\cup B'$
 `,
       before: ``,
       after: `
@@ -55,7 +57,7 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Explorer`,
-      content: `Open the explorer and a two-circle Venn diagram appears with the first identity pre-selected. The blue shaded region marks the elements that satisfy the current identity; the unshaded regions are excluded. The symbol of the current identity appears in the badge above the diagram, and the explanation panel beside it describes what the highlighted region means.
+      content: `Open the explorer and a two-circle [Venn diagram](!/set-theory/venn-diagrams) appears with the first identity pre-selected. The blue shaded region marks the elements that satisfy the current identity; the unshaded regions are excluded. The symbol of the current identity appears in the badge above the diagram, and the explanation panel beside it describes what the highlighted region means.
 
 The interface has three main controls. The **category tabs** at the top group identities by type. The **formula buttons** below the tabs show the identities within the active category. The **Jump to** dropdown on the right lists every identity across all categories in one place.
 
@@ -71,13 +73,13 @@ No setup is required — pick any tab and any button to see the corresponding re
       title: `Navigating Category Tabs`,
       content: `The category tabs organize all 19 identities into seven groups based on their structural role:
 
-• [Basic Sets](!#the-basic-sets) — the sets $A$ and $B$ themselves, the universal set $U$, and the empty set $\\emptyset$
+• [Basic Sets](!#the-basic-sets) — the [sets](!/set-theory/basics#1) $A$ and $B$ themselves, the universal set $U$, and the [empty set](!/set-theory/basics#3) $\\emptyset$
 • [Complements](!#the-two-complements) — $A'$ and $B'$, also written $A^c$ and $B^c$ in the [set operations](!/set-theory/operations#notation) lessons; the prime is this tool's house style and the two spellings mean the same thing
 • [Intersection & Union](!#intersection-and-union) — $A \\cap B$ and $A \\cup B$
 • [Differences](!#the-three-differences) — $A \\setminus B$, $B \\setminus A$, and the symmetric difference $A \\triangle B$
 • [Compound](!#compound-expressions) — combined expressions like $A \\cup B'$ and $A' \\cup B$
 • [De Morgan's Laws](!#de-morgans-laws-for-two-sets) — $(A \\cup B)'$ and $(A \\cap B)'$
-• [Relations](!#set-relations) — subset, disjoint, and equal sets, each drawn with a special circle layout
+• [Relations](!#set-relations) — subset, disjoint, and [equal sets](!/set-theory/relationships#1), each drawn with a special circle layout
 
 Click a tab to switch the row of formula buttons below. The currently selected identity stays highlighted across tab switches, so you can browse other categories without losing your place. The tab strip scrolls horizontally on narrow screens.`,
       before: ``,
@@ -204,13 +206,19 @@ For algebraic proofs, the general $n$-set form, and applications to propositiona
 
 **De Morgan's Laws** — algebraic proofs of both two-set laws and the generalization to arbitrary collections of sets.
 
-**Set Relations** — definitions of subset, proper subset, disjoint sets, and equal sets, with examples.
+**Set Relations** — definitions of subset, [proper subset](!/set-theory/subsets#2), disjoint sets, and equal sets, with examples.
 
 **Set Theory Definitions** — glossary of foundational terms used throughout set algebra.
 
-**Three-Set Venn Diagram** — extends the same visual approach to three overlapping sets and the eight regions they produce, including the three-set De Morgan's laws.
+[Three-Set Venn Diagram](!/set-theory/visual-tools/three-sets-basic-venn) — extends the same visual approach to three [overlapping sets](!/set-theory/relationships#4) and the eight regions they produce, including the three-set De Morgan's laws.
 
-**Set Laws and Identities** — algebraic catalog of commutative, associative, distributive, absorption, and complement laws on sets.`,
+**Set Laws and Identities** — algebraic catalog of commutative, associative, distributive, absorption, and complement laws on sets.
+
+[Two-Set Laws and Identities Explorer](!/set-theory/visual-tools/two-sets-laws-venn) — the identity equations on the same four regions.
+
+[Venn Diagram and Truth Table Explorer](!/set-theory/visual-tools/venn-truth-table) — each region as a row of a truth table.
+
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — shade any expression on up to five sets.`,
       before: ``,
       after: ``,
       link: '',
@@ -698,6 +706,7 @@ The working definition behind the picture is double inclusion: $A = B$ exactly w
 
   return {
     props: {
+      relatedTools: getRelatedTools('two-sets-basic-venn'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -719,7 +728,7 @@ The working definition behind the picture is double inclusion: $A = B$ exactly w
   }
 }
 
-export default function TwoSetsBasicVennPage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function TwoSetsBasicVennPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / group section / per-state section with its
   // frozen-state framed unit [content, unit, after].
@@ -902,6 +911,7 @@ export default function TwoSetsBasicVennPage({seoData, sectionsContent, introCon
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

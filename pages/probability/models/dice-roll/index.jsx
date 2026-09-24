@@ -695,6 +695,9 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 
 
 export async function getStaticProps(){
@@ -1226,8 +1229,38 @@ By allowing more than two outcomes, the dice roll model provides a basic framewo
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_2_0: demoUnitFrame({
+      svg: diceSampleSpaceDiagrams.none,
+      caption: 'Two dice: 36 ordered outcomes',
+      text: 'The outcome space has more than two elements: 36 ordered pairs, one per cell, with the row for the first die and the column for the second. The integer labels are convenient but carry no probability by themselves. Select events and count their cells on the',
+      href: '/probability/visual-tools/dice-roll',
+      linkText: 'dice roll sample space explorer',
+    }),
+    u_3_1: demoUnitFrame({
+      svg: diceSampleSpaceDiagrams.sum7,
+      caption: 'Sum equals 7: six outcomes on the diagonal',
+      text: 'The highlighted diagonal is an event: the six ordered pairs whose faces add to 7, with probability 6 over 36. Doubles, even sums and every other condition on the two faces pick out other groups of cells. Highlight them and compare their sizes on the',
+      href: '/probability/visual-tools/dice-roll',
+      linkText: 'dice roll sample space explorer',
+    }),
+    u_7_2: demoUnitFrame({
+      svg: discretePmfDiagrams.discreteUniform,
+      caption: 'Discrete uniform PMF, a = 1 to b = 6',
+      text: 'The face value of a single fair die is a random variable with the discrete uniform distribution: six bars of equal height 1/6 at the values 1 to 6. Any other function of the roll, such as whether the face is even, induces a different distribution on the same model. Change the range and see the bars adjust on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1254,7 +1287,7 @@ export default function DiceRollPage({
   schemas,
   assumptionsTable,
   constructionsTable,
-  summaryTable,
+  summaryTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1283,6 +1316,8 @@ export default function DiceRollPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-u_2_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_2_0 }} />,
+          `Events in this model are groups of these cells.`,
         ]
     },
     {
@@ -1291,6 +1326,8 @@ export default function DiceRollPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-u_3_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_3_1 }} />,
+          `The probability assignment gives each cell its weight.`,
         ]
     },
     {
@@ -1325,6 +1362,8 @@ export default function DiceRollPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-u_7_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_7_2 }} />,
+          `Repeated rolls build richer distributions.`,
         ]
     },
     {

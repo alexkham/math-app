@@ -9,6 +9,8 @@ import Head from 'next/head'
 import DiscreteDistributionsCDF from '@/app/components/visualizations/probability/discrete-distribution/CDFs/DiscreteProbabilityCDF'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -34,7 +36,7 @@ export async function getStaticProps(){
   const sectionsContent = {
     obj1: {
       title: `Selecting a Distribution`,
-      content: `The visualizer displays six discrete probability distributions across tabs at the top. Click any tab to switch between **Discrete Uniform**, **Binomial**, **Geometric**, **Negative Binomial**, **Hypergeometric**, and **Poisson** distributions. Each distribution models a different probabilistic scenario, from equally likely outcomes to rare event counting. The active tab is highlighted, and the chart immediately updates to show the cumulative distribution function for that distribution with default parameter values.`,
+      content: `The visualizer displays six discrete [probability](!/probability/axioms) distributions across tabs at the top. Click any tab to switch between **Discrete Uniform**, **Binomial**, **Geometric**, **Negative Binomial**, **Hypergeometric**, and **Poisson** distributions. Each distribution models a different probabilistic scenario, from equally likely [outcomes](!/probability/sample-space) to rare [event](!/probability/events) counting. The active tab is highlighted, and the chart immediately updates to show the [cumulative distribution function](!/probability/cdf) for that distribution with default parameter values.`,
       before: ``,
       after: ``,
       link: '',
@@ -64,7 +66,7 @@ The chart updates instantly as you move sliders. Parameter values display next t
 
     obj3: {
       title: `Reading the CDF Chart`,
-      content: `The cumulative distribution function appears as a step chart with discrete jumps. The x-axis shows possible values (k), and the y-axis shows cumulative probability $F(k) = P(X \\leq k)$ ranging from 0 to 1. Each horizontal segment represents the probability that the random variable is less than or equal to that x-value. Vertical jumps occur at each possible outcome, with jump height equal to $P(X = k)$. The rightmost point always reaches probability 1.0, meaning all outcomes up to that point account for the entire probability mass.
+      content: `The cumulative distribution function appears as a step chart with discrete jumps. The x-axis shows possible values (k), and the y-axis shows cumulative probability $F(k) = P(X \\leq k)$ ranging from 0 to 1. Each horizontal segment represents the probability that the [random variable](!/probability/random-variables) is less than or equal to that x-value. Vertical jumps occur at each possible outcome, with jump height equal to $P(X = k)$. The rightmost point always reaches probability 1.0, meaning all outcomes up to that point account for the entire probability mass.
 
 Hover over any point to see exact values. The tooltip displays the k-value and corresponding cumulative probability to six decimal places.`,
       before: ``,
@@ -76,7 +78,7 @@ Hover over any point to see exact values. The tooltip displays the k-value and c
       title: `Understanding Step Functions in Discrete CDFs`,
       content: `Discrete CDFs form step functions rather than smooth curves because probability concentrates at specific points. Between integer values, the CDF remains constant—if no outcome can occur at $k = 2.5$, then $F(2.5) = F(2)$. The function only increases at values where outcomes are possible. This creates the characteristic staircase pattern where each step's height equals the probability mass at that point. The step-after line type shows this clearly: the line extends horizontally from each point, then jumps vertically to the next level.
 
-Compare this to continuous distributions, where CDFs rise smoothly without jumps.`,
+Compare this to [continuous distributions](!/probability/random-variables), where CDFs rise smoothly without jumps.`,
       before: ``,
       after: ``,
       link: '',
@@ -136,17 +138,21 @@ For detailed comparison of probability functions including when to use each, see
 
     obj10: {
       title: `Related Probability Tools and Concepts`,
-      content: `**Discrete Distribution Calculators** - Compute exact probabilities, means, and variances for all six distributions with parameter input.
+      content: `**Discrete Distribution Calculators** - Compute exact probabilities, means, and [variances](!/probability/variance) for all six distributions with parameter input.
 
-**PMF Visualizers** - Display probability mass functions as bar charts showing individual probabilities rather than cumulative values.
+[PMF Visualizers](!/probability/visual-tools/probability-function) - Display probability mass functions as bar charts showing individual probabilities rather than cumulative values.
 
-**Continuous Distribution CDFs** - Explore cumulative distribution functions for continuous random variables where CDFs are smooth curves rather than step functions.
+[Continuous Distribution CDFs](!/probability/visual-tools/cdf/continuous) - Explore cumulative distribution functions for continuous random variables where CDFs are smooth curves rather than step functions.
 
 **Probability Mass Function Theory** - Understand the mathematical foundation of discrete probability functions and their properties.
 
 **Random Variables** - Learn the fundamental concept underlying all probability distributions and how they map outcomes to numerical values.
 
-**Discrete Distributions Overview** - Comprehensive guide to all discrete probability distributions including when to use each type.`,
+**Discrete Distributions Overview** - Comprehensive guide to all discrete probability distributions including when to use each type.
+
+[Dice Roll Simulator](!/probability/visual-tools/dice-roll) - A concrete sample space whose cumulative probabilities these steps record.
+
+[Coin Toss Simulator](!/probability/visual-tools/coin-toss) - The number of heads in $n$ tosses, the binomial case of this explorer.`,
       before: ``,
       after: ``,
       link: '',
@@ -386,6 +392,7 @@ Its distinguishing feature is that mean and variance are both $\\lambda$. That i
 
   return {
     props: {
+      relatedTools: getRelatedTools('probability-cdf-discrete'),
       sectionsContent,
       stateUnits,
       explanationsAppend,
@@ -405,7 +412,7 @@ Its distinguishing feature is that mean and variance are both $\\lambda$. That i
   }
 }
 
-export default function CDFDiscreteVisualizerPage({seoData, sectionsContent, stateUnits, explanationsAppend, introContent, faqQuestions, schemas}) {
+export default function CDFDiscreteVisualizerPage({relatedTools, seoData, sectionsContent, stateUnits, explanationsAppend, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -518,6 +525,7 @@ export default function CDFDiscreteVisualizerPage({seoData, sectionsContent, sta
       /> */}
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

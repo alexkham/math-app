@@ -7,6 +7,8 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
 
 
 
@@ -656,8 +658,52 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    sign: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['poly-three'],
+      caption: '(x + 2)(x &#8722; 1)(x &#8722; 5) &lt; 0: the sign chart',
+      text: 'The three roots cut the axis into four intervals and the chart records the sign of the product on each: negative, positive, negative, positive from left to right. The inequality holds exactly on the shaded intervals where the curve is below the axis. Change an operator or a root and watch the shading redistribute on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+    quadratic: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['quad-two'],
+      caption: '(x + 2)(x &#8722; 3) &lt; 0: between the roots',
+      text: 'The parabola dips below the axis only between its two roots, so the solution is the single interval (&#8722;2, 3); with a negative discriminant the parabola would never dip and the solution would be empty or everything. The roots are the boundaries, the leading coefficient the orientation. Flip the sign of the leading coefficient on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+    polynomial: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['poly-double'],
+      caption: '(x + 3)(x &#8722; 2)&#178; &lt; 0: a double root does not change the sign',
+      text: 'At x = 2 the curve touches the axis and turns back without crossing, so the sign is the same on both sides of that root, while at the simple root x = &#8722;3 it crosses and the sign flips. The solution is the interval left of &#8722;3 alone. Watch which roots flip the chart on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+    rational: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['rat-simple'],
+      caption: '(x &#8722; 1)/(x + 2) &lt; 0: two kinds of critical point',
+      text: 'The numerator zero at x = 1 and the pole at x = &#8722;2 both cut the axis, and the expression is negative only between them; the pole is drawn as an asymptote and can never belong to the solution, while the numerator zero joins it only for a non-strict inequality. Toggle strictness and watch the endpoints open and close on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+    absolute: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['abs-centered'],
+      caption: '|x| &#8722; 3 &lt; 0: the V dips below the axis on (&#8722;3, 3)',
+      text: 'The V-shaped graph is below the axis exactly between its two zeros, so the less-than form gives one bounded interval; the greater-than form would give the two outer rays instead. That is the compound inequality &#8722;3 &lt; x &lt; 3 as a picture. Switch the operator on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj1Table,
@@ -690,7 +736,7 @@ export default function InequalitiesPage({
   obj8Table,
   obj13Table,
   summaryTable,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -802,6 +848,8 @@ export default function InequalitiesPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
           />,
+                  <div key={'unit-sign'} dangerouslySetInnerHTML={{ __html: demoUnits.sign }} />,
+          `Sign analysis replaces algebra on the intervals with a single test point per interval, or none at all when the factors are known.`,
         ]
     },
     {
@@ -818,6 +866,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+                  <div key={'unit-quadratic'} dangerouslySetInnerHTML={{ __html: demoUnits.quadratic }} />,
+          `The three discriminant cases are treated in full on the quadratic inequalities page.`,
         ]
     },
     {
@@ -826,6 +876,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+                  <div key={'unit-polynomial'} dangerouslySetInnerHTML={{ __html: demoUnits.polynomial }} />,
+          `Multiplicity is the one fact the sign chart cannot do without.`,
         ]
     },
     {
@@ -834,6 +886,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+                  <div key={'unit-rational'} dangerouslySetInnerHTML={{ __html: demoUnits.rational }} />,
+          `Rational inequalities differ from polynomial ones only at the poles, and the poles are always excluded.`,
         ]
     },
 
@@ -849,6 +903,8 @@ export default function InequalitiesPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj13Table }}
           />,
+                  <div key={'unit-absolute'} dangerouslySetInnerHTML={{ __html: demoUnits.absolute }} />,
+          `The two conversions are the two ways a level line can sit against a V.`,
         ]
     },
     {

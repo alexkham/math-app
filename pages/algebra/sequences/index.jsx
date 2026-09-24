@@ -6,6 +6,8 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import binomialCoefficientDiagrams from '@/app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
 
 
 export async function getStaticProps(){
@@ -290,8 +292,24 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    triangular: demoUnitFrame({
+      svg: binomialCoefficientDiagrams['pascal-n5'],
+      caption: 'C(5, 2) = 10 is the fourth triangular number',
+      text: 'The highlighted entry of Pascal&#8217;s triangle, C(5, 2), is reached by 10 downward paths, and 10 = 1 + 2 + 3 + 4 is a triangular number: the second diagonal of the triangle lists exactly the triangular numbers, because T&#8345; = C(n + 1, 2). Counting dots in a triangle and choosing 2 objects from n + 1 are the same count. Follow the diagonal down on the',
+      href: '/algebra/visual-tools/binomial-coefficient',
+      linkText: 'binomial coefficient visualizer',
+    }),
+  };
+
    return {
   props:{
+    demoUnits,
      sectionsContent,
      introContent,
      schemas,
@@ -306,7 +324,7 @@ const schemas = {
 }
    }
 
-export default function SequencesPage({seoData, sectionsContent, introContent, schemas}) {
+export default function SequencesPage({seoData, sectionsContent, introContent, schemas, demoUnits}) {
     
   const genericSections=[
     // {
@@ -371,6 +389,8 @@ export default function SequencesPage({seoData, sectionsContent, introContent, s
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-triangular'} dangerouslySetInnerHTML={{ __html: demoUnits.triangular }} />,
+          `The square numbers, treated next, are sums of two consecutive triangular numbers.`,
         ]
     },
     {

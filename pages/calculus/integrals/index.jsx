@@ -10,6 +10,9 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagrams'
+import functionRiemannDiagrams from '@/app/components/functions/riemann/functionRiemannDiagrams'
 
 
 export async function getStaticProps(){
@@ -591,8 +594,31 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    twoTypes: demoUnitFrame({
+      svg: functionFTCDiagrams.cubic,
+      caption: 'f(t) = t&#179; shaded from 0 to 2; F(2) = 4',
+      text: 'The shaded region under the curve from 0 to x = 2 is the definite integral, a number, 4; letting the right edge x move produces the accumulation function F(x) = x&#8308;/4, an antiderivative of f. One picture holds both meanings of the integral sign: area for fixed limits, function for a moving one. Drag the right edge and watch F grow on the',
+      href: '/calculus/visual-tools/fundamental-theorem',
+      linkText: 'fundamental theorem of calculus visualizer',
+    }),
+    riemann: demoUnitFrame({
+      svg: functionRiemannDiagrams.mid,
+      caption: 'Midpoint sum for x&#178; on [0, 3] with n = 8',
+      text: 'Eight rectangles of width 3/8 stand on the interval, each as tall as the curve at the middle of its strip; their total area approximates the area under the parabola, 9. Doubling n halves the width and the error shrinks with it, and the limit of that process is the definite integral. Raise n and watch the sum close in on the',
+      href: '/calculus/visual-tools/riemann-sum',
+      linkText: 'Riemann sum visualizer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -612,7 +638,7 @@ const schemas = {
 }
    }
 
-export default function IntegralsPage({seoData, sectionsContent, introContent, obj2Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas}) {
+export default function IntegralsPage({seoData, sectionsContent, introContent, obj2Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -633,6 +659,8 @@ export default function IntegralsPage({seoData, sectionsContent, introContent, o
           sectionsContent.obj2.content,
           <div key={'obj2-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+                  <div key={'unit-twoTypes'} dangerouslySetInnerHTML={{ __html: demoUnits.twoTypes }} />,
+          `The Fundamental Theorem is the statement that these two meanings agree.`,
         ]
     },
     {
@@ -649,6 +677,8 @@ export default function IntegralsPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-riemann'} dangerouslySetInnerHTML={{ __html: demoUnits.riemann }} />,
+          `Signed area is the geometric name for what these sums measure in the limit.`,
         ]
     },
     {

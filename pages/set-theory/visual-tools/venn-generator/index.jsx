@@ -285,6 +285,8 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import Sections from '../../../../app/components/page-components/section/Sections'
 import SectionTableOfContents from '../../../../app/components/page-components/section/SectionTableofContents'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 // Surfaced on the /set-theory hub via buildSectionData extraction.
@@ -385,7 +387,7 @@ export async function getStaticProps() {
 Then give the diagram something to shade:
 
 • Type an expression directly into the Expression box.
-• Or click the symbol buttons to assemble it: set letters, intersection, union, difference, symmetric difference, complement, parentheses, empty set, and the universe.
+• Or click the symbol buttons to assemble it: set letters, [intersection](!/set-theory/operations#2), [union](!/set-theory/operations#1), difference, [symmetric difference](!/set-theory/operations#5), [complement](!/set-theory/operations#3), parentheses, [empty set](!/set-theory/basics#3), and the universe.
 • Clear empties the box and removes all shading.
 
 Every region satisfying the expression fills with the highlight color. The counter next to the Expression box reports how many regions out of the total are currently shaded, so a two-set union should read 3 of 4, and a three-set intersection should read 1 of 8.
@@ -449,11 +451,11 @@ Comparison is per-region, not per-symbol, so two expressions written completely 
 With 2 or 3 sets the Library tab also changes the layout:
 
 • **Overlapping** is the familiar arrangement where every combination of memberships exists.
-• **Disjoint** separates the circles so no element belongs to two sets.
+• **Disjoint** separates the circles so no [element](!/set-theory/basics#4) belongs to two sets.
 • **A is a subset of B** nests one circle inside another.
 • **A = B** puts the circles on top of each other.
 
-Layouts matter because they encode assumptions. On a disjoint layout, $A \\cap B$ is empty and the shading confirms it. On a subset layout, $A \\setminus B$ vanishes. Switching layouts while holding an expression fixed shows which results depend on the sets actually overlapping.`,
+Layouts matter because they encode assumptions. On a disjoint layout, $A \\cap B$ is empty and the shading confirms it. On a [subset](!/set-theory/subsets#1) layout, $A \\setminus B$ vanishes. Switching layouts while holding an expression fixed shows which results depend on the sets actually overlapping.`,
       before: ``,
       after: ``,
       link: '',
@@ -470,7 +472,7 @@ Two switches control what appears:
 • **Show elements** prints the member names inside their regions.
 • **Show counts** prints how many elements each region holds.
 
-This is the fastest way to check a cardinality calculation by hand. Type the sets, turn on counts, and read off $|A \\cup B|$ directly, then verify it against $|A| + |B| - |A \\cap B|$. It also makes membership concrete for anyone who reads the circles as pictures rather than as sets of elements.`,
+This is the fastest way to check a [cardinality](!/set-theory/cardinality#1) calculation by hand. Type the sets, turn on counts, and read off $|A \\cup B|$ directly, then verify it against $|A| + |B| - |A \\cap B|$. It also makes membership concrete for anyone who reads the circles as pictures rather than as sets of elements.`,
       before: ``,
       after: ``,
       link: '',
@@ -495,7 +497,7 @@ Two export buttons finish the job. **Download SVG** produces a vector file that 
 
     obj8: {
       title: `What a Venn Diagram Shows`,
-      content: `A Venn diagram splits a universe into regions, one for every possible pattern of membership across the sets.
+      content: `A [Venn diagram](!/set-theory/venn-diagrams) splits a universe into regions, one for every possible pattern of membership across the sets.
 
 That last part is what separates a Venn diagram from a loose sketch of overlapping circles. With $n$ sets, a true Venn diagram has $2^n$ regions: 4 regions for 2 sets, 8 for 3, 16 for 4, and 32 for 5. Every combination is present, including the region outside all the sets.
 
@@ -572,7 +574,15 @@ For formal statements, see **set identities**.`,
 
 **Logic** - Set operations mirror the logical connectives: intersection is AND, union is OR, complement is NOT.
 
-**Probability** - Events are sets, so the same diagrams carry over to probability rules for unions and complements.`,
+**Probability** - Events are sets, so the same diagrams carry over to probability rules for unions and complements.
+
+[Two-Set Venn Diagram](!/set-theory/visual-tools/two-sets-basic-venn) - The four regions of two sets, one operation at a time.
+
+[Three-Set Venn Diagram](!/set-theory/visual-tools/three-sets-basic-venn) - The eight regions of three sets, with the three-set identities.
+
+[Venn Diagram and Truth Table Explorer](!/set-theory/visual-tools/venn-truth-table) - The same shaded expressions, checked column by column against a truth table.
+
+[Inclusion-Exclusion Principle Explorer](!/set-theory/visual-tools/inclusion-exclusion) - Counting the elements in the regions shaded here.`,
       before: ``,
       after: ``,
       link: '',
@@ -762,6 +772,7 @@ It is also why five sets is close to the practical ceiling. $32$ regions is alre
 
   return {
     props: {
+      relatedTools: getRelatedTools('set-theory-venn-generator'),
       sectionsContent,
       stateUnits,
       sectionOrder,
@@ -773,7 +784,7 @@ It is also why five sets is close to the practical ceiling. $32$ regions is alre
 }
 
 
-export default function VennDiagramGeneratorPage({ seoData, sectionsContent, stateUnits, sectionOrder, faqQuestions, schemas }) {
+export default function VennDiagramGeneratorPage({ relatedTools, seoData, sectionsContent, stateUnits, sectionOrder, faqQuestions, schemas }) {
 
   const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
     const src = sectionsContent[obj]
@@ -867,6 +878,7 @@ export default function VennDiagramGeneratorPage({ seoData, sectionsContent, sta
    <SectionTableOfContents sections={genericSections}/>
   <br/>
   <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
   <br/>
   <br/>

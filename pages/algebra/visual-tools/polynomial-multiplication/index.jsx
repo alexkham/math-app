@@ -495,6 +495,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import PolynomialMultiplicationVisualizer from '../../../../app/components/algebra/visualizers/polynomials/PolynomialMultiplication'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import polynomialMultiplicationDiagrams from '../../../../app/components/algebra/visualizers/polynomials/polynomialMultiplicationDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -521,17 +523,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Polynomial multiplication** — the operation of multiplying two polynomials $P(x)$ and $Q(x)$, producing a new polynomial whose degree is the sum of the degrees of $P$ and $Q$.
+      content: `[Polynomial multiplication](!/algebra/polynomials/operations#3) — the operation of multiplying two [polynomials](!/algebra/polynomials) $P(x)$ and $Q(x)$, producing a new polynomial whose degree is the sum of the degrees of $P$ and $Q$.
 
-**Distributive property** — the rule $a(b + c) = ab + ac$, applied repeatedly to multiply each term of one polynomial by each term of the other.
+[Distributive property](!/algebra/polynomials/operations#3) — the rule $a(b + c) = ab + ac$, applied repeatedly to multiply each term of one polynomial by each term of the other.
 
-**FOIL** — the mnemonic for multiplying two binomials: First, Outer, Inner, Last. A special case of distribution that produces exactly four pairwise products.
+[FOIL](!/algebra/polynomials/operations#5) — the mnemonic for multiplying two [binomials](!/algebra/polynomials#2): First, Outer, Inner, Last. A special case of distribution that produces exactly four pairwise products.
 
 **Grid method (box method)** — a tabular visualization of polynomial multiplication. The terms of $P$ label the rows, the terms of $Q$ label the columns, and each cell holds the product of its row and column terms. Generalizes FOIL to any number of terms.
 
-**Like terms** — terms that share the same power of $x$. After distributing, like terms are grouped and their coefficients summed.
+[Like terms](!/algebra/definitions#like_terms) — terms that share the same power of $x$. After distributing, [like terms](!/algebra/polynomials/operations#1) are grouped and their [coefficients](!/algebra/equations) summed.
 
-**Degree of a product** — equals the degree of $P$ plus the degree of $Q$. A trinomial times a binomial yields a polynomial of degree (2 + 1) = 3, for example.`,
+[Degree of a product](!/algebra/polynomials/operations#8) — equals the degree of $P$ plus the degree of $Q$. A [trinomial](!/algebra/polynomials#2) times a binomial yields a polynomial of degree (2 + 1) = 3, for example.`,
       before: ``,
       after: ``,
       link: '',
@@ -549,7 +551,7 @@ To explore:
 
 • Click any preset to load a curated example.
 
-• Edit the coefficients and exponents directly in the term rows.
+• Edit the coefficients and [exponents](!/algebra/powers) directly in the term rows.
 
 • Add or remove terms with the **+ add term** button and the small **×** per row.
 
@@ -565,7 +567,7 @@ The status badge at the bottom of the left card tracks progress as $k / N$ cells
       title: `Entering the Polynomials`,
       content: `Two polynomial editors sit in the left card, one for $P(x)$ and one for $Q(x)$. Each editor has three parts:
 
-• A **live display** at the top showing the polynomial in standard form, with terms sorted by descending exponent and signs handled correctly.
+• A **live display** at the top showing the polynomial in [standard form](!/algebra/equations), with terms sorted by descending exponent and signs handled correctly.
 
 • A list of **term rows**, one per term. Each row has a coefficient input (any integer or decimal between &minus;9999 and 9999), the literal $x$, an exponent input (an integer between 0 and 12), and a remove button.
 
@@ -723,15 +725,21 @@ After the grid fills, the **like-term collection** step groups cells whose expon
 
 **Polynomial addition and subtraction** — combine like terms across two polynomials. The companion operations to multiplication.
 
-**Polynomial division** — long division or synthetic division. The inverse operation of multiplication.
+**Polynomial division** — long division or [synthetic division](!/algebra/polynomials/operations#7). The inverse operation of multiplication.
 
-**Binomial theorem** — gives the expansion of $(a + b)^n$ directly using binomial coefficients. A shortcut when one of the polynomials is a power.
+**Binomial theorem** — gives the expansion of $(a + b)^n$ directly using [binomial coefficients](!/algebra/identities#3). A shortcut when one of the polynomials is a power.
 
-**Completing the square** — uses controlled polynomial manipulation to rewrite a quadratic in vertex form.
+[Completing the square](!/algebra/visual-tools/completing-square) — uses controlled polynomial manipulation to rewrite a quadratic in vertex form.
 
 **Special products** — recognizable patterns like $(a + b)^2 = a^2 + 2ab + b^2$, $(a - b)^2 = a^2 - 2ab + b^2$, and $(a + b)(a - b) = a^2 - b^2$. Worth memorizing because they appear constantly.
 
-**Algebra calculator** — for symbolic manipulation beyond what fits in a 36-cell grid, see the dedicated **polynomial multiplication calculator** in the algebra calculators section.`,
+**Algebra calculator** — for symbolic manipulation beyond what fits in a 36-cell grid, see the dedicated **polynomial multiplication calculator** in the algebra calculators section.
+
+[Binomial Coefficient Visualizer](!/algebra/visual-tools/binomial-coefficient) — the coefficients of $(a + b)^n$, counted as paths in Pascal's triangle.
+
+[Powers Table](!/algebra/visual-tools/powers-table) — multiplying powers of the same base adds the exponents, the rule every grid cell uses.
+
+[Equation Visual Explorer](!/algebra/visual-tools/equation) — set the expanded polynomial equal to a number and find where it holds.`,
       before: ``,
       after: ``,
       link: '',
@@ -927,6 +935,7 @@ The five colors of the frozen grid also make a structural point: cells of equal 
 
   return {
     props: {
+      relatedTools: getRelatedTools('algebra-polynomial-multiplication'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1000,7 +1009,7 @@ The five colors of the frozen grid also make a structural point: cells of equal 
   }
 }
 
-export default function PolynomialMultiplicationCalculator({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PolynomialMultiplicationCalculator({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after].
@@ -1256,6 +1265,7 @@ export default function PolynomialMultiplicationCalculator({seoData, sectionsCon
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

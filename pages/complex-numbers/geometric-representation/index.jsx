@@ -840,6 +840,11 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import complexExplorerDiagrams from '@/app/components/calculators/complex-numbers/complexExplorerDiagrams'
+import complexAddSubDiagrams from '@/app/components/calculators/complex-numbers/complexAddSubDiagrams'
+import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
+import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 
 
 export async function getStaticProps(){
@@ -1392,8 +1397,45 @@ const schemas = {
 
  
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    plot: demoUnitFrame({
+      svg: complexExplorerDiagrams.quadrantII,
+      caption: 'z = &#8722;3 + 2i plotted as (&#8722;3, 2)',
+      text: 'The real part &#8722;3 is read along the horizontal axis and the imaginary part 2 up the vertical one, placing the number in the second quadrant; the arrow from the origin has length &#8730;13 &#8776; 3.61. Plotting a complex number is plotting an ordered pair with the axes renamed. Move the point into every quadrant on the',
+      href: '/complex-numbers/visual-tools/complex-explorer',
+      linkText: 'complex number explorer',
+    }),
+    vectors: demoUnitFrame({
+      svg: complexAddSubDiagrams.add,
+      caption: 'z&#8321; + z&#8322; as the diagonal of a parallelogram',
+      text: 'The two arrows z&#8321; and z&#8322; are placed tail to tail and the sum is the diagonal of the parallelogram they span, exactly as vectors add: real parts add along the horizontal, imaginary parts along the vertical. Drag either summand and watch the diagonal follow on the',
+      href: '/complex-numbers/visual-tools/addition-subtraction',
+      linkText: 'complex addition and subtraction tool',
+    }),
+    conj: demoUnitFrame({
+      svg: conjugateModulusDiagrams.start,
+      caption: 'z and z&#772; mirrored in the real axis, |z| = 3.6',
+      text: 'The point z and its conjugate z&#772; sit at the same distance from the origin, one above the real axis and one below: conjugation keeps the real part and flips the sign of the imaginary part, so it is a reflection in the real axis. The modulus, the length of either arrow, is the same 3.6 for both. Drag z anywhere and watch its mirror image follow on the',
+      href: '/complex-numbers/visual-tools/complex-conjugate',
+      linkText: 'conjugate and modulus tool',
+    }),
+    ops: demoUnitFrame({
+      svg: complexMultiplicationDiagrams.general,
+      caption: 'z&#8321;z&#8322;: arguments add, moduli multiply',
+      text: 'The product sits at the angle &#952;&#8321; + &#952;&#8322; marked in the picture and at distance |z&#8321;||z&#8322;| from the origin: multiplying by a complex number rotates by its argument and scales by its modulus. Nothing in the algebraic expansion shows this; the picture does. Turn one factor and watch the product swing round on the',
+      href: '/complex-numbers/visual-tools/multiplication',
+      linkText: 'complex multiplication tool',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1422,7 +1464,7 @@ export default function GeometricRepresentationPage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1464,6 +1506,8 @@ export default function GeometricRepresentationPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+                  <div key={'unit-plot'} dangerouslySetInnerHTML={{ __html: demoUnits.plot }} />,
+          `The plane makes the two-part structure of a complex number visible at a glance.`,
         ]
     },
     {
@@ -1472,6 +1516,8 @@ export default function GeometricRepresentationPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-vectors'} dangerouslySetInnerHTML={{ __html: demoUnits.vectors }} />,
+          `Treating complex numbers as vectors is what turns their addition into geometry.`,
         ]
     },
     {
@@ -1485,6 +1531,8 @@ export default function GeometricRepresentationPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+                  <div key={'unit-conj'} dangerouslySetInnerHTML={{ __html: demoUnits.conj }} />,
+          `The conjugate is the mirror image, and mirror images have equal moduli.`,
         ]
     },
     {
@@ -1506,6 +1554,8 @@ export default function GeometricRepresentationPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+                  <div key={'unit-ops'} dangerouslySetInnerHTML={{ __html: demoUnits.ops }} />,
+          `Addition translates, multiplication rotates and scales: the two operations look nothing alike on the plane.`,
         ]
     },
     {

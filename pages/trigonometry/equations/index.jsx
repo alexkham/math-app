@@ -1009,6 +1009,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
+import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiagrams'
 
 
 export async function getStaticProps(){
@@ -1678,8 +1681,38 @@ Managing this infinity is what distinguishes trigonometric equation solving from
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    general: demoUnitFrame({
+      svg: trigFunctionsGraphDiagrams.sin,
+      caption: 'y = sin x repeats every 2&#960;',
+      text: 'Any horizontal line between &#8722;1 and 1 cuts this wave twice in every period, and the cuts recur every 2&#960; in both directions: that is why one solution always brings infinitely many with it, and why the general solution carries an integer n. The marker at 60&#176; is one of the crossings for the line y = &#8730;3/2. Follow the wave through several periods on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+    twoSolutions: demoUnitFrame({
+      svg: [unitCircleDiagrams.specials[30], unitCircleDiagrams.specials[150]],
+      caption: 'sin 30&#176; = sin 150&#176; = 1/2',
+      text: 'Both hover boxes show the same y-coordinate, 1/2: the two points sit at the same height on opposite sides of the y-axis, one at the reference angle 30&#176; in Quadrant I and one at 180&#176; &#8722; 30&#176; in Quadrant II. Those are the two solutions of sin&#8201;x = 1/2 in one turn of the circle; every other solution is one of these plus full turns. Hover the mirrored pair for any height on the',
+      href: '/visual-tools/unit-circle',
+      linkText: 'unit circle visualizer',
+    }),
+    tanPeriod: demoUnitFrame({
+      svg: trigFunctionsGraphDiagrams.tan,
+      caption: 'y = tan x: one crossing per branch',
+      text: 'Every branch climbs through all real values exactly once, so a horizontal line at any height a meets the curve once per branch and the branches are &#960; apart: tan&#8201;x = a has exactly one solution per period of &#960;, whatever a is. The marker at 60&#176; is the crossing for a = &#8730;3. Pick any height and count the crossings on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj4Table,
@@ -1699,7 +1732,7 @@ Managing this infinity is what distinguishes trigonometric equation solving from
     }
    }
 
-export default function EquationsPage({seoData,sectionsContent , introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas}) {
+export default function EquationsPage({seoData,sectionsContent , introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1719,6 +1752,8 @@ export default function EquationsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-general'} dangerouslySetInnerHTML={{ __html: demoUnits.general }} />,
+          `Restricting to an interval simply selects which of these infinitely many crossings to report.`,
         ]
     },
     {
@@ -1727,6 +1762,8 @@ export default function EquationsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-twoSolutions'} dangerouslySetInnerHTML={{ __html: demoUnits.twoSolutions }} />,
+          `The sign of a only decides which pair of quadrants hosts the two points; the mirror relationship is the same.`,
         ]
     },
     {
@@ -1750,6 +1787,8 @@ export default function EquationsPage({seoData,sectionsContent , introContent, o
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+                  <div key={'unit-tanPeriod'} dangerouslySetInnerHTML={{ __html: demoUnits.tanPeriod }} />,
+          `The shorter period is why the general solution for tangent adds n&#960; rather than 2n&#960;.`,
         ]
     },
     {

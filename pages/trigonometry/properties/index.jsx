@@ -1175,6 +1175,10 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
+import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiagrams'
+import negativeAngleDiagrams from '@/app/components/trigonometry/identities/negative-angle/negativeAngleDiagrams'
 
 
 export async function getStaticProps(){
@@ -2034,8 +2038,45 @@ These properties govern every computation downstream. Periodicity is the reason 
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    periodic: demoUnitFrame({
+      svg: trigFunctionsGraphDiagrams.sin,
+      caption: 'One period of y = sin x is 2&#960;',
+      text: 'The stretch of curve from 0 to 2&#960; is one complete cycle, and every later stretch of the same length is an exact copy: that is what sin(&#952; + 2&#960;) = sin&#8201;&#952; says. The marker at 60&#176; would read the same 0.866 at 420&#176;, at 780&#176;, and at &#8722;300&#176;. Move the marker by a full period and watch the value repeat on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+    evenOdd: demoUnitFrame({
+      svg: negativeAngleDiagrams.sin.overview,
+      caption: 'sin(&#8722;&#952;) = &#8722;sin&#8201;&#952;: P reflected to P&#8242;',
+      text: 'Turning by &#8722;&#952; instead of &#952; reflects the point P across the x-axis to P&#8242;: the x-coordinate is unchanged, so cosine is even, and the y-coordinate flips sign, so sine is odd. The two heights marked in the picture are equal and opposite, which is the identity read off the circle rather than proved. Step through the reflection for any angle on the',
+      href: '/trigonometry/visual-tools/negative-angle-identities',
+      linkText: 'negative angle identities explorer',
+    }),
+    zeros: demoUnitFrame({
+      svg: unitCircleDiagrams.specials[180],
+      caption: '&#952; = 180&#176;: the point is (&#8722;1, 0)',
+      text: 'With the terminal side lying along the negative x-axis the vertical leg has no length at all, so sin&#8201;180&#176; = 0, as the hover box confirms; the same happens at 0&#176; and 360&#176;. Cosine vanishes instead where the terminal side is vertical, at 90&#176; and 270&#176;. Park the point on either axis and read the zero on the',
+      href: '/visual-tools/unit-circle',
+      linkText: 'unit circle visualizer',
+    }),
+    asymptotes: demoUnitFrame({
+      svg: trigFunctionsGraphDiagrams.tan,
+      caption: 'y = tan x: a break at every odd multiple of &#960;/2',
+      text: 'The curve is smooth inside each branch, but at &#960;/2, 3&#960;/2 and every odd multiple of &#960;/2 it runs off to infinity on one side and comes back from minus infinity on the other: a vertical asymptote wherever the cosine in the denominator is zero. Sine and cosine themselves have no such breaks because they are coordinates, never quotients. Trace a branch up to its asymptote on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj8Table,
@@ -2061,7 +2102,7 @@ export default function PropertiesPage({
   obj8Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2082,6 +2123,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-periodic'} dangerouslySetInnerHTML={{ __html: demoUnits.periodic }} />,
+          `Periodicity is the property that turns a finite table of values into a function on the whole real line.`,
         ]
     },
     {
@@ -2090,6 +2133,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-evenOdd'} dangerouslySetInnerHTML={{ __html: demoUnits.evenOdd }} />,
+          `The parity of the other four functions follows by taking reciprocals and quotients of these two.`,
         ]
     },
     {
@@ -2106,6 +2151,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-zeros'} dangerouslySetInnerHTML={{ __html: demoUnits.zeros }} />,
+          `The zeros of the remaining four functions are then either these same angles or none at all.`,
         ]
     },
     {
@@ -2114,6 +2161,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-asymptotes'} dangerouslySetInnerHTML={{ __html: demoUnits.asymptotes }} />,
+          `Continuity is therefore a property of the two coordinates, and discontinuity a property of dividing by them.`,
         ]
     },
     {

@@ -14,6 +14,8 @@ import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandal
 import ThreeSetBasicIdentitiesExplorer from '../../../../app/components/venn-diagrams/3-sets/ThreeSetBasicIdentitiesExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import threeSetsVennDiagrams from '../../../../app/components/venn-diagrams/3-sets/threeSetsVennDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
 
@@ -39,16 +41,16 @@ export async function getStaticProps(){
     obj0: {
       title: `Key Terms`,
       content: `
-- **Set** — a collection of distinct elements
-- **Universal set** — the set containing every element under consideration, denoted $U$
-- **Union** — $A \\cup B \\cup C$, elements in at least one of $A$, $B$, $C$
-- **Intersection** — $A \\cap B \\cap C$, elements in all three sets
+- [Set](!/set-theory/definitions#set) — a collection of distinct [elements](!/set-theory/basics#4)
+- [Universal set](!/set-theory/definitions#universal_set) — the set containing every element under consideration, denoted $U$
+- [Union](!/set-theory/definitions#union) — $A \\cup B \\cup C$, elements in at least one of $A$, $B$, $C$
+- [Intersection](!/set-theory/definitions#intersection) — $A \\cap B \\cap C$, elements in all three [sets](!/set-theory/basics#1)
 - **Pairwise intersection** — $A \\cap B$, $A \\cap C$, or $B \\cap C$
-- **Complement** — $A'$, elements in $U$ but not in $A$
-- **Set difference** — $A \\setminus B$, elements in $A$ but not in $B$
-- **Symmetric difference** — $A \\triangle B \\triangle C$, elements in an odd number of $A$, $B$, $C$
-- **De Morgan's laws (three sets)** — $(A \\cup B \\cup C)' = A' \\cap B' \\cap C'$ and $(A \\cap B \\cap C)' = A' \\cup B' \\cup C'$
-- **Region** — one of the eight disjoint pieces a three-circle Venn diagram divides the universe into
+- [Complement](!/set-theory/definitions#complement) — $A'$, elements in $U$ but not in $A$
+- [Set difference](!/set-theory/definitions#set_difference) — $A \\setminus B$, elements in $A$ but not in $B$
+- [Symmetric difference](!/set-theory/definitions#symmetric_difference) — $A \\triangle B \\triangle C$, elements in an odd number of $A$, $B$, $C$
+- [De Morgan's laws (three sets)](!/set-theory/rules#de_morgan) — $(A \\cup B \\cup C)' = A' \\cap B' \\cap C'$ and $(A \\cap B \\cap C)' = A' \\cup B' \\cup C'$
+- [Region](!/set-theory/venn-diagrams#4) — one of the eight disjoint pieces a three-circle [Venn diagram](!/set-theory/venn-diagrams) divides the universe into
 `,
       before: ``,
       after: `
@@ -74,7 +76,7 @@ No setup is required — pick any tab and any button to see the corresponding re
       title: `Navigating Category Tabs`,
       content: `The category tabs organize all 40 identities into six groups based on their structural role:
 
-• [Basic Sets](!#the-basic-sets) — the sets $A$, $B$, $C$ themselves, the universal set $U$, and the empty set $\\emptyset$
+• [Basic Sets](!#the-basic-sets) — the sets $A$, $B$, $C$ themselves, the universal set $U$, and the [empty set](!/set-theory/basics#3) $\\emptyset$
 • [Complements](!#the-three-complements) — $A'$, $B'$, and $C'$
 • [Intersection & Union](!#intersections-and-unions) — the triple intersection $A \\cap B \\cap C$, the three pairwise intersections, the triple union $A \\cup B \\cup C$, and the three pairwise unions
 • [Differences](!#the-differences) — the six pairwise differences, the three "only" regions like $A \\setminus (B \\cup C)$, the mixed $(A \\cup B) \\setminus C$, and the symmetric differences $A \\triangle B$ and $A \\triangle B \\triangle C$
@@ -140,7 +142,7 @@ Click **Reset** to return both controls to the defaults — blue at $0.85$ opaci
       title: `Previous and Next Navigation`,
       content: `At the bottom of the diagram column, the **Previous** and **Next** buttons cycle through all 40 identities in the order defined by the category groups: Basic Sets, then Complements, then Intersection & Union, then Differences, Compound, and finally De Morgan's Laws. The counter between the two buttons displays the current position, formatted as "$n$ / $40$".
 
-Navigation wraps around: pressing **Previous** on the first scenario jumps to the last, and pressing **Next** on the last returns to the first. This makes the explorer well suited for systematic review — start at the first identity and click through every region combination one by one to see how each algebraic expression maps to a subset of the eight regions.
+Navigation wraps around: pressing **Previous** on the first scenario jumps to the last, and pressing **Next** on the last returns to the first. This makes the explorer well suited for systematic review — start at the first identity and click through every region combination one by one to see how each algebraic expression maps to a [subset](!/set-theory/subsets#1) of the eight regions.
 
 The active tab and active formula button update automatically as you advance, so you always know which group the current identity belongs to.`,
       before: ``,
@@ -230,13 +232,19 @@ For comprehensive treatment, see **set laws and identities**.`,
 
 **De Morgan's Laws** — algebraic proofs of the two-set and three-set forms and the generalization to arbitrary collections of sets.
 
-**Two-Set Venn Diagram** — the simpler two-circle case with four regions; useful for first exposure to the visual approach.
+[Two-Set Venn Diagram](!/set-theory/visual-tools/two-sets-basic-venn) — the simpler two-circle case with four regions; useful for first exposure to the visual approach.
 
-**Inclusion-Exclusion Principle** — the counting formula $|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C| + |A \\cap B \\cap C|$, which depends on the eight-region decomposition.
+[Inclusion-Exclusion Principle](!/set-theory/visual-tools/inclusion-exclusion) — the counting formula $|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C| + |A \\cap B \\cap C|$, which depends on the eight-region decomposition.
 
 **Set Theory Definitions** — glossary of foundational terms used throughout set algebra.
 
-**Set Laws and Identities** — algebraic catalog of commutative, associative, distributive, absorption, and complement laws on sets.`,
+**Set Laws and Identities** — algebraic catalog of commutative, associative, distributive, absorption, and complement laws on sets.
+
+[Three-Set Laws and Identities Explorer](!/set-theory/visual-tools/three-sets-laws-venn) — the identity equations on the same eight regions, proved side by side.
+
+[Venn Diagram and Truth Table Explorer](!/set-theory/visual-tools/venn-truth-table) — the same expressions as truth-table columns.
+
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — shade any expression on up to five sets.`,
       before: ``,
       after: ``,
       link: '',
@@ -955,6 +963,7 @@ Ending the catalog on this pair is apt: the two frames compress everything the p
 
   return {
     props: {
+      relatedTools: getRelatedTools('three-sets-basic-venn'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -976,7 +985,7 @@ Ending the catalog on this pair is apt: the two frames compress everything the p
   }
 }
 
-export default function ThreeSetsBasicVennPage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function ThreeSetsBasicVennPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / section with after-text / per-state section
   // carrying its frozen unit as [content, unit, after].
@@ -1179,6 +1188,7 @@ export default function ThreeSetsBasicVennPage({seoData, sectionsContent, introC
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

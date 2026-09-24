@@ -10,6 +10,8 @@ import ExplanationDetails from '../../../../app/components/ExplanationDetails'
 import SetBuilderExplorer from '../../../../app/components/diagrams/set-theory/SetBuilderExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import setBuilderDiagrams from '../../../../app/components/diagrams/set-theory/setBuilderDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -60,7 +62,7 @@ export async function getStaticProps(){
       title:`Getting Started`,
       content:`The expression across the top of the tool is the set you are building, and it never has more than two parts: a **domain** before the bar, and a **condition** after it.
 
-Everything else on the page feeds those two. The Domain panel sets where candidates come from. The condition rows set the test they have to pass. The strip of chips shows the candidates, green for the ones in the set and grey for the ones that failed.
+Everything else on the page feeds those two. The Domain panel [sets](!/set-theory/basics#1) where candidates come from. The condition rows set the test they have to pass. The strip of chips shows the candidates, green for the ones in the set and grey for the ones that failed.
 
 The fastest way in is the preset buttons, which load complete expressions you can then take apart. Under the builder line there is also a reading of the whole expression in plain words, which is worth glancing at whenever the symbols stop being obvious.
 
@@ -78,7 +80,7 @@ One thing to notice early: an expression with no condition at all is legal. It k
 • The natural numbers, starting at 1.
 • The naturals including zero.
 • The integers, which bring negative candidates into play.
-• A finite set you type yourself, entered as numbers separated by commas.
+• A [finite set](!/set-theory/cardinality#2) you type yourself, entered as numbers separated by commas.
 
 The domain is the first of two gates. It decides which things are even eligible for testing, and anything outside it is never considered at all — not rejected, simply absent. That case has its own frame at [a number outside the domain](!#a-number-outside-the-domain).
 
@@ -120,7 +122,7 @@ The ordinary situation — one condition, a finite answer — is frozen at [the 
 
 Joined by **and**, a candidate has to pass every test. Joined by **or**, passing one is enough. The switch changes nothing about the conditions themselves — only how their verdicts are combined — and flipping it back and forth over the same two tests is the clearest demonstration in the tool.
 
-The two settings are exactly intersection and union, which is the point:
+The two settings are exactly [intersection](!/set-theory/operations#2) and [union](!/set-theory/operations#1), which is the point:
 
 $$\\{x \\in D : P(x) \\text{ and } Q(x)\\} = \\{x \\in D : P(x)\\} \\cap \\{x \\in D : Q(x)\\}$$
 
@@ -209,7 +211,7 @@ The practical consequence is smaller but constant. $\\{x \\in \\mathbb{N} : x^2 
       title:`Conditions as Set Operations`,
       content:`Every logical connective in a condition corresponds to an operation on sets, which is why the bar notation and the operation symbols are not separate topics.
 
-Joining with **and** gives intersection; joining with **or** gives union. Negating a condition gives the complement relative to the domain:
+Joining with **and** gives intersection; joining with **or** gives union. Negating a condition gives the [complement](!/set-theory/operations#3) relative to the domain:
 
 $$\\{x \\in D : \\text{not } P(x)\\} = D \\setminus \\{x \\in D : P(x)\\}$$
 
@@ -234,7 +236,7 @@ Set-builder notation states the rule instead, so nothing is left to guess:
 
 $$\\{x \\in \\mathbb{N} : x \\text{ is even}\\}$$
 
-This is why the notation is not merely a convenience. Every infinite set you meet is named by a rule like this one, because there is no alternative once the elements run out of room.
+This is why the notation is not merely a convenience. Every [infinite set](!/set-theory/cardinality#3) you meet is named by a rule like this one, because there is no alternative once the [elements](!/set-theory/basics#4) run out of room.
 
 The limitation is not really about infinity, either. A finite set of ten thousand members has a roster form in principle and none in practice, and the builder expression that describes it is no longer than the one for three members. The frozen case is [a set too big to list](!#a-set-too-big-to-list).`,
       before:``,
@@ -245,19 +247,23 @@ The limitation is not really about infinity, either. A finite set of ten thousan
 
     obj11:{
       title:`Related Concepts and Tools`,
-      content:`**Set Theory Definitions** — the vocabulary this page assumes: element, membership, domain, subset.
+      content:`**Set Theory Definitions** — the vocabulary this page assumes: element, membership, domain, [subset](!/set-theory/subsets#1).
 
 **Set Operations** — intersection, union, difference, and complement, the operations conditions correspond to.
 
 **Set Notation** — roster form, interval notation, and the symbols used across the subject.
 
-**Cardinality** — finite, countable, and uncountable sets, and why listing stops working.
+**Cardinality** — finite, countable, and [uncountable sets](!/set-theory/cardinality#5), and why listing stops working.
 
 **Propositional Logic** — the and, or and not that join conditions.
 
-**Power Set Explorer** — every subset of a small set, drawn as a lattice.
+[Power Set Explorer](!/set-theory/visual-tools/power-set) — every subset of a small set, drawn as a lattice.
 
-**Venn Diagram Generator** — shading set expressions once they are built.`,
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — shading set expressions once they are built.
+
+[Indexed Union and Intersection Explorer](!/set-theory/visual-tools/union-intersection) — the same and/or joins, taken over whole families of sets.
+
+[Two-Set Venn Diagram](!/set-theory/visual-tools/two-sets-basic-venn) — the four regions a condition on two sets can pick out.`,
       before:``,
       after:``,
       link:'',
@@ -582,6 +588,7 @@ That is the ordinary working state of the notation, and everything else on this 
 
    return {
       props:{
+        relatedTools: getRelatedTools('set-builder'),
          sectionsContent,
          introContent,
          instructions,
@@ -594,7 +601,7 @@ That is the ordinary working state of the notation, and everything else on this 
     }
    }
 
-export default function SetBuilderPage({seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+export default function SetBuilderPage({relatedTools, seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
 
   // Slug ids (Line 1). obj0 is the Key Terms slot, unused on tool pages, so it
   // never reaches this list. A per-state row carries its frozen unit between
@@ -744,6 +751,7 @@ export default function SetBuilderPage({seoData, sectionsContent, introContent, 
    />
    <br/>
    */}
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

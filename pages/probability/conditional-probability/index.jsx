@@ -615,6 +615,10 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
+import partitionVennDiagrams from '@/app/components/probability/conditional-probability-demo/partitionVennDiagrams'
+import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
 
 
 export async function getStaticProps(){
@@ -1152,8 +1156,38 @@ The rest of the page explains how this change of viewpoint works, how it is expr
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_meaning_0: demoUnitFrame({
+      svg: conditionalTreeDiagrams.subtreeGivenA,
+      caption: 'Given A: only the subtree below A remains',
+      text: 'Once A is known to have occurred, the lower branch is discarded and the two branches below A are the whole remaining world. Their weights, P(B given A) and its complement, already add to 1, which is exactly what a conditional probability is: the probabilities inside the restricted situation. Change P(B given A) and watch only that subtree respond on the',
+      href: '/probability/visual-tools/conditional-probability/tree-diagram',
+      linkText: 'conditional probability tree diagram',
+    }),
+    u_visual_1: demoUnitFrame({
+      svg: partitionVennDiagrams.middleSelected,
+      caption: 'Event A across three compartments, the middle one selected',
+      text: 'Selecting a compartment restricts attention to it: the part of A inside the compartment stays solid while the rest of A fades, and the conditional probability is the solid share of the selected compartment. The Venn view and the tree view describe the same rescaling. Select another compartment and compare the shares on the',
+      href: '/probability/visual-tools/conditional-probability/venn-diagram',
+      linkText: 'partition Venn diagram',
+    }),
+    u_examples_2: demoUnitFrame({
+      svg: contingencyTableDiagrams['2x2'],
+      caption: 'A 2 by 2 contingency table with row and column totals',
+      text: 'Each example is a table: the row for A holds the joint counts with B and its complement, and the conditional probability P(A given B) is the A cell in the B column divided by the column total. Reading down a column instead of across the whole table is the restriction in tabular form. Edit the cells and watch the conditionals update on the',
+      href: '/probability/visual-tools/contingency-tables',
+      linkText: 'contingency tables explorer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       examplesTable,
@@ -1182,7 +1216,7 @@ export default function ConditionalProbabilityPage({
   mistakesTable,
   overviewTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1211,6 +1245,8 @@ export default function ConditionalProbabilityPage({
         link:'',
         content:[
             sectionsContent.meaning.content,
+                  <div key={'unit-u_meaning_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_meaning_0 }} />,
+          `The formula makes this restriction a division.`,
         ]
     },
     {
@@ -1246,6 +1282,8 @@ export default function ConditionalProbabilityPage({
         link:'',
         content:[
             sectionsContent.visual.content,
+                  <div key={'unit-u_visual_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_visual_1 }} />,
+          `Concrete examples make the same restriction numerical.`,
         ]
     },
     {
@@ -1255,6 +1293,8 @@ export default function ConditionalProbabilityPage({
         content:[
           sectionsContent.examples.content,
           <div key={'examples-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: examplesTable}}/>,
+                  <div key={'unit-u_examples_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_examples_2 }} />,
+          `Independence is the case where this restriction changes nothing.`,
         ]
     },
     {

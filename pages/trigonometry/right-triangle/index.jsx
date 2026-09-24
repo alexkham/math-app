@@ -2588,6 +2588,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import triangleDiagrams from '@/app/components/trigonometry/triangle/triangleDiagrams'
 
 
 export async function getStaticProps(){
@@ -3542,8 +3544,45 @@ Right triangle trigonometry is limited to acute angles: $\\theta$ must satisfy $
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    t345: demoUnitFrame({
+      svg: triangleDiagrams['345'],
+      caption: 'The 3-4-5 triangle: acute angles 36.9&#176; and 53.1&#176;',
+      text: 'With legs 3 and 4 and hypotenuse 5 every ratio is a plain fraction. For the 36.9&#176; angle the opposite leg is 3 and the adjacent leg 4, so sin = 3/5, cos = 4/5 and tan = 3/4; for the 53.1&#176; angle opposite and adjacent trade places while the hypotenuse stays the hypotenuse. Drag a vertex and read all six ratios recomputed on the',
+      href: '/trigonometry/visual-tools/triangle-explorer',
+      linkText: 'triangle explorer',
+    }),
+    t51213: demoUnitFrame({
+      svg: triangleDiagrams['5-12-13'],
+      caption: 'Opposite 5, hypotenuse 13: &#952; = 22.6&#176;',
+      text: 'This is the worked example: sin&#8201;&#952; = 5/13, and the tool reports the angle that ratio belongs to, 22.6&#176;, with its complement 67.4&#176; at the other acute vertex. Recovering an angle from two sides is the ratio definition run backwards, which is what the inverse functions do. Enter any two sides and read the recovered angles on the',
+      href: '/trigonometry/visual-tools/triangle-explorer',
+      linkText: 'triangle explorer',
+    }),
+    t45: demoUnitFrame({
+      svg: triangleDiagrams['right-45'],
+      caption: '45-45-90: two equal legs, hypotenuse &#8730;2 times a leg',
+      text: 'Both acute angles read 45.0&#176; because the two legs are equal, and the hypotenuse is &#8730;2 &#8776; 1.414 times either leg, the ratio 1 : 1 : &#8730;2 of the text. Equal legs also force sin&#8201;45&#176; = cos&#8201;45&#176; and tan&#8201;45&#176; = 1. Stretch a leg and watch the triangle stop being isosceles on the',
+      href: '/trigonometry/visual-tools/triangle-explorer',
+      linkText: 'triangle explorer',
+    }),
+    t3060: demoUnitFrame({
+      svg: triangleDiagrams['right-30-60'],
+      caption: '30-60-90: sides in the ratio 1 : &#8730;3 : 2',
+      text: 'The shortest side faces the 30.0&#176; angle and is half the hypotenuse; the side facing 60.0&#176; is &#8730;3 &#8776; 1.732 times the shortest. Those two facts are the whole of the exact-value table for 30&#176; and 60&#176;: sin&#8201;30&#176; = 1/2, cos&#8201;30&#176; = &#8730;3/2, and the same numbers swapped at 60&#176;. Nudge an angle away from 30&#176; and watch the clean ratios dissolve on the',
+      href: '/trigonometry/visual-tools/triangle-explorer',
+      linkText: 'triangle explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj3Table,
@@ -3573,7 +3612,7 @@ export default function RightTrianglePage({
   obj8Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -3602,6 +3641,8 @@ export default function RightTrianglePage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-t345'} dangerouslySetInnerHTML={{ __html: demoUnits.t345 }} />,
+          `The mnemonic organises the three ratios; the triangle is where their values come from.`,
         ]
     },
     {
@@ -3649,6 +3690,8 @@ export default function RightTrianglePage({
           sectionsContent.obj5.content,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+                  <div key={'unit-t51213'} dangerouslySetInnerHTML={{ __html: demoUnits.t51213 }} />,
+          `Either acute angle can be recovered this way, and the two must always sum to 90&#176;.`,
         ]
     },
     {
@@ -3657,6 +3700,8 @@ export default function RightTrianglePage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-t45'} dangerouslySetInnerHTML={{ __html: demoUnits.t45 }} />,
+          `Every 45&#176; value in trigonometry traces back to this one triangle.`,
         ]
     },
     {
@@ -3665,6 +3710,8 @@ export default function RightTrianglePage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-t3060'} dangerouslySetInnerHTML={{ __html: demoUnits.t3060 }} />,
+          `Together with the 45-45-90 triangle it supplies every exact value on the standard-angle table.`,
         ]
     },
     {

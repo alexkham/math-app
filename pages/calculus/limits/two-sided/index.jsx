@@ -11,6 +11,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 
 
 export async function getStaticProps(){
@@ -594,8 +596,31 @@ const schemas = {
   }
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    approach: demoUnitFrame({
+      svg: functionLimitDiagrams.continuous,
+      caption: 'x&#178; at x = 1: both probes converge on 1',
+      text: 'The left probe at 0.5 reads 0.25 and the right one at 1.5 reads 2.25, and as both move toward 1 the readings meet at 1: the two traces of the section converge to the same height, so the two-sided limit exists and equals f(1). Drag the probes in from both sides on the',
+      href: '/calculus/visual-tools/limit',
+      linkText: 'limit explorer',
+    }),
+    fail: demoUnitFrame({
+      svg: functionLimitDiagrams.jump,
+      caption: 'Step at x = 0: the two traces end at different heights',
+      text: 'Traced from the left the function heads to 0, from the right to 1: two well-defined one-sided limits that disagree, so the two-sided limit does not exist. This is the jump case of the section; the infinite and oscillating cases fail for different reasons. Watch the two probes refuse to meet on the',
+      href: '/calculus/visual-tools/limit',
+      linkText: 'limit explorer',
+    }),
+  };
+
 return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -614,7 +639,7 @@ return {
    }
 
 
- export default function TwoSidedPage({seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas}) {
+ export default function TwoSidedPage({seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -652,6 +677,8 @@ return {
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-approach'} dangerouslySetInnerHTML={{ __html: demoUnits.approach }} />,
+          `The picture is the definition: one target reached from two directions.`,
         ]
     },
     {
@@ -670,6 +697,8 @@ return {
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+                  <div key={'unit-fail'} dangerouslySetInnerHTML={{ __html: demoUnits.fail }} />,
+          `In every failure mode the two traces either disagree, run away, or never settle.`,
         ]
     },
     {

@@ -8,6 +8,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 
 
 export async function getStaticProps(){
@@ -686,8 +688,31 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    degree: demoUnitFrame({
+      svg: equationVisualizerDiagrams['cubic-three'],
+      caption: 'x&#179; &#8722; 3x = 0: degree 3, three real roots',
+      text: 'The degree of the equation is the highest power present, and it caps the number of crossings with the level line: this cubic reaches its cap of three. A quadratic could show at most two, a linear equation exactly one. Raise the degree and count how many crossings become possible on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+    multiplicity: demoUnitFrame({
+      svg: equationVisualizerDiagrams['cubic-one'],
+      caption: 'x&#179; = 0: one root of multiplicity three',
+      text: 'The curve flattens against the axis at the origin and passes through without the usual crossing angle: the root x = 0 appears three times in the factorisation x &#183; x &#183; x, and the flattening is what a triple root looks like. A double root would touch and turn back instead. Compare the touch of x&#178; = 0 with this crossing on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj7Table,
@@ -715,7 +740,7 @@ export default function PolynomialEquationsPage({
   obj9Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -737,6 +762,8 @@ export default function PolynomialEquationsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-degree'} dangerouslySetInnerHTML={{ __html: demoUnits.degree }} />,
+          `The theorems below say how many roots exist over the complex numbers; the picture shows the real ones.`,
         ]
     },
     {
@@ -803,6 +830,8 @@ export default function PolynomialEquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
           />,
+                  <div key={'unit-multiplicity'} dangerouslySetInnerHTML={{ __html: demoUnits.multiplicity }} />,
+          `Counted with multiplicity, the roots always add up to the degree.`,
         ]
     },
     {

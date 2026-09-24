@@ -8,6 +8,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
 
 
 
@@ -423,8 +425,31 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    positive: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['quad-two'],
+      caption: '&#916; &gt; 0: the parabola dips between its two roots',
+      text: 'With two roots the parabola crosses the axis twice and lies below it exactly between the crossings, so ax&#178; + bx + c &lt; 0 holds on (&#8722;2, 3) and the reverse inequality holds on the two outer rays. The leading coefficient decides which of the two patterns applies. Flip a and watch the shading invert on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+    negative: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['quad-none'],
+      caption: '&#916; &lt; 0: x&#178; + 4 never reaches the axis',
+      text: 'The parabola floats above the axis, never touching it, so x&#178; + 4 is positive for every real x: the inequality x&#178; + 4 &lt; 0 has no solution at all, and x&#178; + 4 &gt; 0 has every real number. With no roots there are no boundaries and the sign is constant. See the empty solution set on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -451,7 +476,7 @@ const schemas = {
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -496,6 +521,8 @@ const schemas = {
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-positive'} dangerouslySetInnerHTML={{ __html: demoUnits.positive }} />,
+          `The two-root case is the only one where the answer is a genuine interval with two endpoints.`,
         ]
     },
     {
@@ -512,6 +539,8 @@ const schemas = {
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-negative'} dangerouslySetInnerHTML={{ __html: demoUnits.negative }} />,
+          `A negative discriminant makes the inequality trivial one way and impossible the other.`,
         ]
     },
     {

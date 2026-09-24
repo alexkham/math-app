@@ -12,6 +12,8 @@ import CoinFlipperSimulator from '@/app/components/probability/coin-toss/CoinTos
 import CoinSampleSpaceVisualizer from '@/app/components/probability/sampleSpace/CoinSampleSpaceVisualizer'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 // Surfaced on the /probability hub via buildSectionData extraction
@@ -44,11 +46,11 @@ export async function getStaticProps(){
   const sectionsContent = {
     obj1: {
       title: `The Coin Toss Probability Model`,
-      content: `The coin toss represents the simplest probability model: a **Bernoulli trial** with exactly two possible outcomes. When you flip a fair coin, heads and tails each have probability 0.5, assuming the coin has no bias and the flip is truly random. This binary structure makes coin tosses the foundational example for understanding probability, independence, and random processes.
+      content: `The coin toss represents the simplest probability model: a **Bernoulli trial** with exactly two possible [outcomes](!/probability/sample-space). When you flip a fair coin, heads and tails each have probability 0.5, assuming the coin has no bias and the flip is truly random. This binary structure makes coin tosses the foundational example for understanding probability, independence, and random processes.
 
 Real coins might have slight biases due to weight distribution or design asymmetry, which is why the simulator allows adjusting $P(\\text{Heads})$ from 0% to 100%. A fair coin uses 50%, but you can model biased coins by changing this parameter. Each flip is independent—previous results don't affect future outcomes, a property that often surprises people who expect patterns in randomness.
 
-Multiple coin tosses create compound experiments with $2^n$ possible outcomes for n coins. The sample space grows exponentially: 2 outcomes for one coin, 4 for two coins, 8 for three coins, and so on. Understanding this expansion is crucial for calculating probabilities of complex events.
+Multiple coin tosses create compound experiments with $2^n$ possible outcomes for n coins. The [sample space](!/probability/sample-space) grows exponentially: 2 outcomes for one coin, 4 for two coins, 8 for three coins, and so on. Understanding this expansion is crucial for calculating [probabilities](!/probability/axioms) of complex [events](!/probability/events).
 
 For comprehensive theory on coin toss probability including mathematical foundations and applications, see **coin toss probability model**.`,
       before: ``,
@@ -72,7 +74,7 @@ The auto-flip mode runs continuous simulations. Click "Auto" to start, adjust sp
       title: `Running Different Simulation Types`,
       content: `Single flips show individual coin behavior with full animation. Use "Flip 1" when demonstrating probability basics or watching the physical flip. The coin rotates 720 degrees and changes color based on the outcome. This mode best illustrates randomness at the individual trial level.
 
-Batch flips (10, 100, 1K, 10K) demonstrate aggregate behavior without watching every flip. Click "Flip 100" to see how results cluster around expected values. Use larger batches to demonstrate convergence—"Flip 10K" shows the Law of Large Numbers in action as the proportion stabilizes near the theoretical probability.
+Batch flips (10, 100, 1K, 10K) demonstrate aggregate behavior without watching every flip. Click "Flip 100" to see how results cluster around [expected values](!/probability/expected-value). Use larger batches to demonstrate convergence—"Flip 10K" shows the [Law of Large Numbers](!/probability/axioms) in action as the proportion stabilizes near the theoretical probability.
 
 Auto-flip mode runs indefinitely until stopped. Adjust speed to match your demonstration needs: slower (500ms) for classroom observation, faster (10ms) for rapid convergence. Watch the graph build in real-time as flips accumulate. This mode excels for showing long-run behavior.`,
       before: ``,
@@ -96,7 +98,7 @@ If the actual proportion stays within the confidence bands, results are statisti
       title: `Interpreting Statistics and Metrics`,
       content: `The statistics panel shows total flips, actual heads percentage, and counts for both outcomes. "Expected" displays $n \\times p$ where n is total flips and p is probability of heads. "Distance" measures how far the actual proportion deviates from expected, expressed as percentage points.
 
-Variance equals $np(1-p)$, measuring spread in the number of heads. Standard deviation (SD) is the square root of variance, giving dispersion in the same units as counts. These values increase with more flips because absolute variability grows even as relative proportion stabilizes.
+[Variance](!/probability/variance) equals $np(1-p)$, measuring spread in the number of heads. [Standard deviation](!/probability/variance) (SD) is the square root of variance, giving dispersion in the same units as counts. These values increase with more flips because absolute variability grows even as relative proportion stabilizes.
 
 The z-score standardizes deviation: $(\\text{actual heads} - \\text{expected}) / \\text{SD}$. Values between -2 and 2 are normal. Scores beyond ±2 indicate unusual results (less than 5% chance). Scores beyond ±3 are rare (less than 0.3% chance). The label "(Unusual!)" or "(Normal)" provides quick interpretation.`,
       before: ``,
@@ -156,19 +158,23 @@ For detailed mathematical treatment of convergence and the Law of Large Numbers,
 
     obj10: {
       title: `Related Probability Tools and Concepts`,
-      content: `**Dice Roll Simulators** - Explore probability with six-sided and custom dice, including sum distributions and multiple dice experiments.
+      content: `[Dice Roll Simulators](!/probability/visual-tools/dice-roll) - Explore probability with six-sided and custom dice, including sum distributions and multiple dice experiments.
 
 **Binomial Distribution Calculator** - Calculate exact probabilities for n independent trials with fixed success probability, the mathematical model underlying coin tosses.
 
-**Expected Value Visualizers** - Understand how probability weights combine with outcomes to determine long-run averages.
+[Expected Value Visualizers](!/probability/visual-tools/expected-value) - Understand how probability weights combine with outcomes to determine long-run averages.
 
-**Probability Distribution Explorers** - Compare different discrete and continuous probability models with interactive parameters.
+[Probability Distribution Explorers](!/probability/visual-tools/distributions) - Compare different discrete and continuous probability models with interactive parameters.
 
 **Bernoulli Trial Theory** - Learn the mathematical foundation of single binary experiments that coin tosses exemplify.
 
 **Sample Space Calculators** - Explore sample spaces for various probability experiments beyond coin tosses.
 
-**Random Variable Simulators** - Generate samples from different probability distributions to observe empirical behavior.`,
+**Random Variable Simulators** - Generate samples from different probability distributions to observe empirical behavior.
+
+[Discrete CDF Explorer](!/probability/visual-tools/cdf/discrete) - The cumulative distribution of the number of heads, one step per possible count.
+
+[Variance Visualizer](!/probability/visual-tools/variance) - How far the number of heads spreads around its mean $np$.`,
       before: ``,
       after: ``,
       link: '',
@@ -381,6 +387,7 @@ That symmetry disappears once the condition stops being local. The explorer's "e
 
   return {
     props: {
+      relatedTools: getRelatedTools('probability-coin-toss'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -399,7 +406,7 @@ That symmetry disappears once the condition stops being local. The explorer's "e
   }
 }
 
-export default function CoinTossPage({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function CoinTossPage({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -517,6 +524,7 @@ export default function CoinTossPage({seoData, sectionsContent, stateUnits, expl
       /> */}
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

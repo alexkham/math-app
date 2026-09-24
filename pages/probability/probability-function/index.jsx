@@ -722,6 +722,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 
 
 export async function getStaticProps(){
@@ -1351,8 +1354,31 @@ The probability function is the mathematical core of any random variable. It is 
     `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_pmf_0: demoUnitFrame({
+      svg: discretePmfDiagrams.binomial,
+      caption: 'Binomial PMF, n = 10, p = 0.5',
+      text: 'The mass function gives each possible value its own bar: the height at k is P(X = k), the heights add to 1 and nothing stands between the integers. The peak at 5 marks the most likely count. Switch between six discrete families and compare the bar patterns on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+    u_pdf_1: demoUnitFrame({
+      svg: continuousPdfDiagrams['normal-pdf'],
+      caption: 'Normal density, mean 0, standard deviation 1',
+      text: 'The density function has no bars: its height at a point is not a probability, and only the area under the curve over an interval is. The total area is 1 and the peak at the mean is about 0.4 for unit standard deviation. Toggle to the CDF view and watch the area become a height on the',
+      href: '/probability/visual-tools/probability-function/continuous',
+      linkText: 'PDF visualizer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1381,7 +1407,7 @@ export default function ProbabilityFunctionPage({
   waysTable,
   pdfPmfTable,
   useTable,
-  summaryTable,
+  summaryTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1426,8 +1452,10 @@ export default function ProbabilityFunctionPage({
         sectionsContent.pmf.content ,
         <div key={'discrete'} style={{transform:'scale(0.8)'}}>
           <DiscreteProbabilityDistributions/>
-        </div>
-      ]
+        </div>,
+                <div key={'unit-u_pmf_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_pmf_0 }} />,
+          `For continuous variables the bars give way to a density.`,
+        ]
     },
     {
        id: 'pdf',
@@ -1438,7 +1466,9 @@ export default function ProbabilityFunctionPage({
          <div  key={'continuous'} style={{transform:'scale(0.8)'}}>
          <ContinuousProbabilityDistributions/>
 
-         </div>
+         </div>,
+                  <div key={'unit-u_pdf_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_pdf_1 }} />,
+          `What questions such functions answer is taken up next.`,
         ]
     },
      {

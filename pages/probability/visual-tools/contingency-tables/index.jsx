@@ -18,6 +18,8 @@ import explanations3x3 from '@/app/components/probability/conditional-probabilit
 import explanations2x2 from '@/app/components/probability/conditional-probability-demo/2x2explanations'
 import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 // Surfaced on the /probability hub via buildSectionData extraction
@@ -243,7 +245,7 @@ const sectionsContent = {
 
 Each table displays three types of probability information simultaneously. The main grid shows [joint probabilities](!/probability/joint-probability) in the interior cells, representing P(A ∩ B) for each combination of outcomes. The row and column totals display marginal probabilities, showing P(A) and P(B) individually. The surrounding panels show [conditional probability](!/probability/conditional-probability) distributions calculated from the joint and marginal values.
 
-The layout follows a consistent pattern across all table sizes. On the left side, you see the joint probability table with clickable cells. On the right side, conditional probability panels show how probability distributes when you condition on different events. Click any cell or conditional row to highlight the mathematical relationship between joint and conditional probabilities.`,
+The layout follows a consistent pattern across all table sizes. On the left side, you see the joint probability table with clickable cells. On the right side, conditional probability panels show how probability distributes when you condition on different [events](!/probability/events). Click any cell or conditional row to highlight the mathematical relationship between joint and conditional probabilities.`,
     before: ``,
     after: ``,
     link: '',
@@ -577,6 +579,7 @@ This shape is also where independence becomes a real question rather than a chec
 
   return {
     props: {
+      relatedTools: getRelatedTools('probability-contingency-tables'),
       sectionsContent,
       faqQuestions,
       schemas,
@@ -593,7 +596,7 @@ This shape is also where independence becomes a real question rather than a chec
   }
 }
 
-export default function ContingencyTablesVisualToolsPage({seoData, sectionsContent, faqQuestions, schemas}) {
+export default function ContingencyTablesVisualToolsPage({relatedTools, seoData, sectionsContent, faqQuestions, schemas}) {
 
   const tableComponents = [
     {
@@ -787,6 +790,7 @@ const genericSections = [
       <br/>
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

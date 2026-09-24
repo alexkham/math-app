@@ -14,6 +14,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import EuclideanVisualizer from '../../../../app/components/arithmetic/visualizers/EuclideanVisualizer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -46,7 +48,7 @@ The visualizer has four main parts arranged top to bottom:
 
 • **Input controls** — two number fields for $a$ and $b$, plus a Random pair button and [five preset pairs](!#entering-numbers-and-using-presets)
 • **Result banner** — large purple number showing the [GCD](!#what-is-the-greatest-common-divisor), with a plain-language sentence explaining what it means
-• **Division chain** — a vertical stack of equations of the form $a = b \\cdot q + r$, each step shrinking the pair, with amber remainder pills and [dashed arrows](!#following-the-substitution-arrows) connecting each remainder to the next divisor
+• **Division chain** — a vertical stack of equations of the form $a = b \\cdot q + r$, each step shrinking the pair, with amber [remainder](!/arithmetic/modulo#1) pills and [dashed arrows](!#following-the-substitution-arrows) connecting each remainder to the next divisor
 • **Steps list and legend** — a side panel listing every division as plain text, plus a color legend
 
 A collapsible "How the Euclidean algorithm works" panel sits at the bottom for the underlying mathematical idea.`,
@@ -146,7 +148,7 @@ For small numbers, you could find the GCD by listing every divisor of each numbe
 
 This naive approach works but becomes slow for large numbers. The Euclidean algorithm — the method visualized here — finds the GCD without ever listing divisors. For $\\gcd(252, 105)$ it takes only [three division steps](!#getting-started-with-the-visualizer), regardless of how many divisors $252$ and $105$ actually have.
 
-The GCD is foundational for simplifying fractions, modular arithmetic, and number theory. Two numbers with GCD equal to $1$ are called [coprime](!#coprime-pairs) — they share no common factors and are in some sense "as different as possible" multiplicatively.`,
+The GCD is foundational for simplifying [fractions](!/arithmetic/fractions#1), modular arithmetic, and number theory. Two numbers with GCD equal to $1$ are called [coprime](!#coprime-pairs) — they share no common factors and are in some sense "as different as possible" multiplicatively.`,
       before: ``,
       after: ``,
       link: '',
@@ -206,7 +208,13 @@ The swap itself is worth a note: the algorithm never needs to be told which numb
 
 **Modular Arithmetic** — the GCD underlies which numbers are invertible modulo $n$ and is the foundation of many cryptographic schemes.
 
-**Fibonacci Numbers** — the [worst-case inputs](!#fibonacci-worst-case) for the Euclidean algorithm, related to it through deep recursive structure.`,
+**Fibonacci Numbers** — the [worst-case inputs](!#fibonacci-worst-case) for the Euclidean algorithm, related to it through deep recursive structure.
+
+[Modular Arithmetic Wheel](!/arithmetic/visual-tools/modular-wheel) — each division row is one reduction modulo the divisor; the wheel shows where the remainder lands.
+
+[Divisibility Table](!/arithmetic/visual-tools/divisibility-table) — the remainder is zero exactly when the divisor passes its divisibility test.
+
+[Base Converter](!/arithmetic/visual-tools/base-converter) — the same repeated division with remainder, applied to a fixed base to read off digits.`,
       before: ``,
       after: ``,
       link: '',
@@ -421,6 +429,7 @@ Fibonacci neighbors are also always coprime — the backwards walk always ends a
 
   return {
     props: {
+      relatedTools: getRelatedTools('euclidean-algorithm'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -443,7 +452,7 @@ Fibonacci neighbors are also always coprime — the backwards walk always ends a
 }
 
 
-export default function EuclideanAlgorithmPage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function EuclideanAlgorithmPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -561,6 +570,7 @@ export default function EuclideanAlgorithmPage({seoData, sectionsContent, introC
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

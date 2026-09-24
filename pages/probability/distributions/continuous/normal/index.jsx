@@ -1085,6 +1085,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
+import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 
 
 export async function getStaticProps(){
@@ -1974,8 +1977,31 @@ This convergence explains why the normal distribution appears so frequently in n
   }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_5_0: demoUnitFrame({
+      svg: continuousPdfDiagrams['normal-pdf'],
+      caption: 'Normal density, mean 0, standard deviation 1',
+      text: 'The bell is symmetric about the mean, peaks there at about 0.4 for unit standard deviation, and has inflection points one standard deviation to each side. The total area is 1, with about 68 percent of it inside one standard deviation of the mean. Change the parameters and see the bell shift and stretch on the',
+      href: '/probability/visual-tools/probability-function/continuous',
+      linkText: 'PDF visualizer',
+    }),
+    u_6_1: demoUnitFrame({
+      svg: continuousCdfDiagrams.normal,
+      caption: 'Normal CDF, mean 0, standard deviation 1',
+      text: 'The S-curve passes through one half at the mean and approaches 0 and 1 in the tails; its slope at any point is the density there, which is why it is steepest at the centre. Values are read from tables or software because the integral has no elementary form. Move along the curve and read cumulative probabilities on the',
+      href: '/probability/visual-tools/cdf/continuous',
+      linkText: 'continuous CDF visualizer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          summaryTable,
@@ -1999,7 +2025,7 @@ export default function NormalDistributionPage({
   introContent,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2063,6 +2089,8 @@ export default function NormalDistributionPage({
             <NormalDistribution/>
                    
                     </div>,
+                  <div key={'unit-u_5_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_0 }} />,
+          `Its cumulative form has no closed formula, as the next section explains.`,
         ]
     },
     {
@@ -2075,6 +2103,8 @@ export default function NormalDistributionPage({
             <NormalDistributionCDF/>
                    
                     </div>,
+                  <div key={'unit-u_6_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_6_1 }} />,
+          `The mean and variance can nevertheless be computed exactly.`,
         ]
     },
     {

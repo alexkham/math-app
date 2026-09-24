@@ -13,6 +13,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 
 
 export async function getStaticProps(){
@@ -1410,8 +1413,31 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_2_0: demoUnitFrame({
+      svg: discretePmfDiagrams.poisson,
+      caption: 'Poisson PMF, lambda = 3: two bars tie for the peak',
+      text: 'The mode of a discrete distribution is the value under the tallest bar; for the Poisson family with an integer lambda the bars at lambda minus 1 and lambda are equally tall, so the distribution has two modes, 2 and 3. Change lambda to a non-integer and the tie breaks. Watch the peak move on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+    u_3_1: demoUnitFrame({
+      svg: continuousPdfDiagrams['exponential-pdf'],
+      caption: 'Exponential density, lambda = 1: the peak sits at zero',
+      text: 'The mode of a continuous distribution is where the density is highest; the exponential density starts at its maximum and only decreases, so its mode is 0, far from its mean of 1 and its median of about 0.69. A symmetric density would put all three together. Compare with the normal and uniform densities on the',
+      href: '/probability/visual-tools/probability-function/continuous',
+      linkText: 'PDF visualizer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          centralTendencyComparisonData,
@@ -1445,7 +1471,7 @@ export default function ModePage({
   mistakesTable,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1474,6 +1500,8 @@ export default function ModePage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-u_2_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_2_0 }} />,
+          `Continuous distributions replace the tallest bar by the highest point of a curve.`,
         ]
     },
     {
@@ -1482,6 +1510,8 @@ export default function ModePage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-u_3_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_3_1 }} />,
+          `Distributions with several peaks are classified next.`,
         ]
     },
     {

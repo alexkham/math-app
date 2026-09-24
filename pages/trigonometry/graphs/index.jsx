@@ -1038,6 +1038,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
 
 
 export async function getStaticProps(){
@@ -1723,8 +1725,45 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    sinGraph: demoUnitFrame({
+      svg: trigFunctionsGraphDiagrams.sin,
+      caption: 'y = sin x, marker at 60&#176;',
+      text: 'The wave starts at the origin, peaks at 1 a quarter of the way through the cycle, crosses zero at the half, bottoms at &#8722;1 at three quarters and closes the cycle at 2&#960;; the marker at 60&#176; reads &#8730;3/2 &#8776; 0.866. Nothing on the curve leaves the band between &#8722;1 and 1. Slide the marker through a full period on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+    cosGraph: demoUnitFrame({
+      svg: trigFunctionsGraphDiagrams.cos,
+      caption: 'y = cos x, marker at 60&#176;',
+      text: 'The same wave, started from its maximum: cos&#8201;0 = 1, zero at &#960;/2, minimum at &#960;. The marker at 60&#176; reads exactly 1/2, and the whole curve is the sine curve pushed &#960;/2 to the left. Compare the two curves at the same marker on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+    tanGraph: demoUnitFrame({
+      svg: trigFunctionsGraphDiagrams.tan,
+      caption: 'y = tan x, asymptotes &#960; apart',
+      text: 'Each branch climbs from &#8722;&#8734; to +&#8734; between two vertical asymptotes, which stand exactly where the cosine is zero; the marker at 60&#176; reads &#8730;3 &#8776; 1.732. The branches repeat every &#960;, half the period of sine and cosine, and there is no maximum or minimum anywhere. Approach an asymptote with the marker on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+    reciprocalGraphs: demoUnitFrame({
+      svg: [trigFunctionsGraphDiagrams.csc, trigFunctionsGraphDiagrams.sec, trigFunctionsGraphDiagrams.cot],
+      caption: 'y = csc x, y = sec x, y = cot x at 60&#176;',
+      text: 'The cosecant and secant curves are U-shaped branches that open away from the axis, each asymptote standing at a zero of the function underneath it, and each branch turning around where that function peaks; the cotangent falls where the tangent climbs and vanishes where the tangent is undefined. At 60&#176; the three markers read 1.155, 2 and 0.577. See each curve drawn over its parent on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj4Table,
@@ -1745,7 +1784,7 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
     }
    }
 
-export default function GraphsPage({seoData,sectionsContent , introContent, obj4Table, obj9Table, obj10Table, obj11Table, faqQuestions, schemas}) {
+export default function GraphsPage({seoData,sectionsContent , introContent, obj4Table, obj9Table, obj10Table, obj11Table, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1765,6 +1804,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-sinGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.sinGraph }} />,
+          `Every property of the sine function has a visible counterpart on this curve.`,
         ]
     },
     {
@@ -1773,6 +1814,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-cosGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.cosGraph }} />,
+          `The two curves are one shape read from two starting points, which is the cofunction identity in graphical form.`,
         ]
     },
     {
@@ -1781,6 +1824,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-tanGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.tanGraph }} />,
+          `The asymptotes and the half period are what set tangent apart from the two bounded waves.`,
         ]
     },
 
@@ -1796,6 +1841,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+                  <div key={'unit-reciprocalGraphs'} dangerouslySetInnerHTML={{ __html: demoUnits.reciprocalGraphs }} />,
+          `Inverting a function swaps its zeros for asymptotes and its extremes for turning points, and nothing else changes.`,
         ]
     },
     {

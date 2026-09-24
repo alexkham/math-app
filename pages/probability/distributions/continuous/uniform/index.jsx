@@ -1118,6 +1118,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
+import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 
 
 export async function getStaticProps(){
@@ -2039,8 +2042,31 @@ Unlike the normal distribution, sums of independent uniform variables do **not**
   }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_5_0: demoUnitFrame({
+      svg: continuousPdfDiagrams['uniform-pdf'],
+      caption: 'Continuous uniform density, a = 0, b = 10',
+      text: 'The density is a flat line at height 1 over b minus a across the interval and zero outside it, so every subinterval of the same length carries the same probability. The rectangle under the line has area exactly 1. Adjust the endpoints and watch the height compensate on the',
+      href: '/probability/visual-tools/probability-function/continuous',
+      linkText: 'PDF visualizer',
+    }),
+    u_6_1: demoUnitFrame({
+      svg: continuousCdfDiagrams.uniform,
+      caption: 'Continuous uniform CDF, a = 0, b = 10',
+      text: 'The CDF is a straight ramp from 0 at a to 1 at b: the accumulated area under a flat density grows linearly with x. Its constant slope is the density height, and the median is the midpoint of the interval. Read F at any point as the fraction of the interval to the left of it on the',
+      href: '/probability/visual-tools/cdf/continuous',
+      linkText: 'continuous CDF visualizer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          summaryTable,
@@ -2064,7 +2090,7 @@ export default function ContinuousUniformDistributionPage({
   introContent,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2127,6 +2153,8 @@ export default function ContinuousUniformDistributionPage({
           <div key={'pdf-uniform'} style={{transform:'scale(0.8)'}}>
           <ContinuousUniformDistribution/>
           </div>,
+                  <div key={'unit-u_5_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_0 }} />,
+          `Accumulating this flat density gives a ramp.`,
         ]
     },
     {
@@ -2138,6 +2166,8 @@ export default function ContinuousUniformDistributionPage({
            <div key={'cdf-uniform'} style={{transform:'scale(0.8)'}}>
           <ContinuousUniformDistributionCDF/>
           </div>,
+                  <div key={'unit-u_6_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_6_1 }} />,
+          `The mean sits at that same midpoint.`,
         ]
     },
     {

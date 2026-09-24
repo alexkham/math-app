@@ -1566,6 +1566,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 
 
 export async function getStaticProps(){
@@ -3235,8 +3237,31 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_3_0: demoUnitFrame({
+      svg: continuousCdfDiagrams.exponential,
+      caption: 'Exponential CDF, lambda = 1: the median is where F crosses one half',
+      text: 'For a continuous variable the CDF is a smooth increasing curve, so it crosses one half at exactly one point; for the exponential family that point is the natural logarithm of 2 over lambda, about 0.69, well below the mean of 1 because of the right tail. Move along the curve and find where the accumulated probability reaches one half on the',
+      href: '/probability/visual-tools/cdf/continuous',
+      linkText: 'continuous CDF visualizer',
+    }),
+    u_7_1: demoUnitFrame({
+      svg: continuousCdfDiagrams.normal,
+      caption: 'Normal CDF, mean 0, standard deviation 1',
+      text: 'Finding a continuous median means solving F(m) equal to one half; for a symmetric density such as the normal the solution is the centre of symmetry, here 0, where the S-curve passes through one half. Skewed families put the median away from the mean. Read the crossing point on the',
+      href: '/probability/visual-tools/cdf/continuous',
+      linkText: 'continuous CDF visualizer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          centralTendencyComparisonData,
@@ -3272,7 +3297,7 @@ export default function MedianPage({
   obj13Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -3309,6 +3334,8 @@ export default function MedianPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-u_3_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_3_0 }} />,
+          `Discrete and continuous medians differ in exactly this uniqueness.`,
         ]
     },
     {
@@ -3351,6 +3378,8 @@ export default function MedianPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-u_7_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_7_1 }} />,
+          `The percentile view generalises this from one half to any level.`,
         ]
     },
     {

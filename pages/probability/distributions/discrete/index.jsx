@@ -11,6 +11,9 @@ import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
 import { processContent } from '@/app/utils/contentProcessor'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 
 
 export async function getStaticProps(){
@@ -1665,8 +1668,31 @@ This page systematically presents six fundamental discrete distributions, detail
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_what_0: demoUnitFrame({
+      svg: discretePmfDiagrams.discreteUniform,
+      caption: 'Discrete uniform PMF, values 1 to 6',
+      text: 'A discrete distribution lives on separate values: six bars stand at 1 through 6, each of height 1/6, and there is nothing in between because the variable cannot land there. The bars are probabilities and add to 1. Switch to another family and see how the heights vary while the values stay separate on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+    u_vs_1: demoUnitFrame({
+      svg: discreteCdfDiagrams.binomial,
+      caption: 'Binomial CDF, n = 10, p = 0.5',
+      text: 'Accumulating a discrete distribution gives a staircase: the CDF jumps by P(X = k) at each value k and is flat in between, whereas a continuous CDF would climb smoothly. The riser heights are the PMF and the final step reaches 1. Compare the staircases of six families on the',
+      href: '/probability/visual-tools/cdf/discrete',
+      linkText: 'discrete CDF explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
           seoData: {
@@ -1699,7 +1725,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
       poissonTable,
     occurenceMatrix,
     discreteDistributionsOverviewData,
-    discreteDistributionsAttributesData,
+    discreteDistributionsAttributesData, demoUnits
   }) {
 
     
@@ -1720,6 +1746,8 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         link:'',
         content:[
           sectionsContent.what.content,
+                  <div key={'unit-u_what_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_what_0 }} />,
+          `The contrast with continuous distributions makes this explicit.`,
         ]
     },
     {
@@ -1728,6 +1756,8 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         link:'',
         content:[
           sectionsContent.vs.content,
+                  <div key={'unit-u_vs_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_vs_1 }} />,
+          `The families themselves are surveyed next.`,
         ]
     },
     {
