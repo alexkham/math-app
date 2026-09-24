@@ -15,6 +15,8 @@ import SquareOfTrinomial from '@/app/components/algebra/identities/SquareOfTrino
 import DifferenceOfSquares from '@/app/components/algebra/identities/DifferenceOfSquares'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticPaths() {
@@ -87,13 +89,13 @@ export async function getStaticProps({ params }) {
       sectionsContent: {
         obj1: {
           title: `The (a+b)² Identity at a Glance`,
-          content: `The square of a sum identity is one of the foundational results of **algebra**:
+          content: `The [square of a sum](!/algebra/polynomials/operations#4) [identity](!/algebra/equations) is one of the foundational results of **algebra**:
 
 $$(a+b)^2 = a^2 + 2ab + b^2$$
 
 Squaring a sum produces a square term for each part plus a cross term that captures their interaction. The cross term is $2ab$, not just $ab$ — and that doubling is exactly what the geometric proof makes visible.
 
-The identity appears constantly: expanding binomials, completing the square, simplifying calculus expressions, and shortcuts for mental arithmetic. Memorising the formula is one path; seeing why it must hold turns it into something you can reconstruct anytime.`,
+The identity appears constantly: expanding [binomials](!/algebra/polynomials#2), [completing the square](!/algebra/equations/quadratic#3), simplifying calculus [expressions](!/algebra/equations), and shortcuts for mental arithmetic. Memorising the formula is one path; seeing why it must hold turns it into something you can reconstruct anytime.`,
           before: ``,
           after: `The proof unfolds in four frozen frames below: [reading the starting square](!#reading-the-starting-square), [splitting each side into a and b](!#splitting-each-side-into-a-and-b), [drawing the grid cuts](!#drawing-the-grid-cuts), and [colouring the four pieces](!#colouring-the-four-pieces-in-sequence).`,
           link: '',
@@ -201,9 +203,9 @@ The right panel shows the four written steps. Each step is greyed out until reac
 
 **Difference of Squares** — Factors $a^2 - b^2$ into $(a+b)(a-b)$ via slice and rearrange.
 
-**Powers Table** — Reference table of integer powers, useful for computing $(a+b)^2$ at specific values.
+[Powers Table](!/algebra/visual-tools/powers-table) — Reference table of integer [powers](!/algebra/powers), useful for computing $(a+b)^2$ at specific values.
 
-**Polynomials** — Theory of polynomial expansion and standard form, in which the square of a sum identity plays a constant role.`,
+**Polynomials** — Theory of polynomial expansion and [standard form](!/algebra/equations), in which the square of a sum identity plays a constant role.`,
           before: ``,
           after: ``,
           link: '',
@@ -265,7 +267,7 @@ The right panel shows the four written steps. Each step is greyed out until reac
       sectionsContent: {
         obj1: {
           title: `The (a-b)² Identity at a Glance`,
-          content: `The square of a difference identity reads:
+          content: `The [square of a difference](!/algebra/polynomials/operations#4) [identity](!/algebra/equations) reads:
 
 $$(a-b)^2 = a^2 - 2ab + b^2$$
 
@@ -281,7 +283,7 @@ Forgetting the minus sign or mishandling it is a frequent source of error. Seein
           title: `Reading the Starting Square`,
           content: `Step 1 of the animation shows a square of side $a$, labelled $a^2$ in the centre. Dimension marks on the top and left edges read "$a$". The visual is identical to the starting frame of the difference-of-squares proof, and that is intentional: many algebraic identities begin from the same plain square and then take it apart in different ways.
 
-The square's area is $a \\times a = a^2$. This is the quantity we will decompose. Unlike the square-of-a-sum proof, where the goal was to expand $(a+b)^2$ into pieces, here we begin from $a^2$ and work toward an expression involving $(a-b)^2$.`,
+The square's area is $a \\times a = a^2$. This is the quantity we will decompose. Unlike the square-of-a-sum proof, where the goal was to expand $(a+b)^2$ into pieces, here we begin from $a^2$ and work toward an [expression](!/algebra/equations) involving $(a-b)^2$.`,
           before: ``,
           after: `The direction of the argument is the thing to fix in mind at this frame: the target quantity $(a-b)^2$ is **smaller** than what is on screen, so the proof will proceed by covering and correcting rather than by cutting cleanly. The visualizer draws the square with $a = 7$ and $b = 3$ units, leaving a $4 \\times 4$ target square comfortably visible inside.
 
@@ -327,7 +329,7 @@ This is the identity's entire content in one still image; [the discard step](!#t
           title: `The Discard Step`,
           content: `Step 4 makes the overlap correction explicit. The top strip lifts upward off the square and the right strip slides outward to the right, so each strip can be inspected on its own. A red X mark appears on one copy of the $b^2$ overlap with a "discard" label, indicating that this piece of area was counted by both strips and needs to be subtracted out. The animation then oscillates back and forth — strips together, strips apart — driving home the relationship.
 
-Solving the area equation $a^2 = 2ab - b^2 + (a-b)^2$ for $(a-b)^2$:
+Solving the area [equation](!/algebra/equations) $a^2 = 2ab - b^2 + (a-b)^2$ for $(a-b)^2$:
 
 $$(a-b)^2 = a^2 - 2ab + b^2$$
 
@@ -387,7 +389,7 @@ The right panel shows the four written steps with the current step highlighted a
 
 **Polynomials** — Theory of polynomial expansion, where this identity is one of the standard tools.
 
-**Factoring** — Recognising perfect square trinomials of the form $a^2 - 2ab + b^2$ allows them to be re-factored as $(a-b)^2$.`,
+**Factoring** — Recognising [perfect square trinomials](!/algebra/polynomials/factoring#7) of the form $a^2 - 2ab + b^2$ allows them to be re-factored as $(a-b)^2$.`,
           before: ``,
           after: ``,
           link: '',
@@ -449,13 +451,13 @@ The right panel shows the four written steps with the current step highlighted a
       sectionsContent: {
         obj1: {
           title: `The (a+b+c)² Identity at a Glance`,
-          content: `The square of a trinomial identity expands the square of a three-term sum:
+          content: `The square of a [trinomial](!/algebra/polynomials#2) [identity](!/algebra/equations) expands the square of a three-term sum:
 
 $$(a+b+c)^2 = a^2 + b^2 + c^2 + 2ab + 2ac + 2bc$$
 
-Three squared terms cover the diagonal of the expansion. Three cross-product terms cover the off-diagonal pairs, each appearing with a coefficient of $2$. Six terms total — fewer than the nine you might initially expect, because cross products like $ab$ and $ba$ are equal and combine.
+Three squared terms cover the diagonal of the expansion. Three cross-product terms cover the off-diagonal pairs, each appearing with a [coefficient](!/algebra/equations) of $2$. Six terms total — fewer than the nine you might initially expect, because cross products like $ab$ and $ba$ are equal and combine.
 
-This identity is the natural step beyond $(a+b)^2$. The same dissection logic that proves the binomial case extends with no modification: more terms, more pieces, same area-conservation argument.`,
+This identity is the natural step beyond $(a+b)^2$. The same dissection logic that proves the [binomial](!/algebra/polynomials#2) case extends with no modification: more terms, more pieces, same area-conservation argument.`,
           before: ``,
           after: `The proof unfolds in four frozen frames below: [reading the starting square](!#reading-the-starting-square), [splitting each side into three segments](!#splitting-each-side-into-three-segments), [building the 3×3 grid](!#building-the-3x3-grid), and [the explosion view](!#the-explosion-view).`,
           link: '',
@@ -525,7 +527,7 @@ A generalization is visible from here at no extra cost: an $n$-term sum squared 
 
         obj6: {
           title: `Why Each Cross Product is Doubled`,
-          content: `The 3×3 grid has nine cells but produces only six distinct expression values. The reason is symmetry: the cell at row $i$, column $j$ has dimensions equal to the $i$th and $j$th segments, but the cell at row $j$, column $i$ has the same dimensions in the opposite orientation. They are different geometric pieces in different positions, but they have the same area.
+          content: `The 3×3 grid has nine cells but produces only six distinct [expression](!/algebra/equations) values. The reason is symmetry: the cell at row $i$, column $j$ has dimensions equal to the $i$th and $j$th segments, but the cell at row $j$, column $i$ has the same dimensions in the opposite orientation. They are different geometric pieces in different positions, but they have the same area.
 
 Specifically:
 
@@ -573,7 +575,7 @@ The right panel lists the four written steps with the current step highlighted.`
 
 **Polynomials** — Theory of polynomial expansion, in which the trinomial square is a standard tool for higher-degree manipulations.
 
-**Powers Table** — Reference for integer powers, useful when checking trinomial expansions at specific values.`,
+[Powers Table](!/algebra/visual-tools/powers-table) — Reference for integer [powers](!/algebra/powers), useful when checking trinomial expansions at specific values.`,
           before: ``,
           after: ``,
           link: '',
@@ -635,11 +637,11 @@ The right panel lists the four written steps with the current step highlighted.`
       sectionsContent: {
         obj1: {
           title: `The a² − b² Identity at a Glance`,
-          content: `The difference of squares identity is a factoring rule:
+          content: `The [difference of squares](!/algebra/polynomials/factoring#6) [identity](!/algebra/equations) is a [factoring](!/algebra/polynomials/factoring) rule:
 
 $$a^2 - b^2 = (a+b)(a-b)$$
 
-The left side is one square minus another. The right side is a product of two binomials — the sum and the difference of the two original quantities. Recognising a difference of squares immediately yields a factorisation, which is one of the most useful single moves in elementary algebra.
+The left side is one square minus another. The right side is a product of two [binomials](!/algebra/polynomials#2) — the sum and the difference of the two original quantities. Recognising a difference of squares immediately yields a factorisation, which is one of the most useful single moves in elementary algebra.
 
 The visual proof works backwards from the geometry: instead of multiplying $(a+b)(a-b)$ by FOIL and watching the cross terms cancel, we start with the area $a^2 - b^2$ and physically rearrange it into a rectangle of dimensions $(a+b)$ by $(a-b)$. The factorisation is then read directly off the rearranged shape.`,
           before: ``,
@@ -715,9 +717,9 @@ Note the whole scene has shifted left compared with the earlier frames: the visu
           title: `Why This Identity is So Useful`,
           content: `The difference of squares is the single most useful factoring identity in elementary algebra, for three reasons:
 
-• **Recognition is fast.** Any expression of the form $X^2 - Y^2$ — where $X$ and $Y$ can be variables, numbers, or compound expressions — factors instantly into $(X+Y)(X-Y)$. Examples: $x^2 - 9 = (x+3)(x-3)$; $4y^2 - 25 = (2y+5)(2y-5)$; $(p+q)^2 - r^2 = (p+q+r)(p+q-r)$.
+• **Recognition is fast.** Any expression of the form $X^2 - Y^2$ — where $X$ and $Y$ can be [variables](!/algebra/equations), numbers, or compound [expressions](!/algebra/equations) — factors instantly into $(X+Y)(X-Y)$. Examples: $x^2 - 9 = (x+3)(x-3)$; $4y^2 - 25 = (2y+5)(2y-5)$; $(p+q)^2 - r^2 = (p+q+r)(p+q-r)$.
 
-• **It enables simplification.** Many algebraic fractions and equations simplify dramatically when a difference of squares can be factored and a common factor cancelled.
+• **It enables simplification.** Many algebraic fractions and [equations](!/algebra/equations) simplify dramatically when a difference of squares can be factored and a common factor cancelled.
 
 • **It yields arithmetic shortcuts.** Numerical computations such as $99 \\times 101 = 100^2 - 1^2 = 9999$ or $48 \\times 52 = 50^2 - 2^2 = 2500 - 4 = 2496$ become trivial once the identity is recognised.
 
@@ -753,7 +755,7 @@ The right panel lists the four written steps with the current step highlighted a
 
 **Square of a Sum** — Visual proof of $(a+b)^2 = a^2 + 2ab + b^2$. Companion identity in the same family.
 
-**Square of a Difference** — Visual proof of $(a-b)^2 = a^2 - 2ab + b^2$. The minus-sign companion to square of a sum.
+**Square of a Difference** — Visual proof of $(a-b)^2 = a^2 - 2ab + b^2$. The minus-sign companion to [square of a sum](!/algebra/polynomials/operations#4).
 
 **Square of a Trinomial** — Extension to three terms.
 
@@ -761,7 +763,7 @@ The right panel lists the four written steps with the current step highlighted a
 
 **Polynomials** — Polynomial structure and operations.
 
-**Powers Table** — Reference table of integer powers, useful for spotting perfect squares like $144 = 12^2$ or $625 = 25^2$ that make difference-of-squares factoring possible.`,
+[Powers Table](!/algebra/visual-tools/powers-table) — Reference table of integer [powers](!/algebra/powers), useful for spotting [perfect squares](!/algebra/roots/simplifying) like $144 = 12^2$ or $625 = 25^2$ that make difference-of-squares factoring possible.`,
           before: ``,
           after: ``,
           link: '',
@@ -931,6 +933,7 @@ The right panel lists the four written steps with the current step highlighted a
 
   return {
     props: {
+      relatedTools: getRelatedTools(`algebra-identities-${params.view}`),
       sectionsContent: currentConfig.sectionsContent,
       introContent,
       faqQuestions: currentConfig.faqQuestions,
@@ -990,7 +993,7 @@ function getFeatureList(view) {
 
 
 export default function AlgebraicIdentityViewPage({
-  seoData,
+  relatedTools, seoData,
   sectionsContent,
   introContent,
   faqQuestions,
@@ -1153,6 +1156,7 @@ export default function AlgebraicIdentityViewPage({
           />
           <br />
           <br />
+          <RelatedTools tools={relatedTools}/>
           <Sections sections={genericSections} />
         </>
       )}

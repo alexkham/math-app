@@ -255,6 +255,8 @@ import vennTwoSetDiagrams from '@/app/components/probability/venn-explorer/vennT
 import vennThreeSetDiagrams from '@/app/components/probability/venn-explorer/vennThreeSetDiagrams'
 import { threeSetProblems } from '@/app/components/probability/venn-explorer/vennThreeSetProblems'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticPaths() {
@@ -421,7 +423,7 @@ sectionsContent: {
     title: `Getting Started with 2-Set Diagrams`,
     content: `The 2-set [Venn diagram](!/probability/visual-tools/venn-diagrams) displays two overlapping circles labeled A and B. Four numbered segments represent all possible outcomes: both events (intersection), A only, B only, and neither event (complement).
 
-View the pre-loaded example problems by clicking the problem name buttons. Each problem shows event descriptions, marginal probabilities $P(A)$ and $P(B)$, and given constraints that help determine all four region probabilities.
+View the pre-loaded example problems by clicking the problem name buttons. Each problem shows event descriptions, marginal [probabilities](!/probability/axioms) $P(A)$ and $P(B)$, and given constraints that help determine all four region probabilities.
 
 The diagram automatically calculates probabilities for all four segments based on the given information. Click any numbered segment to highlight it and see detailed calculations.`,
     before: ``,
@@ -835,7 +837,7 @@ sectionsContent: {
 
 The center segment (#1) shows the triple intersection where all three events occur simultaneously. Segments #2-#7 represent various two-way intersections and single-event-only regions. Segment #8 lies outside all circles.
 
-View the pre-loaded "Demographics Study" example showing how three marginals and four constraints — $P(A \\cap B^c) = 0.4$, $P(A \\cap C^c) = 0.18$, $P(B \\cap C) = 0.38$ and $P(A \\cap B \\cap C) = 0.08$ — determine all eight region probabilities through systematic calculation.`,
+View the pre-loaded "Demographics Study" example showing how three marginals and four constraints — $P(A \\cap B^c) = 0.4$, $P(A \\cap C^c) = 0.18$, $P(B \\cap C) = 0.38$ and $P(A \\cap B \\cap C) = 0.08$ — determine all eight region [probabilities](!/probability/axioms) through systematic calculation.`,
     before: ``,
     after: ``,
     link: ``
@@ -935,7 +937,7 @@ Calculate as $P(A \\cap B | C) = \\frac{P(A \\cap B \\cap C)}{P(C)}$. If $P(A \\
 
 **Market segmentation**: Customers categorized by three preferences or behaviors
 
-For four or more events, contingency tables or [tree diagrams](!/probability/tree-diagrams) become more practical than Venn diagrams.`,
+For four or more events, [contingency tables](!/probability/visual-tools/contingency-tables) or [tree diagrams](!/probability/tree-diagrams) become more practical than Venn diagrams.`,
     before: ``,
     after: ``,
     link: ``
@@ -1205,6 +1207,7 @@ faqQuestions: {
 
   return {
     props: {
+      relatedTools: getRelatedTools(`probability-venn-diagrams-${params.view}`),
       sectionsContent,
       faqQuestions,
       schemas,
@@ -1223,7 +1226,7 @@ faqQuestions: {
   }
 }
 
-export default function VennDiagramsPage({seoData, sectionsContent, stateUnits, sectionOrder, faqQuestions, schemas, currentMode, h1Title}) {
+export default function VennDiagramsPage({relatedTools, seoData, sectionsContent, stateUnits, sectionOrder, faqQuestions, schemas, currentMode, h1Title}) {
 
   const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
     const src = sectionsContent[obj]
@@ -1306,6 +1309,7 @@ export default function VennDiagramsPage({seoData, sectionsContent, stateUnits, 
       <br/>
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

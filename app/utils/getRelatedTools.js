@@ -34,8 +34,10 @@ export function getRelatedTools(key) {
     if (rec.status === 'dropped') continue;
     const target = registry.tools[rec.key];
     if (!target || rec.key === key || seen.has(rec.key)) continue;
-    const url = urlFromPagePath(target.pagePath);
+    let url = urlFromPagePath(target.pagePath);
     if (!url) continue;
+    // a per-view entry of a dynamic route (registry `view` field, 2026-09-25)
+    if (target.view) url += '/' + target.view;
     seen.add(rec.key);
     out.push({
       key: rec.key,

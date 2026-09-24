@@ -263,6 +263,8 @@ import DiscreteExpectedValueVisualization from '@/app/components/probability/exp
 import weightedExpectedValueDiagrams from '@/app/components/probability/expected-value/weightedExpectedValueDiagrams'
 import discreteExpectedValueDiagrams from '@/app/components/probability/expected-value/discreteExpectedValueDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticPaths() {
@@ -339,7 +341,7 @@ sectionsContent: {
     title: `Getting Started with the Weighted Visualizer`,
     content: `This tool demonstrates [expected value](!/probability/expected-value) as a probability-weighted average using a physical "pulling weights" metaphor. Values 1 through 6 appear on a number line, with blue circles above each value representing probability weights.
 
-The visualization shows two key quantities: the expected value E(X) marked by a solid blue line, and the simple average marked by a dashed gray line. When probabilities are equal, these coincide. When probabilities differ, E(X) shifts toward high-probability values.
+The visualization shows two key quantities: the expected value E(X) marked by a solid blue line, and the simple average marked by a dashed gray line. When [probabilities](!/probability/axioms) are equal, these coincide. When probabilities differ, E(X) shifts toward high-probability values.
 
 Select different distributions from the dropdown to see how probability patterns affect E(X). The Play Animation button cycles through all distributions automatically, showing the dynamic relationship between probability weights and expected value.`,
     before: ``,
@@ -349,7 +351,7 @@ Select different distributions from the dropdown to see how probability patterns
 
   obj2: {
     title: `Understanding the Probability Weights`,
-    content: `Each blue circle contains P(X = x), the probability of that outcome. Circle size scales with probability—larger circles indicate more likely outcomes. This visual sizing reinforces that higher probabilities carry more "weight" in the expected value calculation.
+    content: `Each blue circle contains P(X = x), the probability of that outcome. Circle size scales with probability—larger circles indicate more likely [outcomes](!/probability/sample-space). This visual sizing reinforces that higher probabilities carry more "weight" in the expected value calculation.
 
 The arrows connecting circles to the number line represent the "pull" each outcome exerts on E(X). Arrow thickness and length increase with probability. Think of expected value as a balance point: each weight pulls the balance toward its position, and E(X) settles where forces equilibrate.
 
@@ -639,9 +641,9 @@ The bounds are worth stating in general. $E(X)$ can never leave the interval $[1
 sectionsContent: {
   obj1: {
     title: `Getting Started with Discrete Expected Value`,
-    content: `This tool visualizes [expected value](!/probability/expected-value) for a discrete [random variable](!/probability/random-variables) with six possible outcomes (1 through 6). The bar chart displays the probability mass function (PMF), showing P(X = x) for each value.
+    content: `This tool visualizes [expected value](!/probability/expected-value) for a discrete [random variable](!/probability/random-variables) with six possible [outcomes](!/probability/sample-space) (1 through 6). The bar chart displays the [probability mass function](!/probability/probability-function) (PMF), showing P(X = x) for each value.
 
-The left side shows the visualization: vertical bars representing probabilities, with the expected value E[X] marked by a red dashed line. The right side provides interactive controls and calculation details.
+The left side shows the visualization: vertical bars representing [probabilities](!/probability/axioms), with the expected value E[X] marked by a red dashed line. The right side provides interactive controls and calculation details.
 
 Adjust the probability sliders to change the distribution shape. The tool automatically normalizes probabilities to sum to 1, so you can focus on relative weights without constraint management. Watch E[X] move as probabilities shift.`,
     before: ``,
@@ -1001,6 +1003,7 @@ Notice also that the vertical axis rescales between the two states. The tool fit
 
   return {
     props: {
+      relatedTools: getRelatedTools(`probability-expected-value-${params.view}`),
       sectionsContent: currentConfig.sectionsContent,
       stateUnits,
       sectionOrder,
@@ -1048,7 +1051,7 @@ function getFeatureList(view) {
 }
 
 export default function ExpectedValueViewPage({ 
-  seoData, 
+  relatedTools, seoData, 
   sectionsContent, 
   stateUnits,
   sectionOrder,
@@ -1160,6 +1163,7 @@ export default function ExpectedValueViewPage({
           />
           <br />
           <br />
+          <RelatedTools tools={relatedTools}/>
           <Sections sections={genericSections} />
         </>
       )}

@@ -316,6 +316,8 @@ import ExponentialDistributionExplorer from '@/app/components/probability/explor
 import NormalDistributionExplorer from '@/app/components/probability/explorers/distributions/continuous/NormalDistributionExplorer'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticPaths() {
   const paths = [
@@ -375,9 +377,9 @@ sectionsContent: {
     title: 'Using the Parameter Controls',
     content: `Adjust **n (number of trials)** using the top slider to set how many independent experiments you're running. The slider ranges from 1 to 50 trials, allowing you to model scenarios from a single coin flip to extensive quality control batches.
 
-Set **p (success probability)** with the bottom slider to define the likelihood of success on each trial. Values range from 0.01 to 0.99, with 0.5 representing equally likely outcomes like fair coin flips.
+Set **p (success probability)** with the bottom slider to define the likelihood of success on each trial. Values range from 0.01 to 0.99, with 0.5 representing equally likely [outcomes](!/probability/sample-space) like fair coin flips.
 
-Watch the visualization update in real-time as you modify parameters. The blue bars show the probability mass function (PMF), displaying the exact probability for each possible number of successes from 0 to n.`,
+Watch the visualization update in real-time as you modify parameters. The blue bars show the [probability mass function](!/probability/probability-function) (PMF), displaying the exact probability for each possible number of successes from 0 to n.`,
     before: '',
     after: '',
     link: ''
@@ -443,7 +445,7 @@ For discrete distributions, these distinctions matter. P(3 ≤ X ≤ 7) includes
   },
   obj7: {
     title: 'What is the Binomial Distribution?',
-    content: `The binomial distribution models the number of successes in a fixed number of independent trials, where each trial has the same probability of success. It's one of the most fundamental discrete probability distributions.
+    content: `The [binomial distribution](!/probability/distributions/discrete/binomial) models the number of successes in a fixed number of independent trials, where each trial has the same probability of success. It's one of the most fundamental [discrete probability distributions](!/probability/visual-tools/probability-function/discrete).
 
 The distribution requires four conditions: (1) fixed number of trials n, (2) each trial has two outcomes (success/failure), (3) constant success probability p, and (4) trials are independent.
 
@@ -456,18 +458,18 @@ Common applications include quality control (number of defective items), clinica
     title: 'Understanding Distribution Parameters',
     content: `The distribution has two parameters: **n** determines the number of trials, while **p** sets the success probability for each trial. Together, they completely specify the distribution's behavior.
 
-The **mean** (expected value) equals np - if you have 100 trials with p = 0.3, expect about 30 successes on average. The **variance** equals np(1-p), measuring spread around the mean.
+The **mean** ([expected value](!/probability/expected-value)) equals np - if you have 100 trials with p = 0.3, expect about 30 successes on average. The **variance** equals np(1-p), measuring spread around the mean.
 
-The **standard deviation** $\\sqrt{np(1-p)}$ indicates typical deviation from the mean. When p = 0.5, variance is maximized at n/4, creating the widest spread for a given n.`,
+The **standard deviation** $\\sqrt{np(1-p)}$ indicates typical deviation from the mean. When p = 0.5, [variance](!/probability/variance) is maximized at n/4, creating the widest spread for a given n.`,
     before: '',
     after: '',
     link: ''
   },
   obj9: {
     title: 'Normal Approximation Rule',
-    content: `When n is large and p isn't too close to 0 or 1, the binomial distribution approximates a **normal distribution**. The rule of thumb: use normal approximation when both np ≥ 5 and n(1-p) ≥ 5.
+    content: `When n is large and p isn't too close to 0 or 1, the binomial distribution approximates a [normal distribution](!/probability/visual-tools/distributions/normal). The rule of thumb: use normal approximation when both np ≥ 5 and n(1-p) ≥ 5.
 
-The approximating normal distribution has mean μ = np and standard deviation σ = $\\sqrt{np(1-p)}$. Apply a continuity correction by adding/subtracting 0.5 to discrete values for better accuracy.
+The approximating [normal distribution](!/probability/distributions/continuous/normal) has mean μ = np and standard deviation σ = $\\sqrt{np(1-p)}$. Apply a continuity correction by adding/subtracting 0.5 to discrete values for better accuracy.
 
 This approximation simplifies calculations for large n where computing exact binomial probabilities becomes computationally expensive. For detailed guidance on when to use this approximation, see **normal approximation to binomial**.`,
     before: '',
@@ -476,17 +478,17 @@ This approximation simplifies calculations for large n where computing exact bin
   },
   obj10: {
     title: 'Related Distributions and Tools',
-    content: `The **geometric distribution** is related - it counts trials until the first success, while binomial counts successes in n trials. The **negative binomial distribution** generalizes geometric to r successes.
+    content: `The **geometric distribution** is related - it counts trials until the first success, while binomial counts successes in n trials. The [negative binomial distribution](!/probability/visual-tools/distributions/negative-binomial) generalizes geometric to r successes.
 
-For large n and small p, the **Poisson distribution** approximates the binomial with λ = np. This is useful when modeling rare events in large populations.
+For large n and small p, the **Poisson distribution** approximates the binomial with λ = np. This is useful when modeling rare [events](!/probability/events) in large populations.
 
 **Related Tools:**
 
-**Geometric Distribution Calculator** - Trials until first success
+[Geometric Distribution Calculator](!/probability/visual-tools/distributions/geometric) - Trials until first success
 
 **Negative Binomial Calculator** - Trials until r successes  
 
-**Poisson Distribution Calculator** - Rare event modeling
+[Poisson Distribution Calculator](!/probability/visual-tools/distributions/poisson) - Rare event modeling
 
 **Probability Theory Fundamentals** - Core concepts and definitions`,
     before: '',
@@ -733,11 +735,11 @@ schemas: {
 sectionsContent: {
   obj1: {
     title: 'Adjusting Success Probability',
-    content: `Use the **p slider** to set the probability of success on each trial. Values range from 0.01 (very rare success) to 0.99 (almost certain success), controlling how quickly you expect to see the first success.
+    content: `Use the **p slider** to set the [probability](!/probability/axioms) of success on each trial. Values range from 0.01 (very rare success) to 0.99 (almost certain success), controlling how quickly you expect to see the first success.
 
 As you increase p, the distribution becomes more concentrated at k = 1, meaning the first success is more likely to occur on the first trial. As p decreases, the distribution spreads out with longer waiting times becoming more probable.
 
-Watch how the expected value E[X] = 1/p changes with the slider. At p = 0.5, expect 2 trials on average. At p = 0.1, expect 10 trials. The relationship is perfectly reciprocal.`,
+Watch how the [expected value](!/probability/expected-value) E[X] = 1/p changes with the slider. At p = 0.5, expect 2 trials on average. At p = 0.1, expect 10 trials. The relationship is perfectly reciprocal.`,
     before: '',
     after: '',
     link: ''
@@ -755,7 +757,7 @@ The displayed range extends to about 30 trials by default, but the distribution 
   },
   obj3: {
     title: 'Understanding the CDF Display',
-    content: `The CDF curve shows P(X ≤ k), the probability that success occurs within the first k trials. Unlike the continuous CDF for other distributions, this appears as a step function jumping at each integer value.
+    content: `The CDF curve shows P(X ≤ k), the probability that success occurs within the first k trials. Unlike the [continuous CDF](!/probability/visual-tools/cdf/continuous) for other distributions, this appears as a step function jumping at each integer value.
 
 The CDF rises quickly when p is large, reaching values near 1 within just a few trials. For small p, the CDF rises slowly, indicating that many trials might be needed before seeing success.
 
@@ -803,7 +805,7 @@ These calculations help answer practical questions like "What's the probability 
   },
   obj7: {
     title: 'What is the Geometric Distribution?',
-    content: `The geometric distribution models the number of trials needed until the first success occurs in a sequence of independent Bernoulli trials. It's the discrete analog of the exponential distribution.
+    content: `The geometric distribution models the number of trials needed until the first success occurs in a sequence of independent Bernoulli trials. It's the discrete analog of the [exponential distribution](!/probability/distributions/continuous/exponential).
 
 Each trial must be independent with constant success probability p. The distribution counts the trial number on which success first appears, starting from trial 1 and extending theoretically to infinity.
 
@@ -816,7 +818,7 @@ Applications include reliability testing (trials until component failure), sales
     title: 'The Memoryless Property Explained',
     content: `The geometric distribution is the only discrete distribution with the memoryless property: past failures don't affect future probabilities. Mathematically, P(X > n + k | X > n) = P(X > k).
 
-This means if you've already failed n times, the probability distribution for future trials is identical to starting fresh. Each trial is a "clean slate" - previous outcomes provide no information about when success will occur.
+This means if you've already failed n times, the probability distribution for future trials is identical to starting fresh. Each trial is a "clean slate" - previous [outcomes](!/probability/sample-space) provide no information about when success will occur.
 
 This property arises because trials are independent with constant probability. It's what makes the geometric distribution appropriate for modeling truly random processes with no "memory" or aging effects.`,
     before: '',
@@ -827,7 +829,7 @@ This property arises because trials are independent with constant probability. I
     title: 'Mean, Variance, and Statistics',
     content: `The **mean** E[X] = 1/p gives the expected number of trials until first success. With p = 0.2, expect 5 trials on average. The mean is always the reciprocal of the success probability.
 
-The **variance** equals (1-p)/p², measuring spread around the mean. Higher variance means more uncertainty about when success will occur. The **standard deviation** $\\sqrt{(1-p)/p²}$ provides a more interpretable measure of spread.
+The **variance** equals (1-p)/p², measuring spread around the mean. Higher [variance](!/probability/variance) means more uncertainty about when success will occur. The **standard deviation** $\\sqrt{(1-p)/p²}$ provides a more interpretable measure of spread.
 
 The **mode** is always 1 regardless of p - the most likely outcome is success on the first trial. However, when p < 0.5, the mean exceeds 2, showing the distribution's right skew.`,
     before: '',
@@ -836,26 +838,26 @@ The **mode** is always 1 regardless of p - the most likely outcome is success on
   },
   obj10: {
     title: 'Related Distributions and Calculators',
-    content: `The **negative binomial distribution** generalizes the geometric to count trials until the rth success, while geometric specifically handles r = 1. Both share the memoryless property.
+    content: `The [negative binomial distribution](!/probability/visual-tools/distributions/negative-binomial) generalizes the geometric to count trials until the rth success, while geometric specifically handles r = 1. Both share the memoryless property.
 
-The **exponential distribution** is the continuous version of the geometric, modeling time until an event rather than trial number. It also has the memoryless property.
+The **exponential distribution** is the continuous version of the geometric, modeling time until an [event](!/probability/events) rather than trial number. It also has the memoryless property.
 
 **Related Tools:**
 
 **Negative Binomial Calculator** - Trials until r successes
 
-**Binomial Distribution Calculator** - Fixed trials, count successes
+[Binomial Distribution Calculator](!/probability/visual-tools/distributions/binomial) - Fixed trials, count successes
 
-**Exponential Distribution Calculator** - Continuous waiting times
+[Exponential Distribution Calculator](!/probability/visual-tools/distributions/exponential) - Continuous waiting times
 
-**Discrete Probability Distributions** - Overview and comparisons`,
+[Discrete Probability Distributions](!/probability/visual-tools/probability-function/discrete) - Overview and comparisons`,
     before: '',
     after: '',
     link: ''
   },
   obj11: {
     title: 'The Explorer at Its Opening Parameter',
-    content: `At $p = 0.3$ the tallest bar is the first one, $P(X = 1) = 0.3$, and every bar after it is $0.7$ times its neighbour. The mode of a geometric distribution is always $k = 1$.
+    content: `At $p = 0.3$ the tallest bar is the first one, $P(X = 1) = 0.3$, and every bar after it is $0.7$ times its neighbour. The mode of a [geometric distribution](!/probability/distributions/discrete/geometric) is always $k = 1$.
 
 The red line sits at $E[X] = 1/p = 3.33$, well to the right of the mode.`,
     before: '',
@@ -1095,7 +1097,7 @@ schemas: {
 sectionsContent: {
   obj1: {
     title: 'Setting Distribution Parameters',
-    content: `Adjust **r (number of successes)** to specify how many successes you're waiting to achieve. The slider ranges from 1 (equivalent to geometric distribution) to 20 successes, covering typical application scenarios.
+    content: `Adjust **r (number of successes)** to specify how many successes you're waiting to achieve. The slider ranges from 1 (equivalent to [geometric distribution](!/probability/distributions/discrete/geometric)) to 20 successes, covering typical application scenarios.
 
 Set **p (success probability)** using the bottom slider from 0.01 to 0.99. This defines the likelihood of success on each individual trial, with higher p meaning you'll reach r successes more quickly.
 
@@ -1108,7 +1110,7 @@ The visualization updates immediately to show how these parameters affect the di
     title: 'Understanding the PMF Display',
     content: `The PMF bars start at k = r (the minimum possible trial number) since you need at least r trials to get r successes. Each bar shows P(X = k), the probability that the rth success occurs exactly on trial k.
 
-The distribution's shape depends heavily on r. For r = 1, you see pure exponential decay. As r increases, the distribution becomes more symmetric and bell-shaped, eventually approximating a normal distribution for large r.
+The distribution's shape depends heavily on r. For r = 1, you see pure exponential decay. As r increases, the distribution becomes more symmetric and bell-shaped, eventually approximating a [normal distribution](!/probability/distributions/continuous/normal) for large r.
 
 The mode (peak) occurs near r/p, which also represents the mean. This is where the rth success is most likely to occur, balancing the competing effects of needing more trials versus decreasing probability of longer sequences.`,
     before: '',
@@ -1119,7 +1121,7 @@ The mode (peak) occurs near r/p, which also represents the mean. This is where t
     title: 'Interpreting CDF Values',
     content: `The CDF shows P(X ≤ k), the probability that you achieve r successes within the first k trials. The curve starts at 0 for k < r and approaches 1 as k increases.
 
-The steepness of the CDF curve around the mean indicates concentration. A steep curve means most probability mass is concentrated near the expected value r/p, while a gradual curve indicates higher variability.
+The steepness of the CDF curve around the mean indicates concentration. A steep curve means most probability mass is concentrated near the [expected value](!/probability/expected-value) r/p, while a gradual curve indicates higher variability.
 
 Unlike the binomial CDF which always reaches exactly 1 at n trials, the negative binomial CDF approaches 1 asymptotically since theoretically you could need infinitely many trials (though this becomes vanishingly unlikely).`,
     before: '',
@@ -1165,7 +1167,7 @@ Example: With r = 5, what's P(15 ≤ X ≤ 25)? This is the probability that you
   },
   obj7: {
     title: 'What is the Negative Binomial Distribution?',
-    content: `The negative binomial distribution models the number of trials needed to achieve a fixed number r of successes in a sequence of independent Bernoulli trials. It generalizes the geometric distribution from r = 1 to any positive integer r.
+    content: `The [negative binomial distribution](!/probability/distributions/discrete/negative-binomial) models the number of trials needed to achieve a fixed number r of successes in a sequence of independent Bernoulli trials. It generalizes the geometric distribution from r = 1 to any positive integer r.
 
 The "negative" terminology comes from an equivalent formulation counting failures before the rth success, but the standard parameterization counts total trials. Each trial has constant success probability p and is independent of all others.
 
@@ -1178,9 +1180,9 @@ Applications include epidemiology (cases until r infections), insurance (claims 
     title: 'Relationship to Geometric Distribution',
     content: `The geometric distribution is the special case where r = 1. When you only need one success, the negative binomial reduces exactly to the geometric distribution.
 
-For r > 1, the negative binomial can be viewed as the sum of r independent geometric random variables. If $X_1, X_2, ..., X_r$ are geometric(p), then $X_1 + X_2 + ... + X_r$ follows a negative binomial distribution.
+For r > 1, the negative binomial can be viewed as the sum of r independent geometric [random variables](!/probability/random-variables). If $X_1, X_2, ..., X_r$ are geometric(p), then $X_1 + X_2 + ... + X_r$ follows a negative binomial distribution.
 
-This connection explains why both distributions share certain properties and why the negative binomial approaches a normal distribution as r increases - it's a sum of independent random variables, invoking the Central Limit Theorem.`,
+This connection explains why both distributions share certain properties and why the negative binomial approaches a [normal distribution](!/probability/visual-tools/distributions/normal) as r increases - it's a sum of [independent random variables](!/probability/independence), invoking the Central Limit Theorem.`,
     before: '',
     after: '',
     link: ''
@@ -1189,7 +1191,7 @@ This connection explains why both distributions share certain properties and why
     title: 'Distribution Statistics and Properties',
     content: `The **mean** E[X] = r/p represents the expected number of trials to achieve r successes. With r = 5 and p = 0.25, expect 20 trials on average.
 
-The **variance** equals r(1-p)/p², which grows faster than the mean as p decreases. This variance > mean property distinguishes negative binomial from Poisson and makes it useful for **overdispersed count data**.
+The **variance** equals r(1-p)/p², which grows faster than the mean as p decreases. This [variance](!/probability/variance) > mean property distinguishes negative binomial from Poisson and makes it useful for **overdispersed count data**.
 
 The **standard deviation** $\\sqrt{r(1-p)/p²}$ measures typical deviation from the mean. When r is large, the distribution becomes approximately normal with these parameters.`,
     before: '',
@@ -1198,17 +1200,17 @@ The **standard deviation** $\\sqrt{r(1-p)/p²}$ measures typical deviation from 
   },
   obj10: {
     title: 'Related Distributions and Tools',
-    content: `The **binomial distribution** fixes trials and counts successes, while negative binomial fixes successes and counts trials. They're complementary approaches to modeling binary outcomes.
+    content: `The **binomial distribution** fixes trials and counts successes, while negative binomial fixes successes and counts trials. They're complementary approaches to modeling binary [outcomes](!/probability/sample-space).
 
 The **Poisson distribution** assumes mean equals variance, but negative binomial allows variance > mean (overdispersion). This makes negative binomial more flexible for real-world count data with extra variability.
 
 **Related Calculators:**
 
-**Geometric Distribution Calculator** - Special case where r = 1
+[Geometric Distribution Calculator](!/probability/visual-tools/distributions/geometric) - Special case where r = 1
 
-**Binomial Distribution Calculator** - Fixed trials, variable successes
+[Binomial Distribution Calculator](!/probability/visual-tools/distributions/binomial) - Fixed trials, variable successes
 
-**Poisson Distribution Calculator** - Rare events with equidispersion
+[Poisson Distribution Calculator](!/probability/visual-tools/distributions/poisson) - Rare [events](!/probability/events) with equidispersion
 
 **Probability Distribution Comparison** - When to use each distribution`,
     before: '',
@@ -1457,18 +1459,18 @@ schemas: {
 sectionsContent: {
   obj1: {
     title: 'Adjusting the Rate Parameter',
-    content: `Use the **λ (lambda) slider** to set the average rate of events per interval. Values range from 0.1 (very rare events) to 20 (frequent events), representing the expected count in your time or space window.
+    content: `Use the **λ (lambda) slider** to set the average rate of [events](!/probability/events) per interval. Values range from 0.1 (very rare events) to 20 (frequent events), representing the expected count in your time or space window.
 
 As you change λ, watch the distribution shape transform. Low λ values create highly right-skewed distributions concentrated near zero. Higher λ values produce more symmetric, bell-shaped distributions approaching normality.
 
-The parameter λ directly determines both the mean and variance - they're always equal in a Poisson distribution. At λ = 5, you expect 5 events on average with variance also equal to 5.`,
+The parameter λ directly determines both the mean and [variance](!/probability/variance) - they're always equal in a [Poisson distribution](!/probability/distributions/discrete/poisson). At λ = 5, you expect 5 events on average with variance also equal to 5.`,
     before: '',
     after: '',
     link: ''
   },
   obj2: {
     title: 'Reading the PMF Chart',
-    content: `The PMF visualization displays bars for k = 0, 1, 2, ... showing P(X = k), the probability of exactly k events occurring. The chart automatically extends to show the relevant range where probabilities are meaningful.
+    content: `The PMF visualization displays bars for k = 0, 1, 2, ... showing P(X = k), the probability of exactly k events occurring. The chart automatically extends to show the relevant range where [probabilities](!/probability/axioms) are meaningful.
 
 The distribution's peak (mode) occurs at $\\lfloor λ \\rfloor$ - the floor of λ. For λ = 7.5, the mode is at k = 7. When λ is an integer, both k = λ and k = λ-1 are modes with equal probability.
 
@@ -1479,11 +1481,11 @@ Bar heights decrease rapidly beyond λ + 3√λ, which encompasses about 99.7% o
   },
   obj3: {
     title: 'Understanding CDF Values',
-    content: `The CDF displays P(X ≤ k), climbing from 0 toward 1 in discrete steps. Each step represents adding another outcome's probability, with larger steps at more probable values near λ.
+    content: `The CDF displays P(X ≤ k), climbing from 0 toward 1 in discrete steps. Each step represents adding another [outcome](!/probability/sample-space)'s probability, with larger steps at more probable values near λ.
 
 Use the CDF to quickly assess ranges. The probability P(X ≤ 10) can be read directly from the curve at k = 10. The steepness around the mean indicates concentration - steep means most events cluster near λ.
 
-For large λ, the CDF's S-curve shape becomes more pronounced, reflecting the distribution's approach to normality through the Central Limit Theorem.`,
+For large λ, the CDF's S-curve shape becomes more pronounced, reflecting the distribution's approach to normality through the [Central Limit Theorem](!/probability/distributions/continuous/normal).`,
     before: '',
     after: '',
     link: ''
@@ -1542,7 +1544,7 @@ Common applications include customer arrivals, phone call volumes, manufacturing
 
 When analyzing count data, if sample variance significantly exceeds sample mean, Poisson may not be appropriate - consider negative binomial for overdispersion. If variance is much less than mean, other models may fit better.
 
-The standard deviation equals √λ, meaning the typical deviation from the mean grows as the square root of the rate. For λ = 16, standard deviation is 4, so about 68% of observations fall within [12, 20].`,
+The [standard deviation](!/probability/variance) equals √λ, meaning the typical deviation from the mean grows as the square root of the rate. For λ = 16, standard deviation is 4, so about 68% of observations fall within [12, 20].`,
     before: '',
     after: '',
     link: ''
@@ -1566,11 +1568,11 @@ The **normal distribution** approximates Poisson for large λ (typically λ ≥ 
 
 **Related Tools:**
 
-**Exponential Distribution Calculator** - Time between events
+[Exponential Distribution Calculator](!/probability/visual-tools/distributions/exponential) - Time between events
 
-**Binomial Distribution Calculator** - Fixed trials approximation
+[Binomial Distribution Calculator](!/probability/visual-tools/distributions/binomial) - Fixed trials approximation
 
-**Normal Distribution Calculator** - Large λ approximation
+[Normal Distribution Calculator](!/probability/visual-tools/distributions/normal) - Large λ approximation
 
 **Negative Binomial Calculator** - Overdispersed count data`,
     before: '',
@@ -1841,7 +1843,7 @@ Watch how the support (possible values) changes with parameters. The minimum pos
     title: 'Interpreting the PMF Visualization',
     content: `The PMF bars show P(X = k) only for feasible values in the support. You might notice the display doesn't start at 0 if max(0, n-(N-K)) > 0, reflecting the fact that some success counts are impossible given the parameters.
 
-The distribution's shape depends on n and the ratio K/N. Larger samples (n close to N) create distributions more concentrated around the expected value nK/N. Smaller samples allow more variability.
+The distribution's shape depends on n and the ratio K/N. Larger samples (n close to N) create distributions more concentrated around the [expected value](!/probability/expected-value) nK/N. Smaller samples allow more variability.
 
 Compare the hypergeometric shape to binomial with p = K/N. They're similar when N is large relative to n, but hypergeometric shows less spread due to the finite population correction.`,
     before: '',
@@ -1852,7 +1854,7 @@ Compare the hypergeometric shape to binomial with p = K/N. They're similar when 
     title: 'Using the CDF Display',
     content: `The CDF steps only at feasible values in the support. Unlike binomial which has support from 0 to n, hypergeometric CDF may start above 0 and end before n depending on your parameters.
 
-The CDF represents P(X ≤ k), crucial for quality control questions: "What's the probability of finding k or fewer defects in my sample?" The curve's steepness around the mean indicates sampling precision.
+The CDF represents P(X ≤ k), crucial for quality control questions: "What's the [probability](!/probability/axioms) of finding k or fewer defects in my sample?" The curve's steepness around the mean indicates sampling precision.
 
 Notice how the **finite population correction** affects CDF shape. When sampling a large fraction of the population (n/N is significant), the CDF rises more steeply, showing less variability than the equivalent binomial.`,
     before: '',
@@ -1883,9 +1885,9 @@ Range calculations **P(a ≤ X ≤ b)** answer questions about intervals: "What'
   },
   obj7: {
     title: 'What is the Hypergeometric Distribution?',
-    content: `The hypergeometric distribution models sampling without replacement from a finite population with two types of items (successes and failures). Each draw changes the population composition, creating dependence between draws.
+    content: `The [hypergeometric distribution](!/probability/distributions/discrete/hypergeometric) models sampling without replacement from a finite population with two types of items (successes and failures). Each draw changes the population composition, creating dependence between draws.
 
-Unlike the binomial distribution where draws are independent, hypergeometric accounts for **depletion** - each success drawn reduces remaining successes, altering probabilities for subsequent draws.
+Unlike the [binomial distribution](!/probability/distributions/discrete/binomial) where draws are independent, hypergeometric accounts for **depletion** - each success drawn reduces remaining successes, altering probabilities for subsequent draws.
 
 Applications include quality control sampling, card game probabilities, ecological sampling (capture-recapture), lottery odds, and poll accuracy analysis. For theoretical foundations and derivations, see **hypergeometric distribution theory page**.`,
     before: '',
@@ -1907,7 +1909,7 @@ The key difference: binomial assumes constant probability p across trials, while
     title: 'Mean, Variance, and Finite Population Correction',
     content: `The **mean** equals n(K/N) = np, matching the binomial mean. With N = 50, K = 20, n = 10, expect 4 successes on average.
 
-The **variance** np(1-p)[(N-n)/(N-1)] includes the **finite population correction factor** (N-n)/(N-1). This is always ≤ 1, reducing variance below the binomial's np(1-p). The factor approaches 1 as N → ∞.
+The **variance** np(1-p)[(N-n)/(N-1)] includes the **finite population correction factor** (N-n)/(N-1). This is always ≤ 1, reducing [variance](!/probability/variance) below the binomial's np(1-p). The factor approaches 1 as N → ∞.
 
 When sampling without replacement, you're dividing the population into your sample and the remainder. This "information" about the population reduces uncertainty, decreasing variance compared to independent sampling.`,
     before: '',
@@ -1922,13 +1924,17 @@ In **quality control**, hypergeometric models acceptance sampling where you insp
 
 **Related Tools:**
 
-**Binomial Distribution Calculator** - Sampling with replacement / large populations
+[Binomial Distribution Calculator](!/probability/visual-tools/distributions/binomial) - Sampling with replacement / large populations
 
 **Fisher's Exact Test** - Contingency table analysis using hypergeometric
 
 **Sampling Theory Calculator** - Sampling distributions and confidence intervals
 
-**Quality Control Calculators** - Acceptance sampling plans`,
+**Quality Control Calculators** - Acceptance sampling plans
+
+[Discrete Probability Distributions](!/probability/visual-tools/probability-function/discrete) - The hypergeometric PMF beside the other discrete families, same axes, same scale.
+
+[Discrete CDF Explorer](!/probability/visual-tools/cdf/discrete) - The running total of the hypergeometric probabilities, one step per possible count.`,
     before: '',
     after: '',
     link: ''
@@ -2174,7 +2180,7 @@ sectionsContent: {
     title: 'Setting the Distribution Range',
     content: `Adjust **a (minimum value)** using the top slider to set the lowest value in your distribution. The range spans from 0 to 30, accommodating most practical scenarios like die rolls, card draws, or random selections.
 
-Set **b (maximum value)** with the bottom slider to define the upper bound. The calculator automatically ensures b > a, maintaining a valid range with at least 2 possible outcomes.
+Set **b (maximum value)** with the bottom slider to define the upper bound. The calculator automatically ensures b > a, maintaining a valid range with at least 2 possible [outcomes](!/probability/sample-space).
 
 The number of possible values n = b - a + 1 displays in the parameters section. For a standard die with a = 1 and b = 6, you have n = 6 equally likely outcomes.`,
     before: '',
@@ -2183,7 +2189,7 @@ The number of possible values n = b - a + 1 displays in the parameters section. 
   },
   obj2: {
     title: 'Understanding the Flat PMF',
-    content: `The PMF visualization shows perfectly flat bars - every value has identical probability 1/n. This uniform height is the defining characteristic of discrete uniform distributions and represents maximum uncertainty.
+    content: `The PMF visualization shows perfectly flat bars - every value has identical [probability](!/probability/axioms) 1/n. This uniform height is the defining characteristic of [discrete uniform distributions](!/probability/distributions/discrete/uniform) and represents maximum uncertainty.
 
 With n values in the range, each has probability 1/n. For a = 1, b = 6, each outcome {1,2,3,4,5,6} has probability 1/6 ≈ 0.1667, exactly like a fair die.
 
@@ -2218,7 +2224,7 @@ The calculation is trivial compared to other distributions: just check if a ≤ 
     title: 'Using Cumulative Calculators',
     content: `**P(X ≤ k)** calculator gives (k - a + 1)/n for values in the support, counting all outcomes from a to k inclusive. For k < a, probability is 0. For k ≥ b, probability is 1.
 
-**P(X ≥ k)** computes (b - k + 1)/n, counting outcomes from k to b. This equals 1 - P(X ≤ k-1), using the complement rule.
+**P(X ≥ k)** computes (b - k + 1)/n, counting outcomes from k to b. This equals 1 - P(X ≤ k-1), using the [complement rule](!/probability/rules#additive).
 
 The strict inequalities **P(X < k)** and **P(X > k)** differ by one outcome: P(X < k) = P(X ≤ k-1) and P(X > k) = P(X ≥ k+1). This distinction matters for discrete distributions.`,
     before: '',
@@ -2266,7 +2272,7 @@ The entropy equals log(n), maximized among distributions on n points. When you k
     title: 'Distribution Statistics',
     content: `The **mean** equals (a + b)/2, the midpoint of the range. For a standard die (a = 1, b = 6), mean = 3.5, the exact center between minimum and maximum.
 
-The **variance** equals (n² - 1)/12 where n = b - a + 1. Larger ranges have proportionally larger variance. For a die, variance = 35/12 ≈ 2.92.
+The **variance** equals (n² - 1)/12 where n = b - a + 1. Larger ranges have proportionally larger [variance](!/probability/variance). For a die, variance = 35/12 ≈ 2.92.
 
 The **standard deviation** √[(n² - 1)/12] measures typical deviation from the mean. Perfect symmetry around the midpoint is a key feature - the distribution is balanced on both sides.`,
     before: '',
@@ -2275,7 +2281,7 @@ The **standard deviation** √[(n² - 1)/12] measures typical deviation from the
   },
   obj10: {
     title: 'Related Distributions and Tools',
-    content: `The **continuous uniform distribution** is the continuous analog, assigning equal **density** (not probability) across an interval. Both represent maximum uncertainty in their respective domains.
+    content: `The [continuous uniform distribution](!/probability/visual-tools/distributions/uniform-continuous) is the continuous analog, assigning equal **density** (not probability) across an interval. Both represent maximum uncertainty in their respective domains.
 
 The discrete uniform appears as a special case of **categorical distributions** where all categories have equal probability. It's also a special case of **binomial** with n = 1 and p = 1/k for k categories.
 
@@ -2287,7 +2293,11 @@ The discrete uniform appears as a special case of **categorical distributions** 
 
 **Random Number Generation** - Uniform distribution fundamentals
 
-**Entropy and Information Theory** - Maximum entropy principle`,
+**Entropy and Information Theory** - Maximum entropy principle
+
+[Discrete CDF Explorer](!/probability/visual-tools/cdf/discrete) - The equal steps of the uniform staircase, one per value in the range.
+
+[Dice Roll Simulator](!/probability/visual-tools/dice-roll) - A fair die is the discrete uniform on 1 to 6; watch the frequencies flatten.`,
     before: '',
     after: '',
     link: ''
@@ -2543,9 +2553,9 @@ Watch how changing these parameters affects the visualization. The curve always 
   },
   obj2: {
     title: 'Reading the PDF Curve',
-    content: `The PDF (Probability Density Function) displays the characteristic bell-shaped curve. The peak occurs at x = μ, representing the distribution's mean, median, and mode - all equal due to symmetry.
+    content: `The PDF ([Probability Density Function](!/probability/probability-function)) displays the characteristic bell-shaped curve. The peak occurs at x = μ, representing the distribution's mean, median, and mode - all equal due to symmetry.
 
-The curve extends from -∞ to +∞ theoretically, but the calculator shows the practical range μ ± 4σ where 99.99% of probability mass resides. Areas under the curve represent probabilities.
+The curve extends from -∞ to +∞ theoretically, but the calculator shows the practical range μ ± 4σ where 99.99% of probability mass resides. Areas under the curve represent [probabilities](!/probability/axioms).
 
 Inflection points (where curvature changes) occur at μ ± σ. Between these points, the curve is steepest, containing about 68% of the total probability. This geometric feature helps visualize the 68-95-99.7 rule.`,
     before: '',
@@ -2554,7 +2564,7 @@ Inflection points (where curvature changes) occur at μ ± σ. Between these poi
   },
   obj3: {
     title: 'Understanding the CDF Display',
-    content: `The CDF (Cumulative Distribution Function) shows the characteristic S-curve rising from 0 to 1. At any point x, the height gives P(X ≤ x), the probability of values at or below x.
+    content: `The CDF ([Cumulative Distribution Function](!/probability/cdf)) shows the characteristic S-curve rising from 0 to 1. At any point x, the height gives P(X ≤ x), the probability of values at or below x.
 
 The CDF's steepest region occurs around μ where the PDF peaks. At μ itself, CDF equals 0.5 - exactly half the probability lies below the mean due to symmetry.
 
@@ -2578,9 +2588,9 @@ For **range probabilities P(a ≤ X ≤ b)**, the calculator computes CDF(b) - C
     title: 'Working with Z-Scores',
     content: `Every normal distribution calculation uses **standardization**: Z = (X - μ)/σ transforms values to standard normal (μ = 0, σ = 1). The calculator performs this conversion automatically.
 
-Z-scores measure distance from the mean in standard deviation units. Z = 2 means "2 standard deviations above the mean." Z = -1.5 means "1.5 standard deviations below."
+Z-scores measure distance from the mean in standard deviation units. Z = 2 means "2 [standard deviations](!/probability/variance) above the mean." Z = -1.5 means "1.5 standard deviations below."
 
-The standard normal table (Z-table) provides CDF values for Z-scores. For any normal distribution, standardize first, then look up the Z-score. This is why one table suffices for all normal distributions.`,
+The standard normal table (Z-table) provides CDF values for Z-scores. For any normal distribution, standardize first, then look up the Z-score. This is why one table suffices for all [normal distributions](!/probability/distributions/continuous/normal).`,
     before: '',
     after: '',
     link: ''
@@ -2602,7 +2612,7 @@ The **99.7% rule**: About 99.7% fall within μ ± 3σ, or [55, 145]. Values beyo
 
 Two parameters completely define it: μ (mean) determines location, σ (standard deviation) determines spread. The distribution is symmetric around μ, with probability decreasing exponentially as distance from μ increases.
 
-The normal distribution is fundamental because of the **Central Limit Theorem**: sums and averages of independent random variables tend toward normality regardless of the original distribution. For comprehensive theory, see **normal distribution theory page**.`,
+The normal distribution is fundamental because of the **Central Limit Theorem**: sums and averages of [independent random variables](!/probability/independence) tend toward normality regardless of the original distribution. For comprehensive theory, see **normal distribution theory page**.`,
     before: '',
     after: '',
     link: ''
@@ -2643,7 +2653,13 @@ The **t-distribution** approximates normal for large sample sizes but has heavie
 
 **Chi-Square Distribution** - Related to normal's squared values
 
-**Hypothesis Testing Tools** - Applications of normal distribution`,
+**Hypothesis Testing Tools** - Applications of normal distribution
+
+[Continuous Probability Distributions](!/probability/visual-tools/probability-function/continuous) - The normal density beside the uniform and exponential curves, with the PDF and CDF views.
+
+[Continuous CDF Visualizer](!/probability/visual-tools/cdf/continuous) - The S-shaped cumulative curve and the probability it accumulates between two points.
+
+[Chebyshev Inequality Visualizer](!/probability/visual-tools/inequalities/chebyshev) - How loose the variance-only bound is against the true normal tails.`,
     before: '',
     after: '',
     link: ''
@@ -2889,7 +2905,7 @@ schemas: {
 sectionsContent: {
   obj1: {
     title: 'Adjusting the Rate Parameter',
-    content: `Use the **λ (lambda) slider** to set the event rate - how frequently events occur per unit time. Values range from 0.1 (rare events, long waits) to 5 (frequent events, short waits).
+    content: `Use the **λ (lambda) slider** to set the event rate - how frequently [events](!/probability/events) occur per unit time. Values range from 0.1 (rare events, long waits) to 5 (frequent events, short waits).
 
 As λ increases, the PDF curve becomes steeper and more concentrated near zero, reflecting shorter average waiting times. Lower λ creates a more gradual decline, indicating longer typical waits between events.
 
@@ -2904,14 +2920,14 @@ The mean waiting time equals 1/λ. At λ = 2 events per hour, average waiting ti
 
 The steepness of the decline is controlled by λ. Higher rates create steeper drops, while lower rates produce more gradual decreases. The curve always has its mode at x = 0 - the shortest possible waiting time.
 
-About 63% of the probability mass lies within one mean (1/λ) from zero. The practical display range extends to about 4/λ, capturing over 98% of all probability.`,
+About 63% of the [probability](!/probability/axioms) mass lies within one mean (1/λ) from zero. The practical display range extends to about 4/λ, capturing over 98% of all probability.`,
     before: '',
     after: '',
     link: ''
   },
   obj3: {
     title: 'Understanding the CDF Display',
-    content: `The CDF shows P(X ≤ x) = 1 - e^(-λx), rising from 0 and approaching 1 asymptotically. Unlike the normal's S-curve, the exponential CDF rises quickly initially then gradually levels off.
+    content: `The CDF shows P(X ≤ x) = 1 - e^(-λx), rising from 0 and approaching 1 asymptotically. Unlike the normal's S-curve, the [exponential CDF](!/probability/distributions/continuous/exponential#6) rises quickly initially then gradually levels off.
 
 The curve's initial steepness indicates high probability of short waiting times. At x = 1/λ (the mean), the CDF equals approximately 0.632 - about 63.2% of events occur within one average waiting time.
 
@@ -2922,7 +2938,7 @@ The CDF never quite reaches 1, reflecting the theoretical possibility of arbitra
   },
   obj4: {
     title: 'Computing Point Probabilities',
-    content: `For continuous distributions, individual point probabilities are always zero. Instead, use the **PDF value** at x, which gives the probability density: f(x) = λe^(-λx).
+    content: `For [continuous distributions](!/probability/random-variables), individual point probabilities are always zero. Instead, use the **PDF value** at x, which gives the probability density: f(x) = λe^(-λx).
 
 The PDF height indicates relative likelihood - higher values mean that region is more probable. The PDF at x = 0 equals λ, the maximum density, declining exponentially from there.
 
@@ -2971,16 +2987,16 @@ Applications include customer service times, equipment lifetimes, time between a
 
 This means past waiting provides no information about future waiting. The distribution "forgets" how long you've already waited - each moment is statistically identical to any other.
 
-The memoryless property arises from the constant hazard rate λ. Unlike aging processes where failure becomes more likely over time, exponential models truly random, time-independent events.`,
+The memoryless property arises from the constant hazard rate λ. Unlike aging processes where failure becomes more likely over time, exponential models truly random, time-[independent events](!/probability/independence).`,
     before: '',
     after: '',
     link: ''
   },
   obj9: {
     title: 'Distribution Statistics',
-    content: `The **mean** and **standard deviation** both equal 1/λ. With λ = 3 events per hour, average waiting time is 1/3 hour (20 minutes) with the same standard deviation.
+    content: `The **mean** and **standard deviation** both equal 1/λ. With λ = 3 events per hour, average waiting time is 1/3 hour (20 minutes) with the same [standard deviation](!/probability/variance).
 
-The **variance** equals 1/λ², so variance equals mean squared. This high variance relative to the mean reflects the distribution's long right tail - occasional very long waits are possible.
+The **variance** equals 1/λ², so [variance](!/probability/variance) equals mean squared. This high variance relative to the mean reflects the distribution's long right tail - occasional very long waits are possible.
 
 The **median** equals (ln 2)/λ ≈ 0.693/λ, always less than the mean 1/λ. This reflects right skewness - the mode is at 0, median is lower than mean, creating positive skew.`,
     before: '',
@@ -2995,13 +3011,17 @@ The **geometric distribution** is the discrete analog, counting trials until fir
 
 **Related Tools:**
 
-**Poisson Distribution Calculator** - Event counts in intervals
+[Poisson Distribution Calculator](!/probability/visual-tools/distributions/poisson) - Event counts in intervals
 
-**Geometric Distribution Calculator** - Discrete waiting times
+[Geometric Distribution Calculator](!/probability/visual-tools/distributions/geometric) - Discrete waiting times
 
 **Gamma Distribution Calculator** - Sum of exponential waiting times
 
-**Weibull Distribution Calculator** - Variable hazard rate models`,
+**Weibull Distribution Calculator** - Variable hazard rate models
+
+[Continuous CDF Visualizer](!/probability/visual-tools/cdf/continuous) - The cumulative curve 1 - e^(-lambda x) and the survival probability above it.
+
+[Markov Inequality Visualizer](!/probability/visual-tools/inequalities/markov) - The mean-only bound compared with the true exponential tail.`,
     before: '',
     after: '',
     link: ''
@@ -3250,7 +3270,7 @@ sectionsContent: {
 
 Set **b (upper bound)** with the bottom slider to define the maximum value. The calculator automatically ensures b > a, maintaining a valid interval with positive width.
 
-The interval width (b - a) determines both the PDF height 1/(b-a) and the variance. Wider intervals have lower constant density and higher variance.`,
+The interval width (b - a) determines both the PDF height 1/(b-a) and the [variance](!/probability/variance). Wider intervals have lower constant density and higher variance.`,
     before: '',
     after: '',
     link: ''
@@ -3261,7 +3281,7 @@ The interval width (b - a) determines both the PDF height 1/(b-a) and the varian
 
 The rectangular shape represents **maximum entropy** - complete uncertainty about where within [a, b] values will fall. No subinterval is favored over any other of equal width.
 
-The PDF height adjusts automatically to ensure the total area (probability) equals 1. For interval [0, 10], height is 0.1. For [-5, 5], height is also 0.1 since both have width 10.`,
+The PDF height adjusts automatically to ensure the total area ([probability](!/probability/axioms)) equals 1. For interval [0, 10], height is 0.1. For [-5, 5], height is also 0.1 since both have width 10.`,
     before: '',
     after: '',
     link: ''
@@ -3279,7 +3299,7 @@ The CDF's slope equals 1/(b-a), matching the PDF height. Steeper slopes (narrowe
   },
   obj4: {
     title: 'Computing Interval Probabilities',
-    content: `For continuous distributions, point probabilities are always zero. Instead, use the **range calculator** to find P(c ≤ X ≤ d) for any interval [c, d] within [a, b].
+    content: `For [continuous distributions](!/probability/random-variables), point probabilities are always zero. Instead, use the **range calculator** to find P(c ≤ X ≤ d) for any interval [c, d] within [a, b].
 
 The formula is beautifully simple: P(c ≤ X ≤ d) = (d - c)/(b - a). Probability is proportional to interval length - a 2-unit interval has twice the probability of a 1-unit interval.
 
@@ -3292,7 +3312,7 @@ For boundary options, all four give identical results since individual points ha
     title: 'Using Cumulative Calculators',
     content: `**P(X ≤ x)** returns (x-a)/(b-a) for a ≤ x ≤ b, giving the fraction of the interval from a to x. For x < a, returns 0. For x ≥ b, returns 1.
 
-**P(X ≥ x)** computes (b-x)/(b-a), the fraction from x to b. This equals 1 - P(X ≤ x) by the complement rule.
+**P(X ≥ x)** computes (b-x)/(b-a), the fraction from x to b. This equals 1 - P(X ≤ x) by the [complement rule](!/probability/rules#additive).
 
 Since P(X = x) = 0, the strict inequalities P(X < x) and P(X > x) give identical results to P(X ≤ x) and P(X ≥ x). This differs fundamentally from discrete distributions.`,
     before: '',
@@ -3347,9 +3367,9 @@ The **standard deviation** is (b-a)/√12 ≈ (b-a)/3.46. Perfect symmetry aroun
   },
   obj10: {
     title: 'Related Distributions and Tools',
-    content: `The **discrete uniform distribution** is the discrete analog, assigning equal probability to finitely many specific values rather than equal density over a continuous interval.
+    content: `The [discrete uniform distribution](!/probability/visual-tools/distributions/uniform-discrete) is the discrete analog, assigning equal probability to finitely many specific values rather than equal density over a continuous interval.
 
-The **standard uniform distribution** Uniform[0, 1] is fundamental to random number generation. All other distributions can be generated by transforming Uniform[0, 1] random variables. The inverse transform method uses F^(-1)(U) where U ~ Uniform[0, 1].
+The **standard uniform distribution** Uniform[0, 1] is fundamental to random number generation. All other distributions can be generated by transforming Uniform[0, 1] [random variables](!/probability/random-variables). The inverse transform method uses F^(-1)(U) where U ~ Uniform[0, 1].
 
 **Related Tools:**
 
@@ -3359,7 +3379,11 @@ The **standard uniform distribution** Uniform[0, 1] is fundamental to random num
 
 **Random Variable Transformation** - Generating other distributions from uniform
 
-**Beta Distribution Calculator** - Generalization of uniform with shape parameters`,
+**Beta Distribution Calculator** - Generalization of uniform with shape parameters
+
+[Continuous Probability Distributions](!/probability/visual-tools/probability-function/continuous) - The flat uniform density beside the normal and exponential curves.
+
+[Continuous CDF Visualizer](!/probability/visual-tools/cdf/continuous) - The straight ramp from 0 at a to 1 at b.`,
     before: '',
     after: '',
     link: ''
@@ -3762,6 +3786,7 @@ schemas: {
 
   return {
     props: {
+      relatedTools: getRelatedTools(`probability-distributions-${params.view}`),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -3781,7 +3806,7 @@ schemas: {
   };
 }
 
-export default function DistributionExplorerPage({ seoData, sectionsContent, stateUnits, sectionOrder, introContent, componentName, h1Title, faqQuestions, schemas }) {
+export default function DistributionExplorerPage({ relatedTools, seoData, sectionsContent, stateUnits, sectionOrder, introContent, componentName, h1Title, faqQuestions, schemas }) {
 
   const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
     const src = sectionsContent[obj]
@@ -3881,6 +3906,7 @@ export default function DistributionExplorerPage({ seoData, sectionsContent, sta
       <br/>
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>
