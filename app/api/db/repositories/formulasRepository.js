@@ -1623,7 +1623,7 @@ const formulasRepository = [
     formula: "$$(x + y)^n = \\sum_{k=0}^{n} \\binom{n}{k} x^{n-k} y^k$$",
     link: {
           "label": "Algebraic Identities",
-          "url": "/algebra/identities#general"
+          "url": "/algebra/identities#3"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -1657,7 +1657,7 @@ const formulasRepository = [
     formula: "$$\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$$",
     link: {
           "label": "Algebraic Identities",
-          "url": "/algebra/identities#general"
+          "url": "/algebra/identities#3"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -1691,7 +1691,7 @@ const formulasRepository = [
     formula: "$$\\binom{n}{k} + \\binom{n}{k+1} = \\binom{n+1}{k+1}$$",
     link: {
           "label": "Algebraic Identities",
-          "url": "/algebra/identities#general"
+          "url": "/algebra/identities#3"
         },
     relatedTools: [],
     usedOnPages: [],

@@ -378,7 +378,7 @@ const setTheoryTermsList = [
   {
     name: "Set",
     formula: `An unordered collection of distinct objects, denoted $A = \\{a_1, a_2, \\ldots\\}$`,
-    link: { label: "Set Theory — Definition", url: "/set-theory#definition" },
+    link: { label: "Set Theory — Definition", url: "/set-theory/basics#1" },
     fields: {
       "intuition": `A set is the most basic structure in mathematics — a container that holds objects without regard to order or repetition. Two sets with the same elements are identical regardless of how their elements are listed.`,
       "notation": `Sets are denoted by capital letters ($A, B, C$). Elements are listed inside curly braces: $A = \\{1, 2, 3\\}$ (enumerative) or described by a property: $A = \\{x \\mid x > 0\\}$ (descriptive / set-builder).`,
@@ -393,7 +393,7 @@ const setTheoryTermsList = [
   {
     name: "Element",
     formula: `An object $x$ belonging to a set $A$, written $x \\in A$`,
-    link: { label: "Set Theory — Relationships", url: "/set-theory#relationships_between_sets" },
+    link: { label: "Set Theory — Relationships", url: "/set-theory/basics#4" },
     fields: {
       "intuition": `An element is any individual object that belongs to a set. The membership relation $\\in$ is the most primitive notion in set theory — everything else is built from it.`,
       "notation": `$x \\in A$ means $x$ is an element of $A$. The negation $x \\notin A$ means $x$ does not belong to $A$. Elements can be numbers, symbols, other sets, or any well-defined objects.`,
@@ -407,7 +407,7 @@ const setTheoryTermsList = [
   {
     name: "Empty Set",
     formula: `The unique set containing no elements, denoted $\\emptyset = \\{\\}$`,
-    link: { label: "Set Theory — Cardinality and Types", url: "/set-theory#cardinality_and_types_of_sets" },
+    link: { label: "Set Theory — Cardinality and Types", url: "/set-theory/basics#3" },
     fields: {
       "intuition": `The empty set is a valid set that simply has nothing in it. It serves as the identity element for [union](!/set-theory/definitions#union) ($A \\cup \\emptyset = A$) and as an annihilator for [intersection](!/set-theory/definitions#intersection) ($A \\cap \\emptyset = \\emptyset$).`,
       "properties": `The empty set is a [subset](!/set-theory/definitions#subset) of every set: $\\emptyset \\subseteq A$ for all $A$. This holds vacuously — there is no element in $\\emptyset$ that could fail to belong to $A$. Its [cardinality](!/set-theory/definitions#cardinality) is $|\\emptyset| = 0$.`,
@@ -424,7 +424,7 @@ const setTheoryTermsList = [
   {
     name: "Universal Set",
     formula: `The set $U$ containing all elements under consideration in a given context`,
-    link: { label: "Set Theory — Cardinality and Types", url: "/set-theory#cardinality_and_types_of_sets" },
+    link: { label: "Set Theory — Cardinality and Types", url: "/set-theory/basics#3" },
     fields: {
       "intuition": `The universal set defines the boundaries of discussion. Every set in the problem is a [subset](!/set-theory/definitions#subset) of $U$, and the [complement](!/set-theory/definitions#complement) of any set is taken relative to $U$.`,
       "examples": `If the discussion involves integers from 1 to 10, then $U = \\{1, 2, 3, \\ldots, 10\\}$. If working with all real numbers, then $U = \\mathbb{R}$.`,
