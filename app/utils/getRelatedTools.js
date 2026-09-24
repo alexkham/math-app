@@ -15,7 +15,9 @@ import registry from '../api/db/repositories/visual-tools-registry.json';
 export function urlFromPagePath(pagePath) {
   if (!pagePath) return null;
   if (!pagePath.startsWith('pages/')) return pagePath; // already a URL
-  return '/' + pagePath.replace(/^pages\//, '').replace(/\/index\.jsx$/, '');
+  // A dynamic-route tool (…/[view].jsx) is reached through its landing page,
+  // the index.jsx in the same folder (2026-09-23).
+  return '/' + pagePath.replace(/^pages\//, '').replace(/\/index\.jsx$/, '').replace(/\/\[view\]\.jsx$/, '');
 }
 
 /**

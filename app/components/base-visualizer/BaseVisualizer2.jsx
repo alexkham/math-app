@@ -210,8 +210,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './BaseVisualizer2.module.css';
+import { processContent } from '@/app/utils/contentProcessor';
 
-const BaseVisualizer2 = () => {
+// `explanations` (optional, Line 1 2026-09-23): per-state panel entries keyed
+// empty | b2 | b8 | b10 | b16 | other | error. Canonical text lives in
+// getStaticProps of the page; nothing renders when the prop is absent.
+const BaseVisualizer2 = ({ explanations = null }) => {
   const [number, setNumber] = useState('');
   const [base, setBase] = useState('');
   const [visualization, setVisualization] = useState([]);
@@ -370,6 +374,20 @@ const BaseVisualizer2 = () => {
           )
         )}
       </div>
+
+      {explanations && (() => {
+        const b = Number(base) ? Number(base) : 0;
+        const stateKey = error ? 'error'
+          : !base ? 'empty'
+          : b === 2 ? 'b2' : b === 8 ? 'b8' : b === 10 ? 'b10' : b === 16 ? 'b16'
+          : (b >= 2 && b <= 36) ? 'other' : 'error';
+        const entry = explanations[stateKey];
+        return entry ? (
+          <div className={styles.converterInfo}>
+            <div className={styles.infoText}>{processContent(entry)}</div>
+          </div>
+        ) : null;
+      })()}
     </div>
   );
 };
