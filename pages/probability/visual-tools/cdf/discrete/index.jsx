@@ -148,7 +148,7 @@ For detailed comparison of probability functions including when to use each, see
 
 **Random Variables** - Learn the fundamental concept underlying all probability distributions and how they map outcomes to numerical values.
 
-**Discrete Distributions Overview** - Comprehensive guide to all discrete probability distributions including when to use each type.
+**Discrete Distributions Overview** - Comprehensive guide to all [discrete probability distributions](!/probability/visual-tools/probability-function/discrete) including when to use each type.
 
 [Dice Roll Simulator](!/probability/visual-tools/dice-roll) - A concrete sample space whose cumulative probabilities these steps record.
 

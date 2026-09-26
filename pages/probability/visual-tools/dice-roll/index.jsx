@@ -159,9 +159,9 @@ For mathematical foundations of convergence and the Law of Large Numbers, see **
       title: `Related Probability Tools and Concepts`,
       content: `[Coin Toss Simulators](!/probability/visual-tools/coin-toss) - Explore probability with binary outcomes, including Law of Large Numbers demonstrations and sample space analysis.
 
-**Discrete Uniform Distribution Calculators** - Calculate exact probabilities for uniform distributions like fair dice with equal outcome probabilities.
+[Discrete Uniform Distribution Calculators](!/probability/visual-tools/distributions/uniform-discrete) - Calculate exact probabilities for uniform distributions like fair dice with equal outcome probabilities.
 
-**Binomial Distribution Calculators** - Analyze repeated independent trials, which dice rolls exemplify when tracking specific outcomes.
+[Binomial Distribution Calculators](!/probability/visual-tools/distributions/binomial) - Analyze repeated independent trials, which dice rolls exemplify when tracking specific outcomes.
 
 **Discrete Distribution Visualizers** - Compare [probability mass functions](!/probability/probability-function) across different discrete probability models.
 

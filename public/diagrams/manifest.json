@@ -1,5 +1,29 @@
 [
   {
+    "id": "canonical-forms",
+    "title": "How simple the matrix can be made",
+    "source": "/linear-algebra/transformations/basis-change",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 973,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "characteristic-polynomial",
+    "title": "What the polynomial encodes",
+    "source": "/linear-algebra/eigen/characteristic-equation",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1413,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "cholesky-outcomes",
     "title": "What the algorithm does with each matrix",
     "source": "/linear-algebra/decompositions/cholesky",
@@ -12,12 +36,73 @@
     ]
   },
   {
+    "id": "cofactor-chain",
+    "title": "The cofactor construction chain",
+    "source": "/linear-algebra/determinants/cofactors",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1078,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "combination-forms",
+    "title": "One construction, chosen coefficients",
+    "source": "/linear-algebra/vectors/linear-combinations",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1134,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "complex-eigenvalues",
+    "title": "Reading a conjugate pair",
+    "source": "/linear-algebra/eigen/complex",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1343,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
     "id": "cross-product-laws",
     "title": "Properties of the cross product",
     "source": "/linear-algebra/vectors/cross-product",
     "section": "linear-algebra",
     "width": 840,
     "height": 1412,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "definiteness-classes",
+    "title": "Definiteness, read from the signs",
+    "source": "/linear-algebra/decompositions/spectral",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 776,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "definiteness-tests",
+    "title": "Four criteria, four prices",
+    "source": "/linear-algebra/decompositions/cholesky",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 731,
     "formats": [
       "png",
       "pdf"
@@ -85,12 +170,36 @@
     ]
   },
   {
+    "id": "diagonalization-kinds",
+    "title": "Ordinary and spectral, compared",
+    "source": "/linear-algebra/eigen/diagonalization",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 576,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "dot-product-laws",
     "title": "Properties of the dot product",
     "source": "/linear-algebra/vectors/dot-product",
     "section": "linear-algebra",
     "width": 840,
     "height": 1366,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "elimination-stages",
+    "title": "Gaussian elimination, stage by stage",
+    "source": "/linear-algebra/linear-systems/gaussian-elimination",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 981,
     "formats": [
       "png",
       "pdf"
@@ -127,6 +236,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 1072,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "image-kernel-pairs",
+    "title": "Image and kernel, side by side",
+    "source": "/linear-algebra/transformations/image-kernel",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1195,
     "formats": [
       "png",
       "pdf"
@@ -182,12 +303,36 @@
     ]
   },
   {
+    "id": "least-squares-methods",
+    "title": "Four ways to compute the same solution",
+    "source": "/linear-algebra/orthogonality/least-squares",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 917,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "linear-map-combinations",
     "title": "How linear maps combine",
     "source": "/linear-algebra/transformations/properties",
     "section": "linear-algebra",
     "width": 840,
     "height": 1389,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "lu-factors",
+    "title": "What each factor holds",
+    "source": "/linear-algebra/decompositions/lower-upper",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 648,
     "formats": [
       "png",
       "pdf"
@@ -206,12 +351,36 @@
     ]
   },
   {
+    "id": "matrix-powers-by-hand",
+    "title": "Four powers, computed the long way",
+    "source": "/linear-algebra/eigen/diagonalization",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 685,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "matrix-product-laws",
     "title": "Which laws survive the product",
     "source": "/linear-algebra/matrix/operations",
     "section": "linear-algebra",
     "width": 840,
     "height": 1620,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "matrix-type-profiles",
+    "title": "Eleven types and what each one forces",
+    "source": "/linear-algebra/matrix/types",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1927,
     "formats": [
       "png",
       "pdf"
@@ -230,12 +399,84 @@
     ]
   },
   {
+    "id": "orthonormal-operations",
+    "title": "Operations in an orthonormal basis",
+    "source": "/linear-algebra/orthogonality/orthogonal-sets",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1092,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "product-comparison",
+    "title": "Dot against cross",
+    "source": "/linear-algebra/vectors/cross-product",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 576,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "product-interpretations",
+    "title": "Four ways to read the same product",
+    "source": "/linear-algebra/matrix/operations",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1003,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "projection-formulas",
+    "title": "Four formulas, one operation",
+    "source": "/linear-algebra/orthogonality/projections",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1000,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "projection-properties",
     "title": "Properties of orthogonal projections",
     "source": "/linear-algebra/orthogonality/projections",
     "section": "linear-algebra",
     "width": 840,
     "height": 1531,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "qr-forms",
+    "title": "Thin QR and full QR",
+    "source": "/linear-algebra/decompositions/qr",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 557,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "qr-from-gram-schmidt",
+    "title": "Where each factor comes from",
+    "source": "/linear-algebra/orthogonality/gram-schmidt",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 557,
     "formats": [
       "png",
       "pdf"
@@ -260,6 +501,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 1711,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "reflection-cases",
+    "title": "Reflections in the plane",
+    "source": "/linear-algebra/transformations/geometric",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1009,
     "formats": [
       "png",
       "pdf"
@@ -302,6 +555,30 @@
     ]
   },
   {
+    "id": "special-inverses",
+    "title": "When structure makes the inverse cheap",
+    "source": "/linear-algebra/matrix/inverse",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1299,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "special-ranks",
+    "title": "Ranks readable from structure",
+    "source": "/linear-algebra/matrix/rank",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1118,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "spectral-properties",
     "title": "Spectral properties at a glance",
     "source": "/linear-algebra/eigen/properties",
@@ -320,6 +597,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 1153,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "spiral-regimes",
+    "title": "Three regimes, set by the modulus",
+    "source": "/linear-algebra/eigen/complex",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 804,
     "formats": [
       "png",
       "pdf"
@@ -350,6 +639,54 @@
     ]
   },
   {
+    "id": "subspace-recognition",
+    "title": "Subspace or not, and which clause decides",
+    "source": "/linear-algebra/vector-spaces/subspaces",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1271,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "subspace-sums",
+    "title": "Sum and direct sum",
+    "source": "/linear-algebra/vector-spaces/dimension",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 704,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "subspaces-by-type",
+    "title": "The four subspaces, by matrix type",
+    "source": "/linear-algebra/vector-spaces/fundamental-spaces",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 648,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "svd-forms",
+    "title": "Three forms, one factorization",
+    "source": "/linear-algebra/decompositions/svd",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 875,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "svd-readings",
     "title": "What the SVD reveals",
     "source": "/linear-algebra/decompositions/svd",
@@ -362,12 +699,36 @@
     ]
   },
   {
+    "id": "system-shapes",
+    "title": "What the shape of A predicts",
+    "source": "/linear-algebra/linear-systems/solvability",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 712,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "trace-properties",
     "title": "Trace properties at a glance",
     "source": "/linear-algebra/matrix/trace",
     "section": "linear-algebra",
     "width": 840,
     "height": 1560,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "transformation-dictionary",
+    "title": "Transformation ↔ matrix",
+    "source": "/linear-algebra/transformations/matrix-representation",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 1232,
     "formats": [
       "png",
       "pdf"

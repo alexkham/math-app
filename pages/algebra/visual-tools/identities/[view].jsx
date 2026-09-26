@@ -197,11 +197,11 @@ The right panel shows the four written steps. Each step is greyed out until reac
           title: `Related Concepts and Tools`,
           content: `**Algebraic Identities** — Hub for all four identity visualizers including this one.
 
-**Square of a Difference** — Visual proof of $(a-b)^2 = a^2 - 2ab + b^2$. Same identity family with a sign flip.
+[Square of a Difference](!/algebra/visual-tools/identities/square-of-difference) — Visual proof of $(a-b)^2 = a^2 - 2ab + b^2$. Same identity family with a sign flip.
 
-**Square of a Trinomial** — Extension to three terms: $(a+b+c)^2$ as a 3×3 grid.
+[Square of a Trinomial](!/algebra/visual-tools/identities/square-of-trinomial) — Extension to three terms: $(a+b+c)^2$ as a 3×3 grid.
 
-**Difference of Squares** — Factors $a^2 - b^2$ into $(a+b)(a-b)$ via slice and rearrange.
+[Difference of Squares](!/algebra/visual-tools/identities/difference-of-squares) — Factors $a^2 - b^2$ into $(a+b)(a-b)$ via slice and rearrange.
 
 [Powers Table](!/algebra/visual-tools/powers-table) — Reference table of integer [powers](!/algebra/powers), useful for computing $(a+b)^2$ at specific values.
 
@@ -381,11 +381,11 @@ The right panel shows the four written steps with the current step highlighted a
           title: `Related Concepts and Tools`,
           content: `**Algebraic Identities** — Hub for all four identity visualizers.
 
-**Square of a Sum** — Companion proof of $(a+b)^2 = a^2 + 2ab + b^2$. Same form, opposite sign on the middle term.
+[Square of a Sum](!/algebra/visual-tools/identities/square-of-sum) — Companion proof of $(a+b)^2 = a^2 + 2ab + b^2$. Same form, opposite sign on the middle term.
 
-**Difference of Squares** — Factors $a^2 - b^2$ into $(a+b)(a-b)$. Useful next step after this identity.
+[Difference of Squares](!/algebra/visual-tools/identities/difference-of-squares) — Factors $a^2 - b^2$ into $(a+b)(a-b)$. Useful next step after this identity.
 
-**Square of a Trinomial** — Extension to three terms: $(a+b+c)^2$.
+[Square of a Trinomial](!/algebra/visual-tools/identities/square-of-trinomial) — Extension to three terms: $(a+b+c)^2$.
 
 **Polynomials** — Theory of polynomial expansion, where this identity is one of the standard tools.
 
@@ -567,11 +567,11 @@ The right panel lists the four written steps with the current step highlighted.`
           title: `Related Concepts and Tools`,
           content: `**Algebraic Identities** — Hub for all four identity visualizers.
 
-**Square of a Sum** — The 2×2 case of the same dissection logic. Recommended starting point if the trinomial proof feels dense.
+[Square of a Sum](!/algebra/visual-tools/identities/square-of-sum) — The 2×2 case of the same dissection logic. Recommended starting point if the trinomial proof feels dense.
 
-**Square of a Difference** — The signed companion: $(a-b)^2 = a^2 - 2ab + b^2$.
+[Square of a Difference](!/algebra/visual-tools/identities/square-of-difference) — The signed companion: $(a-b)^2 = a^2 - 2ab + b^2$.
 
-**Difference of Squares** — Factors $a^2 - b^2$. Same family of two-term identities.
+[Difference of Squares](!/algebra/visual-tools/identities/difference-of-squares) — Factors $a^2 - b^2$. Same family of two-term identities.
 
 **Polynomials** — Theory of polynomial expansion, in which the trinomial square is a standard tool for higher-degree manipulations.
 
@@ -753,11 +753,11 @@ The right panel lists the four written steps with the current step highlighted a
           title: `Related Concepts and Tools`,
           content: `**Algebraic Identities** — Hub for all four identity visualizers.
 
-**Square of a Sum** — Visual proof of $(a+b)^2 = a^2 + 2ab + b^2$. Companion identity in the same family.
+[Square of a Sum](!/algebra/visual-tools/identities/square-of-sum) — Visual proof of $(a+b)^2 = a^2 + 2ab + b^2$. Companion identity in the same family.
 
-**Square of a Difference** — Visual proof of $(a-b)^2 = a^2 - 2ab + b^2$. The minus-sign companion to [square of a sum](!/algebra/polynomials/operations#4).
+[Square of a Difference](!/algebra/visual-tools/identities/square-of-difference) — Visual proof of $(a-b)^2 = a^2 - 2ab + b^2$. The minus-sign companion to [square of a sum](!/algebra/polynomials/operations#4).
 
-**Square of a Trinomial** — Extension to three terms.
+[Square of a Trinomial](!/algebra/visual-tools/identities/square-of-trinomial) — Extension to three terms.
 
 **Factoring** — Theory of polynomial factoring, where the difference of squares is one of the standard patterns to recognise.
 

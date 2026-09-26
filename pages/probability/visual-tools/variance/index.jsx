@@ -208,7 +208,9 @@ Variance is a fundamental building block in statistics. Mastering it through int
 
 [Coin Toss Simulator](!/probability/visual-tools/coin-toss) — the number of heads in $n$ tosses, with variance $np(1 - p)$.
 
-[Distribution Explorers](!/probability/visual-tools/distributions) — each family's variance as a function of its parameters.`,
+[Distribution Explorers](!/probability/visual-tools/distributions) — each family's variance as a function of its parameters.
+
+[Chebyshev Inequality Visualizer](!/probability/visual-tools/inequalities/chebyshev) — How far a variable can stray from its mean given only its variance: the bound the variance controls.`,
       before: ``,
       after: ``,
       link: '',

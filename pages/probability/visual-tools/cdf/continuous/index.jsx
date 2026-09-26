@@ -141,11 +141,11 @@ For detailed comparison of [probability functions](!/probability/random-variable
 
 [Discrete Distribution CDFs](!/probability/visual-tools/cdf/discrete) - Explore cumulative distribution functions for [discrete random variables](!/probability/random-variables) where CDFs are step functions instead of smooth curves.
 
-**Normal Distribution Tables** - Standard normal (Z) tables showing cumulative probabilities for the standard normal distribution.
+[Normal Distribution Tables](!/probability/visual-tools/distributions/normal) - Standard normal (Z) tables showing cumulative probabilities for the standard normal distribution.
 
 **Probability Density Function Theory** - Understand the mathematical foundation of continuous probability functions and integration.
 
-**Continuous Distributions Overview** - Comprehensive guide to continuous probability distributions including when to use each type.
+**Continuous Distributions Overview** - Comprehensive guide to [continuous probability distributions](!/probability/visual-tools/probability-function/continuous) including when to use each type.
 
 [Distribution Explorers](!/probability/visual-tools/distributions) - Each continuous family with its density and parameters, the curves these CDFs accumulate.
 

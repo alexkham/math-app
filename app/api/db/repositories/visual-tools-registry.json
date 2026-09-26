@@ -28,9 +28,9 @@
       "combinatoricsWritten": "2026-09-22",
       "linear-algebraWritten": "2026-09-22",
       "set-theoryWritten": "2026-09-23",
-      "algebraWritten": "2026-09-25",
+      "algebraWritten": "2026-09-26",
       "arithmeticWritten": "2026-09-23",
-      "probabilityWritten": "2026-09-25"
+      "probabilityWritten": "2026-09-26"
     }
   },
   "tools": {
@@ -16833,7 +16833,7 @@
           "surface": "Completing the Square Visualizer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "algebra-inequality",
@@ -16841,7 +16841,7 @@
           "surface": "Inequalities Visualizer",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "algebra-polynomial-multiplication",
@@ -16849,7 +16849,7 @@
           "surface": "Polynomial Multiplication Visualizer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         }
       ]
     },
@@ -17582,7 +17582,7 @@
           "surface": "Completing the Square Visualizer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "algebra-equation",
@@ -17590,7 +17590,7 @@
           "surface": "Equation Visualizer",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "algebra-polynomial-multiplication",
@@ -17598,7 +17598,7 @@
           "surface": "Polynomial Multiplication Visualizer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         }
       ]
     },
@@ -18258,7 +18258,7 @@
           "surface": "Equation Visual Explorer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "algebra-inequality",
@@ -18266,7 +18266,7 @@
           "surface": "Inequality Visual Explorer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "algebra-polynomial-multiplication",
@@ -18274,7 +18274,7 @@
           "surface": "Polynomial Multiplication Visualizer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         }
       ]
     },
@@ -18735,7 +18735,7 @@
           "surface": "Binomial Coefficient Visualizer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "algebra-completing-square",
@@ -18743,7 +18743,7 @@
           "surface": "Completing the square",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "algebra-equation",
@@ -18751,7 +18751,7 @@
           "surface": "Equation Visual Explorer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "algebra-powers-table",
@@ -18759,7 +18759,7 @@
           "surface": "Powers Table",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         }
       ]
     },
@@ -19218,7 +19218,7 @@
           "surface": "Completing the Square Visualizer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "algebra-polynomial-multiplication",
@@ -19226,7 +19226,7 @@
           "surface": "Polynomial multiplication",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "algebra-powers-table",
@@ -19234,7 +19234,7 @@
           "surface": "Powers Table",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         }
       ]
     },
@@ -19529,7 +19529,7 @@
           "surface": "Binomial Coefficient Visualizer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "algebra-polynomial-multiplication",
@@ -19537,7 +19537,7 @@
           "surface": "Polynomial Multiplication Visualizer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         }
       ]
     },
@@ -19969,7 +19969,31 @@
           "surface": "Powers Table",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-25"
+          "added": "2026-09-26"
+        },
+        {
+          "key": "algebra-identities-difference-of-squares",
+          "fromSection": "using-the-controls",
+          "surface": "Difference of Squares",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
+        },
+        {
+          "key": "algebra-identities-square-of-difference",
+          "fromSection": "using-the-controls",
+          "surface": "Square of a Difference",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
+        },
+        {
+          "key": "algebra-identities-square-of-trinomial",
+          "fromSection": "using-the-controls",
+          "surface": "Square of a Trinomial",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
         }
       ]
     },
@@ -20238,7 +20262,32 @@
           "reason": "Not planted in \"using-the-controls\": every occurrence sits inside bold, math, code or an existing link; linking would require rewriting prose."
         }
       ],
-      "relatedTools": []
+      "relatedTools": [
+        {
+          "key": "algebra-identities-difference-of-squares",
+          "fromSection": "using-the-controls",
+          "surface": "Difference of Squares",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
+        },
+        {
+          "key": "algebra-identities-square-of-sum",
+          "fromSection": "using-the-controls",
+          "surface": "Square of a Sum",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
+        },
+        {
+          "key": "algebra-identities-square-of-trinomial",
+          "fromSection": "using-the-controls",
+          "surface": "Square of a Trinomial",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
+        }
+      ]
     },
     "algebra-identities-square-of-trinomial": {
       "slug": "identities/square-of-trinomial",
@@ -20564,7 +20613,31 @@
           "surface": "Powers Table",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-25"
+          "added": "2026-09-26"
+        },
+        {
+          "key": "algebra-identities-difference-of-squares",
+          "fromSection": "using-the-controls",
+          "surface": "Difference of Squares",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
+        },
+        {
+          "key": "algebra-identities-square-of-difference",
+          "fromSection": "using-the-controls",
+          "surface": "Square of a Difference",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
+        },
+        {
+          "key": "algebra-identities-square-of-sum",
+          "fromSection": "using-the-controls",
+          "surface": "Square of a Sum",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
         }
       ]
     },
@@ -20968,7 +21041,31 @@
           "surface": "Powers Table",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-25"
+          "added": "2026-09-26"
+        },
+        {
+          "key": "algebra-identities-square-of-difference",
+          "fromSection": "using-the-controls",
+          "surface": "Square of a Difference",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
+        },
+        {
+          "key": "algebra-identities-square-of-sum",
+          "fromSection": "using-the-controls",
+          "surface": "Square of a Sum",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
+        },
+        {
+          "key": "algebra-identities-square-of-trinomial",
+          "fromSection": "using-the-controls",
+          "surface": "Square of a Trinomial",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
         }
       ]
     },
@@ -43135,7 +43232,7 @@
           "surface": "Coin Toss Simulator",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-dice-roll",
@@ -43143,7 +43240,7 @@
           "surface": "Dice Roll Simulator",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-distributions",
@@ -43151,7 +43248,7 @@
           "surface": "Distribution Explorers",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-expected-value",
@@ -43159,7 +43256,15 @@
           "surface": "Expected Value Visualizers",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
+        },
+        {
+          "key": "probability-inequalities-chebyshev",
+          "fromSection": "related-concepts",
+          "surface": "Chebyshev Inequality Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-26"
         }
       ]
     },
@@ -43596,7 +43701,7 @@
           "surface": "conditional probability visualizations",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-contingency-tables",
@@ -43604,7 +43709,7 @@
           "surface": "Contingency Tables Explorer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-venn-diagrams",
@@ -43612,7 +43717,7 @@
           "surface": "Venn Diagram Probability Tools",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         }
       ]
     },
@@ -44451,7 +44556,7 @@
           "surface": "Discrete CDF Explorer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-coin-toss",
@@ -44459,7 +44564,7 @@
           "surface": "Coin Toss Simulators",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-expected-value",
@@ -44467,7 +44572,7 @@
           "surface": "Expected Value Visualizers",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-variance",
@@ -44475,7 +44580,23 @@
           "surface": "Variance Visualizer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
+        },
+        {
+          "key": "probability-distributions-binomial",
+          "fromSection": "related-tools-and-concepts",
+          "surface": "Binomial Distribution Calculators",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
+        },
+        {
+          "key": "probability-distributions-uniform-discrete",
+          "fromSection": "related-tools-and-concepts",
+          "surface": "Discrete Uniform Distribution Calculators",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
         }
       ]
     },
@@ -44816,7 +44937,7 @@
           "surface": "Discrete CDF Explorer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-dice-roll",
@@ -44824,7 +44945,7 @@
           "surface": "Dice Roll Simulators",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-distributions",
@@ -44832,7 +44953,7 @@
           "surface": "Probability Distribution Explorers",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-expected-value",
@@ -44840,7 +44961,7 @@
           "surface": "Expected Value Visualizers",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-variance",
@@ -44848,7 +44969,15 @@
           "surface": "Variance Visualizer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
+        },
+        {
+          "key": "probability-distributions-binomial",
+          "fromSection": "related-tools-and-concepts",
+          "surface": "Binomial Distribution Calculator",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
         }
       ]
     },
@@ -45148,7 +45277,7 @@
           "surface": "Venn Diagrams",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         }
       ]
     },
@@ -45479,7 +45608,7 @@
           "surface": "Continuous Distribution CDFs",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-coin-toss",
@@ -45487,7 +45616,7 @@
           "surface": "Coin Toss Simulator",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-dice-roll",
@@ -45495,7 +45624,7 @@
           "surface": "Dice Roll Simulator",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-probability-function",
@@ -45503,7 +45632,15 @@
           "surface": "PMF Visualizers",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
+        },
+        {
+          "key": "probability-probability-function-discrete",
+          "fromSection": "related-tools-and-concepts",
+          "surface": "discrete probability distributions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
         }
       ]
     },
@@ -45921,7 +46058,7 @@
           "surface": "Discrete Distribution CDFs",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-distributions",
@@ -45929,7 +46066,7 @@
           "surface": "Distribution Explorers",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-probability-function",
@@ -45937,7 +46074,7 @@
           "surface": "PDF Visualizers",
           "method": "scan",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
         },
         {
           "key": "probability-variance",
@@ -45945,7 +46082,23 @@
           "surface": "Variance Visualizer",
           "method": "added-sentence",
           "status": "linked",
-          "added": "2026-09-23"
+          "added": "2026-09-26"
+        },
+        {
+          "key": "probability-distributions-normal",
+          "fromSection": "related-tools-and-concepts",
+          "surface": "Normal Distribution Tables",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
+        },
+        {
+          "key": "probability-probability-function-continuous",
+          "fromSection": "related-tools-and-concepts",
+          "surface": "continuous probability distributions",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-26"
         }
       ]
     },

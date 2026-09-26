@@ -160,7 +160,7 @@ For detailed mathematical treatment of convergence and the Law of Large Numbers,
       title: `Related Probability Tools and Concepts`,
       content: `[Dice Roll Simulators](!/probability/visual-tools/dice-roll) - Explore probability with six-sided and custom dice, including sum distributions and multiple dice experiments.
 
-**Binomial Distribution Calculator** - Calculate exact probabilities for n independent trials with fixed success probability, the mathematical model underlying coin tosses.
+[Binomial Distribution Calculator](!/probability/visual-tools/distributions/binomial) - Calculate exact probabilities for n independent trials with fixed success probability, the mathematical model underlying coin tosses.
 
 [Expected Value Visualizers](!/probability/visual-tools/expected-value) - Understand how probability weights combine with outcomes to determine long-run averages.
 
