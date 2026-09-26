@@ -9,6 +9,8 @@
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 // import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 // import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderCurveFeatureV2 from '@/app/utils/illustrations/trigonometry/curves/curveFeature.v2'
 
 
 // export async function getStaticProps(){
@@ -1718,8 +1720,101 @@ The resulting functions — $\\arcsin$, $\\arccos$, $\\arctan$, and their recipr
 
 
 
+  // Demonstration units: figure + explanation panel in one frame, built here
+  // and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  // Authored figures. curveFeature.v2 draws them; these are data only.
+  // Package doc: app/utils/illustrations/trigonometry/curves/curveFeature.v2.md
+  const cfWhyRestrict = {
+    kind: 'lineTest', fn: 'sin',
+    svgTitle: 'Sine fails the horizontal line test until its domain is cut',
+    xRange: [-2 * Math.PI, 2 * Math.PI], yRange: [-1.7, 1.7], cut: 0.5, cutLabel: 'y = \u00bd',
+    crossings: [Math.PI / 6, 5 * Math.PI / 6, Math.PI / 6 - 2 * Math.PI, 5 * Math.PI / 6 - 2 * Math.PI],
+    kept: Math.PI / 6,
+    xTicks: [-2 * Math.PI, -Math.PI, Math.PI, 2 * Math.PI],
+    ghostNote: 'four crossings here', ghostNoteAt: -3 * Math.PI / 2,
+    keptNote: 'restricted to [\u2212\u03c0/2, \u03c0/2] \u00b7 one crossing',
+  };
+  const cfArcsine = {
+    kind: 'reflect', fn: 'sin', size: 300, limit: 2.0,
+    svgTitle: 'Arcsine is the restricted sine reflected across y = x',
+    fnLabel: 'sin', fnLabelAt: 1.2, fnLabelDir: 'se',
+    invLabel: 'arcsin', invLabelAt: 0.95, invLabelDir: 'nw',
+    note: 'the same curve with x and y exchanged',
+  };
+  const cfArccosine = {
+    kind: 'reflect', fn: 'cos', size: 310, limit: 3.45,
+    svgTitle: 'Arccosine is the restricted cosine reflected across y = x',
+    fnLabel: 'cos', fnLabelAt: 2.75, fnLabelDir: 'se',
+    invLabel: 'arccos', invLabelAt: 2.6, invLabelDir: 'ne',
+    note: 'restricted to [0, \u03c0], then exchanged',
+  };
+  const cfArctangent = {
+    kind: 'reflect', fn: 'tan', size: 300, limit: 2.45,
+    svgTitle: 'Arctangent is the restricted tangent reflected across y = x',
+    fnLabel: 'tan', fnLabelAt: 1.05, fnLabelDir: 'w',
+    invLabel: 'arctan', invLabelAt: 1.35, invLabelDir: 'se',
+    note: 'vertical asymptotes become horizontal ones',
+  };
+  const cfCompositionFold = {
+    kind: 'fold', fn: 'sin',
+    svgTitle: 'arcsin(sin x) folds an out-of-range input back into the restricted range',
+    xRange: [-0.35, Math.PI + 0.35], yRange: [-1.25, 1.25],
+    restricted: [-Math.PI / 2, Math.PI / 2],
+    input: 5 * Math.PI / 6, output: Math.PI / 6,
+    carryLabel: 'both give sin = \u00bd',
+    inLabel: '5\u03c0/6  in', outLabel: '\u03c0/6  out', wrongLabel: 'not 5\u03c0/6',
+    title: 'arcsin(sin x) folds the input back',
+  };
+  const cfInverseRanges = {
+    kind: 'ranges', panelWidth: 190, panelHeight: 232, gap: 14, limit: 3.4,
+    svgTitle: 'Each inverse takes its parent range and returns its parent domain',
+    panels: [
+      { fn: 'sin', title: 'arcsin', domain: [-1, 1], range: [-Math.PI / 2, Math.PI / 2],
+        domainLabel: 'takes x in [\u22121, 1]', rangeLabel: 'gives y in [\u2212\u03c0/2, \u03c0/2]' },
+      { fn: 'cos', title: 'arccos', domain: [-1, 1], range: [0, Math.PI],
+        domainLabel: 'takes x in [\u22121, 1]', rangeLabel: 'gives y in [0, \u03c0]' },
+      { fn: 'tan', title: 'arctan', domain: [-2.2, 2.2], range: [-Math.PI / 2, Math.PI / 2],
+        domainLabel: 'takes any x', rangeLabel: 'gives y in (\u2212\u03c0/2, \u03c0/2)' },
+    ],
+  };
+
+  const demoUnits = {
+    whyRestrict: demoUnitFrame({
+      svg: renderCurveFeatureV2(cfWhyRestrict),
+      caption: 'One line, four crossings',
+      text: 'A horizontal line meets the full sine curve at infinitely many points, four of them in the stretch drawn here. Inside the shaded interval it meets the curve exactly once &#8212; which is what makes an inverse possible there and nowhere wider.',
+    }),
+    arcsine: demoUnitFrame({
+      svg: renderCurveFeatureV2(cfArcsine),
+      caption: 'Sine and arcsine across y = x',
+      text: 'Arcsine is not a new curve. It is the restricted sine with its two coordinates exchanged, which is what reflecting across the dashed line does. The endpoint at (&#960;/2, 1) becomes (1, &#960;/2).',
+    }),
+    arccosine: demoUnitFrame({
+      svg: renderCurveFeatureV2(cfArccosine),
+      caption: 'Cosine and arccosine across y = x',
+      text: 'The same construction on a different interval. Cosine is cut to [0, &#960;], where it falls steadily from 1 to &#8722;1, and the reflection of that piece is arccosine. Note the outputs now run from 0 to &#960; rather than either side of zero.',
+    }),
+    arctangent: demoUnitFrame({
+      svg: renderCurveFeatureV2(cfArctangent),
+      caption: 'Tangent and arctangent across y = x',
+      text: 'Reflection exchanges the asymptotes too. Tangent\'s vertical asymptotes at &#177;&#960;/2 become arctangent\'s horizontal ones, which is why arctangent accepts every real number and still never reaches &#177;&#960;/2.',
+    }),
+    compositionFold: demoUnitFrame({
+      svg: renderCurveFeatureV2(cfCompositionFold),
+      caption: '5&#960;/6 in, &#960;/6 out',
+      text: 'Sine sends both angles to the same value, so arcsine cannot tell them apart &#8212; and by definition it answers with the one inside its own range. The input is not recovered; it is folded back.',
+    }),
+    inverseRanges: demoUnitFrame({
+      svg: renderCurveFeatureV2(cfInverseRanges),
+      caption: 'What each inverse takes and gives',
+      text: 'Read the horizontal bar as what goes in and the vertical bar as what comes out. Each is the reverse of its parent function\'s pair, which is the whole content of the word inverse.',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj6Table,
@@ -1742,6 +1837,7 @@ The resulting functions — $\\arcsin$, $\\arccos$, $\\arctan$, and their recipr
 
 export default function InverseFunctionsPage({
   seoData,
+  demoUnits,
   sectionsContent,
   introContent,
   obj6Table,
@@ -1770,6 +1866,8 @@ export default function InverseFunctionsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-whyRestrict'} dangerouslySetInnerHTML={{ __html: demoUnits.whyRestrict }} />,
+          `The interval chosen is a convention, but the need to choose one is not.`,
         ]
     },
     {
@@ -1778,6 +1876,8 @@ export default function InverseFunctionsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-arcsine'} dangerouslySetInnerHTML={{ __html: demoUnits.arcsine }} />,
+          `Every exact value of $\arcsin$ can therefore be read off the sine table backwards.`,
         ]
     },
     {
@@ -1786,6 +1886,8 @@ export default function InverseFunctionsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-arccosine'} dangerouslySetInnerHTML={{ __html: demoUnits.arccosine }} />,
+          `This is why $\arccos$ never returns a negative angle, while $\arcsin$ freely does.`,
         ]
     },
     {
@@ -1794,6 +1896,8 @@ export default function InverseFunctionsPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-arctangent'} dangerouslySetInnerHTML={{ __html: demoUnits.arctangent }} />,
+          `That boundedness is what makes $\arctan$ the best behaved of the three.`,
         ]
     },
     {
@@ -1841,6 +1945,8 @@ export default function InverseFunctionsPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-compositionFold'} dangerouslySetInnerHTML={{ __html: demoUnits.compositionFold }} />,
+          `The same caution applies to $\arccos(\cos x)$ and $\arctan(\tan x)$ on their own intervals.`,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
         ]
@@ -1851,6 +1957,8 @@ export default function InverseFunctionsPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-inverseRanges'} dangerouslySetInnerHTML={{ __html: demoUnits.inverseRanges }} />,
+          `Reading a graph in this direction is the quickest check that an inverse has been applied correctly.`,
         ]
     },
     // NEW capstone section: obj10

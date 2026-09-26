@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sinusoidal parameter explorer — full tool demo</title>
+<style>
+  body { margin: 0; padding: 28px 16px; background: #ffffff; font-family: system-ui, -apple-system, sans-serif; color: #1e3a5f; }
+  button { font-family: inherit; cursor: pointer; }
+  input[type=range] { accent-color: #4F46E5; }
+  .card { max-width: 1100px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px;
+          box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 8px 24px rgba(15,23,42,.05); padding: 22px; }
+  .tabs { display: flex; gap: 4px; padding: 4px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 16px; }
+  .tab { flex: 1; padding: 10px 12px; border: 1px solid transparent; border-radius: 9px; background: transparent;
+         font-size: .95rem; color: #64748b; }
+  .tab.on { background: #ffffff; border-color: #e2e8f0; color: #4F46E5; font-weight: 500; }
+  .idbar { font-family: Georgia, serif; font-size: 1.5rem; text-align: center; padding: 14px 0 16px; }
+  .lbl { font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: #94a3b8; margin: 0 0 8px; }
+  .panel { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px 20px; }
+  .srow { display: flex; align-items: center; gap: 12px; padding: 5px 4px; }
+  .srow span.sym { font-family: Georgia, serif; font-style: italic; font-size: 1rem; min-width: 14px; }
+  .srow span.val { font-size: .9rem; font-weight: 500; min-width: 58px; text-align: right; font-variant-numeric: tabular-nums; }
+  .srow input { flex: 1; }
+  .grid { display: grid; gap: 12px; }
+  .mcard { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 16px; }
+  .mcard p.k { font-size: .8rem; color: #64748b; margin: 0 0 4px; font-style: italic; }
+  .mcard p.v { font-size: 1.35rem; font-weight: 500; margin: 0; font-variant-numeric: tabular-nums; color: #4F46E5; }
+  .steps { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .steps button { padding: 8px 14px; border: 1px solid #cbd5e1; border-radius: 8px; background: #ffffff; color: #1e3a5f; font-size: .88rem; }
+  .steps button:disabled { color: #cbd5e1; border-color: #e2e8f0; cursor: default; }
+  .note { font-size: .88rem; line-height: 1.5; color: #64748b; margin: 0; }
+  .warn { font-size: .88rem; line-height: 1.5; color: #DC2626; margin: 10px 0 0; }
+  .sec { margin-bottom: 18px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="tabs" id="tabs"></div>
+  <div class="idbar" id="idbar"></div>
+
+  <div class="sec">
+    <p class="lbl">Guided walk</p>
+    <div class="steps">
+      <button id="prev" type="button">&larr; Back</button>
+      <button id="next" type="button">Forward &rarr;</button>
+      <button id="reset" type="button">Reset to y = sin x</button>
+      <span id="stepname" style="font-size:.9rem;font-weight:500"></span>
+    </div>
+    <div class="panel"><p class="note" id="stepnote"></p></div>
+  </div>
+
+  <div id="plot" class="sec"></div>
+
+  <div class="sec grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="panel">
+      <p class="lbl" style="margin-bottom:4px">Inside the function — acts on the input</p>
+      <p class="note" style="margin:0 0 10px">B and C work on x, so they change the wave horizontally.</p>
+      <div class="srow"><span class="sym" style="color:#B45309">B</span><input type="range" id="sB" min="0.25" max="4" step="0.25" value="1"><span class="val" id="oB" style="color:#B45309">1.00</span></div>
+      <div class="srow"><span class="sym" style="color:#DC2626">C</span><input type="range" id="sC" min="-24" max="24" step="1" value="0"><span class="val" id="oC" style="color:#DC2626">0</span></div>
+    </div>
+    <div class="panel">
+      <p class="lbl" style="margin-bottom:4px">Outside the function — acts on the output</p>
+      <p class="note" style="margin:0 0 10px">A and D work on the value of the function, so they change it vertically.</p>
+      <div class="srow"><span class="sym" style="color:#16A34A">A</span><input type="range" id="sA" min="-3" max="3" step="0.1" value="1"><span class="val" id="oA" style="color:#16A34A">1.0</span></div>
+      <div class="srow"><span class="sym" style="color:#64748b">D</span><input type="range" id="sD" min="-3" max="3" step="0.1" value="0"><span class="val" id="oD" style="color:#64748b">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <p class="lbl">Read off the wave</p>
+    <div class="grid" id="metrics" style="grid-template-columns: repeat(6, 1fr);"></div>
+    <p class="warn" id="warn"></p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var C = { deep:'#4F46E5', mid:'#818CF8', amp:'#16A34A', per:'#B45309', pha:'#DC2626',
+            text:'#1e3a5f', muted:'#64748b', faint:'#94a3b8', hair:'#cbd5e1', soft:'#e2e8f0', panel:'#f8fafc' };
+
+  var FNS = {
+    sin: { label:'sine',      f: Math.sin, periodic: 2*Math.PI, bounded: true  },
+    cos: { label:'cosine',    f: Math.cos, periodic: 2*Math.PI, bounded: true  },
+    tan: { label:'tangent',   f: Math.tan, periodic: Math.PI,   bounded: false },
+    cot: { label:'cotangent', f: function (t) { return 1 / Math.tan(t); }, periodic: Math.PI, bounded: false }
+  };
+  var ORDER = ['sin', 'cos', 'tan', 'cot'];
+
+  var STEPS = [
+    { name:'The general form',
+      note:'Every sinusoid is y = A sin(Bx − C) + D. Four numbers, four separate jobs: A sets how tall, B how often, C where it starts, D where the middle sits. Change one and only one feature of the picture moves.',
+      st:{ fn:'sin', A:1, B:1, Cn:0, D:0 } },
+    { name:'A — amplitude',
+      note:'A stretches the wave away from its midline. The distance from midline to peak is |A|, so A = 3 and A = −3 give the same amplitude — the negative one is the same wave flipped across the midline.',
+      st:{ fn:'sin', A:3, B:1, Cn:0, D:0 } },
+    { name:'A negative — the reflection',
+      note:'With A = −2 the curve is the A = 2 wave turned upside down about the midline. The amplitude readout stays |A| = 2; it never goes negative. The dashed ghost is the positive wave it was reflected from.',
+      st:{ fn:'sin', A:-2, B:1, Cn:0, D:0 } },
+    { name:'B — period',
+      note:'B multiplies x, so it squeezes the horizontal axis. The period is 2π/|B|: with B = 2 a full cycle takes π, and twice as many cycles fit in the same window.',
+      st:{ fn:'sin', A:1, B:2, Cn:0, D:0 } },
+    { name:'C — phase shift, and the trap',
+      note:'The wave moves by C/B, not by C. Here C = π and B = 2, so the shift is π/2. Read the red bar against the value of C in the equation above: they are different numbers.',
+      st:{ fn:'sin', A:1, B:2, Cn:12, D:0 } },
+    { name:'D — vertical shift',
+      note:'D lifts the whole wave. The midline moves to y = D, the maximum to D + |A| and the minimum to D − |A|, while the amplitude bracket keeps exactly the same length.',
+      st:{ fn:'sin', A:1, B:1, Cn:0, D:2 } },
+    { name:'All four at once',
+      note:'y = 2 sin(2x − π) + 1. Amplitude 2, period π, shift π/2 to the right, midline y = 1. Each readout below traces back to exactly one slider.',
+      st:{ fn:'sin', A:2, B:2, Cn:12, D:1 } },
+    { name:'tan and cot — amplitude has no meaning',
+      note:'Tangent is unbounded: it has no peak, so no amplitude. A still scales it vertically and D still lifts it, but |A| is not a distance to a maximum. The period of tan is π/|B|, not 2π/|B|.',
+      st:{ fn:'tan', A:1, B:1, Cn:0, D:0 } }
+  ];
+
+  var st = { fn:'sin', A:1, B:1, Cn:0, D:0 }, step = -1;
+
+  var X0 = -Math.PI, X1 = 3 * Math.PI, L = 52, R = 1030, T = 20, Bt = 300, YMAX = 3.2;
+  function px(x) { return L + (x - X0) / (X1 - X0) * (R - L); }
+  function py(y) { return (T + Bt) / 2 - y / YMAX * ((Bt - T) / 2); }
+
+  function gcd(a, b) { return b ? gcd(b, a % b) : a; }
+  function piLabel(n, d) {
+    if (n === 0) return '0';
+    var s = n < 0 ? '−' : '', a = Math.abs(n), k = gcd(a, d);
+    a /= k; var dd = d / k;
+    var num = (a === 1 ? '' : a) + 'π';
+    return s + (dd === 1 ? num : num + '/' + dd);
+  }
+  function piNum(v) {
+    var r = v / Math.PI;
+    if (Math.abs(r) < 1e-9) return '0';
+    var m = Math.round(r * 100) / 100;
+    if (m === 1) return 'π';
+    if (m === -1) return '−π';
+    return m + 'π';
+  }
+
+  function curvePath(A, Bv, Cv, D, f, bounded) {
+    var segs = [], cur = '', n = 900, prev = null;
+    for (var i = 0; i <= n; i++) {
+      var x = X0 + (X1 - X0) * i / n, y = A * f(Bv * x - Cv) + D;
+      if (!isFinite(y) || (!bounded && Math.abs(y) > YMAX)) { if (cur) { segs.push(cur); cur = ''; } prev = null; continue; }
+      if (!bounded && prev !== null && Math.abs(y - prev) > 4) { segs.push(cur); cur = ''; }
+      cur += (cur ? ' L ' : 'M ') + px(x).toFixed(1) + ' ' + py(y).toFixed(1);
+      prev = y;
+    }
+    if (cur) segs.push(cur);
+    return segs;
+  }
+
+  function draw() {
+    var spec = FNS[st.fn], A = st.A, Bv = st.B, Cv = st.Cn * Math.PI / 12, D = st.D;
+    var per = spec.periodic / Bv, start = Cv / Bv, bounded = spec.bounded;
+    YMAX = bounded ? Math.max(2.2, Math.abs(D) + Math.abs(A) + 0.9) : 3.2;
+    var s = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1056 340" width="1056" height="340" role="img" style="display:block;max-width:100%;height:auto">'];
+    s.push('<title>y = ' + A.toFixed(1) + ' ' + st.fn + '(' + Bv.toFixed(2) + 'x − ' + piLabel(st.Cn, 12) + ') + ' + D.toFixed(1) + '</title>');
+
+    for (var k = -1; k <= 3; k++) {
+      var xv = k * Math.PI;
+      s.push('<line x1="' + px(xv).toFixed(1) + '" y1="' + T + '" x2="' + px(xv).toFixed(1) + '" y2="' + Bt + '" stroke="' + C.soft + '" stroke-width="1"/>');
+      s.push('<text x="' + px(xv).toFixed(1) + '" y="' + (Bt + 18) + '" text-anchor="middle" font-family="sans-serif" font-size="11" fill="' + C.muted + '">' + piLabel(k, 1) + '</text>');
+    }
+    s.push('<line x1="' + L + '" y1="' + py(0).toFixed(1) + '" x2="' + R + '" y2="' + py(0).toFixed(1) + '" stroke="' + C.faint + '" stroke-width="1"/>');
+    s.push('<line x1="' + px(0).toFixed(1) + '" y1="' + T + '" x2="' + px(0).toFixed(1) + '" y2="' + Bt + '" stroke="' + C.faint + '" stroke-width="1"/>');
+
+    s.push('<line x1="' + L + '" y1="' + py(D).toFixed(1) + '" x2="' + R + '" y2="' + py(D).toFixed(1) + '" stroke="' + C.muted + '" stroke-width="1.2" stroke-dasharray="6 4"/>');
+    s.push('<text x="' + (R - 4) + '" y="' + (py(D) - 7).toFixed(1) + '" text-anchor="end" font-family="sans-serif" font-size="11" font-weight="600" fill="' + C.muted + '">midline  y = D = ' + D.toFixed(1) + '</text>');
+
+    if (A < 0 && bounded) {
+      curvePath(-A, Bv, Cv, D, spec.f, bounded).forEach(function (p) {
+        s.push('<path d="' + p + '" fill="none" stroke="' + C.hair + '" stroke-width="1.6" stroke-dasharray="5 4"/>');
+      });
+    }
+    curvePath(A, Bv, Cv, D, spec.f, bounded).forEach(function (p) {
+      s.push('<path d="' + p + '" fill="none" stroke="' + C.deep + '" stroke-width="2.2" stroke-linejoin="round"/>');
+    });
+
+    if (bounded) {
+      var xp = start + (st.fn === 'sin' ? (A >= 0 ? 1 : 3) * Math.PI / 2 : (A >= 0 ? 0 : Math.PI)) / Bv;
+      while (xp > X1 - 0.3) xp -= per;
+      while (xp < X0 + 0.3) xp += per;
+      var top = D + Math.abs(A), bot = D - Math.abs(A);
+      s.push('<line x1="' + px(xp).toFixed(1) + '" y1="' + py(D).toFixed(1) + '" x2="' + px(xp).toFixed(1) + '" y2="' + py(top).toFixed(1) + '" stroke="' + C.amp + '" stroke-width="1.6"/>');
+      s.push('<line x1="' + (px(xp) - 6).toFixed(1) + '" y1="' + py(top).toFixed(1) + '" x2="' + (px(xp) + 6).toFixed(1) + '" y2="' + py(top).toFixed(1) + '" stroke="' + C.amp + '" stroke-width="1.6"/>');
+      s.push('<text x="' + (px(xp) + 10).toFixed(1) + '" y="' + ((py(D) + py(top)) / 2 + 4).toFixed(1) + '" font-family="sans-serif" font-size="11" font-weight="600" fill="' + C.amp + '">|A| = ' + Math.abs(A).toFixed(1) + '</text>');
+
+      var xmax = start + (Math.PI / 2) / Bv, xmin = start + (3 * Math.PI / 2) / Bv;
+      if (st.fn === 'cos') { xmax = start; xmin = start + Math.PI / Bv; }
+      if (A < 0) { var t = xmax; xmax = xmin; xmin = t; }
+      while (xmax > X1) xmax -= per; while (xmax < X0) xmax += per;
+      while (xmin > X1) xmin -= per; while (xmin < X0) xmin += per;
+      s.push('<circle cx="' + px(xmax).toFixed(1) + '" cy="' + py(top).toFixed(1) + '" r="3.5" fill="' + C.amp + '"/>');
+      s.push('<text x="' + px(xmax).toFixed(1) + '" y="' + (py(top) - 9).toFixed(1) + '" text-anchor="middle" font-family="sans-serif" font-size="11" fill="' + C.amp + '">max = D + |A| = ' + top.toFixed(1) + '</text>');
+      s.push('<circle cx="' + px(xmin).toFixed(1) + '" cy="' + py(bot).toFixed(1) + '" r="3.5" fill="' + C.amp + '"/>');
+      s.push('<text x="' + px(xmin).toFixed(1) + '" y="' + (py(bot) + 18).toFixed(1) + '" text-anchor="middle" font-family="sans-serif" font-size="11" fill="' + C.amp + '">min = D − |A| = ' + bot.toFixed(1) + '</text>');
+    }
+
+    var b0 = start;
+    while (b0 < X0 + 0.001) b0 += per;
+    while (b0 - per >= X0) b0 -= per;
+    var b1 = b0 + per;
+    if (b1 <= X1) {
+      var yb = Bt - 10;
+      s.push('<line x1="' + px(b0).toFixed(1) + '" y1="' + py(D).toFixed(1) + '" x2="' + px(b0).toFixed(1) + '" y2="' + yb + '" stroke="' + C.per + '" stroke-width="1" stroke-dasharray="3 3"/>');
+      s.push('<line x1="' + px(b1).toFixed(1) + '" y1="' + py(D).toFixed(1) + '" x2="' + px(b1).toFixed(1) + '" y2="' + yb + '" stroke="' + C.per + '" stroke-width="1" stroke-dasharray="3 3"/>');
+      s.push('<line x1="' + px(b0).toFixed(1) + '" y1="' + yb + '" x2="' + px(b1).toFixed(1) + '" y2="' + yb + '" stroke="' + C.per + '" stroke-width="1.6"/>');
+      s.push('<text x="' + ((px(b0) + px(b1)) / 2).toFixed(1) + '" y="' + (yb - 7) + '" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="600" fill="' + C.per + '">period = ' + (bounded ? '2π' : 'π') + '/|B| = ' + piNum(per) + '</text>');
+    }
+
+    if (Math.abs(start) > 1e-9) {
+      var ys = T + 16;
+      s.push('<line x1="' + px(0).toFixed(1) + '" y1="' + ys + '" x2="' + px(start).toFixed(1) + '" y2="' + ys + '" stroke="' + C.pha + '" stroke-width="1.6"/>');
+      s.push('<line x1="' + px(start).toFixed(1) + '" y1="' + (ys - 5) + '" x2="' + px(start).toFixed(1) + '" y2="' + (ys + 5) + '" stroke="' + C.pha + '" stroke-width="1.6"/>');
+      s.push('<line x1="' + px(0).toFixed(1) + '" y1="' + (ys - 5) + '" x2="' + px(0).toFixed(1) + '" y2="' + (ys + 5) + '" stroke="' + C.pha + '" stroke-width="1.6"/>');
+      s.push('<text x="' + ((px(0) + px(start)) / 2).toFixed(1) + '" y="' + (ys - 8) + '" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="600" fill="' + C.pha + '">shift = C/B = ' + piNum(start) + '</text>');
+    }
+
+    s.push('</svg>');
+    document.getElementById('plot').innerHTML = s.join('');
+
+    var cs = piLabel(st.Cn, 12);
+    document.getElementById('idbar').innerHTML =
+      'y = <span style="color:' + C.amp + '">' + A.toFixed(1) + '</span> ' + st.fn +
+      '(<span style="color:' + C.per + '">' + Bv.toFixed(2) + '</span>x − <span style="color:' + C.pha + '">' + cs + '</span>) + ' +
+      '<span style="color:' + C.muted + '">' + D.toFixed(1) + '</span>';
+
+    var cards = [
+      ['amplitude |A|', bounded ? Math.abs(A).toFixed(1) : 'none'],
+      ['period ' + (bounded ? '2π' : 'π') + '/|B|', piNum(per)],
+      ['C itself', cs],
+      ['phase shift C/B', piNum(start)],
+      ['midline D', D.toFixed(1)],
+      ['max / min', bounded ? (D + Math.abs(A)).toFixed(1) + ' / ' + (D - Math.abs(A)).toFixed(1) : 'unbounded']
+    ];
+    document.getElementById('metrics').innerHTML = cards.map(function (c) {
+      return '<div class="mcard"><p class="k">' + c[0] + '</p><p class="v">' + c[1] + '</p></div>';
+    }).join('');
+
+    var w = [];
+    if (!bounded) w.push('Amplitude has no meaning for ' + spec.label + ': the curve is unbounded, so there is no peak to measure. A scales it, but |A| is not a distance to a maximum.');
+    if (A < 0 && bounded) w.push('A is negative: the wave is the dashed one reflected across the midline. The amplitude stays |A| = ' + Math.abs(A).toFixed(1) + '.');
+    if (Math.abs(start) > 1e-9) w.push('C = ' + cs + ', but the wave moved by C/B = ' + piNum(start) + '.');
+    document.getElementById('warn').innerHTML = w.join('<br>');
+
+    ORDER.forEach(function (f) {
+      document.getElementById('tab-' + f).className = 'tab' + (f === st.fn ? ' on' : '');
+    });
+    document.getElementById('sA').value = A;
+    document.getElementById('sB').value = Bv;
+    document.getElementById('sC').value = st.Cn;
+    document.getElementById('sD').value = D;
+    document.getElementById('oA').textContent = A.toFixed(1);
+    document.getElementById('oB').textContent = Bv.toFixed(2);
+    document.getElementById('oC').textContent = cs;
+    document.getElementById('oD').textContent = D.toFixed(1);
+    document.getElementById('prev').disabled = step <= 0;
+    document.getElementById('next').disabled = step >= STEPS.length - 1;
+    document.getElementById('stepname').textContent = step < 0 ? 'free exploration' : (step + 1) + ' of ' + STEPS.length + ' — ' + STEPS[step].name;
+    document.getElementById('stepnote').textContent = step < 0
+      ? 'Move any slider, or walk the eight steps to see one parameter at a time.'
+      : STEPS[step].note;
+  }
+
+  document.getElementById('tabs').innerHTML = ORDER.map(function (f) {
+    return '<button type="button" class="tab" id="tab-' + f + '">' + FNS[f].label + '</button>';
+  }).join('');
+  ORDER.forEach(function (f) {
+    document.getElementById('tab-' + f).addEventListener('click', function () { st.fn = f; step = -1; draw(); });
+  });
+
+  [['sA', 'A', 1], ['sB', 'B', 1], ['sC', 'Cn', 1], ['sD', 'D', 1]].forEach(function (p) {
+    document.getElementById(p[0]).addEventListener('input', function () {
+      st[p[1]] = parseFloat(this.value); step = -1; draw();
+    });
+  });
+
+  function goto(i) { step = i; var s = STEPS[i].st; st = { fn:s.fn, A:s.A, B:s.B, Cn:s.Cn, D:s.D }; draw(); }
+  document.getElementById('next').addEventListener('click', function () { goto(step + 1 >= STEPS.length ? STEPS.length - 1 : step + 1); });
+  document.getElementById('prev').addEventListener('click', function () { goto(step <= 0 ? 0 : step - 1); });
+  document.getElementById('reset').addEventListener('click', function () { st = { fn:'sin', A:1, B:1, Cn:0, D:0 }; step = -1; draw(); });
+
+  draw();
+})();
+</script>
+</body>
+</html>

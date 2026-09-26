@@ -2590,6 +2590,7 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import triangleDiagrams from '@/app/components/trigonometry/triangle/triangleDiagrams'
+import renderTriangleLabel from '@/app/utils/illustrations/trigonometry/triangles/triangleLabel'
 
 
 export async function getStaticProps(){
@@ -3549,6 +3550,39 @@ Right triangle trigonometry is limited to acute angles: $\\theta$ must satisfy $
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  // Authored figures. triangleLabel draws them; these are data only.
+  // Package doc: app/utils/illustrations/trigonometry/triangles/triangleLabel.md
+  const tlNaming = {
+    kind: 'pair',
+    svgTitle: 'Opposite and adjacent swap when the other acute angle is chosen',
+    leftTitle: '\u03b8 at the lower right', rightTitle: '\u03b8 at the top',
+  };
+  const tlFindingSides = {
+    kind: 'ratios',
+    svgTitle: 'The ratio you pick is fixed by which two sides are involved',
+  };
+  const tlCofunction = {
+    kind: 'pair',
+    svgTitle: 'A function at \u03b8 is its cofunction at 90\u00b0 \u2212 \u03b8 because the legs swap roles',
+    leftTitle: 'measured from \u03b8', rightTitle: 'measured from 90\u00b0 \u2212 \u03b8',
+    leftEquation: 'sin \u03b8 = opp / hyp', rightEquation: 'cos(90\u00b0 \u2212 \u03b8) = adj / hyp',
+    hypLabel: 'same hypotenuse', markShared: true,
+  };
+  const tlElevation = {
+    kind: 'parallel',
+    svgTitle: 'Elevation from below and depression from above are the same angle',
+    note: 'alternate interior angles \u2014 equal',
+  };
+  const tlLimitations = {
+    kind: 'sequence',
+    svgTitle: 'The ratio definitions die at 0\u00b0 and 90\u00b0 because a side vanishes',
+    panels: [
+      { opp: 130, adj: 200, title: '\u03b8 in range', note: 'both legs present', dying: null },
+      { opp: 10, adj: 200, title: '\u03b8 \u2192 0\u00b0', note: 'opposite \u2192 0', dying: 'opp' },
+      { opp: 165, adj: 12, title: '\u03b8 \u2192 90\u00b0', note: 'adjacent \u2192 0', dying: 'adj' },
+    ],
+  };
+
   const demoUnits = {
     t345: demoUnitFrame({
       svg: triangleDiagrams['345'],
@@ -3577,6 +3611,31 @@ Right triangle trigonometry is limited to acute angles: $\\theta$ must satisfy $
       text: 'The shortest side faces the 30.0&#176; angle and is half the hypotenuse; the side facing 60.0&#176; is &#8730;3 &#8776; 1.732 times the shortest. Those two facts are the whole of the exact-value table for 30&#176; and 60&#176;: sin&#8201;30&#176; = 1/2, cos&#8201;30&#176; = &#8730;3/2, and the same numbers swapped at 60&#176;. Nudge an angle away from 30&#176; and watch the clean ratios dissolve on the',
       href: '/trigonometry/visual-tools/triangle-explorer',
       linkText: 'triangle explorer',
+    }),
+    naming: demoUnitFrame({
+      svg: renderTriangleLabel(tlNaming),
+      caption: 'The same triangle, the other angle chosen',
+      text: 'Nothing about the triangle changes between these two pictures &#8212; only which acute angle is under consideration. The two legs trade the names <em>opposite</em> and <em>adjacent</em>; the hypotenuse keeps its name, because it is defined against the right angle rather than against &#952;.',
+    }),
+    findingSides: demoUnitFrame({
+      svg: renderTriangleLabel(tlFindingSides),
+      caption: 'One ratio per pair of sides',
+      text: 'Each ratio is fixed by which two sides it relates, so the choice is made for you by what you know and what you want. The third side is greyed out in each panel because it plays no part in that ratio.',
+    }),
+    cofunction: demoUnitFrame({
+      svg: renderTriangleLabel(tlCofunction),
+      caption: 'Same leg, two names, two functions',
+      text: 'Measured from &#952; the vertical leg is the opposite side; measured from 90&#176; &#8722; &#952; the same leg is the adjacent side. Both readings divide it by the same hypotenuse, which is why sin&#8201;&#952; and cos(90&#176; &#8722; &#952;) are the same number.',
+    }),
+    elevation: demoUnitFrame({
+      svg: renderTriangleLabel(tlElevation),
+      caption: 'One line of sight, two observers',
+      text: 'The two horizontals are parallel and the line of sight cuts both, so the angle measured upward from below and the angle measured downward from above are alternate interior angles. They are equal, which means either end of the problem can be used to set it up.',
+    }),
+    limitations: demoUnitFrame({
+      svg: renderTriangleLabel(tlLimitations),
+      caption: 'What happens at the two ends',
+      text: 'Push &#952; toward either limit and a leg disappears. At 0&#176; the opposite side has no length and at 90&#176; the adjacent side has none &#8212; and a ratio with a vanished side in it stops meaning anything, which is where the triangle definitions run out.',
     }),
   };
 
@@ -3633,6 +3692,8 @@ export default function RightTrianglePage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-naming'} dangerouslySetInnerHTML={{ __html: demoUnits.naming }} />,
+          `Fixing which angle is $\theta$ is therefore the first step in every right-triangle problem.`,
         ]
     },
     {
@@ -3680,6 +3741,8 @@ export default function RightTrianglePage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-findingSides'} dangerouslySetInnerHTML={{ __html: demoUnits.findingSides }} />,
+          `In practice the known pair of sides chooses the ratio before you do.`,
         ]
     },
     {
@@ -3720,6 +3783,8 @@ export default function RightTrianglePage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-cofunction'} dangerouslySetInnerHTML={{ __html: demoUnits.cofunction }} />,
+          `The same argument pairs tangent with cotangent, and secant with cosecant.`,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
         ]
@@ -3730,6 +3795,8 @@ export default function RightTrianglePage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-elevation'} dangerouslySetInnerHTML={{ __html: demoUnits.elevation }} />,
+          `In either setup the tangent ratio is the one that relates the height to the distance.`,
         ]
     },
     {
@@ -3738,6 +3805,8 @@ export default function RightTrianglePage({
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <div key={'unit-limitations'} dangerouslySetInnerHTML={{ __html: demoUnits.limitations }} />,
+          `The unit circle picks the subject up exactly here, by replacing the ratios with coordinates.`,
         ]
     },
     // NEW capstone section: obj11

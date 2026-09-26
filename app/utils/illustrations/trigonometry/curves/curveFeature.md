@@ -187,8 +187,11 @@ Contrast, two panels, one variable changed:
 ```
 
 The seven shipped specs are in `pages/trigonometry/graphs/index.jsx`, inside
-`getStaticProps`. The working copies used to iterate are
-`session-docs/scripts/_trig-graphs-specs.mjs`.
+`getStaticProps`, named `cfGeneralForm`, `cfAmplitude`, `cfPeriod`,
+`cfPhaseShift`, `cfVerticalShift`, `cfEquationFromGraph`, `cfKeyPoints`. Their
+rendered output is in
+`session-docs/demos/illustrations/trigonometry/curveFeature/`. Those two places
+are the record; the scratch files used to iterate on them were deleted.
 
 ## 11. Scene catalog
 
