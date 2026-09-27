@@ -40,18 +40,18 @@ export async function getStaticProps() {
   ]
 
   const instructions = [
-    'The **Function** row switches the curve between $\\sin$, $\\cos$, $\\tan$ and $\\cot$. The general form $y = Af(Bx - C) + D$ is the same for all four, so every control keeps working when you switch.',
-    'The equation above the graph restates the current curve, with each number in the colour of the parameter it belongs to: **A** red, **B** amber, **C** violet, **D** slate. The same four colours label the features on the graph.',
-    'The sliders are split into two groups. **Outside the function** holds $A$ and $D$, which act on the value the function returns and therefore move the curve vertically.',
-    'Drag **A** to stretch the curve away from its midline. The red bracket on the graph measures $|A|$, and the two dots mark the maximum $D + |A|$ and the minimum $D - |A|$. Pull $A$ below zero and the curve reflects across the midline, with the dashed grey curve showing where it came from.',
-    'Drag **D** to move the midline. The dashed slate line follows it to $y = D$, the maximum and minimum move with it, and the amplitude bracket keeps its length.',
-    '**Inside the function** holds $B$ and $C$, which act on the input $x$ and therefore move the curve horizontally.',
-    'Drag **B** to change how many cycles fit the window. The amber bracket under the curve measures one full period, $\\frac{2\\pi}{|B|}$ for sine and cosine and $\\frac{\\pi}{|B|}$ for tangent and cotangent.',
-    'Drag **C** to shift the curve sideways. It moves in steps of $\\frac{\\pi}{12}$, and the violet bar at the top of the graph measures the actual displacement, which is $\\frac{C}{B}$ and not $C$. The readout strip prints both numbers side by side so the difference is visible whenever $B \\ne 1$.',
-    'The **Guided walk** buttons set all four parameters at once, one idea per button: the general form, amplitude, a negative $A$, a doubled $B$, the $\\frac{C}{B}$ trap, a raised midline, all four together, and tangent. The explanation panel follows whichever you press.',
-    'The strip along the bottom reads the current curve back as numbers: amplitude, period, $C$ itself, the shift $\\frac{C}{B}$, the midline, and the maximum and minimum. Each label carries its parameter colour.',
-    'The **Explanations** panel on the right names the four letters, then explains whichever one you last touched. Choosing $\\tan$ or $\\cot$ switches it to the unbounded case, where amplitude has no meaning because the curve has no peak to measure.',
-    'The **Reset** button returns the tool to $y = \\sin x$, the baseline every comparison is measured against.',
+    'The **Function** row switches the curve between $\\sin$, $\\cos$, $\\tan$ and $\\cot$. The general form $y = Af(Bx - C) + D$ is the same for all four, so every control keeps working when you switch. [Learn more about choosing the function](!#choosing-the-function)',
+    'The equation above the graph restates the current curve, with each number in the colour of the parameter it belongs to: **A** red, **B** amber, **C** violet, **D** slate. The same four colours label the features on the graph. [Learn more about the colour key](!#the-equation-bar-and-the-colour-key)',
+    'The sliders are split into two groups. **Outside the function** holds $A$ and $D$, which act on the value the function returns and therefore move the curve vertically. [Learn more about inside and outside](!#inside-and-outside-the-function)',
+    'Drag **A** to stretch the curve away from its midline. The red bracket on the graph measures $|A|$, and the two dots mark the maximum $D + |A|$ and the minimum $D - |A|$. Pull $A$ below zero and the curve reflects across the midline, with the dashed grey curve showing where it came from. [Learn more about setting A](!#setting-the-amplitude-with-a)',
+    'Drag **D** to move the midline. The dashed slate line follows it to $y = D$, the maximum and minimum move with it, and the amplitude bracket keeps its length. [Learn more about moving the midline](!#moving-the-midline-with-d)',
+    '**Inside the function** holds $B$ and $C$, which act on the input $x$ and therefore move the curve horizontally. [Learn more about inside and outside](!#inside-and-outside-the-function)',
+    'Drag **B** to change how many cycles fit the window. The amber bracket under the curve measures one full period, $\\frac{2\\pi}{|B|}$ for sine and cosine and $\\frac{\\pi}{|B|}$ for tangent and cotangent. [Learn more about setting B](!#setting-the-period-with-b)',
+    'Drag **C** to shift the curve sideways. It moves in steps of $\\frac{\\pi}{12}$, and the violet bar at the top of the graph measures the actual displacement, which is $\\frac{C}{B}$ and not $C$. The readout strip prints both numbers side by side so the difference is visible whenever $B \\ne 1$. [Learn more about why the shift is C over B](!#shifting-with-c-and-why-the-shift-is-c-over-b)',
+    'The **Guided walk** buttons set all four parameters at once, one idea per button: the general form, amplitude, a negative $A$, a doubled $B$, the $\\frac{C}{B}$ trap, a raised midline, all four together, and tangent. The explanation panel follows whichever you press. [Learn more about the guided walk](!#the-guided-walk)',
+    'The strip along the bottom reads the current curve back as numbers: amplitude, period, $C$ itself, the shift $\\frac{C}{B}$, the midline, and the maximum and minimum. Each label carries its parameter colour. [Learn more about reading the numbers](!#reading-the-curve-back-as-numbers)',
+    'The **Explanations** panel on the right names the four letters, then explains whichever one you last touched. Choosing $\\tan$ or $\\cot$ switches it to the unbounded case, where amplitude has no meaning because the curve has no peak to measure. [Learn more about the explanations panel](!#the-explanations-panel)',
+    'The **Reset** button returns the tool to $y = \\sin x$, the baseline every comparison is measured against. [Learn more about the baseline wave](!#the-baseline-wave)',
   ]
 
   const sectionsContent = {
@@ -256,6 +256,18 @@ The [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graph
 The [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) and the [Unit Circle](!/trigonometry/unit-circle) treat the input side: what an angle is, how it sits in standard position, and where the values being plotted here actually come from. The [Unit Circle Visualizer](!/visual-tools/unit-circle) is the tool version of that: it turns the angle and reads the coordinates the wave is built from, one special angle at a time.
 
 For the theory behind each parameter in prose form, with worked examples and the full derivations, the [Trigonometric Graphs](!/trigonometry/graphs) lesson covers the general sinusoidal form, amplitude, period, phase shift and vertical shift as separate sections. The [Properties of Trigonometric Functions](!/trigonometry/properties) page covers periodicity, boundedness and asymptotes, which is where the tangent and cotangent case is argued rather than simply stated.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj21: {
+      title: `The Explanations Panel`,
+      content: `The panel on the right of the tool has two parts. The top is a fixed legend naming the four letters in their colours — **A** amplitude, **B** period, **C** phase shift, **D** vertical shift — each with a one-line gloss of what it controls. The letter you last touched is set in bold, so the legend doubles as a reminder of where your attention was.
+
+Below the legend is the explanation itself, and it follows you. Drag a slider and the panel switches to that parameter; press a [guided walk](!#the-guided-walk) button and it switches to the idea that button demonstrates. Choose $\tan$ or $\cot$ and it switches to the unbounded case, whatever you touched before, because on those functions the amplitude explanation would be describing something that does not exist.
+
+Every explanation ends with two links into this page: one to the frozen state that shows the idea, one to the section that explains the control. Two short red notes can also appear under the explanation. One says the curve is reflected, when $A$ is negative; the other prints $C$ beside $\frac{C}{B}$ whenever the two differ. They stay visible while you work on something else, so a negative $A$ or a shift that is not equal to $C$ never goes unnoticed.`,
       before: ``,
       after: ``,
       link: '',
@@ -501,6 +513,7 @@ For the theory behind each parameter in prose form, with worked examples and the
         keywords: keyWords.join(', '),
         url: '/trigonometry/visual-tools/function-parameters',
         name: 'Trigonometric Function Parameters Explorer',
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="44" x2="72" y2="44" stroke="#B5D4F4" stroke-width="0.9"/><line x1="10" y1="12" x2="10" y2="70" stroke="#B5D4F4" stroke-width="0.9"/><path d="M 10 44.0 L 11 43.0 L 12 41.9 L 13 40.9 L 14 39.9 L 15 39.0 L 16 38.1 L 17 37.3 L 18 36.6 L 19 35.9 L 20 35.3 L 21 34.9 L 22 34.5 L 23 34.2 L 24 34.1 L 25 34.0 L 26 34.1 L 27 34.2 L 28 34.5 L 29 34.9 L 30 35.3 L 31 35.9 L 32 36.6 L 33 37.3 L 34 38.1 L 35 39.0 L 36 39.9 L 37 40.9 L 38 41.9 L 39 43.0 L 40 44.0 L 41 45.0 L 42 46.1 L 43 47.1 L 44 48.1 L 45 49.0 L 46 49.9 L 47 50.7 L 48 51.4 L 49 52.1 L 50 52.7 L 51 53.1 L 52 53.5 L 53 53.8 L 54 53.9 L 55 54.0 L 56 53.9 L 57 53.8 L 58 53.5 L 59 53.1 L 60 52.7 L 61 52.1 L 62 51.4 L 63 50.7 L 64 49.9 L 65 49.0 L 66 48.1 L 67 47.1 L 68 46.1 L 69 45.0 L 70 44.0" fill="none" stroke="#B5D4F4" stroke-width="1.1" stroke-dasharray="2.5,2"/><line x1="10" y1="38" x2="72" y2="38" stroke="#C0DD97" stroke-width="0.9" stroke-dasharray="3,2"/><path d="M 10 48.7 L 11 47.4 L 12 46.0 L 13 44.5 L 14 42.9 L 15 41.3 L 16 39.7 L 17 38.0 L 18 36.3 L 19 34.7 L 20 33.1 L 21 31.5 L 22 30.0 L 23 28.6 L 24 27.3 L 25 26.1 L 26 25.1 L 27 24.1 L 28 23.4 L 29 22.8 L 30 22.3 L 31 22.1 L 32 22.0 L 33 22.1 L 34 22.3 L 35 22.8 L 36 23.4 L 37 24.1 L 38 25.1 L 39 26.1 L 40 27.3 L 41 28.6 L 42 30.0 L 43 31.5 L 44 33.1 L 45 34.7 L 46 36.3 L 47 38.0 L 48 39.7 L 49 41.3 L 50 42.9 L 51 44.5 L 52 46.0 L 53 47.4 L 54 48.7 L 55 49.9 L 56 50.9 L 57 51.9 L 58 52.6 L 59 53.2 L 60 53.7 L 61 53.9 L 62 54.0 L 63 53.9 L 64 53.7 L 65 53.2 L 66 52.6 L 67 51.9 L 68 50.9 L 69 49.9 L 70 48.7" fill="none" stroke="#FAC775" stroke-width="1.9"/><line x1="32" y1="38" x2="32" y2="22" stroke="#ED93B1" stroke-width="1.4"/><line x1="29" y1="22" x2="35" y2="22" stroke="#ED93B1" stroke-width="1.4"/><line x1="10" y1="16" x2="17" y2="16" stroke="#97C459" stroke-width="1.4"/><path d="M 15 13.5 L 18 16 L 15 18.5" fill="none" stroke="#97C459" stroke-width="1.2"/><text x="37" y="30" font-family="Georgia,serif" font-size="8" fill="#ED93B1" font-style="italic">A</text><text x="20" y="14" font-family="Georgia,serif" font-size="8" fill="#97C459" font-style="italic">C</text><text x="64" y="35" font-family="Georgia,serif" font-size="8" fill="#C0DD97" font-style="italic">D</text><text x="40" y="77" font-family="Georgia,serif" font-size="7" fill="#E6F1FB" text-anchor="middle">A f(Bx − C) + D</text></svg>`,
       },
     },
   }
@@ -566,6 +579,12 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj8.title,
       link: sectionsContent.obj8.link,
       content: [sectionsContent.obj8.content],
+    },
+    {
+      id: 'the-explanations-panel',
+      title: sectionsContent.obj21.title,
+      link: sectionsContent.obj21.link,
+      content: [sectionsContent.obj21.content],
     },
     {
       id: 'inside-and-outside-the-function',
@@ -736,7 +755,7 @@ export default function FunctionParametersPage({
       </div>
       <br />
 
-      <div style={{ width: '90%', margin: 'auto' }}>
+      <div style={{ width: '90%', margin: 'auto', zoom: 0.9 }}>
         <SinusoidalParameterExplorer explanations={explanations} />
       </div>
 
