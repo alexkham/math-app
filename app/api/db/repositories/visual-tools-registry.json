@@ -3657,6 +3657,14 @@
           "method": "reverse",
           "status": "linked",
           "added": "2026-09-27"
+        },
+        {
+          "key": "inverse-functions",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Inverse Trigonometric Functions",
+          "method": "reverse",
+          "status": "linked",
+          "added": "2026-09-27"
         }
       ]
     },
@@ -78844,6 +78852,262 @@
           "fromSection": "related-concepts-and-tools",
           "surface": "Unit Circle Visualizer",
           "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-27"
+        }
+      ]
+    },
+    "inverse-functions": {
+      "slug": "inverse-functions",
+      "name": "Inverse Trigonometric Functions Explorer",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/visual-tools/inverse-functions/index.jsx",
+      "component": "app/components/trigonometry/InverseFunctionExplorer.jsx",
+      "diagramsModule": "app/components/trigonometry/inverseFunctionDiagrams.js",
+      "diagramStates": [
+        "lineTestFails",
+        "arcsin",
+        "arccos",
+        "arctan",
+        "compositionFold"
+      ],
+      "line1": {
+        "done": "2026-09-27",
+        "states": 5,
+        "sections": 19,
+        "units": 5,
+        "anchors": 19,
+        "orphans": 0,
+        "verification": "Rendered check by curl, part before __NEXT_DATA__: 200, 19 <section id>, 5 unit frames each holding one <svg>, 479 KaTeX spans, 0 orphans. Browser: presets switch state (composition fold -> step 4, arctan -> tan step 3); drag mapping under zoom 0.9 round-trips exactly (Chrome 152); frozen arctan unit rendered and inspected.",
+        "wiring": "Frozen states rendered by inverseFunctionDiagrams.js through renderToStaticMarkup of the tool's own InverseRestrictionScene (named export), so frozen and live share one code path. Stage notes page-fed via the explanations prop with renderText=processContent, each ending in the state/group anchor pair.",
+        "howToMesh": "10 how-to instructions, each ending in an anchor link to its usage section (10 links, 0 orphans).",
+        "componentFixes": "2026-09-27 step 2: React.useId called unconditionally (rules-of-hooks error broke next build); presets row relabelled Examples with readable button labels; named exports added for the diagrams module."
+      },
+      "relatedTerms": [
+        {
+          "term": "arcsine",
+          "entity": "arcsine",
+          "sections": [
+            "choosing-the-function"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "choosing-the-function",
+              "surface": "arcsine",
+              "target": {
+                "path": "/trigonometry/inverse-functions",
+                "section": "2"
+              },
+              "method": "added-sentence",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "arccosine",
+          "entity": "arccosine",
+          "sections": [
+            "choosing-the-function"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "choosing-the-function",
+              "surface": "arccosine",
+              "target": {
+                "path": "/trigonometry/inverse-functions",
+                "section": "3"
+              },
+              "method": "added-sentence",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "arctangent",
+          "entity": "arctangent",
+          "sections": [
+            "choosing-the-function"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "choosing-the-function",
+              "surface": "arctangent",
+              "target": {
+                "path": "/trigonometry/inverse-functions",
+                "section": "4"
+              },
+              "method": "added-sentence",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "inverse trigonometric functions",
+          "entity": "inverse-trigonometric-functions",
+          "sections": [
+            "the-legend-and-colours",
+            "why-restriction-is-necessary",
+            "domain-and-range-trade-places",
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "the-legend-and-colours",
+              "surface": "inverse trigonometric functions",
+              "target": {
+                "path": "/trigonometry/inverse-functions",
+                "section": null
+              },
+              "method": "added-sentence",
+              "added": "2026-09-27"
+            },
+            {
+              "fromSection": "why-restriction-is-necessary",
+              "surface": "lesson section",
+              "target": {
+                "path": "/trigonometry/inverse-functions",
+                "section": "1"
+              },
+              "method": "added-sentence",
+              "added": "2026-09-27"
+            },
+            {
+              "fromSection": "domain-and-range-trade-places",
+              "surface": "graphs of the inverse functions",
+              "target": {
+                "path": "/trigonometry/inverse-functions",
+                "section": "9"
+              },
+              "method": "added-sentence",
+              "added": "2026-09-27"
+            },
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "compositions",
+              "target": {
+                "path": "/trigonometry/inverse-functions",
+                "section": "8"
+              },
+              "method": "scan",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "monotonicity",
+          "entity": "monotonicity",
+          "sections": [
+            "principal-intervals-as-conventions"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "principal-intervals-as-conventions",
+              "surface": "monotonicity",
+              "target": {
+                "path": "/trigonometry/properties",
+                "section": "6"
+              },
+              "method": "added-sentence",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "properties of trigonometric functions",
+          "entity": "properties-of-trigonometric-functions",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "properties",
+              "target": {
+                "path": "/trigonometry/properties",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "horizontal line test",
+          "entity": "horizontal-line-test",
+          "sections": [
+            "the-line-test",
+            "why-restriction-is-necessary"
+          ],
+          "status": "pending",
+          "plan": {
+            "target": {
+              "path": "/trigonometry/inverse-functions",
+              "section": "1"
+            },
+            "note": "the page's own subject; queued for the Line 2 write pass"
+          }
+        },
+        {
+          "term": "principal interval",
+          "entity": "principal-interval",
+          "sections": [
+            "the-principal-interval-shortcut",
+            "principal-intervals-as-conventions"
+          ],
+          "status": "pending",
+          "plan": {
+            "target": {
+              "path": "/trigonometry/inverse-functions",
+              "section": "2"
+            },
+            "note": "queued"
+          }
+        },
+        {
+          "term": "one-to-one",
+          "entity": "one-to-one",
+          "sections": [
+            "why-restriction-is-necessary"
+          ],
+          "status": "pending",
+          "plan": {
+            "target": {
+              "path": "/functions",
+              "section": null
+            },
+            "note": "crossSection: resolves outside trigonometry; on hold per Line 2 policy",
+            "crossSection": true
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "functions-graphs",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Trigonometric Functions Graphs",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-27"
+        },
+        {
+          "key": "function-parameters",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Trigonometric Function Parameters",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-27"
+        },
+        {
+          "key": "trigonometry-unit-circle",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Unit Circle Visualizer",
+          "method": "scan",
           "status": "linked",
           "added": "2026-09-27"
         }

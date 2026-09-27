@@ -188,7 +188,7 @@ The explorer reports "undefined" at these inputs and the curve appears to break 
 • [Unit Circle](!/visual-tools/unit-circle) — the geometric source of every trig function value.
 • [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — visualize angles, quadrants, [reference angles](!/trigonometry/unit-circle#5), and related-angle relationships.
 • **Trigonometric Identities** — Pythagorean, reciprocal, quotient, and angle-sum formulas.
-• **Inverse Trigonometric Functions** — arcsin, arccos, arctan and their restricted domains.
+• [Inverse Trigonometric Functions](!/trigonometry/visual-tools/inverse-functions) — arcsin, arccos, arctan and their restricted domains, built step by step: line test, restriction, reflection across $y = x$.
 • **Trig Equations Solver** — practice solving equations involving [sine](!/trigonometry/functions#1), [cosine](!/trigonometry/functions#2), and [tangent](!/trigonometry/functions#3).
 • **Special Angles Table** — exact values at $0°$, $30°$, $45°$, $60°$, $90°$, and beyond.
 • [Function Signs by Quadrant](!/trigonometry/visual-tools/functions-signs) — why each curve sits above or below the axis in each quadrant.
