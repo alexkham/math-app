@@ -705,6 +705,7 @@ For applications and worked examples, see the **trigonometric identities applica
 • [Pythagorean Identities](!/trigonometry/visual-tools/pythagorean-identities) — $\\sin^2\\theta + \\cos^2\\theta = 1$ and its companions.
 • **Sum and Difference Identities** — $\\sin(\\alpha \\pm \\beta)$ and $\\cos(\\alpha \\pm \\beta)$, from which double-angle identities follow as the case $\\alpha = \\beta$.
 • [Half-Angle Identities](!/trigonometry/visual-tools/half-angle-identities) — solve the double-angle formulas backward to express $\\sin(\\theta/2)$ and $\\cos(\\theta/2)$.
+• [Triple Angle Identities](!/trigonometry/visual-tools/triple-angle-identities) — the next step up: $\\sin 3\\theta$ and $\\cos 3\\theta$ built by substituting these double-angle identities into the angle sum.
 • [Unit Circle](!/visual-tools/unit-circle) — geometric setup for every identity in this tool.
 • [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — see how $\\sin$, $\\cos$, $\\tan$ and their reciprocals evolve as $\\theta$ varies.
 • [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — interactive triangles with built-in [law of sines](!/trigonometry/sines-cosines-law#2) and law of cosines.
