@@ -192,6 +192,7 @@ The explorer reports "undefined" at these inputs and the curve appears to break 
 • **Trig Equations Solver** — practice solving equations involving [sine](!/trigonometry/functions#1), [cosine](!/trigonometry/functions#2), and [tangent](!/trigonometry/functions#3).
 • **Special Angles Table** — exact values at $0°$, $30°$, $45°$, $60°$, $90°$, and beyond.
 • [Function Signs by Quadrant](!/trigonometry/visual-tools/functions-signs) — why each curve sits above or below the axis in each quadrant.
+• [Trigonometric Function Parameters](!/trigonometry/visual-tools/function-parameters) — the next step from these six graphs: change $A$, $B$, $C$ and $D$ in $y = Af(Bx - C) + D$ and watch amplitude, period, phase shift and midline move on one curve.
 • [Basic Trigonometric Identities](!/trigonometry/visual-tools/basic-identities) — the six functions defined on the unit circle, then traced onto these graphs.
 • **Identity explorers** — the [Pythagorean Identities](!/trigonometry/visual-tools/pythagorean-identities), [Double Angle Identities](!/trigonometry/visual-tools/double-angle-identities), [Half Angle Identities](!/trigonometry/visual-tools/half-angle-identities), [Negative Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) and [Supplementary Angle Identities](!/trigonometry/visual-tools/supplementary-angle-identities) tools, each of which can be read off these curves.`,
       before:``,

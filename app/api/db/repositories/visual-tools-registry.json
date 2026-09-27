@@ -3649,6 +3649,14 @@
           "method": "added-sentence",
           "status": "linked",
           "added": "2026-09-20"
+        },
+        {
+          "key": "function-parameters",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Trigonometric Function Parameters",
+          "method": "reverse",
+          "status": "linked",
+          "added": "2026-09-27"
         }
       ]
     },
@@ -78555,6 +78563,288 @@
           "method": "scan",
           "status": "linked",
           "added": "2026-09-22"
+        }
+      ]
+    },
+    "function-parameters": {
+      "slug": "function-parameters",
+      "name": "Trigonometric Function Parameters Explorer",
+      "section": "trigonometry",
+      "pagePath": "pages/trigonometry/visual-tools/function-parameters/index.jsx",
+      "component": "app/components/trigonometry/graphs/SinusoidalParameterExplorer.jsx",
+      "diagramsModule": "app/components/trigonometry/graphs/functionParametersDiagrams.js",
+      "diagramStates": [
+        "generalForm",
+        "amplitude",
+        "reflection",
+        "period",
+        "phaseShift",
+        "verticalShift",
+        "allFour",
+        "tangent"
+      ],
+      "line1": {
+        "done": "2026-09-27",
+        "states": 8,
+        "sections": 20,
+        "units": 8,
+        "anchors": 20,
+        "orphans": 0,
+        "verification": "Rendered check by curl, part before __NEXT_DATA__: 200, 20 <section id>, 8 unit frames each holding one <svg>, 21 <svg> total, 826 KaTeX spans, every same-page href resolving to a section id, 0 orphans. Node run of the diagrams module: 8 SVGs, one per state; reflection carries 2 paths (ghost + curve), tangent 5 branch paths and no max/min dots.",
+        "wiring": "stateUnits built in getStaticProps with demoUnitFrame and injected as content-array items via dangerouslySetInnerHTML. The tool's own explanation panel is prop-fed from the page (explanations prop), each body ending in the state-section / group-section anchor pair.",
+        "notes": "New tool built 2026-09-27 from the sinusoidal-parameter-explorer proposal in the trigonometry figure registry (v10 section 11). Serves trigonometry/graphs obj5-obj9; those sections are not re-harvested yet."
+      },
+      "relatedTerms": [
+        {
+          "term": "asymptote",
+          "entity": "asymptote",
+          "sections": [
+            "choosing-the-function",
+            "why-tangent-and-cotangent-have-no-amplitude"
+          ],
+          "status": "linked",
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "asymptote"
+          },
+          "links": [
+            {
+              "fromSection": "choosing-the-function",
+              "surface": "asymptotes",
+              "target": {
+                "path": "/trigonometry/properties",
+                "section": "5"
+              },
+              "method": "added-sentence",
+              "added": "2026-09-27"
+            },
+            {
+              "fromSection": "why-tangent-and-cotangent-have-no-amplitude",
+              "surface": "asymptotes",
+              "target": {
+                "path": "/trigonometry/properties",
+                "section": "5"
+              },
+              "method": "added-sentence",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "reflection",
+          "entity": "reflection",
+          "sections": [
+            "setting-the-amplitude-with-a"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "setting-the-amplitude-with-a",
+              "surface": "reflection",
+              "target": {
+                "path": "/trigonometry/graphs",
+                "section": "6"
+              },
+              "method": "added-sentence",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "midline",
+          "entity": "midline",
+          "sections": [
+            "moving-the-midline-with-d",
+            "a-raised-midline"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "moving-the-midline-with-d",
+              "surface": "midline",
+              "target": {
+                "path": "/trigonometry/graphs",
+                "section": "9"
+              },
+              "method": "added-sentence",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "function transformations",
+          "entity": "function-transformations",
+          "sections": [
+            "inside-and-outside-the-function"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "inside-and-outside-the-function",
+              "surface": "function transformations",
+              "target": {
+                "path": "/trigonometry/graphs",
+                "section": "5"
+              },
+              "method": "added-sentence",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "key-point method",
+          "entity": "key-point-method",
+          "sections": [
+            "from-a-graph-back-to-an-equation"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "from-a-graph-back-to-an-equation",
+              "surface": "key-point method",
+              "target": {
+                "path": "/trigonometry/graphs",
+                "section": "11"
+              },
+              "method": "added-sentence",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "trigonometric graphs",
+          "entity": "trigonometric-graphs",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "Trigonometric Graphs",
+              "target": {
+                "path": "/trigonometry/graphs",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "properties of trigonometric functions",
+          "entity": "properties-of-trigonometric-functions",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "Properties of Trigonometric Functions",
+              "target": {
+                "path": "/trigonometry/properties",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "unit circle",
+          "entity": "unit-circle",
+          "sections": [
+            "related-concepts-and-tools"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "related-concepts-and-tools",
+              "surface": "Unit Circle",
+              "target": {
+                "path": "/trigonometry/unit-circle",
+                "section": null
+              },
+              "method": "scan",
+              "added": "2026-09-27"
+            }
+          ]
+        },
+        {
+          "term": "amplitude",
+          "entity": "amplitude",
+          "sections": [
+            "setting-the-amplitude-with-a",
+            "a-stretched-wave",
+            "reading-the-curve-back-as-numbers"
+          ],
+          "status": "pending",
+          "plan": {
+            "target": {
+              "path": "/trigonometry/graphs",
+              "section": "6"
+            },
+            "note": "surface occurs inside the tool's own subject matter; queued for the Line 2 write pass with the per-section cap applied"
+          }
+        },
+        {
+          "term": "period",
+          "entity": "period",
+          "sections": [
+            "setting-the-period-with-b",
+            "a-doubled-frequency"
+          ],
+          "status": "pending",
+          "plan": {
+            "target": {
+              "path": "/trigonometry/graphs",
+              "section": "7"
+            },
+            "note": "same as amplitude; queued"
+          }
+        },
+        {
+          "term": "phase shift",
+          "entity": "phase shift",
+          "sections": [
+            "shifting-with-c-and-why-the-shift-is-c-over-b",
+            "a-shifted-wave"
+          ],
+          "status": "pending",
+          "plan": {
+            "target": {
+              "path": "/trigonometry/graphs",
+              "section": "8"
+            },
+            "note": "same as amplitude; queued"
+          }
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "functions-graphs",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Trigonometric Functions Graphs",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-27"
+        },
+        {
+          "key": "angle-explorer",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Angle Explorer",
+          "method": "scan",
+          "status": "linked",
+          "added": "2026-09-27"
+        },
+        {
+          "key": "trigonometry-unit-circle",
+          "fromSection": "related-concepts-and-tools",
+          "surface": "Unit Circle Visualizer",
+          "method": "added-sentence",
+          "status": "linked",
+          "added": "2026-09-27"
         }
       ]
     }
