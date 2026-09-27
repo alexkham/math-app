@@ -805,6 +805,8 @@ For the partner family, see the **complementary angle identities visualizer**.`,
 
 [Opposite Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) — Behavior of trig functions at $-\\theta$ (reflection across the x-axis).
 
+[Shift Identities](!/trigonometry/visual-tools/shift-identities) — Rotations rather than reflections: the angle turned by $\\pi$ or $\\pi/2$, which flips signs or swaps sine and cosine.
+
 [Double Angle Identities](!/trigonometry/visual-tools/double-angle-identities) — Identities for $2\\theta$ that build on the supplementary and complementary results.
 
 [Half Angle Identities](!/trigonometry/visual-tools/half-angle-identities) — Identities for $\\theta/2$, completing the elementary identity family.
