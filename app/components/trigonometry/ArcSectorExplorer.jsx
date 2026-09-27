@@ -1,0 +1,736 @@
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+
+/* ============================================================
+   ArcSectorExplorer v2
+
+   θ and r on one circle. Arc length s = rθ, sector area
+   A = ½r²θ, one-radian marks, sector as a fraction of the
+   disc, and radius 1 as the unit circle.
+
+   Structure (self-contained, no custom-module imports):
+   - ArcSectorScene     : pure SVG renderer, props only,
+                          reports angle drags upward
+   - ControlsBar        : sliders, toggles, frozen states
+   - ExplanationPanel   : live text
+   - ArcSectorExplorer  : wrapper, owns all state
+
+   Colours: radius #4F46E5, arc #B45309, sector #D97706,
+   circle #CBD5E1. Weights: circle 1.2, radius 2.2, arc 2.6.
+   ============================================================ */
+
+/* ---------------- geometry ---------------- */
+
+const PI = Math.PI;
+const TAU = 2 * PI;
+const W = 780;
+const H = 460;
+const CX = 290;
+const CY = 230;
+const U = 70;
+const FX = 665;
+
+const COL = {
+  radius: '#4F46E5',
+  arc: '#B45309',
+  sector: '#D97706',
+  circle: '#CBD5E1',
+  center: '#64748B',
+  ink: '#1E3A5F',
+  muted: '#64748B',
+  axis: '#94A3B8',
+  xLeg: '#1E40AF',
+  yLeg: '#D97706',
+};
+
+const UI = {
+  ui: '#1e40af',
+  uiSoft: '#bfdbfe',
+  text: '#0f172a',
+  muted: '#64748b',
+  card: '#f3f4f6',
+  border: '#d1d5db',
+};
+
+const f2 = (v) => v.toFixed(2);
+const pt = (R, a) => [CX + R * Math.cos(a), CY - R * Math.sin(a)];
+
+const DEFAULT_PRESETS = {
+  oneRadian: { theta: 1, r: 2, oneRad: true, fraction: false },
+  arcLength: { theta: (3 * PI) / 5, r: 2, oneRad: false, fraction: false },
+  sectorArea: { theta: (2 * PI) / 5, r: 2, oneRad: false, fraction: true },
+  radiusOne: { theta: (2 * PI) / 9, r: 1, oneRad: false, fraction: false },
+};
+
+const PRESET_LABELS = {
+  oneRadian: 'one radian',
+  arcLength: 'arc length',
+  sectorArea: 'sector area',
+  radiusOne: 'radius 1',
+};
+
+/* ---------------- formatting ---------------- */
+
+function fNum(v, d = 3) {
+  const s = Math.abs(v).toFixed(d).replace(/\.?0+$/, '');
+  return (v < 0 && s !== '0' ? '−' : '') + s;
+}
+
+function fPiExact(v) {
+  if (Math.abs(v) < 1e-9) return '0';
+  const m = v / PI;
+  for (const d of [1, 2, 3, 4, 5, 6, 9, 10, 12]) {
+    const n = m * d;
+    if (Math.abs(n - Math.round(n)) < 1e-6) {
+      const r = Math.round(n);
+      const a = Math.abs(r);
+      const num = a === 1 ? '' : a;
+      return (r < 0 ? '−' : '') + (d === 1 ? `${num}π` : `${num}π/${d}`);
+    }
+  }
+  return null;
+}
+
+function fTheta(v) {
+  const p = fPiExact(v);
+  if (p && p !== '0') return `${p} ≈ ${fNum(v)}`;
+  if (Math.abs(v - Math.round(v)) < 1e-9) return String(Math.round(v));
+  return fNum(v);
+}
+
+function fDeg(v) {
+  const d = (v * 180) / PI;
+  return Math.abs(d - Math.round(d)) < 0.05 ? String(Math.round(d)) : d.toFixed(1);
+}
+
+const fR = (r) => fNum(r, 2);
+const isUnitR = (r) => Math.abs(r - 1) < 1e-9;
+
+/* ---------------- snapping ---------------- */
+
+function specials(oneRad) {
+  const s = [];
+  for (let k = 0; k <= 12; k++) s.push((k * PI) / 6);
+  for (let k = 1; k < 8; k += 2) s.push((k * PI) / 4);
+  if (oneRad) for (let k = 1; k <= 6; k++) s.push(k);
+  return s;
+}
+
+function snapTheta(v, oneRad) {
+  for (const s of specials(oneRad)) if (Math.abs(v - s) < 0.035) return s;
+  return v;
+}
+
+function snapR(r) {
+  return Math.abs(r - 1) < 0.06 ? 1 : r;
+}
+
+/* ---------------- paths ---------------- */
+
+function arcPath(R, a0, a1) {
+  const span = a1 - a0;
+  if (span <= 1e-6) return '';
+  if (span >= TAU - 1e-6) {
+    const p0 = pt(R, a0);
+    const p1 = pt(R, a0 + PI);
+    return `M ${f2(p0[0])} ${f2(p0[1])} A ${f2(R)} ${f2(R)} 0 1 0 ${f2(p1[0])} ${f2(p1[1])} A ${f2(R)} ${f2(R)} 0 1 0 ${f2(p0[0])} ${f2(p0[1])}`;
+  }
+  const p0 = pt(R, a0);
+  const p1 = pt(R, a1);
+  return `M ${f2(p0[0])} ${f2(p0[1])} A ${f2(R)} ${f2(R)} 0 ${span > PI ? 1 : 0} 0 ${f2(p1[0])} ${f2(p1[1])}`;
+}
+
+function sectorPath(R, a1) {
+  if (a1 <= 1e-6) return '';
+  if (a1 >= TAU - 1e-6) return `${arcPath(R, 0, TAU)} Z`;
+  return `M ${CX} ${CY} L ${arcPath(R, 0, a1).slice(2)} Z`;
+}
+
+/* ---------------- state helpers ---------------- */
+
+function buildInitialState(p) {
+  let s = {
+    theta: typeof p.initialTheta === 'number' ? Math.min(TAU, Math.max(0, p.initialTheta)) : PI / 3,
+    r: typeof p.initialR === 'number' ? Math.min(3, Math.max(0.5, p.initialR)) : 2,
+    oneRad: !!p.initialOneRad,
+    fraction: !!p.initialFraction,
+  };
+  if (p.initialPreset && p.presets && p.presets[p.initialPreset]) s = { ...s, ...p.presets[p.initialPreset] };
+  return s;
+}
+
+/* ---------------- styles ---------------- */
+
+const STYLES = {
+  container: {
+    fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+    padding: '10px',
+    margin: '0 auto',
+    boxSizing: 'border-box',
+    color: UI.text,
+    lineHeight: 'normal',
+  },
+  grid: { display: 'grid', gap: '12px', alignItems: 'start' },
+  graphCard: { background: '#ffffff', border: `1px solid ${UI.uiSoft}`, borderRadius: '8px', padding: '8px', boxSizing: 'border-box' },
+  svg: { width: '100%', height: 'auto', display: 'block', touchAction: 'none', userSelect: 'none', WebkitUserSelect: 'none' },
+  legend: { display: 'flex', flexWrap: 'wrap', gap: '14px', fontSize: '12px', color: UI.muted, padding: '6px 4px 0' },
+  legendItem: { display: 'inline-flex', alignItems: 'center', gap: '6px' },
+  legendSwatch: (color, opacity = 1) => ({ width: '18px', height: '3px', borderRadius: '2px', display: 'inline-block', background: color, opacity }),
+  controlsCard: {
+    background: UI.card, border: `1px solid ${UI.border}`, borderRadius: '8px', padding: '10px',
+    marginTop: '10px', display: 'grid', gap: '10px', boxSizing: 'border-box',
+  },
+  row: { display: 'flex', flexWrap: 'wrap', gap: '18px', alignItems: 'flex-end' },
+  group: { display: 'flex', flexDirection: 'column', gap: '4px' },
+  sectionLabel: { fontSize: '11px', color: UI.ui, fontWeight: 500, letterSpacing: '0.2px' },
+  btnGroup: { display: 'flex', flexWrap: 'wrap', gap: '3px' },
+  button: (active) => ({
+    padding: '5px 10px',
+    fontSize: '12px',
+    border: `1px solid ${active ? UI.ui : UI.uiSoft}`,
+    borderRadius: '4px',
+    background: active ? UI.ui : '#ffffff',
+    color: active ? '#ffffff' : UI.ui,
+    cursor: 'pointer',
+    fontFamily: 'inherit',
+    fontWeight: 400,
+    lineHeight: 'normal',
+    margin: 0,
+  }),
+  slider: { display: 'flex', alignItems: 'center', gap: '10px' },
+  range: { width: '220px', accentColor: UI.ui, margin: '2px' },
+  readout: { fontSize: '13px', color: UI.text, minWidth: '150px' },
+  b: { fontWeight: 600 },
+  divider: { borderTop: `1px solid ${UI.border}` },
+  panel: { background: UI.card, border: `1px solid ${UI.border}`, borderRadius: '8px', padding: '12px', boxSizing: 'border-box' },
+  panelTitle: { fontSize: '12px', fontWeight: 500, color: UI.ui, marginBottom: '8px', paddingBottom: '6px', borderBottom: `1px solid ${UI.border}` },
+  panelBody: { fontSize: '13px', lineHeight: 1.65, color: UI.text },
+  sec: { marginBottom: '10px', paddingBottom: '8px', borderBottom: `1px solid ${UI.border}` },
+  h3: { fontSize: '14px', fontWeight: 700, lineHeight: 1.65, margin: '0 0 4px', color: UI.text },
+  p: { margin: '0 0 8px' },
+  hint: { margin: '0 0 8px', color: UI.muted, fontSize: '12px' },
+  badge: {
+    display: 'inline-block', fontSize: '12px', fontWeight: 600, padding: '2px 8px', borderRadius: '10px',
+    margin: '2px 0 6px', background: '#fef3c7', color: '#92400e',
+  },
+  cA: { color: COL.arc, fontWeight: 600 },
+};
+
+/* ============================================================
+   ArcSectorScene - pure SVG renderer
+   ============================================================ */
+
+function ArcSectorScene({ theta, r, oneRad, fraction, onAngleDrag }) {
+  const svgRef = useRef(null);
+  const draggingRef = useRef(false);
+
+  const angleFromEvent = (e) => {
+    const svg = svgRef.current;
+    const p0 = svg.createSVGPoint();
+    p0.x = e.clientX;
+    p0.y = e.clientY;
+    const p = p0.matrixTransform(svg.getScreenCTM().inverse());
+    let a = Math.atan2(CY - p.y, p.x - CX);
+    if (a < 0) a += TAU;
+    return a;
+  };
+
+  const handlePointerDown = (e) => {
+    const el = e.target.closest ? e.target.closest('[data-drag]') : null;
+    if (!el) return;
+    draggingRef.current = true;
+    try { svgRef.current.setPointerCapture(e.pointerId); } catch (_) { /* noop */ }
+    e.preventDefault();
+  };
+
+  const handlePointerMove = (e) => {
+    if (draggingRef.current && onAngleDrag) onAngleDrag(angleFromEvent(e));
+  };
+
+  const handlePointerEnd = (e) => {
+    if (!draggingRef.current) return;
+    draggingRef.current = false;
+    try { svgRef.current.releasePointerCapture(e.pointerId); } catch (_) { /* noop */ }
+  };
+
+  let kc = 0;
+  const K = () => `n${kc++}`;
+
+  const line = (a, b, stroke, w, extra = {}) => (
+    <line key={K()} x1={f2(a[0])} y1={f2(a[1])} x2={f2(b[0])} y2={f2(b[1])} stroke={stroke} strokeWidth={w} strokeLinecap="round" {...extra} />
+  );
+  const text = (s, x, y, fill, size, anchor = 'middle', weight = 600) => (
+    <text
+      key={K()}
+      x={f2(x)}
+      y={f2(y)}
+      textAnchor={anchor}
+      fontSize={size}
+      fontWeight={weight}
+      fill={fill}
+      stroke="#ffffff"
+      strokeWidth={3}
+      strokeLinejoin="round"
+      paintOrder="stroke"
+    >
+      {s}
+    </text>
+  );
+  const tickAcross = (p, dirAngle, len, color) => {
+    const dx = (Math.cos(dirAngle) * len) / 2;
+    const dy = (-Math.sin(dirAngle) * len) / 2;
+    return line([p[0] - dx, p[1] - dy], [p[0] + dx, p[1] + dy], color, 1.4);
+  };
+
+  const th = theta;
+  const R = r * U;
+  const unit = isUnitR(r);
+  const o = [];
+  const late = [];
+
+  // disc tint (fraction mode)
+  if (fraction) o.push(<circle key={K()} cx={CX} cy={CY} r={f2(R)} fill={COL.radius} fillOpacity={0.11} />);
+
+  // axes (radius 1)
+  if (unit) {
+    const L = R + 70;
+    o.push(line([CX - L, CY], [CX + L, CY], COL.axis, 1));
+    o.push(line([CX, CY - L], [CX, CY + L], COL.axis, 1));
+  }
+
+  // circle
+  o.push(<circle key={K()} cx={CX} cy={CY} r={f2(R)} fill="none" stroke={COL.circle} strokeWidth={1.2} />);
+
+  // sector
+  const sp = sectorPath(R, th);
+  if (sp) o.push(<path key={K()} d={sp} fill={COL.sector} fillOpacity={fraction ? 0.42 : 0.16} stroke="none" />);
+
+  // unit triangle
+  const P = pt(R, th);
+  if (unit && th > 1e-6 && th < TAU - 1e-6) {
+    const F = [P[0], CY];
+    o.push(
+      <polygon
+        key={K()}
+        points={`${f2(CX)},${f2(CY)} ${f2(F[0])},${f2(F[1])} ${f2(P[0])},${f2(P[1])}`}
+        fill={COL.radius}
+        fillOpacity={0.07}
+      />
+    );
+    if (Math.abs(Math.sin(th)) > 0.02) o.push(line(F, P, COL.yLeg, 2));
+    if (Math.abs(Math.cos(th)) > 0.02) o.push(line([CX, CY], F, COL.xLeg, 2));
+    if (Math.abs(Math.sin(th)) > 0.12 && Math.abs(Math.cos(th)) > 0.12) {
+      const sgx = Math.cos(th) >= 0 ? -1 : 1;
+      const sgy = Math.sin(th) >= 0 ? -1 : 1;
+      const m = 8;
+      o.push(
+        <polyline
+          key={K()}
+          points={`${f2(F[0] + sgx * m)},${f2(F[1])} ${f2(F[0] + sgx * m)},${f2(F[1] + sgy * m)} ${f2(F[0])},${f2(F[1] + sgy * m)}`}
+          fill="none"
+          stroke={COL.muted}
+          strokeWidth={1.1}
+        />
+      );
+    }
+    if (Math.abs(Math.cos(th)) > 0.12) {
+      late.push(text('x', (CX + F[0]) / 2, CY + (Math.sin(th) >= 0 ? 17 : -8), COL.xLeg, 13));
+    }
+    if (Math.abs(Math.sin(th)) > 0.12) {
+      late.push(text('y', F[0] + (Math.cos(th) >= 0 ? 9 : -9), (CY + P[1]) / 2 + 4, COL.yLeg, 13, Math.cos(th) >= 0 ? 'start' : 'end'));
+    }
+  }
+
+  // one-radian reference
+  if (oneRad) {
+    for (let k = 1; k <= 6; k++) {
+      o.push(tickAcross(pt(R, k), k, 12, COL.arc));
+      const lp = pt(R + 17, k);
+      o.push(text(String(k), lp[0], lp[1] + 4, COL.arc, 11));
+    }
+    if (Math.abs(th - 1) > 1e-6) o.push(line([CX, CY], pt(R, 1), COL.radius, 1.4, { strokeDasharray: '5 4' }));
+    o.push(<path key={K()} d={arcPath(R + 8, 0, 1)} fill="none" stroke={COL.arc} strokeWidth={1.6} strokeDasharray="4 3" />);
+    const ap1 = pt(R + 32, 0.42);
+    o.push(text('arc = r', ap1[0], ap1[1], COL.arc, 13, 'start'));
+    o.push(tickAcross(pt(R / 2, 0), PI / 2, 10, COL.radius));
+    o.push(tickAcross(pt(R / 2, 1), 1 + PI / 2, 10, COL.radius));
+    o.push(tickAcross(pt(R + 8, 0.5), 0.5, 10, COL.arc));
+  }
+
+  // radii
+  const radCol = fraction ? COL.arc : COL.radius;
+  const radW = fraction ? 2 : 2.2;
+  o.push(line([CX, CY], pt(R, 0), radCol, radW));
+  if (th > 1e-6 && th < TAU - 1e-6) o.push(line([CX, CY], P, radCol, radW));
+
+  // angle marker
+  const am = Math.min(34, 0.45 * R);
+  const amp = arcPath(am, 0, th);
+  if (amp) o.push(<path key={K()} d={amp} fill="none" stroke={COL.arc} strokeWidth={1.7} strokeLinecap="round" />);
+  if (th > 0.12) {
+    const lp = pt(am + 15, th / 2);
+    o.push(text(Math.abs(th - 1) < 1e-9 ? 'θ = 1' : 'θ', lp[0], lp[1] + 5, COL.arc, 15));
+  }
+
+  // arc
+  const ap = arcPath(R, 0, th);
+  if (ap) o.push(<path key={K()} d={ap} fill="none" stroke={COL.arc} strokeWidth={2.6} strokeLinecap="round" />);
+
+  o.push(...late);
+
+  // labels
+  const rLab = unit ? '1' : 'r';
+  if (!unit) o.push(text(rLab, CX + R / 2, CY + 18, radCol, 14));
+  if (th > 0.25 && th < TAU - 0.25) {
+    const mid = pt(R / 2, th);
+    const n = th + PI / 2;
+    o.push(text(rLab, mid[0] + 14 * Math.cos(n), mid[1] - 14 * Math.sin(n) + 5, radCol, 14));
+  }
+  if (th > 0.2) {
+    const sp2 = pt(R + (oneRad ? 30 : 18), th / 2);
+    if (!(oneRad && Math.abs(th / 2 - 0.42) < 0.35)) o.push(text('s', sp2[0], sp2[1] + 5, COL.arc, 16));
+  }
+
+  // unit point coordinates
+  if (unit) {
+    const cp = pt(R + 26, th);
+    const anchor = Math.cos(th) > 0.3 ? 'start' : Math.cos(th) < -0.3 ? 'end' : 'middle';
+    o.push(text(`(${fNum(Math.cos(th))}, ${fNum(Math.sin(th))})`, cp[0], cp[1] + 5, COL.radius, 12, anchor));
+  }
+
+  // centre + handle
+  o.push(<circle key={K()} cx={CX} cy={CY} r={3.5} fill={COL.center} />);
+  o.push(
+    <g key={K()} data-drag="theta" style={{ cursor: 'grab' }}>
+      <circle cx={f2(P[0])} cy={f2(P[1])} r={18} fill="transparent" />
+      <circle cx={f2(P[0])} cy={f2(P[1])} r={8} fill="#fff" stroke={COL.radius} strokeWidth={3} />
+      <circle cx={f2(P[0])} cy={f2(P[1])} r={2.5} fill={COL.radius} />
+    </g>
+  );
+
+  // formula block
+  const s = r * th;
+  const A = 0.5 * r * r * th;
+  const L = [];
+  L.push([`θ = ${fTheta(th)} rad = ${fDeg(th)}°`, 13, COL.muted, 400]);
+  L.push(null);
+  L.push([unit ? 's = r θ = θ' : 's = r θ', 20, COL.ink, 600]);
+  L.push([`= ${fR(r)} × ${fNum(th)} = ${fNum(s)}`, 13, COL.arc, 600]);
+  L.push(null);
+  if (fraction) {
+    L.push(['A = (θ / 2π) · π r²', 18, COL.ink, 600]);
+    L.push([`= ${fNum(th / TAU)} × ${fNum(PI * r * r)} = ${fNum(A)}`, 13, COL.arc, 600]);
+    L.push([`the slice is ${fNum(th / TAU)} of the disc`, 12, COL.muted, 400]);
+  } else {
+    L.push(['A = ½ r² θ', 20, COL.ink, 600]);
+    L.push([`= ½ × ${fR(r)}² × ${fNum(th)} = ${fNum(A)}`, 13, COL.arc, 600]);
+  }
+  if (oneRad) {
+    L.push(null);
+    L.push(['arc = r  ⇔  θ = 1 rad', 13, COL.ink, 600]);
+    L.push(['one turn = 2π ≈ 6.28 rad', 12, COL.muted, 400]);
+  }
+  if (unit) {
+    L.push(null);
+    L.push(['sin θ = y / r = y', 13, COL.ink, 600]);
+    L.push(['cos θ = x / r = x', 13, COL.ink, 600]);
+  }
+  let y = 58;
+  for (const ln of L) {
+    if (!ln) { y += 12; continue; }
+    y += ln[1] + 8;
+    o.push(text(ln[0], FX, y, ln[2], ln[1], 'middle', ln[3]));
+  }
+
+  return (
+    <svg
+      ref={svgRef}
+      viewBox={`0 0 ${W} ${H}`}
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label="Arc and sector explorer"
+      style={STYLES.svg}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerEnd}
+      onPointerCancel={handlePointerEnd}
+    >
+      <g fontFamily="sans-serif">{o}</g>
+    </svg>
+  );
+}
+
+/* ============================================================
+   Legend
+   ============================================================ */
+
+function Legend() {
+  return (
+    <div style={STYLES.legend}>
+      <span style={STYLES.legendItem}><i style={STYLES.legendSwatch(COL.radius)} />radius</span>
+      <span style={STYLES.legendItem}><i style={STYLES.legendSwatch(COL.arc)} />arc</span>
+      <span style={STYLES.legendItem}><i style={STYLES.legendSwatch(COL.sector, 0.5)} />sector</span>
+      <span style={STYLES.legendItem}><i style={STYLES.legendSwatch(COL.circle)} />circle</span>
+    </div>
+  );
+}
+
+/* ============================================================
+   ControlsBar
+   ============================================================ */
+
+function ControlsBar({
+  theta, r, oneRad, fraction,
+  onTheta, onR, onToggleOneRad, onToggleFraction, onUnit,
+  presets, showPresets, onPreset,
+}) {
+  return (
+    <div style={STYLES.controlsCard}>
+      <div style={STYLES.row}>
+        <div style={STYLES.group}>
+          <span style={STYLES.sectionLabel}>Angle θ</span>
+          <div style={STYLES.slider}>
+            <input
+              type="range"
+              min="0"
+              max="6.283185"
+              step="0.001"
+              value={theta}
+              onChange={(e) => onTheta(parseFloat(e.target.value))}
+              style={STYLES.range}
+            />
+            <span style={STYLES.readout}>
+              θ = <b style={STYLES.b}>{fTheta(theta)}</b> rad = <b style={STYLES.b}>{`${fDeg(theta)}°`}</b>
+            </span>
+          </div>
+        </div>
+        <div style={STYLES.group}>
+          <span style={STYLES.sectionLabel}>Radius r</span>
+          <div style={STYLES.slider}>
+            <input
+              type="range"
+              min="0.5"
+              max="3"
+              step="0.05"
+              value={r}
+              onChange={(e) => onR(parseFloat(e.target.value))}
+              style={STYLES.range}
+            />
+            <span style={STYLES.readout}>
+              r = <b style={STYLES.b}>{fR(r)}</b>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div style={STYLES.divider} />
+
+      <div style={STYLES.row}>
+        <div style={STYLES.group}>
+          <span style={STYLES.sectionLabel}>Show</span>
+          <div style={STYLES.btnGroup}>
+            <button type="button" onClick={onToggleOneRad} style={STYLES.button(oneRad)}>One radian</button>
+            <button type="button" onClick={onToggleFraction} style={STYLES.button(fraction)}>Sector as fraction</button>
+            <button type="button" onClick={onUnit} style={STYLES.button(isUnitR(r))}>r = 1</button>
+          </div>
+        </div>
+      </div>
+
+      {showPresets && presets && (
+        <>
+          <div style={STYLES.divider} />
+          <div style={STYLES.row}>
+            <div style={STYLES.group}>
+              <span style={STYLES.sectionLabel}>Examples</span>
+              <div style={STYLES.btnGroup}>
+                {Object.keys(presets).map((k) => (
+                  <button key={k} type="button" onClick={() => onPreset(k)} style={STYLES.button(false)}>{PRESET_LABELS[k] || k}</button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+/* ============================================================
+   ExplanationPanel
+   ============================================================ */
+
+function ExplanationPanel({ theta, r, oneRad, fraction, title, extra, renderText }) {
+  const th = theta;
+  const s = r * th;
+  const A = 0.5 * r * r * th;
+  const unit = isUnitR(r);
+
+  return (
+    <div style={STYLES.panel}>
+      <div style={STYLES.panelTitle}>{title}</div>
+      <div style={STYLES.panelBody}>
+        <div style={STYLES.sec}>
+          <h3 style={STYLES.h3}>Arc length</h3>
+          <p style={STYLES.p}>
+            <span style={STYLES.cA}>s = r θ</span>
+            {` = ${fR(r)} × ${fNum(th)} = `}
+            <b style={STYLES.b}>{fNum(s)}</b>.
+          </p>
+          <p style={STYLES.p}>
+            A radian is defined as arc divided by radius, so s = r θ is that definition turned around. It needs θ in radians and no conversion factor.
+          </p>
+          <p style={STYLES.hint}>{`In degrees the factor comes back: s = r · ${fDeg(th)}° · π/180.`}</p>
+        </div>
+
+        {oneRad && (
+          <div style={STYLES.sec}>
+            <h3 style={STYLES.h3}>One radian</h3>
+            {Math.abs(th - 1) < 1e-9 && <span style={STYLES.badge}>{`θ = 1 rad: arc = r = ${fR(r)}`}</span>}
+            <p style={STYLES.p}>
+              1 rad is the angle whose arc is exactly one radius long. Laid around the circle, a full turn holds 2π ≈ 6.28 of these arcs: six marks and a bit more.
+            </p>
+          </div>
+        )}
+
+        <div style={STYLES.sec}>
+          <h3 style={STYLES.h3}>Sector area</h3>
+          <p style={STYLES.p}>
+            <span style={STYLES.cA}>A = ½ r² θ</span> = <b style={STYLES.b}>{fNum(A)}</b>.
+          </p>
+          <p style={STYLES.p}>The sector is the fraction θ/2π of the whole disc πr², and (θ/2π) · πr² simplifies to ½ r² θ.</p>
+          {fraction && (
+            <p style={STYLES.p}>{`Here θ/2π = ${fNum(th / TAU)}, so the slice is ${fNum((100 * th) / TAU, 1)}% of the disc.`}</p>
+          )}
+        </div>
+
+        <div style={STYLES.sec}>
+          <h3 style={STYLES.h3}>Changing r</h3>
+          <p style={STYLES.p}>
+            {`θ stays ${fTheta(th)} rad whatever the radius: the angle does not depend on r. The arc grows in proportion to r, the area to r².`}
+          </p>
+        </div>
+
+        <div style={STYLES.sec}>
+          <h3 style={STYLES.h3}>Radius 1</h3>
+          {unit ? (
+            <>
+              <p style={STYLES.p}>
+                {`With r = 1 the arc length equals the angle: s = θ = ${fNum(th)}. The point on the circle is (cos θ, sin θ) = (${fNum(Math.cos(th))}, ${fNum(Math.sin(th))}).`}
+              </p>
+              <p style={STYLES.p}>The ratios sin θ = y/r and cos θ = x/r lose their denominator: sin θ = y, cos θ = x.</p>
+            </>
+          ) : (
+            <p style={STYLES.hint}>Set r = 1 to see the denominator disappear from the ratios.</p>
+          )}
+        </div>
+
+        <p style={STYLES.hint}>Drag the handle on the circle, or use the sliders. θ snaps at special angles.</p>
+
+        {extra ? <div style={STYLES.p}>{renderText(extra)}</div> : null}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   ArcSectorExplorer - wrapper, owns all state
+   ============================================================ */
+
+export default function ArcSectorExplorer({
+  initialTheta = PI / 3,
+  initialR = 2,
+  initialOneRad = false,
+  initialFraction = false,
+  initialPreset = null,
+  presets = DEFAULT_PRESETS,
+  showPresets = true,
+  explanations = null,
+  renderText = (s) => s,
+  explanationsTitle = 'Explanations',
+  maxWidth = 1252,
+  narrowBreakpoint = 880,
+}) {
+  const [st, setSt] = useState(() => buildInitialState({
+    initialTheta, initialR, initialOneRad, initialFraction, initialPreset, presets,
+  }));
+  const [narrow, setNarrow] = useState(false);
+  const containerRef = useRef(null);
+
+  // responsive layout: stack columns when the container is narrow
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return undefined;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0] && entries[0].contentRect ? entries[0].contentRect.width : el.offsetWidth;
+      setNarrow(w < narrowBreakpoint);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [narrowBreakpoint]);
+
+  const handleTheta = useCallback((v) => {
+    setSt((s) => ({ ...s, theta: snapTheta(v, s.oneRad) }));
+  }, []);
+
+  const handleAngleDrag = useCallback((a) => {
+    setSt((s) => {
+      let v = a;
+      if (Math.abs(v - s.theta) > PI) v = s.theta > PI ? TAU : 0;
+      return { ...s, theta: snapTheta(v, s.oneRad) };
+    });
+  }, []);
+
+  const handleR = useCallback((v) => setSt((s) => ({ ...s, r: snapR(v) })), []);
+  const handleToggleOneRad = useCallback(() => setSt((s) => ({ ...s, oneRad: !s.oneRad })), []);
+  const handleToggleFraction = useCallback(() => setSt((s) => ({ ...s, fraction: !s.fraction })), []);
+  const handleUnit = useCallback(() => setSt((s) => ({ ...s, r: 1 })), []);
+
+  const handlePreset = useCallback((k) => {
+    if (!presets || !presets[k]) return;
+    setSt((s) => ({ ...s, ...presets[k] }));
+  }, [presets]);
+
+  return (
+    <div ref={containerRef} style={{ ...STYLES.container, maxWidth: `${maxWidth}px` }}>
+      <div style={{ ...STYLES.grid, gridTemplateColumns: narrow ? '1fr' : '5fr 2fr' }}>
+        <div>
+          <div style={STYLES.graphCard}>
+            <ArcSectorScene
+              theta={st.theta}
+              r={st.r}
+              oneRad={st.oneRad}
+              fraction={st.fraction}
+              onAngleDrag={handleAngleDrag}
+            />
+            <Legend />
+          </div>
+          <ControlsBar
+            theta={st.theta}
+            r={st.r}
+            oneRad={st.oneRad}
+            fraction={st.fraction}
+            onTheta={handleTheta}
+            onR={handleR}
+            onToggleOneRad={handleToggleOneRad}
+            onToggleFraction={handleToggleFraction}
+            onUnit={handleUnit}
+            presets={presets}
+            showPresets={showPresets}
+            onPreset={handlePreset}
+          />
+        </div>
+        <ExplanationPanel
+          theta={st.theta}
+          r={st.r}
+          oneRad={st.oneRad}
+          fraction={st.fraction}
+          title={explanationsTitle}
+          extra={explanations}
+          renderText={renderText}
+        />
+      </div>
+    </div>
+  );
+}
+
+/* Named exports for the page's diagrams module (Line 1 frozen states). */
+export { ArcSectorScene, DEFAULT_PRESETS };

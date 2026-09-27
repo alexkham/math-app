@@ -195,6 +195,7 @@ For full definitions, see [complementary angles](!/trigonometry/definitions#comp
 
 • [Unit Circle](!/visual-tools/unit-circle) — visualize how angle position determines $\\sin$, $\\cos$, and $\\tan$ on a circle of radius $1$.
 • **Degrees and Radians Converter** — quick numeric conversion without the diagram.
+• [Arc and Sector Explorer](!/trigonometry/visual-tools/arc-sector) — what a radian actually measures: drag the angle and radius and watch the arc length $s = r	heta$ and the sector area follow.
 • **Trigonometric Functions** — full theory of sine, cosine, tangent, and their reciprocals.
 • **Special Angles Table** — exact values at $0°$, $30°$, $45°$, $60°$, $90°$, and beyond.
 • **Coterminal Angles** — practice problems and proofs for angles sharing a terminal side.
