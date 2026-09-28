@@ -10,6 +10,9 @@ import BasicTrigIdentitiesExplorer from '../../../../app/components/trigonometry
 import identityDiagrams from '../../../../app/components/trigonometry/identities/basic-identities/basicIdentitiesDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -640,6 +643,111 @@ Cotangent diverges where the sine leg vanishes — $0°$, $180°$, $360°$ — e
     }
   }
 
+  const instructions = [
+    'Drag the blue dot on the circle, or the **$\\theta$ slider** below it, to rotate the angle — the slider runs past $360°$ for several turns. [Learn more about getting started](!#getting-started)',
+    'The **deg** / **rad** buttons switch every angle readout between degrees and radians. [Learn more about the units](!#getting-started)',
+    'The six **tabs** switch the active function between $\\sin$, $\\cos$, $\\tan$, $\\csc$, $\\sec$ and $\\cot$; the circle, the graph and the steps all follow. [Learn more about switching functions](!#switching-between-the-six-functions)',
+    'Press **Play**, or step with **Next ›** and **‹ Prev**, to build the function in five stages: place the angle, read the leg, trace the graph, reference angle, periodicity. **Reset** starts over. [Learn more about the derivation](!#stepping-through-the-derivation)',
+    'On the unit circle, the red ray marks $\\theta$, the point $P$ sits at $(\\cos\\theta, \\sin\\theta)$, and the coloured leg shows the value being read. [Learn more about the circle](!#reading-the-unit-circle-display)',
+    'The graph plots the active function over several periods, with a dot at the current angle and dashed asymptotes. [Learn more about the graph](!#reading-the-graph)',
+    'Push the slider past $360°$ to see the point return to the same place and the value repeat. [Learn more about periodicity](!#exploring-periodicity)',
+    'The **live table** under the circle lists all six functions with their recipe and value at $\\theta$; click a row to switch to it. [Learn more about the table](!#the-live-formula-table)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real
+     BasicTrigIdentitiesExplorer (syncQuery off). Range 0 = the θ slider,
+     -360..1080 degrees. Tab = nth 0, table row = nth 1. */
+  const demos = {
+    'stepping-through-the-derivation': {
+      title: 'The sine derivation, step by step',
+      script: [
+        { say: `STEP 1 IS ON: PLACE THE ANGLE
+DRAG θ → 135°.
+Red ray turns. Point P follows.` },
+        { slide: { range: 0 }, to: 135, ms: 1500 },
+        { wait: 2400 },
+        { say: `TAP Next › — STEP 2
+Drop the vertical leg.
+Its signed length = sin θ.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › — STEP 3
+Trace on the graph.
+Blue dot on the wave = same value.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › — STEP 4
+Reference angle: 45°.
+Acute angle to the x-axis. Sets the size.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › — STEP 5
+Periodicity.
+Every 360°: same point, same value.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'exploring-periodicity': {
+      title: 'Angle, turns and units',
+      script: [
+        { say: `DRAG θ → 150°
+Quadrant II. Ray and point follow.
+sin still positive.` },
+        { slide: { range: 0 }, to: 150, ms: 1500 },
+        { wait: 2400 },
+        { say: `DRAG θ → 510°
+One full turn more.
+Same point. Same value. Arc spirals.` },
+        { slide: { range: 0 }, to: 510, ms: 1900 },
+        { wait: 2600 },
+        { say: `TAP rad
+Angles now in radians.
+510° = 17π/6.` },
+        { click: { button: 'rad', exact: true } },
+        { wait: 2400 },
+        { say: `DRAG θ → −60°
+Negative angle: clockwise.
+sin negative. Point below the axis.` },
+        { slide: { range: 0 }, to: -60, ms: 1900 },
+        { wait: 2600 },
+        { say: `TAP deg
+Back to degrees.` },
+        { click: { button: 'deg', exact: true } },
+        { wait: 2000 },
+      ],
+    },
+    'the-live-formula-table': {
+      title: 'Functions and the live table',
+      script: [
+        { say: `TAP tan(θ)
+Both legs used.
+tan = sin ÷ cos.` },
+        { click: { button: 'tan(θ)', exact: true } },
+        { wait: 2400 },
+        { say: `DRAG θ → 90°
+cos = 0.
+tan undefined. Graph at an asymptote.` },
+        { slide: { range: 0 }, to: 90, ms: 1500 },
+        { wait: 2600 },
+        { say: `TAP TABLE ROW csc(θ)
+Row tap = tab tap.
+csc = 1 / sin = 1 at 90°.` },
+        { click: { button: 'csc(θ)', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW cos(θ)
+Horizontal leg. cos 90° = 0.` },
+        { click: { button: 'cos(θ)', nth: 1 } },
+        { wait: 2400 },
+        { say: `DRAG θ → 45°
+Whole value column updates.
+sin = cos = 0.707. tan = 1.` },
+        { slide: { range: 0 }, to: 45, ms: 1500 },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   const explanations = {
     sin: { steps: [
       `Rotate the ray from the positive x-axis through θ counterclockwise. The terminal point P sits on the unit circle. [Full treatment](!#sine-step-1-place-the-angle) · [All about sine](!#sine-on-the-unit-circle)`,
@@ -694,6 +802,8 @@ Cotangent diverges where the sine leg vanishes — $0°$, $180°$, $360°$ — e
          faqQuestions,
          schemas,
          explanations,
+         instructions,
+         demos,
          stateUnits,
           seoData: {
         title: "Basic Trig Identities Explorer | Unit Circle Visualizer",
@@ -710,7 +820,21 @@ Cotangent diverges where the sine leg vanishes — $0°$, $180°$, $360°$ — e
     }
    }
 
-export default function BasicTrigIdentitiesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function BasicTrigIdentitiesPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <BasicTrigIdentitiesExplorer explanations={explanations} syncQuery={false}/>
+    </ToolDemoPlayer>
+  )
+
 
     
   const genericSections=[
@@ -743,6 +867,7 @@ export default function BasicTrigIdentitiesPage({relatedTools, seoData, sections
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          demo('stepping-through-the-derivation'),
           sectionsContent.obj3.content,
         ]
     },
@@ -767,6 +892,7 @@ export default function BasicTrigIdentitiesPage({relatedTools, seoData, sections
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
+          demo('exploring-periodicity'),
           sectionsContent.obj6.content,
         ]
     },
@@ -775,6 +901,7 @@ export default function BasicTrigIdentitiesPage({relatedTools, seoData, sections
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
+          demo('the-live-formula-table'),
           sectionsContent.obj7.content,
         ]
     },
@@ -1226,6 +1353,10 @@ export default function BasicTrigIdentitiesPage({relatedTools, seoData, sections
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'-20px',marginBottom:'0px'}}>Basic Trigonometric Identities</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <BasicTrigIdentitiesExplorer explanations={explanations}/>
    <br/>
