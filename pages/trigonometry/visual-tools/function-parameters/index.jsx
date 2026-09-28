@@ -622,7 +622,7 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj1.title,
       link: sectionsContent.obj1.link,
       content: [
-        <ToolDemoPlayer key={'demo-choosing-the-function'} script={demoScripts['choosing-the-function']} scale={0.6} renderText={processContent} label='Demo: choosing the function'>
+        <ToolDemoPlayer key={'demo-choosing-the-function'} script={demoScripts['choosing-the-function']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj1.title}`} title={sectionsContent.obj1.title}>
           <SinusoidalParameterExplorer explanations={explanations} />
         </ToolDemoPlayer>,
         sectionsContent.obj1.content
@@ -633,7 +633,7 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj2.title,
       link: sectionsContent.obj2.link,
       content: [
-        <ToolDemoPlayer key={'demo-the-equation-bar-and-the-colour-key'} script={demoScripts['the-equation-bar-and-the-colour-key']} scale={0.6} renderText={processContent} label='Demo: the equation bar and the colour key'>
+        <ToolDemoPlayer key={'demo-the-equation-bar-and-the-colour-key'} script={demoScripts['the-equation-bar-and-the-colour-key']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj2.title}`} title={sectionsContent.obj2.title}>
           <SinusoidalParameterExplorer explanations={explanations} />
         </ToolDemoPlayer>,
         sectionsContent.obj2.content
@@ -644,7 +644,7 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj3.title,
       link: sectionsContent.obj3.link,
       content: [
-        <ToolDemoPlayer key={'demo-setting-the-amplitude-with-a'} script={demoScripts['setting-the-amplitude-with-a']} scale={0.6} renderText={processContent} label='Demo: setting the amplitude with a'>
+        <ToolDemoPlayer key={'demo-setting-the-amplitude-with-a'} script={demoScripts['setting-the-amplitude-with-a']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj3.title}`} title={sectionsContent.obj3.title}>
           <SinusoidalParameterExplorer explanations={explanations} />
         </ToolDemoPlayer>,
         sectionsContent.obj3.content
@@ -655,7 +655,7 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj4.title,
       link: sectionsContent.obj4.link,
       content: [
-        <ToolDemoPlayer key={'demo-moving-the-midline-with-d'} script={demoScripts['moving-the-midline-with-d']} scale={0.6} renderText={processContent} label='Demo: moving the midline with d'>
+        <ToolDemoPlayer key={'demo-moving-the-midline-with-d'} script={demoScripts['moving-the-midline-with-d']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj4.title}`} title={sectionsContent.obj4.title}>
           <SinusoidalParameterExplorer explanations={explanations} />
         </ToolDemoPlayer>,
         sectionsContent.obj4.content
@@ -666,7 +666,7 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj5.title,
       link: sectionsContent.obj5.link,
       content: [
-        <ToolDemoPlayer key={'demo-setting-the-period-with-b'} script={demoScripts['setting-the-period-with-b']} scale={0.6} renderText={processContent} label='Demo: setting the period with b'>
+        <ToolDemoPlayer key={'demo-setting-the-period-with-b'} script={demoScripts['setting-the-period-with-b']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj5.title}`} title={sectionsContent.obj5.title}>
           <SinusoidalParameterExplorer explanations={explanations} />
         </ToolDemoPlayer>,
         sectionsContent.obj5.content
@@ -677,7 +677,7 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj6.title,
       link: sectionsContent.obj6.link,
       content: [
-        <ToolDemoPlayer key={'demo-shifting-with-c-and-why-the-shift-is-c-over-b'} script={demoScripts['shifting-with-c-and-why-the-shift-is-c-over-b']} scale={0.6} renderText={processContent} label='Demo: shifting with c and why the shift is c over b'>
+        <ToolDemoPlayer key={'demo-shifting-with-c-and-why-the-shift-is-c-over-b'} script={demoScripts['shifting-with-c-and-why-the-shift-is-c-over-b']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj6.title}`} title={sectionsContent.obj6.title}>
           <SinusoidalParameterExplorer explanations={explanations} />
         </ToolDemoPlayer>,
         sectionsContent.obj6.content
@@ -688,7 +688,7 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj7.title,
       link: sectionsContent.obj7.link,
       content: [
-        <ToolDemoPlayer key={'demo-the-guided-walk'} script={demoScripts['the-guided-walk']} scale={0.6} renderText={processContent} label='Demo: the guided walk'>
+        <ToolDemoPlayer key={'demo-the-guided-walk'} script={demoScripts['the-guided-walk']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj7.title}`} title={sectionsContent.obj7.title}>
           <SinusoidalParameterExplorer explanations={explanations} />
         </ToolDemoPlayer>,
         sectionsContent.obj7.content
@@ -699,7 +699,7 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj8.title,
       link: sectionsContent.obj8.link,
       content: [
-        <ToolDemoPlayer key={'demo-reading-the-curve-back-as-numbers'} script={demoScripts['reading-the-curve-back-as-numbers']} scale={0.6} renderText={processContent} label='Demo: reading the curve back as numbers'>
+        <ToolDemoPlayer key={'demo-reading-the-curve-back-as-numbers'} script={demoScripts['reading-the-curve-back-as-numbers']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj8.title}`} title={sectionsContent.obj8.title}>
           <SinusoidalParameterExplorer explanations={explanations} />
         </ToolDemoPlayer>,
         sectionsContent.obj8.content
@@ -710,7 +710,7 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj21.title,
       link: sectionsContent.obj21.link,
       content: [
-        <ToolDemoPlayer key={'demo-the-explanations-panel'} script={demoScripts['the-explanations-panel']} scale={0.6} renderText={processContent} label='Demo: the explanations panel'>
+        <ToolDemoPlayer key={'demo-the-explanations-panel'} script={demoScripts['the-explanations-panel']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj21.title}`} title={sectionsContent.obj21.title}>
           <SinusoidalParameterExplorer explanations={explanations} />
         </ToolDemoPlayer>,
         sectionsContent.obj21.content

@@ -1,38 +1,53 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 
 /* ============================================================
-   ToolDemoPlayer v1
+   ToolDemoPlayer v2
 
    Plays a short animated demo of a REAL tool component: the tool is
    mounted as-is (children), made inert for the reader, and driven by a
    script the way a user would drive it - slider values set through the
    native input setter + an 'input' event, buttons clicked, SVG handles
    dragged with pointer events. A drawn cursor travels over the real
-   controls, a caption line states the step. The tool looks exactly like
-   the live tool because it IS the live tool.
+   controls. The tool looks exactly like the live tool because it IS the
+   live tool.
 
-   One demo per usage section (one atomic operation), looping while on
-   screen. Mounted lazily when it nears the viewport; paused when off
-   screen; no autoplay under prefers-reduced-motion (a Play button shows).
+   v2 adds reader control and labels:
+   - The script is cut into steps at every { say } entry. Each say text is
+     a step LABEL: the section's prose compressed to one line. The labels
+     are listed beside the demo; the current one is highlighted; clicking
+     a label plays that step.
+   - Controls: restart, back, play/pause, forward, step counter.
+     Back / Forward / a label click reset the tool, replay everything
+     before the chosen step instantly, then animate that one step and
+     pause. Play runs from the current step to the end.
+   - Autoplays and loops while on screen until the reader presses any
+     control; no autoplay under prefers-reduced-motion.
 
-   Script steps (plain objects, serializable - build them in getStaticProps):
-     { say: 'caption' }                    set the caption (renderText applied)
+   Script entries (plain objects, serializable - build them in getStaticProps):
+     { say: 'label' }                      start a new step with this label
      { move: T, ms }                       glide the cursor to target T
-     { click: T }                          move (if needed) and click T
+     { click: T }                          move and click T
      { slide: T, to: v, ms }               drag a range input to value v
      { drag: T, dx, dy, ms }               pointer-drag an element by (dx, dy) px
      { wait: ms }                          pause
-     { reset: true }                       remount the tool (fresh state)
    Targets T:
      'css selector'                        first match inside the tool
      { css, nth }                          nth match (0-based)
-     { button: 'text' }                    first <button> whose text starts with 'text'
-     { button: 'text', exact: true, nth }  exact text match, nth hit (0-based)
+     { button: 'text', exact?, nth? }      button by text (starts-with, or exact)
      { range: i }                          i-th <input type="range"> (0-based)
-     { text: 'text', css? }                first element (default any) containing text
+     { text: 'text', css? }                first leaf element containing text
    ============================================================ */
 
-const INK = '#111827';
+const UI = {
+  ui: '#1e40af',
+  uiSoft: '#bfdbfe',
+  border: '#cbd5e1',
+  ink: '#0f172a',
+  muted: '#475569',
+  faint: '#94a3b8',
+  panel: '#f8fafc',
+  white: '#ffffff',
+};
 
 function resolve(root, t) {
   if (!root || !t) return null;
@@ -69,47 +84,102 @@ function thumbPoint(input, v) {
   const min = parseFloat(input.min || '0');
   const max = parseFloat(input.max || '100');
   const f = max > min ? (v - min) / (max - min) : 0;
-  const thumb = 16;
+  const thumb = 16 * (r.height ? Math.min(1, r.height / 16) : 1);
   return [r.left + thumb / 2 + f * (r.width - thumb), r.top + r.height / 2];
+}
+
+/* cut the script into steps at every { say } */
+function toSteps(script) {
+  const steps = [];
+  let cur = null;
+  for (const e of script) {
+    if (e.say !== undefined) {
+      cur = { label: e.say, actions: [] };
+      steps.push(cur);
+    } else {
+      if (!cur) { cur = { label: '', actions: [] }; steps.push(cur); }
+      cur.actions.push(e);
+    }
+  }
+  // a label with no actions of its own (a second caption for the same
+  // actions) is folded into the previous step as a note
+  const out = [];
+  for (const s of steps) {
+    if (s.actions.length === 0 || s.actions.every((a) => a.wait)) {
+      if (out.length) {
+        const prev = out[out.length - 1];
+        prev.note = prev.note ? `${prev.note} ${s.label}` : s.label;
+        prev.actions.push(...s.actions);
+        continue;
+      }
+    }
+    out.push(s);
+  }
+  return out;
+}
+
+function CtrlBtn({ onClick, label, primary, disabled, children }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={label}
+      title={label}
+      style={{
+        minWidth: '32px', height: '28px', padding: '0 9px',
+        fontSize: '12px', fontFamily: 'system-ui, -apple-system, sans-serif', lineHeight: 1,
+        border: `1px solid ${primary ? UI.ui : UI.uiSoft}`, borderRadius: '4px',
+        background: primary ? UI.ui : UI.white,
+        color: disabled ? UI.faint : (primary ? UI.white : UI.ui),
+        cursor: disabled ? 'default' : 'pointer',
+      }}
+    >
+      {children}
+    </button>
+  );
 }
 
 export default function ToolDemoPlayer({
   children,
   script = [],
-  scale = 0.78,
+  scale = 0.6,
   renderText = (s) => s,
-  label = 'Animated demo',
+  label = 'Demo',
+  title = 'Demo',
   loopPauseMs = 1600,
-  minHeight = 320,
+  minHeight = 300,
 }) {
   const hostRef = useRef(null);
-  const stageRef = useRef(null);
   const toolRef = useRef(null);
   const cursorRef = useRef(null);
   const rippleRef = useRef(null);
-  const runRef = useRef({ alive: false, visible: false, gen: 0 });
+  const tokenRef = useRef(0);
+  const visibleRef = useRef(false);
   const posRef = useRef({ x: 40, y: 40 });
+
+  const steps = useMemo(() => toSteps(script), [script]);
 
   const [mounted, setMounted] = useState(false);
   const [toolKey, setToolKey] = useState(0);
-  const [caption, setCaption] = useState('');
   const [stageH, setStageH] = useState(minHeight);
-  const [reduced, setReduced] = useState(false);
-  const [manual, setManual] = useState(false);
+  const [current, setCurrent] = useState(-1);
+  const [done, setDone] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [auto, setAuto] = useState(true);
 
-  /* lazy mount + visibility */
+  /* lazy mount + visibility + reduced motion */
   useEffect(() => {
     const el = hostRef.current;
     if (!el) return undefined;
-    if (typeof window !== 'undefined' && window.matchMedia) {
-      setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    }
-    if (typeof IntersectionObserver === 'undefined') { setMounted(true); runRef.current.visible = true; return undefined; }
+    if (typeof window !== 'undefined' && window.matchMedia
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches) setAuto(false);
+    if (typeof IntersectionObserver === 'undefined') { setMounted(true); visibleRef.current = true; return undefined; }
     const near = new IntersectionObserver((es) => {
       if (es.some((e) => e.isIntersecting)) { setMounted(true); near.disconnect(); }
     }, { rootMargin: '400px 0px' });
     const vis = new IntersectionObserver((es) => {
-      runRef.current.visible = es.some((e) => e.intersectionRatio >= 0.35);
+      visibleRef.current = es.some((e) => e.intersectionRatio >= 0.35);
     }, { threshold: [0, 0.35, 0.7] });
     near.observe(el);
     vis.observe(el);
@@ -126,7 +196,7 @@ export default function ToolDemoPlayer({
     return () => ro.disconnect();
   }, [mounted, scale, toolKey]);
 
-  /* make the tool inert for the reader (the script still drives it) */
+  /* inert for the reader; the script still drives it */
   useEffect(() => {
     const el = toolRef.current;
     if (!el) return;
@@ -138,27 +208,38 @@ export default function ToolDemoPlayer({
     posRef.current = { x, y };
     if (cursorRef.current) cursorRef.current.style.transform = `translate(${x}px, ${y}px)`;
   }, []);
-
-  /* client point -> host-local point */
   const local = useCallback((cx, cy) => {
     const h = hostRef.current.getBoundingClientRect();
     return [cx - h.left, cy - h.top];
   }, []);
-
-  const centerOf = useCallback((el) => {
+  const centerOf = (el) => {
     const r = el.getBoundingClientRect();
     return [r.left + r.width / 2, r.top + r.height / 2];
+  };
+  const ripple = useCallback(() => {
+    const r = rippleRef.current;
+    if (!r) return;
+    const { x, y } = posRef.current;
+    r.style.transition = 'none';
+    r.style.left = `${x - 13}px`;
+    r.style.top = `${y - 13}px`;
+    r.style.opacity = '1';
+    r.style.transform = 'scale(0.4)';
+    requestAnimationFrame(() => {
+      r.style.transition = 'opacity 0.5s, transform 0.5s';
+      r.style.opacity = '0';
+      r.style.transform = 'scale(1.4)';
+    });
   }, []);
 
-  useEffect(() => {
-    if (!mounted) return undefined;
-    const R = runRef.current;
-    R.alive = true;
-    const gen = ++R.gen;
-    const live = () => R.alive && R.gen === gen;
-
+  /* the engine: reset, replay steps [0, from) instantly, then animate
+     steps from `from` on; stop after one step when `one` is set */
+  const run = useCallback(async (from, { one = false, loop = false } = {}) => {
+    const token = ++tokenRef.current;
+    const live = () => tokenRef.current === token;
     const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
-    const waitVisible = async () => { while (live() && !R.visible) await sleep(250); };
+    const frame = () => new Promise((res) => requestAnimationFrame(() => res()));
+    const waitVisible = async () => { while (live() && !visibleRef.current) await sleep(250); };
     const tween = (ms, fn) => new Promise((res) => {
       const t0 = performance.now();
       const f = (now) => {
@@ -169,100 +250,146 @@ export default function ToolDemoPlayer({
       };
       requestAnimationFrame(f);
     });
-    const glide = (x, y, ms) => {
-      const { x: sx, y: sy } = posRef.current;
-      return tween(ms, (u) => placeCursor(sx + (x - sx) * u, sy + (y - sy) * u));
-    };
-    const ripple = () => {
-      const r = rippleRef.current;
-      if (!r) return;
-      const { x, y } = posRef.current;
-      r.style.transition = 'none';
-      r.style.left = `${x - 13}px`;
-      r.style.top = `${y - 13}px`;
-      r.style.opacity = '1';
-      r.style.transform = 'scale(0.4)';
-      requestAnimationFrame(() => {
-        r.style.transition = 'opacity 0.5s, transform 0.5s';
-        r.style.opacity = '0';
-        r.style.transform = 'scale(1.4)';
-      });
-    };
     const tool = () => toolRef.current;
 
-    async function step(s) {
-      if (s.say !== undefined) { setCaption(s.say); return; }
-      if (s.wait) { await sleep(s.wait); return; }
-      if (s.reset) { setToolKey((k) => k + 1); await sleep(80); return; }
-      const el = resolve(tool(), s.move || s.click || s.slide || s.drag);
+    async function act(a, fast) {
+      if (a.wait) { if (!fast) await sleep(a.wait); return; }
+      const el = resolve(tool(), a.move || a.click || a.slide || a.drag);
       if (!el) return;
-      if (s.move) { const [x, y] = local(...centerOf(el)); await glide(x, y, s.ms || 700); return; }
-      if (s.click) {
+      if (a.move) {
         const [x, y] = local(...centerOf(el));
-        await glide(x, y, s.ms || 600);
+        if (fast) placeCursor(x, y); else await tween(a.ms || 700, (u) => {
+          const { x: sx, y: sy } = posRef.current;
+          placeCursor(sx + (x - sx) * u, sy + (y - sy) * u);
+        });
+        return;
+      }
+      if (a.click) {
+        const [x, y] = local(...centerOf(el));
+        if (fast) { placeCursor(x, y); el.click(); await frame(); return; }
+        const { x: sx, y: sy } = posRef.current;
+        await tween(a.ms || 600, (u) => placeCursor(sx + (x - sx) * u, sy + (y - sy) * u));
         ripple();
         await sleep(120);
         el.click();
         await sleep(150);
         return;
       }
-      if (s.slide) {
-        const from = parseFloat(el.value);
-        const to = s.to;
-        const [x0, y0] = local(...thumbPoint(el, from));
-        await glide(x0, y0, 600);
+      if (a.slide) {
+        const from0 = parseFloat(el.value);
+        const to = a.to;
+        const stepAttr = parseFloat(el.step) || 0;
+        const snap = (v) => (stepAttr > 0 ? Math.round(v / stepAttr) * stepAttr : v);
+        if (fast) {
+          setRangeValue(el, snap(to));
+          await frame();
+          const [x, y] = local(...thumbPoint(el, to));
+          placeCursor(x, y);
+          return;
+        }
+        const [x0, y0] = local(...thumbPoint(el, from0));
+        const { x: sx, y: sy } = posRef.current;
+        await tween(600, (u) => placeCursor(sx + (x0 - sx) * u, sy + (y0 - sy) * u));
         ripple();
         await sleep(150);
-        const stepAttr = parseFloat(el.step) || 0;
-        await tween(s.ms || 1200, (u) => {
-          let v = from + (to - from) * u;
-          if (stepAttr > 0) v = Math.round(v / stepAttr) * stepAttr;
+        await tween(a.ms || 1200, (u) => {
+          const v = snap(from0 + (to - from0) * u);
           setRangeValue(el, v);
           const [x, y] = local(...thumbPoint(el, v));
           placeCursor(x, y);
         });
         return;
       }
-      if (s.drag) {
+      if (a.drag) {
         const [cx, cy] = centerOf(el);
-        const [lx, ly] = local(cx, cy);
-        await glide(lx, ly, 600);
-        ripple();
         const opts = (x, y) => ({ bubbles: true, cancelable: true, pointerId: 1, pointerType: 'mouse', clientX: x, clientY: y, button: 0, buttons: 1 });
+        const ex = cx + (a.dx || 0);
+        const ey = cy + (a.dy || 0);
+        if (fast) {
+          el.dispatchEvent(new PointerEvent('pointerdown', opts(cx, cy)));
+          el.dispatchEvent(new PointerEvent('pointermove', opts(ex, ey)));
+          el.dispatchEvent(new PointerEvent('pointerup', opts(ex, ey)));
+          await frame();
+          placeCursor(...local(ex, ey));
+          return;
+        }
+        const [lx, ly] = local(cx, cy);
+        const { x: sx, y: sy } = posRef.current;
+        await tween(600, (u) => placeCursor(sx + (lx - sx) * u, sy + (ly - sy) * u));
+        ripple();
         el.dispatchEvent(new PointerEvent('pointerdown', opts(cx, cy)));
-        await tween(s.ms || 1200, (u) => {
-          const x = cx + (s.dx || 0) * u;
-          const y = cy + (s.dy || 0) * u;
+        await tween(a.ms || 1200, (u) => {
+          const x = cx + (a.dx || 0) * u;
+          const y = cy + (a.dy || 0) * u;
           el.dispatchEvent(new PointerEvent('pointermove', opts(x, y)));
-          const [px, py] = local(x, y);
-          placeCursor(px, py);
+          placeCursor(...local(x, y));
         });
-        el.dispatchEvent(new PointerEvent('pointerup', opts(cx + (s.dx || 0), cy + (s.dy || 0))));
+        el.dispatchEvent(new PointerEvent('pointerup', opts(ex, ey)));
       }
     }
 
-    async function loop() {
-      await sleep(400);
-      while (live()) {
-        if (reduced && !manual) return;
-        await waitVisible();
-        for (const s of script) {
-          if (!live()) return;
-          await waitVisible();
-          await step(s);
-        }
-        await sleep(loopPauseMs);
-        if (!live()) return;
-        setCaption('');
-        setToolKey((k) => k + 1);
-        await sleep(300);
-        placeCursor(40, 40);
-        if (reduced) return;
-      }
+    setPlaying(true);
+    // fresh tool
+    setToolKey((k) => k + 1);
+    await sleep(160);
+    if (!live()) return;
+    placeCursor(40, 40);
+    for (let i = 0; i < from && live(); i++) {
+      for (const a of steps[i].actions) { if (!live()) return; await act(a, true); }
     }
-    loop();
-    return () => { R.alive = false; };
-  }, [mounted, script, reduced, manual, loopPauseMs, local, centerOf, placeCursor]);
+    if (!live()) return;
+    setDone(from);
+    setCurrent(from > 0 ? from - 1 : -1);
+
+    let k = from;
+    while (live()) {
+      for (; k < steps.length && live(); k++) {
+        await waitVisible();
+        if (!live()) return;
+        setCurrent(k);
+        for (const a of steps[k].actions) { if (!live()) return; await act(a, false); }
+        if (!live()) return;
+        setDone(k + 1);
+        if (one) { setPlaying(false); return; }
+      }
+      if (!loop || !live()) break;
+      await sleep(loopPauseMs);
+      if (!live()) return;
+      setToolKey((kk) => kk + 1);
+      await sleep(200);
+      placeCursor(40, 40);
+      setDone(0);
+      setCurrent(-1);
+      k = 0;
+    }
+    if (live()) setPlaying(false);
+  }, [steps, local, placeCursor, ripple, loopPauseMs]);
+
+  /* autoplay (looping) once mounted */
+  useEffect(() => {
+    if (!mounted || !auto) return undefined;
+    run(0, { loop: true });
+    const autoToken = tokenRef.current;
+    // cancel only the autoplay run; a run the reader started must survive
+    // the re-render that switching auto off causes
+    return () => { if (tokenRef.current === autoToken) tokenRef.current += 1; };
+  }, [mounted, auto, run]);
+
+  const takeOver = () => { setAuto(false); tokenRef.current += 1; };
+  const onPlayPause = () => {
+    if (playing) { takeOver(); setPlaying(false); return; }
+    setAuto(false);
+    const from = done >= steps.length ? 0 : (current >= 0 && done <= current ? current : done);
+    run(from);
+  };
+  const onBack = () => { takeOver(); run(Math.max(0, (current >= 0 ? current : done) - 1), { one: true }); };
+  const onForward = () => {
+    takeOver();
+    const next = done >= steps.length ? steps.length - 1 : done;
+    run(next, { one: true });
+  };
+  const onRestart = () => { takeOver(); setToolKey((k) => k + 1); setDone(0); setCurrent(-1); setPlaying(false); placeCursor(40, 40); };
+  const onPick = (i) => { takeOver(); run(i, { one: true }); };
 
   return (
     <figure
@@ -271,62 +398,98 @@ export default function ToolDemoPlayer({
       style={{
         position: 'relative',
         margin: '14px auto 18px',
-        maxWidth: '1000px',
-        border: '1px solid #cbd5e1',
+        maxWidth: '1100px',
+        border: `1px solid ${UI.border}`,
         borderRadius: '12px',
-        background: '#f8fafc',
-        padding: '10px 10px 8px',
+        background: UI.panel,
+        padding: '10px',
         overflow: 'hidden',
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '12px',
+        alignItems: 'flex-start',
+        fontFamily: 'system-ui, -apple-system, sans-serif',
       }}
     >
-      <div
-        ref={stageRef}
-        style={{ position: 'relative', height: mounted ? `${stageH}px` : `${minHeight}px`, overflow: 'hidden' }}
-      >
-        {mounted && (
-          <div
-            key={toolKey}
-            ref={toolRef}
-            style={{
-              width: `${100 / scale}%`,
-              transform: `scale(${scale})`,
-              transformOrigin: 'top left',
-              pointerEvents: 'none',
-              userSelect: 'none',
-            }}
-          >
-            {children}
-          </div>
-        )}
+      <div style={{ flex: '1 1 560px', minWidth: 0 }}>
+        <div style={{ position: 'relative', height: mounted ? `${stageH}px` : `${minHeight}px`, overflow: 'hidden' }}>
+          {mounted && (
+            <div
+              key={toolKey}
+              ref={toolRef}
+              style={{
+                width: `${100 / scale}%`,
+                transform: `scale(${scale})`,
+                transformOrigin: 'top left',
+                pointerEvents: 'none',
+                userSelect: 'none',
+              }}
+            >
+              {children}
+            </div>
+          )}
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '8px' }}>
+          <CtrlBtn onClick={onRestart} label="Restart">⏮</CtrlBtn>
+          <CtrlBtn onClick={onBack} label="Back one step" disabled={done === 0 && current <= 0}>‹ Back</CtrlBtn>
+          <CtrlBtn onClick={onPlayPause} label={playing ? 'Pause' : 'Play'} primary>{playing ? '❚❚ Pause' : '▶ Play'}</CtrlBtn>
+          <CtrlBtn onClick={onForward} label="Forward one step" disabled={done >= steps.length}>Next ›</CtrlBtn>
+          <span style={{ marginLeft: '8px', fontSize: '12px', color: UI.muted, fontFamily: 'monospace' }}>
+            {`Step ${Math.max(0, current + 1)} of ${steps.length}`}
+          </span>
+        </div>
       </div>
 
-      <figcaption
-        style={{
-          minHeight: '24px',
-          marginTop: '8px',
-          fontSize: '14px',
-          lineHeight: 1.5,
-          color: '#1e3a5f',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px',
-        }}
-      >
-        <span style={{
-          flex: '0 0 auto', fontSize: '10.5px', fontWeight: 600, letterSpacing: '0.1em',
-          textTransform: 'uppercase', color: '#64748b', border: '1px solid #cbd5e1',
-          borderRadius: '4px', padding: '1px 6px', background: '#fff',
-        }}>Demo</span>
-        <span>{caption ? renderText(caption) : null}</span>
-        {reduced && !manual && (
-          <button
-            type="button"
-            onClick={() => setManual(true)}
-            style={{ marginLeft: 'auto', border: '1px solid #bfdbfe', background: '#fff', color: '#1e40af', borderRadius: '4px', padding: '3px 10px', fontSize: '12px', cursor: 'pointer' }}
-          >
-            Play demo
-          </button>
-        )}
+      <figcaption style={{ flex: '0 1 250px', minWidth: '200px' }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '8px',
+          paddingBottom: '6px', marginBottom: '6px', borderBottom: `1px solid ${UI.border}`,
+        }}>
+          <span style={{
+            fontSize: '10.5px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase',
+            color: UI.muted, border: `1px solid ${UI.border}`, borderRadius: '4px', padding: '1px 6px', background: UI.white,
+          }}>Demo</span>
+          <span style={{ fontSize: '11px', fontWeight: 500, color: UI.ui, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+            {title}
+          </span>
+        </div>
+        <ol style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+          {steps.map((s, i) => {
+            const on = i === current;
+            const past = i < done && !on;
+            return (
+              <li key={i} style={{ marginBottom: '4px' }}>
+                <button
+                  type="button"
+                  onClick={() => onPick(i)}
+                  style={{
+                    display: 'flex', gap: '8px', alignItems: 'baseline', width: '100%', textAlign: 'left',
+                    padding: '5px 6px', borderRadius: '6px', cursor: 'pointer', fontFamily: 'inherit',
+                    border: `1px solid ${on ? UI.ui : 'transparent'}`,
+                    background: on ? UI.white : 'transparent',
+                  }}
+                >
+                  <span style={{
+                    flex: '0 0 auto', fontSize: '11px', fontFamily: 'monospace', fontWeight: 600,
+                    color: on ? UI.white : (past ? UI.ui : UI.faint),
+                    background: on ? UI.ui : 'transparent',
+                    border: `1px solid ${on || past ? UI.ui : UI.border}`,
+                    borderRadius: '4px', padding: '0 5px',
+                  }}>{i + 1}</span>
+                  <span style={{ fontSize: '13px', lineHeight: 1.45, color: on ? UI.ink : UI.muted, fontWeight: on ? 600 : 400 }}>
+                    {renderText(s.label)}
+                  </span>
+                </button>
+                {on && s.note ? (
+                  <div style={{ fontSize: '12.5px', lineHeight: 1.5, color: UI.muted, padding: '2px 8px 4px 34px' }}>
+                    {renderText(s.note)}
+                  </div>
+                ) : null}
+              </li>
+            );
+          })}
+        </ol>
       </figcaption>
 
       <svg
@@ -337,12 +500,12 @@ export default function ToolDemoPlayer({
         viewBox="0 0 20 24"
         style={{ position: 'absolute', left: 0, top: 0, pointerEvents: 'none', filter: 'drop-shadow(0 1px 1px rgba(0,0,0,.35))', transform: 'translate(40px, 40px)', zIndex: 3 }}
       >
-        <path d="M2 1 L2 19 L7 14.5 L10.5 22 L13.5 20.6 L10 13.2 L16.5 13.2 Z" fill="#fff" stroke={INK} strokeWidth="1.3" strokeLinejoin="round" />
+        <path d="M2 1 L2 19 L7 14.5 L10.5 22 L13.5 20.6 L10 13.2 L16.5 13.2 Z" fill="#fff" stroke="#111827" strokeWidth="1.3" strokeLinejoin="round" />
       </svg>
       <div
         ref={rippleRef}
         aria-hidden="true"
-        style={{ position: 'absolute', width: '26px', height: '26px', borderRadius: '50%', border: '2px solid #1e40af', opacity: 0, pointerEvents: 'none', zIndex: 2 }}
+        style={{ position: 'absolute', width: '26px', height: '26px', borderRadius: '50%', border: `2px solid ${UI.ui}`, opacity: 0, pointerEvents: 'none', zIndex: 2 }}
       />
     </figure>
   );
