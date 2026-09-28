@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState, useCallback, useMemo } from 'react';
 
 /* ============================================================
-   ToolDemoPlayer v2
+   ToolDemoPlayer v3
 
    Plays a short animated demo of a REAL tool component: the tool is
    mounted as-is (children), made inert for the reader, and driven by a
@@ -11,11 +11,17 @@ import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
    controls. The tool looks exactly like the live tool because it IS the
    live tool.
 
-   v2 adds reader control and labels:
+   v2 added reader control; v3 puts the labels INTO the animation:
    - The script is cut into steps at every { say } entry. Each say text is
-     a step LABEL: the section's prose compressed to one line. The labels
-     are listed beside the demo; the current one is highlighted; clicking
-     a label plays that step.
+     the step's CALLOUT: a bold, high-contrast text box drawn on the stage
+     (PowerPoint-style), in a corner that does not cover the control being
+     used, with a dashed pointer line to that control. Lines are split on
+     '\n': the first is the headline (the action), the rest say what the
+     reader sees and what it means - clipped, complete, minimal words.
+     { say, at: 'tl'|'tr'|'bl'|'br' } pins the corner; default is automatic.
+   - A demo has 4-5 distinct steps. Short sections are merged into one
+     demo rather than shown as a one- or two-step picture.
+   - Numbered step dots under the demo jump to a step.
    - Controls: restart, back, play/pause, forward, step counter.
      Back / Forward / a label click reset the tool, replay everything
      before the chosen step instantly, then animate that one step and
@@ -24,7 +30,7 @@ import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
      control; no autoplay under prefers-reduced-motion.
 
    Script entries (plain objects, serializable - build them in getStaticProps):
-     { say: 'label' }                      start a new step with this label
+     { say: 'HEADLINE\nline\nline', at? }  start a new step with this callout
      { move: T, ms }                       glide the cursor to target T
      { click: T }                          move and click T
      { slide: T, to: v, ms }               drag a range input to value v
@@ -48,6 +54,8 @@ const UI = {
   panel: '#f8fafc',
   white: '#ffffff',
 };
+
+const CALLOUT = { bg: '#1e3a8a', fg: '#ffffff', soft: '#dbeafe' };
 
 function resolve(root, t) {
   if (!root || !t) return null;
@@ -94,28 +102,14 @@ function toSteps(script) {
   let cur = null;
   for (const e of script) {
     if (e.say !== undefined) {
-      cur = { label: e.say, actions: [] };
+      cur = { lines: String(e.say).split('\n').filter(Boolean), at: e.at || 'auto', actions: [] };
       steps.push(cur);
     } else {
-      if (!cur) { cur = { label: '', actions: [] }; steps.push(cur); }
+      if (!cur) { cur = { lines: [], at: 'auto', actions: [] }; steps.push(cur); }
       cur.actions.push(e);
     }
   }
-  // a label with no actions of its own (a second caption for the same
-  // actions) is folded into the previous step as a note
-  const out = [];
-  for (const s of steps) {
-    if (s.actions.length === 0 || s.actions.every((a) => a.wait)) {
-      if (out.length) {
-        const prev = out[out.length - 1];
-        prev.note = prev.note ? `${prev.note} ${s.label}` : s.label;
-        prev.actions.push(...s.actions);
-        continue;
-      }
-    }
-    out.push(s);
-  }
-  return out;
+  return steps;
 }
 
 function CtrlBtn({ onClick, label, primary, disabled, children }) {
@@ -151,6 +145,8 @@ export default function ToolDemoPlayer({
   minHeight = 300,
 }) {
   const hostRef = useRef(null);
+  const stageRef = useRef(null);
+  const calloutRef = useRef(null);
   const toolRef = useRef(null);
   const cursorRef = useRef(null);
   const rippleRef = useRef(null);
@@ -161,6 +157,8 @@ export default function ToolDemoPlayer({
   const steps = useMemo(() => toSteps(script), [script]);
 
   const [mounted, setMounted] = useState(false);
+  const [callout, setCallout] = useState(null);       // { k, lines, at, target }
+  const [calloutPos, setCalloutPos] = useState(null); // { left, top, from, to }
   const [toolKey, setToolKey] = useState(0);
   const [stageH, setStageH] = useState(minHeight);
   const [current, setCurrent] = useState(-1);
@@ -251,6 +249,23 @@ export default function ToolDemoPlayer({
       requestAnimationFrame(f);
     });
     const tool = () => toolRef.current;
+    const showCallout = (k) => {
+      const s = steps[k];
+      if (!s || !s.lines.length) { setCallout(null); return; }
+      const a = s.actions.find((x) => x.move || x.click || x.slide || x.drag);
+      const el = a ? resolve(tool(), a.move || a.click || a.slide || a.drag) : null;
+      let target = null;
+      if (el && a.slide) {
+        // point at the thumb, where the drag starts
+        const [px, py] = local(...thumbPoint(el, parseFloat(el.value)));
+        target = { x: px - 8, y: py - 8, w: 16, h: 16 };
+      } else if (el) {
+        const r = el.getBoundingClientRect();
+        const [x, y] = local(r.left, r.top);
+        target = { x, y, w: r.width, h: r.height };
+      }
+      setCallout({ k, lines: s.lines, at: s.at, target });
+    };
 
     async function act(a, fast) {
       if (a.wait) { if (!fast) await sleep(a.wait); return; }
@@ -340,6 +355,7 @@ export default function ToolDemoPlayer({
     if (!live()) return;
     setDone(from);
     setCurrent(from > 0 ? from - 1 : -1);
+    if (from > 0) showCallout(from - 1); else setCallout(null);
 
     let k = from;
     while (live()) {
@@ -347,6 +363,9 @@ export default function ToolDemoPlayer({
         await waitVisible();
         if (!live()) return;
         setCurrent(k);
+        showCallout(k);
+        await sleep(650);
+        if (!live()) return;
         for (const a of steps[k].actions) { if (!live()) return; await act(a, false); }
         if (!live()) return;
         setDone(k + 1);
@@ -360,6 +379,7 @@ export default function ToolDemoPlayer({
       placeCursor(40, 40);
       setDone(0);
       setCurrent(-1);
+      setCallout(null);
       k = 0;
     }
     if (live()) setPlaying(false);
@@ -375,6 +395,36 @@ export default function ToolDemoPlayer({
     return () => { if (tokenRef.current === autoToken) tokenRef.current += 1; };
   }, [mounted, auto, run]);
 
+  useLayoutEffect(() => {
+    if (!callout || !calloutRef.current || !stageRef.current || !hostRef.current) { setCalloutPos(null); return; }
+    const host = hostRef.current.getBoundingClientRect();
+    const sr = stageRef.current.getBoundingClientRect();
+    const S = { x: sr.left - host.left, y: sr.top - host.top, w: sr.width, h: sr.height };
+    const bw = calloutRef.current.offsetWidth;
+    const bh = calloutRef.current.offsetHeight;
+    const m = 10;
+    const corners = {
+      tr: { left: S.x + S.w - bw - m, top: S.y + m },
+      tl: { left: S.x + m, top: S.y + m },
+      br: { left: S.x + S.w - bw - m, top: S.y + S.h - bh - m },
+      bl: { left: S.x + m, top: S.y + S.h - bh - m },
+    };
+    const T = callout.target;
+    const hits = (c) => T && !(c.left + bw < T.x - 8 || c.left > T.x + T.w + 8 || c.top + bh < T.y - 8 || c.top > T.y + T.h + 8);
+    let key = callout.at;
+    if (!corners[key]) key = ['tr', 'tl', 'br', 'bl'].find((c) => !hits(corners[c])) || 'tr';
+    const c = corners[key];
+    let from = null;
+    let to = null;
+    if (T) {
+      to = [T.x + T.w / 2, T.y + T.h / 2];
+      const cx = Math.max(c.left, Math.min(to[0], c.left + bw));
+      const cy = Math.max(c.top, Math.min(to[1], c.top + bh));
+      from = [cx, cy];
+    }
+    setCalloutPos({ left: c.left, top: c.top, from, to });
+  }, [callout, stageH]);
+
   const takeOver = () => { setAuto(false); tokenRef.current += 1; };
   const onPlayPause = () => {
     if (playing) { takeOver(); setPlaying(false); return; }
@@ -388,7 +438,7 @@ export default function ToolDemoPlayer({
     const next = done >= steps.length ? steps.length - 1 : done;
     run(next, { one: true });
   };
-  const onRestart = () => { takeOver(); setToolKey((k) => k + 1); setDone(0); setCurrent(-1); setPlaying(false); placeCursor(40, 40); };
+  const onRestart = () => { takeOver(); setToolKey((k) => k + 1); setDone(0); setCurrent(-1); setCallout(null); setPlaying(false); placeCursor(40, 40); };
   const onPick = (i) => { takeOver(); run(i, { one: true }); };
 
   return (
@@ -404,93 +454,115 @@ export default function ToolDemoPlayer({
         background: UI.panel,
         padding: '10px',
         overflow: 'hidden',
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '12px',
-        alignItems: 'flex-start',
         fontFamily: 'system-ui, -apple-system, sans-serif',
       }}
     >
-      <div style={{ flex: '1 1 560px', minWidth: 0 }}>
-        <div style={{ position: 'relative', height: mounted ? `${stageH}px` : `${minHeight}px`, overflow: 'hidden' }}>
-          {mounted && (
-            <div
-              key={toolKey}
-              ref={toolRef}
-              style={{
-                width: `${100 / scale}%`,
-                transform: `scale(${scale})`,
-                transformOrigin: 'top left',
-                pointerEvents: 'none',
-                userSelect: 'none',
-              }}
-            >
-              {children}
-            </div>
-          )}
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '8px' }}>
-          <CtrlBtn onClick={onRestart} label="Restart">⏮</CtrlBtn>
-          <CtrlBtn onClick={onBack} label="Back one step" disabled={done === 0 && current <= 0}>‹ Back</CtrlBtn>
-          <CtrlBtn onClick={onPlayPause} label={playing ? 'Pause' : 'Play'} primary>{playing ? '❚❚ Pause' : '▶ Play'}</CtrlBtn>
-          <CtrlBtn onClick={onForward} label="Forward one step" disabled={done >= steps.length}>Next ›</CtrlBtn>
-          <span style={{ marginLeft: '8px', fontSize: '12px', color: UI.muted, fontFamily: 'monospace' }}>
-            {`Step ${Math.max(0, current + 1)} of ${steps.length}`}
-          </span>
-        </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+        <span style={{
+          fontSize: '10.5px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase',
+          color: UI.white, background: UI.ui, borderRadius: '4px', padding: '2px 7px',
+        }}>Demo</span>
+        <span style={{ fontSize: '12px', fontWeight: 600, color: UI.ui, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+          {title}
+        </span>
       </div>
 
-      <figcaption style={{ flex: '0 1 250px', minWidth: '200px' }}>
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: '8px',
-          paddingBottom: '6px', marginBottom: '6px', borderBottom: `1px solid ${UI.border}`,
-        }}>
-          <span style={{
-            fontSize: '10.5px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase',
-            color: UI.muted, border: `1px solid ${UI.border}`, borderRadius: '4px', padding: '1px 6px', background: UI.white,
-          }}>Demo</span>
-          <span style={{ fontSize: '11px', fontWeight: 500, color: UI.ui, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
-            {title}
-          </span>
-        </div>
-        <ol style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+      <div ref={stageRef} style={{ position: 'relative', height: mounted ? `${stageH}px` : `${minHeight}px`, overflow: 'hidden' }}>
+        {mounted && (
+          <div
+            key={toolKey}
+            ref={toolRef}
+            style={{
+              width: `${100 / scale}%`,
+              transform: `scale(${scale})`,
+              transformOrigin: 'top left',
+              pointerEvents: 'none',
+              userSelect: 'none',
+            }}
+          >
+            {children}
+          </div>
+        )}
+      </div>
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '8px', flexWrap: 'wrap' }}>
+        <CtrlBtn onClick={onRestart} label="Restart">⏮</CtrlBtn>
+        <CtrlBtn onClick={onBack} label="Back one step" disabled={done === 0 && current <= 0}>‹ Back</CtrlBtn>
+        <CtrlBtn onClick={onPlayPause} label={playing ? 'Pause' : 'Play'} primary>{playing ? '❚❚ Pause' : '▶ Play'}</CtrlBtn>
+        <CtrlBtn onClick={onForward} label="Forward one step" disabled={done >= steps.length}>Next ›</CtrlBtn>
+        <span style={{ display: 'inline-flex', gap: '4px', marginLeft: '10px' }}>
           {steps.map((s, i) => {
             const on = i === current;
             const past = i < done && !on;
             return (
-              <li key={i} style={{ marginBottom: '4px' }}>
-                <button
-                  type="button"
-                  onClick={() => onPick(i)}
-                  style={{
-                    display: 'flex', gap: '8px', alignItems: 'baseline', width: '100%', textAlign: 'left',
-                    padding: '5px 6px', borderRadius: '6px', cursor: 'pointer', fontFamily: 'inherit',
-                    border: `1px solid ${on ? UI.ui : 'transparent'}`,
-                    background: on ? UI.white : 'transparent',
-                  }}
-                >
-                  <span style={{
-                    flex: '0 0 auto', fontSize: '11px', fontFamily: 'monospace', fontWeight: 600,
-                    color: on ? UI.white : (past ? UI.ui : UI.faint),
-                    background: on ? UI.ui : 'transparent',
-                    border: `1px solid ${on || past ? UI.ui : UI.border}`,
-                    borderRadius: '4px', padding: '0 5px',
-                  }}>{i + 1}</span>
-                  <span style={{ fontSize: '13px', lineHeight: 1.45, color: on ? UI.ink : UI.muted, fontWeight: on ? 600 : 400 }}>
-                    {renderText(s.label)}
-                  </span>
-                </button>
-                {on && s.note ? (
-                  <div style={{ fontSize: '12.5px', lineHeight: 1.5, color: UI.muted, padding: '2px 8px 4px 34px' }}>
-                    {renderText(s.note)}
-                  </div>
-                ) : null}
-              </li>
+              <button
+                key={i}
+                type="button"
+                onClick={() => onPick(i)}
+                aria-label={`Step ${i + 1}: ${s.lines[0] || ''}`}
+                title={s.lines[0] || ''}
+                style={{
+                  width: '24px', height: '24px', borderRadius: '50%', cursor: 'pointer',
+                  fontSize: '11px', fontWeight: 700, fontFamily: 'monospace', lineHeight: 1, padding: 0,
+                  border: `1px solid ${on || past ? UI.ui : UI.border}`,
+                  background: on ? UI.ui : UI.white,
+                  color: on ? UI.white : (past ? UI.ui : UI.faint),
+                }}
+              >{i + 1}</button>
             );
           })}
-        </ol>
-      </figcaption>
+        </span>
+        <span style={{ marginLeft: '8px', fontSize: '12px', color: UI.muted, fontFamily: 'monospace' }}>
+          {`Step ${Math.max(0, current + 1)} of ${steps.length}`}
+        </span>
+      </div>
+
+      {callout && calloutPos && calloutPos.from && calloutPos.to && (
+        <svg
+          aria-hidden="true"
+          style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 3, overflow: 'visible' }}
+        >
+          <line
+            x1={calloutPos.from[0]} y1={calloutPos.from[1]} x2={calloutPos.to[0]} y2={calloutPos.to[1]}
+            stroke={CALLOUT.bg} strokeWidth="2" strokeDasharray="5 4"
+          />
+          <circle cx={calloutPos.to[0]} cy={calloutPos.to[1]} r="5" fill="none" stroke={CALLOUT.bg} strokeWidth="2" />
+        </svg>
+      )}
+
+      {callout && (
+        <div
+          key={callout.k}
+          ref={calloutRef}
+          role="status"
+          aria-live="polite"
+          style={{
+            position: 'absolute',
+            left: calloutPos ? `${calloutPos.left}px` : '-9999px',
+            top: calloutPos ? `${calloutPos.top}px` : '0px',
+            maxWidth: '300px',
+            background: CALLOUT.bg,
+            color: CALLOUT.fg,
+            borderRadius: '10px',
+            padding: '10px 14px 11px',
+            boxShadow: '0 6px 18px rgba(15, 23, 42, 0.28)',
+            zIndex: 4,
+            pointerEvents: 'none',
+            animation: 'tdp-pop 0.28s ease-out',
+          }}
+        >
+          <div style={{ fontSize: '17px', fontWeight: 800, letterSpacing: '0.3px', lineHeight: 1.25, marginBottom: callout.lines.length > 1 ? '6px' : 0 }}>
+            {renderText(callout.lines[0])}
+          </div>
+          {callout.lines.slice(1).map((ln, i) => (
+            <div key={i} style={{ fontSize: '14.5px', fontWeight: 700, lineHeight: 1.4, color: CALLOUT.soft }}>
+              {renderText(ln)}
+            </div>
+          ))}
+        </div>
+      )}
+
+      <style>{'@keyframes tdp-pop { from { opacity: 0; transform: translateY(6px) scale(0.97); } to { opacity: 1; transform: none; } }'}</style>
 
       <svg
         ref={cursorRef}
@@ -498,7 +570,7 @@ export default function ToolDemoPlayer({
         width="20"
         height="24"
         viewBox="0 0 20 24"
-        style={{ position: 'absolute', left: 0, top: 0, pointerEvents: 'none', filter: 'drop-shadow(0 1px 1px rgba(0,0,0,.35))', transform: 'translate(40px, 40px)', zIndex: 3 }}
+        style={{ position: 'absolute', left: 0, top: 0, pointerEvents: 'none', filter: 'drop-shadow(0 1px 1px rgba(0,0,0,.35))', transform: 'translate(40px, 40px)', zIndex: 5 }}
       >
         <path d="M2 1 L2 19 L7 14.5 L10.5 22 L13.5 20.6 L10 13.2 L16.5 13.2 Z" fill="#fff" stroke="#111827" strokeWidth="1.3" strokeLinejoin="round" />
       </svg>

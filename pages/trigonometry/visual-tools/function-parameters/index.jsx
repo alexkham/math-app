@@ -340,85 +340,132 @@ Every explanation ends with two links into this page: one to the frozen state th
     },
   }
 
-  /* Animated demos, one per usage section (one atomic operation each).
-     Played by ToolDemoPlayer against the real SinusoidalParameterExplorer.
+  /* Animated demos (ToolDemoPlayer v3), driven against the real
+     SinusoidalParameterExplorer. Four demos of five steps; each step's say
+     text is its on-stage callout: first line = the action, then what the
+     reader sees and what it means. Short usage sections are merged.
      Range order in the tool: 0 = A, 1 = D, 2 = B, 3 = C (C in twelfths of pi). */
-  const demoScripts = {
-    'choosing-the-function': [
-      { say: 'Pick a function from the **Function** row.' },
-      { click: { button: 'cos', exact: true } },
-      { wait: 1200 },
-      { click: { button: 'tan', exact: true } },
-      { say: 'On tan the amplitude bracket disappears: the curve has no peak.' },
-      { wait: 1800 },
-      { click: { button: 'sin', exact: true } },
-      { wait: 900 },
-    ],
-    'the-equation-bar-and-the-colour-key': [
-      { say: 'Each number in the equation is drawn in its parameter colour.' },
-      { slide: { range: 0 }, to: 2, ms: 1000 },
-      { slide: { range: 3 }, to: 6, ms: 1100 },
-      { say: 'The same colours label the features on the graph: red bracket, violet bar.' },
-      { wait: 2200 },
-    ],
-    'setting-the-amplitude-with-a': [
-      { say: 'Drag **A** to stretch the curve away from its midline.' },
-      { slide: { range: 0 }, to: 3, ms: 1400 },
-      { wait: 900 },
-      { say: 'Below zero the curve reflects; the dashed curve shows where it came from.' },
-      { slide: { range: 0 }, to: -2, ms: 1600 },
-      { wait: 2000 },
-    ],
-    'moving-the-midline-with-d': [
-      { say: 'Drag **D** to lift the midline.' },
-      { slide: { range: 1 }, to: 2, ms: 1400 },
-      { say: 'Max and min move with it; the amplitude bracket keeps its length.' },
-      { wait: 2200 },
-    ],
-    'setting-the-period-with-b': [
-      { say: 'Drag **B** to fit more cycles into the window.' },
-      { slide: { range: 2 }, to: 2, ms: 1200 },
-      { wait: 800 },
-      { slide: { range: 2 }, to: 3, ms: 900 },
-      { say: 'The amber bracket shrinks to 2π/|B|.' },
-      { wait: 2000 },
-    ],
-    'shifting-with-c-and-why-the-shift-is-c-over-b': [
-      { say: 'Set **B** = 2 first.' },
-      { slide: { range: 2 }, to: 2, ms: 900 },
-      { say: 'Now drag **C** up to π.' },
-      { slide: { range: 3 }, to: 12, ms: 1600 },
-      { say: 'C is π, but the violet bar measures π/2: the shift is C/B.' },
-      { wait: 2600 },
-    ],
-    'the-guided-walk': [
-      { say: 'Each **Guided walk** button sets all four parameters at once.' },
-      { click: { button: 'A < 0', exact: true } },
-      { wait: 1500 },
-      { click: { button: 'C/B', exact: true } },
-      { wait: 1500 },
-      { click: { button: 'all four', exact: true } },
-      { say: 'The explanation panel follows the button you press.' },
-      { wait: 2000 },
-    ],
-    'reading-the-curve-back-as-numbers': [
-      { say: 'The strip under the controls reads the curve back as numbers.' },
-      { slide: { range: 2 }, to: 2, ms: 900 },
-      { slide: { range: 3 }, to: 12, ms: 1300 },
-      { move: { text: 'Shift C/B' }, ms: 700 },
-      { say: '**C itself** and **Shift C/B** sit side by side, so the difference is visible.' },
-      { wait: 2400 },
-    ],
-    'the-explanations-panel': [
-      { say: 'The panel on the right explains whatever you touch last.' },
-      { slide: { range: 1 }, to: 1.5, ms: 1000 },
-      { wait: 1200 },
-      { slide: { range: 2 }, to: 2, ms: 900 },
-      { wait: 1200 },
-      { click: { button: 'tan', exact: true } },
-      { say: 'On tan it switches to the unbounded case.' },
-      { wait: 2200 },
-    ],
+  const demos = {
+    'choosing-the-function': {
+      title: 'Function row and colour key',
+      script: [
+        { say: `TAP cos
+Same four sliders.
+Wave starts at its max.` },
+        { click: { button: 'cos', exact: true } },
+        { wait: 1800 },
+        { say: `TAP tan
+No peak. Red bracket gone.
+Dashed red = asymptotes.
+Amplitude: undefined.` },
+        { click: { button: 'tan', exact: true } },
+        { wait: 2200 },
+        { say: `TAP sin
+Back to the baseline wave.` },
+        { click: { button: 'sin', exact: true } },
+        { wait: 1500 },
+        { say: `DRAG A → 2
+Red number in equation.
+Red bracket on graph. Same thing.` },
+        { slide: { range: 0 }, to: 2, ms: 1300 },
+        { wait: 1800 },
+        { say: `DRAG C → π/2
+Violet in equation = violet bar.
+One colour per letter. Everywhere.` },
+        { slide: { range: 3 }, to: 6, ms: 1300 },
+        { wait: 2200 },
+      ],
+    },
+    'setting-the-amplitude-with-a': {
+      title: 'Outside the function: A and D',
+      script: [
+        { say: `DRAG A → 3
+Wave taller. Red bracket = |A| = 3.
+Zeros stay put. Nothing moves sideways.` },
+        { slide: { range: 0 }, to: 3, ms: 1400 },
+        { wait: 2000 },
+        { say: `DRAG A → −2
+Wave flips over the midline.
+Dashed grey = the unflipped wave.
+|A| = 2. Never negative.` },
+        { slide: { range: 0 }, to: -2, ms: 1600 },
+        { wait: 2400 },
+        { say: `DRAG A → 1
+Normal height again.` },
+        { slide: { range: 0 }, to: 1, ms: 1100 },
+        { wait: 1200 },
+        { say: `DRAG D → 2
+Whole wave up 2.
+Midline y = 2. Max 3. Min 1.` },
+        { slide: { range: 1 }, to: 2, ms: 1400 },
+        { wait: 2000 },
+        { say: `DRAG D → −1.5
+Wave down. Red bracket same length.
+D lifts. D never stretches.` },
+        { slide: { range: 1 }, to: -1.5, ms: 1600 },
+        { wait: 2400 },
+      ],
+    },
+    'setting-the-period-with-b': {
+      title: 'Inside the function: B and C',
+      script: [
+        { say: `DRAG B → 2
+Two cycles where one was.
+Amber bracket: period = π.` },
+        { slide: { range: 2 }, to: 2, ms: 1300 },
+        { wait: 1900 },
+        { say: `DRAG B → 3
+Period 2π/3. Tighter still.
+Height untouched: B works inside.` },
+        { slide: { range: 2 }, to: 3, ms: 1000 },
+        { wait: 1900 },
+        { say: `DRAG B → 2
+Back to period π.` },
+        { slide: { range: 2 }, to: 2, ms: 900 },
+        { wait: 1000 },
+        { say: `DRAG C → π
+Violet bar = shift π/2.
+Shift = C/B. NOT C.` },
+        { slide: { range: 3 }, to: 12, ms: 1700 },
+        { wait: 2200 },
+        { say: `CHECK the readout strip
+C itself = π.
+Shift C/B = 0.5π.
+Two numbers. Different. Always when B ≠ 1.` },
+        { move: { text: 'Shift C/B' }, ms: 800 },
+        { wait: 2800 },
+      ],
+    },
+    'the-guided-walk': {
+      title: 'Guided walk and explanations panel',
+      script: [
+        { say: `TAP  A < 0
+All four sliders set at once.
+Reflected wave. Panel explains A.` },
+        { click: { button: 'A < 0', exact: true } },
+        { wait: 2200 },
+        { say: `TAP  B = 2
+Period halved.
+Panel switches to B.` },
+        { click: { button: 'B = 2', exact: true } },
+        { wait: 2000 },
+        { say: `TAP  C/B
+C = π, shift = π/2.
+The trap, in one picture.` },
+        { click: { button: 'C/B', exact: true } },
+        { wait: 2200 },
+        { say: `TAP  all four
+y = 2 sin(2x − π) + 1.
+Every bracket live at once.` },
+        { click: { button: 'all four', exact: true } },
+        { wait: 2200 },
+        { say: `TAP  tan
+Unbounded case.
+Panel: amplitude has no meaning.`, at: 'tl' },
+        { click: { button: 'tan', exact: true, nth: 1 } },
+        { wait: 2600 },
+      ],
+    },
   }
 
   /* Explanation bodies for the tool's own panel, each ending in the Line 1
@@ -582,7 +629,7 @@ Every explanation ends with two links into this page: one to the frozen state th
       relatedTools: getRelatedTools('function-parameters'),
       instructions,
       explanations,
-      demoScripts,
+      demos,
       stateUnits,
       sectionsContent,
       introContent,
@@ -607,7 +654,7 @@ export default function FunctionParametersPage({
   relatedTools,
   instructions,
   explanations,
-  demoScripts,
+  demos,
   stateUnits,
   seoData,
   sectionsContent,
@@ -622,7 +669,7 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj1.title,
       link: sectionsContent.obj1.link,
       content: [
-        <ToolDemoPlayer key={'demo-choosing-the-function'} script={demoScripts['choosing-the-function']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj1.title}`} title={sectionsContent.obj1.title}>
+        <ToolDemoPlayer key={'demo-choosing-the-function'} script={demos['choosing-the-function'].script} title={demos['choosing-the-function'].title} label={`Demo: ${demos['choosing-the-function'].title}`} scale={0.6} renderText={processContent}>
           <SinusoidalParameterExplorer explanations={explanations} />
         </ToolDemoPlayer>,
         sectionsContent.obj1.content
@@ -633,9 +680,6 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj2.title,
       link: sectionsContent.obj2.link,
       content: [
-        <ToolDemoPlayer key={'demo-the-equation-bar-and-the-colour-key'} script={demoScripts['the-equation-bar-and-the-colour-key']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj2.title}`} title={sectionsContent.obj2.title}>
-          <SinusoidalParameterExplorer explanations={explanations} />
-        </ToolDemoPlayer>,
         sectionsContent.obj2.content
       ],
     },
@@ -644,7 +688,7 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj3.title,
       link: sectionsContent.obj3.link,
       content: [
-        <ToolDemoPlayer key={'demo-setting-the-amplitude-with-a'} script={demoScripts['setting-the-amplitude-with-a']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj3.title}`} title={sectionsContent.obj3.title}>
+        <ToolDemoPlayer key={'demo-setting-the-amplitude-with-a'} script={demos['setting-the-amplitude-with-a'].script} title={demos['setting-the-amplitude-with-a'].title} label={`Demo: ${demos['setting-the-amplitude-with-a'].title}`} scale={0.6} renderText={processContent}>
           <SinusoidalParameterExplorer explanations={explanations} />
         </ToolDemoPlayer>,
         sectionsContent.obj3.content
@@ -655,9 +699,6 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj4.title,
       link: sectionsContent.obj4.link,
       content: [
-        <ToolDemoPlayer key={'demo-moving-the-midline-with-d'} script={demoScripts['moving-the-midline-with-d']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj4.title}`} title={sectionsContent.obj4.title}>
-          <SinusoidalParameterExplorer explanations={explanations} />
-        </ToolDemoPlayer>,
         sectionsContent.obj4.content
       ],
     },
@@ -666,7 +707,7 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj5.title,
       link: sectionsContent.obj5.link,
       content: [
-        <ToolDemoPlayer key={'demo-setting-the-period-with-b'} script={demoScripts['setting-the-period-with-b']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj5.title}`} title={sectionsContent.obj5.title}>
+        <ToolDemoPlayer key={'demo-setting-the-period-with-b'} script={demos['setting-the-period-with-b'].script} title={demos['setting-the-period-with-b'].title} label={`Demo: ${demos['setting-the-period-with-b'].title}`} scale={0.6} renderText={processContent}>
           <SinusoidalParameterExplorer explanations={explanations} />
         </ToolDemoPlayer>,
         sectionsContent.obj5.content
@@ -677,9 +718,6 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj6.title,
       link: sectionsContent.obj6.link,
       content: [
-        <ToolDemoPlayer key={'demo-shifting-with-c-and-why-the-shift-is-c-over-b'} script={demoScripts['shifting-with-c-and-why-the-shift-is-c-over-b']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj6.title}`} title={sectionsContent.obj6.title}>
-          <SinusoidalParameterExplorer explanations={explanations} />
-        </ToolDemoPlayer>,
         sectionsContent.obj6.content
       ],
     },
@@ -688,7 +726,7 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj7.title,
       link: sectionsContent.obj7.link,
       content: [
-        <ToolDemoPlayer key={'demo-the-guided-walk'} script={demoScripts['the-guided-walk']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj7.title}`} title={sectionsContent.obj7.title}>
+        <ToolDemoPlayer key={'demo-the-guided-walk'} script={demos['the-guided-walk'].script} title={demos['the-guided-walk'].title} label={`Demo: ${demos['the-guided-walk'].title}`} scale={0.6} renderText={processContent}>
           <SinusoidalParameterExplorer explanations={explanations} />
         </ToolDemoPlayer>,
         sectionsContent.obj7.content
@@ -699,9 +737,6 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj8.title,
       link: sectionsContent.obj8.link,
       content: [
-        <ToolDemoPlayer key={'demo-reading-the-curve-back-as-numbers'} script={demoScripts['reading-the-curve-back-as-numbers']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj8.title}`} title={sectionsContent.obj8.title}>
-          <SinusoidalParameterExplorer explanations={explanations} />
-        </ToolDemoPlayer>,
         sectionsContent.obj8.content
       ],
     },
@@ -710,9 +745,6 @@ export default function FunctionParametersPage({
       title: sectionsContent.obj21.title,
       link: sectionsContent.obj21.link,
       content: [
-        <ToolDemoPlayer key={'demo-the-explanations-panel'} script={demoScripts['the-explanations-panel']} scale={0.6} renderText={processContent} label={`Demo: ${sectionsContent.obj21.title}`} title={sectionsContent.obj21.title}>
-          <SinusoidalParameterExplorer explanations={explanations} />
-        </ToolDemoPlayer>,
         sectionsContent.obj21.content
       ],
     },
