@@ -10,6 +10,9 @@ import NegativeAngleExplorer from '../../../../app/components/trigonometry/ident
 import negativeAngleDiagrams from '../../../../app/components/trigonometry/identities/negative-angle/negativeAngleDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -476,6 +479,112 @@ Only [secant](!#the-secant-negative-angle-identity) inherits this evenness; the 
       text: 'x = cos(−θ) labels the same foot that was already labelled cos θ. No sign appears.' }),
   };
 
+  const instructions = [
+    'The six **tabs** switch between the negative-angle identities for $\\sin$, $\\cos$, $\\tan$, $\\csc$, $\\sec$ and $\\cot$. Sine and cosine open an animated geometric proof; the other four open a derived card. [Learn more about switching functions](!#switching-between-functions)',
+    'Drag the **$\\theta$ slider** between $10°$ and $80°$. The scene, the step values and every number on the page recompute at the new angle. [Learn more about the angle](!#adjusting-the-angle)',
+    'On a proof tab, press **Play** to run the proof step by step, or use **Next ›** and **‹ Prev**; **Reset** returns to the start and the speed menu sets the pace. [Learn more about playing a proof](!#playing-through-a-geometric-proof)',
+    'The scene draws each step of the proof on the unit circle, mirroring the point at $\\theta$ across the $x$-axis; the log beside it names the rule each step uses. [Learn more about the scene](!#reading-the-geometric-scene)',
+    'On the tan, csc, sec and cot tabs, the derived card shows the short algebra from the sine and cosine results; the **See … proof →** buttons jump to the source identity. [Learn more about derived identities](!#working-with-derived-identities)',
+    'The **formula table** under the tool lists all six identities with their values at the current angle; click a row to open that identity. [Learn more about the formula table](!#reading-the-formula-table)',
+    'The value cards compare both sides of the identity at the chosen angle — they must agree, for example $\\sin(-\\theta) = -\\sin\\theta$. [Learn more about the numerical check](!#verifying-identities-numerically)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real explorer, with
+     syncQuery={false} so demos never touch the page URL. Range 0 = the
+     angle slider of the visible card. Tab = nth 0, table row = nth 1. */
+  const demos = {
+    'playing-through-a-geometric-proof': {
+      title: 'The sine proof, step by step',
+      script: [
+        { say: `DRAG θ → 60°
+Scene redraws at the new angle.
+Proof works for every angle.` },
+        { slide: { range: 0 }, to: 60, ms: 1400 },
+        { wait: 2000 },
+        { say: `TAP Next › — STEP 1
+Place P at angle θ.
+Point P on the unit circle.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › — STEP 2
+Mirror P across the x-axis.
+P′ sits at angle −θ.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › — STEP 3
+Read off sin(−θ).
+Height flips: sin(−θ) = −sin θ.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ‹ Prev
+One step back.
+Scene and log follow.` },
+        { click: { button: '‹ Prev', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'working-with-derived-identities': {
+      title: 'Derived identities',
+      script: [
+        { say: `TAP tan(−θ)
+No animation. Derived card.
+tan(−θ) = −tan θ.` },
+        { click: { button: 'tan(−θ)', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG θ → 55°
+Verify cards: both sides equal.
+Live at every angle.` },
+        { slide: { range: 0 }, to: 55, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP See sin(−θ) proof →
+Source button.
+Jumps to the proof it is built from.` },
+        { click: { button: 'See sin(−θ) proof →' } },
+        { wait: 2400 },
+        { say: `TAP csc(−θ)
+csc(−θ) = −csc θ.
+Reciprocal of the sine result.` },
+        { click: { button: 'csc(−θ)', exact: true } },
+        { wait: 2400 },
+        { say: `TAP cot(−θ)
+cot(−θ) = −cot θ.
+Built from the tangent result.` },
+        { click: { button: 'cot(−θ)', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'reading-the-formula-table': {
+      title: 'The formula table',
+      script: [
+        { say: `TAP TABLE ROW cos(−θ)
+Row tap = tab tap.
+cos(−θ) = cos θ.` },
+        { click: { button: 'cos(−θ)', nth: 1 } },
+        { wait: 2600 },
+        { say: `DRAG θ → 25°
+Value column updates.
+All six at one angle.` },
+        { slide: { range: 0 }, to: 25, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW tan(−θ)
+tan(−θ) = −tan θ.
+Odd: sign flips with the angle.` },
+        { click: { button: 'tan(−θ)', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW sec(−θ)
+sec(−θ) = sec θ.
+Reciprocal of the cosine result.` },
+        { click: { button: 'sec(−θ)', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW sin(−θ)
+sin(−θ) = −sin θ.
+Back to the animated proof.` },
+        { click: { button: 'sin(−θ)', nth: 1 } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   const explanations = {
     sin: { steps: [
       `P sits on the unit circle at angle θ above the x-axis. P = (cos θ, sin θ). The vertical leg has signed length sin θ (positive, P above the x-axis). [Learn more about placing P](!#sine-proof-step-1-place-p) · [The sine identity](!#the-sine-negative-angle-identity)`,
@@ -502,6 +611,8 @@ Only [secant](!#the-secant-negative-angle-identity) inherits this evenness; the 
          faqQuestions,
          schemas,
          explanations,
+         instructions,
+         demos,
          stateUnits,
           seoData: {
         title: "Negative Angle Identities: Even & Odd Trig | Learn Math Class",
@@ -518,7 +629,21 @@ Only [secant](!#the-secant-negative-angle-identity) inherits this evenness; the 
     }
    }
 
-export default function NegativeAngleIdentitiesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function NegativeAngleIdentitiesPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <NegativeAngleExplorer explanations={explanations} syncQuery={false}/>
+    </ToolDemoPlayer>
+  )
+
 
 
   const genericSections=[
@@ -551,6 +676,7 @@ export default function NegativeAngleIdentitiesPage({relatedTools, seoData, sect
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          demo('playing-through-a-geometric-proof'),
           sectionsContent.obj3.content,
         ]
     },
@@ -567,6 +693,7 @@ export default function NegativeAngleIdentitiesPage({relatedTools, seoData, sect
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
+          demo('working-with-derived-identities'),
           sectionsContent.obj5.content,
         ]
     },
@@ -575,6 +702,7 @@ export default function NegativeAngleIdentitiesPage({relatedTools, seoData, sect
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
+          demo('reading-the-formula-table'),
           sectionsContent.obj6.content,
         ]
     },
@@ -800,6 +928,10 @@ export default function NegativeAngleIdentitiesPage({relatedTools, seoData, sect
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'20px'}}>Negative Angle Trigonometric Identities</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <NegativeAngleExplorer explanations={explanations}/>
    <br/>

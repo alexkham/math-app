@@ -13,6 +13,9 @@ import HalfAngleExplorer from '../../../../app/components/trigonometry/identitie
 import halfDiagrams from '../../../../app/components/trigonometry/identities/half-angle/halfAngleDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -534,6 +537,117 @@ Both verification cards agree at every slider position — the numerical seal on
       text: 'The square root delivers cos(&#945;/2) = &#8730;((1 + cos&#8202;&#945;)/2).' }),
   };
 
+  const instructions = [
+    'The six **tabs** switch between the half-angle identities for $\\sin$, $\\cos$, $\\tan$, $\\csc$, $\\sec$ and $\\cot$. Sine and cosine open an animated geometric proof; the other four open a derived card. [Learn more about switching functions](!#switching-between-functions)',
+    'Drag the **$\\alpha$ slider** between $20°$ and $160°$. The scene, the step values and every number on the page recompute at the new angle. [Learn more about the angle](!#adjusting-the-angle)',
+    'On a proof tab, press **Play** to run the proof step by step, or use **Next ›** and **‹ Prev**; **Reset** returns to the start and the speed menu sets the pace. [Learn more about playing a proof](!#playing-through-a-geometric-proof)',
+    'The scene draws each step of the proof on the unit circle as a chord cut by the bisector of $\\alpha$; the log beside it names the rule each step uses. [Learn more about the scene](!#reading-the-geometric-scene)',
+    'On the tan, csc, sec and cot tabs, the derived card shows the short algebra from the sine and cosine results; the **See … proof →** buttons jump to the source identity. [Learn more about derived identities](!#working-with-derived-identities)',
+    'The **formula table** under the tool lists all six identities with their values at the current angle; click a row to open that identity. [Learn more about the formula table](!#reading-the-formula-table)',
+    'The value cards compare both sides of the identity at the chosen angle — they must agree, for example $\\sin\\frac{\\alpha}{2}$ and $\\sqrt{\\frac{1-\\cos\\alpha}{2}}$. [Learn more about the numerical check](!#verifying-identities-numerically)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real explorer, with
+     syncQuery={false} so demos never touch the page URL. Range 0 = the
+     angle slider of the visible card. Tab = nth 0, table row = nth 1. */
+  const demos = {
+    'playing-through-a-geometric-proof': {
+      title: 'The sine proof, step by step',
+      script: [
+        { say: `DRAG α → 120°
+Scene redraws at the new angle.
+Proof works for every angle.` },
+        { slide: { range: 0 }, to: 120, ms: 1400 },
+        { wait: 2000 },
+        { say: `TAP Next › — STEP 1
+Setup.
+Two radii, angle α between them.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › — STEP 2
+Law of cosines on triangle OAB.
+Chord² = 2 − 2 cos α.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › — STEP 3
+Bisect.
+Half-chord opposite angle α/2.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › ×3
+Read off the half-chord → square the chord → equate and solve.
+Proved: sin(α/2) = √((1 − cos α) / 2).` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { wait: 1800 },
+      ],
+    },
+    'working-with-derived-identities': {
+      title: 'Derived identities',
+      script: [
+        { say: `TAP tan(α/2)
+No animation. Derived card.
+tan(α/2) = √((1 − cos α) / (1 + cos α)).` },
+        { click: { button: 'tan(α/2)', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG α → 100°
+Verify cards: both sides equal.
+Live at every angle.` },
+        { slide: { range: 0 }, to: 100, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP See sin(α/2) proof →
+Source button.
+Jumps to the proof it is built from.` },
+        { click: { button: 'See sin(α/2) proof →' } },
+        { wait: 2400 },
+        { say: `TAP csc(α/2)
+csc(α/2) = √(2 / (1 − cos α)).
+Reciprocal of the sine result.` },
+        { click: { button: 'csc(α/2)', exact: true } },
+        { wait: 2400 },
+        { say: `TAP cot(α/2)
+cot(α/2) = √((1 + cos α) / (1 − cos α)).
+Built from the tangent result.` },
+        { click: { button: 'cot(α/2)', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'reading-the-formula-table': {
+      title: 'The formula table',
+      script: [
+        { say: `TAP TABLE ROW cos(α/2)
+Row tap = tab tap.
+cos(α/2) = √((1 + cos α) / 2).` },
+        { click: { button: 'cos(α/2)', nth: 1 } },
+        { wait: 2600 },
+        { say: `DRAG α → 40°
+Value column updates.
+All six at one angle.` },
+        { slide: { range: 0 }, to: 40, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW tan(α/2)
+tan(α/2) = √((1 − cos α) / (1 + cos α)).
+sin(α/2) over cos(α/2). Both roots.` },
+        { click: { button: 'tan(α/2)', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW sec(α/2)
+sec(α/2) = √(2 / (1 + cos α)).
+Reciprocal of the cosine result.` },
+        { click: { button: 'sec(α/2)', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW sin(α/2)
+sin(α/2) = √((1 − cos α) / 2).
+Back to the animated proof.` },
+        { click: { button: 'sin(α/2)', nth: 1 } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   const explanations = {
     sin: { steps: [
       `Two radii OA and OB of length 1, meeting at center O with angle α between them. We want to express sin(α/2) in terms of α. [Full treatment](!#sine-half-step-1-setup) · [The sine half-angle identity](!#the-sine-half-angle-identity)`,
@@ -566,6 +680,8 @@ Both verification cards agree at every slider position — the numerical seal on
          faqQuestions,
          schemas,
          explanations,
+         instructions,
+         demos,
          stateUnits,
           seoData: {
         title: "Half Angle Identities: Interactive Proofs | Learn Math Class",
@@ -582,7 +698,21 @@ Both verification cards agree at every slider position — the numerical seal on
     }
    }
 
-export default function HalfAngleIdentitiesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function HalfAngleIdentitiesPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <HalfAngleExplorer explanations={explanations} syncQuery={false}/>
+    </ToolDemoPlayer>
+  )
+
 
 
   const genericSections=[
@@ -623,6 +753,7 @@ export default function HalfAngleIdentitiesPage({relatedTools, seoData, sections
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          demo('playing-through-a-geometric-proof'),
           sectionsContent.obj3.content,
         ]
     },
@@ -639,6 +770,7 @@ export default function HalfAngleIdentitiesPage({relatedTools, seoData, sections
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
+          demo('working-with-derived-identities'),
           sectionsContent.obj5.content,
         ]
     },
@@ -647,6 +779,7 @@ export default function HalfAngleIdentitiesPage({relatedTools, seoData, sections
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
+          demo('reading-the-formula-table'),
           sectionsContent.obj6.content,
         ]
     },
@@ -932,6 +1065,10 @@ export default function HalfAngleIdentitiesPage({relatedTools, seoData, sections
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'20px',marginBottom:'0px'}}>Half Angle Trigonometric Identities</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
       <div style={{ display: 'grid', gridTemplateColumns: '100px minmax(0, 1fr)', gap: 8,alignItems: 'start' }}>
          <SiblingsNavStandalone

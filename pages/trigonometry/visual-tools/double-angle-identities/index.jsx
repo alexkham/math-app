@@ -510,6 +510,9 @@ import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandal
 import doubleAngleDiagrams from '../../../../app/components/trigonometry/identities/double-angle/doubleAngleDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -1032,6 +1035,117 @@ As with sine, the verification cards keep both sides in numerical agreement acro
       text: 'The two chord measurements force cos&#8202;2&#952; = 1 &#8722; 2&#8202;sin&#178;&#952;.' }),
   };
 
+  const instructions = [
+    'The six **tabs** switch between the double-angle identities for $\\sin$, $\\cos$, $\\tan$, $\\csc$, $\\sec$ and $\\cot$. Sine and cosine open an animated geometric proof; the other four open a derived card. [Learn more about switching functions](!#switching-between-functions)',
+    'Drag the **$\\theta$ slider** between $10°$ and $80°$. The scene, the step values and every number on the page recompute at the new angle. [Learn more about the angle](!#adjusting-the-angle)',
+    'On a proof tab, press **Play** to run the proof step by step, or use **Next ›** and **‹ Prev**; **Reset** returns to the start and the speed menu sets the pace. [Learn more about playing a proof](!#playing-through-a-geometric-proof)',
+    'The scene draws each step of the proof on the unit circle as an isosceles triangle with apex angle $2\\theta$; the log beside it names the rule each step uses. [Learn more about the scene](!#reading-the-geometric-scene)',
+    'On the tan, csc, sec and cot tabs, the derived card shows the short algebra from the sine and cosine results; the **See … proof →** buttons jump to the source identity. [Learn more about derived identities](!#working-with-derived-identities)',
+    'The **formula table** under the tool lists all six identities with their values at the current angle; click a row to open that identity. [Learn more about the formula table](!#reading-the-formula-table)',
+    'The value cards compare both sides of the identity at the chosen angle — they must agree, for example $\\sin 2\\theta$ and $2\\sin\\theta\\cos\\theta$. [Learn more about the numerical check](!#verifying-identities-numerically)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real explorer, with
+     syncQuery={false} so demos never touch the page URL. Range 0 = the
+     angle slider of the visible card. Tab = nth 0, table row = nth 1. */
+  const demos = {
+    'playing-through-a-geometric-proof': {
+      title: 'The sine proof, step by step',
+      script: [
+        { say: `DRAG θ → 50°
+Scene redraws at the new angle.
+Proof works for every angle.` },
+        { slide: { range: 0 }, to: 50, ms: 1400 },
+        { wait: 2000 },
+        { say: `TAP Next › — STEP 1
+Setup.
+Two radii, angle 2θ between them.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › — STEP 2
+Area, first way.
+Area = ½ sin(2θ).` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › — STEP 3
+Bisect.
+Two right triangles, angle θ each.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › ×3
+Read off the legs → area, second way → equate.
+Proved: sin(2θ) = 2 sin θ · cos θ.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { wait: 1800 },
+      ],
+    },
+    'working-with-derived-identities': {
+      title: 'Derived identities',
+      script: [
+        { say: `TAP tan(2θ)
+No animation. Derived card.
+tan(2θ) = 2 tan θ / (1 − tan²θ).` },
+        { click: { button: 'tan(2θ)', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG θ → 30°
+Verify cards: both sides equal.
+Live at every angle.` },
+        { slide: { range: 0 }, to: 30, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP See sin(2θ) proof →
+Source button.
+Jumps to the proof it is built from.` },
+        { click: { button: 'See sin(2θ) proof →' } },
+        { wait: 2400 },
+        { say: `TAP csc(2θ)
+csc(2θ) = 1 / (2 sin θ · cos θ).
+Reciprocal of the sine result.` },
+        { click: { button: 'csc(2θ)', exact: true } },
+        { wait: 2400 },
+        { say: `TAP cot(2θ)
+cot(2θ) = (1 − tan²θ) / (2 tan θ).
+Built from the tangent result.` },
+        { click: { button: 'cot(2θ)', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'reading-the-formula-table': {
+      title: 'The formula table',
+      script: [
+        { say: `TAP TABLE ROW cos(2θ)
+Row tap = tab tap.
+cos(2θ) = 1 − 2 sin²θ.` },
+        { click: { button: 'cos(2θ)', nth: 1 } },
+        { wait: 2600 },
+        { say: `DRAG θ → 20°
+Value column updates.
+All six at one angle.` },
+        { slide: { range: 0 }, to: 20, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW tan(2θ)
+tan(2θ) = 2 tan θ / (1 − tan²θ).
+sin(2θ) over cos(2θ), divided by cos²θ.` },
+        { click: { button: 'tan(2θ)', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW sec(2θ)
+sec(2θ) = 1 / (1 − 2 sin²θ).
+Reciprocal of the cosine result.` },
+        { click: { button: 'sec(2θ)', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW sin(2θ)
+sin(2θ) = 2 sin θ · cos θ.
+Back to the animated proof.` },
+        { click: { button: 'sin(2θ)', nth: 1 } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   const explanations = {
     sin: { steps: [
       `Two radii OA and OB of length 1, meeting at center O with angle 2θ between them. With chord AB they form an isosceles triangle. [Full treatment](!#sine-proof-step-1-setup) · [The sine identity](!#the-sine-double-angle-identity)`,
@@ -1064,6 +1178,8 @@ As with sine, the verification cards keep both sides in numerical agreement acro
          faqQuestions,
          schemas,
          explanations,
+         instructions,
+         demos,
          stateUnits,
           seoData: {
         title: "Double Angle Identities: Interactive Proofs | Learn Math Class",
@@ -1080,7 +1196,21 @@ As with sine, the verification cards keep both sides in numerical agreement acro
     }
    }
 
-export default function DoubleAngleIdentitiesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function DoubleAngleIdentitiesPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <DoubleAngleExplorer explanations={explanations} syncQuery={false}/>
+    </ToolDemoPlayer>
+  )
+
 
 
   const genericSections=[
@@ -1121,6 +1251,7 @@ export default function DoubleAngleIdentitiesPage({relatedTools, seoData, sectio
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          demo('playing-through-a-geometric-proof'),
           sectionsContent.obj3.content,
         ]
     },
@@ -1137,6 +1268,7 @@ export default function DoubleAngleIdentitiesPage({relatedTools, seoData, sectio
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
+          demo('working-with-derived-identities'),
           sectionsContent.obj5.content,
         ]
     },
@@ -1145,6 +1277,7 @@ export default function DoubleAngleIdentitiesPage({relatedTools, seoData, sectio
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
+          demo('reading-the-formula-table'),
           sectionsContent.obj6.content,
         ]
     },
@@ -1430,6 +1563,10 @@ export default function DoubleAngleIdentitiesPage({relatedTools, seoData, sectio
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Double Angle Trigonometric Identities</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    {/* <SiblingsNav
       bg="#fafaf7"

@@ -511,6 +511,9 @@ import SiblingsNavStandalone  from '../../../../app/components/SiblingsNavStanda
 import pythagoreanDiagrams from '../../../../app/components/trigonometry/identities/pythagorean/pythagoreanDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -1055,6 +1058,117 @@ At $35°$ both verification cards settle on $0.819$.`,
       text: 'The cosine identity, checked at 35° where both sides read 0.819.' }),
   };
 
+  const instructions = [
+    'The six **tabs** switch between the Pythagorean identities for $\\sin$, $\\cos$, $\\tan$, $\\csc$, $\\sec$ and $\\cot$. Sine and cosine open an animated geometric proof; the other four open a derived card. [Learn more about switching functions](!#switching-between-functions)',
+    'Drag the **$\\theta$ slider** between $10°$ and $80°$. The scene, the step values and every number on the page recompute at the new angle. [Learn more about the angle](!#adjusting-the-angle)',
+    'On a proof tab, press **Play** to run the proof step by step, or use **Next ›** and **‹ Prev**; **Reset** returns to the start and the speed menu sets the pace. [Learn more about playing a proof](!#playing-through-a-geometric-proof)',
+    'The scene draws each step of the proof on the unit circle as a right triangle with hypotenuse $1$; the log beside it names the rule each step uses. [Learn more about the scene](!#reading-the-geometric-scene)',
+    'On the tan, csc, sec and cot tabs, the derived card shows the short algebra from the sine and cosine results; the **See … proof →** buttons jump to the source identity. [Learn more about derived identities](!#working-with-derived-identities)',
+    'The **formula table** under the tool lists all six identities with their values at the current angle; click a row to open that identity. [Learn more about the formula table](!#reading-the-formula-table)',
+    'The value cards compare both sides of the identity at the chosen angle — they must agree, for example $\\sin\\theta$ and $\\sqrt{1-\\cos^2\\theta}$. [Learn more about the numerical check](!#verifying-identities-numerically)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real explorer, with
+     syncQuery={false} so demos never touch the page URL. Range 0 = the
+     angle slider of the visible card. Tab = nth 0, table row = nth 1. */
+  const demos = {
+    'playing-through-a-geometric-proof': {
+      title: 'The sine proof, step by step',
+      script: [
+        { say: `DRAG θ → 60°
+Scene redraws at the new angle.
+Proof works for every angle.` },
+        { slide: { range: 0 }, to: 60, ms: 1400 },
+        { wait: 2000 },
+        { say: `TAP Next › — STEP 1
+Setup.
+Unit radius, angle θ.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › — STEP 2
+Bisect.
+A right triangle appears.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › — STEP 3
+Identify the legs.
+Legs = sin θ and cos θ. Hypotenuse = 1.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › ×3
+Pythagoras → solve for sin²θ → take the positive root.
+Proved: sinθ = √(1 − cos²θ).` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { wait: 1800 },
+      ],
+    },
+    'working-with-derived-identities': {
+      title: 'Derived identities',
+      script: [
+        { say: `TAP tanθ
+No animation. Derived card.
+tanθ = √(sec²θ − 1).` },
+        { click: { button: 'tanθ', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG θ → 50°
+Verify cards: both sides equal.
+Live at every angle.` },
+        { slide: { range: 0 }, to: 50, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP See sin θ proof →
+Source button.
+Jumps to the proof it is built from.` },
+        { click: { button: 'See sin θ proof →' } },
+        { wait: 2400 },
+        { say: `TAP cscθ
+cscθ = √(1 + cot²θ).
+Reciprocal of the sine result.` },
+        { click: { button: 'cscθ', exact: true } },
+        { wait: 2400 },
+        { say: `TAP cotθ
+cotθ = √(csc²θ − 1).
+Built from the tangent result.` },
+        { click: { button: 'cotθ', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'reading-the-formula-table': {
+      title: 'The formula table',
+      script: [
+        { say: `TAP TABLE ROW cosθ
+Row tap = tab tap.
+cosθ = √(1 − sin²θ).` },
+        { click: { button: 'cosθ', nth: 1 } },
+        { wait: 2600 },
+        { say: `DRAG θ → 20°
+Value column updates.
+All six at one angle.` },
+        { slide: { range: 0 }, to: 20, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW tanθ
+tanθ = √(sec²θ − 1).
+From sin²θ + cos²θ = 1, divided by cos²θ.` },
+        { click: { button: 'tanθ', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW secθ
+secθ = √(1 + tan²θ).
+Reciprocal of the cosine result.` },
+        { click: { button: 'secθ', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW sinθ
+sinθ = √(1 − cos²θ).
+Back to the animated proof.` },
+        { click: { button: 'sinθ', nth: 1 } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   const explanations = {
     sin: { steps: [
       `Two radii OA and OB of length 1 from center O of the unit circle, with chord AB between them. [Learn more about the setup](!#sine-proof-step-1-setup) · [The sine identity](!#the-sine-pythagorean-identity)`,
@@ -1089,6 +1203,8 @@ At $35°$ both verification cards settle on $0.819$.`,
          faqQuestions,
          schemas,
          explanations,
+         instructions,
+         demos,
          stateUnits,
           seoData: {
         title: "Pythagorean Identities: Interactive Proofs | Learn Math Class",
@@ -1105,7 +1221,21 @@ At $35°$ both verification cards settle on $0.819$.`,
     }
    }
 
-export default function PythagoreanIdentitiesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PythagoreanIdentitiesPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <PythagoreanExplorer explanations={explanations} syncQuery={false}/>
+    </ToolDemoPlayer>
+  )
+
 
 
   const genericSections=[
@@ -1146,6 +1276,7 @@ export default function PythagoreanIdentitiesPage({relatedTools, seoData, sectio
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          demo('playing-through-a-geometric-proof'),
           sectionsContent.obj3.content,
         ]
     },
@@ -1162,6 +1293,7 @@ export default function PythagoreanIdentitiesPage({relatedTools, seoData, sectio
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
+          demo('working-with-derived-identities'),
           sectionsContent.obj5.content,
         ]
     },
@@ -1170,6 +1302,7 @@ export default function PythagoreanIdentitiesPage({relatedTools, seoData, sectio
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
+          demo('reading-the-formula-table'),
           sectionsContent.obj6.content,
         ]
     },
@@ -1455,6 +1588,10 @@ export default function PythagoreanIdentitiesPage({relatedTools, seoData, sectio
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'20px',marginBottom:'0px'}}>Pythagorean Trigonometric Identities</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{ display: 'grid', gridTemplateColumns: '100px minmax(0, 1fr)', gap: 8,alignItems: 'start' }}>
      <SiblingsNavStandalone
