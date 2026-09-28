@@ -7,10 +7,12 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import ExplanationDetails from '@/app/components/ExplanationDetails'
 import SinusoidalParameterExplorer from '@/app/components/trigonometry/graphs/SinusoidalParameterExplorer'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
 import functionParametersDiagrams from '@/app/components/trigonometry/graphs/functionParametersDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
+import { processContent } from '@/app/utils/contentProcessor'
 import '@/pages/pages.css'
 
 /* Steps 1-5 (visual-tool-page-creation-instructions v2).
@@ -338,6 +340,87 @@ Every explanation ends with two links into this page: one to the frozen state th
     },
   }
 
+  /* Animated demos, one per usage section (one atomic operation each).
+     Played by ToolDemoPlayer against the real SinusoidalParameterExplorer.
+     Range order in the tool: 0 = A, 1 = D, 2 = B, 3 = C (C in twelfths of pi). */
+  const demoScripts = {
+    'choosing-the-function': [
+      { say: 'Pick a function from the **Function** row.' },
+      { click: { button: 'cos', exact: true } },
+      { wait: 1200 },
+      { click: { button: 'tan', exact: true } },
+      { say: 'On tan the amplitude bracket disappears: the curve has no peak.' },
+      { wait: 1800 },
+      { click: { button: 'sin', exact: true } },
+      { wait: 900 },
+    ],
+    'the-equation-bar-and-the-colour-key': [
+      { say: 'Each number in the equation is drawn in its parameter colour.' },
+      { slide: { range: 0 }, to: 2, ms: 1000 },
+      { slide: { range: 3 }, to: 6, ms: 1100 },
+      { say: 'The same colours label the features on the graph: red bracket, violet bar.' },
+      { wait: 2200 },
+    ],
+    'setting-the-amplitude-with-a': [
+      { say: 'Drag **A** to stretch the curve away from its midline.' },
+      { slide: { range: 0 }, to: 3, ms: 1400 },
+      { wait: 900 },
+      { say: 'Below zero the curve reflects; the dashed curve shows where it came from.' },
+      { slide: { range: 0 }, to: -2, ms: 1600 },
+      { wait: 2000 },
+    ],
+    'moving-the-midline-with-d': [
+      { say: 'Drag **D** to lift the midline.' },
+      { slide: { range: 1 }, to: 2, ms: 1400 },
+      { say: 'Max and min move with it; the amplitude bracket keeps its length.' },
+      { wait: 2200 },
+    ],
+    'setting-the-period-with-b': [
+      { say: 'Drag **B** to fit more cycles into the window.' },
+      { slide: { range: 2 }, to: 2, ms: 1200 },
+      { wait: 800 },
+      { slide: { range: 2 }, to: 3, ms: 900 },
+      { say: 'The amber bracket shrinks to 2π/|B|.' },
+      { wait: 2000 },
+    ],
+    'shifting-with-c-and-why-the-shift-is-c-over-b': [
+      { say: 'Set **B** = 2 first.' },
+      { slide: { range: 2 }, to: 2, ms: 900 },
+      { say: 'Now drag **C** up to π.' },
+      { slide: { range: 3 }, to: 12, ms: 1600 },
+      { say: 'C is π, but the violet bar measures π/2: the shift is C/B.' },
+      { wait: 2600 },
+    ],
+    'the-guided-walk': [
+      { say: 'Each **Guided walk** button sets all four parameters at once.' },
+      { click: { button: 'A < 0', exact: true } },
+      { wait: 1500 },
+      { click: { button: 'C/B', exact: true } },
+      { wait: 1500 },
+      { click: { button: 'all four', exact: true } },
+      { say: 'The explanation panel follows the button you press.' },
+      { wait: 2000 },
+    ],
+    'reading-the-curve-back-as-numbers': [
+      { say: 'The strip under the controls reads the curve back as numbers.' },
+      { slide: { range: 2 }, to: 2, ms: 900 },
+      { slide: { range: 3 }, to: 12, ms: 1300 },
+      { move: { text: 'Shift C/B' }, ms: 700 },
+      { say: '**C itself** and **Shift C/B** sit side by side, so the difference is visible.' },
+      { wait: 2400 },
+    ],
+    'the-explanations-panel': [
+      { say: 'The panel on the right explains whatever you touch last.' },
+      { slide: { range: 1 }, to: 1.5, ms: 1000 },
+      { wait: 1200 },
+      { slide: { range: 2 }, to: 2, ms: 900 },
+      { wait: 1200 },
+      { click: { button: 'tan', exact: true } },
+      { say: 'On tan it switches to the unbounded case.' },
+      { wait: 2200 },
+    ],
+  }
+
   /* Explanation bodies for the tool's own panel, each ending in the Line 1
      anchor pair: the state section, then the group section that owns it. */
   const explanations = {
@@ -499,6 +582,7 @@ Every explanation ends with two links into this page: one to the frozen state th
       relatedTools: getRelatedTools('function-parameters'),
       instructions,
       explanations,
+      demoScripts,
       stateUnits,
       sectionsContent,
       introContent,
@@ -523,6 +607,7 @@ export default function FunctionParametersPage({
   relatedTools,
   instructions,
   explanations,
+  demoScripts,
   stateUnits,
   seoData,
   sectionsContent,
@@ -536,55 +621,100 @@ export default function FunctionParametersPage({
       id: 'choosing-the-function',
       title: sectionsContent.obj1.title,
       link: sectionsContent.obj1.link,
-      content: [sectionsContent.obj1.content],
+      content: [
+        <ToolDemoPlayer key={'demo-choosing-the-function'} script={demoScripts['choosing-the-function']} scale={0.6} renderText={processContent} label='Demo: choosing the function'>
+          <SinusoidalParameterExplorer explanations={explanations} />
+        </ToolDemoPlayer>,
+        sectionsContent.obj1.content
+      ],
     },
     {
       id: 'the-equation-bar-and-the-colour-key',
       title: sectionsContent.obj2.title,
       link: sectionsContent.obj2.link,
-      content: [sectionsContent.obj2.content],
+      content: [
+        <ToolDemoPlayer key={'demo-the-equation-bar-and-the-colour-key'} script={demoScripts['the-equation-bar-and-the-colour-key']} scale={0.6} renderText={processContent} label='Demo: the equation bar and the colour key'>
+          <SinusoidalParameterExplorer explanations={explanations} />
+        </ToolDemoPlayer>,
+        sectionsContent.obj2.content
+      ],
     },
     {
       id: 'setting-the-amplitude-with-a',
       title: sectionsContent.obj3.title,
       link: sectionsContent.obj3.link,
-      content: [sectionsContent.obj3.content],
+      content: [
+        <ToolDemoPlayer key={'demo-setting-the-amplitude-with-a'} script={demoScripts['setting-the-amplitude-with-a']} scale={0.6} renderText={processContent} label='Demo: setting the amplitude with a'>
+          <SinusoidalParameterExplorer explanations={explanations} />
+        </ToolDemoPlayer>,
+        sectionsContent.obj3.content
+      ],
     },
     {
       id: 'moving-the-midline-with-d',
       title: sectionsContent.obj4.title,
       link: sectionsContent.obj4.link,
-      content: [sectionsContent.obj4.content],
+      content: [
+        <ToolDemoPlayer key={'demo-moving-the-midline-with-d'} script={demoScripts['moving-the-midline-with-d']} scale={0.6} renderText={processContent} label='Demo: moving the midline with d'>
+          <SinusoidalParameterExplorer explanations={explanations} />
+        </ToolDemoPlayer>,
+        sectionsContent.obj4.content
+      ],
     },
     {
       id: 'setting-the-period-with-b',
       title: sectionsContent.obj5.title,
       link: sectionsContent.obj5.link,
-      content: [sectionsContent.obj5.content],
+      content: [
+        <ToolDemoPlayer key={'demo-setting-the-period-with-b'} script={demoScripts['setting-the-period-with-b']} scale={0.6} renderText={processContent} label='Demo: setting the period with b'>
+          <SinusoidalParameterExplorer explanations={explanations} />
+        </ToolDemoPlayer>,
+        sectionsContent.obj5.content
+      ],
     },
     {
       id: 'shifting-with-c-and-why-the-shift-is-c-over-b',
       title: sectionsContent.obj6.title,
       link: sectionsContent.obj6.link,
-      content: [sectionsContent.obj6.content],
+      content: [
+        <ToolDemoPlayer key={'demo-shifting-with-c-and-why-the-shift-is-c-over-b'} script={demoScripts['shifting-with-c-and-why-the-shift-is-c-over-b']} scale={0.6} renderText={processContent} label='Demo: shifting with c and why the shift is c over b'>
+          <SinusoidalParameterExplorer explanations={explanations} />
+        </ToolDemoPlayer>,
+        sectionsContent.obj6.content
+      ],
     },
     {
       id: 'the-guided-walk',
       title: sectionsContent.obj7.title,
       link: sectionsContent.obj7.link,
-      content: [sectionsContent.obj7.content],
+      content: [
+        <ToolDemoPlayer key={'demo-the-guided-walk'} script={demoScripts['the-guided-walk']} scale={0.6} renderText={processContent} label='Demo: the guided walk'>
+          <SinusoidalParameterExplorer explanations={explanations} />
+        </ToolDemoPlayer>,
+        sectionsContent.obj7.content
+      ],
     },
     {
       id: 'reading-the-curve-back-as-numbers',
       title: sectionsContent.obj8.title,
       link: sectionsContent.obj8.link,
-      content: [sectionsContent.obj8.content],
+      content: [
+        <ToolDemoPlayer key={'demo-reading-the-curve-back-as-numbers'} script={demoScripts['reading-the-curve-back-as-numbers']} scale={0.6} renderText={processContent} label='Demo: reading the curve back as numbers'>
+          <SinusoidalParameterExplorer explanations={explanations} />
+        </ToolDemoPlayer>,
+        sectionsContent.obj8.content
+      ],
     },
     {
       id: 'the-explanations-panel',
       title: sectionsContent.obj21.title,
       link: sectionsContent.obj21.link,
-      content: [sectionsContent.obj21.content],
+      content: [
+        <ToolDemoPlayer key={'demo-the-explanations-panel'} script={demoScripts['the-explanations-panel']} scale={0.6} renderText={processContent} label='Demo: the explanations panel'>
+          <SinusoidalParameterExplorer explanations={explanations} />
+        </ToolDemoPlayer>,
+        sectionsContent.obj21.content
+      ],
     },
     {
       id: 'inside-and-outside-the-function',
