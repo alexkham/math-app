@@ -78626,7 +78626,7 @@
         "wiring": "stateUnits built in getStaticProps with demoUnitFrame and injected as content-array items via dangerouslySetInnerHTML. The tool's own explanation panel is prop-fed from the page (explanations prop), each body ending in the state-section / group-section anchor pair.",
         "notes": "New tool built 2026-09-27 from the sinusoidal-parameter-explorer proposal in the trigonometry figure registry (v10 section 11). Serves trigonometry/graphs obj5-obj9; those sections are not re-harvested yet.",
         "howToMesh": "12 how-to instructions, each ending in an anchor link to its usage section (12 links, 0 orphans).",
-        "demos": "4 ToolDemoPlayer v3 demos of 5 steps (on-stage callouts, reader controls) in choosing-the-function, setting-the-amplitude-with-a, setting-the-period-with-b, the-guided-walk."
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps (on-stage callouts, reader controls) in choosing-the-function, setting-the-amplitude-with-a, setting-the-period-with-b, the-guided-walk. Headless step check 20/20."
       },
       "relatedTerms": [
         {
@@ -78906,7 +78906,8 @@
         "verification": "Rendered check by curl, part before __NEXT_DATA__: 200, 19 <section id>, 5 unit frames each holding one <svg>, 479 KaTeX spans, 0 orphans. Browser: presets switch state (composition fold -> step 4, arctan -> tan step 3); drag mapping under zoom 0.9 round-trips exactly (Chrome 152); frozen arctan unit rendered and inspected.",
         "wiring": "Frozen states rendered by inverseFunctionDiagrams.js through renderToStaticMarkup of the tool's own InverseRestrictionScene (named export), so frozen and live share one code path. Stage notes page-fed via the explanations prop with renderText=processContent, each ending in the state/group anchor pair.",
         "howToMesh": "10 how-to instructions, each ending in an anchor link to its usage section (10 links, 0 orphans).",
-        "componentFixes": "2026-09-27 step 2: React.useId called unconditionally (rules-of-hooks error broke next build); presets row relabelled Examples with readable button labels; named exports added for the diagrams module."
+        "componentFixes": "2026-09-27 step 2: React.useId called unconditionally (rules-of-hooks error broke next build); presets row relabelled Examples with readable button labels; named exports added for the diagrams module.",
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in the-line-test, restricting-the-domain, reflecting-across-y-x, composing-and-the-fold; headless step check 20/20."
       },
       "relatedTerms": [
         {
@@ -79161,7 +79162,8 @@
         "verification": "Rendered check by curl, part before __NEXT_DATA__: 200, 17 <section id>, 4 unit frames each holding one sized <svg> (780x460), 505 KaTeX spans, 0 orphans. Browser: tool renders at zoom 0.9; frozen one-radian unit inspected.",
         "wiring": "Frozen states rendered by arcSectorDiagrams.js through renderToStaticMarkup of the tool's own ArcSectorScene (named export). Panel note page-fed via explanations with renderText=processContent, linking the four state sections.",
         "howToMesh": "9 how-to instructions, each ending in an anchor link to its usage section (9 links, 0 orphans).",
-        "componentFixes": "2026-09-27 step 2: presets row relabelled Examples with readable labels; named exports added for the diagrams module."
+        "componentFixes": "2026-09-27 step 2: presets row relabelled Examples with readable labels; named exports added for the diagrams module.",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in setting-the-angle, the-one-radian-marks, the-r-1-button; headless step check 15/15."
       },
       "relatedTerms": [
         {
@@ -79356,7 +79358,8 @@
         "verification": "Rendered check by curl, part before __NEXT_DATA__: 200, 28 <section id>, 16 unit frames (the tool's formula table shares the frame border style, so a naive frame count reads 17), 625 KaTeX spans, 0 orphans. Browser: Next advances the derivation and the log carries the page-fed anchor pairs; all 16 frozen units measure 336x240 with text counts rising 6/7/10/13/16 across the steps.",
         "wiring": "Frozen states rendered by tripleAngleDiagrams.js through renderToStaticMarkup of the tool's exported TripleAngleScene (framed 336x240). Step descriptions and derived-card intros page-fed via explanations with renderText=processContent. showFrozen={false} hides the component's review row.",
         "howToMesh": "8 how-to instructions, each ending in an anchor link to its usage section (8 links, 0 orphans).",
-        "layout": "SiblingsNavStandalone used in its float form (v3), not inside a grid: in a 100px grid column it renders null until /sitemap.xml loads and the explorer collapses into the column."
+        "layout": "SiblingsNavStandalone used in its float form (v3), not inside a grid: in a 100px grid column it renders null until /sitemap.xml loads and the explorer collapses into the column.",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in playing-through-the-derivation, checking-each-line-numerically, working-with-derived-identities; demo instances use syncQuery={false}; headless step check 15/15."
       },
       "relatedTerms": [
         {
@@ -79547,7 +79550,8 @@
         "orphans": 0,
         "verification": "Rendered check by curl, part before __NEXT_DATA__: 200, 17 <section id>, 6 identity sections each with one framed 352x264 unit, 400 KaTeX spans, 0 orphans. Browser: shift buttons and tabs switch the identity (tan + pi -> tan theta, half turn); panel note carries the anchor pair.",
         "wiring": "Frozen states rendered by shiftIdentityDiagrams.js through renderToStaticMarkup of the tool's exported ShiftScene (framed). Rotation-panel note page-fed via explanations keyed fn:shift with renderText=processContent. showFrozen={false} hides the component's review row. SiblingsNavStandalone in float form.",
-        "howToMesh": "7 how-to instructions, each ending in an anchor link to its usage section (7 links, 0 orphans)."
+        "howToMesh": "7 how-to instructions, each ending in an anchor link to its usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in choosing-the-shift, reading-the-rotation-figure, reading-the-identity-table; demo instances use syncQuery={false}; headless step check 15/15."
       },
       "relatedTerms": [
         {

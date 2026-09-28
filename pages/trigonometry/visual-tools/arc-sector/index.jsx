@@ -9,6 +9,7 @@ import ExplanationDetails from '@/app/components/ExplanationDetails'
 import ArcSectorExplorer from '@/app/components/trigonometry/ArcSectorExplorer'
 import arcSectorDiagrams from '@/app/components/trigonometry/arcSectorDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 import { processContent } from '@/app/utils/contentProcessor'
@@ -306,6 +307,101 @@ For the theory in prose, the [degrees and radians](!/trigonometry/degrees-radian
     },
   }
 
+  /* Animated demos (ToolDemoPlayer v3) against the real ArcSectorExplorer.
+     Range order: 0 = θ (0 to 2π), 1 = r (0.5 to 3). say = on-stage callout. */
+  const demos = {
+    'setting-the-angle': {
+      title: 'Angle and radius',
+      script: [
+        { say: `DRAG θ → 2π/3
+Amber arc and sector grow.
+Readout: 2.094 rad = 120°.` },
+        { slide: { range: 0 }, to: 2.0944, ms: 1500 },
+        { wait: 2200 },
+        { say: `DRAG r → 3
+Circle, arc, sector: all bigger.
+θ unchanged. Still 2π/3.` },
+        { slide: { range: 1 }, to: 3, ms: 1400 },
+        { wait: 2400 },
+        { say: `DRAG r → 1.5
+Half the radius.
+Arc halves. Area quarters.` },
+        { slide: { range: 1 }, to: 1.5, ms: 1300 },
+        { wait: 2400 },
+        { say: `DRAG θ → π
+Half turn. Straight line.
+s = πr. A = ½πr².` },
+        { slide: { range: 0 }, to: 3.1416, ms: 1400 },
+        { wait: 2400 },
+        { say: `DRAG θ → 2π
+Full turn. Arc = circumference.
+s = 2πr.` },
+        { slide: { range: 0 }, to: 6.2832, ms: 1600 },
+        { wait: 2400 },
+      ],
+    },
+    'the-one-radian-marks': {
+      title: 'One radian and the sector as a fraction',
+      script: [
+        { say: `TAP One radian
+Ticks 1 to 6 = radius-length arcs.
+Six fit. Small gap left.` },
+        { click: { button: 'One radian', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG θ → 1
+Arc = r exactly.
+That angle IS one radian. 57.3°.` },
+        { slide: { range: 0 }, to: 1, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Sector as fraction
+Whole disc tinted.
+Slice = θ/2π of it.` },
+        { click: { button: 'Sector as fraction', exact: true } },
+        { wait: 2400 },
+        { say: `DRAG θ → π/2
+Quarter turn.
+Slice = 1/4 of the disc.` },
+        { slide: { range: 0 }, to: 1.5708, ms: 1300 },
+        { wait: 2400 },
+        { say: `DRAG r → 2.5
+Disc and slice both grow.
+Fraction stays 1/4. θ decides it.` },
+        { slide: { range: 1 }, to: 2.5, ms: 1300 },
+        { wait: 2400 },
+      ],
+    },
+    'the-r-1-button': {
+      title: 'Radius 1 and the examples',
+      script: [
+        { say: `TAP r = 1
+Unit circle. Axes appear.
+Triangle legs: blue x, amber y.` },
+        { click: { button: 'r = 1', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG θ → π/4
+Point = (0.707, 0.707).
+sin θ = y. cos θ = x. No denominator.` },
+        { slide: { range: 0 }, to: 0.7854, ms: 1300 },
+        { wait: 2600 },
+        { say: `DRAG θ → 5π/6
+x negative. cos θ < 0.
+s = θ: arc equals the angle.` },
+        { slide: { range: 0 }, to: 2.618, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP EXAMPLE sector area
+θ = 2π/5, r = 2.
+Slice = 1/5 of the disc.` },
+        { click: { button: 'sector area', exact: true } },
+        { wait: 2600 },
+        { say: `TAP EXAMPLE arc length
+θ = 3π/5, r = 2.
+s = rθ ≈ 3.77. No conversion factor.` },
+        { click: { button: 'arc length', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   const introContent = { id: 'intro', title: '', content: `` }
 
   const faqQuestions = {
@@ -377,6 +473,7 @@ For the theory in prose, the [degrees and radians](!/trigonometry/degrees-radian
       relatedTools: getRelatedTools('arc-sector'),
       instructions,
       explanations,
+      demos,
       stateUnits,
       sectionsContent,
       introContent,
@@ -401,6 +498,7 @@ export default function ArcSectorToolPage({
   relatedTools,
   instructions,
   explanations,
+  demos,
   stateUnits,
   seoData,
   sectionsContent,
@@ -410,6 +508,24 @@ export default function ArcSectorToolPage({
 }) {
 
   const plain = (id, obj) => ({ id, title: obj.title, link: obj.link, content: [obj.content] })
+  const withDemo = (id, obj) => ({
+    id,
+    title: obj.title,
+    link: obj.link,
+    content: [
+      <ToolDemoPlayer
+        key={`demo-${id}`}
+        script={demos[id].script}
+        title={demos[id].title}
+        label={`Demo: ${demos[id].title}`}
+        scale={0.6}
+        renderText={processContent}
+      >
+        <ArcSectorExplorer explanations={explanations} renderText={processContent} />
+      </ToolDemoPlayer>,
+      obj.content,
+    ],
+  })
   const framed = (id, obj, unitKey) => ({
     id,
     title: obj.title,
@@ -422,11 +538,11 @@ export default function ArcSectorToolPage({
   })
 
   const genericSections = [
-    plain('setting-the-angle', sectionsContent.obj1),
+    withDemo('setting-the-angle', sectionsContent.obj1),
     plain('setting-the-radius', sectionsContent.obj2),
-    plain('the-one-radian-marks', sectionsContent.obj3),
+    withDemo('the-one-radian-marks', sectionsContent.obj3),
     plain('the-sector-as-a-fraction', sectionsContent.obj4),
-    plain('the-r-1-button', sectionsContent.obj5),
+    withDemo('the-r-1-button', sectionsContent.obj5),
     plain('the-formula-column', sectionsContent.obj6),
     plain('the-examples-row', sectionsContent.obj7),
     plain('the-legend-and-colours', sectionsContent.obj8),

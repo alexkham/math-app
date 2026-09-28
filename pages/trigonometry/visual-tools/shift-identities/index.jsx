@@ -10,6 +10,7 @@ import ExplanationDetails from '@/app/components/ExplanationDetails'
 import ShiftIdentityExplorer from '@/app/components/trigonometry/ShiftIdentityExplorer'
 import shiftIdentityDiagrams from '@/app/components/trigonometry/shiftIdentityDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 import { processContent } from '@/app/utils/contentProcessor'
@@ -290,6 +291,103 @@ For the theory in prose, the [trigonometric identities](!/trigonometry/identitie
     },
   }
 
+  /* Animated demos (ToolDemoPlayer v3) against the real ShiftIdentityExplorer
+     (syncQuery off). θ range = range 0 (0 to 360). Tab labels follow the
+     current shift; tab = nth 0, identity-table row = nth 1. */
+  const demos = {
+    'choosing-the-shift': {
+      title: 'Quarter turn and half turn',
+      script: [
+        { say: `DRAG θ → 60°
+P and P′ move together.
+Green arrow = quarter turn.
+Legs swap colours.` },
+        { slide: { range: 0 }, to: 60, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP + π
+Half turn. P′ opposite P.
+Both legs flip. sin → −sin.` },
+        { click: { button: '+ π', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG θ → 140°
+P′ stays half a turn ahead.
+Holds at every angle.` },
+        { slide: { range: 0 }, to: 140, ms: 1500 },
+        { wait: 2400 },
+        { say: `TAP tan(θ + π)
+Two minus signs cancel.
+tan(θ + π) = tan θ. Period π.` },
+        { click: { button: 'tan(θ + π)', exact: true } },
+        { wait: 2600 },
+        { say: `TAP + π/2
+Quarter turn again.
+tan(θ + π/2) = −cot θ.` },
+        { click: { button: '+ π/2', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'reading-the-rotation-figure': {
+      title: 'Reading P and P′',
+      script: [
+        { say: `DRAG θ → 30°
+P = (cos θ, sin θ).
+Indigo = cos leg. Amber = sin leg.` },
+        { slide: { range: 0 }, to: 30, ms: 1300 },
+        { wait: 2600 },
+        { say: `TAP cos(θ + π/2)
+x of P′. Amber leg, pointing left.
+= −sin θ.` },
+        { click: { button: 'cos(θ + π/2)', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG θ → 120°
+P in quadrant II. cos θ < 0.
+Identity still holds. Banner agrees.` },
+        { slide: { range: 0 }, to: 120, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP sin(θ + π/2)
+y of P′. Indigo leg = cos θ.
+sin(θ + π/2) = cos θ.` },
+        { click: { button: 'sin(θ + π/2)', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG θ → 300°
+Full turn keeps working.
+Rotation fixes the identity.` },
+        { slide: { range: 0 }, to: 300, ms: 1600 },
+        { wait: 2400 },
+      ],
+    },
+    'reading-the-identity-table': {
+      title: 'The identity table',
+      script: [
+        { say: `TAP ROW cos(θ + π/2)
+One tap = tab + shift together.
+Effect column: cos → −sin.` },
+        { click: { button: 'cos(θ + π/2)', nth: 1 } },
+        { wait: 2600 },
+        { say: `TAP ROW sin(θ + π)
+Shift jumps to + π.
+Effect: sign flips.` },
+        { click: { button: 'sin(θ + π)', nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP ROW tan(θ + π)
+Effect: unchanged.
+The only one without a minus.` },
+        { click: { button: 'tan(θ + π)', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP ROW tan(θ + π/2)
+Effect: tan → −cot.
+Perpendicular radius. Slopes multiply to −1.` },
+        { click: { button: 'tan(θ + π/2)', nth: 0 } },
+        { wait: 2600 },
+        { say: `DRAG θ → 200°
+Whole value column updates.
+Six identities, one angle.` },
+        { slide: { range: 0 }, to: 200, ms: 1500 },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   const introContent = { id: 'intro', title: '', content: `` }
 
   const faqQuestions = {
@@ -361,6 +459,7 @@ For the theory in prose, the [trigonometric identities](!/trigonometry/identitie
       relatedTools: getRelatedTools('shift-identities'),
       instructions,
       explanations,
+      demos,
       stateUnits,
       sectionsContent,
       introContent,
@@ -384,6 +483,7 @@ export default function ShiftIdentitiesPage({
   relatedTools,
   instructions,
   explanations,
+  demos,
   stateUnits,
   seoData,
   sectionsContent,
@@ -393,6 +493,24 @@ export default function ShiftIdentitiesPage({
 }) {
 
   const plain = (id, obj) => ({ id, title: obj.title, link: obj.link, content: [obj.content] })
+  const withDemo = (id, obj) => ({
+    id,
+    title: obj.title,
+    link: obj.link,
+    content: [
+      <ToolDemoPlayer
+        key={`demo-${id}`}
+        script={demos[id].script}
+        title={demos[id].title}
+        label={`Demo: ${demos[id].title}`}
+        scale={0.6}
+        renderText={processContent}
+      >
+        <ShiftIdentityExplorer explanations={explanations} renderText={processContent} showFrozen={false} syncQuery={false} />
+      </ToolDemoPlayer>,
+      obj.content,
+    ],
+  })
   const framed = (id, obj, unitKey) => ({
     id,
     title: obj.title,
@@ -406,12 +524,12 @@ export default function ShiftIdentitiesPage({
 
   const genericSections = [
     plain('switching-between-functions', sectionsContent.obj1),
-    plain('choosing-the-shift', sectionsContent.obj2),
+    withDemo('choosing-the-shift', sectionsContent.obj2),
     plain('adjusting-the-angle', sectionsContent.obj3),
-    plain('reading-the-rotation-figure', sectionsContent.obj4),
+    withDemo('reading-the-rotation-figure', sectionsContent.obj4),
     plain('the-rotation-panel', sectionsContent.obj5),
     plain('checking-both-sides', sectionsContent.obj6),
-    plain('reading-the-identity-table', sectionsContent.obj7),
+    withDemo('reading-the-identity-table', sectionsContent.obj7),
     plain('why-a-half-turn-flips-both-signs', sectionsContent.obj8),
     plain('why-a-quarter-turn-swaps-the-coordinates', sectionsContent.obj9),
     plain('shifts-and-the-sine-wave', sectionsContent.obj10),

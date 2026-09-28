@@ -9,6 +9,7 @@ import ExplanationDetails from '@/app/components/ExplanationDetails'
 import InverseFunctionExplorer from '@/app/components/trigonometry/InverseFunctionExplorer'
 import inverseFunctionDiagrams from '@/app/components/trigonometry/inverseFunctionDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 import { processContent } from '@/app/utils/contentProcessor'
@@ -340,6 +341,139 @@ For the theory in prose, the [inverse trigonometric functions](!/trigonometry/in
     },
   }
 
+  /* Animated demos (ToolDemoPlayer v3) against the real InverseFunctionExplorer.
+     One demo per stage of the tool, five steps each; say = on-stage callout. */
+  const demos = {
+    'the-line-test': {
+      title: 'Step 1: the line test',
+      script: [
+        { say: `TAP LEVEL 0
+Red line y = 0.
+Red dots = crossings. 5 in view.
+One output, many inputs → FAIL.` },
+        { click: { button: '0', exact: true } },
+        { wait: 2400 },
+        { say: `TAP LEVEL 1
+Top of the wave. Still 2 crossings.
+Any level in (−1, 1): fails.` },
+        { click: { button: '1', exact: true } },
+        { wait: 2200 },
+        { say: `TAP LEVEL 3/2
+Zero crossings. Off the range.
+Missing the curve proves nothing.` },
+        { click: { button: '3/2', exact: true } },
+        { wait: 2200 },
+        { say: `DRAG THE RED HANDLE DOWN
+Line slides. Crossings recount live.
+Snaps to the special levels.` },
+        { drag: '[data-drag="line"]', dx: 0, dy: 40, ms: 1500 },
+        { wait: 2000 },
+        { say: `TAP tan
+Every branch hit once.
+Many branches → still FAIL.` },
+        { click: { button: 'tan', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'restricting-the-domain': {
+      title: 'Step 2: restrict the domain',
+      script: [
+        { say: `TAP 2. Restrict
+Blue band = kept piece [−π, π].
+Hollow dots = crossings thrown away.` },
+        { click: { button: '2. Restrict', exact: true } },
+        { wait: 2400 },
+        { say: `DRAG b ← TO π/2
+Piece shrinks from the right.
+Still holds a peak → not one-to-one.` },
+        { drag: '[data-drag="b"]', dx: -52, dy: 0, ms: 1500 },
+        { wait: 2200 },
+        { say: `DRAG a → TO −π/2
+Peak gone. One crossing per level.
+Badge: PRINCIPAL INTERVAL.` },
+        { drag: '[data-drag="a"]', dx: 52, dy: 0, ms: 1500 },
+        { wait: 2400 },
+        { say: `DRAG b ← FURTHER
+One-to-one, but range cut short.
+Badge: partial range. Outputs lost.` },
+        { drag: '[data-drag="b"]', dx: -35, dy: 0, ms: 1200 },
+        { wait: 2400 },
+        { say: `TAP Use principal interval
+Both handles jump to [−π/2, π/2].
+The standard cut. Defines arcsin.` },
+        { click: { button: 'Use principal interval', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'reflecting-across-y-x': {
+      title: 'Step 3: reflect across y = x',
+      script: [
+        { say: `CUT FIRST
+2. Restrict → Use principal interval.
+Kept piece [−π/2, π/2]. One-to-one.` },
+        { click: { button: '2. Restrict', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Use principal interval', exact: true } },
+        { wait: 2200 },
+        { say: `TAP 3. Reflect
+Dashed diagonal = y = x.
+Kept piece in blue.` },
+        { click: { button: '3. Reflect', exact: true } },
+        { wait: 2000 },
+        { say: `TAP Reflect across y = x
+Blue piece swings over the diagonal.
+Amber curve = arcsin.
+Axes swap: numbers ↔ angles.` },
+        { click: { button: 'Reflect across y = x', exact: true } },
+        { wait: 3000 },
+        { say: `TAP cos, REFLECT
+Cut jumps to [0, π].
+Amber = arccos. Range [0, π].` },
+        { click: { button: 'cos', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Reflect across y = x', exact: true } },
+        { wait: 3000 },
+        { say: `TAP tan, REFLECT
+Vertical asymptotes → horizontal.
+arctan never reaches ±π/2.` },
+        { click: { button: 'tan', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Reflect across y = x', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+    'composing-and-the-fold': {
+      title: 'Step 4: compose and fold',
+      script: [
+        { say: `TAP 4. Compose
+Amber band = principal interval.
+Blue handle = input x.` },
+        { click: { button: '4. Compose', exact: true } },
+        { wait: 2200 },
+        { say: `TRY x = π/6
+Inside the band.
+arcsin(sin π/6) = π/6. No fold.` },
+        { click: { button: 'π/6', exact: true } },
+        { wait: 2400 },
+        { say: `TRY x = 5π/6
+Outside the band. sin = 1/2.
+arcsin returns π/6. FOLDED.` },
+        { click: { button: '5π/6', exact: true } },
+        { wait: 2600 },
+        { say: `TRY x = 7π/6
+sin = −1/2. Returns −π/6.
+Output always lands in the band.` },
+        { click: { button: '7π/6', exact: true } },
+        { wait: 2600 },
+        { say: `TAP EXAMPLE arctan
+One tap loads a whole state.
+Function, step, cut, reflection.` },
+        { click: { button: 'arctan', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   const introContent = {
     id: 'intro',
     title: '',
@@ -415,6 +549,7 @@ For the theory in prose, the [inverse trigonometric functions](!/trigonometry/in
       relatedTools: getRelatedTools('inverse-functions'),
       instructions,
       explanations,
+      demos,
       stateUnits,
       sectionsContent,
       introContent,
@@ -439,6 +574,7 @@ export default function InverseFunctionsToolPage({
   relatedTools,
   instructions,
   explanations,
+  demos,
   stateUnits,
   seoData,
   sectionsContent,
@@ -448,6 +584,24 @@ export default function InverseFunctionsToolPage({
 }) {
 
   const plain = (id, obj) => ({ id, title: obj.title, link: obj.link, content: [obj.content] })
+  const withDemo = (id, obj) => ({
+    id,
+    title: obj.title,
+    link: obj.link,
+    content: [
+      <ToolDemoPlayer
+        key={`demo-${id}`}
+        script={demos[id].script}
+        title={demos[id].title}
+        label={`Demo: ${demos[id].title}`}
+        scale={0.6}
+        renderText={processContent}
+      >
+        <InverseFunctionExplorer explanations={explanations} renderText={processContent} />
+      </ToolDemoPlayer>,
+      obj.content,
+    ],
+  })
   const framed = (id, obj, unitKey) => ({
     id,
     title: obj.title,
@@ -462,11 +616,11 @@ export default function InverseFunctionsToolPage({
   const genericSections = [
     plain('choosing-the-function', sectionsContent.obj1),
     plain('the-four-steps', sectionsContent.obj2),
-    plain('the-line-test', sectionsContent.obj3),
-    plain('restricting-the-domain', sectionsContent.obj4),
+    withDemo('the-line-test', sectionsContent.obj3),
+    withDemo('restricting-the-domain', sectionsContent.obj4),
     plain('the-principal-interval-shortcut', sectionsContent.obj5),
-    plain('reflecting-across-y-x', sectionsContent.obj6),
-    plain('composing-and-the-fold', sectionsContent.obj7),
+    withDemo('reflecting-across-y-x', sectionsContent.obj6),
+    withDemo('composing-and-the-fold', sectionsContent.obj7),
     plain('the-examples-row', sectionsContent.obj8),
     plain('the-legend-and-colours', sectionsContent.obj9),
     plain('the-explanations-panel', sectionsContent.obj10),

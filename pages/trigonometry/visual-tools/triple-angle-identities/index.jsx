@@ -10,6 +10,7 @@ import ExplanationDetails from '@/app/components/ExplanationDetails'
 import TripleAngleExplorer from '@/app/components/trigonometry/TripleAngleExplorer'
 import tripleAngleDiagrams from '@/app/components/trigonometry/tripleAngleDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 import { processContent } from '@/app/utils/contentProcessor'
@@ -403,6 +404,110 @@ The polynomial $4x^3 - 3x$ is the third Chebyshev polynomial, and it is the iden
     })
   }
 
+  /* Animated demos (ToolDemoPlayer v3) against the real TripleAngleExplorer
+     (syncQuery off, so demos never touch the page URL). One θ range per card:
+     range 0. Tab buttons and table rows share labels: tab = nth 0, row = nth 1. */
+  const demos = {
+    'playing-through-the-derivation': {
+      title: 'Stepping through the proof',
+      script: [
+        { say: `DRAG θ → 60°
+Circle: 2θ arc (indigo) + θ arc (red).
+Together: the 3θ turn.` },
+        { slide: { range: 0 }, to: 60, ms: 1400 },
+        { wait: 2200 },
+        { say: `TAP Next ›
+Step 1: split the angle.
+sin 3θ = sin(2θ + θ).` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next ›
+Step 2: angle-sum formula.
+Figure turns into the equation card.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › ×3
+Double-angle in. Pythagorean swap.
+Collect: 3 sin θ − 4 sin³θ.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ‹ Prev
+One line back.
+Derivation log follows.` },
+        { click: { button: '‹ Prev', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'checking-each-line-numerically': {
+      title: 'Checking every line',
+      script: [
+        { say: `TAP Next ›
+Left card: sin 3θ.
+Right card: the current line.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next ›
+New line. Same number.
+Equal cards = no mistake.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2400 },
+        { say: `DRAG θ → 20°
+Both cards move together.
+Equal at every angle.` },
+        { slide: { range: 0 }, to: 20, ms: 1500 },
+        { wait: 2400 },
+        { say: `TAP Next › ×3
+Final line. Cards still equal.
+Identity checked.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2400 },
+        { say: `TAP cos(3θ)
+Same five moves.
+Ends at 4 cos³θ − 3 cos θ.` },
+        { click: { button: 'cos(3θ)', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'working-with-derived-identities': {
+      title: 'Derived identities and the table',
+      script: [
+        { say: `TAP tan(3θ)
+No proof steps. Derived card.
+tan 3θ = sin 3θ / cos 3θ.` },
+        { click: { button: 'tan(3θ)', exact: true } },
+        { wait: 2800 },
+        { say: `DRAG θ → 50°
+Verify cards: both sides equal.
+Live at every angle.` },
+        { slide: { range: 0 }, to: 50, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP csc(3θ)
+Reciprocal of sin 3θ.
+Two lines. No new algebra.` },
+        { click: { button: 'csc(3θ)', exact: true } },
+        { wait: 2400 },
+        { say: `TAP See sin(3θ) proof →
+Source button. Jumps to the proof
+this identity is built from.` },
+        { click: { button: 'See sin(3θ) proof' } },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW sec(3θ)
+Table = second switch.
+All six values at the same θ.` },
+        { click: { button: 'sec(3θ)', nth: 1 } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   const introContent = { id: 'intro', title: '', content: `` }
 
   const faqQuestions = {
@@ -474,6 +579,7 @@ The polynomial $4x^3 - 3x$ is the third Chebyshev polynomial, and it is the iden
       relatedTools: getRelatedTools('triple-angle-identities'),
       instructions,
       explanations,
+      demos,
       stateUnits,
       sectionsContent,
       stepSections,
@@ -498,6 +604,7 @@ export default function TripleAngleIdentitiesPage({
   relatedTools,
   instructions,
   explanations,
+  demos,
   stateUnits,
   seoData,
   sectionsContent,
@@ -508,6 +615,24 @@ export default function TripleAngleIdentitiesPage({
 }) {
 
   const plain = (id, obj) => ({ id, title: obj.title, link: obj.link, content: [obj.content] })
+  const withDemo = (id, obj) => ({
+    id,
+    title: obj.title,
+    link: obj.link,
+    content: [
+      <ToolDemoPlayer
+        key={`demo-${id}`}
+        script={demos[id].script}
+        title={demos[id].title}
+        label={`Demo: ${demos[id].title}`}
+        scale={0.6}
+        renderText={processContent}
+      >
+        <TripleAngleExplorer explanations={explanations} renderText={processContent} showFrozen={false} syncQuery={false} />
+      </ToolDemoPlayer>,
+      obj.content,
+    ],
+  })
   const framed = (id, obj, unitKey) => ({
     id,
     title: obj.title,
@@ -522,11 +647,11 @@ export default function TripleAngleIdentitiesPage({
   const genericSections = [
     plain('switching-between-functions', sectionsContent.obj1),
     plain('adjusting-the-angle', sectionsContent.obj2),
-    plain('playing-through-the-derivation', sectionsContent.obj3),
+    withDemo('playing-through-the-derivation', sectionsContent.obj3),
     plain('reading-the-figure', sectionsContent.obj4),
     plain('the-derivation-panel', sectionsContent.obj5),
-    plain('checking-each-line-numerically', sectionsContent.obj6),
-    plain('working-with-derived-identities', sectionsContent.obj7),
+    withDemo('checking-each-line-numerically', sectionsContent.obj6),
+    withDemo('working-with-derived-identities', sectionsContent.obj7),
     plain('reading-the-formula-table', sectionsContent.obj8),
     plain('why-three-is-two-plus', sectionsContent.obj9),
     plain('why-each-result-uses-only-one-function', sectionsContent.obj10),

@@ -1109,6 +1109,7 @@ export default function TripleAngleExplorer({
   renderText     = (s) => s,
   stepDurationMs = 2500,
   showFrozen     = true,
+  syncQuery      = true,   // false: never read or write ?fn= (demo instances)
 }) {
   const [activeFn, setActiveFn] = useState(REGISTRY[initialFn] ? initialFn : 'sin');
   const [theta, setTheta] = useState(initialTheta);
@@ -1118,13 +1119,14 @@ export default function TripleAngleExplorer({
   const [frozenKey, setFrozenKey] = useState(null);
 
   useEffect(() => {
+    if (!syncQuery) return;
     const fromQuery = readFnFromQuery();
     if (fromQuery) setActiveFn(fromQuery);
   }, []);
 
   useEffect(() => {
-    writeFnToQuery(activeFn);
-  }, [activeFn]);
+    if (syncQuery) writeFnToQuery(activeFn);
+  }, [activeFn, syncQuery]);
 
   const entry = REGISTRY[activeFn];
   const ex = explanations && explanations[activeFn];

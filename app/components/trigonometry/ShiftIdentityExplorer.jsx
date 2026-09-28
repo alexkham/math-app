@@ -608,6 +608,7 @@ export default function ShiftIdentityExplorer({
   explanations = null,
   renderText   = (s) => s,
   showFrozen   = true,
+  syncQuery    = true,   // false: never read or write ?shiftFn=&shift= (demo instances)
 }) {
   const [fn, setFn] = useState(FN_ORDER.includes(initialFn) ? initialFn : 'sin');
   const [shift, setShift] = useState(SHIFTS[initialShift] ? initialShift : 'halfPi');
@@ -615,14 +616,15 @@ export default function ShiftIdentityExplorer({
   const [frozen, setFrozen] = useState(null);
 
   useEffect(() => {
+    if (!syncQuery) return;
     const q = readQuery();
     if (q.fn) setFn(q.fn);
     if (q.shift) setShift(q.shift);
   }, []);
 
   useEffect(() => {
-    writeQuery(fn, shift);
-  }, [fn, shift]);
+    if (syncQuery) writeQuery(fn, shift);
+  }, [fn, shift, syncQuery]);
 
   const id = REGISTRY[`${fn}:${shift}`];
   const th = rad(theta);

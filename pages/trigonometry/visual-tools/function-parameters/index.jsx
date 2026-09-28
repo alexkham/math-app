@@ -428,12 +428,15 @@ Violet bar = shift π/2.
 Shift = C/B. NOT C.` },
         { slide: { range: 3 }, to: 12, ms: 1700 },
         { wait: 2200 },
-        { say: `CHECK the readout strip
-C itself = π.
-Shift C/B = 0.5π.
-Two numbers. Different. Always when B ≠ 1.` },
+        { say: `DRAG C → 3π/2, WATCH THE STRIP
+C itself = 3π/2.
+Shift C/B = 0.75π.
+Two numbers. Different whenever B ≠ 1.` },
         { move: { text: 'Shift C/B' }, ms: 800 },
-        { wait: 2800 },
+        { wait: 900 },
+        { slide: { range: 3 }, to: 18, ms: 1500 },
+        { move: { text: 'Shift C/B' }, ms: 700 },
+        { wait: 2600 },
       ],
     },
     'the-guided-walk': {
