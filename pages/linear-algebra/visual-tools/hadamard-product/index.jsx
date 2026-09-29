@@ -503,6 +503,9 @@ import HadamardWrapper from '../../../../app/components/linear-algebra copy/matr
 import hadamardDiagrams from '../../../../app/components/linear-algebra copy/matrix/hadamardDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -881,8 +884,129 @@ That last point is the cleanest illustration that the two products are genuinely
   }
 
 
+  const instructions = [
+    'The **Dimensions** steppers (**▲** / **▼**) set the rows and columns shared by $A$ and $B$, each from 1 to 5; $C$ takes the same shape. [Learn more about choosing dimensions](!#choosing-dimensions)',
+    'Hover the **?** icon for what the Hadamard product is and how it differs from the standard matrix product. [Learn more about getting started](!#getting-started)',
+    '**▶ Play** runs the sweep, **Next →** and **← Back** move one cell at a time, **Reset** returns to the opening scene, and the speed menu sets the pace from Slow to Very Fast. [Learn more about the controls](!#getting-started)',
+    'Each scene lights one cell of $A$, the matching cell of $B$ and the destination in $C$, with two arrows into $C$; filled cells show $a_{i,j} \\cdot b_{i,j}$. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Step explanations** log keeps every completed cell with its formula and a note linking to the matching section below. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real HadamardWrapper
+     (mode='matrices', opens at 2 x 3). Steppers: ▲/▼ nth 0 = rows,
+     nth 1 = columns. */
+  const demos = {
+    'getting-started': {
+      title: 'Shape, play, reset',
+      script: [
+        { say: `TAP ▼ rows
+A, B, C all 1 × 3.
+Step 1 / 5.` },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP ▲ columns
+1 × 4. Step 1 / 6.
+C follows A and B.` },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+a₁,₁ · b₁,₁ … a₁,₄ · b₁,₄ in turn.
+Step 6 / 6.` },
+        { set: 'select', value: '700' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4600 },
+        { say: `TAP Reset
+Step 1 / 6. C empty again.
+Shape kept: 1 × 4.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▲ rows
+2 × 4. Step 1 / 10.
+8 products to compute.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'Reading one scene',
+      script: [
+        { say: `TAP Next →
+Step 2 / 8. Cell (1,1) lit in A, B and C.
+Arrows: c₁,₁ = a₁,₁ · b₁,₁.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Step 3 / 8. c₁,₂ = a₁,₂ · b₁,₂.
+Two numbers in, one out.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next → twice
+Step 5 / 8. c₂,₁ = a₂,₁ · b₂,₁.
+Row 1 done; row 2 starts.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ← Back
+Step 4 / 8. c₁,₃ active again.
+c₂,₁ back to a placeholder.` },
+        { click: { button: '← Back', exact: true } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+Step 8 / 8. All 6 cells: aᵢ,ⱼ · bᵢ,ⱼ.
+C is 2 × 3, like A and B.` },
+        { set: 'select', value: '700' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4000 },
+      ],
+    },
+    'choosing-dimensions': {
+      title: 'Shaping A and B',
+      script: [
+        { say: `TAP ▲ rows
+3 × 3 square. Step 1 / 11.
+9 cells + opening scene + completed product.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 2800 },
+        { say: `TAP ▲ columns twice
+3 × 5 rectangle. Step 1 / 17.
+Same rule for any shape.` },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 2600 },
+        { say: `TAP ▲ rows twice
+5 × 5: the maximum. Step 1 / 27.
+Cell text in C shrinks to fit.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP ▼ columns ×4
+5 × 1: a single column. Step 1 / 7.
+Minimum is 1 on each side.` },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 300 },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 300 },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 300 },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 2400 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+Step 7 / 7. Five products.
+C is 5 × 1, like A and B.` },
+        { set: 'select', value: '400' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-hadamard-product'),
       sectionsContent,
       stateUnits,
@@ -905,7 +1029,22 @@ That last point is the cleanest illustration that the two products are genuinely
   }
 }
 
-export default function HadamardProductVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function HadamardProductVisualizer({ instructions, demos, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <HadamardWrapper mode='matrices' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -927,12 +1066,12 @@ export default function HadamardProductVisualizer({ seoData, sectionsContent, st
 
   const genericSections = [
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-scene-player'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-scene-player')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'one-cell-at-a-time', 'step'),
     stateRow('obj13', 'the-completed-product', 'done'),
-    plain('obj3', 'choosing-dimensions'),
+    withDemo(plain('obj3', 'choosing-dimensions')),
     plain('obj4', 'what-the-hadamard-product-is'),
     plain('obj5', 'hadamard-vs-standard-multiplication'),
     plain('obj6', 'key-properties'),
@@ -997,6 +1136,10 @@ export default function HadamardProductVisualizer({ seoData, sectionsContent, st
       <br />
       <br />
       <h1 className='title' style={{ marginTop: '0px', marginBottom: '0px' }}>Hadamard Product (element-wise)</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br />
       <div style={{ width: '80%', margin: 'auto' }}>
         <HadamardWrapper 
