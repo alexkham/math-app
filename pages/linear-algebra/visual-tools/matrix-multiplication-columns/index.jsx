@@ -15,13 +15,15 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 import '@/pages/pages.css'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 const A = [[2, -1, 3], [1, 2, 0]]
 const V = [2, 1, 3]
 
 export default function MatrixMultiplicationColumns({
-  relatedTools, instructions,
+  relatedTools, instructions, demos,
   avCopy,
   explanations,
   matrixTabExplanations,
@@ -30,6 +32,40 @@ export default function MatrixMultiplicationColumns({
   schemas,
   seoData,
 }) {
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <>
+        <style>{'figure[aria-label^="Demo:"] .stepline { position: static !important; box-shadow: none !important; }'}</style>
+        <MatrixProductWrapper
+          defaultKey='vector'
+          ariaLabel='Reading'
+          tabs={[
+            {
+              key: 'vector',
+              label: 'Matrix × vector',
+              component: ColumnPictureVisualizer,
+              props: {matrix: A, vector: V, content: avCopy, layout: 'compact', explanations },
+            },
+            {
+              key: 'matrix',
+              label: 'Matrix × matrix',
+              component: MatrixProductVisualizer,
+              props: { reading: 'columns', layout: 'compact', explanations: matrixTabExplanations },
+            },
+          ]}
+        />
+      </>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
   const plain = (obj, id) => ({
     id,
     title: sectionsContent[obj].title,
@@ -60,15 +96,15 @@ export default function MatrixMultiplicationColumns({
      they belong to. */
   const genericSections = [
     plain('obj1', 'what-the-tool-shows'),
-    plain('obj2', 'stepping-through-av'),
+    withDemo(plain('obj2', 'stepping-through-av')),
     withUnit('obj10', 'the-empty-bracket', 'emptyPlane'),
     withUnit('obj11', 'one-product-at-a-time', 'dashedPair'),
-    plain('obj3', 'reading-the-plane'),
+    withDemo(plain('obj3', 'reading-the-plane')),
     withUnit('obj12', 'lifting-out-a-column', 'firstScaledPiece'),
     withUnit('obj13', 'the-statement-and-the-arithmetic', 'allPieces'),
-    plain('obj14', 'running-the-tool'),
+    withDemo(plain('obj14', 'running-the-tool')),
     plain('obj4', 'generating-new-numbers'),
-    plain('obj5', 'building-ab-by-columns'),
+    withDemo(plain('obj5', 'building-ab-by-columns')),
     plain('obj6', 'why-the-weight-comes-out-in-front'),
     plain('obj7', 'column-space-and-solvability'),
     plain('obj8', 'why-a-is-two-by-three'),
@@ -196,9 +232,9 @@ export async function getStaticProps() {
   const instructions = [
     'The tab strip above the figure chooses what is on screen. **Matrix $\\times$ vector** builds $A\\mathbf{v}$ from the columns of $A$; the matrix-by-matrix tab repeats the same argument with a second matrix in place of the vector. [What the second tab does](!#building-ab-by-columns)',
     '**Run** plays the whole argument from wherever you are and turns into **Pause**. The twelve steps are one product each at the start, then one regrouping move at a time. [More about the controls](!#running-the-tool)',
-    '**Step** advances a single step and **Back** returns one. Use these rather than Run when a step is doing something you want to hold still, which is mostly [the regrouping steps](!#lifting-out-a-column).',
+    '**Step** advances a single step and **Back** returns one. Use these rather than Run when a step is doing something you want to hold still, which is mostly the regrouping steps. [Learn more about Step and Back](!#running-the-tool)',
     'The **Steps** pips and the step counter show where you are in the twelve steps. A pip is not clickable; it is a position marker. [What the twelve steps are](!#stepping-through-av)',
-    '**Reset** returns to step 0, [the empty bracket](!#the-empty-bracket), with the same numbers on screen.',
+    '**Reset** returns to step 0, the empty bracket, with the same numbers on screen. [Learn more about Reset](!#running-the-tool)',
     '**Generate random numbers** rolls a fresh $A$ and $\\mathbf{v}$. Weights are never zero and no column is the zero vector, so every arrow in the plane keeps a direction to draw. [What the generator enforces](!#generating-new-numbers)',
     'The right panel is the plane picture. Dashed from the origin is a column of $A$ on its own; the solid arrow is that same column scaled by its weight, laid tail to head on the previous one. [How to read the plane](!#reading-the-plane)',
     'The note under the figure changes with the step and says what the picture is claiming at that moment. It is the part to read if a step looks like motion rather than arithmetic. [Where the argument lands](!#the-statement-and-the-arithmetic)',
@@ -663,8 +699,166 @@ The mirror of this argument [puts the vector on the left](!/linear-algebra/visua
     },
   }
 
+  /* Animated demos (ToolDemoPlayer v3) against the real MatrixProductWrapper
+     (opens on Matrix × vector: A = [2 -1 3; 1 2 0], v = (2, 1, 3), Av = (12, 4);
+     Matrix × matrix: A = [2 -1; 1 2], B = [2 1; 1 3], AB = [3 -1; 4 7]).
+     The tool's Run advances every 1800 ms. */
+  const demos = {
+    'stepping-through-av': {
+      title: 'Twelve steps in four stretches',
+      script: [
+        { say: `TAP Step
+Step 1: one product.
+Row 1 of A meets v: 2 × 2 into (Av)₁.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ×2
+Entry 1 complete.
+2·2 + (−1)·1 + 3·3 = 12.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ×3
+Entry 2: 1·2 + 2·1 + 0·3 = 4.
+Definition done: Av = (12, 4).` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Step ×3
+Steps 7–9: nothing new multiplied.
+Each weight comes out in front of its column.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Step ×2
+Statement, then arithmetic.
+(4, 2) + (−1, 2) + (9, 0) = (12, 4).` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'reading-the-plane': {
+      title: 'Lines first, then arrows',
+      script: [
+        { say: `TAP Step ×3
+Entry 1 = 12: dashed line x = 12.
+A line, not a vector.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ×3
+Entry 2 = 4: second line y = 4.
+Lines cross at (12, 4). First arrow.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Step
+Dashed: column 1 = (2, 1) on its own.
+Solid: 2 × column 1 = (4, 2). Same direction.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Step
+Column 2 = (−1, 2), weight 1.
+Tail on the last tip → (3, 4).` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step
+3 × column 3 = (9, 0) → (12, 4).
+Every corner a real vector.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'running-the-tool': {
+      title: 'Step, Back, Run, Reset, new numbers',
+      script: [
+        { say: `TAP Step ×3
+Exactly one step per tap.
+Step 3: entry 1 = 12.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Back
+Exactly one step back: step 2.
+Entry 1: two of its three terms.` },
+        { click: { button: 'Back', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Run → Pause
+Run plays forward, one step per 1.8 s.
+Pause holds the current step.` },
+        { click: { button: 'Run', exact: true } },
+        { wait: 4000 },
+        { click: { button: 'Pause', exact: true } },
+        { wait: 1800 },
+        { say: `TAP Reset
+Step 0: the empty bracket.
+Same A and v.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Generate random numbers
+Fresh A and v. Step 0.
+No zero weight, no zero column.` },
+        { click: { button: 'Generate random numbers', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'building-ab-by-columns': {
+      title: 'Matrix × matrix, one column at a time',
+      script: [
+        { say: `TAP Matrix × matrix
+A = [2 −1; 1 2], B = [2 1; 1 3].
+AB still four ?.` },
+        { click: { button: 'Matrix × matrix', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Step
+Column 1 of A × 2 (b₁₁).
+A gives the direction, B the amount.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Step
++ 1 × column 2 of A.
+Column 1 of AB = (3, 4).` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Step ×2
+1 × (2, 1) + 3 × (−1, 2).
+Column 2 of AB = (−1, 7).` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Step ×2
+AB = [3 −1; 4 7].
+Both columns: same two directions from A.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-multiplication-columns'),
       keyWords,
       instructions,
