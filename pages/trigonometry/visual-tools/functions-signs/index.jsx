@@ -12,6 +12,9 @@ import signsDiagrams from '../../../../app/components/trigonometry/quadrantSigns
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -549,6 +552,107 @@ This means you only need to memorize the signs of three functions ($\\sin$, $\\c
     }
   }
 
+  const instructions = [
+    'The four **quadrant** buttons, **Q1** to **Q4**, move the sample point into that quadrant and recolour the diagram. [Learn more about selecting a quadrant](!#selecting-a-quadrant)',
+    'The **function** buttons choose which of $\\sin$, $\\cos$, $\\tan$, $\\csc$, $\\sec$, $\\cot$ is being signed. [Learn more about choosing a function](!#choosing-a-function)',
+    'The unit circle shows the point, its radius and the dashed drops to both axes, with the selected quadrant shaded. [Learn more about the diagram](!#reading-the-unit-circle-diagram)',
+    'The coordinate panel states the sign of $x$ and $y$ in the current quadrant and the resulting sign of the function. [Learn more about the coordinate panel](!#reading-the-coordinate-panel)',
+    'The explanation panel says why the function has that sign; **Hide Explanations** folds it away and **Show Explanations** brings it back. [Learn more about the explanation panel](!#reading-the-explanation-panel)',
+    'The summary grid lists all six functions with their sign in the current quadrant; click an entry to select that function. [Learn more about the summary grid](!#using-the-function-summary-grid)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real Quadrants tool.
+     Quadrant buttons are matched by their 'Qn:' prefix. */
+  const demos = {
+    'selecting-a-quadrant': {
+      title: 'Quadrants and signs',
+      script: [
+        { say: `TAP Q2
+Point moves to 90°–180°.
+x negative, y positive.
+sin = y → POSITIVE.` },
+        { click: { button: 'Q2:' } },
+        { wait: 2600 },
+        { say: `TAP Q3
+Both coordinates negative.
+sin → NEGATIVE.` },
+        { click: { button: 'Q3:' } },
+        { wait: 2400 },
+        { say: `TAP Q4
+x positive, y negative.
+sin → NEGATIVE.` },
+        { click: { button: 'Q4:' } },
+        { wait: 2400 },
+        { say: `TAP Q1
+Both positive.
+All six functions POSITIVE.` },
+        { click: { button: 'Q1:' } },
+        { wait: 2400 },
+        { say: `TAP cos
+cos = x.
+Q1: POSITIVE. Negative in Q2 and Q3.` },
+        { click: { button: 'cos', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'choosing-a-function': {
+      title: 'One quadrant, six functions',
+      script: [
+        { say: `TAP Q3
+x < 0. y < 0.` },
+        { click: { button: 'Q3:' } },
+        { wait: 2000 },
+        { say: `TAP tan
+tan = y ÷ x = (−) ÷ (−).
+POSITIVE in Q3.` },
+        { click: { button: 'tan', exact: true } },
+        { wait: 2600 },
+        { say: `TAP cos
+cos = x.
+NEGATIVE in Q3.` },
+        { click: { button: 'cos', exact: true } },
+        { wait: 2400 },
+        { say: `TAP sec
+sec = 1 / cos.
+Same sign as cos: NEGATIVE.` },
+        { click: { button: 'sec', exact: true } },
+        { wait: 2400 },
+        { say: `TAP cot
+cot = x ÷ y.
+Same sign as tan: POSITIVE.` },
+        { click: { button: 'cot', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'reading-the-explanation-panel': {
+      title: 'The explanation panel',
+      script: [
+        { say: `TAP Q2
+Panel explains the signs in Q2.` },
+        { click: { button: 'Q2:' } },
+        { wait: 2400 },
+        { say: `TAP csc
+csc = 1 / sin.
+Sin positive in Q2 → csc POSITIVE.` },
+        { click: { button: 'csc', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Hide Explanations
+Panel gone. Diagram and grid only.` },
+        { click: { button: 'Hide Explanations', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Show Explanations
+Panel back. Same quadrant, same function.` },
+        { click: { button: 'Show' } },
+        { wait: 2200 },
+        { say: `TAP Q4
+Panel rewrites for Q4.
+csc → NEGATIVE.` },
+        { click: { button: 'Q4:' } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   const explanations = {
     sin: {
       1: `sin θ = y/r. Since y is positive and r is always positive, sin θ is positive. [Full treatment](!#sine-in-quadrant-i) · [Quadrant I coordinates](!#coordinate-signs-in-quadrant-i)`,
@@ -597,6 +701,8 @@ This means you only need to memorize the signs of three functions ($\\sin$, $\\c
          faqQuestions,
          schemas,
          explanations,
+         instructions,
+         demos,
          stateUnits,
           seoData: {
         title: "Trig Function Signs by Quadrant: ASTC Visualizer | Learn Math Class",
@@ -613,7 +719,21 @@ This means you only need to memorize the signs of three functions ($\\sin$, $\\c
     }
    }
 
-export default function FunctionsSignsPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionsSignsPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <Quadrants explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+
 
 
   const genericSections=[
@@ -630,6 +750,7 @@ export default function FunctionsSignsPage({relatedTools, seoData, sectionsConte
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('selecting-a-quadrant'),
           sectionsContent.obj1.content,
         ]
     },
@@ -638,6 +759,7 @@ export default function FunctionsSignsPage({relatedTools, seoData, sectionsConte
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
+          demo('choosing-a-function'),
           sectionsContent.obj2.content,
         ]
     },
@@ -662,6 +784,7 @@ export default function FunctionsSignsPage({relatedTools, seoData, sectionsConte
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
+          demo('reading-the-explanation-panel'),
           sectionsContent.obj5.content,
         ]
     },
@@ -1047,6 +1170,10 @@ export default function FunctionsSignsPage({relatedTools, seoData, sectionsConte
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'-50px'}}>Trigonometric Functions Signs by Quadrants</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <SiblingsNav 
       bg="#fafaf7"
