@@ -38628,7 +38628,9 @@
         "verification": "STATIC ONLY - eslint parse, line1-static-check.py, and greps confirming the prop reached both getStaticProps and the component tag.",
         "wiring": "C - InnerProductWrapper had no explanations prop; added additively as `explanations = null`, keyed by scene phase (intro/step/done) and written scenario-agnostically so the Frobenius/matrices side would work too. Both builders exported unchanged.",
         "note": "The page renders mode='vectors' only, though the component also supports a matrices (Frobenius) scenario - obj3 documents it but there is no separate page for it. Scenes from buildVectorScenes(4): 6 total; step frozen at pair 3 of 4. The running-sum line lives in the scene CAPTION rather than the layout, so it is absent from the frozen stills; the page prose carries that information instead.",
-        "defectFixed": "obj0 Key Terms was commented out of the genericSections array - restored. Fifth occurrence in this project."
+        "defectFixed": "obj0 Key Terms was commented out of the genericSections array - restored. Fifth occurrence in this project.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 5 instructions each ending in an anchor link to an existing usage section (5 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in getting-started, the-vectors-scenario, reading-the-running-sum; running-sum colours shown in the step log cards; tool does not write the URL; headless step check 14/14."
       },
       "relatedTools": [
         {
