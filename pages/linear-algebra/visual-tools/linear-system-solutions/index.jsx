@@ -8,6 +8,9 @@ import LinearSystemWrapper from '../../../../app/components/linear-algebra copy/
 import linearSystemDiagrams from '../../../../app/components/linear-algebra copy/matrix/linearSystemDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -456,8 +459,129 @@ The direction vectors span the null space of $A$, the solutions of $A\\mathbf{x}
   }
 
 
+  const instructions = [
+    'The **Preset** pills load six systems: one solution, infinitely many, no solution, homogeneous, overdetermined but consistent, and two free variables. [Learn more about choosing a system](!#choosing-a-system)',
+    'The **Shape** steppers (**▲** / **▼**) set $1$ to $4$ equations and $1$ to $4$ unknowns; resizing keeps the existing entries. [Learn more about getting started](!#getting-started)',
+    'Type into any entry of $A$ or of $\\mathbf{b}$, or press **Shuffle** for a random system; the run is rebuilt at once. [Learn more about editing the system](!#getting-started)',
+    '**▶ Play** runs the reduction, **Next →** and **← Back** step one row operation at a time, **Reset** returns to the opening scene, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'The run is a forward pass, a consistency check and a backward pass; the **Row operations** log lists every operation, and clicking an entry jumps back to it. [Learn more about how the reduction runs](!#how-the-reduction-runs)',
+    'Each scene highlights the pivot, the row being changed and the entry being cleared; the last scene shows the solution vector, or $\\mathbf{p}$ and the direction vectors, beside the matrix. [Learn more about reading a scene](!#the-scene-player)',
+    'The final scene names the outcome: one solution, no solution with the row that reads $0 = c$, or infinitely many with one parameter per free variable. [Learn more about the three outcomes](!#the-three-outcomes)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real LinearSystemWrapper
+     (opens on One solution). Cells: input[aria-label="A entry i,j"],
+     input[aria-label="b entry i"]; the only <select> is the speed menu. */
+  const demos = {
+    'getting-started': {
+      title: 'Entries decide the outcome',
+      script: [
+        { say: `TYPE a₃₃ = 9.5
+Row 3 left side = 2·R1 + 1.5·R2.
+Right side 27, not 6.` },
+        { set: 'input[aria-label="A entry 3,3"]', value: 9.5 },
+        { wait: 2600 },
+        { say: `SELECT Fast → TAP ▶ Play
+Row 3 → 0 0 0 | 21.
+0 = 21: no solution.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5400 },
+        { say: `TYPE b₃ = 6 → TAP ▶ Play
+Row 3 → all zeros: redundant.
+x₃ free. p = (8, −2, 0), v₁ = (3/2, −5/2, 1).` },
+        { set: 'input[aria-label="b entry 3"]', value: 6 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6800 },
+        { say: `TAP ▼ equations → ▶ Play
+Row 3 dropped. Rows 1–2 kept.
+Same line: p = (8, −2, 0), v₁ = (3/2, −5/2, 1).` },
+        { click: { button: '▼', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5000 },
+        { say: `TAP Shuffle
+Random system, same shape.
+Half the time one equation is a multiple of another.` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'how-the-reduction-runs': {
+      title: 'Forward pass, backward pass',
+      script: [
+        { say: `TAP Next →
+Pivot 1: 1 at row 1, column 1.
+x₁ = leading variable.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+R3 ← R3 − 2·R1.
+Row 3 → (0, 3, −3 | 15). Constants included.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next → twice
+Pivot 2, then R3 ← R3 − (3/2)·R2.
+Row 3 → (0, 0, −21/2 | 21). Forward pass done.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next → twice
+Pivot 3 = −21/2. Row 3 divided by it.
+Row 3 → (0, 0, 1 | −2). Backward pass.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▶ Play
+Clear above each pivot, scale row 2.
+x = (5, 3, −2). One solution.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 8800 },
+      ],
+    },
+    'choosing-a-system': {
+      title: 'Six presets, three outcomes',
+      script: [
+        { say: `SELECT Fast → TAP Infinitely many → ▶ Play
+No pivot in column 2: x₂ free.
+p = (4, 0, 1), v₁ = (−2, 1, 0). A line.` },
+        { set: 'select', value: 700 },
+        { click: { button: 'Infinitely many', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP No solution → ▶ Play
+Row 3 → 0 0 | 1.
+0 = 1: inconsistent.` },
+        { click: { button: 'No solution', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5400 },
+        { say: `TAP Homogeneous → ▶ Play
+b = 0, so p = (0, 0, 0).
+v₁ = (−2, 1, 0): a line through the origin.` },
+        { click: { button: 'Homogeneous', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5400 },
+        { say: `TAP Overdetermined → ▶ Play
+3 equations, 2 unknowns, still consistent.
+Zero row at the bottom. x = (2, 1).` },
+        { click: { button: 'Overdetermined', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6800 },
+        { say: `TAP Two free variables → ▶ Play
+x₂, x₄ free. Two directions.
+p = (4, 0, 2, 0). A plane of solutions.` },
+        { click: { button: 'Two free variables', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-linear-system-solutions'),
       sectionsContent,
       stateUnits,
@@ -480,7 +604,22 @@ The direction vectors span the null space of $A$, the solutions of $A\\mathbf{x}
   }
 }
 
-export default function LinearSystemSolutionsVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function LinearSystemSolutionsVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <LinearSystemWrapper defaultPreset='unique' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -502,8 +641,8 @@ export default function LinearSystemSolutionsVisualizer({seoData, sectionsConten
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'how-the-reduction-runs'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'how-the-reduction-runs')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'the-forward-pass', 'eliminate'),
     stateRow('obj13', 'the-backward-pass', 'backelim'),
@@ -511,7 +650,7 @@ export default function LinearSystemSolutionsVisualizer({seoData, sectionsConten
     stateRow('obj15', 'no-solution', 'none'),
     stateRow('obj16', 'infinitely-many-solutions', 'infinite'),
     plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-system'),
+    withDemo(plain('obj4', 'choosing-a-system')),
     plain('obj5', 'the-three-outcomes'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -572,6 +711,10 @@ export default function LinearSystemSolutionsVisualizer({seoData, sectionsConten
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Solution Sets of Linear Systems</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <LinearSystemWrapper

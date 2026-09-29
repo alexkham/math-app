@@ -64035,7 +64035,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "NEW TOOL - RREF of [A|b]; phases intro/pivot/swap/eliminate/skip/inconsistent/normalize/backelim/unique/infinite.",
-        "note": "Page sections run obj0..obj16 (one more than the usual template)."
+        "note": "Page sections run obj0..obj16 (one more than the usual template).",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in getting-started, how-the-reduction-runs, choosing-a-system; one typed entry (a33 = 9.5) turns the default into no solution, then b3 = 6 into infinitely many; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
