@@ -62746,7 +62746,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "NONE - PowerWrapper pre-existed (used with title=\"\") and was NOT modified; it has no explanations prop, so this page has no per-state scene notes. Only the page and the diagrams module are new.",
-        "note": "PowerWrapper's scene builder is private, so the four stills (chain, square, cube, final) are composed by hand in the scene vocabulary inside powerDiagrams.js. Candidate for a Line 1 wiring pass if an additive explanations prop is ever added to PowerWrapper."
+        "note": "PowerWrapper's scene builder is private, so the four stills (chain, square, cube, final) are composed by hand in the scene vocabulary inside powerDiagrams.js. Candidate for a Line 1 wiring pass if an additive explanations prop is ever added to PowerWrapper.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in getting-started, bracket-and-collapse, choosing-size-and-exponent; terms per cell 2, 3, 9, 256; overlays drawn by SceneCanvas sit up-left inside the scaled demo stage (pending MatrixCore decision); tool does not write the URL; headless step check 15/15 (pre-existing style-tag hydration errors, 16 per load, unchanged)."
       },
       "relatedTools": [
         {
