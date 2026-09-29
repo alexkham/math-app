@@ -8,6 +8,9 @@ import InverseWrapper from '../../../../app/components/linear-algebra copy/matri
 import inverseDiagrams from '../../../../app/components/linear-algebra copy/matrix/inverseDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -442,8 +445,122 @@ The completed matrix satisfies $A A^{-1} = I$. Row $i$ of $A$ against column $i$
   }
 
 
+  const instructions = [
+    'The **Size of A** stepper (**▲** / **▼**) switches between $2 \\times 2$ and $3 \\times 3$; the cofactors are written out in full, so larger sizes are not offered. [Learn more about choosing the size](!#choosing-the-size)',
+    'Hover the **?** icon for what the inverse is and how the adjugate formula builds it. [Learn more about getting started](!#getting-started)',
+    '**▶ Play** runs the scenes, **Next →** and **← Back** move one step, **Reset** returns to the opening scene, and the speed menu sets the pace from Slow to Very Fast. [Learn more about the controls](!#getting-started)',
+    'The run has four phases: every cofactor, the transpose into $\\operatorname{adj} A$, $\\det A$ from the first row, then division of every entry. [Learn more about the four phases](!#the-four-phases)',
+    'Each scene highlights the entries it uses, strikes the row and column of the current entry in phase 1, and draws arrows to the entry being written in phases 1 and 4. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Step explanations** log keeps every step across all four phases, with a note linking to the matching phase section below. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real InverseWrapper
+     (defaultN={3}: 22 scenes; 2 x 2: 12 scenes). One size stepper ▲/▼. */
+  const demos = {
+    'getting-started': {
+      title: 'Size, play, reset',
+      script: [
+        { say: `TAP ▼
+A is 2 × 2. Step 1 / 12:
+4 + 1 + 1 + 4 steps + intro and outro.` },
+        { click: { button: '▼', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+Cofactors, adjugate, det A, divide.
+Step 12 / 12: A⁻¹ filled.` },
+        { set: 'select', value: '400' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5600 },
+        { say: `TAP Reset
+Step 1 / 12. A and an empty cofactor grid.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▲
+A is 3 × 3: the maximum. Step 1 / 22.
+9 + 1 + 1 + 9 steps + 2.` },
+        { click: { button: '▲', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Row 1, column 1 struck.
+C₁,₁ = a₂,₂a₃,₃ − a₂,₃a₃,₂: a 2 × 2 minor.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+    'the-four-phases': {
+      title: 'Four phases at 2 × 2',
+      script: [
+        { say: `TAP ▼ → Next →
+Phase 1. Strike row 1, column 1.
+C₁,₁ = a₂,₂. Sign +1.` },
+        { click: { button: '▼', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+C₁,₂ = −a₂,₁.
+Sign (−1)¹⁺² = −1: minor negated.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next → ×3
+Phase 2, Step 6 / 12: adj A = Cᵀ.
+Off-diagonal cofactors swap places.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { wait: 2800 },
+        { say: `TAP Next →
+Phase 3: det A = a₁,₁C₁,₁ + a₁,₂C₁,₂.
+Zero → stop. No inverse.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Next →
+Phase 4: (A⁻¹)₁,₁ = a₂,₂ / det A.
+Every entry: same divisor.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+    'choosing-the-size': {
+      title: '3 × 3 against 2 × 2',
+      script: [
+        { say: `TAP Next →
+3 × 3: C₁,₁ = a₂,₂a₃,₃ − a₂,₃a₃,₂.
+Every minor is a 2 × 2 determinant.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Next →
+C₁,₂ = a₂,₃a₃,₁ − a₂,₁a₃,₃.
+Checkerboard sign −1 flips the minor.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+Step 22 / 22. Entries of A⁻¹
+written Cⱼ,ᵢ / |A| to stay readable.` },
+        { set: 'select', value: '400' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 9000 },
+        { say: `TAP ▼
+2 × 2. Step 1 / 12.
+Every minor: a single entry.` },
+        { click: { button: '▼', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ▶ Play
+Step 12 / 12. Entries written out:
+swap the diagonal, negate the rest, divide.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-inverse'),
       sectionsContent,
       stateUnits,
@@ -466,7 +583,22 @@ The completed matrix satisfies $A A^{-1} = I$. Row $i$ of $A$ against column $i$
   }
 }
 
-export default function InverseVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function InverseVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <InverseWrapper defaultN={3} explanations={explanations} />
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -488,15 +620,15 @@ export default function InverseVisualizer({seoData, sectionsContent, stateUnits,
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-four-phases'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-four-phases')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'phase-1-cofactors', 'cofactor'),
     stateRow('obj13', 'phase-2-transpose', 'transpose'),
     stateRow('obj14', 'phase-3-determinant', 'det'),
     stateRow('obj15', 'phase-4-divide', 'divide'),
     plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-the-size'),
+    withDemo(plain('obj4', 'choosing-the-size')),
     plain('obj5', 'what-the-inverse-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -557,6 +689,10 @@ export default function InverseVisualizer({seoData, sectionsContent, stateUnits,
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Matrix Inverse</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <InverseWrapper
