@@ -34740,7 +34740,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - eslint parse, line1-static-check.py, and a node exercise of frozenMatrixSvg confirming 24 cells, the superscript T, the arrow glyph and the 3x4 -> 4x3 dimension pair.",
         "wiring": "C - TransposeWrapper had no explanations prop; added additively as `explanations = null`, keyed by strategy id and appended to every scene caption that strategy produces. STRATEGIES was additionally exported (unchanged) so the diagrams module calls the same builders.",
-        "note": "States are the four STRATEGIES, not scene indices: cell-by-cell (frozen step 6 of 12), row-as-column (2 of 3), column-as-row (2 of 4), diagonal-reflection (scene 1 of 3). Defaults 3x4. Overlays - the curved cell-to-cell arrows and the dashed diagonal axis - are NOT reproduced by frozenMatrixSvg; each frozen scene was chosen so the cell colouring carries the meaning alone."
+        "note": "States are the four STRATEGIES, not scene indices: cell-by-cell (frozen step 6 of 12), row-as-column (2 of 3), column-as-row (2 of 4), diagonal-reflection (scene 1 of 3). Defaults 3x4. Overlays - the curved cell-to-cell arrows and the dashed diagonal axis - are NOT reproduced by frozenMatrixSvg; each frozen scene was chosen so the cell colouring carries the meaning alone.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in getting-started, the-four-methods, square-vs-rectangular; method cards driven as .tw-strategy divs; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {

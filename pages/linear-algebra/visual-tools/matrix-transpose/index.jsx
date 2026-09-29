@@ -14,6 +14,9 @@ import TransposeWrapper from '../../../../app/components/linear-algebra copy/mat
 import transposeDiagrams from '../../../../app/components/linear-algebra copy/matrix/transposeDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -412,8 +415,122 @@ For a rectangular $A$ the axis is an abstraction rather than a line you could dr
   }
 
 
+  const instructions = [
+    'On the **Size** tab, the **▲** / **▼** steppers set the rows and columns of $A$ from 1 to 5; the shape of $A^T$ is shown beside them, and the **?** icon explains the swapped shape. [Learn more about getting started](!#getting-started)',
+    'On the **Method** tab, pick one of four cards: **Cell-by-cell**, **Row-as-column**, **Column-as-row** or **Diagonal reflection**; each builds the same $A^T$ in a different number of steps. [Learn more about the four methods](!#the-four-methods)',
+    'The strip at the right of the tab bar always shows the current shape and the active method. [Learn more about the summary strip](!#getting-started)',
+    '**▶ Play** runs the method, **Next →** and **← Back** move one step, **Reset** returns to the overview scene, and the speed menu sets the pace from Slow to Very Fast. [Learn more about the controls](!#getting-started)',
+    'Each scene highlights the source in $A$ and the destination in $A^T$, joined by curved arrows; the step title gives the move in math notation. [Learn more about reading a scene](!#the-scene-player)',
+    '**Diagonal reflection** draws a dashed axis instead of arrows: the true main diagonal for square $A$, a diagonal-like axis for rectangular $A$. [Learn more about square and rectangular matrices](!#square-vs-rectangular)',
+    'The **Step explanations** log keeps every step with its description and a note linking to the matching method section below. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real TransposeWrapper
+     (opens on the Size tab, A 3 x 4, Cell-by-cell). Steppers: ▲/▼ nth 0 =
+     rows, nth 1 = columns. Method cards are divs: .tw-strategy nth 0..3. */
+  const demos = {
+    'getting-started': {
+      title: 'Size, then the cell sweep',
+      script: [
+        { say: `TAP ▼ rows
+A is 2 × 4 → Aᵀ is 4 × 2.
+Step 1 / 10: 8 cells + 2.` },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP Next →
+a₁,₁ → position [1, 1] of Aᵀ.
+Diagonal entry: same place.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+a₁,₂ → position [2, 1] of Aᵀ.
+Row and column index swap.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `SELECT Fast → TAP ▶ Play
+All 8 entries placed. Step 10 / 10.
+Row 1 of A = column 1 of Aᵀ.` },
+        { set: 'select', value: '700' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6400 },
+        { say: `TAP Reset
+Step 1 / 10. Aᵀ empty again.
+Size kept: 2 × 4.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-four-methods': {
+      title: 'Four methods, one Aᵀ',
+      script: [
+        { say: `TAP Method
+Four cards. Cell-by-cell ✓.
+3 × 4: 12 steps, one entry each.` },
+        { click: { button: 'Method', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Row-as-column
+Step 1 / 5. 3 steps: one per row of A.` },
+        { click: { css: '.tw-strategy', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP Next →
+Row 1 of A → column 1 of Aᵀ.
+All 4 entries move at once.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Column-as-row
+Step 1 / 6. 4 steps: one per column of A.
+Aᵀ fills top-down.` },
+        { click: { css: '.tw-strategy', nth: 2 } },
+        { wait: 2600 },
+        { say: `TAP Diagonal reflection → Next →
+One reflection across the axis.
+No arrows. Same Aᵀ.` },
+        { click: { css: '.tw-strategy', nth: 3 } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'square-vs-rectangular': {
+      title: 'The reflection axis: square vs rectangular',
+      script: [
+        { say: `TAP Method → Diagonal reflection
+A is 3 × 4: no true main diagonal.
+Diagonal-like axis over the 3 × 3 corner.` },
+        { click: { button: 'Method', exact: true } },
+        { wait: 700 },
+        { click: { css: '.tw-strategy', nth: 3 } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Aᵀ = A reflected across that axis.
+Overhang cells: same i ↔ j swap.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Size → ▼ columns
+A is 3 × 3: square.
+True main diagonal. Diagonal cells stay put.` },
+        { click: { button: 'Size', exact: true } },
+        { wait: 700 },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Aᵀ = mirror image of A.
+Same colour = same data, swapped position.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▼ rows
+A is 2 × 3 → Aᵀ is 3 × 2.
+Axis abstract again: 2 × 2 corner.` },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-transpose'),
       sectionsContent,
       stateUnits,
@@ -436,7 +553,22 @@ For a rectangular $A$ the axis is an abstraction rather than a line you could dr
   }
 }
 
-export default function MatrixTransposeVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function MatrixTransposeVisualizer({ instructions, demos, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <TransposeWrapper explanations={explanations} />
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -458,14 +590,14 @@ export default function MatrixTransposeVisualizer({ seoData, sectionsContent, st
 
   const genericSections = [
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-four-methods'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-four-methods')),
     stateRow('obj11', 'cell-by-cell', 'cell-by-cell'),
     stateRow('obj12', 'row-as-column', 'row-as-column'),
     stateRow('obj13', 'column-as-row', 'column-as-row'),
     stateRow('obj14', 'diagonal-reflection', 'diagonal-reflection'),
     plain('obj3', 'the-scene-player'),
-    plain('obj4', 'square-vs-rectangular'),
+    withDemo(plain('obj4', 'square-vs-rectangular')),
     plain('obj5', 'what-the-transpose-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'symmetric-and-skew-symmetric'),
@@ -529,6 +661,10 @@ export default function MatrixTransposeVisualizer({ seoData, sectionsContent, st
       <br />
       <br />
       <h1 className='title' style={{ marginTop: '0px', marginBottom: '0px' }}>Matrix Transpose</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br />
       <div style={{ width: '80%', margin: 'auto' }}>
         <TransposeWrapper explanations={explanations} />
