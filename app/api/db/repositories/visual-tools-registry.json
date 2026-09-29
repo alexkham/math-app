@@ -56941,7 +56941,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - written during a permission-classifier outage; never parsed, linted or rendered. Anchors and unit keys checked by inspection.",
         "wiring": "NEW TOOL - wrapper written with the explanations prop from the start (keys intro/components/determinant/done, appended to the matching scene caption). buildScenes exported for the diagrams module.",
-        "note": "Two methods: componentwise formula and the 3x3 determinant mnemonic. Stills use frozenMatrixSvgFixed (subscript-baseline fix over frozenMatrixSvg)."
+        "note": "Two methods: componentwise formula and the 3x3 determinant mnemonic. Stills use frozenMatrixSvgFixed (subscript-baseline fix over frozenMatrixSvg).",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in getting-started, the-two-methods, the-scene-player; both methods walked, fixed-length readout linked to why-three-dimensions; tool does not write the URL; headless step check 14/14."
       },
       "relatedTools": [
         {
