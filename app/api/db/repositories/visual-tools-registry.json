@@ -74144,7 +74144,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "NEW TOOL - phases intro/gram/notortho/det/lengths/inverse/classify/done; editable test vector.",
-        "note": "Orthogonality test tolerance is 1e-3 so typed decimals such as 0.866 still pass. frozenMatrixSvg does not reproduce bracketType 'bars', so the det still shows square brackets."
+        "note": "Orthogonality test tolerance is 1e-3 so typed decimals such as 0.866 still pass. frozenMatrixSvg does not reproduce bracketType 'bars', so the det still shows square brackets.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 8 instructions each ending in an anchor link to an existing usage section (8 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in getting-started, the-scenes-in-order, the-scene-player, choosing-a-matrix; covers test vector x = (3, 4) giving |Qx| = 5, a q33 = 2 near miss, and the three failing presets; tool does not write the URL; headless step check 20/20."
       },
       "relatedTools": [
         {
