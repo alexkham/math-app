@@ -22841,6 +22841,10 @@
       "name": "Interactive Triangle Explorer",
       "section": "trigonometry",
       "pagePath": "pages/trigonometry/visual-tools/triangle-explorer/index.jsx",
+      "line1": {
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in choosing-a-scenario, dragging-vertices, locking-angles, reading-the-stats-bar; vertex drags via pointer events on the grab handles; tool does not write the URL; headless step check 20/20. The scene refits to the vertices during a drag, so a step jump (instant replay) lands the dragged vertex less far than live playback; callouts hold in both."
+      },
       "relatedTerms": [
         {
           "term": "corner",

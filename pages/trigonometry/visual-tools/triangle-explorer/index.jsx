@@ -12,6 +12,9 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import triangleDiagrams from '../../../../app/components/trigonometry/triangle/triangleDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -507,6 +510,140 @@ It is the scenario to reach for after the fixed ones, once the question stops be
       text: 'A symmetric opening position with nothing pinned — every vertex is grabbable from the first click.' }),
   };
 
+  const instructions = [
+    'The **top bar** loads one of twelve scenarios in four groups: Classification, Special, Trig laws and Explore. [Learn more about the scenarios](!#choosing-a-scenario)',
+    'Tick **draggable**, or pick Free drag, Law of sines or Law of cosines, then drag any vertex to reshape the triangle; **↻ reset** restores the scenario shape. [Learn more about dragging](!#dragging-vertices)',
+    'The **lock** buttons freeze angle A, B or C at its current value; a number box and a slider then set the locked value. Up to two angles can be locked. [Learn more about locking](!#locking-angles)',
+    'The **−** and **+** buttons zoom the diagram in steps of 10%; **fit** returns to 100%. [Learn more about the zoom](!#adjusting-the-zoom)',
+    'The diagram labels the vertices $A$, $B$, $C$, the opposite sides $a$, $b$, $c$ and the interior angles. [Learn more about the diagram](!#reading-the-diagram)',
+    'The **stats bar** under the diagram lists the three angles, the three sides, the perimeter $P$ and the area. [Learn more about the stats bar](!#reading-the-stats-bar)',
+    'The **explanation panel** on the right shows the theory for the active scenario, recomputed from the current shape. [Learn more about the panel](!#reading-the-explanation-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real TriangleExplorer.
+     Vertex handles = the <g> elements with cursor grab, nth 0/1/2 = A/B/C.
+     Range 0 = the slider of the first locked angle. */
+  const VTX = 'g[style*="grab"]'
+  const demos = {
+    'choosing-a-scenario': {
+      title: 'Scenarios',
+      script: [
+        { say: `TAP Isosceles
+Two equal sides.
+Base angles equal: 70° and 70°.` },
+        { click: { button: 'Isosceles', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 30-60-90
+Special right triangle.
+Short leg = half the hypotenuse.` },
+        { click: { button: '30-60-90', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 3-4-5
+Pythagorean triple.
+3² + 4² = 5².` },
+        { click: { button: '3-4-5', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Law of sines
+Any triangle.
+a / sin A = b / sin B = c / sin C.` },
+        { click: { button: 'Law of sines', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Equilateral
+All sides 8. All angles 60°.` },
+        { click: { button: 'Equilateral', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'dragging-vertices': {
+      title: 'Dragging vertices',
+      script: [
+        { say: `TAP Free drag
+Dragging on.
+All three vertices grabbable.` },
+        { click: { button: 'Free drag', exact: true } },
+        { wait: 2200 },
+        { say: `DRAG C UP
+Apex rises.
+Angle C shrinks. Area grows.` },
+        { drag: { css: VTX, nth: 2 }, dx: 0, dy: -12, ms: 1400 },
+        { wait: 2400 },
+        { say: `DRAG B RIGHT
+Base stretches.
+Angles and stats update live.` },
+        { drag: { css: VTX, nth: 1 }, dx: 18, dy: 0, ms: 1400 },
+        { wait: 2400 },
+        { say: `UNTICK draggable
+Vertices frozen.
+Shape stays for study.` },
+        { click: { css: 'input[type=checkbox]' } },
+        { wait: 2400 },
+        { say: `TAP ↻ reset
+Scenario shape restored.` },
+        { click: { button: '↻ reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'locking-angles': {
+      title: 'Locking angles',
+      script: [
+        { say: `TAP Free drag
+Start: 55° – 55° – 70°.` },
+        { click: { button: 'Free drag', exact: true } },
+        { wait: 2000 },
+        { say: `TAP lock — ANGLE A
+A frozen at 55°.
+Number box and slider appear.` },
+        { click: { button: 'lock', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `DRAG B RIGHT
+Triangle reshapes.
+A stays 55°.` },
+        { drag: { css: VTX, nth: 1 }, dx: 50, dy: 10, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG A-SLIDER → 90°
+Locked value changes.
+Right angle at A.` },
+        { slide: { range: 0 }, to: 90, ms: 1600 },
+        { wait: 2600 },
+        { say: `TAP 🔒 locked
+Lock released.
+A free again.` },
+        { click: { button: '🔒 locked' } },
+        { wait: 2400 },
+      ],
+    },
+    'reading-the-stats-bar': {
+      title: 'Stats bar and zoom',
+      script: [
+        { say: `TAP 3-4-5
+Stats bar: sides 5.00, 6.67, 8.33.
+Ratio 3 : 4 : 5.` },
+        { click: { button: '3-4-5', exact: true } },
+        { wait: 2800 },
+        { say: `TAP +  ×2
+Zoom 120%.
+Picture grows. Stats unchanged.` },
+        { click: { button: '+', exact: true } },
+        { wait: 700 },
+        { click: { button: '+', exact: true } },
+        { wait: 2400 },
+        { say: `TAP −
+Zoom 110%.` },
+        { click: { button: '−', exact: true } },
+        { wait: 2200 },
+        { say: `TAP fit
+Back to 100%.` },
+        { click: { button: 'fit', exact: true } },
+        { wait: 2200 },
+        { say: `TAP 5-12-13
+Same perimeter: 20.00.
+Area drops: 16.67 → 13.33.` },
+        { click: { button: '5-12-13', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   const explanations = {
     equilateral: `All three sides and angles are equal — the most symmetric triangle, and the only shape where every angle must read 60°. [Learn more about this scenario](!#the-equilateral-scenario) · [Triangle classifications](!#triangle-classifications)`,
     isosceles: `Two sides equal, two angles equal. The base angles, opposite the equal sides, are congruent. [Learn more about this scenario](!#the-isosceles-scenario) · [Triangle classifications](!#triangle-classifications)`,
@@ -531,6 +668,8 @@ It is the scenario to reach for after the fixed ones, once the question stops be
          faqQuestions,
          schemas,
          explanations,
+         instructions,
+         demos,
          stateUnits,
           seoData: {
         title: "Triangle Explorer: Interactive Visualizer | Learn Math Class",
@@ -547,7 +686,21 @@ It is the scenario to reach for after the fixed ones, once the question stops be
     }
    }
 
-export default function TriangleExplorerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function TriangleExplorerPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <TriangleExplorer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+
 
 
   const genericSections=[
@@ -564,6 +717,7 @@ export default function TriangleExplorerPage({relatedTools, seoData, sectionsCon
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('choosing-a-scenario'),
           sectionsContent.obj1.content,
         ]
     },
@@ -572,6 +726,7 @@ export default function TriangleExplorerPage({relatedTools, seoData, sectionsCon
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
+          demo('dragging-vertices'),
           sectionsContent.obj2.content,
         ]
     },
@@ -580,6 +735,7 @@ export default function TriangleExplorerPage({relatedTools, seoData, sectionsCon
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          demo('locking-angles'),
           sectionsContent.obj3.content,
         ]
     },
@@ -604,6 +760,7 @@ export default function TriangleExplorerPage({relatedTools, seoData, sectionsCon
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
+          demo('reading-the-stats-bar'),
           sectionsContent.obj6.content,
         ]
     },
@@ -829,6 +986,10 @@ export default function TriangleExplorerPage({relatedTools, seoData, sectionsCon
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Triangle</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <SiblingsNav
       bg="#fafaf7"
