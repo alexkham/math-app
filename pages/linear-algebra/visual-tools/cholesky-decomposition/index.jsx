@@ -8,6 +8,9 @@ import CholeskyWrapper from '../../../../app/components/linear-algebra copy/matr
 import choleskyDiagrams from '../../../../app/components/linear-algebra copy/matrix/choleskyDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -438,8 +441,114 @@ Three facts are read off at once: the factorization proves $A$ positive definite
   }
 
 
+  const instructions = [
+    'The **Preset** pills load six matrices: four that factor and two that stop on purpose, one not positive definite and one not symmetric. [Learn more about the presets](!#choosing-a-matrix)',
+    'The **Size** stepper (**▲** / **▼**) sets $A$ from $2 \\times 2$ to $4 \\times 4$; **Shuffle** draws a random symmetric positive definite matrix. [Learn more about getting started](!#getting-started)',
+    'Type into any entry of $A$; the edit is mirrored across the diagonal so $A$ stays symmetric. [Learn more about editing entries](!#getting-started)',
+    '**▶ Play** runs the factorization, **Next →** and **← Back** step one entry at a time, **Reset** returns to the opening scene, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'Each scene highlights the entry of $L$ being computed and the entries of $A$ and $L$ it uses; its mirror in $L^T$ fills at the same time. [Learn more about reading a scene](!#the-scene-player)',
+    'The **step log** lists every entry computed so far, with its formula; the run stops with an explanation when $A$ is not symmetric or a radicand is not positive. [Learn more about how it runs](!#how-the-factorization-runs)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real CholeskyWrapper
+     (opens on Classic 3x3). Cells: input[aria-label="entry i,j"]. */
+  const demos = {
+    'getting-started': {
+      title: 'Size, entries, shuffle',
+      script: [
+        { say: `TAP ▼
+Size 2 × 2.
+Top-left block kept: [4 2; 2 5].` },
+        { click: { button: '▼', exact: true } },
+        { wait: 2400 },
+        { say: `TYPE a₁₂ = 6
+Mirrored: a₂₁ = 6 too.
+A stays symmetric.` },
+        { set: 'input[aria-label="entry 1,2"]', value: 6 },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+√4 = 2 → 6 ÷ 2 = 3.
+5 − 3² = −4 → STOP. Not positive definite.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5200 },
+        { say: `TAP Shuffle
+Random A = BBᵀ + I.
+Always positive definite.` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+Runs to the end.
+LLᵀ = A. Positive definite: proved.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6400 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'Classic 3 × 3, step by step',
+      script: [
+        { say: `TAP Next →
+Diagonal: ℓ₁₁ = √4 = 2.
+Copied at once into Lᵀ.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Below the diagonal: ℓ₂₁ = 2 ÷ 2 = 1.
+Mirrored into Lᵀ.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+ℓ₃₁ = 2 ÷ 2 = 1.
+Column 1 done.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+ℓ₂₂ = √(5 − 1²) = 2.
+Radicand positive → continue.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▶ Play
+ℓ₃₂ = 1, ℓ₃₃ = 2.
+Done: LLᵀ = A.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5600 },
+      ],
+    },
+    'choosing-a-matrix': {
+      title: 'Presets that pass and fail',
+      script: [
+        { say: `TAP 2×2
+A = [4 2; 2 2].
+Whole pattern in three computations.` },
+        { click: { button: '2×2', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+√4 = 2 → 2 ÷ 2 = 1 → √(2 − 1) = 1.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6400 },
+        { say: `TAP Not positive definite
+Symmetric. 1 on the diagonal, 2 off it.` },
+        { click: { button: 'Not positive definite', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+Second radicand 1 − 4 = −3.
+STOP. Not positive definite.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5200 },
+        { say: `TAP Not symmetric → Next →
+a₁₂ ≠ a₂₁.
+STOP before any arithmetic.` },
+        { click: { button: 'Not symmetric', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-cholesky-decomposition'),
       sectionsContent,
       stateUnits,
@@ -462,7 +571,22 @@ Three facts are read off at once: the factorization proves $A$ positive definite
   }
 }
 
-export default function CholeskyVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function CholeskyVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <CholeskyWrapper defaultPreset='classic' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -484,15 +608,15 @@ export default function CholeskyVisualizer({seoData, sectionsContent, stateUnits
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     plain('obj2', 'how-the-factorization-runs'),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'a-diagonal-entry', 'diag'),
     stateRow('obj13', 'an-entry-below-the-diagonal', 'offdiag'),
     stateRow('obj14', 'when-the-matrix-is-not-positive-definite', 'notpd'),
     stateRow('obj15', 'the-completed-factorization', 'done'),
-    plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-matrix'),
+    withDemo(plain('obj3', 'the-scene-player')),
+    withDemo(plain('obj4', 'choosing-a-matrix')),
     plain('obj5', 'what-the-cholesky-factorization-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -553,6 +677,10 @@ export default function CholeskyVisualizer({seoData, sectionsContent, stateUnits
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Cholesky Decomposition</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <CholeskyWrapper

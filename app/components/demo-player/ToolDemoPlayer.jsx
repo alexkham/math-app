@@ -35,8 +35,8 @@ import React, { useEffect, useLayoutEffect, useRef, useState, useCallback, useMe
      { click: T }                          move and click T
      { slide: T, to: v, ms }               drag a range input to value v
      { drag: T, dx, dy, ms }               pointer-drag an element by (dx, dy) px
-     { set: T, value }                     type into a text/number input, or pick
-                                           a <select> option by value
+     { set: T, value }                     type into a text/number input (then blur),
+                                           or pick a <select> option by value
      { wait: ms }                          pause
    Targets T:
      'css selector'                        first match inside the tool
@@ -100,6 +100,13 @@ function setFieldValue(field, v) {
   Object.getOwnPropertyDescriptor(proto, 'value').set.call(field, String(v));
   field.dispatchEvent(new Event('input', { bubbles: true }));
   field.dispatchEvent(new Event('change', { bubbles: true }));
+}
+
+// the reader tabs away: inputs that commit on blur see it
+function leave(field) {
+  if (field.tagName === 'SELECT') return;
+  field.dispatchEvent(new FocusEvent('blur'));
+  field.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
 }
 
 function thumbPoint(input, v) {
@@ -308,7 +315,7 @@ export default function ToolDemoPlayer({
       if (a.set) {
         const v = String(a.value);
         const [x, y] = local(...centerOf(el));
-        if (fast) { placeCursor(x, y); setFieldValue(el, v); await frame(); return; }
+        if (fast) { placeCursor(x, y); setFieldValue(el, v); leave(el); await frame(); return; }
         const { x: sx, y: sy } = posRef.current;
         await tween(a.ms || 600, (u) => placeCursor(sx + (x - sx) * u, sy + (y - sy) * u));
         ripple();
@@ -316,6 +323,7 @@ export default function ToolDemoPlayer({
         if (el.tagName === 'SELECT') { setFieldValue(el, v); await sleep(150); return; }
         // type it out, one character at a time
         for (let i = 1; i <= v.length && live(); i++) { setFieldValue(el, v.slice(0, i)); await sleep(110); }
+        leave(el);
         return;
       }
       if (a.slide) {

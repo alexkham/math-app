@@ -64523,7 +64523,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "NEW TOOL - phases intro/notsym/diag/notpd/offdiag/done; mirrored edits keep the input symmetric; randomSPD for shuffle.",
-        "note": ""
+        "note": "",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in getting-started, the-scene-player, choosing-a-matrix; cell edits via the player's set action (blur commits); tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
