@@ -8,6 +8,9 @@ import SpectralWrapper from '../../../../app/components/linear-algebra copy/matr
 import spectralDiagrams from '../../../../app/components/linear-algebra copy/matrix/spectralDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -477,8 +480,141 @@ The mirror-edits option keeps the entry grid symmetric while you experiment. Tur
   }
 
 
+  const instructions = [
+    'The **Preset** pills load seven matrices: a classic $2 \\times 2$, an indefinite one, a projection, a $3 \\times 3$ with distinct eigenvalues, a repeated eigenvalue, a semidefinite one and a non-symmetric shear that stops the run. [Learn more about the presets](!#choosing-a-matrix)',
+    'The **Size** stepper (**▲** / **▼**) switches between $2 \\times 2$ and $3 \\times 3$; **Shuffle** draws a random symmetric matrix. [Learn more about getting started](!#getting-started)',
+    'Type into any entry of $A$; with **mirror edits** checked the entry across the diagonal follows, unchecked it does not and the run stops on a non-symmetric matrix. [Learn more about editing entries](!#getting-started)',
+    '**▶ Play** runs the decomposition, **Next →** and **← Back** step one scene at a time, **Reset** returns to the opening scene, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'The scenes run from the symmetry check through eigenvalues, eigenvectors, Gram–Schmidt when an eigenvalue repeats, $Q$, $Q^TQ = I$, the factorization and the rank-one sum. [Learn more about the scenes in order](!#the-scenes-in-order)',
+    'Each column of $Q$ and the matching row of $Q^T$ share one colour; the diagonal of $\\Lambda$ is blue, and the captions give exact forms such as $(1, 1)/\\sqrt{2}$. [Learn more about reading a scene](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real SpectralWrapper
+     (opens on 2x2 classic [2 1; 1 2]). Cells: input[aria-label="entry i,j"];
+     mirror edits: input[type="checkbox"]. */
+  const demos = {
+    'getting-started': {
+      title: 'Mirror edits, size, shuffle',
+      script: [
+        { say: `TYPE a₁₂ = 3
+Mirror edits on: a₂₁ = 3 too.
+A = [2 3; 3 2]. Still symmetric.` },
+        { set: 'input[aria-label="entry 1,2"]', value: 3 },
+        { wait: 2400 },
+        { say: `TAP Next →
+Eigenvalues 5, −1. All real.
+Sum 4 = trace.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ▲
+Size 3 × 3. New row and column: 0 0 1.
+Step 1 / 10.` },
+        { click: { button: '▲', exact: true } },
+        { wait: 2400 },
+        { say: `UNCHECK mirror edits → TYPE a₁₂ = 0 → Next →
+a₂₁ stays 3: A ≠ Aᵀ.
+Run stops. Offending entries marked.` },
+        { click: 'input[type="checkbox"]' },
+        { wait: 700 },
+        { set: 'input[aria-label="entry 1,2"]', value: 0 },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Shuffle
+Random symmetric integers.
+Mirror edits back on.` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-scene-player': {
+      title: '2 × 2 classic, scene by scene',
+      script: [
+        { say: `TAP Next →
+Eigenvalues 3, 1. All real.
+Sum 4 = trace.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next → ×2
+λ = 3 → (1, 1). λ = 1 → (1, −1).
+Perpendicular automatically.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+q₁ = (1, 1)/√2, q₂ = (1, −1)/√2.
+One colour per column of Q. Decimals.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next → ×2
+QᵀQ = I, then A = Q Λ Qᵀ.
+Rows of Qᵀ: same colours as columns of Q.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next → ×2
+A = 3 q₁q₁ᵀ + 1 q₂q₂ᵀ.
+Done: positive definite.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'choosing-a-matrix': {
+      title: 'Presets by their eigenvalues',
+      script: [
+        { say: `TAP Indefinite → Next →
+λ = 2, −3.
+Opposite signs: a saddle.` },
+        { click: { button: 'Indefinite', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Projection → Next →
+λ = 1, 0.
+Rank-one sum: a single term.` },
+        { click: { button: 'Projection', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Repeated → Next → ×4
+λ = 4, 1, 1. Plane for λ = 1: (1, −1, 0), (1, 0, −1).
+Gram–Schmidt → (1, 1, −2).` },
+        { click: { button: 'Repeated', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Semidefinite → Next →
+λ = 2, 2, 0.
+Positive semidefinite, singular, rank 2.` },
+        { click: { button: 'Semidefinite', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Not symmetric → Next →
+The shear: A ≠ Aᵀ.
+Run stops at once.` },
+        { click: { button: 'Not symmetric', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-spectral-decomposition'),
       sectionsContent,
       stateUnits,
@@ -501,7 +637,22 @@ The mirror-edits option keeps the entry grid symmetric while you experiment. Tur
   }
 }
 
-export default function SpectralVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function SpectralVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <SpectralWrapper defaultPreset='twoByTwo' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -523,7 +674,7 @@ export default function SpectralVisualizer({seoData, sectionsContent, stateUnits
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     plain('obj2', 'the-scenes-in-order'),
     stateRow('obj11', 'from-eigenvectors-to-q', 'normalize'),
     stateRow('obj12', 'q-transpose-q-equals-i', 'orthocheck'),
@@ -532,8 +683,8 @@ export default function SpectralVisualizer({seoData, sectionsContent, stateUnits
     stateRow('obj15', 'gram-schmidt-inside-a-repeated-eigenspace', 'gram'),
     stateRow('obj16', 'a-single-rank-one-term', 'projection'),
     stateRow('obj17', 'when-the-matrix-is-not-symmetric', 'notsym'),
-    plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-matrix'),
+    withDemo(plain('obj3', 'the-scene-player')),
+    withDemo(plain('obj4', 'choosing-a-matrix')),
     plain('obj5', 'what-the-spectral-theorem-says'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -594,6 +745,10 @@ export default function SpectralVisualizer({seoData, sectionsContent, stateUnits
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Spectral Decomposition</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <SpectralWrapper
