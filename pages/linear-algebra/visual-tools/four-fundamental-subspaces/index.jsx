@@ -8,6 +8,9 @@ import SubspacesWrapper from '../../../../app/components/linear-algebra copy/mat
 import subspacesDiagrams from '../../../../app/components/linear-algebra copy/matrix/subspacesDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -475,8 +478,123 @@ The dimension formulas still hold with zeros: $r + 0 = n$ says full column rank,
   }
 
 
+  const instructions = [
+    'The **Preset** pills load seven matrices: $3 \\times 3$ of rank $2$, rank one, wide $2 \\times 3$, tall $3 \\times 2$, invertible, $4 \\times 3$ of rank $2$, and zero. [Learn more about choosing a matrix](!#choosing-a-matrix)',
+    'The **Size** steppers (**▲** / **▼**) set any shape from $2 \\times 2$ to $4 \\times 4$; **Shuffle** draws a random matrix that usually carries a planted dependency. [Learn more about getting started](!#getting-started)',
+    'Type into any entry of $A$; the run is rebuilt at once. [Learn more about editing entries](!#getting-started)',
+    '**▶ Play** runs the procedure, **Next →** and **← Back** step one scene at a time, **Reset** returns to the start, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'The scenes run in a fixed order: row reduce, column space, row space, null space, left null space, orthogonality, and the dimension count. [Learn more about the scenes in order](!#the-scenes-in-order)',
+    'Each space keeps its colour from scene to scene, and the products $AN$ and $A^TL$ are drawn as grey zero matrices; the **Step explanations** log keeps every stage. [Learn more about reading a scene](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real SubspacesWrapper
+     (opens on 3×3, rank 2). Cells: input[aria-label="entry i,j"]; steppers
+     ▲/▼ nth 0 = rows, nth 1 = columns; the only <select> is the speed menu. */
+  const demos = {
+    'getting-started': {
+      title: 'Entries, size, shuffle',
+      script: [
+        { say: `TYPE a₁₂ = 3
+Column 2 no longer 2 × column 1.
+Row 3 no longer row 1 + row 2.` },
+        { set: 'input[aria-label="entry 1,2"]', value: 3 },
+        { wait: 2600 },
+        { say: `SELECT Fast → TAP ▶ Play
+r = 3: dimensions 3, 0, 3, 0.
+Both null spaces {0}. A invertible.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP ▼ rows → ▶ Play
+2 × 3. r = 2: dimensions 2, 1, 2, 0.
+Full row rank: left null space {0}.` },
+        { click: { button: '▼', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Shuffle
+Random matrix, same shape.
+Usually a planted dependency.` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▶ Play
+Four bases from one row reduction.
+Last scene: dimensions r, n − r, r, m − r.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+      ],
+    },
+    'the-scenes-in-order': {
+      title: '3 × 3, rank 2, scene by scene',
+      script: [
+        { say: `TAP Next →
+R = rref(A). Pivots in columns 1, 3.
+r = 2. Column 2 free.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Column space: pivot columns of A.
+c₁ = (1, 2, 3), c₂ = (1, 3, 4). Column 2 = 2·c₁.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Next →
+Row space: non-zero rows of R.
+r₁ = (1, 2, 0), r₂ = (0, 0, 1).` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Null space: n₁ = (2, −1, 0).
+A n₁ = 0. Dimension 3 − 2 = 1.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Left null space: l₁ = (1, 1, −1).
+Row 1 + row 2 − row 3 = 0.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'choosing-a-matrix': {
+      title: 'Presets, four dimensions each',
+      script: [
+        { say: `SELECT Fast → TAP Rank one → ▶ Play
+r = 1: dimensions 1, 2, 1, 1.
+Null space: a plane in R³.` },
+        { set: 'select', value: 700 },
+        { click: { button: 'Rank one', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Wide 2×3 → ▶ Play
+r = 2: dimensions 2, 1, 2, 0.
+Left null space {0}: Ax = b solvable for every b.` },
+        { click: { button: 'Wide 2×3', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Tall 3×2 → ▶ Play
+r = 2: dimensions 2, 0, 2, 1.
+Null space {0}: at most one solution.` },
+        { click: { button: 'Tall 3×2', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Invertible → ▶ Play
+r = 2: dimensions 2, 0, 2, 0.
+Both null spaces {0}.` },
+        { click: { button: 'Invertible', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Zero → ▶ Play
+r = 0: dimensions 0, 3, 0, 2.
+Null spaces are everything.` },
+        { click: { button: 'Zero', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-four-fundamental-subspaces'),
       sectionsContent,
       stateUnits,
@@ -499,7 +617,22 @@ The dimension formulas still hold with zeros: $r + 0 = n$ says full column rank,
   }
 }
 
-export default function SubspacesVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function SubspacesVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <SubspacesWrapper defaultPreset='rank2' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -521,8 +654,8 @@ export default function SubspacesVisualizer({seoData, sectionsContent, stateUnit
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-scenes-in-order'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-scenes-in-order')),
     stateRow('obj11', 'row-reduction-first', 'rref'),
     stateRow('obj12', 'the-column-space', 'colspace'),
     stateRow('obj13', 'the-row-space', 'rowspace'),
@@ -531,7 +664,7 @@ export default function SubspacesVisualizer({seoData, sectionsContent, stateUnit
     stateRow('obj16', 'the-two-orthogonalities', 'orth'),
     stateRow('obj17', 'when-a-null-space-is-trivial', 'trivial'),
     plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-matrix'),
+    withDemo(plain('obj4', 'choosing-a-matrix')),
     plain('obj5', 'what-the-four-subspaces-are'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -592,6 +725,10 @@ export default function SubspacesVisualizer({seoData, sectionsContent, stateUnit
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Four Fundamental Subspaces</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <SubspacesWrapper

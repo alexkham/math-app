@@ -72507,7 +72507,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "NEW TOOL - m, n in 2..4; phases intro/rref/colspace/rowspace/nullspace/leftnull/orth/done; exports nullOf() for non-square null spaces.",
-        "note": ""
+        "note": "",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in getting-started, the-scenes-in-order, choosing-a-matrix; the five presets walk the dimension counts from 1,2,1,1 to 0,3,0,2; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
