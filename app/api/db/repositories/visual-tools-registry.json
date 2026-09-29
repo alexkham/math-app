@@ -60213,7 +60213,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "NEW TOOL - numeric elimination engine; scenes carry a `phase` field (intro/pivot/swap/eliminate/skip/done) and explanations key on it.",
-        "note": "Inputs are text with a drafts state so '-' and empty do not snap to 0. The same engine pattern is reused by lu-decomposition and linear-system-solutions."
+        "note": "Inputs are text with a drafts state so '-' and empty do not snap to 0. The same engine pattern is reused by lu-decomposition and linear-system-solutions.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in getting-started, how-the-reduction-runs, choosing-a-matrix; one typed entry moves Rank 1 to rank 2; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {

@@ -8,6 +8,9 @@ import RankWrapper from '../../../../app/components/linear-algebra copy/matrix/R
 import rankDiagrams from '../../../../app/components/linear-algebra copy/matrix/rankDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -448,8 +451,123 @@ Whether the matrix has full rank is now a glance: full rank means the pivot coun
   }
 
 
+  const instructions = [
+    'The **Preset** pills load six matrices: rank 2 of 3, full rank, rank 1, wide $2 \\times 4$, tall $4 \\times 2$, and the zero matrix. [Learn more about choosing a matrix](!#choosing-a-matrix)',
+    'The **Size** steppers (**▲** / **▼**) set rows and columns from $1$ to $5$ independently; resizing keeps the existing entries and pads with zeros. [Learn more about getting started](!#getting-started)',
+    'Type into any entry to change $A$, or press **Shuffle** for a random matrix of small integers; the run is rebuilt at once. [Learn more about editing entries](!#getting-started)',
+    '**▶ Play** runs the reduction, **Next →** and **← Back** step one row operation at a time, **Reset** returns to the opening scene, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'Columns are processed left to right: find a pivot, swap it up if needed and clear below it, or skip a column with no pivot. [Learn more about how the reduction runs](!#how-the-reduction-runs)',
+    'Each scene shows the original $A$ beside the reduced $R$; the last scene marks every pivot and puts the rank in its own slot, and the **Row operations** log lists every step. [Learn more about reading a scene](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real RankWrapper
+     (opens on Rank 2 of 3). Cells: input[aria-label="entry i,j"]; steppers:
+     ▲/▼ nth 0 = rows, nth 1 = columns; the only <select> is the speed menu. */
+  const demos = {
+    'getting-started': {
+      title: 'Entries, size, shuffle',
+      script: [
+        { say: `TYPE a₂₃ = 7
+Row 2 = (2, 4, 7).
+No longer 2 × row 1.` },
+        { set: 'input[aria-label="entry 2,3"]', value: 7 },
+        { wait: 2600 },
+        { say: `SELECT Fast → TAP ▶ Play
+3 pivots. rank A = 3.
+Full rank.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6000 },
+        { say: `TAP ▼ columns → ▶ Play
+3 × 2: column 3 dropped.
+rank A = 2, the most a 3 × 2 can have.` },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5400 },
+        { say: `TAP Shuffle
+Random small integers.
+Half the time one row is a multiple of another.` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▶ Play
+Pivots counted column by column.
+Rank lands in its own slot.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5400 },
+      ],
+    },
+    'how-the-reduction-runs': {
+      title: 'Rank 2 of 3, one operation per step',
+      script: [
+        { say: `TAP Next →
+Pivot 1: 1 at row 1, column 1.
+Pivot count 1.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+R2 ← R2 − 2·R1.
+Row 2 → all zeros: it was 2 × row 1.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+R3 ← R3 − 1·R1.
+Row 3 → (0, −2, −2).` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+Swap R2 ↔ R3.
+−2 comes up to row 2.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ▶ Play
+Pivot 2 = −2. Column 3: no pivot, skipped.
+rank A = 2. Column 3 free.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5800 },
+      ],
+    },
+    'choosing-a-matrix': {
+      title: 'Presets and one edit',
+      script: [
+        { say: `SELECT Fast → TAP Full rank → ▶ Play
+Three pivots in a 3 × 3.
+rank A = 3. No free columns.` },
+        { set: 'select', value: 700 },
+        { click: { button: 'Full rank', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6000 },
+        { say: `TAP Rank 1 → ▶ Play
+Every row a multiple of row 1.
+One pivot, columns 2, 3 free. rank A = 1.` },
+        { click: { button: 'Rank 1', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5400 },
+        { say: `TYPE a₃₃ = 5 → ▶ Play
+One entry changed.
+rank A = 2. Pivot columns 1, 3.` },
+        { set: 'input[aria-label="entry 3,3"]', value: 5 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6000 },
+        { say: `TAP Wide 2×4 → ▶ Play
+Capped by 2 rows.
+rank A = 2. Columns 2, 4 free.` },
+        { click: { button: 'Wide 2×4', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4800 },
+        { say: `TAP Zero matrix → ▶ Play
+No pivot anywhere.
+rank A = 0. Every column free.` },
+        { click: { button: 'Zero matrix', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4200 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-rank'),
       sectionsContent,
       stateUnits,
@@ -472,7 +590,22 @@ Whether the matrix has full rank is now a glance: full rank means the pivot coun
   }
 }
 
-export default function RankVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function RankVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <RankWrapper defaultPreset='deficient' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -494,15 +627,15 @@ export default function RankVisualizer({seoData, sectionsContent, stateUnits, ex
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'how-the-reduction-runs'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'how-the-reduction-runs')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'finding-a-pivot', 'pivot'),
     stateRow('obj13', 'eliminating-below', 'eliminate'),
     stateRow('obj14', 'swapping-and-skipping', 'skip'),
     stateRow('obj15', 'the-completed-reduction', 'done'),
     plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-matrix'),
+    withDemo(plain('obj4', 'choosing-a-matrix')),
     plain('obj5', 'what-rank-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -563,6 +696,10 @@ export default function RankVisualizer({seoData, sectionsContent, stateUnits, ex
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Matrix Rank</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <RankWrapper
