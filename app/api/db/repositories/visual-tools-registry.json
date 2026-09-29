@@ -58737,7 +58737,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "NEW TOOL - buildScenes(m, n, method) with methods cell/row/column; explanations keyed by phase.",
-        "note": ""
+        "note": "",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in getting-started, the-three-methods, the-scene-player, choosing-the-two-lengths; all three methods and both length steppers driven; tool does not write the URL; headless step check 18/18."
       },
       "relatedTools": [
         {
