@@ -34245,7 +34245,9 @@
         "wiring": "C - TraceWrapper had no explanations prop; added additively as `explanations = null`, appended to the matching scene's caption. buildScenes was additionally exported (unchanged) so the diagrams module builds the very same scenes.",
         "note": "States are scene PHASES, not scene indices: pose (0), diagonal reveal (1), sweep (frozen at k=1, the first step showing counted/current/pending together) and complete (last). Scene count depends on n; defaultN = 4 gives 7 scenes.",
         "sharedHelper": "app/components/linear-algebra copy/matrix/frozenMatrixSvg.js - SVG port of MatrixCore's HTML/CSS MatrixRenderer (same auto cell sizing 58/51/44, 3px gaps, DEFAULT_HIGHLIGHTS palette incl. dashed targetPending and 1.06 pairA scale, 8px square brackets, italic i,j subscripts). Reusable by the other 7 MatrixCore tools. Does NOT reproduce overlays (arrows/braces) or hover - freeze states whose meaning the cells alone can carry.",
-        "defectFixed": "obj0 Key Terms was defined but rendered nowhere: its genericSections entry AND the KeyTermsCard were both commented out, so the content was invisible. Restored as the key-terms section. Same class as the triangle-explorer .slice(1) bug - worth checking on every remaining linear-algebra page."
+        "defectFixed": "obj0 Key Terms was defined but rendered nowhere: its genericSections entry AND the KeyTermsCard were both commented out, so the content was invisible. Restored as the key-terms section. Same class as the triangle-explorer .slice(1) bug - worth checking on every remaining linear-algebra page.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in getting-started, the-scene-player, choosing-the-dimension; runs 2×2 to 10×10; tool does not write the URL; headless step check 14/14 (the tool's pre-existing style-tag hydration errors, 17 per load, are unchanged)."
       },
       "relatedTools": [
         {
