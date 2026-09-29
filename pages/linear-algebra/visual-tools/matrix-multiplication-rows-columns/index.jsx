@@ -14,16 +14,58 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 import '@/pages/pages.css'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export default function MatrixMultiplicationRowsColumns({
-  relatedTools, instructions,
+  relatedTools, instructions, demos,
   explanations,
   units,
   sectionsContent,
   schemas,
   seoData,
 }) {
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <>
+        <style>{'figure[aria-label^="Demo:"] .stepline { position: static !important; box-shadow: none !important; }'}</style>
+        <MatrixProductWrapper
+          defaultKey='both'
+          ariaLabel='Reading'
+          tabs={[
+            {
+              key: 'both',
+              label: 'By both rows and columns',
+              component: MatrixProductVisualizer,
+              props: {reading: 'both', layout: 'compact', explanations },
+            },
+            {
+              key: 'columns',
+              label: 'By columns of B',
+              component: MatrixProductVisualizer,
+              props: { reading: 'columns', layout: 'compact', explanations },
+            },
+            {
+              key: 'rows',
+              label: 'By rows of A',
+              component: MatrixProductVisualizer,
+              props: { reading: 'rows', layout: 'compact', explanations },
+            },
+          ]}
+        />
+      </>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
   const plain = (obj, id) => ({
     id,
     title: sectionsContent[obj].title,
@@ -54,9 +96,9 @@ export default function MatrixMultiplicationRowsColumns({
      material they belong to. */
   const genericSections = [
     plain('obj1', 'what-this-page-is-for'),
-    plain('obj2', 'the-three-tabs'),
+    withDemo(plain('obj2', 'the-three-tabs')),
     withUnit('obj10', 'the-empty-bracket', 'emptyPlane'),
-    plain('obj3', 'the-colour-swap'),
+    withDemo(plain('obj3', 'the-colour-swap')),
     withUnit('obj4', 'one-row-one-column-one-entry', 'entry'),
     withUnit('obj11', 'building-a-column-of-ab', 'columnFirstPiece'),
     withUnit('obj12', 'the-finished-product-by-columns', 'columnsComplete'),
@@ -64,8 +106,8 @@ export default function MatrixMultiplicationRowsColumns({
     withUnit('obj14', 'the-finished-product-by-rows', 'rowsComplete'),
     plain('obj5', 'why-two-by-two'),
     plain('obj6', 'neither-reading-is-half'),
-    plain('obj15', 'running-the-tool'),
-    plain('obj16', 'steps-and-the-step-counter'),
+    withDemo(plain('obj15', 'running-the-tool')),
+    withDemo(plain('obj16', 'steps-and-the-step-counter')),
     plain('obj17', 'generating-new-numbers'),
     plain('obj7', 'the-invariant-in-four-products'),
     plain('obj8', 'which-reading-answers-which-question'),
@@ -201,7 +243,7 @@ export async function getStaticProps() {
     'Switching tabs restarts at step $0$, because a step number means a different thing in each reading. [Why the step counts differ](!#steps-and-the-step-counter)',
     '**Run** plays from the current step and becomes **Pause**. **Step** and **Back** move one step at a time. [More about the controls](!#running-the-tool)',
     'The **Steps** pips and the counter show the position. The number of steps changes with the tab, because the readings take different routes to the same product. [More about the step counter](!#steps-and-the-step-counter)',
-    '**Reset** returns to step $0$ with the numbers unchanged, which is [the empty bracket](!#the-empty-bracket).',
+    '**Reset** returns to step $0$ with the numbers unchanged, which is the empty bracket. [Learn more about Reset](!#running-the-tool)',
     '**Generate random numbers** rolls a fresh $A$ and $B$. No slice of $AB$ is allowed to land on the origin, so every column and every row of the product stays drawable. [What the generator enforces](!#generating-new-numbers)',
     'Colour marks the **role in the current reading**, never the letter. In the slice tabs, blue is whatever is supplying directions and amber whatever is supplying amounts; the two swap between the columns tab and the rows tab, and that swap is the lesson. In the both tab, blue is the row of $A$ and amber the column of $B$ in play — the two operands of one dot product. [More about the colour swap](!#the-colour-swap)',
   ]
@@ -627,8 +669,158 @@ Both are natural next steps once the two readings are no longer competing for th
     },
   }
 
+  /* Animated demos (ToolDemoPlayer v3) against the real MatrixProductWrapper
+     (opens on By both rows and columns; A = [2 -1; 1 2], B = [2 1; 1 3],
+     AB = [3 -1; 4 7]; 4 steps in the both tab, 6 in each slice tab).
+     The tool's Run advances every 1800 ms. */
+  const demos = {
+    'the-three-tabs': {
+      title: 'One product, three routes',
+      script: [
+        { say: `TAP Step
+Row 1 of A · column 1 of B.
+2·2 + (−1)·1 = 3 → cell (1, 1).` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Step
+Row 1 · column 2: 2·1 + (−1)·3 = −1.
+Negative: projection against the column.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 3000 },
+        { say: `TAP By columns of B → Step ×2
+2 × column 1 of A + 1 × column 2.
+Column 1 of AB = (3, 4).` },
+        { click: { button: 'By columns of B', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+        { say: `TAP By rows of A → Step ×2
+2 × row 1 of B + (−1) × row 2.
+Row 1 of AB = (3, −1).` },
+        { click: { button: 'By rows of A', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Run
+Rows route to the end.
+AB = [3 −1; 4 7]: same as the definition.` },
+        { click: { button: 'Run', exact: true } },
+        { wait: 9000 },
+      ],
+    },
+    'the-colour-swap': {
+      title: 'Blue and amber trade places',
+      script: [
+        { say: `TAP By columns of B
+Blue on A: its columns are the pieces.
+Amber on B: the weights.` },
+        { click: { button: 'By columns of B', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Step
+Blue column 1 of A,
+stretched by amber 2 from B.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2600 },
+        { say: `TAP By rows of A
+Colours swap.
+Blue on B: rows are the pieces. Amber on A.` },
+        { click: { button: 'By rows of A', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Step
+Blue row 1 of B,
+stretched by amber 2 from A.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2600 },
+        { say: `TAP By both rows and columns → Step
+Blue: row 1 of A. Amber: column 1 of B.
+Two operands of one dot product: 3.` },
+        { click: { button: 'By both rows and columns', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+    'running-the-tool': {
+      title: 'Step, Back, Run, Reset, new numbers',
+      script: [
+        { say: `TAP Step ×2
+One entry per tap.
+(AB)₁₁ = 3, (AB)₁₂ = −1.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Back
+One step back.
+Only (AB)₁₁ = 3 left.` },
+        { click: { button: 'Back', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Run → Pause
+Run plays forward, one step per 1.8 s.
+Pause holds the current step.` },
+        { click: { button: 'Run', exact: true } },
+        { wait: 3000 },
+        { click: { button: 'Pause', exact: true } },
+        { wait: 1800 },
+        { say: `TAP Reset
+Step 0: the empty bracket.
+Same A and B.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Generate random numbers
+Fresh A and B. Step 0.
+No zero entry. No zero row or column of AB.` },
+        { click: { button: 'Generate random numbers', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'steps-and-the-step-counter': {
+      title: 'Four steps against six',
+      script: [
+        { say: `TAP Step
+Step 1 / 4.
+One step = one entry of AB.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Run
+Runs to 4 / 4.
+Four entries, four steps.` },
+        { click: { button: 'Run', exact: true } },
+        { wait: 6500 },
+        { say: `TAP By columns of B
+Counter back to 0 / 6.
+A tab switch never carries the position.` },
+        { click: { button: 'By columns of B', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ×4
+Two pieces per column.
+4 / 6: AB complete, [3 −1; 4 7].` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Step ×2
+5: the general statement. 6: the finished product.
+Same eight multiplications, grouped differently.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+  }
+
   return {
     props: {
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-multiplication-rows-columns'),
       keyWords,
       instructions,
