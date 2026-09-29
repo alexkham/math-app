@@ -58074,7 +58074,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "NEW TOOL - explanations keyed intro/pair/dot/normsq/coeff/scale/remainder/done; scenarios 'projection' and 'decomposition'.",
-        "note": "NAME COLLISION: this module is matrix/projectionDiagrams.js; the 2D projection tool has r2-visualizers/projection/projectionDiagrams.js. Different directories, same basename."
+        "note": "NAME COLLISION: this module is matrix/projectionDiagrams.js; the 2D projection tool has r2-visualizers/projection/projectionDiagrams.js. Different directories, same basename.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in getting-started, the-six-phases, choosing-vector-length; both Scenario pills, all six phases and lengths 1–5 covered; tool does not write the URL; headless step check 14/14."
       },
       "relatedTools": [
         {

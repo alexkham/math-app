@@ -8,6 +8,9 @@ import ProjectionWrapper from '../../../../app/components/linear-algebra copy/ma
 import projectionDiagrams from '../../../../app/components/linear-algebra copy/matrix/projectionDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -442,8 +445,131 @@ Read across the phases and the orthogonal decomposition assembles itself: $\\mat
   }
 
 
+  const instructions = [
+    'The **Scenario** pills choose **Projection only**, which stops at the projection, or **Projection and remainder**, which continues to $\\mathbf{u} - \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u}$; switching returns the player to its first scene. [Learn more about getting started](!#getting-started)',
+    'Hover the **?** icon next to **Scenario** for what the projection is and why the remainder is perpendicular to $\\mathbf{v}$. [Learn more about getting started](!#getting-started)',
+    'The **Vector length** stepper (**▲** / **▼**) sets the length shared by $\\mathbf{u}$ and $\\mathbf{v}$, from $1$ to $5$. [Learn more about choosing the length](!#choosing-vector-length)',
+    '**▶ Play** runs every phase, **Next →** and **← Back** move one scene, **Reset** returns to the opening scene, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'The run walks six phases: pair, dot product, squared length, coefficient $c$, scale $\\mathbf{v}$ by $c$, and subtract to get the remainder. [Learn more about the six phases](!#the-six-phases)',
+    'Blue and grey mark the two inputs of the current scene and green the slot being filled, with arrows from the inputs into it. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Step explanations** log lists every scene so far with its phase and formula, the current one highlighted. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real ProjectionWrapper
+     (opens on Projection and remainder, length 3, Step 1 / 14, 1.3 s per scene). */
+  const demos = {
+    'getting-started': {
+      title: 'Scenario, play, speed',
+      script: [
+        { say: `TAP Projection only
+Step 1 / 11.
+Run stops at projᵥu. No remainder.` },
+        { click: { button: 'Projection only' } },
+        { wait: 2400 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+0.4 s per scene.
+Pair, u·v, ‖v‖², c, scale. Step 11 / 11.` },
+        { set: 'select', value: 400 },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5000 },
+        { say: `TAP Projection and remainder
+Step 1 / 14.
+Three more scenes: u − proj.` },
+        { click: { button: 'Projection and remainder' } },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+All six phases.
+Done: u = proj + remainder.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6400 },
+        { say: `TAP Reset
+Step 1 / 14. Every slot empty again.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-six-phases': {
+      title: 'Pair, dot, square, divide, scale, subtract',
+      script: [
+        { say: `TAP Next → × 3
+Phase 1: u₁v₁, u₂v₂, u₃v₃ paired.
+Running sum grows. Step 4 / 14.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+Phase 2: u · v = u₁v₁ + u₂v₂ + u₃v₃.
+All of u blue, all of v grey. Slot green.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Next → Next →
+Phase 3: ‖v‖² = v · v.
+Phase 4: c = (u · v) / ‖v‖².` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 1300 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Next → × 3
+Phase 5: proj = c·v₁, c·v₂, c·v₃.
+One common factor c. Step 10 / 14.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▶ Play
+Phase 6: u₁ − c·v₁, u₂ − c·v₂, u₃ − c·v₃.
+Done at Step 14 / 14.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6400 },
+      ],
+    },
+    'choosing-vector-length': {
+      title: 'Length 1 to 5',
+      script: [
+        { say: `TAP ▼ ▼
+Length 1. Step 1 / 8.
+One pair, one scaling, one subtraction.` },
+        { click: { button: '▼', exact: true } },
+        { wait: 400 },
+        { click: { button: '▼', exact: true } },
+        { wait: 2400 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+0.4 s per scene.
+Same six phases. Step 8 / 8.` },
+        { set: 'select', value: 400 },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3800 },
+        { say: `TAP ▲ × 4
+Length 5, the maximum. ▲ greyed.
+Step 1 / 20.` },
+        { click: { button: '▲', exact: true } },
+        { wait: 350 },
+        { click: { button: '▲', exact: true } },
+        { wait: 350 },
+        { click: { button: '▲', exact: true } },
+        { wait: 350 },
+        { click: { button: '▲', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+5 pairs, 5 scalings, 5 subtractions.
+Still one u · v, one ‖v‖², one c.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 8800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-vector-projection'),
       sectionsContent,
       stateUnits,
@@ -466,7 +592,22 @@ Read across the phases and the orthogonal decomposition assembles itself: $\\mat
   }
 }
 
-export default function ProjectionVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function ProjectionVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ProjectionWrapper mode='both' defaultScenario='decomposition' defaultN={3} explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -488,15 +629,15 @@ export default function ProjectionVisualizer({seoData, sectionsContent, stateUni
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-six-phases'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-six-phases')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'phase-1-pairing', 'pair'),
     stateRow('obj13', 'phase-4-the-coefficient', 'coeff'),
     stateRow('obj14', 'phase-5-scaling', 'scale'),
     stateRow('obj15', 'phase-6-the-remainder', 'remainder'),
     plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-vector-length'),
+    withDemo(plain('obj4', 'choosing-vector-length')),
     plain('obj5', 'what-the-projection-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -557,6 +698,10 @@ export default function ProjectionVisualizer({seoData, sectionsContent, stateUni
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Vector Projection</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <ProjectionWrapper
