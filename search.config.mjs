@@ -1,4 +1,4 @@
-/**
+k/**
  * Search index config for learnmathclass.com (math-app).
  *
  * Read by the shared indexer in /var/www/search-service/indexer/run.mjs,
