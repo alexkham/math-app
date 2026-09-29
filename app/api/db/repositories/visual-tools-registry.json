@@ -61600,7 +61600,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "NEW TOOL - layout A = Q · R throughout; phases intro/start/coef/subtract/norm/done.",
-        "note": ""
+        "note": "",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 5 instructions each ending in an anchor link to an existing usage section (5 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in getting-started, the-scene-player, choosing-the-shape; symbolic tool, demos drive the shape steppers and scene controls; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
