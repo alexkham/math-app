@@ -38131,7 +38131,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - eslint parse, line1-static-check.py, and greps confirming the prop reached both getStaticProps and the component tag.",
         "wiring": "C - reuses the phase-keyed hook added to LinearCombinationWrapper for the matrix page; NO further component change needed.",
-        "note": "SHARED COMPONENT with linear-algebra-matrix-linear-combination. Scenes from buildVectorScenes(4): 1 intro + 3 sweeps of 4 + 1 done = 14; each phase frozen at its 3rd step. CAUTION: this page carries a FULL COMMENTED COPY of the matrix page in its first ~600 lines, so `export default function LinearCombinationVisualizer(` appears TWICE - anchor edits on a newline immediately followed by `export`, or they hit the dead copy."
+        "note": "SHARED COMPONENT with linear-algebra-matrix-linear-combination. Scenes from buildVectorScenes(4): 1 intro + 3 sweeps of 4 + 1 done = 14; each phase frozen at its 3rd step. CAUTION: this page carries a FULL COMMENTED COPY of the matrix page in its first ~600 lines, so `export default function LinearCombinationVisualizer(` appears TWICE - anchor edits on a newline immediately followed by `export`, or they hit the dead copy.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in getting-started, the-three-phases, choosing-vector-length; phases walked at length 2, 3n+2 scene count shown at length 5; tool does not write the URL; headless step check 14/14."
       },
       "relatedTools": [
         {
