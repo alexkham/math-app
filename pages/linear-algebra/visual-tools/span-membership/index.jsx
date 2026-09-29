@@ -8,6 +8,9 @@ import SpanMembershipWrapper from '../../../../app/components/linear-algebra cop
 import spanMembershipDiagrams from '../../../../app/components/linear-algebra copy/matrix/spanMembershipDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -431,8 +434,119 @@ For $\\mathbf{w} = (2, 3, 1)$ the tool reports $2\\mathbf{v}_1 + \\mathbf{v}_2$ 
   }
 
 
+  const instructions = [
+    'The **Preset** pills load seven problems: in a plane, off the plane, on a line, a dependent set, a basis of $\\mathbb{R}^3$, a plane in $\\mathbb{R}^4$, and $\\mathbf{w} = \\mathbf{0}$. [Learn more about choosing a problem](!#choosing-a-problem)',
+    'The **space** stepper (**▲** / **▼**) sets $\\mathbb{R}^2$ to $\\mathbb{R}^4$ and the **vectors** stepper one to four spanning vectors; **Shuffle** gives random vectors with $\\mathbf{w}$ usually in the span. [Learn more about getting started](!#getting-started)',
+    'Type into any entry of the vectors or of the amber column $\\mathbf{w}$; the run is rebuilt at once. [Learn more about editing the vectors](!#getting-started)',
+    '**▶ Play** runs the procedure, **Next →** and **← Back** step one scene at a time, **Reset** returns to the start, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'The scenes run in a fixed order: setup, rank of $V$, the membership test on $[V \\mid \\mathbf{w}]$, then the coordinates, or a stop when $\\mathbf{w}$ is not in the span. [Learn more about the scenes in order](!#the-scenes-in-order)',
+    'Each spanning vector keeps its own colour, $\\mathbf{w}$ stays amber, and a pivot in the last column is muted as the mark of inconsistency; the **Step explanations** log keeps every stage. [Learn more about reading a scene](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real SpanMembershipWrapper
+     (opens on In a plane). Cells: input[aria-label="v₁ entry i"], ...,
+     input[aria-label="w entry i"]; steppers ▲/▼ nth 0 = space, nth 1 =
+     vectors; the only <select> is the speed menu. */
+  const demos = {
+    'getting-started': {
+      title: 'Entries, vectors, shuffle',
+      script: [
+        { say: `TYPE w₃ = 4
+w = (2, 3, 4).
+Plane x + y = z: 2 + 3 ≠ 4.` },
+        { set: 'input[aria-label="w entry 3"]', value: 4 },
+        { wait: 2600 },
+        { say: `SELECT Fast → TAP ▶ Play
+Pivot in the last column.
+Rank 3: w adds a new direction. Not in the span.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4200 },
+        { say: `TAP ▲ vectors → ▶ Play
+v₃ = (0, 0, 1) added. Span = all of R³.
+w = 2v₁ + 3v₂ − v₃: c = (2, 3, −1).` },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4800 },
+        { say: `TAP Shuffle
+Random small-integer vectors.
+w usually built from them.` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▶ Play
+Size of the span, membership,
+then coordinates checked by V c.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4800 },
+      ],
+    },
+    'the-scenes-in-order': {
+      title: 'In a plane, scene by scene',
+      script: [
+        { say: `TAP Next →
+rref(V): rank 2. Span = a plane of R³.
+v₁, v₂ independent: coordinates will be unique.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Next →
+[V | w] reduced. No pivot in the last column.
+Consistent: w is in the span.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+c = (2, 3): w = 2v₁ + 3v₂.
+Check: 2·(1, 0, 1) + 3·(0, 1, 1) = (2, 3, 5).` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Next →
+Summary: w ∈ span{v₁, v₂}.
+Coordinates (2, 3).` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'choosing-a-problem': {
+      title: 'Five presets',
+      script: [
+        { say: `SELECT Fast → TAP Off the plane → ▶ Play
+w = (1, 1, 1): 1 + 1 ≠ 1.
+Rank 3: w adds a new direction.` },
+        { set: 'select', value: 700 },
+        { click: { button: 'Off the plane', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4200 },
+        { say: `TAP On a line → ▶ Play
+One vector: the span is a line.
+w = 2v₁. Coordinates (2).` },
+        { click: { button: 'On a line', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4800 },
+        { say: `TAP Dependent set → ▶ Play
+v₃ = v₁ + v₂: still a plane.
+c = (2, 1, 0), plus any multiple of (−1, −1, 1).` },
+        { click: { button: 'Dependent set', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4800 },
+        { say: `TAP A basis of R³ → ▶ Play
+Rank 3: all of R³.
+Coordinates (−3, 4, 1), unique.` },
+        { click: { button: 'A basis of R³', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4800 },
+        { say: `TAP A plane in R⁴ → ▶ Play
+Two vectors in R⁴. Rank 2.
+w = 3v₁ − 2v₂. Coordinates (3, −2).` },
+        { click: { button: 'A plane in R⁴', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-span-membership'),
       sectionsContent,
       stateUnits,
@@ -455,7 +569,22 @@ For $\\mathbf{w} = (2, 3, 1)$ the tool reports $2\\mathbf{v}_1 + \\mathbf{v}_2$ 
   }
 }
 
-export default function SpanMembershipVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function SpanMembershipVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <SpanMembershipWrapper defaultPreset='plane' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -477,15 +606,15 @@ export default function SpanMembershipVisualizer({seoData, sectionsContent, stat
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-scenes-in-order'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-scenes-in-order')),
     stateRow('obj11', 'sizing-the-span', 'rank'),
     stateRow('obj12', 'the-membership-test', 'membership'),
     stateRow('obj13', 'reading-the-coordinates', 'coords'),
     stateRow('obj14', 'not-in-the-span', 'notin'),
     stateRow('obj15', 'a-dependent-spanning-set', 'dependent'),
     plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-problem'),
+    withDemo(plain('obj4', 'choosing-a-problem')),
     plain('obj5', 'what-span-and-membership-mean'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -546,6 +675,10 @@ export default function SpanMembershipVisualizer({seoData, sectionsContent, stat
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Span and Membership</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <SpanMembershipWrapper
