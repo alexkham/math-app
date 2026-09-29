@@ -35676,7 +35676,9 @@
         "verification": "STATIC ONLY - eslint parse and line1-static-check.py.",
         "wiring": "C - AdditionWrapper had no explanations prop; added additively as `explanations = null`. buildMatrixScenes and buildVectorScenes were also exported (unchanged).",
         "note": "SHARED COMPONENT: AdditionWrapper serves both matrix-addition (mode='matrices') and vector-addition (mode='vectors'). The explanations hook is deliberately generic - keyed by scene phase intro/step/done plus one 'subtract' key that applies whenever the operation toggle is on subtraction - so the vector page can reuse the same shape with its own text. Each page passes its own object, so there is no collision.",
-        "rendererWork": "frozenMatrixSvg gained React-element support: several wrappers build filled cells as JSX (a1,1 + b1,1 with real subscript spans) rather than strings. The element tree is now walked and re-emitted as tspans, honouring verticalAlign:'sub' and fontStyle:'normal'. Without this the cells rendered as [object Object]."
+        "rendererWork": "frozenMatrixSvg gained React-element support: several wrappers build filled cells as JSX (a1,1 + b1,1 with real subscript spans) rather than strings. The element tree is now walked and re-emitted as tspans, honouring verticalAlign:'sub' and fontStyle:'normal'. Without this the cells rendered as [object Object].",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in the-scene-player, addition-and-subtraction, choosing-dimensions; symbolic tool, callouts quote step counters and cell formulas; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
