@@ -37605,7 +37605,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - eslint parse, line1-static-check.py, and greps confirming the prop reached both getStaticProps and the component tag.",
         "wiring": "C - LinearCombinationWrapper had no explanations prop; added additively as `explanations = null`, keyed by animation PHASE (intro / scaleA / scaleB / add / done). The phase is derived from the scene index: the run is 1 intro + 3 sweeps of `cells` + 1 done, so cells = (len - 2) / 3 works for both scenarios. Both builders exported unchanged.",
-        "note": "Defaults 2x3 -> 6 cells -> 20 scenes. Each phase frozen at its 4th step. The 'done' explanation key is wired but has no section of its own; it points at the phase-3 section, since the completed state is that phase finishing."
+        "note": "Defaults 2x3 -> 6 cells -> 20 scenes. Each phase frozen at its 4th step. The 'done' explanation key is wired but has no section of its own; it points at the phase-3 section, since the completed state is that phase finishing.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in getting-started, the-three-phases, choosing-dimensions; phase demo walks scale A, scale B, add at 2×3 (20 scenes); tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
