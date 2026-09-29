@@ -27,6 +27,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import Head from 'next/head'
 import '@/pages/pages.css'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -488,8 +491,115 @@ The triangular case is the one to remember. It is why row reduction computes det
     }
   };
 
+  const instructions = [
+    'The **Matrix Size** dropdown sets the matrix from $2 \\times 2$ to $5 \\times 5$; a new matrix of the current type is generated at once. [Learn more about getting started](!#getting-started)',
+    'The **Matrix Type** dropdown picks one of nine types: Random, Identity, Zero, Scalar, Diagonal, Upper Triangular, Lower Triangular, Symmetric, Skew-symmetric. [Learn more about the nine types](!#the-nine-types-at-a-glance)',
+    'Amber cells mark the positions the type describes: the diagonal for identity, scalar and diagonal, the diagonal and one side for triangular. Random has no colour. [Learn more about free and forced entries](!#the-nine-types-at-a-glance)',
+    'For Symmetric and Skew-symmetric, each mirrored pair of cells shares a colour: equal values for symmetric, opposite values for skew-symmetric. [Learn more about mirrored pairs](!#symmetric-and-skew-symmetric)',
+    'The panel beside the matrix states the rule in words and in matrix form, lists the **Key Properties**, and links to a fuller reference. [Learn more about the explanation](!#getting-started)',
+    '**Clear** empties the display; choose another size or type to generate again. [Learn more about Clear](!#getting-started)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real MatrixGenerator
+     (opens on Random, 3x3). Entries are random draws 1-9: callouts name
+     patterns, never values. Selects: #size-select, #type-select. */
+  const demos = {
+    'getting-started': {
+      title: 'Size, type, Clear',
+      script: [
+        { at: 'bl', say: `SELECT Matrix Type → Identity
+3 × 3. Ones on the diagonal, amber.
+Zeros everywhere else.` },
+        { set: '#type-select', value: 'identity' },
+        { wait: 2600 },
+        { at: 'bl', say: `SELECT Matrix Size → 5x5
+Type kept, size changed.
+Five amber ones down the diagonal.` },
+        { set: '#size-select', value: '5' },
+        { wait: 2600 },
+        { at: 'bl', say: `SELECT Matrix Size → 2x2
+Same pattern, smallest size.
+Pattern fixed; size only counts the cells.` },
+        { set: '#size-select', value: '2' },
+        { wait: 2600 },
+        { at: 'bl', say: `TAP Clear
+Matrix and explanation gone.
+Display empty.` },
+        { click: { button: 'Clear', exact: true } },
+        { wait: 2200 },
+        { at: 'bl', say: `SELECT Matrix Type → Zero
+New pick → new matrix at once.
+All 0. Nothing amber: no position singled out.` },
+        { set: '#type-select', value: 'zero' },
+        { wait: 2800 },
+      ],
+    },
+    'the-nine-types-at-a-glance': {
+      title: 'Free and forced entries',
+      script: [
+        { at: 'bl', say: `SELECT Scalar
+One number repeated down the amber diagonal.
+Off the diagonal: 0.` },
+        { set: '#type-select', value: 'scalar' },
+        { wait: 2600 },
+        { at: 'bl', say: `SELECT Diagonal
+Same amber diagonal.
+Each diagonal entry now free on its own.` },
+        { set: '#type-select', value: 'diagonal' },
+        { wait: 2600 },
+        { at: 'bl', say: `SELECT Upper Triangular
+Diagonal and above: amber, free.
+Below the diagonal: 0.` },
+        { set: '#type-select', value: 'upperTriangular' },
+        { wait: 2600 },
+        { at: 'bl', say: `SELECT Lower Triangular
+Mirror image.
+Above the diagonal: 0.` },
+        { set: '#type-select', value: 'lowerTriangular' },
+        { wait: 2600 },
+        { at: 'bl', say: `SELECT Random
+No colour at all.
+All 9 entries free. Nothing forced.` },
+        { set: '#type-select', value: 'random' },
+        { wait: 2600 },
+      ],
+    },
+    'symmetric-and-skew-symmetric': {
+      title: 'Mirrored pairs',
+      script: [
+        { at: 'bl', say: `SELECT Symmetric
+Each mirrored pair: one colour, equal values.
+Diagonal yellow, free.` },
+        { set: '#type-select', value: 'symmetric' },
+        { wait: 2800 },
+        { at: 'bl', say: `SELECT Matrix Size → 5x5
+Still a mirror across the diagonal.
+aᵢⱼ = aⱼᵢ for every pair.` },
+        { set: '#size-select', value: '5' },
+        { wait: 2600 },
+        { at: 'bl', say: `SELECT Skew-symmetric
+Pairs now opposite: x with −x.
+Diagonal forced to 0, no colour.` },
+        { set: '#type-select', value: 'skewSymmetric' },
+        { wait: 2800 },
+        { at: 'bl', say: `SELECT Matrix Size → 3x3
+Three pairs, three free values.
+Symmetric had six at this size.` },
+        { set: '#size-select', value: '3' },
+        { wait: 2600 },
+        { at: 'bl', say: `SELECT Random
+Pairs unrelated. No colour.
+The mirror is gone.` },
+        { set: '#type-select', value: 'random' },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-types'),
       sectionsContent,
       stateUnits,
@@ -513,7 +623,22 @@ The triangular case is the one to remember. It is why row reduction computes det
 }
 
 
-export default function MatrixTypesPage({ seoData, sectionsContent, stateUnits, faqQuestions, schemas, matrixTypesExplanations, relatedTools }) {
+export default function MatrixTypesPage({ instructions, demos, seoData, sectionsContent, stateUnits, faqQuestions, schemas, matrixTypesExplanations, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <MatrixGenerator explanations={matrixTypesExplanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -539,12 +664,12 @@ export default function MatrixTypesPage({ seoData, sectionsContent, stateUnits, 
 
   const genericSections = [
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-nine-types-at-a-glance'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-nine-types-at-a-glance')),
     stateRow('obj3', 'identity-and-zero', 'identity', 'zero'),
     stateRow('obj4', 'scalar-and-diagonal', 'scalar', 'diagonal'),
     stateRow('obj5', 'triangular-matrices', 'upperTriangular', 'lowerTriangular'),
-    stateRow('obj6', 'symmetric-and-skew-symmetric', 'symmetric', 'skewSymmetric'),
+    withDemo(stateRow('obj6', 'symmetric-and-skew-symmetric', 'symmetric', 'skewSymmetric')),
     stateRow('obj7', 'random-matrices', 'random'),
     plain('obj8', 'how-the-types-relate'),
     plain('obj9', 'determinants-and-eigenvalues-by-type'),
@@ -604,6 +729,10 @@ export default function MatrixTypesPage({ seoData, sectionsContent, stateUnits, 
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Square Matrix Types Generator</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <div style={{transform:'scale(0.95)'}}>
         <MatrixGenerator explanations={matrixTypesExplanations}/>
