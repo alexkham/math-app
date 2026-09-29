@@ -22843,10 +22843,6 @@
       "name": "Interactive Triangle Explorer",
       "section": "trigonometry",
       "pagePath": "pages/trigonometry/visual-tools/triangle-explorer/index.jsx",
-      "line1": {
-        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
-        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in choosing-a-scenario, dragging-vertices, locking-angles, reading-the-stats-bar; vertex drags via pointer events on the grab handles; tool does not write the URL; headless step check 20/20. The scene refits to the vertices during a drag, so a step jump (instant replay) lands the dragged vertex less far than live playback; callouts hold in both."
-      },
       "relatedTerms": [
         {
           "term": "corner",
@@ -23167,7 +23163,9 @@
         "sections": 24,
         "anchors": 83,
         "orphans": 0,
-        "notes": "Third of the four trigonometry pages missed by the 2026-07-31 batch; edits completed 2026-08-23 but left UNVERIFIED and unregistered because a .next/classifier outage blocked rendered checks in that session and the next. VERIFIED 2026-08-28 against the prerendered production DOM: 12 unit frames, 389 KaTeX spans, 31 SVGs, no error overlay. Verification found and fixed ONE REAL DEFECT: the page rendered <Sections sections={genericSections.slice(1)}/> while its KeyTermsCard was commented out, so the obj0 Key Terms block rendered NOWHERE and the #key-terms anchor was orphaned (DOM showed 23 sections, not the 24 the handoff claimed). Removed the .slice(1) so key-terms renders as a section, matching every other Line 1 page (obj0 -> section id 'key-terms'). That single edit is the only change made on 2026-08-28; DOM re-check of this page is pending the next build, the other 23 sections and all 12 units were confirmed in this build. Wiring is the 12-SCENARIO explanations[sc.id] pattern (plain string through processContent between the scenario intro and sc.explain(panelState)), not the tab-strip pattern of the identity explorers. Diagrams port CoreTriangle (vbCalc viewBox pad 35, 30px grid, side colours a red / b amber / c blue, arcP/aLP, 3-degree threshold swapping arc for right-angle mark, SLbl offset 18) with vertices computed from the component's own expressions."
+        "notes": "Third of the four trigonometry pages missed by the 2026-07-31 batch; edits completed 2026-08-23 but left UNVERIFIED and unregistered because a .next/classifier outage blocked rendered checks in that session and the next. VERIFIED 2026-08-28 against the prerendered production DOM: 12 unit frames, 389 KaTeX spans, 31 SVGs, no error overlay. Verification found and fixed ONE REAL DEFECT: the page rendered <Sections sections={genericSections.slice(1)}/> while its KeyTermsCard was commented out, so the obj0 Key Terms block rendered NOWHERE and the #key-terms anchor was orphaned (DOM showed 23 sections, not the 24 the handoff claimed). Removed the .slice(1) so key-terms renders as a section, matching every other Line 1 page (obj0 -> section id 'key-terms'). That single edit is the only change made on 2026-08-28; DOM re-check of this page is pending the next build, the other 23 sections and all 12 units were confirmed in this build. Wiring is the 12-SCENARIO explanations[sc.id] pattern (plain string through processContent between the scenario intro and sc.explain(panelState)), not the tab-strip pattern of the identity explorers. Diagrams port CoreTriangle (vbCalc viewBox pad 35, 30px grid, side colours a red / b amber / c blue, arcP/aLP, 3-degree threshold swapping arc for right-angle mark, SLbl offset 18) with vertices computed from the component's own expressions.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in choosing-a-scenario, dragging-vertices, locking-angles, reading-the-stats-bar; vertex drags via pointer events on the grab handles; tool does not write the URL; headless step check 20/20. The scene refits to the vertices during a drag, so a step jump (instant replay) lands the dragged vertex less far than live playback; callouts hold in both."
       },
       "relatedTools": [
         {
@@ -54370,10 +54368,6 @@
       "section": "trigonometry",
       "pagePath": "pages/trigonometry/visual-tools/functions-signs/index.jsx",
       "component": "quadrant signs tool (see the page's imports)",
-      "line1": {
-        "howToMesh": "2026-09-29 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
-        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in selecting-a-quadrant, choosing-a-function, reading-the-explanation-panel; tool does not write the URL; headless step check 15/15."
-      },
       "relatedTerms": [
         {
           "term": "functions",
@@ -54859,7 +54853,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY. Wired in an earlier trigonometry pass, never recorded here; backfilled after re-verification. Same checker caveat as trigonometry-angle-types - genericSections is an explicit array literal, so line1-static-check.py false-negatives it. Checked against the literal's own id values: 39 sections, all unique, no numeric ids, 28 anchor targets and 0 orphans. A node run of the diagrams module renders 28 SVGs (4 quadrant overviews plus 24 quadrant-by-function combinations) with none malformed.",
         "wiring": "Pre-existing (earlier trigonometry pass). No changes made during the backfill.",
-        "note": "The 24 combos are the 6 trig functions across the 4 quadrants, plus one overview per quadrant. Unit keys are built in loops (stateUnits['q'+q] and stateUnits['q'+q+'-'+f]) rather than written out, so a grep for explicit keys finds none - all 28 referenced keys are produced by those two loops."
+        "note": "The 24 combos are the 6 trig functions across the 4 quadrants, plus one overview per quadrant. Unit keys are built in loops (stateUnits['q'+q] and stateUnits['q'+q+'-'+f]) rather than written out, so a grep for explicit keys finds none - all 28 referenced keys are produced by those two loops.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in selecting-a-quadrant, choosing-a-function, reading-the-explanation-panel; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
