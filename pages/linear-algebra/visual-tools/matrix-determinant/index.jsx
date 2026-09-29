@@ -27,6 +27,9 @@ import DeterminantWrapper from '../../../../app/components/linear-algebra copy/d
 import determinantDiagrams from '../../../../app/components/linear-algebra copy/determinants/determinantDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -552,8 +555,127 @@ The visualizer sizes every strategy card to the sizes it is valid for, which rul
   }
 
 
+  const instructions = [
+    'The **Scenario** tab holds the size stepper (**▲** / **▼**) for $A$ from $2 \\times 2$ to $5 \\times 5$; the second stepper is linked to it, because $A$ is square. [Learn more about choosing the size](!#choosing-the-size)',
+    'The **Strategy** tab holds four cards: diagonal product, Sarrus\'s rule, and cofactor expansion along a row or along a column; a card that does not fit the size is greyed out with a size badge. [Learn more about the four strategies](!#the-four-strategies)',
+    'The two cofactor cards carry a **pill row** that picks the row or column to expand along. [Learn more about the pill row](!#getting-started)',
+    '**▶ Play** animates the recipe, **Next →** and **← Back** step one scene at a time, **Reset** returns to the start, and the speed menu sets the pace. [Learn more about the scene player](!#getting-started)',
+    'Blue marks a term being collected or a pivot, grey a subtracted term or a struck-out row and column, and green brackets a minor $M_{i,j}$. [Learn more about reading the scene player](!#reading-the-scene-player)',
+    'The **Step explanations** log shows the formula growing one term at a time; click any entry to jump to that scene. [Learn more about the step log](!#reading-the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real DeterminantWrapper
+     (opens at 3 × 3 on Sarrus). Strategy cards are divs, targeted by label text;
+     the pill rows are buttons 1..n; the only <select> is the speed menu. */
+  const demos = {
+    'getting-started': {
+      title: 'Size, strategy, player',
+      script: [
+        { say: `TAP ▼
+Size 2 × 2.
+Strategy snaps to Diagonal product.` },
+        { click: { button: '▼', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ▶ Play
+Main diagonal, then anti-diagonal.
+det(A) = a₁,₁a₂,₂ − a₁,₂a₂,₁.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7000 },
+        { say: `TAP ▲ twice
+Size 4 × 4.
+Snaps to Cofactor, expand along a row.` },
+        { click: { button: '▲', exact: true } },
+        { wait: 700 },
+        { click: { button: '▲', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Strategy
+Four cards. Diagonal product: 2×2 only.
+Sarrus: 3×3 only. Both greyed out.` },
+        { click: { button: 'Strategy', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+Row 1 walked: 4 signed terms.
+Minors 3 × 3, left as det(M₁,ⱼ).` },
+        { set: 'select', value: 400 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6800 },
+      ],
+    },
+    'the-four-strategies': {
+      title: 'Same determinant, different recipes',
+      script: [
+        { say: `SELECT Fast → TAP ▶ Play
+Sarrus: 3 down-right diagonals added,
+3 up-right diagonals subtracted. Six products.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6600 },
+        { say: `TAP Strategy → Cofactor, expand along a row
+Run rebuilt: 12 scenes.
+Row 1, three signed terms.` },
+        { click: { button: 'Strategy', exact: true } },
+        { wait: 700 },
+        { click: { text: 'expand along a row' } },
+        { wait: 2600 },
+        { say: `TAP ▶ Play
+det(A) = a₁,₁·det(M₁,₁) − a₁,₂·det(M₁,₂)
++ a₁,₃·det(M₁,₃).` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 8600 },
+        { say: `TAP Cofactor, expand along a column → ▶ Play
+Column 1 walked instead.
+a₁,₁·det(M₁,₁) − a₂,₁·det(M₂,₁) + a₃,₁·det(M₃,₁).` },
+        { click: { text: 'expand along a column' } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 8600 },
+        { say: `TAP 3 → ▶ Play
+Expand along column 3.
+a₁,₃·det(M₁,₃) − a₂,₃·det(M₂,₃) + a₃,₃·det(M₃,₃).` },
+        { click: { button: '3', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 8600 },
+      ],
+    },
+    'reading-the-scene-player': {
+      title: 'Cofactor along row 2, scene by scene',
+      script: [
+        { say: `TAP Strategy → Cofactor row → 2
+Expand along row 2.
+Three signed terms from row 2.` },
+        { click: { button: 'Strategy', exact: true } },
+        { wait: 600 },
+        { click: { text: 'expand along a row' } },
+        { wait: 600 },
+        { click: { button: '2', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next →
+Sign pattern (−1)ⁱ⁺ʲ.
++ − + / − + − / + − +.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Cell (2, 1): pivot a₂,₁ stays.
+Row 2 and column 1 crossed out.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Minor M₂,₁ in green brackets.
+a₁,₂ a₁,₃ / a₃,₂ a₃,₃: original indices kept.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Term 1: −a₂,₁·det(M₂,₁).
+Minus: position (2, 1) in the checkerboard.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-determinant'),
       sectionsContent,
       stateUnits,
@@ -576,7 +698,22 @@ The visualizer sizes every strategy card to the sizes it is valid for, which rul
   }
 }
 
-export default function DeterminantVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function DeterminantVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <DeterminantWrapper title="" defaultSize={3} explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -598,14 +735,14 @@ export default function DeterminantVisualizer({seoData, sectionsContent, stateUn
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-four-strategies'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-four-strategies')),
     stateRow('obj3', 'diagonal-product', 'diagonal'),
     stateRow('obj4', 'sarrus-rule', 'sarrus'),
     stateRow('obj5', 'cofactor-along-a-row', 'cofactor-row'),
     stateRow('obj6', 'cofactor-along-a-column', 'cofactor-col'),
     stateRow('obj7', 'the-sign-pattern', 'sign-pattern'),
-    plain('obj8', 'reading-the-scene-player'),
+    withDemo(plain('obj8', 'reading-the-scene-player')),
     plain('obj9', 'choosing-the-size'),
     plain('obj10', 'what-the-determinant-is'),
     plain('obj11', 'key-properties'),
@@ -669,6 +806,10 @@ export default function DeterminantVisualizer({seoData, sectionsContent, stateUn
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Matrix Determinant</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <DeterminantWrapper
