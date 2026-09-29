@@ -8,6 +8,9 @@ import LeastSquaresWrapper from '../../../../app/components/linear-algebra copy/
 import leastSquaresDiagrams from '../../../../app/components/linear-algebra copy/matrix/leastSquaresDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -478,8 +481,124 @@ The practical fixes are to drop a redundant column, or to use the pseudoinverse,
   }
 
 
+  const instructions = [
+    'The **Preset** pills load seven problems: lines through 3 and 4 points, a parabola through 4 points, projection onto a line and onto a plane, $\\mathbf{b}$ in the column space, and dependent columns. [Learn more about choosing a problem](!#choosing-a-problem)',
+    'The **Size** steppers (**▲** / **▼**) set $2$ to $4$ equations and $1$ to $3$ unknowns; **Shuffle data** builds a polynomial design matrix with random data. [Learn more about getting started](!#getting-started)',
+    'Type into any entry of $A$ or of the amber column $\\mathbf{b}$; the run is rebuilt at once. [Learn more about editing the problem](!#getting-started)',
+    '**▶ Play** runs the procedure, **Next →** and **← Back** step one scene at a time, **Reset** returns to the start, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'The scenes run in a fixed order: consistency check, normal equations, solve for $\\hat{\\mathbf{x}}$, projection $\\mathbf{p}$, residual $\\mathbf{e}$, projection matrix $P$, and the fitted curve. [Learn more about the scenes in order](!#the-scenes-in-order)',
+    '$\\mathbf{b}$ stays amber, $\\hat{\\mathbf{x}}$ is the accent, and products that must come out zero, such as $A^T\\mathbf{e}$, are grey; the **Step explanations** log keeps every stage. [Learn more about reading a scene](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real LeastSquaresWrapper
+     (opens on Line through 3 points). Cells: input[aria-label="entry i,j"],
+     input[aria-label="b entry i"]; steppers ▲/▼ nth 0 = equations, nth 1 =
+     unknowns; the only <select> is the speed menu. */
+  const demos = {
+    'getting-started': {
+      title: 'Data, size, shuffle',
+      script: [
+        { say: `TYPE b₃ = −6
+Data (0, 6), (1, 0), (2, −6).
+Three points on one line.` },
+        { set: 'input[aria-label="b entry 3"]', value: -6 },
+        { wait: 2600 },
+        { say: `SELECT Fast → TAP ▶ Play
+b in the column space.
+Best fit b = 6 − 6t. e = (0, 0, 0).` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP ▲ equations → ▶ Play
+New row (1, 3 | 0): 4 equations.
+x̂ = (18/5, −12/5). |e| = 6.5727.` },
+        { click: { button: '▲', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Shuffle data
+Random data at t = −1, 0, 1, 2.
+Fitting a line b = C + Dt.` },
+        { click: { button: 'Shuffle data', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▶ Play
+Fitted line, fitted values, errors.
+Sum of squares in the last scene.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+      ],
+    },
+    'the-scenes-in-order': {
+      title: 'Line through 3 points, scene by scene',
+      script: [
+        { say: `TAP Next →
+[A | b] row reduced: pivot in the last column.
+No exact solution. rank A = 2.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Normal equations AᵀA x̂ = Aᵀb.
+AᵀA = (3, 3) / (3, 5). Aᵀb = (6, 0).` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Solve: x̂ = (5, −3).
+Fitted line b = 5 − 3t.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+p = A x̂ = (5, 2, −1).
+Closest point of the column space to b.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+e = b − p = (1, −2, 1).
+Aᵀe = (0, 0): perpendicular to every column.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'choosing-a-problem': {
+      title: 'Five presets',
+      script: [
+        { say: `SELECT Fast → TAP Line through 4 points → ▶ Play
+One more equation, same procedure.
+b = 17/10 + 11/10 t. Sum of squares 0.7.` },
+        { set: 'select', value: 700 },
+        { click: { button: 'Line through 4 points', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Projection onto a line → ▶ Play
+Single column a = (1, 2, 2). x̂ = 5/3.
+p = (5/3, 10/3, 10/3).` },
+        { click: { button: 'Projection onto a line', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Projection onto a plane → ▶ Play
+Columns e₁, e₂. p = (1, 2, 0).
+Residual e = (0, 0, 3): the third coordinate.` },
+        { click: { button: 'Projection onto a plane', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP b in the column space → ▶ Play
+Consistent system. x̂ = (1, 2).
+b = 1 + 2t. e = (0, 0, 0).` },
+        { click: { button: 'b in the column space', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Dependent columns → ▶ Play
+Column 2 = 2 × column 1.
+AᵀA singular: the run stops.` },
+        { click: { button: 'Dependent columns', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-least-squares'),
       sectionsContent,
       stateUnits,
@@ -502,7 +621,22 @@ The practical fixes are to drop a redundant column, or to use the pseudoinverse,
   }
 }
 
-export default function LeastSquaresVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function LeastSquaresVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <LeastSquaresWrapper defaultPreset='lineFit' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -524,8 +658,8 @@ export default function LeastSquaresVisualizer({seoData, sectionsContent, stateU
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-scenes-in-order'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-scenes-in-order')),
     stateRow('obj11', 'no-exact-solution', 'consistency'),
     stateRow('obj12', 'the-normal-equations', 'normal'),
     stateRow('obj13', 'solving-for-x-hat', 'solve'),
@@ -534,7 +668,7 @@ export default function LeastSquaresVisualizer({seoData, sectionsContent, stateU
     stateRow('obj16', 'projection-onto-a-line', 'line'),
     stateRow('obj17', 'when-the-columns-are-dependent', 'singular'),
     plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-problem'),
+    withDemo(plain('obj4', 'choosing-a-problem')),
     plain('obj5', 'what-least-squares-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -595,6 +729,10 @@ export default function LeastSquaresVisualizer({seoData, sectionsContent, stateU
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Least Squares and Projection</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <LeastSquaresWrapper
