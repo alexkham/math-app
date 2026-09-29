@@ -1729,6 +1729,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import qrDiagrams from '@/app/components/linear-algebra copy/matrix/qrDiagrams'
+
 import gramSchmidtDiagrams from '@/app/components/linear-algebra copy/matrix/gramSchmidtDiagrams'
 
 
@@ -2325,6 +2326,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     viagram: demoUnitFrame({
       svg: qrDiagrams.subtract,
@@ -2339,6 +2341,13 @@ const schemas = {
       text: 'What remained after the projections was a direction with an arbitrary length; dividing by that length makes it a unit vector and the next column of Q. Gram-Schmidt and QR are not two procedures but one, read as a geometric construction or as a factorisation. Step through the orthogonalisation on the',
       href: '/linear-algebra/visual-tools/gram-schmidt',
       linkText: 'Gram-Schmidt visualizer',
+    }),
+    qrDone: demoUnitFrame({
+      svg: qrDiagrams.done,
+      caption: 'A = QR, complete',
+      text: 'The finished factorization: Q holds orthonormal columns spanning the same space as the columns of A, and R is upper triangular, recording how much of each orthonormal direction every original column uses. Because each column of A only involves the directions found up to that point, R has zeros below its diagonal. Build it column by column on the',
+      href: '/linear-algebra/visual-tools/qr-decomposition',
+      linkText: 'QR decomposition visualizer',
     }),
   };
 
@@ -2382,6 +2391,8 @@ export default function QRDecompositionPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-qrDone'} dangerouslySetInnerHTML={{ __html: demoUnits.qrDone }} />,
+          `Q carries the geometry and R carries the bookkeeping; together they rebuild A exactly.`,
         ]
     },
     {

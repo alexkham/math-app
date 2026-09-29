@@ -913,6 +913,7 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import triangleDiagrams from '@/app/components/trigonometry/triangle/triangleDiagrams'
+import renderTriangleLabelV2 from '@/app/utils/illustrations/trigonometry/triangles/triangleLabel.v2'
 
 
 export async function getStaticProps(){
@@ -1499,6 +1500,24 @@ The Law of Sines and the Law of Cosines are those tools. Together, they provide 
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  // Authored figures. triangleLabel.v2 draws them; these are data only.
+  // Package doc: app/utils/illustrations/trigonometry/triangles/triangleLabel.v2.md
+  const tlAmbiguousCase = {
+    kind: 'swing', angleDeg: 35, bLength: 150, gap: 12,
+    svgTitle: 'The same SSA data can give two triangles, one, or none',
+    panels: [
+      { length: 110, title: 'h < a < b', note: 'two triangles', tone: 'negation' },
+      // exactly the height, computed - a rounded literal misses the tangency test
+      { length: 150 * Math.sin(35 * Math.PI / 180), title: 'a = h', note: 'exactly one', tone: 'result' },
+      { length: 60, title: 'a < h', note: 'none \u2014 it cannot reach', tone: 'muted' },
+    ],
+  };
+  const tlAreaSAS = {
+    kind: 'altitude', width: 500, height: 268, angleDeg: 52, bLength: 170, aLength: 300,
+    svgTitle: 'Half a b sin C is the ordinary area formula with b sin C as the height',
+    heightLabel: 'h = b sin C', note: 'area = \u00bd \u00b7 a \u00b7 h  =  \u00bd ab sin C',
+  };
+
   const demoUnits = {
     lawSines: demoUnitFrame({
       svg: triangleDiagrams['law-of-sines'],
@@ -1513,6 +1532,16 @@ The Law of Sines and the Law of Cosines are those tools. Together, they provide 
       text: 'The side c is computed from the two sides that enclose the angle C and from cos&#8201;C; when C is a right angle the correction term vanishes and the statement is the Pythagorean theorem. Make C acute and c shrinks below the Pythagorean value, make it obtuse and c grows past it. Open the angle C and watch the correction term change sign on the',
       href: '/trigonometry/visual-tools/triangle-explorer',
       linkText: 'triangle explorer',
+    }),
+    ambiguousCase: demoUnitFrame({
+      svg: renderTriangleLabelV2(tlAmbiguousCase),
+      caption: 'The same b and A, three lengths of a',
+      text: 'Side <em>b</em> and angle <em>A</em> are identical in all three panels; only the swung side <em>a</em> changes. Where its arc meets the base is where the third vertex can go &#8212; twice when <em>a</em> is longer than the height but shorter than <em>b</em>, once when it exactly equals the height, and nowhere when it falls short.',
+    }),
+    areaSAS: demoUnitFrame({
+      svg: renderTriangleLabelV2(tlAreaSAS),
+      caption: 'The height, written with a sine',
+      text: 'Drop the altitude onto side <em>a</em> and it is the side opposite angle <em>C</em> in a small right triangle whose hypotenuse is <em>b</em> &#8212; so its length is <em>b</em>&#8201;sin&#8201;<em>C</em>. Half the base times that height is the ordinary area formula with nothing new in it.',
     }),
   };
 
@@ -1579,8 +1608,6 @@ export default function SinesCosinesLawPage({
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
-                  <div key={'unit-lawSines'} dangerouslySetInnerHTML={{ __html: demoUnits.lawSines }} />,
-          `The constant ratio is the diameter of the triangle&#8217;s circumscribed circle, which is why it is the same for all three pairs.`,
         ]
     },
     {
@@ -1589,6 +1616,8 @@ export default function SinesCosinesLawPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-lawSines'} dangerouslySetInnerHTML={{ __html: demoUnits.lawSines }} />,
+          `The constant ratio is the diameter of the triangle&#8217;s circumscribed circle, which is why it is the same for all three pairs.`,
         ]
     },
     {
@@ -1605,6 +1634,8 @@ export default function SinesCosinesLawPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-ambiguousCase'} dangerouslySetInnerHTML={{ __html: demoUnits.ambiguousCase }} />,
+          `Computing $\\sin B$ with the Law of Sines and checking both candidate angles settles which panel a given problem is in.`,
           <div key={'obj4-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
         ]
@@ -1641,6 +1672,8 @@ export default function SinesCosinesLawPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-areaSAS'} dangerouslySetInnerHTML={{ __html: demoUnits.areaSAS }} />,
+          `Because $\\sin C$ peaks at $90°$, two fixed sides enclose the most area when they meet at a right angle.`,
         ]
     },
     {

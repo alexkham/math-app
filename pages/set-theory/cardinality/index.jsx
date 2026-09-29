@@ -11,6 +11,7 @@
 // // // import { tableHeaders } from '@/app/styles/theme'
 // // // import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 // // // import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderSetElementsV2 from '@/app/utils/illustrations/set-theory/relationships/setElements.v2'
 
 
 // // // export async function getStaticProps(){
@@ -3037,6 +3038,28 @@ const schemas = {
 
   // Operation A demonstration unit: frozen tool states + attached explanation
   // panel + tool link, one frame. Rendered as a content-array item.
+  const seInfinite = {
+    kind: 'pairing', width: 560, height: 380,
+    svgTitle: 'An infinite set pairs with a proper part of itself; a finite set cannot',
+    panels: [
+      { leftName: 'ℕ', rightName: 'even numbers ⊂ ℕ', left: ['0', '1', '2', '3', '…'], right: ['0', '2', '4', '6', '…'],
+        pairs: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]], verdict: 'n ↦ 2n: every n has a partner', ok: true },
+      { leftName: '{0, 1, 2, 3}', rightName: '{0, 2}', left: ['0', '1', '2', '3'], right: ['0', '2'],
+        pairs: [[0, 0], [1, 1]], verdict: 'n ↦ 2n: 2 and 3 have no partner', ok: false },
+    ],
+  };
+  const seListing = {
+    kind: 'listing', size: 5,
+    svgTitle: 'Walking the grid of fractions diagonal by diagonal lists every positive rational once',
+  };
+  const seDiagonal = {
+    kind: 'diagonal',
+    svgTitle: 'Changing every diagonal digit builds a number missing from any list',
+    heading: 'an assumed complete list of numbers between 0 and 1',
+    rows: [[3, 1, 4, 1, 5], [2, 7, 1, 8, 2], [5, 0, 0, 0, 0], [1, 4, 1, 4, 2], [6, 6, 6, 6, 6]],
+    verdict: 'x is on no row — the list was not complete',
+  };
+
   const demoUnits = {
     inclusionExclusion: demoUnitFrame({
       svg: [twoSetsVennDiagrams.union, twoSetsVennDiagrams.disjoint],
@@ -3044,6 +3067,21 @@ const schemas = {
       text: 'Two frozen configurations tell the whole story: when the circles overlap (top), the lens lies inside both sets &#8212; summing |A| + |B| counts it twice, so |A &#8745; B| is subtracted once. When the sets are disjoint (bottom), there is no lens and the counts simply add. Slide between the two situations yourself on the',
       href: '/set-theory/visual-tools/two-sets-basic-venn',
       linkText: 'two-set Venn explorer',
+    }),
+    infiniteSelfPairing: demoUnitFrame({
+      svg: renderSetElementsV2(seInfinite),
+      caption: 'The rule n &#8614; 2n, on an infinite set and on a finite one',
+      text: 'On the left every natural number n is sent to 2n, and every even number is hit exactly once &#8212; so &#8469; pairs perfectly with the even numbers, a part of itself. On the right the same rule is tried on {0, 1, 2, 3} and its part {0, 2}: 2 and 3 are left with nowhere to go. A finite set can never pair with a proper part of itself; an infinite set always can.',
+    }),
+    countingRationals: demoUnitFrame({
+      svg: renderSetElementsV2(seListing),
+      caption: 'Listing the positive rationals',
+      text: 'Each fraction p/q sits at column p, row q. The walk runs diagonal by diagonal, turning at the edges, so any fraction is reached after finitely many steps. A fraction not in lowest terms, such as 2/2, names a number already listed &#8212; it is dashed and gets no number, so every rational appears exactly once. The order numbers are the bijection with the natural numbers.',
+    }),
+    cantorDiagonal: demoUnitFrame({
+      svg: renderSetElementsV2(seDiagonal),
+      caption: 'Cantor&#39;s diagonal, five rows deep',
+      text: 'Suppose the rows r&#8321;, r&#8322;, &#8230; list every number between 0 and 1. Take the n-th digit of the n-th row (boxed) and change it; those changed digits spell a new number x. x cannot be r&#8321; &#8212; they differ in the first digit; it cannot be r&#8322; &#8212; they differ in the second; and so on down every row. So no list is complete, and the reals are uncountable.',
     }),
   };
 
@@ -3106,6 +3144,8 @@ export default function CardinalityPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-infiniteSelfPairing'} dangerouslySetInnerHTML={{ __html: demoUnits.infiniteSelfPairing }} />,
+          `Being able to pair with a proper part of itself is exactly what separates an infinite set from a finite one.`,
         ]
     },
     {
@@ -3114,6 +3154,8 @@ export default function CardinalityPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-countingRationals'} dangerouslySetInnerHTML={{ __html: demoUnits.countingRationals }} />,
+          `A set is countable precisely when some walk like this reaches every one of its elements.`,
         ]
     },
 
@@ -3125,6 +3167,8 @@ export default function CardinalityPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-cantorDiagonal'} dangerouslySetInnerHTML={{ __html: demoUnits.cantorDiagonal }} />,
+          `Whatever list is proposed, the diagonal construction produces a real number it leaves out.`,
           <div
             key={'obj5-table'}
             style={tableWrapStyle}

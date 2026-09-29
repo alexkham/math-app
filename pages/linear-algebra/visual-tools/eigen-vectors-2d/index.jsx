@@ -499,6 +499,9 @@ import { SCENARIOS as EV_SCENARIOS } from '../../../../app/components/linear-alg
 import eigenVectorsDiagrams, { groupOf } from '../../../../app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -952,8 +955,123 @@ The pair still carries the geometry. Its modulus is the scaling factor per appli
 
 
 
+  const instructions = [
+    'The scenarios panel on the left loads eleven matrices in four groups, **Two distinct real**, **Isotropic**, **Defective** and **Complex**; the explanation card describes the one selected. [Learn more about the preset scenarios](!#preset-scenarios)',
+    'The canvas shows the gray grid, the green dashed eigendirections of $A$, the orange test vector $v$ and its image $Av$ in cyan. [Learn more about getting started](!#getting-started)',
+    'Drag the orange $v$ handle; $Av$, the angle arc and the alignment color follow, and both vectors turn amber when $v$ lies on an eigendirection. [Learn more about dragging v](!#dragging-v-and-watching-av)',
+    'The layer chips **grid**, **eigenlines**, **v / Av lines**, **angle arc** and **labels** show or hide each layer of the canvas. [Learn more about the layer toggles](!#display-layer-toggles)',
+    'The **Live** card (01) gives $|v|$, $|Av|$, $|Av|/|v|$ and the angle between $v$ and $Av$; its status strip turns amber and reports $\\lambda$ when they align. [Learn more about the alignment signal](!#the-alignment-signal)',
+    'The **Eigen structure of A** card (02) lists each eigenvalue with a unit eigenvector, or the defective, isotropic or complex case, and the characteristic polynomial with its discriminant. [Learn more about the eigen structure card](!#the-eigen-structure-card)',
+    '**Snap to nearest eigendirection** moves $v$ onto the closest eigenline and keeps its length; with complex eigenvalues it is disabled and reads **No real eigenvectors**. [Learn more about the snap button](!#the-snap-button)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real EigenVectors tool
+     (opens on Diagonal, A = diag(2, 0.5), v = (2, 1)). Handle:
+     circle[data-handle="v"]; drags in screen px at scale 0.6 (desktop
+     layout: 31 px per unit). Chips: label.ev-chip (0 grid, 1 eigenlines,
+     2 v / Av lines, 3 angle arc, 4 labels). */
+  const demos = {
+    'dragging-v-and-watching-av': {
+      title: 'Hunting for eigenvectors by hand',
+      script: [
+        { say: `DRAG v → (0, 2)
+On the green y-axis line. Av = (0, 1).
+Amber strip: λ ≈ 0.5.` },
+        { drag: 'circle[data-handle="v"]', dx: -61.81, dy: -31.16, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2600 },
+        { say: `DRAG v → (2, 2)
+Off the lines. Av = (4, 1) swings away.
+angle(v, Av) ≈ −31°. |Av| / |v| = 1.46.` },
+        { drag: 'circle[data-handle="v"]', dx: 62.0, dy: 0, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2800 },
+        { say: `DRAG v → (2, 0)
+On the x-axis line. Av ≈ (4, 0).
+Aligned again: λ ≈ 2.` },
+        { drag: 'circle[data-handle="v"]', dx: 0, dy: 62.0, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2600 },
+        { say: `TAP Reflect y = x
+v kept. Av = (0, 2): 90° away.
+New lines: y = x and y = −x.` },
+        { click: { button: 'Reflect y = x' } },
+        { wait: 2600 },
+        { say: `DRAG v → (1, −1)
+Av ≈ (−1, 1): opposite v. Angle ≈ 180°.
+λ ≈ −1: negative eigenvalue.` },
+        { drag: 'circle[data-handle="v"]', dx: -31.0, dy: 31.0, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2800 },
+      ],
+    },
+    'preset-scenarios': {
+      title: 'Finding an eigenline without the cheat sheet',
+      script: [
+        { say: `TAP Upper triangular
+λ = 3 and 2, read off the diagonal.
+Eigenlines not perpendicular.` },
+        { click: { button: 'Upper triangular' } },
+        { wait: 2600 },
+        { say: `UNCHECK eigenlines
+Green dashed lines hidden.
+Hunt by alignment alone.` },
+        { click: { css: 'label.ev-chip', nth: 1 } },
+        { wait: 2200 },
+        { say: `DRAG v → (2, −2)
+Av = (4, −4): same direction as v.
+Amber strip: λ ≈ 2. Found one.` },
+        { drag: 'circle[data-handle="v"]', dx: 0.19, dy: 92.84, ms: 1500 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2800 },
+        { say: `CHECK eigenlines
+The λ = 2 line runs through (1, −1).
+Guess confirmed.` },
+        { click: { css: 'label.ev-chip', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP Uniform scale ×2
+Isotropic: every direction is eigen.
+Any v: λ ≈ 2.` },
+        { click: { button: 'Uniform scale' } },
+        { wait: 2600 },
+      ],
+    },
+    'the-snap-button': {
+      title: 'Snap across the four cases',
+      script: [
+        { say: `TAP Symmetric
+λ₁ = 3 along (0.71, 0.71).
+λ₂ = 1 along (0.71, −0.71). Perpendicular.` },
+        { click: { button: 'Symmetric' } },
+        { wait: 2600 },
+        { say: `TAP Snap to nearest eigendirection
+v → (1.58, 1.58), same length 2.24.
+λ ≈ 3.` },
+        { click: { button: 'Snap to nearest' } },
+        { wait: 2600 },
+        { say: `TAP Shear
+Defective: λ = 1, one vector (1, 0).
+Pink row. v no longer aligned.` },
+        { click: { button: 'Shear' } },
+        { wait: 2600 },
+        { say: `TAP Snap to nearest eigendirection
+Only one line to snap to: v → (2.24, 0).
+λ ≈ 1.` },
+        { click: { button: 'Snap to nearest' } },
+        { wait: 2600 },
+        { say: `TAP Rotate 90°
+λ = 0 ± 1i. No real eigenvector.
+Button disabled: No real eigenvectors.` },
+        { click: { button: 'Rotate 90°' } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
         relatedTools: getRelatedTools('linear-algebra-eigen-vectors-2d'),
          sectionsContent,
          stateUnits,
@@ -977,7 +1095,22 @@ The pair still carries the geometry. Its modulus is the scaling factor per appli
     }
    }
 
-export default function EigenVectors2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+export default function EigenVectors2DPage({ instructions, demos,seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <EigenVectors explanationOverride={explanationOverride}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -1000,15 +1133,15 @@ export default function EigenVectors2DPage({seoData, sectionsContent, stateUnits
   const genericSections=[
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'dragging-v-and-watching-av'),
-    plain('obj6', 'preset-scenarios'),
+    withDemo(plain('obj2', 'dragging-v-and-watching-av')),
+    withDemo(plain('obj6', 'preset-scenarios')),
     stateRow('obj12', 'distinct-real-eigenvalues', 'distinct'),
     stateRow('obj13', 'repeated-eigenvalue', 'repeated'),
     stateRow('obj14', 'defective-matrices', 'defective'),
     stateRow('obj15', 'complex-eigenvalues', 'complex'),
     plain('obj3', 'the-alignment-signal'),
     plain('obj4', 'the-eigen-structure-card'),
-    plain('obj5', 'the-snap-button'),
+    withDemo(plain('obj5', 'the-snap-button')),
     plain('obj7', 'display-layer-toggles'),
     plain('obj8', 'what-is-an-eigenvector'),
     plain('obj9', 'the-four-cases'),
@@ -1070,6 +1203,10 @@ export default function EigenVectors2DPage({seoData, sectionsContent, stateUnits
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Eigen Vectors</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
    <EigenVectors explanationOverride={explanationOverride}/>

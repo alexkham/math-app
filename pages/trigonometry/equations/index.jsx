@@ -1012,6 +1012,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
 import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiagrams'
+import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 
 
 export async function getStaticProps(){
@@ -1686,6 +1687,20 @@ Managing this infinity is what distinguishes trigonometric equation solving from
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  // Authored figure, drawn by curveFeature. Uses the section's own example.
+  const cfMultipleAngles = {
+    kind: 'pair', title: 'Doubling the angle doubles the solutions',
+    xRange: [0, 2 * Math.PI], yRange: [-1.35, 1.55],
+    panels: [
+      { title: 'sin x = \u221a3/2  \u2192  2 solutions', curves: [{ fn: 'sin' }],
+        marks: [{ type: 'hline', at: Math.sqrt(3) / 2, color: 'negation' },
+                { type: 'points', at: [Math.PI / 3, 2 * Math.PI / 3], color: 'resultStroke', r: 4.5 }] },
+      { title: 'sin 2x = \u221a3/2  \u2192  4 solutions', curves: [{ fn: 'sin', B: 2 }],
+        marks: [{ type: 'hline', at: Math.sqrt(3) / 2, color: 'negation' },
+                { type: 'points', at: [Math.PI / 6, Math.PI / 3, 7 * Math.PI / 6, 4 * Math.PI / 3], color: 'resultStroke', r: 4.5 }] },
+    ],
+  };
+
   const demoUnits = {
     general: demoUnitFrame({
       svg: trigFunctionsGraphDiagrams.sin,
@@ -1707,6 +1722,11 @@ Managing this infinity is what distinguishes trigonometric equation solving from
       text: 'Every branch climbs through all real values exactly once, so a horizontal line at any height a meets the curve once per branch and the branches are &#960; apart: tan&#8201;x = a has exactly one solution per period of &#960;, whatever a is. The marker at 60&#176; is the crossing for a = &#8730;3. Pick any height and count the crossings on the',
       href: '/trigonometry/visual-tools/functions-graphs',
       linkText: 'trigonometric functions graphs',
+    }),
+    multipleAngles: demoUnitFrame({
+      svg: renderCurveFeature(cfMultipleAngles),
+      caption: 'Same line, same interval, twice the crossings',
+      text: 'Doubling the angle squeezes two full cycles into the interval that held one, so the same horizontal line is crossed twice as often. The four marked points are exactly the four solutions listed above &#8212; and the two a hurried solver finds are only the first half of them.',
     }),
   };
 
@@ -1840,6 +1860,8 @@ export default function EquationsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-multipleAngles'} dangerouslySetInnerHTML={{ __html: demoUnits.multipleAngles }} />,
+          `Widening the interval for $u$ to $[0, 4\\pi)$ before solving is what guarantees none are missed.`,
         ]
     },
 

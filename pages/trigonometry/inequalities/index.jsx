@@ -875,6 +875,8 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
+import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
+import renderCircleArc from '@/app/utils/illustrations/trigonometry/circle/circleArc'
 
 
 export async function getStaticProps(){
@@ -1434,6 +1436,56 @@ Two methods dominate. The graphical approach plots the function and a horizontal
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  // Authored figures. Two renderers: curveFeature for the curve scenes,
+  // circleArc for the side-by-side, which takes the curve panel as a
+  // pre-rendered string rather than learning to draw curves itself.
+  const cfSolutionsAsIntervals = {
+    kind: 'single', title: 'Points against a stretch',
+    xRange: [0, 2 * Math.PI], yRange: [-1.5, 1.6], panelWidth: 500, panelHeight: 250,
+    yTicks: [{ at: 0.5, label: '\u00bd' }],
+    panels: [{ curves: [{ fn: 'sin' }], marks: [
+      { type: 'vspan', from: Math.PI / 6, to: 5 * Math.PI / 6, color: 'resultFill', opacity: 0.42 },
+      { type: 'hline', at: 0.5, color: 'negation' },
+      { type: 'points', at: [Math.PI / 6, 5 * Math.PI / 6], labels: ['\u03c0/6', '5\u03c0/6'], color: 'negation', r: 4.5 },
+      { type: 'bracket', orient: 'h', y: -1.15, from: Math.PI / 6, to: 5 * Math.PI / 6, label: 'sin x > \u00bd  \u2014 every angle between', color: 'resultStroke' },
+      { type: 'note', at: Math.PI / 6, y: 1.42, text: 'sin x = \u00bd  \u2014 just these two', anchor: 'start', color: 'negation', size: 11 },
+    ] }],
+  };
+  const cfCompoundInequality = {
+    kind: 'single', title: 'The overlap of two bounds',
+    xRange: [0, 2 * Math.PI], yRange: [-2.35, 1.45], panelWidth: 540, panelHeight: 300,
+    yTicks: [{ at: 0.5, label: '\u00bd' }, { at: 0.866, label: '\u221a3/2' }],
+    panels: [{ curves: [{ fn: 'sin' }], marks: [
+      { type: 'vspan', from: Math.PI / 6, to: Math.PI / 3, color: 'resultFill', opacity: 0.42 },
+      { type: 'vspan', from: 2 * Math.PI / 3, to: 5 * Math.PI / 6, color: 'resultFill', opacity: 0.42 },
+      { type: 'hline', at: 0.5, color: 'primary' },
+      { type: 'hline', at: 0.866, color: 'secondary' },
+      { type: 'bracket', orient: 'h', y: -1.28, from: Math.PI / 6, to: 5 * Math.PI / 6, label: 'sin x > \u00bd', color: 'primary' },
+      { type: 'bracket', orient: 'h', y: -1.72, from: 0, to: Math.PI / 3, color: 'secondary' },
+      { type: 'bracket', orient: 'h', y: -1.72, from: 2 * Math.PI / 3, to: 2 * Math.PI, label: 'sin x \u2264 \u221a3/2', color: 'secondary' },
+      { type: 'bracket', orient: 'h', y: -2.16, from: Math.PI / 6, to: Math.PI / 3, color: 'resultStroke' },
+      { type: 'bracket', orient: 'h', y: -2.16, from: 2 * Math.PI / 3, to: 5 * Math.PI / 6, label: 'both \u2014 the overlap', color: 'resultStroke' },
+    ] }],
+  };
+  const caUnitCircleMethod = {
+    kind: 'compare', gap: 22, noteSpace: 26,
+    svgTitle: 'The same inequality is one arc on the circle and one band under the curve',
+    panels: [
+      { kind: 'cut', width: 300, height: 240, cx: 150, cy: 132, r: 92, at: 0.7071,
+        cutLabel: 'y = \u221a2/2', endpointLabels: ['\u03c0/4', '3\u03c0/4'],
+        arcNote: 'the arc above the line', title: 'on the circle' },
+      { svg: renderCurveFeature({
+          kind: 'single', xRange: [0, 2 * Math.PI], yRange: [-1.4, 1.5], panelWidth: 300, panelHeight: 240,
+          panels: [{ curves: [{ fn: 'sin' }], marks: [
+            { type: 'vspan', from: Math.PI / 4, to: 3 * Math.PI / 4, color: 'resultFill', opacity: 0.42 },
+            { type: 'hline', at: 0.7071, color: 'negation' },
+            { type: 'points', at: [Math.PI / 4, 3 * Math.PI / 4], labels: ['\u03c0/4', '3\u03c0/4'], color: 'resultStroke', r: 4 },
+          ] }],
+        }), title: 'under the curve' },
+    ],
+    notes: [{ text: 'same two angles, same answer', x: 322, y: 282, color: 'text', size: 12 }],
+  };
+
   const demoUnits = {
     graphical: demoUnitFrame({
       svg: trigFunctionsGraphDiagrams.sin,
@@ -1448,6 +1500,21 @@ Two methods dominate. The graphical approach plots the function and a horizontal
       text: 'The upward branches of the secant curve sit only where the cosine is positive and never dip below 1, so sec&#8201;x &#8805; 2 is solved on those branches alone, between the asymptotes at 90&#176; and 270&#176; that must be excluded from any solution set. The marker at 60&#176; reads exactly 2, an endpoint of the answer. Trace a branch out to its asymptote on the',
       href: '/trigonometry/visual-tools/functions-graphs',
       linkText: 'trigonometric functions graphs',
+    }),
+    solutionsAsIntervals: demoUnitFrame({
+      svg: renderCurveFeature(cfSolutionsAsIntervals),
+      caption: 'Two points, or everything between them',
+      text: 'The equation is answered by the two marked crossings and nothing else. The inequality is answered by the whole shaded stretch between them &#8212; and it is continuity that guarantees no gaps appear inside, since the curve cannot get back below the line without crossing it again.',
+    }),
+    unitCircleMethod: demoUnitFrame({
+      svg: renderCircleArc(caUnitCircleMethod),
+      caption: 'Arc on the left, band on the right',
+      text: 'Both panels answer sin&#8201;x &#8805; &#8730;2/2 and both give &#960;/4 and 3&#960;/4. On the circle the answer is the arc whose points sit above the line; under the curve it is the interval where the graph sits above the same height. Picking a method is a matter of which picture you find quicker to read.',
+    }),
+    compoundInequality: demoUnitFrame({
+      svg: renderCurveFeature(cfCompoundInequality),
+      caption: 'Two bounds, one answer',
+      text: 'Each bound has its own solution set, drawn as a bar under the curve. The compound inequality is satisfied only where the two bars overlap, which here breaks the answer into two separate intervals rather than one.',
     }),
   };
 
@@ -1504,6 +1571,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-solutionsAsIntervals'} dangerouslySetInnerHTML={{ __html: demoUnits.solutionsAsIntervals }} />,
+          `Whether each endpoint belongs to the answer is then decided by whether the inequality is strict.`,
           <div key={'obj1-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj1Table }} />,
         ]
@@ -1524,6 +1593,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-unitCircleMethod'} dangerouslySetInnerHTML={{ __html: demoUnits.unitCircleMethod }} />,
+          `For cosine the same reasoning applies to a vertical line, since cosine is the $x$-coordinate.`,
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
         ]
@@ -1552,6 +1623,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-compoundInequality'} dangerouslySetInnerHTML={{ __html: demoUnits.compoundInequality }} />,
+          `Each of those intervals then repeats every $2\\pi$ in the general solution.`,
         ]
     },
     {

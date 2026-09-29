@@ -972,6 +972,7 @@ import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-vi
 import spanMembershipDiagrams from '@/app/components/linear-algebra copy/matrix/spanMembershipDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "span linear algebra",
@@ -1619,6 +1620,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     geometry: demoUnitFrame({
       svg: [spanIndependenceDiagrams.independent, spanIndependenceDiagrams.dependent],
@@ -1635,6 +1637,13 @@ const schemas = {
       text: 'The candidate vector has been placed as the right-hand side and the spanning vectors as the columns, turning "is b in the span" into a system to solve. A consistent system means a set of weights exists and b is reachable; an inconsistent one means no combination lands on it. Try a vector that misses, and watch the contradiction row appear, on the',
       href: '/linear-algebra/visual-tools/span-membership',
       linkText: 'span membership tester',
+    }),
+    spansPlaneOnly: demoUnitFrame({
+      svg: spanMembershipDiagrams.rank,
+      caption: 'Two vectors cannot span R&#179;',
+      text: 'The columns v&#8321; = (1, 0, 1) and v&#8322; = (0, 1, 1) reduce to two pivots: rank 2. A set spans R<sup>n</sup> exactly when its rank is n, and here n = 3, so these two vectors span only a plane inside R<sup>3</sup> &#8212; any target off that plane is out of reach. Test targets against this plane on the',
+      href: '/linear-algebra/visual-tools/span-membership',
+      linkText: 'span and membership visualizer',
     }),
   };
 
@@ -1732,6 +1741,8 @@ export default function SpanPage({seoData, sectionsContent, introContent, obj2Ta
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-spansPlaneOnly'} dangerouslySetInnerHTML={{ __html: demoUnits.spansPlaneOnly }} />,
+          `Spanning Rⁿ needs a pivot in every row, and that needs at least n vectors.`,
         ]
     },
     {

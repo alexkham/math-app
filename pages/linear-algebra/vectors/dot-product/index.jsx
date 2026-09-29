@@ -1112,6 +1112,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import innerProductDiagrams from '@/app/components/linear-algebra copy/matrix/innerProductDiagrams'
 import projectionDiagrams from '@/app/components/linear-algebra copy/matrix/projectionDiagrams'
+import renderVectorArrowsV4 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v4'
 
 
 export async function getStaticProps(){
@@ -1935,6 +1936,20 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const vaAngleTriangle = {
+    kind: 'angle', a: [4, 1], b: [1, 3],
+    svgTitle: 'The triangle behind the geometric formula for the dot product',
+    labels: [['a = (4, 1),  \u2016a\u2016 = \u221a17', 2.3, -0.3, 'a'], ['b = (1, 3)', 0.35, 3.35, 'b'], ['\u2016b\u2016 = \u221a10', 0.35, 3.35 - 16 / 44, 'b'], ['a \u2212 b', 2.75, 2.25, 'third']],
+    notes: ['law of cosines: \u2016a \u2212 b\u2016\u00b2 = \u2016a\u2016\u00b2 + \u2016b\u2016\u00b2 \u2212 2\u2016a\u2016\u2016b\u2016 cos \u03b8', 'a \u00b7 b = 4\u00b71 + 1\u00b73 = 7,  and  \u221a17 \u00b7 \u221a10 \u00b7 cos 57.5\u00b0 \u2248 7'],
+    caption: 'two formulas, one number',
+  };
+  const vaSignPanels = {
+    kind: 'signs', a: [3, 0],
+    svgTitle: 'The sign of the dot product follows the angle: acute, right, obtuse',
+    cases: [{ b: [2, 2], kind: 'acute' }, { b: [0, 2.5], kind: 'right angle' }, { b: [-2, 2], kind: 'obtuse' }],
+    caption: 'the sign of a \u00b7 b tells the angle: acute, right, obtuse',
+  };
+
   const demoUnits = {
     dot: demoUnitFrame({
       svg: innerProductDiagrams.done,
@@ -1951,6 +1966,16 @@ const schemas = {
       text: 'The scalar computed from the two dot products is being multiplied back onto the direction vector, which is what turns a bare ratio into an actual vector lying along it. The projection is always a multiple of the vector projected onto, never of the one being projected &#8212; the picture makes the asymmetry hard to miss. Watch the remainder appear as well on the',
       href: '/linear-algebra/visual-tools/vector-projection',
       linkText: 'vector projection visualizer',
+    }),
+    angleTriangle: demoUnitFrame({
+      svg: renderVectorArrowsV4(vaAngleTriangle),
+      caption: 'Where the cosine comes from',
+      text: 'Draw a and b from the same point and join their tips: the third side is a &#8722; b, and the angle between a and b is &#952;. The law of cosines on that triangle, compared with the expansion of (a &#8722; b) &#183; (a &#8722; b), is exactly the proof in this section. With a = (4, 1) and b = (1, 3), the components give a &#183; b = 7, and the lengths and angle give &#8730;17 &#183; &#8730;10 &#183; cos 57.5&#176; &#8776; 7 &#8212; the same number.',
+    }),
+    signPanels: demoUnitFrame({
+      svg: renderVectorArrowsV4(vaSignPanels),
+      caption: 'Positive, zero, negative',
+      text: 'Keep a = (3, 0) fixed and turn b. At 45&#176; the dot product is 6 &#8212; positive, the vectors lean the same way. At 90&#176; it is exactly 0 &#8212; perpendicular, neither has any component along the other. At 135&#176; it is &#8722;6 &#8212; negative, they lean apart. The lengths stay positive throughout, so the sign of a &#183; b is the sign of cos &#952;.',
     }),
   };
 
@@ -2018,6 +2043,8 @@ export default function DotProductPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-angleTriangle'} dangerouslySetInnerHTML={{ __html: demoUnits.angleTriangle }} />,
+          `The component formula is easy to compute; the geometric one says what the number means.`,
           <div
             key={'obj2-table'}
             style={tableWrapStyle}
@@ -2063,6 +2090,8 @@ export default function DotProductPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-signPanels'} dangerouslySetInnerHTML={{ __html: demoUnits.signPanels }} />,
+          `Reading only the sign is often enough: no square roots and no inverse cosine are needed to tell acute from obtuse.`,
           <div
             key={'obj6-table'}
             style={tableWrapStyle}

@@ -1179,6 +1179,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
 import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiagrams'
 import negativeAngleDiagrams from '@/app/components/trigonometry/identities/negative-angle/negativeAngleDiagrams'
+import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 
 
 export async function getStaticProps(){
@@ -2043,6 +2044,36 @@ These properties govern every computation downstream. Periodicity is the reason 
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  // Authored figures, drawn by curveFeature. The monotonicity figure is three
+  // single-curve renders stacked by demoUnitFrame's svg array - no new layout.
+  const cfBoundedness = {
+    kind: 'single', title: 'Sine stays in the strip; secant never enters it',
+    xRange: [-Math.PI / 2, 5 * Math.PI / 2], yRange: [-3.4, 3.4], panelWidth: 520, panelHeight: 260,
+    yTicks: [{ at: 1, label: '1' }, { at: -1, label: '\u22121' }],
+    panels: [{
+      curves: [
+        { fn: 'sin', color: 'primary', label: 'sin', labelAt: Math.PI / 2 + 0.25, labelAnchor: 'start' },
+        { fn: 'sec', color: 'resultStroke', yClip: 3.4, label: 'sec', labelAt: 0.35, labelAnchor: 'start' },
+      ],
+      marks: [{ type: 'strip', from: -1, to: 1, color: 'primary', opacity: 0.11, outline: true }],
+    }],
+  };
+  const monoRow = (fn, from, to, lab, dir) => ({
+    kind: 'single', xRange: [-Math.PI, 2 * Math.PI], yRange: fn === 'tan' ? [-3, 3] : [-1.5, 1.6],
+    panelWidth: 520, panelHeight: 118, padT: 14, padB: 24,
+    panels: [{
+      curves: [{ fn, color: 'mutedLight' }, { fn, color: 'primary', emphasis: true, clip: [from, to], yClip: 3 }],
+      marks: [
+        { type: 'vspan', from, to, color: 'resultFill', opacity: 0.18 },
+        { type: 'note', at: 2 * Math.PI - 0.1, y: fn === 'tan' ? 2.3 : 1.15, text: lab, anchor: 'end', color: 'text', size: 12 },
+        { type: 'note', at: (from + to) / 2, y: fn === 'tan' ? -2.55 : -1.3, text: dir, anchor: 'middle', color: 'resultStroke', size: 11 },
+      ],
+    }],
+  });
+  const cfMonoSin = monoRow('sin', -Math.PI / 2, Math.PI / 2, 'sin \u2014 rises on [\u2212\u03c0/2, \u03c0/2]', '\u2192 becomes arcsin');
+  const cfMonoCos = monoRow('cos', 0, Math.PI, 'cos \u2014 falls on [0, \u03c0]', '\u2192 becomes arccos');
+  const cfMonoTan = monoRow('tan', -Math.PI / 2 + 0.02, Math.PI / 2 - 0.02, 'tan \u2014 rises on (\u2212\u03c0/2, \u03c0/2)', '\u2192 becomes arctan');
+
   const demoUnits = {
     periodic: demoUnitFrame({
       svg: trigFunctionsGraphDiagrams.sin,
@@ -2071,6 +2102,16 @@ These properties govern every computation downstream. Periodicity is the reason 
       text: 'The curve is smooth inside each branch, but at &#960;/2, 3&#960;/2 and every odd multiple of &#960;/2 it runs off to infinity on one side and comes back from minus infinity on the other: a vertical asymptote wherever the cosine in the denominator is zero. Sine and cosine themselves have no such breaks because they are coordinates, never quotients. Trace a branch up to its asymptote on the',
       href: '/trigonometry/visual-tools/functions-graphs',
       linkText: 'trigonometric functions graphs',
+    }),
+    boundedness: demoUnitFrame({
+      svg: renderCurveFeature(cfBoundedness),
+      caption: 'Inside the strip, and never inside it',
+      text: 'The shaded strip is every value from &#8722;1 to 1. Sine never leaves it; secant never enters it, touching its edge only at the points where cosine is &#177;1. That is why sin&#8201;<em>x</em> = 1.5 and sec&#8201;<em>x</em> = 0.5 are both impossible, for opposite reasons.',
+    }),
+    monotonicity: demoUnitFrame({
+      svg: [renderCurveFeature(cfMonoSin), renderCurveFeature(cfMonoCos), renderCurveFeature(cfMonoTan)],
+      caption: 'One interval each, chosen for a reason',
+      text: 'Each highlighted stretch is where the function moves in one direction only and still takes every value it ever takes. Those are the exact intervals the inverse functions are built on &#8212; which is why the choice is not arbitrary.',
     }),
   };
 
@@ -2143,6 +2184,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-boundedness'} dangerouslySetInnerHTML={{ __html: demoUnits.boundedness }} />,
+          `Checking the range before solving rules out these impossible equations immediately.`,
         ]
     },
     {
@@ -2171,6 +2214,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-monotonicity'} dangerouslySetInnerHTML={{ __html: demoUnits.monotonicity }} />,
+          `Cotangent's principal interval $(0, \\pi)$ follows the same logic, between two consecutive asymptotes.`,
         ]
     },
     {

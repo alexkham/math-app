@@ -1877,7 +1877,7 @@ export default function InverseFunctionsPage({
         content:[
           sectionsContent.obj2.content,
           <div key={'unit-arcsine'} dangerouslySetInnerHTML={{ __html: demoUnits.arcsine }} />,
-          `Every exact value of $\arcsin$ can therefore be read off the sine table backwards.`,
+          `Every exact value of $\\arcsin$ can therefore be read off the sine table backwards.`,
         ]
     },
     {
@@ -1887,7 +1887,7 @@ export default function InverseFunctionsPage({
         content:[
           sectionsContent.obj3.content,
           <div key={'unit-arccosine'} dangerouslySetInnerHTML={{ __html: demoUnits.arccosine }} />,
-          `This is why $\arccos$ never returns a negative angle, while $\arcsin$ freely does.`,
+          `This is why $\\arccos$ never returns a negative angle, while $\\arcsin$ freely does.`,
         ]
     },
     {
@@ -1897,7 +1897,7 @@ export default function InverseFunctionsPage({
         content:[
           sectionsContent.obj4.content,
           <div key={'unit-arctangent'} dangerouslySetInnerHTML={{ __html: demoUnits.arctangent }} />,
-          `That boundedness is what makes $\arctan$ the best behaved of the three.`,
+          `That boundedness is what makes $\\arctan$ the best behaved of the three.`,
         ]
     },
     {
@@ -1946,7 +1946,7 @@ export default function InverseFunctionsPage({
         content:[
           sectionsContent.obj8.content,
           <div key={'unit-compositionFold'} dangerouslySetInnerHTML={{ __html: demoUnits.compositionFold }} />,
-          `The same caution applies to $\arccos(\cos x)$ and $\arctan(\tan x)$ on their own intervals.`,
+          `The same caution applies to $\\arccos(\\cos x)$ and $\\arctan(\\tan x)$ on their own intervals.`,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
         ]

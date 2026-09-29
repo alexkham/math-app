@@ -811,6 +811,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
+import reflectionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/reflection/reflectionDiagrams'
 
 
 export async function getStaticProps(){
@@ -1420,6 +1421,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     signedarea: demoUnitFrame({
       svg: linearTransformationDiagrams.fullRank,
@@ -1434,6 +1436,13 @@ const schemas = {
       text: 'The two columns now point along the same line, the grid has collapsed, and every region on the plane has been crushed to zero area. A zero determinant is exactly this: not a small scaling but a loss of a dimension, which is why nothing can be recovered and no inverse exists. Push a matrix into and out of this state on the',
       href: '/linear-algebra/visual-tools/linear-transformation-2d',
       linkText: 'linear transformation explorer',
+    }),
+    orientationFlip: demoUnitFrame({
+      svg: reflectionDiagrams.axes,
+      caption: 'A reflection: area kept, orientation reversed',
+      text: 'Reflection across the x-axis, the matrix with rows (1, 0) and (0, &#8722;1), whose determinant is &#8722;1. The unit square comes out the same size &#8212; |det| = 1, so no area is gained or lost &#8212; but flipped over: the turn from the first basis vector to the second, counter-clockwise before, is clockwise after. That reversal is exactly what the negative sign records. Try other mirror lines on the',
+      href: '/linear-algebra/visual-tools/reflection-2d',
+      linkText: 'reflection visualizer',
     }),
   };
 
@@ -1523,6 +1532,8 @@ const schemas = {
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-orientationFlip'} dangerouslySetInnerHTML={{ __html: demoUnits.orientationFlip }} />,
+          `No rotation or stretch can undo a reflection's flip; only another orientation-reversing map can.`,
           <div
             key={'obj4-table'}
             style={tableWrapStyle}

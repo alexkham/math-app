@@ -939,6 +939,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import determinantDiagrams from '@/app/components/linear-algebra copy/determinants/determinantDiagrams'
 
 
+
 export async function getStaticProps(){
 
  const keyWords = [
@@ -1671,6 +1672,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     signs: demoUnitFrame({
       svg: determinantDiagrams["sign-pattern"],
@@ -1683,6 +1685,13 @@ const schemas = {
       svg: determinantDiagrams["cofactor-row"],
       caption: 'One row expanded, term by term',
       text: 'Each entry of the row is multiplied by the determinant of the matrix left when its own row and column are removed, and the sign board decides whether the term is added or subtracted. The recursion is visible: every minor is itself a determinant awaiting the same treatment. Expand along a column instead and check the answer matches on the',
+      href: '/linear-algebra/visual-tools/matrix-determinant',
+      linkText: 'determinant visualizer',
+    }),
+    laplaceColumn: demoUnitFrame({
+      svg: determinantDiagrams['cofactor-col'],
+      caption: 'Expanding down column 1',
+      text: 'The same expansion, turned ninety degrees. The pivot is now a<sub>21</sub>, the second entry of the first column; its row and column are struck out, and what is left is the minor M<sub>21</sub>, shown alongside. Its sign comes from the same checkerboard, (&#8722;1)<sup>2+1</sup> = &#8722;1. Summing a<sub>i1</sub>C<sub>i1</sub> down the column gives exactly the determinant the row expansion gave. Run both directions on the',
       href: '/linear-algebra/visual-tools/matrix-determinant',
       linkText: 'determinant visualizer',
     }),
@@ -1781,6 +1790,8 @@ const schemas = {
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-laplaceColumn'} dangerouslySetInnerHTML={{ __html: demoUnits.laplaceColumn }} />,
+          `Whichever row or column is chosen, the answer is the same, so the practical choice is always the line with the most zeros.`,
         ]
     },
     {

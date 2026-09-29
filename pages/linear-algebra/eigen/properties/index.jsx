@@ -917,6 +917,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import eigenVectorsDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
+import powerIterationDiagrams from '@/app/components/linear-algebra copy/matrix/powerIterationDiagrams'
 
 
 export async function getStaticProps(){
@@ -1634,6 +1635,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     defective: demoUnitFrame({
       svg: [eigenVectorsDiagrams.repeated, eigenVectorsDiagrams.defective],
@@ -1648,6 +1650,13 @@ const schemas = {
       text: 'The two eigenvectors point along genuinely different lines, and that is guaranteed whenever the eigenvalues differ &#8212; no amount of tuning can make eigenvectors from distinct eigenvalues line up. It is this guarantee that makes a matrix with all-distinct eigenvalues automatically diagonalisable. Test it by moving the eigenvalues together on the',
       href: '/linear-algebra/visual-tools/eigen-vectors-2d',
       linkText: 'eigenvector explorer',
+    }),
+    powerIteration: demoUnitFrame({
+      svg: powerIterationDiagrams.done,
+      caption: 'Six steps of power iteration',
+      text: 'Start from x<sub>0</sub> = (1, 0), multiply by A = [[4, 1], [2, 3]] and rescale, again and again. The components of the dominant eigenvalue 5 grow faster than those of the eigenvalue 2, so each step points the vector closer to the dominant eigenvector: after six steps x<sub>6</sub> sits beside the exact (1, 1). Watch it converge &#8212; and see the cases where it does not &#8212; on the',
+      href: '/linear-algebra/visual-tools/power-iteration',
+      linkText: 'power iteration visualizer',
     }),
   };
 
@@ -1806,6 +1815,8 @@ export default function EigenvaluePropertiesPage({
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <div key={'unit-powerIteration'} dangerouslySetInnerHTML={{ __html: demoUnits.powerIteration }} />,
+          `How fast it converges depends on the ratio |λ₂ / λ₁|: here 2/5, so each step shrinks the error by more than half.`,
         ]
     },
     {

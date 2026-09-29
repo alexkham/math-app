@@ -1,0 +1,2458 @@
+// import React, { useState, useRef, useEffect, useCallback } from 'react';
+
+// /* ============================================================
+//    InverseFunctionExplorer v1
+
+//    Teaches inverse trig functions through four steps:
+//    1. Line test   - drag a horizontal line, count crossings
+//    2. Restrict    - drag two domain-cut handles until one-to-one
+//    3. Reflect     - animate the kept piece across y = x
+//    4. Compose     - probe x, watch f^-1(f(x)) fold into the
+//                     principal interval
+
+//    Structure (self-contained, no custom-module imports):
+//    - InverseRestrictionScene : pure SVG renderer, props only,
+//                                reports handle drags upward
+//    - ControlsBar             : function / step / stage controls
+//    - ExplanationPanel        : live, stage-aware text
+//    - InverseFunctionExplorer : wrapper, owns all state
+
+//    Colour convention: blue = parent function, amber = inverse.
+//    Plot uses equal x/y scale so the y = x reflection is true.
+//    ============================================================ */
+
+// /* ---------------- geometry ---------------- */
+
+// const PI = Math.PI;
+// const XMAX = 6.8;
+// const YMAX = 3.5;
+// const YCLIP = 8;
+// const W = 760;
+// const H = 400;
+// const CX = 380;
+// const CY = 200;
+// const S = 720 / (2 * XMAX);
+// const STEP = PI / 12;
+
+// const COLORS = {
+//   blue: '#1d4ed8',
+//   ui: '#1e40af',
+//   uiSoft: '#bfdbfe',
+//   amber: '#d97706',
+//   red: '#dc2626',
+//   axis: '#94a3b8',
+//   soft: '#e2e8f0',
+//   text: '#0f172a',
+//   muted: '#64748b',
+//   slate: '#475569',
+//   card: '#f3f4f6',
+//   border: '#d1d5db',
+// };
+
+// const sx = (x) => CX + x * S;
+// const sy = (y) => CY - y * S;
+// const f2 = (v) => v.toFixed(2);
+// const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+// const snap12 = (x) => Math.round(x / STEP) * STEP;
+// const mapT = (t) => (x, y) => [(1 - t) * x + t * y, (1 - t) * y + t * x];
+
+// /* ---------------- function definitions ---------------- */
+
+// const FN = {
+//   sin: {
+//     f: Math.sin,
+//     inv: Math.asin,
+//     invName: 'arcsin',
+//     lo0: -PI / 2,
+//     crit0: PI / 2,
+//     principal: [-PI / 2, PI / 2],
+//     fullRange: '[−1, 1]',
+//     x0: (5 * PI) / 6,
+//     levels: [-1, -0.5, 0, 0.5, 1, 1.5],
+//     probes: [PI / 6, (5 * PI) / 6, (7 * PI) / 6, (-5 * PI) / 6, (2 * PI) / 3, (3 * PI) / 2],
+//     fam(c) {
+//       if (Math.abs(c) > 1 + 1e-12) return [];
+//       const b = Math.asin(clamp(c, -1, 1));
+//       return [[b, 2 * PI], [PI - b, 2 * PI]];
+//     },
+//   },
+//   cos: {
+//     f: Math.cos,
+//     inv: Math.acos,
+//     invName: 'arccos',
+//     lo0: 0,
+//     crit0: 0,
+//     principal: [0, PI],
+//     fullRange: '[−1, 1]',
+//     x0: -PI / 3,
+//     levels: [-1, -0.5, 0, 0.5, 1, 1.5],
+//     probes: [PI / 3, -PI / 3, (4 * PI) / 3, (5 * PI) / 3, (-2 * PI) / 3],
+//     fam(c) {
+//       if (Math.abs(c) > 1 + 1e-12) return [];
+//       const b = Math.acos(clamp(c, -1, 1));
+//       return [[b, 2 * PI], [-b, 2 * PI]];
+//     },
+//   },
+//   tan: {
+//     f: Math.tan,
+//     inv: Math.atan,
+//     invName: 'arctan',
+//     lo0: -PI / 2,
+//     crit0: null,
+//     principal: [-PI / 2, PI / 2],
+//     fullRange: '(−∞, ∞)',
+//     x0: (5 * PI) / 6,
+//     levels: [-Math.sqrt(3), -1, 0, 1, Math.sqrt(3)],
+//     probes: [PI / 6, (5 * PI) / 6, (-3 * PI) / 4, (4 * PI) / 3, (7 * PI) / 4],
+//     fam(c) {
+//       return [[Math.atan(c), PI]];
+//     },
+//   },
+// };
+
+// const FN_ORDER = ['sin', 'cos', 'tan'];
+
+// const STAGES = [
+//   { id: 1, key: 'lineTest', label: 'Line test' },
+//   { id: 2, key: 'restrict', label: 'Restrict' },
+//   { id: 3, key: 'reflect', label: 'Reflect' },
+//   { id: 4, key: 'compose', label: 'Compose' },
+// ];
+
+// const DEFAULT_PRESETS = {
+//   lineTestFails: { fn: 'sin', stage: 1, level: 0.5, cut: [-PI, PI], t: 0 },
+//   arcsin: { fn: 'sin', stage: 3, cut: [-PI / 2, PI / 2], t: 1 },
+//   arccos: { fn: 'cos', stage: 3, cut: [0, PI], t: 1 },
+//   arctan: { fn: 'tan', stage: 3, cut: [-PI / 2, PI / 2], t: 1 },
+//   compositionFold: { fn: 'sin', stage: 4, probe: (5 * PI) / 6, t: 0 },
+// };
+
+// const isAsym = (fn, x) => fn === 'tan' && Math.abs(Math.cos(x)) < 1e-9;
+
+// /* ---------------- formatting ---------------- */
+
+// function fNum(v) {
+//   return (v < 0 ? '−' : '') + Math.abs(v).toFixed(3).replace(/\.?0+$/, '');
+// }
+
+// function fPi(v) {
+//   if (Math.abs(v) < 1e-9) return '0';
+//   const m = v / PI;
+//   for (const d of [1, 2, 3, 4, 6, 12]) {
+//     const n = m * d;
+//     if (Math.abs(n - Math.round(n)) < 1e-6) {
+//       const r = Math.round(n);
+//       const sign = r < 0 ? '−' : '';
+//       const a = Math.abs(r);
+//       const num = a === 1 ? '' : a;
+//       return d === 1 ? `${sign}${num}π` : `${sign}${num}π/${d}`;
+//     }
+//   }
+//   return fNum(v);
+// }
+
+// const NICE = [
+//   [0, '0'], [0.5, '1/2'], [Math.SQRT2 / 2, '√2/2'], [Math.sqrt(3) / 2, '√3/2'],
+//   [1, '1'], [Math.sqrt(3), '√3'], [1 / Math.sqrt(3), '√3/3'], [1.5, '3/2'], [2, '2'], [3, '3'],
+// ];
+
+// const NICE_LEVELS = NICE.reduce((acc, [n]) => (n ? acc.concat([n, -n]) : acc.concat([0])), []);
+
+// function fVal(v) {
+//   for (const [n, s] of NICE) {
+//     if (Math.abs(Math.abs(v) - n) < 1e-6) return (v < 0 && n !== 0 ? '−' : '') + s;
+//   }
+//   return fNum(v);
+// }
+
+// function fInt(lo, hi, loOpen, hiOpen, fmt) {
+//   const L = lo === -Infinity ? '(−∞' : (loOpen ? '(' : '[') + fmt(lo);
+//   const R = hi === Infinity ? '∞)' : fmt(hi) + (hiOpen ? ')' : ']');
+//   return `${L}, ${R}`;
+// }
+
+// function mixColor(h1, h2, t) {
+//   const p = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+//   const A = p(h1);
+//   const B = p(h2);
+//   return '#' + A.map((v, i) => Math.round(v + (B[i] - v) * t).toString(16).padStart(2, '0')).join('');
+// }
+
+// /* ---------------- math ---------------- */
+
+// function rootsIn(fn, c, lo, hi) {
+//   const out = [];
+//   for (const [b, p] of FN[fn].fam(c)) {
+//     const k0 = Math.ceil((lo - b) / p - 1e-9);
+//     for (let k = k0; ; k++) {
+//       const x = b + k * p;
+//       if (x > hi + 1e-9) break;
+//       if (x >= lo - 1e-9 && !isAsym(fn, x)) out.push(x);
+//     }
+//   }
+//   out.sort((u, v) => u - v);
+//   return out.filter((x, i) => i === 0 || Math.abs(x - out[i - 1]) > 1e-7);
+// }
+
+// function analyze(fn, a, b) {
+//   const F = FN[fn];
+//   const eps = 1e-6;
+//   const k = Math.floor(((a + b) / 2 - F.lo0) / PI);
+//   const plo = F.lo0 + k * PI;
+//   const phi = plo + PI;
+//   const oneToOne = a >= plo - eps && b <= phi + eps;
+//   const full = oneToOne && Math.abs(a - plo) < eps && Math.abs(b - phi) < eps;
+//   const principal = full && Math.abs(plo - F.principal[0]) < eps;
+//   return { oneToOne, full, principal, plo, phi };
+// }
+
+// function rangeOf(fn, a, b, an) {
+//   if (fn === 'tan') {
+//     if (!an.oneToOne) return { lo: -Infinity, hi: Infinity };
+//     return {
+//       lo: isAsym(fn, a) ? -Infinity : Math.tan(a),
+//       hi: isAsym(fn, b) ? Infinity : Math.tan(b),
+//     };
+//   }
+//   const F = FN[fn];
+//   const vals = [F.f(a), F.f(b)];
+//   const k0 = Math.ceil((a - F.crit0) / PI - 1e-9);
+//   for (let k = k0; ; k++) {
+//     const x = F.crit0 + k * PI;
+//     if (x > b + 1e-9) break;
+//     vals.push(Math.round(F.f(x)));
+//   }
+//   return { lo: Math.min(...vals), hi: Math.max(...vals) };
+// }
+
+// function curvePath(fn, lo, hi, map) {
+//   const f = FN[fn].f;
+//   const N = Math.max(80, Math.ceil(((hi - lo) / (2 * XMAX)) * 1400));
+//   let d = '';
+//   let pen = false;
+//   let prev = null;
+//   for (let i = 0; i <= N; i++) {
+//     const x = lo + ((hi - lo) * i) / N;
+//     if (fn === 'tan' && Math.abs(Math.cos(x)) < 1e-4) { pen = false; prev = null; continue; }
+//     const y = f(x);
+//     if (!Number.isFinite(y) || Math.abs(y) > YCLIP) { pen = false; prev = null; continue; }
+//     if (prev !== null && Math.abs(y - prev) > 4) pen = false;
+//     const P = map ? map(x, y) : [x, y];
+//     d += `${pen ? 'L' : 'M'}${f2(sx(P[0]))} ${f2(sy(P[1]))} `;
+//     pen = true;
+//     prev = y;
+//   }
+//   return d.trim();
+// }
+
+// /* ---------------- state helpers ---------------- */
+
+// function applyPreset(s, P) {
+//   const fn = FN[P.fn] ? P.fn : s.fn;
+//   const stage = [1, 2, 3, 4].includes(P.stage) ? P.stage : s.stage;
+//   const next = {
+//     ...s,
+//     fn,
+//     stage,
+//     t: typeof P.t === 'number' ? P.t : 0,
+//     probe: typeof P.probe === 'number' ? P.probe : FN[fn].x0,
+//   };
+//   if (typeof P.level === 'number') next.level = P.level;
+//   if (Array.isArray(P.cut) && P.cut.length === 2) {
+//     next.cutA = P.cut[0];
+//     next.cutB = P.cut[1];
+//   } else if (stage >= 3) {
+//     next.cutA = FN[fn].principal[0];
+//     next.cutB = FN[fn].principal[1];
+//   }
+//   return next;
+// }
+
+// function buildInitialState(p) {
+//   const fn = FN[p.initialFn] ? p.initialFn : 'sin';
+//   const stage = [1, 2, 3, 4].includes(p.initialStage) ? p.initialStage : 1;
+//   let s = {
+//     fn,
+//     stage,
+//     level: typeof p.initialLevel === 'number' ? p.initialLevel : 0.5,
+//     cutA: stage >= 3 ? FN[fn].principal[0] : -PI,
+//     cutB: stage >= 3 ? FN[fn].principal[1] : PI,
+//     t: 0,
+//     probe: typeof p.initialProbe === 'number' ? p.initialProbe : FN[fn].x0,
+//   };
+//   if (Array.isArray(p.initialCut) && p.initialCut.length === 2 && p.initialCut[0] < p.initialCut[1]) {
+//     s.cutA = p.initialCut[0];
+//     s.cutB = p.initialCut[1];
+//   }
+//   if (stage === 3 && p.initialReflected && analyze(fn, s.cutA, s.cutB).oneToOne) s.t = 1;
+//   if (p.initialPreset && p.presets && p.presets[p.initialPreset]) s = applyPreset(s, p.presets[p.initialPreset]);
+//   return s;
+// }
+
+// /* ---------------- styles ---------------- */
+
+// const STYLES = {
+//   container: { fontFamily: 'system-ui, -apple-system, sans-serif', padding: '10px', margin: '0 auto' },
+//   grid: { display: 'grid', gap: '12px', alignItems: 'start' },
+//   graphCard: { background: '#ffffff', border: `1px solid ${COLORS.uiSoft}`, borderRadius: '8px', padding: '8px' },
+//   svg: { width: '100%', height: 'auto', display: 'block', touchAction: 'none', userSelect: 'none', WebkitUserSelect: 'none' },
+//   legend: { display: 'flex', flexWrap: 'wrap', gap: '14px', fontSize: '12px', color: COLORS.muted, padding: '6px 4px 0' },
+//   legendItem: { display: 'inline-flex', alignItems: 'center', gap: '6px' },
+//   legendSwatch: (color, opacity = 1) => ({ width: '18px', height: '3px', borderRadius: '2px', display: 'inline-block', background: color, opacity }),
+//   controlsCard: { background: COLORS.card, border: `1px solid ${COLORS.border}`, borderRadius: '8px', padding: '10px', marginTop: '10px', display: 'grid', gap: '10px' },
+//   row: { display: 'flex', flexWrap: 'wrap', gap: '14px', alignItems: 'flex-end' },
+//   group: { display: 'flex', flexDirection: 'column', gap: '4px' },
+//   sectionLabel: { fontSize: '11px', color: COLORS.ui, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.4px' },
+//   btnGroup: { display: 'flex', flexWrap: 'wrap', gap: '3px' },
+//   button: (active) => ({
+//     padding: '5px 10px',
+//     fontSize: '12px',
+//     border: `1px solid ${active ? COLORS.ui : COLORS.uiSoft}`,
+//     borderRadius: '4px',
+//     cursor: 'pointer',
+//     background: active ? COLORS.ui : '#ffffff',
+//     color: active ? '#ffffff' : COLORS.ui,
+//     fontFamily: 'inherit',
+//   }),
+//   fnButton: (active) => ({
+//     padding: '5px 10px',
+//     minWidth: '44px',
+//     fontSize: '12px',
+//     fontFamily: 'monospace',
+//     border: `1px solid ${active ? COLORS.ui : COLORS.uiSoft}`,
+//     borderRadius: '4px',
+//     cursor: 'pointer',
+//     background: active ? COLORS.ui : '#ffffff',
+//     color: active ? '#ffffff' : COLORS.ui,
+//   }),
+//   primaryButton: (disabled) => ({
+//     padding: '6px 12px',
+//     fontSize: '12px',
+//     fontWeight: 600,
+//     border: `1px solid ${COLORS.amber}`,
+//     borderRadius: '4px',
+//     cursor: disabled ? 'not-allowed' : 'pointer',
+//     background: COLORS.amber,
+//     color: '#ffffff',
+//     opacity: disabled ? 0.45 : 1,
+//     fontFamily: 'inherit',
+//   }),
+//   readout: { fontSize: '13px', color: COLORS.text, padding: '4px 0' },
+//   count: { fontSize: '20px', fontWeight: 700, color: COLORS.red, lineHeight: 1 },
+//   divider: { borderTop: `1px solid ${COLORS.border}` },
+//   explanationsCard: { background: COLORS.card, border: `1px solid ${COLORS.border}`, borderRadius: '8px', padding: '12px' },
+//   explanationsTitle: {
+//     fontSize: '12px', fontWeight: 500, color: COLORS.ui, marginBottom: '8px', paddingBottom: '6px',
+//     borderBottom: `1px solid ${COLORS.border}`, textTransform: 'uppercase', letterSpacing: '0.4px',
+//   },
+//   explanationsBody: { fontSize: '13px', lineHeight: 1.65, color: COLORS.text },
+//   h3: { fontSize: '14px', margin: '0 0 6px', color: COLORS.text },
+//   p: { margin: '0 0 8px' },
+//   hint: { margin: '0 0 8px', color: COLORS.muted, fontSize: '12px' },
+//   blue: { color: COLORS.blue, fontWeight: 600 },
+//   amber: { color: COLORS.amber, fontWeight: 600 },
+//   red: { color: COLORS.red, fontWeight: 600 },
+//   ui: { color: COLORS.ui, fontWeight: 600 },
+//   badge: (kind) => {
+//     const map = {
+//       fail: ['#fee2e2', '#991b1b'],
+//       ok: ['#dcfce7', '#166534'],
+//       partial: ['#e2e8f0', '#334155'],
+//       alt: ['#e0e7ff', '#3730a3'],
+//     };
+//     const [bg, fg] = map[kind] || map.partial;
+//     return { display: 'inline-block', fontSize: '12px', fontWeight: 600, padding: '2px 8px', borderRadius: '10px', margin: '2px 0 8px', background: bg, color: fg };
+//   },
+//   table: { width: '100%', borderCollapse: 'collapse', margin: '4px 0 10px', fontSize: '13px' },
+//   th: { padding: '5px 6px', borderBottom: `1px solid ${COLORS.border}`, textAlign: 'left', fontWeight: 500, color: COLORS.muted, fontSize: '12px' },
+//   td: { padding: '5px 6px', borderBottom: `1px solid ${COLORS.border}`, textAlign: 'left' },
+//   eq: {
+//     fontFamily: 'Georgia, "Times New Roman", serif', fontSize: '15px', lineHeight: 1.8, background: '#ffffff',
+//     border: `1px solid ${COLORS.border}`, borderRadius: '6px', padding: '8px 10px', margin: '4px 0 10px',
+//   },
+//   extra: { marginTop: '6px', paddingTop: '8px', borderTop: `1px solid ${COLORS.border}` },
+// };
+
+// /* ============================================================
+//    InverseRestrictionScene - pure SVG renderer
+//    ============================================================ */
+
+// function InverseRestrictionScene({ fn, stage, level, cutA, cutB, t, probe, onHandleDrag, markerId }) {
+//   const svgRef = useRef(null);
+//   const dragRef = useRef(null);
+
+//   const F = FN[fn];
+//   const tt = stage === 3 ? t : 0;
+//   const an = analyze(fn, cutA, cutB);
+
+//   const toData = (e) => {
+//     const svg = svgRef.current;
+//     const pt = svg.createSVGPoint();
+//     pt.x = e.clientX;
+//     pt.y = e.clientY;
+//     const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+//     return { x: (p.x - CX) / S, y: (CY - p.y) / S };
+//   };
+
+//   const handlePointerDown = (e) => {
+//     const el = e.target.closest ? e.target.closest('[data-drag]') : null;
+//     if (!el || !onHandleDrag) return;
+//     dragRef.current = el.getAttribute('data-drag');
+//     try { svgRef.current.setPointerCapture(e.pointerId); } catch (_) { /* noop */ }
+//     e.preventDefault();
+//     onHandleDrag(dragRef.current, toData(e));
+//   };
+
+//   const handlePointerMove = (e) => {
+//     if (dragRef.current && onHandleDrag) onHandleDrag(dragRef.current, toData(e));
+//   };
+
+//   const handlePointerEnd = (e) => {
+//     if (!dragRef.current) return;
+//     dragRef.current = null;
+//     try { svgRef.current.releasePointerCapture(e.pointerId); } catch (_) { /* noop */ }
+//   };
+
+//   let kc = 0;
+//   const K = () => `n${kc++}`;
+//   const SERIF = { fontFamily: 'Georgia, serif', fontStyle: 'italic' };
+
+//   const ln = (x1, y1, x2, y2, stroke, w, extra = {}) => (
+//     <line key={K()} x1={f2(sx(x1))} y1={f2(sy(y1))} x2={f2(sx(x2))} y2={f2(sy(y2))} stroke={stroke} strokeWidth={w} {...extra} />
+//   );
+//   const dot = (x, y, fill, r = 5) => (
+//     <circle key={K()} cx={f2(sx(x))} cy={f2(sy(y))} r={r} fill={fill} stroke="#ffffff" strokeWidth={1.5} />
+//   );
+//   const txt = (s, px, py, fill, size = 11, anchor = 'middle', extra = {}) => (
+//     <text key={K()} x={f2(px)} y={f2(py)} fill={fill} fontSize={size} textAnchor={anchor} {...extra}>{s}</text>
+//   );
+//   const pth = (d, stroke, w, extra = {}) => (
+//     <path key={K()} d={d} fill="none" stroke={stroke} strokeWidth={w} strokeLinejoin="round" strokeLinecap="round" {...extra} />
+//   );
+//   const band = (lo, hi, fill, op) => (op > 0.002
+//     ? <rect key={K()} x={f2(sx(lo))} y={0} width={f2((hi - lo) * S)} height={H} fill={fill} opacity={op.toFixed(3)} />
+//     : null);
+//   const handle = (x, y, color, kind) => (
+//     <g key={K()} data-drag={kind} style={{ cursor: kind === 'line' ? 'ns-resize' : 'ew-resize' }}>
+//       <circle cx={f2(sx(x))} cy={f2(sy(y))} r={16} fill="transparent" />
+//       <circle cx={f2(sx(x))} cy={f2(sy(y))} r={8} fill="#ffffff" stroke={color} strokeWidth={3} />
+//       <circle cx={f2(sx(x))} cy={f2(sy(y))} r={2.5} fill={color} />
+//     </g>
+//   );
+
+//   const ticks = (axis, kind, op) => {
+//     if (op < 0.02) return null;
+//     const lim = axis === 'x' ? XMAX : YMAX;
+//     const vals = [];
+//     if (kind === 'pi') {
+//       for (let k = -8; k <= 8; k++) {
+//         const v = (k * PI) / 2;
+//         if (k !== 0 && Math.abs(v) <= lim - 0.1) vals.push(v);
+//       }
+//     } else {
+//       for (let k = -6; k <= 6; k++) if (k !== 0 && Math.abs(k) <= lim - 0.2) vals.push(k);
+//     }
+//     return (
+//       <g key={K()} opacity={op.toFixed(3)}>
+//         {vals.map((v) => {
+//           const lab = kind === 'pi' ? fPi(v) : fNum(v);
+//           if (axis === 'x') {
+//             return (
+//               <g key={`t${v}`}>
+//                 <line x1={f2(sx(v))} y1={f2(sy(0) - 4)} x2={f2(sx(v))} y2={f2(sy(0) + 4)} stroke={COLORS.axis} strokeWidth={1.2} />
+//                 <text x={f2(sx(v))} y={f2(sy(0) + 16)} fill={COLORS.muted} fontSize={10} textAnchor="middle">{lab}</text>
+//               </g>
+//             );
+//           }
+//           return (
+//             <g key={`t${v}`}>
+//               <line x1={f2(sx(0) - 4)} y1={f2(sy(v))} x2={f2(sx(0) + 4)} y2={f2(sy(v))} stroke={COLORS.axis} strokeWidth={1.2} />
+//               <text x={f2(sx(0) - 7)} y={f2(sy(v) + 3.5)} fill={COLORS.muted} fontSize={10} textAnchor="end">{lab}</text>
+//             </g>
+//           );
+//         })}
+//       </g>
+//     );
+//   };
+
+//   const lineTest = (o, lo, hi, showDiscarded) => {
+//     o.push(ln(-XMAX, level, XMAX, level, COLORS.red, 1.6, { strokeDasharray: '6 4' }));
+//     if (showDiscarded) {
+//       for (const x of rootsIn(fn, level, -XMAX, XMAX)) {
+//         if (x < lo - 1e-9 || x > hi + 1e-9) {
+//           o.push(<circle key={K()} cx={f2(sx(x))} cy={f2(sy(level))} r={4.5} fill="#ffffff" stroke={COLORS.axis} strokeWidth={1.5} />);
+//         }
+//       }
+//     }
+//     for (const x of rootsIn(fn, level, lo, hi)) o.push(dot(x, level, COLORS.red, 5.5));
+//     o.push(txt(`y = ${fVal(level)}`, sx(XMAX - 0.75), sy(level) - 10, COLORS.red, 11, 'end'));
+//     o.push(handle(XMAX - 0.35, level, COLORS.red, 'line'));
+//   };
+
+//   const cutGuides = (o, interactive, op) => {
+//     if (op < 0.02) return;
+//     const kids = [];
+//     for (const [key, x] of [['a', cutA], ['b', cutB]]) {
+//       kids.push(<line key={`g${key}`} x1={f2(sx(x))} y1={18} x2={f2(sx(x))} y2={H - 8} stroke={COLORS.ui} strokeWidth={1} strokeDasharray="4 4" opacity={0.7} />);
+//       kids.push(
+//         <text key={`l${key}`} x={f2(key === 'a' ? sx(x) - 5 : sx(x) + 5)} y={13} fill={COLORS.ui} fontSize={11} fontWeight={600} textAnchor={key === 'a' ? 'end' : 'start'}>
+//           {`${key} = ${fPi(x)}`}
+//         </text>
+//       );
+//       kids.push(interactive ? handle(x, 0, COLORS.ui, key) : dot(x, 0, COLORS.ui, 5));
+//     }
+//     o.push(<g key={K()} opacity={op.toFixed(3)}>{kids}</g>);
+//   };
+
+//   const brackets = (o, tv) => {
+//     const r = rangeOf(fn, cutA, cutB, an);
+//     const M = mapT(tv);
+//     const col = mixColor(COLORS.ui, COLORS.amber, tv);
+//     const seg = (P, Q) => ln(P[0], P[1], Q[0], Q[1], col, 6, { strokeLinecap: 'round', opacity: 0.28 });
+//     o.push(seg(M(cutA, 0), M(cutB, 0)));
+//     if (Number.isFinite(r.lo) && Number.isFinite(r.hi)) {
+//       o.push(seg(M(0, clamp(r.lo, -YCLIP, YCLIP)), M(0, clamp(r.hi, -YCLIP, YCLIP))));
+//     }
+//   };
+
+//   const o = [];
+
+//   // background bands
+//   if (stage === 2) o.push(band(cutA, cutB, COLORS.ui, 0.06));
+//   if (stage === 3) o.push(band(cutA, cutB, COLORS.ui, 0.06 * (1 - tt)));
+//   if (stage === 4) o.push(band(F.principal[0], F.principal[1], COLORS.amber, 0.09));
+
+//   // soft reference lines at ±1 (swap orientation with reflection)
+//   if (1 - tt > 0.02) for (const v of [1, -1]) o.push(ln(-XMAX, v, XMAX, v, COLORS.soft, 1, { strokeDasharray: '3 4', opacity: (1 - tt).toFixed(3) }));
+//   if (tt > 0.02) for (const v of [1, -1]) o.push(ln(v, -YMAX, v, YMAX, COLORS.soft, 1, { strokeDasharray: '3 4', opacity: tt.toFixed(3) }));
+
+//   // axes and ticks
+//   o.push(ln(-XMAX, 0, XMAX, 0, COLORS.axis, 1.5));
+//   o.push(ln(0, -YMAX, 0, YMAX, COLORS.axis, 1.5));
+//   o.push(txt('x', sx(XMAX) - 4, sy(0) - 8, COLORS.muted, 13, 'end', SERIF));
+//   o.push(txt('y', sx(0) + 8, sy(YMAX) + 10, COLORS.muted, 13, 'start', SERIF));
+//   o.push(ticks('x', 'pi', 1 - tt), ticks('y', 'num', 1 - tt), ticks('x', 'num', tt), ticks('y', 'pi', tt));
+
+//   o.push(txt(`y = ${fn} x`, 12, 20, COLORS.blue, 14, 'start', SERIF));
+
+//   // step 1 - line test on full domain
+//   if (stage === 1) {
+//     o.push(pth(curvePath(fn, -XMAX, XMAX), COLORS.blue, 2.4));
+//     lineTest(o, -XMAX, XMAX, false);
+//   }
+
+//   // step 2 - restrict
+//   if (stage === 2) {
+//     o.push(pth(curvePath(fn, -XMAX, XMAX), COLORS.blue, 2, { opacity: 0.22 }));
+//     brackets(o, 0);
+//     o.push(pth(curvePath(fn, cutA, cutB), COLORS.blue, 3));
+//     for (const e of [cutA, cutB]) if (!isAsym(fn, e)) o.push(dot(e, F.f(e), COLORS.blue, 4.5));
+//     lineTest(o, cutA, cutB, true);
+//     cutGuides(o, true, 1);
+//   }
+
+//   // step 3 - reflect across y = x
+//   if (stage === 3) {
+//     o.push(pth(curvePath(fn, -XMAX, XMAX), COLORS.blue, 2, { opacity: 0.14 }));
+//     o.push(ln(-YMAX, -YMAX, YMAX, YMAX, COLORS.slate, 1.2, { strokeDasharray: '7 5', opacity: 0.7 }));
+//     o.push(txt('y = x', sx(3.1) + 8, sy(3.1) + 4, COLORS.slate, 12, 'start', SERIF));
+//     if (an.oneToOne) brackets(o, tt);
+//     for (const e of [cutA, cutB]) {
+//       if (isAsym(fn, e)) o.push(ln(e, -YCLIP, e, YCLIP, COLORS.blue, 1.2, { strokeDasharray: '5 4', opacity: 0.55 }));
+//     }
+//     o.push(pth(curvePath(fn, cutA, cutB), COLORS.blue, 3));
+//     for (const e of [cutA, cutB]) if (!isAsym(fn, e)) o.push(dot(e, F.f(e), COLORS.blue, 4.5));
+
+//     if (an.oneToOne && tt > 0.001) {
+//       const M = mapT(tt);
+//       for (const e of [cutA, cutB]) {
+//         if (isAsym(fn, e)) {
+//           const P = M(e, -YCLIP);
+//           const Q = M(e, YCLIP);
+//           o.push(ln(P[0], P[1], Q[0], Q[1], COLORS.amber, 1.3, { strokeDasharray: '5 4' }));
+//         }
+//       }
+//       o.push(pth(curvePath(fn, cutA, cutB, M), COLORS.amber, 3));
+//       for (const e of [cutA, cutB]) {
+//         if (!isAsym(fn, e)) {
+//           const P = M(e, F.f(e));
+//           o.push(dot(P[0], P[1], COLORS.amber, 4.5));
+//         }
+//       }
+//       if (tt > 0.98) {
+//         o.push(txt(`y = ${an.principal ? `${F.invName} x` : 'inverse of this piece'}`, 12, 40, COLORS.amber, 14, 'start', SERIF));
+//       }
+//     }
+//     cutGuides(o, false, 1 - tt);
+//   }
+
+//   // step 4 - composition fold
+//   if (stage === 4) {
+//     const [p0, p1] = F.principal;
+//     o.push(pth(curvePath(fn, -XMAX, XMAX), COLORS.blue, 2, { opacity: 0.28 }));
+//     o.push(pth(curvePath(fn, p0, p1), COLORS.blue, 3));
+//     o.push(txt('principal interval', sx((p0 + p1) / 2), H - 8, COLORS.amber, 11, 'middle', { fontWeight: 600 }));
+
+//     const undef = isAsym(fn, probe);
+//     if (!undef) {
+//       const y0 = F.f(probe);
+//       const x1 = F.inv(y0);
+//       const yv = clamp(y0, -YMAX - 0.5, YMAX + 0.5);
+//       o.push(ln(probe, 0, probe, yv, COLORS.blue, 1.3, { strokeDasharray: '4 3' }));
+//       o.push(ln(probe, yv, x1, yv, COLORS.slate, 1.3, { strokeDasharray: '4 3' }));
+//       o.push(ln(x1, yv, x1, 0, COLORS.amber, 1.6, { strokeDasharray: '4 3' }));
+//       if (Math.abs(y0) <= YMAX) {
+//         o.push(dot(probe, y0, COLORS.blue, 5.5));
+//         o.push(dot(x1, y0, COLORS.amber, 5.5));
+//         const up = y0 < YMAX - 0.4;
+//         o.push(txt(`${fn}(${fPi(probe)}) = ${fVal(y0)}`, sx(probe), sy(y0) + (up ? -12 : 20), COLORS.blue, 11));
+//       }
+//       o.push(
+//         <rect
+//           key={K()}
+//           x={f2(sx(x1) - 5)}
+//           y={f2(sy(0) - 5)}
+//           width={10}
+//           height={10}
+//           fill={COLORS.amber}
+//           stroke="#ffffff"
+//           strokeWidth={1.5}
+//           transform={`rotate(45 ${f2(sx(x1))} ${f2(sy(0))})`}
+//         />
+//       );
+//       if (Math.abs(x1 - probe) > 1e-6) {
+//         const dir = y0 >= 0 ? 1 : -1;
+//         const startY = sy(0) + dir * 26;
+//         const dx = Math.abs(sx(x1) - sx(probe));
+//         const depth = Math.min(70, 16 + dx * 0.16);
+//         const cxp = (sx(probe) + sx(x1)) / 2;
+//         const cyp = startY + dir * depth * 2;
+//         o.push(
+//           <path
+//             key={K()}
+//             d={`M ${f2(sx(probe))} ${f2(startY)} Q ${f2(cxp)} ${f2(cyp)} ${f2(sx(x1))} ${f2(startY)}`}
+//             fill="none"
+//             stroke={COLORS.amber}
+//             strokeWidth={1.8}
+//             markerEnd={`url(#${markerId})`}
+//           />
+//         );
+//         const ly = clamp(startY + dir * (depth + 14), 14, H - 6);
+//         o.push(txt(`${fPi(probe)} ↦ ${fPi(x1)}`, cxp, ly, COLORS.amber, 12, 'middle', { fontWeight: 600 }));
+//       }
+//     }
+//     o.push(handle(probe, 0, COLORS.ui, 'probe'));
+//     const above = undef || F.f(probe) >= 0;
+//     o.push(txt(`x = ${fPi(probe)}`, sx(probe) + 11, sy(0) + (above ? -9 : 18), COLORS.ui, 11, 'start', { fontWeight: 600 }));
+//   }
+
+//   return (
+//     <svg
+//       ref={svgRef}
+//       viewBox={`0 0 ${W} ${H}`}
+//       xmlns="http://www.w3.org/2000/svg"
+//       role="img"
+//       aria-label={`Graph of ${fn}, step ${stage}`}
+//       style={STYLES.svg}
+//       onPointerDown={handlePointerDown}
+//       onPointerMove={handlePointerMove}
+//       onPointerUp={handlePointerEnd}
+//       onPointerCancel={handlePointerEnd}
+//     >
+//       <defs>
+//         <marker id={markerId} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+//           <path d="M0,0 L10,5 L0,10 z" fill={COLORS.amber} />
+//         </marker>
+//       </defs>
+//       <g fontFamily="system-ui, -apple-system, sans-serif">{o}</g>
+//     </svg>
+//   );
+// }
+
+// /* ============================================================
+//    Legend
+//    ============================================================ */
+
+// function Legend() {
+//   return (
+//     <div style={STYLES.legend}>
+//       <span style={STYLES.legendItem}><i style={STYLES.legendSwatch(COLORS.blue)} />parent function</span>
+//       <span style={STYLES.legendItem}><i style={STYLES.legendSwatch(COLORS.amber)} />inverse</span>
+//       <span style={STYLES.legendItem}><i style={STYLES.legendSwatch(COLORS.red)} />horizontal line and crossings</span>
+//       <span style={STYLES.legendItem}><i style={STYLES.legendSwatch(COLORS.ui, 0.35)} />kept domain</span>
+//     </div>
+//   );
+// }
+
+// /* ============================================================
+//    ControlsBar
+//    ============================================================ */
+
+// function ControlsBar({
+//   fn, stage, level, cutA, cutB, t, probe,
+//   onFn, onStage, onLevel, onPrincipal, onReflect, onProbe,
+//   presets, showPresets, onPreset,
+// }) {
+//   const F = FN[fn];
+//   const an = analyze(fn, cutA, cutB);
+
+//   const crossings = stage === 1
+//     ? rootsIn(fn, level, -XMAX, XMAX).length
+//     : rootsIn(fn, level, cutA, cutB).length;
+
+//   return (
+//     <div style={STYLES.controlsCard}>
+//       <div style={STYLES.row}>
+//         <div style={STYLES.group}>
+//           <span style={STYLES.sectionLabel}>Function</span>
+//           <div style={STYLES.btnGroup}>
+//             {FN_ORDER.map((f) => (
+//               <button key={f} type="button" onClick={() => onFn(f)} style={STYLES.fnButton(fn === f)}>{f}</button>
+//             ))}
+//           </div>
+//         </div>
+//         <div style={STYLES.group}>
+//           <span style={STYLES.sectionLabel}>Step</span>
+//           <div style={STYLES.btnGroup}>
+//             {STAGES.map((s) => (
+//               <button key={s.id} type="button" onClick={() => onStage(s.id)} style={STYLES.button(stage === s.id)}>
+//                 {`${s.id}. ${s.label}`}
+//               </button>
+//             ))}
+//           </div>
+//         </div>
+//       </div>
+
+//       <div style={STYLES.divider} />
+
+//       <div style={STYLES.row}>
+//         {(stage === 1 || stage === 2) && (
+//           <>
+//             <div style={STYLES.group}>
+//               <span style={STYLES.sectionLabel}>{stage === 1 ? 'Crossings in view' : 'Crossings on kept piece'}</span>
+//               <span style={STYLES.count}>{crossings}</span>
+//             </div>
+//             <div style={STYLES.group}>
+//               <span style={STYLES.sectionLabel}>Line level</span>
+//               <div style={STYLES.btnGroup}>
+//                 {F.levels.map((v) => (
+//                   <button key={v} type="button" onClick={() => onLevel(v)} style={STYLES.button(Math.abs(level - v) < 1e-9)}>
+//                     {fVal(v)}
+//                   </button>
+//                 ))}
+//               </div>
+//             </div>
+//           </>
+//         )}
+
+//         {stage === 2 && (
+//           <>
+//             <div style={STYLES.group}>
+//               <span style={STYLES.sectionLabel}>Kept domain</span>
+//               <span style={STYLES.readout}>
+//                 <b>{fInt(cutA, cutB, isAsym(fn, cutA), isAsym(fn, cutB), fPi)}</b>
+//               </span>
+//             </div>
+//             <div style={STYLES.group}>
+//               <span style={STYLES.sectionLabel}>Shortcut</span>
+//               <div style={STYLES.btnGroup}>
+//                 <button type="button" onClick={onPrincipal} style={STYLES.button(an.principal)}>Use principal interval</button>
+//               </div>
+//             </div>
+//           </>
+//         )}
+
+//         {stage === 3 && (
+//           <>
+//             <div style={STYLES.group}>
+//               <span style={STYLES.sectionLabel}>Reflection</span>
+//               <div style={STYLES.btnGroup}>
+//                 <button type="button" onClick={onReflect} disabled={!an.oneToOne} style={STYLES.primaryButton(!an.oneToOne)}>
+//                   {t > 0.5 ? 'Undo reflection' : 'Reflect across y = x'}
+//                 </button>
+//               </div>
+//             </div>
+//             {!an.oneToOne && (
+//               <div style={STYLES.group}>
+//                 <span style={STYLES.sectionLabel}>Kept piece</span>
+//                 <span style={STYLES.readout}>Not one-to-one. Go back to step 2.</span>
+//               </div>
+//             )}
+//           </>
+//         )}
+
+//         {stage === 4 && (
+//           <>
+//             <div style={STYLES.group}>
+//               <span style={STYLES.sectionLabel}>Input</span>
+//               <span style={STYLES.readout}><b>{`x = ${fPi(probe)}`}</b></span>
+//             </div>
+//             <div style={STYLES.group}>
+//               <span style={STYLES.sectionLabel}>Try</span>
+//               <div style={STYLES.btnGroup}>
+//                 {F.probes.map((v) => (
+//                   <button key={v} type="button" onClick={() => onProbe(v)} style={STYLES.button(Math.abs(probe - v) < 1e-9)}>
+//                     {fPi(v)}
+//                   </button>
+//                 ))}
+//               </div>
+//             </div>
+//           </>
+//         )}
+//       </div>
+
+//       {showPresets && presets && (
+//         <>
+//           <div style={STYLES.divider} />
+//           <div style={STYLES.row}>
+//             <div style={STYLES.group}>
+//               <span style={STYLES.sectionLabel}>Frozen states</span>
+//               <div style={STYLES.btnGroup}>
+//                 {Object.keys(presets).map((k) => (
+//                   <button key={k} type="button" onClick={() => onPreset(k)} style={STYLES.button(false)}>{k}</button>
+//                 ))}
+//               </div>
+//             </div>
+//           </div>
+//         </>
+//       )}
+//     </div>
+//   );
+// }
+
+// /* ============================================================
+//    ExplanationPanel
+//    ============================================================ */
+
+// function Badge({ kind, children }) {
+//   return <span style={STYLES.badge(kind)}>{children}</span>;
+// }
+
+// function ExplanationPanel({ fn, stage, level, cutA, cutB, probe, title, extra, renderText }) {
+//   const F = FN[fn];
+//   const an = analyze(fn, cutA, cutB);
+//   const pI = fInt(F.principal[0], F.principal[1], fn === 'tan', fn === 'tan', fPi);
+//   const dI = fInt(cutA, cutB, isAsym(fn, cutA), isAsym(fn, cutB), fPi);
+
+//   let body = null;
+
+//   if (stage === 1) {
+//     const n = rootsIn(fn, level, -XMAX, XMAX).length;
+//     body = (
+//       <>
+//         <h3 style={STYLES.h3}>Horizontal line test</h3>
+//         <p style={STYLES.p}>
+//           The line <span style={STYLES.red}>{`y = ${fVal(level)}`}</span> meets{' '}
+//           <span style={STYLES.blue}>{`y = ${fn} x`}</span> at <b>{n}</b> {n === 1 ? 'point' : 'points'} in view.
+//         </p>
+//         {n >= 2 && (
+//           <>
+//             <Badge kind="fail">{`Fails: ${n} crossings`}</Badge>
+//             <p style={STYLES.p}>
+//               {`Each crossing is a different x with the same output ${fVal(level)}. Asked which x gives ${fVal(level)}, the graph offers ${n} answers here and infinitely many overall.`}
+//             </p>
+//             <p style={STYLES.p}>{`One such line is enough: ${fn} has no inverse on its full domain.`}</p>
+//           </>
+//         )}
+//         {n === 0 && (
+//           <>
+//             <Badge kind="partial">No crossings</Badge>
+//             <p style={STYLES.p}>
+//               {`${fVal(level)} is outside the range ${F.fullRange}, so no x produces it. Missing the curve proves nothing; a line with two or more crossings is what rules an inverse out.`}
+//             </p>
+//           </>
+//         )}
+//         {n === 1 && (
+//           <>
+//             <Badge kind="partial">One crossing at this level</Badge>
+//             <p style={STYLES.p}>This level is hit once, but other levels are hit many times.</p>
+//           </>
+//         )}
+//         <p style={STYLES.hint}>Drag the red handle up and down.</p>
+//       </>
+//     );
+//   }
+
+//   if (stage === 2) {
+//     const n = rootsIn(fn, level, cutA, cutB).length;
+//     const r = rangeOf(fn, cutA, cutB, an);
+//     const rI = fInt(r.lo, r.hi, false, false, fVal);
+//     let verdict;
+//     if (!an.oneToOne) {
+//       verdict = (
+//         <>
+//           <Badge kind="fail">Not one-to-one</Badge>
+//           <p style={STYLES.p}>
+//             {fn === 'tan'
+//               ? 'The kept piece spans an asymptote, so the same outputs repeat on both sides of it.'
+//               : 'The kept piece contains a turning point: the curve rises and falls inside it, so some levels are hit twice.'}
+//           </p>
+//         </>
+//       );
+//     } else if (!an.full) {
+//       verdict = (
+//         <>
+//           <Badge kind="partial">One-to-one, partial range</Badge>
+//           <p style={STYLES.p}>
+//             {`Every level is hit at most once, but the piece only reaches ${rI}, not the full range ${F.fullRange}. Some outputs would have no answer.`}
+//           </p>
+//         </>
+//       );
+//     } else if (!an.principal) {
+//       verdict = (
+//         <>
+//           <Badge kind="alt">One-to-one, full range, not standard</Badge>
+//           <p style={STYLES.p}>{`This piece works, but it is not the convention. The principal interval is ${pI}.`}</p>
+//         </>
+//       );
+//     } else {
+//       verdict = (
+//         <>
+//           <Badge kind="ok">Principal interval</Badge>
+//           <p style={STYLES.p}>
+//             {`Every output in ${F.fullRange} is reached exactly once. This is the piece that defines ${F.invName}.`}
+//           </p>
+//         </>
+//       );
+//     }
+//     body = (
+//       <>
+//         <h3 style={STYLES.h3}>Restrict the domain</h3>
+//         <p style={STYLES.p}>
+//           Kept piece: x in <span style={STYLES.ui}>{dI}</span>. The line{' '}
+//           <span style={STYLES.red}>{`y = ${fVal(level)}`}</span> crosses it <b>{n}</b> {n === 1 ? 'time' : 'times'}.
+//         </p>
+//         {verdict}
+//         <p style={STYLES.hint}>Drag the two blue handles on the x-axis. They snap to multiples of π/12.</p>
+//       </>
+//     );
+//   }
+
+//   if (stage === 3) {
+//     if (!an.oneToOne) {
+//       body = (
+//         <>
+//           <h3 style={STYLES.h3}>Reflect across y = x</h3>
+//           <Badge kind="fail">Nothing to reflect yet</Badge>
+//           <p style={STYLES.p}>
+//             The kept piece is not one-to-one, so its reflection would not be a function. Go back to step 2 and narrow the cut.
+//           </p>
+//         </>
+//       );
+//     } else {
+//       const r = rangeOf(fn, cutA, cutB, an);
+//       const rI = fInt(r.lo, r.hi, false, false, fVal);
+//       const invLabel = an.principal ? F.invName : 'inverse';
+//       const tanAsym = fn === 'tan' && isAsym(fn, cutA) && isAsym(fn, cutB);
+//       body = (
+//         <>
+//           <h3 style={STYLES.h3}>Reflect across y = x</h3>
+//           <table style={STYLES.table}>
+//             <thead>
+//               <tr>
+//                 <th style={STYLES.th} />
+//                 <th style={{ ...STYLES.th, ...STYLES.blue }}>{`${fn} (kept piece)`}</th>
+//                 <th style={{ ...STYLES.th, ...STYLES.amber }}>{invLabel}</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               <tr>
+//                 <td style={STYLES.td}>domain</td>
+//                 <td style={STYLES.td}>{dI}</td>
+//                 <td style={STYLES.td}>{rI}</td>
+//               </tr>
+//               <tr>
+//                 <td style={STYLES.td}>range</td>
+//                 <td style={STYLES.td}>{rI}</td>
+//                 <td style={STYLES.td}>{dI}</td>
+//               </tr>
+//             </tbody>
+//           </table>
+//           <p style={STYLES.p}>
+//             Reflection sends every point (x, y) to (y, x), so the domain and range trade places. The axis labels swap with them.
+//           </p>
+//           {tanAsym && (
+//             <p style={STYLES.p}>
+//               The vertical asymptotes turn horizontal: arctan approaches −π/2 and π/2 but never reaches them.
+//             </p>
+//           )}
+//           {!an.principal && (
+//             <p style={STYLES.p}>{`This is a valid inverse of the kept piece, but it is not ${F.invName}, which is built on ${pI}.`}</p>
+//           )}
+//         </>
+//       );
+//     }
+//   }
+
+//   if (stage === 4) {
+//     const undef = isAsym(fn, probe);
+//     let content;
+//     if (undef) {
+//       content = <p style={STYLES.p}>{`tan is undefined at ${fPi(probe)}, so the composition is undefined there.`}</p>;
+//     } else {
+//       const y0 = F.f(probe);
+//       const x1 = F.inv(y0);
+//       const folded = Math.abs(x1 - probe) > 1e-6;
+//       content = (
+//         <>
+//           <div style={STYLES.eq}>
+//             {`${F.invName}(${fn}(${fPi(probe)}))`}
+//             <br />
+//             {`= ${F.invName}(${fVal(y0)})`}
+//             <br />
+//             = <span style={STYLES.amber}>{fPi(x1)}</span>
+//           </div>
+//           {folded ? (
+//             <>
+//               <Badge kind="alt">{`Folded: ${fPi(probe)} ↦ ${fPi(x1)}`}</Badge>
+//               <p style={STYLES.p}>
+//                 {`${fPi(probe)} lies outside the principal interval ${pI} (shaded). ${F.invName} only returns angles inside it, so it returns the one angle there with the same ${fn} value.`}
+//               </p>
+//               <p style={STYLES.p}>{`The composition folds x back into the interval instead of undoing ${fn}.`}</p>
+//             </>
+//           ) : (
+//             <>
+//               <Badge kind="ok">No fold</Badge>
+//               <p style={STYLES.p}>
+//                 {`${fPi(probe)} is already inside ${pI}, so the composition returns x unchanged. It is the identity only on this interval.`}
+//               </p>
+//             </>
+//           )}
+//         </>
+//       );
+//     }
+//     body = (
+//       <>
+//         <h3 style={STYLES.h3}>{`Compose: ${F.invName}(${fn} x)`}</h3>
+//         {content}
+//         <p style={STYLES.hint}>Drag the blue handle along the x-axis.</p>
+//       </>
+//     );
+//   }
+
+//   return (
+//     <div style={STYLES.explanationsCard}>
+//       <div style={STYLES.explanationsTitle}>{title}</div>
+//       <div style={STYLES.explanationsBody}>
+//         {body}
+//         {extra ? <div style={STYLES.extra}>{renderText(extra)}</div> : null}
+//       </div>
+//     </div>
+//   );
+// }
+
+// /* ============================================================
+//    InverseFunctionExplorer - wrapper, owns all state
+//    ============================================================ */
+
+// export default function InverseFunctionExplorer({
+//   initialFn = 'sin',
+//   initialStage = 1,
+//   initialLevel = 0.5,
+//   initialCut = null,
+//   initialReflected = false,
+//   initialProbe = null,
+//   initialPreset = null,
+//   presets = DEFAULT_PRESETS,
+//   showPresets = false,
+//   explanations = {},
+//   renderText = (s) => s,
+//   explanationsTitle = 'Explanations',
+//   maxWidth = 1252,
+//   narrowBreakpoint = 760,
+// }) {
+//   const [st, setSt] = useState(() => buildInitialState({
+//     initialFn, initialStage, initialLevel, initialCut, initialReflected, initialProbe, initialPreset, presets,
+//   }));
+//   const [narrow, setNarrow] = useState(false);
+
+//   const containerRef = useRef(null);
+//   const animRef = useRef(null);
+//   const tRef = useRef(st.t);
+
+//   const reactId = typeof React.useId === 'function' ? React.useId() : 'ife';
+//   const markerId = `ife-arrow-${String(reactId).replace(/[^a-zA-Z0-9_-]/g, '')}`;
+
+//   useEffect(() => { tRef.current = st.t; }, [st.t]);
+
+//   // responsive layout: stack columns when the container is narrow
+//   useEffect(() => {
+//     const el = containerRef.current;
+//     if (!el || typeof ResizeObserver === 'undefined') return undefined;
+//     const ro = new ResizeObserver((entries) => {
+//       const w = entries[0] && entries[0].contentRect ? entries[0].contentRect.width : el.offsetWidth;
+//       setNarrow(w < narrowBreakpoint);
+//     });
+//     ro.observe(el);
+//     return () => ro.disconnect();
+//   }, [narrowBreakpoint]);
+
+//   const stopAnim = useCallback(() => {
+//     if (animRef.current) {
+//       cancelAnimationFrame(animRef.current);
+//       animRef.current = null;
+//     }
+//   }, []);
+
+//   useEffect(() => stopAnim, [stopAnim]);
+
+//   const animateTo = useCallback((target) => {
+//     stopAnim();
+//     const start = tRef.current;
+//     const reduce = typeof window !== 'undefined' && window.matchMedia
+//       && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+//     const dur = reduce ? 0 : 1100 * Math.abs(target - start);
+//     const ease = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+//     const t0 = typeof performance !== 'undefined' ? performance.now() : Date.now();
+//     const step = (now) => {
+//       const u = dur ? Math.min(1, (now - t0) / dur) : 1;
+//       const v = u < 1 ? start + (target - start) * ease(u) : target;
+//       setSt((s) => ({ ...s, t: v }));
+//       if (u < 1) animRef.current = requestAnimationFrame(step);
+//       else animRef.current = null;
+//     };
+//     animRef.current = requestAnimationFrame(step);
+//   }, [stopAnim]);
+
+//   const handleFn = useCallback((f) => {
+//     stopAnim();
+//     setSt((s) => {
+//       const next = { ...s, fn: f, t: 0, probe: FN[f].x0 };
+//       if (s.stage >= 3) {
+//         next.cutA = FN[f].principal[0];
+//         next.cutB = FN[f].principal[1];
+//       } else {
+//         next.cutA = -PI;
+//         next.cutB = PI;
+//       }
+//       return next;
+//     });
+//   }, [stopAnim]);
+
+//   const handleStage = useCallback((id) => {
+//     stopAnim();
+//     setSt((s) => ({ ...s, stage: id, t: 0 }));
+//   }, [stopAnim]);
+
+//   const handleLevel = useCallback((v) => setSt((s) => ({ ...s, level: v })), []);
+
+//   const handlePrincipal = useCallback(() => {
+//     setSt((s) => ({ ...s, cutA: FN[s.fn].principal[0], cutB: FN[s.fn].principal[1] }));
+//   }, []);
+
+//   const handleReflect = useCallback(() => {
+//     animateTo(tRef.current > 0.5 ? 0 : 1);
+//   }, [animateTo]);
+
+//   const handleProbe = useCallback((v) => setSt((s) => ({ ...s, probe: v })), []);
+
+//   const handlePreset = useCallback((k) => {
+//     if (!presets || !presets[k]) return;
+//     stopAnim();
+//     setSt((s) => applyPreset(s, presets[k]));
+//   }, [presets, stopAnim]);
+
+//   const handleDrag = useCallback((kind, p) => {
+//     setSt((s) => {
+//       if (kind === 'line') {
+//         let c = clamp(p.y, -YMAX + 0.15, YMAX - 0.15);
+//         for (const n of NICE_LEVELS) {
+//           if (Math.abs(c - n) < 0.05) { c = n; break; }
+//         }
+//         return { ...s, level: c };
+//       }
+//       if (kind === 'a') return { ...s, cutA: clamp(snap12(p.x), -2 * PI, s.cutB - STEP) };
+//       if (kind === 'b') return { ...s, cutB: clamp(snap12(p.x), s.cutA + STEP, 2 * PI) };
+//       if (kind === 'probe') return { ...s, probe: clamp(snap12(p.x), -2 * PI, 2 * PI) };
+//       return s;
+//     });
+//   }, []);
+
+//   const stageKey = (STAGES.find((s) => s.id === st.stage) || STAGES[0]).key;
+
+//   return (
+//     <div ref={containerRef} style={{ ...STYLES.container, maxWidth: `${maxWidth}px` }}>
+//       <div style={{ ...STYLES.grid, gridTemplateColumns: narrow ? '1fr' : '5fr 2fr' }}>
+//         <div>
+//           <div style={STYLES.graphCard}>
+//             <InverseRestrictionScene
+//               fn={st.fn}
+//               stage={st.stage}
+//               level={st.level}
+//               cutA={st.cutA}
+//               cutB={st.cutB}
+//               t={st.t}
+//               probe={st.probe}
+//               onHandleDrag={handleDrag}
+//               markerId={markerId}
+//             />
+//             <Legend />
+//           </div>
+//           <ControlsBar
+//             fn={st.fn}
+//             stage={st.stage}
+//             level={st.level}
+//             cutA={st.cutA}
+//             cutB={st.cutB}
+//             t={st.t}
+//             probe={st.probe}
+//             onFn={handleFn}
+//             onStage={handleStage}
+//             onLevel={handleLevel}
+//             onPrincipal={handlePrincipal}
+//             onReflect={handleReflect}
+//             onProbe={handleProbe}
+//             presets={presets}
+//             showPresets={showPresets}
+//             onPreset={handlePreset}
+//           />
+//         </div>
+//         <ExplanationPanel
+//           fn={st.fn}
+//           stage={st.stage}
+//           level={st.level}
+//           cutA={st.cutA}
+//           cutB={st.cutB}
+//           probe={st.probe}
+//           title={explanationsTitle}
+//           extra={explanations ? explanations[stageKey] : null}
+//           renderText={renderText}
+//         />
+//       </div>
+//     </div>
+//   );
+// }
+
+
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+
+/* ============================================================
+   InverseFunctionExplorer v2
+
+   Teaches inverse trig functions through four steps:
+   1. Line test   - drag a horizontal line, count crossings
+   2. Restrict    - drag two domain-cut handles until one-to-one
+   3. Reflect     - animate the kept piece across y = x
+   4. Compose     - probe x, watch f^-1(f(x)) fold into the
+                    principal interval
+
+   Structure (self-contained, no custom-module imports):
+   - InverseRestrictionScene : pure SVG renderer, props only,
+                               reports handle drags upward
+   - ControlsBar             : function / step / stage controls
+   - ExplanationPanel        : live, stage-aware text
+   - InverseFunctionExplorer : wrapper, owns all state
+
+   Colour convention: blue = parent function, amber = inverse.
+   Plot uses equal x/y scale so the y = x reflection is true.
+   ============================================================ */
+
+/* ---------------- geometry ---------------- */
+
+const PI = Math.PI;
+const XMAX = 6.8;
+const YMAX = 3.5;
+const YCLIP = 8;
+const W = 760;
+const H = 400;
+const CX = 380;
+const CY = 200;
+const S = 720 / (2 * XMAX);
+const STEP = PI / 12;
+
+const COLORS = {
+  blue: '#1d4ed8',
+  ui: '#1e40af',
+  uiSoft: '#bfdbfe',
+  amber: '#d97706',
+  red: '#dc2626',
+  axis: '#94a3b8',
+  soft: '#e2e8f0',
+  text: '#0f172a',
+  muted: '#64748b',
+  slate: '#475569',
+  card: '#f3f4f6',
+  border: '#d1d5db',
+};
+
+const sx = (x) => CX + x * S;
+const sy = (y) => CY - y * S;
+const f2 = (v) => v.toFixed(2);
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const snap12 = (x) => Math.round(x / STEP) * STEP;
+const mapT = (t) => (x, y) => [(1 - t) * x + t * y, (1 - t) * y + t * x];
+
+/* ---------------- function definitions ---------------- */
+
+const FN = {
+  sin: {
+    f: Math.sin,
+    inv: Math.asin,
+    invName: 'arcsin',
+    lo0: -PI / 2,
+    crit0: PI / 2,
+    principal: [-PI / 2, PI / 2],
+    fullRange: '[−1, 1]',
+    x0: (5 * PI) / 6,
+    levels: [-1, -0.5, 0, 0.5, 1, 1.5],
+    probes: [PI / 6, (5 * PI) / 6, (7 * PI) / 6, (-5 * PI) / 6, (2 * PI) / 3, (3 * PI) / 2],
+    fam(c) {
+      if (Math.abs(c) > 1 + 1e-12) return [];
+      const b = Math.asin(clamp(c, -1, 1));
+      return [[b, 2 * PI], [PI - b, 2 * PI]];
+    },
+  },
+  cos: {
+    f: Math.cos,
+    inv: Math.acos,
+    invName: 'arccos',
+    lo0: 0,
+    crit0: 0,
+    principal: [0, PI],
+    fullRange: '[−1, 1]',
+    x0: -PI / 3,
+    levels: [-1, -0.5, 0, 0.5, 1, 1.5],
+    probes: [PI / 3, -PI / 3, (4 * PI) / 3, (5 * PI) / 3, (-2 * PI) / 3],
+    fam(c) {
+      if (Math.abs(c) > 1 + 1e-12) return [];
+      const b = Math.acos(clamp(c, -1, 1));
+      return [[b, 2 * PI], [-b, 2 * PI]];
+    },
+  },
+  tan: {
+    f: Math.tan,
+    inv: Math.atan,
+    invName: 'arctan',
+    lo0: -PI / 2,
+    crit0: null,
+    principal: [-PI / 2, PI / 2],
+    fullRange: '(−∞, ∞)',
+    x0: (5 * PI) / 6,
+    levels: [-Math.sqrt(3), -1, 0, 1, Math.sqrt(3)],
+    probes: [PI / 6, (5 * PI) / 6, (-3 * PI) / 4, (4 * PI) / 3, (7 * PI) / 4],
+    fam(c) {
+      return [[Math.atan(c), PI]];
+    },
+  },
+};
+
+const FN_ORDER = ['sin', 'cos', 'tan'];
+
+const STAGES = [
+  { id: 1, key: 'lineTest', label: 'Line test' },
+  { id: 2, key: 'restrict', label: 'Restrict' },
+  { id: 3, key: 'reflect', label: 'Reflect' },
+  { id: 4, key: 'compose', label: 'Compose' },
+];
+
+const DEFAULT_PRESETS = {
+  lineTestFails: { fn: 'sin', stage: 1, level: 0.5, cut: [-PI, PI], t: 0 },
+  arcsin: { fn: 'sin', stage: 3, cut: [-PI / 2, PI / 2], t: 1 },
+  arccos: { fn: 'cos', stage: 3, cut: [0, PI], t: 1 },
+  arctan: { fn: 'tan', stage: 3, cut: [-PI / 2, PI / 2], t: 1 },
+  compositionFold: { fn: 'sin', stage: 4, probe: (5 * PI) / 6, t: 0 },
+};
+
+const isAsym = (fn, x) => fn === 'tan' && Math.abs(Math.cos(x)) < 1e-9;
+
+/* ---------------- formatting ---------------- */
+
+function fNum(v) {
+  return (v < 0 ? '−' : '') + Math.abs(v).toFixed(3).replace(/\.?0+$/, '');
+}
+
+function fPi(v) {
+  if (Math.abs(v) < 1e-9) return '0';
+  const m = v / PI;
+  for (const d of [1, 2, 3, 4, 6, 12]) {
+    const n = m * d;
+    if (Math.abs(n - Math.round(n)) < 1e-6) {
+      const r = Math.round(n);
+      const sign = r < 0 ? '−' : '';
+      const a = Math.abs(r);
+      const num = a === 1 ? '' : a;
+      return d === 1 ? `${sign}${num}π` : `${sign}${num}π/${d}`;
+    }
+  }
+  return fNum(v);
+}
+
+const NICE = [
+  [0, '0'], [0.5, '1/2'], [Math.SQRT2 / 2, '√2/2'], [Math.sqrt(3) / 2, '√3/2'],
+  [1, '1'], [Math.sqrt(3), '√3'], [1 / Math.sqrt(3), '√3/3'], [1.5, '3/2'], [2, '2'], [3, '3'],
+];
+
+const NICE_LEVELS = NICE.reduce((acc, [n]) => (n ? acc.concat([n, -n]) : acc.concat([0])), []);
+
+function fVal(v) {
+  for (const [n, s] of NICE) {
+    if (Math.abs(Math.abs(v) - n) < 1e-6) return (v < 0 && n !== 0 ? '−' : '') + s;
+  }
+  return fNum(v);
+}
+
+function fInt(lo, hi, loOpen, hiOpen, fmt) {
+  const L = lo === -Infinity ? '(−∞' : (loOpen ? '(' : '[') + fmt(lo);
+  const R = hi === Infinity ? '∞)' : fmt(hi) + (hiOpen ? ')' : ']');
+  return `${L}, ${R}`;
+}
+
+function mixColor(h1, h2, t) {
+  const p = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  const A = p(h1);
+  const B = p(h2);
+  return '#' + A.map((v, i) => Math.round(v + (B[i] - v) * t).toString(16).padStart(2, '0')).join('');
+}
+
+/* ---------------- math ---------------- */
+
+function rootsIn(fn, c, lo, hi) {
+  const out = [];
+  for (const [b, p] of FN[fn].fam(c)) {
+    const k0 = Math.ceil((lo - b) / p - 1e-9);
+    for (let k = k0; ; k++) {
+      const x = b + k * p;
+      if (x > hi + 1e-9) break;
+      if (x >= lo - 1e-9 && !isAsym(fn, x)) out.push(x);
+    }
+  }
+  out.sort((u, v) => u - v);
+  return out.filter((x, i) => i === 0 || Math.abs(x - out[i - 1]) > 1e-7);
+}
+
+function analyze(fn, a, b) {
+  const F = FN[fn];
+  const eps = 1e-6;
+  const k = Math.floor(((a + b) / 2 - F.lo0) / PI);
+  const plo = F.lo0 + k * PI;
+  const phi = plo + PI;
+  const oneToOne = a >= plo - eps && b <= phi + eps;
+  const full = oneToOne && Math.abs(a - plo) < eps && Math.abs(b - phi) < eps;
+  const principal = full && Math.abs(plo - F.principal[0]) < eps;
+  return { oneToOne, full, principal, plo, phi };
+}
+
+function rangeOf(fn, a, b, an) {
+  if (fn === 'tan') {
+    if (!an.oneToOne) return { lo: -Infinity, hi: Infinity };
+    return {
+      lo: isAsym(fn, a) ? -Infinity : Math.tan(a),
+      hi: isAsym(fn, b) ? Infinity : Math.tan(b),
+    };
+  }
+  const F = FN[fn];
+  const vals = [F.f(a), F.f(b)];
+  const k0 = Math.ceil((a - F.crit0) / PI - 1e-9);
+  for (let k = k0; ; k++) {
+    const x = F.crit0 + k * PI;
+    if (x > b + 1e-9) break;
+    vals.push(Math.round(F.f(x)));
+  }
+  return { lo: Math.min(...vals), hi: Math.max(...vals) };
+}
+
+function curvePath(fn, lo, hi, map) {
+  const f = FN[fn].f;
+  const N = Math.max(80, Math.ceil(((hi - lo) / (2 * XMAX)) * 1400));
+  let d = '';
+  let pen = false;
+  let prev = null;
+  for (let i = 0; i <= N; i++) {
+    const x = lo + ((hi - lo) * i) / N;
+    if (fn === 'tan' && Math.abs(Math.cos(x)) < 1e-4) { pen = false; prev = null; continue; }
+    const y = f(x);
+    if (!Number.isFinite(y) || Math.abs(y) > YCLIP) { pen = false; prev = null; continue; }
+    if (prev !== null && Math.abs(y - prev) > 4) pen = false;
+    const P = map ? map(x, y) : [x, y];
+    d += `${pen ? 'L' : 'M'}${f2(sx(P[0]))} ${f2(sy(P[1]))} `;
+    pen = true;
+    prev = y;
+  }
+  return d.trim();
+}
+
+/* ---------------- state helpers ---------------- */
+
+function applyPreset(s, P) {
+  const fn = FN[P.fn] ? P.fn : s.fn;
+  const stage = [1, 2, 3, 4].includes(P.stage) ? P.stage : s.stage;
+  const next = {
+    ...s,
+    fn,
+    stage,
+    t: typeof P.t === 'number' ? P.t : 0,
+    probe: typeof P.probe === 'number' ? P.probe : FN[fn].x0,
+  };
+  if (typeof P.level === 'number') next.level = P.level;
+  if (Array.isArray(P.cut) && P.cut.length === 2) {
+    next.cutA = P.cut[0];
+    next.cutB = P.cut[1];
+  } else if (stage >= 3) {
+    next.cutA = FN[fn].principal[0];
+    next.cutB = FN[fn].principal[1];
+  }
+  return next;
+}
+
+function buildInitialState(p) {
+  const fn = FN[p.initialFn] ? p.initialFn : 'sin';
+  const stage = [1, 2, 3, 4].includes(p.initialStage) ? p.initialStage : 1;
+  let s = {
+    fn,
+    stage,
+    level: typeof p.initialLevel === 'number' ? p.initialLevel : 0.5,
+    cutA: stage >= 3 ? FN[fn].principal[0] : -PI,
+    cutB: stage >= 3 ? FN[fn].principal[1] : PI,
+    t: 0,
+    probe: typeof p.initialProbe === 'number' ? p.initialProbe : FN[fn].x0,
+  };
+  if (Array.isArray(p.initialCut) && p.initialCut.length === 2 && p.initialCut[0] < p.initialCut[1]) {
+    s.cutA = p.initialCut[0];
+    s.cutB = p.initialCut[1];
+  }
+  if (stage === 3 && p.initialReflected && analyze(fn, s.cutA, s.cutB).oneToOne) s.t = 1;
+  if (p.initialPreset && p.presets && p.presets[p.initialPreset]) s = applyPreset(s, p.presets[p.initialPreset]);
+  return s;
+}
+
+/* ---------------- styles ---------------- */
+
+const STYLES = {
+  container: { fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif', padding: '10px', margin: '0 auto', boxSizing: 'border-box', color: COLORS.text, lineHeight: 'normal' },
+  grid: { display: 'grid', gap: '12px', alignItems: 'start' },
+  graphCard: { background: '#ffffff', border: `1px solid ${COLORS.uiSoft}`, borderRadius: '8px', padding: '8px' },
+  svg: { width: '100%', height: 'auto', display: 'block', touchAction: 'none', userSelect: 'none', WebkitUserSelect: 'none' },
+  legend: { display: 'flex', flexWrap: 'wrap', gap: '14px', fontSize: '12px', color: COLORS.muted, padding: '6px 4px 0' },
+  legendItem: { display: 'inline-flex', alignItems: 'center', gap: '6px' },
+  legendSwatch: (color, opacity = 1) => ({ width: '18px', height: '3px', borderRadius: '2px', display: 'inline-block', background: color, opacity }),
+  controlsCard: { background: COLORS.card, border: `1px solid ${COLORS.border}`, borderRadius: '8px', padding: '10px', marginTop: '10px', display: 'grid', gap: '10px' },
+  row: { display: 'flex', flexWrap: 'wrap', gap: '14px', alignItems: 'flex-end' },
+  group: { display: 'flex', flexDirection: 'column', gap: '4px' },
+  sectionLabel: { fontSize: '11px', color: COLORS.ui, fontWeight: 500, letterSpacing: '0.2px' },
+  btnGroup: { display: 'flex', flexWrap: 'wrap', gap: '3px' },
+  button: (active) => ({
+    padding: '5px 10px',
+    fontSize: '12px',
+    border: `1px solid ${active ? COLORS.ui : COLORS.uiSoft}`,
+    borderRadius: '4px',
+    cursor: 'pointer',
+    background: active ? COLORS.ui : '#ffffff',
+    color: active ? '#ffffff' : COLORS.ui,
+    fontFamily: 'inherit',
+    fontWeight: 400,
+    lineHeight: 'normal',
+    margin: 0,
+  }),
+  fnButton: (active) => ({
+    padding: '5px 10px',
+    minWidth: '44px',
+    fontSize: '12px',
+    fontFamily: 'monospace',
+    border: `1px solid ${active ? COLORS.ui : COLORS.uiSoft}`,
+    borderRadius: '4px',
+    cursor: 'pointer',
+    background: active ? COLORS.ui : '#ffffff',
+    color: active ? '#ffffff' : COLORS.ui,
+    fontWeight: 400,
+    lineHeight: 'normal',
+    margin: 0,
+  }),
+  primaryButton: (disabled) => ({
+    padding: '6px 12px',
+    fontSize: '12px',
+    fontWeight: 600,
+    border: `1px solid ${COLORS.amber}`,
+    borderRadius: '4px',
+    cursor: disabled ? 'not-allowed' : 'pointer',
+    background: COLORS.amber,
+    color: '#ffffff',
+    opacity: disabled ? 0.45 : 1,
+    fontFamily: 'inherit',
+    lineHeight: 'normal',
+    margin: 0,
+  }),
+  readout: { fontSize: '13px', color: COLORS.text, padding: '4px 0' },
+  count: { fontSize: '20px', fontWeight: 700, color: COLORS.red, lineHeight: 1 },
+  divider: { borderTop: `1px solid ${COLORS.border}` },
+  explanationsCard: { background: COLORS.card, border: `1px solid ${COLORS.border}`, borderRadius: '8px', padding: '12px' },
+  explanationsTitle: {
+    fontSize: '12px', fontWeight: 500, color: COLORS.ui, marginBottom: '8px', paddingBottom: '6px',
+    borderBottom: `1px solid ${COLORS.border}`,
+  },
+  explanationsBody: { fontSize: '13px', lineHeight: 1.65, color: COLORS.text },
+  h3: { fontSize: '14px', fontWeight: 700, lineHeight: 1.3, margin: '0 0 6px', color: COLORS.text },
+  p: { margin: '0 0 8px' },
+  hint: { margin: '0 0 8px', color: COLORS.muted, fontSize: '12px' },
+  blue: { color: COLORS.blue, fontWeight: 600 },
+  amber: { color: COLORS.amber, fontWeight: 600 },
+  red: { color: COLORS.red, fontWeight: 600 },
+  ui: { color: COLORS.ui, fontWeight: 600 },
+  badge: (kind) => {
+    const map = {
+      fail: ['#fee2e2', '#991b1b'],
+      ok: ['#dcfce7', '#166534'],
+      partial: ['#e2e8f0', '#334155'],
+      alt: ['#e0e7ff', '#3730a3'],
+    };
+    const [bg, fg] = map[kind] || map.partial;
+    return { display: 'inline-block', fontSize: '12px', fontWeight: 600, padding: '2px 8px', borderRadius: '10px', margin: '2px 0 8px', background: bg, color: fg };
+  },
+  table: { width: '100%', borderCollapse: 'collapse', margin: '4px 0 10px', fontSize: '13px' },
+  th: { padding: '5px 6px', borderBottom: `1px solid ${COLORS.border}`, textAlign: 'left', fontWeight: 500, color: COLORS.muted, fontSize: '12px' },
+  td: { padding: '5px 6px', borderBottom: `1px solid ${COLORS.border}`, textAlign: 'left' },
+  eq: {
+    fontFamily: 'Georgia, "Times New Roman", serif', fontSize: '15px', lineHeight: 1.8, background: '#ffffff',
+    border: `1px solid ${COLORS.border}`, borderRadius: '6px', padding: '8px 10px', margin: '4px 0 10px',
+  },
+  extra: { marginTop: '6px', paddingTop: '8px', borderTop: `1px solid ${COLORS.border}` },
+};
+
+/* ============================================================
+   InverseRestrictionScene - pure SVG renderer
+   ============================================================ */
+
+function InverseRestrictionScene({ fn, stage, level, cutA, cutB, t, probe, onHandleDrag, markerId }) {
+  const svgRef = useRef(null);
+  const dragRef = useRef(null);
+
+  const F = FN[fn];
+  const tt = stage === 3 ? t : 0;
+  const an = analyze(fn, cutA, cutB);
+
+  const toData = (e) => {
+    const svg = svgRef.current;
+    const pt = svg.createSVGPoint();
+    pt.x = e.clientX;
+    pt.y = e.clientY;
+    const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+    return { x: (p.x - CX) / S, y: (CY - p.y) / S };
+  };
+
+  const handlePointerDown = (e) => {
+    const el = e.target.closest ? e.target.closest('[data-drag]') : null;
+    if (!el || !onHandleDrag) return;
+    dragRef.current = el.getAttribute('data-drag');
+    try { svgRef.current.setPointerCapture(e.pointerId); } catch (_) { /* noop */ }
+    e.preventDefault();
+    onHandleDrag(dragRef.current, toData(e));
+  };
+
+  const handlePointerMove = (e) => {
+    if (dragRef.current && onHandleDrag) onHandleDrag(dragRef.current, toData(e));
+  };
+
+  const handlePointerEnd = (e) => {
+    if (!dragRef.current) return;
+    dragRef.current = null;
+    try { svgRef.current.releasePointerCapture(e.pointerId); } catch (_) { /* noop */ }
+  };
+
+  let kc = 0;
+  const K = () => `n${kc++}`;
+  const SERIF = { fontFamily: 'Georgia, serif', fontStyle: 'italic' };
+
+  const ln = (x1, y1, x2, y2, stroke, w, extra = {}) => (
+    <line key={K()} x1={f2(sx(x1))} y1={f2(sy(y1))} x2={f2(sx(x2))} y2={f2(sy(y2))} stroke={stroke} strokeWidth={w} {...extra} />
+  );
+  const dot = (x, y, fill, r = 5) => (
+    <circle key={K()} cx={f2(sx(x))} cy={f2(sy(y))} r={r} fill={fill} stroke="#ffffff" strokeWidth={1.5} />
+  );
+  const txt = (s, px, py, fill, size = 11, anchor = 'middle', extra = {}) => (
+    <text key={K()} x={f2(px)} y={f2(py)} fill={fill} fontSize={size} textAnchor={anchor} {...extra}>{s}</text>
+  );
+  const pth = (d, stroke, w, extra = {}) => (
+    <path key={K()} d={d} fill="none" stroke={stroke} strokeWidth={w} strokeLinejoin="round" strokeLinecap="round" {...extra} />
+  );
+  const band = (lo, hi, fill, op) => (op > 0.002
+    ? <rect key={K()} x={f2(sx(lo))} y={0} width={f2((hi - lo) * S)} height={H} fill={fill} opacity={op.toFixed(3)} />
+    : null);
+  const handle = (x, y, color, kind) => (
+    <g key={K()} data-drag={kind} style={{ cursor: kind === 'line' ? 'ns-resize' : 'ew-resize' }}>
+      <circle cx={f2(sx(x))} cy={f2(sy(y))} r={16} fill="transparent" />
+      <circle cx={f2(sx(x))} cy={f2(sy(y))} r={8} fill="#ffffff" stroke={color} strokeWidth={3} />
+      <circle cx={f2(sx(x))} cy={f2(sy(y))} r={2.5} fill={color} />
+    </g>
+  );
+
+  const ticks = (axis, kind, op) => {
+    if (op < 0.02) return null;
+    const lim = axis === 'x' ? XMAX : YMAX;
+    const vals = [];
+    if (kind === 'pi') {
+      for (let k = -8; k <= 8; k++) {
+        const v = (k * PI) / 2;
+        if (k !== 0 && Math.abs(v) <= lim - 0.1) vals.push(v);
+      }
+    } else {
+      for (let k = -6; k <= 6; k++) if (k !== 0 && Math.abs(k) <= lim - 0.2) vals.push(k);
+    }
+    return (
+      <g key={K()} opacity={op.toFixed(3)}>
+        {vals.map((v) => {
+          const lab = kind === 'pi' ? fPi(v) : fNum(v);
+          if (axis === 'x') {
+            return (
+              <g key={`t${v}`}>
+                <line x1={f2(sx(v))} y1={f2(sy(0) - 4)} x2={f2(sx(v))} y2={f2(sy(0) + 4)} stroke={COLORS.axis} strokeWidth={1.2} />
+                <text x={f2(sx(v))} y={f2(sy(0) + 16)} fill={COLORS.muted} fontSize={10} textAnchor="middle">{lab}</text>
+              </g>
+            );
+          }
+          return (
+            <g key={`t${v}`}>
+              <line x1={f2(sx(0) - 4)} y1={f2(sy(v))} x2={f2(sx(0) + 4)} y2={f2(sy(v))} stroke={COLORS.axis} strokeWidth={1.2} />
+              <text x={f2(sx(0) - 7)} y={f2(sy(v) + 3.5)} fill={COLORS.muted} fontSize={10} textAnchor="end">{lab}</text>
+            </g>
+          );
+        })}
+      </g>
+    );
+  };
+
+  const lineTest = (o, lo, hi, showDiscarded) => {
+    o.push(ln(-XMAX, level, XMAX, level, COLORS.red, 1.6, { strokeDasharray: '6 4' }));
+    if (showDiscarded) {
+      for (const x of rootsIn(fn, level, -XMAX, XMAX)) {
+        if (x < lo - 1e-9 || x > hi + 1e-9) {
+          o.push(<circle key={K()} cx={f2(sx(x))} cy={f2(sy(level))} r={4.5} fill="#ffffff" stroke={COLORS.axis} strokeWidth={1.5} />);
+        }
+      }
+    }
+    for (const x of rootsIn(fn, level, lo, hi)) o.push(dot(x, level, COLORS.red, 5.5));
+    o.push(txt(`y = ${fVal(level)}`, sx(XMAX - 0.75), sy(level) - 10, COLORS.red, 11, 'end'));
+    o.push(handle(XMAX - 0.35, level, COLORS.red, 'line'));
+  };
+
+  const cutGuides = (o, interactive, op) => {
+    if (op < 0.02) return;
+    const kids = [];
+    for (const [key, x] of [['a', cutA], ['b', cutB]]) {
+      kids.push(<line key={`g${key}`} x1={f2(sx(x))} y1={18} x2={f2(sx(x))} y2={H - 8} stroke={COLORS.ui} strokeWidth={1} strokeDasharray="4 4" opacity={0.7} />);
+      kids.push(
+        <text key={`l${key}`} x={f2(key === 'a' ? sx(x) - 5 : sx(x) + 5)} y={13} fill={COLORS.ui} fontSize={11} fontWeight={600} textAnchor={key === 'a' ? 'end' : 'start'}>
+          {`${key} = ${fPi(x)}`}
+        </text>
+      );
+      kids.push(interactive ? handle(x, 0, COLORS.ui, key) : dot(x, 0, COLORS.ui, 5));
+    }
+    o.push(<g key={K()} opacity={op.toFixed(3)}>{kids}</g>);
+  };
+
+  const brackets = (o, tv) => {
+    const r = rangeOf(fn, cutA, cutB, an);
+    const M = mapT(tv);
+    const col = mixColor(COLORS.ui, COLORS.amber, tv);
+    const seg = (P, Q) => ln(P[0], P[1], Q[0], Q[1], col, 6, { strokeLinecap: 'round', opacity: 0.28 });
+    o.push(seg(M(cutA, 0), M(cutB, 0)));
+    if (Number.isFinite(r.lo) && Number.isFinite(r.hi)) {
+      o.push(seg(M(0, clamp(r.lo, -YCLIP, YCLIP)), M(0, clamp(r.hi, -YCLIP, YCLIP))));
+    }
+  };
+
+  const o = [];
+
+  // background bands
+  if (stage === 2) o.push(band(cutA, cutB, COLORS.ui, 0.06));
+  if (stage === 3) o.push(band(cutA, cutB, COLORS.ui, 0.06 * (1 - tt)));
+  if (stage === 4) o.push(band(F.principal[0], F.principal[1], COLORS.amber, 0.09));
+
+  // soft reference lines at ±1 (swap orientation with reflection)
+  if (1 - tt > 0.02) for (const v of [1, -1]) o.push(ln(-XMAX, v, XMAX, v, COLORS.soft, 1, { strokeDasharray: '3 4', opacity: (1 - tt).toFixed(3) }));
+  if (tt > 0.02) for (const v of [1, -1]) o.push(ln(v, -YMAX, v, YMAX, COLORS.soft, 1, { strokeDasharray: '3 4', opacity: tt.toFixed(3) }));
+
+  // axes and ticks
+  o.push(ln(-XMAX, 0, XMAX, 0, COLORS.axis, 1.5));
+  o.push(ln(0, -YMAX, 0, YMAX, COLORS.axis, 1.5));
+  o.push(txt('x', sx(XMAX) - 4, sy(0) - 8, COLORS.muted, 13, 'end', SERIF));
+  o.push(txt('y', sx(0) + 8, sy(YMAX) + 10, COLORS.muted, 13, 'start', SERIF));
+  o.push(ticks('x', 'pi', 1 - tt), ticks('y', 'num', 1 - tt), ticks('x', 'num', tt), ticks('y', 'pi', tt));
+
+  o.push(txt(`y = ${fn} x`, 12, 20, COLORS.blue, 14, 'start', SERIF));
+
+  // step 1 - line test on full domain
+  if (stage === 1) {
+    o.push(pth(curvePath(fn, -XMAX, XMAX), COLORS.blue, 2.4));
+    lineTest(o, -XMAX, XMAX, false);
+  }
+
+  // step 2 - restrict
+  if (stage === 2) {
+    o.push(pth(curvePath(fn, -XMAX, XMAX), COLORS.blue, 2, { opacity: 0.22 }));
+    brackets(o, 0);
+    o.push(pth(curvePath(fn, cutA, cutB), COLORS.blue, 3));
+    for (const e of [cutA, cutB]) if (!isAsym(fn, e)) o.push(dot(e, F.f(e), COLORS.blue, 4.5));
+    lineTest(o, cutA, cutB, true);
+    cutGuides(o, true, 1);
+  }
+
+  // step 3 - reflect across y = x
+  if (stage === 3) {
+    o.push(pth(curvePath(fn, -XMAX, XMAX), COLORS.blue, 2, { opacity: 0.14 }));
+    o.push(ln(-YMAX, -YMAX, YMAX, YMAX, COLORS.slate, 1.2, { strokeDasharray: '7 5', opacity: 0.7 }));
+    o.push(txt('y = x', sx(3.1) + 8, sy(3.1) + 4, COLORS.slate, 12, 'start', SERIF));
+    if (an.oneToOne) brackets(o, tt);
+    for (const e of [cutA, cutB]) {
+      if (isAsym(fn, e)) o.push(ln(e, -YCLIP, e, YCLIP, COLORS.blue, 1.2, { strokeDasharray: '5 4', opacity: 0.55 }));
+    }
+    o.push(pth(curvePath(fn, cutA, cutB), COLORS.blue, 3));
+    for (const e of [cutA, cutB]) if (!isAsym(fn, e)) o.push(dot(e, F.f(e), COLORS.blue, 4.5));
+
+    if (an.oneToOne && tt > 0.001) {
+      const M = mapT(tt);
+      for (const e of [cutA, cutB]) {
+        if (isAsym(fn, e)) {
+          const P = M(e, -YCLIP);
+          const Q = M(e, YCLIP);
+          o.push(ln(P[0], P[1], Q[0], Q[1], COLORS.amber, 1.3, { strokeDasharray: '5 4' }));
+        }
+      }
+      o.push(pth(curvePath(fn, cutA, cutB, M), COLORS.amber, 3));
+      for (const e of [cutA, cutB]) {
+        if (!isAsym(fn, e)) {
+          const P = M(e, F.f(e));
+          o.push(dot(P[0], P[1], COLORS.amber, 4.5));
+        }
+      }
+      if (tt > 0.98) {
+        o.push(txt(`y = ${an.principal ? `${F.invName} x` : 'inverse of this piece'}`, 12, 40, COLORS.amber, 14, 'start', SERIF));
+      }
+    }
+    cutGuides(o, false, 1 - tt);
+  }
+
+  // step 4 - composition fold
+  if (stage === 4) {
+    const [p0, p1] = F.principal;
+    o.push(pth(curvePath(fn, -XMAX, XMAX), COLORS.blue, 2, { opacity: 0.28 }));
+    o.push(pth(curvePath(fn, p0, p1), COLORS.blue, 3));
+    o.push(txt('principal interval', sx((p0 + p1) / 2), H - 8, COLORS.amber, 11, 'middle', { fontWeight: 600 }));
+
+    const undef = isAsym(fn, probe);
+    if (!undef) {
+      const y0 = F.f(probe);
+      const x1 = F.inv(y0);
+      const yv = clamp(y0, -YMAX - 0.5, YMAX + 0.5);
+      o.push(ln(probe, 0, probe, yv, COLORS.blue, 1.3, { strokeDasharray: '4 3' }));
+      o.push(ln(probe, yv, x1, yv, COLORS.slate, 1.3, { strokeDasharray: '4 3' }));
+      o.push(ln(x1, yv, x1, 0, COLORS.amber, 1.6, { strokeDasharray: '4 3' }));
+      if (Math.abs(y0) <= YMAX) {
+        o.push(dot(probe, y0, COLORS.blue, 5.5));
+        o.push(dot(x1, y0, COLORS.amber, 5.5));
+        const up = y0 < YMAX - 0.4;
+        o.push(txt(`${fn}(${fPi(probe)}) = ${fVal(y0)}`, sx(probe), sy(y0) + (up ? -12 : 20), COLORS.blue, 11));
+      }
+      o.push(
+        <rect
+          key={K()}
+          x={f2(sx(x1) - 5)}
+          y={f2(sy(0) - 5)}
+          width={10}
+          height={10}
+          fill={COLORS.amber}
+          stroke="#ffffff"
+          strokeWidth={1.5}
+          transform={`rotate(45 ${f2(sx(x1))} ${f2(sy(0))})`}
+        />
+      );
+      if (Math.abs(x1 - probe) > 1e-6) {
+        const dir = y0 >= 0 ? 1 : -1;
+        const startY = sy(0) + dir * 26;
+        const dx = Math.abs(sx(x1) - sx(probe));
+        const depth = Math.min(70, 16 + dx * 0.16);
+        const cxp = (sx(probe) + sx(x1)) / 2;
+        const cyp = startY + dir * depth * 2;
+        o.push(
+          <path
+            key={K()}
+            d={`M ${f2(sx(probe))} ${f2(startY)} Q ${f2(cxp)} ${f2(cyp)} ${f2(sx(x1))} ${f2(startY)}`}
+            fill="none"
+            stroke={COLORS.amber}
+            strokeWidth={1.8}
+            markerEnd={`url(#${markerId})`}
+          />
+        );
+        const ly = clamp(startY + dir * (depth + 14), 14, H - 6);
+        o.push(txt(`${fPi(probe)} ↦ ${fPi(x1)}`, cxp, ly, COLORS.amber, 12, 'middle', { fontWeight: 600 }));
+      }
+    }
+    o.push(handle(probe, 0, COLORS.ui, 'probe'));
+    const above = undef || F.f(probe) >= 0;
+    o.push(txt(`x = ${fPi(probe)}`, sx(probe) + 11, sy(0) + (above ? -9 : 18), COLORS.ui, 11, 'start', { fontWeight: 600 }));
+  }
+
+  return (
+    <svg
+      ref={svgRef}
+      viewBox={`0 0 ${W} ${H}`}
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label={`Graph of ${fn}, step ${stage}`}
+      style={STYLES.svg}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerEnd}
+      onPointerCancel={handlePointerEnd}
+    >
+      <defs>
+        <marker id={markerId} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill={COLORS.amber} />
+        </marker>
+      </defs>
+      <g fontFamily="system-ui, -apple-system, sans-serif">{o}</g>
+    </svg>
+  );
+}
+
+/* ============================================================
+   Legend
+   ============================================================ */
+
+function Legend() {
+  return (
+    <div style={STYLES.legend}>
+      <span style={STYLES.legendItem}><i style={STYLES.legendSwatch(COLORS.blue)} />parent function</span>
+      <span style={STYLES.legendItem}><i style={STYLES.legendSwatch(COLORS.amber)} />inverse</span>
+      <span style={STYLES.legendItem}><i style={STYLES.legendSwatch(COLORS.red)} />horizontal line and crossings</span>
+      <span style={STYLES.legendItem}><i style={STYLES.legendSwatch(COLORS.ui, 0.35)} />kept domain</span>
+    </div>
+  );
+}
+
+/* ============================================================
+   ControlsBar
+   ============================================================ */
+
+function ControlsBar({
+  fn, stage, level, cutA, cutB, t, probe,
+  onFn, onStage, onLevel, onPrincipal, onReflect, onProbe,
+  presets, showPresets, onPreset,
+}) {
+  const F = FN[fn];
+  const an = analyze(fn, cutA, cutB);
+
+  const crossings = stage === 1
+    ? rootsIn(fn, level, -XMAX, XMAX).length
+    : rootsIn(fn, level, cutA, cutB).length;
+
+  return (
+    <div style={STYLES.controlsCard}>
+      <div style={STYLES.row}>
+        <div style={STYLES.group}>
+          <span style={STYLES.sectionLabel}>Function</span>
+          <div style={STYLES.btnGroup}>
+            {FN_ORDER.map((f) => (
+              <button key={f} type="button" onClick={() => onFn(f)} style={STYLES.fnButton(fn === f)}>{f}</button>
+            ))}
+          </div>
+        </div>
+        <div style={STYLES.group}>
+          <span style={STYLES.sectionLabel}>Step</span>
+          <div style={STYLES.btnGroup}>
+            {STAGES.map((s) => (
+              <button key={s.id} type="button" onClick={() => onStage(s.id)} style={STYLES.button(stage === s.id)}>
+                {`${s.id}. ${s.label}`}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div style={STYLES.divider} />
+
+      <div style={STYLES.row}>
+        {(stage === 1 || stage === 2) && (
+          <>
+            <div style={STYLES.group}>
+              <span style={STYLES.sectionLabel}>{stage === 1 ? 'Crossings in view' : 'Crossings on kept piece'}</span>
+              <span style={STYLES.count}>{crossings}</span>
+            </div>
+            <div style={STYLES.group}>
+              <span style={STYLES.sectionLabel}>Line level</span>
+              <div style={STYLES.btnGroup}>
+                {F.levels.map((v) => (
+                  <button key={v} type="button" onClick={() => onLevel(v)} style={STYLES.button(Math.abs(level - v) < 1e-9)}>
+                    {fVal(v)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+
+        {stage === 2 && (
+          <>
+            <div style={STYLES.group}>
+              <span style={STYLES.sectionLabel}>Kept domain</span>
+              <span style={STYLES.readout}>
+                <b>{fInt(cutA, cutB, isAsym(fn, cutA), isAsym(fn, cutB), fPi)}</b>
+              </span>
+            </div>
+            <div style={STYLES.group}>
+              <span style={STYLES.sectionLabel}>Shortcut</span>
+              <div style={STYLES.btnGroup}>
+                <button type="button" onClick={onPrincipal} style={STYLES.button(an.principal)}>Use principal interval</button>
+              </div>
+            </div>
+          </>
+        )}
+
+        {stage === 3 && (
+          <>
+            <div style={STYLES.group}>
+              <span style={STYLES.sectionLabel}>Reflection</span>
+              <div style={STYLES.btnGroup}>
+                <button type="button" onClick={onReflect} disabled={!an.oneToOne} style={STYLES.primaryButton(!an.oneToOne)}>
+                  {t > 0.5 ? 'Undo reflection' : 'Reflect across y = x'}
+                </button>
+              </div>
+            </div>
+            {!an.oneToOne && (
+              <div style={STYLES.group}>
+                <span style={STYLES.sectionLabel}>Kept piece</span>
+                <span style={STYLES.readout}>Not one-to-one. Go back to step 2.</span>
+              </div>
+            )}
+          </>
+        )}
+
+        {stage === 4 && (
+          <>
+            <div style={STYLES.group}>
+              <span style={STYLES.sectionLabel}>Input</span>
+              <span style={STYLES.readout}><b>{`x = ${fPi(probe)}`}</b></span>
+            </div>
+            <div style={STYLES.group}>
+              <span style={STYLES.sectionLabel}>Try</span>
+              <div style={STYLES.btnGroup}>
+                {F.probes.map((v) => (
+                  <button key={v} type="button" onClick={() => onProbe(v)} style={STYLES.button(Math.abs(probe - v) < 1e-9)}>
+                    {fPi(v)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+
+      {showPresets && presets && (
+        <>
+          <div style={STYLES.divider} />
+          <div style={STYLES.row}>
+            <div style={STYLES.group}>
+              <span style={STYLES.sectionLabel}>Frozen states (figure replacements)</span>
+              <div style={STYLES.btnGroup}>
+                {Object.keys(presets).map((k) => (
+                  <button key={k} type="button" onClick={() => onPreset(k)} style={STYLES.button(false)}>{k}</button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+/* ============================================================
+   ExplanationPanel
+   ============================================================ */
+
+function Badge({ kind, children }) {
+  return <span style={STYLES.badge(kind)}>{children}</span>;
+}
+
+function ExplanationPanel({ fn, stage, level, cutA, cutB, probe, title, extra, renderText }) {
+  const F = FN[fn];
+  const an = analyze(fn, cutA, cutB);
+  const pI = fInt(F.principal[0], F.principal[1], fn === 'tan', fn === 'tan', fPi);
+  const dI = fInt(cutA, cutB, isAsym(fn, cutA), isAsym(fn, cutB), fPi);
+
+  let body = null;
+
+  if (stage === 1) {
+    const n = rootsIn(fn, level, -XMAX, XMAX).length;
+    body = (
+      <>
+        <h3 style={STYLES.h3}>Horizontal line test</h3>
+        <p style={STYLES.p}>
+          The line <span style={STYLES.red}>{`y = ${fVal(level)}`}</span> meets{' '}
+          <span style={STYLES.blue}>{`y = ${fn} x`}</span> at <b>{n}</b> {n === 1 ? 'point' : 'points'} in view.
+        </p>
+        {n >= 2 && (
+          <>
+            <Badge kind="fail">{`Fails: ${n} crossings`}</Badge>
+            <p style={STYLES.p}>
+              {`Each crossing is a different x with the same output ${fVal(level)}. Asked which x gives ${fVal(level)}, the graph offers ${n} answers here and infinitely many overall.`}
+            </p>
+            <p style={STYLES.p}>{`One such line is enough: ${fn} has no inverse on its full domain.`}</p>
+          </>
+        )}
+        {n === 0 && (
+          <>
+            <Badge kind="partial">No crossings</Badge>
+            <p style={STYLES.p}>
+              {`${fVal(level)} is outside the range ${F.fullRange}, so no x produces it. Missing the curve proves nothing; a line with two or more crossings is what rules an inverse out.`}
+            </p>
+          </>
+        )}
+        {n === 1 && (
+          <>
+            <Badge kind="partial">One crossing at this level</Badge>
+            <p style={STYLES.p}>This level is hit once, but other levels are hit many times.</p>
+          </>
+        )}
+        <p style={STYLES.hint}>Drag the red handle up and down.</p>
+      </>
+    );
+  }
+
+  if (stage === 2) {
+    const n = rootsIn(fn, level, cutA, cutB).length;
+    const r = rangeOf(fn, cutA, cutB, an);
+    const rI = fInt(r.lo, r.hi, false, false, fVal);
+    let verdict;
+    if (!an.oneToOne) {
+      verdict = (
+        <>
+          <Badge kind="fail">Not one-to-one</Badge>
+          <p style={STYLES.p}>
+            {fn === 'tan'
+              ? 'The kept piece spans an asymptote, so the same outputs repeat on both sides of it.'
+              : 'The kept piece contains a turning point: the curve rises and falls inside it, so some levels are hit twice.'}
+          </p>
+        </>
+      );
+    } else if (!an.full) {
+      verdict = (
+        <>
+          <Badge kind="partial">One-to-one, partial range</Badge>
+          <p style={STYLES.p}>
+            {`Every level is hit at most once, but the piece only reaches ${rI}, not the full range ${F.fullRange}. Some outputs would have no answer.`}
+          </p>
+        </>
+      );
+    } else if (!an.principal) {
+      verdict = (
+        <>
+          <Badge kind="alt">One-to-one, full range, not standard</Badge>
+          <p style={STYLES.p}>{`This piece works, but it is not the convention. The principal interval is ${pI}.`}</p>
+        </>
+      );
+    } else {
+      verdict = (
+        <>
+          <Badge kind="ok">Principal interval</Badge>
+          <p style={STYLES.p}>
+            {`Every output in ${F.fullRange} is reached exactly once. This is the piece that defines ${F.invName}.`}
+          </p>
+        </>
+      );
+    }
+    body = (
+      <>
+        <h3 style={STYLES.h3}>Restrict the domain</h3>
+        <p style={STYLES.p}>
+          Kept piece: x in <span style={STYLES.ui}>{dI}</span>. The line{' '}
+          <span style={STYLES.red}>{`y = ${fVal(level)}`}</span> crosses it <b>{n}</b> {n === 1 ? 'time' : 'times'}.
+        </p>
+        {verdict}
+        <p style={STYLES.hint}>Drag the two blue handles on the x-axis. They snap to multiples of π/12.</p>
+      </>
+    );
+  }
+
+  if (stage === 3) {
+    if (!an.oneToOne) {
+      body = (
+        <>
+          <h3 style={STYLES.h3}>Reflect across y = x</h3>
+          <Badge kind="fail">Nothing to reflect yet</Badge>
+          <p style={STYLES.p}>
+            The kept piece is not one-to-one, so its reflection would not be a function. Go back to step 2 and narrow the cut.
+          </p>
+        </>
+      );
+    } else {
+      const r = rangeOf(fn, cutA, cutB, an);
+      const rI = fInt(r.lo, r.hi, false, false, fVal);
+      const invLabel = an.principal ? F.invName : 'inverse';
+      const tanAsym = fn === 'tan' && isAsym(fn, cutA) && isAsym(fn, cutB);
+      body = (
+        <>
+          <h3 style={STYLES.h3}>Reflect across y = x</h3>
+          <table style={STYLES.table}>
+            <thead>
+              <tr>
+                <th style={STYLES.th} />
+                <th style={STYLES.th}>{`${fn} (kept piece)`}</th>
+                <th style={STYLES.th}>{invLabel}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={STYLES.td}>domain</td>
+                <td style={STYLES.td}>{dI}</td>
+                <td style={STYLES.td}>{rI}</td>
+              </tr>
+              <tr>
+                <td style={STYLES.td}>range</td>
+                <td style={STYLES.td}>{rI}</td>
+                <td style={STYLES.td}>{dI}</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style={STYLES.p}>
+            Reflection sends every point (x, y) to (y, x), so the domain and range trade places. The axis labels swap with them.
+          </p>
+          {tanAsym && (
+            <p style={STYLES.p}>
+              The vertical asymptotes turn horizontal: arctan approaches −π/2 and π/2 but never reaches them.
+            </p>
+          )}
+          {!an.principal && (
+            <p style={STYLES.p}>{`This is a valid inverse of the kept piece, but it is not ${F.invName}, which is built on ${pI}.`}</p>
+          )}
+        </>
+      );
+    }
+  }
+
+  if (stage === 4) {
+    const undef = isAsym(fn, probe);
+    let content;
+    if (undef) {
+      content = <p style={STYLES.p}>{`tan is undefined at ${fPi(probe)}, so the composition is undefined there.`}</p>;
+    } else {
+      const y0 = F.f(probe);
+      const x1 = F.inv(y0);
+      const folded = Math.abs(x1 - probe) > 1e-6;
+      content = (
+        <>
+          <div style={STYLES.eq}>
+            {`${F.invName}(${fn}(${fPi(probe)}))`}
+            <br />
+            {`= ${F.invName}(${fVal(y0)})`}
+            <br />
+            = <span style={STYLES.amber}>{fPi(x1)}</span>
+          </div>
+          {folded ? (
+            <>
+              <Badge kind="alt">{`Folded: ${fPi(probe)} ↦ ${fPi(x1)}`}</Badge>
+              <p style={STYLES.p}>
+                {`${fPi(probe)} lies outside the principal interval ${pI} (shaded). ${F.invName} only returns angles inside it, so it returns the one angle there with the same ${fn} value.`}
+              </p>
+              <p style={STYLES.p}>{`The composition folds x back into the interval instead of undoing ${fn}.`}</p>
+            </>
+          ) : (
+            <>
+              <Badge kind="ok">No fold</Badge>
+              <p style={STYLES.p}>
+                {`${fPi(probe)} is already inside ${pI}, so the composition returns x unchanged. It is the identity only on this interval.`}
+              </p>
+            </>
+          )}
+        </>
+      );
+    }
+    body = (
+      <>
+        <h3 style={STYLES.h3}>{`Compose: ${F.invName}(${fn} x)`}</h3>
+        {content}
+        <p style={STYLES.hint}>Drag the blue handle along the x-axis.</p>
+      </>
+    );
+  }
+
+  return (
+    <div style={STYLES.explanationsCard}>
+      <div style={STYLES.explanationsTitle}>{title}</div>
+      <div style={STYLES.explanationsBody}>
+        {body}
+        {extra ? <div style={STYLES.extra}>{renderText(extra)}</div> : null}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   InverseFunctionExplorer - wrapper, owns all state
+   ============================================================ */
+
+export default function InverseFunctionExplorer({
+  initialFn = 'sin',
+  initialStage = 1,
+  initialLevel = 0.5,
+  initialCut = null,
+  initialReflected = false,
+  initialProbe = null,
+  initialPreset = null,
+  presets = DEFAULT_PRESETS,
+  showPresets = true,
+  explanations = {},
+  renderText = (s) => s,
+  explanationsTitle = 'Explanations',
+  maxWidth = 1252,
+  narrowBreakpoint = 760,
+}) {
+  const [st, setSt] = useState(() => buildInitialState({
+    initialFn, initialStage, initialLevel, initialCut, initialReflected, initialProbe, initialPreset, presets,
+  }));
+  const [narrow, setNarrow] = useState(false);
+
+  const containerRef = useRef(null);
+  const animRef = useRef(null);
+  const tRef = useRef(st.t);
+
+  const reactId = typeof React.useId === 'function' ? React.useId() : 'ife';
+  const markerId = `ife-arrow-${String(reactId).replace(/[^a-zA-Z0-9_-]/g, '')}`;
+
+  useEffect(() => { tRef.current = st.t; }, [st.t]);
+
+  // responsive layout: stack columns when the container is narrow
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return undefined;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0] && entries[0].contentRect ? entries[0].contentRect.width : el.offsetWidth;
+      setNarrow(w < narrowBreakpoint);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [narrowBreakpoint]);
+
+  const stopAnim = useCallback(() => {
+    if (animRef.current) {
+      cancelAnimationFrame(animRef.current);
+      animRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => stopAnim, [stopAnim]);
+
+  const animateTo = useCallback((target) => {
+    stopAnim();
+    const start = tRef.current;
+    const reduce = typeof window !== 'undefined' && window.matchMedia
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const dur = reduce ? 0 : 1100 * Math.abs(target - start);
+    const ease = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+    const t0 = typeof performance !== 'undefined' ? performance.now() : Date.now();
+    const step = (now) => {
+      const u = dur ? Math.min(1, (now - t0) / dur) : 1;
+      const v = u < 1 ? start + (target - start) * ease(u) : target;
+      setSt((s) => ({ ...s, t: v }));
+      if (u < 1) animRef.current = requestAnimationFrame(step);
+      else animRef.current = null;
+    };
+    animRef.current = requestAnimationFrame(step);
+  }, [stopAnim]);
+
+  const handleFn = useCallback((f) => {
+    stopAnim();
+    setSt((s) => {
+      const next = { ...s, fn: f, t: 0, probe: FN[f].x0 };
+      if (s.stage >= 3) {
+        next.cutA = FN[f].principal[0];
+        next.cutB = FN[f].principal[1];
+      } else {
+        next.cutA = -PI;
+        next.cutB = PI;
+      }
+      return next;
+    });
+  }, [stopAnim]);
+
+  const handleStage = useCallback((id) => {
+    stopAnim();
+    setSt((s) => ({ ...s, stage: id, t: 0 }));
+  }, [stopAnim]);
+
+  const handleLevel = useCallback((v) => setSt((s) => ({ ...s, level: v })), []);
+
+  const handlePrincipal = useCallback(() => {
+    setSt((s) => ({ ...s, cutA: FN[s.fn].principal[0], cutB: FN[s.fn].principal[1] }));
+  }, []);
+
+  const handleReflect = useCallback(() => {
+    animateTo(tRef.current > 0.5 ? 0 : 1);
+  }, [animateTo]);
+
+  const handleProbe = useCallback((v) => setSt((s) => ({ ...s, probe: v })), []);
+
+  const handlePreset = useCallback((k) => {
+    if (!presets || !presets[k]) return;
+    stopAnim();
+    setSt((s) => applyPreset(s, presets[k]));
+  }, [presets, stopAnim]);
+
+  const handleDrag = useCallback((kind, p) => {
+    setSt((s) => {
+      if (kind === 'line') {
+        let c = clamp(p.y, -YMAX + 0.15, YMAX - 0.15);
+        for (const n of NICE_LEVELS) {
+          if (Math.abs(c - n) < 0.05) { c = n; break; }
+        }
+        return { ...s, level: c };
+      }
+      if (kind === 'a') return { ...s, cutA: clamp(snap12(p.x), -2 * PI, s.cutB - STEP) };
+      if (kind === 'b') return { ...s, cutB: clamp(snap12(p.x), s.cutA + STEP, 2 * PI) };
+      if (kind === 'probe') return { ...s, probe: clamp(snap12(p.x), -2 * PI, 2 * PI) };
+      return s;
+    });
+  }, []);
+
+  const stageKey = (STAGES.find((s) => s.id === st.stage) || STAGES[0]).key;
+
+  return (
+    <div ref={containerRef} style={{ ...STYLES.container, maxWidth: `${maxWidth}px` }}>
+      <div style={{ ...STYLES.grid, gridTemplateColumns: narrow ? '1fr' : '5fr 2fr' }}>
+        <div>
+          <div style={STYLES.graphCard}>
+            <InverseRestrictionScene
+              fn={st.fn}
+              stage={st.stage}
+              level={st.level}
+              cutA={st.cutA}
+              cutB={st.cutB}
+              t={st.t}
+              probe={st.probe}
+              onHandleDrag={handleDrag}
+              markerId={markerId}
+            />
+            <Legend />
+          </div>
+          <ControlsBar
+            fn={st.fn}
+            stage={st.stage}
+            level={st.level}
+            cutA={st.cutA}
+            cutB={st.cutB}
+            t={st.t}
+            probe={st.probe}
+            onFn={handleFn}
+            onStage={handleStage}
+            onLevel={handleLevel}
+            onPrincipal={handlePrincipal}
+            onReflect={handleReflect}
+            onProbe={handleProbe}
+            presets={presets}
+            showPresets={showPresets}
+            onPreset={handlePreset}
+          />
+        </div>
+        <ExplanationPanel
+          fn={st.fn}
+          stage={st.stage}
+          level={st.level}
+          cutA={st.cutA}
+          cutB={st.cutB}
+          probe={st.probe}
+          title={explanationsTitle}
+          extra={explanations ? explanations[stageKey] : null}
+          renderText={renderText}
+        />
+      </div>
+    </div>
+  );
+}

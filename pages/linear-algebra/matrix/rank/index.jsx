@@ -2000,6 +2000,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import rankDiagrams from '@/app/components/linear-algebra copy/matrix/rankDiagrams'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
+import kernelImageDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/kernel-image/kernelImageDiagrams'
 
 
 export async function getStaticProps(){
@@ -2841,6 +2842,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     reduction: demoUnitFrame({
       svg: rankDiagrams.done,
@@ -2855,6 +2857,13 @@ const schemas = {
       text: 'Pivot columns and free columns are both visible here, and between them they fix every one of the four spaces: the pivots give the dimensions of the row and column spaces, the free columns give the dimensions of the null spaces. One number, the rank, is doing all of that work at once. See each space extracted in turn on the',
       href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
       linkText: 'four fundamental subspaces visualizer',
+    }),
+    rankNullity: demoUnitFrame({
+      svg: kernelImageDiagrams.rankOne,
+      caption: 'rank 1 + nullity 1 = 2',
+      text: 'A 2 &#215; 2 matrix of rank 1, drawn as what it does. On the left, the domain: a whole line of vectors &#8212; the kernel &#8212; is sent to zero, so the nullity is 1. On the right, the codomain: every output lands on a single line &#8212; the image &#8212; so the rank is 1. The two dimensions add up to the 2 input dimensions, exactly as rank + nullity = n says. Change the matrix and watch the two lines trade dimension on the',
+      href: '/linear-algebra/visual-tools/kernel-image-2d',
+      linkText: 'kernel and image visualizer',
     }),
   };
 
@@ -2955,6 +2964,8 @@ export default function MatrixRankPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-rankNullity'} dangerouslySetInnerHTML={{ __html: demoUnits.rankNullity }} />,
+          `Every input dimension is accounted for exactly once: it either survives into the image or collapses into the kernel.`,
         ]
     },
     {

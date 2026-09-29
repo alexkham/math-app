@@ -663,6 +663,7 @@ import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gau
 import matrixProductDiagrams from '@/app/components/linear-algebra/multiplication/matrixProductDiagrams'
 
 
+
 export async function getStaticProps(){
 
  const keyWords = [
@@ -1042,6 +1043,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     bothReadings: demoUnitFrame({
       svg: [matrixProductDiagrams.columnsComplete, matrixProductDiagrams.rowsComplete],
@@ -1064,6 +1066,13 @@ const schemas = {
       text: 'The upper form has zeros below every pivot and is enough to back-substitute from. The lower one goes further, clearing above the pivots and scaling them to one, so the solution can simply be read off. The extra work buys legibility, not correctness. Run both passes on a system of your own on the',
       href: '/linear-algebra/visual-tools/gauss-elimination',
       linkText: 'Gaussian elimination visualizer',
+    }),
+    augmented: demoUnitFrame({
+      svg: gaussEliminationDiagrams.initial,
+      caption: '[A | b] before any row operation',
+      text: 'The coefficient matrix on the left of the bar, the right-hand side b on the right: one row per equation, one column per unknown, and the constants carried along as a final column. Every row operation acts on the whole row, bar included, which is why the right-hand side stays correct as the left side is reduced. Start the reduction from here on the',
+      href: '/linear-algebra/visual-tools/gauss-elimination',
+      linkText: 'Gaussian elimination calculator',
     }),
   };
 
@@ -1125,6 +1134,8 @@ export default function LinearSystemsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-augmented'} dangerouslySetInnerHTML={{ __html: demoUnits.augmented }} />,
+          `The bar is only bookkeeping: [A | b] is the whole system with the variable names left out.`,
         ]
     },
     {

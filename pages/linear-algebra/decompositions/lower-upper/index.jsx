@@ -2835,6 +2835,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import luDiagrams from '@/app/components/linear-algebra copy/matrix/luDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "LU decomposition",
@@ -3507,6 +3508,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     construction: demoUnitFrame({
       svg: luDiagrams.eliminate,
@@ -3519,6 +3521,13 @@ const schemas = {
       svg: luDiagrams.swap,
       caption: 'A row swap recorded in the permutation',
       text: 'A zero, or an uncomfortably small number, has appeared where a pivot was needed, so rows have been exchanged and the exchange logged in P. This is why the honest statement of the factorisation is PA = LU: without the permutation there are perfectly ordinary matrices that have no LU at all. Trigger a swap on the',
+      href: '/linear-algebra/visual-tools/lu-decomposition',
+      linkText: 'LU decomposition visualizer',
+    }),
+    luDone: demoUnitFrame({
+      svg: luDiagrams.done,
+      caption: 'A = LU, complete',
+      text: 'The finished factorization: L below, with ones on its diagonal and the elimination multipliers beneath; U above, the upper triangular result of elimination, with its diagonal &#8212; the pivots &#8212; marked. Multiplying the two back together returns A. Build it one elimination step at a time on the',
       href: '/linear-algebra/visual-tools/lu-decomposition',
       linkText: 'LU decomposition visualizer',
     }),
@@ -3566,6 +3575,8 @@ export default function LUDecompositionPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-luDone'} dangerouslySetInnerHTML={{ __html: demoUnits.luDone }} />,
+          `Everything elimination does is recorded in these two triangles, so it never has to be done twice.`,
         ]
     },
     {

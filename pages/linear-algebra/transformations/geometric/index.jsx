@@ -1886,6 +1886,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import reflectionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/reflection/reflectionDiagrams'
 import projection2dDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/projection/projectionDiagrams'
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
+import matrixCompositionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/matrix-composition/matrixCompositionDiagrams'
+import renderVectorArrowsV7 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v7'
 
 
 export async function getStaticProps(){
@@ -2652,6 +2654,20 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
+  const c30 = Math.cos(Math.PI / 6), s30 = Math.sin(Math.PI / 6);
+  const vaSquareMaps = {
+    scaling: { kind: 'unitSquareMap', A: [[1.5, 0], [0, 1.5]], xRange: [-0.5, 2.5], yRange: [-0.5, 2], svgTitle: 'Uniform scaling by 1.5 applied to the unit square',
+      labels: [['Ae\u2081 = (1.5, 0)', 1.55, -0.3, 'e1', 'end'], ['Ae\u2082 = (0, 1.5)', 0.08, 1.62, 'e2'], ['unit square', 0.55, 0.45, 'orig', 'middle']],
+      notes: ['A = 1.5 I: a square of side 1.5, area 2.25'], caption: 'uniform scaling: every direction stretched by 1.5' },
+    rotation: { kind: 'unitSquareMap', A: [[c30, -s30], [s30, c30]], xRange: [-1, 2], yRange: [-0.5, 2], svgTitle: 'Rotation by 30 degrees applied to the unit square',
+      labels: [['Ae\u2081 = (cos \u03b8, sin \u03b8)', 0.95, 0.35, 'e1'], ['Ae\u2082 = (\u2212sin \u03b8, cos \u03b8)', -0.95, 1.6, 'e2'], ['unit square', 0.62, -0.25, 'orig', 'middle']],
+      notes: ['\u03b8 = 30\u00b0: the columns of A are where e\u2081 and e\u2082 land'], caption: 'rotation by 30\u00b0: the square turns, its size unchanged' },
+    shear: { kind: 'unitSquareMap', A: [[1, 1], [0, 1]], xRange: [-0.5, 2.5], yRange: [-0.5, 1.8], svgTitle: 'A horizontal shear applied to the unit square',
+      labels: [['Ae\u2081 = e\u2081 = (1, 0)', 1.02, -0.3, 'e1', 'end'], ['Ae\u2082 = (1, 1)', 1.08, 1.12, 'e2'], ['unit square', 0.5, 0.45, 'orig', 'middle']],
+      notes: ['A = [1 1; 0 1]: same base, same height, area still 1'], caption: 'horizontal shear: e\u2081 stays, e\u2082 leans over' },
+  };
+
   const demoUnits = {
     reflection: demoUnitFrame({
       svg: [reflectionDiagrams.axes, reflectionDiagrams.diagonals],
@@ -2673,6 +2689,28 @@ const schemas = {
       text: 'The determinant reports what the transformation does to area: above, the unit square has become a parallelogram of some definite size; below, it has been flattened to nothing. A negative value would mean the square had been turned over as well. One number, carrying both the scaling and the orientation. Change the matrix and watch it respond on the',
       href: '/linear-algebra/visual-tools/linear-transformation-2d',
       linkText: 'linear transformation explorer',
+    }),
+    orderMatters: demoUnitFrame({
+      svg: matrixCompositionDiagrams.noncommute,
+      caption: 'Shear after rotation, rotation after shear',
+      text: 'A shear and a rotation applied to the same vector in both orders. The solid two-step trail is one order, ending at ABv; the dashed trail is the other order, ending somewhere else &#8212; and the unit square is carried to a different parallelogram by each. The matrices are the same two; only the order of multiplication changed. Swap the order yourself on the',
+      href: '/linear-algebra/visual-tools/matrix-composition-2d',
+      linkText: 'matrix composition visualizer',
+    }),
+    squareScaling: demoUnitFrame({
+      svg: renderVectorArrowsV7(vaSquareMaps.scaling),
+      caption: 'Scaling the unit square by 1.5',
+      text: 'The dashed unit square and its image. With A = 1.5I, e&#8321; lands at (1.5, 0) and e&#8322; at (0, 1.5), so the square becomes a square of side 1.5 &#8212; every direction stretched by the same factor, the area multiplied by 1.5&#178; = 2.25, the shape unchanged.',
+    }),
+    squareRotation: demoUnitFrame({
+      svg: renderVectorArrowsV7(vaSquareMaps.rotation),
+      caption: 'Rotating the unit square by 30&#176;',
+      text: 'Under a rotation by &#952;, e&#8321; lands at (cos &#952;, sin &#952;) and e&#8322; at (&#8722;sin &#952;, cos &#952;) &#8212; exactly the two columns of the rotation matrix. The image is the same square turned about the origin: lengths, angles and area all survive, which is why the determinant is 1.',
+    }),
+    squareShear: demoUnitFrame({
+      svg: renderVectorArrowsV7(vaSquareMaps.shear),
+      caption: 'Shearing the unit square',
+      text: 'The horizontal shear [1 1; 0 1] leaves e&#8321; where it is and pushes e&#8322; sideways to (1, 1). Every point slides parallel to the x-axis by its own height, so the square leans into a parallelogram with the same base and the same height &#8212; and therefore the same area, 1.',
     }),
   };
 
@@ -2738,6 +2776,8 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-squareScaling'} dangerouslySetInnerHTML={{ __html: demoUnits.squareScaling }} />,
+          `Scaling by c multiplies every length by |c| and every area by c².`,
         ]
     },
     {
@@ -2746,6 +2786,8 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-squareRotation'} dangerouslySetInnerHTML={{ __html: demoUnits.squareRotation }} />,
+          `A rotation matrix is written down by asking one question: where do e₁ and e₂ go?`,
         ]
     },
     {
@@ -2801,6 +2843,8 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-squareShear'} dangerouslySetInnerHTML={{ __html: demoUnits.squareShear }} />,
+          `A shear changes shape but never area, which is why its determinant is 1.`,
         ]
     },
     {
@@ -2809,6 +2853,8 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-orderMatters'} dangerouslySetInnerHTML={{ __html: demoUnits.orderMatters }} />,
+          `Because matrix products do not commute, the order in which transformations are applied is part of the transformation.`,
         ]
     },
     {

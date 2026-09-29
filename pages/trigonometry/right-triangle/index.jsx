@@ -3693,7 +3693,7 @@ export default function RightTrianglePage({
         content:[
           sectionsContent.obj1.content,
           <div key={'unit-naming'} dangerouslySetInnerHTML={{ __html: demoUnits.naming }} />,
-          `Fixing which angle is $\theta$ is therefore the first step in every right-triangle problem.`,
+          `Fixing which angle is $\\theta$ is therefore the first step in every right-triangle problem.`,
         ]
     },
     {

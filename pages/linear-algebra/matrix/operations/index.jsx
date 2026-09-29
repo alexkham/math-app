@@ -3185,6 +3185,9 @@ import matrixAdditionDiagrams from '@/app/components/linear-algebra copy/matrix/
 import multiplicationDiagrams from '@/app/components/linear-algebra copy/matrix/multiplicationDiagrams'
 import transposeDiagrams from '@/app/components/linear-algebra copy/matrix/transposeDiagrams'
 import vectorPictureDiagrams from '@/app/components/linear-algebra/multiplication/vectorPictureDiagrams'
+import matrixScalarDiagrams from '@/app/components/linear-algebra copy/matrix/matrixScalarDiagrams'
+import matrixLinCombDiagrams from '@/app/components/linear-algebra copy/matrix/matrixLinCombDiagrams'
+import powerDiagrams from '@/app/components/linear-algebra copy/matrix/powerDiagrams'
 
 
 export async function getStaticProps(){
@@ -4067,6 +4070,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     rowPicture: demoUnitFrame({
       svg: vectorPictureDiagrams.rows.allPieces,
@@ -4096,6 +4100,27 @@ const schemas = {
       text: 'Every entry has swapped places with its mirror image across the diagonal, and the entries sitting on the diagonal have not moved at all. Read that way the transpose is one reflection rather than a rule about indices, and it explains at a glance why transposing twice returns the original. Watch it run cell by cell instead on the',
       href: '/linear-algebra/visual-tools/matrix-transpose',
       linkText: 'transpose visualizer',
+    }),
+    scalarDone: demoUnitFrame({
+      svg: matrixScalarDiagrams.done,
+      caption: 'kA, entry by entry',
+      text: 'Every entry of the result is the scalar times the entry in the same position: k&#183;a<sub>11</sub>, k&#183;a<sub>12</sub>, and so on across all six cells. Nothing moves and nothing mixes &#8212; the shape of A is kept exactly. Watch the cells fill one at a time on the',
+      href: '/linear-algebra/visual-tools/matrix-scalar-multiplication',
+      linkText: 'matrix scalar multiplication visualizer',
+    }),
+    linCombAdd: demoUnitFrame({
+      svg: matrixLinCombDiagrams.add,
+      caption: '&#945;A + &#946;B, the final sweep',
+      text: 'A linear combination of matrices runs in two moves: scale each matrix, then add position by position. This frame is the adding sweep &#8212; the already-scaled &#945;A and &#946;B are combined cell by cell, some cells finished, one in progress, the rest still waiting. It is the same pattern as a linear combination of vectors, with a grid in place of a list. Run all three sweeps on the',
+      href: '/linear-algebra/visual-tools/matrix-linear-combination',
+      linkText: 'matrix linear combination visualizer',
+    }),
+    powerSquare: demoUnitFrame({
+      svg: powerDiagrams.square,
+      caption: 'A&#8308; one product at a time',
+      text: 'A&#8308; is four copies of A multiplied together. The first product has already been carried out here: A&#178; is written out cell by cell, and it still has to be multiplied by A twice more. Each step is an ordinary matrix product, which is why a power needs a square matrix &#8212; every factor must fit the next. Collapse the chain step by step on the',
+      href: '/linear-algebra/visual-tools/matrix-power',
+      linkText: 'matrix power visualizer',
     }),
   };
 
@@ -4170,6 +4195,8 @@ const schemas = {
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-scalarDone'} dangerouslySetInnerHTML={{ __html: demoUnits.scalarDone }} />,
+          `Because the scalar reaches every entry alike, scaling never changes a matrix's shape or the pattern of its zeros.`,
         ]
     },
     {
@@ -4178,6 +4205,8 @@ const schemas = {
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-linCombAdd'} dangerouslySetInnerHTML={{ __html: demoUnits.linCombAdd }} />,
+          `That is why the m × n matrices behave as a vector space: every linear combination stays inside the same size.`,
         ]
     },
     {
@@ -4241,6 +4270,8 @@ const schemas = {
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-powerSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.powerSquare }} />,
+          `Associativity is what lets the chain be collapsed in any grouping and still give the same A⁴.`,
         ]
     },
     {

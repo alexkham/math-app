@@ -11,6 +11,8 @@
 // import { tableHeaders } from '@/app/styles/theme'
 // import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 // import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderSetElementsV3 from '@/app/utils/illustrations/set-theory/relationships/setElements.v3'
+import powerSetExplorerDiagrams from '@/app/components/diagrams/set-theory/powerSetExplorerDiagrams'
 
 
 // export async function getStaticProps(){
@@ -1687,6 +1689,11 @@ const schemas = {
 
   // Operation A demonstration unit: frozen tool state + attached explanation
   // panel + tool link, one frame. Rendered as a content-array item.
+  const seChoices = {
+    kind: 'choices', elements: ['a', 'b', 'c'],
+    svgTitle: 'One in-or-out choice per element builds every subset: 2 \u00d7 2 \u00d7 2 = 8',
+  };
+
   const demoUnits = {
     subset: demoUnitFrame({
       svg: twoSetsVennDiagrams.subsetAinB,
@@ -1694,6 +1701,18 @@ const schemas = {
       text: 'The whole of circle A sits inside circle B &#8212; shaded, because every element of A is already an element of B. Nudge the sets between nested, overlapping, and disjoint configurations on the',
       href: '/set-theory/visual-tools/two-sets-basic-venn',
       linkText: 'two-set Venn explorer',
+    }),
+    subsetChoices: demoUnitFrame({
+      svg: renderSetElementsV3(seChoices),
+      caption: 'Three elements, three choices, eight subsets',
+      text: 'Each level of the tree settles one element: follow the solid branch to keep it, the dashed branch to leave it out. Every path from the top makes exactly three choices and ends at a different subset &#8212; {a, b, c} when every element is kept, &#8709; when none is. Two ways at each of three levels gives 2 &#215; 2 &#215; 2 = 8 paths, so {a, b, c} has 2&#179; = 8 subsets.',
+    }),
+    powerSet: demoUnitFrame({
+      svg: powerSetExplorerDiagrams['nothing-selected'],
+      caption: '&#119979;({a, b, c}), frozen',
+      text: 'All eight subsets of {a, b, c} &#8212; the eight elements of its power set &#8212; stacked by size: &#8709; at the bottom, the three singletons, the three pairs, and {a, b, c} at the top. A line joins two subsets when one is the other with a single element added. The row sizes 1, 3, 3, 1 are the binomial coefficients, and they add to 2&#179; = 8. Pick any subset and light up everything below and above it on the',
+      href: '/set-theory/visual-tools/power-set',
+      linkText: 'power set explorer',
     }),
   };
 
@@ -1765,6 +1784,8 @@ export default function SubsetsPage({seoData, sectionsContent, introContent, obj
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-subsetChoices'} dangerouslySetInnerHTML={{ __html: demoUnits.subsetChoices }} />,
+          `Adding one more element doubles the tree, which is why the count doubles with every element: $2^{n+1} = 2 \\cdot 2^n$.`,
           <div
             key={'obj4-table'}
             style={tableWrapStyle}
@@ -1778,6 +1799,8 @@ export default function SubsetsPage({seoData, sectionsContent, introContent, obj
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-powerSet'} dangerouslySetInnerHTML={{ __html: demoUnits.powerSet }} />,
+          `Every node in that diagram is a subset of $A$ and an element of $\\mathcal{P}(A)$ at once — the power set turns containment into membership.`,
         ]
     },
 

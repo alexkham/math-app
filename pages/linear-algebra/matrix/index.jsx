@@ -668,6 +668,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
+import renderMatrixGrid from '@/app/utils/illustrations/linear-algebra/matrix/matrixGrid'
+import vectorPictureDiagrams from '@/app/components/linear-algebra/multiplication/vectorPictureDiagrams'
 
 
 export async function getStaticProps(){
@@ -1081,6 +1083,15 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const mgAnatomy = {
+    kind: 'anatomy', m: 3, n: 4, row: 2, col: 3,
+    svgTitle: 'Rows, columns and the main diagonal of a 3 by 4 matrix',
+  };
+  // vectorPictureDiagrams gives its marker defs the per-state id (vpd-c4-a) but
+  // its lines point at vpd-c-a, so the arrowheads drop out. Re-pointed here, at
+  // the use site; the shipped module is not edited.
+  const columnPictureFrame = vectorPictureDiagrams.columns.allPieces.replace(/url\(#vpd-c-/g, 'url(#vpd-c4-');
+
   const demoUnits = {
     // Hub page: one unit, on the section that reframes a matrix as an
     // action rather than a table. That view needs the geometric tool.
@@ -1090,6 +1101,18 @@ const schemas = {
       text: 'The grid has been stretched and sheared, but the lines are still straight, still evenly spaced, and still parallel in each family, and the origin has not moved. Those survivals are what the word linear is protecting. Seen this way a matrix is not a table of numbers but an instruction for moving the whole plane at once. Change the entries and watch the grid answer on the',
       href: '/linear-algebra/visual-tools/linear-transformation-2d',
       linkText: 'linear transformation explorer',
+    }),
+    matrixAnatomy: demoUnitFrame({
+      svg: renderMatrixGrid(mgAnatomy),
+      caption: 'Rows, columns, diagonal',
+      text: 'Twelve entries in 3 rows and 4 columns. Row 2 is the horizontal slice a&#8322;&#8321; to a&#8322;&#8324;, a 1 &#215; 4 vector; column 3 is the vertical slice a&#8321;&#8323; to a&#8323;&#8323;, a 3 &#215; 1 vector; they cross at a&#8322;&#8323;. The main diagonal takes the entries whose two indices agree, and on this wide matrix it stops after a&#8323;&#8323; &#8212; min(3, 4) = 3 entries, with column 4 left off it.',
+    }),
+    columnPicture: demoUnitFrame({
+      svg: columnPictureFrame,
+      caption: 'Ax built from columns',
+      text: 'Each column of A is scaled by its entry of v and the pieces are laid tip to tail: v&#8321; times column 1, then v&#8322; times column 2, then v&#8323; times column 3. The dark arrow from the start to the last tip is Av &#8212; a linear combination of the columns, exactly as the formula in this section says. Step through the pieces one at a time on the',
+      href: '/linear-algebra/visual-tools/matrix-multiplication-columns',
+      linkText: 'column-picture visualizer',
     }),
   };
 
@@ -1135,6 +1158,8 @@ const schemas = {
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-matrixAnatomy'} dangerouslySetInnerHTML={{ __html: demoUnits.matrixAnatomy }} />,
+          `Reading a matrix as rows, as columns, or along its diagonal are three different questions asked of the same array.`,
         ]
     },
     {
@@ -1151,6 +1176,8 @@ const schemas = {
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-columnPicture'} dangerouslySetInnerHTML={{ __html: demoUnits.columnPicture }} />,
+          `The column view turns every matrix-vector product into a question about which combinations of the columns can be reached.`,
         ]
     },
     {

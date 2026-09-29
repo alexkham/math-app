@@ -1571,6 +1571,8 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiagrams'
+import renderCurveFeatureV3 from '@/app/utils/illustrations/trigonometry/curves/curveFeature.v3'
+import renderRelationMap from '@/app/utils/illustrations/trigonometry/relations/relationMap'
 
 
 export async function getStaticProps(){
@@ -2778,6 +2780,43 @@ This shift in perspective opens up the full toolkit of function analysis. Each o
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  // Authored figures. curveFeature.v3 draws the six-panel grid; relationMap
+  // draws the two box-and-arrow scenes. Package docs beside each renderer.
+  const cfDomainRange = {
+    kind: 'grid', panelWidth: 186, panelHeight: 128,
+    svgTitle: 'The six functions share only two patterns of excluded point',
+    rows: [
+      { label: 'undefined where cos = 0', panels: ['tan', 'sec'], color: 'negation' },
+      { label: 'undefined where sin = 0', panels: ['cot', 'csc'], color: 'negation' },
+      { label: 'defined everywhere', panels: ['sin', 'cos'], color: 'secondary' },
+    ],
+    note: 'only two patterns of excluded point across all six',
+  };
+  const rmReduceToTwo = {
+    kind: 'roots', width: 560, height: 286,
+    svgTitle: 'All six functions reduce to sine and cosine',
+    rootsLabel: 'the two roots',
+    roots: [{ key: 'sin', x: 92, label: 'sin \u03b8' }, { key: 'cos', x: 340, label: 'cos \u03b8' }],
+    leaves: [
+      { x: 26, label: 'csc \u03b8', root: 'sin', relation: '1 / sin' },
+      { x: 146, label: 'tan \u03b8', root: 'sin', relation: 'sin / cos' },
+      { x: 286, label: 'cot \u03b8', root: 'cos', relation: 'cos / sin' },
+      { x: 406, label: 'sec \u03b8', root: 'cos', relation: '1 / cos' },
+    ],
+    note: 'every other function is written with sine and cosine and nothing else',
+  };
+  const rmFromOneValue = {
+    kind: 'chain', width: 620, height: 250,
+    svgTitle: 'One value plus a quadrant determines the other five',
+    steps: [
+      { x: 16, label: 'sin \u03b8 = 3/5', tone: 'root', under: 'and \u03b8 in Q II' },
+      { x: 186, label: 'cos\u00b2\u03b8 = 16/25', via: 'Pythagorean', under: 'magnitude fixed' },
+      { x: 356, label: 'cos \u03b8 = \u22124/5', tone: 'result', via: 'the quadrant', under: 'sign fixed' },
+    ],
+    outputs: ['tan \u03b8 = \u22123/4', 'cot \u03b8 = \u22124/3', 'sec \u03b8 = \u22125/4', 'csc \u03b8 = 5/3'],
+    note: 'one value plus a quadrant fixes all six', noteX: 310,
+  };
+
   const demoUnits = {
     sin: demoUnitFrame({
       svg: unitCircleDiagrams.functions.sin,
@@ -2820,6 +2859,21 @@ This shift in perspective opens up the full toolkit of function analysis. Each o
       text: 'At 45&#176; the two legs are equal, so adjacent over opposite is exactly 1, and so is its reciprocal in the tangent column beside it. Away from 45&#176; the two columns are reciprocals of each other, cotangent falling as tangent rises, with Undefined where the blue leg vanishes at 0&#176; and 180&#176;. Watch the two columns swap magnitudes across 45&#176; on the',
       href: '/visual-tools/unit-circle',
       linkText: 'unit circle visualizer',
+    }),
+    reduceToTwo: demoUnitFrame({
+      svg: renderRelationMap(rmReduceToTwo),
+      caption: 'Four functions, two roots',
+      text: 'Each of the other four is an arrow away from sine or cosine, and the arrow carries the whole relation. Nothing in the set is independent: fix the two at the top and the other four are already decided.',
+    }),
+    domainRange: demoUnitFrame({
+      svg: renderCurveFeatureV3(cfDomainRange),
+      caption: 'Six functions, two patterns',
+      text: 'The dashed lines mark where each function is undefined. Tangent and secant break in exactly the same places, because both divide by cosine; cotangent and cosecant break in the same places as each other, because both divide by sine. Sine and cosine divide by nothing and never break.',
+    }),
+    fromOneValue: demoUnitFrame({
+      svg: renderRelationMap(rmFromOneValue),
+      caption: 'From one value to all six',
+      text: 'The Pythagorean identity settles how big the second value is; the quadrant settles whether it is positive or negative. Once both are known the remaining four are reciprocals and a quotient away &#8212; and without the quadrant, half of them would have the wrong sign.',
     }),
   };
 
@@ -2962,6 +3016,8 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-reduceToTwo'} dangerouslySetInnerHTML={{ __html: demoUnits.reduceToTwo }} />,
+          `This is why a proof can usually be finished by rewriting everything in terms of $\\sin\\theta$ and $\\cos\\theta$.`,
           <div
             key={'obj7-table'}
             style={tableWrapStyle}
@@ -2977,6 +3033,8 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-domainRange'} dangerouslySetInnerHTML={{ __html: demoUnits.domainRange }} />,
+          `The range restrictions matter just as much: $\\sin x = 2$ has no solution because 2 lies outside $[-1, 1]$.`,
           <div
             key={'obj8-table'}
             style={tableWrapStyle}
@@ -3005,6 +3063,8 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <div key={'unit-fromOneValue'} dangerouslySetInnerHTML={{ __html: demoUnits.fromOneValue }} />,
+          `Starting from tangent instead works the same way, with a right triangle supplying the missing magnitude.`,
         ]
     },
 

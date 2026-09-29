@@ -941,6 +941,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import leastSquaresDiagrams from '@/app/components/linear-algebra copy/matrix/leastSquaresDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "least squares",
@@ -1608,6 +1609,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     geometry: demoUnitFrame({
       svg: leastSquaresDiagrams.residual,
@@ -1627,6 +1629,20 @@ const schemas = {
       svg: leastSquaresDiagrams.line,
       caption: 'A best-fit line through scattered points',
       text: 'The points do not lie on any line, so the system was never going to be consistent. What the fit returns is the line whose vertical errors have the smallest total square &#8212; and fitting a line is nothing more than least squares with two unknowns. Move the points and watch the fit respond on the',
+      href: '/linear-algebra/visual-tools/least-squares',
+      linkText: 'least squares visualizer',
+    }),
+    noExactSolution: demoUnitFrame({
+      svg: leastSquaresDiagrams.consistency,
+      caption: 'The system has no solution',
+      text: 'Three data points and a line with two parameters give three equations in two unknowns. Reducing [A | b] leaves a pivot in the last column &#8212; a row that reads 0 = nonzero &#8212; so b is not in the column space of A and no x makes Ax equal b. Least squares starts exactly here: if no x is exact, find the x whose Ax comes closest. Follow the whole method on the',
+      href: '/linear-algebra/visual-tools/least-squares',
+      linkText: 'least squares visualizer',
+    }),
+    projectionMatrix: demoUnitFrame({
+      svg: leastSquaresDiagrams.projmatrix,
+      caption: 'P b = p',
+      text: 'The projection matrix P = A(A<sup>T</sup>A)<sup>&#8722;1</sup>A<sup>T</sup> built from the same A, applied to b. The output p is the point of the column space nearest to b &#8212; the vector Ax&#770; that the least-squares solution produces. P depends only on A, so one matrix projects every right-hand side at once. See the same projection from the normal equations on the',
       href: '/linear-algebra/visual-tools/least-squares',
       linkText: 'least squares visualizer',
     }),
@@ -1674,6 +1690,8 @@ export default function LeastSquaresPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-noExactSolution'} dangerouslySetInnerHTML={{ __html: demoUnits.noExactSolution }} />,
+          `An inconsistent system is not the end of the problem; it is the reason least squares exists.`,
         ]
     },
     {
@@ -1744,6 +1762,8 @@ export default function LeastSquaresPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-projectionMatrix'} dangerouslySetInnerHTML={{ __html: demoUnits.projectionMatrix }} />,
+          `Whichever way it is computed, the least-squares fit is the projection of b onto the column space.`,
         ]
     },
     {

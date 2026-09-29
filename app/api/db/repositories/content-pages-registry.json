@@ -1529,6 +1529,32 @@
           "probability-probability-function",
           "probability-cdf-continuous"
         ]
+      },
+      "power set": {
+        "tool": "power-set",
+        "decided": "2026-09-28",
+        "runnersUp": [],
+        "why": "the power set explorer draws every subset as a lattice ordered by containment; the only tool that shows a power set at all"
+      },
+      "de morgan's laws": {
+        "tool": "two-sets-laws-venn",
+        "decided": "2026-09-28",
+        "runnersUp": [],
+        "why": "the laws explorer freezes this exact identity as a side-by-side LHS = RHS pair; first link of the concept anywhere"
+      },
+      "distributive laws": {
+        "tool": "three-sets-laws-venn",
+        "decided": "2026-09-28",
+        "runnersUp": [],
+        "why": "the laws explorer freezes this exact identity as a side-by-side LHS = RHS pair; first link of the concept anywhere"
+      },
+      "image (range)": {
+        "tool": "kernel-image-2d",
+        "decided": "2026-09-28",
+        "runnersUp": [
+          "linear-transformation-2d"
+        ],
+        "why": "draws the domain with its kernel and the codomain with its image side by side, so rank and nullity are both visible"
       }
     },
     "operationA": {
@@ -1545,9 +1571,10 @@
       "section": "trigonometry",
       "pagePath": "pages/trigonometry/identities/index.jsx",
       "template": "titled",
-      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template. | 2026-09-27: this entry maps section 0 only - the pass-0 seeder missed the page's named section ids, so the other 18 sections were never mapped. The co-function record was added by the illustration pass. A full Stage 1 re-map (opa-map) is still owed.",
       "sections": [
-        "0"
+        "0",
+        "co-function"
       ],
       "mapped": "2026-09-20",
       "relatedTerms": [
@@ -1595,6 +1622,33 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "complementary angles",
+          "entity": "complementary_angles",
+          "sections": [
+            "co-function"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "co-function",
+              "tool": "angle-explorer",
+              "target": {
+                "path": "/trigonometry/visual-tools/angle-explorer",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "angleExplorerDiagrams.concepts.complementary"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-09-27",
+              "note": "Unit carries no href: the section prose already links angle-explorer, and one link per term per section holds. Tool per $conceptToolMap."
+            }
+          ]
         }
       ]
     },
@@ -2346,8 +2400,32 @@
           "sections": [
             "5"
           ],
-          "status": "deferred",
-          "reason": "no tool demonstrates the power set; candidate for a future subset-lattice visualizer"
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "5",
+              "tool": "power-set",
+              "target": {
+                "path": "/set-theory/visual-tools/power-set",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "powerSetExplorerDiagrams['nothing-selected']"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": "deferred",
+              "to": "linked",
+              "note": "gap closed: the power set explorer (the subset-lattice visualizer this record asked for) shipped after the pass; harvested in the illustration pass"
+            }
+          ]
         },
         {
           "term": "cardinality of power set",
@@ -3343,8 +3421,32 @@
           "sections": [
             "5"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "5",
+              "tool": "pascal-triangle",
+              "target": {
+                "path": "/combinatorics/visual-tools/pascal-triangle",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "pascalTriangleDiagrams.identity"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "to": "linked",
+              "note": "record was stale: section 5 already carries the pascal-triangle identity unit (added 2026-09-22 under 'binomial coefficient')",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "binomial coefficient",
@@ -3959,6 +4061,39 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "Cholesky factorization",
+          "entity": "cholesky_decomposition",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "cholesky-decomposition",
+              "target": {
+                "path": "/linear-algebra/visual-tools/cholesky-decomposition",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "choleskyDiagrams.done"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -4092,6 +4227,39 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "LU factorization",
+          "entity": "lu_decomposition",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "lu-decomposition",
+              "target": {
+                "path": "/linear-algebra/visual-tools/lu-decomposition",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "luDiagrams.done"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -4328,6 +4496,39 @@
           ],
           "status": "dropped",
           "reason": "Runs through 4 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "QR factorization",
+          "entity": "qr_decomposition",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "qr-decomposition",
+              "target": {
+                "path": "/linear-algebra/visual-tools/qr-decomposition",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "qrDiagrams.done"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -4560,6 +4761,39 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "orthogonal eigenvector matrix",
+          "entity": "orthogonal_matrix",
+          "sections": [
+            "5"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "5",
+              "tool": "spectral-decomposition",
+              "target": {
+                "path": "/linear-algebra/visual-tools/spectral-decomposition",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "spectralDiagrams.orthocheck"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -4819,6 +5053,39 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "SVD outer product form",
+          "entity": "singular_value_decomposition",
+          "sections": [
+            "11"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "11",
+              "tool": "singular-value-decomposition",
+              "target": {
+                "path": "/linear-algebra/visual-tools/singular-value-decomposition",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "svdDiagrams.rankone"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -5099,6 +5366,39 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "2x2 determinant",
+          "entity": "determinant",
+          "sections": [
+            "2"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "2",
+              "tool": "matrix-determinant",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-determinant",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "determinantDiagrams.diagonal"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -5436,6 +5736,39 @@
           ],
           "status": "dropped",
           "reason": "Runs through 5 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "Laplace expansion along a column",
+          "entity": "cofactor_expansion",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "matrix-determinant",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-determinant",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "determinantDiagrams['cofactor-col']"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -5609,6 +5942,39 @@
           ],
           "status": "dropped",
           "reason": "Runs through 5 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "orientation",
+          "entity": "orientation",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "reflection-2d",
+              "target": {
+                "path": "/linear-algebra/visual-tools/reflection-2d",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "reflectionDiagrams.axes"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -6285,6 +6651,39 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "algebraic multiplicity",
+          "entity": "algebraic_multiplicity",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "eigenvalues-eigenvectors",
+              "target": {
+                "path": "/linear-algebra/visual-tools/eigenvalues-eigenvectors",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "eigenDiagrams.repeated"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -6478,6 +6877,39 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "complex eigenvalues",
+          "entity": "complex_eigenvalue",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "eigenvalues-eigenvectors",
+              "target": {
+                "path": "/linear-algebra/visual-tools/eigenvalues-eigenvectors",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "eigenDiagrams.complex"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -6729,6 +7161,39 @@
           ],
           "status": "dropped",
           "reason": "Runs through 3 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "recurrence relation",
+          "entity": "recurrence_relation",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "matrix-diagonalization",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-diagonalization",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "diagonalizationDiagrams.markov"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -6947,6 +7412,39 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "power iteration",
+          "entity": "power_iteration",
+          "sections": [
+            "12"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "12",
+              "tool": "power-iteration",
+              "target": {
+                "path": "/linear-algebra/visual-tools/power-iteration",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "powerIterationDiagrams.done"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -7028,6 +7526,29 @@
                 "newStates": []
               },
               "added": "2026-09-13"
+            },
+            {
+              "fromSection": "3",
+              "tool": "gauss-elimination",
+              "target": {
+                "path": "/linear-algebra/visual-tools/gauss-elimination",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "gaussEliminationDiagrams.initial"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "to": "linked",
+              "note": "second link added by the illustration pass: section 3 (the augmented matrix itself) had no frame",
+              "from": "linked"
             }
           ]
         },
@@ -7206,8 +7727,32 @@
           "sections": [
             "4"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "linear-system-solutions",
+              "target": {
+                "path": "/linear-algebra/visual-tools/linear-system-solutions",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "linearSystemDiagrams.infinite"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "to": "linked",
+              "note": "gap closed: harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "augmented matrix",
@@ -7869,8 +8414,32 @@
             "5",
             "10"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "5",
+              "tool": "span-membership",
+              "target": {
+                "path": "/linear-algebra/visual-tools/span-membership",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "spanMembershipDiagrams.notin"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "to": "linked",
+              "note": "gap closed: harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "augmented matrix",
@@ -8011,6 +8580,72 @@
           ],
           "status": "dropped",
           "reason": "Runs through 5 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "existence of solutions",
+          "entity": "system_of_linear_equations",
+          "sections": [
+            "2"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "2",
+              "tool": "span-membership",
+              "target": {
+                "path": "/linear-algebra/visual-tools/span-membership",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "spanMembershipDiagrams.membership"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
+        },
+        {
+          "term": "uniqueness of solutions",
+          "entity": "system_of_linear_equations",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "span-membership",
+              "target": {
+                "path": "/linear-algebra/visual-tools/span-membership",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "spanMembershipDiagrams.dependent"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -8280,6 +8915,40 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "matrix-vector product",
+          "entity": "matrix_vector_product",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "matrix-multiplication-columns",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-multiplication-columns",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "vectorPictureDiagrams.columns.allPieces"
+                ],
+                "arrangement": "single",
+                "note": "marker ids re-pointed at the use site (vpd-c- to vpd-c4-): the module's arrowheads otherwise drop out"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -8765,6 +9434,105 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "scalar multiplication of matrices",
+          "entity": "scalar_multiplication",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "matrix-scalar-multiplication",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-scalar-multiplication",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "matrixScalarDiagrams.done"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
+        },
+        {
+          "term": "linear combination of matrices",
+          "entity": "linear_combination",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "matrix-linear-combination",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-linear-combination",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "matrixLinCombDiagrams.add"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
+        },
+        {
+          "term": "matrix power",
+          "entity": "matrix_power",
+          "sections": [
+            "9"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "9",
+              "tool": "matrix-power",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-power",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "powerDiagrams.square"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -8795,8 +9563,32 @@
           "sections": [
             "6"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "kernel-image-2d",
+              "target": {
+                "path": "/linear-algebra/visual-tools/kernel-image-2d",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "kernelImageDiagrams.rankOne"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "to": "linked",
+              "note": "gap closed: the kernel and image visualizer freezes a rank-1 map with its kernel and image lines; harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "augmented matrix",
@@ -9391,6 +10183,14 @@
               },
               "added": "2026-09-13"
             }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": "linked",
+              "to": "linked",
+              "note": "unit was lost when the page was rewritten (live code no longer carried it; the 2026-09-13 version sits in the commented archive); re-planted from the archive by the illustration pass"
+            }
           ]
         },
         {
@@ -9463,6 +10263,14 @@
                 "newStates": []
               },
               "added": "2026-09-13"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": "linked",
+              "to": "linked",
+              "note": "unit was lost when the page was rewritten (live code no longer carried it; the 2026-09-13 version sits in the commented archive); re-planted from the archive by the illustration pass"
             }
           ]
         },
@@ -9564,6 +10372,14 @@
               },
               "added": "2026-09-13"
             }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": "linked",
+              "to": "linked",
+              "note": "unit was lost when the page was rewritten (live code no longer carried it; the 2026-09-13 version sits in the commented archive); re-planted from the archive by the illustration pass"
+            }
           ]
         },
         {
@@ -9599,6 +10415,72 @@
           ],
           "status": "dropped",
           "reason": "Runs through 5 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "diagonal matrix",
+          "entity": "diagonal_matrix",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "matrix-types",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-types",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "matrixTypesDiagrams.diagonal"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
+        },
+        {
+          "term": "skew-symmetric matrix",
+          "entity": "skew_symmetric_matrix",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "matrix-types",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-types",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "matrixTypesDiagrams.skewSymmetric"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-28"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-28",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -10396,6 +11278,72 @@
           ],
           "status": "dropped",
           "reason": "Runs through 5 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "inconsistent system",
+          "entity": "system_of_linear_equations",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "least-squares",
+              "target": {
+                "path": "/linear-algebra/visual-tools/least-squares",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "leastSquaresDiagrams.consistency"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
+        },
+        {
+          "term": "projection matrix",
+          "entity": "projection_matrix",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "least-squares",
+              "target": {
+                "path": "/linear-algebra/visual-tools/least-squares",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "leastSquaresDiagrams.projmatrix"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -11404,6 +12352,39 @@
           ],
           "status": "dropped",
           "reason": "Runs through 4 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "composition order",
+          "entity": "matrix_multiplication",
+          "sections": [
+            "9"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "9",
+              "tool": "matrix-composition-2d",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-composition-2d",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "matrixCompositionDiagrams.noncommute"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -11792,6 +12773,39 @@
           ],
           "status": "dropped",
           "reason": "Runs through 4 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "inverse transformation",
+          "entity": "inverse_matrix",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "matrix-composition-2d",
+              "target": {
+                "path": "/linear-algebra/visual-tools/matrix-composition-2d",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "matrixCompositionDiagrams.revealInverse"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -12908,6 +13922,29 @@
                 "newStates": []
               },
               "added": "2026-09-13"
+            },
+            {
+              "fromSection": "5",
+              "tool": "four-fundamental-subspaces",
+              "target": {
+                "path": "/linear-algebra/visual-tools/four-fundamental-subspaces",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "subspacesDiagrams.leftnull"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "to": "linked",
+              "note": "link added by the illustration pass for section 5",
+              "from": "linked"
             }
           ]
         },
@@ -13069,6 +14106,39 @@
           ],
           "status": "dropped",
           "reason": "Runs through 7 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "row space",
+          "entity": "row_space",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "four-fundamental-subspaces",
+              "target": {
+                "path": "/linear-algebra/visual-tools/four-fundamental-subspaces",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "subspacesDiagrams.rowspace"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -13465,6 +14535,39 @@
           ],
           "status": "dropped",
           "reason": "Runs through 7 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "spanning R^n",
+          "entity": "span",
+          "sections": [
+            "5"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "5",
+              "tool": "span-membership",
+              "target": {
+                "path": "/linear-algebra/visual-tools/span-membership",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "spanMembershipDiagrams.rank"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -13673,6 +14776,29 @@
                 "newStates": []
               },
               "added": "2026-09-13"
+            },
+            {
+              "fromSection": "3",
+              "tool": "four-fundamental-subspaces",
+              "target": {
+                "path": "/linear-algebra/visual-tools/four-fundamental-subspaces",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "subspacesDiagrams.trivial"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "to": "linked",
+              "note": "link added by the illustration pass for section 3",
+              "from": "linked"
             }
           ]
         },
@@ -16503,12 +17629,13 @@
             "7",
             "8",
             "9",
-            "10"
+            "10",
+            "2"
           ],
           "status": "linked",
           "links": [
             {
-              "fromSection": "1",
+              "fromSection": "2",
               "tool": "triangle-explorer",
               "target": {
                 "path": "/trigonometry/visual-tools/triangle-explorer",
@@ -25090,6 +26217,39 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "full permutation",
+          "entity": "permutation",
+          "sections": [
+            "full"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "full",
+              "tool": "full-permutation",
+              "target": {
+                "path": "/combinatorics/visual-tools/full-permutation",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "fullPermutationDiagrams.n3"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -25110,7 +26270,7 @@
       "section": "set-theory",
       "pagePath": "pages/set-theory/rules/index.jsx",
       "template": "titled",
-      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template.",
+      "templateNote": "Section anchors are numeric ids (\"1\"..\"n\") with real titles in sectionsContent; slugs are not derivable from the titles on this template. | 2026-09-28: sections are named ids (idempotent..de_morgan), not numeric. The page is table-only - no prose - so the Stage 1 scan found no terms. Two units harvested by the illustration pass (De Morgan, distributive); the other five laws skipped as restating the formula in shapes.",
       "sections": [
         "idempotent",
         "associative",
@@ -25121,7 +26281,60 @@
         "de_morgan"
       ],
       "mapped": "2026-09-24",
-      "relatedTerms": []
+      "relatedTerms": [
+        {
+          "term": "de morgan's laws",
+          "entity": "de_morgans_laws",
+          "sections": [
+            "de_morgan"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "de_morgan",
+              "tool": "two-sets-laws-venn",
+              "target": {
+                "path": "/set-theory/visual-tools/two-sets-laws-venn",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "twoSetsLawsVennDiagrams['dm-u']"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-09-28"
+            }
+          ]
+        },
+        {
+          "term": "distributive laws",
+          "entity": "distributive_laws",
+          "sections": [
+            "distributive"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "distributive",
+              "tool": "three-sets-laws-venn",
+              "target": {
+                "path": "/set-theory/visual-tools/three-sets-laws-venn",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "threeSetsLawsVennDiagrams['dist-i-over-u']"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-09-28"
+            }
+          ]
+        }
+      ]
     },
     "arithmetic/divisibility": {
       "slug": "divisibility",

@@ -1287,6 +1287,7 @@ import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiag
 import quadrantSignsDiagrams from '@/app/components/trigonometry/quadrantSignsDiagrams'
 import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
 import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
+import renderCircleArcV2 from '@/app/utils/illustrations/trigonometry/circle/circleArc.v2'
 
 
 export async function getStaticProps(){
@@ -2222,6 +2223,28 @@ The unit circle reveals structure that [right triangle trigonometry](!/trigonome
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  // Authored figures. circleArc.v2 draws them; these are data only.
+  // Package doc: app/utils/illustrations/trigonometry/circle/circleArc.v2.md
+  const caRadiusOne = {
+    kind: 'inscribed', width: 540, height: 330, angleDeg: 40, ratioY: 296, dividers: [286],
+    svgTitle: 'Radius 1 is what removes the denominator from the ratios',
+    panels: [
+      { cx: 140, cy: 150, r: 110, radiusLabel: 'r', title: 'radius r', ratios: ['sin \u03b8 = y / r', 'cos \u03b8 = x / r'] },
+      { cx: 420, cy: 150, r: 62, radiusLabel: '1', title: 'radius 1', ratios: ['sin \u03b8 = y', 'cos \u03b8 = x'] },
+    ],
+  };
+  const caQuadrantal = {
+    kind: 'axisPoints', width: 540, height: 390, cx: 270, cy: 180, r: 104,
+    svgTitle: 'At each quadrantal angle exactly two functions are undefined',
+    points: [
+      { angleDeg: 0, coord: '(1, 0)', zero: 'y = 0', dead: 'cot, csc undefined', dx: 14, dy: 22 },
+      { angleDeg: 90, coord: '(0, 1)', zero: 'x = 0', dead: 'tan, sec undefined', dx: 14, dy: -26 },
+      { angleDeg: 180, coord: '(\u22121, 0)', zero: 'y = 0', dead: 'cot, csc undefined', dx: -14, dy: 22, anchor: 'end' },
+      { angleDeg: 270, coord: '(0, \u22121)', zero: 'x = 0', dead: 'tan, sec undefined', dx: 14, dy: 10 },
+    ],
+    notes: ['where x = 0, anything divided by cos breaks;', 'where y = 0, anything divided by sin breaks'],
+  };
+
   const demoUnits = {
     coordinates: demoUnitFrame({
       svg: unitCircleDiagrams.quadrants[1],
@@ -2257,6 +2280,16 @@ The unit circle reveals structure that [right triangle trigonometry](!/trigonome
       text: 'This curve is the y-coordinate of the moving point, plotted against the angle it has swept: it starts at 0, reaches 1 at 90&#176;, returns to 0 at 180&#176;, falls to &#8722;1 at 270&#176; and closes the cycle at 360&#176;. The marker sits at 60&#176;, where the height is &#8730;3/2 &#8776; 0.866, the same number the unit circle gives for that angle. Follow the marker around one full period on the',
       href: '/trigonometry/visual-tools/functions-graphs',
       linkText: 'trigonometric functions graphs',
+    }),
+    radiusOne: demoUnitFrame({
+      svg: renderCircleArcV2(caRadiusOne),
+      caption: 'The same angle on two circles',
+      text: 'Both triangles have the same shape because the angle is the same; only the size differs. On the larger circle every ratio still has to be divided by the radius. Shrink the radius to 1 and the division disappears &#8212; the two legs of the triangle simply <em>are</em> the cosine and the sine.',
+    }),
+    quadrantal: demoUnitFrame({
+      svg: renderCircleArcV2(caQuadrantal),
+      caption: 'Two functions break at each axis',
+      text: 'On the vertical axis the <em>x</em>-coordinate is zero, so every function with cosine in its denominator &#8212; tangent and secant &#8212; is undefined there. On the horizontal axis it is the <em>y</em>-coordinate that vanishes, and cotangent and cosecant go instead.',
     }),
   };
 
@@ -2325,6 +2358,8 @@ export default function UnitCirclePage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-radiusOne'} dangerouslySetInnerHTML={{ __html: demoUnits.radiusOne }} />,
+          `That is the entire reason the unit circle, rather than some other circle, carries the definitions.`,
         ]
     },
     {
@@ -2343,6 +2378,8 @@ export default function UnitCirclePage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-quadrantal'} dangerouslySetInnerHTML={{ __html: demoUnits.quadrantal }} />,
+          `These same four angles are where the corresponding graphs have their vertical asymptotes.`,
         ]
     },
     {

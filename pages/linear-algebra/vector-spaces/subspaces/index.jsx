@@ -827,6 +827,7 @@ import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-vi
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "subspaces linear algebra",
@@ -1463,6 +1464,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     geometry: demoUnitFrame({
       svg: [spanIndependenceDiagrams.independent, spanIndependenceDiagrams.dependent],
@@ -1475,6 +1477,13 @@ const schemas = {
       svg: subspacesDiagrams.nullspace,
       caption: 'The null space read off the reduced form',
       text: 'Each free column has produced one special solution, and together they form a basis for everything the matrix sends to zero. The null space is a subspace for a reason visible right here: any combination of these solutions is still killed by the matrix, so the set is closed under exactly the two operations a subspace has to survive. Step through all four spaces on the',
+      href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
+      linkText: 'four fundamental subspaces visualizer',
+    }),
+    zeroSubspace: demoUnitFrame({
+      svg: subspacesDiagrams.trivial,
+      caption: 'A null space that is just {0}',
+      text: 'An invertible matrix: reducing it leaves a pivot in every column and no free variable, so the only solution of Ax = 0 is x = 0. Its null space is the zero subspace {0} &#8212; the smallest subspace there is, and a subspace all the same. Compare it with a matrix whose null space is a line on the',
       href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
       linkText: 'four fundamental subspaces visualizer',
     }),
@@ -1548,6 +1557,8 @@ export default function SubspacesPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-zeroSubspace'} dangerouslySetInnerHTML={{ __html: demoUnits.zeroSubspace }} />,
+          `The zero subspace appears naturally: it is the null space of every invertible matrix.`,
         ]
     },
     {

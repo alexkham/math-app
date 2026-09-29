@@ -679,6 +679,7 @@ import determinantDiagrams from '@/app/components/linear-algebra copy/determinan
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "determinant",
@@ -1095,6 +1096,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     sarrus: demoUnitFrame({
       svg: determinantDiagrams.sarrus,
@@ -1118,6 +1120,13 @@ const schemas = {
       text: 'Above, the unit square has become a parallelogram and its area is exactly the determinant. Below, the matrix has flattened the plane onto a line: the parallelogram has no area left and the determinant is zero. Singularity and zero area are the same event seen from two sides. Change the entries and watch the area respond on the',
       href: '/linear-algebra/visual-tools/linear-transformation-2d',
       linkText: 'linear transformation explorer',
+    }),
+    twoByTwo: demoUnitFrame({
+      svg: determinantDiagrams.diagonal,
+      caption: 'ad, the first half of ad &#8722; bc',
+      text: 'The 2 &#215; 2 determinant is built from the two diagonals of the square. Here the main diagonal is lit: a<sub>11</sub> and a<sub>22</sub>, whose product is the ad term. The anti-diagonal, a<sub>12</sub> and a<sub>21</sub>, supplies bc, and the determinant is the first product minus the second. Step through both diagonals and the subtraction on the',
+      href: '/linear-algebra/visual-tools/matrix-determinant',
+      linkText: 'determinant visualizer',
     }),
   };
 
@@ -1167,6 +1176,8 @@ export default function DeterminantsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-twoByTwo'} dangerouslySetInnerHTML={{ __html: demoUnits.twoByTwo }} />,
+          `Every larger determinant is assembled out of 2 × 2 pieces like this one.`,
         ]
     },
     {

@@ -1407,6 +1407,9 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
 import { scenariosData } from '@/app/api/db/diagrams/combinatorics/scenarios'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import fullPermutationDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/fullPermutationDiagrams'
+import renderFixedPoints from '@/app/utils/illustrations/combinatorics/permutations/fixedPoints'
 import GenericTable from '@/app/components/generic-table/GenericTable'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
@@ -2533,6 +2536,29 @@ const schemas = {
 
 }
 
+  const fpHats = {
+    kind: 'derangements',
+    svgTitle: 'Six ways to hand back three hats; two leave no guest with their own',
+    items: ['A', 'B', 'C'],
+    placeName: 'guest', rowName: 'order', countName: 'own hats', ownNote: 'a guest gets their own hat',
+    caption: '2 of the 3! = 6 orders give nobody their own hat: !3 = 2',
+  };
+
+  const demoUnits = {
+    fullN3: demoUnitFrame({
+      svg: fullPermutationDiagrams.n3,
+      caption: 'All 3! = 6 arrangements of three items',
+      text: 'Three distinct items, every order they can stand in: 3 choices for the first place, 2 for the second, 1 for the last, and the six results laid out in groups by their first item. Each group has the same size because whatever goes first, the rest can still be ordered in 2! ways. Build the arrangements for 4 and 5 items on the',
+      href: '/combinatorics/visual-tools/full-permutation',
+      linkText: 'full permutation visualizer',
+    }),
+    hatCheck: demoUnitFrame({
+      svg: renderFixedPoints(fpHats),
+      caption: 'Three guests, three hats',
+      text: 'Guests A, B and C each checked a hat, and the six rows are every order the hats can come back in. A red circle marks a guest who got their own hat back. Four orders return at least one hat correctly; only B C A and C A B leave every guest holding someone else&#8217;s hat &#8212; the two derangements, so !3 = 2. The alternating sum under the table is the formula for n = 3: start from all 3! orders and correct for the ones that fix a place.',
+    }),
+  };
+
    return {
   props:{
     seoData: {
@@ -2549,6 +2575,7 @@ const schemas = {
     fullPermutationTable,
     identicalTable,
     permutationsScenariosTableData,
+    demoUnits,
     partialWithoutTable,
     permutationWithRepetitionTable,
     circularTable,
@@ -2560,7 +2587,7 @@ const schemas = {
   
 export default function PermutationsPage({seoData, sectionsContent, introContent, permutationsDiagram, fullPermutationTable,
   identicalTable, permutationsTable, permutationsScenariosTableData, partialWithoutTable,
-  permutationWithRepetitionTable, circularTable, faqQuestions, schemas}) {
+  permutationWithRepetitionTable, circularTable, faqQuestions, schemas, demoUnits}) {
   
   const permutationsSections=[
     {
@@ -2602,6 +2629,8 @@ export default function PermutationsPage({seoData, sectionsContent, introContent
           sectionsContent.full.before,
         <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: fullPermutationTable }} key="table" />,
       sectionsContent.full.between,
+      <div key={'unit-fullN3'} dangerouslySetInnerHTML={{ __html: demoUnits.fullN3 }} />,
+      `Every extra item multiplies the count again: 4 items give 24 arrangements, 5 give 120.`,
       sectionsContent.full.after,
       
     
@@ -2708,6 +2737,8 @@ export default function PermutationsPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-hatCheck'} dangerouslySetInnerHTML={{ __html: demoUnits.hatCheck }} />,
+          `Both derangements are rotations: in B C A every hat moves one seat one way, in C A B one seat the other way.`,
         ]
     },
 //   {

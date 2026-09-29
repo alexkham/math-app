@@ -2813,6 +2813,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import diagonalizationDiagrams from '@/app/components/linear-algebra copy/matrix/diagonalizationDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "matrix diagonalization",
@@ -3399,6 +3400,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     assemble: demoUnitFrame({
       svg: diagonalizationDiagrams.assemble,
@@ -3420,6 +3422,13 @@ const schemas = {
       text: 'There are not enough independent eigenvectors to make up the columns of P, so P cannot be inverted and the factorisation never forms. Diagonalisation fails for this reason alone &#8212; never because the eigenvalues were awkward, only because the directions ran out. See which matrices hit this wall on the',
       href: '/linear-algebra/visual-tools/matrix-diagonalization',
       linkText: 'diagonalization visualizer',
+    }),
+    markovSteady: demoUnitFrame({
+      svg: diagonalizationDiagrams.markov,
+      caption: 'A Markov matrix after eight steps',
+      text: 'The recurrence x<sub>n+1</sub> = Ax<sub>n</sub> with a Markov matrix A. Written through the diagonalization, A<sup>8</sup> = PD<sup>8</sup>P<sup>&#8722;1</sup>: the eigenvalue 1 stays 1 at every power while the other eigenvalue, smaller than 1 in size, dies away. After eight steps A<sup>8</sup> is already close to its limit &#8212; every column near the steady state, the eigenvector for &#955; = 1. Change the power on the',
+      href: '/linear-algebra/visual-tools/matrix-diagonalization',
+      linkText: 'matrix diagonalization visualizer',
     }),
   };
 
@@ -3540,6 +3549,8 @@ const schemas = {
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-markovSteady'} dangerouslySetInnerHTML={{ __html: demoUnits.markovSteady }} />,
+          `In a recurrence, the eigenvalues decide the long run: those below 1 in size fade, and what is left is the eigenvector of the largest.`,
         ]
     },
     {

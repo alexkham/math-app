@@ -1306,6 +1306,7 @@ import angleDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiag
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import trigoAngleTypesDiagrams from '@/app/components/trigonometry/angle/types/trigoAngleTypesDiagrams'
 import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
+import renderCircleArc from '@/app/utils/illustrations/trigonometry/circle/circleArc'
 
 
 export async function getStaticProps(){
@@ -2226,6 +2227,42 @@ For example, the angles $40°$ and $50°$ are complementary ($40° + 50° = 90°
 
   // Operation A demonstration units: frozen tool state + attached explanation
   // panel + tool link, one frame. Rendered as content-array items.
+  // Authored figures. circleArc draws them; these are data only.
+  // Package doc: app/utils/illustrations/trigonometry/circle/circleArc.md
+  const caOneRadian = {
+    kind: 'arc', width: 420, height: 300, cx: 180, cy: 160, r: 110, from: 0, to: 1,
+    svgTitle: 'One radian is the angle whose arc equals the radius',
+    tickRadii: true, tickArc: true, angleRadius: 34, angleLabel: '\u03b8 = 1', angleLabelOut: 26,
+    radiusLabels: [{ text: 'r', angle: 0, at: 0.5, dy: 18 }, { text: 'r', angle: 1, at: 0.5, dx: -14, dy: -4 }],
+    arcLabel: 'arc = r', arcLabelOut: 24, arcLabelDx: 10, arcLabelAnchor: 'start', arcLabelSize: 14,
+    notes: [
+      { text: 'when the arc is as long as the radius,', x: 210, y: 250, color: 'text', size: 13 },
+      { text: 'the angle is one radian', x: 210, y: 268, color: 'text', size: 13 },
+    ],
+  };
+  const caArcLength = {
+    kind: 'arc', width: 448, height: 290, cx: 162, cy: 165, r: 108, from: 0, to: 1.9,
+    svgTitle: 'Arc length is the radius times the angle, read off directly',
+    angleRadius: 36, angleLabel: '\u03b8', angleColor: 'secondary', angleLabelOut: 22, arcWidth: 2.8,
+    radiusLabels: [{ text: 'r', angle: 0, at: 0.5, dy: 18 }, { text: 'r', angle: 1.9, at: 0.55, dx: -13, dy: 2 }],
+    arcLabel: 's', arcLabelOut: 26, arcLabelDx: -6, arcLabelSize: 16,
+    notes: [
+      { text: 's = r \u03b8', x: 336, y: 150, color: 'text', size: 20 },
+      { text: 'no conversion factor', x: 336, y: 176, color: 'muted', size: 12, bold: false },
+    ],
+  };
+  const caSectorArea = {
+    kind: 'sector', width: 440, height: 310, cx: 168, cy: 150, r: 110, from: 0, to: 1.25,
+    svgTitle: 'The sector is the fraction theta over two pi of the whole disc',
+    angleRadius: 38, angleLabel: '\u03b8', angleLabelOut: 22,
+    notes: [
+      { text: 'the whole disc \u2014 2\u03c0', x: 168, y: 290, color: 'primary', size: 12 },
+      { text: 'the slice is', x: 365, y: 122, color: 'muted', size: 12, bold: false },
+      { text: '\u03b8 / 2\u03c0', x: 365, y: 148, color: 'resultStroke', size: 20 },
+      { text: 'of the disc', x: 365, y: 170, color: 'muted', size: 12, bold: false },
+    ],
+  };
+
   const demoUnits = {
     compSupp: demoUnitFrame({
       svg: [angleExplorerDiagrams.concepts.complementary, angleExplorerDiagrams.concepts.supplementary],
@@ -2249,6 +2286,21 @@ For example, the angles $40°$ and $50°$ are complementary ($40° + 50° = 90°
       href: '/trigonometry/visual-tools/angle-explorer',
       linkText: 'angle explorer',
       textAfterLink: ' marks the coterminal partner for any angle you set, in degrees or radians alike.',
+    }),
+    oneRadian: demoUnitFrame({
+      svg: renderCircleArc(caOneRadian),
+      caption: 'The arc and the radius, same length',
+      text: 'Both radii and the arc between them carry a single tick, because all three are the same length. That is the entire definition: swing the radius round until the arc it sweeps matches it, and the angle you have opened is one radian &#8212; about 57.3&#176;, on a circle of any size.',
+    }),
+    arcLength: demoUnitFrame({
+      svg: renderCircleArc(caArcLength),
+      caption: 'Radius, angle, arc',
+      text: 'Because the angle is already a ratio of two lengths, multiplying it by the radius gives back a length directly. Nothing is converted and no constant appears &#8212; which is exactly what the degree version of the same formula cannot do.',
+    }),
+    sectorArea: demoUnitFrame({
+      svg: renderCircleArc(caSectorArea),
+      caption: 'The slice against the whole',
+      text: 'The shaded wedge occupies the same share of the disc that &#952; occupies of a full turn. Multiply that share by the area of the whole circle and the &#960; cancels, which is where the compact form of the sector-area formula comes from.',
     }),
   };
 
@@ -2313,6 +2365,8 @@ export default function DegreesRadiansPage({seoData,sectionsContent , introConte
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-oneRadian'} dangerouslySetInnerHTML={{ __html: demoUnits.oneRadian }} />,
+          `Because the ratio has no units, every formula built on it inherits that cleanliness.`,
         ]
     },
 
@@ -2355,6 +2409,8 @@ export default function DegreesRadiansPage({seoData,sectionsContent , introConte
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-arcLength'} dangerouslySetInnerHTML={{ __html: demoUnits.arcLength }} />,
+          `Any one of $s$, $r$ and $\\theta$ follows from the other two by the same relation.`,
         ]
     },
     {
@@ -2363,6 +2419,8 @@ export default function DegreesRadiansPage({seoData,sectionsContent , introConte
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-sectorArea'} dangerouslySetInnerHTML={{ __html: demoUnits.sectorArea }} />,
+          `Substituting $s = r\\theta$ turns the same formula into $A = \\frac{1}{2}rs$, the triangle-area analogue.`,
         ]
     },
     {
