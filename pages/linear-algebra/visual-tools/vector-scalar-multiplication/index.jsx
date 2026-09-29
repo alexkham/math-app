@@ -599,6 +599,9 @@ import ScalarMultiplicationWrapper from '../../../../app/components/linear-algeb
 import vectorScalarDiagrams from '../../../../app/components/linear-algebra copy/matrix/vectorScalarDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -977,8 +980,109 @@ One consequence worth naming: the set of all scalar multiples of a single non-ze
   }
 
 
+  const instructions = [
+    'The **Length of u** stepper (**▲** / **▼**) sets the number of components of $u$, from $1$ to $10$; $w$ always gets the same length. [Learn more about choosing the length](!#choosing-vector-length)',
+    'Hover the **?** icon next to the label for a reminder of what a scalar is and why the length is preserved. [Learn more about getting started](!#getting-started)',
+    '**▶ Play** runs the whole product, **Next →** and **← Back** move one scene, **Reset** returns to the opening scene, and the speed menu sets the pace from Slow to Very Fast. [Learn more about the controls](!#getting-started)',
+    'Each scene highlights one component: $u_i$ in blue and $w_i$ in green, joined by a curved arrow; the filled slot shows $k \\cdot u_i$. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Step explanations** log lists every scene so far with its formula, the current one highlighted. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real
+     ScalarMultiplicationWrapper in vector mode (opens on length 4, Step 1 / 6). */
+  const demos = {
+    'getting-started': {
+      title: 'Step, speed, back, reset',
+      script: [
+        { say: `TAP Next →
+w₁ = k · u₁. Step 2 / 6.
+One slot of w filled.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next →
+w₂ = k · u₂. Step 3 / 6.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2200 },
+        { say: `TAP ← Back
+Step 2 / 6: w₁ = k · u₁.
+w₂ back to ?.` },
+        { click: { button: '← Back', exact: true } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+0.7 s per scene: w₂, w₃, w₄.
+Step 6 / 6: Done.` },
+        { set: 'select', value: 700 },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3800 },
+        { say: `TAP Reset
+Step 1 / 6. w all ? again.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2200 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'One component per scene',
+      script: [
+        { say: `TAP Next →
+w₁ = k · u₁.
+u₁ blue, w₁ green. Arrow u₁ → w₁.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+w₂ = k · u₂. Highlight one slot right.
+w₁ keeps k · u₁.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+w₃ = k · u₃.
+Same k in every slot.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ▶ Play
+w₄ = k · u₄, then Done.
+Every wₖ = k · uₖ. Length kept.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3600 },
+      ],
+    },
+    'choosing-vector-length': {
+      title: 'Short and long vectors',
+      script: [
+        { say: `TAP ▼ ▼
+Length 2: u, w two slots.
+Step 1 / 4.` },
+        { click: { button: '▼', exact: true } },
+        { wait: 500 },
+        { click: { button: '▼', exact: true } },
+        { wait: 2200 },
+        { say: `TAP ▶ Play
+k · u₁, k · u₂.
+Done at Step 4 / 4.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4600 },
+        { say: `TAP ▲ ▲ ▲
+Length 5. Step 1 / 7.
+w follows: five slots.` },
+        { click: { button: '▲', exact: true } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true } },
+        { wait: 2200 },
+        { say: `TAP ▶ Play
+k · u₁ … k · u₅.
+Same rule, one scene per component.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 8200 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-vector-scalar-multiplication'),
       sectionsContent,
          stateUnits,
@@ -1001,7 +1105,22 @@ One consequence worth naming: the set of all scalar multiples of a single non-ze
   }
 }
 
-export default function ScalarMultiplicationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function ScalarMultiplicationVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ScalarMultiplicationWrapper mode='vectors' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -1025,12 +1144,12 @@ export default function ScalarMultiplicationVisualizer({seoData, sectionsContent
     // obj0 Key Terms was defined but rendered nowhere - its section entry and the
     // KeyTermsCard were both commented out, so the content was invisible. Restored.
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-scene-player'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-scene-player')),
     stateRow('obj10', 'the-opening-scene', 'intro'),
     stateRow('obj11', 'one-component-at-a-time', 'step'),
     stateRow('obj12', 'the-completed-product', 'done'),
-    plain('obj3', 'choosing-vector-length'),
+    withDemo(plain('obj3', 'choosing-vector-length')),
     plain('obj4', 'what-scalar-multiplication-is'),
     plain('obj5', 'key-properties'),
     plain('obj6', 'why-it-matters'),
@@ -1092,6 +1211,10 @@ export default function ScalarMultiplicationVisualizer({seoData, sectionsContent
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Vector Scalar Multiplication</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <ScalarMultiplicationWrapper

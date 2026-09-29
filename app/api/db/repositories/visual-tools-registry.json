@@ -36997,7 +36997,9 @@
         "verification": "STATIC ONLY - eslint parse and line1-static-check.py, plus explicit greps confirming the explanations prop reached both getStaticProps and the component tag.",
         "wiring": "C - reuses the explanations hook added to ScalarMultiplicationWrapper for the matrix page; NO further component change needed. Keys: intro / step / done.",
         "note": "SHARED COMPONENT with linear-algebra-matrix-scalar-multiplication (mode='vectors' vs 'matrices'). Same obj0-obj9 numbering as its twin, so state sections live in obj10-obj12. Scenes from buildVectorScenes(4): 1 intro + 4 steps + 1 done; step frozen at component 3 of 4.",
-        "defectFixed": "obj0 Key Terms restored - section entry and KeyTermsCard were both commented out. Fourth occurrence of this defect."
+        "defectFixed": "obj0 Key Terms restored - section entry and KeyTermsCard were both commented out. Fourth occurrence of this defect.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 5 instructions each ending in an anchor link to an existing usage section (5 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in getting-started, the-scene-player, choosing-vector-length; callouts use the tool's label u (page text says v); tool does not write the URL; headless step check 13/13."
       },
       "relatedTools": [
         {
