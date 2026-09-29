@@ -89,6 +89,12 @@ function setRangeValue(input, v) {
   input.dispatchEvent(new Event('change', { bubbles: true }));
 }
 
+// SVG elements have no .click(); dispatch the event instead
+function press(el) {
+  if (typeof el.click === 'function') el.click();
+  else el.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+}
+
 function setFieldValue(field, v) {
   const proto = field.tagName === 'SELECT' ? window.HTMLSelectElement.prototype : window.HTMLInputElement.prototype;
   Object.getOwnPropertyDescriptor(proto, 'value').set.call(field, String(v));
@@ -290,12 +296,12 @@ export default function ToolDemoPlayer({
       }
       if (a.click) {
         const [x, y] = local(...centerOf(el));
-        if (fast) { placeCursor(x, y); el.click(); await frame(); return; }
+        if (fast) { placeCursor(x, y); press(el); await frame(); return; }
         const { x: sx, y: sy } = posRef.current;
         await tween(a.ms || 600, (u) => placeCursor(sx + (x - sx) * u, sy + (y - sy) * u));
         ripple();
         await sleep(120);
-        el.click();
+        press(el);
         await sleep(150);
         return;
       }

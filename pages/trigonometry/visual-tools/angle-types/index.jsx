@@ -15,6 +15,9 @@ import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -802,6 +805,134 @@ Adding $360°$ converts any negative angle to its [positive](!#positive-angles) 
     });
   }
 
+  const instructions = [
+    'The concept list groups nine topics under **Classification**, **Relationships** and **Trigonometry**; click one to load its scene and explanation. [Learn more about the concepts](!#choosing-a-concept)',
+    'The **Dark** / **Light** button swaps the colour theme for every concept. [Learn more about the theme toggle](!#switching-dark-and-light-modes)',
+    'Drag a handle to rotate an arm of the angle; it snaps to the special values. On Standard Position and Directed Angles, drag below the $x$-axis for negative angles. [Learn more about dragging](!#dragging-to-set-angles)',
+    'Preset controls jump to canonical cases: the seven Angle Types buttons, the Complementary / Supplementary switch, the $-$ and $+$ coterminal steps, and the special-angle points with their Degrees / Radians / Both labels. [Learn more about the presets](!#using-preset-buttons-and-quick-angles)',
+    'Each scene uses one colour language: blue for the active angle, amber for its partner, green and red for signs and markers, purple for shared arms. [Learn more about the diagrams](!#reading-the-scene-diagrams)',
+    'The panel beside each scene gives the concept, its live values and a formula card, all recomputed as you drag. [Learn more about the panels](!#reading-the-explanation-panels)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real TrigoAngleTypesExplorer
+     (opens on Standard Position). Handle = the first <g> with cursor grab;
+     special-angle points = <g> with cursor pointer, nth = index in 0°..330°. */
+  const HANDLE = { css: 'g[style*="grab"]', nth: 0 }
+  const demos = {
+    'choosing-a-concept': {
+      title: 'Nine concepts, one tool',
+      script: [
+        { say: `TAP Angle Types
+Classification scene.
+45° → ACUTE.` },
+        { click: { button: 'Angle Types', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Comp. & Supplementary
+Two angles, one constraint.
+35° + 55° = 90°.` },
+        { click: { button: 'Comp. & Supplementary', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Reference Angles
+130° in Quadrant II.
+Ref = 180° − 130° = 50°.` },
+        { click: { button: 'Reference Angles', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Coterminal Angles
+60° plus one turn = 420°.
+Same terminal side.` },
+        { click: { button: 'Coterminal Angles', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Dark
+Dark palette. Same concept, same values.` },
+        { click: { button: 'Dark', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'using-preset-buttons-and-quick-angles': {
+      title: 'Preset buttons',
+      script: [
+        { say: `TAP Angle Types
+Seven presets. Start: 45°, acute.` },
+        { click: { button: 'Angle Types', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Right
+90°. Quarter turn.
+Square marks the corner.` },
+        { click: { button: 'Right', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Obtuse
+130°. Between 90° and 180°.` },
+        { click: { button: 'Obtuse', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Reflex
+270°. More than a half turn.` },
+        { click: { button: 'Reflex', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Straight
+180°. Half turn. Arms form a line.` },
+        { click: { button: 'Straight', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'dragging-to-set-angles': {
+      title: 'Dragging handles',
+      script: [
+        { say: `DRAG the handle → Quadrant III
+Signs flip: sin −, cos −, tan +.` },
+        { drag: HANDLE, dx: -80, dy: 90, ms: 1800 },
+        { wait: 2800 },
+        { say: `TAP Vertical Angles
+Two lines cross.
+Opposite angles equal: 55° and 55°.` },
+        { click: { button: 'Vertical Angles', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG the handle → 90°
+All four angles right angles.
+Adjacent pair: 90° + 90° = 180°.` },
+        { drag: HANDLE, dx: -45, dy: -14, ms: 1600 },
+        { wait: 2800 },
+        { say: `TAP Directed Angles
+60° counter-clockwise. Positive.` },
+        { click: { button: 'Directed Angles', exact: true } },
+        { wait: 2400 },
+        { say: `DRAG below the x-axis
+Clockwise → negative angle.
+sin flips sign. cos stays.` },
+        { drag: HANDLE, dx: 0, dy: 110, ms: 1800 },
+        { wait: 2800 },
+      ],
+    },
+    'reading-the-explanation-panels': {
+      title: 'Live values in the panel',
+      script: [
+        { say: `TAP Special Angles
+16 points. 45° selected.
+Panel: sin = cos = √2/2.` },
+        { click: { button: 'Special Angles', exact: true } },
+        { wait: 2600 },
+        { say: `TAP the 150° point
+Panel updates.
+sin 1/2. cos −√3/2.` },
+        { click: { css: 'g[style*="pointer"]', nth: 7 } },
+        { wait: 2800 },
+        { say: `TAP Radians
+Circle labels in radians.
+150° = 5π/6.` },
+        { click: { button: 'Radians', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Coterminal Angles
+Panel: base 60°, coterminal 420°.` },
+        { click: { button: 'Coterminal Angles', exact: true } },
+        { wait: 2600 },
+        { say: `TAP +
+n = 2. 60° + 2 × 360° = 780°.
+Same terminal side.` },
+        { click: { button: '+', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   const explanations = {
     basic: {
       content: `An angle is formed by two rays sharing a common vertex. In trigonometry, the type determines which quadrant the terminal side lands in, and therefore the signs of sin, cos, and tan. [See all angle classifications](!#angle-classifications)`,
@@ -858,6 +989,8 @@ Drag above the x-axis for positive, below for negative.`,
          faqQuestions,
          schemas,
          explanations,
+         instructions,
+         demos,
          stateUnits,
           seoData: {
         title: "Angle Types Explorer: Interactive Visualizer | Learn Math Class",
@@ -874,7 +1007,21 @@ Drag above the x-axis for positive, below for negative.`,
     }
    }
 
-export default function AngleTypesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function AngleTypesPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <TrigoAngleTypesExplorer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+
 
 
   const genericSections=[
@@ -891,6 +1038,7 @@ export default function AngleTypesPage({relatedTools, seoData, sectionsContent, 
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('choosing-a-concept'),
           sectionsContent.obj1.content,
         ]
     },
@@ -907,6 +1055,7 @@ export default function AngleTypesPage({relatedTools, seoData, sectionsContent, 
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          demo('dragging-to-set-angles'),
           sectionsContent.obj3.content,
         ]
     },
@@ -915,6 +1064,7 @@ export default function AngleTypesPage({relatedTools, seoData, sectionsContent, 
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
+          demo('using-preset-buttons-and-quick-angles'),
           sectionsContent.obj4.content,
         ]
     },
@@ -931,6 +1081,7 @@ export default function AngleTypesPage({relatedTools, seoData, sectionsContent, 
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
+          demo('reading-the-explanation-panels'),
           sectionsContent.obj6.content,
         ]
     },
@@ -1468,6 +1619,10 @@ export default function AngleTypesPage({relatedTools, seoData, sectionsContent, 
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>
     Angle Types
    </h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
   {/* <SiblingsNav
      bg="#fafaf7"
