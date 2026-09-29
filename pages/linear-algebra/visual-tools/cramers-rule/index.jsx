@@ -8,6 +8,9 @@ import CramerWrapper from '../../../../app/components/linear-algebra copy/matrix
 import cramerDiagrams from '../../../../app/components/linear-algebra copy/matrix/cramerDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -428,8 +431,115 @@ Read across the whole run and the rule's character is clear: $n + 1$ determinant
   }
 
 
+  const instructions = [
+    'The **Preset** pills load five systems: $2 \\times 2$ and $3 \\times 3$ with integer solutions, one with fractional answers, a homogeneous one, and a singular one where the rule stops. [Learn more about choosing a system](!#choosing-a-system)',
+    'The **Size** stepper (**▲** / **▼**) switches between $2$ and $3$ equations; resizing keeps the existing entries and pads with the identity. [Learn more about getting started](!#getting-started)',
+    'Type into any entry of $A$ or of $\\mathbf{b}$, or press **Shuffle** for a random system built to have a small integer solution. [Learn more about editing the system](!#getting-started)',
+    '**▶ Play** runs the rule, **Next →** and **← Back** step one scene at a time, **Reset** returns to the system, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'The run goes system, $\\det A$, one replaced matrix $A_i$ per unknown, then the solution with its check; if $\\det A = 0$ it stops after the determinant. [Learn more about how the rule runs](!#how-the-rule-runs)',
+    'In each replace scene the swapped column is amber and the $\\det A_i$, $\\det A$ and $x_i$ slots fill; the **Step explanations** log keeps every determinant. [Learn more about reading a scene](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real CramerWrapper
+     (opens on 3×3, integers). Cells: input[aria-label="A entry i,j"],
+     input[aria-label="b entry i"]. */
+  const demos = {
+    'getting-started': {
+      title: 'Size, entries, shuffle',
+      script: [
+        { say: `TAP ▼
+Size 2 × 2. Top-left block kept.
+A = [1 1; 2 −1], b = (6, 3).` },
+        { click: { button: '▼', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ▶ Play
+det A = −3. Non-zero → continue.
+x = (3, 3). Check: A x = b.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7600 },
+        { say: `TYPE a₂₂ = 2 → ▶ Play
+Rows (1, 1), (2, 2): proportional.
+det A = 0 → STOP. No unique solution.` },
+        { set: 'input[aria-label="A entry 2,2"]', value: 2 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4600 },
+        { say: `TAP Shuffle
+Random system, built backwards
+from a small integer solution.` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ▶ Play
+det A, then one det Aᵢ per unknown.
+Last scene: A x = b checked.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7600 },
+      ],
+    },
+    'how-the-rule-runs': {
+      title: '3 × 3, one determinant per step',
+      script: [
+        { say: `TAP Next →
+det A = 7.
+Non-zero → exactly one solution.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+A₁: b swapped into column 1.
+det A₁ = 7 → x₁ = 7 / 7 = 1.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+A₂: b in column 2.
+det A₂ = 14 → x₂ = 14 / 7 = 2.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+A₃: b in column 3.
+det A₃ = 21 → x₃ = 21 / 7 = 3.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+x = (1, 2, 3). Check: A x = (6, 3, 2) = b.
+4 determinants in all.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'choosing-a-system': {
+      title: 'Five presets',
+      script: [
+        { say: `TAP 2×2, integers → ▶ Play
+det A = 5. Three 2 × 2 determinants.
+x = (1, 3).` },
+        { click: { button: '2×2, integers', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7600 },
+        { say: `TAP 2×2, fractions → ▶ Play
+det A = 10. Determinants integer,
+ratios not: x = (7/5, 19/10).` },
+        { click: { button: '2×2, fractions', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7600 },
+        { say: `TAP Homogeneous → ▶ Play
+b = 0: every Aᵢ has a zero column.
+Every xᵢ = 0.` },
+        { click: { button: 'Homogeneous', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7600 },
+        { say: `TAP Singular → ▶ Play
+Columns proportional. det A = 0.
+Run stops: no unique solution.` },
+        { click: { button: 'Singular', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-cramers-rule'),
       sectionsContent,
       stateUnits,
@@ -452,7 +562,22 @@ Read across the whole run and the rule's character is clear: $n + 1$ determinant
   }
 }
 
-export default function CramerVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function CramerVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <CramerWrapper defaultPreset='three' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -474,15 +599,15 @@ export default function CramerVisualizer({seoData, sectionsContent, stateUnits, 
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'how-the-rule-runs'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'how-the-rule-runs')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'the-determinant-of-a', 'det'),
     stateRow('obj13', 'replacing-a-column', 'replace'),
     stateRow('obj14', 'when-the-determinant-is-zero', 'singular'),
     stateRow('obj15', 'the-solution', 'done'),
     plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-system'),
+    withDemo(plain('obj4', 'choosing-a-system')),
     plain('obj5', 'what-cramers-rule-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -543,6 +668,10 @@ export default function CramerVisualizer({seoData, sectionsContent, stateUnits, 
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Cramer&apos;s Rule</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <CramerWrapper
