@@ -354,7 +354,7 @@ export default function TraceWrapper({
       padding: '22px',
       fontFamily: 'Arial, sans-serif'
     }}>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .tr-stepper-btn:hover:not(:disabled) { color: #1e40af; }
         .tr-stepper-btn:disabled { color: #cbd5e1; cursor: not-allowed; }
 
@@ -382,7 +382,7 @@ export default function TraceWrapper({
         .tr-info:hover .tr-tip, .tr-info:focus .tr-tip {
           visibility: visible; opacity: 1;
         }
-      `}</style>
+      ` }} />
 
       {(title || subtitle) && (
         <div style={{ marginBottom: '18px' }}>
