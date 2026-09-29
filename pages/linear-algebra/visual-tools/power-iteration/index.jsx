@@ -8,6 +8,9 @@ import PowerIterationWrapper from '../../../../app/components/linear-algebra cop
 import powerIterationDiagrams from '../../../../app/components/linear-algebra copy/matrix/powerIterationDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -451,8 +454,133 @@ In both cases the fix is a shift. The swap matrix shifted to $A + 0.5I$ has eige
   }
 
 
+  const instructions = [
+    'The **Preset** pills load seven matrices: fast, faster and slow convergence, a negative dominant eigenvalue, a $3 \\times 3$, a tie between $1$ and $-1$, and a rotation. [Learn more about the presets](!#choosing-a-matrix)',
+    'The **Size** stepper (**▲** / **▼**) switches between $2 \\times 2$ and $3 \\times 3$; the **steps** stepper sets how many iterations run, from one to fifteen; **Shuffle** draws a matrix with small integer eigenvalues. [Learn more about getting started](!#getting-started)',
+    'Type into any entry of $A$ or of the start vector $\\mathbf{x}_0$; the scenes are rebuilt at once. [Learn more about editing entries](!#getting-started)',
+    '**▶ Play** runs the iterations, **Next →** and **← Back** step one iteration at a time, **Reset** returns to the start, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'Every step multiplies by $A$, reads the entry of largest magnitude as the new estimate, and divides by it; the log reports how much the estimate and the vector changed. [Learn more about the loop](!#the-loop)',
+    'Each scene shows $A$, the current vector in grey, the product with its largest entry in accent, and the rescaled vector in blue; the final scene sets it beside the exact eigenvector. [Learn more about reading a scene](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real PowerIterationWrapper
+     (opens on Classic [4 1; 2 3], x0 = (1, 0), 6 steps). Cells: input[aria-label="entry i,j"],
+     start vector: input[aria-label="start entry i"]; steppers: button[aria-label="Increase"],
+     nth 0 = size, nth 1 = steps. */
+  const demos = {
+    'getting-started': {
+      title: 'Steps, start vector, size, shuffle',
+      script: [
+        { say: `TAP steps ▲ ×2
+8 iterations.
+Step 1 / 10.` },
+        { click: { css: 'button[aria-label="Increase"]', nth: 1 } },
+        { wait: 700 },
+        { click: { css: 'button[aria-label="Increase"]', nth: 1 } },
+        { wait: 2200 },
+        { say: `SELECT Fast → TAP ▶ Play
+λ ≈ 4, 4.5, 4.7778 … 4.9975.
+Exact 5: off by 0.0025.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7800 },
+        { say: `TYPE x₀ entry 2 = 1 → Next →
+x₀ = (1, 1): already the eigenvector.
+λ ≈ 5 at step 1. x₁ = (1, 1).` },
+        { set: 'input[aria-label="start entry 2"]', value: 1 },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP size ▲
+A 3 × 3. New row and column: 0 0 1.
+x₀ = (1, 1, 1).` },
+        { click: { css: 'button[aria-label="Increase"]', nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP Shuffle
+Random A, small integer eigenvalues.
+x₀ reset to (1, 0, 0).` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'Classic, step by step',
+      script: [
+        { say: `TAP Next →
+A x₀ = (4, 2). Largest entry 4 accent: λ ≈ 4.
+x₁ = (1, 0.5) in blue.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+A x₁ = (4.5, 3.5): λ ≈ 4.5.
+x₂ = (1, 0.7778).` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+λ ≈ 4.7778. Change 0.2778.
+Changes shrinking: converging.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Fast → TAP ▶ Play
+4.907, 4.9621, 4.9847.
+Exact 5, eigenvector (1, 1): off by 0.0153.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4400 },
+        { say: `TAP Reset
+Back to Step 1 / 8.
+x₀ = (1, 0).` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'choosing-a-matrix': {
+      title: 'Fast, slow, and no convergence',
+      script: [
+        { say: `TAP Fast → SELECT Fast → ▶ Play
+λ ≈ 5, 8.2, 8.9024 … 8.9999.
+Ratio 0.1111: about a digit per step.` },
+        { click: { button: 'Fast', exact: true } },
+        { wait: 700 },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6400 },
+        { say: `TAP Slow → ▶ Play
+λ ≈ 9.5, 9.5263 … 9.6287.
+Ratio 0.9: still 0.3713 short of 10.` },
+        { click: { button: 'Slow', exact: true } },
+        { wait: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6400 },
+        { say: `TAP 3×3 → ▶ Play
+λ ≈ 13, 11.1538, 11.0138 … 11.
+Ratio 2/11: converges fast.` },
+        { click: { button: '3×3', exact: true } },
+        { wait: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6400 },
+        { say: `TAP Tie ±1 → ▶ Play
+x swaps (0, 1) ↔ (1, 0) every step.
+λ = 1 and −1 tie: no convergence.` },
+        { click: { button: 'Tie ±1', exact: true } },
+        { wait: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6400 },
+        { say: `TAP Rotation → ▶ Play
+Estimates 1, −1, 1, −1 …
+Complex pair ±i: no convergence.` },
+        { click: { button: 'Rotation', exact: true } },
+        { wait: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-power-iteration'),
       sectionsContent,
       stateUnits,
@@ -475,7 +603,22 @@ In both cases the fix is a shift. The swap matrix shifted to $A + 0.5I$ has eige
   }
 }
 
-export default function PowerIterationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function PowerIterationVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <PowerIterationWrapper defaultPreset='classic' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -497,7 +640,7 @@ export default function PowerIterationVisualizer({seoData, sectionsContent, stat
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     plain('obj2', 'the-loop'),
     stateRow('obj11', 'the-starting-point', 'intro'),
     stateRow('obj12', 'the-first-step', 'step1'),
@@ -505,8 +648,8 @@ export default function PowerIterationVisualizer({seoData, sectionsContent, stat
     stateRow('obj14', 'converged', 'done'),
     stateRow('obj15', 'when-convergence-is-slow', 'slow'),
     stateRow('obj16', 'when-there-is-no-dominant-eigenvalue', 'tie'),
-    plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-matrix'),
+    withDemo(plain('obj3', 'the-scene-player')),
+    withDemo(plain('obj4', 'choosing-a-matrix')),
     plain('obj5', 'why-it-works'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -567,6 +710,10 @@ export default function PowerIterationVisualizer({seoData, sectionsContent, stat
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Power Iteration</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <PowerIterationWrapper

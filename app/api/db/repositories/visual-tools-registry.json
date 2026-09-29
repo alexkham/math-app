@@ -69079,7 +69079,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "NEW TOOL - phases intro/iterate/done (one 'iterate' scene per step, so the explanations object has three keys).",
-        "note": "buildScenes(values, startVec, iterations); editable start vector; the done scene compares against the exact dominant eigenvalue from charPoly/polyRoots and reports |lambda2/lambda1|."
+        "note": "buildScenes(values, startVec, iterations); editable start vector; the done scene compares against the exact dominant eigenvalue from charPoly/polyRoots and reports |lambda2/lambda1|.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in getting-started, the-scene-player, choosing-a-matrix; covers the steps stepper and the start-vector inputs; Negative dominant preset left out of the demos (it does not converge in 6 steps); tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
