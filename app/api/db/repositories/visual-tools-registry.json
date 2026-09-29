@@ -67705,7 +67705,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "NEW TOOL - phases intro/shift/expand/roots/complex/eigvec/done. EigenWrapper is also the NUMERIC ENGINE for the rest of the eigenvalue group: it exports charPoly, polyRoots, rref, nullSpace, tidy and randomEigenMatrix, imported by DiagonalizationWrapper, PowerIterationWrapper, SpectralWrapper, SVDWrapper, SubspacesWrapper, LeastSquaresWrapper, OrthogonalWrapper and SpanMembershipWrapper.",
-        "note": "Root finding: quadratic formula for 2x2, Cardano/trigonometric for 3x3, Newton polish, snap to simple values."
+        "note": "Root finding: quadratic formula for 2x2, Cardano/trigonometric for 3x3, Newton polish, snap to simple values.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in getting-started, the-scene-player, choosing-a-matrix; the-scene-player demo walks the four moves on the default 3×3; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
