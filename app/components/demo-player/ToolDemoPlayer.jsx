@@ -35,6 +35,8 @@ import React, { useEffect, useLayoutEffect, useRef, useState, useCallback, useMe
      { click: T }                          move and click T
      { slide: T, to: v, ms }               drag a range input to value v
      { drag: T, dx, dy, ms }               pointer-drag an element by (dx, dy) px
+     { set: T, value }                     type into a text/number input, or pick
+                                           a <select> option by value
      { wait: ms }                          pause
    Targets T:
      'css selector'                        first match inside the tool
@@ -85,6 +87,13 @@ function setRangeValue(input, v) {
   setter.call(input, String(v));
   input.dispatchEvent(new Event('input', { bubbles: true }));
   input.dispatchEvent(new Event('change', { bubbles: true }));
+}
+
+function setFieldValue(field, v) {
+  const proto = field.tagName === 'SELECT' ? window.HTMLSelectElement.prototype : window.HTMLInputElement.prototype;
+  Object.getOwnPropertyDescriptor(proto, 'value').set.call(field, String(v));
+  field.dispatchEvent(new Event('input', { bubbles: true }));
+  field.dispatchEvent(new Event('change', { bubbles: true }));
 }
 
 function thumbPoint(input, v) {
@@ -252,8 +261,8 @@ export default function ToolDemoPlayer({
     const showCallout = (k) => {
       const s = steps[k];
       if (!s || !s.lines.length) { setCallout(null); return; }
-      const a = s.actions.find((x) => x.move || x.click || x.slide || x.drag);
-      const el = a ? resolve(tool(), a.move || a.click || a.slide || a.drag) : null;
+      const a = s.actions.find((x) => x.move || x.click || x.slide || x.drag || x.set);
+      const el = a ? resolve(tool(), a.move || a.click || a.slide || a.drag || a.set) : null;
       let target = null;
       if (el && a.slide) {
         // point at the thumb, where the drag starts
@@ -269,7 +278,7 @@ export default function ToolDemoPlayer({
 
     async function act(a, fast) {
       if (a.wait) { if (!fast) await sleep(a.wait); return; }
-      const el = resolve(tool(), a.move || a.click || a.slide || a.drag);
+      const el = resolve(tool(), a.move || a.click || a.slide || a.drag || a.set);
       if (!el) return;
       if (a.move) {
         const [x, y] = local(...centerOf(el));
@@ -288,6 +297,19 @@ export default function ToolDemoPlayer({
         await sleep(120);
         el.click();
         await sleep(150);
+        return;
+      }
+      if (a.set) {
+        const v = String(a.value);
+        const [x, y] = local(...centerOf(el));
+        if (fast) { placeCursor(x, y); setFieldValue(el, v); await frame(); return; }
+        const { x: sx, y: sy } = posRef.current;
+        await tween(a.ms || 600, (u) => placeCursor(sx + (x - sx) * u, sy + (y - sy) * u));
+        ripple();
+        await sleep(150);
+        if (el.tagName === 'SELECT') { setFieldValue(el, v); await sleep(150); return; }
+        // type it out, one character at a time
+        for (let i = 1; i <= v.length && live(); i++) { setFieldValue(el, v.slice(0, i)); await sleep(110); }
         return;
       }
       if (a.slide) {

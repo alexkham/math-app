@@ -14,6 +14,9 @@ import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import SiblingsNav from '../../../../app/components/SiblingsNav'
 import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandalone'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -704,6 +707,108 @@ The remaining three functions are reciprocals: $\\csc\\theta = \\frac{1}{\\sin\\
     });
   }
 
+  const instructions = [
+    'Type any value into the **Angle Value** box — negative values and values past $360°$ work too; **Reset** returns to $0°$. [Learn more about setting an angle](!#setting-an-angle)',
+    'The unit menu next to the box switches between **Degrees** and **Radians**; the number in the box is kept, not converted. [Learn more about the units](!#choosing-degrees-or-radians)',
+    'The **Quick Angles** buttons jump to the sixteen special angles from $0°$ to $330°$, converted to the current unit. [Learn more about the presets](!#using-quick-preset-angles)',
+    'The four **Display Options** checkboxes show or hide the angle arc, the reference lines, the complementary angle and the supplementary angle. [Learn more about the display options](!#display-toggle-options)',
+    'The **Angle Properties** column gives the angle in both units, its type, its quadrant and its reference angle. [Learn more about the properties panel](!#reading-the-properties-panel)',
+    'The **Related Angles** and **Coterminal Angles** columns list the complementary, supplementary and reflex angles and one positive and one negative coterminal angle. [Learn more about related angles](!#working-with-related-and-coterminal-angles)',
+    'The **Trigonometric Values** table gives all six functions at the current angle, in exact form at the special angles. [Learn more about the table](!#reading-the-trigonometric-values-table)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real AngleExplorer.
+     Box = the Angle Value number input; unit = the only <select>.
+     Checkboxes nth 0..3 = arc, reference lines, complementary, supplementary. */
+  const demos = {
+    'using-quick-preset-angles': {
+      title: 'Preset angles',
+      script: [
+        { say: `TAP 30°
+Acute. Quadrant 1.
+sin = 1/2. Exact form in the table.` },
+        { click: { button: '30°', exact: true } },
+        { wait: 2800 },
+        { say: `TAP 90°
+Right angle. Straight up.
+cos = 0 → tan = ∞.` },
+        { click: { button: '90°', exact: true } },
+        { wait: 2800 },
+        { say: `TAP 135°
+Obtuse. Quadrant 2.
+Reference angle 45°. Supplementary 45°.` },
+        { click: { button: '135°', exact: true } },
+        { wait: 2800 },
+        { say: `TAP 300°
+Reflex. Quadrant 4.
+cos positive. sin, tan negative.` },
+        { click: { button: '300°', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Reset
+Back to 0°.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2200 },
+      ],
+    },
+    'setting-an-angle': {
+      title: 'Typing an angle, switching units',
+      script: [
+        { say: `TYPE 60
+Any value. Diagram follows.
+sin 60° = √3/2.` },
+        { set: 'input[type="number"]', value: 60 },
+        { wait: 2600 },
+        { say: `SELECT Radians
+Number kept, not converted.
+60 now means 60 rad. Ray jumps.` },
+        { set: 'select', value: 'radians' },
+        { wait: 2800 },
+        { say: `TAP 60°
+Preset converts for you.
+Box: 1.047 rad = 60°.` },
+        { click: { button: '60°', exact: true } },
+        { wait: 2800 },
+        { say: `TYPE 1
+One radian.
+1 rad ≈ 57.30°.` },
+        { set: 'input[type="number"]', value: 1 },
+        { wait: 2800 },
+        { say: `SELECT Degrees
+Box keeps 1. Now 1°.
+Switch unit first, then enter the value.` },
+        { set: 'select', value: 'degrees' },
+        { wait: 2800 },
+      ],
+    },
+    'display-toggle-options': {
+      title: 'Display options',
+      script: [
+        { say: `TAP 60°
+Blue arc from the x-axis to the ray.` },
+        { click: { button: '60°', exact: true } },
+        { wait: 2200 },
+        { say: `TICK Show Complementary Angle
+Green dashed arc to the y-axis.
+90° − 60° = 30°.` },
+        { click: { css: 'input[type="checkbox"]', nth: 2 } },
+        { wait: 2800 },
+        { say: `TICK Show Supplementary Angle
+Red dashed arc to the negative x-axis.
+180° − 60° = 120°.` },
+        { click: { css: 'input[type="checkbox"]', nth: 3 } },
+        { wait: 2800 },
+        { say: `UNTICK Show Angle Arc
+Blue arc gone. Ray stays.` },
+        { click: { css: 'input[type="checkbox"]', nth: 0 } },
+        { wait: 2400 },
+        { say: `UNTICK Show Reference Lines
+Circle, axes, quadrant labels gone.` },
+        { click: { css: 'input[type="checkbox"]', nth: 1 } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   const explanations = {
     angleTypes: {
       acute: {
@@ -856,6 +961,8 @@ The remaining three functions are reciprocals: $\\csc\\theta = \\frac{1}{\\sin\\
          faqQuestions,
          schemas,
          explanations,
+         instructions,
+         demos,
          stateUnits,
           seoData: {
         title: "Angle Explorer: Visualize Trig Angles | Learn Math Class",
@@ -872,7 +979,21 @@ The remaining three functions are reciprocals: $\\csc\\theta = \\frac{1}{\\sin\\
     }
    }
 
-export default function AngleExplorerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function AngleExplorerPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <AngleExplorer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+
 
 
   const genericSections=[
@@ -881,6 +1002,7 @@ export default function AngleExplorerPage({relatedTools, seoData, sectionsConten
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('setting-an-angle'),
           sectionsContent.obj1.content,
         ]
     },
@@ -897,6 +1019,7 @@ export default function AngleExplorerPage({relatedTools, seoData, sectionsConten
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          demo('using-quick-preset-angles'),
           sectionsContent.obj3.content,
         ]
     },
@@ -905,6 +1028,7 @@ export default function AngleExplorerPage({relatedTools, seoData, sectionsConten
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
+          demo('display-toggle-options'),
           sectionsContent.obj4.content,
         ]
     },
@@ -1352,6 +1476,10 @@ export default function AngleExplorerPage({relatedTools, seoData, sectionsConten
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'-20px',marginBottom:'10px'}}>Basic Angle Explorer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <SiblingsNav
       bg="#fafaf7"
