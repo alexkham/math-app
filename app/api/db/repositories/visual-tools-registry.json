@@ -30005,7 +30005,9 @@
         "anchors": 17,
         "orphans": 0,
         "wiring": "B - explanations prop already present (deep-merge override); page supplies both note strings from getStaticProps, defaults preserved elsewhere",
-        "note": "The component keys its verdict by outcome (meaning.success | meaning.fail), not by scenario, so the two converging scenarios share one panel entry; its link line points at both the direct-hit and crosses-over sections. Panel text renders through dangerouslySetInnerHTML, so links are raw <a href=\"#slug\">. The flat/stall diagram is frozen one phase before the tool's resting frame, which drops the tangent."
+        "note": "The component keys its verdict by outcome (meaning.success | meaning.fail), not by scenario, so the two converging scenarios share one panel entry; its link line points at both the direct-hit and crosses-over sections. Panel text renders through dangerouslySetInnerHTML, so links are raw <a href=\"#slug\">. The flat/stall diagram is frozen one phase before the tool's resting frame, which drops the tangent.",
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in preset-scenarios, the-computation-tab, the-meaning-and-theory-tabs; steps wait out the tool's timed runs and Reset before a new scenario, so step-dot jumps match playback; Step and the x0 drag left out (tool bugs); tool does not write the URL; headless step check 12/12."
       },
       "relatedTools": [
         {
