@@ -11,6 +11,9 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import deMoivreDiagrams from '../../../../app/components/calculators/complex-numbers/deMoivreDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
@@ -399,8 +402,115 @@ No teal $n\\theta$ arc appears in this frame — the normalized result angle is 
     inward: 'A base inside the unit circle decays: the spiral coils into the origin, inset and all. [Learn more about the inward spiral](!#the-inward-spiral-when-z-1) · [Getting started](!#getting-started-set-z-and-choose-n)',
   };
 
+  const instructions = [
+    'Drag the navy point $z$ on the plane, or type its coordinates into the **Re** and **Im** boxes; both are limited to $\\pm 10$ and rounded to one decimal place. [Learn more about setting z](!#getting-started-set-z-and-choose-n)',
+    'Set the exponent with the **n** slider, from $-10$ to $10$, or type it into the **n =** box, which accepts $-20$ to $20$. [Learn more about choosing n](!#getting-started-set-z-and-choose-n)',
+    'The **Try these** row loads seven presets, from $(1+i)^2$ to $(0.5+0.5i)^6$, each with its own section below; **Random** picks a new base and an exponent from $2$ to $10$. [Learn more about the presets](!#getting-started-set-z-and-choose-n)',
+    'Purple dots mark the intermediate powers; the dashed navy and teal circles have radii $|z|$ and $|z^n|$, and the arcs labelled θ and nθ show the two angles. [Learn more about the purple trail and modulus circles](!#reading-the-purple-trail-and-modulus-circles)',
+    'A result beyond $\\pm 10$ is drawn as a dashed teal ray with an arrowhead at the edge of the plane, and the **Result** card says so. [Learn more about escaping the window](!#escaping-the-window)',
+    'A result with modulus below $1$ is also magnified in the **Zoom** inset in the upper-right corner of the plane. [Learn more about the inward spiral](!#the-inward-spiral-when-z-1)',
+    'The right panel shows the **Input** summary, the **Result** in rectangular and polar form, and the five-step **Step-by-Step** calculation. [Learn more about the five-step calculation](!#the-five-step-calculation)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real DeMoivreCalculator
+     (opens on z = 1 + i, n = 3). Number inputs in DOM order: 0 = Re, 1 = Im, 2 = n;
+     range 0 = the n slider (-10..10). Presets: (1+i)², (1+i)⁴, i³, (1+i)⁸, (3+4i)⁻¹,
+     2¹⁰, (0.5+0.5i)⁶; Random is never used. The point z is circle.drag-point and lands
+     where the pointer is released, so the drag step starts from a preset (instant replay
+     does not repeat drags). */
+  const demos = {
+    'getting-started-set-z-and-choose-n': {
+      title: 'Setting z and n',
+      script: [
+        { say: `TYPE Re = 0
+z = i. |z| = 1.
+i³ = −i. Navy and teal circles coincide.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: 0 },
+        { wait: 2600 },
+        { say: `TYPE n = 4
+i⁴ = 1. 4 × 90° = 360°, normalized 0°.
+Trail dots: i, −1, −i.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: 4 },
+        { wait: 2800 },
+        { say: `TYPE Im = 2
+z = 2i. (2i)⁴ = 16.
+Beyond ±10: dashed ray to the right.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: 2 },
+        { wait: 2800 },
+        { say: `DRAG n → −1
+(2i)⁻¹ = −0.50i. Modulus 0.50.
+Zoom inset opens. No trail.`, at: 'tl' },
+        { slide: { range: 0 }, to: -1, ms: 1600 },
+        { wait: 2800 },
+        { say: `TAP (1+i)², DRAG z → −1 + i
+(−1+i)² = −2i.
+2 × 135° = 270°, normalized −90°.`, at: 'tl' },
+        { click: { button: '(1+i)²', exact: true } },
+        { drag: 'circle.drag-point', dx: -52.16, dy: 0, ms: 1500 },
+        { wait: 3000 },
+      ],
+    },
+    'reading-the-purple-trail-and-modulus-circles': {
+      title: 'Reading the trail and circles',
+      script: [
+        { say: `TAP (1+i)²
+One purple dot, under z.
+Navy 45° arc doubles: teal 90°. Result 2i.`, at: 'tl' },
+        { click: { button: '(1+i)²', exact: true } },
+        { wait: 2600 },
+        { say: `TAP (1+i)⁴
+3 dots fan outward, 45° apart.
+Navy circle |z| = 1.41, teal |z⁴| = 4.`, at: 'tl' },
+        { click: { button: '(1+i)⁴', exact: true } },
+        { wait: 2800 },
+        { say: `TAP (0.5+0.5i)⁶
+|z| = 0.71 < 1: 5 dots coil inward.
+Zoom inset: −0.13i.`, at: 'tl' },
+        { click: { button: '(0.5+0.5i)⁶', exact: true } },
+        { wait: 2800 },
+        { say: `TAP i³
+|z| = 1: both circles coincide.
+Dots at i and −1. Result −i.`, at: 'tl' },
+        { click: { button: 'i³', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 2¹⁰
+θ = 0: no arcs.
+Dots 2, 4, 8 on the axis. 1024: dashed ray.`, at: 'tl' },
+        { click: { button: '2¹⁰', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-five-step-calculation': {
+      title: 'The five steps',
+      script: [
+        { say: `TAP (1+i)⁸
+Step 3: 1.41⁸ = 16.
+Step 4: 8 × 45° = 360°, normalized 0°.`, at: 'tl' },
+        { click: { button: '(1+i)⁸', exact: true } },
+        { wait: 2800 },
+        { say: `TYPE n = 20
+Box allows 20; slider stops at 10.
+20 × 45° = 900°, normalized 180°. −1024.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: 20 },
+        { wait: 3000 },
+        { say: `TAP (3+4i)⁻¹
+Step 1: z = 5 · e^(i·0.30π).
+Step 3: 5⁻¹ = 0.20. Step 4: −53.13°.`, at: 'tl' },
+        { click: { button: '(3+4i)⁻¹', exact: true } },
+        { wait: 2800 },
+        { say: `DRAG n → 2
+Step 3: 5² = 25. Step 4: 106.26°.
+Step 5: −7 + 24i.`, at: 'tl' },
+        { slide: { range: 0 }, to: 2, ms: 1400 },
+        { wait: 2800 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('demoivre-visualizer'),
          sectionsContent,
          introContent,
@@ -423,7 +533,22 @@ No teal $n\\theta$ arc appears in this frame — the normalized result angle is 
     }
    }
 
-export default function DeMoivreVisualizerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function DeMoivreVisualizerPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <DeMoivreCalculator explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
     
   const genericSections=[
@@ -432,6 +557,7 @@ export default function DeMoivreVisualizerPage({relatedTools, seoData, sectionsC
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('getting-started-set-z-and-choose-n'),
           sectionsContent.obj1.content,
         ]
     },
@@ -510,6 +636,7 @@ export default function DeMoivreVisualizerPage({relatedTools, seoData, sectionsC
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
+          demo('reading-the-purple-trail-and-modulus-circles'),
           sectionsContent.obj7.content,
         ]
     },
@@ -518,6 +645,7 @@ export default function DeMoivreVisualizerPage({relatedTools, seoData, sectionsC
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
+          demo('the-five-step-calculation'),
           sectionsContent.obj8.content,
         ]
     },
@@ -605,6 +733,10 @@ export default function DeMoivreVisualizerPage({relatedTools, seoData, sectionsC
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>De Moivre Law Visual Calculator</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <SiblingsNav maxWidth='100%'>
    <DeMoivreCalculator explanations={explanations}/>
