@@ -11916,7 +11916,9 @@
         "states": 6,
         "sections": 16,
         "anchors": 33,
-        "orphans": 0
+        "orphans": 0,
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos (4/5/5 steps) in how-to-use-the-visualizer, using-the-values-panel, exploring-presets-and-special-cases; tool does not write the URL; headless step check /."
       },
       "relatedTerms": [
         {
