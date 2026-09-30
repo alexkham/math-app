@@ -14452,7 +14452,9 @@
         "states": 8,
         "sections": 16,
         "anchors": 40,
-        "orphans": 0
+        "orphans": 0,
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos (4/4/5/4 steps) in getting-started-drag-the-point, setting-the-angle-with-the-theta-slider, landmark-angle-presets, adjusting-the-radius; each drag step starts from a landmark button so the point lands exactly; new usage section setting-the-angle-with-the-theta-slider; tool does not write the URL; headless step check /."
       },
       "relatedTerms": [
         {

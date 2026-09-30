@@ -11,6 +11,9 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import eulerFormulaDiagrams from '../../../../app/components/calculators/complex-numbers/eulerFormulaDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
@@ -286,6 +289,19 @@ Note also that $-i$ is the conjugate of $i$ from [the quarter turn](!#the-quarte
       link:'',
     },
 
+    obj17:{
+      title:`Setting the Angle with the θ Slider`,
+      content:`The first slider under the plane, labelled $\\theta$, sets the angle without dragging. It runs from $0$ to $2\\pi$ in steps of $0.01$ radians, and the readout to its right prints the angle twice: in degrees to one decimal place and in radians. Near a common angle — a multiple of $\\frac{\\pi}{6}$ or $\\frac{\\pi}{4}$ — the radian label switches to the exact fraction, such as $\\frac{3\\pi}{4}$; anywhere else it prints a decimal multiple of $\\pi$, such as $0.64\\pi$.
+
+The slider and the [draggable point](!#getting-started-drag-the-point) drive the same angle: dragging the point moves the slider thumb, and moving the thumb carries the point around its circle. Neither one changes the radius — the second slider, $r$, does that, as described in [adjusting the radius](!#adjusting-the-radius).
+
+With a step of $0.01$ the slider cannot land exactly on $\\frac{\\pi}{6}$ or $\\pi$, but it can come within the tool's tolerance of $0.05$ radians. There the matching landmark button lights up, and at $r = 1$ the orange callout appears in the right panel — at $3.14$ the readout shows 179.9 degrees and the callout already reads $e^{i\\pi} = -1$. The [landmark buttons](!#landmark-angle-presets) snap to the exact values instead.
+
+The right end of the slider, $6.28$, shows 359.8 degrees, read as $2\\pi$: the point is back beside $1$ on the positive real axis after one full revolution, $e^{2\\pi i} = 1$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
   }
 
 
@@ -435,8 +451,140 @@ Note also that $-i$ is the conjugate of $i$ from [the quarter turn](!#the-quarte
     scaled: 'Off the unit circle: r stretches the direction e^(iθ) into the full polar form. [Learn more about the radius](!#adjusting-the-radius) · [All landmarks](!#landmark-angle-presets)',
   };
 
+  const instructions = [
+    'Drag the point labelled $e^{i\\theta}$ around the plane: the angle follows the pointer, the triangle and the axis projections redraw, and the radius stays as it is. [Learn more about dragging the point](!#getting-started-drag-the-point)',
+    'The $\\theta$ slider sets the angle from $0$ to $2\\pi$ in steps of $0.01$; its readout gives the angle in degrees and in radians. [Learn more about the angle slider](!#setting-the-angle-with-the-theta-slider)',
+    'Move the point into each quadrant to watch the signs of $\\cos\\theta$ and $\\sin\\theta$: the teal leg crosses to the left of the imaginary axis, the red leg drops below the real axis. [Learn more about the four quadrants](!#navigating-all-four-quadrants)',
+    'The seven buttons **0**, **π/6**, **π/4**, **π/3**, **π/2**, **π** and **3π/2** snap to a landmark angle and reset $r$ to $1$; the button lights up, an orange callout names the result, and **Key Ideas** gains a note linking to that landmark\'s section. [Learn more about the landmark presets](!#landmark-angle-presets)',
+    'At $0$, $\\frac{\\pi}{2}$, $\\pi$ and $\\frac{3\\pi}{2}$ the triangle collapses to a single segment along one axis. [Learn more about the degenerate states](!#degenerate-states-when-the-triangle-collapses)',
+    'The $r$ slider sets the radius from $0.1$ to $2.4$; away from $r = 1$ a dashed circle appears, the legs are labelled $r\\cos\\theta$ and $r\\sin\\theta$, and the breakdown adds a **Multiply by r** line. [Learn more about the radius](!#adjusting-the-radius)',
+    'The right panel shows **Live Values** — $\\theta$, $\\cos\\theta$, $\\sin\\theta$, Re(z), Im(z) and $|z|$ — and the three-step **Formula Breakdown**. [Learn more about the live values and formula breakdown](!#reading-the-live-values-and-formula-breakdown)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real EulerFormulaExplorer
+     (opens at theta = pi/4, r = 1). Range inputs: 0 = theta, 1 = r. Landmark buttons
+     '0', 'π/6', 'π/4', 'π/3', 'π/2', 'π', '3π/2' also reset r to 1. The point is
+     circle.drag-point; the tool reads the angle from the pointer position, so each
+     drag step starts from a landmark button (instant replay does not repeat drags). */
+  const demos = {
+    'getting-started-drag-the-point': {
+      title: 'Dragging the point',
+      script: [
+        { say: `DRAG point → quadrant II
+θ = 135.0° = 3π/4.
+cos θ = −0.707: real part negative.
+sin θ = 0.707 stays positive.`, at: 'tl' },
+        { drag: 'circle.drag-point', dx: -147.54, dy: 0, ms: 1500 },
+        { wait: 2800 },
+        { say: `TAP π, DRAG down → quadrant III
+θ = 225.0° = 5π/4.
+cos θ = −0.707, sin θ = −0.707.
+Both parts negative.`, at: 'tl' },
+        { click: { button: 'π', exact: true } },
+        { drag: 'circle.drag-point', dx: 0, dy: 104.33, ms: 1500 },
+        { wait: 2800 },
+        { say: `TAP 3π/2, DRAG right → quadrant IV
+θ = 315.0° = 7π/4.
+cos θ = 0.707, sin θ = −0.707.
+Red leg below the real axis.`, at: 'tl' },
+        { click: { button: '3π/2', exact: true } },
+        { drag: 'circle.drag-point', dx: 104.33, dy: 0, ms: 1500 },
+        { wait: 2800 },
+        { say: `TAP 0, DRAG up → quadrant I
+θ = 45.0° = π/4. Both parts 0.707.
+π/4 button lights. Orange callout returns.`, at: 'tl' },
+        { click: { button: '0', exact: true } },
+        { drag: 'circle.drag-point', dx: 0, dy: -104.33, ms: 1500 },
+        { wait: 2800 },
+      ],
+    },
+    'setting-the-angle-with-the-theta-slider': {
+      title: 'The θ slider',
+      script: [
+        { say: `DRAG θ → 2.00
+114.6° = 0.64π. Point follows.
+e^(iθ) = −0.416 + 0.909i.`, at: 'tl' },
+        { slide: { range: 0 }, to: 2, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG θ → 3.14
+179.9°, read as π.
+π button lights: e^(iπ) = −1.`, at: 'tl' },
+        { slide: { range: 0 }, to: 3.14, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG θ → 4.50
+257.8° = 1.43π.
+e^(iθ) = −0.211 − 0.978i.`, at: 'tl' },
+        { slide: { range: 0 }, to: 4.5, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG θ → 6.28, the end
+359.8° = 2π. Full turn.
+Point back at 1.`, at: 'tl' },
+        { slide: { range: 0 }, to: 6.28, ms: 1600 },
+        { wait: 2800 },
+      ],
+    },
+    'landmark-angle-presets': {
+      title: 'Landmark presets',
+      script: [
+        { say: `TAP π/6
+30.0°. cos = 0.866, sin = 0.500.
+Wide, flat triangle.`, at: 'tl' },
+        { click: { button: 'π/6', exact: true } },
+        { wait: 2600 },
+        { say: `TAP π/3
+60.0°. cos = 0.500, sin = 0.866.
+Same two values, swapped.`, at: 'tl' },
+        { click: { button: 'π/3', exact: true } },
+        { wait: 2600 },
+        { say: `TAP π/2
+e^(iπ/2) = i. cos = 0.
+Triangle collapses: red segment only.`, at: 'tl' },
+        { click: { button: 'π/2', exact: true } },
+        { wait: 2600 },
+        { say: `TAP π
+e^(iπ) = −1. Euler's identity.
+Teal segment to −1. Half-turn arc.`, at: 'tl' },
+        { click: { button: 'π', exact: true } },
+        { wait: 2800 },
+        { say: `TAP 3π/2
+e^(i3π/2) = −i.
+Three-quarter arc. Red segment down.`, at: 'tl' },
+        { click: { button: '3π/2', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'adjusting-the-radius': {
+      title: 'Scaling with r',
+      script: [
+        { say: `DRAG r → 2
+Dashed circle at r = 2.
+Labels: r cos θ, r sin θ.
+2·e^(iθ) = 1.414 + 1.414i.`, at: 'tl' },
+        { slide: { range: 1 }, to: 2, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG r → 0.5
+Point inside the unit circle.
+0.354 + 0.354i. Angle unchanged.`, at: 'tl' },
+        { slide: { range: 1 }, to: 0.5, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP π/3
+r resets to 1.
+e^(iπ/3) = 0.500 + 0.866i.`, at: 'tl' },
+        { click: { button: 'π/3', exact: true } },
+        { wait: 2400 },
+        { say: `DRAG r → 2
+2·e^(iπ/3) = 1 + 1.732i. |z| = 2.
+Breakdown adds: Multiply by r.`, at: 'tl' },
+        { slide: { range: 1 }, to: 2, ms: 1400 },
+        { wait: 2800 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('euler-formula'),
          sectionsContent,
          introContent,
@@ -459,7 +607,22 @@ Note also that $-i$ is the conjugate of $i$ from [the quarter turn](!#the-quarte
     }
    }
 
-export default function PageTemplate({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PageTemplate({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <EulerFormulaExplorer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
     
   const genericSections=[
@@ -468,7 +631,17 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('getting-started-drag-the-point'),
           sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'setting-the-angle-with-the-theta-slider',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          demo('setting-the-angle-with-the-theta-slider'),
+          sectionsContent.obj17.content,
         ]
     },
     {
@@ -484,6 +657,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          demo('landmark-angle-presets'),
           sectionsContent.obj3.content,
         ]
     },
@@ -560,6 +734,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
+          demo('adjusting-the-radius'),
           sectionsContent.obj5.content,
           <div key='u-scaled' dangerouslySetInnerHTML={{ __html: stateUnits.scaled }} />,
           sectionsContent.obj5.after,
@@ -667,6 +842,10 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Euler&apos;s Formula Explorer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <SiblingsNav maxWidth='100%'>
    <EulerFormulaExplorer explanations={explanations}/>
