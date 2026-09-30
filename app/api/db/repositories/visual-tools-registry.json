@@ -30868,7 +30868,9 @@
         "note": "First tool built on FunctionVisualizerCorePro. Its panel renders through processContent, so links use the normal markdown [text](!#slug) form. Frozen SVGs are produced by the core's own generateSVG rather than a hand port - see the shared helper below.",
         "sharedHelper": "app/components/functions/frozenSvg.js - wraps generateSVG with the core defaults; reusable by the six remaining functions/* tools",
         "coreChange": "app/components/functions/FunctionVisualizerCorePro.jsx: added `export` to generateSVG, DEFAULT_STYLES and mergeStyles. Purely additive - no existing caller is affected.",
-        "assetWeight": "frozenSvg now samples curves at 240 (core uses 500 live) and rounds geometry attributes to 2dp; label text is left untouched. Cut the four core-based pages' inline SVG from ~290-550 kB to ~215-300 kB. The limit tool's sin(1/x) family overrides samples to 1200, since the default understates its oscillation."
+        "assetWeight": "frozenSvg now samples curves at 240 (core uses 500 live) and rounds geometry attributes to 2dp; label text is left untouched. Cut the four core-based pages' inline SVG from ~290-550 kB to ~215-300 kB. The limit tool's sin(1/x) family overrides samples to 1200, since the default understates its oscillation.",
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans); plot-size-applied-strip-and-info-panel added for S/M/L/XL, the Applied strip and the info panel tabs.",
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in the-function-families, the-c-slider, jump-to-buttons, display-toggles; Jump to buttons targeted by their c labels; tool does not write the URL; headless step check 20/20."
       },
       "relatedTools": [
         {
