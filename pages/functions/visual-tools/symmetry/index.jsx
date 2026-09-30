@@ -13,6 +13,9 @@ import FunctionSymmetry from '../../../../app/components/functions/symmetry/Func
 import symmetryDiagrams from '../../../../app/components/functions/symmetry/functionSymmetryDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -527,8 +530,147 @@ The example generalizes into the decomposition theorem: every function splits un
       '[Learn more about the mixed polynomial](!#symmetry-of-the-mixed-polynomial) · [Neither group](!#functions-with-neither-symmetry)',
   };
 
+  const instructions = [
+    'The picker on the left lists eleven functions in three groups: **Even**, **Odd** and **Neither**. Tapping one switches the function and resets the parameters. [Learn more about picking a function](!#picking-a-function)',
+    'The **Curves** checkboxes show or hide $f(x)$ in solid blue, $f(-x)$ in dashed amber and $-f(-x)$ in dotted teal; blue under amber means even, blue under teal means odd. [Learn more about the three curves](!#the-three-curves-and-what-overlaps-mean)',
+    'The four **Parameters** sliders set $a$, $k$, $b$ and $h$ in $g(x) = a \\cdot f(b(x - h)) + k$, and **Reset** restores the defaults; a shift can break the symmetry of the base function. [Learn more about transforming and breaking symmetry](!#transforming-and-breaking-symmetry)',
+    'The **S**, **M**, **L** and **XL** buttons set the height of the plot. [Learn more about the plot panel](!#getting-started-with-the-visualizer)',
+    'The **Verdict** card under the plot names the current symmetry: even, odd or neither. [Learn more about the verdict card](!#the-verdict-card)',
+    'Inside the card, three steps state $f(x)$, substitute $-x$ and compare; when a transformation breaks the base symmetry, a note says so. [Learn more about the derivation block](!#the-derivation-block)',
+    'Where $f(x)$ and $f(-x)$ cross, purple dots mark the points and a strip under the card lists their coordinates. [Learn more about intersection markers](!#intersection-markers)',
+    'The info panel has three tabs: **Explanation** repeats the derivation for the base function, **Family** describes the chosen function, and **Concepts** explains even and odd symmetry. [Learn more about the info panel](!#getting-started-with-the-visualizer)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionSymmetry tool
+     (opens on Quadratic). Range inputs in DOM order: 0 = a, 1 = k, 2 = b, 3 = h.
+     Curves checkboxes in DOM order: 0 = f(x), 1 = f(−x), 2 = −f(−x).
+     Picking a function resets a, k, b, h (not the Curves checkboxes). */
+  const demos = {
+    'picking-a-function': {
+      title: 'Picking a function',
+      script: [
+        { say: `TAP Cosine
+Verdict: even.
+Amber dashes lie on the blue curve.` },
+        { click: { button: 'Cosine', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Cubic
+Verdict: odd.
+Teal dots lie on the blue curve.` },
+        { click: { button: 'Cubic', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Reciprocal
+Odd: f(−x) = −1/x = −f(x).
+Two branches, rotation about the origin.` },
+        { click: { button: 'Reciprocal', exact: true } },
+        { wait: 2800 },
+        { say: `TAP x² + x
+Verdict: neither.
+f(−x) = x² − x. No curve overlaps.` },
+        { click: { button: 'x² + x', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Exponential
+Neither: f(−x) = 1/eˣ,
+not f(x), not −f(x).` },
+        { click: { button: 'Exponential', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-three-curves-and-what-overlaps-mean': {
+      title: 'The three curves',
+      script: [
+        { say: `TAP Absolute, UNCHECK f(x)
+Blue hidden. Amber dashes still
+draw the V: f(−x) = f(x). Even.` },
+        { click: { button: 'Absolute', exact: true } },
+        { click: { css: 'input[type=checkbox]', nth: 0 } },
+        { wait: 2800 },
+        { say: `TAP Cubic
+Teal dots draw the cubic:
+−f(−x) = f(x). Odd.` },
+        { click: { button: 'Cubic', exact: true } },
+        { wait: 2600 },
+        { say: `TAP x² + x, CHECK f(x)
+Blue back. Amber and teal
+both leave it. Neither.` },
+        { click: { button: 'x² + x', exact: true } },
+        { click: { css: 'input[type=checkbox]', nth: 0 } },
+        { wait: 2800 },
+        { say: `TAP Sine, UNCHECK f(−x)
+Amber hidden.
+Teal dots on blue: odd.` },
+        { click: { button: 'Sine', exact: true } },
+        { click: { css: 'input[type=checkbox]', nth: 1 } },
+        { wait: 2800 },
+      ],
+    },
+    'the-verdict-card': {
+      title: 'Verdict, derivation, intersections',
+      script: [
+        { say: `TAP Sine
+Verdict odd, in teal.
+sin(−x) = −sin(x). Strip: 4 zeros.` },
+        { click: { button: 'Sine', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Cosine
+Verdict even, in blue.
+cos(−x) = cos(x). No intersection strip.` },
+        { click: { button: 'Cosine', exact: true } },
+        { wait: 2800 },
+        { say: `DRAG b → 2
+f(x) = cos(2x). Still even.
+Derivation still describes the base.` },
+        { slide: { range: 2 }, to: 2, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG h → 1.5
+Verdict: neither, in grey.
+Note: base even, transformation broke it.` },
+        { slide: { range: 3 }, to: 1.5, ms: 1400 },
+        { wait: 3000 },
+        { say: `TAP x² + x
+Neither from the start.
+f(−x) ≠ f(x) and ≠ −f(x).` },
+        { click: { button: 'x² + x', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'transforming-and-breaking-symmetry': {
+      title: 'Transforming and breaking symmetry',
+      script: [
+        { say: `DRAG h → 1
+Parabola shifts right.
+Blue and amber split. Verdict: neither.` },
+        { slide: { range: 3 }, to: 1, ms: 1400 },
+        { wait: 2800 },
+        { say: `TAP Reset
+h back to 0.
+Overlap returns. Verdict: even.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Cubic, DRAG k → 2
+Curve lifts 2 units.
+Odd symmetry broken: neither.` },
+        { click: { button: 'Cubic', exact: true } },
+        { slide: { range: 1 }, to: 2, ms: 1200 },
+        { wait: 2800 },
+        { say: `DRAG k → 0
+Back through the origin.
+Verdict: odd.` },
+        { slide: { range: 1 }, to: 0, ms: 1200 },
+        { wait: 2400 },
+        { say: `DRAG a → −1
+f(x) = −x³. Flipped odd is still odd.
+Verdict stays odd.` },
+        { slide: { range: 0 }, to: -1, ms: 1400 },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('functions-symmetry'),
       sectionsContent,
       introContent,
@@ -552,18 +694,33 @@ The example generalizes into the decomposition theorem: every function splits un
 }
 
 
-export default function FunctionSymmetryPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionSymmetryPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionSymmetry explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
     { id:'getting-started-with-the-visualizer', title:sectionsContent.obj1.title, link:sectionsContent.obj1.link, content:[sectionsContent.obj1.content] },
-    { id:'picking-a-function', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[sectionsContent.obj2.content] },
-    { id:'the-three-curves-and-what-overlaps-mean', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[sectionsContent.obj3.content] },
-    { id:'the-verdict-card', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[sectionsContent.obj4.content] },
+    { id:'picking-a-function', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[demo('picking-a-function'), sectionsContent.obj2.content] },
+    { id:'the-three-curves-and-what-overlaps-mean', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[demo('the-three-curves-and-what-overlaps-mean'), sectionsContent.obj3.content] },
+    { id:'the-verdict-card', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[demo('the-verdict-card'), sectionsContent.obj4.content] },
     { id:'the-derivation-block', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[sectionsContent.obj5.content] },
     { id:'intersection-markers', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[sectionsContent.obj6.content] },
-    { id:'transforming-and-breaking-symmetry', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[sectionsContent.obj7.content] },
+    { id:'transforming-and-breaking-symmetry', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[demo('transforming-and-breaking-symmetry'), sectionsContent.obj7.content] },
     { id:'what-even-and-odd-mean', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[sectionsContent.obj8.content] },
     { id:'why-transformations-break-symmetry', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link, content:[sectionsContent.obj9.content] },
     { id:'even-functions', title:sectionsContent.obj11.title, link:sectionsContent.obj11.link, content:[sectionsContent.obj11.content] },
@@ -636,6 +793,10 @@ export default function FunctionSymmetryPage({relatedTools, seoData, sectionsCon
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Function Symmetry</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionSymmetry explanations={explanations}/>
       <br/>
