@@ -35349,7 +35349,9 @@
         "sections": 20,
         "anchors": 20,
         "orphans": 0,
-        "notes": "Case B wiring. The component resolves 9 explanation ids and most default bodies are functions of a live context object, so they were left in place rather than hoisted verbatim - props must be JSON-serializable and hoisting would have frozen the per-state numbers. The Line 1 anchors ride on the notes prop instead, one entry per id, built in getStaticProps and SSR-visible; the two ids that had default notes (nothing-selected, general) were re-authored statically to keep their insight alongside the anchor. 9 new per-state sections, each [prose, framed unit, deeper prose]; group sections are the three existing usage sections (getting-started, reading-the-subset-lattice, selecting-a-subset), each linking its members in-text. Numeric ids migrated to slugs across all 20 sections."
+        "notes": "Case B wiring. The component resolves 9 explanation ids and most default bodies are functions of a live context object, so they were left in place rather than hoisted verbatim - props must be JSON-serializable and hoisting would have frozen the per-state numbers. The Line 1 anchors ride on the notes prop instead, one entry per id, built in getStaticProps and SSR-visible; the two ids that had default notes (nothing-selected, general) were re-authored statically to keep their insight alongside the anchor. 9 new per-state sections, each [prose, framed unit, deeper prose]; group sections are the three existing usage sections (getting-started, reading-the-subset-lattice, selecting-a-subset), each linking its members in-text. Numeric ids migrated to slugs across all 20 sections.",
+        "howToMesh": "2026-09-30 retrofit: existing how-to block, 9 instructions each given a trailing anchor link to an existing usage section (9 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in getting-started, selecting-a-subset, counting-levels-in-the-subsets-tab, styling-the-diagram; lattice nodes selected by SVG click, Roster form entries clicked; tool does not write the URL; headless step check 18/18."
       },
       "relatedTools": [
         {
