@@ -33799,7 +33799,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - eslint parse plus line1-static-check.py. Not yet rendered; pending the end-of-section next build.",
         "wiring": "C - component had no explanations prop; added additively as `explanations = null`, appended to the InfoPanel explanation tab only when supplied",
-        "note": "findCriticalPoints, classify and autoYBounds ported verbatim, so the markers and their labels are the tool's own - including the x^3 touch-zero case that the second-derivative test cannot classify and the finder detects via a separate |f'| minimum scan. Each state uses that family's defaultInterval."
+        "note": "findCriticalPoints, classify and autoYBounds ported verbatim, so the markers and their labels are the tool's own - including the x^3 touch-zero case that the second-derivative test cannot classify and the finder detects via a separate |f'| minimum scan. Each state uses that family's defaultInterval.",
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to its usage section (8 links, 0 orphans); new section the-plot-legend-and-info-panel for plot size, legend and the Explanation/Concepts panel.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in the-function-families, the-a-and-b-sliders, display-toggles, the-plot-legend-and-info-panel; slider demo covers the a > b swap, the empty interval and the too-narrow interval; tool does not write the URL; headless step check 19/19."
       },
       "relatedTools": [
         {
