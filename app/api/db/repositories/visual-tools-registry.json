@@ -33349,7 +33349,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - eslint parse plus line1-static-check.py (section slugs vs every anchor target the page can emit). Not yet rendered; pending the end-of-section next build.",
         "wiring": "C - component had no explanations prop; added additively as `explanations = null`, appended to the InfoPanel explanation tab only when supplied",
-        "note": "States are the six families on the component's defaults a = 0, x = 2. autoYBounds is ported verbatim and fits BOTH f and F, which is why the exponential state is framed much taller. Readings quoted in the prose come from the tool's own FAMILIES entries."
+        "note": "States are the six families on the component's defaults a = 0, x = 2. autoYBounds is ported verbatim and fits BOTH f and F, which is why the exponential state is framed much taller. Readings quoted in the prose come from the tool's own FAMILIES entries.",
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to its usage section (8 links, 0 orphans); new usage section plot-size-and-info-panel for the S/M/L/XL buttons and the Explanation/Concepts tabs.",
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in the-function-families, the-a-and-x-sliders, the-at-the-point-card, display-toggles; the card demo follows Sine and Cosine through the zeros of f where F peaks; tool does not write the URL; headless step check 20/20."
       },
       "relatedTools": [
         {
