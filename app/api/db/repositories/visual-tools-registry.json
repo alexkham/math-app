@@ -4295,7 +4295,9 @@
         "sections": 36,
         "anchors": 94,
         "orphans": 0,
-        "notes": "Case A wiring (component already accepted explanations via ExplanationsPanel); 19 scenario states, 6 new group sections, De Morgan group = existing section; page prose count corrected 22 to 19 (FAQ/schema untouched)."
+        "notes": "Case A wiring (component already accepted explanations via ExplanationsPanel); 19 scenario states, 6 new group sections, De Morgan group = existing section; page prose count corrected 22 to 19 (FAQ/schema untouched).",
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in navigating-category-tabs, selecting-an-identity, customizing-color-and-opacity; Jump to driven through the select, Previous wrap to 19 / 19 and back; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {

@@ -12,6 +12,9 @@ import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandal
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import twoSetsVennDiagrams from '../../../../app/components/venn-diagrams/twoSetsVennDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
@@ -704,8 +707,121 @@ The working definition behind the picture is double inclusion: $A = B$ exactly w
     }
   }
 
+  const instructions = [
+    'The seven **category tabs**, from **Basic Sets** to **Relations**, switch the row of formula buttons below them; the selected identity stays shaded while you browse. [Learn more about the category tabs](!#navigating-category-tabs)',
+    'Tap a **formula button** such as $A \\cup B$ or $A\'$ to shade its regions; the badge above the diagram shows its symbol. [Learn more about selecting an identity](!#selecting-an-identity)',
+    'The **Jump to** menu lists all 19 identities grouped by tab; picking one also switches to its tab. [Learn more about the Jump to menu](!#selecting-an-identity)',
+    'The diagram shades some of its four regions: outside both circles, only in A, only in B, and the lens $A \\cap B$; hover a region to see its name. **Relations** identities redraw the circles nested, apart or on top of each other. [Learn more about reading the shaded diagram](!#reading-the-shaded-venn-diagram)',
+    'The **Theme** panel sets the shading **Color** and **Opacity** from 0.00 to 1.00; **Reset** returns blue at 0.85. [Learn more about color and opacity](!#customizing-color-and-opacity)',
+    '**← Previous** and **Next →** step through all 19 identities in tab order and wrap around; the counter shows the position, such as 1 / 19. [Learn more about Previous and Next](!#previous-and-next-navigation)',
+    'The **Explanation** panel names the identity; its **Overview** tab gives the definition and, for some identities, an example, and its **Learn More** tab links to that identity\'s section on this page. [Learn more about getting started](!#getting-started-with-the-explorer)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real TwoSetIdentitiesExplorer
+     (opens on Set A, Basic Sets tab, opacity 0.85). One range input: 0 = Opacity.
+     Jump to is the only <select>; option values are scenario ids. */
+  const demos = {
+    'navigating-category-tabs': {
+      title: 'Category tabs and formula buttons',
+      script: [
+        { say: `TAP Complements
+Button row now: A' and B'.
+Diagram still shows A. Selection kept.` },
+        { click: { button: 'Complements', exact: true } },
+        { wait: 2600 },
+        { say: `TAP A'
+Outside + B-only crescent shaded.
+Rectangle with a hole where A was.` },
+        { click: { button: "A'", exact: true } },
+        { wait: 2600 },
+        { say: `TAP Differences → A △ B
+Both crescents shaded.
+Lens blank: shared elements cancel.` },
+        { click: { button: 'Differences', exact: true } },
+        { wait: 700 },
+        { click: { button: 'A △ B', exact: true } },
+        { wait: 2600 },
+        { say: `TAP De Morgan's Laws → (A ∪ B)'
+One region only: outside both circles.
+Same as A' ∩ B'.` },
+        { click: { button: "De Morgan's Laws", exact: true } },
+        { wait: 700 },
+        { click: { button: "(A ∪ B)'", exact: true } },
+        { wait: 2800 },
+        { say: `TAP Relations → A ∩ B = ∅
+Circles redrawn apart.
+No lens: nothing shared.` },
+        { click: { button: 'Relations', exact: true } },
+        { wait: 700 },
+        { click: { button: 'A ∩ B = ∅', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'selecting-an-identity': {
+      title: 'Jump to and the explanation panel',
+      script: [
+        { say: `SELECT Jump to → A ∩ B
+Tab switches to Intersection & Union.
+Lens only. Example ⇒ {3,4}.` },
+        { set: 'select', value: 'intersection' },
+        { wait: 2800 },
+        { say: `TAP Learn More
+Lens = the diagram's "and".
+Inside both parents.` },
+        { click: { button: 'Learn More', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Jump to → A ⊆ B
+Tab: Relations. Small A nested in B.
+Panel back on Overview.` },
+        { set: 'select', value: 'sub-a-b' },
+        { wait: 2800 },
+        { say: `TAP Learn More
+No A-only region can be drawn.
+A ∩ B = A, A ∪ B = B.` },
+        { click: { button: 'Learn More', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Jump to → ∅
+Tab: Basic Sets. Nothing shaded.
+Blank diagram = a real answer.` },
+        { set: 'select', value: 'empty' },
+        { wait: 2600 },
+      ],
+    },
+    'customizing-color-and-opacity': {
+      title: 'Theme, Previous and Next',
+      script: [
+        { say: `DRAG Opacity → 0.30
+Shading paler. Readout 0.30.` },
+        { slide: { range: 0 }, to: 0.3, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP Next →
+2 / 19: Set B.
+Opacity 0.30 kept.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ← Previous ×2
+Wraps: 19 / 19, A = B.
+Two circles in one place.` },
+        { click: { button: '← Previous', exact: true } },
+        { wait: 700 },
+        { click: { button: '← Previous', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+Wraps forward: 1 / 19, Set A.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Reset
+Opacity back to 0.85. Blue shading.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('two-sets-basic-venn'),
       sectionsContent,
       introContent,
@@ -728,7 +844,22 @@ The working definition behind the picture is double inclusion: $A = B$ exactly w
   }
 }
 
-export default function TwoSetsBasicVennPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function TwoSetsBasicVennPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <TwoSetIdentitiesExplorer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / group section / per-state section with its
   // frozen-state framed unit [content, unit, after].
@@ -758,10 +889,10 @@ export default function TwoSetsBasicVennPage({relatedTools, seoData, sectionsCon
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started-with-the-explorer'),
-    plain('obj2', 'navigating-category-tabs'),
-    plain('obj3', 'selecting-an-identity'),
+    withDemo(plain('obj2', 'navigating-category-tabs')),
+    withDemo(plain('obj3', 'selecting-an-identity')),
     plain('obj4', 'reading-the-shaded-venn-diagram'),
-    plain('obj5', 'customizing-color-and-opacity'),
+    withDemo(plain('obj5', 'customizing-color-and-opacity')),
     plain('obj6', 'previous-and-next-navigation'),
 
     plain('obj11', 'the-basic-sets'),
@@ -862,6 +993,10 @@ export default function TwoSetsBasicVennPage({relatedTools, seoData, sectionsCon
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'-10px',marginBottom:'-80px'}}>Venn Diagrams: Two Sets Basic Identities</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       {/* <div style={{ display: 'grid', gridTemplateColumns: '200px minmax(0, 1fr)', gap: 28 }}>
         <SiblingsNavStandalone
