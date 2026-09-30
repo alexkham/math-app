@@ -473,6 +473,9 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import polarRectangularDiagrams from '../../../../app/components/calculators/complex-numbers/polarRectangularDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
@@ -756,6 +759,27 @@ Once again $r = 5$: this is the third preset on the radius-5 circle, with [−4 
       link:'',
     },
 
+    obj17:{
+      title:`The Key Ideas Panel`,
+      content:`The **Key Ideas** panel is the last box in the right column, under **Conversion Formulas**. It is a reading surface: only its links respond to a click.
+
+**Four standing notes:**
+
+- Navy dot: rectangular form $a + bi$ gives the horizontal and vertical components of the point.
+- Blue dot: polar form $(r, \\theta)$ gives the same point as a distance from the origin and an angle from the positive real axis.
+- Teal dot: the right triangle is the bridge between the two, with hypotenuse $r$, adjacent side $a = r\\cos\\theta$ and opposite side $b = r\\sin\\theta$.
+- Orange dot: rectangular form suits addition and subtraction, polar form suits multiplication, division and powers, as in [when to use each form](!#when-to-use-each-form).
+
+**A fifth note for the presets:**
+
+When the point sits exactly on one of the six preset values ($3 + 2i$, $-4 + 3i$, $-3 - 4i$, $5 - 5i$, $5i$, $-6$), a fifth note appears at the bottom of the panel. It says what that position shows and ends with two links: one to the section for that preset further down this page and one to the [four quadrants](!#points-in-all-four-quadrants) or the [axis cases](!#degenerate-cases-points-on-the-axes).
+
+The note appears whether the value came from a preset button, typed values or a drag, and it disappears as soon as the point moves off the preset. Values that match no preset, including most **Random** results, show only the four standing notes.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
   }
 
 
@@ -898,8 +922,143 @@ Once again $r = 5$: this is the third preset on the radius-5 circle, with [−4 
     negReal: 'The 180° edge case: polar form keeps r positive and moves the minus sign into the angle. [Learn more about −6](!#on-the-negative-real-axis-6) · [All axis cases](!#degenerate-cases-points-on-the-axes)',
   };
 
+  const instructions = [
+    'Drag the point $z$ anywhere on the plane, or tap **Random** for an arbitrary point; every value stays within $\\pm 10$. [Learn more about getting started](!#getting-started-drag-type-or-pick-a-preset)',
+    'The plane draws the right triangle from the origin: teal leg $a$, red leg $b$, hypotenuse $r$, the orange arc for $\\theta$ and the dashed modulus circle; the presets **3 + 2i**, **−4 + 3i** and **−3 − 4i** place it in different quadrants. [Learn more about the four quadrants](!#points-in-all-four-quadrants)',
+    'The **5 − 5i** preset gives equal legs and an angle of exactly $-45°$. [Learn more about equal components](!#equal-component-states-and-special-angles)',
+    'The **5i** and **−6** presets put the point on an axis, and the triangle collapses to a single leg. [Learn more about the axis cases](!#degenerate-cases-points-on-the-axes)',
+    'The **Rectangular Form** panel takes $a$ and $b$; out-of-range entries are clamped to $\\pm 10$ with a short warning. [Learn more about the rectangular form panel](!#using-the-rectangular-form-panel)',
+    'The **Polar Form** panel takes $r$ and $\\theta$ in degrees and reports the angle in degrees and radians. [Learn more about the polar form panel](!#using-the-polar-form-panel)',
+    'The **Conversion Formulas** panel substitutes the current values into $r = \\sqrt{a^2 + b^2}$, $\\theta = \\text{atan2}(b, a)$, $a = r\\cos\\theta$ and $b = r\\sin\\theta$. [Learn more about the live formulas](!#live-conversion-formulas)',
+    'The **Key Ideas** panel keeps four standing notes and adds a fifth when the point sits on a preset value. [Learn more about the Key Ideas panel](!#the-key-ideas-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real PolarRectangularConverter
+     (opens on z = 3 + 2i). Inputs: input[type=number] nth 0 = a, 1 = b (clamped to ±10),
+     2 = r, 3 = θ in degrees. Presets by exact label. The point is circle.drag-point; it follows
+     pointer moves only after a live pointerdown, so the drag is always the last step. */
+  const demos = {
+    'getting-started-drag-type-or-pick-a-preset': {
+      title: 'Type, clamp, drag',
+      script: [
+        { say: `TYPE b = −5
+z = 3 − 5i. Below the axis.
+θ = −59.04°. r = 5.83.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: -5 },
+        { wait: 2400 },
+        { say: `TYPE a = 12
+Limit ±10: a = 10.
+z = 10 − 5i. r = 11.18.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: 12 },
+        { wait: 2600 },
+        { say: `TYPE b = 0
+z = 10 on the real axis.
+θ = 0°. Triangle flat.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: 0 },
+        { wait: 2400 },
+        { say: `DRAG the point straight up
+a stays 10. b grows.
+θ opens above 0°. Triangle back.`, at: 'tl' },
+        { drag: 'circle.drag-point', dx: 0, dy: -100, ms: 1600 },
+        { wait: 2600 },
+      ],
+    },
+    'points-in-all-four-quadrants': {
+      title: 'Six presets',
+      script: [
+        { say: `TAP −4 + 3i
+Quadrant II. θ = 143.13°.
+r = 5.`, at: 'tl' },
+        { click: { button: '−4 + 3i', exact: true } },
+        { wait: 2400 },
+        { say: `TAP −3 − 4i
+Quadrant III. θ = −126.87°.
+Same r = 5.`, at: 'tl' },
+        { click: { button: '−3 − 4i', exact: true } },
+        { wait: 2400 },
+        { say: `TAP 5 − 5i
+Quadrant IV. Equal legs.
+θ = −45° = −π/4 rad. r = 7.07.`, at: 'tl' },
+        { click: { button: '5 − 5i', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 5i
+Imaginary axis. a = 0.
+r = 5. θ = 90° = π/2 rad.`, at: 'tl' },
+        { click: { button: '5i', exact: true } },
+        { wait: 2400 },
+        { say: `TAP −6
+Negative real axis. b = 0.
+r = 6. θ = 180° = π rad.`, at: 'tl' },
+        { click: { button: '−6', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'using-the-rectangular-form-panel': {
+      title: 'Type a and b, read the formulas',
+      script: [
+        { say: `TYPE a = 4
+z = 4 + 2i.
+r = √(16 + 4) = 4.47. θ = 26.57°.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: 4 },
+        { wait: 2600 },
+        { say: `TYPE b = 3
+z = 4 + 3i.
+r = √(16 + 9) = 5. θ = 36.87°.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: 3 },
+        { wait: 2600 },
+        { say: `TYPE a = −4
+z = −4 + 3i. Quadrant II.
+atan2(3, −4) = 143.13°.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: -4 },
+        { wait: 2600 },
+        { say: `TYPE b = −3
+z = −4 − 3i. Quadrant III.
+θ = −143.13°. r still 5.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: -3 },
+        { wait: 2600 },
+        { say: `TYPE a = 0
+z = −3i. On the axis.
+θ = −90° = −π/2 rad.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: 0 },
+        { wait: 2600 },
+      ],
+    },
+    'using-the-polar-form-panel': {
+      title: 'Type r and θ',
+      script: [
+        { say: `TYPE θ = 0
+Point turns onto the real axis.
+z = 3.60. Distance kept.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: 0 },
+        { wait: 2400 },
+        { say: `TYPE r = 8
+Point slides out along 0°.
+z = 8. Circle grows.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: 8 },
+        { wait: 2400 },
+        { say: `TYPE θ = 90
+Quarter turn: z = 8i.
+θ = 90° = π/2 rad.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: 90 },
+        { wait: 2400 },
+        { say: `TYPE θ = 180
+Half turn: z = −8.
+θ = π rad. r stays 8.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: 180 },
+        { wait: 2400 },
+        { say: `TYPE r = 3
+Slides inward, same direction.
+z = −3. θ still 180°.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: 3 },
+        { wait: 2600 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('polar-rectangular'),
          sectionsContent,
          introContent,
@@ -922,7 +1081,22 @@ Once again $r = 5$: this is the third preset on the radius-5 circle, with [−4 
     }
    }
 
-export default function PageTemplate({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PageTemplate({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <PolarRectangularConverter explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
     
   const genericSections=[
@@ -931,6 +1105,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('getting-started-drag-type-or-pick-a-preset'),
           sectionsContent.obj1.content,
         ]
     },
@@ -939,6 +1114,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
+          demo('points-in-all-four-quadrants'),
           sectionsContent.obj2.content,
         ]
     },
@@ -1015,6 +1191,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
+          demo('using-the-rectangular-form-panel'),
           sectionsContent.obj5.content,
         ]
     },
@@ -1023,6 +1200,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
+          demo('using-the-polar-form-panel'),
           sectionsContent.obj6.content,
         ]
     },
@@ -1032,6 +1210,14 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+        ]
+    },
+    {
+        id:'the-key-ideas-panel',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
         ]
     },
     {
@@ -1126,6 +1312,10 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Polar-Rectangular Converter</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <SiblingsNav maxWidth='100%'>
    <PolarRectangularConverter explanations={explanations}/>
