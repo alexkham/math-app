@@ -35,7 +35,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState, useCallback, useMe
      { click: T }                          move and click T
      { slide: T, to: v, ms }               drag a range input to value v
      { drag: T, dx, dy, ms }               pointer-drag an element by (dx, dy) px
-     { set: T, value }                     type into a text/number input (then blur),
+     { set: T, value }                     type into a text/number input or textarea (then blur),
                                            or pick a <select> option by value
      { wait: ms }                          pause
    Targets T:
@@ -96,7 +96,9 @@ function press(el) {
 }
 
 function setFieldValue(field, v) {
-  const proto = field.tagName === 'SELECT' ? window.HTMLSelectElement.prototype : window.HTMLInputElement.prototype;
+  const proto = field.tagName === 'SELECT' ? window.HTMLSelectElement.prototype
+    : field.tagName === 'TEXTAREA' ? window.HTMLTextAreaElement.prototype
+    : window.HTMLInputElement.prototype;
   Object.getOwnPropertyDescriptor(proto, 'value').set.call(field, String(v));
   field.dispatchEvent(new Event('input', { bubbles: true }));
   field.dispatchEvent(new Event('change', { bubbles: true }));
