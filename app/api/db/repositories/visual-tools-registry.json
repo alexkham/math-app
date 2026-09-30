@@ -15015,7 +15015,9 @@
         "states": 4,
         "sections": 14,
         "anchors": 17,
-        "orphans": 0
+        "orphans": 0,
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos (5/5/4 steps) in getting-started-enter-any-exponent, reading-the-cycle-diagram, step-by-step-calculation-walkthrough; example buttons and typed exponents walking the cycle (negative exponents kept out); tool does not write the URL; headless step check /."
       },
       "relatedTerms": [
         {

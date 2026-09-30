@@ -10,6 +10,9 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import iPowersDiagrams from '../../../../app/components/calculators/complex-numbers/iPowersDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -394,8 +397,114 @@ Remainder 3 has a second reading worth knowing: three steps forward is one step 
     r3: 'Three steps forward is one step back: i³ = −i is also 1/i. [Learn more about remainder 3](!#remainder-3-the-opening-example) · [All four states](!#the-four-remainder-states)',
   };
 
+  const instructions = [
+    'Type any integer into the box next to the large **i**; the case strip, the cycle diagram and the four steps update as you type. [Learn more about entering an exponent](!#getting-started-enter-any-exponent)',
+    'The buttons **17**, **100**, **323**, **1000**, **45** and **82** load examples; **Random** picks a value from $0$ to $1000$, and **Clear** empties the box and hides the calculation. [Learn more about the example buttons](!#getting-started-enter-any-exponent)',
+    'The strip of four cells, r = 0 to r = 3, lists the only possible results and highlights the one the current exponent lands on. [Learn more about the four remainder states](!#the-four-remainder-states)',
+    'The cycle diagram lights the active node, the **Shortcut** box highlights its remainder row, and the bar underneath prints the exponent, its value mod 4 and the result. [Learn more about the cycle diagram](!#reading-the-cycle-diagram)',
+    'The four steps divide by $4$, rewrite $i^k$ as $i^{4q} \\cdot i^r$, apply $i^4 = 1$ and look up $i^r$; the answer bar repeats the result. [Learn more about the step-by-step calculation](!#step-by-step-calculation-walkthrough)',
+    'The **Explanation** panel lists the four base cases, highlights the active one and adds a note for the current remainder. [Learn more about the explanation panel](!#explanation-panel-and-special-cases)',
+    '**Quick Reference** opens a table of $i^0$ to $i^{100}$ with each power\'s remainder and result. [Learn more about the quick reference table](!#quick-reference-table)',
+    'Negative exponents take the same remainder between $0$ and $3$: for $i^{-1}$ the tool shows remainder $3$ and the result $-i$. [Learn more about negative and zero exponents](!#negative-and-zero-exponents)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real PowersOfICalculator
+     (opens on i^323). One number input (the exponent); example buttons 17, 100, 323,
+     1000, 45, 82 (use exact: 100 vs 1000); Random is never used; Clear empties the box;
+     the Quick Reference toggle opens the i^0..i^100 table. Negative exponents are kept
+     out: the Divide-by-4 check line is wrong for them (e.g. -1 -> "4x0+3=3"). */
+  const demos = {
+    'getting-started-enter-any-exponent': {
+      title: 'Entering an exponent',
+      script: [
+        { say: `TAP 17
+17 ÷ 4 = 4 remainder 1.
+i¹⁷ = i. Cell r = 1 lights.`, at: 'tl' },
+        { click: { button: '17', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 82
+82 ÷ 4 = 20 remainder 2.
+i⁸² = −1. Cell r = 2 lights.`, at: 'tl' },
+        { click: { button: '82', exact: true } },
+        { wait: 2600 },
+        { say: `TYPE 1001
+1001 ÷ 4 = 250 remainder 1.
+i¹⁰⁰¹ = i. Size does not matter.`, at: 'tl' },
+        { set: 'input[type="number"]', value: 1001 },
+        { wait: 2800 },
+        { say: `TAP Clear
+Box empty. Diagram and steps hidden.
+Strip stays; no cell lit.`, at: 'tl' },
+        { click: { button: 'Clear', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 323
+The opening example.
+323 ÷ 4 = 80 remainder 3. i³²³ = −i.`, at: 'tl' },
+        { click: { button: '323', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'reading-the-cycle-diagram': {
+      title: 'Walking the cycle',
+      script: [
+        { say: `TYPE 4
+Left node lights: i⁴ = 1.
+Shortcut row r = 0. Bar: 4 mod 4 = 0 → 1.`, at: 'tl' },
+        { set: 'input[type="number"]', value: 4 },
+        { wait: 2800 },
+        { say: `TYPE 5
+Top node: i⁵ = i.
+One arrow clockwise. Row r = 1.`, at: 'tl' },
+        { set: 'input[type="number"]', value: 5 },
+        { wait: 2600 },
+        { say: `TYPE 6
+Right node: i⁶ = −1.
+Row r = 2.`, at: 'tl' },
+        { set: 'input[type="number"]', value: 6 },
+        { wait: 2600 },
+        { say: `TYPE 7
+Bottom node: i⁷ = −i.
+Row r = 3.`, at: 'tl' },
+        { set: 'input[type="number"]', value: 7 },
+        { wait: 2600 },
+        { say: `TYPE 8
+Back to the left node: i⁸ = 1.
+Cycle of 4 closed.`, at: 'tl' },
+        { set: 'input[type="number"]', value: 8 },
+        { wait: 2800 },
+      ],
+    },
+    'step-by-step-calculation-walkthrough': {
+      title: 'Steps, explanation, table',
+      script: [
+        { say: `TAP 1000
+Step 1: 1000 ÷ 4 = 250 remainder 0.
+Step 3: (i⁴)²⁵⁰ = 1. i¹⁰⁰⁰ = 1.`, at: 'tl' },
+        { click: { button: '1000', exact: true } },
+        { wait: 2800 },
+        { say: `TAP 45
+Step 2: i⁴⁵ = i⁴ˣ¹¹ · i¹.
+Step 4: lookup r = 1 → i.`, at: 'tl' },
+        { click: { button: '45', exact: true } },
+        { wait: 2800 },
+        { say: `TYPE 3
+3 ÷ 4 = 0 remainder 3.
+Explanation row i³ = −i highlighted.`, at: 'tl' },
+        { set: 'input[type="number"]', value: 3 },
+        { wait: 2800 },
+        { say: `TAP Quick Reference
+Table i⁰ to i¹⁰⁰ opens.
+Result column: 1, i, −1, −i, repeating.`, at: 'tl' },
+        { click: { button: 'Quick Reference' } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('i-powers'),
          sectionsContent,
          introContent,
@@ -418,7 +527,22 @@ Remainder 3 has a second reading worth knowing: three steps forward is one step 
     }
    }
 
-export default function PageTemplate({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PageTemplate({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <PowersOfICalculator explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
     
   const genericSections=[
@@ -427,6 +551,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('getting-started-enter-any-exponent'),
           sectionsContent.obj1.content,
         ]
     },
@@ -483,6 +608,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          demo('reading-the-cycle-diagram'),
           sectionsContent.obj3.content,
         ]
     },
@@ -491,6 +617,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
+          demo('step-by-step-calculation-walkthrough'),
           sectionsContent.obj4.content,
         ]
     },
@@ -602,6 +729,10 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Powers of i Calculator/Visualizer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <SiblingsNav maxWidth='100%'>
   <PowersOfICalculator explanations={explanations}/>
