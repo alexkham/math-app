@@ -11278,7 +11278,7 @@
         "anchors": 38,
         "orphans": 0,
         "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
-        "demos": "4 ToolDemoPlayer v3 demos (5/4/4/4 steps) in how-to-use-the-complex-explorer, reading-the-display-panel, exploring-the-conjugate, special-cases-axes-and-origin; tool does not write the URL; headless step check /."
+        "demos": "4 ToolDemoPlayer v3 demos (5/4/4/4 steps) in how-to-use-the-complex-explorer, reading-the-display-panel, exploring-the-conjugate, special-cases-axes-and-origin; tool does not write the URL; headless step check 17/17."
       },
       "relatedTerms": [
         {
@@ -11920,7 +11920,7 @@
         "anchors": 33,
         "orphans": 0,
         "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
-        "demos": "3 ToolDemoPlayer v3 demos (4/5/5 steps) in how-to-use-the-visualizer, using-the-values-panel, exploring-presets-and-special-cases; tool does not write the URL; headless step check /."
+        "demos": "3 ToolDemoPlayer v3 demos (4/5/5 steps) in how-to-use-the-visualizer, using-the-values-panel, exploring-presets-and-special-cases; tool does not write the URL; headless step check 14/14."
       },
       "relatedTerms": [
         {
@@ -12423,7 +12423,7 @@
         "anchors": 35,
         "orphans": 0,
         "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
-        "demos": "4 ToolDemoPlayer v3 demos (4/5/4/4 steps) in getting-started-drag-two-points, the-parallelogram-rule-for-addition, reading-the-step-by-step-panel, the-triangle-inequality; tool does not write the URL; headless step check /."
+        "demos": "4 ToolDemoPlayer v3 demos (4/5/4/4 steps) in getting-started-drag-two-points, the-parallelogram-rule-for-addition, reading-the-step-by-step-panel, the-triangle-inequality; tool does not write the URL; headless step check 17/17."
       },
       "relatedTerms": [
         {
@@ -13933,7 +13933,7 @@
         "anchors": 38,
         "orphans": 0,
         "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
-        "demos": "4 ToolDemoPlayer v3 demos (4/5/5/5 steps) in getting-started-drag-type-or-pick-a-preset, points-in-all-four-quadrants, using-the-rectangular-form-panel, using-the-polar-form-panel; tool does not write the URL; headless step check /."
+        "demos": "4 ToolDemoPlayer v3 demos (4/5/5/5 steps) in getting-started-drag-type-or-pick-a-preset, points-in-all-four-quadrants, using-the-rectangular-form-panel, using-the-polar-form-panel; tool does not write the URL; headless step check 19/19."
       },
       "relatedTerms": [
         {
@@ -14456,7 +14456,7 @@
         "anchors": 40,
         "orphans": 0,
         "howToMesh": "2026-09-30 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans).",
-        "demos": "4 ToolDemoPlayer v3 demos (4/4/5/4 steps) in getting-started-drag-the-point, setting-the-angle-with-the-theta-slider, landmark-angle-presets, adjusting-the-radius; each drag step starts from a landmark button so the point lands exactly; new usage section setting-the-angle-with-the-theta-slider; tool does not write the URL; headless step check /."
+        "demos": "4 ToolDemoPlayer v3 demos (4/4/5/4 steps) in getting-started-drag-the-point, setting-the-angle-with-the-theta-slider, landmark-angle-presets, adjusting-the-radius; each drag step starts from a landmark button so the point lands exactly; new usage section setting-the-angle-with-the-theta-slider; tool does not write the URL; headless step check 17/17."
       },
       "relatedTerms": [
         {
@@ -15019,7 +15019,7 @@
         "anchors": 17,
         "orphans": 0,
         "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
-        "demos": "3 ToolDemoPlayer v3 demos (5/5/4 steps) in getting-started-enter-any-exponent, reading-the-cycle-diagram, step-by-step-calculation-walkthrough; example buttons and typed exponents walking the cycle (negative exponents kept out); tool does not write the URL; headless step check /."
+        "demos": "3 ToolDemoPlayer v3 demos (5/5/4 steps) in getting-started-enter-any-exponent, reading-the-cycle-diagram, step-by-step-calculation-walkthrough; example buttons and typed exponents walking the cycle (negative exponents kept out); tool does not write the URL; headless step check 14/14."
       },
       "relatedTerms": [
         {
@@ -15461,7 +15461,7 @@
         "anchors": 33,
         "orphans": 0,
         "howToMesh": "2026-09-30 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans).",
-        "demos": "3 ToolDemoPlayer v3 demos (5/5/4 steps) in getting-started-set-z-and-choose-n, reading-the-purple-trail-and-modulus-circles, the-five-step-calculation; typed Re/Im/n, n slider, presets and one drag (Random never used); tool does not write the URL; headless step check /."
+        "demos": "3 ToolDemoPlayer v3 demos (5/5/4 steps) in getting-started-set-z-and-choose-n, reading-the-purple-trail-and-modulus-circles, the-five-step-calculation; typed Re/Im/n, n slider, presets and one drag (Random never used); tool does not write the URL; headless step check 14/14."
       },
       "relatedTerms": [
         {
@@ -15932,7 +15932,7 @@
         "anchors": 28,
         "orphans": 0,
         "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
-        "demos": "4 ToolDemoPlayer v3 demos (4/5/5/4 steps) in getting-started-drag-two-points, vertical-and-horizontal-degenerate-cases, the-dashed-circle-and-locus-interpretation, reading-the-step-by-step-panels; tool does not write the URL; headless step check /."
+        "demos": "4 ToolDemoPlayer v3 demos (4/5/5/4 steps) in getting-started-drag-two-points, vertical-and-horizontal-degenerate-cases, the-dashed-circle-and-locus-interpretation, reading-the-step-by-step-panels; tool does not write the URL; headless step check 18/18."
       },
       "relatedTerms": [
         {
