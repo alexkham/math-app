@@ -13,6 +13,9 @@ import FunctionGallery from '../../../../app/components/functions/types/Function
 import functionTypesDiagrams from '../../../../app/components/functions/types/functionTypesDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -564,8 +567,142 @@ Its combination of a hard domain edge and gentle growth makes it the standard fi
       '[Learn more about the square root family](!#the-square-root-family)',
   };
 
+  const instructions = [
+    'The picker on the left lists twelve families, from **Linear** to **Square root**; picking one resets the sliders to that family\'s defaults. [Learn more about the family picker](!#browsing-the-family-picker)',
+    '**Sine**, **Cosine** and **Tangent** sit together in the **Trigonometric** box and share the parameters $A$, $B$, $C$, $D$. [Learn more about the trigonometric group](!#the-trigonometric-group)',
+    'The **Parameters** sliders under the picker change with the family: two for most, three for Quadratic, four for the trigonometric ones. Dragging redraws at once. [Learn more about the sliders](!#adjusting-parameters-with-the-sliders)',
+    'The plot header shows the family name and an equation badge with the current values substituted; outside a family\'s domain nothing is drawn. [Learn more about the plot and equation badge](!#reading-the-plot-and-equation-badge)',
+    'The **S**, **M**, **L** and **XL** buttons set the plot size. [Learn more about the plot panel](!#getting-started-with-the-gallery)',
+    'The info panel\'s **Explanation** tab summarises the active family; **Resources** lists outside reading. [Learn more about the info panel](!#exploring-the-info-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionGallery tool
+     (opens on Linear, a = 1, b = 0). Picking a family resets its sliders to that family's
+     defaults. Ranges in DOM order follow the family's parameter list
+     (trigonometric: 0 A, 1 B, 2 C, 3 D). */
+  const demos = {
+    'browsing-the-family-picker': {
+      title: 'The family picker',
+      script: [
+        { say: `TAP Quadratic
+Parabola. f(x) = 0.3x² + 0x − 3.
+Three sliders: a, b, c.` },
+        { click: { button: 'Quadratic', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Cubic
+f(x) = 0.2x³ − 2x.
+Ends head opposite ways.` },
+        { click: { button: 'Cubic', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Rational
+f(x) = 1 / (x + 0).
+Two branches. Asymptote at x = 0.` },
+        { click: { button: 'Rational', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Exponential
+f(x) = 1·2^x.
+Hugs the x-axis on the left. No root.` },
+        { click: { button: 'Exponential', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Absolute value
+f(x) = 1·|x + 0|.
+Sharp V. Corner at x = 0.` },
+        { click: { button: 'Absolute value', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-trigonometric-group': {
+      title: 'The trigonometric group',
+      script: [
+        { say: `TAP Sine
+f(x) = 1·sin(1x + 0) + 0.
+Four sliders: A, B, C, D.` },
+        { click: { button: 'Sine', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Cosine
+Same wave, shifted by π/2.
+At x = 0 the value is 1, not 0.` },
+        { click: { button: 'Cosine', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Tangent
+Unbounded. Vertical asymptotes.
+Period π, not 2π.` },
+        { click: { button: 'Tangent', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG B → 2
+f(x) = 1·tan(2x + 0) + 0.
+Period π/2. Asymptotes twice as dense.` },
+        { slide: { range: 1 }, to: 2, ms: 1300 },
+        { wait: 2800 },
+      ],
+    },
+    'adjusting-parameters-with-the-sliders': {
+      title: 'Parameter sliders',
+      script: [
+        { say: `DRAG slope a → 2
+f(x) = 2x + 0.
+Line twice as steep.` },
+        { slide: { range: 0 }, to: 2, ms: 1300 },
+        { wait: 2400 },
+        { say: `DRAG intercept b → −3
+f(x) = 2x − 3.
+Crosses the y-axis at −3.` },
+        { slide: { range: 1 }, to: -3, ms: 1300 },
+        { wait: 2400 },
+        { say: `TAP Power, DRAG exponent n → 3
+f(x) = 1·x^3.
+Odd power: ends head opposite ways.` },
+        { click: { button: 'Power', exact: true } },
+        { wait: 600 },
+        { slide: { range: 1 }, to: 3, ms: 1200 },
+        { wait: 2600 },
+        { say: `DRAG exponent n → −1
+f(x) = 1·x^-1.
+Negative n: reciprocal, asymptote at x = 0.` },
+        { slide: { range: 1 }, to: -1, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG exponent n → 0.5
+f(x) = 1·x^0.5.
+Fractional n: a root. Nothing left of 0.` },
+        { slide: { range: 1 }, to: 0.5, ms: 1200 },
+        { wait: 2600 },
+      ],
+    },
+    'reading-the-plot-and-equation-badge': {
+      title: 'Plot, badge and info panel',
+      script: [
+        { say: `TAP Square root
+Badge: f(x) = 1·√(x + 0).
+Curve starts at x = 0. Nothing drawn left.` },
+        { click: { button: 'Square root', exact: true } },
+        { wait: 2800 },
+        { say: `DRAG shift h → −3
+Badge rewrites: 1·√(x + 3).
+Start moves to x = −3.` },
+        { slide: { range: 1 }, to: -3, ms: 1300 },
+        { wait: 2600 },
+        { say: `TAP S
+Compact plot: 500 × 400.` },
+        { click: { button: 'S', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Resources
+Outside reading for the family:
+Square root, WIKI tag.` },
+        { click: { button: 'Resources', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Explanation
+Family summary back.
+Defined only where x ≥ h.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('functions-types'),
       sectionsContent,
       introContent,
@@ -589,14 +726,29 @@ Its combination of a hard domain edge and gentle growth makes it the standard fi
 }
 
 
-export default function FunctionFamiliesGalleryPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionFamiliesGalleryPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionGallery explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const genericSections = [
     { id:'getting-started-with-the-gallery',      title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'browsing-the-family-picker',            title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
-    { id:'the-trigonometric-group',               title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
-    { id:'adjusting-parameters-with-the-sliders', title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
-    { id:'reading-the-plot-and-equation-badge',   title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
+    { id:'browsing-the-family-picker',            title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[demo('browsing-the-family-picker'), sectionsContent.obj2.content] },
+    { id:'the-trigonometric-group',               title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[demo('the-trigonometric-group'), sectionsContent.obj3.content] },
+    { id:'adjusting-parameters-with-the-sliders', title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[demo('adjusting-parameters-with-the-sliders'), sectionsContent.obj4.content] },
+    { id:'reading-the-plot-and-equation-badge',   title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[demo('reading-the-plot-and-equation-badge'), sectionsContent.obj5.content] },
     { id:'exploring-the-info-panel',              title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
     { id:'what-is-a-function-family',             title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
     { id:'defining-features-across-families',     title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
@@ -669,6 +821,10 @@ export default function FunctionFamiliesGalleryPage({relatedTools, seoData, sect
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Functions Families</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionGallery explanations={explanations}/>
       <br/>
