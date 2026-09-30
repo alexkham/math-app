@@ -4943,7 +4943,9 @@
         "sections": 44,
         "anchors": 118,
         "orphans": 0,
-        "notes": "Case A wiring (explanations prop into shared ExplanationsPanel); 26-law catalog (page prose claimed 27 — corrected to 26, FAQ/schema untouched); new pair-diagram module renders LHS=RHS minis with match badge; 7 new group sections, De Morgan group = existing section."
+        "notes": "Case A wiring (explanations prop into shared ExplanationsPanel); 26-law catalog (page prose claimed 27 — corrected to 26, FAQ/schema untouched); new pair-diagram module renders LHS=RHS minis with match badge; 7 new group sections, De Morgan group = existing section.",
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new section the-explanation-panel written for the Explanation panel.",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in navigating-category-tabs, selecting-an-identity, theme-controls-and-navigation; Learn More tab opened after each Jump to pick; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {

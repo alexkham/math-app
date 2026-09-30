@@ -10,6 +10,9 @@ import TwoSetsLawsExplorer from '../../../../app/components/venn-diagrams/TwoSet
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import twoSetsLawsVennDiagrams from '../../../../app/components/venn-diagrams/twoSetsLawsVennDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -140,6 +143,24 @@ This turns the explorer into a tool for visual reasoning rather than rote memori
 Theme changes persist across identity selections, so adjustments apply to every law you visit afterward.
 
 The navigation strip at the bottom has **Previous** and **Next** buttons that cycle through all 26 identities in the order defined by the category groups, with a counter showing position. Navigation wraps around — pressing **Previous** on the first identity jumps to the last. The active tab and active formula button update automatically as you advance, so you always know where you are in the catalog.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj44: {
+      title: `The Explanation Panel`,
+      content: `The **Explanation** panel sits to the right of the diagrams. Its top line names the loaded law, for example **Complement of Union**, and prints the full equation under the name, such as $(A \\cup B)' = A' \\cap B'$.
+
+Below the name are two tabs:
+
+• **Overview** — a one-line **Definition** of the law in words, such as "The complement of a union equals the intersection of the complements."
+
+• **Learn More** — a short note headed **On This Page** that says what the shaded pair shows, followed by two links: one to the section on this page for that single law, and one to the section for its whole group.
+
+The panel always opens on **Overview**. Loading a different law, through a formula button, the **Jump to** menu, or **Previous** and **Next**, switches it back to **Overview**, so open **Learn More** after you settle on a law.
+
+The panel puts the law into words; the two diagrams and the [match indicator](!#the-match-indicator) show that it holds. How to compare the two shadings region by region is covered in [Reading the Side-by-Side Proof](!#reading-the-side-by-side-proof).`,
       before: ``,
       after: ``,
       link: '',
@@ -764,8 +785,120 @@ Closing the catalog here is fitting: the four compound complements demonstrate t
     }
   }
 
+  const instructions = [
+    'The eight **category tabs**, from **Idempotent** to **Compound Complements**, switch the row of formula buttons below them; the loaded law stays on screen while you browse. [Learn more about the category tabs](!#navigating-category-tabs)',
+    'Tap a **formula button**, such as $A \\cup A\' = U$, to load that law into both diagrams; the badge above them shows the full equation. [Learn more about selecting an identity](!#selecting-an-identity)',
+    'The **Jump to** menu lists all 26 laws grouped by tab; picking one also switches to its tab. [Learn more about the Jump to menu](!#selecting-an-identity)',
+    'The left diagram shades the left-hand side and the right diagram the right-hand side, each labelled above it; hover a region to see its name. [Learn more about reading the side-by-side proof](!#reading-the-side-by-side-proof)',
+    'The badge under the diagrams reads **✓ Regions match — identity holds** when both sides shade the same regions; every law in the catalog passes. [Learn more about the match indicator](!#the-match-indicator)',
+    'The **Theme** panel sets the shading **Color** and **Opacity** from 0.00 to 1.00 for both diagrams; **Reset** returns blue at 0.85. [Learn more about the theme controls](!#theme-controls-and-navigation)',
+    '**← Previous** and **Next →** step through the 26 laws in tab order and wrap around; the counter shows the position, such as 1 / 26. [Learn more about Previous and Next](!#theme-controls-and-navigation)',
+    'The **Explanation** panel names the law; **Overview** gives its definition and **Learn More** links to the law\'s own section on this page. [Learn more about the explanation panel](!#the-explanation-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real TwoSetsLawsExplorer
+     (opens on A ∪ A = A, Idempotent tab, opacity 0.85). One range input: 0 = Opacity.
+     Jump to is the only <select>; option values are identity ids. */
+  const demos = {
+    'navigating-category-tabs': {
+      title: 'Category tabs and formula buttons',
+      script: [
+        { say: `TAP Complement
+Button row: five complement laws.
+Diagrams still show A ∪ A = A.` },
+        { click: { button: 'Complement', exact: true } },
+        { wait: 2600 },
+        { say: `TAP A ∪ A' = U
+Both sides: whole rectangle shaded.
+✓ Regions match.` },
+        { click: { button: "A ∪ A' = U", exact: true } },
+        { wait: 2600 },
+        { say: `TAP De Morgan's Laws → (A ∪ B)' = A' ∩ B'
+Both sides: outside region only.` },
+        { click: { button: "De Morgan's Laws", exact: true } },
+        { wait: 700 },
+        { click: { button: "(A ∪ B)' = A' ∩ B'", exact: true } },
+        { wait: 2800 },
+        { say: `TAP Absorption → A ∪ (A ∩ B) = A
+Both sides: full circle A.
+B adds nothing.` },
+        { click: { button: 'Absorption', exact: true } },
+        { wait: 700 },
+        { click: { button: 'A ∪ (A ∩ B) = A', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Compound Complements → (A' ∪ B)' = A ∩ B'
+Both sides: A-only crescent.` },
+        { click: { button: 'Compound Complements', exact: true } },
+        { wait: 700 },
+        { click: { button: "(A' ∪ B)' = A ∩ B'", exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'selecting-an-identity': {
+      title: 'Jump to and the explanation panel',
+      script: [
+        { say: `SELECT Jump to → A △ B = (A \\ B) ∪ (B \\ A)
+Tab switches to Difference.
+Each side: both crescents, lens blank.` },
+        { set: 'select', value: 'sd-1' },
+        { wait: 2800 },
+        { say: `TAP Learn More
+Two private crescents glued by union.
+Links to this law's section.` },
+        { click: { button: 'Learn More', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Jump to → (A ∩ B)' = A' ∪ B'
+Tab: De Morgan's Laws.
+Each side: all but the lens. Panel back on Overview.` },
+        { set: 'select', value: 'dm-i' },
+        { wait: 3000 },
+        { say: `TAP Learn More
+Escaping the overlap:
+miss only one set.` },
+        { click: { button: 'Learn More', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Jump to → A ∩ ∅ = ∅
+Both sides blank.
+Still ✓ Regions match.` },
+        { set: 'select', value: 'ann-i' },
+        { wait: 2600 },
+      ],
+    },
+    'theme-controls-and-navigation': {
+      title: 'Theme, Previous and Next',
+      script: [
+        { say: `DRAG Opacity → 0.30
+Shading paler on both sides. Readout 0.30.` },
+        { slide: { range: 0 }, to: 0.3, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP Next →
+2 / 26: A ∩ A = A.
+Opacity 0.30 kept.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ← Previous ×2
+Wraps: 26 / 26, (A' ∩ B)' = A ∪ B'.
+Tab: Compound Complements.` },
+        { click: { button: '← Previous', exact: true } },
+        { wait: 700 },
+        { click: { button: '← Previous', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Wraps forward: 1 / 26, A ∪ A = A.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Reset
+Opacity back to 0.85. Blue shading.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('two-sets-laws-venn'),
       sectionsContent,
       introContent,
@@ -788,7 +921,22 @@ Closing the catalog here is fitting: the four compound complements demonstrate t
   }
 }
 
-export default function TwoSetsLawsVennPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function TwoSetsLawsVennPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <TwoSetsLawsExplorer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / section with after-text / per-state section
   // carrying its frozen LHS=RHS unit as [content, unit, after].
@@ -818,11 +966,12 @@ export default function TwoSetsLawsVennPage({relatedTools, seoData, sectionsCont
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started-with-the-explorer'),
-    plain('obj2', 'navigating-category-tabs'),
-    plain('obj3', 'selecting-an-identity'),
+    withDemo(plain('obj2', 'navigating-category-tabs')),
+    withDemo(plain('obj3', 'selecting-an-identity')),
     plain('obj4', 'reading-the-side-by-side-proof'),
     plain('obj5', 'the-match-indicator'),
-    plain('obj6', 'theme-controls-and-navigation'),
+    withDemo(plain('obj6', 'theme-controls-and-navigation')),
+    plain('obj44', 'the-explanation-panel'),
 
     plain('obj11', 'the-idempotent-laws'),
     stateRow('obj18', 'idempotent-law-for-union', 'idem-u'),
@@ -931,6 +1080,10 @@ export default function TwoSetsLawsVennPage({relatedTools, seoData, sectionsCont
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'-10px',marginBottom:'-80px'}}>Venn Diagrams: Two Sets Laws and Complex Identities</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <div style={{transform:'scale(0.85)'}}>
         <TwoSetsLawsExplorer explanations={explanations}/>
