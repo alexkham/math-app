@@ -11,6 +11,8 @@ import SetBuilderExplorer from '../../../../app/components/diagrams/set-theory/S
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import setBuilderDiagrams from '../../../../app/components/diagrams/set-theory/setBuilderDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -35,16 +37,16 @@ export async function getStaticProps(){
   ]
 
   const instructions = [
-    'The expression at the top is the set you are building. It always has the same two parts: a domain before the bar, and a condition after it.',
-    'Pick the domain from the Domain panel — the natural numbers, the naturals with zero, the integers, or a finite set you type yourself.',
-    'Add a condition with the Add condition button, then choose a test from the dropdown: comparisons, between, even, odd, prime, perfect square, divisibility, or $x^2 < a$.',
-    'Conditions that need a number show a box for it. Change the number and the candidates re-filter as you type.',
-    'With two or more conditions, the and / or switch decides whether a candidate must pass every test or just one of them.',
-    'The candidate strip shows the domain. Green chips pass the condition and are in the set; grey chips are candidates that failed.',
-    'A trailing ellipsis means the domain runs on past the chips shown — the strip is a window, not the whole domain.',
-    'Click any candidate, or focus it and press Enter, to see it tested condition by condition with a tick or a cross for each.',
-    'The Roster form panel lists the members in braces, or shows $\\varnothing$ when nothing passes and says so when the set is too big to list.',
-    'The preset buttons load ready-made expressions, and the line under the builder reads the whole thing back to you in words.',
+    'The expression at the top is the set you are building. It always has the same two parts: a domain before the bar, and a condition after it. [Learn more about the expression](!#getting-started)',
+    'Pick the domain from the Domain panel — the natural numbers, the naturals with zero, the integers, or a finite set you type yourself. [Learn more about choosing the domain](!#choosing-the-domain)',
+    'Add a condition with the Add condition button, then choose a test from the dropdown: comparisons, between, even, odd, prime, perfect square, divisibility, or $x^2 < a$. [Learn more about adding conditions](!#adding-conditions)',
+    'Conditions that need a number show a box for it. Change the number and the candidates re-filter as you type. [Learn more about the number boxes](!#adding-conditions)',
+    'With two or more conditions, the and / or switch decides whether a candidate must pass every test or just one of them. [Learn more about joining conditions with and or or](!#joining-conditions-with-and-or-or)',
+    'The candidate strip shows the domain. Green chips pass the condition and are in the set; grey chips are candidates that failed. [Learn more about the candidate strip](!#getting-started)',
+    'A trailing ellipsis means the domain runs on past the chips shown — the strip is a window, not the whole domain. [Learn more about the trailing ellipsis](!#choosing-the-domain)',
+    'Click any candidate, or focus it and press Enter, to see it tested condition by condition with a tick or a cross for each. [Learn more about testing a candidate](!#testing-a-candidate)',
+    'The Roster form panel lists the members in braces, or shows $\\varnothing$ when nothing passes and says so when the set is too big to list. [Learn more about the Roster form panel](!#reading-the-roster-panel)',
+    'The preset buttons load ready-made expressions, and the line under the builder reads the whole thing back to you in words. [Learn more about the preset buttons](!#getting-started)',
   ]
 
   const sectionsContent={
@@ -586,8 +588,126 @@ That is the ordinary working state of the notation, and everything else on this 
   }
 
 
+  /* Animated demos (ToolDemoPlayer v3) against the real SetBuilderExplorer
+     (opens on { x ∈ ℕ : x is even ∧ x < 20 }: 9 members, chips 1..24 + ellipsis).
+     Condition rows: <select> nth = row, number boxes in DOM order; chips are
+     .sbx-chip spans (nth = x − 1 on ℕ). ℤ is not used in the demos. */
+  const demos = {
+    'choosing-the-domain': {
+      title: 'Same condition, different domains',
+      script: [
+        { say: `TAP ℕ₀
+0 joins the candidates. 0 is even.
+10 members: { 0, 2, …, 18 }.`, at: 'bl' },
+        { click: { button: 'ℕ₀', exact: true } },
+        { wait: 2800 },
+        { say: `TAP finite set
+A = { 1, …, 10 }. No ellipsis: shown in full.
+5 members: { 2, 4, 6, 8, 10 }.`, at: 'bl' },
+        { click: { button: 'finite set', exact: true } },
+        { wait: 2800 },
+        { say: `TYPE A → 3, 6, 9, 12, 15
+Same condition, new candidates.
+2 members: { 6, 12 }.`, at: 'bl' },
+        { set: 'input.sbx-text', value: '3, 6, 9, 12, 15' },
+        { wait: 2800 },
+        { say: `TAP ℕ
+Chips 1 to 24, then an ellipsis.
+Back to 9 members.`, at: 'bl' },
+        { click: { button: 'ℕ', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'adding-conditions': {
+      title: 'Adding and changing conditions',
+      script: [
+        { say: `TYPE x < a → 10
+Re-filters as you type.
+4 members: { 2, 4, 6, 8 }.` },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: 10 },
+        { wait: 2800 },
+        { say: `SELECT condition 1 → x is prime
+x is prime ∧ x < 10.
+4 members: { 2, 3, 5, 7 }.` },
+        { set: { css: 'select', nth: 0 }, value: 'prime' },
+        { wait: 2800 },
+        { say: `TAP Add
+New row: x < 10.
+Same test twice. Set unchanged.` },
+        { click: { button: 'Add', exact: true } },
+        { wait: 2600 },
+        { say: `SELECT condition 3 → x > a
+x < 10 ∧ x > 10: nothing passes.
+Roster: ∅. No warning.` },
+        { set: { css: 'select', nth: 2 }, value: 'gt' },
+        { wait: 2800 },
+        { say: `TAP × on row 3
+Row removed.
+Back to { 2, 3, 5, 7 }.` },
+        { click: 'button[aria-label="Remove condition 3"]' },
+        { wait: 2600 },
+      ],
+    },
+    'joining-conditions-with-and-or-or': {
+      title: 'And versus or',
+      script: [
+        { say: `TAP { x ∈ ℕ : x < 4 and x > 9 }
+No candidate passes both.
+0 members. Roster: ∅.` },
+        { click: { button: '{ x ∈ ℕ : x < 4 and x > 9 }', exact: true } },
+        { wait: 2800 },
+        { say: `TAP or
+x < 4 ∨ x > 9: passing one is enough.
+Infinitely many: { 1, 2, 3, 10, 11, … }.` },
+        { click: { button: 'or', exact: true } },
+        { wait: 3000 },
+        { say: `TAP { x ∈ ℕ : x is even or x is prime }
+Every even, every prime.
+Infinitely many members.` },
+        { click: { button: '{ x ∈ ℕ : x is even or x is prime }', exact: true } },
+        { wait: 2800 },
+        { say: `TAP and
+Even and prime: only 2.
+1 member. Roster: { 2 }.` },
+        { click: { button: 'and', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'testing-a-candidate': {
+      title: 'Testing candidates',
+      script: [
+        { say: `TAP 6
+✓ 6 is even. ✓ 6 < 20.
+6 is in the set.` },
+        { click: { css: '.sbx-chip', nth: 5 } },
+        { wait: 2600 },
+        { say: `TAP 7
+✗ 7 is even. ✓ 7 < 20.
+One cross under and: not in the set.` },
+        { click: { css: '.sbx-chip', nth: 6 } },
+        { wait: 2800 },
+        { say: `TAP 22
+✓ 22 is even. ✗ 22 < 20.
+Not in the set.` },
+        { click: { css: '.sbx-chip', nth: 21 } },
+        { wait: 2800 },
+        { say: `TAP or
+Same ticks for 22.
+Now one is enough: 22 is in the set.` },
+        { click: { button: 'or', exact: true } },
+        { wait: 2800 },
+        { say: `TAP 22 again
+Selection cleared.
+Panel back to its prompt.` },
+        { click: { css: '.sbx-chip', nth: 21 } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
    return {
       props:{
+      demos,
         relatedTools: getRelatedTools('set-builder'),
          sectionsContent,
          introContent,
@@ -601,7 +721,22 @@ That is the ordinary working state of the notation, and everything else on this 
     }
    }
 
-export default function SetBuilderPage({relatedTools, seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+export default function SetBuilderPage({ demos,relatedTools, seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <SetBuilderExplorer showIntro={false} notes={notes}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Slug ids (Line 1). obj0 is the Key Terms slot, unused on tool pages, so it
   // never reaches this list. A per-state row carries its frozen unit between
@@ -627,17 +762,17 @@ export default function SetBuilderPage({relatedTools, seoData, sectionsContent, 
     plain('obj1', 'getting-started'),
     stateRow('obj12', 'an-empty-condition', 'no-conditions'),
 
-    plain('obj2', 'choosing-the-domain'),
+    withDemo(plain('obj2', 'choosing-the-domain')),
     stateRow('obj18', 'a-number-outside-the-domain', 'candidate-outside'),
 
-    plain('obj3', 'adding-conditions'),
+    withDemo(plain('obj3', 'adding-conditions')),
     stateRow('obj21', 'the-ordinary-bounded-case', 'general'),
 
-    plain('obj4', 'joining-conditions-with-and-or-or'),
+    withDemo(plain('obj4', 'joining-conditions-with-and-or-or')),
     stateRow('obj19', 'two-conditions-joined-by-and', 'and-join'),
     stateRow('obj20', 'two-conditions-joined-by-or', 'or-join'),
 
-    plain('obj5', 'testing-a-candidate'),
+    withDemo(plain('obj5', 'testing-a-candidate')),
     stateRow('obj16', 'a-candidate-that-passes', 'candidate-passes'),
     stateRow('obj17', 'a-candidate-that-fails', 'candidate-fails'),
 
