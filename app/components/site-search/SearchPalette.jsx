@@ -669,7 +669,9 @@ export default function SearchPalette() {
     }}>
       <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>&uarr;&darr;</kbd> {UI_TEXT.footerNavigate}</span>
       <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>Enter</kbd> {UI_TEXT.footerOpen}</span>
-      <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>Tab</kbd> {UI_TEXT.footerTab}</span>
+      {!isFallback && (
+        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>Tab</kbd> {UI_TEXT.footerTab}</span>
+      )}
       <span style={{ marginLeft: 'auto' }}>{UI_TEXT.footerNote}</span>
     </div>
   );
