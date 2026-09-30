@@ -15,6 +15,9 @@ import FunctionComposition from '../../../../app/components/functions/compositio
 import compDiagrams from '../../../../app/components/functions/compositions/functionCompositionDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -541,8 +544,108 @@ Note the coinciding curves in the scene: the blue and amber graphs are identical
       '[Learn more about composing with the square root](!#composing-with-the-square-root)',
   };
 
+  const instructions = [
+    'The picker on the left has two lists of ten functions: **Outer** ($f$, applied second) and **Inner** ($g$, applied first). [Learn more about picking the functions](!#picking-outer-and-inner-functions)',
+    'The plot shows $f \\circ g$ in solid blue and $g \\circ f$ in solid amber; $f$ and $g$ alone can be added as dashed reference curves. [Learn more about getting started](!#getting-started-with-the-visualizer)',
+    'The **legend chips** under the plot show or hide each of the four curves and print its current formula. [Learn more about the legend chips](!#the-legend-chips)',
+    'The **S**, **M**, **L** and **XL** buttons set the height of the plot. [Learn more about the plot panel](!#getting-started-with-the-visualizer)',
+    'The info panel has three tabs: **Explanation** writes out both compositions, **Families** describes the two chosen functions, and **Guide** explains how to read the graph. [Learn more about the info panel](!#getting-started-with-the-visualizer)',
+    'Some pairs are flagged in the info panel: the same function on both sides, the identity, and inverse pairs such as $e^x$ and $\\ln x$. [Learn more about the special cases](!#special-cases-the-tool-highlights)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionComposition tool
+     (opens on Quadratic ∘ Sine). Picker buttons repeat per side:
+     nth 0 = Outer (f), nth 1 = Inner (g). Legend chips: button text = label + formula. */
+  const demos = {
+    'picking-outer-and-inner-functions': {
+      title: 'Outer, inner, order',
+      script: [
+        { say: `TAP Outer: Square root
+f∘g = √(sin x).
+Defined only where sin x ≥ 0.` },
+        { click: { button: 'Square root', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP Inner: Quadratic
+f∘g = √(x²) = |x|. V shape.
+g∘f = (√x)² = x, only for x ≥ 0.` },
+        { click: { button: 'Quadratic', exact: true, nth: 1 } },
+        { wait: 3000 },
+        { say: `TAP Outer: Exponential
+f∘g = e^(x²). g∘f = (eˣ)².
+Order changes the curve.` },
+        { click: { button: 'Exponential', exact: true, nth: 0 } },
+        { wait: 2800 },
+        { say: `TAP Inner: Logarithmic
+Inverse pair. e^(ln x) = x, ln(eˣ) = x.
+Both curves on y = x.` },
+        { click: { button: 'Logarithmic', exact: true, nth: 1 } },
+        { wait: 3000 },
+        { say: `TAP Inner: Exponential
+Same function both sides.
+f∘g = g∘f. Curves coincide.` },
+        { click: { button: 'Exponential', exact: true, nth: 1 } },
+        { wait: 2800 },
+      ],
+    },
+    'the-legend-chips': {
+      title: 'Legend chips',
+      script: [
+        { say: `TAP chip f
+Dashed gray: x² alone.` },
+        { click: { button: 'fx²', exact: true } },
+        { wait: 2400 },
+        { say: `TAP chip g
+Dashed teal: sin x alone.
+Inputs to both compositions.` },
+        { click: { button: 'gsin(x)', exact: true } },
+        { wait: 2600 },
+        { say: `TAP chip f∘g
+Blue (sin x)² hidden.
+Chip dims.` },
+        { click: { button: 'f∘g', nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP chip g∘f
+Amber sin(x²) hidden.
+f and g only.` },
+        { click: { button: 'g∘f', nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'getting-started-with-the-visualizer': {
+      title: 'Plot size and info panel',
+      script: [
+        { say: `TAP L
+Taller plot.
+Same curves, more room.` },
+        { click: { button: 'L', exact: true } },
+        { wait: 2400 },
+        { say: `TAP S
+Compact plot.` },
+        { click: { button: 'S', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Families
+One line per chosen function:
+its role as outer and as inner.` },
+        { click: { button: 'Families', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Guide
+How to read the four curves
+and the chips.` },
+        { click: { button: 'Guide', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Explanation
+Both compositions written out.
+Why the order matters.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('functions-composition'),
       sectionsContent,
       introContent,
@@ -566,14 +669,29 @@ Note the coinciding curves in the scene: the blue and amber graphs are identical
 }
 
 
-export default function FunctionCompositionPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionCompositionPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionComposition explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
-    { id:'getting-started-with-the-visualizer',      title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'picking-outer-and-inner-functions',        title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
-    { id:'the-legend-chips',                         title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
+    { id:'getting-started-with-the-visualizer',      title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[demo('getting-started-with-the-visualizer'), sectionsContent.obj1.content] },
+    { id:'picking-outer-and-inner-functions',        title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[demo('picking-outer-and-inner-functions'), sectionsContent.obj2.content] },
+    { id:'the-legend-chips',                         title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[demo('the-legend-chips'), sectionsContent.obj3.content] },
     { id:'why-order-matters',                        title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
     { id:'special-cases-the-tool-highlights',        title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
     { id:'domain-restrictions-in-composition',       title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
@@ -649,6 +767,10 @@ export default function FunctionCompositionPage({relatedTools, seoData, sections
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Composition of Functions</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionComposition explanations={explanations}/>
       <br/>

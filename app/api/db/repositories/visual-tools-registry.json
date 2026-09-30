@@ -6709,7 +6709,9 @@
         "states": 13,
         "sections": 23,
         "anchors": 46,
-        "orphans": 0
+        "orphans": 0,
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in picking-outer-and-inner-functions, the-legend-chips, getting-started-with-the-visualizer; picker buttons nth 0 = outer, nth 1 = inner; tool does not write the URL; headless step check 14/14."
       },
       "relatedTerms": [
         {
