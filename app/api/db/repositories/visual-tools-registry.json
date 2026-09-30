@@ -65160,7 +65160,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "A - the pre-existing component's explanationOverride={byPreset} REPLACES entries, so each override spreads the tool's SCENARIOS entry and appends the anchor to `body`. Component NOT modified.",
-        "note": "PAGE FOR AN ORPHANED COMPONENT: SpanIndependence.jsx existed without a page. COMPONENT_CSS is not exported, so the diagrams module carries a resolved copy of the SVG rules."
+        "note": "PAGE FOR AN ORPHANED COMPONENT: SpanIndependence.jsx existed without a page. COMPONENT_CSS is not exported, so the diagrams module carries a resolved copy of the SVG rules.",
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in preset-scenarios, dragging-the-vectors, the-sweep-animation, the-live-card; handle drags measured at 31 px per unit in the demo frame, phi slider to 90/180/270, typed b = (4, 3) gives det 2; tool does not write the URL; headless step check 17/17."
       },
       "relatedTools": [
         {
