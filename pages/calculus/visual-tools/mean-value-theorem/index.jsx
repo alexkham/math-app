@@ -495,6 +495,9 @@ import FunctionMVT from '../../../../app/components/functions/mvt/FunctionMVT'
 import functionMVTDiagrams from '../../../../app/components/functions/mvt/functionMVTDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -651,6 +654,24 @@ The reason these rows matter: the MVT only guarantees at least one $c$, but the 
 Any combination is valid. The legend below the graph updates to show only the visible layers.
 
 The **Accent color** picker at the bottom recolors the highlight throughout the tool — useful for screenshots or personal preference.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj17: {
+      title: `The Plot, Legend and Info Panel`,
+      content: `The center panel is headed by the family name, with its formula in a chip beside it, for example $f(x) = x^2$. The **S**, **M**, **L** and **XL** buttons above the plot set its size, and the readout next to them shows it in pixels: 500 × 400, 700 × 550, 900 × 850 or 1100 × 850. The page opens at 880 × 460. The curve, the secant, the tangents and the endpoint lines are redrawn at the new size; nothing else changes.
+
+The legend under the plot names only the layers that are switched on: the curve $f(x)$, the secant from $(a, f(a))$ to $(b, f(b))$, the tangent at $c$, parallel to the secant, and the lines $x = a$ and $x = b$. Which layers show is set in [Display Toggles](!#display-toggles).
+
+The **Applied** strip at the bottom of the center panel repeats the current $a$ and $b$.
+
+The info panel on the right has two tabs:
+
+• **Explanation** — the current function, a **Right now** line with the interval, the secant slope and every $c$ found, a note on how $c$ is found, and a short note on where the family leads, with a link to its section on this page.
+
+• **Concepts** — the statement of the theorem, what it really says, why differentiability matters, Rolle&apos;s theorem as a special case, and what the theorem powers. The full treatment is in [What Is the MVT](!#what-is-the-mvt).`,
       before: ``,
       after: ``,
       link: '',
@@ -964,8 +985,140 @@ The value $\ln(e - 1)$ also has a neat reading: it is the point where the height
   }
 
 
+  const instructions = [
+    'The **Function** picker on the left lists six families in two groups, **Polynomial** and **Transcendental**, each tagged with how many $c$ values to expect; tapping one loads it with its default interval. [Learn more about the function families](!#the-function-families)',
+    'The **Display** checkboxes switch the curve, the secant, the tangent at $c$ and the dashed lines at $a$ and $b$ on and off. [Learn more about the display toggles](!#display-toggles)',
+    'The **left endpoint a** and **right endpoint b** sliders set the interval; the secant, the tangents and the cards follow, and **Reset** next to **Parameters** restores the family default. [Learn more about the a and b sliders](!#the-a-and-b-sliders)',
+    'The **Accent color** picker under **Appearance** recolors the result box and the slider thumbs; its **Reset** restores the default blue. [Learn more about the accent color](!#display-toggles)',
+    'The **S**, **M**, **L** and **XL** buttons set the plot size, and the legend under the plot names the layers that are switched on. [Learn more about the plot and legend](!#the-plot-legend-and-info-panel)',
+    'The three cards under the plot give the secant slope, the number of $c$ values found and $f\'(c)$ at each $c$. [Learn more about the result cards](!#the-three-result-cards)',
+    'Under the cards, one row per $c$ shows its value, $f\'(c)$ and the secant slope it matches. [Learn more about the per-c rows](!#the-per-c-detail-rows)',
+    'The info panel has two tabs: **Explanation** gives the interval, the secant slope and the $c$ values right now, and **Concepts** covers the theorem and Rolle\'s theorem. [Learn more about the info panel](!#the-plot-legend-and-info-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionMVT tool
+     (opens on Quadratic, [a, b] = [-2, 2]). Range inputs in DOM order: 0 = a, 1 = b.
+     Checkboxes in DOM order: 0 = f(x), 1 = secant, 2 = tangent at c, 3 = a, b lines.
+     Reset nth 0 = Parameters, nth 1 = Appearance. Identity is left out: the finder
+     lists hundreds of c values for it. Export / Maximize never used. */
+  const demos = {
+    'the-function-families': {
+      title: 'Families and their c values',
+      script: [
+        { say: `TAP Cubic
+Secant slope 4.
+Two c: −1.155 and 1.155. Rows c₁, c₂.` },
+        { click: { button: 'Cubic' } },
+        { wait: 2600 },
+        { say: `TAP Sine
+[a, b] = [0, 6.28]. Secant slope 0.
+Two c: 1.571 and 4.712.` },
+        { click: { button: 'Sine' } },
+        { wait: 2600 },
+        { say: `TAP Cosine
+[a, b] = [0, 3.14]. Secant slope −0.637.
+Two c: 0.69 and 2.451.` },
+        { click: { button: 'Cosine' } },
+        { wait: 2600 },
+        { say: `TAP Exponential
+[a, b] = [0, 1]. Secant slope 1.718.
+One c: 0.541.` },
+        { click: { button: 'Exponential' } },
+        { wait: 2600 },
+        { say: `TAP Quadratic
+[a, b] = [−2, 2]. Secant slope 0.
+One c: 0, the midpoint.` },
+        { click: { button: 'Quadratic' } },
+        { wait: 2600 },
+      ],
+    },
+    'the-a-and-b-sliders': {
+      title: 'Interval a and b',
+      script: [
+        { say: `DRAG b → 1
+[a, b] = [−2, 1]. Secant slope −1.
+c = −0.5: the midpoint.` },
+        { slide: { range: 1 }, to: 1, ms: 1400 },
+        { wait: 2400 },
+        { say: `DRAG a → 0
+[a, b] = [0, 1]. Secant slope 1.
+c = 0.5.` },
+        { slide: { range: 0 }, to: 0, ms: 1400 },
+        { wait: 2400 },
+        { say: `DRAG a → 3
+a > b: tool swaps them.
+[a, b] = [1, 3]. Slope 4, c = 2.` },
+        { slide: { range: 0 }, to: 3, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG b → 3
+[a, b] = [3, 3].
+c values found: none. Interval too narrow.` },
+        { slide: { range: 1 }, to: 3, ms: 1200 },
+        { wait: 2400 },
+        { say: `TAP Reset
+[a, b] = [−2, 2] again.
+Slope 0, c = 0.` },
+        { click: { button: 'Reset', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'display-toggles': {
+      title: 'Display toggles and accent color',
+      script: [
+        { say: `UNTICK a, b lines
+Dashed verticals at a and b gone.
+Legend drops x = a, x = b.` },
+        { click: { css: 'input[type="checkbox"]', nth: 3 } },
+        { wait: 2400 },
+        { say: `UNTICK secant
+Secant line off.
+Legend drops it. Cards unchanged.` },
+        { click: { css: 'input[type="checkbox"]', nth: 1 } },
+        { wait: 2400 },
+        { say: `UNTICK tangent at c
+Tangent off. Only the curve left.` },
+        { click: { css: 'input[type="checkbox"]', nth: 2 } },
+        { wait: 2400 },
+        { say: `SET Accent color → #d97706
+Result box edge and slider thumbs turn amber.` },
+        { set: 'input[type="color"]', value: '#d97706' },
+        { wait: 2400 },
+        { say: `TAP Reset (Appearance)
+Accent back to #3b82f6.` },
+        { click: { button: 'Reset', exact: true, nth: 1 } },
+        { wait: 2200 },
+      ],
+    },
+    'the-plot-legend-and-info-panel': {
+      title: 'Plot size and info panel',
+      script: [
+        { say: `TAP S
+Plot 500 × 400.
+Same secant, same tangent.` },
+        { click: { button: 'S', exact: true } },
+        { wait: 2200 },
+        { say: `TAP XL
+Plot 1100 × 850.` },
+        { click: { button: 'XL', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Concepts
+The theorem, what it says,
+Rolle's theorem, what it powers.` },
+        { click: { button: 'Concepts', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Explanation
+Right now: [−2, 2], secant slope 0.
+1 value of c: 0.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('calculus-mean-value-theorem'),
       sectionsContent,
       stateUnits,
@@ -989,7 +1142,22 @@ The value $\ln(e - 1)$ also has a neat reading: it is the point where the height
   }
 }
 
-export default function MeanValueTheoremVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function MeanValueTheoremVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionMVT explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -1012,17 +1180,18 @@ export default function MeanValueTheoremVisualizer({relatedTools, seoData, secti
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'the-function-families'),
+    withDemo(plain('obj2', 'the-function-families')),
     stateRow('obj11', 'every-point-is-a-c', 'identity'),
     stateRow('obj12', 'rolles-theorem-in-disguise', 'quadratic'),
     stateRow('obj13', 'two-solutions-at-once', 'cubic'),
     stateRow('obj14', 'a-full-period', 'sine'),
     stateRow('obj15', 'a-secant-that-is-not-flat', 'cosine'),
     stateRow('obj16', 'where-the-average-rate-is-attained', 'exponential'),
-    plain('obj3', 'the-a-and-b-sliders'),
+    withDemo(plain('obj3', 'the-a-and-b-sliders')),
     plain('obj4', 'the-three-result-cards'),
     plain('obj5', 'the-per-c-detail-rows'),
-    plain('obj6', 'display-toggles'),
+    withDemo(plain('obj6', 'display-toggles')),
+    withDemo(plain('obj17', 'the-plot-legend-and-info-panel')),
     plain('obj7', 'what-is-the-mvt'),
     plain('obj8', 'the-speedometer-intuition'),
     plain('obj9', 'rolles-theorem'),
@@ -1084,6 +1253,10 @@ export default function MeanValueTheoremVisualizer({relatedTools, seoData, secti
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Mean Value Theorem Visualizer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionMVT explanations={explanations}/>
       <br/>
