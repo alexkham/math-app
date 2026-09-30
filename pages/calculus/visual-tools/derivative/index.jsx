@@ -496,6 +496,9 @@ import FunctionDerivative from '../../../../app/components/functions/derivative/
 import functionDerivativeDiagrams from '../../../../app/components/functions/derivative/functionDerivativeDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -819,6 +822,17 @@ At $x_0 = 1$: $f(x_0) = 0$ and $f'(x_0) = 1$. The logarithm crosses the x-axis a
 
 That contrast is worth holding next to the [exponential](!#the-exponential), which is the inverse function. Where $e^x$ grows faster than any polynomial, $\ln x$ grows slower than any positive power of $x$ — and the reciprocal derivative is precisely why.`,
       link: '',
+    },
+    obj18: {
+      title: `Plot Size, Applied Strip and Info Panel`,
+      content: `The **S**, **M**, **L** and **XL** buttons above the plot set its size, and the readout next to **Maximize** prints it: **S** is $500 \\times 400$, **M** $700 \\times 550$, **L** $900 \\times 850$ and **XL** $1100 \\times 850$. The page opens at $880 \\times 460$, which is none of the four. The plot never grows wider than its column, so on most screens the buttons mainly change its height. Both curves, the tangent and the markers are redrawn at the new size; the numbers below the plot do not change.
+
+The **Applied** strip at the bottom of the middle column repeats the current value of $x_0$. Its last tag, **x₀ links f and f&apos;**, is a fixed reminder that one slider position is read on both curves; the numbers themselves are in [the at-the-point card](!#the-at-the-point-card) above it.
+
+The info panel on the right has two tabs. **Explanation** is the live one: the family&apos;s function and derivative, what $x_0$ controls, the current $f(x_0)$ and $f'(x_0)$ with the tangent slope they give, and a closing note that links to the section on that family. **Concepts** is fixed text: what a derivative is, the two ways the tool shows it, and what to look for at extrema and inflection points. For the definition, see [what is a derivative](!#what-is-a-derivative).`,
+      before: ``,
+      after: ``,
+      link: '',
     }
 
   }
@@ -982,8 +996,150 @@ That contrast is worth holding next to the [exponential](!#the-exponential), whi
   }
 
 
+  const instructions = [
+    'The **Function** picker on the left lists seven families in two groups, **Polynomial** and **Transcendental**; tapping one loads $f$ with its derivative and puts $x_0$ back at $1$. [Learn more about the function families](!#the-function-families)',
+    'The **Display** checkboxes **f(x)**, **f\'(x)** and **tangent** each hide or show one layer, and the legend under the plot lists only the layers that are on; **Accent color** under **Appearance** recolours the highlights. [Learn more about the display toggles](!#display-toggles)',
+    'The **point x₀** slider under **Parameters** moves the probe from $-5$ to $5$ in steps of $0.05$; the tangent, both markers and the numbers follow it, and **Reset** returns $x_0$ to $1$. [Learn more about the x0 slider](!#the-x0-slider)',
+    'The plot draws $f$ as a solid curve, $f\'$ as a dashed curve and the tangent at $x_0$ as a light-blue line, with a vertical link line through both curves at $x_0$. [Learn more about getting started](!#getting-started)',
+    'The **Jump to** bar under the plot groups special points as **Roots of f**, **Extrema of f** and **Inflections**; tapping a value puts $x_0$ exactly there, and a family with none shows **none in view**. [Learn more about the jump-to points of interest](!#jump-to-points-of-interest)',
+    'The **At the point x₀** card shows **f(x₀)**, **f\'(x₀)** and **Tangent slope** side by side; the last two are always the same number. [Learn more about the at-the-point card](!#the-at-the-point-card)',
+    'The **S**, **M**, **L** and **XL** buttons set the plot size, the **Applied** strip repeats $x_0$, and the info panel tabs **Explanation** and **Concepts** give the live reading and the theory. [Learn more about the plot size, applied strip and info panel](!#plot-size-applied-strip-and-info-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionDerivative tool
+     (opens on Quadratic, x0 = 1). One range input: 0 = point x0 (-5..5, step 0.05).
+     Picking a family resets x0 to 1. Jump to buttons are labelled with their
+     x value (ASCII hyphen), repeated across groups, so nth picks the group.
+     Checkboxes: 0 f(x), 1 f'(x), 2 tangent. Reset nth 0 = Parameters. */
+  const demos = {
+    'the-function-families': {
+      title: 'Picking a family',
+      script: [
+        { say: `TAP Identity
+f′(x) = 1: flat dashed line.
+Tangent = the line itself. Slope 1.` },
+        { click: { button: 'Identity' } },
+        { wait: 2600 },
+        { say: `TAP Cubic
+f′(x) = 3x²: dashed parabola.
+At x₀ = 1: f = 1, slope 3.` },
+        { click: { button: 'Cubic' } },
+        { wait: 2600 },
+        { say: `TAP Sine
+f′(x) = cos(x): wave a quarter turn ahead.
+At x₀ = 1: f = 0.8415, slope 0.5403.` },
+        { click: { button: 'Sine' } },
+        { wait: 2800 },
+        { say: `TAP Exponential
+f′(x) = eˣ: one curve over the other.
+f = slope = 2.7183.` },
+        { click: { button: 'Exponential' } },
+        { wait: 2600 },
+        { say: `TAP Logarithm
+Only x > 0 drawn. f′(x) = 1/x.
+At x₀ = 1: f = 0, slope 1.` },
+        { click: { button: 'Logarithm' } },
+        { wait: 2800 },
+      ],
+    },
+    'the-x0-slider': {
+      title: 'Moving x₀',
+      script: [
+        { say: `DRAG x₀ → −1.5
+Tangent tilts down.
+f = 2.25, f′ = slope = −3.` },
+        { slide: { range: 0 }, to: -1.5, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG x₀ → 0
+Bottom of the parabola.
+Tangent flat. f′ = 0.` },
+        { slide: { range: 0 }, to: 0, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG x₀ → 2
+Steeper climb.
+f = 4, f′ = slope = 4.` },
+        { slide: { range: 0 }, to: 2, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Exponential, DRAG x₀ → −2
+Curve nearly flat on the left.
+f = slope = 0.1353.` },
+        { click: { button: 'Exponential' } },
+        { slide: { range: 0 }, to: -2, ms: 1200 },
+        { wait: 2800 },
+        { say: `TAP Reset
+x₀ back to 1.
+f = slope = 2.7183.` },
+        { click: { button: 'Reset', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'jump-to-points-of-interest': {
+      title: 'Jump to roots, extrema, inflections',
+      script: [
+        { say: `TAP Sine
+Jump to bar fills: Roots of f,
+Extrema of f, Inflections.` },
+        { click: { button: 'Sine' } },
+        { wait: 2600 },
+        { say: `TAP 1.57 (Extrema of f)
+Top of the wave: f = 1.
+Tangent flat. f′ = 0.` },
+        { click: { button: '1.57', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 0 (Roots of f)
+f = 0, crossing the axis.
+Slope 1: steepest climb.` },
+        { click: { button: '0', exact: true } },
+        { wait: 2600 },
+        { say: `TAP −3.14 (Inflections)
+f′ = −1: bottom of the dashed wave.
+Steepest descent of f.` },
+        { click: { button: '-3.14', exact: true, nth: 1 } },
+        { wait: 2800 },
+        { say: `TAP Cubic, TAP 0 (Inflections)
+Root and inflection at once.
+Tangent flat, f′ = 0.` },
+        { click: { button: 'Cubic' } },
+        { click: { button: '0', exact: true, nth: 1 } },
+        { wait: 2800 },
+      ],
+    },
+    'display-toggles': {
+      title: 'Display, plot size and tabs',
+      script: [
+        { say: `UNCHECK tangent
+Tangent line gone.
+Legend drops it. Cards unchanged.` },
+        { click: { css: 'input[type="checkbox"]', nth: 2 } },
+        { wait: 2600 },
+        { say: `UNCHECK f′(x)
+Dashed derivative curve gone.
+Only f and the link line left.` },
+        { click: { css: 'input[type="checkbox"]', nth: 1 } },
+        { wait: 2600 },
+        { say: `TAP M
+Plot 700 × 550.
+Same curve, taller.` },
+        { click: { button: 'M', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Concepts
+Fixed text: what a derivative is,
+what to look for.` },
+        { click: { button: 'Concepts', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Explanation
+Live reading: Quadratic, x₀ = 1.
+f = 1, f′ = 2, tangent slope 2.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('calculus-derivative'),
       sectionsContent,
       stateUnits,
@@ -1007,7 +1163,22 @@ That contrast is worth holding next to the [exponential](!#the-exponential), whi
   }
 }
 
-export default function DerivativeVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function DerivativeVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionDerivative explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -1030,7 +1201,7 @@ export default function DerivativeVisualizer({relatedTools, seoData, sectionsCon
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'the-function-families'),
+    withDemo(plain('obj2', 'the-function-families')),
     stateRow('obj11', 'the-identity-function', 'identity'),
     stateRow('obj12', 'the-quadratic', 'quadratic'),
     stateRow('obj13', 'the-cubic', 'cubic'),
@@ -1038,10 +1209,11 @@ export default function DerivativeVisualizer({relatedTools, seoData, sectionsCon
     stateRow('obj15', 'cosine', 'cosine'),
     stateRow('obj16', 'the-exponential', 'exponential'),
     stateRow('obj17', 'the-logarithm', 'logarithm'),
-    plain('obj3', 'the-x0-slider'),
-    plain('obj4', 'jump-to-points-of-interest'),
+    withDemo(plain('obj3', 'the-x0-slider')),
+    withDemo(plain('obj4', 'jump-to-points-of-interest')),
     plain('obj5', 'the-at-the-point-card'),
-    plain('obj6', 'display-toggles'),
+    withDemo(plain('obj6', 'display-toggles')),
+    plain('obj18', 'plot-size-applied-strip-and-info-panel'),
     plain('obj7', 'what-is-a-derivative'),
     plain('obj8', 'the-tangent-line'),
     plain('obj9', 'from-f-to-f-prime'),
@@ -1103,6 +1275,10 @@ export default function DerivativeVisualizer({relatedTools, seoData, sectionsCon
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Derivative Visualizer & Tangent Line Tool</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionDerivative explanations={explanations}/>
       <br/>
