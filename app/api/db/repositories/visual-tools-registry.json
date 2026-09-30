@@ -10227,7 +10227,9 @@
         "states": 11,
         "sections": 21,
         "anchors": 33,
-        "orphans": 0
+        "orphans": 0,
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to an existing usage section (8 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in picking-a-base-function, transforming-the-base-function, dragging-x0-the-tangent-point, the-applied-chip-strip-and-visibility-toggles; critical-point and tangent-undefined badges shown live (vertex, sqrt endpoint, abs corner); tool does not write the URL; headless step check 20/20."
       },
       "relatedTerms": [
         {

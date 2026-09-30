@@ -12,6 +12,9 @@ import TangentLine from '../../../../app/components/functions/tangent/TangentLin
 import tangentDiagrams from '../../../../app/components/functions/tangent/tangentLineDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
@@ -492,8 +495,153 @@ Together with [sine](!#tangent-to-sine), this pair is the reason simple harmonic
       '[Learn more about this tangent](!#tangent-to-cosine)',
   };
 
+  const instructions = [
+    'The picker on the left lists ten base functions, from **Identity** to **Cosine**; picking one resets $a$, $k$, $b$, $h$ and moves $x_0$ back to 1. [Learn more about picking a base function](!#picking-a-base-function)',
+    'The four **Parameters** sliders under the picker set $a$, $k$, $b$, $h$ in $a \\cdot f(b(x - h)) + k$; their **Reset** button returns all four to the defaults. [Learn more about transforming the base function](!#transforming-the-base-function)',
+    'The plot draws $f$ in blue and its tangent line in amber; the **S**, **M**, **L** and **XL** buttons set the plot size. [Learn more about the plot panel](!#getting-started-with-the-visualizer)',
+    'Drag the $x_0$ slider in the **Tangent point** card from $-10$ to $10$; a green **critical point** badge marks slope 0, a red **tangent undefined** badge marks corners, vertical tangents and points outside the domain. [Learn more about dragging the tangent point](!#dragging-x0-the-tangent-point)',
+    'The **Tangent line** card prints the slope $m$ and the tangent equation in point-slope and slope-intercept form. [Learn more about the tangent equation card](!#reading-the-tangent-equation-card)',
+    'The **Applied** strip lists $a$, $k$, $b$, $h$, $x_0$, $y_0$ and $m$ in one row. [Learn more about the Applied strip](!#the-applied-chip-strip-and-visibility-toggles)',
+    'The **Show** strip hides or shows $f$ and the tangent line. [Learn more about the visibility toggles](!#the-applied-chip-strip-and-visibility-toggles)',
+    'The info panel has three tabs: **Explanation** reads the current point, **Family** describes the chosen function\'s tangents, **Concepts** covers the theory. [Learn more about the info panel](!#the-info-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real TangentLine tool
+     (opens on Quadratic, x₀ = 1). Ranges in DOM order: 0 a, 1 k, 2 b, 3 h, 4 x₀.
+     Reset nth 0 = Parameters reset, nth 1 = x₀ reset. Picking a family resets a, k, b, h and x₀. */
+  const demos = {
+    'picking-a-base-function': {
+      title: 'Picking a base function',
+      script: [
+        { say: `TAP Cubic
+f = x³. Parameters reset, x₀ = 1.
+m = 3. Tangent y = 3x − 2.` },
+        { click: { button: 'Cubic', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Sine
+y₀ = 0.84, m = 0.54.
+Tangent y = 0.54x + 0.3.` },
+        { click: { button: 'Sine', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Logarithmic
+y₀ = 0, m = 1.
+Tangent y = x − 1.` },
+        { click: { button: 'Logarithmic', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Square root, DRAG x₀ → 0
+Endpoint of the domain. Vertical tangent.
+Red badge: tangent undefined.` },
+        { click: { button: 'Square root', exact: true } },
+        { wait: 500 },
+        { slide: { range: 4 }, to: 0, ms: 1200 },
+        { wait: 2800 },
+        { say: `TAP Absolute, DRAG x₀ → 0
+Corner. Left slope −1, right slope 1.
+Red badge: tangent undefined.` },
+        { click: { button: 'Absolute', exact: true } },
+        { wait: 500 },
+        { slide: { range: 4 }, to: 0, ms: 1200 },
+        { wait: 2800 },
+      ],
+    },
+    'transforming-the-base-function': {
+      title: 'Parameters a, k, b, h',
+      script: [
+        { say: `DRAG a → 2
+f = 2x². Curve twice as tall.
+At x₀ = 1: y₀ = 2, m = 4.` },
+        { slide: { range: 0 }, to: 2, ms: 1300 },
+        { wait: 2600 },
+        { say: `DRAG k → 3
+Curve up 3. y₀ = 5.
+Slope unchanged: m = 4.` },
+        { slide: { range: 1 }, to: 3, ms: 1300 },
+        { wait: 2600 },
+        { say: `DRAG b → 0.5
+Curve twice as wide.
+y₀ = 3.5, m = 1.` },
+        { slide: { range: 2 }, to: 0.5, ms: 1300 },
+        { wait: 2600 },
+        { say: `DRAG h → 1
+Vertex moves to x = 1.
+m = 0. Green badge: critical point.` },
+        { slide: { range: 3 }, to: 1, ms: 1300 },
+        { wait: 2800 },
+        { say: `TAP Reset (Parameters)
+a, k, b, h back to defaults.
+f = x² again. m = 2.` },
+        { click: { button: 'Reset', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'dragging-x0-the-tangent-point': {
+      title: 'Dragging x₀',
+      script: [
+        { say: `DRAG x₀ → 0
+Point at the vertex. m = 0.
+Green badge: critical point. Tangent y = 0.` },
+        { slide: { range: 4 }, to: 0, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG x₀ → −2
+Tangent tilts down. m = −4.
+y = −4x − 4.` },
+        { slide: { range: 4 }, to: -2, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG x₀ → 3
+y₀ = 9, m = 6. Slope = 2x₀.
+y = 6x − 9.` },
+        { slide: { range: 4 }, to: 3, ms: 1600 },
+        { wait: 2600 },
+        { say: `DRAG x₀ → 0.5
+y₀ = 0.25, m = 1.
+y = x − 0.25.` },
+        { slide: { range: 4 }, to: 0.5, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Reset (x₀)
+x₀ back to 1. m = 2.
+Tangent y = 2x − 1.` },
+        { click: { button: 'Reset', exact: true, nth: 1 } },
+        { wait: 2400 },
+      ],
+    },
+    'the-applied-chip-strip-and-visibility-toggles': {
+      title: 'Show strip and info panel',
+      script: [
+        { say: `TAP tangent (Show strip)
+Amber line hidden.
+Blue parabola alone.` },
+        { click: { button: 'tangent' } },
+        { wait: 2400 },
+        { say: `TAP tangent, TAP f
+Tangent back, parabola hidden.
+Amber y = 2x − 1 alone.` },
+        { click: { button: 'tangent' } },
+        { wait: 500 },
+        { click: { button: 'f' } },
+        { wait: 2600 },
+        { say: `TAP Family
+Quadratic: derivative 2x.
+Horizontal rest at the vertex.` },
+        { click: { button: 'Family', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Concepts
+Theory: secant to tangent,
+the two equation forms, when it fails.` },
+        { click: { button: 'Concepts', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Explanation
+Live numbers at x₀ = 1:
+y₀ = 1, m = 2, intercept −1.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('functions-tangent-line'),
       sectionsContent,
       introContent,
@@ -517,17 +665,32 @@ Together with [sine](!#tangent-to-sine), this pair is the reason simple harmonic
 }
 
 
-export default function TangentLineVisualizerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function TangentLineVisualizerPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <TangentLine explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
     { id:'getting-started-with-the-visualizer', title:sectionsContent.obj1.title, link:sectionsContent.obj1.link, content:[sectionsContent.obj1.content] },
-    { id:'picking-a-base-function', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[sectionsContent.obj2.content] },
-    { id:'transforming-the-base-function', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[sectionsContent.obj3.content] },
-    { id:'dragging-x0-the-tangent-point', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[sectionsContent.obj4.content] },
+    { id:'picking-a-base-function', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[demo('picking-a-base-function'), sectionsContent.obj2.content] },
+    { id:'transforming-the-base-function', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[demo('transforming-the-base-function'), sectionsContent.obj3.content] },
+    { id:'dragging-x0-the-tangent-point', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[demo('dragging-x0-the-tangent-point'), sectionsContent.obj4.content] },
     { id:'reading-the-tangent-equation-card', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[sectionsContent.obj5.content] },
-    { id:'the-applied-chip-strip-and-visibility-toggles', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[sectionsContent.obj6.content] },
+    { id:'the-applied-chip-strip-and-visibility-toggles', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[demo('the-applied-chip-strip-and-visibility-toggles'), sectionsContent.obj6.content] },
     { id:'the-info-panel', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[sectionsContent.obj7.content] },
     { id:'what-the-tangent-line-is', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[sectionsContent.obj8.content] },
     { id:'when-the-tangent-fails-to-exist', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link, content:[sectionsContent.obj9.content] },
@@ -598,6 +761,10 @@ export default function TangentLineVisualizerPage({relatedTools, seoData, sectio
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Tangent Line Visualizer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <TangentLine explanations={explanations}/>
       <br/>
