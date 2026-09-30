@@ -30388,7 +30388,9 @@
         "orphans": 0,
         "wiring": "B - explanations prop already present (deep-merge override); page supplies all four note strings from getStaticProps, defaults preserved elsewhere",
         "note": "meaning has no idle key - during free drag the component classifies the live slope into asc/desc/max via classifyBySlope, so the free-drag section carries a unit but no panel entry of its own. The max/min diagrams are frozen at the tightest pair of the two tighten steps, which is where the run ends. Panel text renders through dangerouslySetInnerHTML, so links are raw <a href=\"#slug\">.",
-        "prosefix": "obj5 claimed a symmetric interval about x = 0 gives a slope of exactly -1 and called it the most negative attainable; the true value over [-a, a] is a^2/3 - 1, which approaches -1 only as a shrinks. Corrected in place."
+        "prosefix": "obj5 claimed a symmetric interval about x = 0 gives a slope of exactly -1 and called it the most negative attainable; the true value over [-a, a] is a^2/3 - 1, which approaches -1 only as a shrinks. Corrected in place.",
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5, 4 and 4 steps in the-four-scenarios, the-computation-tab, the-meaning-and-theory-tabs; each scenario step waits out the tool's own 5.0 s / 7.2 s animation; no canvas drags; tool does not write the URL; headless step check 13/13."
       },
       "relatedTools": [
         {
