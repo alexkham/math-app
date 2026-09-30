@@ -14,6 +14,9 @@ import FunctionRange from '../../../../app/components/functions/range/FunctionRa
 import rangeDiagrams from '../../../../app/components/functions/range/functionRangeDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -515,8 +518,151 @@ Shift $k$ and the puncture rides to $y = k$: every transformed reciprocal misses
       '[Learn more about the reciprocal](!#the-reciprocal-and-its-missing-output)',
   };
 
+  const instructions = [
+    'The picker on the left lists eleven functions grouped by the shape of their range: all reals, bounded below, bounded between $-1$ and $1$, and the **Reciprocal** with one missing output. Tapping one switches the function and resets the parameters. [Learn more about picking a function](!#picking-a-function)',
+    'The four **Parameters** sliders set $a$, $k$, $b$ and $h$ in $g(x) = a \\cdot f(b(x - h)) + k$; only $a$ and $k$ carry the **affects range** badge, and **Reset** restores the defaults. [Learn more about why only a and k change the range](!#why-only-a-and-k-change-the-range)',
+    'The **Appearance** swatch labelled **Range color** recolours the band, the range card and the achievable marks; its **Reset** restores the default colour. [Learn more about the highlight color](!#customizing-the-highlight-color)',
+    'The **S**, **M**, **L** and **XL** buttons set the height of the plot. [Learn more about the plot panel](!#getting-started-with-the-visualizer)',
+    'The range is drawn twice: as a band on the y-axis of the plot and as a bar on the number line below it, with open and closed endpoints and a red × at a missing output. [Learn more about the y-axis highlight and range bar](!#reading-the-y-axis-highlight-and-range-bar)',
+    'The **Range** card prints the current range in interval form, and the **Applied** strip lists $a$, $k$, $b$, $h$ with the note **a, k affect range**. [Learn more about the range card and applied chips](!#the-range-card-and-applied-chips)',
+    'The **Test point** slider moves a candidate output from $-10$ to $10$; the card reports **achievable** or **not achievable**, and its **Reset** returns the value to $1$. [Learn more about the test point slider](!#probing-with-the-test-point-slider)',
+    'The info panel has three tabs: **Explanation** gives the base and current range, **Family** describes the chosen function, and **Concepts** explains what a range is. [Learn more about the info panel](!#getting-started-with-the-visualizer)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionRange tool
+     (opens on Quadratic, test point 1). Range inputs in DOM order:
+     0 = a, 1 = k, 2 = b, 3 = h, 4 = test point. Reset buttons: nth 0 = Parameters,
+     nth 1 = Appearance, nth 2 = Test point. Picking a function resets a, k, b, h and
+     the test point. The range card labels its variable x (reported); the callouts
+     speak of outputs instead. */
+  const demos = {
+    'picking-a-function': {
+      title: 'Picking a function',
+      script: [
+        { say: `TAP Sine
+Outputs from −1 to 1.
+Band capped at both ends.` },
+        { click: { button: 'Sine', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Exponential
+Outputs > 0.
+Open floor: 0 never reached.` },
+        { click: { button: 'Exponential', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Reciprocal
+Every output except 0.
+Red × marks the missing value.` },
+        { click: { button: 'Reciprocal', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Logarithmic
+Range: all reals.
+Domain is restricted, range is not.` },
+        { click: { button: 'Logarithmic', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Absolute
+Outputs ≥ 0.
+Floor reached at the corner.` },
+        { click: { button: 'Absolute', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'why-only-a-and-k-change-the-range': {
+      title: 'Only a and k move the range',
+      script: [
+        { say: `DRAG h → 2
+Parabola slides right.
+Range unchanged: outputs ≥ 0.` },
+        { slide: { range: 3 }, to: 2, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG b → −2
+Narrower, mirrored.
+Range still ≥ 0.` },
+        { slide: { range: 2 }, to: -2, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG k → −3
+Floor drops 3 units.
+Outputs ≥ −3.` },
+        { slide: { range: 1 }, to: -3, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG a → −1
+Flips across the k line.
+Outputs ≤ −3. Test value 1 not achievable.` },
+        { slide: { range: 0 }, to: -1, ms: 1400 },
+        { wait: 2800 },
+        { say: `TAP Reset
+a, k, b, h back to defaults.
+g(x) = x², outputs ≥ 0.` },
+        { click: { button: 'Reset', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'probing-with-the-test-point-slider': {
+      title: 'Probing with the test point',
+      script: [
+        { say: `DRAG test point → −2
+✗ not achievable.
+No x gives g(x) = −2.` },
+        { slide: { range: 4 }, to: -2, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG test point → 4
+✓ achievable.
+Dashed line crosses the parabola.` },
+        { slide: { range: 4 }, to: 4, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Sine, DRAG test point → 2
+✗ not achievable.
+Sine tops out at 1.` },
+        { click: { button: 'Sine', exact: true } },
+        { slide: { range: 4 }, to: 2, ms: 1200 },
+        { wait: 2800 },
+        { say: `DRAG a → 2
+Outputs now −2 to 2.
+Test value 2 achievable.` },
+        { slide: { range: 0 }, to: 2, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Reciprocal, DRAG test point → 0
+✗ not achievable.
+0 is the one missing output.` },
+        { click: { button: 'Reciprocal', exact: true } },
+        { slide: { range: 4 }, to: 0, ms: 1200 },
+        { wait: 2800 },
+      ],
+    },
+    'getting-started-with-the-visualizer': {
+      title: 'Plot size and info panel',
+      script: [
+        { say: `TAP L
+Taller plot.
+Same curve, same range band.` },
+        { click: { button: 'L', exact: true } },
+        { wait: 2400 },
+        { say: `TAP S
+Compact plot.` },
+        { click: { button: 'S', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Family
+Quadratic: range [0, ∞),
+0 attained at the vertex.` },
+        { click: { button: 'Family', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Concepts
+What the range is.
+Which functions are bounded.` },
+        { click: { button: 'Concepts', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Explanation
+Base range, current range,
+how a and k move it.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('functions-range'),
       sectionsContent,
       introContent,
@@ -540,16 +686,31 @@ Shift $k$ and the puncture rides to $y = k$: every transformed reciprocal misses
 }
 
 
-export default function RangeOfFunctionPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function RangeOfFunctionPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionRange explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
-    { id:'getting-started-with-the-visualizer',          title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'picking-a-function',                           title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
-    { id:'why-only-a-and-k-change-the-range',            title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
+    { id:'getting-started-with-the-visualizer',          title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[demo('getting-started-with-the-visualizer'), sectionsContent.obj1.content] },
+    { id:'picking-a-function',                           title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[demo('picking-a-function'), sectionsContent.obj2.content] },
+    { id:'why-only-a-and-k-change-the-range',            title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[demo('why-only-a-and-k-change-the-range'), sectionsContent.obj3.content] },
     { id:'reading-the-y-axis-highlight-and-range-bar',   title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
-    { id:'probing-with-the-test-point-slider',           title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
+    { id:'probing-with-the-test-point-slider',           title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[demo('probing-with-the-test-point-slider'), sectionsContent.obj5.content] },
     { id:'the-range-card-and-applied-chips',             title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
     { id:'customizing-the-highlight-color',              title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
     { id:'what-is-the-range-of-a-function',              title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
@@ -624,6 +785,10 @@ export default function RangeOfFunctionPage({relatedTools, seoData, sectionsCont
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Range of a Function</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionRange explanations={explanations}/>
       <br/>
