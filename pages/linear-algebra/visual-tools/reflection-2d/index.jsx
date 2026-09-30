@@ -9,6 +9,9 @@ import { SCENARIOS as RF_SCENARIOS } from '../../../../app/components/linear-alg
 import reflectionDiagrams, { groupOf, statsFor } from '../../../../app/components/linear-algebra copy/r2-visualizers/reflection/reflectionDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -249,7 +252,23 @@ That midpoint is the projection $P\\mathbf{v}$, and it is exactly where the flat
 It also explains why the determinant changes sign along the way. The determinant of $M(t)$ runs continuously from $+1$ to $-1$, so somewhere it is $0$, and that somewhere is the projection: the one moment when the plane is flat and the map is not invertible. No path of invertible maps connects a reflection to the identity.`,
       link: '',
     },
-    obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+    obj15: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj16: {
+      title: `Display Layer Toggles`,
+      content: `The chips between the explanation card and the matrix card switch the layers of the canvas on and off. They hide drawings only: $\\mathbf{v}$, $R\\mathbf{v}$, the mirror angle, the animation and every number in the live card stay as they are.
+
+&bull; **grid** &mdash; the background grid, which morphs with $M(t)$ during the animation
+&bull; **mirror** &mdash; the blue mirror line through the origin, with its label
+&bull; **perp** &mdash; the dashed segment from $\\mathbf{v}$ to $R\\mathbf{v}$, perpendicular to the mirror, with its right-angle mark
+&bull; **midpoint** &mdash; the purple dot halfway between $\\mathbf{v}$ and $R\\mathbf{v}$, labelled $P\\mathbf{v}$: the projection onto the mirror
+&bull; **unit sq** &mdash; the unit square under $M(t)$, filled blue, grey or purple by the sign of the determinant
+&bull; **labels** &mdash; the names on the vectors, the midpoint and the mirror
+
+With **grid** and **unit sq** off, only the geometry of one reflection is left: the mirror, $\\mathbf{v}$, $R\\mathbf{v}$, the perpendicular joining them and its midpoint on the line. That is the picture behind $R = 2P - I$, explained in [what reflection is](!#what-reflection-is).`,
+      before: ``,
+      after: ``,
+      link: '',
+    }
   }
 
 
@@ -418,8 +437,114 @@ It also explains why the determinant changes sign along the way. The determinant
   }
 
 
+  const instructions = [
+    'The **Reflect across** panel on the left loads seven mirrors in three groups, **Coord axes**, **Diagonals** and **Custom angle**; each replays the morph and the explanation card describes it. [Learn more about the preset scenarios](!#preset-scenarios)',
+    'The canvas shows the blue mirror, the orange vector $\\mathbf{v}$, its reflection $R\\mathbf{v}$ in cyan, the dashed perpendicular joining them and the purple midpoint $P\\mathbf{v}$ on the mirror. [Learn more about getting started](!#getting-started)',
+    'Drag the tip of $\\mathbf{v}$; $R\\mathbf{v}$ follows as its mirror image, equal to $\\mathbf{v}$ on the mirror and to $-\\mathbf{v}$ perpendicular to it. [Learn more about dragging the vector](!#dragging-the-vector)',
+    'The **Morph I → R** card blends the grid and unit square from the identity into $R$, through the projection at $t = 0.5$: **Play** / **Pause**, step buttons, **Reset** and a $t$ slider. [Learn more about the morph animation](!#the-morph-animation)',
+    'The layer chips **grid**, **mirror**, **perp**, **midpoint**, **unit sq** and **labels** show or hide each layer of the canvas. [Learn more about the layer toggles](!#display-layer-toggles)',
+    'The **Reflection matrix** card shows the entries of $R$; its $\\theta$ slider turns the mirror from $0°$ to $180°$. [Learn more about the matrix card and the angle slider](!#the-matrix-card-and-the-angle-slider)',
+    'The **Live** card (04) gives $|\\mathbf{v}|$, $|R\\mathbf{v}|$, $|\\mathbf{v} - R\\mathbf{v}|$, the angle between $\\mathbf{v}$ and the mirror, $\\det R$ and $\\operatorname{tr} R$. [Learn more about the live card](!#the-live-card)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real Reflection tool
+     (opens on y = x, v = (1.5, 2); every preset replays the morph I -> R).
+     Handle: circle[data-handle="v"]; drags in screen px at scale 0.6
+     (desktop layout: 31 px per unit), each followed by a click on the
+     handle so instant replay sees the new position. Ranges: 0 = t,
+     1 = theta. Chips: label.rf-chip (0 grid, 1 mirror, 2 perp, 3 midpoint,
+     4 unit sq, 5 labels). */
+  const demos = {
+    'dragging-the-vector': {
+      title: 'Mirror images by hand',
+      script: [
+        { say: `DRAG v → (2, 2)
+Onto the mirror y = x.
+Rv = v. Perpendicular vanishes.` },
+        { drag: 'circle[data-handle="v"]', dx: 15.5, dy: -0.31, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2600 },
+        { say: `DRAG v → (−1, 1)
+Perpendicular to the mirror.
+Rv = (1, −1) = −v: eigenvalue −1.` },
+        { drag: 'circle[data-handle="v"]', dx: -92.69, dy: 31.0, ms: 1500 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2800 },
+        { say: `DRAG v → (0.5, 2.5)
+Rv = (2.5, 0.5). Midpoint Pv = (1.5, 1.5).
+|v| = |Rv| = 2.55. |v − Rv| = 2.83.` },
+        { drag: 'circle[data-handle="v"]', dx: 46.5, dy: -46.81, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 3000 },
+        { say: `TAP y-axis
+Same v, new mirror.
+Rv = (−0.5, 2.5): x-coordinate negated.` },
+        { click: { button: 'y-axis' } },
+        { wait: 2800 },
+      ],
+    },
+    'the-morph-animation': {
+      title: 'Through the mirror at t = 0.5',
+      script: [
+        { say: `TAP x-axis
+R = [1 0; 0 −1]. Rv = (1.5, −2).
+Morph replays.` },
+        { click: { button: 'x-axis' } },
+        { wait: 2800 },
+        { say: `TAP Reset
+t = 0: ordinary grid.
+Unit square filled blue: det > 0.` },
+        { click: 'button[title="Reset"]' },
+        { wait: 2200 },
+        { say: `DRAG t → 0.5
+M(t) = P: plane flattened onto the mirror.
+Square grey: det = 0.` },
+        { slide: { range: 0 }, to: 0.5, ms: 1600 },
+        { wait: 2600 },
+        { say: `TAP Step forward
+t = 0.6: through the mirror.
+Square purple: det < 0.` },
+        { click: 'button[title="Step forward"]' },
+        { wait: 2400 },
+        { say: `TAP Play
+t = 1: the square, flipped over.
+det R = −1.` },
+        { click: { button: 'Play', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-matrix-card-and-the-angle-slider': {
+      title: 'The doubled angle',
+      script: [
+        { say: `TAP 30° line
+R = [0.5 0.87; 0.87 −0.5]: cos 60°, sin 60°.
+det R = −1, trace R = 0.` },
+        { click: { button: '30° line' } },
+        { wait: 2800 },
+        { say: `DRAG θ → 90°
+2θ = 180°: R = [−1 0; 0 1].
+The y-axis mirror. Rv = (−1.5, 2).` },
+        { slide: { range: 1 }, to: 90, ms: 1600 },
+        { wait: 2800 },
+        { say: `DRAG θ → 135°
+Mirror y = −x: R = [0 −1; −1 0].
+Rv = (−2, −1.5).` },
+        { slide: { range: 1 }, to: 135, ms: 1400 },
+        { wait: 2800 },
+        { say: `UNCHECK grid, unit sq
+Mirror, v, Rv, perp, midpoint only.
+det R stays −1.` },
+        { click: { css: 'label.rf-chip', nth: 0 } },
+        { click: { css: 'label.rf-chip', nth: 4 } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-reflection-2d'),
       sectionsContent,
       stateUnits,
@@ -442,7 +567,22 @@ It also explains why the determinant changes sign along the way. The determinant
   }
 }
 
-export default function Reflection2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+export default function Reflection2DPage({ instructions, demos,seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <Reflection explanationOverride={explanationOverride}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -465,14 +605,15 @@ export default function Reflection2DPage({seoData, sectionsContent, stateUnits, 
   const genericSections=[
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'dragging-the-vector'),
-    plain('obj3', 'the-morph-animation'),
+    withDemo(plain('obj2', 'dragging-the-vector')),
+    withDemo(plain('obj3', 'the-morph-animation')),
     plain('obj6', 'preset-scenarios'),
     stateRow('obj11', 'reflection-across-a-coordinate-axis', 'axes'),
     stateRow('obj12', 'reflection-across-a-diagonal', 'diagonals'),
     stateRow('obj13', 'reflection-across-a-custom-angle', 'custom'),
     stateRow('obj14', 'halfway-through-the-morph', 'halfway'),
-    plain('obj4', 'the-matrix-card-and-the-angle-slider'),
+    plain('obj16', 'display-layer-toggles'),
+    withDemo(plain('obj4', 'the-matrix-card-and-the-angle-slider')),
     plain('obj5', 'the-live-card'),
     plain('obj7', 'what-reflection-is'),
     plain('obj8', 'composing-reflections'),
@@ -532,6 +673,10 @@ export default function Reflection2DPage({seoData, sectionsContent, stateUnits, 
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Reflection across a Line</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
    <Reflection explanationOverride={explanationOverride}/>

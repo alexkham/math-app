@@ -40288,7 +40288,9 @@
         "wiring": "A for the explanations - LinearTransformations already accepts explanationOverride={byScenario:{...}}, and pickScenarioCopy REPLACES rather than merges, so each override entry spreads the tool's own SCENARIOS entry and appends the anchor to `watch`. The ONLY component change is one name (SVG_STYLE_CSS) appended to the export list that already existed at the bottom of the file.",
         "note": "FIRST r2-visualizers tool. These four components do NOT use 2DCore - each is self-contained with its own SVGRender string builders, scoped CSS and geometry. That means NO renderer port is needed: a frozen still is the tool's own SVG output, wrapped with class=lt5-root, the stylesheet inlined in a <style>, and the two arrow <marker> defs reproduced. All states frozen at t = 1 with the component's DEFAULT_LAYERS.",
         "stateChoice": "The tool has 12 scenarios in 3 rank groups (full x8, rank1 x3, zero x1). Sections follow the groups - which is how the page's own 'Preset Scenarios - Three Rank Categories' section already frames them - plus an identity section for the t=0 baseline. All 12 scenarios still get a panel note; each points at its group's section.",
-        "lesson": "Two traps on these r2 components. (1) They already have a trailing `export { ... }` list - adding `export const` prefixes causes 'Duplicate export'. Check that list first. (2) eslint with a bare config does NOT resolve imports, so importing a name the component does not export passes the parse check and fails silently at runtime - here SVG_STYLE_CSS would have injected the literal text 'undefined' into the frozen <style>. Verify every imported name against the component's export set explicitly."
+        "lesson": "Two traps on these r2 components. (1) They already have a trailing `export { ... }` list - adding `export const` prefixes causes 'Duplicate export'. Check that list first. (2) eslint with a bare config does NOT resolve imports, so importing a name the component does not export passes the parse check and fails silently at runtime - here SVG_STYLE_CSS would have injected the literal text 'undefined' into the frozen <style>. Verify every imported name against the component's export set explicitly.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in the-animation-slider, preset-scenarios, editing-the-matrix; tool does not write the URL; headless step check 14/14."
       },
       "relatedTools": [
         {
@@ -41504,7 +41506,9 @@
         "verification": "STATIC ONLY - eslint parse; line1-static-check.py under-reports (computed anchors) so the runtime slug set was resolved separately and checked against the section ids - 0 orphans. Every imported name was verified against the component's export set.",
         "wiring": "A for the explanations - EigenVectors already accepts explanationOverride={byPreset:{...}}, and ExplanationCard REPLACES rather than merges, so each override spreads the tool's own SCENARIOS entry and appends the anchor to `body`. The ONLY component change is one name (COMPONENT_CSS) appended to the export list that already existed at the bottom of the file.",
         "note": "States are the tool's four eigen categories (distinct x4, repeated x2, defective x2, complex x3), matching the page's own 'Preset Scenarios - Four Categories' framing. All 11 scenarios get a panel note pointing at their category's section. Frozen with the probe vector at the component's initial v = [2, 1], using the tool's own Math2D.alignment so the alignment state matches the live canvas.",
-        "cssHandling": "Unlike LinearTransformations (small SVG-only stylesheet), this component has one 16 kB COMPONENT_CSS for the whole UI. The diagrams module's svgCssFor() keeps only rules whose selectors mention a class the generated markup actually contains, plus the .ev-root block that declares the CSS custom properties those rules use. Class list is read off the markup, so it survives renderer changes."
+        "cssHandling": "Unlike LinearTransformations (small SVG-only stylesheet), this component has one 16 kB COMPONENT_CSS for the whole UI. The diagrams module's svgCssFor() keeps only rules whose selectors mention a class the generated markup actually contains, plus the .ev-root block that declares the CSS custom properties those rules use. Class list is read off the markup, so it survives renderer changes.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in dragging-v-and-watching-av, preset-scenarios, the-snap-button; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
@@ -42067,7 +42071,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - eslint parse; computed anchors resolved separately and checked against the section ids (0 orphans); every imported name verified against the component's export set.",
         "wiring": "A for the explanations - explanationOverride={byPreset:{...}} already existed and REPLACES rather than merges, so each override spreads the tool's own SCENARIOS entry and appends the anchor to `body`. Only component change: COMPONENT_CSS appended to the pre-existing export list.",
-        "note": "DUAL CANVAS. This tool draws a domain canvas (kernel + v) and a codomain canvas (image + Av) side by side, so each frozen state composes BOTH into one SVG with a divider and per-side captions - a still of one canvas alone would miss the point. States are the three rank categories (full x4, rank1 x5, zero x1), matching the page's own framing. Frozen at the canvases' default v = [1.5, 1]; the trail and swarm layers are off in the stills since they depend on drag history."
+        "note": "DUAL CANVAS. This tool draws a domain canvas (kernel + v) and a codomain canvas (image + Av) side by side, so each frozen state composes BOTH into one SVG with a divider and per-side captions - a still of one canvas alone would miss the point. States are the three rank categories (full x4, rank1 x5, zero x1), matching the page's own framing. Frozen at the canvases' default v = [1.5, 1]; the trail and swarm layers are off in the stills since they depend on drag history.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 8 instructions each ending in an anchor link to an existing usage section (8 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in dragging-v-and-the-kernel, preset-scenarios, editing-the-matrix, sweep-playback; tool does not write the URL; headless step check 19/19."
       },
       "relatedTools": [
         {
@@ -43029,7 +43035,9 @@
         "verification": "STATIC ONLY - eslint parse; computed anchors resolved separately vs the section ids (0 orphans); every import checked against BOTH 2DCore's and ChangeBasis's export sets.",
         "wiring": "A for the explanations - 2DCore's ExplanationCard already takes an override with a byPreset map and REPLACES, so each override spreads the tool's own SCENARIOS entry and appends the anchor to `body`. Only component change: `export` added to the LIVE TOOL_CSS declaration.",
         "note": "The ONLY r2 tool that actually builds on 2DCore - the other three are self-contained. Its live copy imports Math2D/SVGRender/projection/DEFAULT_GEOM from there and already exports SCENARIOS, CB_GEOM and DEFAULT_LAYERS. Its two local builders (decompositionSVG, arrowSVG) are NOT exported and are duplicated across five commented-out earlier copies, so they were ported verbatim into the diagrams module rather than surgically exported. States are the four basis categories (natural x4, nonorth x3, special x2, degenerate x1); coordinates quoted in the prose come from Math2D.coordsInBasis at the canvas default v = [2.5, 1.5].",
-        "hazard": "ChangeBasis.jsx is 3914 lines and contains FIVE commented-out earlier copies of the whole component. Every declaration name appears six times. All edits must be anchored on live code and asserted unique - the TOOL_CSS export was applied by locating the single line starting with `const TOOL_CSS = ` at column 0."
+        "hazard": "ChangeBasis.jsx is 3914 lines and contains FIVE commented-out earlier copies of the whole component. Every declaration name appears six times. All edits must be anchored on live code and asserted unique - the TOOL_CSS export was applied by locating the single line starting with `const TOOL_CSS = ` at column 0.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in dragging-the-basis-vectors, moving-the-vector-v, preset-scenarios; SVG handle drags; tool does not write the URL; headless step check 13/13."
       },
       "relatedTools": [
         {
@@ -65817,7 +65825,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "A - explanationOverride={byPreset}, as for span-independence-2d. Component NOT modified.",
-        "note": "PAGE FOR AN ORPHANED COMPONENT. Basename collides with matrix/projectionDiagrams.js (vector-projection); different directories."
+        "note": "PAGE FOR AN ORPHANED COMPONENT. Basename collides with matrix/projectionDiagrams.js (vector-projection); different directories.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in dragging-the-vector, the-morph-animation, the-matrix-card-and-the-angle-slider; tool does not write the URL; headless step check 13/13."
       },
       "relatedTools": [
         {
@@ -66289,7 +66299,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "A - explanationOverride={byPreset}. Component NOT modified.",
-        "note": "PAGE FOR AN ORPHANED COMPONENT. The 'halfway' still is the I -> R morph frozen at t = 0.5, where the map equals the projection P."
+        "note": "PAGE FOR AN ORPHANED COMPONENT. The 'halfway' still is the I -> R morph frozen at t = 0.5, where the map equals the projection P.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in dragging-the-vector, the-morph-animation, the-matrix-card-and-the-angle-slider; tool does not write the URL; headless step check 13/13."
       },
       "relatedTools": [
         {
@@ -66791,7 +66803,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product.",
         "wiring": "A - explanationOverride={byPreset}. Component NOT modified.",
-        "note": "PAGE FOR AN ORPHANED COMPONENT."
+        "note": "PAGE FOR AN ORPHANED COMPONENT.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in getting-started, the-two-phase-animation, preset-scenarios; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
@@ -69722,7 +69736,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - see vector-cross-product. This is NEW 2D component code (own animation loop, drag handling) and is the least verified file of the batch.",
         "wiring": "NEW 2D COMPONENT, self-contained (own Math2D, SVGRender, hooks, ce- CSS) in the r2-visualizers convention; explanationOverride={byPreset} as on the other 2D pages; exports composeScene so the diagrams module reuses the canvas composition exactly.",
-        "note": "A = P C P^-1 with C = r R(theta), P = [Re v | Im v] for lambda = a - bi. The continuous spiral is A^k x0 for real k via P r^k R(k theta) P^-1."
+        "note": "A = P C P^-1 with C = r R(theta), P = [Re v | Im v] for lambda = a - bi. The continuous spiral is A^k x0 for real k via P r^k R(k theta) P^-1.",
+        "howToMesh": "2026-09-29 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in dragging-the-start-vector, the-orbit-animation, preset-scenarios, the-matrix-card; tool does not write the URL; headless step check 19/19."
       },
       "relatedTools": [
         {
