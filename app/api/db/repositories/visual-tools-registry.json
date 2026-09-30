@@ -8417,7 +8417,9 @@
         "states": 11,
         "sections": 22,
         "anchors": 40,
-        "orphans": 0
+        "orphans": 0,
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to an existing usage section (8 links, 0 orphans); usage text updated for Reset, S/M/L/XL and the fourth info tab (Family).",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in picking-a-base-function, transforming-the-function, the-applied-chip-strip-and-show-toggles, the-info-panel-three-tabs; sliders a/k/h show the vertical/horizontal swap on the quadratic branch; tool does not write the URL; headless step check 19/19."
       },
       "relatedTerms": [
         {
