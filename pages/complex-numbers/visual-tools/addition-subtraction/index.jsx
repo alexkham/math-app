@@ -11,6 +11,9 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import complexAddSubDiagrams from '../../../../app/components/calculators/complex-numbers/complexAddSubDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -259,6 +262,20 @@ The lesson of the preset: subtraction measures separation, not size. Two modest 
       link:'',
     },
 
+    obj15:{
+      title:`The Sum, Difference and Key Ideas Panels`,
+      content:`Below the two input boxes, the right panel reports the results. The **z₁ + z₂ — Sum** card (teal) gives the sum and its modulus $|z_1 + z_2|$; the **z₁ − z₂ — Difference** card (purple) gives the difference and $|z_1 - z_2|$, labelled as the distance between $z_1$ and $z_2$. Results are rounded to one decimal place.
+
+The **Show** toggle decides which cards appear: **Both** keeps the two, **Addition** hides the Difference card, and **Subtraction** hides the Sum card together with the [triangle inequality](!#the-triangle-inequality) panel.
+
+A typed value outside $-5$ to $5$ is clamped to the limit, and a short note, "Values are limited to ±5. Input was clamped.", shows above the cards for a moment.
+
+The **Key Ideas** panel at the bottom holds five fixed points: component-wise addition, the parallelogram rule, subtraction as the vector from $z_2$ to $z_1$, the identity $z_1 - z_2 = z_1 + (-z_2)$, and the triangle inequality. Under them comes a note on the current **Show** mode. When the inputs match the [mirror pair](!#the-mirror-pair-preset), the [axis pair](!#the-axis-pair-preset), the [conjugate pair](!#conjugate-pairs-in-addition-and-subtraction) or the [mixed-signs pair](!#the-mixed-signs-preset), a note on that pair is added. The three lines of working live in the [Step-by-Step panel](!#reading-the-step-by-step-panel).`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
   }
 
 
@@ -404,8 +421,141 @@ The lesson of the preset: subtraction measures separation, not size. Two modest 
     mixed: 'Opposite quadrants: the sum cancels down while the difference outgrows both inputs. [Learn more about the mixed-signs pair](!#the-mixed-signs-preset) · [Getting started](!#getting-started-drag-two-points)',
   };
 
+  const instructions = [
+    'Drag $z_1$ (navy) or $z_2$ (orange) on the plane, or type **Re** and **Im** values in the right panel; values run from $-5$ to $5$ in steps of $0.1$. [Learn more about placing the points](!#getting-started-drag-two-points)',
+    'The preset buttons under the plane load five pairs, including the **Conjugate pair**; **Random** picks two arbitrary points. [Learn more about the presets](!#getting-started-drag-two-points)',
+    '**Show: Both** draws the sum and the difference together, as the two diagonals of one parallelogram. [Learn more about Both mode](!#both-mode-comparing-addition-and-subtraction)',
+    '**Show: Addition** keeps the green sum vector, the two dashed ghost vectors and the shaded parallelogram. [Learn more about the parallelogram rule](!#the-parallelogram-rule-for-addition)',
+    '**Show: Subtraction** keeps the purple difference vector, the dashed line from $z_2$ to $z_1$ and the faint $-z_2$. [Learn more about the difference vector](!#subtraction-and-the-difference-vector)',
+    'The **Sum** and **Difference** cards give each result with its modulus; the **Key Ideas** panel adds notes on the mode and on the preset pair. [Learn more about the result panels](!#the-sum-difference-and-key-ideas-panels)',
+    'The **Step-by-Step** panel writes each operation in three lines: the expression, the component-wise grouping, the result. [Learn more about the Step-by-Step panel](!#reading-the-step-by-step-panel)',
+    'With addition visible, the **Triangle Inequality** panel checks $|z_1 + z_2| \\leq |z_1| + |z_2|$ for your values. [Learn more about the triangle inequality](!#the-triangle-inequality)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real ComplexAdditionSubtractionVisualizer
+     (opens on (3+i) & (1+3i), Show: Both). Number inputs input[type="number"] nth 0..3 =
+     z1 Re, z1 Im, z2 Re, z2 Im. Presets keep the Show mode. The drag points use
+     setPointerCapture, so the demos use presets and typed values instead of drags. */
+  const demos = {
+    'getting-started-drag-two-points': {
+      title: 'The presets',
+      script: [
+        { say: `TAP (2+2i) & (−2+2i)
+Sum 4i: straight up.
+Difference 4: straight right.`, at: 'tl' },
+        { click: { button: '(2+2i) & (−2+2i)', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 4 & 3i
+One point per axis. Rectangle.
+Sum 4 + 3i. |z₁+z₂| = 5.`, at: 'tl' },
+        { click: { button: '4 & 3i', exact: true } },
+        { wait: 2600 },
+        { say: `TAP (−1+3i) & (2−i)
+Opposite quadrants.
+Sum shrinks to 1 + 2i.
+Difference −3 + 4i, length 5.`, at: 'tl' },
+        { click: { button: '(−1+3i) & (2−i)', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Conjugate pair
+Sum 6: past the ±5 edge.
+Dashed teal ray points to it.
+Difference 4i.`, at: 'tl' },
+        { click: { button: 'Conjugate pair', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-parallelogram-rule-for-addition': {
+      title: 'Show: Addition, Subtraction, Both',
+      script: [
+        { say: `TAP Addition
+Purple gone. Green sum 4 + 4i.
+Dashed ghosts close the parallelogram.`, at: 'tl' },
+        { click: { button: 'Addition', exact: true } },
+        { wait: 2800 },
+        { say: `TAP 4 & 3i
+Parallelogram → rectangle.
+Triangle Inequality: 5 ≤ 4 + 3 = 7.`, at: 'tl' },
+        { click: { button: '4 & 3i', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Subtraction
+Purple z₁ − z₂ = 4 − 3i.
+Dashed line z₂ → z₁. Faint −z₂.`, at: 'tl' },
+        { click: { button: 'Subtraction', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Conjugate pair
+Difference 4i: vertical.
+|z₁ − z₂| = 4 = distance between points.`, at: 'tl' },
+        { click: { button: 'Conjugate pair', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Both
+Sum 6 and difference 4i together:
+the two diagonals of one parallelogram.`, at: 'tl' },
+        { click: { button: 'Both', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'reading-the-step-by-step-panel': {
+      title: 'Step-by-Step lines',
+      script: [
+        { say: `TYPE z₁ Re = −2
+Addition: (−2 + 1) + (1 + 3)i = −1 + 4i.
+Subtraction: (−2 − 1) + (1 − 3)i = −3 − 2i.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '-2' },
+        { wait: 3000 },
+        { say: `TYPE z₂ Im = −1.5
+Imaginary parts: 1 + (−1.5) and 1 − (−1.5).
+Sum −1 − 0.5i. Difference −3 + 2.5i.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: '-1.5' },
+        { wait: 3000 },
+        { say: `TAP Subtraction
+Only the subtraction lines remain.
+Sum card and inequality hidden.`, at: 'bl' },
+        { click: { button: 'Subtraction', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Addition
+Only the addition lines.
+Triangle Inequality back: 1.1 ≤ 2.2 + 1.8.`, at: 'bl' },
+        { click: { button: 'Addition', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-triangle-inequality': {
+      title: 'When the inequality is tight',
+      script: [
+        { say: `TYPE z₁ = 3, z₂ = 2
+Both on the positive real axis.
+5 ≤ 3 + 2 = 5. Equality.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '0' },
+        { wait: 300 },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '2' },
+        { wait: 300 },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: '0' },
+        { wait: 2800 },
+        { say: `TYPE z₂ Im = 2
+z₂ = 2 + 2i turns away from z₁.
+5.4 ≤ 3 + 2.8 = 5.8. Gap opens.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: '2' },
+        { wait: 2800 },
+        { say: `TYPE z₂ Re = 0
+z₂ = 2i, perpendicular.
+3.6 ≤ 3 + 2 = 5.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0' },
+        { wait: 2800 },
+        { say: `TYPE z₂ = −2
+Opposite direction.
+Sum 1. 1 ≤ 3 + 2 = 5. Widest gap.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '-2' },
+        { wait: 300 },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: '0' },
+        { wait: 2800 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('addition-subtraction'),
          sectionsContent,
          introContent,
@@ -428,7 +578,22 @@ The lesson of the preset: subtraction measures separation, not size. Two modest 
     }
    }
 
-export default function PageTemplate({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PageTemplate({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ComplexAdditionSubtractionVisualizer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
     
   const genericSections=[
@@ -437,6 +602,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('getting-started-drag-two-points'),
           sectionsContent.obj1.content,
         ]
     },
@@ -445,6 +611,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
+          demo('the-parallelogram-rule-for-addition'),
           sectionsContent.obj2.content,
           <div key='u-add' dangerouslySetInnerHTML={{ __html: stateUnits.add }} />,
           sectionsContent.obj2.after,
@@ -513,6 +680,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
+          demo('reading-the-step-by-step-panel'),
           sectionsContent.obj6.content,
         ]
     },
@@ -521,7 +689,16 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
+          demo('the-triangle-inequality'),
           sectionsContent.obj7.content,
+        ]
+    },
+    {
+        id:'the-sum-difference-and-key-ideas-panels',
+        title:sectionsContent.obj15.title,
+        link:sectionsContent.obj15.link,
+        content:[
+          sectionsContent.obj15.content,
         ]
     },
     {
@@ -618,6 +795,10 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Addition /Subtraction Visualizer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <SiblingsNav maxWidth='100%'>
   <ComplexAdditionSubtractionVisualizer explanations={explanations}/>
