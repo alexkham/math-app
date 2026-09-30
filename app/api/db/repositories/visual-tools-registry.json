@@ -32857,7 +32857,9 @@
         "units": 4,
         "verification": "STATIC ONLY - eslint parse of page, component and diagrams module. Not yet rendered; pending the end-of-section next build.",
         "wiring": "C - component had no explanations prop; added additively as `explanations = null`, keyed by method, appended to the InfoPanel explanation tab only when supplied",
-        "note": "States are the four sampling methods on the component's own defaults (quadratic, a=0, b=3, n=8). makeStripFn/riemannSum/trueIntegral/autoViewBounds ported verbatim, so the quoted sums are the tool's: left 7.3828, right 10.7578, mid 8.9648, trap 9.0703 against a true integral of 9. Strip function is a step function, so these diagrams override sampling to 600 to keep the risers square."
+        "note": "States are the four sampling methods on the component's own defaults (quadratic, a=0, b=3, n=8). makeStripFn/riemannSum/trueIntegral/autoViewBounds ported verbatim, so the quoted sums are the tool's: left 7.3828, right 10.7578, mid 8.9648, trap 9.0703 against a true integral of 9. Strip function is a step function, so these diagrams override sampling to 600 to keep the risers square.",
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 7 instructions each ending in an anchor link to its usage section (7 links, 0 orphans); new usage section plot-size-appearance-and-info-panel for the S/M/L/XL buttons, Strip color and the Explanation/Concepts tabs.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in the-four-methods, the-function-families, the-a-b-and-n-sliders, plot-size-appearance-and-info-panel; the families demo doubles as the error-tag walk (overshoots → undershoots → exact); tool does not write the URL; headless step check 19/19."
       },
       "relatedTools": [
         {
