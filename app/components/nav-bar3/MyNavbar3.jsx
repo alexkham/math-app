@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import navThemes from './navThemes';
 import { mainMenuStructure } from './mainMenu';
-import SearchBar2 from '../nav-bar2/SearchBar2';
+import NavSearchTrigger from '../site-search/NavSearchTrigger';
 import { useMediaQuery } from '@/app/hooks/useMediaQuery';
 import { mediaQuery } from '@/app/lib/breakpoints';
 
@@ -52,7 +52,7 @@ function ChevronUp() {
 function MyNavbar3({ 
   menuStructure = mainMenuStructure, 
   themeName = 'white',
-  searchComponent = <SearchBar2 width="200px" />
+  searchComponent = <NavSearchTrigger />
 }) {
   const theme = navThemes[themeName] || navThemes.white;
   const isMobile = useMediaQuery(mediaQuery.tabletDown);
@@ -679,12 +679,17 @@ function MyNavbar3({
               Go Back
             </div>
           </li>
-          {searchComponent && (
+          {searchComponent && !isMobile && (
             <li style={{ marginLeft: '20px', display: 'flex', alignItems: 'center' }}>
               {searchComponent}
             </li>
           )}
         </ul>
+        {searchComponent && isMobile && (
+          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
+            <NavSearchTrigger variant="icon" />
+          </div>
+        )}
       </div>
     </nav>
   );

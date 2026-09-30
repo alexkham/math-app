@@ -1,0 +1,691 @@
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../../pages/pages.css'
+import Head from 'next/head'
+import EulerFormulaExplorer from '../../../../app/components/calculators/complex-numbers/EulerFormulaExplorer'
+import SiblingsNav from '../../../../app/components/SiblingsNav'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import eulerFormulaDiagrams from '../../../../app/components/calculators/complex-numbers/eulerFormulaDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
+
+export async function getStaticProps(){
+
+  const keyWords = [
+    "euler's formula",
+    "euler formula visualization",
+    "euler's formula explorer",
+    "e^iθ complex plane",
+    "euler's formula interactive",
+    "cos theta + i sin theta",
+    "euler's identity",
+    "complex exponential function",
+    "unit circle complex numbers",
+    "polar form visualization",
+    "euler formula calculator",
+    "complex plane interactive tool",
+    "euler formula right triangle",
+    "trigonometry complex numbers",
+    "landmark angles unit circle"
+  ]
+
+  const sectionsContent={
+
+    obj1:{
+      title:`Getting Started — Drag the Point`,
+      content:`The blue draggable point on the [complex plane](!/complex-numbers/geometric-representation#1) represents the value of $re^{i\\theta}$. Grab it and move it anywhere within the plane to explore how **Euler's formula** connects angles, trigonometry, and [complex numbers](!/complex-numbers/algebraic-form#1) in real time.
+
+As you drag, the right panel updates instantly. You will see the current angle $\\theta$ in both degrees and radians, the cosine and sine values, and the resulting [complex number](!/complex-numbers/visual-tools/complex-explorer) in rectangular form. A colored right triangle appears connecting the origin to your point, with the horizontal leg showing the [real part](!/complex-numbers/algebraic-form#21) and the vertical leg showing the [imaginary part](!/complex-numbers/algebraic-form#22).
+
+Start by dragging the point slowly around the **unit circle**. Watch how the triangle changes shape, how the projections on both axes shift, and how the formula breakdown at the right walks through each substitution step. Every position you place the point produces a unique geometric snapshot of Euler's formula in action.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj2:{
+      title:`Navigating All Four Quadrants`,
+      content:`Each quadrant of the complex plane produces a visually distinct triangle with different sign combinations for cosine and sine. Drag the point into each quadrant to see how the triangle flips and the values change sign.
+
+**Quadrant I** (upper right): both $\\cos\\theta > 0$ and $\\sin\\theta > 0$. The triangle sits in the standard position with the green horizontal leg pointing right and the red vertical leg pointing up.
+
+**Quadrant II** (upper left): $\\cos\\theta < 0$ while $\\sin\\theta > 0$. The horizontal leg now extends to the left of the imaginary axis. The real part of $e^{i\\theta}$ becomes negative.
+
+**Quadrant III** (lower left): both components are negative. The triangle appears below and to the left of the origin, and the complex number lies in the third quadrant.
+
+**Quadrant IV** (lower right): $\\cos\\theta > 0$ while $\\sin\\theta < 0$. The vertical leg drops below the real axis. This corresponds to angles between $\\frac{3\\pi}{2}$ and $2\\pi$.
+
+Each quadrant configuration makes a distinct illustration showing how the signs of the real and imaginary parts depend on where the angle places the point.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj3:{
+      title:`Landmark Angle Presets`,
+      content:`Seven preset buttons below the sliders snap the explorer to important angles on the unit circle: $0$, $\\frac{\\pi}{6}$, $\\frac{\\pi}{4}$, $\\frac{\\pi}{3}$, $\\frac{\\pi}{2}$, $\\pi$, and $\\frac{3\\pi}{2}$. Each button also resets the radius to $r = 1$, placing the point exactly on the unit circle. Every landmark has a dedicated section below with the tool frozen on it.
+
+Click $\\frac{\\pi}{6}$ (30°) to see the classic [30-60-90 triangle](!#the-30-degree-landmark) with $\\cos\\frac{\\pi}{6} = \\frac{\\sqrt{3}}{2} \\approx 0.866$ and $\\sin\\frac{\\pi}{6} = \\frac{1}{2} = 0.5$. The horizontal leg is noticeably longer than the vertical one.
+
+Click $\\frac{\\pi}{4}$ (45°) and the triangle becomes [isosceles](!#the-45-degree-landmark) — both legs have equal length since $\\cos\\frac{\\pi}{4} = \\sin\\frac{\\pi}{4} = \\frac{\\sqrt{2}}{2} \\approx 0.707$. The point sits exactly on the diagonal.
+
+Click $\\frac{\\pi}{3}$ (60°) and the triangle [mirrors the 30° case](!#the-60-degree-landmark): now the vertical leg is longer. Together, these three angles illustrate how the balance between real and imaginary parts shifts as $\\theta$ increases through the first quadrant.
+
+Click $\\pi$ to see [Euler's identity](!#eulers-identity-the-special-case-at-pi) in action — the point lands at $-1$ on the real axis, confirming that $e^{i\\pi} = -1$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj4:{
+      title:`Degenerate States — When the Triangle Collapses`,
+      content:`At certain angles the right triangle collapses into a line segment because one of the two trigonometric components equals zero. These degenerate configurations are important special cases of Euler's formula.
+
+At $\\theta = 0$: the point sits at $(r, 0)$ on the positive real axis. Since $\\sin 0 = 0$, the vertical leg vanishes entirely and the triangle reduces to a horizontal line. The formula reads $e^{i \\cdot 0} = 1$ — see [the zero angle](!#the-zero-angle).
+
+At $\\theta = \\frac{\\pi}{2}$: the point lands at $(0, r)$ on the positive imaginary axis. Now $\\cos\\frac{\\pi}{2} = 0$, so the horizontal leg disappears. Only the vertical red segment remains. This gives $e^{i\\pi/2} = i$, a purely imaginary result — see [the quarter turn](!#the-quarter-turn-to-i).
+
+At $\\theta = \\pi$: the point reaches $(-r, 0)$ on the negative real axis — another horizontal-only state. The formula yields the famous $e^{i\\pi} = -1$, treated in full in [Euler's identity](!#eulers-identity-the-special-case-at-pi).
+
+At $\\theta = \\frac{3\\pi}{2}$: the point drops to $(0, -r)$ on the negative imaginary axis, producing a downward vertical segment. Here $e^{i3\\pi/2} = -i$ — see [the three-quarter turn](!#the-three-quarter-turn-to-i).
+
+These four states correspond to the axis crossings of the unit circle. Each one produces a clean, degenerate illustration with no triangle — just a single colored line along one axis.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj5:{
+      title:`Adjusting the Radius`,
+      content:`The $r$ slider controls the [modulus](!/complex-numbers/absolute-value#1) (distance from the origin) and ranges from $0.1$ to $2.4$. When $r = 1$, the point lies on the solid unit circle. When $r \\neq 1$, a dashed circle appears at radius $r$, and the triangle labels switch from "$\\cos\\theta$" / "$\\sin\\theta$" to "$r\\cos\\theta$" / "$r\\sin\\theta$".
+
+Try setting $\\theta = \\frac{\\pi}{4}$ and then slowly increasing $r$ from $1$ to $2$. The triangle grows proportionally — its shape stays the same because the angle has not changed, but every side length doubles. The live values panel reflects the scaled components: at $r = 2$, the real and imaginary parts are both $2 \\times 0.707 \\approx 1.414$.
+
+Setting $r$ below $1$ shrinks the triangle inside the unit circle. At $r = 0.5$, the point sits halfway to the unit circle and all component values are halved.
+
+This demonstrates the general **polar form** $z = re^{i\\theta}$, where $r$ scales the unit-circle point outward or inward. The angle determines direction; the radius determines magnitude.`,
+      before:``,
+      after:`The frozen frame doubles the [60° landmark](!#the-60-degree-landmark): same angle, twice the radius. Every label switches to its scaled reading — $r\\cos\\theta$ and $r\\sin\\theta$ — and the dashed circle at $r = 2$ appears outside the solid unit circle, which never moves.
+
+The unchanged unit circle is the point of the picture: $e^{i\\theta}$ itself always lives on it, and every other complex number is just that unit-circle point stretched by $r$. Direction and magnitude are fully independent — the same separation of jobs the [right triangle section](!#the-right-triangle-trigonometry-and-polar-form) formalizes.`,
+      link:'',
+    },
+
+    obj6:{
+      title:`Reading the Live Values and Formula Breakdown`,
+      content:`The right panel provides two complementary readouts that update with every change to $\\theta$ or $r$.
+
+The **Live Values** section displays six quantities: the current angle $\\theta$ in radians and degrees, $\\cos\\theta$ (green, matching the horizontal leg), $\\sin\\theta$ (red, matching the vertical leg), $\\text{Re}(z)$ and $\\text{Im}(z)$ as the rectangular coordinates, and $|z|$ as the modulus. When $r = 1$, the real and imaginary parts equal $\\cos\\theta$ and $\\sin\\theta$ directly.
+
+The **Formula Breakdown** walks through the substitution step by step. Step 1 states Euler's formula. Step 2 plugs in the current $\\theta$ value. Step 3 evaluates cosine and sine numerically and displays the final complex number. When $r \\neq 1$, an additional multiplication step appears showing $r \\cdot e^{i\\theta} = r\\cos\\theta + ir\\sin\\theta$.
+
+At landmark angles, an orange callout box appears with the symbolic result — for example, "$e^{i\\pi} = -1$" and a note explaining its significance. This callout only activates when $r = 1$ and the angle is within a small tolerance of a preset value.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj7:{
+      title:`What is Euler's Formula?`,
+      content:`**Euler's formula** states that for any real number $\\theta$:
+
+$$e^{i\\theta} = \\cos\\theta + i\\sin\\theta$$
+
+This equation bridges three seemingly unrelated mathematical objects: the exponential function, trigonometric functions, and the imaginary unit $i$. It reveals that raising $e$ to an imaginary power produces a point on the **unit circle** in the complex plane, with the angle $\\theta$ measured in radians from the positive real axis.
+
+The formula can be derived from the Taylor series expansions of $e^x$, $\\cos x$, and $\\sin x$. When $x = i\\theta$ is substituted into the exponential series, the real terms collect into the cosine series and the imaginary terms collect into the sine series.
+
+This is one of the most important results in mathematics because it unifies algebra, geometry, and analysis. It converts between rectangular form $a + bi$ and **polar form** $re^{i\\theta}$, making operations like multiplication, division, and exponentiation of complex numbers far simpler.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj8:{
+      title:`Euler's Identity — The Special Case at θ = π`,
+      content:`Setting $\\theta = \\pi$ in Euler's formula gives:
+
+$$e^{i\\pi} = \\cos\\pi + i\\sin\\pi = -1 + 0i = -1$$
+
+Rearranging: $e^{i\\pi} + 1 = 0$. This is **Euler's identity**, often called the most beautiful equation in mathematics because it links five fundamental constants — $e$, $i$, $\\pi$, $1$, and $0$ — in a single compact relation.
+
+In the explorer, click the $\\pi$ button to see this visually. The point lands at $(-1, 0)$ on the negative real axis. The triangle collapses to a horizontal line pointing left, and the orange landmark callout confirms the identity.
+
+Similarly, setting $\\theta = \\frac{\\pi}{2}$ gives $e^{i\\pi/2} = i$, meaning that multiplying by $e^{i\\pi/2}$ rotates any complex number by 90° counterclockwise. And $\\theta = 2\\pi$ returns to $e^{i \\cdot 2\\pi} = 1$, completing a full revolution. These special cases demonstrate that the exponential function naturally encodes rotation in the complex plane.`,
+      before:``,
+      after:`The frozen frame is the identity as geometry: the orange arc sweeps a perfect half-turn, the triangle has flattened into the teal segment pointing at $-1$, and the active landmark dot glows under the point. Five constants, one picture — $e$ and $i$ in the exponent, $\\pi$ in the arc, $1$ in the radius, $0$ in the vanished imaginary part.
+
+What makes the identity feel inevitable rather than miraculous is the walk there: it is [the zero angle](!#the-zero-angle) rotated through [the quarter turn](!#the-quarter-turn-to-i) and onward, half the journey around the circle. Continue the same half-turn again and you land back at $1$ — which is just $e^{i\\pi} \\cdot e^{i\\pi} = e^{2\\pi i} = 1$, the exponential law doing rotation arithmetic.`,
+      link:'',
+    },
+
+    obj9:{
+      title:`The Right Triangle, Trigonometry, and Polar Form`,
+      content:`The colored right triangle displayed in the explorer is the geometric heart of Euler's formula. Its three sides directly represent the three parts of the equation $re^{i\\theta} = r\\cos\\theta + ir\\sin\\theta$.
+
+The navy hypotenuse from the origin to the point $z$ has length $r = |z|$, the **modulus**. The green horizontal leg from the origin to the projection on the real axis has length $|r\\cos\\theta|$, the real part. The red vertical leg from the real-axis projection up to $z$ has length $|r\\sin\\theta|$, the imaginary part.
+
+This is identical to the standard trigonometric relationship in a right triangle where the adjacent side is $r\\cos\\theta$ and the opposite side is $r\\sin\\theta$. The formula $e^{i\\theta}$ simply packages this triangle into exponential notation.
+
+The **polar form** $z = re^{i\\theta}$ is useful because multiplication of complex numbers becomes:
+
+$$z_1 \\cdot z_2 = r_1 r_2 \\cdot e^{i(\\theta_1 + \\theta_2)}$$
+
+Moduli multiply, angles add. This is far simpler than expanding $(a + bi)(c + di)$ in rectangular form. The explorer makes this visible: the angle $\\theta$ controls rotation while $r$ controls scaling.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+//     obj10:{
+//       title:`Related Concepts and Tools`,
+//       content:`Euler's formula connects to many areas of complex number theory and applied mathematics. Explore these related topics to deepen your understanding.
+
+// **Complex Number Explorer** — an interactive tool for visualizing complex arithmetic, plotting numbers in rectangular and polar form, and performing operations on the complex plane.
+
+// **Complex Numbers** — foundational theory covering the imaginary unit $i$, rectangular form $a + bi$, and algebraic operations.
+
+// **Polar Form and Modulus** — detailed coverage of writing complex numbers as $re^{i\\theta}$, computing the modulus $|z|$ and argument $\\arg(z)$.
+
+// **De Moivre's Theorem** — extends Euler's formula to integer powers: $(e^{i\\theta})^n = e^{in\\theta}$, which gives $( \\cos\\theta + i\\sin\\theta )^n = \\cos(n\\theta) + i\\sin(n\\theta)$.
+
+// **Roots of Unity** — the $n$-th roots of $1$ are $e^{i \\cdot 2\\pi k/n}$ for $k = 0, 1, \\dots, n-1$, equally spaced around the unit circle.
+
+// **Trigonometric Identities** — Euler's formula provides elegant proofs of angle-sum, double-angle, and product-to-sum identities by manipulating exponentials.`,
+//       before:``,
+//       after:``,
+//       link:'',
+//     },
+
+obj10:{
+  title:`Related Concepts and Tools`,
+  content:`Euler's formula is the theoretical backbone of the entire visual tools section. Almost everything else here is a consequence of $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ in one way or another.
+
+The most direct application is the [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular). The polar form $re^{i\\theta}$ you see labeled on this plane is exactly what that tool converts to and from. If you set $r = 1$ here and drag $\theta$, you are tracing the same right triangle that converter uses to extract $a = r\\cos\\theta$ and $b = r\\sin\\theta$.
+
+The reason $e^{i\\theta}$ matters for arithmetic becomes concrete in the [Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication). The key property is $e^{i\\alpha} \cdot e^{i\\beta} = e^{i(\\alpha+\\beta)}$ — multiplying two complex numbers in polar form just adds their angles. That is not a coincidence or a trick; it follows directly from the exponential law you see here.
+
+[De Moivre's Theorem](!/complex-numbers/visual-tools/demoivre-visualizer) takes that one step further: $(re^{i\\theta})^n = r^n e^{in\\theta}$. It is Euler's formula combined with the exponent rule, applied $n$ times. Snap $\\theta$ to $\\pi/2$ here and then visit that tool — you will see exactly why the powers of $i$ cycle the way they do.
+
+Speaking of which, the [Powers of i Calculator](!/complex-numbers/visual-tools/i-powers) is the simplest special case of everything on this page. Setting $\\theta = \\pi/2$ places you at $i$ on the unit circle. Each power multiplies the angle by another $\\pi/2$, cycling through the four cardinal points. The mod 4 pattern that tool is built around is just the unit circle doing four 90° rotations.
+
+[Addition & Subtraction Visualizer](!/complex-numbers/visual-tools/addition-subtraction) — the one operation Euler's formula does not simplify: sums stay rectangular while products go exponential.
+
+[Division Visualizer](!/complex-numbers/visual-tools/division) — division is subtraction of exponents once both numbers are written as $re^{i\\theta}$.`,
+  before:``,
+  after:``,
+  link:'',
+},
+
+    obj11:{
+      title:`The Zero Angle`,
+      content:`The landmark $\\theta = 0$ is where every trip around the circle begins: $e^{i \\cdot 0} = e^0 = 1$, the ordinary exponential fact wearing complex clothing.`,
+      before:``,
+      after:`With $\\sin 0 = 0$ the triangle is all base and no height — the teal segment runs from the origin to $1$ and the red leg does not exist. No arc is drawn either, because there is no angle yet to measure.
+
+This landmark anchors the whole page: every other [preset](!#landmark-angle-presets) is this point rotated by some arc, and after a full revolution the point returns here — $e^{2\\pi i} = 1$, periodicity built into the exponential. The first stop counterclockwise is [the 30° landmark](!#the-30-degree-landmark).`,
+      link:'',
+    },
+
+    obj12:{
+      title:`The 30 Degree Landmark`,
+      content:`The landmark $\\theta = \\frac{\\pi}{6}$ freezes the most familiar triangle in trigonometry — the 30-60-90 — inside Euler's formula.`,
+      before:``,
+      after:`The exact values are the ones every trig course memorizes: $\\cos\\frac{\\pi}{6} = \\frac{\\sqrt{3}}{2} \\approx 0.866$ and $\\sin\\frac{\\pi}{6} = \\frac{1}{2}$ exactly. The frozen frame shows their geometric meaning — a wide, flat triangle whose base is $\\sqrt{3}$ times its height.
+
+Euler's formula turns the memorized pair into a single statement: $e^{i\\pi/6} = \\frac{\\sqrt{3}}{2} + \\frac{1}{2}i$. The complex exponential **is** the value table of trigonometry, one angle at a time.
+
+Its mirror twin is [the 60° landmark](!#the-60-degree-landmark), where base and height trade lengths; between them sits [the balanced 45° case](!#the-45-degree-landmark).`,
+      link:'',
+    },
+
+    obj13:{
+      title:`The 45 Degree Landmark`,
+      content:`The landmark $\\theta = \\frac{\\pi}{4}$ — the tool's opening state — is the perfectly balanced case: cosine and sine agree.`,
+      before:``,
+      after:`Both legs measure $\\frac{\\sqrt{2}}{2} \\approx 0.707$, the isosceles right triangle wedged into the unit circle, and the point rides the 45° diagonal exactly. That shared value is forced by Pythagoras: with equal legs, $2x^2 = 1$ gives $x = \\frac{1}{\\sqrt{2}}$.
+
+This is the crossover point of the whole first quadrant: below it (toward [30°](!#the-30-degree-landmark)) the real part dominates; above it (toward [60°](!#the-60-degree-landmark)) the imaginary part takes over. Drag slowly through $\\frac{\\pi}{4}$ and watch the teal and red readouts in the [live values panel](!#reading-the-live-values-and-formula-breakdown) swap the lead.`,
+      link:'',
+    },
+
+    obj14:{
+      title:`The 60 Degree Landmark`,
+      content:`The landmark $\\theta = \\frac{\\pi}{3}$ is the 30° triangle stood on end: the values swap places.`,
+      before:``,
+      after:`Now $\\cos\\frac{\\pi}{3} = \\frac{1}{2}$ and $\\sin\\frac{\\pi}{3} = \\frac{\\sqrt{3}}{2}$ — exactly the pair from [the 30° landmark](!#the-30-degree-landmark), exchanged. The frozen triangle is tall and narrow where the 30° one was wide and flat; the two are reflections across the 45° diagonal.
+
+The swap is the cofunction identity made visible: $\\cos\\theta = \\sin(\\frac{\\pi}{2} - \\theta)$, and $\\frac{\\pi}{6}$ and $\\frac{\\pi}{3}$ are precisely such a complementary pair. On the unit circle, complementary angles are mirror images — which is all the identity says.
+
+The scaled variant of this exact frame, with $r = 2$, opens [the radius section](!#adjusting-the-radius).`,
+      link:'',
+    },
+
+    obj15:{
+      title:`The Quarter Turn to i`,
+      content:`The landmark $\\theta = \\frac{\\pi}{2}$ lands the exponential exactly on the [imaginary unit](!/complex-numbers/imaginary-numbers#1): $e^{i\\pi/2} = i$.`,
+      before:``,
+      after:`The triangle has collapsed the other way from [the zero angle](!#the-zero-angle): all height, no base. $\\cos\\frac{\\pi}{2} = 0$ pins the point to the imaginary axis, and the red segment from the origin to $i$ is the entire picture.
+
+This landmark is why "multiply by $i$" means "rotate a quarter turn": multiplying by $e^{i\\pi/2}$ adds $\\frac{\\pi}{2}$ to any number's angle. Two quarter turns make [the half turn to −1](!#eulers-identity-the-special-case-at-pi) — which is $i^2 = -1$ restated — and four return home, the cycle the powers of $i$ run on.`,
+      link:'',
+    },
+
+    obj16:{
+      title:`The Three-Quarter Turn to −i`,
+      content:`The landmark $\\theta = \\frac{3\\pi}{2}$ is the last cardinal stop before the circle closes: $e^{i3\\pi/2} = -i$, straight down.`,
+      before:``,
+      after:`The frozen frame shows the longest arc the tool draws — three quarters of the way around before the point drops to the bottom of the unit circle. The triangle is again a single vertical segment, this time pointing down.
+
+The same point has a second name: $e^{-i\\pi/2}$, a quarter turn backwards. Angles that differ by a full $2\\pi$ describe the same complex number, so "three quarters forward" and "one quarter back" are indistinguishable once you arrive — a first taste of the periodicity that makes complex exponentials cyclic rather than ever-growing.
+
+Note also that $-i$ is the conjugate of $i$ from [the quarter turn](!#the-quarter-turn-to-i): reflection across the real axis flips the sign of the angle.`,
+      link:'',
+    },
+
+  }
+
+
+  const introContent = {
+  id: "intro",
+  title: "",
+  content: ``
+}
+
+  const faqQuestions = {
+    obj1: {
+      question: "What is Euler's formula?",
+      answer: "Euler's formula states that e^(iθ) = cos θ + i sin θ for any real angle θ. It connects the exponential function with trigonometric functions through the imaginary unit i, showing that complex exponentials trace the unit circle in the complex plane."
+    },
+    obj2: {
+      question: "What is Euler's identity?",
+      answer: "Euler's identity is the special case e^(iπ) + 1 = 0, obtained by setting θ = π in Euler's formula. It links five fundamental constants — e, i, π, 1, and 0 — in a single equation and is often called the most beautiful formula in mathematics."
+    },
+    obj3: {
+      question: "How do you use this Euler's formula explorer?",
+      answer: "Drag the blue point on the complex plane or use the θ slider to change the angle and the r slider to change the radius. The tool displays a right triangle, live cosine and sine values, and a step-by-step formula breakdown that updates in real time."
+    },
+    obj4: {
+      question: "Why does the triangle disappear at certain angles?",
+      answer: "At θ = 0, π, π/2, and 3π/2 the triangle collapses because one trigonometric component equals zero. At 0 and π, sin θ = 0 so there is no vertical leg. At π/2 and 3π/2, cos θ = 0 so there is no horizontal leg. These are the axis-crossing degenerate cases."
+    },
+    obj5: {
+      question: "How does Euler's formula relate to polar form?",
+      answer: "Polar form writes any complex number as z = r·e^(iθ), where r is the modulus (distance from origin) and θ is the argument (angle). Euler's formula provides the bridge: r·e^(iθ) = r cos θ + i·r sin θ, converting between polar and rectangular representations."
+    }
+  }
+
+  const schemas = {
+    webApplication: {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Euler's Formula Explorer",
+      "description": "Interactive Euler's formula visualization on the complex plane. Drag points, adjust angle and radius, and see real-time trigonometric breakdowns for e^iθ.",
+      "url": "https://www.learnmathclass.com/complex-numbers/visual-tools/euler-formula",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Draggable point on the complex plane for real-time angle exploration",
+        "θ slider with degree and radian display from 0 to 2π",
+        "Adjustable radius slider to explore polar form r·e^(iθ)",
+        "Color-coded right triangle showing cos θ and sin θ components",
+        "Seven landmark angle presets including Euler's identity at θ = π",
+        "Live formula breakdown with step-by-step substitution",
+        "Projection lines and dots on real and imaginary axes"
+      ],
+      "author": {
+        "@type": "Organization",
+        "name": "Learn Math Class"
+      },
+      "datePublished": "2024-01-15",
+      "dateModified": new Date().toISOString(),
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "learningResourceType": "Interactive Tool",
+      "educationalLevel": "High School, College",
+      "keywords": keyWords.join(", ")
+    },
+
+    breadcrumb: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.learnmathclass.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Complex Numbers",
+          "item": "https://www.learnmathclass.com/complex-numbers"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Visual Tools",
+          "item": "https://www.learnmathclass.com/complex-numbers/visual-tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Euler's Formula Explorer",
+          "item": "https://www.learnmathclass.com/complex-numbers/visual-tools/euler-formula"
+        }
+      ]
+    },
+
+    faq: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": Object.keys(faqQuestions).map(key => ({
+        "@type": "Question",
+        "name": faqQuestions[key].question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faqQuestions[key].answer
+        }
+      }))
+    }
+  }
+
+
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // plane + attached picture-reading panel, one frame, no link (own page).
+  const stateUnits = {
+    theta0: demoUnitFrame({ svg: eulerFormulaDiagrams.theta0, caption: '&#952; = 0, frozen',
+      text: 'All base, no height: e&#8304; = 1 sits on the positive real axis with no arc to draw and no red leg — the starting point of every trip around the circle.' }),
+    theta30: demoUnitFrame({ svg: eulerFormulaDiagrams.theta30, caption: '&#952; = &#960;/6, frozen',
+      text: 'The 30-60-90 triangle inside the unit circle: base &#8730;3/2 &#8776; 0.866, height exactly 1/2 — wide and flat, the real part firmly in charge.' }),
+    theta45: demoUnitFrame({ svg: eulerFormulaDiagrams.theta45, caption: '&#952; = &#960;/4, frozen',
+      text: 'The balanced case and the tool&#8217;s opening state: both legs equal &#8730;2/2 &#8776; 0.707, the isosceles right triangle riding the diagonal.' }),
+    theta60: demoUnitFrame({ svg: eulerFormulaDiagrams.theta60, caption: '&#952; = &#960;/3, frozen',
+      text: 'The 30° triangle stood on end: base 1/2, height &#8730;3/2 — the same two exact values with their jobs exchanged.' }),
+    theta90: demoUnitFrame({ svg: eulerFormulaDiagrams.theta90, caption: '&#952; = &#960;/2, frozen',
+      text: 'All height, no base: cos(&#960;/2) = 0 pins the point to i on the imaginary axis, and the quarter-turn arc explains why multiplying by i rotates 90°.' }),
+    theta180: demoUnitFrame({ svg: eulerFormulaDiagrams.theta180, caption: '&#952; = &#960;, frozen',
+      text: 'Euler&#8217;s identity as a picture: a half-turn arc, a flat segment to &#8722;1, and the active landmark dot — e, i, &#960;, 1 and 0 in one frame.' }),
+    theta270: demoUnitFrame({ svg: eulerFormulaDiagrams.theta270, caption: '&#952; = 3&#960;/2, frozen',
+      text: 'The longest arc the tool draws — three quarters of the circle — before the point drops straight down to &#8722;i at the bottom of the unit circle.' }),
+    scaled: demoUnitFrame({ svg: eulerFormulaDiagrams.scaled, caption: 'r = 2, &#952; = &#960;/3, frozen',
+      text: 'The 60° frame at double radius: labels switch to r cos &#952; and r sin &#952;, a dashed circle appears at r = 2, and the solid unit circle stays put underneath.' }),
+  };
+
+  // Per-state additions for the tool's Key Ideas panel, keyed by the landmark
+  // the current angle matches, or the scaled r ≠ 1 state (see
+  // EulerFormulaExplorer).
+  const explanations = {
+    theta0: 'The anchor of the circle: e⁰ = 1, no angle yet, no height yet. [Learn more about the zero angle](!#the-zero-angle) · [All landmarks](!#landmark-angle-presets)',
+    theta30: 'The 30-60-90 triangle lying flat: cos = √3/2, sin = 1/2 exactly. [Learn more about the 30° landmark](!#the-30-degree-landmark) · [All landmarks](!#landmark-angle-presets)',
+    theta45: 'Perfect balance: both legs √2/2, the point riding the diagonal. [Learn more about the 45° landmark](!#the-45-degree-landmark) · [All landmarks](!#landmark-angle-presets)',
+    theta60: 'The 30° values with their jobs swapped — the cofunction identity in one frame. [Learn more about the 60° landmark](!#the-60-degree-landmark) · [All landmarks](!#landmark-angle-presets)',
+    theta90: 'A quarter turn lands exactly on i — this is why multiplying by i rotates 90°. [Learn more about the quarter turn](!#the-quarter-turn-to-i) · [All landmarks](!#landmark-angle-presets)',
+    theta180: 'Five constants, one point: e^(iπ) = −1. [Learn more about Euler’s identity](!#eulers-identity-the-special-case-at-pi) · [All landmarks](!#landmark-angle-presets)',
+    theta270: 'Three quarters forward equals one quarter back: e^(i3π/2) = −i. [Learn more about the three-quarter turn](!#the-three-quarter-turn-to-i) · [All landmarks](!#landmark-angle-presets)',
+    scaled: 'Off the unit circle: r stretches the direction e^(iθ) into the full polar form. [Learn more about the radius](!#adjusting-the-radius) · [All landmarks](!#landmark-angle-presets)',
+  };
+
+   return {
+      props:{
+      relatedTools: getRelatedTools('euler-formula'),
+         sectionsContent,
+         introContent,
+         faqQuestions,
+         schemas,
+         explanations,
+         stateUnits,
+          seoData: {
+        title: "Euler's Formula Explorer | Learn Math Class",
+        description: "Interactive Euler's formula visualization on the complex plane. Drag points, adjust angle and radius, and see real-time trigonometric breakdowns for e^iθ.",
+        keywords: keyWords.join(", "),
+        url: "/complex-numbers/visual-tools/euler-formula",
+        hubDescription: "Explore eⁱᶿ = cos θ + i sin θ on an interactive unit circle. Drag the angle or use the slider, see the right triangle projections, hit landmark angles like Euler's identity eⁱᵖ = −1, and scale with r for the full polar form.",
+        category: "Powers & Exponential",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="42" r="24" fill="none" stroke="#B5D4F4" stroke-width="1.2"/><line x1="12" y1="42" x2="68" y2="42" stroke="#B5D4F4" stroke-width="0.8"/><line x1="40" y1="14" x2="40" y2="66" stroke="#B5D4F4" stroke-width="0.8"/><line x1="53.77" y1="22.34" x2="53.77" y2="42" stroke="#85B7EB" stroke-width="1" stroke-dasharray="2.5,2"/><line x1="53.77" y1="22.34" x2="40" y2="22.34" stroke="#97C459" stroke-width="1" stroke-dasharray="2.5,2"/><line x1="40" y1="42" x2="53.77" y2="22.34" stroke="#FAC775" stroke-width="1.9"/><path d="M 49 42 A 9 9 0 0 0 45.16 34.63" fill="none" stroke="#FAC775" stroke-width="1.2"/><circle cx="53.77" cy="22.34" r="3.2" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><text x="50" y="38" font-family="Georgia,serif" font-size="6" fill="#FAC775" text-anchor="middle" font-style="italic">&#952;</text><text x="34" y="76" font-family="Georgia,serif" font-size="10" fill="#E6F1FB" font-style="italic">e</text><text x="40" y="70.5" font-family="Georgia,serif" font-size="7" fill="#E6F1FB" font-style="italic">i&#952;</text></svg>`,
+         name: "Euler's Formula Explorer"
+      },
+        
+       }
+    }
+   }
+
+export default function PageTemplate({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+    
+  const genericSections=[
+    {
+        id:'getting-started-drag-the-point',
+        title:sectionsContent.obj1.title,
+        link:sectionsContent.obj1.link,
+        content:[
+          sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'navigating-all-four-quadrants',
+        title:sectionsContent.obj2.title,
+        link:sectionsContent.obj2.link,
+        content:[
+          sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'landmark-angle-presets',
+        title:sectionsContent.obj3.title,
+        link:sectionsContent.obj3.link,
+        content:[
+          sectionsContent.obj3.content,
+        ]
+    },
+    {
+        id:'the-30-degree-landmark',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+          <div key='u-theta30' dangerouslySetInnerHTML={{ __html: stateUnits.theta30 }} />,
+          sectionsContent.obj12.after,
+        ]
+    },
+    {
+        id:'the-45-degree-landmark',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
+          <div key='u-theta45' dangerouslySetInnerHTML={{ __html: stateUnits.theta45 }} />,
+          sectionsContent.obj13.after,
+        ]
+    },
+    {
+        id:'the-60-degree-landmark',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <div key='u-theta60' dangerouslySetInnerHTML={{ __html: stateUnits.theta60 }} />,
+          sectionsContent.obj14.after,
+        ]
+    },
+    {
+        id:'degenerate-states-when-the-triangle-collapses',
+        title:sectionsContent.obj4.title,
+        link:sectionsContent.obj4.link,
+        content:[
+          sectionsContent.obj4.content,
+        ]
+    },
+    {
+        id:'the-zero-angle',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
+          <div key='u-theta0' dangerouslySetInnerHTML={{ __html: stateUnits.theta0 }} />,
+          sectionsContent.obj11.after,
+        ]
+    },
+    {
+        id:'the-quarter-turn-to-i',
+        title:sectionsContent.obj15.title,
+        link:sectionsContent.obj15.link,
+        content:[
+          sectionsContent.obj15.content,
+          <div key='u-theta90' dangerouslySetInnerHTML={{ __html: stateUnits.theta90 }} />,
+          sectionsContent.obj15.after,
+        ]
+    },
+    {
+        id:'the-three-quarter-turn-to-i',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
+          <div key='u-theta270' dangerouslySetInnerHTML={{ __html: stateUnits.theta270 }} />,
+          sectionsContent.obj16.after,
+        ]
+    },
+    {
+        id:'adjusting-the-radius',
+        title:sectionsContent.obj5.title,
+        link:sectionsContent.obj5.link,
+        content:[
+          sectionsContent.obj5.content,
+          <div key='u-scaled' dangerouslySetInnerHTML={{ __html: stateUnits.scaled }} />,
+          sectionsContent.obj5.after,
+        ]
+    },
+    {
+        id:'reading-the-live-values-and-formula-breakdown',
+        title:sectionsContent.obj6.title,
+        link:sectionsContent.obj6.link,
+        content:[
+          sectionsContent.obj6.content,
+        ]
+    },
+    {
+        id:'what-is-eulers-formula',
+        title:sectionsContent.obj7.title,
+        link:sectionsContent.obj7.link,
+        content:[
+          sectionsContent.obj7.content,
+        ]
+    },
+    {
+        id:'eulers-identity-the-special-case-at-pi',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+          <div key='u-theta180' dangerouslySetInnerHTML={{ __html: stateUnits.theta180 }} />,
+          sectionsContent.obj8.after,
+        ]
+    },
+    {
+        id:'the-right-triangle-trigonometry-and-polar-form',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
+        ]
+    },
+    {
+        id:'related-concepts-and-tools',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
+        ]
+    },
+]
+
+  return (
+   <>
+   <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.webApplication)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
+    }}
+  />
+</Head>
+   {/* <GenericNavbar/> */}
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+    <OperaSidebar 
+           side='right'
+           // topOffset='65px' 
+           sidebarWidth='45px'
+           panelWidth='200px'
+           iconColor='white'
+           panelBackgroundColor='#f2f2f2'
+         /> 
+   <Breadcrumb/>
+   <br/>
+   <br/>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Euler&apos;s Formula Explorer</h1>
+   <br/>
+   <SiblingsNav maxWidth='100%'>
+   <EulerFormulaExplorer explanations={explanations}/>
+   </SiblingsNav>
+   <br/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   />
+   <br/>
+   <br/>
+   <br/>
+   <RelatedTools tools={relatedTools}/>
+   <Sections sections={genericSections}/>
+   <br/>
+   <br/>
+   <br/>
+   {/* <ScrollUpButton/> */}
+   </>
+  )
+}

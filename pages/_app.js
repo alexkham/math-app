@@ -48,10 +48,13 @@ import ScrollToBottom from "@/app/components/scroll-up-button/ScrollToBottom";
 import Footer from "@/app/components/page-components/footer/Footer";
 import MyNavbar3 from "@/app/components/nav-bar3/MyNavbar3";
 import RouteSync from "../app/components/dev/RouteSync";
+import { SearchProvider } from "@/app/components/site-search/SearchProvider";
+import SearchPalette from "@/app/components/site-search/SearchPalette";
+import FloatingAskButton from "@/app/components/site-search/FloatingAskButton";
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
+    <SearchProvider>
       <RouteSync />
 
       {/* Google Analytics 4 */}
@@ -79,7 +82,9 @@ export default function App({ Component, pageProps }) {
       <Component {...pageProps} />
 
       <ScrollUpButton/>
+      <SearchPalette />
+      <FloatingAskButton />
       <Footer/>
-    </>
+    </SearchProvider>
   );
 }

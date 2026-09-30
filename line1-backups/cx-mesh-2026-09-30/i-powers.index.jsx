@@ -1,0 +1,626 @@
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../../pages/pages.css'
+import Head from 'next/head'
+import PowersOfICalculator from '@/app/components/calculators/complex-numbers/PowersOfICalculator'
+import SiblingsNav from '../../../../app/components/SiblingsNav'
+import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
+import iPowersDiagrams from '../../../../app/components/calculators/complex-numbers/iPowersDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
+
+
+
+export async function getStaticProps(){
+
+  const keyWords = [
+    "powers of i",
+    "powers of i calculator",
+    "imaginary unit powers",
+    "i to the power of n",
+    "i squared equals",
+    "i cubed value",
+    "powers of i cycle",
+    "i^n mod 4",
+    "imaginary number exponent",
+    "powers of i pattern",
+    "complex number powers",
+    "i to the fourth power",
+    "simplify powers of i",
+    "i power calculator",
+    "cyclic pattern imaginary unit"
+  ]
+
+  const sectionsContent={
+
+    obj1:{
+      title:`Getting Started — Enter Any Exponent`,
+      content:`Type any integer into the input field next to the large $i$ symbol. The calculator immediately shows the result, a four-step solution, and highlights which of the four possible outcomes applies.
+
+Six preset buttons — 17, 100, 323, 1000, 45, and 82 — let you jump to specific examples. Click **Random** to generate a value between 0 and 1000, or **Clear** to reset the input and hide the calculation panel.
+
+The four-case strip at the top always stays visible, displaying the four values in the cycle: $i^0 = 1$, $i^1 = i$, $i^2 = -1$, $i^3 = -i$. Whichever remainder matches the current exponent gets highlighted with a blue background, so you can see at a glance where the input lands in the cycle.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj2:{
+      title:`The Four Remainder States`,
+      content:`Every power of $i$ reduces to one of exactly four values, determined by the remainder when the exponent is divided by 4. Each state produces a distinct visual configuration in the calculator.
+
+**Remainder 0** — result is $1$. Try entering 100, 44, or any multiple of 4. The left node on the cycle diagram lights up and the case cell for $r = 0$ highlights. The four-step breakdown shows [full cycles vanishing](!#remainder-0-full-cycles-vanish) with zero left over.
+
+**Remainder 1** — result is $i$. Enter 17, 45, or 1001. The top node activates. The calculation confirms that the exponent equals $4q + 1$, so the final lookup gives $i^1 = i$ — [the cycle restarting](!#remainder-1-the-cycle-restarts).
+
+**Remainder 2** — result is $-1$. Enter 82, 50, or 6. The right node highlights. This is the state behind [the fundamental definition](!#remainder-2-the-definition-itself) $i^2 = -1$.
+
+**Remainder 3** — result is $-i$. Enter 323, 99, or 7. The bottom node activates. The chain $i^3 = i^2 \\cdot i = -1 \\cdot i = -i$ appears in the explanation panel — this is [the tool's opening example](!#remainder-3-the-opening-example).
+
+Each remainder state produces its own unique cycle diagram highlighting, and each has a dedicated section below with the diagram frozen in that state.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj3:{
+      title:`Reading the Cycle Diagram`,
+      content:`The SVG cycle diagram sits between the case strip and the calculation steps. It shows four nodes arranged in a circle — $i^1 = i$ at the top, $i^2 = -1$ at the right, $i^3 = -i$ at the bottom, and $i^4 = 1$ at the left — connected by curved arrows indicating the clockwise progression through the cycle.
+
+The active node glows with a ring effect and full opacity while inactive nodes appear faded. Inside each node, the power label appears above a divider line and the resulting value below it.
+
+To the right of the circle, a **Shortcut** box lists all four remainder-to-value mappings with the active row highlighted in blue. At the bottom, an example bar shows the current computation in compact form: the exponent, its mod 4 result, and the final value.
+
+The center of the circle reads "cycle of 4," reinforcing the key insight that powers of $i$ repeat every four steps. This diagram is the visual anchor of the entire tool — each of the four remainder states produces a different highlighted configuration.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj4:{
+      title:`Step-by-Step Calculation Walkthrough`,
+      content:`When an exponent is entered, the calculator displays a four-step breakdown on the left panel.
+
+**Step 1 — Divide by 4:** The exponent $k$ is divided by 4, showing the quotient $q$ and remainder $r$ with a verification check: $4 \\times q + r = k$.
+
+**Step 2 — Rewrite:** The power is decomposed as $i^k = i^{4q + r} = i^{4q} \\cdot i^r$, separating the full cycles from the leftover.
+
+**Step 3 — Apply $i^4 = 1$:** Since $i^4 = 1$, raising 1 to any power still gives 1, so $i^{4q} = (i^4)^q = 1^q = 1$. The expression simplifies to $1 \\cdot i^r = i^r$.
+
+**Step 4 — Lookup:** The remainder $r$ maps directly to one of the four known values: $1$, $i$, $-1$, or $-i$.
+
+Below the steps, the **answer bar** shows the final result in large text alongside the general formula $i^k = i^r$ where $r = k \\bmod 4$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj5:{
+      title:`Explanation Panel and Special Cases`,
+      content:`The right-side explanation panel lists all four base cases with their derivation chains. The row matching the current remainder is highlighted with a blue background and a left border accent. This makes it easy to see both the active result and the reasoning behind it.
+
+The four explanations are:
+
+$i^0 = 1$ — any number raised to the zero power equals 1.
+
+$i^1 = i$ — $i$ to the first power is simply $i$.
+
+$i^2 = -1$ — this is the defining property of the [imaginary unit](!/complex-numbers/imaginary-numbers#1).
+
+$i^3 = -i$ — derived by multiplying: $i^3 = i^2 \\cdot i = (-1)(i) = -i$.
+
+Try entering small exponents like 0, 1, 2, and 3 to confirm each base case directly. Then try a large number like 1000 — the same four-step process applies regardless of magnitude, because only the remainder after dividing by 4 matters.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj6:{
+      title:`Quick Reference Table`,
+      content:`Click the **Quick Reference** toggle at the bottom to expand a scrollable table showing $i^0$ through $i^{100}$. Each row lists the power, its $k \\bmod 4$ value, and the result.
+
+Every fourth row is separated by a thicker border, visually reinforcing the length-4 cycle. Scanning down the result column, the repeating pattern $1, i, -1, -i, 1, i, -1, -i, \\dots$ becomes immediately obvious.
+
+This table serves as a verification tool. If you enter 47 in the calculator and get $-i$, you can scroll to row 47 in the reference table and confirm the result independently. It also helps students who learn by pattern recognition — seeing dozens of repetitions of the same four-value cycle builds intuition faster than any single example.
+
+The table is compact by default (collapsed) so it does not overwhelm the main interface. Open it when you need to verify or explore, collapse it when you are done.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj7:{
+      title:`Why Powers of i Cycle Every 4`,
+      content:`The repeating pattern comes from the definition $i^2 = -1$. Building up from there:
+
+$$i^0 = 1$$
+$$i^1 = i$$
+$$i^2 = -1$$
+$$i^3 = i^2 \\cdot i = -i$$
+$$i^4 = i^3 \\cdot i = (-i)(i) = -i^2 = -(-1) = 1$$
+
+At $i^4$ the value returns to $1$, which is where $i^0$ started. From this point every subsequent multiplication by $i$ just re-traces the same sequence: $1 \\to i \\to -1 \\to -i \\to 1 \\to \\dots$
+
+Formally, the group generated by $i$ under multiplication is the cyclic group of order 4: $\\{1, i, -1, -i\\}$. The remainder $r = k \\bmod 4$ identifies which element of this group $i^k$ equals. This is why the mod 4 shortcut works for any integer exponent, no matter how large.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj8:{
+      title:`Negative and Zero Exponents`,
+      content:`The calculator handles negative exponents using the same mod 4 logic. For any negative integer $k$, the remainder is computed as $((k \\bmod 4) + 4) \\bmod 4$ to ensure a non-negative result between 0 and 3.
+
+For example, $i^{-1}$: since $i \\cdot i^{-1} = 1$, we need the [multiplicative inverse](!/complex-numbers/multiplicative-inverse#2) of $i$. Multiplying numerator and denominator by $-i$ gives $i^{-1} = \\frac{1}{i} = \\frac{-i}{-i^2} = \\frac{-i}{1} = -i$. The calculator confirms this because $-1 \\bmod 4 = 3$ and $i^3 = -i$.
+
+Similarly, $i^{-2} = \\frac{1}{i^2} = \\frac{1}{-1} = -1$, matching remainder 2. And $i^{-3} = \\frac{1}{i^3} = \\frac{1}{-i} = i$, matching remainder 1.
+
+The zero exponent $i^0 = 1$ follows the standard convention that any nonzero number raised to the power 0 equals 1.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+    obj9:{
+      title:`Connection to Complex Numbers and Euler's Formula`,
+      content:`The four powers of $i$ correspond to four special points on the unit circle in the **complex plane**: $1$ sits on the positive real axis, $i$ on the positive imaginary axis, $-1$ on the negative real axis, and $-i$ on the negative imaginary axis.
+
+Using **Euler's formula** $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$, each power of $i$ maps to a quarter turn:
+
+$i^0 = e^{i \\cdot 0} = 1$ (angle $0$)
+
+$i^1 = e^{i\\pi/2} = i$ (angle $90°$)
+
+$i^2 = e^{i\\pi} = -1$ (angle $180°$)
+
+$i^3 = e^{i3\\pi/2} = -i$ (angle $270°$)
+
+Multiplying by $i$ is equivalent to rotating a point 90° counterclockwise on the [complex plane](!/complex-numbers/geometric-representation#1). Four such rotations return to the starting position — this is the geometric reason behind the length-4 cycle.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
+//     obj10:{
+//       title:`Related Concepts and Tools`,
+//       content:`The powers of $i$ connect to several fundamental topics in complex number theory. Explore these related pages to build a fuller picture.
+
+// **Complex Numbers** — foundational theory covering the imaginary unit $i$, rectangular form $a + bi$, and algebraic operations.
+
+// **Euler's Formula Explorer** — interactive visualization of $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ on the complex plane, showing how the four powers of $i$ correspond to quarter-turn rotations.
+
+// **Complex Number Explorer** — a general-purpose tool for plotting and operating on complex numbers in both rectangular and polar form.
+
+// **Polar Form and Modulus** — how to express complex numbers as $re^{i\\theta}$ and compute the modulus $|z|$ and argument $\\arg(z)$.
+
+// **De Moivre's Theorem** — extends powers of complex numbers to arbitrary exponents using $(\\cos\\theta + i\\sin\\theta)^n = \\cos(n\\theta) + i\\sin(n\\theta)$.`,
+//       before:``,
+//       after:``,
+//       link:'',
+//     },
+
+obj10:{
+  title:`Related Concepts and Tools`,
+  content:`The mod 4 cycle here is algebraically simple, but its geometric meaning becomes clear once you see it on the complex plane.
+
+The direct geometric explanation lives in the [Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication). Each multiplication by $i$ is a 90° rotation — [modulus](!/complex-numbers/absolute-value#1) stays at 1, angle increases by 90°. Four rotations return to the start. The cycle $i, -1, -i, 1$ is just that rotation applied repeatedly, and you can reproduce it exactly by setting $z_1 = i$ and $z_2 = i$ there, then mentally chaining the result.
+
+That rotation behavior is a special case of [De Moivre's Theorem](!/complex-numbers/visual-tools/demoivre-visualizer). In polar form, $i = e^{i\pi/2}$, so $i^n = e^{in\pi/2}$ — which means the angle just increments by $\pi/2$ each time and wraps around at $2\pi$. Set $z = i$ in that tool and drag $n$ through 1, 2, 3, 4 to watch it happen visually.
+
+If the polar notation $e^{i\pi/2}$ is unfamiliar, [Euler's Formula Explorer](!/complex-numbers/visual-tools/euler-formula) is the place to start. $\theta = \pi/2$ places you exactly at $i$ on the unit circle — and $\theta = \pi$ lands at $-1$, which is $i^2$. The four powers of $i$ are the four cardinal points of the unit circle, and that tool shows why.
+
+The [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) ties it together practically — convert $i$, $-1$, $-i$, and $1$ to polar form and you'll see that all four have $r = 1$ and angles that are exact multiples of 90°.
+
+[Addition & Subtraction Visualizer](!/complex-numbers/visual-tools/addition-subtraction) — combining these four values is how every [complex number](!/complex-numbers/visual-tools/complex-explorer) gets built from its [real and imaginary parts](!/complex-numbers/algebraic-form#21).`,
+  before:``,
+  after:``,
+  link:'',
+},
+
+    obj11:{
+      title:`Remainder 0: Full Cycles Vanish`,
+      content:`When the exponent is a multiple of 4, nothing survives the reduction: $i^{100} = 1$, exactly as if no [multiplication](!/complex-numbers/operations#3) had happened at all.`,
+      before:``,
+      after:`The frozen computation is $100 \\div 4 = 25$ remainder $0$: twenty-five complete trips around the cycle and not a single step more. Each trip contributes a factor of $i^4 = 1$, and $1^{25}$ is still $1$ — a hundred multiplications collapsing to nothing, as the [step-by-step walkthrough](!#step-by-step-calculation-walkthrough) shows line by line.
+
+This state is the identity of the cycle, and it explains the other three: every power of $i$ is "some full cycles, then a short remainder walk". Remainder 0 is the case where the walk has length zero. One step further takes you to [remainder 1](!#remainder-1-the-cycle-restarts).`,
+      link:'',
+    },
+
+    obj12:{
+      title:`Remainder 1: The Cycle Restarts`,
+      content:`An exponent one step past a multiple of 4 lands back on $i$ itself: $i^{17} = i$, seventeen multiplications with the effect of one.`,
+      before:``,
+      after:`The frozen computation reads $17 = 4 \\times 4 + 1$: four vanishing cycles and a single leftover step. The top node of the [cycle diagram](!#reading-the-cycle-diagram) lights up, which is the diagram's way of saying the sequence has begun again.
+
+Remainder 1 is why the pattern is periodic rather than merely finite — the cycle does not stop at $i^4 = 1$, it starts over from there. Every exponent congruent to $1 \\pmod 4$, whether $5$, $17$, or $1001$, is geometrically a single quarter-turn.`,
+      link:'',
+    },
+
+    obj13:{
+      title:`Remainder 2: The Definition Itself`,
+      content:`Two steps into the cycle sits the identity everything else is built on: $i^{82} = i^2 = -1$.`,
+      before:``,
+      after:`The frozen computation is $82 = 4 \\times 20 + 2$: twenty silent cycles, then the two-step walk $1 \\to i \\to -1$. Whatever the exponent, remainder 2 always lands on the number whose existence defines $i$ in the first place — $i^2 = -1$ is not derived from anything, it is the starting axiom, as the [cycle explanation](!#why-powers-of-i-cycle-every-4) lays out.
+
+Half the cycle equals negation: multiplying by $i^2$ flips any number to its opposite. That is the algebraic shadow of a $180°$ rotation, and it is why even powers of $i$ are always real ($\\pm 1$) while odd powers are always imaginary ($\\pm i$).`,
+      link:'',
+    },
+
+    obj14:{
+      title:`Remainder 3: The Opening Example`,
+      content:`The tool opens on $i^{323}$ — a deliberately unwieldy exponent that the mod-4 shortcut dispatches in one line: remainder $3$, so $i^{323} = -i$.`,
+      before:``,
+      after:`The frozen computation is $323 = 4 \\times 80 + 3$: eighty full cycles and a three-step walk $1 \\to i \\to -1 \\to -i$, ending at the bottom node. Three hundred twenty-three multiplications, and the answer was decided entirely by the last two digits' remainder.
+
+Remainder 3 has a second reading worth knowing: three steps forward is one step back, so $i^3 = i^{-1}$ — the multiplicative inverse of $i$. That equivalence is exactly the [negative exponent rule](!#negative-and-zero-exponents) seen from the other side of the cycle.`,
+      link:'',
+    },
+
+  }
+
+
+  const introContent = {
+  id: "intro",
+  title: "",
+  content: ``
+}
+
+  const faqQuestions = {
+    obj1: {
+      question: "What are the powers of i?",
+      answer: "The imaginary unit i cycles through four values when raised to successive integer powers: i⁰ = 1, i¹ = i, i² = −1, i³ = −i, and then i⁴ = 1 again. This four-step pattern repeats indefinitely for all integer exponents."
+    },
+    obj2: {
+      question: "How do you simplify any power of i?",
+      answer: "Divide the exponent by 4 and use the remainder. If the remainder is 0 the answer is 1, if 1 the answer is i, if 2 the answer is −1, and if 3 the answer is −i. This works because i⁴ = 1, so full groups of 4 in the exponent contribute nothing."
+    },
+    obj3: {
+      question: "Why do powers of i repeat every 4?",
+      answer: "Because i² = −1 by definition, and multiplying twice more gives i⁴ = (i²)² = (−1)² = 1. Once the value returns to 1, every subsequent power re-traces the same cycle of 1, i, −1, −i."
+    },
+    obj4: {
+      question: "What is i to a negative power?",
+      answer: "Negative exponents follow the same cycle. Compute the remainder of the exponent modulo 4 (adjusted to be non-negative). For example, i⁻¹ = −i because −1 mod 4 = 3, and i³ = −i."
+    },
+    obj5: {
+      question: "How do powers of i relate to the complex plane?",
+      answer: "The four powers of i correspond to quarter-turn rotations on the unit circle: 1 is at 0°, i is at 90°, −1 is at 180°, and −i is at 270°. Multiplying by i rotates a complex number 90° counterclockwise."
+    }
+  }
+
+  const schemas = {
+    webApplication: {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Powers of i Calculator",
+      "description": "Interactive calculator for powers of the imaginary unit i. Enter any exponent, see the four-step mod 4 solution, cycle diagram, and reference table from i⁰ to i¹⁰⁰.",
+      "url": "https://www.learnmathclass.com/complex-numbers/visual-tools/i-powers",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Instant calculation of i^n for any integer exponent",
+        "Four-step solution breakdown with division, rewrite, simplification, and lookup",
+        "Animated cycle diagram highlighting the active remainder node",
+        "Four-case strip showing all possible values with active highlighting",
+        "Six preset examples plus random and clear buttons",
+        "Collapsible reference table from i⁰ to i¹⁰⁰"
+      ],
+      "author": {
+        "@type": "Organization",
+        "name": "Learn Math Class"
+      },
+      "datePublished": "2024-01-15",
+      "dateModified": new Date().toISOString(),
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "learningResourceType": "Interactive Tool",
+      "educationalLevel": "High School, College",
+      "keywords": keyWords.join(", ")
+    },
+
+    breadcrumb: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.learnmathclass.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Complex Numbers",
+          "item": "https://www.learnmathclass.com/complex-numbers"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Visual Tools",
+          "item": "https://www.learnmathclass.com/complex-numbers/visual-tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Powers of i Calculator",
+          "item": "https://www.learnmathclass.com/complex-numbers/visual-tools/i-powers"
+        }
+      ]
+    },
+
+    faq: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": Object.keys(faqQuestions).map(key => ({
+        "@type": "Question",
+        "name": faqQuestions[key].question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faqQuestions[key].answer
+        }
+      }))
+    }
+  }
+
+
+  // Framed illustration units for the per-state sections (Line 1 v5): frozen
+  // cycle diagram + attached picture-reading panel, one frame, no link.
+  const stateUnits = {
+    r0: demoUnitFrame({ svg: iPowersDiagrams.r0, caption: 'i&#185;&#8304;&#8304; — remainder 0, frozen',
+      text: 'The left node glows: 100 &#247; 4 = 25 with nothing left over, so twenty-five full cycles vanish and i&#185;&#8304;&#8304; = 1.' }),
+    r1: demoUnitFrame({ svg: iPowersDiagrams.r1, caption: 'i&#185;&#8311; — remainder 1, frozen',
+      text: 'The top node glows: 17 = 4&#215;4 + 1, four silent cycles and one leftover quarter-step — seventeen multiplications with the effect of one.' }),
+    r2: demoUnitFrame({ svg: iPowersDiagrams.r2, caption: 'i&#8312;&#178; — remainder 2, frozen',
+      text: 'The right node glows: 82 mod 4 = 2 lands on &#8722;1, the defining value of the imaginary unit — half the cycle equals negation.' }),
+    r3: demoUnitFrame({ svg: iPowersDiagrams.r3, caption: 'i&#179;&#178;&#179; — remainder 3, frozen',
+      text: 'The tool&#8217;s opening state: 323 = 4&#215;80 + 3, and the bottom node glows on &#8722;i — three steps forward, which is also one step back.' }),
+  };
+
+  // Per-state additions for the tool's Explanation panel, keyed by the
+  // current remainder class (see PowersOfICalculator).
+  const explanations = {
+    r0: 'Multiples of 4 erase themselves: every full cycle is a factor of 1. [Learn more about remainder 0](!#remainder-0-full-cycles-vanish) · [All four states](!#the-four-remainder-states)',
+    r1: 'One step past a multiple of 4, the cycle simply begins again at i. [Learn more about remainder 1](!#remainder-1-the-cycle-restarts) · [All four states](!#the-four-remainder-states)',
+    r2: 'Remainder 2 always lands on the axiom itself: i² = −1, a half-turn of the cycle. [Learn more about remainder 2](!#remainder-2-the-definition-itself) · [All four states](!#the-four-remainder-states)',
+    r3: 'Three steps forward is one step back: i³ = −i is also 1/i. [Learn more about remainder 3](!#remainder-3-the-opening-example) · [All four states](!#the-four-remainder-states)',
+  };
+
+   return {
+      props:{
+      relatedTools: getRelatedTools('i-powers'),
+         sectionsContent,
+         introContent,
+         faqQuestions,
+         schemas,
+         explanations,
+         stateUnits,
+          seoData: {
+        title: "Powers of i Calculator | Learn Math Class",
+        description: "Calculate any power of the imaginary unit i instantly. See the mod 4 cycle, step-by-step solution, animated diagram, and full reference table from i⁰ to i¹⁰⁰.",
+        keywords: keyWords.join(", "),
+        url: "/complex-numbers/visual-tools/i-powers",
+        hubDescription: "Calculate any power of i instantly. See the 4-step cycle in a dynamic diagram, follow the division-by-4 method step by step, and look up results from i⁰ to i¹⁰⁰ in the reference table.",
+        category: "Powers & Exponential",
+        svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="24" fill="none" stroke="#B5D4F4" stroke-width="1" stroke-dasharray="3,2.5"/><line x1="10" y1="40" x2="70" y2="40" stroke="#B5D4F4" stroke-width="0.8"/><line x1="40" y1="10" x2="40" y2="70" stroke="#B5D4F4" stroke-width="0.8"/><path d="M 40 26 A 14 14 0 0 0 26 40" fill="none" stroke="#E6F1FB" stroke-width="1.2"/><path d="M 26 40 L 29 37 L 29 43 Z" fill="#E6F1FB"/><circle cx="64" cy="40" r="6.5" fill="#85B7EB" stroke="#0C447C" stroke-width="1.2"/><circle cx="40" cy="16" r="6.5" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><circle cx="16" cy="40" r="6.5" fill="#97C459" stroke="#27500A" stroke-width="1.2"/><circle cx="40" cy="64" r="6.5" fill="#ED93B1" stroke="#72243E" stroke-width="1.2"/><text x="64" y="42.5" font-family="Georgia,serif" font-size="7" fill="#042C53" text-anchor="middle">1</text><text x="40" y="18.5" font-family="Georgia,serif" font-size="7" fill="#412402" text-anchor="middle" font-style="italic">i</text><text x="16" y="42.5" font-family="Georgia,serif" font-size="6.5" fill="#173404" text-anchor="middle">&#8722;1</text><text x="40" y="66.5" font-family="Georgia,serif" font-size="6.5" fill="#4B1528" text-anchor="middle" font-style="italic">&#8722;i</text><text x="40" y="77" font-family="Georgia,serif" font-size="7" fill="#E6F1FB" text-anchor="middle" font-style="italic">period 4</text></svg>`,
+         name: "Powers of i Calculator"
+      },
+        
+       }
+    }
+   }
+
+export default function PageTemplate({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+    
+  const genericSections=[
+    {
+        id:'getting-started-enter-any-exponent',
+        title:sectionsContent.obj1.title,
+        link:sectionsContent.obj1.link,
+        content:[
+          sectionsContent.obj1.content,
+        ]
+    },
+    {
+        id:'the-four-remainder-states',
+        title:sectionsContent.obj2.title,
+        link:sectionsContent.obj2.link,
+        content:[
+          sectionsContent.obj2.content,
+        ]
+    },
+    {
+        id:'remainder-0-full-cycles-vanish',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
+          <div key='u-r0' dangerouslySetInnerHTML={{ __html: stateUnits.r0 }} />,
+          sectionsContent.obj11.after,
+        ]
+    },
+    {
+        id:'remainder-1-the-cycle-restarts',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+          <div key='u-r1' dangerouslySetInnerHTML={{ __html: stateUnits.r1 }} />,
+          sectionsContent.obj12.after,
+        ]
+    },
+    {
+        id:'remainder-2-the-definition-itself',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
+          <div key='u-r2' dangerouslySetInnerHTML={{ __html: stateUnits.r2 }} />,
+          sectionsContent.obj13.after,
+        ]
+    },
+    {
+        id:'remainder-3-the-opening-example',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <div key='u-r3' dangerouslySetInnerHTML={{ __html: stateUnits.r3 }} />,
+          sectionsContent.obj14.after,
+        ]
+    },
+    {
+        id:'reading-the-cycle-diagram',
+        title:sectionsContent.obj3.title,
+        link:sectionsContent.obj3.link,
+        content:[
+          sectionsContent.obj3.content,
+        ]
+    },
+    {
+        id:'step-by-step-calculation-walkthrough',
+        title:sectionsContent.obj4.title,
+        link:sectionsContent.obj4.link,
+        content:[
+          sectionsContent.obj4.content,
+        ]
+    },
+    {
+        id:'explanation-panel-and-special-cases',
+        title:sectionsContent.obj5.title,
+        link:sectionsContent.obj5.link,
+        content:[
+          sectionsContent.obj5.content,
+        ]
+    },
+    {
+        id:'quick-reference-table',
+        title:sectionsContent.obj6.title,
+        link:sectionsContent.obj6.link,
+        content:[
+          sectionsContent.obj6.content,
+        ]
+    },
+    {
+        id:'why-powers-of-i-cycle-every-4',
+        title:sectionsContent.obj7.title,
+        link:sectionsContent.obj7.link,
+        content:[
+          sectionsContent.obj7.content,
+        ]
+    },
+    {
+        id:'negative-and-zero-exponents',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
+        ]
+    },
+    {
+        id:'connection-to-complex-numbers-and-eulers-formula',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
+        ]
+    },
+    {
+        id:'related-concepts-and-tools',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
+        ]
+    },
+]
+
+  return (
+   <>
+   <Head>
+  <title>{seoData.title}</title>
+  <meta name="description" content={seoData.description} />
+  <meta name="keywords" content={seoData.keywords} />
+  <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+  
+  <meta property="og:title" content={seoData.title} />
+  <meta property="og:description" content={seoData.description} />
+  <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Learn Math Class" />
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={seoData.title} />
+  <meta name="twitter:description" content={seoData.description} />
+  
+  <meta name="robots" content="index, follow" />
+  
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.webApplication)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.breadcrumb)
+    }}
+  />
+
+  <script 
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ 
+      __html: JSON.stringify(schemas.faq)
+    }}
+  />
+</Head>
+   {/* <GenericNavbar/> */}
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+    <OperaSidebar 
+           side='right'
+           // topOffset='65px' 
+           sidebarWidth='45px'
+           panelWidth='200px'
+           iconColor='white'
+           panelBackgroundColor='#f2f2f2'
+         /> 
+   <Breadcrumb/>
+   <br/>
+   <br/>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Powers of i Calculator/Visualizer</h1>
+   <br/>
+   <SiblingsNav maxWidth='100%'>
+  <PowersOfICalculator explanations={explanations}/>
+  </SiblingsNav>
+   <br/>
+   <SectionTableOfContents sections={genericSections}
+    showSecondaryNav={true}
+         secondaryNavMode="siblings"  // or "children"
+         secondaryNavTitle="More in this Section"
+   />
+   <br/>
+   <br/>
+   <br/>
+   <RelatedTools tools={relatedTools}/>
+   <Sections sections={genericSections}/>
+   <br/>
+   <br/>
+   <br/>
+   {/* <ScrollUpButton/> */}
+   </>
+  )
+}

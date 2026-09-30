@@ -28,7 +28,8 @@
  * @typedef {Object} Props
  * @property {Array<MenuItem>} [menuStructure=mainMenuStructure] - Menu structure array. Defaults to mainMenuStructure from mainMenu.js
  * @property {string} [themeName='white'] - Theme name. Available: 'white', 'dark', 'lighterDark', 'mediumGray', 'coolBlueGray'
- * @property {React.ReactNode} [searchComponent=<SearchBar2 width="200px" />] - Custom search component. Pass null to hide search
+ * @property {React.ReactNode} [searchComponent=<NavSearchTrigger />] - Custom search component. Pass null to hide search.
+ *   Below 768px the slot is not rendered in the menu list; the bar shows <NavSearchTrigger variant="icon" /> on the right instead.
  */
 
 /**

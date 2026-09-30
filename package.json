@@ -6,7 +6,7 @@
     "dev": "next dev",
     "dev:sync": "concurrently -n next,sync -c cyan,magenta \"next dev\" \"node scripts/route-sync.js\"",
     "dev:sync2": "concurrently -n next,sync -c cyan,magenta \"next dev\" \"node scripts/route-sync-ws.js\"",
-    "build": "next build && node generate-sitemap.mjs",
+    "build": "next build && node generate-sitemap.mjs && node search-index.mjs",
     "start": "next start --port 3007 ",
     "generate-nav": "node generateNavFromSitemap.js",
     "lint": "next lint",
