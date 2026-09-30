@@ -8888,7 +8888,9 @@
         "states": 6,
         "sections": 17,
         "anchors": 25,
-        "orphans": 0
+        "orphans": 0,
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new section the-plot-info-panel-and-appearance.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in getting-started, editing-individual-pieces, adding-new-pieces, open-vs-closed-endpoints; selects and number inputs driven with set, bracket toggles walk overlap → jump → gap on Heaviside; tool does not write the URL; headless step check 19/19."
       },
       "relatedTerms": [
         {
