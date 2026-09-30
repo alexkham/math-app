@@ -7227,7 +7227,9 @@
         "states": 11,
         "sections": 23,
         "anchors": 58,
-        "orphans": 0
+        "orphans": 0,
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to an existing usage section (8 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in picking-a-function, why-only-b-and-h-change-the-domain, probing-with-the-test-point-slider, getting-started-with-the-visualizer; the test-point demo moves the Reciprocal hole with h and probes it; tool does not write the URL; headless step check 19/19."
       },
       "relatedTerms": [
         {
