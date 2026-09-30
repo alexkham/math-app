@@ -5466,7 +5466,9 @@
         "sections": 25,
         "anchors": 52,
         "orphans": 0,
-        "notes": "Case A wiring; 12-law catalog (page count correct); new pair-diagram module with generic 8-region painter at mini scale (LHS=RHS + match badge); 1 new group section (De Morgan) — associative/distributive and difference groups served by existing sections whose lists became member links; page file carries a commented template head, all edits live-region-scoped."
+        "notes": "Case A wiring; 12-law catalog (page count correct); new pair-diagram module with generic 8-region painter at mini scale (LHS=RHS + match badge); 1 new group section (De Morgan) — associative/distributive and difference groups served by existing sections whose lists became member links; page file carries a commented template head, all edits live-region-scoped.",
+        "howToMesh": "2026-09-30 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new section the-explanation-panel written for the Explanation panel.",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in navigating-category-tabs, selecting-an-identity, theme-controls-and-navigation; all four tabs visited, Previous wrap to 12 / 12; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
