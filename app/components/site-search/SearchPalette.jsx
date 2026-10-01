@@ -256,7 +256,7 @@ export default function SearchPalette() {
     results.forEach((result) => { if (table[result.kind] !== undefined) table[result.kind] += 1; });
     return table;
   }, [results]);
-  const effectiveTab = isFallback ? 'all' : tab;
+  const effectiveTab = tab;
   const visible = useMemo(
     () => (effectiveTab === 'all' ? results : results.filter((result) => result.kind === effectiveTab)),
     [results, effectiveTab],
@@ -318,7 +318,7 @@ export default function SearchPalette() {
       if (selected) { event.preventDefault(); open(selected); }
       return;
     }
-    if (event.key === 'Tab' && searching && !isFallback) {
+    if (event.key === 'Tab' && searching) {
       event.preventDefault();
       cycleTab(event.shiftKey ? -1 : 1);
     }
@@ -388,7 +388,7 @@ export default function SearchPalette() {
   const iconHoverOn = { background: TOKENS.surface2, color: TOKENS.ink };
   const iconHoverOff = { background: TOKENS.surface, color: TOKENS.muted };
 
-  const showTabs = !isFallback;
+  const showTabs = true;
   const showCounts = searching;
   const showFooter = !isMobile;
 
@@ -672,9 +672,7 @@ export default function SearchPalette() {
     }}>
       <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>&uarr;&darr;</kbd> {UI_TEXT.footerNavigate}</span>
       <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>Enter</kbd> {UI_TEXT.footerOpen}</span>
-      {!isFallback && (
-        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>Tab</kbd> {UI_TEXT.footerTab}</span>
-      )}
+      <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>Tab</kbd> {UI_TEXT.footerTab}</span>
       <span style={{ marginLeft: 'auto' }}>{UI_TEXT.footerNote}</span>
     </div>
   );
