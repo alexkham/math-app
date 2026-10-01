@@ -11,6 +11,9 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import complexMultiplicationDiagrams from '../../../../app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -228,6 +231,18 @@ And if you want to see what happens when you apply this operation repeatedly to 
   link:'',
 },
 
+
+    obj12:{
+      title:`The Product Card and Key Ideas Panel`,
+      content:`Under the two factor boxes, the **z₁ · z₂ — Product** card (teal) gives the product in rectangular form and, below it, its modulus $|z_1 z_2|$ and its angle $\\theta$ in degrees. Values are rounded to two decimal places. When the product lies outside the $\\pm 10$ grid, the card adds the line "Product extends beyond ±10 — shown as a ray with arrow on the diagram", and the plane draws the dashed ray described in [off-screen products](!#off-screen-products-and-the-zoom-inset).
+
+Each factor box also prints its own modulus and angle next to the rectangular form, so the angles in the factor boxes, on the Product card and on the [angle arcs](!#reading-the-three-angle-arcs) can be read side by side. A typed value outside $-10$ to $10$ is clamped to the limit, and the note "Values are limited to ±10. Input was clamped." shows for a moment.
+
+The **Key Ideas** panel at the bottom of the right column holds four fixed points: FOIL with $i^2 = -1$, the geometric rule (moduli multiply, angles add), multiplication by $i$ as a $90°$ turn, and multiplication by a real number as pure scaling. When the factors match one of the five presets, a note on that preset is added, with a link to its section. The worked calculations live in the [FOIL panel](!#the-algebraic-foil-method) and the [polar panel](!#the-geometric-polar-method).`,
+      before:``,
+      after:``,
+      link:'',
+    },
   }
 
 
@@ -367,8 +382,149 @@ And if you want to see what happens when you apply this operation repeatedly to 
     realScaling: 'A real factor rotates nothing — the product keeps z₂’s direction and doubles its length. [Learn more about real factors](!#multiplication-by-a-pure-real-number) · [Getting started](!#getting-started-drag-and-multiply)',
   };
 
+  const instructions = [
+    'Drag $z_1$ (navy) or $z_2$ (orange) on the plane, or type **Re** and **Im** values in the factor boxes on the right; values run from $-10$ to $10$. [Learn more about placing the factors](!#getting-started-drag-and-multiply)',
+    'The preset buttons under the plane load five pairs, from $(2+i)(-1+2i)$ to $i \\times i$; **Random** picks two arbitrary factors. [Learn more about the presets](!#getting-started-drag-and-multiply)',
+    'Three arcs at the origin show $\\theta_1$ (navy), $\\theta_2$ (orange) and their sum, the angle of the product. [Learn more about the angle arcs](!#reading-the-three-angle-arcs)',
+    'A product beyond $\\pm 10$ turns into a dashed ray with an arrow; a product with modulus below $1$ gets a **Zoom** inset in the top-right corner of the plane. [Learn more about off-screen products and the zoom inset](!#off-screen-products-and-the-zoom-inset)',
+    'The **Product** card gives $z_1 z_2$ with its modulus and angle; the **Key Ideas** panel adds a note when the factors match a preset. [Learn more about the Product card](!#the-product-card-and-key-ideas-panel)',
+    'The **Algebraic Method (FOIL)** panel expands $(a+bi)(c+di)$ term by term and replaces $i^2$ with $-1$. [Learn more about the FOIL panel](!#the-algebraic-foil-method)',
+    'The **Geometric Method (Polar)** panel multiplies the moduli and adds the angles. [Learn more about the polar panel](!#the-geometric-polar-method)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real ComplexMultiplicationVisualizer
+     (opens on (2+i)(−1+2i)). Number inputs input[type="number"] nth 0..3 = z1 Re, z1 Im,
+     z2 Re, z2 Im. The drag points use setPointerCapture, so the demos use presets and
+     typed values instead of drags. */
+  const demos = {
+    'getting-started-drag-and-multiply': {
+      title: 'The presets',
+      script: [
+        { say: `TAP (1+i)(1−i)
+45° + (−45°) = 0°.
+Product 2, flat on the real axis.`, at: 'tl' },
+        { click: { button: '(1+i)(1−i)', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 3 × 2i
+0° + 90° = 90°. Length 3 × 2.
+Product 6i, straight up.`, at: 'tl' },
+        { click: { button: '3 × 2i', exact: true } },
+        { wait: 2600 },
+        { say: `TAP i × i
+90° + 90° = 180°.
+Product −1: i² = −1.`, at: 'tl' },
+        { click: { button: 'i × i', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 2(−3+4i)
+Real factor: no navy arc, no turn.
+Product −6 + 8i. Modulus 2 × 5 = 10.`, at: 'tl' },
+        { click: { button: '2(−3+4i)', exact: true } },
+        { wait: 2800 },
+        { say: `TAP (2+i)(−1+2i)
+26.57° + 116.57° = 143.13°.
+Product −4 + 3i. Modulus 5.`, at: 'tl' },
+        { click: { button: '(2+i)(−1+2i)', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'reading-the-three-angle-arcs': {
+      title: 'Angles add',
+      script: [
+        { say: `TAP i × i
+Navy θ₁ = 90°, orange θ₂ = 90°.
+Outer arc 180°. Product −1.`, at: 'tl' },
+        { click: { button: 'i × i', exact: true } },
+        { wait: 2600 },
+        { say: `TYPE z₂ Re = 1
+z₂ = 1 + i. θ₂ = 45°.
+90° + 45° = 135°. Product −1 + i.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '1' },
+        { wait: 2800 },
+        { say: `TYPE z₁ Re = 1
+z₁ = 1 + i. θ₁ = 45°.
+45° + 45° = 90°. Product 2i.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '1' },
+        { wait: 2800 },
+        { say: `TYPE z₁ Re = −1
+z₁ = −1 + i. θ₁ = 135°.
+135° + 45° = 180°. Product −2.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '-1' },
+        { wait: 2800 },
+        { say: `TYPE z₂ Im = −1
+z₂ = 1 − i. θ₂ = −45°.
+135° − 45° = 90°. Product 2i.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: '-1' },
+        { wait: 2800 },
+      ],
+    },
+    'off-screen-products-and-the-zoom-inset': {
+      title: 'Off-screen ray and zoom inset',
+      script: [
+        { say: `TYPE z₁ = 8 + 6i
+Product −20 + 10i. |z₁z₂| = 22.36.
+Past ±10: dashed ray with arrow.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '8' },
+        { wait: 300 },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '6' },
+        { wait: 2800 },
+        { say: `TYPE z₁ = 0.3
+Product −0.30 + 0.60i. |z₁z₂| = 0.67.
+Below 1: Zoom inset, top right.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '0.3' },
+        { wait: 300 },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '0' },
+        { wait: 2800 },
+        { say: `TYPE z₂ = 0.2 + 0.1i
+Product 0.06 + 0.03i.
+Inset rescales: Zoom (0.30 × 0.30).`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0.2' },
+        { wait: 300 },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: '0.1' },
+        { wait: 2800 },
+        { say: `TYPE z₁ Re = 5
+Product 1 + 0.50i. |z₁z₂| = 1.12.
+Back above 1: inset gone.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '5' },
+        { wait: 2800 },
+      ],
+    },
+    'the-algebraic-foil-method': {
+      title: 'FOIL and polar panels',
+      script: [
+        { say: `TAP (1+i)(1−i)
+FOIL: 1 − i + i − i².
+Cross terms cancel. −i² = +1. Result 2.`, at: 'tl' },
+        { click: { button: '(1+i)(1−i)', exact: true } },
+        { wait: 3000 },
+        { say: `TYPE z₁ = 3 + 4i, z₂ = 3 − 4i
+Product 25: 9 + 16.
+Polar: 5 × 5 = 25. 53.13° − 53.13° = 0°.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '3' },
+        { wait: 250 },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '4' },
+        { wait: 250 },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '3' },
+        { wait: 250 },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: '-4' },
+        { wait: 3000 },
+        { say: `TAP 3 × 2i
+FOIL: 0 + 6i + 0i + 0i² = 6i.
+Polar: 3 × 2 = 6. 0° + 90° = 90°.`, at: 'tl' },
+        { click: { button: '3 × 2i', exact: true } },
+        { wait: 3000 },
+        { say: `TAP (2+i)(−1+2i)
+FOIL: −2 + 4i − i + 2i² = −4 + 3i.
+Polar: 2.24 × 2.24 = 5, at 143.13°.`, at: 'tl' },
+        { click: { button: '(2+i)(−1+2i)', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('multiplication'),
          sectionsContent,
          introContent,
@@ -391,7 +547,22 @@ And if you want to see what happens when you apply this operation repeatedly to 
     }
    }
 
-export default function PageTemplate({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PageTemplate({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ComplexMultiplicationVisualizer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
     
   const genericSections=[
@@ -400,6 +571,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('getting-started-drag-and-multiply'),
           sectionsContent.obj1.content,
         ]
     },
@@ -408,6 +580,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
+          demo('reading-the-three-angle-arcs'),
           sectionsContent.obj2.content,
           <div key='u-general' dangerouslySetInnerHTML={{ __html: stateUnits.general }} />,
           sectionsContent.obj2.after,
@@ -448,6 +621,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
+          demo('off-screen-products-and-the-zoom-inset'),
           sectionsContent.obj6.content,
         ]
     },
@@ -456,6 +630,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
+          demo('the-algebraic-foil-method'),
           sectionsContent.obj7.content,
         ]
     },
@@ -465,6 +640,14 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+        ]
+    },
+    {
+        id:'the-product-card-and-key-ideas-panel',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     {
@@ -553,6 +736,10 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Multiplication</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <SiblingsNav maxWidth='100%'>
    <ComplexMultiplicationVisualizer explanations={explanations}/>
