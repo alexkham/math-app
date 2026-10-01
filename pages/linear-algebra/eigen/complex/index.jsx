@@ -1582,6 +1582,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import complexEigenDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/complex-eigen/complexEigenDiagrams'
+import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiagrams'
 
 
 export async function getStaticProps(){
@@ -2190,6 +2191,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     rotation: demoUnitFrame({
       svg: complexEigenDiagrams.rotation,
@@ -2204,6 +2206,13 @@ const schemas = {
       text: 'The rotation is the same in both; what differs is the modulus of the eigenvalue. Below one, repeated application pulls everything towards the origin; above one, it throws everything outward. The argument sets how fast it turns and the modulus sets whether it survives, which is the whole stability story for a discrete system. Tune both on the',
       href: '/linear-algebra/visual-tools/complex-eigenvalues-2d',
       linkText: 'complex eigenvalue explorer',
+    }),
+    noRealEigen: demoUnitFrame({
+      svg: eigenDiagrams.complex,
+      caption: 'A rotation has no real eigenvector',
+      text: 'The rotation preset: a real 2 &#215; 2 matrix whose characteristic polynomial has a negative discriminant. Its roots are a complex conjugate pair, and (A &#8722; &#955;I)v = 0 has no nonzero real solution &#8212; every real vector is turned off its own line, so no real direction is merely stretched. Compare it with the real cases on the',
+      href: '/linear-algebra/visual-tools/eigenvalues-eigenvectors',
+      linkText: 'eigenvalues and eigenvectors visualizer',
     }),
   };
 
@@ -2250,6 +2259,8 @@ const schemas = {
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-noRealEigen'} dangerouslySetInnerHTML={{ __html: demoUnits.noRealEigen }} />,
+          `Complex eigenvalues are the algebra's way of reporting that the transformation turns every real direction.`,
         ]
     },
     {

@@ -10,6 +10,10 @@ import ExplanationDetails from '../../../../app/components/ExplanationDetails'
 import IndexedUnionIntersectionExplorer from '../../../../app/components/diagrams/set-theory/IndexedUnionIntersectionExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import indexedUnionIntersectionDiagrams from '../../../../app/components/diagrams/set-theory/indexedUnionIntersectionDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -33,16 +37,16 @@ export async function getStaticProps(){
   ]
 
   const instructions = [
-    'Pick a family from the family picker. Each one is a rule giving the set $A_i$ for every index $i$, shown beside its name.',
-    'The index control raises or lowers how many sets are in play. Push it up and watch the two accumulated results move.',
-    'The member rows show $A_1, A_2, A_3, \\ldots$ in order, faint at the start and solid at the current index.',
-    'The two heavy bars underneath are the running union $\\bigcup$ in blue and the running intersection $\\bigcap$ in amber.',
-    'On a number line, a hollow endpoint is excluded and a filled one is included. An arrowhead means the set runs to infinity.',
-    'Discrete families are drawn as a grid instead, one row per set, with the members of that set highlighted.',
-    'The Venn families show the finite case: two panels, one shading the union and one the intersection.',
-    'The limits panel names what the two operators settle on over the whole infinite family, which is not always what a finite stage suggests.',
-    'Play steps the index upward on its own, and pausing leaves it wherever it has reached.',
-    'The explanation panel names the lesson of the family you are on — an empty limit, a decisive endpoint, an unbounded union, or a stalled operator.',
+    'Pick a family from the family picker. Each one is a rule giving the set $A_i$ for every index $i$, shown beside its name. [Learn more about the family picker](!#choosing-a-family)',
+    'The index control raises or lowers how many sets are in play. Push it up and watch the two accumulated results move. [Learn more about pushing the index](!#pushing-the-index)',
+    'The member rows show $A_1, A_2, A_3, \\ldots$ in order, faint at the start and solid at the current index. [Learn more about the member rows](!#reading-the-number-line)',
+    'The two heavy bars underneath are the running union $\\bigcup$ in blue and the running intersection $\\bigcap$ in amber. [Learn more about the union and intersection bars](!#getting-started)',
+    'On a number line, a hollow endpoint is excluded and a filled one is included. An arrowhead means the set runs to infinity. [Learn more about reading the number line](!#reading-the-number-line)',
+    'Discrete families are drawn as a grid instead, one row per set, with the members of that set highlighted. [Learn more about the discrete view](!#discrete-and-venn-views)',
+    'The Venn families show the finite case: two panels, one shading the union and one the intersection. [Learn more about the Venn view](!#discrete-and-venn-views)',
+    'The limits panel names what the two operators settle on over the whole infinite family, which is not always what a finite stage suggests. [Learn more about the limits panel](!#getting-started)',
+    'Play steps the index upward on its own, and pausing leaves it wherever it has reached. [Learn more about Play](!#pushing-the-index)',
+    'The explanation panel names the lesson of the family you are on — an empty limit, a decisive endpoint, an unbounded union, or a stalled operator. [Learn more about the explanation panel](!#getting-started)',
   ]
 
   const sectionsContent={
@@ -58,7 +62,7 @@ export async function getStaticProps(){
 
     obj1:{
       title:`Getting Started`,
-      content:`The tool takes an **indexed family** of sets — $A_1, A_2, A_3, \\ldots$ — and accumulates the two big operators over it as you raise the index.
+      content:`The tool takes an **indexed family** of [sets](!/set-theory/basics#1) — $A_1, A_2, A_3, \\ldots$ — and accumulates the two big operators over it as you raise the index.
 
 Choose a family, then push the index up. Three things move together:
 
@@ -66,7 +70,7 @@ Choose a family, then push the index up. Three things move together:
 • The **union bar**, in blue, holding everything in at least one of them.
 • The **intersection bar**, in amber, holding everything in all of them.
 
-The union can only grow as the index rises and the intersection can only shrink. Watching them move in opposite directions is the point of the display, and it is the first thing to look for.
+The [union](!/set-theory/operations#1) can only grow as the index rises and the [intersection](!/set-theory/operations#2) can only shrink. Watching them move in opposite directions is the point of the display, and it is the first thing to look for.
 
 At index $1$ there is nothing to accumulate — both operators simply return $A_1$, which is [where every family starts](!#one-set-is-not-a-family). Raise it and they begin to separate.
 
@@ -142,7 +146,7 @@ The tick labels are the coordinates, and they rescale when a family needs a wide
 
 **Venn families** are different in kind: they show a finite family rather than an infinite one, side by side, one panel shading the union and one the intersection. With only two or three sets the big operators are just $\\cup$ and $\\cap$ written once instead of repeatedly, which is [the finite chain](!#the-finite-chain).
 
-A Venn diagram can only ever show a small finite family, because it needs a separate region for every combination of memberships and there are $2^n$ of those.`,
+A [Venn diagram](!/set-theory/venn-diagrams) can only ever show a small finite family, because it needs a separate region for every combination of memberships and there are $2^n$ of those.`,
       before:``,
       after:``,
       link:'',
@@ -197,7 +201,7 @@ Nested downward — each $A_{i+1} \\subseteq A_i$ — and the union settles imme
 
 Nested upward — each $A_i \\subseteq A_{i+1}$ — and the mirror image happens: the intersection settles at $A_1$ and the union grows, which is [a stalled intersection](!#when-the-intersection-stops-shrinking). The growing-intervals family is the clean case, and it also shows [bounded sets with an unbounded union](!#bounded-sets-unbounded-union).
 
-Neither stall is a failure. A union takes each element once however many sets contain it, so a term already covered contributes nothing, and the operator is behaving exactly as defined.
+Neither stall is a failure. A union takes each [element](!/set-theory/basics#4) once however many sets contain it, so a term already covered contributes nothing, and the operator is behaving exactly as defined.
 
 Families that are not nested in either direction do both things at once — the union grows and the intersection shrinks on the same step, which is [the general case](!#the-general-case).`,
       before:``,
@@ -233,7 +237,7 @@ In the closed version $0$ belongs to every set in the family, so it survives eve
 
 $$\\bigcap_{i=1}^{\\infty} \\left(0, \\tfrac{1}{i}\\right] = \\varnothing \\qquad \\bigcap_{i=1}^{\\infty} \\left[0, \\tfrac{1}{i}\\right] = \\{0\\}$$
 
-This is worth doing by hand once, because it is the cleanest demonstration that open and closed are not a formality of notation. The bracket is carrying real information, and here it is the difference between an empty set and a point.
+This is worth doing by hand once, because it is the cleanest demonstration that open and closed are not a formality of notation. The bracket is carrying real information, and here it is the difference between an [empty set](!/set-theory/basics#3) and a point.
 
 The unions are worth comparing too, and they are less dramatic: $(0, 1]$ against $[0, 1]$, differing by the same single point. Union is the forgiving operator — one set containing an element is enough to keep it — while intersection demands unanimity, which is why it is the one that notices a bracket. For the underlying vocabulary, see **interval notation**.`,
       before:``,
@@ -254,9 +258,13 @@ The unions are worth comparing too, and they are less dramatic: $(0, 1]$ against
 
 **Propositional Logic** — the existential and universal quantifiers the operators translate into.
 
-**Venn Diagram Generator** — for the finite case, with expressions rather than families.
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — for the finite case, with expressions rather than families.
 
-**Power Set Explorer** — every subset of a small set, arranged by containment.`,
+[Power Set Explorer](!/set-theory/visual-tools/power-set) — every [subset](!/set-theory/subsets#1) of a small set, arranged by containment.
+
+[Inclusion-Exclusion Principle Explorer](!/set-theory/visual-tools/inclusion-exclusion) — the size of a union of finitely many sets.
+
+[Two-Set Venn Diagram](!/set-theory/visual-tools/two-sets-basic-venn) — union and intersection of two sets, region by region.`,
       before:``,
       after:``,
       link:'',
@@ -585,8 +593,137 @@ With the families this tool ships, the panel always finds a sharper description 
   }
 
 
+  /* Animated demos (ToolDemoPlayer v3) against the real IndexedUnionIntersectionExplorer
+     (opens on Aᵢ = (0, 1/i] at n = 2). Picking a family resets n to 2. Buttons:
+     Previous, Add Aₙ (label follows n, matched by prefix), Play, Reset, then the
+     family buttons (matched by the start of their rule). Play is timed and not used. */
+  const demos = {
+    'choosing-a-family': {
+      title: 'Choosing a family',
+      script: [
+        { say: `TAP Aᵢ = [0, 1/i]
+Rule printed in the header.
+As the index runs forever: ⋂ = {0}.` },
+        { click: { button: 'Aᵢ = [0, 1/i]' } },
+        { wait: 2600 },
+        { say: `TAP Aᵢ = [−i, i]
+Growing intervals, n = 2.
+Forever: ⋃ = ℝ, ⋂ = [−1, 1].` },
+        { click: { button: 'Aᵢ = [−i, i]' } },
+        { wait: 2600 },
+        { say: `TAP Aᵢ = [i, ∞)
+Sliding tails.
+Forever: ⋃ = [1, ∞), ⋂ = ∅.` },
+        { click: { button: 'Aᵢ = [i, ∞)' } },
+        { wait: 2600 },
+        { say: `TAP Aᵢ = {1, 2, …, i}
+Discrete family: grid view.
+Forever: ⋃ = ℕ, ⋂ = {1}.` },
+        { click: { button: 'Aᵢ = {1, 2' } },
+        { wait: 2600 },
+        { say: `TAP Aᵢ = (0, 1/i]
+Left endpoint excluded.
+Forever: ⋂ = ∅, not {0}.` },
+        { click: { button: 'Aᵢ = (0, 1/i]' } },
+        { wait: 2600 },
+      ],
+    },
+    'pushing-the-index': {
+      title: 'Pushing the index',
+      script: [
+        { say: `TAP Reset
+n = 1. One row.
+⋃ and ⋂ both start as A₁ = (0, 1].` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Add A₂
+⋂ shrank to (0, 1/2].
+⋃ unchanged: A₂ added nothing new.` },
+        { click: { button: 'Add A' } },
+        { wait: 2800 },
+        { say: `TAP Add A₃
+⋂ = (0, 1/3].
+⋃ still (0, 1].` },
+        { click: { button: 'Add A' } },
+        { wait: 2400 },
+        { say: `TAP Add A₄
+⋂ = (0, 1/4]. Panel:
+every set non-empty, intersection empty.` },
+        { click: { button: 'Add A' } },
+        { wait: 2800 },
+        { say: `TAP Previous
+n = 3. Row A₄ removed.
+⋂ rolls back to (0, 1/3].` },
+        { click: { button: 'Previous', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'reading-the-number-line': {
+      title: 'Reading the number line',
+      script: [
+        { say: `TAP Aᵢ = [−i, i]
+Filled dots: endpoints included.
+Ticks −3 to 3. ⋃ = [−2, 2].`, at: 'br' },
+        { click: { button: 'Aᵢ = [−i, i]' } },
+        { wait: 2800 },
+        { say: `TAP Add A₃
+Earlier rows fade, A₃ solid.
+Blue ⋃ bar grows to [−3, 3].`, at: 'br' },
+        { click: { button: 'Add A' } },
+        { wait: 2600 },
+        { say: `TAP Add A₄
+Ticks rescale: −4 to 4.
+Amber ⋂ bar stays [−1, 1].`, at: 'br' },
+        { click: { button: 'Add A' } },
+        { wait: 2600 },
+        { say: `TAP Aᵢ = [i, ∞)
+Arrowhead on the right:
+set runs to infinity.`, at: 'br' },
+        { click: { button: 'Aᵢ = [i, ∞)' } },
+        { wait: 2600 },
+        { say: `TAP Aᵢ = (0, 1/i]
+Hollow dot at 0: excluded.
+Filled dot at 1/i: included.`, at: 'br' },
+        { click: { button: 'Aᵢ = (0, 1/i]' } },
+        { wait: 2800 },
+      ],
+    },
+    'discrete-and-venn-views': {
+      title: 'Discrete and Venn views',
+      script: [
+        { say: `TAP Aᵢ = {1, 2, …, i}
+Grid: one row per set.
+⋃ so far {1, 2}, ⋂ {1}.` },
+        { click: { button: 'Aᵢ = {1, 2' } },
+        { wait: 2600 },
+        { say: `TAP Add A₃
+⋃ grew to {1, 2, 3}.
+⋂ stays {1}.` },
+        { click: { button: 'Add A' } },
+        { wait: 2400 },
+        { say: `TAP multiples of the index
+Aᵢ = { n ∈ ℕ : i divides n }.
+⋂ so far: the even numbers.` },
+        { click: { button: 'Aᵢ = { n' } },
+        { wait: 2600 },
+        { say: `TAP Add A₃
+⋂ = {6, 12, …}.
+Amber row: only 6 and 12 left.` },
+        { click: { button: 'Add A' } },
+        { wait: 2800 },
+        { say: `TAP A₁, A₂, A₃ on a Venn diagram
+Finite family. Blue panel: ⋃ Aᵢ.
+Amber panel: ⋂ Aᵢ.` },
+        { click: { button: 'A₁, A₂, A₃ on' } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
    return {
       props:{
+      demos,
+        relatedTools: getRelatedTools('union-intersection'),
          sectionsContent,
          introContent,
          instructions,
@@ -599,7 +736,22 @@ With the families this tool ships, the panel always finds a sharper description 
     }
    }
 
-export default function UnionIntersectionPage({seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+export default function UnionIntersectionPage({ demos,relatedTools, seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <IndexedUnionIntersectionExplorer showIntro={false} notes={notes}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Slug ids (Line 1). obj0 is the Key Terms slot, unused on tool pages, so it
   // never reaches this list. A per-state row carries its frozen unit between
@@ -625,14 +777,14 @@ export default function UnionIntersectionPage({seoData, sectionsContent, introCo
     plain('obj1', 'getting-started'),
     stateRow('obj12', 'one-set-is-not-a-family', 'start'),
 
-    plain('obj2', 'choosing-a-family'),
+    withDemo(plain('obj2', 'choosing-a-family')),
 
-    plain('obj3', 'pushing-the-index'),
+    withDemo(plain('obj3', 'pushing-the-index')),
     stateRow('obj13', 'the-pattern-is-still-forming', 'building'),
 
-    plain('obj4', 'reading-the-number-line'),
+    withDemo(plain('obj4', 'reading-the-number-line')),
 
-    plain('obj5', 'discrete-and-venn-views'),
+    withDemo(plain('obj5', 'discrete-and-venn-views')),
     stateRow('obj17', 'the-running-intersection-is-an-lcm', 'lcm-intersection'),
     stateRow('obj18', 'the-finite-chain', 'finite-chain'),
 
@@ -750,6 +902,7 @@ export default function UnionIntersectionPage({seoData, sectionsContent, introCo
    />
    <br/>
    */}
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

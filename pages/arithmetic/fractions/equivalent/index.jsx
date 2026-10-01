@@ -673,6 +673,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
 
 
 export async function getStaticProps(){
@@ -1112,8 +1114,24 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    simplify: demoUnitFrame({
+      svg: euclideanVisualizerDiagrams.classic,
+      caption: 'gcd(252, 105) = 21: the factor that reduces 105/252 to 5/12',
+      text: 'Simplifying a fraction means dividing numerator and denominator by their greatest common divisor, and the algorithm finds it without factoring: 252 = 105 &#183; 2 + 42, 105 = 42 &#183; 2 + 21, 42 = 21 &#183; 2, so the gcd is 21 and 105/252 = 5/12 in one step. Find the reducing factor for any fraction on the',
+      href: '/arithmetic/visual-tools/euclidean-algorithm',
+      linkText: 'Euclidean algorithm visualizer',
+    }),
+  };
+
 return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1131,7 +1149,7 @@ return {
 }
    }
 
-export default function EquivalentFractionsPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas}) {
+export default function EquivalentFractionsPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1168,6 +1186,8 @@ export default function EquivalentFractionsPage({seoData, sectionsContent, intro
           sectionsContent.obj3.content,
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+                  <div key={'unit-simplify'} dangerouslySetInnerHTML={{ __html: demoUnits.simplify }} />,
+          `Dividing by the greatest common factor at once is what reaching simplest form in a single step means.`,
         ]
     },
     {

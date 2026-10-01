@@ -8,6 +8,9 @@ import LUWrapper from '../../../../app/components/linear-algebra copy/matrix/LUW
 import luDiagrams from '../../../../app/components/linear-algebra copy/matrix/luDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -429,8 +432,124 @@ That asymmetry is the whole economy of the method. A simulation that solves the 
   }
 
 
+  const instructions = [
+    'The **Preset** pills load six matrices: a classic integer case, negative pivots, one that needs a swap, a $2 \\times 2$, a Pascal $4 \\times 4$ and a singular one. [Learn more about the presets](!#choosing-a-matrix)',
+    'The **Size** stepper (**▲** / **▼**) sets $A$ from $2 \\times 2$ to $4 \\times 4$, keeping the entries and padding with the identity; **Shuffle** draws random small integers. [Learn more about getting started](!#getting-started)',
+    'Type into any entry of $A$; the scenes are rebuilt from the new matrix at once. [Learn more about editing entries](!#getting-started)',
+    '**▶ Play** runs the elimination, **Next →** and **← Back** step one row operation at a time, **Reset** returns to the opening scene, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'Each scene shows $A$ (or $PA$), $L$ and the working matrix $U$: the pivot, the row being cleared, and an arrow from the cleared entry to its multiplier in $L$. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Row operations** log lists every pivot, multiplier and swap; a zero pivot swaps two rows and the result reads $PA = LU$. [Learn more about how the elimination runs](!#how-the-elimination-runs)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real LUWrapper
+     (opens on Classic 3x3). Cells: input[aria-label="entry i,j"]. */
+  const demos = {
+    'getting-started': {
+      title: 'Size, entries, shuffle',
+      script: [
+        { say: `TAP ▼
+Size 2 × 2.
+Top-left block kept: [2 1; 4 3].` },
+        { click: { button: '▼', exact: true } },
+        { wait: 2400 },
+        { say: `TYPE a₂₁ = 8
+A = [2 1; 8 3].
+Scenes rebuilt: Step 1 / 4.` },
+        { set: 'input[aria-label="entry 2,1"]', value: 8 },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+Pivot 2. ℓ₂₁ = 8 ÷ 2 = 4 → into L.
+Done: A = LU. det = −2.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5600 },
+        { say: `TAP ▲
+Size 3 × 3.
+Padded with identity: new row and column 0 0 1.` },
+        { click: { button: '▲', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Shuffle
+Random small integers.
+Zero in the corner 3 times in 10 → swap.` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'Classic 3 × 3, step by step',
+      script: [
+        { say: `TAP Next →
+Pivot 1: 2 at (1, 1).
+Pivot cell accent, its row primary.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+ℓ₂₁ = 4 ÷ 2 = 2 → into L.
+R2 ← R2 − 2·R1. Entry turns 0.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+ℓ₃₁ = 8 ÷ 2 = 4.
+Arrow: cleared entry → its place in L.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Fast → TAP ▶ Play
+Pivot 2 = 1. ℓ₃₂ = 3.
+Done: A = LU. det = 2·1·2 = 4.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3800 },
+        { say: `TAP Reset
+Back to Step 1 / 7.
+L: ones and zeros in grey. U = copy of A.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'choosing-a-matrix': {
+      title: 'Swap, singular, fraction, Pascal',
+      script: [
+        { say: `TAP Needs a swap → Next →
+a₁₁ = 0: nothing to divide by.
+Swap R1 ↔ R2. A relabelled PA.` },
+        { click: { button: 'Needs a swap', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `SELECT Fast → TAP ▶ Play
+ℓ₂₁ = 0, ℓ₃₁ = 2, ℓ₃₂ = 1.
+Done: PA = LU.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5400 },
+        { say: `TAP Singular → ▶ Play
+Zero pivot at (2, 2) → swap R2 ↔ R3.
+U₃₃ = 0, nothing below. det = 0.` },
+        { click: { button: 'Singular', exact: true } },
+        { wait: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP 2×2 → ▶ Play
+ℓ₂₁ = 6 ÷ 4 = 3/2.
+Fractions shown as a/b. det = −6.` },
+        { click: { button: '2×2', exact: true } },
+        { wait: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3600 },
+        { say: `TAP Pascal 4×4 → ▶ Play
+Multipliers 1, 1, 1, 2, 3, 3.
+L and U: both Pascal triangles.` },
+        { click: { button: 'Pascal 4×4', exact: true } },
+        { wait: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 8200 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-lu-decomposition'),
       sectionsContent,
       stateUnits,
@@ -453,7 +572,22 @@ That asymmetry is the whole economy of the method. A simulation that solves the 
   }
 }
 
-export default function LUVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function LUVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <LUWrapper defaultPreset='classic' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -475,15 +609,15 @@ export default function LUVisualizer({seoData, sectionsContent, stateUnits, expl
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     plain('obj2', 'how-the-elimination-runs'),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'marking-a-pivot', 'pivot'),
     stateRow('obj13', 'eliminating-and-recording', 'eliminate'),
     stateRow('obj14', 'swapping-rows', 'swap'),
     stateRow('obj15', 'the-completed-factorization', 'done'),
-    plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-matrix'),
+    withDemo(plain('obj3', 'the-scene-player')),
+    withDemo(plain('obj4', 'choosing-a-matrix')),
     plain('obj5', 'what-the-lu-decomposition-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -544,6 +678,10 @@ export default function LUVisualizer({seoData, sectionsContent, stateUnits, expl
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>LU Decomposition</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <LUWrapper

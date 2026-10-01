@@ -8,6 +8,9 @@ import OrthogonalWrapper from '../../../../app/components/linear-algebra copy/ma
 import orthogonalDiagrams from '../../../../app/components/linear-algebra copy/matrix/orthogonalDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -473,8 +476,163 @@ Columns that are not perpendicular, as in the shear preset, cannot be repaired b
   }
 
 
+  const instructions = [
+    'The **Preset** pills load eight matrices: five orthogonal ones (two rotations, a reflection, a permutation, a Householder reflection) and three that fail the test. [Learn more about the presets](!#choosing-a-matrix)',
+    'Hover the **?** beside Preset for a reminder of what orthogonality means and implies. [Learn more about getting started](!#getting-started)',
+    'The **Size** stepper (**▲** / **▼**) switches $Q$ between $2 \\times 2$ and $3 \\times 3$; **Shuffle** draws a random rotation or reflection. [Learn more about size and Shuffle](!#getting-started)',
+    'Type into any of the **Entries of Q**; values are shown to four decimals and the run restarts from the first scene. [Learn more about editing entries](!#getting-started)',
+    'Change the **Test vector x**; the lengths scene shows $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$ and $(Q\\mathbf{x})\\cdot(Q\\mathbf{y}) = \\mathbf{x}\\cdot\\mathbf{y}$ for it. [Learn more about the test vector](!#getting-started)',
+    '**▶ Play** runs the scenes, **Next →** and **← Back** step one at a time, **Reset** returns to the first scene, and the speed menu sets the pace; the **Step explanations** log keeps every stage. [Learn more about the controls](!#getting-started)',
+    'The scenes run $Q^TQ$, determinant, lengths and angles, inverse, classification; a matrix that fails $Q^TQ = I$ stops early with the diagnosis. [Learn more about the scenes](!#the-scenes-in-order)',
+    'In each scene the diagonal of $Q^TQ$ is the target, $\\mathbf{x}$ and $Q\\mathbf{x}$ share one colour, and the classification scene colours a rotation and a reflection differently. [Learn more about reading a scene](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real OrthogonalWrapper
+     (opens on Rotation 30°, x = (2, 1), 1800 ms per scene).
+     Cells: input[aria-label="entry i,j"], input[aria-label="x entry i"]. */
+  const demos = {
+    'getting-started': {
+      title: 'Size, entries, Shuffle',
+      script: [
+        { say: `TAP ▲
+Size 3 × 3.
+Rotation 30° kept top-left. New column (0, 0, 1).` },
+        { click: { button: '▲', exact: true } },
+        { wait: 2600 },
+        { say: `SELECT Fast → TAP ▶ Play
+All 7 scenes pass.
+Rotation by 30° about (0, 0, 1).` },
+        { set: 'select', value: '700' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6400 },
+        { say: `TYPE q₃₃ = 2 → TAP ▶ Play
+QᵀQ diagonal 1, 1, 4: column 3 length 2.
+STOP. Normalizing fixes it.` },
+        { set: 'input[aria-label="entry 3,3"]', value: 2 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4400 },
+        { say: `TAP Shuffle
+Random rotation or reflection.
+Always orthogonal.` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+Runs to the end.
+QᵀQ = I every time.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6400 },
+      ],
+    },
+    'the-scenes-in-order': {
+      title: 'Rotation 30°, scene by scene',
+      script: [
+        { say: `TAP Next →
+QᵀQ = I.
+Diagonal 1, 1: unit columns. Off-diagonal 0: perpendicular.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+det Q = 1.
+Orientation kept: a rotation.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+x = (2, 1): |x| = 2.2361 = |Qx|.
+x·y = 2 = (Qx)·(Qy).` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Q⁻¹ = Qᵀ.
+QQᵀ = I: rows orthonormal too.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+cos θ = 0.866, sin θ = 0.5.
+Rotation by 30°.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'Test vector and player controls',
+      script: [
+        { say: `TYPE x = (3, 4) → Next → ×3
+|x| = 5, |Qx| = 5.
+x, Qx green. y, Qy grey.` },
+        { set: 'input[aria-label="x entry 1"]', value: 3 },
+        { set: 'input[aria-label="x entry 2"]', value: 4 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ← Back
+One scene back: det Q = 1.
+Rotation.` },
+        { click: { button: '← Back', exact: true } },
+        { wait: 2400 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+Rest of the run in seconds.
+Ends: rotation by 30°.` },
+        { set: 'select', value: '400' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4200 },
+        { say: `TAP Reset
+Back to scene 1.
+Log shows the question only.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next →
+QᵀQ scene. Diagonal = the target.
+1, 1 on it: QᵀQ = I.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'choosing-a-matrix': {
+      title: 'Presets that pass and fail',
+      script: [
+        { say: `TAP Reflection
+Entries ±0.7071 = ±1/√2.
+det will be −1.` },
+        { click: { button: 'Reflection', exact: true } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+det Q = −1: a reflection.
+Mirror line at 22.5°.` },
+        { set: 'select', value: '700' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6400 },
+        { say: `TAP Orthogonal, not unit → ▶ Play
+QᵀQ diagonal 2, 2: lengths 1.4142.
+STOP. Normalized Q̃ shown: fixable.` },
+        { click: { button: 'Orthogonal, not unit', exact: true } },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4200 },
+        { say: `TAP Scaled rotation → ▶ Play
+QᵀQ = 4I. Lengths 2, 2.
+det Q = 4. Normalizing fixes it.` },
+        { click: { button: 'Scaled rotation', exact: true } },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4200 },
+        { say: `TAP Shear → ▶ Play
+Columns not perpendicular.
+STOP. No rescaling helps.` },
+        { click: { button: 'Shear', exact: true } },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4200 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-orthogonal-matrices'),
       sectionsContent,
       stateUnits,
@@ -497,7 +655,22 @@ Columns that are not perpendicular, as in the shear preset, cannot be repaired b
   }
 }
 
-export default function OrthogonalVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function OrthogonalVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <OrthogonalWrapper defaultPreset='rotate30' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -519,8 +692,8 @@ export default function OrthogonalVisualizer({seoData, sectionsContent, stateUni
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-scenes-in-order'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-scenes-in-order')),
     stateRow('obj11', 'the-test', 'gram'),
     stateRow('obj12', 'determinant-plus-or-minus-one', 'det'),
     stateRow('obj13', 'lengths-and-angles-survive', 'lengths'),
@@ -528,8 +701,8 @@ export default function OrthogonalVisualizer({seoData, sectionsContent, stateUni
     stateRow('obj15', 'reading-off-a-reflection', 'reflect'),
     stateRow('obj16', 'the-axis-of-a-rotation-in-space', 'axis'),
     stateRow('obj17', 'perpendicular-but-not-unit', 'fix'),
-    plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-matrix'),
+    withDemo(plain('obj3', 'the-scene-player')),
+    withDemo(plain('obj4', 'choosing-a-matrix')),
     plain('obj5', 'what-an-orthogonal-matrix-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -590,6 +763,10 @@ export default function OrthogonalVisualizer({seoData, sectionsContent, stateUni
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Orthogonal Matrices</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <OrthogonalWrapper

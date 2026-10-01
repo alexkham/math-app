@@ -682,6 +682,9 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import varianceDiagrams from '@/app/components/probability/variance/varianceDiagrams'
+import chebyshevDiagrams from '@/app/components/probability/inequalities/chebyshevDiagrams'
 
 
 export async function getStaticProps(){
@@ -1140,8 +1143,31 @@ These results are deliberately general. They apply across wide classes of random
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_3_0: demoUnitFrame({
+      svg: varianceDiagrams.default,
+      caption: 'A dataset with its mean and squared deviations',
+      text: 'The inputs to the inequalities are exactly what this picture shows: a mean and the spread of the values around it, measured by variance. A random variable with small spread cannot often land far from its mean, and that is the fact the bounds make precise. Move the points and watch the variance respond on the',
+      href: '/probability/visual-tools/variance',
+      linkText: 'variance visualizer',
+    }),
+    u_5_1: demoUnitFrame({
+      svg: chebyshevDiagrams['chebyshev-normal'],
+      caption: 'Chebyshev bound for a normal variable, mean 10, variance 4, deviation 3',
+      text: 'The shaded tails are the actual probability of straying at least 3 from the mean and the bound is variance over 9, which sits well above them: the inequality is valid but loose because it uses only the variance. The Markov visualizer shows the even looser bound that uses only the mean. Change the deviation and compare bound and truth on the',
+      href: '/probability/visual-tools/inequalities/chebyshev',
+      linkText: 'Chebyshev inequality visualizer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       obj4Table,
@@ -1165,7 +1191,7 @@ export default function ProbabilityInequalitiesPage({
   obj4Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1210,6 +1236,8 @@ export default function ProbabilityInequalitiesPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-u_3_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_3_0 }} />,
+          `The inequalities are grouped by which of these inputs they use.`,
         ]
     },
     {
@@ -1228,6 +1256,8 @@ export default function ProbabilityInequalitiesPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-u_5_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_1 }} />,
+          `How the featured inequalities relate is set out next.`,
         ]
     },
     {

@@ -14,6 +14,9 @@ import FunctionAsymptotes from '../../../../app/components/functions/asymptotes/
 import asymDiagrams from '../../../../app/components/functions/asymptotes/functionAsymptotesDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -560,8 +563,147 @@ Zeros at $x = \\pm 1$ anchor the two branches to the axis on their way between w
       '[Learn more about the oblique rational](!#the-oblique-rational-function) · [Oblique asymptotes](!#oblique-asymptotes)',
   };
 
+  const instructions = [
+    'The picker on the left lists eleven functions in four groups: **Vertical only**, **Horizontal only**, **Both V and H** and **Oblique**. Tapping one switches the function and resets the parameters. [Learn more about picking a function](!#picking-a-function)',
+    'The four **Parameters** sliders set $a$, $k$, $b$ and $h$ in $g(x) = a \\cdot f(b(x - h)) + k$; the dashed lines move with the curve, the **Applied** chips light up for every changed value, and **Reset** restores the defaults. [Learn more about transforming and tracking asymptotes](!#transforming-and-tracking-asymptotes)',
+    'The plot draws the curve in solid blue, vertical asymptotes as red dashed lines, horizontal ones as green dashed lines and oblique ones as purple dashed slants. [Learn more about reading the plot](!#reading-the-plot)',
+    'The **S**, **M**, **L** and **XL** buttons set the height of the plot. [Learn more about the plot panel](!#getting-started-with-the-visualizer)',
+    'The **Detected asymptotes** panel under the plot lists every line found as a coloured pill with its equation, and counts the total. [Learn more about the detected asymptotes panel](!#the-detected-asymptotes-panel)',
+    'Each vertical row reports the two one-sided limits, $x \\to c^-$ and $x \\to c^+$, as $+\\infty$ or $-\\infty$; horizontal and oblique rows show the direction, $x \\to +\\infty$, $x \\to -\\infty$ or $x \\to \\pm\\infty$. [Learn more about one-sided limits](!#one-sided-limits-at-vertical-asymptotes)',
+    'The two **Oblique** functions add a purple slant $y = x$ that the curve approaches far from the origin. [Learn more about oblique asymptotes](!#oblique-asymptotes)',
+    'The info panel has three tabs: **Detected** writes out the asymptotes found, **Family** describes the chosen function, and **Concepts** explains the three kinds of asymptote. [Learn more about the info panel](!#getting-started-with-the-visualizer)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionAsymptotes tool
+     (opens on Reciprocal). Range inputs in DOM order: 0 = a, 1 = k, 2 = b, 3 = h.
+     Only states whose detection was probed are used (see the page report). */
+  const demos = {
+    'picking-a-function': {
+      title: 'Picking a function',
+      script: [
+        { say: `TAP Logistic
+Two green dashed lines.
+y = 1 on the right, y = 0 on the left.` },
+        { click: { button: 'Logistic', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 1 / (1 + x²)
+Bell curve. One green line y = 0.
+Same limit on both sides.` },
+        { click: { button: '1 / (1 + x²)', exact: true } },
+        { wait: 2600 },
+        { say: `TAP (x + 1) / (x − 1)
+Red dashed vertical x = 1.
+Curve splits into two branches there.` },
+        { click: { button: '(x + 1) / (x − 1)', exact: true } },
+        { wait: 2600 },
+        { say: `TAP x / (x² − 1)
+Two red verticals: x = −1, x = 1.
+Three branches.` },
+        { click: { button: 'x / (x² − 1)', exact: true } },
+        { wait: 2600 },
+        { say: `TAP x + 1/x
+Red x = 0 + purple slant y = x.
+Far out, curve hugs y = x.` },
+        { click: { button: 'x + 1/x', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-detected-asymptotes-panel': {
+      title: 'Detected asymptotes panel',
+      script: [
+        { say: `TAP (x² − 1) / x
+Vertical row x = 0: 0⁻ → +∞, 0⁺ → −∞.
+Oblique row y = x. 2 total.` },
+        { click: { button: '(x² − 1) / x', exact: true } },
+        { wait: 2800 },
+        { say: `TAP x + 1/x
+Same pills. Limits swap:
+0⁻ → −∞, 0⁺ → +∞.` },
+        { click: { button: 'x + 1/x', exact: true } },
+        { wait: 2600 },
+        { say: `TAP x / (x² − 1)
+Two vertical rows, x = −1 and x = 1.
+Each: −∞ from the left, +∞ from the right.` },
+        { click: { button: 'x / (x² − 1)', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Exponential decay
+Horizontal row y = 0, x → +∞ only.
+Left side blows up. 1 total.` },
+        { click: { button: 'Exponential decay', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Logistic
+Two horizontal rows:
+y = 1 as x → +∞, y = 0 as x → −∞.` },
+        { click: { button: 'Logistic', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'transforming-and-tracking-asymptotes': {
+      title: 'Tracking asymptotes with a, k, b, h',
+      script: [
+        { say: `DRAG h → 2
+Red vertical moves x = 0 → x = 2.
+g(x) = 1/(x − 2). Chip h = 2 lit.` },
+        { slide: { range: 3 }, to: 2, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG a → −1
+Curve flips. Line stays at x = 2.
+Limits swap: 2⁻ → +∞, 2⁺ → −∞.` },
+        { slide: { range: 0 }, to: -1, ms: 1400 },
+        { wait: 2800 },
+        { say: `TAP Logistic, DRAG a → 3
+New function resets the sliders.
+Right line y = 1 → y = 3.` },
+        { click: { button: 'Logistic', exact: true } },
+        { slide: { range: 0 }, to: 3, ms: 1200 },
+        { wait: 2600 },
+        { say: `DRAG k → −1
+Both green lines drop by 1:
+y = 2 right, y = −1 left.` },
+        { slide: { range: 1 }, to: -1, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG b → −1
+Curve mirrored left–right.
+Sides swap: y = −1 right, y = 2 left.` },
+        { slide: { range: 2 }, to: -1, ms: 1400 },
+        { wait: 2800 },
+      ],
+    },
+    'getting-started-with-the-visualizer': {
+      title: 'Plot size and info panel',
+      script: [
+        { say: `TAP L
+Taller plot.
+Same curve, same dashed lines.` },
+        { click: { button: 'L', exact: true } },
+        { wait: 2400 },
+        { say: `TAP S
+Compact plot.` },
+        { click: { button: 'S', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Family
+Reciprocal: sign-flip vertical x = 0,
+horizontal y = 0.` },
+        { click: { button: 'Family', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Concepts
+What an asymptote is.
+Vertical, horizontal, oblique.` },
+        { click: { button: 'Concepts', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Detected
+Function and every line found,
+with its one-sided limits.` },
+        { click: { button: 'Detected', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('functions-asymptotes'),
       sectionsContent,
       introContent,
@@ -585,17 +727,32 @@ Zeros at $x = \\pm 1$ anchor the two branches to the axis on their way between w
 }
 
 
-export default function FunctionAsymptotesPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionAsymptotesPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionAsymptotes explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
-    { id:'getting-started-with-the-visualizer',        title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'picking-a-function',                         title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
+    { id:'getting-started-with-the-visualizer',        title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[demo('getting-started-with-the-visualizer'), sectionsContent.obj1.content] },
+    { id:'picking-a-function',                         title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[demo('picking-a-function'), sectionsContent.obj2.content] },
     { id:'reading-the-plot',                           title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
-    { id:'the-detected-asymptotes-panel',              title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
+    { id:'the-detected-asymptotes-panel',              title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[demo('the-detected-asymptotes-panel'), sectionsContent.obj4.content] },
     { id:'one-sided-limits-at-vertical-asymptotes',    title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
-    { id:'transforming-and-tracking-asymptotes',       title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
+    { id:'transforming-and-tracking-asymptotes',       title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[demo('transforming-and-tracking-asymptotes'), sectionsContent.obj6.content] },
     { id:'oblique-asymptotes',                         title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
     { id:'what-is-an-asymptote',                       title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
     { id:'why-asymptotes-matter',                      title:sectionsContent.obj9.title,  link:sectionsContent.obj9.link,  content:[sectionsContent.obj9.content] },
@@ -669,6 +826,10 @@ export default function FunctionAsymptotesPage({relatedTools, seoData, sectionsC
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Asymptotes</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionAsymptotes explanations={explanations}/>
       <br/>

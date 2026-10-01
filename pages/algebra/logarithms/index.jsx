@@ -693,6 +693,8 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 
 
 export async function getStaticProps(){
@@ -1194,8 +1196,24 @@ const schemas = {
   }
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    table: demoUnitFrame({
+      svg: powersTableDiagrams['b2-default'],
+      caption: 'Powers of 2: read the table backwards for log&#8322;',
+      text: 'The table lists 2&#8304;, 2&#185;, 2&#178;, &#8230; with their values 1, 2, 4, 8, &#8230;; a logarithm reads it in the other direction, from value to exponent: log&#8322; 8 = 3 because 8 sits in the row of 2&#179;. Every logarithm question is a lookup in the right base&#8217;s table. Change the base and read off its logarithms on the',
+      href: '/algebra/visual-tools/powers-table',
+      linkText: 'powers table',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1222,7 +1240,7 @@ export default function LogarithmsPage({
   obj6Table,
   obj7Table,
   summaryTable,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1242,6 +1260,8 @@ export default function LogarithmsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-table'} dangerouslySetInnerHTML={{ __html: demoUnits.table }} />,
+          `Values between the rows are what make logarithms more than a lookup, and the rest of the page is about them.`,
         ]
     },
     {

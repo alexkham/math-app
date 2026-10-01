@@ -1272,6 +1272,10 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
+import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
+import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 
 
 export async function getStaticProps(){
@@ -2226,8 +2230,38 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    geom: demoUnitFrame({
+      svg: conjugateModulusDiagrams.start,
+      caption: 'z and z&#772; mirrored in the real axis, |z| = 3.6',
+      text: 'The point z and its conjugate z&#772; sit at the same distance from the origin, one above the real axis and one below: conjugation keeps the real part and flips the sign of the imaginary part, so it is a reflection in the real axis. The modulus, the length of either arrow, is the same 3.6 for both. Drag z anywhere and watch its mirror image follow on the',
+      href: '/complex-numbers/visual-tools/complex-conjugate',
+      linkText: 'conjugate and modulus tool',
+    }),
+    product: demoUnitFrame({
+      svg: complexMultiplicationDiagrams.conjugateProduct,
+      caption: 'z &#183; z&#772; lands on the positive real axis',
+      text: 'The arguments of z and z&#772; are opposite, so they cancel when the two are multiplied and the product has argument 0: it lies on the positive real axis at distance |z|&#178;. That is the identity z&#8201;z&#772; = |z|&#178; seen as a rotation back to the axis. Multiply any number by its conjugate on the',
+      href: '/complex-numbers/visual-tools/multiplication',
+      linkText: 'complex multiplication tool',
+    }),
+    division: demoUnitFrame({
+      svg: complexDivisionDiagrams.conjugateQuotient,
+      caption: 'Dividing by the conjugate clears the denominator',
+      text: 'Multiplying numerator and denominator by z&#772;&#8322; turns the denominator into the real number |z&#8322;|&#178;, and the picture shows the quotient at the angle &#952;&#8321; &#8722; &#952;&#8322; that results. Division is multiplication by the conjugate followed by a real scaling. Work any quotient through on the',
+      href: '/complex-numbers/visual-tools/division',
+      linkText: 'complex division tool',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj1Table,
@@ -2258,7 +2292,7 @@ export default function ComplexConjugatePage({
   obj5Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2303,6 +2337,8 @@ export default function ComplexConjugatePage({
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-geom'} dangerouslySetInnerHTML={{ __html: demoUnits.geom }} />,
+          `Every algebraic property of the conjugate below is a consequence of this reflection.`,
         ]
     },
     {
@@ -2332,6 +2368,8 @@ export default function ComplexConjugatePage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-product'} dangerouslySetInnerHTML={{ __html: demoUnits.product }} />,
+          `The identity gives the modulus without a square root, which is why it appears in every division.`,
         ]
     },
     {
@@ -2361,6 +2399,8 @@ export default function ComplexConjugatePage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-division'} dangerouslySetInnerHTML={{ __html: demoUnits.division }} />,
+          `Without the conjugate there would be no way to write a quotient in standard form.`,
         ]
     },
     {

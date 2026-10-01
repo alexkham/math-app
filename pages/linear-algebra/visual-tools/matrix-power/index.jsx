@@ -8,6 +8,9 @@ import PowerWrapper from '../../../../app/components/linear-algebra copy/matrix/
 import powerDiagrams, { meta as powerMeta } from '../../../../app/components/linear-algebra copy/matrix/powerDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -402,8 +405,131 @@ The final caption makes the point that the bracketing did not matter. Grouping f
   }
 
 
+  const instructions = [
+    'The **Matrix size** stepper (**▲** / **▼**) sets $A$ from $2 \\times 2$ to $4 \\times 4$; the second stepper is locked because $A$ must be square. [Learn more about choosing size and exponent](!#choosing-size-and-exponent)',
+    'The **Exponent** stepper sets $n$ from 1 to 5, and **Computing** spells out $A^n$ as $n$ copies of $A$; the run has $2(n - 1) + 1$ scenes. [Learn more about the exponent](!#choosing-size-and-exponent)',
+    'Hover the **?** icon for what a matrix power is and why $A$ must be square. [Learn more about getting started](!#getting-started)',
+    '**▶ Play** runs the scenes, **Next →** and **← Back** move one scene, **Reset** returns to the definition, and the speed menu sets the pace from Slow to Very Fast. [Learn more about the controls](!#getting-started)',
+    'Each stage brackets the leftmost pair with a dashed outline, then collapses it into one power; the exponent grows by one per stage. [Learn more about bracket and collapse](!#bracket-and-collapse)',
+    'From $A^3$ up, cells show a $\\Sigma$ summary; hover a cell to see every term, with the count in the tooltip header. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Step explanations** log keeps a record of every bracket and collapse. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real PowerWrapper
+     (opens at 2 x 2, n = 4: 7 scenes). Steppers: ▲/▼ nth 0 = size (the
+     second size stepper is locked and has no buttons), nth 1 = exponent. */
+  const demos = {
+    'getting-started': {
+      title: 'Size, exponent, play',
+      script: [
+        { say: `TAP ▼ exponent
+n = 3. Computing: A³ = A · A · A.
+Step 1 / 5.` },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 2600 },
+        { say: `TAP ▲ size
+A is 3 × 3. Both dimensions linked.
+Still 5 scenes: size does not change them.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 2800 },
+        { say: `SELECT Fast → TAP ▶ Play
+Bracket, collapse, bracket, collapse.
+Step 5 / 5: A³. 9 terms per cell.` },
+        { set: 'select', value: '700' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3800 },
+        { say: `TAP Reset
+Step 1 / 5. Three copies of A again.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▲ exponent twice
+n = 5: A⁵ = A · A · A · A · A.
+Step 1 / 9: 2(n − 1) + 1 scenes.` },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 2800 },
+      ],
+    },
+    'bracket-and-collapse': {
+      title: 'Bracket, collapse, repeat',
+      script: [
+        { say: `TAP Next →
+Bracket (A · A) → A².
+Dashed group. Exponents add: 1 + 1 = 2.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Collapse: A⁴ = A² · A · A.
+Cells of A² shown in full.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Bracket (A² · A) → A³.
+2 + 1 = 3.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+Collapse: A⁴ = A³ · A.
+4 terms per cell → Σ summary.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▶ Play
+Last bracket, then Step 7 / 7: A⁴.
+8 terms per cell. Grouping order does not matter.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4000 },
+      ],
+    },
+    'choosing-size-and-exponent': {
+      title: 'Terms per cell',
+      script: [
+        { say: `TAP ▼ exponent twice
+n = 2: A² = A · A.
+Step 1 / 3.` },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 400 },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 2400 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+2 × 2, A²: 2 terms per cell.
+All shown inline.` },
+        { set: 'select', value: '400' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ▲ size → ▶ Play
+3 × 3, A²: 3 terms per cell.
+Still inline.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ▲ exponent → ▶ Play
+3 × 3, A³: 9 terms per cell.
+Σ summary takes over.` },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3200 },
+        { say: `TAP ▲ size, ▲ exponent twice → ▶ Play
+4 × 4, A⁵: Step 9 / 9.
+256 terms per cell.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-power'),
       sectionsContent,
       stateUnits,
@@ -425,7 +551,22 @@ The final caption makes the point that the bracketing did not matter. Grouping f
   }
 }
 
-export default function MatrixPowerVisualizer({seoData, sectionsContent, stateUnits, introContent, faqQuestions, schemas, relatedTools }) {
+export default function MatrixPowerVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <PowerWrapper title="" defaultSize={2} defaultExponent={4} />
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -447,14 +588,14 @@ export default function MatrixPowerVisualizer({seoData, sectionsContent, stateUn
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'bracket-and-collapse'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'bracket-and-collapse')),
     stateRow('obj11', 'the-definition', 'chain'),
     stateRow('obj12', 'the-first-collapse', 'square'),
     stateRow('obj13', 'the-second-collapse', 'cube'),
     stateRow('obj14', 'the-result', 'final'),
     plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-size-and-exponent'),
+    withDemo(plain('obj4', 'choosing-size-and-exponent')),
     plain('obj5', 'what-a-matrix-power-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -515,6 +656,10 @@ export default function MatrixPowerVisualizer({seoData, sectionsContent, stateUn
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Matrix Powers</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <PowerWrapper

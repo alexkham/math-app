@@ -10,6 +10,9 @@ import ScalarMultiplicationWrapper from '../../../../app/components/linear-algeb
 import matrixScalarDiagrams from '../../../../app/components/linear-algebra copy/matrix/matrixScalarDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -379,8 +382,129 @@ Two consequences are worth knowing because they are easy to get wrong. The trace
   }
 
 
+  const instructions = [
+    'The **Dimensions of A** steppers (**▲** / **▼**) set the rows and columns of $A$, each from 1 to 5; $C$ takes the same shape automatically. [Learn more about choosing dimensions](!#choosing-dimensions)',
+    'Hover the **?** icon for what a scalar is and why the shape of $A$ is kept. [Learn more about getting started](!#getting-started)',
+    '**▶ Play** runs the sweep, **Next →** and **← Back** move one cell at a time, **Reset** returns to the opening scene, and the speed menu sets the pace from Slow to Very Fast. [Learn more about the controls](!#getting-started)',
+    'Each scene lights one entry of $A$ and its destination in $C$, with an arrow between them and $c_{i,j} = k \\cdot a_{i,j}$ as its title. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Step explanations** log keeps every completed step with its formula and a note linking to the matching section below. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real
+     ScalarMultiplicationWrapper (mode='matrices', opens at 2 x 3).
+     Steppers: ▲/▼ nth 0 = rows, nth 1 = columns. */
+  const demos = {
+    'getting-started': {
+      title: 'Shape, play, reset',
+      script: [
+        { say: `TAP ▼ rows
+A is 1 × 3. C follows: 1 × 3.
+Step 1 / 5.` },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP ▲ columns
+A is 1 × 4. Step 1 / 6.
+Any shape allowed: k meets each entry alone.` },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 2600 },
+        { say: `SELECT Fast → TAP ▶ Play
+k · a₁,₁ … k · a₁,₄ written in turn.
+Step 6 / 6.` },
+        { set: 'select', value: '700' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4600 },
+        { say: `TAP Reset
+Step 1 / 6. C empty again.
+Shape kept: 1 × 4.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▲ rows
+A is 2 × 4. Step 1 / 10.
+8 cells to fill, one factor k.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'Reading one scene',
+      script: [
+        { say: `TAP Next →
+Step 2 / 8. a₁,₁ lit in A, c₁,₁ in C.
+Arrow: c₁,₁ = k · a₁,₁.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+Step 3 / 8. c₁,₂ = k · a₁,₂.
+c₁,₁ keeps its product.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next → twice
+Step 5 / 8. c₂,₁ = k · a₂,₁.
+Row 1 done; row 2 starts.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ← Back
+Step 4 / 8. c₁,₃ active again.
+c₂,₁ back to a placeholder.` },
+        { click: { button: '← Back', exact: true } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+Step 8 / 8. All 6 cells hold k · aᵢ,ⱼ.
+Log lists every step.` },
+        { set: 'select', value: '700' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4000 },
+      ],
+    },
+    'choosing-dimensions': {
+      title: 'Any shape works',
+      script: [
+        { say: `TAP ▲ rows
+3 × 3 square. Step 1 / 11.
+9 cells + opening scene + completed product.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP ▲ columns twice
+3 × 5 rectangle. Step 1 / 17.
+Same rule. No shape restriction.` },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 2600 },
+        { say: `TAP ▲ rows twice
+5 × 5: the maximum. Step 1 / 27.
+Entries of C shrink to stay readable.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP ▼ columns ×4
+5 × 1: a single column. Step 1 / 7.
+Minimum is 1 on each side.` },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 300 },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 300 },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 300 },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 2400 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+Step 7 / 7. Five products, one k.
+C is 5 × 1, like A.` },
+        { set: 'select', value: '400' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-scalar-multiplication'),
       sectionsContent,
          stateUnits,
@@ -403,7 +527,22 @@ Two consequences are worth knowing because they are easy to get wrong. The trace
   }
 }
 
-export default function ScalarMultiplicationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function ScalarMultiplicationVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ScalarMultiplicationWrapper mode='matrices' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -427,12 +566,12 @@ export default function ScalarMultiplicationVisualizer({seoData, sectionsContent
     // obj0 Key Terms was defined but rendered nowhere - its section entry and the
     // KeyTermsCard were both commented out, so the content was invisible. Restored.
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-scene-player'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-scene-player')),
     stateRow('obj10', 'the-opening-scene', 'intro'),
     stateRow('obj11', 'one-cell-at-a-time', 'step'),
     stateRow('obj12', 'the-completed-product', 'done'),
-    plain('obj3', 'choosing-dimensions'),
+    withDemo(plain('obj3', 'choosing-dimensions')),
     plain('obj4', 'what-scalar-multiplication-is'),
     plain('obj5', 'key-properties'),
     plain('obj6', 'why-it-matters'),
@@ -496,6 +635,10 @@ export default function ScalarMultiplicationVisualizer({seoData, sectionsContent
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Matrix Scalar Multiplication</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <ScalarMultiplicationWrapper

@@ -1945,6 +1945,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
+import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 
 
 export async function getStaticProps(){
@@ -2663,8 +2666,38 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    connection: demoUnitFrame({
+      svg: functionLimitDiagrams.onesided,
+      caption: '&#8730;x at 0: a right-hand limit with no left-hand partner',
+      text: 'Only the right probe can be placed, and it heads to 0; with no function to the left there is no left-hand limit to compare it with, so the two-sided limit is not defined at this endpoint although the one-sided one is. The equivalence in this section needs both sides to exist and agree. Try both probes on the',
+      href: '/calculus/visual-tools/limit',
+      linkText: 'limit explorer',
+    }),
+    staircase: demoUnitFrame({
+      svg: functionContinuityDiagrams.staircase,
+      caption: 'The floor function: a jump at every integer',
+      text: 'At each integer the function steps up by one: the left-hand limit is the lower step and the right-hand limit the upper one, so the two never agree and every integer is a jump discontinuity. Between integers the function is constant and perfectly continuous. Test the checker at an integer and at a non-integer on the',
+      href: '/calculus/visual-tools/continuity',
+      linkText: 'continuity checker',
+    }),
+    asymptote: demoUnitFrame({
+      svg: functionLimitDiagrams['infinite-jump'],
+      caption: '1/x at 0: &#8722;&#8734; on the left, +&#8734; on the right',
+      text: 'The probes at &#177;0.5 read &#8722;2 and 2 and run off in opposite directions as they close in, which is exactly the sign pattern the section derives for 1/(x &#8722; 2) at 2: the side decides the sign. Watch the two readings separate on the',
+      href: '/calculus/visual-tools/limit',
+      linkText: 'limit explorer',
+    }),
+  };
+
 return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -2683,7 +2716,7 @@ return {
    }
 
 
-export default function OneSidedPage({seoData, sectionsContent, introContent, obj3Table, summaryTable, faqQuestions, schemas}) {
+export default function OneSidedPage({seoData, sectionsContent, introContent, obj3Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2712,6 +2745,8 @@ export default function OneSidedPage({seoData, sectionsContent, introContent, ob
           sectionsContent.obj3.content,
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+                  <div key={'unit-connection'} dangerouslySetInnerHTML={{ __html: demoUnits.connection }} />,
+          `The two-sided limit is a conclusion drawn from the one-sided ones, never the other way round.`,
         ]
     },
     {
@@ -2747,6 +2782,8 @@ export default function OneSidedPage({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-staircase'} dangerouslySetInnerHTML={{ __html: demoUnits.staircase }} />,
+          `The one-sided limits at a jump are the two values the function is torn between.`,
         ]
     },
     {
@@ -2755,6 +2792,8 @@ export default function OneSidedPage({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-asymptote'} dangerouslySetInnerHTML={{ __html: demoUnits.asymptote }} />,
+          `Near an asymptote the side of approach is the only thing that determines the sign.`,
         ]
     },
     {

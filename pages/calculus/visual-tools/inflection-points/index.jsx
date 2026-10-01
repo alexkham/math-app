@@ -496,6 +496,9 @@ import FunctionConcavity from '../../../../app/components/calculus/visualizers/F
 import functionConcavityDiagrams from '../../../../app/components/calculus/visualizers/functionConcavityDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -940,8 +943,108 @@ One more detail this scenario makes visible: the tangent at $c = 0$ is **not** h
   }
 
 
+  const instructions = [
+    'Drag the $c$ marker along the x-axis of the plot; the point $P = (c, f(c))$, its tangent line and the value $f\'\'(c)$ follow. [Learn more about dragging c](!#drag-and-scenario-modes)',
+    'The plot draws $f(x) = \\frac{1}{3}x^3 - x$ in dark blue, the tangent at $P$ in the scenario colour and a dashed drop line from $c$ up to $P$. [Learn more about the plot](!#getting-started)',
+    'The three scenario buttons, **Concave up**, **Concave down** and **Inflection**, move $c$ to $1.3$, $-1.3$ or $0$, play the animation and tint the tool blue, red or amber. [Learn more about the three scenarios](!#the-three-scenarios)',
+    'While a scenario runs, the banner at the top of the plot counts **Step 1 / 7** to **Step 7 / 7** and names each step. [Learn more about the seven-step animation](!#the-seven-step-animation)',
+    'The shading between the curve and the tangent is the concavity gap: blue where the curve lies above the tangent, red where it lies below, split at $c$ for the inflection point. [Learn more about the concavity gap](!#reading-the-concavity-gap)',
+    'The readout strip under the buttons shows $c$, $f(c)$, $f\'(c)$ and $f\'\'(c)$. [Learn more about the readouts](!#getting-started)',
+    '**Reset** stops any scenario and returns $c$ to $-0.50$. [Learn more about Reset](!#getting-started)',
+    'The info panel has three tabs: **Computation** evaluates $f\'\'(c) = 2c$ and reads the concavity off its sign, **Meaning** gives the verdict, and **Theory** holds the background; Meaning opens by itself when a scenario finishes. [Learn more about the info panel tabs](!#the-info-panel-tabs)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionConcavity tool.
+     Controls driven: the three scenario buttons, Reset, and the Computation /
+     Meaning / Theory tabs (divs, targeted by text). A scenario runs a ~5 s
+     seven-step animation and ignores clicks while it runs, so every scenario
+     after the first in a demo is preceded by Reset (which cancels it); a
+     scenario is never followed by a tab step. Dragging c is not demoed: the
+     canvas listens to mouse events, the player dispatches pointer events. */
+  const demos = {
+    'getting-started': {
+      title: 'Readout strip and Reset',
+      script: [
+        { say: `TAP Concave down
+c = −1.30, f(c) = 0.57, f′(c) = 0.69.
+f″(c) = −2.60 < 0.` },
+        { click: { button: '⌒Concave down' } },
+        { wait: 5900 },
+        { say: `TAP Reset
+Back to c = −0.50.
+f′(c) = −0.75, f″(c) = −1.00.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Inflection
+c = 0.00, f(c) = 0.00, f′(c) = −1.00.
+f″(c) = 0.00.` },
+        { click: { button: '⟿Inflection' } },
+        { wait: 5900 },
+        { say: `TAP Reset
+c = −0.50 again. Tint cleared.
+Computation tab back on top.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-three-scenarios': {
+      title: 'Three scenarios, three gaps',
+      script: [
+        { say: `TAP Concave up
+Blue. c = 1.30, f″(c) = 2.60 > 0.
+Blue gap: curve above tangent.` },
+        { click: { button: '⌣Concave up' } },
+        { wait: 5900 },
+        { say: `TAP Reset, then Concave down
+Red. c = −1.30, f″(c) = −2.60 < 0.
+Red gap: curve below tangent.` },
+        { click: { button: 'Reset', exact: true } },
+        { click: { button: '⌒Concave down' } },
+        { wait: 5900 },
+        { say: `TAP Reset, then Inflection
+Amber. c = 0, f″(c) = 0.
+Tangent crosses the curve. Gap splits at c.` },
+        { click: { button: 'Reset', exact: true } },
+        { click: { button: '⟿Inflection' } },
+        { wait: 5900 },
+        { say: `TAP Reset
+Gap gone. c = −0.50.
+Scenario cleared.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-info-panel-tabs': {
+      title: 'Computation, Meaning, Theory',
+      script: [
+        { say: `TAP Theory
+Definition, test for concavity,
+inflection points, test for extrema, this function.` },
+        { click: { text: 'Theory' } },
+        { wait: 2800 },
+        { say: `TAP Meaning
+Verdict: The curve at c.
+Note: f″(c) measures how the slope changes.` },
+        { click: { text: 'Meaning' } },
+        { wait: 2600 },
+        { say: `TAP Computation
+c = −0.50. f″(c) = 2 · (−0.50) = −1.000.
+f″(c) < 0 ⇒ concave down.` },
+        { click: { text: 'Computation' } },
+        { wait: 2800 },
+        { say: `TAP Inflection
+Seven steps; blocks light in turn.
+Ends on Meaning: inflection point.` },
+        { click: { button: '⟿Inflection' } },
+        { wait: 5900 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('calculus-inflection-points'),
          sectionsContent,
          stateUnits,
@@ -964,7 +1067,22 @@ One more detail this scenario makes visible: the tangent at $c = 0$ is **not** h
     }
    }
 
-export default function InflectionPointsVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function InflectionPointsVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionConcavity explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -986,15 +1104,15 @@ export default function InflectionPointsVisualizer({relatedTools, seoData, secti
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     stateRow('obj2', 'drag-and-scenario-modes', 'idle'),
-    plain('obj3', 'the-three-scenarios'),
+    withDemo(plain('obj3', 'the-three-scenarios')),
     stateRow('obj11', 'concave-up', 'up'),
     stateRow('obj12', 'concave-down', 'down'),
     stateRow('obj13', 'inflection-point', 'infl'),
     plain('obj4', 'the-seven-step-animation'),
     plain('obj5', 'reading-the-concavity-gap'),
-    plain('obj6', 'the-info-panel-tabs'),
+    withDemo(plain('obj6', 'the-info-panel-tabs')),
     plain('obj7', 'what-is-concavity'),
     plain('obj8', 'the-second-derivative-test'),
     plain('obj9', 'necessary-vs-sufficient'),
@@ -1062,6 +1180,10 @@ export default function InflectionPointsVisualizer({relatedTools, seoData, secti
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Inflection Points</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
   <div style={{transform:'scale(0.9)',width:'80%',margin:'auto'}}>
    <FunctionConcavity explanations={explanations}/>

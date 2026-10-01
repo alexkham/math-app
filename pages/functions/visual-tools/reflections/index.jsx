@@ -499,6 +499,9 @@ import FunctionReflections from '../../../../app/components/functions/reflection
 import reflectionsDiagrams from '../../../../app/components/functions/reflections/functionReflectionsDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -551,7 +554,7 @@ export async function getStaticProps(){
 
 The page launches with the quadratic as base and the x-axis reflection active, so $g(x) = -x^2$ appears as the upside-down parabola.
 
-To explore, click a different base in the left column or pick a different reflection tab on the right. Equation badges above the plot rewrite to match. Tabs whose reflection has no parameters apply instantly; the y = c and x = c tabs expose a slider for the line offset $c$, which you can drag, animate, or step through.`,
+To explore, click a different base in the left column or pick a different reflection tab on the right. Equation badges above the plot rewrite to match. Tabs whose reflection has no parameters apply instantly; the y = c and x = c tabs expose a slider for the line offset $c$, which you can drag, animate, or step through. The **S**, **M**, **L** and **XL** buttons above the plot set its size, and the **Reflecting** strip below it prints the pattern of the active reflection, for example $g(x) = -f(x)$ across the x-axis.`,
       before: ``,
       after: ``,
       link: '',
@@ -961,8 +964,149 @@ Together with [|f(x)|](!#output-reflection-fx), it completes the partial-reflect
       '[Learn more about f(|x|)](!#input-reflection-fx) · [All seven reflections](!#the-seven-reflection-tabs)',
   };
 
+  const instructions = [
+    'The left column lists ten base functions; click one to load it as $f$ (slate gray) and redraw its reflection $g$ (blue). [Learn more about choosing a base function](!#choosing-a-base-function)',
+    'The badges above the plot print $f(x)$ and the current $g(x)$; the **S**, **M**, **L** and **XL** buttons set the plot size, and the **Reflecting** strip under it names the active reflection. [Learn more about getting started](!#getting-started)',
+    'The **Explanation** panel describes the active reflection in general, then what it does to the chosen base under **Applied to**. [Learn more about the base-specific notes](!#choosing-a-base-function)',
+    'The seven reflection tabs (**x-axis**, **y-axis**, **y = x**, **y = c**, **x = c**, **|f|**, **f(|x|)**) pick the reflection; hover a tab for its formula. [Learn more about the seven tabs](!#the-seven-reflection-tabs)',
+    'On the **y = x** tab, one-to-one bases give the inverse; the others show every branch of the multivalued reflection. [Learn more about the y = x reflection](!#the-y-x-reflection-and-multivalued-inverses)',
+    '**|f|** flips only the parts of $f$ below the x-axis; **f(|x|)** mirrors the right half of $f$ onto the left. [Learn more about partial reflections](!#partial-reflections-fx-and-fx2)',
+    'The **y = c** and **x = c** tabs add a **line offset c** slider from $-6$ to $6$ (default $1$), an orange mirror line, and a **Reset** button. [Learn more about the parameter tabs](!#the-parameter-tabs-y-c-and-x-c)',
+    '**Manual** / **Auto**: Auto locks the slider and adds step back, play/pause and step forward buttons plus a **Speed** choice of 0.5×, 1×, 2× or 4×. [Learn more about Manual and Auto mode](!#manual-vs-auto-mode)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionReflections tool
+     (opens on Quadratic with the x-axis tab). The only range input is the line offset c
+     on the y = c / x = c tabs. Those tab labels gain a value badge when c is not 1,
+     so they are matched by prefix. Play (auto sweep) is never pressed: it is time-based. */
+  const demos = {
+    'choosing-a-base-function': {
+      title: 'Choosing a base',
+      script: [
+        { say: `TAP y-axis
+g(x) = (−x)². Quadratic is even:
+the two curves sit on top of each other.` },
+        { click: { button: 'y-axis', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Cubic
+g(x) = (−x)³. Odd function:
+same result as the x-axis flip.` },
+        { click: { button: 'Cubic', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Square root
+g(x) = √(−x).
+Domain swaps to x ≤ 0: curve moves left.` },
+        { click: { button: 'Square root', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Cosine
+Even again: g(x) = cos(−x)
+lies exactly on f.` },
+        { click: { button: 'Cosine', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Exponential
+g(x) = e^(−x): the decay curve.
+Same shape, falling instead of rising.` },
+        { click: { button: 'Exponential', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-seven-reflection-tabs': {
+      title: 'Reflection tabs on sine',
+      script: [
+        { say: `TAP Sine
+x-axis tab: g(x) = −sin(x).
+Wave flipped upside down.` },
+        { click: { button: 'Sine', exact: true } },
+        { wait: 2600 },
+        { say: `TAP y-axis
+g(x) = sin(−x).
+Sine is odd: same curve as the x-axis flip.` },
+        { click: { button: 'y-axis', exact: true } },
+        { wait: 2800 },
+        { say: `TAP |f|
+g(x) = |sin(x)|.
+Arches below the axis flip up. Corners at the roots.` },
+        { click: { button: '|f|', exact: true } },
+        { wait: 3000 },
+        { say: `TAP f(|x|)
+g(x) = sin(|x|).
+Right half mirrored to the left: even.` },
+        { click: { button: 'f(|x|)', exact: true } },
+        { wait: 2800 },
+        { say: `TAP y = x
+Sine is not one-to-one.
+All branches drawn: arcsin(x) + 2πk, π − arcsin(x) + 2πk.` },
+        { click: { button: 'y = x', exact: true } },
+        { wait: 3200 },
+      ],
+    },
+    'the-parameter-tabs-y-c-and-x-c': {
+      title: 'Line offset c',
+      script: [
+        { say: `TAP y = c
+Orange line y = 1.
+g(x) = 2 − (x)²: same distance, other side.` },
+        { click: { button: 'y = c' } },
+        { wait: 2800 },
+        { say: `DRAG c → 0
+g(x) = 0 − (x)².
+Same as the x-axis reflection. Tab badge: 0.` },
+        { slide: { range: 0 }, to: 0, ms: 1200 },
+        { wait: 2800 },
+        { say: `DRAG c → 3
+g(x) = 6 − (x)².
+Mirror line up to y = 3.` },
+        { slide: { range: 0 }, to: 3, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP x = c
+Vertical orange line x = 1.
+g(x) = (2 − x)². y = c keeps its 3.` },
+        { click: { button: 'x = c' } },
+        { wait: 2800 },
+        { say: `DRAG c → −2
+g(x) = (-4 − x)².
+Vertex mirrored to x = −4.` },
+        { slide: { range: 0 }, to: -2, ms: 1400 },
+        { wait: 2800 },
+      ],
+    },
+    'manual-vs-auto-mode': {
+      title: 'Manual, Auto and Reset',
+      script: [
+        { say: `TAP x = c
+Manual mode: drag the slider yourself.
+c = 1, g(x) = (2 − x)².` },
+        { click: { button: 'x = c' } },
+        { wait: 2600 },
+        { say: `TAP Auto
+Slider locked.
+Step back, play, step forward + Speed appear.` },
+        { click: { button: 'Auto', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ⏭ twice
+c = 1.2, one 0.1 step per tap.
+g(x) = (2.4 − x)².` },
+        { click: { button: '⏭', exact: true } },
+        { wait: 500 },
+        { click: { button: '⏭', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Reset
+c back to 1. g(x) = (2 − x)².` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Manual
+Step and Speed controls gone.
+Slider free again.` },
+        { click: { button: 'Manual', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('functions-reflections'),
          sectionsContent,
          introContent,
@@ -985,7 +1129,22 @@ Together with [|f(x)|](!#output-reflection-fx), it completes the partial-reflect
     }
    }
 
-export default function FunctionReflectionsPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionReflectionsPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionReflections explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
     
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
@@ -993,10 +1152,10 @@ export default function FunctionReflectionsPage({relatedTools, seoData, sections
   const genericSections=[
     { id:'key-terms', title:sectionsContent.obj0.title, link:sectionsContent.obj0.link, content:[sectionsContent.obj0.content] },
     { id:'getting-started', title:sectionsContent.obj1.title, link:sectionsContent.obj1.link, content:[sectionsContent.obj1.content] },
-    { id:'choosing-a-base-function', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[sectionsContent.obj2.content] },
-    { id:'the-seven-reflection-tabs', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[sectionsContent.obj3.content] },
-    { id:'the-parameter-tabs-y-c-and-x-c', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[sectionsContent.obj4.content] },
-    { id:'manual-vs-auto-mode', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[sectionsContent.obj5.content] },
+    { id:'choosing-a-base-function', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[demo('choosing-a-base-function'), sectionsContent.obj2.content] },
+    { id:'the-seven-reflection-tabs', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[demo('the-seven-reflection-tabs'), sectionsContent.obj3.content] },
+    { id:'the-parameter-tabs-y-c-and-x-c', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[demo('the-parameter-tabs-y-c-and-x-c'), sectionsContent.obj4.content] },
+    { id:'manual-vs-auto-mode', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[demo('manual-vs-auto-mode'), sectionsContent.obj5.content] },
     { id:'the-y-x-reflection-and-multivalued-inverses', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[sectionsContent.obj6.content] },
     { id:'partial-reflections-fx-and-fx2', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[sectionsContent.obj7.content] },
     { id:'what-is-a-reflection', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[sectionsContent.obj8.content] },
@@ -1070,6 +1229,10 @@ export default function FunctionReflectionsPage({relatedTools, seoData, sections
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'30px'}}>Function Reflections</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(1.1)'}}>
   <FunctionReflections explanations={explanations}/>

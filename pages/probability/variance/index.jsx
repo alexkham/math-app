@@ -962,6 +962,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import varianceDiagrams from '@/app/components/probability/variance/varianceDiagrams'
 
 
 export async function getStaticProps(){
@@ -1813,8 +1815,38 @@ const continuousVarianceFormulasData = {
   ]
 };
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_notation_0: demoUnitFrame({
+      svg: varianceDiagrams.default,
+      caption: 'A dataset around its mean of 20',
+      text: 'Variance measures how far the points scatter around the mean: each deviation is squared and the squares are averaged, so points far from 20 count far more than points near it. A tight cluster gives a small value, a wide scatter a large one. Drag the points and watch the variance respond on the',
+      href: '/probability/visual-tools/variance',
+      linkText: 'variance visualizer',
+    }),
+    u_general_1: demoUnitFrame({
+      svg: varianceDiagrams.sample,
+      caption: 'The same dataset with the sample variance',
+      text: 'When the values are observed data rather than a known distribution, the squared deviations are averaged over n minus 1 instead of n, which raises the result slightly to correct for estimating the mean from the same data. The picture is unchanged, only the divisor differs. Toggle between population and sample variance on the',
+      href: '/probability/visual-tools/variance',
+      linkText: 'variance visualizer',
+    }),
+    u_sd_2: demoUnitFrame({
+      svg: varianceDiagrams.high,
+      caption: 'A high-variance dataset',
+      text: 'Variance is in squared units, so a wide scatter produces a number far larger than any deviation in the picture; the standard deviation is its square root and returns to the original units, matching the typical distance from the mean that the eye sees. Compare the two readings on the',
+      href: '/probability/visual-tools/variance',
+      linkText: 'variance visualizer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1849,7 +1881,7 @@ export default function VariancePage({
   calculateTable,
   sdTable,
   mistakesTable,
-  summaryTable,
+  summaryTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1898,6 +1930,8 @@ export default function VariancePage({
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-u_notation_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_notation_0 }} />,
+          `The formula behind this picture is given next.`,
         ]
     },
     // {
@@ -1929,7 +1963,9 @@ export default function VariancePage({
        
           <div style={{transform:'scale(1.15)'}} dangerouslySetInnerHTML={{ __html: generalTable }} key="table" />,
            sectionsContent.general.after,
-    ]
+              <div key={'unit-u_general_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_general_1 }} />,
+          `A PMF given by formula allows a direct computation instead.`,
+        ]
 },
 {
     id:'discrete',
@@ -2003,6 +2039,8 @@ export default function VariancePage({
             sectionsContent.sd.content,
             <div key={'sd-table'} style={tableWrapStyle}
                  dangerouslySetInnerHTML={{ __html: sdTable }} />,
+                  <div key={'unit-u_sd_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_sd_2 }} />,
+          `Common mistakes about variance are collected next.`,
         ]
     },
     {

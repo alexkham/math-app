@@ -12,6 +12,9 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import conjugateModulusDiagrams from '../../../../app/components/calculators/complex-numbers/conjugateModulusDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
@@ -349,6 +352,25 @@ The proof box's checkmark still appears, and it should: the identity is universa
 The [special cases section](!#special-cases-to-investigate) lists the other boundary configurations worth loading: the axes, the unit circle, and the 45° diagonal.`,
       link: '',
     },
+    obj17: {
+      title: `The Key Ideas Panel`,
+      content: `The **Key Ideas** panel sits at the bottom of the right column, under the proof box. It is a reading surface: nothing in it can be clicked except its links.
+
+**Three standing notes:**
+
+- Navy dot: the conjugate $\\bar{z}$ reflects $z$ across the real axis, keeping the real part and negating the imaginary part.
+- Blue dot: the modulus $|z|$ is the distance from the origin, and $z$ and $\\bar{z}$ share it.
+- Teal dot: the product $z \\cdot \\bar{z}$ is always a real number equal to $|z|^2$, the reason a conjugate is used to clear a complex denominator.
+
+**A fourth note for the named values:**
+
+When $z$ lands exactly on one of the preset values ($3 + 2i$, $-1 + 4i$, $3i$, $4$, $-2 - 3i$) or on the origin, an orange-dot note appears below the three. It says what is special about that value and ends with two links: one to the section for that value further down this page, and one back to the [presets overview](!#exploring-presets-and-special-cases) or the [special cases](!#special-cases-to-investigate).
+
+The note appears for a preset button, a typed value or a drag that stops exactly on the value, and it disappears as soon as $z$ moves off it. Values that match no preset, including most **Random** results, show only the three standing notes.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
   }
 
   const faqQuestions = {
@@ -489,8 +511,113 @@ The [special cases section](!#special-cases-to-investigate) lists the other boun
     origin: 'At zero the identity still holds — with every quantity equal to 0. [Learn more about the origin](!#the-origin-z-0) · [All special cases](!#special-cases-to-investigate)',
   };
 
+  const instructions = [
+    'Drag the navy point **z** anywhere on the plane; the orange point **z̄** follows as its mirror image across the real axis. [Learn more about using the visualizer](!#how-to-use-the-visualizer)',
+    'The plane draws $z$ as a solid navy vector, $\\bar{z}$ as a dashed orange vector, the dashed modulus circle through both, light right triangles on the real part, and a purple dashed segment from $z$ to $\\bar{z}$. [Learn more about the display](!#understanding-the-display)',
+    'The **Try these** row loads $3 + 2i$, $-1 + 4i$, $3i$, $4$ and $-2 - 3i$; **Random** picks any value inside the plane. [Learn more about the presets](!#exploring-presets-and-special-cases)',
+    '**Set z manually** takes exact values in the **Re** and **Im** boxes; anything beyond $\\pm 10$ is clamped to $\\pm 10$ with a short warning. [Learn more about manual input](!#how-to-use-the-visualizer)',
+    'The **Values** panel lists $z$, $\\bar{z}$, $|z|$, $|z|^2$ and the product $z \\cdot \\bar{z}$ written as two factors. [Learn more about the values panel](!#using-the-values-panel)',
+    'The proof box under the values computes $z \\cdot \\bar{z} = a^2 + b^2$ and $|z|^2$ from the current $z$ and closes with a check mark. [Learn more about the proof box](!#the-proof-box-explained)',
+    'The **Key Ideas** panel keeps three standing notes and adds a fourth when $z$ sits exactly on a preset value or the origin. [Learn more about the Key Ideas panel](!#the-key-ideas-panel)',
+    'Type **0** into both boxes for the origin, or zero out one part to put $z$ on an axis. [Learn more about the special cases](!#special-cases-to-investigate)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real ConjugateModulusVisualizer
+     (opens on z = 3 + 2i). Inputs: input[type=number] nth 0 = Re, nth 1 = Im (clamped to ±10).
+     Preset buttons: 3+2i, −1+4i, 3i, 4, −2−3i (exact labels). The z handle is circle.drag-point;
+     it follows pointer moves only after a live pointerdown, so the drag is always a last step. */
+  const demos = {
+    'how-to-use-the-visualizer': {
+      title: 'Type, clamp, drag',
+      script: [
+        { say: `TYPE Re = 5
+z = 5 + 2i. z̄ = 5 − 2i.
+Same real part. Im sign flipped.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: 5 },
+        { wait: 2400 },
+        { say: `TYPE Im = −4
+z drops below the axis: 5 − 4i.
+z̄ jumps above it: 5 + 4i.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: -4 },
+        { wait: 2400 },
+        { say: `TYPE Re = 12
+Over the limit. Clamped to 10.
+z = 10 − 4i. Warning shows briefly.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: 12 },
+        { wait: 2600 },
+        { say: `DRAG z up across the real axis
+z̄ mirrors it below.
+Circle shrinks with |z|.`, at: 'tl' },
+        { drag: 'circle.drag-point', dx: -104.33, dy: -182.58, ms: 1600 },
+        { wait: 2600 },
+      ],
+    },
+    'exploring-presets-and-special-cases': {
+      title: 'Five presets',
+      script: [
+        { say: `TAP −1+4i
+Second quadrant. z̄ = −1 − 4i: third.
+|z|² = 1 + 16 = 17.`, at: 'tl' },
+        { click: { button: '−1+4i', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 3i
+On the imaginary axis.
+z̄ = −3i = −z. |z| = 3.`, at: 'tl' },
+        { click: { button: '3i', exact: true } },
+        { wait: 2400 },
+        { say: `TAP 4
+Real number: z̄ = z = 4.
+Both points coincide: orange z̄ on top.`, at: 'tl' },
+        { click: { button: '4', exact: true } },
+        { wait: 2400 },
+        { say: `TAP −2−3i
+Third quadrant. z̄ = −2 + 3i: second.
+|z|² = 13: same circle as 3 + 2i.`, at: 'tl' },
+        { click: { button: '−2−3i', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 3+2i
+Back to the start. z · z̄ = 9 + 4 = 13.
+Key Ideas adds a note per preset.`, at: 'tl' },
+        { click: { button: '3+2i', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'using-the-values-panel': {
+      title: 'Values and proof',
+      script: [
+        { say: `TYPE Re = 4
+z = 4 + 2i. |z|² = 20.
+Proof: 16 + 4 = 20 ✓`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: 4 },
+        { wait: 2400 },
+        { say: `TYPE Im = 3
+z = 4 + 3i. |z| = 5.
+Proof: 16 + 9 = 25 ✓`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: 3 },
+        { wait: 2400 },
+        { say: `TYPE Im = −3
+z = 4 − 3i. z̄ = 4 + 3i.
+Same |z| = 5. Same 25.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: -3 },
+        { wait: 2400 },
+        { say: `TYPE Re = 0
+z = −3i. z̄ = 3i.
+Proof: 0 + 9 = 9 = |z|².`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: 0 },
+        { wait: 2400 },
+        { say: `TYPE Im = 0
+z = 0. Every value 0.
+Identity still holds: 0 = 0 ✓`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: 0 },
+        { wait: 2600 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('complex-conjugate'),
          sectionsContent,
          introContent,
@@ -513,7 +640,7 @@ The [special cases section](!#special-cases-to-investigate) lists the other boun
     }
    }
 
-export default function ComplexConjugateVisualizerPage({
+export default function ComplexConjugateVisualizerPage({ instructions, demos,
   relatedTools, seoData,
   sectionsContent,
   introContent,
@@ -523,6 +650,21 @@ export default function ComplexConjugateVisualizerPage({
   stateUnits
 }) {
 
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ConjugateModulusVisualizer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
+
     
   const genericSections=[
     {
@@ -530,6 +672,7 @@ export default function ComplexConjugateVisualizerPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('how-to-use-the-visualizer'),
           sectionsContent.obj1.content,
         ]
     },
@@ -546,6 +689,7 @@ export default function ComplexConjugateVisualizerPage({
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          demo('using-the-values-panel'),
           sectionsContent.obj3.content,
         ]
     },
@@ -558,10 +702,19 @@ export default function ComplexConjugateVisualizerPage({
         ]
     },
     {
+        id:'the-key-ideas-panel',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
+        ]
+    },
+    {
         id:'exploring-presets-and-special-cases',
         title:sectionsContent.obj5.title,
         link:sectionsContent.obj5.link,
         content:[
+          demo('exploring-presets-and-special-cases'),
           sectionsContent.obj5.content,
         ]
     },
@@ -724,6 +877,10 @@ export default function ComplexConjugateVisualizerPage({
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Conjugate Visualizer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <SiblingsNav maxWidth='100%'>
    <ConjugateModulusVisualizer explanations={explanations}/>

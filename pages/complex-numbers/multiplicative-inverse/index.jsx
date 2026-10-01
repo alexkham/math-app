@@ -1367,6 +1367,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoivreDiagrams'
+import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 
 
 export async function getStaticProps(){
@@ -2395,8 +2398,31 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    geom: demoUnitFrame({
+      svg: deMoivreDiagrams.inverse,
+      caption: 'z = 3 + 4i and z&#8315;&#185; = 0.12 &#8722; 0.16i',
+      text: 'The inverse points in the mirrored direction, argument &#8722;&#952;, and its length is the reciprocal 1/5 of the original 5, which is why it needs a zoom to be seen: the modulus inverts and the argument negates. That is the formula z&#8315;&#185; = z&#772;/|z|&#178; as a picture. Watch the inverse shrink as z grows on the',
+      href: '/complex-numbers/visual-tools/demoivre-visualizer',
+      linkText: 'De Moivre visualizer',
+    }),
+    division: demoUnitFrame({
+      svg: complexDivisionDiagrams.general,
+      caption: 'z&#8321;/z&#8322;: arguments subtract, moduli divide',
+      text: 'The quotient sits at the angle &#952;&#8321; &#8722; &#952;&#8322; and at distance |z&#8321;|/|z&#8322;|: division undoes the rotation and the scaling that multiplication performs. Multiplying numerator and denominator by the conjugate is the algebra that produces this picture. Move the divisor and watch the quotient counter-rotate on the',
+      href: '/complex-numbers/visual-tools/division',
+      linkText: 'complex division tool',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -2427,7 +2453,7 @@ export default function MultiplicativeInversePage({
   obj11Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2483,6 +2509,8 @@ export default function MultiplicativeInversePage({
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-geom'} dangerouslySetInnerHTML={{ __html: demoUnits.geom }} />,
+          `Points inside the unit circle have inverses outside it, and the circle itself is fixed.`,
         ]
     },
     {
@@ -2533,6 +2561,8 @@ export default function MultiplicativeInversePage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+                  <div key={'unit-division'} dangerouslySetInnerHTML={{ __html: demoUnits.division }} />,
+          `Every division is a multiplication by an inverse, which is why the two share one picture.`,
         ]
     },
     {

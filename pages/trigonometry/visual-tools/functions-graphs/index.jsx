@@ -13,6 +13,9 @@ import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandal
 import graphDiagrams from '../../../../app/components/trigonometry/trigFunctionsGraphDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -123,7 +126,7 @@ What to look for:
 • [Periodicity](!#period-amplitude-and-range) — the same pattern repeats. Compare $\\theta$ and $\\theta + 2\\pi$ to confirm.
 • **Zeros** — points where the curve crosses the x-axis.
 
-Sliding the angle input animates the marker along the curve, anchoring numerical output to its visual position.`,
+Sliding the angle input animates the marker along the curve, anchoring numerical output to its visual position. Drag the plot sideways to pan the visible range, and use the mouse wheel over it — or the **x+**, **x−**, **y+** and **y−** buttons above it — to zoom in or out; **Reset** returns to the default window.`,
       before:``,
       after:``,
       link:'',
@@ -188,10 +191,11 @@ The explorer reports "undefined" at these inputs and the curve appears to break 
 • [Unit Circle](!/visual-tools/unit-circle) — the geometric source of every trig function value.
 • [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — visualize angles, quadrants, [reference angles](!/trigonometry/unit-circle#5), and related-angle relationships.
 • **Trigonometric Identities** — Pythagorean, reciprocal, quotient, and angle-sum formulas.
-• **Inverse Trigonometric Functions** — arcsin, arccos, arctan and their restricted domains.
+• [Inverse Trigonometric Functions](!/trigonometry/visual-tools/inverse-functions) — arcsin, arccos, arctan and their restricted domains, built step by step: line test, restriction, reflection across $y = x$.
 • **Trig Equations Solver** — practice solving equations involving [sine](!/trigonometry/functions#1), [cosine](!/trigonometry/functions#2), and [tangent](!/trigonometry/functions#3).
 • **Special Angles Table** — exact values at $0°$, $30°$, $45°$, $60°$, $90°$, and beyond.
 • [Function Signs by Quadrant](!/trigonometry/visual-tools/functions-signs) — why each curve sits above or below the axis in each quadrant.
+• [Trigonometric Function Parameters](!/trigonometry/visual-tools/function-parameters) — the next step from these six graphs: change $A$, $B$, $C$ and $D$ in $y = Af(Bx - C) + D$ and watch amplitude, period, phase shift and midline move on one curve.
 • [Basic Trigonometric Identities](!/trigonometry/visual-tools/basic-identities) — the six functions defined on the unit circle, then traced onto these graphs.
 • **Identity explorers** — the [Pythagorean Identities](!/trigonometry/visual-tools/pythagorean-identities), [Double Angle Identities](!/trigonometry/visual-tools/double-angle-identities), [Half Angle Identities](!/trigonometry/visual-tools/half-angle-identities), [Negative Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) and [Supplementary Angle Identities](!/trigonometry/visual-tools/supplementary-angle-identities) tools, each of which can be read off these curves.`,
       before:``,
@@ -242,6 +246,19 @@ Each branch touches $\\pm 1$ exactly where [sine](!#the-graph-of-sine) peaks, si
       after:`Key features: period $2\\pi$, vertical asymptotes at $\\pi/2 + \\pi k$ (where $\\cos\\theta = 0$), range $(-\\infty, -1] \\cup [1, \\infty)$. At the frozen $\\theta = 60°$, $\\sec\\theta = 2$ exactly — the reciprocal of $\\cos 60° = 1/2$.
 
 Its branches touch $\\pm 1$ at [cosine's](!#the-graph-of-cosine) extremes, and its asymptotes coincide with [tangent's](!#the-graph-of-tangent), since both divide by $\\cos\\theta$.`,
+      link:'',
+    },
+    obj17:{
+      title:`The Explanations Panel`,
+      content:`The **Explanations** card on the right of the tool always describes the function that is currently selected. Switching the **Function** row rewrites it: sine and cosine are described as coordinates on the unit circle, tangent and cotangent as ratios with their asymptotes, and the three reciprocals by the function they invert.
+
+Each explanation states the facts a reader needs to read the graph: the range, the period, where the zeros are, where the maxima and minima sit, and where the function is undefined. Those are exactly the features to look for on the curve — the card and the plot are meant to be read together.
+
+The card does not change with the angle. It describes the function as a whole; the **Result** field and the marker on the curve describe the current value. Keep both in view: pick a function, read what the card says about it, then drag the angle and watch the curve do what the card promised.
+
+Each explanation ends with a link to the full treatment of that function further down this page, where the graph is frozen at $60°$ and every feature is annotated.`,
+      before:``,
+      after:``,
       link:'',
     },
     obj16:{
@@ -391,6 +408,111 @@ Cotangent's asymptotes stand at [tangent's](!#the-graph-of-tangent) zeros and vi
       text: 'Strictly falling branches interlocking with tangent&#8217;s; the marker reads cot &#952; = 1/&#8730;3 &#8776; 0.577.' }),
   };
 
+  const instructions = [
+    'The **Function** row switches the curve between $\\sin$, $\\cos$, $\\tan$, $\\csc$, $\\sec$ and $\\cot$. The angle stays where it is, so the new curve appears with the marker at the same $\\theta$. [Learn more about selecting a function](!#selecting-a-function)',
+    'The **Unit** buttons switch every angle on the page between degrees and radians: the axis labels, the angle box, the preset buttons and the result. [Learn more about degrees and radians](!#switching-between-degrees-and-radians)',
+    'Drag the **Angle** slider, or type an exact value in the box beside it, to move the marker along the curve from $-360°$ to $360°$. [Learn more about setting the angle](!#setting-the-angle)',
+    'The **Quick** buttons jump straight to the special angles $0$, $\\frac{\\pi}{6}$, $\\frac{\\pi}{4}$, $\\frac{\\pi}{3}$, $\\frac{\\pi}{2}$, $\\pi$, $\\frac{3\\pi}{2}$ and $2\\pi$. [Learn more about the presets](!#setting-the-angle)',
+    'The **Result** field reads the current value, such as $\\sin(\\frac{\\pi}{2}) = 1.0000$, and says **undefined** where the function has no value. [Learn more about the result display](!#reading-the-result-display)',
+    'On the graph, the red marker sits at the current angle and dashed lines mark asymptotes. Drag the plot to pan, scroll or use the **x±** and **y±** buttons to zoom, and **Reset** to restore the view. [Learn more about reading the graph](!#reading-the-graph)',
+    'Hold the angle fixed and click through the functions to compare their values at one point — the fastest way to see reciprocal and quotient relationships. [Learn more about comparing functions](!#comparing-functions-side-by-side)',
+    'The **Explanations** card describes the selected function: range, period, zeros, extrema and undefined points. [Learn more about the explanations panel](!#the-explanations-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real TrigFunctionsExplorer.
+     One range input (angle, -360..360). Starts at 90 degrees, radians. */
+  const demos = {
+    'selecting-a-function': {
+      title: 'The function row',
+      script: [
+        { say: `TAP cos
+Graph redraws: cosine wave.
+Marker stays at the same angle.` },
+        { click: { button: 'cos', exact: true } },
+        { wait: 2200 },
+        { say: `TAP tan
+Branches + dashed asymptotes.
+Result: tan(π/2) = undefined.` },
+        { click: { button: 'tan', exact: true } },
+        { wait: 2400 },
+        { say: `TAP csc
+U-shaped branches.
+1/sin. Asymptotes where sin = 0.` },
+        { click: { button: 'csc', exact: true } },
+        { wait: 2400 },
+        { say: `TAP cot
+Falling branches.
+cot(π/2) = 0. Crosses the axis here.` },
+        { click: { button: 'cot', exact: true } },
+        { wait: 2400 },
+        { say: `TAP sin
+Back to the wave.
+sin(π/2) = 1. The peak.` },
+        { click: { button: 'sin', exact: true } },
+        { wait: 2200 },
+      ],
+    },
+    'setting-the-angle': {
+      title: 'Angle, units and presets',
+      script: [
+        { say: `DRAG ANGLE → 30°
+Marker slides along the curve.
+Result: sin(π/6) = 0.5000.` },
+        { slide: { range: 0 }, to: 30, ms: 1500 },
+        { wait: 2200 },
+        { say: `TAP deg
+Axis, box, presets, result: all in degrees.
+sin(30°) = 0.5000.` },
+        { click: { button: 'deg', exact: true } },
+        { wait: 2400 },
+        { say: `TAP PRESET 45°
+Jump to a special angle.
+sin(45°) = 0.7071.` },
+        { click: { button: '45°', exact: true } },
+        { wait: 2400 },
+        { say: `DRAG ANGLE → 210°
+Marker drops below the axis.
+sin(210°) = −0.5000. Quadrant III.` },
+        { slide: { range: 0 }, to: 210, ms: 1500 },
+        { wait: 2400 },
+        { say: `TAP rad
+Same angle, radian labels: 7π/6.
+Presets relabel in π.` },
+        { click: { button: 'rad', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'reading-the-result-display': {
+      title: 'Result and comparison',
+      script: [
+        { say: `TAP PRESET π/4
+Result: sin(π/4) = 0.7071.` },
+        { click: { button: 'π/4', exact: true } },
+        { wait: 2200 },
+        { say: `TAP cos
+Same angle. cos(π/4) = 0.7071.
+Equal to sin here.` },
+        { click: { button: 'cos', exact: true } },
+        { wait: 2400 },
+        { say: `TAP tan
+tan(π/4) = 1.0000.
+sin ÷ cos = 1.` },
+        { click: { button: 'tan', exact: true } },
+        { wait: 2400 },
+        { say: `TAP PRESET π/2
+tan(π/2) = undefined.
+Marker on an asymptote.` },
+        { click: { button: 'π/2', exact: true } },
+        { wait: 2400 },
+        { say: `TAP cot
+cot(π/2) = 0.0000.
+Reciprocal turns ∞ into 0.` },
+        { click: { button: 'cot', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   const explanations = {
     sin: `**sin(θ)** is the y-coordinate of the point on the unit circle at angle θ. Range: [-1, 1]. Period: 2π. Zeros at integer multiples of π. Maxima at π/2 + 2πk, minima at -π/2 + 2πk. [Full treatment](!#the-graph-of-sine)`,
     cos: `**cos(θ)** is the x-coordinate of the point on the unit circle at angle θ. Range: [-1, 1]. Period: 2π. Zeros at π/2 + πk. Maxima at 2πk, minima at π + 2πk. [Full treatment](!#the-graph-of-cosine)`,
@@ -409,6 +531,8 @@ Cotangent's asymptotes stand at [tangent's](!#the-graph-of-tangent) zeros and vi
          faqQuestions,
          schemas,
          explanations,
+         instructions,
+         demos,
          stateUnits,
           seoData: {
         title: "Trig Functions Graphs: Interactive Visualizer | Learn Math Class",
@@ -425,7 +549,20 @@ Cotangent's asymptotes stand at [tangent's](!#the-graph-of-tangent) zeros and vi
     }
    }
 
-export default function TrigFunctionsGraphsPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function TrigFunctionsGraphsPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, instructions, demos, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <TrigFunctionsExplorer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
 
 
   const genericSections=[
@@ -442,6 +579,7 @@ export default function TrigFunctionsGraphsPage({relatedTools, seoData, sections
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('selecting-a-function'),
           sectionsContent.obj1.content,
         ]
     },
@@ -458,6 +596,7 @@ export default function TrigFunctionsGraphsPage({relatedTools, seoData, sections
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          demo('setting-the-angle'),
           sectionsContent.obj3.content,
         ]
     },
@@ -466,6 +605,7 @@ export default function TrigFunctionsGraphsPage({relatedTools, seoData, sections
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
+          demo('reading-the-result-display'),
           sectionsContent.obj4.content,
         ]
     },
@@ -483,6 +623,14 @@ export default function TrigFunctionsGraphsPage({relatedTools, seoData, sections
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+        ]
+    },
+    {
+        id:'the-explanations-panel',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
         ]
     },
     {
@@ -639,6 +787,10 @@ export default function TrigFunctionsGraphsPage({relatedTools, seoData, sections
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Trigonometric Functions Graphs</h1>
+   <br/>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#1e40af' />
+   </div>
    <br/>
    {/* <SiblingsNav
       bg="#fafaf7"

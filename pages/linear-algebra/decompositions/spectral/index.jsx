@@ -1772,6 +1772,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spectralDiagrams from '@/app/components/linear-algebra copy/matrix/spectralDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "spectral decomposition",
@@ -2401,6 +2402,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     outer: demoUnitFrame({
       svg: spectralDiagrams.rankone,
@@ -2413,6 +2415,13 @@ const schemas = {
       svg: spectralDiagrams.factor,
       caption: 'Q orthogonal, &#923; diagonal, Q transposed',
       text: 'Because the eigenvectors of a symmetric matrix can be chosen orthonormal, the matrix of them is orthogonal &#8212; and the inverse of an orthogonal matrix is simply its transpose. That is the whole economy of the spectral form: no inverse ever has to be computed. Check the orthogonality yourself on the',
+      href: '/linear-algebra/visual-tools/spectral-decomposition',
+      linkText: 'spectral decomposition visualizer',
+    }),
+    orthoCheck: demoUnitFrame({
+      svg: spectralDiagrams.orthocheck,
+      caption: 'Q&#7488;Q = I',
+      text: 'The normalized eigenvectors of a symmetric matrix, placed as the columns of Q, and Q<sup>T</sup> multiplied by Q. Every off-diagonal entry is the dot product of two different eigenvectors and comes out 0; every diagonal entry is a squared length and comes out 1. So Q<sup>T</sup> = Q<sup>&#8722;1</sup>: inverting Q costs nothing but a transpose. Step through the check on the',
       href: '/linear-algebra/visual-tools/spectral-decomposition',
       linkText: 'spectral decomposition visualizer',
     }),
@@ -2515,6 +2524,8 @@ export default function SpectralDecompositionPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-orthoCheck'} dangerouslySetInnerHTML={{ __html: demoUnits.orthoCheck }} />,
+          `Because Q⁻¹ is just Qᵀ, the decomposition A = QDQᵀ needs no matrix inversion at all.`,
         ]
     },
     {

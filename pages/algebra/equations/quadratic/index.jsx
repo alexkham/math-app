@@ -9,6 +9,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import completeTheSquareDiagrams from '@/app/components/algebra/visualizers/equations/completeTheSquareDiagrams'
+import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 
 
 export async function getStaticProps(){
@@ -733,8 +736,38 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    complete: demoUnitFrame({
+      svg: completeTheSquareDiagrams['step-vertex'],
+      caption: 'x&#178; + 6x + 5 = 0 becomes (x + 3)&#178; &#8722; 4 = 0',
+      text: 'The x&#178; block and the 6x strip, split into two 3x halves, form an incomplete square; adding the 3 &#215; 3 corner completes it, and the constant 5 falls short of that 9 by 4, so the equation reads (x + 3)&#178; = 4 and x + 3 = &#177;2. The method is this rearrangement of area. Step through the corner and the gap on the',
+      href: '/algebra/visual-tools/completing-square',
+      linkText: 'completing the square visualizer',
+    }),
+    discriminant: demoUnitFrame({
+      svg: equationVisualizerDiagrams['quad-none'],
+      caption: 'x&#178; + 4 = 0: the parabola never reaches the axis',
+      text: 'The vertex sits at height 4 above the axis, so no real x makes the expression zero: the discriminant 0&#178; &#8722; 4 &#183; 1 &#183; 4 = &#8722;16 is negative and there are no crossings to mark. Lower the parabola by 4 and the crossings merge into one at the vertex; lower it further and two appear. Watch the discriminant change sign on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+    graph: demoUnitFrame({
+      svg: equationVisualizerDiagrams['quad-two'],
+      caption: 'x&#178; &#8722; 4 = 0: the solutions are the x-intercepts',
+      text: 'The two crossings of the parabola with the axis, at &#8722;2 and 2, are the two solutions of the equation: solving a quadratic and finding the x-intercepts of its graph are the same task. The vertex halfway between them sits on the axis of symmetry x = &#8722;b/2a. Drag the parabola and watch the intercepts move together on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj5Table,
@@ -766,7 +799,7 @@ export default function QuadraticEquationsPage({
   obj8Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -823,6 +856,8 @@ export default function QuadraticEquationsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-complete'} dangerouslySetInnerHTML={{ __html: demoUnits.complete }} />,
+          `The quadratic formula in the next section is this construction carried out once with letters.`,
         ]
     },
     {
@@ -844,6 +879,8 @@ export default function QuadraticEquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+                  <div key={'unit-discriminant'} dangerouslySetInnerHTML={{ __html: demoUnits.discriminant }} />,
+          `Positive, zero, negative: two crossings, one, none.`,
         ]
     },
     {
@@ -883,6 +920,8 @@ export default function QuadraticEquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
           />,
+                  <div key={'unit-graph'} dangerouslySetInnerHTML={{ __html: demoUnits.graph }} />,
+          `Every algebraic method on this page locates these two points without drawing the curve.`,
         ]
     },
     {

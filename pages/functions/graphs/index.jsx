@@ -932,6 +932,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionTypesDiagrams from '@/app/components/functions/types/functionTypesDiagrams'
 
 
 export async function getStaticProps(){
@@ -1545,8 +1547,24 @@ const faqQuestions = {
     },
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    curves: demoUnitFrame({
+      svg: functionTypesDiagrams.cubic,
+      caption: 'f(x) = 0.2x&#179; &#8722; 2x: the S-shape of a cubic',
+      text: 'The curve rises, turns down through a local maximum, falls through the origin, turns up again at a local minimum and rises for good: the characteristic S of a cubic, with one more turn than a parabola. Recognising the shape tells you the family before any algebra. Flip through the families and their signature curves on the',
+      href: '/functions/visual-tools/types',
+      linkText: 'function types explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj6Table,
@@ -1579,7 +1597,7 @@ export default function GraphsPage({
   faqQuestions,
   schemas,
   obj3MiniTable,
-  obj4MiniTable,
+  obj4MiniTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1694,6 +1712,8 @@ export default function GraphsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
           />,
+                  <div key={'unit-curves'} dangerouslySetInnerHTML={{ __html: demoUnits.curves }} />,
+          `Each family leaves a shape you can name at a glance, which is the point of learning them.`,
         ]
     },
     {

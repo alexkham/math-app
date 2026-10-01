@@ -621,6 +621,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vectorAdditionDiagrams from '@/app/components/linear-algebra copy/matrix/vectorAdditionDiagrams'
+import renderVectorArrows from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows'
 
 
 export async function getStaticProps(){
@@ -1028,6 +1029,18 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  // Page-theme palette (owner, 2026-09-28): site blue / navy / amber, not the tools' orange-cyan.
+  const vaFreeVector = {
+    kind: 'copies', vector: [3, 2],
+    style: { vector: '#2563EB', negation: '#C0392B', text: '#1E3A5F' },
+    svgTitle: 'A vector is fixed by its components, not by where it is drawn',
+    tails: [[0, 0], [4, 3], [6, 0]],
+    labels: [['v = (3, 2)', 1.2, 1.55], ['v = (3, 2)', 5.1, 4.55], ['v = (3, 2)', 7.2, 1.6]],
+    wrong: { tail: [1, 3], vector: [2, 3], labelAt: [3.3, 5.7], label: ['(2, 3): same length,', 'other direction, not v'] },
+    note: 'the copy with its tail at the origin O is the position vector of the point (3, 2)',
+    caption: 'same components, same vector, wherever it is drawn',
+  };
+
   const demoUnits = {
     // Hub page: one unit only. The operations section is the single
     // place a live demo adds more than the summary prose does.
@@ -1037,6 +1050,11 @@ const schemas = {
       text: 'Addition, subtraction and scaling all share this shape: the operation is applied to each slot on its own and the slots never talk to each other. That is why all three demand vectors of the same length and why all three return a vector of that same length. See the same run for subtraction on the',
       href: '/linear-algebra/visual-tools/vector-addition',
       linkText: 'vector addition visualizer',
+    }),
+    freeVector: demoUnitFrame({
+      svg: renderVectorArrows(vaFreeVector),
+      caption: 'One vector, three places',
+      text: 'The three blue arrows start at different points, yet each runs 3 across and 2 up &#8212; the dashed legs show it &#8212; so all three are the single vector v = (3, 2). The one whose tail sits at the origin is the position vector of the point (3, 2). The red arrow is exactly as long as v, but it runs 2 across and 3 up: a different direction, so a different vector.',
     }),
   };
 
@@ -1086,6 +1104,8 @@ export default function VectorsPage({seoData, sectionsContent, introContent, obj
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-freeVector'} dangerouslySetInnerHTML={{ __html: demoUnits.freeVector }} />,
+          `Moving an arrow never changes the vector it represents; changing a component always does.`,
           <div
             key={'obj3-table'}
             style={tableWrapStyle}

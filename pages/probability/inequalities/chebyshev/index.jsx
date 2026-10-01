@@ -660,6 +660,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import chebyshevDiagrams from '@/app/components/probability/inequalities/chebyshevDiagrams'
 
 
 export async function getStaticProps(){
@@ -1127,8 +1129,31 @@ The result is deliberately general. It applies without assuming any particular d
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_2_0: demoUnitFrame({
+      svg: chebyshevDiagrams['chebyshev-normal'],
+      caption: 'Chebyshev bound for a normal variable, mean 10, variance 4, deviation 3',
+      text: 'The bound is the variance divided by the square of the deviation, here 4 over 9, and the shaded tails show the true probability of deviating by at least 3, which is much smaller. Two units of standard deviation against a deviation of three produces the same ratio for every distribution. Change the variance or the deviation and watch the bound move on the',
+      href: '/probability/visual-tools/inequalities/chebyshev',
+      linkText: 'Chebyshev inequality visualizer',
+    }),
+    u_7_1: demoUnitFrame({
+      svg: chebyshevDiagrams['chebyshev-uniform'],
+      caption: 'Chebyshev bound for a uniform variable',
+      text: 'For a uniform variable the true tail probability can be zero while the bound stays positive: the inequality knows only the variance and cannot see that the distribution has no tails at all. That gap is the price of generality. Switch between families and see how loose the bound gets on the',
+      href: '/probability/visual-tools/inequalities/chebyshev',
+      linkText: 'Chebyshev inequality visualizer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       summaryTable,
@@ -1151,7 +1176,7 @@ export default function ChebyshevInequalityPage({
   introContent,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1180,6 +1205,8 @@ export default function ChebyshevInequalityPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-u_2_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_2_0 }} />,
+          `The next section reads the inequality in words.`,
         ]
     },
     {
@@ -1239,6 +1266,8 @@ export default function ChebyshevInequalityPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-u_7_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_7_1 }} />,
+          `Why the inequality matters despite this is explained next.`,
         ]
     },
     {

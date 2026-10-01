@@ -774,6 +774,7 @@ import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r
 import matrixCompositionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/matrix-composition/matrixCompositionDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "matrix representation linear transformation",
@@ -1360,6 +1361,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     standard: demoUnitFrame({
       svg: linearTransformationDiagrams.fullRank,
@@ -1374,6 +1376,13 @@ const schemas = {
       text: 'Above, the order makes no difference. Below, it plainly does: the same two transformations applied the other way round leave the grid somewhere else. Matrix multiplication is non-commutative for this reason and no other &#8212; doing things in a different order genuinely ends up somewhere different. Swap the order yourself on the',
       href: '/linear-algebra/visual-tools/matrix-composition-2d',
       linkText: '2D composition explorer',
+    }),
+    undoMap: demoUnitFrame({
+      svg: matrixCompositionDiagrams.revealInverse,
+      caption: 'A shear, then its inverse',
+      text: 'The first step shears the plane; the second applies the inverse shear. The two-step trail returns the vector to where it started, and the unit square comes back as the unit square: the product of the two matrices is the identity. That is the matrix meaning of an inverse transformation &#8212; composing with it gives the map that changes nothing. Try other pairs on the',
+      href: '/linear-algebra/visual-tools/matrix-composition-2d',
+      linkText: 'matrix composition visualizer',
     }),
   };
 
@@ -1482,6 +1491,8 @@ export default function MatrixRepresentationPage({seoData, sectionsContent, intr
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-undoMap'} dangerouslySetInnerHTML={{ __html: demoUnits.undoMap }} />,
+          `Undoing a transformation and inverting its matrix are the same act, written in two languages.`,
         ]
     },
     {

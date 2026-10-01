@@ -2,8 +2,12 @@
 
 import React, { useState, useRef } from 'react';
 import styles from './UnitCircle.module.css';
+import { processContent } from '@/app/utils/contentProcessor';
 
-const UnitCircle = () => {
+// `explanations` (optional, Line 1 2026-09-23): per-state panel entries keyed
+// s<deg> (special angle), q1-q4 (quadrant), rotations, functions. Canonical
+// text lives in getStaticProps of the page; nothing renders when it is absent.
+const UnitCircle = ({ explanations = null }) => {
   const [angle, setAngle] = useState(0);
   const [hoveredAngle, setHoveredAngle] = useState(null);
   const [inputAngle, setInputAngle] = useState('0');
@@ -430,6 +434,24 @@ const UnitCircle = () => {
             </div>
           </div>
 
+          {explanations && (() => {
+            const inputDeg = parseFloat(inputAngle);
+            const isSpecial = Number.isInteger(degrees) && (degrees % 30 === 0 || degrees % 45 === 0);
+            const quadrant = degrees < 90 ? 1 : degrees < 180 ? 2 : degrees < 270 ? 3 : 4;
+            const stateKey = hoveredAngle ? 's' + hoveredAngle.angle
+              : (!isNaN(inputDeg) && (inputDeg >= 360 || inputDeg < 0)) ? 'rotations'
+              : isSpecial ? 's' + degrees : 'q' + quadrant;
+            const entry = explanations[stateKey];
+            return (
+              <div className={styles.explanationsContainer} style={{ marginTop: '10px' }}>
+                <h3 className={styles.explanationsTitle}>What the circle shows now</h3>
+                <div style={{ fontSize: 'smaller', color: '#4a5568', lineHeight: 1.5 }}>
+                  {entry ? <div>{processContent(entry)}</div> : null}
+                  {explanations.functions ? <div style={{ marginTop: '8px' }}>{processContent(explanations.functions)}</div> : null}
+                </div>
+              </div>
+            );
+          })()}
 
             
           </div>

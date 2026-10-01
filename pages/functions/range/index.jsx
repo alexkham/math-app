@@ -870,6 +870,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionRangeDiagrams from '@/app/components/functions/range/functionRangeDiagrams'
+import functionTransformationsDiagrams from '@/app/components/functions/transformations/functionTransformationsDiagrams'
 
 
 export async function getStaticProps(){
@@ -1438,8 +1441,38 @@ const faqQuestions = {
     },
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    fromGraph: demoUnitFrame({
+      svg: functionRangeDiagrams.quadratic,
+      caption: 'f(x) = x&#178;: range [0, &#8734;) read off the y-axis',
+      text: 'The shaded band on the vertical axis marks the heights the curve actually reaches: from the vertex at 0, included as a closed dot, upward without bound, and nothing below. Range is the vertical shadow of the graph. Switch to sin x and watch the band shrink to [&#8722;1, 1] on the',
+      href: '/functions/visual-tools/range',
+      linkText: 'range explorer',
+    }),
+    absolute: demoUnitFrame({
+      svg: functionRangeDiagrams.absolute,
+      caption: 'f(x) = |x|: outputs from 0 upward',
+      text: 'The V never dips below the axis, so its vertical band starts at 0 with a closed dot and runs upward: the same range as the parabola although the shape is different. Families with a minimum share this pattern; families with a horizontal asymptote, like e&#710;x, have an open endpoint instead. Compare them on the',
+      href: '/functions/visual-tools/range',
+      linkText: 'range explorer',
+    }),
+    shift: demoUnitFrame({
+      svg: functionTransformationsDiagrams.k,
+      caption: 'g(x) = f(x) + 3: the parabola and its range move up by 3',
+      text: 'Adding 3 to every output lifts the whole graph by 3, so the range [0, &#8734;) of x&#178; becomes [3, &#8734;): vertical transformations act directly on the range. A horizontal shift would leave the range alone. Move the parameter k and watch the lowest point rise and fall on the',
+      href: '/functions/visual-tools/transformations',
+      linkText: 'transformations explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj2Table,
@@ -1468,7 +1501,7 @@ export default function RangePage({
   obj8Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1544,6 +1577,8 @@ export default function RangePage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-fromGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.fromGraph }} />,
+          `Gaps in the band are the outputs the function never produces.`,
         ]
     },
     {
@@ -1557,6 +1592,8 @@ export default function RangePage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+                  <div key={'unit-absolute'} dangerouslySetInnerHTML={{ __html: demoUnits.absolute }} />,
+          `Recognising the family is often the fastest route to the range.`,
         ]
     },
     {
@@ -1570,6 +1607,8 @@ export default function RangePage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
           />,
+                  <div key={'unit-shift'} dangerouslySetInnerHTML={{ __html: demoUnits.shift }} />,
+          `Reflection in the x-axis is the vertical transformation that turns the range upside down.`,
         ]
     },
     {

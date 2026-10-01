@@ -620,6 +620,8 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import diagrams from '@/app/api/db/svg/set-theory/svg'
 import summaries from '@/app/api/db/tables/set-theory/summaries'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 
 
 export async function getStaticProps(){
@@ -955,8 +957,31 @@ const schemas = {
 
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    subset: demoUnitFrame({
+      svg: twoSetsVennDiagrams.subsetAinB,
+      caption: 'A &#8838; B: every element of A is an element of B',
+      text: 'The circle A lies entirely inside the circle B, so any element that belongs to A automatically belongs to B: that containment is the subset relation, and the picture shows why B can have elements outside A while the reverse is impossible. Membership of a single point and containment of a whole set are the two relationships drawn here. Drag the circles apart and watch the relation change on the',
+      href: '/set-theory/visual-tools/two-sets-basic-venn',
+      linkText: 'two-set Venn diagram explorer',
+    }),
+    intersection: demoUnitFrame({
+      svg: twoSetsVennDiagrams.intersection,
+      caption: 'A &#8745; B: the shaded overlap',
+      text: 'Only the region belonging to both circles is shaded: an element is in A &#8745; B exactly when it is in A and in B. The union would shade both circles entirely, the difference A \\ B only the part of A outside the overlap. Switch operations and watch the shading move on the',
+      href: '/set-theory/visual-tools/two-sets-basic-venn',
+      linkText: 'two-set Venn diagram explorer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     figs,
@@ -980,7 +1005,7 @@ const schemas = {
    }
 
 
-export default function SetTheoryBasicsPage({seoData, sectionsContent, introContent, figs, notationTable, cardinalityTable, relationshipsTable, operationsTable, faqQuestions, schemas}) {
+export default function SetTheoryBasicsPage({seoData, sectionsContent, introContent, figs, notationTable, cardinalityTable, relationshipsTable, operationsTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1059,6 +1084,8 @@ export default function SetTheoryBasicsPage({seoData, sectionsContent, introCont
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: relationshipsTable }}
           />,
+                  <div key={'unit-subset'} dangerouslySetInnerHTML={{ __html: demoUnits.subset }} />,
+          `Equality of sets is the case where the containment runs both ways.`,
         ]
     },
 
@@ -1082,6 +1109,8 @@ export default function SetTheoryBasicsPage({seoData, sectionsContent, introCont
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: operationsTable }}
           />,
+                  <div key={'unit-intersection'} dangerouslySetInnerHTML={{ __html: demoUnits.intersection }} />,
+          `The operations page develops each of these with its own laws and diagrams.`,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

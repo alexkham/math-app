@@ -14,6 +14,11 @@ import SiblingsNavStandalone from '../../../../app/components/SiblingsNavStandal
 import ThreeSetBasicIdentitiesExplorer from '../../../../app/components/venn-diagrams/3-sets/ThreeSetBasicIdentitiesExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import threeSetsVennDiagrams from '../../../../app/components/venn-diagrams/3-sets/threeSetsVennDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
 
@@ -39,16 +44,16 @@ export async function getStaticProps(){
     obj0: {
       title: `Key Terms`,
       content: `
-- **Set** — a collection of distinct elements
-- **Universal set** — the set containing every element under consideration, denoted $U$
-- **Union** — $A \\cup B \\cup C$, elements in at least one of $A$, $B$, $C$
-- **Intersection** — $A \\cap B \\cap C$, elements in all three sets
+- [Set](!/set-theory/definitions#set) — a collection of distinct [elements](!/set-theory/basics#4)
+- [Universal set](!/set-theory/definitions#universal_set) — the set containing every element under consideration, denoted $U$
+- [Union](!/set-theory/definitions#union) — $A \\cup B \\cup C$, elements in at least one of $A$, $B$, $C$
+- [Intersection](!/set-theory/definitions#intersection) — $A \\cap B \\cap C$, elements in all three [sets](!/set-theory/basics#1)
 - **Pairwise intersection** — $A \\cap B$, $A \\cap C$, or $B \\cap C$
-- **Complement** — $A'$, elements in $U$ but not in $A$
-- **Set difference** — $A \\setminus B$, elements in $A$ but not in $B$
-- **Symmetric difference** — $A \\triangle B \\triangle C$, elements in an odd number of $A$, $B$, $C$
-- **De Morgan's laws (three sets)** — $(A \\cup B \\cup C)' = A' \\cap B' \\cap C'$ and $(A \\cap B \\cap C)' = A' \\cup B' \\cup C'$
-- **Region** — one of the eight disjoint pieces a three-circle Venn diagram divides the universe into
+- [Complement](!/set-theory/definitions#complement) — $A'$, elements in $U$ but not in $A$
+- [Set difference](!/set-theory/definitions#set_difference) — $A \\setminus B$, elements in $A$ but not in $B$
+- [Symmetric difference](!/set-theory/definitions#symmetric_difference) — $A \\triangle B \\triangle C$, elements in an odd number of $A$, $B$, $C$
+- [De Morgan's laws (three sets)](!/set-theory/rules#de_morgan) — $(A \\cup B \\cup C)' = A' \\cap B' \\cap C'$ and $(A \\cap B \\cap C)' = A' \\cup B' \\cup C'$
+- [Region](!/set-theory/venn-diagrams#4) — one of the eight disjoint pieces a three-circle [Venn diagram](!/set-theory/venn-diagrams) divides the universe into
 `,
       before: ``,
       after: `
@@ -74,7 +79,7 @@ No setup is required — pick any tab and any button to see the corresponding re
       title: `Navigating Category Tabs`,
       content: `The category tabs organize all 40 identities into six groups based on their structural role:
 
-• [Basic Sets](!#the-basic-sets) — the sets $A$, $B$, $C$ themselves, the universal set $U$, and the empty set $\\emptyset$
+• [Basic Sets](!#the-basic-sets) — the sets $A$, $B$, $C$ themselves, the universal set $U$, and the [empty set](!/set-theory/basics#3) $\\emptyset$
 • [Complements](!#the-three-complements) — $A'$, $B'$, and $C'$
 • [Intersection & Union](!#intersections-and-unions) — the triple intersection $A \\cap B \\cap C$, the three pairwise intersections, the triple union $A \\cup B \\cup C$, and the three pairwise unions
 • [Differences](!#the-differences) — the six pairwise differences, the three "only" regions like $A \\setminus (B \\cup C)$, the mixed $(A \\cup B) \\setminus C$, and the symmetric differences $A \\triangle B$ and $A \\triangle B \\triangle C$
@@ -140,7 +145,7 @@ Click **Reset** to return both controls to the defaults — blue at $0.85$ opaci
       title: `Previous and Next Navigation`,
       content: `At the bottom of the diagram column, the **Previous** and **Next** buttons cycle through all 40 identities in the order defined by the category groups: Basic Sets, then Complements, then Intersection & Union, then Differences, Compound, and finally De Morgan's Laws. The counter between the two buttons displays the current position, formatted as "$n$ / $40$".
 
-Navigation wraps around: pressing **Previous** on the first scenario jumps to the last, and pressing **Next** on the last returns to the first. This makes the explorer well suited for systematic review — start at the first identity and click through every region combination one by one to see how each algebraic expression maps to a subset of the eight regions.
+Navigation wraps around: pressing **Previous** on the first scenario jumps to the last, and pressing **Next** on the last returns to the first. This makes the explorer well suited for systematic review — start at the first identity and click through every region combination one by one to see how each algebraic expression maps to a [subset](!/set-theory/subsets#1) of the eight regions.
 
 The active tab and active formula button update automatically as you advance, so you always know which group the current identity belongs to.`,
       before: ``,
@@ -230,13 +235,19 @@ For comprehensive treatment, see **set laws and identities**.`,
 
 **De Morgan's Laws** — algebraic proofs of the two-set and three-set forms and the generalization to arbitrary collections of sets.
 
-**Two-Set Venn Diagram** — the simpler two-circle case with four regions; useful for first exposure to the visual approach.
+[Two-Set Venn Diagram](!/set-theory/visual-tools/two-sets-basic-venn) — the simpler two-circle case with four regions; useful for first exposure to the visual approach.
 
-**Inclusion-Exclusion Principle** — the counting formula $|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C| + |A \\cap B \\cap C|$, which depends on the eight-region decomposition.
+[Inclusion-Exclusion Principle](!/set-theory/visual-tools/inclusion-exclusion) — the counting formula $|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C| + |A \\cap B \\cap C|$, which depends on the eight-region decomposition.
 
 **Set Theory Definitions** — glossary of foundational terms used throughout set algebra.
 
-**Set Laws and Identities** — algebraic catalog of commutative, associative, distributive, absorption, and complement laws on sets.`,
+**Set Laws and Identities** — algebraic catalog of commutative, associative, distributive, absorption, and complement laws on sets.
+
+[Three-Set Laws and Identities Explorer](!/set-theory/visual-tools/three-sets-laws-venn) — the identity equations on the same eight regions, proved side by side.
+
+[Venn Diagram and Truth Table Explorer](!/set-theory/visual-tools/venn-truth-table) — the same expressions as truth-table columns.
+
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — shade any expression on up to five sets.`,
       before: ``,
       after: ``,
       link: '',
@@ -953,8 +964,121 @@ Ending the catalog on this pair is apt: the two frames compress everything the p
     }
   }
 
+  const instructions = [
+    'The six **category tabs**, from **Basic Sets** to **De Morgan\'s Laws**, switch the row of formula buttons below them; the selected identity stays shaded while you browse. [Learn more about the category tabs](!#navigating-category-tabs)',
+    'Tap a **formula button** such as $A \\cap B \\cap C$ or **exactly two** to shade its regions; the badge above the diagram shows its symbol. [Learn more about selecting an identity](!#selecting-an-identity)',
+    'The **Jump to** menu lists all 40 identities grouped by tab; picking one also switches to its tab. [Learn more about the Jump to menu](!#selecting-an-identity)',
+    'The diagram shades some of its eight regions: outside all three circles, the three only-regions, the three pairwise slivers and the center $A \\cap B \\cap C$; hover a region to see its name. [Learn more about reading the shaded diagram](!#reading-the-shaded-venn-diagram)',
+    'The **Theme** panel sets the shading **Color** and **Opacity** from 0.00 to 1.00; **Reset** returns blue at 0.85. [Learn more about color and opacity](!#customizing-color-and-opacity)',
+    '**← Previous** and **Next →** step through all 40 identities in tab order and wrap around; the counter shows the position, such as 1 / 40. [Learn more about Previous and Next](!#previous-and-next-navigation)',
+    'The **Explanation** panel names the identity; its **Overview** tab gives the definition and, for some identities, an example, and its **Learn More** tab links to that identity\'s section on this page. [Learn more about getting started](!#getting-started-with-the-explorer)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real ThreeSetIdentitiesExplorer
+     (opens on Set A, Basic Sets tab, opacity 0.85). One range input: 0 = Opacity.
+     Jump to is the only <select>; option values are scenario ids. */
+  const demos = {
+    'navigating-category-tabs': {
+      title: 'Category tabs and formula buttons',
+      script: [
+        { say: `TAP Complements
+Button row now: A', B', C'.
+Diagram still shows A. Selection kept.` },
+        { click: { button: 'Complements', exact: true } },
+        { wait: 2600 },
+        { say: `TAP C'
+Four regions outside circle C shaded.
+Circle C left blank.` },
+        { click: { button: "C'", exact: true } },
+        { wait: 2600 },
+        { say: `TAP Intersection & Union → A ∩ B ∩ C
+Center region only.
+In all three sets.` },
+        { click: { button: 'Intersection & Union', exact: true } },
+        { wait: 700 },
+        { click: { button: 'A ∩ B ∩ C', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Compound → exactly two
+Three slivers shaded.
+Center blank: that is three, not two.` },
+        { click: { button: 'Compound', exact: true } },
+        { wait: 700 },
+        { click: { button: 'exactly two', exact: true } },
+        { wait: 2800 },
+        { say: `TAP De Morgan's Laws → (A ∪ B ∪ C)'
+One region only: outside all three circles.` },
+        { click: { button: "De Morgan's Laws", exact: true } },
+        { wait: 700 },
+        { click: { button: "(A ∪ B ∪ C)'", exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'selecting-an-identity': {
+      title: 'Jump to and the explanation panel',
+      script: [
+        { say: `SELECT Jump to → A ∩ B ∩ C
+Tab switches to Intersection & Union.
+Center only. Example ⇒ {3}.` },
+        { set: 'select', value: 'inter-abc' },
+        { wait: 2800 },
+        { say: `TAP Learn More
+Most exclusive region:
+three membership tests, all passed.` },
+        { click: { button: 'Learn More', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Jump to → A △ B △ C
+Tab: Differences. Three only-regions + center.
+In an odd number of sets. Panel back on Overview.` },
+        { set: 'select', value: 'symdiff-abc' },
+        { wait: 3000 },
+        { say: `TAP Learn More
+Odd count: 1 or 3.
+Parity makes △ associative.` },
+        { click: { button: 'Learn More', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Jump to → ≤ one
+Tab: Compound.
+Outside + three only-regions: in none or one set.` },
+        { set: 'select', value: 'at-most-one' },
+        { wait: 2800 },
+      ],
+    },
+    'customizing-color-and-opacity': {
+      title: 'Theme, Previous and Next',
+      script: [
+        { say: `DRAG Opacity → 0.30
+Shading paler. Readout 0.30.` },
+        { slide: { range: 0 }, to: 0.3, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP Next →
+2 / 40: Set B.
+Opacity 0.30 kept.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ← Previous ×2
+Wraps: 40 / 40, (A ∩ B ∩ C)'.
+All but the center shaded.` },
+        { click: { button: '← Previous', exact: true } },
+        { wait: 700 },
+        { click: { button: '← Previous', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Wraps forward: 1 / 40, Set A.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Reset
+Opacity back to 0.85. Blue shading.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
+      relatedTools: getRelatedTools('three-sets-basic-venn'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -976,7 +1100,22 @@ Ending the catalog on this pair is apt: the two frames compress everything the p
   }
 }
 
-export default function ThreeSetsBasicVennPage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function ThreeSetsBasicVennPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ThreeSetBasicIdentitiesExplorer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / section with after-text / per-state section
   // carrying its frozen unit as [content, unit, after].
@@ -1006,10 +1145,10 @@ export default function ThreeSetsBasicVennPage({seoData, sectionsContent, introC
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started-with-the-explorer'),
-    plain('obj2', 'navigating-category-tabs'),
-    plain('obj3', 'selecting-an-identity'),
+    withDemo(plain('obj2', 'navigating-category-tabs')),
+    withDemo(plain('obj3', 'selecting-an-identity')),
     plain('obj4', 'reading-the-shaded-venn-diagram'),
-    plain('obj5', 'customizing-color-and-opacity'),
+    withDemo(plain('obj5', 'customizing-color-and-opacity')),
     plain('obj6', 'previous-and-next-navigation'),
 
     plain('obj12', 'the-basic-sets'),
@@ -1130,6 +1269,10 @@ export default function ThreeSetsBasicVennPage({seoData, sectionsContent, introC
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'-10px',marginBottom:'-80px'}}>Venn Diagrams: Three Sets Basic Identities</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       {/* <div style={{ display: 'grid', gridTemplateColumns: '200px minmax(0, 1fr)', gap: 28 }}>
         <SiblingsNavStandalone
@@ -1179,6 +1322,7 @@ export default function ThreeSetsBasicVennPage({seoData, sectionsContent, introC
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

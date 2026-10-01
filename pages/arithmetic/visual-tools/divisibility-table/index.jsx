@@ -534,6 +534,8 @@ import Head from 'next/head'
 import DivisibilityTable from '@/app/components/divisibility/divisibility-table'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import divisibilityTableDiagrams from '@/app/components/divisibility/divisibilityTableDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -562,7 +564,7 @@ export async function getStaticProps(){
       title: `Selecting Divisors`,
       content: `Click any divisor button (÷1 through ÷12) at the top of the grid to highlight all numbers from 0 to 100 that are divisible by that value. The button turns blue when active, and matching numbers in the grid become highlighted with a light blue background.
 
-You can select multiple divisors simultaneously. When multiple divisors are selected, the grid highlights numbers divisible by any of the selected values. This lets you [compare divisibility patterns](!#combining-divisors)—for example, selecting both ÷2 and ÷3 shows all even numbers plus all multiples of 3.
+You can select multiple divisors simultaneously. When multiple divisors are selected, the grid highlights numbers divisible by any of the selected values. This lets you [compare divisibility patterns](!#combining-divisors)—for example, selecting both ÷2 and ÷3 shows all even numbers plus all [multiples](!/arithmetic/divisibility/factors#5) of 3.
 
 Click a selected divisor again to deselect it. Use the red ✕ button to clear all selections at once and reset the grid to its default state.`,
       before: ``,
@@ -588,7 +590,7 @@ The hovered cell enlarges and turns blue, making it easy to track which number y
 
 Number 0 is special: it's [divisible](!#what-is-divisibility) by every number (since 0 ÷ n = 0 for any n). The tooltip for 0 shows all twelve divisors with the explanation "0 ÷ anything = 0."
 
-Number 1 is only divisible by itself. All other numbers have at least two divisors (1 and the number itself), with composite numbers having additional divisors between them.`,
+Number 1 is only divisible by itself. All other numbers have at least two divisors (1 and the number itself), with [composite numbers](!/arithmetic/divisibility#7) having additional divisors between them.`,
       before: ``,
       after: ``,
       link: '',
@@ -760,7 +762,11 @@ Similar reasoning explains other rules. For [divisibility by 4](!#divisibility-r
 
 • **Prime Factorization** - Breaking numbers into prime factors reveals all divisibility relationships
 
-• **Modular Arithmetic** - [Divisibility rules](!#the-twelve-divisibility-rules) are applications of modular arithmetic, where a is divisible by b means a ≡ 0 (mod b)`,
+• **Modular Arithmetic** - [Divisibility rules](!#the-twelve-divisibility-rules) are applications of modular arithmetic, where a is divisible by b means a ≡ 0 (mod b)
+• [Divisibility Tiles](!/arithmetic/visual-tools/divisibility-tiles) - The same rules shown as tiles arranged in rows, with the remainder left over in the last row
+• [Divisibility Decision Tree](!/arithmetic/visual-tools/divisibility-tree) - The rules applied one after another as a yes/no tree for a single number
+• [Modular Arithmetic Wheel](!/arithmetic/visual-tools/modular-wheel) - Divisibility by n is remainder zero on the wheel with n positions
+• [Sieve of Eratosthenes](!/arithmetic/visual-tools/eratosthenes-sieve) - The primes, the numbers with no divisor in this table other than 1 and themselves`,
       before: ``,
       after: ``,
       link: '',
@@ -768,7 +774,7 @@ Similar reasoning explains other rules. For [divisibility by 4](!#divisibility-r
 
     obj16: {
       title: `Divisibility Rule for 1`,
-      content: `Every integer is divisible by 1, because dividing by 1 leaves the number unchanged: n ÷ 1 = n, always a whole number with no remainder. The tooltip states it plainly: "Every number ÷1."
+      content: `Every integer is divisible by 1, because dividing by 1 leaves the number unchanged: n ÷ 1 = n, always a whole number with no [remainder](!/arithmetic/modulo#1). The tooltip states it plainly: "Every number ÷1."
 
 Select ÷1 and the entire grid lights up—all 101 cells from 0 to 100. It is the only divisor button that highlights everything, which makes it a useful sanity check: whatever else is selected, adding ÷1 cannot remove a highlight, only guarantee them all.
 
@@ -999,6 +1005,7 @@ Selecting several buttons at once shows the union of their patterns—see [combi
 
   return {
     props: {
+      relatedTools: getRelatedTools('divisibility-table'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1018,7 +1025,7 @@ Selecting several buttons at once shows the union of their patterns—see [combi
   }
 }
 
-export default function DivisibilityTablePage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function DivisibilityTablePage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1281,6 +1288,7 @@ export default function DivisibilityTablePage({seoData, sectionsContent, introCo
       /> */}
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

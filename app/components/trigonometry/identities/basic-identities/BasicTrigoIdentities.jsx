@@ -351,6 +351,7 @@ function FormulaTable({ theta, active, onSelect }) {
 // explanations now live in getStaticProps of the page that renders this
 // component; edit the page's explanations object, not the scenarios here.
 export default function BasicTrigIdentitiesExplorer({
+  syncQuery = true,   // false: never read or write ?fn= (demo instances)
   initialFn    = 'sin',
   initialTheta = 30,
   explanations = null,
@@ -359,13 +360,14 @@ export default function BasicTrigIdentitiesExplorer({
   const [theta, setTheta]       = useState(initialTheta);
 
   useEffect(() => {
+    if (!syncQuery) return;
     const fromQuery = readFnFromQuery();
     if (fromQuery) setActiveFn(fromQuery);
   }, []);
 
   useEffect(() => {
-    writeFnToQuery(activeFn);
-  }, [activeFn]);
+    if (syncQuery) writeFnToQuery(activeFn);
+  }, [activeFn, syncQuery]);
 
   const entry = REGISTRY[activeFn];
 

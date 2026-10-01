@@ -570,6 +570,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
+import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 
 
 export async function getStaticProps(){
@@ -1070,8 +1073,38 @@ Since "all possible outcomes" appears directly in the formula, it makes sense to
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_definition_0: demoUnitFrame({
+      svg: diceSampleSpaceDiagrams.none,
+      caption: 'The sample space of two dice: 36 ordered outcomes',
+      text: 'Every possible result of the two rolls appears exactly once: the row gives the first die, the column the second, and no cell is missing or repeated. The whole grid is the sample space and each event will be a group of its cells. Highlight groups and see them become events on the',
+      href: '/probability/visual-tools/dice-roll',
+      linkText: 'dice roll sample space explorer',
+    }),
+    u_events_1: demoUnitFrame({
+      svg: diceSampleSpaceDiagrams.even,
+      caption: 'Even sum: an event as a subset of the sample space',
+      text: 'The highlighted cells are an event, a subset of the grid picked out by a condition on the outcome. Half of the 36 cells satisfy it, so its probability is 18 over 36, and the complement is the unhighlighted half. Switch conditions and watch different subsets light up on the',
+      href: '/probability/visual-tools/dice-roll',
+      linkText: 'dice roll sample space explorer',
+    }),
+    u_practice_2: demoUnitFrame({
+      svg: coinSampleSpaceDiagrams.none,
+      caption: 'Three coin tosses: eight equally likely sequences',
+      text: 'Repeating a two-outcome experiment three times gives a sample space of eight ordered sequences, each with probability 1/8. Listing them explicitly is the first step in every question about the experiment. Group the sequences by number of heads on the',
+      href: '/probability/visual-tools/coin-toss',
+      linkText: 'coin toss sample space explorer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1098,7 +1131,7 @@ export default function SampleSpacePage({
   schemas,
   outcomesTable,
   mistakesTable,
-  summaryTable,
+  summaryTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1119,6 +1152,8 @@ export default function SampleSpacePage({
         link:'',
         content:[
             sectionsContent.definition.content,
+                  <div key={'unit-u_definition_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_definition_0 }} />,
+          `Sample spaces come in several types, listed next.`,
         ]
     },
     {
@@ -1172,6 +1207,8 @@ export default function SampleSpacePage({
         link:'',
         content:[
           sectionsContent.events.content,
+                  <div key={'unit-u_events_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_events_1 }} />,
+          `Practical examples show how the sample space shapes such subsets.`,
         ]
     },
     {
@@ -1180,6 +1217,8 @@ export default function SampleSpacePage({
         link:'',
         content:[
           sectionsContent.practice.content,
+                  <div key={'unit-u_practice_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_practice_2 }} />,
+          `Common mistakes usually come from getting this list wrong.`,
         ]
     },
     {

@@ -1556,6 +1556,11 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionSymmetryDiagrams from '@/app/components/functions/symmetry/functionSymmetryDiagrams'
+import functionInverseDiagrams from '@/app/components/functions/inverse/functionInverseDiagrams'
+import functionAsymptotesDiagrams from '@/app/components/functions/asymptotes/functionAsymptotesDiagrams'
+import functionTypesDiagrams from '@/app/components/functions/types/functionTypesDiagrams'
 
 
 export async function getStaticProps(){
@@ -2749,8 +2754,52 @@ const faqQuestions = {
     },
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    odd: demoUnitFrame({
+      svg: functionSymmetryDiagrams.cubic,
+      caption: 'f(x) = x&#179;: symmetric about the origin',
+      text: 'Rotating the picture half a turn about the origin returns it to itself: the point (x, y) has the partner (&#8722;x, &#8722;y) on the curve, which is f(&#8722;x) = &#8722;f(x). That is an odd function; the parabola beside it in the tool is the even case instead. Test any family for both symmetries on the',
+      href: '/functions/visual-tools/symmetry',
+      linkText: 'symmetry explorer',
+    }),
+    even: demoUnitFrame({
+      svg: functionSymmetryDiagrams.quadratic,
+      caption: 'f(x) = x&#178;: symmetric about the y-axis',
+      text: 'The reflection of the parabola across the y-axis lands exactly on the parabola: f(&#8722;x) = f(x). A graph symmetric about the origin, like x&#179;, or symmetric about neither, like x&#178; + x, can be checked the same way. Fold any curve along the axis or spin it about the origin on the',
+      href: '/functions/visual-tools/symmetry',
+      linkText: 'symmetry explorer',
+    }),
+    oneToOne: demoUnitFrame({
+      svg: functionInverseDiagrams.cubic,
+      caption: 'f(x) = x&#179;: every horizontal line meets it once',
+      text: 'The cubic passes the horizontal line test, so it is one-to-one and its inverse, the cube root, exists and is drawn as the mirror image in y = x. A parabola would fail the test, two inputs sharing one output, and would need its domain cut before an inverse could be drawn. Compare the two on the',
+      href: '/functions/visual-tools/inverse-function',
+      linkText: 'inverse function explorer',
+    }),
+    asymptotes: demoUnitFrame({
+      svg: functionAsymptotesDiagrams.reciprocal,
+      caption: 'f(x) = 1/x: vertical x = 0 and horizontal y = 0',
+      text: 'The two dashed lines are the asymptotes: the curve runs off to infinity beside the vertical one and flattens onto the horizontal one at both ends, approaching each without touching. The vertical line marks a forbidden input, the horizontal one a limiting output. Explore oblique asymptotes as well on the',
+      href: '/functions/visual-tools/asymptotes',
+      linkText: 'asymptotes explorer',
+    }),
+    periodic: demoUnitFrame({
+      svg: functionTypesDiagrams.sine,
+      caption: 'f(x) = sin x repeats every 2&#960;',
+      text: 'Any stretch of the curve of length 2&#960; is a copy of every other such stretch: that is periodicity, and 2&#960; is the smallest length that works. The values never leave [&#8722;1, 1], so the function is also bounded. Compare with the non-periodic families on the',
+      href: '/functions/visual-tools/types',
+      linkText: 'function types explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj1Table,
@@ -2783,7 +2832,7 @@ export default function PropertiesPage({
   obj13Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2808,6 +2857,8 @@ export default function PropertiesPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj1Table }}
           />,
+                  <div key={'unit-odd'} dangerouslySetInnerHTML={{ __html: demoUnits.odd }} />,
+          `Most functions are neither even nor odd; the two symmetries are special properties, not a dichotomy.`,
         ]
     },
     {
@@ -2816,6 +2867,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-even'} dangerouslySetInnerHTML={{ __html: demoUnits.even }} />,
+          `Symmetry about a vertical line other than the y-axis is a shifted even function.`,
         ]
     },
     {
@@ -2824,6 +2877,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-oneToOne'} dangerouslySetInnerHTML={{ __html: demoUnits.oneToOne }} />,
+          `One-to-one is exactly the property an inverse needs.`,
         ]
     },
     {
@@ -2924,6 +2979,8 @@ export default function PropertiesPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj13Table }}
           />,
+                  <div key={'unit-asymptotes'} dangerouslySetInnerHTML={{ __html: demoUnits.asymptotes }} />,
+          `Asymptotes are statements about limits drawn as lines.`,
         ]
     },
     {
@@ -2940,6 +2997,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj15.link,
         content:[
           sectionsContent.obj15.content,
+                  <div key={'unit-periodic'} dangerouslySetInnerHTML={{ __html: demoUnits.periodic }} />,
+          `Periodicity is why one cycle of a trigonometric function is enough to know all of it.`,
         ]
     },
     {

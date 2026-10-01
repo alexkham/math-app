@@ -9,6 +9,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 
 
 export async function getStaticProps(){
@@ -476,8 +478,31 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    standard: demoUnitFrame({
+      svg: equationVisualizerDiagrams['lin-negative'],
+      caption: '&#8722;x + 5 = 0: the line crosses the axis at x = 5',
+      text: 'The standard form ax + b = 0 asks where the line y = ax + b meets the x-axis, and for &#8722;x + 5 that is x = 5, the single marked crossing. The condition a &#8800; 0 is what keeps the line from being horizontal, which is what guarantees the crossing exists. Tilt the line by changing a on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+    special: demoUnitFrame({
+      svg: equationVisualizerDiagrams['lin-constant'],
+      caption: '2 = 3: a horizontal line that never reaches the level',
+      text: 'When the variable cancels the left side is a constant, a horizontal line, and either it coincides with the level line, every x a solution, or, as here with 2 = 3, it runs parallel below it and there is no solution at all. No crossing, no marble. Compare the two degenerate cases on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -507,7 +532,7 @@ export default function LinearEquationsPage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -529,6 +554,8 @@ export default function LinearEquationsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-standard'} dangerouslySetInnerHTML={{ __html: demoUnits.standard }} />,
+          `Solving is the algebra that locates this crossing without drawing it.`,
         ]
     },
     {
@@ -592,6 +619,8 @@ export default function LinearEquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+                  <div key={'unit-special'} dangerouslySetInnerHTML={{ __html: demoUnits.special }} />,
+          `Both outcomes are legitimate answers, and the picture shows why neither is a mistake.`,
         ]
     },
     {

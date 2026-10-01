@@ -16,6 +16,10 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import baseConverterDiagrams from '@/app/components/base-visualizer/baseConverterDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps() {
@@ -50,7 +54,7 @@ export async function getStaticProps() {
 
 **Positional notation** — writing a number as a string of digits whose meaning depends on position, $d_k \\cdots d_1 d_0 = \\sum_i d_i\\, b^i$.
 
-**Repeated division** — the standard way to convert from decimal to base $b$: divide by $b$, record the remainder, repeat with the quotient until it reaches $0$, then read the remainders from last to first.
+**Repeated division** — the standard way to convert from decimal to base $b$: divide by $b$, record the remainder, repeat with the quotient until it reaches $0$, then read the [remainders](!/arithmetic/modulo#1) from last to first.
 
 **Expansion** — the reverse direction: multiply each digit by its place value and add, which converts any base back to decimal.`,
       before: ``,
@@ -83,7 +87,7 @@ In decimal, $b = 10$, and $472$ means $4 \\cdot 100 + 7 \\cdot 10 + 2$. In binar
 
 Decimal is a convention, not a property of numbers. The quantity five is the same whether it is written $5$, $101_2$, $12_3$ or $5_{16}$; only the notation changes. That is the whole idea the visualizer is built to show: a base conversion changes how a number is written, never what it is.
 
-Two facts follow. A number needs about $\\log_b N$ digits in base $b$, so small bases give long strings and large bases short ones. And the largest $k$-digit number in base $b$ is $b^k - 1$, all digits at their maximum, just as $999 = 10^3 - 1$.`,
+Two facts follow. A number needs about $\\log_b N$ digits in base $b$, so small bases give long strings and large bases short ones. And the largest $k$-digit number in base $b$ is $b^k - 1$, all digits at their maximum, just as $999 = 10^3 - 1$. The familiar case, [decimal](!#decimal-base-10), is treated first below with the tool frozen on $100$.`,
       before: ``,
       after: ``,
       link: '',
@@ -138,7 +142,7 @@ Conversion between two non-decimal bases is done in two hops through decimal: ex
 
 Hexadecimal won because a byte is eight bits and therefore exactly two hex digits, from $00$ to $FF$. Memory addresses, colour codes and hash values are written in hex for that reason.
 
-Set the visualizer to base $2$, then base $16$, for the same number and check the grouping by eye. The tool computes both by repeated division, but the results line up as the grouping rule predicts.`,
+Set the visualizer to base $2$, then base $16$, for the same number and check the grouping by eye. The tool computes both by repeated division, but the results line up as the grouping rule predicts. Each of the three has a dedicated section with the tool frozen on $100$: [binary](!#binary-base-2), [octal](!#octal-base-8) and [hexadecimal](!#hexadecimal-base-16).`,
       before: ``,
       after: ``,
       link: '',
@@ -152,7 +156,7 @@ Large bases give short strings. In base $36$, $144$ is $40_{36}$, since $4 \\cdo
 
 Small bases have their uses too. Base $3$ appears in balanced ternary and in some logic circuits; base $12$ has a long history in measurement because $12$ divides evenly by $2$, $3$, $4$ and $6$; base $60$, inherited from Babylon, still runs our minutes and seconds.
 
-The point of allowing any base from $2$ to $36$ is that the visualizer never suggests decimal is special. The same steps produce the same number in every base.`,
+The point of allowing any base from $2$ to $36$ is that the visualizer never suggests decimal is special. The same steps produce the same number in every base. The largest case has its own section, [Base 36](!#base-36-every-digit-and-every-letter), with the tool frozen on $100 = 2S_{36}$.`,
       before: ``,
       after: ``,
       link: '',
@@ -227,11 +231,77 @@ Notice the grouping between binary and the two power-of-two bases: $1\\ 100\\ 10
 
 **Binary arithmetic** — addition and multiplication carried out directly in base $2$, the next step after conversion.
 
-**Base conversion table** — the reference table on this site for quick lookup, alongside the numeric base converter for larger inputs.`,
+**Base conversion table** — the reference table on this site for quick lookup, alongside the numeric base converter for larger inputs.
+
+[Modular Arithmetic Wheel](!/arithmetic/visual-tools/modular-wheel) — the remainder of each division step is where the running quotient lands on a wheel with $b$ slots.
+
+[Euclidean Algorithm Visualizer](!/arithmetic/visual-tools/euclidean-algorithm) — the same division-with-remainder rows, applied to two numbers instead of one number and a base.
+
+[Divisibility Table](!/arithmetic/visual-tools/divisibility-table) — the divisibility rules are facts about digits in base $10$; other bases have other rules.`,
       before: ``,
       after: ``,
       link: '',
     },
+    obj11: {
+      title: `Decimal: Base 10`,
+      content: `Base $10$ is the identity conversion: the digits the tool prints are the digits you typed. The visualizer still regroups the cubes, and that is the point. $100$ becomes one group of $10^2 = 100$ cubes, zero groups of $10$, and zero single cubes, which is exactly what the string $100$ says.`,
+      before: ``,
+      after: `**Reading the rows.** The result structure lists the powers of $10$ from the largest that fits downward: $10^2$ with $\\times 1$, $10^1$ with $\\times 0$, $10^0$ with $\\times 0$. Each digit is a count of groups, and the zeros are as informative as the one: they hold the places open.
+
+Decimal feels like the way numbers *are* only because it is the base everyone learns first. Enter $100$ with base $10$, then change the base to $2$ or $16$ and watch the same one hundred cubes regroup; nothing about the quantity changes, only the group sizes. The general rule is in [What a Base Is](!#what-a-base-is), and the reverse direction, digits back to a count, in [Expansion](!#expansion).
+
+Because base $10$ uses ten digit symbols, $0$ to $9$, a single decimal digit can hold at most nine groups of any size; the tenth group is what forces a carry into the next place. The [binary](!#binary-base-2) picture makes the same rule visible with only two symbols.`,
+      link: '',
+    },
+
+    obj12: {
+      title: `Binary: Base 2`,
+      content: `In base $2$ each digit is a bit, $0$ or $1$, so every row of the result structure holds either one group or none. $100$ needs seven bits: $100 = 64 + 32 + 4$, and the visualizer shows exactly those three groups, at $2^6$, $2^5$ and $2^2$, with empty rows at $2^4$, $2^3$, $2^1$ and $2^0$.`,
+      before: ``,
+      after: `**Why so many rows.** A base $b$ needs about $\\log_b N$ digits, and $\\log_2 100 \\approx 6.6$, so seven. Binary is the longest notation the tool offers; the same $100$ takes three digits in [octal](!#octal-base-8) and two in [hexadecimal](!#hexadecimal-base-16).
+
+**By repeated division.** $100 \\to 50$ r $0$, $50 \\to 25$ r $0$, $25 \\to 12$ r $1$, $12 \\to 6$ r $0$, $6 \\to 3$ r $0$, $3 \\to 1$ r $1$, $1 \\to 0$ r $1$; read upward, $1100100_2$. The method is explained in [Repeated Division](!#repeated-division). Each remainder is the bit for one row of the picture.
+
+Binary is the native notation of digital hardware, where a bit is a switch that is on or off. The grouping that turns it into the two shorthand bases is described in [Binary, Octal and Hexadecimal](!#binary-octal-and-hexadecimal).`,
+      link: '',
+    },
+
+    obj13: {
+      title: `Octal: Base 8`,
+      content: `In base $8$ the digits run $0$ to $7$ and the place values are $1, 8, 64, 512, \\ldots$. $100 = 1 \\cdot 64 + 4 \\cdot 8 + 4$, so the visualizer shows one $8^2$ group, four $8^1$ groups and four single cubes: $144_8$.`,
+      before: ``,
+      after: `**Three bits per digit.** Because $8 = 2^3$, each octal digit is exactly three binary digits. Split the [binary](!#binary-base-2) string $1100100_2$ into threes from the right, $1\\ 100\\ 100$, and read $1$, $4$, $4$; no arithmetic needed. The four groups of $8$ in the picture are the $100$ in the middle of the bit string.
+
+**By repeated division.** $100 \\to 12$ r $4$, $12 \\to 1$ r $4$, $1 \\to 0$ r $1$: the remainders $4, 4, 1$ read upward give $144_8$, as in the [worked example](!#worked-example).
+
+Octal was the programmer's shorthand before bytes settled at eight bits; it survives in file permissions and a few older systems. [Hexadecimal](!#hexadecimal-base-16), four bits per digit, took over because it divides a byte evenly.`,
+      link: '',
+    },
+
+    obj14: {
+      title: `Hexadecimal: Base 16`,
+      content: `Base $16$ uses sixteen digit symbols, $0$ to $9$ and then $A$ to $F$ for ten to fifteen. $100 = 6 \\cdot 16 + 4$, so the visualizer shows six $16^1$ groups and four single cubes: $64_{16}$. Both digits happen to be below ten; try $45$ to see a letter, $2D_{16}$.`,
+      before: ``,
+      after: `**Four bits per digit.** $16 = 2^4$, so one hexadecimal digit is four bits. Grouping $1100100_2$ into fours from the right, $110\\ 0100$, reads $6$ and $4$ directly. A byte is eight bits and therefore exactly two hex digits, from $00$ to $FF$, which is why memory addresses, colour codes and hashes are written in hex.
+
+**By repeated division.** $100 \\to 6$ r $4$, $6 \\to 0$ r $6$: two steps, the shortest of the four conversions in the [worked example](!#worked-example).
+
+Compare the picture with [octal](!#octal-base-8): the same hundred cubes, but the larger base makes bigger groups and fewer rows. The largest base the tool accepts, [base 36](!#base-36-every-digit-and-every-letter), pushes this to the limit.`,
+      link: '',
+    },
+
+    obj15: {
+      title: `Base 36: Every Digit and Every Letter`,
+      content: `Base $36$ is the largest base the visualizer accepts, because it is the largest with a standard set of symbols: the ten digits and the twenty-six letters, $A = 10$ up to $Z = 35$. $100 = 2 \\cdot 36 + 28$, and $28$ is written $S$, so the result is $2S_{36}$.`,
+      before: ``,
+      after: `**Reading the picture.** The $36^1$ row holds two groups of $36$ cubes and the $36^0$ row holds twenty-eight single cubes. A row can hold up to thirty-five groups before it must carry, which is why the second digit needs a letter: there are not enough numerals for a base this large.
+
+**By repeated division.** $100 \\to 2$ r $28$, $2 \\to 0$ r $2$; the remainders $28$ and $2$ become the digits $S$ and $2$. Large bases give short strings, which is why identifiers and short links are often base-$36$ encodings of large integers; see [Bases Beyond Sixteen](!#bases-beyond-sixteen).
+
+Any base between $17$ and $36$ behaves the same way, with letters appearing as soon as a digit exceeds $9$. Type $100$ with base $20$ or $25$ to see $50_{20}$ and $40_{25}$, both letter-free, then base $30$ for $3A_{30}$.`,
+      link: '',
+    },
+
   }
 
   const faqQuestions = {
@@ -345,10 +415,38 @@ Notice the grouping between binary and the two power-of-two bases: $1\\ 100\\ 10
     }
   ]
 
+  // Line 1 (2026-09-23): framed units freezing the tool on 100 in each base; see baseConverterDiagrams.js.
+  const stateUnits = {
+    b10: demoUnitFrame({ svg: baseConverterDiagrams.bases[10], caption: '100 in base 10, frozen',
+      text: 'All one hundred cubes sit in a single 10&#178; group and the 10&#185; and 10&#8304; rows are empty: the digits 1, 0, 0 read straight off the picture.' }),
+    b2: demoUnitFrame({ svg: baseConverterDiagrams.bases[2], caption: '100 in base 2, frozen',
+      text: 'Seven rows, one per power of two from 64 down to 1: the 64, 32 and 4 rows hold one group each, the others none, giving 1100100.' }),
+    b8: demoUnitFrame({ svg: baseConverterDiagrams.bases[8], caption: '100 in base 8, frozen',
+      text: 'Three rows: one group of 64, four groups of 8 and four single cubes, so the digits are 1, 4, 4.' }),
+    b16: demoUnitFrame({ svg: baseConverterDiagrams.bases[16], caption: '100 in base 16, frozen',
+      text: 'Two rows: six groups of 16 and four single cubes, so 100 is 64 in hexadecimal, with no letter digit needed this time.' }),
+    b36: demoUnitFrame({ svg: baseConverterDiagrams.bases[36], caption: '100 in base 36, frozen',
+      text: 'Two rows: two groups of 36 and twenty-eight single cubes; the count 28 has no numeral of its own, so the tool writes the letter S.' }),
+  };
+
+  // Line 1: explanations panel entries keyed by tool state (empty, b2, b8, b10, b16, other, error).
+  const explanations = {
+    empty: `Type a whole number up to 144 and a base from 2 to 36. The grid on the left holds the number as cubes; the right side regroups the same cubes by powers of the base, one row per digit. [What a base is](!#what-a-base-is) · [Repeated division](!#repeated-division)`,
+    b2: `Base 2: every row holds one group or none, so each digit is a bit. The number of rows is the number of bits, the longest notation the tool offers. [Learn more about binary](!#binary-base-2) · [Binary, octal and hexadecimal](!#binary-octal-and-hexadecimal)`,
+    b8: `Base 8: digits 0 to 7, place values 1, 8, 64. Each octal digit is three bits, so the picture is the binary one with rows merged in threes. [Learn more about octal](!#octal-base-8) · [Binary, octal and hexadecimal](!#binary-octal-and-hexadecimal)`,
+    b10: `Base 10: the digits you typed, regrouped into hundreds, tens and units. Change the base to see the same cubes regroup. [Learn more about decimal](!#decimal-base-10) · [What a base is](!#what-a-base-is)`,
+    b16: `Base 16: digits 0 to 9 then A to F, four bits per digit, two digits per byte. Rows above nine groups show a letter. [Learn more about hexadecimal](!#hexadecimal-base-16) · [Binary, octal and hexadecimal](!#binary-octal-and-hexadecimal)`,
+    other: `A base past 16 uses letters for digits above 9, up to Z = 35 in base 36; the fewer the rows, the larger the base. [Learn more about base 36 and other bases](!#base-36-every-digit-and-every-letter) · [Bases beyond sixteen](!#bases-beyond-sixteen)`,
+    error: `The number must be at most 144 and the base between 2 and 36; the grid has 144 cells and the alphabet runs out at base 36. [Common mistakes](!#common-mistakes)`,
+  };
+
   return {
     props: {
+      relatedTools: getRelatedTools('base-converter'),
       sectionsContent,
       faqQuestions,
+      stateUnits,
+      explanations,
       schemas,
       navigationGroup,
       seoData: {
@@ -365,7 +463,7 @@ Notice the grouping between binary and the two power-of-two bases: $1\\ 100\\ 10
 }
 
 
-export default function BaseConverter({ seoData, sectionsContent, faqQuestions, schemas, navigationGroup }) {
+export default function BaseConverter({ relatedTools, seoData, sectionsContent, faqQuestions, schemas, navigationGroup, stateUnits, explanations }) {
 
   const plain = (obj, id) => ({
     id,
@@ -373,15 +471,31 @@ export default function BaseConverter({ seoData, sectionsContent, faqQuestions, 
     link: sectionsContent[obj].link,
     content: [ sectionsContent[obj].content ],
   })
+  // Line 1: a per-state section is [opening prose, framed unit, deeper treatment]
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={'u-' + unitKey} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
 
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
     plain('obj2', 'what-a-base-is'),
+    stateRow('obj11', 'decimal-base-10', 'b10'),
     plain('obj3', 'repeated-division'),
     plain('obj4', 'expansion'),
     plain('obj5', 'binary-octal-and-hexadecimal'),
+    stateRow('obj12', 'binary-base-2', 'b2'),
+    stateRow('obj13', 'octal-base-8', 'b8'),
+    stateRow('obj14', 'hexadecimal-base-16', 'b16'),
     plain('obj6', 'bases-beyond-sixteen'),
+    stateRow('obj15', 'base-36-every-digit-and-every-letter', 'b36'),
     plain('obj7', 'worked-example'),
     plain('obj8', 'common-mistakes'),
     plain('obj9', 'where-base-conversion-appears'),
@@ -449,7 +563,7 @@ export default function BaseConverter({ seoData, sectionsContent, faqQuestions, 
       />
       <br/>
       <div style={{marginTop:'-100px'}}>
-        <BaseVisualizer2 />
+        <BaseVisualizer2 explanations={explanations} />
       </div>
       <br/>
       <br/>
@@ -463,6 +577,7 @@ export default function BaseConverter({ seoData, sectionsContent, faqQuestions, 
       <br/>
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

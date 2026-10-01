@@ -496,6 +496,9 @@ import FunctionLimit from '../../../../app/components/functions/limit/FunctionLi
 import functionLimitDiagrams from '../../../../app/components/functions/limit/functionLimitDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -855,6 +858,17 @@ At $\varepsilon = 0.5$ the right sample reads $f(0.5) = 0.71$, and the left samp
 
 That is why one-sided limits are worth having as their own notion. $\lim_{x \to 0^+} \sqrt{x} = 0$ is a perfectly good statement, and it is exactly what justifies calling $\sqrt{x}$ continuous on $[0, \infty)$ — continuity at an endpoint is defined using the one-sided limit, because that is the only one available.`,
       link: '',
+    },
+    obj18: {
+      title: `Plot Size, Applied Strip and Info Panel`,
+      content: `The **S**, **M**, **L** and **XL** buttons above the plot set its size, and the readout next to **Maximize** prints it: **S** is $500 \\times 400$, **M** $700 \\times 550$, **L** $900 \\times 850$ and **XL** $1100 \\times 850$. The page opens at $880 \\times 460$, which is none of the four. The plot never grows wider than its column, so on most screens the buttons mainly change its height. The curve, the limit lines and the markers are redrawn at the new size; the numbers below the plot do not change.
+
+The **Applied** strip at the bottom of the middle column repeats the two values the picture depends on: $c$, fixed by the family, and $\\varepsilon$, set by the slider. Its last tag, **L⁻ = L⁺ ⇒ limit exists**, is the rule itself and reads the same for every family; the verdict for the current family is in [the two verdict rows](!#the-two-verdict-rows) above it.
+
+The info panel on the right has two tabs. **Explanation** is the live one: the family&apos;s description, its equation and $c$, the current samples $f(c - \\varepsilon)$ and $f(c + \\varepsilon)$, both one-sided limits, the verdict, and a closing note that links to the section on that family. **Concepts** is fixed text on one-sided and two-sided limits. For the definition behind both, see [what is a limit](!#what-is-a-limit).`,
+      before: ``,
+      after: ``,
+      link: '',
     }
 
   }
@@ -1018,8 +1032,151 @@ That is why one-sided limits are worth having as their own notion. $\lim_{x \to 
   }
 
 
+  const instructions = [
+    'The **Function** picker on the left lists seven families under six headings, from **Continuous (control)** to **One-sided**; tapping one loads it with its own $c$ and resets $\\varepsilon$ to $0.5$. [Learn more about the discontinuity zoo](!#the-discontinuity-zoo)',
+    'The **Display** checkboxes **f(x)**, **L⁻, L⁺**, **x = c** and **approach** each hide or show one layer, and the legend under the plot lists only the layers that are on; **Accent color** under **Appearance** recolours the highlights. [Learn more about the display toggles](!#display-toggles)',
+    'The **distance ε** slider under **Parameters** sets how far from $c$ the two samples are taken, on a logarithmic scale down to $\\varepsilon = 0.001$; **Reset** returns it to $0.5$. [Learn more about the epsilon slider](!#the-epsilon-slider)',
+    'The plot draws $f$ as a solid blue curve, the limit values as dashed light-blue lines, $x = c$ as a dashed grey line, and the two samples as dots at $c - \\varepsilon$ and $c + \\varepsilon$. [Learn more about getting started](!#getting-started)',
+    'The **From the left** and **From the right** cards print $x$, $f(x)$ and the target $L^-$ or $L^+$; shrink $\\varepsilon$ and the $f(x)$ row closes in on the target. [Learn more about the approach bar](!#the-approach-bar)',
+    'The **Limit at x = c** box shows three cards, **Left limit L⁻**, **Right limit L⁺** and **Two-sided limit**, each holding a number, $+\\infty$, $-\\infty$ or DNE. [Learn more about the three limit cards](!#the-three-limit-cards)',
+    'Under the cards, the first verdict row tags the limit, for example **limit exists** or **DNE (jump)**, and the second gives $f(c)$ and tags the point, for example **continuous** or **removable**. [Learn more about the two verdict rows](!#the-two-verdict-rows)',
+    'The **S**, **M**, **L** and **XL** buttons set the plot size, the **Applied** strip repeats $c$ and $\\varepsilon$, and the info panel tabs **Explanation** and **Concepts** give the live reading and the theory. [Learn more about the plot size, applied strip and info panel](!#plot-size-applied-strip-and-info-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionLimit tool
+     (opens on Hole, c = 1, eps = 0.5). One range input: 0 = distance eps, on a
+     log10 scale (-1 = 0.1, -2 = 0.01). Picking a family resets eps to 0.5.
+     Checkboxes in DOM order: 0 f(x), 1 L lines, 2 x = c, 3 approach.
+     Reset buttons: nth 0 = Parameters, nth 1 = Appearance. */
+  const demos = {
+    'the-discontinuity-zoo': {
+      title: 'Picking a family',
+      script: [
+        { say: `TAP Quadratic
+One dashed L line at height 1.
+Curve runs straight through it. c = 1.` },
+        { click: { button: 'Quadratic' } },
+        { wait: 2600 },
+        { say: `TAP Step
+Two dashed L lines: 0 and 1.
+Curve breaks at c = 0.` },
+        { click: { button: 'Step' } },
+        { wait: 2600 },
+        { say: `TAP 1/x²
+No L lines: no finite height.
+Both branches climb at c = 0.` },
+        { click: { button: '1/x²' } },
+        { wait: 2600 },
+        { say: `TAP 1/x
+Branches split: down left, up right.
+Sample dots at −2 and 2.` },
+        { click: { button: '1/xc=0', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Square root
+Nothing left of c = 0.
+One sample dot: f(0.5) = 0.707.` },
+        { click: { button: 'Square root' } },
+        { wait: 2800 },
+      ],
+    },
+    'the-epsilon-slider': {
+      title: 'Shrinking ε',
+      script: [
+        { say: `DRAG ε → 0.1
+Dots slide in toward x = 1.
+f(0.9) = 1.9, f(1.1) = 2.1.` },
+        { slide: { range: 0 }, to: -1, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG ε → 0.01
+f(0.99) = 1.99, f(1.01) = 2.01.
+Both closing on L = 2.` },
+        { slide: { range: 0 }, to: -2, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Step, DRAG ε → 0.1
+Left f(−0.1) = −0.1, heading to L⁻ = 0.
+Right f(0.1) = 1.1, heading to L⁺ = 1.` },
+        { click: { button: 'Step' } },
+        { slide: { range: 0 }, to: -1, ms: 1200 },
+        { wait: 2800 },
+        { say: `TAP 1/x², DRAG ε → 0.1
+Both sides read 100.
+No finite target: L⁻ = L⁺ = +∞.` },
+        { click: { button: '1/x²' } },
+        { slide: { range: 0 }, to: -1, ms: 1200 },
+        { wait: 2800 },
+        { say: `TAP Reset
+ε back to 0.5.
+Both sides read 4.` },
+        { click: { button: 'Reset', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'the-three-limit-cards': {
+      title: 'Limit cards and verdicts',
+      script: [
+        { say: `TAP Quadratic
+Cards: L⁻ 1 | L⁺ 1 | two-sided 1.
+LIMIT EXISTS. f(c) = 1: CONTINUOUS.` },
+        { click: { button: 'Quadratic' } },
+        { wait: 2800 },
+        { say: `TAP Hole
+Cards: 2 | 2 | 2. LIMIT EXISTS.
+f(c) undefined: REMOVABLE.` },
+        { click: { button: 'Hole' } },
+        { wait: 2800 },
+        { say: `TAP Step
+Cards: 0 | 1 | DNE. DNE (JUMP).
+f(c) = 1: JUMP.` },
+        { click: { button: 'Step' } },
+        { wait: 2800 },
+        { say: `TAP 1/x
+Cards: −∞ | +∞ | DNE. DNE (INFINITE).
+Vertical asymptote at c.` },
+        { click: { button: '1/xc=0', exact: true } },
+        { wait: 2800 },
+        { say: `TAP sin(1/x)
+Cards: DNE | DNE | DNE.
+DNE (OSCILLATING). ESSENTIAL.` },
+        { click: { button: 'sin(1/x)' } },
+        { wait: 2800 },
+      ],
+    },
+    'display-toggles': {
+      title: 'Display, plot size and tabs',
+      script: [
+        { say: `UNCHECK approach
+Both sample dots gone.
+Legend drops approach. Cards unchanged.` },
+        { click: { css: 'input[type="checkbox"]', nth: 3 } },
+        { wait: 2600 },
+        { say: `UNCHECK L⁻, L⁺
+Dashed L line at 2 and its circle gone.
+Curve and x = c remain.` },
+        { click: { css: 'input[type="checkbox"]', nth: 1 } },
+        { wait: 2600 },
+        { say: `TAP M
+Plot 700 × 550.
+Same curve, taller.` },
+        { click: { button: 'M', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Concepts
+Fixed text: one-sided and
+two-sided limits.` },
+        { click: { button: 'Concepts', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Explanation
+Live reading: Hole, c = 1,
+samples 1.5 and 2.5, verdict.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('calculus-limit'),
       sectionsContent,
       stateUnits,
@@ -1043,7 +1200,22 @@ That is why one-sided limits are worth having as their own notion. $\lim_{x \to 
   }
 }
 
-export default function LimitExplorer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function LimitExplorer({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionLimit explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -1066,7 +1238,7 @@ export default function LimitExplorer({relatedTools, seoData, sectionsContent, s
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'the-discontinuity-zoo'),
+    withDemo(plain('obj2', 'the-discontinuity-zoo')),
     stateRow('obj11', 'the-control-case', 'continuous'),
     stateRow('obj12', 'the-hole', 'removable'),
     stateRow('obj13', 'the-step', 'jump'),
@@ -1074,11 +1246,12 @@ export default function LimitExplorer({relatedTools, seoData, sectionsContent, s
     stateRow('obj15', 'infinite-in-opposite-directions', 'infinite-jump'),
     stateRow('obj16', 'oscillation-without-a-limit', 'oscillating'),
     stateRow('obj17', 'a-limit-from-one-side', 'onesided'),
-    plain('obj3', 'the-epsilon-slider'),
+    withDemo(plain('obj3', 'the-epsilon-slider')),
     plain('obj4', 'the-approach-bar'),
-    plain('obj5', 'the-three-limit-cards'),
+    withDemo(plain('obj5', 'the-three-limit-cards')),
     plain('obj6', 'the-two-verdict-rows'),
-    plain('obj7', 'display-toggles'),
+    withDemo(plain('obj7', 'display-toggles')),
+    plain('obj18', 'plot-size-applied-strip-and-info-panel'),
     plain('obj8', 'what-is-a-limit'),
     plain('obj9', 'one-sided-vs-two-sided'),
     plain('obj10', 'related-concepts'),
@@ -1139,6 +1312,10 @@ export default function LimitExplorer({relatedTools, seoData, sectionsContent, s
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Limit Explorer - Interactive Visualizer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionLimit explanations={explanations}/>
       <br/>

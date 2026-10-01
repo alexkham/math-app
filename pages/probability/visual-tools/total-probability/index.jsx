@@ -11,6 +11,8 @@ import Head from 'next/head'
 import TotalProbabilityVisualizerV2 from '@/app/components/probability/total-probability/TotalProbabilityVisualizerV2'
 import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 // Surfaced on the /probability hub via buildSectionData extraction
@@ -42,9 +44,9 @@ export async function getStaticProps(){
   const sectionsContent = {
     obj1: {
       title: `Using the Interactive Visualizer`,
-      content: `The Total Probability Visualizer lets you explore how probabilities flow through partitioned sample spaces. Start by selecting the number of A events (2-5) and B outcomes (2-5) using the control buttons. Notice that these numbers have an inverse relationship - more A events means fewer possible B outcomes to keep the visualization readable.
+      content: `The Total Probability Visualizer lets you explore how [probabilities](!/probability/axioms) flow through partitioned [sample spaces](!/probability/sample-space). Start by selecting the number of A [events](!/probability/events) (2-5) and B [outcomes](!/probability/sample-space) (2-5) using the control buttons. Notice that these numbers have an inverse relationship - more A events means fewer possible B outcomes to keep the visualization readable.
 
-The tree diagram shows probability paths from left to right. The first level branches represent your A events, each labeled with its probability P(Aᵢ). The second level shows all possible B outcomes for each A event, labeled with conditional probabilities P(Bⱼ|Aᵢ). Click on any outcome in the calculations panel to highlight its corresponding path through the tree.
+The tree diagram shows probability paths from left to right. The first level branches represent your A events, each labeled with its probability P(Aᵢ). The second level shows all possible B outcomes for each A event, labeled with [conditional probabilities](!/probability/conditional-probability) P(Bⱼ|Aᵢ). Click on any outcome in the calculations panel to highlight its corresponding path through the tree.
 
 Use the "Customize Data" button to reveal probability sliders. Adjust P(A) values and they automatically normalize to sum to 1. Similarly, conditional probabilities P(B|A) for each A event normalize across their row. Watch how the tree diagram and calculations update in real-time as you modify probabilities.`,
       before: ``,
@@ -130,7 +132,7 @@ In **quality control**, manufacturers partition production by machine or shift. 
 
     obj8: {
       title: `Probability Trees and Path Analysis`,
-      content: `Probability trees provide a visual representation of sequential or conditional probability structures. Each branch represents a possible outcome with its associated probability. In the total probability context, the first level branches show the partition (A events), and second level branches show outcomes (B events) conditional on each partition element.
+      content: `[Probability trees](!/probability/tree-diagrams) provide a visual representation of sequential or conditional probability structures. Each branch represents a possible outcome with its associated probability. In the total probability context, the first level branches show the partition (A events), and second level branches show outcomes (B events) conditional on each partition element.
 
 Path probabilities are calculated by multiplying probabilities along the path. A path from start through Aᵢ to Bⱼ has probability P(Aᵢ) · P(Bⱼ|Aᵢ) = P(Aᵢ ∩ Bⱼ). The tree structure makes this multiplication rule visual and intuitive. The visualizer highlights paths when you click outcomes, showing exactly which probabilities multiply together.
 
@@ -166,13 +168,19 @@ Think of it this way: addition rule combines alternatives (A or B), while total 
 
     obj11: {
       title: `Related Probability Concepts`,
-      content: `**Conditional Probability** forms the foundation of total probability. Understanding P(B|A) is essential before applying the total probability theorem. For detailed coverage of conditional probability, see **conditional probability theory** and **conditional probability visualizations**.
+      content: `**Conditional Probability** forms the foundation of total probability. Understanding P(B|A) is essential before applying the total probability theorem. For detailed coverage of conditional probability, see **conditional probability theory** and [conditional probability visualizations](!/probability/visual-tools/conditional-probability).
 
 **Bayes' Theorem** reverses the conditioning in total probability problems. After computing P(B) using total probability, Bayes' theorem finds P(Aᵢ|B). These theorems work as a pair in many applications. Learn more at **Bayes' theorem calculator** and **Bayes' theorem examples**.
 
 **Independence** provides an important special case. When B is independent of the partition, P(B|Aᵢ) equals P(B) for all i, and total probability simplifies to P(B) = Σ P(Aᵢ)·P(B) = P(B). Explore independence at **independent events** and **testing independence**.
 
-**Probability distributions** can be analyzed using total probability by conditioning on parameter values or mixture components. See **mixture distributions** and **conditional distributions** for applications in statistical modeling.`,
+**Probability distributions** can be analyzed using total probability by conditioning on parameter values or mixture components. See **mixture distributions** and **conditional distributions** for applications in statistical modeling.
+
+**Conditional Probability Visualizers** — the $P(B \\mid A_i)$ terms the theorem multiplies and sums, drawn one condition at a time.
+
+[Contingency Tables Explorer](!/probability/visual-tools/contingency-tables) — a two-way table is the law of total probability written as row and column sums.
+
+[Venn Diagram Probability Tools](!/probability/visual-tools/venn-diagrams) — the partition $A_1, \\ldots, A_n$ drawn as regions that cover the whole sample space.`,
       before: ``,
       after: ``,
       link: '',
@@ -218,7 +226,7 @@ Conditioning is exactly that rescaling. Restricting attention to $A_1$ makes its
       title: `Summing Across Branches: the Law Itself`,
       content: `Clicking an outcome instead highlights one $B_j$ across **every** branch. The still shows $B_2$ selected, so the three paths ending in $B_2$ are lit and the others fade.
 
-Those three paths are exactly the terms of the law of total probability:
+Those three paths are exactly the terms of the [law of total probability](!/probability/total-probability#law):
 
 $P(B_2) = 0.33 \times 0.3 + 0.33 \times 0.5 + 0.34 \times 0.3 = 0.366$`,
       before: ``,
@@ -389,6 +397,7 @@ What does change is the arithmetic burden. Each extra branch adds a term to ever
 
   return {
     props: {
+      relatedTools: getRelatedTools('probability-total-probability'),
       sectionsContent,
       stateUnits,
       explanations,
@@ -407,7 +416,7 @@ What does change is the arithmetic burden. Each extra branch adds a term to ever
   }
 }
 
-export default function TotalProbabilityPage({seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
+export default function TotalProbabilityPage({relatedTools, seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
 
   const plain = (obj, id) => ({
     id,
@@ -519,6 +528,7 @@ export default function TotalProbabilityPage({seoData, sectionsContent, stateUni
       <br/>
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

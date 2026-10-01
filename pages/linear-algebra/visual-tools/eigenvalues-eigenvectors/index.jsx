@@ -8,6 +8,9 @@ import EigenWrapper from '../../../../app/components/linear-algebra copy/matrix/
 import eigenDiagrams from '../../../../app/components/linear-algebra copy/matrix/eigenDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -454,8 +457,161 @@ This is also the reason symmetric matrices are special. Their eigenvalues are al
   }
 
 
+  const instructions = [
+    'The **Preset** pills load six matrices: three distinct eigenvalues, a symmetric $2 \\times 2$, a repeated eigenvalue, a defective matrix, a triangular one and a rotation. [Learn more about the presets](!#choosing-a-matrix)',
+    'The **Size** stepper (**▲** / **▼**) switches between $2 \\times 2$ and $3 \\times 3$; **Shuffle** draws a matrix with small integer eigenvalues. [Learn more about getting started](!#getting-started)',
+    'Type into any entry of $A$; the scenes are rebuilt from the new matrix at once. [Learn more about editing entries](!#getting-started)',
+    '**▶ Play** runs the computation, **Next →** and **← Back** step one scene at a time, **Reset** returns to the opening scene, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'Every run makes the same four moves: form $A - \\lambda I$, expand the determinant, find the roots, and row reduce once per real eigenvalue. [Learn more about the four moves](!#the-four-moves)',
+    'Each scene highlights the diagonal of $A - \\lambda I$, the pivots and free columns of its reduced form, and the eigenvector with an arrow from the free column that produced it. [Learn more about reading a scene](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real EigenWrapper
+     (opens on Three distinct [2 0 0; 0 3 4; 0 4 9]). Cells: input[aria-label="entry i,j"]. */
+  const demos = {
+    'getting-started': {
+      title: 'Size, entries, shuffle',
+      script: [
+        { say: `TAP ▼
+Size 2 × 2.
+Top-left block kept: [2 0; 0 3].` },
+        { click: { button: '▼', exact: true } },
+        { wait: 2400 },
+        { say: `TYPE a₁₂ = 4 → Next → ×3
+p(λ) = λ² − 5λ + 6 → λ = 3, 2.
+Triangular: a₁₂ changes nothing.` },
+        { set: 'input[aria-label="entry 1,2"]', value: 4 },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+λ = 3: v = (4, 1).
+Check: A v = 3 v.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▲
+Size 3 × 3. New row and column: 0 0 1.
+Step 1 / 8.` },
+        { click: { button: '▲', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Shuffle
+Random A = P D P⁻¹.
+Small integer eigenvalues, integer entries.` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'Three distinct, the four moves',
+      script: [
+        { say: `TAP Next →
+Form A − λI.
+Diagonal highlighted: aᵢᵢ − λ.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+p(λ) = λ³ − 14λ² + 35λ − 22.
+Coefficient row accent.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Roots: λ = 11, 2, 1.
+Sum 14 = trace. Product 22 = det.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+λ = 11: 2 pivots, 1 free column.
+v = (0, 1, 2). Arrow from the free column.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Fast → TAP ▶ Play
+v = (1, 0, 0) for 2, (0, 2, −1) for 1.
+Done: 3 eigenvectors, diagonalizable.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3800 },
+      ],
+    },
+    'choosing-a-matrix': {
+      title: 'Presets from distinct to complex',
+      script: [
+        { say: `TAP Symmetric 2×2 → Next → ×3
+λ = 3, 1.
+Symmetric: real eigenvalues.` },
+        { click: { button: 'Symmetric 2×2', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Repeated eigenvalue → Next → ×5
+λ = 4, 1, 1. A − I: 2 free columns.
+A plane: (1, −1, 0), (1, 0, −1).` },
+        { click: { button: 'Repeated eigenvalue', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Defective → Next → ×5
+λ = 1, 1. One eigenvector: (1, 0).
+Not diagonalizable.` },
+        { click: { button: 'Defective', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Triangular → Next → ×3
+λ = 6, 4, 1.
+The diagonal entries, read straight off.` },
+        { click: { button: 'Triangular', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Rotation → Next → ×4
+p(λ) = λ² + 1 → λ = i, −i.
+No real eigenvectors: run stops.` },
+        { click: { button: 'Rotation', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-eigenvalues-eigenvectors'),
       sectionsContent,
       stateUnits,
@@ -478,7 +634,22 @@ This is also the reason symmetric matrices are special. Their eigenvalues are al
   }
 }
 
-export default function EigenVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function EigenVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <EigenWrapper defaultPreset='distinct' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -500,7 +671,7 @@ export default function EigenVisualizer({seoData, sectionsContent, stateUnits, e
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     plain('obj2', 'the-four-moves'),
     stateRow('obj11', 'forming-a-minus-lambda-i', 'shift'),
     stateRow('obj12', 'the-characteristic-polynomial', 'expand'),
@@ -508,8 +679,8 @@ export default function EigenVisualizer({seoData, sectionsContent, stateUnits, e
     stateRow('obj14', 'reading-an-eigenvector', 'eigvec'),
     stateRow('obj15', 'a-repeated-eigenvalue', 'repeated'),
     stateRow('obj16', 'complex-eigenvalues', 'complex'),
-    plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-matrix'),
+    withDemo(plain('obj3', 'the-scene-player')),
+    withDemo(plain('obj4', 'choosing-a-matrix')),
     plain('obj5', 'what-eigenvalues-and-eigenvectors-are'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -570,6 +741,10 @@ export default function EigenVisualizer({seoData, sectionsContent, stateUnits, e
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Eigenvalues and Eigenvectors</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <EigenWrapper

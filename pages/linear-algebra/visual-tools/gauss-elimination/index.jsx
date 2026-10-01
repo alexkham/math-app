@@ -647,6 +647,9 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 import GaussEliminationWrapper from '../../../../app/components/linear-algebra copy/matrix/GaussEliminationWrapper'
@@ -1142,8 +1145,135 @@ It is also the computational backbone of the subject. Rank, inverses, [determina
     done: note('Echelon form is solved by back-substitution; reduced echelon form is read straight off the last column.', 'the-two-target-forms', 'Learn more about the two forms'),
   }
 
+  const instructions = [
+    'The **Target form** pills choose where the run stops: **Echelon form** clears below the pivots, **Reduced echelon form** also scales every pivot to $1$ and clears above it. [Learn more about the two target forms](!#the-two-target-forms)',
+    'The **Preset** pills load six systems: one that starts with a swap, a pivot already $1$, a free variable, no solution, four unknowns, and the zero matrix. [Learn more about using the calculator](!#getting-started)',
+    'The **Shape** steppers (**▲** / **▼**) set $1$ to $5$ equations and $1$ to $5$ unknowns; **Shuffle** draws a random system of that shape. [Learn more about setting the shape](!#getting-started)',
+    'Type integers or decimals into any entry of $A$ or of the amber column $b$; results are shown as exact fractions. [Learn more about reading the entries](!#getting-started)',
+    '**▶ Play** runs the operations at the speed set in the menu, **Next →** and **← Back** step one operation at a time, and **Reset** returns to the opening scene. [Learn more about stepping through the run](!#the-scene-player)',
+    'The **Row operations** log names each operation in $R$ notation and says why the solution set is unchanged; click any entry to jump back to it. [Learn more about the step log](!#the-scene-player)',
+    'The last step reports the rank and then the solution by back-substitution, the free variables, or the row that reads $0 = c$. [Learn more about back-substitution](!#back-substitution)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real GaussEliminationWrapper
+     (opens on Starts with a swap, Echelon form). Cells: input[aria-label="A entry i,j"],
+     input[aria-label="b entry i"]; the only <select> is the speed menu. */
+  const demos = {
+    'getting-started': {
+      title: 'Presets, entries, shape',
+      script: [
+        { say: `SELECT Fast → TAP Free variable → ▶ Play
+Column 2: no pivot. x₂ free.
+Rank 2, 3 unknowns: infinitely many.` },
+        { set: 'select', value: 700 },
+        { click: { button: 'Free variable', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5200 },
+        { say: `TAP No solution → ▶ Play
+Row 3 → 0 0 | 1.
+0 = 1: no solution.` },
+        { click: { button: 'No solution', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5800 },
+        { say: `TYPE b₂ = 4 → ▶ Play
+Row 2 = 2 × row 1 now. Row 3 → 0 0 | 0.
+Rank 2. x = (1, 1).` },
+        { set: 'input[aria-label="b entry 2"]', value: 4 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5800 },
+        { say: `TAP ▼ equations → ▶ Play
+Row 3 dropped. Rows 1–2 kept.
+Rank 1. x₂ free.` },
+        { click: { button: '▼', exact: true } },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4400 },
+        { say: `TAP Shuffle
+Random system, same shape.
+Run rebuilt from step 1.` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-two-target-forms': {
+      title: 'Echelon form vs reduced echelon form',
+      script: [
+        { say: `SELECT Fast → TAP ▶ Play
+8 steps. Zeros below every pivot.
+Pivots 2, 2, 3 left as found.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Reduced echelon form
+Same matrix. Run rebuilt.
+14 steps instead of 8.` },
+        { click: { button: 'Reduced echelon form', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next → 3 times
+Swap, pivot 1, then R1 ← R1 / 2.
+Row 1 → (1, 2, 1/2 | 9/2). Reduced run only.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next → 4 times
+R3 ← R3 − R1, pivot 2, R2 ← R2 / 2.
+R1 ← R1 − 2·R2: row 1 → (1, 0, −1/2 | 1/2).
+Entry above pivot 2 cleared.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▶ Play
+Identity block. Amber column = answer.
+x = 17/12, y = 13/12, z = 11/6.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5600 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'Starts with a swap, one operation per step',
+      script: [
+        { say: `TAP Next →
+Swap R1 ↔ R2.
+2 comes up into the pivot position.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+Pivot 1: 2 at row 1, column 1.
+x₁ = leading variable.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+R3 ← R3 − (1/2)·R1.
+Row 3 → (0, −1, 5/2 | 7/2). Pivot row unchanged.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next → twice
+Pivot 2, then R3 ← R3 + (1/2)·R2.
+Row 3 → (0, 0, 3 | 11/2).` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 800 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▶ Play
+Pivot 3 = 3. Echelon form. Rank 3.
+Back-substitution: x = (17/12, 13/12, 11/6).` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5200 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-gauss-elimination'),
       intro,
       sectionsContent,
@@ -1166,7 +1296,22 @@ It is also the computational backbone of the subject. Rank, inverses, [determina
   }
 }
 
-export default function GaussianEliminationCalculatorPage({ seoData, intro, sectionsContent, stateUnits, explanations, schemas, relatedTools }) {
+export default function GaussianEliminationCalculatorPage({ instructions, demos, seoData, intro, sectionsContent, stateUnits, explanations, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <GaussEliminationWrapper defaultPreset='swapFirst' defaultMode='ref' explanations={explanations} title={null} subtitle={null}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -1191,8 +1336,8 @@ export default function GaussianEliminationCalculatorPage({ seoData, intro, sect
 
   const genericSections = [
     plain('obj0', 'key-terms'),
-    stateRow('obj1', 'getting-started', 'intro'),
-    stateRow('obj2', 'the-two-target-forms', 'refDone', 'rrefDone'),
+    withDemo(stateRow('obj1', 'getting-started', 'intro')),
+    withDemo(stateRow('obj2', 'the-two-target-forms', 'refDone', 'rrefDone')),
     stateRow('obj3', 'finding-a-pivot', 'pivot'),
     stateRow('obj4', 'swapping-rows', 'swap'),
     stateRow('obj5', 'scaling-to-a-leading-1', 'scale'),
@@ -1200,7 +1345,7 @@ export default function GaussianEliminationCalculatorPage({ seoData, intro, sect
     stateRow('obj7', 'clearing-above', 'eliminateAbove'),
     stateRow('obj8', 'free-columns', 'skip'),
     stateRow('obj9', 'no-solution', 'noSolution'),
-    plain('obj10', 'the-scene-player'),
+    withDemo(plain('obj10', 'the-scene-player')),
     plain('obj11', 'row-operations'),
     plain('obj12', 'back-substitution'),
     plain('obj13', 'what-gaussian-elimination-is'),
@@ -1263,6 +1408,10 @@ export default function GaussianEliminationCalculatorPage({ seoData, intro, sect
         <h1 className="title" style={{marginTop:'0px',marginBottom:'14px'}}>
           Gaussian Elimination Calculator
         </h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
 
         <section aria-label="Matrix Equation Solver">
           {/* Page-owned intro: the h2 keeps the heading level for SEO,

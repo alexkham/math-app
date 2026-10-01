@@ -1791,6 +1791,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import choleskyDiagrams from '@/app/components/linear-algebra copy/matrix/choleskyDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "Cholesky decomposition",
@@ -2430,6 +2431,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     algorithm: demoUnitFrame({
       svg: choleskyDiagrams.diag,
@@ -2442,6 +2444,13 @@ const schemas = {
       svg: choleskyDiagrams.notpd,
       caption: 'A negative value under the square root',
       text: 'The quantity about to be square-rooted has come out negative, and the algorithm stops. That failure is not a numerical accident: it happens precisely when the matrix is not positive definite, which makes attempting the decomposition the standard test for the property. Feed in a matrix that fails on the',
+      href: '/linear-algebra/visual-tools/cholesky-decomposition',
+      linkText: 'Cholesky decomposition visualizer',
+    }),
+    choleskyDone: demoUnitFrame({
+      svg: choleskyDiagrams.done,
+      caption: 'A = LL&#7488;, complete',
+      text: 'The finished Cholesky factor L, lower triangular with positive diagonal entries, and its mirror image L<sup>T</sup>. One triangle is enough to rebuild the whole symmetric matrix: L times its own transpose gives A back. That is why Cholesky costs half of LU &#8212; half of the factorization comes free by symmetry. Follow the column-by-column computation on the',
       href: '/linear-algebra/visual-tools/cholesky-decomposition',
       linkText: 'Cholesky decomposition visualizer',
     }),
@@ -2485,6 +2494,8 @@ export default function PageTemplate({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-choleskyDone'} dangerouslySetInnerHTML={{ __html: demoUnits.choleskyDone }} />,
+          `A symmetric positive definite matrix is exactly one that can be written this way.`,
         ]
     },
     {

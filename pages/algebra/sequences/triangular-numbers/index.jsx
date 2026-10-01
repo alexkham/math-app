@@ -7,6 +7,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import binomialCoefficientDiagrams from '@/app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
 
 
 export async function getStaticProps(){
@@ -333,8 +335,24 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    binomial: demoUnitFrame({
+      svg: binomialCoefficientDiagrams['pascal-n5'],
+      caption: 'T&#8324; = C(5, 2) = 10',
+      text: 'The closed form n(n + 1)/2 is the binomial coefficient C(n + 1, 2), and Pascal&#8217;s triangle shows it: the highlighted entry C(5, 2) is reached by 10 paths, and 10 is the fourth triangular number. The pairing argument of the text and the path count are two derivations of one number. Walk the second diagonal of the triangle on the',
+      href: '/algebra/visual-tools/binomial-coefficient',
+      linkText: 'binomial coefficient visualizer',
+    }),
+  };
+
    return {
   props:{
+    demoUnits,
      sectionsContent,
      introContent,
      faqQuestions,
@@ -350,7 +368,7 @@ const schemas = {
 }
    }
 
-export default function TriangularNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function TriangularNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
     
   const genericSections=[
     // {
@@ -383,6 +401,8 @@ export default function TriangularNumbersPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-binomial'} dangerouslySetInnerHTML={{ __html: demoUnits.binomial }} />,
+          `Choosing 2 of n + 1 objects and stacking n rows of dots count the same thing.`,
         ]
     },
     {

@@ -13,6 +13,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 
 
 export async function getStaticProps(){
@@ -638,8 +640,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    jump: demoUnitFrame({
+      svg: functionContinuityDiagrams.jump,
+      caption: 'Jump at x = 0: the two sides disagree',
+      text: 'Approaching zero from the left the function heads to 0, from the right it sits at 1, and the checker&#8217;s three conditions fail at the second: no two-sided limit, so no continuity, so no derivative. A tangent line would have to be two different lines at once. Test any breakpoint against the three conditions on the',
+      href: '/calculus/visual-tools/continuity',
+      linkText: 'continuity checker',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj7Table,
@@ -658,7 +676,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj7Table, obj8Table, summaryTable, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -728,6 +746,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-jump'} dangerouslySetInnerHTML={{ __html: demoUnits.jump }} />,
+          `Continuity is thus the first gate a function must pass before differentiability can even be asked about.`,
         ]
     },
     {

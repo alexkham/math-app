@@ -9,6 +9,9 @@ import { SCENARIOS as CE_SCENARIOS } from '../../../../app/components/linear-alg
 import complexEigenDiagrams, { groupOf, statsFor } from '../../../../app/components/linear-algebra copy/r2-visualizers/complex-eigen/complexEigenDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -281,6 +284,22 @@ Each dot lies on an ellipse $0.866$ times the size of the previous one, all of t
 
 That separation is what the rotation-scaling form buys. A matrix that looks like an arbitrary jumble of four numbers is a rotation by a known angle, a scaling by a known factor, and a fixed change of coordinates, and each of the three can be read off independently.`,
       link: '',
+    },
+    obj17: {
+      title: `Display Layer Toggles`,
+      content: `The chips between the explanation card and the matrix card switch the layers of the canvas on and off. They hide drawings only: $A$, $\\mathbf{x}_0$, the number of steps, the animation and every number in the live card stay exactly as they are.
+
+• **grid** &mdash; the grey standard grid and axes
+• **orbit** &mdash; the blue dots $A^k\\mathbf{x}_0$ and the faint line joining them
+• **spiral** &mdash; the grey continuous curve $A^k\\mathbf{x}_0$ for real $k$, the path the cyan arrow follows during the animation
+• **ellipse** &mdash; the purple invariant ellipse through $\\mathbf{x}_0$, the image under $P$ of a circle
+• **Re v, Im v** &mdash; the two green dashed lines along the columns of $P$, each with a short arrow for the column itself
+• **labels** &mdash; the step numbers on the first nine dots and the names on $\\mathbf{x}_0$, the cyan arrow and the green axes
+
+Two combinations are worth trying. Turn off **ellipse** and **spiral** to see the orbit alone: for $r = 1$ the dots still trace a closed curve, and for $r \\neq 1$ they visibly step inward or outward. Turn off **orbit** and keep **spiral** to see the continuous curve that the whole-number steps sample. Why the curve is an ellipse seen through $P$ is explained in [what complex eigenvalues mean](!#what-complex-eigenvalues-mean).`,
+      before: ``,
+      after: ``,
+      link: '',
     }
   }
 
@@ -456,8 +475,147 @@ That separation is what the rotation-scaling form buys. A matrix that looks like
   }
 
 
+  const instructions = [
+    'The **Matrices** panel (03) on the left loads seven matrices in three groups, **On an ellipse**, **Spiral in** and **Spiral out**; a preset keeps $\\mathbf{x}_0$, replays the animation, and the card on the right explains it. [Learn more about the preset scenarios](!#preset-scenarios)',
+    'The canvas shows the orange start vector $\\mathbf{x}_0$, the blue orbit dots $A^k\\mathbf{x}_0$, the grey spiral, the purple ellipse and the green dashed columns of $P$; the cyan arrow is the current point. [Learn more about getting started](!#getting-started)',
+    'Drag the orange $\\mathbf{x}_0$ handle: the orbit, the spiral and the ellipse redraw at once, while the steps per turn stay fixed. [Learn more about dragging the start vector](!#dragging-the-start-vector)',
+    'In the orbit card, **Play** / **Pause** sweeps the cyan arrow, the step buttons jump one whole step, the scrubber sets any $k$, and the **steps** slider runs the orbit from $2$ to $24$ steps. [Learn more about the orbit animation](!#the-orbit-animation)',
+    'The layer chips **grid**, **orbit**, **spiral**, **ellipse**, **Re v, Im v** and **labels** show or hide each layer of the canvas. [Learn more about the layer toggles](!#display-layer-toggles)',
+    'Type into the four entries of $A$ in the matrix card; below them appear $P$ and $C$, or a note that the eigenvalues are real and there is no rotation. [Learn more about the matrix card](!#the-matrix-card)',
+    'The **Live** card (04) reads $\\lambda$, $r$, $\\theta$, the steps per turn, $\\det A$, $\\operatorname{tr} A$ and the growth ratios off $A$ and $\\mathbf{x}_0$, and ends with a verdict: on its ellipse, spiralling in or spiralling out. [Learn more about the live card](!#the-live-card)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real ComplexEigen tool
+     (opens on Skewed rotation, x0 = (2, 0.5), 8 steps; every mount and every
+     preset replays the 3.2 s orbit animation). Handle: circle[data-handle="v"];
+     drags in screen px at scale 0.6 (desktop layout: 31 px per unit).
+     Chips: label.ce-chip (0 grid, 1 orbit, 2 spiral, 3 ellipse, 4 Re v Im v, 5 labels).
+     Ranges: 0 = scrubber, 1 = steps. Cells: input[aria-label="entry i,j"]. */
+  const demos = {
+    'dragging-the-start-vector': {
+      title: 'Moving x₀, then thinning the picture',
+      script: [
+        { say: `DRAG x₀ → (1, 1)
+Ellipse shrinks. Same shape, same tilt.
+Still 6 steps per turn.` },
+        { wait: 3000 },
+        { drag: 'circle[data-handle="v"]', dx: -30.81, dy: -15.56, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2200 },
+        { say: `DRAG x₀ → (−1, 1)
+Bigger ellipse, same 6 steps per turn.
+|Ax₀| / |x₀|: 0.44 → 2.36. Depends on x₀.` },
+        { drag: 'circle[data-handle="v"]', dx: -61.69, dy: -0.12, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2600 },
+        { say: `TAP Skewed spiral in
+x₀ kept. r = 0.866.
+Dots step inward, ellipse to ellipse.` },
+        { click: { button: 'Skewed spiral in' } },
+        { wait: 3800 },
+        { say: `UNCHECK ellipse
+Purple ellipse gone.
+Orbit, spiral, numbers: unchanged.` },
+        { click: { css: 'label.ce-chip', nth: 3 } },
+        { wait: 2200 },
+        { say: `UNCHECK spiral
+Blue dots alone: the orbit Aᵏx₀.
+Halves every 4.8 steps.` },
+        { click: { css: 'label.ce-chip', nth: 2 } },
+        { wait: 2400 },
+      ],
+    },
+    'the-orbit-animation': {
+      title: 'Stepping through the orbit',
+      script: [
+        { say: `TAP Reset
+k = 0 of 8. Orbit cleared.
+Only x₀ = (2, 0.5).` },
+        { click: 'button[title="Reset"]' },
+        { wait: 2200 },
+        { say: `TAP Next step
+k = 1. Cyan arrow lands on dot 1.
+A¹x₀ = (1.87, 1.55).` },
+        { click: 'button[title="Next step"]' },
+        { wait: 2400 },
+        { say: `DRAG scrubber → k = 4
+Any k, whole or fractional.
+A⁴x₀ = (−1.87, −1.55) = −A¹x₀.` },
+        { slide: { range: 0 }, to: 0.5, ms: 1400 },
+        { wait: 2400 },
+        { say: `DRAG steps → 12
+Two laps of 6. Scrubber stays at half.
+k = 6 of 12: A⁶x₀ = x₀ = (2, 0.5).` },
+        { slide: { range: 1 }, to: 12, ms: 1200 },
+        { wait: 2600 },
+        { say: `TAP Play
+Cyan arrow sweeps the spiral.
+k = 12 of 12. Back at x₀.` },
+        { click: { button: 'Play', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'preset-scenarios': {
+      title: 'Seven matrices, three groups',
+      script: [
+        { say: `TAP Rotate 90°
+λ = 0 ± 1i. P = I.
+Circle, 4 steps per turn.` },
+        { click: { button: 'Rotate 90°' } },
+        { wait: 3800 },
+        { say: `TAP Rotate 45°
+θ = 45°: 8 steps per turn.
+trace A = 1.414 = 2 cos 45°.` },
+        { click: { button: 'Rotate 45°' } },
+        { wait: 3800 },
+        { say: `TAP Spiral in
+r = 0.9, θ = 36.9°.
+Halves every 6.6 steps.` },
+        { click: { button: 'Spiral in' } },
+        { wait: 3800 },
+        { say: `TAP Spiral out
+λ = 1.1 ± 0.5i. r = 1.208.
+Doubles every 3.7 steps.` },
+        { click: { button: 'Spiral out' } },
+        { wait: 3800 },
+        { say: `TAP Skewed spiral out
+r = 1.148, θ = 40°. det A = 1.318.
+Ellipses tilted by P.` },
+        { click: { button: 'Skewed spiral out' } },
+        { wait: 3800 },
+      ],
+    },
+    'the-matrix-card': {
+      title: 'Editing A across the boundary',
+      script: [
+        { say: `TAP Spiral out
+C = [1.1 −0.5; 0.5 1.1]. P = 0.5·I.
+r = 1.208, θ = 24.4°.` },
+        { click: { button: 'Spiral out' } },
+        { wait: 3600 },
+        { say: `TYPE a₂₁ = −0.5
+A symmetric → real eigenvalues 1.6, 0.6.
+No P, no C. No rotation.` },
+        { set: 'input[aria-label="entry 2,1"]', value: '-0.5' },
+        { wait: 2800 },
+        { say: `TYPE a₂₁ = 0.1
+tr² = 4.84 < 4 det = 5.04 → complex.
+λ = 1.1 ± 0.22i. θ = 11.5°.` },
+        { set: 'input[aria-label="entry 2,1"]', value: '0.1' },
+        { wait: 2800 },
+        { say: `TYPE a₂₂ = 0.7
+det A = 0.82 → r = 0.906 < 1.
+Verdict flips: spirals in, halves every 7 steps.` },
+        { set: 'input[aria-label="entry 2,2"]', value: '0.7' },
+        { wait: 3000 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-complex-eigenvalues-2d'),
       sectionsContent,
       stateUnits,
@@ -480,7 +638,22 @@ That separation is what the rotation-scaling form buys. A matrix that looks like
   }
 }
 
-export default function ComplexEigenvalues2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+export default function ComplexEigenvalues2DPage({ instructions, demos,seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ComplexEigen explanationOverride={explanationOverride}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -503,16 +676,17 @@ export default function ComplexEigenvalues2DPage({seoData, sectionsContent, stat
   const genericSections=[
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'dragging-the-start-vector'),
-    plain('obj3', 'the-orbit-animation'),
-    plain('obj6', 'preset-scenarios'),
+    withDemo(plain('obj2', 'dragging-the-start-vector')),
+    withDemo(plain('obj3', 'the-orbit-animation')),
+    withDemo(plain('obj6', 'preset-scenarios')),
     stateRow('obj11', 'a-plain-rotation', 'rotation'),
     stateRow('obj12', 'a-rotation-in-a-skewed-basis', 'ellipse'),
     stateRow('obj13', 'the-columns-of-p', 'axes'),
     stateRow('obj14', 'spiralling-in', 'inward'),
     stateRow('obj15', 'spiralling-out', 'outward'),
     stateRow('obj16', 'a-skewed-spiral', 'skew'),
-    plain('obj4', 'the-matrix-card'),
+    plain('obj17', 'display-layer-toggles'),
+    withDemo(plain('obj4', 'the-matrix-card')),
     plain('obj5', 'the-live-card'),
     plain('obj7', 'what-complex-eigenvalues-mean'),
     plain('obj8', 'reading-r-and-theta-from-the-matrix'),
@@ -572,6 +746,10 @@ export default function ComplexEigenvalues2DPage({seoData, sectionsContent, stat
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Complex Eigenvalues in 2D</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
    <ComplexEigen explanationOverride={explanationOverride}/>

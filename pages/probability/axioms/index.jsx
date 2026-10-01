@@ -711,6 +711,8 @@ import { probabilityConceptsData } from '@/app/api/db/diagrams/probability/conce
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 
 
 export async function getStaticProps(){
@@ -1299,8 +1301,24 @@ Everything that follows in probability — conditional probability, independence
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_axioms_0: demoUnitFrame({
+      svg: diceSampleSpaceDiagrams.none,
+      caption: 'The 36 outcomes of two dice, each with probability 1/36',
+      text: 'Every cell is one outcome and carries the same non-negative weight, 1/36, so no probability is negative; the 36 weights add to exactly 1, which is the normalization axiom; and any event made of separate cells has probability equal to its count of cells over 36, which is additivity for disjoint outcomes. All three axioms are visible in one grid. Highlight an event and count its cells on the',
+      href: '/probability/visual-tools/dice-roll',
+      linkText: 'dice roll sample space explorer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       axiomsTable,
@@ -1329,7 +1347,7 @@ export default function AxiomsPage({
   assumeTable,
   overviewTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1381,6 +1399,8 @@ export default function AxiomsPage({
             />
             </div>,
             <div key={'axioms-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: axiomsTable}}/>,
+                  <div key={'unit-u_axioms_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_axioms_0 }} />,
+          `Each axiom is now stated separately.`,
         ]
     },
     {

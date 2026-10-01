@@ -473,6 +473,9 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import distanceMidpointDiagrams from '../../../../app/components/calculators/complex-numbers/distanceMidpointDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
@@ -698,6 +701,28 @@ Two bonuses hide in the frozen picture. The midpoint of $-4$ and $4$ is $0$, so 
       link:'',
     },
 
+    obj14:{
+      title:`The Key Ideas Panel`,
+      content:`The **Key Ideas** panel closes the right column, under the two step-by-step panels. It is a reading surface: only its links respond to a click.
+
+**Five standing notes, one per coloured element on the plane:**
+
+- Orange dot: the distance $|z_1 - z_2|$ is the Euclidean distance formula of coordinate geometry.
+- Teal dot: the right triangle carries $\\Delta a$ and $\\Delta b$, and the distance is its hypotenuse.
+- Purple dot: the midpoint $(z_1 + z_2)/2$ averages the real parts and the imaginary parts.
+- Blue dot: the dashed circle is centred at $z_1$ with radius $|z_1 - z_2|$, the circle $|z - z_1| = r$.
+- Navy dot: with one point on the origin, distance reduces to the modulus.
+
+**A sixth note for the named configurations:**
+
+When the two points match one of the five preset pairs exactly, or sit on top of each other, an extra note appears at the bottom of the panel. It names what is special about the pair and ends with two links: one to the section for that pair further down this page and one back to [getting started](!#getting-started-drag-two-points) or the [degenerate cases](!#vertical-and-horizontal-degenerate-cases).
+
+The note appears whether the pair came from a preset button, typed values or a drag, and it disappears as soon as either point moves off the pair. [Coincident points](!#coincident-points-distance-zero) have their own note: distance zero happens only when $z_1 = z_2$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
   }
 
 
@@ -839,8 +864,139 @@ Two bonuses hide in the frozen picture. The midpoint of $-4$ and $4$ is $0$, so 
     coincident: 'Distance zero happens for exactly one configuration: z₁ = z₂. [Learn more about coincident points](!#coincident-points-distance-zero) · [Getting started](!#getting-started-drag-two-points)',
   };
 
+  const instructions = [
+    'Drag the navy point $z_1$ or the orange point $z_2$, type exact values into their **Re** and **Im** boxes (limit $\\pm 5$, clamped with a warning), or tap **Random** for two arbitrary points. [Learn more about getting started](!#getting-started-drag-two-points)',
+    'The plane draws the orange distance segment, the teal $\\Delta a$ and red $\\Delta b$ legs with a right-angle marker, and the purple midpoint $M$; the default pair $(-2 + i)$ & $(3 + 3i)$ shows all of them. [Learn more about the right triangle](!#the-right-triangle-and-distance-segment)',
+    'The preset **0 & (3+4i)** puts $z_1$ on the origin, so the distance becomes the modulus $|3 + 4i| = 5$. [Learn more about modulus as distance](!#distance-from-the-origin-modulus-as-a-special-case)',
+    'The **Symmetric** preset loads two opposite points; their midpoint lands on the origin. [Learn more about symmetric points](!#symmetric-points-and-midpoint-at-the-origin)',
+    'The **Vertical** and **Horizontal** presets share a real part or an imaginary part, and the triangle collapses to a single leg. [Learn more about the degenerate cases](!#vertical-and-horizontal-degenerate-cases)',
+    'The **Show circle** checkbox shows or hides the dashed circle centred at $z_1$ through $z_2$. [Learn more about the dashed circle](!#the-dashed-circle-and-locus-interpretation)',
+    'The **Distance** and **Midpoint** cards give the two results, and the **Distance Step-by-Step** and **Midpoint Step-by-Step** panels show every line of the calculation. [Learn more about the step-by-step panels](!#reading-the-step-by-step-panels)',
+    'The **Key Ideas** panel keeps five standing notes and adds one more when the points match a preset pair or coincide. [Learn more about the Key Ideas panel](!#the-key-ideas-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real ComplexDistanceMidpoint tool
+     (opens on z1 = -2 + i, z2 = 3 + 3i). Inputs: input[type=number] nth 0..3 = z1 Re, z1 Im,
+     z2 Re, z2 Im (clamped to ±5). Presets by exact label; input[type=checkbox] = Show circle.
+     Handles are circle.drag-point nth 0 = z1, nth 1 = z2; they follow pointer moves only after a
+     live pointerdown, so a drag is always the last step of its demo. */
+  const demos = {
+    'getting-started-drag-two-points': {
+      title: 'Type, clamp, drag',
+      script: [
+        { say: `TYPE z₂ Re = 1
+z₂ = 1 + 3i. d = √13 = 3.61.
+M = −0.50 + 2i.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: 1 },
+        { wait: 2400 },
+        { say: `TYPE z₂ Im = 1
+z₂ = 1 + i: level with z₁.
+Triangle flattens. d = 3.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: 1 },
+        { wait: 2400 },
+        { say: `TYPE z₁ Re = 7
+Limit ±5: z₁ = 5 + i.
+d = 4. M = 3 + i.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: 7 },
+        { wait: 2600 },
+        { say: `DRAG z₂ straight up
+Δa stays 4. Δb grows from 0.
+Triangle back. d grows.`, at: 'tl' },
+        { drag: { css: 'circle.drag-point', nth: 1 }, dx: 0, dy: -158.23, ms: 1600 },
+        { wait: 2600 },
+      ],
+    },
+    'vertical-and-horizontal-degenerate-cases': {
+      title: 'Five presets',
+      script: [
+        { say: `TAP 0 & (3+4i)
+z₁ on the origin.
+Legs 3, 4. d = 5 = |3 + 4i|.`, at: 'tl' },
+        { click: { button: '0 & (3+4i)', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Symmetric
+z₂ = −z₁. M on the origin.
+d = √52 = 7.21.`, at: 'tl' },
+        { click: { button: 'Symmetric', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Vertical
+Same real part: Δa = 0.
+One leg. d = 6. M = 1 + i.`, at: 'tl' },
+        { click: { button: 'Vertical', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Horizontal
+Two real numbers: Δb = 0.
+d = 8. M = 0.`, at: 'tl' },
+        { click: { button: 'Horizontal', exact: true } },
+        { wait: 2600 },
+        { say: `TAP (−2+i) & (3+3i)
+Full triangle: Δa 5, Δb 2.
+d = √29 = 5.39.
+M = 0.50 + 2i.`, at: 'tl' },
+        { click: { button: '(−2+i) & (3+3i)', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'the-dashed-circle-and-locus-interpretation': {
+      title: 'The dashed circle',
+      script: [
+        { say: `UNCHECK Show circle
+Dashed circle gone.
+Triangle, segment and M stay.`, at: 'tl' },
+        { click: 'input[type="checkbox"]' },
+        { wait: 2200 },
+        { say: `CHECK Show circle
+Centre z₁, radius d = 5.39.
+Passes through z₂.`, at: 'tl' },
+        { click: 'input[type="checkbox"]' },
+        { wait: 2400 },
+        { say: `TAP Horizontal
+Centre −4, radius 8.
+Circle runs off the plane.`, at: 'tl' },
+        { click: { button: 'Horizontal', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Vertical
+Centre 1 + 4i, radius 6.`, at: 'tl' },
+        { click: { button: 'Vertical', exact: true } },
+        { wait: 2200 },
+        { say: `TYPE z₂ Im = 4
+z₂ = z₁ = 1 + 4i. d = 0.
+Circle collapses: not drawn.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: 4 },
+        { wait: 2600 },
+      ],
+    },
+    'reading-the-step-by-step-panels': {
+      title: 'Step-by-step panels',
+      script: [
+        { say: `TYPE z₁ Re = 0
+z₁ = i. z₁ − z₂ = −3 − 2i.
+√(9 + 4) = √13 = 3.61.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: 0 },
+        { wait: 2600 },
+        { say: `TYPE z₁ Im = −1
+z₁ = −i. z₁ − z₂ = −3 − 4i.
+√(9 + 16) = √25 = 5.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: -1 },
+        { wait: 2600 },
+        { say: `TYPE z₂ Re = 0
+z₂ = 3i. Δa = 0.
+√(0 + 16) = 4. M = i.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: 0 },
+        { wait: 2600 },
+        { say: `TYPE z₂ Im = 1
+z₂ = i = −z₁. d = 2.
+Sum = 0, so M = 0.`, at: 'tl' },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: 1 },
+        { wait: 2600 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('distance-midpoint'),
          sectionsContent,
          introContent,
@@ -863,7 +1019,22 @@ Two bonuses hide in the frozen picture. The midpoint of $-4$ and $4$ is $0$, so 
     }
    }
 
-export default function DistanceMidpointPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function DistanceMidpointPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ComplexDistanceMidpoint explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
     
   const genericSections=[
@@ -872,6 +1043,7 @@ export default function DistanceMidpointPage({relatedTools, seoData, sectionsCon
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('getting-started-drag-two-points'),
           sectionsContent.obj1.content,
         ]
     },
@@ -890,6 +1062,7 @@ export default function DistanceMidpointPage({relatedTools, seoData, sectionsCon
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          demo('vertical-and-horizontal-degenerate-cases'),
           sectionsContent.obj3.content,
         ]
     },
@@ -938,6 +1111,7 @@ export default function DistanceMidpointPage({relatedTools, seoData, sectionsCon
         title:sectionsContent.obj6.title,
         link:sectionsContent.obj6.link,
         content:[
+          demo('the-dashed-circle-and-locus-interpretation'),
           sectionsContent.obj6.content,
         ]
     },
@@ -946,7 +1120,16 @@ export default function DistanceMidpointPage({relatedTools, seoData, sectionsCon
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
+          demo('reading-the-step-by-step-panels'),
           sectionsContent.obj7.content,
+        ]
+    },
+    {
+        id:'the-key-ideas-panel',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
         ]
     },
     {
@@ -1043,6 +1226,10 @@ export default function DistanceMidpointPage({relatedTools, seoData, sectionsCon
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Distance and Midpoint between Complex Numbers</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <SiblingsNav maxWidth='100%'>
    <ComplexDistanceMidpoint explanations={explanations}/>

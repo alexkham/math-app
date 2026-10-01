@@ -663,6 +663,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
+import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 
 
 export async function getStaticProps(){
@@ -1214,8 +1217,38 @@ The sections that follow explain how this accumulation works, how it is defined 
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_discrete_0: demoUnitFrame({
+      svg: discreteCdfDiagrams.binomial,
+      caption: 'Binomial CDF, n = 10, p = 0.5: a staircase',
+      text: 'The cumulative probability is flat between the possible values and jumps at each one; the height of the jump at k is exactly P(X = k), so the whole probability mass function can be read off the risers. Nothing accumulates between integers because a discrete variable puts no probability there. Switch distributions and compare the staircases on the',
+      href: '/probability/visual-tools/cdf/discrete',
+      linkText: 'discrete CDF explorer',
+    }),
+    u_continuous_1: demoUnitFrame({
+      svg: continuousCdfDiagrams.normal,
+      caption: 'Normal CDF, mean 0, standard deviation 1',
+      text: 'Here the cumulative probability rises without any jumps: probability is spread over intervals, so P(X = x) is zero for every single point and the curve climbs smoothly from 0 toward 1. The steepest part of the S-curve sits where the density is largest. Move along the curve and read the accumulated probability on the',
+      href: '/probability/visual-tools/cdf/continuous',
+      linkText: 'continuous CDF visualizer',
+    }),
+    u_using_2: demoUnitFrame({
+      svg: continuousCdfDiagrams.uniform,
+      caption: 'Continuous uniform CDF, a = 0, b = 10: a straight ramp',
+      text: 'For a uniform variable the CDF is a straight line from 0 at a to 1 at b, so the probability of any interval inside [a, b] is the difference of the two ramp heights, which is the length of the interval divided by b minus a. The difference F(b) minus F(a) is the same calculation on every distribution, only the curve changes. Pick two points and read the difference on the',
+      href: '/probability/visual-tools/cdf/continuous',
+      linkText: 'continuous CDF visualizer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       propertiesTable,
@@ -1244,7 +1277,7 @@ export default function PageTemplate({
   mistakesTable,
   overviewTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1317,6 +1350,8 @@ export default function PageTemplate({
         link:'',
         content:[
             sectionsContent.discrete.content,
+                  <div key={'unit-u_discrete_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_discrete_0 }} />,
+          `Continuous variables give a very different picture.`,
         ]
     },
     {
@@ -1325,6 +1360,8 @@ export default function PageTemplate({
         link:'',
         content:[
             sectionsContent.continuous.content,
+                  <div key={'unit-u_continuous_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_continuous_1 }} />,
+          `Mixed distributions combine both behaviours.`,
         ]
     },
     {
@@ -1341,6 +1378,8 @@ export default function PageTemplate({
         link:'',
         content:[
             sectionsContent.using.content,
+                  <div key={'unit-u_using_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_using_2 }} />,
+          `The comparison with the PMF and PDF makes this role precise.`,
         ]
     },
     {

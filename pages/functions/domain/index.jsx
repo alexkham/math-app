@@ -898,6 +898,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionDomainDiagrams from '@/app/components/functions/domain/functionDomainDiagrams'
 
 
 export async function getStaticProps(){
@@ -1472,8 +1474,38 @@ const faqQuestions = {
     },
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    rational: demoUnitFrame({
+      svg: functionDomainDiagrams.reciprocal,
+      caption: 'f(x) = 1/x: every real except 0',
+      text: 'The band on the axis covers the whole line except for one open dot at 0, where the denominator vanishes and the curve breaks into two branches. Everything else is a valid input. Move to a rational function with two excluded points on the',
+      href: '/functions/visual-tools/domain',
+      linkText: 'domain explorer',
+    }),
+    radical: demoUnitFrame({
+      svg: functionDomainDiagrams.sqrt,
+      caption: 'f(x) = &#8730;x: inputs from 0 onward',
+      text: 'Negative inputs have no real square root, so the band starts at 0 with a closed dot, 0 itself being allowed, and runs to the right. An odd root would have no such cut. Compare the square root with the logarithm, whose cut is open, on the',
+      href: '/functions/visual-tools/domain',
+      linkText: 'domain explorer',
+    }),
+    log: demoUnitFrame({
+      svg: functionDomainDiagrams.logarithmic,
+      caption: 'f(x) = ln x: inputs strictly greater than 0',
+      text: 'The band covers only the positive half of the axis and the dot at 0 is open: the logarithm of 0 is undefined and the curve plunges toward the vertical asymptote there without ever reaching it. This is the one restriction with a strict inequality. See the asymptote and the open endpoint together on the',
+      href: '/functions/visual-tools/domain',
+      linkText: 'domain explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj2Table,
@@ -1502,7 +1534,7 @@ export default function DomainPage({
   obj9Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1559,6 +1591,8 @@ export default function DomainPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-rational'} dangerouslySetInnerHTML={{ __html: demoUnits.rational }} />,
+          `The excluded values are the vertical asymptotes or holes of the graph.`,
         ]
     },
     {
@@ -1567,6 +1601,8 @@ export default function DomainPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-radical'} dangerouslySetInnerHTML={{ __html: demoUnits.radical }} />,
+          `Whether the endpoint is included is the difference between the closed dot here and the open one for the logarithm.`,
         ]
     },
     {
@@ -1575,6 +1611,8 @@ export default function DomainPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-log'} dangerouslySetInnerHTML={{ __html: demoUnits.log }} />,
+          `Combined functions intersect all such restrictions, which the next section takes up.`,
         ]
     },
     {

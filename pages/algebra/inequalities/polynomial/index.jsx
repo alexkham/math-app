@@ -7,6 +7,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
 
 
 
@@ -446,8 +448,31 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    chart: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['poly-three'],
+      caption: 'Three simple roots, four intervals, alternating signs',
+      text: 'With roots at &#8722;2, 1 and 5 the axis splits into four intervals, and because each root is simple the sign flips at every one of them: the chart reads &#8722;, +, &#8722;, + and the strict inequality selects the two shaded intervals. No test points are needed once the roots and their multiplicities are known. Fill the chart for any factored polynomial on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+    double: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['poly-double'],
+      caption: 'The double root at x = 2 keeps the sign',
+      text: 'The factor (x &#8722; 2)&#178; is never negative, so the curve touches the axis at 2 and bounces back: the sign chart shows the same sign on both sides of that root, and only the simple root at &#8722;3 produces a flip. Even multiplicity touches, odd multiplicity crosses. Compare a simple and a double root side by side on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -476,7 +501,7 @@ const schemas = {
   obj4Table,
   obj5Table,
   summaryTable,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -513,6 +538,8 @@ const schemas = {
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
+                  <div key={'unit-chart'} dangerouslySetInnerHTML={{ __html: demoUnits.chart }} />,
+          `The method is the same for every degree; only the number of intervals grows.`,
         ]
     },
     {
@@ -536,6 +563,8 @@ const schemas = {
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+                  <div key={'unit-double'} dangerouslySetInnerHTML={{ __html: demoUnits.double }} />,
+          `End behaviour, treated next, fixes the sign of the first interval so the rest follow by flipping.`,
         ]
     },
 

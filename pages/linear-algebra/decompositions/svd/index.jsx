@@ -8339,6 +8339,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import svdDiagrams from '@/app/components/linear-algebra copy/matrix/svdDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "singular value decomposition",
@@ -9073,6 +9074,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     values: demoUnitFrame({
       svg: svdDiagrams.eigen,
@@ -9085,6 +9087,13 @@ const schemas = {
       svg: svdDiagrams.factor,
       caption: 'The three factors assembled',
       text: 'Two orthogonal matrices with a rectangular diagonal between them, and the whole product reconstructs the original. Unlike diagonalisation this asks nothing of the matrix &#8212; not squareness, not symmetry, not a full set of eigenvectors. Every matrix without exception has this factorisation. Build it for a matrix of your own on the',
+      href: '/linear-algebra/visual-tools/singular-value-decomposition',
+      linkText: 'SVD visualizer',
+    }),
+    outerForm: demoUnitFrame({
+      svg: svdDiagrams.rankone,
+      caption: 'A as a sum of rank-one pieces',
+      text: 'The same matrix written term by term: A = &#8730;45 u&#8321;v&#8321;<sup>T</sup> + &#8730;5 u&#8322;v&#8322;<sup>T</sup>. Each term is a rank-one matrix &#8212; a column times a row &#8212; weighted by a singular value, largest first. Keeping only the first term gives the best rank-one approximation of A, which is why the order of the singular values matters. Build the terms on the',
       href: '/linear-algebra/visual-tools/singular-value-decomposition',
       linkText: 'SVD visualizer',
     }),
@@ -9339,6 +9348,8 @@ export default function SVDPage({
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <div key={'unit-outerForm'} dangerouslySetInnerHTML={{ __html: demoUnits.outerForm }} />,
+          `Truncating this sum after k terms is exactly the low-rank approximation described above.`,
         ]
     },
     {

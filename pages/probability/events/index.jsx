@@ -560,6 +560,10 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
+import vennTwoSetDiagrams from '@/app/components/probability/venn-explorer/vennTwoSetDiagrams'
+import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
 
 
 export async function getStaticProps(){
@@ -1050,8 +1054,38 @@ This page presents the idea of events and shows how they form the basic language
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_sample_0: demoUnitFrame({
+      svg: diceSampleSpaceDiagrams.even,
+      caption: 'Even sum: 18 of the 36 outcomes of two dice',
+      text: 'The grid is the sample space and the highlighted cells are an event: the outcomes where the two dice sum to an even number. An event is nothing more than a chosen subset of the grid, here exactly half of it. Highlight other subsets and see them as events on the',
+      href: '/probability/visual-tools/dice-roll',
+      linkText: 'dice roll sample space explorer',
+    }),
+    u_sets_1: demoUnitFrame({
+      svg: vennTwoSetDiagrams.intersectionSelected,
+      caption: 'Two events A and B with their intersection selected',
+      text: 'Events behave as sets because they are sets of outcomes: the selected overlap is A and B, the two circles together are A or B, and everything outside a circle is its complement. The four regions of the diagram partition the sample space. Click a region and read its probability on the',
+      href: '/probability/visual-tools/venn-diagrams/two-sets',
+      linkText: 'two-set Venn diagram tool',
+    }),
+    u_conditional_2: demoUnitFrame({
+      svg: conditionalTreeDiagrams.subtreeGivenA,
+      caption: 'Given A: the subtree below A',
+      text: 'Assuming A has occurred discards the lower branch and leaves only the subtree below A, whose branch weights already sum to 1. The conditional probability of B is the weight of the B branch inside that subtree. Adjust the weights and watch the subtree renormalise on the',
+      href: '/probability/visual-tools/conditional-probability/tree-diagram',
+      linkText: 'conditional probability tree diagram',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       typesTable,
@@ -1078,7 +1112,7 @@ export default function EventsPage({
   relationsTable,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1099,6 +1133,8 @@ export default function EventsPage({
         link:'',
         content:[
             sectionsContent.sample.content,
+                  <div key={'unit-u_sample_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_sample_0 }} />,
+          `Events come in several structural types.`,
         ]
     },
     {
@@ -1117,6 +1153,8 @@ export default function EventsPage({
         link:'',
         content:[
             sectionsContent.sets.content,
+                  <div key={'unit-u_sets_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_sets_1 }} />,
+          `Relations between events follow from this set view.`,
         ]
     },
     {
@@ -1151,6 +1189,8 @@ export default function EventsPage({
         link:'',
         content:[
           sectionsContent.conditional.content,
+                  <div key={'unit-u_conditional_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_conditional_2 }} />,
+          `Certain event patterns recur in problems and are collected next.`,
         ]
     },
     {

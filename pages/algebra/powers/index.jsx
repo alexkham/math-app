@@ -672,6 +672,8 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 
 
 export async function getStaticProps(){
@@ -1139,8 +1141,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    natural: demoUnitFrame({
+      svg: powersTableDiagrams['b2-default'],
+      caption: 'Powers of 2 from 2&#8304; to 2&#185;&#8304;',
+      text: 'Each row multiplies the previous one by the base: 2, 4, 8, 16, &#8230;, and the expression column writes the repeated factors out, 2 &#215; 2 &#215; 2 for 2&#179;. The exponent counts the factors, which is the natural-exponent definition made into a table. Change the base and watch the column grow on the',
+      href: '/algebra/visual-tools/powers-table',
+      linkText: 'powers table',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj10Table,
@@ -1159,7 +1177,7 @@ const schemas = {
    }
 
 
- export default function PowersAndExponentsPage({seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, schemas}) {
+ export default function PowersAndExponentsPage({seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -1194,6 +1212,8 @@ const schemas = {
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-natural'} dangerouslySetInnerHTML={{ __html: demoUnits.natural }} />,
+          `Every later exponent type is defined so that this table extends without breaking its pattern.`,
         ]
     },
     {

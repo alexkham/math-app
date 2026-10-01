@@ -10,6 +10,9 @@ import InnerProductWrapper from '../../../../app/components/linear-algebra copy/
 import innerProductDiagrams from '../../../../app/components/linear-algebra copy/matrix/innerProductDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -395,8 +398,117 @@ The operation is symmetric, $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\lang
   }
 
 
+  const instructions = [
+    'The **Vector length** stepper (**▲** / **▼**) sets the length shared by $u$ and $v$, from $2$ to $10$; the player returns to its first scene. [Learn more about getting started](!#getting-started)',
+    '**▶ Play** runs the whole sum, **Next →** and **← Back** move one scene, **Reset** returns to the opening scene, and the speed menu sets the pace from Slow to Very Fast. [Learn more about the controls](!#getting-started)',
+    'Each scene pairs $u_k$ (blue) with $v_k$ (grey) and draws two arrows into the $\\langle u, v \\rangle$ box. [Learn more about the vectors scenario](!#the-vectors-scenario)',
+    'The final scene turns every entry of $u$ and $v$ and the result box green: one scalar from $n$ products. [Learn more about the completed sum](!#the-vectors-scenario)',
+    'Each card in the **Step explanations** log writes the sum out term by term: grey is pending, blue and bold is the current term, green is already counted. [Learn more about reading the running sum](!#reading-the-running-sum)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real InnerProductWrapper
+     locked to vectors (opens on length 4, Step 1 / 6). */
+  const demos = {
+    'getting-started': {
+      title: 'Length, play, speed',
+      script: [
+        { say: `TAP ▼
+Length 3. Step 1 / 5.
+Three pairs to multiply.` },
+        { click: { button: '▼', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+u₁v₁, u₂v₂, u₃v₃ in turn.
+Step 5 / 5: every entry green.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6000 },
+        { say: `TAP ▲ ▲ ▲
+Length 6. Step 1 / 8.
+One scene per pair.` },
+        { click: { button: '▲', exact: true } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true } },
+        { wait: 2200 },
+        { say: `SELECT Fast → TAP ▶ Play
+0.7 s per scene.
+Six pairs. Step 8 / 8.` },
+        { set: 'select', value: 700 },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6000 },
+        { say: `TAP Reset
+Step 1 / 8.
+Nothing paired yet.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-vectors-scenario': {
+      title: 'Pair, multiply, sum',
+      script: [
+        { say: `TAP Next →
+Pair u₁ with v₁.
+u₁ blue, v₁ grey. Two arrows into ⟨u,v⟩.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Pair u₂ with v₂.
+Same index in both vectors, nothing else.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next → Next →
+u₃ with v₃, u₄ with v₄.
+All four pairs made.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 1200 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next →
+Step 6 / 6: every entry green.
+Two vectors in, one scalar out.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ← Back
+Step 5 / 6: pair u₄ with v₄ again.` },
+        { click: { button: '← Back', exact: true } },
+        { wait: 2200 },
+      ],
+    },
+    'reading-the-running-sum': {
+      title: 'Grey, blue, green',
+      script: [
+        { say: `TAP ▼ ▼
+Length 2. Step 1 / 4.
+Log card 1: u₁v₁ + u₂v₂, all grey.` },
+        { click: { button: '▼', exact: true } },
+        { wait: 400 },
+        { click: { button: '▼', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next →
+Card 2: u₁v₁ blue, bold. Being computed.
+u₂v₂ grey: pending.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Card 3: u₁v₁ green, counted.
+u₂v₂ blue, bold.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Card 4: Inner product computed.
+Every term green. Sum complete.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-vectors-inner-product'),
       sectionsContent,
       stateUnits,
@@ -419,7 +531,22 @@ The operation is symmetric, $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\lang
   }
 }
 
-export default function InnerProductVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function InnerProductVisualizer({ instructions, demos, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <InnerProductWrapper mode='vectors' explanations={explanations} />
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -442,13 +569,13 @@ export default function InnerProductVisualizer({ seoData, sectionsContent, state
   const genericSections = [
     // obj0 Key Terms was defined but commented out of the array - restored
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-vectors-scenario'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-vectors-scenario')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'pairing-and-accumulating', 'step'),
     stateRow('obj13', 'the-completed-inner-product', 'done'),
     plain('obj3', 'the-matrices-scenario'),
-    plain('obj4', 'reading-the-running-sum'),
+    withDemo(plain('obj4', 'reading-the-running-sum')),
     plain('obj5', 'what-the-inner-product-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -512,6 +639,10 @@ export default function InnerProductVisualizer({ seoData, sectionsContent, state
       <br />
       <br />
       <h1 className='title' style={{ marginTop: '-50px', marginBottom: '0px' }}>Inner Product of Vectors</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br />
       <div style={{ width: '80%', margin: 'auto' }}>
         <InnerProductWrapper mode='vectors' explanations={explanations} />

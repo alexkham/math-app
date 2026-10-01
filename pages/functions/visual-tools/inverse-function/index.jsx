@@ -12,6 +12,9 @@ import FunctionInverse from '../../../../app/components/functions/inverse/Functi
 import inverseDiagrams from '../../../../app/components/functions/inverse/functionInverseDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -75,7 +78,7 @@ Click any family to switch. Parameters reset to defaults on every switch, so you
 • $b$ — **horizontal scale and reflection**
 • $h$ — **horizontal shift**
 
-The transformed function is $g(x) = a \\cdot f(b(x - h)) + k$. The visualizer **re-derives the inverse symbolically** every time you move a slider, so $g^{-1}(x) = h + f^{-1}((x - k) / a) / b$ updates in real time. Both equations are displayed as monospace badges in the plot header.
+The transformed function is $g(x) = a \\cdot f(b(x - h)) + k$. The visualizer **re-derives the inverse symbolically** every time you move a slider, so $g^{-1}(x) = h + f^{-1}((x - k) / a) / b$ updates in real time. Both equations are displayed as monospace badges in the plot header. The **Reset** button beside the Parameters heading returns all four sliders to their defaults without changing the function.
 
 The most important thing this slider strip teaches: transforming $f$ does not just move the inverse on the screen, it changes **which** transformations the inverse carries. A vertical scale of $f$ becomes a horizontal scale of $f^{-1}$. Vertical shifts on $f$ become horizontal shifts on $f^{-1}$. The Parameters tab in the info panel makes this explicit.`,
       before: ``,
@@ -94,7 +97,7 @@ The most important thing this slider strip teaches: transforming $f$ does not ju
 
 For unrestricted families like cubic or exponential, only the three solid curves appear. For restricted families like quadratic, you see all four — the faded full parabola alongside the bold branch on $x \\geq 0$, plus the inverse $\\sqrt{x}$ in amber.
 
-Crosshair and curve tooltips work the same as in other visualizers in the series — mouse over any curve to read off coordinates.`,
+Crosshair and curve tooltips work the same as in other visualizers in the series — mouse over any curve to read off coordinates. The **S**, **M**, **L** and **XL** buttons above the plot set its size; the curves and equations stay the same.`,
       before: ``,
       after: ``,
       link: '',
@@ -115,12 +118,14 @@ For self-[inverse functions](!/functions/inverse#1) at default parameters, $g$ a
     },
 
     obj6: {
-      title: `The Info Panel — Three Tabs`,
-      content: `The side info panel has three tabs:
+      title: `The Info Panel — Four Tabs`,
+      content: `The side info panel has four tabs:
 
 • **Explanation** — reads the current state. Shows the base function and its inverse, the transformed equations, and special notes for the current family (self-inverse identity, restriction explanation for restricted families). Closes with the inverse-check identity $g(g^{-1}(x)) = x$.
 
 • **Parameters** — explains the rule by which transformations of $f$ become transformations of $f^{-1}$. Includes a table showing each correspondence (vertical scale on $f$ becomes horizontal scale on $f^{-1}$, vertical shift becomes horizontal shift, and so on), then describes the current parameter values one by one. The most useful tab for understanding **why** the inverse changes the way it does.
+
+• **Family** — a short note on the chosen function and its inverse, with a link to that pair's section further down this page.
 
 • **Concepts** — general theory: reflection across $y = x$, the horizontal line test, restricted branches, the mirror identity. Independent of the current state.`,
       before: ``,
@@ -499,8 +504,145 @@ Together with [sine](!#sine-and-the-arcsine), this closes the picker's tour of r
       '[Learn more about cosine and arccosine](!#cosine-and-the-arccosine) · [Restricted branches](!#the-horizontal-line-test-and-restricted-branches)',
   };
 
+  const instructions = [
+    'The **Function** list on the left holds eleven base functions; an **R** badge marks the ones that need a domain restriction to be invertible. [Learn more about picking a base function](!#picking-a-base-function)',
+    'The four **Parameters** sliders (vertical scale $a$, vertical shift $k$, horizontal scale $b$, horizontal shift $h$) transform $g$, and $g^{-1}$ is re-derived on every move; **Reset** returns them to defaults. [Learn more about transforming the function](!#transforming-the-function)',
+    'The header above the plot names the function, shows the **domain restricted** or **self-inverse (at defaults)** badge, and prints $g(x)$ and $g^{-1}(x)$. [Learn more about getting started](!#getting-started-with-the-visualizer)',
+    'The plot draws $g$ in blue, $g^{-1}$ in amber and the mirror line $y = x$ in dashed gray; restricted functions add the faded full curve. [Learn more about reading the plot](!#reading-the-plot)',
+    'The **S**, **M**, **L** and **XL** buttons set the size of the plot. [Learn more about the plot](!#reading-the-plot)',
+    'The **Applied** strip under the plot shows $a$, $k$, $b$ and $h$; changed values are highlighted in blue. [Learn more about the Applied strip](!#the-applied-chip-strip-and-show-toggles)',
+    'The **Show** buttons hide or show each curve and print its equation. [Learn more about the Show toggles](!#the-applied-chip-strip-and-show-toggles)',
+    'The info panel has four tabs: **Explanation** reads the current state, **Parameters** shows how each transformation of $f$ becomes one of $f^{-1}$, **Family** describes the chosen pair, and **Concepts** covers the theory. [Learn more about the info panel](!#the-info-panel-three-tabs)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionInverse tool
+     (opens on Quadratic, all sliders at defaults). Ranges: 0 = a, 1 = k, 2 = b, 3 = h.
+     Show chips: button text = label + formula, so they are matched by prefix. */
+  const demos = {
+    'picking-a-base-function': {
+      title: 'Picking a base function',
+      script: [
+        { say: `TAP Cubic
+No R badge: one-to-one.
+g⁻¹(x) = ∛(x). No faded curve.` },
+        { click: { button: 'Cubic', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Exponential
+g⁻¹(x) = ln(x).
+Amber = blue mirrored across y = x.` },
+        { click: { button: 'Exponential', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Sine (R)
+Badge: domain restricted.
+Faded dashed = full wave. Bold = branch.
+g⁻¹(x) = arcsin(x).` },
+        { click: { button: 'SineR', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Reciprocal
+Badge: self-inverse (at defaults).
+g = g⁻¹ = 1/(x). Curves coincide.` },
+        { click: { button: 'Reciprocal', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Identity
+g = g⁻¹ = x.
+Both lie on the mirror y = x.` },
+        { click: { button: 'Identity', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'transforming-the-function': {
+      title: 'Sliders and Reset',
+      script: [
+        { say: `DRAG a → 2
+g(x) = 2·(x)². Narrower parabola.
+g⁻¹(x) = √(x/2).
+Vertical scale on g = horizontal on g⁻¹.` },
+        { slide: { range: 0 }, to: 2, ms: 1400 },
+        { wait: 3000 },
+        { say: `DRAG k → 1
+g(x) = 2·(x)² + 1: up 1.
+g⁻¹(x) = √((x − 1)/2): right 1.` },
+        { slide: { range: 1 }, to: 1, ms: 1200 },
+        { wait: 2800 },
+        { say: `DRAG h → 2
+g(x) = 2·(x − 2)² + 1: right 2.
+g⁻¹(x) = 2 + √((x − 1)/2): up 2.` },
+        { slide: { range: 3 }, to: 2, ms: 1200 },
+        { wait: 2800 },
+        { say: `TAP Parameters
+Rule table: vertical and horizontal swap.
+Current a, k, h read out one by one.` },
+        { click: { button: 'Parameters', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Reset
+a = 1, k = 0, b = 1, h = 0.
+Back to (x)² and √(x).` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'the-applied-chip-strip-and-show-toggles': {
+      title: 'Applied and Show strips',
+      script: [
+        { say: `TAP Reciprocal
+g = g⁻¹ = 1/(x).
+Applied: a, k, b, h at defaults, grey.` },
+        { click: { button: 'Reciprocal', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Show g⁻¹
+Amber hidden. Blue unchanged:
+the two curves were on top of each other.` },
+        { click: { button: 'g⁻¹' } },
+        { wait: 2800 },
+        { say: `DRAG k → 2
+Applied chip k = 2 turns blue.
+Self-inverse badge gone.
+g(x) = 1/(x) + 2.` },
+        { slide: { range: 1 }, to: 2, ms: 1400 },
+        { wait: 3000 },
+        { say: `TAP Show g⁻¹
+Amber back: g⁻¹(x) = 1/(x − 2).
+Now a separate curve.` },
+        { click: { button: 'g⁻¹' } },
+        { wait: 2600 },
+        { say: `TAP Show y = x
+Mirror line hidden.
+Only g and g⁻¹ left.` },
+        { click: { button: 'y = x' } },
+        { wait: 2400 },
+      ],
+    },
+    'the-info-panel-three-tabs': {
+      title: 'Info panel tabs',
+      script: [
+        { say: `TAP Family
+Quadratic restricted to x ≥ 0.
+Link to the quadratic pair section.` },
+        { click: { button: 'Family', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Concepts
+Theory: reflection across y = x,
+horizontal line test, restricted branches.` },
+        { click: { button: 'Concepts', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Parameters
+Rule: g⁻¹(x) = h + f⁻¹((x − k)/a)/b.
+Sliders at defaults here.` },
+        { click: { button: 'Parameters', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Explanation
+Current state: f and f⁻¹, g and g⁻¹,
+domain restriction note, the check.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('functions-inverse'),
       sectionsContent,
       introContent,
@@ -524,17 +666,32 @@ Together with [sine](!#sine-and-the-arcsine), this closes the picker's tour of r
 }
 
 
-export default function InverseFunctionVisualizerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function InverseFunctionVisualizerPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionInverse explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
     { id:'getting-started-with-the-visualizer',               title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'picking-a-base-function',                           title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
-    { id:'transforming-the-function',                         title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
+    { id:'picking-a-base-function',                           title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[demo('picking-a-base-function'), sectionsContent.obj2.content] },
+    { id:'transforming-the-function',                         title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[demo('transforming-the-function'), sectionsContent.obj3.content] },
     { id:'reading-the-plot',                                  title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
-    { id:'the-applied-chip-strip-and-show-toggles',           title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
-    { id:'the-info-panel-three-tabs',                         title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
+    { id:'the-applied-chip-strip-and-show-toggles',           title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[demo('the-applied-chip-strip-and-show-toggles'), sectionsContent.obj5.content] },
+    { id:'the-info-panel-three-tabs',                         title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[demo('the-info-panel-three-tabs'), sectionsContent.obj6.content] },
     { id:'what-is-an-inverse-function',                       title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
     { id:'the-horizontal-line-test-and-restricted-branches',  title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
     { id:'how-transformations-of-f-become-transformations-of-f-1', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link, content:[sectionsContent.obj9.content] },
@@ -606,6 +763,10 @@ export default function InverseFunctionVisualizerPage({relatedTools, seoData, se
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Inverse Functions Visualizer/Explorer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionInverse explanations={explanations}/>
       <br/>

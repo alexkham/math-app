@@ -261,6 +261,8 @@ import ChebyshevInequality from '@/app/components/probability/inequalities/Cheby
 import markovDiagrams from '@/app/components/probability/inequalities/markovDiagrams'
 import chebyshevDiagrams from '@/app/components/probability/inequalities/chebyshevDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticPaths() {
@@ -335,7 +337,7 @@ export async function getStaticProps({ params }) {
 sectionsContent: {
   obj1: {
     title: `Getting Started with the Markov Visualizer`,
-    content: `This tool demonstrates [Markov's inequality](!/probability/inequalities/markov), which bounds tail probabilities using only the [expected value](!/probability/expected-value). The visualization shows a probability distribution with the tail region P(X ≥ a) highlighted in red.
+    content: `This tool demonstrates [Markov's inequality](!/probability/inequalities/markov), which bounds tail [probabilities](!/probability/axioms) using only the [expected value](!/probability/expected-value). The visualization shows a probability distribution with the tail region P(X ≥ a) highlighted in red.
 
 The left panel displays the PDF (for continuous) or PMF (for discrete distributions). A green dashed line marks E[X], and a red dashed line marks the threshold a. The red shaded area (or red bars) represents the actual tail probability.
 
@@ -413,7 +415,7 @@ Key experiments to try:
 
 $$\\frac{E[X]}{a} \\geq 1$$
 
-A probability bound of 100% or more is trivially true and provides no information. Every probability is ≤ 1, so saying P(X ≥ a) ≤ 1.5 tells us nothing.
+A [probability bound](!/probability/axioms#consequences) of 100% or more is trivially true and provides no information. Every probability is ≤ 1, so saying P(X ≥ a) ≤ 1.5 tells us nothing.
 
 The warning box turns red and explains that the bound is useless. To get meaningful information, increase a above E[X].
 
@@ -432,8 +434,8 @@ This limitation is fundamental to Markov's inequality. The bound only constrains
 
 The ratio Bound/Actual indicates how loose the inequality is. Typical observations:
 
-**Exponential distribution**: Bound is relatively tight (ratio 2-5x)
-**Normal distribution**: Bound is very loose (ratio 10-100x or more)
+[Exponential distribution](!/probability/visual-tools/distributions/exponential): Bound is relatively tight (ratio 2-5x)
+[Normal distribution](!/probability/visual-tools/distributions/normal): Bound is very loose (ratio 10-100x or more)
 **Uniform distribution**: Bound can be exact at certain thresholds
 
 The gap exists because Markov must hold for ANY non-negative distribution with that E[X]. The worst-case distribution (which achieves the bound) places all probability mass at exactly 0 and a, creating maximum tail probability.
@@ -450,13 +452,13 @@ Real distributions spread probability more evenly, giving smaller tails than the
 
 **Minimal requirements**: Only needs X ≥ 0 and E[X] known. No variance, no distribution shape.
 
-**Universal applicability**: Works for any non-negative random variable, continuous or discrete.
+**Universal applicability**: Works for any non-negative [random variable](!/probability/random-variables), continuous or discrete.
 
 **Theoretical foundation**: Building block for stronger inequalities. [Chebyshev's inequality](!/probability/inequalities/chebyshev) is derived from Markov applied to (X - μ)².
 
 **Quick bounds**: When you only know the average, Markov gives an instant upper bound.
 
-Applications include algorithm analysis (bounding worst-case by average-case), queueing theory (service time bounds), and proving convergence in probability (weak law of large numbers).`,
+Applications include algorithm analysis (bounding worst-case by average-case), queueing theory (service time bounds), and proving convergence in probability (weak [law of large numbers](!/probability/axioms)).`,
     before: ``,
     after: ``,
     link: '',
@@ -666,7 +668,7 @@ Across all nine states the actual tail runs from $0.3\\%$ to $26.3\\%$ against o
 sectionsContent: {
   obj1: {
     title: `Getting Started with the Chebyshev Visualizer`,
-    content: `This tool demonstrates [Chebyshev's inequality](!/probability/inequalities/chebyshev), which bounds the probability of deviating from the mean using [variance](!/probability/variance). The visualization shows a probability distribution with both tails highlighted in red.
+    content: `This tool demonstrates [Chebyshev's inequality](!/probability/inequalities/chebyshev), which bounds the [probability](!/probability/axioms) of deviating from the mean using [variance](!/probability/variance). The visualization shows a probability distribution with both tails highlighted in red.
 
 The left panel displays the PDF (for continuous) or PMF (for discrete distributions). A green dashed line marks the mean μ, and red dashed lines mark μ-a and μ+a. The red shaded regions represent the actual probability of being more than a away from the mean.
 
@@ -759,11 +761,11 @@ But this is looser than necessary because the two-tailed bound includes both sid
 
 Typical observations across distributions:
 
-**Normal distribution**: Chebyshev is very conservative. At 2σ, bound is 25% but actual is about 4.5%. At 3σ, bound is 11% but actual is about 0.3%.
+[Normal distribution](!/probability/visual-tools/distributions/normal): Chebyshev is very conservative. At 2σ, bound is 25% but actual is about 4.5%. At 3σ, bound is 11% but actual is about 0.3%.
 
 **Uniform distribution**: Chebyshev can be exact at the distribution boundaries. The uniform distribution is one of the "worst cases" for Chebyshev.
 
-**Exponential distribution**: Asymmetric, so left tail contributes differently than right tail. Bound is moderately loose.
+[Exponential distribution](!/probability/visual-tools/distributions/exponential): Asymmetric, so left tail contributes differently than right tail. Bound is moderately loose.
 
 The gap demonstrates that Chebyshev guarantees apply to all distributions, including pathological ones that concentrate probability at exactly ±a from the mean.`,
     before: ``,
@@ -779,7 +781,7 @@ The gap demonstrates that Chebyshev guarantees apply to all distributions, inclu
 
 **Tighter than Markov**: Uses variance information for quadratic improvement. The 1/k² decay is much faster than Markov's 1/k.
 
-**Theoretical cornerstone**: Used to prove the weak law of large numbers, convergence of sample means, and consistency of estimators.
+**Theoretical cornerstone**: Used to prove the weak [law of large numbers](!/probability/axioms), convergence of sample means, and consistency of estimators.
 
 **Practical applications**:
 • Quality control: Setting tolerance limits based on process variance
@@ -1150,6 +1152,7 @@ It also makes a point the continuous cases obscure: a distribution can be very s
 
   return {
     props: {
+      relatedTools: getRelatedTools(`probability-inequalities-${params.view}`),
       sectionsContent: currentConfig.sectionsContent,
       stateUnits,
       sectionOrder,
@@ -1197,7 +1200,7 @@ function getFeatureList(view) {
 }
 
 export default function InequalityViewPage({ 
-  seoData, 
+  relatedTools, seoData, 
   sectionsContent, 
   stateUnits,
   sectionOrder,
@@ -1306,6 +1309,7 @@ export default function InequalityViewPage({
           />
           <br />
           <br />
+          <RelatedTools tools={relatedTools}/>
           <Sections sections={genericSections} />
         </>
       )}

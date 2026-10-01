@@ -3029,6 +3029,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "four fundamental subspaces",
@@ -3781,6 +3782,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     colspace: demoUnitFrame({
       svg: subspacesDiagrams.colspace,
@@ -3800,6 +3802,20 @@ const schemas = {
       svg: subspacesDiagrams.orth,
       caption: 'The two orthogonality pairings, side by side',
       text: 'Row space against null space, column space against left null space &#8212; each pair meets at right angles and each pair accounts for a whole space between them. Every vector splits uniquely into a part in one and a part in the other, which is what makes these complements rather than merely perpendicular. Check the dot products yourself on the',
+      href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
+      linkText: 'four fundamental subspaces visualizer',
+    }),
+    rowSpace: demoUnitFrame({
+      svg: subspacesDiagrams.rowspace,
+      caption: 'The row space from R',
+      text: 'The same rank-2 matrix as the column-space frame, now read by rows. Row reduction does not change the row space, so the nonzero rows of the reduced form R are a basis for it &#8212; two of them, because the rank is 2. The row space lives in the domain, R<sup>3</sup>, alongside the null space. See all four subspaces of this matrix on the',
+      href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
+      linkText: 'four fundamental subspaces visualizer',
+    }),
+    leftNull: demoUnitFrame({
+      svg: subspacesDiagrams.leftnull,
+      caption: 'The left null space from A&#7488;',
+      text: 'Transpose A and reduce: the free column of rref(A<sup>T</sup>) gives the special solution L, and A<sup>T</sup>L = 0 confirms it. With rank 2 in a 3-row matrix the left null space has dimension 3 &#8722; 2 = 1. It lives in the codomain, beside the column space, and every vector in it is perpendicular to every column. Compare the four subspaces on the',
       href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
       linkText: 'four fundamental subspaces visualizer',
     }),
@@ -3874,6 +3890,8 @@ export default function FundamentalSubspacesPage({seoData, sectionsContent, intr
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-rowSpace'} dangerouslySetInnerHTML={{ __html: demoUnits.rowSpace }} />,
+          `Row operations change the columns but never the row space, which is why R can be read for it directly.`,
         ]
     },
     {
@@ -3892,6 +3910,8 @@ export default function FundamentalSubspacesPage({seoData, sectionsContent, intr
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-leftNull'} dangerouslySetInnerHTML={{ __html: demoUnits.leftNull }} />,
+          `The left null space is the null space of Aᵀ, so every tool used for the null space applies to it unchanged.`,
         ]
     },
     {

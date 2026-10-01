@@ -631,6 +631,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
+import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
 
 
 export async function getStaticProps(){
@@ -1140,8 +1143,31 @@ This idea is not an add-on to probability theory. Bayes' theorem sits at the int
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_conditional_0: demoUnitFrame({
+      svg: conditionalTreeDiagrams.subtreeGivenA,
+      caption: 'Branches below A carry P(B given A) and P(not B given A)',
+      text: 'Bayes theorem rearranges two ways of reaching the same leaf: along the upper path the joint probability is P(A) times P(B given A), and the same leaf is reached the other way round through P(B) times P(A given B). Equating the two products and dividing by P(B) is the whole theorem. Change the branch weights and watch both products stay equal on the',
+      href: '/probability/visual-tools/conditional-probability/tree-diagram',
+      linkText: 'conditional probability tree diagram',
+    }),
+    u_total_1: demoUnitFrame({
+      svg: totalProbabilityDiagrams.outcome,
+      caption: 'One outcome highlighted across every branch of the partition',
+      text: 'The denominator P(B) collects the highlighted outcome from every branch: each branch contributes P(A<sub>i</sub>) times P(B given A<sub>i</sub>), and the sum of those contributions is the total probability of B. Bayes theorem then asks what share of that sum came from a single branch. Highlight an outcome and read the contributions on the',
+      href: '/probability/visual-tools/total-probability',
+      linkText: 'law of total probability visualizer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       formulaTable,
@@ -1168,7 +1194,7 @@ export default function BayesPage({
   mistakesTable,
   overviewTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1205,6 +1231,8 @@ export default function BayesPage({
         link:'',
         content:[
           sectionsContent.conditional.content,
+                  <div key={'unit-u_conditional_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_conditional_0 }} />,
+          `The formula below writes this rearrangement out in symbols.`,
         ]
     },
     {
@@ -1241,6 +1269,8 @@ export default function BayesPage({
         link:'',
         content:[
           sectionsContent.total.content,
+                  <div key={'unit-u_total_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_total_1 }} />,
+          `The chain rule offers a second way to read the same products.`,
         ]
     },
     {

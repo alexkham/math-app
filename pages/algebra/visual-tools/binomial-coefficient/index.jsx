@@ -13,6 +13,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import BinomialCoefficientsVisualizer from '../../../../app/components/algebra/visualizers/binomial/BinomialCoefficientVisualizer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import binomialCoefficientDiagrams from '../../../../app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -39,17 +41,17 @@ export async function getStaticProps(){
 
     obj0: {
       title: `Key Terms`,
-      content: `**Binomial coefficient** — the count $\\binom{n}{k}$ (read &quot;n choose k&quot;) of ways to choose $k$ items from $n$ distinct items, ignoring order. Equivalently, the coefficient of $a^{n-k} b^k$ in the expansion of $(a+b)^n$.
+      content: `[Binomial coefficient](!/algebra/identities#3) — the count $\\binom{n}{k}$ (read &quot;n choose k&quot;) of ways to choose $k$ items from $n$ distinct items, ignoring order. Equivalently, the coefficient of $a^{n-k} b^k$ in the expansion of $(a+b)^n$.
 
-**Binomial theorem** — the identity $(a+b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^k$. Expresses any power of a binomial as a polynomial in $a$ and $b$ with binomial-coefficient weights.
+[Binomial theorem](!/algebra/identities#3) — the [identity](!/algebra/equations) $(a+b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^k$. Expresses any [power](!/algebra/powers) of a binomial as a [polynomial](!/algebra/polynomials) in $a$ and $b$ with binomial-coefficient weights.
 
 **Pascal&apos;s triangle** — the triangular array whose row $n$, position $k$ equals $\\binom{n}{k}$. Each cell is the sum of the two cells immediately above it.
 
 **Pascal&apos;s rule** — the identity $\\binom{n}{k} = \\binom{n-1}{k-1} + \\binom{n-1}{k}$. The reason every cell in Pascal&apos;s triangle equals the sum of the two cells above.
 
-**Factorial formula** — $\\binom{n}{k} = \\dfrac{n!}{k! (n-k)!}$. The closed-form expression for the binomial coefficient.
+**Factorial formula** — $\\binom{n}{k} = \\dfrac{n!}{k! (n-k)!}$. The closed-form [expression](!/algebra/equations) for the [binomial coefficient](!/algebra/identities#3).
 
-**Decision tree** — a binary tree of choices. The number of leaves with exactly $k$ &quot;right&quot; branches equals $\\binom{n}{k}$, giving a combinatorial reading of the formula.`,
+[Decision tree](!/algebra/polynomials/factoring#13) — a binary tree of choices. The number of leaves with exactly $k$ &quot;right&quot; branches equals $\\binom{n}{k}$, giving a combinatorial reading of the formula.`,
       before: ``,
       after: ``,
       link: '',
@@ -85,9 +87,9 @@ To explore quickly:
       title: `The Three Views`,
       content: `The same binomial coefficients are computed three different ways. Each view answers the question *where do the numbers in row $n$ of Pascal&apos;s triangle come from?*
 
-• [Decision Tree](!#decision-tree-view) — every path of length $n$ in a binary tree corresponds to one term in the expansion. Leaves with the same b-count belong to the same like-term group. Group size equals the coefficient.
+• [Decision Tree](!#decision-tree-view) — every path of length $n$ in a binary tree corresponds to one term in the expansion. Leaves with the same b-count belong to the same like-term group. Group size equals the [coefficient](!/algebra/equations).
 
-• [Distribution](!#distribution-view) — animates the actual multiplication. For each of the $n$ factors $(a+b)$, pick either $a$ or $b$. Each of the $2^n$ choice sequences produces one product. Products with the same exponents fall into the same bucket; the bucket count is the coefficient.
+• [Distribution](!#distribution-view) — animates the actual multiplication. For each of the $n$ factors $(a+b)$, pick either $a$ or $b$. Each of the $2^n$ choice sequences produces one product. Products with the same [exponents](!/algebra/powers) fall into the same bucket; the bucket count is the coefficient.
 
 • [Pascal Paths](!#pascal-paths-view) — Pascal&apos;s triangle reinterpreted as a path-counting grid. To reach cell $(n, k)$ from the top, take $n$ steps, $k$ of them going right. The number of ways equals $\\binom{n}{k}$.
 
@@ -119,7 +121,7 @@ Changing $n$ resets all three views simultaneously. The formula readout in the t
 
     obj4: {
       title: `Decision Tree View`,
-      content: `The Decision Tree view draws every length-$n$ binary path from a single root. At each level, branches split into an **a** path (blue) and a **b** path (amber). After $n$ levels, the tree has $2^n$ leaves, each labeled with the sequence of choices that led to it.
+      content: `The Decision Tree view draws every length-$n$ binary path from a single [root](!/algebra/roots). At each level, branches split into an **a** path (blue) and a **b** path (amber). After $n$ levels, the tree has $2^n$ leaves, each labeled with the sequence of choices that led to it.
 
 Each leaf belongs to one of $n + 1$ **groups**, color-coded by how many $b$&apos;s the path contains. Below the tree, group cards summarize each:
 
@@ -255,19 +257,23 @@ The triangle&apos;s rows are built up using this rule alone: start with $\\binom
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Binomial theorem** — the identity that names the coefficients. Generalizes to non-integer and negative exponents through the generalized binomial series.
+      content: `**Binomial theorem** — the identity that names the coefficients. Generalizes to non-integer and [negative exponents](!/algebra/powers/negative-exponents) through the generalized binomial series.
 
 **Multinomial coefficients** — generalize to more than two terms: $\\binom{n}{k_1, k_2, \\dots, k_m}$ counts ways to split $n$ items into groups of given sizes. Appears in the expansion of $(x_1 + x_2 + \\dots + x_m)^n$.
 
 **Combinations and permutations** — the two foundational counting concepts. Binomial coefficients are exactly combinations: $\\binom{n}{k} = C(n, k)$.
 
-**Polynomial multiplication** — binomial expansion is a special case. The multiplication grid for $(a + b) \\cdot (a + b)$ has four cells; for $(a + b)^n$ the grid is $n$-dimensional, and the diagonals collect like terms.
+[Polynomial multiplication](!/algebra/visual-tools/polynomial-multiplication) — binomial expansion is a special case. The multiplication grid for $(a + b) \\cdot (a + b)$ has four cells; for $(a + b)^n$ the grid is $n$-dimensional, and the diagonals collect [like terms](!/algebra/polynomials/operations#1).
 
 **Probability** — binomial coefficients drive the **binomial distribution**: $P(X = k) = \\binom{n}{k} p^k (1 - p)^{n-k}$. The same $\\binom{n}{k}$ that appears in $(a + b)^n$ counts the success patterns.
 
 **Catalan numbers and other combinatorial sequences** — many counting sequences are built from binomial coefficients via simple combinations.
 
-**Algebra calculator** — for symbolic expansions of $(a + b)^n$ at arbitrary $n$, see the **binomial expansion calculator** in the algebra calculators section.`,
+**Algebra calculator** — for symbolic expansions of $(a + b)^n$ at arbitrary $n$, see the **binomial expansion calculator** in the algebra calculators section.
+
+[Powers Table](!/algebra/visual-tools/powers-table) — the powers of two that each row of Pascal's triangle sums to, and the powers of the base inside every expansion term.
+
+[Completing the Square Visualizer](!/algebra/visual-tools/completing-square) — the $n = 2$ row, $(a + b)^2 = a^2 + 2ab + b^2$, drawn as the area of a square.`,
       before: ``,
       after: ``,
       link: '',
@@ -456,6 +462,7 @@ The frame also shows why the tool caps at $n = 5$: another row would double the 
 
   return {
     props: {
+      relatedTools: getRelatedTools('algebra-binomial-coefficient'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -548,7 +555,7 @@ The frame also shows why the tool caps at $n = 5$: another row would double the 
   }
 }
 
-export default function BinomialCoefficientVisualizerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function BinomialCoefficientVisualizerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after].
@@ -803,6 +810,7 @@ export default function BinomialCoefficientVisualizerPage({seoData, sectionsCont
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

@@ -496,6 +496,9 @@ import FunctionTangentLine from '../../../../app/components/calculus/visualizers
 import functionTangentLineDiagrams from '../../../../app/components/calculus/visualizers/functionTangentLineDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -963,8 +966,110 @@ Comparing the two flat tangents side by side is the fastest way to see that zero
   }
 
 
+  const instructions = [
+    'Drag the $c$ marker along the x-axis of the plot; the point $P = (c, f(c))$ and the tangent line follow, and the tangent pivots as the slope $f\'(c) = c^2 - 1$ changes. [Learn more about dragging c](!#drag-and-scenario-modes)',
+    'The plot draws $f(x) = \\frac{1}{3}x^3 - x$ in dark blue, the tangent in the scenario colour and the dashed grey drop line from $c$ up to $P$. [Learn more about the plot](!#getting-started)',
+    'The four scenario buttons, **Positive slope**, **Negative slope**, **Local max** and **Local min**, move $c$ to a fixed value, play the animation and tint the tool blue, red, amber or teal. [Learn more about the four scenarios](!#the-four-scenarios)',
+    'While a scenario runs, the banner at the top of the plot counts **Step 1 / 6** to **Step 6 / 6** and names each step. [Learn more about the six-step animation](!#the-six-step-animation)',
+    'The readout strip under the buttons shows $c$, $f(c)$, $f\'(c)$ and the slope of the tangent, which is always equal to $f\'(c)$. [Learn more about the readouts](!#getting-started)',
+    '**Reset** stops any scenario and returns $c$ to $-0.50$. [Learn more about Reset](!#getting-started)',
+    'The **Computation** tab gives the point of tangency, the slope from the derivative and the tangent equation in point-slope and slope-intercept form. [Learn more about the Computation tab](!#the-computation-tab)',
+    'The **Meaning** tab gives a verdict on the current tangent, and **Theory** holds five background blocks; Meaning opens by itself when a scenario finishes. [Learn more about the Meaning and Theory tabs](!#the-meaning-and-theory-tabs)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionTangentLine tool.
+     Controls driven: the four scenario buttons, Reset, and the Computation /
+     Meaning / Theory tabs (divs, targeted by text). A scenario runs a ~4.3 s
+     six-step animation and ignores clicks while it runs, so every scenario
+     after the first in a demo is preceded by Reset (which cancels it); a
+     scenario is never followed by a tab step. Dragging c is not demoed: the
+     canvas listens to mouse events, the player dispatches pointer events. */
+  const demos = {
+    'getting-started': {
+      title: 'Readout strip and Reset',
+      script: [
+        { say: `TAP Negative slope
+c = 0.40, f(c) = −0.38.
+f′(c) = slope of tangent = −0.84.` },
+        { click: { button: '↘Negative slope' } },
+        { wait: 5200 },
+        { say: `TAP Reset
+Back to c = −0.50, f(c) = 0.46.
+Slope −0.75. Scenario cleared.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Local max
+c = −1.00, f(c) = 0.67.
+Slope 0.00: flat tangent.` },
+        { click: { button: '⌒Local max' } },
+        { wait: 5200 },
+        { say: `TAP Reset
+c = −0.50 again.
+Computation tab back on top.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-four-scenarios': {
+      title: 'The four scenarios',
+      script: [
+        { say: `TAP Positive slope
+Blue. c = −1.70, f′(c) = 1.89 > 0.
+Tangent rises to the right.` },
+        { click: { button: '↗Positive slope' } },
+        { wait: 5200 },
+        { say: `TAP Reset, then Negative slope
+Red. c = 0.40, f′(c) = −0.84 < 0.
+Tangent falls to the right.` },
+        { click: { button: 'Reset', exact: true } },
+        { click: { button: '↘Negative slope' } },
+        { wait: 5200 },
+        { say: `TAP Reset, then Local max
+Amber. c = −1.00, f′(c) = 0.
+Flat tangent at the peak.` },
+        { click: { button: 'Reset', exact: true } },
+        { click: { button: '⌒Local max' } },
+        { wait: 5200 },
+        { say: `TAP Reset, then Local min
+Teal. c = 1.00, f′(c) = 0.
+Flat tangent at the valley.` },
+        { click: { button: 'Reset', exact: true } },
+        { click: { button: '⌣Local min' } },
+        { wait: 5200 },
+      ],
+    },
+    'the-computation-tab': {
+      title: 'Computation, Meaning, Theory',
+      script: [
+        { say: `TAP Theory
+Five blocks: definition, derivative as slope,
+linearization, critical points, this function.` },
+        { click: { text: 'Theory' } },
+        { wait: 2600 },
+        { say: `TAP Meaning
+Verdict: The tangent at c.
+Note: f′(c) IS the tangent's slope.` },
+        { click: { text: 'Meaning' } },
+        { wait: 2600 },
+        { say: `TAP Computation
+c = −0.50, f(c) = 0.458.
+f′(c) = (−0.50)² − 1 = −0.750.
+y = −0.750 x + 0.083.` },
+        { click: { text: 'Computation' } },
+        { wait: 2800 },
+        { say: `TAP Local min
+Six steps; blocks light in turn.
+Ends on Meaning: horizontal tangent, min.` },
+        { click: { button: '⌣Local min' } },
+        { wait: 5200 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('calculus-tangent-line'),
          sectionsContent,
          stateUnits,
@@ -987,7 +1092,22 @@ Comparing the two flat tangents side by side is the fastest way to see that zero
     }
    }
 
-export default function TangentLineVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function TangentLineVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionTangentLine explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -1009,15 +1129,15 @@ export default function TangentLineVisualizer({relatedTools, seoData, sectionsCo
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     stateRow('obj2', 'drag-and-scenario-modes', 'idle'),
-    plain('obj3', 'the-four-scenarios'),
+    withDemo(plain('obj3', 'the-four-scenarios')),
     stateRow('obj11', 'positive-slope', 'pos'),
     stateRow('obj12', 'negative-slope', 'neg'),
     stateRow('obj13', 'local-maximum', 'max'),
     stateRow('obj14', 'local-minimum', 'min'),
     plain('obj4', 'the-six-step-animation'),
-    plain('obj5', 'the-computation-tab'),
+    withDemo(plain('obj5', 'the-computation-tab')),
     plain('obj6', 'the-meaning-and-theory-tabs'),
     plain('obj7', 'what-is-a-tangent-line'),
     plain('obj8', 'derivative-as-slope'),
@@ -1084,6 +1204,10 @@ export default function TangentLineVisualizer({relatedTools, seoData, sectionsCo
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Tangent Line</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
   <div style={{transform:'scale(0.9)',width:'80%',margin:'auto'}}>
    <FunctionTangentLine explanations={explanations}/>

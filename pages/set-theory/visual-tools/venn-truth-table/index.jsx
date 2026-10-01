@@ -10,6 +10,10 @@ import ExplanationDetails from '../../../../app/components/ExplanationDetails'
 import VennTruthTableExplorer from '../../../../app/components/diagrams/set-theory/VennTruthTableExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import vennTruthTableDiagrams from '../../../../app/components/diagrams/set-theory/vennTruthTableDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -33,16 +37,16 @@ export async function getStaticProps(){
   ]
 
   const instructions = [
-    'Type a set expression into the Expression box, or build it from the symbol buttons: the set letters, then $\\cap$, $\\cup$, $\\setminus$, $\\oplus$, the complement mark, brackets, $\\emptyset$ and $U$.',
-    'The 2 sets and 3 sets buttons rebuild both views at that size. Two sets give 4 regions and 4 rows; three sets give 8 of each.',
-    'The counter beside the Expression heading reads how many regions the expression shades out of the total.',
-    'As sets and As logic show the same expression in both alphabets, rewritten live as you type.',
-    'The preset buttons load standard expressions, including $A \\cup A^c$ and $A \\cap A^c$ — the tautology and the contradiction.',
-    'The Regions panel shades every region the expression is true on, and its heading shows the result column as a string of ones and zeros.',
-    'The Truth table panel lists one row per region: which sets the point is inside, then whether the expression holds there.',
-    'Click any row, or any region of the diagram, and the matching one on the other side is outlined. Click it again to deselect.',
-    'The key under the table pairs each set symbol with its logical twin: $\\cap$ with $\\wedge$, $\\cup$ with $\\vee$, $\\oplus$ with exclusive or, and the complement mark with negation.',
-    'The panel below both views names what you are looking at — a tautology, a contradiction, a named connective, or an expression that ignores one of its sets.',
+    'Type a set expression into the Expression box, or build it from the symbol buttons: the set letters, then $\\cap$, $\\cup$, $\\setminus$, $\\oplus$, the complement mark, brackets, $\\emptyset$ and $U$. [Learn more about writing expressions](!#writing-expressions-the-parser-accepts)',
+    'The 2 sets and 3 sets buttons rebuild both views at that size. Two sets give 4 regions and 4 rows; three sets give 8 of each. [Learn more about the set count](!#getting-started)',
+    'The counter beside the Expression heading reads how many regions the expression shades out of the total. [Learn more about the counter](!#getting-started)',
+    'As sets and As logic show the same expression in both alphabets, rewritten live as you type. [Learn more about set and logic notation](!#set-notation-and-logic-notation)',
+    'The preset buttons load standard expressions, including $A \\cup A^c$ and $A \\cap A^c$ — the tautology and the contradiction. [Learn more about the presets](!#getting-started)',
+    'The Regions panel shades every region the expression is true on, and its heading shows the result column as a string of ones and zeros. [Learn more about the Regions panel](!#reading-the-two-views)',
+    'The Truth table panel lists one row per region: which sets the point is inside, then whether the expression holds there. [Learn more about the Truth table panel](!#reading-the-two-views)',
+    'Click any row, or any region of the diagram, and the matching one on the other side is outlined. Click it again to deselect. [Learn more about linking a row to a region](!#linking-a-row-to-a-region)',
+    'The key under the table pairs each set symbol with its logical twin: $\\cap$ with $\\wedge$, $\\cup$ with $\\vee$, $\\oplus$ with exclusive or, and the complement mark with negation. [Learn more about the connective key](!#set-notation-and-logic-notation)',
+    'The panel below both views names what you are looking at — a tautology, a contradiction, a named connective, or an expression that ignores one of its sets. [Learn more about tautologies and contradictions](!#tautologies-and-contradictions)',
   ]
 
   const sectionsContent={
@@ -60,7 +64,7 @@ export async function getStaticProps(){
       title:`Getting Started`,
       content:`The tool holds one expression and draws it twice, so the first thing to do is give it an expression.
 
-Type into the **Expression** box, or assemble it from the symbol buttons underneath: the set letters first, then the operators — intersection, union, difference, symmetric difference, the complement mark, brackets, the empty set and the universe.
+Type into the **Expression** box, or assemble it from the symbol buttons underneath: the set letters first, then the operators — [intersection](!/set-theory/operations#2), [union](!/set-theory/operations#1), difference, [symmetric difference](!/set-theory/operations#5), the [complement](!/set-theory/operations#3) mark, brackets, the [empty set](!/set-theory/basics#3) and the universe.
 
 Two choices shape everything else:
 
@@ -112,7 +116,7 @@ The deeper point is that every point of the universe lies in exactly one region,
 
     obj4:{
       title:`Writing Expressions the Parser Accepts`,
-      content:`The parser is the same one the Venn diagram generator uses, so the notation carries over.
+      content:`The parser is the same one the [Venn diagram](!/set-theory/venn-diagrams) generator uses, so the notation carries over.
 
 Operators need something on both sides, and the complement mark goes **after** what it negates: $A^c$, not a prefix. Brackets group exactly as they do in arithmetic, and nesting is allowed, so $((A \\cap B) \\setminus C)^c$ is a single valid expression.
 
@@ -256,7 +260,13 @@ The diagram shows the same fact geometrically. If an expression ignores $B$, its
 
 **Venn Diagrams** — the diagram side on its own, for two and three sets.
 
-**Venn Diagram Generator** — the companion tool, which shades expressions on up to five sets but does not build the table.`,
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — the companion tool, which shades expressions on up to five sets but does not build the table.
+
+[Two-Set Venn Diagram](!/set-theory/visual-tools/two-sets-basic-venn) — the four regions, one operation at a time.
+
+[Three-Set Venn Diagram](!/set-theory/visual-tools/three-sets-basic-venn) — the eight regions and the identities on them.
+
+[Two-Set Laws and Identities Explorer](!/set-theory/visual-tools/two-sets-laws-venn) — the identity catalogue these columns verify.`,
       before:``,
       after:``,
       link:'',
@@ -559,8 +569,138 @@ Underneath this is the fact that makes the whole tool work: every point of the u
   }
 
 
+  /* Animated demos (ToolDemoPlayer v3) against the real VennTruthTableExplorer
+     (opens in 2 sets mode on A ∩ B: 1/4, Regions 0001). Region elements in DOM
+     order: Region U, Region A, Region B, Region A∩B; table rows top to bottom:
+     A∩B, B, A, U. The expression box is input[aria-label="Set expression"]. */
+  const demos = {
+    'getting-started': {
+      title: 'Presets and the set count',
+      script: [
+        { say: `TAP A ∪ B
+Counter 3/4.
+As logic: A ∨ B. Panel: disjunction.`, at: 'br' },
+        { click: { button: 'A ∪ B', exact: true } },
+        { wait: 2600 },
+        { say: `TAP A ⊕ B
+Counter 2/4.
+As logic: A ⊻ B. Panel: exclusive or.`, at: 'br' },
+        { click: { button: 'A ⊕ B', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 3 sets
+8 regions, 8 rows. A ⊕ B kept: 4/8.
+Panel: answer does not depend on C.`, at: 'br' },
+        { click: { button: '3 sets', exact: true } },
+        { wait: 2800 },
+        { say: `TAP (A ∪ B ∪ C)ᶜ
+Counter 1/8.
+Only the region outside all three circles.`, at: 'br' },
+        { click: { button: '(A ∪ B ∪ C)ᶜ', exact: true } },
+        { wait: 2600 },
+        { say: `TAP A ⊕ B ⊕ C
+Counter 4/8.
+Regions heading: 01101001.`, at: 'br' },
+        { click: { button: 'A ⊕ B ⊕ C', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'reading-the-two-views': {
+      title: 'Shaded regions are the true rows',
+      script: [
+        { say: `TAP A ∪ B
+3 regions shaded, 3 rows read T.
+Regions heading: 0111.` },
+        { click: { button: 'A ∪ B', exact: true } },
+        { wait: 2600 },
+        { say: `TAP (A ∩ B)ᶜ
+All but the overlap shaded.
+Row A∩B reads F. Heading: 1110.` },
+        { click: { button: '(A ∩ B)ᶜ', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Aᶜ ∪ B
+Only row A reads F: A true, B false.
+Heading 1011. Panel: material implication.` },
+        { click: { button: 'Aᶜ ∪ B', exact: true } },
+        { wait: 2800 },
+        { say: `TAP A ∪ Aᶜ
+Every region shaded, every row T.
+Heading 1111: tautology.` },
+        { click: { button: 'A ∪ Aᶜ', exact: true } },
+        { wait: 2600 },
+        { say: `TAP A ∩ Aᶜ
+Nothing shaded, every row F.
+Heading 0000: contradiction.` },
+        { click: { button: 'A ∩ Aᶜ', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'linking-a-row-to-a-region': {
+      title: 'Linking a row to a region',
+      script: [
+        { say: `CLICK row B
+Row B highlighted. Panel: Region B,
+A false, B true. A ∩ B false: blank.` },
+        { click: { css: 'tbody tr', nth: 1 } },
+        { wait: 2800 },
+        { say: `CLICK region A∩B
+Row A∩B highlighted in the table.
+Expression true there: region shaded.` },
+        { click: 'g[aria-label="Region A∩B"]' },
+        { wait: 2800 },
+        { say: `CLICK region A∩B again
+Selection cleared.
+Panel back to conjunction.` },
+        { click: 'g[aria-label="Region A∩B"]' },
+        { wait: 2400 },
+        { say: `CLICK row U
+Panel: Region U, A false, B false.
+Outside both circles. Blank.` },
+        { click: { css: 'tbody tr', nth: 3 } },
+        { wait: 2800 },
+        { say: `CLICK region A
+Row A highlighted: A true, B false.
+A ∩ B false there. Region blank.` },
+        { click: 'g[aria-label="Region A"]' },
+        { wait: 2800 },
+      ],
+    },
+    'writing-expressions-the-parser-accepts': {
+      title: 'Writing expressions',
+      script: [
+        { say: `TYPE A \\ B
+Counter 1/4: region A only.
+As logic: A ∧ ¬B. Heading 0100.` },
+        { set: 'input[aria-label="Set expression"]', value: 'A \\ B' },
+        { wait: 2800 },
+        { say: `TYPE A ∩ Bᶜ
+Same heading, 0100.
+Same column: equal sets.` },
+        { set: 'input[aria-label="Set expression"]', value: 'A ∩ Bᶜ' },
+        { wait: 2600 },
+        { say: `TYPE (A ∪ B), TAP ᶜ
+Complement mark goes after the bracket.
+Counter 1/4. Panel: Peirce arrow, NOR.` },
+        { set: 'input[aria-label="Set expression"]', value: '(A ∪ B)' },
+        { click: { button: 'ᶜ', exact: true } },
+        { wait: 2800 },
+        { say: `TYPE (A ∩ B
+Box turns red.
+Missing a closing parenthesis.` },
+        { set: 'input[aria-label="Set expression"]', value: '(A ∩ B' },
+        { wait: 2600 },
+        { say: `TYPE A ∩ C
+Unknown set “C”.
+2 sets mode draws only A and B.` },
+        { set: 'input[aria-label="Set expression"]', value: 'A ∩ C' },
+        { wait: 2600 },
+      ],
+    },
+  }
+
    return {
       props:{
+      demos,
+        relatedTools: getRelatedTools('venn-truth-table'),
          sectionsContent,
          introContent,
          instructions,
@@ -573,7 +713,22 @@ Underneath this is the fact that makes the whole tool work: every point of the u
     }
    }
 
-export default function VennTruthTablePage({seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+export default function VennTruthTablePage({ demos,relatedTools, seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <VennTruthTableExplorer showIntro={false} notes={notes}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Slug ids (Line 1). obj0 is the Key Terms slot, unused on tool pages, so it
   // never reaches this list. A per-state row carries its frozen unit between
@@ -596,16 +751,16 @@ export default function VennTruthTablePage({seoData, sectionsContent, introConte
   })
 
   const genericSections = [
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     stateRow('obj12', 'an-empty-expression-box', 'empty'),
 
-    plain('obj2', 'reading-the-two-views'),
+    withDemo(plain('obj2', 'reading-the-two-views')),
     stateRow('obj19', 'an-ordinary-mixed-column', 'general'),
 
-    plain('obj3', 'linking-a-row-to-a-region'),
+    withDemo(plain('obj3', 'linking-a-row-to-a-region')),
     stateRow('obj20', 'one-row-one-region', 'row-selected'),
 
-    plain('obj4', 'writing-expressions-the-parser-accepts'),
+    withDemo(plain('obj4', 'writing-expressions-the-parser-accepts')),
     stateRow('obj13', 'an-expression-that-will-not-parse', 'error'),
     stateRow('obj14', 'a-set-not-on-the-diagram', 'unknown-set'),
 
@@ -722,6 +877,7 @@ export default function VennTruthTablePage({seoData, sectionsContent, introConte
    />
    <br/>
    */}
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

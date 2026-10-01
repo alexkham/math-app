@@ -16,6 +16,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import { tableHeaders } from '@/app/styles/theme'
 import { renderMultiplesLine } from '../../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
 import { renderFactorSet } from '../../../../app/utils/illustrations/arithmetic/divisibility/factorSet'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import divisibilityTableDiagrams from '@/app/components/divisibility/divisibilityTableDiagrams'
 
 
 
@@ -636,8 +638,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    multiples: demoUnitFrame({
+      svg: divisibilityTableDiagrams.d3,
+      caption: 'The &#247;3 column: the multiples of 3 marked down the table',
+      text: 'Reading down the highlighted column, every third number is marked as divisible by 3: those marks are the multiples 3, 6, 9, 12, &#8230; produced by multiplying 3 out, an endless sequence spaced 3 apart. The factors of a number are finite; its multiples never stop. Pick any divisor column and read its multiples on the',
+      href: '/arithmetic/visual-tools/divisibility-table',
+      linkText: 'interactive divisibility table',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj6Table,
@@ -670,7 +688,7 @@ export default function FactorsPage({seoData, sectionsContent,
   introContent, obj6Table, obj10Table, summaryTable, faqQuestions,
   schemas, obj5SvgMultiples, obj6SvgSplit,
   fsFactorsObj1, fsFactorsObj2, fsFactorsObj3, fsFactorsObj4,
-  fsFactorsObj7, fsFactorsObj9, fsFactorsObj10}) {
+  fsFactorsObj7, fsFactorsObj9, fsFactorsObj10, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
   const figureWrapStyle = { maxWidth: '800px', margin: '20px auto' }
@@ -747,7 +765,9 @@ export default function FactorsPage({seoData, sectionsContent,
       <div key={'obj5-svg'} style={figureWrapStyle}
            dangerouslySetInnerHTML={{ __html: obj5SvgMultiples }} />,
       sectionsContent.obj5.afterFigure,
-    ]
+              <div key={'unit-multiples'} dangerouslySetInnerHTML={{ __html: demoUnits.multiples }} />,
+          `Common multiples, treated below, are the rows where two such columns are marked at once.`,
+        ]
 },
     // {
     //     id:'6',

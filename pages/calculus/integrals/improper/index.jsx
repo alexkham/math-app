@@ -12,6 +12,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 
 
 export async function getStaticProps(){
@@ -519,8 +521,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    unbounded: demoUnitFrame({
+      svg: functionLimitDiagrams['infinite-pos'],
+      caption: '1/x&#178; near x = 0: the integrand is unbounded',
+      text: 'Both probes, at &#8722;0.5 and 0.5, read 4, and moving them inward sends the values to infinity: the curve has a vertical asymptote at 0, so no rectangle of finite height can cover the region beside it. An integral across this point must stop short at t and let t approach 0 in a limit. Squeeze the probes toward the asymptote on the',
+      href: '/calculus/visual-tools/limit',
+      linkText: 'limit explorer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -539,7 +557,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -550,6 +568,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-unbounded'} dangerouslySetInnerHTML={{ __html: demoUnits.unbounded }} />,
+          `Both kinds of impropriety are handled the same way: replace the bad endpoint by a variable and take a limit.`,
         ]
     },
     {

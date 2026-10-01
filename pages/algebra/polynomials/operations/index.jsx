@@ -9,6 +9,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import polynomialMultiplicationDiagrams from '@/app/components/algebra/visualizers/polynomials/polynomialMultiplicationDiagrams'
 
 
 
@@ -714,8 +716,38 @@ const schemas = {
 
 
  
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    multiply: demoUnitFrame({
+      svg: polynomialMultiplicationDiagrams['ps-3x2'],
+      caption: '(x&#178; &#8722; 3x + 2)(2x + 5): six cells, four buckets',
+      text: 'Three terms times two terms fill a 3 &#215; 2 grid of six products, and the like-term buckets sort them by degree: 2x&#179;, then 5x&#178; &#8722; 6x&#178;, then &#8722;15x + 4x, then 10. Multiplying coefficients and adding exponents happens once per cell; combining like terms happens once per bucket. Fill a grid of any size on the',
+      href: '/algebra/visual-tools/polynomial-multiplication',
+      linkText: 'polynomial multiplication visualizer',
+    }),
+    special: demoUnitFrame({
+      svg: polynomialMultiplicationDiagrams['ps-cubes'],
+      caption: '(x + 1)(x&#178; &#8722; x + 1): the middle buckets cancel',
+      text: 'The six cells deliver x&#179;, &#8722;x&#178; + x&#178;, x &#8722; x and 1, and the two middle buckets sum to zero, leaving x&#179; + 1: the sum-of-cubes pattern is a grid whose cross terms cancel. Every special product is a grid with a memorable cancellation. Watch the buckets empty on the',
+      href: '/algebra/visual-tools/polynomial-multiplication',
+      linkText: 'polynomial multiplication visualizer',
+    }),
+    foil: demoUnitFrame({
+      svg: polynomialMultiplicationDiagrams['ps-foil'],
+      caption: 'First, Outer, Inner, Last: the four cells of (x + 2)(x + 3)',
+      text: 'The mnemonic names the four cells of a 2 &#215; 2 grid in a fixed order: First is the top-left x&#178;, Outer and Inner are the two x-cells that combine to 5x, Last is the constant 6. FOIL is the grid method for binomials, and it does not extend to longer factors, while the grid does. Compare FOIL with a 3 &#215; 2 grid on the',
+      href: '/algebra/visual-tools/polynomial-multiplication',
+      linkText: 'polynomial multiplication visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -735,7 +767,7 @@ const schemas = {
    }
 
 
-export default function OperationsPage({seoData, sectionsContent, introContent, obj4Table, obj7Table, summaryTable, faqQuestions, schemas}) {
+export default function OperationsPage({seoData, sectionsContent, introContent, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -772,6 +804,8 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-multiply'} dangerouslySetInnerHTML={{ __html: demoUnits.multiply }} />,
+          `Long division, treated next, runs this grid backwards one cell at a time.`,
         ]
     },
 
@@ -787,6 +821,8 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+                  <div key={'unit-special'} dangerouslySetInnerHTML={{ __html: demoUnits.special }} />,
+          `Recognising the pattern saves filling the grid, but the grid is why the pattern holds.`,
         ]
     },
     {
@@ -795,6 +831,8 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-foil'} dangerouslySetInnerHTML={{ __html: demoUnits.foil }} />,
+          `For anything larger than two binomials, return to the grid.`,
         ]
     },
     {

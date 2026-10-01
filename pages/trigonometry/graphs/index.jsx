@@ -1038,6 +1038,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
+import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 
 
 export async function getStaticProps(){
@@ -1723,8 +1726,176 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  // Authored figures for the four-parameter sections. curveFeature draws the
+  // curve; the specs below are data only. Package doc:
+  // app/utils/illustrations/trigonometry/curves/curveFeature.md
+  const cfGeneralForm = {
+    kind: 'single', title: 'The four parameters of y = A sin(Bx - C) + D',
+    xRange: [-0.5, 2 * Math.PI + 0.9], yRange: [-2.6, 5.2], panelHeight: 260, panelWidth: 500,
+    yTicks: [{ at: 2, label: 'D' }],
+    panels: [{
+      curves: [{ fn: 'sin', A: 2, B: 1, C: Math.PI / 2, D: 2, color: 'primary' }],
+      marks: [
+        { type: 'midline', at: 2, label: 'D — midline', labelAt: 2 * Math.PI + 0.85, labelAnchor: 'end', color: 'muted' },
+        { type: 'bracket', orient: 'v', at: Math.PI + 0.15, from: 2, to: 4, label: 'A', color: 'resultStroke', labelSide: 'right' },
+        { type: 'bracket', orient: 'h', y: -1.75, from: Math.PI / 2, to: Math.PI / 2 + 2 * Math.PI, label: 'B — one period', color: 'secondary' },
+        { type: 'dimension', y: 4.7, from: 0, to: Math.PI / 2, label: 'C — shift', color: 'negation' },
+        { type: 'points', at: [Math.PI / 2], y: [2], color: 'negation', r: 4 },
+      ],
+    }],
+  };
+  const cfAmplitude = {
+    kind: 'pair', title: 'A = 1 against A = 3', xRange: [0, 2 * Math.PI], yRange: [-3.6, 3.6],
+    yTicks: [{ at: 3, label: '3' }, { at: 1, label: '1' }, { at: -1, label: '−1' }, { at: -3, label: '−3' }],
+    panels: [
+      { title: 'y = sin x', curves: [{ fn: 'sin', A: 1 }],
+        marks: [{ type: 'midline', at: 0, color: 'muted' },
+                { type: 'bracket', orient: 'v', at: Math.PI / 2, from: 0, to: 1, label: '1', color: 'resultStroke' }] },
+      { title: 'y = 3 sin x', curves: [{ fn: 'sin', A: 3 }],
+        marks: [{ type: 'midline', at: 0, color: 'muted' },
+                { type: 'bracket', orient: 'v', at: Math.PI / 2, from: 0, to: 3, label: '3', color: 'resultStroke' }] },
+    ],
+  };
+  const cfPeriod = {
+    kind: 'pair', title: 'B = 1 against B = 2', xRange: [0, 2 * Math.PI], yRange: [-1.5, 1.5],
+    panels: [
+      { title: 'y = sin x   (B = 1)', curves: [{ fn: 'sin', B: 1 }],
+        marks: [{ type: 'bracket', orient: 'h', y: -1.2, from: 0, to: 2 * Math.PI, label: 'one cycle = 2π', color: 'secondary' }] },
+      { title: 'y = sin 2x   (B = 2)', curves: [{ fn: 'sin', B: 2 }],
+        marks: [{ type: 'bracket', orient: 'h', y: -1.2, from: 0, to: Math.PI, label: 'one cycle = π', color: 'secondary' },
+                { type: 'vline', at: Math.PI, color: 'hairline' }] },
+    ],
+  };
+  const cfPhaseShift = {
+    kind: 'pair', title: 'The shift is C/B, not C', xRange: [0, 2 * Math.PI], yRange: [-1.5, 2.3],
+    panels: [
+      { title: 'y = sin 2x', curves: [{ fn: 'sin', B: 2 }],
+        marks: [{ type: 'points', at: [0], labels: ['start'], color: 'muted' }] },
+      { title: 'y = sin(2x − π)', curves: [{ fn: 'sin', B: 2, C: Math.PI }],
+        marks: [
+          { type: 'points', at: [Math.PI / 2], labels: ['start'], color: 'negation' },
+          { type: 'dimension', y: 1.75, from: 0, to: Math.PI / 2, label: 'π/2  =  C/B', color: 'negation' },
+          { type: 'note', at: Math.PI + 0.3, y: -1.25, text: 'not π', anchor: 'start', color: 'muted', size: 11 },
+        ] },
+    ],
+  };
+  const cfVerticalShift = {
+    kind: 'pair', title: 'D = 0 against D = 2', xRange: [0, 2 * Math.PI], yRange: [-1.8, 3.8],
+    yTicks: [{ at: 0, label: '0' }, { at: 2, label: '2' }],
+    panels: [
+      { title: 'y = sin x   (D = 0)', curves: [{ fn: 'sin' }],
+        marks: [{ type: 'midline', at: 0, label: 'y = 0', labelAt: 2 * Math.PI, labelAnchor: 'end', color: 'muted' },
+                { type: 'bracket', orient: 'v', at: Math.PI / 2, from: 0, to: 1, label: '1', color: 'resultStroke' }] },
+      { title: 'y = sin x + 2   (D = 2)', curves: [{ fn: 'sin', D: 2 }],
+        marks: [{ type: 'midline', at: 2, label: 'y = 2', labelAt: 2 * Math.PI, labelAnchor: 'end', color: 'muted' },
+                { type: 'bracket', orient: 'v', at: Math.PI / 2, from: 2, to: 3, label: '1', color: 'resultStroke' }] },
+    ],
+  };
+  const cfEquationFromGraph = {
+    kind: 'single', title: 'Reading A, B, C, D off a graph in order',
+    xRange: [-0.4, 2 * Math.PI + 0.6], yRange: [-2.4, 5.0], panelHeight: 250, panelWidth: 500,
+    panels: [{
+      curves: [{ fn: 'sin', A: 2, B: 1, C: Math.PI / 2, D: 1 }],
+      marks: [
+        { type: 'points', at: [Math.PI, 2 * Math.PI], y: [3, -1], labels: ['1 · max = 3', '2 · min = −1'], color: 'resultStroke' },
+        { type: 'midline', at: 1, label: '3 · midline  D = 1', labelAt: 0.3, labelAnchor: 'start', color: 'muted' },
+        { type: 'bracket', orient: 'v', at: Math.PI + 1.15, from: 1, to: 3, label: '4 · |A| = 2', color: 'resultStroke', labelSide: 'right' },
+        { type: 'bracket', orient: 'h', y: -1.95, from: Math.PI / 2, to: Math.PI / 2 + 2 * Math.PI, label: '5 · period 2π   →   B = 1', color: 'secondary' },
+      ],
+    }],
+  };
+  const cfKeyPoints = {
+    kind: 'single', title: 'Five points fix one period',
+    xRange: [-0.35, 2 * Math.PI + 0.35], yRange: [-1.75, 1.75], panelHeight: 220, panelWidth: 480,
+    panels: [{
+      curves: [{ fn: 'sin', emphasis: true }],
+      marks: [
+        { type: 'vline', at: Math.PI / 2, color: 'hairlineLight' },
+        { type: 'vline', at: Math.PI, color: 'hairlineLight' },
+        { type: 'vline', at: 3 * Math.PI / 2, color: 'hairlineLight' },
+        { type: 'midline', at: 0, color: 'muted' },
+        { type: 'points', at: [0, Math.PI / 2, Math.PI, 3 * Math.PI / 2, 2 * Math.PI],
+          labels: ['zero', 'max', 'zero', '', 'zero'], color: 'resultStroke', r: 4.5 },
+        { type: 'note', at: 3 * Math.PI / 2, y: -1.32, text: 'min', anchor: 'middle', color: 'resultStroke' },
+        { type: 'bracket', orient: 'h', y: 1.5, from: 0, to: Math.PI / 2, label: 'period / 4', color: 'secondary' },
+      ],
+    }],
+  };
+
+  const demoUnits = {
+    sinGraph: demoUnitFrame({
+      svg: trigFunctionsGraphDiagrams.sin,
+      caption: 'y = sin x, marker at 60&#176;',
+      text: 'The wave starts at the origin, peaks at 1 a quarter of the way through the cycle, crosses zero at the half, bottoms at &#8722;1 at three quarters and closes the cycle at 2&#960;; the marker at 60&#176; reads &#8730;3/2 &#8776; 0.866. Nothing on the curve leaves the band between &#8722;1 and 1. Slide the marker through a full period on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+    cosGraph: demoUnitFrame({
+      svg: trigFunctionsGraphDiagrams.cos,
+      caption: 'y = cos x, marker at 60&#176;',
+      text: 'The same wave, started from its maximum: cos&#8201;0 = 1, zero at &#960;/2, minimum at &#960;. The marker at 60&#176; reads exactly 1/2, and the whole curve is the sine curve pushed &#960;/2 to the left. Compare the two curves at the same marker on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+    tanGraph: demoUnitFrame({
+      svg: trigFunctionsGraphDiagrams.tan,
+      caption: 'y = tan x, asymptotes &#960; apart',
+      text: 'Each branch climbs from &#8722;&#8734; to +&#8734; between two vertical asymptotes, which stand exactly where the cosine is zero; the marker at 60&#176; reads &#8730;3 &#8776; 1.732. The branches repeat every &#960;, half the period of sine and cosine, and there is no maximum or minimum anywhere. Approach an asymptote with the marker on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+    reciprocalGraphs: demoUnitFrame({
+      svg: [trigFunctionsGraphDiagrams.csc, trigFunctionsGraphDiagrams.sec, trigFunctionsGraphDiagrams.cot],
+      caption: 'y = csc x, y = sec x, y = cot x at 60&#176;',
+      text: 'The cosecant and secant curves are U-shaped branches that open away from the axis, each asymptote standing at a zero of the function underneath it, and each branch turning around where that function peaks; the cotangent falls where the tangent climbs and vanishes where the tangent is undefined. At 60&#176; the three markers read 1.155, 2 and 0.577. See each curve drawn over its parent on the',
+      href: '/trigonometry/visual-tools/functions-graphs',
+      linkText: 'trigonometric functions graphs',
+    }),
+    generalForm: demoUnitFrame({
+      svg: renderCurveFeature(cfGeneralForm),
+      caption: 'One wave, four parameters',
+      text: 'Each parameter owns one feature and leaves the others alone. <em>A</em> sets the distance from the midline to a peak, <em>B</em> sets how much horizontal room one cycle takes, <em>C</em> slides the cycle sideways, and <em>D</em> raises or lowers the line the wave oscillates about.',
+    }),
+    amplitude: demoUnitFrame({
+      svg: renderCurveFeature(cfAmplitude),
+      caption: 'A = 1 against A = 3',
+      text: 'Both waves cross zero at the same places and close a cycle over the same interval &#8212; only the height changes. Tripling <em>A</em> triples the distance from the midline to the peak and moves nothing else.',
+    }),
+    periodContrast: demoUnitFrame({
+      svg: renderCurveFeature(cfPeriod),
+      caption: 'B = 1 against B = 2',
+      text: 'Doubling <em>B</em> halves the horizontal room one cycle needs, so two complete cycles now fit where one did. The height is untouched: both waves still run between &#8722;1 and 1.',
+    }),
+    phaseShift: demoUnitFrame({
+      svg: renderCurveFeature(cfPhaseShift),
+      caption: 'Where the cycle starts',
+      text: 'The argument 2<em>x</em> &#8722; &#960; vanishes at <em>x</em> = &#960;/2, so that is where the standard cycle begins &#8212; half of &#960;, not &#960;. Reading <em>C</em> straight off as the shift is the common error.',
+    }),
+    verticalShift: demoUnitFrame({
+      svg: renderCurveFeature(cfVerticalShift),
+      caption: 'D = 0 against D = 2',
+      text: 'Adding 2 lifts the midline from <em>y</em> = 0 to <em>y</em> = 2 and carries the whole wave with it. The bracket from midline to peak is the same length in both panels: <em>D</em> does not touch the amplitude.',
+    }),
+    equationFromGraph: demoUnitFrame({
+      svg: renderCurveFeature(cfEquationFromGraph),
+      caption: 'Five readings, in order',
+      text: 'The order is forced. Maximum and minimum come first because everything else is built from them: their average is the midline, half their difference is the amplitude, and only then does the horizontal length of one cycle give <em>B</em>.',
+    }),
+    keyPoints: demoUnitFrame({
+      svg: renderCurveFeature(cfKeyPoints),
+      caption: 'One period, four equal parts',
+      text: 'Dividing a period into quarters puts five points on the curve at heights midline, maximum, midline, minimum, midline. Those five fix the shape; the curve is drawn through them freehand.',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj4Table,
@@ -1745,7 +1916,7 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
     }
    }
 
-export default function GraphsPage({seoData,sectionsContent , introContent, obj4Table, obj9Table, obj10Table, obj11Table, faqQuestions, schemas}) {
+export default function GraphsPage({seoData,sectionsContent , introContent, obj4Table, obj9Table, obj10Table, obj11Table, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1765,6 +1936,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-sinGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.sinGraph }} />,
+          `Every property of the sine function has a visible counterpart on this curve.`,
         ]
     },
     {
@@ -1773,6 +1946,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-cosGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.cosGraph }} />,
+          `The two curves are one shape read from two starting points, which is the cofunction identity in graphical form.`,
         ]
     },
     {
@@ -1781,6 +1956,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-tanGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.tanGraph }} />,
+          `The asymptotes and the half period are what set tangent apart from the two bounded waves.`,
         ]
     },
 
@@ -1796,6 +1973,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+                  <div key={'unit-reciprocalGraphs'} dangerouslySetInnerHTML={{ __html: demoUnits.reciprocalGraphs }} />,
+          `Inverting a function swaps its zeros for asymptotes and its extremes for turning points, and nothing else changes.`,
         ]
     },
     {
@@ -1804,6 +1983,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-generalForm'} dangerouslySetInnerHTML={{ __html: demoUnits.generalForm }} />,
+          `The rest of this page takes the four parameters one at a time, in the order the form presents them.`,
         ]
     },
     {
@@ -1812,6 +1993,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-amplitude'} dangerouslySetInnerHTML={{ __html: demoUnits.amplitude }} />,
+          `Amplitude is a vertical measurement only; it says nothing about how often the wave repeats.`,
         ]
     },
     {
@@ -1820,6 +2003,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-periodContrast'} dangerouslySetInnerHTML={{ __html: demoUnits.periodContrast }} />,
+          `Period and amplitude are independent: changing one leaves the other exactly where it was.`,
         ]
     },
     {
@@ -1828,6 +2013,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-phaseShift'} dangerouslySetInnerHTML={{ __html: demoUnits.phaseShift }} />,
+          `Factoring $B$ out of the argument makes the shift readable without dividing.`,
         ]
     },
 
@@ -1838,6 +2025,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-verticalShift'} dangerouslySetInnerHTML={{ __html: demoUnits.verticalShift }} />,
+          `With the midline located, the maximum and minimum follow immediately as $D + |A|$ and $D - |A|$.`,
           <div
             key={'obj9-table'}
             style={tableWrapStyle}
@@ -1872,6 +2061,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <div key={'unit-equationFromGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.equationFromGraph }} />,
+          `Reading in this order matters: the amplitude cannot be computed until the midline is known.`,
           <div
             key={'obj10-table'}
             style={tableWrapStyle}
@@ -1887,6 +2078,8 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <div key={'unit-keyPoints'} dangerouslySetInnerHTML={{ __html: demoUnits.keyPoints }} />,
+          `The same five-point skeleton works for cosine and tangent; only the pattern of heights changes.`,
           <div
             key={'obj11-table'}
             style={tableWrapStyle}

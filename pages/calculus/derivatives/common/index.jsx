@@ -12,6 +12,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
 
 
 export async function getStaticProps(){
@@ -698,8 +700,45 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    power: demoUnitFrame({
+      svg: functionDerivativeDiagrams.quadratic,
+      caption: 'f(x) = x&#178; and f&#8242;(x) = 2x, marked at x = 1',
+      text: 'The upper curve is the function, the lower one its derivative, and at x = 1 the marker reads f&#8242;(1) = 2, the slope of the parabola there. The derivative is a straight line because bringing the exponent down leaves degree one: that is the power rule drawn out. Move the marker and watch the slope of the parabola track the height of the line on the',
+      href: '/calculus/visual-tools/derivative',
+      linkText: 'derivative explorer',
+    }),
+    trig: demoUnitFrame({
+      svg: functionDerivativeDiagrams.sine,
+      caption: 'f(x) = sin x and f&#8242;(x) = cos x, marked at x = 1',
+      text: 'The derivative curve peaks where the sine climbs fastest, at x = 0, and crosses zero where the sine tops out, at &#960;/2: the cosine is the sine&#8217;s slope read off point by point. At x = 1 the marker reads cos 1 &#8776; 0.54. Slide the marker to a peak of the sine and watch the derivative hit zero on the',
+      href: '/calculus/visual-tools/derivative',
+      linkText: 'derivative explorer',
+    }),
+    exp: demoUnitFrame({
+      svg: functionDerivativeDiagrams.exponential,
+      caption: 'f(x) = e&#710;x and f&#8242;(x) = e&#710;x coincide',
+      text: 'The two curves lie exactly on top of each other: at every x the slope of e&#710;x equals its height, so at x = 1 both readings are e &#8776; 2.72. No other function has this property, which is why e is the natural base. Check any point and see the two readouts agree on the',
+      href: '/calculus/visual-tools/derivative',
+      linkText: 'derivative explorer',
+    }),
+    log: demoUnitFrame({
+      svg: functionDerivativeDiagrams.logarithm,
+      caption: 'f(x) = ln x and f&#8242;(x) = 1/x, marked at x = 1',
+      text: 'The logarithm climbs steeply near zero and flattens as x grows, and its derivative curve 1/x records exactly that: large on the left, small on the right, equal to 1 at x = 1 where the marker sits. Move the marker toward zero and watch the slope reading run away on the',
+      href: '/calculus/visual-tools/derivative',
+      linkText: 'derivative explorer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -718,7 +757,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -739,6 +778,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj2.content,
           <div key={'obj2-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+                  <div key={'unit-power'} dangerouslySetInnerHTML={{ __html: demoUnits.power }} />,
+          `Every polynomial derivative is this picture repeated term by term.`,
         ]
     },
     {
@@ -755,6 +796,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-trig'} dangerouslySetInnerHTML={{ __html: demoUnits.trig }} />,
+          `The quarter-period shift between a function and its derivative is the whole content of these two formulas.`,
         ]
     },
     {
@@ -773,6 +816,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-exp'} dangerouslySetInnerHTML={{ __html: demoUnits.exp }} />,
+          `Every other exponential differs from its derivative only by the constant factor ln a.`,
         ]
     },
     {
@@ -781,6 +826,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-log'} dangerouslySetInnerHTML={{ __html: demoUnits.log }} />,
+          `The reciprocal derivative is what makes the logarithm the antiderivative of 1/x.`,
         ]
     },
     {

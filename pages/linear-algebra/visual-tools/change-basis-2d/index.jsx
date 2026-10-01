@@ -499,6 +499,9 @@ import { SCENARIOS as CB_SCENARIOS } from '../../../../app/components/linear-alg
 import changeBasisDiagrams, { groupOf } from '../../../../app/components/linear-algebra copy/r2-visualizers/change-basis/changeBasisDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -948,8 +951,111 @@ That is why $\\det B \\neq 0$ is the precondition for everything else on this pa
 
 
 
+  const instructions = [
+    'The **Scenarios** panel (03) on the left loads ten preset bases in four groups, **Natural**, **Non-orth**, **Orientation** and **Degenerate**; the explanation card describes the one selected. [Learn more about the preset scenarios](!#preset-scenarios)',
+    'The canvas shows the gray standard grid, the dashed basis grid in the colors of $b_1$ (teal) and $b_2$ (purple), and the amber vector $v$, which stays put while the basis changes. [Learn more about getting started](!#getting-started)',
+    'Drag the teal $b_1$ or purple $b_2$ handle to reshape the basis; the basis grid tilts and stretches, and the line under $B^{-1}$ reports orthonormal, orthogonal, oblique or not a basis. [Learn more about dragging the basis vectors](!#dragging-the-basis-vectors)',
+    'Drag the amber $v$ handle to move the vector; the dashed decomposition legs along $b_1$ and $b_2$ rebuild to its tip. [Learn more about moving the vector v](!#moving-the-vector-v)',
+    'The layer chips **std grid**, **basis grid**, **decomposition** and **labels** show or hide each layer of the canvas. [Learn more about the layer toggles](!#display-layer-toggles)',
+    'The **Coordinates of v** card (01) gives $v_{std}$ and $v_B$ side by side and the combination $v = c_1 \\cdot b_1 + c_2 \\cdot b_2$; dashes and a red strip mean the basis is singular. [Learn more about the coordinates card](!#the-coordinates-card)',
+    'The **Change-of-basis matrix** card (02) shows $B$ with $b_1$ and $b_2$ as columns, its inverse $B^{-1}$, and $\\det B$ with the classification. [Learn more about the basis matrix and its inverse](!#the-basis-matrix-and-its-inverse)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real ChangeBasis tool
+     (opens on the standard basis, v = (2.5, 1.5)). Handles are the hit circles
+     circle[data-handle="b1" | "b2" | "v"]; drags are in screen px at scale 0.6
+     (desktop layout: 26.6 px per unit). */
+  const demos = {
+    'dragging-the-basis-vectors': {
+      title: 'Reshaping the basis by hand',
+      script: [
+        { say: `DRAG b₁ → (1, 1)
+Basis grid tilts. v stays put.
+(c₁, c₂) = (2.5, −1). det B = 1.` },
+        { drag: 'circle[data-handle="b1"]', dx: 0.106, dy: -26.6, ms: 1400 },
+        { click: 'circle[data-handle="b1"]' },
+        { wait: 2600 },
+        { say: `DRAG b₂ → (−1, 1)
+Right angle again, length √2.
+det B = 2. Orthogonal (not unit).` },
+        { drag: 'circle[data-handle="b2"]', dx: -26.6, dy: -0.106, ms: 1400 },
+        { click: 'circle[data-handle="b2"]' },
+        { wait: 2600 },
+        { say: `DRAG b₂ → (1, 1.5)
+Close to b₁. Cells flatten.
+det B = 0.5. (c₁, c₂) ≈ (4.5, −2).` },
+        { drag: 'circle[data-handle="b2"]', dx: 53.094, dy: -13.406, ms: 1600 },
+        { click: 'circle[data-handle="b2"]' },
+        { wait: 2800 },
+        { say: `TAP Collinear (bad)
+b₂ = 2·b₁. det B = 0.
+B⁻¹ and (c₁, c₂): dashes. Not a basis.` },
+        { click: { button: 'Collinear (bad)' } },
+        { wait: 2800 },
+      ],
+    },
+    'moving-the-vector-v': {
+      title: 'Same vector, new address',
+      script: [
+        { say: `TAP Skewed
+Parallelogram cells.
+v = (2.5, 1.5) → (c₁, c₂) = (2.63, 0.45).` },
+        { click: { button: 'Skewed' } },
+        { wait: 2600 },
+        { say: `DRAG v → (1.7, 1.8)
+Tip lands on a basis-grid corner.
+v = 2·b₁ + 1·b₂: (c₁, c₂) = (2, 1).` },
+        { drag: 'circle[data-handle="v"]', dx: -21.014, dy: -8.14, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2800 },
+        { say: `UNCHECK std grid
+Only the basis grid left.
+Legs run 2 cells along b₁, 1 along b₂.` },
+        { click: { css: 'label.r2-chip', nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP Rotated 45°
+v does not move: still (1.7, 1.8).
+New address: (c₁, c₂) ≈ (2.5, 0.1).` },
+        { click: { button: 'Rotated 45°' } },
+        { wait: 2800 },
+      ],
+    },
+    'preset-scenarios': {
+      title: 'One preset from each group',
+      script: [
+        { say: `TAP Rotated 30°
+Unit axes, right angle.
+B⁻¹ = Bᵀ. (c₁, c₂) = (2.92, 0.05).` },
+        { click: { button: 'Rotated 30°' } },
+        { wait: 2600 },
+        { say: `TAP Stretched axes
+B diagonal (2, 0.5). B⁻¹ = (0.5, 2).
+(c₁, c₂) = (1.25, 3): shrinks along b₁.` },
+        { click: { button: 'Stretched axes' } },
+        { wait: 2600 },
+        { say: `TAP Obtuse basis
+Axes 56.6° apart. det B = 0.91.
+Valid basis: (c₁, c₂) = (2.25, 0.82).` },
+        { click: { button: 'Obtuse basis' } },
+        { wait: 2600 },
+        { say: `TAP Y flipped
+b₂ points down. det B = −1.
+c₂ flips: (c₁, c₂) = (2.5, −1.5).` },
+        { click: { button: 'Y flipped' } },
+        { wait: 2600 },
+        { say: `TAP Axes swapped
+b₁ = (0, 1), b₂ = (1, 0). det B = −1.
+Coordinates swap: (c₁, c₂) = (1.5, 2.5).` },
+        { click: { button: 'Axes swapped' } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
         relatedTools: getRelatedTools('linear-algebra-change-basis-2d'),
          sectionsContent,
          stateUnits,
@@ -973,7 +1079,22 @@ That is why $\\det B \\neq 0$ is the precondition for everything else on this pa
     }
    }
 
-export default function ChangeBasis2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+export default function ChangeBasis2DPage({ instructions, demos,seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ChangeBasis explanationOverride={explanationOverride}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -996,9 +1117,9 @@ export default function ChangeBasis2DPage({seoData, sectionsContent, stateUnits,
   const genericSections=[
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'dragging-the-basis-vectors'),
-    plain('obj3', 'moving-the-vector-v'),
-    plain('obj6', 'preset-scenarios'),
+    withDemo(plain('obj2', 'dragging-the-basis-vectors')),
+    withDemo(plain('obj3', 'moving-the-vector-v')),
+    withDemo(plain('obj6', 'preset-scenarios')),
     stateRow('obj12', 'natural-bases', 'natural'),
     stateRow('obj13', 'non-orthogonal-bases', 'nonorth'),
     stateRow('obj14', 'orientation-reversed', 'special'),
@@ -1066,6 +1187,10 @@ export default function ChangeBasis2DPage({seoData, sectionsContent, stateUnits,
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Change of Basis</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
    <ChangeBasis explanationOverride={explanationOverride}/>

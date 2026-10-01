@@ -619,6 +619,10 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
+import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
+import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 
 
 export async function getStaticProps(){
@@ -1109,8 +1113,38 @@ distributions, averages, variability, and comparison of outcomes.
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_outcomes_0: demoUnitFrame({
+      svg: coinSampleSpaceDiagrams.none,
+      caption: 'Three tosses labelled by the number of heads',
+      text: 'The outcomes are sequences of heads and tails, not numbers; the labels attach a number to each cell, the count of heads, and that assignment is a random variable. Eight outcomes collapse to four numerical values. Select a value and see which outcomes it collects on the',
+      href: '/probability/visual-tools/coin-toss',
+      linkText: 'coin toss sample space explorer',
+    }),
+    u_types_1: demoUnitFrame({
+      svg: continuousPdfDiagrams['normal-pdf'],
+      caption: 'Normal density: a continuous random variable',
+      text: 'A continuous random variable spreads its probability along the line, so it is described by a density curve and the probability of any exact value is zero; a discrete variable would be described by separate bars instead. The area under this bell is 1. Toggle between the density and its CDF on the',
+      href: '/probability/visual-tools/probability-function/continuous',
+      linkText: 'PDF visualizer',
+    }),
+    u_probability_2: demoUnitFrame({
+      svg: discreteCdfDiagrams.binomial,
+      caption: 'Binomial CDF, n = 10, p = 0.5: the statement X &le; k',
+      text: 'A statement such as X &le; k is an event, and its probability is read straight off the CDF as the height of the step at k. Statements such as X = k or a &lt; X &le; b are differences of such heights. Read these probabilities from the staircase on the',
+      href: '/probability/visual-tools/cdf/discrete',
+      linkText: 'discrete CDF explorer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1135,7 +1169,7 @@ export default function RandomVariablesPage({
   faqQuestions,
   schemas,
   typesTable,
-  summaryTable,
+  summaryTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1156,6 +1190,8 @@ export default function RandomVariablesPage({
         link:'',
         content:[
             sectionsContent.outcomes.content,
+                  <div key={'unit-u_outcomes_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_outcomes_0 }} />,
+          `The definition makes this assignment precise.`,
         ]
     },
     {
@@ -1184,6 +1220,8 @@ export default function RandomVariablesPage({
             sectionsContent.types.content,
             <div key={'types-table'} style={tableWrapStyle}
                  dangerouslySetInnerHTML={{ __html: typesTable }} />,
+                  <div key={'unit-u_types_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_types_1 }} />,
+          `Probability statements about such variables are written next.`,
         ]
     },
     {
@@ -1192,6 +1230,8 @@ export default function RandomVariablesPage({
         link:'',
         content:[
             sectionsContent.probability.content,
+                  <div key={'unit-u_probability_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_probability_2 }} />,
+          `Why this numerical language matters is the next question.`,
         ]
     },
     {

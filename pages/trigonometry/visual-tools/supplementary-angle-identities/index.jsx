@@ -498,6 +498,9 @@ import SupplementaryAngleExplorer from '../../../../app/components/trigonometry/
 import supplementaryAngleDiagrams from '../../../../app/components/trigonometry/identities/supplementary-angle/supplementaryAngleDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -805,6 +808,8 @@ For the partner family, see the **complementary angle identities visualizer**.`,
 
 [Opposite Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) — Behavior of trig functions at $-\\theta$ (reflection across the x-axis).
 
+[Shift Identities](!/trigonometry/visual-tools/shift-identities) — Rotations rather than reflections: the angle turned by $\\pi$ or $\\pi/2$, which flips signs or swaps sine and cosine.
+
 [Double Angle Identities](!/trigonometry/visual-tools/double-angle-identities) — Identities for $2\\theta$ that build on the supplementary and complementary results.
 
 [Half Angle Identities](!/trigonometry/visual-tools/half-angle-identities) — Identities for $\\theta/2$, completing the elementary identity family.
@@ -920,6 +925,19 @@ The reflected triangle appears in its own colours: teal for the horizontal leg, 
 The green arc traces that total. At $\\theta = 35°$ it reads $145°$. In radians this is $\\pi - \\theta$ — so $P'$ is not merely some mirrored point, it is the terminal point of the supplementary angle. Everything before this step was construction; this is where the construction acquires a name.`,
       link: '',
     },
+    obj24: {
+      title: `Playing the Reflection Proof`,
+      content: `On the **sin** and **cos** tabs, a control bar under the scene runs the reflection proof. It has six stages, and the counter at its right reads **Step n of 6**.
+
+**Play** advances one stage every few seconds until the proof is complete; while it runs the button reads **Pause**. **Next ›** and **‹ Prev** move one stage at a time and stop playback, **Reset** returns to the empty setup, and the speed menu sets how fast Play advances.
+
+Each stage adds one thing to the unit-circle scene: the angle $\\theta$ and its point, the mirror along the $y$-axis, the gap from the point to the mirror, the reflected point, the new angle $\\pi - \\theta$ read off at that point, and finally the two sets of coordinates side by side. The log beside the scene names each stage as it appears; click an earlier entry to jump back to it.
+
+The six stages are identical on both tabs — only the coordinate being read changes. Run the sine tab and watch the height survive the reflection; run the cosine tab and watch the horizontal coordinate change sign. The full treatment of every stage, with its frozen figure, starts at [Reflection Proof, Step 1](!#reflection-proof-step-1-setup).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
     obj23: {
       title: `Reflection Proof, Step 6: Compare Coordinates`,
       content: `The last step names the same point twice and equates the two descriptions.`,
@@ -971,6 +989,117 @@ Both geometric identities fall out of this single comparison, which is why the t
       text: 'One point named twice — once by reflection, once as the terminal point of π − θ.' }),
   };
 
+  const instructions = [
+    'The six **tabs** switch between the supplementary identities for $\\sin$, $\\cos$, $\\tan$, $\\csc$, $\\sec$ and $\\cot$ at $\\pi - \\theta$. Sine and cosine open the geometric reflection view; the other four open a derivation card. [Learn more about the two views](!#switching-between-geometric-and-derived-views)',
+    'Drag the **$\\theta$ slider** to change the angle; every point, coordinate, formula and value updates as you drag. [Learn more about getting started](!#getting-started-with-the-explorer)',
+    'On the sin and cos tabs, press **Play** to run the six-stage reflection proof, or step with **Next ›** and **‹ Prev**; **Reset** returns to the setup. [Learn more about playing the proof](!#playing-the-reflection-proof)',
+    'On a derivation card, the **identity bar** states the result with $\\pi - \\theta$ in red, and the derivation rows show the algebra from the sine and cosine results. [Learn more about the identity bar](!#reading-the-identity-bar-and-derivation-steps)',
+    'The **See … proof →** buttons on a derivation card jump to the geometric identity it is built from. [Learn more about tracing sources](!#tracing-identities-back-to-their-source)',
+    'The **formula table** lists all six identities with a **flips** or **unchanged** badge and the value at $\\theta$; click a row to open that identity. [Learn more about the table](!#using-the-formula-comparison-table)',
+    'The two **metric cards** compute both sides of the identity at the current angle — they must match to three decimals. [Learn more about the numerical check](!#verifying-identities-numerically)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real explorer, with
+     syncQuery={false} so demos never touch the page URL. Range 0 = the
+     angle slider of the visible card. Tab = nth 0, table row = nth 1. */
+  const demos = {
+    'playing-the-reflection-proof': {
+      title: 'The reflection proof, step by step',
+      script: [
+        { say: `DRAG θ → 60°
+Scene redraws at the new angle.
+Proof works for every angle.` },
+        { slide: { range: 0 }, to: 60, ms: 1400 },
+        { wait: 2000 },
+        { say: `TAP Next › — STEP 1
+Setup.
+Point P at angle θ on the unit circle.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › — STEP 2
+Introduce the mirror.
+The y-axis becomes the mirror line.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › — STEP 3
+Measure the gap to the mirror.
+Horizontal distance from P to the y-axis.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next › ×3
+Reflect → read the new angle π − θ → compare coordinates.
+Proved: sin(π − θ) = sin θ.` },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next ›', exact: true } },
+        { wait: 900 },
+        { wait: 1800 },
+      ],
+    },
+    'reading-the-identity-bar-and-derivation-steps': {
+      title: 'Derived identities',
+      script: [
+        { say: `TAP tan(π − θ)
+No animation. Derived card.
+tan(π − θ) = −tan θ.` },
+        { click: { button: 'tan(π − θ)', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG θ → 55°
+Verify cards: both sides equal.
+Live at every angle.` },
+        { slide: { range: 0 }, to: 55, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP See sin(π − θ) proof →
+Source button.
+Jumps to the proof it is built from.` },
+        { click: { button: 'See sin(π − θ) proof →' } },
+        { wait: 2400 },
+        { say: `TAP csc(π − θ)
+csc(π − θ) = csc θ.
+Reciprocal of the sine result.` },
+        { click: { button: 'csc(π − θ)', exact: true } },
+        { wait: 2400 },
+        { say: `TAP cot(π − θ)
+cot(π − θ) = −cot θ.
+Built from the tangent result.` },
+        { click: { button: 'cot(π − θ)', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'using-the-formula-comparison-table': {
+      title: 'The formula table',
+      script: [
+        { say: `TAP TABLE ROW cos(π − θ)
+Row tap = tab tap.
+cos(π − θ) = −cos θ.` },
+        { click: { button: 'cos(π − θ)', nth: 1 } },
+        { wait: 2600 },
+        { say: `DRAG θ → 25°
+Value column updates.
+All six at one angle.` },
+        { slide: { range: 0 }, to: 25, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW tan(π − θ)
+tan(π − θ) = −tan θ.
+Sign flips: sin unchanged over cos flipped.` },
+        { click: { button: 'tan(π − θ)', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW sec(π − θ)
+sec(π − θ) = −sec θ.
+Reciprocal of the cosine result.` },
+        { click: { button: 'sec(π − θ)', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP TABLE ROW sin(π − θ)
+sin(π − θ) = sin θ.
+Back to the animated proof.` },
+        { click: { button: 'sin(π − θ)', nth: 1 } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   const explanations = {
     sin: { steps: [
       `Place point P on the unit circle at angle θ from the x-axis. Drop perpendiculars: horizontal leg = cos θ, vertical leg = sin θ. [Learn more about the setup](!#reflection-proof-step-1-setup) · [The sine identity](!#the-sine-supplementary-identity)`,
@@ -1003,6 +1132,8 @@ Both geometric identities fall out of this single comparison, which is why the t
       faqQuestions,
       schemas,
       explanations,
+      instructions,
+      demos,
       stateUnits,
       seoData: {
         title: "Supplementary Angle Identities Tool | Learn Math Class",
@@ -1019,7 +1150,7 @@ Both geometric identities fall out of this single comparison, which is why the t
   }
 }
 
-export default function SupplementaryAngleIdentitiesPage({
+export default function SupplementaryAngleIdentitiesPage({ instructions, demos,
   relatedTools, seoData,
   sectionsContent,
   introContent,
@@ -1028,6 +1159,20 @@ export default function SupplementaryAngleIdentitiesPage({
   explanations,
   stateUnits
 }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <SupplementaryAngleExplorer explanations={explanations} syncQuery={false}/>
+    </ToolDemoPlayer>
+  )
+
 
   // Superseded by the explicit slug rows below (Line 1 v5): the auto-map cannot
   // carry slug ids or illustration units.
@@ -1041,9 +1186,10 @@ export default function SupplementaryAngleIdentitiesPage({
   const genericSections = [
     { id: 'getting-started-with-the-explorer',            title: sectionsContent.obj1.title,  link: sectionsContent.obj1.link,  content: [sectionsContent.obj1.content] },
     { id: 'switching-between-geometric-and-derived-views', title: sectionsContent.obj2.title,  link: sectionsContent.obj2.link,  content: [sectionsContent.obj2.content] },
-    { id: 'reading-the-identity-bar-and-derivation-steps', title: sectionsContent.obj3.title,  link: sectionsContent.obj3.link,  content: [sectionsContent.obj3.content] },
+    { id: 'playing-the-reflection-proof',                 title: sectionsContent.obj24.title, link: sectionsContent.obj24.link, content: [demo('playing-the-reflection-proof'), sectionsContent.obj24.content] },
+    { id: 'reading-the-identity-bar-and-derivation-steps', title: sectionsContent.obj3.title,  link: sectionsContent.obj3.link,  content: [demo('reading-the-identity-bar-and-derivation-steps'), sectionsContent.obj3.content] },
     { id: 'tracing-identities-back-to-their-source',      title: sectionsContent.obj4.title,  link: sectionsContent.obj4.link,  content: [sectionsContent.obj4.content] },
-    { id: 'using-the-formula-comparison-table',           title: sectionsContent.obj5.title,  link: sectionsContent.obj5.link,  content: [sectionsContent.obj5.content] },
+    { id: 'using-the-formula-comparison-table',           title: sectionsContent.obj5.title,  link: sectionsContent.obj5.link,  content: [demo('using-the-formula-comparison-table'), sectionsContent.obj5.content] },
     { id: 'verifying-identities-numerically',             title: sectionsContent.obj6.title,  link: sectionsContent.obj6.link,  content: [sectionsContent.obj6.content] },
     { id: 'what-are-supplementary-angle-identities',      title: sectionsContent.obj7.title,  link: sectionsContent.obj7.link,  content: [sectionsContent.obj7.content] },
     { id: 'why-reflection-across-the-y-axis',             title: sectionsContent.obj8.title,  link: sectionsContent.obj8.link,  content: [sectionsContent.obj8.content] },
@@ -1231,6 +1377,10 @@ export default function SupplementaryAngleIdentitiesPage({
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Supplementary Angle Trigonometric Identities</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
    <SupplementaryAngleExplorer explanations={explanations}/>

@@ -865,6 +865,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 
 export async function getStaticProps(){
 
@@ -1505,8 +1508,31 @@ const discreteUniformExplanations = {
   }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_4_0: demoUnitFrame({
+      svg: discretePmfDiagrams.discreteUniform,
+      caption: 'Discrete uniform PMF, a = 1 to b = 6',
+      text: 'Six bars of equal height 1/6 stand at the integers 1 to 6: every value in the range is equally likely and nothing lies outside it. The height is always 1 over the number of values, so widening the range lowers every bar. Change a and b and watch the bars redistribute on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+    u_5_1: demoUnitFrame({
+      svg: discreteCdfDiagrams.discreteUniform,
+      caption: 'Discrete uniform CDF, a = 1 to b = 6',
+      text: 'Because every bar has the same height the staircase climbs in equal steps of 1/6, reaching 1 at b. F(k) is the number of values up to k over the total number of values, a straight count. Compare the even steps with the uneven staircases of other families on the',
+      href: '/probability/visual-tools/cdf/discrete',
+      linkText: 'discrete CDF explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          discreteUniformExplanations,
@@ -1532,7 +1558,7 @@ export default function DiscreteUniformDistributionPage({
   discreteUniformExplanations,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1599,7 +1625,9 @@ export default function DiscreteUniformDistributionPage({
           <div key={'uniform-pmf-visualization'} style={{transform:'scale(0.8)'}}>
          
           <DiscreteUniformDistribution/>
-          </div>        
+          </div>,        
+                  <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
+          `The cumulative form is a regular staircase.`,
         ]
     },
     {
@@ -1612,7 +1640,9 @@ export default function DiscreteUniformDistributionPage({
          
          
           <DiscreteUniformDistributionCDF/>
-          </div>     
+          </div>,     
+                  <div key={'unit-u_5_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_1 }} />,
+          `The mean is the midpoint of the range.`,
         ]
     },
     {

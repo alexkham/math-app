@@ -8,6 +8,9 @@ import SVDWrapper from '../../../../app/components/linear-algebra copy/matrix/SV
 import svdDiagrams from '../../../../app/components/linear-algebra copy/matrix/svdDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -488,8 +491,150 @@ The [condition number](!/linear-algebra/decompositions/svd#13) of a singular mat
   }
 
 
+  const instructions = [
+    'The **Preset** pills load seven matrices: a classic $2 \\times 2$, rank one, symmetric, a rotation, a wide $2 \\times 3$, a tall $3 \\times 2$ and a $3 \\times 3$ with a repeated singular value. [Learn more about the presets](!#choosing-a-matrix)',
+    'The two **Size** steppers (**▲** / **▼**) set rows and columns independently from $2$ to $3$; **Shuffle** draws a random small-integer matrix. [Learn more about getting started](!#getting-started)',
+    'Type into any entry of $A$; the scenes are rebuilt from the new matrix at once. [Learn more about editing entries](!#getting-started)',
+    '**▶ Play** runs the decomposition, **Next →** and **← Back** step one scene at a time, **Reset** returns to the opening scene, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'The scenes follow the hand method: $A^TA$, the singular values, the $\\mathbf{v}_i$, the $\\mathbf{u}_i$, completing $U$ when needed, the factorization and the rank-one sum. [Learn more about the scenes in order](!#the-scenes-in-order)',
+    'Column $i$ of $U$, entry $i$ of $\\Sigma$ and row $i$ of $V^T$ share one colour; zero singular values are muted, and the captions give exact forms such as $\\sqrt{45}$. [Learn more about reading a scene](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real SVDWrapper
+     (opens on 2x2 classic [3 0; 4 5]). Cells: input[aria-label="entry i,j"];
+     steppers: button[aria-label="Increase"], nth 0 = rows, nth 1 = columns. */
+  const demos = {
+    'getting-started': {
+      title: 'Entries, size, shuffle',
+      script: [
+        { say: `TYPE a₂₁ = 0
+A = [3 0; 0 5].
+Diagonal: nothing to rotate.` },
+        { set: 'input[aria-label="entry 2,1"]', value: 0 },
+        { wait: 2400 },
+        { say: `TAP Next → ×2
+AᵀA eigenvalues 25, 9.
+σ = 5, 3.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP rows ▲
+A 3 × 2. New row: 0 0.
+Step 1 / 12: one more scene.` },
+        { click: { css: 'button[aria-label="Increase"]', nth: 0 } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+Two σ for three rows → complete U from e₃.
+Done: A = U Σ Vᵀ, σ = 5, 3.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 9000 },
+        { say: `TAP Shuffle
+Random integers −2 to 3.
+σ usually irrational: four decimals.` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-scene-player': {
+      title: '2 × 2 classic, scene by scene',
+      script: [
+        { say: `TAP Next → ×2
+AᵀA eigenvalues 45, 5.
+σ = √45, √5. Rank 2.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+λ = 45: v₁ = (1, 1)/√2.
+Stretched by exactly σ₁ = √45.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next → ×3
+v₂ = (1, −1)/√2, then u₁, u₂.
+u₂ = A v₂ / σ₂ = (3, −1)/√10.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Assemble U, Σ, Vᵀ.
+One colour per index: column of U, σ, row of Vᵀ.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next → ×2
+A = √45 u₁v₁ᵀ + √5 u₂v₂ᵀ.
+Rank-one terms: separate matrices.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'choosing-a-matrix': {
+      title: 'Presets by their singular values',
+      script: [
+        { say: `TAP Rank one → Next → ×2
+σ = 5, 0. Rank 1.
+Zero singular value muted.` },
+        { click: { button: 'Rank one', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Symmetric → Next → ×2
+σ = 3, 1: the eigenvalues of A.
+U = V: the spectral decomposition.` },
+        { click: { button: 'Symmetric', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Rotation → Next → ×2
+σ = 1, 1: repeated.
+V = I, U = the rotation itself.` },
+        { click: { button: 'Rotation', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Wide 2×3 → Next → ×2
+σ = √3, 1, 0. Rank 2.
+v₃ with λ = 0 spans the null space.` },
+        { click: { button: 'Wide 2×3', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 3×3 → Next → ×4
+σ = 2, 1, 1. λ = 1 twice.
+Gram–Schmidt: v₂ = (1, −1, 0), v₃ = (1, 1, −2).` },
+        { click: { button: '3×3', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-singular-value-decomposition'),
       sectionsContent,
       stateUnits,
@@ -512,7 +657,22 @@ The [condition number](!/linear-algebra/decompositions/svd#13) of a singular mat
   }
 }
 
-export default function SVDVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function SVDVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <SVDWrapper defaultPreset='classic' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -534,7 +694,7 @@ export default function SVDVisualizer({seoData, sectionsContent, stateUnits, exp
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     plain('obj2', 'the-scenes-in-order'),
     stateRow('obj11', 'forming-a-transpose-a', 'gram'),
     stateRow('obj12', 'the-singular-values', 'eigen'),
@@ -543,8 +703,8 @@ export default function SVDVisualizer({seoData, sectionsContent, stateUnits, exp
     stateRow('obj15', 'the-rank-one-expansion', 'rankone'),
     stateRow('obj16', 'completing-u', 'complete'),
     stateRow('obj17', 'a-rank-one-matrix', 'single'),
-    plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-matrix'),
+    withDemo(plain('obj3', 'the-scene-player')),
+    withDemo(plain('obj4', 'choosing-a-matrix')),
     plain('obj5', 'what-the-svd-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -605,6 +765,10 @@ export default function SVDVisualizer({seoData, sectionsContent, stateUnits, exp
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Singular Value Decomposition</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <SVDWrapper

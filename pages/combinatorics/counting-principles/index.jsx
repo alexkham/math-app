@@ -1012,6 +1012,7 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import distributionIntoCellsDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/distributionIntoCellsDiagrams'
+import renderCountTree from '@/app/utils/illustrations/combinatorics/counting/countTree'
 
 
 export async function getStaticProps(){
@@ -1718,6 +1719,14 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const ctOutfits = {
+    kind: 'product',
+    svgTitle: 'Three shirts times two trousers: a tree of six outfits',
+    step1: { name: 'step 1: shirt', options: ['S\u2081', 'S\u2082', 'S\u2083'] },
+    step2: { name: 'step 2: trousers', options: ['P\u2081', 'P\u2082'] },
+    outcomeName: 'outfit', outcomePlural: 'outfits',
+  };
+
   const demoUnits = {
     pigeonhole: demoUnitFrame({
       svg: distributionIntoCellsDiagrams.big43,
@@ -1725,6 +1734,11 @@ const schemas = {
       text: 'Every one of the 81 assignments of 4 items to 3 cells is enumerated here, and not one of them leaves all three cells with a single item &#8212; there are simply not enough cells to go round. That is the pigeonhole principle as an exhaustive check rather than an argument: the crowded cell is present in all 81 cases, which is why the conclusion needs no construction. Change the counts and watch the guarantee appear and disappear on the',
       href: '/combinatorics/visual-tools/distribution',
       linkText: 'distribution into cells visualizer',
+    }),
+    outfitTree: demoUnitFrame({
+      svg: renderCountTree(ctOutfits),
+      caption: 'Three choices, then two',
+      text: 'Choose a shirt, then trousers. Each of the 3 shirts opens its own branch, and every branch splits the same 2 ways, so the tree ends in 3 &#215; 2 = 6 leaves &#8212; one for each outfit, each reached by exactly one path. Add a third step with k options and every leaf would split k ways again: that repeated splitting is why the counts multiply.',
     }),
   };
 
@@ -1776,6 +1790,8 @@ export default function CountingPrinciplesPage({seoData, sectionsContent, introC
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-outfitTree'} dangerouslySetInnerHTML={{ __html: demoUnits.outfitTree }} />,
+          `The rule needs the second step to offer the same number of options whatever the first choice was; the tree shows it as equal-sized fans.`,
           <div key={'obj2-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj2Table }} />,
         ]

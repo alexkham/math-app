@@ -8,6 +8,9 @@ import GramSchmidtWrapper from '../../../../app/components/linear-algebra copy/m
 import gramSchmidtDiagrams from '../../../../app/components/linear-algebra copy/matrix/gramSchmidtDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -438,8 +441,131 @@ That is why the process is the foundation of so much numerical linear algebra. A
   }
 
 
+  const instructions = [
+    'The **Number of vectors** stepper (**▲** / **▼**) sets $2$ or $3$ input vectors, the rows of $V$; the **Vector length** stepper sets $2$, $3$ or $4$ components. [Learn more about choosing the size](!#choosing-the-size)',
+    '**▶ Play** runs the process, **Next →** and **← Back** step one scene at a time, **Reset** returns to the opening scene, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'The first pass keeps $\\mathbf{v}_1$ and subtracts one projection per earlier vector; the second pass divides each row by its length. The **Step explanations** log keeps every step. [Learn more about the phases](!#the-phases)',
+    'Each scene highlights the row being read and the row being built, with an arrow from $\\mathbf{u}_j$ into the new row; cells show the growing expression $v_{k,i} - c_{k,1} u_{1,i} - \\cdots$. [Learn more about reading a scene](!#the-scene-player)',
+    'The label beside the steppers names the setting, such as 3 vectors in $\\mathbb{R}^2$, and warns when there are more vectors than dimensions. [Learn more about getting started](!#getting-started)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real GramSchmidtWrapper
+     (opens on 3 vectors in R^3). Steppers: button[aria-label="Increase"/"Decrease"],
+     nth 0 = number of vectors, nth 1 = vector length. */
+  const demos = {
+    'getting-started': {
+      title: 'Size, step, play',
+      script: [
+        { say: `TAP vectors ▼
+2 vectors in ℝ³.
+Step 1 / 7: one subtraction.` },
+        { click: { css: 'button[aria-label="Decrease"]', nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP length ▲
+2 vectors in ℝ⁴.
+Still 7 steps: length changes nothing.` },
+        { click: { css: 'button[aria-label="Increase"]', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP Next → ×2
+u₁ = v₁, then start u₂ from v₂.
+Step 3 / 7.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ← Back
+Step 2 / 7: back to u₁ = v₁.` },
+        { click: { button: '← Back', exact: true } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+u₂ −= c₂,₁ u₁, then e₁, e₂.
+Done: rows of E orthonormal.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5000 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'Three vectors, scene by scene',
+      script: [
+        { say: `TAP Next →
+u₁ = v₁. Row of V primary.
+Row of U accent: kept as it is.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next → ×2
+Start u₂, then u₂ −= c₂,₁ u₁.
+Arrow from u₁. c₂,₁ = (v₂ · u₁) / (u₁ · u₁).` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next → ×3
+Start u₃, subtract c₃,₁ u₁, then c₃,₂ u₂.
+Row 3: v₃,ᵢ − c₃,₁u₁,ᵢ − c₃,₂u₂,ᵢ.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Second pass: U → E.
+e₁ = u₁ / ‖u₁‖. Length now 1.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next → ×3
+e₂, e₃, then Done.
+Rows of E orthonormal, same span as V.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'choosing-the-size': {
+      title: 'Two vectors, three vectors, lengths',
+      script: [
+        { say: `TAP vectors ▼
+2 vectors: one subtraction.
+u₂ = v₂ − c₂,₁ u₁.` },
+        { click: { css: 'button[aria-label="Decrease"]', nth: 0 } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+7 steps: keep, start, subtract, normalize ×2.
+Done.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5400 },
+        { say: `TAP vectors ▲ → ▶ Play
+11 steps. u₃ projected onto u₁, then u₂.
+Never onto the original v₂.` },
+        { click: { css: 'button[aria-label="Increase"]', nth: 0 } },
+        { wait: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 8400 },
+        { say: `TAP length ▲
+3 vectors in ℝ⁴.
+Still 11 steps: longer rows only.` },
+        { click: { css: 'button[aria-label="Increase"]', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP length ▼ ×2
+3 vectors in ℝ²: more vectors than dimensions.
+The set cannot be independent.` },
+        { click: { css: 'button[aria-label="Decrease"]', nth: 1 } },
+        { wait: 700 },
+        { click: { css: 'button[aria-label="Decrease"]', nth: 1 } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-gram-schmidt'),
       sectionsContent,
       stateUnits,
@@ -462,7 +588,22 @@ That is why the process is the foundation of so much numerical linear algebra. A
   }
 }
 
-export default function GramSchmidtVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function GramSchmidtVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <GramSchmidtWrapper defaultK={3} defaultN={3} explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -484,15 +625,15 @@ export default function GramSchmidtVisualizer({seoData, sectionsContent, stateUn
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     plain('obj2', 'the-phases'),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'keeping-the-first-vector', 'keep'),
     stateRow('obj13', 'subtracting-the-projections', 'subtract'),
     stateRow('obj14', 'normalizing', 'normalize'),
     stateRow('obj15', 'the-completed-orthonormal-set', 'done'),
-    plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-the-size'),
+    withDemo(plain('obj3', 'the-scene-player')),
+    withDemo(plain('obj4', 'choosing-the-size')),
     plain('obj5', 'what-the-gram-schmidt-process-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -553,6 +694,10 @@ export default function GramSchmidtVisualizer({seoData, sectionsContent, stateUn
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Gram-Schmidt Process</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <GramSchmidtWrapper

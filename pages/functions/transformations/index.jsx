@@ -1506,6 +1506,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionTransformationsDiagrams from '@/app/components/functions/transformations/functionTransformationsDiagrams'
+import functionReflectionsDiagrams from '@/app/components/functions/reflections/functionReflectionsDiagrams'
 
 
 export async function getStaticProps(){
@@ -2681,8 +2684,59 @@ const faqQuestions = {
     },
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    vertShift: demoUnitFrame({
+      svg: functionTransformationsDiagrams.k,
+      caption: 'g(x) = f(x) + 3',
+      text: 'The dashed parabola is f(x) = x&#178; and the solid one is the same curve lifted 3 units: every point moved straight up by the same amount, the vertex included, and the shape is untouched. A negative k would push it down. Drag k through negative values on the',
+      href: '/functions/visual-tools/transformations',
+      linkText: 'transformations explorer',
+    }),
+    horizShift: demoUnitFrame({
+      svg: functionTransformationsDiagrams.h,
+      caption: 'g(x) = f(x &#8722; 3)',
+      text: 'Subtracting 3 inside the function moves the parabola 3 units to the right, the direction opposite to the sign: the vertex that was at 0 now sits at 3. The graph itself is unchanged, only its position. Watch the vertex slide as h changes on the',
+      href: '/functions/visual-tools/transformations',
+      linkText: 'transformations explorer',
+    }),
+    vertRefl: demoUnitFrame({
+      svg: functionReflectionsDiagrams.xAxis,
+      caption: 'g(x) = &#8722;x&#178;: reflected in the x-axis',
+      text: 'Negating the output flips the parabola upside down across the x-axis: points above the axis land the same distance below it, and the vertex stays on the axis. The mirror line is drawn in the picture. Reflect other families in the same line on the',
+      href: '/functions/visual-tools/reflections',
+      linkText: 'reflections explorer',
+    }),
+    horizRefl: demoUnitFrame({
+      svg: functionReflectionsDiagrams.yAxis,
+      caption: 'g(x) = &#8730;(&#8722;x): reflected in the y-axis',
+      text: 'Negating the input mirrors the square root across the y-axis: the curve that rose to the right now rises to the left, and its domain [0, &#8734;) becomes (&#8722;&#8734;, 0]. An even function would be its own reflection here. Reflect the other families in the y-axis on the',
+      href: '/functions/visual-tools/reflections',
+      linkText: 'reflections explorer',
+    }),
+    vertStretch: demoUnitFrame({
+      svg: functionTransformationsDiagrams.a,
+      caption: 'g(x) = 2f(x)',
+      text: 'Multiplying every output by 2 doubles each height: the parabola becomes narrower because it climbs twice as fast, while its x-intercept and vertex on the axis stay put. A factor between 0 and 1 would flatten it instead. Slide a past 1 and below 1 on the',
+      href: '/functions/visual-tools/transformations',
+      linkText: 'transformations explorer',
+    }),
+    horizStretch: demoUnitFrame({
+      svg: functionTransformationsDiagrams.b,
+      caption: 'g(x) = f(2x)',
+      text: 'Doubling the input compresses the graph horizontally by a factor of 2: the height that x&#178; reaches at x = 2 is now reached at x = 1. Heights are unchanged; positions along the x-axis are halved. Compare with the vertical stretch, which looks similar but moves different points, on the',
+      href: '/functions/visual-tools/transformations',
+      linkText: 'transformations explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj1Table,
@@ -2711,7 +2765,7 @@ export default function TransformationsPage({
   obj12Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2763,6 +2817,8 @@ export default function TransformationsPage({
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-vertShift'} dangerouslySetInnerHTML={{ __html: demoUnits.vertShift }} />,
+          `The vertical shift is the one transformation that leaves the x-coordinates of every feature alone.`,
         ]
     },
     {
@@ -2779,6 +2835,8 @@ export default function TransformationsPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-horizShift'} dangerouslySetInnerHTML={{ __html: demoUnits.horizShift }} />,
+          `The sign reversal is the single most common source of error on this page.`,
         ]
     },
     {
@@ -2787,6 +2845,8 @@ export default function TransformationsPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-vertRefl'} dangerouslySetInnerHTML={{ __html: demoUnits.vertRefl }} />,
+          `Reflection is the special case a = &#8722;1 of the vertical stretch.`,
         ]
     },
     {
@@ -2795,6 +2855,8 @@ export default function TransformationsPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-horizRefl'} dangerouslySetInnerHTML={{ __html: demoUnits.horizRefl }} />,
+          `Reflection is the special case b = &#8722;1 of the horizontal stretch.`,
         ]
     },
     {
@@ -2803,6 +2865,8 @@ export default function TransformationsPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-vertStretch'} dangerouslySetInnerHTML={{ __html: demoUnits.vertStretch }} />,
+          `Vertical stretches change the range; the domain is untouched.`,
         ]
     },
     {
@@ -2816,6 +2880,8 @@ export default function TransformationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: insideOutsideTable }}
           />,
+                  <div key={'unit-horizStretch'} dangerouslySetInnerHTML={{ __html: demoUnits.horizStretch }} />,
+          `Horizontal stretches change the domain; the range is untouched.`,
         ]
     },
     {

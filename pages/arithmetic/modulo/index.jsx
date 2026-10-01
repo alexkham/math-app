@@ -806,6 +806,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 
 
 export async function getStaticProps(){
@@ -1381,8 +1383,38 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    wrap: demoUnitFrame({
+      svg: modPieWheelDiagrams.running,
+      caption: 'Counting round a wheel of 6: the remainder is the slot you land on',
+      text: 'The integers 1, 2, 3, &#8230; are placed one after another round a wheel with six slots, so 6 lands back on slot 0, 7 on slot 1, and every number lands on the slot equal to its remainder on division by 6. That slot is a mod 6. Count round the wheel for any modulus on the',
+      href: '/arithmetic/visual-tools/modular-wheel',
+      linkText: 'modular arithmetic wheel',
+    }),
+    range: demoUnitFrame({
+      svg: modPieWheelDiagrams.summary,
+      caption: 'Six slots, six possible remainders: 0 to 5',
+      text: 'The wheel has exactly six slots and every integer lands in one of them, so there are exactly six possible remainders mod 6, from 0 to 5, and none can equal 6 itself: that would be slot 0 again. The slots are the complete set of residues. Change the modulus and count the slots on the',
+      href: '/arithmetic/visual-tools/modular-wheel',
+      linkText: 'modular arithmetic wheel',
+    }),
+    congruence: demoUnitFrame({
+      svg: modPieWheelDiagrams.classDetail,
+      caption: 'One slot holds 3, 9, 15, &#8230;: a congruence class',
+      text: 'Every number that lands in the same slot shares the same remainder, and those numbers are congruent modulo 6: the slot is the congruence class, and 3 &#8801; 9 &#8801; 15 (mod 6) is the statement that they sit together. Congruence is equality of slots. Highlight a class and read its members on the',
+      href: '/arithmetic/visual-tools/modular-wheel',
+      linkText: 'modular arithmetic wheel',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj1Table,
@@ -1405,7 +1437,7 @@ return {
 
 
 
-export default function ModuloPage({seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas}) {
+export default function ModuloPage({seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1426,6 +1458,8 @@ export default function ModuloPage({seoData, sectionsContent, introContent, obj1
           sectionsContent.obj1.content,
           <div key={'obj1-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+                  <div key={'unit-wrap'} dangerouslySetInnerHTML={{ __html: demoUnits.wrap }} />,
+          `Modulo is the arithmetic of the slot, not of the number.`,
         ]
     },
     {
@@ -1463,6 +1497,8 @@ export default function ModuloPage({seoData, sectionsContent, introContent, obj1
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+                  <div key={'unit-range'} dangerouslySetInnerHTML={{ __html: demoUnits.range }} />,
+          `Whatever the size of a, its remainder is one of these few values.`,
         ]
     },
      {
@@ -1495,6 +1531,8 @@ export default function ModuloPage({seoData, sectionsContent, introContent, obj1
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-congruence'} dangerouslySetInnerHTML={{ __html: demoUnits.congruence }} />,
+          `The properties in the next section are the rules of working with slots instead of numbers.`,
         ]
     },
     {

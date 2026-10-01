@@ -7,6 +7,9 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
+import binomialCoefficientDiagrams from '@/app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
 
 export async function getStaticProps() {
 
@@ -480,8 +483,38 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    square: demoUnitFrame({
+      svg: identityDiagrams['sum-4'],
+      caption: '(a + b)&#178; as an area: a&#178; + ab + ab + b&#178;',
+      text: 'A square of side a + b is cut into four pieces: an a &#215; a square, a b &#215; b square and two a &#215; b rectangles. Their areas add up to the whole, which is the identity (a + b)&#178; = a&#178; + 2ab + b&#178; read off the picture, the middle term being the two identical rectangles. Build the square piece by piece on the',
+      href: '/algebra/visual-tools/identities/square-of-sum',
+      linkText: 'square of a sum explorer',
+    }),
+    binomial: demoUnitFrame({
+      svg: binomialCoefficientDiagrams['pascal-n5'],
+      caption: 'C(5, 2) = 10 paths through Pascal&#8217;s triangle',
+      text: 'The coefficient of a&#179;b&#178; in (a + b)&#8309; is the number of ways to choose which 2 of the 5 factors contribute a b, and the triangle counts those choices as the 10 downward paths that reach the highlighted entry. Every row of the triangle is the coefficient list of one power. Follow the paths for any entry on the',
+      href: '/algebra/visual-tools/binomial-coefficient',
+      linkText: 'binomial coefficient visualizer',
+    }),
+    dos: demoUnitFrame({
+      svg: identityDiagrams['dos-4'],
+      caption: 'a&#178; &#8722; b&#178; rearranged into (a + b)(a &#8722; b)',
+      text: 'Removing a b &#215; b corner from an a &#215; a square leaves an L-shape of area a&#178; &#8722; b&#178;; cutting the L into two rectangles, a(a &#8722; b) and (a &#8722; b)b, and laying them end to end gives one rectangle of sides a + b and a &#8722; b. The factorisation is a rearrangement of area, nothing more. Watch the pieces slide into the rectangle on the',
+      href: '/algebra/visual-tools/identities/difference-of-squares',
+      linkText: 'difference of squares explorer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj1Table,
@@ -510,7 +543,7 @@ export default function AlgebraicIdentitiesPage({
   obj5Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const genericSections = [
@@ -533,7 +566,9 @@ export default function AlgebraicIdentitiesPage({
           style={{ margin: '20px auto', width: '100%' }}
           dangerouslySetInnerHTML={{ __html: obj1Table }}
         />,
-      ]
+                <div key={'unit-square'} dangerouslySetInnerHTML={{ __html: demoUnits.square }} />,
+          `The square of a difference and the conjugate product are the same picture with one side shortened or one piece removed.`,
+        ]
     },
     {
       id: '2',
@@ -554,7 +589,9 @@ export default function AlgebraicIdentitiesPage({
       link: sectionsContent.obj3.link,
       content: [
         sectionsContent.obj3.content,
-      ]
+                <div key={'unit-binomial'} dangerouslySetInnerHTML={{ __html: demoUnits.binomial }} />,
+          `Pascal&#8217;s triangle is the binomial theorem with the algebra stripped away.`,
+        ]
     },
     {
       id: '4',
@@ -575,7 +612,9 @@ export default function AlgebraicIdentitiesPage({
           style={{ margin: '20px auto', width: '100%' }}
           dangerouslySetInnerHTML={{ __html: obj5Table }}
         />,
-      ]
+                <div key={'unit-dos'} dangerouslySetInnerHTML={{ __html: demoUnits.dos }} />,
+          `The higher-degree factorisations below have no such picture, which is why they are learned as patterns.`,
+        ]
     },
     {
       id: '6',

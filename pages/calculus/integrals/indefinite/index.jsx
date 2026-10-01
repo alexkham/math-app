@@ -13,6 +13,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagrams'
 
 
 export async function getStaticProps(){
@@ -593,8 +595,24 @@ const schemas = {
   }
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    anti: demoUnitFrame({
+      svg: functionFTCDiagrams.quadratic,
+      caption: 'F(x) = &#8747;&#8320;&#710;x t&#178; dt = x&#179;/3 is an antiderivative of x&#178;',
+      text: 'The lower curve is f(t) = t&#178; and the upper one is the area accumulated under it from 0; the slope of the upper curve at any x equals the height of the lower one there, which is what F&#8242; = f means. Start the accumulation from a different a and the upper curve shifts by a constant: the + C of the indefinite integral. Change the starting point and watch the whole antiderivative slide on the',
+      href: '/calculus/visual-tools/fundamental-theorem',
+      linkText: 'fundamental theorem of calculus visualizer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -612,7 +630,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -623,6 +641,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-anti'} dangerouslySetInnerHTML={{ __html: demoUnits.anti }} />,
+          `Every antiderivative of f is one of these accumulation curves, shifted.`,
         ]
     },
     {

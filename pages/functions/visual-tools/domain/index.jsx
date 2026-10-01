@@ -13,6 +13,9 @@ import FunctionDomain from '../../../../app/components/functions/domain/Function
 import domainDiagrams from '../../../../app/components/functions/domain/functionDomainDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -505,8 +508,143 @@ Shift $h$ and the puncture follows to $x = h$. Every rational function's domain 
       '[Learn more about the reciprocal](!#the-reciprocal-and-its-excluded-point) · [Restricted families](!#the-restricted-families)',
   };
 
+  const instructions = [
+    'The picker on the left lists eleven functions: eight defined on all real numbers, then **Logarithmic**, **Square root** and **Reciprocal** with built-in restrictions. Tapping one switches the function and resets the parameters. [Learn more about picking a function](!#picking-a-function)',
+    'The four **Parameters** sliders set $a$, $k$, $b$ and $h$ in $g(x) = a \\cdot f(b(x - h)) + k$; only $b$ and $h$ carry the **affects domain** badge, and **Reset** restores the defaults. [Learn more about why only b and h change the domain](!#why-only-b-and-h-change-the-domain)',
+    'The **Appearance** swatch labelled **Domain color** recolours the band, the domain card and the in-domain marks; its **Reset** restores the default colour. [Learn more about the highlight color](!#customizing-the-highlight-color)',
+    'The **S**, **M**, **L** and **XL** buttons set the height of the plot. [Learn more about the plot panel](!#getting-started-with-the-visualizer)',
+    'The domain is drawn twice: as a band on the x-axis of the plot and as a bar on the number line below it, with open and closed endpoints and a red × at an excluded point. [Learn more about the x-axis highlight and domain bar](!#reading-the-x-axis-highlight-and-domain-bar)',
+    'The **Domain** card prints the current domain, such as $x > 0$ or all real x, and the **Applied** strip lists $a$, $k$, $b$, $h$ with the note **b, h affect domain**. [Learn more about the domain card and applied chips](!#the-domain-card-and-applied-chips)',
+    'The **Test point** slider moves $x$ from $-10$ to $10$; the card reports **in domain** with the value $g(x)$, or **outside domain** with $g(x)$ undefined, and its **Reset** returns $x$ to $1$. [Learn more about the test point slider](!#probing-with-the-test-point-slider)',
+    'The info panel has three tabs: **Explanation** gives the base and current domain, **Family** describes the chosen function, and **Concepts** explains what a domain is. [Learn more about the info panel](!#getting-started-with-the-visualizer)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionDomain tool
+     (opens on Logarithmic, test point x = 1). Range inputs in DOM order:
+     0 = a, 1 = k, 2 = b, 3 = h, 4 = test point. Reset buttons: nth 0 = Parameters,
+     nth 1 = Appearance, nth 2 = Test point. Picking a function resets a, k, b, h and x. */
+  const demos = {
+    'picking-a-function': {
+      title: 'Picking a function',
+      script: [
+        { say: `TAP Square root
+Domain x ≥ 0.
+Closed endpoint: 0 is allowed.` },
+        { click: { button: 'Square root', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Reciprocal
+Domain x ≠ 0.
+One excluded point, marked ×.` },
+        { click: { button: 'Reciprocal', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Sine
+Domain: all real x.
+Band covers the whole axis.` },
+        { click: { button: 'Sine', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Logarithmic
+Domain x > 0.
+Open endpoint: 0 itself refused.` },
+        { click: { button: 'Logarithmic', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'why-only-b-and-h-change-the-domain': {
+      title: 'Only b and h move the domain',
+      script: [
+        { say: `DRAG a → −2
+Curve flips and stretches.
+Domain stays x > 0.` },
+        { slide: { range: 0 }, to: -2, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG k → 3
+Curve lifts 3 units.
+Domain still x > 0.` },
+        { slide: { range: 1 }, to: 3, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG h → 2
+Band shifts right: x > 2.
+Test point x = 1 now outside.` },
+        { slide: { range: 3 }, to: 2, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG b → −1
+Inequality flips: x < 2.
+x = 1 back inside.` },
+        { slide: { range: 2 }, to: -1, ms: 1400 },
+        { wait: 2800 },
+        { say: `TAP Reset
+a, k, b, h back to defaults.
+g(x) = ln(x), x > 0.` },
+        { click: { button: 'Reset', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'probing-with-the-test-point-slider': {
+      title: 'Probing with the test point',
+      script: [
+        { say: `DRAG test point → −2
+✗ outside domain.
+g(−2) is undefined.` },
+        { slide: { range: 4 }, to: -2, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG test point → 4
+✓ in domain.
+g(4) = 1.39.` },
+        { slide: { range: 4 }, to: 4, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Reciprocal, DRAG x → 0
+Domain x ≠ 0.
+g(0) is undefined.` },
+        { click: { button: 'Reciprocal', exact: true } },
+        { slide: { range: 4 }, to: 0, ms: 1200 },
+        { wait: 2800 },
+        { say: `DRAG h → 2
+Hole moves to x = 2.
+x = 0 now in domain: g(0) = −0.5.` },
+        { slide: { range: 3 }, to: 2, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG test point → 2
+Right on the hole.
+✗ outside domain. g(2) is undefined.` },
+        { slide: { range: 4 }, to: 2, ms: 1400 },
+        { wait: 2800 },
+      ],
+    },
+    'getting-started-with-the-visualizer': {
+      title: 'Plot size and info panel',
+      script: [
+        { say: `TAP L
+Taller plot.
+Same curve, same domain band.` },
+        { click: { button: 'L', exact: true } },
+        { wait: 2400 },
+        { say: `TAP S
+Compact plot.` },
+        { click: { button: 'S', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Family
+Logarithm: domain (0, ∞),
+open boundary at 0.` },
+        { click: { button: 'Family', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Concepts
+What the domain is.
+Which functions carry restrictions.` },
+        { click: { button: 'Concepts', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Explanation
+Base domain, current domain,
+how b and h move it.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('functions-domain'),
       sectionsContent,
       introContent,
@@ -530,16 +668,31 @@ Shift $h$ and the puncture follows to $x = h$. Every rational function's domain 
 }
 
 
-export default function DomainOfFunctionPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function DomainOfFunctionPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionDomain explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
-    { id:'getting-started-with-the-visualizer',         title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[sectionsContent.obj1.content] },
-    { id:'picking-a-function',                          title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[sectionsContent.obj2.content] },
-    { id:'why-only-b-and-h-change-the-domain',          title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[sectionsContent.obj3.content] },
+    { id:'getting-started-with-the-visualizer',         title:sectionsContent.obj1.title,  link:sectionsContent.obj1.link,  content:[demo('getting-started-with-the-visualizer'), sectionsContent.obj1.content] },
+    { id:'picking-a-function',                          title:sectionsContent.obj2.title,  link:sectionsContent.obj2.link,  content:[demo('picking-a-function'), sectionsContent.obj2.content] },
+    { id:'why-only-b-and-h-change-the-domain',          title:sectionsContent.obj3.title,  link:sectionsContent.obj3.link,  content:[demo('why-only-b-and-h-change-the-domain'), sectionsContent.obj3.content] },
     { id:'reading-the-x-axis-highlight-and-domain-bar', title:sectionsContent.obj4.title,  link:sectionsContent.obj4.link,  content:[sectionsContent.obj4.content] },
-    { id:'probing-with-the-test-point-slider',          title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[sectionsContent.obj5.content] },
+    { id:'probing-with-the-test-point-slider',          title:sectionsContent.obj5.title,  link:sectionsContent.obj5.link,  content:[demo('probing-with-the-test-point-slider'), sectionsContent.obj5.content] },
     { id:'the-domain-card-and-applied-chips',           title:sectionsContent.obj6.title,  link:sectionsContent.obj6.link,  content:[sectionsContent.obj6.content] },
     { id:'customizing-the-highlight-color',             title:sectionsContent.obj7.title,  link:sectionsContent.obj7.link,  content:[sectionsContent.obj7.content] },
     { id:'what-is-the-domain-of-a-function',            title:sectionsContent.obj8.title,  link:sectionsContent.obj8.link,  content:[sectionsContent.obj8.content] },
@@ -613,6 +766,10 @@ export default function DomainOfFunctionPage({relatedTools, seoData, sectionsCon
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Domain of a Function</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionDomain explanations={explanations}/>
       <br/>

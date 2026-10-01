@@ -942,6 +942,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import traceDiagrams from '@/app/components/linear-algebra copy/matrix/traceDiagrams'
+import renderMatrixGridV3 from '@/app/utils/illustrations/linear-algebra/matrix/matrixGrid.v3'
 
 
 export async function getStaticProps(){
@@ -1669,6 +1670,12 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const mgCyclicTrace = {
+    kind: 'products', A: [[1, 2, 0], [0, 1, 3]], B: [[1, 0], [2, 1], [0, 1]],
+    svgTitle: 'tr(AB) = tr(BA) even when AB and BA have different sizes',
+    caption: 'different sizes, different entries, the same trace',
+  };
+
   const demoUnits = {
     definition: demoUnitFrame({
       svg: traceDiagrams.sweep,
@@ -1676,6 +1683,11 @@ const schemas = {
       text: 'Only the entries on the main diagonal are picked up; everything off it is passed over untouched. That is the entire definition, and it is why the trace is defined for square matrices alone &#8212; a non-square matrix has no full diagonal to sweep. Run the sweep on your own matrix on the',
       href: '/linear-algebra/visual-tools/matrix-trace',
       linkText: 'trace visualizer',
+    }),
+    cyclicTrace: demoUnitFrame({
+      svg: renderMatrixGridV3(mgCyclicTrace),
+      caption: 'Two products, one trace',
+      text: 'A is 2 &#215; 3 and B is 3 &#215; 2, so both products exist &#8212; but AB is a 2 &#215; 2 matrix and BA is a 3 &#215; 3 matrix, with nothing in common entry by entry. Add up each diagonal anyway: 5 + 4 = 9 and 1 + 5 + 3 = 9. Both sums are the same double sum of a<sub>ij</sub>b<sub>ji</sub>, taken in a different order, which is why the trace cannot tell the two products apart.',
     }),
   };
 
@@ -1761,6 +1773,8 @@ export default function MatrixTracePage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-cyclicTrace'} dangerouslySetInnerHTML={{ __html: demoUnits.cyclicTrace }} />,
+          `The same numbers are being added in both traces; only the grouping into diagonal entries differs.`,
         ]
     },
     {

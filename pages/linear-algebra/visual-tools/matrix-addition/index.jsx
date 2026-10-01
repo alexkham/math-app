@@ -11,6 +11,9 @@ import AdditionWrapper from '../../../../app/components/linear-algebra copy/matr
 import matrixAdditionDiagrams from '../../../../app/components/linear-algebra copy/matrix/matrixAdditionDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -411,8 +414,133 @@ That framing explains which properties survive and which do not. Subtraction is 
   }
 
 
+  const instructions = [
+    'The **Operation** control switches between **A + B** and **A − B**; every cell of $C$ and every caption changes its operator, and the run restarts at step 1. [Learn more about switching the operation](!#addition-and-subtraction)',
+    'The **Dimensions** steppers (**▲** / **▼**) set the rows and columns shared by $A$ and $B$, each from 1 to 5; $C$ follows automatically. [Learn more about choosing dimensions](!#choosing-dimensions)',
+    'Hover the **?** icon beside **Dimensions** for why $A$ and $B$ must have the same shape. [Learn more about getting started](!#getting-started)',
+    '**▶ Play** runs the sweep, **Next →** and **← Back** move one cell at a time, **Reset** returns to the opening scene, and the speed menu sets the pace from Slow to Very Fast. [Learn more about the controls](!#getting-started)',
+    'Each scene lights one cell of $A$, the matching cell of $B$ and the destination in $C$, with arrows into $C$ and the cell formula as its title. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Step explanations** log keeps every completed step with its formula and a note linking to the matching section below. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real AdditionWrapper
+     (mode='matrices', opens on A + B at 2 x 3). Steppers: ▲/▼ nth 0 = rows,
+     nth 1 = columns. */
+  const demos = {
+    'the-scene-player': {
+      title: 'Stepping through C = A + B',
+      script: [
+        { say: `TAP Next →
+Step 2 / 8. Cell (1,1) lit in A, B and C.
+Arrows carry a₁,₁ and b₁,₁ into c₁,₁.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+Step 3 / 8. c₁,₂ = a₁,₂ + b₁,₂.
+c₁,₁ keeps its sum. Log grows by one.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ← Back
+Step 2 / 8 again.
+c₁,₂ back to a placeholder.` },
+        { click: { button: '← Back', exact: true } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+Sweep runs row by row to Step 8 / 8.
+All 6 cells of C filled.` },
+        { set: 'select', value: '700' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5200 },
+        { say: `TAP Reset
+Step 1 / 8. C empty again.
+A and B unchanged: 2 × 3.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'addition-and-subtraction': {
+      title: 'Flipping the operator',
+      script: [
+        { say: `TAP Next → twice
+Step 3 / 8. c₁,₂ = a₁,₂ + b₁,₂.
+Sum written into C[1,2].` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2400 },
+        { say: `TAP A − B
+Scenes rebuilt: back to Step 1 / 8.
+Intro now says subtract.` },
+        { click: { button: 'A − B', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next → twice
+Same cell, same pairing.
+c₁,₂ = a₁,₂ − b₁,₂: difference, not sum.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+Step 8 / 8. Every cell reads a − b.
+Shape still 2 × 3.` },
+        { set: 'select', value: '400' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3600 },
+        { say: `TAP A + B
+Back to addition, Step 1 / 8.
+Only the operator ever changes.` },
+        { click: { button: 'A + B', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'choosing-dimensions': {
+      title: 'Shaping A and B',
+      script: [
+        { say: `TAP ▼ rows
+A, B, C all 1 × 3.
+Step 1 / 5: 3 cells + intro + outro.` },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP ▲ rows twice
+3 × 3 square. Step 1 / 11.
+Scenes = rows × columns + 2.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP ▲ columns twice
+3 × 5 rectangle. Step 1 / 17.
+Same rule: no match across rows and columns needed.` },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 2600 },
+        { say: `TAP ▲ rows twice
+5 × 5: the maximum. Step 1 / 27.
+C has no stepper: its shape is forced.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP ▼ rows ×4
+1 × 5 row. Step 1 / 7.
+Minimum is 1 on each side.` },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 300 },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 300 },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 300 },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-addition'),
       sectionsContent,
       stateUnits,
@@ -435,7 +563,22 @@ That framing explains which properties survive and which do not. Subtraction is 
   }
 }
 
-export default function MatrixAdditionVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function MatrixAdditionVisualizer({ instructions, demos, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <AdditionWrapper mode='matrices' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -458,13 +601,13 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, sta
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'the-scene-player'),
+    withDemo(plain('obj2', 'the-scene-player')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'one-cell-at-a-time', 'step'),
     stateRow('obj13', 'the-completed-sum', 'done'),
     stateRow('obj14', 'switching-to-subtraction', 'subtract'),
-    plain('obj3', 'addition-and-subtraction'),
-    plain('obj4', 'choosing-dimensions'),
+    withDemo(plain('obj3', 'addition-and-subtraction')),
+    withDemo(plain('obj4', 'choosing-dimensions')),
     plain('obj5', 'what-matrix-addition-is'),
     plain('obj6', 'key-formulas'),
     plain('obj7', 'the-same-shape-rule'),
@@ -528,6 +671,10 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, sta
       <br />
       <br />
       <h1 className='title' style={{ marginTop: '0px', marginBottom: '0px' }}>Matrix Addition&Subtraction</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br />
       <div style={{ width: '80%', margin: 'auto' }}>
         <AdditionWrapper 

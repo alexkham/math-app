@@ -861,6 +861,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
+import renderVectorArrowsV6 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v6'
 
 
 export async function getStaticProps(){
@@ -1471,6 +1472,17 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const vaSolutionSet = {
+    kind: 'solutionSet', normal: [1, 2], c: 4, xp: [2, 1], xh: [-2, 1],
+    svgTitle: 'The solutions of Ax = b form a line parallel to the null space',
+    labels: {
+      xp: ['x\u209a = (2, 1)', 2.15, 0.6], xh: ['x\u2095 = (\u22122, 1)', -2.1, 1.35, 'end'], x: ['x = x\u209a + x\u2095 = (0, 2)', 0.2, 2.35],
+      solutionLine: ['solutions of Ax = b', 5.9, -0.95, 'end', -8], nullLine: ['null space: Ax = 0', -3.9, 2.25],
+    },
+    notes: ['A = [1 2; 2 4], b = (4, 8): every solution satisfies x + 2y = 4', 'parallel lines: moving along the null space stays among the solutions'],
+    caption: 'every solution = one particular solution + a null-space vector',
+  };
+
   const demoUnits = {
     nontrivial: demoUnitFrame({
       svg: linearSystemDiagrams.infinite,
@@ -1485,6 +1497,11 @@ const schemas = {
       text: 'Each free variable is set to one in turn while the others are held at zero, and the pivot variables are solved to match. The vectors produced are independent and they span every solution of the system, which is what it means to call the solution set the null space rather than merely to say it resembles one. Generate them for your own matrix on the',
       href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
       linkText: 'four fundamental subspaces visualizer',
+    }),
+    solutionSet: demoUnitFrame({
+      svg: renderVectorArrowsV6(vaSolutionSet),
+      caption: 'Ax = b is Ax = 0, shifted',
+      text: 'Both equations of this system reduce to x + 2y = 4, so its solutions fill the amber line; the homogeneous system Ax = 0 has the dashed line x + 2y = 0 through the origin. Pick one solution x<sub>p</sub> = (2, 1), add any vector of the null space &#8212; here x<sub>h</sub> = (&#8722;2, 1) &#8212; and you land on the amber line again, at (0, 2). Every solution is reached this way, which is why the two lines are parallel copies of each other.',
     }),
   };
 
@@ -1607,6 +1624,8 @@ export default function HomogeneousSystemsPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-solutionSet'} dangerouslySetInnerHTML={{ __html: demoUnits.solutionSet }} />,
+          `Solving Ax = b therefore splits into two jobs: find one solution, and find the null space.`,
           <div
             key={'obj7-table'}
             style={tableWrapStyle}

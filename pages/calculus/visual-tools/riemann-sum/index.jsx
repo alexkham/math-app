@@ -494,6 +494,9 @@ import FunctionRiemann from '../../../../app/components/functions/riemann/Functi
 import functionRiemannDiagrams from '../../../../app/components/functions/riemann/functionRiemannDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -789,6 +792,23 @@ The shaded shapes are visibly slanted here, which is the one method where the ou
 They also err in a fixed ratio — the trapezoid error runs about twice the midpoint error and opposite in sign. Combining them in the proportion that cancels both, $\frac{2 \cdot \text{mid} + \text{trap}}{3}$, gives exactly $9$ here. That combination is Simpson's rule, which is accurate to $O(1/n^4)$ in general and exact for any polynomial of degree three or less — so on $x^2$ it lands on the true value with only eight strips.`,
       link: '',
     },
+    obj16: {
+      title: `Plot Size, Appearance and the Info Panel`,
+      content: `The row of buttons above the plot sets its size: **S** is $500 \\times 400$, **M** is $700 \\times 550$, **L** is $900 \\times 850$ and **XL** is $1100 \\times 850$ pixels. The current size is printed next to the buttons, and the page opens at $880 \\times 460$. A new size redraws the same curve, strips and dashed lines; nothing about the sum changes.
+
+**Appearance**, at the bottom of the left panel, holds one control: **Strip color**. The colour you pick fills the strips and tints the result card, the **partitions n** slider, the active **Method** button and the $n$ and rule chips in the **Applied** strip. The **Reset** button next to **Appearance** returns to the default blue.
+
+The info panel on the right has two tabs.
+
+• **Explanation** follows the current setup. It gives the rule and its formula, then $f$, $a$, $b$, $n$ and $\\Delta x$, the values of $S_n$, the true integral and the error, a short paragraph on why the rule over- or undershoots here, and the rule's convergence order. It rewrites itself whenever you change the function, the method or a slider.
+
+• **Concepts** does not change with the controls: what a Riemann sum is, the four rules, convergence order, signed areas, and what happens when there is no closed-form integral.
+
+For the three numbers themselves, see [the result card](!#the-result-card).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
     obj15: {
       title: ``,
       content: ``,
@@ -946,8 +966,141 @@ They also err in a fixed ratio — the trapezoid error runs about twice the midp
   }
 
 
+  const instructions = [
+    'The **Function** picker on the left lists eight functions in three groups: **Polynomial**, **Transcendental** and **Numerical only**. Tapping one switches the curve and resets $a$, $b$ and $n$ to $0$, $3$ and $8$; the chosen method stays. [Learn more about the function families](!#the-function-families)',
+    'The four **Method** buttons, **Left**, **Right**, **Midpoint** and **Trapezoid**, choose where each strip samples $f$; the shaded strips, the result card and the Explanation tab change at once. [Learn more about the four methods](!#the-four-methods)',
+    'The **Parameters** sliders set **lower bound a** and **upper bound b** (from $-8$ to $8$) and **partitions n** (from $1$ to $80$); the dashed grey lines follow $a$ and $b$, sliding $b$ below $a$ flips the sign of the sum, and **Reset** restores $a = 0$, $b = 3$, $n = 8$. [Learn more about the a, b, and n sliders](!#the-a-b-and-n-sliders)',
+    'The **S**, **M**, **L** and **XL** buttons set the plot size, and **Strip color** under **Appearance** recolours the strips and the result card. [Learn more about plot size and appearance](!#plot-size-appearance-and-info-panel)',
+    'The **Riemann sum** card under the plot shows **Approximation Sₙ**, **True integral** (closed form, or numeric for the two Numerical only functions) and **Error** $= S_n - I$; the **Applied** strip below repeats $a$, $b$, $n$ and the rule. [Learn more about reading the result card](!#the-result-card)',
+    'The tag under the error reads **overshoots** (red), **undershoots** or **exact** (green). [Learn more about the error tag](!#the-error-tag)',
+    'The info panel has two tabs: **Explanation** works through the current setup and why the rule over- or undershoots, **Concepts** covers the four rules and convergence order. [Learn more about the info panel](!#plot-size-appearance-and-info-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionRiemann tool
+     (opens on Quadratic, Left, a = 0, b = 3, n = 8). Range inputs in DOM order:
+     0 = lower bound a, 1 = upper bound b, 2 = partitions n. Every value in a
+     callout was read off the tool. A new function resets a, b, n; the method stays. */
+  const demos = {
+    'the-four-methods': {
+      title: 'The four methods',
+      script: [
+        { say: `TAP Right
+Each top meets the curve at its right edge.
+S₈ = 10.7578. Error +1.7578: OVERSHOOTS.` },
+        { click: { button: 'Right', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Midpoint
+Tops cross the curve mid-strip.
+S₈ = 8.9648. Error −0.0352.` },
+        { click: { button: 'Midpoint', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Trapezoid
+Slanted caps: chord between strip edges.
+S₈ = 9.0703. Error +0.0703, opposite sign.` },
+        { click: { button: 'Trapezoid', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Left
+Every top under the rising curve.
+S₈ = 7.3828. Error −1.6172: UNDERSHOOTS.` },
+        { click: { button: 'Left', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-function-families': {
+      title: 'Function families and the error tag',
+      script: [
+        { say: `TAP Cosine
+cos x falls on [0, 3]. Left tops sit above.
+S₈ = 0.5126 vs 0.1411. OVERSHOOTS, red.` },
+        { click: { button: 'Cosine', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Right
+Right edge now the low side.
+S₈ = −0.2337. Error −0.3748: UNDERSHOOTS.` },
+        { click: { button: 'Right', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Identity
+f(x) = x. True integral 4.5, closed form.
+Right rule: +0.5625, OVERSHOOTS.` },
+        { click: { button: 'Identity', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Trapezoid
+Chords lie on the line.
+S₈ = 4.5. Tag turns green: EXACT.` },
+        { click: { button: 'Trapezoid', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Gaussian bump
+No closed form. True integral 1.2499
+from numeric (n=4000 trap).` },
+        { click: { button: 'Gaussian bump', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-a-b-and-n-sliders': {
+      title: 'The a, b and n sliders',
+      script: [
+        { say: `DRAG n → 16
+Strips half as wide: Δx = 0.1875.
+Left error −1.6172 → −0.8262. Halved.` },
+        { slide: { range: 2 }, to: 16, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG n → 32
+Halved again: error −0.4175.
+Left rule is O(1/n).` },
+        { slide: { range: 2 }, to: 32, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG b → −3
+b below a: Δx negative, signs flip.
+True integral −9. S₃₂ = −8.5825.` },
+        { slide: { range: 1 }, to: -3, ms: 1600 },
+        { wait: 2800 },
+        { say: `DRAG a → −3
+a = b: every strip has zero width.
+S₃₂ = 0. Tag: EXACT.` },
+        { slide: { range: 0 }, to: -3, ms: 1600 },
+        { wait: 2600 },
+        { say: `TAP Reset
+Back to a = 0, b = 3, n = 8.
+S₈ = 7.3828.` },
+        { click: { button: 'Reset', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'plot-size-appearance-and-info-panel': {
+      title: 'Plot size and info panel',
+      script: [
+        { say: `TAP L
+Plot 900 × 850.
+Same curve, same strips.` },
+        { click: { button: 'L', exact: true } },
+        { wait: 2400 },
+        { say: `TAP S
+Compact plot, 500 × 400.` },
+        { click: { button: 'S', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Concepts
+Fixed text: the four rules,
+convergence order, signed areas.` },
+        { click: { button: 'Concepts', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Explanation
+Current setup: f, a, b, n, Δx,
+S₈, true integral, error.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Midpoint
+Explanation rewrites for the new rule:
+Midpoint Riemann sum, O(1/n²).` },
+        { click: { button: 'Midpoint', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('calculus-riemann-sum'),
       sectionsContent,
       stateUnits,
@@ -971,7 +1124,22 @@ They also err in a fixed ratio — the trapezoid error runs about twice the midp
   }
 }
 
-export default function RiemannSumVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function RiemannSumVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionRiemann explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -994,15 +1162,16 @@ export default function RiemannSumVisualizer({relatedTools, seoData, sectionsCon
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'the-four-methods'),
+    withDemo(plain('obj2', 'the-four-methods')),
     stateRow('obj11', 'left-rule', 'left'),
     stateRow('obj12', 'right-rule', 'right'),
     stateRow('obj13', 'midpoint-rule', 'mid'),
     stateRow('obj14', 'trapezoid-rule', 'trap'),
-    plain('obj3', 'the-function-families'),
-    plain('obj4', 'the-a-b-and-n-sliders'),
+    withDemo(plain('obj3', 'the-function-families')),
+    withDemo(plain('obj4', 'the-a-b-and-n-sliders')),
     plain('obj5', 'the-result-card'),
     plain('obj6', 'the-error-tag'),
+    withDemo(plain('obj16', 'plot-size-appearance-and-info-panel')),
     plain('obj7', 'what-is-a-riemann-sum'),
     plain('obj8', 'convergence-and-error'),
     plain('obj9', 'signed-area'),
@@ -1064,6 +1233,10 @@ export default function RiemannSumVisualizer({relatedTools, seoData, sectionsCon
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Riemann Sum</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionRiemann explanations={explanations}/>
       <br/>

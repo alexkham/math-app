@@ -673,6 +673,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 
 
 export async function getStaticProps(){
@@ -1147,8 +1149,24 @@ This makes them a structural tool for counting and for applying linearity of exp
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_1_0: demoUnitFrame({
+      svg: coinSampleSpaceDiagrams.majority,
+      caption: 'Majority heads: the four sequences where the indicator equals 1',
+      text: 'The highlighted sequences are the event, and the indicator variable is the function that assigns 1 to each of them and 0 to the other four: it turns a set of outcomes into a number that can be added and averaged. Its expected value is the count of highlighted cells over 8. Select other events and read their indicators on the',
+      href: '/probability/visual-tools/coin-toss',
+      linkText: 'coin toss sample space explorer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       summaryTable,
@@ -1171,7 +1189,7 @@ export default function IndicatorsPage({
   introContent,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1192,6 +1210,8 @@ export default function IndicatorsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
+          `The formal definition follows.`,
         ]
     },
     {

@@ -499,6 +499,9 @@ import { SCENARIOS as LT_SCENARIOS } from '../../../../app/components/linear-alg
 import linearTransformationDiagrams, { groupOf } from '../../../../app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -969,8 +972,115 @@ This preset is the reason "rank" is a more informative measure than "invertible 
 
 
 
+  const instructions = [
+    'The **Scenarios** panel (03) on the left groups twelve matrices by rank, **Full rank**, **Singular** and **Degenerate**; selecting one plays the morph and fills the explanation card. [Learn more about the preset scenarios](!#preset-scenarios)',
+    'The canvas shows the plane under $M(t) = (1 - t)I + tA$: the grid, the basis vectors $\\hat{i}$ and $\\hat{j}$, the unit square and the unit circle, blending from the identity at $t = 0$ to $A$ at $t = 1$. [Learn more about getting started](!#getting-started)',
+    'In the **Animation** card, **Play** / **Pause** runs $t$ to $1$, the step buttons move $t$ by $0.1$, **Reset** returns to $t = 0$, and the slider sets any $t$. [Learn more about the animation slider](!#the-animation-slider)',
+    'The strip under the canvas gives $\\det M(t)$ and names the matrix: identity, rotation, reflection, uniform scaling, singular, zero map and more. [Learn more about the classification readout](!#the-classification-readout)',
+    'The layer chips **grid**, **basis**, **unit sq**, **unit ○**, **eigen**, **ker / im**, **samples** and **labels** show or hide each layer of the canvas. [Learn more about the layer toggles](!#display-layer-toggles)',
+    'Type into the four entries of $A$ in the **Matrix** card; the canvas updates at once and the explanation card switches to **Custom matrix**. [Learn more about editing the matrix](!#editing-the-matrix)',
+    'The **Live** card (04) reports $M(t)$, $\\det M(t)$, $\\det A$, the trace, the eigenvalues and the rank of $A$. [Learn more about the live card](!#the-live-card)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real LinearTransformation
+     tool (opens on Identity; every preset auto-plays the 1.6 s morph
+     M(t) = (1 - t)I + tA). Range 0 = t slider; step buttons are
+     button[title="Step +0.1"] / "Step -0.1", reset button[title="Reset"].
+     Cells: .lt5-matrix-bracket input (0 a11, 1 a12, 2 a21, 3 a22).
+     Chips: label.lt5-chip (0 grid, 1 basis, 2 unit sq, 3 unit circle,
+     4 eigen, 5 ker / im, 6 samples, 7 labels). */
+  const demos = {
+    'the-animation-slider': {
+      title: 'Scrubbing a reflection through t',
+      script: [
+        { say: `TAP Reflect y=x
+Morph plays, t: 0 → 1.
+det A = −1. classify: reflection.` },
+        { click: { button: 'Reflect y=x' } },
+        { wait: 2800 },
+        { say: `TAP Reset
+t = 0: the identity grid.
+det M(t) = 1.` },
+        { click: 'button[title="Reset"]' },
+        { wait: 2200 },
+        { say: `DRAG t → 0.5
+M(t) = [0.5 0.5; 0.5 0.5].
+det M(t) = 0: plane flattened onto y = x.` },
+        { slide: { range: 0 }, to: 0.5, ms: 1800 },
+        { wait: 2800 },
+        { say: `TAP Step +0.1
+t = 0.6. det M(t) = −0.2.
+Unit square turns pink: orientation flipped.` },
+        { click: 'button[title="Step +0.1"]' },
+        { wait: 2600 },
+        { say: `TAP Play
+Eases on to t = 1.
+M(t) = A = [0 1; 1 0]. det −1.` },
+        { click: { button: 'Play', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'preset-scenarios': {
+      title: 'Twelve presets, three ranks',
+      script: [
+        { say: `TAP Rotate 45°
+classify: rotation. det A = 1.
+Eigenvalues 0.707 ± 0.707i.` },
+        { click: { button: 'Rotate 45°' } },
+        { wait: 2800 },
+        { say: `TAP Scale 2×
+classify: uniform scaling.
+det A = 4: areas × 4. Eigenvalues 2, 2.` },
+        { click: { button: 'Scale 2×' } },
+        { wait: 2800 },
+        { say: `TAP Twist & stretch
+classify: general invertible.
+det A = 1.86. Eigenvalues 1.3 ± 0.412i.` },
+        { click: { button: 'Twist & stretch' } },
+        { wait: 2800 },
+        { say: `TAP Project to y=x
+Rank 1. classify: singular → line.
+Red kernel y = −x, green image y = x.` },
+        { click: { button: 'Project to y=x' } },
+        { wait: 2800 },
+        { say: `TAP Zero map
+Rank 0. Whole grid shrinks to the origin.
+classify: zero map.` },
+        { click: { button: 'Zero map' } },
+        { wait: 2800 },
+      ],
+    },
+    'editing-the-matrix': {
+      title: 'Typing entries, reading the live card',
+      script: [
+        { say: `TYPE a₁₂ = 1
+A = [1 1; 0 1]. Card: Custom matrix.
+det A = 1, eigenvalues 1, 1. General invertible.` },
+        { set: { css: '.lt5-matrix-bracket input', nth: 1 }, value: '1' },
+        { wait: 3000 },
+        { say: `TYPE a₂₁ = 1
+Columns parallel: det A = 0, rank A = 1.
+Kernel and image lines appear.` },
+        { set: { css: '.lt5-matrix-bracket input', nth: 2 }, value: '1' },
+        { wait: 3000 },
+        { say: `CHECK samples
+Sample dots all land on the image line.
+Eigenvalues 2, 0.` },
+        { click: { css: 'label.lt5-chip', nth: 6 } },
+        { wait: 2600 },
+        { say: `TYPE a₂₁ = −1
+A = [1 1; −1 1]. det A = 2, rank 2.
+Eigenvalues 1 ± 1i. Samples spread out again.` },
+        { set: { css: '.lt5-matrix-bracket input', nth: 2 }, value: '-1' },
+        { wait: 3000 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
         relatedTools: getRelatedTools('linear-algebra-linear-transformation-2d'),
          sectionsContent,
          stateUnits,
@@ -994,7 +1104,22 @@ This preset is the reason "rank" is a more informative measure than "invertible 
     }
    }
 
-export default function LinearTransformation2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+export default function LinearTransformation2DPage({ instructions, demos,seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <LinearTransformation explanationOverride={explanationOverride}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -1017,13 +1142,13 @@ export default function LinearTransformation2DPage({seoData, sectionsContent, st
   const genericSections=[
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'the-animation-slider'),
-    plain('obj7', 'preset-scenarios'),
+    withDemo(plain('obj2', 'the-animation-slider')),
+    withDemo(plain('obj7', 'preset-scenarios')),
     stateRow('obj12', 'the-identity', 'identity'),
     stateRow('obj13', 'full-rank', 'fullRank'),
     stateRow('obj14', 'rank-1-collapse', 'rankOne'),
     stateRow('obj15', 'the-zero-map', 'zero'),
-    plain('obj3', 'editing-the-matrix'),
+    withDemo(plain('obj3', 'editing-the-matrix')),
     plain('obj4', 'display-layer-toggles'),
     plain('obj5', 'the-live-card'),
     plain('obj6', 'the-classification-readout'),
@@ -1088,6 +1213,10 @@ export default function LinearTransformation2DPage({seoData, sectionsContent, st
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Linear Transformation</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
    <LinearTransformation explanationOverride={explanationOverride}/>

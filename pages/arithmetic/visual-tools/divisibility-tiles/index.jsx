@@ -472,6 +472,8 @@ import Head from 'next/head'
 import DivisibilityTiles from '../../../../app/components/divisibility/DivisibilityTiles'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import divisibilityTilesDiagrams from '@/app/components/divisibility/divisibilityTilesDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -537,7 +539,7 @@ Click the **Group** button to see the magic happen. The tool rearranges all tile
 
 When you click Group, the display transforms to show the division result. Complete groups appear as blue tiles enclosed in light blue boxes, each labeled with the group size. If your number doesn't divide evenly, leftover tiles display in bright yellow with an amber border, making the **remainder** immediately visible.
 
-The visual contrast between blue groups and yellow leftovers provides instant feedback about divisibility. Equal-sized blue boxes mean perfect division, while any yellow tiles indicate a remainder exists.`,
+The visual contrast between blue groups and yellow leftovers provides instant feedback about divisibility. Equal-sized blue boxes mean perfect division, while any yellow tiles indicate a [remainder](!/arithmetic/modulo#1) exists.`,
       before: ``,
       after: `The rows-of-ten arrangement is deliberate: it mirrors base-ten notation, so a number like 23 is readable at a glance as two full rows and three extra tiles—the tens digit and the units digit made physical.
 
@@ -588,7 +590,7 @@ This feature helps students understand the relationship between consecutive [mul
       title: `What is Divisibility?`,
       content: `**Divisibility** describes whether one integer divides another exactly, leaving no remainder. We say $a$ is divisible by $b$ when there exists an integer $k$ such that $a = b × k$. For example, 24 is divisible by 6 because $24 = 6 × 4$.
 
-The notation $b | a$ means "b divides a" and indicates that $a$ is a **multiple** of $b$. Equivalently, $b$ is a **factor** (or divisor) of $a$. Understanding divisibility is fundamental to working with fractions, finding common denominators, and factoring numbers.
+The notation $b | a$ means "b divides a" and indicates that $a$ is a **multiple** of $b$. Equivalently, $b$ is a **factor** (or divisor) of $a$. Understanding divisibility is fundamental to working with [fractions](!/arithmetic/fractions#1), finding [common denominators](!/arithmetic/fractions/adding-subtracting#3), and factoring numbers.
 
 Divisibility connects directly to the concept of [remainders](!#division-quotients-and-remainders). When $a ÷ b$ produces remainder $r$, we write $a = b × q + r$ where $q$ is the quotient. When $r = 0$, divisibility holds.`,
       before: ``,
@@ -651,11 +653,19 @@ Use the Divisibility Tiles tool to verify these rules visually. Enter a number, 
 
 **Greatest Common Divisor (GCD)**: The largest number that divides two integers evenly. Essential for simplifying **fractions** to lowest terms.
 
-**Least Common Multiple (LCM)**: The smallest number divisible by two given integers. Used when adding fractions with different denominators.
+**Least Common Multiple (LCM)**: The smallest number divisible by two given integers. Used when adding fractions with different [denominators](!/arithmetic/fractions#2).
 
 **Prime Factorization**: Breaking numbers into prime factors reveals all divisibility relationships and provides a systematic approach to finding GCD and LCM.
 
-**Modular Arithmetic**: Extends [remainder concepts](!#division-quotients-and-remainders) into a complete number system used in cryptography, computer science, and advanced mathematics.`,
+**Modular Arithmetic**: Extends [remainder concepts](!#division-quotients-and-remainders) into a complete number system used in cryptography, computer science, and advanced mathematics.
+
+[Divisibility Table](!/arithmetic/visual-tools/divisibility-table): The same twelve rules stated and tested for any number, side by side.
+
+[Divisibility Decision Tree](!/arithmetic/visual-tools/divisibility-tree): The rules applied in sequence as a branching yes/no test.
+
+[Modular Arithmetic Wheel](!/arithmetic/visual-tools/modular-wheel): The leftover tiles are the remainder, the position the number lands on around a wheel of n slots.
+
+[Euclidean Algorithm Visualizer](!/arithmetic/visual-tools/euclidean-algorithm): Computes the GCD used to reduce a fraction, by repeated division with remainder.`,
       before: ``,
       after: ``,
       link: '',
@@ -799,6 +809,7 @@ It also completes the tool's spectrum of outcomes: all blue (divisible), blue wi
 
   return {
     props: {
+      relatedTools: getRelatedTools('divisibility-tiles'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -811,7 +822,7 @@ It also completes the tool's spectrum of outcomes: all blue (divisible), blue wi
 }
 
 export default function DivisibilityTilesPage({
-  seoData,
+  relatedTools, seoData,
   sectionsContent,
   introContent,
   faqQuestions,
@@ -917,6 +928,7 @@ export default function DivisibilityTilesPage({
       <br/>
       <br/>
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

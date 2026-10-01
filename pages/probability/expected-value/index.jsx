@@ -792,6 +792,9 @@ import GenericTable from '@/app/components/generic-table/GenericTable'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import weightedExpectedValueDiagrams from '@/app/components/probability/expected-value/weightedExpectedValueDiagrams'
+import discreteExpectedValueDiagrams from '@/app/components/probability/expected-value/discreteExpectedValueDiagrams'
 
 
 export async function getStaticProps(){
@@ -1436,8 +1439,31 @@ const continuousExpectedValueFormulasData = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_intuition_0: demoUnitFrame({
+      svg: weightedExpectedValueDiagrams['pull-right'],
+      caption: 'A distribution pulled to the right: the mean follows the weight',
+      text: 'The expected value is a balance point: values with more probability pull it toward them, so when the heavy bars sit on the right the marked mean moves right of the simple average of the values. Long-run averages of repeated draws settle at that balance point. Drag the weights and watch the mean shift on the',
+      href: '/probability/visual-tools/expected-value/weighted',
+      linkText: 'weighted expected value visualizer',
+    }),
+    u_discrete_1: demoUnitFrame({
+      svg: discreteExpectedValueDiagrams.opening,
+      caption: 'A discrete distribution with E[X] = 3.4',
+      text: 'Each value contributes its value times its probability, and the bars here add up to an expected value of 3.4. Moving one slider changes one probability and renormalises the rest, so the mean moves toward whichever value gained weight. Drag a slider and watch the sum update on the',
+      href: '/probability/visual-tools/expected-value/discrete',
+      linkText: 'discrete expected value visualizer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          generalTable,
@@ -1467,7 +1493,7 @@ export default function ExpectedValuePage({
   continuousExpectedValueFormulasData,
   propertiesTable,
   examplesTable,
-  summaryTable,
+  summaryTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1488,6 +1514,8 @@ export default function ExpectedValuePage({
         link:'',
         content:[
             sectionsContent.intuition.content,
+                  <div key={'unit-u_intuition_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_intuition_0 }} />,
+          `The calculation behind the balance point comes next.`,
         ]
     },
     {
@@ -1534,6 +1562,8 @@ export default function ExpectedValuePage({
         content:[
           sectionsContent.discrete.content,
           sectionsContent.discrete.example,
+                  <div key={'unit-u_discrete_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_discrete_1 }} />,
+          `The continuous case replaces the sum by an integral.`,
         ]
     },
      {

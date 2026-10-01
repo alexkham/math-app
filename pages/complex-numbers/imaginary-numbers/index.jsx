@@ -1095,6 +1095,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import complexExplorerDiagrams from '@/app/components/calculators/complex-numbers/complexExplorerDiagrams'
+import iPowersDiagrams from '@/app/components/calculators/complex-numbers/iPowersDiagrams'
 
 
 export async function getStaticProps(){
@@ -1875,8 +1878,31 @@ const schemas = {
 
   
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    pureImag: demoUnitFrame({
+      svg: complexExplorerDiagrams.pureImaginary,
+      caption: 'z = 2i: a point on the imaginary axis',
+      text: 'The number has no real part, so it sits directly on the vertical axis at height 2; every pure imaginary number lives on this axis and nowhere else, just as every real number lives on the horizontal one. Slide the point along the axis and watch the real part stay at 0 on the',
+      href: '/complex-numbers/visual-tools/complex-explorer',
+      linkText: 'complex number explorer',
+    }),
+    cycle: demoUnitFrame({
+      svg: iPowersDiagrams.r1,
+      caption: 'The powers of i: a cycle of four',
+      text: 'The four values i, &#8722;1, &#8722;i, 1 sit on a loop and each multiplication by i steps one place round it, so i&#8309; lands back on i: the remainder of the exponent on division by 4 is all that matters. The highlighted node is the current power. Step the exponent up and watch the cycle repeat on the',
+      href: '/complex-numbers/visual-tools/i-powers',
+      linkText: 'powers of i visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1907,7 +1933,7 @@ export default function ImaginaryNumbersPage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1949,6 +1975,8 @@ export default function ImaginaryNumbersPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-pureImag'} dangerouslySetInnerHTML={{ __html: demoUnits.pureImag }} />,
+          `The imaginary axis is the number line of the pure imaginary numbers.`,
         ]
     },
     {
@@ -1989,6 +2017,8 @@ export default function ImaginaryNumbersPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+                  <div key={'unit-cycle'} dangerouslySetInnerHTML={{ __html: demoUnits.cycle }} />,
+          `Geometrically each multiplication by i is a quarter turn, which is why the cycle closes after four.`,
         ]
     },
     {

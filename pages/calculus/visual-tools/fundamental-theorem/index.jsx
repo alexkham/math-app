@@ -496,6 +496,9 @@ import FunctionFTC from '../../../../app/components/functions/ftc/FunctionFTC'
 import functionFTCDiagrams from '../../../../app/components/functions/ftc/functionFTCDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -802,6 +805,21 @@ The accumulator is $F(x) = \sin(x)$, so this family draws a cosine and a sine on
 The negative readings also make the sign convention concrete. Between $\pi/2$ and $2$ the shaded region lies below the axis and is subtracted, which is why the total of $0.909$ is smaller than the area of the visible region above the axis alone.`,
       link: '',
     },
+    obj17: {
+      title: `Plot Size and the Info Panel`,
+      content: `The row of buttons above the plot sets its size: **S** is $500 \\times 400$, **M** is $700 \\times 550$, **L** is $900 \\times 850$ and **XL** is $1100 \\times 850$ pixels. The page opens at $880 \\times 460$, and the current size is printed next to the buttons. A new size redraws the same curves, shading and marker dots; the numbers in the card do not change.
+
+The info panel on the right has two tabs.
+
+• **Explanation** follows the controls. It names the function, gives the integrand $f(t)$ and the accumulator $F(x)$ as formulas, then under **Right now** lists the current $a$ and $x$, the shaded area, $F(x)$ and $f(x)$, and closes with the two halves of the theorem. A short note at the end links to the matching family section on this page. The tab rewrites itself whenever you pick a function or move a slider.
+
+• **Concepts** does not change with the controls. It explains the accumulator $F$, what $F'(x)$ is, why Part 2 lets you evaluate an integral with any antiderivative, and what the picture shows.
+
+For the three numbers in the card, see [the at-the-point card](!#the-at-the-point-card).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
     obj16: {
       title: `Exponential: Accumulator and Integrand Almost Coincide`,
       content: `$f(t) = e^t$ from $0$ to $2$ gives
@@ -973,8 +991,147 @@ It follows directly from $f' = f$. The only functions whose accumulated area mat
   }
 
 
+  const instructions = [
+    'The **Function** picker on the left lists six functions in two groups, **Polynomial** and **Transcendental**; tapping one switches $f$ and its accumulator $F$ and resets $a$ to $0$ and $x$ to $2$. [Learn more about the function families](!#the-function-families)',
+    'The **Display** checkboxes **f(t)**, **F(x)** and **area** show or hide the solid integrand, the dashed accumulator and the shading; the legend under the plot lists only what is visible. [Learn more about the display toggles](!#display-toggles)',
+    'The **Parameters** sliders set **lower bound a** and **upper bound x**, the moving point, both from $-5$ to $5$; **Reset** puts them back at $a = 0$, $x = 2$. [Learn more about the a and x sliders](!#the-a-and-x-sliders)',
+    '**Accent color** under **Appearance** recolours the sliders, the card and the **Applied** chips; the **Reset** next to it returns to blue. [Learn more about the accent color](!#display-toggles)',
+    'The **S**, **M**, **L** and **XL** buttons above the plot set its size. [Learn more about plot size](!#plot-size-and-info-panel)',
+    'The shaded region runs under $f$ from $a$ to $x$; it counts negative where $f$ is below the t-axis and flips sign when $x$ is left of $a$. [Learn more about the shaded area](!#the-shaded-area)',
+    'The **At the moving point x** card shows **Area**, **F(x)** and **f(x) = F\'(x)**; the first two always match, and the third is the slope of $F$ at $x$. [Learn more about the at-the-point card](!#the-at-the-point-card)',
+    'The info panel has two tabs: **Explanation** gives the chosen function, its accumulator and the current values; **Concepts** walks through both parts of the theorem. [Learn more about the info panel](!#plot-size-and-info-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionFTC tool
+     (opens on Quadratic, a = 0, x = 2). Range inputs in DOM order:
+     0 = lower bound a, 1 = upper bound x. Checkboxes: 0 = f(t), 1 = F(x), 2 = area.
+     A new function resets a and x. Every value in a callout was read off the tool. */
+  const demos = {
+    'the-function-families': {
+      title: 'The function families',
+      script: [
+        { say: `TAP Identity
+f(t) = t. Shaded triangle, area 2.
+F(2) = 2. f(2) = 2.` },
+        { click: { button: 'Identity', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Cubic
+Area 4 = F(2). f(2) = 8.
+F(x) = x⁴/4: degree up by one.` },
+        { click: { button: 'Cubic', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Sine
+Area 1.416 = F(2).
+f(2) = 0.909: F still climbing.` },
+        { click: { button: 'Sine', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Cosine
+Area 0.909. f(2) = −0.416:
+integrand already negative.` },
+        { click: { button: 'Cosine', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Exponential
+Area 6.389. f(2) = 7.389.
+Gap exactly 1: F(x) = eˣ − 1.` },
+        { click: { button: 'Exponential', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-a-and-x-sliders': {
+      title: 'The a and x sliders',
+      script: [
+        { say: `DRAG x → 1
+Shading shrinks with x.
+Area = F(1) = 0.333. f(1) = 1.` },
+        { slide: { range: 1 }, to: 1, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG x → 0
+x = a. Region collapses.
+Area 0. F(a) = 0.` },
+        { slide: { range: 1 }, to: 0, ms: 1400 },
+        { wait: 2400 },
+        { say: `DRAG x → −2
+x left of a: sign flips.
+Area −2.667. f(−2) = 4.` },
+        { slide: { range: 1 }, to: -2, ms: 1600 },
+        { wait: 2600 },
+        { say: `DRAG a → 1
+Dashed F shifts; solid f stays.
+Area −3. f(x) still 4.` },
+        { slide: { range: 0 }, to: 1, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Reset
+Back to a = 0, x = 2.
+Area 2.667.` },
+        { click: { button: 'Reset', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'the-at-the-point-card': {
+      title: 'Reading the card: area, F(x), slope',
+      script: [
+        { say: `TAP Sine
+Area = F(x) = 1.416.
+f(x) = 0.909 > 0: F rising.` },
+        { click: { button: 'Sine', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG x → 3.15
+f(x) = −0.008, near zero.
+F flat at its top: area 2.` },
+        { slide: { range: 1 }, to: 3.15, ms: 1600 },
+        { wait: 2600 },
+        { say: `DRAG x → 5
+Shading below the axis subtracts.
+Area 0.716. f(x) = −0.959: F falling.` },
+        { slide: { range: 1 }, to: 5, ms: 1600 },
+        { wait: 2800 },
+        { say: `TAP Cosine
+x back to 2. Area 0.909 still positive,
+slope f(2) = −0.416 already negative.` },
+        { click: { button: 'Cosine', exact: true } },
+        { wait: 2800 },
+        { say: `DRAG x → 1.55
+f(x) = 0.021, near zero.
+F at its peak: area 1.` },
+        { slide: { range: 1 }, to: 1.55, ms: 1400 },
+        { wait: 2600 },
+      ],
+    },
+    'display-toggles': {
+      title: 'Display, plot size and info panel',
+      script: [
+        { say: `UNCHECK F(x)
+Dashed accumulator gone.
+Legend drops it. Plain area under f.` },
+        { click: { css: 'input[type="checkbox"]', nth: 1 } },
+        { wait: 2600 },
+        { say: `UNCHECK area
+Shading gone. Only f(t) left.
+Card numbers unchanged.` },
+        { click: { css: 'input[type="checkbox"]', nth: 2 } },
+        { wait: 2400 },
+        { say: `TAP L
+Plot 900 × 850.` },
+        { click: { button: 'L', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Concepts
+Fixed text: the accumulator,
+what F'(x) is, Part 1 and Part 2.` },
+        { click: { button: 'Concepts', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Explanation
+Right now: a, x, area,
+F(x) and f(x) for this setup.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('calculus-fundamental-theorem'),
       sectionsContent,
       stateUnits,
@@ -998,7 +1155,22 @@ It follows directly from $f' = f$. The only functions whose accumulated area mat
   }
 }
 
-export default function FTCVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function FTCVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionFTC explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -1021,17 +1193,18 @@ export default function FTCVisualizer({relatedTools, seoData, sectionsContent, s
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'the-function-families'),
+    withDemo(plain('obj2', 'the-function-families')),
     stateRow('obj11', 'area-that-grows-like-a-triangle', 'identity'),
     stateRow('obj12', 'the-opening-state', 'quadratic'),
     stateRow('obj13', 'a-faster-integrand', 'cubic'),
     stateRow('obj14', 'an-accumulator-that-turns-around', 'sine'),
     stateRow('obj15', 'where-the-curves-swap-roles', 'cosine'),
     stateRow('obj16', 'accumulator-and-integrand-coincide', 'exponential'),
-    plain('obj3', 'the-a-and-x-sliders'),
+    withDemo(plain('obj3', 'the-a-and-x-sliders')),
     plain('obj4', 'the-shaded-area'),
-    plain('obj5', 'the-at-the-point-card'),
-    plain('obj6', 'display-toggles'),
+    withDemo(plain('obj5', 'the-at-the-point-card')),
+    withDemo(plain('obj6', 'display-toggles')),
+    plain('obj17', 'plot-size-and-info-panel'),
     plain('obj7', 'what-is-the-ftc'),
     plain('obj8', 'part-1-the-accumulator'),
     plain('obj9', 'part-2-evaluation'),
@@ -1093,6 +1266,10 @@ export default function FTCVisualizer({relatedTools, seoData, sectionsContent, s
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'-50px',marginBottom:'0px'}}>Fundamental Theorem of Calculus</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionFTC explanations={explanations}/>
       <br/>

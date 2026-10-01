@@ -11,6 +11,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 
 
 export async function getStaticProps(){
@@ -622,8 +624,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    definition: demoUnitFrame({
+      svg: powersTableDiagrams['b2-default'],
+      caption: 'a&#8319; as a table: exponent, expanded product, value',
+      text: 'The middle column writes each power as its repeated product, 2 &#215; 2 &#215; 2 &#215; 2 for 2&#8308;, and the right column evaluates it, 16: the exponent is nothing more than the count of factors in the middle column. Every law on this page is a statement about how those factor lists combine. Read the three columns for any base on the',
+      href: '/algebra/visual-tools/powers-table',
+      linkText: 'powers table',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -643,7 +661,7 @@ return {
    }
 
 // export default function NaturalExponentsPage({seoData,sectionsContent , introContent}) {
-export default function NaturalExponentsPage({seoData, sectionsContent, introContent, obj2Table, obj8Table, summaryTable, faqQuestions, schemas}) {
+export default function NaturalExponentsPage({seoData, sectionsContent, introContent, obj2Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -662,6 +680,8 @@ export default function NaturalExponentsPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
+          `The five laws below are bookkeeping for these lists of factors.`,
         ]
     },
     {

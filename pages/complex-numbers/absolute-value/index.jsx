@@ -1269,6 +1269,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
+import complexAddSubDiagrams from '@/app/components/calculators/complex-numbers/complexAddSubDiagrams'
 
 
 export async function getStaticProps(){
@@ -2222,8 +2225,31 @@ const schemas = {
 
  
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    modulus: demoUnitFrame({
+      svg: conjugateModulusDiagrams.start,
+      caption: '|z| = 3.6, the length of the arrow',
+      text: 'The modulus is the straight-line distance from the origin to the point, the hypotenuse of the right triangle whose legs are the real and imaginary parts, which is why it is computed by the Pythagorean formula. The conjugate below the axis has exactly the same length. Drag z and watch the readout on the',
+      href: '/complex-numbers/visual-tools/complex-conjugate',
+      linkText: 'conjugate and modulus tool',
+    }),
+    triangle: demoUnitFrame({
+      svg: complexAddSubDiagrams.add,
+      caption: 'z&#8321; + z&#8322;: the diagonal is shorter than the two sides together',
+      text: 'The sum is the diagonal of the parallelogram, and the diagonal of a parallelogram is never longer than the two sides that lead to it: |z&#8321; + z&#8322;| &#8804; |z&#8321;| + |z&#8322;|, the triangle inequality as a picture. Equality happens only when the two arrows point the same way. Line the arrows up and watch the inequality become an equation on the',
+      href: '/complex-numbers/visual-tools/addition-subtraction',
+      linkText: 'complex addition and subtraction tool',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj1Table,
@@ -2254,7 +2280,7 @@ export default function AbsoluteValuePage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2280,6 +2306,8 @@ export default function AbsoluteValuePage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj1Table }}
           />,
+                  <div key={'unit-modulus'} dangerouslySetInnerHTML={{ __html: demoUnits.modulus }} />,
+          `Everything below is about how this one length behaves.`,
         ]
     },
     {
@@ -2336,6 +2364,8 @@ export default function AbsoluteValuePage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-triangle'} dangerouslySetInnerHTML={{ __html: demoUnits.triangle }} />,
+          `The algebraic proof in the next section verifies what the parallelogram makes obvious.`,
         ]
     },
     {

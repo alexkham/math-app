@@ -498,6 +498,9 @@ import FunctionDerivativeLocal from '../../../../app/components/calculus/visuali
 import functionDerivativeLocalDiagrams from '../../../../app/components/calculus/visualizers/functionDerivativeLocalDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -944,8 +947,111 @@ Both extrema also demonstrate the limitation of a single secant reading. A slope
   }
 
 
+  const instructions = [
+    'Drag $P_1$ or $P_2$ along the curve to set the interval; the secant, the readouts and the **Computation** tab update as you drag, and dragging pauses while a scenario plays. [Learn more about getting started](!#getting-started)',
+    'The four scenario buttons under the graph, **Ascending**, **Descending**, **Local max** and **Local min**, move $P_1$ and $P_2$ to a textbook interval and play a narrated animation with a numbered step banner on the graph; the last two end by tightening the points around $x = -1$ or $x = 1$. [Learn more about the four scenarios](!#the-four-scenarios)',
+    '**Reset** clears the scenario and returns $P_1$ and $P_2$ to $x = -1.40$ and $x = -0.40$ for free dragging. [Learn more about the four scenarios](!#the-four-scenarios)',
+    'The readout row under the buttons prints the x of $P_1$ and $P_2$ and the slope to two decimals, next to the legend for $f(x)$, the secant and $\\Delta x$, $\\Delta y$. [Learn more about exploring the curve](!#exploring-freely)',
+    'The **Computation** tab shows the two points, then $\\Delta x$ and $\\Delta y$, then $m = \\Delta y / \\Delta x$; during a scenario each block lights up when the animation reaches it. [Learn more about the computation tab](!#the-computation-tab)',
+    'The **Meaning** tab opens by itself when a scenario ends and names the configuration on a coloured verdict card; **Theory** holds the definition, sign and monotonicity, Fermat\'s theorem and the rules on this function. [Learn more about the meaning and theory tabs](!#the-meaning-and-theory-tabs)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionDerivativeLocal
+     tool (opens with P1 = -1.40, P2 = -0.40, no scenario, Computation tab).
+     Scenario buttons carry a glyph: '↗Ascending', '↘Descending', '⌒Local max',
+     '⌣Local min'. Each scenario plays its own timed animation (about 5.0 s, or
+     7.2 s with the two tighten steps) and then opens Meaning by itself, so every
+     scenario step waits past its end, and the step after a scenario is always
+     another scenario or Reset (both stop or replace the running animation).
+     Panel tabs are divs: targeted by text. P1/P2 canvas drags are not used:
+     the canvas maps pointer positions with its unscaled width. */
+  const demos = {
+    'the-four-scenarios': {
+      title: 'The four scenarios',
+      script: [
+        { say: `TAP Ascending
+Blue. P₁ −2.05, P₂ −1.35 on the left wing.
+Slope 1.93. Meaning opens: ASCENDING.` },
+        { click: { button: '↗Ascending', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Descending
+Red. P₁ −0.55, P₂ 0.55 across the middle.
+Slope −0.90. DESCENDING.` },
+        { click: { button: '↘Descending', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Local max
+Amber. Points straddle the peak at x = −1,
+then tighten to −1.08 and −0.92. Slope 0.00.` },
+        { click: { button: '⌒Local max', exact: true } },
+        { wait: 8400 },
+        { say: `TAP Local min
+Teal. Same around the valley at x = 1.
+Ends at 0.92 and 1.08. Slope 0.00.` },
+        { click: { button: '⌣Local min', exact: true } },
+        { wait: 8400 },
+        { say: `TAP Reset
+Points back to −1.40 and −0.40.
+Slope −0.11. Free to drag.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'the-computation-tab': {
+      title: 'Reading the Computation tab',
+      script: [
+        { say: `TAP Ascending
+Blocks light in turn: points, Δx, Δy, m.
+Δx = 0.70, Δy = 1.35, m = 1.93.`, at: 'tl' },
+        { click: { button: '↗Ascending', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Reset
+Computation back, every block lit.
+P₁ (−1.40, 0.49), P₂ (−0.40, 0.38). m = −0.11.`, at: 'tl' },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Descending
+Δx = 1.10, Δy = −0.99.
+m = −0.90.`, at: 'tl' },
+        { click: { button: '↘Descending', exact: true } },
+        { wait: 6200 },
+        { say: `TAP Local max
+Slope block stays lit while points tighten:
+m = 0.07, then 0.02, then 0.00.`, at: 'tl' },
+        { click: { button: '⌒Local max', exact: true } },
+        { wait: 8400 },
+      ],
+    },
+    'the-meaning-and-theory-tabs': {
+      title: 'Meaning and Theory tabs',
+      script: [
+        { say: `TAP Meaning
+No scenario: verdict from the slope.
+−0.11 < 0: DESCENDING card.`, at: 'tl' },
+        { click: { text: 'Meaning' } },
+        { wait: 2800 },
+        { say: `TAP Theory
+Definition, Sign & monotonicity,
+Fermat's theorem, On this function.`, at: 'tl' },
+        { click: { text: 'Theory' } },
+        { wait: 2800 },
+        { say: `TAP Local min
+Animation runs on Computation.
+Meaning opens by itself: LOCAL MINIMUM.`, at: 'tl' },
+        { click: { button: '⌣Local min', exact: true } },
+        { wait: 8400 },
+        { say: `TAP Reset
+Scenario cleared.
+Computation tab back.`, at: 'tl' },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('calculus-average-rate-of-change'),
          sectionsContent,
          stateUnits,
@@ -967,7 +1073,22 @@ Both extrema also demonstrate the limitation of a single secant reading. A slope
     }
    }
 
-export default function AverageRateOfChangeVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
+export default function AverageRateOfChangeVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionDerivativeLocal explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -990,13 +1111,13 @@ export default function AverageRateOfChangeVisualizer({relatedTools, seoData, se
   const genericSections=[
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'the-four-scenarios'),
+    withDemo(plain('obj2', 'the-four-scenarios')),
     stateRow('obj11', 'ascending-interval', 'asc'),
     stateRow('obj12', 'descending-interval', 'desc'),
     stateRow('obj13', 'closing-in-on-a-maximum', 'max'),
     stateRow('obj14', 'closing-in-on-a-minimum', 'min'),
-    plain('obj3', 'the-computation-tab'),
-    plain('obj4', 'the-meaning-and-theory-tabs'),
+    withDemo(plain('obj3', 'the-computation-tab')),
+    withDemo(plain('obj4', 'the-meaning-and-theory-tabs')),
     stateRow('obj5', 'exploring-freely', 'idle'),
     plain('obj6', 'what-is-average-rate-of-change'),
     plain('obj7', 'from-secant-to-derivative'),
@@ -1066,6 +1187,10 @@ export default function AverageRateOfChangeVisualizer({relatedTools, seoData, se
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Average Rate of Change</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(0.95)',width:'80%',margin:'auto'}}>
    <FunctionDerivativeLocal explanations={explanations}/>

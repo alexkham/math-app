@@ -9,6 +9,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 
 
 export async function getStaticProps(){
@@ -817,8 +819,24 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    product: demoUnitFrame({
+      svg: powersTableDiagrams['b2-default'],
+      caption: '2&#179; &#183; 2&#8308; = 2&#8311;: add the rows',
+      text: 'Read 8 from the row of 2&#179; and 16 from the row of 2&#8308;; their product, 128, sits in the row of 2&#8311;, three rows plus four rows down. Multiplying powers of the same base adds the exponents because it concatenates the lists of factors, and the table makes the addition of row numbers visible. Check any product against the table on the',
+      href: '/algebra/visual-tools/powers-table',
+      linkText: 'powers table',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj9Table,
@@ -838,7 +856,7 @@ const schemas = {
    }
 
 // export default function RulesPage({seoData,sectionsContent , introContent}) {
-export default function RulesPage({seoData, sectionsContent, introContent, obj9Table, obj10Table, summaryTable, faqQuestions, schemas}) {
+export default function RulesPage({seoData, sectionsContent, introContent, obj9Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -857,6 +875,8 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj9T
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-product'} dangerouslySetInnerHTML={{ __html: demoUnits.product }} />,
+          `The quotient rule reads the same table upward instead of downward.`,
         ]
     },
     {

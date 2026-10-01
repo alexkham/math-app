@@ -3029,6 +3029,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inverseDiagrams from '@/app/components/linear-algebra copy/matrix/inverseDiagrams'
+import renderMatrixGridV2 from '@/app/utils/illustrations/linear-algebra/matrix/matrixGrid.v2'
 
 
 export async function getStaticProps(){
@@ -3892,6 +3893,12 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const mgInverseRecipe = {
+    kind: 'recipe',
+    svgTitle: 'The 2 by 2 inverse: swap the diagonal, negate the off-diagonal, divide by the determinant',
+    caption: 'only possible when ad \u2212 bc \u2260 0',
+  };
+
   const demoUnits = {
     rowreduce: demoUnitFrame({
       svg: inverseDiagrams.done,
@@ -3906,6 +3913,11 @@ const schemas = {
       text: 'Each position is being filled with the signed determinant of the matrix left when its row and column are deleted. Transposing this array and dividing by the determinant gives the inverse, which shows plainly where the failure lives: a zero determinant makes the final division impossible no matter how well the cofactors came out. Follow the full route on the',
       href: '/linear-algebra/visual-tools/matrix-inverse',
       linkText: 'matrix inverse visualizer',
+    }),
+    inverseRecipe: demoUnitFrame({
+      svg: renderMatrixGridV2(mgInverseRecipe),
+      caption: 'The 2 &#215; 2 recipe',
+      text: 'Follow the colours across the arrow. The amber entries a and d trade corners; the blue entries b and c stay where they are but change sign; and the whole matrix is scaled by 1/(ad &#8722; bc). Multiply the result by A and every product collapses to the identity &#8212; which is also why the recipe fails the moment ad &#8722; bc is zero: there is nothing to divide by.',
     }),
   };
 
@@ -3971,6 +3983,8 @@ export default function MatrixInversePage({seoData, sectionsContent, introConten
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-inverseRecipe'} dangerouslySetInnerHTML={{ __html: demoUnits.inverseRecipe }} />,
+          `Three moves and one division: the 2 × 2 inverse is the one case simple enough to carry out by eye.`,
         ]
     },
     {

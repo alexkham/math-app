@@ -8,6 +8,9 @@ import OuterProductWrapper from '../../../../app/components/linear-algebra copy/
 import outerProductDiagrams from '../../../../app/components/linear-algebra copy/matrix/outerProductDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -417,8 +420,156 @@ Swapping the roles of $\\mathbf{u}$ and $\\mathbf{v}$ transposes the grid, and s
   }
 
 
+  const instructions = [
+    'The **Method** pills build $\\mathbf{u}\\mathbf{v}^T$ **Cell by cell**, **Row by row** or **Column by column**; switching rebuilds the scenes and returns the player to its first scene. [Learn more about the three methods](!#the-three-methods)',
+    'Hover the **?** icon next to **Method** for what the outer product is and why it has rank 1. [Learn more about getting started](!#getting-started)',
+    'The two **Lengths** steppers are independent: $\\mathbf{u}$ sets the rows and $\\mathbf{v}$ the columns of the result, $1$ to $5$ each, and the readout shows the result shape. [Learn more about choosing the two lengths](!#choosing-the-two-lengths)',
+    '**▶ Play** fills the whole matrix, **Next →** and **← Back** move one scene, **Reset** returns to the opening scene, and the speed menu sets the pace from Slow to Very Fast. [Learn more about the controls](!#getting-started)',
+    'Blue marks the active entry or entries of $\\mathbf{u}$, grey those of $\\mathbf{v}$, and green the cell, row or column being filled, with arrows into it. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Step explanations** log lists every cell, row or column filled so far, the current one highlighted. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real OuterProductWrapper
+     (opens on Cell by cell, u and v length 3, Step 1 / 11). Stepper buttons:
+     nth 0 = u, nth 1 = v. */
+  const demos = {
+    'getting-started': {
+      title: 'Play, speed, step, back',
+      script: [
+        { say: `SELECT Fast → TAP ▶ Play
+0.7 s per scene. Nine cells, row after row.
+Step 11 / 11: uvᵀ complete.` },
+        { set: 'select', value: 700 },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 8000 },
+        { say: `TAP Reset
+Step 1 / 11. Grid all ? again.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Next → Next →
+Step 3 / 11.
+u₁ · v₁, then u₁ · v₂ in row 1.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 1200 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ← Back
+Step 2 / 11: only u₁ · v₁.
+Row 1, column 2 back to ?.` },
+        { click: { button: '← Back', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'the-three-methods': {
+      title: 'Cells, rows, columns',
+      script: [
+        { say: `TAP Row by row
+Step 1 / 5.
+One scene per row: 3 rows.` },
+        { click: { button: 'Row by row' } },
+        { wait: 2400 },
+        { say: `TAP Next →
+Row 1: u₁ · vᵀ.
+Whole row fills at once.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Column by column → Next →
+Column 1: v₁ · u.
+Whole column fills at once.` },
+        { click: { button: 'Column by column' } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ▶ Play
+Columns 2 and 3, then Done.
+Same 3 × 3 matrix.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4600 },
+        { say: `TAP Cell by cell
+Step 1 / 11.
+Nine cells, one per scene.` },
+        { click: { button: 'Cell by cell' } },
+        { wait: 2400 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'Reading the highlights',
+      script: [
+        { say: `TAP Next →
+u₁ blue, v₁ grey.
+Row 1, column 1 green. Two arrows in.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Row by row → Next →
+u₁ blue, all of vᵀ grey.
+Row 1 green. One arrow per entry of vᵀ.` },
+        { click: { button: 'Row by row' } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Row 2: u₂ · vᵀ.
+Row 1 keeps u₁ · v₁, u₁ · v₂, u₁ · v₃.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Column by column → Next →
+Roles swap: all of u blue, v₁ grey.
+Column 1 green.` },
+        { click: { button: 'Column by column' } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'choosing-the-two-lengths': {
+      title: 'Two independent lengths',
+      script: [
+        { say: `TAP v ▼
+v length 2. result 3×2.
+No matching-length rule.` },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 2600 },
+        { say: `TAP u ▼ ▼
+u length 1. result 1×2.
+A single row. Step 1 / 4.` },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 400 },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+u₁ · v₁, u₁ · v₂.
+A scaled copy of vᵀ.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4600 },
+        { say: `TAP u ▲ × 4
+u length 5. result 5×2.
+Step 1 / 12.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 350 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 350 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 350 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP v ▲ ▲ ▲
+v length 5. result 5×5.
+25 entries from 10 numbers.` },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 350 },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 350 },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-vector-outer-product'),
       sectionsContent,
       stateUnits,
@@ -441,7 +592,22 @@ Swapping the roles of $\\mathbf{u}$ and $\\mathbf{v}$ transposes the grid, and s
   }
 }
 
-export default function OuterProductVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function OuterProductVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <OuterProductWrapper mode='both' defaultMethod='cell' defaultM={3} defaultN={3} explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -463,15 +629,15 @@ export default function OuterProductVisualizer({seoData, sectionsContent, stateU
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-three-methods'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-three-methods')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'cell-by-cell', 'cell'),
     stateRow('obj13', 'row-by-row', 'row'),
     stateRow('obj14', 'column-by-column', 'column'),
     stateRow('obj15', 'the-completed-product', 'done'),
-    plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-the-two-lengths'),
+    withDemo(plain('obj3', 'the-scene-player')),
+    withDemo(plain('obj4', 'choosing-the-two-lengths')),
     plain('obj5', 'what-the-outer-product-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -532,6 +698,10 @@ export default function OuterProductVisualizer({seoData, sectionsContent, stateU
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Outer Product of Vectors</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <OuterProductWrapper

@@ -964,6 +964,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gaussEliminationDiagrams'
+import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
 
 
 export async function getStaticProps(){
@@ -1682,6 +1683,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     ref: demoUnitFrame({
       svg: gaussEliminationDiagrams.refDone,
@@ -1703,6 +1705,13 @@ const schemas = {
       text: 'All coefficients gone, constant still present: the row claims zero equals a non-zero number. Detecting inconsistency needs no separate test, because reduction surfaces this row on its own if the system has no solution. Force one to appear on the',
       href: '/linear-algebra/visual-tools/gauss-elimination',
       linkText: 'Gaussian elimination visualizer',
+    }),
+    freeColumn: demoUnitFrame({
+      svg: linearSystemDiagrams.infinite,
+      caption: 'A free column becomes a direction',
+      text: 'A reduced form with fewer pivots than unknowns. The pivot columns fix their variables; the column without a pivot is free, and its variable can take any value. That one free variable turns the solution into a particular point p plus every multiple of a direction v&#8321; &#8212; one free column, one dimension of solutions. Compare the unique and inconsistent cases on the',
+      href: '/linear-algebra/visual-tools/linear-system-solutions',
+      linkText: 'solution sets visualizer',
     }),
   };
 
@@ -1798,6 +1807,8 @@ export default function EchelonFormPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-freeColumn'} dangerouslySetInnerHTML={{ __html: demoUnits.freeColumn }} />,
+          `Count the free columns and you have counted the dimensions of the solution set.`,
         ]
     },
     {

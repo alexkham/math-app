@@ -614,6 +614,9 @@ import LinearCombinationWrapper from '../../../../app/components/linear-algebra 
 import vectorLinCombDiagrams from '../../../../app/components/linear-algebra copy/matrix/vectorLinCombDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -1015,8 +1018,127 @@ Geometrically the final phase is the parallelogram rule applied to the two scale
   }
 
 
+  const instructions = [
+    'The **▲** / **▼** stepper sets the length shared by $u$ and $v$, from $1$ to $10$; $w$ always has the same length, and the run has $3n + 2$ scenes. [Learn more about choosing the length](!#choosing-vector-length)',
+    'Hover the **?** icon next to the length label for why a linear combination is scalar multiplication plus vector addition. [Learn more about getting started](!#getting-started)',
+    '**▶ Play** runs all three phases, **Next →** and **← Back** move one scene, **Reset** returns to the opening scene, and the speed menu sets the pace from Slow to Very Fast. [Learn more about the controls](!#getting-started)',
+    'The run walks three phases: $u$ is scaled by $\\alpha$ in place, then $v$ by $\\beta$, then each $w_i$ is filled with $\\alpha u_i + \\beta v_i$. [Learn more about the three phases](!#the-three-phases)',
+    'The active component is blue in phase 1 and grey in phase 2; in phase 3 two curved arrows flow from $u_i$ and $v_i$ into the green $w_i$. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Step explanations** log lists every scene so far with its phase and formula, the current one highlighted. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real
+     LinearCombinationWrapper in vector mode (opens on length 4, Step 1 / 14). */
+  const demos = {
+    'getting-started': {
+      title: 'Length, play, speed',
+      script: [
+        { say: `TAP ▼ ▼ ▼
+Length 1: u, v, w one slot each.
+Step 1 / 5.` },
+        { click: { button: '▼', exact: true } },
+        { wait: 400 },
+        { click: { button: '▼', exact: true } },
+        { wait: 400 },
+        { click: { button: '▼', exact: true } },
+        { wait: 2200 },
+        { say: `TAP ▶ Play
+α·u₁, then β·v₁,
+then w₁ = α·u₁ + β·v₁. Step 5 / 5.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6000 },
+        { say: `TAP ▲
+Length 2. Step 1 / 8.
+Two scenes per phase.` },
+        { click: { button: '▲', exact: true } },
+        { wait: 2200 },
+        { say: `SELECT Fast → TAP ▶ Play
+0.7 s per scene.
+Scale, scale, add. Step 8 / 8.` },
+        { set: 'select', value: 700 },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6000 },
+        { say: `TAP Reset
+Step 1 / 8.
+u, v unscaled again. w all ?.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-three-phases': {
+      title: 'Scale u, scale v, add',
+      script: [
+        { say: `TAP ▼ ▼ → TAP Next →
+Length 2. Phase 1: u₁ → α·u₁.
+Scaled in place. v untouched.` },
+        { click: { button: '▼', exact: true } },
+        { wait: 400 },
+        { click: { button: '▼', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+u₂ → α·u₂.
+u fully scaled. Phase 1 done.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next → Next →
+Phase 2: v₁ → β·v₁, v₂ → β·v₂.
+u stays scaled.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 1200 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next →
+Phase 3: w₁ = α·u₁ + β·v₁.
+Arrows from u₁ and v₁ into w₁.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▶ Play
+w₂ = α·u₂ + β·v₂, then Done.
+Step 8 / 8.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3600 },
+      ],
+    },
+    'choosing-vector-length': {
+      title: 'Scenes grow with the length',
+      script: [
+        { say: `TAP ▲
+Length 5. Step 1 / 17.
+3 phases × 5 components + intro + Done.` },
+        { click: { button: '▲', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+0.4 s per scene.
+5 scenes per phase. Step 17 / 17.` },
+        { set: 'select', value: 400 },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7600 },
+        { say: `TAP ▼ ▼ ▼
+Length 2. Step 1 / 8.
+Scenes rebuilt: w all ?.` },
+        { click: { button: '▼', exact: true } },
+        { wait: 400 },
+        { click: { button: '▼', exact: true } },
+        { wait: 400 },
+        { click: { button: '▼', exact: true } },
+        { wait: 2200 },
+        { say: `TAP ▶ Play
+Same three phases, 2 scenes each.
+Step 8 / 8.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4000 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-vector-linear-combination'),
       sectionsContent,
       stateUnits,
@@ -1039,7 +1161,22 @@ Geometrically the final phase is the parallelogram rule applied to the two scale
   }
 }
 
-export default function LinearCombinationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function LinearCombinationVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <LinearCombinationWrapper mode='vectors' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -1061,14 +1198,14 @@ export default function LinearCombinationVisualizer({seoData, sectionsContent, s
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-three-phases'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-three-phases')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'phase-1-scaling-u', 'scaleA'),
     stateRow('obj13', 'phase-2-scaling-v', 'scaleB'),
     stateRow('obj14', 'phase-3-adding', 'add'),
     plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-vector-length'),
+    withDemo(plain('obj4', 'choosing-vector-length')),
     plain('obj5', 'what-a-linear-combination-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -1132,6 +1269,10 @@ export default function LinearCombinationVisualizer({seoData, sectionsContent, s
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Linear Combinations of Vectors</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <LinearCombinationWrapper

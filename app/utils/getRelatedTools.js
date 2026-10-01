@@ -15,7 +15,9 @@ import registry from '../api/db/repositories/visual-tools-registry.json';
 export function urlFromPagePath(pagePath) {
   if (!pagePath) return null;
   if (!pagePath.startsWith('pages/')) return pagePath; // already a URL
-  return '/' + pagePath.replace(/^pages\//, '').replace(/\/index\.jsx$/, '');
+  // A dynamic-route tool (…/[view].jsx) is reached through its landing page,
+  // the index.jsx in the same folder (2026-09-23).
+  return '/' + pagePath.replace(/^pages\//, '').replace(/\/index\.jsx$/, '').replace(/\/\[view\]\.jsx$/, '');
 }
 
 /**
@@ -32,8 +34,10 @@ export function getRelatedTools(key) {
     if (rec.status === 'dropped') continue;
     const target = registry.tools[rec.key];
     if (!target || rec.key === key || seen.has(rec.key)) continue;
-    const url = urlFromPagePath(target.pagePath);
+    let url = urlFromPagePath(target.pagePath);
     if (!url) continue;
+    // a per-view entry of a dynamic route (registry `view` field, 2026-09-25)
+    if (target.view) url += '/' + target.view;
     seen.add(rec.key);
     out.push({
       key: rec.key,

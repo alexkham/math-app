@@ -1308,6 +1308,10 @@ import DiscreteProbabilityDistributions from '@/app/components/visualizations/pr
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
+import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 
 
 export async function getStaticProps(){
@@ -2537,8 +2541,38 @@ const generalTable = `
 `
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_1_0: demoUnitFrame({
+      svg: discretePmfDiagrams.binomial,
+      caption: 'Binomial PMF, n = 10, p = 0.5',
+      text: 'Each bar is a weight placed on a value of the discrete variable: the height at k is P(X = k), the weights add to 1 and the number line between the integers carries nothing. Here the heaviest weight sits at 5. Switch families and watch the weights redistribute on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+    u_10_1: demoUnitFrame({
+      svg: discreteCdfDiagrams.binomial,
+      caption: 'Binomial CDF, n = 10, p = 0.5',
+      text: 'Adding the PMF bars from the left produces a staircase: each riser at k has height P(X = k), so the PMF is recovered from the CDF by taking differences of consecutive steps, and the CDF from the PMF by running sums. The two descriptions carry the same information. Compare the risers with the bars on the',
+      href: '/probability/visual-tools/cdf/discrete',
+      linkText: 'discrete CDF explorer',
+    }),
+    u_11_2: demoUnitFrame({
+      svg: distributionExplorerDiagrams['uniform-discrete-pmf'],
+      caption: 'Discrete uniform PMF with its mean marked',
+      text: 'The catalogue of discrete mass functions ranges from the flat uniform pattern shown here through the peaked binomial and Poisson shapes to the decaying geometric tail; each is a different rule for splitting unit mass across integers. The explorer marks the mean of each. Compare the six families side by side on the',
+      href: '/probability/visual-tools/distributions/uniform-discrete',
+      linkText: 'distribution explorer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
      sectionsContent,
      introContent,
      generalTable,
@@ -2575,7 +2609,7 @@ export default function PMFPage({
   mistakesTable,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2605,6 +2639,8 @@ export default function PMFPage({
                   }} dangerouslySetInnerHTML={{ 
                     __html:   pmfData['probability at points'].svg
                   }} />,
+                  <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
+          `The set of values that carry weight is the support, defined next.`,
         ]
     },
     {
@@ -2723,6 +2759,8 @@ export default function PMFPage({
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+                  <div key={'unit-u_10_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_10_1 }} />,
+          `The common discrete families are catalogued next.`,
         ]
     },
     {
@@ -2736,6 +2774,8 @@ export default function PMFPage({
            <div key={'discrete'} style={{transform:'scale(0.8)'}}>
                     <DiscreteProbabilityDistributions/>
                   </div>,
+                  <div key={'unit-u_11_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_11_2 }} />,
+          `Common mistakes with these functions are collected next.`,
         ]
     },
     {

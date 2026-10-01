@@ -9,6 +9,9 @@ import { SCENARIOS as PR_SCENARIOS } from '../../../../app/components/linear-alg
 import projectionDiagrams, { groupOf, statsFor } from '../../../../app/components/linear-algebra copy/r2-visualizers/projection/projectionDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -253,7 +256,23 @@ The residual is all of $\\mathbf{v}$: nothing of it survives the projection.`,
 It is also the reason a projection has no inverse. Two different vectors on the kernel, or any vector and that vector plus a kernel vector, have the same projection, so the output does not determine the input. Every linear map with a non-trivial kernel fails to be invertible for exactly this reason.`,
       link: '',
     },
-    obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+    obj15: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj16: {
+      title: `Display Layer Toggles`,
+      content: `The chips between the explanation card and the matrix card switch the layers of the canvas on and off. They hide drawings only: $\\mathbf{v}$, the line, the animation and every number in the live card stay as they are.
+
+&bull; **grid** &mdash; the background grid, which morphs with $M(t)$ during the animation
+&bull; **line** &mdash; the blue projection line, the image of $P$, labelled im P
+&bull; **kernel** &mdash; the red dashed line perpendicular to it, labelled ker P: the vectors that $P$ sends to the origin
+&bull; **unit sq** &mdash; the unit square under $M(t)$, which thins to a segment of the line at $t = 1$
+&bull; **dropline** &mdash; the dashed perpendicular from $\\mathbf{v}$ to $P\\mathbf{v}$ with its right-angle mark
+&bull; **labels** &mdash; the names on the vectors and on the two lines
+
+With **grid** and **unit sq** off, only the geometry of a single projection is left: the line, its kernel, $\\mathbf{v}$, the foot of the perpendicular and the dropline. That is the picture behind the Pythagoras relation between $\\|\\mathbf{v}\\|$, $\\|P\\mathbf{v}\\|$ and $\\|\\mathbf{v} - P\\mathbf{v}\\|$ in the live card; the reasons are in [what orthogonal projection is](!#what-orthogonal-projection-is).`,
+      before: ``,
+      after: ``,
+      link: '',
+    }
   }
 
 
@@ -421,8 +440,113 @@ It is also the reason a projection has no inverse. Two different vectors on the 
   }
 
 
+  const instructions = [
+    'The **Project onto** panel on the left loads seven lines in three groups, **Coord axes**, **Diagonals** and **Custom angle**; each replays the morph and the explanation card describes it. [Learn more about the preset scenarios](!#preset-scenarios)',
+    'The canvas shows the blue projection line, the red dashed kernel, the orange vector $\\mathbf{v}$ and its projection $P\\mathbf{v}$ in green, joined by a dashed dropline with a right-angle mark. [Learn more about getting started](!#getting-started)',
+    'Drag the tip of $\\mathbf{v}$; $P\\mathbf{v}$ follows as the foot of the perpendicular and collapses to the origin on the kernel. [Learn more about dragging the vector](!#dragging-the-vector)',
+    'The **Morph I → P** card blends the grid and unit square from the identity into $P$: **Play** / **Pause**, step buttons, **Reset** and a $t$ slider. [Learn more about the morph animation](!#the-morph-animation)',
+    'The layer chips **grid**, **line**, **kernel**, **unit sq**, **dropline** and **labels** show or hide each layer of the canvas. [Learn more about the layer toggles](!#display-layer-toggles)',
+    'The **Projection matrix** card shows the entries of $P$; its $\\theta$ slider turns the line from $0°$ to $180°$. [Learn more about the matrix card and the angle slider](!#the-matrix-card-and-the-angle-slider)',
+    'The **Live** card (04) gives $|\\mathbf{v}|$, $|P\\mathbf{v}|$, $|\\mathbf{v} - P\\mathbf{v}|$, the angle between $\\mathbf{v}$ and the line, $\\det P$ and $\\operatorname{tr} P$. [Learn more about the live card](!#the-live-card)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real Projection tool
+     (opens on y = x, v = (1.5, 1.5); every preset replays the morph I -> P).
+     Handle: circle[data-handle="v"]; drags in screen px at scale 0.6
+     (desktop layout: 31 px per unit), each followed by a click on the
+     handle so instant replay sees the new position. Ranges: 0 = t,
+     1 = theta. Chips: label.pr-chip (0 grid, 1 line, 2 kernel, 3 unit sq,
+     4 dropline, 5 labels). */
+  const demos = {
+    'dragging-the-vector': {
+      title: 'The foot of the perpendicular',
+      script: [
+        { say: `DRAG v → (0.5, 2.5)
+Pv stays (1.5, 1.5): foot of the perpendicular.
+Dropline |v − Pv| = 1.41.` },
+        { drag: 'circle[data-handle="v"]', dx: -31.0, dy: -31.0, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2800 },
+        { say: `DRAG v → (−1, 1)
+On the red kernel line.
+Pv = (0, 0): dashed ring at the origin.` },
+        { drag: 'circle[data-handle="v"]', dx: -46.19, dy: 46.19, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2800 },
+        { say: `DRAG v → (2, 0.5)
+Pv = (1.25, 1.25).
+|v| = 2.06, |Pv| = 1.77, |v − Pv| = 1.06.` },
+        { drag: 'circle[data-handle="v"]', dx: 92.69, dy: 15.19, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2800 },
+        { say: `DRAG v → (2, 2)
+On the line: v = Pv.
+Dropline gone. |v − Pv| = 0.` },
+        { drag: 'circle[data-handle="v"]', dx: 0.31, dy: -46.5, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2600 },
+      ],
+    },
+    'the-morph-animation': {
+      title: 'Flattening the plane onto the x-axis',
+      script: [
+        { say: `TAP x-axis
+P = [1 0; 0 0]. Morph replays.
+Grid ends flat on the x-axis.` },
+        { click: { button: 'x-axis' } },
+        { wait: 2800 },
+        { say: `TAP Reset
+t = 0: square grid, square unit square.` },
+        { click: 'button[title="Reset"]' },
+        { wait: 2200 },
+        { say: `DRAG t → 0.5
+M(t) = [1 0; 0 0.5].
+Grid squashed halfway, square half height.` },
+        { slide: { range: 0 }, to: 0.5, ms: 1600 },
+        { wait: 2600 },
+        { say: `TAP Step forward
+t = 0.6. Square thinner still.` },
+        { click: 'button[title="Step forward"]' },
+        { wait: 2200 },
+        { say: `TAP Play
+t = 1: unit square collapsed to a segment.
+det P = 0: no way back.` },
+        { click: { button: 'Play', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-matrix-card-and-the-angle-slider': {
+      title: 'One angle, one projection',
+      script: [
+        { say: `TAP 30° line
+P = [0.75 0.43; 0.43 0.25].
+Diagonal adds to 1: trace P = 1.` },
+        { click: { button: '30° line' } },
+        { wait: 2800 },
+        { say: `DRAG θ → 70°
+P = [0.12 0.32; 0.32 0.88].
+Still symmetric. det P = 0, trace P = 1.` },
+        { slide: { range: 1 }, to: 70, ms: 1600 },
+        { wait: 2800 },
+        { say: `DRAG θ → 90°
+Off-diagonal entries vanish.
+P = [0 0; 0 1]: the y-axis.` },
+        { slide: { range: 1 }, to: 90, ms: 1200 },
+        { wait: 2600 },
+        { say: `UNCHECK grid, unit sq
+Line, kernel, v, Pv, dropline only.
+Pv = (0, 1.5).` },
+        { click: { css: 'label.pr-chip', nth: 0 } },
+        { click: { css: 'label.pr-chip', nth: 3 } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-projection-2d'),
       sectionsContent,
       stateUnits,
@@ -445,7 +569,22 @@ It is also the reason a projection has no inverse. Two different vectors on the 
   }
 }
 
-export default function Projection2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+export default function Projection2DPage({ instructions, demos,seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <Projection explanationOverride={explanationOverride}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -468,14 +607,15 @@ export default function Projection2DPage({seoData, sectionsContent, stateUnits, 
   const genericSections=[
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'dragging-the-vector'),
-    plain('obj3', 'the-morph-animation'),
+    withDemo(plain('obj2', 'dragging-the-vector')),
+    withDemo(plain('obj3', 'the-morph-animation')),
     plain('obj6', 'preset-scenarios'),
     stateRow('obj11', 'projection-onto-a-coordinate-axis', 'axes'),
     stateRow('obj12', 'projection-onto-a-diagonal', 'diagonals'),
     stateRow('obj13', 'projection-onto-a-custom-angle', 'custom'),
     stateRow('obj14', 'a-vector-on-the-kernel', 'kernel'),
-    plain('obj4', 'the-matrix-card-and-the-angle-slider'),
+    plain('obj16', 'display-layer-toggles'),
+    withDemo(plain('obj4', 'the-matrix-card-and-the-angle-slider')),
     plain('obj5', 'the-live-card'),
     plain('obj7', 'what-orthogonal-projection-is'),
     plain('obj8', 'kernel-and-image'),
@@ -535,6 +675,10 @@ export default function Projection2DPage({seoData, sectionsContent, stateUnits, 
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Projection onto a Line</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
    <Projection explanationOverride={explanationOverride}/>

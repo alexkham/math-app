@@ -1766,6 +1766,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
+import spanMembershipDiagrams from '@/app/components/linear-algebra copy/matrix/spanMembershipDiagrams'
 
 
 export async function getStaticProps(){
@@ -2423,6 +2424,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     cases: demoUnitFrame({
       svg: [linearSystemDiagrams.unique, linearSystemDiagrams.none, linearSystemDiagrams.infinite],
@@ -2430,6 +2432,27 @@ const schemas = {
       text: 'Existence fails only in the middle case, where a contradiction row appears. Uniqueness fails only in the last, where a free column leaves an unknown unpinned. The two questions are independent of each other, and between them they exhaust what can happen. Build a system for each ending on the',
       href: '/linear-algebra/visual-tools/linear-system-solutions',
       linkText: 'linear system solutions visualizer',
+    }),
+    existsIn: demoUnitFrame({
+      svg: spanMembershipDiagrams.membership,
+      caption: 'b in the column space: consistent',
+      text: 'Here the columns are v&#8321; = (1, 0, 1) and v&#8322; = (0, 1, 1), and the target is w = (2, 3, 5). Reducing [V | w] produces no row of the form 0 = nonzero: the last column carries no pivot, so appending w did not raise the rank, and w is a combination of the columns &#8212; the system has a solution. Try other targets on the',
+      href: '/linear-algebra/visual-tools/span-membership',
+      linkText: 'span and membership visualizer',
+    }),
+    notUnique: demoUnitFrame({
+      svg: spanMembershipDiagrams.dependent,
+      caption: 'Dependent columns: no uniqueness',
+      text: 'Three columns with v&#8323; = v&#8321; + v&#8322;. The reduction finds only two pivots, so the rank is 2 while there are 3 unknowns: one column is free. Whenever a solution exists it can be shifted along that free direction, so it is never unique. Uniqueness needs rank equal to the number of unknowns. Explore dependent sets on the',
+      href: '/linear-algebra/visual-tools/span-membership',
+      linkText: 'span and membership visualizer',
+    }),
+    rankJumps: demoUnitFrame({
+      svg: spanMembershipDiagrams.notin,
+      caption: 'The rank goes up when b is appended',
+      text: 'The off-plane preset: the target lies outside the plane of the columns. Reducing [V | w] puts a pivot in the last column &#8212; a row that reads 0 = nonzero &#8212; so rank([V | w]) is one more than rank(V). That jump is exactly the Rouch&#233;&#8211;Capelli condition failing, and the system has no solution. Move the target on and off the plane on the',
+      href: '/linear-algebra/visual-tools/span-membership',
+      linkText: 'span and membership visualizer',
     }),
   };
 
@@ -2502,6 +2525,8 @@ export default function SolvabilityPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-existsIn'} dangerouslySetInnerHTML={{ __html: demoUnits.existsIn }} />,
+          `Existence is a question about b alone: is it one of the vectors the columns can reach?`,
         ]
     },
     {
@@ -2510,6 +2535,8 @@ export default function SolvabilityPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-notUnique'} dangerouslySetInnerHTML={{ __html: demoUnits.notUnique }} />,
+          `Uniqueness is a question about A alone: whatever b is, a free column always leaves room to move.`,
         ]
     },
     {
@@ -2528,6 +2555,8 @@ export default function SolvabilityPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-rankJumps'} dangerouslySetInnerHTML={{ __html: demoUnits.rankJumps }} />,
+          `Comparing two ranks is all the theorem asks, and row reduction computes both at once.`,
         ]
     },
     {

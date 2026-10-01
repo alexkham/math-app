@@ -6237,7 +6237,7 @@ const algebraFormulasList = [
     name: 'Binomial Theorem',
     category: 'Polynomial Theorems',
     formula: `$$(x + y)^n = \\sum_{k=0}^{n} \\binom{n}{k} x^{n-k} y^k$$`,
-    link: { label: 'Algebraic Identities', url: '/algebra/identities#general' },
+    link: { label: 'Algebraic Identities', url: '/algebra/identities#3' },
     fields: {
       // ORIGINAL:
       // explanation: `Expands any positive integer power of a binomial as a sum of $n + 1$ terms. Each term is weighted by a binomial coefficient $\\binom{n}{k}$, with the powers of $x$ decreasing and the powers of $y$ increasing.`,
@@ -6272,7 +6272,7 @@ const algebraFormulasList = [
     name: 'Binomial Coefficient',
     category: 'Polynomial Theorems',
     formula: `$$\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$$`,
-    link: { label: 'Algebraic Identities', url: '/algebra/identities#general' },
+    link: { label: 'Algebraic Identities', url: '/algebra/identities#3' },
     fields: {
       // ORIGINAL:
       // explanation: `Counts the number of ways to choose $k$ items from $n$ items, and gives the coefficient of the $k$-th term in the binomial expansion. Read "$n$ choose $k$."`,
@@ -6298,7 +6298,7 @@ const algebraFormulasList = [
     name: 'Pascal\'s Rule',
     category: 'Polynomial Theorems',
     formula: `$$\\binom{n}{k} + \\binom{n}{k+1} = \\binom{n+1}{k+1}$$`,
-    link: { label: 'Algebraic Identities', url: '/algebra/identities#general' },
+    link: { label: 'Algebraic Identities', url: '/algebra/identities#3' },
     fields: {
       // ORIGINAL:
       // explanation: `Each entry in Pascal's triangle equals the sum of the two entries directly above it. This recurrence builds binomial coefficients row by row without computing factorials.`,

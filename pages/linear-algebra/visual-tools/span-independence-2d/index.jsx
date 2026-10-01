@@ -9,6 +9,9 @@ import { SCENARIOS as SP_SCENARIOS } from '../../../../app/components/linear-alg
 import spanIndependenceDiagrams, { groupOf, statsFor } from '../../../../app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -421,8 +424,134 @@ Drag $\\mathbf{b}$ to the origin as well and the rank drops to $0$: the span is 
   }
 
 
+  const instructions = [
+    'The sidebar loads nine presets in three groups: **Independent**, **Dependent** and **Edge cases**. [Learn more about the presets](!#preset-scenarios)',
+    'The canvas shows $\\mathbf{a}$ in orange, $\\mathbf{b}$ in cyan, the parallelogram they span and a lattice of their combinations; a corner label names the span. [Learn more about getting started](!#getting-started)',
+    'Drag the tip of $\\mathbf{a}$ or $\\mathbf{b}$, or type exact coordinates into the **Vectors** card. [Learn more about dragging the vectors](!#dragging-the-vectors)',
+    'The sweep panel turns $\\mathbf{b}$ a full circle: **Play** runs it, the $\\varphi$ slider sets the angle, and the progress bar and sparkline mark where the determinant is zero. [Learn more about the sweep animation](!#the-sweep-animation)',
+    'The **Live** card gives both lengths, the angle, the determinant, the area and the rank, with an INDEPENDENT / DEPENDENT / DEGENERATE strip. [Learn more about the live card](!#the-live-card)',
+    'The chips **grid**, **parallelogram**, **lattice**, **trail**, **span line** and **labels** show or hide each layer. [Learn more about the layer toggles](!#display-layer-toggles)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real SpanIndependence tool
+     (opens on Orthogonal: a = (2, 1), b = (-1, 2)). Handles: circle[data-handle="a|b"];
+     range 0 = the sweep angle phi; vector inputs: .sp-vec-grid input nth 0..3 = a1 a2 b1 b2;
+     chips: label.sp-chip nth 0..5 = grid, parallelogram, lattice, trail, span line, labels. */
+  const demos = {
+    'preset-scenarios': {
+      title: 'Nine presets',
+      script: [
+        { say: `TAP Oblique
+60° apart. det = 3.46.
+Independent: span = ℝ².` },
+        { click: { button: 'Oblique' } },
+        { wait: 2600 },
+        { say: `TAP Near-aligned
+15° apart. det = 1.04.
+Thin parallelogram. Still independent.` },
+        { click: { button: 'Near-aligned' } },
+        { wait: 2600 },
+        { say: `TAP b = 2a
+Parallel. det = 0. Rank 1.
+Span = one line.` },
+        { click: { button: 'b = 2a' } },
+        { wait: 2600 },
+        { say: `TAP a = 0
+Zero vector. Rank 1.
+Span = the line of b.` },
+        { click: { button: 'a = 0' } },
+        { wait: 2600 },
+        { say: `TAP Standard basis
+e₁, e₂. det = 1.
+Unit square.` },
+        { click: { button: 'Standard basis' } },
+        { wait: 2600 },
+      ],
+    },
+    'dragging-the-vectors': {
+      title: 'Dragging a and b',
+      script: [
+        { say: `DRAG b toward a
+Angle shrinks. det falls.
+Parallelogram thins.` },
+        { drag: 'circle[data-handle="b"]', dx: 93, dy: 0, ms: 1500 },
+        { click: 'circle[data-handle="b"]' },
+        { wait: 2600 },
+        { say: `DRAG b past a
+det < 0. Parallelogram purple.
+Orientation flipped. Still rank 2.` },
+        { drag: 'circle[data-handle="b"]', dx: 31, dy: 46.5, ms: 1500 },
+        { click: 'circle[data-handle="b"]' },
+        { wait: 2600 },
+        { say: `DRAG a up
+Both tips are handles.
+Lattice and area follow.` },
+        { drag: 'circle[data-handle="a"]', dx: 0, dy: -62, ms: 1500 },
+        { click: 'circle[data-handle="a"]' },
+        { wait: 2600 },
+        { say: `TAP Orthogonal
+Back to a = (2, 1), b = (−1, 2).
+det = 5.` },
+        { click: { button: 'Orthogonal' } },
+        { wait: 2400 },
+      ],
+    },
+    'the-sweep-animation': {
+      title: 'b turns a full circle',
+      script: [
+        { say: `DRAG φ → 90°
+b opposite a. det = 0.
+Rank 1: span = line.` },
+        { slide: { range: 0 }, to: 90, ms: 1600 },
+        { wait: 2600 },
+        { say: `DRAG φ → 180°
+det = −5. Parallelogram purple.
+Independent again.` },
+        { slide: { range: 0 }, to: 180, ms: 1600 },
+        { wait: 2600 },
+        { say: `DRAG φ → 270°
+b along a. det = 0.
+Second dependent angle.` },
+        { slide: { range: 0 }, to: 270, ms: 1600 },
+        { wait: 2600 },
+        { say: `TAP Orthogonal → Play
+b sweeps 360°. |b| fixed.
+Trail marks every parallelogram.` },
+        { click: { button: 'Orthogonal' } },
+        { wait: 600 },
+        { click: { button: 'Play', exact: true } },
+        { wait: 6000 },
+      ],
+    },
+    'the-live-card': {
+      title: 'Typed coordinates, live numbers',
+      script: [
+        { say: `TYPE b₁ = 4
+b = (4, 2) = 2a.
+det = 0. Rank 1. DEPENDENT.` },
+        { set: { css: '.sp-vec-grid input[type="number"]', nth: 2 }, value: 4 },
+        { wait: 2800 },
+        { say: `TYPE b₂ = 3
+b = (4, 3). |b| = 5.
+det = 2·3 − 1·4 = 2. Rank 2.` },
+        { set: { css: '.sp-vec-grid input[type="number"]', nth: 3 }, value: 3 },
+        { wait: 2800 },
+        { say: `UNCHECK parallelogram
+Fill gone. Area stays 2 in the card.` },
+        { click: { css: 'label.sp-chip', nth: 1 } },
+        { wait: 2400 },
+        { say: `UNCHECK lattice
+Dots gone. a and b only.` },
+        { click: { css: 'label.sp-chip', nth: 2 } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-span-independence-2d'),
       sectionsContent,
       stateUnits,
@@ -445,7 +574,22 @@ Drag $\\mathbf{b}$ to the origin as well and the rank drops to $0$: the span is 
   }
 }
 
-export default function SpanIndependence2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+export default function SpanIndependence2DPage({ instructions, demos,seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <SpanIndependence explanationOverride={explanationOverride}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -468,14 +612,14 @@ export default function SpanIndependence2DPage({seoData, sectionsContent, stateU
   const genericSections=[
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'dragging-the-vectors'),
-    plain('obj3', 'the-sweep-animation'),
-    plain('obj6', 'preset-scenarios'),
+    withDemo(plain('obj2', 'dragging-the-vectors')),
+    withDemo(plain('obj3', 'the-sweep-animation')),
+    withDemo(plain('obj6', 'preset-scenarios')),
     stateRow('obj11', 'independent-pairs', 'independent'),
     stateRow('obj12', 'near-dependence', 'nearDependent'),
     stateRow('obj13', 'dependent-pairs', 'dependent'),
     stateRow('obj14', 'edge-cases', 'edge'),
-    plain('obj4', 'the-live-card'),
+    withDemo(plain('obj4', 'the-live-card')),
     plain('obj5', 'display-layer-toggles'),
     plain('obj7', 'what-span-is'),
     plain('obj8', 'what-linear-independence-is'),
@@ -535,6 +679,10 @@ export default function SpanIndependence2DPage({seoData, sectionsContent, stateU
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Span and Linear Independence</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
    <SpanIndependence explanationOverride={explanationOverride}/>

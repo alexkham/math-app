@@ -877,6 +877,10 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import complexAddSubDiagrams from '@/app/components/calculators/complex-numbers/complexAddSubDiagrams'
+import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
+import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 
 
 export async function getStaticProps(){
@@ -1467,8 +1471,45 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    add: demoUnitFrame({
+      svg: complexAddSubDiagrams.add,
+      caption: 'z&#8321; + z&#8322; as the diagonal of a parallelogram',
+      text: 'The two arrows z&#8321; and z&#8322; are placed tail to tail and the sum is the diagonal of the parallelogram they span, exactly as vectors add: real parts add along the horizontal, imaginary parts along the vertical. Drag either summand and watch the diagonal follow on the',
+      href: '/complex-numbers/visual-tools/addition-subtraction',
+      linkText: 'complex addition and subtraction tool',
+    }),
+    sub: demoUnitFrame({
+      svg: complexAddSubDiagrams.sub,
+      caption: 'z&#8321; &#8722; z&#8322; = z&#8321; + (&#8722;z&#8322;)',
+      text: 'The subtrahend is reversed into &#8722;z&#8322; and then added: the difference is the diagonal of the parallelogram spanned by z&#8321; and the reversed arrow. Its length is the distance between the two original points. Reverse either operand and watch the diagonal swing on the',
+      href: '/complex-numbers/visual-tools/addition-subtraction',
+      linkText: 'complex addition and subtraction tool',
+    }),
+    mul: demoUnitFrame({
+      svg: complexMultiplicationDiagrams.general,
+      caption: 'z&#8321;z&#8322;: arguments add, moduli multiply',
+      text: 'The product sits at the angle &#952;&#8321; + &#952;&#8322; marked in the picture and at distance |z&#8321;||z&#8322;| from the origin: multiplying by a complex number rotates by its argument and scales by its modulus. Nothing in the algebraic expansion shows this; the picture does. Turn one factor and watch the product swing round on the',
+      href: '/complex-numbers/visual-tools/multiplication',
+      linkText: 'complex multiplication tool',
+    }),
+    div: demoUnitFrame({
+      svg: complexDivisionDiagrams.general,
+      caption: 'z&#8321;/z&#8322;: arguments subtract, moduli divide',
+      text: 'The quotient sits at the angle &#952;&#8321; &#8722; &#952;&#8322; and at distance |z&#8321;|/|z&#8322;|: division undoes the rotation and the scaling that multiplication performs. Multiplying numerator and denominator by the conjugate is the algebra that produces this picture. Move the divisor and watch the quotient counter-rotate on the',
+      href: '/complex-numbers/visual-tools/division',
+      linkText: 'complex division tool',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1499,7 +1540,7 @@ export default function OperationsPage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1520,6 +1561,8 @@ export default function OperationsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-add'} dangerouslySetInnerHTML={{ __html: demoUnits.add }} />,
+          `Componentwise addition and vector addition are one and the same rule.`,
         ]
     },
     {
@@ -1528,6 +1571,8 @@ export default function OperationsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-sub'} dangerouslySetInnerHTML={{ __html: demoUnits.sub }} />,
+          `Subtraction is addition of the additive inverse, on the page and on the plane.`,
         ]
     },
     {
@@ -1541,6 +1586,8 @@ export default function OperationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+                  <div key={'unit-mul'} dangerouslySetInnerHTML={{ __html: demoUnits.mul }} />,
+          `The four-term expansion hides a rotation; the trigonometric form reveals it.`,
         ]
     },
     {
@@ -1554,6 +1601,8 @@ export default function OperationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+                  <div key={'unit-div'} dangerouslySetInnerHTML={{ __html: demoUnits.div }} />,
+          `The conjugate trick is the algebra that performs this counter-rotation.`,
         ]
     },
     {

@@ -1292,6 +1292,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import complexAddSubDiagrams from '@/app/components/calculators/complex-numbers/complexAddSubDiagrams'
+import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
 
 
 export async function getStaticProps(){
@@ -2251,8 +2254,31 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    negation: demoUnitFrame({
+      svg: complexAddSubDiagrams.sub,
+      caption: '&#8722;z&#8322; is z&#8322; turned through 180&#176;',
+      text: 'The additive inverse &#8722;z&#8322; is the arrow z&#8322; reversed: same length, opposite direction, the point reflected through the origin. Subtracting z&#8322; is then adding this reversed arrow, which is the diagonal z&#8321; &#8722; z&#8322; drawn in the picture. Flip the sign of any number and watch it pass through the origin on the',
+      href: '/complex-numbers/visual-tools/addition-subtraction',
+      linkText: 'complex addition and subtraction tool',
+    }),
+    vsConj: demoUnitFrame({
+      svg: conjugateModulusDiagrams.start,
+      caption: 'z&#772; reflects in the real axis; &#8722;z would reflect through the origin',
+      text: 'The conjugate shown here changes only the sign of the imaginary part, so z and z&#772; are mirror images across the real axis. The additive inverse changes both signs and lands diagonally opposite, in the quadrant the conjugate never visits. Compare the two by hand on the',
+      href: '/complex-numbers/visual-tools/complex-conjugate',
+      linkText: 'conjugate and modulus tool',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj5Table,
@@ -2283,7 +2309,7 @@ export default function AdditiveInversePage({
   obj10Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2331,6 +2357,8 @@ export default function AdditiveInversePage({
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-negation'} dangerouslySetInnerHTML={{ __html: demoUnits.negation }} />,
+          `Reflection through the origin is the geometric meaning of a change of sign in both parts.`,
         ]
     },
     {
@@ -2365,6 +2393,8 @@ export default function AdditiveInversePage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj6Table }}
           />,
+                  <div key={'unit-vsConj'} dangerouslySetInnerHTML={{ __html: demoUnits.vsConj }} />,
+          `Two sign changes versus one: that is the whole difference between the two operations.`,
         ]
     },
     {

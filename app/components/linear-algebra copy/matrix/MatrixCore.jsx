@@ -357,7 +357,12 @@ export function SceneCanvas({
       return;
     }
 
-    const containerRect = containerRef.current.getBoundingClientRect();
+    // Measure in the container's own (unscaled) pixels, so overlays stay on
+    // their cells when an ancestor scales the canvas with a CSS transform.
+    const rawRect = containerRef.current.getBoundingClientRect();
+    const k = containerRef.current.offsetWidth ? rawRect.width / containerRef.current.offsetWidth : 1;
+    const unscale = (r) => ({ left: r.left / k, top: r.top / k, right: r.right / k, bottom: r.bottom / k, width: r.width / k, height: r.height / k });
+    const containerRect = unscale(rawRect);
     const els = [];
 
     scene.overlays.forEach((ov) => {
@@ -373,8 +378,8 @@ export function SceneCanvas({
         );
         if (!fromCell || !toCell) return;
 
-        const fr = fromCell.getBoundingClientRect();
-        const tr = toCell.getBoundingClientRect();
+        const fr = unscale(fromCell.getBoundingClientRect());
+        const tr = unscale(toCell.getBoundingClientRect());
         const x1 = fr.left + fr.width / 2 - containerRect.left;
         const y1 = fr.top + fr.height / 2 - containerRect.top;
         const x2 = tr.left + tr.width / 2 - containerRect.left;
@@ -419,8 +424,8 @@ export function SceneCanvas({
         const lastCell  = matrixEl.querySelector(`[data-row="${lastK}"][data-col="${lastK}"]`);
         if (!firstCell || !lastCell) return;
 
-        const fr = firstCell.getBoundingClientRect();
-        const lr = lastCell.getBoundingClientRect();
+        const fr = unscale(firstCell.getBoundingClientRect());
+        const lr = unscale(lastCell.getBoundingClientRect());
 
         const x1 = fr.left   - containerRect.left;
         const y1 = fr.top    - containerRect.top;
@@ -446,7 +451,7 @@ export function SceneCanvas({
         const rects = ids
           .map((id) => containerRef.current.querySelector(`[data-matrix-id="${id}"]`))
           .filter(Boolean)
-          .map((el) => el.getBoundingClientRect());
+          .map((el) => unscale(el.getBoundingClientRect()));
         if (rects.length === 0) return;
 
         const padding = ov.padding != null ? ov.padding : 14;

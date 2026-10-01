@@ -696,7 +696,7 @@ export default function PowerWrapper({
       padding: '22px',
       fontFamily: 'Arial, sans-serif'
     }}>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .pw-stepper-btn:hover:not(:disabled) { color: #1e40af; }
         .pw-stepper-btn:disabled { color: #cbd5e1; cursor: not-allowed; }
 
@@ -770,7 +770,7 @@ export default function PowerWrapper({
           visibility: visible;
           opacity: 1;
         }
-      `}</style>
+      ` }} />
 
       {(title || subtitle) && (
         <div style={{ marginBottom: '18px' }}>

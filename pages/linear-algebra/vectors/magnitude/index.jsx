@@ -813,6 +813,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import magnitudeDiagrams from '@/app/components/linear-algebra copy/matrix/magnitudeDiagrams'
+import renderVectorArrowsV3 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v3'
 
 
 export async function getStaticProps(){
@@ -1383,6 +1384,21 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const vaUnitCircle = {
+    kind: 'units',
+    svgTitle: 'Every unit vector ends on the unit circle',
+    vectors: [
+      { at: [1, 0], label: 'e\u2081 = (1, 0)', dx: 8, dy: -10 },
+      { at: [0, 1], label: 'e\u2082 = (0, 1)', dx: 10, dy: -8 },
+      { at: [Math.SQRT1_2, Math.SQRT1_2], label: '(1/\u221a2, 1/\u221a2)', dx: 10, dy: -6 },
+      { at: [-0.6, 0.8], label: '(\u22120.6, 0.8)', dx: -10, dy: -8, anchor: 'end' },
+      { at: [0.28, -0.96], label: '(0.28, \u22120.96)', dx: 12, dy: 14 },
+    ],
+    shapeLabel: { text: 'the unit circle', at: [-0.72 - 8 / 120, -0.72 - 22 / 120] },
+    note: 'each: sum of squared components = 1',
+    caption: 'every unit vector ends on the unit circle',
+  };
+
   const demoUnits = {
     norm: demoUnitFrame({
       svg: magnitudeDiagrams.root,
@@ -1397,6 +1413,11 @@ const schemas = {
       text: 'Each component is being divided by the length just computed, so the direction survives untouched while the size collapses to exactly one. This is why normalisation fails for the zero vector alone &#8212; it is the single case with no length to divide by and no direction to preserve. Normalise a vector of your choosing on the',
       href: '/linear-algebra/visual-tools/vector-magnitude',
       linkText: 'magnitude visualizer',
+    }),
+    unitCircle: demoUnitFrame({
+      svg: renderVectorArrowsV3(vaUnitCircle),
+      caption: 'Unit vectors in every direction',
+      text: 'Five unit vectors, each drawn from the origin. Two lie along the axes, one at 45&#176;, two in less obvious directions &#8212; for (&#8722;0.6, 0.8), the squares add as 0.36 + 0.64 = 1. Whatever the direction, a length of exactly 1 puts the tip on the circle of radius 1, so the unit vectors of the plane and the points of the unit circle are the same thing.',
     }),
   };
 
@@ -1492,6 +1513,8 @@ export default function VectorMagnitudePage({seoData, sectionsContent, introCont
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-unitCircle'} dangerouslySetInnerHTML={{ __html: demoUnits.unitCircle }} />,
+          `Choosing a unit vector is choosing a direction and nothing else, which is exactly what normalization below extracts.`,
         ]
     },
     {

@@ -1008,6 +1008,10 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderSetElements from '@/app/utils/illustrations/set-theory/relationships/setElements'
+import renderSetElementsV2 from '@/app/utils/illustrations/set-theory/relationships/setElements.v2'
 
 
 export async function getStaticProps(){
@@ -1678,8 +1682,68 @@ const schemas = {
 
  
 
+  const VENN_TOOL = '/set-theory/visual-tools/two-sets-basic-venn';
+  // Authored figures for the two concepts no set-theory tool demonstrates.
+  // setElements draws them; these are data only. Package doc beside the renderer.
+  const seEquivalence = {
+    kind: 'pairing', width: 560, height: 290,
+    svgTitle: 'Equivalence is decided by pairing elements off, not by comparing them',
+    panels: [
+      { leftName: 'A', rightName: 'B', left: ['a', 'b', 'c'], right: ['1', '2', '3'],
+        pairs: [[0, 0], [1, 1], [2, 2]], verdict: 'paired off: |A| = |B|', ok: true },
+      { leftName: 'A', rightName: 'C', left: ['a', 'b', 'c'], right: ['1', '2'],
+        pairs: [[0, 0], [1, 1]], verdict: 'one left over: |A| \u2260 |C|', ok: false },
+    ],
+  };
+  const sePartition = {
+    kind: 'partition', width: 520, height: 280,
+    svgTitle: 'A partition cuts a set into blocks that cover it with no overlap',
+    setLabel: 'S = {1, 2, 3, 4, 5}',
+    blocks: [
+      { items: ['1', '3'], label: '{1, 3}' },
+      { items: ['2', '4'], label: '{2, 4}' },
+      { items: ['5'], label: '{5}' },
+    ],
+    note: 'every element in exactly one block \u2014 no gaps, no overlaps',
+  };
+
+  const demoUnits = {
+    equalSets: demoUnitFrame({
+      svg: twoSetsVennDiagrams.equalSets,
+      caption: 'A = B, frozen',
+      text: 'The two circles coincide completely &#8212; one drawn solid for A, one dashed for B &#8212; because equal sets occupy exactly the same region: every element of one is an element of the other. Compare this against every other relationship on the',
+      href: VENN_TOOL,
+      linkText: 'two-set Venn explorer',
+    }),
+    disjoint: demoUnitFrame({
+      svg: twoSetsVennDiagrams.disjoint,
+      caption: 'A &#8745; B = &#8709;, frozen',
+      text: 'The circles pull completely apart: no overlap region exists, because no element belongs to both sets. Slide between disjoint, overlapping, and nested configurations on the',
+      href: VENN_TOOL,
+      linkText: 'two-set Venn explorer',
+    }),
+    overlapping: demoUnitFrame({
+      svg: twoSetsVennDiagrams.intersection,
+      caption: 'Overlapping sets, frozen',
+      text: 'The shaded lens is non-empty &#8212; the shared elements &#8212; while both crescents keep elements of their own: the definition of overlap, drawn. Explore how the lens grows and shrinks as sets change on the',
+      href: VENN_TOOL,
+      linkText: 'two-set Venn explorer',
+    }),
+    equivalence: demoUnitFrame({
+      svg: renderSetElementsV2(seEquivalence),
+      caption: 'Pairing off, and failing to',
+      text: 'On the left the two sets share no elements at all, yet every element of <em>A</em> finds exactly one partner in <em>B</em> &#8212; so they are equivalent without being equal. On the right one element of <em>A</em> is left with nowhere to go, and that single leftover is enough to make the sets inequivalent.',
+    }),
+    partition: demoUnitFrame({
+      svg: renderSetElements(sePartition),
+      caption: 'Three blocks that fill the set',
+      text: 'The three blocks sit side by side inside <em>S</em> without touching, so no element can belong to two of them; together they leave no element of <em>S</em> outside. Those two facts &#8212; no overlap, no gap &#8212; are the whole definition of a partition.',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     summaryTable,
@@ -1699,7 +1763,7 @@ const schemas = {
 
  
 
-export default function SetRelationshipsPage({seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas}) {
+export default function SetRelationshipsPage({demoUnits, seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1718,6 +1782,8 @@ export default function SetRelationshipsPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-equal-sets'} dangerouslySetInnerHTML={{ __html: demoUnits.equalSets }} />,
+          `Equality is the strictest of all set relationships — everything that follows on this page relaxes it in one direction or another.`,
         ]
     },
     {
@@ -1726,6 +1792,8 @@ export default function SetRelationshipsPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-equivalence'} dangerouslySetInnerHTML={{ __html: demoUnits.equivalence }} />,
+          `For infinite sets the same pairing test still works, which is how $\\mathbb{N}$ and $\\mathbb{Z}$ turn out to be equivalent.`,
         ]
     },
     {
@@ -1734,6 +1802,8 @@ export default function SetRelationshipsPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-disjoint'} dangerouslySetInnerHTML={{ __html: demoUnits.disjoint }} />,
+          `Disjointness is the opposite extreme from equality: no shared elements at all — a condition important enough that probability gives it its own name.`,
         ]
     },
     {
@@ -1742,6 +1812,8 @@ export default function SetRelationshipsPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-overlapping'} dangerouslySetInnerHTML={{ __html: demoUnits.overlapping }} />,
+          `Overlap is the general case between the two extremes — and the configuration where the set operations of union, intersection, and difference all produce genuinely distinct results.`,
         ]
     },
     {
@@ -1750,6 +1822,8 @@ export default function SetRelationshipsPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-partition'} dangerouslySetInnerHTML={{ __html: demoUnits.partition }} />,
+          `Remove any one block, or let two blocks share an element, and the collection stops being a partition.`,
         ]
     },
 
@@ -1934,7 +2008,7 @@ export default function SetRelationshipsPage({seoData, sectionsContent, introCon
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Page Title</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Relationship between Sets</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

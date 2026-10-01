@@ -285,23 +285,27 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import Sections from '../../../../app/components/page-components/section/Sections'
 import SectionTableOfContents from '../../../../app/components/page-components/section/SectionTableofContents'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 // Surfaced on the /set-theory hub via buildSectionData extraction.
 
 
 const instructions = [
-  'Pick how many sets you want with the 2 / 3 / 4 / 5 buttons.',
-  'Type an expression in the box, or build it with the symbol buttons: A B \u2229 \u222a \\ \u2295 \u1d9c ( ) \u2205 U. Clear empties the box.',
-  'The diagram shades every region that satisfies the expression. The counter beside Expression shows how many regions out of the total are shaded.',
-  'The Regions strip lists every region. Dots show which sets a region is inside; a filled cell means it is shaded.',
-  'Put a second expression in the Compare box: \u2261 means it shades the same regions, \u2262 means it does not.',
-  'Library tab: click a preset expression to load it. With 2 or 3 sets you can also switch the layout to Overlapping, Disjoint, A \u2286 B, or A = B.',
-  'Elements tab: one set per line, like A = 1, 2, 3. Use U for elements in no set. Each element drops into the region its membership picks. Toggle Show elements and Show counts.',
-  'Style tab: highlight color and opacity, outline color and width, circle size, and switches for the universe box, region labels, and the caption.',
-  'Drag any curve to move it. At 4 and 5 sets the layout is fixed \u2014 dragging destroys regions.',
-  'Download SVG or Download PNG to save the diagram.',
-  'Typing shortcuts: & for \u2229, | or + for \u222a, - for \\. Complement is A\u1d9c, A\u2032, A* or \u00acA. \u2295 is symmetric difference. Only the set letters currently on the diagram are valid.'
+  'Pick how many sets you want with the 2 / 3 / 4 / 5 buttons. [Learn more about getting started](!#getting-started)',
+  'Type an expression in the box, or build it with the symbol buttons: A B \u2229 \u222a \\ \u2295 \u1d9c ( ) \u2205 U. Clear empties the box. [Learn more about writing set expressions](!#writing-set-expressions)',
+  'The diagram shades every region that satisfies the expression. The counter beside Expression shows how many regions out of the total are shaded. [Learn more about the counter](!#getting-started)',
+  'The Regions strip lists every region. Dots show which sets a region is inside; a filled cell means it is shaded. [Learn more about the Regions strip](!#the-regions-strip)',
+  'Put a second expression in the Compare box: \u2261 means it shades the same regions, \u2262 means it does not. [Learn more about comparing two expressions](!#comparing-two-expressions)',
+  'Library tab: click a preset expression to load it. With 2 or 3 sets you can also switch the layout to Overlapping, Disjoint, A \u2286 B, or A = B. [Learn more about presets and layouts](!#presets-and-layouts)',
+  'Elements tab: one set per line, like A = 1, 2, 3. Use U for elements in no set. Each element drops into the region its membership picks. Toggle Show elements and Show counts. [Learn more about placing elements in regions](!#placing-elements-in-regions)',
+  'Style tab: highlight color and opacity, outline color and width, circle size, and switches for the universe box, region labels, and the caption. [Learn more about the Style tab](!#styling-and-exporting)',
+  'Drag any curve to move it. At 4 and 5 sets the layout is fixed \u2014 dragging destroys regions. [Learn more about dragging curves](!#styling-and-exporting)',
+  'Download SVG or Download PNG to save the diagram. [Learn more about exporting](!#styling-and-exporting)',
+  'Typing shortcuts: & for \u2229, | or + for \u222a, - for \\. Complement is A\u1d9c, A\u2032, A* or \u00acA. \u2295 is symmetric difference. Only the set letters currently on the diagram are valid. [Learn more about typing shortcuts](!#writing-set-expressions)'
 ]
 
 
@@ -385,7 +389,7 @@ export async function getStaticProps() {
 Then give the diagram something to shade:
 
 • Type an expression directly into the Expression box.
-• Or click the symbol buttons to assemble it: set letters, intersection, union, difference, symmetric difference, complement, parentheses, empty set, and the universe.
+• Or click the symbol buttons to assemble it: set letters, [intersection](!/set-theory/operations#2), [union](!/set-theory/operations#1), difference, [symmetric difference](!/set-theory/operations#5), [complement](!/set-theory/operations#3), parentheses, [empty set](!/set-theory/basics#3), and the universe.
 • Clear empties the box and removes all shading.
 
 Every region satisfying the expression fills with the highlight color. The counter next to the Expression box reports how many regions out of the total are currently shaded, so a two-set union should read 3 of 4, and a three-set intersection should read 1 of 8.
@@ -449,11 +453,11 @@ Comparison is per-region, not per-symbol, so two expressions written completely 
 With 2 or 3 sets the Library tab also changes the layout:
 
 • **Overlapping** is the familiar arrangement where every combination of memberships exists.
-• **Disjoint** separates the circles so no element belongs to two sets.
+• **Disjoint** separates the circles so no [element](!/set-theory/basics#4) belongs to two sets.
 • **A is a subset of B** nests one circle inside another.
 • **A = B** puts the circles on top of each other.
 
-Layouts matter because they encode assumptions. On a disjoint layout, $A \\cap B$ is empty and the shading confirms it. On a subset layout, $A \\setminus B$ vanishes. Switching layouts while holding an expression fixed shows which results depend on the sets actually overlapping.`,
+Layouts matter because they encode assumptions. On a disjoint layout, $A \\cap B$ is empty and the shading confirms it. On a [subset](!/set-theory/subsets#1) layout, $A \\setminus B$ vanishes. Switching layouts while holding an expression fixed shows which results depend on the sets actually overlapping.`,
       before: ``,
       after: ``,
       link: '',
@@ -470,7 +474,7 @@ Two switches control what appears:
 • **Show elements** prints the member names inside their regions.
 • **Show counts** prints how many elements each region holds.
 
-This is the fastest way to check a cardinality calculation by hand. Type the sets, turn on counts, and read off $|A \\cup B|$ directly, then verify it against $|A| + |B| - |A \\cap B|$. It also makes membership concrete for anyone who reads the circles as pictures rather than as sets of elements.`,
+This is the fastest way to check a [cardinality](!/set-theory/cardinality#1) calculation by hand. Type the sets, turn on counts, and read off $|A \\cup B|$ directly, then verify it against $|A| + |B| - |A \\cap B|$. It also makes membership concrete for anyone who reads the circles as pictures rather than as sets of elements.`,
       before: ``,
       after: ``,
       link: '',
@@ -495,7 +499,7 @@ Two export buttons finish the job. **Download SVG** produces a vector file that 
 
     obj8: {
       title: `What a Venn Diagram Shows`,
-      content: `A Venn diagram splits a universe into regions, one for every possible pattern of membership across the sets.
+      content: `A [Venn diagram](!/set-theory/venn-diagrams) splits a universe into regions, one for every possible pattern of membership across the sets.
 
 That last part is what separates a Venn diagram from a loose sketch of overlapping circles. With $n$ sets, a true Venn diagram has $2^n$ regions: 4 regions for 2 sets, 8 for 3, 16 for 4, and 32 for 5. Every combination is present, including the region outside all the sets.
 
@@ -572,7 +576,15 @@ For formal statements, see **set identities**.`,
 
 **Logic** - Set operations mirror the logical connectives: intersection is AND, union is OR, complement is NOT.
 
-**Probability** - Events are sets, so the same diagrams carry over to probability rules for unions and complements.`,
+**Probability** - Events are sets, so the same diagrams carry over to probability rules for unions and complements.
+
+[Two-Set Venn Diagram](!/set-theory/visual-tools/two-sets-basic-venn) - The four regions of two sets, one operation at a time.
+
+[Three-Set Venn Diagram](!/set-theory/visual-tools/three-sets-basic-venn) - The eight regions of three sets, with the three-set identities.
+
+[Venn Diagram and Truth Table Explorer](!/set-theory/visual-tools/venn-truth-table) - The same shaded expressions, checked column by column against a truth table.
+
+[Inclusion-Exclusion Principle Explorer](!/set-theory/visual-tools/inclusion-exclusion) - Counting the elements in the regions shaded here.`,
       before: ``,
       after: ``,
       link: '',
@@ -760,8 +772,142 @@ It is also why five sets is close to the practical ceiling. $32$ regions is alre
     }
   }
 
+  /* Animated demos (ToolDemoPlayer v3) against the real VennGenerator
+     (opens at 2 sets, Overlapping, on A ∩ B: 1/4, Library tab, elements shown:
+     A = 1, 2, 3, 7, 9 / B = 3, 4, 5, 9 / U = 6, 8). Inputs: the expression box
+     input[aria-label="Set expression"], the Compare box
+     input[aria-label="Second expression to compare"]. Export buttons are never used. */
+  const demos = {
+    'getting-started': {
+      title: 'Building an expression',
+      script: [
+        { say: `TAP Clear
+Box empty. Counter 0/4.
+Panel: nothing to draw yet.` },
+        { click: { button: 'Clear', exact: true } },
+        { wait: 2400 },
+        { say: `TAP A, ∪, B
+Symbol buttons build A ∪ B.
+Counter 3/4: only the outside blank.` },
+        { click: { button: 'A', exact: true } },
+        { wait: 400 },
+        { click: { button: '∪', exact: true } },
+        { wait: 400 },
+        { click: { button: 'B', exact: true } },
+        { wait: 2400 },
+        { say: `TYPE A & B
+Shortcut: & is ∩.
+Counter 1/4: the lens.` },
+        { set: 'input[aria-label="Set expression"]', value: 'A & B' },
+        { wait: 2600 },
+        { say: `TAP 3 sets
+8 regions. Expression kept.
+Counter 2/8: A∩B and A∩B∩C.` },
+        { click: { button: '3 sets', exact: true } },
+        { wait: 2800 },
+        { say: `TAP 5 sets
+Ellipses, 32 regions.
+Counter 8/32.` },
+        { click: { button: '5 sets', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'comparing-two-expressions': {
+      title: 'Checking De Morgan',
+      script: [
+        { say: `TAP (A ∪ B)ᶜ
+Counter 1/4: outside both circles.
+Regions heading 1000.` },
+        { click: { button: '(A ∪ B)ᶜ', exact: true } },
+        { wait: 2600 },
+        { say: `TYPE Compare: Aᶜ ∩ Bᶜ
+Verdict ≡.
+Same region: the identity holds.` },
+        { set: 'input[aria-label="Second expression to compare"]', value: 'Aᶜ ∩ Bᶜ' },
+        { wait: 2800 },
+        { say: `TYPE Compare: (A ∩ B)ᶜ
+Verdict ≢.
+Disagree on 2 regions: A, B.` },
+        { set: 'input[aria-label="Second expression to compare"]', value: '(A ∩ B)ᶜ' },
+        { wait: 2800 },
+        { say: `TAP (A ∩ B)ᶜ, TYPE Compare: Aᶜ ∪ Bᶜ
+Verdict ≡: the other De Morgan law.
+Same 3 regions.` },
+        { click: { button: '(A ∩ B)ᶜ', exact: true } },
+        { wait: 600 },
+        { set: 'input[aria-label="Second expression to compare"]', value: 'Aᶜ ∪ Bᶜ' },
+        { wait: 2800 },
+        { say: `TAP 3 sets
+Still ≡, now across all 8 regions.
+Counter 6/8.` },
+        { click: { button: '3 sets', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'presets-and-layouts': {
+      title: 'Layouts',
+      script: [
+        { say: `TAP Disjoint
+Circles apart. Counter still 1/4,
+but A∩B has no area: nothing shaded.` },
+        { click: { button: 'Disjoint', exact: true } },
+        { wait: 2800 },
+        { say: `TAP A ⊆ B
+A drawn inside B.
+A ∩ B is all of A: A shaded.` },
+        { click: { button: 'A ⊆ B', exact: true } },
+        { wait: 2800 },
+        { say: `TAP A = B
+Curves coincide.
+Only the lens and the outside have area.` },
+        { click: { button: 'A = B', exact: true } },
+        { wait: 2800 },
+        { say: `TAP A ⊕ B
+Counter 2/4, but both crescents
+have no area: nothing shaded.` },
+        { click: { button: 'A ⊕ B', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Overlapping
+Crescents return, both shaded.
+All nine elements back in place.` },
+        { click: { button: 'Overlapping', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'placing-elements-in-regions': {
+      title: 'Elements and style',
+      script: [
+        { say: `TAP Elements
+One set per line: A = 1, 2, 3, 7, 9,
+B = 3, 4, 5, 9, U = 6, 8.` },
+        { click: { button: 'Elements', exact: true } },
+        { wait: 2800 },
+        { say: `TICK Show counts
+A only 3, lens 2, B only 2, outside 2.` },
+        { click: 'input[id^="showcount"]' },
+        { wait: 2600 },
+        { say: `UNTICK Show elements
+Names hidden. Counts stay.` },
+        { click: 'input[id^="showel"]' },
+        { wait: 2400 },
+        { say: `TAP Style, UNTICK Caption
+A ∩ B under the diagram removed.` },
+        { click: { button: 'Style', exact: true } },
+        { wait: 500 },
+        { click: 'input[id^="showcap"]' },
+        { wait: 2600 },
+        { say: `UNTICK Universe box
+Box and its U label removed.` },
+        { click: 'input[id^="showu"]' },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      demos,
+      relatedTools: getRelatedTools('set-theory-venn-generator'),
       sectionsContent,
       stateUnits,
       sectionOrder,
@@ -773,12 +919,26 @@ It is also why five sets is close to the practical ceiling. $32$ regions is alre
 }
 
 
-export default function VennDiagramGeneratorPage({ seoData, sectionsContent, stateUnits, sectionOrder, faqQuestions, schemas }) {
+export default function VennDiagramGeneratorPage({ demos, relatedTools, seoData, sectionsContent, stateUnits, sectionOrder, faqQuestions, schemas }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <VennGenerator showIntro={false}/>
+    </ToolDemoPlayer>
+  )
+
 
   const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
     const src = sectionsContent[obj]
     if (!src || !src.title) return null
-    const body = [ src.content ]
+    const body = demos[id] ? [demo(id), src.content] : [ src.content ]
     if (unitKey && stateUnits[unitKey]) {
       body.push(<div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />)
       if (src.after) body.push(src.after)
@@ -867,6 +1027,7 @@ export default function VennDiagramGeneratorPage({ seoData, sectionsContent, sta
    <SectionTableOfContents sections={genericSections}/>
   <br/>
   <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
   <br/>
   <br/>

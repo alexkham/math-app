@@ -8,6 +8,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
 
 
 
@@ -476,8 +478,24 @@ const schemas = {
    
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    critical: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['rat-simple'],
+      caption: 'Numerator zero at 1, pole at &#8722;2',
+      text: 'Both critical points divide the axis, but they behave differently: at x = 1 the expression is zero and the curve crosses the axis, while at x = &#8722;2 the denominator vanishes and the curve runs off along the dashed asymptote. The solution, the interval between them, can include the first endpoint but never the second. Distinguish the two kinds on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+  };
+
 return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -505,7 +523,7 @@ export default function RationalInequalitiesPage({
   obj4Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -543,6 +561,8 @@ export default function RationalInequalitiesPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
+                  <div key={'unit-critical'} dangerouslySetInnerHTML={{ __html: demoUnits.critical }} />,
+          `Every rational sign chart is built from these two kinds of marks and nothing else.`,
         ]
     },
 

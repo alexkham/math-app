@@ -8,6 +8,9 @@ import CrossProductWrapper from '../../../../app/components/linear-algebra copy/
 import crossProductDiagrams from '../../../../app/components/linear-algebra copy/matrix/crossProductDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -425,8 +428,117 @@ The perpendicularity is the property worth remembering as a check. A cross produ
   }
 
 
+  const instructions = [
+    'The **Method** pills switch between the **Component formula** and the **Determinant expansion**; switching rebuilds the scenes and returns the player to its first scene. [Learn more about the two methods](!#the-two-methods)',
+    'Hover the **?** icon next to **Method** for what the cross product is and how the two methods relate. [Learn more about getting started](!#getting-started)',
+    'The **Vector length** readout is fixed at $3$: there is no stepper, because the cross product is defined only in three dimensions. [Learn more about why the length is fixed](!#why-three-dimensions)',
+    '**▶ Play** runs all three components, **Next →** and **← Back** move one scene, **Reset** returns to the opening scene, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'In a component scene the two active entries of $\\mathbf{u}$ are blue, those of $\\mathbf{v}$ grey, the skipped row muted, and four arrows flow into the green component of $\\mathbf{w}$. [Learn more about reading a scene](!#the-scene-player)',
+    'In a determinant scene the pivot $\\mathbf{i}$, $\\mathbf{j}$ or $\\mathbf{k}$ is blue, its row and column are struck through, the $2 \\times 2$ minor is grey, and one arrow flows into $\\mathbf{w}$. [Learn more about the determinant scenes](!#the-scene-player)',
+    'The **Step explanations** log lists every scene so far with its formula, the current one highlighted. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real CrossProductWrapper
+     (opens on Component formula, Step 1 / 5, 1.4 s per scene). */
+  const demos = {
+    'getting-started': {
+      title: 'Play, speed, method',
+      script: [
+        { say: `TAP ▶ Play
+w₁, w₂, w₃ fill in turn.
+Step 5 / 5: Done.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6800 },
+        { say: `TAP Reset
+Step 1 / 5. w all ? again.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2200 },
+        { say: `SELECT Fast → TAP ▶ Play
+0.7 s per scene.
+Same three components.` },
+        { set: 'select', value: 700 },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4000 },
+        { say: `TAP Determinant expansion
+Scenes rebuilt: Step 1 / 5.
+u, v written under i, j, k.` },
+        { click: { button: 'Determinant expansion' } },
+        { wait: 2600 },
+        { say: `TAP ▶ Play
+Expand along i, j, k.
+Same w as the component formula.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4200 },
+      ],
+    },
+    'the-two-methods': {
+      title: 'Two routes, same w₂',
+      script: [
+        { say: `TAP Next → Next →
+w₂ = u₃v₁ − u₁v₃.
+Skip row 2. Middle component runs 3 then 1.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 1400 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Determinant expansion
+Step 1 / 5.
+i, j, k on top; u, v below.` },
+        { click: { button: 'Determinant expansion' } },
+        { wait: 2600 },
+        { say: `TAP Next →
+Expand along i. Strike row 1, column 1.
+Minor → w₁ = u₂v₃ − u₃v₂.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Next →
+Expand along j. Cofactor sign −.
+w₂ = −(u₁v₃ − u₃v₁) = u₃v₁ − u₁v₃.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3200 },
+        { say: `TAP Next →
+Expand along k: w₃ = u₁v₂ − u₂v₁.
+Same three components, other route.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'Reading the highlights',
+      script: [
+        { say: `TAP Next →
+w₁: u₂, u₃ blue; v₂, v₃ grey.
+Row 1 muted. Four arrows into green w₁.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Next → Next →
+w₃ = u₁v₂ − u₂v₁.
+Row 3 muted now.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 1400 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Determinant expansion → Next →
+i blue. Row 1 and column 1 struck.
+Minor grey. One arrow into w₁.` },
+        { click: { button: 'Determinant expansion' } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP ▶ Play
+j, then k, then Done.
+Step 5 / 5.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-vector-cross-product'),
       sectionsContent,
       stateUnits,
@@ -449,7 +561,22 @@ The perpendicularity is the property worth remembering as a check. A cross produ
   }
 }
 
-export default function CrossProductVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function CrossProductVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <CrossProductWrapper mode='both' defaultMethod='components' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -471,13 +598,13 @@ export default function CrossProductVisualizer({seoData, sectionsContent, stateU
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-two-methods'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-two-methods')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'the-component-sweep', 'components'),
     stateRow('obj13', 'the-determinant-expansion', 'determinant'),
     stateRow('obj14', 'the-completed-product', 'done'),
-    plain('obj3', 'the-scene-player'),
+    withDemo(plain('obj3', 'the-scene-player')),
     plain('obj4', 'why-three-dimensions'),
     plain('obj5', 'what-the-cross-product-is'),
     plain('obj6', 'key-properties'),
@@ -539,6 +666,10 @@ export default function CrossProductVisualizer({seoData, sectionsContent, stateU
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Cross Product of Vectors</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <CrossProductWrapper

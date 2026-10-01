@@ -1963,6 +1963,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import crossProductDiagrams from '@/app/components/linear-algebra copy/matrix/crossProductDiagrams'
+import renderVectorArrowsV5 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v5'
 
 
 export async function getStaticProps(){
@@ -2746,6 +2747,20 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const vaCrossArea = {
+    kind: 'area', a: [4, 0], b: [1, 3],
+    svgTitle: 'The length of a \u00d7 b is the area of the parallelogram on a and b',
+    labels: { a: ['a = (4, 0)', 2.6, -20 / 44], b: ['b = (1, 3)', 1 + 8 / 44, 3.25], height: ['height \u2016b\u2016 sin \u03b8 = 3', 1 + 6.6 / 44, 1.5], area: [3.3, 2.1] },
+    notes: ['area = base \u00d7 height = \u2016a\u2016 \u00b7 \u2016b\u2016 sin \u03b8 = 4 \u00b7 3 = 12', 'in \u211d\u00b3: (4, 0, 0) \u00d7 (1, 3, 0) = (0, 0, 12), a vector of length 12'],
+    caption: 'the length of a \u00d7 b is the parallelogram\u2019s area',
+  };
+  const vaCrossOrientation = {
+    kind: 'orientation', a: [3.6, 0], b: [3.2 * Math.cos(1.2), 3.2 * Math.sin(1.2)], height: 300,
+    svgTitle: 'Swapping the order of a cross product reverses its direction',
+    notes: ['right-hand rule: fingers curl first \u2192 second, the thumb gives the cross product'],
+    caption: 'swap the order and the cross product turns around',
+  };
+
   const demoUnits = {
     determinant: demoUnitFrame({
       svg: crossProductDiagrams.determinant,
@@ -2753,6 +2768,16 @@ const schemas = {
       text: 'The three components of the result are being read off a determinant whose first row carries the basis vectors and whose other two rows are the operands. The middle component picks up its minus sign from the checkerboard pattern, not from anything geometric &#8212; a detail far easier to trust once seen laid out. Expand it row by row on the',
       href: '/linear-algebra/visual-tools/vector-cross-product',
       linkText: 'cross product visualizer',
+    }),
+    crossArea: demoUnitFrame({
+      svg: renderVectorArrowsV5(vaCrossArea),
+      caption: 'Length as area',
+      text: 'With a along the x-axis, the height of the parallelogram is the dashed drop from the tip of b, and it equals &#8214;b&#8214; sin &#952;. Base times height is &#8214;a&#8214; &#8214;b&#8214; sin &#952; &#8212; exactly the formula for &#8214;a &#215; b&#8214;. Here the base is 4 and the height 3, so the area is 12; computing (4, 0, 0) &#215; (1, 3, 0) in components gives (0, 0, 12), a vector of that same length, pointing straight out of the plane.',
+    }),
+    crossOrientation: demoUnitFrame({
+      svg: renderVectorArrowsV5(vaCrossOrientation),
+      caption: 'Order decides direction',
+      text: 'Both panels use the same a and b. Curling the fingers of the right hand from a toward b turns counter-clockwise on the page, and the thumb points out of the page (&#8857;): that is a &#215; b. Starting from b and curling toward a turns clockwise, and the thumb points into the page (&#8855;): b &#215; a. Same length, opposite direction &#8212; anti-commutativity, a &#215; b = &#8722;(b &#215; a).',
     }),
   };
 
@@ -2839,6 +2864,8 @@ demoUnits}) {
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-crossArea'} dangerouslySetInnerHTML={{ __html: demoUnits.crossArea }} />,
+          `The parallelogram collapses to a segment when a and b are parallel, which is why their cross product is zero.`,
         ]
     },
     {
@@ -2847,6 +2874,8 @@ demoUnits}) {
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-crossOrientation'} dangerouslySetInnerHTML={{ __html: demoUnits.crossOrientation }} />,
+          `The magnitude formula fixes how long a × b is; the right-hand rule is the only thing that fixes which way it points.`,
         ]
     },
     {

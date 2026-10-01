@@ -7,6 +7,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
 
 
 
@@ -612,8 +614,24 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    lessThan: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['abs-shifted'],
+      caption: '|x &#8722; 2| &#8722; 4 &lt; 0: the interval (&#8722;2, 6)',
+      text: 'The V has its corner at x = 2 and dips below the axis between its zeros at &#8722;2 and 6, so the less-than inequality holds on that bounded interval: the compound inequality &#8722;4 &lt; x &#8722; 2 &lt; 4 drawn out. Shifting the corner shifts the interval without changing its width. Move the corner and the level on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -638,7 +656,7 @@ export default function AbsoluteValueInequalitiesPage({
   obj3Table,
   obj6Table,
   summaryTable,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -670,6 +688,8 @@ export default function AbsoluteValueInequalitiesPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-lessThan'} dangerouslySetInnerHTML={{ __html: demoUnits.lessThan }} />,
+          `The width of the interval is 2k, and its centre is wherever the expression inside the bars vanishes.`,
         ]
     },
 

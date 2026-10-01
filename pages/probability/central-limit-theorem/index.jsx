@@ -731,6 +731,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 
 
 export async function getStaticProps(){
@@ -1350,8 +1352,24 @@ It describes how combining many independent random contributions leads to a stab
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_notation_0: demoUnitFrame({
+      svg: distributionExplorerDiagrams['normal-pdf'],
+      caption: 'The standard normal density, the limit shape of averages',
+      text: 'The bell curve is the destination of the theorem: whatever shape the original distribution has, the standardised sample mean approaches this density as the sample size grows. Its centre is the population mean and its spread shrinks with the square root of the sample size. Compare the bell with the skewed and flat shapes it emerges from on the',
+      href: '/probability/visual-tools/distributions/normal',
+      linkText: 'distribution explorer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       obj3Table,
@@ -1380,7 +1398,7 @@ export default function PageTemplate({
   obj7Table,
   obj8Table,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1437,6 +1455,8 @@ export default function PageTemplate({
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-u_notation_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_notation_0 }} />,
+          `The scaling behind that shrinking spread is the subject of the next section.`,
         ]
     },
     {

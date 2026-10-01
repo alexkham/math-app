@@ -11,6 +11,8 @@ import Head from 'next/head'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagrams'
 
 
 export async function getStaticProps(){
@@ -675,8 +677,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    ftc1: demoUnitFrame({
+      svg: functionFTCDiagrams.cubic,
+      caption: 'F(x) = &#8747;&#8320;&#710;x t&#179; dt with x = 2: F&#8242;(2) = f(2) = 8',
+      text: 'The accumulation function is the upper curve; at the right edge x = 2 its slope equals the height of the integrand there, 8. Nudging x to the right adds a thin strip of area whose height is f(x) and whose width is the nudge, so the rate at which area accumulates is f(x) itself. Move the edge and compare the slope above with the height below on the',
+      href: '/calculus/visual-tools/fundamental-theorem',
+      linkText: 'fundamental theorem of calculus visualizer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj7Table,
@@ -695,7 +713,7 @@ const schemas = {
 
    }
 
-export default function RulesPage({seoData, sectionsContent, introContent, obj7Table, summaryTable, faqQuestions, schemas}) {
+export default function RulesPage({seoData, sectionsContent, introContent, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -738,6 +756,8 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj7T
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-ftc1'} dangerouslySetInnerHTML={{ __html: demoUnits.ftc1 }} />,
+          `Part 1 is the statement that accumulating and differentiating undo each other.`,
         ]
     },
     {

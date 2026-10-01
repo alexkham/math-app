@@ -496,6 +496,9 @@ import FunctionNewtonMethod from '../../../../app/components/calculus/visualizer
 import functionNewtonMethodDiagrams from '../../../../app/components/calculus/visualizers/functionNewtonMethodDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -926,8 +929,114 @@ The practical rule follows directly: **starting points near critical points of $
   }
 
 
+  const instructions = [
+    'Drag the blue dot on the x-axis to place your own starting guess $x_0$; the dashed drop line marks the point $(x_0, f(x_0))$ on the curve. [Learn more about stepping from a custom start](!#manual-stepping)',
+    'The three scenario buttons under the graph, **Direct hit** ($x_0 = 3$), **Crosses over** ($x_0 = -1$) and **Stalls** ($x_0 = 0.85$), animate a preset run: the first two converge to the root, **Stalls** is sent off the chart. [Learn more about the preset scenarios](!#preset-scenarios)',
+    '**Step ▶** plays one Newton iteration from your own $x_0$ and is disabled while a scenario is loaded; **Reset** clears the run and puts $x_0$ back at $3$. [Learn more about manual stepping](!#manual-stepping)',
+    'Each iteration plays in five phases, named in the banner at the top of the graph: mark the guess, draw the tangent, follow it to the x-axis, lift back to the curve, settle. A red banner means the run failed. [Learn more about reading the animation](!#reading-the-animation)',
+    'The readouts under the graph show $n$, $x_n$, $f(x_n)$ and the error $|x_n - \\alpha|$. [Learn more about the readouts](!#getting-started)',
+    'The **Computation** tab gives the Newton step, the current values of $f(x_n)$, $f\'(x_n)$, the correction and $x_{n+1}$, and a **History** table with one row per iteration. [Learn more about the Computation tab](!#the-computation-tab)',
+    'The **Meaning** tab opens by itself when a run ends, with a blue **Converged** or red **Stalls** verdict; **Theory** holds the definition, the derivation, quadratic convergence, failure modes and the numbers for this cubic. [Learn more about the Meaning and Theory tabs](!#the-meaning-and-theory-tabs)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionNewtonMethod tool
+     (opens idle at x0 = 3 on the Computation tab). The tool times its own runs
+     (about 2.36 s per iteration) and opens Meaning by itself when a run ends, so
+     each scenario step waits the run out, clicks Reset first when a run may still
+     be animating (instant replay), and tab steps after a Stalls run glide to the
+     tab for 2.2 s. Every value in a callout was read off the tool. */
+  const demos = {
+    'preset-scenarios': {
+      title: 'The three scenarios',
+      script: [
+        { at: 'tl', say: `TAP Direct hit · x₀ = 3
+Four tangents walk down to α.
+Meaning opens: CONVERGED, error 1.9e-7.` },
+        { click: { button: '→Direct hit' } },
+        { wait: 10000 },
+        { at: 'tl', say: `TAP Stalls · x₀ = 0.85
+Tangent nearly flat. Red banner:
+x₁ ≈ 37.2, off the chart. STALLS.` },
+        { move: { button: '⚠Stalls' }, ms: 400 },
+        { click: { button: 'Reset', exact: true } },
+        { click: { button: '⚠Stalls' } },
+        { wait: 3000 },
+        { at: 'tl', say: `TAP Crosses over · x₀ = −1
+First tangent throws x₁ to 3,
+then converges. 5 iterations.` },
+        { move: { button: '↻Crosses over' }, ms: 400 },
+        { click: { button: 'Reset', exact: true } },
+        { click: { button: '↻Crosses over' } },
+        { wait: 12200 },
+        { at: 'tl', say: `TAP Reset
+Back to x₀ = 3, n = 0.
+Free start. Computation tab.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-computation-tab': {
+      title: 'Reading the Computation tab',
+      script: [
+        { at: 'tl', say: `TAP Stalls · x₀ = 0.85
+Run stops after one tangent.
+Meaning tab opens by itself.` },
+        { click: { button: '⚠Stalls' } },
+        { wait: 3000 },
+        { at: 'tl', say: `TAP Computation
+f′(xₙ) = 0.167: tiny.
+correction = −36.334, xₙ₊₁ = 37.184.` },
+        { move: { text: 'Computation' }, ms: 2200 },
+        { click: { text: 'Computation' } },
+        { wait: 2800 },
+        { at: 'tl', say: `TAP Reset
+x₀ = 3: f′ = 25.000, correction 0.640,
+xₙ₊₁ = 2.360. History: one row.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2800 },
+        { at: 'tl', say: `TAP Direct hit, then Computation
+History |err|: 0.905 → 0.265 → 0.033 → 0.001.
+Correct digits roughly double.` },
+        { click: { button: '→Direct hit' } },
+        { wait: 9800 },
+        { click: { text: 'Computation' } },
+        { wait: 2400 },
+      ],
+    },
+    'the-meaning-and-theory-tabs': {
+      title: 'Meaning and Theory tabs',
+      script: [
+        { at: 'tl', say: `TAP Theory
+Five blocks: definition, derivation,
+quadratic convergence, failure modes, this cubic.` },
+        { click: { text: 'Theory' } },
+        { wait: 2800 },
+        { at: 'tl', say: `TAP Stalls · x₀ = 0.85
+Meaning opens by itself. Red card:
+f′(x₀) = 0.167, x₁ ≈ 37.2.` },
+        { click: { button: '⚠Stalls' } },
+        { wait: 3000 },
+        { at: 'tl', say: `TAP Theory
+Failure modes: flat tangent first.
+Critical points at ±0.816.` },
+        { move: { text: 'Theory' }, ms: 2200 },
+        { click: { text: 'Theory' } },
+        { wait: 2800 },
+        { at: 'tl', say: `TAP Direct hit · x₀ = 3
+Meaning card turns blue: CONVERGED.
+4 iterations, error 1.9e-7.` },
+        { move: { button: '→Direct hit' }, ms: 400 },
+        { click: { button: 'Reset', exact: true } },
+        { click: { button: '→Direct hit' } },
+        { wait: 10000 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('calculus-newtons-method'),
          sectionsContent,
          stateUnits,
@@ -949,7 +1058,22 @@ The practical rule follows directly: **starting points near critical points of $
     }
    }
 
-export default function NewtonsMethodVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
+export default function NewtonsMethodVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionNewtonMethod explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -972,14 +1096,14 @@ export default function NewtonsMethodVisualizer({relatedTools, seoData, sections
   const genericSections=[
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'preset-scenarios'),
+    withDemo(plain('obj2', 'preset-scenarios')),
     stateRow('obj11', 'direct-hit', 'fast'),
     stateRow('obj12', 'crosses-over', 'cross'),
     stateRow('obj13', 'stalls-near-a-critical-point', 'flat'),
     stateRow('obj3', 'manual-stepping', 'idle'),
     plain('obj4', 'reading-the-animation'),
-    plain('obj5', 'the-computation-tab'),
-    plain('obj6', 'the-meaning-and-theory-tabs'),
+    withDemo(plain('obj5', 'the-computation-tab')),
+    withDemo(plain('obj6', 'the-meaning-and-theory-tabs')),
     plain('obj7', 'what-is-newtons-method'),
     plain('obj8', 'quadratic-convergence'),
     plain('obj9', 'when-newtons-method-fails'),
@@ -1047,6 +1171,10 @@ export default function NewtonsMethodVisualizer({relatedTools, seoData, sections
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Newton&apos;s Method</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(0.9)',width:'80%',margin:'auto'}}>
    <FunctionNewtonMethod explanations={explanations}/>

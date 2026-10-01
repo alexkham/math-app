@@ -11,6 +11,9 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import complexExplorerDiagrams from '../../../../app/components/calculators/complex-numbers/complexExplorerDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
@@ -443,8 +446,143 @@ Sign-wise the quadrant mirrors [Quadrant II](!#quadrant-ii-upper-left): one part
     quadrantIV: 'The conjugate quadrant: every point here is the mirror image of a Quadrant I number. [Learn more about Quadrant IV](!#quadrant-iv-lower-right) · [All four quadrants](!#the-four-quadrants)',
   };
 
+  const instructions = [
+    '**Click** anywhere on the plane to place the point $z$, or drag to move it; the point snaps to the grid. [Learn more about placing the point](!#how-to-use-the-complex-explorer)',
+    'Type exact values in the **a** (real part) and **b** (imaginary part) fields above the plane; the point moves as you type. [Learn more about the input fields](!#how-to-use-the-complex-explorer)',
+    'The **Range ±** buttons set the visible area from ±5 to ±10; up to ±7 the point snaps to halves, from ±8 to whole numbers. [Learn more about the range buttons](!#how-to-use-the-complex-explorer)',
+    'The right column shows $z = a + bi$ and three cards: **Real Part** in orange, **Imaginary Part** in navy, **Modulus** in blue. [Learn more about the display panel](!#reading-the-display-panel)',
+    'The explanation panel under the cards names the state (**Quadrant I** to **IV**, **Purely Real**, **Pure Imaginary** or **The Origin**) and works the modulus formula for your values. [Learn more about the explanation panel](!#reading-the-display-panel)',
+    'When both parts are nonzero a right triangle appears: orange leg $a$, navy leg $b$, blue hypotenuse $|z|$. [Learn more about the right triangle](!#understanding-the-right-triangle)',
+    'The faint orange point mirrored across the real axis is the conjugate $\\bar{z} = a - bi$; the **Conjugate** card gives its value. [Learn more about the conjugate](!#exploring-the-conjugate)',
+    'Put the point on an axis or at the origin to see the special cases; each case and each quadrant has its own section below. [Learn more about the special cases](!#special-cases-axes-and-origin)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real ComplexExplorer tool
+     (opens on z = 2 + 3i, Range ±5). Inputs: input nth 0 = a, nth 1 = b (commit on
+     blur; they snap to 0.5 up to ±7, to 1 from ±8). Range buttons: '−' and '+'.
+     The plane listens to mouse events only, so the demos type values instead of dragging. */
+  const demos = {
+    'how-to-use-the-complex-explorer': {
+      title: 'Typing a and b, setting the range',
+      script: [
+        { say: `TYPE a = 4
+Point slides right. z = 4 + 3i.
+Modulus card: 5.`, at: 'br' },
+        { set: { css: 'input', nth: 0 }, value: '4' },
+        { wait: 2400 },
+        { say: `TYPE b = −1.5
+Point drops below the real axis.
+z = 4 − 1.5i. Quadrant IV.`, at: 'br' },
+        { set: { css: 'input', nth: 1 }, value: '-1.5' },
+        { wait: 2600 },
+        { say: `TAP + three times
+Range ±8. Ticks every 2 units.
+Snap now whole numbers.`, at: 'br' },
+        { click: { button: '+', exact: true } },
+        { wait: 350 },
+        { click: { button: '+', exact: true } },
+        { wait: 350 },
+        { click: { button: '+', exact: true } },
+        { wait: 2400 },
+        { say: `TYPE a = 2.4
+Snaps to a = 2.
+z = 2 − 1.5i. |z| = 2.5.`, at: 'br' },
+        { set: { css: 'input', nth: 0 }, value: '2.4' },
+        { wait: 2600 },
+        { say: `TAP − three times
+Back to Range ±5. Finer grid.
+Point kept: z = 2 − 1.5i.`, at: 'br' },
+        { click: { button: '−', exact: true } },
+        { wait: 350 },
+        { click: { button: '−', exact: true } },
+        { wait: 350 },
+        { click: { button: '−', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'reading-the-display-panel': {
+      title: 'Cards, panel, quadrants',
+      script: [
+        { say: `TYPE a = 3, b = 4
+Cards: 3 | 4 | 5.
+Panel: Quadrant I. √(9 + 16) = 5.`, at: 'br' },
+        { set: { css: 'input', nth: 0 }, value: '3' },
+        { wait: 400 },
+        { set: { css: 'input', nth: 1 }, value: '4' },
+        { wait: 2800 },
+        { say: `TYPE a = −3
+Panel: Quadrant II. Triangle opens left.
+Modulus still 5.`, at: 'br' },
+        { set: { css: 'input', nth: 0 }, value: '-3' },
+        { wait: 2600 },
+        { say: `TYPE b = −4
+Panel: Quadrant III. Both parts negative.
+Legs 3 and 4. |z| = 5.`, at: 'br' },
+        { set: { css: 'input', nth: 1 }, value: '-4' },
+        { wait: 2600 },
+        { say: `TYPE a = 3
+Panel: Quadrant IV.
+Conjugate card: z̅ = 3 + 4i.`, at: 'br' },
+        { set: { css: 'input', nth: 0 }, value: '3' },
+        { wait: 2600 },
+      ],
+    },
+    'exploring-the-conjugate': {
+      title: 'z and its conjugate',
+      script: [
+        { say: `TYPE b = 1
+z = 2 + i. Faint z̅ = 2 − i
+just below the real axis.`, at: 'br' },
+        { set: { css: 'input', nth: 1 }, value: '1' },
+        { wait: 2600 },
+        { say: `TYPE b = −2.5
+z below the axis, z̅ above.
+z̅ = 2 + 2.5i. Same a, opposite b.`, at: 'br' },
+        { set: { css: 'input', nth: 1 }, value: '-2.5' },
+        { wait: 2800 },
+        { say: `TYPE a = −4
+Both points move left together.
+z̅ = −4 + 2.5i.`, at: 'br' },
+        { set: { css: 'input', nth: 0 }, value: '-4' },
+        { wait: 2600 },
+        { say: `TYPE b = 0
+z = −4 on the real axis.
+z̅ = z. Faint point gone.`, at: 'br' },
+        { set: { css: 'input', nth: 1 }, value: '0' },
+        { wait: 2600 },
+      ],
+    },
+    'special-cases-axes-and-origin': {
+      title: 'Axes and origin',
+      script: [
+        { say: `TYPE b = 0
+z = 2. Panel: Purely Real.
+No triangle. |z| = |2| = 2.`, at: 'br' },
+        { set: { css: 'input', nth: 1 }, value: '0' },
+        { wait: 2600 },
+        { say: `TYPE a = −3.5
+Still Purely Real.
+Modulus 3.5: absolute value of a.`, at: 'br' },
+        { set: { css: 'input', nth: 0 }, value: '-3.5' },
+        { wait: 2600 },
+        { say: `TYPE a = 0
+z = 0. Panel: The Origin.
+Modulus 0. Only z = 0 has it.`, at: 'br' },
+        { set: { css: 'input', nth: 0 }, value: '0' },
+        { wait: 2600 },
+        { say: `TYPE b = 2
+z = 2i. Panel: Pure Imaginary.
+|z| = 2. z̅ = −2i, below the origin.`, at: 'br' },
+        { set: { css: 'input', nth: 1 }, value: '2' },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('complex-explorer'),
       sectionsContent,
       introContent,
@@ -457,7 +595,7 @@ Sign-wise the quadrant mirrors [Quadrant II](!#quadrant-ii-upper-left): one part
   }
 }
 
-export default function ComplexExplorerPage({
+export default function ComplexExplorerPage({ instructions, demos,
   relatedTools, seoData,
   sectionsContent,
   introContent,
@@ -467,18 +605,33 @@ export default function ComplexExplorerPage({
   stateUnits
 }) {
 
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ComplexExplorer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
+
   const genericSections = [
     {
       id: 'how-to-use-the-complex-explorer',
       title: sectionsContent.obj1.title,
       link: sectionsContent.obj1.link,
-      content: [sectionsContent.obj1.content]
+      content: [demo('how-to-use-the-complex-explorer'), sectionsContent.obj1.content]
     },
     {
       id: 'reading-the-display-panel',
       title: sectionsContent.obj2.title,
       link: sectionsContent.obj2.link,
-      content: [sectionsContent.obj2.content]
+      content: [demo('reading-the-display-panel'), sectionsContent.obj2.content]
     },
     {
       id: 'understanding-the-right-triangle',
@@ -490,13 +643,13 @@ export default function ComplexExplorerPage({
       id: 'exploring-the-conjugate',
       title: sectionsContent.obj4.title,
       link: sectionsContent.obj4.link,
-      content: [sectionsContent.obj4.content]
+      content: [demo('exploring-the-conjugate'), sectionsContent.obj4.content]
     },
     {
       id: 'special-cases-axes-and-origin',
       title: sectionsContent.obj5.title,
       link: sectionsContent.obj5.link,
-      content: [sectionsContent.obj5.content]
+      content: [demo('special-cases-axes-and-origin'), sectionsContent.obj5.content]
     },
     {
       id: 'the-origin',
@@ -635,6 +788,10 @@ export default function ComplexExplorerPage({
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Number Explorer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <SiblingsNav maxWidth='100%'>
         <div style={{transform:'scale(0.95'}}>

@@ -9,6 +9,8 @@ import Head from 'next/head'
 import PowerTable from '../../../../app/components/visualizations/algebra/powers/PowersTable'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '../../../../app/components/visualizations/algebra/powers/powersTableDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -34,13 +36,13 @@ export async function getStaticProps(){
   const sectionsContent = {
     obj1: {
       title: `What is a Power?`,
-      content: `A power is a shorthand for repeated multiplication. The expression $b^n$ means multiplying the **base** $b$ by itself $n$ times — so $2^4 = 2 \\times 2 \\times 2 \\times 2 = 16$. The number $b$ is the base, and $n$ is the exponent (or power).
+      content: `A power is a shorthand for repeated multiplication. The [expression](!/algebra/equations) $b^n$ means multiplying the **base** $b$ by itself $n$ times — so $2^4 = 2 \\times 2 \\times 2 \\times 2 = 16$. The number $b$ is the base, and $n$ is the exponent (or power).
 
-Powers compress long products into compact notation. Instead of writing $10 \\times 10 \\times 10 \\times 10 \\times 10 \\times 10$, you write $10^6$. The notation scales effortlessly: $10^{100}$ would take a page to write out as a product but fits in three characters as a power.
+[Powers](!/algebra/powers) compress long products into compact notation. Instead of writing $10 \\times 10 \\times 10 \\times 10 \\times 10 \\times 10$, you write $10^6$. The notation scales effortlessly: $10^{100}$ would take a page to write out as a product but fits in three characters as a power.
 
 This tool builds a table of powers for any **base** from 2 to 10, letting you see the exact value, the multiplication that produces it, and how the values grow row by row. The default state — base 2, max power 10 — shows the classic doubling sequence that underlies binary numbers.
 
-For full theory of exponents, exponent rules, and properties, see **exponents and powers**.`,
+For full theory of [exponents](!/algebra/powers), [exponent rules](!/algebra/roots/rational-exponents), and properties, see **exponents and powers**.`,
       before: ``,
       after: ``,
       link: '',
@@ -96,7 +98,7 @@ Below the table, the pattern note reminds you of the row-to-row relationship: ea
 
 The exponent law $b^m \\div b^n = b^{m-n}$ requires $b^0 = 1$ for any nonzero base. Setting $m = n$ gives $b^0$ on one side, while the same expression also equals any nonzero $b^n / b^n = 1$. Both must agree, forcing $b^0 = 1$.
 
-The Expression column displays this row simply as the value **1** — there is no multiplication to spell out, since the rule says zero copies of the base produce the multiplicative identity. Every base from 2 to 10 obeys this rule, which is why every powers table opens the same way.`,
+The Expression column displays this row simply as the value **1** — there is no multiplication to spell out, since the rule says zero copies of the base produce the multiplicative [identity](!/algebra/equations). Every base from 2 to 10 obeys this rule, which is why every powers table opens the same way.`,
       before: ``,
       after: ``,
       link: '',
@@ -142,7 +144,7 @@ The pattern note at the bottom of the table summarizes it: each row is **×base*
 
 This is why exponential growth shows up in population dynamics, compound interest, viral spread, and computer science complexity. A linear process gains a fixed amount per step; an exponential process multiplies by a fixed factor per step, and the gap between the two opens up rapidly.
 
-For the formal definition and behavior of exponential functions, see **exponential function**.`,
+For the formal definition and behavior of [exponential functions](!/algebra/powers/exponential-functions), see **exponential function**.`,
       before: ``,
       after: ``,
       link: '',
@@ -154,11 +156,15 @@ For the formal definition and behavior of exponential functions, see **exponenti
 
 **Exponential Function** — How $b^x$ behaves as a continuous function of $x$, including the special role of base $e$.
 
-**Logarithms** — The inverse operation of exponentiation: if $b^n = v$, then $\\log_b v = n$. Use logarithms to find the exponent given the base and the value.
+**Logarithms** — The inverse operation of exponentiation: if $b^n = v$, then $\\log_b v = n$. Use [logarithms](!/algebra/logarithms) to find the exponent given the base and the value.
 
 **Algebraic Identities Visualizers** — Geometric proofs of squared identities like $(a+b)^2$ and $(a-b)^2$, showing where powers of 2 appear in algebra.
 
-**Algebra Visual Tools** — Index of all interactive tools for algebra topics including identity proofs and the powers table itself.`,
+**Algebra Visual Tools** — Index of all interactive tools for algebra topics including identity proofs and the powers table itself.
+
+[Polynomial Multiplication Visualizer](!/algebra/visual-tools/polynomial-multiplication) — Where the law $b^m \\cdot b^n = b^{m+n}$ is applied cell by cell.
+
+[Binomial Coefficient Visualizer](!/algebra/visual-tools/binomial-coefficient) — The row sums of Pascal's triangle are the powers of two in this table.`,
       before: ``,
       after: ``,
       link: '',
@@ -336,6 +342,7 @@ The second lesson is in the Value column's right edge: every row past $5^0$ ends
 
   return {
     props: {
+      relatedTools: getRelatedTools('algebra-powers-table'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -356,7 +363,7 @@ The second lesson is in the Value column's right edge: every row past $5^0$ ends
   }
 }
 
-export default function PowersTablePage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PowersTablePage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Replaces the former numeric-id auto-map.)
@@ -463,6 +470,7 @@ export default function PowersTablePage({seoData, sectionsContent, introContent,
         /> */}
    <br/>
    <br/>
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

@@ -942,6 +942,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
+import partitionVennDiagrams from '@/app/components/probability/conditional-probability-demo/partitionVennDiagrams'
 
 
 export async function getStaticProps(){
@@ -1844,8 +1847,38 @@ This structure also sets the stage for Bayes' theorem. Bayes reverses conditiona
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_cases_0: demoUnitFrame({
+      svg: totalProbabilityDiagrams.overview,
+      caption: 'A three-way partition and its outcomes',
+      text: 'The first level splits the sample space into three cases that cannot overlap and together cover everything; the second level shows how the outcome behaves inside each case. The probability of the outcome is spread across the three branches. Adjust the case probabilities and watch the pieces move on the',
+      href: '/probability/visual-tools/total-probability',
+      linkText: 'law of total probability visualizer',
+    }),
+    u_diagram_1: demoUnitFrame({
+      svg: partitionVennDiagrams.threeCompartments,
+      caption: 'Event A drawn across a three-compartment partition',
+      text: 'The Venn view of the same idea: the partition slices the sample space into compartments, event A cuts across all of them, and the probability of A is the sum of its pieces inside each compartment. The tree and the table show the same sum in other shapes. Select a compartment and read the piece of A inside it on the',
+      href: '/probability/visual-tools/conditional-probability/venn-diagram',
+      linkText: 'partition Venn diagram',
+    }),
+    u_why_2: demoUnitFrame({
+      svg: totalProbabilityDiagrams.branch,
+      caption: 'The first case highlighted: its contribution to the total',
+      text: 'The highlighted branch contributes P(A<sub>1</sub>) times P(B given A<sub>1</sub>), the probability of B occurring by way of the first case. Exactly one case occurs, the cases do not overlap and each piece is a product, which is why the pieces simply add. Highlight each case in turn and add the contributions on the',
+      href: '/probability/visual-tools/total-probability',
+      linkText: 'law of total probability visualizer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1876,7 +1909,7 @@ export default function TotalProbabilityPage({
   examplesTable,
   bayesTable,
   mistakesTable,
-  summaryTable,
+  summaryTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1907,6 +1940,8 @@ export default function TotalProbabilityPage({
         link:'',
         content:[
           sectionsContent.cases.content,
+                  <div key={'unit-u_cases_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_cases_0 }} />,
+          `The law states this splitting formally.`,
         ]
     },
     {
@@ -1942,6 +1977,8 @@ export default function TotalProbabilityPage({
         link:'',
         content:[
           sectionsContent.diagram.content,
+                  <div key={'unit-u_diagram_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_diagram_1 }} />,
+          `Worked examples put numbers on the pieces.`,
         ]
     },
     {
@@ -1960,6 +1997,8 @@ export default function TotalProbabilityPage({
         link:'',
         content:[
           sectionsContent.why.content,
+                  <div key={'unit-u_why_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_why_2 }} />,
+          `Conditional probability is the ingredient inside each product.`,
         ]
     },
     {

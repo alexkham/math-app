@@ -852,6 +852,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 
 export async function getStaticProps(){
 
@@ -1495,8 +1498,31 @@ const hypergeometricExplanations = {
   }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_4_0: demoUnitFrame({
+      svg: discretePmfDiagrams.hypergeometric,
+      caption: 'Hypergeometric PMF, N = 50, K = 20, n = 10',
+      text: 'The bars count successes in 10 draws without replacement from a population of 50 that holds 20 successes; the peak is at 4, the value of nK over N, and the bars vanish beyond the smaller of n and K. Each height is a ratio of binomial coefficients. Change N, K and n and watch the range and the peak move on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+    u_5_1: demoUnitFrame({
+      svg: discreteCdfDiagrams.hypergeometric,
+      caption: 'Hypergeometric CDF, N = 50, K = 20, n = 10',
+      text: 'The staircase accumulates the PMF and reaches 1 at the last possible count. It sits close to the binomial staircase with p equal to K over N, and the two merge as N grows because drawing without replacement then barely changes the odds. Compare it with the binomial step pattern on the',
+      href: '/probability/visual-tools/cdf/discrete',
+      linkText: 'discrete CDF explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          hypergeometricExplanations,
@@ -1522,7 +1548,7 @@ export default function HypergeometricDistributionPage({
   hypergeometricExplanations,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1588,7 +1614,9 @@ export default function HypergeometricDistributionPage({
                   </div>,
                   <div key={'hypergeometric-pmf-visualization'} style={{transform:'scale(0.8)'}}>
                   <HypergeometricDistribution/>
-                  </div>
+                  </div>,
+                  <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
+          `Summing the bars from the left gives the CDF.`,
         ]
     },
     {
@@ -1600,7 +1628,9 @@ export default function HypergeometricDistributionPage({
            <div key={'hypergeometric-cdf-visualization'} style={{transform:'scale(0.8)'}}>
                   
                   <HypergeometricDistributionCDF/>
-                  </div>
+                  </div>,
+                  <div key={'unit-u_5_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_1 }} />,
+          `The expected value below is the same as the binomial one.`,
         ]
     },
     {

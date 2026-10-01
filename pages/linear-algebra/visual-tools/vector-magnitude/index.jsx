@@ -8,6 +8,9 @@ import MagnitudeWrapper from '../../../../app/components/linear-algebra copy/mat
 import magnitudeDiagrams from '../../../../app/components/linear-algebra copy/matrix/magnitudeDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -417,8 +420,126 @@ The completed picture reads $\\mathbf{v} = \\|\\mathbf{v}\\| \\, \\hat{\\mathbf{
   }
 
 
+  const instructions = [
+    'The **Scenario** pills choose **Magnitude only**, which stops at $\\|\\mathbf{v}\\|$, or **Magnitude, then unit vector**, which continues to $\\hat{\\mathbf{v}}$; switching returns the player to its first scene. [Learn more about getting started](!#getting-started)',
+    'Hover the **?** icon next to **Scenario** for what the magnitude is and why normalizing keeps the direction. [Learn more about getting started](!#getting-started)',
+    'The **Vector length** stepper (**▲** / **▼**) sets the number of components of $\\mathbf{v}$, from $1$ to $6$; the squares row and $\\hat{\\mathbf{v}}$ follow. [Learn more about choosing the length](!#choosing-vector-length)',
+    '**▶ Play** runs the whole computation, **Next →** and **← Back** move one scene, **Reset** returns to the opening scene, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'The run has three phases: square each component, sum the squares and take the root in one scene, then divide each component by $\\|\\mathbf{v}\\|$. [Learn more about the three phases](!#the-three-phases)',
+    'Blue marks the component being used, green the slot being filled, grey the inputs feeding it; arrows run from the inputs into the green slot. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Step explanations** log lists every scene so far with its phase and formula, the current one highlighted. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real MagnitudeWrapper
+     (opens on Magnitude, then unit vector, length 3, Step 1 / 9, 1.3 s per scene). */
+  const demos = {
+    'getting-started': {
+      title: 'Scenario, play, speed',
+      script: [
+        { say: `TAP Magnitude only
+Step 1 / 6.
+Run stops at ‖v‖. No unit vector.` },
+        { click: { button: 'Magnitude only' } },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+v₁², v₂², v₃², then ‖v‖ = √(v₁² + v₂² + v₃²).
+Done at Step 6 / 6.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7600 },
+        { say: `TAP Magnitude, then unit vector
+Step 1 / 9.
+Three more scenes: v̂ = v / ‖v‖.` },
+        { click: { button: 'Magnitude, then unit vector' } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+0.7 s per scene.
+Square, root, divide. Step 9 / 9.` },
+        { set: 'select', value: 700 },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6800 },
+        { say: `TAP Reset
+Step 1 / 9.
+Squares, ‖v‖ and v̂ empty again.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-three-phases': {
+      title: 'Square, sum and root, divide',
+      script: [
+        { say: `TAP Next →
+Phase 1: v₁ → v₁².
+v₁ blue, its square green, beside v.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next → Next →
+v₂², v₃².
+Squares row full. Phase 1 done.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 1300 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next →
+Phase 2, one scene:
+‖v‖ = √(v₁² + v₂² + v₃²). Arrows from every square.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Next →
+Phase 3: v̂₁ = v₁ / ‖v‖.
+Layout now v ÷ ‖v‖ = v̂.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+        { say: `TAP ▶ Play
+v̂₂, v̂₃, then Done.
+Same divisor for every component. Step 9 / 9.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5000 },
+      ],
+    },
+    'choosing-vector-length': {
+      title: 'Length 2 to 6',
+      script: [
+        { say: `TAP ▼
+Length 2. Step 1 / 7.
+Two components, two squares.` },
+        { click: { button: '▼', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next → × 3
+‖v‖ = √(v₁² + v₂²).
+Pythagorean theorem: legs v₁, v₂.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▲ × 4
+Length 6, the maximum. ▲ greyed.
+Step 1 / 15.` },
+        { click: { button: '▲', exact: true } },
+        { wait: 350 },
+        { click: { button: '▲', exact: true } },
+        { wait: 350 },
+        { click: { button: '▲', exact: true } },
+        { wait: 350 },
+        { click: { button: '▲', exact: true } },
+        { wait: 2400 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+0.4 s per scene. ‖v‖ elided: √(v₁² + ⋯ + v₆²).
+Same rule. Step 15 / 15.` },
+        { set: 'select', value: 400 },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-vector-magnitude'),
       sectionsContent,
       stateUnits,
@@ -441,7 +562,22 @@ The completed picture reads $\\mathbf{v} = \\|\\mathbf{v}\\| \\, \\hat{\\mathbf{
   }
 }
 
-export default function MagnitudeVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function MagnitudeVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <MagnitudeWrapper mode='both' defaultScenario='unit' defaultN={3} explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -463,14 +599,14 @@ export default function MagnitudeVisualizer({seoData, sectionsContent, stateUnit
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-three-phases'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-three-phases')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'phase-1-squaring', 'square'),
     stateRow('obj13', 'phase-2-sum-and-root', 'root'),
     stateRow('obj14', 'phase-3-normalizing', 'normalize'),
     plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-vector-length'),
+    withDemo(plain('obj4', 'choosing-vector-length')),
     plain('obj5', 'what-the-magnitude-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -531,6 +667,10 @@ export default function MagnitudeVisualizer({seoData, sectionsContent, stateUnit
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Magnitude and Unit Vector</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <MagnitudeWrapper

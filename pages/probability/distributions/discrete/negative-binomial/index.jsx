@@ -855,6 +855,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 
 export async function getStaticProps(){
 
@@ -1491,8 +1494,31 @@ const negativeBinomialExplanations = {
   }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_4_0: demoUnitFrame({
+      svg: discretePmfDiagrams.negativeBinomial,
+      caption: 'Negative binomial PMF, r = 3, p = 0.4',
+      text: 'The bars start at r, the fewest trials that can hold r successes, rise to a peak and then decay in a long right tail; the geometric distribution is the special case r equal to 1. Each height multiplies a binomial coefficient by p to the r and (1 minus p) to the k minus r. Raise r and watch the whole pattern shift right and widen on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+    u_6_1: demoUnitFrame({
+      svg: distributionExplorerDiagrams['negative-binomial-pmf'],
+      caption: 'Negative binomial PMF with the mean marked',
+      text: 'The marked mean sits to the right of the peak because of the long right tail: the expected number of trials is r over p, so each additional required success adds 1 over p trials on average. Linearity of expectation gives this without any summation. Change r and p and watch the mean marker move on the',
+      href: '/probability/visual-tools/distributions/negative-binomial',
+      linkText: 'distribution explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          negativeBinomialExplanations,
@@ -1518,7 +1544,7 @@ export default function NegativeBinomialDistributionPage({
   negativeBinomialExplanations,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1585,7 +1611,9 @@ export default function NegativeBinomialDistributionPage({
                    <div key={'negative-pmf-visualization'} style={{transform:'scale(0.8)'}}>
                           
         <NegativeBinomialDistribution/>
-        </div>   
+        </div>,   
+                  <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
+          `The CDF has no closed form and is summed term by term.`,
         ]
     },
     {
@@ -1607,6 +1635,8 @@ export default function NegativeBinomialDistributionPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-u_6_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_6_1 }} />,
+          `The variance is derived by the same additive argument.`,
         ]
     },
     {

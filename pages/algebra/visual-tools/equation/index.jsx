@@ -12,6 +12,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import EquationVisualizer from '../../../../app/components/algebra/equations/visualizer/EquationsVisualizer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import equationVisualizerDiagrams from '../../../../app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -39,16 +41,16 @@ export async function getStaticProps(){
     obj0: {
       title: `Key Terms`,
       content: `
-- **Equation** $f(x) = n$ — a statement that the value of the function $f$ at some $x$ equals the constant $n$
-- **Solution** — a value of $x$ for which $f(x) = n$ holds; geometrically, an $x$ where the curve $y = f(x)$ crosses the horizontal line $y = n$
-- **Solution set** — the set of all $x$ satisfying the equation, possibly empty, finite, or infinite
-- **f(x) − n** — the auxiliary function whose zeros are exactly the solutions of $f(x) = n$
-- **Sign chart** — a table tracking the sign of $f(x) - n$ across intervals separated by its zeros
-- **Critical point (in this context)** — a zero of $f(x) - n$ or a point where $f$ is undefined; the only places the sign of $f(x) - n$ can change
+- [Equation](!/algebra/definitions#equation) $f(x) = n$ — a statement that the value of the function $f$ at some $x$ equals the constant $n$
+- [Solution](!/algebra/definitions#solution) — a value of $x$ for which $f(x) = n$ holds; geometrically, an $x$ where the curve $y = f(x)$ crosses the horizontal line $y = n$
+- [Solution set](!/algebra/definitions#solution_set) — the set of all $x$ satisfying the [equation](!/algebra/equations), possibly empty, finite, or infinite
+- **f(x) − n** — the auxiliary function whose zeros are exactly the [solutions](!/algebra/equations) of $f(x) = n$
+- [Sign chart](!/algebra/inequalities/polynomial#2) — a table tracking the sign of $f(x) - n$ across intervals separated by its zeros
+- [Critical point (in this context)](!/algebra/definitions#critical_point) — a zero of $f(x) - n$ or a point where $f$ is undefined; the only places the sign of $f(x) - n$ can change
 - **Marble** — the draggable probe positioned at some $x$ in the visualizer; lets you read off $f(x)$ at that point
-- **Multiplicity** — for polynomial equations, how many times a given solution is repeated as a root of $f(x) - n$
-- **Linear equation** — $f(x) = n$ where $f$ is a degree-1 polynomial; has exactly one solution unless $f$ is constant
-- **Quadratic equation** — $f(x) = n$ where $f$ is a degree-2 polynomial; has zero, one, or two real solutions
+- [Multiplicity](!/algebra/definitions#multiplicity) — for [polynomial equations](!/algebra/equations), how many times a given solution is repeated as a [root](!/algebra/roots) of $f(x) - n$
+- [Linear equation](!/algebra/equations#6) — $f(x) = n$ where $f$ is a degree-1 polynomial; has exactly one solution unless $f$ is constant
+- [Quadratic equation](!/algebra/equations#7) — $f(x) = n$ where $f$ is a degree-2 polynomial; has zero, one, or two real solutions
 `,
       before: ``,
       after: ``,
@@ -74,7 +76,7 @@ A **type bar** at the top of the page lets you switch between equation families 
 Switching the type does three things at once:
 
 • The graph updates to show the new function $f(x)$
-• The parameter sliders below the graph reconfigure to match the new family (a linear equation has two sliders for slope and intercept; higher-degree equations have more)
+• The parameter sliders below the graph reconfigure to match the new family (a linear equation has two sliders for slope and [intercept](!/algebra/polynomials#2); higher-degree equations have more)
 • The sign chart rebuilds with a new set of factors and intervals
 
 The currently active type is highlighted in blue. Your last-chosen parameters for each family are preserved when you switch back, so you can compare how the same target $n$ behaves across different function shapes.`,
@@ -173,7 +175,7 @@ For comprehensive theory on equations and solution sets, see **algebra equations
 
     obj9: {
       title: `Why the Sign Chart Helps Even for Equations`,
-      content: `Sign charts are most often associated with inequalities, but they are equally useful for equations. The reason: the zeros of $f(x) - n$ are exactly the points where its sign changes (or fails to change, in the case of repeated roots).
+      content: `Sign charts are most often associated with [inequalities](!/algebra/inequalities), but they are equally useful for equations. The reason: the zeros of $f(x) - n$ are exactly the points where its sign changes (or fails to change, in the case of repeated roots).
 
 A sign chart for $f(x) - n$ presents the structure of the equation visually:
 
@@ -194,19 +196,23 @@ For the inequality version of the same idea, see **inequalities visualizer**.`,
       title: `Related Concepts and Tools`,
       content: `**Equations** — the general theory of equations, methods of solution, and classification by type.
 
-**Inequalities Visualizer** — the companion tool for $f(x) < n$, $f(x) \\leq n$, and the strict and non-strict comparisons; uses the same marble-and-sign-chart layout.
+[Inequalities Visualizer](!/algebra/visual-tools/inequality) — the companion tool for $f(x) < n$, $f(x) \\leq n$, and the strict and non-strict comparisons; uses the same marble-and-sign-chart layout.
 
-**Linear Equations** — the simplest case, where $f$ is a degree-one polynomial; the visualizer always produces a single solution unless $f$ is constant.
+**Linear Equations** — the simplest case, where $f$ is a degree-one [polynomial](!/algebra/polynomials); the visualizer always produces a single solution unless $f$ is constant.
 
 **Quadratic Equations** — degree-two case, where the equation has zero, one, or two real solutions depending on the discriminant of $f(x) - n$.
 
-**Polynomial Equations** — higher-degree cases, where the fundamental theorem of algebra bounds the number of complex solutions by the degree.
+**Polynomial Equations** — higher-degree cases, where the [fundamental theorem of algebra](!/algebra/polynomials/rules#11) bounds the number of complex solutions by the degree.
 
 **Sign Charts** — the general technique for tracking the sign of a function across intervals, used here and throughout calculus.
 
 **Function Graphs** — visualizers for plotting $y = f(x)$ on its own, without comparison to a target.
 
-**Equation Solving Step by Step** — written walkthroughs of standard solution methods for each equation type.`,
+**Equation Solving Step by Step** — written walkthroughs of standard solution methods for each equation type.
+
+[Completing the Square Visualizer](!/algebra/visual-tools/completing-square) — the quadratic case solved by rewriting $f(x) - n$ in vertex form.
+
+[Polynomial Multiplication Visualizer](!/algebra/visual-tools/polynomial-multiplication) — expand a product of factors into the standard form the visualizer expects.`,
       before: ``,
       after: ``,
       link: '',
@@ -228,7 +234,7 @@ Linear equations are where the marble metaphor is easiest to internalize — the
       title: `Quadratic Equations in the Explorer`,
       content: `The Quadratic tab solves $ax^2 + bx + c = n$, and its four templates are a complete tour of what a parabola can do against a horizontal line: cross twice ([two solutions](!#a-parabola-with-two-solutions)), touch once ([the tangent case](!#the-tangent-case-one-solution)), miss entirely ([no solution](!#a-parabola-with-no-solution)), or be revisited with the level pushed up ([raising the level](!#raising-the-level)).
 
-The quartet is the discriminant of $f(x) - n$ made visible: positive, zero, negative — two, one, or zero real roots. Dragging the $n$ slider between the frozen states shows the transitions live: two solutions slide together, merge at the tangent, and vanish.`,
+The quartet is the [discriminant](!/algebra/equations/quadratic) of $f(x) - n$ made visible: positive, zero, negative — two, one, or zero real roots. Dragging the $n$ slider between the frozen states shows the transitions live: two solutions slide together, merge at the tangent, and vanish.`,
       before: ``,
       after: ``,
       link: '',
@@ -238,7 +244,7 @@ The quartet is the discriminant of $f(x) - n$ made visible: positive, zero, nega
       title: `Cubic Equations in the Explorer`,
       content: `The Cubic tab solves $ax^3 + bx + c = n$. A cubic's ends run to opposite infinities, so it can never miss a horizontal line — the question is only **how many times** it crosses: three ([three roots](!#a-cubic-with-three-roots)), one ([one root](!#a-cubic-with-one-root)), or three again after the level moves off the symmetric zero ([the shifted cubic](!#the-shifted-cubic)).
 
-The guaranteed crossing is the family's headline fact: every cubic equation has at least one real solution, a direct consequence of the intermediate value theorem. The local hills and valleys created by a negative linear coefficient are what open the door to three.`,
+The guaranteed crossing is the family's headline fact: every cubic equation has at least one real solution, a direct consequence of the intermediate value theorem. The local hills and valleys created by a negative linear [coefficient](!/algebra/equations) are what open the door to three.`,
       before: ``,
       after: ``,
       link: '',
@@ -246,7 +252,7 @@ The guaranteed crossing is the family's headline fact: every cubic equation has 
 
     obj14: {
       title: `Absolute-Value Equations in the Explorer`,
-      content: `The Absolute value tab solves $|x - h| + k = n$ — the V-shape family. The three templates mirror the parabola's trichotomy with sharper geometry: the level line cuts both arms ([two solutions](!#the-v-with-two-solutions)), passes exactly through the vertex ([one solution](!#the-v-at-its-vertex)), or runs below the vertex and never meets the graph ([no solution](!#the-v-that-never-reaches)).
+      content: `The [Absolute value](!/algebra/equations/absolute-value) tab solves $|x - h| + k = n$ — the V-shape family. The three templates mirror the parabola's trichotomy with sharper geometry: the level line cuts both arms ([two solutions](!#the-v-with-two-solutions)), passes exactly through the vertex ([one solution](!#the-v-at-its-vertex)), or runs below the vertex and never meets the graph ([no solution](!#the-v-that-never-reaches)).
 
 The V makes the solution-count logic purely visual: the vertex sits at height $k$, so everything depends on whether $n$ is above, at, or below $k$. It is the same above/at/below story as the quadratic's discriminant — told without any algebra at all.`,
       before: ``,
@@ -258,7 +264,7 @@ The V makes the solution-count logic purely visual: the vertex sits at height $k
 
     obj15: {
       title: `The Basic Linear Equation`,
-      content: `The opening template freezes $x = 3$ — the identity line $f(x) = x$ against the level $n = 3$. One clean crossing at $x = 3$, marked on the axis; the marble waits at $x = 0$, off by exactly $3$.`,
+      content: `The opening template freezes $x = 3$ — the [identity](!/algebra/equations) line $f(x) = x$ against the level $n = 3$. One clean crossing at $x = 3$, marked on the axis; the marble waits at $x = 0$, off by exactly $3$.`,
       before: ``,
       after: `No equation is more transparent, which is precisely its value as a first frame: the curve **is** the $x$-value, so asking "where does $f(x)$ reach $3$?" answers itself. The sign chart underneath is correspondingly minimal — negative left of $3$, zero at $3$, positive right of it.
 
@@ -575,6 +581,7 @@ One difference from the quadratic case deserves the closing word: there is no co
 
   return {
     props: {
+      relatedTools: getRelatedTools('algebra-equation'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -602,7 +609,7 @@ One difference from the quadratic case deserves the closing word: there is no co
 }
 
 
-export default function EquationVisualExplorerPage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function EquationVisualExplorerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after].
@@ -743,6 +750,7 @@ export default function EquationVisualExplorerPage({seoData, sectionsContent, in
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

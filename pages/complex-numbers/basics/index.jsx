@@ -888,6 +888,11 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import complexExplorerDiagrams from '@/app/components/calculators/complex-numbers/complexExplorerDiagrams'
+import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
+import polarRectangularDiagrams from '@/app/components/calculators/complex-numbers/polarRectangularDiagrams'
+import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoivreDiagrams'
 
 
 export async function getStaticProps(){
@@ -1462,8 +1467,52 @@ const faqQuestions = {
   }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    pureImag: demoUnitFrame({
+      svg: complexExplorerDiagrams.pureImaginary,
+      caption: 'z = 2i on the imaginary axis',
+      text: 'The point sits straight up the vertical axis with no horizontal component: a real multiple of i and nothing else, which is what pure imaginary means. Its conjugate, &#8722;2i, is directly below it. Slide the point along either axis and read off which part vanishes on the',
+      href: '/complex-numbers/visual-tools/complex-explorer',
+      linkText: 'complex number explorer',
+    }),
+    conj: demoUnitFrame({
+      svg: conjugateModulusDiagrams.start,
+      caption: 'z and z&#772; mirrored in the real axis, |z| = 3.6',
+      text: 'The point z and its conjugate z&#772; sit at the same distance from the origin, one above the real axis and one below: conjugation keeps the real part and flips the sign of the imaginary part, so it is a reflection in the real axis. The modulus, the length of either arrow, is the same 3.6 for both. Drag z anywhere and watch its mirror image follow on the',
+      href: '/complex-numbers/visual-tools/complex-conjugate',
+      linkText: 'conjugate and modulus tool',
+    }),
+    plane: demoUnitFrame({
+      svg: complexExplorerDiagrams.quadrantI,
+      caption: 'z = 2 + 3i plotted as the point (2, 3)',
+      text: 'The real part 2 is the horizontal coordinate and the imaginary part 3 the vertical one, so the number is a point in the first quadrant; the arrow from the origin has length |z| = &#8730;13 &#8776; 3.61. Every complex number is one such point and one such arrow. Move the point through all four quadrants on the',
+      href: '/complex-numbers/visual-tools/complex-explorer',
+      linkText: 'complex number explorer',
+    }),
+    polar: demoUnitFrame({
+      svg: polarRectangularDiagrams.qi,
+      caption: 'z = 3 + 2i: r = 3.61 and the angle &#952;',
+      text: 'The same point described by its distance from the origin, r = &#8730;13 &#8776; 3.61, and the angle &#952; it makes with the positive real axis: those two numbers are the modulus and the argument, and together they are the trigonometric form. Convert back and forth for any point on the',
+      href: '/complex-numbers/visual-tools/polar-rectangular',
+      linkText: 'polar and rectangular form converter',
+    }),
+    demoivre: demoUnitFrame({
+      svg: deMoivreDiagrams.fourth,
+      caption: 'z, z&#178;, z&#179;, z&#8308;: the argument multiplies by n',
+      text: 'Each power turns the arrow by the same angle &#952; again and scales its length by r again, so z&#8319; sits at angle n&#952; and distance r&#8319;: De Moivre&#8217;s theorem drawn as a spiral of four arrows. Raise the exponent and watch the spiral wind on the',
+      href: '/complex-numbers/visual-tools/demoivre-visualizer',
+      linkText: 'De Moivre visualizer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj1Table,
@@ -1486,7 +1535,7 @@ const faqQuestions = {
     }
    }
 
-export default function ComplexNumbersBasicsPage({seoData, sectionsContent, introContent, obj1Table, obj3Table, obj8Table, summaryTable, faqQuestions, schemas}) {
+export default function ComplexNumbersBasicsPage({seoData, sectionsContent, introContent, obj1Table, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1511,6 +1560,8 @@ export default function ComplexNumbersBasicsPage({seoData, sectionsContent, intr
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj1Table }}
           />,
+                  <div key={'unit-pureImag'} dangerouslySetInnerHTML={{ __html: demoUnits.pureImag }} />,
+          `The pure imaginary numbers are the vertical axis of the plane introduced below, just as the reals are its horizontal axis.`,
         ]
     },
     {
@@ -1519,6 +1570,8 @@ export default function ComplexNumbersBasicsPage({seoData, sectionsContent, intr
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-conj'} dangerouslySetInnerHTML={{ __html: demoUnits.conj }} />,
+          `The conjugate is the one operation on this page that is a pure reflection.`,
         ]
     },
     {
@@ -1559,6 +1612,8 @@ export default function ComplexNumbersBasicsPage({seoData, sectionsContent, intr
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-plane'} dangerouslySetInnerHTML={{ __html: demoUnits.plane }} />,
+          `From here on every algebraic statement about complex numbers has a picture.`,
         ]
     },
     {
@@ -1575,6 +1630,8 @@ export default function ComplexNumbersBasicsPage({seoData, sectionsContent, intr
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-polar'} dangerouslySetInnerHTML={{ __html: demoUnits.polar }} />,
+          `Modulus and argument are the natural coordinates for multiplication, as the next sections show.`,
         ]
     },
     {
@@ -1596,6 +1653,8 @@ export default function ComplexNumbersBasicsPage({seoData, sectionsContent, intr
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
           />,
+                  <div key={'unit-demoivre'} dangerouslySetInnerHTML={{ __html: demoUnits.demoivre }} />,
+          `The n-th roots run the same construction backwards, dividing the angle by n.`,
         ]
     },
     {

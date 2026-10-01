@@ -646,6 +646,9 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
+import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 
 
 export async function getStaticProps(){
@@ -1071,8 +1074,31 @@ Understanding how to count correctly determines whether probability calculations
 This page explains how counting methods connect to probability calculations, from basic classical formulas to conditional probability, expectation, and discrete distributions. All specific counting techniques (permutations, combinations, etc.) are covered in the dedicated combinatorics section.`
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_1_0: demoUnitFrame({
+      svg: diceSampleSpaceDiagrams.sum7,
+      caption: 'Sum equals 7: six of the 36 equally likely cells',
+      text: 'The classical formula counts cells: the event has six outcomes, the sample space has 36, so its probability is 6 over 36. Counting only works because every cell carries the same 1/36, which is the equally likely assumption built into the formula. Highlight other events and count their cells on the',
+      href: '/probability/visual-tools/dice-roll',
+      linkText: 'dice roll sample space explorer',
+    }),
+    u_3_1: demoUnitFrame({
+      svg: coinSampleSpaceDiagrams.none,
+      caption: 'Three tosses: the eight sequences of heads and tails',
+      text: 'A coin-toss experiment is counted as ordered sequences: three tosses give 2 times 2 times 2, that is 8 outcomes, each with probability 1/8. The labels group the sequences by the number of heads, which is where the binomial coefficients enter. Select a number of heads and count the matching sequences on the',
+      href: '/probability/visual-tools/coin-toss',
+      linkText: 'coin toss sample space explorer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       obj4Table,
@@ -1097,7 +1123,7 @@ export default function CombinatoricsPage({
   obj4Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1118,6 +1144,8 @@ export default function CombinatoricsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
+          `How outcomes are organised for counting is taken up next.`,
         ]
     },
     {
@@ -1134,6 +1162,8 @@ export default function CombinatoricsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-u_3_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_3_1 }} />,
+          `Repeating such counts across trials produces the distributions of the next section.`,
         ]
     },
     {

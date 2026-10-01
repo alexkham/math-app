@@ -595,6 +595,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import waffleChartDiagrams from '@/app/components/probability/conditional-probability-demo/waffleChartDiagrams'
+import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
 
 
 export async function getStaticProps(){
@@ -1111,8 +1114,31 @@ The rest of the page develops what independence means, how it is expressed forma
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_visual_0: demoUnitFrame({
+      svg: waffleChartDiagrams.allEqual,
+      caption: 'A waffle chart with equal columns: independence',
+      text: 'Each column is a value of one variable and the shaded share in every column is the same: knowing the column tells you nothing about the shading, which is what independence looks like. Unequal shares across columns would mean dependence. Drag the shares apart and watch the events become dependent on the',
+      href: '/probability/visual-tools/conditional-probability/waffle-chart',
+      linkText: 'conditional probability waffle chart',
+    }),
+    u_mistakes_1: demoUnitFrame({
+      svg: contingencyTableDiagrams['2x2'],
+      caption: 'A 2 by 2 contingency table',
+      text: 'Independence is a check on the table: the cell for A and B must equal the product of the row total and the column total, divided by the grand total. Disjoint events fail that check badly, because their shared cell is zero while the product is not, so disjoint and independent are opposite situations. Edit the cells and test the product rule on the',
+      href: '/probability/visual-tools/contingency-tables',
+      linkText: 'contingency tables explorer',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       examplesTable,
@@ -1139,7 +1165,7 @@ export default function IndependencePage({
   mistakesTable,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1203,6 +1229,8 @@ export default function IndependencePage({
         link:'',
         content:[
             sectionsContent.visual.content,
+                  <div key={'unit-u_visual_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_visual_0 }} />,
+          `Examples show where such equal shares actually arise.`,
         ]
     },
     {
@@ -1247,6 +1275,8 @@ export default function IndependencePage({
           sectionsContent.mistakes.content,
           <div key={'mistakes-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+                  <div key={'unit-u_mistakes_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_mistakes_1 }} />,
+          `The connections below place independence among the other core ideas.`,
         ]
     },
     {

@@ -694,6 +694,9 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
+import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
 
 
 export async function getStaticProps(){
@@ -1208,8 +1211,38 @@ They help track how probabilities change as information accumulates and make com
 `
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_4_0: demoUnitFrame({
+      svg: conditionalTreeDiagrams.subtreeGivenA,
+      caption: 'The subtree below A: branch weights are conditional probabilities',
+      text: 'Every branch beyond the root carries a conditional probability: the two branches below A are P(B given A) and its complement, and they add to 1 because they exhaust what can happen once A has occurred. The tree builds conditioning into its structure. Change P(B given A) and watch only the subtree respond on the',
+      href: '/probability/visual-tools/conditional-probability/tree-diagram',
+      linkText: 'conditional probability tree diagram',
+    }),
+    u_15_1: demoUnitFrame({
+      svg: totalProbabilityDiagrams.outcome,
+      caption: 'One outcome highlighted across every branch',
+      text: 'The first-level branches are the disjoint cases of the law of total probability, and the highlighted outcome appears once in each; its overall probability is the sum of the path products leading to it. The tree makes the partition and the sum visible at once. Highlight an outcome and add its paths on the',
+      href: '/probability/visual-tools/total-probability',
+      linkText: 'law of total probability visualizer',
+    }),
+    u_5_2: demoUnitFrame({
+      svg: conditionalTreeDiagrams.leafPath,
+      caption: 'One complete path: multiply along the branches',
+      text: 'A complete path is one sequence of outcomes, and its probability is the product of the branch weights along it, here P(A) times P(B given A). Adding the products of several paths gives the probability of any event made of those sequences. Follow other paths and multiply on the',
+      href: '/probability/visual-tools/conditional-probability/tree-diagram',
+      linkText: 'conditional probability tree diagram',
+    }),
+  };
+
   return {
     props: {
+    demoUnits,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1236,7 +1269,7 @@ export default function TreeDiagramsPage({
   schemas,
   obj7Table,
   obj8Table,
-  summaryTable,
+  summaryTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1281,6 +1314,8 @@ export default function TreeDiagramsPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
+          `The same structure carries the law of total probability.`,
         ]
     },
      {
@@ -1289,6 +1324,8 @@ export default function TreeDiagramsPage({
         link:sectionsContent.obj15.link,
         content:[
           sectionsContent.obj15.content,
+                  <div key={'unit-u_15_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_15_1 }} />,
+          `Computing with paths is the subject of the next section.`,
         ]
     },
     {
@@ -1297,6 +1334,8 @@ export default function TreeDiagramsPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-u_5_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_2 }} />,
+          `Bayes theorem reads the same tree backwards.`,
         ]
     },
     {

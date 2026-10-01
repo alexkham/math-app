@@ -915,6 +915,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionTangentLineDiagrams from '@/app/components/calculus/visualizers/functionTangentLineDiagrams'
 
 
 export async function getStaticProps(){
@@ -1636,8 +1638,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    linear: demoUnitFrame({
+      svg: functionTangentLineDiagrams.pos,
+      caption: 'The tangent line at P is the linear approximation',
+      text: 'Near the marked point the curve and its tangent line are nearly indistinguishable, and the line&#8217;s slope, 1.89, is the f&#8242;(a) of the formula: moving dx along the line raises it by 1.89&#8201;dx, which is dy. The gap between line and curve, visible only farther out, is the error the differential ignores. Move the point and watch the approximating line follow on the',
+      href: '/calculus/visual-tools/tangent-line',
+      linkText: 'tangent line at a point tool',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1657,7 +1675,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj3Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj3Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1705,6 +1723,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-linear'} dangerouslySetInnerHTML={{ __html: demoUnits.linear }} />,
+          `Linear approximation is therefore nothing more than reading the tangent line instead of the curve.`,
         ]
     },
     {

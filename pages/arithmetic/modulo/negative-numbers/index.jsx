@@ -774,6 +774,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 
 
 export async function getStaticProps(){
@@ -1243,8 +1245,24 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    class: demoUnitFrame({
+      svg: modPieWheelDiagrams.classDetail,
+      caption: 'One class, many representatives',
+      text: 'Every number in a slot is congruent to every other: &#8722;1 and 2 occupy the same slot mod 3 just as 3, 9 and 15 share a slot mod 6 here, so the two conventions&#8217; answers, &#8722;1 and 2, are two names for one class. The wheel does not care which representative you write. Step backwards through negative numbers on the',
+      href: '/arithmetic/visual-tools/modular-wheel',
+      linkText: 'modular arithmetic wheel',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1264,7 +1282,7 @@ return {
    }
 
 
-export default function NegativeNumbersPage({seoData, sectionsContent, introContent, obj4Table, obj11Table, summaryTable, faqQuestions, schemas}) {
+export default function NegativeNumbersPage({seoData, sectionsContent, introContent, obj4Table, obj11Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1341,6 +1359,8 @@ export default function NegativeNumbersPage({seoData, sectionsContent, introCont
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-class'} dangerouslySetInnerHTML={{ __html: demoUnits.class }} />,
+          `Choosing a convention is choosing which member of the class to report, nothing more.`,
         ]
     },
     {

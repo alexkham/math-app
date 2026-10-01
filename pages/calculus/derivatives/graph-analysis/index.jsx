@@ -12,6 +12,10 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionTangentLineDiagrams from '@/app/components/calculus/visualizers/functionTangentLineDiagrams'
+import functionOptimizationDiagrams from '@/app/components/functions/optimization/functionOptimizationDiagrams'
+import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
 
 
 export async function getStaticProps(){
@@ -881,8 +885,59 @@ const schemas = {
   //      }
   //   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    tangent: demoUnitFrame({
+      svg: functionTangentLineDiagrams.pos,
+      caption: 'Tangent at P with slope f&#8242;(c) = 1.89',
+      text: 'The line touches the curve at P and nowhere else nearby, and its slope 1.89 is the derivative at that point; the point-slope equation of the section is this line written out. Where the curve is steeper the line tilts more, where the curve flattens the line goes level. Drag P along the curve and read the slope on the',
+      href: '/calculus/visual-tools/tangent-line',
+      linkText: 'tangent line at a point tool',
+    }),
+    critical: demoUnitFrame({
+      svg: functionOptimizationDiagrams['cubic-bump'],
+      caption: 'x&#179; &#8722; 3x on [&#8722;3, 3]: critical points at x = &#177;1',
+      text: 'The derivative 3x&#178; &#8722; 3 vanishes at x = &#8722;1 and x = 1, and the tool marks both: a local maximum on the left, a local minimum on the right, each with a horizontal tangent. Nothing else in the interval is a candidate for an extreme except the two endpoints. Change the interval or the function and watch the candidates recomputed on the',
+      href: '/calculus/visual-tools/optimization',
+      linkText: 'optimization and critical points visualizer',
+    }),
+    secondTest: demoUnitFrame({
+      svg: functionConcavityDiagrams.up,
+      caption: 'f&#8243;(c) = 2.60: concave up, a cup',
+      text: 'At the marked point the curve bends upward and the second derivative is positive; a horizontal tangent here would sit at the bottom of the cup, which is the local-minimum case of the second derivative test. Turn the bend over and the sign flips with it. Move the marker to a downward bend on the',
+      href: '/calculus/visual-tools/inflection-points',
+      linkText: 'concavity and inflection points tool',
+    }),
+    concavity: demoUnitFrame({
+      svg: functionConcavityDiagrams.down,
+      caption: 'f&#8243;(c) = &#8722;2.60: concave down',
+      text: 'Here the slopes decrease as x increases: the tangent lines turn clockwise as they move right, and the curve stays below each of them. That is concavity read from the second derivative, negative throughout this stretch. Compare the two bends side by side on the',
+      href: '/calculus/visual-tools/inflection-points',
+      linkText: 'concavity and inflection points tool',
+    }),
+    inflection: demoUnitFrame({
+      svg: functionConcavityDiagrams.infl,
+      caption: 'f&#8243;(c) = 0.00: the bending changes sides',
+      text: 'To the left of the marker the curve cups down, to the right it cups up, and at the marker itself the second derivative is exactly zero while it changes sign: the definition of an inflection point in one picture. A zero of f&#8243; without the sign change would not qualify. Slide the marker through the crossing on the',
+      href: '/calculus/visual-tools/inflection-points',
+      linkText: 'concavity and inflection points tool',
+    }),
+    optimization: demoUnitFrame({
+      svg: functionOptimizationDiagrams['quartic-w'],
+      caption: 'x&#8308; &#8722; 4x&#178; on [&#8722;3, 3]: critical points and endpoints',
+      text: 'The W-shaped quartic has three critical points, two minima at x = &#177;&#8730;2 and a local maximum at 0, and the tool lists them beside the two endpoints; the absolute extremes on the closed interval are found by comparing just these five values. That is the Extreme Value Theorem turned into a procedure. Narrow the interval and watch the absolute maximum move to an endpoint on the',
+      href: '/calculus/visual-tools/optimization',
+      linkText: 'optimization and critical points visualizer',
+    }),
+  };
+
   return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj6Table,
@@ -910,7 +965,7 @@ export default function PageTemplate({
   obj10Table,
   overviewTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -930,6 +985,8 @@ export default function PageTemplate({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-tangent'} dangerouslySetInnerHTML={{ __html: demoUnits.tangent }} />,
+          `The tangent line is the local stand-in for the curve, and its slope is the derivative made visible.`,
         ]
     },
     {
@@ -965,6 +1022,8 @@ export default function PageTemplate({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-critical'} dangerouslySetInnerHTML={{ __html: demoUnits.critical }} />,
+          `Locating the critical points is the first step; classifying them is the work of the two tests that follow.`,
         ]
     },
     {
@@ -982,6 +1041,8 @@ export default function PageTemplate({
         content:[
           sectionsContent.obj6.content,
           <div key={'obj6-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj6Table}}/>,
+                  <div key={'unit-secondTest'} dangerouslySetInnerHTML={{ __html: demoUnits.secondTest }} />,
+          `When f&#8243;(c) = 0 the test is silent, and the first derivative test must decide.`,
         ]
     },
     {
@@ -991,6 +1052,8 @@ export default function PageTemplate({
         content:[
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj7Table}}/>,
+                  <div key={'unit-concavity'} dangerouslySetInnerHTML={{ __html: demoUnits.concavity }} />,
+          `Concavity is the shape of the shape: not where the graph goes, but how it curves on the way.`,
         ]
     },
     {
@@ -999,6 +1062,8 @@ export default function PageTemplate({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-inflection'} dangerouslySetInnerHTML={{ __html: demoUnits.inflection }} />,
+          `Inflection points are to the second derivative what critical points are to the first.`,
         ]
     },
     {
@@ -1016,6 +1081,8 @@ export default function PageTemplate({
         content:[
           sectionsContent.obj10.content,
           <div key={'obj10-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj10Table}}/>,
+                  <div key={'unit-optimization'} dangerouslySetInnerHTML={{ __html: demoUnits.optimization }} />,
+          `Constraints change the function to be optimized, never the procedure.`,
         ]
     },
     {

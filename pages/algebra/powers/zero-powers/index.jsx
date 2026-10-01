@@ -9,6 +9,8 @@ import Head from 'next/head'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 
 
 export async function getStaticProps(){
@@ -640,8 +642,24 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    zero: demoUnitFrame({
+      svg: powersTableDiagrams['b5-cap'],
+      caption: 'Powers of 5: the table starts at 5&#8304; = 1',
+      text: 'Reading the table upward, each row is the one below it divided by 5: 125, 25, 5, and then 1, which is why 5&#8304; must be 1 and not 0. The zero row is forced by the pattern, exactly as the quotient-rule argument says. Try any base and watch the top row read 1 on the',
+      href: '/algebra/visual-tools/powers-table',
+      linkText: 'powers table',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -662,7 +680,7 @@ return {
    }
 
 // export default function ZeroPowersPage({seoData,sectionsContent , introContent}) {
-export default function ZeroPowersPage({seoData, sectionsContent, introContent, obj3Table, obj6Table, obj7Table, summaryTable, faqQuestions, schemas}) {
+export default function ZeroPowersPage({seoData, sectionsContent, introContent, obj3Table, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -704,6 +722,8 @@ export default function ZeroPowersPage({seoData, sectionsContent, introContent, 
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+                  <div key={'unit-zero'} dangerouslySetInnerHTML={{ __html: demoUnits.zero }} />,
+          `Only the base 0 breaks this argument, which is why 0&#8304; needs the separate discussion below.`,
         ]
     },
     {

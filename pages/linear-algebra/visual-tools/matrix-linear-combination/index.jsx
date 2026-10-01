@@ -10,6 +10,9 @@ import LinearCombinationWrapper from '../../../../app/components/linear-algebra 
 import matrixLinCombDiagrams from '../../../../app/components/linear-algebra copy/matrix/matrixLinCombDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -411,8 +414,152 @@ It is also worth noticing what the entrywise formula licenses. Because each cell
   }
 
 
+  const instructions = [
+    'The **Dimensions** steppers (**▲** / **▼**) set the rows and columns shared by $A$ and $B$, each from 1 to 5; $C$ takes the same shape. [Learn more about choosing dimensions](!#choosing-dimensions)',
+    'Hover the **?** icon for how a linear combination is built from scalar multiplication and matrix addition. [Learn more about getting started](!#getting-started)',
+    '**▶ Play** runs the animation, **Next →** and **← Back** move one cell at a time, **Reset** returns to the opening scene, and the speed menu sets the pace from Slow to Very Fast. [Learn more about the controls](!#getting-started)',
+    'The run has three phases: scale $A$ by $\\alpha$, scale $B$ by $\\beta$, then add the scaled matrices into $C$. [Learn more about the three phases](!#the-three-phases)',
+    'Each scene lights the active cell, with arrows from $A$ and $B$ into $C$ in phase 3, and filled cells show $\\alpha a_{i,j}$, $\\beta b_{i,j}$ or their sum. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Step explanations** log keeps every completed step across all three phases, with a note linking to the matching section below. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real
+     LinearCombinationWrapper (mode='matrices', opens at 2 x 3: 20 scenes).
+     Steppers: ▲/▼ nth 0 = rows, nth 1 = columns. */
+  const demos = {
+    'getting-started': {
+      title: 'Shape, play, reset',
+      script: [
+        { say: `TAP ▼ rows
+A, B, C all 1 × 3.
+Step 1 / 11: 3 cells × 3 phases + 2.` },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP ▼ columns twice
+1 × 1. Step 1 / 5.
+One cell per phase.` },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 400 },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+α·a₁,₁, then β·b₁,₁, then their sum.
+Step 5 / 5.` },
+        { set: 'select', value: '700' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3600 },
+        { say: `TAP Reset
+Step 1 / 5. A and B unscaled, C empty.
+Shape kept: 1 × 1.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▲ rows
+2 × 1. Step 1 / 8.
+C follows A and B.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'the-three-phases': {
+      title: 'Scale, scale, add',
+      script: [
+        { say: `TAP Next →
+Phase 1, Step 2 / 20.
+a₁,₁ → α·a₁,₁, in place. B untouched.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next → ×6
+Phase 2, Step 8 / 20. A fully scaled.
+b₁,₁ → β·b₁,₁.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { wait: 2600 },
+        { say: `TAP Next → ×6
+Phase 3, Step 14 / 20.
+c₁,₁ = α·a₁,₁ + β·b₁,₁. Two arrows into C.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 250 },
+        { wait: 2800 },
+        { say: `TAP ← Back
+Step 13 / 20: last cell of phase 2.
+b₂,₃ → β·b₂,₃. C empty again.` },
+        { click: { button: '← Back', exact: true } },
+        { wait: 2600 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+Phase 3 runs to Step 20 / 20.
+All 6 cells of C: α·aᵢ,ⱼ + β·bᵢ,ⱼ.` },
+        { set: 'select', value: '400' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 3600 },
+      ],
+    },
+    'choosing-dimensions': {
+      title: 'Shaping A and B',
+      script: [
+        { say: `TAP ▲ rows
+3 × 3 square. Step 1 / 29.
+3 × 9 cell scenes + 2.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP ▲ columns twice
+3 × 5 rectangle. Step 1 / 47.
+Same rule: only A and B must match.` },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 2600 },
+        { say: `TAP ▲ rows twice
+5 × 5: the maximum. Step 1 / 77.
+Cell text shrinks to stay readable.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP ▼ columns ×4
+5 × 1 column. Step 1 / 17.
+Minimum is 1 on each side.` },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 300 },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 300 },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 300 },
+        { click: { button: '▼', exact: true, nth: 1 } },
+        { wait: 2400 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+Scale A, scale B, add: Step 17 / 17.
+C is 5 × 1.` },
+        { set: 'select', value: '400' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-linear-combination'),
       sectionsContent,
       stateUnits,
@@ -435,7 +582,22 @@ It is also worth noticing what the entrywise formula licenses. Because each cell
   }
 }
 
-export default function LinearCombinationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function LinearCombinationVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <LinearCombinationWrapper mode='matrices' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -457,14 +619,14 @@ export default function LinearCombinationVisualizer({seoData, sectionsContent, s
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-three-phases'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-three-phases')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'phase-1-scaling-a', 'scaleA'),
     stateRow('obj13', 'phase-2-scaling-b', 'scaleB'),
     stateRow('obj14', 'phase-3-adding', 'add'),
     plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-dimensions'),
+    withDemo(plain('obj4', 'choosing-dimensions')),
     plain('obj5', 'what-a-linear-combination-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -528,6 +690,10 @@ export default function LinearCombinationVisualizer({seoData, sectionsContent, s
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Linear Combinations of Matrices</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <LinearCombinationWrapper

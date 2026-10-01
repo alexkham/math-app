@@ -9,6 +9,9 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
+import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 
 
 
@@ -573,8 +576,38 @@ const schemas = {
 }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    roots: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['poly-double'],
+      caption: 'A simple root crosses, a double root touches',
+      text: 'At x = &#8722;3 the curve passes straight through the axis; at x = 2, a root of multiplicity two, it touches and turns back, and the sign chart underneath records no change there. Odd multiplicity crosses, even multiplicity bounces, and higher multiplicities flatten the approach. Compare the two behaviours at the axis on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+    quadratic: demoUnitFrame({
+      svg: equationVisualizerDiagrams['quad-high'],
+      caption: 'x&#178; &#8722; 2x &#8722; 3 against the level y = 5',
+      text: 'The parabola opens upward because its leading coefficient is positive, its vertex is the single turning point, and the level line y = 5 meets it twice, at the x-values where x&#178; &#8722; 2x &#8722; 3 = 5. Lower the level to the axis and those crossings become the x-intercepts. Drag the level up and down on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+    cubic: demoUnitFrame({
+      svg: equationVisualizerDiagrams['cubic-shifted'],
+      caption: 'x&#179; &#8722; 4x = 3: opposite ends, two turning points',
+      text: 'The cubic falls on the left and rises on the right, its two turning points bracketing the dip, and the level y = 3 catches it once on the far right while a lower level would catch it three times. Odd degree means the ends go opposite ways and at least one crossing always exists. Raise and lower the level on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -596,7 +629,7 @@ return {
 
 // export default function GraphingPage({seoData,sectionsContent , introContent}) {
 
-export default function GraphingPage({seoData, sectionsContent, introContent, obj3Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas}) {
+export default function GraphingPage({seoData, sectionsContent, introContent, obj3Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -656,6 +689,8 @@ export default function GraphingPage({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-roots'} dangerouslySetInnerHTML={{ __html: demoUnits.roots }} />,
+          `Multiplicity decides whether a root is a crossing or a touch, and the sketch depends on it.`,
         ]
     },
 
@@ -687,6 +722,8 @@ export default function GraphingPage({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-quadratic'} dangerouslySetInnerHTML={{ __html: demoUnits.quadratic }} />,
+          `The vertex is the one point every sketch of a parabola must get right.`,
         ]
     },
     {
@@ -695,6 +732,8 @@ export default function GraphingPage({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+                  <div key={'unit-cubic'} dangerouslySetInnerHTML={{ __html: demoUnits.cubic }} />,
+          `Higher degrees add turning points, but the end behaviour rule stays the same.`,
         ]
     },
     {

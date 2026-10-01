@@ -10,6 +10,10 @@ import ExplanationDetails from '../../../../app/components/ExplanationDetails'
 import InclusionExclusionExplorer from '../../../../app/components/diagrams/set-theory/InclusionExclusionExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import inclusionExclusionDiagrams from '../../../../app/components/diagrams/set-theory/inclusionExclusionDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -33,16 +37,16 @@ export async function getStaticProps(){
   ]
 
   const instructions = [
-    'Enter the sizes of the sets and their overlaps in the panel on the right: $|A|$, $|B|$, the pairwise intersections, and with three sets the triple intersection too.',
-    'The 2 sets and 3 sets buttons switch between the three-term formula and the seven-term one.',
-    'The large number in each region is how many times that region has been counted so far — not how many elements it holds.',
-    'The small grey number underneath is the element count of that region, worked out from the sizes you entered.',
-    'Press Next term to apply the terms one at a time, Previous to step back, and Reset to return to zero.',
-    'Play steps through the whole formula automatically, and Pause stops it wherever it has reached.',
-    'The region being changed by the current term is tinted: green when the term is being added, red when it is being subtracted.',
-    'The running total beside the diagram is the value of the formula so far, and the counter reads which term you are on.',
-    'The goal is to get every region reading exactly $1$. That is the moment the running total equals the size of the union.',
-    'A region marked with a cross has a negative element count, which means the sizes you entered cannot describe any real collection of sets.',
+    'Enter the sizes of the sets and their overlaps in the panel on the right: $|A|$, $|B|$, the pairwise intersections, and with three sets the triple intersection too. [Learn more about entering the sizes](!#entering-the-sizes)',
+    'The 2 sets and 3 sets buttons switch between the three-term formula and the seven-term one. [Learn more about two sets and three sets](!#two-sets-and-three-sets)',
+    'The large number in each region is how many times that region has been counted so far — not how many elements it holds. [Learn more about reading the region numbers](!#reading-the-region-numbers)',
+    'The small grey number underneath is the element count of that region, worked out from the sizes you entered. [Learn more about the small grey number](!#reading-the-region-numbers)',
+    'Press Next term to apply the terms one at a time, Previous to step back, and Reset to return to zero. [Learn more about stepping through the terms](!#stepping-through-the-terms)',
+    'Play steps through the whole formula automatically, and Pause stops it wherever it has reached. [Learn more about Play and Pause](!#getting-started)',
+    'The region being changed by the current term is tinted: green when the term is being added, red when it is being subtracted. [Learn more about the green and red tint](!#stepping-through-the-terms)',
+    'The running total beside the diagram is the value of the formula so far, and the counter reads which term you are on. [Learn more about the running total](!#getting-started)',
+    'The goal is to get every region reading exactly $1$. That is the moment the running total equals the size of the union. [Learn more about the goal of every region at 1](!#reading-the-region-numbers)',
+    'A region marked with a cross has a negative element count, which means the sizes you entered cannot describe any real collection of sets. [Learn more about the cross](!#reading-the-region-numbers)',
   ]
 
   const sectionsContent={
@@ -65,9 +69,9 @@ Enter the sizes on the right — $|A|$, $|B|$, and the overlaps — then press *
 Two numbers sit in each region, and mixing them up makes the whole display confusing:
 
 • The **large number** is how many times that region has been counted so far.
-• The **small grey number** underneath is how many elements the region actually holds.
+• The **small grey number** underneath is how many [elements](!/set-theory/basics#4) the region actually holds.
 
-The large numbers all start at $0$ and the entire job of the formula is to get every one of them to exactly $1$. When that happens, each element of the union has been counted once and the running total is the answer.
+The large numbers all start at $0$ and the entire job of the formula is to get every one of them to exactly $1$. When that happens, each element of the [union](!/set-theory/operations#1) has been counted once and the running total is the answer.
 
 **Play** runs the whole sequence, **Previous** steps back, and **Reset** returns to the beginning — which is [the state before any term is applied](!#nothing-counted-yet).`,
       before:``,
@@ -78,7 +82,7 @@ The large numbers all start at $0$ and the entire job of the formula is to get e
 
     obj2:{
       title:`Entering the Sizes`,
-      content:`The right-hand panel takes the sizes, and with three sets there are seven of them: the three set sizes, the three pairwise intersections, and the triple intersection.
+      content:`The right-hand panel takes the sizes, and with three [sets](!/set-theory/basics#1) there are seven of them: the three set sizes, the three pairwise [intersections](!/set-theory/operations#2), and the triple intersection.
 
 Those seven numbers determine everything else. The tool works backwards from them to the size of each region, which is why the small grey numbers change as soon as you type.
 
@@ -238,7 +242,13 @@ All three are easy to catch by the same habit: step through and check that every
 
 **Combinatorics** — counting problems where the principle does the heavy lifting.
 
-**Venn Diagram Generator** — for shading expressions rather than counting them.`,
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — for shading expressions rather than counting them.
+
+[Two-Set Venn Diagram](!/set-theory/visual-tools/two-sets-basic-venn) — the four-region picture behind $|A \\cup B| = |A| + |B| - |A \\cap B|$.
+
+[Three-Set Venn Diagram](!/set-theory/visual-tools/three-sets-basic-venn) — the eight regions whose counts the three-set formula adds and subtracts.
+
+[Indexed Union and Intersection Explorer](!/set-theory/visual-tools/union-intersection) — unions over whole families of sets, whose sizes the general formula counts.`,
       before:``,
       after:``,
       link:'',
@@ -549,8 +559,115 @@ The general lesson is one worth carrying beyond this tool: a counting formula ap
   }
 
 
+  /* Animated demos (ToolDemoPlayer v3) against the real InclusionExclusionExplorer
+     (opens on 3 sets, Enter sizes: |A| = 24, |B| = 20, |C| = 18, |A ∩ B| = 9,
+     |A ∩ C| = 7, |B ∩ C| = 6, |A ∩ B ∩ C| = 3; union 43). Number fields in DOM
+     order: 0 |A|, 1 |B|, 2 |C|, 3 |A ∩ B|, 4 |A ∩ C|, 5 |B ∩ C|, 6 |A ∩ B ∩ C|;
+     in Enter regions: 0 A only, 1 B only, 2 A ∩ B only, 3 C only, …
+     Play is timed and is not used. */
+  const demos = {
+    'stepping-through-the-terms': {
+      title: 'Seven terms, one at a time',
+      script: [
+        { say: `TAP Next term
++|A| = 24. A's four regions green, each reads 1.
+Running total 24.` },
+        { click: { button: 'Next term', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next term ×2
+All three sets in. Total 62: too big.
+Pair regions read 2. Centre reads 3.` },
+        { click: { button: 'Next term', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Next term', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next term
+−|A ∩ B| = 9. Red tint, total 53.
+A ∩ B region → 1. Centre → 2: hit too.` },
+        { click: { button: 'Next term', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next term ×2
+−|A ∩ C|, −|B ∩ C|. Total 40.
+Pairs at 1. Centre falls to 0.` },
+        { click: { button: 'Next term', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Next term', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next term
++|A ∩ B ∩ C| = 3. Centre back to 1.
+Every region reads 1. |A ∪ B ∪ C| = 43.` },
+        { click: { button: 'Next term', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+    'entering-the-sizes': {
+      title: 'Sizes in, regions out',
+      script: [
+        { say: `TYPE |A ∩ B| → 2
+Less than |A ∩ B ∩ C| = 3.
+A ∩ B region: cross. 1 region is negative.` },
+        { set: { css: '.iex-field input', nth: 3 }, value: 2 },
+        { wait: 2800 },
+        { say: `TYPE |A ∩ B ∩ C| → 0
+Cross gone. Centre holds 0.
+Grey counts: A only 15, B only 12.` },
+        { set: { css: '.iex-field input', nth: 6 }, value: 0 },
+        { wait: 2800 },
+        { say: `TAP Enter regions
+Fields become region counts:
+A only 15, B only 12, A ∩ B only 2 …` },
+        { click: { button: 'Enter regions', exact: true } },
+        { wait: 2800 },
+        { say: `TYPE A only → 20
+Grey number in A alone: 20.
+Formula: |A| now 29.` },
+        { set: { css: '.iex-field input', nth: 0 }, value: 20 },
+        { wait: 2800 },
+        { say: `TAP Enter sizes
+|A| = 29 = 20 + 2 + 7 + 0.
+Sizes derived from the regions.` },
+        { click: { button: 'Enter sizes', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'two-sets-and-three-sets': {
+      title: 'Two sets, then three',
+      script: [
+        { say: `TAP 2 sets
+Three terms: |A| + |B| − |A ∩ B|.
+Counter: term 0 of 3.` },
+        { click: { button: '2 sets', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next term ×2
+Both sets in. Total 44.
+Lens reads 2: counted twice.` },
+        { click: { button: 'Next term', exact: true } },
+        { wait: 300 },
+        { click: { button: 'Next term', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next term
+−|A ∩ B| = 9. Lens → 1.
+|A ∪ B| = 35.` },
+        { click: { button: 'Next term', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Previous
+One term back: term 2 of 3.
+Lens 2 again, total 44.` },
+        { click: { button: 'Previous', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 3 sets
+Seven terms. Counter resets: term 0 of 7.
+Every region back to 0.` },
+        { click: { button: '3 sets', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
    return {
       props:{
+      demos,
+        relatedTools: getRelatedTools('inclusion-exclusion'),
          sectionsContent,
          introContent,
          instructions,
@@ -563,7 +680,22 @@ The general lesson is one worth carrying beyond this tool: a counting formula ap
     }
    }
 
-export default function InclusionExclusionPage({seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+export default function InclusionExclusionPage({ demos,relatedTools, seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <InclusionExclusionExplorer showIntro={false} notes={notes}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Slug ids (Line 1). obj0 is the Key Terms slot, unused on tool pages, so it
   // never reaches this list. A per-state row carries its frozen unit between
@@ -589,11 +721,11 @@ export default function InclusionExclusionPage({seoData, sectionsContent, introC
     plain('obj1', 'getting-started'),
     stateRow('obj11', 'nothing-counted-yet', 'start'),
 
-    plain('obj2', 'entering-the-sizes'),
+    withDemo(plain('obj2', 'entering-the-sizes')),
     stateRow('obj12', 'when-nothing-overlaps', 'disjoint'),
     stateRow('obj18', 'sizes-that-cannot-happen', 'impossible'),
 
-    plain('obj3', 'stepping-through-the-terms'),
+    withDemo(plain('obj3', 'stepping-through-the-terms')),
     stateRow('obj13', 'a-term-being-added', 'adding'),
     stateRow('obj14', 'all-the-sets-are-in', 'all-added'),
     stateRow('obj15', 'a-term-being-subtracted', 'subtracting'),
@@ -601,7 +733,7 @@ export default function InclusionExclusionPage({seoData, sectionsContent, introC
     stateRow('obj17', 'every-region-counted-once', 'complete'),
 
     plain('obj4', 'reading-the-region-numbers'),
-    plain('obj5', 'two-sets-and-three-sets'),
+    withDemo(plain('obj5', 'two-sets-and-three-sets')),
     plain('obj6', 'what-the-principle-says'),
     plain('obj7', 'why-the-signs-alternate'),
     plain('obj8', 'where-it-gets-used'),
@@ -708,6 +840,7 @@ export default function InclusionExclusionPage({seoData, sectionsContent, introC
    />
    <br/>
    */}
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

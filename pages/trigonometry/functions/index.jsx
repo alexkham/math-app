@@ -1569,6 +1569,10 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiagrams'
+import renderCurveFeatureV3 from '@/app/utils/illustrations/trigonometry/curves/curveFeature.v3'
+import renderRelationMap from '@/app/utils/illustrations/trigonometry/relations/relationMap'
 
 
 export async function getStaticProps(){
@@ -2771,8 +2775,111 @@ This shift in perspective opens up the full toolkit of function analysis. Each o
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  // Authored figures. curveFeature.v3 draws the six-panel grid; relationMap
+  // draws the two box-and-arrow scenes. Package docs beside each renderer.
+  const cfDomainRange = {
+    kind: 'grid', panelWidth: 186, panelHeight: 128,
+    svgTitle: 'The six functions share only two patterns of excluded point',
+    rows: [
+      { label: 'undefined where cos = 0', panels: ['tan', 'sec'], color: 'negation' },
+      { label: 'undefined where sin = 0', panels: ['cot', 'csc'], color: 'negation' },
+      { label: 'defined everywhere', panels: ['sin', 'cos'], color: 'secondary' },
+    ],
+    note: 'only two patterns of excluded point across all six',
+  };
+  const rmReduceToTwo = {
+    kind: 'roots', width: 560, height: 286,
+    svgTitle: 'All six functions reduce to sine and cosine',
+    rootsLabel: 'the two roots',
+    roots: [{ key: 'sin', x: 92, label: 'sin \u03b8' }, { key: 'cos', x: 340, label: 'cos \u03b8' }],
+    leaves: [
+      { x: 26, label: 'csc \u03b8', root: 'sin', relation: '1 / sin' },
+      { x: 146, label: 'tan \u03b8', root: 'sin', relation: 'sin / cos' },
+      { x: 286, label: 'cot \u03b8', root: 'cos', relation: 'cos / sin' },
+      { x: 406, label: 'sec \u03b8', root: 'cos', relation: '1 / cos' },
+    ],
+    note: 'every other function is written with sine and cosine and nothing else',
+  };
+  const rmFromOneValue = {
+    kind: 'chain', width: 620, height: 250,
+    svgTitle: 'One value plus a quadrant determines the other five',
+    steps: [
+      { x: 16, label: 'sin \u03b8 = 3/5', tone: 'root', under: 'and \u03b8 in Q II' },
+      { x: 186, label: 'cos\u00b2\u03b8 = 16/25', via: 'Pythagorean', under: 'magnitude fixed' },
+      { x: 356, label: 'cos \u03b8 = \u22124/5', tone: 'result', via: 'the quadrant', under: 'sign fixed' },
+    ],
+    outputs: ['tan \u03b8 = \u22123/4', 'cot \u03b8 = \u22124/3', 'sec \u03b8 = \u22125/4', 'csc \u03b8 = 5/3'],
+    note: 'one value plus a quadrant fixes all six', noteX: 310,
+  };
+
+  const demoUnits = {
+    sin: demoUnitFrame({
+      svg: unitCircleDiagrams.functions.sin,
+      caption: 'sin 50&#176; &#8776; 0.766, the vertical leg',
+      text: 'On the unit circle the hypotenuse is the radius, 1, so opposite over hypotenuse collapses to the length of the blue vertical leg: at 50&#176; it is 0.766, the highlighted first entry of the value row. The leg can never be longer than the radius, which is why the ratio never leaves [&#8722;1, 1]. Drag the point and watch the leg and the entry change together on the',
+      href: '/visual-tools/unit-circle',
+      linkText: 'unit circle visualizer',
+    }),
+    cos: demoUnitFrame({
+      svg: unitCircleDiagrams.functions.cos,
+      caption: 'cos 50&#176; &#8776; 0.643, the horizontal leg',
+      text: 'The red horizontal leg is the adjacent side over a hypotenuse of 1: cos&#8201;50&#176; &#8776; 0.643, the highlighted second entry. As the angle grows the red leg shrinks while the blue one lengthens, the two legs trading places at 45&#176;, which is the complementary relationship in one picture. Move the point toward 90&#176; and watch this entry fall to 0 on the',
+      href: '/visual-tools/unit-circle',
+      linkText: 'unit circle visualizer',
+    }),
+    tan: demoUnitFrame({
+      svg: unitCircleDiagrams.functions.tan,
+      caption: 'tan 50&#176; &#8776; 1.192, the slope of the radius',
+      text: 'Opposite over adjacent is the blue leg divided by the red one, 0.766/0.643 &#8776; 1.192, and that ratio is exactly the slope of the radius line. Near 90&#176; the red leg shrinks toward zero and the ratio grows without bound, which is why the table prints Undefined there. Steer the radius toward vertical and watch the highlighted entry run away on the',
+      href: '/visual-tools/unit-circle',
+      linkText: 'unit circle visualizer',
+    }),
+    csc: demoUnitFrame({
+      svg: unitCircleDiagrams.functions.csc,
+      caption: 'csc 30&#176; = 2, hypotenuse over opposite',
+      text: 'At 30&#176; the blue leg is exactly half the radius, so hypotenuse over opposite is exactly 2, the highlighted entry. Because the leg is at most the radius, the reciprocal is never between &#8722;1 and 1, and where the leg vanishes, at 0&#176; and 180&#176;, the table prints Undefined. Shrink the leg toward the axis and watch the entry grow on the',
+      href: '/visual-tools/unit-circle',
+      linkText: 'unit circle visualizer',
+    }),
+    sec: demoUnitFrame({
+      svg: unitCircleDiagrams.functions.sec,
+      caption: 'sec 60&#176; = 2, hypotenuse over adjacent',
+      text: 'At 60&#176; the red leg is half the radius, so hypotenuse over adjacent is exactly 2. The picture is the cosecant one with the roles of the legs exchanged: the same bound |sec&#8201;&#952;| &#8805; 1, and Undefined where the red leg vanishes at 90&#176; and 270&#176;. Compare the two reciprocal columns at any angle on the',
+      href: '/visual-tools/unit-circle',
+      linkText: 'unit circle visualizer',
+    }),
+    cot: demoUnitFrame({
+      svg: unitCircleDiagrams.functions.cot,
+      caption: 'cot 45&#176; = 1, adjacent over opposite',
+      text: 'At 45&#176; the two legs are equal, so adjacent over opposite is exactly 1, and so is its reciprocal in the tangent column beside it. Away from 45&#176; the two columns are reciprocals of each other, cotangent falling as tangent rises, with Undefined where the blue leg vanishes at 0&#176; and 180&#176;. Watch the two columns swap magnitudes across 45&#176; on the',
+      href: '/visual-tools/unit-circle',
+      linkText: 'unit circle visualizer',
+    }),
+    reduceToTwo: demoUnitFrame({
+      svg: renderRelationMap(rmReduceToTwo),
+      caption: 'Four functions, two roots',
+      text: 'Each of the other four is an arrow away from sine or cosine, and the arrow carries the whole relation. Nothing in the set is independent: fix the two at the top and the other four are already decided.',
+    }),
+    domainRange: demoUnitFrame({
+      svg: renderCurveFeatureV3(cfDomainRange),
+      caption: 'Six functions, two patterns',
+      text: 'The dashed lines mark where each function is undefined. Tangent and secant break in exactly the same places, because both divide by cosine; cotangent and cosecant break in the same places as each other, because both divide by sine. Sine and cosine divide by nothing and never break.',
+    }),
+    fromOneValue: demoUnitFrame({
+      svg: renderRelationMap(rmFromOneValue),
+      caption: 'From one value to all six',
+      text: 'The Pythagorean identity settles how big the second value is; the quadrant settles whether it is positive or negative. Once both are known the remaining four are reciprocals and a quotient away &#8212; and without the quadrant, half of them would have the wrong sign.',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj7Table,
@@ -2808,7 +2915,7 @@ Whether you are analyzing waveforms, studying rotations, or decomposing function
     }
    }
 
-export default function FunctionsPage({seoData,sectionsContent , introContent, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas}) {
+export default function FunctionsPage({seoData,sectionsContent , introContent, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2828,6 +2935,8 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-sin'} dangerouslySetInnerHTML={{ __html: demoUnits.sin }} />,
+          `The graph of the sine function is nothing more than this leg length plotted against the angle.`,
         ]
     },
     {
@@ -2836,6 +2945,8 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-cos'} dangerouslySetInnerHTML={{ __html: demoUnits.cos }} />,
+          `Cosine is therefore the sine of the complementary angle, a fact the cofunction identities make precise.`,
         ]
     },
     {
@@ -2844,6 +2955,8 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-tan'} dangerouslySetInnerHTML={{ __html: demoUnits.tan }} />,
+          `The tangent is the one primary function whose range is all of the real numbers.`,
         ]
     },
     {
@@ -2852,6 +2965,8 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-csc'} dangerouslySetInnerHTML={{ __html: demoUnits.csc }} />,
+          `Every statement about cosecant is a statement about sine turned upside down.`,
         ]
     },
     {
@@ -2860,6 +2975,8 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-sec'} dangerouslySetInnerHTML={{ __html: demoUnits.sec }} />,
+          `Secant inherits its sign and its zeros of definition directly from cosine.`,
         ]
     },
     {
@@ -2868,6 +2985,8 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-cot'} dangerouslySetInnerHTML={{ __html: demoUnits.cot }} />,
+          `The six functions are thus two lengths and four ratios built from them.`,
         ]
     },
 
@@ -2897,6 +3016,8 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-reduceToTwo'} dangerouslySetInnerHTML={{ __html: demoUnits.reduceToTwo }} />,
+          `This is why a proof can usually be finished by rewriting everything in terms of $\\sin\\theta$ and $\\cos\\theta$.`,
           <div
             key={'obj7-table'}
             style={tableWrapStyle}
@@ -2912,6 +3033,8 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-domainRange'} dangerouslySetInnerHTML={{ __html: demoUnits.domainRange }} />,
+          `The range restrictions matter just as much: $\\sin x = 2$ has no solution because 2 lies outside $[-1, 1]$.`,
           <div
             key={'obj8-table'}
             style={tableWrapStyle}
@@ -2940,6 +3063,8 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <div key={'unit-fromOneValue'} dangerouslySetInnerHTML={{ __html: demoUnits.fromOneValue }} />,
+          `Starting from tangent instead works the same way, with a right triangle supplying the missing magnitude.`,
         ]
     },
 

@@ -498,6 +498,9 @@ import TraceWrapper from '../../../../app/components/linear-algebra copy/matrix/
 import traceDiagrams from '../../../../app/components/linear-algebra copy/matrix/traceDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -893,8 +896,132 @@ The compact form is also what makes the algebraic properties easy to check. Line
   }
 
 
+  const instructions = [
+    'The **Dimension of A** steppers (**▲** / **▼**) set $n$ from 2 to 10; both move together because $A$ must be square. [Learn more about choosing the dimension](!#choosing-the-dimension)',
+    'Hover the **?** icon for why the trace needs a square matrix and which entries it adds. [Learn more about getting started](!#getting-started)',
+    '**▶ Play** runs the scenes, **Next →** and **← Back** move one scene, **Reset** returns to the opening question, and the speed menu sets the pace from Slow to Very Fast. [Learn more about the controls](!#getting-started)',
+    'The scenes run in a fixed order: pose the question, reveal the main diagonal, add one diagonal entry per scene, then show the complete trace. [Learn more about the scene order](!#scene-order)',
+    'Diagonal entries are pending (dashed green), current (solid blue) or counted (solid green); the running formula in the step log uses the same colours. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Step explanations** log keeps every scene with its formula and a note linking to the matching section below. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real TraceWrapper
+     (opens at 4 x 4: 7 scenes = pose, diagonal, 4 entries, complete).
+     Two linked steppers: ▲/▼ nth 0 and nth 1 both set n. */
+  const demos = {
+    'getting-started': {
+      title: 'Size, play, reset',
+      script: [
+        { say: `TAP ▼
+A is 3 × 3. Both steppers move.
+Step 1 / 6.` },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP ▲ (second stepper) twice
+A is 5 × 5. Square, always.
+Step 1 / 8.` },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 400 },
+        { click: { button: '▲', exact: true, nth: 1 } },
+        { wait: 2600 },
+        { say: `SELECT Fast → TAP ▶ Play
+Diagonal, then a₁,₁ … a₅,₅ one by one.
+Step 8 / 8: trace complete.` },
+        { set: 'select', value: '700' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5800 },
+        { say: `TAP Reset
+Step 1 / 8. Nothing highlighted.
+Only the question: what is tr(A)?` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+Step 2 / 8. Main diagonal revealed.
+Off-diagonal cells: ignored.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'Pending, current, counted',
+      script: [
+        { say: `TAP Next →
+Step 2 / 7. The main diagonal of the 4 × 4.
+4 cells in, 12 out.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+a₁,₁ current. Rest of diagonal pending.
+Running formula starts: tr(A) = a₁,₁ …` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+a₂,₂ current. a₁,₁ counted.
+Formula grows by one term.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▶ Play
+a₃,₃, a₄,₄, then Step 7 / 7.
+tr(A) = a₁,₁ + a₂,₂ + a₃,₃ + a₄,₄.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4600 },
+        { say: `TAP ← Back
+Step 6 / 7. a₄,₄ current again.
+Other three: counted.` },
+        { click: { button: '← Back', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'choosing-the-dimension': {
+      title: 'From 2 × 2 to 10 × 10',
+      script: [
+        { say: `TAP ▼ twice
+A is 2 × 2: the minimum.
+Step 1 / 5.` },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 300 },
+        { click: { button: '▼', exact: true, nth: 0 } },
+        { wait: 300 },
+        { wait: 2400 },
+        { say: `SELECT Very Fast → TAP ▶ Play
+Step 5 / 5. tr(A) = a₁,₁ + a₂,₂.
+Two terms. Two cells ignored.` },
+        { set: 'select', value: '400' },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▲ ×8
+A is 10 × 10: the maximum.
+Step 1 / 13. Cells shrink to fit.` },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 200 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 200 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 200 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 200 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 200 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 200 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 200 },
+        { click: { button: '▲', exact: true, nth: 0 } },
+        { wait: 200 },
+        { wait: 2600 },
+        { say: `TAP ▶ Play
+Step 13 / 13. Exactly 10 terms.
+90 off-diagonal entries ignored.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6000 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-trace'),
       sectionsContent,
       stateUnits,
@@ -917,7 +1044,22 @@ The compact form is also what makes the algebraic properties easy to check. Line
   }
 }
 
-export default function MatrixTraceVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function MatrixTraceVisualizer({ instructions, demos, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <TraceWrapper explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -941,9 +1083,9 @@ export default function MatrixTraceVisualizer({ seoData, sectionsContent, stateU
     // obj0 Key Terms was defined but rendered nowhere - its section entry and the
     // KeyTermsCard were both commented out, so the content was invisible. Restored.
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-scene-player'),
-    plain('obj3', 'choosing-the-dimension'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-scene-player')),
+    withDemo(plain('obj3', 'choosing-the-dimension')),
     plain('obj4', 'scene-order'),
     stateRow('obj11', 'the-opening-scene', 'pose'),
     stateRow('obj12', 'revealing-the-diagonal', 'diagonal'),
@@ -1012,6 +1154,10 @@ export default function MatrixTraceVisualizer({ seoData, sectionsContent, stateU
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Trace of a Matrix</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <TraceWrapper explanations={explanations}/>

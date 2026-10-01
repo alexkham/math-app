@@ -8,6 +8,8 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import polynomialMultiplicationDiagrams from '@/app/components/algebra/visualizers/polynomials/polynomialMultiplicationDiagrams'
 
 
 
@@ -602,8 +604,24 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    multiply: demoUnitFrame({
+      svg: polynomialMultiplicationDiagrams['ps-foil'],
+      caption: '(x + 2)(x + 3) = x&#178; + 5x + 6 on the grid',
+      text: 'Every term of one factor multiplies every term of the other, one cell per pair, and the like-term buckets underneath collect the cells by degree: one x&#178;, two x-terms that add to 5x, one constant 6. Addition and subtraction combine like terms directly; multiplication first creates them. Multiply longer polynomials cell by cell on the',
+      href: '/algebra/visual-tools/polynomial-multiplication',
+      linkText: 'polynomial multiplication visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj1Table,
@@ -624,7 +642,7 @@ const schemas = {
 
 
 
-export default function PolynomialsPage({seoData, sectionsContent, introContent, obj1Table, obj2Table, obj11Table, summaryTable, schemas}) {
+export default function PolynomialsPage({seoData, sectionsContent, introContent, obj1Table, obj2Table, obj11Table, summaryTable, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -706,6 +724,8 @@ export default function PolynomialsPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-multiply'} dangerouslySetInnerHTML={{ __html: demoUnits.multiply }} />,
+          `Division reverses this grid, and the operations page treats all four in turn.`,
         ]
     },
     {

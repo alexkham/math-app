@@ -1364,6 +1364,10 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import eulerFormulaDiagrams from '@/app/components/calculators/complex-numbers/eulerFormulaDiagrams'
+import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
+import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoivreDiagrams'
 
 
 export async function getStaticProps(){
@@ -2393,8 +2397,45 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    euler: demoUnitFrame({
+      svg: eulerFormulaDiagrams.theta45,
+      caption: 'e^(i&#952;) at &#952; = 45&#176;: the point (cos &#952;, sin &#952;)',
+      text: 'The point e^(i&#952;) sits on the unit circle at angle &#952;, with horizontal leg cos &#952; and vertical leg sin &#952; drawn in: Euler&#8217;s formula is the statement that the exponential of an imaginary number is a point on this circle. At 45&#176; both legs are &#8730;2/2. Sweep &#952; round the circle on the',
+      href: '/complex-numbers/visual-tools/euler-formula',
+      linkText: 'Euler formula visualizer',
+    }),
+    identity: demoUnitFrame({
+      svg: eulerFormulaDiagrams.theta180,
+      caption: 'e^(i&#960;) = &#8722;1',
+      text: 'At &#952; = &#960; the point has travelled half way round the unit circle and sits at &#8722;1 on the real axis: the sine leg has vanished and the cosine leg points left. That single position is Euler&#8217;s identity, e^(i&#960;) + 1 = 0. Park the angle at &#960; on the',
+      href: '/complex-numbers/visual-tools/euler-formula',
+      linkText: 'Euler formula visualizer',
+    }),
+    mult: demoUnitFrame({
+      svg: complexMultiplicationDiagrams.general,
+      caption: 'z&#8321;z&#8322;: arguments add, moduli multiply',
+      text: 'The product sits at the angle &#952;&#8321; + &#952;&#8322; marked in the picture and at distance |z&#8321;||z&#8322;| from the origin: multiplying by a complex number rotates by its argument and scales by its modulus. Nothing in the algebraic expansion shows this; the picture does. Turn one factor and watch the product swing round on the',
+      href: '/complex-numbers/visual-tools/multiplication',
+      linkText: 'complex multiplication tool',
+    }),
+    power: demoUnitFrame({
+      svg: deMoivreDiagrams.squared,
+      caption: 'z and z&#178;: (re^(i&#952;))&#178; = r&#178;e^(2i&#952;)',
+      text: 'Squaring doubles the angle and squares the length, exactly what the exponent rule (e^(i&#952;))&#178; = e^(2i&#952;) predicts; the picture and the exponential form say the same thing in two languages. Raise the power and watch the exponent rule turn into a spiral on the',
+      href: '/complex-numbers/visual-tools/demoivre-visualizer',
+      linkText: 'De Moivre visualizer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -2424,7 +2465,7 @@ export default function ExponentialFormPage({
   obj9Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2445,6 +2486,8 @@ export default function ExponentialFormPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-euler'} dangerouslySetInnerHTML={{ __html: demoUnits.euler }} />,
+          `The formula turns the trigonometric form into a single exponential, which is what makes it useful.`,
         ]
     },
     {
@@ -2466,6 +2509,8 @@ export default function ExponentialFormPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-identity'} dangerouslySetInnerHTML={{ __html: demoUnits.identity }} />,
+          `The identity is Euler&#8217;s formula evaluated at the one angle where both legs are integers.`,
         ]
     },
     {
@@ -2514,6 +2559,8 @@ export default function ExponentialFormPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-mult'} dangerouslySetInnerHTML={{ __html: demoUnits.mult }} />,
+          `Adding exponents and adding angles are the same operation.`,
         ]
     },
     {
@@ -2530,6 +2577,8 @@ export default function ExponentialFormPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-power'} dangerouslySetInnerHTML={{ __html: demoUnits.power }} />,
+          `Roots divide the exponent, and therefore the angle, in the same way.`,
         ]
     },
     {

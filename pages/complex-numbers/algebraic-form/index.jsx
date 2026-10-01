@@ -1206,6 +1206,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
+import complexExplorerDiagrams from '@/app/components/calculators/complex-numbers/complexExplorerDiagrams'
 
 
 export async function getStaticProps(){
@@ -2097,8 +2100,31 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    conj: demoUnitFrame({
+      svg: conjugateModulusDiagrams.start,
+      caption: 'z and z&#772; mirrored in the real axis, |z| = 3.6',
+      text: 'The point z and its conjugate z&#772; sit at the same distance from the origin, one above the real axis and one below: conjugation keeps the real part and flips the sign of the imaginary part, so it is a reflection in the real axis. The modulus, the length of either arrow, is the same 3.6 for both. Drag z anywhere and watch its mirror image follow on the',
+      href: '/complex-numbers/visual-tools/complex-conjugate',
+      linkText: 'conjugate and modulus tool',
+    }),
+    realPart: demoUnitFrame({
+      svg: complexExplorerDiagrams.quadrantI,
+      caption: 'z = 2 + 3i: Re(z) = 2 is the horizontal coordinate',
+      text: 'The real part is the foot of the point on the horizontal axis, a = 2, and the imaginary part is its height, b = 3; the explorer reads both off the plotted point. Re(z) is a real number, a coordinate, never a complex one. Drag the point and watch a and b update on the',
+      href: '/complex-numbers/visual-tools/complex-explorer',
+      linkText: 'complex number explorer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj1Table,
@@ -2128,7 +2154,7 @@ export default function AlgebraicFormPage({
   obj3Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2186,6 +2212,8 @@ export default function AlgebraicFormPage({
         link:sectionsContent.obj21.link,
         content:[
           sectionsContent.obj21.content,
+                  <div key={'unit-realPart'} dangerouslySetInnerHTML={{ __html: demoUnits.realPart }} />,
+          `The imaginary part, treated next, is the other coordinate and just as real a number.`,
         ]
     },
     {
@@ -2215,6 +2243,8 @@ export default function AlgebraicFormPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-conj'} dangerouslySetInnerHTML={{ __html: demoUnits.conj }} />,
+          `Conjugation is a reflection, which is why applying it twice returns the original number.`,
         ]
     },
     {

@@ -7,6 +7,8 @@ import '../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 
 export async function getStaticProps(){
 const keyWords = [
@@ -575,8 +577,45 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    linear: demoUnitFrame({
+      svg: equationVisualizerDiagrams['lin-steep'],
+      caption: '3x &#8722; 2 = 4: one crossing',
+      text: 'The line y = 3x &#8722; 2 meets the level y = 4 exactly once, at x = 2, and the marker sits on that crossing: a linear equation has one solution because a non-horizontal line crosses any level exactly once. Change the slope or the level and the single crossing simply moves. Drag the level line on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+    quadratic: demoUnitFrame({
+      svg: equationVisualizerDiagrams['quad-two'],
+      caption: 'x&#178; &#8722; 4 = 0: two crossings',
+      text: 'The parabola meets the axis at x = &#8722;2 and x = 2, so the equation has two real solutions; raise the level above the vertex and the crossings vanish, set it on the vertex and they merge into one. The number of solutions is the number of times the curve meets the line, which is what the discriminant counts. Slide the level through the vertex on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+    polynomial: demoUnitFrame({
+      svg: equationVisualizerDiagrams['cubic-three'],
+      caption: 'x&#179; &#8722; 3x = 0: three crossings',
+      text: 'The cubic crosses the axis three times, at &#8722;&#8730;3, 0 and &#8730;3, the maximum a degree-three equation allows; shift the level up and one crossing at a time disappears until a single one remains, never none, because a cubic always crosses every level. Degree bounds the count, shape decides it. Move the level and count the marbles on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+    absolute: demoUnitFrame({
+      svg: equationVisualizerDiagrams['abs-two'],
+      caption: '|x| = 3: the V crosses the level twice',
+      text: 'The V-shaped graph of |x| meets the level y = 3 at x = &#8722;3 and x = 3: the two cases of the case-splitting method are the two arms of the V. Lower the level to 0 and the crossings merge at the corner; lower it further and there are none. Watch the two solutions appear and disappear on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj3Table,
@@ -610,7 +649,7 @@ export default function EquationsPage({
   obj10Table,
   obj11Table,
   summaryTable,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -686,6 +725,8 @@ export default function EquationsPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-linear'} dangerouslySetInnerHTML={{ __html: demoUnits.linear }} />,
+          `One unknown, one power, one crossing: that is the whole theory of the linear case.`,
         ]
     },
     {
@@ -699,6 +740,8 @@ export default function EquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7DiscriminantTable }}
           />,
+                  <div key={'unit-quadratic'} dangerouslySetInnerHTML={{ __html: demoUnits.quadratic }} />,
+          `The discriminant is the algebraic name for how the level line sits relative to the vertex.`,
         ]
     },
     {
@@ -707,6 +750,8 @@ export default function EquationsPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-polynomial'} dangerouslySetInnerHTML={{ __html: demoUnits.polynomial }} />,
+          `The Fundamental Theorem counts complex roots; the picture shows how many of them are real.`,
         ]
     },
     {
@@ -728,6 +773,8 @@ export default function EquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj10Table }}
           />,
+                  <div key={'unit-absolute'} dangerouslySetInnerHTML={{ __html: demoUnits.absolute }} />,
+          `Each arm of the V is one of the two linear equations the case split produces.`,
         ]
     },
     {

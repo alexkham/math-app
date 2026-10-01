@@ -496,6 +496,9 @@ import FunctionContinuity from '../../../../app/components/functions/continuity/
 import functionContinuityDiagrams from '../../../../app/components/functions/continuity/functionContinuityDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -792,6 +795,17 @@ The point of interest the tool jumps to first is $c = -2$, where $L^- = -2.5$, $
 
 That combination is entirely ordinary. "Continuous" is a statement about a single point, and "continuous on an interval" means continuous at each point of it. A function can fail the test at infinitely many places and still be perfectly well behaved on each piece in between — which is exactly how floor, ceiling, and rounding functions behave in practice.`,
       link: '',
+    },
+    obj17: {
+      title: `Plot Size, Applied Strip and Info Panel`,
+      content: `The **S**, **M**, **L** and **XL** buttons above the plot set its size, and the readout next to **Maximize** prints it: **S** is $500 \\times 400$, **M** $700 \\times 550$, **L** $900 \\times 850$ and **XL** $1100 \\times 850$. The page opens at $880 \\times 460$, which is none of the four. The plot never grows wider than its column, so on most screens the buttons mainly change its height. The curve, the limit lines and the markers are redrawn at the new size; the checklist does not change.
+
+The **Applied** strip at the bottom of the middle column repeats the current value of $c$. Its last tag, **All 3 pass ⇒ continuous**, is the rule itself and reads the same at every point; the verdict for the current $c$ is the last line of [the three-condition checklist](!#the-three-condition-checklist) above it.
+
+The info panel on the right has two tabs. **Explanation** is the live one: the family and the current $c$, a short description, the equation, the current $f(c)$, $L^-$ and $L^+$, which conditions fail, what the slider does, and a closing note that links to the section on that family. **Concepts** is fixed text on the three-part definition and on continuity over an interval. For the definition itself, see [what is continuity](!#what-is-continuity).`,
+      before: ``,
+      after: ``,
+      link: '',
     }
 
   }
@@ -947,8 +961,149 @@ That combination is entirely ordinary. "Continuous" is a statement about a singl
   }
 
 
+  const instructions = [
+    'The **Function** picker on the left lists six families, from **Smooth (x²)** to **Staircase**; tapping one loads it and parks $c$ on its first point of interest, or at $0$ for **Smooth (x²)**. [Learn more about the function families](!#the-function-families)',
+    'The **Display** checkboxes **f(x)**, **L⁻, L⁺** and **x = c** each hide or show one layer, and the legend under the plot lists only the layers that are on; **Accent color** under **Appearance** recolours the highlights. [Learn more about the display toggles](!#display-toggles)',
+    'The **point c** slider under **Parameters** moves the probe from $-3$ to $3$ in steps of $0.05$, and the checklist is re-run at every position. [Learn more about the c slider](!#the-c-slider)',
+    'The **Jump to** buttons under the slider put $c$ exactly on the family\'s points of interest, one for most families and five for **Staircase**; **Reset** returns $c$ to the first of them. [Learn more about the jump-to buttons](!#jump-to-buttons)',
+    'The plot draws $f$ as a solid curve, the one-sided limits as dashed horizontal lines with markers at $(c, L^-)$ and $(c, L^+)$, and $x = c$ as a dashed vertical line that follows the slider. [Learn more about probing with the c slider](!#the-c-slider)',
+    'The **Three-condition checklist** marks each condition ✓ or ✕, $f(c)$ is defined, the limit exists, $f(c)$ equals the limit, and its last row tags the point **continuous**, **removable**, **jump** or **infinite**. [Learn more about the three-condition checklist](!#the-three-condition-checklist)',
+    'The **S**, **M**, **L** and **XL** buttons set the plot size, the **Applied** strip repeats $c$, and the info panel tabs **Explanation** and **Concepts** give the live reading and the theory. [Learn more about the plot size, applied strip and info panel](!#plot-size-applied-strip-and-info-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionContinuity tool
+     (opens on Hole at x=1, c = 1). One range input: 0 = point c (-3..3, step 0.05).
+     Picking a family moves c to its first point of interest (Smooth: 0).
+     Jump to buttons are labelled with their c value. Checkboxes: 0 f(x),
+     1 L lines, 2 x = c. Reset buttons: nth 0 = Parameters, nth 1 = Appearance. */
+  const demos = {
+    'the-function-families': {
+      title: 'Picking a family',
+      script: [
+        { say: `TAP Smooth (x²)
+c = 0. Three ✓. CONTINUOUS.
+No Jump to buttons: nothing to find.` },
+        { click: { button: 'Smooth' } },
+        { wait: 2600 },
+        { say: `TAP Jump at x=0
+L⁻ = 0 ≠ L⁺ = 1.
+Condition 2 ✕. JUMP.` },
+        { click: { button: 'Jump at' } },
+        { wait: 2600 },
+        { say: `TAP Wrong value at x=1
+f(1) = 0 ≠ lim = 2.
+Condition 3 ✕. REMOVABLE.` },
+        { click: { button: 'Wrong value' } },
+        { wait: 2600 },
+        { say: `TAP Asymptote at x=0
+L⁻ = L⁺ = +∞. f(0) undefined.
+Three ✕. INFINITE.` },
+        { click: { button: 'Asymptote' } },
+        { wait: 2600 },
+        { say: `TAP Staircase
+c = −2. L⁻ = −2.5 ≠ L⁺ = −1.5. JUMP.
+Five Jump to buttons: −2 to 2.` },
+        { click: { button: 'Staircase' } },
+        { wait: 2800 },
+      ],
+    },
+    'the-c-slider': {
+      title: 'Probing with the c slider',
+      script: [
+        { say: `DRAG c → 1.5
+Off the hole: f(1.5) = 2.5 = lim.
+Three ✓. CONTINUOUS.` },
+        { slide: { range: 0 }, to: 1.5, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG c → 1
+On the hole: f(1) undefined.
+Limit still 2. REMOVABLE.` },
+        { slide: { range: 0 }, to: 1, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Jump at x=0, DRAG c → 0.5
+Inside one piece: f(0.5) = 1.5.
+Three ✓. CONTINUOUS.` },
+        { click: { button: 'Jump at' } },
+        { slide: { range: 0 }, to: 0.5, ms: 1200 },
+        { wait: 2800 },
+        { say: `DRAG c → 0
+On the seam: L⁻ = 0 ≠ L⁺ = 1.
+Condition 2 ✕. JUMP.` },
+        { slide: { range: 0 }, to: 0, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Asymptote at x=0, DRAG c → 1
+Away from 0: f(1) = 1 = lim.
+Three ✓. CONTINUOUS.` },
+        { click: { button: 'Asymptote' } },
+        { slide: { range: 0 }, to: 1, ms: 1200 },
+        { wait: 2800 },
+      ],
+    },
+    'jump-to-buttons': {
+      title: 'Jump to and Reset',
+      script: [
+        { say: `TAP Staircase
+c lands on −2, the first button.
+L⁻ = −2.5 ≠ L⁺ = −1.5. JUMP.` },
+        { click: { button: 'Staircase' } },
+        { wait: 2600 },
+        { say: `TAP 0
+c = 0 exactly. Button 0 lit.
+L⁻ = −0.5 ≠ L⁺ = 0.5. JUMP.` },
+        { click: { button: '0', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG c → 0.5
+Between steps: f(0.5) = 0.5 = lim.
+Three ✓. No button lit.` },
+        { slide: { range: 0 }, to: 0.5, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP 2
+c = 2. L⁻ = 1.5 ≠ L⁺ = 2.5.
+Same jump, one step higher.` },
+        { click: { button: '2', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Reset
+c back to −2, the first point of interest.` },
+        { click: { button: 'Reset', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'display-toggles': {
+      title: 'Display, plot size and tabs',
+      script: [
+        { say: `UNCHECK L⁻, L⁺
+Dashed L line at 2 and its marker gone.
+Legend drops the L entry.` },
+        { click: { css: 'input[type="checkbox"]', nth: 1 } },
+        { wait: 2600 },
+        { say: `UNCHECK x = c
+Dashed vertical at c = 1 gone.
+Checklist unchanged.` },
+        { click: { css: 'input[type="checkbox"]', nth: 2 } },
+        { wait: 2600 },
+        { say: `TAP S
+Plot 500 × 400.
+Same curve, shorter.` },
+        { click: { button: 'S', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Concepts
+Fixed text: the three-part definition,
+continuity on an interval.` },
+        { click: { button: 'Concepts', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Explanation
+Live reading: Hole at x=1, c = 1.
+f(c) undefined, L⁻ = L⁺ = 2.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('calculus-continuity'),
       sectionsContent,
       stateUnits,
@@ -972,7 +1127,22 @@ That combination is entirely ordinary. "Continuous" is a statement about a singl
   }
 }
 
-export default function ContinuityChecker({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function ContinuityChecker({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionContinuity explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -995,17 +1165,18 @@ export default function ContinuityChecker({relatedTools, seoData, sectionsConten
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'the-function-families'),
+    withDemo(plain('obj2', 'the-function-families')),
     stateRow('obj11', 'continuous-everywhere', 'smooth'),
     stateRow('obj12', 'removable-hole', 'hole'),
     stateRow('obj13', 'jump-discontinuity', 'jump'),
     stateRow('obj14', 'wrong-value-at-a-point', 'wrongvalue'),
     stateRow('obj15', 'infinite-discontinuity', 'asymptote'),
     stateRow('obj16', 'the-staircase', 'staircase'),
-    plain('obj3', 'the-c-slider'),
-    plain('obj4', 'jump-to-buttons'),
+    withDemo(plain('obj3', 'the-c-slider')),
+    withDemo(plain('obj4', 'jump-to-buttons')),
     plain('obj5', 'the-three-condition-checklist'),
-    plain('obj6', 'display-toggles'),
+    withDemo(plain('obj6', 'display-toggles')),
+    plain('obj17', 'plot-size-applied-strip-and-info-panel'),
     plain('obj7', 'what-is-continuity'),
     plain('obj8', 'types-of-discontinuities'),
     plain('obj9', 'continuity-and-limits'),
@@ -1067,6 +1238,10 @@ export default function ContinuityChecker({relatedTools, seoData, sectionsConten
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Continuity Checker - Interactive Visualizer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionContinuity explanations={explanations}/>
       <br/>

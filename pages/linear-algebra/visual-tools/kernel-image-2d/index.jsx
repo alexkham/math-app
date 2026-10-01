@@ -499,6 +499,9 @@ import { SCENARIOS as KI_SCENARIOS } from '../../../../app/components/linear-alg
 import kernelImageDiagrams, { groupOf } from '../../../../app/components/linear-algebra copy/r2-visualizers/kernel-image/kernelImageDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -752,6 +755,21 @@ Comparing this against the rank-1 case is the point of having it. Both are singu
       before:``,
       after:``,
       link:'',
+    },
+    obj16:{
+      title:`The Properties Card`,
+      content:`Card 02 (Properties) sits under the explanation card in the center column. It summarizes what $A$ does and updates with every preset, every edit of $A$ and every drag of $v$.
+
+&bull; **Rank A** &mdash; $2$, $1$ or $0$: the number of independent columns of $A$.
+&bull; **dim ker A** &mdash; the dimension of the kernel, in red like the kernel line or ring on the left canvas.
+&bull; **dim im A** &mdash; the dimension of the image, in green like the image line on the right canvas.
+&bull; **Determinant** &mdash; nonzero exactly when the rank is $2$; it drops to $0$ as soon as the two columns become parallel.
+&bull; **v &isin; ker A?** &mdash; the one row that depends on $v$. It reads **no (trivial)** at rank 2 and **always** at rank 0; at rank 1 it switches from **no** to **yes &mdash; collapses** when $v$ lies on the kernel line.
+
+The bottom line adds the two dimensions: dim ker + dim im $= 2$. The split between them changes from preset to preset, but the total never does, because the domain is always the plane. Watching that line while switching from Identity ($0 + 2$) to Project to x ($1 + 1$) to Zero map ($2 + 0$) is the quickest way to see [the rank-nullity theorem](!#the-rank-nullity-theorem) at work.`,
+      before:``,
+      after:``,
+      link:'',
     }
   }
 
@@ -926,8 +944,148 @@ Comparing this against the rank-1 case is the point of having it. Both are singu
 
 
 
+  const instructions = [
+    'The left canvas is the domain, with $v$ in orange and the kernel as a red dashed line or ring; the right canvas is the codomain, with $Av$ in cyan and the image in green. [Learn more about getting started](!#getting-started)',
+    'Press and drag anywhere on the left canvas to place $v$; on the kernel line $Av$ collapses to the origin. [Learn more about dragging v](!#dragging-v-and-the-kernel)',
+    'Watch $Av$ on the right canvas: anywhere in the plane at rank 2, confined to the green image line at rank 1, fixed at the origin at rank 0. [Learn more about the image line](!#av-and-the-image-line)',
+    'The scenarios panels (03a and 03b) load the **Full rank**, **Image is a line** and **Image is origin** presets; **Rotate** has its own angle menu. [Learn more about the preset scenarios](!#preset-scenarios)',
+    'The layer chips **grid**, **kernel**, **image**, **trail**, **swarm** and **labels** show or hide each layer in both canvases. [Learn more about the layer toggles](!#display-layer-toggles)',
+    'Type into the four entries of $A$ in the **Multiplication** card (01); the row-by-row expansion of $Av$ updates beside them. [Learn more about editing the matrix](!#editing-the-matrix)',
+    'The **Properties** card (02) reports the rank, dim ker A, dim im A, the determinant and whether $v$ is in the kernel, with dim ker + dim im = 2 underneath. [Learn more about the properties card](!#the-properties-card)',
+    'The **Sweep** strip runs $v$ round a circle: **Play** / **Pause**, 30° steps back and forward, a scrub slider and **Reset**; the trails show the circle and its image. [Learn more about sweep playback](!#sweep-playback)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real KernelImage tool
+     (opens on Identity, v = (1.5, 1)). The domain canvas sets v wherever it
+     is pressed, so drags start at its centre (the origin): target
+     'svg.ki-canvas-domain', offsets in screen px at scale 0.6 (desktop
+     layout: ~21 px per unit). Cells: .ki-mult-card input (0 a11, 1 a12,
+     2 a21, 3 a22). Chips: label.ki-chip (0 grid, 1 kernel, 2 image,
+     3 trail, 4 swarm, 5 labels). */
+  const demos = {
+    'dragging-v-and-the-kernel': {
+      title: 'Placing v on and off the kernel',
+      script: [
+        { say: `TAP Project to x
+Rank 1. Red dashed kernel: the y-axis.
+Green image line: the x-axis.` },
+        { click: { button: 'Project to x' } },
+        { wait: 2600 },
+        { say: `DRAG v → (0, 2)
+On the kernel. Av = (0, 0).
+v ∈ ker A? yes — collapses.` },
+        { drag: 'svg.ki-canvas-domain', dx: 0, dy: -41.95, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG v → (0, −2)
+Along the kernel line.
+Av stays (0, 0) all the way.` },
+        { drag: 'svg.ki-canvas-domain', dx: 0, dy: 41.95, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG v → (2, 1)
+Off the kernel. Av = (2, 0).
+Lands on the green image line.` },
+        { drag: 'svg.ki-canvas-domain', dx: 41.95, dy: -20.97, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Zero map
+Rank 0. ker A = ℝ², im A = {0}.
+Any v: Av = (0, 0). Always.` },
+        { click: { button: 'Zero map' } },
+        { wait: 2600 },
+      ],
+    },
+    'preset-scenarios': {
+      title: 'Full rank, rank 1, and ker = im',
+      script: [
+        { say: `TAP Rotate & stretch
+Rank 2, det ≈ 1.93. ker A = {0}.
+Av = (1.1, 2.25).` },
+        { click: { button: 'Rotate & stretch' } },
+        { wait: 2600 },
+        { say: `SELECT Rotate 30°
+Rigid turn, det 1. ker A = {0}, im A = ℝ².
+Av = (0.8, 1.62).` },
+        { set: 'select', value: '30' },
+        { wait: 2600 },
+        { say: `TAP Project to y = x
+Rank 1. Kernel y = −x, image y = x.
+Perpendicular: orthogonal projection.` },
+        { click: { button: 'Project to y = x' } },
+        { wait: 2600 },
+        { say: `TAP Outer product
+Image through (1, 2). Kernel through (−1, 2).
+Oblique. Av = (4, 8).` },
+        { click: { button: 'Outer product' } },
+        { wait: 2800 },
+        { say: `TAP Nilpotent (ker = im)
+Kernel and image: both the x-axis.
+Av = (1, 0). Apply A twice: zero.` },
+        { click: { button: 'Nilpotent' } },
+        { wait: 2800 },
+      ],
+    },
+    'editing-the-matrix': {
+      title: 'Typing A down to rank 1 and back',
+      script: [
+        { say: `TYPE a₂₂ = 0
+Bottom row zero → rank 1, det 0.
+dim ker + dim im = 1 + 1. Av = (1.5, 0).` },
+        { set: { css: '.ki-mult-card input', nth: 3 }, value: '0' },
+        { wait: 2800 },
+        { say: `TYPE a₁₂ = 1
+Kernel tilts to y = −x.
+Image stays the x-axis. Av = (2.5, 0).` },
+        { set: { css: '.ki-mult-card input', nth: 1 }, value: '1' },
+        { wait: 2800 },
+        { say: `TYPE a₁₂ = −1.5
+Kernel now runs through v = (1.5, 1).
+Av = (0, 0): yes — collapses.` },
+        { set: { css: '.ki-mult-card input', nth: 1 }, value: '-1.5' },
+        { wait: 2800 },
+        { say: `TYPE a₂₂ = 1
+Columns independent again. Rank 2, det 1.
+ker A = {0}. Av = (0, 1).` },
+        { set: { css: '.ki-mult-card input', nth: 3 }, value: '1' },
+        { wait: 2800 },
+      ],
+    },
+    'sweep-playback': {
+      title: 'Sweeping v through A',
+      script: [
+        { say: `TAP Project to x
+Rank 1. Kernel: the y-axis.
+v = (1.5, 1) → Av = (1.5, 0).` },
+        { click: { button: 'Project to x' } },
+        { wait: 2400 },
+        { say: `TAP Step forward ×3
+30° per tap → 90°. v = (−1, 1.5).
+Every Av dot lands on the x-axis.` },
+        { click: 'button[aria-label="Step forward"]' },
+        { click: 'button[aria-label="Step forward"]' },
+        { click: 'button[aria-label="Step forward"]' },
+        { wait: 2600 },
+        { say: `CHECK swarm
+140 sample points, left.
+Their images, right: all on the image line.` },
+        { click: { css: 'label.ki-chip', nth: 4 } },
+        { wait: 2800 },
+        { say: `TAP Shear x
+New A: trail cleared, sweep back to 0°.
+Rank 2. Av = (0.5, 1.5).` },
+        { click: { button: 'Shear x' } },
+        { wait: 2400 },
+        { say: `TAP Play
+v circles 360°, radius 1.8.
+Right trail: the circle's image, an ellipse.` },
+        { click: 'button[aria-label="Play"]' },
+        { wait: 4400 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
         relatedTools: getRelatedTools('linear-algebra-kernel-image-2d'),
          sectionsContent,
          stateUnits,
@@ -950,7 +1108,22 @@ Comparing this against the rank-1 case is the point of having it. Both are singu
     }
    }
 
-export default function KernelImage2DPage({seoData, sectionsContent, stateUnits, introContent, faqQuestions, schemas, relatedTools }) {
+export default function KernelImage2DPage({ instructions, demos,seoData, sectionsContent, stateUnits, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <KernelImage explanationOverride={explanationOverride}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   /* ---- per-scenario panel notes (Line 1) ----
      Built here rather than in getStaticProps: SCENARIOS entries carry A, and
@@ -1006,14 +1179,15 @@ export default function KernelImage2DPage({seoData, sectionsContent, stateUnits,
   const genericSections=[
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'dragging-v-and-the-kernel'),
+    withDemo(plain('obj2', 'dragging-v-and-the-kernel')),
     plain('obj3', 'av-and-the-image-line'),
-    plain('obj6', 'preset-scenarios'),
+    withDemo(plain('obj6', 'preset-scenarios')),
     stateRow('obj12', 'full-rank', 'full'),
     stateRow('obj13', 'rank-1', 'rankOne'),
     stateRow('obj14', 'rank-0', 'zero'),
-    plain('obj4', 'editing-the-matrix'),
-    plain('obj5', 'sweep-playback'),
+    withDemo(plain('obj4', 'editing-the-matrix')),
+    plain('obj16', 'the-properties-card'),
+    withDemo(plain('obj5', 'sweep-playback')),
     plain('obj7', 'display-layer-toggles'),
     plain('obj8', 'defining-kernel-and-image'),
     plain('obj9', 'three-rank-cases'),
@@ -1076,6 +1250,10 @@ export default function KernelImage2DPage({seoData, sectionsContent, stateUnits,
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Kernel and Image</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
    <KernelImage explanationOverride={explanationOverride}/>

@@ -1651,6 +1651,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionCompositionDiagrams from '@/app/components/functions/compositions/functionCompositionDiagrams'
 
 
 export async function getStaticProps(){
@@ -2978,8 +2980,38 @@ const faqQuestions = {
     },
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    compose: demoUnitFrame({
+      svg: functionCompositionDiagrams.quadratic,
+      caption: 'f(x) = x&#178;, g(x) = sin x: f(g(x)) = (sin x)&#178;',
+      text: 'The output of the inner function feeds the outer one: every value sin x is squared, so the composite curve is the sine wave with its negative halves folded up. Swap the order and g(f(x)) = sin(x&#178;) is a wave that speeds up as x grows; the two composites are different functions. Compare the two orders for any pair on the',
+      href: '/functions/visual-tools/composition',
+      linkText: 'function composition explorer',
+    }),
+    self: demoUnitFrame({
+      svg: functionCompositionDiagrams.selfCompose,
+      caption: 'f composed with itself',
+      text: 'Applying the same rule twice gives a new curve, f(f(x)), drawn beside f: the second application acts on the outputs of the first. Repeating a function is how iteration and recursion begin. See how the shape changes with each extra application on the',
+      href: '/functions/visual-tools/composition',
+      linkText: 'function composition explorer',
+    }),
+    inversePair: demoUnitFrame({
+      svg: functionCompositionDiagrams.inversePair,
+      caption: 'f(x) = e&#710;x, g(x) = ln x: f(g(x)) = x',
+      text: 'Composed in either order the two curves collapse onto the line y = x: the logarithm undoes the exponential and the exponential undoes the logarithm, which is the defining property of an inverse pair drawn out. The only trace of the pair is the domain restriction x &gt; 0 inherited from ln. Check any candidate pair the same way on the',
+      href: '/functions/visual-tools/composition',
+      linkText: 'function composition explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj5Table,
@@ -3008,7 +3040,7 @@ export default function CompositionPage({
   obj9Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -3028,6 +3060,8 @@ export default function CompositionPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-compose'} dangerouslySetInnerHTML={{ __html: demoUnits.compose }} />,
+          `The order of the two functions is part of the definition, not a detail.`,
         ]
     },
     {
@@ -3099,6 +3133,8 @@ export default function CompositionPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-self'} dangerouslySetInnerHTML={{ __html: demoUnits.self }} />,
+          `Composition with itself is the simplest case of iterating a rule.`,
         ]
     },
     {
@@ -3117,6 +3153,8 @@ export default function CompositionPage({
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+                  <div key={'unit-inversePair'} dangerouslySetInnerHTML={{ __html: demoUnits.inversePair }} />,
+          `A pair that composes to the identity in both orders is inverse; one order alone is not enough.`,
         ]
     },
     {

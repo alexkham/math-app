@@ -496,6 +496,9 @@ import FunctionOptimization from '../../../../app/components/functions/optimizat
 import functionOptimizationDiagrams from '../../../../app/components/functions/optimization/functionOptimizationDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -666,6 +669,24 @@ The fallback test handles the cases where the second derivative is too gentle to
 Any combination is valid. The legend below the graph updates to show only the visible layers.
 
 The **Accent color** picker at the bottom recolors the live highlight throughout the tool.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj17: {
+      title: `The Plot, Legend and Info Panel`,
+      content: `The center panel is headed by the family name, with its formula in a chip beside it, for example $f(x) = x^3 - 3x$. The **S**, **M**, **L** and **XL** buttons above the plot set its size, and the readout next to them shows it in pixels: 500 × 400, 700 × 550, 900 × 850 or 1100 × 850. The page opens at 880 × 460. The horizontal window stays at $[-5, 5]$ whatever the size; the faint blue band inside it is the search window $[a, b]$ from [The a and b Sliders](!#the-a-and-b-sliders).
+
+The legend under the plot names only the layers that are switched on: the solid $f(x)$, the dashed $f'(x)$, the dotted $f''(x)$ and the numbered critical points. Which layers show is set in [Display Toggles](!#display-toggles).
+
+The **Applied** strip at the bottom of the center panel repeats the current $a$ and $b$.
+
+The info panel on the right has two tabs:
+
+• **Explanation** — the family&apos;s derivatives, a **Right now** line listing every critical point found in $[a, b]$ with its verdict, a note on reading the picture, and a short note on where the family leads, with a link to its section on this page.
+
+• **Concepts** — the first-derivative test, the second-derivative test, inflection points and why optimization matters. The full treatment is in [The Second-Derivative Test](!#the-second-derivative-test).`,
       before: ``,
       after: ``,
       link: '',
@@ -980,8 +1001,140 @@ But neither is a critical point, and the tool marks neither, because $f'$ is now
   }
 
 
+  const instructions = [
+    'The **Function** picker on the left lists six families in two groups, **Polynomial** and **Transcendental**, each tagged with what it produces; tapping one loads it with its default search window. [Learn more about the function families](!#the-function-families)',
+    'The **Display** checkboxes switch the $f(x)$ curve, the dashed $f\'(x)$, the dotted $f\'\'(x)$ and the critical-point markers on and off. [Learn more about the display toggles](!#display-toggles)',
+    'The **left endpoint a** and **right endpoint b** sliders set the search window $[a, b]$; the band, the markers and the table follow, and **Reset** next to **Parameters** restores the family default. [Learn more about the a and b sliders](!#the-a-and-b-sliders)',
+    'The **Accent color** picker under **Appearance** recolors the table edge and the slider thumbs; its **Reset** restores the default blue. [Learn more about the accent color](!#display-toggles)',
+    'The **S**, **M**, **L** and **XL** buttons set the plot size, and the legend under the plot names the layers that are switched on. [Learn more about the plot and legend](!#the-plot-legend-and-info-panel)',
+    'The table under the plot has one row per critical point in $[a, b]$: its number, $x$, $f(x)$, $f\'\'(x)$, the second-derivative test and the verdict. [Learn more about the critical-point table](!#the-critical-point-table)',
+    'The verdict tag reads **local max**, **local min** or **inflection**; when $f\'\'(c)$ is about zero, the tool falls back to the sign of $f\'$ on each side. [Learn more about the classification](!#classification)',
+    'The info panel has two tabs: **Explanation** lists the critical points found right now with a note on the family, and **Concepts** covers the first- and second-derivative tests. [Learn more about the info panel](!#the-plot-legend-and-info-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionOptimization tool
+     (opens on x³ − 3x, [a, b] = [-3, 3]). Range inputs in DOM order: 0 = a, 1 = b.
+     Checkboxes in DOM order: 0 = f(x), 1 = f'(x), 2 = f''(x), 3 = critical points.
+     Reset nth 0 = Parameters, nth 1 = Appearance. Export / Maximize never used. */
+  const demos = {
+    'the-function-families': {
+      title: 'Six families',
+      script: [
+        { say: `TAP Quadratic
+One row: x = 0, f″ = 2.
+LOCAL MIN.` },
+        { click: { button: 'Quadratic' } },
+        { wait: 2400 },
+        { say: `TAP x³
+One row at 0, f″ = 0.
+f′ does not change sign: INFLECTION (TOUCH).` },
+        { click: { button: 'x³inflection', exact: true } },
+        { wait: 2800 },
+        { say: `TAP x⁴ − 4x²
+Three rows: min at −1.414, max at 0, min at 1.414.
+Both minima at f = −4.` },
+        { click: { button: 'x⁴' } },
+        { wait: 2800 },
+        { say: `TAP sin(x)
+Window jumps to [−6.28, 6.28].
+Four rows: max, min, max, min.` },
+        { click: { button: 'sin(x)' } },
+        { wait: 2600 },
+        { say: `TAP e⁻ˣ²
+Window back to [−3, 3].
+One row: x = 0, f = 1, LOCAL MAX.` },
+        { click: { button: 'e⁻ˣ²' } },
+        { wait: 2600 },
+      ],
+    },
+    'the-a-and-b-sliders': {
+      title: 'Search window a and b',
+      script: [
+        { say: `DRAG a → 0
+[a, b] = [0, 3]. Max at −1 drops out.
+One row left: min at x = 1.` },
+        { slide: { range: 0 }, to: 0, ms: 1400 },
+        { wait: 2400 },
+        { say: `DRAG b → 0.5
+[a, b] = [0, 0.5].
+No critical points in this interval.` },
+        { slide: { range: 1 }, to: 0.5, ms: 1400 },
+        { wait: 2400 },
+        { say: `DRAG a → 2
+a > b: tool swaps them.
+[a, b] = [0.5, 2]. Min at 1 is back.` },
+        { slide: { range: 0 }, to: 2, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG b → 2
+[a, b] = [2, 2].
+Interval too narrow.` },
+        { slide: { range: 1 }, to: 2, ms: 1200 },
+        { wait: 2400 },
+        { say: `TAP Reset
+[a, b] = [−3, 3] again.
+Two rows: max at −1, min at 1.` },
+        { click: { button: 'Reset', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+    'display-toggles': {
+      title: 'Display toggles and accent color',
+      script: [
+        { say: `TICK f''(x)
+Dotted f″ curve on.
+Legend adds f′′(x).` },
+        { click: { css: 'input[type="checkbox"]', nth: 2 } },
+        { wait: 2400 },
+        { say: `UNTICK f'(x)
+Dashed f′ curve off.
+Legend drops f′(x).` },
+        { click: { css: 'input[type="checkbox"]', nth: 1 } },
+        { wait: 2400 },
+        { say: `UNTICK critical points
+Markers and drop lines gone.
+Table keeps both rows.` },
+        { click: { css: 'input[type="checkbox"]', nth: 3 } },
+        { wait: 2400 },
+        { say: `SET Accent color → #d97706
+Table edge and slider thumbs turn amber.` },
+        { set: 'input[type="color"]', value: '#d97706' },
+        { wait: 2400 },
+        { say: `TAP Reset (Appearance)
+Accent back to #3b82f6.` },
+        { click: { button: 'Reset', exact: true, nth: 1 } },
+        { wait: 2200 },
+      ],
+    },
+    'the-plot-legend-and-info-panel': {
+      title: 'Plot size and info panel',
+      script: [
+        { say: `TAP S
+Plot 500 × 400.
+Same curves, same table.` },
+        { click: { button: 'S', exact: true } },
+        { wait: 2200 },
+        { say: `TAP XL
+Plot 1100 × 850.` },
+        { click: { button: 'XL', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Concepts
+First- and second-derivative tests,
+inflection points, why it matters.` },
+        { click: { button: 'Concepts', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Explanation
+Right now: 2 critical points in [−3, 3].
+x = −1 local max, x = 1 local min.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('calculus-optimization'),
       sectionsContent,
       stateUnits,
@@ -1005,7 +1158,22 @@ But neither is a critical point, and the tool marks neither, because $f'$ is now
   }
 }
 
-export default function OptimizationVisualizer({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function OptimizationVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionOptimization explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -1028,17 +1196,18 @@ export default function OptimizationVisualizer({relatedTools, seoData, sectionsC
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'the-function-families'),
+    withDemo(plain('obj2', 'the-function-families')),
     stateRow('obj11', 'one-critical-point', 'quadratic'),
     stateRow('obj12', 'a-maximum-and-a-minimum', 'cubic-bump'),
     stateRow('obj13', 'where-the-test-fails', 'cubic'),
     stateRow('obj14', 'three-critical-points', 'quartic-w'),
     stateRow('obj15', 'four-critical-points', 'sine'),
     stateRow('obj16', 'one-maximum-two-inflections', 'gaussian'),
-    plain('obj3', 'the-a-and-b-sliders'),
+    withDemo(plain('obj3', 'the-a-and-b-sliders')),
     plain('obj4', 'the-critical-point-table'),
     plain('obj5', 'classification'),
-    plain('obj6', 'display-toggles'),
+    withDemo(plain('obj6', 'display-toggles')),
+    withDemo(plain('obj17', 'the-plot-legend-and-info-panel')),
     plain('obj7', 'what-is-optimization'),
     plain('obj8', 'the-first-derivative-test'),
     plain('obj9', 'the-second-derivative-test'),
@@ -1100,6 +1269,10 @@ export default function OptimizationVisualizer({relatedTools, seoData, sectionsC
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Optimization Visualizer - Critical Points</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionOptimization explanations={explanations}/>
       <br/>

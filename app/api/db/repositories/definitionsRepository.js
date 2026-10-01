@@ -22336,7 +22336,7 @@ const definitionsRepository = [
     "formula": "An unordered collection of distinct objects, denoted $A = \\{a_1, a_2, \\ldots\\}$",
     "link": {
       "label": "Set Theory — Definition",
-      "url": "/set-theory#definition"
+      "url": "/set-theory/basics#1"
     },
     "relatedTools": [
       {
@@ -22389,7 +22389,7 @@ const definitionsRepository = [
     "formula": "An object $x$ belonging to a set $A$, written $x \\in A$",
     "link": {
       "label": "Set Theory — Relationships",
-      "url": "/set-theory#relationships_between_sets"
+      "url": "/set-theory/basics#4"
     },
     "relatedTools": [
       {
@@ -22438,7 +22438,7 @@ const definitionsRepository = [
     "formula": "The unique set containing no elements, denoted $\\emptyset = \\{\\}$",
     "link": {
       "label": "Set Theory — Cardinality and Types",
-      "url": "/set-theory#cardinality_and_types_of_sets"
+      "url": "/set-theory/basics#3"
     },
     "relatedTools": [
       {
@@ -22500,7 +22500,7 @@ const definitionsRepository = [
     "formula": "The set $U$ containing all elements under consideration in a given context",
     "link": {
       "label": "Set Theory — Cardinality and Types",
-      "url": "/set-theory#cardinality_and_types_of_sets"
+      "url": "/set-theory/basics#3"
     },
     "relatedTools": [
       {

@@ -9,6 +9,9 @@ import { SCENARIOS as MC_SCENARIOS } from '../../../../app/components/linear-alg
 import matrixCompositionDiagrams, { groupOf, statsFor } from '../../../../app/components/linear-algebra copy/r2-visualizers/matrix-composition/matrixCompositionDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -429,8 +432,125 @@ The animation makes the undoing visible. The first half shears the plane; the se
   }
 
 
+  const instructions = [
+    'The **order** toggle (**AB** / **BA**) in the top bar applies the two matrices in either order and replays the animation; drag the orange $\\mathbf{v}$ to move the start vector. [Learn more about getting started](!#getting-started)',
+    'The **view** toggle switches between **Trail**, one canvas with both paths, and **Stages**, three canvases from $\\mathbf{v}$ to the final point. [Learn more about the two views](!#trail-and-stages-views)',
+    'The **Scenarios** panel on the left loads nine pairs in three groups, **Commutative**, **Non-commutative** and **Reveals**; the explanation card describes the one selected. [Learn more about the preset scenarios](!#preset-scenarios)',
+    'The **Composition** card runs $t$ from $0$ to $1$ in two phases, first matrix then second: **Play** / **Pause**, step buttons, **Reset** and a slider; the readouts track $\\mathbf{v}_0$, the midpoint and the endpoint. [Learn more about the two-phase animation](!#the-two-phase-animation)',
+    'The layer chips **grid**, **unit sq**, **ghosts**, **AB path**, **BA path** and **labels** show or hide each overlay. [Learn more about the layer toggles](!#display-layer-toggles)',
+    'Type into $A$ or $B$ in the **Matrices** card; the product for the current order is computed beneath them. [Learn more about the matrices card](!#the-matrices-card-and-the-live-card)',
+    'The **Live** card (04) sets $AB$ and $BA$ side by side, compares $AB\\mathbf{v}$ with $BA\\mathbf{v}$, and states whether $A$ and $B$ commute. [Learn more about the live card](!#the-matrices-card-and-the-live-card)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real MatrixComposition
+     tool (opens on Shear x rotate, order AB, Trail view, v0 = (1.5, 1); every
+     preset and every order flip replays the 2.4 s two-phase animation).
+     The v handle sits at the vector's current point, so drags run after
+     Reset (t = 0, handle on v0); desktop layout: 31 px per unit at scale 0.6.
+     Transport: button[title="Reset" | "Step forward" | "Play / Pause"],
+     range 0 = t. Cells: .mc-mat-bracket input (0-3 = A, 4-7 = B).
+     Chips: label.mc-chip (0 grid, 1 unit sq, 2 ghosts, 3 AB path, 4 BA path, 5 labels). */
+  const demos = {
+    'getting-started': {
+      title: 'Order matters, until it does not',
+      script: [
+        { say: `TAP BA
+Same A and B, other order.
+BAv = (1.24, 1.77) vs ABv = (0.71, 2.12).
+Do NOT commute: gap 0.64.` },
+        { click: { button: 'BA', exact: true } },
+        { wait: 3400 },
+        { say: `TAP Two rotations
+60° and 30°. Dashed path under the solid one.
+ABv = BAv = (−1, 1.5). Commute.` },
+        { click: { button: 'Two rotations' } },
+        { wait: 3400 },
+        { say: `TAP Reset, DRAG v₀ → (0, 2)
+t = 0, then move the start vector.
+Both endpoints follow: (−2, 0).` },
+        { click: 'button[title="Reset"]' },
+        { drag: 'circle[data-handle="v"]', dx: -46.5, dy: -31, ms: 1400 },
+        { click: 'circle[data-handle="v"]' },
+        { wait: 2600 },
+        { say: `TAP Play
+v₀ → Av → BAv: a quarter turn.
+BAv = (−2, 0).` },
+        { click: 'button[title="Play / Pause"]' },
+        { wait: 3200 },
+        { say: `TAP AB
+Other order, same endpoint (−2, 0).
+Rotations commute.` },
+        { click: { button: 'AB', exact: true } },
+        { wait: 3400 },
+      ],
+    },
+    'the-two-phase-animation': {
+      title: 'Phase 1 applies B, phase 2 applies A',
+      script: [
+        { say: `TAP Reset
+t = 0. v₀ = (1.5, 1). Grid square.` },
+        { click: 'button[title="Reset"]' },
+        { wait: 2200 },
+        { say: `DRAG t → 0.5
+End of phase 1: grid sheared by B.
+v slid straight to Bv = (2, 1).` },
+        { slide: { range: 0 }, to: 0.5, ms: 1800 },
+        { wait: 2600 },
+        { say: `TAP Step forward
+t = 0.6: phase 2 · applying A.
+Path bends at Bv.` },
+        { click: 'button[title="Step forward"]' },
+        { wait: 2400 },
+        { say: `TAP Play
+Rotation finishes on top of the shear.
+ABv = (0.71, 2.12).` },
+        { click: 'button[title="Play / Pause"]' },
+        { wait: 3000 },
+        { say: `TAP Stages
+Three canvases: v → Bv → ABv.
+Same state, whole plane per step.` },
+        { click: { button: 'Stages' } },
+        { wait: 2800 },
+      ],
+    },
+    'preset-scenarios': {
+      title: 'Drastic, surprising, and undone',
+      script: [
+        { say: `TAP Project × rotate
+ABv = (1.06, 1.06), BAv = (0.35, 0).
+Gap 1.27: drastic.` },
+        { click: { button: 'Project × rotate' } },
+        { wait: 3400 },
+        { say: `UNCHECK grid, unit sq
+Only the two trails left.
+Solid = AB, dashed = BA.` },
+        { click: { css: 'label.mc-chip', nth: 0 } },
+        { click: { css: 'label.mc-chip', nth: 1 } },
+        { wait: 2600 },
+        { say: `TAP Two reflections
+AB = [0 −1; 1 0]: a 90° rotation.
+BA turns the other way. Gap 3.61.` },
+        { click: { button: 'Two reflections' } },
+        { wait: 3400 },
+        { say: `TAP Shear × inverse
+AB = I. Path returns to v₀ = (1.5, 1).
+A and B commute.` },
+        { click: { button: 'Shear × inverse' } },
+        { wait: 3400 },
+        { say: `TYPE a₁₂ = −0.3, TAP Play
+Two x-shears: AB = BA = [1 0.3; 0 1].
+ABv = (1.8, 1). Still commute.` },
+        { set: { css: '.mc-mat-bracket input', nth: 1 }, value: '-0.3' },
+        { click: 'button[title="Play / Pause"]' },
+        { wait: 3200 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-composition-2d'),
       sectionsContent,
       stateUnits,
@@ -453,7 +573,22 @@ The animation makes the undoing visible. The first half shears the plane; the se
   }
 }
 
-export default function MatrixComposition2DPage({seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+export default function MatrixComposition2DPage({ instructions, demos,seoData, sectionsContent, stateUnits, explanationOverride, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <MatrixComposition explanationOverride={explanationOverride}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -475,10 +610,10 @@ export default function MatrixComposition2DPage({seoData, sectionsContent, state
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     plain('obj2', 'trail-and-stages-views'),
-    plain('obj3', 'the-two-phase-animation'),
-    plain('obj6', 'preset-scenarios'),
+    withDemo(plain('obj3', 'the-two-phase-animation')),
+    withDemo(plain('obj6', 'preset-scenarios')),
     stateRow('obj11', 'a-commuting-pair', 'commute'),
     stateRow('obj12', 'a-non-commuting-pair', 'noncommute'),
     stateRow('obj13', 'two-reflections-make-a-rotation', 'revealRotation'),
@@ -543,6 +678,10 @@ export default function MatrixComposition2DPage({seoData, sectionsContent, state
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Matrix Composition</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(0.9)'}}>
    <MatrixComposition explanationOverride={explanationOverride}/>

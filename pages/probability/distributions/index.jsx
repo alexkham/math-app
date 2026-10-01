@@ -14,6 +14,9 @@ import { probabilityFunctionData } from '@/app/api/db/diagrams/probability/proba
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 
 
 
@@ -444,8 +447,31 @@ This page serves as a conceptual map of probability distributions. It explains h
   }
   
   
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_function_0: demoUnitFrame({
+      svg: discretePmfDiagrams.binomial,
+      caption: 'Binomial PMF, n = 10, p = 0.5',
+      text: 'A discrete probability function is a set of bars: each bar stands at a possible value, its height is the probability of that value, and the heights add to 1. The continuous counterpart replaces bars by a density curve whose area, not height, carries probability. Switch between distributions and compare the bar patterns on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+    u_cdf_1: demoUnitFrame({
+      svg: continuousCdfDiagrams.normal,
+      caption: 'Normal CDF, mean 0, standard deviation 1',
+      text: 'The cumulative distribution function accumulates probability from the left: at any x it reports P(X &le; x), so it starts at 0, ends at 1 and never decreases. For a continuous variable the curve is smooth; for a discrete one it would climb in steps. Trace the curve and read off accumulated probabilities on the',
+      href: '/probability/visual-tools/cdf/continuous',
+      linkText: 'continuous CDF visualizer',
+    }),
+  };
+
       return {
         props:{
+    demoUnits,
           sectionsContent,
           introContent,
           distributionsData,
@@ -467,7 +493,7 @@ This page serves as a conceptual map of probability distributions. It explains h
 
 export default function DistributionsPage({sectionsContent,introContent,
   distributionsData,discreteDistributionsTypesData,fundamentalPropertiesData,
-continuousDistributionsTypesData, seoData}) {
+continuousDistributionsTypesData, seoData, demoUnits}) {
    
     
   const distributionsSections=[
@@ -609,6 +635,8 @@ continuousDistributionsTypesData, seoData}) {
                             }} />,
 
           sectionsContent.function.after,
+                  <div key={'unit-u_function_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_function_0 }} />,
+          `The cumulative view collects these bars from the left.`,
         ]
     },
 
@@ -618,6 +646,8 @@ continuousDistributionsTypesData, seoData}) {
         link:sectionsContent.cdf.link,
         content:[
           sectionsContent.cdf.content,
+                  <div key={'unit-u_cdf_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_cdf_1 }} />,
+          `Why these functions matter is the subject of the closing section.`,
         ]
     },
 

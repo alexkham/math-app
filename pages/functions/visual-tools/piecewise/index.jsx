@@ -498,6 +498,9 @@ import FunctionPiecewise from '../../../../app/components/functions/piecewise/Fu
 import piecewiseDiagrams from '../../../../app/components/functions/piecewise/functionPiecewiseDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -642,6 +645,28 @@ A green check means the definition does qualify as a function; a red cross means
 • **gap** (red) — adjacent pieces are both open at the same $x$, or some interior interval has no piece. The function isn&apos;t defined there.
 
 Each row lists the $x$ value of the boundary and the actual one-sided values that produced the classification.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj17: {
+      title: `The Plot, Info Panel and Appearance`,
+      content: `The center panel is headed **Piecewise builder** and counts the pieces in use, for example f(x) = piecewise (2 pieces). The **S**, **M**, **L** and **XL** buttons above the plot set its size. The horizontal window stays at $[-5, 5]$ whatever the size.
+
+The legend under the plot names the three marks: the piece line, numbered at its left endpoint; the filled **closed endpoint** dot; and the empty **open endpoint** circle. How the two dots decide who owns a boundary is covered in [Open vs Closed Endpoints](!#open-vs-closed-endpoints).
+
+The **Applied** strip at the bottom of the center panel shows how many pieces the definition has right now.
+
+The info panel on the right has up to three tabs:
+
+• **Explanation** — the current definition written piece by piece with its interval brackets, a count of pieces and boundaries by kind, and a short list of things to try.
+
+• **Preset** — a note on the last preset loaded, with a link to its section on this page. It is not shown after **Empty (start over)**.
+
+• **Concepts** — what makes a piecewise function well-defined: no overlaps, no gaps, and how boundaries are classified. The theory is in [Continuity at a Boundary](!#continuity-at-a-boundary).
+
+The **Appearance** block at the bottom of the left panel has an **Accent color** picker. It tints the boundary report box and the Applied strip; its **Reset** button restores the default blue.`,
       before: ``,
       after: ``,
       link: '',
@@ -936,8 +961,145 @@ Together with the [hole](!#the-removable-hole), this preset completes the discon
       '[Learn more about this preset](!#the-jump-discontinuity) · [All patterns](!#common-piecewise-patterns)',
   };
 
+  const instructions = [
+    'The **Presets** menu loads a complete definition (Absolute value, Heaviside step, Sign function, Sawtooth, Removable hole, Jump discontinuity, or Empty); **Reset** next to Pieces reloads the absolute value. [Learn more about getting started](!#getting-started)',
+    'Each piece row has a function menu, two number boxes for its interval, and a **✕** button that removes the piece. [Learn more about editing pieces](!#editing-individual-pieces)',
+    'The bracket buttons on either side of the bounds switch each endpoint between closed (filled dot) and open (empty circle). [Learn more about open and closed endpoints](!#open-vs-closed-endpoints)',
+    'Under **Add piece**, pick a shape in the **f(x) =** menu and tap **+ Add**; the new piece starts where the last one ends and runs 2 units to the right. [Learn more about adding pieces](!#adding-new-pieces)',
+    'The plot draws every piece on its interval with its endpoint marks; the **S**, **M**, **L** and **XL** buttons set its size, and the **Applied** strip counts the pieces. [Learn more about the plot](!#the-plot-info-panel-and-appearance)',
+    'The verdict line in the report box says whether the definition is a function: continuous, with jumps, with removable points, not fully defined, or not well-defined. [Learn more about the verdict panel](!#the-verdict-panel)',
+    'Under the verdict, each boundary gets a row tagged continuous, removable, jump, overlap or gap, with the one-sided values. [Learn more about the boundary report](!#reading-the-boundary-report)',
+    'The info panel\'s **Explanation**, **Preset** and **Concepts** tabs write out the current definition, describe the loaded preset, and explain well-definedness; **Accent color** under Appearance tints the report box. [Learn more about the info panel](!#the-plot-info-panel-and-appearance)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionPiecewise tool
+     (opens on the Absolute value preset: -x on [-5, 0), x on [0, 5]).
+     Selects in DOM order: 0 = presets, 1..n = piece rows, last = Add piece.
+     Number inputs: 2 per piece row (start, end). Bracket buttons are matched by their current label. */
+  const demos = {
+    'getting-started': {
+      title: 'Presets and Reset',
+      script: [
+        { say: `SELECT Heaviside step
+Two constants: −1, then 1.
+JUMP at x = 0: left −1, right 1.` },
+        { set: { css: 'select', nth: 0 }, value: 'heaviside' },
+        { wait: 2800 },
+        { say: `TAP Preset
+Note on the loaded preset:
+the minimal jump. Link to its section.` },
+        { click: { button: 'Preset', exact: true } },
+        { wait: 2600 },
+        { say: `SELECT Sawtooth (3 pieces)
+Three parallel ramps.
+Two jumps: x = −3 and x = 1.` },
+        { set: { css: 'select', nth: 0 }, value: 'sawtooth' },
+        { wait: 2800 },
+        { say: `SELECT Empty (start over)
+No pieces. Verdict: ✕ No pieces.
+Preset tab gone.` },
+        { set: { css: 'select', nth: 0 }, value: 'empty' },
+        { wait: 2600 },
+        { say: `TAP Reset
+Absolute value back: −x, then x.
+CONTINUOUS at x = 0.` },
+        { click: { button: 'Reset', exact: true, nth: 0 } },
+        { wait: 2600 },
+      ],
+    },
+    'editing-individual-pieces': {
+      title: 'Editing a piece',
+      script: [
+        { say: `SELECT piece 2 → x + 1
+JUMP at x = 0: left 0, right 1.
+Still well-defined.` },
+        { set: { css: 'select', nth: 2 }, value: 'xp1' },
+        { wait: 2800 },
+        { say: `SELECT piece 1 → x + 1
+Same line on both sides.
+CONTINUOUS at x = 0, f = 1.` },
+        { set: { css: 'select', nth: 1 }, value: 'xp1' },
+        { wait: 2600 },
+        { say: `TYPE piece 2 start → 1
+✕ Not fully defined.
+GAP: no piece covers (0, 1).` },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '1' },
+        { wait: 2800 },
+        { say: `TYPE piece 1 end → 1
+Pieces meet again at x = 1.
+CONTINUOUS, f = 2.` },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '1' },
+        { wait: 2600 },
+        { say: `TAP ✕ on piece 2
+One piece left: [−5, 1).
+GAP: no piece covers (1, 5).` },
+        { click: { button: '✕', exact: true, nth: 1 } },
+        { wait: 2600 },
+      ],
+    },
+    'open-vs-closed-endpoints': {
+      title: 'Open and closed endpoints',
+      script: [
+        { say: `SELECT Heaviside step
+Piece 1 ends open: empty circle at (0, −1).
+Piece 2 starts closed: filled dot at (0, 1).` },
+        { set: { css: 'select', nth: 0 }, value: 'heaviside' },
+        { wait: 3000 },
+        { say: `TAP ) → ] on piece 1
+Both pieces closed at x = 0.
+✕ OVERLAP: pieces 1 & 2 both claim x = 0.` },
+        { click: { button: ')', exact: true, nth: 0 } },
+        { wait: 3000 },
+        { say: `TAP [ → ( on piece 2
+x = 0 now belongs to piece 1: f(0) = −1.
+✓ Well-defined, with jumps.` },
+        { click: { button: '[', exact: true, nth: 1 } },
+        { wait: 3000 },
+        { say: `TAP ] → ) on piece 1
+Both open at x = 0.
+✕ GAP: no piece owns x = 0.` },
+        { click: { button: ']', exact: true, nth: 0 } },
+        { wait: 2800 },
+      ],
+    },
+    'adding-new-pieces': {
+      title: 'Adding pieces',
+      script: [
+        { say: `TYPE piece 2 end → 3
+✕ Not fully defined.
+GAP: no piece covers (3, 5).` },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: '3' },
+        { wait: 2600 },
+        { say: `PICK f(x) = 2, TAP + Add
+Piece 3 = 2 on (3, 5]: opens where piece 2 closes.
+JUMP at x = 3: left 3, right 2.` },
+        { set: { css: 'select', nth: 3 }, value: 'c2' },
+        { click: { button: '+ Add', exact: true } },
+        { move: { css: 'select', nth: 3 }, ms: 600 },
+        { wait: 3000 },
+        { say: `SELECT piece 3 → x
+CONTINUOUS at x = 3.
+✓ Continuous on viewport.` },
+        { set: { css: 'select', nth: 3 }, value: 'x' },
+        { wait: 2600 },
+        { say: `TAP + Add again
+Piece 4 = (5, 5]: no room left in [−5, 5].
+✕ Invalid piece.` },
+        { click: { button: '+ Add', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ✕ on piece 4
+Back to 3 pieces.
+✓ Continuous on viewport.` },
+        { click: { button: '✕', exact: true, nth: 3 } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('functions-piecewise'),
       sectionsContent,
       introContent,
@@ -959,19 +1121,35 @@ Together with the [hole](!#the-removable-hole), this preset completes the discon
   }
 }
 
-export default function PiecewiseFunctionBuilder({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PiecewiseFunctionBuilder({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionPiecewise explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
     { id:'key-terms', title:sectionsContent.obj0.title, link:sectionsContent.obj0.link, content:[sectionsContent.obj0.content] },
-    { id:'getting-started', title:sectionsContent.obj1.title, link:sectionsContent.obj1.link, content:[sectionsContent.obj1.content] },
-    { id:'editing-individual-pieces', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[sectionsContent.obj2.content] },
-    { id:'adding-new-pieces', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[sectionsContent.obj3.content] },
-    { id:'open-vs-closed-endpoints', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[sectionsContent.obj4.content] },
+    { id:'getting-started', title:sectionsContent.obj1.title, link:sectionsContent.obj1.link, content:[demo('getting-started'), sectionsContent.obj1.content] },
+    { id:'editing-individual-pieces', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[demo('editing-individual-pieces'), sectionsContent.obj2.content] },
+    { id:'adding-new-pieces', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[demo('adding-new-pieces'), sectionsContent.obj3.content] },
+    { id:'open-vs-closed-endpoints', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[demo('open-vs-closed-endpoints'), sectionsContent.obj4.content] },
     { id:'the-verdict-panel', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[sectionsContent.obj5.content] },
     { id:'reading-the-boundary-report', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[sectionsContent.obj6.content] },
+    { id:'the-plot-info-panel-and-appearance', title:sectionsContent.obj17.title, link:sectionsContent.obj17.link, content:[sectionsContent.obj17.content] },
     { id:'what-is-a-piecewise-function', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[sectionsContent.obj7.content] },
     { id:'continuity-at-a-boundary', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[sectionsContent.obj8.content] },
     { id:'common-piecewise-patterns', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link, content:[sectionsContent.obj9.content] },
@@ -1037,6 +1215,10 @@ export default function PiecewiseFunctionBuilder({relatedTools, seoData, section
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Piecewise Function Builder & Visualizer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FunctionPiecewise explanations={explanations}/>
       <br/>

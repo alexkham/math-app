@@ -779,6 +779,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vectorAdditionDiagrams from '@/app/components/linear-algebra copy/matrix/vectorAdditionDiagrams'
 import vectorScalarDiagrams from '@/app/components/linear-algebra copy/matrix/vectorScalarDiagrams'
+import renderVectorArrowsV2 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v2'
 
 
 export async function getStaticProps(){
@@ -1432,6 +1433,23 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  // Page-theme palette (owner, 2026-09-28): site blue / navy / amber, not the tools' orange-cyan-green.
+  const vaPageStyle = { a: '#2563EB', b: '#06357A', result: '#B45309', negation: '#C0392B', text: '#1E3A5F' };
+  const vaSumRoutes = {
+    kind: 'sum', a: [4, 1], b: [1, 3], style: vaPageStyle,
+    svgTitle: 'a + b and b + a: two routes to the same diagonal',
+    labels: [['a', 2.1, 0.2, 'a'], ['b', 4.75, 2.3, 'b', 'start'], ['b', 0.42, 1.7, 'b', 'end'], ['a', 2.9, 3.75, 'a'], ['a + b = b + a', 5.2, 4.3, 'result', 'start']],
+    notes: ['dashed: the same vector, moved to the other one\u2019s tip'],
+    caption: 'a then b, or b then a: the same diagonal',
+  };
+  const vaDifferenceTips = {
+    kind: 'difference', a: [5, 2], b: [2, 4], style: vaPageStyle,
+    svgTitle: 'a \u2212 b runs from the tip of b to the tip of a',
+    labels: [['a = (5, 2)', 3.2, 0.75, 'a', 'start'], ['b = (2, 4)', 1.45, 2.4, 'b', 'start'], ['a \u2212 b = (3, \u22122)', 3.75, 3.35, 'result', 'start']],
+    notes: ['b followed by a \u2212 b lands on a, so b + (a \u2212 b) = a', 'its length, \u221a13, is the distance between the two tips'],
+    caption: 'a \u2212 b runs from the tip of b to the tip of a',
+  };
+
   const demoUnits = {
     // Section 1 defines addition componentwise, so the symbolic
     // tool is the match: it fills one slot at a time.
@@ -1448,6 +1466,16 @@ const schemas = {
       text: 'One number has reached every entry: each component of the result is the matching component multiplied by the same scalar. Nothing has been mixed between slots, which is why scaling changes a vector\'s length and possibly its direction but never tilts it off its own line. Try a negative scalar and watch the arrow flip on the',
       href: '/linear-algebra/visual-tools/vector-scalar-multiplication',
       linkText: 'scalar multiplication visualizer',
+    }),
+    sumRoutes: demoUnitFrame({
+      svg: renderVectorArrowsV2(vaSumRoutes),
+      caption: 'Commutativity, drawn',
+      text: 'Walk a first and then b (lower route), or b first and then a (upper route): both walks end at the same point, the far corner of the parallelogram that a and b span. The amber diagonal from O to that corner is a + b, and it is also b + a. The dashed arrows are not new vectors &#8212; they are a and b moved so that each starts where the other ends.',
+    }),
+    differenceTips: demoUnitFrame({
+      svg: renderVectorArrowsV2(vaDifferenceTips),
+      caption: 'Subtraction as the arrow between two tips',
+      text: 'With a and b drawn from the same point, a &#8722; b is the amber arrow from the tip of b to the tip of a. Check it tip-to-tail: walk b, then a &#8722; b, and you arrive at the tip of a, so b + (a &#8722; b) = a. Here a &#8722; b = (5 &#8722; 2, 2 &#8722; 4) = (3, &#8722;2), and its length &#8730;13 is exactly how far apart the two tips are.',
     }),
   };
 
@@ -1524,6 +1552,8 @@ demoUnits}) {
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-sumRoutes'} dangerouslySetInnerHTML={{ __html: demoUnits.sumRoutes }} />,
+          `Because the two routes always meet at the same corner, a sum of vectors can be taken in any order.`,
           <div key={'obj2-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj2Table }} />,
         ]
@@ -1534,6 +1564,8 @@ demoUnits}) {
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-differenceTips'} dangerouslySetInnerHTML={{ __html: demoUnits.differenceTips }} />,
+          `Reading a − b as the arrow between two tips is what turns subtraction into a way of measuring distance.`,
         ]
     },
     {

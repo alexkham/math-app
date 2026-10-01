@@ -988,6 +988,10 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionDomainDiagrams from '@/app/components/functions/domain/functionDomainDiagrams'
+import functionSymmetryDiagrams from '@/app/components/functions/symmetry/functionSymmetryDiagrams'
+import functionAsymptotesDiagrams from '@/app/components/functions/asymptotes/functionAsymptotesDiagrams'
 
 
 export async function getStaticProps(){
@@ -1636,8 +1640,38 @@ const faqQuestions = {
     },
   }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    domainGraph: demoUnitFrame({
+      svg: functionDomainDiagrams.sqrt,
+      caption: 'f(x) = &#8730;x: domain [0, &#8734;) read off the axis',
+      text: 'The curve begins at the origin with a closed dot and runs off to the right, and the shaded band on the x-axis marks exactly the inputs that have a point above them: nothing to the left of 0, everything from 0 onward. Domain is the horizontal shadow of the graph. Switch families and watch the band change on the',
+      href: '/functions/visual-tools/domain',
+      linkText: 'domain explorer',
+    }),
+    symmetry: demoUnitFrame({
+      svg: functionSymmetryDiagrams.quadratic,
+      caption: 'f(x) = x&#178;: mirror symmetry about the y-axis',
+      text: 'The parabola and its reflection across the y-axis coincide point for point, which is the graphical meaning of f(&#8722;x) = f(x): an even function. Folding the picture along the vertical axis leaves it unchanged. Try x&#179;, which instead lands on itself after a half turn about the origin, on the',
+      href: '/functions/visual-tools/symmetry',
+      linkText: 'symmetry explorer',
+    }),
+    endBehavior: demoUnitFrame({
+      svg: functionAsymptotesDiagrams.expDecay,
+      caption: 'f(x) = e^(&#8722;x): the curve flattens onto y = 0',
+      text: 'Toward the right the curve sinks ever closer to the dashed line y = 0 without touching it: that line is a horizontal asymptote, and it is the end behaviour of the function written as a level. Toward the left the curve climbs without bound instead. Scan the far ends of any family on the',
+      href: '/functions/visual-tools/asymptotes',
+      linkText: 'asymptotes explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          obj4Table,
@@ -1670,7 +1704,7 @@ export default function AnalyzingFunctionsPage({
   summaryTable,
   faqQuestions,
   schemas,
-  obj10MiniTable
+  obj10MiniTable, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1698,6 +1732,8 @@ export default function AnalyzingFunctionsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-domainGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.domainGraph }} />,
+          `Range is read the same way from the vertical shadow of the graph.`,
         ]
     },
     {
@@ -1732,6 +1768,8 @@ export default function AnalyzingFunctionsPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-symmetry'} dangerouslySetInnerHTML={{ __html: demoUnits.symmetry }} />,
+          `Symmetry halves the work: one side of the graph determines the other.`,
         ]
     },
     {
@@ -1750,6 +1788,8 @@ export default function AnalyzingFunctionsPage({
           sectionsContent.obj8.content,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+                  <div key={'unit-endBehavior'} dangerouslySetInnerHTML={{ __html: demoUnits.endBehavior }} />,
+          `End behaviour and asymptotes are the same fact seen from the function and from the line.`,
         ]
     },
     {

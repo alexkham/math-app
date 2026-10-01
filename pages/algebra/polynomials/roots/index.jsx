@@ -10,6 +10,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 
 
 
@@ -614,8 +616,38 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    factors: demoUnitFrame({
+      svg: equationVisualizerDiagrams['cubic-three'],
+      caption: 'x&#179; &#8722; 3x = x(x &#8722; &#8730;3)(x + &#8730;3): three roots, three crossings',
+      text: 'Each linear factor contributes one crossing of the axis: at 0, at &#8730;3 and at &#8722;&#8730;3 the product vanishes because one factor does. Root and factor are the same information: r is a root exactly when (x &#8722; r) divides the polynomial, and the picture shows all three at once. Read the roots off the marbles on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+    multiplicity: demoUnitFrame({
+      svg: equationVisualizerDiagrams['cubic-one'],
+      caption: 'x&#179; = 0: the root 0 appears three times',
+      text: 'The three factors are all x, so the single root has multiplicity three and the curve flattens as it passes through the origin; a double root would touch and turn back without crossing. Multiplicity is visible as the shape of the curve at the root. Compare x&#178; = 0 and x&#179; = 0 on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+    graph: demoUnitFrame({
+      svg: equationVisualizerDiagrams['quad-two'],
+      caption: 'x&#178; &#8722; 4 = 0: the real roots are the x-intercepts',
+      text: 'The parabola crosses the axis at &#8722;2 and 2, the two real roots; complex roots, which the graph cannot show, would appear as a parabola that never reaches the axis. Every real root is an intercept and every intercept a real root. Move the parabola off the axis and watch the intercepts vanish on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+  };
+
   return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj4Table,
@@ -635,7 +667,7 @@ const schemas = {
 }
    }
 
-export default function RootsPage({seoData, sectionsContent, introContent, obj4Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas}) {
+export default function RootsPage({seoData, sectionsContent, introContent, obj4Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -675,6 +707,8 @@ export default function RootsPage({seoData, sectionsContent, introContent, obj4T
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-factors'} dangerouslySetInnerHTML={{ __html: demoUnits.factors }} />,
+          `The Factor Theorem in the rules page is this correspondence stated as a theorem.`,
         ]
     },
     {
@@ -706,6 +740,8 @@ export default function RootsPage({seoData, sectionsContent, introContent, obj4T
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+                  <div key={'unit-multiplicity'} dangerouslySetInnerHTML={{ __html: demoUnits.multiplicity }} />,
+          `Counting roots with multiplicity is what makes the degree bound exact.`,
         ]
     },
     {
@@ -761,6 +797,8 @@ export default function RootsPage({seoData, sectionsContent, introContent, obj4T
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+                  <div key={'unit-graph'} dangerouslySetInnerHTML={{ __html: demoUnits.graph }} />,
+          `Complex roots are the crossings the graph would need to leave the real line to show.`,
         ]
     },
     {

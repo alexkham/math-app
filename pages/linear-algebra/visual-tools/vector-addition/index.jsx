@@ -561,6 +561,9 @@ import AdditionWrapper from '../../../../app/components/linear-algebra copy/matr
 import vectorAdditionDiagrams from '../../../../app/components/linear-algebra copy/matrix/vectorAdditionDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -960,8 +963,117 @@ Geometrically the difference is the vector **from** the tip of $\\mathbf{v}$ **t
   }
 
 
+  const instructions = [
+    'The **Operation** control switches between **u + v** and **u − v**; the scenes are rebuilt with the new operator and the player returns to its first scene. [Learn more about addition and subtraction](!#addition-and-subtraction)',
+    'The **▲** / **▼** stepper sets the length shared by $u$ and $v$, from $1$ to $10$; $w$ always has the same length. [Learn more about choosing the length](!#choosing-vector-length)',
+    'Hover the **?** icon next to the length label for why $u$ and $v$ must have the same length. [Learn more about getting started](!#getting-started)',
+    '**▶ Play** runs the whole sum, **Next →** and **← Back** move one scene, **Reset** returns to the opening scene, and the speed menu sets the pace from Slow to Very Fast. [Learn more about the controls](!#getting-started)',
+    'Each scene highlights one component: $u_i$ in blue, $v_i$ in grey and $w_i$ in green, with two curved arrows flowing into $w_i$. [Learn more about reading a scene](!#the-scene-player)',
+    'The **Step explanations** log lists every scene so far with its formula, the current one highlighted. [Learn more about the step log](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real AdditionWrapper in
+     vector mode (opens on u + v, length 4, Step 1 / 6). */
+  const demos = {
+    'getting-started': {
+      title: 'Length, play, speed',
+      script: [
+        { say: `TAP ▼
+Length 3: u, v, w three slots each.
+Step 1 / 5. w all ?.` },
+        { click: { button: '▼', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+w fills left to right:
+u₁ + v₁, u₂ + v₂, u₃ + v₃.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6000 },
+        { say: `TAP Reset
+Back to Step 1 / 5.
+w empty again.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+0.7 s per scene.
+Same sweep, quicker.` },
+        { set: 'select', value: 700 },
+        { wait: 600 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 4000 },
+        { say: `TAP ▲ ▲
+Length 5. Step 1 / 7.
+One more scene per slot.` },
+        { click: { button: '▲', exact: true } },
+        { wait: 500 },
+        { click: { button: '▲', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'One component per scene',
+      script: [
+        { say: `TAP Next →
+w₁ = u₁ + v₁.
+u₁ blue, v₁ grey, w₁ green. Two arrows into w₁.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+w₂ = u₂ + v₂. Highlight moves one slot right.
+w₁ keeps u₁ + v₁.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ← Back
+Back to w₁ = u₁ + v₁. Step 2 / 6.
+Log card 2 highlighted.` },
+        { click: { button: '← Back', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ▶ Play
+w₂, w₃, w₄ in turn.
+Step 6 / 6: Done. w complete.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6000 },
+        { say: `TAP Reset
+Step 1 / 6. w all ? again.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2200 },
+      ],
+    },
+    'addition-and-subtraction': {
+      title: 'Plus or minus',
+      script: [
+        { say: `TAP u − v
+Operator between u and v: −.
+Scenes rebuilt. Step 1 / 6.` },
+        { click: { button: 'u − v', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Next →
+w₁ = u₁ − v₁.
+Same arrows, same slot. Only the sign changed.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ▶ Play
+u₂ − v₂ … u₄ − v₄.
+Done: subtraction is element-wise.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6000 },
+        { say: `TAP u + v
+Operator back to +.
+Step 1 / 6. w empty.` },
+        { click: { button: 'u + v', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+w₁ … w₄ = uᵢ + vᵢ.
+Same structure. Only the operator differs.` },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7200 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-vector-addition'),
       sectionsContent,
       stateUnits,
@@ -984,7 +1096,22 @@ Geometrically the difference is the vector **from** the tip of $\\mathbf{v}$ **t
   }
 }
 
-export default function MatrixAdditionVisualizer({ seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function MatrixAdditionVisualizer({ instructions, demos, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <AdditionWrapper mode='vectors' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -1006,13 +1133,13 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, sta
 
   const genericSections = [
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
-    plain('obj2', 'the-scene-player'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj2', 'the-scene-player')),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'one-component-at-a-time', 'step'),
     stateRow('obj13', 'the-completed-sum', 'done'),
     stateRow('obj14', 'switching-to-subtraction', 'subtract'),
-    plain('obj3', 'addition-and-subtraction'),
+    withDemo(plain('obj3', 'addition-and-subtraction')),
     plain('obj4', 'choosing-vector-length'),
     plain('obj5', 'what-vector-addition-is'),
     plain('obj6', 'key-formulas'),
@@ -1075,6 +1202,10 @@ export default function MatrixAdditionVisualizer({ seoData, sectionsContent, sta
       <br />
       <br />
       <h1 className='title' style={{ marginTop: '0px', marginBottom: '0px' }}>Vector Addition&Subtraction</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br />
       <div style={{ width: '80%', margin: 'auto' }}>
         <AdditionWrapper 

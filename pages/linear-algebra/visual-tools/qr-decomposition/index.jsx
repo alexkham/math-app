@@ -8,6 +8,9 @@ import QRWrapper from '../../../../app/components/linear-algebra copy/matrix/QRW
 import qrDiagrams from '../../../../app/components/linear-algebra copy/matrix/qrDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -434,8 +437,124 @@ Put together they give the least-squares recipe: $A\\mathbf{x} \\approx \\mathbf
   }
 
 
+  const instructions = [
+    'The **Shape** steppers (**▲** / **▼**) set $A$ from $2$ to $4$ rows and $2$ or $3$ columns; the label beside them gives the shapes of $Q$ and $R$. [Learn more about choosing the shape](!#choosing-the-shape)',
+    '**▶ Play** runs the factorization, **Next →** and **← Back** step one scene at a time, **Reset** returns to the opening scene, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'Each column runs the same cycle: start, one coefficient and one subtraction per finished column, then normalize; the **Step explanations** log keeps every step. [Learn more about the phases](!#the-phases)',
+    'Each scene highlights the columns it reads and the entry it writes, with arrows from $Q$ and $A$ into $R$ and from $R$ back into $Q$. [Learn more about reading a scene](!#the-scene-player)',
+    'The cells are symbolic: $Q$ shows the growing expression of each working column, $R$ shows $\\mathbf{q}_j \\cdot \\mathbf{a}_k$ above the diagonal and $\\|\\mathbf{u}_k\\|$ on it. [Learn more about the cells](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real QRWrapper
+     (opens on 3 x 3). Steppers: button[aria-label="Increase"/"Decrease"],
+     nth 0 = rows, nth 1 = columns. */
+  const demos = {
+    'getting-started': {
+      title: 'Shape, step, play',
+      script: [
+        { say: `TAP rows ▲
+A 4 × 3. Q is 4×3, R is 3×3.
+Tall A: the least-squares shape.` },
+        { click: { css: 'button[aria-label="Increase"]', nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP columns ▼
+A 4 × 2. Q is 4×2, R is 2×2.
+Step 1 / 8.` },
+        { click: { css: 'button[aria-label="Decrease"]', nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP Next → ×2
+u₁ = a₁, then r₁,₁ = ‖u₁‖.
+Step 3 / 8: q₁ = u₁ / r₁,₁.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ← Back
+Step 2 / 8: back to u₁ = a₁.
+Nothing normalized yet.` },
+        { click: { button: '← Back', exact: true } },
+        { wait: 2600 },
+        { say: `SELECT Fast → TAP ▶ Play
+Runs from here: q₁, r₁,₂, u₂ → q₂.
+Done: A = QR.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 5600 },
+      ],
+    },
+    'the-scene-player': {
+      title: 'One column cycle, scene by scene',
+      script: [
+        { say: `TAP Next →
+u₁ = a₁. Column 1 of A primary.
+Column 1 of Q accent: the copy.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next →
+r₁,₁ = ‖u₁‖ onto the diagonal of R.
+q₁ = u₁ / r₁,₁: a unit column.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next → ×2
+r₁,₂ = q₁ · a₂ into R, above the diagonal.
+Arrows from q₁ and a₂.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+u₂ −= r₁,₂ q₁. Arrow from R back into Q.
+Cells read aᵢ,₂ − r₁,₂ qᵢ,₁.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+r₂,₂ = ‖u₂‖, q₂ = u₂ / r₂,₂.
+Q column and R diagonal accent.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'choosing-the-shape': {
+      title: 'Two columns, three columns, tall, wide',
+      script: [
+        { say: `TAP columns ▼
+A 3 × 2. R is 2×2.
+One coefficient above the diagonal: r₁,₂.` },
+        { click: { css: 'button[aria-label="Decrease"]', nth: 1 } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+a₂ = r₁,₂ q₁ + r₂,₂ q₂.
+Done: A = QR.` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 6200 },
+        { say: `TAP columns ▲ → ▶ Play
+14 steps. u₃ −= r₁,₃ q₁, then r₂,₃ q₂.
+Projected onto q₁, q₂ — never onto a₂.` },
+        { click: { css: 'button[aria-label="Increase"]', nth: 1 } },
+        { wait: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 10200 },
+        { say: `TAP rows ▲
+A 4 × 3. Q is 4×3, R stays 3×3.
+Taller columns, same cycle.` },
+        { click: { css: 'button[aria-label="Increase"]', nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP rows ▼ ×2
+A 2 × 3: more columns than rows.
+Columns cannot be independent.` },
+        { click: { css: 'button[aria-label="Decrease"]', nth: 0 } },
+        { wait: 700 },
+        { click: { css: 'button[aria-label="Decrease"]', nth: 0 } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-qr-decomposition'),
       sectionsContent,
       stateUnits,
@@ -458,7 +577,22 @@ Put together they give the least-squares recipe: $A\\mathbf{x} \\approx \\mathbf
   }
 }
 
-export default function QRVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function QRVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <QRWrapper defaultK={3} defaultN={3} explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -480,15 +614,15 @@ export default function QRVisualizer({seoData, sectionsContent, stateUnits, expl
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     plain('obj2', 'the-phases'),
     stateRow('obj11', 'the-opening-scene', 'intro'),
     stateRow('obj12', 'recording-a-coefficient', 'coef'),
     stateRow('obj13', 'subtracting-the-projections', 'subtract'),
     stateRow('obj14', 'normalizing-into-q-and-the-diagonal-of-r', 'norm'),
     stateRow('obj15', 'the-completed-factorization', 'done'),
-    plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-the-shape'),
+    withDemo(plain('obj3', 'the-scene-player')),
+    withDemo(plain('obj4', 'choosing-the-shape')),
     plain('obj5', 'what-the-qr-decomposition-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -549,6 +683,10 @@ export default function QRVisualizer({seoData, sectionsContent, stateUnits, expl
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>QR Decomposition</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <QRWrapper

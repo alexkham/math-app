@@ -10,6 +10,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 
 
 
@@ -652,8 +654,24 @@ const schemas = {
   },
 }
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    basic: demoUnitFrame({
+      svg: equationVisualizerDiagrams['abs-two'],
+      caption: '|x| = 3 has solutions x = &#8722;3 and x = 3',
+      text: 'The level y = 3 cuts both arms of the V, so B &gt; 0 gives two solutions; at B = 0 the level touches only the corner and there is one; below the axis the level misses the graph and there is none. The three structures of the section are three positions of one line. Slide the level through the three cases on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+  };
+
 return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -683,7 +701,7 @@ export default function AbsoluteValueEquationsPage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas,
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -724,6 +742,8 @@ export default function AbsoluteValueEquationsPage({
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+                  <div key={'unit-basic'} dangerouslySetInnerHTML={{ __html: demoUnits.basic }} />,
+          `Everything else on this page is this picture with a more complicated expression inside the bars.`,
         ]
     },
     {

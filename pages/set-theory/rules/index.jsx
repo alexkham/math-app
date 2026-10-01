@@ -9,6 +9,9 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Sections from '@/app/components/page-components/section/Sections';
 import ExpandableTable from '@/app/components/generic-table/ExpandableTable';
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import twoSetsLawsVennDiagrams from '@/app/components/venn-diagrams/twoSetsLawsVennDiagrams'
+import threeSetsLawsVennDiagrams from '@/app/components/venn-diagrams/3-sets/threeSetsLawsVennDiagrams'
 
 
 export async function getStaticProps(){
@@ -214,8 +217,31 @@ $A^c$ is the **complement** of $A$ — everything in $U$ that is not in $A$. Thi
 Read that way, each law states that two different routes through these operations land on the same set.`,
   }
 
-    return {
+      // Operation A demonstration units: a frozen law state from the laws tools,
+  // an explanation panel, and the tool link, in one frame. Built here and
+  // rendered as content-array items. Only the two non-obvious laws: for the
+  // others both sides paint the same trivially-shaded region, which restates
+  // the formula in shapes.
+  const demoUnits = {
+    deMorgan: demoUnitFrame({
+      svg: twoSetsLawsVennDiagrams['dm-u'],
+      caption: '(A &#8746; B)&#8242; = A&#8242; &#8745; B&#8242;, frozen',
+      text: 'Both sides paint the same region &#8212; everything outside both circles. The complement of a union keeps only what lies in neither set, which is exactly what is outside <em>A</em> and also outside <em>B</em>. Check the second De Morgan law, and every other two-set identity, on the',
+      href: '/set-theory/visual-tools/two-sets-laws-venn',
+      linkText: 'two-set laws explorer',
+    }),
+    distributive: demoUnitFrame({
+      svg: threeSetsLawsVennDiagrams['dist-i-over-u'],
+      caption: 'A &#8745; (B &#8746; C) = (A &#8745; B) &#8746; (A &#8745; C), frozen',
+      text: 'Both sides paint the same two lenses: the part of <em>A</em> that overlaps <em>B</em>, and the part of <em>A</em> that overlaps <em>C</em>. Intersection spreads across a union the way multiplication spreads across a sum. Step through the other three-set identities on the',
+      href: '/set-theory/visual-tools/three-sets-laws-venn',
+      linkText: 'three-set laws explorer',
+    }),
+  };
+
+  return {
       props:{
+        demoUnits,
         sectionsContent,
         setAlgebraLawsData,
         introContent,
@@ -224,13 +250,13 @@ Read that way, each law states that two different routes through these operation
   }
   
 
-export default function SetTheoryRulesPage({sectionsContent,setAlgebraLawsData,introContent}) {
+export default function SetTheoryRulesPage({demoUnits,sectionsContent,setAlgebraLawsData,introContent}) {
 
 
     
   const setTheoryRulesSections=[
     {
-        id:' idempotent',
+        id:'idempotent',
         title:sectionsContent.idempotent.title,
         link:'',
         content:[
@@ -284,6 +310,8 @@ export default function SetTheoryRulesPage({sectionsContent,setAlgebraLawsData,i
              copyableFields={["formula"]}
              includedFields={ ["law", "formula", "explanation"]} />
              </div> ,
+            <div key={'unit-distributive'} dangerouslySetInnerHTML={{ __html: demoUnits.distributive }} />,
+            `Union spreads across intersection as well, which has no counterpart in ordinary arithmetic.`,
         ]
     },
     {
@@ -326,6 +354,8 @@ export default function SetTheoryRulesPage({sectionsContent,setAlgebraLawsData,i
              copyableFields={["formula"]}
              includedFields={ ["law", "formula", "explanation"]} />
              </div> ,
+            <div key={'unit-deMorgan'} dangerouslySetInnerHTML={{ __html: demoUnits.deMorgan }} />,
+            `The same exchange runs the other way: the complement of an intersection is the union of the complements.`,
         ]
     }
 ]

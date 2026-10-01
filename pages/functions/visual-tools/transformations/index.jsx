@@ -15,6 +15,9 @@ import FunctionTransformations from '../../../../app/components/functions/transf
 import transformDiagrams from '../../../../app/components/functions/transformations/functionTransformationsDiagrams'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -401,8 +404,164 @@ Reading a transformed formula backwards into its four moves is the skill this ta
       '[Learn more about combining transformations](!#combining-all-four-transformations) · [All five tabs](!#the-four-tabs-and-the-custom-tab)',
   };
 
+  const instructions = [
+    'The picker on the left lists ten base functions; picking one returns $a$, $k$, $b$, $h$ to their defaults and keeps the active tab. [Learn more about picking a base function](!#picking-a-base-function)',
+    'The plot shows the base $f(x)$ as a dashed gray curve and the transformed $g(x) = a \\cdot f(b(x - h)) + k$ as a solid blue curve, with both equations in the header. [Learn more about reading the two curves](!#reading-the-two-curves)',
+    'The **S**, **M**, **L** and **XL** buttons set the plot size. [Learn more about the plot panel](!#getting-started-with-the-visualizer)',
+    'The **Applied** strip shows $a$, $k$, $b$, $h$; a parameter away from its default lights up blue. [Learn more about the Applied strip](!#the-applied-chip-strip)',
+    'The tab bar isolates one parameter (**V. scale**, **V. shift**, **H. scale**, **H. shift**) or shows all four sliders in **Custom**; values carry over between tabs. [Learn more about the tabs](!#the-four-tabs-and-the-custom-tab)',
+    'In a single-parameter tab, **Manual** means dragging the slider; **Auto** swaps in step-back, play and step-forward buttons plus speed chips. [Learn more about Manual and Auto mode](!#manual-vs-auto-mode)',
+    '**Reset** in a single-parameter tab resets that parameter; **Reset all** in Custom resets all four. [Learn more about the Reset buttons](!#the-four-tabs-and-the-custom-tab)',
+    'The info panel\'s **Explanation** tab gives the general rule and what the current value does to the chosen function; **About** gives a short note on the active tab. [Learn more about the info panel](!#the-side-info-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FunctionTransformations tool
+     (opens on Quadratic, V. scale tab, Manual). A single-parameter tab shows one range
+     (index 0); Custom shows four (0 a, 1 k, 2 b, 3 h). Tab labels gain a value badge when
+     non-default, so tabs are matched by prefix. Auto's ▶ is never pressed (timed sweep). */
+  const demos = {
+    'picking-a-base-function': {
+      title: 'Same move, different bases',
+      script: [
+        { say: `DRAG a → −1
+Blue g = −x². Opens downward.
+Dashed gray f = x² stays put.` },
+        { slide: { range: 0 }, to: -1, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Sine, DRAG a → −1
+Pick resets a to 1. Tab stays V. scale.
+g = −sin(x). Flipped, still between −1 and 1.` },
+        { click: { button: 'Sine', exact: true } },
+        { wait: 600 },
+        { slide: { range: 0 }, to: -1, ms: 1200 },
+        { wait: 2800 },
+        { say: `TAP Exponential, DRAG a → −1
+g = −eˣ.
+Flips below the x-axis.` },
+        { click: { button: 'Exponential', exact: true } },
+        { wait: 600 },
+        { slide: { range: 0 }, to: -1, ms: 1200 },
+        { wait: 2600 },
+        { say: `TAP Square root, DRAG a → −1
+g = −√x.
+Flips below the x-axis.` },
+        { click: { button: 'Square root', exact: true } },
+        { wait: 600 },
+        { slide: { range: 0 }, to: -1, ms: 1200 },
+        { wait: 2600 },
+        { say: `TAP Logarithmic
+a back to 1.
+Blue g on top of dashed f.` },
+        { click: { button: 'Logarithmic', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-four-tabs-and-the-custom-tab': {
+      title: 'Tabs and Custom',
+      script: [
+        { say: `DRAG a → 2 (V. scale)
+g = 2x². Narrower.
+Tab badge shows 2.` },
+        { slide: { range: 0 }, to: 2, ms: 1300 },
+        { wait: 2400 },
+        { say: `TAP V. shift, DRAG k → 3
+a = 2 kept. g = 2x² + 3.
+Vertex (0, 3).` },
+        { click: { button: 'V. shift' } },
+        { wait: 600 },
+        { slide: { range: 0 }, to: 3, ms: 1300 },
+        { wait: 2600 },
+        { say: `TAP H. shift, DRAG h → 2
+g = 2(x − 2)² + 3.
+Vertex (2, 3).` },
+        { click: { button: 'H. shift' } },
+        { wait: 600 },
+        { slide: { range: 0 }, to: 2, ms: 1300 },
+        { wait: 2600 },
+        { say: `TAP Custom
+All four sliders at once.
+Chips a, k, h lit blue.` },
+        { click: { button: 'Custom' } },
+        { wait: 2600 },
+        { say: `TAP Reset all
+a, k, b, h back to defaults.
+g back on top of f.` },
+        { click: { button: 'Reset all', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'manual-vs-auto-mode': {
+      title: 'Manual and Auto',
+      script: [
+        { say: `TAP V. shift, TAP Auto
+Slider dims. ⏮ ▶ ⏭ and Speed appear.
+▶ sweeps k between −6 and 6.` },
+        { click: { button: 'V. shift' } },
+        { wait: 500 },
+        { click: { button: 'Auto', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ⏭ ×5
+One step = 0.1.
+k = 0.5. Curve up 0.5.` },
+        { click: { button: '⏭', exact: true } },
+        { click: { button: '⏭', exact: true } },
+        { click: { button: '⏭', exact: true } },
+        { click: { button: '⏭', exact: true } },
+        { click: { button: '⏭', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ⏮ ×2
+k = 0.3.` },
+        { click: { button: '⏮', exact: true } },
+        { click: { button: '⏮', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Manual
+Step buttons gone. Slider live.
+k stays 0.3.` },
+        { click: { button: 'Manual', exact: true } },
+        { wait: 2400 },
+        { say: `DRAG k → −2
+g = x² − 2.
+Vertex (0, −2).` },
+        { slide: { range: 0 }, to: -2, ms: 1400 },
+        { wait: 2400 },
+      ],
+    },
+    'the-side-info-panel': {
+      title: 'The info panel',
+      script: [
+        { say: `DRAG a → 0.5
+Explanation, Applied to quadratic:
+wider, rises only 0.5× as fast.` },
+        { slide: { range: 0 }, to: 0.5, ms: 1300 },
+        { wait: 2800 },
+        { say: `TAP About
+Short note on V. scale:
+roots and x-positions never move.` },
+        { click: { button: 'About', exact: true } },
+        { wait: 2600 },
+        { say: `TAP H. scale
+About follows the tab.
+b > 1 compresses. The backwards one.` },
+        { click: { button: 'H. scale' } },
+        { wait: 2600 },
+        { say: `DRAG b → 2
+g = 0.5(2x)².
+Squeezed toward the y-axis.` },
+        { slide: { range: 0 }, to: 2, ms: 1300 },
+        { wait: 2400 },
+        { say: `TAP Explanation
+General rules for b,
+then: b = 2 squeezes horizontally by 2×.` },
+        { click: { button: 'Explanation', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('functions-transformations'),
       sectionsContent,
       introContent,
@@ -426,18 +585,33 @@ Reading a transformed formula backwards into its four moves is the skill this ta
 }
 
 
-export default function FunctionTransformationsPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function FunctionTransformationsPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FunctionTransformations explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const unit = (key) => <div key={'u-' + key} dangerouslySetInnerHTML={{ __html: stateUnits[key] }} />;
 
   const genericSections = [
     { id:'getting-started-with-the-visualizer', title:sectionsContent.obj1.title, link:sectionsContent.obj1.link, content:[sectionsContent.obj1.content] },
-    { id:'picking-a-base-function', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[sectionsContent.obj2.content] },
-    { id:'the-four-tabs-and-the-custom-tab', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[sectionsContent.obj3.content] },
-    { id:'manual-vs-auto-mode', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[sectionsContent.obj4.content] },
+    { id:'picking-a-base-function', title:sectionsContent.obj2.title, link:sectionsContent.obj2.link, content:[demo('picking-a-base-function'), sectionsContent.obj2.content] },
+    { id:'the-four-tabs-and-the-custom-tab', title:sectionsContent.obj3.title, link:sectionsContent.obj3.link, content:[demo('the-four-tabs-and-the-custom-tab'), sectionsContent.obj3.content] },
+    { id:'manual-vs-auto-mode', title:sectionsContent.obj4.title, link:sectionsContent.obj4.link, content:[demo('manual-vs-auto-mode'), sectionsContent.obj4.content] },
     { id:'reading-the-two-curves', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[sectionsContent.obj5.content] },
     { id:'the-applied-chip-strip', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[sectionsContent.obj6.content] },
-    { id:'the-side-info-panel', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[sectionsContent.obj7.content] },
+    { id:'the-side-info-panel', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[demo('the-side-info-panel'), sectionsContent.obj7.content] },
     { id:'the-four-transformations-mathematically', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[sectionsContent.obj8.content] },
     { id:'why-horizontal-transformations-are-backwards', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link, content:[sectionsContent.obj9.content] },
     { id:'the-vertical-scale', title:sectionsContent.obj11.title, link:sectionsContent.obj11.link, content:[sectionsContent.obj11.content, unit('a'), sectionsContent.obj11.after] },
@@ -501,6 +675,10 @@ export default function FunctionTransformationsPage({relatedTools, seoData, sect
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'30px'}}>Transformations of Functions</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <div style={{transform:'scale(1.1)'}}>
       <FunctionTransformations explanations={explanations}/>

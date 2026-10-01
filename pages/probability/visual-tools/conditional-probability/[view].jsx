@@ -17,6 +17,8 @@ import waffleChartDiagrams from '@/app/components/probability/conditional-probab
 import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
 import explanations2x2 from '@/app/components/probability/conditional-probability-demo/2x2explanations'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticPaths() {
   const paths = [
@@ -92,7 +94,7 @@ export async function getStaticProps({ params }) {
 sectionsContent: {
   obj1: {
     title: `Getting Started with the Tree Diagram`,
-    content: `This interactive tree diagram visualizes [conditional probability](!/probability/conditional-probability) as branching paths from left to right. The diagram starts at a single point and splits into branches representing possible outcomes, with probabilities labeled along each path.
+    content: `This interactive tree diagram visualizes [conditional probability](!/probability/conditional-probability) as branching paths from left to right. The diagram starts at a single point and splits into branches representing possible outcomes, with [probabilities](!/probability/axioms) labeled along each path.
 
 The left side displays the tree structure with nodes and connecting branches. The right side shows calculated probabilities organized into panels: joint probabilities, marginal probabilities, and conditional probabilities. All values update instantly as you adjust the input parameters.
 
@@ -106,7 +108,7 @@ Three sliders below the tree control the fundamental probabilities that determin
     title: `Using the Probability Sliders`,
     content: `Three sliders control the tree diagram's probability structure:
 
-• P(A) sets the probability of event A occurring at the first branch. Moving this slider changes how probability mass splits between the upper branch (A) and lower branch (Aᶜ). Values range from 0.01 to 0.99.
+• P(A) sets the probability of [event](!/probability/events) A occurring at the first branch. Moving this slider changes how probability mass splits between the upper branch (A) and lower branch (Aᶜ). Values range from 0.01 to 0.99.
 
 • P(B|A) sets the [conditional probability](!/probability/conditional-probability) of B given that A has occurred. This determines how the A branch splits into outcomes B and Bᶜ on the second level.
 
@@ -343,9 +345,9 @@ Confusing the two is the standard error. $0.42 + 0.18 = 0.6$, not $1$ — the br
 sectionsContent: {
   obj1: {
     title: `Getting Started with the Venn Diagram`,
-    content: `This interactive Venn diagram visualizes [conditional probability](!/probability/conditional-probability) through geometric regions. The rectangular sample space Ω is divided into vertical compartments (B₁, B₂, B₃, etc.), while event A appears as an indigo ellipse that overlaps these compartments to different degrees.
+    content: `This interactive [Venn diagram](!/probability/sets) visualizes [conditional probability](!/probability/conditional-probability) through geometric regions. The rectangular [sample space](!/probability/sample-space) Ω is divided into vertical compartments (B₁, B₂, B₃, etc.), while [event](!/probability/events) A appears as an indigo ellipse that overlaps these compartments to different degrees.
 
-The left side displays the diagram with labeled areas. The middle column shows the total probability P(A) with calculation breakdowns. The right column displays conditional probabilities P(A|Bᵢ) for each compartment with step-by-step formulas.
+The left side displays the diagram with labeled areas. The middle column shows the total [probability](!/probability/axioms) P(A) with calculation breakdowns. The right column displays conditional probabilities P(A|Bᵢ) for each compartment with step-by-step formulas.
 
 Click any compartment to highlight the intersection A ∩ Bᵢ and see exactly how conditional probability is calculated from areas. The visualization demonstrates that knowing which compartment you're in changes the probability of event A.`,
     before: ``,
@@ -443,7 +445,7 @@ Area(A) = Area(A ∩ B₁) + Area(A ∩ B₂) + Area(A ∩ B₃)
 **From probabilities:**
 P(A) = P(B₁)·P(A|B₁) + P(B₂)·P(A|B₂) + P(B₃)·P(A|B₃)
 
-Both methods yield P(A) = 0.68. The verification section confirms the law of total probability by showing each term and their sum. This demonstrates that total probability is a weighted average of conditional probabilities, weighted by the probability of each condition.`,
+Both methods yield P(A) = 0.68. The verification section confirms the [law of total probability](!/probability/visual-tools/total-probability) by showing each term and their sum. This demonstrates that total probability is a weighted average of conditional probabilities, weighted by the probability of each condition.`,
     before: ``,
     after: ``,
     link: '',
@@ -599,9 +601,9 @@ sectionsContent: {
     title: `Getting Started with the Waffle Chart`,
     content: `This interactive waffle chart visualizes [conditional probability](!/probability/conditional-probability) through proportional grid displays. The chart divides the sample space into four equal regions (A, B, C, D), each containing a 10×10 grid of 100 tiles.
 
-Dark blue tiles represent an event occurring within each region. The distribution of dark tiles varies by region, controlled by individual sliders. This creates a scenario where the same event has different conditional probabilities depending on which region you're in.
+Dark blue tiles represent an [event](!/probability/events) occurring within each region. The distribution of dark tiles varies by region, controlled by individual sliders. This creates a scenario where the same event has different conditional probabilities depending on which region you're in.
 
-The layout shows all four grids in a row at the top, with controls and statistics below. Each region header displays its conditional probability P(Event | Region), making it easy to compare across regions. The right panel shows total probability calculated using the law of total probability.`,
+The layout shows all four grids in a row at the top, with controls and statistics below. Each region header displays its conditional probability P(Event | Region), making it easy to compare across regions. The right panel shows total probability calculated using the [law of total probability](!/probability/visual-tools/total-probability).`,
     before: ``,
     after: ``,
     link: '',
@@ -609,7 +611,7 @@ The layout shows all four grids in a row at the top, with controls and statistic
 
   obj2: {
     title: `Understanding the Grid Structure`,
-    content: `Each region contains exactly 100 tiles arranged in a 10×10 grid. Tiles are either the region's background color (event did not occur) or dark blue (event occurred). The number of dark blue tiles directly represents the percentage probability within that region.
+    content: `Each region contains exactly 100 tiles arranged in a 10×10 grid. Tiles are either the region's background color (event did not occur) or dark blue (event occurred). The number of dark blue tiles directly represents the percentage [probability](!/probability/axioms) within that region.
 
 The four regions have equal probability:
 
@@ -835,7 +837,7 @@ Move any one slider away and the equality breaks immediately. That fragility is 
 sectionsContent: {
   obj1: {
     title: `Getting Started with the Contingency Table`,
-    content: `This interactive 2×2 contingency table displays the complete probability relationship between two events A and B. The table organizes [joint probabilities](!/probability/joint-probability), marginal probabilities, and [conditional probabilities](!/probability/conditional-probability) in a single unified view.
+    content: `This interactive 2×2 contingency table displays the complete probability relationship between two [events](!/probability/events) A and B. The table organizes [joint probabilities](!/probability/joint-probability), marginal [probabilities](!/probability/axioms), and [conditional probabilities](!/probability/conditional-probability) in a single unified view.
 
 The left side shows the main probability table with four interior cells (joint probabilities) and row/column totals (marginal probabilities). The right side displays four conditional probability panels showing P(B|A), P(B|Aᶜ), P(A|B), and P(A|Bᶜ).
 
@@ -965,7 +967,7 @@ The table shows P(B) calculated via [total probability](!/probability/total-prob
 
   obj8: {
     title: `Related Tools and Concepts`,
-    content: `Contingency tables connect to several probability concepts and tools on this site:
+    content: `[Contingency tables](!/probability/visual-tools/contingency-tables) connect to several probability concepts and tools on this site:
 
 **Theory Pages:**
 
@@ -1222,6 +1224,7 @@ Both conditionals live here too, as the same cell over two different totals: $P(
 
   return {
     props: {
+      relatedTools: getRelatedTools(`probability-conditional-probability-${params.view}`),
       sectionsContent: currentConfig.sectionsContent,
       introContent,
       faqQuestions: currentConfig.faqQuestions,
@@ -1285,7 +1288,7 @@ function getFeatureList(view) {
 }
 
 export default function ConditionalProbabilityViewPage({ 
-  seoData, 
+  relatedTools, seoData, 
   sectionsContent, 
   stateUnits,
   sectionOrder,
@@ -1405,6 +1408,7 @@ export default function ConditionalProbabilityViewPage({
           />
           <br />
           <br />
+          <RelatedTools tools={relatedTools}/>
           <Sections sections={genericSections} />
         </>
       )}

@@ -9,6 +9,11 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import TwoSetsLawsExplorer from '../../../../app/components/venn-diagrams/TwoSetsLawsExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import twoSetsLawsVennDiagrams from '../../../../app/components/venn-diagrams/twoSetsLawsVennDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -35,16 +40,16 @@ export async function getStaticProps(){
     obj0: {
       title: `Key Terms`,
       content: `
-- **Set identity** — an equation between two set expressions that holds for all sets
-- **Idempotent law** — $A \\cup A = A$, $A \\cap A = A$
-- **Commutative law** — $A \\cup B = B \\cup A$, $A \\cap B = B \\cap A$
-- **Identity element** — $\\emptyset$ for union, $U$ for intersection
-- **Annihilator** — $U$ for union, $\\emptyset$ for intersection
-- **Complement law** — $A \\cup A' = U$, $A \\cap A' = \\emptyset$
-- **Double complement** — $(A')' = A$
-- **De Morgan's laws** — $(A \\cup B)' = A' \\cap B'$, $(A \\cap B)' = A' \\cup B'$
+- [Set identity](!/set-theory/venn-diagrams#5) — an equation between two set expressions that holds for all [sets](!/set-theory/basics#1)
+- [Idempotent law](!/set-theory/rules#idempotent) — $A \\cup A = A$, $A \\cap A = A$
+- [Commutative law](!/set-theory/rules#commutative) — $A \\cup B = B \\cup A$, $A \\cap B = B \\cap A$
+- [Identity element](!/set-theory/rules#identity) — $\\emptyset$ for [union](!/set-theory/operations#1), $U$ for [intersection](!/set-theory/operations#2)
+- [Annihilator](!/set-theory/rules#identity) — $U$ for union, $\\emptyset$ for intersection
+- [Complement law](!/set-theory/rules#complement) — $A \\cup A' = U$, $A \\cap A' = \\emptyset$
+- [Double complement](!/set-theory/rules#complement) — $(A')' = A$
+- [De Morgan's laws](!/set-theory/rules#de_morgan) — $(A \\cup B)' = A' \\cap B'$, $(A \\cap B)' = A' \\cup B'$
 - **Absorption law** — $A \\cup (A \\cap B) = A$, $A \\cap (A \\cup B) = A$
-- **Visual proof** — two diagrams shading the same regions confirm an identity
+- [Visual proof](!/set-theory/venn-diagrams#5) — two diagrams shading the same regions confirm an identity
 `,
       before: ``,
       after: `
@@ -54,7 +59,7 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Explorer`,
-      content: `Open the explorer and you'll see two miniature Venn diagrams side by side, separated by an equals sign. The left diagram shades the regions for the **left-hand side** of an identity; the right diagram shades the regions for the **right-hand side**. When the two shaded patterns match, the identity holds — and a green badge below the diagrams confirms it.
+      content: `Open the explorer and you'll see two miniature [Venn diagrams](!/set-theory/venn-diagrams) side by side, separated by an equals sign. The left diagram shades the regions for the **left-hand side** of an identity; the right diagram shades the regions for the **right-hand side**. When the two shaded patterns match, the identity holds — and a green badge below the diagrams confirms it.
 
 The current identity is shown as a badge above the diagrams (e.g. $A \\cup A = A$). Each side has a label showing the specific expression it represents. The first identity loads automatically, so you can start interacting immediately.
 
@@ -74,7 +79,7 @@ The interface has three control areas: the **category tabs** at the top, the **f
 • [Complement](!#the-complement-laws) — laws involving $A'$, including the double complement
 • [De Morgan's Laws](!#de-morgans-laws-and-their-mirrors) — the two complement-distribution laws
 • [Absorption](!#the-absorption-laws) — $A$ absorbs $A \\cap B$ in a union, and $A \\cup B$ in an intersection
-• [Difference](!#the-difference-identities) — equivalent forms for $A \\setminus B$ and the symmetric difference
+• [Difference](!#the-difference-identities) — equivalent forms for $A \\setminus B$ and the [symmetric difference](!/set-theory/operations#5)
 • [Compound Complements](!#the-compound-complements) — complements of mixed expressions like $(A \\cup B')'$
 
 Click a tab to switch the row of formula buttons below it. The current identity stays selected across tab switches, so you can browse other groups without losing context.`,
@@ -143,6 +148,24 @@ The navigation strip at the bottom has **Previous** and **Next** buttons that cy
       link: '',
     },
 
+    obj44: {
+      title: `The Explanation Panel`,
+      content: `The **Explanation** panel sits to the right of the diagrams. Its top line names the loaded law, for example **Complement of Union**, and prints the full equation under the name, such as $(A \\cup B)' = A' \\cap B'$.
+
+Below the name are two tabs:
+
+• **Overview** — a one-line **Definition** of the law in words, such as "The complement of a union equals the intersection of the complements."
+
+• **Learn More** — a short note headed **On This Page** that says what the shaded pair shows, followed by two links: one to the section on this page for that single law, and one to the section for its whole group.
+
+The panel always opens on **Overview**. Loading a different law, through a formula button, the **Jump to** menu, or **Previous** and **Next**, switches it back to **Overview**, so open **Learn More** after you settle on a law.
+
+The panel puts the law into words; the two diagrams and the [match indicator](!#the-match-indicator) show that it holds. How to compare the two shadings region by region is covered in [Reading the Side-by-Side Proof](!#reading-the-side-by-side-proof).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
     obj7: {
       title: `What is a Set Identity?`,
       content: `A **set identity** is an equation between two set expressions that holds for every possible choice of the sets involved. The equation $A \\cup B = B \\cup A$ is an identity because it is true regardless of what $A$ and $B$ are. By contrast, $A \\cup B = A$ is not an identity — it holds only when $B \\subseteq A$.
@@ -187,7 +210,7 @@ For the algebraic proofs and the general $n$-set form, see **De Morgan's laws**.
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Two-Set Basic Identities** — the companion explorer for shading individual operations (union, intersection, complement, differences) rather than identity equations.
+      content: `[Two-Set Basic Identities](!/set-theory/visual-tools/two-sets-basic-venn) — the companion explorer for shading individual operations (union, intersection, complement, differences) rather than identity equations.
 
 **Set Operations** — formal definitions of union, intersection, complement, difference, and symmetric difference.
 
@@ -197,9 +220,15 @@ For the algebraic proofs and the general $n$-set form, see **De Morgan's laws**.
 
 **Set Laws and Identities** — the full algebraic catalog of laws on sets.
 
-**Three-Set Venn Diagram** — extends visual proof techniques to three overlapping sets.
+[Three-Set Venn Diagram](!/set-theory/visual-tools/three-sets-basic-venn) — extends visual proof techniques to three [overlapping sets](!/set-theory/relationships#4).
 
-**Set Theory Definitions** — glossary of foundational terms used throughout set algebra.`,
+**Set Theory Definitions** — glossary of foundational terms used throughout set algebra.
+
+[Three-Set Laws and Identities Explorer](!/set-theory/visual-tools/three-sets-laws-venn) — the same catalogue of laws on three sets.
+
+[Venn Diagram and Truth Table Explorer](!/set-theory/visual-tools/venn-truth-table) — the laws checked as matching truth-table columns.
+
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — shade both sides of any identity on up to five sets.`,
       before: ``,
       after: ``,
       link: '',
@@ -221,7 +250,7 @@ Idempotence is one of the properties that separates set algebra from ordinary ar
       title: `The Commutative Laws`,
       content: `Order does not matter for the two central operations: [union commutes](!#commutative-law-for-union) and [intersection commutes](!#commutative-law-for-intersection). Both proofs are pictures of left-right symmetry — swapping the operands relabels the circles without moving a single region.
 
-The commutative pair is the baseline against which the non-commutative parts of the catalog stand out: set difference, treated in [the difference identities](!#the-difference-identities), is the standard example of an operation where order emphatically does matter.`,
+The commutative pair is the baseline against which the non-commutative parts of the catalog stand out: [set difference](!/set-theory/operations#4), treated in [the difference identities](!#the-difference-identities), is the standard example of an operation where order emphatically does matter.`,
       before: ``,
       after: ``,
       link: '',
@@ -229,7 +258,7 @@ The commutative pair is the baseline against which the non-commutative parts of 
 
     obj13: {
       title: `Identity and Annihilation`,
-      content: `Four laws fix how the two extreme sets interact with the two operations. The empty set is the identity for union ([union with the empty set](!#union-with-the-empty-set)) and the annihilator for intersection ([intersection with the empty set](!#intersection-with-the-empty-set)); the universe is the identity for intersection ([intersection with the universe](!#intersection-with-the-universe)) and the annihilator for union ([union with the universe](!#union-with-the-universe)).
+      content: `Four laws fix how the two extreme sets interact with the two operations. The [empty set](!/set-theory/basics#3) is the identity for union ([union with the empty set](!#union-with-the-empty-set)) and the annihilator for intersection ([intersection with the empty set](!#intersection-with-the-empty-set)); the universe is the identity for intersection ([intersection with the universe](!#intersection-with-the-universe)) and the annihilator for union ([union with the universe](!#union-with-the-universe)).
 
 The pattern is a perfect duality: swap $\\cup$ with $\\cap$ and $\\emptyset$ with $U$, and each law becomes another law of the group. This $\\emptyset \\leftrightarrow U$ mirror runs through the whole algebra and returns at full strength in De Morgan's laws.`,
       before: ``,
@@ -451,7 +480,7 @@ Absorption is the law that shrinks expressions during simplification, and one of
 
     obj34: {
       title: `Absorption by Intersection`,
-      content: `$A \\cap (A \\cup B) = A$: restricting a set to a superset of itself is no restriction. Both frames shade the plain circle of $A$.`,
+      content: `$A \\cap (A \\cup B) = A$: restricting a set to a [superset](!/set-theory/subsets#3) of itself is no restriction. Both frames shade the plain circle of $A$.`,
       before: ``,
       after: `The inner expression $A \\cup B$ contains all of $A$, so intersecting $A$ with it discards nothing. Again $B$ evaporates from the result — the mirror of the evaporation in [absorption by union](!#absorption-by-union), with the roles of $\\cup$ and $\\cap$ exchanged.
 
@@ -756,8 +785,121 @@ Closing the catalog here is fitting: the four compound complements demonstrate t
     }
   }
 
+  const instructions = [
+    'The eight **category tabs**, from **Idempotent** to **Compound Complements**, switch the row of formula buttons below them; the loaded law stays on screen while you browse. [Learn more about the category tabs](!#navigating-category-tabs)',
+    'Tap a **formula button**, such as $A \\cup A\' = U$, to load that law into both diagrams; the badge above them shows the full equation. [Learn more about selecting an identity](!#selecting-an-identity)',
+    'The **Jump to** menu lists all 26 laws grouped by tab; picking one also switches to its tab. [Learn more about the Jump to menu](!#selecting-an-identity)',
+    'The left diagram shades the left-hand side and the right diagram the right-hand side, each labelled above it; hover a region to see its name. [Learn more about reading the side-by-side proof](!#reading-the-side-by-side-proof)',
+    'The badge under the diagrams reads **✓ Regions match — identity holds** when both sides shade the same regions; every law in the catalog passes. [Learn more about the match indicator](!#the-match-indicator)',
+    'The **Theme** panel sets the shading **Color** and **Opacity** from 0.00 to 1.00 for both diagrams; **Reset** returns blue at 0.85. [Learn more about the theme controls](!#theme-controls-and-navigation)',
+    '**← Previous** and **Next →** step through the 26 laws in tab order and wrap around; the counter shows the position, such as 1 / 26. [Learn more about Previous and Next](!#theme-controls-and-navigation)',
+    'The **Explanation** panel names the law; **Overview** gives its definition and **Learn More** links to the law\'s own section on this page. [Learn more about the explanation panel](!#the-explanation-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real TwoSetsLawsExplorer
+     (opens on A ∪ A = A, Idempotent tab, opacity 0.85). One range input: 0 = Opacity.
+     Jump to is the only <select>; option values are identity ids. */
+  const demos = {
+    'navigating-category-tabs': {
+      title: 'Category tabs and formula buttons',
+      script: [
+        { say: `TAP Complement
+Button row: five complement laws.
+Diagrams still show A ∪ A = A.` },
+        { click: { button: 'Complement', exact: true } },
+        { wait: 2600 },
+        { say: `TAP A ∪ A' = U
+Both sides: whole rectangle shaded.
+✓ Regions match.` },
+        { click: { button: "A ∪ A' = U", exact: true } },
+        { wait: 2600 },
+        { say: `TAP De Morgan's Laws → (A ∪ B)' = A' ∩ B'
+Both sides: outside region only.` },
+        { click: { button: "De Morgan's Laws", exact: true } },
+        { wait: 700 },
+        { click: { button: "(A ∪ B)' = A' ∩ B'", exact: true } },
+        { wait: 2800 },
+        { say: `TAP Absorption → A ∪ (A ∩ B) = A
+Both sides: full circle A.
+B adds nothing.` },
+        { click: { button: 'Absorption', exact: true } },
+        { wait: 700 },
+        { click: { button: 'A ∪ (A ∩ B) = A', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Compound Complements → (A' ∪ B)' = A ∩ B'
+Both sides: A-only crescent.` },
+        { click: { button: 'Compound Complements', exact: true } },
+        { wait: 700 },
+        { click: { button: "(A' ∪ B)' = A ∩ B'", exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'selecting-an-identity': {
+      title: 'Jump to and the explanation panel',
+      script: [
+        { say: `SELECT Jump to → A △ B = (A \\ B) ∪ (B \\ A)
+Tab switches to Difference.
+Each side: both crescents, lens blank.` },
+        { set: 'select', value: 'sd-1' },
+        { wait: 2800 },
+        { say: `TAP Learn More
+Two private crescents glued by union.
+Links to this law's section.` },
+        { click: { button: 'Learn More', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Jump to → (A ∩ B)' = A' ∪ B'
+Tab: De Morgan's Laws.
+Each side: all but the lens. Panel back on Overview.` },
+        { set: 'select', value: 'dm-i' },
+        { wait: 3000 },
+        { say: `TAP Learn More
+Escaping the overlap:
+miss only one set.` },
+        { click: { button: 'Learn More', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Jump to → A ∩ ∅ = ∅
+Both sides blank.
+Still ✓ Regions match.` },
+        { set: 'select', value: 'ann-i' },
+        { wait: 2600 },
+      ],
+    },
+    'theme-controls-and-navigation': {
+      title: 'Theme, Previous and Next',
+      script: [
+        { say: `DRAG Opacity → 0.30
+Shading paler on both sides. Readout 0.30.` },
+        { slide: { range: 0 }, to: 0.3, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP Next →
+2 / 26: A ∩ A = A.
+Opacity 0.30 kept.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ← Previous ×2
+Wraps: 26 / 26, (A' ∩ B)' = A ∪ B'.
+Tab: Compound Complements.` },
+        { click: { button: '← Previous', exact: true } },
+        { wait: 700 },
+        { click: { button: '← Previous', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Wraps forward: 1 / 26, A ∪ A = A.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Reset
+Opacity back to 0.85. Blue shading.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
+      relatedTools: getRelatedTools('two-sets-laws-venn'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -779,7 +921,22 @@ Closing the catalog here is fitting: the four compound complements demonstrate t
   }
 }
 
-export default function TwoSetsLawsVennPage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function TwoSetsLawsVennPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <TwoSetsLawsExplorer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / section with after-text / per-state section
   // carrying its frozen LHS=RHS unit as [content, unit, after].
@@ -809,11 +966,12 @@ export default function TwoSetsLawsVennPage({seoData, sectionsContent, introCont
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started-with-the-explorer'),
-    plain('obj2', 'navigating-category-tabs'),
-    plain('obj3', 'selecting-an-identity'),
+    withDemo(plain('obj2', 'navigating-category-tabs')),
+    withDemo(plain('obj3', 'selecting-an-identity')),
     plain('obj4', 'reading-the-side-by-side-proof'),
     plain('obj5', 'the-match-indicator'),
-    plain('obj6', 'theme-controls-and-navigation'),
+    withDemo(plain('obj6', 'theme-controls-and-navigation')),
+    plain('obj44', 'the-explanation-panel'),
 
     plain('obj11', 'the-idempotent-laws'),
     stateRow('obj18', 'idempotent-law-for-union', 'idem-u'),
@@ -922,6 +1080,10 @@ export default function TwoSetsLawsVennPage({seoData, sectionsContent, introCont
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'-10px',marginBottom:'-80px'}}>Venn Diagrams: Two Sets Laws and Complex Identities</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <div style={{transform:'scale(0.85)'}}>
         <TwoSetsLawsExplorer explanations={explanations}/>
@@ -952,6 +1114,7 @@ export default function TwoSetsLawsVennPage({seoData, sectionsContent, introCont
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

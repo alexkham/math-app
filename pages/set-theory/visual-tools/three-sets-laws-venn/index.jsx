@@ -469,6 +469,11 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import ThreeSetsLawsExplorer from '../../../../app/components/venn-diagrams/3-sets/ThreeSetsLawsExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import threeSetsLawsVennDiagrams from '../../../../app/components/venn-diagrams/3-sets/threeSetsLawsVennDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
 
@@ -494,15 +499,15 @@ export async function getStaticProps(){
     obj0: {
       title: `Key Terms`,
       content: `
-- **Set identity** — an equation between two set expressions that holds for all sets
-- **Associative law** — $(A \\cup B) \\cup C = A \\cup (B \\cup C)$, also for $\\cap$ and $\\triangle$
-- **Distributive law** — $A \\cap (B \\cup C) = (A \\cap B) \\cup (A \\cap C)$ and its dual
-- **De Morgan's laws (three sets)** — $(A \\cup B \\cup C)' = A' \\cap B' \\cap C'$ and $(A \\cap B \\cap C)' = A' \\cup B' \\cup C'$
-- **Symmetric difference** — $A \\triangle B$, elements in exactly one of $A$ or $B$; extends to $A \\triangle B \\triangle C$
+- [Set identity](!/set-theory/venn-diagrams#5) — an equation between two set expressions that holds for all [sets](!/set-theory/basics#1)
+- [Associative law](!/set-theory/rules#associative) — $(A \\cup B) \\cup C = A \\cup (B \\cup C)$, also for $\\cap$ and $\\triangle$
+- [Distributive law](!/set-theory/rules#distributive) — $A \\cap (B \\cup C) = (A \\cap B) \\cup (A \\cap C)$ and its dual
+- [De Morgan's laws (three sets)](!/set-theory/rules#de_morgan) — $(A \\cup B \\cup C)' = A' \\cap B' \\cap C'$ and $(A \\cap B \\cap C)' = A' \\cup B' \\cup C'$
+- [Symmetric difference](!/set-theory/definitions#symmetric_difference) — $A \\triangle B$, [elements](!/set-theory/basics#4) in exactly one of $A$ or $B$; extends to $A \\triangle B \\triangle C$
 - **Difference distribution** — $A \\setminus (B \\cup C) = (A \\setminus B) \\cap (A \\setminus C)$ and $A \\setminus (B \\cap C) = (A \\setminus B) \\cup (A \\setminus C)$
 - **Nested difference** — $(A \\setminus B) \\setminus C = A \\setminus (B \\cup C)$
-- **Visual proof** — two diagrams shading the same eight regions confirm an identity
-- **Eight regions** — the disjoint pieces a three-circle Venn diagram divides the universe into
+- [Visual proof](!/set-theory/venn-diagrams#5) — two diagrams shading the same eight regions confirm an identity
+- [Eight regions](!/set-theory/venn-diagrams#3) — the disjoint pieces a three-circle [Venn diagram](!/set-theory/venn-diagrams) divides the universe into
 `,
       before: ``,
       after: `
@@ -527,9 +532,9 @@ The interface has three control areas: the **category tabs** at the top, the **f
       content: `The four category tabs group the 12 laws by structural type:
 
 • [Associative](!#associative-and-distributive-laws) — grouping does not matter for repeated $\\cup$, $\\cap$, or $\\triangle$ (three identities)
-• [Distributive](!#associative-and-distributive-laws) — intersection distributes over union and union distributes over intersection (two identities)
-• [De Morgan's Laws](!#de-morgans-laws-for-three-sets) — the complement of a triple union or triple intersection (two identities)
-• [Difference](!#difference-identities-in-three-sets) — five identities showing how set difference interacts with union, intersection, and itself, including nested differences
+• [Distributive](!#associative-and-distributive-laws) — [intersection](!/set-theory/operations#2) distributes over [union](!/set-theory/operations#1) and union distributes over intersection (two identities)
+• [De Morgan's Laws](!#de-morgans-laws-for-three-sets) — the [complement](!/set-theory/operations#3) of a triple union or triple intersection (two identities)
+• [Difference](!#difference-identities-in-three-sets) — five identities showing how [set difference](!/set-theory/operations#4) interacts with union, intersection, and itself, including nested differences
 
 Click a tab to switch the row of formula buttons below it. The current identity stays selected across tab switches, so you can browse other groups without losing context. The active tab updates automatically when you use Previous/Next.`,
       before: ``,
@@ -592,6 +597,24 @@ This turns the explorer into a tool for visual reasoning rather than rote memori
 Theme changes persist across identity selections, so adjustments apply to every law you visit afterward. Lower opacity is particularly useful when comparing the central triple-intersection regions on both diagrams, where multiple circle boundaries overlap.
 
 The navigation strip at the bottom has **Previous** and **Next** buttons that cycle through all 12 identities in the order defined by the category groups: Associative, then Distributive, then De Morgan's Laws, then Difference. Navigation wraps around. The active tab and active formula button update automatically as you advance.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj25: {
+      title: `The Explanation Panel`,
+      content: `The **Explanation** panel sits to the right of the diagrams. Its top line names the loaded law, for example **Complement of Triple Union**, and prints the full equation under the name, such as $(A \\cup B \\cup C)' = A' \\cap B' \\cap C'$.
+
+Below the name are two tabs:
+
+• **Overview** — a one-line **Definition** of the law in words, such as "The complement of a union of three sets equals the intersection of their complements."
+
+• **Learn More** — a short note headed **On This Page** that says what the shaded pair shows, followed by two links: one to the section on this page for that single law, and one to the section for its whole group.
+
+The panel always opens on **Overview**. Loading a different law, through a formula button, the **Jump to** menu, or **Previous** and **Next**, switches it back to **Overview**, so open **Learn More** after you settle on a law.
+
+The panel puts the law into words; the two diagrams and the [match indicator](!#the-match-indicator) show that it holds on all eight regions. How to compare the two shadings region by region is covered in [Reading the Side-by-Side Proof](!#reading-the-side-by-side-proof).`,
       before: ``,
       after: ``,
       link: '',
@@ -663,9 +686,9 @@ These laws are essentially the De Morgan and distributive laws translated into d
 
     obj11: {
       title: `Related Concepts and Tools`,
-      content: `**Two-Set Laws and Identities** — the companion explorer for 27 two-set laws across categories like idempotent, commutative, absorption, and compound complements.
+      content: `[Two-Set Laws and Identities](!/set-theory/visual-tools/two-sets-laws-venn) — the companion explorer for 27 two-set laws across categories like idempotent, commutative, absorption, and compound complements.
 
-**Three-Set Basic Identities** — the companion explorer for shading individual three-set expressions (triple union, triple intersection, "exactly two", and so on) rather than identity equations.
+[Three-Set Basic Identities](!/set-theory/visual-tools/three-sets-basic-venn) — the companion explorer for shading individual three-set expressions (triple union, triple intersection, "exactly two", and so on) rather than identity equations.
 
 **Set Operations** — formal definitions of union, intersection, complement, difference, and symmetric difference.
 
@@ -675,7 +698,11 @@ These laws are essentially the De Morgan and distributive laws translated into d
 
 **Set Laws and Identities** — the full algebraic catalog including associativity, distributivity, and absorption.
 
-**Set Theory Definitions** — glossary of foundational terms used throughout set algebra.`,
+**Set Theory Definitions** — glossary of foundational terms used throughout set algebra.
+
+[Venn Diagram and Truth Table Explorer](!/set-theory/visual-tools/venn-truth-table) — the same identities verified as matching truth-table columns.
+
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — shade the two sides of any identity yourself, on up to five sets.`,
       before: ``,
       after: ``,
       link: '',
@@ -984,8 +1011,121 @@ The law generalizes into a habit worth keeping: a chain of subtractions can alwa
     }
   }
 
+  const instructions = [
+    'The four **category tabs**, **Associative**, **Distributive**, **De Morgan\'s Laws** and **Difference**, switch the row of formula buttons below them; the loaded law stays on screen while you browse. [Learn more about the category tabs](!#navigating-category-tabs)',
+    'Tap a **formula button**, such as $A \\cap (B \\cup C) = (A \\cap B) \\cup (A \\cap C)$, to load that law into both diagrams; the badge above them shows the full equation. [Learn more about selecting an identity](!#selecting-an-identity)',
+    'The **Jump to** menu lists all 12 laws grouped by tab; picking one also switches to its tab. [Learn more about the Jump to menu](!#selecting-an-identity)',
+    'The left diagram shades the left-hand side and the right diagram the right-hand side, each labelled above it, over the same eight regions; hover a region to see its name. [Learn more about reading the side-by-side proof](!#reading-the-side-by-side-proof)',
+    'The badge under the diagrams reads **✓ Regions match — identity holds** when both sides shade the same regions; every law in the catalog passes. [Learn more about the match indicator](!#the-match-indicator)',
+    'The **Theme** panel sets the shading **Color** and **Opacity** from 0.00 to 1.00 for both diagrams; **Reset** returns blue at 0.85. [Learn more about the theme controls](!#theme-controls-and-navigation)',
+    '**← Previous** and **Next →** step through the 12 laws in tab order and wrap around; the counter shows the position, such as 1 / 12. [Learn more about Previous and Next](!#theme-controls-and-navigation)',
+    'The **Explanation** panel names the law; **Overview** gives its definition and **Learn More** links to the law\'s own section on this page. [Learn more about the explanation panel](!#the-explanation-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real ThreeSetsLawsExplorer
+     (opens on (A ∪ B) ∪ C = A ∪ (B ∪ C), Associative tab, opacity 0.85).
+     One range input: 0 = Opacity. Jump to is the only <select>; option values are identity ids. */
+  const demos = {
+    'navigating-category-tabs': {
+      title: 'Category tabs and formula buttons',
+      script: [
+        { say: `TAP Distributive
+Button row: the two distributive laws.
+Diagrams still show (A ∪ B) ∪ C.` },
+        { click: { button: 'Distributive', exact: true } },
+        { wait: 2600 },
+        { say: `TAP A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)
+Both sides: the three regions where A meets B or C.
+✓ Regions match.` },
+        { click: { button: 'A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)', exact: true } },
+        { wait: 2800 },
+        { say: `TAP De Morgan's Laws → (A ∪ B ∪ C)' = A' ∩ B' ∩ C'
+Both sides: outside region only.` },
+        { click: { button: "De Morgan's Laws", exact: true } },
+        { wait: 700 },
+        { click: { button: "(A ∪ B ∪ C)' = A' ∩ B' ∩ C'", exact: true } },
+        { wait: 2800 },
+        { say: `TAP Difference → (A \\ B) \\ C = A \\ (B ∪ C)
+Both sides: A-only region.` },
+        { click: { button: 'Difference', exact: true } },
+        { wait: 700 },
+        { click: { button: '(A \\ B) \\ C = A \\ (B ∪ C)', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Associative → (A △ B) △ C = A △ (B △ C)
+Both sides: three only-regions + center.
+In an odd number of sets.` },
+        { click: { button: 'Associative', exact: true } },
+        { wait: 700 },
+        { click: { button: '(A △ B) △ C = A △ (B △ C)', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'selecting-an-identity': {
+      title: 'Jump to and the explanation panel',
+      script: [
+        { say: `SELECT Jump to → A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)
+Tab switches to Distributive.
+Each side: circle A + the B ∩ C lens.` },
+        { set: 'select', value: 'dist-u-over-i' },
+        { wait: 3000 },
+        { say: `TAP Learn More
+No arithmetic analogue:
+a + bc ≠ (a+b)(a+c).` },
+        { click: { button: 'Learn More', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Jump to → (A ∩ B ∩ C)' = A' ∪ B' ∪ C'
+Tab: De Morgan's Laws.
+Each side: all but the center. Panel back on Overview.` },
+        { set: 'select', value: 'dm-i-3' },
+        { wait: 3000 },
+        { say: `TAP Learn More
+One failed membership escapes.
+Only the core stays blank.` },
+        { click: { button: 'Learn More', exact: true } },
+        { wait: 2800 },
+        { say: `SELECT Jump to → (A ∩ B) \\ C = A ∩ (B \\ C)
+Tab: Difference.
+Each side: one sliver, in A and B but not C.` },
+        { set: 'select', value: 'inter-minus-c' },
+        { wait: 3000 },
+      ],
+    },
+    'theme-controls-and-navigation': {
+      title: 'Theme, Previous and Next',
+      script: [
+        { say: `DRAG Opacity → 0.30
+Shading paler on both sides. Readout 0.30.` },
+        { slide: { range: 0 }, to: 0.3, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP Next →
+2 / 12: (A ∩ B) ∩ C = A ∩ (B ∩ C).
+Center only. Opacity 0.30 kept.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ← Previous ×2
+Wraps: 12 / 12, (A \\ B) \\ C = A \\ (B ∪ C).
+Tab: Difference.` },
+        { click: { button: '← Previous', exact: true } },
+        { wait: 700 },
+        { click: { button: '← Previous', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Wraps forward: 1 / 12, (A ∪ B) ∪ C = A ∪ (B ∪ C).` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Reset
+Opacity back to 0.85. Blue shading.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
+      relatedTools: getRelatedTools('three-sets-laws-venn'),
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1007,7 +1147,22 @@ The law generalizes into a habit worth keeping: a chain of subtractions can alwa
   }
 }
 
-export default function ThreeSetsLawsVennPage({seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function ThreeSetsLawsVennPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ThreeSetsLawsExplorer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / section with after-text / per-state section
   // carrying its frozen LHS=RHS unit as [content, unit, after].
@@ -1037,11 +1192,12 @@ export default function ThreeSetsLawsVennPage({seoData, sectionsContent, introCo
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started-with-the-explorer'),
-    plain('obj2', 'navigating-category-tabs'),
-    plain('obj3', 'selecting-an-identity'),
+    withDemo(plain('obj2', 'navigating-category-tabs')),
+    withDemo(plain('obj3', 'selecting-an-identity')),
     plain('obj4', 'reading-the-side-by-side-proof'),
     plain('obj5', 'the-match-indicator'),
-    plain('obj6', 'theme-controls-and-navigation'),
+    withDemo(plain('obj6', 'theme-controls-and-navigation')),
+    plain('obj25', 'the-explanation-panel'),
     plain('obj7', 'what-is-a-three-set-identity'),
     plain('obj8', 'why-do-visual-proofs-work'),
 
@@ -1125,6 +1281,10 @@ export default function ThreeSetsLawsVennPage({seoData, sectionsContent, introCo
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'-10px',marginBottom:'-80px'}}>Venn Diagrams: Three Sets Laws and Complex Identities</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <div style={{transform:'scale(0.85)'}}>
        <ThreeSetsLawsExplorer explanations={explanations}/>
@@ -1155,6 +1315,7 @@ export default function ThreeSetsLawsVennPage({seoData, sectionsContent, introCo
         variant="light"
       /> */}
       <br/>
+      <RelatedTools tools={relatedTools}/>
       <Sections sections={genericSections}/>
       <br/>
       <br/>

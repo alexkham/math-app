@@ -15,6 +15,9 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
+import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 
 
 export async function getStaticProps(){
@@ -543,8 +546,45 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    idea: demoUnitFrame({
+      svg: functionLimitDiagrams.removable,
+      caption: '(x&#178; &#8722; 1)/(x &#8722; 1) near x = 1: the hole',
+      text: 'The function has no value at 1, but the probes on either side, at 0.5 and 1.5, read 1.5 and 2.5, and closing in they both head for 2. That number is the limit, and it exists although f(1) does not: behaviour near the point, not at it. Slide the probes toward the hole on the',
+      href: '/calculus/visual-tools/limit',
+      linkText: 'limit explorer',
+    }),
+    onesided: demoUnitFrame({
+      svg: functionLimitDiagrams.onesided,
+      caption: '&#8730;x at x = 0: only the right-hand approach exists',
+      text: 'To the right of 0 the probe reads a value heading to 0; to the left there is no function at all, so the left-hand limit cannot even be asked. The right-hand limit is 0, and it is the only one available at an endpoint of the domain. Try to place the left probe on the',
+      href: '/calculus/visual-tools/limit',
+      linkText: 'limit explorer',
+    }),
+    infinity: demoUnitFrame({
+      svg: functionLimitDiagrams['infinite-pos'],
+      caption: '1/x&#178; near x = 0: both sides run to +&#8734;',
+      text: 'The probes at &#8722;0.5 and 0.5 both read 4, and every step inward multiplies the readings: the outputs grow without bound while the inputs approach 0. That is an infinite limit, written lim = &#8734;, and the line x = 0 is a vertical asymptote. Watch the readings climb as the probes close in on the',
+      href: '/calculus/visual-tools/limit',
+      linkText: 'limit explorer',
+    }),
+    continuity: demoUnitFrame({
+      svg: functionContinuityDiagrams.wrongvalue,
+      caption: 'Wrong value at x = 1: the limit exists, f(1) misses it',
+      text: 'Both approaches agree on a limit at x = 1, and f(1) is defined, yet the marked value sits away from where the curve is heading: the third condition fails and the function is not continuous there. Fixing the single value would repair it. See which of the three conditions each example fails on the',
+      href: '/calculus/visual-tools/continuity',
+      linkText: 'continuity checker',
+    }),
+  };
+
    return {
   props: {
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -563,7 +603,7 @@ const schemas = {
   }
 }
    }
-export default function LimitsPage({seoData, sectionsContent, introContent, obj2Table, obj4Table, obj8Table, summaryTable, faqQuestions, schemas}) {
+export default function LimitsPage({seoData, sectionsContent, introContent, obj2Table, obj4Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -574,6 +614,8 @@ export default function LimitsPage({seoData, sectionsContent, introContent, obj2
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-idea'} dangerouslySetInnerHTML={{ __html: demoUnits.idea }} />,
+          `Everything that follows refines this one question: what is the function heading toward?`,
         ]
     },
     {
@@ -602,6 +644,8 @@ export default function LimitsPage({seoData, sectionsContent, introContent, obj2
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+                  <div key={'unit-onesided'} dangerouslySetInnerHTML={{ __html: demoUnits.onesided }} />,
+          `Two-sided limits are then the case where the two one-sided answers agree.`,
         ]
     },
     {
@@ -636,6 +680,8 @@ export default function LimitsPage({seoData, sectionsContent, introContent, obj2
           sectionsContent.obj8.content,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+                  <div key={'unit-infinity'} dangerouslySetInnerHTML={{ __html: demoUnits.infinity }} />,
+          `Infinity is a description of behaviour here, never a value the function takes.`,
         ]
     },
     {
@@ -644,6 +690,8 @@ export default function LimitsPage({seoData, sectionsContent, introContent, obj2
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+                  <div key={'unit-continuity'} dangerouslySetInnerHTML={{ __html: demoUnits.continuity }} />,
+          `The dedicated page treats each of the three conditions and each way it can fail.`,
         ]
     },
     {

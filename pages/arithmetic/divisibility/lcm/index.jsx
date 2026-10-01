@@ -15,6 +15,8 @@ import { tableHeaders } from '@/app/styles/theme'
 // import { renderMultiplesLine } from '../../../../app/utils/illustrations/multiplesLine'
 import {renderMultiplesLine} from '../../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
 import { renderPrimeFactorization } from '../../../../app/utils/illustrations/arithmetic/divisibility/primeFactorization'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import divisibilityTableDiagrams from '@/app/components/divisibility/divisibilityTableDiagrams'
 
 
 
@@ -693,8 +695,24 @@ const schemas = {
 
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    multiples: demoUnitFrame({
+      svg: divisibilityTableDiagrams.d6,
+      caption: 'The &#247;6 column: 6, 12, 18, 24, &#8230;',
+      text: 'The highlighted column marks every number divisible by 6, which is the list of multiples of 6 the method starts from; the &#247;8 column beside it marks 8, 16, 24, and the first row marked in both columns is 24, the least common multiple. Listing multiples is reading two columns until they agree. Compare any two divisor columns on the',
+      href: '/arithmetic/visual-tools/divisibility-table',
+      linkText: 'interactive divisibility table',
+    }),
+  };
+
 return {
   props:{
+    demoUnits,
     sectionsContent,
     introContent,
     obj2Table,
@@ -723,7 +741,7 @@ export default function LCMPage({seoData, sectionsContent,
    faqQuestions, schemas,
   obj1SvgCommon,
 obj3SvgListing,
-obj10SvgBuses,pfLcmObj4,}) {
+obj10SvgBuses,pfLcmObj4, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -848,7 +866,9 @@ obj10SvgBuses,pfLcmObj4,}) {
            style={{ maxWidth: '800px', margin: '20px auto' }}
            dangerouslySetInnerHTML={{ __html: obj3SvgListing }} />,
       sectionsContent.obj3.afterFigure,
-    ]
+              <div key={'unit-multiples'} dangerouslySetInnerHTML={{ __html: demoUnits.multiples }} />,
+          `The method is transparent but slow; the next two replace the search with structure.`,
+        ]
 },
     // {
     //     id:'4',

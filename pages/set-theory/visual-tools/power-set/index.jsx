@@ -10,6 +10,10 @@ import ExplanationDetails from '../../../../app/components/ExplanationDetails'
 import PowerSetExplorer from '../../../../app/components/diagrams/set-theory/PowerSetExplorer'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import powerSetExplorerDiagrams from '../../../../app/components/diagrams/set-theory/powerSetExplorerDiagrams'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
 export async function getStaticProps(){
@@ -33,15 +37,15 @@ export async function getStaticProps(){
   ]
 
   const instructions = [
-    'Type the elements of the set into the Elements box, separated by commas or spaces. Repeats are dropped, because a set has no duplicates, and order never matters.',
-    'The Size buttons 1 to 5 rebuild the set at that many elements, and the preset buttons below load ready-made sets: a, b, c — 1, 2, 3, 4 — x, y — red, green, blue.',
-    'The diagram is a Hasse diagram of the subset lattice. Every subset of the set is a node, and a line joins two nodes that differ by exactly one element, so the subset relation reads as upward paths.',
-    'The readout beside the title reports the arithmetic: $|A| = n$ elements give $|P(A)| = 2^n$ subsets. Levels run from the empty set at the bottom to the whole set at the top.',
-    'Click any subset, or focus it and press Enter, to select it. Its subsets light up below it, its supersets light up above it, and the legend under the diagram names the three colors.',
-    'Switch the Empty set toggle to write the empty subset as $\\emptyset$ rather than as an empty pair of braces.',
-    'The Subsets tab counts each level as $\\binom{n}{k}$ with a bar chart, and totals them to $2^n$ — a row of Pascal’s triangle read off the diagram.',
-    'The Roster form below that table lists every subset in set notation. Clicking any entry selects that subset in the diagram, which is the fastest way to reach a node in a crowded lattice.',
-    'The Style tab sets the highlight color, the vertical gap between levels, and whether lines outside the selected cones are dimmed.',
+    'Type the elements of the set into the Elements box, separated by commas or spaces. Repeats are dropped, because a set has no duplicates, and order never matters. [Learn more about the Elements box](!#getting-started)',
+    'The Size buttons 1 to 5 rebuild the set at that many elements, and the preset buttons below load ready-made sets: a, b, c — 1, 2, 3, 4 — x, y — red, green, blue. [Learn more about the Size and preset buttons](!#getting-started)',
+    'The diagram is a Hasse diagram of the subset lattice. Every subset of the set is a node, and a line joins two nodes that differ by exactly one element, so the subset relation reads as upward paths. [Learn more about reading the subset lattice](!#reading-the-subset-lattice)',
+    'The readout beside the title reports the arithmetic: $|A| = n$ elements give $|P(A)| = 2^n$ subsets. Levels run from the empty set at the bottom to the whole set at the top. [Learn more about the readout](!#reading-the-subset-lattice)',
+    'Click any subset, or focus it and press Enter, to select it. Its subsets light up below it, its supersets light up above it, and the legend under the diagram names the three colors. [Learn more about selecting a subset](!#selecting-a-subset)',
+    'Switch the Empty set toggle to write the empty subset as $\\emptyset$ rather than as an empty pair of braces. [Learn more about the Empty set toggle](!#getting-started)',
+    'The Subsets tab counts each level as $\\binom{n}{k}$ with a bar chart, and totals them to $2^n$ — a row of Pascal’s triangle read off the diagram. [Learn more about the Subsets tab](!#counting-levels-in-the-subsets-tab)',
+    'The Roster form below that table lists every subset in set notation. Clicking any entry selects that subset in the diagram, which is the fastest way to reach a node in a crowded lattice. [Learn more about the Roster form](!#counting-levels-in-the-subsets-tab)',
+    'The Style tab sets the highlight color, the vertical gap between levels, and whether lines outside the selected cones are dimmed. [Learn more about the Style tab](!#styling-the-diagram)',
   ]
 
   const sectionsContent={
@@ -57,17 +61,17 @@ export async function getStaticProps(){
 
     obj1:{
       title:`Getting Started`,
-      content:`The explorer draws the power set of whatever set you hand it, so the first move is to define that set.
+      content:`The explorer draws the [power set](!/set-theory/subsets#5) of whatever set you hand it, so the first move is to define that set.
 
-Type the members into the **Elements** box, separated by commas or spaces. Anything works as an element: letters, numbers, words. Two rules are enforced as you type, and both of them are facts about sets rather than quirks of the tool. Repeats are dropped, because a set has no duplicates. Order is ignored, because $\\{a, b\\}$ and $\\{b, a\\}$ are the same set.
+Type the members into the **Elements** box, separated by commas or spaces. Anything works as an element: letters, numbers, words. Two rules are enforced as you type, and both of them are facts about [sets](!/set-theory/basics#1) rather than quirks of the tool. Repeats are dropped, because a set has no duplicates. Order is ignored, because $\\{a, b\\}$ and $\\{b, a\\}$ are the same set.
 
 Three shortcuts save you the typing:
 
-• The **Size** buttons, 1 through 5, rebuild the set at that many elements.
+• The **Size** buttons, 1 through 5, rebuild the set at that many [elements](!/set-theory/basics#4).
 • The preset buttons load ready-made sets — letters, numbers, a two-element set, and color names.
 • The **Empty set** toggle decides whether the empty subset is drawn as $\\emptyset$ or as an empty pair of braces.
 
-Five elements is the ceiling, and the reason is the doubling rather than an arbitrary limit: five elements already produce 32 subsets, and six would produce 64. The picture stops being readable well before the mathematics stops being correct.
+Five elements is the ceiling, and the reason is the doubling rather than an arbitrary limit: five elements already produce 32 [subsets](!/set-theory/subsets#1), and six would produce 64. The picture stops being readable well before the mathematics stops being correct.
 
 Three things the box can be told will change what you see rather than draw a lattice: leaving it [empty](!#an-empty-elements-box), listing [a repeated element](!#a-repeated-element), or going [past five elements](!#past-five-elements). Each has its own frozen frame below.`,
       before:``,
@@ -103,7 +107,7 @@ Selection splits the diagram into three colors, named in the legend under the pi
 
 • The selected subset itself.
 • Everything **below** it that it contains — its own subsets.
-• Everything **above** it that contains it — its supersets.
+• Everything **above** it that contains it — its [supersets](!/set-theory/subsets#3).
 
 Anything left pale is incomparable to your selection: it neither contains the subset nor sits inside it.
 
@@ -234,7 +238,7 @@ In **combinatorics**, counting subsets by size is counting combinations, and the
 
 In logic and computing, a subset of $n$ items is a string of $n$ bits, so power sets are the natural model for flag sets, feature toggles, and truth assignments over $n$ variables.
 
-In **set theory** proper, the power set drives Cantor’s theorem: $|P(A)|$ is always strictly larger than $|A|$, even for infinite sets. That single result is what produces different sizes of infinity, and it starts from the diagram on this page.`,
+In **set theory** proper, the power set drives Cantor’s theorem: $|P(A)|$ is always strictly larger than $|A|$, even for [infinite sets](!/set-theory/cardinality#3). That single result is what produces different sizes of infinity, and it starts from the diagram on this page.`,
       before:``,
       after:``,
       link:'',
@@ -247,7 +251,7 @@ In **set theory** proper, the power set drives Cantor’s theorem: $|P(A)|$ is a
 
 **Subsets** — the containment relation, proper subsets, and how to prove one set sits inside another.
 
-**Set Operations** — union, intersection, difference, and complement, defined on the same sets whose subsets are drawn here.
+**Set Operations** — [union](!/set-theory/operations#1), [intersection](!/set-theory/operations#2), difference, and [complement](!/set-theory/operations#3), defined on the same sets whose subsets are drawn here.
 
 **Cardinality** — sizes of sets, finite and infinite, and Cantor’s theorem about the power set.
 
@@ -255,7 +259,11 @@ In **set theory** proper, the power set drives Cantor’s theorem: $|P(A)|$ is a
 
 **Pascal’s Triangle** — where those level counts come from, and why they are symmetric.
 
-**Venn Diagram Generator** — the companion tool for shading set expressions rather than enumerating subsets.`,
+[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — the companion tool for shading set expressions rather than enumerating subsets.
+
+[Set-Builder Notation Explorer](!/set-theory/visual-tools/set-builder) — describe a subset by a condition instead of listing its elements.
+
+[Indexed Union and Intersection Explorer](!/set-theory/visual-tools/union-intersection) — monotone families of subsets, walked up and down the same lattice.`,
       before:``,
       after:``,
       link:'',
@@ -560,8 +568,130 @@ Selecting a smaller subset trades one cone for the other, most sharply at [a sin
   }
 
 
+  /* Animated demos (ToolDemoPlayer v3) against the real PowerSetExplorer
+     (opens on the Set tab with Elements a, b, c: 8 subsets, nothing selected).
+     Lattice nodes are <g role="button" aria-label="Subset {…}">; Roster form
+     entries are buttons labelled {…}. The first checkbox is Empty set; the only
+     range input is Level gap (Style tab, 52..120). */
+  const demos = {
+    'getting-started': {
+      title: 'Building the set',
+      script: [
+        { say: `TAP Size 2
+Elements a, b.
+|P(A)| = 2^2 = 4. Four nodes.` },
+        { click: { button: '2', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Size 4
+Elements a, b, c, d.
+|P(A)| = 2^4 = 16. Five levels.` },
+        { click: { button: '4', exact: true } },
+        { wait: 2600 },
+        { say: `TAP x, y
+Preset loads {x, y}.
+Same four-node diamond as size 2.` },
+        { click: { button: 'x, y', exact: true } },
+        { wait: 2600 },
+        { say: `TYPE Elements → x, y, x
+Repeated element dropped.
+Still |A| = 2, four subsets.` },
+        { set: 'input[type="text"]', value: 'x, y, x' },
+        { wait: 2800 },
+        { say: `TAP Empty set
+Bottom node: ∅ becomes { }.
+Same empty subset, other spelling.` },
+        { click: 'input[type="checkbox"]' },
+        { wait: 2600 },
+      ],
+    },
+    'selecting-a-subset': {
+      title: 'Selecting a subset',
+      script: [
+        { say: `TAP {a}
+Below, blue: ∅ only. 2 subsets.
+Above, green: 4 of 8 contain a.` },
+        { click: '[aria-label="Subset {a}"]' },
+        { wait: 2800 },
+        { say: `TAP {a, b}
+Blue cone below: 4 nodes, a copy of the size-2 diagram.
+Green above: {a, b, c}. Pale: incomparable.` },
+        { click: '[aria-label="Subset {a, b}"]' },
+        { wait: 3000 },
+        { say: `TAP ∅
+Nothing below it.
+Every other node green: ∅ is in all of them.` },
+        { click: '[aria-label="Subset ∅"]' },
+        { wait: 2800 },
+        { say: `TAP {a, b, c}
+Every other node blue, below.
+8 subsets, 7 of them proper.` },
+        { click: '[aria-label="Subset {a, b, c}"]' },
+        { wait: 2800 },
+      ],
+    },
+    'counting-levels-in-the-subsets-tab': {
+      title: 'Level counts and the roster',
+      script: [
+        { say: `TAP Subsets
+Level table: C(3, k) = 1, 3, 3, 1.
+Total 8 = 2^3.` },
+        { click: { button: 'Subsets', exact: true } },
+        { wait: 2800 },
+        { say: `TAP {b} in the Roster form
+{b} selected in the diagram.
+Green above: 4 supersets.` },
+        { click: { button: '{b}', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Set → Size 5
+|P(A)| = 2^5 = 32.
+Selection cleared.` },
+        { click: { button: 'Set', exact: true } },
+        { wait: 400 },
+        { click: { button: '5', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Subsets
+C(5, k) = 1, 5, 10, 10, 5, 1.
+Symmetric, largest in the middle. Total 32.` },
+        { click: { button: 'Subsets', exact: true } },
+        { wait: 3000 },
+        { say: `TAP {a, c} in the Roster form
+Blue cone below: 4 subsets.
+Green: 8 supersets = 2^3.` },
+        { click: { button: '{a, c}', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'styling-the-diagram': {
+      title: 'Level gap',
+      script: [
+        { say: `TAP Size 5
+32 subsets on six levels.
+Labels crowd each other.` },
+        { click: { button: '5', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Style
+Highlight, Level gap, Fade edges.
+Level gap at 62 for five elements.` },
+        { click: { button: 'Style', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG Level gap → 110
+Rows spread apart.
+Same lattice, more room per level.` },
+        { slide: { range: 0 }, to: 110, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG Level gap → 52
+Rows packed tight.
+Whole lattice in a short strip.` },
+        { slide: { range: 0 }, to: 52, ms: 1400 },
+        { wait: 2800 },
+      ],
+    },
+  }
+
    return {
       props:{
+      demos,
+        relatedTools: getRelatedTools('power-set'),
          sectionsContent,
          introContent,
          instructions,
@@ -574,7 +704,22 @@ Selecting a smaller subset trades one cone for the other, most sharply at [a sin
     }
    }
 
-export default function PowerSetPage({seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+export default function PowerSetPage({ demos,relatedTools, seoData, sectionsContent, introContent, instructions, faqQuestions, schemas, stateUnits, notes}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <PowerSetExplorer showIntro={false} notes={notes}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Slug ids (Line 1). obj0 is the Key Terms slot, unused on tool pages, so it
   // never reaches this list. A per-state row carries its frozen unit between
@@ -597,7 +742,7 @@ export default function PowerSetPage({seoData, sectionsContent, introContent, in
   })
 
   const genericSections = [
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     stateRow('obj12', 'an-empty-elements-box', 'no-elements'),
     stateRow('obj13', 'a-repeated-element', 'duplicate'),
     stateRow('obj14', 'past-five-elements', 'too-many'),
@@ -606,14 +751,14 @@ export default function PowerSetPage({seoData, sectionsContent, introContent, in
     stateRow('obj15', 'a-one-element-set', 'one-element-set'),
     stateRow('obj16', 'the-whole-lattice-nothing-selected', 'nothing-selected'),
 
-    plain('obj3', 'selecting-a-subset'),
+    withDemo(plain('obj3', 'selecting-a-subset')),
     stateRow('obj17', 'the-empty-set-at-the-bottom', 'empty-set'),
     stateRow('obj18', 'the-whole-set-at-the-top', 'full-set'),
     stateRow('obj19', 'a-singleton-selected', 'singleton'),
     stateRow('obj20', 'a-subset-in-the-middle', 'general'),
 
-    plain('obj4', 'counting-levels-in-the-subsets-tab'),
-    plain('obj5', 'styling-the-diagram'),
+    withDemo(plain('obj4', 'counting-levels-in-the-subsets-tab')),
+    withDemo(plain('obj5', 'styling-the-diagram')),
     plain('obj6', 'things-worth-trying'),
     plain('obj7', 'what-is-a-power-set'),
     plain('obj8', 'why-a-set-of-n-elements-has-2-to-the-n-subsets'),
@@ -718,6 +863,7 @@ export default function PowerSetPage({seoData, sectionsContent, introContent, in
    />
    <br/>
    */}
+   <RelatedTools tools={relatedTools}/>
    <Sections sections={genericSections}/>
    <br/>
    <br/>

@@ -8,6 +8,9 @@ import DiagonalizationWrapper from '../../../../app/components/linear-algebra co
 import diagonalizationDiagrams from '../../../../app/components/linear-algebra copy/matrix/diagonalizationDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -482,8 +485,141 @@ The other way to fail is complex eigenvalues, shown by the rotation preset. Ther
   }
 
 
+  const instructions = [
+    'The **Preset** pills load eight matrices, from a classic $2 \\times 2$ and a Markov chain to a defective matrix and a rotation that stop the run. [Learn more about the presets](!#choosing-a-matrix)',
+    'The **Size** stepper (**▲** / **▼**) switches between $2 \\times 2$ and $3 \\times 3$; the **k** stepper picks the power $A^k$ the last scenes compute; **Shuffle** draws a matrix with small integer eigenvalues. [Learn more about getting started](!#getting-started)',
+    'Type into any entry of $A$; the scenes are rebuilt from the new matrix at once. [Learn more about editing entries](!#getting-started)',
+    '**▶ Play** runs the diagonalization, **Next →** and **← Back** step one scene at a time, **Reset** returns to the opening scene, and the speed menu sets the pace. [Learn more about the controls](!#getting-started)',
+    'The scenes run through eigenvalues, eigenvectors, $P$ and $D$, $P^{-1}$, the factorization, the check $P^{-1}AP = D$ and the power; defective and complex cases stop early. [Learn more about the scenes in order](!#the-scenes-in-order)',
+    'Each column of $P$ has its own colour, the diagonal of $D$ is blue with grey zeros, and $P^{-1}$ is secondary throughout. [Learn more about reading a scene](!#the-scene-player)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real DiagonalizationWrapper
+     (opens on 2x2 classic [4 1; 2 3], k = 3). Cells: input[aria-label="entry i,j"];
+     steppers: button[aria-label="Increase"], nth 0 = size, nth 1 = power k. */
+  const demos = {
+    'getting-started': {
+      title: 'Power, entries, size, shuffle',
+      script: [
+        { say: `TAP k ▲
+k = 4.
+Last scene will compute A⁴.` },
+        { click: { css: 'button[aria-label="Increase"]', nth: 1 } },
+        { wait: 2400 },
+        { say: `SELECT Fast → TAP ▶ Play
+5⁴ = 625, 2⁴ = 16.
+A⁴ = (422, 203) / (406, 219).` },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7000 },
+        { say: `TYPE a₂₁ = 6 → Next → ×2
+A = [4 1; 6 3]. λ = 6, 1.
+Eigenvectors (1, 2) and (1, −3).` },
+        { set: 'input[aria-label="entry 2,1"]', value: 6 },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP size ▲
+A 3 × 3. New row and column: 0 0 1.
+Step 1 / 9.` },
+        { click: { css: 'button[aria-label="Increase"]', nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP Shuffle
+Random A = P D P⁻¹.
+Small integer eigenvalues: always completes.` },
+        { click: { button: 'Shuffle', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-scene-player': {
+      title: '2 × 2 classic, scene by scene',
+      script: [
+        { say: `TAP Next → ×2
+λ = 5, 2. Trace check: 7.
+Eigenvectors (1, 1), (1, −2) above their λ.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Assemble P and D. One colour per column of P.
+D: diagonal blue, zeros grey.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+Invert P. det P = −3.
+P⁻¹ secondary: thirds in its entries.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Next →
+A = P D P⁻¹.
+A on the left: the target reproduced.` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Next → ×2
+P⁻¹ A P = diag(5, 2), then A³.
+5³ = 125, 2³ = 8 → A³ = (86, 39) / (78, 47).` },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+    'choosing-a-matrix': {
+      title: 'Presets that complete and stop',
+      script: [
+        { say: `TAP Markov chain → SELECT Fast → ▶ Play
+λ = 1, 2/5.
+Largest λ = 1: Aᵏ settles along (5, 1).` },
+        { click: { button: 'Markov chain', exact: true } },
+        { wait: 700 },
+        { set: 'select', value: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7000 },
+        { say: `TAP Fibonacci → ▶ Play
+λ = 1.618, −0.618.
+A³ = (3, 2) / (2, 1): Fibonacci numbers.` },
+        { click: { button: 'Fibonacci', exact: true } },
+        { wait: 700 },
+        { click: { button: '▶ Play', exact: true } },
+        { wait: 7000 },
+        { say: `TAP Repeated but fine → Next → ×2
+λ = 4, 1, 1.
+λ = 1 has two eigenvectors → diagonalizable.` },
+        { click: { button: 'Repeated but fine', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Defective → Next → ×2
+λ = 1, 1 but one eigenvector (1, 0).
+Run stops: not diagonalizable.` },
+        { click: { button: 'Defective', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Rotation → Next → ×2
+λ = i, −i.
+No real P: run stops.` },
+        { click: { button: 'Rotation', exact: true } },
+        { wait: 700 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 600 },
+        { click: { button: 'Next →', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('linear-algebra-matrix-diagonalization'),
       sectionsContent,
       stateUnits,
@@ -506,7 +642,22 @@ The other way to fail is complex eigenvalues, shown by the rotation preset. Ther
   }
 }
 
-export default function DiagonalizationVisualizer({seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+export default function DiagonalizationVisualizer({ instructions, demos,seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas, relatedTools }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <DiagonalizationWrapper defaultPreset='twoByTwo' explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -528,7 +679,7 @@ export default function DiagonalizationVisualizer({seoData, sectionsContent, sta
 
   const genericSections=[
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
     plain('obj2', 'the-scenes-in-order'),
     stateRow('obj11', 'the-eigenvector-matrix', 'eigvecs'),
     stateRow('obj12', 'assembling-p-and-d', 'assemble'),
@@ -537,8 +688,8 @@ export default function DiagonalizationVisualizer({seoData, sectionsContent, sta
     stateRow('obj15', 'powers-through-the-diagonal', 'power'),
     stateRow('obj16', 'a-markov-chain-settling-down', 'markov'),
     stateRow('obj17', 'when-it-fails', 'defective'),
-    plain('obj3', 'the-scene-player'),
-    plain('obj4', 'choosing-a-matrix'),
+    withDemo(plain('obj3', 'the-scene-player')),
+    withDemo(plain('obj4', 'choosing-a-matrix')),
     plain('obj5', 'what-diagonalization-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
@@ -599,6 +750,10 @@ export default function DiagonalizationVisualizer({seoData, sectionsContent, sta
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Matrix Diagonalization</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{width:'80%',margin:'auto'}}>
    <DiagonalizationWrapper

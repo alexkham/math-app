@@ -850,6 +850,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "characteristic equation",
@@ -1484,6 +1485,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     polynomial: demoUnitFrame({
       svg: eigenDiagrams.expand,
@@ -1503,6 +1505,13 @@ const schemas = {
       svg: eigenDiagrams.eigvec,
       caption: 'Solving the shifted system for one eigenvalue',
       text: 'With a specific eigenvalue substituted, the shifted matrix is being reduced and its null space read off. Any non-zero vector in that space is an eigenvector, and the whole space is the eigenspace &#8212; which is why eigenvectors are never unique and are usually quoted normalised. Run the solve for each eigenvalue in turn on the',
+      href: '/linear-algebra/visual-tools/eigenvalues-eigenvectors',
+      linkText: 'eigenvalues and eigenvectors visualizer',
+    }),
+    repeatedRoot: demoUnitFrame({
+      svg: eigenDiagrams.repeated,
+      caption: 'A repeated eigenvalue, &#955; = 1',
+      text: 'Here &#955; = 1 is a double root of the characteristic polynomial, so its algebraic multiplicity is 2. Substituting it back, A &#8722; I has two free columns, and the solutions of (A &#8722; I)v = 0 fill a whole plane &#8212; for this matrix the eigenspace is as large as the multiplicity allows. That is not guaranteed, which is what the geometric multiplicity measures. Work through the repeated preset on the',
       href: '/linear-algebra/visual-tools/eigenvalues-eigenvectors',
       linkText: 'eigenvalues and eigenvectors visualizer',
     }),
@@ -1621,6 +1630,8 @@ export default function CharacteristicEquationPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-repeatedRoot'} dangerouslySetInnerHTML={{ __html: demoUnits.repeatedRoot }} />,
+          `Algebraic multiplicity counts the root; how many independent eigenvectors it brings is a separate question.`,
         ]
     },
     {

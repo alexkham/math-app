@@ -1533,6 +1533,7 @@ import doubleAngleDiagrams from '@/app/components/trigonometry/identities/double
 import halfAngleDiagrams from '@/app/components/trigonometry/identities/half-angle/halfAngleDiagrams'
 import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
 
 export async function getStaticProps(){
 
@@ -2526,6 +2527,13 @@ Inverse trigonometric identities like $\sin^{-1}(x) + \cos^{-1}(x) = \frac{\pi}{
       // Operation A demonstration units: frozen tool state + attached explanation
       // panel + tool link, one frame. Rendered as content-array items.
       const demoUnits = {
+        // harvested, no href: this section's prose already links the angle
+        // explorer, and one link per term per section holds
+        coFunction: demoUnitFrame({
+          svg: angleExplorerDiagrams.concepts.complementary,
+          caption: 'A complementary pair, frozen at 35&#176; and 55&#176;',
+          text: 'The two acute angles of a right triangle always add to 90&#176;, so each is the other&#8217;s complement. The side opposite one of them is the side adjacent to the other &#8212; which is why the sine of 35&#176; and the cosine of 55&#176; are the same number, and why every co-function pair works the same way.',
+        }),
         reciprocal: demoUnitFrame({
           svg: basicIdentitiesDiagrams.csc.overview,
           caption: 'Reciprocal pair, frozen',
@@ -2753,6 +2761,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
          sectionsContent.co_function.after,
+        <div key={'unit-coFunction'} dangerouslySetInnerHTML={{ __html: demoUnits.coFunction }} />,
+        `The same swap pairs tangent with cotangent and secant with cosecant, with no new reasoning needed.`,
 
 
         

@@ -859,6 +859,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 
 export async function getStaticProps(){
 
@@ -1506,8 +1509,31 @@ const poissonExplanations = {
   }
 
 
+
+  // Operation A demonstration units: a frozen tool state, an explanation
+  // panel reading that state, and the contextual link, in one frame. Built
+  // here and rendered as content-array items - never interpolated into
+  // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const demoUnits = {
+    u_4_0: demoUnitFrame({
+      svg: discretePmfDiagrams.poisson,
+      caption: 'Poisson PMF, lambda = 3',
+      text: 'The bars peak at 2 and 3, the integers around lambda, and fall off in a right tail that never quite ends; each height is lambda to the k times e to the minus lambda over k factorial. Small lambda piles the mass near zero, large lambda makes the pattern almost symmetric. Change lambda and watch the peak follow it on the',
+      href: '/probability/visual-tools/probability-function/discrete',
+      linkText: 'PMF visualizer',
+    }),
+    u_5_1: demoUnitFrame({
+      svg: discreteCdfDiagrams.poisson,
+      caption: 'Poisson CDF, lambda = 3',
+      text: 'The event of at most k occurrences has probability equal to the sum of the first k plus 1 bars, and the staircase shows that sum passing one half between 2 and 3 for lambda equal to 3. The final steps are tiny because the tail bars are small. Read P(X &le; k) at any step on the',
+      href: '/probability/visual-tools/cdf/discrete',
+      linkText: 'discrete CDF explorer',
+    }),
+  };
+
    return {
       props:{
+    demoUnits,
          sectionsContent,
          introContent,
          poissonExplanations,
@@ -1533,7 +1559,7 @@ export default function PoissonDistributionPage({
   poissonExplanations,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas, demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1600,7 +1626,9 @@ export default function PoissonDistributionPage({
         <div key={'poisson-pmf-visualization'} style={{transform:'scale(0.8)'}}>
      
       <PoissonDistribution/>
-      </div>
+      </div>,
+                  <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
+          `The CDF adds these bars from the left.`,
         ]
     },
     {
@@ -1613,7 +1641,9 @@ export default function PoissonDistributionPage({
      
      
       <PoissonDistributionCDF/>
-      </div>
+      </div>,
+                  <div key={'unit-u_5_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_1 }} />,
+          `The mean and variance both equal lambda.`,
         ]
     },
     {
