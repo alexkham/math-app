@@ -473,6 +473,9 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import complexDivisionDiagrams from '../../../../app/components/calculators/complex-numbers/complexDivisionDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 export async function getStaticProps(){
@@ -843,8 +846,131 @@ Divisions this tidy are the exception, not the rule — nudge either input by $0
     divideByZero: 'The single undefined point of complex division — every other z₂ works. [Learn more about dividing by zero](!#the-divide-by-zero-state) · [Getting started](!#getting-started-set-numerator-and-denominator)',
   };
 
+  const instructions = [
+    'Drag $z_1$ (navy, the numerator) or $z_2$ (orange, the denominator) on the plane, or type their real and imaginary parts into the two boxes. [Learn more about getting started](!#getting-started-set-numerator-and-denominator)',
+    'The preset buttons load six divisions, from $6/3$ to $(-2+6i)/(1+2i)$; **Random** draws a new pair. [Learn more about the clean-division preset](!#the-clean-division-preset)',
+    'The **Quotient** card gives $z_1 / z_2$ in rectangular form with its modulus and angle. [Learn more about getting started](!#getting-started-set-numerator-and-denominator)',
+    'The three arcs near the origin show $\\theta_1$, $\\theta_2$ and their difference, the angle of the quotient. [Learn more about the angle arcs](!#the-three-angle-arcs-subtraction-in-action)',
+    'The **Algebraic method** panel multiplies top and bottom by the conjugate of $z_2$ and simplifies. [Learn more about the conjugate method](!#the-conjugate-multiplication-method)',
+    'The **Geometric method** panel divides the lengths and subtracts the angles. [Learn more about the polar method](!#the-polar-geometric-method)',
+    'A zero denominator shows a message instead of a quotient; a quotient beyond $\\pm 10$ is drawn as a dashed ray toward the edge. [Learn more about the divide-by-zero state](!#the-divide-by-zero-state)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real ComplexDivisionVisualizer
+     (opens on (4+2i)/(1−i)). Number inputs input[type="number"] nth 0..3 = z1 Re, z1 Im,
+     z2 Re, z2 Im. The drag points use pointer capture, so the demos use presets and
+     typed values instead of drags. */
+  const demos = {
+    'getting-started-set-numerator-and-denominator': {
+      title: 'The presets',
+      script: [
+        { say: `TAP 6/3
+Both real, both at 0°.
+Quotient 2.`, at: 'tl' },
+        { click: { button: '6/3', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 4i/2i
+90° − 90° = 0°. Length 4 ÷ 2.
+Quotient 2, on the real axis.`, at: 'tl' },
+        { click: { button: '4i/2i', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 1/i
+0° − 90° = −90°. Length 1.
+Quotient −i: a clockwise quarter turn.`, at: 'tl' },
+        { click: { button: '1/i', exact: true } },
+        { wait: 2600 },
+        { say: `TAP (3+4i)/(3−4i)
+Same modulus 5. Angles ±53.13°.
+Quotient −0.28 + 0.96i on the unit circle.`, at: 'tl' },
+        { click: { button: '(3+4i)/(3−4i)', exact: true } },
+        { wait: 2800 },
+        { say: `TAP (−2+6i)/(1+2i)
+Integers in, integers out.
+Quotient exactly 2 + 2i.`, at: 'tl' },
+        { click: { button: '(−2+6i)/(1+2i)', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-three-angle-arcs-subtraction-in-action': {
+      title: 'Angles subtract',
+      script: [
+        { say: `TYPE z₂ Re = 0
+z₂ = −i. θ₂ = −90°. θ₁ = 26.57°.
+26.57° + 90° = 116.57°. Quotient −2 + 4i.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0' },
+        { wait: 2800 },
+        { say: `TAP 1/i
+0° − 90° = −90°.
+Outer arc swings clockwise.`, at: 'tl' },
+        { click: { button: '1/i', exact: true } },
+        { wait: 2600 },
+        { say: `TAP 4i/2i
+Equal angles cancel: 90° − 90° = 0°.
+Quotient on the positive real axis.`, at: 'tl' },
+        { click: { button: '4i/2i', exact: true } },
+        { wait: 2600 },
+        { say: `TAP (4+2i)/(1−i)
+θ₁ = 26.57°, θ₂ = −45°.
+26.57° − (−45°) = 71.57°. Quotient 1 + 3i.`, at: 'tl' },
+        { click: { button: '(4+2i)/(1−i)', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'the-divide-by-zero-state': {
+      title: 'Zero and huge quotients',
+      script: [
+        { say: `TYPE z₂ Re = 0
+z₂ = −i. Quotient −2 + 4i.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0' },
+        { wait: 2400 },
+        { say: `TYPE z₂ Im = 0
+z₂ = 0.
+Cannot divide by zero.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: '0' },
+        { wait: 2800 },
+        { say: `TYPE z₂ Re = 0.5
+Quotient 8 + 4i. |z₁/z₂| = 8.94.
+Small denominator, long quotient.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0.5' },
+        { wait: 2800 },
+        { say: `TYPE z₂ Re = 0.3
+Quotient 13.33 + 6.67i. |z₁/z₂| = 14.91.
+Past ±10: dashed ray toward the edge.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0.3' },
+        { wait: 2800 },
+      ],
+    },
+    'the-conjugate-multiplication-method': {
+      title: 'Multiply by the conjugate',
+      script: [
+        { say: `TAP (−2+6i)/(1+2i)
+Denominator (1 + 2i)(1 − 2i) = 5.
+Numerator 10 + 10i. Result 2 + 2i.`, at: 'tl' },
+        { click: { button: '(−2+6i)/(1+2i)', exact: true } },
+        { wait: 3000 },
+        { say: `TAP 6/3
+Real denominator: its conjugate is 3.
+18 ÷ 9 = 2.`, at: 'tl' },
+        { click: { button: '6/3', exact: true } },
+        { wait: 2600 },
+        { say: `TAP (3+4i)/(3−4i)
+Denominator 3² + 4² = 25.
+Numerator −7 + 24i. Result −0.28 + 0.96i.`, at: 'tl' },
+        { click: { button: '(3+4i)/(3−4i)', exact: true } },
+        { wait: 3000 },
+        { say: `TAP 1/i
+Denominator (i)(−i) = 1.
+Result −i.`, at: 'tl' },
+        { click: { button: '1/i', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
    return {
       props:{
+      instructions,
+      demos,
       relatedTools: getRelatedTools('division'),
          sectionsContent,
          introContent,
@@ -867,7 +993,22 @@ Divisions this tidy are the exception, not the rule — nudge either input by $0
     }
    }
 
-export default function PageTemplate({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+export default function PageTemplate({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, explanations, stateUnits}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ComplexDivisionVisualizer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
     
   const genericSections=[
@@ -876,6 +1017,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
+          demo('getting-started-set-numerator-and-denominator'),
           sectionsContent.obj1.content,
         ]
     },
@@ -884,6 +1026,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
+          demo('the-three-angle-arcs-subtraction-in-action'),
           sectionsContent.obj2.content,
           <div key='u-general' dangerouslySetInnerHTML={{ __html: stateUnits.general }} />,
           sectionsContent.obj2.after,
@@ -944,6 +1087,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
+          demo('the-divide-by-zero-state'),
           sectionsContent.obj7.content,
           <div key='u-divideByZero' dangerouslySetInnerHTML={{ __html: stateUnits.divideByZero }} />,
           sectionsContent.obj7.after,
@@ -962,6 +1106,7 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
+          demo('the-conjugate-multiplication-method'),
           sectionsContent.obj9.content,
         ]
     },
@@ -1041,6 +1186,10 @@ export default function PageTemplate({relatedTools, seoData, sectionsContent, in
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Division</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <SiblingsNav maxWidth='100%'>
    <ComplexDivisionVisualizer explanations={explanations}/>
