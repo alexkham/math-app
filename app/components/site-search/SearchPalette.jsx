@@ -388,7 +388,8 @@ export default function SearchPalette() {
   const iconHoverOn = { background: TOKENS.surface2, color: TOKENS.ink };
   const iconHoverOff = { background: TOKENS.surface, color: TOKENS.muted };
 
-  const showTabs = searching && !isFallback;
+  const showTabs = !isFallback;
+  const showCounts = searching;
   const showFooter = !isMobile;
 
   /* ---------- pieces ---------- */
@@ -490,19 +491,21 @@ export default function SearchPalette() {
           >
             {item.key !== 'all' && <KindIcon kind={item.key} size={15} />}
             {item.label}
-            <span style={{
-              minWidth: 22, height: 20, padding: '0 6px', borderRadius: 999,
-              background: on ? TOKENS.brand : TOKENS.white,
-              border: `1px solid ${on ? TOKENS.brand : TOKENS.line}`,
-              color: on ? TOKENS.white : TOKENS.muted,
-              fontFamily: kbdStyle.fontFamily, fontSize: 11.5, display: 'grid', placeItems: 'center',
-            }}>
-              {counts[item.key]}
-            </span>
+            {showCounts && (
+              <span style={{
+                minWidth: 22, height: 20, padding: '0 6px', borderRadius: 999,
+                background: on ? TOKENS.brand : TOKENS.white,
+                border: `1px solid ${on ? TOKENS.brand : TOKENS.line}`,
+                color: on ? TOKENS.white : TOKENS.muted,
+                fontFamily: kbdStyle.fontFamily, fontSize: 11.5, display: 'grid', placeItems: 'center',
+              }}>
+                {counts[item.key]}
+              </span>
+            )}
           </button>
         );
       })}
-      {!isMobile && source === 'semantic' && (
+      {!isMobile && (!searching || source === 'semantic') && (
         <span style={{
           marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 6, paddingLeft: 16,
           fontSize: 13, color: TOKENS.brand, fontWeight: 600, whiteSpace: 'nowrap',
