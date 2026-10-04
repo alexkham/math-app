@@ -1550,6 +1550,7 @@ import polarRectangularDiagrams from '@/app/components/calculators/complex-numbe
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 
 
+
 export async function getStaticProps(){
 
   const keyWords = [
@@ -2733,6 +2734,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     modulus: demoUnitFrame({
       svg: polarRectangularDiagrams.qi,
@@ -2761,6 +2763,13 @@ const schemas = {
       text: 'The product sits at the angle &#952;&#8321; + &#952;&#8322; marked in the picture and at distance |z&#8321;||z&#8322;| from the origin: multiplying by a complex number rotates by its argument and scales by its modulus. Nothing in the algebraic expansion shows this; the picture does. Turn one factor and watch the product swing round on the',
       href: '/complex-numbers/visual-tools/multiplication',
       linkText: 'complex multiplication tool',
+    }),
+    principalArg: demoUnitFrame({
+      svg: polarRectangularDiagrams.qiv,
+      caption: 'A negative principal argument',
+      text: 'z = 5 &#8722; 5i lies in the fourth quadrant. The angle arc runs clockwise from the positive real axis, a quarter of a half turn: under the (&#8722;&#960;, &#960;] convention Arg(z) = &#8722;&#960;/4, not 7&#960;/4. Both angles name the same point; the principal argument is the one inside the standard interval. Drag z into other quadrants on the',
+      href: '/complex-numbers/visual-tools/polar-rectangular',
+      linkText: 'polar and rectangular converter',
     }),
   };
 
@@ -2833,6 +2842,8 @@ export default function TrigoFormPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-principalArg'} dangerouslySetInnerHTML={{ __html: demoUnits.principalArg }} />,
+          `Under the [0, 2π) convention the same z has Arg(z) = 7π/4: the point is fixed, only the chosen representative changes.`,
         ]
     },
     {

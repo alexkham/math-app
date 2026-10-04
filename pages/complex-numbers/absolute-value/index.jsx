@@ -1272,6 +1272,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
 import complexAddSubDiagrams from '@/app/components/calculators/complex-numbers/complexAddSubDiagrams'
+import distanceMidpointDiagrams from '@/app/components/calculators/complex-numbers/distanceMidpointDiagrams'
 
 
 export async function getStaticProps(){
@@ -2230,6 +2231,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     modulus: demoUnitFrame({
       svg: conjugateModulusDiagrams.start,
@@ -2244,6 +2246,20 @@ const schemas = {
       text: 'The sum is the diagonal of the parallelogram, and the diagonal of a parallelogram is never longer than the two sides that lead to it: |z&#8321; + z&#8322;| &#8804; |z&#8321;| + |z&#8322;|, the triangle inequality as a picture. Equality happens only when the two arrows point the same way. Line the arrows up and watch the inequality become an equation on the',
       href: '/complex-numbers/visual-tools/addition-subtraction',
       linkText: 'complex addition and subtraction tool',
+    }),
+    pureImagModulus: demoUnitFrame({
+      svg: conjugateModulusDiagrams.pureImaginary,
+      caption: 'A pure imaginary number and its modulus',
+      text: 'z = 3i sits on the imaginary axis, three units above the origin, so |z| = &#8730;(0&#178; + 3&#178;) = 3. Its conjugate &#8722;3i sits three units below and has the same modulus: on the imaginary axis, as on the real axis, the modulus is the distance from 0 and ignores the sign. Move z onto either axis, or to 0, on the',
+      href: '/complex-numbers/visual-tools/complex-conjugate',
+      linkText: 'complex conjugate and modulus explorer',
+    }),
+    distance: demoUnitFrame({
+      svg: distanceMidpointDiagrams.general,
+      caption: 'Distance as the modulus of a difference',
+      text: 'For z&#8321; = &#8722;2 + i and z&#8322; = 3 + 3i the difference has real part 5 and imaginary part 2, the legs of the right triangle drawn between the points. Its modulus is the hypotenuse: |z&#8321; &#8722; z&#8322;| = &#8730;(5&#178; + 2&#178;) = &#8730;29 &#8776; 5.39. Drag either point on the',
+      href: '/complex-numbers/visual-tools/distance-midpoint',
+      linkText: 'distance and midpoint visualizer',
     }),
   };
 
@@ -2335,6 +2351,8 @@ export default function AbsoluteValuePage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-pureImagModulus'} dangerouslySetInnerHTML={{ __html: demoUnits.pureImagModulus }} />,
+          `Only z = 0 has modulus 0: every other point, on an axis or not, lies some positive distance from the origin.`,
         ]
     },
     {
@@ -2395,6 +2413,8 @@ export default function AbsoluteValuePage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-distance'} dangerouslySetInnerHTML={{ __html: demoUnits.distance }} />,
+          `Fix z₀ and let z vary with |z − z₀| = r: the points traced out form the circle of radius r about z₀.`,
         ]
     },
     {

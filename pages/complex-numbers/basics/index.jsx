@@ -893,6 +893,8 @@ import complexExplorerDiagrams from '@/app/components/calculators/complex-number
 import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
 import polarRectangularDiagrams from '@/app/components/calculators/complex-numbers/polarRectangularDiagrams'
 import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoivreDiagrams'
+import eulerFormulaDiagrams from '@/app/components/calculators/complex-numbers/eulerFormulaDiagrams'
+import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
 
 
 export async function getStaticProps(){
@@ -1472,6 +1474,17 @@ const faqQuestions = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
+  const crQuartic = {
+    kind: 'roots',
+    svgTitle: 'The four roots of z^4 + 1 = 0 on the unit circle',
+    roots: [
+      { arg: 45, label: '(1 + i)/√2' }, { arg: 135, label: '(−1 + i)/√2' },
+      { arg: 225, label: '(−1 − i)/√2' }, { arg: 315, label: '(1 − i)/√2' },
+    ],
+    captionLines: ['z⁴ + 1 = 0 has no real root, but exactly 4 complex roots —', 'one per degree, 90° apart on the unit circle, in two conjugate pairs'],
+  };
+
   const demoUnits = {
     pureImag: demoUnitFrame({
       svg: complexExplorerDiagrams.pureImaginary,
@@ -1507,6 +1520,18 @@ const faqQuestions = {
       text: 'Each power turns the arrow by the same angle &#952; again and scales its length by r again, so z&#8319; sits at angle n&#952; and distance r&#8319;: De Moivre&#8217;s theorem drawn as a spiral of four arrows. Raise the exponent and watch the spiral wind on the',
       href: '/complex-numbers/visual-tools/demoivre-visualizer',
       linkText: 'De Moivre visualizer',
+    }),
+    euler180: demoUnitFrame({
+      svg: eulerFormulaDiagrams.theta180,
+      caption: 'e^(iπ) on the unit circle',
+      text: 'The point e^(i&#952;) = cos &#952; + i sin &#952; sits on the unit circle at angle &#952; from the positive real axis. At &#952; = &#960; the angle is a half turn: cos &#960; = &#8722;1 and sin &#960; = 0, so the point lands on &#8722;1 and e^(i&#960;) + 1 = 0. Sweep &#952; around the circle on the',
+      href: '/complex-numbers/visual-tools/euler-formula',
+      linkText: 'Euler\'s formula visualizer',
+    }),
+    quarticRoots: demoUnitFrame({
+      svg: renderComplexRoots(crQuartic),
+      caption: 'Four roots for a degree-4 equation',
+      text: 'The example from the text: z&#8308; = &#8722;1 has no solution on the real line, yet in the plane it has exactly four, as the Fundamental Theorem of Algebra promises for degree 4. All four have modulus 1, so they sit on the unit circle, and their arguments 45&#176;, 135&#176;, 225&#176;, 315&#176; are 90&#176; apart. Because the coefficients are real, the roots come in conjugate pairs &#8212; each is the mirror image of another across the real axis.',
     }),
   };
 
@@ -1640,6 +1665,8 @@ export default function ComplexNumbersBasicsPage({seoData, sectionsContent, intr
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-euler180'} dangerouslySetInnerHTML={{ __html: demoUnits.euler180 }} />,
+          `Doubling the angle to 2π brings the point back to 1: e^(2πi) = 1.`,
         ]
     },
     {
@@ -1663,6 +1690,8 @@ export default function ComplexNumbersBasicsPage({seoData, sectionsContent, intr
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-quarticRoots'} dangerouslySetInnerHTML={{ __html: demoUnits.quarticRoots }} />,
+          `So z⁴ + 1 factors over the reals into two quadratics, one for each conjugate pair: (z² − √2 z + 1)(z² + √2 z + 1).`,
         ]
     },
     {

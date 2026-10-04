@@ -1101,6 +1101,7 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
+import renderBinomialCurve from '@/app/utils/illustrations/combinatorics/binomial/binomialCurve'
 
 
 export async function getStaticProps(){
@@ -1871,6 +1872,14 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const bcGeneral = {
+    kind: 'polynomial', k: 2, xRange: [-1.5, 4.5], yRange: [-1, 8],
+    svgTitle: 'C(x, 2) as a curve through the counts C(n, 2)',
+    curveLabel: { text: 'C(x, 2) = x(x \u2212 1)/2', x: 3.1, y: 7.4 },
+    labelDy: { 2: -12 },
+    extra: [{ x: -1, label: 'x = \u22121: value 1' }, { x: 2.5, label: 'x = 5/2: value 15/8' }],
+  };
+
   const demoUnits = {
     symmetry: demoUnitFrame({
       svg: pascalTriangleDiagrams.symmetry,
@@ -1878,6 +1887,11 @@ const schemas = {
       text: 'The two highlighted entries sit at mirrored positions in the same row and hold the same value, which is the identity C(n,k) = C(n,n&#8722;k) drawn rather than proved. Choosing which 2 of 7 items to take is the same act as choosing which 5 to leave, and the array makes that restatement visible as a reflection. Move the focus along a row and watch its mirror move with it on the',
       href: '/combinatorics/visual-tools/pascal-triangle',
       linkText: 'Pascal&#8217;s triangle visualizer',
+    }),
+    generalizedC2: demoUnitFrame({
+      svg: renderBinomialCurve(bcGeneral),
+      caption: 'One polynomial through the counts',
+      text: 'For k = 2 the descending-product form gives C(x, 2) = x(x &#8722; 1)/2, a parabola in x. At x = 0, 1, 2, 3, 4 it passes through 0, 0, 1, 3, 6 &#8212; the number of ways to choose 2 items from x. Between and beyond those points the same formula still returns a value: 15/8 at x = 5/2, and 1 at x = &#8722;1. Those values count nothing; they are what the algebraic definition adds, and what Newton&#8217;s generalized binomial theorem uses.',
     }),
   };
 
@@ -1922,6 +1936,8 @@ export default function BinomialCoefficientPage({seoData, sectionsContent, intro
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-generalizedC2'} dangerouslySetInnerHTML={{ __html: demoUnits.generalizedC2 }} />,
+          `For any k the curve is a polynomial of degree k, and it vanishes at x = 0, 1, ..., k - 1: fewer than k items leave no way to choose k.`,
         ]
     },
     {

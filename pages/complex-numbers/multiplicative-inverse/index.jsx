@@ -1372,6 +1372,7 @@ import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoi
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "multiplicative inverse complex number",
@@ -2403,6 +2404,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     geom: demoUnitFrame({
       svg: deMoivreDiagrams.inverse,
@@ -2417,6 +2419,13 @@ const schemas = {
       text: 'The quotient sits at the angle &#952;&#8321; &#8722; &#952;&#8322; and at distance |z&#8321;|/|z&#8322;|: division undoes the rotation and the scaling that multiplication performs. Multiplying numerator and denominator by the conjugate is the algebra that produces this picture. Move the divisor and watch the quotient counter-rotate on the',
       href: '/complex-numbers/visual-tools/division',
       linkText: 'complex division tool',
+    }),
+    divByZero: demoUnitFrame({
+      svg: complexDivisionDiagrams.divideByZero,
+      caption: 'Dividing by zero: nothing to draw',
+      text: 'The division visualizer with z&#8321; = 4 + 2i and the denominator z&#8322; set to 0. Every other quotient has a length |z&#8321;|/|z&#8322;| and an angle &#952;&#8321; &#8722; &#952;&#8322;; here the length would need a division by |z&#8322;| = 0 and z&#8322; has no angle at all, so the tool draws no quotient. Move z&#8322; off the origin on the',
+      href: '/complex-numbers/visual-tools/division',
+      linkText: 'complex division visualizer',
     }),
   };
 
@@ -2553,6 +2562,8 @@ export default function MultiplicativeInversePage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-divByZero'} dangerouslySetInnerHTML={{ __html: demoUnits.divByZero }} />,
+          `The same is true of 0⁻¹ = 1/0: with z₁ = 1 the figure stays empty, because no w gives 0 · w = 1.`,
         ]
     },
     {

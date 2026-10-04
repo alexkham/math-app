@@ -1368,6 +1368,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import eulerFormulaDiagrams from '@/app/components/calculators/complex-numbers/eulerFormulaDiagrams'
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoivreDiagrams'
+import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 
 
 export async function getStaticProps(){
@@ -2402,6 +2403,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     euler: demoUnitFrame({
       svg: eulerFormulaDiagrams.theta45,
@@ -2430,6 +2432,20 @@ const schemas = {
       text: 'Squaring doubles the angle and squares the length, exactly what the exponent rule (e^(i&#952;))&#178; = e^(2i&#952;) predicts; the picture and the exponential form say the same thing in two languages. Raise the power and watch the exponent rule turn into a spiral on the',
       href: '/complex-numbers/visual-tools/demoivre-visualizer',
       linkText: 'De Moivre visualizer',
+    }),
+    scaledPolar: demoUnitFrame({
+      svg: eulerFormulaDiagrams.scaled,
+      caption: 'z = 2e^(iπ/3)',
+      text: 'The exponential form reads as directions for reaching z: turn to the angle &#952; = &#960;/3, then go out a distance r = 2. The factor e^(i&#952;) supplies the direction on the unit circle and r stretches it, so the point lands on the circle of radius 2, with coordinates r cos &#952; = 1 and r sin &#952; = &#8730;3 &#8212; the algebraic form 1 + &#8730;3 i. Change r and &#952; on the',
+      href: '/complex-numbers/visual-tools/euler-formula',
+      linkText: 'Euler\'s formula visualizer',
+    }),
+    divAngles: demoUnitFrame({
+      svg: complexDivisionDiagrams.general,
+      caption: 'Dividing subtracts the angles',
+      text: 'z&#8321; = 4 + 2i divided by z&#8322; = 1 &#8722; i. In exponential form the quotient is (r&#8321;/r&#8322;) e^(i(&#952;&#8321; &#8722; &#952;&#8322;)): its angle is &#952;&#8321; &#8722; &#952;&#8322;, marked on the figure, and its length is &#8730;20/&#8730;2 = &#8730;10. The result is 1 + 3i. Try other pairs on the',
+      href: '/complex-numbers/visual-tools/division',
+      linkText: 'complex division visualizer',
     }),
   };
 
@@ -2519,6 +2535,8 @@ export default function ExponentialFormPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-scaledPolar'} dangerouslySetInnerHTML={{ __html: demoUnits.scaledPolar }} />,
+          `With r = 1 the same point sits on the unit circle: e^(iθ) alone is a pure direction.`,
         ]
     },
     {
@@ -2569,6 +2587,8 @@ export default function ExponentialFormPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-divAngles'} dangerouslySetInnerHTML={{ __html: demoUnits.divAngles }} />,
+          `Here θ₂ is negative, so subtracting it turns the quotient further counterclockwise than z₁.`,
         ]
     },
     {

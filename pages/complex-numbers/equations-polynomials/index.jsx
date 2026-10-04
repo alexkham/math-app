@@ -959,6 +959,9 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
+import renderComplexRootsV2 from '@/app/utils/illustrations/complex-numbers/plane/complexRoots.v2'
 
 
 // Surfaced on the /complex-numbers hub via buildSectionData extraction.
@@ -1608,6 +1611,37 @@ const schemas = {
 
 
 
+  const crCubeUnity = {
+    kind: 'roots',
+    svgTitle: 'The roots of z^3 - 1: 1, omega and omega squared on the unit circle',
+    ticks: { re: ['', '−1'], im: ['i', '−i'] },
+    roots: [{ arg: 0, label: '1' }, { arg: 120, label: 'ω = −1/2 + (√3/2)i' }, { arg: 240, label: 'ω² = −1/2 − (√3/2)i' }],
+    pairNote: 'ω and ω² are conjugates: together they give the real factor z² + z + 1',
+    captionLines: ['z³ − 1 = (z − 1)(z − ω)(z − ω²) = (z − 1)(z² + z + 1)'],
+  };
+
+  const crZConj = {
+    kind: 'withOrigin',
+    svgTitle: 'The four solutions of z^2 = conj z',
+    ticks: { re: ['', '−1'], im: ['i', '−i'] },
+    roots: [{ arg: 0, label: '1' }, { arg: 120, label: '−1/2 + (√3/2)i' }, { arg: 240, label: '−1/2 − (√3/2)i' }],
+    circleNote: 'r = 1: three solutions on the unit circle',
+    captionLines: ['z² = z̄ has 2 + 2 = 4 solutions: z = 0, and three with |z| = 1', 'at 0°, 120°, 240°, where 3θ is a multiple of 360°'],
+  };
+
+  const demoUnits = {
+    cubeUnity: demoUnitFrame({
+      svg: renderComplexRoots(crCubeUnity),
+      caption: 'Three linear factors, three roots',
+      text: 'Each linear factor of z&#179; &#8722; 1 is one root in the plane: 1 on the real axis, and &#969;, &#969;&#178; at 120&#176; and 240&#176; on the unit circle. Over the reals only the factor z &#8722; 1 splits off; the other two roots are a conjugate pair, and multiplying their factors gives (z &#8722; &#969;)(z &#8722; &#969;&#178;) = z&#178; + z + 1, which has real coefficients but no real root.',
+    }),
+    zSquaredConj: demoUnitFrame({
+      svg: renderComplexRootsV2(crZConj),
+      caption: 'The n + 2 solutions for n = 2',
+      text: 'Matching moduli in z&#178; = z&#772; gives r&#178; = r, so r = 0 or r = 1. The case r = 0 is the single point z = 0, drawn filled. The case r = 1 puts the rest on the unit circle, where matching arguments gives 3&#952; = 360&#176;k: three solutions at 0&#176;, 120&#176; and 240&#176;. That makes 1 + 3 = 4 = n + 2, two more than the n roots of z&#8319; = w.',
+    }),
+  };
+
   return {
   props:{
     sectionsContent,
@@ -1618,6 +1652,7 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Polynomial Equations & Fundamental Theorem | Learn Math Class",
       description: "Learn how complex numbers solve all polynomial equations. Covers the Fundamental Theorem of Algebra, factoring over ℂ, Vieta's formulas, conjugate pairs, and solving equations like z^n = w.",
@@ -1640,6 +1675,7 @@ export default function EquationsPolynomialsPage({
   summaryTable,
   faqQuestions,
   schemas,
+  demoUnits,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1676,6 +1712,8 @@ export default function EquationsPolynomialsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-cubeUnity'} dangerouslySetInnerHTML={{ __html: demoUnits.cubeUnity }} />,
+          `Over ℂ every factor is linear; over ℝ a conjugate pair stays joined as one quadratic factor.`,
         ]
     },
     {
@@ -1726,6 +1764,8 @@ export default function EquationsPolynomialsPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-zSquaredConj'} dangerouslySetInnerHTML={{ __html: demoUnits.zSquaredConj }} />,
+          `The circle solutions are the cube roots of unity: for r = 1, z̄ = 1/z, so z² = z̄ becomes z³ = 1.`,
         ]
     },
     {

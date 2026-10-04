@@ -984,6 +984,11 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import inclusionExclusionDiagrams from '@/app/components/diagrams/set-theory/inclusionExclusionDiagrams'
+import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
+import renderFixedPoints from '@/app/utils/illustrations/combinatorics/permutations/fixedPoints'
+import renderVennCount from '@/app/utils/illustrations/combinatorics/counting/vennCount'
 
 
 export async function getStaticProps(){
@@ -1656,6 +1661,48 @@ const schemas = {
 }
 
 
+  const fpPositions = {
+    kind: 'derangements',
+    svgTitle: 'The six permutations of 1, 2, 3 and how many of the sets A1, A2, A3 each one is in',
+    items: ['1', '2', '3'],
+    placeName: 'position', rowName: 'perm.', countName: 'in how many Aᵢ', ownNote: 'element i in position i: the permutation is in Aᵢ',
+    caption: 'In none of A₁, A₂, A₃: 6 − 3·2! + 3·1! − 0! = 2',
+  };
+
+  const vcLanguages = {
+    kind: 'twoSets', idPrefix: 'v2c-ie',
+    svgTitle: '30 students: 18 take French, 15 take Spanish, 7 take both',
+    a: { name: 'French', letter: 'F', size: 18 }, b: { name: 'Spanish', letter: 'S', size: 15 },
+    both: 7, total: 30, unit: 'students', neitherNote: 'take neither',
+  };
+
+  const demoUnits = {
+    centreEmptied: demoUnitFrame({
+      svg: inclusionExclusionDiagrams['centre-emptied'],
+      caption: 'After the three subtractions',
+      text: 'Each region shows how many times its elements have been counted so far (large number) and how many elements it holds (small number). The three singles counted the centre three times; the three pairwise subtractions each took it back once, so the centre now reads 0 while every other region reads 1. Adding |A &#8745; B &#8745; C| back is the last correction. Step through all seven terms on the',
+      href: '/set-theory/visual-tools/inclusion-exclusion',
+      linkText: 'inclusion-exclusion explorer',
+    }),
+    complementUnion: demoUnitFrame({
+      svg: twoSetsVennDiagrams.complementUnion,
+      caption: 'Outside every set',
+      text: 'The shaded region is everything in U that lies in neither A nor B: the universe with the union removed, which is also the overlap of the two complements. Its size is |U| &#8722; |A &#8746; B|, so counting the elements that avoid every condition comes down to one union count. Compare it with the other two-set regions on the',
+      href: '/set-theory/visual-tools/two-sets-basic-venn',
+      linkText: 'two-set Venn diagram tool',
+    }),
+    derangeSets: demoUnitFrame({
+      svg: renderFixedPoints(fpPositions),
+      caption: 'Permutations of 1, 2, 3 and the sets Aᵢ',
+      text: 'A permutation is in A&#7522; when element i stays in position i, so the last column is how many of the sets it belongs to. The identity is in all three, three permutations are in exactly one, and two are in none. Adding the column gives 6 = 3&#183;2!, the sum of the |A&#7522;|, and the complementary form removes everything that is in at least one set, leaving the 2 derangements.',
+    }),
+    languages: demoUnitFrame({
+      svg: renderVennCount(vcLanguages),
+      caption: 'The overlap, counted twice',
+      text: 'The example from the text, region by region: 11 students take only French, 8 only Spanish, 7 both, and 4 neither. The 18 French students include the 7, and so do the 15 Spanish students, so 18 + 15 = 33 counts those 7 twice. Subtracting |F &#8745; S| once gives 26, the same as adding the three inner regions directly.',
+    }),
+  };
+
    return {
       props:{
          sectionsContent,
@@ -1664,6 +1711,7 @@ const schemas = {
          capstoneTable,
          faqQuestions,
          schemas,
+         demoUnits,
           seoData: {
         title: "Inclusion-Exclusion Formula & Examples | Learn Math Class",
         description: "Inclusion-exclusion principle for counting unions of overlapping sets. Two-set, three-set, and general n-set formulas with derangement and surjection examples.",
@@ -1676,7 +1724,7 @@ const schemas = {
     }
    }
 
-export default function InclusionExclusionPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas}) {
+export default function InclusionExclusionPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1695,6 +1743,8 @@ export default function InclusionExclusionPage({seoData, sectionsContent, introC
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-languages'} dangerouslySetInnerHTML={{ __html: demoUnits.languages }} />,
+          `The 4 outside both circles are 30 - 26: the complementary count, taken up again in the complementary form below.`,
         ]
     },
     {
@@ -1703,6 +1753,8 @@ export default function InclusionExclusionPage({seoData, sectionsContent, introC
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-centreEmptied'} dangerouslySetInnerHTML={{ __html: demoUnits.centreEmptied }} />,
+          `Add the triple intersection back and every region reads exactly 1: each element of the union is counted once.`,
         ]
     },
     {
@@ -1719,6 +1771,8 @@ export default function InclusionExclusionPage({seoData, sectionsContent, introC
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-complementUnion'} dangerouslySetInnerHTML={{ __html: demoUnits.complementUnion }} />,
+          `With more sets the picture is the same: the region outside all the circles, found by subtracting the union from U.`,
         ]
     },
     {
@@ -1727,6 +1781,8 @@ export default function InclusionExclusionPage({seoData, sectionsContent, introC
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-derangeSets'} dangerouslySetInnerHTML={{ __html: demoUnits.derangeSets }} />,
+          `Each k-fold intersection has (3 − k)! permutations, which is why the terms are 3!, 3·2!, 3·1! and 0!.`,
         ]
     },
     {

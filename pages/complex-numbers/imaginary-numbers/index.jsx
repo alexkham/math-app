@@ -1100,6 +1100,7 @@ import complexExplorerDiagrams from '@/app/components/calculators/complex-number
 import iPowersDiagrams from '@/app/components/calculators/complex-numbers/iPowersDiagrams'
 
 
+
 export async function getStaticProps(){
 
   const keyWords = [
@@ -1883,6 +1884,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     pureImag: demoUnitFrame({
       svg: complexExplorerDiagrams.pureImaginary,
@@ -1897,6 +1899,13 @@ const schemas = {
       text: 'The four values i, &#8722;1, &#8722;i, 1 sit on a loop and each multiplication by i steps one place round it, so i&#8309; lands back on i: the remainder of the exponent on division by 4 is all that matters. The highlighted node is the current power. Step the exponent up and watch the cycle repeat on the',
       href: '/complex-numbers/visual-tools/i-powers',
       linkText: 'powers of i visualizer',
+    }),
+    imagPartSign: demoUnitFrame({
+      svg: complexExplorerDiagrams.quadrantIV,
+      caption: 'Im(z) is a signed real number',
+      text: 'z = 3 &#8722; 2i, written in strict standard form as 3 + (&#8722;2)i. The figure reads its two parts as coordinates: a = 3 across, b = &#8722;2 down. The imaginary part is that &#8722;2 &#8212; a real number, sign included, with no i attached. Try other points on the',
+      href: '/complex-numbers/visual-tools/complex-explorer',
+      linkText: 'complex number explorer',
     }),
   };
 
@@ -2004,6 +2013,8 @@ export default function ImaginaryNumbersPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-imagPartSign'} dangerouslySetInnerHTML={{ __html: demoUnits.imagPartSign }} />,
+          `Keep the sign and drop the i: Im(2 − 7i) = −7, not 7 and not −7i.`,
         ]
     },
     {

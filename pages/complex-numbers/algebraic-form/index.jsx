@@ -1211,6 +1211,7 @@ import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbe
 import complexExplorerDiagrams from '@/app/components/calculators/complex-numbers/complexExplorerDiagrams'
 
 
+
 export async function getStaticProps(){
 
   const keyWords = [
@@ -2105,6 +2106,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     conj: demoUnitFrame({
       svg: conjugateModulusDiagrams.start,
@@ -2117,6 +2119,13 @@ const schemas = {
       svg: complexExplorerDiagrams.quadrantI,
       caption: 'z = 2 + 3i: Re(z) = 2 is the horizontal coordinate',
       text: 'The real part is the foot of the point on the horizontal axis, a = 2, and the imaginary part is its height, b = 3; the explorer reads both off the plotted point. Re(z) is a real number, a coordinate, never a complex one. Drag the point and watch a and b update on the',
+      href: '/complex-numbers/visual-tools/complex-explorer',
+      linkText: 'complex number explorer',
+    }),
+    imagPartNeg: demoUnitFrame({
+      svg: complexExplorerDiagrams.quadrantIV,
+      caption: 'A negative imaginary part',
+      text: 'z = 3 &#8722; 2i sits three units right of the imaginary axis and two units below the real axis. Its imaginary part is the vertical coordinate with its sign, b = &#8722;2 &#8212; a real number, not &#8722;2i. Dropping the minus sign would put the point at 3 + 2i, above the axis, which is its conjugate. Move z between quadrants on the',
       href: '/complex-numbers/visual-tools/complex-explorer',
       linkText: 'complex number explorer',
     }),
@@ -2222,6 +2231,8 @@ export default function AlgebraicFormPage({
         link:sectionsContent.obj22.link,
         content:[
           sectionsContent.obj22.content,
+          <div key={'unit-imagPartNeg'} dangerouslySetInnerHTML={{ __html: demoUnits.imagPartNeg }} />,
+          `Re(z) = 3 is read off the horizontal axis the same way: the pair (Re z, Im z) is the point's address in the plane.`,
         ]
     },
     {

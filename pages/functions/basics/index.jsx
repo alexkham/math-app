@@ -890,6 +890,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderSetElementsV2 from '@/app/utils/illustrations/set-theory/relationships/setElements.v2'
+import renderLineTest from '@/app/utils/illustrations/functions/graphs/lineTest'
 
 
 export async function getStaticProps(){
@@ -1491,6 +1494,41 @@ const faqQuestions = {
     },
   }
 
+  const seFunctionOrNot = {
+    kind: 'pairing',
+    svgTitle: 'A function assigns one output to each input; a relation may assign two',
+    style: { primary: '#2563EB', primaryLight: '#DBEAFE', secondary: '#06357A', secondaryLight: '#E8EEF7', result: '#B45309', resultFill: '#FDF3E3', text: '#1E3A5F' },
+    panels: [
+      { leftName: 'input x', rightName: 'f(x) = x² + 1', left: ['−2', '0', '2', '3'], right: ['1', '5', '10'],
+        pairs: [[0, 1], [1, 0], [2, 1], [3, 2]], verdict: 'a function: one arrow leaves each input', ok: true },
+      { leftName: 'number', rightName: 'its square roots', left: ['1', '4', '9'], right: ['−3', '−2', '−1', '1', '2', '3'],
+        pairs: [[0, 2], [0, 3], [1, 1], [1, 4], [2, 0], [2, 5]], verdict: 'not a function: 4 goes to 2 and to −2', ok: false },
+    ],
+  };
+
+  const ltParabolaCircle = {
+    kind: 'vertical',
+    svgTitle: 'Vertical line test: a parabola passes, a circle fails',
+    panels: [
+      { title: 'y = x² − 1', curve: { type: 'graph', f: (x) => x * x - 1, from: -2, to: 2 }, lines: [-1.5, 0.5, 1.5], verdict: 'one crossing per line: a function' },
+      { title: 'x² + y² = 4', curve: { type: 'circle', r: 2 }, lines: [1], verdict: 'x = 1 crosses twice: not a function' },
+    ],
+    caption: 'Two crossings on one vertical line = one input with two outputs',
+  };
+
+  const demoUnits = {
+    functionOrNot: demoUnitFrame({
+      svg: renderSetElementsV2(seFunctionOrNot),
+      caption: 'One output per input',
+      text: 'Left: f(x) = x&#178; + 1 on four inputs. Exactly one arrow leaves each input; &#8722;2 and 2 both land on 5, which is allowed &#8212; sharing an output breaks nothing. Right: pairing each number with its square roots sends 4 to both 2 and &#8722;2 (and 1, 9 likewise), so an input has two outputs and the rule is not a function.',
+    }),
+    verticalLineTest: demoUnitFrame({
+      svg: renderLineTest(ltParabolaCircle),
+      caption: 'A parabola passes, a circle fails',
+      text: 'Each dashed line holds x fixed. On the parabola y = x&#178; &#8722; 1 every such line meets the curve exactly once, so each input has one output. On the circle x&#178; + y&#178; = 4 the line x = 1 meets it at y = &#8730;3 and y = &#8722;&#8730;3: one input, two outputs, so the circle is not the graph of a function.',
+    }),
+  };
+
    return {
       props:{
          sectionsContent,
@@ -1501,6 +1539,7 @@ const faqQuestions = {
          summaryTable,
          faqQuestions,
          schemas,
+         demoUnits,
           seoData: {
         title: "Functions Basics: Definition, Notation & Tests | Learn Math Class",
         // Surfaced on the /functions hub via buildSectionData extraction.
@@ -1523,7 +1562,8 @@ export default function FunctionsBasicsPage({
   obj8Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas,
+  demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1543,6 +1583,8 @@ export default function FunctionsBasicsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-functionOrNot'} dangerouslySetInnerHTML={{ __html: demoUnits.functionOrNot }} />,
+          `The test is only about arrows leaving an input: several arrows arriving at one output are fine.`,
         ]
     },
     {
@@ -1564,6 +1606,8 @@ export default function FunctionsBasicsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-verticalLineTest'} dangerouslySetInnerHTML={{ __html: demoUnits.verticalLineTest }} />,
+          `The upper half alone, y = √(4 − x²), passes the test: cutting the circle along the x-axis leaves two functions.`,
         ]
     },
     {

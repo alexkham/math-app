@@ -80,13 +80,14 @@ right of the last place; row i baseline at y = 84 + 40·i.
 
 ## 10. Spec examples
 
-Shipped spec: `fpHats` in `pages/combinatorics/permutations/index.jsx`.
+Shipped specs: `fpHats` in `pages/combinatorics/permutations/index.jsx`; `fpPositions` in `pages/combinatorics/inclusion-exclusion/index.jsx`.
 
 ## 11. Scene catalog
 
 | Scene | Page · section | Kind | Job | Origin |
 |---|---|---|---|---|
-| `hatCheck` | permutations obj8 | derangements | classify | deferred: derangements |
+| `hatCheck` | permutations obj8 | derangements | structure | deferred: derangements |
+| `derangeSets` | inclusion-exclusion obj5 | derangements | structure | deferred: derangements |
 
 ## 12. Renderer requirements
 

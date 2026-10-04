@@ -1295,6 +1295,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import complexAddSubDiagrams from '@/app/components/calculators/complex-numbers/complexAddSubDiagrams'
 import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
+import renderComplexPoints from '@/app/utils/illustrations/complex-numbers/plane/complexPoints'
 
 
 export async function getStaticProps(){
@@ -2259,6 +2260,11 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const cpNegation = {
+    kind: 'negation', idPrefix: 'cp-neg', z: { re: 3, im: 2 },
+    svgTitle: 'z = 3 + 2i and -z = -3 - 2i, a half turn apart about 0',
+  };
+
   const demoUnits = {
     negation: demoUnitFrame({
       svg: complexAddSubDiagrams.sub,
@@ -2273,6 +2279,11 @@ const schemas = {
       text: 'The conjugate shown here changes only the sign of the imaginary part, so z and z&#772; are mirror images across the real axis. The additive inverse changes both signs and lands diagonally opposite, in the quadrant the conjugate never visits. Compare the two by hand on the',
       href: '/complex-numbers/visual-tools/complex-conjugate',
       linkText: 'conjugate and modulus tool',
+    }),
+    halfTurn: demoUnitFrame({
+      svg: renderComplexPoints(cpNegation),
+      caption: 'z and −z through the origin',
+      text: 'Negating both coordinates of z = 3 + 2i gives &#8722;z = &#8722;3 &#8722; 2i, the point directly opposite through 0. The two sit at the ends of one diameter of the circle of radius |z| = &#8730;13, so |&#8722;z| = |z|, and the origin is their midpoint. The curved arrow is the half turn about 0 that carries z to &#8722;z: the argument grows by exactly 180&#176;.',
     }),
   };
 
@@ -2367,6 +2378,8 @@ export default function AdditiveInversePage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-halfTurn'} dangerouslySetInnerHTML={{ __html: demoUnits.halfTurn }} />,
+          `Compare the conjugate: it reflects z across the real axis instead, so it keeps the real part and flips only the sign of the imaginary part.`,
         ]
     },
     {

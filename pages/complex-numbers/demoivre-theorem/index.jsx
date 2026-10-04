@@ -1049,6 +1049,7 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoivreDiagrams'
+import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
 
 
 export async function getStaticProps(){
@@ -1764,6 +1765,14 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const crCube8 = {
+    kind: 'roots',
+    svgTitle: 'The three cube roots of 8 on the circle of radius 2',
+    ticks: { re: ['', '−2'], im: ['2i', '−2i'] },
+    roots: [{ arg: 0, label: '2' }, { arg: 120, label: '−1 + √3 i' }, { arg: 240, label: '−1 − √3 i' }],
+    captionLines: ['z³ = 8 has one real root, 2, and two complex ones —', 'three roots of modulus 2, 120° apart'],
+  };
+
   const demoUnits = {
     formula: demoUnitFrame({
       svg: deMoivreDiagrams.squared,
@@ -1778,6 +1787,11 @@ const schemas = {
       text: 'The ten arrows step round by the same angle each time while their lengths grow geometrically, and the tenth lands where the theorem says: argument 10&#952;, modulus r&#185;&#8304;. The algebraic expansion of a tenth power would take dozens of terms; the picture takes ten turns. Follow the spiral for any base on the',
       href: '/complex-numbers/visual-tools/demoivre-visualizer',
       linkText: 'De Moivre visualizer',
+    }),
+    cubeRoots8: demoUnitFrame({
+      svg: renderComplexRoots(crCube8),
+      caption: 'The three cube roots of 8',
+      text: 'Write 8 = 8 cis 0&#176;. Every cube root has modulus 8^(1/3) = 2, so all three sit on the circle of radius 2. Their arguments are (0&#176; + 360&#176;k)/3 for k = 0, 1, 2: 0&#176;, 120&#176; and 240&#176;. The real root 2 is the one real-number experience finds; the other two, &#8722;1 &#177; &#8730;3 i, are a conjugate pair, and each cubes to 8 because tripling 120&#176; or 240&#176; lands on a multiple of 360&#176;.',
     }),
   };
 
@@ -1876,6 +1890,8 @@ export default function DeMoivreTheoremPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-cubeRoots8'} dangerouslySetInnerHTML={{ __html: demoUnits.cubeRoots8 }} />,
+          `Take k = 3 and the angle is 360°, the same point as k = 0: the list of roots closes after n steps.`,
         ]
     },
     {

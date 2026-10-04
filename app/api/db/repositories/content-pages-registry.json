@@ -1555,6 +1555,30 @@
           "linear-transformation-2d"
         ],
         "why": "draws the domain with its kernel and the codomain with its image side by side, so rank and nullity are both visible"
+      },
+      "inclusion-exclusion principle (three sets)": {
+        "tool": "inclusion-exclusion",
+        "decided": "2026-09-29",
+        "runnersUp": [
+          "three-sets-basic-venn"
+        ],
+        "why": "paints each region with how many times it has been counted, term by term, so the add-back of the triple intersection is visible"
+      },
+      "inclusion-exclusion complementary form": {
+        "tool": "two-sets-basic-venn",
+        "decided": "2026-09-29",
+        "runnersUp": [
+          "three-sets-basic-venn"
+        ],
+        "why": "shades the region outside the union, the set the complementary form counts"
+      },
+      "exponential form": {
+        "tool": "euler-formula",
+        "decided": "2026-09-30",
+        "runnersUp": [
+          "polar-rectangular"
+        ],
+        "why": "its scaled state draws r e^(i theta) with r cos theta and r sin theta marked, the form and its conversion in one frame"
       }
     },
     "operationA": {
@@ -3354,6 +3378,39 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "euler's formula",
+          "entity": "eulers_formula",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "euler-formula",
+              "target": {
+                "path": "/complex-numbers/visual-tools/euler-formula",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "eulerFormulaDiagrams.theta180"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-30"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-30",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -20469,6 +20526,29 @@
                 "newStates": []
               },
               "added": "2026-09-24"
+            },
+            {
+              "fromSection": "2",
+              "tool": "complex-conjugate",
+              "target": {
+                "path": "/complex-numbers/visual-tools/complex-conjugate",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "conjugateModulusDiagrams.pureImaginary"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-30"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-30",
+              "to": "linked",
+              "note": "illustration pass: second unit, special cases section (pure imaginary 3i)",
+              "from": "linked"
             }
           ]
         },
@@ -20480,6 +20560,39 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "distance between complex numbers",
+          "entity": "distance_between_complex_numbers",
+          "sections": [
+            "8"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "8",
+              "tool": "distance-midpoint",
+              "target": {
+                "path": "/complex-numbers/visual-tools/distance-midpoint",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "distanceMidpointDiagrams.general"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-30"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-30",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -20719,6 +20832,29 @@
                 "newStates": []
               },
               "added": "2026-09-24"
+            },
+            {
+              "fromSection": "22",
+              "tool": "complex-explorer",
+              "target": {
+                "path": "/complex-numbers/visual-tools/complex-explorer",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "complexExplorerDiagrams.quadrantIV"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-30"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-30",
+              "to": "linked",
+              "note": "illustration pass: unit in The Imaginary Part section (z = 3 - 2i, b = -2)",
+              "from": "linked"
             }
           ]
         },
@@ -21276,8 +21412,32 @@
             "10",
             "11"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "euler-formula",
+              "target": {
+                "path": "/complex-numbers/visual-tools/euler-formula",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "eulerFormulaDiagrams.scaled"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-30"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-30",
+              "to": "linked",
+              "note": "gap closed: the Euler's formula visualizer freezes r e^(i theta) with r = 2; harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "trigonometric form",
@@ -21431,6 +21591,39 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "division in exponential form",
+          "entity": "complex_division",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "division",
+              "target": {
+                "path": "/complex-numbers/visual-tools/division",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "complexDivisionDiagrams.general"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-30"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-30",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -21732,6 +21925,39 @@
               "added": "2026-09-24"
             }
           ]
+        },
+        {
+          "term": "imaginary part (sign)",
+          "entity": "imaginary_part",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "complex-explorer",
+              "target": {
+                "path": "/complex-numbers/visual-tools/complex-explorer",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "complexExplorerDiagrams.quadrantIV"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-30"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-30",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest) for section 4; the page's 'imaginary part' record is dropped in sections 3, notation, 6, 7 only, and stays as it is"
+            }
+          ]
         }
       ]
     },
@@ -21880,6 +22106,29 @@
                 "newStates": []
               },
               "added": "2026-09-24"
+            },
+            {
+              "fromSection": "8",
+              "tool": "division",
+              "target": {
+                "path": "/complex-numbers/visual-tools/division",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "complexDivisionDiagrams.divideByZero"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-30"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-30",
+              "to": "linked",
+              "note": "illustration pass: unit in Why Zero Has No Multiplicative Inverse (divide-by-zero state)",
+              "from": "linked"
             }
           ]
         },
@@ -25887,6 +26136,39 @@
               "added": "2026-09-22"
             }
           ]
+        },
+        {
+          "term": "multinomial coefficient",
+          "entity": "multinomial_coefficient",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "partition",
+              "target": {
+                "path": "/combinatorics/visual-tools/partition",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "partitionIntoGroupsDiagrams.p211"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "from": null,
+              "to": "linked",
+              "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
+            }
+          ]
         }
       ]
     },
@@ -26104,8 +26386,32 @@
           "sections": [
             "4"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "two-sets-basic-venn",
+              "target": {
+                "path": "/set-theory/visual-tools/two-sets-basic-venn",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "twoSetsVennDiagrams.complementUnion"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "to": "linked",
+              "note": "gap closed: the two-set Venn tool freezes the complement of the union; harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "inclusion-exclusion principle (general)",
@@ -26122,8 +26428,32 @@
           "sections": [
             "2"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "2",
+              "tool": "inclusion-exclusion",
+              "target": {
+                "path": "/set-theory/visual-tools/inclusion-exclusion",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "inclusionExclusionDiagrams['centre-emptied']"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-09-29"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-09-29",
+              "to": "linked",
+              "note": "gap closed: the set-theory inclusion-exclusion explorer freezes the three-set count after the pairwise subtractions; harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "inclusion-exclusion principle (two sets)",

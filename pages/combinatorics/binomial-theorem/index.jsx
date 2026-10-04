@@ -1151,6 +1151,8 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
+import partitionIntoGroupsDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/partitionIntoGroupsDiagrams'
+import renderBinomialExpansion from '@/app/utils/illustrations/combinatorics/binomial/binomialExpansion'
 
 
 export async function getStaticProps(){
@@ -1971,6 +1973,12 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
+  const beChoices = {
+    kind: 'choices', n: 3,
+    svgTitle: 'The 8 picks from (a + b)(a + b)(a + b), grouped by the number of b’s',
+  };
+
   const demoUnits = {
     rowsum: demoUnitFrame({
       svg: pascalTriangleDiagrams.rowsum,
@@ -1978,6 +1986,18 @@ const schemas = {
       text: 'The whole of row 4 is highlighted and its entries total 16, which is the substitution a = b = 1 carried out in the array instead of in the algebra. Reading the same row as a count of subsets explains why the total is a power of two: each of the 4 items is independently either in or out. Highlight any row and watch its total double on the',
       href: '/combinatorics/visual-tools/pascal-triangle',
       linkText: 'Pascal&#8217;s triangle visualizer',
+    }),
+    multinomialP211: demoUnitFrame({
+      svg: partitionIntoGroupsDiagrams.p211,
+      caption: 'Four items into boxes of 2, 1 and 1',
+      text: 'The coefficient of x&#8321;&#178;x&#8322;x&#8323; in (x&#8321; + x&#8322; + x&#8323;)&#8308; counts the ways to hand the 4 factors to three labelled groups: two factors give x&#8321;, one gives x&#8322;, one gives x&#8323;. Filling Box A with 2 of the 4 items, then Box B and Box C with 1 each, gives 4!/(2!&#183;1!&#183;1!) = 12 partitions, so the term is 12x&#8321;&#178;x&#8322;x&#8323;. Try other group sizes on the',
+      href: '/combinatorics/visual-tools/partition',
+      linkText: 'partition into groups visualizer',
+    }),
+    choicesN3: demoUnitFrame({
+      svg: renderBinomialExpansion(beChoices),
+      caption: 'Every pick, sorted by its b\'s',
+      text: 'Multiplying out (a + b)(a + b)(a + b) means taking a or b from each of the three factors, 2 &#215; 2 &#215; 2 = 8 picks in all. Sort the picks by how many b&#8217;s they take: one pick has none, three have one, three have two, one has three. Each column is a set of positions chosen for the b&#8217;s, so its size is C(3, k), and all its picks multiply to the same a&#179;&#8315;&#7503;b&#7503; &#8212; which is why that binomial coefficient becomes the term&#8217;s coefficient.',
     }),
   };
 
@@ -2022,6 +2042,8 @@ export default function BinomialTheoremPage({seoData, sectionsContent, introCont
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-choicesN3'} dangerouslySetInnerHTML={{ __html: demoUnits.choicesN3 }} />,
+          `The coefficients 1, 3, 3, 1 are row 3 of Pascal's triangle; with four factors the same sorting gives 1, 4, 6, 4, 1.`,
         ]
     },
     {
@@ -2050,6 +2072,8 @@ export default function BinomialTheoremPage({seoData, sectionsContent, introCont
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-multinomialP211'} dangerouslySetInnerHTML={{ __html: demoUnits.multinomialP211 }} />,
+          `With only two boxes, of sizes k and n - k, the same count is the binomial coefficient: the binomial theorem is the two-group case.`,
         ]
     },
     {
