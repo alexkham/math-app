@@ -1804,10 +1804,11 @@ export function useInequality(types, options = {}) {
     return () => clearTimeout(id);
   }, [state.tour, state.stepIdx, state.typeId, state.p, type]);
 
-  // URL writeback
+  // URL writeback (options.syncUrl === false turns it off, e.g. for demo copies)
   useEffect(() => {
+    if (options.syncUrl === false) return;
     writeUrl(state, type);
-  }, [state.typeId, state.p, state.strict, state.dir, type]);
+  }, [state.typeId, state.p, state.strict, state.dir, type, options.syncUrl]);
 
   return { state, dispatch, type, computed, focus, F, inDomain, holds };
 }

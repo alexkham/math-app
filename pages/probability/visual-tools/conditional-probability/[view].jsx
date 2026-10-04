@@ -19,6 +19,9 @@ import explanations2x2 from '@/app/components/probability/conditional-probabilit
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 export async function getStaticPaths() {
   const paths = [
@@ -1222,8 +1225,773 @@ Both conditionals live here too, as the same cell over two different totals: $P(
     content: currentConfig.introContent
   };
 
+  // How-to instructions and animated demos (ToolDemoPlayer v3), keyed by view.
+  const INSTRUCTIONS = {
+    'tree-diagram': [
+      '**P(A) slider** sets the first split: branch A gets $P(A)$, branch Aᶜ gets $1 - P(A)$, from 0.01 to 0.99. [Learn more about the probability sliders](!#the-probability-sliders)',
+      '**P(B|A)** and **P(B|Aᶜ)** sliders split each first-level branch into B and Bᶜ; $P(B^c \\mid A)$ and $P(B^c \\mid A^c)$ follow as 1 minus each. [Learn more about the probability sliders](!#the-probability-sliders)',
+      '**Read the tree** left to right: edge labels carry the branch probabilities, and the four endpoints show the joint probabilities as P = values. [Learn more about reading the tree](!#reading-the-tree)',
+      '**Click any card** in Calculated Probabilities to light up its path in the card\'s colour; click it again or press **Clear Selection** to reset. [Learn more about clicking to highlight](!#clicking-to-highlight)',
+      '**Joint Probabilities** cards show each endpoint as a product along its path, e.g. $P(A \\cap B) = P(A) \\times P(B \\mid A)$; the four sum to 1. [Learn more about joint probabilities](!#joint-probabilities)',
+      '**Marginal Probabilities** cards: P(A) and P(Aᶜ) come from the first split, while P(B) adds the two paths that end in B. [Learn more about marginal probabilities](!#marginal-probabilities)',
+      '**Bayes Theorem** box turns the sliders\' direction around: $P(A \\mid B) = P(B \\mid A) \\, P(A) / P(B)$, and $P(A^c \\mid B)$ beside it. [Learn more about Bayes\' theorem in the tree](!#bayes-in-the-tree)',
+    ],
+    'venn-diagram': [
+      '**Compartments** B₁, B₂, … split the rectangle Ω into equal vertical strips, so each has $P(B_i) = 1/n$. [Learn more about the sample space partition](!#the-sample-space-partition)',
+      '**Number of compartments** slider under Settings switches between 2, 3 and 4 strips; ellipse A stays fixed, every piece and card recomputes, and any selection clears. [Learn more about the sample space partition](!#the-sample-space-partition)',
+      '**Read ellipse A**: labels give Area(A) = 68, Area(Ω) = 100 and each Area(A∩Bᵢ), so $P(A) = 68/100 = 0.68$. [Learn more about event A and intersections](!#event-a-and-intersections)',
+      '**Click a compartment** in the diagram, or its card in Conditional Probabilities: the strip fills with its colour and only A ∩ Bᵢ stays solid; click again to deselect. [Learn more about clicking compartments](!#clicking-compartments)',
+      '**Conditional Probabilities** cards give $P(A \\mid B_i)$ in three steps: areas, probabilities, then the ratio $P(A \\cap B_i) / P(B_i)$. [Learn more about the conditional calculations](!#conditional-probability-calculations)',
+      '**Total Probability** column rebuilds P(A) three ways: summed areas, the area ratio, and $\\sum P(B_i) \\, P(A \\mid B_i)$ in the Verification block. [Learn more about total probability](!#total-probability)',
+      '**Compare the cards**: middle strips score higher than edge strips because the ellipse is widest there; equal values everywhere would mean independence. [Learn more about why conditionals differ](!#why-conditionals-differ)',
+    ],
+    'waffle-chart': [
+      '**Four 10×10 grids**, Region A to Region D, each with P(Region) = 0.25; a dark blue tile is an outcome where the event occurred. [Learn more about the grid structure](!#the-grid-structure)',
+      '**Region sliders** under Adjust Distribution set each region\'s share of dark tiles from 0 to 1 in steps of 0.05; the count beside each shows dark tiles out of 100. [Learn more about the distribution sliders](!#the-distribution-sliders)',
+      '**Region headers** show the conditional probability, dark tiles divided by 100, in a word form and a colour-square form. [Learn more about reading conditional probabilities](!#reading-conditional-probabilities)',
+      '**Total panel** on the right adds 0.25 times each region\'s value and shows the raw count of dark tiles out of 400. [Learn more about the total probability calculation](!#total-probability-calculation)',
+      '**Compare a region with the total**: the total is the average of the four, while the region you know you are in can sit far above or below it. [Learn more about conditional vs total](!#conditional-vs-total)',
+      '**Try two settings with one total**: all regions at 0.50, or two at 0.80 and two at 0.20; both give a total of 0.500. [Learn more about same total, different distributions](!#same-total-different-distributions)',
+    ],
+    'contingency-table': [
+      '**P(A) slider** sets the row totals: P(A) for row A and $1 - P(A)$ for row Aᶜ. [Learn more about the probability sliders](!#the-probability-sliders)',
+      '**P(B|A)** and **P(B|Aᶜ)** sliders split each row between columns B and Bᶜ; set them equal and A and B become independent. [Learn more about the probability sliders](!#the-probability-sliders)',
+      '**Joint Probability Table** cells hold $P(A \\cap B)$, $P(A \\cap B^c)$, $P(A^c \\cap B)$ and $P(A^c \\cap B^c)$; the corner cell shows their sum, 1.0000. [Learn more about the joint table](!#reading-the-joint-table)',
+      '**Total** row and column hold the marginals: P(A) and P(Aᶜ) on the right, P(B) and P(Bᶜ) along the bottom. [Learn more about marginal probabilities](!#marginal-probabilities)',
+      '**Four panels** on the right, Conditional on A, Aᶜ, B and Bᶜ, show each conditional with its division; every panel totals 1.0000. [Learn more about the conditional panels](!#conditional-probability-panels)',
+      '**Click a cell or a panel row** to highlight it; the note under the sliders explains the selection, and **Clear Selection** removes it. [Learn more about clicking to trace](!#clicking-to-trace)',
+      '**Compare P(B|A) with P(A|B)**: both use the joint cell $P(A \\cap B)$, but divide by P(A) and by P(B). [Learn more about Bayes\' theorem in the table](!#bayes-in-the-table)',
+    ],
+  };
+  const DEMOS = {
+    "tree-diagram": {
+      "the-probability-sliders": {
+        "title": "Moving the three sliders",
+        "script": [
+          {
+            "say": "DRAG P(A) → 0.8\nBranch A = 0.8, branch Aᶜ = 0.2.\nLeaves 0.56, 0.24, 0.06, 0.14."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.8,
+            "ms": 1300
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "DRAG P(B|A) → 0.5\nA splits 0.5 / 0.5; P(Bᶜ|A) = 1 − 0.5.\nA ∩ B = A ∩ Bᶜ = 0.40."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.5,
+            "ms": 1300
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "DRAG P(B|Aᶜ) → 0.9\nAᶜ splits 0.9 / 0.1.\nAᶜ ∩ B = 0.2 × 0.9 = 0.18."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 0.9,
+            "ms": 1300
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "DRAG P(A) → 0.2\nWeight moves to the Aᶜ branch.\nLeaves 0.10, 0.10, 0.72, 0.08. Sum still 1."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.2,
+            "ms": 1600
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      },
+      "clicking-to-highlight": {
+        "title": "Highlighting paths",
+        "script": [
+          {
+            "say": "TAP card A ∩ B\nGreen path: Start → A → A ∩ B.\n0.6 × 0.7 = 0.42."
+          },
+          {
+            "click": {
+              "text": "A ∩ B = P(A)"
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Clear Selection\nEvery path back to the default colours."
+          },
+          {
+            "click": {
+              "button": "Clear Selection",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "TAP card P(B)\nPink: both paths that end in B.\nP(B) = 0.42 + 0.12 = 0.54."
+          },
+          {
+            "click": {
+              "text": "P(B) = P(A∩B)"
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG P(B|Aᶜ) → 0.6\nHighlight stays. Aᶜ ∩ B = 0.4 × 0.6 = 0.24.\nP(B) = 0.42 + 0.24 = 0.66."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 0.6,
+            "ms": 1300
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "TAP card P(B) again\nSame card switches the highlight off."
+          },
+          {
+            "click": {
+              "text": "P(B) = P(A∩B)"
+            }
+          },
+          {
+            "wait": 2200
+          }
+        ]
+      },
+      "bayes-in-the-tree": {
+        "title": "Reversing the conditional",
+        "script": [
+          {
+            "say": "DRAG P(A) → 0.5\nP(B) = 0.35 + 0.15 = 0.50.\nBayes box: P(A|B) = 0.35 / 0.50 = 0.7000."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.5,
+            "ms": 1300
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG P(B|A) → 0.9\nP(B) = 0.45 + 0.15 = 0.60.\nP(A|B) = 0.45 / 0.60 = 0.7500."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.9,
+            "ms": 1300
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG P(B|Aᶜ) → 0.1\nP(A|B) = 0.45 / 0.50 = 0.9000.\nMost B outcomes come through A."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 0.1,
+            "ms": 1600
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "TAP card P(B)\nPink: the two paths into B, 0.45 + 0.05.\nP(A|B) = the A path's share = 0.9."
+          },
+          {
+            "click": {
+              "text": "P(B) = P(A∩B)"
+            }
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      }
+    },
+    "venn-diagram": {
+      "the-sample-space-partition": {
+        "title": "Changing the partition",
+        "script": [
+          {
+            "say": "DRAG compartments → 4\nFour strips, P(Bᵢ) = 0.25.\nPieces 11, 23, 23, 11. Area(A) still 68."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 4,
+            "ms": 900
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG compartments → 2\nTwo halves, P(Bᵢ) = 0.50.\nPieces 34 + 34 = 68."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 2,
+            "ms": 900
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "DRAG compartments → 3\nThirds, P(Bᵢ) = 0.33.\nPieces 18, 32, 18."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 3,
+            "ms": 700
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP strip B₂\nB₂ fills: Area(B₂) = 33.33 of 100.\nP(A|B₂) = 0.32 / 0.33 = 0.96."
+          },
+          {
+            "click": {
+              "css": "svg rect[style*=\"cursor\"]",
+              "nth": 1
+            }
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "clicking-compartments": {
+        "title": "Conditioning on one compartment",
+        "script": [
+          {
+            "say": "TAP strip B₂\nOnly A ∩ B₂ stays solid; rest of A fades.\nP(A|B₂) = 0.32 / 0.33 = 0.96."
+          },
+          {
+            "click": {
+              "css": "svg rect[style*=\"cursor\"]",
+              "nth": 1
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "TAP B₂ again\nDeselected: full view.\nLaw of Total Probability box returns."
+          },
+          {
+            "click": {
+              "css": "svg rect[style*=\"cursor\"]",
+              "nth": 1
+            }
+          },
+          {
+            "wait": 2400
+          },
+          {
+            "say": "TAP card P(A | B₁)\nCard selects like the strip.\nP(A|B₁) = 0.18 / 0.33 = 0.54."
+          },
+          {
+            "click": {
+              "text": "P(A | B₁)"
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG compartments → 4\nSelection clears on any change.\nCards 0.44, 0.92, 0.92, 0.44."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 4,
+            "ms": 700
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "why-conditionals-differ": {
+        "title": "Why the conditionals differ",
+        "script": [
+          {
+            "say": "TAP card P(A | B₃)\nEdge strip: the ellipse is thin there.\nP(A|B₃) = 0.18 / 0.33 = 0.54."
+          },
+          {
+            "click": {
+              "text": "P(A | B₃)"
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG compartments → 2\nSelection clears. Two halves.\nP(A|B₁) = P(A|B₂) = 0.68 = P(A)."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 2,
+            "ms": 700
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "TAP card P(A | B₂)\n0.34 / 0.50 = 0.68.\nEqual overlap: the half tells nothing. Independence."
+          },
+          {
+            "click": {
+              "text": "P(A | B₂)"
+            }
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "DRAG compartments → 4\nSelection clears.\nMiddle 0.92, edges 0.44; weighted sum 0.68."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 4,
+            "ms": 900
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      }
+    },
+    "waffle-chart": {
+      "the-distribution-sliders": {
+        "title": "Moving the region sliders",
+        "script": [
+          {
+            "say": "DRAG Region A → 0.80\n80/100 tiles dark; header 0.80.\nTotal 270 of 400 = 0.675."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.8,
+            "ms": 1300
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "DRAG Region B → 0.60\nHeader 0.60.\nTotal 290 of 400 = 0.725."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.6,
+            "ms": 1300
+          },
+          {
+            "wait": 2400
+          },
+          {
+            "say": "DRAG Region C → 0.40\nHeader 0.40.\nTotal 265 of 400 = 0.662."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 0.4,
+            "ms": 1300
+          },
+          {
+            "wait": 2400
+          },
+          {
+            "say": "DRAG Region D → 0.20\nGradient 0.80, 0.60, 0.40, 0.20.\nTotal 200 of 400 = 0.500."
+          },
+          {
+            "slide": {
+              "range": 3
+            },
+            "to": 0.2,
+            "ms": 1600
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "conditional-vs-total": {
+        "title": "Knowing the region",
+        "script": [
+          {
+            "say": "DRAG Region A → 0.80\nRegion A header 0.80.\nTotal 270 of 400 = 0.675."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.8,
+            "ms": 1300
+          },
+          {
+            "wait": 2400
+          },
+          {
+            "say": "DRAG Region B → 0.20\nTotal 250 of 400 = 0.625."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.2,
+            "ms": 1300
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "DRAG Region C → 0.20\nTotal 205 of 400 = 0.512."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 0.2,
+            "ms": 1300
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "DRAG Region D → 0.20\nTotal 140 of 400 = 0.350.\nIn Region A: 0.80, over double. Elsewhere 0.20."
+          },
+          {
+            "slide": {
+              "range": 3
+            },
+            "to": 0.2,
+            "ms": 1600
+          },
+          {
+            "wait": 3200
+          }
+        ]
+      },
+      "same-total-different-distributions": {
+        "title": "Same total, different spread",
+        "script": [
+          {
+            "say": "DRAG Regions A, B → 0.50\nTotal 250 of 400 = 0.625."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.5,
+            "ms": 900
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.5,
+            "ms": 700
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "DRAG Regions C, D → 0.50\nAll four at 0.50. Total 0.500.\nRegion tells nothing: independence."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 0.5,
+            "ms": 900
+          },
+          {
+            "slide": {
+              "range": 3
+            },
+            "to": 0.5,
+            "ms": 900
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG Regions A, B → 0.80\nTotal 260 of 400 = 0.650."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.8,
+            "ms": 900
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.8,
+            "ms": 900
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "DRAG Regions C, D → 0.20\nTotal back to 0.500.\nNow the region matters: 0.80 vs 0.20."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 0.2,
+            "ms": 900
+          },
+          {
+            "slide": {
+              "range": 3
+            },
+            "to": 0.2,
+            "ms": 900
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      }
+    },
+    "contingency-table": {
+      "the-probability-sliders": {
+        "title": "Moving the three sliders",
+        "script": [
+          {
+            "say": "DRAG P(A) → 0.8\nRow totals 0.80 and 0.20.\nCells 0.56, 0.24, 0.06, 0.14."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.8,
+            "ms": 1300
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "DRAG P(B|Aᶜ) → 0.7\nNow P(B|A) = P(B|Aᶜ) = 0.7.\nP(A|B) = 0.56 / 0.70 = 0.80 = P(A): independent."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 0.7,
+            "ms": 1500
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "DRAG P(B|A) → 0.2\nRow A splits 0.16 / 0.64.\nP(B) = 0.16 + 0.14 = 0.30."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.2,
+            "ms": 1500
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "DRAG P(A) → 0.3\nCells 0.06, 0.24, 0.49, 0.21.\nColumn total P(B) = 0.55."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.3,
+            "ms": 1500
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "clicking-to-trace": {
+        "title": "Tracing a ratio",
+        "script": [
+          {
+            "say": "TAP cell P(A ∩ B)\nGreen outline; the note explains the cell.\nClear Selection appears."
+          },
+          {
+            "click": {
+              "css": "td[style*=\"cursor\"]",
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP row P(B|A)\nNumerator cell + row total P(A) light up.\n0.42 / 0.60 = 0.7000."
+          },
+          {
+            "click": {
+              "css": "tr.clickable-row",
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "TAP row P(A|B)\nSame green cell; denominator now P(B).\n0.42 / 0.54 = 0.7778."
+          },
+          {
+            "click": {
+              "css": "tr.clickable-row",
+              "nth": 4
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "TAP Clear Selection\nHighlights off; note back to its default."
+          },
+          {
+            "click": {
+              "button": "Clear Selection",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "TAP cell P(Aᶜ ∩ Bᶜ)\nRed outline: neither event.\n0.40 × 0.70 = 0.28."
+          },
+          {
+            "click": {
+              "css": "td[style*=\"cursor\"]",
+              "nth": 3
+            }
+          },
+          {
+            "wait": 2600
+          }
+        ]
+      },
+      "bayes-in-the-table": {
+        "title": "Flipping the condition",
+        "script": [
+          {
+            "say": "TAP row P(B|A)\n0.42 / 0.60 = 0.7000.\nDenominator: row total P(A)."
+          },
+          {
+            "click": {
+              "css": "tr.clickable-row",
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP row P(A|B)\n0.42 / 0.54 = 0.7778.\nSame numerator, column total P(B)."
+          },
+          {
+            "click": {
+              "css": "tr.clickable-row",
+              "nth": 4
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG P(A) → 0.2\nP(A|B) = 0.14 / 0.38 = 0.3684.\nP(B|A) stays 0.7000."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.2,
+            "ms": 1500
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "TAP row P(B|A)\n0.14 / 0.20 = 0.7000.\nFlipping the condition changes the answer."
+          },
+          {
+            "click": {
+              "css": "tr.clickable-row",
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      }
+    }
+  };
+  const instructions = INSTRUCTIONS[params.view] || [];
+  const demos = DEMOS[params.view] || {};
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools(`probability-conditional-probability-${params.view}`),
       sectionsContent: currentConfig.sectionsContent,
       introContent,
@@ -1297,8 +2065,31 @@ export default function ConditionalProbabilityViewPage({
   schemas,
   currentView, 
   componentName, 
-  h1Title 
+  h1Title,
+  instructions,
+  demos
 }) {
+
+  // the tool as the page renders it live, mounted inside each demo
+  const demoTools = {
+    TreeDiagram: <ConditionalProbabilityTree2 />,
+    VennDiagram: <ConditionalProbabilityVenn />,
+    WaffleChart: <WaffleChart />,
+    ContingencyTable: <ConditionalProbabilityTable2 explanations={explanations2x2} />,
+  }
+  const demoTool = demoTools[componentName]
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      {demoTool}
+    </ToolDemoPlayer>
+  )
 
   const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
     const src = sectionsContent[obj]
@@ -1308,6 +2099,7 @@ export default function ConditionalProbabilityViewPage({
       body.push(<div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />)
       if (src.after) body.push(src.after)
     }
+    if (demos && demos[id] && demoTool) body.unshift(demo(id))
     return { id, title: src.title, link: src.link || '', content: body }
   }).filter(Boolean);
 
@@ -1367,6 +2159,10 @@ export default function ConditionalProbabilityViewPage({
       <br />
       <br />
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>{h1Title}</h1>
+      <div style={{width:'80%', margin:'auto'}}>
+        <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+      </div>
+      <br/>
 
       {componentName === 'WaffleChart' && (
         <div style={{ transform: 'scale(0.9)' }}>

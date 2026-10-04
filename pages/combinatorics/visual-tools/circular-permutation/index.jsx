@@ -1128,6 +1128,9 @@ import CircularPermutation from '../../../../app/components/combinatorics/new-vi
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import circularPermutationsDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/circularPermutationsDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -1553,8 +1556,125 @@ The tool uses the anchoring approach because it produces unique arrangements dir
     n5: `Twenty-four cards, one per rotation class: the complete answer to the round-table question, with no duplicate ever produced. [Learn more about the completed grid](!#the-completed-grid) · [What is a circular permutation](!#what-is-a-circular-permutation)`,
   };
 
+  const instructions = [
+    'The **Mode** switch at the left of the control bar toggles between **● Balls** (numbered coloured balls) and **A Letters** (letter labels). [Learn more about the mode switch](!#mode-switch)',
+    'The **n** stepper sets the number of items from 3 to 5; changing it resets the build and updates $(n-1)!$ in the header. [Learn more about adjusting n](!#adjusting-n)',
+    '**Step ▶** moves one ball into the next slot, **◀ Back** undoes one step, **▶ Play** builds every arrangement, **↺ Reset** clears the grid, and the **Speed** slider (0.3 to 3) sets the pace. [Learn more about the transport controls](!#transport-controls)',
+    'The two lines at the top right of the scene show $(n-1)!$ with its total and the status: **Arrangements** $k$ of the total, or **Complete**. [Learn more about getting started](!#getting-started)',
+    'Red ball 1 is the **anchor**: it sits in the solid **FIXED** slot at the top of the ring in every arrangement and stays dimmed in the source row. [Learn more about the anchor](!#the-anchor)',
+    'The other slots of the **build ring** are numbered clockwise from $\\#2$; each ball flies in along a dotted guide line, and a flash ring marks a full ring. [Learn more about the build ring](!#the-build-ring)',
+    'Finished arrangements are added under **COMPLETED** as small ring cards, each with the anchor on top, counted as $k / (n-1)!$. [Learn more about the completed grid](!#the-completed-grid)',
+    'The **right panel** shows the **Anchor** row with its progress and explains why fixing one item divides $n!$ by $n$. [Learn more about why the count is (n − 1)!](!#why-n-1-instead-of-n)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real CircularPermutation tool
+     (opens at n = 3, balls mode, idle; Red is FIXED at the top of the ring).
+     Step ▶ starts a ball flight (rAF + timer): every Step click is followed by an
+     until on "no ball in flight", so instant replay lands on the same state.
+     Play runs to "Complete · t / t" (until). n is only changed while the grid
+     is empty (the tool crashes when n changes with completed cards). */
+  const LANDED = 'svg.vt-scene-svg:not(:has(g[style*="translate"]))'
+  const demos = {
+    'the-build-ring': {
+      title: 'One ring, slot by slot',
+      script: [
+        { say: `TAP Step ▶
+Blue ball 2 flies into slot #2.
+Red 1 already FIXED at the top.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Green ball 3 → slot #3.
+Ring full: 1, 2, 3 clockwise.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Flash ring around the build area.
+Arrangements: 1 / 2.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+First ring card recorded.
+COMPLETED 1 / 2. Anchor stays put.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Green 3 → slot #2 this time.
+Second arrangement: the swap.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2800 },
+      ],
+    },
+    'adjusting-n': {
+      title: 'n = 4: six rings',
+      script: [
+        { say: `TAP +
+n = 4. Slots #2, #3, #4 around the anchor.
+Header: (4−1)! = 6.` },
+        { click: { button: '+', exact: true } },
+        { wait: 2600 },
+        { say: `SLIDE Speed → 3
+Fastest setting.
+Flights take a third of the time.` },
+        { slide: { range: 0 }, to: 3, ms: 1200 },
+        { wait: 2000 },
+        { say: `TAP ▶ Play
+Complete · 6 / 6.
+Six ring cards, each crowned by Red.` },
+        { click: { button: '▶ Play', exact: true } },
+        { until: { text: 'Complete · 6 / 6' }, ms: 20000 },
+        { wait: 2800 },
+        { say: `TAP the Mode switch
+Letters: A at the top of every card.
+B, C, D in the other three seats.` },
+        { click: '.vt-switch' },
+        { wait: 2800 },
+        { say: `TAP ↺ Reset
+Grid cleared. n = 4 kept.
+Press Play or Step to begin.` },
+        { click: { button: '↺ Reset', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'transport-controls': {
+      title: 'Slow speed, Back, n = 5',
+      script: [
+        { say: `SLIDE Speed → 0.3
+Slowest setting.
+Each flight is easy to follow.` },
+        { slide: { range: 0 }, to: 0.3, ms: 1200 },
+        { wait: 2000 },
+        { say: `TAP Step ▶
+Blue ball 2 drifts into slot #2
+along its dotted guide line.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2400 },
+        { say: `TAP ◀ Back
+Ball 2 leaves slot #2.
+Only the FIXED anchor remains.` },
+        { click: { button: '◀ Back', exact: true } },
+        { wait: 2600 },
+        { say: `TAP +
+n = 4. Header: (4−1)! = 6.` },
+        { click: { button: '+', exact: true } },
+        { wait: 2200 },
+        { say: `TAP +
+n = 5. (5−1)! = 24.
++ greys out: 5 is the maximum.` },
+        { click: { button: '+', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('circular-permutation'),
       sectionsContent,
       introContent,
@@ -1578,7 +1698,22 @@ The tool uses the anchoring approach because it produces unique arrangements dir
   }
 }
 
-export default function CircularPermutationVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function CircularPermutationVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <CircularPermutation explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1603,9 +1738,9 @@ export default function CircularPermutationVisualizer({relatedTools, seoData, se
     plain('obj0', 'key-terms'),
     stateRow('obj1', 'getting-started', 'idle'),
     stateRow('obj2', 'the-anchor', 'n3'),
-    stateRow('obj3', 'adjusting-n', 'n4'),
-    stateRow('obj4', 'the-build-ring', 'building'),
-    plain('obj5', 'transport-controls'),
+    withDemo(stateRow('obj3', 'adjusting-n', 'n4')),
+    withDemo(stateRow('obj4', 'the-build-ring', 'building')),
+    withDemo(plain('obj5', 'transport-controls')),
     plain('obj6', 'mode-switch'),
     stateRow('obj7', 'the-completed-grid', 'n5'),
     plain('obj8', 'what-is-a-circular-permutation'),
@@ -1707,6 +1842,10 @@ export default function CircularPermutationVisualizer({relatedTools, seoData, se
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Circular Permutations</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <CircularPermutation explanations={explanations}/>
       <br/>

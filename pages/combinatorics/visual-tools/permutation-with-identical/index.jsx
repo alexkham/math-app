@@ -496,6 +496,9 @@ import PermutationWithIdenticalItems from '../../../../app/components/combinator
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import permutationWithIdenticalDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/permutationWithIdenticalDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -972,8 +975,130 @@ For genuinely large multisets the tool bows out and the formula alone remains: M
     mAABBC: `Thirty arrangements from three letter groups — the stepper's largest run, where the formula's economy over enumeration shows. [Learn more about AABBC](!#aabbc-the-longest-run) · [All multisets](!#the-multiset-stepper)`,
   };
 
+  const instructions = [
+    'The **Mode** switch toggles **● Balls** (colored circles numbered 1, 2, 3) and **A Letters** (tiles A, B, C); the source row, slots, cards and panel all follow. [Learn more about the mode switch](!#mode-switch)',
+    '**◀** and **▶** next to **multiset =** cycle six presets, AAB, AAAB, AABB, AABC, AAABB and AABBC; each change clears the build and updates the formula. [Learn more about the multiset stepper](!#the-multiset-stepper)',
+    '**▶ Play** builds every distinct arrangement and stops at the end, **Step ▶** moves one ball into one slot, **◀ Back** steps backward and **↺ Reset** clears the completed rows. [Learn more about the transport controls](!#transport-controls)',
+    'The **Speed** slider runs from 0.3 to 3 and sets how fast Play flies and lands each ball. [Learn more about the speed slider](!#transport-controls)',
+    'The header shows $n! / (k_1! \\cdot k_2! \\cdots)$ and the total for the chosen multiset; the status line under it tracks the group being built and ends at **Complete**. [Learn more about getting started](!#getting-started)',
+    'In the build area each ball flies from the source row into the next slot, and only the copy in use dims, so an identical twin stays bright. [Learn more about the build area](!#the-build-area)',
+    'Finished arrangements are filed under **COMPLETED**, one row per distinct first item; the rows hold different numbers of cards. [Learn more about first-item groups](!#grouping-by-distinct-first-item)',
+    'The right panel adds a row per first-item group with its progress and how many ways the remaining positions can be arranged. [Learn more about the right panel](!#right-panel-and-progress)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real PermutationWithIdenticalItems
+     (opens on AAB, balls mode, speed 1). Stepper buttons: '◀' / '▶' exact;
+     transport: 'Step ▶', '◀ Back', '▶ Play', '↺ Reset'. A landed build ball is a
+     Ball group with no transform: g[style="opacity: 1;"] > text[y="187"]. */
+  const landed = (k) => ({ until: { css: 'svg.vt-scene-svg g[style="opacity: 1;"] > text[y="187"]', nth: k } })
+  const demos = {
+    'getting-started': {
+      title: 'Play, speed, next multiset',
+      script: [
+        { say: `SLIDE Speed → 3
+Balls fly and land 3× faster.
+Same arrangements, same order.` },
+        { slide: { range: 0 }, to: 3, ms: 1200 },
+        { wait: 2000 },
+        { say: `TAP ▶ Play
+AAB, ABA, BAA built and filed.
+Header 3!/(2! · 1!) = 3.
+Status: Complete · 3 / 3.` },
+        { click: { button: '▶ Play', exact: true } },
+        { until: { text: 'Complete · 3 / 3' }, ms: 12000 },
+        { wait: 2400 },
+        { say: `TAP ▶ next to multiset =
+AAAB. Build cleared.
+Header 4!/(3! · 1!) = 4.` },
+        { click: { button: '▶', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+Row 1 (red first): 3 cards.
+Row 2 (blue first): 1 card.
+Complete · 4 / 4.` },
+        { click: { button: '▶ Play', exact: true } },
+        { until: { text: 'Complete · 4 / 4' }, ms: 12000 },
+        { wait: 2600 },
+        { say: `TAP ↺ Reset
+Completed rows cleared.
+Multiset stays AAAB.` },
+        { click: { button: '↺ Reset', exact: true } },
+        { wait: 2200 },
+      ],
+    },
+    'the-build-area': {
+      title: 'One ball at a time',
+      script: [
+        { say: `TAP Step ▶
+Red 1 flies to slot #1.
+Only that source copy dims.
+Its twin stays bright.` },
+        { click: { button: 'Step ▶', exact: true } },
+        landed(0),
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Second red 1 into slot #2.
+Both red copies now dim.` },
+        { click: { button: 'Step ▶', exact: true } },
+        landed(1),
+        { wait: 2400 },
+        { say: `TAP Step ▶
+Blue 2 into slot #3.
+All 3 slots full.` },
+        { click: { button: 'Step ▶', exact: true } },
+        landed(2),
+        { wait: 2400 },
+        { say: `TAP Step ▶
+Flash ring: arrangement complete.
+Status: Group Red: 1 / 2.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: 'svg.vt-scene-svg animate' },
+        { wait: 2400 },
+        { say: `TAP Step ▶
+Card filed in row 1 (red first).
+COMPLETED 1 / 3. Slots empty again.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'mode-switch': {
+      title: 'Letters, back, balls',
+      script: [
+        { say: `TAP A Letters
+Balls → letter tiles.
+Source row: A A B.` },
+        { click: { text: 'A Letters' } },
+        { wait: 2200 },
+        { say: `TAP ◀ next to multiset =
+Wraps to AABBC.
+Header 5!/(2! · 2! · 1!) = 30.` },
+        { click: { button: '◀', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Step ▶
+A into slot #1.
+Status: Group A: 0 / 12.
+Panel: First item A, 0 / 12.` },
+        { click: { button: 'Step ▶', exact: true } },
+        landed(0),
+        { wait: 2800 },
+        { say: `TAP ◀ Back
+Tile goes back. Slot #1 empty.
+Status: Press Play or Step to begin.` },
+        { click: { button: '◀ Back', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ● Balls
+Colored balls again.
+Red 1, blue 2, green 3 = A, B, C.` },
+        { click: { text: '● Balls' } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('permutation-with-identical'),
       sectionsContent,
       introContent,
@@ -997,7 +1122,22 @@ For genuinely large multisets the tool bows out and the formula alone remains: M
   }
 }
 
-export default function PermutationWithIdenticalItemsVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PermutationWithIdenticalItemsVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <PermutationWithIdenticalItems explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1020,8 +1160,8 @@ export default function PermutationWithIdenticalItemsVisualizer({relatedTools, s
 
   const genericSections = [
     plain('obj0', 'key-terms'),
-    stateRow('obj1', 'getting-started', 'idle'),
-    stateRow('obj2', 'the-build-area', 'building'),
+    withDemo(stateRow('obj1', 'getting-started', 'idle')),
+    withDemo(stateRow('obj2', 'the-build-area', 'building')),
     plain('obj3', 'the-multiset-stepper'),
     stateRow('obj11', 'aab-the-smallest-multiset', 'mAAB'),
     stateRow('obj12', 'aaab-placing-the-single-b', 'mAAAB'),
@@ -1029,7 +1169,7 @@ export default function PermutationWithIdenticalItemsVisualizer({relatedTools, s
     stateRow('obj14', 'aabbc-the-longest-run', 'mAABBC'),
     stateRow('obj4', 'grouping-by-distinct-first-item', 'mAABC'),
     plain('obj5', 'transport-controls'),
-    plain('obj6', 'mode-switch'),
+    withDemo(plain('obj6', 'mode-switch')),
     plain('obj7', 'right-panel-and-progress'),
     plain('obj8', 'what-is-a-permutation-with-identical-items'),
     stateRow('obj9', 'why-divide-by-k', 'mAABB'),
@@ -1130,6 +1270,10 @@ export default function PermutationWithIdenticalItemsVisualizer({relatedTools, s
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Permutations with Identical Items</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <PermutationWithIdenticalItems explanations={explanations}/>
       <br/>

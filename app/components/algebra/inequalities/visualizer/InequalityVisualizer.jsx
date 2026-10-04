@@ -270,8 +270,10 @@ export default function InequalityVisualizer({
   initialStrict,
   initialDirection,
   explanations = null,
+  syncUrl = true,
 }) {
   const iqRaw = useInequality(TYPES, {
+    syncUrl,
     initial: {
       typeId: initialType,
       p: initialParams,

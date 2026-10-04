@@ -497,6 +497,9 @@ import CompletingTheSquare from '../../../../app/components/algebra/visualizers/
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import completeTheSquareDiagrams from '../../../../app/components/algebra/visualizers/equations/completeTheSquareDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -1042,8 +1045,109 @@ Restoring the factor gives $3(x + 2)^2 - 5$, vertex $(-2, -5)$ — coincidentall
   }
 
 
+  const instructions = [
+    'Type $a$, $b$ and $c$ into the three boxes of $ax^2 + bx + c = 0$; the diagram and the step list update at once and return to step 1. [Learn more about entering coefficients](!#entering-coefficients)',
+    'Tap a preset under **Try a preset** to load one of five quadratics, from the default $x^2 + 6x + 5$ to $3x^2 + 12x + 7$. [Learn more about the presets](!#presets)',
+    'Watch the **Geometric Picture**: the $x^2$ square, the $bx$ strips and the constant block are rearranged stage by stage, and a red block marks the gap in the corner. [Learn more about the geometric diagram](!#the-geometric-diagram)',
+    'Press **Next →** and **← Back** to move one step, **▶ Play** to advance automatically, **↺ Restart** to return to step 1, or tap a progress pip to jump. [Learn more about the animation controls](!#animation-controls)',
+    'Tap any card in **Step-by-step solution** to jump the diagram to that step; the current card is highlighted and the others fade. [Learn more about the step-by-step panel](!#the-step-by-step-panel)',
+    'Read the **Vertex form** box at the bottom of the step list: $y = a(x - h)^2 + k$ with the vertex $(h, k)$, at full strength on the last step. [Learn more about the vertex form box](!#the-vertex-form-box)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real CompletingTheSquare tool
+     (opens on x² + 6x + 5, step 1). Number inputs in DOM order: 0 = a, 1 = b, 2 = c.
+     Presets by label; animation buttons '← Back', 'Next →', '▶ Play', '↺ Restart';
+     step cards '.cts-step' (nth = step - 1). Any coefficient change
+     resets to step 1. ▶ Play is timed and not driven. The left card (height 100vh − 40px) scrolls
+     internally and its animation row sits below the fold, which the player cannot scroll to,
+     so Back / Next / Restart / pips are not driven. */
+  const demos = {
+    'entering-coefficients': {
+      title: 'Typing a, b and c',
+      script: [
+        { say: `TYPE c → 9
+x² + 6x + 9: corner exactly fills.
+Vertex form y = (x + 3)² + 0.` },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '9' },
+        { wait: 2800 },
+        { say: `TYPE c → 12
+Constant overflows the 3 × 3 corner.
+Excess of 3: y = (x + 3)² + 3.` },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '12' },
+        { wait: 2800 },
+        { say: `TYPE b → 4
+Half of 4 is 2. Corner 2 × 2 = 4.
+Excess of 8: y = (x + 2)² + 8.` },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '4' },
+        { wait: 2800 },
+        { say: `TYPE a → 2
+New step 2: Factor out 2.
+y = 2(x + 1)² + 10.` },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '2' },
+        { wait: 2800 },
+      ],
+    },
+    'presets': {
+      title: 'Five presets',
+      script: [
+        { say: `TAP 2x² + 8x + 3
+Extra step 2: Factor out 2.
+y = 2(x + 2)² − 5.` },
+        { click: { button: '2x² + 8x + 3', exact: true } },
+        { wait: 2800 },
+        { say: `TAP x² − 4x + 1
+Half of −4 is −2.
+Sign shows in y = (x − 2)² − 3.` },
+        { click: { button: 'x² − 4x + 1', exact: true } },
+        { wait: 2800 },
+        { say: `TAP x² + 5x + 2
+Half of 5 is 2.5. Corner 6.25.
+Gap of 4.25.` },
+        { click: { button: 'x² + 5x + 2', exact: true } },
+        { wait: 2800 },
+        { say: `TAP 3x² + 12x + 7
+Factor out 3. Gap of 1.6667.
+Vertex (−2, −5), same as 2x² + 8x + 3.` },
+        { click: { button: '3x² + 12x + 7', exact: true } },
+        { wait: 3000 },
+        { say: `TAP x² + 6x + 5
+Default back. Gap of 4.
+y = (x + 3)² − 4.` },
+        { click: { button: 'x² + 6x + 5', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'the-step-by-step-panel': {
+      title: 'Jumping from the step list',
+      script: [
+        { say: `TAP step 3 card
+Split the 6x rectangle.
+Two strips x × 3, right and below.`, at: 'bl' },
+        { click: { css: '.cts-step', nth: 2 } },
+        { wait: 2800 },
+        { say: `TAP step 5 card
+Gap of 4: red block in the corner.
+9 − 5 = 4.`, at: 'bl' },
+        { click: { css: '.cts-step', nth: 4 } },
+        { wait: 2800 },
+        { say: `TAP step 7 card
+Solve for x: −1 or −5.
+Vertex form box lights up.`, at: 'bl' },
+        { click: { css: '.cts-step', nth: 6 } },
+        { wait: 2800 },
+        { say: `TAP step 4 card
+Constant 5 into the corner.
+Vertex form box fades.`, at: 'bl' },
+        { click: { css: '.cts-step', nth: 3 } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('algebra-completing-square'),
       sectionsContent,
       introContent,
@@ -1099,7 +1203,22 @@ Restoring the factor gives $3(x + 2)^2 - 5$, vertex $(-2, -5)$ — coincidentall
   }
 }
 
-export default function CompletingTheSquareCalculator({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function CompletingTheSquareCalculator({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <CompletingTheSquare explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after].
@@ -1123,9 +1242,9 @@ export default function CompletingTheSquareCalculator({relatedTools, seoData, se
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'entering-coefficients'),
+    withDemo(plain('obj2', 'entering-coefficients')),
 
-    plain('obj3', 'presets'),
+    withDemo(plain('obj3', 'presets')),
     stateRow('obj19', 'the-default-quadratic', 'ps-basic'),
     stateRow('obj20', 'a-leading-coefficient-of-two', 'ps-factored'),
     stateRow('obj21', 'the-negative-middle-term', 'ps-negative-b'),
@@ -1142,7 +1261,7 @@ export default function CompletingTheSquareCalculator({relatedTools, seoData, se
     stateRow('obj17', 'reading-off-the-vertex-form', 'step-vertex'),
     stateRow('obj18', 'solving-for-x', 'step-solve'),
 
-    plain('obj5', 'the-step-by-step-panel'),
+    withDemo(plain('obj5', 'the-step-by-step-panel')),
     plain('obj6', 'animation-controls'),
     plain('obj7', 'the-vertex-form-box'),
     plain('obj8', 'what-is-completing-the-square'),
@@ -1244,6 +1363,10 @@ export default function CompletingTheSquareCalculator({relatedTools, seoData, se
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Completing the Square</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <CompletingTheSquare explanations={explanations}/>
       <br/>

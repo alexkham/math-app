@@ -10,6 +10,9 @@ import PowerTable from '../../../../app/components/visualizations/algebra/powers
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '../../../../app/components/visualizations/algebra/powers/powersTableDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -340,8 +343,105 @@ The second lesson is in the Value column's right edge: every row past $5^0$ ends
     content: ``
   }
 
+  const instructions = [
+    'Type a **Base** from 2 to 10; the table rebuilds at once, and an out-of-range value outlines the box in red with the reason. [Learn more about setting the base and max power](!#setting-base-and-max-power)',
+    'Type a **Max Power** to set the last row: up to 16 for bases 2 to 4, up to 10 for bases 5 to 10; the **?** next to it explains the limit. [Learn more about pushing to maximum powers](!#pushing-to-maximum-powers)',
+    'Press **Reset All** to return to base 2 and max power 10 and clear any error. [Learn more about the inputs and Reset All](!#setting-base-and-max-power)',
+    'Read each row across the **Power**, **Expression** and **Value** columns: the notation $b^n$, the multiplication written out, and the exact result. [Learn more about reading the three columns](!#reading-the-three-columns)',
+    'The first row is always $b^0 = 1$, whatever the base. [Learn more about the zero power rule](!#the-zero-power-rule)',
+    'Scan the last digit of each value to spot its cycle, such as 7, 9, 3, 1 for base 7. [Learn more about last-digit patterns](!#spotting-last-digit-patterns)',
+    'The note under the table states the row rule: each row is **×base** the row above it. [Learn more about why powers grow so fast](!#why-powers-grow-so-fast)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real PowerTable tool
+     (opens on Base 2, Max Power 10). Number inputs in DOM order: 0 = Base, 1 = Max Power;
+     button 'Reset All'. The '?' tooltip opens on hover/focus only and is not driven. */
+  const demos = {
+    'setting-base-and-max-power': {
+      title: 'Base, Max Power and Reset All',
+      script: [
+        { say: `TYPE Max Power → 5
+Six rows, 2⁰ to 2⁵.
+Last value 32.` },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '5' },
+        { wait: 2600 },
+        { say: `TYPE Base → 3
+Powers of 3: 1, 3, 9, 27, 81, 243.
+Note: each row ×3 the row above.` },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '3' },
+        { wait: 2800 },
+        { say: `TYPE Max Power → 20
+Red outline: Maximum power is 16 for base 3.
+Table keeps the last valid rows.` },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '20' },
+        { wait: 3000 },
+        { say: `TAP Reset All
+Base 2, Max Power 10. Error cleared.
+11 rows, last value 1,024.` },
+        { click: { button: 'Reset All', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'exploring-different-bases': {
+      title: 'Switching bases',
+      script: [
+        { say: `TYPE Base → 10
+Each row adds a zero.
+10¹⁰ = 10,000,000,000.` },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '10' },
+        { wait: 2800 },
+        { say: `TYPE Base → 5
+Every value after 5⁰ ends in 5.
+5¹⁰ = 9,765,625.` },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '5' },
+        { wait: 2800 },
+        { say: `TYPE Base → 7
+Last digits 7, 9, 3, 1, then repeat.
+7¹⁰ = 282,475,249.` },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '7' },
+        { wait: 2800 },
+        { say: `TYPE Base → 9
+Same 10 rows, far bigger values.
+9¹⁰ = 3,486,784,401.` },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '9' },
+        { wait: 2800 },
+      ],
+    },
+    'pushing-to-maximum-powers': {
+      title: 'Pushing to the cap',
+      script: [
+        { say: `TYPE Max Power → 16
+17 rows. 2¹⁶ = 65,536.
+Past 10: 2 × 2 × ... × 2 (16 times).` },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '16' },
+        { wait: 3000 },
+        { say: `TYPE Base → 4
+Still 16 allowed.
+4¹⁶ = 4,294,967,296.` },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '4' },
+        { wait: 2800 },
+        { say: `TYPE Base → 5
+Cap drops to 10.
+Max Power set to 10 automatically.` },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '5' },
+        { wait: 2800 },
+        { say: `TYPE Max Power → 11
+Red outline: Maximum power is 10 for base 5.` },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '11' },
+        { wait: 2800 },
+        { say: `TYPE Max Power → 0
+One row: 5⁰ = 1.
+Zero power rule.` },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '0' },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('algebra-powers-table'),
       sectionsContent,
       introContent,
@@ -363,7 +463,22 @@ The second lesson is in the Value column's right edge: every row past $5^0$ ends
   }
 }
 
-export default function PowersTablePage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PowersTablePage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <PowerTable explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Replaces the former numeric-id auto-map.)
@@ -386,16 +501,16 @@ export default function PowersTablePage({relatedTools, seoData, sectionsContent,
 
   const genericSections = [
     plain('obj1', 'what-is-a-power'),
-    plain('obj2', 'setting-base-and-max-power'),
+    withDemo(plain('obj2', 'setting-base-and-max-power')),
     plain('obj3', 'reading-the-three-columns'),
 
-    plain('obj4', 'exploring-different-bases'),
+    withDemo(plain('obj4', 'exploring-different-bases')),
     stateRow('obj10', 'the-default-table-powers-of-two', 'b2-default'),
     stateRow('obj11', 'powers-of-ten-and-place-value', 'b10'),
     stateRow('obj12', 'base-five-at-the-cap-boundary', 'b5-cap'),
 
     plain('obj5', 'the-zero-power-rule'),
-    stateRow('obj6', 'pushing-to-maximum-powers', 'b2-deep'),
+    withDemo(stateRow('obj6', 'pushing-to-maximum-powers', 'b2-deep')),
     stateRow('obj7', 'spotting-last-digit-patterns', 'b7'),
     plain('obj8', 'why-powers-grow-so-fast'),
     plain('obj9', 'related-concepts-and-tools'),
@@ -453,6 +568,10 @@ export default function PowersTablePage({relatedTools, seoData, sectionsContent,
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Table of Powers</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <PowerTable explanations={explanations}/>
    <br/>

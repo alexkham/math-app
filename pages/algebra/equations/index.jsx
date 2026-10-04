@@ -9,6 +9,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 export async function getStaticProps(){
 const keyWords = [
@@ -582,6 +583,19 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const rationalLhs = (x) => 3 / (x - 1) + 2 / (x + 4);
+  const fpRationalExcluded = { kind: 'pieces', svgTitle: '3/(x - 1) + 2/(x + 4) = 1: x = 1 and x = -4 excluded, solutions 1 plus or minus sqrt 15', xRange: [-8, 8], yRange: [-4, 6],
+    pieces: [
+      { fn: rationalLhs, from: -8, to: -4.002, ends: [null, null], color: 'f' },
+      { fn: rationalLhs, from: -3.998, to: 0.998, ends: [null, null], color: 'f' },
+      { fn: rationalLhs, from: 1.002, to: 8, ends: [null, null], color: 'f', label: { text: '3/(x − 1) + 2/(x + 4)', x: 2.2, y: 4.5, pos: 'e' } },
+      { fn: () => 1, from: -8, to: 8, ends: [null, null], color: 'g', label: { text: 'y = 1', x: 7.5, y: 1, pos: 'n' } },
+    ],
+    vlines: [{ x: -4 }, { x: 1 }],
+    notes: [{ x: -4, y: 5.6, text: 'x = −4 excluded', pos: 'w' }, { x: 1, y: 5.6, text: 'x = 1 excluded', pos: 'w' }],
+    points: [{ x: 1 - Math.sqrt(15), y: 1, label: 'x = 1 − √15', pos: 'ne' }, { x: 1 + Math.sqrt(15), y: 1, label: 'x = 1 + √15', pos: 'sw' }],
+    caption: 'Rule out x = 1 and x = −4 first; y = 1 is met at x = 1 ± √15' };
+
   const demoUnits = {
     linear: demoUnitFrame({
       svg: equationVisualizerDiagrams['lin-steep'],
@@ -610,6 +624,25 @@ const schemas = {
       text: 'The V-shaped graph of |x| meets the level y = 3 at x = &#8722;3 and x = 3: the two cases of the case-splitting method are the two arms of the V. Lower the level to 0 and the crossings merge at the corner; lower it further and there are none. Watch the two solutions appear and disappear on the',
       href: '/algebra/visual-tools/equation',
       linkText: 'equation visual explorer',
+    }),
+    oneValue: demoUnitFrame({
+      svg: equationVisualizerDiagrams['lin-basic'],
+      caption: 'x = 3: true at one input, false everywhere else',
+      text: 'The left side x is drawn as a curve and the right side 3 as a level; the equation asserts that they are equal, and that happens at exactly one input, where the curve crosses the level. At every other x the two sides differ, so the statement is false there. Move the marble along the axis and try other equations on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+    emptySet: demoUnitFrame({
+      svg: equationVisualizerDiagrams['quad-none'],
+      caption: 'x&#178; + 4 = 0: the empty solution set',
+      text: 'The curve x&#178; + 4 never comes down to the level 0, so no real input makes the two sides equal: the solution set over &#8477; is empty, just as for the section\'s x&#178; = &#8722;1. Lower the curve until it touches or crosses the level, and the set gains one or two members, as x&#178; = 4 has {&#8722;2, 2}. Try it on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+    rationalExcluded: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRationalExcluded),
+      caption: 'Excluded values first, solutions second',
+      text: 'The section\'s equation 3/(x &#8722; 1) + 2/(x + 4) = 1. Its left side is undefined at x = 1 and x = &#8722;4, where the graph breaks at the dashed lines; those inputs are ruled out before solving. Clearing denominators gives x&#178; &#8722; 2x &#8722; 14 = 0, so x = 1 &#177; &#8730;15, and neither is an excluded value: both are the points where the curve meets y = 1.',
     }),
   };
 
@@ -670,6 +703,8 @@ export default function EquationsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-oneValue'} dangerouslySetInnerHTML={{ __html: demoUnits.oneValue }} />,
+          `Solving an equation means finding every input at which its assertion is true.`,
         ]
     },
     {
@@ -678,6 +713,8 @@ export default function EquationsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-emptySet'} dangerouslySetInnerHTML={{ __html: demoUnits.emptySet }} />,
+          `An empty solution set is still an answer: the equation has no solutions in that number system.`,
         ]
     },
     {
@@ -760,6 +797,8 @@ export default function EquationsPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-rationalExcluded'} dangerouslySetInnerHTML={{ __html: demoUnits.rationalExcluded }} />,
+          `Any candidate that lands on an excluded value is extraneous and must be discarded.`,
         ]
     },
     {

@@ -9,6 +9,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -433,6 +435,24 @@ const schemas = {
 }
 
 
+  const fpLnVsLog = { kind: 'pieces', svgTitle: 'ln x and log x: both through (1, 0); ln x is log x stretched by ln 10', xRange: [0, 12], yRange: [-2, 3],
+    pieces: [
+      { fn: (x) => Math.log(x), from: 0.14, to: 12, ends: [null, null], color: 'f', label: { text: 'ln x', x: 11.5, y: Math.log(11.5), pos: 'n' } },
+      { fn: (x) => Math.log10(x), from: 0.01, to: 12, ends: [null, null], color: 'g', label: { text: 'log x', x: 11.5, y: Math.log10(11.5), pos: 'n' } },
+    ],
+    vlines: [{ x: 10 }],
+    points: [{ x: 1, y: 0 }, { x: Math.E, y: 1, label: '(e, 1)', pos: 'nw' }, { x: 10, y: 1, label: '(10, 1)', pos: 'se' }, { x: 10, y: Math.log(10), label: '(10, ln 10 ≈ 2.303)', pos: 'nw' }],
+    notes: [{ x: 0.5, y: -1.4, text: 'at every x: ln x ≈ 2.303 · log x', pos: 'e' }],
+    caption: 'Same shape: ln x is log x stretched by ln 10 ≈ 2.303' };
+
+  const demoUnits = {
+    lnVsLog: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLnVsLog),
+      caption: 'One curve, two vertical scales',
+      text: 'ln x and log x drawn together. Both cross the axis at (1, 0). The natural logarithm reaches 1 already at x = e &#8776; 2.718, the common logarithm only at x = 10, so ln x is the steeper of the two. At x = 10 the dashed line shows the fixed ratio between them: log 10 = 1 while ln 10 &#8776; 2.303, and the same factor 2.303 links their heights at every x.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -442,6 +462,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Common & Natural Logarithms: Log vs Ln Explained | Learn Math Class",
       description: "Learn common logarithm (base 10) and natural logarithm (base e): definitions, the number e, calculator conventions, when to use each, and how to convert between them.",
@@ -462,7 +483,8 @@ export default function PageTemplate({
   obj4Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas,
+  demoUnits,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -559,6 +581,8 @@ export default function PageTemplate({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-lnVsLog'} dangerouslySetInnerHTML={{ __html: demoUnits.lnVsLog }} />,
+          `Every logarithm is a vertical stretch of every other, by the change-of-base constant.`,
         ]
     },
     {

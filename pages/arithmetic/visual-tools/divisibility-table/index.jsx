@@ -535,6 +535,9 @@ import DivisibilityTable from '@/app/components/divisibility/divisibility-table'
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import divisibilityTableDiagrams from '@/app/components/divisibility/divisibilityTableDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -840,6 +843,21 @@ Selecting several buttons at once shows the union of their patterns—see [combi
       link: '',
     },
 
+
+    obj21: {
+      title: `The Explanation Below the Grid`,
+      content: `A short explanation appears below the grid as soon as at least one divisor button is active, and disappears when the selection is empty. It follows the selection, not the mouse: hovering over cells changes the tooltip but leaves this explanation alone.
+
+With exactly one divisor selected, the explanation states that divisor's rule in a sentence—for ÷2, that the last digit alone decides; for ÷3, that the digit sum decides—and adds a fact about the highlighted pattern, such as the 34 cells lit by ÷3 or the nine lit by ÷12.
+
+With two or more divisors selected, the single-rule text gives way to one shared explanation of the union: the grid now highlights every number divisible by any of the chosen values, and the overlaps reveal shared multiples. The order in which the buttons were pressed does not matter.
+
+Every explanation ends in two links: one to the section for its rule—or to [combining divisors](!#combining-divisors) for a multi-selection—and one to [the twelve divisibility rules](!#the-twelve-divisibility-rules), which groups the tests into families. Clearing the selection with the red ✕ removes the explanation along with the highlights.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
   }
 
   const introContent = {
@@ -1003,8 +1021,119 @@ Selecting several buttons at once shows the union of their patterns—see [combi
     multi: `With several divisors selected the grid highlights the union — every number divisible by any of them — and the overlaps reveal shared multiples. [Learn more about combining divisors](!#combining-divisors) · [All twelve rules](!#the-twelve-divisibility-rules)`,
   };
 
+  const instructions = [
+    'Click a **÷** button (÷1 to ÷12) above the grid to highlight every number from 0 to 100 divisible by it; click it again to deselect. [Learn more about selecting divisors](!#selecting-divisors)',
+    'The red **✕** button appears once a divisor is active and clears the whole selection at once. [Learn more about clearing the selection](!#selecting-divisors)',
+    'Select two or more divisors to highlight their union: with ÷2 and ÷3 active, 68 of the 101 cells light up. [Learn more about combining divisors](!#combining-divisors)',
+    'Hover over any number to open a tooltip listing every divisor from 1 to 12 that divides it, with the reason for each. [Learn more about the hover tooltip](!#hovering-for-divisibility-details)',
+    'The grid holds 0 to 100 in 17 columns, so each divisor\'s multiples form stripes and diagonals. [Learn more about the grid layout](!#understanding-the-grid-layout)',
+    'The explanation below the grid states the rule of the selected divisor, or describes the union when several are active. [Learn more about the explanation below the grid](!#the-explanation-below-the-grid)',
+    'Each button carries its own test: last digit (2, 5, 10), digit sum (3, 9), trailing digits (4, 8), two combined tests (6, 12), alternating sum (11), direct division (7), and 1. [Learn more about the twelve rules](!#the-twelve-divisibility-rules)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real DivisibilityTable
+     (opens with nothing selected). Divisor buttons are "÷1" … "÷12" (exact match);
+     the red "✕" clear button exists only while a divisor is active.
+     The hover tooltip cannot be driven (the player has no hover entry). */
+  const demos = {
+    'selecting-divisors': {
+      title: 'Selecting and clearing divisors',
+      script: [
+        { say: `TAP ÷2
+Button turns blue.
+51 even cells light up.
+Explanation appears below the grid.` },
+        { click: { button: '÷2', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ÷2 again
+Deselected. Grid back to plain.
+Explanation gone.` },
+        { click: { button: '÷2', exact: true } },
+        { wait: 2200 },
+        { say: `TAP ÷5
+21 cells: numbers ending in 0 or 5.
+Last digit decides.` },
+        { click: { button: '÷5', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ÷10
+Union of ÷5 and ÷10.
+Nothing new lights: every multiple of 10 ends in 0.` },
+        { click: { button: '÷10', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ✕
+Whole selection cleared at once.` },
+        { click: { button: '✕', exact: true } },
+        { wait: 2200 },
+      ],
+    },
+    'the-twelve-divisibility-rules': {
+      title: 'Rule families',
+      script: [
+        { say: `TAP ÷3
+Digit-sum rule.
+Every third cell: 34 in all.` },
+        { click: { button: '÷3', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ÷3 off, ÷9 on
+Stricter digit sum: 12 cells.
+Every one was lit under ÷3.` },
+        { click: { button: '÷3', exact: true } },
+        { click: { button: '÷9', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ÷9 off, ÷11 on
+Alternating sum.
+0 plus repdigits 11, 22 … 99.` },
+        { click: { button: '÷9', exact: true } },
+        { click: { button: '÷11', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ÷11 off, ÷7 on
+No digit shortcut.
+15 cells, steps of seven.` },
+        { click: { button: '÷11', exact: true } },
+        { click: { button: '÷7', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ÷7 off, ÷1 on
+All 101 cells lit.
+1 divides every number.` },
+        { click: { button: '÷7', exact: true } },
+        { click: { button: '÷1', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'combining-divisors': {
+      title: 'Union and overlap',
+      script: [
+        { say: `TAP ÷2
+51 even cells.` },
+        { click: { button: '÷2', exact: true } },
+        { wait: 2200 },
+        { say: `TAP ÷3 as well
+Union: 68 cells lit.
+51 + 34 − 17 shared multiples of 6.` },
+        { click: { button: '÷3', exact: true } },
+        { wait: 3000 },
+        { say: `TAP ✕
+Selection cleared.` },
+        { click: { button: '✕', exact: true } },
+        { wait: 2000 },
+        { say: `TAP ÷6
+17 cells: exactly the overlap
+of the ÷2 and ÷3 patterns.` },
+        { click: { button: '÷6', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ÷3 as well
+Union = the 34 cells of ÷3.
+Every multiple of 6 is a multiple of 3.` },
+        { click: { button: '÷3', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('divisibility-table'),
       sectionsContent,
       introContent,
@@ -1025,7 +1154,22 @@ Selecting several buttons at once shows the union of their patterns—see [combi
   }
 }
 
-export default function DivisibilityTablePage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function DivisibilityTablePage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <DivisibilityTable explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1047,11 +1191,12 @@ export default function DivisibilityTablePage({relatedTools, seoData, sectionsCo
   })
 
   const genericSections = [
-    plain('obj1', 'selecting-divisors'),
+    withDemo(plain('obj1', 'selecting-divisors')),
     plain('obj2', 'hovering-for-divisibility-details'),
     plain('obj3', 'understanding-the-grid-layout'),
+    plain('obj21', 'the-explanation-below-the-grid'),
 
-    plain('obj20', 'the-twelve-divisibility-rules'),
+    withDemo(plain('obj20', 'the-twelve-divisibility-rules')),
     stateRow('obj16', 'divisibility-rule-for-1', 'd1'),
     stateRow('obj4', 'divisibility-rule-for-2', 'd2'),
     stateRow('obj5', 'divisibility-rule-for-3', 'd3'),
@@ -1064,7 +1209,7 @@ export default function DivisibilityTablePage({relatedTools, seoData, sectionsCo
     stateRow('obj10', 'divisibility-rule-for-10', 'd10'),
     stateRow('obj11', 'divisibility-rule-for-11', 'd11'),
     stateRow('obj12', 'divisibility-rule-for-12', 'd12'),
-    stateRow('obj19', 'combining-divisors', 'multi'),
+    withDemo(stateRow('obj19', 'combining-divisors', 'multi')),
 
     plain('obj13', 'what-is-divisibility'),
     plain('obj14', 'why-divisibility-rules-work'),
@@ -1128,6 +1273,10 @@ export default function DivisibilityTablePage({relatedTools, seoData, sectionsCo
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Divisibility Table</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
      
 
       {/* Instruction Box
@@ -1192,86 +1341,6 @@ export default function DivisibilityTablePage({relatedTools, seoData, sectionsCo
         </div>
       </div> */}
 
-      {/* Instruction Box - Accordion (CSS only with chevron) */}
-<style jsx>{`
-  details summary::-webkit-details-marker { display: none; }
-  details summary::marker { display: none; }
-  details[open] .chevron { transform: rotate(180deg); }
-`}</style>
-
-<details style={{
-  background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
-  border: '2px solid #7dd3fc',
-  borderRadius: '12px',
-  marginBottom: '20px',
-  maxWidth: '1000px',
-  marginLeft: 'auto',
-  marginRight: 'auto'
-}}>
-  <summary style={{
-    padding: '20px 24px',
-    cursor: 'pointer',
-    listStyle: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  }}>
-    <span style={{
-      fontSize: '1.1rem',
-      fontWeight: '700',
-      color: '#0369a1',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '8px'
-    }}>
-      <span style={{ fontSize: '1.3rem' }}>💡</span> How to Use This Tool
-    </span>
-    <span className="chevron" style={{
-      fontSize: '1.2rem',
-      color: '#0369a1',
-      transition: 'transform 0.3s ease'
-    }}>▼</span>
-  </summary>
-  
-  <div style={{
-    padding: '0 24px 20px 24px',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-    gap: '16px',
-    fontSize: '0.9rem',
-    color: '#334155'
-  }}>
-    <div>
-      <p style={{ margin: '0 0 8px 0', fontWeight: '600', color: '#0284c7' }}>
-        Select Divisors
-      </p>
-      <p style={{ margin: 0, lineHeight: '1.5' }}>
-        Click any <strong>÷ button</strong> to highlight all numbers divisible by that value. 
-        Select multiple divisors to see numbers divisible by any of them. Click again to deselect.
-      </p>
-    </div>
-    
-    <div>
-      <p style={{ margin: '0 0 8px 0', fontWeight: '600', color: '#0284c7' }}>
-        Explore Numbers
-      </p>
-      <p style={{ margin: 0, lineHeight: '1.5' }}>
-        <strong>Hover over any number</strong> in the grid to see all its divisors (1-12) 
-        and the divisibility rule explanation for each one.
-      </p>
-    </div>
-    
-    <div>
-      <p style={{ margin: '0 0 8px 0', fontWeight: '600', color: '#0284c7' }}>
-        Learn the Rules
-      </p>
-      <p style={{ margin: 0, lineHeight: '1.5' }}>
-        The tooltip shows <strong>why</strong> each number is divisible—digit sums for 3 and 9, 
-        last digits for 2, 5, and 10, and combined rules for 6 and 12.
-      </p>
-    </div>
-  </div>
-</details>
 
       <DivisibilityTable explanations={explanations}/>
       <br/>

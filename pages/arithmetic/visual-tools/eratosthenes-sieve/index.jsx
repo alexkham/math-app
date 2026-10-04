@@ -12,6 +12,9 @@ import EratosthenesSieve from '../../../../app/components/visualizations/arithme
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import eratosthenesSieveDiagrams from '@/app/components/visualizations/arithmetic/eratosthenesSieveDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -382,8 +385,126 @@ Fittingly, the last pass is also the smallest — three new crossings against th
     done: `Four sweeps settled all hundred numbers: 25 primes stand in solid color, 74 composites carry the tints of the primes that crossed them. [Learn more about the finished grid](!#understanding-the-grid-display) · [The algorithm](!#what-is-the-sieve-of-eratosthenes)`,
   };
 
+  const instructions = [
+    '**▶ Start** runs the sieve on its own, one action after another, and reads **⏸ Pause** while it runs. [Learn more about Start and Pause](!#how-to-use-the-sieve-visualization)',
+    '**Step** advances exactly one action: finding the next prime, or crossing out one of its multiples. [Learn more about Step](!#how-to-use-the-sieve-visualization)',
+    '**Reset** clears the grid, the cards and the counts and returns to **Press Start to begin the sieve**; the speed setting is kept. [Learn more about Reset](!#how-to-use-the-sieve-visualization)',
+    'The **Speed** slider runs from $1$ to $10$; slide right for a faster run. [Learn more about the speed slider](!#how-to-use-the-sieve-visualization)',
+    'The status bar narrates the current action, such as **Crossing out 12 (3 × 4)**, and its legend gives the colours for ÷2, ÷3, ÷5 and ÷7. [Learn more about the status bar](!#reading-the-status-bar)',
+    'In the $10 \\times 10$ grid primes turn solid, composites take the tint of the prime that crossed them, numbers crossed by two or more small primes are striped, and $1$ stays gray. [Learn more about the grid colours](!#understanding-the-grid-display)',
+    'The **Primes**, **Composites** and **Current** cards keep running totals and show the prime being processed; a finished run reads $25$ primes and $74$ composites. [Learn more about the statistics](!#tracking-statistics)',
+    'The **Step-by-Step** panel opens a card per prime, such as **÷3**, with its starting point $p^2$, the numbers it crossed and their count; the note under the cards follows the stage of the run. [Learn more about the Step-by-Step panel](!#using-the-step-by-step-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real EratosthenesSieve.
+     Controls: ▶ Start (label ⏸ Pause while running), Step, Reset, Speed = range 0
+     (1..10, 600 - 50*speed ms per action). Runs happen at speed 1 only and are
+     stopped by an `until` on the status text plus an immediate Pause, so live
+     play and instant replay land on the same state. No run to completion: it
+     takes over 11 s even at speed 10. */
+  const demos = {
+    'how-to-use-the-sieve-visualization': {
+      title: 'Step, Speed, Start, Pause and Reset',
+      script: [
+        { at: 'bl', say: `TAP Step
+Status: Found prime 2.
+2 turns solid blue.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2400 },
+        { at: 'bl', say: `TAP Step
+Crossing out 4 (2 × 2).
+One action per Step.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2400 },
+        { at: 'bl', say: `DRAG Speed → 1
+Slider left = slower.
+1 = slowest setting.` },
+        { slide: { range: 0 }, to: 1, ms: 1000 },
+        { wait: 2000 },
+        { at: 'bl', say: `TAP Start, then Pause
+Runs on its own: 6, 8, 10.
+Start reads Pause while running.
+Pause holds it at 10 (2 × 5).` },
+        { click: { button: '▶ Start', exact: true } },
+        { until: { text: 'Crossing out 10 (2 × 5)' }, ms: 15000 },
+        { click: { button: '⏸ Pause', exact: true }, ms: 1 },
+        { wait: 2800 },
+        { at: 'bl', say: `TAP Reset
+Grid back to 100 candidates.
+Press Start to begin the sieve.
+Speed stays at 1.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'reading-the-status-bar': {
+      title: 'Status bar and grid colours',
+      script: [
+        { at: 'bl', say: `TAP Step
+Found prime 2 — crossing out multiples.
+2 solid blue. 1 gray: neither.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2600 },
+        { at: 'bl', say: `TAP Step
+Crossing out 4 (2 × 2).
+4 tinted blue: ÷2 in the legend.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2600 },
+        { at: 'bl', say: `DRAG Speed → 1, Start, Pause
+Status narrates each cross:
+6, 8, 10, 12.
+Held at Crossing out 12 (2 × 6).` },
+        { slide: { range: 0 }, to: 1, ms: 800 },
+        { click: { button: '▶ Start', exact: true } },
+        { until: { text: 'Crossing out 12 (2 × 6)' }, ms: 15000 },
+        { click: { button: '⏸ Pause', exact: true }, ms: 1 },
+        { wait: 2800 },
+        { at: 'bl', say: `TAP Reset
+Press Start to begin the sieve.
+All colours cleared.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'using-the-step-by-step-panel': {
+      title: 'Step-by-Step panel and statistics',
+      script: [
+        { at: 'bl', say: `TAP Step
+÷2 card: multiples of 2 from 2² = 4.
+0 numbers crossed.
+Primes 1, Current 2.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2600 },
+        { at: 'bl', say: `TAP Step three times
+Crossed: 4 6 8.
+3 numbers crossed. Composites 3.` },
+        { click: { button: 'Step', exact: true } },
+        { wait: 400 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 400 },
+        { click: { button: 'Step', exact: true } },
+        { wait: 2600 },
+        { at: 'bl', say: `DRAG Speed → 1, Start, Pause
+Badges 10, 12, 14, 16 join the card.
+7 numbers crossed. Composites 7.` },
+        { slide: { range: 0 }, to: 1, ms: 800 },
+        { click: { button: '▶ Start', exact: true } },
+        { until: { text: 'Crossing out 16 (2 × 8)' }, ms: 15000 },
+        { click: { button: '⏸ Pause', exact: true }, ms: 1 },
+        { wait: 2800 },
+        { at: 'bl', say: `TAP Reset
+÷2 card gone.
+Primes 0, Composites 0.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('eratosthenes-sieve'),
       sectionsContent,
       introContent,
@@ -396,7 +517,7 @@ Fittingly, the last pass is also the smallest — three new crossings against th
   }
 }
 
-export default function SievePage({
+export default function SievePage({ instructions, demos,
   relatedTools, seoData,
   sectionsContent,
   introContent,
@@ -405,6 +526,21 @@ export default function SievePage({
   stateUnits,
   explanations
 }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <EratosthenesSieve explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -426,10 +562,10 @@ export default function SievePage({
   })
 
   const genericSections = [
-    stateRow('obj1', 'how-to-use-the-sieve-visualization', 'idle'),
+    withDemo(stateRow('obj1', 'how-to-use-the-sieve-visualization', 'idle')),
     stateRow('obj2', 'understanding-the-grid-display', 'done'),
-    plain('obj3', 'reading-the-status-bar'),
-    plain('obj4', 'using-the-step-by-step-panel'),
+    withDemo(plain('obj3', 'reading-the-status-bar')),
+    withDemo(plain('obj4', 'using-the-step-by-step-panel')),
     plain('obj5', 'tracking-statistics'),
     plain('obj6', 'what-is-the-sieve-of-eratosthenes'),
     stateRow('obj12', 'the-first-pass-multiples-of-2', 'sieve2'),
@@ -499,6 +635,10 @@ export default function SievePage({
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Sieve of Eratosthenes</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <EratosthenesSieve explanations={explanations}/>
       <br/>

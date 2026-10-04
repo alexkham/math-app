@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 function CoinFlipperSimulator() {
   const [state, setState] = useState({
@@ -90,6 +90,11 @@ function CoinFlipperSimulator() {
     animationTimeout.current = setTimeout(() => setIsFlipping(false), 400);
   };
 
+  // Auto mode calls the latest doFlips (a fresh closure each render); calling the
+  // one captured when Auto started kept re-applying the same totals.
+  const doFlipsRef = useRef(doFlips);
+  useEffect(() => { doFlipsRef.current = doFlips; });
+
   const toggleContinuous = () => {
     if (isContinuous) {
       setIsContinuous(false);
@@ -99,7 +104,7 @@ function CoinFlipperSimulator() {
       }
     } else {
       setIsContinuous(true);
-      continuousInterval.current = setInterval(() => doFlips(1), speed);
+      continuousInterval.current = setInterval(() => doFlipsRef.current(1), speed);
     }
   };
 

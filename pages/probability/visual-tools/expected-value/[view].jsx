@@ -265,6 +265,9 @@ import discreteExpectedValueDiagrams from '@/app/components/probability/expected
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 
 export async function getStaticPaths() {
@@ -1001,8 +1004,336 @@ Notice also that the vertical axis rescales between the two states. The tool fit
     content: currentConfig.introContent
   };
 
+  // How-to instructions and animated demos (ToolDemoPlayer v3), keyed by view.
+  const INSTRUCTIONS = {
+    'weighted': [
+      '**Select Distribution** picks one of seven presets, from Equal Weights to Strong Left Bias; circles, arrows and the E(X) marker update at once. [Learn more about the distribution selector](!#the-distribution-selector)',
+      '**▶ Play Animation** steps through the presets every 2 seconds and turns into **⏸ Pause**; picking a preset by hand also stops it. [Learn more about animation mode](!#animation-mode)',
+      '**Blue circles** hold P(X = x) and grow with it; the arrow under each circle shows how hard that outcome pulls on E(X). [Learn more about the probability weights](!#the-probability-weights)',
+      '**Blue numbers** under the axis give each contribution x × P(x); the solid E(X) marker and the grey dashed Avg marker sit below them. [Learn more about the probability weights](!#the-probability-weights)',
+      '**Calculation** panel lists every term x × P(x), their sum E(X), and the Simple Average, which stays 3.500 for every preset. [Learn more about the calculation panel](!#the-calculation-panel)',
+      '**Pick Equal Weights** and E(X) lands exactly on Avg = 3.50, because every weight is 1/6. [Learn more about the equal-weights case](!#when-ex-equals-simple-average)',
+      '**Compare E(X) with Avg** across presets: the likelier an outcome, the harder it pulls E(X) toward itself. [Learn more about the weighted average](!#weighted-average-concept)',
+    ],
+    'discrete': [
+      '**Read the bars**: each height is P(X = x), printed above the bar, for the values 1 to 6 along the axis. [Learn more about reading the bar chart](!#reading-the-bar-chart)',
+      '**Number inside each bar** is its contribution $x \\cdot P(X = x)$; the six contributions add up to E[X]. [Learn more about contributions](!#understanding-contributions)',
+      '**Drag a P(X = x) slider** under Adjust Probabilities to change that outcome\'s weight; under it you see the probability after rescaling and its contribution. [Learn more about the probability sliders](!#using-the-probability-sliders)',
+      '**Every drag rescales** all six so they sum to 1: a slider sets a relative weight, so pushing one to its maximum does not make that outcome certain. [Learn more about why the sliders renormalise](!#why-the-sliders-renormalise)',
+      '**Red dashed line** marks E[X] on the value axis, with its value printed on top; it moves with every slider. [Learn more about the expected value indicator](!#the-expected-value-indicator)',
+      '**Formula** panel shows $E[X] = \\sum x \\cdot P(X = x)$ and the current Expected Value in red. [Learn more about the formula display](!#the-formula-display)',
+      '**Watch the bounds**: E[X] always stays between 1 and 6 and usually falls between two bars. [Learn more about expected value properties](!#expected-value-properties)',
+    ],
+  };
+  const DEMOS = {
+    "weighted": {
+      "the-distribution-selector": {
+        "title": "Picking a preset",
+        "script": [
+          {
+            "say": "SELECT Pull Right\nBig circles on 5 and 6: P = 0.25, 0.40.\nE(X) = 4.70, right of Avg 3.50."
+          },
+          {
+            "set": "select",
+            "value": "Pull Right"
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "SELECT Pull Left\nMirror image: weight on 1 and 2.\nE(X) = 2.30."
+          },
+          {
+            "set": "select",
+            "value": "Pull Left"
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SELECT Pull Center\nPeak on 3 and 4.\nE(X) = 3.50, on top of Avg."
+          },
+          {
+            "set": "select",
+            "value": "Pull Center"
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SELECT Pull Extremes\nWeight on 1 and 6, P = 0.30 each.\nOpposite shape, same E(X) = 3.50."
+          },
+          {
+            "set": "select",
+            "value": "Pull Extremes"
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      },
+      "animation-mode": {
+        "title": "Animation and manual picks",
+        "script": [
+          {
+            "say": "TAP ▶ Play Animation\nPresets change every 2 seconds.\nButton turns into ⏸ Pause."
+          },
+          {
+            "click": {
+              "button": "▶ Play Animation",
+              "exact": true
+            }
+          },
+          {
+            "wait": 4200
+          },
+          {
+            "say": "SELECT Strong Right Bias\nManual pick stops the animation.\n6 × 0.60 = 3.60. E(X) = 5.23."
+          },
+          {
+            "set": "select",
+            "value": "Strong Right Bias"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "SELECT Strong Left Bias\n1 × 0.60 = 0.60. E(X) = 1.77.\nAvg marker never moves: 3.50."
+          },
+          {
+            "set": "select",
+            "value": "Strong Left Bias"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "SELECT Equal Weights\nAll circles P = 0.17.\nE(X) = Avg = 3.50."
+          },
+          {
+            "set": "select",
+            "value": "Equal Weights"
+          },
+          {
+            "wait": 2600
+          }
+        ]
+      },
+      "the-calculation-panel": {
+        "title": "Reading the calculation",
+        "script": [
+          {
+            "say": "SELECT Pull Right\nRows 0.05, 0.10, 0.30, 0.60, 1.25, 2.40.\nSum: E(X) = 4.700."
+          },
+          {
+            "set": "select",
+            "value": "Pull Right"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "SELECT Strong Right Bias\nOne row, 6 × 0.60 = 3.60, is most of the sum.\nE(X) = 5.230."
+          },
+          {
+            "set": "select",
+            "value": "Strong Right Bias"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "SELECT Pull Center\nRows 0.05, 0.30, 0.90, 1.20, 0.75, 0.30.\nE(X) = 3.500."
+          },
+          {
+            "set": "select",
+            "value": "Pull Center"
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "SELECT Equal Weights\nEvery row x × 0.17.\nE(X) = 3.500 = Simple Average."
+          },
+          {
+            "set": "select",
+            "value": "Equal Weights"
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      }
+    },
+    "discrete": {
+      "using-the-probability-sliders": {
+        "title": "Sliders set weights",
+        "script": [
+          {
+            "say": "DRAG P(X = 1) → max\nBar 1 jumps to 0.528, not 1.00.\nOther five shrink. E[X] 3.400 → 2.259."
+          },
+          {
+            "set": {
+              "range": 0
+            },
+            "value": "1"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "DRAG P(X = 6) → max\nP(X = 6) = 0.508; P(X = 1) drops to 0.267.\nE[X] = 4.111."
+          },
+          {
+            "set": {
+              "range": 5
+            },
+            "value": "1"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "DRAG P(X = 1) → 0\nOutcome 1 gone; P(X = 6) = 0.693.\nE[X] = 5.242."
+          },
+          {
+            "set": {
+              "range": 0
+            },
+            "value": "0"
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG P(X = 6) → 0\nOnly 2 to 5 left: 0.176, 0.294, 0.353, 0.176.\nE[X] = 3.529."
+          },
+          {
+            "set": {
+              "range": 5
+            },
+            "value": "0"
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      },
+      "the-expected-value-indicator": {
+        "title": "Moving the E[X] line",
+        "script": [
+          {
+            "say": "DRAG P(X = 6) → max\nRed dashed line jumps right.\nE[X] = 4.663, between bars 4 and 5."
+          },
+          {
+            "set": {
+              "range": 5
+            },
+            "value": "1"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "DRAG P(X = 5) → max\nBar 5 now tallest, 0.520.\nE[X] = 4.825."
+          },
+          {
+            "set": {
+              "range": 4
+            },
+            "value": "1"
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG P(X = 1) → 0\nLeft tail gone.\nE[X] = 4.930."
+          },
+          {
+            "set": {
+              "range": 0
+            },
+            "value": "0"
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "DRAG P(X = 2) → 0\nE[X] = 5.056.\nStill between 1 and 6, the outer values."
+          },
+          {
+            "set": {
+              "range": 1
+            },
+            "value": "0"
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      },
+      "understanding-contributions": {
+        "title": "Reading the contributions",
+        "script": [
+          {
+            "say": "DRAG P(X = 4) → 0\nBar 4 empty: contribution 0.000.\nE[X] 3.400 → 3.143."
+          },
+          {
+            "set": {
+              "range": 3
+            },
+            "value": "0"
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG P(X = 6) → max\nP(X = 6) = 0.519.\n6 × 0.519 = 3.115 of E[X] = 4.521."
+          },
+          {
+            "set": {
+              "range": 5
+            },
+            "value": "1"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "DRAG P(X = 2) → max\nBar 2 tallest, 0.530: contributes 1.059.\nBar 6, P = 0.275, still gives 1.648."
+          },
+          {
+            "set": {
+              "range": 1
+            },
+            "value": "1"
+          },
+          {
+            "wait": 3200
+          },
+          {
+            "say": "DRAG P(X = 3) → 0\nFour bars left: 0.043, 1.174, 0.325, 1.827.\nTheir sum is E[X] = 3.370."
+          },
+          {
+            "set": {
+              "range": 2
+            },
+            "value": "0"
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      }
+    }
+  };
+  const instructions = INSTRUCTIONS[params.view] || [];
+  const demos = DEMOS[params.view] || {};
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools(`probability-expected-value-${params.view}`),
       sectionsContent: currentConfig.sectionsContent,
       stateUnits,
@@ -1060,8 +1391,29 @@ export default function ExpectedValueViewPage({
   schemas,
   currentView, 
   componentName, 
-  h1Title 
+  h1Title,
+  instructions,
+  demos
 }) {
+
+  // the tool as the page renders it live, mounted inside each demo
+  const demoTools = {
+    WeightedExpectedValueVisualizer: <WeightedExpectedValueVisualizer />,
+    DiscreteExpectedValueVisualization: <DiscreteExpectedValueVisualization />,
+  }
+  const demoTool = demoTools[componentName]
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      {demoTool}
+    </ToolDemoPlayer>
+  )
 
   const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
     const src = sectionsContent[obj]
@@ -1079,6 +1431,10 @@ export default function ExpectedValueViewPage({
         : [ src.content ],
     }
   }).filter(Boolean);
+  // each demo goes at the top of its usage section
+  genericSections.forEach((row) => {
+    if (demos && demos[row.id] && demoTool) row.content = [demo(row.id), ...row.content]
+  })
 
   return (
     <>
@@ -1136,6 +1492,10 @@ export default function ExpectedValueViewPage({
       <br />
       <br />
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>{h1Title}</h1>
+      <div style={{width:'80%', margin:'auto'}}>
+        <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+      </div>
+      <br/>
       <br />
       <br />
 

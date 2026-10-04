@@ -8,6 +8,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -499,6 +501,49 @@ const schemas = {
 }
 
 
+  const fpLogCombined = { kind: 'pieces', svgTitle: 'log2 x + log2(x - 2) = 3 only at x = 4; the curve exists for x > 2', xRange: [-3, 9], yRange: [-3, 6],
+    pieces: [
+      { fn: (x) => Math.log2(x) + Math.log2(x - 2), from: 2.02, to: 9, ends: [null, null], color: 'f', label: { text: 'log₂ x + log₂(x − 2)', x: 2.6, y: 5.6, pos: 'e' } },
+      { fn: () => 3, from: -3, to: 9, ends: [null, null], color: 'g', label: { text: 'y = 3', x: 8.5, y: 3, pos: 's' } },
+    ],
+    vlines: [{ x: 2 }],
+    points: [{ x: 4, y: 3, label: 'x = 4', pos: 'se' }],
+    notes: [{ x: 2.1, y: -2.6, text: 'domain: x > 2', pos: 'e' }, { x: 5, y: -0.8, text: 'x = −2 is rejected:', pos: 'e', color: 'r' },
+      { x: 5, y: -1.6, text: 'log₂(−2) is undefined', pos: 'e', color: 'r' }],
+    caption: 'Only x = 4 survives: the left side exists only for x > 2' };
+  const fpLogQuadratic = { kind: 'pieces', svgTitle: '(log2 x)^2 - 5 log2 x + 6 = 0 at x = 4 and x = 8', xRange: [0, 10], yRange: [-1, 8],
+    pieces: [{ fn: (x) => Math.log2(x) ** 2 - 5 * Math.log2(x) + 6, from: 0.05, to: 10, ends: [null, null], color: 'f', label: { text: '(log₂ x)² − 5 log₂ x + 6', x: 1.3, y: 5.5, pos: 'e' } }],
+    points: [{ x: 4, y: 0 }, { x: 8, y: 0 }],
+    notes: [{ x: 3, y: 7.4, text: 'u = log₂ x: u² − 5u + 6 = 0, so u = 2 or 3', pos: 'e', color: 'g' },
+      { x: 3, y: 6.6, text: 'x = 2² = 4 or x = 2³ = 8', pos: 'e', color: 'r' }],
+    caption: 'Quadratic in log₂ x: zeros at x = 4 and x = 8' };
+  const fpExpBothSides = { kind: 'pieces', svgTitle: '2^(x + 3) = 5^(x - 1) at x approximately 4.026', xRange: [0, 5], yRange: [0, 300], yStep: 50,
+    pieces: [
+      { fn: (x) => 2 ** (x + 3), from: 0, to: 5, ends: [null, null], color: 'f', label: { text: '2ˣ⁺³', x: 4.6, y: 2 ** 7.6, pos: 'se' } },
+      { fn: (x) => 5 ** (x - 1), from: 0, to: 5, ends: [null, null], color: 'g', label: { text: '5ˣ⁻¹', x: 4.2, y: 5 ** 3.2, pos: 'w' } },
+    ],
+    points: [{ x: 4.026, y: 2 ** 7.026, label: 'x ≈ 4.026', pos: 'nw' }],
+    notes: [{ x: 0.1, y: 280, text: 'x = (ln 5 + 3 ln 2)/(ln 5 − ln 2) ≈ 4.026', pos: 'e', color: 'r' }],
+    caption: '2ˣ⁺³ = 5ˣ⁻¹: the faster-growing 5ˣ⁻¹ overtakes at x ≈ 4.026' };
+
+  const demoUnits = {
+    combined: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogCombined),
+      caption: 'Why x = &#8722;2 is thrown out',
+      text: 'The section\'s log&#8322; x + log&#8322;(x &#8722; 2) = 3. The left side only exists for x &gt; 2, where both arguments are positive, so its graph starts at the dashed line. It meets the level 3 once, at x = 4. Condensing to x&#178; &#8722; 2x = 8 also produces x = &#8722;2, but no part of the graph lives there: log&#8322;(&#8722;2) is undefined, so the candidate is rejected.',
+    }),
+    logQuadratic: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogQuadratic),
+      caption: 'A quadratic hiding inside a logarithm',
+      text: 'The section\'s (log&#8322; x)&#178; &#8722; 5 log&#8322; x + 6 = 0. In terms of u = log&#8322; x it is u&#178; &#8722; 5u + 6 = 0, with u = 2 or u = 3, so x = 4 or x = 8. The graph confirms both: it reaches zero exactly there, dipping slightly below the axis between them.',
+    }),
+    bothSides: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpExpBothSides),
+      caption: 'Two exponentials with different bases',
+      text: 'The section\'s 2&#739;&#8314;&#179; = 5&#739;&#8315;&#185;. The left side starts higher, but base 5 grows faster, so the two curves cross exactly once. Taking logarithms of both sides brings the exponents down and gives x = (ln 5 + 3 ln 2)/(ln 5 &#8722; ln 2) &#8776; 4.026, the crossing in the graph.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -508,6 +553,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Logarithmic Equations: Solving Methods & Examples | Learn Math Class",
       description: "Learn to solve logarithmic equations: convert to exponential form, use one-to-one property, combine logs, handle domain restrictions, and solve exponential equations with logs.",
@@ -528,7 +574,8 @@ export default function EquationsPage({
   obj9Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas,
+  demoUnits,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -564,6 +611,8 @@ export default function EquationsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-combined'} dangerouslySetInnerHTML={{ __html: demoUnits.combined }} />,
+          `Checking each candidate against the domain is the step that cannot be skipped.`,
         ]
     },
     {
@@ -593,6 +642,8 @@ export default function EquationsPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-logQuadratic'} dangerouslySetInnerHTML={{ __html: demoUnits.logQuadratic }} />,
+          `Each value of u gives one x, because log₂ x is one-to-one.`,
         ]
     },
     {
@@ -609,6 +660,8 @@ export default function EquationsPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-bothSides'} dangerouslySetInnerHTML={{ __html: demoUnits.bothSides }} />,
+          `Either ln or log gives the same crossing; only the arithmetic differs.`,
         ]
     },
     {

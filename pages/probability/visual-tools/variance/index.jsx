@@ -11,6 +11,9 @@ import VarianceVisualizer from '@/app/components/probability/variance/VarianceVi
 import varianceDiagrams from '@/app/components/probability/variance/varianceDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -276,6 +279,19 @@ The correction matters most when $n$ is small: here, with $n = 7$, it raises the
 Which to use is a question about intent, not data. Use $n$ when the points *are* the whole population you care about; use $n - 1$ when they are a sample standing in for something larger.`,
       link: '',
     },
+    obj16: {
+      title: `Reading the Statistics Bar and Decimals`,
+      content: `Under the controls, five boxes summarise the current dataset: **Mean (μ)**, **Variance**, **Std Dev**, **Range** and **n**. The variance and standard deviation labels follow the Variance Type switch, σ² and σ for population and s² and s for sample, so the boxes always say which divisor produced the number. Range is the largest value minus the smallest, and n counts the points, so it changes with **Add Point** and with each ✕ in the table.
+
+The **Decimals** menu (0 to 4, default 2) sets how many decimal places every computed number shows: the five boxes, the Deviation and Squared Dev columns, the table total and each line of the step-by-step calculation. It changes only the display. The data and the calculation are untouched, and the setting stays through **Reset** and the presets.
+
+For the default dataset, the three presets and the sample setting, a note under the boxes adds one observation about that state, with a link to the section that discusses it.
+
+Comparing Range with Std Dev is a quick check on the shape of the data: Range depends only on the two extreme points, Std Dev on every point. The [variance and standard deviation](!#variance-and-standard-deviation) section explains how the two measures relate.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
   }
 
   const introContent = {
@@ -430,8 +446,119 @@ The tool displays everything simultaneously: the visual distribution, the data t
     }
   }
 
+  const instructions = [
+    '**Variance Type** switches between **Population (σ²)**, dividing by $n$, and **Sample (s²)**, dividing by $n - 1$; hover the **?** for when to use which. [Learn more about population vs sample](!#population-vs-sample)',
+    '**Add Point** adds a point at the current mean, **Reset** restores the default data, and the **Low Variance**, **High Variance** and **With Outliers** presets load ready-made datasets. [Learn more about using the visualizer](!#using-the-visualizer)',
+    'The statistics bar shows **Mean (μ)**, **Variance**, **Std Dev**, **Range** and **n**; the **Decimals** menu sets 0 to 4 decimal places for every computed number. [Learn more about the statistics bar](!#the-statistics-bar)',
+    'On the chart each point hangs from the dashed mean line by a green bar (above the mean) or a red bar (below); drag a point up or down to change its value, or hover it to read its deviation. [Learn more about the visual display](!#the-visual-display)',
+    'The **Data Points** table lists each value with its deviation and squared deviation; type a new value into any row, or press **✕** to remove a point (at least 2 stay). [Learn more about the data table](!#data-table-and-manual-input)',
+    '**Step-by-Step Calculation** runs the formula on the current data in five numbered steps, from the mean to the final variance and standard deviation. [Learn more about the step-by-step breakdown](!#step-by-step-calculation)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real VarianceVisualizer
+     (opens on 12, 15, 18, 20, 22, 25, 28, population, 2 decimals). The chart's
+     points are dragged with mouse events, which the player's pointer drag does not
+     send, so the demos edit values through the table: input[type="number"] nth i =
+     x(i+1); the ✕ buttons are nth i in row order. Radios: nth 0 = Population,
+     nth 1 = Sample. The per-state note for the sample setting is written for n = 7,
+     so points are added only in population mode. */
+  const demos = {
+    'using-the-visualizer': {
+      title: 'Presets, Add Point, Reset',
+      script: [
+        { say: `TAP Low Variance
+Points hug the mean 20.86.
+σ² = 0.69. Range 2.`, at: 'bl' },
+        { click: { button: 'Low Variance', exact: true } },
+        { wait: 2600 },
+        { say: `TAP High Variance
+Points pushed to the extremes.
+σ² = 138.98. Range 30.`, at: 'bl' },
+        { click: { button: 'High Variance', exact: true } },
+        { wait: 2600 },
+        { say: `TAP With Outliers
+Six points near 16, one at 40.
+σ² = 72.98. Std Dev 8.54.`, at: 'bl' },
+        { click: { button: 'With Outliers', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Add Point
+New point at the mean 19.14. n = 8.
+Same squared total, σ² = 63.86.`, at: 'bl' },
+        { click: { button: 'Add Point', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Reset
+Default data back.
+Mean 20.00. σ² = 26.57.`, at: 'bl' },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'data-table-and-manual-input': {
+      title: 'Editing the table',
+      script: [
+        { say: `TYPE x1 → 20
+Mean 21.14. Range 13.
+σ² = 16.12: spread shrinks.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: 20 },
+        { wait: 2800 },
+        { say: `TYPE x7 → 40
+Squared Dev of x7 jumps.
+σ² = 57.27. Range 25.`, at: 'bl' },
+        { set: { css: 'input[type="number"]', nth: 6 }, value: 40 },
+        { wait: 2800 },
+        { say: `TAP ✕ on row 7
+Outlier gone. n = 6. Mean 20.00.
+σ² = 9.67.`, at: 'bl' },
+        { click: { button: '✕', exact: true, nth: 6 } },
+        { wait: 2800 },
+        { say: `SELECT Decimals → 4
+Same data, more digits.
+σ² = 9.6667.`, at: 'bl' },
+        { set: 'select', value: '4' },
+        { wait: 2600 },
+        { say: `TAP Reset
+Default data back. Decimals stay 4.
+σ² = 26.5714.`, at: 'bl' },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'population-vs-sample': {
+      title: 'Population or sample',
+      script: [
+        { say: `TAP Sample (s²)
+Step 5: divide by n − 1 = 6.
+s² = 186 / 6 = 31.00. s = 5.57.`, at: 'bl' },
+        { click: { css: 'input[type="radio"]', nth: 1 } },
+        { wait: 2800 },
+        { say: `TAP Low Variance
+Squared total 4.86.
+s² = 4.86 / 6 = 0.81.`, at: 'bl' },
+        { click: { button: 'Low Variance', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Population (σ²)
+Divide by n = 7.
+σ² = 0.69: smaller than s².`, at: 'bl' },
+        { click: { css: 'input[type="radio"]', nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP Add Point
+Point at the mean: squared total stays 4.86.
+n = 8. σ² = 0.61.`, at: 'bl' },
+        { click: { button: 'Add Point', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Reset
+Default data, population.
+σ² = 26.57.`, at: 'bl' },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('probability-variance'),
       sectionsContent,
       stateUnits,
@@ -452,7 +579,22 @@ The tool displays everything simultaneously: the visual distribution, the data t
   }
 }
 
-export default function VarianceVisualizerPage({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function VarianceVisualizerPage({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <VarianceVisualizer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -475,16 +617,17 @@ export default function VarianceVisualizerPage({relatedTools, seoData, sectionsC
   const genericSections = [
     plain('obj1', 'what-is-variance'),
     plain('obj2', 'variance-formulas'),
-    plain('obj3', 'using-the-visualizer'),
+    withDemo(plain('obj3', 'using-the-visualizer')),
     stateRow('obj11', 'the-default-dataset', 'default'),
     stateRow('obj12', 'low-variance-preset', 'low'),
     stateRow('obj13', 'high-variance-preset', 'high'),
     stateRow('obj14', 'the-outlier-preset', 'outliers'),
     stateRow('obj15', 'the-sample-toggle', 'sample'),
+    plain('obj16', 'the-statistics-bar'),
     plain('obj4', 'the-visual-display'),
     plain('obj5', 'step-by-step-calculation'),
-    plain('obj6', 'data-table-and-manual-input'),
-    plain('obj7', 'population-vs-sample'),
+    withDemo(plain('obj6', 'data-table-and-manual-input')),
+    withDemo(plain('obj7', 'population-vs-sample')),
     plain('obj8', 'exploring-outliers'),
     plain('obj9', 'variance-and-standard-deviation'),
     plain('obj10', 'related-concepts'),
@@ -555,6 +698,10 @@ export default function VarianceVisualizerPage({relatedTools, seoData, sectionsC
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
         Interactive Variance Visualizer
       </h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
 
       <br/>
       

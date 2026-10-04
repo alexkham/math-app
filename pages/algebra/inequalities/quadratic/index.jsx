@@ -10,6 +10,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 
@@ -430,6 +431,28 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpQuadBelowLine = { kind: 'pieces', svgTitle: 'x^2 < 3x + 10: the parabola is below the line for -2 < x < 5', xRange: [-4, 7], yRange: [-4, 36], yStep: 4,
+    pieces: [
+      { fn: (x) => x * x, from: -4, to: 7, ends: [null, null], color: 'f', label: { text: 'y = x²', x: -3.6, y: 13, pos: 'e' } },
+      { fn: (x) => 3 * x + 10, from: -4, to: 7, ends: [null, null], color: 'g', label: { text: 'y = 3x + 10', x: 3.2, y: 19.6, pos: 'w' } },
+    ],
+    points: [{ x: -2, y: 4 }, { x: 5, y: 25 }],
+    notes: [{ x: -3.9, y: 32, text: 'x² below the line: −2 < x < 5', pos: 'e', color: 'r' }],
+    caption: 'x² < 3x + 10, or x² − 3x − 10 < 0: solution −2 < x < 5' };
+  const fpQuadTouch = { kind: 'pieces', svgTitle: '(x - 2)^2 > 0 for every x except 2', xRange: [-1, 5], yRange: [-2, 9],
+    pieces: [
+      { fn: (x) => (x - 2) ** 2, from: -1, to: 2, ends: [null, 'open'], color: 'f', label: { text: '(x − 2)²', x: 0.6, y: 2.0, pos: 'w' } },
+      { fn: (x) => (x - 2) ** 2, from: 2, to: 5, ends: ['open', null], color: 'f' },
+    ],
+    notes: [{ x: 0.1, y: 8, text: '> 0: every x except 2', pos: 'e', color: 'r' }, { x: 0.1, y: 6.8, text: '≥ 0: every real x', pos: 'e', color: 'g' }],
+    caption: 'Δ = 0: touches the axis once, positive everywhere else' };
+  const fpBiquadIneq = { kind: 'pieces', svgTitle: 'x^4 - 5x^2 + 4 > 0 on three pieces', xRange: [-2.8, 2.8], yRange: [-3, 10],
+    pieces: [{ fn: (x) => x ** 4 - 5 * x * x + 4, from: -2.8, to: 2.8, ends: [null, null], color: 'f' }],
+    points: [{ x: -2, y: 0 }, { x: -1, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }],
+    notes: [{ x: -2.2, y: 9, text: 'u = x²: (u − 1)(u − 4) > 0, so u < 1 or u > 4', pos: 'e', color: 'g' },
+      { x: -2.2, y: 7.2, text: 'solution x < −2, −1 < x < 1, x > 2', pos: 'e', color: 'r' }],
+    caption: 'x⁴ − 5x² + 4 > 0 on three pieces, found through u = x²' };
+
   const demoUnits = {
     positive: demoUnitFrame({
       svg: inequalityVisualizerDiagrams['quad-two'],
@@ -444,6 +467,21 @@ const schemas = {
       text: 'The parabola floats above the axis, never touching it, so x&#178; + 4 is positive for every real x: the inequality x&#178; + 4 &lt; 0 has no solution at all, and x&#178; + 4 &gt; 0 has every real number. With no roots there are no boundaries and the sign is constant. See the empty solution set on the',
       href: '/algebra/visual-tools/inequality',
       linkText: 'inequality visual explorer',
+    }),
+    belowLine: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpQuadBelowLine),
+      caption: 'Before and after standard form',
+      text: 'The section\'s x&#178; &lt; 3x + 10, with each side drawn as its own graph. The parabola dips below the line between their crossings at x = &#8722;2 and x = 5, so that stretch is the solution. Moving everything to one side gives x&#178; &#8722; 3x &#8722; 10 &lt; 0, whose roots are the same &#8722;2 and 5: rewriting in standard form changes how the question looks, not its answer.',
+    }),
+    touch: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpQuadTouch),
+      caption: 'A single root that never changes the sign',
+      text: 'With &#916; = 0 the quadratic is a perfect square, here (x &#8722; 2)&#178;. It touches the axis at x = 2 and is positive everywhere else. So (x &#8722; 2)&#178; &gt; 0 holds for every x except 2 (the open circle), &#8805; 0 holds for every real number, &lt; 0 never holds, and &#8804; 0 holds only at x = 2.',
+    }),
+    biquad: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpBiquadIneq),
+      caption: 'A quartic inequality solved as a quadratic',
+      text: 'The section\'s x&#8308; &#8722; 5x&#178; + 4 &gt; 0. With u = x&#178; it becomes (u &#8722; 1)(u &#8722; 4) &gt; 0, true for u &lt; 1 or u &gt; 4. Back in x, u &lt; 1 is &#8722;1 &lt; x &lt; 1 and u &gt; 4 is x &lt; &#8722;2 or x &gt; 2: exactly the three stretches where the curve is above the axis, with the four boundaries &#177;1 and &#177;2 excluded.',
     }),
   };
 
@@ -498,6 +536,8 @@ const schemas = {
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-belowLine'} dangerouslySetInnerHTML={{ __html: demoUnits.belowLine }} />,
+          `Any inequality between two expressions can be read as one graph above or below another.`,
         ]
     },
 
@@ -531,6 +571,8 @@ const schemas = {
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-touch'} dangerouslySetInnerHTML={{ __html: demoUnits.touch }} />,
+          `The repeated root is the only point where a strict inequality can fail.`,
         ]
     },
     {
@@ -572,6 +614,8 @@ const schemas = {
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-biquad'} dangerouslySetInnerHTML={{ __html: demoUnits.biquad }} />,
+          `Each positive value of u yields two symmetric boundaries in x.`,
         ]
     },
 

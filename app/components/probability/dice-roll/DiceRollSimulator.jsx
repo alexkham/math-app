@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 function DiceRollSimulator() {
   const [state, setState] = useState({
@@ -93,6 +93,11 @@ function DiceRollSimulator() {
     animationTimeout.current = setTimeout(() => setIsRolling(false), 400);
   };
 
+  // Auto mode calls the latest doRolls (a fresh closure each render); calling the
+  // one captured when Auto started kept re-applying the same totals.
+  const doRollsRef = useRef(doRolls);
+  useEffect(() => { doRollsRef.current = doRolls; });
+
   const toggleContinuous = () => {
     if (isContinuous) {
       setIsContinuous(false);
@@ -102,7 +107,7 @@ function DiceRollSimulator() {
       }
     } else {
       setIsContinuous(true);
-      continuousInterval.current = setInterval(() => doRolls(1), speed);
+      continuousInterval.current = setInterval(() => doRollsRef.current(1), speed);
     }
   };
 

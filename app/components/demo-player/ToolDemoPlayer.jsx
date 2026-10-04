@@ -38,6 +38,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState, useCallback, useMe
      { set: T, value }                     type into a text/number input or textarea (then blur),
                                            or pick a <select> option by value
      { wait: ms }                          pause
+     { until: T, ms? }                     wait (also during replay) until T exists
    Targets T:
      'css selector'                        first match inside the tool
      { css, nth }                          nth match (0-based)
@@ -92,7 +93,11 @@ function setRangeValue(input, v) {
 // SVG elements have no .click(); dispatch the event instead
 function press(el) {
   if (typeof el.click === 'function') el.click();
-  else el.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+  else {
+    // give SVG clicks real coordinates (tools that place tooltips at the pointer)
+    const r = el.getBoundingClientRect();
+    el.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 }));
+  }
 }
 
 function setFieldValue(field, v) {
@@ -293,6 +298,13 @@ export default function ToolDemoPlayer({
 
     async function act(a, fast) {
       if (a.wait) { if (!fast) await sleep(a.wait); return; }
+      if (a.until) {
+        // hold until the target exists, in live play AND instant replay,
+        // so steps behind a tool's own animation replay to the same state
+        const t0 = performance.now();
+        while (live() && !resolve(tool(), a.until) && performance.now() - t0 < (a.ms || 6000)) await sleep(50);
+        return;
+      }
       const el = resolve(tool(), a.move || a.click || a.slide || a.drag || a.set);
       if (!el) return;
       if (a.move) {

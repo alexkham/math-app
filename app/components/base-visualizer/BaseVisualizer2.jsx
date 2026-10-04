@@ -207,7 +207,7 @@
 
 
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import styles from './BaseVisualizer2.module.css';
 import { processContent } from '@/app/utils/contentProcessor';
@@ -218,28 +218,24 @@ import { processContent } from '@/app/utils/contentProcessor';
 const BaseVisualizer2 = ({ explanations = null }) => {
   const [number, setNumber] = useState('');
   const [base, setBase] = useState('');
-  const [visualization, setVisualization] = useState([]);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    setError('');
+  // Derived during render (not in an effect): an effect left the previous base's
+  // digits on screen for one render, so 45 in base 2 switched to base 16 drew
+  // 16^5 cubes and froze the tab. Invalid input now also clears the rows.
+  const { visualization, error } = useMemo(() => {
     const num = Number(number) ? Number(number) : 0;
     const b = Number(base) ? Number(base) : 0;
-    
-    if (num > 144) {
-      setError('Number must be 144 or less');
-      return;
-    }
+    if (num > 144) return { visualization: [], error: 'Number must be 144 or less' };
     if (b >= 2 && b <= 36) {
       const converted = num.toString(b);
-      const newVisualization = converted.split('').reverse().map((digit, index) => ({
-        power: index,
-        count: parseInt(digit, b)
-      }));
-      setVisualization(newVisualization);
-    } else if (b !== 0) {
-      setError('Base must be between 2 and 36');
+      return {
+        visualization: converted.split('').reverse().map((digit, index) => ({
+          power: index,
+          count: parseInt(digit, b)
+        })),
+        error: '',
+      };
     }
+    return { visualization: [], error: b !== 0 ? 'Base must be between 2 and 36' : '' };
   }, [number, base]);
 
   const renderGrid = (filled) => {
@@ -269,7 +265,7 @@ const BaseVisualizer2 = ({ explanations = null }) => {
     const b = Number(base) ? Number(base) : 0;
     let remainingCubes = Number(number) ? Number(number) : 0;
   
-    if (b === 0 || remainingCubes === 0) return null;
+    if (b < 2 || b > 36 || error || remainingCubes === 0) return null;
   
     return (
       <div className={styles.resultStructure}>
@@ -308,8 +304,6 @@ const BaseVisualizer2 = ({ explanations = null }) => {
   const handleReset = () => {
     setNumber('');
     setBase('');
-    setVisualization([]);
-    setError('');
   };
 
   return (

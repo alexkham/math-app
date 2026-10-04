@@ -17,6 +17,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 
 export async function getStaticPaths() {
@@ -931,8 +934,941 @@ The right panel lists the four written steps with the current step highlighted a
   });
   const explanations = EXPLANATIONS[params.view];
 
+  // How-to instructions and animated demos (ToolDemoPlayer v3), keyed by view.
+  // The tools step through animated transitions; every Forward / Back / Play /
+  // Reset is followed by an `until` on the Steps panel's card count (the panel
+  // shows one card per step reached), so instant replay lands on the same step.
+  const INSTRUCTIONS = {
+    'square-of-sum': [
+      '**Forward ▶▶** animates the proof one step ahead and **◀◀ Back** one step back; the **Steps** panel on the right adds a card for each step reached. [Learn more about the controls](!#using-the-controls)',
+      '**▶ Play** runs the proof through to Step 4, **⏸ Pause** stops it in place, **↺ Reset** returns to Step 1, and **Speed** sets 0.5× to 2×. [Learn more about the controls](!#using-the-controls)',
+      'Step 1 draws one square of side $a + b$: area $(a+b)^2$. [Learn more about the starting square](!#reading-the-starting-square)',
+      'Step 2 marks each side as $a$ then $b$; no area moves. [Learn more about the side split](!#splitting-each-side-into-a-and-b)',
+      'Step 3 drops a cut from each mark: four outlined rectangles. [Learn more about the grid cuts](!#drawing-the-grid-cuts)',
+      'Step 4 colours the pieces $a^2$, $b^2$ and two $ab$ rectangles: $(a+b)^2 = a^2 + 2ab + b^2$. [Learn more about the four pieces](!#colouring-the-four-pieces-in-sequence)',
+      'The note under the **Steps** panel explains the current step and links to its section. [Learn more about the identity at a glance](!#identity-at-a-glance)',
+    ],
+    'square-of-difference': [
+      '**Forward ▶▶** animates the proof one step ahead and **◀◀ Back** one step back; the **Steps** panel on the right adds a card for each step reached. [Learn more about the controls](!#using-the-controls)',
+      '**▶ Play** runs the proof through to Step 4, **⏸ Pause** stops it in place, **↺ Reset** returns to Step 1, and **Speed** sets 0.5× to 2×. [Learn more about the controls](!#using-the-controls)',
+      'Step 1 draws a square of side $a$: area $a^2$. [Learn more about the starting square](!#reading-the-starting-square)',
+      'Step 2 marks $b^2$ in the corner; the side splits into $a - b$ and $b$. [Learn more about the b² corner](!#marking-the-b-squared-corner)',
+      'Step 3 lays two $ab$ strips over the rest, overlapping on $b^2$; the $(a-b)^2$ square remains. [Learn more about the two strips](!#two-ab-strips-with-an-overlap)',
+      'Step 4 pulls the strips apart: $a^2 = ab + ab - b^2 + (a-b)^2$, so $(a-b)^2 = a^2 - 2ab + b^2$. [Learn more about the discard step](!#the-discard-step)',
+      'The note under the **Steps** panel explains the current step and links to its section. [Learn more about the identity at a glance](!#identity-at-a-glance)',
+    ],
+    'square-of-trinomial': [
+      '**Forward ▶▶** animates the proof one step ahead and **◀◀ Back** one step back; the **Steps** panel on the right adds a card for each step reached. [Learn more about the controls](!#using-the-controls)',
+      '**▶ Play** runs the proof through to Step 4, **⏸ Pause** stops it in place, **↺ Reset** returns to Step 1, and **Speed** sets 0.5× to 2×. [Learn more about the controls](!#using-the-controls)',
+      'Step 1 draws one square of side $a + b + c$: area $(a+b+c)^2$. [Learn more about the starting square](!#reading-the-starting-square)',
+      'Step 2 splits each side into segments $a$, $b$, $c$. [Learn more about the three-way split](!#splitting-each-side-into-three-segments)',
+      'Step 3 cuts the square into 9 rectangles: $a^2$, $b^2$, $c^2$ on the diagonal, matching pairs off it. [Learn more about the 3×3 grid](!#building-the-3x3-grid)',
+      'Step 4 pushes the 9 pieces apart and back: $(a+b+c)^2 = a^2 + b^2 + c^2 + 2ab + 2ac + 2bc$. [Learn more about the explosion view](!#the-explosion-view)',
+      'The note under the **Steps** panel explains the current step and links to its section. [Learn more about the identity at a glance](!#identity-at-a-glance)',
+    ],
+    'difference-of-squares': [
+      '**Forward ▶▶** animates the proof one step ahead and **◀◀ Back** one step back; the **Steps** panel on the right adds a card for each step reached. [Learn more about the controls](!#using-the-controls)',
+      '**▶ Play** runs the proof through to Step 4, **⏸ Pause** stops it in place, **↺ Reset** returns to Step 1, and **Speed** sets 0.5× to 2×. [Learn more about the controls](!#using-the-controls)',
+      'Step 1 draws a square of side $a$: area $a^2$. [Learn more about the starting square](!#reading-the-starting-square)',
+      'Step 2 marks the $b^2$ corner to be removed. [Learn more about the removal mark](!#marking-the-b-squared-removal)',
+      'Step 3 removes $b^2$; the L-shape left splits into $(a-b) \\cdot b$ and $a(a-b)$. [Learn more about the L-shape](!#splitting-the-l-shape-into-two-rectangles)',
+      'Step 4 lifts the top strip, rotates it 90° and docks it: one rectangle $(a+b) \\times (a-b)$. [Learn more about lift, rotate, and place](!#lift-rotate-and-place)',
+      'The note under the **Steps** panel explains the current step and links to its section. [Learn more about the identity at a glance](!#identity-at-a-glance)',
+    ],
+  };
+  const DEMOS = {
+    "square-of-sum": {
+      "reading-the-starting-square": {
+        "title": "Stepping through the proof",
+        "script": [
+          {
+            "say": "TAP Forward ▶▶\nStep 2: each side marked a, then b.\nNo area moves."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(2):last-child"
+          },
+          {
+            "wait": 2400
+          },
+          {
+            "say": "TAP Forward ▶▶\nStep 3: a cut from each mark.\nFour rectangles, not yet coloured."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(3):last-child"
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Forward ▶▶\nStep 4: a², b² and two ab pieces colour in.\n(a+b)² = a² + 2ab + b²."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "TAP ◀◀ Back\nBack to Step 3.\nColour gone: four outlined rectangles."
+          },
+          {
+            "click": {
+              "button": "◀◀ Back",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(3):last-child"
+          },
+          {
+            "wait": 3200
+          }
+        ]
+      },
+      "using-the-controls": {
+        "title": "Play, speed and reset",
+        "script": [
+          {
+            "say": "SELECT Speed 2×, TAP ▶ Play\nWhole proof at double speed.\nStops on Step 4."
+          },
+          {
+            "set": "select",
+            "value": "0.5"
+          },
+          {
+            "wait": 400
+          },
+          {
+            "click": {
+              "button": "▶ Play",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child",
+            "ms": 15000
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "TAP ↺ Reset\nBack to Step 1. Intro replays."
+          },
+          {
+            "click": {
+              "button": "↺ Reset",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(1):last-child"
+          },
+          {
+            "wait": 2400
+          },
+          {
+            "say": "TAP Forward ▶▶\nOne step at 2×: Step 2, each side marked a, then b."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(2):last-child"
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "SELECT Speed 1×, TAP ▶ Play\nRuns on from Step 2 at normal speed.\nStops on Step 4."
+          },
+          {
+            "set": "select",
+            "value": "1"
+          },
+          {
+            "wait": 400
+          },
+          {
+            "click": {
+              "button": "▶ Play",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child",
+            "ms": 15000
+          },
+          {
+            "wait": 2400
+          }
+        ]
+      },
+      "colouring-the-four-pieces-in-sequence": {
+        "title": "Step 4 and back",
+        "script": [
+          {
+            "say": "SELECT Speed 2×, TAP ▶ Play\nStep 4: a², b² and two ab pieces colour in.\n(a+b)² = a² + 2ab + b²."
+          },
+          {
+            "set": "select",
+            "value": "0.5"
+          },
+          {
+            "wait": 400
+          },
+          {
+            "click": {
+              "button": "▶ Play",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child",
+            "ms": 15000
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP ◀◀ Back\nBack to Step 3.\nColour gone: four outlined rectangles."
+          },
+          {
+            "click": {
+              "button": "◀◀ Back",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(3):last-child"
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Forward ▶▶\nStep 4 again: a², then b², then both ab.\nThe two ab pieces are the 2 in 2ab."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "TAP ↺ Reset\nBack to Step 1: the starting square."
+          },
+          {
+            "click": {
+              "button": "↺ Reset",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(1):last-child"
+          },
+          {
+            "wait": 2400
+          }
+        ]
+      }
+    },
+    "square-of-difference": {
+      "reading-the-starting-square": {
+        "title": "Stepping through the proof",
+        "script": [
+          {
+            "say": "TAP Forward ▶▶\nStep 2: b² marked in the corner.\nSide splits into a − b and b."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(2):last-child"
+          },
+          {
+            "wait": 2400
+          },
+          {
+            "say": "TAP Forward ▶▶\nStep 3: two ab strips cover the rest.\nOverlap on b². (a − b)² remains."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(3):last-child"
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Forward ▶▶\nStep 4: strips slide apart and back.\na² = ab + ab − b² + (a − b)²."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "TAP ◀◀ Back\nBack to Step 3.\nStrips in place, overlapping on b²."
+          },
+          {
+            "click": {
+              "button": "◀◀ Back",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(3):last-child"
+          },
+          {
+            "wait": 3200
+          }
+        ]
+      },
+      "using-the-controls": {
+        "title": "Play, speed and reset",
+        "script": [
+          {
+            "say": "SELECT Speed 2×, TAP ▶ Play\nWhole proof at double speed.\nEnds on Step 4; strips keep moving."
+          },
+          {
+            "set": "select",
+            "value": "0.5"
+          },
+          {
+            "wait": 400
+          },
+          {
+            "click": {
+              "button": "▶ Play",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child",
+            "ms": 15000
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "TAP ↺ Reset\nBack to Step 1. Intro replays."
+          },
+          {
+            "click": {
+              "button": "↺ Reset",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(1):last-child"
+          },
+          {
+            "wait": 2400
+          },
+          {
+            "say": "TAP Forward ▶▶\nOne step at 2×: Step 2, b² marked in the corner."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(2):last-child"
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "SELECT Speed 1×, TAP ▶ Play\nRuns on from Step 2 at normal speed.\nEnds on Step 4; strips keep moving."
+          },
+          {
+            "set": "select",
+            "value": "1"
+          },
+          {
+            "wait": 400
+          },
+          {
+            "click": {
+              "button": "▶ Play",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child",
+            "ms": 15000
+          },
+          {
+            "wait": 2400
+          }
+        ]
+      },
+      "the-discard-step": {
+        "title": "Step 4 and back",
+        "script": [
+          {
+            "say": "SELECT Speed 2×, TAP ▶ Play\nStep 4: strips slide apart and back.\na² = ab + ab − b² + (a − b)²."
+          },
+          {
+            "set": "select",
+            "value": "0.5"
+          },
+          {
+            "wait": 400
+          },
+          {
+            "click": {
+              "button": "▶ Play",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child",
+            "ms": 15000
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP ◀◀ Back\nBack to Step 3.\nStrips in place, overlapping on b²."
+          },
+          {
+            "click": {
+              "button": "◀◀ Back",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(3):last-child"
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Forward ▶▶\nStep 4 again: b² was covered twice.\n(a − b)² = a² − 2ab + b²."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "TAP ↺ Reset\nBack to Step 1: the starting square."
+          },
+          {
+            "click": {
+              "button": "↺ Reset",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(1):last-child"
+          },
+          {
+            "wait": 2400
+          }
+        ]
+      }
+    },
+    "square-of-trinomial": {
+      "reading-the-starting-square": {
+        "title": "Stepping through the proof",
+        "script": [
+          {
+            "say": "TAP Forward ▶▶\nStep 2: each side split into a, b, c."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(2):last-child"
+          },
+          {
+            "wait": 2400
+          },
+          {
+            "say": "TAP Forward ▶▶\nStep 3: grid of 9 rectangles.\nDiagonal a², b², c². Off-diagonal pairs match."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(3):last-child"
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Forward ▶▶\nStep 4: pieces explode apart and re-form.\n(a+b+c)² = a² + b² + c² + 2ab + 2ac + 2bc."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "TAP ◀◀ Back\nBack to Step 3.\nNine cells together, no explosion."
+          },
+          {
+            "click": {
+              "button": "◀◀ Back",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(3):last-child"
+          },
+          {
+            "wait": 3200
+          }
+        ]
+      },
+      "using-the-controls": {
+        "title": "Play, speed and reset",
+        "script": [
+          {
+            "say": "SELECT Speed 2×, TAP ▶ Play\nWhole proof at double speed.\nEnds on Step 4; pieces keep exploding."
+          },
+          {
+            "set": "select",
+            "value": "0.5"
+          },
+          {
+            "wait": 400
+          },
+          {
+            "click": {
+              "button": "▶ Play",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child",
+            "ms": 15000
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "TAP ↺ Reset\nBack to Step 1. Intro replays."
+          },
+          {
+            "click": {
+              "button": "↺ Reset",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(1):last-child"
+          },
+          {
+            "wait": 2400
+          },
+          {
+            "say": "TAP Forward ▶▶\nOne step at 2×: Step 2, each side split into a, b, c."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(2):last-child"
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "SELECT Speed 1×, TAP ▶ Play\nRuns on from Step 2 at normal speed.\nEnds on Step 4; pieces keep exploding."
+          },
+          {
+            "set": "select",
+            "value": "1"
+          },
+          {
+            "wait": 400
+          },
+          {
+            "click": {
+              "button": "▶ Play",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child",
+            "ms": 15000
+          },
+          {
+            "wait": 2400
+          }
+        ]
+      },
+      "the-explosion-view": {
+        "title": "Step 4 and back",
+        "script": [
+          {
+            "say": "SELECT Speed 2×, TAP ▶ Play\nStep 4: pieces explode apart and re-form.\n(a+b+c)² = a² + b² + c² + 2ab + 2ac + 2bc."
+          },
+          {
+            "set": "select",
+            "value": "0.5"
+          },
+          {
+            "wait": 400
+          },
+          {
+            "click": {
+              "button": "▶ Play",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child",
+            "ms": 15000
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP ◀◀ Back\nBack to Step 3.\nNine cells together, no explosion."
+          },
+          {
+            "click": {
+              "button": "◀◀ Back",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(3):last-child"
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Forward ▶▶\nStep 4 again: count the pieces.\n3 squares + 3 matching pairs = 6 terms."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "TAP ↺ Reset\nBack to Step 1: the starting square."
+          },
+          {
+            "click": {
+              "button": "↺ Reset",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(1):last-child"
+          },
+          {
+            "wait": 2400
+          }
+        ]
+      }
+    },
+    "difference-of-squares": {
+      "reading-the-starting-square": {
+        "title": "Stepping through the proof",
+        "script": [
+          {
+            "say": "TAP Forward ▶▶\nStep 2: b² corner marked for removal."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(2):last-child"
+          },
+          {
+            "wait": 2400
+          },
+          {
+            "say": "TAP Forward ▶▶\nStep 3: b² removed.\nThe L splits into (a−b)·b and a·(a−b)."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(3):last-child"
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Forward ▶▶\nStep 4: top strip lifts, rotates 90°, docks.\nOne rectangle: (a+b) × (a−b)."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "TAP ◀◀ Back\nBack to Step 3.\nStrip back on top of the L."
+          },
+          {
+            "click": {
+              "button": "◀◀ Back",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(3):last-child"
+          },
+          {
+            "wait": 3200
+          }
+        ]
+      },
+      "using-the-controls": {
+        "title": "Play, speed and reset",
+        "script": [
+          {
+            "say": "SELECT Speed 2×, TAP ▶ Play\nWhole proof at double speed.\nStops on Step 4."
+          },
+          {
+            "set": "select",
+            "value": "0.5"
+          },
+          {
+            "wait": 400
+          },
+          {
+            "click": {
+              "button": "▶ Play",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child",
+            "ms": 15000
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "TAP ↺ Reset\nBack to Step 1. Intro replays."
+          },
+          {
+            "click": {
+              "button": "↺ Reset",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(1):last-child"
+          },
+          {
+            "wait": 2400
+          },
+          {
+            "say": "TAP Forward ▶▶\nOne step at 2×: Step 2, b² corner marked for removal."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(2):last-child"
+          },
+          {
+            "wait": 2200
+          },
+          {
+            "say": "SELECT Speed 1×, TAP ▶ Play\nRuns on from Step 2 at normal speed.\nStops on Step 4."
+          },
+          {
+            "set": "select",
+            "value": "1"
+          },
+          {
+            "wait": 400
+          },
+          {
+            "click": {
+              "button": "▶ Play",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child",
+            "ms": 15000
+          },
+          {
+            "wait": 2400
+          }
+        ]
+      },
+      "lift-rotate-and-place": {
+        "title": "Step 4 and back",
+        "script": [
+          {
+            "say": "SELECT Speed 2×, TAP ▶ Play\nStep 4: top strip lifts, rotates 90°, docks.\nOne rectangle: (a+b) × (a−b)."
+          },
+          {
+            "set": "select",
+            "value": "0.5"
+          },
+          {
+            "wait": 400
+          },
+          {
+            "click": {
+              "button": "▶ Play",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child",
+            "ms": 15000
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP ◀◀ Back\nBack to Step 3.\nStrip back on top of the L."
+          },
+          {
+            "click": {
+              "button": "◀◀ Back",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(3):last-child"
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Forward ▶▶\nStep 4 again: lift, rotate, place.\na² − b² = (a+b)(a−b)."
+          },
+          {
+            "click": {
+              "button": "Forward ▶▶",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(4):last-child"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "TAP ↺ Reset\nBack to Step 1: the starting square."
+          },
+          {
+            "click": {
+              "button": "↺ Reset",
+              "exact": true
+            }
+          },
+          {
+            "until": "aside ol > li:nth-child(1):last-child"
+          },
+          {
+            "wait": 2400
+          }
+        ]
+      }
+    }
+  };
+  const instructions = INSTRUCTIONS[params.view];
+  const demos = DEMOS[params.view];
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools(`algebra-identities-${params.view}`),
       sectionsContent: currentConfig.sectionsContent,
       introContent,
@@ -1002,8 +1938,25 @@ export default function AlgebraicIdentityViewPage({
   componentName,
   h1Title,
   stateUnits,
-  explanations
+  explanations,
+  instructions,
+  demos
 }) {
+
+  const TOOLS = { SquareOfSum, SquareOfDifference, SquareOfTrinomial, DifferenceOfSquares }
+  const Tool = TOOLS[componentName]
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <Tool explanations={explanations} />
+    </ToolDemoPlayer>
+  )
 
   // Line 1: per-view section slugs. The slots are shared across views —
   // obj1 = identity overview (group), obj2..obj5 = the four proof steps
@@ -1048,6 +2001,7 @@ export default function AlgebraicIdentityViewPage({
           )
           if (obj.after) row.content.push(obj.after)
         }
+        if (demos && demos[row.id] && Tool) row.content.unshift(demo(row.id))
         return row
       }).filter(section => section.title)
     : []
@@ -1108,6 +2062,10 @@ export default function AlgebraicIdentityViewPage({
       <br />
       <br />
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>{h1Title}</h1>
+      <div style={{width:'80%', margin:'auto'}}>
+        <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+      </div>
+      <br/>
 
       <SiblingsNav
        bg="#fafaf7"

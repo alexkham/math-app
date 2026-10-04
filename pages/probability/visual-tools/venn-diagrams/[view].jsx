@@ -257,6 +257,9 @@ import { threeSetProblems } from '@/app/components/probability/venn-explorer/ven
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 
 export async function getStaticPaths() {
@@ -1205,8 +1208,382 @@ faqQuestions: {
     }
   };
 
+  // How-to instructions and animated demos (ToolDemoPlayer v3), keyed by view.
+  // Segments are clicked as SVG rects (rect[rx="3"], nth = segment - 1), rows by
+  // their '#k:' label. The tools do not write the URL.
+  const INSTRUCTIONS = {
+    'two-sets': [
+      'Tap **Student Survey** or **Health Screening** at the top to switch the example problem; events, marginals, the given constraint and all four values change. [Learn more about working with multiple problems](!#multiple-problems)',
+      'The left column lists the **Events** A and B with $P(A)$ and $P(B)$, and the **Given Constraints**; together they fix all four regions. [Learn more about getting started](!#getting-started)',
+      '**4 Possible Outcomes** lists each region, #1 $A \\cap B$ to #4 $A^c \\cap B^c$, with its probability to three decimals; the four sum to 1. [Learn more about reading probability values](!#reading-probability-values)',
+      '**Show Calculations** adds the step and the arithmetic under each outcome; the button then reads **Hide Calculations**. [Learn more about Show Calculations](!#show-calculations)',
+      'Click a numbered segment in the diagram, or its row in the list, to select it: the segment turns gold and the row yellow; click again to deselect. Hovering previews in pale yellow. [Learn more about clicking and hovering](!#clicking-and-hovering)',
+      'Segments 1 to 4 are $A \\cap B$, A only, B only, and outside both circles. [Learn more about the four regions](!#the-four-regions)',
+    ],
+    'three-sets': [
+      'The left column shows the **Demographics Study**: **Events** A, B, C with $P(A) = 0.5$, $P(B) = 0.5$, $P(C) = 0.62$, and four **Given Constraints**. [Learn more about getting started](!#getting-started)',
+      '**8 Possible Outcomes** lists each region, #1 $A \\cap B \\cap C$ to #8 $A^c \\cap B^c \\cap C^c$, with its probability to three decimals. [Learn more about reading probability solutions](!#reading-probability-solutions)',
+      '**Show Calculations** adds the step under each outcome and a **General Solution Steps** box below the list; the button then reads **Hide Calculations**. [Learn more about Show Calculations](!#show-calculations)',
+      '**General Solution Steps** first finds $P(A \\cap B) = 0.1$ and $P(A \\cap C) = 0.32$ from the constraints, then solves for the eight regions. [Learn more about solving systems of equations](!#solving-systems-of-equations)',
+      'Click a numbered segment, 1 to 8, or its row in the list, to select it: the segment turns gold and the row yellow; click again to deselect. [Learn more about navigating eight regions](!#navigating-eight-regions)',
+      'Segment 1 is the centre, where all three events occur; segment 8 lies outside all three circles; segments 2 to 7 are the pieces where two events, or one, occur. [Learn more about the eight outcomes](!#the-eight-outcomes)',
+    ],
+  };
+  const DEMOS = {
+    "two-sets": {
+      "getting-started": {
+        "title": "Problems, givens and outcomes",
+        "script": [
+          {
+            "say": "TAP Health Screening\nA: Has Condition, P = 0.2.\nB: Test Positive, P = 0.3.\nGiven: P(A ∩ Bᶜ) = 0.05."
+          },
+          {
+            "click": {
+              "button": "Health Screening",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Show Calculations\n#1 derived: 0.2 − 0.05 = 0.15.\n#2 is the given, 0.05."
+          },
+          {
+            "click": {
+              "button": "Show Calculations",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Student Survey\nGiven: P(A ∩ B) = 0.15.\n#1 is now the given one."
+          },
+          {
+            "click": {
+              "button": "Student Survey",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP segment 2\nA only: gold.\nRow #2: 0.450.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "css": "rect[rx=\"3\"]",
+              "nth": 1
+            }
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      },
+      "clicking-and-hovering": {
+        "title": "Selecting segments",
+        "script": [
+          {
+            "say": "TAP segment 1\nThe overlap turns gold.\nRow #1, A∩B: 0.150.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "css": "rect[rx=\"3\"]",
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP segment 1 again\nDeselected.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "css": "rect[rx=\"3\"]",
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP row #2\nSegment 2 turns gold.\nA only: 0.450.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "text": "#2:"
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Health Screening\nSelection stays on #2.\nNow 0.050."
+          },
+          {
+            "click": {
+              "button": "Health Screening",
+              "exact": true
+            }
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      },
+      "show-calculations": {
+        "title": "Show Calculations",
+        "script": [
+          {
+            "say": "TAP Show Calculations\nA step under each row.\n#2: 0.6 − 0.15 = 0.45."
+          },
+          {
+            "click": {
+              "button": "Show Calculations",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP segment 3\nB only: gold.\n#3: 0.4 − 0.15 = 0.25.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "css": "rect[rx=\"3\"]",
+              "nth": 2
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Health Screening\nSteps follow the new givens.\n#3: 0.3 − 0.15 = 0.15."
+          },
+          {
+            "click": {
+              "button": "Health Screening",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Hide Calculations\nSteps fold away.\nValues stay."
+          },
+          {
+            "click": {
+              "button": "Hide Calculations",
+              "exact": true
+            }
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      }
+    },
+    "three-sets": {
+      "getting-started": {
+        "title": "Centre and two-event segments",
+        "script": [
+          {
+            "say": "TAP segment 1\nCentre: A, B and C.\nRow #1: 0.080, the given.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "css": "rect[rx=\"3\"]",
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP row #1\nDeselected from the list.\nRow and segment: one selection.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "text": "#1:"
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP segment 5\nB and C, not A.\nRow #5: 0.300.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "css": "rect[rx=\"3\"]",
+              "nth": 4
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP row #5\nDeselected.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "text": "#5:"
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP segment 3\nA and C, not B.\nRow #3: 0.240.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "css": "rect[rx=\"3\"]",
+              "nth": 2
+            }
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      },
+      "navigating-eight-regions": {
+        "title": "Selecting segments and rows",
+        "script": [
+          {
+            "say": "TAP segment 4\nA only: gold.\nRow #4: 0.160.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "css": "rect[rx=\"3\"]",
+              "nth": 3
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP segment 4 again\nDeselected.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "css": "rect[rx=\"3\"]",
+              "nth": 3
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP row #7\nSegment 7 turns gold: C only.\nRow #7: 0.000.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "text": "#7:"
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP segment 7\nDeselected from the diagram.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "css": "rect[rx=\"3\"]",
+              "nth": 6
+            }
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      },
+      "show-calculations": {
+        "title": "Show Calculations",
+        "script": [
+          {
+            "say": "TAP Show Calculations\nA step under each row.\nGeneral Solution Steps below:\nP(A∩B) = 0.1, P(A∩C) = 0.32."
+          },
+          {
+            "click": {
+              "button": "Show Calculations",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP segment 6\nB only: gold.\n#6: 0.5 − 0.1 − 0.30 = 0.10.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "css": "rect[rx=\"3\"]",
+              "nth": 5
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Hide Calculations\nSteps fold away.\nSegment 6 stays gold."
+          },
+          {
+            "click": {
+              "button": "Hide Calculations",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP segment 6\nDeselected.",
+            "at": "tl"
+          },
+          {
+            "click": {
+              "css": "rect[rx=\"3\"]",
+              "nth": 5
+            }
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      }
+    }
+  };
+  const instructions = INSTRUCTIONS[params.view];
+  const demos = DEMOS[params.view];
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools(`probability-venn-diagrams-${params.view}`),
       sectionsContent,
       faqQuestions,
@@ -1226,7 +1603,24 @@ faqQuestions: {
   }
 }
 
-export default function VennDiagramsPage({relatedTools, seoData, sectionsContent, stateUnits, sectionOrder, faqQuestions, schemas, currentMode, h1Title}) {
+export default function VennDiagramsPage({relatedTools, seoData, sectionsContent, stateUnits, sectionOrder, faqQuestions, schemas, currentMode, h1Title, instructions, demos}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      {currentMode === 2 ? (
+        <VennExplorer2 problemsData={[]} />
+      ) : (
+        <VennExplorer problemsData={threeSetProblems} />
+      )}
+    </ToolDemoPlayer>
+  )
 
   const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
     const src = sectionsContent[obj]
@@ -1236,6 +1630,7 @@ export default function VennDiagramsPage({relatedTools, seoData, sectionsContent
       body.push(<div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />)
       if (src.after) body.push(src.after)
     }
+    if (demos && demos[id]) body.unshift(demo(id))
     return { id, title: src.title, link: src.link || '', content: body }
   }).filter(Boolean);
 
@@ -1295,6 +1690,10 @@ export default function VennDiagramsPage({relatedTools, seoData, sectionsContent
       <br/>
       <br/>
       <h1 className={`title`} style={{marginTop:`-10px`,marginBottom:`20px`}}>{h1Title}</h1>
+      <div style={{width:'80%', margin:'auto'}}>
+        <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+      </div>
+      <br/>
       <br/>
       <br/>
       

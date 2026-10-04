@@ -8,6 +8,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -400,6 +402,49 @@ const schemas = {
 
 
 
+  const fpLogIneqDomain = { kind: 'pieces', svgTitle: 'log4(x + 2) < 0 on -2 < x < -1', xRange: [-3, 3], yRange: [-3, 2],
+    pieces: [{ fn: (x) => Math.log(x + 2) / Math.log(4), from: -1.995, to: 3, ends: [null, null], color: 'f', label: { text: 'y = log₄(x + 2)', x: 2.5, y: Math.log(4.5) / Math.log(4), pos: 'n' } }],
+    vlines: [{ x: -2, label: 'x = −2: domain edge' }],
+    points: [{ x: -1, y: 0, label: 'x = −1', pos: 'se' }],
+    notes: [{ x: -1.85, y: -2.5, text: 'below 0 for −2 < x < −1', pos: 'e', color: 'r' }],
+    caption: 'log₄(x + 2) < 0 only on −2 < x < −1' };
+  const fpLogIneqBand = { kind: 'pieces', svgTitle: '1 < log2 x < 4 exactly for 2 < x < 16', xRange: [0, 18], yRange: [-2, 5],
+    pieces: [
+      { fn: () => 1, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0, 18]], label: { text: 'y = 1', x: 17, y: 1, pos: 's' } },
+      { fn: () => 4, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0, 18]], label: { text: 'y = 4', x: 1, y: 4, pos: 'n' } },
+      { fn: (x) => Math.log2(x), from: 0.25, to: 18, ends: [null, null], color: 'f', label: { text: 'y = log₂ x', x: 17, y: Math.log2(17), pos: 's' } },
+    ],
+    points: [{ x: 2, y: 1, label: '(2, 1)', pos: 'se' }, { x: 16, y: 4, label: '(16, 4)', pos: 'nw' }],
+    notes: [{ x: 5, y: 0.5, text: 'solution 2 < x < 16', pos: 'e', color: 'r' }],
+    caption: 'Squeezing log₂ x between 1 and 4 squeezes x between 2¹ and 2⁴' };
+  const fpLogIneqBase = { kind: 'pieces', svgTitle: 'log2 x > 1 for x > 2, but log1/2 x > 1 for 0 < x < 1/2', xRange: [0, 5], yRange: [-3, 3],
+    pieces: [
+      { fn: (x) => Math.log2(x), from: 0.13, to: 5, ends: [null, null], color: 'f', label: { text: 'log₂ x', x: 4.6, y: Math.log2(4.6), pos: 'n' } },
+      { fn: (x) => -Math.log2(x), from: 0.13, to: 5, ends: [null, null], color: 'g', label: { text: 'log₁/₂ x', x: 4.6, y: -Math.log2(4.6), pos: 's' } },
+      { fn: () => 1, from: 0, to: 5, ends: [null, null], color: 'r', label: { text: 'y = 1', x: 4.6, y: 1, pos: 's' } },
+    ],
+    points: [{ x: 2, y: 1, label: 'x = 2', pos: 'se' }, { x: 0.5, y: 1, label: 'x = 1/2', pos: 'ne' }],
+    notes: [{ x: 2.2, y: 2.6, text: 'log₂ x > 1 for x > 2', pos: 'e', color: 'f' }, { x: 0.6, y: -1.6, text: 'log₁/₂ x > 1 for 0 < x < 1/2', pos: 'e', color: 'g' }],
+    caption: 'Same inequality, opposite sides: the base decides the direction' };
+
+  const demoUnits = {
+    domainEdge: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogIneqDomain),
+      caption: 'The domain closes the interval',
+      text: 'The section\'s log&#8324;(x + 2) &lt; 0. The algebra gives x + 2 &lt; 1, so x &lt; &#8722;1, a ray running off to the left. But the graph starts at the dashed line x = &#8722;2, where the argument reaches 0, and nothing exists to its left. The curve is below the axis only between that wall and x = &#8722;1: the solution is &#8722;2 &lt; x &lt; &#8722;1.',
+    }),
+    band: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogIneqBand),
+      caption: 'Bounding a logarithm on both sides',
+      text: 'The section\'s 1 &lt; log&#8322; x &lt; 4. The curve sits between the two dashed levels exactly while x runs from 2 to 16: it crosses y = 1 at x = 2&#185; = 2 and y = 4 at x = 2&#8308; = 16. Because base 2 is greater than 1, both bounds keep their direction when converted.',
+    }),
+    base: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogIneqBase),
+      caption: 'Why the base decides the direction',
+      text: 'log&#8322; x and log&#8321;&#8260;&#8322; x against the same level y = 1. The rising curve log&#8322; x is above the level to the right of its crossing, so log&#8322; x &gt; 1 means x &gt; 2. The falling curve log&#8321;&#8260;&#8322; x is above the level to the left of its crossing, so log&#8321;&#8260;&#8322; x &gt; 1 means 0 &lt; x &lt; 1/2. The same inequality has its answer on opposite sides.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -407,6 +452,7 @@ return {
     directionTable,
     summaryTable,
     schemas,
+    demoUnits,
     seoData: {
       title: "Logarithmic Inequalities: Solving by Base Type | Learn Math Class",
       description: "Learn to solve logarithmic inequalities: when to preserve or reverse direction based on base, domain restrictions, compound inequalities, and graphical interpretation.",
@@ -427,7 +473,8 @@ export default function InequalitiesPage({
   introContent,
   directionTable,
   summaryTable,
-  schemas
+  schemas,
+  demoUnits,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -476,6 +523,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-domainEdge'} dangerouslySetInnerHTML={{ __html: demoUnits.domainEdge }} />,
+          `State the domain first; the algebraic answer is then cut to fit it.`,
         ]
     },
     {
@@ -484,6 +533,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-band'} dangerouslySetInnerHTML={{ __html: demoUnits.band }} />,
+          `With a base between 0 and 1, both bounds would flip and swap ends.`,
         ]
     },
     {
@@ -500,6 +551,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-base'} dangerouslySetInnerHTML={{ __html: demoUnits.base }} />,
+          `The wall at x = 0 also bounds the decreasing case from the left.`,
         ]
     },
     {

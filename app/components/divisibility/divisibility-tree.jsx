@@ -1,8 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useId } from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
 
 const DivisibilityTreeSVG = ({ explanations = null }) => {
   const [inputNumber, setInputNumber] = useState('');
+  // per-instance prefix for SVG ids, so several copies on one page (live + demos) don't share gradients
+  const uid = useId().replace(/:/g, '');
   const [hoveredNode, setHoveredNode] = useState(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 
@@ -142,11 +144,11 @@ const DivisibilityTreeSVG = ({ explanations = null }) => {
         style={{ cursor: isActive ? 'pointer' : 'default' }}
       >
         <defs>
-          <linearGradient id={`grad-${id}`} x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id={`grad-${uid}-${id}`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={isActive ? '#3b82f6' : '#e2e8f0'} />
             <stop offset="100%" stopColor={isActive ? '#2563eb' : '#e2e8f0'} />
           </linearGradient>
-          <filter id={`shadow-${id}`} x="-20%" y="-20%" width="140%" height="140%">
+          <filter id={`shadow-${uid}-${id}`} x="-20%" y="-20%" width="140%" height="140%">
             <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#3b82f6" floodOpacity={isActive ? 0.3 : 0} />
           </filter>
         </defs>
@@ -155,10 +157,10 @@ const DivisibilityTreeSVG = ({ explanations = null }) => {
           width={width}
           height={height}
           rx={rx}
-          fill={`url(#grad-${id})`}
+          fill={`url(#grad-${uid}-${id})`}
           stroke={isActive ? 'none' : '#cbd5e1'}
           strokeWidth={isActive ? 0 : 1}
-          filter={`url(#shadow-${id})`}
+          filter={`url(#shadow-${uid}-${id})`}
         />
         
         <text

@@ -19,6 +19,9 @@ import SectionTableOfContents from '@/app/components/page-components/section/Sec
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import baseConverterDiagrams from '@/app/components/base-visualizer/baseConverterDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -302,6 +305,23 @@ Any base between $17$ and $36$ behaves the same way, with letters appearing as s
       link: '',
     },
 
+    obj16: {
+      title: `Reading the Grid and the Rows`,
+      content: `The tool draws the same number twice, once as a count and once as digits.
+
+**The grid** on the left has $144$ cells, twelve by twelve. Typing a number fills that many cells, each carrying its count from $1$ up, so the grid is the number before any base is chosen.
+
+**The rows** on the right regroup the same cubes by powers of the base, largest first. Each row is labelled with the base, the power and the group size, so $8^1(8)$ is the row of groups of eight, and ends with a count such as $\\times 4$. That count is the digit for the place. For $100$ in base $8$ the rows read $8^2(64)\\ \\times 1$, $8^1(8)\\ \\times 4$ and $8^0(1)\\ \\times 4$, so $100 = 144_8$. A row with $\\times 0$ is drawn empty and still counts: it holds its place open.
+
+**The result line** under the picture prints the string, for example **100 in base 8 is: 144**. Digits above $9$ print as lower-case letters: $45$ in base $16$ shows **2d**, which is $2D_{16}$.
+
+**The red message** takes the place of the result line when the number is above $144$ or the base is outside $2$ to $36$.
+
+**The note** at the bottom follows the base. Bases $2$, $8$, $10$ and $16$ each have their own note, every other base shares one, and each note links to the section on this page that treats its base. The arithmetic behind the counts is in [Repeated Division](!#repeated-division).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
   }
 
   const faqQuestions = {
@@ -440,8 +460,137 @@ Any base between $17$ and $36$ behaves the same way, with letters appearing as s
     error: `The number must be at most 144 and the base between 2 and 36; the grid has 144 cells and the alphabet runs out at base 36. [Common mistakes](!#common-mistakes)`,
   };
 
+  const instructions = [
+    'Type a whole number from $0$ to $144$ in **Number**; the grid on the left fills that many cells, each carrying its count. [Learn more about the Number box](!#getting-started)',
+    'Type a base from $2$ to $36$ in **Base**; the cubes regroup into one row per digit and the result line prints the number in that base. [Learn more about the Base box](!#getting-started)',
+    '**Reset** clears both boxes, the grid, the rows and the result line. [Learn more about Reset](!#getting-started)',
+    'Each row on the right is labelled with its place value, such as $2^5(32)$, and ends with a count such as $\\times 1$: the number of groups in the row is the digit for that place. [Learn more about reading the rows](!#reading-the-grid-and-the-rows)',
+    'The result line under the picture reads, for example, **100 in base 8 is: 144**; digits above $9$ print as lower-case letters, so $45$ in base $16$ shows **2d**. [Learn more about the result line](!#reading-the-grid-and-the-rows)',
+    'A number above $144$ or a base outside $2$ to $36$ replaces the result line with a red message. [Learn more about the red message](!#reading-the-grid-and-the-rows)',
+    'The note at the bottom follows the base: $2$, $8$, $10$ and $16$ each have their own, every other base shares one, and each note links to the section on its base. [Learn more about the note](!#reading-the-grid-and-the-rows)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real BaseVisualizer2.
+     Controls: input#number, input#base, Reset. Every base change starts from
+     Reset and types the base BEFORE the number: changing the base while a number
+     is set renders the old digits at the new place values for one frame
+     (45 in base 2, then base 16, draws 16^5 cubes and stalls the page). */
+  const demos = {
+    'getting-started': {
+      title: 'Number, Base and Reset',
+      script: [
+        { at: 'tr', say: `TYPE Base 16
+Grid still empty: no number yet.
+Note switches to base 16.` },
+        { set: 'input#base', value: '16' },
+        { wait: 2400 },
+        { at: 'tr', say: `TYPE Number 45
+45 cubes fill the grid.
+Rows: 16¹ ×2, 16⁰ ×13.
+45 in base 16 is: 2d.` },
+        { set: 'input#number', value: '45' },
+        { wait: 2800 },
+        { at: 'tr', say: `TYPE Number 100
+Rows: 16¹ ×6, 16⁰ ×4.
+100 in base 16 is: 64.` },
+        { set: 'input#number', value: '100' },
+        { wait: 2600 },
+        { at: 'tr', say: `TAP Reset
+Both boxes cleared.
+Grid and rows empty.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2200 },
+        { at: 'tr', say: `BASE 2, NUMBER 45
+Six rows, one per bit.
+32 + 8 + 4 + 1 = 45.
+45 in base 2 is: 101101.` },
+        { set: 'input#base', value: '2' },
+        { set: 'input#number', value: '45' },
+        { wait: 2800 },
+      ],
+    },
+    'reading-the-grid-and-the-rows': {
+      title: 'Reading the rows: 100 in four bases',
+      script: [
+        { at: 'tr', say: `BASE 10, NUMBER 100
+10² ×1, 10¹ ×0, 10⁰ ×0.
+Group counts = digits.
+100 in base 10 is: 100.` },
+        { set: 'input#base', value: '10' },
+        { set: 'input#number', value: '100' },
+        { wait: 2800 },
+        { at: 'tr', say: `BASE 8, NUMBER 100
+Reset first.
+Rows 8² ×1, 8¹ ×4, 8⁰ ×4.
+100 in base 8 is: 144.` },
+        { click: { button: 'Reset', exact: true } },
+        { set: 'input#base', value: '8' },
+        { set: 'input#number', value: '100' },
+        { wait: 2800 },
+        { at: 'tr', say: `BASE 2, NUMBER 100
+Reset first.
+Seven rows, 2⁶ to 2⁰.
+Groups at 64, 32, 4.
+100 in base 2 is: 1100100.` },
+        { click: { button: 'Reset', exact: true } },
+        { set: 'input#base', value: '2' },
+        { set: 'input#number', value: '100' },
+        { wait: 3000 },
+        { at: 'tr', say: `BASE 36, NUMBER 100
+Reset first.
+Rows 36¹ ×2, 36⁰ ×28.
+28 prints as letter s.
+100 in base 36 is: 2s.` },
+        { click: { button: 'Reset', exact: true } },
+        { set: 'input#base', value: '36' },
+        { set: 'input#number', value: '100' },
+        { wait: 3000 },
+      ],
+    },
+    'binary-octal-and-hexadecimal': {
+      title: '144 in binary, octal and hexadecimal',
+      script: [
+        { at: 'tr', say: `BASE 2, NUMBER 144
+Eight rows.
+2⁷ ×1, 2⁴ ×1, rest ×0.
+144 in base 2 is: 10010000.` },
+        { set: 'input#base', value: '2' },
+        { set: 'input#number', value: '144' },
+        { wait: 2800 },
+        { at: 'tr', say: `BASE 8, NUMBER 144
+Reset first.
+Rows 8² ×2, 8¹ ×2, 8⁰ ×0.
+220 = bits in threes:
+10 010 000.` },
+        { click: { button: 'Reset', exact: true } },
+        { set: 'input#base', value: '8' },
+        { set: 'input#number', value: '144' },
+        { wait: 3000 },
+        { at: 'tr', say: `BASE 16, NUMBER 144
+Reset first.
+Rows 16¹ ×9, 16⁰ ×0.
+90 = bits in fours:
+1001 0000.` },
+        { click: { button: 'Reset', exact: true } },
+        { set: 'input#base', value: '16' },
+        { set: 'input#number', value: '144' },
+        { wait: 3000 },
+        { at: 'tr', say: `BASE 36, NUMBER 144
+Reset first.
+Rows 36¹ ×4, 36⁰ ×0: 40.
+Larger base, fewer rows.` },
+        { click: { button: 'Reset', exact: true } },
+        { set: 'input#base', value: '36' },
+        { set: 'input#number', value: '144' },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('base-converter'),
       sectionsContent,
       faqQuestions,
@@ -463,7 +612,22 @@ Any base between $17$ and $36$ behaves the same way, with letters appearing as s
 }
 
 
-export default function BaseConverter({ relatedTools, seoData, sectionsContent, faqQuestions, schemas, navigationGroup, stateUnits, explanations }) {
+export default function BaseConverter({ instructions, demos, relatedTools, seoData, sectionsContent, faqQuestions, schemas, navigationGroup, stateUnits, explanations }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <BaseVisualizer2 explanations={explanations} />
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -485,12 +649,13 @@ export default function BaseConverter({ relatedTools, seoData, sectionsContent, 
 
   const genericSections = [
     plain('obj0', 'key-terms'),
-    plain('obj1', 'getting-started'),
+    withDemo(plain('obj1', 'getting-started')),
+    withDemo(plain('obj16', 'reading-the-grid-and-the-rows')),
     plain('obj2', 'what-a-base-is'),
     stateRow('obj11', 'decimal-base-10', 'b10'),
     plain('obj3', 'repeated-division'),
     plain('obj4', 'expansion'),
-    plain('obj5', 'binary-octal-and-hexadecimal'),
+    withDemo(plain('obj5', 'binary-octal-and-hexadecimal')),
     stateRow('obj12', 'binary-base-2', 'b2'),
     stateRow('obj13', 'octal-base-8', 'b8'),
     stateRow('obj14', 'hexadecimal-base-16', 'b16'),
@@ -553,6 +718,10 @@ export default function BaseConverter({ relatedTools, seoData, sectionsContent, 
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Base Conversion Visualizer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <VerticalButtonGroup
         items={navigationGroup}

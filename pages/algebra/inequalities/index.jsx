@@ -9,6 +9,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 
@@ -663,6 +664,16 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpFlip = { kind: 'pieces', svgTitle: '-3x >= 12 holds exactly for x <= -4', xRange: [-8, 3], yRange: [-10, 26], yStep: 4,
+    pieces: [
+      { fn: (x) => -3 * x, from: -8, to: 3, ends: [null, null], color: 'f', label: { text: 'y = −3x', x: 1.4, y: -4.2, pos: 'e' } },
+      { fn: () => 12, from: -8, to: 3, ends: [null, null], color: 'g', label: { text: 'y = 12', x: 1.5, y: 12, pos: 'n' } },
+    ],
+    vlines: [{ x: -4, label: 'x = −4' }],
+    points: [{ x: -4, y: 12 }],
+    notes: [{ x: -7.8, y: 6, text: 'line on or above 12: x ≤ −4', pos: 'e', color: 'r' }],
+    caption: 'Dividing by −3 flips ≥ to ≤: −3x ≥ 12 holds only left of −4' };
+
   const demoUnits = {
     sign: demoUnitFrame({
       svg: inequalityVisualizerDiagrams['poly-three'],
@@ -698,6 +709,25 @@ const schemas = {
       text: 'The V-shaped graph is below the axis exactly between its two zeros, so the less-than form gives one bounded interval; the greater-than form would give the two outer rays instead. That is the compound inequality &#8722;3 &lt; x &lt; 3 as a picture. Switch the operator on the',
       href: '/algebra/visual-tools/inequality',
       linkText: 'inequality visual explorer',
+    }),
+    stretches: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['op-lt'],
+      caption: '(x + 2)(x &#8722; 1)(x &#8722; 5) &lt; 0: two stretches of the line',
+      text: 'The curve dips below the axis twice, and every input in those stretches makes the expression negative: the solution set is not a list of values but the blue bars on the axis, everything left of &#8722;2 and everything between 1 and 5. The open circles mark boundaries that do not satisfy the strict inequality. Try other expressions on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+    closedEnds: demoUnitFrame({
+      svg: inequalityVisualizerDiagrams['op-le'],
+      caption: 'The same expression with &#8804;: the boundaries join the set',
+      text: 'Changing &lt; to &#8804; keeps the same stretches but fills in the circles at &#8722;2, 1 and 5, because the expression equals 0 there and 0 &#8804; 0 is true. In interval notation the parentheses become brackets: (&#8722;&#8734;, &#8722;2] &#8746; [1, 5]. The infinite end keeps its parenthesis, since &#8734; is never a number to include. Switch operators on the',
+      href: '/algebra/visual-tools/inequality',
+      linkText: 'inequality visual explorer',
+    }),
+    flip: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpFlip),
+      caption: 'Why dividing by a negative flips the sign',
+      text: 'The section\'s &#8722;3x &#8805; 12. The line y = &#8722;3x falls as x grows, so it sits on or above the level 12 only for x at or left of &#8722;4. Dividing both sides by &#8722;3 must therefore turn &#8805; into &#8804;: the answer is x &#8804; &#8722;4, not x &#8805; &#8722;4.',
     }),
   };
 
@@ -772,6 +802,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-stretches'} dangerouslySetInnerHTML={{ __html: demoUnits.stretches }} />,
+          `A solution set of an inequality is usually a union of intervals, not a finite list.`,
         ]
     },
     {
@@ -780,6 +812,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-closedEnds'} dangerouslySetInnerHTML={{ __html: demoUnits.closedEnds }} />,
+          `Filled circle, bracket and the non-strict symbol always travel together.`,
         ]
     },
 
@@ -858,6 +892,8 @@ export default function InequalitiesPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-flip'} dangerouslySetInnerHTML={{ __html: demoUnits.flip }} />,
+          `Multiplying by a negative reverses order because it mirrors the number line.`,
         ]
     },
     {

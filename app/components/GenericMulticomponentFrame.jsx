@@ -120,7 +120,8 @@ export default function GenericMultiComponentFrame({
   buttonMinWidth = '180px',
   primaryColor = '#007bff',
   paramName = 'tab',
-  defaultSlug = null
+  defaultSlug = null,
+  syncUrl = true, // false: neither read nor write the ?tab= param (demo copies)
 }) {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -153,7 +154,7 @@ export default function GenericMultiComponentFrame({
 
 const getInitialActive = useCallback(() => {
   if (hasSlugs) {
-    const slugParam = searchParams.get(paramName)
+    const slugParam = syncUrl ? searchParams.get(paramName) : null
     if (slugParam) {
       const foundComponent = components.find(c => c.slug === slugParam)
       if (foundComponent) return foundComponent.id || components.indexOf(foundComponent) + 1
@@ -164,7 +165,7 @@ const getInitialActive = useCallback(() => {
     }
   }
   return initialActive
-}, [hasSlugs, searchParams, paramName, components, defaultSlug, initialActive])
+}, [hasSlugs, searchParams, paramName, components, defaultSlug, initialActive, syncUrl])
 
 const [activeComponent, setActiveComponent] = useState(getInitialActive)
 
@@ -179,7 +180,7 @@ useEffect(() => {
     setActiveComponent(componentId)
     
     // Update URL if slugs are being used
-    if (hasSlugs && component.slug) {
+    if (syncUrl && hasSlugs && component.slug) {
       const currentParams = new URLSearchParams(searchParams.toString())
       currentParams.set(paramName, component.slug)
       router.push(`?${currentParams.toString()}`, { scroll: false })

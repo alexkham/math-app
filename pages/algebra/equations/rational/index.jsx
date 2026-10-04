@@ -8,6 +8,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -457,6 +459,57 @@ const schemas = {
   },
 }
 
+  const fpRatDomain = { kind: 'pieces', svgTitle: 'x/(x - 3) and 9/(x - 3) + 2: x = 3 excluded, they meet at x = -3', xRange: [-6, 8], yRange: [-6, 10],
+    pieces: [
+      { fn: (x) => x / (x - 3), from: -6, to: 2.99, ends: [null, null], color: 'f' },
+      { fn: (x) => x / (x - 3), from: 3.01, to: 8, ends: [null, null], color: 'f' },
+      { fn: (x) => 9 / (x - 3) + 2, from: -6, to: 2.99, ends: [null, null], color: 'g' },
+      { fn: (x) => 9 / (x - 3) + 2, from: 3.01, to: 8, ends: [null, null], color: 'g' },
+    ],
+    vlines: [{ x: 3 }],
+    points: [{ x: -3, y: 0.5 }],
+    notes: [{ x: 3, y: 9, text: 'x = 3 excluded', pos: 'w' }, { x: -3, y: 1.6, text: 'x = −3: both sides 1/2', pos: 'n', color: 'r' },
+      { x: 4.2, y: 0.6, text: 'x/(x − 3)', pos: 'e', color: 'f' }, { x: 5, y: 7.6, text: '9/(x − 3) + 2', pos: 'e', color: 'g' }],
+    caption: 'x = 3 is ruled out first; the two sides meet only at x = −3' };
+  const fpRatHole = { kind: 'pieces', svgTitle: 'x/(x - 3) - 3/(x - 3) equals 1 for every x except 3', xRange: [-2, 8], yRange: [-1, 3],
+    pieces: [
+      { fn: () => 1, from: -2, to: 3, ends: [null, 'open'], color: 'f' },
+      { fn: () => 1, from: 3, to: 8, ends: ['open', null], color: 'f', label: { text: 'x/(x − 3) − 3/(x − 3)', x: 5.5, y: 1, pos: 'n' } },
+    ],
+    vlines: [{ x: 3 }],
+    notes: [{ x: 3, y: 2.6, text: 'x = 3: undefined', pos: 'e' }, { x: 0.5, y: 1, text: '= 1, the right side', pos: 's', color: 'g' }],
+    caption: 'Clearing gives 0 = 0, yet the solution set is every x except 3' };
+  const fpRatNone = { kind: 'pieces', svgTitle: '2/(x^2 - 1) and 1/(x - 1) never meet; the candidate x = 1 is excluded', xRange: [-4, 4], yRange: [-5, 5],
+    pieces: [
+      { fn: (x) => 2 / (x * x - 1), from: -4, to: -1.002, ends: [null, null], color: 'f' },
+      { fn: (x) => 2 / (x * x - 1), from: -0.998, to: 0.998, ends: [null, null], color: 'f' },
+      { fn: (x) => 2 / (x * x - 1), from: 1.002, to: 4, ends: [null, null], color: 'f' },
+      { fn: (x) => 1 / (x - 1), from: -4, to: 0.998, ends: [null, null], color: 'g' },
+      { fn: (x) => 1 / (x - 1), from: 1.002, to: 4, ends: [null, null], color: 'g' },
+    ],
+    vlines: [{ x: -1 }, { x: 1 }],
+    notes: [{ x: -3, y: 1.2, text: '2/(x² − 1)', pos: 'n', color: 'f' }, { x: 2.6, y: 2.4, text: '1/(x − 1)', pos: 'e', color: 'g' },
+      { x: 1.15, y: 4.6, text: 'candidate x = 1 excluded', pos: 'e' }, { x: -1.1, y: 4.6, text: 'x = −1 excluded', pos: 'w' }],
+    caption: 'The graphs never meet: the only candidate, x = 1, is excluded' };
+
+  const demoUnits = {
+    domain: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRatDomain),
+      caption: 'The excluded value is a wall, not a solution',
+      text: 'The section\'s x/(x &#8722; 3) = 9/(x &#8722; 3) + 2, each side drawn as its own graph. Both break at the dashed line x = 3, where the shared denominator is zero: no point of either graph exists there, so 3 is declared out of the domain before solving. The graphs meet once, at x = &#8722;3, where both sides equal 1/2.',
+    }),
+    hole: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRatHole),
+      caption: 'An identity with one point missing',
+      text: 'The section\'s x/(x &#8722; 3) &#8722; 3/(x &#8722; 3) = 1. The left side simplifies to (x &#8722; 3)/(x &#8722; 3), which is 1 wherever it is defined, so its graph lies exactly on the right side y = 1, except for the open circle at x = 3, where it is undefined. Clearing denominators reports 0 = 0; the graph shows the solution set is every real number except 3.',
+    }),
+    none: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRatNone),
+      caption: 'A candidate that lands on an excluded value',
+      text: 'The section\'s 2/(x&#178; &#8722; 1) = 1/(x &#8722; 1). Clearing denominators gives 2 = x + 1, so x = 1, but x = 1 is one of the excluded values (dashed). The graphs confirm it: the two sides never meet anywhere in the domain, and the only place the algebra points to is the vertical line where both are undefined. The equation has no solution.',
+    }),
+  };
+
    return {
   props: {
     sectionsContent,
@@ -466,6 +519,7 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Rational Equations: Clearing Denominators & Checking | Learn Math Class",
       description: "Master rational equations: domain restrictions, clearing denominators with LCD, extraneous solutions, monomial and polynomial denominators, cross-multiplication for proportions, and equations reducible to rational form.",
@@ -486,6 +540,7 @@ export default function RationalEquationsPage({
   summaryTable,
   faqQuestions,
   schemas,
+  demoUnits,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -515,6 +570,8 @@ export default function RationalEquationsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-domain'} dangerouslySetInnerHTML={{ __html: demoUnits.domain }} />,
+          `Stating the excluded values first is what later catches an extraneous candidate.`,
         ]
     },
     {
@@ -536,6 +593,8 @@ export default function RationalEquationsPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-hole'} dangerouslySetInnerHTML={{ __html: demoUnits.hole }} />,
+          `An identity after clearing still inherits every restriction of the original equation.`,
         ]
     },
     {
@@ -552,6 +611,8 @@ export default function RationalEquationsPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-none'} dangerouslySetInnerHTML={{ __html: demoUnits.none }} />,
+          `Factoring the denominators first is what reveals x = 1 as excluded.`,
         ]
     },
     {

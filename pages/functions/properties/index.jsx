@@ -1561,6 +1561,9 @@ import functionSymmetryDiagrams from '@/app/components/functions/symmetry/functi
 import functionInverseDiagrams from '@/app/components/functions/inverse/functionInverseDiagrams'
 import functionAsymptotesDiagrams from '@/app/components/functions/asymptotes/functionAsymptotesDiagrams'
 import functionTypesDiagrams from '@/app/components/functions/types/functionTypesDiagrams'
+import functionRangeDiagrams from '@/app/components/functions/range/functionRangeDiagrams'
+import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -2759,6 +2762,45 @@ const faqQuestions = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpEndBehavior = { kind: 'pieces', svgTitle: '3x^4 - 5x^2 + 2 and its leading term 3x^4 agree for large |x|', xRange: [-2, 2], yRange: [-2, 14], yStep: 2,
+    pieces: [
+      { fn: (x) => 3 * x ** 4, from: 3, to: 3, ends: [null, null], color: 'g', ghost: [[-2, 2]] },
+      { fn: (x) => 3 * x ** 4 - 5 * x * x + 2, from: -2, to: 2, ends: [null, null], color: 'f', label: { text: '3x⁴ − 5x² + 2', x: 0, y: -0.4, pos: 's' } },
+    ],
+    notes: [{ x: 0, y: 11, text: 'dashed: the leading term 3x⁴', pos: 'n', color: 'g' }, { x: 0, y: 9, text: 'both ends rise without bound', pos: 'n', color: 'f' }],
+    caption: 'For large |x| the leading term 3x⁴ takes over: up at both ends' };
+  const fpMultiplicity = { kind: 'pieces', svgTitle: 'f(x) = (x + 1)(x - 2)^2 crosses at -1 and touches at 2', xRange: [-2, 3.5], yRange: [-4, 6],
+    pieces: [{ fn: (x) => (x + 1) * (x - 2) ** 2, from: -2, to: 3.5, ends: [null, null], color: 'f', label: { text: 'f(x) = (x + 1)(x − 2)²', x: 0.1, y: 4.6, pos: 'e' } }],
+    points: [{ x: -1, y: 0 }, { x: 2, y: 0 }],
+    notes: [{ x: -1, y: -3.4, text: 'x = −1 (multiplicity 1): crosses', pos: 'e' }, { x: 2, y: -1.6, text: 'x = 2 (multiplicity 2): touches', pos: 'n' }],
+    caption: 'An odd-multiplicity zero crosses the axis; an even one bounces back' };
+  const fpSecant = { kind: 'pieces', svgTitle: 'Secant of x^2 through (1, 1) and (3, 9) has slope 4', xRange: [-1, 4], yRange: [-1, 12], yStep: 2,
+    pieces: [
+      { fn: (x) => x * x, from: -1, to: 4, ends: [null, null], color: 'f', label: { text: 'f(x) = x²', x: -0.9, y: 2.6, pos: 'e' } },
+      { fn: (x) => 4 * x - 3, from: 1, to: 3, ends: [null, null], color: 'r', ghost: [[0.4, 3.6]] },
+      { fn: () => 1, from: 1, to: 3, ends: [null, null], color: 'g' },
+    ],
+    points: [{ x: 1, y: 1, label: '(1, 1)', pos: 'nw' }, { x: 3, y: 9, label: '(3, 9)', pos: 'nw' }],
+    notes: [{ x: 2, y: 1, text: 'run 3 − 1 = 2', pos: 'n', color: 'g' }, { x: 3, y: 5, text: 'rise 9 − 1 = 8', pos: 'e', color: 'r' },
+      { x: 2.3, y: 6.2, text: 'slope 8 / 2 = 4', pos: 'nw', color: 'r' }],
+    caption: 'Average rate of change on [1, 3] = slope of the secant line = 4' };
+  const fpConcavity = { kind: 'pieces', svgTitle: 'x^3: concave down for x < 0, concave up for x > 0, inflection at the origin', xRange: [-2, 2], yRange: [-6, 6], yStep: 2,
+    pieces: [
+      { fn: (x) => x ** 3, from: -1.82, to: 0, ends: [null, null], color: 'g', label: { text: 'concave down', x: -0.3, y: -3, pos: 'w' } },
+      { fn: (x) => x ** 3, from: 0, to: 1.82, ends: [null, null], color: 'f', label: { text: 'concave up', x: 0.3, y: 3, pos: 'e' } },
+      { fn: (x) => 3 * x + 2, from: 3, to: 3, ends: [null, null], color: 'g', ghost: [[-2, 0]] },
+      { fn: (x) => 3 * x - 2, from: 3, to: 3, ends: [null, null], color: 'f', ghost: [[0, 2]] },
+    ],
+    points: [{ x: 0, y: 0 }],
+    notes: [{ x: -0.05, y: 2.6, text: 'inflection point (0, 0)', pos: 'w' }],
+    caption: 'x³ lies below its dashed tangent on the left, above it on the right' };
+  const fpMonotoneProps = {
+  kind: 'monotone', svgTitle: 'y = x^2 falls on (-inf, 0) and rises on (0, inf)', idPrefix: 'fp-mono-props',
+  f: (x) => x * x, xRange: [-2.6, 2.6], yRange: [-1, 6.5], from: -2.5, to: 2.5,
+  turn: { x: 0, label: 'turning point (0, 0)' }, arrowAt: [-1.6, 1.6], wordAt: 1.4, curveLabel: { text: 'y = x²', x: 2.3, y: 6.2 },
+  decText: 'decreasing on (−∞, 0)', incText: 'increasing on (0, ∞)', caption: 'Moving right, the curve falls until x = 0, then rises',
+};
+
   const demoUnits = {
     odd: demoUnitFrame({
       svg: functionSymmetryDiagrams.cubic,
@@ -2794,6 +2836,59 @@ const faqQuestions = {
       text: 'Any stretch of the curve of length 2&#960; is a copy of every other such stretch: that is periodicity, and 2&#960; is the smallest length that works. The values never leave [&#8722;1, 1], so the function is also bounded. Compare with the non-periodic families on the',
       href: '/functions/visual-tools/types',
       linkText: 'function types explorer',
+    }),
+    onto: demoUnitFrame({
+      svg: functionRangeDiagrams.exponential,
+      caption: 'f(x) = e&#710;x: the outputs never reach 0 or below',
+      text: 'The band on the y-axis marks the heights the curve reaches: everything above 0, with an open dot at 0 itself, and nothing at or below it. As a map from &#8477; to &#8477;, e&#710;x is therefore not onto: the negative half of the codomain is never hit. Shrink the codomain to (0, &#8734;) and the same function is onto. Compare the ranges of other families on the',
+      href: '/functions/visual-tools/range',
+      linkText: 'range explorer',
+    }),
+    monotoneSquare: demoUnitFrame({
+      svg: renderFunctionPlot(fpMonotoneProps),
+      caption: 'Falling, then rising',
+      text: 'The section\'s example f(x) = x&#178;. Read from left to right, the curve falls until the vertex at x = 0 and rises after it. The direction is stated as x-intervals under the plot: decreasing on (&#8722;&#8734;, 0], increasing on [0, &#8734;).',
+    }),
+    expLogMonotone: demoUnitFrame({
+      svg: functionInverseDiagrams.exponential,
+      caption: 'e&#710;x and ln x: both only ever rise',
+      text: 'Neither curve turns back anywhere: e&#710;x rises across all real inputs and ln x across all positive ones, so both are strictly increasing, hence monotonic. That is exactly why each can be undone, and the two are mirror images in the dashed line y = x: each is the other&#8217;s inverse. Explore other inverse pairs on the',
+      href: '/functions/visual-tools/inverse-function',
+      linkText: 'inverse function explorer',
+    }),
+    boundedSine: demoUnitFrame({
+      svg: functionRangeDiagrams.sine,
+      caption: 'f(x) = sin x: every output between &#8722;1 and 1',
+      text: 'However far the wave runs in either direction, its heights stay inside the band from &#8722;1 to 1 on the y-axis, both ends reached and marked with closed dots. So sin x is bounded above by 1 and below by &#8722;1; the band is its whole range. See which families are bounded on the',
+      href: '/functions/visual-tools/range',
+      linkText: 'range explorer',
+    }),
+    localPeaks: demoUnitFrame({
+      svg: functionTypesDiagrams.cubic,
+      caption: 'A cubic&#8217;s peak and valley',
+      text: 'The curve 0.2x&#179; &#8722; 2x rises to a peak, falls through the origin into a valley, then rises for good. The peak is a local maximum and the valley a local minimum: each is extreme only among nearby points, since the curve climbs higher than the peak further right and falls lower than the valley further left. Compare the shapes of other families on the',
+      href: '/functions/visual-tools/types',
+      linkText: 'function types explorer',
+    }),
+    endBehavior: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpEndBehavior),
+      caption: 'The leading term decides the ends',
+      text: 'The section\'s polynomial 3x&#8308; &#8722; 5x&#178; + 2 (solid) next to its leading term 3x&#8308; (dashed). Near the origin the two differ, but as |x| grows the lower-degree terms stop mattering and the curves run together: even degree with a positive leading coefficient, so both ends rise without bound.',
+    }),
+    multiplicity: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpMultiplicity),
+      caption: 'Crossing and touching zeros',
+      text: 'f(x) = (x + 1)(x &#8722; 2)&#178; has two zeros. The factor x + 1 appears once, so at x = &#8722;1 the graph passes through the axis and changes sign. The factor x &#8722; 2 appears twice, so at x = 2 the graph touches the axis and turns back without changing sign.',
+    }),
+    secant: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpSecant),
+      caption: 'Average rate of change as a slope',
+      text: 'The section\'s example: f(x) = x&#178; on [1, 3]. The output climbs from 1 to 9, a rise of 8, while the input moves from 1 to 3, a run of 2. The ratio 8 / 2 = 4 is the slope of the secant line joining (1, 1) and (3, 9), the amber line.',
+    }),
+    concavity: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpConcavity),
+      caption: 'Bending down, then bending up',
+      text: 'The section\'s cubic f(x) = x&#179;. Left of the origin the curve lies below its tangent line (dashed, drawn at x = &#8722;1): concave down. Right of the origin it lies above its tangent (dashed, at x = 1): concave up. The switch happens at the origin, the inflection point.',
     }),
   };
 
@@ -2887,6 +2982,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-onto'} dangerouslySetInnerHTML={{ __html: demoUnits.onto }} />,
+          `Whether a function is onto is a statement about the codomain as much as about the function.`,
         ]
     },
     {
@@ -2908,6 +3005,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-monotoneSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.monotoneSquare }} />,
+          `Increasing and decreasing always describe stretches of the x-axis, never of the y-axis.`,
         ]
     },
     {
@@ -2916,6 +3015,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-expLogMonotone'} dangerouslySetInnerHTML={{ __html: demoUnits.expLogMonotone }} />,
+          `A strictly monotonic function never repeats an output, so it is always one-to-one.`,
         ]
     },
     {
@@ -2924,6 +3025,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-boundedSine'} dangerouslySetInnerHTML={{ __html: demoUnits.boundedSine }} />,
+          `A bounded function's whole graph fits inside one horizontal strip.`,
         ]
     },
     {
@@ -2932,6 +3035,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-localPeaks'} dangerouslySetInnerHTML={{ __html: demoUnits.localPeaks }} />,
+          `Local extrema sit exactly where the function changes between increasing and decreasing.`,
         ]
     },
     {
@@ -2989,6 +3094,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+          <div key={'unit-endBehavior'} dangerouslySetInnerHTML={{ __html: demoUnits.endBehavior }} />,
+          `For any polynomial, the degree and the sign of the leading coefficient settle the end behavior.`,
         ]
     },
     {
@@ -3007,6 +3114,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <div key={'unit-multiplicity'} dangerouslySetInnerHTML={{ __html: demoUnits.multiplicity }} />,
+          `Reading the multiplicities tells you how the graph meets the axis before you plot a single point.`,
         ]
     },
     {
@@ -3015,6 +3124,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj17.link,
         content:[
           sectionsContent.obj17.content,
+          <div key={'unit-secant'} dangerouslySetInnerHTML={{ __html: demoUnits.secant }} />,
+          `Shrinking the interval turns the secant into the tangent, and the average rate into the instantaneous one.`,
         ]
     },
     {
@@ -3023,6 +3134,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj18.link,
         content:[
           sectionsContent.obj18.content,
+          <div key={'unit-concavity'} dangerouslySetInnerHTML={{ __html: demoUnits.concavity }} />,
+          `The same comparison with tangent lines works for any curve, wherever it bends.`,
         ]
     },
     {

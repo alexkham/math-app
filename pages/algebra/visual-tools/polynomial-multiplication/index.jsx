@@ -496,6 +496,9 @@ import PolynomialMultiplicationVisualizer from '../../../../app/components/algeb
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import polynomialMultiplicationDiagrams from '../../../../app/components/algebra/visualizers/polynomials/polynomialMultiplicationDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -933,8 +936,155 @@ The five colors of the frozen grid also make a structural point: cells of equal 
   }
 
 
+  const instructions = [
+    'Tap a preset at the top of the left card to load one of five products, from $(x + 2)(x + 3)$ to $(2x^2 + x - 3)(x^2 - 2x + 1)$. [Learn more about the presets](!#presets)',
+    'Edit $P(x)$ and $Q(x)$ term by term: type a coefficient and an exponent in each row, press **+ add term** to append a term, or **×** to remove one. [Learn more about entering the polynomials](!#entering-the-polynomials)',
+    'Press **Step ▶** to fill one grid cell, **Auto-expand** to fill them all, and **↺ Reset** to clear; the status shows cells filled out of the total. [Learn more about the animation controls](!#animation-controls)',
+    'Read the grid on the right: each cell is a row term of $P(x)$ times a column term of $Q(x)$, and its exponent is the sum of the two. [Learn more about the multiplication grid](!#the-multiplication-grid)',
+    'Watch the buckets below the grid: each collects the cells with the same power of $x$ and shows its contributions and running **sum**. [Learn more about the like-term buckets](!#the-like-term-buckets)',
+    'Read the **Result** box at the bottom: it reads **Result (pending)** until every cell is filled, then shows $P(x) \\cdot Q(x)$ in full. [Learn more about the final result](!#the-final-result)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real PolynomialMultiplicationVisualizer
+     (opens on (x² − 3x + 2)(2x + 5)). Presets by label; term inputs
+     input[aria-label="coefficient"] / input[aria-label="exponent"] in DOM order (P rows first,
+     then Q rows); '+ add term' nth 0 = P, nth 1 = Q; '×' = remove term. Controls 'Step ▶',
+     'Auto-expand' (timed, not driven), '↺ Reset'. Any edit or preset resets to 0 cells. */
+  const demos = {
+    'entering-the-polynomials': {
+      title: 'Editing P(x) and Q(x)',
+      script: [
+        { say: `TYPE Q coefficient 5 → −5
+Q(x) = 2x − 5.
+Cells flip sign: 15x, −10.` },
+        { set: { css: 'input[aria-label="coefficient"]', nth: 4 }, value: '-5' },
+        { wait: 2800 },
+        { say: `TAP + add term under Q
+New term 1 appended.
+3 × 3 = 9 cells.` },
+        { click: { button: '+ add term', nth: 1 } },
+        { wait: 2600 },
+        { say: `TYPE its exponent → 2
+Q(x) = x² + 2x − 5.
+New bucket: x⁴ terms.` },
+        { set: { css: 'input[aria-label="exponent"]', nth: 5 }, value: '2' },
+        { wait: 2800 },
+        { say: `TYPE its coefficient → 3
+Q(x) = 3x² + 2x − 5.
+Corner cell x² · 3x² = 3x⁴.` },
+        { set: { css: 'input[aria-label="coefficient"]', nth: 5 }, value: '3' },
+        { wait: 2800 },
+        { say: `TAP × on P's first term
+P(x) = −3x + 2.
+2 × 3 = 6 cells.` },
+        { click: { button: '×', exact: true, nth: 0 } },
+        { wait: 2600 },
+      ],
+    },
+    'presets': {
+      title: 'Five preset products',
+      script: [
+        { say: `TAP (x + 2)(x + 3)
+2 × 2 = 4 cells.
+Buckets: x², x, constants.` },
+        { click: { button: '(x + 2)(x + 3)', exact: true } },
+        { wait: 2600 },
+        { say: `TAP (2x − 1)(x + 4)
+Negative term −1.
+Cells −x and −4 carry the sign.` },
+        { click: { button: '(2x − 1)(x + 4)', exact: true } },
+        { wait: 2600 },
+        { say: `TAP (x + 1)(x² − x + 1)
+2 × 3 = 6 cells.
+Buckets x³ down to constants.` },
+        { click: { button: '(x + 1)(x² − x + 1)', exact: true } },
+        { wait: 2600 },
+        { say: `TAP (2x² + x − 3)(x² − 2x + 1)
+3 × 3 = 9 cells.
+Five buckets, x⁴ to constants.` },
+        { click: { button: '(2x² + x − 3)(x² − 2x + 1)', exact: true } },
+        { wait: 2800 },
+        { say: `TAP (x² − 3x + 2)(2x + 5)
+Default back.
+3 × 2 = 6 cells.` },
+        { click: { button: '(x² − 3x + 2)(2x + 5)', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-like-term-buckets': {
+      title: 'Like terms collecting',
+      script: [
+        { say: `TAP (2x² + x − 3)(x² − 2x + 1)
+9 empty cells, 5 empty buckets.
+Status 0 / 9 cells.` },
+        { click: { button: '(2x² + x − 3)(x² − 2x + 1)', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ▶ ×3
+Row 2x²: 2x⁴, −4x³, 2x².
+Each lands in its own bucket.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Step ▶ ×3
+Row x: x³, −2x², x.
+x³ bucket: −4 + 1 = −3x³. x² bucket: 2 − 2 = 0.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Step ▶ ×3
+Row −3: −3x², 6x, −3. 9 / 9 cells.
+Result 2x⁴ − 3x³ − 3x² + 7x − 3.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 500 },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+    'animation-controls': {
+      title: 'Step ▶ and ↺ Reset',
+      script: [
+        { say: `TAP (x + 2)(x + 3), TAP Step ▶
+x · x = x². 1 / 4 cells.
+x² bucket: 1.` },
+        { click: { button: '(x + 2)(x + 3)', exact: true } },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+x · 3 = 3x into x terms.
+2 / 4 cells.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Step ▶
+2 · x = 2x. x terms: 3 + 2 = 5x.
+3 / 4 cells.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+2 · 3 = 6. 4 / 4 cells.
+Result x² + 5x + 6.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ↺ Reset
+Grid and buckets cleared.
+0 / 4 cells. Same polynomials.` },
+        { click: { button: '↺ Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('algebra-polynomial-multiplication'),
       sectionsContent,
       introContent,
@@ -1009,7 +1159,22 @@ The five colors of the frozen grid also make a structural point: cells of equal 
   }
 }
 
-export default function PolynomialMultiplicationCalculator({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PolynomialMultiplicationCalculator({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <PolynomialMultiplicationVisualizer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after].
@@ -1033,9 +1198,9 @@ export default function PolynomialMultiplicationCalculator({relatedTools, seoDat
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
-    plain('obj2', 'entering-the-polynomials'),
+    withDemo(plain('obj2', 'entering-the-polynomials')),
 
-    plain('obj3', 'presets'),
+    withDemo(plain('obj3', 'presets')),
     stateRow('obj11', 'the-canonical-foil', 'ps-foil'),
     stateRow('obj12', 'sign-handling', 'ps-signs'),
     stateRow('obj13', 'trinomial-times-binomial', 'ps-3x2'),
@@ -1043,8 +1208,8 @@ export default function PolynomialMultiplicationCalculator({relatedTools, seoDat
     stateRow('obj15', 'trinomial-times-trinomial', 'ps-3x3'),
 
     plain('obj4', 'the-multiplication-grid'),
-    plain('obj5', 'the-like-term-buckets'),
-    plain('obj6', 'animation-controls'),
+    withDemo(plain('obj5', 'the-like-term-buckets')),
+    withDemo(plain('obj6', 'animation-controls')),
     plain('obj7', 'the-final-result'),
     plain('obj8', 'what-is-polynomial-multiplication'),
     plain('obj9', 'foil-generalized'),
@@ -1236,6 +1401,10 @@ export default function PolynomialMultiplicationCalculator({relatedTools, seoDat
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Polynomial Multiplication</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <div style={{transform:'scale(0.9)'}}>
       <PolynomialMultiplicationVisualizer explanations={explanations}/>

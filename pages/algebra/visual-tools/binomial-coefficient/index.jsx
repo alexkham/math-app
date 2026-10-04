@@ -14,6 +14,9 @@ import BinomialCoefficientsVisualizer from '../../../../app/components/algebra/v
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import binomialCoefficientDiagrams from '../../../../app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -460,8 +463,114 @@ The frame also shows why the tool caps at $n = 5$: another row would double the 
     'pascal-n5': `Ten paths defeat the eye but not the formula — $C(5,2) = 5!/(2! \\cdot 3!)$ is the moment enumeration hands over to computation. [Learn more about the fifth row](!#the-fifth-row) · [Adjusting n](!#adjusting-n)`,
   };
 
+  const instructions = [
+    'Tap **Decision Tree**, **Distribution** or **Pascal Paths** at the top to see the same row of coefficients as a tree of choices, as products sorted into buckets, or as paths through the triangle. [Learn more about the three views](!#the-three-views)',
+    'Tap a value of **n** from 1 to 5; the $(a + b)^n$ readout and all three views update together. [Learn more about adjusting n](!#adjusting-n)',
+    'In **Decision Tree**, hover a leaf to light its path from **start**, or hover a group card to light every path in that group; each card shows **paths landing here**. [Learn more about the decision tree view](!#decision-tree-view)',
+    'In **Distribution**, press **Step ▶** to deliver one product into its bucket, **Auto-expand** to deliver them all, and **↺ Reset** to empty the buckets; the counter shows products delivered out of $2^n$. [Learn more about the distribution view](!#distribution-view)',
+    'In **Pascal Paths**, hover any cell to draw every path from the top to it; the **Selected Cell** card gives its row, column, value and path count. [Learn more about the Pascal paths view](!#pascal-paths-view)',
+    'Every view shows the same row $n$ of coefficients: the group cards, the bucket counts and the bottom row of the triangle all read $1, 3, 3, 1$ for $n = 3$. [Learn more about reading the coefficients](!#reading-the-coefficients)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real BinomialCoefficientsVisualizer
+     (opens on Decision Tree, n = 3). Buttons: view tabs 'Decision Tree' / 'Distribution' /
+     'Pascal Paths', n picker '1'..'5' (exact), Distribution controls 'Step ▶',
+     'Auto-expand', '↺ Reset'. Changing n empties the Distribution buckets.
+     Hover (tree leaves, group cards, Pascal cells) is not driven: the player has no hover action. */
+  const demos = {
+    'the-three-views': {
+      title: 'Three views of one row',
+      script: [
+        { say: `TAP Distribution
+3 factor boxes, 4 empty buckets.
+Expansion: a³ + 3a²b + 3ab² + b³.` },
+        { click: { button: 'Distribution', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Pascal Paths
+Rows 0 to 3 of the triangle.
+Bottom row: 1, 3, 3, 1.` },
+        { click: { button: 'Pascal Paths', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Decision Tree
+8 leaves, 4 group cards.
+Paths landing here: 1, 3, 3, 1.` },
+        { click: { button: 'Decision Tree', exact: true } },
+        { wait: 2600 },
+        { say: `TAP n = 4
+16 leaves, 5 group cards.
+Counts 1, 4, 6, 4, 1.` },
+        { click: { button: '4', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Pascal Paths
+Row 4 added: 1, 4, 6, 4, 1.
+Same numbers, counted as paths.` },
+        { click: { button: 'Pascal Paths', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'adjusting-n': {
+      title: 'Adjusting n',
+      script: [
+        { say: `TAP n = 1
+(a + b)¹: 2 leaves, 2 groups.
+Counts 1, 1. The base case.` },
+        { click: { button: '1', exact: true } },
+        { wait: 2600 },
+        { say: `TAP n = 2
+4 leaves, 3 groups.
+Counts 1, 2, 1.` },
+        { click: { button: '2', exact: true } },
+        { wait: 2400 },
+        { say: `TAP n = 4
+16 leaves, 5 groups.
+Middle group a²b²: 6 paths.` },
+        { click: { button: '4', exact: true } },
+        { wait: 2600 },
+        { say: `TAP n = 5
+2⁵ = 32 leaves, 6 groups.
+Counts 1, 5, 10, 10, 5, 1.` },
+        { click: { button: '5', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'distribution-view': {
+      title: 'Delivering products into buckets',
+      script: [
+        { say: `TAP Distribution, TAP n = 2
+2 factor boxes, 3 empty buckets.
+Counter 0 / 4.` },
+        { click: { button: 'Distribution', exact: true } },
+        { click: { button: '2', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Picks a · a = a².
+Pellet aa lands in the a² bucket. 1 / 4.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ▶ twice
+a · b and b · a both give ab.
+ab bucket: count 2 / 2.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 900 },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+b · b = b². 4 / 4 delivered.
+Buckets 1, 2, 1. Expansion lit.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2800 },
+        { say: `TAP ↺ Reset
+Buckets empty. Counter 0 / 4.` },
+        { click: { button: '↺ Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('algebra-binomial-coefficient'),
       sectionsContent,
       introContent,
@@ -555,7 +664,22 @@ The frame also shows why the tool caps at $n = 5$: another row would double the 
   }
 }
 
-export default function BinomialCoefficientVisualizerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function BinomialCoefficientVisualizerPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <BinomialCoefficientsVisualizer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after].
@@ -580,12 +704,12 @@ export default function BinomialCoefficientVisualizerPage({relatedTools, seoData
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
 
-    plain('obj2', 'the-three-views'),
+    withDemo(plain('obj2', 'the-three-views')),
     stateRow('obj4', 'decision-tree-view', 'view-tree'),
-    stateRow('obj5', 'distribution-view', 'view-distribution'),
+    withDemo(stateRow('obj5', 'distribution-view', 'view-distribution')),
     stateRow('obj6', 'pascal-paths-view', 'view-pascal'),
 
-    plain('obj3', 'adjusting-n'),
+    withDemo(plain('obj3', 'adjusting-n')),
     stateRow('obj11', 'the-base-case-n-1', 'tree-n1'),
     stateRow('obj12', 'the-fifth-row', 'pascal-n5'),
 
@@ -781,6 +905,10 @@ export default function BinomialCoefficientVisualizerPage({relatedTools, seoData
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Binomial Coefficient Visualizer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <div style={{transform:'scale(0.85)'}}>
         <BinomialCoefficientsVisualizer explanations={explanations}/>

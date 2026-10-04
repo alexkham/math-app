@@ -8,6 +8,9 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import renderLineTestV2 from '@/app/utils/illustrations/functions/graphs/lineTest.v2'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -362,6 +365,36 @@ const schemas = {
 
 
 
+  const fpLogArgDomain = { kind: 'pieces', svgTitle: 'log2(x - 3) is defined only for x > 3; log5(x^2 + 1) for every x', xRange: [-5, 9], yRange: [-3, 4],
+    pieces: [
+      { fn: (x) => Math.log2(x - 3), from: 3.13, to: 9, ends: [null, null], color: 'f', label: { text: 'log₂(x − 3): x > 3 only', x: 3.3, y: -1.7, pos: 'e' } },
+      { fn: (x) => Math.log(x * x + 1) / Math.log(5), from: -5, to: 9, ends: [null, null], color: 'g' },
+    ],
+    vlines: [{ x: 3, label: 'x = 3' }],
+    notes: [{ x: 3.8, y: 3.3, text: 'log₅(x² + 1): every x', pos: 'e', color: 'g' }],
+    caption: 'x − 3 > 0 needs x > 3; x² + 1 is always positive' };
+  const ltLogOneToOne = {
+    kind: 'horizontal', svgTitle: 'Horizontal line test: log2 x passes, log2(x^2 + 1) fails',
+    panels: [
+      { title: 'log₂ x', f: (x) => Math.log2(x), from: 0.04, to: 5, lines: [1.5, -0.5, -2.5], verdict: 'one crossing per line: one-to-one' },
+      { title: 'log₂(x² + 1)', f: (x) => Math.log2(x * x + 1), from: -5, to: 5, lines: [2, 1], verdict: 'x = ±1 both give 1: not one-to-one' },
+    ],
+    caption: 'Always increasing means one-to-one; log₂(x² + 1) turns back at 0',
+  };
+
+  const demoUnits = {
+    argDomain: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogArgDomain),
+      caption: 'The argument sets the domain',
+      text: 'The section\'s two composite logarithms. log&#8322;(x &#8722; 3) needs x &#8722; 3 &gt; 0, so its graph begins at the dashed line x = 3 and nothing exists to the left. log&#8325;(x&#178; + 1) has an argument that is positive for every real x, so its graph runs across the whole axis, touching its lowest value 0 at x = 0.',
+    }),
+    oneToOne: demoUnitFrame({
+      svg: renderLineTestV2(ltLogOneToOne),
+      caption: 'One-to-one, seen with horizontal lines',
+      text: 'Every horizontal line meets log&#8322; x exactly once, because the curve only ever rises: no two inputs share an output, so log&#8322;(M) = log&#8322;(N) forces M = N. The function log&#8322;(x&#178; + 1) is a different story: its argument falls and then rises again, so the graph turns back at 0 and the line y = 1 meets it at x = &#177;1. Two inputs share an output, and the one-to-one property fails.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -370,6 +403,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Properties of Logarithms: Domain, Range & More | Learn Math Class",
       description: "Learn logarithm properties: domain (0, ∞), range (-∞, ∞), monotonicity, one-to-one property, continuity, vertical asymptote, and inverse relationship with exponentials.",
@@ -389,7 +423,8 @@ export default function PropertiesPage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas,
+  demoUnits,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -409,6 +444,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-argDomain'} dangerouslySetInnerHTML={{ __html: demoUnits.argDomain }} />,
+          `The domain of a composite logarithm is wherever its whole argument is positive.`,
         ]
     },
     {
@@ -433,6 +470,8 @@ export default function PropertiesPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-oneToOne'} dangerouslySetInnerHTML={{ __html: demoUnits.oneToOne }} />,
+          `This is why equating arguments is safe for log_a(x) but needs care when the argument is not monotonic.`,
         ]
     },
     {

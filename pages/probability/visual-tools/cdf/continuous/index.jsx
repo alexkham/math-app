@@ -11,6 +11,9 @@ import ContinuousCDFVisualizer from '@/app/components/visualizations/probability
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -194,6 +197,19 @@ The curve never reaches 1. At the right edge of the plotted window $F \\approx 0
 The memoryless property is what the shape encodes: $P(X > s + t \\mid X > s) = P(X > t)$. Slide the origin anywhere along the curve, rescale so it starts at 0 again, and you get the same curve back. A component that has already survived an hour is exactly as likely to survive the next hour as a brand new one.`,
       link: '',
     },
+    obj14: {
+      title: `Reading the CDF Explanation Panel`,
+      content: `To the right of the chart, the **CDF Explanation** panel describes the distribution on the active tab. It opens with that distribution's CDF formula, for example $F(x) = 1 - e^{-\\lambda x}$ for the exponential distribution, then says how the curve behaves: where it is 0, where it rises fastest and how it reaches or approaches 1.
+
+The text changes only when you switch tabs. Moving a slider redraws the curve but leaves the panel as it is, because the formula is written in terms of the parameters rather than their current values. Put the slider values shown above the chart into the formula to check a point by hand.
+
+Each explanation ends with two links: one to the section on this page about that distribution's CDF, and one to the comparison of all three curve shapes.
+
+Read the panel together with the chart: the formula says what $F(x)$ should be, and hovering over the curve shows the value the chart computed, to four decimal places. For the general definition behind every formula here, see [what a continuous CDF is](!#what-is-a-continuous-cdf).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
   }
 
 
@@ -347,8 +363,117 @@ The memoryless property is what the shape encodes: $P(X > s + t \\mid X > s) = P
     content: ``
   }
 
+  const instructions = [
+    'The tabs switch between **Continuous Uniform**, **Normal (Gaussian)** and **Exponential**; each tab keeps its own slider settings. [Learn more about selecting a distribution](!#selecting-a-distribution)',
+    'The sliders set the active distribution\'s parameters: **Lower Bound (a)** and **Upper Bound (b)**, **Mean (μ)** and **Standard Deviation (σ)**, or **Rate Parameter (λ)**; the curve redraws as you drag. [Learn more about adjusting parameters](!#adjusting-parameters)',
+    'The chart plots $F(x) = P(X \\leq x)$ as a smooth curve over a window around the distribution: the interval plus 20% each side, $\\mu \\pm 4\\sigma$, or 0 to $5/\\lambda$. [Learn more about reading smooth CDF curves](!#reading-smooth-cdf-curves)',
+    'Steep parts of the curve mark where density is high; the curve has no jumps, because any single value has probability 0. [Learn more about continuous vs discrete CDFs](!#continuous-vs-discrete-cdfs)',
+    'Hover the curve to read $x$ and $F(x)$ to four decimals; subtract two readings to get $P(a < X \\leq b) = F(b) - F(a)$. [Learn more about finding cumulative probabilities](!#finding-cumulative-probabilities)',
+    'The **CDF Explanation** panel gives the active distribution\'s CDF formula and how its curve behaves, with links to its own section. [Learn more about the explanation panel](!#the-cdf-explanation-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real ContinuousCDFVisualizer
+     (opens on Continuous Uniform, a = 0, b = 10). Each tab renders only its own
+     sliders: range 0 = first parameter, range 1 = second. Plot windows: uniform
+     [a, b] plus 20% each side, normal mu +/- 4 sigma, exponential 0 to 5 / lambda.
+     The x-axis ticks fall on sample points, so callouts quote the window ends
+     rather than tick labels. */
+  const demos = {
+    'selecting-a-distribution': {
+      title: 'Three tabs, three shapes',
+      script: [
+        { say: `TAP Normal (Gaussian)
+S-shaped curve, steepest at mean.
+μ = 0, σ = 1.0. Window μ ± 4σ.`, at: 'br' },
+        { click: { button: 'Normal (Gaussian)', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Exponential
+Rapid initial rise, asymptotic approach to 1.
+λ = 1.00. Window 0 to 5.`, at: 'br' },
+        { click: { button: 'Exponential', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Continuous Uniform
+Straight line from 0 at a = 0
+to 1 at b = 10.`, at: 'br' },
+        { click: { button: 'Continuous Uniform', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG a → 2
+Line now rises over 2 to 10.
+Flat at 0 left of a.`, at: 'br' },
+        { slide: { range: 0 }, to: 2, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG b → 6
+Interval 2 to 6: half as wide.
+Slope doubles.`, at: 'br' },
+        { slide: { range: 1 }, to: 6, ms: 1400 },
+        { wait: 2800 },
+      ],
+    },
+    'adjusting-parameters': {
+      title: 'Mean and standard deviation',
+      script: [
+        { say: `TAP Normal, DRAG μ → 2
+Whole S-curve shifts right.
+F crosses 0.5 at x = 2.`, at: 'br' },
+        { click: { button: 'Normal (Gaussian)', exact: true } },
+        { wait: 600 },
+        { slide: { range: 0 }, to: 2, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG σ → 0.5
+Window 0 to 4.
+Steep rise packed around 2.`, at: 'br' },
+        { slide: { range: 1 }, to: 0.5, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG σ → 2.0
+Window −6 to 10.
+Same S, rising slowly.`, at: 'br' },
+        { slide: { range: 1 }, to: 2, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG μ → −3
+Shift left. Window −11 to 5.
+Shape unchanged: σ still 2.0.`, at: 'br' },
+        { slide: { range: 0 }, to: -3, ms: 1600 },
+        { wait: 2800 },
+      ],
+    },
+    'parameter-effects-on-shape': {
+      title: 'Rate and comparison',
+      script: [
+        { say: `TAP Exponential, DRAG λ → 3.00
+Window shrinks to 0 to 1.67.
+Steeper start: probability builds fast.`, at: 'br' },
+        { click: { button: 'Exponential', exact: true } },
+        { wait: 600 },
+        { slide: { range: 0 }, to: 3, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG λ → 0.50
+Window 0 to 10.
+Gentle rise, long tail to the right.`, at: 'br' },
+        { slide: { range: 0 }, to: 0.5, ms: 1600 },
+        { wait: 2800 },
+        { say: `TAP Continuous Uniform
+Constant slope:
+equal density across [a, b].`, at: 'br' },
+        { click: { button: 'Continuous Uniform', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Normal (Gaussian)
+Symmetric S around μ.
+Steepest where density peaks.`, at: 'br' },
+        { click: { button: 'Normal (Gaussian)', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Exponential
+λ still 0.50.
+Each tab keeps its own settings.`, at: 'br' },
+        { click: { button: 'Exponential', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('probability-cdf-continuous'),
       sectionsContent,
       stateUnits,
@@ -369,7 +494,22 @@ The memoryless property is what the shape encodes: $P(X > s + t \\mid X > s) = P
   }
 }
 
-export default function CDFContinuousVisualizerPage({relatedTools, seoData, sectionsContent, stateUnits, explanationsAppend, introContent, faqQuestions, schemas}) {
+export default function CDFContinuousVisualizerPage({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanationsAppend, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ContinuousCDFVisualizer explanationsAppend={explanationsAppend}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -392,16 +532,17 @@ export default function CDFContinuousVisualizerPage({relatedTools, seoData, sect
   // this page previously generated its sections from Object.keys(sectionsContent)
   // with numeric ids; replaced with an explicit slug list
   const genericSections = [
-    plain('obj1', 'selecting-a-distribution'),
-    plain('obj2', 'adjusting-parameters'),
+    withDemo(plain('obj1', 'selecting-a-distribution')),
+    withDemo(plain('obj2', 'adjusting-parameters')),
     plain('obj3', 'reading-smooth-cdf-curves'),
     plain('obj4', 'continuous-vs-discrete-cdfs'),
     plain('obj5', 'finding-cumulative-probabilities'),
+    plain('obj14', 'the-cdf-explanation-panel'),
     plain('obj6', 'comparing-curve-shapes'),
     stateRow('obj11', 'continuous-uniform', 'uniform'),
     stateRow('obj12', 'normal', 'normal'),
     stateRow('obj13', 'exponential', 'exponential'),
-    plain('obj7', 'parameter-effects-on-shape'),
+    withDemo(plain('obj7', 'parameter-effects-on-shape')),
     plain('obj8', 'what-is-a-continuous-cdf'),
     plain('obj9', 'cdf-and-pdf'),
     plain('obj10', 'related-tools-and-concepts'),
@@ -458,6 +599,10 @@ export default function CDFContinuousVisualizerPage({relatedTools, seoData, sect
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cumulative Distribution Function(CDF) of Continuous Distributions</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       
       <div style={{transform:'scale(0.8)'}}>
         <ContinuousCDFVisualizer explanationsAppend={explanationsAppend}/>

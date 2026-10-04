@@ -10,6 +10,9 @@ import DiscreteDistributionsCDF from '@/app/components/visualizations/probabilit
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -224,6 +227,19 @@ Like the geometric, the support is unbounded — any count is possible — so th
 Its distinguishing feature is that mean and variance are both $\\lambda$. That is a strong claim about the data, and it is the first thing to check before using it: count data whose variance clearly exceeds its mean is overdispersed, and the Poisson will understate the spread.`,
       link: '',
     },
+    obj17: {
+      title: `Reading the CDF Explanation Panel`,
+      content: `To the right of the chart, the **CDF Explanation** panel describes the distribution on the active tab. It opens with that distribution's CDF formula, for example $F(k) = 1 - (1-p)^k$ for the geometric distribution, then says what the steps mean for it: where the function starts, how large the steps are and how it approaches 1.
+
+The text changes only when you switch tabs. Moving a slider redraws the chart but leaves the panel as it is, because the formula is written in terms of the parameters rather than their current values. Put the slider values shown above the chart into the formula to check a step by hand.
+
+Each explanation ends with two links: one to the section on this page about that distribution's CDF, and one to the comparison of all six shapes.
+
+Read the panel together with the chart: the formula says what $F(k)$ should be, and hovering over a point shows the value the chart computed, to six decimal places. For the general definition behind every formula here, see [what a CDF is](!#what-is-a-cdf).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
   }
 
 
@@ -390,8 +406,126 @@ Its distinguishing feature is that mean and variance are both $\\lambda$. That i
     content: ``
   }
 
+  const instructions = [
+    'The tabs switch between **Discrete Uniform**, **Binomial**, **Geometric**, **Negative Binomial**, **Hypergeometric** and **Poisson**; each opens with its default parameters. [Learn more about selecting a distribution](!#selecting-a-distribution)',
+    'The sliders above the chart set the active distribution\'s parameters, such as $a$ and $b$, $n$ and $p$, $r$, $N$, $K$ or $\\lambda$; the chart redraws as you drag. [Learn more about adjusting parameters](!#adjusting-parameters)',
+    'The chart plots $F(k) = P(X \\leq k)$ against **Value (k)** as a step line, with one dot per possible value and $F(k)$ from 0 to 1. [Learn more about reading the CDF chart](!#reading-the-cdf-chart)',
+    'Each vertical jump has height $P(X = k)$, and the line stays flat between possible values. [Learn more about step functions](!#step-functions-in-discrete-cdfs)',
+    'Hover a point to read $k$ and $F(k)$ to six decimals; subtract two readings to get $P(a < X \\leq b) = F(b) - F(a)$. [Learn more about finding cumulative probabilities](!#finding-cumulative-probabilities)',
+    'The **CDF Explanation** panel gives the active distribution\'s CDF formula and how its steps behave, with links to its own section. [Learn more about the explanation panel](!#the-cdf-explanation-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real DiscreteDistributionsCDF
+     (opens on Discrete Uniform, a = 1, b = 6). Each tab renders only its own
+     sliders: range 0 = first parameter, range 1 = second. Hypergeometric is left
+     out: its default chart has a y-axis tick printed as 1.0000000000000002. */
+  const demos = {
+    'selecting-a-distribution': {
+      title: 'Six tabs, six staircases',
+      script: [
+        { say: `TAP Binomial
+Successes in n independent trials.
+n = 10, p = 0.50. Steps at k = 0 to 10.`, at: 'br' },
+        { click: { button: 'Binomial', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Geometric
+Waiting time until first success.
+p = 0.30. Steps start at k = 1.`, at: 'br' },
+        { click: { button: 'Geometric', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Negative Binomial
+Waiting time until r-th success.
+r = 3, p = 0.40. Steps start at k = 3.`, at: 'br' },
+        { click: { button: 'Negative Binomial', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Poisson
+Rare events over time.
+λ = 3.0. Steps at k = 0 to 18.`, at: 'br' },
+        { click: { button: 'Poisson', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Discrete Uniform
+a = 1, b = 6.
+Six equal steps of 1/6.`, at: 'br' },
+        { click: { button: 'Discrete Uniform', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'adjusting-parameters': {
+      title: 'Moving the sliders',
+      script: [
+        { say: `DRAG a → 3
+Values 3 to 6.
+Four equal steps of 0.25.`, at: 'br' },
+        { slide: { range: 0 }, to: 3, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG b → 10
+Values 3 to 10.
+Eight equal steps of 1/8.`, at: 'br' },
+        { slide: { range: 1 }, to: 10, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Binomial, DRAG n → 20
+Steps at k = 0 to 20.
+p = 0.50: steepest rise near 10.`, at: 'br' },
+        { click: { button: 'Binomial', exact: true } },
+        { wait: 600 },
+        { slide: { range: 0 }, to: 20, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG p → 0.30
+Steepest rise moves left,
+near np = 6.`, at: 'br' },
+        { slide: { range: 1 }, to: 0.3, ms: 1400 },
+        { wait: 2800 },
+        { say: `TAP Geometric, DRAG p → 0.10
+Axis stretches to k = 50.
+Slow climb: many trials needed.`, at: 'br' },
+        { click: { button: 'Geometric', exact: true } },
+        { wait: 600 },
+        { slide: { range: 0 }, to: 0.1, ms: 1400 },
+        { wait: 2800 },
+      ],
+    },
+    'parameter-effects-on-shape': {
+      title: 'Parameters and shape',
+      script: [
+        { say: `TAP Poisson, DRAG λ → 1.0
+Steps at k = 0 to 16.
+Nearly all the rise by k = 3.`, at: 'br' },
+        { click: { button: 'Poisson', exact: true } },
+        { wait: 600 },
+        { slide: { range: 0 }, to: 1, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG λ → 10.0
+Steps at k = 0 to 25.
+Gradual rise, steepest near k = 10.`, at: 'br' },
+        { slide: { range: 0 }, to: 10, ms: 1600 },
+        { wait: 2800 },
+        { say: `TAP Negative Binomial, DRAG r → 8
+Steps now start at k = 8:
+at least r trials needed.`, at: 'br' },
+        { click: { button: 'Negative Binomial', exact: true } },
+        { wait: 600 },
+        { slide: { range: 0 }, to: 8, ms: 1400 },
+        { wait: 2800 },
+        { say: `DRAG p → 0.80
+Fewer trials needed.
+Rise packed close to k = 8.`, at: 'br' },
+        { slide: { range: 1 }, to: 0.8, ms: 1400 },
+        { wait: 2800 },
+        { say: `TAP Geometric, DRAG p → 0.90
+Steps at k = 1 to 12.
+First step already reaches 0.9.`, at: 'br' },
+        { click: { button: 'Geometric', exact: true } },
+        { wait: 600 },
+        { slide: { range: 0 }, to: 0.9, ms: 1400 },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('probability-cdf-discrete'),
       sectionsContent,
       stateUnits,
@@ -412,7 +546,22 @@ Its distinguishing feature is that mean and variance are both $\\lambda$. That i
   }
 }
 
-export default function CDFDiscreteVisualizerPage({relatedTools, seoData, sectionsContent, stateUnits, explanationsAppend, introContent, faqQuestions, schemas}) {
+export default function CDFDiscreteVisualizerPage({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanationsAppend, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <DiscreteDistributionsCDF explanationsAppend={explanationsAppend}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -435,11 +584,12 @@ export default function CDFDiscreteVisualizerPage({relatedTools, seoData, sectio
   // this page previously generated its sections from Object.keys(sectionsContent)
   // with numeric ids; replaced with an explicit slug list
   const genericSections = [
-    plain('obj1', 'selecting-a-distribution'),
-    plain('obj2', 'adjusting-parameters'),
+    withDemo(plain('obj1', 'selecting-a-distribution')),
+    withDemo(plain('obj2', 'adjusting-parameters')),
     plain('obj3', 'reading-the-cdf-chart'),
     plain('obj4', 'step-functions-in-discrete-cdfs'),
     plain('obj5', 'finding-cumulative-probabilities'),
+    plain('obj17', 'the-cdf-explanation-panel'),
     plain('obj6', 'comparing-distribution-shapes'),
     stateRow('obj11', 'discrete-uniform', 'discreteUniform'),
     stateRow('obj12', 'binomial', 'binomial'),
@@ -447,7 +597,7 @@ export default function CDFDiscreteVisualizerPage({relatedTools, seoData, sectio
     stateRow('obj14', 'negative-binomial', 'negativeBinomial'),
     stateRow('obj15', 'hypergeometric', 'hypergeometric'),
     stateRow('obj16', 'poisson', 'poisson'),
-    plain('obj7', 'parameter-effects-on-shape'),
+    withDemo(plain('obj7', 'parameter-effects-on-shape')),
     plain('obj8', 'what-is-a-cdf'),
     plain('obj9', 'cdf-vs-pmf'),
     plain('obj10', 'related-tools-and-concepts'),
@@ -506,6 +656,10 @@ export default function CDFDiscreteVisualizerPage({relatedTools, seoData, sectio
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Cumulative Distribution Function(CDF) of Discrete Distributions</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <div style={{transform:'scale(0.8)'}}>
         <DiscreteDistributionsCDF explanationsAppend={explanationsAppend}/>
       </div>

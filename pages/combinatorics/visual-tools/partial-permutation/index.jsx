@@ -495,6 +495,9 @@ import PartialPermutation from '../../../../app/components/combinatorics/new-vis
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import partialPermutationDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/partialPermutationDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -961,8 +964,157 @@ The agreement between permutations and combinations at $r = 1$ is worth remember
     big53: `P(5, 3) = 5 × 4 × 3 = 60: the multiplication chain stops after r factors, and that truncation is the whole formula. [Learn more about the derivation](!#deriving-p-n-r-step-by-step) · [Adjusting n and r](!#adjusting-n-and-r)`,
   };
 
+  const instructions = [
+    'The **Mode** switch at the left of the control bar toggles between **● Balls** (numbered coloured balls) and **A Letters** (letter labels). [Learn more about the mode switch](!#mode-switch)',
+    'The **n** stepper (3 to 5) sets the source row and the **r** stepper (1 to n) sets the number of slots; lowering $n$ below $r$ pulls $r$ down with it, and either change resets the build. [Learn more about adjusting n and r](!#adjusting-n-and-r)',
+    'Set **r** equal to **n** to use every item and get $n!$, or set **r** to 1 for one card per item. [Learn more about the r = n limit](!#when-r-equals-n)',
+    '**Step ▶** moves one ball into the next slot, **◀ Back** undoes one step, **▶ Play** builds every arrangement, **↺ Reset** clears the completed list, and the **Speed** slider (0.3 to 3) sets the pace. [Learn more about the transport controls](!#transport-controls)',
+    'The two lines at the top right of the scene show $P(n, r)$ with its total and the status: the current step and its count, or **Complete**. [Learn more about getting started](!#getting-started)',
+    'In the **build area** only $r$ slots appear; each ball flies in along a dotted guide line, used items dim, and the unused ones stay bright. [Learn more about the build area](!#the-build-area)',
+    'Finished arrangements land under **COMPLETED**, one tinted row per first item, each holding $(n-1)!/(n-r)!$ cards. [Learn more about grouping by first item](!#grouping-by-first-item)',
+    'The **right panel** adds a row for each first-item group with its progress and a one-line narration of how the remaining slots are filled. [Learn more about the right panel](!#right-panel-and-progress)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real PartialPermutation tool
+     (opens at n = 3, r = 2, balls mode, idle). Stepper buttons repeat:
+     nth 0 = n, nth 1 = r. Step ▶ starts a ball flight (rAF + timer): every Step
+     click is followed by an until on "no ball in flight", so instant replay lands
+     on the same state. Play runs to "Complete · t / t" (until). */
+  const LANDED = 'svg.vt-scene-svg:not(:has(g[style*="translate"]))'
+  const demos = {
+    'the-build-area': {
+      title: 'Two slots, one ball left out',
+      script: [
+        { say: `TAP Step ▶
+Red ball 1 flies into slot #1.
+Ball 1 dims in the source row.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Blue ball 2 → slot #2.
+Green 3 stays bright: left out.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+r = 2 slots full: flash ring.
+Status: Step 1 (Red): 1 / 2.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Card 1 2 drops into the Red row.
+COMPLETED 1 / 6.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Next arrangement starts.
+Ball 1 in #1 again. Card 1 2 stays.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2800 },
+      ],
+    },
+    'adjusting-n-and-r': {
+      title: 'n, r and the clamp',
+      script: [
+        { say: `TAP n +
+n = 4, r = 2. Four balls, two slots.
+Header: P(4, 2) = 12.` },
+        { click: { button: '+', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP r +
+r = 3: three slots.
+P(4, 3) = 24.` },
+        { click: { button: '+', exact: true, nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP r +
+r = 4 = n. Every item used.
+P(4, 4) = 24. r + greys out.` },
+        { click: { button: '+', exact: true, nth: 1 } },
+        { wait: 2600 },
+        { say: `TAP n −
+n = 3. r clamps down to 3.
+P(3, 3) = 6.` },
+        { click: { button: '−', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP r −
+r = 2. P(3, 2) = 6.
+Same 6: the last slot was forced.` },
+        { click: { button: '−', exact: true, nth: 1 } },
+        { wait: 2800 },
+      ],
+    },
+    'grouping-by-first-item': {
+      title: 'Rows by first item',
+      script: [
+        { say: `SLIDE Speed → 3
+Fastest setting.
+Flights take a third of the time.` },
+        { slide: { range: 0 }, to: 3, ms: 1200 },
+        { wait: 2000 },
+        { say: `TAP ▶ Play
+Complete · 6 / 6.
+Three rows, one per first item, 2 cards each.` },
+        { click: { button: '▶ Play', exact: true } },
+        { until: { text: 'Complete · 6 / 6' }, ms: 20000 },
+        { wait: 2800 },
+        { say: `TAP the Mode switch
+Letters: rows A, B, C.
+AB AC · BA BC · CA CB.` },
+        { click: '.vt-switch' },
+        { wait: 2800 },
+        { say: `TAP r −
+r = 1: one slot. P(3, 1) = 3.
+Build resets. Letters kept.` },
+        { click: { button: '−', exact: true, nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP ▶ Play
+Complete · 3 / 3.
+One card per row: a choice, no order.` },
+        { click: { button: '▶ Play', exact: true } },
+        { until: { text: 'Complete · 3 / 3' }, ms: 20000 },
+        { wait: 2800 },
+      ],
+    },
+    'transport-controls': {
+      title: 'Slow speed, Back, Reset',
+      script: [
+        { say: `SLIDE Speed → 0.3
+Slowest setting.
+Each flight is easy to follow.` },
+        { slide: { range: 0 }, to: 0.3, ms: 1200 },
+        { wait: 2000 },
+        { say: `TAP Step ▶
+Red ball 1 drifts into slot #1
+along its dotted guide line.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2400 },
+        { say: `TAP Step ▶
+Blue ball 2 → slot #2.
+Both slots full.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2400 },
+        { say: `TAP ◀ Back
+Ball 2 leaves slot #2.
+Blue bright again in the source row.` },
+        { click: { button: '◀ Back', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ↺ Reset
+Build area cleared.
+Press Play or Step to begin.` },
+        { click: { button: '↺ Reset', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('partial-permutation'),
       sectionsContent,
       introContent,
@@ -986,7 +1138,22 @@ The agreement between permutations and combinations at $r = 1$ is worth remember
   }
 }
 
-export default function PartialPermutationVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PartialPermutationVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <PartialPermutation explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1010,12 +1177,12 @@ export default function PartialPermutationVisualizer({relatedTools, seoData, sec
   const genericSections = [
     plain('obj0', 'key-terms'),
     stateRow('obj1', 'getting-started', 'idle'),
-    stateRow('obj2', 'the-build-area', 'building'),
-    plain('obj3', 'adjusting-n-and-r'),
-    stateRow('obj4', 'grouping-by-first-item', 'default32'),
+    withDemo(stateRow('obj2', 'the-build-area', 'building')),
+    withDemo(plain('obj3', 'adjusting-n-and-r')),
+    withDemo(stateRow('obj4', 'grouping-by-first-item', 'default32')),
     stateRow('obj11', 'when-r-equals-n', 'rEqualsN'),
     stateRow('obj12', 'when-r-is-one', 'rOne'),
-    plain('obj5', 'transport-controls'),
+    withDemo(plain('obj5', 'transport-controls')),
     plain('obj6', 'mode-switch'),
     plain('obj7', 'right-panel-and-progress'),
     plain('obj8', 'what-is-a-partial-permutation'),
@@ -1117,6 +1284,10 @@ export default function PartialPermutationVisualizer({relatedTools, seoData, sec
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Partial Permutations</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <PartialPermutation explanations={explanations}/>
       <br/>

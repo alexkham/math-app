@@ -9,6 +9,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 
@@ -522,6 +525,36 @@ const schemas = {
 }
 
 
+  const fpLinBoundary = { kind: 'pieces', svgTitle: '4x - 7 <= 2x + 11: the lines meet at x = 9 and the solution is x <= 9', xRange: [0, 14], yRange: [-10, 50], yStep: 10,
+    pieces: [
+      { fn: (x) => 4 * x - 7, from: 0, to: 14, ends: [null, null], color: 'f', label: { text: '4x − 7', x: 13, y: 45, pos: 'w' } },
+      { fn: (x) => 2 * x + 11, from: 0, to: 14, ends: [null, null], color: 'g', label: { text: '2x + 11', x: 13, y: 33, pos: 's' } },
+    ],
+    vlines: [{ x: 9, label: 'x = 9' }],
+    points: [{ x: 9, y: 29 }],
+    notes: [{ x: 0.3, y: 40, text: 'left of 9: 4x − 7 is below 2x + 11', pos: 'e', color: 'f' },
+      { x: 0.3, y: 34, text: 'solution x ≤ 9, that is (−∞, 9]', pos: 'e', color: 'r' }],
+    caption: 'The boundary solves the equation; the inequality picks a side' };
+  const fpLinCompound = { kind: 'domainOpen', svgTitle: 'AND gives (-2, 3]; OR gives two rays', range: [-6, 6],
+    rows: [
+      { label: '−3 < 2x + 1 ≤ 7  (AND)', color: 'f', segs: [[-2, 3, true, false]], tag: { text: '(−2, 3]', x: 4.5 } },
+      { label: 'x + 3 < −1 or x + 3 > 5  (OR)', color: 'r', segs: [[null, -4, false, true], [2, null, true]], tag: { text: '(−∞, −4) ∪ (2, ∞)', x: 4.3 } },
+    ],
+    caption: 'AND keeps the overlap, one interval; OR keeps either, two rays' };
+
+  const demoUnits = {
+    boundary: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLinBoundary),
+      caption: 'Where the boundary comes from',
+      text: 'The section\'s 4x &#8722; 7 &#8804; 2x + 11, with each side drawn as a line. They cross at x = 9, the solution of the equation 4x &#8722; 7 = 2x + 11: that is the boundary point. To the left of 9 the steeper line 4x &#8722; 7 is below the other, so the inequality holds there; the crossing itself counts because the inequality is non-strict. The solution is (&#8722;&#8734;, 9].',
+    }),
+    compound: demoUnitFrame({
+      svg: renderFunctionPlotV2(fpLinCompound),
+      caption: 'AND versus OR on the number line',
+      text: 'The section\'s two compound inequalities. The chain &#8722;3 &lt; 2x + 1 &#8804; 7 needs both parts at once, which leaves the overlap &#8722;2 &lt; x &#8804; 3: open at &#8722;2, closed at 3. The disjunction x + 3 &lt; &#8722;1 or x + 3 &gt; 5 needs only one part, which leaves two separate rays, x &lt; &#8722;4 and x &gt; 2, with the gap between them excluded.',
+    }),
+  };
+
    return {
   props: {
     sectionsContent,
@@ -532,6 +565,7 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Linear Inequalities: Solving & Graphing Step by Step | Learn Math Class",
       description: "Learn to solve linear inequalities in one variable: the flip rule for negatives, graphing on number lines, compound inequalities (AND/OR), fractions, special cases, and literal inequalities.",
@@ -554,6 +588,7 @@ const schemas = {
   summaryTable,
   faqQuestions,
   schemas,
+  demoUnits,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -634,6 +669,8 @@ const schemas = {
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-boundary'} dangerouslySetInnerHTML={{ __html: demoUnits.boundary }} />,
+          `The equation finds the boundary; one test value or the inequality symbol finds the side.`,
         ]
     },
     {
@@ -642,6 +679,8 @@ const schemas = {
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-compound'} dangerouslySetInnerHTML={{ __html: demoUnits.compound }} />,
+          `An AND of two rays pointing the wrong way is empty; an OR of overlapping rays is the whole line.`,
         ]
     },
     {

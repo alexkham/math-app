@@ -695,6 +695,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -1201,6 +1202,26 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpLogAnchors = { kind: 'pieces', svgTitle: 'log base 2, e and 10 all pass through (1, 0) and through (a, 1)', xRange: [0, 11], yRange: [-3, 4],
+    pieces: [
+      { fn: (x) => Math.log2(x), from: 0.02, to: 11, ends: [null, null], color: 'f', label: { text: 'log₂ x', x: 10.5, y: Math.log2(10.5), pos: 'n' } },
+      { fn: (x) => Math.log(x), from: 0.02, to: 11, ends: [null, null], color: 'g', label: { text: 'ln x', x: 10.5, y: Math.log(10.5), pos: 'n' } },
+      { fn: (x) => Math.log10(x), from: 0.002, to: 11, ends: [null, null], color: 'r', label: { text: 'log₁₀ x', x: 10.5, y: Math.log10(10.5), pos: 'n' } },
+    ],
+    points: [{ x: 1, y: 0 }, { x: 2, y: 1 }, { x: Math.E, y: 1 }, { x: 10, y: 1 }],
+    notes: [{ x: 0.3, y: 3.6, text: 'each passes through (a, 1)', pos: 'e' },
+      { x: 0.3, y: 3.05, text: 'and every one passes through (1, 0)', pos: 'e' }],
+    caption: 'log_a(1) = 0 and log_a(a) = 1 for every base' };
+  const fpLogMirror = { kind: 'pieces', svgTitle: '2^x and log base 2 of x are reflections in y = x', xRange: [-2, 7], yRange: [-1.5, 5.37],
+    pieces: [
+      { fn: (x) => x, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-1.5, 5.3]] },
+      { fn: (x) => 2 ** x, from: -2, to: 7, ends: [null, null], color: 'f', label: { text: 'y = 2ˣ', x: 1.6, y: 2 ** 1.6, pos: 'w' } },
+      { fn: (x) => Math.log2(x), from: 0.36, to: 7, ends: [null, null], color: 'g', label: { text: 'y = log₂ x', x: 6, y: Math.log2(6), pos: 's' } },
+    ],
+    points: [{ x: 2, y: 4, label: '(2, 4)', pos: 'nw' }, { x: 4, y: 2, label: '(4, 2)', pos: 'se' }],
+    notes: [{ x: 4.7, y: 4.7, text: 'y = x', pos: 'e', color: 'g' }],
+    caption: 'log₂(2ˣ) = x: (2, 4) on 2ˣ becomes (4, 2) on log₂ x' };
+
   const demoUnits = {
     table: demoUnitFrame({
       svg: powersTableDiagrams['b2-default'],
@@ -1208,6 +1229,16 @@ const schemas = {
       text: 'The table lists 2&#8304;, 2&#185;, 2&#178;, &#8230; with their values 1, 2, 4, 8, &#8230;; a logarithm reads it in the other direction, from value to exponent: log&#8322; 8 = 3 because 8 sits in the row of 2&#179;. Every logarithm question is a lookup in the right base&#8217;s table. Change the base and read off its logarithms on the',
       href: '/algebra/visual-tools/powers-table',
       linkText: 'powers table',
+    }),
+    anchors: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogAnchors),
+      caption: 'Two points every logarithm shares',
+      text: 'log&#8322; x, ln x and log&#8321;&#8320; x drawn together. All three cross the axis at x = 1, because a&#8304; = 1 for every base, so log_a(1) = 0. Each also reaches height 1 exactly at its own base, (2, 1), (e, 1) and (10, 1), because a&#185; = a. The larger the base, the further right that second anchor sits and the flatter the curve.',
+    }),
+    mirror: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogMirror),
+      caption: 'The logarithm undoes the exponential',
+      text: '2&#739; and log&#8322; x are mirror images in the dashed line y = x. The point (2, 4) on 2&#739; says 2&#178; = 4; its mirror (4, 2) on log&#8322; x says log&#8322;(4) = 2. Following one graph and then the other returns to the start, which is what the identities log_a(a&#739;) = x and a^(log_a x) = x state in symbols.',
     }),
   };
 
@@ -1283,6 +1314,8 @@ export default function LogarithmsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-anchors'} dangerouslySetInnerHTML={{ __html: demoUnits.anchors }} />,
+          `Sketching any logarithm can start from these two guaranteed points.`,
         ]
     },
     {
@@ -1291,6 +1324,8 @@ export default function LogarithmsPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-mirror'} dangerouslySetInnerHTML={{ __html: demoUnits.mirror }} />,
+          `Every pair of mirror points across y = x is one instance of the two inverse identities.`,
         ]
     },
     {

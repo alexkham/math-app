@@ -263,6 +263,9 @@ import chebyshevDiagrams from '@/app/components/probability/inequalities/chebysh
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 
 export async function getStaticPaths() {
@@ -1150,8 +1153,356 @@ It also makes a point the continuous cases obscure: a distribution can be very s
     content: currentConfig.introContent
   };
 
+  // How-to instructions and animated demos (ToolDemoPlayer v3), keyed by view.
+  const INSTRUCTIONS = {
+    'markov': [
+      '**Distribution Type** picks one of nine shapes, three continuous and six discrete; the plot redraws as a PDF curve or as PMF bars. [Learn more about the distribution selector](!#the-distribution-selector)',
+      '**E[X] slider** (green) sets the mean from 1 to 30; the green dashed line and the whole distribution follow it. [Learn more about the two sliders](!#adjusting-ex-and-threshold)',
+      '**Threshold a slider** (red) sets a from 1 to 40; the red dashed line moves and everything at or beyond a turns red. [Learn more about the two sliders](!#adjusting-ex-and-threshold)',
+      '**Read the banner** above the plot: $P(X \\geq a) \\leq E[X]/a$ with the numbers filled in, the bound as a percentage, and the Actual tail under it. [Learn more about the Markov bound](!#the-markov-bound)',
+      '**Set a at or below E[X]** and the banner turns red: the bound reaches 1 or more and tells you nothing. [Learn more about when Markov becomes useless](!#when-markov-becomes-useless)',
+      '**Compare Bound with Actual** in the banner or the grey panel: the actual tail never exceeds the bound, and is often far below it. [Learn more about bound vs actual](!#bound-vs-actual)',
+    ],
+    'chebyshev': [
+      '**Distribution Type** picks one of nine shapes; only Normal and Uniform use the variance slider, the others fix σ² from μ and say so under the banner. [Learn more about the control sliders](!#using-the-control-sliders)',
+      '**Mean μ**, **Variance σ²** and **Distance from mean (threshold a)** sliders set the centre, the spread and the half-width of the band from μ−a to μ+a. [Learn more about the control sliders](!#using-the-control-sliders)',
+      '**Read the banner**: $P(|X - \\mu| \\geq a) \\leq \\sigma^2 / a^2$ with the numbers filled in, shown as a percentage capped at 100%. [Learn more about the Chebyshev bound](!#the-chebyshev-bound)',
+      '**Set a to a whole number of σ**: with σ² = 4, a = 4, 6, 8, 10 gives k = 2 to 5 and bounds of 25%, 11.1%, 6.3%, 4.0%. [Learn more about the k standard deviations form](!#the-k-standard-deviations-form)',
+      '**Red tails** on both sides, left of μ−a and right of μ+a, are the event the bound covers. [Learn more about two-tailed bounds](!#two-tailed-vs-one-tailed)',
+      '**Compare Bound with Actual**: the true two-tailed probability is always at or below the bound. [Learn more about bound vs actual](!#bound-vs-actual)',
+    ],
+  };
+  const DEMOS = {
+    "markov": {
+      "the-distribution-selector": {
+        "title": "Same bound, different shapes",
+        "script": [
+          {
+            "say": "SELECT Normal\nBound stays 10 / 15 = 66.7%.\nActual 15.9%."
+          },
+          {
+            "set": "select",
+            "value": "normal"
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "SELECT Uniform\nFlat PDF, same E[X] = 10.\nActual 25.0%."
+          },
+          {
+            "set": "select",
+            "value": "uniform"
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SELECT Poisson\nPMF bars; red bars = P(X ≥ 15).\nActual 8.3%."
+          },
+          {
+            "set": "select",
+            "value": "poisson"
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "SELECT Hypergeometric\nAlmost nothing past 15.\nActual 0.3% against a 66.7% bound."
+          },
+          {
+            "set": "select",
+            "value": "hypergeometric"
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      },
+      "adjusting-ex-and-threshold": {
+        "title": "Moving E[X] and a",
+        "script": [
+          {
+            "say": "DRAG a → 20\na = 2·E[X]: bound 10 / 20 = 50.0%.\nActual 13.5%."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 20,
+            "ms": 1300
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG a → 40\nBound 10 / 40 = 25.0%.\nRed tail shrinks: actual 1.8%."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 40,
+            "ms": 1500
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG E[X] → 20\nDistribution spreads right.\nBound 20 / 40 = 50.0%, actual 13.5%."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 20,
+            "ms": 1500
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG E[X] → 30\nBound 30 / 40 = 75.0%.\nActual 26.4%."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 30,
+            "ms": 1300
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "when-markov-becomes-useless": {
+        "title": "When the bound says nothing",
+        "script": [
+          {
+            "say": "DRAG a → 10\na = E[X]: banner turns red.\nBound 1.000 ≥ 1, tells us nothing."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 10,
+            "ms": 1300
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "DRAG a → 5\nBound 10 / 5 = 2.000.\nStill no information."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 5,
+            "ms": 1300
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "DRAG a → 12\na > E[X]: banner back to amber.\nBound 83.3%, actual 30.1%."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 12,
+            "ms": 1300
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "DRAG E[X] → 15\nNow E[X] > a = 12: red again.\nBound 1.250."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 15,
+            "ms": 1300
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      }
+    },
+    "chebyshev": {
+      "the-k-standard-deviations-form": {
+        "title": "Counting standard deviations",
+        "script": [
+          {
+            "say": "DRAG a → 4\nσ = 2, so a = 2σ.\nBound 4 / 16 = 25.0%. Actual 4.6%."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 4,
+            "ms": 1000
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG a → 6\na = 3σ: bound 1/9 = 11.1%.\nActual 0.3%."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 6,
+            "ms": 1100
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG a → 8\na = 4σ: bound 1/16 = 6.3%.\nActual 0.0%."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 8,
+            "ms": 1100
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "DRAG a → 10\na = 5σ: bound 1/25 = 4.0%.\nBound falls as 1/k²."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 10,
+            "ms": 1100
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "using-the-control-sliders": {
+        "title": "Moving mean, variance and a",
+        "script": [
+          {
+            "say": "DRAG a → 4\nRed lines to μ−a = 6 and μ+a = 14.\nBound 4.00 / 16.0 = 25.0%."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 4,
+            "ms": 1000
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG σ² → 16\nCurve spreads; bound 16 / 16 = 100.0%.\nActual 31.7%."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 16,
+            "ms": 1500
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "DRAG a → 8\nTwice the distance, a quarter of the bound.\n16 / 64 = 25.0%. Actual 4.6%."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 8,
+            "ms": 1300
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "DRAG μ → 15\nCurve and both red lines shift right.\nBound and actual unchanged: 25.0%, 4.6%."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 15,
+            "ms": 1300
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      },
+      "bound-vs-actual": {
+        "title": "Same mean, different shapes",
+        "script": [
+          {
+            "say": "SELECT Binomial\nσ² fixed at 6.00; variance slider not used.\nBound 66.7%, actual 15.1%."
+          },
+          {
+            "set": "select",
+            "value": "binomial"
+          },
+          {
+            "wait": 3200
+          },
+          {
+            "say": "SELECT Poisson\nσ² = μ = 10.00. Bound capped at 100.0%.\nActual 26.5%."
+          },
+          {
+            "set": "select",
+            "value": "poisson"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "SELECT Exponential\nσ² = 100.00; one long right tail.\nBound 100.0%, actual 77.6%."
+          },
+          {
+            "set": "select",
+            "value": "exponential"
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "SELECT Normal\nVariance slider back in use: σ² = 4.\nBound 44.4%, actual 13.4%."
+          },
+          {
+            "set": "select",
+            "value": "normal"
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      }
+    }
+  };
+  const instructions = INSTRUCTIONS[params.view] || [];
+  const demos = DEMOS[params.view] || {};
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools(`probability-inequalities-${params.view}`),
       sectionsContent: currentConfig.sectionsContent,
       stateUnits,
@@ -1209,8 +1560,29 @@ export default function InequalityViewPage({
   schemas,
   currentView, 
   componentName, 
-  h1Title 
+  h1Title,
+  instructions,
+  demos
 }) {
+
+  // the tool as the page renders it live, mounted inside each demo
+  const demoTools = {
+    MarkovInequality: <MarkovInequality />,
+    ChebyshevInequality: <ChebyshevInequality />,
+  }
+  const demoTool = demoTools[componentName]
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      {demoTool}
+    </ToolDemoPlayer>
+  )
 
   const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
     const src = sectionsContent[obj]
@@ -1222,6 +1594,10 @@ export default function InequalityViewPage({
     }
     return { id, title: src.title, link: src.link || '', content: body }
   }).filter(Boolean);
+  // each demo goes at the top of its usage section
+  genericSections.forEach((row) => {
+    if (demos && demos[row.id] && demoTool) row.content = [demo(row.id), ...row.content]
+  })
 
   return (
     <>
@@ -1280,6 +1656,10 @@ export default function InequalityViewPage({
       <br />
       <br />
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>{h1Title}</h1>
+      <div style={{width:'80%', margin:'auto'}}>
+        <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+      </div>
+      <br/>
       <br />
       <br />
 

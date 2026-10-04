@@ -12,6 +12,9 @@ import TotalProbabilityVisualizerV2 from '@/app/components/probability/total-pro
 import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -395,8 +398,119 @@ What does change is the arithmetic burden. Each extra branch adds a term to ever
     }
   }
 
+  const instructions = [
+    '**Number of A Events** (2 to 5) and **Number of B Outcomes** set the partition and the outcomes; more A events lower the B maximum, and every change resets the probabilities to equal values. [Learn more about using the visualizer](!#using-the-visualizer)',
+    'The tree runs left to right: each branch carries $P(A_i)$, each leaf carries $P(B_j|A_i)$, and the note above it links to the section for the state shown. [Learn more about the default tree](!#the-default-tree)',
+    '**▲ Customize Data** opens sliders for every $P(A_i)$ and $P(B_j|A_i)$; each group is auto-normalized to sum to 1, and **▼ Close** shuts the panel. [Learn more about customizing the data](!#using-the-visualizer)',
+    'Click a **Marginal Probabilities** row such as $P(B_2)$ to highlight every path that ends in that outcome; the row shows the total probability sum it comes from. [Learn more about the calculations panel](!#the-calculations-panel)',
+    'The **View All Paths Through A Event** buttons highlight one branch and all its leaves; a **Joint Probabilities** row highlights a single path, and **Clear Selection** removes the highlight. [Learn more about paths and joint probabilities](!#the-calculations-panel)',
+    'The **Bayes\' Theorem** block reverses the conditioning, listing $P(A_i|B_j)$ for each outcome $B_j$. [Learn more about the Bayes block](!#the-calculations-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real TotalProbabilityVisualizerV2
+     (opens on 3 A events x 3 B outcomes: P(A) = 0.33, 0.33, 0.34). The partition
+     buttons share labels: nth 0 = Number of A Events, nth 1 = Number of B Outcomes.
+     The Customize Data sliders renormalise on every input event, so a dragged slide
+     ends somewhere else than an instant replay; the demo sets them with { set }
+     instead. { set } types character by character in live play, so the values are
+     single characters: 1 clamps to the slider maximum 0.99 in both live play and
+     replay. Ranges in DOM order: 0-2 = P(A1..A3), 3-5 = P(Bj|A1). */
+  const demos = {
+    'using-the-visualizer': {
+      title: 'Customizing the probabilities',
+      script: [
+        { say: `TAP ▲ Customize Data
+Sliders open over the tree.
+P(A) = 0.330, 0.330, 0.340.`, at: 'bl' },
+        { click: { button: '▲Customize Data', exact: true } },
+        { wait: 2600 },
+        { say: `SET P(A1) → max (0.99)
+Auto-normalized: 0.598, 0.198, 0.204.
+Still sums to 1.`, at: 'bl' },
+        { set: { range: 0 }, value: 1 },
+        { wait: 2800 },
+        { say: `SET P(B1|A1) → max (0.99)
+Row A1 renormalized: 0.622, 0.189, 0.189.
+P(B1) rises to 0.4719.`, at: 'bl' },
+        { set: { range: 3 }, value: 1 },
+        { wait: 3000 },
+        { say: `TAP ▼ Close
+Panel shut. Tree and calculations
+keep the new values.`, at: 'bl' },
+        { click: { button: '▼Close', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Number of A Events → 3
+Every probability reset to equal:
+P(Aᵢ) = 1/3, P(Bⱼ) = 0.3333.`, at: 'bl' },
+        { click: { button: '3', exact: true, nth: 0 } },
+        { wait: 2800 },
+      ],
+    },
+    'the-calculations-panel': {
+      title: 'Marginals, paths and joints',
+      script: [
+        { say: `TAP P(B2) = 0.3660
+Three paths into B2 light up.
+0.099 + 0.165 + 0.102 = 0.366.`, at: 'bl' },
+        { click: { text: 'P(B2) = 0.3660' } },
+        { wait: 3000 },
+        { say: `TAP A2 in View All Paths
+Branch A2 and its three leaves.
+0.099 + 0.165 + 0.066 = 0.330 = P(A2).`, at: 'bl' },
+        { click: { button: 'A2', exact: true } },
+        { wait: 3000 },
+        { say: `TAP P(A3 ∩ B3) = 0.1700
+One path: 0.34 × 0.50.
+Multiply along the path.`, at: 'bl' },
+        { click: { text: 'P(A3 ∩ B3) = 0.1700' } },
+        { wait: 2800 },
+        { say: `TAP P(B1) = 0.2990
+Bayes, Given B1:
+P(A1|B1) = 0.132 / 0.299 = 0.4415.`, at: 'bl' },
+        { click: { text: 'P(B1) = 0.2990' } },
+        { wait: 3000 },
+        { say: `TAP Clear Selection
+All paths back to grey.`, at: 'bl' },
+        { click: { button: 'Clear Selection', exact: true } },
+        { wait: 2200 },
+      ],
+    },
+    'changing-the-partition-size': {
+      title: 'Partition size',
+      script: [
+        { say: `TAP Number of A Events → 2
+P(A1) = P(A2) = 0.500.
+B outcomes: 3 (max: 5).`, at: 'bl' },
+        { click: { button: '2', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP Number of B Outcomes → 5
+Ten leaves.
+Each P(Bⱼ) = 0.2000.`, at: 'bl' },
+        { click: { button: '5', exact: true, nth: 1 } },
+        { wait: 2600 },
+        { say: `TAP Number of A Events → 5
+B outcomes forced down to 2 (max: 2).
+P(Aᵢ) = 0.200. P(B1) = P(B2) = 0.5000.`, at: 'bl' },
+        { click: { button: '5', exact: true, nth: 0 } },
+        { wait: 3000 },
+        { say: `TAP Number of A Events → 4
+P(Aᵢ) = 0.250. B outcomes: 2 (max: 3).
+Eight leaves.`, at: 'bl' },
+        { click: { button: '4', exact: true, nth: 0 } },
+        { wait: 2800 },
+        { say: `TAP Number of B Outcomes → 3
+Twelve leaves.
+Marginals still sum to 1.`, at: 'bl' },
+        { click: { button: '3', exact: true, nth: 1 } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('probability-total-probability'),
       sectionsContent,
       stateUnits,
@@ -416,7 +530,22 @@ What does change is the arithmetic burden. Each extra branch adds a term to ever
   }
 }
 
-export default function TotalProbabilityPage({relatedTools, seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
+export default function TotalProbabilityPage({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <TotalProbabilityVisualizerV2 explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -439,12 +568,12 @@ export default function TotalProbabilityPage({relatedTools, seoData, sectionsCon
   // this page previously generated its sections from Object.keys(sectionsContent)
   // with numeric ids; replaced with an explicit slug list
   const genericSections = [
-    plain('obj1', 'using-the-visualizer'),
-    plain('obj2', 'the-calculations-panel'),
+    withDemo(plain('obj1', 'using-the-visualizer')),
+    withDemo(plain('obj2', 'the-calculations-panel')),
     stateRow('obj13', 'the-default-tree', 'overview'),
     stateRow('obj14', 'following-a-single-branch', 'branch'),
     stateRow('obj15', 'summing-across-branches', 'outcome'),
-    stateRow('obj16', 'changing-the-partition-size', 'wide'),
+    withDemo(stateRow('obj16', 'changing-the-partition-size', 'wide')),
     plain('obj3', 'what-is-the-law-of-total-probability'),
     plain('obj4', 'partitions-of-the-sample-space'),
     plain('obj5', 'connection-to-bayes-theorem'),
@@ -517,6 +646,10 @@ export default function TotalProbabilityPage({relatedTools, seoData, sectionsCon
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Total Probability Visualizer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <div style={{transform:'scale(0.85)'}}>
         <TotalProbabilityVisualizerV2 explanations={explanations}/>

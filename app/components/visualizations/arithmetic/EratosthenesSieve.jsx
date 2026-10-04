@@ -132,6 +132,11 @@ const EratosthenesSieve = ({ explanations = null }) => {
     return () => clearTimeout(timer);
   }, [isRunning, phase, step, speed, sieveState]);
 
+  // a finished run stops itself, so the button returns to ▶ Start
+  useEffect(() => {
+    if (phase === 'done' && isRunning) setIsRunning(false);
+  }, [phase, isRunning]);
+
   const getCompositeBackground = (crossedBy) => {
     if (!Array.isArray(crossedBy) || crossedBy.length === 0) return '#f8fafc';
     

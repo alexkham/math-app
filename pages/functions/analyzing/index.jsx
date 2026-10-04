@@ -992,6 +992,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionDomainDiagrams from '@/app/components/functions/domain/functionDomainDiagrams'
 import functionSymmetryDiagrams from '@/app/components/functions/symmetry/functionSymmetryDiagrams'
 import functionAsymptotesDiagrams from '@/app/components/functions/asymptotes/functionAsymptotesDiagrams'
+import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
+import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
 
 
 export async function getStaticProps(){
@@ -1645,6 +1647,35 @@ const faqQuestions = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const cfSinePeriod = {
+    kind: 'single', title: 'The sine wave repeats every 2 pi',
+    xRange: [-0.3, 4 * Math.PI + 0.4], yRange: [-1.9, 1.95], panelHeight: 250, panelWidth: 520, xTicks: 'pi',
+    yTicks: [{ at: 1, label: '1' }, { at: -1, label: '−1' }],
+    style: { primary: '#2563EB', primaryLight: '#93C5FD', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#B45309', negation: '#C0392B' },
+    panels: [{
+      curves: [{ fn: 'sin', A: 1, color: 'primary' }],
+      marks: [
+        { type: 'midline', at: 0, color: 'muted' },
+        { type: 'points', at: [Math.PI / 2, 5 * Math.PI / 2], y: [1, 1], color: 'resultStroke', r: 4 },
+        { type: 'dimension', y: 1.55, from: Math.PI / 2, to: 5 * Math.PI / 2, label: 'peak to peak: period 2π', color: 'resultStroke' },
+        { type: 'bracket', orient: 'h', y: -1.45, from: 0, to: 2 * Math.PI, label: 'one cycle', color: 'secondary' },
+        { type: 'bracket', orient: 'h', y: -1.45, from: 2 * Math.PI, to: 4 * Math.PI, label: 'the same cycle again', color: 'secondary' },
+      ],
+    }],
+  };
+
+  const fpMonotone = {
+    kind: 'monotone', svgTitle: 'y = x^2 falls on (-inf, 0) and rises on (0, inf)', idPrefix: 'fp-mono',
+    f: (x) => x * x, xRange: [-2.6, 2.6], yRange: [-1, 6.5], from: -2.5, to: 2.5,
+    turn: { x: 0, label: 'turning point (0, 0)' }, arrowAt: [-1.6, 1.6], wordAt: 1.4, curveLabel: { text: 'y = x²', x: 2.3, y: 6.2 },
+    decText: 'decreasing on (−∞, 0)', incText: 'increasing on (0, ∞)', caption: 'Moving right, the curve falls until x = 0, then rises',
+  };
+  const fpExtrema = {
+    kind: 'extrema', svgTitle: 'Local and absolute extrema of x^3 - 3x on [-2.2, 2.2]',
+    f: (x) => x * x * x - 3 * x, xRange: [-2.6, 2.6], yRange: [-4.8, 4.8], domain: [-2.2, 2.2],
+    local: [{ x: -1, label: 'local max 2' }, { x: 1, label: 'local min −2', below: true }], title: 'f(x) = x³ − 3x on [−2.2, 2.2]',
+  };
+
   const demoUnits = {
     domainGraph: demoUnitFrame({
       svg: functionDomainDiagrams.sqrt,
@@ -1666,6 +1697,21 @@ const faqQuestions = {
       text: 'Toward the right the curve sinks ever closer to the dashed line y = 0 without touching it: that line is a horizontal asymptote, and it is the end behaviour of the function written as a level. Toward the left the curve climbs without bound instead. Scan the far ends of any family on the',
       href: '/functions/visual-tools/asymptotes',
       linkText: 'asymptotes explorer',
+    }),
+    sinePeriod: demoUnitFrame({
+      svg: renderCurveFeature(cfSinePeriod),
+      caption: 'Reading the period from two peaks',
+      text: 'The graph of sin x from 0 to 4&#960;. The stretch from 0 to 2&#960; is one complete cycle, and the stretch from 2&#960; to 4&#960; repeats it exactly. Measuring between two consecutive peaks, at &#960;/2 and 5&#960;/2, gives the same 2&#960; &#8212; any pair of matching points one cycle apart does.',
+    }),
+    monotoneSquare: demoUnitFrame({
+      svg: renderFunctionPlot(fpMonotone),
+      caption: 'Falling, then rising',
+      text: 'The section\'s example, f(x) = x&#178;. Read left to right: the curve falls until x = 0 and rises after it, and the turning point (0, 0) separates the two. The bars underneath repeat the answer the way it is written &#8212; as intervals of x: decreasing on (&#8722;&#8734;, 0), increasing on (0, &#8734;). The heights do the falling and rising, but the intervals name inputs.',
+    }),
+    extremaCubic: demoUnitFrame({
+      svg: renderFunctionPlot(fpExtrema),
+      caption: 'Local peaks against the highest point',
+      text: 'f(x) = x&#179; &#8722; 3x on the closed interval [&#8722;2.2, 2.2]. The peak at x = &#8722;1 and the valley at x = 1 are local extrema: each beats only the values near it. Across the whole interval, the highest and lowest values sit at the endpoints, f(2.2) &#8776; 4.05 and f(&#8722;2.2) &#8776; &#8722;4.05 &#8212; absolute extrema that are not peaks or valleys at all.',
     }),
   };
 
@@ -1742,6 +1788,8 @@ export default function AnalyzingFunctionsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-monotoneSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.monotoneSquare }} />,
+          `At the turning point itself the function is neither increasing nor decreasing: the intervals are open at x = 0.`,
         ]
     },
     {
@@ -1760,6 +1808,8 @@ export default function AnalyzingFunctionsPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-extremaCubic'} dangerouslySetInnerHTML={{ __html: demoUnits.extremaCubic }} />,
+          `Widen the interval and the endpoints climb further, while the local max 2 and min −2 stay where they are.`,
         ]
     },
     {
@@ -1778,6 +1828,8 @@ export default function AnalyzingFunctionsPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-sinePeriod'} dangerouslySetInnerHTML={{ __html: demoUnits.sinePeriod }} />,
+          `A shorter shift never lands on a matching point everywhere at once, which is why 2π is the smallest such p.`,
         ]
     },
     {

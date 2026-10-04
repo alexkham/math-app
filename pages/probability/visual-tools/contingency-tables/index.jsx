@@ -19,6 +19,9 @@ import explanations2x2 from '@/app/components/probability/conditional-probabilit
 import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -470,6 +473,20 @@ This shape is also where independence becomes a real question rather than a chec
     link: '',
   },
 
+  obj15: {
+    title: `Reading the Explanation Panel`,
+    content: `Every table has an explanation panel on the left, under the joint table. In the 2×2 table it sits below the three sliders; in the 2×3, 2×4 and 3×3 tables it has two tabs, **Explanations** and **Controls**.
+
+With nothing selected, the panel reads "No selection made" and asks for a click. Click a cell of the joint table and it explains that joint probability: for $P(A \\cap B)$ in the 2×2 table, that it is the probability that both events occur and that it equals $P(A) \\times P(B|A)$. Click a row in a conditional panel and the text switches to that conditional probability, naming the row or column the sample space is restricted to and the marginal that serves as the denominator.
+
+The **Controls** tab of the larger tables holds a short how-to for the table itself: what clicking a cell, a conditional row or a Row Explanations accordion does. Switching to another table size returns the panel to its Explanations tab.
+
+The red **Clear Selection** button appears as soon as anything is highlighted. It removes the highlight from the cell and from the marginal and returns the panel to its opening text; clicking a highlighted cell a second time does the same. For the formulas behind every explanation, see [joint, marginal and conditional probabilities](!#joint-marginal-conditional).`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
 }
 
 
@@ -577,8 +594,154 @@ This shape is also where independence becomes a real question rather than a chec
     }
   }
 
+  const instructions = [
+    'The **2×2 Table**, **2×3 Table**, **2×4 Table** and **3×3 Table** tabs switch between four contingency tables; only the 2×2 table has sliders, the other three are fixed examples. [Learn more about comparing table sizes](!#comparing-table-sizes)',
+    'In the 2×2 table the $P(A)$, $P(B|A)$ and $P(B|A^c)$ sliders run from 0.01 to 0.99 and rebuild every joint, marginal and conditional value at once. [Learn more about the 2×2 sliders](!#using-the-2x2-table)',
+    'Each cell of the **Joint Probability Table** holds a joint probability such as $P(A \\cap B)$; click a cell to outline it in its own colour and explain it in the panel. [Learn more about the joint table](!#reading-the-joint-table)',
+    'The **Total** row and column hold the marginal probabilities, each the sum of its row or column; the corner always reads 1.0000. [Learn more about marginal probabilities](!#marginal-probabilities)',
+    'The **Conditional on** panels list every conditional probability with its formula, such as $P(B|A) = P(A \\cap B) / P(A)$; click a row to highlight its joint cell, the numerator, and its marginal, the denominator. [Learn more about the conditional panels](!#conditional-probability-panels)',
+    'In the 2×3, 2×4 and 3×3 tables, **▶ Row Explanations** opens a short list above each conditional panel naming what each of its rows is. [Learn more about the Row Explanations accordions](!#conditional-probability-panels)',
+    'The explanation panel describes the selected cell or conditional row; in the larger tables its **Controls** tab holds a how-to, and **Clear Selection** removes every highlight. [Learn more about the explanation panel](!#the-explanation-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real four-tab frame, with
+     syncUrl={false} so the demos neither read nor write ?table=. Opens on the 2x2
+     table: P(A) = 0.6, P(B|A) = 0.7, P(B|Ac) = 0.3. Ranges 0-2 = the three 2x2
+     sliders. Joint cells: td[style*="cursor: pointer"] (2x2 nth 0 = A∩B, 1 = A∩Bc,
+     2 = Ac∩B, 3 = Ac∩Bc). Conditional rows: tr.clickable-row in panel order (2x2:
+     0 P(B|A), 3 P(Bc|Ac), 4 P(A|B), 6 P(A|Bc); 3x3: 9 = P(A1|B1)). The larger
+     tables open on their Explanations tab, which prints the page's anchor HTML as
+     text, so the size steps switch to the Controls tab at once. */
+  const demos = {
+    'using-the-2x2-table': {
+      title: 'The three 2×2 sliders',
+      script: [
+        { say: `DRAG P(A) → 0.50
+Rows A and Aᶜ: 0.5000 each.
+Cells 0.35, 0.15 / 0.15, 0.35.`, at: 'tr' },
+        { slide: { range: 0 }, to: 0.5, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG P(B|A) → 0.90
+Row A splits 0.4500 / 0.0500.
+P(B) total = 0.6000.`, at: 'tr' },
+        { slide: { range: 1 }, to: 0.9, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG P(B|Aᶜ) → 0.90
+P(B) = 0.9000 = P(B|A) = P(B|Aᶜ).
+Independent: P(A|B) = 0.5000 = P(A).`, at: 'tr' },
+        { slide: { range: 2 }, to: 0.9, ms: 1400 },
+        { wait: 3000 },
+        { say: `DRAG P(A) → 0.20
+P(B) stays 0.9000.
+P(A|B) = 0.2000 = P(A). Still independent.`, at: 'tr' },
+        { slide: { range: 0 }, to: 0.2, ms: 1400 },
+        { wait: 3000 },
+        { say: `DRAG P(B|Aᶜ) → 0.10
+P(B) = 0.2600.
+P(A|B) = 0.18 / 0.26 = 0.6923. Dependent.`, at: 'tr' },
+        { slide: { range: 2 }, to: 0.1, ms: 1400 },
+        { wait: 3000 },
+      ],
+    },
+    'reading-the-joint-table': {
+      title: 'Joint cells and their totals',
+      script: [
+        { say: `TAP cell A ∩ B
+0.4200 outlined green.
+Panel: P(A) × P(B|A) = 0.6 × 0.7.`, at: 'tr' },
+        { click: { css: 'td[style*="cursor: pointer"]', nth: 0 } },
+        { wait: 2800 },
+        { say: `TAP cell A ∩ Bᶜ
+0.1800 outlined amber.
+Row A: 0.42 + 0.18 = 0.6000 = P(A).`, at: 'tr' },
+        { click: { css: 'td[style*="cursor: pointer"]', nth: 1 } },
+        { wait: 2800 },
+        { say: `TAP cell Aᶜ ∩ B
+0.1200 outlined purple.
+Column B: 0.42 + 0.12 = 0.5400 = P(B).`, at: 'tr' },
+        { click: { css: 'td[style*="cursor: pointer"]', nth: 2 } },
+        { wait: 2800 },
+        { say: `TAP cell Aᶜ ∩ Bᶜ
+0.2800 outlined red.
+Four cells sum to 1.0000.`, at: 'tr' },
+        { click: { css: 'td[style*="cursor: pointer"]', nth: 3 } },
+        { wait: 2600 },
+        { say: `TAP Aᶜ ∩ Bᶜ again
+Highlight off.
+Panel: No selection made.`, at: 'tr' },
+        { click: { css: 'td[style*="cursor: pointer"]', nth: 3 } },
+        { wait: 2400 },
+      ],
+    },
+    'conditional-probability-panels': {
+      title: 'Conditional rows',
+      script: [
+        { say: `TAP P(B|A) in Conditional on A
+Cell A ∩ B + total P(A) highlighted.
+0.42 / 0.60 = 0.7000.`, at: 'tr' },
+        { click: { css: 'tr.clickable-row', nth: 0 } },
+        { wait: 2800 },
+        { say: `TAP P(A|B) in Conditional on B
+Same cell, now over P(B).
+0.42 / 0.54 = 0.7778 ≠ P(B|A).`, at: 'tr' },
+        { click: { css: 'tr.clickable-row', nth: 4 } },
+        { wait: 3000 },
+        { say: `TAP P(Bᶜ|Aᶜ) in Conditional on Aᶜ
+Restricted to row Aᶜ.
+0.28 / 0.40 = 0.7000.`, at: 'bl' },
+        { click: { css: 'tr.clickable-row', nth: 3 } },
+        { wait: 2800 },
+        { say: `TAP P(A|Bᶜ) in Conditional on Bᶜ
+Restricted to column Bᶜ.
+0.18 / 0.46 = 0.3913.`, at: 'tr' },
+        { click: { css: 'tr.clickable-row', nth: 6 } },
+        { wait: 2800 },
+        { say: `TAP Clear Selection
+All highlights off.
+Panel: No selection made.`, at: 'tr' },
+        { click: { button: 'Clear Selection', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'comparing-table-sizes': {
+      title: 'Larger tables',
+      script: [
+        { say: `TAP 2×3 Table → Controls
+Columns B₁ B₂ B₃.
+Totals 0.4200, 0.3400, 0.2400.`, at: 'bl' },
+        { click: { button: '2×3 Table', exact: true } },
+        { click: { button: 'Controls', exact: true } },
+        { wait: 2800 },
+        { say: `TAP 2×4 Table → Controls
+Four columns.
+Totals 0.2600, 0.2900, 0.2500, 0.2000.`, at: 'bl' },
+        { click: { button: '2×4 Table', exact: true } },
+        { click: { button: 'Controls', exact: true } },
+        { wait: 2800 },
+        { say: `TAP 3×3 Table → Controls
+Rows 0.3000, 0.4000, 0.3000.
+Columns 0.3450, 0.3550, 0.3000.`, at: 'bl' },
+        { click: { button: '3×3 Table', exact: true } },
+        { click: { button: 'Controls', exact: true } },
+        { wait: 3000 },
+        { say: `TAP ▶ Row Explanations
+Conditional on A₁ opens its list:
+P(B₁|A₁), P(B₂|A₁), P(B₃|A₁).`, at: 'bl' },
+        { click: { text: 'Row Explanations' } },
+        { wait: 2800 },
+        { say: `TAP P(A₁|B₁) in Conditional on B₁
+Cell A₁ ∩ B₁ + total P(B₁) highlighted.
+0.1200 / 0.3450 = 0.3478.`, at: 'bl' },
+        { click: { css: 'tr.clickable-row', nth: 9 } },
+        { wait: 3000 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('probability-contingency-tables'),
       sectionsContent,
       faqQuestions,
@@ -596,7 +759,31 @@ This shape is also where independence becomes a real question rather than a chec
   }
 }
 
-export default function ContingencyTablesVisualToolsPage({relatedTools, seoData, sectionsContent, faqQuestions, schemas}) {
+export default function ContingencyTablesVisualToolsPage({ instructions, demos,relatedTools, seoData, sectionsContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <GenericMultiComponentFrame
+        components={tableComponents}
+        initialActive={1}
+        explanations={tableExplanations}
+        buttonMinWidth="140px"
+        primaryColor="#007bff"
+        paramName="table"
+        defaultSlug="2x2"
+        syncUrl={false}
+      />
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const tableComponents = [
     {
@@ -701,11 +888,12 @@ const stateRow = (obj, id, title, unitKey) => ({
 // this array previously carried hardcoded titles and numeric ids
 const genericSections = [
   plain('obj1', 'getting-started', 'Getting Started with Contingency Tables'),
-  plain('obj2', 'using-the-2x2-table', 'Using the 2\u00D72 Interactive Table'),
-  plain('obj3', 'reading-the-joint-table', 'Reading the Joint Probability Table'),
+  withDemo(plain('obj2', 'using-the-2x2-table', 'Using the 2\u00D72 Interactive Table')),
+  withDemo(plain('obj3', 'reading-the-joint-table', 'Reading the Joint Probability Table')),
   plain('obj4', 'marginal-probabilities', 'Understanding Marginal Probabilities'),
-  plain('obj5', 'conditional-probability-panels', 'Exploring Conditional Probability Panels'),
-  plain('obj6', 'comparing-table-sizes', 'Comparing Different Table Sizes'),
+  withDemo(plain('obj5', 'conditional-probability-panels', 'Exploring Conditional Probability Panels')),
+  plain('obj15', 'the-explanation-panel', 'Reading the Explanation Panel'),
+  withDemo(plain('obj6', 'comparing-table-sizes', 'Comparing Different Table Sizes')),
   stateRow('obj11', 'the-2x2-table', 'The 2\u00D72 Table: Two Events and Their Complements', '2x2'),
   stateRow('obj12', 'the-2x3-table', 'The 2\u00D73 Table: One Event Against Three Outcomes', '2x3'),
   stateRow('obj13', 'the-2x4-table', 'The 2\u00D74 Table: Four Outcomes', '2x4'),
@@ -772,6 +960,10 @@ const genericSections = [
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Contingency Tables</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <br/>
       <div style={{transform:'scale(0.95)'}}>

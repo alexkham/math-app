@@ -1365,6 +1365,10 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionInverseDiagrams from '@/app/components/functions/inverse/functionInverseDiagrams'
+import renderSetElementsV2 from '@/app/utils/illustrations/set-theory/relationships/setElements.v2'
+import renderInverseMirror from '@/app/utils/illustrations/functions/inverse/inverseMirror'
+import renderCompositionSteps from '@/app/utils/illustrations/functions/composition/compositionSteps'
+import renderLineTestV2 from '@/app/utils/illustrations/functions/graphs/lineTest.v2'
 
 
 export async function getStaticProps(){
@@ -2409,6 +2413,41 @@ const faqQuestions = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const seReversible = {
+    kind: 'pairing', svgTitle: 'Doubling can be undone; squaring cannot',
+    style: { primary: '#2563EB', primaryLight: '#DBEAFE', secondary: '#06357A', secondaryLight: '#E8EEF7', result: '#B45309', resultFill: '#FDF3E3', text: '#1E3A5F' },
+    panels: [
+      { leftName: 'input x', rightName: 'f(x) = 2x', left: ['−1', '0', '3'], right: ['−2', '0', '6'],
+        pairs: [[0, 0], [1, 1], [2, 2]], verdict: 'each output from one input: reversible', ok: true },
+      { leftName: 'input x', rightName: 'f(x) = x²', left: ['−3', '−2', '2', '3'], right: ['4', '9'],
+        pairs: [[0, 1], [1, 0], [2, 0], [3, 1]], verdict: '9 comes from 3 and −3: no way back', ok: false },
+    ],
+  };
+  const imSwap = {
+    kind: 'swapPoints', svgTitle: 'Points (2, 5) and (-1, 3) on f reflect to (5, 2) and (3, -1) on the inverse', range: [-2, 6],
+    pairs: [{ a: 2, b: 5, fPos: 'nw', invPos: 'se' }, { a: -1, b: 3, fPos: 'nw', invPos: 'se' }],
+    fixed: [{ v: 4, pos: 'se', text: '(4, 4) stays put' }],
+    caption: 'Swapping the coordinates reflects a point across y = x',
+  };
+  const csInvF = { name: 'f', rule: '5x − 2', fn: (x) => 5 * x - 2 };
+  const csInvG = { name: 'g', rule: '(x + 2)/5', fn: (x) => (x + 2) / 5 };
+  const csRoundTrip = {
+    kind: 'chain', idPrefix: 'csinv', svgTitle: 'f(g(3)) = 3 and g(f(3)) = 3 for f(x) = 5x - 2, g(x) = (x + 2)/5',
+    rows: [
+      { title: 'f(g(3))', input: 3, steps: [csInvG, csInvF], note: 'g first, then f' },
+      { title: 'g(f(3))', input: 3, steps: [csInvF, csInvG], note: 'f first, then g' },
+    ],
+    caption: 'Both orders bring 3 back: g undoes f and f undoes g',
+  };
+  const ltSquareCube = {
+    kind: 'horizontal', svgTitle: 'Horizontal line test: x squared fails, x cubed passes',
+    panels: [
+      { title: 'f(x) = x²', f: (x) => x * x, from: -3, to: 3, lines: [4, 1], verdict: '−2 and 2 both give 4: no inverse' },
+      { title: 'f(x) = x³', f: (x) => x * x * x, from: -2, to: 2, lines: [4, 1, -3], verdict: 'one crossing per line: f⁻¹(x) = ∛x' },
+    ],
+    caption: 'Two crossings on one horizontal line = one output from two inputs',
+  };
+
   const demoUnits = {
     reflection: demoUnitFrame({
       svg: functionInverseDiagrams.cubic,
@@ -2430,6 +2469,33 @@ const faqQuestions = {
       text: 'The exponential and the logarithm are mirror images in y = x: the exponential&#8217;s horizontal asymptote y = 0 becomes the logarithm&#8217;s vertical asymptote x = 0, and the point (0, 1) becomes (1, 0). Domain and range have traded places. Compare the other classic pairs on the',
       href: '/functions/visual-tools/inverse-function',
       linkText: 'inverse function explorer',
+    }),
+    reversible: demoUnitFrame({
+      svg: renderSetElementsV2(seReversible),
+      caption: 'One function can be run backwards, the other cannot',
+      text: 'Doubling sends &#8722;1, 0 and 3 to &#8722;2, 0 and 6, and every output has exactly one arrow coming in, so each arrow can be followed back: f&#8315;&#185;(6) = 3. Squaring sends both 3 and &#8722;3 to 9; standing at 9 there are two arrows to retrace and no rule for choosing, so x&#178; on all real numbers has no inverse.',
+    }),
+    swapPoints: demoUnitFrame({
+      svg: renderInverseMirror(imSwap),
+      caption: 'Coordinates swapped, points mirrored',
+      text: 'The section\'s two points: (2, 5) on f becomes (5, 2) on f&#8315;&#185;, and (&#8722;1, 3) becomes (3, &#8722;1). Each pair is joined by a segment that meets the dashed line y = x at a right angle, halfway between the two points: that is exactly a reflection across y = x. A point already on the line, such as (4, 4), is its own swap and does not move.',
+    }),
+    sqrtSquare: demoUnitFrame({
+      svg: functionInverseDiagrams.sqrt,
+      caption: 'f(x) = &#8730;x and f&#8315;&#185;(x) = x&#178; for x &#8805; 0',
+      text: 'The square root takes inputs from [0, &#8734;) and returns outputs in [0, &#8734;); its inverse is only the right half of the parabola, with the same domain and range traded. The left half of x&#178; never appears, because &#8730;x never outputs a negative number for it to send back. Compare other inverse pairs and their domains on the',
+      href: '/functions/visual-tools/inverse-function',
+      linkText: 'inverse function explorer',
+    }),
+    roundTrip: demoUnitFrame({
+      svg: renderCompositionSteps(csRoundTrip),
+      caption: 'A round trip in both orders',
+      text: 'The section\'s pair, f(x) = 5x &#8722; 2 and g(x) = (x + 2)/5, run on the input 3. Through g then f: 3 becomes 1, then 3 again. Through f then g: 3 becomes 13, then 3 again. Both orders return the input unchanged, which is what the two composition conditions demand.',
+    }),
+    horizontalTest: demoUnitFrame({
+      svg: renderLineTestV2(ltSquareCube),
+      caption: 'The parabola fails, the cubic passes',
+      text: 'On the parabola, the line y = 4 crosses at x = &#8722;2 and x = 2: two inputs share the output 4, so the inverse would not know which to return. Every horizontal line meets the cubic exactly once, so each output comes from one input and f&#8315;&#185;(x) = &#8731;x is well defined.',
     }),
   };
 
@@ -2488,6 +2554,8 @@ export default function InversePage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-reversible'} dangerouslySetInnerHTML={{ __html: demoUnits.reversible }} />,
+          `Only a function whose outputs each come from one input can be reversed.`,
         ]
     },
     {
@@ -2522,6 +2590,8 @@ export default function InversePage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-swapPoints'} dangerouslySetInnerHTML={{ __html: demoUnits.swapPoints }} />,
+          `Doing this to every point of the graph of f produces the graph of its inverse.`,
         ]
     },
     {
@@ -2538,6 +2608,8 @@ export default function InversePage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-sqrtSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.sqrtSquare }} />,
+          `The inverse inherits its domain from the range of f, so it is never larger than what f actually outputs.`,
         ]
     },
     {
@@ -2546,6 +2618,8 @@ export default function InversePage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-roundTrip'} dangerouslySetInnerHTML={{ __html: demoUnits.roundTrip }} />,
+          `One input is only a check; the algebra above proves the round trip for every x.`,
         ]
     },
     {
@@ -2554,6 +2628,8 @@ export default function InversePage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-horizontalTest'} dangerouslySetInnerHTML={{ __html: demoUnits.horizontalTest }} />,
+          `A failing graph can still be inverted on a smaller domain, as the restriction section below shows.`,
         ]
     },
     {

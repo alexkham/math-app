@@ -1215,6 +1215,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
 
 
 export async function getStaticProps(){
@@ -2103,6 +2105,55 @@ const faqQuestions = {
     },
   }
 
+  const fpSum = {
+    kind: 'sum', svgTitle: 'f + g at x = 2: 4 + 7 = 11', f: (x) => x * x, g: (x) => 5 * x - 3, x0: 2, xRange: [-1.2, 3], yRange: [-4, 15], yStep: 2,
+    fLabel: { text: 'f(x) = x²', x: -1.05 }, gLabel: { text: 'g(x) = 5x − 3', x: 0.25 }, sumLabel: { text: 'f + g', x: 2.75, y: 13.8 },
+    caption: 'At each x, stack the two outputs: 4 + 7 = 11',
+  };
+  const fpProduct = {
+    kind: 'product', svgTitle: 'fg is zero where f or g is zero', f: (x) => x + 2, g: (x) => x - 3, xRange: [-3.5, 4.5], yRange: [-7, 7], yStep: 2,
+    zeros: [{ x: -2, label: 'x = −2: f = 0', left: true, dy: 52 }, { x: 3, label: 'x = 3: g = 0', factor: 'g' }],
+    fLabel: { text: 'f(x) = x + 2', x: 3.4 }, gLabel: { text: 'g(x) = x − 3', x: -3.3 }, productLabel: { text: 'fg = x² − x − 6', x: 0.5, y: -6.25 },
+    caption: 'The product is zero exactly where one factor is zero',
+  };
+  const fpQuotient = {
+    kind: 'quotient', svgTitle: '(x^2 - 1)/(x + 1) is x - 1 with a hole at x = -1', q: (x) => x - 1, xRange: [-3.5, 3.5], yRange: [-4.5, 3.5], yStep: 1,
+    hole: { x: -1, label: 'hole at (−1, −2)' }, note: 'g(−1) = 0: not in the domain', curveLabel: { text: '(x² − 1)/(x + 1)', x: 2.9 },
+    caption: 'Same line as x − 1, except at x = −1, where the quotient is undefined',
+  };
+  const fpDomain = {
+    kind: 'domain', svgTitle: 'Dom(f + g) is the overlap [0, 4]', range: [-2, 7],
+    rows: [
+      { label: 'Dom f, f(x) = √x', from: 0, to: null, color: 'f', tag: { text: '[0, ∞)', x: 5.5 } },
+      { label: 'Dom g, g(x) = √(4 − x)', from: null, to: 4, color: 'g', tag: { text: '(−∞, 4]', x: 2.5 } },
+      { label: 'Dom (f + g)', from: 0, to: 4, color: 'r', tag: { text: '[0, 4]', x: 2 } },
+    ],
+    caption: 'Only inputs in both domains survive: the overlap [0, 4]',
+  };
+
+  const demoUnits = {
+    sumStack: demoUnitFrame({
+      svg: renderFunctionPlot(fpSum),
+      caption: 'Adding outputs, one input at a time',
+      text: 'f(x) = x&#178; and g(x) = 5x &#8722; 3 from the text, with their sum. At x = 2 the bar for f(2) = 4 rises from the axis and the bar for g(2) = 7 sits on top of it; together they reach 11, exactly where the f + g curve passes. Every point of f + g is built the same way: same input, outputs added.',
+    }),
+    productZeros: demoUnitFrame({
+      svg: renderFunctionPlot(fpProduct),
+      caption: 'Where a product vanishes',
+      text: 'f(x) = x + 2 and g(x) = x &#8722; 3 multiply to (fg)(x) = x&#178; &#8722; x &#8722; 6. Two lines make a parabola, and its zeros are inherited: fg = 0 at x = &#8722;2, where f is zero, and at x = 3, where g is zero. Between them one factor is positive and the other negative, so the product dips below the axis.',
+    }),
+    quotientHole: demoUnitFrame({
+      svg: renderFunctionPlot(fpQuotient),
+      caption: 'A hole where the divisor is zero',
+      text: '(x&#178; &#8722; 1)/(x + 1) simplifies to x &#8722; 1, and the graph is that line &#8212; with one point missing. At x = &#8722;1 the divisor g(x) = x + 1 is zero, so the quotient has no value there, even though the simplified formula would give &#8722;2. The open circle marks the input the simplification hides.',
+    }),
+    domainOverlap: demoUnitFrame({
+      svg: renderFunctionPlot(fpDomain),
+      caption: 'The overlap of two domains',
+      text: '&#8730;x needs x &#8805; 0 and &#8730;(4 &#8722; x) needs x &#8804; 4. A sum, difference or product needs both functions defined at the same input, so its domain is where the two lines overlap: [0, 4]. Outside it, at least one part has no value.',
+    }),
+  };
+
    return {
       props:{
          sectionsContent,
@@ -2113,6 +2164,7 @@ const faqQuestions = {
          summaryTable,
          faqQuestions,
          schemas,
+         demoUnits,
           seoData: {
         title: "Function Arithmetic: Operations on Functions | Learn Math Class",
         description: "Learn function arithmetic: adding, subtracting, multiplying, and dividing functions. Master combined function domains, sum of functions, quotient of functions, and real-world applications.",
@@ -2133,7 +2185,8 @@ export default function ArithmeticPage({
   obj9Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas,
+  demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2161,6 +2214,8 @@ export default function ArithmeticPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-sumStack'} dangerouslySetInnerHTML={{ __html: demoUnits.sumStack }} />,
+          `The same picture with the bar for g(2) hung below f(2) instead of stacked on it is the difference f − g.`,
         ]
     },
     {
@@ -2177,6 +2232,8 @@ export default function ArithmeticPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-productZeros'} dangerouslySetInnerHTML={{ __html: demoUnits.productZeros }} />,
+          `A product of polynomials collects every zero of every factor; that is why factored form shows the zeros at a glance.`,
         ]
     },
     {
@@ -2185,6 +2242,8 @@ export default function ArithmeticPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-quotientHole'} dangerouslySetInnerHTML={{ __html: demoUnits.quotientHole }} />,
+          `Had the factor x + 1 not cancelled, x = −1 would be a vertical asymptote rather than a hole; either way it is excluded.`,
         ]
     },
     {
@@ -2203,6 +2262,8 @@ export default function ArithmeticPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-domainOverlap'} dangerouslySetInnerHTML={{ __html: demoUnits.domainOverlap }} />,
+          `For a quotient f/g, also remove the inputs where g(x) = 0 from this overlap.`,
         ]
     },
     {

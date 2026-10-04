@@ -1653,6 +1653,7 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionCompositionDiagrams from '@/app/components/functions/compositions/functionCompositionDiagrams'
+import renderCompositionSteps from '@/app/utils/illustrations/functions/composition/compositionSteps'
 
 
 export async function getStaticProps(){
@@ -2985,6 +2986,22 @@ const faqQuestions = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const csG = { name: 'g', rule: '3x − 2', fn: (x) => 3 * x - 2 };
+  const csF = { name: 'f', rule: 'x² + 1', fn: (x) => x * x + 1 };
+  const csChain = {
+    kind: 'chain', svgTitle: '(f o g)(4) = 101 and (g o f)(4) = 49',
+    rows: [
+      { title: '(f ∘ g)(4)', input: 4, steps: [csG, csF], note: 'inner g first, then f' },
+      { title: '(g ∘ f)(4)', input: 4, steps: [csF, csG], note: 'inner f first, then g' },
+    ],
+    caption: 'Work from the inside out — and the order matters: 101 ≠ 49',
+  };
+  const csGraphical = {
+    kind: 'graphical', svgTitle: '(f o g)(0) read from two graphs', a: 0,
+    g: { fn: (x) => 3 * x - 2, xRange: [-1.5, 2.5], yRange: [-3, 4], title: 'step 1 · graph of g(x) = 3x − 2' },
+    f: { fn: (x) => x * x + 1, xRange: [-3, 3], yRange: [-1, 10], title: 'step 2 · graph of f(x) = x² + 1' },
+  };
+
   const demoUnits = {
     compose: demoUnitFrame({
       svg: functionCompositionDiagrams.quadratic,
@@ -3006,6 +3023,16 @@ const faqQuestions = {
       text: 'Composed in either order the two curves collapse onto the line y = x: the logarithm undoes the exponential and the exponential undoes the logarithm, which is the defining property of an inverse pair drawn out. The only trace of the pair is the domain restriction x &gt; 0 inherited from ln. Check any candidate pair the same way on the',
       href: '/functions/visual-tools/composition',
       linkText: 'function composition explorer',
+    }),
+    insideOut: demoUnitFrame({
+      svg: renderCompositionSteps(csChain),
+      caption: 'Inside out, in both orders',
+      text: 'The section\'s two evaluations side by side. For (f &#8728; g)(4) the input goes through g first, 3(4) &#8722; 2 = 10, and that 10 is what f receives: 10&#178; + 1 = 101. Swap the order and f acts first: 4&#178; + 1 = 17, then g gives 3(17) &#8722; 2 = 49. Same two functions, same input, different results.',
+    }),
+    graphRead: demoUnitFrame({
+      svg: renderCompositionSteps(csGraphical),
+      caption: 'Two graph readings, one composition',
+      text: 'To find (f &#8728; g)(0) from graphs: on the graph of g, go from x = 0 to the curve and read g(0) = &#8722;2. That output is the next input &#8212; find &#8722;2 on the x-axis of f\'s graph, go up to the curve and read f(&#8722;2) = 5. Every point of f &#8728; g takes this pair of readings.',
     }),
   };
 
@@ -3089,6 +3116,8 @@ export default function CompositionPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-insideOut'} dangerouslySetInnerHTML={{ __html: demoUnits.insideOut }} />,
+          `The middle value never appears in the answer, but it decides it: 10 in one order, 17 in the other.`,
         ]
     },
     {
@@ -3163,6 +3192,8 @@ export default function CompositionPage({
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <div key={'unit-graphRead'} dangerouslySetInnerHTML={{ __html: demoUnits.graphRead }} />,
+          `If g(a) falls outside the part of f's graph you can see — or outside f's domain — the composition cannot be read there.`,
         ]
     },
     {

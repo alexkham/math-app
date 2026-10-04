@@ -12,6 +12,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import completeTheSquareDiagrams from '@/app/components/algebra/visualizers/equations/completeTheSquareDiagrams'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
+import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -741,6 +743,19 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpZeroProduct = {
+    kind: 'product', svgTitle: '(x - 2)(x - 3) = 0 exactly where x - 2 = 0 or x - 3 = 0', f: (x) => x - 2, g: (x) => x - 3, xRange: [-0.5, 5.5], yRange: [-4, 8], yStep: 2,
+    zeros: [{ x: 2, label: 'x = 2: x − 2 = 0', dy: 52 }, { x: 3, label: 'x = 3: x − 3 = 0', factor: 'g' }],
+    fLabel: { text: 'x − 2', x: 5.3 }, gLabel: { text: 'x − 3', x: -0.4 }, productLabel: { text: '(x − 2)(x − 3) = x² − 5x + 6', x: 2.5, y: 7 },
+    caption: 'The product is zero exactly where one factor is zero',
+  };
+  const fpFormulaRoots = { kind: 'pieces', svgTitle: '2x^2 - 3x - 5 = 0: roots 3/4 plus or minus 7/4', xRange: [-2, 4], yRange: [-7, 8],
+  pieces: [{ fn: (x) => 2 * x * x - 3 * x - 5, from: -2, to: 4, ends: [null, null], color: 'f', label: { text: 'y = 2x² − 3x − 5', x: 2.9, y: 6.5, pos: 'w' } }],
+  vlines: [{ x: 0.75, label: 'axis x = −b/2a = 3/4' }],
+  points: [{ x: -1, y: 0 }, { x: 2.5, y: 0 }],
+  notes: [{ x: -1.05, y: -1.6, text: '3/4 − 7/4 = −1', pos: 'w', color: 'r' }, { x: 2.55, y: -1.6, text: '3/4 + 7/4 = 5/2', pos: 'e', color: 'r' }],
+  caption: 'Roots = −b/2a ± √Δ/2a: 7/4 either side of the axis' };
+
   const demoUnits = {
     complete: demoUnitFrame({
       svg: completeTheSquareDiagrams['step-vertex'],
@@ -762,6 +777,23 @@ const schemas = {
       text: 'The two crossings of the parabola with the axis, at &#8722;2 and 2, are the two solutions of the equation: solving a quadratic and finding the x-intercepts of its graph are the same task. The vertex halfway between them sits on the axis of symmetry x = &#8722;b/2a. Drag the parabola and watch the intercepts move together on the',
       href: '/algebra/visual-tools/equation',
       linkText: 'equation visual explorer',
+    }),
+    notStandard: demoUnitFrame({
+      svg: equationVisualizerDiagrams['quad-high'],
+      caption: 'x&#178; &#8722; 2x &#8722; 3 = 5: a quadratic not yet in standard form',
+      text: 'The left side is drawn as a parabola and the right side 5 as a level above the axis; the solutions are where the two meet. Moving the 5 across gives x&#178; &#8722; 2x &#8722; 8 = 0, which lowers the parabola by 5 so the same solutions become its crossings of the axis, the standard-form picture. Shift the level yourself on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+    zeroProduct: demoUnitFrame({
+      svg: renderFunctionPlot(fpZeroProduct),
+      caption: 'Factoring turns one quadratic into two linear equations',
+      text: 'The section\'s x&#178; &#8722; 5x + 6 = (x &#8722; 2)(x &#8722; 3). The two factor lines cross the axis at x = 2 and x = 3, and the parabola, their product, is zero at exactly those inputs and nowhere else: a product vanishes only when one of its factors does.',
+    }),
+    formulaRoots: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpFormulaRoots),
+      caption: 'What the &#177; in the formula does',
+      text: 'The section\'s 2x&#178; &#8722; 3x &#8722; 5 = 0. The term &#8722;b/2a = 3/4 is the parabola\'s axis of symmetry; &#8730;&#916;/2a = &#8730;49/4 = 7/4 is how far each root sits from it. The &#177; sends one root left and one right: 3/4 &#8722; 7/4 = &#8722;1 and 3/4 + 7/4 = 5/2.',
     }),
   };
 
@@ -821,6 +853,8 @@ export default function QuadraticEquationsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-notStandard'} dangerouslySetInnerHTML={{ __html: demoUnits.notStandard }} />,
+          `Bringing an equation to standard form never changes its solutions, only how they are read.`,
         ]
     },
     {
@@ -848,6 +882,8 @@ export default function QuadraticEquationsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-zeroProduct'} dangerouslySetInnerHTML={{ __html: demoUnits.zeroProduct }} />,
+          `The zero-product property is why the right side must be 0 before factoring.`,
         ]
     },
     {
@@ -866,6 +902,8 @@ export default function QuadraticEquationsPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-formulaRoots'} dangerouslySetInnerHTML={{ __html: demoUnits.formulaRoots }} />,
+          `When the discriminant is 0 the half-width vanishes and the two roots merge on the axis.`,
         ]
     },
     {

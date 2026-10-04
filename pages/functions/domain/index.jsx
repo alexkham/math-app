@@ -900,6 +900,8 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionDomainDiagrams from '@/app/components/functions/domain/functionDomainDiagrams'
+import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
+import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
 
 
 export async function getStaticProps(){
@@ -1479,6 +1481,25 @@ const faqQuestions = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpNaturalRestricted = {
+    kind: 'domain', svgTitle: 'Natural domain of h(t) against the restricted domain [0, 4]', range: [-2, 7],
+    rows: [
+      { label: 'natural domain of h(t) = −16t² + 64t', from: null, to: null, color: 'f', tag: { text: '(−∞, ∞)', x: 5.5 } },
+      { label: 'restricted by the flight: launch to landing', from: 0, to: 4, color: 'r', tag: { text: '[0, 4]', x: 5.6 } },
+    ],
+    caption: 'The formula accepts every t; the situation keeps only 0 ≤ t ≤ 4',
+  };
+
+  const fpCombinedDomain = {
+    kind: 'domainOpen', svgTitle: 'Domain of sqrt(x)/(x - 3): [0, 3) union (3, inf)', range: [-2, 7],
+    rows: [
+      { label: 'the root needs x ≥ 0', color: 'f', segs: [[0, null, false]], tag: { text: '[0, ∞)', x: 5.5 } },
+      { label: 'the denominator needs x − 3 ≠ 0', color: 'g', segs: [[null, 3, false, true], [3, null, true]], tag: { text: 'x ≠ 3', x: 5.5 } },
+      { label: 'Dom f(x) = √x / (x − 3)', color: 'r', segs: [[0, 3, false, true], [3, null, true]], tag: { text: '[0, 3) ∪ (3, ∞)', x: 5.2 } },
+    ],
+    caption: 'All restrictions at once: keep only inputs that pass every one',
+  };
+
   const demoUnits = {
     rational: demoUnitFrame({
       svg: functionDomainDiagrams.reciprocal,
@@ -1500,6 +1521,23 @@ const faqQuestions = {
       text: 'The band covers only the positive half of the axis and the dot at 0 is open: the logarithm of 0 is undefined and the curve plunges toward the vertical asymptote there without ever reaching it. This is the one restriction with a strict inequality. See the asymptote and the open endpoint together on the',
       href: '/functions/visual-tools/domain',
       linkText: 'domain explorer',
+    }),
+    allReals: demoUnitFrame({
+      svg: functionDomainDiagrams.linearScale,
+      caption: 'Nothing to rule out',
+      text: 'A line like f(x) = 2x has no division, no root and no logarithm, so no input can fail: the graph runs on forever in both directions and every real number on the x-axis has a point above or below it. The domain is (&#8722;&#8734;, &#8734;). Compare functions with real restrictions on the',
+      href: '/functions/visual-tools/domain',
+      linkText: 'domain visualizer',
+    }),
+    naturalRestricted: demoUnitFrame({
+      svg: renderFunctionPlot(fpNaturalRestricted),
+      caption: 'What the formula allows, what the situation allows',
+      text: 'The projectile\'s height formula h(t) = &#8722;16t&#178; + 64t gives an output for every real t, so its natural domain is all real numbers. The situation keeps only the flight itself: from launch at t = 0 to landing at t = 4. The restricted domain [0, 4] is a choice made outside the formula, sitting inside the natural domain.',
+    }),
+    combinedDomain: demoUnitFrame({
+      svg: renderFunctionPlotV2(fpCombinedDomain),
+      caption: 'Two restrictions, one domain',
+      text: 'f(x) = &#8730;x / (x &#8722; 3), the section\'s first example. The square root keeps x &#8805; 0; the denominator removes the single point x = 3. Writing each restriction on its own line and keeping only what survives both gives [0, 3) &#8746; (3, &#8734;): 0 is included (filled dot), 3 is excluded (hollow dot).',
     }),
   };
 
@@ -1554,6 +1592,8 @@ export default function DomainPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-allReals'} dangerouslySetInnerHTML={{ __html: demoUnits.allReals }} />,
+          `For f(x) = 1/x the picture changes: a single gap at x = 0 is all that is missing.`,
         ]
     },
     {
@@ -1583,6 +1623,8 @@ export default function DomainPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-naturalRestricted'} dangerouslySetInnerHTML={{ __html: demoUnits.naturalRestricted }} />,
+          `A restricted domain can never be larger than the natural one: it only removes inputs the formula would otherwise accept.`,
         ]
     },
     {
@@ -1631,6 +1673,8 @@ export default function DomainPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-combinedDomain'} dangerouslySetInnerHTML={{ __html: demoUnits.combinedDomain }} />,
+          `The same line-by-line method handles any number of restrictions: one line per requirement, then the overlap.`,
         ]
     },
     {

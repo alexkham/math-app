@@ -8,6 +8,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -452,6 +454,84 @@ const schemas = {
 
 
 
+  const fpLogDoubling = { kind: 'pieces', svgTitle: 'log2 x: each doubling of x adds 1 to the output', xRange: [0, 9], yRange: [-3, 4],
+    pieces: [{ fn: (x) => Math.log2(x), from: 0.13, to: 9, ends: [null, null], color: 'f', label: { text: 'y = log₂ x', x: 8.6, y: Math.log2(8.6), pos: 'n' } }],
+    points: [{ x: 1, y: 0, label: '(1, 0)', pos: 'se' }, { x: 2, y: 1, label: '(2, 1)', pos: 'nw' }, { x: 4, y: 2, label: '(4, 2)', pos: 'nw' }, { x: 8, y: 3, label: '(8, 3)', pos: 'nw' }],
+    notes: [{ x: 3, y: -1.6, text: 'each doubling of x adds 1 to y', pos: 'e', color: 'r' }],
+    caption: 'log₂ x rises without bound, but ever more slowly' };
+  const fpLogAsymptote = { kind: 'pieces', svgTitle: 'log2 x falls to minus infinity and log1/2 x rises to plus infinity as x approaches 0', xRange: [-1, 6], yRange: [-4, 4],
+    pieces: [
+      { fn: (x) => Math.log2(x), from: 0.05, to: 6, ends: [null, null], color: 'f', label: { text: 'log₂ x', x: 5.5, y: Math.log2(5.5), pos: 'n' } },
+      { fn: (x) => -Math.log2(x), from: 0.05, to: 6, ends: [null, null], color: 'g', label: { text: 'log₁/₂ x', x: 5.5, y: -Math.log2(5.5), pos: 's' } },
+    ],
+    notes: [{ x: 0.3, y: -3.4, text: 'log₂ x → −∞ as x → 0⁺', pos: 'e', color: 'f' }, { x: 0.3, y: 3.4, text: 'log₁/₂ x → +∞ as x → 0⁺', pos: 'e', color: 'g' }],
+    caption: 'The y-axis is a vertical asymptote: the graphs never reach x = 0' };
+  const fpLogShiftRight = { kind: 'pieces', svgTitle: 'log2(x - 3): log2 x moved 3 right, asymptote x = 3', xRange: [-1, 10], yRange: [-3, 4],
+    pieces: [
+      { fn: (x) => Math.log2(x), from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0.13, 10]] },
+      { fn: (x) => Math.log2(x - 3), from: 3.13, to: 10, ends: [null, null], color: 'f', label: { text: 'y = log₂(x − 3)', x: 9, y: Math.log2(6), pos: 's' } },
+    ],
+    vlines: [{ x: 3, label: 'x = 3' }],
+    points: [{ x: 4, y: 0, label: '(4, 0)', pos: 'se' }, { x: 5, y: 1, label: '(5, 1)', pos: 'se' }],
+    notes: [{ x: 5.6, y: 3.6, text: 'dashed: y = log₂ x', pos: 'e', color: 'g' }],
+    caption: 'Shifting right 3 moves the asymptote to x = 3 and (1, 0) to (4, 0)' };
+  const fpLogShiftUp = { kind: 'pieces', svgTitle: 'log3 x + 2: log3 x moved up 2, asymptote unchanged', xRange: [0, 10], yRange: [-3, 5],
+    pieces: [
+      { fn: (x) => Math.log(x) / Math.log(3), from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0.05, 10]], label: { text: 'y = log₃ x', x: 8.5, y: Math.log(8.5) / Math.log(3), pos: 's' } },
+      { fn: (x) => Math.log(x) / Math.log(3) + 2, from: 0.02, to: 10, ends: [null, null], color: 'f', label: { text: 'y = log₃ x + 2', x: 8.5, y: Math.log(8.5) / Math.log(3) + 2, pos: 'n' } },
+    ],
+    points: [{ x: 1, y: 2, label: '(1, 2)', pos: 'se' }, { x: 3, y: 3, label: '(3, 3)', pos: 'se' }],
+    notes: [{ x: 3, y: -2, text: 'every point moves up 2; the asymptote stays at x = 0', pos: 'e', color: 'r' }],
+    caption: 'A vertical shift moves the anchors, not the asymptote' };
+  const fpLogStretch = { kind: 'pieces', svgTitle: '2 log2 x: log2 x stretched vertically by 2, (1, 0) fixed', xRange: [0, 9], yRange: [-4, 7],
+    pieces: [
+      { fn: (x) => Math.log2(x), from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0.13, 9]], label: { text: 'y = log₂ x', x: 7, y: Math.log2(7), pos: 's' } },
+      { fn: (x) => 2 * Math.log2(x), from: 0.25, to: 9, ends: [null, null], color: 'f', label: { text: 'y = 2 log₂ x', x: 3, y: 4.5, pos: 'n' } },
+    ],
+    points: [{ x: 1, y: 0, label: '(1, 0) stays fixed', pos: 'se' }, { x: 2, y: 1, label: '(2, 1)', pos: 'se' }, { x: 2, y: 2, label: '(2, 2)', pos: 'nw' }],
+    caption: 'Every height doubles; only the zero at x = 1 cannot move' };
+  const fpLogReflect = { kind: 'pieces', svgTitle: '-log2 x reflects across the x-axis; log2(-x) reflects across the y-axis', xRange: [-6, 6], yRange: [-3, 3],
+    pieces: [
+      { fn: (x) => Math.log2(x), from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0.13, 6]], label: { text: 'dashed: y = log₂ x', x: 5, y: Math.log2(5), pos: 'n' } },
+      { fn: (x) => -Math.log2(x), from: 0.13, to: 6, ends: [null, null], color: 'f', label: { text: 'y = −log₂ x', x: 5, y: -Math.log2(5), pos: 's' } },
+      { fn: (x) => Math.log2(-x), from: -6, to: -0.13, ends: [null, null], color: 'r', label: { text: 'y = log₂(−x)', x: -5, y: Math.log2(5), pos: 'n' } },
+    ],
+    points: [{ x: 2, y: -1, label: '(2, −1)', pos: 'ne' }, { x: -2, y: 1, label: '(−2, 1)', pos: 'sw' }],
+    caption: '−log₂ x flips across the x-axis; log₂(−x) flips across the y-axis' };
+
+  const demoUnits = {
+    doubling: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogDoubling),
+      caption: 'Equal steps from doubling',
+      text: 'log&#8322; x passes through (1, 0), (2, 1), (4, 2) and (8, 3): every time x doubles, the output goes up by exactly 1. That is why the curve keeps rising forever yet flattens out: reaching the next unit of height takes twice as long a stretch of x as the last one.',
+    }),
+    asymptote: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogAsymptote),
+      caption: 'Opposite directions at the same wall',
+      text: 'Near x = 0 both curves run along the y-axis without touching it. log&#8322; x plunges toward &#8722;&#8734; and log&#8321;&#8260;&#8322; x climbs toward +&#8734;, but neither ever reaches x = 0, where no power of the base gives 0. Away from the axis the two are mirror images across the x-axis.',
+    }),
+    shiftRight: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogShiftRight),
+      caption: 'Moving the asymptote',
+      text: 'The section\'s log&#8322;(x &#8722; 3) against the original log&#8322; x (dashed). Every point slides 3 units right: the asymptote moves from x = 0 to x = 3, (1, 0) becomes (4, 0) and (2, 1) becomes (5, 1). The domain becomes x &gt; 3.',
+    }),
+    shiftUp: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogShiftUp),
+      caption: 'Lifting the curve',
+      text: 'The section\'s log&#8323; x + 2 against log&#8323; x. Every point rises 2 units: (1, 0) becomes (1, 2) and (3, 1) becomes (3, 3). The asymptote is a vertical line, so a vertical shift leaves it at x = 0, and the domain is still x &gt; 0.',
+    }),
+    stretch: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogStretch),
+      caption: 'A vertical stretch by 2',
+      text: 'The section\'s 2 log&#8322; x against log&#8322; x. Every output is doubled, so (2, 1) becomes (2, 2) and the curve is steeper everywhere. The point (1, 0) cannot move, because doubling 0 still gives 0, and the asymptote stays at x = 0.',
+    }),
+    reflect: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogReflect),
+      caption: 'Two different reflections',
+      text: 'The section\'s &#8722;log&#8322; x and log&#8322;(&#8722;x) against log&#8322; x (dashed). Negating the output flips the curve across the x-axis: (2, 1) becomes (2, &#8722;1) and the function now decreases. Negating the input flips it across the y-axis: (2, 1) becomes (&#8722;2, 1) and the domain becomes x &lt; 0.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -461,6 +541,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Logarithmic Graphs: Transformations & Key Features | Learn Math Class",
       description: "Learn to graph logarithmic functions: basic shape, domain/range, vertical asymptotes, key points, transformations (shifts, stretches, reflections), and inverse relationship with exponentials.",
@@ -483,7 +564,8 @@ export default function GraphsPage({
   obj5Table,
   summaryTable,
   faqQuestions,
-  schemas
+  schemas,
+  demoUnits,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -503,6 +585,8 @@ export default function GraphsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-doubling'} dangerouslySetInnerHTML={{ __html: demoUnits.doubling }} />,
+          `Concave down everywhere: each step up costs more x than the one before.`,
         ]
     },
     {
@@ -519,6 +603,8 @@ export default function GraphsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-asymptote'} dangerouslySetInnerHTML={{ __html: demoUnits.asymptote }} />,
+          `Only a horizontal shift can move this asymptote.`,
         ]
     },
     {
@@ -553,6 +639,8 @@ export default function GraphsPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-shiftRight'} dangerouslySetInnerHTML={{ __html: demoUnits.shiftRight }} />,
+          `Subtracting inside the logarithm moves the graph right, not left.`,
         ]
     },
     {
@@ -561,6 +649,8 @@ export default function GraphsPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-shiftUp'} dangerouslySetInnerHTML={{ __html: demoUnits.shiftUp }} />,
+          `Vertical changes act on outputs only; the domain is untouched.`,
         ]
     },
     {
@@ -569,6 +659,8 @@ export default function GraphsPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-stretch'} dangerouslySetInnerHTML={{ __html: demoUnits.stretch }} />,
+          `A negative factor would add a reflection across the x-axis.`,
         ]
     },
     {
@@ -577,6 +669,8 @@ export default function GraphsPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-reflect'} dangerouslySetInnerHTML={{ __html: demoUnits.reflect }} />,
+          `The sign outside affects heights; the sign inside affects positions along x.`,
         ]
     },
     {

@@ -12,6 +12,9 @@ import DiceSampleSpaceVisualizer from '@/app/components/probability/sampleSpace/
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -389,8 +392,159 @@ That parity argument is worth more than the count, because it survives changes t
     content: ``
   }
 
+  const instructions = [
+    'The **Number of Dice** slider sets 1 to 6 dice before rolling; it locks once rolling starts and shows **Reset to change**. [Learn more about getting started](!#getting-started)',
+    '**Roll 1** shows the dice faces and their sum; **Roll 10**, **Roll 100**, **Roll 1K** and **Roll 10K** add a batch at once; **Reset** clears every roll. **Recent Rolls** lists the last 20 with their sums. [Learn more about the roll buttons](!#getting-started)',
+    'The **Sum Distribution** tab draws a histogram of the sums: blue bars for the actual counts, translucent red bars for the expected counts. [Learn more about the sum histogram](!#sum-distribution-histograms)',
+    'The **Convergence** tab plots the average sum against the number of rolls, with a red dashed line at the expected average, $3.5$ per die. [Learn more about the convergence graph](!#the-convergence-graph)',
+    'The **Statistics** panel gives Total Rolls, Actual Average, Expected Average, Variance ($n \\times 35/12$), SD and the Z-Score marked (Normal) or (Unusual!). [Learn more about statistics and z-scores](!#statistics-and-z-scores)',
+    'The **Dice Sample Space Explorer/Calculator** tab lists all $6^n$ outcomes for 1 to 4 dice; **Show Probabilities** adds each outcome\'s sum and probability. [Learn more about the sample space explorer](!#using-the-sample-space-explorer)',
+    '**Highlight** picks a condition such as Sum is..., Specific numbers, Highest/Lowest value, All different numbers, Any Doubles or Even Sum; extra boxes appear for its values, and **Probability Analysis** gives favorable over total. [Learn more about highlight conditions](!#advanced-highlight-conditions)',
+    '**Dice relationships**, **Difference conditions** and **Majority conditions** test order, spread and parity across the dice. [Learn more about dice relationships](!#dice-relationships)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real two-tab frame
+     (opens on the simulator, 2 dice). Simulator ranges in DOM order: 0 = Auto
+     speed, 1 = Number of Dice. After a roll the Roll buttons stay disabled for
+     400-600 ms, so every Roll waits until one of them is enabled again. Rolls are
+     random: callouts quote only Total Rolls and the expected values, which depend
+     on the number of dice alone. Explorer selects: 0 = Number of Dice, 1 = Highlight,
+     then the condition's own selects. The explorer's per-state notes are written
+     for 2 dice, and 3 or 4 dice make the stage very tall, so the demos stay on 2 dice.
+     Auto is left out (its timer keeps the state from before it started). */
+  const rollReady = { until: 'div[style*="1fr 1fr"] > button:not([disabled])' }
+  const demos = {
+    'getting-started': {
+      title: 'Dice count, first rolls, reset',
+      script: [
+        { say: `DRAG Number of Dice → 3
+Expected Average 10.50.
+Variance 8.75. SD 2.96.`, at: 'bl' },
+        { slide: { range: 1 }, to: 3, ms: 1400 },
+        { wait: 2600 },
+        { say: `TAP Roll 1
+Three dice and their sum.
+Total Rolls 1. Recent Rolls (Last 1).`, at: 'bl' },
+        rollReady,
+        { click: { button: 'Roll 1', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Roll 10
+Total Rolls 11. Sums 3 to 18 on the axis.
+Slider locked: Reset to change.`, at: 'bl' },
+        rollReady,
+        { click: { button: 'Roll 10', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Reset
+Total Rolls 0. No rolls yet.
+Dice count kept at 3.`, at: 'bl' },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `DRAG Number of Dice → 1
+Slider free again.
+Expected Average 3.50.`, at: 'bl' },
+        { slide: { range: 1 }, to: 1, ms: 1400 },
+        { wait: 2400 },
+      ],
+    },
+    'sum-distribution-histograms': {
+      title: 'Histogram and convergence',
+      script: [
+        { say: `TAP Roll 100
+Total Rolls 100. Sums 2 to 12.
+Blue = actual. Red = expected, peak at 7.`, at: 'bl' },
+        rollReady,
+        { click: { button: 'Roll 100', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Roll 10K
+Total Rolls 10,100.
+Blue bars now track the red ones.`, at: 'bl' },
+        rollReady,
+        { click: { button: 'Roll 10K', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Convergence
+Average sum per batch.
+Red dashed line: converge to 7.00.`, at: 'bl' },
+        { click: { button: 'Convergence', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Sum Distribution
+Back to the histogram.`, at: 'bl' },
+        { click: { button: 'Sum Distribution', exact: true } },
+        { wait: 2200 },
+        { say: `TAP Reset
+Total Rolls 0.
+Start rolling to see distribution.`, at: 'bl' },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'using-the-sample-space-explorer': {
+      title: 'Sample space explorer',
+      script: [
+        { say: `TAP Sample Space Explorer tab
+2 dice: 36 outcomes.
+Each P = 1/36.`, at: 'br' },
+        { click: { button: 'Dice Sample Space' } },
+        { wait: 2600 },
+        { say: `SELECT Highlight → Sum is...
+Default: equals 7.
+6/36 = 16.67%.`, at: 'br' },
+        { set: { css: 'select', nth: 1 }, value: 'sumIs' },
+        { wait: 2600 },
+        { say: `TYPE Value → 10
+4+6, 5+5, 6+4.
+3/36 = 8.33%.`, at: 'br' },
+        { set: 'input[type="number"]', value: 10 },
+        { wait: 2600 },
+        { say: `SELECT Any Doubles
+1-1 to 6-6.
+6/36 = 16.67%.`, at: 'br' },
+        { set: { css: 'select', nth: 1 }, value: 'doubles' },
+        { wait: 2600 },
+        { say: `SELECT Even Sum
+Half the grid.
+18/36 = 50.00%.`, at: 'br' },
+        { set: { css: 'select', nth: 1 }, value: 'even' },
+        { wait: 2600 },
+      ],
+    },
+    'advanced-highlight-conditions': {
+      title: 'Highlight conditions, 2 dice',
+      script: [
+        { say: `TAP explorer, SELECT Specific numbers
+Default: at least one 6.
+11/36 = 30.56%.`, at: 'br' },
+        { click: { button: 'Dice Sample Space' } },
+        { wait: 600 },
+        { set: { css: 'select', nth: 1 }, value: 'specificNumbers' },
+        { wait: 2600 },
+        { say: `SELECT Exactly (count 2)
+Exactly two 6s: only 6-6.
+1/36 = 2.78%.`, at: 'br' },
+        { set: { css: 'select', nth: 3 }, value: 'exactly' },
+        { wait: 2600 },
+        { say: `SELECT None (zero)
+No 6 on either die: 5 × 5.
+25/36 = 69.44%.`, at: 'br' },
+        { set: { css: 'select', nth: 3 }, value: 'none' },
+        { wait: 2600 },
+        { say: `SELECT All different numbers
+Every pair except doubles.
+30/36 = 83.33%.`, at: 'br' },
+        { set: { css: 'select', nth: 1 }, value: 'allDifferent' },
+        { wait: 2600 },
+        { say: `SELECT Highest/Lowest value
+Default: maximum die shows 5.
+9/36 = 25.00%.`, at: 'br' },
+        { set: { css: 'select', nth: 1 }, value: 'extremeValues' },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('probability-dice-roll'),
       sectionsContent,
       stateUnits,
@@ -410,7 +564,32 @@ That parity argument is worth more than the count, because it survives changes t
   }
 }
 
-export default function DiceRollVisualizersPage({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function DiceRollVisualizersPage({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <GenericMultiComponentFrame
+        components={[
+          { id: 1, name: 'Dice Roll Probability Simulator', key: 'simulator', component: DiceRollSimulator },
+          { id: 2, name: 'Dice Sample Space Explorer/Calculator', key: 'sampleSpace', component: DiceSampleSpaceVisualizer },
+        ]}
+        explanations={{ sampleSpace: explanations }}
+        initialActive={1}
+        buttonMinWidth="160px"
+        primaryColor="#007bff"
+        syncUrl={false}
+      />
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -434,16 +613,16 @@ export default function DiceRollVisualizersPage({relatedTools, seoData, sections
   // with numeric ids; replaced with an explicit slug list
   const genericSections = [
     plain('obj1', 'the-dice-roll-probability-model'),
-    plain('obj2', 'getting-started'),
-    plain('obj3', 'sum-distribution-histograms'),
+    withDemo(plain('obj2', 'getting-started')),
+    withDemo(plain('obj3', 'sum-distribution-histograms')),
     plain('obj4', 'the-convergence-graph'),
     plain('obj5', 'statistics-and-z-scores'),
-    plain('obj6', 'using-the-sample-space-explorer'),
+    withDemo(plain('obj6', 'using-the-sample-space-explorer')),
     stateRow('obj11', 'the-full-sample-space', 'none'),
     stateRow('obj12', 'highlighting-a-sum', 'sum7'),
     stateRow('obj13', 'doubles', 'doubles'),
     stateRow('obj14', 'an-even-sum', 'even'),
-    plain('obj7', 'advanced-highlight-conditions'),
+    withDemo(plain('obj7', 'advanced-highlight-conditions')),
     plain('obj8', 'dice-relationships'),
     plain('obj9', 'law-of-large-numbers'),
     plain('obj10', 'related-tools-and-concepts'),
@@ -502,6 +681,10 @@ export default function DiceRollVisualizersPage({relatedTools, seoData, sections
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Dice Roll Visualizers</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <GenericMultiComponentFrame
         components={[

@@ -9,6 +9,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 
@@ -453,6 +454,19 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpCubeRootBoundary = { kind: 'pieces', svgTitle: 'x^3 - 2 > 0 exactly for x greater than the cube root of 2', xRange: [-2, 3], yRange: [-10, 15], yStep: 5,
+    pieces: [{ fn: (x) => x ** 3 - 2, from: -2, to: 3, ends: [null, null], color: 'f', label: { text: 'y = x³ − 2', x: 2.3, y: 10.2, pos: 'w' } }],
+    points: [{ x: Math.cbrt(2), y: 0, label: '∛2 ≈ 1.26', pos: 'nw' }],
+    notes: [{ x: -1.8, y: 12, text: 'x³ − 2 > 0 only right of ∛2', pos: 'e', color: 'r' }, { x: -1.8, y: 7.5, text: 'solution (∛2, ∞)', pos: 'e', color: 'r' }],
+    caption: 'An irrational root is still a boundary: x³ − 2 > 0 for x > ∛2' };
+  const fpQuarticSigns = { kind: 'pieces', svgTitle: '(x + 2)^2 (x - 1)(x - 4) > 0: touches at -2, crosses at 1 and 4', xRange: [-3.5, 5], yRange: [-60, 40], yStep: 20,
+    pieces: [{ fn: (x) => (x + 2) ** 2 * (x - 1) * (x - 4), from: -3.5, to: 5, ends: [null, null], color: 'f', label: { text: '(x + 2)²(x − 1)(x − 4)', x: 2.5, y: 25, pos: 'n' } }],
+    points: [{ x: -2, y: 0 }, { x: 1, y: 0 }, { x: 4, y: 0 }],
+    notes: [{ x: -3.4, y: -25, text: '−2: double root, the sign does not change', pos: 'e', color: 'g' },
+      { x: -3.4, y: -40, text: '1 and 4: simple roots, the sign flips', pos: 'e', color: 'g' },
+      { x: -3.4, y: -52, text: 'solution: x < −2, −2 < x < 1, x > 4', pos: 'e', color: 'r' }],
+    caption: 'Positive at both ends; the double root −2 keeps the sign' };
+
   const demoUnits = {
     chart: demoUnitFrame({
       svg: inequalityVisualizerDiagrams['poly-three'],
@@ -467,6 +481,16 @@ const schemas = {
       text: 'The factor (x &#8722; 2)&#178; is never negative, so the curve touches the axis at 2 and bounces back: the sign chart shows the same sign on both sides of that root, and only the simple root at &#8722;3 produces a flip. Even multiplicity touches, odd multiplicity crosses. Compare a simple and a double root side by side on the',
       href: '/algebra/visual-tools/inequality',
       linkText: 'inequality visual explorer',
+    }),
+    irrational: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpCubeRootBoundary),
+      caption: 'A boundary that is not a rational number',
+      text: 'The section\'s x&#179; &#8722; 2 &gt; 0. Its only real root is &#8731;2 &#8776; 1.26, which the rational root theorem could never find, yet it splits the line exactly like any other root: the curve is below the axis to its left and above it to its right. The solution is (&#8731;2, &#8734;), with the boundary excluded because the inequality is strict.',
+    }),
+    quartic: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpQuarticSigns),
+      caption: 'Reading the signs from the ends inward',
+      text: 'The section\'s (x + 2)&#178;(x &#8722; 1)(x &#8722; 4) &gt; 0. Its leading term x&#8308; makes both ends positive. Moving inward from the right, the simple root 4 flips the sign to negative and the simple root 1 flips it back to positive; the double root &#8722;2 only touches the axis, so the sign stays positive on both sides. Excluding the roots themselves, the solution is x &lt; &#8722;2, &#8722;2 &lt; x &lt; 1, or x &gt; 4.',
     }),
   };
 
@@ -588,6 +612,8 @@ const schemas = {
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-irrational'} dangerouslySetInnerHTML={{ __html: demoUnits.irrational }} />,
+          `Approximate roots work the same way; only the precision of the boundary changes.`,
         ]
     },
     {
@@ -596,6 +622,8 @@ const schemas = {
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-quartic'} dangerouslySetInnerHTML={{ __html: demoUnits.quartic }} />,
+          `End behavior plus multiplicity fills the whole sign chart without a single test point.`,
         ]
     },
 

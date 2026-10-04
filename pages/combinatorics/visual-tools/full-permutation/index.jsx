@@ -1145,6 +1145,9 @@ import FullPermutation from '../../../../app/components/combinatorics/new-visual
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import fullPermutationDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/fullPermutationDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -1586,8 +1589,126 @@ Seen against the six-card and twenty-four-card views reached by [adjusting n](!#
     n5: `Five items give 5! = 120 arrangements — the grid shrinks its cards just to fit them, and the factorial's growth becomes visible. [Learn more about the n! derivation](!#deriving-n-step-by-step) · [What is a full permutation](!#what-is-a-full-permutation)`,
   };
 
+  const instructions = [
+    'The **Mode** switch at the left of the control bar toggles between **● Balls** (numbered coloured balls) and **A Letters** (letter labels). [Learn more about the mode switch](!#mode-switch)',
+    'The **n** stepper sets the number of items from 3 to 5; changing it resets the build and updates $P(n) = n!$ in the header. [Learn more about adjusting n](!#adjusting-n)',
+    '**Step ▶** moves one ball into the next slot, **◀ Back** undoes one step, **▶ Play** builds every arrangement, and **↺ Reset** clears the completed list. [Learn more about the transport controls](!#transport-controls)',
+    'The **Speed** slider (0.3 to 3) sets how fast Play and the ball flights run. [Learn more about the speed slider](!#transport-controls)',
+    'The two lines at the top right of the scene show $P(n) = n!$ and the status: the current step and its count, or **Complete**. [Learn more about getting started](!#getting-started)',
+    'In the **build area** each ball flies from the source row to its numbered slot along a dotted guide line; used items dim in the source row. [Learn more about the build area](!#the-build-area)',
+    'Finished arrangements land under **COMPLETED**, one tinted row per first item, each row holding $(n-1)!$ cards. [Learn more about grouping by first item](!#grouping-by-first-item)',
+    'The **right panel** adds a row for each first-item group with its progress $k / (n-1)!$ and a one-line narration. [Learn more about the right panel](!#right-panel-and-progress)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real FullPermutation tool
+     (opens at n = 3, balls mode, idle). Step ▶ starts a ball flight (rAF + timer):
+     every Step click is followed by an until on "no ball in flight", so instant
+     replay lands on the same state. Play runs to "Complete · 6 / 6" (until).
+     ◀ Back is only used mid-build (Back from the finished state is off by one). */
+  const LANDED = 'svg.vt-scene-svg:not(:has(g[style*="translate"]))'
+  const demos = {
+    'the-build-area': {
+      title: 'One arrangement, ball by ball',
+      script: [
+        { say: `TAP Step ▶
+Red ball 1 flies into slot #1.
+Ball 1 dims in the source row: used.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Blue ball 2 → slot #2.
+Two dimmed. Only ball 3 left.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Green ball 3 → slot #3.
+All slots full: 1 2 3.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Flash ring around the build area.
+Status: Step 1 (Red): 1 / 2.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Card 1 2 3 drops into the Red row.
+COMPLETED 1 / 6. Slots empty again.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'adjusting-n': {
+      title: 'n and the Mode switch',
+      script: [
+        { say: `TAP +
+n = 4. Four balls, four slots.
+Header: P(4) = 4! = 24.` },
+        { click: { button: '+', exact: true } },
+        { wait: 2600 },
+        { say: `TAP +
+n = 5. Header: P(5) = 5! = 120.
++ greys out: 5 is the maximum.` },
+        { click: { button: '+', exact: true } },
+        { wait: 2600 },
+        { say: `TAP the Mode switch
+Balls become letters A to E.
+Same items, new labels.` },
+        { click: '.vt-switch' },
+        { wait: 2600 },
+        { say: `TAP −
+n = 4: A to D. Build resets.
+Letters mode kept.` },
+        { click: { button: '−', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Step ▶
+A flies into slot #1.
+Status: Step 1 (A): 0 / 6. 6 = 3!.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2800 },
+      ],
+    },
+    'transport-controls': {
+      title: 'Speed, Play, Reset, Back',
+      script: [
+        { say: `SLIDE Speed → 3
+Fastest setting.
+Flights take a third of the time.` },
+        { slide: { range: 0 }, to: 3, ms: 1200 },
+        { wait: 2000 },
+        { say: `TAP ▶ Play
+All 6 arrangements built.
+Complete · 6 / 6. Three rows of 2.` },
+        { click: { button: '▶ Play', exact: true } },
+        { until: { text: 'Complete · 6 / 6' }, ms: 20000 },
+        { wait: 2800 },
+        { say: `TAP ↺ Reset
+Completed list cleared.
+Press Play or Step to begin.` },
+        { click: { button: '↺ Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Step ▶
+Red ball 1 → slot #1.
+Status: Step 1 (Red): 0 / 2.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2400 },
+        { say: `TAP ◀ Back
+Ball 1 leaves slot #1.
+Build area empty again.` },
+        { click: { button: '◀ Back', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('full-permutation'),
       sectionsContent,
       introContent,
@@ -1611,7 +1732,22 @@ Seen against the six-card and twenty-four-card views reached by [adjusting n](!#
   }
 }
 
-export default function FullPermutationVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function FullPermutationVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <FullPermutation explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1635,10 +1771,10 @@ export default function FullPermutationVisualizer({relatedTools, seoData, sectio
   const genericSections = [
     plain('obj0', 'key-terms'),
     stateRow('obj1', 'getting-started', 'idle'),
-    stateRow('obj2', 'the-build-area', 'building'),
-    stateRow('obj3', 'adjusting-n', 'n4'),
+    withDemo(stateRow('obj2', 'the-build-area', 'building')),
+    withDemo(stateRow('obj3', 'adjusting-n', 'n4')),
     stateRow('obj4', 'grouping-by-first-item', 'n3'),
-    plain('obj5', 'transport-controls'),
+    withDemo(plain('obj5', 'transport-controls')),
     plain('obj6', 'mode-switch'),
     plain('obj7', 'right-panel-and-progress'),
     plain('obj8', 'what-is-a-full-permutation'),
@@ -1740,6 +1876,10 @@ export default function FullPermutationVisualizer({relatedTools, seoData, sectio
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Full Permutation</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <FullPermutation explanations={explanations}/>
       <br/>

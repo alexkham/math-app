@@ -318,6 +318,9 @@ import distributionExplorerDiagrams from '@/app/components/probability/explorers
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 export async function getStaticPaths() {
   const paths = [
@@ -506,6 +509,43 @@ Switching to the CDF tab replots the same numbers as a running total that climbs
 The variance is $np(1-p) = 2.5$, so $\\sigma \\approx 1.58$. Almost the whole distribution lies within two standard deviations of the mean, which is why the bars at $k = 0$ and $k = 10$ — $1/1024$ each — are barely off the axis.
 
 Reading the two tabs together is the point of having both. The tallest PMF bar is the steepest CDF rise; a flat stretch in the CDF is a negligible PMF bar.`,
+    link: ''
+  },
+  obj12: {
+    title: 'Reading the Statistics Panel',
+    content: `The **Statistics** panel sits in the left column, under **Parameters**. Its four cards show **Expected Value**, **Variance** and **Std Deviation** to four decimals, and **Mode** as a whole number of successes. Every card recomputes on each slider move, so the panel always describes the bars in the middle column; the red $E[X]$ line on the chart sits at the **Expected Value** number.
+
+**Show Formulas** prints the rule under each card: $E[X] = np$, $\\text{Var}(X) = np(1-p)$, $\\sigma = \\sqrt{np(1-p)}$ and $\\text{Mode} = \\lfloor (n+1)p \\rfloor$. The button then reads **Hide Formulas**. The numbers are the same either way; the formulas only show where they come from.
+
+At the opening values, $n = 10$, $p = 0.5$, the cards read 5.0000, 2.5000, 1.5811 and 5. Expected Value and Mode agree at 5 because $p = 0.5$ puts the peak in the middle. Slide $p$ to $0.20$ at $n = 20$ and the cards read 4.0000, 3.2000, 1.7889 and 4.
+
+The **Parameters** cards above the panel repeat each value with its symbol and a one-line meaning: **Number of Trials (n)**, **Success Probability (p)** and **Failure Probability (q = 1-p)**. For where the formulas come from, see [Understanding Distribution Parameters](!#understanding-distribution-parameters).`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj13: {
+    title: 'Using the Table Tab',
+    content: `**Table** is the third tab above the chart, after **PMF** and **CDF**. It replaces the chart with three columns, **k**, **P(X = k)** and **P(X ≤ k)**, one row per value on the chart's axis, every value to six decimals. The rows follow the sliders: move one and the whole table recomputes.
+
+Use it where the chart is too small to read. At the opening values, $n = 10$, $p = 0.5$, the table runs from $k = 0$ to $k = 10$. Row 5 is the largest, 0.246094, with $P(X \\le 5) = 0.623047$; rows 0 and 10 hold 0.000977 each, and the last $P(X \\le k)$ is exactly 1.000000.
+
+The **P(X ≤ k)** column is the [CDF](!#cdf-graph) as numbers, and each **P(X = k)** entry is one bar of the [PMF chart](!#interpreting-the-pmf-chart). Subtract two neighbouring **P(X ≤ k)** rows to recover a **P(X = k)** entry. For a value the table does not list, or a range of values, use the **Probability Calculator** below the chart.`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj14: {
+    title: 'Key Properties and Real-World Applications',
+    content: `The right column holds two lists. **Key Properties** has 5 rows, each ending in ▼: **Support: X ∈ {0, 1, 2, ..., 10}**, **Independent Trials**, **Binary Outcomes**, **Fixed Number of Trials**, **Approximates Normal Distribution**. Row titles here are those at the opening values. Tap a row to open its explanation; tap another and the first closes, so one explanation is open at a time; tap the open row to close it.
+
+Every explanation quotes the current $n$ or $p$: the support row reads up to $n$, and **Approximates Normal Distribution** gives the matching mean and standard deviation (at $n = 10$, $p = 0.5$: 5.00 and 1.58). Open a row, move a slider, and the numbers in the open explanation follow.
+
+**Real-World Applications**, below, lists 5 situations the binomial distribution models, starting with **Number of heads in 10 coin flips** and **Number of defective items in a batch of products**. This list is fixed text and does not change with the sliders.
+
+The rows are short summaries. The full treatment is in [What is the Binomial Distribution?](!#binomial-distribution).`,
+    before: '',
+    after: '',
     link: ''
   },
 },
@@ -866,6 +906,43 @@ The red line sits at $E[X] = 1/p = 3.33$, well to the right of the mode.`,
 The tool plots $k = 1$ to $30$, and those bars sum to $0.999977$ rather than $1$. The missing $0.0023\\%$ lives past the right edge — the support is unbounded, so any finite window falls slightly short.
 
 The variance is $(1-p)/p^2 = 7.78$, giving $\\sigma = 2.79$, which is almost as large as the mean itself. A distribution whose standard deviation rivals its mean is very spread out, and the CDF tab shows the consequence: it takes until about $k = 9$ to accumulate $95\\%$ of the probability.`,
+    link: ''
+  },
+  obj12: {
+    title: 'Reading the Statistics Panel',
+    content: `The **Statistics** panel sits in the left column, under **Parameters**. Its four cards show **Expected Value**, **Variance** and **Std Deviation** to four decimals, and **Mode** as a whole number of trials. Every card recomputes on each slider move, so the panel always describes the bars in the middle column; the red $E[X]$ line on the chart sits at the **Expected Value** number.
+
+**Show Formulas** prints the rule under each card: $E[X] = 1/p$, $\\text{Var}(X) = (1-p)/p^2$, $\\sigma = \\sqrt{(1-p)/p^2}$ and $\\text{Mode} = 1$. The button then reads **Hide Formulas**. The numbers are the same either way; the formulas only show where they come from.
+
+At the opening values, $p = 0.3$, the cards read 3.3333, 7.7778, 2.7889 and 1. Mode stays 1 at every $p$: the first trial is always the single most likely place for the first success. At $p = 0.10$ the cards read 10.0000, 90.0000, 9.4868 and 1.
+
+The **Parameters** cards above the panel repeat each value with its symbol and a one-line meaning: **Success Probability (p)**, **Failure Probability (q = 1-p)** and **Expected Trials (E[X])**. For where the formulas come from, see [Mean, Variance, and Statistics](!#mean-variance-and-statistics).`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj13: {
+    title: 'Using the Table Tab',
+    content: `**Table** is the third tab above the chart, after **PMF** and **CDF**. It replaces the chart with three columns, **k**, **P(X = k)** and **P(X ≤ k)**, one row per value on the chart's axis, every value to six decimals. The rows follow the sliders: move one and the whole table recomputes.
+
+Use it where the chart is too small to read. At the opening values, $p = 0.3$, the table runs from $k = 1$ to $k = 30$. Row 1 is 0.300000 and each row is 0.7 times the one before; the column stops at $k = 30$ with $P(X \\le 30) = 0.999977$, because the support never ends and the table is cut there.
+
+The **P(X ≤ k)** column is the [CDF](!#cdf-display) as numbers, and each **P(X = k)** entry is one bar of the [PMF chart](!#pmf-visualization). Subtract two neighbouring **P(X ≤ k)** rows to recover a **P(X = k)** entry. For a value the table does not list, or a range of values, use the **Probability Calculator** below the chart.`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj14: {
+    title: 'Key Properties and Real-World Applications',
+    content: `The right column holds two lists. **Key Properties** has 5 rows, each ending in ▼: **Support: X ∈ {1, 2, 3, ...}**, **Memoryless Property**, **Independent Trials**, **Decreasing Probabilities**, **Special Case of Negative Binomial**. Row titles here are those at the opening values. Tap a row to open its explanation; tap another and the first closes, so one explanation is open at a time; tap the open row to close it.
+
+**Independent Trials** and **Decreasing Probabilities** quote the current $p$, so they change with the slider. Open a row, move a slider, and the numbers in the open explanation follow.
+
+**Real-World Applications**, below, lists 5 situations the geometric distribution models, starting with **Number of coin flips until you get heads** and **Number of sales calls until you make a sale**. This list is fixed text and does not change with the sliders.
+
+The rows are short summaries. The full treatment is in [What is the Geometric Distribution?](!#geometric-distribution).`,
+    before: '',
+    after: '',
     link: ''
   },
 },
@@ -1230,6 +1307,43 @@ Setting $r = 1$ would collapse this to the geometric case exactly. Raising $r$ p
 The variance is $r(1-p)/p^2 = 38.9$, so $\\sigma = 6.24$. Note that this is $\\sqrt{5}$ times the geometric's $\\sigma$ at the same $p$ — variances of independent waits add, standard deviations do not.`,
     link: ''
   },
+  obj12: {
+    title: 'Reading the Statistics Panel',
+    content: `The **Statistics** panel sits in the left column, under **Parameters**. Its four cards show **Expected Value**, **Variance** and **Std Deviation** to four decimals, and **Mode** as a whole number of trials. Every card recomputes on each slider move, so the panel always describes the bars in the middle column; the red $E[X]$ line on the chart sits at the **Expected Value** number.
+
+**Show Formulas** prints the rule under each card: $E[X] = r/p$, $\\text{Var}(X) = r(1-p)/p^2$, $\\sigma = \\sqrt{r(1-p)/p^2}$ and $\\text{Mode} = \\lfloor (r-1)(1-p)/p \\rfloor + r$. The button then reads **Hide Formulas**. The numbers are the same either way; the formulas only show where they come from.
+
+At the opening values, $r = 5$, $p = 0.3$, the cards read 16.6667, 38.8889, 6.2361 and 14. Mode 14 sits below the Expected Value 16.6667 because the bars have a long right tail. At $r = 10$, $p = 0.5$ the cards read 20.0000, 20.0000, 4.4721 and 19.
+
+The **Parameters** cards above the panel repeat each value with its symbol and a one-line meaning: **Target Successes (r)**, **Success Probability (p)**, **Failure Probability (q = 1-p)** and **Expected Trials (E[X])**. For where the formulas come from, see [Distribution Statistics and Properties](!#distribution-statistics-and-properties).`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj13: {
+    title: 'Using the Table Tab',
+    content: `**Table** is the third tab above the chart, after **PMF** and **CDF**. It replaces the chart with three columns, **k**, **P(X = k)** and **P(X ≤ k)**, one row per value on the chart's axis, every value to six decimals. The rows follow the sliders: move one and the whole table recomputes.
+
+Use it where the chart is too small to read. At the opening values, $r = 5$, $p = 0.3$, the table runs from $k = 5$ to $k = 50$. Row 5 is 0.002430, the chance that the first five trials are all successes; the table stops at $k = 50$ with $P(X \\le 50) = 0.999828$, so a sliver of probability lies beyond the last row.
+
+The **P(X ≤ k)** column is the [CDF](!#interpreting-cdf-values) as numbers, and each **P(X = k)** entry is one bar of the [PMF chart](!#pmf-display). Subtract two neighbouring **P(X ≤ k)** rows to recover a **P(X = k)** entry. For a value the table does not list, or a range of values, use the **Probability Calculator** below the chart.`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj14: {
+    title: 'Key Properties and Real-World Applications',
+    content: `The right column holds two lists. **Key Properties** has 5 rows, each ending in ▼: **Support: X ∈ {5, 6, 7, ...}**, **Fixed Number of Successes**, **Generalizes Geometric Distribution**, **Independent Trials**, **Overdispersion vs Poisson**. Row titles here are those at the opening values. Tap a row to open its explanation; tap another and the first closes, so one explanation is open at a time; tap the open row to close it.
+
+The support row moves with $r$, and **Overdispersion vs Poisson** quotes the current variance and mean (38.89 and 16.67 at the opening values). Open a row, move a slider, and the numbers in the open explanation follow.
+
+**Real-World Applications**, below, lists 5 situations the negative binomial distribution models, starting with **Number of coin flips until getting 5 heads** and **Number of sales calls until closing 3 deals**. This list is fixed text and does not change with the sliders.
+
+The rows are short summaries. The full treatment is in [What is the Negative Binomial Distribution?](!#negative-binomial-distribution).`,
+    before: '',
+    after: '',
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -1592,6 +1706,43 @@ The tool draws $k = 0$ to $19$ and stops early once the probabilities fall below
 Variance equals the mean, both $3$, which is the Poisson's defining fingerprint and the first thing to test before using it. Count data whose variance clearly exceeds its mean is overdispersed, and a Poisson will understate its spread.`,
     link: ''
   },
+  obj12: {
+    title: 'Reading the Statistics Panel',
+    content: `The **Statistics** panel sits in the left column, under **Parameters**. Its four cards show **Expected Value**, **Variance** and **Std Deviation** to four decimals, and **Mode** as a whole number of events. Every card recomputes on each slider move, so the panel always describes the bars in the middle column; the red $E[X]$ line on the chart sits at the **Expected Value** number.
+
+**Show Formulas** prints the rule under each card: $E[X] = \\lambda$, $\\text{Var}(X) = \\lambda$, $\\sigma = \\sqrt{\\lambda}$ and $\\text{Mode} = \\lfloor \\lambda \\rfloor$. The button then reads **Hide Formulas**. The numbers are the same either way; the formulas only show where they come from.
+
+At the opening values, $\\lambda = 3$, the cards read 3.0000, 3.0000, 1.7321 and 3. Expected Value and Variance are equal, 3.0000 each, and stay equal at every $\\lambda$. At $\\lambda = 12$ the cards read 12.0000, 12.0000, 3.4641 and 12.
+
+The **Parameters** cards above the panel repeat each value with its symbol and a one-line meaning: **Rate Parameter (λ)**, **Mean = Variance (E[X] = Var(X))** and **Standard Deviation (σ)**. For where the formulas come from, see [Mean Equals Variance Property](!#mean-equals-variance-property).`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj13: {
+    title: 'Using the Table Tab',
+    content: `**Table** is the third tab above the chart, after **PMF** and **CDF**. It replaces the chart with three columns, **k**, **P(X = k)** and **P(X ≤ k)**, one row per value on the chart's axis, every value to six decimals. The rows follow the sliders: move one and the whole table recomputes.
+
+Use it where the chart is too small to read. At the opening values, $\\lambda = 3$, the table runs from $k = 0$ to $k = 19$. Row 0 is 0.049787, which is $e^{-3}$; rows 2 and 3 tie at 0.224042, and by the last rows $P(X \\le k)$ shows 1.000000 to six decimals. Raise $\\lambda$ and the table grows: at $\\lambda = 8$ it runs to $k = 30$.
+
+The **P(X ≤ k)** column is the [CDF](!#understanding-cdf-values) as numbers, and each **P(X = k)** entry is one bar of the [PMF chart](!#pmf-chart). Subtract two neighbouring **P(X ≤ k)** rows to recover a **P(X = k)** entry. For a value the table does not list, or a range of values, use the **Probability Calculator** below the chart.`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj14: {
+    title: 'Key Properties and Real-World Applications',
+    content: `The right column holds two lists. **Key Properties** has 6 rows, each ending in ▼: **Support: X ∈ {0, 1, 2, 3, ...}**, **Mean Equals Variance**, **Rare Events Approximation**, **Independent Events**, **Additive Property**, **Approximates Normal Distribution**. Row titles here are those at the opening values. Tap a row to open its explanation; tap another and the first closes, so one explanation is open at a time; tap the open row to close it.
+
+**Mean Equals Variance** and **Approximates Normal Distribution** quote the current $\\lambda$, so they change with the slider. Open a row, move a slider, and the numbers in the open explanation follow.
+
+**Real-World Applications**, below, lists 6 situations the Poisson distribution models, starting with **Number of customer arrivals per hour at a store** and **Number of phone calls received at a call center per minute**. This list is fixed text and does not change with the sliders.
+
+The rows are short summaries. The full treatment is in [What is the Poisson Distribution?](!#poisson-distribution).`,
+    before: '',
+    after: '',
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -1950,6 +2101,43 @@ The mean is the same as a binomial with $n = 10$ and $p = K/N = 0.4$. The spread
 The reason is that sampling without replacement is self-correcting: each success drawn leaves fewer successes for the next draw, so outcomes cluster more tightly around the mean than independent trials would. Draw the entire population and the variance falls to zero — you would know the answer exactly.
 
 As $N$ grows with $n$ fixed the correction tends to $1$ and the hypergeometric converges to the binomial. That is why polling a city is treated as binomial while sampling ten items from a batch of fifty is not.`,
+    link: ''
+  },
+  obj12: {
+    title: 'Reading the Statistics Panel',
+    content: `The **Statistics** panel sits in the left column, under **Parameters**. Its four cards show **Expected Value**, **Variance** and **Std Deviation** to four decimals, and **Mode** as a whole number of successes. Every card recomputes on each slider move, so the panel always describes the bars in the middle column; the red $E[X]$ line on the chart sits at the **Expected Value** number.
+
+**Show Formulas** prints the rule under each card: $E[X] = n(K/N)$, $\\text{Var}(X) = n(K/N)(1-K/N)(N-n)/(N-1)$, $\\sigma = \\sqrt{\\text{Var}(X)}$ and $\\text{Mode} = \\lfloor (n+1)(K+1)/(N+2) \\rfloor$. The button then reads **Hide Formulas**. The numbers are the same either way; the formulas only show where they come from.
+
+At the opening values, $N = 50$, $K = 20$, $n = 10$, the cards read 4.0000, 1.9592, 1.3997 and 4. Variance 1.9592 is smaller than the binomial $np(1-p) = 2.4$ for the same proportion, because of the factor $(N-n)/(N-1) = 40/49$: each draw leaves the population. At $K = 10$, $n = 25$ the cards read 5.0000, 2.0408, 1.4286 and 5.
+
+The **Parameters** cards above the panel repeat each value with its symbol and a one-line meaning: **Population Size (N)**, **Success States (K)**, **Number of Draws (n)** and **Proportion of Successes (K/N)**. For where the formulas come from, see [Mean, Variance, and Finite Population Correction](!#mean-variance-and-finite-population-correction).`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj13: {
+    title: 'Using the Table Tab',
+    content: `**Table** is the third tab above the chart, after **PMF** and **CDF**. It replaces the chart with three columns, **k**, **P(X = k)** and **P(X ≤ k)**, one row per value on the chart's axis, every value to six decimals. The rows follow the sliders: move one and the whole table recomputes.
+
+Use it where the chart is too small to read. At the opening values, $N = 50$, $K = 20$, $n = 10$, the table runs from $k = 0$ to $k = 10$, the support $\\max(0, n-(N-K))$ to $\\min(n, K)$. Row 4 is the largest, 0.280059; row 10 is 0.000018, and $P(X \\le k)$ ends at 1.000000.
+
+The **P(X ≤ k)** column is the [CDF](!#cdf-display) as numbers, and each **P(X = k)** entry is one bar of the [PMF chart](!#interpreting-the-pmf-visualization). Subtract two neighbouring **P(X ≤ k)** rows to recover a **P(X = k)** entry. For a value the table does not list, or a range of values, use the **Probability Calculator** below the chart.`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj14: {
+    title: 'Key Properties and Real-World Applications',
+    content: `The right column holds two lists. **Key Properties** has 5 rows, each ending in ▼: **Support: X ∈ {0, 1, ..., 10}**, **Sampling Without Replacement**, **Finite Population Correction**, **Approximates Binomial Distribution**, **Symmetric Under Complement**. Row titles here are those at the opening values. Tap a row to open its explanation; tap another and the first closes, so one explanation is open at a time; tap the open row to close it.
+
+The support row shows the current smallest and largest $k$, and **Finite Population Correction** quotes $(N-n)/(N-1)$ (0.816 at the opening values). Open a row, move a slider, and the numbers in the open explanation follow.
+
+**Real-World Applications**, below, lists 5 situations the hypergeometric distribution models, starting with **Drawing cards from a deck without replacement** and **Quality control: selecting items from a batch without replacement**. This list is fixed text and does not change with the sliders.
+
+The rows are short summaries. The full treatment is in [What is the Hypergeometric Distribution?](!#hypergeometric-distribution).`,
+    before: '',
+    after: '',
     link: ''
   },
 },
@@ -2315,6 +2503,43 @@ The variance is $\\frac{n^2 - 1}{12} = \\frac{35}{12} = 2.917$, so $\\sigma \\ap
 Equal bars also make the CDF the easiest of the nine to read backwards. Since every riser is $1/6$, the CDF at $k$ is just $k/6$ for a die, and any quantile can be read off by eye.`,
     link: ''
   },
+  obj12: {
+    title: 'Reading the Statistics Panel',
+    content: `The **Statistics** panel sits in the left column, under **Parameters**. Its four cards show **Expected Value**, **Variance** and **Std Deviation** to four decimals, and **Mode** as the words All values. Every card recomputes on each slider move, so the panel always describes the bars in the middle column; the red $E[X]$ line on the chart sits at the **Expected Value** number.
+
+**Show Formulas** prints the rule under each card: $E[X] = (a + b)/2$, $\\text{Var}(X) = (n^2 - 1)/12$, $\\sigma = \\sqrt{\\text{Var}(X)}$, and under Mode the line Every value has equal probability. The button then reads **Hide Formulas**. The numbers are the same either way; the formulas only show where they come from.
+
+At the opening values, $a = 1$, $b = 6$, the cards read 3.5000, 2.9167, 1.7078 and All values. Mode reads All values: every value from $a$ to $b$ has the same probability. Move $a$ to 5 with $b = 10$ and Variance returns to 2.9167, because $n = 6$ again; only the Expected Value moves, to 7.5000.
+
+The **Parameters** cards above the panel repeat each value with its symbol and a one-line meaning: **Minimum Value (a)**, **Maximum Value (b)** and **Number of Values (n)**. For where the formulas come from, see [Distribution Statistics](!#distribution-statistics).`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj13: {
+    title: 'Using the Table Tab',
+    content: `**Table** is the third tab above the chart, after **PMF** and **CDF**. It replaces the chart with three columns, **k**, **P(X = k)** and **P(X ≤ k)**, one row per value on the chart's axis, every value to six decimals. The rows follow the sliders: move one and the whole table recomputes.
+
+Use it where the chart is too small to read. At the opening values, $a = 1$, $b = 6$, the table runs from $k = 1$ to $k = 6$. Every $P(X = k)$ is 0.166667, and $P(X \\le k)$ climbs by that amount each row: 0.166667, 0.333333, … 1.000000.
+
+The **P(X ≤ k)** column is the [CDF](!#linear-cdf) as numbers, and each **P(X = k)** entry is one bar of the [PMF chart](!#flat-pmf). Subtract two neighbouring **P(X ≤ k)** rows to recover a **P(X = k)** entry. For a value the table does not list, or a range of values, use the **Probability Calculator** below the chart.`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj14: {
+    title: 'Key Properties and Real-World Applications',
+    content: `The right column holds two lists. **Key Properties** has 5 rows, each ending in ▼: **Support: X ∈ {1, 2, ..., 6}**, **Equal Probability (1/n)**, **Maximum Entropy Distribution**, **Symmetric Around Mean**, **Memoryless (Independence)**. Row titles here are those at the opening values. Tap a row to open its explanation; tap another and the first closes, so one explanation is open at a time; tap the open row to close it.
+
+The support row lists $a$ to $b$, and **Equal Probability (1/n)** and **Symmetric Around Mean** quote the current values. Open a row, move a slider, and the numbers in the open explanation follow.
+
+**Real-World Applications**, below, lists 5 situations the discrete uniform distribution models, starting with **Rolling a fair die (outcomes 1-6 with equal probability)** and **Drawing a random card from a deck**. This list is fixed text and does not change with the sliders.
+
+The rows are short summaries. The full treatment is in [What is the Discrete Uniform Distribution?](!#discrete-uniform-distribution).`,
+    before: '',
+    after: '',
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -2675,6 +2900,43 @@ The CDF tab shows the sigmoid crossing $0.5$ exactly at the mean, and reaching $
 The two tabs locate $\\sigma$ differently, which is why both are worth looking at. On the PDF it is the distance from the peak to the inflection points; on the CDF it is where the curve stops steepening. Same number, two different visual cues.
 
 Because the Gaussian has no elementary antiderivative, the CDF cannot be written in closed form with ordinary functions — the tool evaluates it through an error-function approximation, which is why every normal probability you have ever looked up came from a table or a numerical routine rather than a formula.`,
+    link: ''
+  },
+  obj12: {
+    title: 'Reading the Statistics Panel',
+    content: `The **Statistics** panel sits in the left column, under **Parameters**. Its four cards show **Expected Value**, **Variance** and **Std Deviation** to four decimals, and **Mode** to four decimals. Every card recomputes on each slider move, so the panel always describes the curve in the middle column; the red $E[X]$ line on the chart sits at the **Expected Value** number.
+
+**Show Formulas** prints the rule under each card: $E[X] = \\mu$, $\\text{Var}(X) = \\sigma^2$, $\\sigma$ and $\\text{Mode} = \\mu$. The button then reads **Hide Formulas**. The numbers are the same either way; the formulas only show where they come from.
+
+At the opening values, $\\mu = 0$, $\\sigma = 1$, the cards read 0.0000, 1.0000, 1.0000 and 0.0000. Expected Value and Mode both equal $\\mu$, and Std Deviation is $\\sigma$ itself. At $\\mu = 3$, $\\sigma = 2$ the cards read 3.0000, 4.0000, 2.0000 and 3.0000.
+
+The **Parameters** cards above the panel repeat each value with its symbol and a one-line meaning: **Mean (μ)**, **Standard Deviation (σ)** and **Variance (σ²)**. For where the formulas come from, see [Distribution Properties and Statistics](!#distribution-properties-and-statistics).`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj13: {
+    title: 'Using the Table Tab',
+    content: `**Table** is the third tab above the chart, after **PDF** and **CDF**. It replaces the chart with three columns, **x**, **f(x)** and **F(x)**, one row per point the chart plots, every value to six decimals. The rows follow the sliders: move one and the whole table recomputes.
+
+Use it where the chart is too small to read. At the opening values, $\\mu = 0$, $\\sigma = 1$, the table runs from $x = -4$ to $x = 4$, that is $\\mu \\pm 4\\sigma$, in steps of about 0.0267. The end rows have $f(x) = 0.000134$, and $F(4) = 0.999968$. Set $\\sigma = 2$ and the rows span $-8$ to $8$.
+
+The **F(x)** column is the [CDF](!#cdf-display) as numbers, and **f(x)** is the height of the [PDF curve](!#pdf-curve) at that x. The density is not a probability; for one, use an interval. For a value the table does not list, or a range of values, use the **Probability Calculator** below the chart.`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj14: {
+    title: 'Key Properties and Real-World Applications',
+    content: `The right column holds two lists. **Key Properties** has 6 rows, each ending in ▼: **Support: X ∈ (-∞, ∞)**, **Symmetric Bell Curve**, **68-95-99.7 Rule (Empirical Rule)**, **Central Limit Theorem**, **Standardization to Z-Score**, **Maximum Entropy Distribution**. Row titles here are those at the opening values. Tap a row to open its explanation; tap another and the first closes, so one explanation is open at a time; tap the open row to close it.
+
+**Symmetric Bell Curve** and **68-95-99.7 Rule (Empirical Rule)** quote the current $\\mu$ and $\\sigma$; the second lists the intervals $\\mu \\pm \\sigma$, $\\mu \\pm 2\\sigma$ and $\\mu \\pm 3\\sigma$ as numbers. Open a row, move a slider, and the numbers in the open explanation follow.
+
+**Real-World Applications**, below, lists 6 situations the normal distribution models, starting with **Heights and weights of populations** and **Measurement errors in scientific experiments**. This list is fixed text and does not change with the sliders.
+
+The rows are short summaries. The full treatment is in [What is the Normal Distribution?](!#normal-distribution).`,
+    before: '',
+    after: '',
     link: ''
   },
 },
@@ -3039,6 +3301,43 @@ The mean sits at $1$ but the median is $\\frac{\\ln 2}{\\lambda} = 0.693$, notic
 Mean and standard deviation are both $1/\\lambda$, so the coefficient of variation is exactly $1$ for every $\\lambda$. Changing the rate rescales the whole picture without altering its shape — which is the memoryless property seen from the outside.`,
     link: ''
   },
+  obj12: {
+    title: 'Reading the Statistics Panel',
+    content: `The **Statistics** panel sits in the left column, under **Parameters**. Its four cards show **Expected Value**, **Variance** and **Std Deviation** to four decimals, and **Mode** to four decimals. Every card recomputes on each slider move, so the panel always describes the curve in the middle column; the red $E[X]$ line on the chart sits at the **Expected Value** number.
+
+**Show Formulas** prints the rule under each card: $E[X] = 1/\\lambda$, $\\text{Var}(X) = 1/\\lambda^2$, $\\sigma = 1/\\lambda$ and $\\text{Mode} = 0$. The button then reads **Hide Formulas**. The numbers are the same either way; the formulas only show where they come from.
+
+At the opening values, $\\lambda = 1$, the cards read 1.0000, 1.0000, 1.0000 and 0.0000. Expected Value and Std Deviation are equal, both $1/\\lambda$, and Mode is 0 at every $\\lambda$. At $\\lambda = 4$ the cards read 0.2500, 0.0625, 0.2500 and 0.0000.
+
+The **Parameters** cards above the panel repeat each value with its symbol and a one-line meaning: **Rate Parameter (λ)**, **Scale Parameter (1/λ)** and **Expected Value (E[X])**. For where the formulas come from, see [Distribution Statistics](!#distribution-statistics).`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj13: {
+    title: 'Using the Table Tab',
+    content: `**Table** is the third tab above the chart, after **PDF** and **CDF**. It replaces the chart with three columns, **x**, **f(x)** and **F(x)**, one row per point the chart plots, every value to six decimals. The rows follow the sliders: move one and the whole table recomputes.
+
+Use it where the chart is too small to read. At the opening values, $\\lambda = 1$, the table runs from $x = 0$ to $x = 6.9078$ in steps of 0.0230. The first row has $f(0) = 1.000000$, equal to $\\lambda$; the last row has $F(x) = 0.999000$. Set $\\lambda = 2$ and the rows end at 3.4539, half as far.
+
+The **F(x)** column is the [CDF](!#cdf-display) as numbers, and **f(x)** is the height of the [PDF curve](!#pdf-curve) at that x. The density is not a probability; for one, use an interval. For a value the table does not list, or a range of values, use the **Probability Calculator** below the chart.`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj14: {
+    title: 'Key Properties and Real-World Applications',
+    content: `The right column holds two lists. **Key Properties** has 6 rows, each ending in ▼: **Support: X ∈ [0, ∞)**, **Memoryless Property**, **Constant Hazard Rate**, **Connection to Poisson Process**, **Decreasing Probability Density**, **Simple CDF and Quantiles**. Row titles here are those at the opening values. Tap a row to open its explanation; tap another and the first closes, so one explanation is open at a time; tap the open row to close it.
+
+**Constant Hazard Rate** and **Connection to Poisson Process** quote the current $\\lambda$, so they change with the slider. Open a row, move a slider, and the numbers in the open explanation follow.
+
+**Real-World Applications**, below, lists 6 situations the exponential distribution models, starting with **Time until the next customer arrives at a store** and **Lifetime of electronic components (time until failure)**. This list is fixed text and does not change with the sliders.
+
+The rows are short summaries. The full treatment is in [What is the Exponential Distribution?](!#exponential-distribution).`,
+    before: '',
+    after: '',
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -3401,6 +3700,43 @@ Those kinks are the only places the CDF is not differentiable. A continuous rand
 The variance is $\\frac{(b-a)^2}{12} = 8.33$, so $\\sigma \\approx 2.89$. Widening the interval lowers the density and raises the variance together, since the area under the density is pinned at $1$ — the two effects are the same fact seen from two directions.`,
     link: ''
   },
+  obj12: {
+    title: 'Reading the Statistics Panel',
+    content: `The **Statistics** panel sits in the left column, under **Parameters**. Its four cards show **Expected Value**, **Variance** and **Std Deviation** to four decimals, and **Mode** as the interval, All values in [a, b]. Every card recomputes on each slider move, so the panel always describes the curve in the middle column; the red $E[X]$ line on the chart sits at the **Expected Value** number.
+
+**Show Formulas** prints the rule under each card: $E[X] = (a + b)/2$, $\\text{Var}(X) = (b - a)^2/12$, $\\sigma = (b - a)/\\sqrt{12}$ and $\\text{Mode} = $ any $x \\in [a, b]$. The button then reads **Hide Formulas**. The numbers are the same either way; the formulas only show where they come from.
+
+At the opening values, $a = 0$, $b = 10$, the cards read 5.0000, 8.3333, 2.8868 and All values in [0, 10]. Mode reads All values in [0, 10]: the density is flat, so no point is more likely than another. At $a = 5$, $b = 20$ the cards read 12.5000, 18.7500, 4.3301 and All values in [5, 20].
+
+The **Parameters** cards above the panel repeat each value with its symbol and a one-line meaning: **Lower Bound (a)**, **Upper Bound (b)**, **Range (b - a)** and **Density (1/(b-a))**. For where the formulas come from, see [Distribution Statistics](!#distribution-statistics).`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj13: {
+    title: 'Using the Table Tab',
+    content: `**Table** is the third tab above the chart, after **PDF** and **CDF**. It replaces the chart with three columns, **x**, **f(x)** and **F(x)**, one row per point the chart plots, every value to six decimals. The rows follow the sliders: move one and the whole table recomputes.
+
+Use it where the chart is too small to read. At the opening values, $a = 0$, $b = 10$, the table runs from $x = -2$ to $x = 12$ in steps of 0.1, a little beyond $[a, b]$ on both sides. Outside the interval $f(x) = 0$; $F(x)$ is 0 below $a$ and 1.000000 above $b$.
+
+The **F(x)** column is the [CDF](!#linear-cdf) as numbers, and **f(x)** is the height of the [PDF curve](!#flat-pdf) at that x. The density is not a probability; for one, use an interval. For a value the table does not list, or a range of values, use the **Probability Calculator** below the chart.`,
+    before: '',
+    after: '',
+    link: ''
+  },
+  obj14: {
+    title: 'Key Properties and Real-World Applications',
+    content: `The right column holds two lists. **Key Properties** has 6 rows, each ending in ▼: **Support: X ∈ [0, 10]**, **Constant Probability Density**, **Maximum Entropy**, **Linear CDF**, **Memoryless-like Property**, **Transformation to Standard Uniform**. Row titles here are those at the opening values. Tap a row to open its explanation; tap another and the first closes, so one explanation is open at a time; tap the open row to close it.
+
+The support row, **Constant Probability Density** and **Linear CDF** quote the current $a$, $b$ and $1/(b-a)$. Open a row, move a slider, and the numbers in the open explanation follow.
+
+**Real-World Applications**, below, lists 5 situations the continuous uniform distribution models, starting with **Random number generation between two values** and **Arrival time within a time window when all times are equally likely**. This list is fixed text and does not change with the sliders.
+
+The rows are short summaries. The full treatment is in [What is the Continuous Uniform Distribution?](!#continuous-uniform-distribution).`,
+    before: '',
+    after: '',
+    link: ''
+  },
 },
 
 faqQuestions: {
@@ -3640,12 +3976,15 @@ schemas: {
   const orderByView = {
     'binomial': [
       ['obj1', 'parameter-controls'],
+      ['obj12', 'reading-the-statistics-panel'],
       ['obj2', 'interpreting-the-pmf-chart'],
       ['obj3', 'cdf-graph'],
+      ['obj13', 'the-table-tab'],
       ['obj11', 'the-explorer-at-its-opening-parameters', 'state'],
       ['obj4', 'calculating-point-probabilities'],
       ['obj5', 'computing-cumulative-probabilities'],
       ['obj6', 'range-probability-calculations'],
+      ['obj14', 'key-properties-and-applications'],
       ['obj7', 'binomial-distribution'],
       ['obj8', 'understanding-distribution-parameters'],
       ['obj9', 'normal-approximation-rule'],
@@ -3653,12 +3992,15 @@ schemas: {
     ],
     'geometric': [
       ['obj1', 'adjusting-success-probability'],
+      ['obj12', 'reading-the-statistics-panel'],
       ['obj2', 'pmf-visualization'],
       ['obj3', 'cdf-display'],
+      ['obj13', 'the-table-tab'],
       ['obj11', 'the-explorer-at-its-opening-parameter', 'state'],
       ['obj4', 'computing-exact-probabilities'],
       ['obj5', 'calculating-survival-probabilities'],
       ['obj6', 'range-probability-calculations'],
+      ['obj14', 'key-properties-and-applications'],
       ['obj7', 'geometric-distribution'],
       ['obj8', 'the-memoryless-property-explained'],
       ['obj9', 'mean-variance-and-statistics'],
@@ -3666,12 +4008,15 @@ schemas: {
     ],
     'negative-binomial': [
       ['obj1', 'setting-distribution-parameters'],
+      ['obj12', 'reading-the-statistics-panel'],
       ['obj2', 'pmf-display'],
       ['obj3', 'interpreting-cdf-values'],
+      ['obj13', 'the-table-tab'],
       ['obj11', 'the-explorer-at-its-opening-parameters', 'state'],
       ['obj4', 'calculating-point-probabilities'],
       ['obj5', 'using-cumulative-calculators'],
       ['obj6', 'computing-range-probabilities'],
+      ['obj14', 'key-properties-and-applications'],
       ['obj7', 'negative-binomial-distribution'],
       ['obj8', 'relationship-to-geometric-distribution'],
       ['obj9', 'distribution-statistics-and-properties'],
@@ -3679,12 +4024,15 @@ schemas: {
     ],
     'poisson': [
       ['obj1', 'adjusting-the-rate-parameter'],
+      ['obj12', 'reading-the-statistics-panel'],
       ['obj2', 'pmf-chart'],
       ['obj3', 'understanding-cdf-values'],
+      ['obj13', 'the-table-tab'],
       ['obj11', 'the-explorer-at-its-opening-parameter', 'state'],
       ['obj4', 'computing-exact-probabilities'],
       ['obj5', 'calculating-cumulative-probabilities'],
       ['obj6', 'range-probability-calculations'],
+      ['obj14', 'key-properties-and-applications'],
       ['obj7', 'poisson-distribution'],
       ['obj8', 'mean-equals-variance-property'],
       ['obj9', 'poisson-as-binomial-approximation'],
@@ -3693,11 +4041,14 @@ schemas: {
     'hypergeometric': [
       ['obj1', 'setting-population-parameters'],
       ['obj2', 'understanding-parameter-dependencies'],
+      ['obj12', 'reading-the-statistics-panel'],
       ['obj3', 'interpreting-the-pmf-visualization'],
       ['obj11', 'the-explorer-at-its-opening-parameters', 'state'],
       ['obj4', 'cdf-display'],
+      ['obj13', 'the-table-tab'],
       ['obj5', 'calculating-exact-probabilities'],
       ['obj6', 'computing-cumulative-and-range-probabilities'],
+      ['obj14', 'key-properties-and-applications'],
       ['obj7', 'hypergeometric-distribution'],
       ['obj8', 'hypergeometric-vs-binomial'],
       ['obj9', 'mean-variance-and-finite-population-correction'],
@@ -3705,12 +4056,15 @@ schemas: {
     ],
     'uniform-discrete': [
       ['obj1', 'setting-the-distribution-range'],
+      ['obj12', 'reading-the-statistics-panel'],
       ['obj2', 'flat-pmf'],
       ['obj3', 'linear-cdf'],
+      ['obj13', 'the-table-tab'],
       ['obj11', 'the-explorer-at-its-opening-range', 'state'],
       ['obj4', 'computing-point-probabilities'],
       ['obj5', 'using-cumulative-calculators'],
       ['obj6', 'range-probability-calculations'],
+      ['obj14', 'key-properties-and-applications'],
       ['obj7', 'discrete-uniform-distribution'],
       ['obj8', 'maximum-entropy-principle'],
       ['obj9', 'distribution-statistics'],
@@ -3718,12 +4072,15 @@ schemas: {
     ],
     'normal': [
       ['obj1', 'adjusting-mean-and-standard-deviation'],
+      ['obj12', 'reading-the-statistics-panel'],
       ['obj2', 'pdf-curve'],
       ['obj3', 'cdf-display'],
+      ['obj13', 'the-table-tab'],
       ['obj11', 'the-explorer-at-its-opening-parameters', 'state'],
       ['obj4', 'probability-calculators'],
       ['obj5', 'working-with-z-scores'],
       ['obj6', 'the-empirical-rule-68-95-99-7'],
+      ['obj14', 'key-properties-and-applications'],
       ['obj7', 'normal-distribution'],
       ['obj8', 'central-limit-theorem-connection'],
       ['obj9', 'distribution-properties-and-statistics'],
@@ -3731,12 +4088,15 @@ schemas: {
     ],
     'exponential': [
       ['obj1', 'adjusting-the-rate-parameter'],
+      ['obj12', 'reading-the-statistics-panel'],
       ['obj2', 'pdf-curve'],
       ['obj3', 'cdf-display'],
+      ['obj13', 'the-table-tab'],
       ['obj11', 'the-explorer-at-its-opening-parameter', 'state'],
       ['obj4', 'computing-point-probabilities'],
       ['obj5', 'calculating-cumulative-probabilities'],
       ['obj6', 'range-probability-calculations'],
+      ['obj14', 'key-properties-and-applications'],
       ['obj7', 'exponential-distribution'],
       ['obj8', 'the-memoryless-property'],
       ['obj9', 'distribution-statistics'],
@@ -3744,12 +4104,15 @@ schemas: {
     ],
     'uniform-continuous': [
       ['obj1', 'setting-interval-bounds'],
+      ['obj12', 'reading-the-statistics-panel'],
       ['obj2', 'flat-pdf'],
       ['obj3', 'linear-cdf'],
+      ['obj13', 'the-table-tab'],
       ['obj11', 'the-explorer-at-its-opening-bounds', 'state'],
       ['obj4', 'computing-interval-probabilities'],
       ['obj5', 'using-cumulative-calculators'],
       ['obj6', 'range-probability-examples'],
+      ['obj14', 'key-properties-and-applications'],
       ['obj7', 'continuous-uniform-distribution'],
       ['obj8', 'maximum-entropy-principle'],
       ['obj9', 'distribution-statistics'],
@@ -3784,8 +4147,2803 @@ schemas: {
     content: `Use the interactive calculator below to explore this probability distribution. Adjust parameters to see how they affect probabilities and visualize the distribution.`
   };
 
+  // How-to instructions and animated demos (ToolDemoPlayer v3), keyed by view.
+  // Each demo mounts the view's own explorer; calculator inputs are typed with
+  // { set }, sliders driven with { slide }. The tools do not write the URL.
+  const INSTRUCTIONS = {
+    'binomial': [
+      '**Drag n and p** under **Parameters**: n from 1 to 50 trials, p from 0.01 to 0.99. Bars, statistics and every calculator result update at once. [Learn more about the parameter controls](!#parameter-controls)',
+      '**Statistics** shows **Expected Value**, **Variance**, **Std Deviation** and **Mode** for the current parameters; **Show Formulas** prints the rule under each card. [Learn more about the statistics panel](!#reading-the-statistics-panel)',
+      '**PMF**, the first tab above the chart, draws one bar per value k with height $P(X = k)$; the red line marks $E[X]$. [Learn more about the PMF chart](!#interpreting-the-pmf-chart)',
+      '**CDF** replots the same values as the running total $P(X \\le k)$, climbing from 0 to 1. [Learn more about the CDF graph](!#cdf-graph)',
+      '**Table** lists every k with $P(X = k)$ and $P(X \\le k)$ to six decimals. [Learn more about the Table tab](!#the-table-tab)',
+      'In the **Probability Calculator**, tap **P(X = k)**, **P(X < k)**, **P(X ≤ k)**, **P(X > k)** or **P(X ≥ k)** and type k; the box below shows the probability to six decimals. [Learn more about point probabilities](!#calculating-point-probabilities)',
+      'Tap a range tab, **P(a ≤ X ≤ b)**, **P(a < X < b)**, **P(a ≤ X < b)** or **P(a < X ≤ b)**, and type a and b; the four differ in which endpoints count. [Learn more about range probabilities](!#range-probability-calculations)',
+      '**Key Properties** in the right column: tap a row\'s ▼ to open its explanation, one at a time; **Real-World Applications** below lists typical uses. [Learn more about key properties and applications](!#key-properties-and-applications)',
+    ],
+    'geometric': [
+      '**Drag p** under **Parameters**, from 0.01 to 0.99. Bars, statistics and every calculator result update at once. [Learn more about the success probability slider](!#adjusting-success-probability)',
+      '**Statistics** shows **Expected Value**, **Variance**, **Std Deviation** and **Mode** for the current parameters; **Show Formulas** prints the rule under each card. [Learn more about the statistics panel](!#reading-the-statistics-panel)',
+      '**PMF**, the first tab above the chart, draws one bar per value k with height $P(X = k)$; the red line marks $E[X]$. [Learn more about the PMF visualization](!#pmf-visualization)',
+      '**CDF** replots the same values as the running total $P(X \\le k)$, climbing from 0 to 1. [Learn more about the CDF display](!#cdf-display)',
+      '**Table** lists every k with $P(X = k)$ and $P(X \\le k)$ to six decimals. [Learn more about the Table tab](!#the-table-tab)',
+      'In the **Probability Calculator**, tap **P(X = k)**, **P(X < k)**, **P(X ≤ k)**, **P(X > k)** or **P(X ≥ k)** and type k; the box below shows the probability to six decimals. [Learn more about exact probabilities](!#computing-exact-probabilities)',
+      'Tap a range tab, **P(a ≤ X ≤ b)**, **P(a < X < b)**, **P(a ≤ X < b)** or **P(a < X ≤ b)**, and type a and b; the four differ in which endpoints count. [Learn more about range probabilities](!#range-probability-calculations)',
+      '**Key Properties** in the right column: tap a row\'s ▼ to open its explanation, one at a time; **Real-World Applications** below lists typical uses. [Learn more about key properties and applications](!#key-properties-and-applications)',
+    ],
+    'negative-binomial': [
+      '**Drag r and p** under **Parameters**: r from 1 to 20 target successes, p from 0.01 to 0.99. Bars, statistics and every calculator result update at once. [Learn more about the parameter sliders](!#setting-distribution-parameters)',
+      '**Statistics** shows **Expected Value**, **Variance**, **Std Deviation** and **Mode** for the current parameters; **Show Formulas** prints the rule under each card. [Learn more about the statistics panel](!#reading-the-statistics-panel)',
+      '**PMF**, the first tab above the chart, draws one bar per value k with height $P(X = k)$; the red line marks $E[X]$. [Learn more about the PMF display](!#pmf-display)',
+      '**CDF** replots the same values as the running total $P(X \\le k)$, climbing from 0 to 1. [Learn more about CDF values](!#interpreting-cdf-values)',
+      '**Table** lists every k with $P(X = k)$ and $P(X \\le k)$ to six decimals. [Learn more about the Table tab](!#the-table-tab)',
+      'In the **Probability Calculator**, tap **P(X = k)**, **P(X < k)**, **P(X ≤ k)**, **P(X > k)** or **P(X ≥ k)** and type k; the box below shows the probability to six decimals. [Learn more about point probabilities](!#calculating-point-probabilities)',
+      'Tap a range tab, **P(a ≤ X ≤ b)**, **P(a < X < b)**, **P(a ≤ X < b)** or **P(a < X ≤ b)**, and type a and b; the four differ in which endpoints count. [Learn more about range probabilities](!#computing-range-probabilities)',
+      '**Key Properties** in the right column: tap a row\'s ▼ to open its explanation, one at a time; **Real-World Applications** below lists typical uses. [Learn more about key properties and applications](!#key-properties-and-applications)',
+    ],
+    'poisson': [
+      '**Drag λ** under **Parameters**, from 0.1 to 20. Bars, statistics and every calculator result update at once. [Learn more about the rate parameter](!#adjusting-the-rate-parameter)',
+      '**Statistics** shows **Expected Value**, **Variance**, **Std Deviation** and **Mode** for the current parameters; **Show Formulas** prints the rule under each card. [Learn more about the statistics panel](!#reading-the-statistics-panel)',
+      '**PMF**, the first tab above the chart, draws one bar per value k with height $P(X = k)$; the red line marks $E[X]$. [Learn more about the PMF chart](!#pmf-chart)',
+      '**CDF** replots the same values as the running total $P(X \\le k)$, climbing from 0 to 1. [Learn more about CDF values](!#understanding-cdf-values)',
+      '**Table** lists every k with $P(X = k)$ and $P(X \\le k)$ to six decimals. [Learn more about the Table tab](!#the-table-tab)',
+      'In the **Probability Calculator**, tap **P(X = k)**, **P(X < k)**, **P(X ≤ k)**, **P(X > k)** or **P(X ≥ k)** and type k; the box below shows the probability to six decimals. [Learn more about exact probabilities](!#computing-exact-probabilities)',
+      'Tap a range tab, **P(a ≤ X ≤ b)**, **P(a < X < b)**, **P(a ≤ X < b)** or **P(a < X ≤ b)**, and type a and b; the four differ in which endpoints count. [Learn more about range probabilities](!#range-probability-calculations)',
+      '**Key Properties** in the right column: tap a row\'s ▼ to open its explanation, one at a time; **Real-World Applications** below lists typical uses. [Learn more about key properties and applications](!#key-properties-and-applications)',
+    ],
+    'hypergeometric': [
+      '**Drag N, K and n** under **Parameters**: population size, success states, number of draws. K and n never exceed N, and N never drops below K or n. Bars, statistics and every calculator result update at once. [Learn more about the population parameters](!#setting-population-parameters)',
+      '**Statistics** shows **Expected Value**, **Variance**, **Std Deviation** and **Mode** for the current parameters; **Show Formulas** prints the rule under each card. [Learn more about the statistics panel](!#reading-the-statistics-panel)',
+      '**PMF**, the first tab above the chart, draws one bar per value k with height $P(X = k)$; the red line marks $E[X]$. [Learn more about the PMF visualization](!#interpreting-the-pmf-visualization)',
+      '**CDF** replots the same values as the running total $P(X \\le k)$, climbing from 0 to 1. [Learn more about the CDF display](!#cdf-display)',
+      '**Table** lists every k with $P(X = k)$ and $P(X \\le k)$ to six decimals. [Learn more about the Table tab](!#the-table-tab)',
+      'In the **Probability Calculator**, tap **P(X = k)**, **P(X < k)**, **P(X ≤ k)**, **P(X > k)** or **P(X ≥ k)** and type k; the box below shows the probability to six decimals. [Learn more about exact probabilities](!#calculating-exact-probabilities)',
+      'Tap a range tab, **P(a ≤ X ≤ b)**, **P(a < X < b)**, **P(a ≤ X < b)** or **P(a < X ≤ b)**, and type a and b; the four differ in which endpoints count. [Learn more about cumulative and range probabilities](!#computing-cumulative-and-range-probabilities)',
+      '**Key Properties** in the right column: tap a row\'s ▼ to open its explanation, one at a time; **Real-World Applications** below lists typical uses. [Learn more about key properties and applications](!#key-properties-and-applications)',
+    ],
+    'uniform-discrete': [
+      '**Drag a and b** under **Parameters**, each from 0 to 30; b always stays above a. Bars, statistics and every calculator result update at once. [Learn more about the distribution range](!#setting-the-distribution-range)',
+      '**Statistics** shows **Expected Value**, **Variance**, **Std Deviation** and **Mode** for the current parameters; **Show Formulas** prints the rule under each card. [Learn more about the statistics panel](!#reading-the-statistics-panel)',
+      '**PMF**, the first tab above the chart, draws one bar per value k with height $P(X = k)$; the red line marks $E[X]$. [Learn more about the flat PMF](!#flat-pmf)',
+      '**CDF** replots the same values as the running total $P(X \\le k)$, climbing from 0 to 1. [Learn more about the linear CDF](!#linear-cdf)',
+      '**Table** lists every k with $P(X = k)$ and $P(X \\le k)$ to six decimals. [Learn more about the Table tab](!#the-table-tab)',
+      'In the **Probability Calculator**, tap **P(X = k)**, **P(X < k)**, **P(X ≤ k)**, **P(X > k)** or **P(X ≥ k)** and type k; the box below shows the probability to six decimals. [Learn more about point probabilities](!#computing-point-probabilities)',
+      'Tap a range tab, **P(a ≤ X ≤ b)**, **P(a < X < b)**, **P(a ≤ X < b)** or **P(a < X ≤ b)**, and type a and b; the four differ in which endpoints count. [Learn more about range probabilities](!#range-probability-calculations)',
+      '**Key Properties** in the right column: tap a row\'s ▼ to open its explanation, one at a time; **Real-World Applications** below lists typical uses. [Learn more about key properties and applications](!#key-properties-and-applications)',
+    ],
+    'normal': [
+      '**Drag μ and σ** under **Parameters**: μ from −10 to 10, σ from 0.1 to 5. Curve, statistics and every calculator result update at once. [Learn more about mean and standard deviation](!#adjusting-mean-and-standard-deviation)',
+      '**Statistics** shows **Expected Value**, **Variance**, **Std Deviation** and **Mode** for the current parameters; **Show Formulas** prints the rule under each card. [Learn more about the statistics panel](!#reading-the-statistics-panel)',
+      '**PDF**, the first tab above the chart, draws the density curve $f(x)$; the red line marks $E[X]$. [Learn more about the PDF curve](!#pdf-curve)',
+      '**CDF** draws $F(x) = P(X \\le x)$, rising from 0 to 1. [Learn more about the CDF display](!#cdf-display)',
+      '**Table** lists sample points x with $f(x)$ and $F(x)$ to six decimals. [Learn more about the Table tab](!#the-table-tab)',
+      'In the **Probability Calculator**, tap **P(X < x)**, **P(X ≤ x)**, **P(X > x)** or **P(X ≥ x)** and type x; strict and non-strict tabs give the same number. [Learn more about the probability calculators](!#probability-calculators)',
+      'The calculator opens on **P(a ≤ X ≤ b)**: type a and b for the area between them; the other three range tabs give the same area. [Learn more about the empirical rule](!#the-empirical-rule-68-95-99-7)',
+      '**Key Properties** in the right column: tap a row\'s ▼ to open its explanation, one at a time; **Real-World Applications** below lists typical uses. [Learn more about key properties and applications](!#key-properties-and-applications)',
+    ],
+    'exponential': [
+      '**Drag λ** under **Parameters**, from 0.1 to 5. Curve, statistics and every calculator result update at once. [Learn more about the rate parameter](!#adjusting-the-rate-parameter)',
+      '**Statistics** shows **Expected Value**, **Variance**, **Std Deviation** and **Mode** for the current parameters; **Show Formulas** prints the rule under each card. [Learn more about the statistics panel](!#reading-the-statistics-panel)',
+      '**PDF**, the first tab above the chart, draws the density curve $f(x)$; the red line marks $E[X]$. [Learn more about the PDF curve](!#pdf-curve)',
+      '**CDF** draws $F(x) = P(X \\le x)$, rising from 0 to 1. [Learn more about the CDF display](!#cdf-display)',
+      '**Table** lists sample points x with $f(x)$ and $F(x)$ to six decimals. [Learn more about the Table tab](!#the-table-tab)',
+      'In the **Probability Calculator**, tap **P(X < x)**, **P(X ≤ x)**, **P(X > x)** or **P(X ≥ x)** and type x; strict and non-strict tabs give the same number. [Learn more about cumulative probabilities](!#calculating-cumulative-probabilities)',
+      'The calculator opens on **P(a ≤ X ≤ b)**: type a and b for the area between them; the other three range tabs give the same area. [Learn more about range probabilities](!#range-probability-calculations)',
+      '**Key Properties** in the right column: tap a row\'s ▼ to open its explanation, one at a time; **Real-World Applications** below lists typical uses. [Learn more about key properties and applications](!#key-properties-and-applications)',
+    ],
+    'uniform-continuous': [
+      '**Drag a and b** under **Parameters**, each from −20 to 20 in steps of 0.1; b always stays above a. Curve, statistics and every calculator result update at once. [Learn more about the interval bounds](!#setting-interval-bounds)',
+      '**Statistics** shows **Expected Value**, **Variance**, **Std Deviation** and **Mode** for the current parameters; **Show Formulas** prints the rule under each card. [Learn more about the statistics panel](!#reading-the-statistics-panel)',
+      '**PDF**, the first tab above the chart, draws the density curve $f(x)$; the red line marks $E[X]$. [Learn more about the flat PDF](!#flat-pdf)',
+      '**CDF** draws $F(x) = P(X \\le x)$, rising from 0 to 1. [Learn more about the linear CDF](!#linear-cdf)',
+      '**Table** lists sample points x with $f(x)$ and $F(x)$ to six decimals. [Learn more about the Table tab](!#the-table-tab)',
+      'In the **Probability Calculator**, tap **P(X < x)**, **P(X ≤ x)**, **P(X > x)** or **P(X ≥ x)** and type x; strict and non-strict tabs give the same number. [Learn more about cumulative calculators](!#using-cumulative-calculators)',
+      'The calculator opens on **P(a ≤ X ≤ b)**: type a and b for the area between them; the other three range tabs give the same area. [Learn more about interval probabilities](!#computing-interval-probabilities)',
+      '**Key Properties** in the right column: tap a row\'s ▼ to open its explanation, one at a time; **Real-World Applications** below lists typical uses. [Learn more about key properties and applications](!#key-properties-and-applications)',
+    ],
+  };
+  const DEMOS = {
+    "binomial": {
+      "parameter-controls": {
+        "title": "Parameters and statistics",
+        "script": [
+          {
+            "say": "SLIDE n → 20\nE[X] = 10.0000. Var = 5.0000.\nBars spread out to k = 20."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 20,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE p → 0.20\nE[X] = 4.0000. Mode = 4.\nBars pile up on the left."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.2,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Show Formulas\nRule under each card:\nE[X] = np, Var(X) = np(1-p)."
+          },
+          {
+            "click": {
+              "button": "Show Formulas",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE n → 40\nFormulas stay. Numbers double:\nE[X] = 8.0000, Var = 6.4000."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 40,
+            "ms": 1200
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "interpreting-the-pmf-chart": {
+        "title": "PMF, CDF and Table tabs",
+        "script": [
+          {
+            "say": "TAP CDF\nSame k, running total P(X ≤ k).\nBars climb from 0 to 1."
+          },
+          {
+            "click": {
+              "button": "CDF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Table\nk | P(X = k) | P(X ≤ k).\nk = 5: 0.246094 and 0.623047."
+          },
+          {
+            "click": {
+              "button": "Table",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE p → 0.20\nTable recomputes.\nk = 2 now largest: 0.301990."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.2,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP PMF\nBars back, peak at k = 2.\nRed line E[X] = 2.00."
+          },
+          {
+            "click": {
+              "button": "PMF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "calculating-point-probabilities": {
+        "title": "Point and cumulative probabilities",
+        "script": [
+          {
+            "say": "TYPE k = 5 in P(X = k)\nP(X = 5) = 0.246094.\nTallest bar at n = 10, p = 0.5."
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X < k), TYPE 5\nP(X < 5) = 0.376953.\nk = 0 to 4 only."
+          },
+          {
+            "click": {
+              "button": "P(X < k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X ≤ k), TYPE 5\nP(X ≤ 5) = 0.623047.\n= P(X < 5) + P(X = 5)."
+          },
+          {
+            "click": {
+              "button": "P(X ≤ k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X > k), TYPE 5\nP(X > 5) = 0.376953.\n= 1 − P(X ≤ 5)."
+          },
+          {
+            "click": {
+              "button": "P(X > k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "range-probability-calculations": {
+        "title": "Range probabilities",
+        "script": [
+          {
+            "say": "TAP P(a ≤ X ≤ b), TYPE 3 and 7\nP(3 ≤ X ≤ 7) = 0.890625.\nk = 3 to 7, both ends in."
+          },
+          {
+            "click": {
+              "button": "P(a ≤ X ≤ b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 7
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a < X < b), TYPE 3 and 7\nP(3 < X < 7) = 0.656250.\nOnly k = 4, 5, 6."
+          },
+          {
+            "click": {
+              "button": "P(a < X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 7
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a ≤ X < b), TYPE 3 and 7\nP(3 ≤ X < 7) = 0.773438.\nk = 3 in, k = 7 out."
+          },
+          {
+            "click": {
+              "button": "P(a ≤ X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 7
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a < X ≤ b), TYPE 3 and 7\nP(3 < X ≤ 7) = 0.773438.\nSame: P(X = 3) = P(X = 7) at p = 0.5."
+          },
+          {
+            "click": {
+              "button": "P(a < X ≤ b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 7
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      }
+    },
+    "geometric": {
+      "adjusting-success-probability": {
+        "title": "Parameters and statistics",
+        "script": [
+          {
+            "say": "SLIDE p → 0.50\nE[X] = 2.0000. Var = 2.0000.\nEach bar half the one before."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.5,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE p → 0.10\nE[X] = 10.0000. Var = 90.0000.\nLong flat tail. Mode stays 1."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.1,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Show Formulas\nE[X] = 1/p, Var(X) = (1-p)/p².\nMode = 1 for every p."
+          },
+          {
+            "click": {
+              "button": "Show Formulas",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE p → 0.80\nE[X] = 1.2500. Var = 0.3125.\nAlmost all mass on k = 1."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.8,
+            "ms": 1200
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "pmf-visualization": {
+        "title": "PMF, CDF and Table tabs",
+        "script": [
+          {
+            "say": "TAP CDF\nRunning total P(X ≤ k).\nRises fast, then flattens toward 1."
+          },
+          {
+            "click": {
+              "button": "CDF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Table\nk = 1 to 30. k = 1: 0.300000.\nLast row: P(X ≤ 30) = 0.999977."
+          },
+          {
+            "click": {
+              "button": "Table",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE p → 0.60\nTable recomputes.\nk = 1: 0.600000. k = 2: 0.240000."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.6,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP PMF\nBars back: 0.6, 0.24, …\nRed line E[X] = 1.67."
+          },
+          {
+            "click": {
+              "button": "PMF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "computing-exact-probabilities": {
+        "title": "Point and cumulative probabilities",
+        "script": [
+          {
+            "say": "TYPE k = 3 in P(X = k)\nP(X = 3) = 0.147000.\n= 0.7² × 0.3: two failures, then success."
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X < k), TYPE 3\nP(X < 3) = 0.510000.\nSuccess on trial 1 or 2."
+          },
+          {
+            "click": {
+              "button": "P(X < k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X ≤ k), TYPE 3\nP(X ≤ 3) = 0.657000.\n= 0.510000 + 0.147000."
+          },
+          {
+            "click": {
+              "button": "P(X ≤ k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X > k), TYPE 3\nP(X > 3) = 0.343000.\n= 0.7³: first 3 trials all fail."
+          },
+          {
+            "click": {
+              "button": "P(X > k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "range-probability-calculations": {
+        "title": "Range probabilities",
+        "script": [
+          {
+            "say": "TAP P(a ≤ X ≤ b), TYPE 2 and 5\nP(2 ≤ X ≤ 5) = 0.531930.\nk = 2, 3, 4, 5."
+          },
+          {
+            "click": {
+              "button": "P(a ≤ X ≤ b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a < X < b), TYPE 2 and 5\nP(2 < X < 5) = 0.249900.\nOnly k = 3, 4."
+          },
+          {
+            "click": {
+              "button": "P(a < X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a ≤ X < b), TYPE 2 and 5\nP(2 ≤ X < 5) = 0.459900.\nk = 2 in, k = 5 out."
+          },
+          {
+            "click": {
+              "button": "P(a ≤ X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a < X ≤ b), TYPE 2 and 5\nP(2 < X ≤ 5) = 0.321930.\nk = 2 out, k = 5 in."
+          },
+          {
+            "click": {
+              "button": "P(a < X ≤ b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      }
+    },
+    "negative-binomial": {
+      "setting-distribution-parameters": {
+        "title": "Parameters and statistics",
+        "script": [
+          {
+            "say": "SLIDE r → 10\nE[X] = 33.3333. Mode = 31.\nBars shift right and spread."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 10,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE p → 0.50\nE[X] = 20.0000. Var = 20.0000.\nFewer trials needed."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.5,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Show Formulas\nE[X] = r/p, Var(X) = r(1-p)/p².\nMode = ⌊(r-1)(1-p)/p⌋ + r."
+          },
+          {
+            "click": {
+              "button": "Show Formulas",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE r → 2\nE[X] = 4.0000. Mode = 3.\nBars now start at k = 2."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 2,
+            "ms": 1200
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "pmf-display": {
+        "title": "PMF, CDF and Table tabs",
+        "script": [
+          {
+            "say": "TAP CDF\nRunning total P(X ≤ k).\nStarts at k = 5: 5 successes need 5 trials."
+          },
+          {
+            "click": {
+              "button": "CDF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Table\nk = 5 to 50. k = 5: 0.002430.\nP(X ≤ 50) = 0.999828: table stops at 50."
+          },
+          {
+            "click": {
+              "button": "Table",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE p → 0.50\nTable recomputes.\nk = 5: 0.031250. P(X ≤ 9) = 0.500000."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.5,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP PMF\nBars back, peak at k = 8 and 9.\nRed line E[X] = 10.00."
+          },
+          {
+            "click": {
+              "button": "PMF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "calculating-point-probabilities": {
+        "title": "Point and cumulative probabilities",
+        "script": [
+          {
+            "say": "TYPE k = 15 in P(X = k)\nP(X = 15) = 0.068710.\n5th success exactly on trial 15."
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 15
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X < k), TYPE 15\nP(X < 15) = 0.415799.\n5th success by trial 14."
+          },
+          {
+            "click": {
+              "button": "P(X < k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 15
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X ≤ k), TYPE 15\nP(X ≤ 15) = 0.484509.\n= 0.415799 + 0.068710."
+          },
+          {
+            "click": {
+              "button": "P(X ≤ k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 15
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X > k), TYPE 15\nP(X > 15) = 0.515491.\n= 1 − P(X ≤ 15). 16 trials or more."
+          },
+          {
+            "click": {
+              "button": "P(X > k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 15
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "computing-range-probabilities": {
+        "title": "Range probabilities",
+        "script": [
+          {
+            "say": "TAP P(a ≤ X ≤ b), TYPE 10 and 20\nP(10 ≤ X ≤ 20) = 0.663684.\nk = 10 to 20, both ends in."
+          },
+          {
+            "click": {
+              "button": "P(a ≤ X ≤ b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 10
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 20
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a < X < b), TYPE 10 and 20\nP(10 < X < 20) = 0.567508.\nk = 11 to 19."
+          },
+          {
+            "click": {
+              "button": "P(a < X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 10
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 20
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a ≤ X < b), TYPE 10 and 20\nP(10 ≤ X < 20) = 0.618968.\nk = 10 in, k = 20 out."
+          },
+          {
+            "click": {
+              "button": "P(a ≤ X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 10
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 20
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a < X ≤ b), TYPE 10 and 20\nP(10 < X ≤ 20) = 0.612224.\nk = 10 out, k = 20 in."
+          },
+          {
+            "click": {
+              "button": "P(a < X ≤ b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 10
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 20
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      }
+    },
+    "poisson": {
+      "adjusting-the-rate-parameter": {
+        "title": "Parameters and statistics",
+        "script": [
+          {
+            "say": "SLIDE λ → 6.0\nE[X] = Var = 6.0000. Mode = 6.\nBars move right and spread."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 6,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE λ → 0.5\nE[X] = Var = 0.5000. Mode = 0.\nTallest bar at k = 0."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.5,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Show Formulas\nE[X] = λ, Var(X) = λ, σ = √λ.\nMode = ⌊λ⌋."
+          },
+          {
+            "click": {
+              "button": "Show Formulas",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE λ → 12.0\nE[X] = Var = 12.0000.\nσ = 3.4641. Bars nearly symmetric."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 12,
+            "ms": 1200
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "pmf-chart": {
+        "title": "PMF, CDF and Table tabs",
+        "script": [
+          {
+            "say": "TAP CDF\nRunning total P(X ≤ k).\n0.049787 at k = 0, then up to 1."
+          },
+          {
+            "click": {
+              "button": "CDF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Table\nk = 0 to 19. k = 2 and 3 tie: 0.224042.\nk = 0: 0.049787."
+          },
+          {
+            "click": {
+              "button": "Table",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE λ → 8.0\nTable recomputes, rows to k = 30.\nk = 0 drops to 0.000335."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 8,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP PMF\nBars back, centred near 8.\nRed line E[X] = 8.00."
+          },
+          {
+            "click": {
+              "button": "PMF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "computing-exact-probabilities": {
+        "title": "Point and cumulative probabilities",
+        "script": [
+          {
+            "say": "TYPE k = 3 in P(X = k)\nP(X = 3) = 0.224042.\nTies with k = 2: the tallest bars."
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X < k), TYPE 3\nP(X < 3) = 0.423190.\nk = 0, 1, 2."
+          },
+          {
+            "click": {
+              "button": "P(X < k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X ≤ k), TYPE 3\nP(X ≤ 3) = 0.647232.\n= 0.423190 + 0.224042."
+          },
+          {
+            "click": {
+              "button": "P(X ≤ k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X > k), TYPE 3\nP(X > 3) = 0.352768.\n= 1 − P(X ≤ 3)."
+          },
+          {
+            "click": {
+              "button": "P(X > k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "range-probability-calculations": {
+        "title": "Range probabilities",
+        "script": [
+          {
+            "say": "TAP P(a ≤ X ≤ b), TYPE 2 and 5\nP(2 ≤ X ≤ 5) = 0.716934.\nk = 2 to 5, both ends in."
+          },
+          {
+            "click": {
+              "button": "P(a ≤ X ≤ b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a < X < b), TYPE 2 and 5\nP(2 < X < 5) = 0.392073.\nOnly k = 3, 4."
+          },
+          {
+            "click": {
+              "button": "P(a < X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a ≤ X < b), TYPE 2 and 5\nP(2 ≤ X < 5) = 0.616115.\nk = 2 in, k = 5 out."
+          },
+          {
+            "click": {
+              "button": "P(a ≤ X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a < X ≤ b), TYPE 2 and 5\nP(2 < X ≤ 5) = 0.492892.\nk = 2 out, k = 5 in."
+          },
+          {
+            "click": {
+              "button": "P(a < X ≤ b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      }
+    },
+    "hypergeometric": {
+      "setting-population-parameters": {
+        "title": "Parameters and statistics",
+        "script": [
+          {
+            "say": "SLIDE K → 10\nK/N = 0.200. E[X] = 2.0000.\nBars shift left."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 10,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE n → 25\nHalf the population drawn.\nE[X] = 5.0000. Var = 2.0408."
+          },
+          {
+            "slide": {
+              "range": 2
+            },
+            "to": 25,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Show Formulas\nE[X] = n(K/N).\nVar carries the (N-n)/(N-1) factor."
+          },
+          {
+            "click": {
+              "button": "Show Formulas",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE N → 100\nK/N = 0.100. E[X] = 2.5000.\nVar = 1.7045."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 100,
+            "ms": 1200
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "interpreting-the-pmf-visualization": {
+        "title": "PMF, CDF and Table tabs",
+        "script": [
+          {
+            "say": "TAP CDF\nRunning total P(X ≤ k), k = 0 to 10.\nSteepest rise at k = 3 and 4."
+          },
+          {
+            "click": {
+              "button": "CDF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Table\nk = 4 largest: 0.280059.\nk = 10: 0.000018. Last P(X ≤ k) = 1.000000."
+          },
+          {
+            "click": {
+              "button": "Table",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE K → 40\nK/N = 0.800. Table recomputes.\nk = 8 now largest: 0.336898."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 40,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP PMF\nBars piled right, peak at k = 8.\nRed line E[X] = 8.00."
+          },
+          {
+            "click": {
+              "button": "PMF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "calculating-exact-probabilities": {
+        "title": "Point and cumulative probabilities",
+        "script": [
+          {
+            "say": "TYPE k = 4 in P(X = k)\nP(X = 4) = 0.280059.\nThe tallest bar."
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 4
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X < k), TYPE 4\nP(X < 4) = 0.364968.\nk = 0 to 3."
+          },
+          {
+            "click": {
+              "button": "P(X < k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 4
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X ≤ k), TYPE 4\nP(X ≤ 4) = 0.645027.\n= 0.364968 + 0.280059."
+          },
+          {
+            "click": {
+              "button": "P(X ≤ k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 4
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X > k), TYPE 4\nP(X > 4) = 0.354973.\n= 1 − P(X ≤ 4)."
+          },
+          {
+            "click": {
+              "button": "P(X > k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 4
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "computing-cumulative-and-range-probabilities": {
+        "title": "Range probabilities",
+        "script": [
+          {
+            "say": "TAP P(a ≤ X ≤ b), TYPE 3 and 6\nP(3 ≤ X ≤ 6) = 0.824479.\nk = 3 to 6, both ends in."
+          },
+          {
+            "click": {
+              "button": "P(a ≤ X ≤ b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 6
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a < X < b), TYPE 3 and 6\nP(3 < X < 6) = 0.495144.\nOnly k = 4, 5."
+          },
+          {
+            "click": {
+              "button": "P(a < X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 6
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a ≤ X < b), TYPE 3 and 6\nP(3 ≤ X < 6) = 0.721073.\nk = 3 in, k = 6 out."
+          },
+          {
+            "click": {
+              "button": "P(a ≤ X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 6
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a < X ≤ b), TYPE 3 and 6\nP(3 < X ≤ 6) = 0.598550.\nk = 3 out, k = 6 in."
+          },
+          {
+            "click": {
+              "button": "P(a < X ≤ b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 6
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      }
+    },
+    "uniform-discrete": {
+      "setting-the-distribution-range": {
+        "title": "Parameters and statistics",
+        "script": [
+          {
+            "say": "SLIDE b → 10\nn = 10 values.\nE[X] = 5.5000. Var = 8.2500."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 10,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE a → 5\nValues 5 to 10: n = 6.\nE[X] = 7.5000. Var back to 2.9167."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 5,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Show Formulas\nE[X] = (a + b) / 2.\nVar(X) = (n² - 1) / 12."
+          },
+          {
+            "click": {
+              "button": "Show Formulas",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE b → 20\nn = 16. E[X] = 12.5000.\nVar = 21.2500."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 20,
+            "ms": 1200
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "flat-pmf": {
+        "title": "PMF, CDF and Table tabs",
+        "script": [
+          {
+            "say": "TAP CDF\nRunning total P(X ≤ k).\nSix equal steps up to 1."
+          },
+          {
+            "click": {
+              "button": "CDF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Table\nEvery P(X = k) = 0.166667.\nP(X ≤ k): 0.166667 … 1.000000."
+          },
+          {
+            "click": {
+              "button": "Table",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE b → 12\nTwelve rows, each 0.083333.\nP(X ≤ 6) = 0.500000."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 12,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP PMF\nTwelve equal bars.\nRed line E[X] = 6.50."
+          },
+          {
+            "click": {
+              "button": "PMF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "computing-point-probabilities": {
+        "title": "Point and cumulative probabilities",
+        "script": [
+          {
+            "say": "TYPE k = 3 in P(X = k)\nP(X = 3) = 0.166667.\nSame for every k from 1 to 6."
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X < k), TYPE 3\nP(X < 3) = 0.333333.\nk = 1, 2."
+          },
+          {
+            "click": {
+              "button": "P(X < k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X ≤ k), TYPE 3\nP(X ≤ 3) = 0.500000.\n3 of the 6 values."
+          },
+          {
+            "click": {
+              "button": "P(X ≤ k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X > k), TYPE 3\nP(X > 3) = 0.500000.\nk = 4, 5, 6."
+          },
+          {
+            "click": {
+              "button": "P(X > k)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter k\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "range-probability-calculations": {
+        "title": "Range probabilities",
+        "script": [
+          {
+            "say": "TAP P(a ≤ X ≤ b), TYPE 2 and 5\nP(2 ≤ X ≤ 5) = 0.666667.\nk = 2, 3, 4, 5: 4 of 6."
+          },
+          {
+            "click": {
+              "button": "P(a ≤ X ≤ b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a < X < b), TYPE 2 and 5\nP(2 < X < 5) = 0.333333.\nOnly k = 3, 4."
+          },
+          {
+            "click": {
+              "button": "P(a < X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a ≤ X < b), TYPE 2 and 5\nP(2 ≤ X < 5) = 0.500000.\nk = 2 in, k = 5 out."
+          },
+          {
+            "click": {
+              "button": "P(a ≤ X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a < X ≤ b), TYPE 2 and 5\nP(2 < X ≤ 5) = 0.500000.\nk = 2 out, k = 5 in."
+          },
+          {
+            "click": {
+              "button": "P(a < X ≤ b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      }
+    },
+    "normal": {
+      "adjusting-mean-and-standard-deviation": {
+        "title": "Parameters and statistics",
+        "script": [
+          {
+            "say": "SLIDE μ → 3\nCurve slides right.\nE[X] = Mode = 3.0000. Var stays 1.0000."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 3,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE σ → 2\nCurve wider and lower.\nVar = 4.0000. Peak still at 3."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 2,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Show Formulas\nE[X] = μ, Var(X) = σ².\nMode = μ."
+          },
+          {
+            "click": {
+              "button": "Show Formulas",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE σ → 0.5\nNarrow, tall curve.\nVar = 0.2500."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.5,
+            "ms": 1200
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "pdf-curve": {
+        "title": "PDF, CDF and Table tabs",
+        "script": [
+          {
+            "say": "TAP CDF\nS-curve F(x), 0 to 1.\nSteepest at the mean."
+          },
+          {
+            "click": {
+              "button": "CDF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Table\nx | f(x) | F(x), x = −4 to 4.\nF(4) = 0.999968."
+          },
+          {
+            "click": {
+              "button": "Table",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE σ → 2\nRows now x = −8 to 8.\nEnd rows f(x) = 0.000067, half of before."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 2,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP PDF\nWider bell, peak near 0.2.\nRed line E[X] = 0.00."
+          },
+          {
+            "click": {
+              "button": "PDF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "probability-calculators": {
+        "title": "Cumulative probabilities",
+        "script": [
+          {
+            "say": "TAP P(X ≤ x), TYPE 1\nP(X ≤ 1) = 0.841345.\nArea left of μ + σ."
+          },
+          {
+            "click": {
+              "button": "P(X ≤ x)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter x\"]",
+            "value": 1
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X < x), TYPE 1\nP(X < 1) = 0.841345.\nSame: a single point adds 0."
+          },
+          {
+            "click": {
+              "button": "P(X < x)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter x\"]",
+            "value": 1
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X > x), TYPE 1\nP(X > 1) = 0.158655.\n= 1 − 0.841345."
+          },
+          {
+            "click": {
+              "button": "P(X > x)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter x\"]",
+            "value": 1
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X ≥ x), TYPE 1\nP(X ≥ 1) = 0.158655.\nStrict or not: same area."
+          },
+          {
+            "click": {
+              "button": "P(X ≥ x)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter x\"]",
+            "value": 1
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "the-empirical-rule-68-95-99-7": {
+        "title": "The empirical rule",
+        "script": [
+          {
+            "say": "TYPE a = −1, b = 1\nP(−1 ≤ X ≤ 1) = 0.682689.\nμ ± σ: about 68%."
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": -1
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 1
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TYPE a = −2, b = 2\nP(−2 ≤ X ≤ 2) = 0.954500.\nμ ± 2σ: about 95%."
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": -2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TYPE a = −3, b = 3\nP(−3 ≤ X ≤ 3) = 0.997300.\nμ ± 3σ: about 99.7%."
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": -3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE σ → 2\nSame bounds now μ ± 1.5σ.\nP(−3 ≤ X ≤ 3) = 0.866386."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 2,
+            "ms": 1200
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      }
+    },
+    "exponential": {
+      "adjusting-the-rate-parameter": {
+        "title": "Parameters and statistics",
+        "script": [
+          {
+            "say": "SLIDE λ → 2.0\nE[X] = 0.5000. Var = 0.2500.\nCurve starts higher, drops faster."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 2,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE λ → 0.5\nE[X] = 2.0000. Var = 4.0000.\nLower start, longer tail."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.5,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Show Formulas\nE[X] = 1/λ, Var(X) = 1/λ², σ = 1/λ.\nMode = 0 for every λ."
+          },
+          {
+            "click": {
+              "button": "Show Formulas",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE λ → 4.0\nE[X] = σ = 0.2500.\nSteep drop near 0."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 4,
+            "ms": 1200
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "pdf-curve": {
+        "title": "PDF, CDF and Table tabs",
+        "script": [
+          {
+            "say": "TAP CDF\nF(x) rises from 0 toward 1.\nFast at first, then levels off."
+          },
+          {
+            "click": {
+              "button": "CDF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Table\nx | f(x) | F(x). f(0) = 1.000000 = λ.\nLast row F(x) = 0.999000."
+          },
+          {
+            "click": {
+              "button": "Table",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE λ → 2.0\nf(0) = 2.000000.\nRows end at x = 3.4539, half as far."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 2,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP PDF\nCurve starts at 2.\nRed line E[X] = 0.50."
+          },
+          {
+            "click": {
+              "button": "PDF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "calculating-cumulative-probabilities": {
+        "title": "Cumulative probabilities",
+        "script": [
+          {
+            "say": "TAP P(X ≤ x), TYPE 1\nP(X ≤ 1) = 0.632121.\n= 1 − e^(−1)."
+          },
+          {
+            "click": {
+              "button": "P(X ≤ x)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter x\"]",
+            "value": 1
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X < x), TYPE 1\nP(X < 1) = 0.632121.\nSame: a single point adds 0."
+          },
+          {
+            "click": {
+              "button": "P(X < x)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter x\"]",
+            "value": 1
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X > x), TYPE 1\nP(X > 1) = 0.367879.\nStill waiting at x = 1."
+          },
+          {
+            "click": {
+              "button": "P(X > x)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter x\"]",
+            "value": 1
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X ≥ x), TYPE 1\nP(X ≥ 1) = 0.367879.\nSame as P(X > 1)."
+          },
+          {
+            "click": {
+              "button": "P(X ≥ x)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter x\"]",
+            "value": 1
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "range-probability-calculations": {
+        "title": "Range probabilities",
+        "script": [
+          {
+            "say": "TYPE a = 0, b = 1\nP(0 ≤ X ≤ 1) = 0.632121.\nThe first unit of time."
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 0
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 1
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TYPE a = 1, b = 2\nP(1 ≤ X ≤ 2) = 0.232544.\nSame width, less area."
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 1
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TYPE a = 2, b = 3\nP(2 ≤ X ≤ 3) = 0.085548.\nEach unit 0.368 × the one before."
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 3
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE λ → 0.5\nSlower rate, fatter tail.\nP(2 ≤ X ≤ 3) = 0.144749."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 0.5,
+            "ms": 1200
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      }
+    },
+    "uniform-continuous": {
+      "setting-interval-bounds": {
+        "title": "Parameters and statistics",
+        "script": [
+          {
+            "say": "SLIDE b → 20\nDensity 1/(b-a) = 0.0500.\nE[X] = 10.0000. Var = 33.3333."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 20,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE a → 5\nRange 15. Density 0.0667.\nE[X] = 12.5000."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 5,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Show Formulas\nE[X] = (a + b) / 2.\nVar(X) = (b - a)² / 12."
+          },
+          {
+            "click": {
+              "button": "Show Formulas",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE a → −10\nRange 30. Density 0.0333.\nE[X] = 5.0000. Var = 75.0000."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": -10,
+            "ms": 1200
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "flat-pdf": {
+        "title": "PDF, CDF and Table tabs",
+        "script": [
+          {
+            "say": "TAP CDF\nF(x): 0 below a, straight line,\n1 above b."
+          },
+          {
+            "click": {
+              "button": "CDF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP Table\nx from −2 to 12, step 0.1.\nf(x) = 0 outside [0, 10]."
+          },
+          {
+            "click": {
+              "button": "Table",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE b → 20\nRows now x = −4 to 24.\nF(x) reaches 1 at x = 20."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 20,
+            "ms": 1200
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP PDF\nFlat top, twice as wide, half as high.\nRed line E[X] = 10.00."
+          },
+          {
+            "click": {
+              "button": "PDF",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "using-cumulative-calculators": {
+        "title": "Cumulative probabilities",
+        "script": [
+          {
+            "say": "TAP P(X ≤ x), TYPE 4\nP(X ≤ 4) = 0.400000.\n= (4 − 0) / (10 − 0)."
+          },
+          {
+            "click": {
+              "button": "P(X ≤ x)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter x\"]",
+            "value": 4
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X < x), TYPE 4\nP(X < 4) = 0.400000.\nSame: a single point adds 0."
+          },
+          {
+            "click": {
+              "button": "P(X < x)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter x\"]",
+            "value": 4
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X > x), TYPE 4\nP(X > 4) = 0.600000.\n= (10 − 4) / 10."
+          },
+          {
+            "click": {
+              "button": "P(X > x)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter x\"]",
+            "value": 4
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(X ≥ x), TYPE 4\nP(X ≥ 4) = 0.600000.\nSame as P(X > 4)."
+          },
+          {
+            "click": {
+              "button": "P(X ≥ x)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter x\"]",
+            "value": 4
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "computing-interval-probabilities": {
+        "title": "Interval probabilities",
+        "script": [
+          {
+            "say": "TYPE a = 2, b = 5\nP(2 ≤ X ≤ 5) = 0.300000.\nLength 3 of 10."
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a < X < b), TYPE 2 and 5\nP(2 < X < 5) = 0.300000.\nEndpoints add nothing."
+          },
+          {
+            "click": {
+              "button": "P(a < X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 5
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "TAP P(a ≤ X < b), TYPE 2 and 8\nP(2 ≤ X < 8) = 0.600000.\nTwice the length, twice the probability."
+          },
+          {
+            "click": {
+              "button": "P(a ≤ X < b)",
+              "exact": true,
+              "nth": 0
+            }
+          },
+          {
+            "set": "input[placeholder=\"Enter a\"]",
+            "value": 2
+          },
+          {
+            "wait": 250
+          },
+          {
+            "set": "input[placeholder=\"Enter b\"]",
+            "value": 8
+          },
+          {
+            "wait": 250
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "SLIDE b → 20\nInterval [0, 20], same 2 to 8.\nP = 0.300000: 6 of 20."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 20,
+            "ms": 1200
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      }
+    }
+  };
+  const instructions = INSTRUCTIONS[view];
+  const demos = DEMOS[view];
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools(`probability-distributions-${params.view}`),
       sectionsContent,
       introContent,
@@ -3806,7 +6964,32 @@ schemas: {
   };
 }
 
-export default function DistributionExplorerPage({ relatedTools, seoData, sectionsContent, stateUnits, sectionOrder, introContent, componentName, h1Title, faqQuestions, schemas }) {
+export default function DistributionExplorerPage({ relatedTools, seoData, sectionsContent, stateUnits, sectionOrder, introContent, componentName, h1Title, faqQuestions, schemas, instructions, demos }) {
+
+  const TOOLS = {
+    BinomialDistributionExplorer,
+    GeometricDistributionExplorer: GeometricDistributionExplorerer,
+    NegativeBinomialDistributionExplorer,
+    PoissonDistributionExplorer,
+    HypergeometricDistributionExplorer,
+    DiscreteUniformDistributionExplorer,
+    NormalDistributionExplorer,
+    ExponentialDistributionExplorer,
+    ContinuousUniformDistributionExplorer,
+  }
+  const Tool = TOOLS[componentName]
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <Tool title='Modify Parameters and See Results' />
+    </ToolDemoPlayer>
+  )
 
   const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
     const src = sectionsContent[obj]
@@ -3816,6 +6999,7 @@ export default function DistributionExplorerPage({ relatedTools, seoData, sectio
       body.push(<div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />)
       if (src.after) body.push(src.after)
     }
+    if (demos && demos[id] && Tool) body.unshift(demo(id))
     return { id, title: src.title, link: src.link || '', content: body }
   }).filter(Boolean);
 
@@ -3878,6 +7062,10 @@ export default function DistributionExplorerPage({ relatedTools, seoData, sectio
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
         {h1Title}
       </h1>
+      <div style={{width:'80%', margin:'auto'}}>
+        <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+      </div>
+      <br/>
       <br/>
       <div style={{width:'80%',margin:'auto'}}>
       {componentName === 'BinomialDistributionExplorer' && <BinomialDistributionExplorer 

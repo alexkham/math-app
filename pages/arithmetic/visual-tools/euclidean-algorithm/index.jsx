@@ -15,6 +15,9 @@ import EuclideanVisualizer from '../../../../app/components/arithmetic/visualize
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -427,8 +430,118 @@ Fibonacci neighbors are also always coprime — the backwards walk always ends a
     equal: `Equal inputs end immediately: a = a · 1 + 0, and since gcd(d, 0) = d, the answer is the number itself. [Learn more about why this works](!#why-the-algorithm-works) · [All presets](!#entering-numbers-and-using-presets)`,
   };
 
+  const instructions = [
+    'The purple banner at the top gives the GCD three ways: a large number, the equation $\\gcd(a, b) = N$, and a sentence that counts the steps. [Learn more about the result banner](!#the-result-banner-and-gcd-callout)',
+    'Type any two positive whole numbers into **a** and **b**; the chain is recomputed on every keystroke, and if $a < b$ the pair is swapped. [Learn more about entering numbers](!#entering-numbers-and-using-presets)',
+    '**Random pair** draws two numbers from $12$ to $480$; the five preset buttons load $(252, 105)$, $(462, 198)$, $(1071, 462)$, $(56, 84)$ and $(35, 54)$. [Learn more about the presets](!#entering-numbers-and-using-presets)',
+    'Each row reads dividend = divisor · quotient + remainder; the remainder sits in an amber pill, and the last row ends in a dashed gray $0$ marked **stop**. [Learn more about reading a division row](!#reading-a-division-row)',
+    'A dashed amber arrow carries each remainder down to the divisor place of the next row; the final divisor sits in a purple box labelled **gcd = N**. [Learn more about the substitution arrows](!#following-the-substitution-arrows)',
+    'Hover an amber pill to turn its arrow purple and ring the next divisor; hover a line of the **Steps** list to light the same step in the diagram. [Learn more about hovering remainders and steps](!#hovering-remainders-and-steps)',
+    'The **Steps** list repeats every division as text, the legend names the three colours, and for each preset, for equal inputs and for $144$ and $89$ a note under the list explains the case. [Learn more about the parts of the visualizer](!#getting-started-with-the-visualizer)',
+    '**How the Euclidean algorithm works** at the bottom opens the method in four numbered steps. [Learn more about the visualizer layout](!#getting-started-with-the-visualizer)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real EuclideanVisualizer
+     (opens on a = 252, b = 105). Inputs: input nth 0 = a, nth 1 = b; presets
+     are buttons labelled '252, 105' ... '35, 54'. Random pair is left out
+     (not deterministic); hover highlights are left out (the player has no
+     hover action). The tool does not animate, so no waits on the tool. */
+  const demos = {
+    'getting-started-with-the-visualizer': {
+      title: 'Banner, chain and Steps list',
+      script: [
+        { say: `TAP 462, 198
+Banner: gcd(462, 198) = 66,
+found in 2 steps.
+Chain and Steps list: two rows.` },
+        { click: { button: '462, 198', exact: true } },
+        { wait: 2800 },
+        { say: `TAP 1071, 462
+Three rows: remainders 147, 21, 0.
+Banner: 21, found in 3 steps.` },
+        { click: { button: '1071, 462', exact: true } },
+        { wait: 2800 },
+        { say: `TAP How the Euclidean algorithm works
+Panel opens: four numbered steps.
+Divide, replace, repeat, stop at 0.` },
+        { click: 'summary' },
+        { wait: 2800 },
+        { say: `TYPE a 0
+Not a positive whole number.
+Banner, chain and Steps list vanish.` },
+        { set: { css: 'input', nth: 0 }, value: '0' },
+        { wait: 2600 },
+        { say: `TAP 252, 105
+Launch pair back.
+Remainders 42, 21, 0.
+Purple box on 21: gcd = 21.` },
+        { click: { button: '252, 105', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'entering-numbers-and-using-presets': {
+      title: 'Presets and typed pairs',
+      script: [
+        { say: `TAP 35, 54
+a < b: swapped to gcd(54, 35).
+Five rows: 19, 16, 3, 1, 0.
+gcd = 1: coprime.` },
+        { click: { button: '35, 54', exact: true } },
+        { wait: 3000 },
+        { say: `TAP 56, 84
+Swap, then 84 = 56 · 1 + 28.
+28 divides 56: gcd = 28 in 2 steps.` },
+        { click: { button: '56, 84', exact: true } },
+        { wait: 2800 },
+        { say: `TYPE a 144, b 89
+Ten rows, every quotient 1 but the last.
+Fibonacci worst case: gcd = 1.` },
+        { set: { css: 'input', nth: 0 }, value: '144' },
+        { set: { css: 'input', nth: 1 }, value: '89' },
+        { wait: 3000 },
+        { say: `TYPE a 36, b 36
+One row: 36 = 36 · 1 + 0.
+gcd = 36, found in 1 step.` },
+        { set: { css: 'input', nth: 0 }, value: '36' },
+        { set: { css: 'input', nth: 1 }, value: '36' },
+        { wait: 2800 },
+      ],
+    },
+    'reading-a-division-row': {
+      title: 'Rows, pills, arrows and the stop',
+      script: [
+        { say: `TYPE b 21
+252 = 21 · 12 + 0: one row.
+Dashed gray 0, marked stop.
+21 in the purple box: gcd = 21.` },
+        { set: { css: 'input', nth: 1 }, value: '21' },
+        { wait: 3000 },
+        { say: `TYPE b 100
+Four rows. Amber pills 52, 48, 4.
+Dashed arrow carries each pill
+down to the next divisor.` },
+        { set: { css: 'input', nth: 1 }, value: '100' },
+        { wait: 3000 },
+        { say: `TYPE a 30
+a < b: swapped.
+100 = 30 · 3 + 10, then 30 = 10 · 3 + 0.
+gcd = 10.` },
+        { set: { css: 'input', nth: 0 }, value: '30' },
+        { wait: 3000 },
+        { say: `TAP 1071, 462
+Quotients 2, 3, 7.
+Pill 147 becomes the divisor of row 2,
+pill 21 the divisor of row 3.` },
+        { click: { button: '1071, 462', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('euclidean-algorithm'),
       sectionsContent,
       introContent,
@@ -452,7 +565,22 @@ Fibonacci neighbors are also always coprime — the backwards walk always ends a
 }
 
 
-export default function EuclideanAlgorithmPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function EuclideanAlgorithmPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <EuclideanVisualizer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -474,9 +602,9 @@ export default function EuclideanAlgorithmPage({relatedTools, seoData, sectionsC
   })
 
   const genericSections = [
-    stateRow('obj1', 'getting-started-with-the-visualizer', 'classic'),
-    plain('obj2', 'entering-numbers-and-using-presets'),
-    plain('obj3', 'reading-a-division-row'),
+    withDemo(stateRow('obj1', 'getting-started-with-the-visualizer', 'classic')),
+    withDemo(plain('obj2', 'entering-numbers-and-using-presets')),
+    withDemo(plain('obj3', 'reading-a-division-row')),
     plain('obj4', 'following-the-substitution-arrows'),
     plain('obj5', 'hovering-remainders-and-steps'),
     plain('obj6', 'the-result-banner-and-gcd-callout'),
@@ -543,6 +671,10 @@ export default function EuclideanAlgorithmPage({relatedTools, seoData, sectionsC
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Euclidean Algorithm</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <EuclideanVisualizer explanations={explanations}/>
       <br/>

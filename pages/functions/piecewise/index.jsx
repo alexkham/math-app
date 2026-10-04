@@ -981,6 +981,8 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionPiecewiseDiagrams from '@/app/components/functions/piecewise/functionPiecewiseDiagrams'
+import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -1623,6 +1625,55 @@ const faqQuestions = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpTwoRules = {
+    kind: 'pieces', svgTitle: 'f(x) = x + 1 for x < 0 and x^2 for x >= 0, evaluated at -3, 0 and 2', xRange: [-4, 3], yRange: [-3, 6],
+    pieces: [
+      { fn: (x) => x + 1, from: -4, to: 0, ends: [null, 'open'], color: 'f', label: { text: 'x + 1 for x < 0', x: -1.3, y: -2.3, pos: 'n' } },
+      { fn: (x) => x * x, from: 0, to: 2.45, ends: ['closed', null], color: 'g', label: { text: 'x² for x ≥ 0', x: 1.7, y: 5.2, pos: 'w' } },
+    ],
+    points: [{ x: -3, y: -2, label: 'f(−3) = −2', pos: 'w' }, { x: 2, y: 4, label: 'f(2) = 4', pos: 'e' }],
+    notes: [{ x: 0.15, y: -1, text: 'f(0) = 0: x ≥ 0 owns 0', pos: 'e', color: 'g' }, { x: 0, y: 1, text: '(0, 1) open: not used', pos: 'nw', color: 'f' }],
+    caption: 'Two formulas on two intervals, still one output per input',
+  };
+  const fpDrawJump = {
+    kind: 'pieces', svgTitle: 'Graphing x + 3 for x < 1 and 2x - 1 for x >= 1', xRange: [-3, 4], yRange: [-1, 7],
+    pieces: [
+      { fn: (x) => x + 3, from: -3, to: 1, ends: [null, 'open'], color: 'f', ghost: [[1, 4]], label: { text: 'x + 3 for x < 1', x: -0.8, y: 0, pos: 'n' } },
+      { fn: (x) => 2 * x - 1, from: 1, to: 4, ends: ['closed', null], color: 'g', ghost: [[0, 1]], label: { text: '2x − 1 for x ≥ 1', x: 3.3, y: 6.2, pos: 'w' } },
+    ],
+    notes: [{ x: 1, y: 4, text: '(1, 4) excluded: open dot', pos: 'nw', color: 'f' }, { x: 1, y: 1, text: '(1, 1) included: solid dot', pos: 'e', color: 'g' }],
+    caption: 'Each line kept only on its interval; the dots show who owns x = 1',
+  };
+  const fpPieceDomain = {
+    kind: 'domainOpen', svgTitle: 'Domain of x^2 for x <= -1 and sqrt x for x >= 0', range: [-4, 4],
+    rows: [
+      { label: 'x² covers x ≤ −1', color: 'f', segs: [[null, -1, false, false]], tag: { text: '(−∞, −1]', x: 2.5 } },
+      { label: '√x covers x ≥ 0', color: 'g', segs: [[0, null, false]], tag: { text: '[0, ∞)', x: 2.5 } },
+      { label: 'Dom f: no piece covers (−1, 0)', color: 'r', segs: [[null, -1, false, false], [0, null, false]], tag: { text: '(−∞, −1] ∪ [0, ∞)', x: 2.3 } },
+    ],
+    caption: 'The domain is the union of the pieces’ intervals — gaps stay out',
+  };
+  const fpRangeUnion = {
+    kind: 'pieces', svgTitle: 'Range of 2 for x < 0 and x + 1 for x >= 0 is [1, inf)', xRange: [-4, 4], yRange: [-1, 6],
+    pieces: [
+      { fn: () => 2, from: -4, to: 0, ends: [null, 'open'], color: 'g', label: { text: '2 for x < 0', x: -2.5, y: 2, pos: 'n' } },
+      { fn: (x) => x + 1, from: 0, to: 5, ends: ['closed', null], color: 'f', label: { text: 'x + 1 for x ≥ 0', x: 2.2, y: 3.2, pos: 'se' } },
+    ],
+    yBars: [{ from: 1, to: 7, color: 'r', label: 'outputs [1, ∞)', labelY: 4.6, dx: 0 }],
+    notes: [{ x: -2.5, y: 2, text: '{2} is already inside [1, ∞)', pos: 's', color: 'g' }],
+    caption: 'Range = {2} ∪ [1, ∞) = [1, ∞)',
+  };
+  const fpPlumber = {
+    kind: 'pieces', svgTitle: 'Plumber cost C(t): 50 for the first hour, then 30t + 20', xRange: [0, 4], yRange: [0, 120], yStep: 20, xLetter: 't', yLetter: 'C',
+    pieces: [
+      { fn: () => 50, from: 0, to: 1, ends: ['open', 'closed'], color: 'g', label: { text: '$50 flat', x: 0.5, y: 50, pos: 'n' } },
+      { fn: (t) => 30 * t + 20, from: 1, to: 4, ends: ['open', null], color: 'f', label: { text: '30t + 20: +$30 per extra hour', x: 2.5, y: 25, pos: 'n' } },
+    ],
+    vlines: [{ x: 1, label: 'threshold t = 1' }],
+    points: [{ x: 3, y: 110, label: 'C(3) = 110', pos: 'se' }],
+    caption: 'The rule changes at t = 1 hour; the cost C does not jump',
+  };
+
   const demoUnits = {
     jump: demoUnitFrame({
       svg: functionPiecewiseDiagrams.jump,
@@ -1644,6 +1695,31 @@ const faqQuestions = {
       text: 'Each piece is a constant, so the graph is two horizontal segments with a jump of 2 at x = 0; the open and closed dots record which piece owns the boundary. Every step function is built this way, one flat piece per interval. Try the three-piece sign function on the',
       href: '/functions/visual-tools/piecewise',
       linkText: 'piecewise function explorer',
+    }),
+    twoRules: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpTwoRules),
+      caption: 'One function, two formulas',
+      text: 'The section\'s example: x + 1 for x &lt; 0 (blue) and x&#178; for x &#8805; 0 (navy). Each input falls in exactly one interval, so exactly one formula runs: f(&#8722;3) = &#8722;2 from the first, f(2) = 4 from the second. At the boundary x = 0 the condition x &#8805; 0 applies, so f(0) = 0; the first piece&#8217;s end at (0, 1) is open and never used.',
+    }),
+    drawJump: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpDrawJump),
+      caption: 'Graph each piece on its own interval',
+      text: 'Each line is drawn as if it ran everywhere (faint dashes), then only its own interval is kept. At x = 1 the first piece would give 4, but x = 1 is excluded, so (1, 4) gets an open dot; the second piece gives 1 and includes x = 1, so (1, 1) gets a solid dot. The gap between the two dots is the jump.',
+    }),
+    domainGap: demoUnitFrame({
+      svg: renderFunctionPlotV2(fpPieceDomain),
+      caption: 'Two intervals, one domain with a gap',
+      text: 'x&#178; is used only for x &#8804; &#8722;1 and &#8730;x only for x &#8805; 0. Laying the two intervals on one line and keeping everything either piece covers gives (&#8722;&#8734;, &#8722;1] &#8746; [0, &#8734;); the inputs between &#8722;1 and 0 belong to no piece, so they are not in the domain.',
+    }),
+    rangeUnion: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRangeUnion),
+      caption: 'Collecting the outputs of each piece',
+      text: 'The constant piece outputs only 2; the line x + 1, starting at (0, 1) with a solid dot, outputs every value from 1 upward. The amber bar on the y-axis is the union of the two: 2 already lies in [1, &#8734;), so the range is [1, &#8734;).',
+    }),
+    plumber: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpPlumber),
+      caption: 'The plumber\'s charge as a graph',
+      text: 'C(t) = 50 for 0 &lt; t &#8804; 1 and 30t + 20 for t &gt; 1. The flat piece is the first-hour charge; after the threshold at one hour, the line climbs $30 per hour. Both pieces give $50 at t = 1, so the graph has no jump, and three hours cost C(3) = $110.',
     }),
   };
 
@@ -1700,6 +1776,8 @@ export default function PiecewisePage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-twoRules'} dangerouslySetInnerHTML={{ __html: demoUnits.twoRules }} />,
+          `Which formula applies is decided by the input, never by choice.`,
         ]
     },
     {
@@ -1735,6 +1813,8 @@ export default function PiecewisePage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-drawJump'} dangerouslySetInnerHTML={{ __html: demoUnits.drawJump }} />,
+          `Open and closed dots are part of the graph, not decoration: they say which piece owns each boundary.`,
         ]
     },
     {
@@ -1743,6 +1823,8 @@ export default function PiecewisePage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-domainGap'} dangerouslySetInnerHTML={{ __html: demoUnits.domainGap }} />,
+          `Remember to intersect each interval with what its own formula allows.`,
         ]
     },
     {
@@ -1751,6 +1833,8 @@ export default function PiecewisePage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-rangeUnion'} dangerouslySetInnerHTML={{ __html: demoUnits.rangeUnion }} />,
+          `A piece's outputs can hide inside another piece's range, as the constant 2 does here.`,
         ]
     },
     {
@@ -1812,6 +1896,8 @@ export default function PiecewisePage({
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <div key={'unit-plumber'} dangerouslySetInnerHTML={{ __html: demoUnits.plumber }} />,
+          `Drawing the function is a quick check that the written pieces match the description.`,
         ]
     },
     {

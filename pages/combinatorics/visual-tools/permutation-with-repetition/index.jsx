@@ -494,6 +494,9 @@ import PermutationWithRepetition from '../../../../app/components/combinatorics/
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import permutationsWithRepetitionDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/permutationsWithRepetitionDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -970,8 +973,121 @@ Spotting the six permutation cards inside the 27 is a good exercise with the mod
     big53: `5³ = 125: one extra slot multiplies by all of n, never by a shrinking remainder — length, not alphabet, is where the growth lives. [Learn more about the derivation](!#deriving-n-r) · [Adjusting n and r](!#adjusting-n-and-r)`,
   };
 
+  const instructions = [
+    'The **Mode** switch toggles **● Balls** (colored circles numbered 1, 2, 3 …) and **A Letters** (tiles A, B, C …); the build state is kept, only the drawing changes. [Learn more about the mode switch](!#mode-switch)',
+    '**n − / +** sets the source pool from 3 to 5 items and **r − / +** the number of slots, capped at 4 for $n = 3$ and 3 for $n = 4$ or 5; raising $n$ can lower $r$. [Learn more about adjusting n and r](!#adjusting-n-and-r)',
+    '**▶ Play** builds all $n^r$ arrangements and stops at the end, **Step ▶** moves one ball into one slot, **◀ Back** steps backward and **↺ Reset** clears the completed rows. [Learn more about the transport controls](!#transport-controls)',
+    'The **Speed** slider runs from 0.3 to 3 and sets how fast Play flies and lands each ball. [Learn more about the speed slider](!#transport-controls)',
+    'The header shows $n^r$ and the total; the status line under it tracks the first-item step being built and ends at **Complete**. [Learn more about getting started](!#getting-started)',
+    'In the build area each ball flies from the source row into the next slot; the source row never dims, so the same item can land again. [Learn more about the build area](!#the-build-area)',
+    'Finished arrangements are filed under **COMPLETED**, one row per first item, each row holding $n^{r-1}$ cards. [Learn more about first-item groups](!#grouping-by-first-item)',
+    'The right panel adds a row per first item with its progress and how the remaining $r - 1$ positions are filled. [Learn more about the right panel](!#right-panel-and-progress)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real PermutationWithRepetition
+     (opens on n = 3, r = 2, balls mode, speed 1). Steppers: '−' / '+' exact,
+     nth 0 = n, nth 1 = r. A landed build ball is a Ball group with no transform:
+     g[style="opacity: 1;"] > text[y="187"]. */
+  const landed = (k) => ({ until: { css: 'svg.vt-scene-svg g[style="opacity: 1;"] > text[y="187"]', nth: k } })
+  const demos = {
+    'getting-started': {
+      title: 'Play all 3² arrangements',
+      script: [
+        { say: `SLIDE Speed → 3
+Balls fly and land 3× faster.
+Same arrangements, same order.` },
+        { slide: { range: 0 }, to: 3, ms: 1200 },
+        { wait: 2000 },
+        { say: `TAP ▶ Play
+All 3² = 9 built and filed.
+3 rows of 3 cards, one per first item.
+Status: Complete · 9 / 9.` },
+        { click: { button: '▶ Play', exact: true } },
+        { until: { text: 'Complete · 9 / 9' }, ms: 15000 },
+        { wait: 2600 },
+        { say: `TAP A Letters
+Same 9 cards, now as letters:
+AA, AB, AC … CC.` },
+        { click: { text: 'A Letters' } },
+        { wait: 2600 },
+        { say: `TAP ↺ Reset
+Completed rows cleared.
+Status: Press Play or Step to begin.` },
+        { click: { button: '↺ Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-build-area': {
+      title: 'One ball at a time',
+      script: [
+        { say: `TAP Step ▶
+Red 1 flies to slot #1.
+Source row does not dim.
+Status: Step 1 (Red): 0 / 3.` },
+        { click: { button: 'Step ▶', exact: true } },
+        landed(0),
+        { wait: 2800 },
+        { say: `TAP Step ▶
+Red 1 again, into slot #2.
+Reuse allowed: red stays bright.` },
+        { click: { button: 'Step ▶', exact: true } },
+        landed(1),
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Flash ring: arrangement complete.
+Status: Step 1 (Red): 1 / 3.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: 'svg.vt-scene-svg animate' },
+        { wait: 2400 },
+        { say: `TAP Step ▶
+Red-red card filed in row 1.
+COMPLETED 1 / 9. Slots empty.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Step ▶
+Next arrangement: red into #1 again.
+Every arrangement in row 1 starts red.` },
+        { click: { button: 'Step ▶', exact: true } },
+        landed(0),
+        { wait: 2600 },
+      ],
+    },
+    'adjusting-n-and-r': {
+      title: 'Steppers n and r',
+      script: [
+        { say: `TAP r +
+r = 3. Three slots.
+Header 3³ = 27.` },
+        { click: { button: '+', exact: true, nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP r +
+r = 4: more slots than items.
+3⁴ = 81. Cap for n = 3.` },
+        { click: { button: '+', exact: true, nth: 1 } },
+        { wait: 2600 },
+        { say: `TAP n +
+n = 4. r clamped to 3.
+4³ = 64.` },
+        { click: { button: '+', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP n +
+n = 5. Five items in the source.
+5³ = 125. Largest run.` },
+        { click: { button: '+', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP r −
+r = 2. Two slots.
+5² = 25.` },
+        { click: { button: '−', exact: true, nth: 1 } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('permutation-with-repetition'),
       sectionsContent,
       introContent,
@@ -995,7 +1111,22 @@ Spotting the six permutation cards inside the 27 is a good exercise with the mod
   }
 }
 
-export default function PermutationWithRepetitionVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PermutationWithRepetitionVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <PermutationWithRepetition explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1018,9 +1149,9 @@ export default function PermutationWithRepetitionVisualizer({relatedTools, seoDa
 
   const genericSections = [
     plain('obj0', 'key-terms'),
-    stateRow('obj1', 'getting-started', 'idle'),
-    stateRow('obj2', 'the-build-area', 'building'),
-    plain('obj3', 'adjusting-n-and-r'),
+    withDemo(stateRow('obj1', 'getting-started', 'idle')),
+    withDemo(stateRow('obj2', 'the-build-area', 'building')),
+    withDemo(plain('obj3', 'adjusting-n-and-r')),
     stateRow('obj4', 'grouping-by-first-item', 'default32'),
     stateRow('obj12', 'sequences-versus-permutations', 'cube33'),
     stateRow('obj11', 'when-r-exceeds-n', 'rExceedsN'),
@@ -1126,6 +1257,10 @@ export default function PermutationWithRepetitionVisualizer({relatedTools, seoDa
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Permutations with Repetition</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <PermutationWithRepetition explanations={explanations}/>
       <br/>

@@ -10,6 +10,9 @@ import InequalityVisualizer from '../../../../app/components/algebra/inequalitie
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '../../../../app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -652,8 +655,152 @@ Frozen side by side, the four frames are a truth table for the operator pair —
   }
 
 
+  const instructions = [
+    'Tap **Polynomial**, **Quadratic**, **Absolute value**, **Rational** or **Radical** in the type bar; the curve, the factors and the sign chart switch to that family. [Learn more about selecting an inequality type](!#selecting-an-inequality-type)',
+    'The inequality above the graph is built from clickable factors; the line under the graph says whether the marble\'s $x$ satisfies it, and the **interval** and **set-builder** pills give the solution set. [Learn more about getting started](!#getting-started-with-the-visualizer)',
+    '**✋ drag** moves the marble, **➭ step** walks it through test points and critical points with **◀ prev**, **next ▶** and **tour**, and **▶ auto** sweeps it; the arrow, bracket, Space and R keys do the same. [Learn more about the modes and shortcuts](!#three-interaction-modes-and-keyboard-shortcuts)',
+    'The **strict** / **non-strict** button excludes or includes the zeros, the $f(x) < 0$ button flips the direction, and **↺ reset** restores both with the template. [Learn more about direction and strictness](!#direction-and-strictness)',
+    'Templates load preset inequalities; each parameter has a slider with clickable ticks, and **⌨** turns it into a typed box. [Learn more about parameters and templates](!#adjusting-parameters-and-using-templates)',
+    'The **Sign chart** has one row per factor and an $f(x)$ row; tap a column or a cell to move the marble there. [Learn more about reading the sign chart](!#reading-the-sign-chart)',
+    'The **Explanation** panel has a live tab, labelled with the marble\'s $x$, that combines the factor signs, and a **strategy** tab with the solving steps. [Learn more about the explanation panel](!#reading-the-explanation-panel)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real InequalityVisualizer
+     (opens on Polynomial, template Three roots: (x + 2)(x − 1)(x − 5) < 0, marble at
+     x = −4). Range inputs in DOM order: 0 = auto speed, then the type's parameters
+     (Polynomial: 1 = r₁, 2 = r₂, 3 = r₃; Rational: 1 = zero a, 2 = pole b). The
+     marble listens to mouse events, so the demos move it with the step buttons and
+     the sign-chart columns instead of drags. */
+  const demos = {
+    'selecting-an-inequality-type': {
+      title: 'Types, templates and roots',
+      script: [
+        { say: `TAP Quadratic
+(x + 2)(x − 3) < 0.
+Solution (−2, 3).`, at: 'br' },
+        { click: { button: 'Quadratic', exact: true } },
+        { wait: 2600 },
+        { say: `TAP No real roots
+(x² + 4) < 0. Always positive.
+Solution ∅.`, at: 'br' },
+        { click: { button: 'No real roots', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Rational
+(x − 1) / (x + 2) < 0. Pole at −2.
+Solution (−2, 1).`, at: 'br' },
+        { click: { button: 'Rational', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG pole b → 3
+(x − 1) / (x − 3) < 0.
+Solution (1, 3).`, at: 'br' },
+        { slide: { range: 2 }, to: 3, ms: 1600 },
+        { wait: 2600 },
+        { say: `TAP Polynomial, DRAG root r₃ → −2
+(x + 2)²(x − 1) < 0. Double root at −2.
+Solution (−∞, −2) ∪ (−2, 1).`, at: 'br' },
+        { click: { button: 'Polynomial', exact: true } },
+        { wait: 600 },
+        { slide: { range: 3 }, to: -2, ms: 1800 },
+        { wait: 2800 },
+      ],
+    },
+    'direction-and-strictness': {
+      title: 'Direction and strictness',
+      script: [
+        { say: `TAP strict ( < )
+Now non-strict: ≤ 0. Zeros included.
+(−∞, −2] ∪ [1, 5].`, at: 'tr' },
+        { click: { button: 'strict ( < )', exact: true } },
+        { wait: 2600 },
+        { say: `TAP f(x) < 0
+Direction flips: f(x) ≥ 0.
+Positive parts: [−2, 1] ∪ [5, ∞).`, at: 'tr' },
+        { click: { button: 'f(x) < 0', exact: true } },
+        { wait: 2600 },
+        { say: `TAP non-strict ( ≥ )
+Strict again: f(x) > 0. Zeros excluded.
+(−2, 1) ∪ (5, ∞).`, at: 'tr' },
+        { click: { button: 'non-strict ( ≥ )', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ↺ reset
+Back to f(x) < 0, strict.
+(−∞, −2) ∪ (1, 5).`, at: 'tr' },
+        { click: { button: '↺ reset', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Rational, TAP strict ( < )
+(x − 1) / (x + 2) ≤ 0: (−2, 1].
+Zero 1 included. Pole −2 stays open.`, at: 'tr' },
+        { click: { button: 'Rational', exact: true } },
+        { wait: 600 },
+        { click: { button: 'strict ( < )', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'three-interaction-modes-and-keyboard-shortcuts': {
+      title: 'Stepping the marble',
+      script: [
+        { say: `TAP ➭ step
+Step mode on. Left test point: x = −4.
+f(−4) = −90 → satisfies.`, at: 'tr' },
+        { click: { button: '➭ step', exact: true } },
+        { wait: 2400 },
+        { say: `TAP next ▶
+Critical point x = −2. f(−2) = 0.
+Strict: zero excluded → fails.`, at: 'tr' },
+        { click: { button: 'next ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP next ▶
+Test point in (−2, 1): x = −0.50.
+f = 12.38, positive → fails.`, at: 'tr' },
+        { click: { button: 'next ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP next ▶
+Critical point x = 1. f(1) = 0 → fails.`, at: 'tr' },
+        { click: { button: 'next ▶', exact: true } },
+        { wait: 2400 },
+        { say: `TAP next ▶
+Test point in (1, 5): x = 3.
+f(3) = −20 → satisfies.`, at: 'tr' },
+        { click: { button: 'next ▶', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'reading-the-sign-chart': {
+      title: 'Sign chart and strategy',
+      script: [
+        { say: `TAP column 5
+Marble lands on x = 5.
+Row (x − 5) reads 0. f(5) = 0 → fails.`, at: 'bl' },
+        { click: { css: 'table.sc th.critc', nth: 2 } },
+        { wait: 2600 },
+        { say: `TAP interval 1 – 5
+Test point x = 3. Signs + · + · − = −.
+f(3) = −20 → satisfies.`, at: 'bl' },
+        { click: { css: 'table.sc th.interval-cell', nth: 2 } },
+        { wait: 2800 },
+        { say: `TAP f(x) cell right of 5
+x = 6. Signs + · + · + = +.
+f(6) = 40 → fails.`, at: 'bl' },
+        { click: { css: 'table.sc tr.prod td.interval-cell', nth: 3 } },
+        { wait: 2800 },
+        { say: `TAP strategy
+Critical points −2, 1, 5. Keep the negative parts.
+Solution (−∞, −2) ∪ (1, 5).`, at: 'bl' },
+        { click: { button: 'strategy', exact: true } },
+        { wait: 3000 },
+        { say: `TAP Double root
+(x + 3)(x − 2)² < 0. Critical points −3, 2.
+Solution (−∞, −3).`, at: 'bl' },
+        { click: { button: 'Double root', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('algebra-inequality'),
       sectionsContent,
       introContent,
@@ -682,7 +829,22 @@ Frozen side by side, the four frames are a truth table for the operator pair —
 }
 
 
-export default function InequalityVisualExplorerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function InequalityVisualExplorerPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <InequalityVisualizer explanations={explanations} syncUrl={false}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / section with after-text / per-state section
   // carrying its frozen unit as [content, unit, after].
@@ -712,17 +874,17 @@ export default function InequalityVisualExplorerPage({relatedTools, seoData, sec
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started-with-the-visualizer'),
-    plain('obj2', 'selecting-an-inequality-type'),
+    withDemo(plain('obj2', 'selecting-an-inequality-type')),
 
-    withAfter('obj3', 'direction-and-strictness'),
+    withDemo(withAfter('obj3', 'direction-and-strictness')),
     stateRow('obj31', 'strictly-less-than-zero', 'op-lt'),
     stateRow('obj32', 'at-most-zero', 'op-le'),
     stateRow('obj33', 'strictly-greater-than-zero', 'op-gt'),
     stateRow('obj34', 'at-least-zero', 'op-ge'),
 
-    plain('obj4', 'three-interaction-modes-and-keyboard-shortcuts'),
+    withDemo(plain('obj4', 'three-interaction-modes-and-keyboard-shortcuts')),
     plain('obj5', 'adjusting-parameters-and-using-templates'),
-    plain('obj6', 'reading-the-sign-chart'),
+    withDemo(plain('obj6', 'reading-the-sign-chart')),
     plain('obj7', 'reading-the-explanation-panel'),
 
     plain('obj11', 'polynomial-inequalities-in-the-explorer'),
@@ -808,6 +970,10 @@ export default function InequalityVisualExplorerPage({relatedTools, seoData, sec
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Inequality Visual Explorer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <div style={{transform:'scale(0.95)'}}>
         <InequalityVisualizer explanations={explanations}/>

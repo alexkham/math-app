@@ -1509,6 +1509,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionTransformationsDiagrams from '@/app/components/functions/transformations/functionTransformationsDiagrams'
 import functionReflectionsDiagrams from '@/app/components/functions/reflections/functionReflectionsDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -2689,6 +2690,20 @@ const faqQuestions = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpCombined = { kind: 'pieces', svgTitle: 'x^2 transformed into -2(x + 3)^2 + 5, vertex (0, 0) to (-3, 5)', xRange: [-6, 2], yRange: [-3, 7],
+    pieces: [
+      { fn: (x) => x * x, from: 9, to: 9, ends: [null, null], color: 'g', ghost: [[-2.7, 2]] },
+      { fn: (x) => -2 * (x + 3) ** 2 + 5, from: -6, to: 2, ends: [null, null], color: 'f', label: { text: '−2(x + 3)² + 5', x: -1.0, y: -2.2, pos: 'e' } },
+    ],
+    points: [{ x: 0, y: 0, label: '(0, 0)', pos: 's' }, { x: -3, y: 5, label: 'vertex (−3, 5)', pos: 'n' }],
+    notes: [{ x: 0.6, y: 5.5, text: 'parent x²', pos: 'e', color: 'g' }],
+    caption: 'Parent x² (dashed): left 3, stretch ×2, flip, up 5' };
+  const fpFromGraph = { kind: 'pieces', svgTitle: 'Reading y = -2(x - 3)^2 - 2 from its vertex and one more point', xRange: [-1, 6], yRange: [-8, 2],
+    pieces: [{ fn: (x) => -2 * (x - 3) ** 2 - 2, from: -1, to: 6, ends: [null, null], color: 'f' }],
+    points: [{ x: 3, y: -2, label: 'vertex (3, −2)', pos: 'n' }, { x: 4, y: -4, label: '(4, −4)', pos: 'e' }],
+    notes: [{ x: 3, y: -7.4, text: '1 right, 2 down: |a| = 2', pos: 'n', color: 'g' }, { x: 3, y: 1, text: 'y = −2(x − 3)² − 2', pos: 'n', color: 'f' }],
+    caption: 'The vertex gives h and k; one more point gives a' };
+
   const demoUnits = {
     vertShift: demoUnitFrame({
       svg: functionTransformationsDiagrams.k,
@@ -2731,6 +2746,23 @@ const faqQuestions = {
       text: 'Doubling the input compresses the graph horizontally by a factor of 2: the height that x&#178; reaches at x = 2 is now reached at x = 1. Heights are unchanged; positions along the x-axis are halved. Compare with the vertical stretch, which looks similar but moves different points, on the',
       href: '/functions/visual-tools/transformations',
       linkText: 'transformations explorer',
+    }),
+    general: demoUnitFrame({
+      svg: functionTransformationsDiagrams.custom,
+      caption: 'All four parameters at once',
+      text: 'The dashed curve is the parent f(x) = x&#178;; the solid one is g(x) = 0.5 &#183; f(1.5(x &#8722; 2)) + 1. Inside the function, h = 2 moves the vertex right and b = 1.5 narrows the curve; outside, a = 0.5 flattens it and k = 1 lifts it. The vertex lands at (2, 1). Set each of a, b, h, k yourself on the',
+      href: '/functions/visual-tools/transformations',
+      linkText: 'transformations explorer',
+    }),
+    combined: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpCombined),
+      caption: 'Four transformations, one parabola',
+      text: 'The section\'s example g(x) = &#8722;2(x + 3)&#178; + 5 against its parent x&#178; (dashed). Shifting left 3 and up 5 carries the vertex from (0, 0) to (&#8722;3, 5); the factor &#8722;2 makes the curve twice as steep and turns it upside down, so the vertex becomes a maximum.',
+    }),
+    fromGraph: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpFromGraph),
+      caption: 'Reading the equation off the graph',
+      text: 'The section\'s parabola: its vertex at (3, &#8722;2) gives h = 3 and k = &#8722;2. One step right of the vertex the graph has dropped 2 units, where the parent x&#178; would have risen 1, so |a| = 2 and, since it opens downward, a = &#8722;2. The point (4, &#8722;4) checks the result: &#8722;2(4 &#8722; 3)&#178; &#8722; 2 = &#8722;4.',
     }),
   };
 
@@ -2798,6 +2830,8 @@ export default function TransformationsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-general'} dangerouslySetInnerHTML={{ __html: demoUnits.general }} />,
+          `Every transformation on this page is one of these four parameters at work.`,
         ]
     },
     {
@@ -2890,6 +2924,8 @@ export default function TransformationsPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-combined'} dangerouslySetInnerHTML={{ __html: demoUnits.combined }} />,
+          `Tracking the vertex is the quickest way to check a combined transformation.`,
         ]
     },
     {
@@ -2906,6 +2942,8 @@ export default function TransformationsPage({
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <div key={'unit-fromGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.fromGraph }} />,
+          `Any visible point other than the vertex can serve as the check.`,
         ]
     },
     {

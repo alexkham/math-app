@@ -12,6 +12,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 
@@ -659,6 +660,33 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpAbsQuadratic = { kind: 'pieces', svgTitle: '|x^2 - 4| = 5 at x = 3 and x = -3 only', xRange: [-4, 4], yRange: [-6, 8],
+    pieces: [
+      { fn: (x) => x * x - 4, from: 9, to: 9, ends: [null, null], color: 'g', ghost: [[-4, 4]] },
+      { fn: () => -5, from: 9, to: 9, ends: [null, null], color: 'r', ghost: [[-4, 4]], label: { text: 'y = −5: never reached', x: 2, y: -5, pos: 's' } },
+      { fn: (x) => Math.abs(x * x - 4), from: -4, to: 4, ends: [null, null], color: 'f' },
+      { fn: () => 5, from: -4, to: 4, ends: [null, null], color: 'g', label: { text: 'y = 5', x: -1.4, y: 5, pos: 'n' } },
+    ],
+    points: [{ x: -3, y: 5, label: 'x = −3', pos: 'sw' }, { x: 3, y: 5, label: 'x = 3', pos: 'se' }],
+    notes: [{ x: -3.9, y: -4.2, text: 'dashed: x² − 4', pos: 'e', color: 'g' }],
+    caption: '|x² − 4| = 5 only at x = ±3: the case x² − 4 = −5 has no solution' };
+  const fpAbsBothSides = { kind: 'pieces', svgTitle: '|2x - 1| = |x + 4| at x = -1 and x = 5', xRange: [-6, 7], yRange: [-1, 12],
+    pieces: [
+      { fn: (x) => Math.abs(2 * x - 1), from: -6, to: 7, ends: [null, null], color: 'f', label: { text: '|2x − 1|', x: 6.1, y: 11.2, pos: 'w' } },
+      { fn: (x) => Math.abs(x + 4), from: -6, to: 7, ends: [null, null], color: 'g', label: { text: '|x + 4|', x: -3, y: 3.6, pos: 'n' } },
+    ],
+    points: [{ x: -1, y: 3, label: 'x = −1', pos: 'e' }, { x: 5, y: 9, label: 'x = 5', pos: 'se' }],
+    caption: 'Equal magnitudes twice: 2x − 1 = x + 4 and 2x − 1 = −(x + 4)' };
+  const fpAbsExtraneous = { kind: 'pieces', svgTitle: '|x - 2| = 3x - 4 holds only at x = 3/2; x = 1 is extraneous', xRange: [-1, 4], yRange: [-3, 6],
+    pieces: [
+      { fn: (x) => Math.abs(x - 2), from: -1, to: 4, ends: [null, null], color: 'f', label: { text: '|x − 2|', x: -0.5, y: 3.3, pos: 'n' } },
+      { fn: (x) => 3 * x - 4, from: -1, to: 4, ends: [null, null], color: 'g', label: { text: '3x − 4', x: 3.2, y: 5.6, pos: 'w' } },
+    ],
+    vlines: [{ x: 1, label: 'x = 1: extraneous' }],
+    points: [{ x: 1.5, y: 0.5 }],
+    notes: [{ x: 1.38, y: 0.3, text: 'x = 3/2', pos: 'w', color: 'r' }, { x: 1, y: 0.85, text: '|x − 2| = 1', pos: 'w', color: 'f' }, { x: 1, y: -1, text: '3x − 4 = −1', pos: 'w', color: 'g' }],
+    caption: 'Squaring keeps x = 1, but there |x − 2| = 1 while 3x − 4 = −1' };
+
   const demoUnits = {
     basic: demoUnitFrame({
       svg: equationVisualizerDiagrams['abs-two'],
@@ -666,6 +694,28 @@ const schemas = {
       text: 'The level y = 3 cuts both arms of the V, so B &gt; 0 gives two solutions; at B = 0 the level touches only the corner and there is one; below the axis the level misses the graph and there is none. The three structures of the section are three positions of one line. Slide the level through the three cases on the',
       href: '/algebra/visual-tools/equation',
       linkText: 'equation visual explorer',
+    }),
+    negativeSide: demoUnitFrame({
+      svg: equationVisualizerDiagrams['abs-none'],
+      caption: '|x| + 5 = 2: no solution',
+      text: 'The V-shaped curve |x| + 5 never drops below 5, so it never reaches the level 2: the equation, which says |x| = &#8722;3, asks a distance to be negative and has no solution. Checking the sign of the right-hand side settles this before any case split. Slide the level and watch solutions appear on the',
+      href: '/algebra/visual-tools/equation',
+      linkText: 'equation visual explorer',
+    }),
+    absQuadratic: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpAbsQuadratic),
+      caption: 'Two cases, one of them empty',
+      text: 'The section\'s |x&#178; &#8722; 4| = 5. The bars fold the dipping part of x&#178; &#8722; 4 (dashed) up above the axis. The case x&#178; &#8722; 4 = 5 meets the level at x = &#177;3; the case x&#178; &#8722; 4 = &#8722;5 would need the dashed parabola to reach &#8722;5, which it never does, so it adds nothing. The solution set is {&#8722;3, 3}.',
+    }),
+    absBothSides: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpAbsBothSides),
+      caption: 'Two V-shapes, two crossings',
+      text: 'The section\'s |2x &#8722; 1| = |x + 4|, each side drawn as its own V. They meet where the magnitudes agree: at x = 5 the insides are equal (9 and 9), and at x = &#8722;1 they are opposites (&#8722;3 and 3). These are exactly the two cases f(x) = g(x) and f(x) = &#8722;g(x).',
+    }),
+    absExtraneous: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpAbsExtraneous),
+      caption: 'Where squaring goes wrong',
+      text: 'The section\'s |x &#8722; 2| = 3x &#8722; 4. The V and the line meet once, at x = 3/2. Squaring both sides also produces x = 1, but on the dashed line x = 1 the two sides are 1 and &#8722;1: equal in square, not in value. Because the right side is negative there, x = 1 is extraneous.',
     }),
   };
 
@@ -723,6 +773,8 @@ export default function AbsoluteValueEquationsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-negativeSide'} dangerouslySetInnerHTML={{ __html: demoUnits.negativeSide }} />,
+          `A negative right-hand side means an empty solution set, whatever is inside the bars.`,
         ]
     },
     {
@@ -765,6 +817,8 @@ export default function AbsoluteValueEquationsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-absQuadratic'} dangerouslySetInnerHTML={{ __html: demoUnits.absQuadratic }} />,
+          `Each case is solved by its own method, and only real solutions join the set.`,
         ]
     },
     {
@@ -773,6 +827,8 @@ export default function AbsoluteValueEquationsPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-absBothSides'} dangerouslySetInnerHTML={{ __html: demoUnits.absBothSides }} />,
+          `Checking both candidates in the original equation confirms the picture.`,
         ]
     },
     {
@@ -794,6 +850,8 @@ export default function AbsoluteValueEquationsPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-absExtraneous'} dangerouslySetInnerHTML={{ __html: demoUnits.absExtraneous }} />,
+          `Case-splitting with an interval check avoids the extraneous root that squaring creates.`,
         ]
     },
     {

@@ -489,6 +489,13 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
   const demoUnits = {
+    trinomial: demoUnitFrame({
+      svg: identityDiagrams['tri-3'],
+      caption: '(a + b + c)&#178; as nine pieces',
+      text: 'A square of side a + b + c, cut along a, b and c in both directions, falls into nine rectangles: three squares a&#178;, b&#178;, c&#178; on the diagonal and six off-diagonal pieces, each product ab, ac, bc appearing twice, once on each side of the diagonal. That is exactly a&#178; + b&#178; + c&#178; + 2ab + 2ac + 2bc. Step through the dissection on the',
+      href: '/algebra/visual-tools/identities/square-of-trinomial',
+      linkText: 'square of a trinomial explorer',
+    }),
     square: demoUnitFrame({
       svg: identityDiagrams['sum-4'],
       caption: '(a + b)&#178; as an area: a&#178; + ab + ab + b&#178;',
@@ -599,6 +606,8 @@ export default function AlgebraicIdentitiesPage({
       link: sectionsContent.obj4.link,
       content: [
         sectionsContent.obj4.content,
+                <div key={'unit-trinomial'} dangerouslySetInnerHTML={{ __html: demoUnits.trinomial }} />,
+          `Squaring a sum of k terms works the same way: k squares on the diagonal and every pair twice off it.`,
       ]
     },
     {

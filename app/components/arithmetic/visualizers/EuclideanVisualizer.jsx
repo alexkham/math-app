@@ -163,7 +163,7 @@ export default function EuclideanVisualizer({ explanations = null }) {
   return (
     <div className="ev-root">
       <header className="ev-head">
-        <h1 className="ev-title">Euclidean Algorithm Visualizer</h1>
+        <h2 className="ev-title">Euclidean Algorithm Visualizer</h2>
         <p className="ev-sub">
           Type any two whole numbers, or try a preset. Each line below divides
           and keeps the leftover — the pair shrinks until nothing is left over,
@@ -747,7 +747,7 @@ export default function EuclideanVisualizer({ explanations = null }) {
           font-weight: 700;
         }
         .ev-explain[open] summary::before {
-          content: '\u2212 ';
+          content: '− ';
         }
         .ev-explain-body {
           margin-top: 10px;

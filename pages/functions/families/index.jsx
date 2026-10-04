@@ -1635,6 +1635,7 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionTypesDiagrams from '@/app/components/functions/types/functionTypesDiagrams'
+import functionPiecewiseDiagrams from '@/app/components/functions/piecewise/functionPiecewiseDiagrams'
 
 
 export async function getStaticProps(){
@@ -2933,6 +2934,7 @@ const faqQuestions = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     quadratic: demoUnitFrame({
       svg: functionTypesDiagrams.quadratic,
@@ -2966,6 +2968,41 @@ const faqQuestions = {
       svg: functionTypesDiagrams.sine,
       caption: 'f(x) = sin x: a wave of period 2&#960;',
       text: 'The curve oscillates between &#8722;1 and 1 and repeats every 2&#960;, crossing the axis at every multiple of &#960;. It is the model of periodic behaviour, and the cosine beside it is the same wave shifted a quarter period. Compare the trigonometric family with the others on the',
+      href: '/functions/visual-tools/types',
+      linkText: 'function types explorer',
+    }),
+    linear: demoUnitFrame({
+      svg: functionTypesDiagrams.linear,
+      caption: 'A straight line, constant slope',
+      text: 'f(x) = x, the simplest member of the linear family. Every step of 1 to the right rises by the same amount, so the graph is a straight line; changing m tilts it and changing b slides it up or down, but it never bends. See the other families side by side on the',
+      href: '/functions/visual-tools/types',
+      linkText: 'function types explorer',
+    }),
+    cubic: demoUnitFrame({
+      svg: functionTypesDiagrams.cubic,
+      caption: 'A cubic with a peak and a valley',
+      text: 'f(x) = 0.2x&#179; &#8722; 2x. The ends go in opposite directions, as for every cubic with a positive leading coefficient, and between them the curve turns twice: a local maximum, then a local minimum. A cubic has at most two such turns. Compare it with the other families on the',
+      href: '/functions/visual-tools/types',
+      linkText: 'function types explorer',
+    }),
+    sqrtFamily: demoUnitFrame({
+      svg: functionTypesDiagrams.sqrt,
+      caption: 'Starts at the origin, grows ever more slowly',
+      text: 'f(x) = &#8730;x is defined only for x &#8805; 0, so the graph begins at the origin and runs to the right. It keeps rising, but each step adds less than the one before: the curve flattens without ever levelling off. Compare it with the other families on the',
+      href: '/functions/visual-tools/types',
+      linkText: 'function types explorer',
+    }),
+    stepHeaviside: demoUnitFrame({
+      svg: functionPiecewiseDiagrams.heaviside,
+      caption: 'Constant pieces with a jump',
+      text: 'The Heaviside step: 0 for negative inputs, 1 from 0 on. Each piece is a horizontal segment and the graph jumps between them &#8212; the pattern every step function shares, from this single jump to the floor function\'s staircase of jumps at every integer. Build other piecewise functions on the',
+      href: '/functions/visual-tools/piecewise',
+      linkText: 'piecewise function visualizer',
+    }),
+    logFamily: demoUnitFrame({
+      svg: functionTypesDiagrams.logarithmic,
+      caption: 'The logarithm\'s vertical wall',
+      text: 'f(x) = ln(x) exists only for x &gt; 0. Near 0 it plunges without bound along the y-axis, it crosses the x-axis at x = 1, and to the right it keeps climbing, more and more slowly. It is the exponential graph reflected across y = x. Compare it with the other families on the',
       href: '/functions/visual-tools/types',
       linkText: 'function types explorer',
     }),
@@ -3051,6 +3088,8 @@ export default function FamiliesPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-linear'} dangerouslySetInnerHTML={{ __html: demoUnits.linear }} />,
+          `A constant function is the slope-0 member of this family: the line lies flat.`,
         ]
     },
     {
@@ -3069,6 +3108,8 @@ export default function FamiliesPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-cubic'} dangerouslySetInnerHTML={{ __html: demoUnits.cubic }} />,
+          `Shrink the 2x term toward 0 and the two turns merge into the single flat point of x³.`,
         ]
     },
     {
@@ -3095,6 +3136,8 @@ export default function FamiliesPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-sqrtFamily'} dangerouslySetInnerHTML={{ __html: demoUnits.sqrtFamily }} />,
+          `The same graph is half of the parabola x = y², turned on its side.`,
         ]
     },
     {
@@ -3134,6 +3177,8 @@ export default function FamiliesPage({
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+          <div key={'unit-stepHeaviside'} dangerouslySetInnerHTML={{ __html: demoUnits.stepHeaviside }} />,
+          `At each jump the function takes exactly one of the two values; the solid and open dots say which.`,
         ]
     },
     {
@@ -3152,6 +3197,8 @@ export default function FamiliesPage({
         link:sectionsContent.obj15.link,
         content:[
           sectionsContent.obj15.content,
+          <div key={'unit-logFamily'} dangerouslySetInnerHTML={{ __html: demoUnits.logFamily }} />,
+          `ln(1) = 0 for every base's logarithm: all log graphs pass through (1, 0).`,
         ]
     },
     {

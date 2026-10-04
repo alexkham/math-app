@@ -9,6 +9,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
+import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 
@@ -619,6 +621,28 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpAbsForms = { kind: 'domainOpen', svgTitle: '|x| < 3 is one interval; |x| > 3 is two rays', range: [-6, 6],
+    rows: [
+      { label: '|x| < 3: within 3 of 0', color: 'f', segs: [[-3, 3, true, true]], tag: { text: '(−3, 3)', x: 4.5 } },
+      { label: '|x| > 3: more than 3 from 0', color: 'r', segs: [[null, -3, false, true], [3, null, true]], tag: { text: '(−∞, −3) ∪ (3, ∞)', x: 3.6 } },
+    ],
+    caption: 'Less-than traps x between two bounds; greater-than pushes it out' };
+  const fpAbsFold = { kind: 'pieces', svgTitle: '|x^2 - 7x + 10| >= 2 holds on three pieces', xRange: [-0.5, 7.5], yRange: [-1, 8],
+    pieces: [
+      { fn: (x) => Math.abs(x * x - 7 * x + 10), from: -0.5, to: 7.5, ends: [null, null], color: 'f' },
+      { fn: () => 2, from: -0.5, to: 7.5, ends: [null, null], color: 'g', label: { text: 'y = 2', x: 7.2, y: 2, pos: 'n' } },
+    ],
+    points: [{ x: (7 - Math.sqrt(17)) / 2, y: 2 }, { x: 3, y: 2 }, { x: 4, y: 2 }, { x: (7 + Math.sqrt(17)) / 2, y: 2 }],
+    notes: [{ x: 0.45, y: 7.4, text: 'x ≤ 1.44, 3 ≤ x ≤ 4, x ≥ 5.56', pos: 'e', color: 'r' },
+      { x: 3.5, y: 2.6, text: '[3, 4]: the fold tops 2', pos: 'n', color: 'f' }],
+    caption: '|x² − 7x + 10| ≥ 2 holds on three separate pieces' };
+  const fpAbsDistance = { kind: 'domainOpen', svgTitle: '|x - 5| < 3 and |x - 1| < |x - 7| read as distances', range: [-2, 10],
+    rows: [
+      { label: '|x − 5| < 3: within 3 of 5', color: 'f', segs: [[2, 8, true, true]], tag: { text: '(2, 8)', x: 9 } },
+      { label: '|x − 1| < |x − 7|: closer to 1 than to 7', color: 'r', segs: [[null, 4, false, true]], tag: { text: 'x < 4', x: 8 } },
+    ],
+    caption: 'Distance from a point, or nearer of two points: 4 is the midpoint' };
+
   const demoUnits = {
     lessThan: demoUnitFrame({
       svg: inequalityVisualizerDiagrams['abs-shifted'],
@@ -626,6 +650,21 @@ const schemas = {
       text: 'The V has its corner at x = 2 and dips below the axis between its zeros at &#8722;2 and 6, so the less-than inequality holds on that bounded interval: the compound inequality &#8722;4 &lt; x &#8722; 2 &lt; 4 drawn out. Shifting the corner shifts the interval without changing its width. Move the corner and the level on the',
       href: '/algebra/visual-tools/inequality',
       linkText: 'inequality visual explorer',
+    }),
+    forms: demoUnitFrame({
+      svg: renderFunctionPlotV2(fpAbsForms),
+      caption: 'One interval or two rays',
+      text: 'With k = 3: |x| &lt; 3 asks for points within 3 of zero, a single bounded interval from &#8722;3 to 3, written as the conjunction &#8722;3 &lt; x &lt; 3. |x| &gt; 3 asks for points more than 3 from zero, two rays heading away from each other, written as the disjunction x &lt; &#8722;3 or x &gt; 3. Both boundaries are open because both inequalities are strict.',
+    }),
+    fold: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpAbsFold),
+      caption: 'Three pieces from one inequality',
+      text: 'The section\'s |x&#178; &#8722; 7x + 10| &#8805; 2. The bars fold the dip of the parabola between 2 and 5 upward, and the folded hump just reaches above 2 between x = 3 and x = 4. Together with the two outer arms, the graph is on or above the level on three pieces: x &#8804; (7 &#8722; &#8730;17)/2 &#8776; 1.44, 3 &#8804; x &#8804; 4, and x &#8805; (7 + &#8730;17)/2 &#8776; 5.56.',
+    }),
+    distance: demoUnitFrame({
+      svg: renderFunctionPlotV2(fpAbsDistance),
+      caption: 'Absolute value as distance on the line',
+      text: '|x &#8722; 5| &lt; 3 collects the points less than 3 away from 5: the interval (2, 8) centred at 5. |x &#8722; 1| &lt; |x &#8722; 7| compares two distances: the points nearer to 1 than to 7 are everything left of their midpoint 4, the open ray x &lt; 4. No algebra is needed once each side is read as a distance.',
     }),
   };
 
@@ -680,6 +719,8 @@ export default function AbsoluteValueInequalitiesPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-forms'} dangerouslySetInnerHTML={{ __html: demoUnits.forms }} />,
+          `Less-than becomes AND, greater-than becomes OR: the shape of the answer follows.`,
         ]
     },
     {
@@ -721,6 +762,8 @@ export default function AbsoluteValueInequalitiesPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-fold'} dangerouslySetInnerHTML={{ __html: demoUnits.fold }} />,
+          `With a non-linear inside, each half of the conversion can contribute its own pieces.`,
         ]
     },
 
@@ -744,6 +787,8 @@ export default function AbsoluteValueInequalitiesPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-distance'} dangerouslySetInnerHTML={{ __html: demoUnits.distance }} />,
+          `Reading |x − a| as distance from a turns many of these inequalities into a picture on the number line.`,
         ]
     },
 

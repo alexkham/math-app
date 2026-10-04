@@ -690,7 +690,7 @@ function renderControls({
           {placed.length === 0
             ? 'Numbers fill grid cells in order'
             : placed.length === committedNumber
-            ? `Done · ${placed.filter((p) => p.sliceIdx === 0).length} divisible by ${committedNumber === 0 ? 0 : '' + (placed[0]?.n ? '' : '')}`
+            ? `Done · ${placed.filter((p) => p.sliceIdx === 0).length} divisible by ${divisor}`
             : `${placed[placed.length - 1].n} → class ${placed[placed.length - 1].sliceIdx}, row ${placed[placed.length - 1].row + 1}`}
         </div>
       </div>
@@ -712,19 +712,6 @@ function renderControls({
         Row 1: first occurrence, Row 2: second, etc.
       </p>
 
-      <div
-        style={{
-          fontSize: '0.7rem',
-          color: PALETTE.textDim,
-          textAlign: 'center',
-          fontFamily: MONO,
-          paddingTop: '0.4rem',
-          borderTop: `1px dashed ${PALETTE.border}`,
-        }}
-      >
-        svg {geometry.svgSize.toFixed(0)} · inner {geometry.innerR.toFixed(0)} ·
-        rows {geometry.rowsNeeded} · cell {geometry.cellH.toFixed(1)}px
-      </div>
     </>
   );
 }

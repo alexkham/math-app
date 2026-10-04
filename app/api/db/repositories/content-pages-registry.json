@@ -1579,6 +1579,30 @@
           "polar-rectangular"
         ],
         "why": "its scaled state draws r e^(i theta) with r cos theta and r sin theta marked, the form and its conversion in one frame"
+      },
+      "linear functions": {
+        "tool": "functions-types",
+        "decided": "2026-10-03",
+        "runnersUp": [
+          "functions-transformations"
+        ],
+        "why": "freezes the linear family's base line beside the other families"
+      },
+      "domain range swap of inverse": {
+        "tool": "functions-inverse",
+        "decided": "2026-10-03",
+        "runnersUp": [
+          "functions-domain"
+        ],
+        "why": "freezes an inverse pair whose domain and range trade places"
+      },
+      "general transformation": {
+        "tool": "functions-transformations",
+        "decided": "2026-10-03",
+        "runnersUp": [
+          "functions-reflections"
+        ],
+        "why": "its custom tab freezes all four parameters of a f(b(x - h)) + k at once"
       }
     },
     "operationA": {
@@ -18694,6 +18718,29 @@
                 "newStates": []
               },
               "added": "2026-09-24"
+            },
+            {
+              "fromSection": "1",
+              "tool": "functions-domain",
+              "target": {
+                "path": "/functions/visual-tools/domain",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "functionDomainDiagrams.linearScale"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-10-03"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-10-03",
+              "to": "linked",
+              "note": "illustration pass: unit in What is Domain (f(x) = 2x, all reals)",
+              "from": "linked"
             }
           ]
         },
@@ -18793,8 +18840,32 @@
             "1",
             "4"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "functions-types",
+              "target": {
+                "path": "/functions/visual-tools/types",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "functionTypesDiagrams.linear"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-10-03"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-10-03",
+              "to": "linked",
+              "note": "gap closed: the function types explorer freezes f(x) = x; harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "local maximum",
@@ -18802,8 +18873,32 @@
           "sections": [
             "6"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "functions-types",
+              "target": {
+                "path": "/functions/visual-tools/types",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "functionTypesDiagrams.cubic"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-10-03"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-10-03",
+              "to": "linked",
+              "note": "gap closed for this page: the cubic frame shows a local maximum and minimum; harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "quadratic function",
@@ -19229,8 +19324,32 @@
           "sections": [
             "5"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "5",
+              "tool": "functions-inverse",
+              "target": {
+                "path": "/functions/visual-tools/inverse-function",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "functionInverseDiagrams.sqrt"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-10-03"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-10-03",
+              "to": "linked",
+              "note": "gap closed: the inverse function explorer freezes sqrt x and x^2 on x >= 0 with domain and range traded; harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "inverse composition property",
@@ -19601,8 +19720,32 @@
           "sections": [
             "7"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "functions-inverse",
+              "target": {
+                "path": "/functions/visual-tools/inverse-function",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "functionInverseDiagrams.exponential"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-10-03"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-10-03",
+              "to": "linked",
+              "note": "gap closed for this page: the inverse explorer's e^x / ln x frame shows two strictly increasing functions; harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "local maximum",
@@ -19610,8 +19753,32 @@
           "sections": [
             "9"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "9",
+              "tool": "functions-types",
+              "target": {
+                "path": "/functions/visual-tools/types",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "functionTypesDiagrams.cubic"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-10-03"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-10-03",
+              "to": "linked",
+              "note": "gap closed for this page: the cubic frame shows a local maximum; harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "local minimum",
@@ -19619,8 +19786,32 @@
           "sections": [
             "9"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "9",
+              "tool": "functions-types",
+              "target": {
+                "path": "/functions/visual-tools/types",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "functionTypesDiagrams.cubic"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-10-03"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-10-03",
+              "to": "linked",
+              "note": "gap closed for this page: the cubic frame shows a local minimum; harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "odd function test",
@@ -19884,8 +20075,32 @@
           "sections": [
             "5"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "5",
+              "tool": "functions-range",
+              "target": {
+                "path": "/functions/visual-tools/range",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "functionRangeDiagrams.exponential"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-10-03"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-10-03",
+              "to": "linked",
+              "note": "gap closed for this page: the range explorer's e^x frame shows an increasing function whose range is bounded by its asymptote; harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "linear function",
@@ -20110,8 +20325,32 @@
           "sections": [
             "2"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "2",
+              "tool": "functions-transformations",
+              "target": {
+                "path": "/functions/visual-tools/transformations",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "functionTransformationsDiagrams.custom"
+                ],
+                "arrangement": "single"
+              },
+              "added": "2026-10-03"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-10-03",
+              "to": "linked",
+              "note": "gap closed: the transformations explorer's custom frame applies a, b, h and k together; harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "horizontal dilation",

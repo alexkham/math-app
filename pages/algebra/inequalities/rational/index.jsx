@@ -10,6 +10,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 
@@ -483,6 +484,27 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpCrossMult = { kind: 'pieces', svgTitle: '(x - 3)/(x + 2) > 1 holds exactly for x < -2', xRange: [-8, 6], yRange: [-6, 8],
+    pieces: [
+      { fn: (x) => (x - 3) / (x + 2), from: -8, to: -2.01, ends: [null, null], color: 'f' },
+      { fn: (x) => (x - 3) / (x + 2), from: -1.99, to: 6, ends: [null, null], color: 'f', label: { text: '(x − 3)/(x + 2)', x: 2, y: -1.3, pos: 's' } },
+      { fn: () => 1, from: -8, to: 6, ends: [null, null], color: 'g', label: { text: 'y = 1', x: 5, y: 1, pos: 'n' } },
+    ],
+    vlines: [{ x: -2 }],
+    notes: [{ x: -7.8, y: -2, text: 'above 1 for x < −2', pos: 'e', color: 'r' }, { x: -1.1, y: -5.2, text: 'multiplying by x + 2 misses it', pos: 'e', color: 'g' }],
+    caption: '(x − 3)/(x + 2) > 1 holds exactly for x < −2' };
+  const fpRatSigns = { kind: 'pieces', svgTitle: '(7 - x)/((x - 3)(x + 1)) <= 0 on (-1, 3) and [7, inf)', xRange: [-4, 12], yRange: [-3, 3],
+    pieces: [
+      { fn: (x) => (7 - x) / ((x - 3) * (x + 1)), from: -4, to: -1.01, ends: [null, null], color: 'f' },
+      { fn: (x) => (7 - x) / ((x - 3) * (x + 1)), from: -0.99, to: 2.99, ends: [null, null], color: 'f' },
+      { fn: (x) => (7 - x) / ((x - 3) * (x + 1)), from: 3.01, to: 12, ends: [null, null], color: 'f' },
+    ],
+    vlines: [{ x: -1 }, { x: 3 }],
+    points: [{ x: 7, y: 0 }],
+    notes: [{ x: -0.8, y: 2.4, text: '−1, 3: excluded', pos: 'e' }, { x: 7, y: 0.6, text: '7: included', pos: 'n', color: 'r' },
+      { x: 3.6, y: 2.4, text: 'solution: −1 < x < 3 or x ≥ 7', pos: 'e', color: 'r' }],
+    caption: 'Denominator zeros are walls; the numerator zero 7 joins ≤ 0' };
+
   const demoUnits = {
     critical: demoUnitFrame({
       svg: inequalityVisualizerDiagrams['rat-simple'],
@@ -490,6 +512,16 @@ const schemas = {
       text: 'Both critical points divide the axis, but they behave differently: at x = 1 the expression is zero and the curve crosses the axis, while at x = &#8722;2 the denominator vanishes and the curve runs off along the dashed asymptote. The solution, the interval between them, can include the first endpoint but never the second. Distinguish the two kinds on the',
       href: '/algebra/visual-tools/inequality',
       linkText: 'inequality visual explorer',
+    }),
+    crossMult: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpCrossMult),
+      caption: 'What cross-multiplying gets wrong',
+      text: 'The section\'s (x &#8722; 3)/(x + 2) &gt; 1. Multiplying by x + 2 as if it were positive gives &#8722;3 &gt; 2, which suggests no solution. The graph disagrees: left of the wall at x = &#8722;2 the whole branch lies above y = 1, because there x + 2 is negative and the multiplication should have flipped the inequality. Rewriting as &#8722;5/(x + 2) &gt; 0 gives the true answer, x &lt; &#8722;2.',
+    }),
+    signs: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRatSigns),
+      caption: 'Two kinds of critical points on one graph',
+      text: 'The section\'s (7 &#8722; x)/((x &#8722; 3)(x + 1)) &#8804; 0. The denominator zeros &#8722;1 and 3 are walls where the graph breaks and the expression is undefined, so they are excluded even though the inequality is non-strict. The numerator zero 7 is where the graph touches 0, so it is included. The graph is on or below the axis on &#8722;1 &lt; x &lt; 3 and from 7 onward, where it stays just below the axis.',
     }),
   };
 
@@ -601,6 +633,8 @@ export default function RationalInequalitiesPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-crossMult'} dangerouslySetInnerHTML={{ __html: demoUnits.crossMult }} />,
+          `Moving everything to one side and using a sign chart avoids the case split entirely.`,
         ]
     },
     {
@@ -617,6 +651,8 @@ export default function RationalInequalitiesPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-signs'} dangerouslySetInnerHTML={{ __html: demoUnits.signs }} />,
+          `Numerator zeros follow the inequality symbol; denominator zeros are always excluded.`,
         ]
     },
     {

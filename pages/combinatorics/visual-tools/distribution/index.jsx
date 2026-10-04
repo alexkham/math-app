@@ -496,6 +496,9 @@ import DistributionIntoCells from '../../../../app/components/combinatorics/new-
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import distributionIntoCellsDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/distributionIntoCellsDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -952,8 +955,125 @@ For counts that **require** every cell non-empty, the section offers the [strong
     big43: `3⁴ = 81, and with four items in three cells the pigeonhole principle plants a shared cell in every card. [Learn more about the derivation](!#deriving-k-n) · [Adjusting n and k](!#adjusting-n-and-k)`,
   };
 
+  const instructions = [
+    'The **Mode** switch toggles **● Balls** (colored circles numbered 1, 2, 3 …) and **A Letters** (tiles A, B, C …); cells stay numbered in both. [Learn more about the mode switch](!#mode-switch)',
+    '**n − / +** sets the items from 2 to 4 and **k − / +** the cells from 2 to 4, capped at 3 for $n = 4$; raising $n$ can lower $k$. [Learn more about adjusting n and k](!#adjusting-n-and-k)',
+    '**▶ Play** builds all $k^n$ distributions and stops at the end, **Step ▶** sends one item into its cell, **◀ Back** steps backward and **↺ Reset** clears the completed rows. [Learn more about the transport controls](!#transport-controls)',
+    'The **Speed** slider runs from 0.3 to 3 and sets how fast Play flies and lands each item. [Learn more about the speed slider](!#transport-controls)',
+    'The header shows $k^n$ and the total; the status line under it tracks the cell item 1 went to and ends at **Complete**. [Learn more about getting started](!#getting-started)',
+    'Each item flies into its cell and stacks on what is there, with no capacity limit; the **assignment** readout fills in $(c_1, c_2, \\dots)$ as items land. [Learn more about the cells](!#the-cells)',
+    'Finished distributions are filed under **COMPLETED**, one row per cell item 1 went to, each row holding $k^{n-1}$ cards. [Learn more about the item 1 groups](!#grouping-by-item-1s-destination)',
+    'The right panel adds a row per destination of item 1 with its progress and the $k^{n-1}$ count for the remaining items. [Learn more about the right panel](!#right-panel-and-progress)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real DistributionIntoCells
+     (opens on n = 3, k = 3, balls mode, speed 1). Steppers: '−' / '+' exact,
+     nth 0 = n, nth 1 = k. A placed item in a cell is a Ball group with no
+     transform, r = 16, off the items row (cy 64). */
+  const placed = (i) => ({ until: { css: 'svg.vt-scene-svg g[style="opacity: 1;"] > circle[r="16"]:not([cy="64"])', nth: i } })
+  const demos = {
+    'getting-started': {
+      title: 'Play all 3² distributions',
+      script: [
+        { say: `TAP n −
+n = 2 items, k = 3 cells.
+Header 3² = 9.` },
+        { click: { button: '−', exact: true, nth: 0 } },
+        { wait: 2400 },
+        { say: `SLIDE Speed → 3
+Items fly and land 3× faster.` },
+        { slide: { range: 0 }, to: 3, ms: 1200 },
+        { wait: 1800 },
+        { say: `TAP ▶ Play
+All 9 distributions built and filed.
+3 rows: item 1 → Cell 1, 2, 3.
+Status: Complete · 9 / 9.` },
+        { click: { button: '▶ Play', exact: true } },
+        { until: { text: 'Complete · 9 / 9' }, ms: 15000 },
+        { wait: 2800 },
+        { say: `TAP A Letters
+Items A and B.
+Same 9 cards, tuples unchanged.` },
+        { click: { text: 'A Letters' } },
+        { wait: 2400 },
+        { say: `TAP ↺ Reset
+Completed rows cleared.
+Status: Press Play or Step to begin.` },
+        { click: { button: '↺ Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'the-cells': {
+      title: 'One item at a time',
+      script: [
+        { say: `TAP Step ▶
+Item 1 into Cell 1.
+assignment: (1, ?, ?).
+Status: Cell 1: 0 / 9.` },
+        { click: { button: 'Step ▶', exact: true } },
+        placed(0),
+        { wait: 2800 },
+        { say: `TAP Step ▶
+Item 2 stacks on item 1.
+assignment: (1, 1, ?).` },
+        { click: { button: 'Step ▶', exact: true } },
+        placed(1),
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Item 3 into Cell 1 too: (1, 1, 1).
+No capacity limit. Cells 2, 3 empty.` },
+        { click: { button: 'Step ▶', exact: true } },
+        placed(2),
+        { wait: 2800 },
+        { say: `TAP Step ▶
+Flash ring: distribution complete.
+Status: Cell 1: 1 / 9.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: 'svg.vt-scene-svg animate' },
+        { wait: 2400 },
+        { say: `TAP Step ▶
+Card (1,1,1) filed: item 1 → Cell 1.
+COMPLETED 1 / 27. Readout (?, ?, ?).` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'adjusting-n-and-k': {
+      title: 'Steppers n and k',
+      script: [
+        { say: `TAP k +
+k = 4 cells.
+4³ = 64.` },
+        { click: { button: '+', exact: true, nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP n +
+n = 4 items. k clamped to 3.
+3⁴ = 81. Largest run.` },
+        { click: { button: '+', exact: true, nth: 0 } },
+        { wait: 2800 },
+        { say: `TAP k −
+k = 2 cells.
+2⁴ = 16.` },
+        { click: { button: '−', exact: true, nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP n −
+n = 3 items.
+2³ = 8. Binary choices.` },
+        { click: { button: '−', exact: true, nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP n −
+n = 2 items.
+2² = 4. Smallest run.` },
+        { click: { button: '−', exact: true, nth: 0 } },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('distribution'),
       sectionsContent,
       introContent,
@@ -977,7 +1097,22 @@ For counts that **require** every cell non-empty, the section offers the [strong
   }
 }
 
-export default function DistributionIntoCellsVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function DistributionIntoCellsVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <DistributionIntoCells explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1000,9 +1135,9 @@ export default function DistributionIntoCellsVisualizer({relatedTools, seoData, 
 
   const genericSections = [
     plain('obj0', 'key-terms'),
-    stateRow('obj1', 'getting-started', 'idle'),
-    stateRow('obj2', 'the-cells', 'building'),
-    plain('obj3', 'adjusting-n-and-k'),
+    withDemo(stateRow('obj1', 'getting-started', 'idle')),
+    withDemo(stateRow('obj2', 'the-cells', 'building')),
+    withDemo(plain('obj3', 'adjusting-n-and-k')),
     stateRow('obj4', 'grouping-by-item-1s-destination', 'default33'),
     stateRow('obj11', 'two-cells-binary-choices', 'twoCells'),
     stateRow('obj12', 'more-cells-than-items', 'manyCells'),
@@ -1068,6 +1203,10 @@ export default function DistributionIntoCellsVisualizer({relatedTools, seoData, 
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Distribution into Cells</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <DistributionIntoCells explanations={explanations}/>
       <br/>

@@ -496,6 +496,9 @@ import PartitionIntoGroups from '../../../../app/components/combinatorics/new-vi
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import partitionIntoGroupsDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/partitionIntoGroupsDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -995,8 +998,160 @@ The $12 + 12 + 6$ row split is also a neat self-check of the destination decompo
     p221: `Thirty partitions in rows of 12, 12, and 6 — the stepper's largest run, and the formula's best argument against hand-counting. [Learn more about 2+2+1](!#two-plus-two-plus-one-the-largest-run) · [All shapes](!#the-partition-stepper)`,
   };
 
+  const instructions = [
+    'The **● Balls / A Letters** switch at the left of the control bar draws the items as numbered coloured balls or as letter tiles A, B, C, …; the box names stay A, B, C either way. [Learn more about the mode switch](!#mode-switch)',
+    'Use **◀** and **▶** next to **partition =** to cycle through seven shapes, from $2+2$ to $2+2+1$; each shape clears the build and updates the formula $n!/(n_1! \\cdots n_k!)$ at the top right of the scene. [Learn more about the partition stepper](!#the-partition-stepper)',
+    'Press **Step ▶** to send one ball into its slot; once every slot is full, the next press files the finished partition below. **◀ Back** undoes one step. [Learn more about the transport controls](!#transport-controls)',
+    '**▶ Play** builds every partition of the current shape and stops at the end, **↺ Reset** clears the completed section, and the **Speed** slider sets how fast the balls fly. [Learn more about Play, Reset and Speed](!#transport-controls)',
+    'The top right of the scene shows the formula with its value and a status line such as **Item 1 in Box A: 0 / 3**. [Learn more about getting started](!#getting-started)',
+    'In the **BUILD BOXES** row each box is labelled **BOX A (2)**, **BOX B (2)**, … with dashed slots; balls fill Box A first, and a ring flashes around the boxes when a partition is complete. [Learn more about the build boxes](!#the-build-boxes)',
+    'The **COMPLETED** section files each partition as a card in the row of the box that received item 1 (**→ Box A**, **→ Box B**, …), with the count of finished partitions at its right. [Learn more about grouping by item-1 destination](!#grouping-by-item-1-destination)',
+    'The right panel adds one row per destination of item 1, with a counter such as **0 / 3** and the formula for that row; a ✓ marks each finished row. [Learn more about the right panel](!#right-panel-and-progress)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real PartitionIntoGroups tool
+     (opens on shape 2+2, balls mode, speed 1). Stepper buttons are the exact '◀' / '▶';
+     the mode switch is the .vt-switch div. Step ▶ flies a ball: untilLanded holds
+     (also in replay) until the dotted guide line is gone; untilDone holds until
+     ▶ Play is disabled (enumeration finished). */
+  const untilLanded = { until: 'svg.vt-scene-svg:not(:has(line[stroke-dasharray="5 4"]))', ms: 4000 }
+  const untilDone = { until: 'button.vt-btn-primary:disabled', ms: 20000 }
+  const stepBtn = { button: 'Step ▶', exact: true }
+  const demos = {
+    'the-partition-stepper': {
+      title: 'Cycling the partition shape',
+      script: [
+        { say: `TAP ▶ next to partition =
+Shape 3+1. Boxes A (3), B (1).
+Header: 4!/(3! · 1!) = 4.` },
+        { click: { button: '▶', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▶ again
+Shape 2+1+1. Three boxes.
+4!/(2! · 1! · 1!) = 12.` },
+        { click: { button: '▶', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ▶ again
+Shape 4+1. SOURCE (n = 5).
+5!/(4! · 1!) = 5.` },
+        { click: { button: '▶', exact: true } },
+        { wait: 2400 },
+        { say: `TAP ◀
+Back to 2+1+1.
+Every shape starts from an empty build.` },
+        { click: { button: '◀', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Step ▶
+Ball 1 flies into Box A.
+Status: Item 1 in Box A: 0 / 6.` },
+        { click: stepBtn },
+        untilLanded,
+        { wait: 2600 },
+      ],
+    },
+    'transport-controls': {
+      title: 'Step, file, back',
+      script: [
+        { say: `TAP Step ▶
+Ball 1 flies into Box A.
+Dotted guide = its path. Source ball dims.` },
+        { click: stepBtn },
+        untilLanded,
+        { wait: 2400 },
+        { say: `TAP Step ▶ ×3
+Balls 2, 3, 4 land.
+Box A: 1 2. Box B: 3 4.` },
+        { click: stepBtn },
+        untilLanded,
+        { click: stepBtn, ms: 200 },
+        untilLanded,
+        { click: stepBtn, ms: 200 },
+        untilLanded,
+        { wait: 2400 },
+        { say: `TAP Step ▶
+All slots full. Ring flashes.
+Status: Item 1 in Box A: 1 / 3.` },
+        { click: stepBtn },
+        { wait: 2400 },
+        { say: `TAP Step ▶
+Card filed in row → Box A.
+COMPLETED 1 / 6. Boxes empty again.` },
+        { click: stepBtn },
+        { wait: 2600 },
+        { say: `TAP ◀ Back
+Card returns to the boxes.
+COMPLETED 0 / 6.` },
+        { click: { button: '◀ Back', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'mode-switch': {
+      title: 'Balls and letters',
+      script: [
+        { say: `TAP the mode switch
+Balls → letter tiles A, B, C, D.
+Box names stay BOX A, BOX B.` },
+        { click: '.vt-switch' },
+        { wait: 2400 },
+        { say: `TAP Step ▶ ×4
+A B into Box A, C D into Box B.
+Panel row: A → Box A.` },
+        { click: stepBtn },
+        untilLanded,
+        { click: stepBtn, ms: 200 },
+        untilLanded,
+        { click: stepBtn, ms: 200 },
+        untilLanded,
+        { click: stepBtn, ms: 200 },
+        untilLanded,
+        { wait: 2400 },
+        { say: `TAP Step ▶ ×2
+Card A B | C D filed.
+COMPLETED 1 / 6.` },
+        { click: stepBtn },
+        { click: stepBtn, ms: 200 },
+        { wait: 2400 },
+        { say: `TAP the mode switch
+Back to balls. Same card: 1 2 | 3 4.
+Panel row: Red → Box A.` },
+        { click: '.vt-switch' },
+        { wait: 2600 },
+      ],
+    },
+    'grouping-by-item-1-destination': {
+      title: 'Rows by item-1 destination',
+      script: [
+        { say: `TAP ▶ next to partition =
+Shape 3+1.
+4!/(3! · 1!) = 4.` },
+        { click: { button: '▶', exact: true } },
+        { wait: 2200 },
+        { say: `SLIDE Speed → 3, TAP ▶ Play
+All 4 partitions built.
+Row → Box A: 3 cards. Row → Box B: 1.` },
+        { slide: { range: 0 }, to: 3, ms: 900 },
+        { click: { button: '▶ Play', exact: true } },
+        untilDone,
+        { wait: 2800 },
+        { say: `TAP ◀
+Shape 2+2. Completed section cleared.
+4!/(2! · 2!) = 6.` },
+        { click: { button: '◀', exact: true } },
+        { wait: 2200 },
+        { say: `TAP ▶ Play
+Rows → Box A and → Box B: 3 cards each.
+3 + 3 = 6.` },
+        { click: { button: '▶ Play', exact: true } },
+        untilDone,
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('partition'),
       sectionsContent,
       introContent,
@@ -1020,7 +1175,22 @@ The $12 + 12 + 6$ row split is also a neat self-check of the destination decompo
   }
 }
 
-export default function PartitionIntoGroupsVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PartitionIntoGroupsVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <PartitionIntoGroups explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1045,15 +1215,15 @@ export default function PartitionIntoGroupsVisualizer({relatedTools, seoData, se
     plain('obj0', 'key-terms'),
     stateRow('obj1', 'getting-started', 'idle'),
     stateRow('obj2', 'the-build-boxes', 'building'),
-    plain('obj3', 'the-partition-stepper'),
+    withDemo(plain('obj3', 'the-partition-stepper')),
     stateRow('obj11', 'three-plus-one-a-combination-in-disguise', 'p31'),
     stateRow('obj12', 'four-plus-one-choosing-who-stands-alone', 'p41'),
     stateRow('obj13', 'three-plus-two-the-team-split', 'p32'),
     stateRow('obj14', 'three-plus-one-plus-one-equal-boxes', 'p311'),
     stateRow('obj15', 'two-plus-two-plus-one-the-largest-run', 'p221'),
-    stateRow('obj4', 'grouping-by-item-1-destination', 'p211'),
-    plain('obj5', 'transport-controls'),
-    plain('obj6', 'mode-switch'),
+    withDemo(stateRow('obj4', 'grouping-by-item-1-destination', 'p211')),
+    withDemo(plain('obj5', 'transport-controls')),
+    withDemo(plain('obj6', 'mode-switch')),
     plain('obj7', 'right-panel-and-progress'),
     plain('obj8', 'what-is-a-partition-into-groups'),
     stateRow('obj9', 'deriving-the-multinomial-coefficient', 'p22'),
@@ -1114,6 +1284,10 @@ export default function PartitionIntoGroupsVisualizer({relatedTools, seoData, se
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Partition into Groups</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <PartitionIntoGroups explanations={explanations}/>
       <br/>

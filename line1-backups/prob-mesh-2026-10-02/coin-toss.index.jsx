@@ -1,0 +1,535 @@
+
+
+import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
+import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import React from 'react'
+import '../../../../pages/pages.css'
+import Head from 'next/head'
+import GenericMultiComponentFrame from '@/app/components/GenericMulticomponentFrame'
+import CoinFlipperSimulator from '@/app/components/probability/coin-toss/CoinTossProbabilitySimulator'
+import CoinSampleSpaceVisualizer from '@/app/components/probability/sampleSpace/CoinSampleSpaceVisualizer'
+import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import { getRelatedTools } from '@/app/utils/getRelatedTools'
+
+
+// Surfaced on the /probability hub via buildSectionData extraction
+// (card icon + description). Do not use apostrophes in comments here.
+const hubMeta = {
+  hubDescription: 'Flip a fair or biased coin thousands of times and watch the Law of Large Numbers pull results toward theory, or map the complete sample space for up to six flips and calculate the probability of any pattern you highlight.',
+  svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="13" fill="#FAC775" stroke="#854F0B" stroke-width="1.6"/><text x="24" y="30" font-family="Georgia,serif" font-size="14" fill="#412402" text-anchor="middle" font-weight="bold">H</text><line x1="12" y1="48" x2="74" y2="48" stroke="#B5D4F4" stroke-width="1.1" stroke-dasharray="3,2.5"/><path d="M 14 62 C 20 36, 26 58, 32 46 C 40 52, 48 46, 56 48.6 C 62 49.4, 68 48, 74 48" fill="none" stroke="#97C459" stroke-width="1.8"/><line x1="12" y1="64" x2="74" y2="64" stroke="#B5D4F4" stroke-width="1.1"/><text x="62" y="44" font-family="Georgia,serif" font-size="7" fill="#B5D4F4" text-anchor="middle" font-style="italic">0.5</text></svg>`,
+}
+
+export async function getStaticProps(){
+
+  const keyWords = [
+    'coin toss probability',
+    'coin flip simulator',
+    'sample space calculator',
+    'law of large numbers',
+    'probability simulator',
+    'coin toss outcomes',
+    'expected value calculator',
+    'variance calculator',
+    'probability visualizer',
+    'interactive probability tool',
+    'coin flip statistics',
+    'convergence visualization',
+    'Bernoulli trial',
+    'random experiment',
+    'probability convergence'
+  ]
+
+  const sectionsContent = {
+    obj1: {
+      title: `The Coin Toss Probability Model`,
+      content: `The coin toss represents the simplest probability model: a **Bernoulli trial** with exactly two possible [outcomes](!/probability/sample-space). When you flip a fair coin, heads and tails each have probability 0.5, assuming the coin has no bias and the flip is truly random. This binary structure makes coin tosses the foundational example for understanding probability, independence, and random processes.
+
+Real coins might have slight biases due to weight distribution or design asymmetry, which is why the simulator allows adjusting $P(\\text{Heads})$ from 0% to 100%. A fair coin uses 50%, but you can model biased coins by changing this parameter. Each flip is independent—previous results don't affect future outcomes, a property that often surprises people who expect patterns in randomness.
+
+Multiple coin tosses create compound experiments with $2^n$ possible outcomes for n coins. The [sample space](!/probability/sample-space) grows exponentially: 2 outcomes for one coin, 4 for two coins, 8 for three coins, and so on. Understanding this expansion is crucial for calculating [probabilities](!/probability/axioms) of complex [events](!/probability/events).
+
+For comprehensive theory on coin toss probability including mathematical foundations and applications, see **coin toss probability model**.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj2: {
+      title: `Getting Started with the Simulator`,
+      content: `The simulator displays an animated coin in the center with controls on the right. The coin changes color to show the result: gold for heads, silver for tails. Begin by setting your desired probability of heads using the slider at the bottom—default is 50% for a fair coin. Once flipping starts, this setting locks until you reset.
+
+Click any flip button to run simulations. "Flip 1" shows the animation clearly. "Flip 10" through "Flip 10K" batch-process multiple flips instantly. The convergence graph updates after each batch, showing how your results compare to expected probability. All statistics recalculate automatically.
+
+The auto-flip mode runs continuous simulations. Click "Auto" to start, adjust speed with the slider (10-500ms between flips), then click "Stop" when ready. Use "Reset" to clear all data and start fresh with a new probability setting.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj3: {
+      title: `Running Different Simulation Types`,
+      content: `Single flips show individual coin behavior with full animation. Use "Flip 1" when demonstrating probability basics or watching the physical flip. The coin rotates 720 degrees and changes color based on the outcome. This mode best illustrates randomness at the individual trial level.
+
+Batch flips (10, 100, 1K, 10K) demonstrate aggregate behavior without watching every flip. Click "Flip 100" to see how results cluster around [expected values](!/probability/expected-value). Use larger batches to demonstrate convergence—"Flip 10K" shows the [Law of Large Numbers](!/probability/axioms) in action as the proportion stabilizes near the theoretical probability.
+
+Auto-flip mode runs indefinitely until stopped. Adjust speed to match your demonstration needs: slower (500ms) for classroom observation, faster (10ms) for rapid convergence. Watch the graph build in real-time as flips accumulate. This mode excels for showing long-run behavior.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj4: {
+      title: `Understanding the Convergence Graph`,
+      content: `The convergence graph plots proportion of heads (y-axis) against number of flips (x-axis). The blue line shows actual results, while the red dashed line marks expected probability. Blue dashed curves above and below represent ±2 standard error confidence bands—the range where results should fall about 95% of the time.
+
+Early in the simulation, the blue line jumps erratically. With few flips, randomness dominates and proportions swing widely. As flips increase, the line stabilizes and converges toward the red line. This visual demonstrates the Law of Large Numbers: short-run volatility versus long-run predictability.
+
+If the actual proportion stays within the confidence bands, results are statistically normal. Excursions outside the bands indicate unusual runs but aren't necessarily impossible—just improbable. The graph updates dynamically, showing the complete history of how probability estimates improved with more data.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj5: {
+      title: `Interpreting Statistics and Metrics`,
+      content: `The statistics panel shows total flips, actual heads percentage, and counts for both outcomes. "Expected" displays $n \\times p$ where n is total flips and p is probability of heads. "Distance" measures how far the actual proportion deviates from expected, expressed as percentage points.
+
+[Variance](!/probability/variance) equals $np(1-p)$, measuring spread in the number of heads. [Standard deviation](!/probability/variance) (SD) is the square root of variance, giving dispersion in the same units as counts. These values increase with more flips because absolute variability grows even as relative proportion stabilizes.
+
+The z-score standardizes deviation: $(\\text{actual heads} - \\text{expected}) / \\text{SD}$. Values between -2 and 2 are normal. Scores beyond ±2 indicate unusual results (less than 5% chance). Scores beyond ±3 are rare (less than 0.3% chance). The label "(Unusual!)" or "(Normal)" provides quick interpretation.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj6: {
+      title: `Tracking Streaks and Patterns`,
+      content: `The streaks panel displays three metrics. "Current" shows the ongoing run of the same outcome—if the last five flips were all heads, it displays 5 Current H. This resets whenever the outcome changes. "Longest H" and "Longest T" track the maximum consecutive runs for each outcome across the entire simulation.
+
+Long streaks often surprise people who expect randomness to "balance out" quickly. Even with a fair coin, streaks of 5-7 identical outcomes occur regularly in sequences of 50-100 flips. Streaks of 10+ are rare but not impossible. The tracker helps dispel the gambler's fallacy—the belief that tails is "due" after a long run of heads.
+
+Recent flips display the last 50 outcomes as colored circles: gold for heads, silver for tails. Read from left to right to see the sequence. This visual helps identify patterns, clusters, and the overall texture of randomness. True randomness often looks clumpier than people expect.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj7: {
+      title: `Using the Sample Space Explorer`,
+      content: `Select the number of coins (1-6) to generate all possible outcomes. For 3 coins, you'll see 8 possibilities (HHH, HHT, HTH, HTT, THH, THT, TTH, TTT). Each outcome displays as a row of coin images showing the specific sequence. The total grows exponentially: 2 outcomes for 1 coin, 4 for 2 coins, 8 for 3 coins, up to 64 for 6 coins.
+
+Choose a highlight condition to filter outcomes meeting specific criteria. The tool calculates how many outcomes satisfy your condition and displays the probability. For example, selecting "Exactly 2 heads" with 3 coins highlights HHT, HTH, and THH—showing 3/8 = 37.5% probability.
+
+Enable "Show Probabilities" to see individual outcome probabilities below each sequence. For fair coins, each outcome has equal probability $1/2^n$. The counts show H and T totals for that specific sequence. This feature helps understand that while all outcomes are equally likely, not all event totals are.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj8: {
+      title: `Setting Highlight Conditions`,
+      content: `"Heads count" conditions filter by the number of heads. Choose "Exactly", "At least", "At most", "More than", or "Less than", then specify the count. With 4 coins, "At least 3 heads" highlights HHHH, HHHT, HHTH, HTHH, and THHH—5 outcomes giving 5/16 = 31.25% probability.
+
+"Runs/Streaks" highlights sequences containing consecutive identical outcomes. Select heads or tails, then set minimum length. "Runs of 3 heads" with 4 coins finds HHHH and HHHT, THHH. This demonstrates how rare long runs become as length increases.
+
+Pattern conditions include "More heads than tails" (majority), "Equal heads and tails" (only possible with even coin counts), "Alternating pattern" (HTHTH...), and "All same" (all heads or all tails). Each condition teaches different aspects of combinatorial probability. The probability calculation updates automatically based on highlighted outcomes.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj9: {
+      title: `The Law of Large Numbers`,
+      content: `The Law of Large Numbers states that as the number of trials increases, the sample proportion converges to the theoretical probability. With few flips, you might get 7 heads in 10 flips (70%), far from the expected 50%. But with 10,000 flips, you'll typically see close to 5,000 heads—within 1-2% of expected.
+
+This doesn't mean individual outcomes become more predictable. The 10,001st flip still has exactly 50% chance of heads regardless of previous results. What changes is the aggregate: random fluctuations get diluted by the sheer volume of data. The proportion stabilizes even though absolute deviation grows.
+
+The convergence graph visualizes this principle. Early wild swings smooth out as the blue line gravitates toward the red expected value line. The confidence bands narrow proportionally with $1/\\sqrt{n}$, showing increasing precision of probability estimates. This fundamental theorem underlies all of statistical inference.
+
+For detailed mathematical treatment of convergence and the Law of Large Numbers, see **law of large numbers theory**.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj10: {
+      title: `Related Probability Tools and Concepts`,
+      content: `[Dice Roll Simulators](!/probability/visual-tools/dice-roll) - Explore probability with six-sided and custom dice, including sum distributions and multiple dice experiments.
+
+[Binomial Distribution Calculator](!/probability/visual-tools/distributions/binomial) - Calculate exact probabilities for n independent trials with fixed success probability, the mathematical model underlying coin tosses.
+
+[Expected Value Visualizers](!/probability/visual-tools/expected-value) - Understand how probability weights combine with outcomes to determine long-run averages.
+
+[Probability Distribution Explorers](!/probability/visual-tools/distributions) - Compare different discrete and continuous probability models with interactive parameters.
+
+**Bernoulli Trial Theory** - Learn the mathematical foundation of single binary experiments that coin tosses exemplify.
+
+**Sample Space Calculators** - Explore sample spaces for various probability experiments beyond coin tosses.
+
+**Random Variable Simulators** - Generate samples from different probability distributions to observe empirical behavior.
+
+[Discrete CDF Explorer](!/probability/visual-tools/cdf/discrete) - The cumulative distribution of the number of heads, one step per possible count.
+
+[Variance Visualizer](!/probability/visual-tools/variance) - How far the number of heads spreads around its mean $np$.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
+    obj11: {
+      title: `The Full Sample Space for Three Coins`,
+      content: `With three coins selected, the explorer lists every possible result: HHH, HHT, HTH, HTT, THH, THT, TTH, TTT. That is $2^3 = 8$ outcomes, each card noting $P = 1/8$.
+
+Each coin contributes a factor of 2, so $n$ coins give $2^n$ outcomes. The growth is why the explorer becomes impractical well before the mathematics does — ten coins would already need 1024 cards.`,
+      before: ``,
+      after: `As with the dice, the outcomes are **ordered**: HHT, HTH and THH are three separate cards even though all three have two heads. That ordering is what makes the counts come out right.
+
+It also explains the shape of the binomial distribution directly. Exactly one outcome has three heads, three have two, three have one and one has none — the row $1, 3, 3, 1$ from Pascal's triangle. Those counts, divided by 8, are the probabilities of getting 0, 1, 2 or 3 heads.`,
+      link: '',
+    },
+    obj12: {
+      title: `A Majority of Heads`,
+      content: `The majority condition highlights every outcome with more heads than tails: HHH, HHT, HTH and THH.
+
+$P(\text{more heads than tails}) = \frac{4}{8} = \frac{1}{2}$
+
+Four of the eight cards light up — exactly half the space.`,
+      before: ``,
+      after: `The result is exactly a half, and symmetry is the reason. Flipping every coin in an outcome turns a heads-majority into a tails-majority and back, pairing the 8 outcomes into 4 mirrored couples. Since no outcome can be its own mirror here, the two events must be the same size.
+
+That argument depends on the coin count being **odd**. With three coins every outcome has a strict majority one way or the other, so the space splits cleanly in two. With an even number there is a third possibility — a tie — and the majority probability drops below a half.`,
+      link: '',
+    },
+    obj13: {
+      title: `All Three the Same`,
+      content: `The all-same condition highlights just HHH and TTT.
+
+$P(\text{all three match}) = \frac{2}{8} = \frac{1}{4}$
+
+These are the two most "extreme" outcomes, one at each end of the head count.`,
+      before: ``,
+      after: `The quick way to see the quarter: the first coin can be anything, and the remaining two each have to match it, giving $1 \times \frac{1}{2} \times \frac{1}{2} = \frac{1}{4}$. Counting cards and multiplying probabilities agree, as they must.
+
+This is also the pair people find least likely-looking, and that intuition is misleading. HHH has exactly the same probability as HTH — $1/8$ each — because both are single outcomes. What is rarer is not the *sequence* HHH but the *event* "all three match", which contains two of the eight sequences rather than one.`,
+      link: '',
+    },
+    obj14: {
+      title: `Alternating Outcomes`,
+      content: `The alternating condition highlights outcomes where no two adjacent coins agree: HTH and THT.
+
+$P(\text{alternating}) = \frac{2}{8} = \frac{1}{4}$
+
+The same probability as all-same, and for a related reason: the first coin is free and each of the next two is then forced.`,
+      before: ``,
+      after: `Both conditions constrain every coin after the first, so both come to $2/2^3$. The difference is only what the constraint says — "match the previous one" for all-same, "differ from it" for alternating — and neither is more restrictive than the other.
+
+That symmetry disappears once the condition stops being local. The explorer's "equal number of heads and tails" condition highlights **nothing at all** with three coins, because 3 is odd and cannot split evenly — a genuinely empty event, with probability 0. It is worth selecting once: an event that exists as a description but contains no outcome is easier to accept when you have seen the grid stay blank.`,
+      link: '',
+    },
+  }
+
+
+  /* ---- frozen-state demonstration units (Line 1) ----
+     From the SAMPLE SPACE explorer, not the toss simulator: the simulator's
+     convergence chart and streak tracker are empirical and render nothing until
+     random tosses accumulate. The explorer's cards are ported to SVG in
+     coinSampleSpaceDiagrams.js using the component's own highlight predicate. */
+  const unit = (key, caption, text) => demoUnitFrame({ svg: coinSampleSpaceDiagrams[key], caption, text })
+
+  const stateUnits = {
+    none: unit('none', 'Full sample space, nothing highlighted',
+      'All eight ordered outcomes for three coins - gold discs for heads, silver for tails - each with ' +
+      'its head/tail count and P = 1/8. HHT, HTH and THH are three separate cards.'),
+    majority: unit('majority', 'Heads majority highlighted',
+      'Four of the eight cards: HHH, HHT, HTH, THH. Exactly half, because flipping every coin pairs ' +
+      'each heads-majority outcome with a tails-majority one.'),
+    allSame: unit('allSame', 'All three matching highlighted',
+      'Just HHH and TTT - 2/8 = 1/4. The first coin is free and the other two must copy it.'),
+    alternating: unit('alternating', 'Alternating outcomes highlighted',
+      'HTH and THT, also 1/4. The same count as all-same, because both conditions fix every coin ' +
+      'after the first.'),
+  }
+
+
+  /* ---- per-state notes for the sample space explorer (Line 1) ----
+     CoinSampleSpaceVisualizer took no props; an additive `explanations = null`
+     prop was added and the note renders above the outcome grid. The value
+     reaches it through GenericMultiComponentFrame's own `explanations` prop,
+     which maps component keys to per-component values. */
+  const note = (body, slug, label) =>
+    `${body} <a href="#${slug}" style="color:#1d4ed8;font-weight:600">${label}</a>` +
+    ` &middot; <a href="#using-the-sample-space-explorer" style="color:#1d4ed8;font-weight:600">using the explorer</a>`
+
+  const explanations = {
+    none: note('Eight ordered outcomes; the counts 1, 3, 3, 1 across head totals are Pascal&apos;s triangle.', 'the-full-sample-space', 'Learn more about the sample space'),
+    majority: note('Exactly half - flipping every coin pairs the two majorities off against each other.', 'a-majority-of-heads', 'Learn more about majorities'),
+    allSame: note('HHH is no rarer than HTH; what is rarer is the event, which holds two sequences of eight.', 'all-three-the-same', 'Learn more about matching outcomes'),
+    alternating: note('Same count as all-same: both conditions fix every coin after the first.', 'alternating-outcomes', 'Learn more about alternating outcomes'),
+  }
+
+
+  const faqQuestions = {
+    obj1: {
+      question: "What is the probability of getting heads in a coin toss?",
+      answer: "For a fair coin, the probability of heads is exactly 0.5 or 50%. This assumes the coin has no bias and the flip is truly random. Real coins may have slight biases, which is why the simulator allows adjusting P(Heads) from 0% to 100% to model both fair and biased coins."
+    },
+    obj2: {
+      question: "How does the Law of Large Numbers apply to coin tosses?",
+      answer: "The Law of Large Numbers states that as you flip more coins, the proportion of heads converges to the theoretical probability (50% for a fair coin). With few flips, results vary widely—you might get 70% or 30% heads. With thousands of flips, the proportion stabilizes very close to 50%, though individual flips remain unpredictable."
+    },
+    obj3: {
+      question: "What does the z-score tell you in coin toss simulations?",
+      answer: "The z-score measures how many standard deviations your results are from expected. Values between -2 and 2 are normal (about 95% of the time). Scores beyond ±2 indicate unusual but possible results. Scores beyond ±3 are rare (less than 0.3% chance). It helps identify whether observed deviations are due to normal randomness or potential bias."
+    },
+    obj4: {
+      question: "How do you calculate the sample space for multiple coin tosses?",
+      answer: "The sample space for n coins has 2^n possible outcomes. For 1 coin: 2 outcomes (H, T). For 2 coins: 4 outcomes (HH, HT, TH, TT). For 3 coins: 8 outcomes. Each outcome is equally likely with probability 1/2^n for fair coins. The sample space explorer visualizes all possibilities and calculates probabilities for specific conditions."
+    },
+    obj5: {
+      question: "Why do long streaks occur in random coin tosses?",
+      answer: "Long streaks are natural consequences of randomness. In 100 flips of a fair coin, you'll typically see at least one streak of 5-7 identical outcomes. Streaks of 10+ are rare but not impossible. People often underestimate how clumpy true randomness appears, expecting more alternation than actually occurs. Each flip remains independent with 50% probability regardless of previous streaks."
+    }
+  }
+
+  const schemas = {
+    webApplication: {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Coin Toss Probability Simulator and Sample Space Calculator",
+      "description": "Interactive coin flip simulator demonstrating the Law of Large Numbers with convergence graphs, statistics, and sample space explorer for multiple coins.",
+      "url": "https://www.learnmathclass.com/probability/visual-tools/coin-toss",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Interactive coin flip simulator with animated coin display",
+        "Single flip and batch simulation modes (1, 10, 100, 1K, 10K flips)",
+        "Auto-flip mode with adjustable speed control",
+        "Real-time convergence graph showing Law of Large Numbers",
+        "Statistical analysis including variance, standard deviation, and z-scores",
+        "Streak tracking with longest run detection",
+        "Sample space explorer for 1-6 coins with all possible outcomes",
+        "Customizable highlight conditions for outcome filtering",
+        "Probability calculations for complex events",
+        "Adjustable coin bias from 0% to 100% heads probability"
+      ],
+      "author": {
+        "@type": "Organization",
+        "name": "Learn Math Class"
+      },
+      "datePublished": "2024-01-15",
+      "dateModified": new Date().toISOString(),
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "learningResourceType": "Interactive Tool",
+      "educationalLevel": "High School, College",
+      "keywords": keyWords.join(", ")
+    },
+    
+    breadcrumb: {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.learnmathclass.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Probability",
+          "item": "https://www.learnmathclass.com/probability"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Visual Tools",
+          "item": "https://www.learnmathclass.com/probability/visual-tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Coin Toss",
+          "item": "https://www.learnmathclass.com/probability/visual-tools/coin-toss"
+        }
+      ]
+    },
+    
+    faq: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": Object.keys(faqQuestions).map(key => ({
+        "@type": "Question",
+        "name": faqQuestions[key].question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faqQuestions[key].answer
+        }
+      }))
+    }
+  }
+
+  const introContent = {
+    id: "intro",
+    title: "",
+    content: ``
+  }
+
+  return {
+    props: {
+      relatedTools: getRelatedTools('probability-coin-toss'),
+      sectionsContent,
+      stateUnits,
+      explanations,
+      introContent,
+      faqQuestions,
+      schemas,
+      seoData: {
+        title: "Coin Toss Simulator | Probability Calculator & Visualizer",
+        description: "Simulate coin flips with real-time statistics, convergence graphs, and sample space exploration. Visualize the Law of Large Numbers interactively.",
+        keywords: keyWords.join(", "),
+        url: "/probability/visual-tools/coin-toss",
+        category: "Simulators",
+        name: "Coin Toss Probability Simulator and Calculator"
+      },
+    }
+  }
+}
+
+export default function CoinTossPage({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const plain = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [ sectionsContent[obj].content ],
+  })
+
+  const stateRow = (obj, id, unitKey) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />,
+      sectionsContent[obj].after,
+    ],
+  })
+
+  // this page previously generated its sections from Object.keys(sectionsContent)
+  // with numeric ids; replaced with an explicit slug list
+  const genericSections = [
+    plain('obj1', 'the-coin-toss-probability-model'),
+    plain('obj2', 'getting-started'),
+    plain('obj3', 'simulation-types'),
+    plain('obj4', 'the-convergence-graph'),
+    plain('obj5', 'statistics-and-metrics'),
+    plain('obj6', 'streaks-and-patterns'),
+    plain('obj7', 'using-the-sample-space-explorer'),
+    stateRow('obj11', 'the-full-sample-space', 'none'),
+    stateRow('obj12', 'a-majority-of-heads', 'majority'),
+    stateRow('obj13', 'all-three-the-same', 'allSame'),
+    stateRow('obj14', 'alternating-outcomes', 'alternating'),
+    plain('obj8', 'setting-highlight-conditions'),
+    plain('obj9', 'the-law-of-large-numbers'),
+    plain('obj10', 'related-tools-and-concepts'),
+  ]
+
+
+
+  return (
+    <>
+      <Head>
+        <title>{seoData.title}</title>
+        <meta name="description" content={seoData.description} />
+        <meta name="keywords" content={seoData.keywords} />
+        <link rel="canonical" href={`https://www.learnmathclass.com${seoData.url}`} />
+        
+        <meta property="og:title" content={seoData.title} />
+        <meta property="og:description" content={seoData.description} />
+        <meta property="og:url" content={`https://www.learnmathclass.com${seoData.url}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Learn Math Class" />
+        
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={seoData.title} />
+        <meta name="twitter:description" content={seoData.description} />
+        
+        <meta name="robots" content="index, follow" />
+        
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.webApplication) }}
+        />
+        
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.breadcrumb) }}
+        />
+        
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas.faq) }}
+        />
+      </Head>
+
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <OperaSidebar 
+        side='right'
+        sidebarWidth='45px'
+        panelWidth='200px'
+        iconColor='white'
+        panelBackgroundColor='#f2f2f2'
+      /> 
+      <Breadcrumb/>
+      <br/>
+      <br/>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Coin Toss</h1>
+      <br/>
+      <GenericMultiComponentFrame
+        components={[
+          { id: 1, name: 'Coin Toss Probability Simulator', key: 'simulator', component: CoinFlipperSimulator },
+          { id: 2, name: 'Coin Toss Sample Space Explorer/Calculator', key: 'sampleSpace', component: CoinSampleSpaceVisualizer },
+        ]}
+        explanations={{ sampleSpace: explanations }}
+        initialActive={1}
+        buttonMinWidth="160px"
+        primaryColor="#007bff"
+      />
+      <br/>
+      <br/>
+      <SectionTableOfContents sections={genericSections}/>
+      <br/>
+      <br/>
+      <br/>
+      {/* <IntroSection 
+        id={introContent.id}
+        title={introContent.title}
+        content={introContent.content}
+        backgroundColor='#f9fafb'
+        textColor="#06357a"
+      /> */}
+      <br/>
+      <br/>
+      <RelatedTools tools={relatedTools}/>
+      <Sections sections={genericSections}/>
+      <br/>
+      <br/>
+      <br/>
+      {/* <ScrollUpButton/> */}
+    </>
+  )
+}

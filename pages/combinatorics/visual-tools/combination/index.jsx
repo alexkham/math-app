@@ -496,6 +496,9 @@ import SimpleCombination from '../../../../app/components/combinatorics/new-visu
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import simpleCombinationDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/simpleCombinationDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -968,8 +971,155 @@ The single-card run is also the fastest way to sanity-check the tool's grouping 
     rEqualsN: `Taking everything leaves nothing to decide: C(n, n) = 1, one card with all the balls, held together by 0! = 1. [Learn more about the r = n boundary](!#when-r-equals-n-one-subset) · [What is a combination](!#what-is-a-combination)`,
   };
 
+  const instructions = [
+    'The **Mode** switch at the left of the control bar toggles between **● Balls** (numbered coloured balls) and **A Letters** (letter labels). [Learn more about the mode switch](!#mode-switch)',
+    'The **n** stepper (3 to 5) sets the source row and the **r** stepper (1 to n) sets the subset size; lowering $n$ below $r$ pulls $r$ down with it, and either change resets the build. [Learn more about adjusting n and r](!#adjusting-n-and-r)',
+    'Set **r** equal to **n** and the only subset is the whole set: one card, $C(n, n) = 1$. [Learn more about the r = n case](!#when-r-equals-n-one-subset)',
+    '**Step ▶** moves one ball into the build set, **◀ Back** undoes one step, **▶ Play** builds every subset, **↺ Reset** clears the completed rows, and the **Speed** slider (0.3 to 3) sets the pace. [Learn more about the transport controls](!#transport-controls)',
+    'The two lines at the top right of the scene show $C(n, r)$ with its total and the status: **Group** of the current smallest item with its count, or **Complete**. [Learn more about getting started](!#getting-started)',
+    'The **build set** has $r$ slots with no position numbers; balls land smallest first along a dotted guide line, and used items dim in the source row. [Learn more about the build set](!#the-build-set)',
+    'Finished subsets land under **COMPLETED**, one tinted row per smallest item; the rows shrink as the smallest item gets larger. [Learn more about grouping by smallest item](!#grouping-by-smallest-item)',
+    'The **right panel** adds a row for each smallest-item group with its progress and a one-line count of how the rest of the subset is picked. [Learn more about the right panel](!#right-panel-and-progress)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real SimpleCombination tool
+     (opens at n = 3, r = 2, balls mode, idle). Stepper buttons repeat:
+     nth 0 = n, nth 1 = r. Step ▶ starts a ball flight (rAF + timer): every Step
+     click is followed by an until on "no ball in flight", so instant replay lands
+     on the same state. Play runs to "Complete · t / t" (until). */
+  const LANDED = 'svg.vt-scene-svg:not(:has(g[style*="translate"]))'
+  const demos = {
+    'the-build-set': {
+      title: 'Unlabeled slots, smallest first',
+      script: [
+        { say: `TAP Step ▶
+Red ball 1 lands in the build set.
+Slots carry no # numbers.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Blue ball 2 joins: subset {1, 2}.
+Smallest first, always.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+r = 2 slots full: flash ring.
+Status: Group Red: 1 / 2.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Card {1, 2} filed in the Red row.
+COMPLETED 1 / 3.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Next subset starts.
+Ball 1 again. Card {1, 2} stays.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2800 },
+      ],
+    },
+    'adjusting-n-and-r': {
+      title: 'n, r and the symmetry',
+      script: [
+        { say: `TAP n +
+n = 4, r = 2.
+Header: C(4, 2) = 6.` },
+        { click: { button: '+', exact: true, nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP n +
+n = 5. C(5, 2) = 10.
+n + greys out: 5 is the maximum.` },
+        { click: { button: '+', exact: true, nth: 0 } },
+        { wait: 2600 },
+        { say: `TAP r +
+r = 3. C(5, 3) = 10 again.
+Pick 3 to keep = pick 2 to leave out.` },
+        { click: { button: '+', exact: true, nth: 1 } },
+        { wait: 2800 },
+        { say: `TAP r +
+r = 4. C(5, 4) = 5.
+Same as C(5, 1).` },
+        { click: { button: '+', exact: true, nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP r +
+r = 5 = n. C(5, 5) = 1.
+r + greys out: only the whole set.` },
+        { click: { button: '+', exact: true, nth: 1 } },
+        { wait: 2800 },
+      ],
+    },
+    'grouping-by-smallest-item': {
+      title: 'Rows by smallest item',
+      script: [
+        { say: `TAP n +
+n = 4, r = 2. C(4, 2) = 6.` },
+        { click: { button: '+', exact: true, nth: 0 } },
+        { wait: 2200 },
+        { say: `SLIDE Speed → 3
+Fastest setting.
+Flights take a third of the time.` },
+        { slide: { range: 0 }, to: 3, ms: 1200 },
+        { wait: 2000 },
+        { say: `TAP ▶ Play
+Complete · 6 / 6.
+Rows of 3, 2, 1 by smallest item.` },
+        { click: { button: '▶ Play', exact: true } },
+        { until: { text: 'Complete · 6 / 6' }, ms: 20000 },
+        { wait: 3000 },
+        { say: `TAP the Mode switch
+Letters: AB AC AD · BC BD · CD.
+D is never smallest: no row.` },
+        { click: '.vt-switch' },
+        { wait: 3000 },
+        { say: `TAP ↺ Reset
+Rows cleared. n = 4, r = 2 kept.
+Press Play or Step to begin.` },
+        { click: { button: '↺ Reset', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'transport-controls': {
+      title: 'Slow speed, Back, Reset',
+      script: [
+        { say: `SLIDE Speed → 0.3
+Slowest setting.
+Each flight is easy to follow.` },
+        { slide: { range: 0 }, to: 0.3, ms: 1200 },
+        { wait: 2000 },
+        { say: `TAP Step ▶
+Red ball 1 drifts into the build set
+along its dotted guide line.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2400 },
+        { say: `TAP Step ▶
+Blue ball 2 joins.
+Both slots full.` },
+        { click: { button: 'Step ▶', exact: true } },
+        { until: LANDED },
+        { wait: 2400 },
+        { say: `TAP ◀ Back
+Ball 2 leaves the build set.
+Blue bright again in the source row.` },
+        { click: { button: '◀ Back', exact: true } },
+        { wait: 2600 },
+        { say: `TAP ↺ Reset
+Build set cleared.
+Press Play or Step to begin.` },
+        { click: { button: '↺ Reset', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('combination'),
       sectionsContent,
       introContent,
@@ -993,7 +1143,22 @@ The single-card run is also the fastest way to sanity-check the tool's grouping 
   }
 }
 
-export default function SimpleCombinationVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function SimpleCombinationVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <SimpleCombination explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1017,11 +1182,11 @@ export default function SimpleCombinationVisualizer({relatedTools, seoData, sect
   const genericSections = [
     plain('obj0', 'key-terms'),
     stateRow('obj1', 'getting-started', 'idle'),
-    stateRow('obj2', 'the-build-set', 'building'),
-    stateRow('obj3', 'adjusting-n-and-r', 'sym52'),
-    stateRow('obj4', 'grouping-by-smallest-item', 'big53'),
+    withDemo(stateRow('obj2', 'the-build-set', 'building')),
+    withDemo(stateRow('obj3', 'adjusting-n-and-r', 'sym52')),
+    withDemo(stateRow('obj4', 'grouping-by-smallest-item', 'big53')),
     stateRow('obj11', 'when-r-equals-n-one-subset', 'rEqualsN'),
-    plain('obj5', 'transport-controls'),
+    withDemo(plain('obj5', 'transport-controls')),
     plain('obj6', 'mode-switch'),
     plain('obj7', 'right-panel-and-progress'),
     plain('obj8', 'what-is-a-combination'),
@@ -1123,6 +1288,10 @@ export default function SimpleCombinationVisualizer({relatedTools, seoData, sect
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Simple Combinations</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <SimpleCombination explanations={explanations}/>
       <br/>

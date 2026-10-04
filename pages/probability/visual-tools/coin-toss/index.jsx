@@ -13,6 +13,9 @@ import CoinSampleSpaceVisualizer from '@/app/components/probability/sampleSpace/
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -385,8 +388,162 @@ That symmetry disappears once the condition stops being local. The explorer's "e
     content: ``
   }
 
+  const instructions = [
+    'The **P(Heads)** slider under the flip controls sets the coin from 0% to 100% heads; it locks once flipping starts and shows **Reset to change**. [Learn more about getting started](!#getting-started)',
+    '**Flip 1** spins the coin once, gold for **H** and silver for **T**; **Flip 10**, **Flip 100**, **Flip 1K** and **Flip 10K** add a whole batch at once. [Learn more about the simulation types](!#simulation-types)',
+    '**Auto** starts flipping at the interval set by the speed slider beside it (10 to 500 ms) and turns into **Stop**; **Reset** clears every flip but keeps P(Heads). [Learn more about auto-flip and reset](!#simulation-types)',
+    'The **Convergence to Expected Probability** graph plots the proportion of heads against the number of flips: blue line for the actual proportion, red dashed line for P(Heads), light-blue dashed curves for the ±2 standard error bands. [Learn more about the convergence graph](!#the-convergence-graph)',
+    'The **Statistics** panel gives Total, Heads %, Heads and Tails, then Expected ($np$), Distance, Variance ($np(1-p)$), SD and the Z-Score marked (Normal) or (Unusual!). [Learn more about the statistics](!#statistics-and-metrics)',
+    '**Streaks** shows the current run and the longest runs of heads and of tails; **Recent Flips** shows up to the last 50 results as gold and silver discs. [Learn more about streaks and patterns](!#streaks-and-patterns)',
+    'The **Coin Toss Sample Space Explorer/Calculator** tab lists all $2^n$ outcomes for 1 to 6 coins chosen in **Number of Coins**; **Show Probabilities** adds each card\'s H and T counts and its probability. [Learn more about the sample space explorer](!#using-the-sample-space-explorer)',
+    '**Highlight** picks a condition: Heads count (with Condition and Count), Runs/Streaks (with Run type and Length), a majority, equal heads and tails, alternating, or all same. Matching cards turn blue and **Probability Analysis** gives favorable over total. [Learn more about highlight conditions](!#setting-highlight-conditions)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real two-tab frame
+     (opens on the simulator, fair coin). Simulator ranges in DOM order: 0 = Auto
+     speed, 1 = P(Heads). After a flip the Flip buttons stay disabled for 400-600 ms,
+     so every Flip waits until one of them is enabled again. Flip results are random:
+     callouts quote only Total and the band widths, which depend on n and p
+     alone (the Expected / SD row sits below the 100vh fold). Explorer selects: 0 = Number of Coins, 1 = Highlight, 2 = Condition /
+     Run type. Auto is left out (its timer keeps the state from before it started). */
+  const flipReady = { until: 'div[style*="1fr 1fr"] > button:not([disabled])' }
+  const demos = {
+    'getting-started': {
+      title: 'Bias, first flips, reset',
+      script: [
+        { say: `DRAG P(Heads) → 70%
+Biased coin.
+Caption: converge to 70%.`, at: 'bl' },
+        { slide: { range: 1 }, to: 0.7, ms: 1400 },
+        { wait: 2400 },
+        { say: `TAP Flip 1
+Coin spins: gold H or silver T.
+Total 1. Recent Flips (Last 1).`, at: 'bl' },
+        flipReady,
+        { click: { button: 'Flip 1', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Flip 10
+Total 11. Red dashed line at 0.70.
+Slider locked: Reset to change.`, at: 'bl' },
+        flipReady,
+        { click: { button: 'Flip 10', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Reset
+Total 0. No flips yet.
+P(Heads) kept at 70%.`, at: 'bl' },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `DRAG P(Heads) → 50%
+Slider free again.
+Fair coin.`, at: 'bl' },
+        { slide: { range: 1 }, to: 0.5, ms: 1400 },
+        { wait: 2400 },
+      ],
+    },
+    'simulation-types': {
+      title: 'Batches and the convergence graph',
+      script: [
+        { say: `TAP Flip 10
+Total 10. Red dashed line = 0.50.
+One batch = one point: no line yet.`, at: 'bl' },
+        flipReady,
+        { click: { button: 'Flip 10', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Flip 100
+Total 110. Blue line drawn.
+Bands at 110 flips: 0.50 ± 0.10.`, at: 'bl' },
+        flipReady,
+        { click: { button: 'Flip 100', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Flip 1K
+Total 1,110.
+Bands ± 0.03.`, at: 'bl' },
+        flipReady,
+        { click: { button: 'Flip 1K', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Flip 10K
+Total 11,110. Bands ± 0.01.
+Band width shrinks like 1/√n.`, at: 'bl' },
+        flipReady,
+        { click: { button: 'Flip 10K', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Reset
+Total 0. Graph empty:
+Start flipping to see convergence.`, at: 'bl' },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'using-the-sample-space-explorer': {
+      title: 'Sample space explorer',
+      script: [
+        { say: `TAP Sample Space Explorer tab
+3 coins: 8 outcomes, TTT to HHH.
+Each card P = 1/8.`, at: 'br' },
+        { click: { button: 'Coin Toss Sample Space' } },
+        { wait: 2600 },
+        { say: `SELECT Highlight → More tails than heads
+4 blue cards.
+4/8 = 50.00%.`, at: 'br' },
+        { set: { css: 'select', nth: 1 }, value: 'tailsMajority' },
+        { wait: 2600 },
+        { say: `SELECT Number of Coins → 4
+16 outcomes, each P = 1/16.
+Tails majority now 5/16 = 31.25%.`, at: 'br' },
+        { set: { css: 'select', nth: 0 }, value: '4' },
+        { wait: 2800 },
+        { say: `SELECT Equal heads and tails
+6 blue cards.
+6/16 = 37.50%. Ties take the rest.`, at: 'br' },
+        { set: { css: 'select', nth: 1 }, value: 'equal' },
+        { wait: 2800 },
+        { say: `UNTICK Show Probabilities
+H, T counts and P vanish.
+Cards show the sequence only.`, at: 'br' },
+        { click: 'input[type="checkbox"]' },
+        { wait: 2400 },
+      ],
+    },
+    'setting-highlight-conditions': {
+      title: 'Highlight conditions, 3 coins',
+      script: [
+        { say: `TAP explorer, SELECT Heads count
+Default: at least 2 heads.
+4/8 = 50.00%.`, at: 'br' },
+        { click: { button: 'Coin Toss Sample Space' } },
+        { wait: 600 },
+        { set: { css: 'select', nth: 1 }, value: 'headsCount' },
+        { wait: 2600 },
+        { say: `SELECT Condition → Exactly
+Exactly 2: HHT, HTH, THH.
+3/8 = 37.50%.`, at: 'br' },
+        { set: { css: 'select', nth: 2 }, value: 'exactly' },
+        { wait: 2600 },
+        { say: `TYPE Count → 3
+Only HHH.
+1/8 = 12.50%.`, at: 'br' },
+        { set: 'input[type="number"]', value: 3 },
+        { wait: 2400 },
+        { say: `SELECT Runs/Streaks, TYPE Length → 2
+Two heads in a row: THH, HHT, HHH.
+3/8 = 37.50%.`, at: 'br' },
+        { set: { css: 'select', nth: 1 }, value: 'runs' },
+        { wait: 600 },
+        { set: 'input[type="number"]', value: 2 },
+        { wait: 2800 },
+        { say: `SELECT Equal heads and tails
+3 coins cannot split evenly.
+0/8 = 0.00%. Empty event.`, at: 'br' },
+        { set: { css: 'select', nth: 1 }, value: 'equal' },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('probability-coin-toss'),
       sectionsContent,
       stateUnits,
@@ -406,7 +563,32 @@ That symmetry disappears once the condition stops being local. The explorer's "e
   }
 }
 
-export default function CoinTossPage({relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+export default function CoinTossPage({ instructions, demos,relatedTools, seoData, sectionsContent, stateUnits, explanations, introContent, faqQuestions, schemas}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <GenericMultiComponentFrame
+        components={[
+          { id: 1, name: 'Coin Toss Probability Simulator', key: 'simulator', component: CoinFlipperSimulator },
+          { id: 2, name: 'Coin Toss Sample Space Explorer/Calculator', key: 'sampleSpace', component: CoinSampleSpaceVisualizer },
+        ]}
+        explanations={{ sampleSpace: explanations }}
+        initialActive={1}
+        buttonMinWidth="160px"
+        primaryColor="#007bff"
+        syncUrl={false}
+      />
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   const plain = (obj, id) => ({
     id,
@@ -430,17 +612,17 @@ export default function CoinTossPage({relatedTools, seoData, sectionsContent, st
   // with numeric ids; replaced with an explicit slug list
   const genericSections = [
     plain('obj1', 'the-coin-toss-probability-model'),
-    plain('obj2', 'getting-started'),
-    plain('obj3', 'simulation-types'),
+    withDemo(plain('obj2', 'getting-started')),
+    withDemo(plain('obj3', 'simulation-types')),
     plain('obj4', 'the-convergence-graph'),
     plain('obj5', 'statistics-and-metrics'),
     plain('obj6', 'streaks-and-patterns'),
-    plain('obj7', 'using-the-sample-space-explorer'),
+    withDemo(plain('obj7', 'using-the-sample-space-explorer')),
     stateRow('obj11', 'the-full-sample-space', 'none'),
     stateRow('obj12', 'a-majority-of-heads', 'majority'),
     stateRow('obj13', 'all-three-the-same', 'allSame'),
     stateRow('obj14', 'alternating-outcomes', 'alternating'),
-    plain('obj8', 'setting-highlight-conditions'),
+    withDemo(plain('obj8', 'setting-highlight-conditions')),
     plain('obj9', 'the-law-of-large-numbers'),
     plain('obj10', 'related-tools-and-concepts'),
   ]
@@ -498,6 +680,10 @@ export default function CoinTossPage({relatedTools, seoData, sectionsContent, st
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Coin Toss</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <GenericMultiComponentFrame
         components={[

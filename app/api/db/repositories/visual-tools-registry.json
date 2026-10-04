@@ -16916,7 +16916,9 @@
         "sections": 29,
         "anchors": 65,
         "orphans": 0,
-        "notes": "Case C wiring: additive explanations prop, stateKey by exact template value-match (special lin-constant a=0 state checked first), matched entry appended inside the Explanation card via processContent (Panels.jsx additive edit). Diagrams module ports the NumberLine pipeline (G frame, yRange, numeric root finder, marble at fresh-load x=0). 13 templates + 1 special state; 4 type-group sections."
+        "notes": "Case C wiring: additive explanations prop, stateKey by exact template value-match (special lin-constant a=0 state checked first), matched entry appended inside the Explanation card via processContent (Panels.jsx additive edit). Diagrams module ports the NumberLine pipeline (G frame, yRange, numeric root finder, marble at fresh-load x=0). 13 templates + 1 special state; 4 type-group sections.",
+        "howToMesh": "2026-10-01 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in selecting-an-equation-type, three-interaction-modes, adjusting-parameters-and-using-templates, reading-the-sign-chart; marble moved with the step buttons and sign-chart columns (its drag listens to mouse events only); tool does not write the URL; headless step check 19/19."
       },
       "relatedTools": [
         {
@@ -17665,7 +17667,9 @@
         "sections": 35,
         "anchors": 70,
         "orphans": 0,
-        "notes": "Case C wiring, two-dimensional state (template + comparison operator, both panel entries can be active — addition-subtraction pattern). 15 templates + 4 operator states frozen on the default polynomial; operator group = existing Direction and Strictness section. Diagrams module ports the inequality NumberLine pipeline (crit-driven view range, percentile-clamped symmetric y-range, domain shading, open/closed endpoint circles, pole styling, marble at crit[0]-2). Family list in prose corrected (was linear/quadratic/polynomial/rational; actual tabs: polynomial/quadratic/absolute value/rational/radical)."
+        "notes": "Case C wiring, two-dimensional state (template + comparison operator, both panel entries can be active — addition-subtraction pattern). 15 templates + 4 operator states frozen on the default polynomial; operator group = existing Direction and Strictness section. Diagrams module ports the inequality NumberLine pipeline (crit-driven view range, percentile-clamped symmetric y-range, domain shading, open/closed endpoint circles, pole styling, marble at crit[0]-2). Family list in prose corrected (was linear/quadratic/polynomial/rational; actual tabs: polynomial/quadratic/absolute value/rational/radical).",
+        "howToMesh": "2026-10-01 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in selecting-an-inequality-type, direction-and-strictness, three-interaction-modes-and-keyboard-shortcuts, reading-the-sign-chart; demo copies pass syncUrl={false} (new opt-out prop on InequalityVisualizer, default true) so the page address is not rewritten; headless step check 20/20."
       },
       "relatedTools": [
         {
@@ -18341,7 +18345,9 @@
         "sections": 24,
         "anchors": 43,
         "orphans": 0,
-        "notes": "Case C wiring, two-dimensional state (proof step + preset, both panel entries can be active; entries render under the diagram caption). 8 step states (factor-out step frozen on the a=2 preset, the rest on the default) + 5 preset states frozen at the gap stage. ZERO new group sections — existing Presets and The Geometric Diagram sections serve as groups, their bold lists converted to member links. Diagrams module ports the stage renderer verbatim (area-model palette, dashed corner, leader line, dimension bars); the live gap pulse animation renders static."
+        "notes": "Case C wiring, two-dimensional state (proof step + preset, both panel entries can be active; entries render under the diagram caption). 8 step states (factor-out step frozen on the a=2 preset, the rest on the default) + 5 preset states frozen at the gap stage. ZERO new group sections — existing Presets and The Geometric Diagram sections serve as groups, their bold lists converted to member links. Diagrams module ports the stage renderer verbatim (area-model palette, dashed corner, leader line, dimension bars); the live gap pulse animation renders static.",
+        "howToMesh": "2026-10-01 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos; tool does not write the URL; headless step check 13/13."
       },
       "relatedTools": [
         {
@@ -18818,7 +18824,9 @@
         "sections": 16,
         "anchors": 15,
         "orphans": 0,
-        "notes": "Case C wiring keyed by activePresetIdx (the component already nulls it on any manual edit, so custom polynomials render no extra entry); entry appended under the tool's explain box. 5 preset states frozen at completion (grid fully delivered + buckets + result). Existing Presets section = group (bold list converted to member links); zero new group sections. Diagrams module recomputes cells/buckets/result with the component's own pure logic; exponents render as unicode superscripts."
+        "notes": "Case C wiring keyed by activePresetIdx (the component already nulls it on any manual edit, so custom polynomials render no extra entry); entry appended under the tool's explain box. 5 preset states frozen at completion (grid fully delivered + buckets + result). Existing Presets section = group (bold list converted to member links); zero new group sections. Diagrams module recomputes cells/buckets/result with the component's own pure logic; exponents render as unicode superscripts.",
+        "howToMesh": "2026-10-01 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos; tool does not write the URL; headless step check 19/19."
       },
       "relatedTools": [
         {
@@ -19301,7 +19309,9 @@
         "sections": 13,
         "anchors": 21,
         "orphans": 0,
-        "notes": "Case C wiring keyed by view + n (n-boundary states take precedence: tree at n=1, Pascal at n=5); entry appended under the active view. The 3 view states mapped onto EXISTING dedicated sections (Decision Tree View / Distribution View / Pascal Paths View) — new after-texts authored, units inserted; 2 new sections for the n-boundaries. Groups: existing The Three Views + Adjusting n sections. Diagrams module ports buildTree/pascal layouts and palette; the distribution frame freezes the completed run (last combo locked, pellets sorted); pascal frames freeze the hover engaged with the component's per-path 1.5px fan-out."
+        "notes": "Case C wiring keyed by view + n (n-boundary states take precedence: tree at n=1, Pascal at n=5); entry appended under the active view. The 3 view states mapped onto EXISTING dedicated sections (Decision Tree View / Distribution View / Pascal Paths View) — new after-texts authored, units inserted; 2 new sections for the n-boundaries. Groups: existing The Three Views + Adjusting n sections. Diagrams module ports buildTree/pascal layouts and palette; the distribution frame freezes the completed run (last combo locked, pellets sorted); pascal frames freeze the hover engaged with the component's per-path 1.5px fan-out.",
+        "howToMesh": "2026-10-01 retrofit: how-to block added, 6 instructions each ending in an anchor link to an existing usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos; tool does not write the URL; headless step check 14/14."
       },
       "relatedTools": [
         {
@@ -19612,7 +19622,9 @@
         "sections": 12,
         "anchors": 19,
         "orphans": 0,
-        "notes": "Case C wiring keyed by exact (base, maxPower) match on five named configurations; entry renders below the tool's pattern note. 2 states mapped onto EXISTING sections (Pushing to Maximum Powers = base-2 depth-16; Spotting Last-Digit Patterns = base 7), 3 new sections (base-2 default, base 10, base 5 at the cap). Group = existing Exploring Different Bases. Page's numeric-id auto-map (Object.keys) replaced with explicit slug rows. Diagrams module recomputes BigInt values with thousand separators and ports the table chrome (blue header band, zebra rows, abbreviated expressions past exponent 10)."
+        "notes": "Case C wiring keyed by exact (base, maxPower) match on five named configurations; entry renders below the tool's pattern note. 2 states mapped onto EXISTING sections (Pushing to Maximum Powers = base-2 depth-16; Spotting Last-Digit Patterns = base 7), 3 new sections (base-2 default, base 10, base 5 at the cap). Group = existing Exploring Different Bases. Page's numeric-id auto-map (Object.keys) replaced with explicit slug rows. Diagrams module recomputes BigInt values with thousand separators and ports the table chrome (blue header band, zebra rows, abbreviated expressions past exponent 10).",
+        "howToMesh": "2026-10-01 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos; tool does not write the URL; headless step check 13/13."
       },
       "relatedTools": [
         {
@@ -19754,6 +19766,10 @@
     },
     "algebra-identities-square-of-sum": {
       "slug": "identities/square-of-sum",
+      "line1": {
+        "howToMesh": "2026-10-01 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in reading-the-starting-square, colouring-the-four-pieces-in-sequence, using-the-controls (instructions and demos keyed by view in identities/[view].jsx); every step waits with the player's until entry on the Steps panel card count so replay lands on the same step; tool does not write the URL; headless step check 12/12."
+      },
       "name": "Square of a Sum Visualization",
       "section": "algebra",
       "pagePath": "pages/algebra/visual-tools/identities/[view].jsx",
@@ -20091,6 +20107,10 @@
     },
     "algebra-identities-square-of-difference": {
       "slug": "identities/square-of-difference",
+      "line1": {
+        "howToMesh": "2026-10-01 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in reading-the-starting-square, the-discard-step, using-the-controls (instructions and demos keyed by view in identities/[view].jsx); every step waits with the player's until entry on the Steps panel card count so replay lands on the same step; tool does not write the URL; headless step check 12/12."
+      },
       "name": "Square of a Difference Visualization",
       "section": "algebra",
       "pagePath": "pages/algebra/visual-tools/identities/[view].jsx",
@@ -20383,6 +20403,10 @@
     },
     "algebra-identities-square-of-trinomial": {
       "slug": "identities/square-of-trinomial",
+      "line1": {
+        "howToMesh": "2026-10-01 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in reading-the-starting-square, the-explosion-view, using-the-controls (instructions and demos keyed by view in identities/[view].jsx); every step waits with the player's until entry on the Steps panel card count so replay lands on the same step; tool does not write the URL; headless step check 12/12."
+      },
       "name": "Square of a Trinomial Visualization",
       "section": "algebra",
       "pagePath": "pages/algebra/visual-tools/identities/[view].jsx",
@@ -20735,6 +20759,10 @@
     },
     "algebra-identities-difference-of-squares": {
       "slug": "identities/difference-of-squares",
+      "line1": {
+        "howToMesh": "2026-10-01 retrofit: how-to block added, 7 instructions each ending in an anchor link to an existing usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in reading-the-starting-square, lift-rotate-and-place, using-the-controls (instructions and demos keyed by view in identities/[view].jsx); every step waits with the player's until entry on the Steps panel card count so replay lands on the same step; tool does not write the URL; headless step check 12/12."
+      },
       "name": "Difference of Squares Visualization",
       "section": "algebra",
       "pagePath": "pages/algebra/visual-tools/identities/[view].jsx",
@@ -23500,7 +23528,9 @@
         "sections": 20,
         "anchors": 72,
         "orphans": 0,
-        "notes": "First arithmetic tool. Case C from zero props: additive `explanations` prop on DivisibilityTable, stateKey derived from selectedDivisors (exactly one selected -> d<N>, two or more -> multi, none -> null/no panel), entry rendered in a new white card below the grid through processContent. States = the 12 divisor buttons plus the multi-select union (frozen at the doc's own example pair, ÷2+÷3). 9 of the 12 rule sections already existed (rules 2,3,4,5,6,9,10,11,12); new sections: rule-for-1, rule-for-7 (classic double-and-subtract rule with proof), rule-for-8, combining-divisors (inclusion-exclusion + LCM), and the group section the-twelve-divisibility-rules linking all 13. Diagrams replicate the component's grid verbatim: 17-column 0-100 layout, isHighlighted predicate (0 lights under every selection), exact colors and the selector row with active-button gradient and clear button. Rendered/landing verification PENDING - permission-classifier outage gated Bash and preview tools during the pass (same as the 08-21/22 sessions); statics grep-verified (20 slugs, 72 anchors, 0 orphans, 13 units = 13 explanations = 13 stateRows). Backups pending materialization from git (page + component verified clean at session start): git show HEAD:<path>."
+        "notes": "First arithmetic tool. Case C from zero props: additive `explanations` prop on DivisibilityTable, stateKey derived from selectedDivisors (exactly one selected -> d<N>, two or more -> multi, none -> null/no panel), entry rendered in a new white card below the grid through processContent. States = the 12 divisor buttons plus the multi-select union (frozen at the doc's own example pair, ÷2+÷3). 9 of the 12 rule sections already existed (rules 2,3,4,5,6,9,10,11,12); new sections: rule-for-1, rule-for-7 (classic double-and-subtract rule with proof), rule-for-8, combining-divisors (inclusion-exclusion + LCM), and the group section the-twelve-divisibility-rules linking all 13. Diagrams replicate the component's grid verbatim: 17-column 0-100 layout, isHighlighted predicate (0 lights under every selection), exact colors and the selector row with active-button gradient and clear button. Rendered/landing verification PENDING - permission-classifier outage gated Bash and preview tools during the pass (same as the 08-21/22 sessions); statics grep-verified (20 slugs, 72 anchors, 0 orphans, 13 units = 13 explanations = 13 stateRows). Backups pending materialization from git (page + component verified clean at session start): git show HEAD:<path>.",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans); new section the-explanation-below-the-grid.",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in selecting-divisors, the-twelve-divisibility-rules, combining-divisors; union demo shows ÷2+÷3 = 68 cells against ÷6 = 17 overlap; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
@@ -23786,7 +23816,9 @@
         "sections": 11,
         "anchors": 25,
         "orphans": 0,
-        "notes": "Second arithmetic tool. Case C from zero props (component file is CLEAN - no commented template heads, unlike most pages). The tool's state is (number 1-100 free input, divisor 2-9, grouped boolean) - free numeric input is not enumerable, so states are the four qualitative display outcomes: ungrouped (gray grid in rows of ten), divisible (all blue, checkmark), remainder (yellow leftover + hint card), zeroGroups (divisor > number -> quotient 0, all yellow; special case checked FIRST in the stateKey derivation). Entry renders at the bottom of the right-hand Explanation column. Three outcomes mapped onto existing state-aware sections (understanding-the-tiles-display, what-is-divisibility, division-quotients-and-remainders); one new section when-the-divisor-is-larger; obj1 how-to-use-divisibility-tiles serves as the group section with in-text member links. Diagrams replicate the banner + tiles card + group/leftover boxes with the component's own grouping math and greedy flex-wrap layout (frozen at 23 ungrouped, 20÷5, 23÷5, 3÷5). Rendered/landing verification PENDING (same classifier outage); statics grep-verified (11 slugs, 25 anchors, 0 orphans, 4 units = 4 explanations = 4 stateRows). Backups pending materialization from git: git show HEAD:<path>."
+        "notes": "Second arithmetic tool. Case C from zero props (component file is CLEAN - no commented template heads, unlike most pages). The tool's state is (number 1-100 free input, divisor 2-9, grouped boolean) - free numeric input is not enumerable, so states are the four qualitative display outcomes: ungrouped (gray grid in rows of ten), divisible (all blue, checkmark), remainder (yellow leftover + hint card), zeroGroups (divisor > number -> quotient 0, all yellow; special case checked FIRST in the stateKey derivation). Entry renders at the bottom of the right-hand Explanation column. Three outcomes mapped onto existing state-aware sections (understanding-the-tiles-display, what-is-divisibility, division-quotients-and-remainders); one new section when-the-divisor-is-larger; obj1 how-to-use-divisibility-tiles serves as the group section with in-text member links. Diagrams replicate the banner + tiles card + group/leftover boxes with the component's own grouping math and greedy flex-wrap layout (frozen at 23 ungrouped, 20÷5, 23÷5, 3÷5). Rendered/landing verification PENDING (same classifier outage); statics grep-verified (11 slugs, 25 anchors, 0 orphans, 4 units = 4 explanations = 4 stateRows). Backups pending materialization from git: git show HEAD:<path>.",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in how-to-use-divisibility-tiles, using-the-explanation-panel, finding-nearby-divisible-numbers; Number typed via set, zero-groups case (5 ÷ 8) shown; tool does not write the URL; headless step check 13/13."
       },
       "relatedTools": [
         {
@@ -23986,7 +24018,9 @@
         "sections": 14,
         "anchors": 42,
         "orphans": 0,
-        "notes": "Third arithmetic tool. Case C from zero props; component file is clean (no commented heads). Free input 1-9999, so states are the seven qualitatively distinct tree configurations, rendered as TWO SIMULTANEOUS DIMENSIONS (precedent: inequality, completing-square): parity path (oddPath | evenPath = even-but-4-fails | eightChain = 4-passes) + digit-sum path (threePass | threeFail), with specials checked first (empty = no input, primeLike = only 1 passes -> single entry replaces the pair). Entries render stacked at the bottom of the summary panel. Frozen examples verified by hand: 26 (even, 4 fails), 45 (odd), 104 (2-4-8 all pass), 126 (3+9 pass, 7 hits), 50 (3 fails, 5+10 pass), 13 (prime). New sections: the-odd-shortcut, the-powers-of-two-chain, when-the-digit-sum-fails, only-divisible-by-1 (incl. the 169-smallest-impostor argument); obj2 understanding-the-tree-structure is the group section linking all seven members. Diagrams module ports the full 576x816 tree SVG verbatim (analysis logic, node coords, branch-box opacity, derived-box colors) with a freeze(key, n) generic; width attr 400. Backups materialized in line1-backups/arithmetic-divisibility-tree/. Rendered/landing verification PENDING (classifier outage); statics grep-verified (14 slugs, 42 anchors, 0 orphans, 7 units = 7 explanations = 7 stateRows)."
+        "notes": "Third arithmetic tool. Case C from zero props; component file is clean (no commented heads). Free input 1-9999, so states are the seven qualitatively distinct tree configurations, rendered as TWO SIMULTANEOUS DIMENSIONS (precedent: inequality, completing-square): parity path (oddPath | evenPath = even-but-4-fails | eightChain = 4-passes) + digit-sum path (threePass | threeFail), with specials checked first (empty = no input, primeLike = only 1 passes -> single entry replaces the pair). Entries render stacked at the bottom of the summary panel. Frozen examples verified by hand: 26 (even, 4 fails), 45 (odd), 104 (2-4-8 all pass), 126 (3+9 pass, 7 hits), 50 (3 fails, 5+10 pass), 13 (prime). New sections: the-odd-shortcut, the-powers-of-two-chain, when-the-digit-sum-fails, only-divisible-by-1 (incl. the 169-smallest-impostor argument); obj2 understanding-the-tree-structure is the group section linking all seven members. Diagrams module ports the full 576x816 tree SVG verbatim (analysis logic, node coords, branch-box opacity, derived-box colors) with a freeze(key, n) generic; width attr 400. Backups materialized in line1-backups/arithmetic-divisibility-tree/. Rendered/landing verification PENDING (classifier outage); statics grep-verified (14 slugs, 42 anchors, 0 orphans, 7 units = 7 explanations = 7 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new section the-explanations-below-the-summary.",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in how-to-use-the-decision-tree, understanding-the-tree-structure, the-explanations-below-the-summary; all values probed on the live tool; SVG gradient ids made per-instance (useId) so demo copies render their own colours; tool does not write the URL; headless step check 12/12."
       },
       "relatedTools": [
         {
@@ -24185,7 +24219,9 @@
         "sections": 14,
         "anchors": 35,
         "orphans": 0,
-        "notes": "Fourth arithmetic tool. Case C from zero props; component clean. The tool is an ANIMATED ALGORITHM, so states are its stages (precedent: proof-step tools): idle, sieve2/3/5/7 (each frozen at the END of that prime's sweep - the clearest teaching frame), done. stateKey from phase + last activeDivisors entry (activeDivisors never gains 11 - the done branch fires first). Entry renders at the bottom of the Step-by-Step panel. Mapping: idle->how-to-use, sieve5->why-start-at-p-squared (its own worked example is p=5), done->understanding-the-grid-display; new sections the-first-pass-multiples-of-2, the-second-pass-multiples-of-3, the-last-pass-multiples-of-7 (incl. the 91 = 7x13 trap and the 21-number mass promotion); obj6 what-is-the-sieve-of-eratosthenes is the group section. Diagrams simulate the component's sieve verbatim including the append-to-already-crossed behavior (so 56 = [2,7] stripes match live), single-prime tint color+'30'/border color+'60', multi-prime stripes as rotated SVG <pattern> standing in for the CSS repeating gradient. Counts verified: 49 crossings for 2, 16 new for 3, 6 new for 5 (25,35,55,65,85,95), 3 new for 7 (49,77,91), 25 primes/74 composites final. Backups materialized in line1-backups/arithmetic-eratosthenes-sieve/. Rendered/landing verification PENDING (classifier outage); statics grep-verified (14 slugs, 35 anchors, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
+        "notes": "Fourth arithmetic tool. Case C from zero props; component clean. The tool is an ANIMATED ALGORITHM, so states are its stages (precedent: proof-step tools): idle, sieve2/3/5/7 (each frozen at the END of that prime's sweep - the clearest teaching frame), done. stateKey from phase + last activeDivisors entry (activeDivisors never gains 11 - the done branch fires first). Entry renders at the bottom of the Step-by-Step panel. Mapping: idle->how-to-use, sieve5->why-start-at-p-squared (its own worked example is p=5), done->understanding-the-grid-display; new sections the-first-pass-multiples-of-2, the-second-pass-multiples-of-3, the-last-pass-multiples-of-7 (incl. the 91 = 7x13 trap and the 21-number mass promotion); obj6 what-is-the-sieve-of-eratosthenes is the group section. Diagrams simulate the component's sieve verbatim including the append-to-already-crossed behavior (so 56 = [2,7] stripes match live), single-prime tint color+'30'/border color+'60', multi-prime stripes as rotated SVG <pattern> standing in for the CSS repeating gradient. Counts verified: 49 crossings for 2, 16 new for 3, 6 new for 5 (25,35,55,65,85,95), 3 new for 7 (49,77,91), 25 primes/74 composites final. Backups materialized in line1-backups/arithmetic-eratosthenes-sieve/. Rendered/landing verification PENDING (classifier outage); statics grep-verified (14 slugs, 35 anchors, 0 orphans, 6 units = 6 explanations = 6 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5/4/4 steps in how-to-use-the-sieve-visualization, reading-the-status-bar, using-the-step-by-step-panel; runs stop on an until for the status text plus Pause, inside the ÷2 pass; tool does not write the URL; headless step check 13/13."
       },
       "relatedTools": [
         {
@@ -24421,7 +24457,9 @@
         "sections": 14,
         "anchors": 44,
         "orphans": 0,
-        "notes": "Fifth arithmetic tool. Case C; component clean, styled-jsx with CSS vars and its own purple palette (#7F77DD - NOT the blue family of the other arithmetic tools; diagrams keep it). Complex-numbers pattern: states are the 5 presets value-matched on the SWAPPED (hi, lo) pair - classic (252,105), quickFinish (462,198), textbook (1071,462), shortCase (84,56), coprime (54,35) - plus specials checked first: equal (a===b, one-row chain) and fibonacci (144,89 exact - the page's own worst-case example). Custom/random input shows nothing. Entry renders under the Steps list. New sections filled into the page's EMPTY obj11-14 STUBS (obj15 still empty): short-chains, the-textbook-example-1071-and-462, coprime-pairs, fibonacci-worst-case (Lame 1844). Mapping: classic->getting-started, equal->why-the-algorithm-works (gcd(d,0)=d base case), shortCase->special-cases; obj2 entering-numbers-and-using-presets is the group. PROSE CORRECTION: obj2/obj9 claimed (56,84) is a case 'where one input divides the other' - false (56 does not divide 84); rewritten as swap-then-quick-finish (28 divides 56). FAQ/schemas untouched. Diagrams port computeChain + layoutRow + the chain SVG verbatim (monospace CHAR_W 10.8 layout, amber pills, dashed Bezier arrows + arrowheads, gray stop pill, purple GCD box + callout), non-hover appearance. Chains verified by hand for all 7 states. Backups materialized in line1-backups/arithmetic-euclidean-algorithm/. Rendered/landing verification PENDING; statics grep-verified (14 slugs, 44 anchors, 0 orphans - every section has an inbound link, 7 units = 7 explanations = 7 stateRows)."
+        "notes": "Fifth arithmetic tool. Case C; component clean, styled-jsx with CSS vars and its own purple palette (#7F77DD - NOT the blue family of the other arithmetic tools; diagrams keep it). Complex-numbers pattern: states are the 5 presets value-matched on the SWAPPED (hi, lo) pair - classic (252,105), quickFinish (462,198), textbook (1071,462), shortCase (84,56), coprime (54,35) - plus specials checked first: equal (a===b, one-row chain) and fibonacci (144,89 exact - the page's own worst-case example). Custom/random input shows nothing. Entry renders under the Steps list. New sections filled into the page's EMPTY obj11-14 STUBS (obj15 still empty): short-chains, the-textbook-example-1071-and-462, coprime-pairs, fibonacci-worst-case (Lame 1844). Mapping: classic->getting-started, equal->why-the-algorithm-works (gcd(d,0)=d base case), shortCase->special-cases; obj2 entering-numbers-and-using-presets is the group. PROSE CORRECTION: obj2/obj9 claimed (56,84) is a case 'where one input divides the other' - false (56 does not divide 84); rewritten as swap-then-quick-finish (28 divides 56). FAQ/schemas untouched. Diagrams port computeChain + layoutRow + the chain SVG verbatim (monospace CHAR_W 10.8 layout, amber pills, dashed Bezier arrows + arrowheads, gray stop pill, purple GCD box + callout), non-hover appearance. Chains verified by hand for all 7 states. Backups materialized in line1-backups/arithmetic-euclidean-algorithm/. Rendered/landing verification PENDING; statics grep-verified (14 slugs, 44 anchors, 0 orphans - every section has an inbound link, 7 units = 7 explanations = 7 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5/4/4 steps in getting-started-with-the-visualizer, entering-numbers-and-using-presets, reading-a-division-row; presets and typed pairs only; tool does not write the URL; headless step check 13/13."
       },
       "relatedTools": [
         {
@@ -24850,7 +24888,9 @@
         "sections": 12,
         "anchors": 37,
         "orphans": 0,
-        "notes": "Sixth and LAST arithmetic tool - section complete. Case C; component clean, own PALETTE (blues on #f5f8ff with warm-gold zero-class accents). States are the tool's panel phases keyed off the EXISTING panelMode variable: idle, running, class -> split into classDetail (nonzero pinned) vs zeroPinned (slice 0 - visually distinct gold treatment), summary -> split into summary vs parity (divisor 2, the wheel as two halves). Entry renders between the context box and the deep-dive in the right panel with a gold left border. New section reading-a-complete-run (balance theorem: classes 1..r get q+1, rest get q) filled into the obj11 stub; obj7 right-panel-context is the group (it already enumerates the modes). Note the page renders obj0 Key Terms BOTH as a KeyTermsCard and as section 0 - existing behavior, kept. TWO PROSE CORRECTIONS: obj6 and the component's own deep-dive 'Try this' both said 'Run with divisor 10' but the divisor grid stops at 9 - obj6 bullet rewritten around divisor 5 (last digits five apart), component bullet fixed likewise (a rare in-component text edit, flagged to owner). Diagrams port the wheel verbatim (polar geometry, slice opacities 0.32/0.14/0.55, gold accent arc, outward rows, rotated upright labels, placement math n%d + per-class row counter) at frozen svgSize 520; states frozen at mod-6 idle / 17-of-36 / class-2 pinned / zero pinned / complete / mod-2 with 20. Backups pending: git show HEAD:<path>. Rendered/landing verification PENDING for the whole arithmetic section (classifier outage all session; owner's server hit the stale-.next ENOENT on divisibility-table - recovery authorized but also blocked); statics grep-verified (12 slugs, 37 anchors, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
+        "notes": "Sixth and LAST arithmetic tool - section complete. Case C; component clean, own PALETTE (blues on #f5f8ff with warm-gold zero-class accents). States are the tool's panel phases keyed off the EXISTING panelMode variable: idle, running, class -> split into classDetail (nonzero pinned) vs zeroPinned (slice 0 - visually distinct gold treatment), summary -> split into summary vs parity (divisor 2, the wheel as two halves). Entry renders between the context box and the deep-dive in the right panel with a gold left border. New section reading-a-complete-run (balance theorem: classes 1..r get q+1, rest get q) filled into the obj11 stub; obj7 right-panel-context is the group (it already enumerates the modes). Note the page renders obj0 Key Terms BOTH as a KeyTermsCard and as section 0 - existing behavior, kept. TWO PROSE CORRECTIONS: obj6 and the component's own deep-dive 'Try this' both said 'Run with divisor 10' but the divisor grid stops at 9 - obj6 bullet rewritten around divisor 5 (last digits five apart), component bullet fixed likewise (a rare in-component text edit, flagged to owner). Diagrams port the wheel verbatim (polar geometry, slice opacities 0.32/0.14/0.55, gold accent arc, outward rows, rotated upright labels, placement math n%d + per-class row counter) at frozen svgSize 520; states frozen at mod-6 idle / 17-of-36 / class-2 pinned / zero pinned / complete / mod-2 with 20. Backups pending: git show HEAD:<path>. Rendered/landing verification PENDING for the whole arithmetic section (classifier outage all session; owner's server hit the stale-.next ENOENT on divisibility-table - recovery authorized but also blocked); statics grep-verified (12 slugs, 37 anchors, 0 orphans, 6 units = 6 explanations = 6 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 4/4/5/4 steps in run-controls-and-speed, hovering-and-pinning-classes, adjusting-divisor-and-count, reading-a-complete-run; runs at speed 10 end on an until for the Done status, slices pinned by click; tool does not write the URL; headless step check 17/17."
       },
       "relatedTools": [
         {
@@ -24909,7 +24949,9 @@
         "anchors": 12,
         "orphans": 0,
         "verification": "line1-static-check.py 16 sections, 12 anchor targets, 0 orphans; node run of the diagrams module 5 SVGs, 0 malformed. Rendered check 2026-09-24 on port 3000: 16 <section id>, 5 frames, panel SSR (What the converter shows now), related-tools strip present, 0 dead anchors.",
-        "notes": "Case C: BaseVisualizer2 had no explanations panel. Additive `explanations` prop (null default = unchanged render) keyed by state: empty | b2 | b8 | b10 | b16 | other (17-36) | error, rendered through processContent in the existing converterInfo/infoText classes. States = the number 100 written in bases 10, 2, 8, 16 and 36, i.e. the page's own worked example; each has a dedicated section (decimal-base-10, binary-base-2, octal-base-8, hexadecimal-base-16, base-36-every-digit-and-every-letter) placed next to its group section (what-a-base-is, binary-octal-and-hexadecimal, bases-beyond-sixteen), and each group section got one in-text link sentence. New diagrams module reproduces the component layout (12x12 grid of 144 cubes with the first 100 filled and numbered, result structure one row per power with groups of cubes and x count, result line). Planted by session-docs/scripts/line1-base-converter-plant.py (dry/apply; page LF, component CRLF, each preserved). Line 2/3/Key Terms follow with --only=base-converter."
+        "notes": "Case C: BaseVisualizer2 had no explanations panel. Additive `explanations` prop (null default = unchanged render) keyed by state: empty | b2 | b8 | b10 | b16 | other (17-36) | error, rendered through processContent in the existing converterInfo/infoText classes. States = the number 100 written in bases 10, 2, 8, 16 and 36, i.e. the page's own worked example; each has a dedicated section (decimal-base-10, binary-base-2, octal-base-8, hexadecimal-base-16, base-36-every-digit-and-every-letter) placed next to its group section (what-a-base-is, binary-octal-and-hexadecimal, bases-beyond-sixteen), and each group section got one in-text link sentence. New diagrams module reproduces the component layout (12x12 grid of 144 cubes with the first 100 filled and numbered, result structure one row per power with groups of cubes and x count, result line). Planted by session-docs/scripts/line1-base-converter-plant.py (dry/apply; page LF, component CRLF, each preserved). Line 2/3/Key Terms follow with --only=base-converter.",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans); new section reading-the-grid-and-the-rows.",
+        "demos": "3 ToolDemoPlayer v3 demos of 5/4/4 steps in getting-started, reading-the-grid-and-the-rows, binary-octal-and-hexadecimal; every base change goes through Reset with the base typed before the number (the tool hangs otherwise); tool does not write the URL; headless step check 13/13."
       },
       "relatedTerms": [
         {
@@ -25269,7 +25311,9 @@
         "sections": 11,
         "anchors": 30,
         "orphans": 0,
-        "notes": "FIRST COMBINATORICS TOOL - section started 2026-08-25. All 11 combinatorics tools share the new-visualizers architecture: scenes/*.jsx built on shared.jsx (a 3-version file, v3 LIVE from ~line 1382: ALL_ITEMS 5 colored balls A-E, N 3-5, radial-gradient Ball, ControlBar/steppers/TransportButtons, RightPanel/InfoPanelHeader/StepRow, injected vt-* CSS). NO shared explanations infra -> whole section is Case C; this pass sets the pattern. IMPORTANT: these pages' commented heads are FULL PREVIOUS COPIES with real prose (not empty templates) - single-paragraph Edit anchors collide; use multi-paragraph anchors. Page shape = modular-wheel's (obj0 Key Terms as both KeyTermsCard and section 0, obj1-10 content, obj11-15 empty stubs). States = phases + completed enumerations: idle, building (frozen mid-flight with dotted guide + dimmed source), n3/n4/n5 (animState done keyed by n). ZERO new sections - all states map to existing prose (idle->getting-started, building->the-build-area, n3->grouping-by-first-item, n4->adjusting-n, n5->deriving-n-step-by-step); obj8 what-is-a-full-permutation is the group. Entry renders under the right panel's step rows. Diagrams port shared.jsx + scene verbatim (layout math incl. CARD_CFG per n, permsAll order, tint-0.08 group rows, avatar r13); balls mode only; n5 frame = all 120 cards (svgH ~1582). Rendered/landing verification PENDING (classifier outage; owner's server had stale-.next ENOENT - recovery still pending too). Backups pending: git show HEAD:<path>. Statics grep-verified (11 slugs, 30 anchors all in live region, 0 orphans, 5 units = 5 explanations = 5 stateRows)."
+        "notes": "FIRST COMBINATORICS TOOL - section started 2026-08-25. All 11 combinatorics tools share the new-visualizers architecture: scenes/*.jsx built on shared.jsx (a 3-version file, v3 LIVE from ~line 1382: ALL_ITEMS 5 colored balls A-E, N 3-5, radial-gradient Ball, ControlBar/steppers/TransportButtons, RightPanel/InfoPanelHeader/StepRow, injected vt-* CSS). NO shared explanations infra -> whole section is Case C; this pass sets the pattern. IMPORTANT: these pages' commented heads are FULL PREVIOUS COPIES with real prose (not empty templates) - single-paragraph Edit anchors collide; use multi-paragraph anchors. Page shape = modular-wheel's (obj0 Key Terms as both KeyTermsCard and section 0, obj1-10 content, obj11-15 empty stubs). States = phases + completed enumerations: idle, building (frozen mid-flight with dotted guide + dimmed source), n3/n4/n5 (animState done keyed by n). ZERO new sections - all states map to existing prose (idle->getting-started, building->the-build-area, n3->grouping-by-first-item, n4->adjusting-n, n5->deriving-n-step-by-step); obj8 what-is-a-full-permutation is the group. Entry renders under the right panel's step rows. Diagrams port shared.jsx + scene verbatim (layout math incl. CARD_CFG per n, permsAll order, tint-0.08 group rows, avatar r13); balls mode only; n5 frame = all 120 cards (svgH ~1582). Rendered/landing verification PENDING (classifier outage; owner's server had stale-.next ENOENT - recovery still pending too). Backups pending: git show HEAD:<path>. Statics grep-verified (11 slugs, 30 anchors all in live region, 0 orphans, 5 units = 5 explanations = 5 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to an existing usage section (8 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in the-build-area, adjusting-n, transport-controls; Step waits until no ball is in flight and Play waits for completion (until), so replay lands on the same state; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
@@ -25611,7 +25655,9 @@
         "sections": 15,
         "anchors": 40,
         "orphans": 0,
-        "notes": "Second combinatorics tool; same scene architecture as full-permutation, wired identically (Case C additive prop, entry under right-panel step rows). Preset pattern: multiset stepper cycles 6 curated multisets, so states = idle + building + one per preset keyed m<ID> off animState done + multiset.id. Counts verified by hand: AAB 3 (groups 2+1), AAAB 4 (3+1), AABB 6 (3+3), AABC 12 (6+3+3), AAABB 10 (6+4), AABBC 30 (12+12+6). The building frame freezes POSITIONAL DIMMING (the scene's signature: only the specific copy in use dims, its twin stays bright - outcome ABA with left A landed, B mid-flight). Four new sections in the obj11-14 stubs: aab-the-smallest-multiset, aaab-placing-the-single-b (positions-of-the-rare-letter view), aaabb-two-letters-ten-arrangements (two-letter multiset = binomial coefficient), aabbc-the-longest-run; mAABB -> why-divide-by-k (its own tagged-collapse example), mAABC -> grouping-by-distinct-first-item (its own unequal-rows example); obj3 the-multiset-stepper is the group with all six preset links. Diagrams port distinctPerms order + per-group row heights + positional dimming verbatim. Rendered/landing verification PENDING (section-wide). Backups pending: git show HEAD:<path>. Statics grep-verified (15 slugs, 40 anchors all live-region, 0 orphans, 8 units = 8 explanations = 8 stateRows)."
+        "notes": "Second combinatorics tool; same scene architecture as full-permutation, wired identically (Case C additive prop, entry under right-panel step rows). Preset pattern: multiset stepper cycles 6 curated multisets, so states = idle + building + one per preset keyed m<ID> off animState done + multiset.id. Counts verified by hand: AAB 3 (groups 2+1), AAAB 4 (3+1), AABB 6 (3+3), AABC 12 (6+3+3), AAABB 10 (6+4), AABBC 30 (12+12+6). The building frame freezes POSITIONAL DIMMING (the scene's signature: only the specific copy in use dims, its twin stays bright - outcome ABA with left A landed, B mid-flight). Four new sections in the obj11-14 stubs: aab-the-smallest-multiset, aaab-placing-the-single-b (positions-of-the-rare-letter view), aaabb-two-letters-ten-arrangements (two-letter multiset = binomial coefficient), aabbc-the-longest-run; mAABB -> why-divide-by-k (its own tagged-collapse example), mAABC -> grouping-by-distinct-first-item (its own unequal-rows example); obj3 the-multiset-stepper is the group with all six preset links. Diagrams port distinctPerms order + per-group row heights + positional dimming verbatim. Rendered/landing verification PENDING (section-wide). Backups pending: git show HEAD:<path>. Statics grep-verified (15 slugs, 40 anchors all live-region, 0 orphans, 8 units = 8 explanations = 8 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to an existing usage section (8 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in getting-started, the-build-area, mode-switch; Step waits on each landed ball (until) so replay lands on positional dimming exactly; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
@@ -25917,7 +25963,9 @@
         "sections": 13,
         "anchors": 33,
         "orphans": 0,
-        "notes": "Third combinatorics tool; same scene architecture, wired identically. States: idle + building (frozen mid-build with C left bright and about to be excluded) + notable (n, r) DONE configs keyed with boundary precedence (r===n -> rEqualsN, r===1 -> rOne, then (3,2) default32, (5,3) big53); other done combos show nothing (preset precedent). Two new sections in obj11-12 stubs: when-r-equals-n (0! = 1 earning its keep, P(5,4)=P(5,5) plateau) and when-r-is-one (P(n,1)=n, coincidence with C(n,1), recursion base); default32 -> grouping-by-first-item, big53 -> deriving-p-n-r-step-by-step; obj3 adjusting-n-and-r is the group with combo links. Diagrams port permsR order + CARD_CFG_BY_R + COLS_OVERRIDE + the 'BUILD AREA (r = r)' label verbatim. Rendered/landing verification PENDING (section-wide). Backups pending: git show HEAD:<path>. Statics grep-verified (13 slugs, 33 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
+        "notes": "Third combinatorics tool; same scene architecture, wired identically. States: idle + building (frozen mid-build with C left bright and about to be excluded) + notable (n, r) DONE configs keyed with boundary precedence (r===n -> rEqualsN, r===1 -> rOne, then (3,2) default32, (5,3) big53); other done combos show nothing (preset precedent). Two new sections in obj11-12 stubs: when-r-equals-n (0! = 1 earning its keep, P(5,4)=P(5,5) plateau) and when-r-is-one (P(n,1)=n, coincidence with C(n,1), recursion base); default32 -> grouping-by-first-item, big53 -> deriving-p-n-r-step-by-step; obj3 adjusting-n-and-r is the group with combo links. Diagrams port permsR order + CARD_CFG_BY_R + COLS_OVERRIDE + the 'BUILD AREA (r = r)' label verbatim. Rendered/landing verification PENDING (section-wide). Backups pending: git show HEAD:<path>. Statics grep-verified (13 slugs, 33 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to an existing usage section (8 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in the-build-area, adjusting-n-and-r, grouping-by-first-item, transport-controls; shows r clamping and P(3, 2) = P(3, 3) = 6; Step waits until no ball is in flight and Play waits for completion (until), so replay lands on the same state; tool does not write the URL; headless step check 20/20."
       },
       "relatedTools": [
         {
@@ -26208,7 +26256,9 @@
         "sections": 13,
         "anchors": 30,
         "orphans": 0,
-        "notes": "Fourth combinatorics tool; standard wiring. States: idle + building (frozen on the FIRST arrangement AA - the same ball landing twice with the source row NEVER dimming, the scenario's signature) + notable done configs with r > n checked first (rExceedsN (3,4)=81), then default32 (3,2)=9, cube33 (3,3)=27, big53 (5,3)=125; other combos null. Two new sections in stubs: when-r-exceeds-n (pigeonhole: every card has a repeat; (n-r)! undefined for r>n) and sequences-versus-permutations (6-of-27 repeat-free subset, birthday-problem connection); default32 -> grouping-by-first-item, big53 -> deriving-n-r; obj3 adjusting-n-and-r is the group. NOTE: caught own drafting error mid-pass (claimed PINs have r > n; fixed to the binary-string example, r=8 > n=2). Diagrams port tuplesR cartesian order, per-(n,r) CARD_CFG, the UNLIMITED SUPPLY label, and no-dimming verbatim. Rendered/landing verification PENDING (section-wide). Backups from HEAD 8f318b9 (pre-pass for this page; verify wc 1154/737). Statics grep-verified (13 slugs, 30 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
+        "notes": "Fourth combinatorics tool; standard wiring. States: idle + building (frozen on the FIRST arrangement AA - the same ball landing twice with the source row NEVER dimming, the scenario's signature) + notable done configs with r > n checked first (rExceedsN (3,4)=81), then default32 (3,2)=9, cube33 (3,3)=27, big53 (5,3)=125; other combos null. Two new sections in stubs: when-r-exceeds-n (pigeonhole: every card has a repeat; (n-r)! undefined for r>n) and sequences-versus-permutations (6-of-27 repeat-free subset, birthday-problem connection); default32 -> grouping-by-first-item, big53 -> deriving-n-r; obj3 adjusting-n-and-r is the group. NOTE: caught own drafting error mid-pass (claimed PINs have r > n; fixed to the binary-string example, r=8 > n=2). Diagrams port tuplesR cartesian order, per-(n,r) CARD_CFG, the UNLIMITED SUPPLY label, and no-dimming verbatim. Rendered/landing verification PENDING (section-wide). Backups from HEAD 8f318b9 (pre-pass for this page; verify wc 1154/737). Statics grep-verified (13 slugs, 30 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to an existing usage section (8 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in getting-started, the-build-area, adjusting-n-and-r; n + at r = 4 shows r clamped to 3; tool does not write the URL; headless step check 14/14."
       },
       "relatedTools": [
         {
@@ -26545,7 +26595,9 @@
         "sections": 11,
         "anchors": 29,
         "orphans": 0,
-        "notes": "Fifth combinatorics tool; standard wiring, entry under the single anchor StepRow. Unlike the linear scenes this one has ONE group (the anchor Red pinned at the ring top, always dimmed in the source) and ring-shaped result cards. States: idle (anchor already seated - symmetry spent before the first move), building (Green landed, Blue mid-flight, FIXED badge untouched), n3/n4/n5 done (2 / 6 / 24 ring cards). ZERO new sections: idle->getting-started, n3->the-anchor (the two-card representative argument), n4->adjusting-n (shifted factorial 2,6,24), building->the-build-ring (no left/right, only clockwise-from-anchor), n5->the-completed-grid (full round-table catalog); obj8 what-is-a-circular-permutation is the group. Diagrams port ringPos geometry, FIXED badge, solid-vs-dashed slots, radial #2..#n labels, and mini ring cards with per-n CARD_CFG verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1754/610. Statics grep-verified (11 slugs, 29 anchors all live-region, 0 orphans, 5 units = 5 explanations = 5 stateRows)."
+        "notes": "Fifth combinatorics tool; standard wiring, entry under the single anchor StepRow. Unlike the linear scenes this one has ONE group (the anchor Red pinned at the ring top, always dimmed in the source) and ring-shaped result cards. States: idle (anchor already seated - symmetry spent before the first move), building (Green landed, Blue mid-flight, FIXED badge untouched), n3/n4/n5 done (2 / 6 / 24 ring cards). ZERO new sections: idle->getting-started, n3->the-anchor (the two-card representative argument), n4->adjusting-n (shifted factorial 2,6,24), building->the-build-ring (no left/right, only clockwise-from-anchor), n5->the-completed-grid (full round-table catalog); obj8 what-is-a-circular-permutation is the group. Diagrams port ringPos geometry, FIXED badge, solid-vs-dashed slots, radial #2..#n labels, and mini ring cards with per-n CARD_CFG verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1754/610. Statics grep-verified (11 slugs, 29 anchors all live-region, 0 orphans, 5 units = 5 explanations = 5 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to an existing usage section (8 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in the-build-ring, adjusting-n, transport-controls; n changed only while the completed grid is empty (tool crashes otherwise); Step waits until no ball is in flight and Play waits for completion (until), so replay lands on the same state; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
@@ -26897,7 +26949,9 @@
         "sections": 12,
         "anchors": 30,
         "orphans": 0,
-        "notes": "Sixth combinatorics tool; standard wiring. The scene's signature is the UNLABELED build slots ('BUILD SET (size r = r)', no #position labels - order carries no meaning) and smallest-element grouping with varying sizes C(n-1-i, r-1). States: idle + building (canonical smallest-first landing) + done configs with r===n first (rEqualsN (5,5)=1), then default32 (3,2)=3, sym52 (5,2)=10, big53 (5,3)=10 (groups 6+3+1); other combos null. One new section in the obj11 stub: when-r-equals-n-one-subset (0!=1, symmetry framing both extremes, Pascal-row peak at n/2); sym52 -> adjusting-n-and-r (its own C(n,r)=C(n,n-r) paragraph), big53 -> grouping-by-smallest-item (its own 6+3+1 example), default32 -> deriving-c-n-r (the P/r! census-of-duplicates pairing vs the partial tool's 6); obj8 what-is-a-combination is the group. PROSE CORRECTION: obj4's displayed formula read 'group size at smallest = i = binom(...)' (mangled '= i ='); fixed to 'group size at smallest index i ='. Diagrams port combinations() canonical order, unlabeled slots, per-group row heights verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1146/705. Statics grep-verified (12 slugs, 30 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
+        "notes": "Sixth combinatorics tool; standard wiring. The scene's signature is the UNLABELED build slots ('BUILD SET (size r = r)', no #position labels - order carries no meaning) and smallest-element grouping with varying sizes C(n-1-i, r-1). States: idle + building (canonical smallest-first landing) + done configs with r===n first (rEqualsN (5,5)=1), then default32 (3,2)=3, sym52 (5,2)=10, big53 (5,3)=10 (groups 6+3+1); other combos null. One new section in the obj11 stub: when-r-equals-n-one-subset (0!=1, symmetry framing both extremes, Pascal-row peak at n/2); sym52 -> adjusting-n-and-r (its own C(n,r)=C(n,n-r) paragraph), big53 -> grouping-by-smallest-item (its own 6+3+1 example), default32 -> deriving-c-n-r (the P/r! census-of-duplicates pairing vs the partial tool's 6); obj8 what-is-a-combination is the group. PROSE CORRECTION: obj4's displayed formula read 'group size at smallest = i = binom(...)' (mangled '= i ='); fixed to 'group size at smallest index i ='. Diagrams port combinations() canonical order, unlabeled slots, per-group row heights verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1146/705. Statics grep-verified (12 slugs, 30 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to an existing usage section (8 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in the-build-set, adjusting-n-and-r, grouping-by-smallest-item, transport-controls; shows C(5, 2) = C(5, 3) and the 3/2/1 rows of C(4, 2); Step waits until no ball is in flight and Play waits for completion (until), so replay lands on the same state; tool does not write the URL; headless step check 20/20."
       },
       "relatedTools": [
         {
@@ -27265,7 +27319,9 @@
         "sections": 16,
         "anchors": 44,
         "orphans": 0,
-        "notes": "Seventh combinatorics tool; standard wiring. Preset pattern: partition stepper cycles 7 shapes, states = idle + building + p<shape> keyed off preset.id with '+' stripped (p22..p221). Counts and destination-row splits verified by hand: 2+2=6, 3+1=4 (3+1), 2+1+1=12 (6+3+3), 4+1=5 (4+1), 3+2=10 (6+4), 3+1+1=20, 2+2+1=30 (12+12+6). ALL FIVE STUBS obj11-15 used - new sections: three-plus-one-a-combination-in-disguise (two-box multinomial = binomial), four-plus-one-choosing-who-stands-alone (singleton boxes, count = n), three-plus-two-the-team-split (the C(5,3) tie-in + named-teams caution for 5+5), three-plus-one-plus-one-equal-boxes (the labeled convention biting: each grouping twice, /m! for unlabeled), two-plus-two-plus-one-the-largest-run; p22 -> deriving-the-multinomial-coefficient (24/4 over-count with the labeled mirror-cards note), p211 -> grouping-by-item-1-destination (its own 6+3+3 example); obj3 the-partition-stepper is the group with all seven shape links. Diagrams port generatePartitions + sortByItemZeroBox, the labeled BUILD BOXES floor plan, box-separator cards, and '-> Box X' group avatars verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1082/886. Statics grep-verified (16 slugs, 44 anchors all live-region, 0 orphans, 9 units = 9 explanations = 9 stateRows)."
+        "notes": "Seventh combinatorics tool; standard wiring. Preset pattern: partition stepper cycles 7 shapes, states = idle + building + p<shape> keyed off preset.id with '+' stripped (p22..p221). Counts and destination-row splits verified by hand: 2+2=6, 3+1=4 (3+1), 2+1+1=12 (6+3+3), 4+1=5 (4+1), 3+2=10 (6+4), 3+1+1=20, 2+2+1=30 (12+12+6). ALL FIVE STUBS obj11-15 used - new sections: three-plus-one-a-combination-in-disguise (two-box multinomial = binomial), four-plus-one-choosing-who-stands-alone (singleton boxes, count = n), three-plus-two-the-team-split (the C(5,3) tie-in + named-teams caution for 5+5), three-plus-one-plus-one-equal-boxes (the labeled convention biting: each grouping twice, /m! for unlabeled), two-plus-two-plus-one-the-largest-run; p22 -> deriving-the-multinomial-coefficient (24/4 over-count with the labeled mirror-cards note), p211 -> grouping-by-item-1-destination (its own 6+3+3 example); obj3 the-partition-stepper is the group with all seven shape links. Diagrams port generatePartitions + sortByItemZeroBox, the labeled BUILD BOXES floor plan, box-separator cards, and '-> Box X' group avatars verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1082/886. Statics grep-verified (16 slugs, 44 anchors all live-region, 0 orphans, 9 units = 9 explanations = 9 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in the-partition-stepper, grouping-by-item-1-destination, transport-controls, mode-switch; Step and Play steps wait with until on the landed/finished state so replay matches; tool does not write the URL; headless step check 18/18."
       },
       "relatedTools": [
         {
@@ -27709,7 +27765,9 @@
         "sections": 13,
         "anchors": 29,
         "orphans": 0,
-        "notes": "Eighth combinatorics tool; standard wiring. The scene's signature: items pick cells (functions viewpoint - mathematically identical to permutation-with-repetition but framed from the items' side), bottom-up stacking, live assignment tuple readout with ? placeholders, and UNIFORM group sizes k^(n-1) (independence's fingerprint vs the section's staircases). States: idle + building (frozen at (1,1,?) with two items sharing Cell 1) + done configs: default33 (3,3)=27 (9+9+9), twoCells (3,2)=8 (binary strings = subsets, 2^n bridge to the binomial theorem), manyCells (2,4)=16 (>=2 cells empty guaranteed, no surjections), big43 (4,3)=81 (pigeonhole in every card); other combos null. Two new sections in stubs: two-cells-binary-choices and more-cells-than-items (vacancy as pigeonhole's mirror, n=k bijections as the k!/k^k minority); default33 -> grouping-by-item-1s-destination (its own uniformity paragraph), big43 -> deriving-k-n; obj3 adjusting-n-and-k is the group. Diagrams port cells layout, stacking math (countItemsInCellBefore), readout/legend/formula card, and tuple-labeled mini cards verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1090/905. Statics grep-verified (13 slugs, 29 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
+        "notes": "Eighth combinatorics tool; standard wiring. The scene's signature: items pick cells (functions viewpoint - mathematically identical to permutation-with-repetition but framed from the items' side), bottom-up stacking, live assignment tuple readout with ? placeholders, and UNIFORM group sizes k^(n-1) (independence's fingerprint vs the section's staircases). States: idle + building (frozen at (1,1,?) with two items sharing Cell 1) + done configs: default33 (3,3)=27 (9+9+9), twoCells (3,2)=8 (binary strings = subsets, 2^n bridge to the binomial theorem), manyCells (2,4)=16 (>=2 cells empty guaranteed, no surjections), big43 (4,3)=81 (pigeonhole in every card); other combos null. Two new sections in stubs: two-cells-binary-choices and more-cells-than-items (vacancy as pigeonhole's mirror, n=k bijections as the k!/k^k minority); default33 -> grouping-by-item-1s-destination (its own uniformity paragraph), big43 -> deriving-k-n; obj3 adjusting-n-and-k is the group. Diagrams port cells layout, stacking math (countItemsInCellBefore), readout/legend/formula card, and tuple-labeled mini cards verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1090/905. Statics grep-verified (13 slugs, 29 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to an existing usage section (8 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in getting-started, the-cells, adjusting-n-and-k; Step waits on each placed item (until); tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
@@ -28012,7 +28070,9 @@
         "sections": 12,
         "anchors": 28,
         "orphans": 0,
-        "notes": "Ninth combinatorics tool; standard wiring. The scene INVERTS the section's casting: identical items sit still in the strip, the k-1 BARS animate in (stars-and-bars staged literally). States: idle (items seated, bars waiting - 'the choice belongs to the dividers'), building (frozen at (0,1,?) with an empty first bin's dashed bracket), default43 (C(6,2)=15, countdown rows 5+4+3+2+1 = hockey stick), twoBins (k===2 boundary, any n, frozen at (4,2): one bar, five pointable choices), big54 ((5,4): C(8,3)=56, triangular rows 21+15+10+6+3+1, vs 4^5=1024 for distinct items); other combos null. One new section in the obj11 stub: three-bars-fifty-six-ways; default43 -> grouping-by-first-bin-count (its own 5+4+3+2+1 example), twoBins -> the-stars-and-bars-argument; obj3 adjusting-n-and-k is the group. PROSE FIX: obj10's multiset-coefficient notation was the broken '\\\\binom{\\\\binom{k}{n}}{}' (empty bottom argument); rewritten as the doubled-parenthesis \\\\left( \\\\binom{k}{n} \\\\right) form. Diagrams port the holding row, numbered strip, cell-only alternating bin bands, progressive brackets (partKnown logic), dual composition<->bar-positions readouts, formula card, and x1-grouped strip cards verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1084/1138. Statics grep-verified (12 slugs, 28 anchors all live-region, 0 orphans, 5 units = 5 explanations = 5 stateRows)."
+        "notes": "Ninth combinatorics tool; standard wiring. The scene INVERTS the section's casting: identical items sit still in the strip, the k-1 BARS animate in (stars-and-bars staged literally). States: idle (items seated, bars waiting - 'the choice belongs to the dividers'), building (frozen at (0,1,?) with an empty first bin's dashed bracket), default43 (C(6,2)=15, countdown rows 5+4+3+2+1 = hockey stick), twoBins (k===2 boundary, any n, frozen at (4,2): one bar, five pointable choices), big54 ((5,4): C(8,3)=56, triangular rows 21+15+10+6+3+1, vs 4^5=1024 for distinct items); other combos null. One new section in the obj11 stub: three-bars-fifty-six-ways; default43 -> grouping-by-first-bin-count (its own 5+4+3+2+1 example), twoBins -> the-stars-and-bars-argument; obj3 adjusting-n-and-k is the group. PROSE FIX: obj10's multiset-coefficient notation was the broken '\\\\binom{\\\\binom{k}{n}}{}' (empty bottom argument); rewritten as the doubled-parenthesis \\\\left( \\\\binom{k}{n} \\\\right) form. Diagrams port the holding row, numbered strip, cell-only alternating bin bands, progressive brackets (partKnown logic), dual composition<->bar-positions readouts, formula card, and x1-grouped strip cards verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1084/1138. Statics grep-verified (12 slugs, 28 anchors all live-region, 0 orphans, 5 units = 5 explanations = 5 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new section composition-and-bar-position-readouts.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in adjusting-n-and-k, grouping-by-first-bin-count, transport-controls, mode-switch; final step plays n = 4, k = 3 to completion with until; tool does not write the URL; headless step check 18/18."
       },
       "relatedTools": [
         {
@@ -28282,7 +28342,9 @@
         "sections": 14,
         "anchors": 37,
         "orphans": 0,
-        "notes": "Tenth combinatorics tool; standard wiring. Sibling of weak-composition but the board differs: bars land in the n-1 GAPS BETWEEN items (dashed drop-zones), never at the ends and never two per gap - so x_i >= 1 is enforced by geometry, not arithmetic. States: idle, building (frozen at (1,2,?) with one gap sealed), and done configs with boundaries first (kEqualsN k===n -> single forced (1,1,...,1); twoBins k===2 -> one bar among n-1 gaps), then default53 (5,3)=C(4,2)=6 rows 3+2+1, big74 (7,4)=C(6,3)=20 rows 10+6+3+1 (centre of Pascal's 6th row); other combos null. Three new sections in stubs obj11-13: two-bins-one-divider, twenty-ways-the-largest-run, when-k-equals-n-the-forced-composition (incl. the C=0 case for k>n); default53 -> grouping-by-first-bin-count (its own 3+2+1 example); obj3 adjusting-n-and-k is the group. NOTE the-gap-choice-argument is a PLAIN section (its unit would have duplicated twoBins; its after was rewritten to link the two-bin section instead of referencing a frame). A stray CJK character ('已') slipped into one drafted paragraph and was corrected; final sweep confirms ASCII+math-symbol text only. Diagrams port the gap geometry, drop-zone indicators, bin bands over item ranges, progressive brackets, dual composition<->chosen-gaps readouts, and gap-based mini cards verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1084/1102. Statics grep-verified (14 slugs, 37 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows)."
+        "notes": "Tenth combinatorics tool; standard wiring. Sibling of weak-composition but the board differs: bars land in the n-1 GAPS BETWEEN items (dashed drop-zones), never at the ends and never two per gap - so x_i >= 1 is enforced by geometry, not arithmetic. States: idle, building (frozen at (1,2,?) with one gap sealed), and done configs with boundaries first (kEqualsN k===n -> single forced (1,1,...,1); twoBins k===2 -> one bar among n-1 gaps), then default53 (5,3)=C(4,2)=6 rows 3+2+1, big74 (7,4)=C(6,3)=20 rows 10+6+3+1 (centre of Pascal's 6th row); other combos null. Three new sections in stubs obj11-13: two-bins-one-divider, twenty-ways-the-largest-run, when-k-equals-n-the-forced-composition (incl. the C=0 case for k>n); default53 -> grouping-by-first-bin-count (its own 3+2+1 example); obj3 adjusting-n-and-k is the group. NOTE the-gap-choice-argument is a PLAIN section (its unit would have duplicated twoBins; its after was rewritten to link the two-bin section instead of referencing a frame). A stray CJK character ('已') slipped into one drafted paragraph and was corrected; final sweep confirms ASCII+math-symbol text only. Diagrams port the gap geometry, drop-zone indicators, bin bands over item ranges, progressive brackets, dual composition<->chosen-gaps readouts, and gap-based mini cards verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1084/1102. Statics grep-verified (14 slugs, 37 anchors all live-region, 0 orphans, 6 units = 6 explanations = 6 stateRows).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new section composition-and-gap-readouts.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in adjusting-n-and-k, grouping-by-first-bin-count, transport-controls, mode-switch; Play at Speed 3 with until on completion; tool does not write the URL; headless step check 19/19."
       },
       "relatedTools": [
         {
@@ -28770,7 +28832,9 @@
         "sections": 11,
         "anchors": 36,
         "orphans": 0,
-        "notes": "ELEVENTH AND LAST COMBINATORICS TOOL - section complete. Structurally unlike scenes #1-#10: NO ANIMATION (component lives in new-visualizers/general/, not scenes/). States are the four LENSES (identity / hockey / rowsum / symmetry) plus the unfocused view; stateKey = focusN===null ? 'unfocused' : mode. The page already had a dedicated section per mode (obj3-obj6), so mapping was one-to-one with ZERO new sections; obj2 clicking-cells-and-focus took the unfocused frame. Frozen states were TUNED TO MATCH each section's own worked example: identity C(4,2)=3+3, hockey C(5,2)=1+2+3+4, rowsum row 4 = 16 (moved off row 5), symmetry C(7,2)=C(7,5)=21 at N=7 (moved off N=6). obj1 getting-started keeps prose-only after via a new plainWithAfter() helper (no unit - its natural frame is the identity one, which obj3 owns). Diagrams port cell geometry, the four role fills (focus solid accent + C(n,r) caption, related amber-soft, secondary green-soft, default dashed), per-mode connectors (dashed parent lines / hockey polyline / symmetry arc), row labels, the rowsum right-edge label, and the (a+b)^n banner verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1090/739. Statics grep-verified (11 slugs, 36 anchors, 0 orphans, 5 units = 5 explanations = 5 stateRows). COMBINATORICS SECTION TOTALS (summed from this file, not by hand): 11 tools, 67 states, 141 sections, 366 anchors, 0 orphans. Registry parses clean; 52 of 57 entries now carry line1.done."
+        "notes": "ELEVENTH AND LAST COMBINATORICS TOOL - section complete. Structurally unlike scenes #1-#10: NO ANIMATION (component lives in new-visualizers/general/, not scenes/). States are the four LENSES (identity / hockey / rowsum / symmetry) plus the unfocused view; stateKey = focusN===null ? 'unfocused' : mode. The page already had a dedicated section per mode (obj3-obj6), so mapping was one-to-one with ZERO new sections; obj2 clicking-cells-and-focus took the unfocused frame. Frozen states were TUNED TO MATCH each section's own worked example: identity C(4,2)=3+3, hockey C(5,2)=1+2+3+4, rowsum row 4 = 16 (moved off row 5), symmetry C(7,2)=C(7,5)=21 at N=7 (moved off N=6). obj1 getting-started keeps prose-only after via a new plainWithAfter() helper (no unit - its natural frame is the identity one, which obj3 owns). Diagrams port cell geometry, the four role fills (focus solid accent + C(n,r) caption, related amber-soft, secondary green-soft, default dashed), per-mode connectors (dashed parent lines / hockey polyline / symmetry arc), row labels, the rowsum right-edge label, and the (a+b)^n banner verbatim. Rendered/landing verification PENDING (section-wide). Backups verify against audit wc 1090/739. Statics grep-verified (11 slugs, 36 anchors, 0 orphans, 5 units = 5 explanations = 5 stateRows). COMBINATORICS SECTION TOTALS (summed from this file, not by hand): 11 tools, 67 states, 141 sections, 366 anchors, 0 orphans. Registry parses clean; 52 of 57 entries now carry line1.done.",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 8 instructions each ending in an anchor link to an existing usage section (8 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 4–5 steps in clicking-cells-and-focus, mode-1-pascals-identity, mode-2-hockey-stick, mode-3-row-sum; cells clicked as SVG rects; tool does not write the URL; headless step check 18/18."
       },
       "relatedTools": [
         {
@@ -43389,7 +43453,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - eslint parse, line1-static-check.py, and a node run of the diagrams module asserting 7 points / 7 bars / 5 gridlines and the tool's own statistics (population 26.571 vs sample 31.000 on the same data).",
         "wiring": "C - VarianceVisualizer took NO props at all; added `explanations = null` additively, rendered as a note under the statistics row. State is derived by value-matching live dataPoints against the component's own presets, with the sample toggle taking precedence.",
-        "note": "The page had obj1..obj10 and NO spare slots, so obj11-obj15 were appended to sectionsContent. There is also no obj0 Key Terms on this page at all - nothing to restore, unlike the linear-algebra pages. The chart is built inline in JSX, so the diagrams module ports it; hover state (which brightens one bar and shows a delta label) is not reproduced - every bar is drawn at the resting 0.3 opacity."
+        "note": "The page had obj1..obj10 and NO spare slots, so obj11-obj15 were appended to sectionsContent. There is also no obj0 Key Terms on this page at all - nothing to restore, unlike the linear-algebra pages. The chart is built inline in JSX, so the diagrams module ports it; hover state (which brightens one bar and shows a delta label) is not reproduced - every bar is drawn at the resting 0.3 opacity.",
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 6 instructions each ending in an anchor link to a usage section (6 links, 0 orphans); new section the-statistics-bar.",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in using-the-visualizer, data-table-and-manual-input, population-vs-sample; values edited through the table (chart points drag with mouse events); tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
@@ -43858,7 +43924,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - eslint parse, line1-static-check.py, and a node run of the diagrams module asserting 12 edges / 13 nodes on the default tree, 16/17 on the wide one, and B marginals summing to exactly 1.0000 in both.",
         "wiring": "C - the component took NO props; added `explanations = null` additively, rendered above the tree. State derived from the component's own highlightedPath (null / A{i} / B{j}) plus the partition size.",
-        "note": "PAGE PATTERN NOT SEEN BEFORE: this page generated its sections with Object.keys(sectionsContent).map() and numeric ids rather than a literal array. That map was replaced with an explicit slug list. obj13-obj16 appended (the page had obj1..obj12 and no spare slots, and no obj0 Key Terms). The tree is drawn inline in JSX, so the diagrams module ports it."
+        "note": "PAGE PATTERN NOT SEEN BEFORE: this page generated its sections with Object.keys(sectionsContent).map() and numeric ids rather than a literal array. That map was replaced with an explicit slug list. obj13-obj16 appended (the page had obj1..obj12 and no spare slots, and no obj0 Key Terms). The tree is drawn inline in JSX, so the diagrams module ports it.",
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 6 instructions each ending in an anchor link to a usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in using-the-visualizer, the-calculations-panel, changing-the-partition-size; self-normalizing sliders set to their 0.99 maximum with a one-character set so live play and replay match; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
@@ -44715,7 +44783,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - eslint parse, line1-static-check.py, and a node run of the diagrams module asserting 36 cards and the counts 6/36 (sum 7), 6/36 (doubles), 18/36 (even), with 252 pips = 2 x 21 x 6.",
         "wiring": "C - DiceSampleSpaceVisualizer took no props; added `explanations = null` additively, keyed by highlight condition, rendered above the outcome grid. IMPORTANT: the value reaches it through GenericMultiComponentFrame's OWN `explanations` prop, which already maps component keys to per-component values - that pass-through existed before this project and should be used for every framed tool rather than a per-entry props hack.",
-        "limitation": "TWO components share this page. The roll SIMULATOR has no frozen states at all: both of its charts (sum histogram, convergence line) are EMPIRICAL and render placeholder text until random rolls accumulate, so there is no deterministic state to capture. All four states come from the sample space explorer. This is stated in the page prose, not hidden."
+        "limitation": "TWO components share this page. The roll SIMULATOR has no frozen states at all: both of its charts (sum histogram, convergence line) are EMPIRICAL and render placeholder text until random rolls accumulate, so there is no deterministic state to capture. All four states come from the sample space explorer. This is stated in the page prose, not hidden.",
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in getting-started, sum-distribution-histograms, using-the-sample-space-explorer, advanced-highlight-conditions; explorer demos stay on 2 dice; demo copies pass syncUrl={false}; headless step check 20/20."
       },
       "relatedTools": [
         {
@@ -45096,7 +45166,9 @@
         "verification": "STATIC ONLY - eslint parse, line1-static-check.py, and a node run asserting 8 cards / 24 coin discs and the counts 4/8 majority, 2/8 all-same, 2/8 alternating, plus equalSplitCount = 0 computed rather than asserted.",
         "wiring": "C - CoinSampleSpaceVisualizer took no props; added `explanations = null` additively, keyed by highlight condition, rendered above the outcome grid. Value delivered through GenericMultiComponentFrame's own `explanations` prop.",
         "limitation": "Same as dice-roll: the toss SIMULATOR half of this page has no frozen states, because its convergence chart and streak tracker are empirical and render nothing until random tosses accumulate. All four states come from the sample space explorer, and the prose says so.",
-        "gotcha": "This component is declared as `function CoinSampleSpaceVisualizer()` with a separate `export default` at the bottom, unlike its dice sibling which is a const arrow. Check the actual declaration form before patching a signature."
+        "gotcha": "This component is declared as `function CoinSampleSpaceVisualizer()` with a separate `export default` at the bottom, unlike its dice sibling which is a const arrow. Check the actual declaration form before patching a signature.",
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans).",
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in getting-started, simulation-types, using-the-sample-space-explorer, setting-highlight-conditions; random flips quoted only through Total and the ±2 SE band widths; demo copies pass syncUrl={false} (new GenericMultiComponentFrame opt-out, default true); headless step check 20/20."
       },
       "relatedTools": [
         {
@@ -45436,7 +45508,9 @@
         "verification": "STATIC ONLY - eslint parse; computed table slugs resolved separately against the section ids (0 orphans); node run of the diagrams module confirming all four grand totals are exactly 1.0000 and the row marginals match each component's declared P(A).",
         "wiring": "A, mostly - the page ALREADY delivered per-cell explanation maps for 2x3/2x4/3x3 through GenericMultiComponentFrame's `explanations` prop, and those components already accepted the prop. Line 1 added the section anchor to every entry of all four maps via a withAnchor() wrapper at page level (the explanation FILES were not edited).",
         "gapFilled": "The 2x2 table - the DEFAULT view - had no explanations file and its component took no explanations prop, so selecting a cell there produced nothing while the other three tables explained themselves. Added 2x2explanations.js (13 entries, same key vocabulary: cell keys plus <cell>-<marginal>) and an additive explanations prop + panel on ConditionalProbabilityTable2.",
-        "note": "Third distinct page-section pattern in probability: this one had a genericSections array with HARDCODED titles and numeric ids, rather than reading titles from sectionsContent. Replaced with an explicit slug list. (The other two: literal arrays, and Object.keys(...).map().)"
+        "note": "Third distinct page-section pattern in probability: this one had a genericSections array with HARDCODED titles and numeric ids, rather than reading titles from sectionsContent. Replaced with an explicit slug list. (The other two: literal arrays, and Object.keys(...).map().)",
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans); new section the-explanation-panel.",
+        "demos": "4 ToolDemoPlayer v3 demos of 5 steps in using-the-2x2-table, reading-the-joint-table, conditional-probability-panels, comparing-table-sizes; slider demo walks into and out of independence; demo copies pass syncUrl={false}; headless step check 20/20."
       },
       "relatedTools": [
         {
@@ -45767,7 +45841,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - eslint parse, line1-static-check.py, runtime slugs resolved separately (0 orphans), and a node run of the diagrams module confirming each CDF is monotone with the right endpoints: uniform 0.1667->1, binomial 0.001->1, geometric 0.3->0.999995 (unbounded support, correctly never reaching 1), negBin 0.064->1 starting at k=3, hypergeometric 0.0029->1, Poisson e^-3=0.0498->1.",
         "wiring": "A-ish. The component ALREADY accepted `explanationsOverride`, but that REPLACES its built-in explanation. Added an additive `explanationsAppend` prop so the tool's own text survives and the section link is appended. The panel renders through processContent, so anchors are markdown.",
-        "note": "RECHARTS. The live chart is a recharts <LineChart type='stepAfter'>, which cannot be rendered to a string at build time, so the diagrams module ports the plot: the six data builders and their pmf/cdf helpers (all defined inside the component) are ported verbatim and evaluated at the component's default sliders, then drawn with the same visual config the component passes recharts (stroke #245de1 width 3, dots r4, dashed #e0e0e0 grid, #1a3a52 axes, y domain [0,1])."
+        "note": "RECHARTS. The live chart is a recharts <LineChart type='stepAfter'>, which cannot be rendered to a string at build time, so the diagrams module ports the plot: the six data builders and their pmf/cdf helpers (all defined inside the component) are ported verbatim and evaluated at the component's default sliders, then drawn with the same visual config the component passes recharts (stroke #245de1 width 3, dots r4, dashed #e0e0e0 grid, #1a3a52 axes, y domain [0,1]).",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 6 instructions each ending in an anchor link to a usage section (6 links, 0 orphans); new section the-cdf-explanation-panel.",
+        "demos": "3 ToolDemoPlayer v3 demos of 5 steps in selecting-a-distribution, adjusting-parameters, parameter-effects-on-shape; callouts quote slider labels, tab descriptions and plotted k-ranges only; tool does not write the URL; headless step check 15/15."
       },
       "relatedTools": [
         {
@@ -46217,7 +46293,9 @@
         "orphans": 0,
         "verification": "STATIC ONLY - eslint parse of page + component + diagrams module, line1-static-check.py (13 sections / 3 units / 0 orphans), computed note() anchors resolved separately against the wired slug list (0 orphans), and a node run of the diagrams module in a shim: 3 SVGs, 200 points each, 199 L-commands (= points-1, so no dropped samples), no NaN/undefined. Readings taken from the component's own functions - uniform F(5)=0.5 with slope 0.1; normal F(0)=0.5, F(1)=0.8413, and the empirical rule as CDF differences 0.6827 / 0.9545 / 0.9973, matching published tables to 4dp; exponential F(1)=1-e^-1=0.6321, median ln2=0.6931 left of the mean 1, last plotted point 0.9931.",
         "wiring": "A-ish, same as the discrete sibling. The component ALREADY accepted `explanationsOverride`, but that REPLACES its built-in explanation, so an additive `explanationsAppend` prop was added and the tool's own text survives with the section link appended. The panel renders through processContent, so anchors are markdown. Also exported the three module-level CDF helpers (uniformCDF / normalCDF / exponentialCDF) so the frozen stills are drawn from the tool's own functions rather than a re-derivation.",
-        "note": "RECHARTS, like the discrete sibling. The live chart is a recharts <LineChart>, which cannot be rendered to a string at build time, so continuousCdfDiagrams.js ports the plot: the component's three data builders (defined inside it, closing over its sliders) ported verbatim and evaluated at its default sliders, drawn with the configuration it gives recharts. The component asks for type='monotone'; at 201 nominal samples a polyline is visually identical and more faithful at the uniform's two corners, where a spline would round a genuine kink. Two facts recorded because they are the tool's real behaviour, not a port artefact: float accumulation in the `for (let x = start; x <= end; x += step)` loops stops one step short, so each series has 200 points and the windows end at 11.93 / 3.96 / 4.975 rather than 12 / 4 / 5; and the normal curve is an Abramowitz & Stegun erf approximation (~1.5e-7), so F(0) reads 0.5000000005 rather than exactly 0.5."
+        "note": "RECHARTS, like the discrete sibling. The live chart is a recharts <LineChart>, which cannot be rendered to a string at build time, so continuousCdfDiagrams.js ports the plot: the component's three data builders (defined inside it, closing over its sliders) ported verbatim and evaluated at its default sliders, drawn with the configuration it gives recharts. The component asks for type='monotone'; at 201 nominal samples a polyline is visually identical and more faithful at the uniform's two corners, where a spline would round a genuine kink. Two facts recorded because they are the tool's real behaviour, not a port artefact: float accumulation in the `for (let x = start; x <= end; x += step)` loops stops one step short, so each series has 200 points and the windows end at 11.93 / 3.96 / 4.975 rather than 12 / 4 / 5; and the normal curve is an Abramowitz & Stegun erf approximation (~1.5e-7), so F(0) reads 0.5000000005 rather than exactly 0.5.",
+        "howToMesh": "2026-10-03 retrofit: how-to block added, 6 instructions each ending in an anchor link to a usage section (6 links, 0 orphans); new section the-cdf-explanation-panel.",
+        "demos": "3 ToolDemoPlayer v3 demos of 5, 4 and 5 steps in selecting-a-distribution, adjusting-parameters, parameter-effects-on-shape; callouts quote plot-window ends, not the irregular tick labels; tool does not write the URL; headless step check 14/14."
       },
       "relatedTools": [
         {
@@ -46396,6 +46474,10 @@
     },
     "probability-expected-value-weighted": {
       "slug": "expected-value/weighted",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in the-distribution-selector, animation-mode, the-calculation-panel; the timed Play Animation step carries no numbers; tool does not write the URL; headless step check 12/12."
+      },
       "name": "Weighted Expected Value Visualizer",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/expected-value/[view].jsx",
@@ -46565,6 +46647,10 @@
     },
     "probability-expected-value-discrete": {
       "slug": "expected-value/discrete",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in using-the-probability-sliders, the-expected-value-indicator, understanding-contributions; sliders set to min/max with single-event set (the tool renormalises on every input); tool does not write the URL; headless step check 12/12."
+      },
       "name": "Discrete Expected Value Visualization",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/expected-value/[view].jsx",
@@ -46910,6 +46996,10 @@
     },
     "probability-inequalities-markov": {
       "slug": "inequalities/markov",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 6 instructions each ending in an anchor link to a usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in the-distribution-selector, adjusting-ex-and-threshold, when-markov-becomes-useless; tool does not write the URL; headless step check 12/12."
+      },
       "name": "Markov Inequality Visualizer",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/inequalities/[view].jsx",
@@ -47200,6 +47290,10 @@
     },
     "probability-inequalities-chebyshev": {
       "slug": "inequalities/chebyshev",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 6 instructions each ending in an anchor link to a usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in the-k-standard-deviations-form, using-the-control-sliders, bound-vs-actual; a = 2σ to 5σ walks 25% → 4.0%; tool does not write the URL; headless step check 12/12."
+      },
       "name": "Chebyshev Inequality Visualizer",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/inequalities/[view].jsx",
@@ -47596,6 +47690,10 @@
     },
     "probability-probability-function-discrete": {
       "slug": "probability-function/discrete",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans); new section the-explanation-panel.",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in selecting-a-distribution, adjusting-parameters, comparing-distribution-shapes; tool does not write the URL; headless step check 12/12."
+      },
       "name": "Discrete Probability Distributions",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/probability-function/[view].jsx",
@@ -48140,6 +48238,10 @@
     },
     "probability-probability-function-continuous": {
       "slug": "probability-function/continuous",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans); new section the-explanation-panel.",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in the-pdf-cdf-toggle, adjusting-parameters, density-vs-probability; tool does not write the URL; headless step check 12/12."
+      },
       "name": "Continuous Probability Distributions",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/probability-function/[view].jsx",
@@ -48705,6 +48807,10 @@
     },
     "probability-venn-diagrams-two-sets": {
       "slug": "venn-diagrams/two-sets",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 6 instructions each ending in an anchor link to a usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in getting-started, clicking-and-hovering, show-calculations; SVG segments clicked; tool does not write the URL; headless step check 12/12."
+      },
       "name": "2-Set Venn Diagram Tool",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/venn-diagrams/[view].jsx",
@@ -48987,6 +49093,10 @@
     },
     "probability-venn-diagrams-three-sets": {
       "slug": "venn-diagrams/three-sets",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 6 instructions each ending in an anchor link to a usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 5/4/4 steps in getting-started, navigating-eight-regions, show-calculations; segment 8 skipped (clipped SVG); tool does not write the URL; headless step check 13/13."
+      },
       "name": "3-Set Venn Diagram Tool",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/venn-diagrams/[view].jsx",
@@ -49404,6 +49514,10 @@
     },
     "probability-conditional-probability-tree-diagram": {
       "slug": "conditional-probability/tree-diagram",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in the-probability-sliders, clicking-to-highlight, bayes-in-the-tree; card highlights paired with a text change; tool does not write the URL; headless step check 13/13."
+      },
       "name": "Tree Diagram - Conditional Probability Visualization",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/conditional-probability/[view].jsx",
@@ -49695,6 +49809,10 @@
     },
     "probability-conditional-probability-venn-diagram": {
       "slug": "conditional-probability/venn-diagram",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in the-sample-space-partition, clicking-compartments, why-conditionals-differ; compartments clicked in the SVG and on their cards; tool does not write the URL; headless step check 12/12."
+      },
       "name": "Venn Diagram - Conditional Probability Visualization",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/conditional-probability/[view].jsx",
@@ -49972,6 +50090,10 @@
     },
     "probability-conditional-probability-waffle-chart": {
       "slug": "conditional-probability/waffle-chart",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 6 instructions each ending in an anchor link to a usage section (6 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4 steps in the-distribution-sliders, conditional-vs-total, same-total-different-distributions; callouts quote tile counts only (tile placement is random); tool does not write the URL; headless step check 12/12."
+      },
       "name": "Waffle Chart - Conditional Probability Visualization",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/conditional-probability/[view].jsx",
@@ -50215,6 +50337,10 @@
     },
     "probability-conditional-probability-contingency-table": {
       "slug": "conditional-probability/contingency-table",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 7 instructions each ending in an anchor link to a usage section (7 links, 0 orphans).",
+        "demos": "3 ToolDemoPlayer v3 demos of 4–5 steps in the-probability-sliders, clicking-to-trace, bayes-in-the-table; tool does not write the URL; headless step check 13/13."
+      },
       "name": "Contingency Table - Conditional Probability Visualization",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/conditional-probability/[view].jsx",
@@ -50562,6 +50688,10 @@
     },
     "probability-distributions-binomial": {
       "slug": "distributions/binomial",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new usage sections reading-the-statistics-panel, the-table-tab, key-properties-and-applications.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4 steps in parameter-controls, interpreting-the-pmf-chart, calculating-point-probabilities, range-probability-calculations; calculator values typed with set, sliders driven with slide; tool does not write the URL; headless step check 16/16."
+      },
       "name": "Binomial Distribution Calculator",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/distributions/[view].jsx",
@@ -50953,6 +51083,10 @@
     },
     "probability-distributions-geometric": {
       "slug": "distributions/geometric",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new usage sections reading-the-statistics-panel, the-table-tab, key-properties-and-applications.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4 steps in adjusting-success-probability, pmf-visualization, computing-exact-probabilities, range-probability-calculations; calculator values typed with set, sliders driven with slide; tool does not write the URL; headless step check 16/16."
+      },
       "name": "Geometric Distribution Calculator",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/distributions/[view].jsx",
@@ -51277,6 +51411,10 @@
     },
     "probability-distributions-negative-binomial": {
       "slug": "distributions/negative-binomial",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new usage sections reading-the-statistics-panel, the-table-tab, key-properties-and-applications.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4 steps in setting-distribution-parameters, pmf-display, calculating-point-probabilities, computing-range-probabilities; calculator values typed with set, sliders driven with slide; tool does not write the URL; headless step check 16/16."
+      },
       "name": "Negative Binomial Distribution Calculator",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/distributions/[view].jsx",
@@ -51662,6 +51800,10 @@
     },
     "probability-distributions-poisson": {
       "slug": "distributions/poisson",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new usage sections reading-the-statistics-panel, the-table-tab, key-properties-and-applications.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4 steps in adjusting-the-rate-parameter, pmf-chart, computing-exact-probabilities, range-probability-calculations; calculator values typed with set, sliders driven with slide; tool does not write the URL; headless step check 16/16."
+      },
       "name": "Poisson Distribution Calculator",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/distributions/[view].jsx",
@@ -51989,6 +52131,10 @@
     },
     "probability-distributions-hypergeometric": {
       "slug": "distributions/hypergeometric",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new usage sections reading-the-statistics-panel, the-table-tab, key-properties-and-applications.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4 steps in setting-population-parameters, interpreting-the-pmf-visualization, calculating-exact-probabilities, computing-cumulative-and-range-probabilities; calculator values typed with set, sliders driven with slide; tool does not write the URL; headless step check 16/16."
+      },
       "name": "Hypergeometric Distribution Calculator",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/distributions/[view].jsx",
@@ -52256,6 +52402,10 @@
     },
     "probability-distributions-uniform-discrete": {
       "slug": "distributions/uniform-discrete",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new usage sections reading-the-statistics-panel, the-table-tab, key-properties-and-applications.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4 steps in setting-the-distribution-range, flat-pmf, computing-point-probabilities, range-probability-calculations; calculator values typed with set, sliders driven with slide; tool does not write the URL; headless step check 16/16."
+      },
       "name": "Discrete Uniform Distribution Calculator",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/distributions/[view].jsx",
@@ -52529,6 +52679,10 @@
     },
     "probability-distributions-normal": {
       "slug": "distributions/normal",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new usage sections reading-the-statistics-panel, the-table-tab, key-properties-and-applications.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4 steps in adjusting-mean-and-standard-deviation, pdf-curve, probability-calculators, the-empirical-rule-68-95-99-7; calculator values typed with set, sliders driven with slide; tool does not write the URL; headless step check 16/16."
+      },
       "name": "Normal Distribution Calculator",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/distributions/[view].jsx",
@@ -52797,6 +52951,10 @@
     },
     "probability-distributions-exponential": {
       "slug": "distributions/exponential",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new usage sections reading-the-statistics-panel, the-table-tab, key-properties-and-applications.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4 steps in adjusting-the-rate-parameter, pdf-curve, calculating-cumulative-probabilities, range-probability-calculations; calculator values typed with set, sliders driven with slide; tool does not write the URL; headless step check 16/16."
+      },
       "name": "Exponential Distribution Calculator",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/distributions/[view].jsx",
@@ -53095,6 +53253,10 @@
     },
     "probability-distributions-uniform-continuous": {
       "slug": "distributions/uniform-continuous",
+      "line1": {
+        "howToMesh": "2026-10-02 retrofit: how-to block added, 8 instructions each ending in an anchor link to a usage section (8 links, 0 orphans); new usage sections reading-the-statistics-panel, the-table-tab, key-properties-and-applications.",
+        "demos": "4 ToolDemoPlayer v3 demos of 4 steps in setting-interval-bounds, flat-pdf, using-cumulative-calculators, computing-interval-probabilities; calculator values typed with set, sliders driven with slide; tool does not write the URL; headless step check 16/16."
+      },
       "name": "Continuous Uniform Distribution Calculator",
       "section": "probability",
       "pagePath": "pages/probability/visual-tools/distributions/[view].jsx",

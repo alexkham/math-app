@@ -104,6 +104,7 @@ export const UI_TEXT = {
   footerNavigate: 'navigate',
   footerOpen: 'open',
   footerTab: 'next category',
+  footerClose: 'close',
   footerNote: 'Search by meaning across the whole site',
   searching: 'Searching',
   emptyCategory: 'Nothing in this category. Other tabs have results.',

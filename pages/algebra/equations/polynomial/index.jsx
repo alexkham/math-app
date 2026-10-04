@@ -10,6 +10,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
+import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -693,6 +695,31 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const crQuarticConj = {
+    kind: 'roots',
+    svgTitle: 'The four roots of z^4 + 1 = 0: two conjugate pairs',
+    roots: [
+      { arg: 45, label: '(1 + i)/√2' }, { arg: 135, label: '(−1 + i)/√2' },
+      { arg: 225, label: '(−1 − i)/√2' }, { arg: 315, label: '(1 − i)/√2' },
+    ],
+    captionLines: ['z⁴ + 1 = 0 has no real root, but exactly 4 complex roots —', 'one per degree, 90° apart on the unit circle, in two conjugate pairs'],
+  };
+  const fpRationalRoots = { kind: 'pieces', svgTitle: '2x^3 - 3x^2 - 8x + 12: of 16 rational candidates, only -2, 3/2 and 2 are roots', xRange: [-3, 3.5], yRange: [-6, 18], yStep: 2,
+    pieces: [{ fn: (x) => 2 * x ** 3 - 3 * x * x - 8 * x + 12, from: -3, to: 3.5, ends: [null, null], color: 'f' }],
+    points: [{ x: -2, y: 0 }, { x: 1.5, y: 0 }, { x: 2, y: 0 }],
+    notes: [{ x: -2.9, y: 17, text: 'candidates ±1, ±2, ±3, ±4, ±6, ±12, ±1/2, ±3/2', pos: 'e' }, { x: 0.4, y: 9, text: 'roots: −2, 3/2, 2', pos: 'e', color: 'r' }],
+    caption: 'P(x) = 2x³ − 3x² − 8x + 12: three of sixteen candidates are roots' };
+  const fpQuarticRoots = { kind: 'pieces', svgTitle: 'Three quartics with four, two and no real roots', xRange: [-2.6, 2.6], yRange: [-5, 6],
+    pieces: [
+      { fn: (x) => x ** 4 - 5 * x * x + 4, from: -2.6, to: 2.6, ends: [null, null], color: 'f' },
+      { fn: (x) => x ** 4 - 2 * x * x - 3, from: -2.6, to: 2.6, ends: [null, null], color: 'g' },
+      { fn: (x) => x ** 4 + 1, from: -2.6, to: 2.6, ends: [null, null], color: 'r' },
+    ],
+    points: [{ x: -2, y: 0 }, { x: -1, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }, { x: -Math.sqrt(3), y: 0 }, { x: Math.sqrt(3), y: 0 }],
+    notes: [{ x: -2.55, y: -4.6, text: 'x⁴ − 5x² + 4: four roots', pos: 'e', color: 'f' }, { x: 0.2, y: -4.6, text: 'x⁴ − 2x² − 3: two roots', pos: 'e', color: 'g' },
+      { x: -1.25, y: 5.3, text: 'x⁴ + 1: none', pos: 'e', color: 'r' }],
+    caption: 'A quartic can have four, two or no real roots' };
+
   const demoUnits = {
     degree: demoUnitFrame({
       svg: equationVisualizerDiagrams['cubic-three'],
@@ -707,6 +734,21 @@ const schemas = {
       text: 'The curve flattens against the axis at the origin and passes through without the usual crossing angle: the root x = 0 appears three times in the factorisation x &#183; x &#183; x, and the flattening is what a triple root looks like. A double root would touch and turn back instead. Compare the touch of x&#178; = 0 with this crossing on the',
       href: '/algebra/visual-tools/equation',
       linkText: 'equation visual explorer',
+    }),
+    conjugatePairs: demoUnitFrame({
+      svg: renderComplexRoots(crQuarticConj),
+      caption: 'Degree 4, four roots, two conjugate pairs',
+      text: 'z&#8308; + 1 = 0 has real coefficients but no real root, since z&#8308; is never negative for real z. In &#8450; it has exactly four roots, one per degree, as the theorem promises. They sit in mirror pairs across the real axis, (1 + i)/&#8730;2 with (1 &#8722; i)/&#8730;2 and (&#8722;1 + i)/&#8730;2 with (&#8722;1 &#8722; i)/&#8730;2: each pair multiplies out to a real quadratic factor, here x&#178; &#8722; &#8730;2x + 1 and x&#178; + &#8730;2x + 1.',
+    }),
+    rationalRoots: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRationalRoots),
+      caption: 'Candidates versus roots',
+      text: 'The section\'s cubic 2x&#179; &#8722; 3x&#178; &#8722; 8x + 12. The theorem lists sixteen possible rational roots; the graph crosses the axis at only three of them, &#8722;2, 3/2 and 2. Testing the list by substitution finds x = 2 first; dividing out (x &#8722; 2) leaves 2x&#178; + x &#8722; 6 = (2x &#8722; 3)(x + 2), which gives the other two.',
+    }),
+    quarticRoots: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpQuarticRoots),
+      caption: 'Four, two or no real roots',
+      text: 'Three bi-quadratics, each solved by u = x&#178;. x&#8308; &#8722; 5x&#178; + 4 gives u = 1 or 4, so x = &#177;1, &#177;2: four real roots. x&#8308; &#8722; 2x&#178; &#8722; 3 gives u = 3 or &#8722;1, and only u = 3 yields real x = &#177;&#8730;3: two real roots. x&#8308; + 1 never reaches 0: no real roots at all, unlike a cubic, which always crosses the axis at least once.',
     }),
   };
 
@@ -772,6 +814,8 @@ export default function PolynomialEquationsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-conjugatePairs'} dangerouslySetInnerHTML={{ __html: demoUnits.conjugatePairs }} />,
+          `Real roots appear on the real axis; every non-real root brings its conjugate with it.`,
         ]
     },
     {
@@ -788,6 +832,8 @@ export default function PolynomialEquationsPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-rationalRoots'} dangerouslySetInnerHTML={{ __html: demoUnits.rationalRoots }} />,
+          `The theorem shortens the search but never guarantees that any candidate is a root.`,
         ]
     },
     {
@@ -804,6 +850,8 @@ export default function PolynomialEquationsPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-quarticRoots'} dangerouslySetInnerHTML={{ __html: demoUnits.quarticRoots }} />,
+          `Real roots of a quartic come in even numbers when counted with multiplicity: four, two or none.`,
         ]
     },
     {

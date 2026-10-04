@@ -473,6 +473,9 @@ import DivisibilityTiles from '../../../../app/components/divisibility/Divisibil
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import divisibilityTilesDiagrams from '@/app/components/divisibility/divisibilityTilesDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -807,8 +810,112 @@ It also completes the tool's spectrum of outcomes: all blue (divisible), blue wi
     zeroGroups: `The divisor is larger than the number, so not even one complete group forms — the quotient is 0 and every tile is leftover. [Learn more about this edge case](!#when-the-divisor-is-larger) · [How the tool works](!#how-to-use-divisibility-tiles)`,
   };
 
+  const instructions = [
+    'Type a number from 1 to 100 in the **Number** field; the tiles redraw as a gray grid and any grouping is cleared. [Learn more about entering a number](!#how-to-use-divisibility-tiles)',
+    'Click a **Divisor** button from 2 to 9 to choose the group size; choosing one also returns the tiles to the ungrouped grid. [Learn more about choosing the divisor](!#how-to-use-divisibility-tiles)',
+    'Click **Group** to pack the tiles into equal groups; the same button then reads **Reset** and restores the plain grid. [Learn more about Group and Reset](!#how-to-use-divisibility-tiles)',
+    'Ungrouped, the tiles are gray in rows of 10; grouped, each complete group is a blue box labeled with its size, and the leftover is a yellow box labeled with a plus sign. [Learn more about the tiles display](!#understanding-the-tiles-display)',
+    'The banner above the tiles reads **23 tiles** before grouping and **4 groups of 5 + 3 leftover**, or ends in **Divisible ✓**, after it. [Learn more about the result banner](!#reading-the-result-banner)',
+    'The **Explanation** panel on the right writes the division, the multiplication check and any leftover subtraction, then concludes **Divisible!** or **Not Divisible**. [Learn more about the explanation panel](!#using-the-explanation-panel)',
+    'When the split fails, the **What would work?** hint names the nearest smaller and larger numbers that divide evenly. [Learn more about nearby divisible numbers](!#finding-nearby-divisible-numbers)',
+    'A divisor larger than the number forms no group at all: 0 blue boxes and every tile yellow. [Learn more about this case](!#when-the-divisor-is-larger)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real DivisibilityTiles tool
+     (opens on 23 tiles, divisor 5, ungrouped). Divisor buttons are "2" … "9"
+     (exact match); the action button reads "Group" / "Reset". Typing a number or
+     choosing a divisor returns the tool to the ungrouped grid. */
+  const demos = {
+    'how-to-use-divisibility-tiles': {
+      title: 'Number, divisor, Group',
+      script: [
+        { say: `TAP Group
+23 ÷ 5: four blue groups of 5.
+3 yellow tiles left over.` },
+        { click: { button: 'Group', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Reset
+Back to 23 gray tiles.
+Rows of 10: two full rows + 3.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `TYPE 24 in Number
+24 gray tiles. Banner: 24 tiles.` },
+        { set: 'input[type="number"]', value: 24 },
+        { wait: 2200 },
+        { say: `TAP 6, then Group
+Four blue groups of 6. No yellow.
+Banner: Divisible ✓.` },
+        { click: { button: '6', exact: true } },
+        { click: { button: 'Group', exact: true } },
+        { wait: 2800 },
+        { say: `TAP 7
+New divisor → grouping resets.
+Panel asks: 24 tiles in groups of 7?` },
+        { click: { button: '7', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'using-the-explanation-panel': {
+      title: 'Banner and Explanation panel',
+      script: [
+        { say: `TAP 3
+Banner still: 23 tiles.
+Panel asks: equal groups of 3?` },
+        { click: { button: '3', exact: true } },
+        { wait: 2400 },
+        { say: `TAP Group
+Banner: 7 groups of 3 + 2 leftover.
+Panel: 23 ÷ 3 = 7 remainder 2.
+7 × 3 = 21. Leftover 23 − 21 = 2.` },
+        { click: { button: 'Group', exact: true } },
+        { wait: 3200 },
+        { say: `TYPE 21 in Number
+Grouping resets. 21 gray tiles.` },
+        { set: 'input[type="number"]', value: 21 },
+        { wait: 2200 },
+        { say: `TAP Group
+Banner: 7 groups of 3 — Divisible ✓.
+No Leftover step. Green conclusion.` },
+        { click: { button: 'Group', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+    'finding-nearby-divisible-numbers': {
+      title: 'Nearby numbers and zero groups',
+      script: [
+        { say: `TAP 8, then Group
+2 groups of 8 + 7 leftover.
+Hint: try 16 (subtract 7) or 24 (add 1).` },
+        { click: { button: '8', exact: true } },
+        { click: { button: 'Group', exact: true } },
+        { wait: 3000 },
+        { say: `TYPE 24, then Group
+3 groups of 8 — Divisible ✓.
+Hint gone.` },
+        { set: 'input[type="number"]', value: 24 },
+        { click: { button: 'Group', exact: true } },
+        { wait: 2800 },
+        { say: `TYPE 5, then Group
+Divisor 8 > 5: 0 groups.
+All 5 tiles yellow.
+Hint: try 0 or 8.` },
+        { set: 'input[type="number"]', value: 5 },
+        { click: { button: 'Group', exact: true } },
+        { wait: 3000 },
+        { say: `TAP 5, then Group
+1 group of 5 — Divisible ✓.` },
+        { click: { button: '5', exact: true } },
+        { click: { button: 'Group', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('divisibility-tiles'),
       sectionsContent,
       introContent,
@@ -821,7 +928,7 @@ It also completes the tool's spectrum of outcomes: all blue (divisible), blue wi
   }
 }
 
-export default function DivisibilityTilesPage({
+export default function DivisibilityTilesPage({ instructions, demos,
   relatedTools, seoData,
   sectionsContent,
   introContent,
@@ -830,6 +937,21 @@ export default function DivisibilityTilesPage({
   stateUnits,
   explanations
 }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <DivisibilityTiles explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -851,11 +973,11 @@ export default function DivisibilityTilesPage({
   })
 
   const genericSections = [
-    plain('obj1', 'how-to-use-divisibility-tiles'),
+    withDemo(plain('obj1', 'how-to-use-divisibility-tiles')),
     stateRow('obj2', 'understanding-the-tiles-display', 'ungrouped'),
     plain('obj3', 'reading-the-result-banner'),
-    plain('obj4', 'using-the-explanation-panel'),
-    plain('obj5', 'finding-nearby-divisible-numbers'),
+    withDemo(plain('obj4', 'using-the-explanation-panel')),
+    withDemo(plain('obj5', 'finding-nearby-divisible-numbers')),
     stateRow('obj6', 'what-is-divisibility', 'divisible'),
     stateRow('obj7', 'division-quotients-and-remainders', 'remainder'),
     stateRow('obj11', 'when-the-divisor-is-larger', 'zeroGroups'),
@@ -921,6 +1043,10 @@ export default function DivisibilityTilesPage({
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Divisibility Tiles</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <DivisibilityTiles explanations={explanations}/>
       <br/>

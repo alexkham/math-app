@@ -934,6 +934,7 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionTypesDiagrams from '@/app/components/functions/types/functionTypesDiagrams'
+import renderFunctionPlotV3 from '@/app/utils/illustrations/functions/graphs/functionPlot.v3'
 
 
 export async function getStaticProps(){
@@ -1552,6 +1553,24 @@ const faqQuestions = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpPlaneQuadrants = {
+    kind: 'plane', svgTitle: 'The four quadrants and the point (3, -2) plotted from the origin', xRange: [-5, 5], yRange: [-4, 4],
+    point: { x: 3, y: -2, label: '(3, −2)' },
+    caption: 'The signs of (x, y) decide the quadrant: (3, −2) is in Quadrant IV',
+  };
+  const fpPointsSquare = {
+    kind: 'pointsToCurve', svgTitle: 'Points (x, x^2) for x = -2 to 2 lying on the parabola y = x^2', xRange: [-3, 3], yRange: [-1, 9],
+    fn: (x) => x * x, points: [-2, -1, 0, 1, 2], fnLabel: { text: 'f(x) = x²', x: 1.2, y: 8 },
+    caption: 'Each input gives one point (x, f(x)); together they form the curve',
+  };
+  const fpReadSquareMinus4 = {
+    kind: 'readValues', svgTitle: 'Reading f(3) = 5 and solving f(x) = 0 on the graph of x^2 - 4', xRange: [-4, 4], yRange: [-5, 7],
+    fn: (x) => x * x - 4, input: { x: 3, label: 'f(3) = 5: one answer' },
+    output: { y: 0, xs: [-2, 2], label: 'f(x) = 0: two answers, x = −2 and x = 2' },
+    fnLabel: { text: 'f(x) = x² − 4', x: -3.9, y: 6.4 },
+    caption: 'An input has one output; an output can come from several inputs',
+  };
+
   const demoUnits = {
     curves: demoUnitFrame({
       svg: functionTypesDiagrams.cubic,
@@ -1559,6 +1578,21 @@ const faqQuestions = {
       text: 'The curve rises, turns down through a local maximum, falls through the origin, turns up again at a local minimum and rises for good: the characteristic S of a cubic, with one more turn than a parabola. Recognising the shape tells you the family before any algebra. Flip through the families and their signature curves on the',
       href: '/functions/visual-tools/types',
       linkText: 'function types explorer',
+    }),
+    planeQuadrants: demoUnitFrame({
+      svg: renderFunctionPlotV3(fpPlaneQuadrants),
+      caption: 'Four quadrants, one plotted point',
+      text: 'The section\'s own example, (3, &#8722;2). Start at the origin, move 3 units right along the x-axis, then 2 units down. A positive x and a negative y put the point in Quadrant IV: each quadrant is named by the signs of its two coordinates.',
+    }),
+    pointsSquare: demoUnitFrame({
+      svg: renderFunctionPlotV3(fpPointsSquare),
+      caption: 'Five points of the graph of x squared',
+      text: 'The points the section lists for f(x) = x&#178;: (&#8722;2, 4), (&#8722;1, 1), (0, 0), (1, 1) and (2, 4). Each pairs one input with its output. Filling in every input between them traces the parabola, drawn faintly behind the points.',
+    }),
+    readSquareMinus4: demoUnitFrame({
+      svg: renderFunctionPlotV3(fpReadSquareMinus4),
+      caption: 'Two readings of the same graph',
+      text: 'f(x) = x&#178; &#8722; 4. To find f(3), go up from x = 3 to the curve and across to the y-axis: one point, so one answer, 5. To solve f(x) = 0, look along the line y = 0, here the x-axis: it meets the curve twice, so x = &#8722;2 and x = 2 are both answers.',
     }),
   };
 
@@ -1617,6 +1651,8 @@ export default function GraphsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-planeQuadrants'} dangerouslySetInnerHTML={{ __html: demoUnits.planeQuadrants }} />,
+          `Every graph on this page is drawn on this grid: inputs along the x-axis, outputs measured up or down.`,
         ]
     },
     {
@@ -1625,6 +1661,8 @@ export default function GraphsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-pointsSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.pointsSquare }} />,
+          `The graph is all of these input-output pairs at once.`,
         ]
     },
     // {
@@ -1673,6 +1711,8 @@ export default function GraphsPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-readSquareMinus4'} dangerouslySetInnerHTML={{ __html: demoUnits.readSquareMinus4 }} />,
+          `A reading from an input gives at most one value; a reading from an output can give none, one or many.`,
         ]
     },
     {

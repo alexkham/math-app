@@ -496,6 +496,9 @@ import StrongComposition from '../../../../app/components/combinatorics/new-visu
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import strongCompositionDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/strongCompositionDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -817,7 +820,24 @@ The zero case beyond the boundary is worth stating because word problems produce
       link: '',
     },
     obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+    obj15: { title: ``, content: ``, before: ``, after: ``, link: '' },
+    obj16: {
+      title: `Composition and Gap Readouts`,
+      content: `Under the items row, two readouts restate the current build in both encodings, joined by **⇔**:
+
+• **composition: ( … )** — the bin counts $(x_1, x_2, \\dots, x_k)$.
+
+• **chosen gaps: { … }** — the numbers of the gaps that hold a bar.
+
+Both start as question marks — $(?, ?, ?)$ and $\\{?, ?\\}$ for the default $n = 5$, $k = 3$ — and fill in as bars land. In the first build, one **Step ▶** gives $(1, ?, ?) \\Leftrightarrow \\{1, ?\\}$: the first bar in gap 1 seals $x_1 = 1$. The second gives $(1, 1, 3) \\Leftrightarrow \\{1, 2\\}$, and the last bin is known only now, because it runs from the last bar to the end of the row. The same values appear in the brackets under the items.
+
+Below the readouts, a **formula card** spells out the count for the current $n$ and $k$: **Choose k − 1 = 2 gaps out of n − 1 = 4 gaps between items**, followed by $C(4, 2) = 4!/(2! \\cdot 2!) = 24/(2 \\cdot 2) = 6$. The card changes only with the [n and k steppers](!#adjusting-n-and-k); the readouts change with every bar.
+
+The two-way arrow is the [gap-choice argument](!#the-gap-choice-argument) in one line: each set of $k - 1$ gaps gives exactly one composition, and each composition gives back exactly one set of gaps.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
 
   }
 
@@ -964,8 +984,157 @@ The zero case beyond the boundary is worth stating because word problems produce
     kEqualsN: `With as many bins as items, every bin must hold exactly one: the count collapses to a single forced composition. [Learn more about the k = n boundary](!#when-k-equals-n-the-forced-composition) · [Adjusting n and k](!#adjusting-n-and-k)`,
   };
 
+  const instructions = [
+    'The **● Balls / A Letters** switch at the left of the control bar draws every item as the same red ball or the same letter A; bars and gaps look the same in both modes. [Learn more about the mode switch](!#mode-switch)',
+    'The **n** stepper sets the number of identical items (3 to 7) and the **k** stepper the number of bins (2 to 4, never more than $n$); each change clears the build and updates $C(n - 1, k - 1)$ at the top right of the scene. [Learn more about adjusting n and k](!#adjusting-n-and-k)',
+    '**Step ▶** drops one bar into its gap, **◀ Back** undoes one step, **▶ Play** builds every composition and stops at the end, **↺ Reset** clears the completed section, and **Speed** sets how fast the bars fly. [Learn more about the transport controls](!#transport-controls)',
+    'The top right of the scene shows the count $C(n - 1, k - 1)$ and a status line such as **x₁ = 1: 0 / 3**. [Learn more about getting started](!#getting-started)',
+    'In the items row, bars land only in the dashed drop-zones between items; coloured bands mark the bins and the brackets below read $x_1, x_2, \\dots$ as soon as the bars fix them. [Learn more about items and gaps](!#items-and-gaps)',
+    'Under the strip, **composition: ( … ) ⇔ chosen gaps: { … }** shows the same build in both encodings, and the formula card writes out the full count. [Learn more about the composition and gap readouts](!#composition-and-gap-readouts)',
+    'The **COMPLETED** section files each strip in the row of its first-bin count $x_1$, with the count of finished compositions at its right. [Learn more about grouping by first-bin count](!#grouping-by-first-bin-count)',
+    'The right panel adds one row per value of $x_1$, with a counter such as **0 / 3** and the formula for that row; a ✓ marks each finished row. [Learn more about the right panel](!#right-panel-and-progress)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real StrongComposition tool
+     (opens on n = 5, k = 3, balls mode, speed 1). Stepper buttons: '−' / '+' exact,
+     nth 0 = n, nth 1 = k. The mode switch is the .vt-switch div. Step ▶ flies a bar:
+     untilLanded holds (also in replay) until the dotted guide line is gone;
+     untilDone holds until ▶ Play is disabled (enumeration finished). */
+  const untilLanded = { until: 'svg.vt-scene-svg:not(:has(line[stroke-dasharray="5 4"]))', ms: 4000 }
+  const untilDone = { until: 'button.vt-btn-primary:disabled', ms: 20000 }
+  const stepBtn = { button: 'Step ▶', exact: true }
+  const demos = {
+    'adjusting-n-and-k': {
+      title: 'Changing n and k',
+      script: [
+        { say: `TAP n +
+n = 6. Five gaps between items.
+C(5, 2) = 10.` },
+        { click: { button: '+', exact: true, nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP k +
+k = 4. Three bars to place.
+C(5, 3) = 10. Same count as C(5, 2).` },
+        { click: { button: '+', exact: true, nth: 1 } },
+        { wait: 2800 },
+        { say: `TAP n +
+n = 7, k = 4.
+C(6, 3) = 20. Largest run.` },
+        { click: { button: '+', exact: true, nth: 0 } },
+        { wait: 2400 },
+        { say: `TAP k −
+k = 3. Two bars.
+C(6, 2) = 15.` },
+        { click: { button: '−', exact: true, nth: 1 } },
+        { wait: 2400 },
+        { say: `TAP k −
+k = 2. One bar, six gaps.
+C(6, 1) = 6.` },
+        { click: { button: '−', exact: true, nth: 1 } },
+        { wait: 2400 },
+      ],
+    },
+    'grouping-by-first-bin-count': {
+      title: 'Rows by first-bin count',
+      script: [
+        { say: `SLIDE Speed → 3, TAP ▶ Play
+All 6 compositions built.
+Rows x₁ = 1, 2, 3: 3, 2, 1 strips.` },
+        { slide: { range: 0 }, to: 3, ms: 900 },
+        { click: { button: '▶ Play', exact: true } },
+        untilDone,
+        { wait: 2800 },
+        { say: `TAP n −
+n = 4. C(3, 2) = 3.
+Completed section cleared.` },
+        { click: { button: '−', exact: true, nth: 0 } },
+        { wait: 2200 },
+        { say: `TAP ▶ Play
+Rows x₁ = 1: 2 strips. x₁ = 2: 1.
+2 + 1 = 3.` },
+        { click: { button: '▶ Play', exact: true } },
+        untilDone,
+        { wait: 2600 },
+        { say: `TAP n −
+n = k = 3. C(2, 2) = 1.
+Every gap must take a bar.` },
+        { click: { button: '−', exact: true, nth: 0 } },
+        { wait: 2200 },
+        { say: `TAP ▶ Play
+One strip: (1, 1, 1).
+Single row x₁ = 1.` },
+        { click: { button: '▶ Play', exact: true } },
+        untilDone,
+        { wait: 2600 },
+      ],
+    },
+    'transport-controls': {
+      title: 'Step, file, back',
+      script: [
+        { say: `TAP Step ▶
+Bar 1 drops into gap 1.
+(1, ?, ?) ⇔ {1, ?}. x₁ = 1: 0 / 3.` },
+        { click: stepBtn },
+        untilLanded,
+        { wait: 2600 },
+        { say: `TAP Step ▶
+Bar 2 drops into gap 2.
+(1, 1, 3) ⇔ {1, 2}.` },
+        { click: stepBtn },
+        untilLanded,
+        { wait: 2400 },
+        { say: `TAP Step ▶
+Both bars placed. Ring flashes.
+Status: x₁ = 1: 1 / 3.` },
+        { click: stepBtn },
+        { wait: 2400 },
+        { say: `TAP Step ▶
+Strip filed in row x₁ = 1.
+COMPLETED 1 / 6. Gaps empty again.` },
+        { click: stepBtn },
+        { wait: 2600 },
+        { say: `TAP ◀ Back
+Strip returns to the items row.
+COMPLETED 0 / 6.` },
+        { click: { button: '◀ Back', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'mode-switch': {
+      title: 'Balls and letters',
+      script: [
+        { say: `TAP the mode switch
+Every item becomes the letter A.
+Identical items, identical labels.` },
+        { click: '.vt-switch' },
+        { wait: 2400 },
+        { say: `TAP Step ▶ ×2
+Bars into gaps 1 and 2.
+(1, 1, 3). Bars look the same in both modes.` },
+        { click: stepBtn },
+        untilLanded,
+        { click: stepBtn, ms: 200 },
+        untilLanded,
+        { wait: 2600 },
+        { say: `TAP Step ▶ ×2
+Strip filed in row x₁ = 1.
+COMPLETED 1 / 6.` },
+        { click: stepBtn },
+        { click: stepBtn, ms: 200 },
+        { wait: 2400 },
+        { say: `TAP the mode switch
+Back to balls.
+Filed strip redrawn with red balls.` },
+        { click: '.vt-switch' },
+        { wait: 2400 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('strong-composition'),
       sectionsContent,
       introContent,
@@ -989,7 +1158,22 @@ The zero case beyond the boundary is worth stating because word problems produce
   }
 }
 
-export default function StrongCompositionVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function StrongCompositionVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <StrongComposition explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1014,13 +1198,14 @@ export default function StrongCompositionVisualizer({relatedTools, seoData, sect
     plain('obj0', 'key-terms'),
     stateRow('obj1', 'getting-started', 'idle'),
     stateRow('obj2', 'items-and-gaps', 'building'),
-    plain('obj3', 'adjusting-n-and-k'),
-    stateRow('obj4', 'grouping-by-first-bin-count', 'default53'),
+    plain('obj16', 'composition-and-gap-readouts'),
+    withDemo(plain('obj3', 'adjusting-n-and-k')),
+    withDemo(stateRow('obj4', 'grouping-by-first-bin-count', 'default53')),
     stateRow('obj11', 'two-bins-one-divider', 'twoBins'),
     stateRow('obj12', 'twenty-ways-the-largest-run', 'big74'),
     stateRow('obj13', 'when-k-equals-n-the-forced-composition', 'kEqualsN'),
-    plain('obj5', 'transport-controls'),
-    plain('obj6', 'mode-switch'),
+    withDemo(plain('obj5', 'transport-controls')),
+    withDemo(plain('obj6', 'mode-switch')),
     plain('obj7', 'right-panel-and-progress'),
     plain('obj8', 'what-is-a-strong-composition'),
     plain('obj9', 'the-gap-choice-argument'),
@@ -1081,6 +1266,10 @@ export default function StrongCompositionVisualizer({relatedTools, seoData, sect
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Strong Composition</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <StrongComposition explanations={explanations}/>
       <br/>

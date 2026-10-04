@@ -13,6 +13,9 @@ import continuousPdfDiagrams from '@/app/components/visualizations/probability/c
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 
 export async function getStaticPaths() {
@@ -222,6 +225,19 @@ That is not a coincidence or a rounding artefact.`,
 
 Nudge $\\lambda$ off an integer and one bar wins: the mode becomes $\\lfloor \\lambda \\rfloor$ alone. It is the clearest thing on this page that you can check by eye and then confirm with one line of algebra.`,
           link: '',
+        },
+        obj19: {
+          title: `Reading the Explanation Panel`,
+          content: `The **Explanation** panel sits to the right of the chart and always describes the tab that is active. Switch tabs and the text is replaced; move a slider and it stays as it is, because it is written in symbols, not in the current slider values.
+
+Each explanation runs in the same order. It opens with what the distribution counts, gives its probability mass function, for example $P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}$ on the Binomial tab, then its mean and variance, and closes with situations the distribution typically models.
+
+The last line of the panel is a link to this page's section on the same distribution at its opening settings, where the chart is reproduced as a still with its exact bar heights.
+
+Use the panel to connect the formula with the bars: read the mean from the formula, set the sliders, and check that the tallest bars sit near it. For the idea behind every one of these formulas, see [what a PMF is](!#what-is-a-pmf).`,
+          before: ``,
+          after: ``,
+          link: '',
         }
       },
       faqQuestions: {
@@ -406,6 +422,19 @@ The tool plots $x$ from $0$ out to $5/\\lambda$.`,
 
 The right edge of the window is the detail to carry away. The plotted CDF ends at about $0.9931$, not $1$, and the missing $0.69\\%$ is spread over the infinite tail beyond. The PDF view makes the same point differently — the curve is visibly still above zero when the plot stops, so there is clearly more distribution to the right than the window shows.`,
           link: '',
+        },
+        obj16: {
+          title: `Reading the Explanation Panel`,
+          content: `The **Explanation** panel sits to the right of the chart and always describes the tab that is active. Switch tabs and the text is replaced; move a slider or switch between PDF and CDF and it stays as it is, because it is written in symbols, not in the current slider values.
+
+Each explanation runs in the same order. It opens with what the distribution describes, gives its probability density function, for example $f(x) = \\frac{1}{b-a}$ on the Continuous Uniform tab, then its mean and variance, and closes with situations the distribution typically models.
+
+The last line of the panel is a link to this page's section on the same distribution at its opening settings, where the PDF and the CDF are reproduced side by side as stills.
+
+Use the panel to connect the formula with the curve: read the mean from the formula, set the sliders, and check where the curve centres or how fast it decays. For the idea behind every one of these formulas, see [what a PDF is](!#what-is-a-pdf).`,
+          before: ``,
+          after: ``,
+          link: '',
         }
       },
       faqQuestions: {
@@ -487,6 +516,7 @@ The right edge of the window is the detail to carry away. The plotted CDF ends a
       ['obj1', 'selecting-a-distribution'],
       ['obj2', 'adjusting-parameters'],
       ['obj3', 'reading-the-bar-chart'],
+      ['obj19', 'the-explanation-panel'],
       ['obj13', 'discrete-uniform', 'discreteUniform'],
       ['obj14', 'binomial', 'binomial'],
       ['obj15', 'geometric', 'geometric'],
@@ -507,6 +537,7 @@ The right edge of the window is the detail to carry away. The plotted CDF ends a
       ['obj1', 'selecting-a-distribution'],
       ['obj2', 'the-pdf-cdf-toggle'],
       ['obj3', 'adjusting-parameters'],
+      ['obj16', 'the-explanation-panel'],
       ['obj13', 'continuous-uniform', 'uniform'],
       ['obj14', 'normal', 'normal'],
       ['obj15', 'exponential', 'exponential'],
@@ -650,8 +681,369 @@ The right edge of the window is the detail to carry away. The plotted CDF ends a
     content: currentConfig.introContent
   };
 
+  // How-to instructions and animated demos (ToolDemoPlayer v3), keyed by view.
+  const INSTRUCTIONS = {
+    'discrete': [
+      '**Tabs** across the top switch between six PMFs: Discrete Uniform, Binomial, Geometric, Negative Binomial, Hypergeometric and Poisson; the active tab turns blue. [Learn more about selecting a distribution](!#selecting-a-distribution)',
+      '**Sliders** under the distribution name set its parameters, each label showing the current value: a and b, n and p, p, r and p, N, K and n, or λ. [Learn more about adjusting parameters](!#adjusting-parameters)',
+      '**Bar chart** plots P(X = k) against the value k; hover a bar for its exact probability. [Learn more about reading the bar chart](!#reading-the-bar-chart)',
+      '**Explanation** panel on the right gives the active distribution\'s PMF, mean and variance, and ends with a link to its section on this page. [Learn more about the explanation panel](!#the-explanation-panel)',
+      '**Bar heights** are probabilities between 0 and 1, and all the bars together add up to 1. [Learn more about probability values](!#understanding-probability-values)',
+      '**Switch tabs to compare shapes**: flat Discrete Uniform, bell-shaped Binomial, Geometric falling from its first bar, Poisson drifting right as λ grows. [Learn more about comparing shapes](!#comparing-distribution-shapes)',
+      '**Match the tab to the situation**: fixed trials for Binomial, waiting for a success for Geometric, draws without replacement for Hypergeometric, counts per interval for Poisson. [Learn more about working with scenarios](!#working-with-scenarios)',
+    ],
+    'continuous': [
+      '**Tabs** across the top switch between Continuous Uniform, Normal (Gaussian) and Exponential; the active tab turns blue. [Learn more about selecting a distribution](!#selecting-a-distribution)',
+      '**PDF / CDF buttons** above the chart switch the curve between the density $f(x)$ and the cumulative $F(x) = P(X \\leq x)$; the choice stays when you change tabs. [Learn more about the PDF and CDF toggle](!#the-pdf-cdf-toggle)',
+      '**Sliders** set the parameters, each label showing the current value: bounds a and b, mean μ and standard deviation σ, or rate λ. [Learn more about adjusting parameters](!#adjusting-parameters)',
+      '**Explanation** panel on the right gives the active distribution\'s PDF, mean and variance, and ends with a link to its section on this page. [Learn more about the explanation panel](!#the-explanation-panel)',
+      '**Read the curve** against the vertical axis: f(x) in the PDF view, F(x) from 0 to 1 in the CDF view. [Learn more about reading the curve](!#reading-the-curve)',
+      '**Squeeze a distribution** and the density climbs past 1: height is density, probability is area. [Learn more about density vs probability](!#density-vs-probability)',
+      '**Switch tabs to compare shapes**: a flat block, a bell, a decay from the left edge, each with its own CDF. [Learn more about comparing shapes](!#comparing-distribution-shapes)',
+    ],
+  };
+  const DEMOS = {
+    "discrete": {
+      "selecting-a-distribution": {
+        "title": "Switching distributions",
+        "script": [
+          {
+            "say": "TAP Binomial\nSliders n = 10, p = 0.50.\nSymmetric bars, peak at k = 5."
+          },
+          {
+            "click": {
+              "button": "Binomial",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "TAP Geometric\nOne slider: p = 0.30.\nTallest bar first, each next one smaller."
+          },
+          {
+            "click": {
+              "button": "Geometric",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "TAP Poisson\nOne slider: λ = 3.0.\nTwo equal peaks, k = 2 and k = 3."
+          },
+          {
+            "click": {
+              "button": "Poisson",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "TAP Hypergeometric\nThree sliders: N = 50, K = 20, n = 10.\nPeak at k = 4."
+          },
+          {
+            "click": {
+              "button": "Hypergeometric",
+              "exact": true
+            }
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      },
+      "adjusting-parameters": {
+        "title": "Binomial sliders",
+        "script": [
+          {
+            "say": "TAP Binomial\nn = 10, p = 0.50: peak at k = 5."
+          },
+          {
+            "click": {
+              "button": "Binomial",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2400
+          },
+          {
+            "say": "DRAG p → 0.20\nPeak slides left to k = 2.\nLong tail to the right."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.2,
+            "ms": 1400
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG n → 40\nBars k = 0 to 40.\nPeak moves to k = 8 = np."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 40,
+            "ms": 1500
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG p → 0.80\nMirror image: peak at k = 32.\nLong tail to the left."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.8,
+            "ms": 1600
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      },
+      "comparing-distribution-shapes": {
+        "title": "Shapes and parameters",
+        "script": [
+          {
+            "say": "TAP Poisson\nλ = 3.0: two equal peaks, k = 2 and 3."
+          },
+          {
+            "click": {
+              "button": "Poisson",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "DRAG λ → 10\nBars shift right and spread out.\nPeaks now at k = 9 and 10."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 10,
+            "ms": 1500
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "TAP Negative Binomial\nr = 3, p = 0.40.\nBars start at k = 3; peak at k = 5."
+          },
+          {
+            "click": {
+              "button": "Negative Binomial",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG r → 1\nOne success needed: the Geometric shape.\nTallest bar at k = 1."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 1,
+            "ms": 1200
+          },
+          {
+            "wait": 3000
+          }
+        ]
+      }
+    },
+    "continuous": {
+      "the-pdf-cdf-toggle": {
+        "title": "PDF and CDF",
+        "script": [
+          {
+            "say": "TAP CDF (Cumulative)\nUniform on [0, 10]: straight line.\nF rises from 0 at x = 0 to 1 at x = 10."
+          },
+          {
+            "click": {
+              "button": "CDF (Cumulative)",
+              "exact": true
+            }
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "TAP Normal (Gaussian)\nCDF view stays on.\nS-curve, crossing 0.5 at μ = 0."
+          },
+          {
+            "click": {
+              "button": "Normal (Gaussian)",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "TAP Exponential\nSteep rise from 0, then flattening.\nEnds just short of 1 at the right edge."
+          },
+          {
+            "click": {
+              "button": "Exponential",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "TAP PDF (Probability Density)\nDensity starts at f(0) = λ = 1.\nDecays to the right."
+          },
+          {
+            "click": {
+              "button": "PDF (Probability Density)",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "adjusting-parameters": {
+        "title": "Normal sliders",
+        "script": [
+          {
+            "say": "TAP Normal (Gaussian)\nμ = 0, σ = 1.0.\nBell centred on 0, peak about 0.4."
+          },
+          {
+            "click": {
+              "button": "Normal (Gaussian)",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "DRAG μ → 2\nBell shifts right to 2.\nSame width, same height."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": 2,
+            "ms": 1300
+          },
+          {
+            "wait": 2600
+          },
+          {
+            "say": "DRAG σ → 0.3\nTaller and narrower.\nPeak above 1."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.3,
+            "ms": 1400
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG σ → 2.5\nWide and flat.\nPeak drops to about 0.16."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 2.5,
+            "ms": 1600
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      },
+      "density-vs-probability": {
+        "title": "Density above 1",
+        "script": [
+          {
+            "say": "DRAG b → 2\nUniform on [0, 2].\nDensity 1/(b − a) = 0.5."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 2,
+            "ms": 1500
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG b → 0.5\nUniform on [0, 0.5].\nDensity 2: above 1, still a valid PDF."
+          },
+          {
+            "slide": {
+              "range": 1
+            },
+            "to": 0.5,
+            "ms": 1200
+          },
+          {
+            "wait": 3000
+          },
+          {
+            "say": "TAP CDF (Cumulative)\nF climbs from 0 to 1 over [0, 0.5].\nTotal probability still 1."
+          },
+          {
+            "click": {
+              "button": "CDF (Cumulative)",
+              "exact": true
+            }
+          },
+          {
+            "wait": 2800
+          },
+          {
+            "say": "DRAG a → −2\nRamp now runs from −2 to 0.5.\nGentler slope, same rise to 1."
+          },
+          {
+            "slide": {
+              "range": 0
+            },
+            "to": -2,
+            "ms": 1400
+          },
+          {
+            "wait": 2800
+          }
+        ]
+      }
+    }
+  };
+  const instructions = INSTRUCTIONS[params.view] || [];
+  const demos = DEMOS[params.view] || {};
+
    return {
       props:{
+        instructions,
+        demos,
         relatedTools: getRelatedTools(`probability-probability-function-${params.view}`),
          sectionsContent,
          introContent,
@@ -674,7 +1066,26 @@ The right edge of the window is the detail to carry away. The plotted CDF ends a
     }
    }
 
-export default function ProbabilityFunctionViewPage({relatedTools, seoData, sectionsContent, stateUnits, sectionOrder, explanationsAppend, introContent, faqQuestions, schemas, currentView, componentName, h1Title}) {
+export default function ProbabilityFunctionViewPage({relatedTools, seoData, sectionsContent, stateUnits, sectionOrder, explanationsAppend, introContent, faqQuestions, schemas, currentView, componentName, h1Title, instructions, demos}) {
+
+  // the tool as the page renders it live, mounted inside each demo
+  const demoTools = {
+    DiscreteProbability: <DiscreteProbabilityDistributions explanationsAppend={explanationsAppend}/>,
+    ContinuousProbability: <ContinuousProbabilityDistributions explanationsAppend={explanationsAppend}/>,
+  }
+  const demoTool = demoTools[componentName]
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      {demoTool}
+    </ToolDemoPlayer>
+  )
 
     
   const genericSections = (sectionOrder || []).map(([obj, id, unitKey]) => {
@@ -685,6 +1096,7 @@ export default function ProbabilityFunctionViewPage({relatedTools, seoData, sect
       body.push(<div key={`u-${unitKey}`} dangerouslySetInnerHTML={{ __html: stateUnits[unitKey] }} />)
       if (src.after) body.push(src.after)
     }
+    if (demos && demos[id] && demoTool) body.unshift(demo(id))
     return { id, title: src.title, link: src.link || '', content: body }
   }).filter(Boolean);
 
@@ -745,6 +1157,10 @@ export default function ProbabilityFunctionViewPage({relatedTools, seoData, sect
    <br/>
    <br/>
    <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>{h1Title}</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
    <br/>
    <div style={{transform:'scale(0.8)'}}>
    {componentName === 'DiscreteProbability' && (

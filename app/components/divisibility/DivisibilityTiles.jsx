@@ -376,7 +376,11 @@ const styles = {
     width: '36px',
     height: '40px',
     background: '#f8fafc',
-    border: '2px solid #e2e8f0',
+    // longhands, so the active style's borderColor swaps cleanly (shorthand + longhand
+    // left a black border on deselect)
+    borderWidth: '2px',
+    borderStyle: 'solid',
+    borderColor: '#e2e8f0',
     borderRadius: '8px',
     color: '#64748b',
     fontSize: '0.95rem',

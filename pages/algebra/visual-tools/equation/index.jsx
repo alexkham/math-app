@@ -13,6 +13,9 @@ import EquationVisualizer from '../../../../app/components/algebra/equations/vis
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import equationVisualizerDiagrams from '../../../../app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -579,8 +582,148 @@ One difference from the quadratic case deserves the closing word: there is no co
   }
 
 
+  const instructions = [
+    'Tap **Linear**, **Quadratic**, **Cubic** or **Absolute value** in the type bar; the curve, the parameters and the sign chart switch to that family, starting on its first template. [Learn more about selecting an equation type](!#selecting-an-equation-type)',
+    'The graph draws $y = f(x)$ against the level $n$; the line under it reads $f(x)$ at the marble and says whether that $x$ is a solution, and the **solutions** pill lists every crossing. [Learn more about getting started](!#getting-started-with-the-visualizer)',
+    '**✋ drag** moves the marble freely, **➭ step** jumps it between stops with **◀ prev** and **next ▶**, and **▶ auto** sweeps it at the chosen speed; **↺ clear trail** erases its trail. [Learn more about the interaction modes](!#three-interaction-modes)',
+    'Templates load preset equations; each parameter has a slider with clickable ticks, **⌨** turns it into a typed box, and **↺ reset** restores the current template. [Learn more about parameters and templates](!#adjusting-parameters-and-using-templates)',
+    'The **Sign chart** gives the sign of $f(x) - n$ between the solutions; tap a column to move the marble there. [Learn more about reading the sign chart](!#reading-the-sign-chart)',
+    'The **Explanation** panel has a live tab, labelled with the marble\'s $x$, and a **strategy** tab with the solving steps. [Learn more about the explanation panel](!#reading-the-explanation-panel)',
+    'Keys: the arrows nudge the marble, the bracket keys step, Space plays, **R** resets. [Learn more about keyboard shortcuts](!#keyboard-shortcuts)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real EquationVisualizer
+     (opens on Linear, template Basic: x = 3, marble at x = 0). Range inputs in DOM
+     order: 0 = auto speed, then the type's parameters (Quadratic: 1 = a, 2 = b,
+     3 = c, 4 = level n). The marble listens to mouse events, so the demos move it
+     with the step buttons and the sign-chart columns instead of drags. */
+  const demos = {
+    'selecting-an-equation-type': {
+      title: 'Switching the equation type',
+      script: [
+        { say: `TAP Quadratic
+x² − 4 = 0. Two solutions: −2, 2.
+Sign chart: + 0 − 0 +.`, at: 'br' },
+        { click: { button: 'Quadratic', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Cubic
+x³ − 3x = 0. Three solutions:
+−1.73, 0, 1.73. Marble at 0 sits on one.`, at: 'br' },
+        { click: { button: 'Cubic', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Absolute value
+|x| = 3. The V cut on both arms.
+Solutions −3, 3.`, at: 'br' },
+        { click: { button: 'Absolute value', exact: true } },
+        { wait: 2600 },
+        { say: `TAP Linear
+x = 3. One crossing, one solution.
+Each type opens on its first template.`, at: 'br' },
+        { click: { button: 'Linear', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'three-interaction-modes': {
+      title: 'Stepping the marble',
+      script: [
+        { say: `TAP Quadratic, TAP ➭ step
+x² − 4 = 0. Step mode on.
+◀ prev and next ▶ unlock.`, at: 'tr' },
+        { click: { button: 'Quadratic', exact: true } },
+        { wait: 600 },
+        { click: { button: '➭ step', exact: true } },
+        { wait: 2400 },
+        { say: `TAP next ▶
+Marble jumps to x = −2.
+f(−2) = 0, n = 0 → solution.`, at: 'tr' },
+        { click: { button: 'next ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP next ▶
+Between solutions: x = 0.
+f(0) = −4. Off by 4.`, at: 'tr' },
+        { click: { button: 'next ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP next ▶
+x = 2: second solution.
+f(2) = 0.`, at: 'tr' },
+        { click: { button: 'next ▶', exact: true } },
+        { wait: 2600 },
+        { say: `TAP next ▶
+Right of last solution: x = 5.
+f(5) = 21. Off by 21.`, at: 'tr' },
+        { click: { button: 'next ▶', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'adjusting-parameters-and-using-templates': {
+      title: 'Templates and parameters',
+      script: [
+        { say: `TAP Quadratic, TAP One solution
+x² = 0. Level touches the vertex.
+One solution: 0. Sign chart + 0 +.`, at: 'tr' },
+        { click: { button: 'Quadratic', exact: true } },
+        { wait: 600 },
+        { click: { button: 'One solution', exact: true } },
+        { wait: 2600 },
+        { say: `DRAG level n → 4
+x² = 4. Level above the vertex.
+Two solutions: −2, 2.`, at: 'tr' },
+        { slide: { range: 4 }, to: 4, ms: 1400 },
+        { wait: 2600 },
+        { say: `DRAG level n → −3
+x² = −3. Level below the vertex.
+No real solutions.`, at: 'tr' },
+        { slide: { range: 4 }, to: -3, ms: 1600 },
+        { wait: 2600 },
+        { say: `TAP ↺ reset
+Back to the template: x² = 0.`, at: 'tr' },
+        { click: { button: '↺ reset', exact: true } },
+        { wait: 2200 },
+        { say: `TAP ⌨ on c, TYPE −1
+Slider becomes a typed box.
+x² − 1 = 0. Solutions −1, 1.`, at: 'tr' },
+        { click: { button: '⌨', exact: true, nth: 2 } },
+        { wait: 500 },
+        { set: { css: 'input.ctrl-num', nth: 0 }, value: '-1' },
+        { wait: 2600 },
+      ],
+    },
+    'reading-the-sign-chart': {
+      title: 'Sign chart and strategy',
+      script: [
+        { say: `TAP Cubic
+Sign of f(x) − n: − 0 + 0 − 0 +.
+Zero columns −1.73, 0, 1.73 = solutions.`, at: 'bl' },
+        { click: { button: 'Cubic', exact: true } },
+        { wait: 2800 },
+        { say: `TAP column 1.73
+Marble jumps to x = 1.73.
+f(1.73) = 0 → solution.`, at: 'bl' },
+        { click: { css: 'table.sc th.critc', nth: 2 } },
+        { wait: 2600 },
+        { say: `TAP interval 0 – 1.73
+Test point x = 0.87.
+f(0.87) = −1.95: the − in that column.`, at: 'bl' },
+        { click: { css: 'table.sc th.interval-cell', nth: 2 } },
+        { wait: 2800 },
+        { say: `TAP strategy
+Solving steps for this type.
+Found: −1.73, 0, 1.73.`, at: 'bl' },
+        { click: { button: 'strategy', exact: true } },
+        { wait: 2800 },
+        { say: `TAP Shifted
+x³ − 4x = 3. Chart and steps rebuild.
+Found: −1.30, −1, 2.30.`, at: 'bl' },
+        { click: { button: 'Shifted', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('algebra-equation'),
       sectionsContent,
       introContent,
@@ -609,7 +752,22 @@ One difference from the quadratic case deserves the closing word: there is no co
 }
 
 
-export default function EquationVisualExplorerPage({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function EquationVisualExplorerPage({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <EquationVisualizer explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after].
@@ -633,10 +791,10 @@ export default function EquationVisualExplorerPage({relatedTools, seoData, secti
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started-with-the-visualizer'),
-    plain('obj2', 'selecting-an-equation-type'),
-    plain('obj3', 'three-interaction-modes'),
-    plain('obj4', 'adjusting-parameters-and-using-templates'),
-    plain('obj5', 'reading-the-sign-chart'),
+    withDemo(plain('obj2', 'selecting-an-equation-type')),
+    withDemo(plain('obj3', 'three-interaction-modes')),
+    withDemo(plain('obj4', 'adjusting-parameters-and-using-templates')),
+    withDemo(plain('obj5', 'reading-the-sign-chart')),
     plain('obj6', 'reading-the-explanation-panel'),
     plain('obj7', 'keyboard-shortcuts'),
 
@@ -720,6 +878,10 @@ export default function EquationVisualExplorerPage({relatedTools, seoData, secti
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'-30px'}}>Equation Visual Explorer</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <div style={{transform:'scale(0.95)'}}>
         <EquationVisualizer explanations={explanations}/>

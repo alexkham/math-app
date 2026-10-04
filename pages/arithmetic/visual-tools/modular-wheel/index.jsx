@@ -499,6 +499,9 @@ import ModPieWheel from '../../../../app/components/arithmetic/visualizers/ModPi
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -961,8 +964,154 @@ This is the pigeonhole picture of [equivalence classes](!#equivalence-classes-an
     parity: `Divisor 2 is parity made visible: the wheel splits into even and odd halves, alternating one number at a time. [Learn more about changing the divisor](!#adjusting-divisor-and-count) · [Panel modes](!#right-panel-context)`,
   };
 
+  const instructions = [
+    '**Count up to** sets how many integers a run places, from $1$ up to the cap printed under the box as **max for divisor n**; a larger value shows a red message and disables **▶ Run**. [Learn more about the count](!#adjusting-divisor-and-count)',
+    'The **Divisor** grid picks $n$ from $2$ to $9$; the wheel is re-divided into $n$ slices at once and any run is cleared. [Learn more about the divisor grid](!#adjusting-divisor-and-count)',
+    'The **Speed** slider, from 🐢 to 🐇, sets the time per number, about $365$ ms at $1$ and $50$ ms at $10$; a run keeps the speed it started with. [Learn more about the speed slider](!#run-controls-and-speed)',
+    '**▶ Run** places $1, 2, 3, \\dots$ one per tick and turns into **⏹ Stop**, which halts the run; **Reset** clears the wheel and any pinned class. [Learn more about the run controls](!#run-controls-and-speed)',
+    'The wheel has one slice per remainder, $0$ starred at the top and the rest clockwise; rows fill outward from the centre, and the hub reads **mod n**. [Learn more about the wheel and slices](!#the-wheel-and-slices)',
+    'Hover or tap a slice to see its class: a tooltip gives the formula and examples, the right panel lists the numbers placed there, and a tap pins it until you tap again. [Learn more about hovering and pinning](!#hovering-and-pinning-classes)',
+    'The starred slice $0$ holds the multiples of $n$, the only class where divisibility by $n$ holds. [Learn more about the zero class](!#the-zero-class-why-its-special)',
+    'The right panel switches between **Overview**, **Now placing**, **Class details** and **Run complete**, which lists the divisible numbers and the count per class. [Learn more about the right panel](!#right-panel-context)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real ModPieWheel (opens on
+     divisor 6, count 36, speed 6). Speed = range 0 and is read when Run is
+     pressed; every run goes at speed 10 (50 ms per number) and ends on an
+     `until` for the 'Done · ' status, so replay lands on the finished wheel.
+     The one Stop is taken at speed 1 (365 ms per number) right after the
+     status shows 4, well inside one tick. Slices are the paths that carry a
+     <title>, in remainder order; the player's click pins them. The `until`
+     on a missing element before the second Run is a 500 ms pause that also
+     holds in replay: a Run pressed within one tick of Stop revives the
+     stopped loop (tool bug), so replay must not press Run straight after Stop. */
+  const demos = {
+    'run-controls-and-speed': {
+      title: 'Run, Stop, Speed and Reset',
+      script: [
+        { at: 'bl', say: `DRAG Speed → 🐢 1
+Slowest: about 365 ms per number.
+Read when Run is pressed.` },
+        { slide: { range: 0 }, to: 1, ms: 1000 },
+        { wait: 2000 },
+        { at: 'bl', say: `TAP ▶ Run, then ⏹ Stop
+1, 2, 3, 4 land one per tick.
+Stop holds the wheel:
+4 → class 4, row 1.` },
+        { click: { button: '▶ Run', exact: true } },
+        { until: { text: '4 → class 4' }, ms: 15000 },
+        { click: { button: '⏹ Stop', exact: true }, ms: 1 },
+        { wait: 2800 },
+        { at: 'bl', say: `DRAG Speed → 🐇 10, TAP ▶ Run
+Starts fresh from 1, 50 ms per number.
+Done: six numbers in every class.` },
+        { until: { css: '.no-such-element' }, ms: 500 },
+        { slide: { range: 0 }, to: 10, ms: 700 },
+        { click: { button: '▶ Run', exact: true } },
+        { until: { text: 'Done · ' }, ms: 15000 },
+        { wait: 2800 },
+        { at: 'bl', say: `TAP Reset
+Wheel empty again.
+Numbers fill grid cells in order.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'hovering-and-pinning-classes': {
+      title: 'Pinning a class',
+      script: [
+        { at: 'bl', say: `DRAG Speed → 10, TAP ▶ Run
+1 to 36 sorted mod 6.
+Run complete: 6 per class.` },
+        { slide: { range: 0 }, to: 10, ms: 700 },
+        { click: { button: '▶ Run', exact: true } },
+        { until: { text: 'Done · ' }, ms: 15000 },
+        { wait: 2600 },
+        { at: 'bl', say: `TAP slice 2
+Pinned: n = 6k + 2.
+Placed so far: 2, 8, 14, 20, 26, 32.` },
+        { click: { css: 'path:has(> title)', nth: 2 } },
+        { wait: 2800 },
+        { at: 'bl', say: `TAP slice 3
+Pin moves: n = 6k + 3.
+3, 9, 15, 21, 27, 33:
+every member one more.` },
+        { click: { css: 'path:has(> title)', nth: 3 } },
+        { wait: 2800 },
+        { at: 'bl', say: `TAP slice 0 ★
+Zero class: n = 6k.
+6, 12, 18, 24, 30, 36:
+the multiples of 6.` },
+        { click: { css: 'path:has(> title)', nth: 0 } },
+        { wait: 2800 },
+      ],
+    },
+    'adjusting-divisor-and-count': {
+      title: 'Divisor and count',
+      script: [
+        { at: 'bl', say: `TAP divisor 2
+Wheel splits into two halves.
+Class 0 = evens, class 1 = odds.` },
+        { click: { button: '2', exact: true } },
+        { wait: 2600 },
+        { at: 'bl', say: `TYPE Count up to 20
+Rows shrink to 10 per half.` },
+        { set: 'input[type="number"]', value: '20' },
+        { wait: 2400 },
+        { at: 'bl', say: `DRAG Speed → 10, TAP ▶ Run
+Evens in the starred half,
+odds opposite: 10 each.` },
+        { slide: { range: 0 }, to: 10, ms: 700 },
+        { click: { button: '▶ Run', exact: true } },
+        { until: { text: 'Done · ' }, ms: 15000 },
+        { wait: 2800 },
+        { at: 'bl', say: `TAP divisor 7
+Seven slices, run cleared.
+Count stays 20.` },
+        { click: { button: '7', exact: true } },
+        { wait: 2400 },
+        { at: 'bl', say: `TAP ▶ Run
+20 = 2 · 7 + 6.
+Classes 1–6 get 3, class 0 gets 2:
+7 and 14.` },
+        { click: { button: '▶ Run', exact: true } },
+        { until: { text: 'Done · ' }, ms: 15000 },
+        { wait: 3000 },
+      ],
+    },
+    'reading-a-complete-run': {
+      title: 'Reading a complete run',
+      script: [
+        { at: 'bl', say: `TYPE Count up to 20
+Divisor stays 6.` },
+        { set: 'input[type="number"]', value: '20' },
+        { wait: 2200 },
+        { at: 'bl', say: `DRAG Speed → 10, TAP ▶ Run
+Run complete: divisible by 6 (3):
+6, 12, 18.` },
+        { slide: { range: 0 }, to: 10, ms: 700 },
+        { click: { button: '▶ Run', exact: true } },
+        { until: { text: 'Done · ' }, ms: 15000 },
+        { wait: 2800 },
+        { at: 'bl', say: `TAP slice 1
+Class 1: 1, 7, 13, 19 — four members.
+Class 0 has three: 6, 12, 18.
+Never more than one apart.` },
+        { click: { css: 'path:has(> title)', nth: 1 } },
+        { wait: 3000 },
+        { at: 'bl', say: `TAP slice 1 again
+Pin released. Run complete back:
+per class 3, 4, 4, 3, 3, 3.` },
+        { click: { css: 'path:has(> title)', nth: 1 } },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('modular-wheel'),
       sectionsContent,
       introContent,
@@ -986,7 +1135,22 @@ This is the pigeonhole picture of [equivalence classes](!#equivalence-classes-an
   }
 }
 
-export default function ModularWheelVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function ModularWheelVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <ModPieWheel explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -1011,12 +1175,12 @@ export default function ModularWheelVisualizer({relatedTools, seoData, sectionsC
     plain('obj0', 'key-terms'),
     stateRow('obj1', 'getting-started', 'idle'),
     plain('obj2', 'the-wheel-and-slices'),
-    stateRow('obj3', 'run-controls-and-speed', 'running'),
-    stateRow('obj4', 'hovering-and-pinning-classes', 'classDetail'),
+    withDemo(stateRow('obj3', 'run-controls-and-speed', 'running')),
+    withDemo(stateRow('obj4', 'hovering-and-pinning-classes', 'classDetail')),
     stateRow('obj5', 'the-zero-class-why-its-special', 'zeroPinned'),
-    stateRow('obj6', 'adjusting-divisor-and-count', 'parity'),
+    withDemo(stateRow('obj6', 'adjusting-divisor-and-count', 'parity')),
     plain('obj7', 'right-panel-context'),
-    stateRow('obj11', 'reading-a-complete-run', 'summary'),
+    withDemo(stateRow('obj11', 'reading-a-complete-run', 'summary')),
     plain('obj8', 'what-is-modular-arithmetic'),
     plain('obj9', 'equivalence-classes-and-their-structure'),
     plain('obj10', 'related-concepts'),
@@ -1075,6 +1239,10 @@ export default function ModularWheelVisualizer({relatedTools, seoData, sectionsC
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Modular Wheel</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <div style={{transform:'scale(0.9)'}}>
         <ModPieWheel explanations={explanations}/>

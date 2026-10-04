@@ -70,6 +70,18 @@ export default function CircularPermutation({ explanations = null }) {
     rafsRef.current = [];
   }, []);
 
+  // Changing n resets the run in the same update, so old cards (built from the
+  // previous n's items) are never drawn against the new items — that crashed the tool.
+  const changeN = useCallback((v) => {
+    clearTimers();
+    setOutcomeIdx(0);
+    setSlotsFilled(0);
+    setAnimState("idle");
+    setCompleted([]);
+    setPlaying(false);
+    setN(v);
+  }, [clearTimers]);
+
   // ── Derived ───────────────────────────────────────────
   const items = useMemo(() => getItems(n), [n]);
   const fixedItem = items[0]; // anchored at top of the ring
@@ -198,7 +210,9 @@ export default function CircularPermutation({ explanations = null }) {
     if (animState === "idle" || animState === "done") {
       if (outcomeIdx > 0 || completed.length > 0) {
         if (completed.length > 0) setCompleted((prev) => prev.slice(0, -1));
-        if (outcomeIdx > 0) setOutcomeIdx((i) => i - 1);
+        // in "done" outcomeIdx already points at the last outcome; only step it
+        // back from "idle" (between outcomes) — stepping it in "done" restored the wrong arrangement
+        if (animState === "idle" && outcomeIdx > 0) setOutcomeIdx((i) => i - 1);
         setSlotsFilled(itemsPerOutcome);
         setAnimState("complete");
       }
@@ -336,7 +350,7 @@ export default function CircularPermutation({ explanations = null }) {
         <ControlBar>
           <ModeSwitch value={mode} onChange={setMode} />
           <Divider />
-          <NStepper value={n} onChange={setN} />
+          <NStepper value={n} onChange={changeN} />
           <Divider />
           <TransportButtons
             onBack={stepBack} onStep={stepForward}

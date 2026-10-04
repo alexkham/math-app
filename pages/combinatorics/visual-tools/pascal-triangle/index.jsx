@@ -496,6 +496,9 @@ import PascalsTriangle from '../../../../app/components/combinatorics/new-visual
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -927,8 +930,138 @@ Together, these four are sufficient to derive most other binomial identities by 
     symmetry: `The focus and its mirror hold the same number: choosing r to include is choosing n − r to leave out. [Learn more about symmetry](!#mode-4-symmetry) · [Getting started](!#getting-started)`,
   };
 
+  const instructions = [
+    '**Pascal\'s identity** links the focused cell to its two amber parents and adds them in the panel. [Learn more about Pascal\'s identity](!#mode-1-pascals-identity)',
+    '**Hockey stick** treats the focused cell as the puck and draws the amber stick up the column to its left. [Learn more about the hockey stick](!#mode-2-hockey-stick)',
+    '**Row sum** outlines the whole focused row and labels its total, $2^n$, at the right edge. [Learn more about the row sum](!#mode-3-row-sum)',
+    '**Symmetry** marks the mirror cell $C(n, n - r)$ in green with an arc between the two. [Learn more about symmetry](!#mode-4-symmetry)',
+    '**N − / +** shows rows 0 through $N$, from 4 to 9; lowering $N$ below the focused row clears the focus. [Learn more about getting started](!#getting-started)',
+    'Click any cell to focus it; **Clear selection** removes the focus and the panel asks for a new cell. [Learn more about focusing cells](!#clicking-cells-and-focus)',
+    'The right panel shows the focused cell\'s factorial breakdown and the active mode\'s arithmetic. [Learn more about the panel](!#clicking-cells-and-focus)',
+    'The banner under the triangle expands $(a + b)^n$ for the focused row; with no focus it shows row 0. [Learn more about the polynomial banner](!#the-polynomial-banner)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real PascalsTriangle
+     (opens on N = 6, Pascal's identity, focus C(4, 2)). Cells are <g onClick>
+     groups rendered row by row: cell C(n, r) is rect index n(n+1)/2 + r. */
+  const cell = (n, r) => ({ css: 'svg.vt-scene-svg g[style*="cursor"] > rect', nth: (n * (n + 1)) / 2 + r })
+  const demos = {
+    'clicking-cells-and-focus': {
+      title: 'Focus, N, clear',
+      script: [
+        { say: `TAP C(5, 2)
+Focus in blue: C(5, 2) = 10.
+Amber parents: 4 + 6.
+Banner: row 5.` },
+        { click: cell(5, 2) },
+        { wait: 2800 },
+        { say: `TAP C(6, 3)
+C(6, 3) = 10 + 10 = 20.
+Banner: (a + b)⁶.` },
+        { click: cell(6, 3) },
+        { wait: 2600 },
+        { say: `TAP N −
+N = 5. Row 6 removed.
+Focus was in it → cleared.
+Banner back to row 0.` },
+        { click: { button: '−', exact: true } },
+        { wait: 2800 },
+        { say: `TAP C(3, 1)
+C(3, 1) = 1 + 2 = 3.
+Panel: 3! / (1! · 2!) = 3.` },
+        { click: cell(3, 1) },
+        { wait: 2600 },
+        { say: `TAP Clear selection
+Dashed outlines only.
+Panel: Click any cell to start.` },
+        { click: { button: 'Clear selection', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'mode-1-pascals-identity': {
+      title: 'Edges, apex, interior',
+      script: [
+        { say: `TAP C(6, 0)
+Left edge: one parent, C(5, 0) = 1.
+Edges are always 1.` },
+        { click: cell(6, 0) },
+        { wait: 2600 },
+        { say: `TAP C(6, 6)
+Right edge: one parent, C(5, 5) = 1.` },
+        { click: cell(6, 6) },
+        { wait: 2400 },
+        { say: `TAP C(0, 0)
+Apex. No parents.
+C(0, 0) = 1 by convention.` },
+        { click: cell(0, 0) },
+        { wait: 2400 },
+        { say: `TAP C(6, 2)
+C(6, 2) = C(5, 1) + C(5, 2)
+= 5 + 10 = 15.` },
+        { click: cell(6, 2) },
+        { wait: 2800 },
+      ],
+    },
+    'mode-2-hockey-stick': {
+      title: 'Stick and puck',
+      script: [
+        { say: `TAP Hockey stick
+Focus C(4, 2) = puck.
+Stick: 1 + 2 + 3 = 6.` },
+        { click: { button: 'Hockey stick', exact: true } },
+        { wait: 2800 },
+        { say: `TAP C(5, 2)
+Stick one cell longer.
+1 + 2 + 3 + 4 = 10.` },
+        { click: cell(5, 2) },
+        { wait: 2600 },
+        { say: `TAP C(6, 3)
+Stick in column 2.
+1 + 3 + 6 + 10 = 20.` },
+        { click: cell(6, 3) },
+        { wait: 2800 },
+        { say: `TAP C(5, 0)
+Column 0: no stick.
+Panel: pick a column ≥ 1.` },
+        { click: cell(5, 0) },
+        { wait: 2400 },
+      ],
+    },
+    'mode-3-row-sum': {
+      title: 'Row sum and symmetry',
+      script: [
+        { say: `TAP Row sum
+Row 4 lit in amber.
+1 + 4 + 6 + 4 + 1 = 16 = 2⁴.` },
+        { click: { button: 'Row sum', exact: true } },
+        { wait: 2800 },
+        { say: `TAP C(6, 1)
+Row 6: sum = 64 = 2⁶.` },
+        { click: cell(6, 1) },
+        { wait: 2400 },
+        { say: `TAP Symmetry
+Mirror C(6, 5) in green.
+C(6, 1) = C(6, 5) = 6.` },
+        { click: { button: 'Symmetry', exact: true } },
+        { wait: 2600 },
+        { say: `TAP C(4, 2)
+Center cell: its own mirror.
+No arc. C(4, 2) = 6.` },
+        { click: cell(4, 2) },
+        { wait: 2600 },
+        { say: `TAP C(5, 1)
+C(5, 1) = C(5, 4) = 5.
+Include 1 = leave out 4.` },
+        { click: cell(5, 1) },
+        { wait: 2600 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('pascal-triangle'),
       sectionsContent,
       introContent,
@@ -952,7 +1085,22 @@ Together, these four are sufficient to derive most other binomial identities by 
   }
 }
 
-export default function PascalTriangleVisualizer({relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+export default function PascalTriangleVisualizer({ instructions, demos,relatedTools, seoData, sectionsContent, introContent, faqQuestions, schemas, stateUnits, explanations}) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <PascalsTriangle explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -983,10 +1131,10 @@ export default function PascalTriangleVisualizer({relatedTools, seoData, section
   const genericSections = [
     plain('obj0', 'key-terms'),
     plainWithAfter('obj1', 'getting-started'),
-    stateRow('obj2', 'clicking-cells-and-focus', 'unfocused'),
-    stateRow('obj3', 'mode-1-pascals-identity', 'identity'),
-    stateRow('obj4', 'mode-2-hockey-stick', 'hockey'),
-    stateRow('obj5', 'mode-3-row-sum', 'rowsum'),
+    withDemo(stateRow('obj2', 'clicking-cells-and-focus', 'unfocused')),
+    withDemo(stateRow('obj3', 'mode-1-pascals-identity', 'identity')),
+    withDemo(stateRow('obj4', 'mode-2-hockey-stick', 'hockey')),
+    withDemo(stateRow('obj5', 'mode-3-row-sum', 'rowsum')),
     stateRow('obj6', 'mode-4-symmetry', 'symmetry'),
     plain('obj7', 'the-polynomial-banner'),
     plain('obj8', 'what-are-binomial-coefficients'),
@@ -1048,6 +1196,10 @@ export default function PascalTriangleVisualizer({relatedTools, seoData, section
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'0px'}}>Pascal&apos;s Triangle</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <PascalsTriangle explanations={explanations}/>
       <br/>

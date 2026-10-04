@@ -873,6 +873,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionRangeDiagrams from '@/app/components/functions/range/functionRangeDiagrams'
 import functionTransformationsDiagrams from '@/app/components/functions/transformations/functionTransformationsDiagrams'
+import functionInverseDiagrams from '@/app/components/functions/inverse/functionInverseDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -1446,6 +1448,14 @@ const faqQuestions = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpRestrictedRange = {
+    kind: 'pieces', svgTitle: 'x^2 on the domain [1, 3] has range [1, 9]', xRange: [-1, 4], yRange: [-1, 11], yStep: 2,
+    pieces: [{ fn: (x) => x * x, from: 1, to: 3, ends: ['closed', 'closed'], color: 'f', ghost: [[-1, 1], [3, 3.3]], label: { text: 'f(x) = x² on [1, 3]', x: 2.15, y: 4.6, pos: 'e' } }],
+    yBars: [{ from: 1, to: 9, color: 'r', label: 'range [1, 9]', labelY: 5 }],
+    notes: [{ x: 1, y: 1, text: '(1, 1)', pos: 'nw', color: 'f' }, { x: 3, y: 9, text: '(3, 9)', pos: 'w', color: 'f' }, { x: 2, y: 0.3, text: 'domain [1, 3]', pos: 'n', color: 'g' }],
+    caption: 'Same rule, smaller domain: the outputs fill exactly [1, 9]',
+  };
+
   const demoUnits = {
     fromGraph: demoUnitFrame({
       svg: functionRangeDiagrams.quadratic,
@@ -1467,6 +1477,39 @@ const faqQuestions = {
       text: 'Adding 3 to every output lifts the whole graph by 3, so the range [0, &#8734;) of x&#178; becomes [3, &#8734;): vertical transformations act directly on the range. A horizontal shift would leave the range alone. Move the parameter k and watch the lowest point rise and fall on the',
       href: '/functions/visual-tools/transformations',
       linkText: 'transformations explorer',
+    }),
+    restricted: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRestrictedRange),
+      caption: 'The domain shapes the range',
+      text: 'The section\'s third example: the rule x&#178; kept only on the domain [1, 3] (solid), with the rest of the parabola faint. The outputs start at f(1) = 1 and end at f(3) = 9, both reached, so the range is the closed interval [1, 9] marked on the y-axis, far smaller than the [0, &#8734;) of the full parabola.',
+    }),
+    cubicOnto: demoUnitFrame({
+      svg: functionRangeDiagrams.cubic,
+      caption: 'f(x) = x&#179;: the range is the whole codomain',
+      text: 'The band on the y-axis covers every height: each real number is the cube of some real number, so the range of x&#179; equals its codomain &#8477; and the function is onto. For x&#178;, by contrast, the band stops at 0 and the negative half of the codomain is never reached. Compare the two on the',
+      href: '/functions/visual-tools/range',
+      linkText: 'range explorer',
+    }),
+    reciprocalGap: demoUnitFrame({
+      svg: functionRangeDiagrams.reciprocal,
+      caption: 'f(x) = 1/x: every output except 0',
+      text: 'Solving y = 1/x for x gives x = 1/y, which works for every y except 0, and the graph agrees: the band covers the whole y-axis with a single open dot at 0. The section\'s 1/(x &#8722; 3) is this curve moved 3 to the right, which leaves the heights, and so the range (&#8722;&#8734;, 0) &#8746; (0, &#8734;), unchanged. See it on the',
+      href: '/functions/visual-tools/range',
+      linkText: 'range explorer',
+    }),
+    asymptoteEdge: demoUnitFrame({
+      svg: functionRangeDiagrams.exponential,
+      caption: 'f(x) = e&#710;x: approaching 0, never reaching it',
+      text: 'e&#710;x only increases, and as x runs left its outputs sink toward the horizontal asymptote y = 0 without ever arriving. So 0 is the edge of the range but not part of it: the band is (0, &#8734;), with an open dot at 0. The asymptote marks the boundary; the open dot records that it is never achieved. Compare bounded and unbounded families on the',
+      href: '/functions/visual-tools/range',
+      linkText: 'range explorer',
+    }),
+    swap: demoUnitFrame({
+      svg: functionInverseDiagrams.exponential,
+      caption: 'e&#710;x and ln x: range and domain trade places',
+      text: 'The outputs of e&#710;x fill (0, &#8734;); reflected in the dashed line y = x, those same values become the inputs of ln x, whose domain is (0, &#8734;). In the other direction, every real input of e&#710;x reappears as an output of ln x, so its range is all of &#8477;. Watch the swap for other pairs on the',
+      href: '/functions/visual-tools/inverse-function',
+      linkText: 'inverse function explorer',
     }),
   };
 
@@ -1521,6 +1564,8 @@ export default function RangePage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-restricted'} dangerouslySetInnerHTML={{ __html: demoUnits.restricted }} />,
+          `Change the domain and the range changes with it, even when the rule stays the same.`,
         ]
     },
     {
@@ -1553,6 +1598,8 @@ export default function RangePage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-cubicOnto'} dangerouslySetInnerHTML={{ __html: demoUnits.cubicOnto }} />,
+          `Onto means the range leaves no part of the codomain unused.`,
         ]
     },
     {
@@ -1561,6 +1608,8 @@ export default function RangePage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-reciprocalGap'} dangerouslySetInnerHTML={{ __html: demoUnits.reciprocalGap }} />,
+          `Whatever value of y makes the solved equation impossible is the value missing from the range.`,
         ]
     },
     {
@@ -1569,6 +1618,8 @@ export default function RangePage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-asymptoteEdge'} dangerouslySetInnerHTML={{ __html: demoUnits.asymptoteEdge }} />,
+          `A horizontal asymptote is a candidate boundary; whether it is included has to be checked separately.`,
         ]
     },
     {
@@ -1625,6 +1676,8 @@ export default function RangePage({
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <div key={'unit-swap'} dangerouslySetInnerHTML={{ __html: demoUnits.swap }} />,
+          `Finding one function's range therefore also finds its inverse's domain.`,
         ]
     },
     {

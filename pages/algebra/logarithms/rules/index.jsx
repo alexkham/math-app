@@ -7,6 +7,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -644,6 +646,20 @@ const schemas = {
   }
 }
 
+  const fpLogProduct = { kind: 'pieces', svgTitle: 'log2 32 = log2 8 + log2 4: multiplying inputs adds outputs', xRange: [0, 34], yRange: [-1, 6], xStep: 4,
+    pieces: [{ fn: (x) => Math.log2(x), from: 0.5, to: 34, ends: [null, null], color: 'f', label: { text: 'y = log₂ x', x: 20, y: Math.log2(20), pos: 's' } }],
+    points: [{ x: 4, y: 2, label: 'log₂ 4 = 2', pos: 'se' }, { x: 8, y: 3, label: 'log₂ 8 = 3', pos: 'se' }, { x: 32, y: 5, label: 'log₂ 32 = 5 = 3 + 2', pos: 'nw' }],
+    notes: [{ x: 1, y: 5.6, text: '8 × 4 = 32, and 3 + 2 = 5', pos: 'e', color: 'r' }],
+    caption: 'Multiplying inputs adds outputs: log₂(8 · 4) = log₂ 8 + log₂ 4' };
+
+  const demoUnits = {
+    product: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLogProduct),
+      caption: 'The product rule on the graph',
+      text: 'The section\'s example on the curve y = log&#8322; x. At x = 4 the height is 2 and at x = 8 it is 3. Multiplying the inputs, 8 &#215; 4 = 32, gives the point (32, 5), and 5 is exactly 3 + 2. The logarithm turns the multiplication of inputs into the addition of heights, which is the product rule log&#8322;(xy) = log&#8322; x + log&#8322; y.',
+    }),
+  };
+
    return {
   props: {
     sectionsContent,
@@ -653,6 +669,7 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Logarithm Rules: Product, Quotient & Power | Learn Math Class",
       description: "Master logarithm rules: product, quotient, power, and change of base. Learn to expand and condense logarithmic expressions with examples and common errors.",
@@ -672,7 +689,8 @@ const schemas = {
    obj7Table,
    summaryTable,
    faqQuestions,
-   schemas
+   schemas,
+   demoUnits,
  }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -692,6 +710,8 @@ const schemas = {
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-product'} dangerouslySetInnerHTML={{ __html: demoUnits.product }} />,
+          `Dividing inputs subtracts heights in the same way, which is the quotient rule.`,
         ]
     },
     {

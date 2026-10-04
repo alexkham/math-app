@@ -474,6 +474,9 @@ import DivisibilityTreeSVG from '@/app/components/divisibility/divisibility-tree
 import demoUnitFrame from '../../../../app/components/demo-unit/demoUnitFrame'
 import divisibilityTreeDiagrams from '@/app/components/divisibility/divisibilityTreeDiagrams'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 
 
@@ -724,6 +727,20 @@ Numbers in this state are the tree's most instructive failures: the entire flowc
 
 A good exercise: hunt for the smallest impostor. A composite number always has a factor no larger than its square root, so any composite below $13^2 = 169$ must have a factor of 12 or less—and the tree will catch it. Numbers like 91 (= 7 × 13) never reach the yellow note because ÷7 exposes them. Below 169, therefore, every all-red number really is prime; 169 itself is the first composite to slip through. [Prime factorization](!#related-concepts-and-tools) is the systematic version of this reasoning.`,
       link: '',
+    },
+
+    obj15: {
+      title: `The Explanations Below the Summary`,
+      content: `Under the summary panel on the right, the tool adds short explanations of the path your number took through the tree. They follow the number in the input field and change the moment it changes.
+
+With the field empty, a single explanation says the tree is waiting. Once a number is entered, two explanations normally appear together, one for each independent part of the tree. The first describes the parity branch: odd, even but failing ÷4, or even and passing ÷4 so that ÷8 is tested. The second describes the digit-sum branch: ÷3 passing and the same sum moving on to ÷9, or ÷3 failing and ÷9 refused without a calculation.
+
+One case replaces both: when every test from 2 to 12 fails, a single explanation flags the number as divisible only by 1, next to the yellow note in the summary.
+
+Each explanation ends in two links—one to the section that treats its case in full, such as [the odd shortcut](!#the-odd-shortcut) or [the powers of two chain](!#the-powers-of-two-chain), and one to [the tree structure](!#understanding-the-tree-structure). Clicking **Reset** returns the panel to the single waiting explanation.`,
+      before: ``,
+      after: ``,
+      link: '',
     }
 
   }
@@ -858,8 +875,112 @@ A good exercise: hunt for the smallest impostor. A composite number always has a
     primeLike: `Every test from 2 to 12 failed — only 1 divides this number. It may be prime, or its factors may simply be larger than 12. [Learn more about prime suspects](!#only-divisible-by-1) · [Tree structure](!#understanding-the-tree-structure)`,
   };
 
+  const instructions = [
+    'Type a whole number from 1 to 9999 in the field at the top; the tree lights in blue the path it follows through every test. [Learn more about entering a number](!#how-to-use-the-decision-tree)',
+    'Next to the field, the **Divisible by** line lists every divisor from 1 to 12 that passes, and **Reset** clears the field and the tree. [Learn more about the summary and Reset](!#how-to-use-the-decision-tree)',
+    'The tree reads top to bottom: the even/odd split, then ÷3 and ÷9, then ÷5, ÷7 and ÷11, and the **Derived** row for 6, 10 and 12. [Learn more about the tree structure](!#understanding-the-tree-structure)',
+    'Even numbers run the ÷2, ÷4, ÷8 chain on the left; odd numbers take the single node on the right that rules out all six even divisors. [Learn more about the even/odd split](!#the-even-odd-split)',
+    'The ÷3 node shows the digit sum (**sum=**); when ÷3 fails, ÷9 is refused without a calculation. [Learn more about the digit-sum rules](!#digit-sum-rules-for-3-and-9)',
+    'Hover over any highlighted node to read the calculation behind its green or red badge. [Learn more about the tooltips](!#reading-the-tooltips)',
+    'When every test from 2 to 12 fails, the summary panel adds a yellow note: the number may be prime. [Learn more about this case](!#only-divisible-by-1)',
+    'The explanations under the summary describe the parity branch and the digit-sum branch your number took. [Learn more about the explanations below the summary](!#the-explanations-below-the-summary)',
+  ]
+
+  /* Animated demos (ToolDemoPlayer v3) against the real DivisibilityTreeSVG tool
+     (opens with an empty field, tree gray). The number field is the only
+     input[type="number"]; "Reset" exists only while a number is entered.
+     Node tooltips are hover-only and cannot be driven (the player has no hover entry). */
+  const demos = {
+    'how-to-use-the-decision-tree': {
+      title: 'Number, path, Reset',
+      script: [
+        { say: `TYPE 26
+Even branch lights. ÷2 ✓.
+Last two digits 26: ÷4 ✗, ÷8 blocked.
+Divisible by: 1, 2.` },
+        { set: 'input[type="number"]', value: 26 },
+        { wait: 3000 },
+        { say: `TYPE 104
+04 passes ÷4 and unlocks ÷8.
+104 ÷ 8 = 13: ÷8 ✓.
+Divisible by: 1, 2, 4, 8.` },
+        { set: 'input[type="number"]', value: 104 },
+        { wait: 3000 },
+        { say: `TYPE 45
+Odd: one node rules out
+2, 4, 6, 8, 10, 12.
+Divisible by: 1, 3, 5, 9.` },
+        { set: 'input[type="number"]', value: 45 },
+        { wait: 3000 },
+        { say: `TAP Reset
+Field cleared. Tree back to gray.` },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2200 },
+      ],
+    },
+    'understanding-the-tree-structure': {
+      title: 'Digit sums, ÷11 and the Derived row',
+      script: [
+        { say: `TYPE 126
+sum=9: ÷3 ✓, same sum ÷9 ✓.
+÷7 by direct division ✓.
+Derived ÷6 green (2∧3).` },
+        { set: 'input[type="number"]', value: 126 },
+        { wait: 3200 },
+        { say: `TYPE 50
+sum=5: ÷3 ✗, ÷9 refused.
+ends 0: ÷5 ✓. Derived ÷10 green (2∧5).` },
+        { set: 'input[type="number"]', value: 50 },
+        { wait: 3000 },
+        { say: `TYPE 132
+alt=0: ÷11 ✓.
+32 passes ÷4 → ÷12 green (3∧4).
+Divisible by: 1, 2, 3, 4, 6, 11, 12.` },
+        { set: 'input[type="number"]', value: 132 },
+        { wait: 3200 },
+        { say: `TYPE 209
+alt=11: ÷11 ✓.
+Odd, sum=11: ÷3 ✗.
+Divisible by: 1, 11.` },
+        { set: 'input[type="number"]', value: 209 },
+        { wait: 3000 },
+      ],
+    },
+    'the-explanations-below-the-summary': {
+      title: 'Summary panel and explanations',
+      script: [
+        { say: `TYPE 13
+Every test 2–12 fails.
+Yellow note: only divisible by 1.
+One explanation: prime or larger factors.` },
+        { set: 'input[type="number"]', value: 13 },
+        { wait: 3200 },
+        { say: `TYPE 169
+Same all-red summary.
+169 = 13 × 13. Not prime.
+Factor beyond 12.` },
+        { set: 'input[type="number"]', value: 169 },
+        { wait: 3000 },
+        { say: `TYPE 91
+÷7 catches it: Divisible by 1, 7.
+Two explanations: odd shortcut,
+digit sum fails ÷3.` },
+        { set: 'input[type="number"]', value: 91 },
+        { wait: 3200 },
+        { say: `TYPE 96
+Divisible by 1, 2, 3, 4, 6, 8, 12.
+Explanations: ÷4 unlocks ÷8;
+sum=15 passes ÷3.` },
+        { set: 'input[type="number"]', value: 96 },
+        { wait: 3200 },
+      ],
+    },
+  }
+
   return {
     props: {
+      instructions,
+      demos,
       relatedTools: getRelatedTools('divisibility-tree'),
       sectionsContent,
       introContent,
@@ -872,7 +993,7 @@ A good exercise: hunt for the smallest impostor. A composite number always has a
   }
 }
 
-export default function DivisibilityTreePage({
+export default function DivisibilityTreePage({ instructions, demos,
   relatedTools, seoData,
   sectionsContent,
   introContent,
@@ -881,6 +1002,21 @@ export default function DivisibilityTreePage({
   stateUnits,
   explanations
 }) {
+
+  const demo = (id) => (
+    <ToolDemoPlayer
+      key={`demo-${id}`}
+      script={demos[id].script}
+      title={demos[id].title}
+      label={`Demo: ${demos[id].title}`}
+      scale={0.6}
+      renderText={processContent}
+    >
+      <DivisibilityTreeSVG explanations={explanations}/>
+    </ToolDemoPlayer>
+  )
+  const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
+
 
   // Helper rows: plain section / per-state section carrying its frozen unit
   // as [content, unit, after]. (Slug ids replace the former numeric ids.)
@@ -902,9 +1038,10 @@ export default function DivisibilityTreePage({
   })
 
   const genericSections = [
-    stateRow('obj1', 'how-to-use-the-decision-tree', 'empty'),
-    plain('obj2', 'understanding-the-tree-structure'),
+    withDemo(stateRow('obj1', 'how-to-use-the-decision-tree', 'empty')),
+    withDemo(plain('obj2', 'understanding-the-tree-structure')),
     plain('obj3', 'reading-the-tooltips'),
+    withDemo(plain('obj15', 'the-explanations-below-the-summary')),
     stateRow('obj4', 'the-even-odd-split', 'evenPath'),
     stateRow('obj11', 'the-odd-shortcut', 'oddPath'),
     stateRow('obj12', 'the-powers-of-two-chain', 'eightChain'),
@@ -975,6 +1112,10 @@ export default function DivisibilityTreePage({
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Divisibility Decision Tree</h1>
+   <div style={{width:'80%', margin:'auto'}}>
+     <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
+   </div>
+   <br/>
       <br/>
       <div style={{transform:'scale(0.95)'}}>
         <DivisibilityTreeSVG explanations={explanations}/>

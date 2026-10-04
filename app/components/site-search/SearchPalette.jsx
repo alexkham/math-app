@@ -438,20 +438,19 @@ export default function SearchPalette() {
       >
         <CloseIcon size={14} />
       </button>
-      {isMobile ? (
-        <button
-          type="button"
-          aria-label={UI_TEXT.close}
-          onClick={closeSearch}
-          onMouseEnter={(e) => setHover(e, true, iconHoverOn, iconHoverOff)}
-          onMouseLeave={(e) => setHover(e, false, iconHoverOn, iconHoverOff)}
-          style={{ ...iconButtonStyle, width: 44, height: 44 }}
-        >
-          <CloseIcon size={16} />
-        </button>
-      ) : (
-        <kbd style={{ ...kbdStyle, color: TOKENS.dim }}>{UI_TEXT.escHint}</kbd>
-      )}
+      {/* 2026-10-04: the close button shows on every layout; on desktop the Esc hint sits before it */}
+      {!isMobile && <kbd style={{ ...kbdStyle, color: TOKENS.dim }}>{UI_TEXT.escHint}</kbd>}
+      <button
+        type="button"
+        aria-label={UI_TEXT.close}
+        title={UI_TEXT.close}
+        onClick={closeSearch}
+        onMouseEnter={(e) => setHover(e, true, iconHoverOn, iconHoverOff)}
+        onMouseLeave={(e) => setHover(e, false, iconHoverOn, iconHoverOff)}
+        style={isMobile ? { ...iconButtonStyle, width: 44, height: 44 } : iconButtonStyle}
+      >
+        <CloseIcon size={16} />
+      </button>
       <div aria-hidden="true" style={{
         position: 'absolute', left: 0, right: 0, bottom: -1, height: 2, overflow: 'hidden',
         opacity: status === 'loading' ? 1 : 0, transition: 'opacity .15s',
@@ -673,6 +672,17 @@ export default function SearchPalette() {
       <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>&uarr;&darr;</kbd> {UI_TEXT.footerNavigate}</span>
       <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>Enter</kbd> {UI_TEXT.footerOpen}</span>
       <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>Tab</kbd> {UI_TEXT.footerTab}</span>
+      <button
+        type="button"
+        onClick={closeSearch}
+        aria-label={UI_TEXT.close}
+        onMouseEnter={(e) => setHover(e, true, { color: TOKENS.ink, background: TOKENS.surface2 }, { color: TOKENS.muted, background: 'transparent' })}
+        onMouseLeave={(e) => setHover(e, false, { color: TOKENS.ink, background: TOKENS.surface2 }, { color: TOKENS.muted, background: 'transparent' })}
+        style={{
+          display: 'flex', alignItems: 'center', gap: 6, border: 0, background: 'transparent', color: TOKENS.muted,
+          font: 'inherit', cursor: 'pointer', padding: '4px 8px', margin: '0 0 0 -8px', borderRadius: 7,
+        }}
+      ><kbd style={kbdStyle}>{UI_TEXT.escHint}</kbd> {UI_TEXT.footerClose}</button>
       <span style={{ marginLeft: 'auto' }}>{UI_TEXT.footerNote}</span>
     </div>
   );
