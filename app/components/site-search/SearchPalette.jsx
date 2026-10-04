@@ -158,7 +158,7 @@ const ResultRow = React.memo(function ResultRow({ result, index, isActive, terms
  */
 export default function SearchPalette({ fullPageNavigation = false }) {
   const router = useRouter();
-  const pathname = usePathname();
+  const currentPathname = usePathname();
   const { isOpen, initialQuery, openCount, closeSearch } = useSiteSearch();
   const isMobile = useMediaQuery(mediaQuery.tabletDown);
 
@@ -299,7 +299,7 @@ export default function SearchPalette({ fullPageNavigation = false }) {
   const open = useCallback((result) => {
     if (!result || !result.url) return;
     const { pathname, hash } = splitUrl(result.url);
-    const currentPath = pathname || (typeof window !== 'undefined' ? window.location.pathname : '');
+    const currentPath = currentPathname || (typeof window !== 'undefined' ? window.location.pathname : '');
     closeSearch();
     if (hash && pathname === currentPath) {
       window.setTimeout(() => {
@@ -312,44 +312,106 @@ export default function SearchPalette({ fullPageNavigation = false }) {
     }
     if (fullPageNavigation) { window.location.assign(result.url); return; }
     router.push(result.url);
-  }, [router, pathname, closeSearch, fullPageNavigation]);
+  }, [router, currentPathname, closeSearch, fullPageNavigation]);
 
   const clearQuery = useCallback(() => {
     setQuery('');
     if (inputRef.current) inputRef.current.focus();
   }, []);
 
-  const onInputKeyDown = (event) => {
-    if (event.key === 'ArrowDown') { event.preventDefault(); moveActive(1); return; }
-    if (event.key === 'ArrowUp') { event.preventDefault(); moveActive(-1); return; }
-    if (event.key === 'Enter') {
-      if (selected) { event.preventDefault(); open(selected); }
-      return;
-    }
-    if (event.key === 'Tab' && searching) {
-      event.preventDefault();
-      cycleTab(event.shiftKey ? -1 : 1);
-    }
-  };
+  /* ---------- keyboard: one document-level listener while open ----------
+   * Registered in the capture phase on `document`, so it runs no matter where
+   * focus is (input, a button in the panel, or the page body after a click on
+   * a non-focusable spot) and before any page component's own document
+   * listener (navbar Escape, explorer arrow keys, visualizer digits...).
+   * Keys the dialog owns are consumed with stopImmediatePropagation; the rest
+   * are still stopped so the page behind never reacts to typing. Ctrl/Cmd
+   * combinations pass through untouched (the provider's Ctrl+K toggle, copy,
+   * paste, browser shortcuts).
+   */
+  const keyStateRef = useRef({});
+  keyStateRef.current = { searching, selected, moveActive, cycleTab, open, clearQuery };
 
-  const onDialogKeyDown = (event) => {
-    if (event.key === 'Escape') {
-      event.preventDefault();
+  useEffect(() => {
+    if (!isOpen || typeof document === 'undefined') return undefined;
+
+    const focusInput = () => { if (inputRef.current) inputRef.current.focus(); };
+    const focusables = () => Array.from(panelRef.current ? panelRef.current.querySelectorAll('button, a[href], input') : [])
+      .filter((el) => !el.disabled && el.tabIndex !== -1 && el.offsetParent !== null);
+
+    const onKeyDown = (event) => {
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
+      const state = keyStateRef.current;
+      const key = event.key;
+      const panel = panelRef.current;
+      const input = inputRef.current;
+      const target = event.target;
+      const inPanel = !!(panel && target && typeof target.nodeType === 'number' && panel.contains(target));
+      const onControl = inPanel && target !== input && (target.tagName === 'BUTTON' || target.tagName === 'A');
+      const consume = () => { event.preventDefault(); event.stopImmediatePropagation(); };
+
+      if (key === 'Escape') {
+        consume();
+        state.clearQuery(); // never closes: the X button does that
+        return;
+      }
+      if (key === 'ArrowDown' || key === 'ArrowUp') {
+        consume();
+        state.moveActive(key === 'ArrowDown' ? 1 : -1);
+        if (target !== input) focusInput();
+        return;
+      }
+      if (key === 'Enter') {
+        if (onControl) { event.stopPropagation(); return; } // the button or link acts natively
+        event.stopImmediatePropagation();
+        if (state.selected) { event.preventDefault(); state.open(state.selected); }
+        return;
+      }
+      if (key === 'Tab') {
+        if (state.searching) {
+          consume();
+          state.cycleTab(event.shiftKey ? -1 : 1);
+          focusInput();
+          return;
+        }
+        // Start screen: keep focus cycling inside the dialog.
+        event.stopImmediatePropagation();
+        const list = focusables();
+        if (!list.length) { event.preventDefault(); return; }
+        const first = list[0];
+        const last = list[list.length - 1];
+        if (!inPanel) { event.preventDefault(); (event.shiftKey ? last : first).focus(); return; }
+        if (event.shiftKey && target === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && target === last) { event.preventDefault(); first.focus(); }
+        return;
+      }
+      // Any other key: the page behind must not see it. A printable character
+      // typed while focus is outside the input goes to the input.
       event.stopPropagation();
-      if (query) clearQuery();
-      else closeSearch();
-      return;
-    }
-    // Keep Tab inside the dialog when focus is on a button rather than the input.
-    if (event.key === 'Tab' && panelRef.current && event.target !== inputRef.current) {
-      const focusable = Array.from(panelRef.current.querySelectorAll('button, a[href], input'))
-        .filter((el) => !el.disabled && el.offsetParent !== null);
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && event.target === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && event.target === last) { event.preventDefault(); first.focus(); }
-    }
+      if (!inPanel && input && key.length === 1) focusInput();
+    };
+
+    // If a page script or a click moves focus out of the panel, bring it back.
+    const onFocusIn = (event) => {
+      const panel = panelRef.current;
+      if (!panel || !event.target || panel.contains(event.target)) return;
+      focusInput();
+    };
+
+    document.addEventListener('keydown', onKeyDown, true);
+    document.addEventListener('focusin', onFocusIn, true);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown, true);
+      document.removeEventListener('focusin', onFocusIn, true);
+    };
+  }, [isOpen]);
+
+  // Clicking a non-interactive spot inside the panel (preview text, list
+  // background, footer) must not move focus to the page body.
+  const onPanelMouseDown = (event) => {
+    const target = event.target;
+    if (target && typeof target.closest === 'function' && target.closest('button, a[href], input, textarea, select, [tabindex]')) return;
+    event.preventDefault();
   };
 
   if (!isOpen) return null;
@@ -422,7 +484,6 @@ export default function SearchPalette({ fullPageNavigation = false }) {
         type="text"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-        onKeyDown={onInputKeyDown}
         placeholder={UI_TEXT.placeholder}
         autoComplete="off"
         autoCorrect="off"
@@ -436,6 +497,8 @@ export default function SearchPalette({ fullPageNavigation = false }) {
           color: TOKENS.ink, font: 'inherit', fontSize: isMobile ? 18 : 21, fontWeight: 500, outline: 'none',
         }}
       />
+      {/* 2026-10-04: Esc clears the query (never closes), so its hint sits before the clear button, shown with it; the X button closes on every layout */}
+      {!isMobile && <kbd style={{ ...kbdStyle, color: TOKENS.dim, visibility: query ? 'visible' : 'hidden' }}>{UI_TEXT.escHint}</kbd>}
       <button
         type="button"
         aria-label={UI_TEXT.clear}
@@ -446,8 +509,6 @@ export default function SearchPalette({ fullPageNavigation = false }) {
       >
         <CloseIcon size={14} />
       </button>
-      {/* 2026-10-04: the close button shows on every layout; on desktop the Esc hint sits before it */}
-      {!isMobile && <kbd style={{ ...kbdStyle, color: TOKENS.dim }}>{UI_TEXT.escHint}</kbd>}
       <button
         type="button"
         aria-label={UI_TEXT.close}
@@ -682,15 +743,15 @@ export default function SearchPalette({ fullPageNavigation = false }) {
       <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>Tab</kbd> {UI_TEXT.footerTab}</span>
       <button
         type="button"
-        onClick={closeSearch}
-        aria-label={UI_TEXT.close}
+        onClick={clearQuery}
+        aria-label={UI_TEXT.clear}
         onMouseEnter={(e) => setHover(e, true, { color: TOKENS.ink, background: TOKENS.surface2 }, { color: TOKENS.muted, background: 'transparent' })}
         onMouseLeave={(e) => setHover(e, false, { color: TOKENS.ink, background: TOKENS.surface2 }, { color: TOKENS.muted, background: 'transparent' })}
         style={{
           display: 'flex', alignItems: 'center', gap: 6, border: 0, background: 'transparent', color: TOKENS.muted,
           font: 'inherit', cursor: 'pointer', padding: '4px 8px', margin: '0 0 0 -8px', borderRadius: 7,
         }}
-      ><kbd style={kbdStyle}>{UI_TEXT.escHint}</kbd> {UI_TEXT.footerClose}</button>
+      ><kbd style={kbdStyle}>{UI_TEXT.escHint}</kbd> {UI_TEXT.footerClear}</button>
       <span style={{ marginLeft: 'auto' }}>{UI_TEXT.footerNote}</span>
     </div>
   );
@@ -709,7 +770,7 @@ export default function SearchPalette({ fullPageNavigation = false }) {
         aria-label={UI_TEXT.dialogLabel}
         className={ANIM}
         style={panelStyle}
-        onKeyDown={onDialogKeyDown}
+        onMouseDown={onPanelMouseDown}
       >
         {inputRow}
         {tabStrip}
