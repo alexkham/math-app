@@ -33585,8 +33585,33 @@
             "10",
             "12"
           ],
-          "status": "deferred",
-          "reason": "No visual tool covers this concept today. Re-queryable as tools are built and Line-2 processed."
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "algebra-identities",
+              "target": {
+                "path": "/algebra/visual-tools/identities/difference-of-squares",
+                "section": null
+              },
+              "unit": {
+                "diagrams": [
+                  "identityDiagrams['dos-4']"
+                ],
+                "arrangement": "single",
+                "newStates": []
+              },
+              "added": "2026-10-04"
+            }
+          ],
+          "history": [
+            {
+              "date": "2026-10-04",
+              "to": "linked",
+              "note": "gap closed for this page: the difference of squares explorer freezes the L-to-rectangle rearrangement; harvested in the illustration pass",
+              "from": "deferred"
+            }
+          ]
         },
         {
           "term": "general difference of even powers",

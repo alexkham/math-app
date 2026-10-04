@@ -477,6 +477,13 @@ export const SetBuilderExplorer = (props) => {
     for (let x = domain.hi + 1; x <= domain.hi + 300; x++) {
       if (candidatePasses(x, conditions, predicates, join)) return true;
     }
+    // domains unbounded below (ℤ) also run on past the window's lower end:
+    // e.g. x even ∧ x < 20 is infinite there, not finite
+    if (domain.infiniteBelow ?? domain.lo < 0) {
+      for (let x = domain.lo - 1; x >= domain.lo - 300; x--) {
+        if (candidatePasses(x, conditions, predicates, join)) return true;
+      }
+    }
     return false;
   }, [domain, conditions, predicates, join]);
 
@@ -846,7 +853,7 @@ export const SetBuilderExplorer = (props) => {
                         onChange={(e) => setConditionArg(i, 'b', e.target.value)}
                       />
                     )}
-                    {conditions.length > 1 && (
+                    {conditions.length >= 1 && (
                       <button
                         type="button"
                         className="sbx-x"

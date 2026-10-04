@@ -10,6 +10,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import polynomialMultiplicationDiagrams from '@/app/components/algebra/visualizers/polynomials/polynomialMultiplicationDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 
@@ -609,6 +610,20 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpDegreeFamily = { kind: 'pieces', svgTitle: 'Polynomials of degree 1 to 3: line, parabola, S-curve', xRange: [-3, 3], yRange: [-4, 6],
+    pieces: [
+      { fn: (x) => x + 1, from: -3, to: 3, ends: [null, null], color: 'f' },
+      { fn: (x) => x * x - 2, from: -3, to: 3, ends: [null, null], color: 'g' },
+      { fn: (x) => x ** 3 - 3 * x, from: -3, to: 3, ends: [null, null], color: 'r' },
+    ],
+    notes: [{ x: -1.9, y: 5.6, text: 'degree 1: x + 1', pos: 'e', color: 'f' }, { x: -1.9, y: 5.0, text: 'degree 2: x² − 2', pos: 'e', color: 'g' },
+      { x: -1.9, y: 4.4, text: 'degree 3: x³ − 3x', pos: 'e', color: 'r' }],
+    caption: 'Turning points 0, 1, 2: at most n − 1 for degree n' };
+  const fpEvaluate = { kind: 'pieces', svgTitle: 'P(x) = 2x^2 - 3x + 1 with P(4) = 21 and P(-2) = 15', xRange: [-3, 5], yRange: [-2, 24], yStep: 4,
+    pieces: [{ fn: (x) => 2 * x * x - 3 * x + 1, from: -3, to: 5, ends: [null, null], color: 'f', label: { text: 'P(x) = 2x² − 3x + 1', x: -0.5, y: 8, pos: 'e' } }],
+    points: [{ x: 4, y: 21, label: 'P(4) = 21', pos: 'w' }, { x: -2, y: 15, label: 'P(−2) = 15', pos: 'e' }],
+    caption: 'Each evaluation is a point on the graph: (4, 21) and (−2, 15)' };
+
   const demoUnits = {
     multiply: demoUnitFrame({
       svg: polynomialMultiplicationDiagrams['ps-foil'],
@@ -616,6 +631,16 @@ const schemas = {
       text: 'Every term of one factor multiplies every term of the other, one cell per pair, and the like-term buckets underneath collect the cells by degree: one x&#178;, two x-terms that add to 5x, one constant 6. Addition and subtraction combine like terms directly; multiplication first creates them. Multiply longer polynomials cell by cell on the',
       href: '/algebra/visual-tools/polynomial-multiplication',
       linkText: 'polynomial multiplication visualizer',
+    }),
+    degrees: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpDegreeFamily),
+      caption: 'One curve per degree',
+      text: 'A linear, a quadratic and a cubic polynomial drawn together. The line never turns, the parabola turns once and the cubic turns twice: a polynomial of degree n can have at most n &#8722; 1 turning points. A degree-0 polynomial, a constant, would be a flat line with no turns at all.',
+    }),
+    evaluate: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpEvaluate),
+      caption: 'Evaluation as a point on the graph',
+      text: 'The section\'s P(x) = 2x&#178; &#8722; 3x + 1. Substituting x = 4 gives 21 and substituting x = &#8722;2 gives 15; on the graph these are the points (4, 21) and (&#8722;2, 15). Every evaluation of a polynomial is one point of its curve.',
     }),
   };
 
@@ -700,6 +725,8 @@ export default function PolynomialsPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-degrees'} dangerouslySetInnerHTML={{ __html: demoUnits.degrees }} />,
+          `Higher degrees allow more bends, which is why degree is the first thing to read off a polynomial.`,
         ]
     },
     {
@@ -716,6 +743,8 @@ export default function PolynomialsPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-evaluate'} dangerouslySetInnerHTML={{ __html: demoUnits.evaluate }} />,
+          `Evaluating at many inputs and joining the points is the most basic way to sketch the graph.`,
         ]
     },
     {

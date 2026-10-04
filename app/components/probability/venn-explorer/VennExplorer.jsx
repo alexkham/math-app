@@ -63,7 +63,7 @@ const VennExplorer = ({ problemsData = [] }) => {
 
     return (
       <div style={{ position: 'relative' }}>
-        <svg width="500" height="350" style={{ border: '1px solid #ccc', borderRadius: '4px', backgroundColor: 'white' }}>
+        <svg viewBox="0 0 500 350" width="500" height="350" style={{ border: '1px solid #ccc', borderRadius: '4px', backgroundColor: 'white', maxWidth: '100%', height: 'auto' }}>
           <rect width="500" height="350" fill="#fafafa"/>
           
           {/* Omega symbol */}

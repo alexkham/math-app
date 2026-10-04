@@ -11,6 +11,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import completeTheSquareDiagrams from '@/app/components/algebra/visualizers/equations/completeTheSquareDiagrams'
+import polynomialMultiplicationDiagrams from '@/app/components/algebra/visualizers/polynomials/polynomialMultiplicationDiagrams'
+import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 
@@ -960,6 +963,16 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpIrreducible = { kind: 'pieces', svgTitle: 'x^2 - 2 has irrational roots; x^2 + 1 has no real roots', xRange: [-3, 3], yRange: [-3, 6],
+    pieces: [
+      { fn: (x) => x * x - 2, from: -3, to: 3, ends: [null, null], color: 'f' },
+      { fn: (x) => x * x + 1, from: -3, to: 3, ends: [null, null], color: 'g' },
+    ],
+    points: [{ x: -Math.SQRT2, y: 0 }, { x: Math.SQRT2, y: 0 }],
+    notes: [{ x: -2.0, y: 5.6, text: 'x² + 1 never reaches 0: irreducible over ℝ', pos: 'e', color: 'g' },
+      { x: -2.9, y: -2.6, text: 'x² − 2 = (x + √2)(x − √2): roots ±√2, not rational', pos: 'e', color: 'f' }],
+    caption: 'x² − 2 factors over ℝ but not over ℤ; x² + 1 factors over neither' };
+
   const demoUnits = {
     perfect: demoUnitFrame({
       svg: completeTheSquareDiagrams['step-corner'],
@@ -967,6 +980,25 @@ const schemas = {
       text: 'The x&#178; block and two 3x strips leave a square-shaped hole at the corner, and the constant 9 = 3 &#215; 3 fills it exactly: the trinomial is a perfect square, (x + 3)&#178;, because its constant is the square of half the middle coefficient. A different constant leaves a gap or an overflow instead. Test any trinomial for the corner fit on the',
       href: '/algebra/visual-tools/completing-square',
       linkText: 'completing the square visualizer',
+    }),
+    grid: demoUnitFrame({
+      svg: polynomialMultiplicationDiagrams['ps-foil'],
+      caption: '(x + 2)(x + 3): the product that factoring undoes',
+      text: 'Multiplying the section\'s factors cell by cell gives x&#178;, 3x, 2x and 6; the two x-terms collect into 5x, giving x&#178; + 5x + 6. Factoring runs this grid backwards: from the trinomial, find the two numbers, 2 and 3, that fill the corner cells and add to the middle coefficient. Fill other grids on the',
+      href: '/algebra/visual-tools/polynomial-multiplication',
+      linkText: 'polynomial multiplication visualizer',
+    }),
+    squares: demoUnitFrame({
+      svg: identityDiagrams['dos-4'],
+      caption: 'a&#178; &#8722; b&#178; as a rearranged area',
+      text: 'Cutting a b-by-b square out of an a-by-a square leaves an L-shaped region of area a&#178; &#8722; b&#178;. Slicing the L and moving one strip turns it into a single rectangle with sides a + b and a &#8722; b, so the area is also (a + b)(a &#8722; b). That is the difference of squares, read as geometry. Step through the rearrangement on the',
+      href: '/algebra/visual-tools/identities/difference-of-squares',
+      linkText: 'difference of squares explorer',
+    }),
+    irreducible: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpIrreducible),
+      caption: 'Irreducible depends on the number system',
+      text: 'The section\'s two examples. x&#178; &#8722; 2 crosses the axis at &#177;&#8730;2: it has real roots, so over the real numbers it factors as (x + &#8730;2)(x &#8722; &#8730;2), but those roots are not rational, so over the integers it cannot be factored. x&#178; + 1 never reaches the axis at all: it has no real roots and stays irreducible over the real numbers, factoring only over the complex numbers as (x + i)(x &#8722; i).',
     }),
   };
 
@@ -1013,6 +1045,8 @@ export default function FactoringPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-grid'} dangerouslySetInnerHTML={{ __html: demoUnits.grid }} />,
+          `Every factoring technique on this page reverses one way of filling such a grid.`,
         ]
     },
     {
@@ -1060,6 +1094,8 @@ export default function FactoringPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-squares'} dangerouslySetInnerHTML={{ __html: demoUnits.squares }} />,
+          `The sum a² + b² has no such rearrangement, and over the reals it does not factor.`,
         ]
     },
     {
@@ -1109,6 +1145,8 @@ export default function FactoringPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <div key={'unit-irreducible'} dangerouslySetInnerHTML={{ __html: demoUnits.irreducible }} />,
+          `Real roots are what a quadratic needs to factor over ℝ; rational roots are what it needs over ℤ.`,
         ]
     },
 
