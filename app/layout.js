@@ -5,6 +5,9 @@ import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import ScrollUpButton from './components/scroll-up-button/ScrollUpButton';
+import { SearchProvider } from './components/site-search/SearchProvider';
+import SearchPalette from './components/site-search/SearchPalette';
+import FloatingAskButton from './components/site-search/FloatingAskButton';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -44,9 +47,12 @@ export default function RootLayout({ children }) {
           <GoBackButton className='fixed-button' />
         </nav> */}
 
-        <div>{children}</div>
-        <ScrollUpButton />
-        
+        <SearchProvider>
+          <div>{children}</div>
+          <ScrollUpButton />
+          <SearchPalette fullPageNavigation />
+          <FloatingAskButton />
+        </SearchProvider>
       </body>
     </html>
   );

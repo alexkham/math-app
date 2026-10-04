@@ -1,6 +1,8 @@
 # SearchPalette
 
-The one search dialog. Mounted once in `pages/_app.js`; reads its state from `SearchProvider`. No props.
+The one search dialog. Mounted once per router, in `pages/_app.js` and in `app/layout.js` (home page); reads its state from `SearchProvider`. Uses `useRouter`/`usePathname` from `next/navigation` so it works under both routers.
+
+Props: `fullPageNavigation` (boolean, default false). `app/layout.js` passes `true`: results then open with a full page load, because the App Router cannot client-navigate into Pages Router routes (it only loops `?_rsc` fetches). Under `pages/_app.js` leave it off and results open client-side.
 
 ## Layout
 

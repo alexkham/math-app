@@ -5,7 +5,7 @@ The visible part of the semantic site search. One shared palette, opened from th
 | File | Role |
 |---|---|
 | `SearchProvider.jsx` | context: `isOpen`, `openSearch()`, `closeSearch()`, `useSiteSearch()`; global shortcut, scroll lock, focus return |
-| `SearchPalette.jsx` | the dialog, mounted once in `pages/_app.js` |
+| `SearchPalette.jsx` | the dialog, mounted once per router: `pages/_app.js` and `app/layout.js` |
 | `NavSearchTrigger.jsx` | navbar entry point (field at 1024px and up, icon button below) |
 | `FloatingAskButton.jsx` | fixed "Ask Learn Math" pill above `ScrollUpButton` |
 | `HeroSearch.jsx` | large opt-in field for landing and hub pages |
@@ -17,6 +17,7 @@ Each component has its own `<Name>Docs.md` next to it.
 ## Wiring
 
 `pages/_app.js` wraps the tree in `<SearchProvider>` and renders `<SearchPalette />` and `<FloatingAskButton />` once, after `<ScrollUpButton/>`.
+`app/layout.js` does the same for the App Router (the home page `app/page.js` lives there and never passes through `pages/_app.js`). The palette navigates with `next/navigation`, which works under both routers.
 `MyNavbar3` renders `<NavSearchTrigger />` in its search slot and, below 768px, `<NavSearchTrigger variant="icon" />` in the bar itself.
 
 ## API

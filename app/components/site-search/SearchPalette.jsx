@@ -1,6 +1,6 @@
 'use client';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter, usePathname } from 'next/navigation';
 import { processContent } from '@/app/utils/contentProcessor';
 import { useMediaQuery } from '@/app/hooks/useMediaQuery';
 import { mediaQuery } from '@/app/lib/breakpoints';
@@ -150,8 +150,15 @@ const ResultRow = React.memo(function ResultRow({ result, index, isActive, terms
 
 /* ---------- the palette ---------- */
 
-export default function SearchPalette() {
+/**
+ * Props
+ *   fullPageNavigation  true where the palette is mounted under the App Router (app/layout.js):
+ *                       results then open with a full page load, because the App Router cannot
+ *                       client-navigate into Pages Router routes. Default false (pages/_app.js).
+ */
+export default function SearchPalette({ fullPageNavigation = false }) {
   const router = useRouter();
+  const pathname = usePathname();
   const { isOpen, initialQuery, openCount, closeSearch } = useSiteSearch();
   const isMobile = useMediaQuery(mediaQuery.tabletDown);
 
@@ -292,7 +299,7 @@ export default function SearchPalette() {
   const open = useCallback((result) => {
     if (!result || !result.url) return;
     const { pathname, hash } = splitUrl(result.url);
-    const currentPath = splitUrl(router.asPath || '').pathname;
+    const currentPath = pathname || (typeof window !== 'undefined' ? window.location.pathname : '');
     closeSearch();
     if (hash && pathname === currentPath) {
       window.setTimeout(() => {
@@ -303,8 +310,9 @@ export default function SearchPalette() {
       }, 60);
       return;
     }
+    if (fullPageNavigation) { window.location.assign(result.url); return; }
     router.push(result.url);
-  }, [router, closeSearch]);
+  }, [router, pathname, closeSearch, fullPageNavigation]);
 
   const clearQuery = useCallback(() => {
     setQuery('');
