@@ -15,6 +15,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 
 
+
 export async function getStaticProps(){
 const keyWords = [
   "natural exponents",
@@ -629,11 +630,19 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     definition: demoUnitFrame({
       svg: powersTableDiagrams['b2-default'],
       caption: 'a&#8319; as a table: exponent, expanded product, value',
       text: 'The middle column writes each power as its repeated product, 2 &#215; 2 &#215; 2 &#215; 2 for 2&#8308;, and the right column evaluates it, 16: the exponent is nothing more than the count of factors in the middle column. Every law on this page is a statement about how those factor lists combine. Read the three columns for any base on the',
+      href: '/algebra/visual-tools/powers-table',
+      linkText: 'powers table',
+    }),
+    tenPowers: demoUnitFrame({
+      svg: powersTableDiagrams['b10'],
+      caption: 'Powers of 10: exponents count zeros',
+      text: 'With base 10 every power is a 1 followed by as many zeros as the exponent: 10&#179; = 1,000 and 10&#8308; = 10,000. Multiplying them, 1,000 &#215; 10,000 = 10,000,000, which has 3 + 4 = 7 zeros and is the row for 10&#8311;. Adding exponents is just adding up the zeros, which is the product rule. See any base laid out on the',
       href: '/algebra/visual-tools/powers-table',
       linkText: 'powers table',
     }),
@@ -723,6 +732,8 @@ export default function NaturalExponentsPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-tenPowers'} dangerouslySetInnerHTML={{ __html: demoUnits.tenPowers }} />,
+          `Any base works the same way: its factors are counted, not multiplied out.`,
         ]
     },
     {

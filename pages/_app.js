@@ -51,10 +51,12 @@ import RouteSync from "../app/components/dev/RouteSync";
 import { SearchProvider } from "@/app/components/site-search/SearchProvider";
 import SearchPalette from "@/app/components/site-search/SearchPalette";
 import FloatingAskButton from "@/app/components/site-search/FloatingAskButton";
+import { AssistantProvider } from "@/app/components/site-search/AssistantProvider";
 
 export default function App({ Component, pageProps }) {
   return (
     <SearchProvider>
+    <AssistantProvider>
       <RouteSync />
 
       {/* Google Analytics 4 */}
@@ -83,8 +85,9 @@ export default function App({ Component, pageProps }) {
 
       <ScrollUpButton/>
       <SearchPalette />
-      <FloatingAskButton />
+      <FloatingAskButton mode="assistant" />
       <Footer/>
+    </AssistantProvider>
     </SearchProvider>
   );
 }

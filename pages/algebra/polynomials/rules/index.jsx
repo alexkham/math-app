@@ -9,6 +9,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 
@@ -890,6 +892,37 @@ const schemas = {
 
 
 
+  const fpCandidatesMiss = { kind: 'pieces', svgTitle: 'x^2 - 2: the candidates 1, -1, 2, -2 all miss; the roots are plus or minus sqrt 2', xRange: [-3, 3], yRange: [-3, 5],
+    pieces: [
+      { fn: (x) => x * x - 2, from: -3, to: -Math.SQRT2, ends: [null, 'closed'], color: 'f' },
+      { fn: (x) => x * x - 2, from: -Math.SQRT2, to: Math.SQRT2, ends: ['closed', 'closed'], color: 'f' },
+      { fn: (x) => x * x - 2, from: Math.SQRT2, to: 3, ends: ['closed', null], color: 'f' },
+    ],
+    points: [{ x: -2, y: 2, label: 'P(−2) = 2', pos: 'w' }, { x: -1, y: -1, label: 'P(−1) = −1', pos: 'sw' },
+      { x: 1, y: -1, label: 'P(1) = −1', pos: 'se' }, { x: 2, y: 2, label: 'P(2) = 2', pos: 'e' }],
+    notes: [{ x: -2.9, y: -2.6, text: 'roots ±√2 ≈ ±1.41 (blue dots): irrational', pos: 'e', color: 'f' }],
+    caption: 'No candidate from ±1, ±2 is a root: the roots ±√2 are irrational' };
+  const fpDescartes = { kind: 'pieces', svgTitle: 'x^3 - 2x^2 - x + 2 has two positive roots and one negative root', xRange: [-2, 3], yRange: [-4, 4],
+    pieces: [{ fn: (x) => x ** 3 - 2 * x * x - x + 2, from: -2, to: 3, ends: [null, null], color: 'f' }],
+    points: [{ x: -1, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }],
+    notes: [{ x: -1.8, y: 3.6, text: 'P(x): signs + − − +, 2 changes: 2 or 0 positive roots', pos: 'e', color: 'f' },
+      { x: -1.8, y: 2.6, text: 'P(−x): signs − − + +, 1 change: 1 negative root', pos: 'e', color: 'g' },
+      { x: 0.2, y: -3.2, text: 'actual roots: −1, 1, 2', pos: 'e', color: 'r' }],
+    caption: 'Descartes allows 2 positive, 1 negative root: here 1, 2 and −1' };
+
+  const demoUnits = {
+    candidates: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpCandidatesMiss),
+      caption: 'Where the theorem cannot see',
+      text: 'The section\'s x&#178; &#8722; 2. Its rational candidates are &#177;1 and &#177;2, and each one lands off the axis: P(&#177;1) = &#8722;1 and P(&#177;2) = 2. The graph still crosses the axis twice, at &#177;&#8730;2 &#8776; &#177;1.41 (blue dots), but these roots are irrational, so the list could never contain them.',
+    }),
+    descartes: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpDescartes),
+      caption: 'Checking Descartes\' count against the graph',
+      text: 'The section\'s x&#179; &#8722; 2x&#178; &#8722; x + 2. The coefficients of P(x) change sign twice, so there are 2 or 0 positive roots; those of P(&#8722;x) change sign once, so there is exactly 1 negative root. The graph confirms the count: it crosses at x = 1 and x = 2 on the positive side and at x = &#8722;1 on the negative side.',
+    }),
+  };
+
   return {
   props:{
     sectionsContent,
@@ -900,6 +933,7 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Polynomial Theorems: Remainder, Factor & Rational Root | Learn Math Class",
       description: "Master polynomial theorems: Remainder Theorem, Factor Theorem, Rational Root Theorem, Descartes' Rule of Signs, Fundamental Theorem of Algebra, Vieta's formulas, and root bounds.",
@@ -911,7 +945,7 @@ const schemas = {
 }
    }
 
-export default function RulesPage({seoData, sectionsContent, introContent, obj10Table, obj12Table, obj13Table, summaryTable, faqQuestions, schemas}) {
+export default function RulesPage({seoData, sectionsContent, introContent, obj10Table, obj12Table, obj13Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -980,6 +1014,8 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj10
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-candidates'} dangerouslySetInnerHTML={{ __html: demoUnits.candidates }} />,
+          `An empty candidate list rules out rational roots only, never roots in general.`,
         ]
     },
     {
@@ -996,6 +1032,8 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj10
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-descartes'} dangerouslySetInnerHTML={{ __html: demoUnits.descartes }} />,
+          `The rule gives possible counts; finding the roots still takes the other tools on this page.`,
         ]
     },
 

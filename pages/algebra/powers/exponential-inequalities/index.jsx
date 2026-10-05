@@ -9,6 +9,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -480,6 +482,50 @@ const schemas = {
 }
 
 
+  const fpExpFlip = { kind: 'pieces', svgTitle: '(1/3)^x > 9 holds exactly for x < -2', xRange: [-3, 2], yRange: [-2, 14],
+    pieces: [
+      { fn: (x) => (1 / 3) ** x, from: -2.45, to: 2, ends: [null, null], color: 'f', label: { text: '(1/3)ˣ', x: -1, y: 3, pos: 'e' } },
+      { fn: () => 9, from: -3, to: 2, ends: [null, null], color: 'g', label: { text: 'y = 9', x: 1.5, y: 9, pos: 'n' } },
+    ],
+    points: [{ x: -2, y: 9, label: 'x = −2', pos: 'sw' }],
+    notes: [{ x: -1.5, y: 12, text: 'above 9 only for x < −2: the base 1/3 flips >', pos: 'e', color: 'r' }],
+    caption: 'A decreasing base reverses >: (1/3)ˣ > 9 means x < −2' };
+  const fpExpSign = { kind: 'pieces', svgTitle: '2^x is always positive: 2^x > -5 always, 2^x < -1 never', xRange: [-4, 3], yRange: [-6, 8],
+    pieces: [
+      { fn: () => -1, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[-4, 3]], label: { text: 'y = −1: 2ˣ < −1 never holds', x: -2, y: -1, pos: 's' } },
+      { fn: () => -5, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-4, 3]], label: { text: 'y = −5: 2ˣ > −5 holds for every x', x: -1, y: -5, pos: 's' } },
+      { fn: (x) => 2 ** x, from: -4, to: 3, ends: [null, null], color: 'f', label: { text: 'y = 2ˣ', x: 2.5, y: 2 ** 2.5, pos: 'w' } },
+    ],
+    notes: [{ x: -3.8, y: 6.8, text: '2ˣ > 0 for every x: the curve never reaches the axis', pos: 'e' }],
+    caption: 'Positivity alone settles 2ˣ > −5 and 2ˣ < −1' };
+  const fpExpBand = { kind: 'pieces', svgTitle: '1/4 < 2^x < 16 exactly for -2 < x < 4', xRange: [-3, 5], yRange: [-2, 18], yStep: 2,
+    pieces: [
+      { fn: () => 0.25, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-3, 5]], label: { text: 'y = 1/4', x: -2.6, y: 0.25, pos: 'n' } },
+      { fn: () => 16, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-3, 5]], label: { text: 'y = 16', x: -2, y: 16, pos: 'n' } },
+      { fn: (x) => 2 ** x, from: -3, to: 4.1, ends: [null, null], color: 'f' },
+    ],
+    points: [{ x: -2, y: 0.25 }, { x: 4, y: 16, label: '(4, 16)', pos: 'nw' }],
+    notes: [{ x: -2.8, y: 9, text: 'solution −2 < x < 4: 2⁻² < 2ˣ < 2⁴', pos: 'e', color: 'r' }],
+    caption: '1/4 < 2ˣ < 16 is 2⁻² < 2ˣ < 2⁴, so −2 < x < 4' };
+
+  const demoUnits = {
+    expFlip: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpExpFlip),
+      caption: 'The decreasing case',
+      text: 'The section\'s (1/3)&#739; &gt; 9, with 9 written as (1/3)&#8315;&#178;. The curve (1/3)&#739; falls from left to right, so it is above the level 9 only to the left of the crossing at x = &#8722;2. Comparing exponents therefore turns &gt; into &lt;: the solution is x &lt; &#8722;2.',
+    }),
+    expSign: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpExpSign),
+      caption: 'Answers settled by positivity',
+      text: 'The curve 2&#739; stays above the axis for every x. It therefore lies above any negative level, so 2&#739; &gt; &#8722;5 holds for all real x, and it never comes down to a negative level, so 2&#739; &lt; &#8722;1 has no solution. No computation is needed in either case.',
+    }),
+    expBand: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpExpBand),
+      caption: 'Bounding an exponential on both sides',
+      text: 'The section\'s 1/4 &lt; 2&#739; &lt; 16. Writing the bounds as 2&#8315;&#178; and 2&#8308; shows where the curve sits between the two dashed levels: exactly while x runs from &#8722;2 to 4. Base 2 is greater than 1, so both bounds keep their direction: &#8722;2 &lt; x &lt; 4.',
+    }),
+  };
+
 return {
   props:{
     sectionsContent,
@@ -489,6 +535,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Exponential Inequalities: When to Flip the Sign | Learn Math Class",
       description: "Learn to solve exponential inequalities: when to preserve vs flip inequality direction based on base, rewriting with common bases, compound inequalities, and domain considerations.",
@@ -501,7 +548,7 @@ return {
    }
 
 // export default function InequalitiesPage({seoData,sectionsContent , introContent}) {
-export default function InequalitiesPage({seoData, sectionsContent, introContent, obj1Table, obj3Table, summaryTable, faqQuestions, schemas}) {
+export default function InequalitiesPage({seoData, sectionsContent, introContent, obj1Table, obj3Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -535,6 +582,8 @@ export default function InequalitiesPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-expFlip'} dangerouslySetInnerHTML={{ __html: demoUnits.expFlip }} />,
+          `With 2ˣ > 8 the curve rises and the direction is kept: x > 3.`,
         ]
     },
 
@@ -558,6 +607,8 @@ export default function InequalitiesPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-expSign'} dangerouslySetInnerHTML={{ __html: demoUnits.expSign }} />,
+          `Checking the sign first can finish an exponential inequality before any algebra.`,
         ]
     },
     {
@@ -566,6 +617,8 @@ export default function InequalitiesPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-expBand'} dangerouslySetInnerHTML={{ __html: demoUnits.expBand }} />,
+          `With a base between 0 and 1, both bounds would flip and change places.`,
         ]
     },
 

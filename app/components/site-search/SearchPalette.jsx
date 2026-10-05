@@ -5,6 +5,13 @@ import { processContent } from '@/app/utils/contentProcessor';
 import { useMediaQuery } from '@/app/hooks/useMediaQuery';
 import { mediaQuery } from '@/app/lib/breakpoints';
 import { useSiteSearch, SEARCH_INPUT_ATTR } from './SearchProvider';
+import { useAssistant } from './AssistantProvider';
+import ModeSwitch, { MODE_SWITCH_ATTR } from './ModeSwitch';
+import { PageChip, NewChatButton } from './AssistantHeader';
+import AskAiRow, { useIsMac, askShortcutLabel } from './AskAiRow';
+import AssistantView from './AssistantView';
+import { navigateToUrl } from './navigate';
+import { currentPagePath, currentPageTitle } from './pageContext';
 import {
   TOKENS, KIND_META, TABS, TRY_ASKING, POPULAR, UI_TEXT,
   SEARCH_LIMIT, DEBOUNCE_MS, MIN_QUERY_LENGTH, STOP_WORDS,
@@ -12,10 +19,15 @@ import {
 import { SparkIcon, CloseIcon, ArrowIcon, KindIcon } from './searchIcons';
 
 /**
- * SearchPalette: the one search dialog, mounted once in pages/_app.js.
- * Opens through SearchProvider (navbar trigger, floating pill, hero field, Ctrl+K).
+ * SearchPalette: the one dialog, mounted once per router (pages/_app.js, app/layout.js).
+ * Opens through SearchProvider (navbar trigger, hero field, Ctrl+K: Search mode; floating pill: Ask AI mode).
  *
- * Talks to GET /api/search?q=&limit=20 and filters by kind client-side.
+ * Two modes in one shell (SearchProvider.mode):
+ *   search     this file: input, tabs, results, preview, footer. Talks to GET /api/search?q=&limit=20
+ *              and filters by kind client-side. Plus the Ask AI entry points (AskAiRow, Ctrl/Cmd+Enter).
+ *   assistant  header shows PageChip / New chat (AssistantHeader) and the body is AssistantView;
+ *              tabs and footer are not rendered. The conversation lives in AssistantProvider.
+ * ModeSwitch sits at the left of the header in both modes.
  */
 
 const Z_INDEX = 100100;
@@ -63,14 +75,6 @@ function humanizeTopic(topic) {
     .replace(/[-_]+/g, ' ')
     .trim()
     .replace(/\b\w/g, (c) => c.toUpperCase());
-}
-
-function splitUrl(url) {
-  const text = String(url || '');
-  const hashAt = text.indexOf('#');
-  const withoutHash = hashAt === -1 ? text : text.slice(0, hashAt);
-  const hash = hashAt === -1 ? '' : text.slice(hashAt);
-  return { pathname: withoutHash.split('?')[0], hash };
 }
 
 function breadcrumb(result, withKind) {
@@ -159,8 +163,16 @@ const ResultRow = React.memo(function ResultRow({ result, index, isActive, terms
 export default function SearchPalette({ fullPageNavigation = false }) {
   const router = useRouter();
   const currentPathname = usePathname();
-  const { isOpen, initialQuery, openCount, closeSearch } = useSiteSearch();
+  const { isOpen, mode, initialQuery, openCount, closeSearch, setMode } = useSiteSearch();
+  const assistant = useAssistant();
   const isMobile = useMediaQuery(mediaQuery.tabletDown);
+  const isMac = useIsMac();
+  const isAssistant = mode === 'assistant';
+  const actionsRef = useRef({}); // AssistantView registers its composer actions here
+  const pagePath = currentPagePath(currentPathname);
+  // Page title comes from document.title, read again on every open and on every route change.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const pageTitle = useMemo(() => currentPageTitle(currentPathname), [currentPathname, openCount]);
 
   const [query, setQuery] = useState('');
   const [shownQuery, setShownQuery] = useState('');
@@ -298,20 +310,7 @@ export default function SearchPalette({ fullPageNavigation = false }) {
 
   const open = useCallback((result) => {
     if (!result || !result.url) return;
-    const { pathname, hash } = splitUrl(result.url);
-    const currentPath = currentPathname || (typeof window !== 'undefined' ? window.location.pathname : '');
-    closeSearch();
-    if (hash && pathname === currentPath) {
-      window.setTimeout(() => {
-        const id = decodeURIComponent(hash.slice(1));
-        const target = document.getElementById(id);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        if (window.history && window.history.replaceState) window.history.replaceState(null, '', result.url);
-      }, 60);
-      return;
-    }
-    if (fullPageNavigation) { window.location.assign(result.url); return; }
-    router.push(result.url);
+    navigateToUrl(result.url, { router, currentPath: currentPathname, closeSearch, fullPageNavigation });
   }, [router, currentPathname, closeSearch, fullPageNavigation]);
 
   const clearQuery = useCallback(() => {
@@ -328,16 +327,37 @@ export default function SearchPalette({ fullPageNavigation = false }) {
    * are still stopped so the page behind never reacts to typing. Ctrl/Cmd
    * combinations pass through untouched (the provider's Ctrl+K toggle, copy,
    * paste, browser shortcuts).
+   * In Ask AI mode the composer owns the keys: only Escape (clears the draft), Tab (focus trap)
+   * and Enter inside the composer (send; Shift+Enter inserts a line) are handled here, through
+   * the actions AssistantView registers in actionsRef.
    */
   const keyStateRef = useRef({});
-  keyStateRef.current = { searching, selected, moveActive, cycleTab, open, clearQuery };
+  keyStateRef.current = { searching, selected, moveActive, cycleTab, open, clearQuery, isAssistant, actionsRef };
 
   useEffect(() => {
     if (!isOpen || typeof document === 'undefined') return undefined;
 
-    const focusInput = () => { if (inputRef.current) inputRef.current.focus(); };
-    const focusables = () => Array.from(panelRef.current ? panelRef.current.querySelectorAll('button, a[href], input') : [])
+    const focusInput = () => {
+      const state = keyStateRef.current;
+      if (state.isAssistant) {
+        const actions = state.actionsRef.current;
+        if (actions && actions.focusComposer) actions.focusComposer();
+        return;
+      }
+      if (inputRef.current) inputRef.current.focus();
+    };
+    const focusables = () => Array.from(panelRef.current ? panelRef.current.querySelectorAll('button, a[href], input, textarea') : [])
       .filter((el) => !el.disabled && el.tabIndex !== -1 && el.offsetParent !== null);
+    const trapTab = (event, target, inPanel) => {
+      event.stopImmediatePropagation();
+      const list = focusables();
+      if (!list.length) { event.preventDefault(); return; }
+      const first = list[0];
+      const last = list[list.length - 1];
+      if (!inPanel) { event.preventDefault(); (event.shiftKey ? last : first).focus(); return; }
+      if (event.shiftKey && target === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && target === last) { event.preventDefault(); first.focus(); }
+    };
 
     const onKeyDown = (event) => {
       if (event.ctrlKey || event.metaKey || event.altKey) return;
@@ -349,6 +369,31 @@ export default function SearchPalette({ fullPageNavigation = false }) {
       const inPanel = !!(panel && target && typeof target.nodeType === 'number' && panel.contains(target));
       const onControl = inPanel && target !== input && (target.tagName === 'BUTTON' || target.tagName === 'A');
       const consume = () => { event.preventDefault(); event.stopImmediatePropagation(); };
+
+      // ModeSwitch handles Left/Right itself (roving tabs), in both modes.
+      if (inPanel && typeof target.closest === 'function' && target.closest(`[${MODE_SWITCH_ATTR}]`)
+        && (key === 'ArrowLeft' || key === 'ArrowRight')) return;
+
+      if (state.isAssistant) {
+        const actions = state.actionsRef.current || {};
+        const composer = actions.composer ? actions.composer() : null;
+        const inComposer = !!(composer && target === composer);
+        if (key === 'Escape') { consume(); if (actions.clearComposer) actions.clearComposer(); return; }
+        if (key === 'Tab') { trapTab(event, target, inPanel); return; }
+        if (key === 'Enter') {
+          if (inComposer) {
+            if (event.shiftKey || event.isComposing || event.keyCode === 229) { event.stopPropagation(); return; }
+            consume();
+            if (actions.send) actions.send();
+            return;
+          }
+          event.stopPropagation(); // a button or link acts natively
+          return;
+        }
+        event.stopPropagation();
+        if (!inPanel && composer && key.length === 1) composer.focus();
+        return;
+      }
 
       if (key === 'Escape') {
         consume();
@@ -375,14 +420,7 @@ export default function SearchPalette({ fullPageNavigation = false }) {
           return;
         }
         // Start screen: keep focus cycling inside the dialog.
-        event.stopImmediatePropagation();
-        const list = focusables();
-        if (!list.length) { event.preventDefault(); return; }
-        const first = list[0];
-        const last = list[list.length - 1];
-        if (!inPanel) { event.preventDefault(); (event.shiftKey ? last : first).focus(); return; }
-        if (event.shiftKey && target === first) { event.preventDefault(); last.focus(); }
-        else if (!event.shiftKey && target === last) { event.preventDefault(); first.focus(); }
+        trapTab(event, target, inPanel);
         return;
       }
       // Any other key: the page behind must not see it. A printable character
@@ -458,25 +496,42 @@ export default function SearchPalette({ fullPageNavigation = false }) {
   const iconHoverOn = { background: TOKENS.surface2, color: TOKENS.ink };
   const iconHoverOff = { background: TOKENS.surface, color: TOKENS.muted };
 
-  const showTabs = true;
+  const showTabs = !isAssistant;
   const showCounts = searching;
-  const showFooter = !isMobile;
+  const showFooter = !isMobile && !isAssistant;
+  const askQuery = query.replace(/\s+/g, ' ').trim();
+  const goAsk = (carry, origin) => setMode('assistant', carry, origin);
+  const newChat = () => {
+    assistant.reset();
+    const actions = actionsRef.current;
+    if (actions && actions.focusComposer) actions.focusComposer();
+  };
+  const hasConversation = assistant.messages.length > 0;
 
   /* ---------- pieces ---------- */
 
-  const inputRow = (
+  /* Header. 2026-10-05: ModeSwitch replaced the spark tile; in Ask AI mode the page chip and New chat
+   * replace the input. Below 768px the header wraps into two rows: ModeSwitch, spacer and the
+   * buttons on row one; the input (or the page chip) on row two. */
+  const closeButton = (
+    <button
+      type="button"
+      aria-label={UI_TEXT.close}
+      title={UI_TEXT.close}
+      onClick={closeSearch}
+      onMouseEnter={(e) => setHover(e, true, iconHoverOn, iconHoverOff)}
+      onMouseLeave={(e) => setHover(e, false, iconHoverOn, iconHoverOff)}
+      style={isMobile ? { ...iconButtonStyle, width: 44, height: 44 } : iconButtonStyle}
+    >
+      <CloseIcon size={16} />
+    </button>
+  );
+
+  const searchInput = (
     <div style={{
-      position: 'relative', display: 'flex', alignItems: 'center', gap: 14,
-      height: 74, padding: '0 18px', borderBottom: `1px solid ${TOKENS.line}`, flexShrink: 0,
+      flex: isMobile ? '1 1 100%' : 1, minWidth: 0, display: 'flex', alignItems: 'center', gap: isMobile ? 10 : 14,
     }}>
-      <span style={{
-        width: 40, height: 40, borderRadius: 11, flexShrink: 0,
-        background: TOKENS.brandTint, border: `1px solid ${TOKENS.brandLine}`, color: TOKENS.brand,
-        display: 'grid', placeItems: 'center',
-      }}>
-        <SparkIcon size={21} className={ANIM} style={{ animation: 'lmc-search-twinkle 2.4s ease-in-out infinite' }} />
-      </span>
-      <label htmlFor="lmc-search-input" style={{ position: 'absolute', left: -9999 }}>{UI_TEXT.dialogLabel}</label>
+      <label htmlFor="lmc-search-input" style={{ position: 'absolute', left: -9999 }}>{UI_TEXT.triggerLabel}</label>
       <input
         id="lmc-search-input"
         ref={inputRef}
@@ -484,6 +539,13 @@ export default function SearchPalette({ fullPageNavigation = false }) {
         type="text"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
+        onKeyDown={(event) => {
+          // Ctrl/Cmd+Enter: ask the AI about the typed text. Plain keys are handled by the document listener.
+          if (event.key === 'Enter' && (event.ctrlKey || event.metaKey) && askQuery.length >= MIN_QUERY_LENGTH) {
+            event.preventDefault();
+            goAsk(askQuery, 'ask_row');
+          }
+        }}
         placeholder={UI_TEXT.placeholder}
         autoComplete="off"
         autoCorrect="off"
@@ -509,27 +571,42 @@ export default function SearchPalette({ fullPageNavigation = false }) {
       >
         <CloseIcon size={14} />
       </button>
-      <button
-        type="button"
-        aria-label={UI_TEXT.close}
-        title={UI_TEXT.close}
-        onClick={closeSearch}
-        onMouseEnter={(e) => setHover(e, true, iconHoverOn, iconHoverOff)}
-        onMouseLeave={(e) => setHover(e, false, iconHoverOn, iconHoverOff)}
-        style={isMobile ? { ...iconButtonStyle, width: 44, height: 44 } : iconButtonStyle}
-      >
-        <CloseIcon size={16} />
-      </button>
-      <div aria-hidden="true" style={{
-        position: 'absolute', left: 0, right: 0, bottom: -1, height: 2, overflow: 'hidden',
-        opacity: status === 'loading' ? 1 : 0, transition: 'opacity .15s',
-      }}>
-        <div className={ANIM} style={{
-          position: 'absolute', top: 0, left: 0, width: '30%', height: 2,
-          background: `linear-gradient(90deg, rgba(77, 77, 255, 0), ${TOKENS.brand}, rgba(77, 77, 255, 0))`,
-          animation: status === 'loading' ? 'lmc-search-scan 1.1s ease-in-out infinite' : 'none',
-        }} />
-      </div>
+    </div>
+  );
+
+  const pageChip = (
+    <div style={{ flex: isMobile ? '1 1 100%' : 1, minWidth: 0, display: 'flex', alignItems: 'center' }}>
+      <PageChip pageTitle={pageTitle} usePage={assistant.usePage} setUsePage={assistant.setUsePage} />
+    </div>
+  );
+
+  const header = (
+    <div style={isMobile ? {
+      position: 'relative', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 10,
+      minHeight: 64, padding: '10px 12px', borderBottom: `1px solid ${TOKENS.line}`, flexShrink: 0,
+    } : {
+      position: 'relative', display: 'flex', alignItems: 'center', gap: 14,
+      height: 74, padding: '0 18px', borderBottom: `1px solid ${TOKENS.line}`, flexShrink: 0,
+    }}>
+      <ModeSwitch mode={mode} onChange={(next) => setMode(next, '', 'switch')} compact={isMobile} />
+      {isMobile && <span style={{ flex: 1 }} />}
+      {isMobile && isAssistant && hasConversation && <NewChatButton onClick={newChat} iconOnly />}
+      {isMobile && closeButton}
+      {isAssistant ? pageChip : searchInput}
+      {!isMobile && isAssistant && hasConversation && <NewChatButton onClick={newChat} />}
+      {!isMobile && closeButton}
+      {!isAssistant && (
+        <div aria-hidden="true" style={{
+          position: 'absolute', left: 0, right: 0, bottom: -1, height: 2, overflow: 'hidden',
+          opacity: status === 'loading' ? 1 : 0, transition: 'opacity .15s',
+        }}>
+          <div className={ANIM} style={{
+            position: 'absolute', top: 0, left: 0, width: '30%', height: 2,
+            background: `linear-gradient(90deg, rgba(77, 77, 255, 0), ${TOKENS.brand}, rgba(77, 77, 255, 0))`,
+            animation: status === 'loading' ? 'lmc-search-scan 1.1s ease-in-out infinite' : 'none',
+          }} />
+        </div>
+      )}
     </div>
   );
 
@@ -613,6 +690,7 @@ export default function SearchPalette({ fullPageNavigation = false }) {
           ))}
         </div>
       </div>
+      <AskAiRow variant="start" onClick={() => goAsk('', 'start_card')} />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         <div style={{ fontSize: 14, fontWeight: 600, color: TOKENS.muted }}>{UI_TEXT.popular}</div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -684,6 +762,9 @@ export default function SearchPalette({ fullPageNavigation = false }) {
         overflowY: 'auto', padding: 10, display: 'flex', flexDirection: 'column', gap: 3, flexShrink: 0,
       }}
     >
+      {askQuery.length >= MIN_QUERY_LENGTH && (
+        <AskAiRow variant="results" query={askQuery} isMac={isMac} onClick={() => goAsk(askQuery, 'ask_row')} />
+      )}
       {isFallback && visible.length > 0 && (
         <div style={{ padding: '6px 10px 8px', fontSize: 12.5, color: TOKENS.muted }}>{UI_TEXT.fallbackNote}</div>
       )}
@@ -740,6 +821,7 @@ export default function SearchPalette({ fullPageNavigation = false }) {
     }}>
       <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>&uarr;&darr;</kbd> {UI_TEXT.footerNavigate}</span>
       <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>Enter</kbd> {UI_TEXT.footerOpen}</span>
+      <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>{askShortcutLabel(isMac)}</kbd> {UI_TEXT.footerAsk}</span>
       <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><kbd style={kbdStyle}>Tab</kbd> {UI_TEXT.footerTab}</span>
       <button
         type="button"
@@ -772,15 +854,24 @@ export default function SearchPalette({ fullPageNavigation = false }) {
         style={panelStyle}
         onMouseDown={onPanelMouseDown}
       >
-        {inputRow}
+        {header}
         {tabStrip}
         <div style={{ flex: 1, display: 'flex', minHeight: 0 }}>
-          {searching ? (
+          {isAssistant && (
+            <AssistantView
+              pagePath={pagePath}
+              isMobile={isMobile}
+              fullPageNavigation={fullPageNavigation}
+              actionsRef={actionsRef}
+              onSearchInstead={(question) => setMode('search', question, 'search_instead')}
+            />
+          )}
+          {!isAssistant && (searching ? (
             <>
               {resultsList}
               {previewPane}
             </>
-          ) : startScreen}
+          ) : startScreen)}
         </div>
         {footer}
       </div>

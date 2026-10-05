@@ -1,13 +1,13 @@
 # FloatingAskButton
 
-The fixed "Ask Learn Math" pill at the bottom right, stacked above `ScrollUpButton` (right 20px, bottom 20px, 50 × 50). Rendered once in `pages/_app.js`.
+The fixed "Ask AI" pill at the bottom right, stacked above `ScrollUpButton` (right 20px, bottom 20px, 50 × 50). Rendered once in `pages/_app.js` and once in `app/layout.js`, with `mode="assistant"`.
 
 ## Props
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `mode` | `'search' \| 'assistant'` | `'search'` | `'search'` opens the palette. `'assistant'` is reserved for the future AI assistant and currently behaves like `'search'`; branch on it inside `handleClick` when the assistant exists |
-| `label` | string | `"Ask Learn Math"` | visible label and `aria-label` |
+| `mode` | `'search' \| 'assistant'` | `'search'` | `'search'` opens the palette in Search mode (`openSearch('')`); `'assistant'` opens it in Ask AI mode (`openAssistant('', 'pill')`) |
+| `label` | string | `"Ask AI"` | visible label and `aria-label` (`UI_TEXT.askLabel`) |
 | `right` | string | `"20px"` | |
 | `bottom` | string | `"84px"` | leaves room for `ScrollUpButton` |
 | `zIndex` | number | `99990` | below the navbar's mobile menu (100000), above page content |
@@ -21,6 +21,6 @@ The fixed "Ask Learn Math" pill at the bottom right, stacked above `ScrollUpButt
 ## Usage
 
 ```jsx
-// pages/_app.js, inside <SearchProvider>, after <ScrollUpButton/>
-<FloatingAskButton />
+// pages/_app.js and app/layout.js, inside <SearchProvider> and <AssistantProvider>, after <ScrollUpButton/>
+<FloatingAskButton mode="assistant" />
 ```

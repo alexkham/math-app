@@ -10,6 +10,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -529,6 +531,21 @@ const schemas = {
   }
 }
 
+  const fpHalfSteps = { kind: 'pieces', svgTitle: '2^x at half-integer exponents: each half step multiplies by sqrt 2', xRange: [-0.5, 2.5], yRange: [0, 5],
+    pieces: [{ fn: (x) => 2 ** x, from: -0.5, to: 2.3, ends: [null, null], color: 'f' }],
+    points: [{ x: 0, y: 1, label: '2⁰ = 1', pos: 'nw' }, { x: 0.5, y: Math.SQRT2, label: '2^(1/2) ≈ 1.414', pos: 'nw' }, { x: 1, y: 2, label: '2¹ = 2', pos: 'nw' },
+      { x: 1.5, y: 2 * Math.SQRT2, label: '2^(3/2) ≈ 2.828', pos: 'nw' }, { x: 2, y: 4, label: '2² = 4', pos: 'nw' }],
+    notes: [{ x: 1.2, y: 0.8, text: 'each ½-step multiplies by √2', pos: 'e', color: 'r' }, { x: 1.2, y: 0.35, text: '√2 · √2 = 2: two half-steps', pos: 'e', color: 'r' }],
+    caption: '2^(1/2) is the number whose square is 2, so 2^(1/2) = √2' };
+
+  const demoUnits = {
+    halfSteps: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpHalfSteps),
+      caption: 'What half an exponent step does',
+      text: 'Points of y = 2&#739; at x = 0, &#189;, 1, 3/2 and 2. A whole step in the exponent doubles the value; for the product rule to hold, a half step must multiply by a number that, used twice, doubles: &#8730;2. So 2^(1/2) = &#8730;2 &#8776; 1.414 and 2^(3/2) = 2&#8730;2 &#8776; 2.828, points that sit exactly on the same curve.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -538,6 +555,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Rational Exponents: Fractional Powers & Roots | Learn Math Class",
       description: "Learn rational exponents: fractional powers, roots as exponents, and simplification. Understand a^(m/n) = nth root of a^m with examples and domain rules.",
@@ -550,7 +568,7 @@ return {
    }
 
 // export default function RationalExponentsPage({seoData,sectionsContent , introContent}) {
-export default function RationalExponentsPage({seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas}) {
+export default function RationalExponentsPage({seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -569,6 +587,8 @@ export default function RationalExponentsPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-halfSteps'} dangerouslySetInnerHTML={{ __html: demoUnits.halfSteps }} />,
+          `The same reasoning makes a^(1/n) the number whose nth power is a.`,
         ]
     },
     {

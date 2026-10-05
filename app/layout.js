@@ -8,6 +8,7 @@ import ScrollUpButton from './components/scroll-up-button/ScrollUpButton';
 import { SearchProvider } from './components/site-search/SearchProvider';
 import SearchPalette from './components/site-search/SearchPalette';
 import FloatingAskButton from './components/site-search/FloatingAskButton';
+import { AssistantProvider } from './components/site-search/AssistantProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -48,10 +49,12 @@ export default function RootLayout({ children }) {
         </nav> */}
 
         <SearchProvider>
-          <div>{children}</div>
-          <ScrollUpButton />
-          <SearchPalette fullPageNavigation />
-          <FloatingAskButton />
+          <AssistantProvider>
+            <div>{children}</div>
+            <ScrollUpButton />
+            <SearchPalette fullPageNavigation />
+            <FloatingAskButton mode="assistant" />
+          </AssistantProvider>
         </SearchProvider>
       </body>
     </html>

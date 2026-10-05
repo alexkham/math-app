@@ -619,7 +619,7 @@ export default function FunctionRange({
 
   /* Range of g under current parameters */
   const gRange = useMemo(() => transformRange(fam.baseRange, a, k), [fam, a, k]);
-  const rangeStr = useMemo(() => rangeToString(gRange, 'x'), [gRange]);
+  const rangeStr = useMemo(() => rangeToString(gRange, 'y'), [gRange]);
   const tyInRange = inRange(gRange, ty);
   const fAtTy = tyInRange ? forwardFn(ty) : NaN;
 
@@ -995,7 +995,7 @@ export default function FunctionRange({
                       color: c.ink, fontWeight: 700,
                       fontVariantNumeric: 'tabular-nums',
                     }}>
-                      x = {fmt(ty)}
+                      y = {fmt(ty)}
                     </span>
                     <button onClick={resetTestY} style={{
                       background: darkMode ? '#0f172a' : '#fff',

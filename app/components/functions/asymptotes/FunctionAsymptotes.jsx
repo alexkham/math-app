@@ -230,12 +230,24 @@ const DEFAULT_FAMILIES = FAMILIES;
    EQUATION BUILDER
    ================================================================ */
 
+function hasTopLevelSum(str) {
+  let depth = 0;
+  for (let i = 0; i < str.length; i++) {
+    const ch = str[i];
+    if (ch === '(') depth++;
+    else if (ch === ')') depth--;
+    else if (depth === 0 && i > 0 && (ch === '+' || ch === '−') && str[i - 1] === ' ') return true;
+  }
+  return false;
+}
+
 function buildForwardEq(fam, p) {
   const { a, b, h, k } = p;
   let inner = 'x';
   if (h !== 0) inner = `x ${h >= 0 ? '−' : '+'} ${fmt(Math.abs(h))}`;
   if (b !== 1) inner = h !== 0 ? `${fmt(b)}(${inner})` : `${fmt(b)}x`;
   let body = fam.bodyOf(inner);
+  if (a !== 1 && hasTopLevelSum(body)) body = `[${body}]`;
   let out;
   if (a === -1) out = `−${body}`;
   else if (a !== 1) out = `${fmt(a)}·${body}`;
@@ -258,60 +270,77 @@ function findVerticalAsymptotes(fn, xMin, xMax, samples = 600) {
   const out = [];
   const step = (xMax - xMin) / samples;
   const BIG = 1e4;
+  const f = x => { try { return fn(x); } catch { return NaN; } };
 
-  let lastY = null, lastX = null;
-  for (let i = 0; i <= samples; i++) {
+  const add = (c) => {
+    if (c === null || out.some(a => Math.abs(a.x - c) < step * 0.5)) return;
+    const lim = probeOneSided(f, c);
+    if (!lim.leftLimit && !lim.rightLimit) return;   // a root or a finite edge, not an asymptote
+    // Snap to a clean value if it is one (cosmetic)
+    const r = Math.round(c * 1000) / 1000;
+    out.push({ x: Math.abs(c - r) < 1e-7 ? r : c, ...lim });
+  };
+
+  let lastX = xMin, lastY = f(xMin);
+  for (let i = 1; i <= samples; i++) {
     const x = xMin + i * step;
-    let y;
-    try { y = fn(x); } catch { y = NaN; }
-
-    if (lastY !== null && lastX !== null) {
-      const finBoth = Number.isFinite(y) && Number.isFinite(lastY);
-      const finJump = finBoth && (Math.abs(y) > BIG || Math.abs(lastY) > BIG) && Math.abs(y - lastY) > BIG;
-      const nanCross = (!Number.isFinite(y) && Number.isFinite(lastY) && Math.abs(lastY) > 5) ||
-                       (!Number.isFinite(lastY) && Number.isFinite(y) && Math.abs(y) > 5);
-      if (finJump || nanCross) {
-        // Refine: scan more finely between lastX and x.
-        const cand = refineVA(fn, lastX, x);
-        if (cand !== null) {
-          if (!out.some(a => Math.abs(a.x - cand) < step * 0.5)) {
-            out.push({ x: cand, ...probeOneSided(fn, cand) });
-          }
-        }
-      }
+    const y = f(x);
+    const finY = Number.isFinite(y), finL = Number.isFinite(lastY);
+    if (finY && finL) {
+      if (y * lastY < 0) add(bisectSignChange(f, lastX, x, lastY));
+      else if ((Math.abs(y) > BIG || Math.abs(lastY) > BIG) && Math.abs(y - lastY) > BIG) add(refineVA(f, lastX, x));
+    } else if (finY !== finL) {
+      add(bisectDomainEdge(f, lastX, x, finL));
     }
     lastY = y; lastX = x;
   }
   return out;
 }
 
-function refineVA(fn, x1, x2) {
-  // Find the x in [x1, x2] where |f(x)| is largest (proxy for the asymptote).
-  let bestX = (x1 + x2) / 2, bestMag = -Infinity;
-  const N = 40;
-  for (let i = 0; i <= N; i++) {
-    const x = x1 + (i / N) * (x2 - x1);
-    let y;
-    try { y = fn(x); } catch { y = NaN; }
-    const mag = Number.isFinite(y) ? Math.abs(y) : 1e308;
-    if (mag > bestMag) { bestMag = mag; bestX = x; }
+function bisectSignChange(f, x1, x2, y1) {
+  // Narrow a sign change down to a point: either a root or a pole.
+  for (let i = 0; i < 60; i++) {
+    const m = (x1 + x2) / 2;
+    const ym = f(m);
+    if (!Number.isFinite(ym)) return m;
+    if (ym * y1 > 0) { x1 = m; y1 = ym; } else x2 = m;
   }
-  // Snap to a clean nearby value if close (cosmetic)
-  for (const r of [0, 0.5, 1, -1, 2, -2, Math.PI / 2]) {
-    if (Math.abs(bestX - r) < 0.02) return r;
-  }
-  return Math.round(bestX * 1000) / 1000;
+  return (x1 + x2) / 2;
 }
 
-function probeOneSided(fn, c) {
-  const eps = [1e-6, 1e-5, 1e-4];
+function bisectDomainEdge(f, x1, x2, leftIsFinite) {
+  // Narrow the boundary between defined and undefined values down to a point.
+  for (let i = 0; i < 60; i++) {
+    const m = (x1 + x2) / 2;
+    if (Number.isFinite(f(m)) === leftIsFinite) x1 = m; else x2 = m;
+  }
+  return leftIsFinite ? x1 : x2;
+}
+
+function refineVA(f, x1, x2) {
+  // Narrow down to the x in [x1, x2] where |f(x)| is largest (a same-sign spike).
+  const mag = x => { const y = f(x); return Number.isFinite(y) ? Math.abs(y) : Infinity; };
+  for (let i = 0; i < 80; i++) {
+    const m1 = x1 + (x2 - x1) / 3, m2 = x2 - (x2 - x1) / 3;
+    if (mag(m1) < mag(m2)) x1 = m1; else x2 = m2;
+  }
+  return (x1 + x2) / 2;
+}
+
+function probeOneSided(f, c) {
+  // Walk towards c from one side. The side is unbounded if |f| keeps growing
+  // by steps that do not shrink (1/x grows faster each step, ln by equal steps;
+  // a steep but finite curve such as e^(3x) grows by shrinking steps).
+  const eps = [1e-3, 1e-5, 1e-7, 1e-9];
   const sampleSide = (sign) => {
-    for (const e of eps) {
-      let y;
-      try { y = fn(c + sign * e); } catch { return null; }
-      if (Number.isFinite(y) && Math.abs(y) > 1e4) return y > 0 ? '+∞' : '−∞';
-      if (!Number.isFinite(y)) continue;
-    }
+    const ys = eps.map(e => f(c + sign * e));
+    if (!ys.every(Number.isFinite)) return null;
+    const last = ys[ys.length - 1];
+    const mags = ys.map(Math.abs);
+    const d = mags.slice(1).map((m, i) => m - mags[i]);
+    const growing = d.every(v => v > 0) && d[d.length - 1] >= 0.5 * d[0];
+    const sameSign = ys.every(y => Math.sign(y) === Math.sign(last));
+    if (growing && sameSign && Math.abs(last) > 5) return last > 0 ? '+∞' : '−∞';
     return null;
   };
   return {
@@ -332,7 +361,7 @@ function findHorizontalAsymptotes(fn) {
   const sides = [];
 
   const checkSide = (sign) => {
-    const probes = [100, 1000, 10000, 100000].map(v => sign * v);
+    const probes = [1e5, 1e6, 1e7, 1e8].map(v => sign * v);
     const ys = [];
     for (const x of probes) {
       let y;
@@ -345,7 +374,7 @@ function findHorizontalAsymptotes(fn) {
     for (let i = 1; i < ys.length; i++) {
       if (Math.abs(ys[i] - ys[i - 1]) > tol) return null;
     }
-    return ys[ys.length - 1];
+    return Math.round(ys[ys.length - 1] * 1e6) / 1e6 + 0;
   };
 
   const yPos = checkSide(+1);
@@ -375,17 +404,23 @@ function findObliqueAsymptotes(fn, hasInfos) {
   const out = [];
 
   const checkSide = (sign) => {
-    const x1 = sign * 1e4, x2 = sign * 1e5;
-    let y1, y2;
-    try { y1 = fn(x1); y2 = fn(x2); } catch { return null; }
-    if (!Number.isFinite(y1) || !Number.isFinite(y2)) return null;
-    const m1 = y1 / x1, m2 = y2 / x2;
-    if (Math.abs(m1) < 1e-4) return null;       // m ≈ 0 → would be HA, not oblique
-    if (Math.abs(m1 - m2) > 1e-3) return null;  // m not converging
-    if (!Number.isFinite(m1)) return null;
-    const b1 = y1 - m1 * x1, b2 = y2 - m1 * x2;
-    if (Math.abs(b1 - b2) > 1e-3) return null;
-    return { m: Math.round(m1 * 1000) / 1000, b: Math.round(b1 * 1000) / 1000 };
+    const xs = [1e5, 1e6, 1e7].map(v => sign * v);
+    const ys = [];
+    for (const x of xs) {
+      let y;
+      try { y = fn(x); } catch { return null; }
+      if (!Number.isFinite(y)) return null;
+      ys.push(y);
+    }
+    // Slope from differences, so an offset b does not leak into m
+    const mA = (ys[1] - ys[0]) / (xs[1] - xs[0]);
+    const m = (ys[2] - ys[1]) / (xs[2] - xs[1]);
+    if (!Number.isFinite(m)) return null;
+    if (Math.abs(m) < 1e-4) return null;        // m ≈ 0 → would be HA, not oblique
+    if (Math.abs(mA - m) > 1e-3) return null;   // m not converging
+    const b1 = ys[1] - m * xs[1], b2 = ys[2] - m * xs[2];
+    if (Math.abs(b1 - b2) > 1e-3) return null;  // b not converging
+    return { m: Math.round(m * 1000) / 1000, b: Math.round(b2 * 1000) / 1000 + 0 };
   };
 
   const haRight = hasInfos.some(h => h.side === 'right' || h.side === 'both');

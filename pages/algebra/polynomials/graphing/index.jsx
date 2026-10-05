@@ -12,6 +12,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 
@@ -581,6 +582,23 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpTurns = { kind: 'pieces', svgTitle: 'x^3 has no turning points; x^3 - 3x has two', xRange: [-2.5, 2.5], yRange: [-4, 4],
+    pieces: [
+      { fn: (x) => x ** 3, from: -2.5, to: 2.5, ends: [null, null], color: 'g' },
+      { fn: (x) => x ** 3 - 3 * x, from: -2.5, to: 2.5, ends: [null, null], color: 'f' },
+    ],
+    points: [{ x: -1, y: 2, label: '(−1, 2)', pos: 'n' }, { x: 1, y: -2, label: '(1, −2)', pos: 's' }],
+    notes: [{ x: -2.4, y: 3.4, text: 'x³ − 3x: two turning points', pos: 'e', color: 'f' }, { x: 0.3, y: -3.4, text: 'x³: no turning points', pos: 'e', color: 'g' }],
+    caption: 'Both are cubics: at most 2 turns, but x³ uses none' };
+  const fpHigherDegree = { kind: 'pieces', svgTitle: 'A quartic with 3 turns and a quintic with 4 turns', xRange: [-2.6, 2.6], yRange: [-6, 8],
+    pieces: [
+      { fn: (x) => x ** 4 - 5 * x * x + 4, from: -2.6, to: 2.6, ends: [null, null], color: 'f' },
+      { fn: (x) => x ** 5 - 5 * x ** 3 + 4 * x, from: -2.6, to: 2.6, ends: [null, null], color: 'r' },
+    ],
+    notes: [{ x: -1.9, y: 7.4, text: 'quartic x⁴ − 5x² + 4: 3 turns, both ends up', pos: 'e', color: 'f' },
+      { x: -1.9, y: 6.6, text: 'quintic x⁵ − 5x³ + 4x: 4 turns, ends opposite', pos: 'e', color: 'r' }],
+    caption: 'Even degree: ends agree; odd degree: ends disagree' };
+
   const demoUnits = {
     roots: demoUnitFrame({
       svg: inequalityVisualizerDiagrams['poly-double'],
@@ -602,6 +620,16 @@ const schemas = {
       text: 'The cubic falls on the left and rises on the right, its two turning points bracketing the dip, and the level y = 3 catches it once on the far right while a lower level would catch it three times. Odd degree means the ends go opposite ways and at least one crossing always exists. Raise and lower the level on the',
       href: '/algebra/visual-tools/equation',
       linkText: 'equation visual explorer',
+    }),
+    turns: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpTurns),
+      caption: 'The maximum is not always used',
+      text: 'The section\'s two cubics. x&#179; rises the whole way, flattening at the origin but never reversing: no turning points. x&#179; &#8722; 3x rises to a peak at (&#8722;1, 2), falls to a valley at (1, &#8722;2) and rises again: two turning points, the most a cubic can have.',
+    }),
+    higher: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpHigherDegree),
+      caption: 'Quartic and quintic side by side',
+      text: 'x&#8308; &#8722; 5x&#178; + 4 is a W with three turning points and four roots, both ends rising because the degree is even and the leading coefficient positive. x&#8309; &#8722; 5x&#179; + 4x has five roots and four turning points, and its ends point in opposite directions because the degree is odd.',
     }),
   };
 
@@ -681,6 +709,8 @@ export default function GraphingPage({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-turns'} dangerouslySetInnerHTML={{ __html: demoUnits.turns }} />,
+          `Degree n caps the number of turns at n − 1; it never forces them.`,
         ]
     },
     {
@@ -742,6 +772,8 @@ export default function GraphingPage({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <div key={'unit-higher'} dangerouslySetInnerHTML={{ __html: demoUnits.higher }} />,
+          `Counting roots, turns and end directions is enough to recognise the degree of a sketch.`,
         ]
     },
     {

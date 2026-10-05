@@ -9,6 +9,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -588,6 +590,34 @@ const schemas = {
 
 
 
+  const fpTwoToX = { kind: 'pieces', svgTitle: 'Powers of 2 with a variable exponent trace the curve y = 2^x', xRange: [-2, 3.5], yRange: [-1, 9],
+    pieces: [{ fn: (x) => 2 ** x, from: -2, to: 3.15, ends: [null, null], color: 'f' }],
+    points: [{ x: 3, y: 8, label: '2³ = 8', pos: 'w' }, { x: 2, y: 4, label: '2² = 4', pos: 'w' }, { x: 1, y: 2, label: '2¹ = 2', pos: 'nw' },
+      { x: 0, y: 1, label: '2⁰ = 1', pos: 'nw' }, { x: -1, y: 0.5, label: '2⁻¹ = 1/2', pos: 'nw' }, { x: 0.5, y: Math.SQRT2, label: '2^(1/2) = √2', pos: 'se' }],
+    caption: 'A fixed base with a variable exponent: the points join into one curve' };
+  const fpESlope = { kind: 'pieces', svgTitle: 'e^x has slope equal to its height: 1 at (0, 1), e at (1, e)', xRange: [-2, 2], yRange: [-1, 7],
+    pieces: [
+      { fn: (x) => x + 1, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[-2, 2]] },
+      { fn: (x) => Math.E * x, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[-0.37, 2]] },
+      { fn: (x) => Math.exp(x), from: -2, to: 2, ends: [null, null], color: 'f', label: { text: 'y = eˣ', x: 1.75, y: 5.75, pos: 'w' } },
+    ],
+    points: [{ x: 0, y: 1, label: 'height 1, slope 1', pos: 'nw' }, { x: 1, y: Math.E, label: 'height e, slope e', pos: 'nw' }],
+    notes: [{ x: -1.9, y: 6.4, text: 'dashed: tangent lines', pos: 'e', color: 'r' }],
+    caption: 'eˣ is the base whose slope equals its height at every point' };
+
+  const demoUnits = {
+    twoToX: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpTwoToX),
+      caption: 'From single powers to a function',
+      text: 'The section\'s values 2&#8315;&#185; = 1/2, 2&#8304; = 1, 2&#185; = 2, 2&#178; = 4, 2&#179; = 8 and 2^(1/2) = &#8730;2, plotted as points. With the base locked at 2 and the exponent free, they are no longer separate computations but points of one smooth curve, y = 2&#739;, defined for every real exponent.',
+    }),
+    eSlope: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpESlope),
+      caption: 'The property that singles out e',
+      text: 'The curve y = e&#739; with its tangent lines at two points (dashed). At (0, 1) the height is 1 and the tangent has slope 1; at (1, e) the height is e &#8776; 2.718 and the tangent has slope e. At every point the steepness of e&#739; equals its value, which no other base achieves.',
+    }),
+  };
+
 return {
   props:{
     sectionsContent,
@@ -598,6 +628,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Exponential Functions: Growth, Decay & Euler's e | Learn Math Class",
       description: "Understand exponential functions f(x) = aˣ: growth vs decay, domain and range, horizontal asymptotes, comparison with polynomials, and Euler's number e.",
@@ -610,7 +641,7 @@ return {
    }
 
 // export default function ExponentialFunctionsPage({seoData,sectionsContent , introContent}) {
-export default function ExponentialFunctionsPage({seoData, sectionsContent, introContent, obj2Table, obj3Table, obj4Table, summaryTable, faqQuestions, schemas}) {
+export default function ExponentialFunctionsPage({seoData, sectionsContent, introContent, obj2Table, obj3Table, obj4Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -629,6 +660,8 @@ export default function ExponentialFunctionsPage({seoData, sectionsContent, intr
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-twoToX'} dangerouslySetInnerHTML={{ __html: demoUnits.twoToX }} />,
+          `Every positive base a gives its own such curve through (0, 1).`,
         ]
     },
     {
@@ -701,6 +734,8 @@ export default function ExponentialFunctionsPage({seoData, sectionsContent, intr
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-eSlope'} dangerouslySetInnerHTML={{ __html: demoUnits.eSlope }} />,
+          `This is why e appears wherever growth is proportional to the current amount.`,
         ]
     },
     {

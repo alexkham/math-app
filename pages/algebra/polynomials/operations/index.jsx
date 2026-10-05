@@ -11,6 +11,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import polynomialMultiplicationDiagrams from '@/app/components/algebra/visualizers/polynomials/polynomialMultiplicationDiagrams'
+import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 
@@ -721,6 +723,22 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpCancelDegree = {
+    kind: 'sum', svgTitle: '(2x^3 + x) + (-2x^3 + 5x^2) = 5x^2 + x: the cubic terms cancel', f: (x) => 2 * x ** 3 + x, g: (x) => -2 * x ** 3 + 5 * x * x, x0: 1,
+    xRange: [-1.5, 2], yRange: [-10, 22], yStep: 4,
+    fLabel: { text: '2x³ + x', x: 1.55 }, gLabel: { text: '−2x³ + 5x²', x: -1.45 }, sumLabel: { text: 'sum: 5x² + x', x: 1.75, y: 21 },
+    caption: 'Two cubics add up to a quadratic: the x³ terms cancel',
+  };
+  const fpRemainder = { kind: 'pieces', svgTitle: 'x^3 - 2x^2 + 5x - 3 = (x - 1)(x^2 - x + 4) + 1', xRange: [-1, 3], yRange: [-8, 14],
+    pieces: [
+      { fn: (x) => (x - 1) * (x * x - x + 4), from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-1, 3]] },
+      { fn: (x) => x ** 3 - 2 * x * x + 5 * x - 3, from: -1, to: 3, ends: [null, null], color: 'f', label: { text: 'P(x)', x: 2.3, y: 10.2, pos: 'w' } },
+    ],
+    points: [{ x: 1, y: 1, label: 'P(1) = 1: the remainder', pos: 'nw' }],
+    notes: [{ x: -0.9, y: 12, text: 'x³ − 2x² + 5x − 3 = (x − 1)(x² − x + 4) + 1', pos: 'e' },
+      { x: 1.3, y: -4, text: 'dashed: (x − 1)(x² − x + 4)', pos: 'e', color: 'g' }],
+    caption: 'Dividend = divisor × quotient + remainder: the gap is 1 everywhere' };
+
   const demoUnits = {
     multiply: demoUnitFrame({
       svg: polynomialMultiplicationDiagrams['ps-3x2'],
@@ -742,6 +760,16 @@ const schemas = {
       text: 'The mnemonic names the four cells of a 2 &#215; 2 grid in a fixed order: First is the top-left x&#178;, Outer and Inner are the two x-cells that combine to 5x, Last is the constant 6. FOIL is the grid method for binomials, and it does not extend to longer factors, while the grid does. Compare FOIL with a 3 &#215; 2 grid on the',
       href: '/algebra/visual-tools/polynomial-multiplication',
       linkText: 'polynomial multiplication visualizer',
+    }),
+    remainder: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRemainder),
+      caption: 'The remainder on the graph',
+      text: 'The section\'s division of x&#179; &#8722; 2x&#178; + 5x &#8722; 3 by x &#8722; 1 gives quotient x&#178; &#8722; x + 4 and remainder 1. The dashed curve is divisor times quotient, (x &#8722; 1)(x&#178; &#8722; x + 4); the solid curve is the dividend. They differ by exactly 1 at every x, and at x = 1, where the divisor is zero, the dividend\'s value P(1) = 1 is the remainder itself.',
+    }),
+    cancel: demoUnitFrame({
+      svg: renderFunctionPlot(fpCancelDegree),
+      caption: 'When leading terms cancel',
+      text: 'The section\'s 2x&#179; + x and &#8722;2x&#179; + 5x&#178; are both cubics, but their sum is 5x&#178; + x, a parabola: the leading terms 2x&#179; and &#8722;2x&#179; cancel. At x = 1 the bars show the sum point by point, 3 + 3 = 6. This is why the degree of a sum is only at most the larger degree.',
     }),
   };
 
@@ -841,6 +869,8 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-remainder'} dangerouslySetInnerHTML={{ __html: demoUnits.remainder }} />,
+          `The remainder theorem is this picture: dividing by x − c leaves P(c).`,
         ]
     },
 
@@ -864,6 +894,8 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-cancel'} dangerouslySetInnerHTML={{ __html: demoUnits.cancel }} />,
+          `Products never lose degree this way: the leading terms multiply and cannot cancel.`,
         ]
     },
 

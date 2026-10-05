@@ -9,6 +9,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -448,6 +450,23 @@ const schemas = {
 
 
 
+  const fpSqueezePi = { kind: 'pieces', svgTitle: '2^x near x = pi: rational brackets squeeze 2^pi to about 8.825', xRange: [3, 3.3], yRange: [8, 10],
+    pieces: [{ fn: (x) => 2 ** x, from: 3, to: 3.3, ends: [null, null], color: 'f', label: { text: 'y = 2ˣ', x: 3.28, y: 2 ** 3.28, pos: 'w' } }],
+    points: [{ x: 3.1, y: 2 ** 3.1, label: '2^3.1 ≈ 8.574', pos: 'se' }, { x: Math.PI, y: 2 ** Math.PI, label: '2^π ≈ 8.825', pos: 'se' },
+      { x: 3.2, y: 2 ** 3.2, label: '2^3.2 ≈ 9.190', pos: 'se' }],
+    notes: [{ x: 3.003, y: 9.85, text: '3 < π < 4 gives 8 < 2^π < 16', pos: 'e' },
+      { x: 3.003, y: 9.7, text: '3.1 < π < 3.2 gives 8.574 < 2^π < 9.190', pos: 'e' },
+      { x: 3.003, y: 9.55, text: '3.14 < π < 3.15 gives 8.815 < 2^π < 8.876', pos: 'e', color: 'r' }],
+    caption: 'Rational brackets around π squeeze 2ˣ to one value, 2^π ≈ 8.825' };
+
+  const demoUnits = {
+    squeeze: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpSqueezePi),
+      caption: 'Filling in the point at x = &#960;',
+      text: 'A close-up of y = 2&#739; between x = 3 and x = 3.3. The rational exponents 3.1 and 3.2 lie on either side of &#960;, so 2^&#960; sits between 2^3.1 &#8776; 8.574 and 2^3.2 &#8776; 9.190; tighter brackets, 3.14 and 3.15, pin it between 8.815 and 8.876. Because the curve through the rational points has no gaps or jumps, the brackets close in on exactly one height, 2^&#960; &#8776; 8.825.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -456,6 +475,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Irrational Exponents: Defining 2^π & Real Powers | Learn Math Class",
       description: "Understand irrational exponents: how 2^π is defined through rational approximation and continuous extension. Learn why a > 0 is required for real exponents.",
@@ -470,7 +490,7 @@ return {
 // export default function IrrationalExponentsPage({seoData,sectionsContent , introContent}) {
 
 
-export default function IrrationalExponentsPage({seoData, sectionsContent, introContent, obj2Table, summaryTable, faqQuestions, schemas}) {
+export default function IrrationalExponentsPage({seoData, sectionsContent, introContent, obj2Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -512,6 +532,8 @@ export default function IrrationalExponentsPage({seoData, sectionsContent, intro
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-squeeze'} dangerouslySetInnerHTML={{ __html: demoUnits.squeeze }} />,
+          `Every irrational exponent is filled in the same way, so 2ˣ is defined for every real x.`,
         ]
     },
     {

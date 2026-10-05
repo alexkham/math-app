@@ -674,6 +674,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -1146,6 +1147,13 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpPowerPattern = { kind: 'pieces', svgTitle: 'Powers of 3 from 3^3 down to 3^-2: each step left divides by 3', xRange: [-2.5, 3.5], yRange: [-2, 28], yStep: 4,
+    pieces: [{ fn: (x) => 3 ** x, from: -2.5, to: 3.1, ends: [null, null], color: 'f' }],
+    points: [{ x: 3, y: 27, label: '3³ = 27', pos: 'w' }, { x: 2, y: 9, label: '3² = 9', pos: 'w' }, { x: 1, y: 3, label: '3¹ = 3', pos: 'nw' },
+      { x: 0, y: 1, label: '3⁰ = 1', pos: 'nw' }, { x: -1, y: 1 / 3, label: '3⁻¹ = 1/3', pos: 'nw' }, { x: -2, y: 1 / 9, label: '3⁻² = 1/9', pos: 'nw' }],
+    notes: [{ x: -2.3, y: 22, text: 'each step to the left divides by 3', pos: 'e', color: 'r' }],
+    caption: '3⁰ = 1 and 3⁻ⁿ = 1/3ⁿ continue the same divide-by-3 pattern' };
+
   const demoUnits = {
     natural: demoUnitFrame({
       svg: powersTableDiagrams['b2-default'],
@@ -1153,6 +1161,11 @@ const schemas = {
       text: 'Each row multiplies the previous one by the base: 2, 4, 8, 16, &#8230;, and the expression column writes the repeated factors out, 2 &#215; 2 &#215; 2 for 2&#179;. The exponent counts the factors, which is the natural-exponent definition made into a table. Change the base and watch the column grow on the',
       href: '/algebra/visual-tools/powers-table',
       linkText: 'powers table',
+    }),
+    pattern: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpPowerPattern),
+      caption: 'The pattern that forces a&#8304; = 1',
+      text: 'The section\'s powers of 3 as points on y = 3&#739;. Moving one step left always divides by 3: 27, 9, 3. One more step gives 3 &#247; 3 = 1, so 3&#8304; must be 1; continuing gives 1/3 and 1/9, which is exactly 3&#8315;&#185; and 3&#8315;&#178;. The curve never reaches 0, because dividing a positive number by 3 never gives 0.',
     }),
   };
 
@@ -1222,6 +1235,8 @@ const schemas = {
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-pattern'} dangerouslySetInnerHTML={{ __html: demoUnits.pattern }} />,
+          `The same pattern, continued below zero, is the definition of negative exponents in the next section.`,
         ]
     },
     {

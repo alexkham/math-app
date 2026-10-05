@@ -6,13 +6,11 @@ import { TOKENS, UI_TEXT } from './searchConfig';
 import { SparkIcon } from './searchIcons';
 
 /**
- * FloatingAskButton: the fixed "Ask Learn Math" pill, bottom right,
+ * FloatingAskButton: the fixed "Ask AI" pill, bottom right,
  * stacked above ScrollUpButton (right 20px, bottom 20px, 50 x 50).
  *
- * mode 'search'    (default) opens the search palette.
- * mode 'assistant' reserved for the future AI assistant. Nothing is built for it yet:
- *                  today it behaves exactly like 'search'. When the assistant exists,
- *                  branch on `mode` inside handleClick and leave the search path alone.
+ * mode 'search'    (default) opens the palette in Search mode.
+ * mode 'assistant' opens the palette in Ask AI mode (pages/_app.js and app/layout.js use this since 2026-10-05).
  *
  * The pill stays mounted while the palette is open (only hidden), so focus can
  * return to it when the palette closes.
@@ -36,11 +34,11 @@ export default function FloatingAskButton({
   bottom = '84px',
   zIndex = 99990,
 }) {
-  const { isOpen, openSearch } = useSiteSearch();
+  const { isOpen, openSearch, openAssistant } = useSiteSearch();
 
   const handleClick = () => {
-    // Future: if (mode === 'assistant') open the assistant instead.
-    openSearch('');
+    if (mode === 'assistant') openAssistant('', 'pill');
+    else openSearch('');
   };
 
   return (

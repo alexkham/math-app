@@ -8,6 +8,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -591,6 +593,23 @@ const schemas = {
 
 
 
+  const fpMatchBases = { kind: 'pieces', svgTitle: '2^x = 8 has exactly one solution, x = 3', xRange: [-2, 4.5], yRange: [-2, 14], yStep: 2,
+    pieces: [
+      { fn: (x) => 2 ** x, from: -2, to: 3.8, ends: [null, null], color: 'f', label: { text: 'y = 2ˣ', x: 3.6, y: 2 ** 3.6, pos: 'w' } },
+      { fn: () => 8, from: -2, to: 4.5, ends: [null, null], color: 'g', label: { text: 'y = 8 = 2³', x: -0.8, y: 8, pos: 'n' } },
+    ],
+    points: [{ x: 3, y: 8, label: 'x = 3', pos: 'se' }],
+    notes: [{ x: -1.9, y: 12.4, text: '2ˣ only rises, so it meets each level once', pos: 'e', color: 'r' }],
+    caption: '2ˣ = 2³ forces x = 3: equal powers of one base have equal exponents' };
+
+  const demoUnits = {
+    matchBases: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpMatchBases),
+      caption: 'Why matching bases works',
+      text: 'The section\'s 2&#739; = 8. Writing 8 as 2&#179; makes both sides powers of 2. The graph of y = 2&#739; only ever rises, so it meets the level y = 8 exactly once, at x = 3: no other exponent can give the same power of 2. That one-to-one behaviour is what licenses equating the exponents.',
+    }),
+  };
+
 return {
   props:{
     sectionsContent,
@@ -602,6 +621,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Exponential Equations: Solve for the Exponent | Learn Math Class",
       description: "Learn to solve exponential equations: matching bases, using exponent laws, substitution for quadratic forms, rational and negative exponent cases, and checking for extraneous solutions.",
@@ -614,7 +634,7 @@ return {
    }
 
 // export default function ExponentialEquationsPage({seoData,sectionsContent , introContent}) {
-export default function ExponentialEquationsPage({seoData, sectionsContent, introContent, obj4Table, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas}) {
+export default function ExponentialEquationsPage({seoData, sectionsContent, introContent, obj4Table, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -672,6 +692,8 @@ export default function ExponentialEquationsPage({seoData, sectionsContent, intr
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-matchBases'} dangerouslySetInnerHTML={{ __html: demoUnits.matchBases }} />,
+          `With base 1 every exponent gives 1, which is why the method needs a ≠ 1.`,
         ]
     },
     {

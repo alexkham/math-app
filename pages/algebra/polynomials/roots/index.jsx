@@ -12,6 +12,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 
@@ -621,6 +622,20 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpRootCheck = { kind: 'pieces', svgTitle: 'x^2 - 5x + 6: zero at x = 2 and x = 3, equal to 2 at x = 1', xRange: [-0.5, 5], yRange: [-1, 6],
+    pieces: [{ fn: (x) => x * x - 5 * x + 6, from: -0.5, to: 5, ends: [null, null], color: 'f', label: { text: 'P(x) = x² − 5x + 6', x: 4.6, y: 4.16, pos: 'w' } }],
+    points: [{ x: 2, y: 0, label: 'P(2) = 0', pos: 'sw' }, { x: 3, y: 0, label: 'P(3) = 0', pos: 'se' }, { x: 1, y: 2, label: 'P(1) = 2: not a root', pos: 'e' }],
+    caption: 'A root is an input where the polynomial is exactly 0' };
+  const fpQuotientRoots = { kind: 'pieces', svgTitle: 'x^3 - 6x^2 + 11x - 6 divided by x - 2 leaves x^2 - 4x + 3, with roots 1 and 3', xRange: [0, 4], yRange: [-2, 4],
+    pieces: [
+      { fn: (x) => x * x - 4 * x + 3, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0, 4]] },
+      { fn: (x) => x ** 3 - 6 * x * x + 11 * x - 6, from: 0, to: 4, ends: [null, null], color: 'f' },
+    ],
+    points: [{ x: 1, y: 0 }, { x: 2, y: 0 }, { x: 3, y: 0 }],
+    notes: [{ x: 0.3, y: 3.6, text: 'P(x) = x³ − 6x² + 11x − 6', pos: 'e', color: 'f' },
+      { x: 0.3, y: 3.0, text: 'dashed: quotient x² − 4x + 3 after dividing by x − 2', pos: 'e', color: 'g' }],
+    caption: 'Dividing out x − 2 leaves a quotient with the other roots, 1 and 3' };
+
   const demoUnits = {
     factors: demoUnitFrame({
       svg: equationVisualizerDiagrams['cubic-three'],
@@ -642,6 +657,16 @@ const schemas = {
       text: 'The parabola crosses the axis at &#8722;2 and 2, the two real roots; complex roots, which the graph cannot show, would appear as a parabola that never reaches the axis. Every real root is an intercept and every intercept a real root. Move the parabola off the axis and watch the intercepts vanish on the',
       href: '/algebra/visual-tools/equation',
       linkText: 'equation visual explorer',
+    }),
+    rootCheck: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRootCheck),
+      caption: 'Testing inputs by substitution',
+      text: 'The section\'s P(x) = x&#178; &#8722; 5x + 6. Substituting 2 or 3 gives exactly 0, so the graph touches the axis at both: they are roots. Substituting 1 gives 2, a point above the axis, so 1 is not a root. Every root is an x-intercept, and every x-intercept is a root.',
+    }),
+    quotient: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpQuotientRoots),
+      caption: 'The quotient keeps the remaining roots',
+      text: 'The section\'s x&#179; &#8722; 6x&#178; + 11x &#8722; 6. Synthetic division by x &#8722; 2 leaves remainder 0, so 2 is a root, and quotient x&#178; &#8722; 4x + 3 (dashed). The dashed parabola crosses the axis exactly at 1 and 3, the cubic\'s other two roots: dividing out a root removes it and leaves the rest untouched.',
     }),
   };
 
@@ -688,6 +713,8 @@ export default function RootsPage({seoData, sectionsContent, introContent, obj4T
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-rootCheck'} dangerouslySetInnerHTML={{ __html: demoUnits.rootCheck }} />,
+          `Substitution can confirm a claimed root but cannot find one on its own.`,
         ]
     },
     {
@@ -781,6 +808,8 @@ export default function RootsPage({seoData, sectionsContent, introContent, obj4T
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-quotient'} dangerouslySetInnerHTML={{ __html: demoUnits.quotient }} />,
+          `Each successful division lowers the degree by one, until a quadratic finishes the job.`,
         ]
     },
     {
