@@ -11,6 +11,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -647,6 +648,23 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpZeroNeg = { kind: 'pieces', svgTitle: 'a^-2 = 1/a^2 grows without bound as a approaches 0', xRange: [-3, 3], yRange: [-1, 12], xLetter: 'a',
+    pieces: [
+      { fn: (x) => 1 / (x * x), from: -3, to: -0.28, ends: [null, null], color: 'f' },
+      { fn: (x) => 1 / (x * x), from: 0.28, to: 3, ends: [null, null], color: 'f' },
+    ],
+    points: [{ x: 0.5, y: 4, label: '0.5⁻² = 4', pos: 'e' }, { x: 1, y: 1, label: '1⁻² = 1', pos: 'e' }],
+    notes: [{ x: 0.6, y: 10.5, text: 'a → 0: 1/a² grows without bound', pos: 'e', color: 'r' }, { x: -2.9, y: 6, text: '0⁻² = 1/0: undefined', pos: 'e', color: 'r' }],
+    caption: 'Negative powers of a shrinking base blow up: 0⁻ⁿ has no value' };
+  const fpZeroZero = { kind: 'pieces', svgTitle: 'The patterns 0^t = 0 and t^0 = 1 disagree at t = 0', xRange: [-2, 2], yRange: [-1, 2], xLetter: 't',
+    pieces: [
+      { fn: () => 0, from: 0, to: 2, ends: ['open', null], color: 'f', label: { text: '0ᵗ = 0 (t > 0)', x: 1.2, y: 0, pos: 'n' } },
+      { fn: () => 1, from: -2, to: 0, ends: [null, 'open'], color: 'g', label: { text: 't⁰ = 1 (t ≠ 0)', x: -1, y: 1, pos: 'n' } },
+      { fn: () => 1, from: 0, to: 2, ends: ['open', null], color: 'g' },
+    ],
+    notes: [{ x: -1.9, y: 1.7, text: 'at t = 0 the patterns disagree: 0⁰ = 0 or 1?', pos: 'e', color: 'r' }],
+    caption: '0⁰ sits where 0ᵗ = 0 and t⁰ = 1 meet: no single value fits both' };
+
   const demoUnits = {
     zero: demoUnitFrame({
       svg: powersTableDiagrams['b5-cap'],
@@ -654,6 +672,16 @@ const schemas = {
       text: 'Reading the table upward, each row is the one below it divided by 5: 125, 25, 5, and then 1, which is why 5&#8304; must be 1 and not 0. The zero row is forced by the pattern, exactly as the quotient-rule argument says. Try any base and watch the top row read 1 on the',
       href: '/algebra/visual-tools/powers-table',
       linkText: 'powers table',
+    }),
+    zeroNeg: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpZeroNeg),
+      caption: 'Why 0 cannot take a negative power',
+      text: 'The graph of a&#8315;&#178; = 1/a&#178;. At a = 1 it is 1, at a = 0.5 it is already 4, and as a closes in on 0 the curve shoots upward without limit, on both sides. At a = 0 itself the formula asks for 1/0, so there is no point on the graph there: 0 raised to any negative power is undefined.',
+    }),
+    zeroZero: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpZeroZero),
+      caption: 'Two patterns that meet at 0⁰',
+      text: 'Two lines over the same axis. Holding the base at 0 and shrinking a positive exponent t gives 0&#7511; = 0 every time; holding the exponent at 0 and shrinking the base t gives t&#8304; = 1 every time. Both patterns head for 0&#8304; at t = 0, one at height 0 and one at height 1 (the open circles), so neither can settle its value by itself.',
     }),
   };
 
@@ -707,6 +735,8 @@ export default function ZeroPowersPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-zeroNeg'} dangerouslySetInnerHTML={{ __html: demoUnits.zeroNeg }} />,
+          `From here on, every exponent law that involves negative powers carries the condition a ≠ 0.`,
         ]
     },
 
@@ -732,6 +762,8 @@ export default function ZeroPowersPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-zeroZero'} dangerouslySetInnerHTML={{ __html: demoUnits.zeroZero }} />,
+          `Which value 0⁰ takes therefore depends on the field, as the next two sections show.`,
         ]
     },
     {
