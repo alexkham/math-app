@@ -14,6 +14,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagrams'
 
 
@@ -600,6 +601,17 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const inPx = (x) => x / 3 * 388;
+  const fpConstCancels = { kind: 'pieces', svgTitle: 'x^2 and x^2 + 2 rise by the same 3 from x = 1 to x = 2: the constant cancels in F(b) - F(a)', xRange: [0, 3], yRange: [-1, 9],
+    pieces: [
+      { fn: (x) => x * x + 2, from: 0, to: 2.6, ends: [null, null], color: 'g', label: { text: 'x² + 2', x: 0.35, y: 2.12, pos: 'n' } },
+      { fn: (x) => x * x, from: 0, to: 2.9, ends: [null, null], color: 'f', label: { text: 'x²', x: 2.6, y: 6.76, pos: 'se' } },
+    ],
+    vlines: [{ x: 1, label: 'a = 1' }, { x: 2, label: 'b = 2' }],
+    yBars: [{ from: 1, to: 4, color: 'f', dx: inPx(2) + 10 }, { from: 3, to: 6, color: 'g', dx: inPx(2) - 10 }],
+    points: [{ x: 1, y: 1 }, { x: 2, y: 4 }, { x: 1, y: 3 }, { x: 2, y: 6 }],
+    notes: [{ x: 2.12, y: 2.4, text: '4 − 1 = 3', pos: 'e', color: 'f' }, { x: 1.45, y: 6.6, text: '6 − 3 = 3', pos: 'e', color: 'g' }],
+    caption: 'Any antiderivative gives the same F(b) − F(a): the + C cancels' };
   const demoUnits = {
     anti: demoUnitFrame({
       svg: functionFTCDiagrams.quadratic,
@@ -607,6 +619,11 @@ const schemas = {
       text: 'The lower curve is f(t) = t&#178; and the upper one is the area accumulated under it from 0; the slope of the upper curve at any x equals the height of the lower one there, which is what F&#8242; = f means. Start the accumulation from a different a and the upper curve shifts by a constant: the + C of the indefinite integral. Change the starting point and watch the whole antiderivative slide on the',
       href: '/calculus/visual-tools/fundamental-theorem',
       linkText: 'fundamental theorem of calculus visualizer',
+    }),
+    constCancels: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpConstCancels),
+      caption: 'Why the + C drops out of a definite integral',
+      text: 'x&#178; and x&#178; + 2 are two antiderivatives of 2x, one sitting 2 units above the other. Between a = 1 and b = 2 the lower curve rises from 1 to 4 and the upper from 3 to 6: the same rise of 3 (the two columns). Shifting a curve up moves both endpoints by the same amount, so F(b) &#8722; F(a) is the same for every member of the family and equals &#8747;&#8321;&#178; 2x dx = 3.',
     }),
   };
 
@@ -704,6 +721,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-constCancels'} dangerouslySetInnerHTML={{ __html: demoUnits.constCancels }} />,
+          `That is why a definite integral needs no + C, while an indefinite one does.`,
         ]
     },
     {

@@ -61,7 +61,9 @@ const STEPS = [
 /* ---------- helpers ---------- */
 const ease       = (t) => t * t * (3 - 2 * t);
 const lerp       = (a, b, t) => a + (b - a) * t;
-const fmt        = (n, d = 2) => (Math.abs(n) < 1e-9 ? '0.00' : n.toFixed(d));
+const fmt        = (n, d = 2) => (Math.abs(n) < 1e-9 ? (0).toFixed(d) : n.toFixed(d));
+// "− 0.5" / "+ 0.5": fold a value's sign into the operator before it (no "x − -0.50").
+const minusTerm  = (n, d = 2) => (n < 0 && Math.abs(n) >= 1e-9 ? '+ ' : '\u2212 ') + fmt(Math.abs(n), d);
 const fmtSigned  = (n) => (n >= 0 ? fmt(n) : '(' + fmt(n) + ')');
 const clampX     = (x) => Math.max(X_MIN + 0.05, Math.min(X_MAX - 0.05, x));
 
@@ -657,7 +659,10 @@ export default function FunctionTangentLine({ explanations } = {}) {
     const getMouse = (e) => {
       const r = cv.getBoundingClientRect();
       const t = (e.touches && e.touches[0]) || e;
-      return { x: t.clientX - r.left, y: t.clientY - r.top };
+      // screen px -> canvas css px: the page or a demo may scale the tool (transform: scale)
+      const sx = r.width ? cv.clientWidth / r.width : 1;
+      const sy = r.height ? cv.clientHeight / r.height : 1;
+      return { x: (t.clientX - r.left) * sx, y: (t.clientY - r.top) * sy };
     };
     const onDragMove = (m) => {
       const s = sceneRef.current;
@@ -893,7 +898,7 @@ export default function FunctionTangentLine({ explanations } = {}) {
                   <Formula label="tangent line equation">
                     <div style={{ margin: '2px 0' }}>y − f(c) = f&prime;(c) (x − c)</div>
                     <div style={{ margin: '2px 0' }}>
-                      y − <span style={resStyle}>{fmt(yc, 3)}</span> = <span style={resStyle}>{fmt(m, 3)}</span> (x − <span style={resStyle}>{fmt(c)}</span>)
+                      y <span style={resStyle}>{minusTerm(yc, 3)}</span> = <span style={resStyle}>{fmt(m, 3)}</span> (x <span style={resStyle}>{minusTerm(c)}</span>)
                     </div>
                     <div style={{ marginTop: 6 }}>
                       y = <span style={resStyle}>{fmt(m, 3) + ' x ' + (b >= 0 ? '+ ' : '− ') + fmt(Math.abs(b), 3)}</span>

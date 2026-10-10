@@ -51,13 +51,13 @@ import InfoPanel from '../InfoPanel';
 
 const conceptsContent =
   '## What is a derivative?\n\n' +
-  'The **derivative** of $f$ at a point measures the *instantaneous rate of change* — how fast the output changes when the input changes a tiny bit. Geometrically it&apos;s the slope of the line that just barely touches the curve at that point (the **tangent line**).\n\n' +
+  'The **derivative** of $f$ at a point measures the instantaneous rate of change — how fast the output changes when the input changes a tiny bit. Geometrically it&apos;s the slope of the line that just barely touches the curve at that point (the **tangent line**).\n\n' +
   '### Two ways to see it\n\n' +
   '- **On the graph of f** — pick a point, draw the tangent. The tangent&apos;s slope is the derivative there.\n' +
   '- **As its own function f&apos;** — plot the derivative value at every $x$. Now the derivative is a curve in its own right; the height of $f\'$ at any $x$ is the slope of $f$ at that same $x$.\n\n' +
   'This tool shows both at once. Slide $x_0$ and watch them stay in sync.\n\n' +
   '### What to look for\n\n' +
-  '- **Maxima and minima of $f$** land where $f\'$ *crosses zero*. At the top of a hill on $f$, the tangent is horizontal — slope 0 — so $f\'$ is at 0.\n' +
+  '- **Maxima and minima of $f$** land where $f\'$ crosses zero. At the top of a hill on $f$, the tangent is horizontal — slope 0 — so $f\'$ is at 0.\n' +
   '- **Steep parts of $f$** push $f\'$ far from zero.\n' +
   '- **Constant or near-constant parts of $f$** (e.g. near an extremum) keep $f\'$ near zero.\n' +
   '- **Inflection points of $f$** (where the curve changes concavity) sit at maxima and minima *of $f\'$*.\n\n' +
@@ -180,14 +180,36 @@ const DEFAULT_FAMILIES = FAMILIES;
    Numerical: scan with sign changes, then bisect.
    ================================================================ */
 
-function findRootsOf(fn, xmin, xmax, samples = 400) {
+// touching: also count zeros where fn does not change sign (a root of f such as x² at 0).
+// Extrema and inflections need a sign change of f' / f'', so they leave it off.
+function findRootsOf(fn, xmin, xmax, samples = 400, touching = false) {
   const roots = [];
   const step = (xmax - xmin) / samples;
+  const f = (x) => { try { const y = fn(x); return Number.isFinite(y) ? y : NaN; } catch { return NaN; } };
+  const ys = Array.from({ length: samples + 1 }, (_, i) => f(xmin + i * step));
+  const push = (r) => { if (!roots.length || Math.abs(r - roots[roots.length - 1]) > step) roots.push(r); };
   for (let i = 0; i < samples; i++) {
     const x1 = xmin + i * step, x2 = x1 + step;
-    let y1, y2;
-    try { y1 = fn(x1); y2 = fn(x2); } catch { continue; }
+    const y1 = ys[i], y2 = ys[i + 1];
     if (!Number.isFinite(y1) || !Number.isFinite(y2)) continue;
+    // A zero that falls exactly on a sample (sin(0), f''(0)) has no sign change around it in y1 * y2.
+    if (Math.abs(y1) < 1e-12) {
+      if (touching || (i > 0 && ys[i - 1] * y2 < 0)) push(x1);
+      continue;
+    }
+    // A root that only touches zero (x² at 0) never changes sign: look for |f| dipping to 0 at x1.
+    const y0 = i > 0 ? ys[i - 1] : NaN;
+    if (touching && Number.isFinite(y0) && y0 * y1 > 0 && y1 * y2 > 0 &&
+        Math.abs(y1) <= Math.abs(y0) && Math.abs(y1) <= Math.abs(y2)) {
+      let a = x1 - step, b = x2;
+      for (let j = 0; j < 60; j++) {
+        const m1 = a + (b - a) / 3, m2 = b - (b - a) / 3;
+        if (Math.abs(f(m1)) < Math.abs(f(m2))) b = m2; else a = m1;
+      }
+      const m = (a + b) / 2;
+      if (Math.abs(f(m)) < 1e-7) push(m);
+      continue;
+    }
     if (y1 * y2 < 0) {
       let a = x1, b = x2;
       for (let j = 0; j < 40; j++) {
@@ -197,10 +219,10 @@ function findRootsOf(fn, xmin, xmax, samples = 400) {
         let ya; try { ya = fn(a); } catch { break; }
         if (ya * ym < 0) b = m; else a = m;
       }
-      const r = (a + b) / 2;
-      if (!roots.length || Math.abs(r - roots[roots.length - 1]) > step) roots.push(r);
+      push((a + b) / 2);
     }
   }
+  if (touching && Math.abs(ys[samples]) < 1e-12) push(xmax);
   return roots;
 }
 
@@ -209,7 +231,7 @@ function findPOI(fam, xmin, xmax) {
   const h = 1e-4;
   const ddfn = x => (dfn(x + h) - dfn(x - h)) / (2 * h);
   return {
-    roots:       findRootsOf(fn,   xmin, xmax),
+    roots:       findRootsOf(fn,   xmin, xmax, 400, true),
     extrema:     findRootsOf(dfn,  xmin, xmax),  // f'(x) = 0
     inflections: findRootsOf(ddfn, xmin, xmax),  // f''(x) = 0
   };

@@ -879,7 +879,7 @@ export default function DistributionIntoCells({ explanations = null }) {
           <RightPanel>
             <InfoPanelHeader
               minHeight={resultsTop}
-              title="Distribution into cells (kⁿ)"
+              title={<>Distribution into cells <span style={{ textTransform: "none" }}>(kⁿ)</span></>}
               formula={formulaText}
               intro={
                 <>

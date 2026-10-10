@@ -7,6 +7,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -363,12 +365,36 @@ The triple $(3, 4, 5)$ comes from $m = 2, n = 1$; the triple $(5, 12, 13)$ from 
   }
 
 
+  const sqDot = (i, j, color) => ({ fn: () => j, from: i, to: i, ends: ['closed', 'closed'], color });
+  const sqGrid = (n, pick) => { const out = []; for (let i = 1; i <= n; i++) for (let j = 1; j <= n; j++) out.push(sqDot(i, j, pick(i, j))); return out; };
+  const fpGnomons = { kind: 'pieces', svgTitle: 'A 5 by 5 square of dots built from L-shaped layers of 1, 3, 5, 7, 9 dots', xRange: [0, 6.5], yRange: [0, 6.2], xLetter: 'n', yLetter: 'n',
+    pieces: sqGrid(5, (i, j) => (Math.max(i, j) % 2 ? 'f' : 'r')),
+    notes: [1, 2, 3, 4, 5].map((k) => ({ x: k + 0.12, y: k + 0.28, text: k === 1 ? '1' : '+' + (2 * k - 1), pos: 'e', color: k % 2 ? 'f' : 'r' })),
+    caption: '1 + 3 + 5 + 7 + 9 = 25: each L-shaped layer adds the next odd number' };
+  const fpTwoTriangles = { kind: 'pieces', svgTitle: 'A 4 by 4 square of dots cut along the staircase into 10 dots and 6 dots', xRange: [0, 5.5], yRange: [0, 5.2], xLetter: 'n', yLetter: 'n',
+    pieces: [{ fn: (x) => x - 0.5, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0.6, 4.6]] }, ...sqGrid(4, (i, j) => (j >= i ? 'f' : 'r'))],
+    notes: [{ x: 0.3, y: 4.75, text: 'blue: T₄ = 1 + 2 + 3 + 4 = 10', pos: 'e', color: 'f' }, { x: 2.6, y: 0.45, text: 'amber: T₃ = 6', pos: 'e', color: 'r' }],
+    caption: '4² = 16 = T₄ + T₃ = 10 + 6: a square is two staircase triangles' };
+  const demoUnits = {
+    gnomons: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpGnomons),
+      caption: 'A square built from odd layers',
+      text: 'A 5 &#215; 5 square of dots, coloured by layer. The corner dot is 1. Each next layer is an L-shape wrapped around the square before it: 3 dots to make 2 &#215; 2, then 5, 7 and 9. A layer around an (n &#8722; 1) &#215; (n &#8722; 1) square needs n dots along the top and n &#8722; 1 down the side, which is 2n &#8722; 1, so 1 + 3 + 5 + 7 + 9 = 5&#178; = 25.',
+    }),
+    twoTriangles: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpTwoTriangles),
+      caption: 'A square cut into two triangles',
+      text: 'The section&#8217;s n = 4. The dashed staircase line splits the 4 &#215; 4 square of dots in two. The blue dots on and above it come in columns of 4, 3, 2 and 1, the triangular number T&#8324; = 10. The amber dots below come in columns of 3, 2 and 1, which is T&#8323; = 6. Together they fill the square: 10 + 6 = 16.',
+    }),
+  };
+
    return {
       props:{
          sectionsContent,
          introContent,
          faqQuestions,
          schemas,
+         demoUnits,
           seoData: {
         title: "Square Numbers: Perfect Squares Formula | Learn Math Class",
         description: "Learn square numbers: perfect squares, sum of consecutive odd numbers, sum of squares formula, divisibility properties, and connections to triangular numbers.",
@@ -381,7 +407,7 @@ The triple $(3, 4, 5)$ comes from $m = 2, n = 1$; the triple $(5, 12, 13)$ from 
     }
    }
 
-export default function SquareNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function SquareNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
 
 
   const genericSections=[
@@ -407,6 +433,8 @@ export default function SquareNumbersPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-gnomons'} dangerouslySetInnerHTML={{ __html: demoUnits.gnomons }} />,
+          `The layers grow by 2 each time, so the gaps between consecutive squares are the odd numbers.`,
         ]
     },
     {
@@ -431,6 +459,8 @@ export default function SquareNumbersPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-twoTriangles'} dangerouslySetInnerHTML={{ __html: demoUnits.twoTriangles }} />,
+          `The same cut works for every n: n² = Tₙ + Tₙ₋₁.`,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

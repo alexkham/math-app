@@ -10,6 +10,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -892,6 +894,26 @@ const schemas = {
 }
 
 
+  const sqF = (x) => (x === 0 ? 0 : x * x * Math.sin(1 / x));
+  const sqEdges = Array.from({ length: 61 }, (_, i) => Math.sign(i - 30) * Math.pow(Math.abs(i - 30) / 30, 2) * 0.35);
+  const sqPieces = sqEdges.slice(0, -1).map((a, i) => ({ fn: sqF, from: a, to: sqEdges[i + 1], ends: [null, null], color: 'f' }));
+  const fpSqueeze = { kind: 'pieces', svgTitle: 'x^2 sin(1/x) oscillates between -x^2 and x^2; both bounds go to 0 at 0, so the squeezed function does too', xRange: [-0.35, 0.35], yRange: [-0.13, 0.13],
+    pieces: [
+      { fn: (x) => x * x, from: -0.35, to: 0.35, ends: [null, null], color: 'r', label: { text: 'h(x) = x²', x: -0.335, y: 0.105, pos: 'e' } },
+      { fn: (x) => -x * x, from: -0.35, to: 0.35, ends: [null, null], color: 'g', label: { text: 'g(x) = −x²', x: -0.335, y: -0.115, pos: 'e' } },
+      ...sqPieces,
+    ],
+    points: [{ x: 0, y: 0 }],
+    notes: [{ x: 0.03, y: 0.115, text: 'f(x) = x² sin(1/x)', pos: 'e', color: 'f' }, { x: 0.03, y: -0.11, text: 'trapped: f → 0 as x → 0', pos: 'e', color: 'r' }],
+    caption: 'The bounds close in on 0, and the trapped function has to follow' };
+  const demoUnits = {
+    squeeze: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpSqueeze),
+      caption: 'The squeeze theorem in action',
+      text: 'f(x) = x&#178; sin(1/x) oscillates faster and faster as x approaches 0, so no limit rule can be applied to sin(1/x) directly. But sin(1/x) always lies between &#8722;1 and 1, so the graph of f is trapped between g(x) = &#8722;x&#178; and h(x) = x&#178;. Both bounds go to 0 at x = 0, the band pinches shut, and the trapped function has no choice: its limit at 0 is 0 as well.',
+    }),
+  };
+
   return {
   props: {
     sectionsContent,
@@ -901,6 +923,7 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Limit Rules: Laws & Theorems | Learn Math Class",
       description: "Complete guide to limit laws: sum, difference, product, quotient, power, and root rules. Plus polynomial limits, rational function limits, composition rule, and the Squeeze Theorem.",
@@ -912,7 +935,7 @@ const schemas = {
 }
    }
 
-export default function RulesPage({seoData, sectionsContent, introContent, obj12Table, obj15Table, summaryTable, faqQuestions, schemas}) {
+export default function RulesPage({seoData, sectionsContent, introContent, obj12Table, obj15Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1029,6 +1052,8 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj12
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+          <div key={'unit-squeeze'} dangerouslySetInnerHTML={{ __html: demoUnits.squeeze }} />,
+          `Without the factor x² the band would stay between −1 and 1 and the squeeze would fail.`,
         ]
     },
     {

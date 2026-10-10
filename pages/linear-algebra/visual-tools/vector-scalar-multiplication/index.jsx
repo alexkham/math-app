@@ -648,9 +648,9 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Set the length of $v$ and watch $kv = w$ build one component at a time.
+      content: `Set the length of $v$ and watch $kv = w$ build one component at a time. (The tool labels this vector $u$.)
 
-• Use the **Dimensions** stepper to set the length of $v$ (1 to 5 components)
+• Use the **Dimensions** stepper to set the length of $v$ (1 to 10 components)
 • $w$ inherits the same length automatically
 • Hover the **?** icon for a reminder of what a [scalar](!/linear-algebra/vectors#1) is and why the length is preserved
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review

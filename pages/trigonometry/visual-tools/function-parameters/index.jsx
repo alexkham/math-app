@@ -142,7 +142,7 @@ Two readings are worth making deliberately. At $B = 2$ the bracket is $\\pi$ wid
 
 Nothing vertical responds. The amplitude bracket keeps its length and the midline holds its height, because $B$ acts only on the input.
 
-The frozen case is [a doubled frequency](!#a-doubled-frequency), where $B = 2$ halves the period to $\pi$.`,
+The frozen case is [a doubled frequency](!#a-doubled-frequency), where $B = 2$ halves the period to $\\pi$.`,
       before: ``,
       after: ``,
       link: '',
@@ -267,9 +267,9 @@ For the theory behind each parameter in prose form, with worked examples and the
       title: `The Explanations Panel`,
       content: `The panel on the right of the tool has two parts. The top is a fixed legend naming the four letters in their colours — **A** amplitude, **B** period, **C** phase shift, **D** vertical shift — each with a one-line gloss of what it controls. The letter you last touched is set in bold, so the legend doubles as a reminder of where your attention was.
 
-Below the legend is the explanation itself, and it follows you. Drag a slider and the panel switches to that parameter; press a [guided walk](!#the-guided-walk) button and it switches to the idea that button demonstrates. Choose $\tan$ or $\cot$ and it switches to the unbounded case, whatever you touched before, because on those functions the amplitude explanation would be describing something that does not exist.
+Below the legend is the explanation itself, and it follows you. Drag a slider and the panel switches to that parameter; press a [guided walk](!#the-guided-walk) button and it switches to the idea that button demonstrates. Choose $\\tan$ or $\\cot$ and it switches to the unbounded case, whatever you touched before, because on those functions the amplitude explanation would be describing something that does not exist.
 
-Every explanation ends with two links into this page: one to the frozen state that shows the idea, one to the section that explains the control. Two short red notes can also appear under the explanation. One says the curve is reflected, when $A$ is negative; the other prints $C$ beside $\frac{C}{B}$ whenever the two differ. They stay visible while you work on something else, so a negative $A$ or a shift that is not equal to $C$ never goes unnoticed.`,
+Every explanation ends with two links into this page: one to the frozen state that shows the idea, one to the section that explains the control. Two short red notes can also appear under the explanation. One says the curve is reflected, when $A$ is negative; the other prints $C$ beside $\\frac{C}{B}$ whenever the two differ. They stay visible while you work on something else, so a negative $A$ or a shift that is not equal to $C$ never goes unnoticed.`,
       before: ``,
       after: ``,
       link: '',
@@ -277,8 +277,8 @@ Every explanation ends with two links into this page: one to the frozen state th
 
     obj13: {
       title: `The Baseline Wave`,
-      content: `Every comparison in this tool is measured against one curve: $y = \sin x$, with $A = 1$, $B = 1$, $C = 0$ and $D = 2$ replaced by $D = 0$. It is what the **Reset** button restores and what the first button of the [guided walk](!#the-guided-walk) loads.`,
-      after: `In this state the midline sits on the $x$-axis, the amplitude bracket measures $1$, the period bracket spans $2\pi$, and there is no phase-shift bar at all, because a displacement of zero is not drawn. Each of the states below changes exactly one of those readings, which is what makes them comparable.`,
+      content: `Every comparison in this tool is measured against one curve: $y = \\sin x$, with $A = 1$, $B = 1$, $C = 0$ and $D = 2$ replaced by $D = 0$. It is what the **Reset** button restores and what the first button of the [guided walk](!#the-guided-walk) loads.`,
+      after: `In this state the midline sits on the $x$-axis, the amplitude bracket measures $1$, the period bracket spans $2\\pi$, and there is no phase-shift bar at all, because a displacement of zero is not drawn. Each of the states below changes exactly one of those readings, which is what makes them comparable.`,
       before: ``,
       link: '',
     },
@@ -293,7 +293,7 @@ Every explanation ends with two links into this page: one to the frozen state th
 
     obj15: {
       title: `A Reflected Wave`,
-      content: `At $A = -2$ the tool draws two curves. The solid one is $y = -2\sin x$; the dashed grey one is $y = 2\sin x$, the wave it is a [reflection](!#setting-the-amplitude-with-a) of.`,
+      content: `At $A = -2$ the tool draws two curves. The solid one is $y = -2\\sin x$; the dashed grey one is $y = 2\\sin x$, the wave it is a [reflection](!#setting-the-amplitude-with-a) of.`,
       after: `Read the two together and the rule is visible rather than asserted: every point of one is the mirror image of the other in the midline, the maximum and minimum dots have swapped places, and the amplitude readout stays at $|A| = 2$. The sign of $A$ decides which way the curve leaves the midline; the size of $A$ decides how far it goes.`,
       before: ``,
       link: '',
@@ -301,16 +301,16 @@ Every explanation ends with two links into this page: one to the frozen state th
 
     obj16: {
       title: `A Doubled Frequency`,
-      content: `With $B = 2$ the input axis is compressed by a factor of two, which is the whole content of the [period](!#setting-the-period-with-b) formula $T = \frac{2\pi}{|B|}$.`,
-      after: `The amber bracket is now $\pi$ wide instead of $2\pi$, and two complete cycles fit in the interval that previously held one. Nothing vertical has moved: the bracket measuring $|A|$ is the same length as in [the baseline wave](!#the-baseline-wave), and the midline has not shifted. An inside factor rescales the horizontal axis only.`,
+      content: `With $B = 2$ the input axis is compressed by a factor of two, which is the whole content of the [period](!#setting-the-period-with-b) formula $T = \\frac{2\\pi}{|B|}$.`,
+      after: `The amber bracket is now $\\pi$ wide instead of $2\\pi$, and two complete cycles fit in the interval that previously held one. Nothing vertical has moved: the bracket measuring $|A|$ is the same length as in [the baseline wave](!#the-baseline-wave), and the midline has not shifted. An inside factor rescales the horizontal axis only.`,
       before: ``,
       link: '',
     },
 
     obj17: {
       title: `A Shifted Wave`,
-      content: `This is the state the whole tool exists for. Here $B = 2$ and $C = \pi$, so the equation bar prints $\pi$ while the violet bar on the graph measures $\frac{\pi}{2}$ — the [phase shift](!#shifting-with-c-and-why-the-shift-is-c-over-b) is $\frac{C}{B}$.`,
-      after: `The two violet numbers in the readout strip, **C itself** and **Shift C/B**, are deliberately printed side by side in this state. The curve begins its standard cycle where the argument $Bx - C$ is zero, which is $x = \frac{\pi}{2}$, and the bar measures from the origin to exactly that point. Set $B$ back to $1$ and the two numbers coincide again.`,
+      content: `This is the state the whole tool exists for. Here $B = 2$ and $C = \\pi$, so the equation bar prints $\\pi$ while the violet bar on the graph measures $\\frac{\\pi}{2}$ — the [phase shift](!#shifting-with-c-and-why-the-shift-is-c-over-b) is $\\frac{C}{B}$.`,
+      after: `The two violet numbers in the readout strip, **C itself** and **Shift C/B**, are deliberately printed side by side in this state. The curve begins its standard cycle where the argument $Bx - C$ is zero, which is $x = \\frac{\\pi}{2}$, and the bar measures from the origin to exactly that point. Set $B$ back to $1$ and the two numbers coincide again.`,
       before: ``,
       link: '',
     },
@@ -325,16 +325,16 @@ Every explanation ends with two links into this page: one to the frozen state th
 
     obj19: {
       title: `All Four at Once`,
-      content: `The state $y = 2\sin(2x - \pi) + 1$ puts every parameter away from its neutral value at the same time, which is how sinusoids actually arrive in problems.`,
-      after: `Each annotation still reports its own parameter and nothing else: the red bracket measures $2$, the amber bracket spans $\pi$, the violet bar measures $\frac{\pi}{2}$, and the dashed midline sits at $y = 1$, with the peak at $3$ and the trough at $-1$. Reading them in the order midline, amplitude, period, shift is exactly the procedure described in [reading the curve back as numbers](!#reading-the-curve-back-as-numbers).`,
+      content: `The state $y = 2\\sin(2x - \\pi) + 1$ puts every parameter away from its neutral value at the same time, which is how sinusoids actually arrive in problems.`,
+      after: `Each annotation still reports its own parameter and nothing else: the red bracket measures $2$, the amber bracket spans $\\pi$, the violet bar measures $\\frac{\\pi}{2}$, and the dashed midline sits at $y = 1$, with the peak at $3$ and the trough at $-1$. Reading them in the order midline, amplitude, period, shift is exactly the procedure described in [reading the curve back as numbers](!#reading-the-curve-back-as-numbers).`,
       before: ``,
       link: '',
     },
 
     obj20: {
       title: `The Tangent Case`,
-      content: `Switching the function to $\tan$ keeps the same four sliders and drops one annotation, because [amplitude has no meaning](!#why-tangent-and-cotangent-have-no-amplitude) for an unbounded curve.`,
-      after: `There is no red bracket and there are no maximum or minimum dots — there is nothing to measure them against. The dashed red lines are the **asymptotes**, and between any two of them the branch covers every real value. What survives is the amber bracket, now spanning $\pi$ rather than $2\pi$, the midline, and the phase-shift bar. The readout strip states the absence in words, printing **none** for amplitude and **unbounded** for the maximum and minimum.`,
+      content: `Switching the function to $\\tan$ keeps the same four sliders and drops one annotation, because [amplitude has no meaning](!#why-tangent-and-cotangent-have-no-amplitude) for an unbounded curve.`,
+      after: `There is no red bracket and there are no maximum or minimum dots — there is nothing to measure them against. The dashed red lines are the **asymptotes**, and between any two of them the branch covers every real value. What survives is the amber bracket, now spanning $\\pi$ rather than $2\\pi$, the midline, and the phase-shift bar. The readout strip states the absence in words, printing **none** for amplitude and **unbounded** for the maximum and minimum.`,
       before: ``,
       link: '',
     },
@@ -476,10 +476,10 @@ Panel: amplitude has no meaning.`, at: 'tl' },
   const explanations = {
     form: `**y = A f(Bx - C) + D.** Four letters, four separate jobs. Move one slider and exactly one feature of the curve responds; each is drawn on the graph in its own colour. **Outside** the function, A and D act on the value it returns, so they work vertically. **Inside**, B and C act on the input x, so they work horizontally. [Learn more about the general form](!#the-baseline-wave) · [the guided walk](!#the-guided-walk)`,
     A: `**A - amplitude.** A stretches the curve away from its midline. Midline to peak is **|A|**, so A = 3 and A = -3 are equally tall. A negative A reflects the curve across the midline; the dashed grey curve is the positive wave it came from, and the amplitude readout stays |A|. Maximum = **D + |A|**, minimum = **D - |A|**. [Learn more about amplitude](!#a-stretched-wave) · [the reflected case](!#a-reflected-wave)`,
-    B: `**B - period.** B multiplies x, squeezing the horizontal axis. The period is $\frac{2\pi}{|B|}$ for sine and cosine, $\frac{\pi}{|B|}$ for tangent and cotangent. Larger B fits more cycles in the same window, and nothing vertical responds. [Learn more about the period](!#a-doubled-frequency) · [setting B](!#setting-the-period-with-b)`,
-    C: `**C - phase shift.** The curve moves by **C/B**, not by C. With C = $\pi$ and B = 2 the shift is $\frac{\pi}{2}$, not $\pi$. Compare the violet bar on the graph with the value of C in the equation; they agree only when B = 1. [Learn more about the phase shift](!#a-shifted-wave) · [why it is C over B](!#shifting-with-c-and-why-the-shift-is-c-over-b)`,
+    B: `**B - period.** B multiplies x, squeezing the horizontal axis. The period is $\\frac{2\\pi}{|B|}$ for sine and cosine, $\\frac{\\pi}{|B|}$ for tangent and cotangent. Larger B fits more cycles in the same window, and nothing vertical responds. [Learn more about the period](!#a-doubled-frequency) · [setting B](!#setting-the-period-with-b)`,
+    C: `**C - phase shift.** The curve moves by **C/B**, not by C. With C = $\\pi$ and B = 2 the shift is $\\frac{\\pi}{2}$, not $\\pi$. Compare the violet bar on the graph with the value of C in the equation; they agree only when B = 1. [Learn more about the phase shift](!#a-shifted-wave) · [why it is C over B](!#shifting-with-c-and-why-the-shift-is-c-over-b)`,
     D: `**D - vertical shift.** D lifts the whole curve. The midline moves to **y = D**, the maximum to D + |A|, the minimum to D - |A|, and the amplitude bracket keeps its length because D leaves A alone. [Learn more about the vertical shift](!#a-raised-midline) · [moving the midline](!#moving-the-midline-with-d)`,
-    unbounded: `**Amplitude has no meaning here.** Tangent and cotangent are unbounded: no peak, so no distance from midline to maximum to measure. A still scales the curve and D still lifts it, but |A| is not an amplitude. The period is $\frac{\pi}{|B|}$, half the sine and cosine case. [Learn more about the tangent case](!#the-tangent-case) · [why there is no amplitude](!#why-tangent-and-cotangent-have-no-amplitude)`,
+    unbounded: `**Amplitude has no meaning here.** Tangent and cotangent are unbounded: no peak, so no distance from midline to maximum to measure. A still scales the curve and D still lifts it, but |A| is not an amplitude. The period is $\\frac{\\pi}{|B|}$, half the sine and cosine case. [Learn more about the tangent case](!#the-tangent-case) · [why there is no amplitude](!#why-tangent-and-cotangent-have-no-amplitude)`,
   }
 
   const stateUnits = {

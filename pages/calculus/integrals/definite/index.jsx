@@ -14,6 +14,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionRiemannDiagrams from '@/app/components/functions/riemann/functionRiemannDiagrams'
 import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagrams'
 
@@ -613,6 +614,24 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const deTwoPi = 2 * Math.PI;
+  const deSignedBars = Array.from({ length: 36 }, (_, i) => { const x = (i + 0.5) * deTwoPi / 36, y = Math.sin(x); return { from: Math.min(0, y), to: Math.max(0, y), color: y >= 0 ? 'f' : 'r', dx: x / 7 * 388 }; });
+  const deAvgBars = Array.from({ length: 30 }, (_, i) => { const x = (i + 0.5) * 3 / 30, y = x * x; return { from: Math.min(3, y), to: Math.max(3, y), color: y >= 3 ? 'r' : 'g', dx: x / 4 * 388 }; });
+  const fpSignedArea = { kind: 'pieces', svgTitle: 'sin x on [0, 2 pi]: area +2 above the axis and -2 below cancel, so the integral is 0', xRange: [0, 7], yRange: [-1.5, 1.5],
+    pieces: [{ fn: Math.sin, from: 0, to: deTwoPi, ends: [null, null], color: 'f', label: { text: 'y = sin x', x: 1.6, y: 1, pos: 'n' } }],
+    yBars: deSignedBars,
+    notes: [{ x: 0.8, y: 0.35, text: '+2', pos: 'e', color: 'f' }, { x: 3.95, y: -0.45, text: '−2', pos: 'e', color: 'r' }, { x: 3.5, y: 1.25, text: 'integral over [0, 2π]: 2 − 2 = 0', pos: 'e', color: 'r' }],
+    caption: 'Signed area: the part below the axis counts negative' };
+  const fpAvgValue = { kind: 'pieces', svgTitle: 'x^2 on [0, 3] has average value 3: the excess above y = 3 balances the shortfall below; reached at x = sqrt 3', xRange: [0, 4], yRange: [-1, 10],
+    pieces: [
+      { fn: () => 3, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0, 3.6]], label: { text: 'f_avg = 3', x: 3.6, y: 3, pos: 'n' } },
+      { fn: (x) => x * x, from: 0, to: 3.1, ends: [null, null], color: 'f', label: { text: 'y = x²', x: 2.9, y: 8.41, pos: 'w' } },
+    ],
+    yBars: deAvgBars,
+    vlines: [{ x: 3 }],
+    points: [{ x: Math.sqrt(3), y: 3, label: 'c = √3', pos: 'nw' }],
+    notes: [{ x: 0.15, y: 9.2, text: 'area under x² on [0, 3]: 9 = 3 · 3', pos: 'e' }, { x: 0.15, y: 8.2, text: 'amber excess = navy shortfall', pos: 'e', color: 'r' }],
+    caption: 'The average value is the level where excess and shortfall balance' };
   const demoUnits = {
     construction: demoUnitFrame({
       svg: functionRiemannDiagrams.left,
@@ -634,6 +653,16 @@ const schemas = {
       text: 'The shaded area is the definite integral, and the accumulation curve above it reads F(2) = 8/3 exactly: the antiderivative t&#179;/3 evaluated at the right edge minus its value at the left. No rectangles were summed to get the number. Move the right edge and read the area straight off the antiderivative on the',
       href: '/calculus/visual-tools/fundamental-theorem',
       linkText: 'fundamental theorem of calculus visualizer',
+    }),
+    signedArea: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpSignedArea),
+      caption: 'Area above and below the axis',
+      text: 'y = sin x on [0, 2&#960;]. The blue strips between the curve and the axis on [0, &#960;] have total area 2 and count as +2. The amber strips on [&#960;, 2&#960;] have the same area but lie below the axis, so they count as &#8722;2. The definite integral adds the two: 2 &#8722; 2 = 0, although the total shaded area is 4, which is what &#8747;|sin x| dx would give.',
+    }),
+    avgValue: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpAvgValue),
+      caption: 'The average value as a balancing level',
+      text: 'f(x) = x&#178; on [0, 3] has &#8747;&#8320;&#179; x&#178; dx = 9, so its average value is 9/3 = 3. The dashed level y = 3 is that average: where the curve is above it (amber) the excess area exactly equals the shortfall where the curve is below it (navy), so a rectangle of height 3 over [0, 3] has the same area 9. The curve crosses the level at c = &#8730;3, the point the Mean Value Theorem for Integrals promises.',
     }),
   };
 
@@ -701,6 +730,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-signedArea'} dangerouslySetInnerHTML={{ __html: demoUnits.signedArea }} />,
+          `Over [0, π] alone the integral is 2: only a full period cancels.`,
         ]
     },
     {
@@ -735,6 +766,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-avgValue'} dangerouslySetInnerHTML={{ __html: demoUnits.avgValue }} />,
+          `Because x² curves upward, its average 3 lies above the midpoint value f(1.5) = 2.25.`,
         ]
     },
     {

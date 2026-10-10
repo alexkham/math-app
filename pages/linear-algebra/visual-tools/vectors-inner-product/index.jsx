@@ -57,15 +57,13 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Pick a scenario and a shape, then watch the [inner product](!/linear-algebra/orthogonality/inner-product#8) build up term by term.
+      content: `Pick a length, then watch the [inner product](!/linear-algebra/orthogonality/inner-product#8) $\\langle u, v \\rangle$ build up term by term.
 
-• Use the **Scenario** pills to switch between **Vectors** $\\langle u, v \\rangle$ and **Matrices** $\\langle A, B \\rangle_F$
-• In the [vectors](!/linear-algebra/vectors#1) scenario, set the shared **length** of $u$ and $v$ (2 to 10)
-• In the matrices scenario, set the shared **dimensions** of $A$ and $B$ (2×2 to 5×5)
+• Set the shared **length** of the [vectors](!/linear-algebra/vectors#1) $u$ and $v$ (2 to 10)
 • Hover the **?** icons for explanations of the inner product itself and the same-shape requirement
 • Use the scene player below to step, play, pause, change speed, and scroll the step log
 
-The point of having one tool for both scenarios is to make the unity explicit: same operation, different operands.`,
+This page runs the vectors scenario. The same tool also has a matrices scenario, the Frobenius inner product, described below: same operation, different operands.`,
       before: ``,
       after: ``,
       link: '',
@@ -75,7 +73,7 @@ The point of having one tool for both scenarios is to make the unity explicit: s
       content: `In the vectors scenario, $u$ and $v$ are shown as row vectors of length $n$, and the result $\\langle u, v \\rangle$ appears as a single boxed [scalar](!/linear-algebra/vectors#1).
 
 • Each scene pairs one entry $u_k$ with $v_k$, highlighting both and drawing two arrows into the result box
-• The running sum above the canvas updates term by term — counted terms turn green, the current term is blue and bold, pending terms stay grey
+• The running sum in the step log updates term by term — counted terms turn green, the current term is blue and bold, pending terms stay grey
 • The result box shows a stacked $\\Sigma$ notation with an upper bound that advances as more terms are counted
 • Final scene highlights every entry of both vectors and the completed sum
 
@@ -86,10 +84,10 @@ This is the textbook dot product, broken into its $n$ pairwise products.`,
     },
     obj3: {
       title: `The Matrices Scenario`,
-      content: `In the matrices scenario, $A$ and $B$ are shown as $m \\times n$ grids, and the result $\\langle A, B \\rangle_F$ appears as a single boxed scalar with the Frobenius subscript $F$.
+      content: `The matrices scenario is not shown on this page; it is the same tool fed two matrices. There, $A$ and $B$ are shown as $m \\times n$ grids, and the result $\\langle A, B \\rangle_F$ appears as a single boxed scalar with the Frobenius subscript $F$.
 
 • Each scene pairs one entry $a_{i,j}$ with $b_{i,j}$ in row-major order, highlighting both and drawing arrows into the result box
-• The running sum above the canvas grows by one $a_{i,j} b_{i,j}$ term per step, color-coded the same way as in the vectors scenario
+• The running sum in the step log grows by one $a_{i,j} b_{i,j}$ term per step, color-coded the same way as in the vectors scenario
 • Total steps equal $m \\times n$ — every cell of both matrices contributes exactly one product
 • Final scene highlights every cell of both matrices in green and presents the completed sum
 
@@ -100,7 +98,7 @@ The Frobenius inner product is exactly the dot product of the matrices "flattene
     },
     obj4: {
       title: `Reading the Running Sum`,
-      content: `The expression above the canvas is the inner product written out as a sum of individual product terms, with per-term color coding.
+      content: `The expression in the step log is the inner product written out as a sum of individual product terms, with per-term color coding.
 
 • **Grey** terms are pending — not yet computed
 • **Blue, bold** marks the term being computed in the current scene
@@ -327,7 +325,7 @@ The operation is symmetric, $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\lang
         "Two scenarios in one tool: vector dot product and Frobenius matrix inner product",
         "Adjustable vector length from 2 to 10",
         "Adjustable matrix dimensions from 2 by 2 up to 5 by 5",
-        "Running expanded sum with per-term color coding above the canvas",
+        "Running expanded sum with per-term color coding in the step log",
         "Animated curved arrows from paired entries into the scalar result box",
         "Stacked sigma notation in the result box with advancing upper bound",
         "Adjustable playback speed and scrollable step log"

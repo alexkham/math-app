@@ -12,6 +12,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
 
 
@@ -628,6 +629,19 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fnTan = (c) => (x) => 2.25 + c + 3 * (x - 1.5);
+  const fpShiftFamily = { kind: 'pieces', svgTitle: 'x^2 + 3, x^2 and x^2 - 2 have the same derivative 2x: at x = 1.5 all three tangents have slope 3', xRange: [-3, 3], yRange: [-3, 9],
+    pieces: [
+      { fn: fnTan(3), from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0.6, 2.4]] },
+      { fn: fnTan(0), from: 99, to: 99, ends: [null, null], color: 'f', ghost: [[0.6, 2.4]] },
+      { fn: fnTan(-2), from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[0.6, 2.4]] },
+      { fn: (x) => x * x + 3, from: -2.4, to: 2.4, ends: [null, null], color: 'g' },
+      { fn: (x) => x * x, from: -2.9, to: 2.9, ends: [null, null], color: 'f' },
+      { fn: (x) => x * x - 2, from: -3, to: 3, ends: [null, null], color: 'r' },
+    ],
+    points: [{ x: 1.5, y: 5.25 }, { x: 1.5, y: 2.25 }, { x: 1.5, y: 0.25 }],
+    notes: [{ x: 0.08, y: 2.45, text: 'x² + 3', pos: 'e', color: 'g' }, { x: 0.08, y: -0.6, text: 'x²', pos: 'e', color: 'f' }, { x: 0.08, y: -2.6, text: 'x² − 2', pos: 'e', color: 'r' }, { x: 0.95, y: -2.0, text: 'same slope 3 at x = 1.5', pos: 'e', color: 'r' }],
+    caption: 'f′ fixes every slope but not the height: f is known only up to + C' };
   const demoUnits = {
     fAndFp: demoUnitFrame({
       svg: functionDerivativeDiagrams.cubic,
@@ -635,6 +649,11 @@ const schemas = {
       text: 'Wherever the cubic rises its derivative sits above the axis, and at x = 0, where the cubic flattens for an instant, the derivative touches zero without crossing: the graph of f&#8242; is read off the slopes of f. At the marker, x = 1, the cubic has slope 3 and the parabola has height 3. Slide the marker and watch height below follow slope above on the',
       href: '/calculus/visual-tools/derivative',
       linkText: 'derivative explorer',
+    }),
+    shiftFamily: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpShiftFamily),
+      caption: 'One derivative, many functions',
+      text: 'The section&#8217;s x&#178; and x&#178; + 5 idea with three curves: x&#178; + 3, x&#178; and x&#178; &#8722; 2. Each is the others moved up or down, so at any x they all have the same slope. At x = 1.5 the three dashed tangents are parallel, each with slope 3, and everywhere the derivative is 2x. Reading f from f&#8242; recovers this shape, but which of the curves is f needs one known value.',
     }),
   };
 
@@ -715,6 +734,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-shiftFamily'} dangerouslySetInnerHTML={{ __html: demoUnits.shiftFamily }} />,
+          `Knowing f(0) = 3 would single out x² + 3 from the whole family.`,
         ]
     },
     {

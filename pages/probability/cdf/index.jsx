@@ -664,6 +664,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 
@@ -940,9 +941,9 @@ export async function getStaticProps(){
       content:`
 Probability is first defined for events, but many questions involve numerical values rather than yes-or-no outcomes. A random variable connects these two views by assigning a number to each outcome of an experiment.
 
-Once a random variable is defined, statements about its value naturally form events. Expressions like $X \le x$, $X > x$, or $a < X \le b$ describe collections of outcomes and therefore have probabilities attached to them.
+Once a random variable is defined, statements about its value naturally form events. Expressions like $X \\le x$, $X > x$, or $a < X \\le b$ describe collections of outcomes and therefore have probabilities attached to them.
 
-The cumulative distribution function is built exactly on this connection. It takes events of the form $X \le x$ and assigns to each value $x$ the probability of that event, linking random variables back to the event-based foundation of probability.
+The cumulative distribution function is built exactly on this connection. It takes events of the form $X \\le x$ and assigns to each value $x$ the probability of that event, linking random variables back to the event-based foundation of probability.
 `,
       before:``,
       after:``,
@@ -1163,7 +1164,7 @@ Many important concepts rely directly on the CDF, including quantiles, medians, 
       content:`
 The CDF ties together several core ideas in probability.
 
-• [Events](!/probability/events) appear as statements of the form $X \le x$.  
+• [Events](!/probability/events) appear as statements of the form $X \\le x$.  
 • [Random variables](!/probability/random-variables) provide the numerical structure the CDF describes.  
 • [PMF](!/probability/probability-function#pmf) and [PDF](!/probability/probability-function#pdf) are specific ways probability is distributed, both derived from the CDF.  
 • [Probability axioms](!/probability/axioms) guarantee the basic properties of the CDF.  
@@ -1222,6 +1223,15 @@ The sections that follow explain how this accumulation works, how it is defined 
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpMixedCdf = { kind: 'pieces', svgTitle: 'A mixed CDF: flat at 0, a jump of 0.3 at x = 0, then a straight rise to 1 at x = 2, then flat', xRange: [-1, 3], yRange: [-0.1, 1.2],
+    pieces: [
+      { fn: () => 0, from: -1, to: 0, ends: [null, 'open'], color: 'f' },
+      { fn: (x) => 0.3 + 0.35 * x, from: 0, to: 2, ends: ['closed', null], color: 'f', label: { text: 'smooth rise: spread-out 0.7', x: 1.05, y: 0.3 + 0.35 * 1.05, pos: 'se' } },
+      { fn: () => 1, from: 2, to: 3, ends: [null, null], color: 'f' },
+    ],
+    vlines: [{ x: 0 }],
+    notes: [{ x: 0.08, y: 0.18, text: 'jump 0.3 = P(X = 0)', pos: 'e', color: 'r' }, { x: 2.05, y: 1.1, text: 'flat: no probability', pos: 'e', color: 'r' }],
+    caption: 'One CDF, both kinds: a jump for the mass at 0, a ramp for the rest' };
   const demoUnits = {
     u_discrete_0: demoUnitFrame({
       svg: discreteCdfDiagrams.binomial,
@@ -1243,6 +1253,11 @@ The sections that follow explain how this accumulation works, how it is defined 
       text: 'For a uniform variable the CDF is a straight line from 0 at a to 1 at b, so the probability of any interval inside [a, b] is the difference of the two ramp heights, which is the length of the interval divided by b minus a. The difference F(b) minus F(a) is the same calculation on every distribution, only the curve changes. Pick two points and read the difference on the',
       href: '/probability/visual-tools/cdf/continuous',
       linkText: 'continuous CDF visualizer',
+    }),
+    mixedCdf: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpMixedCdf),
+      caption: 'A CDF that jumps and ramps',
+      text: 'A random variable that equals 0 with probability 0.3 and otherwise spreads the remaining 0.7 evenly over (0, 2]. Its CDF is 0 to the left of 0, jumps by 0.3 at x = 0 (the filled dot: the value at 0 includes the jump), rises in a straight line from 0.3 to 1 across (0, 2], and stays at 1 after that. No PMF and no PDF describes this variable on its own, but one CDF does.',
     }),
   };
 
@@ -1370,6 +1385,8 @@ export default function PageTemplate({
         link:'',
         content:[
             sectionsContent.mixed.content,
+                  <div key={'unit-mixedCdf'} dangerouslySetInnerHTML={{ __html: demoUnits.mixedCdf }} />,
+            `The jump gives P(X = 0) = 0.3; any interval inside (0, 2] gets 0.35 per unit of length.`,
         ]
     },
     {

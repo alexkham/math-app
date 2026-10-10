@@ -889,8 +889,40 @@ Each explanation ends in two links—one to the section that treats its case in 
   /* Animated demos (ToolDemoPlayer v3) against the real DivisibilityTreeSVG tool
      (opens with an empty field, tree gray). The number field is the only
      input[type="number"]; "Reset" exists only while a number is entered.
-     Node tooltips are hover-only and cannot be driven (the player has no hover entry). */
+     Node tooltips are driven with { hover } on a node's label text
+     ({ text: '÷3?', css: 'text', exact: true }). */
   const demos = {
+    'reading-the-tooltips': {
+      title: 'Reading the tooltips',
+      script: [
+        { say: `TYPE 126
+Even branch, sum=9, ends 6.
+Every node now has a tooltip.` },
+        { set: 'input[type="number"]', value: '126' },
+        { wait: 2600 },
+        { say: `HOVER ÷3?
+Passes: digit sum 1+2+6 = 9,
+and 9 ÷ 3 = 3.` },
+        { hover: { text: '÷3?', css: 'text', exact: true } },
+        { wait: 3400 },
+        { say: `HOVER ÷4?
+Fails: last two digits 26 ÷ 4 = 6.50,
+not whole.` },
+        { unhover: { text: '÷3?', css: 'text', exact: true } },
+        { hover: { text: '÷4?', css: 'text', exact: true } },
+        { wait: 3400 },
+        { say: `HOVER ÷9?
+Passes: digit sum 9 ÷ 9 = 1.
+So 126 is divisible by 9.` },
+        { unhover: { text: '÷4?', css: 'text', exact: true } },
+        { hover: { text: '÷9?', css: 'text', exact: true } },
+        { wait: 3400 },
+        { say: `MOVE away
+Tooltip closes.` },
+        { unhover: { text: '÷9?', css: 'text', exact: true } },
+        { wait: 1800 },
+      ],
+    },
     'how-to-use-the-decision-tree': {
       title: 'Number, path, Reset',
       script: [
@@ -1040,7 +1072,7 @@ export default function DivisibilityTreePage({ instructions, demos,
   const genericSections = [
     withDemo(stateRow('obj1', 'how-to-use-the-decision-tree', 'empty')),
     withDemo(plain('obj2', 'understanding-the-tree-structure')),
-    plain('obj3', 'reading-the-tooltips'),
+    withDemo(plain('obj3', 'reading-the-tooltips')),
     withDemo(plain('obj15', 'the-explanations-below-the-summary')),
     stateRow('obj4', 'the-even-odd-split', 'evenPath'),
     stateRow('obj11', 'the-odd-shortcut', 'oddPath'),

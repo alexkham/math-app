@@ -907,6 +907,9 @@ function fmt(v) {
   const r = Math.round(v * 100) / 100;
   return Math.abs(r - Math.round(r)) < 1e-4 ? String(Math.round(r)) : String(r);
 }
+// fmt() with a typographic minus, for plain-text labels (math mode keeps fmt()).
+function fmtU(v) { const t = fmt(v); return t.startsWith('-') ? `\u2212${t.slice(1)}` : t; }
+
 
 function fmtSigned(v) {
   if (!Number.isFinite(v)) return '— ?';
@@ -1239,7 +1242,7 @@ export default function TangentLine({
   /* ---- InfoPanel content ---- */
   const explanationContent = useMemo(() => {
     let body =
-      `## ${fam.name} — tangent at x₀ = ${fmt(x0)}\n\n` +
+      `## ${fam.name} — tangent at x₀ = ${fmtU(x0)}\n\n` +
       `**Function** · $f(x) = ${forwardEq}$\n\n` +
       `**Derivative** · $f'(x) = ${derivEq}$\n\n`;
 
@@ -1551,7 +1554,7 @@ export default function TangentLine({
                     color: c.ink, fontWeight: 700,
                     fontVariantNumeric: 'tabular-nums',
                   }}>
-                    x₀ = {fmt(x0)}
+                    x₀ = {fmtU(x0)}
                   </span>
                   <button onClick={resetX0} style={{
                     background: darkMode ? '#0f172a' : '#fff',

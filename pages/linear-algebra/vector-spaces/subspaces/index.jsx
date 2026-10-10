@@ -1200,7 +1200,7 @@ Most of the ten axioms — commutativity, associativity, distributivity, the ide
         id: 'trivial-subspaces',
         tex: `$\\{\\mathbf{0}\\}$ and $V$`,
         read: `the zero subspace and the whole space`,
-        means: `Every space owns exactly two subspaces for free, and both are called **trivial** — including $V$ itself. The braces matter: $\\{\\mathbf{0}\\}$ is a *set containing* the zero vector, a space of [dimension](!/linear-algebra/vector-spaces/dimension#notation) $0$, while a bare $\\mathbf{0}$ is the vector itself.`,
+        means: `Every space owns exactly two subspaces for free, and both are called **trivial** — including $V$ itself. The braces matter: $\\{\\mathbf{0}\\}$ is a set containing the zero vector, a space of [dimension](!/linear-algebra/vector-spaces/dimension#notation) $0$, while a bare $\\mathbf{0}$ is the vector itself.`,
         cases: `"Proper" excludes $V$ and nothing else, so a proper subspace may still be trivial in the other direction — $\\{\\mathbf{0}\\}$ is proper. The two words cut the collection differently, which is why careful statements say "proper nonzero subspace" when they mean neither extreme.`,
         confusedWith: `The empty set. $\\emptyset$ is **not** a subspace of anything: a subspace must contain $\\mathbf{0}$, so the smallest one is $\\{\\mathbf{0}\\}$ — and this is the one place where a set-theory instinct gives the wrong smallest object.`,
       },

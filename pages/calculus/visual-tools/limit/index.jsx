@@ -566,7 +566,7 @@ To explore quickly, switch families in the left panel — the discontinuity zoo 
 
     obj2: {
       title: `The Discontinuity Zoo`,
-      content: `Seven function families are organized into five groups:
+      content: `Seven function families are organized into six groups:
 
 **Continuous (control):**
 
@@ -608,7 +608,7 @@ To explore quickly, switch families in the left panel — the discontinuity zoo 
 
 • The marker positions on the graph close in on the limit lines.
 
-The slider is on a **logarithmic scale**, ranging from $\\varepsilon = 1$ down to $\\varepsilon = 10^{-3}$. Each tick is roughly an order of magnitude, so very small values of $\\varepsilon$ are easy to reach precisely.
+The slider is on a **logarithmic scale**, ranging from about $\\varepsilon = 2$ (the top of the slider is $10^{0.3}$) down to $\\varepsilon = 10^{-3}$. Each tick is roughly an order of magnitude, so very small values of $\\varepsilon$ are easy to reach precisely.
 
 This mirrors the formal definition of a limit: for the limit to equal $L$, the value $f(x)$ must get **arbitrarily close** to $L$ when $x$ gets sufficiently close to $c$. Shrinking $\\varepsilon$ is the visual equivalent of "as close as you like".
 
@@ -786,20 +786,20 @@ For deeper coverage of one-sided limits, see the **one-sided limits** page.`,
       title: `Quadratic: the Control Case`,
       content: `$f(x) = x^2$ centered at $c = 1$ is the family with nothing wrong with it, and it is here to give the other six something to be compared against.
 
-At $\varepsilon = 0.5$ the tool samples $f(0.5) = 0.25$ on the left and $f(1.5) = 2.25$ on the right. Both one-sided limits are $1$, $f(1) = 1$, and the single $L$ line passes straight through the curve.`,
+At $\\varepsilon = 0.5$ the tool samples $f(0.5) = 0.25$ on the left and $f(1.5) = 2.25$ on the right. Both one-sided limits are $1$, $f(1) = 1$, and the single $L$ line passes straight through the curve.`,
       before: ``,
-      after: `Shrink $\varepsilon$ and the two sampled values close in on $1$ from either side. That is the definition being enacted: the limit is the number the function values approach, and here they approach it from both directions at once.
+      after: `Shrink $\\varepsilon$ and the two sampled values close in on $1$ from either side. That is the definition being enacted: the limit is the number the function values approach, and here they approach it from both directions at once.
 
 Because $f(c)$ also equals that number, this family is continuous at $c$ as well. Limit and continuity coincide in the easy case — the six families that follow are exactly the ways they can come apart.`,
       link: '',
     },
     obj12: {
       title: `Hole: the Limit Exists Without the Value`,
-      content: `$f(x) = \frac{x^2 - 1}{x - 1}$ at $c = 1$. The expression cancels to $x + 1$ everywhere except at $x = 1$, where it reads $\frac{0}{0}$ and is undefined.
+      content: `$f(x) = \\frac{x^2 - 1}{x - 1}$ at $c = 1$. The expression cancels to $x + 1$ everywhere except at $x = 1$, where it reads $\\frac{0}{0}$ and is undefined.
 
-At $\varepsilon = 0.5$: $f(0.5) = 1.5$, $f(1.5) = 2.5$. Both one-sided limits are $2$, and the $L$ line is drawn at that height — but no $f(c)$ marker appears on it, because there is no value there.`,
+At $\\varepsilon = 0.5$: $f(0.5) = 1.5$, $f(1.5) = 2.5$. Both one-sided limits are $2$, and the $L$ line is drawn at that height — but no $f(c)$ marker appears on it, because there is no value there.`,
       before: ``,
-      after: `This family makes the sharpest point in the whole tool: **the limit does not care what happens at $c$**. Its definition only involves $x$ near $c$ with $x \neq c$, so the missing value is irrelevant to it. The limit is $2$ regardless.
+      after: `This family makes the sharpest point in the whole tool: **the limit does not care what happens at $c$**. Its definition only involves $x$ near $c$ with $x \\neq c$, so the missing value is irrelevant to it. The limit is $2$ regardless.
 
 That is why the verdict rows split the way they do. The limit row passes; the continuity row fails. Filling the hole with $f(1) = 2$ would repair continuity without changing the limit at all.`,
       link: '',
@@ -808,9 +808,9 @@ That is why the verdict rows split the way they do. The limit row passes; the co
       title: `Step: One-Sided Limits That Disagree`,
       content: `A piecewise function — $f(x) = x$ below zero, $f(x) = x + 1$ from zero up — centered at $c = 0$.
 
-At $\varepsilon = 0.5$: $f(-0.5) = -0.5$ approaching from the left, $f(0.5) = 1.5$ from the right. The two $L$ lines sit at $0$ and $1$, and shrinking $\varepsilon$ drives the samples toward those two different numbers.`,
+At $\\varepsilon = 0.5$: $f(-0.5) = -0.5$ approaching from the left, $f(0.5) = 1.5$ from the right. The two $L$ lines sit at $0$ and $1$, and shrinking $\\varepsilon$ drives the samples toward those two different numbers.`,
       before: ``,
-      after: `Both one-sided limits exist here, which is what separates a jump from the wilder failures below. What fails is the requirement that they agree: $\lim_{x \to 0} f(x)$ exists only when $L^- = L^+$, and $0 \neq 1$.
+      after: `Both one-sided limits exist here, which is what separates a jump from the wilder failures below. What fails is the requirement that they agree: $\\lim_{x \\to 0} f(x)$ exists only when $L^- = L^+$, and $0 \\neq 1$.
 
 The gap $L^+ - L^- = 1$ is the jump's size, and it is a fixed property of the two pieces. No choice of $f(0)$ can close it, which is what makes a jump irreparable while a hole is not.`,
       link: '',
@@ -819,29 +819,29 @@ The gap $L^+ - L^- = 1$ is the jump's size, and it is a fixed property of the tw
       title: `1/x²: Both Sides Blow Up the Same Way`,
       content: `$f(x) = 1/x^2$ at $c = 0$ has a vertical asymptote, and the function grows without bound on both sides.
 
-At $\varepsilon = 0.5$: $f(-0.5) = 4$ and $f(0.5) = 4$ — equal, and both already large. Halve $\varepsilon$ and both become $16$; halve again and they are $64$. No $L$ lines are drawn at all, because there is no finite height to draw them at.`,
+At $\\varepsilon = 0.5$: $f(-0.5) = 4$ and $f(0.5) = 4$ — equal, and both already large. Halve $\\varepsilon$ and both become $16$; halve again and they are $64$. No $L$ lines are drawn at all, because there is no finite height to draw them at.`,
       before: ``,
-      after: `The tool records this as $L^- = L^+ = +\infty$, and that notation deserves care. It describes *how* the limit fails, not a value it takes. In the strict sense the limit does not exist, because "exists" means converging to a real number.
+      after: `The tool records this as $L^- = L^+ = +\\infty$, and that notation deserves care. It describes how the limit fails, not a value it takes. In the strict sense the limit does not exist, because "exists" means converging to a real number.
 
-Some texts write $\lim_{x \to 0} 1/x^2 = +\infty$ as shorthand for exactly this behaviour, which is a legitimate convention as long as everyone understands it is a statement about unbounded growth. See [one-sided vs two-sided](!#one-sided-vs-two-sided) for how the same distinction plays out with finite values.`,
+Some texts write $\\lim_{x \\to 0} 1/x^2 = +\\infty$ as shorthand for exactly this behaviour, which is a legitimate convention as long as everyone understands it is a statement about unbounded growth. See [one-sided vs two-sided](!#one-sided-vs-two-sided) for how the same distinction plays out with finite values.`,
       link: '',
     },
     obj15: {
       title: `1/x: Infinite in Opposite Directions`,
       content: `$f(x) = 1/x$ at $c = 0$ also has an asymptote, but the two sides run opposite ways.
 
-At $\varepsilon = 0.5$: $f(-0.5) = -2$ and $f(0.5) = 2$. Shrink $\varepsilon$ and the left sample dives toward $-\infty$ while the right climbs toward $+\infty$.`,
+At $\\varepsilon = 0.5$: $f(-0.5) = -2$ and $f(0.5) = 2$. Shrink $\\varepsilon$ and the left sample dives toward $-\\infty$ while the right climbs toward $+\\infty$.`,
       before: ``,
-      after: `Compare this with $1/x^2$ directly. There, both sides agreed on their manner of failure; here they do not even do that. The tool reports $L^- = -\infty$ and $L^+ = +\infty$, which is a jump and an infinity at once.
+      after: `Compare this with $1/x^2$ directly. There, both sides agreed on their manner of failure; here they do not even do that. The tool reports $L^- = -\\infty$ and $L^+ = +\\infty$, which is a jump and an infinity at once.
 
 The practical consequence shows up in improper integrals and in graphing: the curve leaves the frame downward on one side and upward on the other, so the asymptote separates two branches that share no common value or common direction.`,
       link: '',
     },
     obj16: {
       title: `sin(1/x): Oscillation With No Limit at All`,
-      content: `$f(x) = \sin(1/x)$ at $c = 0$ is the family where neither one-sided limit exists — and not because the function grows too large. It stays neatly inside $[-1, 1]$ the whole time.
+      content: `$f(x) = \\sin(1/x)$ at $c = 0$ is the family where neither one-sided limit exists — and not because the function grows too large. It stays neatly inside $[-1, 1]$ the whole time.
 
-At $\varepsilon = 0.5$ the samples read $f(-0.5) = -0.91$ and $f(0.5) = 0.91$. Those numbers are honest but useless: pick a slightly different $\varepsilon$ and they will be entirely different, because as $x \to 0$ the argument $1/x$ runs off to infinity and the sine cycles faster and faster.`,
+At $\\varepsilon = 0.5$ the samples read $f(-0.5) = -0.91$ and $f(0.5) = 0.91$. Those numbers are honest but useless: pick a slightly different $\\varepsilon$ and they will be entirely different, because as $x \\to 0$ the argument $1/x$ runs off to infinity and the sine cycles faster and faster.`,
       before: ``,
       after: `This is the cleanest demonstration that "bounded" is not "convergent". Between any two points, however close to zero, the function still completes infinitely many full oscillations, taking every value in $[-1, 1]$ along the way. There is no single number the values settle toward.
 
@@ -850,13 +850,13 @@ It also shows why sampling alone can never establish a limit. Two sample points 
     },
     obj17: {
       title: `Square Root: a Limit From One Side Only`,
-      content: `$f(x) = \sqrt{x}$ at $c = 0$ is defined only for $x \geq 0$, so the left half of the graph is simply empty.
+      content: `$f(x) = \\sqrt{x}$ at $c = 0$ is defined only for $x \\geq 0$, so the left half of the graph is simply empty.
 
-At $\varepsilon = 0.5$ the right sample reads $f(0.5) = 0.71$, and the left sample cannot be taken at all — $f(-0.5)$ is undefined. The tool reports $L^+ = 0$ and $L^-$ as DNE.`,
+At $\\varepsilon = 0.5$ the right sample reads $f(0.5) = 0.71$, and the left sample cannot be taken at all — $f(-0.5)$ is undefined. The tool reports $L^+ = 0$ and $L^-$ as DNE.`,
       before: ``,
       after: `The two-sided limit therefore does not exist, but the reason is different in kind from the previous families. Nothing misbehaves; there is simply no left side to approach from.
 
-That is why one-sided limits are worth having as their own notion. $\lim_{x \to 0^+} \sqrt{x} = 0$ is a perfectly good statement, and it is exactly what justifies calling $\sqrt{x}$ continuous on $[0, \infty)$ — continuity at an endpoint is defined using the one-sided limit, because that is the only one available.`,
+That is why one-sided limits are worth having as their own notion. $\\lim_{x \\to 0^+} \\sqrt{x} = 0$ is a perfectly good statement, and it is exactly what justifies calling $\\sqrt{x}$ continuous on $[0, \\infty)$ — continuity at an endpoint is defined using the one-sided limit, because that is the only one available.`,
       link: '',
     },
     obj18: {

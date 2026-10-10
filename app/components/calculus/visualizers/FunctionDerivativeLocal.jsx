@@ -58,7 +58,8 @@ const DEFAULT_X = { x1: -1.40, x2: -0.40 };
 /* ----- helpers ----- */
 const ease = (t) => t * t * (3 - 2 * t);
 const lerp = (a, b, t) => a + (b - a) * t;
-const fmt = (n) => (Math.abs(n) < 1e-9 ? '0.00' : n.toFixed(2));
+// below 0.01 two decimals would read 0.00: show two significant figures instead (0.0021)
+const fmt = (n) => (Math.abs(n) < 1e-9 ? '0.00' : Math.abs(n) < 0.01 ? Number(n.toPrecision(2)).toString() : n.toFixed(2));
 const fmtSigned = (n) => (n >= 0 ? fmt(n) : '(' + fmt(n) + ')');
 const clampX = (x) => Math.max(X_MIN + 0.05, Math.min(X_MAX - 0.05, x));
 

@@ -502,20 +502,24 @@ export default function PartitionIntoGroups({ explanations = null }) {
     const firstItem = items[0];
     const sz = groupSizes[gi];
     const reducedSizes = sizes.map((s, j) => j === boxIdx ? s - 1 : s);
-    const reducedDenom = reducedSizes.map((s) => `${s}!`).join(" · ");
+    // 0! = 1 adds nothing to the quotient, so a box that is already full is left out of it
+    const reducedDenom = reducedSizes.filter((s) => s > 0).map((s) => `${s}!`).join(" · ");
+    const left = sizes[boxIdx] - 1;
+    const others = sizes.map((s, j) => ({ s, j })).filter((o) => o.j !== boxIdx);
 
     return (
       <>
         <ChipAndName item={firstItem} mode={mode} /> is placed in{" "}
         <b>Box {BOX_LABELS[boxIdx]}</b> (size <b>{sizes[boxIdx]}</b>).
-        {" "}The remaining <b>{n - 1}</b> items partition into the other
-        {" "}{k - 1 === 1 ? "box" : "boxes"} of sizes{" "}
-        {reducedSizes.map((s, i) => (
-          <React.Fragment key={i}>
-            {i > 0 ? ", " : ""}<b>{s}</b>
+        {" "}The remaining <b>{n - 1}</b> items fill the rest:{" "}
+        {left > 0
+          ? <>Box {BOX_LABELS[boxIdx]} needs <b>{left}</b> more</>
+          : <>Box {BOX_LABELS[boxIdx]} is already full</>}
+        {others.map((o, i) => (
+          <React.Fragment key={o.j}>
+            {i === others.length - 1 ? " and " : ", "}Box {BOX_LABELS[o.j]} takes <b>{o.s}</b>
           </React.Fragment>
-        ))}
-        {" "}(Box {BOX_LABELS[boxIdx]} needs <b>{sizes[boxIdx] - 1}</b> more), giving{" "}
+        ))}, giving{" "}
         <b>{n - 1}! / ({reducedDenom}) = {sz}</b> partition{sz === 1 ? "" : "s"}.
       </>
     );

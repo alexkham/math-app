@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 
+// Axis ticks: round away float noise (1.0000000000000002 -> 1, 6.907755278982137 -> 6.908).
+const fmtTick = (v) => (typeof v === 'number' && Number.isFinite(v) ? String(Math.round(v * 1000) / 1000) : v);
+
 export default function GenericDistributionExplorer({ distribution }) {
   const [activeTab, setActiveTab] = useState('pmf');
   const [calcTab, setCalcTab] = useState('point');
@@ -405,6 +408,7 @@ export default function GenericDistributionExplorer({ distribution }) {
                       label={{ value: 'Value (k)', position: 'insideBottom', offset: -5 }}
                     />
                     <YAxis 
+                      tickFormatter={fmtTick}
                       label={{ value: 'Probability P(X = k)', angle: -90, position: 'insideLeft' }}
                     />
                     <Tooltip 
@@ -418,7 +422,7 @@ export default function GenericDistributionExplorer({ distribution }) {
                       strokeWidth={3}
                       label={{ 
                         value: `E[X]=${distribution.statistics.mean.toFixed(2)}`, 
-                        position: 'top',
+                        position: 'insideTopRight', // centred on a mean near the edge it ran into the y-axis
                         fill: '#e74c3c',
                         fontSize: 11,
                         fontWeight: 'bold',
@@ -449,6 +453,8 @@ export default function GenericDistributionExplorer({ distribution }) {
                     <YAxis 
                       label={{ value: 'Cumulative Probability P(X ≤ k)', angle: -90, position: 'insideLeft' }}
                       domain={[0, 1]}
+                      allowDataOverflow
+                      tickFormatter={fmtTick}
                     />
                     <Tooltip 
                       formatter={(value) => value.toFixed(6)}
@@ -461,7 +467,7 @@ export default function GenericDistributionExplorer({ distribution }) {
                       strokeWidth={3}
                       label={{ 
                         value: `E[X]=${distribution.statistics.mean.toFixed(2)}`, 
-                        position: 'top',
+                        position: 'insideTopRight', // centred on a mean near the edge it ran into the y-axis
                         fill: '#e74c3c',
                         fontSize: 11,
                         fontWeight: 'bold',

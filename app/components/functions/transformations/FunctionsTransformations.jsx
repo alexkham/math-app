@@ -856,10 +856,10 @@ export const BASES = {
       a: v => v === 1 ? null : v === 0
         ? `**a = 0** flattens the line to the x-axis.`
         : v < 0
-          ? `**a = ${fmt(v)}** flips the line across the x-axis; slope becomes \`${fmt(v)}\`.`
-          : `Slope becomes \`${fmt(v)}\`: the line rises by \`${fmt(v)}\` per unit of $x$.`,
+          ? `**a = ${fmt(v)}** flips the line across the x-axis; slope becomes @[${fmt(v)}]@.`
+          : `Slope becomes @[${fmt(v)}]@: the line rises by @[${fmt(v)}]@ per unit of $x$.`,
       k: v => v === 0 ? null : `Slides the line vertically by **${fmt(v)}** — same slope, shifted ${v > 0 ? 'up' : 'down'}.`,
-      b: v => v === 1 ? null : `For a line, **b** just rescales the slope: equivalent to slope \`${fmt(v)}\`.`,
+      b: v => v === 1 ? null : `For a line, **b** just rescales the slope: equivalent to slope @[${fmt(v)}]@.`,
       h: v => v === 0 ? null : `Shifts the line ${v > 0 ? 'right' : 'left'} by **${fmt(Math.abs(v))}** — indistinguishable from a vertical shift.`,
     },
   },
@@ -874,11 +874,11 @@ export const BASES = {
           : v > 1
             ? `**a = ${fmt(v)}** makes the parabola **narrower** — rises ${fmt(v)}× as fast.`
             : `**a = ${fmt(v)}** makes the parabola **wider** — rises only ${fmt(v)}× as fast.`,
-      k: v => v === 0 ? null : `Moves the **vertex** from (0, 0) to (0, \`${fmt(v)}\`).`,
+      k: v => v === 0 ? null : `Moves the **vertex** from (0, 0) to (0, @[${fmt(v)}]@).`,
       b: v => v === 1 ? null : v === 0
-        ? `**b = 0** makes the input zero — curve collapses to \`f(0) = 0\`.`
+        ? `**b = 0** makes the input zero — curve collapses to @[f(0) = 0]@.`
         : `**b = ${fmt(v)}** squeezes horizontally by ${fmt(Math.abs(v))}×.`,
-      h: v => v === 0 ? null : `Moves the **vertex** from (0, 0) to (\`${fmt(v)}\`, 0).`,
+      h: v => v === 0 ? null : `Moves the **vertex** from (0, 0) to (@[${fmt(v)}]@, 0).`,
     },
   },
   cubic: {
@@ -888,9 +888,9 @@ export const BASES = {
       a: v => v === 1 ? null : v < 0
         ? `**a = ${fmt(v)}** flips the cubic — falls from upper-left to lower-right.`
         : `**a = ${fmt(v)}** stretches the cubic vertically by ${fmt(v)}×.`,
-      k: v => v === 0 ? null : `Inflection point moves to (0, \`${fmt(v)}\`).`,
+      k: v => v === 0 ? null : `Inflection point moves to (0, @[${fmt(v)}]@).`,
       b: v => v === 1 ? null : `**b = ${fmt(v)}** ${v < 0 ? 'flips horizontally' : `compresses horizontally by ${fmt(v)}×`}.`,
-      h: v => v === 0 ? null : `Inflection point moves to (\`${fmt(v)}\`, 0).`,
+      h: v => v === 0 ? null : `Inflection point moves to (@[${fmt(v)}]@, 0).`,
     },
   },
   reciprocal: {
@@ -900,9 +900,9 @@ export const BASES = {
       a: v => v === 1 ? null : v < 0
         ? `**a = ${fmt(v)}** flips the branches across the x-axis.`
         : `Scales both branches vertically by ${fmt(v)}×.`,
-      k: v => v === 0 ? null : `Horizontal asymptote moves from \`y = 0\` to \`y = ${fmt(v)}\`.`,
-      b: v => v === 1 ? null : `**b = ${fmt(v)}** tightens the curve around \`x = 0\`.`,
-      h: v => v === 0 ? null : `Vertical asymptote moves from \`x = 0\` to \`x = ${fmt(v)}\`.`,
+      k: v => v === 0 ? null : `Horizontal asymptote moves from @[y = 0]@ to @[y = ${fmt(v)}]@.`,
+      b: v => v === 1 ? null : `**b = ${fmt(v)}** tightens the curve around @[x = 0]@.`,
+      h: v => v === 0 ? null : `Vertical asymptote moves from @[x = 0]@ to @[x = ${fmt(v)}]@.`,
     },
   },
   exponential: {
@@ -911,8 +911,8 @@ export const BASES = {
     specific: {
       a: v => v === 1 ? null : v < 0
         ? `**a = ${fmt(v)}** flips below the x-axis.`
-        : `Scales vertically by ${fmt(v)}×. Y-intercept moves from 1 to \`${fmt(v)}\`.`,
-      k: v => v === 0 ? null : `Horizontal asymptote moves from \`y = 0\` to \`y = ${fmt(v)}\`.`,
+        : `Scales vertically by ${fmt(v)}×. Y-intercept moves from 1 to @[${fmt(v)}]@.`,
+      k: v => v === 0 ? null : `Horizontal asymptote moves from @[y = 0]@ to @[y = ${fmt(v)}]@.`,
       b: v => v === 1 ? null : v < 0
         ? `**b = ${fmt(v)}** flips horizontally — exponential **decay** instead of growth.`
         : v > 1
@@ -927,20 +927,20 @@ export const BASES = {
     specific: {
       a: v => v === 1 ? null : v < 0
         ? `**a = ${fmt(v)}** flips the curve — now falls toward the asymptote.`
-        : `Scales vertically by ${fmt(v)}×; still crosses \`y = 0\` at \`x = 1\`.`,
+        : `Scales vertically by ${fmt(v)}×; still crosses @[y = 0]@ at @[x = 1]@.`,
       k: v => v === 0 ? null : `Lifts the curve by ${fmt(v)}.`,
-      b: v => v === 1 ? null : `**b = ${fmt(v)}** rescales horizontally. Note: \`ln(bx) = ln(b) + ln(x)\`.`,
-      h: v => v === 0 ? null : `Vertical asymptote moves from \`x = 0\` to \`x = ${fmt(v)}\`; domain: \`x > ${fmt(v)}\`.`,
+      b: v => v === 1 ? null : `**b = ${fmt(v)}** rescales horizontally. Note: @[ln(bx) = ln(b) + ln(x)]@.`,
+      h: v => v === 0 ? null : `Vertical asymptote moves from @[x = 0]@ to @[x = ${fmt(v)}]@; domain: @[x > ${fmt(v)}]@.`,
     },
   },
   sine: {
     name: 'Sine', group: 'Trigonometric', glyph: 'M2,14 Q7,2 12,14 Q17,26 22,14',
     base: x => Math.sin(x), eqBase: 'f(x) = sin(x)', bodyOf: i => `sin(${i})`,
     specific: {
-      a: v => v === 1 ? null : `**Amplitude = ${fmt(Math.abs(v))}**${v < 0 ? ' (flipped)' : ''}. Oscillates between \`${fmt(-Math.abs(v))}\` and \`${fmt(Math.abs(v))}\`.`,
-      k: v => v === 0 ? null : `Midline moves from \`y = 0\` to \`y = ${fmt(v)}\`.`,
+      a: v => v === 1 ? null : `**Amplitude = ${fmt(Math.abs(v))}**${v < 0 ? ' (flipped)' : ''}. Oscillates between @[${fmt(-Math.abs(v))}]@ and @[${fmt(Math.abs(v))}]@.`,
+      k: v => v === 0 ? null : `Midline moves from @[y = 0]@ to @[y = ${fmt(v)}]@.`,
       b: v => v === 1 ? null : `**Period = 2π/${fmt(Math.abs(v))} ≈ ${fmt(2*Math.PI/Math.abs(v))}**${v < 0 ? ' (mirrored)' : ''}.`,
-      h: v => v === 0 ? null : `Phase shift of **${fmt(v)}** — \`sin(0)\` now happens at \`x = ${fmt(v)}\`.`,
+      h: v => v === 0 ? null : `Phase shift of **${fmt(v)}** — @[sin(0)]@ now happens at @[x = ${fmt(v)}]@.`,
     },
   },
   cosine: {
@@ -948,9 +948,9 @@ export const BASES = {
     base: x => Math.cos(x), eqBase: 'f(x) = cos(x)', bodyOf: i => `cos(${i})`,
     specific: {
       a: v => v === 1 ? null : `**Amplitude = ${fmt(Math.abs(v))}**${v < 0 ? ' (flipped)' : ''}.`,
-      k: v => v === 0 ? null : `Midline moves to \`y = ${fmt(v)}\`; peak at \`y = ${fmt(v + 1)}\`.`,
+      k: v => v === 0 ? null : `Midline moves to @[y = ${fmt(v)}]@; peak at @[y = ${fmt(v + 1)}]@.`,
       b: v => v === 1 ? null : `**Period = 2π/${fmt(Math.abs(v))} ≈ ${fmt(2*Math.PI/Math.abs(v))}**${v < 0 ? '; cos is even, so the flip is invisible' : ''}.`,
-      h: v => v === 0 ? null : `Peak moves from \`x = 0\` to \`x = ${fmt(v)}\`.`,
+      h: v => v === 0 ? null : `Peak moves from @[x = 0]@ to @[x = ${fmt(v)}]@.`,
     },
   },
   absolute: {
@@ -959,10 +959,10 @@ export const BASES = {
     specific: {
       a: v => v === 1 ? null : v < 0
         ? `**a = ${fmt(v)}** flips the V to open downward.`
-        : `Slope of each side: \`±${fmt(v)}\`.`,
-      k: v => v === 0 ? null : `Vertex moves to (0, \`${fmt(v)}\`).`,
+        : `Slope of each side: @[±${fmt(v)}]@.`,
+      k: v => v === 0 ? null : `Vertex moves to (0, @[${fmt(v)}]@).`,
       b: v => v === 1 ? null : `**b = ${fmt(v)}** sharpens horizontally${v < 0 ? ' (even, so flip is invisible)' : ''}.`,
-      h: v => v === 0 ? null : `Vertex moves to (\`${fmt(v)}\`, 0).`,
+      h: v => v === 0 ? null : `Vertex moves to (@[${fmt(v)}]@, 0).`,
     },
   },
   sqrt: {
@@ -972,9 +972,9 @@ export const BASES = {
       a: v => v === 1 ? null : v < 0
         ? `**a = ${fmt(v)}** flips the curve below the x-axis.`
         : `Scales vertically by ${fmt(v)}×.`,
-      k: v => v === 0 ? null : `Starting point moves to (0, \`${fmt(v)}\`).`,
-      b: v => v === 1 ? null : `Domain ${v < 0 ? 'flips to \`x ≤ 0\`' : `compresses by ${fmt(v)}×`}.`,
-      h: v => v === 0 ? null : `Domain shifts to \`x ≥ ${fmt(v)}\`; starting point: (\`${fmt(v)}\`, 0).`,
+      k: v => v === 0 ? null : `Starting point moves to (0, @[${fmt(v)}]@).`,
+      b: v => v === 1 ? null : `Domain ${v < 0 ? 'flips to @[x ≤ 0]@' : `compresses by ${fmt(v)}×`}.`,
+      h: v => v === 0 ? null : `Domain shifts to @[x ≥ ${fmt(v)}]@; starting point: (@[${fmt(v)}]@, 0).`,
     },
   },
 };
@@ -1165,13 +1165,13 @@ export default function FunctionTransformations({
       if (active.length === 0) {
         content =
           '## Custom · ' + fam.name + '\n' +
-          '`g(x) = a · f(b(x − h)) + k`\n\n' +
-          '*No transformations applied yet — adjust any slider to see effects on **' + fam.name + '**.*';
+          '@[g(x) = a · f(b(x − h)) + k]@\n\n' +
+          'No transformations applied yet — adjust any slider to see effects on **' + fam.name + '**.';
       } else {
-        content = '## Custom · ' + fam.name + '\n`g(x) = a · f(b(x − h)) + k`\n\n';
+        content = '## Custom · ' + fam.name + '\n@[g(x) = a · f(b(x − h)) + k]@\n\n';
         active.forEach(k => {
           const spec = fam.specific[k](params[k]);
-          content += `**${GENERAL[k].title}** · \`${k} = ${fmt(params[k])}\`\n${spec || ''}\n\n`;
+          content += `**${GENERAL[k].title}** · @[${k} = ${fmt(params[k])}]@\n${spec || ''}\n\n`;
         });
       }
     } else {
@@ -1180,12 +1180,12 @@ export default function FunctionTransformations({
       const specific = fam.specific[activeTab](v);
       content =
         `## ${g.title}\n` +
-        `\`${g.formula}\`\n\n` +
+        `@[${g.formula}]@\n\n` +
         `### General\n${g.body}\n\n` +
         `### Applied to ${fam.name.toLowerCase()}\n` +
         (specific
           ? specific
-          : `*Currently at the default value — move the slider to see how it affects **${fam.name}**.*`);
+          : `Currently at the default value — move the slider to see how it affects **${fam.name}**.`);
     }
     return [
       { key: 'explanation', label: 'Explanation', order: 0, content },

@@ -866,6 +866,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 
@@ -1513,6 +1514,21 @@ const discreteUniformExplanations = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const duPx = (k, w) => k / w * 388;
+  const duSumP = (s) => (6 - Math.abs(s - 7)) / 36;
+  const duDiceBars = [].concat(
+    [1, 2, 3, 4, 5, 6].map((k) => ({ from: 0, to: 1 / 6, color: 'f', dx: duPx(k, 13) - 4 })),
+    [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((s) => ({ from: 0, to: duSumP(s), color: 'r', dx: duPx(s, 13) + 4 })));
+  const duWidthBars = [].concat(
+    [1, 2, 3, 4, 5, 6, 7, 8, 9].map((k) => ({ from: 0, to: 1 / 9, color: 'f', dx: duPx(k, 10.5) - 4 })),
+    [4, 5, 6].map((k) => ({ from: 0, to: 1 / 3, color: 'r', dx: duPx(k, 10.5) + 4 })));
+  const base = { kind: 'pieces', pieces: [{ fn: () => 0, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [] }] };
+  const fpDuDice = { ...base, svgTitle: 'One fair die: six equal bars of 1/6. The sum of two dice: a triangle from 2 to 12, peaked at 7', xRange: [-0.5, 12.5], yRange: [0, 0.24], xLetter: 'x', yBars: duDiceBars,
+    notes: [{ x: 7.6, y: 0.225, text: 'blue: one die, 1/6 each', pos: 'e', color: 'f' }, { x: 7.6, y: 0.205, text: 'amber: sum of two dice', pos: 'e', color: 'r' }, { x: 7.6, y: 0.185, text: '7 has 6 of 36 ways', pos: 'e' }],
+    caption: 'One die is uniform; adding two dice is not' };
+  const fpDuWidth = { ...base, svgTitle: 'Two discrete uniforms centred at 5: three values with variance 2/3, nine values with variance 20/3', xRange: [-0.5, 10], yRange: [0, 0.4], xLetter: 'x', yBars: duWidthBars,
+    notes: [{ x: 6.6, y: 0.37, text: 'amber: n = 3, Var ≈ 0.67', pos: 'e', color: 'r' }, { x: 6.6, y: 0.34, text: 'blue: n = 9, Var ≈ 6.67', pos: 'e', color: 'f' }, { x: 6.6, y: 0.31, text: 'both: mean 5', pos: 'e' }],
+    caption: '3 times as many values, 10 times the variance' };
   const demoUnits = {
     u_4_0: demoUnitFrame({
       svg: discretePmfDiagrams.discreteUniform,
@@ -1527,6 +1543,16 @@ const discreteUniformExplanations = {
       text: 'Because every bar has the same height the staircase climbs in equal steps of 1/6, reaching 1 at b. F(k) is the number of values up to k over the total number of values, a straight count. Compare the even steps with the uneven staircases of other families on the',
       href: '/probability/visual-tools/cdf/discrete',
       linkText: 'discrete CDF explorer',
+    }),
+    duDice: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpDuDice),
+      caption: 'Uniform as the baseline',
+      text: 'Blue bars: one roll of a fair die, six values of probability 1/6 each, the discrete uniform on 1 to 6. Amber bars: the sum of two dice. Every one of the 36 ordered pairs is still equally likely, but the sums are not: 7 can be made in 6 ways and 2 or 12 in only one. Repeating the experiment and adding turns the flat profile into a triangle.',
+    }),
+    duWidth: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpDuWidth),
+      caption: 'Variance against the number of values',
+      text: 'Two discrete uniforms, both centred at 5. Amber: the values 4, 5, 6, each with probability 1/3, variance (3&#178; &#8722; 1)/12 &#8776; 0.67. Blue: the values 1 to 9, each with probability 1/9, variance (9&#178; &#8722; 1)/12 &#8776; 6.67. Three times as many values give ten times the variance, because the formula grows with n&#178;.',
     }),
   };
 
@@ -1579,6 +1605,8 @@ export default function DiscreteUniformDistributionPage({
         link:sectionsContent.obj1.link,
         content:[
            sectionsContent.obj1.content,
+                  <div key={'unit-duDice'} dangerouslySetInnerHTML={{ __html: demoUnits.duDice }} />,
+           `Flat over single picks, uneven over their sums: one source of the other discrete shapes.`,
           sectionsContent.links.decide,
           sectionsContent.obj1.example,
           sectionsContent.links.example,
@@ -1659,6 +1687,8 @@ export default function DiscreteUniformDistributionPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-duWidth'} dangerouslySetInnerHTML={{ __html: demoUnits.duWidth }} />,
+          `Moving the range left or right changes the mean but never the variance: only n = b − a + 1 counts.`,
         ]
     },
     {

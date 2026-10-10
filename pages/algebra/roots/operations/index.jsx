@@ -8,6 +8,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -533,6 +535,17 @@ const schemas = {
 }
 
 
+
+  const demoUnits = {
+    squareOfSum: demoUnitFrame({
+      svg: identityDiagrams['sum-4'],
+      caption: 'Why the middle term stays',
+      text: 'The square of a sum as an area: a side a + b cut into an a &#215; a square, a b &#215; b square and two a &#215; b rectangles. With a = &#8730;5 and b = &#8730;2 the squares have areas 5 and 2 and each rectangle has area &#8730;5&#183;&#8730;2 = &#8730;10, so (&#8730;5 + &#8730;2)&#178; = 7 + 2&#8730;10. Writing a&#178; + b&#178; alone drops the two rectangles. Build the square piece by piece on the',
+      href: '/algebra/visual-tools/identities/square-of-sum',
+      linkText: 'square of a sum explorer',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -542,6 +555,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Operations on Radicals: Add, Subtract, Multiply, Divide | Learn Math Class",
       description: "Learn operations with radicals: adding, subtracting, multiplying, and dividing radical expressions. Includes conjugates, expanding products, and squaring radicals.",
@@ -556,7 +570,7 @@ return {
 // export default function OperationsPage({seoData,sectionsContent , introContent}) {
 
 
-export default function OperationsPage({seoData, sectionsContent, introContent, obj1Table, obj6Table, summaryTable, faqQuestions, schemas}) {
+export default function OperationsPage({seoData, sectionsContent, introContent, obj1Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -633,6 +647,8 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-squareOfSum'} dangerouslySetInnerHTML={{ __html: demoUnits.squareOfSum }} />,
+          `The two rectangles are the 2a√b of (a + √b)², which is why squaring a binomial leaves a radical behind.`,
         ]
     },
     {

@@ -12,6 +12,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagrams'
 
 
@@ -682,6 +683,17 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const rbBars = Array.from({ length: 30 }, (_, i) => { const x = 1 + (i + 0.5) * 3 / 30; return { from: 0, to: Math.sqrt(x), color: 'f', dx: x / 5 * 388 }; });
+  const fpBounds = { kind: 'pieces', svgTitle: 'sqrt x on [1, 4] lies between 1 and 2, so its integral 14/3 lies between 1 x 3 = 3 and 2 x 3 = 6', xRange: [0, 5], yRange: [-0.5, 2.8],
+    pieces: [
+      { fn: () => 2, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[1, 4]], label: { text: 'M = 2: box area 6', x: 2.5, y: 2, pos: 'n' } },
+      { fn: () => 1, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[1, 4]], label: { text: 'm = 1: box area 3', x: 2.5, y: 1, pos: 's' } },
+      { fn: Math.sqrt, from: 0, to: 4.8, ends: [null, null], color: 'f', label: { text: 'y = √x', x: 4.4, y: Math.sqrt(4.4), pos: 'se' } },
+    ],
+    yBars: rbBars,
+    vlines: [{ x: 1 }, { x: 4 }],
+    notes: [{ x: 0.1, y: 2.55, text: '3 ≤ area under √x on [1, 4] = 14/3 ≤ 6', pos: 'e', color: 'r' }],
+    caption: 'm(b − a) ≤ integral ≤ M(b − a): the area sits between two boxes' };
   const demoUnits = {
     ftc1: demoUnitFrame({
       svg: functionFTCDiagrams.cubic,
@@ -689,6 +701,11 @@ const schemas = {
       text: 'The accumulation function is the upper curve; at the right edge x = 2 its slope equals the height of the integrand there, 8. Nudging x to the right adds a thin strip of area whose height is f(x) and whose width is the nudge, so the rate at which area accumulates is f(x) itself. Move the edge and compare the slope above with the height below on the',
       href: '/calculus/visual-tools/fundamental-theorem',
       linkText: 'fundamental theorem of calculus visualizer',
+    }),
+    bounds: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpBounds),
+      caption: 'Bounding an integral between two boxes',
+      text: 'On [1, 4] the function &#8730;x stays between m = 1 and M = 2. The shaded area under the curve therefore contains the box of height 1 over the interval, area 1 &#183; 3 = 3, and fits inside the box of height 2, area 2 &#183; 3 = 6. So 3 &#8804; &#8747;&#8321;&#8308; &#8730;x dx &#8804; 6 before any antiderivative is found; the exact value is 14/3 &#8776; 4.67.',
     }),
   };
 
@@ -784,6 +801,8 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj7T
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-bounds'} dangerouslySetInnerHTML={{ __html: demoUnits.bounds }} />,
+          `Splitting [1, 4] and bounding each piece separately would tighten both estimates.`,
         ]
     },
     {

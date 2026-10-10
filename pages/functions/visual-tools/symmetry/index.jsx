@@ -49,9 +49,11 @@ export async function getStaticProps(){
 • $f(-x)$ in **dashed amber** (the function reflected across the y-axis)
 • $-f(-x)$ in **dotted teal** (the function rotated 180° about the origin)
 
-Below the plot sits a **verdict card** that names the symmetry — Even, Odd, or Neither — followed by a step-by-step algebraic derivation. On the right is the **info panel** with two tabs.
+Below the plot sits a **verdict card** that names the symmetry — Even, Odd, or Neither — followed by a step-by-step algebraic derivation. On the right is the **info panel** with three tabs — Explanation, Family and Concepts.
 
-The page launches with quadratic. Blue and amber overlap exactly: the dashes punch through the solid line. That visual coincidence is the proof that $f(-x) = f(x)$, so the function is even.`,
+The page launches with quadratic. Blue and amber overlap exactly: the dashes punch through the solid line. That visual coincidence is the proof that $f(-x) = f(x)$, so the function is even.
+
+The **S**, **M**, **L** and **XL** buttons above the plot set its height; the curves and readouts stay the same.`,
       before: ``,
       after: ``,
       link: '',
@@ -83,7 +85,7 @@ Click any entry to switch. [Transformation](!/functions/transformations#2) param
 
 The three curves use deliberately distinct stroke patterns — solid, long-dash, fine-dot — so overlapping curves remain visually distinguishable as two separate lines rather than collapsing into one. Even when the geometric coincidence is exact, you can still see both curves at the overlap, which makes the visual evidence trustworthy.
 
-A legend in the sidebar lets you toggle any of the three curves off if you want to inspect them individually.`,
+The **Curves** toggles in the sidebar let you switch any of the three curves off if you want to inspect them individually.`,
       before: ``,
       after: ``,
       link: '',

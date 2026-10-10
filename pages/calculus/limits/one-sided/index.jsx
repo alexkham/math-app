@@ -1946,6 +1946,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 
@@ -2671,6 +2672,21 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpPiecewiseMeet = { kind: 'pieces', svgTitle: 'x^2 for x < 2 and 3x - 2 for x >= 2 both approach 4 at x = 2, so the two-sided limit is 4', xRange: [0, 4], yRange: [-1, 10],
+    pieces: [
+      { fn: (x) => x * x, from: 0, to: 2, ends: [null, 'open'], color: 'f', label: { text: 'x² (x < 2)', x: 1.2, y: 1.44, pos: 'se' } },
+      { fn: (x) => 3 * x - 2, from: 2, to: 4, ends: ['closed', null], color: 'r', label: { text: '3x − 2 (x ≥ 2)', x: 3.1, y: 7.3, pos: 'nw' } },
+    ],
+    vlines: [{ x: 2 }],
+    notes: [{ x: 0.1, y: 9.2, text: 'from the left: 2² = 4', pos: 'e', color: 'f' }, { x: 0.1, y: 8.2, text: 'from the right: 3·2 − 2 = 4', pos: 'e', color: 'r' }, { x: 2.1, y: 2.4, text: 'both sides → 4', pos: 'e' }],
+    caption: 'Same one-sided limits from two formulas: the limit at 2 is 4' };
+  const fpSignFn = { kind: 'pieces', svgTitle: '|x|/x is -1 for x < 0 and +1 for x > 0 and undefined at 0: the one-sided limits are -1 and 1', xRange: [-3, 3], yRange: [-2, 2],
+    pieces: [
+      { fn: () => -1, from: -3, to: 0, ends: [null, 'open'], color: 'r', label: { text: 'x < 0: |x|/x = −1', x: -2.9, y: -1, pos: 'n' } },
+      { fn: () => 1, from: 0, to: 3, ends: ['open', null], color: 'f', label: { text: 'x > 0: |x|/x = 1', x: 1.5, y: 1, pos: 'n' } },
+    ],
+    notes: [{ x: 0.15, y: -0.5, text: 'no value at 0', pos: 'e' }, { x: -2.9, y: 1.7, text: 'left −1, right 1: no limit at 0', pos: 'e', color: 'r' }],
+    caption: '|x|/x: −1 from the left, 1 from the right, no limit at 0' };
   const demoUnits = {
     connection: demoUnitFrame({
       svg: functionLimitDiagrams.onesided,
@@ -2692,6 +2708,16 @@ const schemas = {
       text: 'The probes at &#177;0.5 read &#8722;2 and 2 and run off in opposite directions as they close in, which is exactly the sign pattern the section derives for 1/(x &#8722; 2) at 2: the side decides the sign. Watch the two readings separate on the',
       href: '/calculus/visual-tools/limit',
       linkText: 'limit explorer',
+    }),
+    piecewiseMeet: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpPiecewiseMeet),
+      caption: 'Two formulas meeting at x = 2',
+      text: 'The section&#8217;s f(x) = x&#178; for x &lt; 2 and 3x &#8722; 2 for x &#8805; 2. Approaching 2 from the left, the blue piece x&#178; heads to 4; from the right, the amber piece 3x &#8722; 2 also heads to 4, and f(2) = 4 as well. Because the two one-sided limits agree, the two-sided limit exists and equals 4. The graph still bends at the join, but that affects the derivative, not the limit.',
+    }),
+    signFn: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpSignFn),
+      caption: '|x|/x on each side of 0',
+      text: 'The section&#8217;s |x|/x. For every positive x, |x| = x and the quotient is 1; for every negative x, |x| = &#8722;x and the quotient is &#8722;1. The graph is two flat rays with open ends at 0, where the expression has no value. The right-hand limit is 1, the left-hand limit is &#8722;1, and since they differ the two-sided limit at 0 does not exist.',
     }),
   };
 
@@ -2774,6 +2800,8 @@ export default function OneSidedPage({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-piecewiseMeet'} dangerouslySetInnerHTML={{ __html: demoUnits.piecewiseMeet }} />,
+          `Changing the right piece to 3x would give a right limit of 6: a jump, and no two-sided limit.`,
         ]
     },
     {
@@ -2810,6 +2838,8 @@ export default function OneSidedPage({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-signFn'} dangerouslySetInnerHTML={{ __html: demoUnits.signFn }} />,
+          `Redefining the value at 0 cannot help: no single number is close to both −1 and 1.`,
         ]
     },
     {

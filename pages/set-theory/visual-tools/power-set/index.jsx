@@ -572,7 +572,8 @@ Selecting a smaller subset trades one cone for the other, most sharply at [a sin
      (opens on the Set tab with Elements a, b, c: 8 subsets, nothing selected).
      Lattice nodes are <g role="button" aria-label="Subset {…}">; Roster form
      entries are buttons labelled {…}. The first checkbox is Empty set; the only
-     range input is Level gap (Style tab, 52..120). */
+     range input is Level gap (Style tab, 52..120). Highlight is the color input,
+     Fade edges the checkbox with id fade… (both on the Style tab). */
   const demos = {
     'getting-started': {
       title: 'Building the set',
@@ -662,7 +663,7 @@ Green: 8 supersets = 2^3.` },
       ],
     },
     'styling-the-diagram': {
-      title: 'Level gap',
+      title: 'Level gap, Highlight, Fade edges',
       script: [
         { say: `TAP Size 5
 32 subsets on six levels.
@@ -679,10 +680,17 @@ Rows spread apart.
 Same lattice, more room per level.` },
         { slide: { range: 0 }, to: 110, ms: 1400 },
         { wait: 2800 },
-        { say: `DRAG Level gap → 52
-Rows packed tight.
-Whole lattice in a short strip.` },
-        { slide: { range: 0 }, to: 52, ms: 1400 },
+        { say: `TAP {a, b}, PICK Highlight → amber
+Its downward cone turns amber.
+Lines outside both cones fade.` },
+        { click: '[aria-label="Subset {a, b}"]' },
+        { wait: 900 },
+        { set: 'input[type=color]', value: '#d97706' },
+        { wait: 2800 },
+        { say: `UNTICK Fade edges
+Every line back at full strength.
+The cones are harder to trace.` },
+        { set: 'input[id^="fade"]', value: false },
         { wait: 2800 },
       ],
     },

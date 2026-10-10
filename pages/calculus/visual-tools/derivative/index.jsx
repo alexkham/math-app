@@ -774,31 +774,31 @@ Notice also that $f'$ crosses zero rather than merely touching it. That crossing
 
 At $x_0 = 1$: $f(x_0) = 1$ and $f'(x_0) = 3$. Slide $x_0$ to the origin and the tangent goes flat — but the curve does not turn around.`,
       before: ``,
-      after: `This is the standard counterexample to "zero derivative means extremum". At $x = 0$ the tangent is horizontal, yet $f' \ge 0$ everywhere, so the function never stops increasing. It merely pauses.
+      after: `This is the standard counterexample to "zero derivative means extremum". At $x = 0$ the tangent is horizontal, yet $f' \\ge 0$ everywhere, so the function never stops increasing. It merely pauses.
 
 What distinguishes this from the quadratic is that $f'$ touches the axis without crossing it. No sign change, no turning point. The rule that actually classifies a critical point is the sign change of $f'$, not the zero itself.`,
       link: '',
     },
     obj14: {
       title: `Sine: the Derivative Is a Quarter Turn`,
-      content: `$f(x) = \sin(x)$ has $f'(x) = \cos(x)$ — the same wave, shifted left by $\pi/2$.
+      content: `$f(x) = \\sin(x)$ has $f'(x) = \\cos(x)$ — the same wave, shifted left by $\\pi/2$.
 
-At $x_0 = 1$: $f(x_0) = 0.84$ and $f'(x_0) = 0.54$. The sine is still climbing at that point, though it is slowing down as it nears its peak at $\pi/2 \approx 1.571$.`,
+At $x_0 = 1$: $f(x_0) = 0.84$ and $f'(x_0) = 0.54$. The sine is still climbing at that point, though it is slowing down as it nears its peak at $\\pi/2 \\approx 1.571$.`,
       before: ``,
-      after: `The shift is the most useful thing to see here. Every peak of $\sin$ lines up with a zero of $\cos$ going downward, every trough with a zero going upward, and the steepest parts of the sine sit exactly where the cosine reaches $\pm 1$.
+      after: `The shift is the most useful thing to see here. Every peak of $\\sin$ lines up with a zero of $\\cos$ going downward, every trough with a zero going upward, and the steepest parts of the sine sit exactly where the cosine reaches $\\pm 1$.
 
-Differentiating four times returns you to where you started: $\sin \to \cos \to -\sin \to -\cos \to \sin$. Each step is another quarter turn, which is why trigonometric derivatives cycle rather than simplify.`,
+Differentiating four times returns you to where you started: $\\sin \\to \\cos \\to -\\sin \\to -\\cos \\to \\sin$. Each step is another quarter turn, which is why trigonometric derivatives cycle rather than simplify.`,
       link: '',
     },
     obj15: {
       title: `Cosine: the Same Wave With a Sign`,
-      content: `$f(x) = \cos(x)$ has $f'(x) = -\sin(x)$. Same shape as the sine family, but the minus sign matters.
+      content: `$f(x) = \\cos(x)$ has $f'(x) = -\\sin(x)$. Same shape as the sine family, but the minus sign matters.
 
-At $x_0 = 1$: $f(x_0) = 0.54$ and $f'(x_0) = -0.84$. The cosine is descending there — it peaked at the origin and is on its way down to its zero at $\pi/2$.`,
+At $x_0 = 1$: $f(x_0) = 0.54$ and $f'(x_0) = -0.84$. The cosine is descending there — it peaked at the origin and is on its way down to its zero at $\\pi/2$.`,
       before: ``,
       after: `Compare this with the [sine family](!#sine) directly: the readings swap roles and one of them picks up a minus. That is not a coincidence but the quarter-turn rule applied one step further along the cycle.
 
-The negative sign is also the reason the second derivative of $\cos$ is $-\cos$ — the function equals the negative of its own second derivative, which is exactly the differential equation that makes sine and cosine describe oscillation.`,
+The negative sign is also the reason the second derivative of $\\cos$ is $-\\cos$ — the function equals the negative of its own second derivative, which is exactly the differential equation that makes sine and cosine describe oscillation.`,
       link: '',
     },
     obj16: {
@@ -814,13 +814,13 @@ Geometrically it says the height of the curve is its own slope: at height 2.72 t
     },
     obj17: {
       title: `Logarithm: a Derivative That Blows Up`,
-      content: `$f(x) = \ln(x)$ has $f'(x) = 1/x$, and both are defined only for $x > 0$ — the left half of the graph is empty for this family.
+      content: `$f(x) = \\ln(x)$ has $f'(x) = 1/x$, and both are defined only for $x > 0$ — the left half of the graph is empty for this family.
 
 At $x_0 = 1$: $f(x_0) = 0$ and $f'(x_0) = 1$. The logarithm crosses the x-axis at 1, and it does so at slope exactly 1.`,
       before: ``,
       after: `Watch what happens as $x_0$ moves toward zero. The logarithm plunges without bound, and $1/x$ climbs without bound alongside it — the curve gets steeper and steeper with no limiting slope. Move the other way and both flatten out: at $x = 5$ the slope is already down to $0.2$.
 
-That contrast is worth holding next to the [exponential](!#the-exponential), which is the inverse function. Where $e^x$ grows faster than any polynomial, $\ln x$ grows slower than any positive power of $x$ — and the reciprocal derivative is precisely why.`,
+That contrast is worth holding next to the [exponential](!#the-exponential), which is the inverse function. Where $e^x$ grows faster than any polynomial, $\\ln x$ grows slower than any positive power of $x$ — and the reciprocal derivative is precisely why.`,
       link: '',
     },
     obj18: {

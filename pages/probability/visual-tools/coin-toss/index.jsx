@@ -198,7 +198,7 @@ It also explains the shape of the binomial distribution directly. Exactly one ou
       title: `A Majority of Heads`,
       content: `The majority condition highlights every outcome with more heads than tails: HHH, HHT, HTH and THH.
 
-$P(\text{more heads than tails}) = \frac{4}{8} = \frac{1}{2}$
+$P(\\text{more heads than tails}) = \\frac{4}{8} = \\frac{1}{2}$
 
 Four of the eight cards light up — exactly half the space.`,
       before: ``,
@@ -211,20 +211,20 @@ That argument depends on the coin count being **odd**. With three coins every ou
       title: `All Three the Same`,
       content: `The all-same condition highlights just HHH and TTT.
 
-$P(\text{all three match}) = \frac{2}{8} = \frac{1}{4}$
+$P(\\text{all three match}) = \\frac{2}{8} = \\frac{1}{4}$
 
 These are the two most "extreme" outcomes, one at each end of the head count.`,
       before: ``,
-      after: `The quick way to see the quarter: the first coin can be anything, and the remaining two each have to match it, giving $1 \times \frac{1}{2} \times \frac{1}{2} = \frac{1}{4}$. Counting cards and multiplying probabilities agree, as they must.
+      after: `The quick way to see the quarter: the first coin can be anything, and the remaining two each have to match it, giving $1 \\times \\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{4}$. Counting cards and multiplying probabilities agree, as they must.
 
-This is also the pair people find least likely-looking, and that intuition is misleading. HHH has exactly the same probability as HTH — $1/8$ each — because both are single outcomes. What is rarer is not the *sequence* HHH but the *event* "all three match", which contains two of the eight sequences rather than one.`,
+This is also the pair people find least likely-looking, and that intuition is misleading. HHH has exactly the same probability as HTH — $1/8$ each — because both are single outcomes. What is rarer is not the sequence HHH but the event "all three match", which contains two of the eight sequences rather than one.`,
       link: '',
     },
     obj14: {
       title: `Alternating Outcomes`,
       content: `The alternating condition highlights outcomes where no two adjacent coins agree: HTH and THT.
 
-$P(\text{alternating}) = \frac{2}{8} = \frac{1}{4}$
+$P(\\text{alternating}) = \\frac{2}{8} = \\frac{1}{4}$
 
 The same probability as all-same, and for a related reason: the first coin is free and each of the next two is then forced.`,
       before: ``,

@@ -389,13 +389,15 @@ export default function FunctionContinuity({
     const failed = [!v.c1pass && '1', !v.c2pass && '2', !v.c3pass && '3'].filter(Boolean);
     const summary = v.continuous
       ? 'All three conditions pass — continuous at this c.'
-      : `Check ${failed.join(' and ')} fails — not continuous at this c.`;
+      : `Check${failed.length > 1 ? 's' : ''} ${failed.join(' and ')} fail${failed.length > 1 ? '' : 's'} — not continuous at this c.`;
+    // Values in math mode; "undefined" stays plain text (math mode would italicise it letter by letter).
+    const mv = (x) => (Number.isFinite(x) ? `$${fmt(x)}$` : fmt(x));
     return (
       `## ${fam.name} at c = ${fmt(c, 2)}\n\n` +
       `${fam.intro}\n\n` +
-      `**Function** · $${fam.eq}$\n\n` +
+      `**Function** · ${fam.eq}\n\n` +
       `### Right now\n\n` +
-      `f(c) = $${fmt(v.Fc)}$; $L^-$ = $${fmt(v.Lminus)}$, $L^+$ = $${fmt(v.Lplus)}$. ${summary}\n\n` +
+      `f(c) = ${mv(v.Fc)}; $L^-$ = ${mv(v.Lminus)}, $L^+$ = ${mv(v.Lplus)}. ${summary}\n\n` +
       `### What c controls\n\n` +
       `Slide c to test the three conditions at any point. At most c the checklist passes — f is continuous almost everywhere. The interesting points are the few where at least one check fails. Use the jump-to buttons to land on them directly.` +
       // Optional per-family note supplied by the page (Line 1 anchor mesh).
@@ -689,7 +691,7 @@ export default function FunctionContinuity({
               <div style={{ ...sectionTitle, margin: '0 4px 4px' }}>Display</div>
               <div style={{ display: 'flex', flexDirection: 'column', padding: '0 4px' }}>
                 <Toggle checked={showF}      onChange={setShowF}      swatchColor={COL.f}     style="solid"  label="f(x)" />
-                <Toggle checked={showLimits} onChange={setShowLimits} swatchColor={COL.limit} style="dashed" label="L\u207B, L\u207A" />
+                <Toggle checked={showLimits} onChange={setShowLimits} swatchColor={COL.limit} style="dashed" label={'L\u207B, L\u207A'} />
                 <Toggle checked={showC}      onChange={setShowC}      swatchColor={COL.link}  style="dashed" label="x = c" />
               </div>
             </div>
@@ -897,7 +899,8 @@ export default function FunctionContinuity({
                 fontSize: 9.5, textTransform: 'uppercase', letterSpacing: '0.05em',
                 color: panelTones.text, fontWeight: 700,
                 background: panelTones.soft, padding: '2px 6px', borderRadius: 3,
-              }}>all 3 pass &rArr; continuous</span>
+              }}>{v.continuous ? <>all 3 pass &rArr; continuous</>
+                : <>{[!v.c1pass && '1', !v.c2pass && '2', !v.c3pass && '3'].filter(Boolean).join(' & ')} fail{[v.c1pass, v.c2pass, v.c3pass].filter((x) => !x).length > 1 ? '' : 's'} &rArr; not continuous</>}</span>
             </div>
           </div>
         </div>

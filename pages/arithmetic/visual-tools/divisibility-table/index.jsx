@@ -1034,8 +1034,35 @@ Every explanation ends in two links: one to the section for its rule—or to [co
   /* Animated demos (ToolDemoPlayer v3) against the real DivisibilityTable
      (opens with nothing selected). Divisor buttons are "÷1" … "÷12" (exact match);
      the red "✕" clear button exists only while a divisor is active.
-     The hover tooltip cannot be driven (the player has no hover entry). */
+     The hover tooltip is driven with { hover } on a grid cell, matched by its
+     exact number ({ text, css: 'div', exact }). */
   const demos = {
+    'hovering-for-divisibility-details': {
+      title: 'The hover tooltip',
+      script: [
+        { say: `HOVER 36
+Cell turns blue, tooltip opens above it:
+divisible by 1, 2, 3, 4, 6, 9, 12 - each with its reason.` },
+        { hover: { text: '36', css: 'div', exact: true } },
+        { wait: 3200 },
+        { say: `HOVER 91
+Only 1 and 7.
+No shortcut for 7: the tooltip divides, 91 ÷ 7 = 13.` },
+        { unhover: { text: '36', css: 'div', exact: true } },
+        { hover: { text: '91', css: 'div', exact: true } },
+        { wait: 3200 },
+        { say: `HOVER 0
+Divisible by all twelve.
+The tooltip opens below 0, the top-left cell.` },
+        { unhover: { text: '91', css: 'div', exact: true } },
+        { hover: { text: '0', css: 'div', exact: true } },
+        { wait: 3000 },
+        { say: `MOVE away
+Tooltip closes; the grid is plain again.` },
+        { unhover: { text: '0', css: 'div', exact: true } },
+        { wait: 1800 },
+      ],
+    },
     'selecting-divisors': {
       title: 'Selecting and clearing divisors',
       script: [
@@ -1192,7 +1219,7 @@ export default function DivisibilityTablePage({ instructions, demos,relatedTools
 
   const genericSections = [
     withDemo(plain('obj1', 'selecting-divisors')),
-    plain('obj2', 'hovering-for-divisibility-details'),
+    withDemo(plain('obj2', 'hovering-for-divisibility-details')),
     plain('obj3', 'understanding-the-grid-layout'),
     plain('obj21', 'the-explanation-below-the-grid'),
 

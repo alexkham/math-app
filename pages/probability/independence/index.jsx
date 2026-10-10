@@ -596,6 +596,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderJointRectangle from '@/app/utils/illustrations/probability/areas/jointRectangle'
 import waffleChartDiagrams from '@/app/components/probability/conditional-probability-demo/waffleChartDiagrams'
 import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
 
@@ -1119,6 +1120,14 @@ The rest of the page develops what independence means, how it is expressed forma
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const jrIndependentSquare = { kind: 'split', svgTitle: 'Unit square with P(A) = 0.4 and B taking height 0.3 in both columns: P(A and B) = 0.12 = 0.4 times 0.3',
+    pA: 0.4, pBgivenA: 0.3, pBgivenNotA: 0.3, labelA: 'A', labelNotA: 'not A',
+    notes: [{ text: 'B has height 0.3' }, { text: 'in both columns', indent: true }, { text: '' }, { text: 'P(B | A) = 0.3', color: 'f' }, { text: 'P(B | not A) = 0.3', color: 'r' }, { text: '= P(B)', indent: true }, { text: '' }, { text: 'P(A ∩ B) = 0.4 · 0.3', color: 'f' }, { text: '= 0.12', color: 'f', indent: true }],
+    caption: 'Independent: B takes the same share of every column' };
+  const jrRainWet = { kind: 'split', svgTitle: 'Unit square with P(rain) = 0.3, P(wet | rain) = 0.9 and P(wet | no rain) = 0.2: the heights differ, so the events are dependent',
+    pA: 0.3, pBgivenA: 0.9, pBgivenNotA: 0.2, labelA: 'rain', labelNotA: 'no rain',
+    notes: [{ text: 'B: the ground is wet' }, { text: '' }, { text: 'P(wet | rain) = 0.9', color: 'f' }, { text: 'P(wet | no rain) = 0.2', color: 'r' }, { text: '' }, { text: 'P(wet) = 0.27 + 0.14' }, { text: '= 0.41', indent: true }, { text: 'P(rain ∩ wet) = 0.27', color: 'f' }, { text: '≠ 0.3 · 0.41 ≈ 0.12', color: 'f', indent: true }],
+    caption: 'Dependent: the wet share changes from column to column' };
   const demoUnits = {
     u_visual_0: demoUnitFrame({
       svg: waffleChartDiagrams.allEqual,
@@ -1133,6 +1142,16 @@ The rest of the page develops what independence means, how it is expressed forma
       text: 'Independence is a check on the table: the cell for A and B must equal the product of the row total and the column total, divided by the grand total. Disjoint events fail that check badly, because their shared cell is zero while the product is not, so disjoint and independent are opposite situations. Edit the cells and test the product rule on the',
       href: '/probability/visual-tools/contingency-tables',
       linkText: 'contingency tables explorer',
+    }),
+    independentSquare: demoUnitFrame({
+      svg: renderJointRectangle(jrIndependentSquare),
+      caption: 'The product rule as an area',
+      text: 'The unit square is all of the probability. Column A has width P(A) = 0.4. Event B takes the bottom 0.3 of the height in both columns, so P(B | A) = P(B | not A) = P(B) = 0.3. The blue rectangle A &#8745; B is then 0.4 wide and 0.3 high, and its area is exactly P(A) &#183; P(B) = 0.12. Equal heights in both columns and the product formula are the same fact.',
+    }),
+    rainWet: demoUnitFrame({
+      svg: renderJointRectangle(jrRainWet),
+      caption: 'Rain and wet ground: dependent',
+      text: 'Example 3 with numbers chosen for illustration: rain on 30% of days, the ground wet on 90% of rainy days and on 20% of dry ones. The wet part of the rain column is much taller than in the no-rain column, so learning the ground is wet changes the chance of rain. P(rain &#8745; wet) = 0.27, far from P(rain) &#183; P(wet) = 0.3 &#183; 0.41 &#8776; 0.12: the product rule fails.',
     }),
   };
 
@@ -1221,6 +1240,8 @@ export default function IndependencePage({
         link:'',
         content:[
             sectionsContent.formula.content,
+                  <div key={'unit-independentSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.independentSquare }} />,
+            `Change either column's height and the blue area stops being P(A) · P(B).`,
         ]
     },
     {
@@ -1241,6 +1262,8 @@ export default function IndependencePage({
           sectionsContent.examples.content,
           <div key={'examples-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: examplesTable }} />,
+                  <div key={'unit-rainWet'} dangerouslySetInnerHTML={{ __html: demoUnits.rainWet }} />,
+            `Given wet ground, the chance of rain rises from 0.3 to 0.27/0.41 ≈ 0.66.`,
         ]
     },
     {

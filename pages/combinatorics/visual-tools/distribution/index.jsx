@@ -558,7 +558,7 @@ To run the visualization:
 
 • Press **Step ▶** to send one item at a time.
 
-• Press **◀** to step backward.
+• Press **◀ Back** to step backward.
 
 • Adjust the **Speed** slider.
 
@@ -648,7 +648,7 @@ Twenty-seven cards also invite an audit of the "no constraint" claim: find $(1,1
       title: `Transport Controls`,
       content: `The control bar offers four transport buttons plus a speed slider:
 
-• **◀** (Step back) — walks the animation one step backward. Useful for re-examining a single distribution or pausing mid-build.
+• **◀ Back** (Step back) — walks the animation one step backward. Useful for re-examining a single distribution or pausing mid-build.
 
 • **Step ▶** (Step forward) — sends one item into [its chosen cell](!#the-cells). Stop after each step to read the partial assignment tuple.
 

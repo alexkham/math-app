@@ -8,6 +8,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -564,6 +566,23 @@ const schemas = {
 
 
 
+  const fpPrincipal = { kind: 'pieces', svgTitle: 'x^2 = 25 has solutions -5 and 5; the principal square root of 25 is 5', xRange: [-7, 7], yRange: [-4, 36], yStep: 5,
+    pieces: [
+      { fn: (x) => x * x, from: -6.2, to: 6.2, ends: [null, null], color: 'f', label: { text: 'y = x²', x: 5.6, y: 31.4, pos: 'w' } },
+      { fn: () => 25, from: -7, to: 7, ends: [null, null], color: 'g', label: { text: 'y = 25', x: -6.2, y: 25, pos: 'n' } },
+    ],
+    points: [{ x: -5, y: 25, label: 'x = −5', pos: 'sw' }, { x: 5, y: 25, label: '√25 = 5', pos: 'se' }],
+    notes: [{ x: -6.8, y: -3.6, text: 'x² = 25 has two solutions; √ returns only the non-negative one', pos: 'e', color: 'r' }],
+    caption: '√25 = 5, not ±5: the radical names one value so it can be a function' };
+
+  const demoUnits = {
+    principal: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpPrincipal),
+      caption: 'Two square roots, one principal root',
+      text: 'The parabola y = x&#178; meets the level 25 twice, at x = &#8722;5 and x = 5: both numbers square to 25. The radical &#8730;25 does not mean both; it names the non-negative one, 5. Choosing one value is what makes &#8730;x a function, with a single output for each input.',
+    }),
+  };
+
    return {
   props: {
     sectionsContent,
@@ -573,6 +592,7 @@ const schemas = {
     obj9Table,
     summaryTable,
     schemas,
+    demoUnits,
     seoData: {
       title: "Roots & Radicals: Square, Cube & Nth Roots | Learn Math Class",
       description: "Learn roots and radicals: square roots, cube roots, principal roots, radical notation, rational exponents, simplification rules, radical equations, and functions.",
@@ -595,6 +615,7 @@ export default function RootsAndRadicalsPage({
   obj9Table,
   summaryTable,
   schemas,
+  demoUnits,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -630,6 +651,8 @@ export default function RootsAndRadicalsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-principal'} dangerouslySetInnerHTML={{ __html: demoUnits.principal }} />,
+          `To get both solutions of x² = 25, write x = ±√25 explicitly.`,
         ]
     },
     {

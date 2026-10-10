@@ -209,7 +209,7 @@ The mean is $r/p = 7.5$, well to the right of the mode at $5$ — a right-skewed
 
 That peak sits at the mean $n \\cdot \\frac{K}{N} = 10 \\times 0.4 = 4$.`,
           before: ``,
-          after: `Compare this with the binomial. A binomial with $n = 10$ and $p = 0.4$ has the same mean of $4$, but a *wider* spread: its variance is $np(1-p) = 2.4$ against the hypergeometric's $2.4 \\times \\frac{N-n}{N-1} = 2.4 \\times \\frac{40}{49} \\approx 1.96$.
+          after: `Compare this with the binomial. A binomial with $n = 10$ and $p = 0.4$ has the same mean of $4$, but a wider spread: its variance is $np(1-p) = 2.4$ against the hypergeometric's $2.4 \\times \\frac{N-n}{N-1} = 2.4 \\times \\frac{40}{49} \\approx 1.96$.
 
 That extra factor is the finite population correction, and it is always less than 1 when $n > 1$. Sampling without replacement is self-correcting — every success drawn makes the next success slightly less likely — so outcomes cluster more tightly around the mean than independent trials would.`,
           link: '',
@@ -394,7 +394,7 @@ Use the panel to connect the formula with the bars: read the mean from the formu
 
 The two stills below are the same distribution under the two toggle positions.`,
           before: ``,
-          after: `Seeing them together makes the relationship concrete: the CDF's slope *is* the PDF's height. A flat density gives a straight-line CDF, and the two corners in the CDF are exactly where the density jumps from $0$ to $0.1$ and back.
+          after: `Seeing them together makes the relationship concrete: the CDF's slope is the PDF's height. A flat density gives a straight-line CDF, and the two corners in the CDF are exactly where the density jumps from $0$ to $0.1$ and back.
 
 Notice that the density value $0.1$ is not a probability. $P(X = 3) = 0$ here, as it is for any continuous variable. What $0.1$ means is probability per unit of $x$, so the probability of landing in an interval of width $2$ is $0.2$ — you have to multiply by a width before you get a probability at all.`,
           link: '',

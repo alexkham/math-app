@@ -164,7 +164,7 @@ For detailed comparison of [probability functions](!/probability/random-variable
 
 $F(5) = 0.5$ exactly. Half the probability sits in the first half of the interval, because every part of the interval is equally likely.`,
       before: ``,
-      after: `The slope *is* the density. The uniform pdf is the constant $\\frac{1}{b-a} = 0.1$, and that constant is precisely the gradient of the line you see — which is the geometric statement of $f(x) = F'(x)$ in its simplest possible case.
+      after: `The slope is the density. The uniform pdf is the constant $\\frac{1}{b-a} = 0.1$, and that constant is precisely the gradient of the line you see — which is the geometric statement of $f(x) = F'(x)$ in its simplest possible case.
 
 The two corners are worth noticing. At $x = a$ and $x = b$ the curve has a kink: it is continuous there, but not differentiable, because the density jumps from 0 to 0.1 and back. A CDF must be continuous for a continuous random variable, but it need not be smooth.`,
       link: '',

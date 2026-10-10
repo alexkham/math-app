@@ -13,6 +13,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionMVTDiagrams from '@/app/components/functions/mvt/functionMVTDiagrams'
 
 
@@ -799,6 +800,16 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpLhopital = { kind: 'pieces', svgTitle: 'sin 2x and x both vanish at 0 with slopes 2 and 1, so sin 2x / x tends to 2', xRange: [-1.6, 1.6], yRange: [-1.5, 1.5],
+    pieces: [
+      { fn: (x) => 2 * x, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[-0.72, 0.72]] },
+      { fn: (x) => Math.sin(2 * x), from: -1.6, to: 1.6, ends: [null, null], color: 'f' },
+      { fn: (x) => x, from: -1.5, to: 1.5, ends: [null, null], color: 'g' },
+    ],
+    points: [{ x: 0.3, y: Math.sin(0.6) }, { x: 0.3, y: 0.3 }],
+    vlines: [{ x: 0.3 }],
+    notes: [{ x: -1.55, y: 1.3, text: 'slopes at 0: 2 and 1', pos: 'e', color: 'r' }, { x: 0.4, y: -0.45, text: 'x = 0.3: 0.565 / 0.3 ≈ 1.88', pos: 'e' }, { x: 0.4, y: -0.8, text: 'blue: sin 2x', pos: 'e', color: 'f' }, { x: 0.4, y: -1.05, text: 'navy: y = x', pos: 'e', color: 'g' }, { x: 0.4, y: -1.3, text: 'dashed: y = 2x, tangent at 0', pos: 'e', color: 'r' }],
+    caption: 'Near 0 the ratio of heights tends to the ratio of slopes: 2 / 1 = 2' };
   const demoUnits = {
     mvt: demoUnitFrame({
       svg: functionMVTDiagrams.quadratic,
@@ -806,6 +817,18 @@ const schemas = {
       text: 'The dashed line joins the endpoints of the interval and has slope (f(b) &#8722; f(a))/(b &#8722; a); the solid tangent at the marked c has the same slope, so the two lines are parallel. The theorem promises such a c on any interval where the function is smooth, and for the parabola there is exactly one. Change the interval and watch c move to keep the tangent parallel on the',
       href: '/calculus/visual-tools/mean-value-theorem',
       linkText: 'mean value theorem visualizer',
+    }),
+    rolleSine: demoUnitFrame({
+      svg: functionMVTDiagrams.sine,
+      caption: 'Rolle&#8217;s theorem on a full period of sine',
+      text: 'f(x) = sin x on [0, 2&#960;] starts and ends at 0, so the secant through the endpoints is flat. Rolle&#8217;s theorem promises at least one point inside where the tangent is flat too, and here there are two: cos c = 0 at c = &#960;/2, the peak, and c = 3&#960;/2, the trough. The curve rises above its starting height and has to turn back down, and then it dips below and has to turn back up. Try other intervals on the',
+      href: '/calculus/visual-tools/mean-value-theorem',
+      linkText: 'mean value theorem visualizer',
+    }),
+    lhopital: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLhopital),
+      caption: 'Why the derivatives decide 0/0',
+      text: 'Take lim sin(2x)/x as x &#8594; 0. Both curves pass through the origin, so the quotient starts as 0/0. Close to 0 each curve is almost its tangent line: sin 2x is almost 2x and x is exactly x. The ratio of the heights is then almost the ratio of the slopes, 2/1. At x = 0.3 the heights are 0.565 and 0.3, a ratio of 1.88, and the ratio closes in on 2 as x shrinks.',
     }),
   };
 
@@ -914,6 +937,8 @@ export default function RulesPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-rolleSine'} dangerouslySetInnerHTML={{ __html: demoUnits.rolleSine }} />,
+          `Between two roots of f there is always a root of f′: here between 0 and π lies π/2.`,
         ]
     },
     {
@@ -922,6 +947,8 @@ export default function RulesPage({
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <div key={'unit-lhopital'} dangerouslySetInnerHTML={{ __html: demoUnits.lhopital }} />,
+          `L’Hôpital’s rule compares slopes: lim f/g = lim f′/g′ = 2 cos 0 / 1 = 2.`,
           <div key={'theorems-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: theoremsTable}}/>,
         ]
     },

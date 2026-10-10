@@ -871,9 +871,14 @@ Still ✓ Regions match.` },
 Shading paler on both sides. Readout 0.30.` },
         { slide: { range: 0 }, to: 0.3, ms: 1400 },
         { wait: 2400 },
+        { say: `PICK Color → amber
+Shading turns amber.
+Opacity stays 0.30.` },
+        { set: 'input[type=color]', value: '#f59e0b' },
+        { wait: 2400 },
         { say: `TAP Next →
 2 / 26: A ∩ A = A.
-Opacity 0.30 kept.` },
+Amber at 0.30 kept.` },
         { click: { button: 'Next →', exact: true } },
         { wait: 2400 },
         { say: `TAP ← Previous ×2
@@ -883,12 +888,8 @@ Tab: Compound Complements.` },
         { wait: 700 },
         { click: { button: '← Previous', exact: true } },
         { wait: 2800 },
-        { say: `TAP Next →
-Wraps forward: 1 / 26, A ∪ A = A.` },
-        { click: { button: 'Next →', exact: true } },
-        { wait: 2200 },
         { say: `TAP Reset
-Opacity back to 0.85. Blue shading.` },
+Blue again, opacity back to 0.85.` },
         { click: { button: 'Reset', exact: true } },
         { wait: 2400 },
       ],

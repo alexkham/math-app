@@ -8,6 +8,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -556,6 +558,17 @@ const schemas = {
 
 
 
+
+  const demoUnits = {
+    conjugateArea: demoUnitFrame({
+      svg: identityDiagrams['dos-4'],
+      caption: 'Why a conjugate clears the radical',
+      text: 'The product of conjugates is a difference of squares: an a &#215; a square with a b &#215; b corner removed rearranges into one rectangle of sides a + b and a &#8722; b. With the section&#8217;s a = &#8730;7 and b = &#8730;3 the two squares have areas 7 and 3, so (&#8730;7 + &#8730;3)(&#8730;7 &#8722; &#8730;3) = 7 &#8722; 3 = 4. Only the squares survive, and squares of square roots are rational. Step through the rearrangement on the',
+      href: '/algebra/visual-tools/identities/difference-of-squares',
+      linkText: 'difference of squares explorer',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -566,6 +579,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Simplifying Radicals: Rationalize & Reduce | Learn Math Class",
       description: "Learn to simplify radicals: factor perfect powers, simplify with variables, rationalize monomial and binomial denominators, reduce indices, and achieve simplest form.",
@@ -588,6 +602,7 @@ export default function SimplifyingPage({
   summaryTable,
   faqQuestions,
   schemas,
+  demoUnits,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -651,6 +666,8 @@ export default function SimplifyingPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-conjugateArea'} dangerouslySetInnerHTML={{ __html: demoUnits.conjugateArea }} />,
+          `Multiplying by a + √b instead would add a cross term 2a√b and keep the radical.`,
         ]
     },
     {

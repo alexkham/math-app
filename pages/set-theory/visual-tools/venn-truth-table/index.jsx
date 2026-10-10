@@ -88,7 +88,7 @@ Before typing anything the tool sits in [its empty state](!#an-empty-expression-
 
 A region of the diagram is a decision about each set: inside or outside. A row of the table is a decision about each set: true or false. With $n$ sets there are $2^n$ of each, and they are the same $2^n$ decisions in a different alphabet.
 
-So the shaded regions are exactly the true rows. The heading of the Regions panel prints the result column as a string of ones and zeros — the **signature** of the expression — and reading it left to right walks the table top to bottom.
+So the shaded regions are exactly the true rows. The heading of the Regions panel prints the result column as a string of ones and zeros — the **signature** of the expression — and reading it left to right walks the table from the bottom row up.
 
 The table columns are the sets, in order, followed by the **Result** column. The Region column names each row the way set notation would: an intersection of the sets the point lies in, or the universe symbol for the region outside everything.
 
@@ -293,7 +293,7 @@ Seeing the empty case makes the later ones easier to read. [Every region shaded]
       title:`An Expression That Will Not Parse`,
       content:`Type $A \\cap (B$ and the box turns red. The reader reached the end of the expression still waiting for a closing bracket, so it stops and says so rather than guessing what you meant.`,
       before:``,
-      after:`Both views hold their previous shading while an expression is unparseable. Nothing is cleared, because there is no new answer to show — only a message about the reading.
+      after:`While an expression is unparseable both views go blank: no region is shaded and the Result column shows dashes, because there is no answer to show — only a message about the reading.
 
 Three causes account for nearly all of these. An unclosed bracket, as here. An operator with nothing on one side, such as a trailing intersection sign. And a complement mark placed before what it negates instead of after it.
 
@@ -441,7 +441,7 @@ Underneath this is the fact that makes the whole tool work: every point of the u
   // are SSR-visible from here. Keys match resolveExplanationId.
   const notes = {
     'empty': `The regions are made by the sets, not by the expression — an expression only selects among them. [Learn more about the empty expression box](!#an-empty-expression-box) · [Getting started](!#getting-started)`,
-    'error': `Both views hold their previous shading while an expression is unreadable, because there is no new answer to show. [Learn more about a failed parse](!#an-expression-that-will-not-parse) · [Writing expressions](!#writing-expressions-the-parser-accepts)`,
+    'error': `Both views go blank while an expression is unreadable — no shading, dashes in the Result column — because there is no answer to show. [Learn more about a failed parse](!#an-expression-that-will-not-parse) · [Writing expressions](!#writing-expressions-the-parser-accepts)`,
     'unknown-set': `The tool will not treat an unknown set as empty — that would look like a result instead of a mistake. [Learn more about an unknown set](!#a-set-not-on-the-diagram) · [Writing expressions](!#writing-expressions-the-parser-accepts)`,
     'tautology': `Redraw the circles any way you like and the shading does not change, which is what makes this a statement about the logic rather than about the sets. [Learn more about every region shaded](!#every-region-shaded) · [Tautologies and contradictions](!#tautologies-and-contradictions)`,
     'contradiction': `Nothing shaded because the expression is a contradiction is a result; nothing shaded because it would not parse is a message. [Learn more about no region shaded](!#no-region-shaded) · [Tautologies and contradictions](!#tautologies-and-contradictions)`,

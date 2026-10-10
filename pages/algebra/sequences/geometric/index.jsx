@@ -9,6 +9,8 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -658,6 +660,42 @@ const schemas = {
   },
 }
 
+  const geGrow = (n) => 2 * 3 ** (n - 1), geDecay = (n) => 81 / 3 ** (n - 1), geAlt = (n) => 4 * (-2) ** (n - 1);
+  const geAltZig = (x) => { const i = Math.min(Math.max(Math.floor(x), 1), 3); return geAlt(i) + (geAlt(i + 1) - geAlt(i)) * (x - i); };
+  const geDots = (fn, ns, color) => ns.map((n) => ({ fn, from: n, to: n, ends: ['closed', 'closed'], color }));
+  const gePx = (n) => n * 388 / 7;
+  const geCols = [1, 2, 3, 4, 5, 6].flatMap((n) => {
+    const s = 1 - 0.5 ** n;
+    return [{ from: 0, to: s, color: 'f', dx: gePx(n) }, { from: s, to: 1, color: 'r', dx: gePx(n), label: n < 4 ? '1/' + 2 ** n : undefined, labelY: (s + 1) / 2 - 0.01 }];
+  });
+  const fpRatioCases = { kind: 'pieces', svgTitle: 'Geometric sequences: r = 3 grows, r = 1/3 decays, r = -2 alternates in sign with growing size', xRange: [0, 6], yRange: [-40, 90], yStep: 20, xLetter: 'n',
+    pieces: [
+      { fn: (x) => 2 * 3 ** (x - 1), from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[1, 4]] },
+      { fn: (x) => 81 / 3 ** (x - 1), from: 99, to: 99, ends: [null, null], color: 'f', ghost: [[1, 5]] },
+      { fn: geAltZig, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[1, 4]] },
+      ...geDots(geGrow, [1, 2, 3, 4], 'g'), ...geDots(geDecay, [1, 2, 3, 4, 5], 'f'), ...geDots(geAlt, [1, 2, 3, 4], 'r'),
+    ],
+    notes: [{ x: 0.3, y: -14, text: 'r = 3: 2, 6, 18, 54 grow', pos: 'e', color: 'g' }, { x: 0.3, y: -24, text: 'r = 1/3: 81, 27, 9, 3, 1 decay', pos: 'e', color: 'f' },
+      { x: 0.3, y: -34, text: 'r = −2: 4, −8, 16, −32 alternate', pos: 'e', color: 'r' }],
+    caption: 'The ratio decides: grow (r > 1), decay (0 < r < 1), alternate (r < 0)' };
+  const fpHalvesFill = { kind: 'pieces', svgTitle: 'Partial sums of 1/2 + 1/4 + 1/8 + ... reach 1/2, 3/4, 7/8, ... and close in on 1', xRange: [0, 7], yRange: [0, 1.2], xLetter: 'n',
+    pieces: [{ fn: () => 1, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0.5, 6.5]], label: { text: 'S = 1', x: 6.6, y: 1, pos: 'n' } }],
+    yBars: geCols,
+    notes: [{ x: 0.6, y: 1.12, text: 'blue: Sₙ = 1/2 + … + 1/2ⁿ   amber: the gap left, 1/2ⁿ', pos: 'e' }],
+    caption: 'Each term covers half the remaining gap, so the sums close in on 1' };
+  const demoUnits = {
+    ratioCases: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRatioCases),
+      caption: 'Three ratios, three shapes',
+      text: 'The section&#8217;s three sequences plotted against n. With r = 3 the dots 2, 6, 18, 54 climb ever faster. With r = 1/3 the dots 81, 27, 9, 3, 1 fall toward the axis without reaching it. With r = &#8722;2 the dots 4, &#8722;8, 16, &#8722;32 jump from one side of the axis to the other, each farther out than the last. The sign of r controls the side, its size controls growth or decay.',
+    }),
+    halvesFill: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpHalvesFill),
+      caption: 'Filling the unit by halves',
+      text: 'Column n shows the partial sum S&#8345; of 1/2 + 1/4 + 1/8 + &#8230; in blue and the gap still left below 1 in amber. The gaps are 1/2, 1/4, 1/8, &#8230;: each new term covers exactly half of what remains. The blue part never passes the dashed line at 1, but by n = 6 the gap is 1/64 and too thin to see. The partial sums close in on S = 1.',
+    }),
+  };
+
    return {
   props:{
      sectionsContent,
@@ -667,6 +705,7 @@ const schemas = {
      capstoneTable,
      faqQuestions,
      schemas,
+     demoUnits,
      seoData: {
        title: "Geometric Sequences & Series Formula | Learn Math Class",
        description: "Learn geometric sequences: definition, common ratio, nth term formula, recursive form, finite and infinite geometric series, and geometric mean with examples.",
@@ -678,7 +717,7 @@ const schemas = {
 }
    }
 
-export default function GeometricSequencesPage({seoData, sectionsContent, introContent, obj1Table, obj3Table, capstoneTable, faqQuestions, schemas}) {
+export default function GeometricSequencesPage({seoData, sectionsContent, introContent, obj1Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -697,6 +736,8 @@ export default function GeometricSequencesPage({seoData, sectionsContent, introC
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-ratioCases'} dangerouslySetInnerHTML={{ __html: demoUnits.ratioCases }} />,
+          `With −1 < r < 0 the jumps shrink instead: the terms alternate and decay toward 0.`,
           <div key={'obj1-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj1Table }} />,
         ]
@@ -741,6 +782,8 @@ export default function GeometricSequencesPage({seoData, sectionsContent, introC
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-halvesFill'} dangerouslySetInnerHTML={{ __html: demoUnits.halvesFill }} />,
+          `With r = 2 the gap would never close: each term would be larger than everything before it.`,
         ]
     },
     {

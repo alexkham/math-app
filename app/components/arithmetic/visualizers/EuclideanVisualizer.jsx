@@ -341,20 +341,22 @@ export default function EuclideanVisualizer({ explanations = null }) {
                     />
 
                     {/* equation pieces */}
-                    <text x={l.dividendX} y={l.y} fill={neutral}>{l.dividend}</text>
-                    <text x={l.dividendX + l.dividend.length * CHAR_W} y={l.y} fill={muted}> = </text>
+                    <text x={l.dividendX} y={l.y} fill={neutral} textLength={l.dividend.length * CHAR_W} lengthAdjust="spacing">{l.dividend}</text>
+                    <text x={l.dividendX + l.dividend.length * CHAR_W + SEP / 2} y={l.y} fill={muted} textAnchor="middle">=</text>
                     <text
                       x={l.divisorX}
                       y={l.y}
+                      textLength={l.divisorW}
+                      lengthAdjust="spacing"
                       fill={isLast ? C.primary : divHot ? C.primaryDark : neutral}
                       fontWeight={isLast || divHot ? 700 : 400}
                     >
                       {l.divisor}
                     </text>
-                    <text x={l.divisorX + l.divisorW} y={l.y} fill={muted}> · </text>
-                    <text x={l.quotientX} y={l.y} fill={neutral}>{l.quotient}</text>
-                    <text x={l.quotientX + l.quotient.length * CHAR_W} y={l.y} fill={muted}> + </text>
-                    <text x={l.remainderX} y={l.y} fill={zero ? C.gray : C.remainderText} fontWeight={600}>{l.remainder}</text>
+                    <text x={l.divisorX + l.divisorW + SEP / 2} y={l.y} fill={muted} textAnchor="middle">·</text>
+                    <text x={l.quotientX} y={l.y} fill={neutral} textLength={l.quotient.length * CHAR_W} lengthAdjust="spacing">{l.quotient}</text>
+                    <text x={l.quotientX + l.quotient.length * CHAR_W + SEP / 2} y={l.y} fill={muted} textAnchor="middle">+</text>
+                    <text x={l.remainderX} y={l.y} fill={zero ? C.gray : C.remainderText} fontWeight={600} textLength={l.remainderW} lengthAdjust="spacing">{l.remainder}</text>
 
                     {/* stop label under the terminating zero */}
                     {zero && (

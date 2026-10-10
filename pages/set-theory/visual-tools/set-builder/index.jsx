@@ -219,7 +219,7 @@ $$\\{x \\in D : \\text{not } P(x)\\} = D \\setminus \\{x \\in D : P(x)\\}$$
 
 That last one is why the complement always needs a domain to be taken relative to. There is no absolute complement, because there is no set of everything.
 
-Difference follows from the same pattern, since $A \setminus B$ keeps what is in $A$ and not in $B$ — a conjunction with a negation in it, exactly as the condition would be written.
+Difference follows from the same pattern, since $A \\setminus B$ keeps what is in $A$ and not in $B$ — a conjunction with a negation in it, exactly as the condition would be written.
 
 The correspondence runs in both directions and is worth using deliberately. A set expression that is awkward to read as operations is often obvious written as a condition, and the reverse happens just as often. For the operations in their own right, see **set operations**.`,
       before:``,
@@ -296,7 +296,7 @@ Add a condition and candidates start failing immediately — the ordinary case i
 
 Conditions joined by **and** make this easy to arrange, because two incompatible tests give the empty set however large the domain is. Parity is the cleanest example: no integer is both even and odd, so the size of the domain is irrelevant.
 
-This is also how the empty set is usually *proved* to be empty in practice. You rarely check every candidate; you show that the conditions are contradictory, and emptiness follows. Clicking any chip shows the same thing case by case — see [a candidate that fails](!#a-candidate-that-fails).`,
+This is also how the empty set is usually proved to be empty in practice. You rarely check every candidate; you show that the conditions are contradictory, and emptiness follows. Clicking any chip shows the same thing case by case — see [a candidate that fails](!#a-candidate-that-fails).`,
       link:'',
 
     },
@@ -337,7 +337,7 @@ The result here is also a small theorem rather than an accident. Every even numb
 
 That is the property that lets set-builder notation describe sets no one could write down. Membership in $\\{x \\in \\mathbb{N} : x \\text{ is prime}\\}$ is decidable for any candidate you name, however large, even though the set is infinite and no roster exists.
 
-Note also what the tick does *not* say. It reports that this candidate satisfies the condition, not that the condition is a good description of the set you had in mind. The tool checks your expression; it cannot check your intention. The opposite verdict is at [a candidate that fails](!#a-candidate-that-fails).`,
+Note also what the tick does not say. It reports that this candidate satisfies the condition, not that the condition is a good description of the set you had in mind. The tool checks your expression; it cannot check your intention. The opposite verdict is at [a candidate that fails](!#a-candidate-that-fails).`,
       link:'',
 
     },

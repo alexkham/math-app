@@ -438,7 +438,7 @@ This limitation is fundamental to Markov's inequality. The bound only constrains
 The ratio Bound/Actual indicates how loose the inequality is. Typical observations:
 
 [Exponential distribution](!/probability/visual-tools/distributions/exponential): Bound is relatively tight (ratio 2-5x)
-[Normal distribution](!/probability/visual-tools/distributions/normal): Bound is very loose (ratio 10-100x or more)
+[Normal distribution](!/probability/visual-tools/distributions/normal): Bound is loose - at the opening settings it gives 66.7% against an actual 15.9% (about 4x), and the gap widens as a moves into the tail
 **Uniform distribution**: Bound can be exact at certain thresholds
 
 The gap exists because Markov must hold for ANY non-negative distribution with that E[X]. The worst-case distribution (which achieves the bound) places all probability mass at exactly 0 and a, creating maximum tail probability.
@@ -505,7 +505,7 @@ Applications include algorithm analysis (bounding worst-case by average-case), q
 
 The bound is about four times the truth here.`,
     before: ``,
-    after: `The gap is the price of assuming nothing. Markov is handed one number, $E[X] = 10$, and must produce a bound valid for *every* non-negative variable with that mean — including the worst case, which puts all its mass at $0$ and at $a$ and hits $10/15$ exactly. A bell curve is nothing like that worst case, so its real tail is far smaller.
+    after: `The gap is the price of assuming nothing. Markov is handed one number, $E[X] = 10$, and must produce a bound valid for every non-negative variable with that mean — including the worst case, which puts all its mass at $0$ and at $a$ and hits $10/15$ exactly. A bell curve is nothing like that worst case, so its real tail is far smaller.
 
 Worth flagging about this option specifically: the tool labels it "Normal (non-negative range only)". A genuine normal variable can be negative, and Markov requires $X \\geq 0$, so what is drawn is the normal curve restricted to $x \\geq 0$. With $\\mu = 10$ and $\\sigma = 5$ the omitted region carries about $2.3\\%$ of the mass — small, but the reason for the label.`,
     link: '',
@@ -565,7 +565,7 @@ The pattern across the nine is now visible: the more concentrated a distribution
 
 The stems visibly decay by a constant factor of $0.9$ from one integer to the next.`,
     before: ``,
-    after: `There is a detail here worth knowing before trusting the printed number. The geometric support is unbounded, but the tool plots and sums only $x = 1$ to $40$, which carries about $98.5\\%$ of the mass. The remaining $1.5\\%$ lies past the right edge and is *not* counted, so the reported "Actual" is a slight undercount rather than the exact tail.
+    after: `There is a detail here worth knowing before trusting the printed number. The geometric support is unbounded, but the tool plots and sums only $x = 1$ to $40$, which carries about $98.5\\%$ of the mass. The remaining $1.5\\%$ lies past the right edge and is not counted, so the reported "Actual" is a slight undercount rather than the exact tail.
 
 That never threatens the inequality — undercounting can only make the actual smaller than the bound — but it does mean this figure is the sum over the drawn stems, not a closed form. The same applies to the negative binomial. For the exponential, normal and uniform the tool uses exact formulas instead, so no truncation is involved.`,
     link: '',
@@ -577,7 +577,7 @@ That never threatens the inequality — undercounting can only make the actual s
 
 Its shape sits between the geometric's steady decay and the binomial's tight hump.`,
     before: ``,
-    after: `That intermediate position is exactly what the parameter $r$ controls. At $r = 1$ the negative binomial *is* the geometric; as $r$ grows the distribution becomes more symmetric and more concentrated, and the actual tail shrinks toward the binomial's. Fixing $r = 5$ puts this option in the middle of that range, and its $18.8\\%$ sits between the geometric's $21.4\\%$ and the binomial's $3.4\\%$.
+    after: `That intermediate position is exactly what the parameter $r$ controls. At $r = 1$ the negative binomial is the geometric; as $r$ grows the distribution becomes more symmetric and more concentrated, and the actual tail shrinks toward the binomial's. Fixing $r = 5$ puts this option in the middle of that range, and its $18.8\\%$ sits between the geometric's $21.4\\%$ and the binomial's $3.4\\%$.
 
 Like the geometric, its support is unbounded and the plotted window is finite, though here the omitted mass is under $0.01\\%$.`,
     link: '',
@@ -603,7 +603,7 @@ Note also that the rounding makes the mean $17 \\times 0.6 = 10.2$ rather than e
 
 That is the largest actual tail of all nine states.`,
     before: ``,
-    after: `It edges out the continuous uniform's $25\\%$ for a small reason worth seeing: the continuous version spreads mass over $[0, 20]$ and the discrete version over $\\{1, \\dots, 19\\}$, and the threshold $a = 15$ is *included* in the discrete tail because the inequality is $P(X \\geq a)$. Endpoint conventions matter for discrete variables in a way they never do for continuous ones, where a single point carries no probability.
+    after: `It edges out the continuous uniform's $25\\%$ for a small reason worth seeing: the continuous version spreads mass over $[0, 20]$ and the discrete version over $\\{1, \\dots, 19\\}$, and the threshold $a = 15$ is included in the discrete tail because the inequality is $P(X \\geq a)$. Endpoint conventions matter for discrete variables in a way they never do for continuous ones, where a single point carries no probability.
 
 Across all nine states the actual tail runs from $0.3\\%$ to $26.3\\%$ against one unchanging bound of $66.7\\%$. Even the worst case among real distributions uses barely two fifths of what Markov permits.`,
     link: '',

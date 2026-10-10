@@ -7,6 +7,10 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import { renderFactorSet } from '@/app/utils/illustrations/arithmetic/divisibility/factorSet'
+import { renderPrimeFactorization } from '@/app/utils/illustrations/arithmetic/divisibility/primeFactorization'
 
 
 export async function getStaticProps(){
@@ -403,12 +407,46 @@ const schemas = {
 }
 
 
+  const prPrimes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
+  const prSteps = prPrimes.map((p, i) => ({ fn: () => i + 1, from: p, to: prPrimes[i + 1] || 100, ends: [null, null], color: 'f' }));
+  const prStyle = { primary: '#06357A', secondary: '#2563EB', result: '#FDE7C8', resultStroke: '#B45309', fill: '#FDE7C8', stroke: '#B45309', text: '#1E3A5F', textMuted: '#64748B', neutral: '#64748B', border: '#5A7299', negation: '#C0392B' };
+  const fpPrimeCount = { kind: 'pieces', svgTitle: 'pi(n), the number of primes up to n, against n / ln n for n up to 100', xRange: [0, 100], yRange: [0, 30], xStep: 10, yStep: 5, xLetter: 'n',
+      pieces: [{ fn: (x) => x / Math.log(x), from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[3, 100]], label: { text: 'n / ln n', x: 96, y: 96 / Math.log(96), pos: 's' } }, ...prSteps],
+      points: [{ x: 100, y: 25, label: 'π(100) = 25', pos: 'nw' }],
+      notes: [{ x: 3, y: 27.5, text: 'blue steps: π(n) climbs by 1 at each prime', pos: 'e', color: 'f' }, { x: 3, y: 24.5, text: 'n / ln n ≈ 21.7 at n = 100: the estimate', pos: 'e', color: 'r' }],
+      caption: 'The prime count π(n) rises ever more slowly, close to n / ln n' };
+  const pfPairs91 = { kind: 'pairs', of: 91, style: prStyle, info: { lines: [
+    { kind: 'formula', text: '91 = 7 \u00B7 13', role: 'primary' }, { kind: 'separator' },
+    { kind: 'note', text: '\u221A91 \u2248 9.5' }, { kind: 'note', text: 'test 2, 3, 5, 7 only:' }, { kind: 'note', text: '7 divides, so 91 is composite' },
+    { kind: 'note', text: 'its partner 13 sits above \u221A91', italic: true }] } };
+  const pfTree252 = { kind: 'tree', n: 252, style: prStyle, info: { lines: [
+    { kind: 'formula', text: '252 = 2\u00B2 \u00B7 3\u00B2 \u00B7 7', role: 'primary' }, { kind: 'separator' },
+    { kind: 'note', text: 'every branch ends in a prime' }, { kind: 'note', text: 'any splitting order gives' }, { kind: 'note', text: 'the same leaves' }] } };
+  const demoUnits = {
+    trialPairs: demoUnitFrame({
+      svg: renderFactorSet(pfPairs91),
+      caption: 'Why trial division stops at &#8730;n',
+      text: 'The section&#8217;s 91 with its divisors paired off: 1 with 91 and 7 with 13. In every pair one partner is at most &#8730;91 &#8776; 9.5 and the other at least, so testing 2, 3, 5 and 7 is enough to meet every pair from its small end. 7 divides 91, which settles it: composite. For 97 the tests 2, 3, 5, 7 all fail, so the only pair is 1 &#183; 97 and 97 is prime.',
+    }),
+    factorTree: demoUnitFrame({
+      svg: renderPrimeFactorization(pfTree252),
+      caption: 'The factor tree of 252',
+      text: 'The section&#8217;s repeated division drawn as a tree: 252 splits off a 2 to leave 126, then another 2 to leave 63, then a 3 to leave 21, which is 3 &#183; 7. Every branch ends in a prime leaf, and the leaves read 2, 2, 3, 3, 7, so 252 = 2&#178; &#183; 3&#178; &#183; 7. Starting with 252 = 4 &#183; 63 or 12 &#183; 21 would grow a different tree with the same leaves.',
+    }),
+    primeCount: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpPrimeCount),
+      caption: 'Counting primes up to 100',
+      text: 'The blue steps are &#960;(n): the count goes up by 1 at each prime 2, 3, 5, 7, &#8230;, 97 and reaches 25 at n = 100. The dashed curve is the estimate n / ln n, which gives about 21.7 there. The steps get longer as n grows because primes spread out; the curve follows that bend, and the ratio of the two tends to 1 as n grows without bound.',
+    }),
+  };
+
    return {
   props:{
      sectionsContent,
      introContent,
      faqQuestions,
      schemas,
+     demoUnits,
      seoData: {
        title: "Prime Numbers: Sieve, Factorization & PNT | Learn Math Class",
 description: "Learn prime numbers: definition, Euclid's infinitude proof, sieve of Eratosthenes, primality testing, prime factorization, and the prime number theorem.",
@@ -420,7 +458,7 @@ description: "Learn prime numbers: definition, Euclid's infinitude proof, sieve 
 }
    }
 
-export default function PrimeNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PrimeNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
     
   const genericSections=[
     // {
@@ -461,6 +499,8 @@ export default function PrimeNumbersPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-trialPairs'} dangerouslySetInnerHTML={{ __html: demoUnits.trialPairs }} />,
+          `For a perfect square such as 49 the pair 7 · 7 sits exactly at √n.`,
         ]
     },
     {
@@ -469,6 +509,8 @@ export default function PrimeNumbersPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-factorTree'} dangerouslySetInnerHTML={{ __html: demoUnits.factorTree }} />,
+          `Uniqueness is why 1 is not prime: a leaf 1 could be added any number of times.`,
         ]
     },
     {
@@ -477,6 +519,8 @@ export default function PrimeNumbersPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-primeCount'} dangerouslySetInnerHTML={{ __html: demoUnits.primeCount }} />,
+          `Below 100 the estimate runs low by about 3; in relative terms the gap shrinks as n grows.`,
         ]
     },
     {

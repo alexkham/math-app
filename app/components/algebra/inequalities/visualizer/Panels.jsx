@@ -440,7 +440,7 @@ function NumberLine({ iq }) {
               stroke="#94a3b8" strokeWidth={isZero ? 1.5 : 1} />
         <text x={G.padX - 6} y={py + 3} fontSize="9.5"
               fill={isZero ? '#475569' : '#94a3b8'} textAnchor="end"
-              fontVariantNumeric="tabular-nums"
+              style={{ fontVariantNumeric: 'tabular-nums' }}
               fontWeight={isZero ? 600 : 400}>{formatTick(v)}</text>
       </g>
     );

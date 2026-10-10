@@ -102,7 +102,7 @@ export default function MatrixMultiplicationColumns({
     withDemo(plain('obj3', 'reading-the-plane')),
     withUnit('obj12', 'lifting-out-a-column', 'firstScaledPiece'),
     withUnit('obj13', 'the-statement-and-the-arithmetic', 'allPieces'),
-    withDemo(plain('obj14', 'running-the-tool')),
+    withDemo({ ...plain('obj14', 'running-the-tool'), content: [sectionsContent.obj14.content, sectionsContent.obj14.after] }),
     plain('obj4', 'generating-new-numbers'),
     withDemo(plain('obj5', 'building-ab-by-columns')),
     plain('obj6', 'why-the-weight-comes-out-in-front'),
@@ -580,7 +580,7 @@ $$A\\mathbf{v} = v_1c_1 + v_2c_2 + v_3c_3$$
 with $c_j$ the $j$-th column of $A$. Step $11$ carries out the arithmetic and lands on the same pair of numbers the row-by-row route produced.`,
       after: `Both steps share one figure, because the plane is already complete at step $10$: three scaled columns laid tail to head, ending on the answer. The last step changes the algebra above the picture, not the picture.
 
-Read the final figure against [the dashed-line stage](!#one-product-at-a-time) and the gain is obvious. Same endpoint, same eight-odd multiplications, but here **every corner along the path is a real vector** — a partial sum of columns. That is what makes the column reading say something about what the matrix *does*, rather than only about what it computes.
+Read the final figure against [the dashed-line stage](!#one-product-at-a-time) and the gain is obvious. Same endpoint, same eight-odd multiplications, but here **every corner along the path is a real vector** — a partial sum of columns. That is what makes the column reading say something about what the matrix does, rather than only about what it computes.
 
 Where that leads is [column space and solvability](!#column-space-and-solvability).`,
       link: '',
@@ -588,7 +588,7 @@ Where that leads is [column space and solvability](!#column-space-and-solvabilit
 
     obj14: {
       title: `Running the tool`,
-      content: `**Run** plays forward from wherever you are and becomes **Pause** while it is playing. It advances a little under twice a second, which is fast enough to show the shape of the argument and too fast to check a step.
+      content: `**Run** plays forward from wherever you are and becomes **Pause** while it is playing. It advances about one step every 1.8 seconds, which is fast enough to show the shape of the argument and too fast to check a step.
 
 **Step** and **Back** move exactly one step. These are the ones that matter on steps $7$ to $9$: a regrouping is a claim, and a claim is easier to check held still.
 

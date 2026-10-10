@@ -41,7 +41,7 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Open the page and three panels appear. On the left is the **function picker** with ten base [function](!/functions/basics#1) families. In the center sits the **plot panel**, with the chosen function $f(x)$ drawn in blue and its **tangent line** at the chosen point drawn in amber. On the right is the **info panel** with two tabs — a live explanation of the current state and a general theory tab about tangents.
+      content: `Open the page and three panels appear. On the left is the **function picker** with ten base [function](!/functions/basics#1) families. In the center sits the **plot panel**, with the chosen function $f(x)$ drawn in blue and its **tangent line** at the chosen point drawn in amber. On the right is the **info panel** with three tabs — a live explanation of the current state, a Family tab on the chosen function's tangents, and a general theory tab about tangents.
 
 Below the plot, the centerpiece of the tool is the **tangent point card**: an amber-bordered block containing the $x_0$ slider, the current values of $x_0$, $y_0$, and slope $m$, and the tangent equation written in both point-slope and slope-intercept forms.
 
@@ -130,9 +130,11 @@ The **Show** strip below has two toggle buttons, one each for the function $f$ a
 
     obj7: {
       title: `The Info Panel`,
-      content: `The side info panel has two tabs:
+      content: `The side info panel has three tabs:
 
 • **Explanation** — reads the current state. Shows the symbolic forms of $f(x)$ and $f'(x)$, the numerical values of $x_0$, $y_0$, $m$, and the $y$-intercept of the tangent, and renders the tangent equation in both forms. When $x_0$ is at a critical point ($m \\approx 0$), an extra note explains that this is a candidate for a local extremum. When the tangent is undefined, a different note explains why and suggests sliding $x_0$ to a smooth part of the curve.
+
+• **Family** — describes how tangents behave on the chosen function.
 
 • **Concepts** — general theory of tangent lines independent of the current state. Covers the secant-to-tangent limit definition, the relationship between the slope of the tangent and the derivative, the two equivalent forms of the equation, and the three ways the tangent can fail to exist (corners, vertical tangents, points outside the domain).
 

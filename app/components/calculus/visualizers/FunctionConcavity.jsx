@@ -655,7 +655,10 @@ export default function FunctionConcavity({ explanations } = {}) {
     const getMouse = (e) => {
       const r = cv.getBoundingClientRect();
       const t = (e.touches && e.touches[0]) || e;
-      return { x: t.clientX - r.left, y: t.clientY - r.top };
+      // screen px -> canvas css px: the page or a demo may scale the tool (transform: scale)
+      const sx = r.width ? cv.clientWidth / r.width : 1;
+      const sy = r.height ? cv.clientHeight / r.height : 1;
+      return { x: (t.clientX - r.left) * sx, y: (t.clientY - r.top) * sy };
     };
     const onDragMove = (m) => {
       const s = sceneRef.current;

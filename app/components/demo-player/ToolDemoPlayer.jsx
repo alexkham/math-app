@@ -33,18 +33,28 @@ import React, { useEffect, useLayoutEffect, useRef, useState, useCallback, useMe
      { say: 'HEADLINE\nline\nline', at? }  start a new step with this callout
      { move: T, ms }                       glide the cursor to target T
      { click: T }                          move and click T
-     { slide: T, to: v, ms }               drag a range input to value v
-     { drag: T, dx, dy, ms }               pointer-drag an element by (dx, dy) px
+     { slide: T, to: v, ms, jump? }        drag a range input to value v (jump: one move, no
+                                           values in between - for self-normalising sliders)
+     { drag: T, dx, dy, ms, at?, to? }     drag an element by (dx, dy) px - or from at: [fx, fy] to
+                                           to: [fx, fy], fractions of its box (a handle on a canvas);
+                                           sends pointer AND mouse
+                                           events like a real mouse, so canvas tools that listen
+                                           to mouse events follow too
      { set: T, value }                     type into a text/number input or textarea (then blur),
-                                           or pick a <select> option by value
+                                           pick a <select> option, set a color/date input,
+                                           or set a checkbox/radio to true/false (clicks only if needed)
+     { hover: T, ms } / { unhover: T }     glide to T and hover it (tooltips) / leave it
+     { scroll: T, by: px | to: 'top'|'bottom'|px }  scroll a scrollable element inside the tool
      { wait: ms }                          pause
      { until: T, ms? }                     wait (also during replay) until T exists
+   Live play and instant replay end in the same state: typing and drags
+   are replayed one event per frame, not in one burst.
    Targets T:
      'css selector'                        first match inside the tool
      { css, nth }                          nth match (0-based)
      { button: 'text', exact?, nth? }      button by text (starts-with, or exact)
      { range: i }                          i-th <input type="range"> (0-based)
-     { text: 'text', css? }                first leaf element containing text
+     { text: 'text', css?, exact? }        first leaf element containing (exact: equal to) the text
    ============================================================ */
 
 const UI = {
@@ -75,7 +85,7 @@ function resolve(root, t) {
   if (t.text !== undefined) {
     const want = String(t.text);
     return Array.from(root.querySelectorAll(t.css || '*')).find((el) =>
-      el.children.length === 0 && el.textContent.includes(want)) || null;
+      el.children.length === 0 && (t.exact ? el.textContent.trim() === want : el.textContent.includes(want))) || null;
   }
   if (t.css) return root.querySelectorAll(t.css)[t.nth || 0] || null;
   return null;
@@ -115,6 +125,29 @@ function leave(field) {
   field.dispatchEvent(new FocusEvent('blur'));
   field.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
 }
+
+// what a real mouse does: a pointer event, then the compatible mouse event
+// (suppressed when the pointerdown handler called preventDefault)
+function pointerAndMouse(el, kind, x, y, state) {
+  const base = { bubbles: true, cancelable: true, clientX: x, clientY: y, button: 0, buttons: kind === 'up' ? 0 : 1 };
+  const ok = el.dispatchEvent(new PointerEvent('pointer' + kind, { ...base, pointerId: 1, pointerType: 'mouse', isPrimary: true }));
+  if (kind === 'down') state.mouse = ok;
+  if (state.mouse) el.dispatchEvent(new MouseEvent('mouse' + kind, base));
+}
+
+function hoverOn(el, on) {
+  const r = el.getBoundingClientRect();
+  const o = { bubbles: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 };
+  const kinds = on ? ['pointerover', 'pointerenter', 'mouseover', 'mouseenter', 'pointermove', 'mousemove']
+    : ['pointerout', 'pointerleave', 'mouseout', 'mouseleave'];
+  for (const k of kinds) {
+    const bubbles = !/enter|leave/.test(k);
+    const Ev = k.startsWith('pointer') ? PointerEvent : MouseEvent;
+    el.dispatchEvent(new Ev(k, { ...o, bubbles, pointerId: 1, pointerType: 'mouse' }));
+  }
+}
+
+const ONE_SHOT_TYPES = /^(color|date|time|datetime-local|month|week|file)$/;
 
 function thumbPoint(input, v) {
   const r = input.getBoundingClientRect();
@@ -281,8 +314,8 @@ export default function ToolDemoPlayer({
     const showCallout = (k) => {
       const s = steps[k];
       if (!s || !s.lines.length) { setCallout(null); return; }
-      const a = s.actions.find((x) => x.move || x.click || x.slide || x.drag || x.set);
-      const el = a ? resolve(tool(), a.move || a.click || a.slide || a.drag || a.set) : null;
+      const a = s.actions.find((x) => x.move || x.click || x.slide || x.drag || x.set || x.hover || x.scroll);
+      const el = a ? resolve(tool(), a.move || a.click || a.slide || a.drag || a.set || a.hover || a.scroll) : null;
       let target = null;
       if (el && a.slide) {
         // point at the thumb, where the drag starts
@@ -305,8 +338,28 @@ export default function ToolDemoPlayer({
         while (live() && !resolve(tool(), a.until) && performance.now() - t0 < (a.ms || 6000)) await sleep(50);
         return;
       }
-      const el = resolve(tool(), a.move || a.click || a.slide || a.drag || a.set);
+      const el = resolve(tool(), a.move || a.click || a.slide || a.drag || a.set || a.hover || a.unhover || a.scroll);
       if (!el) return;
+      if (a.unhover) { hoverOn(el, false); if (!fast) await sleep(150); return; }
+      if (a.hover) {
+        const [x, y] = local(...centerOf(el));
+        if (fast) { placeCursor(x, y); hoverOn(el, true); await frame(); return; }
+        const { x: sx, y: sy } = posRef.current;
+        await tween(a.ms || 700, (u) => placeCursor(sx + (x - sx) * u, sy + (y - sy) * u));
+        hoverOn(el, true);
+        await sleep(200);
+        return;
+      }
+      if (a.scroll) {
+        const target = a.to === 'top' ? 0 : a.to === 'bottom' ? el.scrollHeight : typeof a.to === 'number' ? a.to : el.scrollTop + (a.by || 0);
+        if (fast) { el.scrollTop = target; await frame(); return; }
+        const [x, y] = local(...centerOf(el));
+        const { x: sx, y: sy } = posRef.current;
+        await tween(500, (u) => placeCursor(sx + (x - sx) * u, sy + (y - sy) * u));
+        const s0 = el.scrollTop;
+        await tween(a.ms || 900, (u) => { el.scrollTop = s0 + (target - s0) * u; });
+        return;
+      }
       if (a.move) {
         const [x, y] = local(...centerOf(el));
         if (fast) placeCursor(x, y); else await tween(a.ms || 700, (u) => {
@@ -329,12 +382,34 @@ export default function ToolDemoPlayer({
       if (a.set) {
         const v = String(a.value);
         const [x, y] = local(...centerOf(el));
-        if (fast) { placeCursor(x, y); setFieldValue(el, v); leave(el); await frame(); return; }
+        const isCheck = el.tagName === 'INPUT' && (el.type === 'checkbox' || el.type === 'radio');
+        const oneShot = el.tagName === 'SELECT' || (el.tagName === 'INPUT' && ONE_SHOT_TYPES.test(el.type));
+        if (isCheck) {
+          const want = a.value === true || v === 'true' || v === 'on' || v === '1';
+          if (!fast) {
+            const { x: sx, y: sy } = posRef.current;
+            await tween(a.ms || 600, (u) => placeCursor(sx + (x - sx) * u, sy + (y - sy) * u));
+            ripple();
+            await sleep(120);
+          } else placeCursor(x, y);
+          if (el.checked !== want) press(el);
+          await (fast ? frame() : sleep(150));
+          return;
+        }
+        if (fast) {
+          placeCursor(x, y);
+          if (oneShot) setFieldValue(el, v);
+          // same keystrokes as live play, one per frame, so self-correcting fields end up alike
+          else for (let i = 1; i <= v.length && live(); i++) { setFieldValue(el, v.slice(0, i)); await frame(); }
+          leave(el);
+          await frame();
+          return;
+        }
         const { x: sx, y: sy } = posRef.current;
         await tween(a.ms || 600, (u) => placeCursor(sx + (x - sx) * u, sy + (y - sy) * u));
         ripple();
         await sleep(150);
-        if (el.tagName === 'SELECT') { setFieldValue(el, v); await sleep(150); return; }
+        if (oneShot) { setFieldValue(el, v); leave(el); await sleep(150); return; }
         // type it out, one character at a time
         for (let i = 1; i <= v.length && live(); i++) { setFieldValue(el, v.slice(0, i)); await sleep(110); }
         leave(el);
@@ -357,6 +432,13 @@ export default function ToolDemoPlayer({
         await tween(600, (u) => placeCursor(sx + (x0 - sx) * u, sy + (y0 - sy) * u));
         ripple();
         await sleep(150);
+        if (a.jump) {
+          // one move straight to the value (the cursor still travels)
+          const [x1, y1] = local(...thumbPoint(el, to));
+          await tween(a.ms || 700, (u) => placeCursor(x0 + (x1 - x0) * u, y0 + (y1 - y0) * u));
+          setRangeValue(el, snap(to));
+          return;
+        }
         await tween(a.ms || 1200, (u) => {
           const v = snap(from0 + (to - from0) * u);
           setRangeValue(el, v);
@@ -366,14 +448,18 @@ export default function ToolDemoPlayer({
         return;
       }
       if (a.drag) {
-        const [cx, cy] = centerOf(el);
-        const opts = (x, y) => ({ bubbles: true, cancelable: true, pointerId: 1, pointerType: 'mouse', clientX: x, clientY: y, button: 0, buttons: 1 });
-        const ex = cx + (a.dx || 0);
-        const ey = cy + (a.dy || 0);
+        const box = el.getBoundingClientRect();
+        const [cx, cy] = a.at ? [box.left + a.at[0] * box.width, box.top + a.at[1] * box.height] : centerOf(el);
+        const ex = a.to ? box.left + a.to[0] * box.width : cx + (a.dx || 0);
+        const ey = a.to ? box.top + a.to[1] * box.height : cy + (a.dy || 0);
+        const st = {};
         if (fast) {
-          el.dispatchEvent(new PointerEvent('pointerdown', opts(cx, cy)));
-          el.dispatchEvent(new PointerEvent('pointermove', opts(ex, ey)));
-          el.dispatchEvent(new PointerEvent('pointerup', opts(ex, ey)));
+          // down, a few moves and up on separate frames: tools that only follow the
+          // pointer once their "dragging" state has rendered see the moves too
+          pointerAndMouse(el, 'down', cx, cy, st);
+          await frame();
+          for (let i = 1; i <= 4 && live(); i++) { pointerAndMouse(el, 'move', cx + (ex - cx) * i / 4, cy + (ey - cy) * i / 4, st); await frame(); }
+          pointerAndMouse(el, 'up', ex, ey, st);
           await frame();
           placeCursor(...local(ex, ey));
           return;
@@ -382,14 +468,15 @@ export default function ToolDemoPlayer({
         const { x: sx, y: sy } = posRef.current;
         await tween(600, (u) => placeCursor(sx + (lx - sx) * u, sy + (ly - sy) * u));
         ripple();
-        el.dispatchEvent(new PointerEvent('pointerdown', opts(cx, cy)));
+        pointerAndMouse(el, 'down', cx, cy, st);
+        await frame();
         await tween(a.ms || 1200, (u) => {
-          const x = cx + (a.dx || 0) * u;
-          const y = cy + (a.dy || 0) * u;
-          el.dispatchEvent(new PointerEvent('pointermove', opts(x, y)));
+          const x = cx + (ex - cx) * u;
+          const y = cy + (ey - cy) * u;
+          pointerAndMouse(el, 'move', x, y, st);
           placeCursor(...local(x, y));
         });
-        el.dispatchEvent(new PointerEvent('pointerup', opts(ex, ey)));
+        pointerAndMouse(el, 'up', ex, ey, st);
       }
     }
 
@@ -418,6 +505,7 @@ export default function ToolDemoPlayer({
         if (!live()) return;
         for (const a of steps[k].actions) { if (!live()) return; await act(a, false); }
         if (!live()) return;
+        showCallout(k); // re-aim: a slid thumb or moved handle is no longer where it started
         setDone(k + 1);
         if (one) { setPlaying(false); return; }
       }
@@ -512,7 +600,7 @@ export default function ToolDemoPlayer({
           fontSize: '10.5px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase',
           color: UI.white, background: UI.ui, borderRadius: '4px', padding: '2px 7px',
         }}>Demo</span>
-        <span style={{ fontSize: '12px', fontWeight: 600, color: UI.ui, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+        <span style={{ fontSize: '12.5px', fontWeight: 700, color: UI.ui, letterSpacing: '0.2px' }}>
           {title}
         </span>
       </div>

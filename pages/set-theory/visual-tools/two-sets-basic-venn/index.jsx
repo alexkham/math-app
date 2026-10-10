@@ -643,7 +643,7 @@ The working definition behind the picture is double inclusion: $A = B$ exactly w
       "featureList": [
         "Interactive two-circle Venn diagram with shaded regions for each selected identity",
         "Identities organized into seven category tabs: Basic Sets, Complements, Intersection and Union, Differences, Compound expressions, De Morgan's Laws, and Relations",
-        "Formula buttons and a Jump-to dropdown for selecting any of 22 standard two-set identities",
+        "Formula buttons and a Jump-to dropdown for selecting any of 19 standard two-set identities",
         "Customizable shading color and opacity with a one-click reset",
         "Previous and Next navigation with a scenario counter that wraps around",
         "Special circle layouts for subset, disjoint, and equal-set relations",
@@ -719,6 +719,7 @@ The working definition behind the picture is double inclusion: $A = B$ exactly w
 
   /* Animated demos (ToolDemoPlayer v3) against the real TwoSetIdentitiesExplorer
      (opens on Set A, Basic Sets tab, opacity 0.85). One range input: 0 = Opacity.
+     The Color picker is set with { set: 'input[type=color]', value }.
      Jump to is the only <select>; option values are scenario ids. */
   const demos = {
     'navigating-category-tabs': {
@@ -794,9 +795,14 @@ Blank diagram = a real answer.` },
 Shading paler. Readout 0.30.` },
         { slide: { range: 0 }, to: 0.3, ms: 1400 },
         { wait: 2400 },
+        { say: `PICK Color → amber
+Shading turns amber.
+Opacity stays 0.30.` },
+        { set: 'input[type=color]', value: '#f59e0b' },
+        { wait: 2400 },
         { say: `TAP Next →
 2 / 19: Set B.
-Opacity 0.30 kept.` },
+Amber at 0.30 kept.` },
         { click: { button: 'Next →', exact: true } },
         { wait: 2400 },
         { say: `TAP ← Previous ×2
@@ -806,12 +812,8 @@ Two circles in one place.` },
         { wait: 700 },
         { click: { button: '← Previous', exact: true } },
         { wait: 2600 },
-        { say: `TAP Next →
-Wraps forward: 1 / 19, Set A.` },
-        { click: { button: 'Next →', exact: true } },
-        { wait: 2200 },
         { say: `TAP Reset
-Opacity back to 0.85. Blue shading.` },
+Blue again, opacity back to 0.85.` },
         { click: { button: 'Reset', exact: true } },
         { wait: 2400 },
       ],

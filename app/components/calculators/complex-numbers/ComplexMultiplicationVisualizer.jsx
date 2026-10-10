@@ -68,7 +68,8 @@ export default function ComplexMultiplicationVisualizer({ explanations }) {
 
   const handlePointerDown = useCallback((which) => (e) => {
     setDragging(which);
-    e.target.setPointerCapture(e.pointerId);
+    // capture keeps the drag when the pointer leaves the dot; a scripted pointer has no capture to give
+    try { e.target.setPointerCapture(e.pointerId); } catch (err) { /* no active pointer */ }
   }, []);
 
   const handlePointerMove = useCallback((e) => {

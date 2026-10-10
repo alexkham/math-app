@@ -538,7 +538,7 @@ const WeightedExpectedValueVisualizer = () => {
             <ul style={{ color: '#34495e', marginTop: '10px', paddingLeft: '20px' }}>
               <li style={{ marginBottom: '8px' }}><strong>Blue circles</strong> contain P(X = x) - the probability of each outcome. Circle size also shows probability</li>
               <li style={{ marginBottom: '8px' }}><strong>Arrow thickness/length</strong> shows &quot;pull strength&quot; - how much that outcome pulls E(X) toward it</li>
-              <li style={{ marginBottom: '8px' }}><strong>Red line (E(X))</strong> is the weighted average - pulled toward high-probability outcomes</li>
+              <li style={{ marginBottom: '8px' }}><strong>Blue line (E(X))</strong> is the weighted average - pulled toward high-probability outcomes</li>
               <li style={{ marginBottom: '8px' }}><strong>Gray dashed line</strong> is the simple average (unweighted) - treats all outcomes equally</li>
             </ul>
 

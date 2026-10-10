@@ -256,7 +256,7 @@ That is the multiplication rule $P(A \\cap B) = P(A) \\cdot P(B \\mid A)$, drawn
     before: ``,
     after: `The order matters for reading, not for the answer. The same leaf is $P(B) \\cdot P(A \\mid B) = 0.54 \\times 0.7778 = 0.42$, which is the tree drawn with $B$ first. A tree commits you to one order of conditioning; the joint probability it produces does not depend on that choice.
 
-Notice also what a single path is *not*. $0.42$ is the probability of $A$ and $B$ together, not the probability of $B$ given $A$. The conditional is the edge label, $0.7$; the joint is the leaf.`,
+Notice also what a single path is not. $0.42$ is the probability of $A$ and $B$ together, not the probability of $B$ given $A$. The conditional is the edge label, $0.7$; the joint is the leaf.`,
     link: '',
   },
 
@@ -518,7 +518,7 @@ The middle piece is largest because the ellipse is widest at its centre, not bec
 
 $P(A \\mid B_2) = \\frac{P(A \\cap B_2)}{P(B_2)} = \\frac{0.32}{1/3} = 0.96$.`,
     before: ``,
-    after: `Conditioning is a change of denominator, and the picture shows it as a change of *frame*. Before selecting, the whole rectangle was the world and $A$ filled $68\\%$ of it. After selecting, only $B_2$ is the world and $A$ fills $96\\%$ of that.
+    after: `Conditioning is a change of denominator, and the picture shows it as a change of frame. Before selecting, the whole rectangle was the world and $A$ filled $68\\%$ of it. After selecting, only $B_2$ is the world and $A$ fills $96\\%$ of that.
 
 The three conditionals are $0.54$, $0.96$ and $0.54$, and they do **not** sum to anything meaningful — they are three separate answers to three separate questions. What does add up is the weighted combination: $\\frac{1}{3}(0.54) + \\frac{1}{3}(0.96) + \\frac{1}{3}(0.54) = 0.68 = P(A)$.
 
@@ -762,7 +762,7 @@ The four regions are equally likely, $\\frac{1}{4}$ each, so $P(\\text{dark}) = 
     before: ``,
     after: `That single fraction is the law of total probability again, in its most countable form. Written the usual way it is $\\sum_i P(\\text{dark} \\mid \\text{region}_i) P(\\text{region}_i) = \\frac{0.15 + 0.40 + 0.65 + 0.85}{4}$, and it gives $0.5125$ either way — because with equal region weights, a weighted average is just an average.
 
-One honest caveat about the picture. The live tool decides *which* tiles are dark with a random shuffle, so the arrangement is different every time it loads and cannot be frozen. The count is fully determined, and the count is what the probability depends on, so the still below fills tiles in reading order instead. Scattered or blocked, $15$ dark tiles is $15$ dark tiles.`,
+One honest caveat about the picture. The live tool decides which tiles are dark with a random shuffle, so the arrangement is different every time it loads and cannot be frozen. The count is fully determined, and the count is what the probability depends on, so the still below fills tiles in reading order instead. Scattered or blocked, $15$ dark tiles is $15$ dark tiles.`,
     link: '',
   },
 
@@ -860,7 +860,7 @@ Three sliders below the table control P(A), P(B|A), and P(B|Aᶜ). All other pro
 
 • P(B|Aᶜ) sets the conditional probability of B given A did not occur. This determines how the Aᶜ row splits between columns.
 
-As you adjust any slider, all six interior cells and four marginal totals recalculate instantly. The conditional probability panels on the right also update. Try setting P(B|A) = P(B|Aᶜ) to see what happens—this creates [independence](!/probability/independence) between A and B.`,
+As you adjust any slider, all four interior cells and four marginal totals recalculate instantly. The conditional probability panels on the right also update. Try setting P(B|A) = P(B|Aᶜ) to see what happens—this creates [independence](!/probability/independence) between A and B.`,
     before: ``,
     after: ``,
     link: '',
@@ -1008,7 +1008,7 @@ The table shows P(B) calculated via [total probability](!/probability/total-prob
 
 Read across for the row marginals $0.60$ and $0.40$; read down for the column marginals $0.54$ and $0.46$. The grand total is exactly $1$.`,
     before: ``,
-    after: `The table and the tree are the same three numbers in two layouts, and each makes a different thing easy. The tree shows how the joints are *built* — multiply along a path. The table shows how the marginals are *recovered* — sum along a row or a column.
+    after: `The table and the tree are the same three numbers in two layouts, and each makes a different thing easy. The tree shows how the joints are built — multiply along a path. The table shows how the marginals are recovered — sum along a row or a column.
 
 The column marginal is where the table earns its place. $P(B) = 0.42 + 0.12 = 0.54$ is the law of total probability, and in this layout it is not a formula at all, just the total of a column.
 

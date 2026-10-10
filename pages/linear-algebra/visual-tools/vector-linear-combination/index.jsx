@@ -665,7 +665,7 @@ export async function getStaticProps(){
       title: `Getting Started with the Visualizer`,
       content: `Set the shared length of $u$ and $v$, then watch $\\alpha u + \\beta v = w$ build in three phases.
 
-• Use the **Dimensions** stepper to set the length of $u$ and $v$ (1 to 5 components). $w$ inherits the length automatically
+• Use the **Dimensions** stepper to set the length of $u$ and $v$ (1 to 10 components). $w$ inherits the length automatically
 • Hover the **?** icon for a reminder that [linear combinations](!/linear-algebra/vectors/linear-combinations#1) are built from [scalar](!/linear-algebra/vectors#1) multiplication plus [vector addition](!/linear-algebra/vectors/basic-operations#1)
 • Press play or step manually through the scene player
 • The animation walks three phases in order: scale $u$ by $\\alpha$, scale $v$ by $\\beta$, then add the scaled vectors into $w$

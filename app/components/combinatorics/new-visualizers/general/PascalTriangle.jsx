@@ -322,6 +322,7 @@ export default function PascalsTriangle({ explanations = null }) {
 
   // Connectors per mode
   const connectors = [];
+  const overlays = []; // drawn above the cells (the symmetry arc would hide under them)
 
   if (mode === "identity" && focusN !== null && focusN >= 1) {
     const n = focusN, r = focusR;
@@ -380,8 +381,8 @@ export default function PascalsTriangle({ explanations = null }) {
       const x1 = cellCenterX(n, r), y1 = cellCenterY(n);
       const x2 = cellCenterX(n, n - r), y2 = cellCenterY(n);
       const midX = (x1 + x2) / 2;
-      const midY = y1 - 22;
-      connectors.push(
+      const midY = y1 - 60;
+      overlays.push(
         <path
           key="sym-arc"
           d={`M${x1} ${y1} Q${midX} ${midY} ${x2} ${y2}`}
@@ -461,8 +462,10 @@ export default function PascalsTriangle({ explanations = null }) {
 
   // Line 1: state key for the hoisted explanations - the active lens, or the
   // unfocused view when no cell is selected (this tool has no animation).
-  const stateKey = focusN === null || focusR === null ? "unfocused" : mode;
-  const stateEntry = (explanations && explanations[stateKey]) || null;
+  // The identity note speaks of "two parents": the apex has none and edge cells only one.
+  const noTwoParents = mode === "identity" && focusN !== null && (focusR === 0 || focusR === focusN);
+  const stateKey = focusN === null || focusR === null ? "unfocused" : noTwoParents ? null : mode;
+  const stateEntry = (explanations && stateKey && explanations[stateKey]) || null;
 
   // Mode-specific content
   let modeContent = null;
@@ -536,6 +539,7 @@ export default function PascalsTriangle({ explanations = null }) {
 
               {/* Cells (on top) */}
               {cells}
+              {overlays}
 
               {/* Polynomial banner */}
               <rect

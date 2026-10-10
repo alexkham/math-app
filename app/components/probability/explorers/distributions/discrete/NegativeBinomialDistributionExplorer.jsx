@@ -141,7 +141,7 @@ export default function NegativeBinomialDistributionExplorer({
           marginBottom: '6px',
           fontSize: '13px'
         }}>
-          Number of Successes (r): {r}
+          Target Successes (r): {r}
           <input
             type="range"
             min={minR}

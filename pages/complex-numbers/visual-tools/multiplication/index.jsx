@@ -394,8 +394,8 @@ The **Key Ideas** panel at the bottom of the right column holds four fixed point
 
   /* Animated demos (ToolDemoPlayer v3) against the real ComplexMultiplicationVisualizer
      (opens on (2+i)(−1+2i)). Number inputs input[type="number"] nth 0..3 = z1 Re, z1 Im,
-     z2 Re, z2 Im. The drag points use setPointerCapture, so the demos use presets and
-     typed values instead of drags. */
+     z2 Re, z2 Im. Drag points: circle.drag-point nth 0 = z1 (navy), nth 1 = z2 (orange),
+     dragged with { drag, dx, dy } (screen px in the 0.6 stage). */
   const demos = {
     'getting-started-drag-and-multiply': {
       title: 'The presets',
@@ -420,10 +420,10 @@ Real factor: no navy arc, no turn.
 Product −6 + 8i. Modulus 2 × 5 = 10.`, at: 'tl' },
         { click: { button: '2(−3+4i)', exact: true } },
         { wait: 2800 },
-        { say: `TAP (2+i)(−1+2i)
-26.57° + 116.57° = 143.13°.
-Product −4 + 3i. Modulus 5.`, at: 'tl' },
-        { click: { button: '(2+i)(−1+2i)', exact: true } },
+        { say: `DRAG z₂ (orange)
+The product follows it at twice the length:
+multiplying by 2 only stretches.`, at: 'tl' },
+        { drag: { css: 'circle.drag-point', nth: 1 }, dx: 36, dy: 24, ms: 1600 },
         { wait: 2800 },
       ],
     },

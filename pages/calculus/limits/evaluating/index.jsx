@@ -12,6 +12,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 
 
@@ -628,6 +629,23 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const leSign = (x) => (x + 1) / (x - 3);
+  const fpHoleLimit = { kind: 'pieces', svgTitle: '(x^2 - 4)/(x - 2) is the line x + 2 with a hole at (2, 4): substitution gives 0/0 but the limit is 4', xRange: [-1, 5], yRange: [-1, 7],
+    pieces: [
+      { fn: (x) => x + 2, from: -1, to: 2, ends: [null, 'open'], color: 'f' },
+      { fn: (x) => x + 2, from: 2, to: 5, ends: ['open', null], color: 'f', label: { text: 'y = (x² − 4)/(x − 2)', x: 2.9, y: 4.9, pos: 'se' } },
+    ],
+    vlines: [{ x: 2 }],
+    notes: [{ x: 0.2, y: 6.4, text: 'at x = 2: 0/0, no value', pos: 'e', color: 'r' }, { x: 0.2, y: 5.7, text: 'heights near x = 2 → 4', pos: 'e', color: 'f' }],
+    caption: '0/0 at the point, yet the limit is 4: the graph has only a hole' };
+  const fpSignAnalysis = { kind: 'pieces', svgTitle: '(x + 1)/(x - 3): just right of 3 the quotient is large positive, just left large negative', xRange: [-2, 8], yRange: [-12, 12], yStep: 4,
+    pieces: [
+      { fn: leSign, from: -2, to: 2.67, ends: [null, null], color: 'f' },
+      { fn: leSign, from: 3.36, to: 8, ends: [null, null], color: 'f', label: { text: 'y = (x + 1)/(x − 3)', x: 4.5, y: leSign(4.5), pos: 'ne' } },
+    ],
+    vlines: [{ x: 3, label: 'x = 3' }],
+    notes: [{ x: 3.8, y: 10.2, text: '4 / (small +) → +∞', pos: 'e', color: 'r' }, { x: -1.9, y: -10.2, text: '4 / (small −) → −∞', pos: 'e', color: 'r' }],
+    caption: 'The sign of the small denominator decides +∞ or −∞' };
   const demoUnits = {
     onesided: demoUnitFrame({
       svg: functionLimitDiagrams.jump,
@@ -635,6 +653,16 @@ const schemas = {
       text: 'Evaluated from the left the probe heads to 0, from the right to 1; the two one-sided limits are perfectly well defined and simply differ, so the two-sided limit does not exist. Any expression that changes formula at a point, like |x|/x, has to be evaluated this way. Read each side separately on the',
       href: '/calculus/visual-tools/limit',
       linkText: 'limit explorer',
+    }),
+    holeLimit: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpHoleLimit),
+      caption: 'What 0/0 hides',
+      text: 'The section&#8217;s (x&#178; &#8722; 4)/(x &#8722; 2). For every x &#8800; 2 it equals x + 2, so its graph is that line with a single point missing at (2, 4): substituting x = 2 gives 0/0 because the formula has no value there. The heights on both sides still close in on 4, and the limit is 4. 0/0 says only that more work is needed, which factoring and canceling then supplies.',
+    }),
+    signAnalysis: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpSignAnalysis),
+      caption: 'Which infinity, from which side',
+      text: 'The section&#8217;s (x + 1)/(x &#8722; 3) near x = 3. The numerator stays near 4 while the denominator shrinks to 0. Just right of 3 the denominator is a small positive number, so the quotient is a large positive number and the graph shoots up; just left of 3 it is a small negative number and the graph drops. So the right-hand limit is +&#8734; and the left-hand limit is &#8722;&#8734;.',
     }),
   };
 
@@ -680,6 +708,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-holeLimit'} dangerouslySetInnerHTML={{ __html: demoUnits.holeLimit }} />,
+          `Factoring in section 4 removes the common factor x − 2 and fills in the value 4.`,
         ]
     },
     {
@@ -773,6 +803,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <div key={'unit-signAnalysis'} dangerouslySetInnerHTML={{ __html: demoUnits.signAnalysis }} />,
+          `Because the two sides disagree, the two-sided limit at 3 does not exist, not even as ∞.`,
           <div key={'obj11-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj11Table }} />,
         ]

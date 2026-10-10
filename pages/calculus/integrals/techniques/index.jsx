@@ -11,6 +11,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -501,6 +503,26 @@ const schemas = {
 }
 
 
+  const pfA = (x) => 0.5 / (x - 1), pfB = (x) => -0.5 / (x + 1), pfF = (x) => 1 / (x * x - 1);
+  const fpPartialFractions = { kind: 'pieces', svgTitle: '1/(x^2 - 1) is the sum of 1/2 over (x - 1) and -1/2 over (x + 1): each piece has one asymptote, the sum has both', xRange: [-3.5, 3.5], yRange: [-4, 4],
+    pieces: [
+      { fn: pfA, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[-3.5, 0.88], [1.13, 3.5]] },
+      { fn: pfB, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-3.5, -1.13], [-0.88, 3.5]] },
+      { fn: pfF, from: -3.5, to: -1.13, ends: [null, null], color: 'f' },
+      { fn: pfF, from: -0.87, to: 0.87, ends: [null, null], color: 'f' },
+      { fn: pfF, from: 1.13, to: 3.5, ends: [null, null], color: 'f' },
+    ],
+    vlines: [{ x: -1, label: 'x = −1' }, { x: 1, label: 'x = 1' }],
+    notes: [{ x: 1.4, y: 3.4, text: 'blue: 1/(x² − 1)', pos: 'e', color: 'f' }, { x: 1.4, y: 2.9, text: 'amber: (1/2)/(x − 1)', pos: 'e', color: 'r' }, { x: 1.4, y: 2.4, text: 'navy: −(1/2)/(x + 1)', pos: 'e', color: 'g' }],
+    caption: 'Two simple fractions, one asymptote each, add up to the original' };
+  const demoUnits = {
+    partialFractions: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpPartialFractions),
+      caption: 'A fraction taken apart',
+      text: 'The section&#8217;s 1/(x&#178; &#8722; 1) (blue) has two vertical asymptotes, at x = &#8722;1 and x = 1. The decomposition writes it as (1/2)/(x &#8722; 1) (amber dashes), which carries only the asymptote at 1, plus &#8722;(1/2)/(x + 1) (navy dashes), which carries only the one at &#8722;1. Adding the two dashed curves point by point gives the blue curve, and each simple piece integrates to a logarithm.',
+    }),
+  };
+
   return {
   props: {
     sectionsContent,
@@ -510,6 +532,7 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Integration Techniques: Substitution, Parts & More | Learn Math Class",
       description: "Master integration techniques: u-substitution, integration by parts (LIATE), trigonometric integrals, trig substitution, partial fractions, and how to choose the right method.",
@@ -521,7 +544,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -595,6 +618,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-partialFractions'} dangerouslySetInnerHTML={{ __html: demoUnits.partialFractions }} />,
+          `Each factor of the denominator contributes one simple fraction with its own asymptote.`,
         ]
     },
     {

@@ -935,13 +935,13 @@ Once the sample space is identified, it can be written in different ways dependi
   $\(\\Omega = \{(H,H), (H,T), (T,H), (T,T)\}\)$
 
 - **Sequences or tuples** when more than two components are involved, e.g. three dice  
-  $\(\\Omega = \{(x_1, x_2, x_3) : x_i \in \{1,\ldots,6\}\}\)$
+  $\(\\Omega = \{(x_1, x_2, x_3) : x_i \\in \{1,\\ldots,6\}\}\)$
 
 - **Intervals** when outcomes vary continuously, e.g. a measurement  
   $\(\\Omega = [0,1]\)$
 
 - **Set-builder notation** for describing outcomes by a rule, e.g.  
-  $\(\\Omega = \{x : 0 \le x \le 10\}\)$
+  $\(\\Omega = \{x : 0 \\le x \\le 10\}\)$
 
 - **Cartesian products** for combining simpler spaces, e.g.  
   $\(\\Omega = A \\times B\)$
@@ -992,9 +992,9 @@ Different situations lead to different forms of sample spaces. A few common exam
 
 • A die roll: $\(\\Omega = \{1,2,3,4,5,6\}\)$
 • A deck draw: $\(\\Omega =\)$ all 52 individual cards
-• Two coin tosses: $\(\Omega = \{(H,H), (H,T), (T,H), (T,T)\}\)$
+• Two coin tosses: $\(\\Omega = \{(H,H), (H,T), (T,H), (T,T)\}\)$
 • Measuring a person's height: $\(\\Omega = [0,3]\)$
-• Time until an event occurs: $\(\\Omega = [0,\infty)\)$
+• Time until an event occurs: $\(\\Omega = [0,\\infty)\)$
 • Choosing two items without replacement: outcomes are ordered pairs of objects
 
 These examples show how the structure of $\(\\Omega\)$ changes with the scenario, but the idea remains the same: it captures every outcome the situation can produce.

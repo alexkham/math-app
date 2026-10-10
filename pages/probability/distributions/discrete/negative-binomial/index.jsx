@@ -856,6 +856,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 
@@ -1499,6 +1500,27 @@ const negativeBinomialExplanations = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const nbC = (n, k) => { let c = 1; for (let i = 1; i <= k; i++) c = c * (n - k + i) / i; return c; };
+  const nbP = (r, k) => (k < r ? 0 : nbC(k - 1, r - 1) * 0.4 ** r * 0.6 ** (k - r));
+  const nbPx = (k) => k / 25.5 * 388;
+  const nbBars = [].concat(
+    Array.from({ length: 24 }, (_, i) => ({ from: 0, to: nbP(1, i + 1), color: 'f', dx: nbPx(i + 1) - 4 })),
+    Array.from({ length: 22 }, (_, i) => ({ from: 0, to: nbP(3, i + 3), color: 'r', dx: nbPx(i + 3) })),
+    Array.from({ length: 20 }, (_, i) => ({ from: 0, to: nbP(5, i + 5), color: 'g', dx: nbPx(i + 5) + 4 }))).filter((b) => b.to > 0.002);
+  const nbSeq = [0, 0, 1, 0, 1, 0, 0, 0, 1];
+  const nbDots = nbSeq.map((s, i) => ({ fn: () => 0, from: i + 1, to: i + 1, ends: [s ? 'closed' : 'open', s ? 'closed' : 'open'], color: s ? 'r' : 'g' }));
+  const fpNbShapes = { kind: 'pieces', svgTitle: 'Negative binomial PMFs with p = 0.4 for r = 1, 3 and 5 successes', xRange: [-0.5, 25], yRange: [0, 0.42], xStep: 5, xLetter: 'k',
+    pieces: [{ fn: () => 0, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [] }],
+    yBars: nbBars,
+    notes: [{ x: 12, y: 0.39, text: 'p = 0.4 in all three', pos: 'e' }, { x: 12, y: 0.36, text: 'blue: r = 1, mean 2.5', pos: 'e', color: 'f' }, { x: 12, y: 0.33, text: 'amber: r = 3, mean 7.5', pos: 'e', color: 'r' }, { x: 12, y: 0.3, text: 'navy: r = 5, mean 12.5', pos: 'e', color: 'g' }],
+    caption: 'Larger r: the bars start at k = r, move right and spread out' };
+  const fpNbWaits = { kind: 'pieces', svgTitle: 'Nine trials F F S F S F F F S: the wait for three successes split into three geometric waits of 3, 2 and 4 trials', xRange: [0, 11], yRange: [0, 1.2], yStep: 5, xLetter: 'trial', yLetter: ' ',
+    pieces: [].concat(nbDots, [
+      { fn: () => 0.4, from: 0.6, to: 3.4, ends: [null, null], color: 'f', label: { text: 'wait 1: 3', x: 2, y: 0.4, pos: 'n' } },
+      { fn: () => 0.4, from: 3.6, to: 5.4, ends: [null, null], color: 'r', label: { text: 'wait 2: 2', x: 4.5, y: 0.4, pos: 'n' } },
+      { fn: () => 0.4, from: 5.6, to: 9.4, ends: [null, null], color: 'g', label: { text: 'wait 3: 4', x: 7.5, y: 0.4, pos: 'n' } }]),
+    notes: [{ x: 0.6, y: 1.1, text: 'filled: success, hollow: failure', pos: 'e' }, { x: 0.6, y: 0.98, text: 'X = 3 + 2 + 4 = 9 trials for r = 3', pos: 'e' }, { x: 0.6, y: 0.86, text: 'each wait is geometric: mean 1/p, variance (1 − p)/p²', pos: 'e' }],
+    caption: 'r successes = r independent geometric waits, end to end' };
   const demoUnits = {
     u_4_0: demoUnitFrame({
       svg: discretePmfDiagrams.negativeBinomial,
@@ -1513,6 +1535,16 @@ const negativeBinomialExplanations = {
       text: 'The marked mean sits to the right of the peak because of the long right tail: the expected number of trials is r over p, so each additional required success adds 1 over p trials on average. Linearity of expectation gives this without any summation. Change r and p and watch the mean marker move on the',
       href: '/probability/visual-tools/distributions/negative-binomial',
       linkText: 'distribution explorer',
+    }),
+    nbShapes: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpNbShapes),
+      caption: 'What r does',
+      text: 'Three negative binomial PMFs, all with p = 0.4. Blue, r = 1: the geometric case, tallest at k = 1. Amber, r = 3: the bars start at k = 3 and peak a few trials later. Navy, r = 5: they start at k = 5, sit further right and spread wider. The mean r/p grows from 2.5 to 7.5 to 12.5 trials.',
+    }),
+    nbWaits: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpNbWaits),
+      caption: 'Three successes as three waits',
+      text: 'One run of trials until the third success: F F S F S F F F S. Cut it after each success and it splits into three separate waits, of 3, 2 and 4 trials. Each wait is a geometric count that starts fresh, independent of the others, so X = 9 is their sum. Adding r means of 1/p gives r/p; adding r variances of (1 &#8722; p)/p&#178; gives r(1 &#8722; p)/p&#178;.',
     }),
   };
 
@@ -1597,6 +1629,8 @@ export default function NegativeBinomialDistributionPage({
             <div key={'parameters-negative'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
                         {processContent( sectionsContent.obj2.content)}
                     </div>,
+                  <div key={'unit-nbShapes'} dangerouslySetInnerHTML={{ __html: demoUnits.nbShapes }} />,
+            `Every PMF here starts at k = r: fewer than r trials cannot hold r successes.`,
                 
         ]
     },
@@ -1645,6 +1679,8 @@ export default function NegativeBinomialDistributionPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-nbWaits'} dangerouslySetInnerHTML={{ __html: demoUnits.nbWaits }} />,
+          `Variances add only because the waits are independent: each one restarts after a success.`,
         ]
     },
     {

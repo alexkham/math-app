@@ -686,7 +686,7 @@ A **StepRow** is added for each [item-1-destination group](!#grouping-by-item-1-
 
 • A **progress counter** $k / \\text{group size}$ tracking how many partitions in this group have completed.
 
-• A short **narration** of the structure: *Item 1 is placed in Box A (size 2). The remaining 3 items partition into the other boxes of sizes 1, 1, 1 (Box A needs 1 more), giving $3!/(1! \\cdot 1! \\cdot 1!) = 6$ partitions.* The formula reflects the reduced sizes after item 1 is placed.
+• A short **narration** of the structure: "Item 1 is placed in Box A (size 2). The remaining 3 items fill the rest: Box A needs 1 more, Box B takes 1 and Box C takes 1, giving $3!/(1! \\cdot 1! \\cdot 1!) = 6$ partitions." The formula reflects the reduced sizes after item 1 is placed.
 
 When all groups complete, every StepRow shows **done** with a checkmark, and the counter reaches *total / total*.`,
       before: ``,

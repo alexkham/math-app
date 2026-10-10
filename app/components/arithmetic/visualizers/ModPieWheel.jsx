@@ -122,6 +122,8 @@ export default function ModPieWheel({ explanations = null }) {
   // --- refs ---
   const wheelAreaRef = useRef(null);
   const runningRef = useRef(false);
+  // Each run gets its own id; a loop whose id is stale stops even if a new run set runningRef again.
+  const runIdRef = useRef(0);
 
   // --- effects ---
 
@@ -222,20 +224,21 @@ export default function ModPieWheel({ explanations = null }) {
     setPlaced([]);
     runningRef.current = true;
     setIsRunning(true);
-    runLoop(parsedNumber, divisor, speed);
+    runLoop(parsedNumber, divisor, speed, ++runIdRef.current);
   }
 
   function stopRun() {
     runningRef.current = false;
+    runIdRef.current++;
     setIsRunning(false);
   }
 
-  async function runLoop(N, d, sp) {
+  async function runLoop(N, d, sp, id) {
     const slotCounters = new Array(d).fill(0);
     for (let num = 1; num <= N; num++) {
       const delay = Math.max(20, 400 - sp * 35);
       await new Promise((r) => setTimeout(r, delay));
-      if (!runningRef.current) return;
+      if (!runningRef.current || runIdRef.current !== id) return;
       const remainder = num % d;
       const row = slotCounters[remainder]++;
       setPlaced((prev) => [...prev, { n: num, sliceIdx: remainder, row }]);

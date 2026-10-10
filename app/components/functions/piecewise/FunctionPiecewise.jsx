@@ -241,7 +241,7 @@ function analyze(pieces) {
       let leftLim = null, rightLim = null;
       pieces.forEach((p) => {
         const cat = CATALOG[p.expr];
-        if (!cat) return;
+        if (!cat || p.to === p.from) return;   // a single-point piece has a value, not a one-sided limit
         if (Math.abs(p.to - x) < 1e-9) {
           try { leftLim = cat.fn(x); } catch {}
         }
@@ -439,8 +439,8 @@ export default function FunctionPiecewise({
           const cat = CATALOG[p.expr];
           const lb = p.fromKind === 'closed' ? '[' : '(';
           const rb = p.toKind === 'closed' ? ']' : ')';
-          return `${cat ? cat.label : '?'}   for x \u2208 ${lb}${p.from}, ${p.to}${rb}`;
-        }).join('  \n');
+          return `- ${cat ? cat.label : '?'} for x \u2208 ${lb}${fmt(p.from)}, ${fmt(p.to)}${rb}`;
+        }).join('\n');
 
     const counts = { ok: 0, jump: 0, removable: 0, overlap: 0, gap: 0 };
     verdict.boundaries.forEach(bd => { counts[bd.kind] = (counts[bd.kind] || 0) + 1; });
@@ -456,13 +456,13 @@ export default function FunctionPiecewise({
     return (
       `## Build a piecewise function\n\n` +
       `Each row in the editor is a piece: a function shape plus the domain on which it applies. The plot draws every piece on its claimed interval, with open or closed endpoint markers honoring your choices.\n\n` +
-      `### Current definition\n\n\`\`\`\n${defText}\n\`\`\`\n\n` +
+      `### Current definition\n\n${defText}\n\n` +
       `### Right now\n\n${numbers}\n\n` +
       `### What to try\n\n` +
       `- Load a preset to see a known shape, then tweak it.\n` +
-      `- Open both endpoints of two adjacent pieces at the same x — you&apos;ll get a gap warning.\n` +
+      `- Open both endpoints of two adjacent pieces at the same x — you\u2019ll get a gap warning.\n` +
       `- Close both endpoints at the same x — overlap warning.\n` +
-      `- Use two pieces that don&apos;t agree at a boundary — jump discontinuity.`
+      `- Use two pieces that don\u2019t agree at a boundary — jump discontinuity.`
     );
   }, [pieces, verdict]);
 
@@ -982,7 +982,11 @@ export default function FunctionPiecewise({
                 fontSize: 9.5, textTransform: 'uppercase', letterSpacing: '0.05em',
                 color: panelTones.text, fontWeight: 700,
                 background: panelTones.soft, padding: '2px 6px', borderRadius: 3,
-              }}>domains tile &rArr; well-defined</span>
+              }}>{verdict.kind === 'overlap' ? <>pieces overlap &rArr; not well-defined</>
+                : verdict.kind === 'gap' ? <>domains leave a gap &rArr; not fully defined</>
+                : verdict.kind === 'invalid' ? <>invalid piece</>
+                : verdict.kind === 'empty' ? <>no pieces yet</>
+                : <>domains tile &rArr; well-defined</>}</span>
             </div>
           </div>
         </div>

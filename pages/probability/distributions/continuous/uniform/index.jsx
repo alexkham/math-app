@@ -1119,6 +1119,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 
@@ -2047,6 +2048,15 @@ Unlike the normal distribution, sums of independent uniform variables do **not**
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const unPx = (x) => (x + 2) / 37 * 388;
+  const unBars = [].concat(
+    Array.from({ length: 10 }, (_, i) => ({ from: 0, to: 1 / 30, color: 'f', dx: unPx(5 + (i + 0.5) * 0.5) })),
+    Array.from({ length: 20 }, (_, i) => ({ from: 0, to: 1 / 30, color: 'r', dx: unPx(15 + (i + 0.5) * 0.5) })));
+  const fpLengthProb = { kind: 'pieces', svgTitle: 'Bus arrival uniform on [0, 30] minutes: the 5-minute window [5, 10] has probability 1/6, the 10-minute window [15, 25] has 1/3', xRange: [-2, 35], yRange: [0, 0.05], xStep: 5,
+    pieces: [{ fn: () => 1 / 30, from: 0, to: 30, ends: ['closed', 'closed'], color: 'g', label: { text: 'f(x) = 1/30', x: 28, y: 1 / 30, pos: 'n' } }],
+    yBars: unBars,
+    notes: [{ x: 3.5, y: 0.043, text: '[5, 10]: 5/30 = 1/6', pos: 'e', color: 'f' }, { x: 14.5, y: 0.043, text: '[15, 25]: 10/30 = 1/3', pos: 'e', color: 'r' }],
+    caption: 'Twice the length, twice the probability: P = length / 30' };
   const demoUnits = {
     u_5_0: demoUnitFrame({
       svg: continuousPdfDiagrams['uniform-pdf'],
@@ -2061,6 +2071,11 @@ Unlike the normal distribution, sums of independent uniform variables do **not**
       text: 'The CDF is a straight ramp from 0 at a to 1 at b: the accumulated area under a flat density grows linearly with x. Its constant slope is the density height, and the median is the midpoint of the interval. Read F at any point as the fraction of the interval to the left of it on the',
       href: '/probability/visual-tools/cdf/continuous',
       linkText: 'continuous CDF visualizer',
+    }),
+    lengthProb: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLengthProb),
+      caption: 'Probability as length',
+      text: 'A bus arrives at a uniformly random moment in the half hour [0, 30] minutes, so the density is the flat line at 1/30. The probability of a window is the area above it: the 5-minute window from 5 to 10 gets 5 &#215; 1/30 = 1/6 (blue), the 10-minute window from 15 to 25 gets 10 &#215; 1/30 = 1/3 (amber). Where the window sits does not matter; only its length does.',
     }),
   };
 
@@ -2111,6 +2126,8 @@ export default function ContinuousUniformDistributionPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-lengthProb'} dangerouslySetInnerHTML={{ __html: demoUnits.lengthProb }} />,
+          `Any 5-minute window, early or late, has the same probability 1/6.`,
           sectionsContent.obj1.example,
           sectionsContent.links.examples,
         ]

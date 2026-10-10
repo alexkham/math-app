@@ -66,7 +66,7 @@ You will begin by exploring the truth-functional nature of propositional logic: 
 
 You will also examine logical equivalences, which identify when two expressions always yield the same truth value, and are fundamental to simplifying and transforming logical formulas.
 
-A dedicated section on logical implication explains conditional statements like "$p \rightarrow q$" in both syntactic and semantic terms. Common misconceptions, properties of implication, and its use in proofs are addressed clearly.
+A dedicated section on logical implication explains conditional statements like "$p \\rightarrow q$" in both syntactic and semantic terms. Common misconceptions, properties of implication, and its use in proofs are addressed clearly.
 
 Each section is supported by examples, truth tables, and conceptual explanations designed to connect formal definitions to intuitive reasoning. Together, these topics form a complete picture of how meaning is assigned to logical statements in propositional systems.
 

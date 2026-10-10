@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 export default function TotalProbabilityVisualizerV2({ explanations = null } = {}) {
   const [numA, setNumA] = useState(3);
@@ -54,15 +54,32 @@ export default function TotalProbabilityVisualizerV2({ explanations = null } = {
     setHighlightedPath(null);
   };
 
+  // While a slider is dragged, renormalise from the values at drag start, so the
+  // result depends only on where the thumb ends (not on every value passed on the way).
+  const dragBase = useRef(null);
+  const startDrag = () => {
+    dragBase.current = { a: aProbs, c: condProbs };
+    window.addEventListener('pointerup', endDrag, { once: true });
+    window.addEventListener('pointercancel', endDrag, { once: true });
+  };
+  const endDrag = () => { dragBase.current = null; };
+
   const updateAProb = (index, value) => {
-    const newProbs = [...aProbs];
+    // On release the browser re-sends the thumb value snapped to the 0.01 step (0.526 -> 0.53);
+    // renormalising that again would drift the distribution, so ignore it.
+    if (!dragBase.current && Math.abs(value - aProbs[index]) < 0.005) return;
+    const newProbs = [...(dragBase.current ? dragBase.current.a : aProbs)];
     newProbs[index] = value;
     const normalized = normalizeProbs(newProbs);
     setAProbs(normalized);
   };
 
   const updateCondProb = (i, j, value) => {
+    // On release the browser re-sends the thumb value snapped to the 0.01 step (0.526 -> 0.53);
+    // renormalising that again would drift the distribution, so ignore it.
+    if (!dragBase.current && Math.abs(value - condProbs[i][j]) < 0.005) return;
     const newCondProbs = condProbs.map(row => [...row]);
+    if (dragBase.current) newCondProbs[i] = [...dragBase.current.c[i]];
     newCondProbs[i][j] = value;
     
     const rowSum = newCondProbs[i].reduce((a, b) => a + b, 0);
@@ -152,7 +169,7 @@ export default function TotalProbabilityVisualizerV2({ explanations = null } = {
   // page keys on; with nothing highlighted the state is the plain tree, and a
   // partition other than the default 3 is documented separately.
   const line1Key = highlightedPath
-    ? (/^A\d+/.test(highlightedPath) ? 'branch' : 'outcome')
+    ? (/^A\d+_all$/.test(highlightedPath) ? 'branch' : /^B\d+$/.test(highlightedPath) ? 'outcome' : 'joint')
     : (numA === 3 && numB === 3 ? 'overview' : 'wide');
   const line1Note = explanations ? explanations[line1Key] : null;
 
@@ -567,6 +584,7 @@ export default function TotalProbabilityVisualizerV2({ explanations = null } = {
                           max="0.99"
                           step="0.01"
                           value={prob}
+                          onPointerDown={startDrag}
                           onChange={(e) => updateAProb(i, parseFloat(e.target.value))}
                           style={{ width: '100%', accentColor: '#3b82f6' }}
                         />
@@ -597,6 +615,7 @@ export default function TotalProbabilityVisualizerV2({ explanations = null } = {
                               max="0.99"
                               step="0.01"
                               value={prob}
+                              onPointerDown={startDrag}
                               onChange={(e) => updateCondProb(i, j, parseFloat(e.target.value))}
                               style={{ width: '100%', accentColor: baseColors[i % baseColors.length] }}
                             />

@@ -21,6 +21,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
@@ -681,6 +682,24 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const biC = (n, k) => { let c = 1; for (let i = 1; i <= k; i++) c = c * (n - k + i) / i; return c; };
+  const biP = (n, p) => (k) => biC(n, Math.round(k)) * p ** Math.round(k) * (1 - p) ** (n - Math.round(k));
+  const biZig = (n, p) => (x) => { const i = Math.min(Math.max(Math.floor(x), 0), n - 1); const f = biP(n, p); return f(i) + (f(i + 1) - f(i)) * (x - i); };
+  const biDots = (n, p, color) => Array.from({ length: n + 1 }, (_, k) => ({ fn: () => biP(n, p)(k), from: k, to: k, ends: ['closed', 'closed'], color }));
+  const biStems = Array.from({ length: 10 }, (_, k) => ({ from: 0, to: biP(9, 0.5)(k), color: k === 4 || k === 5 ? 'r' : 'f', dx: k / 10.5 * 388 }));
+  const fpBinomShapes = { kind: 'pieces', svgTitle: 'Binomial PMFs with n = 10 and p = 0.2, 0.5, 0.8: the peak sits near np and the skew flips with p', xRange: [0, 10], yRange: [0, 0.42], xLetter: 'k',
+    pieces: [
+      { fn: biZig(10, 0.2), from: 99, to: 99, ends: [null, null], color: 'f', ghost: [[0, 10]] }, ...biDots(10, 0.2, 'f'),
+      { fn: biZig(10, 0.5), from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0, 10]] }, ...biDots(10, 0.5, 'g'),
+      { fn: biZig(10, 0.8), from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[0, 10]] }, ...biDots(10, 0.8, 'r'),
+    ],
+    notes: [{ x: 3.3, y: 0.41, text: 'p = 0.2: peak near 2, tail to the right', pos: 'e', color: 'f' }, { x: 3.3, y: 0.385, text: 'p = 0.5: symmetric about 5', pos: 'e', color: 'g' }, { x: 3.3, y: 0.36, text: 'p = 0.8: mirror image of p = 0.2', pos: 'e', color: 'r' }],
+    caption: 'n fixes the range 0 to 10; p moves the peak to about np' };
+  const fpTwoModes = { kind: 'pieces', svgTitle: 'Binomial PMF with n = 9, p = 0.5: k = 4 and k = 5 are equally likely, about 0.246 each, so there are two modes', xRange: [-0.5, 10], yRange: [0, 0.3], xLetter: 'k',
+    pieces: [{ fn: () => 0, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [] }],
+    yBars: biStems,
+    notes: [{ x: 6.3, y: 0.27, text: '(n + 1)p = 5 is an integer:', pos: 'e', color: 'r' }, { x: 6.3, y: 0.25, text: 'modes 4 and 5, 0.246 each', pos: 'e', color: 'r' }],
+    caption: 'n = 9, p = 0.5: two equal tallest bars, two modes' };
   const demoUnits = {
     u_4_0: demoUnitFrame({
       svg: discretePmfDiagrams.binomial,
@@ -702,6 +721,16 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
       text: 'A run of coin flips is a binomial experiment: with three tosses the eight equally likely sequences group into one way to get 0 heads, three ways for 1, three for 2 and one for 3, which are the binomial coefficients. The probability of exactly two heads is 3 over 8. Select a number of heads and count the matching sequences on the',
       href: '/probability/visual-tools/coin-toss',
       linkText: 'coin toss sample space explorer',
+    }),
+    binomShapes: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpBinomShapes),
+      caption: 'How p shapes a binomial with n = 10',
+      text: 'Three binomial distributions with the same n = 10, so the same possible values 0 to 10, and different p. With p = 0.2 (blue) the probabilities pile up near 2 with a tail to the right; with p = 0.5 (navy) they are symmetric about 5; with p = 0.8 (amber) the picture is the mirror image of p = 0.2. In each case the peak sits near the mean np: n sets the range, p sets where the mass goes.',
+    }),
+    twoModes: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpTwoModes),
+      caption: 'A binomial with two modes',
+      text: 'The section&#8217;s second example, n = 9 and p = 0.5. Here (n + 1)p = 5 is an integer, and the two amber bars at k = 4 and k = 5 have exactly the same height, about 0.246 each; no other value comes close. Both are modes. With n = 10 and p = 0.3, where (n + 1)p = 3.3 is not an integer, there would be a single tallest bar at 3.',
     }),
   };
 
@@ -787,6 +816,8 @@ export default function BinomialDistributionPage({
             <div key={'parameters-binomial'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
     {processContent( sectionsContent.obj2.content)}
 </div>,
+                  <div key={'unit-binomShapes'} dangerouslySetInnerHTML={{ __html: demoUnits.binomShapes }} />,
+          `With n = 10 the mean np is 2, 5 and 8 for the three curves, right where they peak.`,
         
         ]
     },
@@ -841,6 +872,8 @@ export default function BinomialDistributionPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-twoModes'} dangerouslySetInnerHTML={{ __html: demoUnits.twoModes }} />,
+          `Whenever (n + 1)p is a whole number, the binomial has two neighbouring modes.`,
         ]
     },
     {

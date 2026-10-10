@@ -206,7 +206,7 @@ The general rule behind the split: $z + \\bar{z} = 2\\,\\text{Re}(z)$ and $z - \
 
 [Complex Number Explorer](!/complex-numbers/visual-tools/complex-explorer) — a general-purpose interactive tool for plotting complex numbers, adjusting their real and imaginary parts, and observing how they behave under basic operations.
 
-[Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) — switch between rectangular form $a + bi$ and polar form $r e^{i\theta}$. Polar form simplifies multiplication and division; rectangular form, used in this tool, simplifies addition and subtraction.
+[Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular) — switch between rectangular form $a + bi$ and polar form $r e^{i\\theta}$. Polar form simplifies multiplication and division; rectangular form, used in this tool, simplifies addition and subtraction.
 
 [Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication) — see how multiplying two complex numbers stretches and rotates vectors on the plane. The moduli multiply and the arguments add.
 
@@ -216,11 +216,11 @@ The general rule behind the split: $z + \\bar{z} = 2\\,\\text{Re}(z)$ and $z - \
 
 [Distance & Midpoint Tool](!/complex-numbers/visual-tools/distance-midpoint) — compute and visualize the distance $|z_1 - z_2|$ and midpoint between two complex numbers, connecting complex arithmetic to Euclidean geometry.
 
-[De Moivre's Theorem Visualizer](!/complex-numbers/visual-tools/demoivre-visualizer) — animate the identity $(r e^{i\theta})^n = r^n e^{in\theta}$ and watch how raising a complex number to a power scales its modulus and multiplies its angle.
+[De Moivre's Theorem Visualizer](!/complex-numbers/visual-tools/demoivre-visualizer) — animate the identity $(r e^{i\\theta})^n = r^n e^{in\\theta}$ and watch how raising a complex number to a power scales its modulus and multiplies its angle.
 
 [Powers of i Calculator](!/complex-numbers/visual-tools/i-powers) — compute $i^n$ for any integer using the mod 4 cycle $i, -1, -i, 1$ and see where each power lands on the unit circle.
 
-[Euler's Formula Explorer](!/complex-numbers/visual-tools/euler-formula) — visualize $e^{i\theta} = \cos\theta + i\sin\theta$ and see how the exponential function traces the unit circle, connecting trigonometry, complex numbers, and the number $e$.`,
+[Euler's Formula Explorer](!/complex-numbers/visual-tools/euler-formula) — visualize $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ and see how the exponential function traces the unit circle, connecting trigonometry, complex numbers, and the number $e$.`,
       before:``,
       after:``,
       link:'',

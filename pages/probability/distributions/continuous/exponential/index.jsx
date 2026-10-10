@@ -1126,6 +1126,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 
@@ -2059,6 +2060,20 @@ The sum of $n$ independent $\\text{Exp}(\\lambda)$ variables follows a Gamma$(n,
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpExpCenters = { kind: 'pieces', svgTitle: 'Exponential density with rate 1: mode 0, median ln 2 = 0.693, mean 1, in that order from left to right', xRange: [0, 2.5], yRange: [0, 1.15],
+    pieces: [{ fn: (x) => Math.exp(-x), from: 0, to: 2.5, ends: ['closed', null], color: 'f', label: { text: 'f(x) = e^(−x)', x: 1.9, y: Math.exp(-1.9), pos: 'ne' } }],
+    vlines: [{ x: Math.LN2, label: 'median' }, { x: 1, label: 'mean' }],
+    points: [{ x: 0, y: 1, label: 'mode 0', pos: 'ne' }],
+    notes: [{ x: 1.25, y: 0.9, text: 'mode 0 < median 0.693 < mean 1', pos: 'e', color: 'r' }, { x: 1.25, y: 0.8, text: 'half the area lies left of 0.693', pos: 'e' }],
+    caption: 'λ = 1: the long right tail pulls the mean past the median' };
+  const fpMemoryless = { kind: 'pieces', svgTitle: 'Exponential density with rate 1 and the density of X given X > 1: the same curve, moved to start at 1', xRange: [0, 5], yRange: [0, 1.2],
+    pieces: [
+      { fn: (x) => Math.exp(-x), from: 0, to: 5, ends: ['closed', null], color: 'f', label: { text: 'f(x) = e^(−x)', x: 0.35, y: Math.exp(-0.35), pos: 'ne' } },
+      { fn: (x) => Math.exp(-(x - 1)), from: 1, to: 5, ends: ['closed', null], color: 'r', label: { text: 'given X > 1: e^(−(x−1))', x: 1.45, y: Math.exp(-0.45), pos: 'ne' } },
+    ],
+    vlines: [{ x: 1, label: 's = 1' }],
+    notes: [{ x: 2.4, y: 1.05, text: 'same shape, just shifted:', pos: 'e', color: 'r' }, { x: 2.4, y: 0.95, text: 'the wait so far is forgotten', pos: 'e', color: 'r' }],
+    caption: 'Memoryless: after waiting 1, the remaining wait is Exp(1) again' };
   const demoUnits = {
     u_5_0: demoUnitFrame({
       svg: continuousPdfDiagrams['exponential-pdf'],
@@ -2073,6 +2088,16 @@ The sum of $n$ independent $\\text{Exp}(\\lambda)$ variables follows a Gamma$(n,
       text: 'The cumulative probability rises fastest at zero and flattens toward 1, mirroring the decaying density above it; F(x) is 1 minus e to the minus lambda x, so the median sits where the curve crosses one half. The gap between the curve and 1 is the survival probability that drives the memoryless property. Read the probability of waiting at most x on the',
       href: '/probability/visual-tools/cdf/continuous',
       linkText: 'continuous CDF visualizer',
+    }),
+    expCenters: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpExpCenters),
+      caption: 'Mode, median and mean of Exp(1)',
+      text: 'The density e^(&#8722;x) for rate &#955; = 1. Its highest point is at 0, the mode. The median, ln 2 &#8776; 0.693, is the dashed line with half of the area on each side. The mean, 1, lies further right: the long thin tail carries little area but large values, and they pull the average past the median. For any rate the three keep this order and the ratios: median = 0.693 &#215; mean.',
+    }),
+    memoryless: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpMemoryless),
+      caption: 'The memoryless property as a picture',
+      text: 'The blue curve is the Exp(1) density. The amber curve is the density of X once we know X &gt; 1: it starts at x = 1 with height 1 and decays exactly like the original. It is the same curve moved one unit to the right, so the remaining wait X &#8722; 1 again follows Exp(1). Having waited already tells nothing about how much longer the wait will be.',
     }),
   };
 
@@ -2206,6 +2231,8 @@ export default function ExponentialDistributionPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-expCenters'} dangerouslySetInnerHTML={{ __html: demoUnits.expCenters }} />,
+          `With λ = 3 per hour all three scale by 1/3: mode 0, median 13.9 minutes, mean 20 minutes.`,
         ]
     },
     {
@@ -2250,6 +2277,8 @@ export default function ExponentialDistributionPage({
         link:sectionsContent.obj15.link,
         content:[
           sectionsContent.obj15.content,
+          <div key={'unit-memoryless'} dangerouslySetInnerHTML={{ __html: demoUnits.memoryless }} />,
+          `Any other density would change shape after conditioning; this is why the exponential is the only memoryless one.`,
         ]
     },
     {

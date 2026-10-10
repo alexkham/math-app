@@ -11,6 +11,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 
 
@@ -651,6 +653,39 @@ const schemas = {
 }
 
 
+  const teL2 = Math.log(2);
+  const fpCircleTangent = { kind: 'pieces', svgTitle: 'The circle x^2 + y^2 = 25 with its tangent at (3, 4), slope -x/y = -3/4', xRange: [-6.5, 7.9], yRange: [-5.5, 5.5],
+    pieces: [
+      { fn: (x) => 4 - 0.75 * (x - 3), from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[0, 6.5]], label: { text: 'slope −3/4', x: 6.2, y: 1.6, pos: 'ne' } },
+      { fn: (x) => Math.sqrt(Math.max(0, 25 - x * x)), from: -5, to: 5, ends: [null, null], color: 'f' },
+      { fn: (x) => -Math.sqrt(Math.max(0, 25 - x * x)), from: -5, to: 5, ends: [null, null], color: 'f' },
+    ],
+    points: [{ x: 3, y: 4, label: '(3, 4)', pos: 'ne' }],
+    notes: [{ x: -6.3, y: 5.0, text: 'x² + y² = 25', pos: 'e', color: 'f' }, { x: 2.6, y: -5.2, text: 'dy/dx = −x/y = −3/4', pos: 'e', color: 'r' }],
+    caption: 'No formula for y needed: the slope −x/y reads both coordinates' };
+  const fpInverseSlopes = { kind: 'pieces', svgTitle: 'e^x has slope 2 at (ln 2, 2); its inverse ln x has slope 1/2 at the mirrored point (2, ln 2)', xRange: [-2, 4], yRange: [-2, 4],
+    pieces: [
+      { fn: (x) => x, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-2, 4]], label: { text: 'y = x', x: 3.6, y: 3.6, pos: 'nw' } },
+      { fn: (x) => 2 + 2 * (x - teL2), from: 99, to: 99, ends: [null, null], color: 'f', ghost: [[-0.1, 1.4]] },
+      { fn: (x) => teL2 + 0.5 * (x - 2), from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[0.8, 3.6]] },
+      { fn: Math.exp, from: -2, to: 1.38, ends: [null, null], color: 'f', label: { text: 'eˣ', x: 1.25, y: Math.exp(1.25), pos: 'w' } },
+      { fn: Math.log, from: 0.14, to: 4, ends: [null, null], color: 'r', label: { text: 'ln x', x: 3.6, y: Math.log(3.6), pos: 'se' } },
+    ],
+    points: [{ x: teL2, y: 2, label: 'slope 2', pos: 'nw' }, { x: 2, y: teL2, label: 'slope 1/2', pos: 'se' }],
+    caption: 'Mirrored points, reciprocal slopes: 2 on eˣ, 1/2 on ln x' };
+  const demoUnits = {
+    circleTangent: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpCircleTangent),
+      caption: 'A slope from the equation alone',
+      text: 'The section&#8217;s circle x&#178; + y&#178; = 25 is not the graph of one function: each x inside (&#8722;5, 5) has two points. Implicit differentiation gives dy/dx = &#8722;x/y, which uses both coordinates and so picks the right branch automatically. At (3, 4) the slope is &#8722;3/4, the dashed tangent line; at (3, &#8722;4) the same formula gives +3/4.',
+    }),
+    inverseSlopes: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpInverseSlopes),
+      caption: 'Reciprocal slopes at mirrored points',
+      text: 'e&#739; and ln x are reflections of each other in the dashed line y = x. At (ln 2, 2) the curve e&#739; has slope e^(ln 2) = 2; the mirrored point on ln x is (2, ln 2), where the slope is 1/2. Reflecting across y = x swaps rise and run, so every slope m becomes 1/m: (f&#8315;&#185;)&#8242;(b) = 1/f&#8242;(a).',
+    }),
+  };
+
   return {
   props:{
     sectionsContent,
@@ -660,6 +695,7 @@ const schemas = {
     overviewTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Differentiation Techniques: Implicit & More | Learn Math Class",
       description: "Master implicit, logarithmic, and parametric differentiation plus inverse function derivatives. Techniques for equations, variable exponents, and parametric curves.",
@@ -680,7 +716,8 @@ export default function PageTemplate({
   obj7Table,
   overviewTable,
   faqQuestions,
-  schemas
+  schemas,
+  demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -692,6 +729,8 @@ export default function PageTemplate({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-circleTangent'} dangerouslySetInnerHTML={{ __html: demoUnits.circleTangent }} />,
+          `At (5, 0) the formula divides by y = 0: the tangent there is vertical.`,
           <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj1Table}}/>,
         ]
     },
@@ -736,6 +775,8 @@ export default function PageTemplate({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-inverseSlopes'} dangerouslySetInnerHTML={{ __html: demoUnits.inverseSlopes }} />,
+          `A flat spot on f, slope 0, would mirror to a vertical tangent on f⁻¹, which is why f′ ≠ 0 is required.`,
         ]
     },
     {

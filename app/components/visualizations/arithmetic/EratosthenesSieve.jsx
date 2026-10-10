@@ -364,7 +364,7 @@ const EratosthenesSieve = ({ explanations = null }) => {
               </div>
               <div style={styles.statCard}>
                 <div style={{ ...styles.statValue, color: primeColors[currentPrime] || '#64748b' }}>
-                  {phase !== 'done' && currentPrime > 1 ? currentPrime : '—'}
+                  {phase !== 'done' && phase !== 'idle' && currentPrime > 1 ? currentPrime : '—'}
                 </div>
                 <div style={styles.statLabel}>Current</div>
               </div>

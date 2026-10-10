@@ -9,6 +9,42 @@ import { renderMathBlock } from './renderMathBlock'; // ← NEW
 // Order matters: earlier alternatives win on collisions.
 const INLINE_TOKEN_PATTERN = /(__SVG_PLACEHOLDER_\d+__|__HTML_PLACEHOLDER_\d+__|__ACADEMIC_PLACEHOLDER_\d+__|@@(?:\[[^\]]*\])?[\s\S]+?@@|\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*|\[.+?\]\(.+?\)|@\[.+?\]@|@table:\[[\s\S]+?\]@|@span\[[^\]]+\]:[^@]+@)/;
 
+// Plain-text segments are rendered as React text, so HTML entities written in
+// page content (&apos;, &middot;, &#8722; ...) would print literally. Decode
+// them here. Math, code, links and raw-HTML tokens never reach this.
+const NAMED_ENTITIES = {
+  amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: '\u00a0', thinsp: '\u2009', ensp: '\u2002', emsp: '\u2003',
+  mdash: '\u2014', ndash: '\u2013', hellip: '\u2026', bull: '\u2022', middot: '\u00b7', deg: '\u00b0',
+  lsquo: '\u2018', rsquo: '\u2019', ldquo: '\u201c', rdquo: '\u201d', laquo: '\u00ab', raquo: '\u00bb',
+  minus: '\u2212', plus: '+', plusmn: '\u00b1', times: '\u00d7', divide: '\u00f7', frasl: '\u2044',
+  le: '\u2264', ge: '\u2265', ne: '\u2260', asymp: '\u2248', equiv: '\u2261', sim: '\u223c', prop: '\u221d',
+  infin: '\u221e', radic: '\u221a', int: '\u222b', sum: '\u2211', prod: '\u220f', part: '\u2202', nabla: '\u2207',
+  prime: '\u2032', Prime: '\u2033', sup1: '\u00b9', sup2: '\u00b2', sup3: '\u00b3', frac12: '\u00bd', frac14: '\u00bc', frac34: '\u00be',
+  isin: '\u2208', notin: '\u2209', ni: '\u220b', sub: '\u2282', sup: '\u2283', sube: '\u2286', supe: '\u2287', nsub: '\u2284',
+  cap: '\u2229', cup: '\u222a', empty: '\u2205', forall: '\u2200', exist: '\u2203', and: '\u2227', or: '\u2228', not: '\u00ac',
+  perp: '\u22a5', parallel: '\u2225', Vert: '\u2016', ang: '\u2220', there4: '\u2234', sdot: '\u22c5', oplus: '\u2295', otimes: '\u2297',
+  lfloor: '\u230a', rfloor: '\u230b', lceil: '\u2308', rceil: '\u2309', lang: '\u27e8', rang: '\u27e9',
+  larr: '\u2190', rarr: '\u2192', uarr: '\u2191', darr: '\u2193', harr: '\u2194', lArr: '\u21d0', rArr: '\u21d2', hArr: '\u21d4', map: '\u21a6',
+  reals: '\u211d', integers: '\u2124', naturals: '\u2115', rationals: '\u211a', complexes: '\u2102',
+  alpha: '\u03b1', beta: '\u03b2', gamma: '\u03b3', delta: '\u03b4', epsilon: '\u03b5', zeta: '\u03b6', eta: '\u03b7', theta: '\u03b8',
+  iota: '\u03b9', kappa: '\u03ba', lambda: '\u03bb', mu: '\u03bc', nu: '\u03bd', xi: '\u03be', omicron: '\u03bf', pi: '\u03c0',
+  rho: '\u03c1', sigma: '\u03c3', sigmaf: '\u03c2', tau: '\u03c4', upsilon: '\u03c5', phi: '\u03c6', chi: '\u03c7', psi: '\u03c8', omega: '\u03c9',
+  Alpha: '\u0391', Beta: '\u0392', Gamma: '\u0393', Delta: '\u0394', Epsilon: '\u0395', Zeta: '\u0396', Eta: '\u0397', Theta: '\u0398',
+  Iota: '\u0399', Kappa: '\u039a', Lambda: '\u039b', Mu: '\u039c', Nu: '\u039d', Xi: '\u039e', Omicron: '\u039f', Pi: '\u03a0',
+  Rho: '\u03a1', Sigma: '\u03a3', Tau: '\u03a4', Upsilon: '\u03a5', Phi: '\u03a6', Chi: '\u03a7', Psi: '\u03a8', Omega: '\u03a9',
+  thetasym: '\u03d1', piv: '\u03d6', copy: '\u00a9', reg: '\u00ae', trade: '\u2122', sect: '\u00a7', para: '\u00b6', check: '\u2713', cross: '\u2717',
+};
+
+export const decodeEntities = (text) => (typeof text === 'string' && text.indexOf('&') !== -1
+  ? text.replace(/&(#x[0-9a-fA-F]+|#[0-9]+|[a-zA-Z][a-zA-Z0-9]*);/g, (m, name) => {
+      if (name[0] === '#') {
+        const code = name[1] === 'x' || name[1] === 'X' ? parseInt(name.slice(2), 16) : parseInt(name.slice(1), 10);
+        return Number.isFinite(code) && code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : m;
+      }
+      return Object.prototype.hasOwnProperty.call(NAMED_ENTITIES, name) ? NAMED_ENTITIES[name] : m;
+    })
+  : text);
+
 export const processContent = (content, styles = null) => {
   if (!content) return null;
   
@@ -209,7 +245,7 @@ const contentWithAcademicPlaceholders = content.replace(/@academic\[[\s\S]*?\]@/
       const linkMatch = part.match(/\[(.+?)\]\((!)?(.+?)\)/);
       if (linkMatch) {
         const [, text, sameTab, url] = linkMatch;
-        return <a key={`link-${index}`} href={url} className={styles?.markdownLink || "markdown-link"} data-markdown-link="true" {...(!sameTab && { target: "_blank", rel: "noopener noreferrer" })}>{text}</a>;
+        return <a key={`link-${index}`} href={url} className={styles?.markdownLink || "markdown-link"} data-markdown-link="true" {...(!sameTab && { target: "_blank", rel: "noopener noreferrer" })}>{decodeEntities(text)}</a>;
       }
     }
 
@@ -249,7 +285,7 @@ const contentWithAcademicPlaceholders = content.replace(/@academic\[[\s\S]*?\]@/
       );
     }
     
-    return part;
+    return decodeEntities(part);
   };
   
   lines.forEach((line, lineIndex) => {
@@ -274,6 +310,8 @@ const contentWithAcademicPlaceholders = content.replace(/@academic\[[\s\S]*?\]@/
     const processedParts = parts.filter(Boolean).map((part, partIndex) => processPart(part, `${lineIndex}-${partIndex}`));
   
     if (trimmedLine.startsWith('- ')) {
+      // Process the item without its "- " marker, so plain words before the first token are kept.
+      const itemParts = trimmedLine.substring(2).split(INLINE_TOKEN_PATTERN).filter(Boolean).map((part, partIndex) => processPart(part, `${lineIndex}-${partIndex}`));
       if (inList && currentListItem.length > 0) {
         elements.push(<li key={`li-${elements.length}`}>{currentListItem}</li>);
         currentListItem = [];
@@ -281,7 +319,7 @@ const contentWithAcademicPlaceholders = content.replace(/@academic\[[\s\S]*?\]@/
       inList = true;
       currentListItem.push(
         <span key={`tab-${lineIndex}`} style={{ marginLeft: `${tabCount * 2}em` }}>
-          {processedParts.slice(1)}
+          {itemParts}
         </span>
       );
     } else if (inList) {

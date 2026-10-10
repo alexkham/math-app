@@ -615,7 +615,7 @@ export default function FunctionNewtonMethod({ explanations } = {}) {
         animRafRef.current = requestAnimationFrame(tick);
       } else if (sceneRef.current.justFinished) {
         sceneRef.current.justFinished = false;
-        setActiveTab('mean');
+        if (!sceneRef.current.singleShot || sceneRef.current.failed) setActiveTab('mean');
       }
     };
     animRafRef.current = requestAnimationFrame(tick);
@@ -767,7 +767,7 @@ export default function FunctionNewtonMethod({ explanations } = {}) {
   const s = sceneRef.current;
   const n = s.curIdx >= 0 ? s.curIdx : Math.max(0, s.drawnCount);
   const curIt = s.curIdx >= 0 ? s.iters[s.curIdx]
-              : (s.drawnCount > 0 ? s.iters[s.drawnCount - 1] : null);
+              : (s.drawnCount < s.iters.length && !s.failed ? s.iters[s.drawnCount] : null);
   const liveX = curIt ? curIt.x : s.x0;
   const liveFx = curIt ? curIt.fx : f(s.x0);
   const liveDfx = curIt ? curIt.dfx : fp(s.x0);
@@ -775,18 +775,20 @@ export default function FunctionNewtonMethod({ explanations } = {}) {
   const liveXNext = curIt ? curIt.xNext : liveX - liveCorr;
   const liveErr = Math.abs(liveX - ROOT);
 
-  const visibleRows = Math.max(1, s.drawnCount + (s.curIdx >= 0 ? 1 : 0));
+  const lastRow = s.curIdx >= 0 ? s.curIdx : (s.failed ? s.drawnCount - 1 : s.drawnCount);
+  const xAt = (i) => (i < s.iters.length ? s.iters[i].x : s.iters[i - 1].xNext);
   const tableRows = s.iters.length === 0
     ? [{ idx: 0, x: s.x0, fx: f(s.x0), err: Math.abs(s.x0 - ROOT), isCur: true, isFail: false }]
-    : s.iters.slice(0, visibleRows).map((it, i) => {
-        const isCur = i === (s.curIdx >= 0 ? s.curIdx : s.drawnCount - 1);
+    : Array.from({ length: Math.max(1, lastRow + 1) }, (_, i) => {
+        const x = xAt(i);
+        const it = s.iters[i];
         return {
           idx: i,
-          x: it.x,
-          fx: it.fx,
-          err: Math.abs(it.x - ROOT),
-          isCur,
-          isFail: !!(it.flew || it.failed),
+          x,
+          fx: it ? it.fx : f(x),
+          err: Math.abs(x - ROOT),
+          isCur: i === lastRow,
+          isFail: !!(it && (it.flew || it.failed)),
         };
       });
 
@@ -819,16 +821,20 @@ export default function FunctionNewtonMethod({ explanations } = {}) {
     : { '--vMain': '#3b82f6', '--vDeep': '#1e3a8a', '--vMid': '#dbeafe', '--vSoft': '#dfebfe', '--vTint': '#bfdbfe' };
 
   // verdict substitution context
-  const successIters = s.iters.length;
+  const successIters = s.drawnCount;
   const successFinalErr = (() => {
-    if (s.iters.length === 0) return '—';
-    const last = s.iters[s.iters.length - 1];
+    if (s.drawnCount === 0) return '—';
+    const last = s.iters[s.drawnCount - 1];
     const e = Math.abs((last.xNext !== undefined && isFinite(last.xNext) ? last.xNext : last.x) - ROOT);
     return e < 1e-4 ? e.toExponential(1) : e.toFixed(4);
   })();
   const failIt = s.failedIter || (s.iters[0] || { x: s.x0, dfx: fp(s.x0), xNext: s.x0 - f(s.x0) / fp(s.x0) });
 
-  const verdictContent = isFail ? exp.meaning.fail : exp.meaning.success;
+  const verdictContent = isFail ? exp.meaning.fail
+    : s.drawnCount === 0
+      ? { ...exp.meaning.success, badge: 'Not run yet', title: 'No iteration taken yet',
+          text: 'Pick a scenario, or press Step to take one Newton step from x₀. The verdict appears once the guess has moved.' }
+      : exp.meaning.success;
   const subVars = isFail
     ? { x0: fmt(failIt.x, 2), dfx0: fmt(failIt.dfx, 3), xnext: fmt(failIt.xNext, 1) }
     : { iters: successIters, plural: successIters === 1 ? '' : 's', finalErr: successFinalErr };

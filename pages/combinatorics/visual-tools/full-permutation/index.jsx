@@ -1582,7 +1582,7 @@ Seen against the six-card and twenty-four-card views reached by [adjusting n](!#
   // Per-state panel explanations (Line 1). Rendered under the right panel's
   // step rows through processContent — same-page !# anchors work.
   const explanations = {
-    idle: `Three items wait in the source row and three dashed slots wait below — nothing is chosen yet, and every one of the n! orders is still possible. [Learn more about getting started](!#getting-started) · [What is a full permutation](!#what-is-a-full-permutation)`,
+    idle: `The n items wait in the source row and n dashed slots wait below — nothing is chosen yet, and every one of the n! orders is still possible. [Learn more about getting started](!#getting-started) · [What is a full permutation](!#what-is-a-full-permutation)`,
     building: `One arrangement is being built: used items dim in the source row, and the dotted line shows the current ball dropping into its position. [Learn more about the build area](!#the-build-area) · [What is a full permutation](!#what-is-a-full-permutation)`,
     n3: `All 3! = 6 arrangements are in: three rows — one per first item — with exactly 2 = (3−1)! permutations each. That factoring is the formula. [Learn more about first-item groups](!#grouping-by-first-item) · [What is a full permutation](!#what-is-a-full-permutation)`,
     n4: `With four items the count jumps to 4! = 24: four first-item rows, six arrangements each — one more item, four times the outcomes. [Learn more about adjusting n](!#adjusting-n) · [What is a full permutation](!#what-is-a-full-permutation)`,

@@ -439,7 +439,7 @@ The diagram automatically calculates probabilities for all four segments based o
 
 Hover over segments to preview which outcome they represent. The segment highlights in yellow, and the matching outcome in the list also highlights.
 
-Hover over outcomes in the left panel to see their location in the diagram. This two-way interaction helps connect symbolic notation like $A \\cap B$ with visual diagram regions.`,
+Hover over outcomes in the middle column to see their location in the diagram. This two-way interaction helps connect symbolic notation like $A \\cap B$ with visual diagram regions.`,
     before: ``,
     after: ``,
     link: ``
@@ -575,7 +575,7 @@ Same intersection region, two different denominators, two very different numbers
 
 Selection is a toggle: clicking the same box again clears it.`,
     before: ``,
-    after: `The diagram deliberately carries no numbers. The circles and the four boxes show you *where* each outcome lives; the probabilities live in the list beside them, and selecting a region is what ties the two together.
+    after: `The diagram deliberately carries no numbers. The circles and the four boxes show you where each outcome lives; the probabilities live in the list beside them, and selecting a region is what ties the two together.
 
 That split is worth keeping in mind when reading any Venn diagram: circle areas here are fixed and identical, so they encode set membership, not probability. A region drawn large may hold very little probability — in the Health Screening problem the outside region holds $0.65$, nearly two thirds of everything, while looking like empty background.`,
     link: ``
@@ -860,9 +860,9 @@ Hover over segments to preview which outcome they represent. Hover over outcomes
     title: `Understanding the Eight Outcomes`,
     content: `**Segment #1** ($A \\cap B \\cap C$): All three events occur - the center intersection.
 
-**Segments #2-4**: Two events occur, one doesn't - the three two-way intersections excluding the center.
+**Segments #2, #3 and #5**: Two events occur, one doesn't - the three two-way intersections excluding the center.
 
-**Segments #5-7**: Only one event occurs - portions of single circles that don't overlap with others.
+**Segments #4, #6 and #7**: Only one event occurs - portions of single circles that don't overlap with others.
 
 **Segment #8** ($A^c \\cap B^c \\cap C^c$): None of the events occur - outside all three circles.
 
@@ -899,7 +899,7 @@ The probabilities reflect both the given marginals $P(A), P(B), P(C)$ and the sp
 
 The general approach: (1) Use constraints to find pairwise intersections like $P(A \\cap B)$. (2) Set up equations relating the triple intersection to known values. (3) Solve for the center region. (4) Calculate remaining regions systematically.
 
-Click "Show Calculations" to see the General Solution Steps outlining this process. Individual region calculations appear when you select specific segments.`,
+Click "Show Calculations" to see the General Solution Steps outlining this process. Each outcome in the list then shows its own step and arithmetic underneath, whether or not a segment is selected.`,
     before: ``,
     after: ``,
     link: ``
@@ -999,7 +999,7 @@ The still below shows region 8, $A^c \\cap B^c \\cap C^c$ — the one region tha
     before: ``,
     after: `Region 8 is easy to overlook because nothing is drawn around it, yet it carries $0.10$ here, as much as region 6 and more than region 2. The $\\Omega$ in the top-left corner is the reminder: the rectangle is the sample space, and everything not enclosed by a circle still belongs to it.
 
-The diagram deliberately carries no numbers. The circles and the eight boxes show you *where* each outcome lives; the probabilities live in the list beside them, and selecting a region is what ties the two together.
+The diagram deliberately carries no numbers. The circles and the eight boxes show you where each outcome lives; the probabilities live in the list beside them, and selecting a region is what ties the two together.
 
 That split matters more with three sets than with two. All three circles are drawn at the same radius and in fixed positions, so the picture encodes set membership only — never probability. Region 5 takes up about $11\\%$ of the area inside the circles but holds $0.30$, the largest probability of any region in the diagram; region 4 takes up twice that area, about $23\\%$, and holds only $0.16$. Region 7 is starker still: roughly $16\\%$ of the drawn interior, and a probability of exactly zero.`,
     link: ``

@@ -793,6 +793,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import weightedExpectedValueDiagrams from '@/app/components/probability/expected-value/weightedExpectedValueDiagrams'
 import discreteExpectedValueDiagrams from '@/app/components/probability/expected-value/discreteExpectedValueDiagrams'
 
@@ -1444,6 +1445,19 @@ const continuousExpectedValueFormulasData = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const evPx = (x) => (x - 0) / 18 * 388;
+  const base = { kind: 'pieces' };
+  const fpEvProfit = { ...base, svgTitle: 'A game paying +10 with probability 0.2 and -4 with probability 0.8: the balance point is -1.2', xRange: [-6, 12], yRange: [0, 1], xStep: 2, yStep: 5, yLetter: ' ', xLetter: 'x',
+    pieces: [{ fn: () => 0, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [] }],
+    yBars: [{ from: 0, to: 0.8, color: 'f', dx: evPx(-4) }, { from: 0, to: 0.2, color: 'f', dx: evPx(10) }],
+    vlines: [{ x: -1.2, label: '' }],
+    notes: [{ x: -1.3, y: 0.95, text: 'E[X] = −1.2', pos: 'w', color: 'r' }, { x: -3.6, y: 0.82, text: 'P = 0.8', pos: 'e' }, { x: 10.4, y: 0.24, text: 'P = 0.2', pos: 'w' }, { x: 1.5, y: 0.6, text: '10 · 0.2 + (−4) · 0.8', pos: 'e' }, { x: 1.5, y: 0.52, text: '= 2 − 3.2 = −1.2', pos: 'e', color: 'r' }],
+    caption: 'The balance point, not an outcome: no play ever pays −1.2' };
+  const fpEvDensity = { ...base, svgTitle: 'Density f(x) = x/2 on [0, 2]: the mean 4/3 lies right of the midpoint 1', xRange: [-0.2, 2.6], yRange: [0, 1.2], xStep: 0.5, yStep: 0.5, xLetter: 'x', yLetter: 'f(x)',
+    pieces: [{ fn: (x) => x / 2, from: 0, to: 2, ends: [null, 'closed'], color: 'f', label: { text: 'f(x) = x/2', x: 0.7, y: 0.35, pos: 'nw' } }],
+    vlines: [{ x: 1, label: '' }, { x: 4 / 3, label: '' }],
+    notes: [{ x: 0.97, y: 1.12, text: 'midpoint 1', pos: 'w' }, { x: 1.36, y: 1.12, text: 'E[X] = 4/3', pos: 'e', color: 'r' }, { x: 1.45, y: 0.35, text: 'more weight on the right', pos: 'e' }, { x: 1.45, y: 0.27, text: 'pulls the mean right', pos: 'e' }],
+    caption: 'The mean 4/3 sits right of the midpoint 1' };
   const demoUnits = {
     u_intuition_0: demoUnitFrame({
       svg: weightedExpectedValueDiagrams['pull-right'],
@@ -1458,6 +1472,16 @@ const continuousExpectedValueFormulasData = {
       text: 'Each value contributes its value times its probability, and the bars here add up to an expected value of 3.4. Moving one slider changes one probability and renormalises the rest, so the mean moves toward whichever value gained weight. Drag a slider and watch the sum update on the',
       href: '/probability/visual-tools/expected-value/discrete',
       linkText: 'discrete expected value visualizer',
+    }),
+    evProfit: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpEvProfit),
+      caption: 'The profit game\'s balance point',
+      text: 'The simple profit model from the examples: lose 4 with probability 0.8, win 10 with probability 0.2. Put a weight on each outcome as tall as its probability and E[X] is the point where the axis balances: 10 &#183; 0.2 + (&#8722;4) &#183; 0.8 = &#8722;1.2. No single play ever pays &#8722;1.2; it is the average loss per play over many plays.',
+    }),
+    evDensity: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpEvDensity),
+      caption: 'Mean of the density x/2',
+      text: 'The density f(x) = x/2 on [0, 2] from the example above. It rises to the right, so more of the probability lies near 2 than near 0. The balance point is therefore right of the midpoint 1: integrating x &#183; f(x) gives E[X] = 4/3 &#8776; 1.33.',
     }),
   };
 
@@ -1572,6 +1596,8 @@ export default function ExpectedValuePage({
         link:'',
         content:[
           sectionsContent.continuous.content,
+                  <div key={'unit-evDensity'} dangerouslySetInnerHTML={{ __html: demoUnits.evDensity }} />,
+          `For a density symmetric about its midpoint, such as the uniform on [0, 2], the mean would be exactly 1.`,
         ]
     },
      {
@@ -1625,6 +1651,8 @@ export default function ExpectedValuePage({
             sectionsContent.examples.content,
             <div key={'examples-table'} style={tableWrapStyle}
                  dangerouslySetInnerHTML={{ __html: examplesTable }} />,
+                  <div key={'unit-evProfit'} dangerouslySetInnerHTML={{ __html: demoUnits.evProfit }} />,
+            `A negative expected value means the game loses money in the long run, however often single plays win.`,
         ]
     },
     {

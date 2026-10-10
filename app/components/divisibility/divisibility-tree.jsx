@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useId } from 'react';
+import React, { useState, useMemo, useId, useRef } from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
 
 const DivisibilityTreeSVG = ({ explanations = null }) => {
@@ -122,11 +122,17 @@ const DivisibilityTreeSVG = ({ explanations = null }) => {
     return explanations[nodeId] || null;
   };
 
+  // Tooltip coordinates relative to the tool's own box, divided by any scale on it,
+  // so a page or demo that wraps the tool in transform: scale() keeps it on the node.
+  const rootRef = useRef(null);
   const handleMouseEnter = (nodeId, e) => {
     if (!hasInput) return;
     const rect = e.currentTarget.getBoundingClientRect();
+    const root = rootRef.current;
+    const rr = root ? root.getBoundingClientRect() : { left: 0, top: 0, width: 1 };
+    const k = root && root.offsetWidth ? rr.width / root.offsetWidth : 1;
     setHoveredNode(nodeId);
-    setTooltipPos({ x: rect.left + rect.width / 2, y: rect.top });
+    setTooltipPos({ x: (rect.left + rect.width / 2 - rr.left) / k, y: (rect.top - rr.top) / k });
   };
 
   const handleMouseLeave = () => setHoveredNode(null);
@@ -317,7 +323,7 @@ const DivisibilityTreeSVG = ({ explanations = null }) => {
   const centerX = svgWidth / 2;
 
   return (
-    <div style={styles.container}>
+    <div ref={rootRef} style={styles.container}>
       {/* Header */}
       <header style={styles.header}>
         {/* <h1 style={styles.title}>Divisibility Decision Tree</h1> */}
@@ -703,7 +709,7 @@ const styles = {
     lineHeight: '1.5',
   },
   tooltip: {
-    position: 'fixed',
+    position: 'absolute',
     transform: 'translate(-50%, -100%) translateY(-12px)',
     zIndex: 1000,
     pointerEvents: 'none',

@@ -712,8 +712,12 @@ export default function PowersOfICalculator({ explanations }) {
   const [refOpen, setRefOpen] = useState(false);
 
   const k = Math.floor(power);
-  const q = Math.floor(Math.abs(k) / 4) * (k < 0 ? -1 : 1);
+  // Floored division, so k = 4q + r with 0 <= r <= 3 also for negative k (-1 = 4*(-1) + 3).
+  const q = Math.floor(k / 4);
   const r = ((k % 4) + 4) % 4;
+  const kTxt = k < 0 ? `\u2212${-k}` : `${k}`;
+  const qTxt = q < 0 ? `\u2212${-q}` : `${q}`;
+  const qFac = q < 0 ? `(${qTxt})` : qTxt;
   const hasInput = power !== '';
 
   // Line 1: page-supplied per-state explanations, keyed by the current
@@ -800,15 +804,15 @@ export default function PowersOfICalculator({ explanations }) {
           <div style={styles.calcBox}>
             <div style={styles.stepsGrid}>
               <Step n="1" label="Divide by 4">
-                {k} &divide; 4 = {q} remainder{' '}
+                {kTxt} &divide; 4 = {qTxt} remainder{' '}
                 <span style={styles.rChip}>{r}</span>
-                <span style={styles.checkMark}> (4&times;{q}+{r}={4 * q + r} &#x2713;)</span>
+                <span style={styles.checkMark}> (4&times;{qFac}+{r}={kTxt} &#x2713;)</span>
               </Step>
               <Step n="2" label="Rewrite">
-                i<sup>{k}</sup> = i<sup>4&times;{q}+{r}</sup> = i<sup>4&times;{q}</sup> &middot; i<sup>{r}</sup>
+                i<sup>{kTxt}</sup> = i<sup>4&times;{qFac}+{r}</sup> = i<sup>4&times;{qFac}</sup> &middot; i<sup>{r}</sup>
               </Step>
               <Step n="3" label="Apply i&#x2074;=1">
-                (i&#x2074;)<sup>{q}</sup> &middot; i<sup>{r}</sup> = 1 &middot; i<sup>{r}</sup> = i<sup>{r}</sup>
+                (i&#x2074;)<sup>{qTxt}</sup> &middot; i<sup>{r}</sup> = 1 &middot; i<sup>{r}</sup> = i<sup>{r}</sup>
               </Step>
               <Step n="4" label={`Lookup r=${r}`}>
                 i<sup>{r}</sup> ={' '}
@@ -817,7 +821,7 @@ export default function PowersOfICalculator({ explanations }) {
             </div>
             <div style={styles.answerBar}>
               <span style={styles.answerText}>
-                i<sup>{k}</sup> ={' '}
+                i<sup>{kTxt}</sup> ={' '}
                 <strong style={styles.answerValue}>{results[r].value}</strong>
               </span>
               <span style={styles.formulaInline}>

@@ -732,6 +732,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 
 
@@ -1357,6 +1358,17 @@ It describes how combining many independent random contributions leads to a stab
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const cltFact = (k) => { let f = 1; for (let i = 2; i <= k; i++) f *= i; return f; };
+  const cltMean = (n) => (x) => (x < 0 ? 0 : n === 1 ? Math.exp(-x) : x === 0 ? 0 : Math.exp(n * Math.log(n) + (n - 1) * Math.log(x) - n * x - Math.log(cltFact(n - 1))));
+  const fpCltShapes = { kind: 'pieces', svgTitle: 'Density of the mean of n exponential observations for n = 1, 4 and 30: skewed at n = 1, a narrowing bell around 1 by n = 30', xRange: [0, 3], yRange: [0, 2.6], xLetter: 'x̄',
+    pieces: [
+      { fn: cltMean(1), from: 0, to: 3, ends: [null, null], color: 'r', label: { text: 'n = 1', x: 0.18, y: cltMean(1)(0.18), pos: 'ne' } },
+      { fn: cltMean(4), from: 0, to: 3, ends: [null, null], color: 'f', label: { text: 'n = 4', x: 1.45, y: cltMean(4)(1.45), pos: 'ne' } },
+      { fn: cltMean(30), from: 0.2, to: 2, ends: [null, null], color: 'g', label: { text: 'n = 30', x: 1.12, y: cltMean(30)(1.12), pos: 'ne' } },
+    ],
+    vlines: [{ x: 1, label: 'μ = 1' }],
+    notes: [{ x: 1.8, y: 2.2, text: 'original data: skewed', pos: 'e', color: 'r' }, { x: 1.8, y: 1.95, text: 'means of 30: a bell', pos: 'e', color: 'g' }, { x: 1.8, y: 1.7, text: 'spread shrinks like 1/√n', pos: 'e' }],
+    caption: 'Averaging a skewed variable: the sample mean turns bell-shaped' };
   const demoUnits = {
     u_notation_0: demoUnitFrame({
       svg: distributionExplorerDiagrams['normal-pdf'],
@@ -1364,6 +1376,11 @@ It describes how combining many independent random contributions leads to a stab
       text: 'The bell curve is the destination of the theorem: whatever shape the original distribution has, the standardised sample mean approaches this density as the sample size grows. Its centre is the population mean and its spread shrinks with the square root of the sample size. Compare the bell with the skewed and flat shapes it emerges from on the',
       href: '/probability/visual-tools/distributions/normal',
       linkText: 'distribution explorer',
+    }),
+    cltShapes: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpCltShapes),
+      caption: 'Means of a skewed variable becoming a bell',
+      text: 'Start from a strongly skewed variable: an exponential with mean 1 (amber, n = 1). The blue curve is the distribution of the average of 4 such observations: still lopsided, but with a hump. The navy curve is the average of 30: nearly symmetric, bell-shaped and centred on the mean 1, and much narrower. The data never change shape; it is the distribution of the sample mean that turns normal, with spread shrinking like 1/&#8730;n.',
     }),
   };
 
@@ -1465,6 +1482,8 @@ export default function PageTemplate({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-cltShapes'} dangerouslySetInnerHTML={{ __html: demoUnits.cltShapes }} />,
+          `For a skewed start like this one, n = 30 is a reasonable size; a symmetric start needs far fewer.`,
         ]
     },
     {

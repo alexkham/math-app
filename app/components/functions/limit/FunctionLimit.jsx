@@ -66,7 +66,7 @@ const conceptsContent =
   '- **Infinite** — at least one of $L^-$, $L^+$ is $\\pm\\infty$. A vertical asymptote at $c$.\n' +
   '- **Oscillating** — neither one-sided limit exists because the function bounces around without settling. Classic example: $\\sin(1/x)$ near $0$.\n\n' +
   '### Why $f(c)$ doesn&apos;t determine the limit\n\n' +
-  'The limit is about the *approach*, not the destination. The function&apos;s actual value at $c$ — if it has one — could be anything, and it wouldn&apos;t change $L^-$ or $L^+$. That&apos;s why **removable** is a category: the limit exists cleanly; only $f(c)$ is the problem, and you could just patch it.';
+  'The limit is about the approach, not the destination. The function&apos;s actual value at $c$ — if it has one — could be anything, and it wouldn&apos;t change $L^-$ or $L^+$. That&apos;s why **removable** is a category: the limit exists cleanly; only $f(c)$ is the problem, and you could just patch it.';
 
 
 /* ================================================================
@@ -278,7 +278,7 @@ function classify(fam) {
       contDetail = 'The limit exists but f(c) \u2260 lim. You could redefine f(c) to make it continuous.';
       contKind = 'bad';
     } else {
-      contLabel = type === 'jump' ? 'jump' : type;
+      contLabel = type === 'onesided' ? 'one-sided' : type;
       contDetail = 'The two-sided limit doesn\u2019t exist, so f can\u2019t be continuous at c — no redefinition of f(c) can fix that.';
       contKind = 'bad';
     }
@@ -296,7 +296,7 @@ function classify(fam) {
       contDetail = 'Essential discontinuity — no value of f(c) could fix it.';
       contKind = 'bad';
     } else {
-      contLabel = type;
+      contLabel = type === 'onesided' ? 'one-sided' : type;
       contDetail = 'f isn\u2019t defined at c and the limit doesn\u2019t exist.';
       contKind = 'bad';
     }
@@ -478,7 +478,7 @@ export default function FunctionLimit({
     return (
       `## ${fam.name} — ${v.contLabel}\n\n` +
       `${fam.intro}\n\n` +
-      `**Function** · $${fam.eq}$\n\n` +
+      `**Function** · ${fam.eq}\n\n` +
       `**Centered at** · $c = ${fam.c}$\n\n` +
       `### Right now\n\n` +
       `With $\u03b5 = ${fmt(eps)}$: $f(c - \u03b5) = ${fmt(fL)}$, $f(c + \u03b5) = ${fmt(fR)}$.\n\n` +
@@ -697,7 +697,7 @@ ${explanations[current]}` : '')
               <div style={{ ...sectionTitle, margin: '0 4px 4px' }}>Display</div>
               <div style={{ display: 'flex', flexDirection: 'column', padding: '0 4px' }}>
                 <Toggle checked={showF}        onChange={setShowF}        swatchColor={COL.f}        style="solid"  label="f(x)" />
-                <Toggle checked={showLimits}   onChange={setShowLimits}   swatchColor={COL.limit}    style="dashed" label="L\u207B, L\u207A" />
+                <Toggle checked={showLimits}   onChange={setShowLimits}   swatchColor={COL.limit}    style="dashed" label={'L\u207B, L\u207A'} />
                 <Toggle checked={showC}        onChange={setShowC}        swatchColor={COL.link}     style="dashed" label="x = c" />
                 <Toggle checked={showApproach} onChange={setShowApproach} swatchColor={COL.approach} style="dotted" label="approach" />
               </div>
@@ -1027,7 +1027,9 @@ ${explanations[current]}` : '')
                 fontSize: 9.5, textTransform: 'uppercase', letterSpacing: '0.05em',
                 color: panelTones.text, fontWeight: 700,
                 background: panelTones.soft, padding: '2px 6px', borderRadius: 3,
-              }}>L&#8315; = L&#8314; &rArr; limit exists</span>
+              }}>{v.limitExists ? <>L&#8315; = L&#8314; &rArr; limit exists</>
+                : v.verdictTag === 'DNE (jump)' ? <>L&#8315; &ne; L&#8314; &rArr; no limit</>
+                : <>{v.verdictTag}</>}</span>
             </div>
           </div>
         </div>

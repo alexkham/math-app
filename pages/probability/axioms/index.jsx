@@ -712,6 +712,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 
 
@@ -1306,6 +1307,10 @@ Everything that follows in probability — conditional probability, independence
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const ogDisjoint = { kind: 'dice', svgTitle: 'Two dice: sum 7 and doubles share no outcome, so their probabilities add to 12/36',
+    events: [{ label: 'A: sum is 7', test: (a, b) => a + b === 7, color: 'f' }, { label: 'B: doubles', test: (a, b) => a === b, color: 'r' }],
+    notes: [{ text: 'no shared cell: A ∩ B = ∅' }, { text: 'P(A ∪ B) = 6/36 + 6/36', color: 'r' }, { text: '= 12/36 = 1/3', color: 'r' }],
+    caption: 'Disjoint events: no overlap, so the probabilities simply add' };
   const demoUnits = {
     u_axioms_0: demoUnitFrame({
       svg: diceSampleSpaceDiagrams.none,
@@ -1313,6 +1318,11 @@ Everything that follows in probability — conditional probability, independence
       text: 'Every cell is one outcome and carries the same non-negative weight, 1/36, so no probability is negative; the 36 weights add to exactly 1, which is the normalization axiom; and any event made of separate cells has probability equal to its count of cells over 36, which is additivity for disjoint outcomes. All three axioms are visible in one grid. Highlight an event and count its cells on the',
       href: '/probability/visual-tools/dice-roll',
       linkText: 'dice roll sample space explorer',
+    }),
+    disjoint: demoUnitFrame({
+      svg: renderOutcomeGrid(ogDisjoint),
+      caption: 'Two events that cannot happen together',
+      text: 'The 36 equally likely outcomes of rolling two dice. A, a sum of 7, takes the six blue cells on the anti-diagonal; B, doubles, takes the six amber cells on the main diagonal. No cell is in both, because a double always has an even sum, so A and B are disjoint. Axiom 3 then says the probability of A or B is the sum of the two: 6/36 + 6/36 = 12/36, exactly the 12 coloured cells.',
     }),
   };
 
@@ -1425,6 +1435,8 @@ export default function AxiomsPage({
         link:'',
         content:[
           sectionsContent.axiom3.content,
+                  <div key={'unit-disjoint'} dangerouslySetInnerHTML={{ __html: demoUnits.disjoint }} />,
+          `With overlapping events the shared outcomes would be counted twice, which is why the axiom requires disjointness.`,
         ]
     },
     {

@@ -167,7 +167,7 @@ For detailed comparison of probability functions including when to use each, see
 
 Every step is the same height because every outcome has the same probability. That is the visual signature of a uniform distribution: a staircase with even risers.`,
       before: ``,
-      after: `The step height *is* the pmf. $F(k) - F(k-1) = P(X = k)$, so reading the jump at any $k$ recovers the probability of that single value — which is how a CDF and a pmf carry the same information in different form.
+      after: `The step height is the pmf. $F(k) - F(k-1) = P(X = k)$, so reading the jump at any $k$ recovers the probability of that single value — which is how a CDF and a pmf carry the same information in different form.
 
 Between the steps the function is flat, and that flatness is meaningful rather than decorative: $F(2.7) = F(2)$ because no probability accumulates between 2 and 3. A discrete CDF is defined for every real $k$, but only changes at the values the variable can actually take.`,
       link: '',
@@ -211,7 +211,7 @@ The left endpoint is the detail worth carrying. Many distributions start at 0, t
 
 $F(0) = 0.0029$: the chance of drawing no successes at all in ten draws from a population that is 40% successes.`,
       before: ``,
-      after: `The contrast with the binomial is the point of having this distribution on the same page. The binomial assumes each draw has the same success probability; here each draw *changes* the population, so the probability shifts as you go.
+      after: `The contrast with the binomial is the point of having this distribution on the same page. The binomial assumes each draw has the same success probability; here each draw changes the population, so the probability shifts as you go.
 
 For large $N$ relative to $n$ the difference vanishes and the hypergeometric approaches the binomial with $p = K/N$ — which is why sampling 10 people from a city is treated as binomial while sampling 10 from a room of 50 is not.`,
       link: '',

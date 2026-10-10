@@ -90,8 +90,9 @@ export default function DeMoivreCalculator({ explanations }) {
   // Formatting
   const fmtNum = (v) => {
     if (Math.abs(v) < 0.005) return '0';
-    if (Math.abs(v - Math.round(v)) < 0.005) return String(Math.round(v));
-    return v.toFixed(2);
+    const a = Math.abs(v);
+    const t = Math.abs(a - Math.round(a)) < 0.005 ? String(Math.round(a)) : a.toFixed(2);
+    return v < 0 ? `−${t}` : t;
   };
 
   const fmtComplex = (r, i) => {
@@ -160,7 +161,7 @@ export default function DeMoivreCalculator({ explanations }) {
   for (let i = -range; i <= range; i++) {
     if (i === 0 || i % 2 !== 0) continue;
     const px = toSvg(i, 0);
-    ticks.push({ x: px.x, y: px.y + 16, label: String(i), anchor: 'middle' });
+    ticks.push({ x: px.x, y: px.y + 16, label: i < 0 ? `−${-i}` : String(i), anchor: 'middle' });
     const py = toSvg(0, i);
     ticks.push({ x: py.x - 10, y: py.y + 4, label: i > 0 ? `${i}i` : `−${Math.abs(i)}i`, anchor: 'end' });
   }
@@ -194,6 +195,7 @@ export default function DeMoivreCalculator({ explanations }) {
 
   const supDigits = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '-': '⁻' };
   const toSup = (num) => String(num).split('').map(c => supDigits[c] || c).join('');
+  const nTxt = n < 0 ? `−${-n}` : String(n);
 
   // Line 1: page-supplied per-state explanations, keyed by the preset the
   // current (z, n) matches. Nothing renders when no explanations prop is
@@ -331,7 +333,7 @@ export default function DeMoivreCalculator({ explanations }) {
                       <line x1={originSvg.x} y1={originSvg.y} x2={edgeSvg.x} y2={edgeSvg.y} stroke="#2A7A8C" strokeWidth="3" strokeDasharray="8,4" />
                       <polygon points={`${edgeSvg.x},${edgeSvg.y} ${lx},${ly} ${rx},${ry}`} fill="#2A7A8C" />
                       <text x={edgeSvg.x + (cosA >= 0 ? -46 : 8)} y={edgeSvg.y + (sinA >= 0 ? -10 : 18)} fontSize="12" fontWeight="700" fill="#2A7A8C" fontFamily="'JetBrains Mono', monospace">
-                        z{toSup(n)} →
+                        {cosA >= 0 ? `z${toSup(n)} →` : `← z${toSup(n)}`}
                       </text>
                     </g>
                   );
@@ -406,7 +408,7 @@ export default function DeMoivreCalculator({ explanations }) {
               <label style={styles.sliderLabel}>n</label>
               <input type="range" min="-10" max="10" step="1" value={n}
                 onChange={(e) => setN(parseInt(e.target.value))} style={styles.slider} />
-              <span style={styles.sliderVal}>{n}</span>
+              <span style={styles.sliderVal}>{nTxt}</span>
             </div>
             {warning && (
               <div style={styles.warningMsg}>Values are limited to ±10. Input was clamped.</div>
@@ -454,7 +456,7 @@ export default function DeMoivreCalculator({ explanations }) {
             </div>
             <div style={styles.summaryRow}>
               <span style={styles.summaryLabel}>n</span>
-              <span style={styles.summaryVal}><strong>{n}</strong></span>
+              <span style={styles.summaryVal}><strong>{nTxt}</strong></span>
             </div>
           </div>
 
@@ -498,7 +500,7 @@ export default function DeMoivreCalculator({ explanations }) {
               <span>Multiply the angle by n:</span>
             </div>
             <div style={styles.stepMath}>
-              nθ = {n} × {fmtDeg(arg)} = <strong style={{ color: palette.green }}>{fmtDeg(argResult)}</strong>
+              nθ = {nTxt} × {arg < 0 && fmtNum(arg) !== '0' ? `(${fmtDeg(arg)})` : fmtDeg(arg)} = <strong style={{ color: palette.green }}>{fmtDeg(argResult)}</strong>
               {Math.abs(argResult) > Math.PI && (
                 <span style={{ color: palette.muted, fontSize: '0.85rem' }}> (normalized: {fmtDeg(argResultNorm)})</span>
               )}
@@ -511,7 +513,7 @@ export default function DeMoivreCalculator({ explanations }) {
               z{toSup(n)} = {fmtNum(modResult)}(cos({fmtDeg(argResultNorm)}) + i sin({fmtDeg(argResultNorm)}))
             </div>
             <div style={styles.stepMath}>
-              = {fmtNum(modResult)}({fmtNum(Math.cos(argResult))} + {fmtNum(Math.sin(argResult))}i)
+              = {fmtNum(modResult)}({fmtComplex(Math.cos(argResult), Math.sin(argResult))})
             </div>
             <div style={{ ...styles.stepMath, fontWeight: '700', color: palette.green }}>
               = {fmtComplex(resultRe, resultIm)}

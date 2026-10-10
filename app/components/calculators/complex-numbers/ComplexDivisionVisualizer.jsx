@@ -79,7 +79,8 @@ export default function ComplexDivisionVisualizer({ explanations }) {
 
   const handlePointerDown = useCallback((which) => (e) => {
     setDragging(which);
-    e.target.setPointerCapture(e.pointerId);
+    // capture keeps the drag when the pointer leaves the dot; a scripted pointer has no capture to give
+    try { e.target.setPointerCapture(e.pointerId); } catch (err) { /* no active pointer */ }
   }, []);
 
   const handlePointerMove = useCallback((e) => {
@@ -99,9 +100,12 @@ export default function ComplexDivisionVisualizer({ explanations }) {
 
   const fmtNum = (n) => {
     if (Math.abs(n) < 0.005) return '0';
-    if (Math.abs(n - Math.round(n)) < 0.005) return String(Math.round(n));
-    return n.toFixed(2);
+    const a = Math.abs(n);
+    const t = Math.abs(a - Math.round(a)) < 0.005 ? String(Math.round(a)) : a.toFixed(2);
+    return n < 0 ? `\u2212${t}` : t;
   };
+  // A negative value after an operator or under a square goes in brackets: "45° − (−30°)", "(−1)²".
+  const fmtParen = (n, unit = '') => (n <= -0.005 ? `(${fmtNum(n)}${unit})` : `${fmtNum(n)}${unit}`);
 
   const fmtComplex = (re, im) => {
     const rs = fmtNum(re);
@@ -145,7 +149,7 @@ export default function ComplexDivisionVisualizer({ explanations }) {
   for (let i = -range; i <= range; i++) {
     if (i === 0 || i % 2 !== 0) continue;
     const px = toSvg(i, 0);
-    ticks.push({ x: px.x, y: px.y + 16, label: String(i), anchor: 'middle' });
+    ticks.push({ x: px.x, y: px.y + 16, label: i < 0 ? `−${-i}` : String(i), anchor: 'middle' });
     const py = toSvg(0, i);
     ticks.push({ x: py.x - 10, y: py.y + 4, label: i > 0 ? `${i}i` : `\u2212${Math.abs(i)}i`, anchor: 'end' });
   }
@@ -431,15 +435,15 @@ export default function ComplexDivisionVisualizer({ explanations }) {
                 Multiply top and bottom by the conjugate of z&#x2082;:
               </div>
               <div style={styles.stepText}>
-                Denominator: ({fmtComplex(z2.re, z2.im)})({fmtComplex(z2conj.re, z2conj.im)}) = |z&#x2082;|&sup2; = {fmtNum(z2.re)}&sup2; + {fmtNum(Math.abs(z2.im))}&sup2; = <strong>{fmtNum(denom)}</strong>
+                Denominator: ({fmtComplex(z2.re, z2.im)})({fmtComplex(z2conj.re, z2conj.im)}) = |z&#x2082;|&sup2; = {fmtParen(z2.re)}&sup2; + {fmtNum(Math.abs(z2.im))}&sup2; = <strong>{fmtNum(denom)}</strong>
               </div>
               <div style={styles.stepText}>
-                Numerator: ({fmtComplex(z1.re, z1.im)})({fmtComplex(z2conj.re, z2conj.im)}) = <strong>{fmtNum(numReal)} + {fmtNum(numImag)}i</strong>
+                Numerator: ({fmtComplex(z1.re, z1.im)})({fmtComplex(z2conj.re, z2conj.im)}) = <strong>{fmtComplex(numReal, numImag)}</strong>
               </div>
               <div style={styles.stepText}>
                 Result:{' '}
                 <span style={styles.frac}>
-                  <span style={styles.fracNum}>{fmtNum(numReal)} + {fmtNum(numImag)}i</span>
+                  <span style={styles.fracNum}>{fmtComplex(numReal, numImag)}</span>
                   <span style={styles.fracBar}></span>
                   <span style={styles.fracDen}>{fmtNum(denom)}</span>
                 </span>
@@ -456,7 +460,7 @@ export default function ComplexDivisionVisualizer({ explanations }) {
                 <strong style={{ color: palette.navy }}>|z&#x2081;|</strong> &divide; <strong style={{ color: palette.orange }}>|z&#x2082;|</strong> = {fmtNum(mod1)} &divide; {fmtNum(mod2)} = <strong style={{ color: palette.teal }}>{fmtNum(modQ)}</strong>
               </div>
               <div style={styles.stepText}>
-                <strong style={{ color: palette.navy }}>&theta;&#x2081;</strong> &minus; <strong style={{ color: palette.orange }}>&theta;&#x2082;</strong> = {fmtNum(arg1 * 180 / Math.PI)}&deg; &minus; {fmtNum(arg2 * 180 / Math.PI)}&deg; = <strong style={{ color: palette.teal }}>{fmtNum(argQ * 180 / Math.PI)}&deg;</strong>
+                <strong style={{ color: palette.navy }}>&theta;&#x2081;</strong> &minus; <strong style={{ color: palette.orange }}>&theta;&#x2082;</strong> = {fmtNum(arg1 * 180 / Math.PI)}&deg; &minus; {fmtParen(arg2 * 180 / Math.PI, '\u00b0')} = <strong style={{ color: palette.teal }}>{fmtNum(argQ * 180 / Math.PI)}&deg;</strong>
               </div>
               <div style={styles.geoSummary}>
                 Divide the lengths, subtract the angles. The quotient vector is <strong style={{ color: palette.teal }}>{fmtNum(modQ)}</strong> units long at <strong style={{ color: palette.teal }}>{fmtNum(argQ * 180 / Math.PI)}&deg;</strong> from the real axis.

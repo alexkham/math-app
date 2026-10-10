@@ -764,7 +764,7 @@
 // export default DivisibilityTable;
 
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
 
 const DivisibilityTable = ({ explanations = null }) => {
@@ -830,14 +830,21 @@ const DivisibilityTable = ({ explanations = null }) => {
     }
   };
 
+  // Tooltip coordinates are taken relative to the tool's own box and divided by any
+  // scale on it: a page or demo that wraps the tool in transform: scale() would otherwise
+  // shift a position: fixed tooltip away from the cell.
+  const rootRef = useRef(null);
   const handleMouseEnter = (num, e) => {
     const rect = e.target.getBoundingClientRect();
+    const root = rootRef.current;
+    const rr = root ? root.getBoundingClientRect() : { left: 0, top: 0, width: 1 };
+    const k = root && root.offsetWidth ? rr.width / root.offsetWidth : 1;
     setHoveredNumber(num);
     setTooltipPos({
-      x: rect.left + rect.width / 2,
-      y: rect.top,
-      bottom: rect.bottom,
-      height: rect.height
+      x: (rect.left + rect.width / 2 - rr.left) / k,
+      y: (rect.top - rr.top) / k,
+      bottom: (rect.bottom - rr.top) / k,
+      height: rect.height / k
     });
   };
 
@@ -944,7 +951,7 @@ const DivisibilityTable = ({ explanations = null }) => {
   };
 
   return (
-    <div style={styles.container}>
+    <div ref={rootRef} style={styles.container}>
       <div style={styles.inner}>
         {/* Header */}
         <header style={styles.header}>
@@ -1046,6 +1053,7 @@ const DivisibilityTable = ({ explanations = null }) => {
 
 const styles = {
   container: {
+    position: 'relative',
     minHeight: 'auto',
     background: 'linear-gradient(180deg, #f0f7ff 0%, #e8f4fc 100%)',
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
@@ -1127,7 +1135,7 @@ const styles = {
     color: '#1e3a5f',
   },
   tooltip: {
-    position: 'fixed',
+    position: 'absolute',
     zIndex: 1000,
     pointerEvents: 'none',
   },

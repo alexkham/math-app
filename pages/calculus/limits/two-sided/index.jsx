@@ -12,6 +12,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 
 
@@ -601,6 +602,15 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpApproachNotArrival = { kind: 'pieces', svgTitle: 'f(x) = x^2 except f(1) = 3: both sides approach height 1 at x = 1, so the limit is 1 though f(1) = 3', xRange: [-0.5, 2.5], yRange: [-0.5, 4.5],
+    pieces: [
+      { fn: (x) => x * x, from: -0.5, to: 1, ends: [null, 'open'], color: 'f' },
+      { fn: (x) => x * x, from: 1, to: 2.1, ends: ['open', null], color: 'f', label: { text: 'y = x² (x ≠ 1)', x: 1.75, y: 3.06, pos: 'se' } },
+      { fn: () => 3, from: 1, to: 1, ends: ['closed', 'closed'], color: 'r' },
+    ],
+    vlines: [{ x: 1 }],
+    notes: [{ x: 1.08, y: 3.0, text: 'f(1) = 3', pos: 'e', color: 'r' }, { x: 1.08, y: 0.75, text: 'limit = 1 from both sides', pos: 'e', color: 'f' }, { x: 0.08, y: 4.2, text: 'limit ignores f(1)', pos: 'e', color: 'r' }],
+    caption: 'The limit follows the approach, not the plotted point at x = 1' };
   const demoUnits = {
     approach: demoUnitFrame({
       svg: functionLimitDiagrams.continuous,
@@ -615,6 +625,11 @@ const schemas = {
       text: 'Traced from the left the function heads to 0, from the right to 1: two well-defined one-sided limits that disagree, so the two-sided limit does not exist. This is the jump case of the section; the infinite and oscillating cases fail for different reasons. Watch the two probes refuse to meet on the',
       href: '/calculus/visual-tools/limit',
       linkText: 'limit explorer',
+    }),
+    approachNotArrival: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpApproachNotArrival),
+      caption: 'Approach, not arrival',
+      text: 'A function equal to x&#178; everywhere except at x = 1, where the value is moved up to f(1) = 3 (the amber dot). Tracing the curve toward x = 1 from the left, the height heads to 1; tracing from the right, it also heads to 1, toward the open circle. Both traces agree, so the two-sided limit is 1. The plotted point at height 3 plays no part: the limit depends only on the approach.',
     }),
   };
 
@@ -687,6 +702,8 @@ return {
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-approachNotArrival'} dangerouslySetInnerHTML={{ __html: demoUnits.approachNotArrival }} />,
+          `If f(1) were moved back to 1, the limit would not change; only continuity at 1 would be restored.`,
         ]
     },
     {

@@ -766,6 +766,7 @@ export default function StrongComposition({ explanations = null }) {
 
               {/* Bin bands + frames (over items, cell-only) */}
               {currentItemRanges.map((r, i) => {
+                if (!partKnown(i)) return null; // no band before the bar that closes this bin lands
                 const xLeft = itemLeftX(r.first);
                 const xRight = itemRightX(r.last);
                 return (
@@ -983,7 +984,7 @@ export default function StrongComposition({ explanations = null }) {
                 fontSize="11" fontWeight="600" fill={COLORS.textDim}
                 fontFamily="'JetBrains Mono',monospace"
               >
-                Choose k − 1 = {k - 1} gaps out of n − 1 = {n - 1} gaps between items:
+                Choose k − 1 = {k - 1} gap{k - 1 === 1 ? "" : "s"} out of the n − 1 = {n - 1} gaps between items:
               </text>
               <text
                 x={SVG_W / 2} y={formulaCardTop + 40} textAnchor="middle"

@@ -44,11 +44,13 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Open the page and three panels appear. On the left is the **function picker** with eleven base [functions](!/functions/basics#1) grouped by the shape of their [range](!/functions/range#1) — all real numbers, bounded below, bounded between $-1$ and $1$, or all reals with one excluded value. In the center is the **plot panel** with the function $g(x)$ in blue and a colored band drawn directly **on the y-axis** showing the range. On the right is the **info panel** with two tabs.
+      content: `Open the page and three panels appear. On the left is the **function picker** with eleven base [functions](!/functions/basics#1) grouped by the shape of their [range](!/functions/range#1) — all real numbers, bounded below, bounded between $-1$ and $1$, or all reals with one excluded value. In the center is the **plot panel** with the function $g(x)$ in blue and a colored band drawn directly **on the y-axis** showing the range. On the right is the **info panel** with three tabs — Explanation, Family and Concepts.
 
 Below the plot sits the **range card** — a colored block displaying the range in interval notation, the same range drawn on a horizontal 1D number line, and a draggable **test point slider** that lets you check whether a specific y-value is achievable as an output of $g$.
 
-The page launches with the quadratic family. Its range is $y \\geq 0$ — the parabola never produces negative values. The y-axis band starts at $y = 0$ and extends upward; the test point at $y = 1$ shows a green "achievable" badge.`,
+The page launches with the quadratic family. Its range is $y \\geq 0$ — the parabola never produces negative values. The y-axis band starts at $y = 0$ and extends upward; the test point at $y = 1$ shows a green "achievable" badge.
+
+The **S**, **M**, **L** and **XL** buttons above the plot set its height; the curves and readouts stay the same.`,
       before: ``,
       after: ``,
       link: '',

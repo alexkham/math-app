@@ -54,7 +54,9 @@ export async function getStaticProps(){
 
 A **legend chip strip** below the plot lets you toggle any curve. By default only the two compositions are shown, so the asymmetry between $f \\circ g$ and $g \\circ f$ is the visual focus. On the right, the **info panel** shows the symbolic forms of both compositions and explains why the order matters for this specific pair.
 
-The page launches with the [quadratic](!#composing-with-the-quadratic) $f(x) = x^2$ and [sine](!#composing-with-sine) $g(x) = \\sin(x)$. You see $f(g(x)) = \\sin^2(x)$ in blue and $g(f(x)) = \\sin(x^2)$ in amber — clearly two different curves built from the same two ingredients.`,
+The page launches with the [quadratic](!#composing-with-the-quadratic) $f(x) = x^2$ and [sine](!#composing-with-sine) $g(x) = \\sin(x)$. You see $f(g(x)) = \\sin^2(x)$ in blue and $g(f(x)) = \\sin(x^2)$ in amber — clearly two different curves built from the same two ingredients.
+
+The **S**, **M**, **L** and **XL** buttons above the plot set its height; the curves and readouts stay the same.`,
       before: ``,
       after: ``,
       link: '',

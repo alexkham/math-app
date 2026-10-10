@@ -8,6 +8,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -838,6 +840,23 @@ const schemas = {
   }
 }
 
+  const fpRootOfSum = { kind: 'pieces', svgTitle: 'sqrt(9 + x) stays below 3 + sqrt(x) for every x > 0: at x = 16 they are 5 and 7', xRange: [0, 20], yRange: [-1, 9], xStep: 2,
+    pieces: [
+      { fn: (x) => 3 + Math.sqrt(x), from: 0, to: 20, ends: [null, null], color: 'r', label: { text: 'y = √9 + √x', x: 9, y: 6, pos: 'nw' } },
+      { fn: (x) => Math.sqrt(9 + x), from: 0, to: 20, ends: [null, null], color: 'f', label: { text: 'y = √(9 + x)', x: 9, y: Math.sqrt(18), pos: 'se' } },
+    ],
+    points: [{ x: 16, y: 7, label: '√9 + √16 = 7', pos: 'nw' }, { x: 16, y: 5, label: '√(9 + 16) = 5', pos: 'se' }, { x: 0, y: 3, label: 'equal only at x = 0', pos: 'se' }],
+    vlines: [{ x: 16 }],
+    notes: [{ x: 0.4, y: 8.4, text: 'the split version overshoots for every x > 0', pos: 'e', color: 'r' }],
+    caption: '√(a + b) ≠ √a + √b: at a = 9, b = 16 the two sides are 5 and 7' };
+  const demoUnits = {
+    rootOfSum: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRootOfSum),
+      caption: 'The root of a sum is not the sum of roots',
+      text: 'Fix a = 9 and let b = x vary. The lower curve is the true value &#8730;(9 + x); the upper curve is the split version &#8730;9 + &#8730;x = 3 + &#8730;x. They agree only at x = 0. At the section&#8217;s x = 16 the dashed line meets them at 5 and 7, and for every positive x the split version is too large.',
+    }),
+  };
+
    return {
   props: {
     sectionsContent,
@@ -847,6 +866,7 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Radical Rules: Product, Quotient & Power | Learn Math Class",
       description: "Learn radical rules: product rule, quotient rule, power rule, and nested radicals. Understand restrictions, common errors, and connections to exponent laws.",
@@ -858,7 +878,7 @@ const schemas = {
 }
    }
 
-export default function RadicalRulesPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas}) {
+export default function RadicalRulesPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -922,6 +942,8 @@ export default function RadicalRulesPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-rootOfSum'} dangerouslySetInnerHTML={{ __html: demoUnits.rootOfSum }} />,
+          `Squaring 3 + √x gives 9 + x + 6√x: the extra 6√x is exactly what the split adds.`,
           <div
             key={'obj6-table'}
             style={tableWrapStyle}

@@ -1226,6 +1226,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
 
 
@@ -2109,6 +2110,33 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const hoT3 = (x) => x - x ** 3 / 6, hoT5 = (x) => x - x ** 3 / 6 + x ** 5 / 120;
+  const fpSineShift = { kind: 'pieces', svgTitle: 'sin x and its derivative cos x: the derivative is the same wave shifted left by pi/2', xRange: [-4, 7], yRange: [-2, 2],
+    pieces: [
+      { fn: () => 1, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[0, Math.PI / 2]], label: { text: 'shift π/2', x: Math.PI / 4, y: 1, pos: 'n' } },
+      { fn: Math.sin, from: -4, to: 7, ends: [null, null], color: 'f', label: { text: 'sin x', x: 4.2, y: Math.sin(4.2), pos: 'se' } },
+      { fn: Math.cos, from: -4, to: 7, ends: [null, null], color: 'g', label: { text: 'cos x = (sin x)′', x: 5.6, y: Math.cos(5.6), pos: 'w' } },
+    ],
+    points: [{ x: Math.PI / 2, y: 1 }, { x: 0, y: 1 }],
+    notes: [{ x: -3.9, y: 1.7, text: 'each derivative moves the wave π/2 to the left', pos: 'e', color: 'r' }, { x: -3.9, y: -1.75, text: 'four shifts make a full period: the 4-cycle', pos: 'e' }],
+    caption: '(sin x)′ = sin(x + π/2): each derivative shifts the wave by π/2' };
+  const fpTaylorSine = { kind: 'pieces', svgTitle: 'Taylor polynomials of sin x at 0 of degree 1, 3 and 5 fit on wider and wider intervals', xRange: [-4, 4], yRange: [-2, 2],
+    pieces: [
+      { fn: (x) => x, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-2, 2]] },
+      { fn: hoT3, from: -3.2, to: 3.2, ends: [null, null], color: 'g' },
+      { fn: hoT5, from: -4, to: 4, ends: [null, null], color: 'r' },
+      { fn: Math.sin, from: -4, to: 4, ends: [null, null], color: 'f', label: { text: 'sin x', x: -3.5, y: Math.sin(-3.5), pos: 'n' } },
+    ],
+    notes: [{ x: -2.7, y: 1.75, text: 'degree 1 (dashed)', pos: 'e', color: 'g' }, { x: -2.7, y: 1.45, text: 'degree 3 (navy)', pos: 'e', color: 'g' }, { x: -2.7, y: 1.15, text: 'degree 5 (amber)', pos: 'e', color: 'r' }],
+    caption: 'More derivatives at 0, closer fit: degrees 1, 3, 5 for sin x' };
+  const fpXAbsX = { kind: 'pieces', svgTitle: 'x|x| looks smooth, but its derivative 2|x| has a corner at 0: C1 but not C2', xRange: [-2.5, 2.5], yRange: [-3, 5],
+    pieces: [
+      { fn: (x) => x * Math.abs(x), from: -2.2, to: 2.2, ends: [null, null], color: 'f', label: { text: 'f(x) = x|x|', x: -1.7, y: -2.89, pos: 'e' } },
+      { fn: (x) => 2 * Math.abs(x), from: -2.4, to: 2.4, ends: [null, null], color: 'r', label: { text: 'f′(x) = 2|x|', x: 1.8, y: 3.6, pos: 'w' } },
+    ],
+    points: [{ x: 0, y: 0 }],
+    notes: [{ x: 0.15, y: -0.6, text: 'corner in f′: f″(0) does not exist', pos: 'e', color: 'r' }],
+    caption: 'x|x| has a continuous derivative with a corner: class C¹, not C²' };
   const demoUnits = {
     second: demoUnitFrame({
       svg: functionConcavityDiagrams.up,
@@ -2116,6 +2144,21 @@ const schemas = {
       text: 'The first derivative says whether the curve rises; the second says whether the rise is speeding up. At the marker the tangent slopes are growing as x increases, the curve bends upward, and the readout f&#8243;(c) = 2.60 records how fast. Where the readout turns negative the bend has flipped. Watch the number and the bend change together on the',
       href: '/calculus/visual-tools/inflection-points',
       linkText: 'concavity and inflection points tool',
+    }),
+    sineShift: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpSineShift),
+      caption: 'Differentiating sine is a shift',
+      text: 'The curves sin x and its derivative cos x are the same wave, one a quarter period ahead of the other: the peak of sin x at x = &#960;/2 sits at x = 0 on cos x. That is (sin x)&#8242; = sin(x + &#960;/2). Each further derivative moves the wave another &#960;/2 to the left, so four of them move it a full period 2&#960; and bring back sin x, which is the four-step cycle sin, cos, &#8722;sin, &#8722;cos.',
+    }),
+    taylorSine: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpTaylorSine),
+      caption: 'Taylor polynomials of sin x at 0',
+      text: 'The Taylor polynomials of sin x at 0 use the derivatives 0, 1, 0, &#8722;1, 0, 1, &#8230; there. Degree 1 is the line y = x, which follows the curve only near 0. Degree 3, x &#8722; x&#179;/6, stays close until about &#177;1.5; degree 5 adds x&#8309;/120 and holds on to about &#177;2.5. Each additional derivative used at the single point 0 widens the stretch where the polynomial matches sin x.',
+    }),
+    xAbsX: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpXAbsX),
+      caption: 'Smooth to the eye, not twice differentiable',
+      text: 'The section&#8217;s f(x) = x|x| bends smoothly through the origin; it is x&#178; on the right and &#8722;x&#178; on the left. Its derivative f&#8242;(x) = 2|x| is continuous, but it is a V with a corner at 0, and a corner has no derivative. So f&#8242;&#8242;(0) does not exist: f is in C&#185; but not in C&#178;.',
     }),
   };
 
@@ -2226,6 +2269,8 @@ export default function PageTemplate({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-sineShift'} dangerouslySetInnerHTML={{ __html: demoUnits.sineShift }} />,
+          `For sin(ax) the shift is the same; only the height is multiplied by a at each step.`,
         ]
     },
     {
@@ -2242,6 +2287,8 @@ export default function PageTemplate({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <div key={'unit-taylorSine'} dangerouslySetInnerHTML={{ __html: demoUnits.taylorSine }} />,
+          `Only odd powers appear because the even-order derivatives of sin x at 0 are all 0.`,
         ]
     },
     {
@@ -2250,6 +2297,8 @@ export default function PageTemplate({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-xAbsX'} dangerouslySetInnerHTML={{ __html: demoUnits.xAbsX }} />,
+          `Joining x² and −x² matches values and first derivatives at 0, but not second derivatives, 2 and −2.`,
           <div key={'obj9-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj9Table}}/>,
         ]
     },

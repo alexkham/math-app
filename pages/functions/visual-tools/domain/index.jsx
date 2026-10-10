@@ -43,11 +43,13 @@ export async function getStaticProps(){
 
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Open the page and three panels appear. On the left is the **function picker** with eleven base [functions](!/functions/basics#1) grouped by [domain](!/functions/domain#1) shape — those that accept every real number, and those with built-in domain restrictions. In the center is the **plot panel** with the function $g(x)$ in blue and a colored band drawn directly **on the x-axis** showing the domain. On the right is the **info panel** with two tabs.
+      content: `Open the page and three panels appear. On the left is the **function picker** with eleven base [functions](!/functions/basics#1) grouped by [domain](!/functions/domain#1) shape — those that accept every real number, and those with built-in domain restrictions. In the center is the **plot panel** with the function $g(x)$ in blue and a colored band drawn directly **on the x-axis** showing the domain. On the right is the **info panel** with three tabs — Explanation, Family and Concepts.
 
 Below the plot sits the **domain card** — a colored block displaying the domain in interval notation, the same domain drawn on a horizontal 1D number line, and a draggable **test point slider** that lets you check whether a specific x-value is in the domain and, if so, see the value $g(x)$ that the function produces there.
 
-The page launches with the logarithmic family. Its domain is $x > 0$ — the function is undefined for zero and negative inputs. The x-axis band starts just to the right of $0$ with an open endpoint and extends rightward; the test point at $x = 1$ shows $g(1) = 0$.`,
+The page launches with the logarithmic family. Its domain is $x > 0$ — the function is undefined for zero and negative inputs. The x-axis band starts just to the right of $0$ with an open endpoint and extends rightward; the test point at $x = 1$ shows $g(1) = 0$.
+
+The **S**, **M**, **L** and **XL** buttons above the plot set its height; the curves and readouts stay the same.`,
       before: ``,
       after: ``,
       link: '',

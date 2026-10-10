@@ -428,15 +428,15 @@ For complete coverage of Bayesian reasoning, see the [Bayes theorem](!/probabili
 
   obj11: {
     title: `The 2×2 Table: Two Events and Their Complements`,
-    content: `The default view crosses one event $A$ against one event $B$, giving four joint probabilities. With the tool's parameters — $P(A) = 0.6$, $P(B \mid A) = 0.7$, $P(B \mid A^c) = 0.3$ — the body reads
+    content: `The default view crosses one event $A$ against one event $B$, giving four joint probabilities. With the tool's parameters — $P(A) = 0.6$, $P(B \\mid A) = 0.7$, $P(B \\mid A^c) = 0.3$ — the body reads
 
-$P(A \cap B) = 0.42$, $P(A \cap B^c) = 0.18$, $P(A^c \cap B) = 0.12$, $P(A^c \cap B^c) = 0.28$
+$P(A \\cap B) = 0.42$, $P(A \\cap B^c) = 0.18$, $P(A^c \\cap B) = 0.12$, $P(A^c \\cap B^c) = 0.28$
 
 and the four cells sum to 1, as the frozen table's grand total confirms.`,
     before: ``,
     after: `The margins are where the table earns its name. Summing a row gives $P(A) = 0.6$ and $P(A^c) = 0.4$; summing a column gives $P(B) = 0.54$ and $P(B^c) = 0.46$. Those column totals are the law of total probability computed by addition rather than by formula.
 
-Conditioning is division by a margin. $P(B \mid A) = 0.42 / 0.6 = 0.7$ recovers the input, while $P(A \mid B) = 0.42 / 0.54 \approx 0.78$ does not equal it — the clearest demonstration on the page that $P(B \mid A)$ and $P(A \mid B)$ are different questions about the same cell.`,
+Conditioning is division by a margin. $P(B \\mid A) = 0.42 / 0.6 = 0.7$ recovers the input, while $P(A \\mid B) = 0.42 / 0.54 \\approx 0.78$ does not equal it — the clearest demonstration on the page that $P(B \\mid A)$ and $P(A \\mid B)$ are different questions about the same cell.`,
     link: '',
   },
   obj12: {
@@ -447,7 +447,7 @@ Column totals come out $0.42$, $0.34$ and $0.24$, and the six cells still sum to
     before: ``,
     after: `Nothing structural changes when a variable gains outcomes. Each row is still a conditional distribution summing to 1, each column total is still a marginal, and each cell is still a row probability times a conditional.
 
-What does change is that $B$ is no longer a yes/no question, so $B^c$ stops being a single column. The complement of $B_1$ is now $B_2 \cup B_3$, and reading it off means adding two columns rather than looking one up — which is exactly the step that trips people moving from the 2×2 case.`,
+What does change is that $B$ is no longer a yes/no question, so $B^c$ stops being a single column. The complement of $B_1$ is now $B_2 \\cup B_3$, and reading it off means adding two columns rather than looking one up — which is exactly the step that trips people moving from the 2×2 case.`,
     link: '',
   },
   obj13: {
@@ -458,14 +458,14 @@ Column totals are $0.26$, $0.29$, $0.25$ and $0.20$ — and again the grid sums 
     before: ``,
     after: `This shape is worth seeing because the arithmetic stops being memorable. With four columns the marginals have to be computed rather than eyeballed, which is the point at which a table earns its keep over mental arithmetic.
 
-It also shows the growth pattern. An $r \times c$ table holds $rc$ joint probabilities but only $r + c$ marginals, and the joint values cannot be recovered from the marginals alone — knowing $P(A)$ and $P(B_2)$ tells you nothing about $P(A \cap B_2)$ unless the variables happen to be independent.`,
+It also shows the growth pattern. An $r \\times c$ table holds $rc$ joint probabilities but only $r + c$ marginals, and the joint values cannot be recovered from the marginals alone — knowing $P(A)$ and $P(B_2)$ tells you nothing about $P(A \\cap B_2)$ unless the variables happen to be independent.`,
     link: '',
   },
   obj14: {
     title: `The 3×3 Table: Both Variables Partitioned`,
     content: `The last shape partitions **both** variables into three, giving nine joint cells. The tool uses $P(A_1) = 0.3$, $P(A_2) = 0.4$ and the remaining $P(A_3) = 0.3$, with a row of conditionals for each.
 
-Row totals are $0.30$, $0.40$, $0.30$; column totals $0.34$, $0.35$, $0.30$; grand total 1.`,
+Row totals are $0.30$, $0.40$, $0.30$; column totals $0.345$, $0.355$, $0.30$; grand total 1.`,
     before: ``,
     after: `With neither variable binary, complements lose their special status entirely — there is no $A^c$ column to point at, only "the other two rows". That is the general case, and the 2×2 table is best understood as its smallest instance rather than as the basic form.
 
@@ -858,7 +858,7 @@ export default function ContingencyTablesVisualToolsPage({ instructions, demos,r
       'be computed rather than eyeballed.'),
     '3x3': unit('3x3', '3\u00D73 table, frozen',
       'Nine cells with both variables partitioned three ways. Row totals 0.30, 0.40, 0.30; column ' +
-      'totals 0.34, 0.35, 0.30; grand total 1.'),
+      'totals 0.345, 0.355, 0.30; grand total 1.'),
   }
 
 //   const genericSections = Object.keys(sectionsContent).map((key, index) => ({

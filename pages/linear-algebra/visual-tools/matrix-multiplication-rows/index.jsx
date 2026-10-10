@@ -103,7 +103,7 @@ export default function MatrixMultiplicationRows({
     withDemo(plain('obj3', 'reading-the-plane')),
     withUnit('obj12', 'lifting-out-a-row', 'firstScaledPiece'),
     withUnit('obj13', 'the-statement-and-the-arithmetic', 'allPieces'),
-    withDemo(plain('obj14', 'running-the-tool')),
+    withDemo({ ...plain('obj14', 'running-the-tool'), content: [sectionsContent.obj14.content, sectionsContent.obj14.after] }),
     plain('obj4', 'generating-new-numbers'),
     withDemo(plain('obj5', 'building-ab-by-rows')),
     plain('obj6', 'why-the-weight-comes-out-in-front'),
@@ -580,7 +580,7 @@ $$\\mathbf{v}^{T}A = v_1r_1 + v_2r_2 + v_3r_3$$
 with $r_i$ the $i$-th row of $A$. Step $11$ carries out the arithmetic.`,
       after: `Both steps share one figure, because the plane is already complete at step $10$: three scaled rows laid tail to head, ending on the answer. The last step changes the algebra above the picture, not the picture.
 
-The endpoint is $(12, 4)$ — the same point the columns page reaches. That is not a coincidence and not a proof that the two products are the same: this page uses the **transpose** of that page's matrix with the same weights, so the arithmetic is bound to agree. What differs is what the answer *is*: a row vector with one entry per column here, a column vector with one entry per row there. [Why the shape is three by two](!#why-a-is-three-by-two) makes that argument properly.
+The endpoint is $(12, 4)$ — the same point the columns page reaches. That is not a coincidence and not a proof that the two products are the same: this page uses the **transpose** of that page's matrix with the same weights, so the arithmetic is bound to agree. What differs is what the answer is: a row vector with one entry per column here, a column vector with one entry per row there. [Why the shape is three by two](!#why-a-is-three-by-two) makes that argument properly.
 
 Read the final figure against [the dashed-line stage](!#one-product-at-a-time) and the gain is clear: same endpoint, same six products, but here every corner along the path is a real vector.`,
       link: '',
@@ -588,7 +588,7 @@ Read the final figure against [the dashed-line stage](!#one-product-at-a-time) a
 
     obj14: {
       title: `Running the tool`,
-      content: `**Run** plays forward from wherever you are and becomes **Pause** while it is playing. It advances a little under twice a second — fast enough to show the shape of the argument, too fast to check a step.
+      content: `**Run** plays forward from wherever you are and becomes **Pause** while it is playing. It advances about one step every 1.8 seconds — fast enough to show the shape of the argument, too fast to check a step.
 
 **Step** and **Back** move exactly one step. These are the ones that matter on steps $7$ to $9$: a regrouping is a claim, and a claim is easier to check held still.
 

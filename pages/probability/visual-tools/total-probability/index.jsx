@@ -205,9 +205,9 @@ Think of it this way: addition rule combines alternatives (A or B), while total 
 
     obj13: {
       title: `The Default Tree`,
-      content: `The visualizer opens on a three-part partition. From the start node, three branches carry $P(A_1) = 0.33$, $P(A_2) = 0.33$ and $P(A_3) = 0.34$; each then splits into three outcomes carrying the conditional probabilities $P(B_j \mid A_i)$.
+      content: `The visualizer opens on a three-part partition. From the start node, three branches carry $P(A_1) = 0.33$, $P(A_2) = 0.33$ and $P(A_3) = 0.34$; each then splits into three outcomes carrying the conditional probabilities $P(B_j \\mid A_i)$.
 
-Multiplying along any root-to-leaf path gives that path's joint probability. The first path, for instance, is $0.33 \times 0.4 = 0.132$, which is $P(A_1 \cap B_1)$.`,
+Multiplying along any root-to-leaf path gives that path's joint probability. The first path, for instance, is $0.33 \\times 0.4 = 0.132$, which is $P(A_1 \\cap B_1)$.`,
       before: ``,
       after: `Two conditions make the tree a valid partition, and both are visible in the numbers. The branch probabilities sum to 1, so the $A_i$ cover the whole sample space; and each fan of conditionals sums to 1, so within any branch the outcomes are exhaustive.
 
@@ -220,7 +220,7 @@ Nine leaves, nine joint probabilities, and they sum to 1 as well. Every point of
 
 What is highlighted is the conditional world "given $A_1$". Inside it the three conditional probabilities $0.4$, $0.3$, $0.3$ sum to 1 — they are a complete probability distribution in their own right.`,
       before: ``,
-      after: `This view separates two quantities the notation makes easy to confuse. $P(B_1 \mid A_1) = 0.4$ is the probability *within* the highlighted sub-tree, and it is the number on the edge. $P(A_1 \cap B_1) = 0.132$ is the probability of that leaf *within the whole tree*, and it is the number at the node — the edge value scaled down by the $0.33$ it took to reach the branch at all.
+      after: `This view separates two quantities the notation makes easy to confuse. $P(B_1 \\mid A_1) = 0.4$ is the probability within the highlighted sub-tree, and it is the number on the edge. $P(A_1 \\cap B_1) = 0.132$ is the probability of that leaf within the whole tree, and it is the number at the node — the edge value scaled down by the $0.33$ it took to reach the branch at all.
 
 Conditioning is exactly that rescaling. Restricting attention to $A_1$ makes its probability the new total, and dividing through by $0.33$ is what turns joint probabilities back into conditional ones.`,
       link: '',
@@ -231,7 +231,7 @@ Conditioning is exactly that rescaling. Restricting attention to $A_1$ makes its
 
 Those three paths are exactly the terms of the [law of total probability](!/probability/total-probability#law):
 
-$P(B_2) = 0.33 \times 0.3 + 0.33 \times 0.5 + 0.34 \times 0.3 = 0.366$`,
+$P(B_2) = 0.33 \\times 0.3 + 0.33 \\times 0.5 + 0.34 \\times 0.3 = 0.366$`,
       before: ``,
       after: `This is the picture the whole tool is built around. An event that is awkward to compute directly is decomposed into the ways it can happen — one per partition branch — and those pieces are added.
 
@@ -246,7 +246,7 @@ Highlighting each outcome in turn gives $0.299$, $0.366$ and $0.335$ — the thr
 
 The frozen picture is a four-part partition, each branch carrying $0.25$. The tree is wider, there are twelve leaves instead of nine, and the marginals still sum to 1.`,
       before: ``,
-      after: `The statement generalises without change: $P(B) = \sum_{i} P(A_i) P(B \mid A_i)$, over however many branches the partition has. Two is enough — the common case is a partition into an event and its complement, $P(B) = P(A)P(B \mid A) + P(A^c)P(B \mid A^c)$ — and the sum extends to any finite number.
+      after: `The statement generalises without change: $P(B) = \\sum_{i} P(A_i) P(B \\mid A_i)$, over however many branches the partition has. Two is enough — the common case is a partition into an event and its complement, $P(B) = P(A)P(B \\mid A) + P(A^c)P(B \\mid A^c)$ — and the sum extends to any finite number.
 
 What does change is the arithmetic burden. Each extra branch adds a term to every marginal, which is why the tree view stops being practical well before the mathematics does. The principle is what transfers; the drawing is a teaching aid that runs out of room first.`,
       link: '',

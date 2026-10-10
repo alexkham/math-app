@@ -7,6 +7,7 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import binomialCoefficientDiagrams from '@/app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
 
 
@@ -297,6 +298,16 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const seqArith = (n) => 3 * n - 1, seqGeo = (n) => 2 ** (n - 1);
+  const seqDots = (fn, color) => [1, 2, 3, 4, 5, 6].map((n) => ({ fn, from: n, to: n, ends: ['closed', 'closed'], color }));
+  const fpStepsFactors = { kind: 'pieces', svgTitle: 'Arithmetic 2, 5, 8, ... adds 3; geometric 1, 2, 4, ... doubles and overtakes at n = 5', xRange: [0, 7], yRange: [-2, 34], yStep: 4, xLetter: 'n',
+    pieces: [
+      { fn: seqArith, from: 99, to: 99, ends: [null, null], color: 'f', ghost: [[1, 6]] },
+      { fn: seqGeo, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[1, 6]] },
+      ...seqDots(seqArith, 'f'), ...seqDots(seqGeo, 'r'),
+    ],
+    notes: [{ x: 0.3, y: 30, text: 'add 3: 2, 5, 8, 11, 14, 17', pos: 'e', color: 'f' }, { x: 0.3, y: 26.5, text: 'double: 1, 2, 4, 8, 16, 32', pos: 'e', color: 'r' }, { x: 0.3, y: 23, text: 'doubling passes adding 3 at n = 5', pos: 'e' }],
+    caption: 'Arithmetic grows by equal steps, geometric by equal factors' };
   const demoUnits = {
     triangular: demoUnitFrame({
       svg: binomialCoefficientDiagrams['pascal-n5'],
@@ -304,6 +315,11 @@ const schemas = {
       text: 'The highlighted entry of Pascal&#8217;s triangle, C(5, 2), is reached by 10 downward paths, and 10 = 1 + 2 + 3 + 4 is a triangular number: the second diagonal of the triangle lists exactly the triangular numbers, because T&#8345; = C(n + 1, 2). Counting dots in a triangle and choosing 2 objects from n + 1 are the same count. Follow the diagonal down on the',
       href: '/algebra/visual-tools/binomial-coefficient',
       linkText: 'binomial coefficient visualizer',
+    }),
+    stepsFactors: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpStepsFactors),
+      caption: 'Equal steps against equal factors',
+      text: 'The first six terms of two sequences, plotted against their index n. The arithmetic 2, 5, 8, 11, &#8230; adds 3 each time, so its dots climb a straight line. The geometric 1, 2, 4, 8, &#8230; doubles each time, so its dots start lower and bend upward. Doubling overtakes adding 3 at n = 5, where 16 passes 14, and the gap then widens with every term.',
     }),
   };
 
@@ -365,6 +381,8 @@ export default function SequencesPage({seoData, sectionsContent, introContent, s
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-stepsFactors'} dangerouslySetInnerHTML={{ __html: demoUnits.stepsFactors }} />,
+          `Any geometric sequence with a₁ > 0 and r > 1 eventually passes any arithmetic one, whatever its d.`,
         ]
     },
     {

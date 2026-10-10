@@ -744,9 +744,9 @@ For deeper coverage of integration techniques and antiderivative tables, see the
       title: `Identity: Area That Grows Like a Triangle`,
       content: `With $f(t) = t$, $a = 0$ and $x = 2$, the shaded region is a right triangle of base $2$ and height $2$, so its area is $2$ — and the accumulator reads $F(2) = 2$ to match.
 
-Geometry gives the whole answer here without any integration: $F(x) = \frac{1}{2} \cdot x \cdot x = \frac{x^2}{2}$, a parabola. The dashed F curve on the graph is exactly that parabola.`,
+Geometry gives the whole answer here without any integration: $F(x) = \\frac{1}{2} \\cdot x \\cdot x = \\frac{x^2}{2}$, a parabola. The dashed F curve on the graph is exactly that parabola.`,
       before: ``,
-      after: `This family is the cleanest illustration of Part 1. Differentiate the area function and you get $\frac{d}{dx}\left(\frac{x^2}{2}\right) = x$, which is the integrand you started with. The slope of the dashed curve at any $x$ equals the height of the solid one at that same $x$.
+      after: `This family is the cleanest illustration of Part 1. Differentiate the area function and you get $\\frac{d}{dx}\\left(\\frac{x^2}{2}\\right) = x$, which is the integrand you started with. The slope of the dashed curve at any $x$ equals the height of the solid one at that same $x$.
 
 It also shows why a straight integrand produces a curved accumulator. Area accrues faster as $x$ grows, because each new sliver is taller than the last — so F bends upward even though f does not.`,
       link: '',
@@ -755,7 +755,7 @@ It also shows why a straight integrand produces a curved accumulator. Area accru
       title: `Quadratic: the Tool's Opening State`,
       content: `$f(t) = t^2$ from $a = 0$ to $x = 2$. The shaded area works out to
 
-$\int_0^2 t^2\,dt = \frac{2^3}{3} = \frac{8}{3} \approx 2.667$
+$\\int_0^2 t^2\,dt = \\frac{2^3}{3} = \\frac{8}{3} \\approx 2.667$
 
 and $F(2)$ reads the same. Note that $f(2) = 4$ while $F(2) = 2.667$: the two markers sit at different heights, and they are measuring different things.`,
       before: ``,
@@ -768,41 +768,41 @@ What connects them is the slope. The dashed F curve is steepest where the solid 
       title: `Cubic: a Faster Integrand, a Faster Accumulator`,
       content: `$f(t) = t^3$ on $[0, 2]$ gives
 
-$\int_0^2 t^3\,dt = \frac{2^4}{4} = 4$
+$\\int_0^2 t^3\,dt = \\frac{2^4}{4} = 4$
 
 with $f(2) = 8$. The accumulator is $F(x) = x^4/4$, which climbs steeply once past $x = 1$.`,
       before: ``,
       after: `Integrating raises the degree by one, every time: $t$ accumulates to $x^2/2$, $t^2$ to $x^3/3$, $t^3$ to $x^4/4$. That is the power rule running backwards, and the three polynomial families lay it out in order.
 
-There is a detail the negative side of the graph makes visible. For $x < 0$ the cubic is below the axis, so area accrues *negatively* — yet $F(x) = x^4/4$ is positive there. No contradiction: with $x < 0 = a$ the integral runs backwards, and the two sign reversals cancel. The [signed area](!#the-shaded-area) discussion covers the bookkeeping.`,
+There is a detail the negative side of the graph makes visible. For $x < 0$ the cubic is below the axis, so area accrues negatively — yet $F(x) = x^4/4$ is positive there. No contradiction: with $x < 0 = a$ the integral runs backwards, and the two sign reversals cancel. The [signed area](!#the-shaded-area) discussion covers the bookkeeping.`,
       link: '',
     },
     obj14: {
       title: `Sine: an Accumulator That Turns Around`,
-      content: `$f(t) = \sin(t)$ from $0$ to $2$. The area comes to
+      content: `$f(t) = \\sin(t)$ from $0$ to $2$. The area comes to
 
-$\int_0^2 \sin(t)\,dt = -\cos(2) + \cos(0) \approx 1.416$
+$\\int_0^2 \\sin(t)\,dt = -\\cos(2) + \\cos(0) \\approx 1.416$
 
-with $f(2) \approx 0.909$. Here $F(x) = 1 - \cos(x)$, a shifted cosine wave.`,
+with $f(2) \\approx 0.909$. Here $F(x) = 1 - \\cos(x)$, a shifted cosine wave.`,
       before: ``,
-      after: `The interesting behaviour is just past $x = \pi$. There the sine drops below the axis, each new sliver of area is negative, and the accumulator stops rising and begins to fall — even though it is still positive.
+      after: `The interesting behaviour is just past $x = \\pi$. There the sine drops below the axis, each new sliver of area is negative, and the accumulator stops rising and begins to fall — even though it is still positive.
 
 That turning point is Part 1 again, read in reverse: F has a maximum exactly where $f$ crosses zero going downward, because $F' = f$ and a maximum needs $F' = 0$. Every zero of the integrand is a critical point of the accumulator.`,
       link: '',
     },
     obj15: {
       title: `Cosine: Where the Two Curves Swap Roles`,
-      content: `$f(t) = \cos(t)$ on $[0, 2]$ accumulates to
+      content: `$f(t) = \\cos(t)$ on $[0, 2]$ accumulates to
 
-$\int_0^2 \cos(t)\,dt = \sin(2) - \sin(0) \approx 0.909$
+$\\int_0^2 \\cos(t)\,dt = \\sin(2) - \\sin(0) \\approx 0.909$
 
-while $f(2) = \cos(2) \approx -0.416$ — the integrand has already gone negative, though the accumulated total is still comfortably positive.
+while $f(2) = \\cos(2) \\approx -0.416$ — the integrand has already gone negative, though the accumulated total is still comfortably positive.
 
-The accumulator is $F(x) = \sin(x)$, so this family draws a cosine and a sine on the same axes.`,
+The accumulator is $F(x) = \\sin(x)$, so this family draws a cosine and a sine on the same axes.`,
       before: ``,
-      after: `Compare this state against the sine family and the pairing becomes obvious: there the integrand was $\sin$ and the accumulator a shifted $\cos$; here the integrand is $\cos$ and the accumulator is $\sin$. Differentiation and integration walk the same cycle in opposite directions.
+      after: `Compare this state against the sine family and the pairing becomes obvious: there the integrand was $\\sin$ and the accumulator a shifted $\\cos$; here the integrand is $\\cos$ and the accumulator is $\\sin$. Differentiation and integration walk the same cycle in opposite directions.
 
-The negative readings also make the sign convention concrete. Between $\pi/2$ and $2$ the shaded region lies below the axis and is subtracted, which is why the total of $0.909$ is smaller than the area of the visible region above the axis alone.`,
+The negative readings also make the sign convention concrete. Between $\\pi/2$ and $2$ the shaded region lies below the axis and is subtracted, which is why the total of $0.909$ is smaller than the area of the visible region above the axis alone.`,
       link: '',
     },
     obj17: {
@@ -824,9 +824,9 @@ For the three numbers in the card, see [the at-the-point card](!#the-at-the-poin
       title: `Exponential: Accumulator and Integrand Almost Coincide`,
       content: `$f(t) = e^t$ from $0$ to $2$ gives
 
-$\int_0^2 e^t\,dt = e^2 - 1 \approx 6.389$
+$\\int_0^2 e^t\,dt = e^2 - 1 \\approx 6.389$
 
-against $f(2) = e^2 \approx 7.389$. The two differ by exactly $1$, and they will differ by exactly $1$ at every $x$.`,
+against $f(2) = e^2 \\approx 7.389$. The two differ by exactly $1$, and they will differ by exactly $1$ at every $x$.`,
       before: ``,
       after: `That is the signature of the exponential. Since $F(x) = e^x - e^0 = e^x - 1$, the accumulator is the integrand shifted down by one unit — the two curves on screen are parallel in the vertical sense, never converging or diverging.
 

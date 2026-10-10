@@ -1918,6 +1918,8 @@ export function Chip({ item, mode }) {
 }
 
 export function ChipAndName({ item, mode }) {
+  // In letters mode the chip already is the letter; adding its name printed it twice ("AA").
+  if (mode !== "balls") return <b><Chip item={item} mode={mode} /></b>;
   return (
     <>
       <Chip item={item} mode={mode} />

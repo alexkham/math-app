@@ -356,9 +356,9 @@ obj7: {
 
 The coefficient $a$ governs direction and steepness. When $a > 0$, the line climbs from left to right; when $a < 0$, it descends. Doubling $a$ doubles the steepness — each unit step in $x$ produces twice the vertical change.
 
-Setting $x = 0$ places the graph at $(0, b)$ on the vertical axis. Setting $P(x) = 0$ and solving gives the x-intercept at $x = -\frac{b}{a}$, the single [root](!/algebra/polynomials/roots) of the polynomial. With just these two points, the entire graph is fixed.
+Setting $x = 0$ places the graph at $(0, b)$ on the vertical axis. Setting $P(x) = 0$ and solving gives the x-intercept at $x = -\\frac{b}{a}$, the single [root](!/algebra/polynomials/roots) of the polynomial. With just these two points, the entire graph is fixed.
 
-No turning points exist because the graph never changes direction — it increases everywhere or decreases everywhere, depending on the sign of $a$. End behavior follows the same logic: as $x$ moves toward $+\infty$ or $-\infty$, the line continues without bound in the direction $a$ dictates.`,
+No turning points exist because the graph never changes direction — it increases everywhere or decreases everywhere, depending on the sign of $a$. End behavior follows the same logic: as $x$ moves toward $+\\infty$ or $-\\infty$, the line continues without bound in the direction $a$ dictates.`,
   before: ``,
   after: ``,
   link: '',

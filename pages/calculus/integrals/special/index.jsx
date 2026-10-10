@@ -8,6 +8,8 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 
@@ -760,6 +762,24 @@ const schemas = {
 }
 
 
+  const fpLnAbs = { kind: 'pieces', svgTitle: '1/x and ln|x| on both sides of 0: ln|x| has slope 1/x for negative x too', xRange: [-4, 4], yRange: [-3, 3],
+    pieces: [
+      { fn: (x) => 1 / x, from: -4, to: -0.34, ends: [null, null], color: 'r' },
+      { fn: (x) => 1 / x, from: 0.34, to: 4, ends: [null, null], color: 'r', label: { text: 'y = 1/x', x: 0.55, y: 1 / 0.55, pos: 'e' } },
+      { fn: (x) => Math.log(-x), from: -4, to: -0.06, ends: [null, null], color: 'f', label: { text: 'ln(−x)', x: -3.2, y: Math.log(3.2), pos: 'n' } },
+      { fn: Math.log, from: 0.06, to: 4, ends: [null, null], color: 'f', label: { text: 'ln x', x: 3.2, y: Math.log(3.2), pos: 'n' } },
+    ],
+    points: [{ x: -2, y: Math.log(2) }, { x: -2, y: -0.5 }],
+    notes: [{ x: -3.9, y: -2.2, text: 'slope of ln|x| at −2: −1/2', pos: 'e', color: 'r' }],
+    caption: 'ln|x| is an antiderivative of 1/x on both sides of 0' };
+  const demoUnits = {
+    lnAbs: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLnAbs),
+      caption: 'Why the absolute value in ln|x|',
+      text: '1/x is defined on both sides of 0, but ln x only for x &gt; 0. On the left the antiderivative is ln(&#8722;x), the mirror image of ln x, and the two halves together are ln|x|. At x = &#8722;2 the left branch is falling with slope &#8722;1/2, which is exactly 1/x there. Writing only ln x would leave the negative half of 1/x without an antiderivative.',
+    }),
+  };
+
   return {
   props: {
     sectionsContent,
@@ -769,6 +789,7 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Special Integrals: Essential Formulas | Learn Math Class",
       description: "Essential integration formulas: power rule, exponential, trigonometric, inverse trig (arctan, arcsin), and logarithmic integrals. Standard forms every calculus student should memorize.",
@@ -780,7 +801,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -799,6 +820,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-lnAbs'} dangerouslySetInnerHTML={{ __html: demoUnits.lnAbs }} />,
+          `The two halves can even carry different constants: 0 is not in the domain, so nothing links them.`,
         ]
     },
     {

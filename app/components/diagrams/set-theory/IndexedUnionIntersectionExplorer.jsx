@@ -587,7 +587,8 @@ export const IndexedUnionIntersectionExplorer = (props) => {
       intersectionText: isVenn
         ? regionSetText(intersection, vennSets)
         : (intersection.length
-          ? '{' + intersection.join(', ') + (family.punch === 'lcm' ? ', \u2026' : '') + '}'
+          // the list is cut at the display cap, so a run that reaches it goes on (tails: {n, n+1, …})
+          ? '{' + intersection.join(', ') + (family.punch === 'lcm' || intersection[intersection.length - 1] >= discreteCap ? ', \u2026' : '') + '}'
           : '\u2205'),
       unionStalled: before.length > 0 && prevUnionSet.size === unionSet.size,
       intersectionStalled: prevIntersection !== null && prevIntersection.length === intersection.length
@@ -996,7 +997,7 @@ export const IndexedUnionIntersectionExplorer = (props) => {
               <div className="ifx-btnrow">
                 <button type="button" className="ifx-btn" onClick={prev} disabled={n === 1}>Previous</button>
                 <button type="button" className="ifx-btn ifx-solid" onClick={next} disabled={n === topIndex}>
-                  Add A{subscript(n + 1 > topIndex ? topIndex : n + 1)}
+                  {n >= topIndex ? `All A\u2081\u2026A${subscript(topIndex)} added` : `Add A${subscript(n + 1)}`}
                 </button>
                 <button type="button" className="ifx-btn" onClick={togglePlay}>
                   {playing ? 'Pause' : 'Play'}

@@ -412,7 +412,7 @@ export default function PermutationWithRepetition({ explanations = null }) {
         Position 1 is locked to <ChipAndName item={item} mode={mode} />.
         {" "}The remaining <b>{remainCount}</b> {noun} {verb} each filled from{" "}
         <ListWithChips items={items} mode={mode} conjunction="or" />
-        {" "}(repetition allowed) in <b>{seq} = {M}</b> {wayWord}.
+        {" "}(repetition allowed) in <b>{remainCount > 1 ? `${seq} = ${M}` : M}</b> {wayWord}.
       </>
     );
   };
@@ -739,8 +739,7 @@ export default function PermutationWithRepetition({ explanations = null }) {
                     stepNum={i + 1}
                     headerLabel={
                       <>
-                        First item: <Chip item={item} mode={mode} />
-                        <b>{nameOf(item, mode)}</b>
+                        First item: <ChipAndName item={item} mode={mode} />
                       </>
                     }
                     progressText={progressText}

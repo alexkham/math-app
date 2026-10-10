@@ -616,6 +616,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
 import partitionVennDiagrams from '@/app/components/probability/conditional-probability-demo/partitionVennDiagrams'
 import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
@@ -1008,7 +1009,7 @@ This formula does not introduce a new probability law — it expresses how proba
 Conditional probability becomes clearer when viewed geometrically or sequentially.
 
 **Venn diagram view:**  
-The condition $B$ restricts attention to a smaller region of the sample space. The probability of $A$ is then evaluated only within that region, as the proportion of the overlap $A \cap B$ relative to $B$ itself.
+The condition $B$ restricts attention to a smaller region of the sample space. The probability of $A$ is then evaluated only within that region, as the proportion of the overlap $A \\cap B$ relative to $B$ itself.
 
 **Tree diagram view:**  
 In a probability tree, conditioning corresponds to moving along a branch where a condition has already occurred. Probabilities along later branches are evaluated relative to that branch, not the entire tree.
@@ -1161,6 +1162,16 @@ The rest of the page explains how this change of viewpoint works, how it is expr
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const ogGivenSum8 = { kind: 'dice', svgTitle: 'Two dice given sum 8: five outcomes remain; three have an even first die, so P(first even | sum 8) = 3/5',
+    condition: { label: 'sum not 8: removed', test: (a, b) => a + b === 8 },
+    events: [{ label: 'first die even', test: (a) => a % 2 === 0, color: 'f' }],
+    notes: [{ text: 'given sum 8:' }, { text: '5 outcomes remain' }, { text: 'P(first even | sum 8)', color: 'f' }, { text: '= 3/5', color: 'f' }, { text: 'unconditionally 1/2', color: 'g' }],
+    caption: 'Inside the condition, count again: 3 of the 5 remaining' };
+  const ogIndependent = { kind: 'dice', svgTitle: 'Two dice given an even first die: 18 outcomes remain and 3 have second die 5, so the probability stays 1/6',
+    condition: { label: 'first die odd: removed', test: (a) => a % 2 === 0 },
+    events: [{ label: 'second die is 5', test: (a, b) => b === 5, color: 'r' }],
+    notes: [{ text: 'given first die even:' }, { text: '18 outcomes remain' }, { text: 'P(second 5 | even)', color: 'r' }, { text: '= 3/18 = 1/6', color: 'r' }, { text: 'same as without it', color: 'g' }],
+    caption: 'Independent: the condition leaves the probability at 1/6' };
   const demoUnits = {
     u_meaning_0: demoUnitFrame({
       svg: conditionalTreeDiagrams.subtreeGivenA,
@@ -1182,6 +1193,16 @@ The rest of the page explains how this change of viewpoint works, how it is expr
       text: 'Each example is a table: the row for A holds the joint counts with B and its complement, and the conditional probability P(A given B) is the A cell in the B column divided by the column total. Reading down a column instead of across the whole table is the restriction in tabular form. Edit the cells and watch the conditionals update on the',
       href: '/probability/visual-tools/contingency-tables',
       linkText: 'contingency tables explorer',
+    }),
+    givenSum8: demoUnitFrame({
+      svg: renderOutcomeGrid(ogGivenSum8),
+      caption: 'Restricting to the condition',
+      text: 'Learning that the two dice sum to 8 discards every other outcome (greyed out). Five equally likely outcomes remain: (2,6), (3,5), (4,4), (5,3), (6,2). Three of them have an even first die, so P(first die even | sum 8) = 3/5, although without the information the answer is 1/2. The event is the same; only the frame it is measured in has shrunk.',
+    }),
+    independentGrid: demoUnitFrame({
+      svg: renderOutcomeGrid(ogIndependent),
+      caption: 'A condition that changes nothing',
+      text: 'Now the condition is that the first die is even, which keeps 18 outcomes, rows 2, 4 and 6. In every kept row exactly one cell has a 5 on the second die, so P(second die 5 | first even) = 3/18 = 1/6, the same as with no condition. The first die carries no information about the second: the two events are independent.',
     }),
   };
 
@@ -1237,6 +1258,8 @@ export default function ConditionalProbabilityPage({
         link:'',
         content:[
             sectionsContent.conditioning.content,
+                  <div key={'unit-givenSum8'} dangerouslySetInnerHTML={{ __html: demoUnits.givenSum8 }} />,
+            `Dividing by P(sum 8) = 5/36 in the formula does exactly this rescaling to the 5 remaining cells.`,
         ]
     },
     {
@@ -1303,6 +1326,8 @@ export default function ConditionalProbabilityPage({
         link:'',
         content:[
           sectionsContent.independence.content,
+                  <div key={'unit-independentGrid'} dangerouslySetInnerHTML={{ __html: demoUnits.independentGrid }} />,
+          `Compare the sum-8 condition above, which moved the probability from 1/2 to 3/5.`,
         ]
     },
     {

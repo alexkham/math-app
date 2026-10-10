@@ -106,7 +106,7 @@ export default function MatrixMultiplicationRowsColumns({
     withUnit('obj14', 'the-finished-product-by-rows', 'rowsComplete'),
     plain('obj5', 'why-two-by-two'),
     plain('obj6', 'neither-reading-is-half'),
-    withDemo(plain('obj15', 'running-the-tool')),
+    withDemo({ ...plain('obj15', 'running-the-tool'), content: [sectionsContent.obj15.content, sectionsContent.obj15.after] }),
     withDemo(plain('obj16', 'steps-and-the-step-counter')),
     plain('obj17', 'generating-new-numbers'),
     plain('obj7', 'the-invariant-in-four-products'),
@@ -391,7 +391,7 @@ In the plane, the step draws the row of $A$ and the column of $B$ from the origi
 
 Four steps cover the whole product, one per entry, because a $2 \\times 2$ result has four of them. Nothing is grouped and nothing is regrouped; this tab is the definition with no rearrangement at all.
 
-That makes it the right place to start and the wrong place to stop. It shows what every entry is, and it shows nothing about what the product *does* — for that you have to watch whole slices assemble, in [building a column](!#building-a-column-of-ab) and [building a row](!#building-a-row-of-ab).`,
+That makes it the right place to start and the wrong place to stop. It shows what every entry is, and it shows nothing about what the product does — for that you have to watch whole slices assemble, in [building a column](!#building-a-column-of-ab) and [building a row](!#building-a-row-of-ab).`,
       link: '',
     },
 
@@ -534,7 +534,7 @@ The entry step makes that concrete rather than asserted: [one row, one column, o
       title: `Running the tool`,
       content: `The control bar sits at the same height in every tab and on every step, so nothing jumps as the figure changes.
 
-**Run** plays forward from wherever you are and becomes **Pause** while it is playing. It advances roughly twice a second, which is fast enough to see the shape of a route and too fast to follow an individual step.
+**Run** plays forward from wherever you are and becomes **Pause** while it is playing. It advances about one step every 1.9 seconds, which is fast enough to see the shape of a route and too fast to follow an individual step.
 
 **Step** and **Back** move exactly one step. These are the controls that matter: the regrouping and entry steps are arguments, and an argument is easier to check held still than in motion.
 

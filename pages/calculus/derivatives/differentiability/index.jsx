@@ -14,6 +14,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 
 
@@ -645,6 +646,26 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpCorner = { kind: 'pieces', svgTitle: '|x| has slope -1 on the left and +1 on the right: two tangent directions at the corner', xRange: [-3, 3], yRange: [-2, 3],
+    pieces: [
+      { fn: (x) => -x, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[0, 2.2]] },
+      { fn: (x) => x, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-2.2, 0]] },
+      { fn: (x) => Math.abs(x), from: -3, to: 3, ends: [null, null], color: 'f', label: { text: 'y = |x|', x: 2.4, y: 2.4, pos: 'nw' } },
+    ],
+    points: [{ x: 0, y: 0 }],
+    notes: [{ x: -2.95, y: -0.6, text: 'slope +1 continued', pos: 'e', color: 'g' }, { x: 1.15, y: -0.6, text: 'slope −1 continued', pos: 'e', color: 'r' }],
+    caption: 'A corner: two finite one-sided slopes that disagree, so no tangent' };
+  const fpCusp = { kind: 'pieces', svgTitle: 'x^(2/3) has a cusp at 0: the slope goes to minus infinity from the left and plus infinity from the right', xRange: [-3, 3], yRange: [-1, 3],
+    pieces: [{ fn: (x) => Math.cbrt(x * x), from: -3, to: 3, ends: [null, null], color: 'f', label: { text: 'y = x^(2/3)', x: 1.8, y: Math.cbrt(1.8 * 1.8), pos: 'se' } }],
+    points: [{ x: 0, y: 0 }],
+    notes: [{ x: -2.9, y: 2.6, text: 'both sides arrive vertically', pos: 'e', color: 'r' }, { x: -2.9, y: -0.6, text: 'slope → −∞', pos: 'e', color: 'r' }, { x: 0.5, y: -0.6, text: 'slope → +∞', pos: 'e', color: 'r' }],
+    caption: 'A cusp: one-sided slopes are infinite with opposite signs' };
+  const fpVertTangent = { kind: 'pieces', svgTitle: 'x^(1/3) passes smoothly through 0 with a vertical tangent: the slope goes to plus infinity from both sides', xRange: [-3, 3], yRange: [-2, 2],
+    pieces: [{ fn: (x) => Math.cbrt(x), from: -3, to: 3, ends: [null, null], color: 'f', label: { text: 'y = x^(1/3)', x: 1.6, y: Math.cbrt(1.6), pos: 'se' } }],
+    points: [{ x: 0, y: 0 }],
+    vlines: [{ x: 0, label: 'tangent: x = 0' }],
+    notes: [{ x: -2.9, y: -1.6, text: 'slope → +∞ from both sides', pos: 'e', color: 'r' }],
+    caption: 'A vertical tangent: no sharp point, but the slope is infinite' };
   const demoUnits = {
     jump: demoUnitFrame({
       svg: functionContinuityDiagrams.jump,
@@ -652,6 +673,21 @@ const schemas = {
       text: 'Approaching zero from the left the function heads to 0, from the right it sits at 1, and the checker&#8217;s three conditions fail at the second: no two-sided limit, so no continuity, so no derivative. A tangent line would have to be two different lines at once. Test any breakpoint against the three conditions on the',
       href: '/calculus/visual-tools/continuity',
       linkText: 'continuity checker',
+    }),
+    corner: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpCorner),
+      caption: 'Two slopes at one point',
+      text: 'The section&#8217;s f(x) = |x| at x = 0. Coming from the left the graph has slope &#8722;1, and continuing that line past 0 gives the amber dashes; coming from the right it has slope +1, continued as the navy dashes. Both one-sided slopes are finite, but they point in different directions, so no single tangent line fits the corner.',
+    }),
+    cusp: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpCusp),
+      caption: 'Infinite slopes from opposite sides',
+      text: 'The section&#8217;s x^(2/3) at x = 0. Near the origin both branches turn steeply toward the vertical: from the left the slope heads to &#8722;&#8734;, from the right to +&#8734;. The graph is unbroken but comes to a sharp point, and the two infinite slopes have opposite signs, so f&#8242;(0) does not exist.',
+    }),
+    vertTangent: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpVertTangent),
+      caption: 'A smooth curve with a vertical tangent',
+      text: 'The section&#8217;s x^(1/3) at x = 0. The curve passes through the origin without a sharp point and stands vertical there: the slope grows to +&#8734; from both sides, and the tangent is the dashed line x = 0. The tangent exists as a line, but its slope is not a number, so the function is not differentiable at 0.',
     }),
   };
 
@@ -722,6 +758,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-corner'} dangerouslySetInnerHTML={{ __html: demoUnits.corner }} />,
+          `Any piecewise-linear graph with a change of slope has a corner at the join.`,
         ]
     },
     {
@@ -730,6 +768,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-cusp'} dangerouslySetInnerHTML={{ __html: demoUnits.cusp }} />,
+          `Compare section 5: there the infinite slopes have the same sign and the curve does not turn back.`,
         ]
     },
     {
@@ -738,6 +778,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-vertTangent'} dangerouslySetInnerHTML={{ __html: demoUnits.vertTangent }} />,
+          `Compare section 4: here both sides agree on +∞, so the curve has no sharp point, only a vertical tangent.`,
         ]
     },
     {

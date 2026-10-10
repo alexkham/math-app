@@ -12,6 +12,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 
@@ -826,6 +827,22 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const ctF = (x) => x ** 3 - 3 * x, ctG = (x) => x ** 3 - x - 1;
+  const ctRoots = [-1.5321, 0.3473, 1.8794];
+  const fpIvtLevel = { kind: 'pieces', svgTitle: 'x^3 - 3x on [-2, 2.2] runs from -2 to about 4.05, so it takes the value 1 somewhere; here at three points', xRange: [-2.5, 2.5], yRange: [-3, 5],
+    pieces: [
+      { fn: () => 1, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[-2.5, 2.5]], label: { text: 'k = 1', x: -2.4, y: 1, pos: 'ne' } },
+      { fn: ctF, from: -2, to: 2.2, ends: ['closed', 'closed'], color: 'f', label: { text: 'y = x³ − 3x', x: 2.1, y: ctF(2.1), pos: 'w' } },
+    ],
+    points: ctRoots.map((c) => ({ x: c, y: 1 })),
+    notes: [{ x: -2.4, y: -2.5, text: 'f(−2) = −2 < 1 < f(2.2) ≈ 4.05', pos: 'e' }, { x: 0.2, y: -2.5, text: 'three c with f(c) = 1', pos: 'e', color: 'r' }],
+    caption: 'IVT promises at least one c with f(c) = k; here there are three' };
+  const fpBisection = { kind: 'pieces', svgTitle: 'x^3 - x - 1 is -1 at 1 and 5 at 2; halving the interval at 1.5 and 1.25 traps the root near 1.32', xRange: [0.8, 2.2], yRange: [-2, 6],
+    pieces: [{ fn: ctG, from: 0.8, to: 2.1, ends: [null, null], color: 'f', label: { text: 'y = x³ − x − 1', x: 1.95, y: ctG(1.95), pos: 'w' } }],
+    points: [{ x: 1, y: -1, label: 'f(1) = −1', pos: 'se' }, { x: 2, y: 5, label: 'f(2) = 5', pos: 'w' }, { x: 1.5, y: ctG(1.5), label: 'f(1.5) > 0', pos: 'nw' }, { x: 1.25, y: ctG(1.25), label: 'f(1.25) < 0', pos: 'se' }],
+    vlines: [{ x: 1.25 }, { x: 1.5 }],
+    notes: [{ x: 0.85, y: 5.4, text: 'sign change on [1.25, 1.5]: the root is there', pos: 'e', color: 'r' }],
+    caption: 'Each halving keeps the half where the sign changes' };
   const demoUnits = {
     three: demoUnitFrame({
       svg: functionContinuityDiagrams.wrongvalue,
@@ -861,6 +878,16 @@ const schemas = {
       text: 'The probes at &#177;0.5 read sin 2 &#8776; 0.91, but moving them inward the readings swing between &#8722;1 and 1 faster and faster, never settling: the limit fails to exist not by running away but by refusing to choose. No value of f(0) could make this continuous. Squeeze the probes and watch the readings swing on the',
       href: '/calculus/visual-tools/limit',
       linkText: 'limit explorer',
+    }),
+    ivtLevel: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpIvtLevel),
+      caption: 'Every height in between is reached',
+      text: 'f(x) = x&#179; &#8722; 3x is continuous on [&#8722;2, 2.2], starts at f(&#8722;2) = &#8722;2 and ends at about 4.05. Any level between those two heights, such as the dashed k = 1, must be crossed: the unbroken curve cannot get from below the line to above it without meeting it. Here it meets it three times. The theorem only promises at least one such c, not where it is or how many there are.',
+    }),
+    bisection: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpBisection),
+      caption: 'Trapping a root by halving',
+      text: 'The section&#8217;s f(x) = x&#179; &#8722; x &#8722; 1 is negative at 1 and positive at 2, so a root lies between. f(1.5) &#8776; 0.875 is positive, so the root is in [1, 1.5]; f(1.25) &#8776; &#8722;0.30 is negative, so it is in [1.25, 1.5], between the dashed lines. Each step halves the interval that must contain the root; the root itself is about 1.3247.',
     }),
   };
 
@@ -1009,6 +1036,8 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <div key={'unit-ivtLevel'} dangerouslySetInnerHTML={{ __html: demoUnits.ivtLevel }} />,
+          `Without continuity the guarantee fails: a jump can skip a level entirely.`,
         ]
     },
     {
@@ -1017,6 +1046,8 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <div key={'unit-bisection'} dangerouslySetInnerHTML={{ __html: demoUnits.bisection }} />,
+          `Ten halvings shrink [1, 2] to an interval shorter than 0.001.`,
         ]
     },
     {

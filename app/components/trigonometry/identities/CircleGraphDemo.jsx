@@ -1390,7 +1390,7 @@ function CurveGraph({
           const tracedPts = tracedEnd === -1 ? seg : seg.slice(0, tracedEnd + 1);
           const restPts   = tracedEnd === -1 ? [] : seg.slice(tracedEnd);
           const buildPath = (arr) => arr.length === 0 ? '' :
-            `M ${arr[0].x} ${arr[0].y} ` + arr.slice(1).map(p => `L ${p.x} ${p.y}`).join(' ');
+            `M ${+arr[0].x.toFixed(2)} ${+arr[0].y.toFixed(2)} ` + arr.slice(1).map(p => `L ${+p.x.toFixed(2)} ${+p.y.toFixed(2)}`).join(' '); /* 2-decimal coordinates: the server and the browser can differ in the last digit of long floats (hydration mismatch) */
           return (
             <g key={i}>
               <path d={buildPath(restPts)} fill="none"

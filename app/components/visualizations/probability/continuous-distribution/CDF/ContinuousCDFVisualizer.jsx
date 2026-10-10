@@ -2,6 +2,9 @@ import { useState, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { processContent } from '@/app/utils/contentProcessor';
 
+// Axis ticks: round away float noise (1.0000000000000002 -> 1, 6.907755278982137 -> 6.908).
+const fmtTick = (v) => (typeof v === 'number' && Number.isFinite(v) ? String(Math.round(v * 1000) / 1000) : v);
+
 // exported so the page's frozen-state stills are drawn from the tool's own
 // functions rather than a re-derivation (Line 1)
 export const uniformCDF = (x, a, b) => {
@@ -445,7 +448,10 @@ export default function ContinuousCDFVisualizer({ explanationsOverride = {}, exp
               <LineChart data={currentDist.data}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
                 <XAxis 
-                  dataKey="x" 
+                  dataKey="x"
+                  type="number"
+                  domain={['dataMin', 'dataMax']}
+                  tickFormatter={fmtTick}
                   label={{ value: 'x', position: 'insideBottom', offset: -5, style: { fontWeight: 600 } }}
                   stroke="#1a3a52"
                 />
@@ -458,10 +464,12 @@ export default function ContinuousCDFVisualizer({ explanationsOverride = {}, exp
                   }}
                   stroke="#1a3a52"
                   domain={[0, 1]}
+                  allowDataOverflow
+                  tickFormatter={fmtTick}
                 />
                 <Tooltip 
                   formatter={(value) => value.toFixed(4)}
-                  labelFormatter={(label) => `x = ${label}`}
+                  labelFormatter={(label) => `x = ${fmtTick(Number(label))}`}
                   contentStyle={{ 
                     background: 'white', 
                     border: '2px solid #245de1',

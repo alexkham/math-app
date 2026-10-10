@@ -16,6 +16,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 
@@ -551,6 +552,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     idea: demoUnitFrame({
       svg: functionLimitDiagrams.removable,
@@ -579,6 +581,13 @@ const schemas = {
       text: 'Both approaches agree on a limit at x = 1, and f(1) is defined, yet the marked value sits away from where the curve is heading: the third condition fails and the function is not continuous there. Fixing the single value would repair it. See which of the three conditions each example fails on the',
       href: '/calculus/visual-tools/continuity',
       linkText: 'continuity checker',
+    }),
+    oscillating: demoUnitFrame({
+      svg: functionLimitDiagrams.oscillating,
+      caption: 'sin(1/x): a limit that fails by oscillating',
+      text: 'Near x = 0 the graph of sin(1/x) swings between &#8722;1 and 1 faster and faster: every interval around 0, however small, contains points where the function is 1 and points where it is &#8722;1. No single height L stays within a fixed band of the curve near 0, so the limit does not exist even though the function stays bounded. Freeze other cases on the',
+      href: '/calculus/visual-tools/limit',
+      linkText: 'limit explorer',
     }),
   };
 
@@ -624,6 +633,8 @@ export default function LimitsPage({seoData, sectionsContent, introContent, obj2
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-oscillating'} dangerouslySetInnerHTML={{ __html: demoUnits.oscillating }} />,
+          `The unbounded case is pictured in section 8; a jump, where left and right disagree, on the two-sided limits page.`,
           <div key={'obj2-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj2Table }} />,
         ]

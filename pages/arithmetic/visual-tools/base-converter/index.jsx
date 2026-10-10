@@ -251,7 +251,7 @@ Notice the grouping between binary and the two power-of-two bases: $1\\ 100\\ 10
       before: ``,
       after: `**Reading the rows.** The result structure lists the powers of $10$ from the largest that fits downward: $10^2$ with $\\times 1$, $10^1$ with $\\times 0$, $10^0$ with $\\times 0$. Each digit is a count of groups, and the zeros are as informative as the one: they hold the places open.
 
-Decimal feels like the way numbers *are* only because it is the base everyone learns first. Enter $100$ with base $10$, then change the base to $2$ or $16$ and watch the same one hundred cubes regroup; nothing about the quantity changes, only the group sizes. The general rule is in [What a Base Is](!#what-a-base-is), and the reverse direction, digits back to a count, in [Expansion](!#expansion).
+Decimal feels like the way numbers are only because it is the base everyone learns first. Enter $100$ with base $10$, then change the base to $2$ or $16$ and watch the same one hundred cubes regroup; nothing about the quantity changes, only the group sizes. The general rule is in [What a Base Is](!#what-a-base-is), and the reverse direction, digits back to a count, in [Expansion](!#expansion).
 
 Because base $10$ uses ten digit symbols, $0$ to $9$, a single decimal digit can hold at most nine groups of any size; the tenth group is what forces a carry into the next place. The [binary](!#binary-base-2) picture makes the same rule visible with only two symbols.`,
       link: '',

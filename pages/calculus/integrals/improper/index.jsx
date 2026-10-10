@@ -13,6 +13,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 
 
@@ -526,6 +527,24 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const imBars = Array.from({ length: 40 }, (_, i) => { const x = 1 + (i + 0.5) * 5 / 40; return { from: 0, to: 1 / (x * x + 1), color: 'f', dx: x / 6 * 388 }; });
+  const fpAreaSoFar = { kind: 'pieces', svgTitle: 'Area under 1/x^2 from 1 to b is 1 - 1/b and levels off at 1; area under 1/x is ln b and keeps growing', xRange: [0, 20], yRange: [0, 3.5], xStep: 2, xLetter: 'b',
+    pieces: [
+      { fn: () => 1, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0, 20]], label: { text: 'limit 1', x: 19.5, y: 1, pos: 'nw' } },
+      { fn: (b) => 1 - 1 / b, from: 1, to: 20, ends: ['closed', null], color: 'f', label: { text: 'under 1/x²: 1 − 1/b', x: 11, y: 1 - 1 / 11, pos: 'se' } },
+      { fn: Math.log, from: 1, to: 20, ends: ['closed', null], color: 'r', label: { text: 'under 1/x: ln b', x: 9, y: Math.log(9), pos: 'nw' } },
+    ],
+    notes: [{ x: 0.4, y: 3.2, text: 'area from 1 to b, as b grows', pos: 'e' }],
+    caption: '1/x² totals 1; 1/x totals ln b, which never stops growing' };
+  const fpCompare = { kind: 'pieces', svgTitle: '1/(x^2 + 1) lies below 1/x^2 on [1, infinity); the larger area is 1, so the smaller area is finite', xRange: [0, 6], yRange: [0, 1.2], xLetter: 'x',
+    pieces: [
+      { fn: (x) => 1 / (x * x), from: 0.95, to: 6, ends: [null, null], color: 'r', label: { text: '1/x²: total area 1', x: 1.6, y: 1 / 2.56, pos: 'ne' } },
+      { fn: (x) => 1 / (x * x + 1), from: 1, to: 6, ends: ['closed', null], color: 'f', label: { text: '1/(x² + 1)', x: 3.2, y: 1 / 11.24, pos: 'n' } },
+    ],
+    yBars: imBars,
+    vlines: [{ x: 1 }],
+    notes: [{ x: 2.6, y: 0.95, text: 'smaller integrand, area at most 1', pos: 'e', color: 'f' }],
+    caption: 'Trapped under a convergent integral, the smaller one converges too' };
   const demoUnits = {
     unbounded: demoUnitFrame({
       svg: functionLimitDiagrams['infinite-pos'],
@@ -533,6 +552,16 @@ const schemas = {
       text: 'Both probes, at &#8722;0.5 and 0.5, read 4, and moving them inward sends the values to infinity: the curve has a vertical asymptote at 0, so no rectangle of finite height can cover the region beside it. An integral across this point must stop short at t and let t approach 0 in a limit. Squeeze the probes toward the asymptote on the',
       href: '/calculus/visual-tools/limit',
       linkText: 'limit explorer',
+    }),
+    areaSoFar: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpAreaSoFar),
+      caption: 'Area so far, as the upper limit grows',
+      text: 'For each upper limit b, the curves show the area from 1 to b. Under 1/x&#178; the area is 1 &#8722; 1/b: it climbs quickly and then flattens against the dashed level 1, so &#8747;&#8321;^&#8734; dx/x&#178; converges to 1. Under 1/x the area is ln b: it slows down but never levels off, so &#8747;&#8321;^&#8734; dx/x diverges. The integrands differ only in how fast they decay.',
+    }),
+    compare: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpCompare),
+      caption: 'Comparison: trapped below a finite area',
+      text: 'The section&#8217;s 1/(x&#178; + 1) on [1, &#8734;) lies below 1/x&#178; at every x. The shaded region under the smaller curve is therefore contained in the region under the larger one, whose total area is 1. A region inside a finite area is finite, so &#8747;&#8321;^&#8734; dx/(x&#178; + 1) converges; its value is &#960;/4.',
     }),
   };
 
@@ -615,6 +644,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-areaSoFar'} dangerouslySetInnerHTML={{ __html: demoUnits.areaSoFar }} />,
+          `1/x is the boundary case p = 1 of the p-test: any power above 1 levels off.`,
         ]
     },
     {
@@ -633,6 +664,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-compare'} dangerouslySetInnerHTML={{ __html: demoUnits.compare }} />,
+          `The test only works one way: lying below a divergent integral proves nothing.`,
         ]
     },
     {

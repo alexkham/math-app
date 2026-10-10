@@ -853,6 +853,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 
@@ -1503,6 +1504,18 @@ const hypergeometricExplanations = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const hgC = (n, k) => { if (k < 0 || k > n) return 0; let c = 1; for (let i = 1; i <= k; i++) c = c * (n - k + i) / i; return c; };
+  const hgH = (k) => hgC(8, k) * hgC(12, 10 - k) / hgC(20, 10);
+  const hgB = (k) => hgC(10, k) * 0.4 ** k * 0.6 ** (10 - k);
+  const hgPx = (k) => k / 10.5 * 388;
+  const hgBars = [].concat(
+    Array.from({ length: 11 }, (_, k) => ({ from: 0, to: hgB(k), color: 'f', dx: hgPx(k) - 4 })),
+    Array.from({ length: 9 }, (_, k) => ({ from: 0, to: hgH(k), color: 'r', dx: hgPx(k) + 4 })));
+  const fpHyperVsBinom = { kind: 'pieces', svgTitle: 'Drawing 10 from 20 items with 8 successes, without replacement, against the binomial with p = 0.4: same mean 4, narrower spread', xRange: [-0.5, 10], yRange: [0, 0.4], xLetter: 'k',
+    pieces: [{ fn: () => 0, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [] }],
+    yBars: hgBars,
+    notes: [{ x: 6.2, y: 0.37, text: 'blue: binomial, n = 10, p = 0.4', pos: 'e', color: 'f' }, { x: 6.2, y: 0.34, text: 'amber: 10 of N = 20, K = 8', pos: 'e', color: 'r' }, { x: 6.2, y: 0.31, text: 'same mean 4', pos: 'e' }, { x: 6.2, y: 0.28, text: 'variance 2.4 vs 1.26', pos: 'e' }],
+    caption: 'Without replacement the counts bunch closer to the mean' };
   const demoUnits = {
     u_4_0: demoUnitFrame({
       svg: discretePmfDiagrams.hypergeometric,
@@ -1517,6 +1530,11 @@ const hypergeometricExplanations = {
       text: 'The staircase accumulates the PMF and reaches 1 at the last possible count. It sits close to the binomial staircase with p equal to K over N, and the two merge as N grows because drawing without replacement then barely changes the odds. Compare it with the binomial step pattern on the',
       href: '/probability/visual-tools/cdf/discrete',
       linkText: 'discrete CDF explorer',
+    }),
+    hyperVsBinom: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpHyperVsBinom),
+      caption: 'Without replacement against with replacement',
+      text: 'Ten draws from a population of 20 items, 8 of them successes. Amber bars: drawing without replacement (hypergeometric). Blue bars: the binomial with the same n = 10 and p = 8/20 = 0.4, as if each item were put back. Both have mean 4, but the amber bars are taller in the middle and thinner in the tails: the variance falls from 2.4 to 2.4 &#183; (20 &#8722; 10)/(20 &#8722; 1) &#8776; 1.26.',
     }),
   };
 
@@ -1647,6 +1665,8 @@ export default function HypergeometricDistributionPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-hyperVsBinom'} dangerouslySetInnerHTML={{ __html: demoUnits.hyperVsBinom }} />,
+          `The factor (N − n)/(N − 1) is the whole difference: here 10/19, about one half.`,
         ]
     },
     {

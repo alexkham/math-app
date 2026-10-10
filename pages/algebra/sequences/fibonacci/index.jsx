@@ -12,6 +12,8 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -427,6 +429,42 @@ const schemas = {
   },
 }
 
+  const fibF = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
+  const fibRatio = (n) => fibF[n] / fibF[n - 1];
+  const fibZig = (x) => { const i = Math.min(Math.max(Math.floor(x), 1), 9); return fibRatio(i) + (fibRatio(i + 1) - fibRatio(i)) * (x - i); };
+  const fibPhi = (1 + Math.sqrt(5)) / 2;
+  const fibDots = (fn, ns, color) => ns.map((n) => ({ fn, from: n, to: n, ends: ['closed', 'closed'], color }));
+  const fpFibRatios = { kind: 'pieces', svgTitle: 'Ratios of consecutive Fibonacci numbers 1, 2, 1.5, 1.667, 1.6, ... close in on phi from alternating sides', xRange: [0, 11], yRange: [0, 2.5], xLetter: 'n',
+    pieces: [
+      { fn: () => fibPhi, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[0, 11]], label: { text: 'φ ≈ 1.618', x: 10.9, y: fibPhi, pos: 'nw' } },
+      { fn: fibZig, from: 99, to: 99, ends: [null, null], color: 'f', ghost: [[1, 10]] },
+      ...fibDots(fibRatio, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'f'),
+    ],
+    notes: [{ x: 1.15, y: 2.05, text: '2/1', pos: 'e', color: 'f' }, { x: 1.1, y: 0.85, text: '1/1', pos: 'e', color: 'f' }, { x: 3.1, y: 1.4, text: '3/2', pos: 'e', color: 'f' },
+      { x: 4.1, y: 1.8, text: '5/3', pos: 'e', color: 'f' }, { x: 5.1, y: 1.45, text: '8/5', pos: 'e', color: 'f' },
+      { x: 0.4, y: 0.3, text: 'Fₙ₊₁ / Fₙ alternates above and below φ, closing in', pos: 'e', color: 'r' }],
+    caption: 'The ratios of consecutive Fibonacci numbers converge to φ' };
+  const fpBinet = { kind: 'pieces', svgTitle: 'Fibonacci numbers sit on the curve phi^n / sqrt 5: F10 = 55 and phi^10/sqrt5 = 55.004', xRange: [0, 11], yRange: [-5, 95], yStep: 10, xLetter: 'n',
+    pieces: [
+      { fn: (x) => fibPhi ** x / Math.sqrt(5), from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[0, 11]], label: { text: 'y = φⁿ / √5', x: 9.6, y: fibPhi ** 9.6 / Math.sqrt(5), pos: 'w' } },
+      ...fibDots((n) => fibF[n - 1], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 'f'),
+    ],
+    points: [{ x: 10, y: 55, label: 'F₁₀ = 55', pos: 'se' }],
+    notes: [{ x: 0.4, y: 85, text: 'φ¹⁰/√5 ≈ 55.004: round it to get F₁₀', pos: 'e', color: 'r' }, { x: 0.4, y: 75, text: 'the ψⁿ/√5 part is always under 1/2', pos: 'e' }],
+    caption: 'Fₙ is φⁿ/√5 rounded to the nearest whole number' };
+  const demoUnits = {
+    fibRatios: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpFibRatios),
+      caption: 'Ratios settling on the golden ratio',
+      text: 'Each dot is the ratio F&#8345;&#8330;&#8321;/F&#8345;: 1/1, 2/1, 3/2, 5/3, 8/5, and so on. The ratios jump above and below the dashed level &#966; &#8776; 1.618, and each jump is smaller than the last. By n = 6 the dots sit on the line to the eye; 89/55 = 1.61818&#8230; already agrees with &#966; to three decimal places.',
+    }),
+    binet: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpBinet),
+      caption: 'Binet&#8217;s formula without the small term',
+      text: 'The dots are F&#8321; to F&#8321;&#8321;; the dashed curve is &#966;&#8319;/&#8730;5 alone, with the &#968;&#8319; term dropped. The dots sit on the curve: at n = 10 the curve gives 55.004 and F&#8321;&#8320; = 55. The dropped part &#968;&#8319;/&#8730;5 is smaller than 1/2 for every n, so rounding &#966;&#8319;/&#8730;5 to the nearest whole number gives F&#8345; exactly.',
+    }),
+  };
+
    return {
   props:{
      sectionsContent,
@@ -435,6 +473,7 @@ const schemas = {
      capstoneTable,
      faqQuestions,
      schemas,
+     demoUnits,
      seoData: {
        title: "Fibonacci Sequence: Golden Ratio & Binet | Learn Math Class",
        description: "Learn the Fibonacci sequence: recursive definition, golden ratio limit, Binet's closed-form formula, Cassini's identity, Zeckendorf's theorem, and Lucas numbers.",
@@ -446,7 +485,7 @@ const schemas = {
 }
    }
 
-export default function FibonacciSequencePage({seoData, sectionsContent, introContent, obj4Table, capstoneTable, faqQuestions, schemas}) {
+export default function FibonacciSequencePage({seoData, sectionsContent, introContent, obj4Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -473,6 +512,8 @@ export default function FibonacciSequencePage({seoData, sectionsContent, introCo
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-fibRatios'} dangerouslySetInnerHTML={{ __html: demoUnits.fibRatios }} />,
+          `The alternation comes from ψ: its powers flip sign while shrinking toward 0.`,
         ]
     },
     {
@@ -481,6 +522,8 @@ export default function FibonacciSequencePage({seoData, sectionsContent, introCo
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-binet'} dangerouslySetInnerHTML={{ __html: demoUnits.binet }} />,
+          `Growth per step is the factor φ ≈ 1.618, the same φ the ratios converge to.`,
         ]
     },
     {

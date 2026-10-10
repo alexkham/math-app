@@ -3,6 +3,9 @@ import { useState, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { processContent } from '@/app/utils/contentProcessor';
 
+// Axis ticks: round away float noise (1.0000000000000002 -> 1, 6.907755278982137 -> 6.908).
+const fmtTick = (v) => (typeof v === 'number' && Number.isFinite(v) ? String(Math.round(v * 1000) / 1000) : v);
+
 export default function DiscreteDistributionsCDF({ explanationsOverride = {}, explanationsAppend = {} }) {
   const [activeDistribution, setActiveDistribution] = useState('discreteUniform');
   
@@ -633,6 +636,8 @@ export default function DiscreteDistributionsCDF({ explanationsOverride = {}, ex
                 />
                 <YAxis 
                   domain={[0, 1]}
+                  allowDataOverflow
+                  tickFormatter={fmtTick}
                   label={{ value: 'Cumulative Probability F(k)', angle: -90, position: 'insideLeft', style: { fontWeight: 600 } }}
                   stroke="#1a3a52"
                 />

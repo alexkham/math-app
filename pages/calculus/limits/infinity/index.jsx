@@ -12,6 +12,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 
 
@@ -673,6 +674,24 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const inR = (x) => (2 * x + 1) / (x - 3);
+  const fpHorizAsym = { kind: 'pieces', svgTitle: '(2x + 1)/(x - 3) approaches the horizontal asymptote y = 2 as x goes to infinity and to minus infinity', xRange: [-12, 18], yRange: [-6, 10], xStep: 3, yStep: 2,
+    pieces: [
+      { fn: () => 2, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[-12, 18]], label: { text: 'y = 2', x: -11.5, y: 2, pos: 'ne' } },
+      { fn: inR, from: -12, to: 2.3, ends: [null, null], color: 'f' },
+      { fn: inR, from: 3.85, to: 18, ends: [null, null], color: 'f', label: { text: 'y = (2x + 1)/(x − 3)', x: 9, y: inR(9), pos: 'ne' } },
+    ],
+    vlines: [{ x: 3, label: 'x = 3' }],
+    notes: [{ x: -11.5, y: -4.5, text: 'x → −∞: from below', pos: 'e', color: 'r' }, { x: 6.2, y: 7.8, text: 'x → ∞: from above', pos: 'e', color: 'r' }],
+    caption: 'Both ends settle onto y = 2, the ratio of leading coefficients' };
+  const fpGrowthRace = { kind: 'pieces', svgTitle: 'x^3 leads e^x for a while, but e^x overtakes it after x about 4.54 and the ratio x^3/e^x tends to 0', xRange: [0, 7], yRange: [-20, 300], yStep: 50,
+    pieces: [
+      { fn: (x) => x ** 3, from: 0, to: 6.6, ends: [null, null], color: 'g', label: { text: 'x³', x: 6.3, y: 6.3 ** 3, pos: 'se' } },
+      { fn: Math.exp, from: 0, to: 5.7, ends: [null, null], color: 'f', label: { text: 'eˣ', x: 5.5, y: Math.exp(5.5), pos: 'nw' } },
+      { fn: (x) => 20 * Math.log(Math.max(x, 0.01)), from: 1, to: 7, ends: [null, null], color: 'r', label: { text: '20 ln x', x: 6.5, y: 20 * Math.log(6.5), pos: 'n' } },
+    ],
+    points: [{ x: 4.536, y: 4.536 ** 3, label: 'eˣ passes x³ at x ≈ 4.54', pos: 'nw' }],
+    caption: 'Logarithm ≪ power ≪ exponential: the exponential wins in the end' };
   const demoUnits = {
     vertical: demoUnitFrame({
       svg: functionLimitDiagrams['infinite-pos'],
@@ -687,6 +706,16 @@ const schemas = {
       text: 'The left probe reads &#8722;2 and the right one 2, and moving inward they diverge in opposite directions: the two one-sided infinite limits have opposite signs, so the curve leaves the picture downward on one side of the asymptote and upward on the other. The two-sided limit does not exist even as an infinite limit. Compare the two signs on the',
       href: '/calculus/visual-tools/limit',
       linkText: 'limit explorer',
+    }),
+    horizAsym: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpHorizAsym),
+      caption: 'A horizontal asymptote at both ends',
+      text: 'The section&#8217;s (2x + 1)/(x &#8722; 3). Far to the right the graph sits just above the dashed line y = 2 and closes in on it; far to the left it sits just below it and closes in from beneath. Both limits at infinity equal 2, the ratio of the leading coefficients 2/1, so y = 2 is the horizontal asymptote in both directions. Near x = 3 the same function has a vertical asymptote instead.',
+    }),
+    growthRace: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpGrowthRace),
+      caption: 'Exponential beats power beats logarithm',
+      text: 'On [0, 7]: x&#179; pulls ahead of e&#739; for a while, but e&#739; catches it at x &#8776; 4.54 and from then on leaves it further and further behind, so x&#179;/e&#739; &#8594; 0. The logarithm, even multiplied by 20, barely rises on this scale and is overtaken by x&#179; almost at once. The ordering ln x &#8810; x&#8319; &#8810; e&#739; holds for every power n; a larger n only delays the crossing.',
     }),
   };
 
@@ -739,6 +768,8 @@ export default function InfinityPage({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-horizAsym'} dangerouslySetInnerHTML={{ __html: demoUnits.horizAsym }} />,
+          `A graph may cross its horizontal asymptote; the asymptote only describes the far ends.`,
         ]
     },
     {
@@ -765,6 +796,8 @@ export default function InfinityPage({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-growthRace'} dangerouslySetInnerHTML={{ __html: demoUnits.growthRace }} />,
+          `For x¹⁰ the crossing with eˣ comes only near x ≈ 35.8, but it does come.`,
         ]
     },
     {

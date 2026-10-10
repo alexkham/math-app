@@ -614,7 +614,7 @@ Use Meaning for interpretation of the current scenario; use Theory for the under
 - **Sweep through the interval** — keep $P_1$ at a fixed position and slide $P_2$ across the curve. Watch the slope readout flip sign as $P_2$ crosses the local max and local min.
 - **Shrink the interval manually** — place $P_1$ and $P_2$ very close to each other near $x = -1$. The slope approaches zero, mirroring what the tighten animation does automatically.
 - **Compare equal intervals** — put both points on the left wing, then on the right wing. Both readings are positive, but the magnitudes differ because the curve steepens away from the origin.
-- **Cross the inflection** — straddle $x = 0$ symmetrically. Over $[-a, a]$ the average rate works out to $\frac{a^2}{3} - 1$, so it is always negative and climbs toward $-1$ as the interval shrinks. The Descending scenario uses $a = 0.55$ and reads $-0.90$.
+- **Cross the inflection** — straddle $x = 0$ symmetrically. Over $[-a, a]$ the average rate works out to $\\frac{a^2}{3} - 1$, so it is always negative and climbs toward $-1$ as the interval shrinks. The Descending scenario uses $a = 0.55$ and reads $-0.90$.
 
 The bottom-of-graph readouts and the formulas in the Computation tab stay synchronized, so any drag is immediately reflected in the arithmetic.`,
       before: ``,
@@ -708,11 +708,11 @@ For deeper coverage, see the **critical points page** and the **extrema classifi
       title: `Ascending: a Positive Average Rate`,
       content: `The Ascending scenario puts $P_1$ at $x = -2.05$ and $P_2$ at $x = -1.35$, both on the left wing where the cubic is climbing. The two coordinates are $f(-2.05) = -0.8217$ and $f(-1.35) = 0.5299$, so
 
-$\text{slope} = \frac{0.5299 - (-0.8217)}{-1.35 - (-2.05)} = \frac{1.3516}{0.70} = 1.93$
+$\\text{slope} = \\frac{0.5299 - (-0.8217)}{-1.35 - (-2.05)} = \\frac{1.3516}{0.70} = 1.93$
 
 A positive average rate, and the chevrons along the shaded band all point uphill to confirm it.`,
       before: ``,
-      after: `The number $1.93$ is not the derivative at any particular point — it is the *average* over the whole interval. Compare it with the two endpoint derivatives, $f'(-2.05) = 3.20$ and $f'(-1.35) = 0.82$: the average sits between them, as the mean value theorem promises it must.
+      after: `The number $1.93$ is not the derivative at any particular point — it is the average over the whole interval. Compare it with the two endpoint derivatives, $f'(-2.05) = 3.20$ and $f'(-1.35) = 0.82$: the average sits between them, as the mean value theorem promises it must.
 
 That is the honest reading of any secant slope. It reports the net change per unit of $x$ across the interval and says nothing about what happened inside. Shrink the interval and the average converges on a single instantaneous rate, which is the move traced in [from secant slope to derivative](!#from-secant-to-derivative).`,
       link: '',
@@ -721,13 +721,13 @@ That is the honest reading of any secant slope. It reports the net change per un
       title: `Descending: a Negative Average Rate`,
       content: `The Descending scenario straddles the middle interval symmetrically, $P_1$ at $x = -0.55$ and $P_2$ at $x = 0.55$. Because $f$ is an odd function the two heights are exact opposites, $f(-0.55) = 0.4945$ and $f(0.55) = -0.4945$, so
 
-$\text{slope} = \frac{-0.4945 - 0.4945}{1.10} = \frac{-0.9891}{1.10} = -0.90$
+$\\text{slope} = \\frac{-0.4945 - 0.4945}{1.10} = \\frac{-0.9891}{1.10} = -0.90$
 
 The chevrons run downhill through the whole band, matching the sign.`,
       before: ``,
       after: `On $(-1, 1)$ the derivative $f'(x) = x^2 - 1$ is negative everywhere, so every secant drawn inside that interval comes out negative too. There is no way to pick two points in this band and get a rising average.
 
-This scenario also gives the cleanest view of the symmetric case: over $[-a, a]$ the average rate is exactly $\frac{a^2}{3} - 1$. At $a = 0.55$ that is $-0.90$, the value on screen; as $a$ shrinks the reading climbs toward $-1$, which is $f'(0)$.`,
+This scenario also gives the cleanest view of the symmetric case: over $[-a, a]$ the average rate is exactly $\\frac{a^2}{3} - 1$. At $a = 0.55$ that is $-0.90$, the value on screen; as $a$ shrinks the reading climbs toward $-1$, which is $f'(0)$.`,
       link: '',
     },
     obj13: {

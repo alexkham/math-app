@@ -156,7 +156,7 @@ export async function getStaticProps() {
 
 The tabs fall into two groups. **Sine and cosine** are proved from scratch: their tabs open a step-by-step derivation that starts from the angle sum and ends at the identity. **Tangent, cosecant, secant and cotangent** are derived from those two: their tabs open a shorter card that shows how each follows from the sine and cosine results.
 
-Switching tabs resets the derivation to its start, so every function begins from step 0. The angle θ is kept, so all six identities can be compared at the same value. The current function is also written into the page address as \`?fn=\`, which means a link to this page can open straight onto, say, the cosine derivation.
+Switching tabs resets the derivation to its start, so every function begins from step 0. The angle θ is kept, so all six identities can be compared at the same value. The current function is also written into the page address as @[?fn=]@, which means a link to this page can open straight onto, say, the cosine derivation.
 
 The [formula table](!#reading-the-formula-table) under the tool is a second way to switch: clicking any of its rows opens that function.`,
       before: ``,

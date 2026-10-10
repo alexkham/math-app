@@ -102,8 +102,9 @@ export default function MarkovInequality() {
   const height = 400;
   const padding = { top: 40, right: 40, bottom: 60, left: 60 };
 
-  const scaleX = (x) => padding.left + (x / maxX) * (width - padding.left - padding.right);
-  const scaleY = (y) => height - padding.bottom - (y / maxY) * (height - padding.top - padding.bottom);
+  // 2-decimal coordinates: the server and the browser can differ in the last digit of long floats (hydration mismatch)
+  const scaleX = (x) => Math.round((padding.left + (x / maxX) * (width - padding.left - padding.right)) * 100) / 100;
+  const scaleY = (y) => Math.round((height - padding.bottom - (y / maxY) * (height - padding.top - padding.bottom)) * 100) / 100;
 
   const curvePath = !isDiscrete ? points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${scaleX(p.x)},${scaleY(p.y)}`).join(' ') : '';
 

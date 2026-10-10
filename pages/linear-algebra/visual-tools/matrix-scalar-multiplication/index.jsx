@@ -264,7 +264,7 @@ Two consequences are worth knowing because they are easy to get wrong. The trace
 
   const explanations = {
     intro: note('No shape rule to satisfy - k multiplies a matrix of any dimensions.', 'the-opening-scene', 'Learn more about the opening scene'),
-    step: note('Six multiplications sharing one factor, each independent of the others.', 'one-cell-at-a-time', 'Learn more about the cell sweep'),
+    step: note('One multiplication per entry, all sharing the same factor k and each independent of the others.', 'one-cell-at-a-time', 'Learn more about the cell sweep'),
     done: note('One factor everywhere - and note det(kA) = k^n det(A), not k det(A).', 'the-completed-product', 'Learn more about the completed product'),
   }
 

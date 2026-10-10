@@ -1351,7 +1351,7 @@ export const FAMILIES = {
       { k: 'b', label: 'intercept b', min: -8, max: 8, step: 0.5, def: 0 },
     ],
     fn: p => x => p.a * x + p.b,
-    eq: p => `f(x) = ${fmt(p.a)}x ${sign(p.b)} ${fmt(Math.abs(p.b))}`,
+    eq: p => `f(x) = ${poly([[p.a, 'x'], [p.b, '']])}`,
     explanation:
       '## Linear\n' +
       'A **straight line**: $f(x) = ax + b$.\n' +
@@ -1370,7 +1370,7 @@ export const FAMILIES = {
       { k: 'c', label: 'c', min: -8, max: 8, step: 0.5, def: -3 },
     ],
     fn: p => x => p.a * x * x + p.b * x + p.c,
-    eq: p => `f(x) = ${fmt(p.a)}x² ${sign(p.b)} ${fmt(Math.abs(p.b))}x ${sign(p.c)} ${fmt(Math.abs(p.c))}`,
+    eq: p => `f(x) = ${poly([[p.a, 'x²'], [p.b, 'x'], [p.c, '']])}`,
     explanation:
       '## Quadratic\n' +
       'A **parabola**: $f(x) = ax^2 + bx + c$.\n' +
@@ -1387,7 +1387,7 @@ export const FAMILIES = {
       { k: 'b', label: 'b', min: -6, max: 6, step: 0.5, def: -2 },
     ],
     fn: p => x => p.a * x * x * x + p.b * x,
-    eq: p => `f(x) = ${fmt(p.a)}x³ ${sign(p.b)} ${fmt(Math.abs(p.b))}x`,
+    eq: p => `f(x) = ${poly([[p.a, 'x³'], [p.b, 'x']])}`,
     explanation:
       '## Cubic\n' +
       'An odd-degree **polynomial**: $f(x) = ax^3 + bx$.\n' +
@@ -1403,7 +1403,7 @@ export const FAMILIES = {
       { k: 'n', label: 'exponent n', min: -3, max: 4, step: 0.5, def: 2 },
     ],
     fn: p => x => p.a * Math.pow(x, p.n),
-    eq: p => `f(x) = ${fmt(p.a)}·x^${fmt(p.n)}`,
+    eq: p => `f(x) = ${p.n === 0 ? poly([[p.a, '']]) : poly([[p.a, p.n === 1 ? 'x' : `x^${fmtU(p.n)}`]])}`,
     explanation:
       '## Power\n' +
       'The family $f(x) = ax^n$.\n' +
@@ -1419,7 +1419,7 @@ export const FAMILIES = {
       { k: 'h', label: 'shift h', min: -6, max: 6, step: 0.5, def: 0 },
     ],
     fn: p => x => p.a / (x - p.h),
-    eq: p => `f(x) = ${fmt(p.a)} / (x ${sign(-p.h)} ${fmt(Math.abs(p.h))})`,
+    eq: p => `f(x) = ${p.a === 0 ? '0' : `${fmtU(p.a)} / ${p.h === 0 ? 'x' : `(${shifted(p.h)})`}`}`,
     explanation:
       '## Rational\n' +
       'A **reciprocal** curve: $f(x) = \\dfrac{a}{x - h}$.\n' +
@@ -1435,7 +1435,7 @@ export const FAMILIES = {
       { k: 'base', label: 'base', min: 0.2, max: 4, step: 0.1, def: 2 },
     ],
     fn: p => x => p.a * Math.pow(p.base, x),
-    eq: p => `f(x) = ${fmt(p.a)}·${fmt(p.base)}^x`,
+    eq: p => `f(x) = ${scaled(p.a, `${fmt(p.base)}^x`)}`,
     explanation:
       '## Exponential\n' +
       'Constant **multiplicative** growth: $f(x) = a\\,b^x$.\n' +
@@ -1451,7 +1451,7 @@ export const FAMILIES = {
       { k: 'd', label: 'shift d', min: -6, max: 6, step: 0.5, def: 0 },
     ],
     fn: p => x => (x > 0 ? p.a * Math.log(x) + p.d : NaN),
-    eq: p => `f(x) = ${fmt(p.a)}·ln(x) ${sign(p.d)} ${fmt(Math.abs(p.d))}`,
+    eq: p => `f(x) = ${scaled(p.a, 'ln(x)')}${plus(p.d)}`,
     explanation:
       '## Logarithmic\n' +
       'The **inverse of the exponential**: $f(x) = a\\ln(x) + d$.\n' +
@@ -1467,11 +1467,11 @@ export const FAMILIES = {
     params: [
       { k: 'A', label: 'amplitude A', min: 0, max: 5, step: 0.25, def: 1 },
       { k: 'B', label: 'frequency B', min: 0.25, max: 4, step: 0.25, def: 1 },
-      { k: 'C', label: 'phase C', min: -3.14, max: 3.14, step: 0.1, def: 0 },
+      { k: 'C', label: 'phase C', min: -3.1, max: 3.1, step: 0.1, def: 0 },
       { k: 'D', label: 'offset D', min: -5, max: 5, step: 0.5, def: 0 },
     ],
     fn: p => x => p.A * Math.sin(p.B * x + p.C) + p.D,
-    eq: p => `f(x) = ${fmt(p.A)}·sin(${fmt(p.B)}x ${sign(p.C)} ${fmt(Math.abs(p.C))}) ${sign(p.D)} ${fmt(Math.abs(p.D))}`,
+    eq: p => `f(x) = ${p.A === 0 ? poly([[p.D, '']]) : scaled(p.A, `sin(${poly([[p.B, 'x'], [p.C, '']])})`) + plus(p.D)}`,
     explanation:
       '## Sine\n' +
       'The general sinusoid: $f(x) = A\\sin(Bx + C) + D$.\n' +
@@ -1489,11 +1489,11 @@ export const FAMILIES = {
     params: [
       { k: 'A', label: 'amplitude A', min: 0, max: 5, step: 0.25, def: 1 },
       { k: 'B', label: 'frequency B', min: 0.25, max: 4, step: 0.25, def: 1 },
-      { k: 'C', label: 'phase C', min: -3.14, max: 3.14, step: 0.1, def: 0 },
+      { k: 'C', label: 'phase C', min: -3.1, max: 3.1, step: 0.1, def: 0 },
       { k: 'D', label: 'offset D', min: -5, max: 5, step: 0.5, def: 0 },
     ],
     fn: p => x => p.A * Math.cos(p.B * x + p.C) + p.D,
-    eq: p => `f(x) = ${fmt(p.A)}·cos(${fmt(p.B)}x ${sign(p.C)} ${fmt(Math.abs(p.C))}) ${sign(p.D)} ${fmt(Math.abs(p.D))}`,
+    eq: p => `f(x) = ${p.A === 0 ? poly([[p.D, '']]) : scaled(p.A, `cos(${poly([[p.B, 'x'], [p.C, '']])})`) + plus(p.D)}`,
     explanation:
       '## Cosine\n' +
       '$f(x) = A\\cos(Bx + C) + D$.\n' +
@@ -1512,11 +1512,11 @@ export const FAMILIES = {
     params: [
       { k: 'A', label: 'amplitude A', min: 0, max: 5, step: 0.25, def: 1 },
       { k: 'B', label: 'frequency B', min: 0.25, max: 4, step: 0.25, def: 1 },
-      { k: 'C', label: 'phase C', min: -3.14, max: 3.14, step: 0.1, def: 0 },
+      { k: 'C', label: 'phase C', min: -3.1, max: 3.1, step: 0.1, def: 0 },
       { k: 'D', label: 'offset D', min: -5, max: 5, step: 0.5, def: 0 },
     ],
     fn: p => x => p.A * Math.tan(p.B * x + p.C) + p.D,
-    eq: p => `f(x) = ${fmt(p.A)}·tan(${fmt(p.B)}x ${sign(p.C)} ${fmt(Math.abs(p.C))}) ${sign(p.D)} ${fmt(Math.abs(p.D))}`,
+    eq: p => `f(x) = ${p.A === 0 ? poly([[p.D, '']]) : scaled(p.A, `tan(${poly([[p.B, 'x'], [p.C, '']])})`) + plus(p.D)}`,
     explanation:
       '## Tangent\n' +
       '$f(x) = A\\tan(Bx + C) + D$, with $\\tan(x) = \\dfrac{\\sin(x)}{\\cos(x)}$.\n' +
@@ -1537,7 +1537,7 @@ export const FAMILIES = {
       { k: 'h', label: 'shift h', min: -6, max: 6, step: 0.5, def: 0 },
     ],
     fn: p => x => p.a * Math.abs(x - p.h),
-    eq: p => `f(x) = ${fmt(p.a)}·|x ${sign(-p.h)} ${fmt(Math.abs(p.h))}|`,
+    eq: p => `f(x) = ${scaled(p.a, `|${shifted(p.h)}|`)}`,
     explanation:
       '## Absolute value\n' +
       'A sharp **V shape**: $f(x) = a\\,|x - h|$.\n' +
@@ -1553,7 +1553,7 @@ export const FAMILIES = {
       { k: 'h', label: 'shift h', min: -6, max: 6, step: 0.5, def: 0 },
     ],
     fn: p => x => (x - p.h >= 0 ? p.a * Math.sqrt(x - p.h) : NaN),
-    eq: p => `f(x) = ${fmt(p.a)}·√(x ${sign(-p.h)} ${fmt(Math.abs(p.h))})`,
+    eq: p => `f(x) = ${scaled(p.a, `√(${shifted(p.h)})`)}`,
     explanation:
       '## Square root\n' +
       'Half a sideways parabola: $f(x) = a\\sqrt{x - h}$.\n' +
@@ -1570,6 +1570,26 @@ function fmt(v) {
   return Math.abs(r - Math.round(r)) < 1e-4 ? String(Math.round(r)) : String(r);
 }
 function sign(v) { return v >= 0 ? '+' : '−'; }
+function fmtU(v) { const t = fmt(v); return t.startsWith('-') ? `\u2212${t.slice(1)}` : t; }
+// Badge text helpers: no "1·", no "+ 0", no "(x + 0)", a typographic minus.
+function scaled(a, expr) {
+  if (a === 0) return '0';
+  if (a === 1) return expr;
+  if (a === -1) return `\u2212${expr}`;
+  return `${fmtU(a)}·${expr}`;
+}
+function plus(v) { return v === 0 ? '' : ` ${v > 0 ? '+' : '\u2212'} ${fmt(Math.abs(v))}`; }
+function shifted(h) { return h === 0 ? 'x' : `x ${h > 0 ? '\u2212' : '+'} ${fmt(Math.abs(h))}`; }
+// [[coef, 'x²'], [coef, 'x'], [coef, '']] -> "0.3x² − 3"; all zero -> "0"
+function poly(terms) {
+  let out = '';
+  for (const [c, v] of terms) {
+    if (c === 0) continue;
+    const mag = v && Math.abs(c) === 1 ? v : `${fmt(Math.abs(c))}${v}`;
+    out += out ? ` ${c > 0 ? '+' : '\u2212'} ${mag}` : `${c < 0 ? '\u2212' : ''}${mag}`;
+  }
+  return out || '0';
+}
 
 function FamilyGlyph({ d, active }) {
   return (

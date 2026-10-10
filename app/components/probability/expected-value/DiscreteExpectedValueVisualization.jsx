@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 // Hoisted out of the useState call and exported so the page's frozen-state
 // still is built from the tool's own opening distribution (Line 1). Cloned on
@@ -21,8 +21,21 @@ export default function DiscreteExpectedValueVisualization() {
     return values.reduce((sum, val) => sum + val.x * val.p, 0);
   };
 
+  // While a slider is dragged, rescale from the values at drag start, so the result
+  // depends only on where the thumb ends, not on every value passed on the way.
+  const dragBase = useRef(null);
+  const startDrag = () => {
+    dragBase.current = values.map(v => ({ ...v }));
+    const end = () => { dragBase.current = null; };
+    window.addEventListener('pointerup', end, { once: true });
+    window.addEventListener('pointercancel', end, { once: true });
+  };
+
   const handleProbabilityChange = (index, newP) => {
-    const newValues = [...values];
+    // On release the browser re-sends the thumb value snapped to the 0.01 step (0.526 -> 0.53);
+    // renormalising that again would drift the distribution, so ignore it.
+    if (!dragBase.current && Math.abs((parseFloat(newP) || 0) - values[index].p) < 0.005) return;
+    const newValues = (dragBase.current || values).map(v => ({ ...v }));
     newValues[index].p = parseFloat(newP) || 0;
     
     // Normalize probabilities to sum to 1
@@ -211,6 +224,7 @@ export default function DiscreteExpectedValueVisualization() {
                     max="1"
                     step="0.01"
                     value={val.p}
+                    onPointerDown={startDrag}
                     onChange={(e) => handleProbabilityChange(idx, e.target.value)}
                     style={{ width: '100%', marginBottom: '5px' }}
                   />

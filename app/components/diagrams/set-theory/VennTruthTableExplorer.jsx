@@ -52,7 +52,20 @@ export function toLogicNotation(src) {
   out = out.replace(/\bU\b/g, '\u22a4');
   // Postfix complement becomes prefix negation on the atom it follows.
   out = out.replace(/([A-Z])\s*(?:\u1d9c|'|\u2032|\*|\^c)/g, '\u00ac$1');
-  out = out.replace(/\)\s*(?:\u1d9c|'|\u2032|\*|\^c)/g, ')\u2032');
+  // A complemented bracket becomes prefix negation too: (A ∨ B)′ → ¬(A ∨ B).
+  for (let guard = 0; guard < 32; guard++) {
+    const m = /\)\s*(?:\u1d9c|'|\u2032|\*|\^c)/.exec(out);
+    if (!m) break;
+    let depth = 0, i = m.index;
+    for (; i >= 0; i--) {
+      if (out[i] === ')') depth++;
+      else if (out[i] === '(' && --depth === 0) break;
+    }
+    const close = m.index + 1, after = m.index + m[0].length;
+    out = i < 0
+      ? out.slice(0, close) + out.slice(after)
+      : out.slice(0, i) + '\u00ac' + out.slice(i, close) + out.slice(after);
+  }
   out = out.replace(/~|!/g, '\u00ac');
   return out.replace(/\s+/g, ' ').trim();
 }
@@ -199,7 +212,7 @@ export const DEFAULT_EXPLANATIONS = {
 
   'named': {
     title: (ctx) => 'This is ' + ctx.formName,
-    body: (ctx) => 'The result column is $' + ctx.signature + '$, which is exactly the column for **' + ctx.formGloss + '**.\n\nWritten as sets it is $' + ctx.formExpr + '$. Written as logic it is $' + ctx.formLogic + '$. Same column, same regions, two notations.\n\nThat correspondence is not a coincidence or an analogy. Intersection is conjunction, union is disjunction, complement is negation \u2014 and every set identity you can prove is a logical equivalence you have already proved, and the other way round.'
+    body: (ctx) => 'The result column is $' + ctx.signature + '$, which is exactly the column for **' + ctx.formGloss + '**.\n\nWritten as sets it is $' + ctx.formExpr.replace(/\\/g, '\\setminus ') + '$. Written as logic it is $' + ctx.formLogic + '$. Same column, same regions, two notations.\n\nThat correspondence is not a coincidence or an analogy. Intersection is conjunction, union is disjunction, complement is negation \u2014 and every set identity you can prove is a logical equivalence you have already proved, and the other way round.'
   },
 
   'independent': {
@@ -591,7 +604,9 @@ export const VennTruthTableExplorer = (props) => {
             y="0"
             width={geo.width}
             height={geo.height}
-            fill="none"
+            // the border of the whole drawing only reaches U; a light accent fill marks inner regions too
+            fill={theme.accent}
+            fillOpacity="0.3"
             stroke={theme.accent}
             strokeWidth="7"
             strokeDasharray="6 4"
@@ -812,8 +827,9 @@ export const VennTruthTableExplorer = (props) => {
                             {r.vars[s] ? trueSymbol : falseSymbol}
                           </td>
                         ))}
-                        <td className={'vtt-result ' + (on ? 'vtt-t' : 'vtt-f')}>
-                          {on ? trueSymbol : falseSymbol}
+                        <td className={'vtt-result ' + (evaluation.error ? '' : on ? 'vtt-t' : 'vtt-f')}>
+                          {/* no answer while the expression does not parse - F would read as 'false everywhere' */}
+                          {evaluation.error ? '\u2013' : on ? trueSymbol : falseSymbol}
                         </td>
                       </tr>
                     );

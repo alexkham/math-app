@@ -742,7 +742,7 @@ Two other sign conventions are also handled correctly:
 
     obj11: {
       title: `Left Rule: Every Rectangle Falls Short`,
-      content: `On the tool's opening setup — $f(x) = x^2$ from $a = 0$ to $b = 3$ with $n = 8$ strips, so $\Delta x = 0.375$ — the left rule takes each rectangle's height from the left edge of its strip.
+      content: `On the tool's opening setup — $f(x) = x^2$ from $a = 0$ to $b = 3$ with $n = 8$ strips, so $\\Delta x = 0.375$ — the left rule takes each rectangle's height from the left edge of its strip.
 
 $S_8 = 7.3828$ against a true integral of $9$, an error of $-1.6172$.
 
@@ -750,7 +750,7 @@ Because $x^2$ is increasing across the whole interval, the left edge is the lowe
       before: ``,
       after: `That undershoot is not a quirk of these numbers — it is guaranteed for any increasing function. Reverse the situation and the guarantee reverses with it: on a decreasing function the left rule overshoots by exactly the same reasoning.
 
-The gaps between the rectangle tops and the curve are the error, laid out visually. Each one is roughly a triangle of width $\Delta x$ and height $f'(x)\Delta x$, so halving $\Delta x$ quarters each gap but doubles their number — leaving the total error only halved. That is the $O(1/n)$ behaviour discussed under [convergence and error](!#convergence-and-error).`,
+The gaps between the rectangle tops and the curve are the error, laid out visually. Each one is roughly a triangle of width $\\Delta x$ and height $f'(x)\\Delta x$, so halving $\\Delta x$ quarters each gap but doubles their number — leaving the total error only halved. That is the $O(1/n)$ behaviour discussed under [convergence and error](!#convergence-and-error).`,
       link: '',
     },
     obj12: {
@@ -789,7 +789,7 @@ The shaded shapes are visibly slanted here, which is the one method where the ou
       before: ``,
       after: `The sign is predictable. A chord across a strip of an upward-curving function lies above the curve, so the trapezoid rule overshoots whenever $f'' > 0$ and undershoots whenever $f'' < 0$. The midpoint rule errs the other way for the same reason, which is why the two bracket the answer: $8.9648 < 9 < 9.0703$.
 
-They also err in a fixed ratio — the trapezoid error runs about twice the midpoint error and opposite in sign. Combining them in the proportion that cancels both, $\frac{2 \cdot \text{mid} + \text{trap}}{3}$, gives exactly $9$ here. That combination is Simpson's rule, which is accurate to $O(1/n^4)$ in general and exact for any polynomial of degree three or less — so on $x^2$ it lands on the true value with only eight strips.`,
+They also err in a fixed ratio — the trapezoid error runs about twice the midpoint error and opposite in sign. Combining them in the proportion that cancels both, $\\frac{2 \\cdot \\text{mid} + \\text{trap}}{3}$, gives exactly $9$ here. That combination is Simpson's rule, which is accurate to $O(1/n^4)$ in general and exact for any polynomial of degree three or less — so on $x^2$ it lands on the true value with only eight strips.`,
       link: '',
     },
     obj16: {

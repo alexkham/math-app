@@ -798,7 +798,7 @@ const pitfallSections = {
  
 The most persistent confusion is between $\\sin^{-1}(x)$ and $\\frac{1}{\\sin(x)}$. The superscript $-1$ on a [trigonometric function](!/trigonometry/functions) does not mean "raise to the power $-1$." It denotes the [inverse function](!/trigonometry/inverse-functions): $\\sin^{-1}(x) = \\arcsin(x)$, which returns an angle. The reciprocal of sine is the cosecant: $\\frac{1}{\\sin(x)} = \\csc(x)$. The notation $\\arcsin$ avoids this trap entirely.
  
-The expression $\\sin^2(\\theta)$ means $(\\sin\\theta)^2$ \u2014 the square of the output. It does not mean $\\sin(\\theta^2)$, which would apply the function to a squared input. These produce different values at almost every angle: $\\sin^2(30\u00B0) = \\left(\\frac{1}{2}\\right)^2 = \\frac{1}{4}$, while $\\sin(30\u00B0^2) = \\sin(900\u00B0) = \\sin(180\u00B0) = 0$.
+The expression $\\sin^2(\\theta)$ means $(\\sin\\theta)^2$ \u2014 the square of the output. It does not mean $\\sin(\\theta^2)$, which would apply the function to a squared input. These produce different values at almost every angle: $\\sin^2(30\\u00B0) = \\left(\\frac{1}{2}\\right)^2 = \\frac{1}{4}$, while $\\sin(30\\u00B0^2) = \\sin(900\\u00B0) = \\sin(180\\u00B0) = 0$.
  
 The abbreviation $\\text{cis}(\\theta)$ stands for $\\cos\\theta + i\\sin\\theta$ and appears in some textbooks for the [trigonometric form](!/complex-numbers/trigonometric-form#7) of complex numbers. It is not a separate function \u2014 just shorthand. Not all sources use it.
  
@@ -830,9 +830,9 @@ The $\\pm$ sign in [half-angle formulas](!/trigonometry/identities#half) is not 
     title: `Domain and Mode Errors`,
     content: `Input and output conventions in trigonometry carry strict requirements that are easy to overlook \u2014 and the consequences are silently wrong answers, not error messages.
  
-The degree symbol matters. $\\sin(30)$ with no degree symbol means sine of $30$ radians \u2014 approximately $-0.988$. $\\sin(30\u00B0)$ means sine of $30$ degrees \u2014 exactly $\\frac{1}{2}$. When no unit symbol is present, radians are assumed. This mismatch is the most common source of calculator errors: the calculator is in the wrong mode, the answer looks plausible enough to go unquestioned, and the error propagates through subsequent work.
+The degree symbol matters. $\\sin(30)$ with no degree symbol means sine of $30$ radians \u2014 approximately $-0.988$. $\\sin(30\\u00B0)$ means sine of $30$ degrees \u2014 exactly $\\frac{1}{2}$. When no unit symbol is present, radians are assumed. This mismatch is the most common source of calculator errors: the calculator is in the wrong mode, the answer looks plausible enough to go unquestioned, and the error propagates through subsequent work.
  
-Radians carry no unit symbol precisely because they are dimensionless \u2014 the ratio of two lengths. The absence of a symbol is itself the indicator. When an expression like $\\sin(\\pi/6)$ appears, the $\\pi/6$ is in radians. When an expression like $\\sin(30\u00B0)$ appears, the degree symbol is explicit. Mixing the two in a single computation is a reliable path to error.
+Radians carry no unit symbol precisely because they are dimensionless \u2014 the ratio of two lengths. The absence of a symbol is itself the indicator. When an expression like $\\sin(\\pi/6)$ appears, the $\\pi/6$ is in radians. When an expression like $\\sin(30\\u00B0)$ appears, the degree symbol is explicit. Mixing the two in a single computation is a reliable path to error.
  
 The [inverse trigonometric functions](!/trigonometry/inverse-functions) take numbers as inputs and return angles as outputs. The domain of $\\arcsin$ is $[-1, 1]$ \u2014 only numbers in this interval have a corresponding angle. The output of $\\arcsin$ is an angle in $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$. Students frequently reverse these, attempting to compute $\\arcsin(2)$ (undefined) or expecting $\\arcsin$ to return a number outside its range.
  

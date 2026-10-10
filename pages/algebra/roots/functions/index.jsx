@@ -9,6 +9,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -622,6 +624,76 @@ const schemas = {
 
 
 
+  const fpSqrtRuns = { kind: 'pieces', svgTitle: 'sqrt x rises by 1 over runs of 1, 3 and 5 in x', xRange: [0, 10], yRange: [-1, 4],
+    pieces: [
+      { fn: () => 1, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[1, 4]], label: { text: 'run 3', x: 2.5, y: 1, pos: 's' } },
+      { fn: () => 2, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[4, 9]], label: { text: 'run 5', x: 6.5, y: 2, pos: 's' } },
+      { fn: (x) => Math.sqrt(x), from: 0, to: 10, ends: ['closed', null], color: 'f', label: { text: 'y = √x', x: 9.6, y: Math.sqrt(9.6), pos: 's' } },
+    ],
+    points: [{ x: 1, y: 1, label: '(1, 1)', pos: 'nw' }, { x: 4, y: 2, label: '(4, 2)', pos: 'nw' }, { x: 9, y: 3, label: '(9, 3)', pos: 'nw' }],
+    notes: [{ x: 0.3, y: 3.6, text: 'each +1 in output needs a longer run: 1, 3, 5', pos: 'e', color: 'r' }],
+    caption: 'Equal rises in √x need ever longer runs in x: 1, 3, 5, …' };
+  const fpCbrtOdd = { kind: 'pieces', svgTitle: 'The cube root graph is symmetric about the origin: (8, 2) and (-8, -2)', xRange: [-10, 10], yRange: [-3, 3], xStep: 2,
+    pieces: [
+      { fn: (x) => x / 4, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-8, 8]] },
+      { fn: (x) => Math.cbrt(x), from: -10, to: 10, ends: [null, null], color: 'f', label: { text: 'y = ∛x', x: -5, y: Math.cbrt(-5), pos: 'se' } },
+    ],
+    points: [{ x: 8, y: 2, label: '(8, 2)', pos: 'nw' }, { x: -8, y: -2, label: '(−8, −2)', pos: 'se' }, { x: 0, y: 0 }],
+    notes: [{ x: -9.6, y: 2.5, text: 'f(−x) = −f(x)', pos: 'e', color: 'r' }],
+    caption: 'The cube root is odd: ∛(−8) = −2 mirrors ∛8 = 2 through O' };
+  const fpEvenIndex = { kind: 'pieces', svgTitle: 'sqrt x and the fourth root of x: equal at 0 and 1, the fourth root lower for x > 1', xRange: [0, 16], yRange: [-1, 5], xStep: 2,
+    pieces: [
+      { fn: (x) => Math.sqrt(x), from: 0, to: 16, ends: ['closed', null], color: 'f', label: { text: 'y = √x', x: 11, y: Math.sqrt(11), pos: 'nw' } },
+      { fn: (x) => x ** 0.25, from: 0, to: 16, ends: ['closed', null], color: 'g', label: { text: 'y = ⁴√x', x: 11, y: 11 ** 0.25, pos: 'se' } },
+    ],
+    points: [{ x: 1, y: 1, label: 'both 1 at x = 1', pos: 'se' }, { x: 16, y: 4, label: '√16 = 4', pos: 'w' }, { x: 16, y: 2, label: '⁴√16 = 2', pos: 'nw' }],
+    notes: [{ x: 0.5, y: 4.6, text: 'higher even index: flatter, still starting at the origin', pos: 'e', color: 'r' }],
+    caption: 'Both even roots need x ≥ 0; the fourth root rises more slowly' };
+  const fpRadDomains = { kind: 'pieces', svgTitle: 'Domains: sqrt(x-3) for x >= 3, sqrt(5-2x) for x <= 5/2, cube root of (x+4) for all x', xRange: [-6, 8], yRange: [-3, 5],
+    pieces: [
+      { fn: (x) => Math.cbrt(x + 4), from: -6, to: 8, ends: [null, null], color: 'r', label: { text: 'y = ∛(x+4): all x', x: 7.8, y: Math.cbrt(11.8), pos: 'nw' } },
+      { fn: (x) => Math.sqrt(5 - 2 * x), from: -5.5, to: 2.5, ends: [null, 'closed'], color: 'g', label: { text: 'y = √(5−2x): x ≤ 5/2', x: -3, y: Math.sqrt(11), pos: 'ne' } },
+      { fn: (x) => Math.sqrt(x - 3), from: 3, to: 8, ends: ['closed', null], color: 'f', label: { text: 'y = √(x−3): x ≥ 3', x: 5.5, y: Math.sqrt(2.5), pos: 'se' } },
+    ],
+    notes: [{ x: -5.8, y: -2.5, text: 'even roots stop where the radicand reaches 0', pos: 'e', color: 'r' }],
+    caption: 'Even-index radicals end at radicand 0; the cube root runs on' };
+  const fpRadInverse = { kind: 'pieces', svgTitle: 'f(x) = sqrt(x-5) and its inverse x^2 + 5, x >= 0, mirror images across y = x', xRange: [-1, 12], yRange: [-1, 12],
+    pieces: [
+      { fn: (x) => x, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-1, 12]], label: { text: 'y = x', x: 11, y: 11, pos: 'nw' } },
+      { fn: (x) => Math.sqrt(x - 5), from: 5, to: 12, ends: ['closed', null], color: 'f', label: { text: 'f(x) = √(x − 5)', x: 10, y: Math.sqrt(5), pos: 'se' } },
+      { fn: (x) => x * x + 5, from: 0, to: Math.sqrt(7), ends: ['closed', null], color: 'r', label: { text: 'f⁻¹(x) = x² + 5, x ≥ 0', x: 2.2, y: 2.2 * 2.2 + 5, pos: 'e' } },
+    ],
+    points: [{ x: 9, y: 2, label: '(9, 2)', pos: 'nw' }, { x: 2, y: 9, label: '(2, 9)', pos: 'w' }],
+    notes: [{ x: 4.8, y: 0.6, text: 'starts at (5, 0)', pos: 'w' }, { x: 0.3, y: 4.4, text: 'starts at (0, 5)', pos: 'e' }],
+    caption: 'Swapping x and y: f⁻¹ takes inputs x ≥ 0, the outputs of f' };
+  const demoUnits = {
+    sqrtRuns: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpSqrtRuns),
+      caption: 'Equal rises, longer runs',
+      text: 'The section&#8217;s steps on the graph of y = &#8730;x. The output climbs from 1 to 2 while x runs from 1 to 4, a run of 3, and from 2 to 3 while x runs from 4 to 9, a run of 5. Each further unit of height costs a longer run: the curve keeps rising but flattens.',
+    }),
+    cbrtOdd: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpCbrtOdd),
+      caption: 'Odd symmetry of the cube root',
+      text: '&#8731;8 = 2 and &#8731;(&#8722;8) = &#8722;2, so (8, 2) and (&#8722;8, &#8722;2) sit on the curve, joined by a dashed segment through the origin. Every point (a, b) has its partner (&#8722;a, &#8722;b): a half-turn about the origin carries the curve onto itself, which is f(&#8722;x) = &#8722;f(x).',
+    }),
+    evenIndex: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpEvenIndex),
+      caption: 'Square root and fourth root',
+      text: 'Both curves start at the origin and need x &#8805; 0. They meet again at x = 1, where both equal 1. Beyond that the fourth root stays lower: at x = 16 it reaches only 2 while &#8730;16 = 4. The higher even index gives the flatter curve.',
+    }),
+    radDomains: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRadDomains),
+      caption: 'Where each radical exists',
+      text: 'The section&#8217;s three functions. &#8730;(x &#8722; 3) begins at x = 3 and runs right; &#8730;(5 &#8722; 2x) runs in from the left and ends at x = 5/2. Each even root stops exactly where its radicand reaches 0. &#8731;(x + 4) has no such point: it continues through x = &#8722;4 and across the whole axis.',
+    }),
+    radInverse: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRadInverse),
+      caption: 'A radical and its inverse',
+      text: 'f(x) = &#8730;(x &#8722; 5) starts at (5, 0); its inverse x&#178; + 5 starts at (0, 5). The point (9, 2) on f becomes (2, 9) on the inverse, mirrored across the dashed line y = x. The outputs of f are the numbers y &#8805; 0, so the inverse accepts only x &#8805; 0.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -631,6 +703,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Radical Functions: Graphs, Domain & Transformations | Learn Math Class",
       description: "Learn radical functions: square root and cube root graphs, domain and range, transformations, inverse relationships with power functions, and graphing strategies.",
@@ -643,7 +716,7 @@ return {
    }
 
 // export default function FunctionsPage({seoData,sectionsContent , introContent}) {
-export default function FunctionsPage({seoData, sectionsContent, introContent, obj7Table, obj10Table, summaryTable, faqQuestions, schemas}) {
+export default function FunctionsPage({seoData, sectionsContent, introContent, obj7Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -670,6 +743,8 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-sqrtRuns'} dangerouslySetInnerHTML={{ __html: demoUnits.sqrtRuns }} />,
+          `The runs grow 1, 3, 5, …: the odd numbers, since (n + 1)² − n² = 2n + 1.`,
         ]
     },
     {
@@ -686,6 +761,8 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-cbrtOdd'} dangerouslySetInnerHTML={{ __html: demoUnits.cbrtOdd }} />,
+          `The square root has no such partner points: its graph lives only at x ≥ 0.`,
         ]
     },
     {
@@ -694,6 +771,8 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-evenIndex'} dangerouslySetInnerHTML={{ __html: demoUnits.evenIndex }} />,
+          `Between 0 and 1 the order flips: there the fourth root is the higher curve.`,
         ]
     },
     {
@@ -702,6 +781,8 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-radDomains'} dangerouslySetInnerHTML={{ __html: demoUnits.radDomains }} />,
+          `For an even root, solve radicand ≥ 0; for an odd root, there is nothing to solve.`,
         ]
     },
     {
@@ -731,6 +812,8 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-radInverse'} dangerouslySetInnerHTML={{ __html: demoUnits.radInverse }} />,
+          `Without the restriction x ≥ 0, x² + 5 would not be one-to-one and could not be the inverse.`,
         ]
     },
     {

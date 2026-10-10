@@ -743,7 +743,7 @@ Slide $c$ anywhere on this family and watch nothing happen. The dashed vertical 
     },
     obj12: {
       title: `Hole: the Value Is Missing`,
-      content: `The Hole family is $f(x) = \frac{x^2 - 1}{x - 1}$. Factoring gives $\frac{(x-1)(x+1)}{x-1}$, which cancels to $x + 1$ — but only for $x \neq 1$. At $x = 1$ the original expression is $\frac{0}{0}$, so the function simply has no value there.
+      content: `The Hole family is $f(x) = \\frac{x^2 - 1}{x - 1}$. Factoring gives $\\frac{(x-1)(x+1)}{x-1}$, which cancels to $x + 1$ — but only for $x \\neq 1$. At $x = 1$ the original expression is $\\frac{0}{0}$, so the function simply has no value there.
 
 At the point of interest $c = 1$: $L^- = 2$ and $L^+ = 2$, so condition 2 passes cleanly. Condition 1 fails, because $f(1)$ is undefined. The verdict is a **removable** discontinuity.`,
       before: ``,
@@ -754,7 +754,7 @@ Note what the graph does and does not show. The curve looks like the line $y = x
     },
     obj13: {
       title: `Jump: the One-Sided Limits Disagree`,
-      content: `The Jump family is piecewise: $f(x) = x$ for $x < 0$, and $f(x) = x + 1$ for $x \geq 0$. Each piece is continuous on its own; the trouble is at the seam.
+      content: `The Jump family is piecewise: $f(x) = x$ for $x < 0$, and $f(x) = x + 1$ for $x \\geq 0$. Each piece is continuous on its own; the trouble is at the seam.
 
 At $c = 0$: $L^- = 0$ approaching from the left, $L^+ = 1$ approaching from the right. Two different finite values, so the two-sided limit does not exist and condition 2 fails. Condition 1 passes — $f(0) = 1$ is perfectly well defined.`,
       before: ``,
@@ -767,27 +767,27 @@ That is the whole distinction between a removable discontinuity and a jump: remo
       title: `Wrong Value: the Limit Exists but Misses`,
       content: `The Wrong value family is the line $f(x) = x + 1$ everywhere except at a single point, where the definition overrides it: $f(1) = 0$ instead of the natural $2$.
 
-At $c = 1$ the first two conditions pass — $f(1) = 0$ is defined, and $L^- = L^+ = 2$ so the limit exists. It is condition 3 that fails: $f(c) \neq \lim_{x \to c} f(x)$, because $0 \neq 2$. The graph shows it plainly, with the isolated dot sitting well below the line it belongs to.`,
+At $c = 1$ the first two conditions pass — $f(1) = 0$ is defined, and $L^- = L^+ = 2$ so the limit exists. It is condition 3 that fails: $f(c) \\neq \\lim_{x \\to c} f(x)$, because $0 \\neq 2$. The graph shows it plainly, with the isolated dot sitting well below the line it belongs to.`,
       before: ``,
       after: `The verdict is again **removable**, and this family exists to make the point that removable covers two different failures. In the hole family condition 1 failed and the value was missing; here condition 1 passes and condition 3 fails, because the value is present but wrong. Both are repaired the same way — set $f(1) = 2$, the value the limit dictates.
 
-That shared repair is why the classification groups them together. What matters for repairability is whether $\lim_{x \to c} f(x)$ exists, not whether $f(c)$ happens to be defined.`,
+That shared repair is why the classification groups them together. What matters for repairability is whether $\\lim_{x \\to c} f(x)$ exists, not whether $f(c)$ happens to be defined.`,
       link: '',
     },
     obj15: {
       title: `Asymptote: an Infinite Discontinuity`,
-      content: `The Asymptote family is $f(x) = \frac{1}{x^2}$, which grows without bound on both sides of the origin.
+      content: `The Asymptote family is $f(x) = \\frac{1}{x^2}$, which grows without bound on both sides of the origin.
 
-At $c = 0$ the tool reports $f(c)$ as undefined and both one-sided limits as $+\infty$. Condition 1 fails and condition 2 fails as well — and it fails for a stronger reason than in the jump case. It is not that the two sides disagree; it is that neither side approaches a finite value at all.`,
+At $c = 0$ the tool reports $f(c)$ as undefined and both one-sided limits as $+\\infty$. Condition 1 fails and condition 2 fails as well — and it fails for a stronger reason than in the jump case. It is not that the two sides disagree; it is that neither side approaches a finite value at all.`,
       before: ``,
       after: `Because the limit is infinite rather than merely two-valued, no patch helps. Assigning $f(0)$ any real number leaves the surrounding values growing arbitrarily large, so condition 3 could never hold. The tool labels this **infinite**, and marks it explicitly as not removable.
 
-Worth noticing: "$L^- = L^+ = +\infty$" is a statement about how the function behaves, not a claim that the limit exists. In the strict sense the limit fails to exist here — $\infty$ is a description of the failure, not a value.`,
+Worth noticing: "$L^- = L^+ = +\\infty$" is a statement about how the function behaves, not a claim that the limit exists. In the strict sense the limit fails to exist here — $\\infty$ is a description of the failure, not a value.`,
       link: '',
     },
     obj16: {
       title: `Staircase: Discontinuous at Every Integer`,
-      content: `The Staircase family is $f(x) = \lfloor x \rfloor + 0.5$, the floor function lifted by a half. It is flat on each interval between consecutive integers and steps up by exactly $1$ at each integer.
+      content: `The Staircase family is $f(x) = \\lfloor x \\rfloor + 0.5$, the floor function lifted by a half. It is flat on each interval between consecutive integers and steps up by exactly $1$ at each integer.
 
 The point of interest the tool jumps to first is $c = -2$, where $L^- = -2.5$, $L^+ = -1.5$, and $f(c) = -1.5$. That is a **jump** discontinuity, structurally identical to the jump family — except that here it repeats at every integer, and the jump-to buttons walk through five of them.`,
       before: ``,

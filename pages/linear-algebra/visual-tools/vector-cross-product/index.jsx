@@ -63,7 +63,7 @@ export async function getStaticProps(){
 • There is no length control: the cross product is defined only for [vectors](!/linear-algebra/vectors#1) in $\\mathbb{R}^3$, so $\\mathbf{u}$, $\\mathbf{v}$ and $\\mathbf{w}$ always have three components
 • Hover the **?** icon for a reminder of what the cross product is and how the two methods relate
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
-• Both methods produce the same three expressions — switch between them at the same step to compare`,
+• Both methods produce the same three expressions — switching restarts the scene at step 1, so step through each to compare`,
       before: ``,
       after: ``,
       link: '',

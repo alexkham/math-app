@@ -3061,11 +3061,11 @@ const conceptsContent =
   'On the number line below the graph, the colored band shows where the function accepts an input. Drag the test point to probe a specific value — a colored dot means **in domain**, red means **outside**.\n\n' +
   '### Half-line endpoints: open vs closed\n\n' +
   'A **closed** endpoint (filled circle) means the boundary value is included. $\\sqrt{x}$ at $x = 0$: yes, $\\sqrt{0} = 0$, so $x = 0$ is in the domain. Closed.\n\n' +
-  'An **open** endpoint (hollow circle) means the boundary is excluded. $\\ln(x)$ at $x = 0$: $\\ln(0)$ is undefined (limit is $-\\infty$), so $x = 0$ is *not* in the domain. Open.\n\n' +
+  'An **open** endpoint (hollow circle) means the boundary is excluded. $\\ln(x)$ at $x = 0$: $\\ln(0)$ is undefined (limit is $-\\infty$), so $x = 0$ is not in the domain. Open.\n\n' +
   '### Excluded points\n\n' +
   'Some functions are defined everywhere except a single value — like $1/x$ at $x = 0$. The bar is filled everywhere except for an open hole at the excluded point, marked with a small red ×.\n\n' +
   '### Why a and k don\'t matter\n\n' +
-  'Think about the formula $g(x) = a \\cdot f(b(x - h)) + k$. The input that reaches the inner $f$ is $b(x - h)$ — only $b$ and $h$ appear there. After $f$ produces its output, $a$ and $k$ scale and shift it, but by that point the question "is this input legal?" has already been answered. Multiplying or shifting the *output* can\'t make a forbidden input suddenly legal.';
+  'Think about the formula $g(x) = a \\cdot f(b(x - h)) + k$. The input that reaches the inner $f$ is $b(x - h)$ — only $b$ and $h$ appear there. After $f$ produces its output, $a$ and $k$ scale and shift it, but by that point the question "is this input legal?" has already been answered. Multiplying or shifting the output can\'t make a forbidden input suddenly legal.';
 
 
 /* ================================================================
@@ -3088,6 +3088,12 @@ function fmt(v) {
   const r = Math.round(v * 100) / 100;
   return Math.abs(r - Math.round(r)) < 1e-4 ? String(Math.round(r)) : String(r);
 }
+// fmt() with a typographic minus, for the Unicode equation text (the TeX builders keep fmt()).
+function fmtU(v) {
+  const s = fmt(v);
+  return s.startsWith('-') ? `\u2212${s.slice(1)}` : s;
+}
+
 
 
 /* ================================================================
@@ -3229,15 +3235,35 @@ const DEFAULT_FAMILIES = FAMILIES;
    EQUATION BUILDER (same shape as Inverse / Transformations)
    ================================================================ */
 
+// True when str is a sum/difference at its top level ("x − 2", "2·x + 1"), i.e. it
+// needs brackets before it can be multiplied or negated. (), [], {} and |…| group.
+function isSum(str) {
+  let depth = 0, inAbs = false;
+  for (let i = 0; i < str.length; i++) {
+    const ch = str[i];
+    if (ch === '(' || ch === '[' || ch === '{') depth++;
+    else if (ch === ')' || ch === ']' || ch === '}') depth--;
+    else if (ch === '|') inAbs = !inAbs;
+    else if (depth === 0 && !inAbs && i > 0 && str[i - 1] === ' ' && (ch === '+' || ch === '\u2212' || ch === '-')) return true;
+  }
+  return false;
+}
+
 function buildForwardEq(fam, p) {
   const { a, b, h, k } = p;
   let inner = 'x';
   if (h !== 0) inner = `x ${h >= 0 ? '−' : '+'} ${fmt(Math.abs(h))}`;
-  if (b !== 1) inner = h !== 0 ? `${fmt(b)}(${inner})` : `${fmt(b)}x`;
+  if (b === -1) inner = h !== 0 ? `−(${inner})` : '−x';
+  else if (b !== 1) inner = h !== 0 ? `${fmtU(b)}(${inner})` : `${fmtU(b)}x`;
   let body = fam.bodyOf(inner);
+  // A family that does not bracket its input (x, 2·x) gets brackets around a sum or a
+  // leading minus: 2·(x − 2), not 2·x − 2.
+  if ((isSum(inner) || inner.startsWith('−')) && body !== inner && !body.includes(`(${inner})`)
+      && !body.includes(`{${inner}}`) && !body.includes(`|${inner}|`)) body = fam.bodyOf(`(${inner})`);
+  const wrap = isSum(body) || body.startsWith('−');
   let out;
-  if (a === -1) out = `−${body}`;
-  else if (a !== 1) out = `${fmt(a)}·${body}`;
+  if (a === -1) out = wrap ? `−(${body})` : `−${body}`;
+  else if (a !== 1) out = wrap ? `${fmtU(a)}·(${body})` : `${fmtU(a)}·${body}`;
   else out = body;
   if (k !== 0) out += ` ${k >= 0 ? '+' : '−'} ${fmt(Math.abs(k))}`;
   return out;
@@ -3673,7 +3699,7 @@ export default function FunctionDomain({
       `Only **b** and **h** can change the domain. They transform the input to the base function:\n\n` +
       `- $h$ — shifts the domain boundary along the x-axis by the same amount\n` +
       `- $b$ — scales the domain boundary by $1/b$; if $b < 0$, the inequality direction flips\n\n` +
-      `**a** and **k** transform the output — they shift and scale what comes *out* of the function, not where it accepts input. Move them and the domain stays put.`
+      `**a** and **k** transform the output — they shift and scale what comes out of the function, not where it accepts input. Move them and the domain stays put.`
     );
   }, [fam, forwardEq, domainStr]);
 

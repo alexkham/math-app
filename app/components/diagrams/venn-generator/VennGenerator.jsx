@@ -2814,7 +2814,10 @@ export const VennGenerator = (props) => {
       diffList: comparison.differing.slice(0, 6).join(', ') + (comparison.differing.length > 6 ? ', \u2026' : ''),
       plural: (word, k) => (k === 1 ? word : word + 's')
     };
-    const id = resolveExplanationId(ctx);
+    let id = resolveExplanationId(ctx);
+    const reshaped = setCount === 2 && !evaluation.error && twoSet &&
+      ({ ...DEFAULT_GEOMETRY_NOTES, ...(geometryNotesProp || {}) })[twoSet.classification.type];
+    if (reshaped && id.includes(':')) id = 'general';
     const source = (explanationsProp && explanationsProp[id]) || DEFAULT_EXPLANATIONS[id] || DEFAULT_EXPLANATIONS.general;
     const resolve = (v) => (typeof v === 'function' ? v(ctx) : v);
 
@@ -3094,8 +3097,15 @@ export const VennGenerator = (props) => {
                   if (Math.hypot(dx, dy) < 1) { dx = 0; dy = -1; }
                   const d = Math.hypot(dx, dy);
                   const reach = Math.max(sh.rx, sh.ry) + 18;
-                  const tx = Math.max(26, Math.min(width - 26, sh.cx + (dx / d) * reach));
-                  const ty = Math.max(36, Math.min(height - 12, sh.cy + (dy / d) * reach + 6));
+                  return { s, x: sh.cx + (dx / d) * reach, y: sh.cy + (dy / d) * reach + 6 };
+                }).map((pos, i, all) => {
+                  // names that land on the same spot (coinciding curves) are spread side by side
+                  const twins = all.filter((o) => Math.hypot(o.x - pos.x, o.y - pos.y) < 14);
+                  const k = twins.indexOf(pos);
+                  const shift = (k - (twins.length - 1) / 2) * 22;
+                  const s = pos.s;
+                  const tx = Math.max(26, Math.min(width - 26, pos.x + shift));
+                  const ty = Math.max(36, Math.min(height - 12, pos.y));
                   return (
                     <text
                       key={'name-' + s}
@@ -3136,7 +3146,7 @@ export const VennGenerator = (props) => {
                       <text
                         key={'count-' + pl.mask}
                         x={pl.anchor.x}
-                        y={pl.anchor.y + (pl.chips.length ? 34 : 5)}
+                        y={pl.anchor.y + (pl.chips.length ? 34 : (showRegionLabels && pl.mask !== 0 && setCount <= 3 ? -3 : 5))}
                         textAnchor="middle"
                         fontFamily={MATH_FONT}
                         fontSize="15"
@@ -3152,7 +3162,7 @@ export const VennGenerator = (props) => {
                       <text
                         key={'label-' + pl.mask}
                         x={pl.anchor.x}
-                        y={pl.anchor.y - (pl.chips.length ? 34 : -5)}
+                        y={pl.anchor.y + (pl.chips.length ? -34 : (showCounts ? 15 : 5))}
                         textAnchor="middle"
                         fontFamily={MATH_FONT}
                         fontSize="13"

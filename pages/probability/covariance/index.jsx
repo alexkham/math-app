@@ -663,6 +663,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1121,6 +1123,32 @@ variable.
 `
   }
 
+  const cvPts = [[1, 2], [1.5, 3.5], [2, 1.5], [2.5, 3], [3, 4.5], [3.5, 2.5], [4, 5], [4.5, 4], [5, 6], [5.5, 5], [6, 6.5], [2.2, 4.4]];
+  const cvMx = cvPts.reduce((s, p) => s + p[0], 0) / cvPts.length, cvMy = cvPts.reduce((s, p) => s + p[1], 0) / cvPts.length;
+  const cvDots = cvPts.map(([x, y]) => ({ fn: () => y, from: x, to: x, ends: ['closed', 'closed'], color: (x - cvMx) * (y - cvMy) >= 0 ? 'f' : 'r' }));
+  const cvParab = [-2, -1, 0, 1, 2].map((x) => ({ fn: () => x * x, from: x, to: x, ends: ['closed', 'closed'], color: 'f' }));
+  const fpCovSign = { kind: 'pieces', svgTitle: 'Twelve paired observations with dashed lines at the two means: most points sit above-and-above or below-and-below, so the covariance is positive', xRange: [0, 7], yRange: [0, 7.5], xLetter: 'x', yLetter: 'y',
+    pieces: [{ fn: () => cvMy, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0, 7]], label: { text: 'mean of y', x: 6.95, y: cvMy, pos: 'nw' } }, ...cvDots],
+    vlines: [{ x: cvMx, label: 'mean of x' }],
+    notes: [{ x: 0.2, y: 7.0, text: 'blue: deviations agree', pos: 'e', color: 'f' }, { x: 0.2, y: 6.4, text: 'amber: deviations disagree', pos: 'e', color: 'r' }],
+    caption: 'Most deviations agree in sign, so the covariance is positive' };
+  const fpZeroCov = { kind: 'pieces', svgTitle: 'X takes -2, -1, 0, 1, 2 equally and Y = X^2: Y is fixed by X, yet Cov(X, Y) = 0', xRange: [-3, 5], yRange: [-0.5, 5],
+    pieces: [{ fn: (x) => x * x, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-2.2, 2.2]] }, ...cvParab],
+    notes: [{ x: 2.45, y: 4.5, text: 'Y = X²: dependent', pos: 'e', color: 'r' }, { x: 2.45, y: 4.0, text: 'yet Cov(X, Y) = 0', pos: 'e', color: 'f' }, { x: 2.45, y: 3.5, text: 'the halves cancel', pos: 'e' }],
+    caption: 'Zero covariance yet total dependence: only linear trends count' };
+  const demoUnits = {
+    covSign: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpCovSign),
+      caption: 'Deviations that agree in sign',
+      text: 'Twelve paired observations, with dashed lines at the mean of x and the mean of y. Each point&#8217;s deviation from the two means is either the same sign (both above or both below: blue) or opposite signs (amber). Covariance averages the products of the two deviations; here the blue points dominate, so the products are mostly positive and the covariance is positive: high x tends to come with high y.',
+    }),
+    zeroCov: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpZeroCov),
+      caption: 'Dependent, with zero covariance',
+      text: 'Let X take the values &#8722;2, &#8722;1, 0, 1, 2 with equal probability and set Y = X&#178;. Knowing X fixes Y completely. Yet the points on the left of the parabola mirror those on the right: every positive product of deviations is matched by a negative one, so Cov(X, Y) = E[X&#179;] &#8722; E[X]E[X&#178;] = 0. Covariance measures linear tendency only, and a symmetric curve has none.',
+    }),
+  };
+
   return {
     props: {
       sectionsContent,
@@ -1128,6 +1156,7 @@ variable.
       summaryTable,
       faqQuestions,
       schemas,
+      demoUnits,
       seoData: {
         title: "Covariance: Joint Behavior of Random Variables | Learn Math Class",
         description: "Learn how covariance measures joint behavior of random variables. Understand positive, negative, and zero covariance, independence relationships, and applications.",
@@ -1139,7 +1168,7 @@ variable.
   }
 }
 
-export default function CovariancePage({seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas}) {
+export default function CovariancePage({seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1167,6 +1196,8 @@ export default function CovariancePage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-covSign'} dangerouslySetInnerHTML={{ __html: demoUnits.covSign }} />,
+          `If the amber points dominated instead, the covariance would be negative.`,
         ]
     },
     {
@@ -1183,6 +1214,8 @@ export default function CovariancePage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-zeroCov'} dangerouslySetInnerHTML={{ __html: demoUnits.zeroCov }} />,
+          `So independence implies zero covariance, but zero covariance does not imply independence.`,
         ]
     },
     {

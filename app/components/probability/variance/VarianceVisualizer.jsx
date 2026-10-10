@@ -34,7 +34,9 @@ export default function VarianceVisualizer({ explanations = null } = {}) {
     const p = LINE1_PRESETS[k];
     return p.length === dataPoints.length && p.every((v, i) => v === dataPoints[i]);
   }) || null;
-  const line1Key = varianceType === 'sample' ? 'sample' : line1Preset;
+  // The 'sample' note is written for the default 7-point dataset ("divisor 6 instead of 7");
+  // on another preset its own note still holds, since its claims are ratios n − 1 does not change.
+  const line1Key = varianceType === 'sample' && line1Preset === 'default' ? 'sample' : line1Preset;
   const line1Note = explanations && line1Key ? explanations[line1Key] : null;
 
   // Chart dimensions
@@ -70,7 +72,8 @@ export default function VarianceVisualizer({ explanations = null } = {}) {
   };
 
   const addPoint = () => {
-    setDataPoints([...dataPoints, mean]);
+    // Insert the mean rounded like the rest of the data (19.14, not 19.142857142857142).
+    setDataPoints([...dataPoints, Math.round(mean * 100) / 100]);
   };
 
   const removePoint = (index) => {

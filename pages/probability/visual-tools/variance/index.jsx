@@ -272,11 +272,11 @@ This is the concrete argument for why variance and standard deviation are called
 
 The chart is identical in both — same points, same mean, same bars. Only the reported variance moves.`,
       before: ``,
-      after: `Dividing by $n - 1$ is **Bessel's correction**, and it exists because a sample's own mean is not the population mean. The sample mean is, by construction, the point that minimises the sum of squared deviations *for that sample*, so those deviations come out slightly too small on average. Dividing by the smaller number $n - 1$ compensates, making the estimate unbiased.
+      after: `Dividing by $n - 1$ is **Bessel's correction**, and it exists because a sample's own mean is not the population mean. The sample mean is, by construction, the point that minimises the sum of squared deviations for that sample, so those deviations come out slightly too small on average. Dividing by the smaller number $n - 1$ compensates, making the estimate unbiased.
 
 The correction matters most when $n$ is small: here, with $n = 7$, it raises the figure by about 17%. At $n = 100$ the difference is around 1%, and at $n = 1000$ it is negligible — which is why the choice is often glossed over for large datasets and should not be for small ones.
 
-Which to use is a question about intent, not data. Use $n$ when the points *are* the whole population you care about; use $n - 1$ when they are a sample standing in for something larger.`,
+Which to use is a question about intent, not data. Use $n$ when the points are the whole population you care about; use $n - 1$ when they are a sample standing in for something larger.`,
       link: '',
     },
     obj16: {

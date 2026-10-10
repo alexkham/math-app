@@ -691,8 +691,7 @@ export default function FullPermutation({ explanations = null }) {
                     stepNum={i + 1}
                     headerLabel={
                       <>
-                        First item: <Chip item={item} mode={mode} />
-                        <b>{nameOf(item, mode)}</b>
+                        First item: <ChipAndName item={item} mode={mode} />
                       </>
                     }
                     progressText={progressText}

@@ -53,7 +53,7 @@ const conceptsContent =
   '### Excluded values\n\n' +
   'Some functions hit every output except one. $1/x$ reaches every real number except $0$ — the function has a horizontal asymptote at $y = 0$. The range bar is filled everywhere except for an open hole at the excluded value, marked with a small red ×.\n\n' +
   '### Why b and h don\'t matter\n\n' +
-  'Think about the formula $g(x) = a \\cdot f(b(x - h)) + k$. The transformations $b$ and $h$ act on the input *before* $f$ runs — they decide which x feeds into $f$. But the *outputs* $f$ produces are determined by $f$ alone; relabeling the inputs doesn\'t change which numbers can come out. Then $a$ scales those outputs and $k$ shifts them — and those are the only operations that move the range.';
+  'Think about the formula $g(x) = a \\cdot f(b(x - h)) + k$. The transformations $b$ and $h$ act on the input before $f$ runs — they decide which x feeds into $f$. But the outputs $f$ produces are determined by $f$ alone; relabeling the inputs doesn\'t change which numbers can come out. Then $a$ scales those outputs and $k$ shifts them — and those are the only operations that move the range.';
 
 
 /* ================================================================
@@ -76,6 +76,12 @@ function fmt(v) {
   const r = Math.round(v * 100) / 100;
   return Math.abs(r - Math.round(r)) < 1e-4 ? String(Math.round(r)) : String(r);
 }
+// fmt() with a typographic minus, for the Unicode equation text (the TeX builders keep fmt()).
+function fmtU(v) {
+  const s = fmt(v);
+  return s.startsWith('-') ? `\u2212${s.slice(1)}` : s;
+}
+
 
 
 /* ================================================================
@@ -218,15 +224,35 @@ const DEFAULT_FAMILIES = FAMILIES;
    EQUATION BUILDER (same shape as Inverse / Transformations)
    ================================================================ */
 
+// True when str is a sum/difference at its top level ("x − 2", "2·x + 1"), i.e. it
+// needs brackets before it can be multiplied or negated. (), [], {} and |…| group.
+function isSum(str) {
+  let depth = 0, inAbs = false;
+  for (let i = 0; i < str.length; i++) {
+    const ch = str[i];
+    if (ch === '(' || ch === '[' || ch === '{') depth++;
+    else if (ch === ')' || ch === ']' || ch === '}') depth--;
+    else if (ch === '|') inAbs = !inAbs;
+    else if (depth === 0 && !inAbs && i > 0 && str[i - 1] === ' ' && (ch === '+' || ch === '\u2212' || ch === '-')) return true;
+  }
+  return false;
+}
+
 function buildForwardEq(fam, p) {
   const { a, b, h, k } = p;
   let inner = 'x';
   if (h !== 0) inner = `x ${h >= 0 ? '−' : '+'} ${fmt(Math.abs(h))}`;
-  if (b !== 1) inner = h !== 0 ? `${fmt(b)}(${inner})` : `${fmt(b)}x`;
+  if (b === -1) inner = h !== 0 ? `−(${inner})` : '−x';
+  else if (b !== 1) inner = h !== 0 ? `${fmtU(b)}(${inner})` : `${fmtU(b)}x`;
   let body = fam.bodyOf(inner);
+  // A family that does not bracket its input (x, 2·x) gets brackets around a sum or a
+  // leading minus: 2·(x − 2), not 2·x − 2.
+  if ((isSum(inner) || inner.startsWith('−')) && body !== inner && !body.includes(`(${inner})`)
+      && !body.includes(`{${inner}}`) && !body.includes(`|${inner}|`)) body = fam.bodyOf(`(${inner})`);
+  const wrap = isSum(body) || body.startsWith('−');
   let out;
-  if (a === -1) out = `−${body}`;
-  else if (a !== 1) out = `${fmt(a)}·${body}`;
+  if (a === -1) out = wrap ? `−(${body})` : `−${body}`;
+  else if (a !== 1) out = wrap ? `${fmtU(a)}·(${body})` : `${fmtU(a)}·${body}`;
   else out = body;
   if (k !== 0) out += ` ${k >= 0 ? '+' : '−'} ${fmt(Math.abs(k))}`;
   return out;
@@ -662,7 +688,7 @@ export default function FunctionRange({
       `Only **a** and **k** can change the range. They transform the output of the base function:\n\n` +
       `- $k$ — shifts every output up or down by the same amount\n` +
       `- $a$ — scales every output by a factor of $a$; if $a < 0$, the range flips across the $k$ line\n\n` +
-      `**b** and **h** transform the input — they change *which* x produces each output, but the *set* of outputs the function can reach stays the same. Move them and the range stays put.`
+      `**b** and **h** transform the input — they change which x produces each output, but the set of outputs the function can reach stays the same. Move them and the range stays put.`
     );
   }, [fam, forwardEq, rangeStr]);
 

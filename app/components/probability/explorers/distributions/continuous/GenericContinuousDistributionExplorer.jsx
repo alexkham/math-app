@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { LineChart, AreaChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 
+// Axis ticks: round away float noise (1.0000000000000002 -> 1, 6.907755278982137 -> 6.908).
+const fmtTick = (v) => (typeof v === 'number' && Number.isFinite(v) ? String(Math.round(v * 1000) / 1000) : v);
+
 export default function GenericContinuousDistributionExplorer({ distribution }) {
   const [activeTab, setActiveTab] = useState('pdf');
   const [calcTab, setCalcTab] = useState('range');
@@ -391,9 +394,11 @@ export default function GenericContinuousDistributionExplorer({ distribution }) 
                       dataKey="x"
                       type="number"
                       domain={['dataMin', 'dataMax']}
+                      tickFormatter={fmtTick}
                       label={{ value: 'Value (x)', position: 'insideBottom', offset: -5 }}
                     />
                     <YAxis 
+                      tickFormatter={fmtTick}
                       label={{ value: 'Density f(x)', angle: -90, position: 'insideLeft' }}
                     />
                     <Tooltip 
@@ -432,11 +437,14 @@ export default function GenericContinuousDistributionExplorer({ distribution }) 
                       dataKey="x"
                       type="number"
                       domain={['dataMin', 'dataMax']}
+                      tickFormatter={fmtTick}
                       label={{ value: 'Value (x)', position: 'insideBottom', offset: -5 }}
                     />
                     <YAxis 
                       label={{ value: 'Cumulative Probability F(x)', angle: -90, position: 'insideLeft' }}
                       domain={[0, 1]}
+                      allowDataOverflow
+                      tickFormatter={fmtTick}
                     />
                     <Tooltip 
                       formatter={(value) => value.toFixed(6)}

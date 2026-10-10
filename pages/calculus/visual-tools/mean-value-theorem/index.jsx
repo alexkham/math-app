@@ -751,11 +751,11 @@ For deeper coverage, see the **Rolle&apos;s theorem** page.`,
       title: `Identity: Every Point Is a c`,
       content: `$f(x) = x$ on $[-2, 2]$. The endpoints are $(-2, -2)$ and $(2, 2)$, so the secant slope is
 
-$m = \frac{2 - (-2)}{2 - (-2)} = 1$
+$m = \\frac{2 - (-2)}{2 - (-2)} = 1$
 
 and $f'(x) = 1$ everywhere. The theorem asks for a point where $f'(c) = m$, and here **every** point in the interval qualifies.`,
       before: ``,
-      after: `The MVT promises *at least one* $c$, never exactly one, and this family is the reason that wording matters. The tool's solver reports several hundred solutions on this interval — one per sample step — because there is genuinely no place where the condition fails.
+      after: `The MVT promises at least one $c$, never exactly one, and this family is the reason that wording matters. The tool's solver reports several hundred solutions on this interval — one per sample step — because there is genuinely no place where the condition fails.
 
 Geometrically the secant, the curve and every tangent are the same line, which is why the picture looks so bare. A straight function has nothing to deviate from its own average rate, so the "somewhere the instantaneous rate equals the average rate" guarantee is satisfied trivially and everywhere at once.`,
       link: '',
@@ -764,22 +764,22 @@ Geometrically the secant, the curve and every tangent are the same line, which i
       title: `Quadratic: Rolle's Theorem in Disguise`,
       content: `$f(x) = x^2$ on $[-2, 2]$. Because the parabola is symmetric about the origin, the two endpoint heights are equal — $f(-2) = f(2) = 4$ — so the secant is horizontal:
 
-$m = \frac{4 - 4}{2 - (-2)} = 0$
+$m = \\frac{4 - 4}{2 - (-2)} = 0$
 
 Solving $f'(c) = 2c = 0$ gives the single solution $c = 0$.`,
       before: ``,
       after: `Equal endpoint values is exactly the hypothesis of [Rolle's theorem](!#rolles-theorem), which is the special case of the MVT where $f(a) = f(b)$ and the conclusion becomes $f'(c) = 0$. This family is the MVT and Rolle's theorem being the same statement.
 
-The location of $c$ is not a coincidence either. For any interval $[a, b]$ on a parabola, the mean value point is the midpoint $\frac{a+b}{2}$ — a property of quadratics specifically, not something the theorem promises in general. Drag the endpoints and watch $c$ track the middle.`,
+The location of $c$ is not a coincidence either. For any interval $[a, b]$ on a parabola, the mean value point is the midpoint $\\frac{a+b}{2}$ — a property of quadratics specifically, not something the theorem promises in general. Drag the endpoints and watch $c$ track the middle.`,
       link: '',
     },
     obj13: {
       title: `Cubic: Two Solutions at Once`,
       content: `$f(x) = x^3$ on $[-2, 2]$ runs from $-8$ to $8$, so
 
-$m = \frac{8 - (-8)}{4} = 4$
+$m = \\frac{8 - (-8)}{4} = 4$
 
-Solving $f'(c) = 3c^2 = 4$ gives $c = \pm\frac{2}{\sqrt{3}} \approx \pm 1.1547$ — two solutions, both inside the interval, and the tool draws a tangent at each.`,
+Solving $f'(c) = 3c^2 = 4$ gives $c = \\pm\\frac{2}{\\sqrt{3}} \\approx \\pm 1.1547$ — two solutions, both inside the interval, and the tool draws a tangent at each.`,
       before: ``,
       after: `Two parallel tangents, one on either side of the origin, both matching the secant's slope of 4. This is the clearest demonstration that the theorem's "at least one" is not merely cautious phrasing.
 
@@ -788,11 +788,11 @@ Between the two solutions the curve is shallower than the secant — at the orig
     },
     obj14: {
       title: `Sine: a Full Period With a Flat Secant`,
-      content: `$f(x) = \sin(x)$ on $[0, 2\pi]$ starts and ends at zero, so the secant is horizontal again:
+      content: `$f(x) = \\sin(x)$ on $[0, 2\\pi]$ starts and ends at zero, so the secant is horizontal again:
 
-$m = \frac{0 - 0}{2\pi} = 0$
+$m = \\frac{0 - 0}{2\\pi} = 0$
 
-Solving $\cos(c) = 0$ on $(0, 2\pi)$ gives $c = \frac{\pi}{2} \approx 1.5708$ and $c = \frac{3\pi}{2} \approx 4.7124$ — the peak and the trough.`,
+Solving $\\cos(c) = 0$ on $(0, 2\\pi)$ gives $c = \\frac{\\pi}{2} \\approx 1.5708$ and $c = \\frac{3\\pi}{2} \\approx 4.7124$ — the peak and the trough.`,
       before: ``,
       after: `Another Rolle's-theorem configuration, and the two solutions are precisely the turning points of the wave. That is what a horizontal tangent means for a sine: nothing else on a full period has zero slope.
 
@@ -801,28 +801,28 @@ The lesson worth carrying is about the net-versus-total distinction. The functio
     },
     obj15: {
       title: `Cosine: a Secant That Is Not Flat`,
-      content: `$f(x) = \cos(x)$ on $[0, \pi]$ falls from $1$ to $-1$, so this time the secant genuinely slopes:
+      content: `$f(x) = \\cos(x)$ on $[0, \\pi]$ falls from $1$ to $-1$, so this time the secant genuinely slopes:
 
-$m = \frac{-1 - 1}{\pi} = -\frac{2}{\pi} \approx -0.6366$
+$m = \\frac{-1 - 1}{\\pi} = -\\frac{2}{\\pi} \\approx -0.6366$
 
-Solving $-\sin(c) = -\frac{2}{\pi}$ gives two solutions, $c \approx 0.6901$ and $c \approx 2.4515$, placed symmetrically about $\frac{\pi}{2}$.`,
+Solving $-\\sin(c) = -\\frac{2}{\\pi}$ gives two solutions, $c \\approx 0.6901$ and $c \\approx 2.4515$, placed symmetrically about $\\frac{\\pi}{2}$.`,
       before: ``,
       after: `This is the first family where the tangents are visibly tilted rather than horizontal, which makes the actual claim of the theorem easier to see: three parallel lines, one secant and two tangents, all at slope $-0.64$.
 
-The symmetry of the two solutions about the midpoint reflects the symmetry of $\sin$ about $\frac{\pi}{2}$ on this interval. The cosine descends fastest at the middle and more gently at both ends, so the average steepness is achieved once on the way in and once on the way out.`,
+The symmetry of the two solutions about the midpoint reflects the symmetry of $\\sin$ about $\\frac{\\pi}{2}$ on this interval. The cosine descends fastest at the middle and more gently at both ends, so the average steepness is achieved once on the way in and once on the way out.`,
       link: '',
     },
     obj16: {
       title: `Exponential: Where the Average Rate Is Attained`,
       content: `$f(x) = e^x$ on $[0, 1]$ climbs from $1$ to $e$, so
 
-$m = \frac{e - 1}{1} \approx 1.7183$
+$m = \\frac{e - 1}{1} \\approx 1.7183$
 
-Since $f' = f$, solving $e^c = e - 1$ gives $c = \ln(e - 1) \approx 0.5413$ — a single solution, slightly right of the midpoint.`,
+Since $f' = f$, solving $e^c = e - 1$ gives $c = \\ln(e - 1) \\approx 0.5413$ — a single solution, slightly right of the midpoint.`,
       before: ``,
       after: `That offset is the interesting part. For the parabola the mean value point sat exactly at the midpoint; here it does not, and it never will. Because $e^x$ is convex, the function spends more of the interval below its average slope and less above it, which pushes the crossing point past the middle.
 
-The value $\ln(e - 1)$ also has a neat reading: it is the point where the height of the curve equals the average rate of change across the whole interval — a coincidence available only to a function that is its own derivative.`,
+The value $\\ln(e - 1)$ also has a neat reading: it is the point where the height of the curve equals the average rate of change across the whole interval — a coincidence available only to a function that is its own derivative.`,
       link: '',
     }
 

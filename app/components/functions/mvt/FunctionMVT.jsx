@@ -49,14 +49,14 @@ const conceptsContent =
   '## The Mean Value Theorem\n\n' +
   'If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then there is at least one point $c \\in (a, b)$ where\n\n' +
   '$$f\'(c) = \\frac{f(b) - f(a)}{b - a}.$$\n\n' +
-  'The left side is the slope of the curve at $c$. The right side is the slope of the secant line connecting the endpoints. They&apos;re equal at some interior point.\n\n' +
+  'The left side is the slope of the curve at $c$. The right side is the slope of the secant line connecting the endpoints. They’re equal at some interior point.\n\n' +
   '### What it really says\n\n' +
   'Pick the average rate of change of $f$ over $[a, b]$. That average is the secant slope. The theorem promises that the curve achieves that exact rate of change as an instantaneous slope somewhere in the middle.\n\n' +
-  'Drive 100 km in 1 hour. Your average speed was 100 km/h. The MVT says at some instant, your speedometer read exactly 100 km/h. You can&apos;t average 100 without hitting 100 at least once.\n\n' +
+  'Drive 100 km in 1 hour. Your average speed was 100 km/h. The MVT says at some instant, your speedometer read exactly 100 km/h. You can’t average 100 without hitting 100 at least once.\n\n' +
   '### Why differentiability matters\n\n' +
-  'Without differentiability you can dodge the conclusion. A function with a sharp corner can have a secant slope it never matches as an instantaneous slope — at the corner the "slope" isn&apos;t a single number.\n\n' +
-  '### Rolle&apos;s theorem — a special case\n\n' +
-  'When $f(a) = f(b)$, the secant slope is zero. The MVT gives you $f\'(c) = 0$: a horizontal tangent somewhere between. That&apos;s Rolle&apos;s theorem.\n\n' +
+  'Without differentiability you can dodge the conclusion. A function with a sharp corner can have a secant slope it never matches as an instantaneous slope — at the corner the "slope" isn’t a single number.\n\n' +
+  '### Rolle’s theorem — a special case\n\n' +
+  'When $f(a) = f(b)$, the secant slope is zero. The MVT gives you $f\'(c) = 0$: a horizontal tangent somewhere between. That’s Rolle’s theorem.\n\n' +
   '### What it powers\n\n' +
   'The MVT is the engine behind a lot of calculus: if $f\' = 0$ on an interval, $f$ is constant there; if $f\' > 0$, $f$ is increasing; if two functions have the same derivative, they differ by a constant. Each of these comes from the MVT applied to a cleverly chosen interval.';
 
@@ -167,6 +167,17 @@ const DEFAULT_FAMILIES = FAMILIES;
 /* ================================================================
    c FINDER — solve f&apos;(c) = m on (a, b) via sampling + bisection
    ================================================================ */
+
+function matchesEverywhere(fam, a, b, m, samples = 200) {
+  // True when f'(x) = m on all of (a, b), e.g. a straight line: every point is a c.
+  if (!(b > a)) return false;
+  const tol = 1e-9 * Math.max(1, Math.abs(m));
+  for (let i = 0; i <= samples; i++) {
+    const g = fam.dfn(a + (i / samples) * (b - a)) - m;
+    if (!Number.isFinite(g) || Math.abs(g) > tol) return false;
+  }
+  return true;
+}
 
 function findCs(fam, a, b, m, samples = 800) {
   if (!(b > a)) return [];
@@ -311,7 +322,10 @@ export default function FunctionMVT({
   const fa = useMemo(() => fam.fn(aN), [fam, aN]);
   const fb = useMemo(() => fam.fn(bN), [fam, bN]);
   const m  = useMemo(() => validInterval ? (fb - fa) / (bN - aN) : NaN, [validInterval, fa, fb, aN, bN]);
-  const cs = useMemo(() => validInterval && Number.isFinite(m) ? findCs(fam, aN, bN, m) : [], [fam, aN, bN, m, validInterval]);
+  const everyC = useMemo(() => validInterval && Number.isFinite(m) && matchesEverywhere(fam, aN, bN, m), [fam, aN, bN, m, validInterval]);
+  // Every point qualifies: draw one representative c at the midpoint instead of hundreds.
+  const cs = useMemo(() => everyC ? [(aN + bN) / 2]
+    : (validInterval && Number.isFinite(m) ? findCs(fam, aN, bN, m) : []), [everyC, fam, aN, bN, m, validInterval]);
 
   /* Functions array: f, secant (linear), one tangent per c (linear). */
   const functions = useMemo(() => {
@@ -371,12 +385,12 @@ export default function FunctionMVT({
       cs.forEach((c, i) => {
         const y = fam.fn(c);
         if (!Number.isFinite(y)) return;
-        const tag = cs.length > 1 ? `c${i + 1} = ${fmt(c)}` : `c = ${fmt(c)}`;
+        const tag = everyC ? 'c = any point of (a, b)' : (cs.length > 1 ? `c${i + 1} = ${fmt(c)}` : `c = ${fmt(c)}`);
         pts.push({ x: c, y, color: COL.tan, label: tag });
       });
     }
     return pts;
-  }, [fam, aN, bN, fa, fb, cs, showEndpoints, showTangents, validInterval]);
+  }, [fam, aN, bN, fa, fb, cs, everyC, showEndpoints, showTangents, validInterval]);
 
   /* View bounds. */
   const viewport = useMemo(() => {
@@ -389,19 +403,21 @@ export default function FunctionMVT({
   const explanationContent = useMemo(() => {
     const intro =
       `## MVT on the ${fam.name.toLowerCase()}\n\n` +
-      `Pick any interval. Connect the two endpoints with a secant line. The MVT guarantees at least one c inside $(a, b)$ where the curve&apos;s tangent is parallel to that secant.\n\n` +
+      `Pick any interval. Connect the two endpoints with a secant line. The MVT guarantees at least one c inside $(a, b)$ where the curve’s tangent is parallel to that secant.\n\n` +
       `**Function** · $${fam.eq}$\n\n`;
 
     const rightNow = validInterval
       ? `### Right now\n\nOn $[a, b] = [${fmt(aN, 2)}, ${fmt(bN, 2)}]$: secant slope $= ${fmt(m)}$. ` +
-        (cs.length === 0
+        (everyC
+          ? `Every c in $(a, b)$ works: $f'(c) = ${fmt(m)}$ at every point, the same as the secant slope.`
+          : cs.length === 0
           ? `No c found in this interval.`
           : `Found ${cs.length} value${cs.length === 1 ? '' : 's'} of c where $f'(c)$ matches: $${cs.map(c => fmt(c)).join(', ')}$.`)
       : `### Right now\n\nInterval too narrow.`;
 
     const howFound =
       `\n\n### How c is found\n\n` +
-      `Compute the secant slope $m = (f(b) - f(a))/(b - a)$. Then solve $f'(c) = m$ for $c$ in $(a, b)$. For the quadratic, that&apos;s exactly the midpoint $(a+b)/2$. For other functions there can be more than one c.`;
+      `Compute the secant slope $m = (f(b) - f(a))/(b - a)$. Then solve $f'(c) = m$ for $c$ in $(a, b)$. For the quadratic, that’s exactly the midpoint $(a+b)/2$. For other functions there can be more than one c.`;
 
     // Optional per-family note supplied by the page (Line 1 anchor mesh).
     // Omitted -> the panel reads exactly as it always has.
@@ -410,7 +426,7 @@ export default function FunctionMVT({
 ${explanations[current]}` : '';
 
     return intro + rightNow + howFound + extra;
-  }, [fam, aN, bN, m, cs, validInterval, explanations, current]);
+  }, [fam, aN, bN, m, cs, everyC, validInterval, explanations, current]);
 
   const infoTabs = useMemo(() => ([
     { key: 'explanation', label: 'Explanation', order: 0, content: explanationContent },
@@ -787,10 +803,10 @@ ${explanations[current]}` : '';
                   <div style={{
                     fontFamily: monoStack, fontSize: 18, fontWeight: 700,
                     color: ctok.ink, fontVariantNumeric: 'tabular-nums',
-                  }}>{cs.length === 0 ? 'none' : cs.length}</div>
+                  }}>{everyC ? 'every c' : (cs.length === 0 ? 'none' : cs.length)}</div>
                   <div style={{
                     fontSize: 11, color: ctok.muted, marginTop: 2, fontFamily: monoStack,
-                  }}>{cs.length
+                  }}>{everyC ? 'every point of (a, b)' : cs.length
                     ? 'at c = ' + cs.map(c => fmt(c, 3)).join(', ')
                     : (validInterval ? 'no interior solution' : 'interval too narrow')}</div>
                 </div>
@@ -844,7 +860,7 @@ ${explanations[current]}` : '';
                         background: COL.tan, color: '#fff',
                         textTransform: 'uppercase', letterSpacing: '0.05em',
                       }}>{cs.length > 1 ? `c${subDigit(i + 1)}` : 'c'}</span>
-                      <span>c = <strong style={{ color: ctok.ink }}>{fmt(c)}</strong></span>
+                      <span>c = <strong style={{ color: ctok.ink }}>{everyC ? `any in (${fmt(aN, 2)}, ${fmt(bN, 2)})` : fmt(c)}</strong></span>
                       <span style={{ color: ctok.muted }}>&rarr;</span>
                       <span>f&apos;(c) = <strong style={{ color: ctok.ink }}>{fmt(fam.dfn(c))}</strong></span>
                       <span style={{
@@ -916,7 +932,7 @@ ${explanations[current]}` : '';
                 fontSize: 9.5, textTransform: 'uppercase', letterSpacing: '0.05em',
                 color: panelTones.text, fontWeight: 700,
                 background: panelTones.soft, padding: '2px 6px', borderRadius: 3,
-              }}>tangent &parallel; secant</span>
+              }}>tangent {'\u2225'} secant</span>
             </div>
           </div>
         </div>

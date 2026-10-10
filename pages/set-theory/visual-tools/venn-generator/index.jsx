@@ -614,7 +614,7 @@ The expression did not change. The set of regions that have any area did.`,
 
 Under Disjoint the tool still selects the $A \\cap B$ row — the strip shows it — but there is no path to fill, so the diagram stays empty. Under $A \\subseteq B$ the missing row is "A only", because every element of $A$ is also in $B$. Under $A = B$ both "A only" and "B only" vanish and just two regions survive of the four.
 
-That gap between what an expression *selects* and what a diagram can *show* is exactly why a Venn diagram is a tool for reasoning about relationships rather than a proof. The algebra is always over all $2^n$ regions; the picture only draws the ones your arrangement admits.`,
+That gap between what an expression selects and what a diagram can show is exactly why a Venn diagram is a tool for reasoning about relationships rather than a proof. The algebra is always over all $2^n$ regions; the picture only draws the ones your arrangement admits.`,
       link: '',
     },
 

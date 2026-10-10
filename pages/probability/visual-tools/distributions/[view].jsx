@@ -411,7 +411,7 @@ Use the CDF to quickly find probabilities for ranges. For example, P(X ≤ 7) ca
   },
   obj4: {
     title: 'Calculating Point Probabilities',
-    content: `Enter a value k in the **Point Probability** calculator to find P(X = k), the exact probability of getting k successes. The calculator uses the binomial formula: C(n,k) × p^k × (1-p)^(n-k).
+    content: `Enter a value k in the **P(X = k)** row of the **Probability Calculator** to find P(X = k), the exact probability of getting k successes. The calculator uses the binomial formula: C(n,k) × p^k × (1-p)^(n-k).
 
 The binomial coefficient C(n,k) counts the number of ways to arrange k successes among n trials. The calculator handles this computation automatically, even for large values where manual calculation would be impractical.
 
@@ -422,7 +422,7 @@ Try calculating P(X = 5) for n = 10, p = 0.5. You should get approximately 0.246
   },
   obj5: {
     title: 'Computing Cumulative Probabilities',
-    content: `The **Cumulative Probability** calculator computes P(X ≤ k) by summing probabilities from 0 to k. This answers questions like "What's the probability of at most k successes?"
+    content: `The **P(X ≤ k)** row of the **Probability Calculator** computes P(X ≤ k) by summing probabilities from 0 to k. This answers questions like "What's the probability of at most k successes?"
 
 For the complement, use **P(X > k)** to find the probability of more than k successes. This equals 1 - P(X ≤ k) and is useful for threshold problems.
 
@@ -808,7 +808,7 @@ At any point k, the CDF value equals 1 - (1-p)^k, providing a closed-form expres
   },
   obj4: {
     title: 'Computing Exact Probabilities',
-    content: `Enter trial number k in the **Point Probability** calculator to find P(X = k) using the formula p(1-p)^(k-1). This gives the exact probability that the first success occurs on trial k.
+    content: `Enter trial number k in the **P(X = k)** row of the **Probability Calculator** to find P(X = k) using the formula p(1-p)^(k-1). This gives the exact probability that the first success occurs on trial k.
 
 The calculation accounts for k-1 failures (each with probability 1-p) followed by one success (probability p). For example, with p = 0.3, the probability of first success on trial 3 is 0.7² × 0.3 = 0.147.
 
@@ -830,7 +830,7 @@ The memoryless property appears here: P(X > n+k | X > n) = P(X > k). If you've a
   },
   obj6: {
     title: 'Range Probability Calculations',
-    content: `The range calculator finds P(a ≤ X ≤ b), the probability that first success occurs between trials a and b inclusive. This equals the difference in CDF values: F(b) - F(a-1).
+    content: `The **P(a ≤ X ≤ b)** row of the **Probability Calculator** finds P(a ≤ X ≤ b), the probability that first success occurs between trials a and b inclusive. This equals the difference in CDF values: F(b) - F(a-1).
 
 Four boundary options handle edge cases:
 • **[a, b]** - Both endpoints included
@@ -1207,7 +1207,7 @@ Unlike the binomial CDF which always reaches exactly 1 at n trials, the negative
   },
   obj4: {
     title: 'Calculating Point Probabilities',
-    content: `Enter trial number k in the **Point Probability** calculator to compute P(X = k) using the negative binomial formula: C(k-1, r-1) × p^r × (1-p)^(k-r).
+    content: `Enter trial number k in the **P(X = k)** row of the **Probability Calculator** to compute P(X = k) using the negative binomial formula: C(k-1, r-1) × p^r × (1-p)^(k-r).
 
 The binomial coefficient C(k-1, r-1) counts ways to arrange r-1 successes in the first k-1 trials (the rth success must occur on trial k). The calculator handles this computation even for large values.
 
@@ -1606,7 +1606,7 @@ For large λ, the CDF's S-curve shape becomes more pronounced, reflecting the di
   },
   obj4: {
     title: 'Computing Exact Probabilities',
-    content: `Enter event count k in the **Point Probability** calculator to find P(X = k) using the Poisson formula: (λ^k × e^(-λ)) / k!. The calculator handles the factorial computation automatically.
+    content: `Enter event count k in the **P(X = k)** row of the **Probability Calculator** to find P(X = k) using the Poisson formula: (λ^k × e^(-λ)) / k!. The calculator handles the factorial computation automatically.
 
 The exponential term e^(-λ) rapidly decreases as λ increases, while λ^k grows with k. Their balance creates the characteristic probability distribution. For λ = 4, k = 4, you get about 0.195 - the most likely single outcome.
 
@@ -1628,7 +1628,7 @@ The ≥ and > distinction matters: P(X ≥ k) includes k itself, while P(X > k) 
   },
   obj6: {
     title: 'Range Probability Calculations',
-    content: `The range calculator computes P(a ≤ X ≤ b) by taking F(b) - F(a-1), where F is the CDF. This gives the probability of event count falling within the specified window.
+    content: `The **P(a ≤ X ≤ b)** row of the **Probability Calculator** computes it by taking F(b) - F(a-1), where F is the CDF. This gives the probability of event count falling within the specified window.
 
 Four boundary options handle inclusivity:
 • **[a, b]** - Include both bounds
@@ -2014,7 +2014,7 @@ Notice how the **finite population correction** affects CDF shape. When sampling
   },
   obj5: {
     title: 'Calculating Exact Probabilities',
-    content: `Enter k in the **Point Probability** calculator to compute P(X = k) using: [C(K,k) × C(N-K, n-k)] / C(N,n). The three binomial coefficients account for all ways to select k successes and n-k failures.
+    content: `Enter k in the **P(X = k)** row of the **Probability Calculator** to compute P(X = k) using: [C(K,k) × C(N-K, n-k)] / C(N,n). The three binomial coefficients account for all ways to select k successes and n-k failures.
 
 The denominator C(N,n) counts all possible samples of size n from population N. The numerator counts samples with exactly k successes: choose k from K successes and n-k from N-K failures.
 
@@ -2399,7 +2399,7 @@ For ranges, P(c ≤ X ≤ d) = (d - c + 1)/n. With a = 1, b = 10, the probabilit
   },
   obj4: {
     title: 'Computing Point Probabilities',
-    content: `Enter any value k in the **Point Probability** calculator. If k is in the range [a, b], you get 1/n. If k is outside this range, probability is 0 - the value simply cannot occur.
+    content: `Enter any value k in the **P(X = k)** row of the **Probability Calculator**. If k is in the range [a, b], you get 1/n. If k is outside this range, probability is 0 - the value simply cannot occur.
 
 This constant probability applies to every outcome in the support. There's no concept of "more likely" or "less likely" outcomes - complete uniformity across all possibilities.
 
@@ -2421,7 +2421,7 @@ The strict inequalities **P(X < k)** and **P(X > k)** differ by one outcome: P(X
   },
   obj6: {
     title: 'Range Probability Calculations',
-    content: `The range calculator computes P(c ≤ X ≤ d) using the formula (d - c + 1)/n, simply counting integers in [c, d] and dividing by total outcomes.
+    content: `The **P(a ≤ X ≤ b)** row of the **Probability Calculator** computes P(c ≤ X ≤ d) using the formula (d - c + 1)/n, simply counting integers in [c, d] and dividing by total outcomes.
 
 Four boundary options:
 • **[c, d]** - Include both endpoints, count d - c + 1 values
@@ -2804,7 +2804,7 @@ The CDF approaches but never quite reaches 0 or 1 at the display's edges. At μ 
 
 **P(X ≥ x)** gives the right-tail probability, computed as 1 - P(X ≤ x). This answers questions like "What fraction of values exceed x?"
 
-For **range probabilities P(a ≤ X ≤ b)**, the calculator computes CDF(b) - CDF(a), giving the area under the curve between a and b. This is the fundamental probability for any continuous interval.`,
+For **range probabilities P(a ≤ X ≤ b)**, take CDF(b) - CDF(a) from two **P(X ≤ x)** readings, giving the area under the curve between a and b. This is the fundamental probability for any continuous interval.`,
     before: '',
     after: '',
     link: ''
@@ -3200,11 +3200,11 @@ The CDF never quite reaches 1, reflecting the theoretical possibility of arbitra
   },
   obj4: {
     title: 'Computing Point Probabilities',
-    content: `For [continuous distributions](!/probability/random-variables), individual point probabilities are always zero. Instead, use the **PDF value** at x, which gives the probability density: f(x) = λe^(-λx).
+    content: `For [continuous distributions](!/probability/random-variables), individual point probabilities are always zero. What the curve shows instead is the **density** f(x) = λe^(-λx) — the height of the PDF, not a probability.
 
 The PDF height indicates relative likelihood - higher values mean that region is more probable. The PDF at x = 0 equals λ, the maximum density, declining exponentially from there.
 
-To find actual probabilities, you need intervals. Use the range calculator to find P(a ≤ X ≤ b), which computes the area under the PDF curve between a and b.`,
+To find actual probabilities you need intervals. The **Probability Calculator** gives P(X ≤ x) (and P(X < x), P(X > x), P(X ≥ x)); an interval follows by subtraction, P(a ≤ X ≤ b) = P(X ≤ b) − P(X ≤ a), the area under the PDF curve between a and b.`,
     before: '',
     after: '',
     link: ''
@@ -3222,9 +3222,9 @@ To find actual probabilities, you need intervals. Use the range calculator to fi
   },
   obj6: {
     title: 'Range Probability Calculations',
-    content: `The range calculator computes P(a ≤ X ≤ b) = F(b) - F(a) = e^(-λa) - e^(-λb), giving the probability that waiting time falls between a and b.
+    content: `There is no separate range calculator: P(a ≤ X ≤ b) = F(b) - F(a) = e^(-λa) - e^(-λb), the difference of two **P(X ≤ x)** readings, giving the probability that waiting time falls between a and b.
 
-Four boundary options exist, but for continuous distributions all four give identical results since individual points have zero probability:
+The four boundary forms all give the same number for a continuous distribution, since individual points have zero probability:
 • **[a, b]**, **(a, b)**, **[a, b)**, **(a, b]** all equal e^(-λa) - e^(-λb)
 
 Example: For λ = 1, find P(0.5 ≤ X ≤ 2). This gives e^(-0.5) - e^(-2) ≈ 0.606 - 0.135 = 0.471, about 47% probability the wait is between 0.5 and 2 time units.`,
@@ -3598,11 +3598,11 @@ The CDF's slope equals 1/(b-a), matching the PDF height. Steeper slopes (narrowe
   },
   obj4: {
     title: 'Computing Interval Probabilities',
-    content: `For [continuous distributions](!/probability/random-variables), point probabilities are always zero. Instead, use the **range calculator** to find P(c ≤ X ≤ d) for any interval [c, d] within [a, b].
+    content: `For [continuous distributions](!/probability/random-variables), point probabilities are always zero. Instead, find P(c ≤ X ≤ d) for an interval [c, d] within [a, b] as the difference of two **P(X ≤ x)** readings from the **Probability Calculator**.
 
 The formula is beautifully simple: P(c ≤ X ≤ d) = (d - c)/(b - a). Probability is proportional to interval length - a 2-unit interval has twice the probability of a 1-unit interval.
 
-For boundary options, all four give identical results since individual points have zero probability. The distinction between [c, d], (c, d), [c, d), and (c, d] is meaningless for continuous distributions.`,
+The four boundary forms all give identical results since individual points have zero probability. The distinction between [c, d], (c, d), [c, d), and (c, d] is meaningless for continuous distributions.`,
     before: '',
     after: '',
     link: ''

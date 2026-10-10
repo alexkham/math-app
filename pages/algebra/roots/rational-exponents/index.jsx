@@ -8,6 +8,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -869,6 +871,21 @@ const schemas = {
 
 
 
+  const fpThirdSteps = { kind: 'pieces', svgTitle: '8^x at thirds: 8^(2/3) = 4 and 8^(-2/3) = 1/4 are reciprocals', xRange: [-1, 1], yRange: [-1, 9],
+    pieces: [{ fn: (x) => 8 ** x, from: -1, to: 1, ends: [null, null], color: 'f', label: { text: 'y = 8ˣ', x: 0.88, y: 8 ** 0.88, pos: 'w' } }],
+    points: [{ x: -1, y: 1 / 8 }, { x: -2 / 3, y: 1 / 4, label: '8^(−2/3) = 1/4', pos: 'n' }, { x: -1 / 3, y: 1 / 2 }, { x: 0, y: 1 },
+      { x: 1 / 3, y: 2, label: '8^(1/3) = 2', pos: 'se' }, { x: 2 / 3, y: 4, label: '8^(2/3) = 4', pos: 'nw' }, { x: 1, y: 8, label: '8', pos: 'w' }],
+    notes: [{ x: 0.12, y: 0.6, text: 'each +1/3 doubles the value', pos: 'e', color: 'r' },
+      { x: 0.06, y: -0.5, text: '±2/3: 4 and 1/4, reciprocals', pos: 'e', color: 'r' }],
+    caption: '8^(−2/3) = 1 / 8^(2/3) = 1/4: a negative exponent flips the value' };
+  const demoUnits = {
+    thirdSteps: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpThirdSteps),
+      caption: 'Exponents in thirds, both signs',
+      text: 'The curve y = 8&#739; marked at every third from &#8722;1 to 1. Since 8&#185;&#8725;&#179; = 2, each step of 1/3 to the right doubles the value: 1, 2, 4, 8. Stepping left halves it: 1/2, 1/4, 1/8. So 8&#8315;&#178;&#8725;&#179; = 1/4 sits as far left of 0 as 8&#178;&#8725;&#179; = 4 sits right, with the reciprocal value.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -878,6 +895,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Rational Exponents: Fractional Powers & Radicals | Learn Math Class",
       description: "Learn rational exponents: fractional powers as roots, a^(m/n) meaning, negative rational exponents, converting between forms, and applying exponent laws.",
@@ -892,7 +910,7 @@ return {
 // export default function RationalExponentsPage({seoData,sectionsContent , introContent}) {
 
 
-export default function RationalExponentsPage({seoData, sectionsContent, introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas}) {
+export default function RationalExponentsPage({seoData, sectionsContent, introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -927,6 +945,8 @@ export default function RationalExponentsPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-thirdSteps'} dangerouslySetInnerHTML={{ __html: demoUnits.thirdSteps }} />,
+          `An exponent and its negative always give reciprocals: aᵗ · a⁻ᵗ = a⁰ = 1.`,
         ]
     },
     {

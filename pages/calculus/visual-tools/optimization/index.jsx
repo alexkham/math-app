@@ -777,16 +777,16 @@ This is also the cleanest case of the [second-derivative test](!#the-second-deri
     },
     obj12: {
       title: `x³ − 3x: a Maximum and a Minimum`,
-      content: `$f(x) = x^3 - 3x$ has $f'(x) = 3x^2 - 3$, so $f'(x) = 0$ at $x = \pm 1$ — two critical points, and the second derivative $f''(x) = 6x$ separates them:
+      content: `$f(x) = x^3 - 3x$ has $f'(x) = 3x^2 - 3$, so $f'(x) = 0$ at $x = \\pm 1$ — two critical points, and the second derivative $f''(x) = 6x$ separates them:
 
 - $x = -1$: $f'' = -6 < 0$, concave down, **local max**, with $f(-1) = 2$
 - $x = 1$: $f'' = +6 > 0$, concave up, **local min**, with $f(1) = -2$
 
 The markers are coloured accordingly — deep blue for the max, main blue for the min.`,
       before: ``,
-      after: `Neither of these is a global extremum. A cubic runs off to $+\infty$ on one side and $-\infty$ on the other, so on a wide enough interval the endpoints beat both critical points. That distinction — local versus global — is the reason a real optimization problem always has to check the endpoints too.
+      after: `Neither of these is a global extremum. A cubic runs off to $+\\infty$ on one side and $-\\infty$ on the other, so on a wide enough interval the endpoints beat both critical points. That distinction — local versus global — is the reason a real optimization problem always has to check the endpoints too.
 
-Watch $f''$ as you read across: it is negative left of the origin and positive right of it, crossing zero exactly at $x = 0$. That crossing is an inflection point of $f$, but it is *not* a critical point, because $f'(0) = -3 \neq 0$. The tool marks only the critical points, which is why nothing appears there.`,
+Watch $f''$ as you read across: it is negative left of the origin and positive right of it, crossing zero exactly at $x = 0$. That crossing is an inflection point of $f$, but it is not a critical point, because $f'(0) = -3 \\neq 0$. The tool marks only the critical points, which is why nothing appears there.`,
       link: '',
     },
     obj13: {
@@ -797,12 +797,12 @@ The tool falls back to the first-derivative test: it samples $f'$ just left and 
       before: ``,
       after: `This family exists to make the limits of the tests explicit. $f''(c) = 0$ is not evidence of anything — the test is simply silent, and something else has to decide. Here the sign of $f'$ on both sides does the work, and it says the function never stops increasing.
 
-The finder itself has to work harder for this case too. A critical point where $f'$ crosses zero is easy to bracket by a sign change; one where $f'$ merely *touches* zero has no sign change to detect, so the tool scans separately for local minima of $|f'|$ that sit near zero. That is why this point is found at all.`,
+The finder itself has to work harder for this case too. A critical point where $f'$ crosses zero is easy to bracket by a sign change; one where $f'$ merely touches zero has no sign change to detect, so the tool scans separately for local minima of $|f'|$ that sit near zero. That is why this point is found at all.`,
       link: '',
     },
     obj14: {
       title: `x⁴ − 4x²: Three Critical Points in a W`,
-      content: `$f(x) = x^4 - 4x^2$ gives $f'(x) = 4x^3 - 8x = 4x(x^2 - 2)$, so the critical points are $x = 0$ and $x = \pm\sqrt{2} \approx \pm 1.4142$. With $f''(x) = 12x^2 - 8$:
+      content: `$f(x) = x^4 - 4x^2$ gives $f'(x) = 4x^3 - 8x = 4x(x^2 - 2)$, so the critical points are $x = 0$ and $x = \\pm\\sqrt{2} \\approx \\pm 1.4142$. With $f''(x) = 12x^2 - 8$:
 
 - $x = -1.4142$: $f'' = 16 > 0$, **local min**, $f = -4$
 - $x = 0$: $f'' = -8 < 0$, **local max**, $f = 0$
@@ -812,14 +812,14 @@ Three markers, two of them at the same height.`,
       before: ``,
       after: `The two minima tie exactly, at $f = -4$, because the function is even. That is worth noticing: a global minimum need not be unique, and any procedure that assumes it is will pick one arbitrarily.
 
-The local maximum at the origin is the more interesting one. It is a maximum *locally* — the curve does fall away on both sides of it — while sitting at height $0$, well above the two minima and well below where the quartic goes further out. "Local" is doing real work in that sentence, and the W shape is the clearest picture of why the word is there.`,
+The local maximum at the origin is the more interesting one. It is a maximum locally — the curve does fall away on both sides of it — while sitting at height $0$, well above the two minima and well below where the quartic goes further out. "Local" is doing real work in that sentence, and the W shape is the clearest picture of why the word is there.`,
       link: '',
     },
     obj15: {
       title: `sin(x): Four Critical Points Over Two Periods`,
-      content: `On its default interval $[-2\pi, 2\pi]$, $f(x) = \sin(x)$ has $f'(x) = \cos(x)$ vanishing four times: at $x = \pm\frac{\pi}{2}$ and $x = \pm\frac{3\pi}{2}$.
+      content: `On its default interval $[-2\\pi, 2\\pi]$, $f(x) = \\sin(x)$ has $f'(x) = \\cos(x)$ vanishing four times: at $x = \\pm\\frac{\\pi}{2}$ and $x = \\pm\\frac{3\\pi}{2}$.
 
-The classification alternates, since $f'' = -\sin(x)$ flips sign at each one:
+The classification alternates, since $f'' = -\\sin(x)$ flips sign at each one:
 
 - $x = -4.7124$: **local max**, $f = 1$
 - $x = -1.5708$: **local min**, $f = -1$
@@ -837,7 +837,7 @@ That makes the search window matter in a way it does not for the polynomial fami
 
 It is a global maximum too: the function is positive everywhere and decays to zero in both directions, so nothing can exceed the peak.`,
       before: ``,
-      after: `The dotted $f''$ curve is where this family gets interesting. It equals $(4x^2 - 2)e^{-x^2}$ and crosses zero at $x = \pm\frac{1}{\sqrt{2}} \approx \pm 0.707$ — the two inflection points, one on each shoulder of the bell. In statistics those are the points one standard deviation out.
+      after: `The dotted $f''$ curve is where this family gets interesting. It equals $(4x^2 - 2)e^{-x^2}$ and crosses zero at $x = \\pm\\frac{1}{\\sqrt{2}} \\approx \\pm 0.707$ — the two inflection points, one on each shoulder of the bell. In statistics those are the points one standard deviation out.
 
 But neither is a critical point, and the tool marks neither, because $f'$ is nowhere near zero there. Critical points come from $f'$; inflection points come from $f''$. They are different questions asked of different derivatives, and this curve is the one where confusing them is easiest — which makes it the best place to keep them apart.`,
       link: '',

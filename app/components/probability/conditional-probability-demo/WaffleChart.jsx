@@ -26,9 +26,19 @@ export default function WaffleChart() {
       ...Array(totalTiles - numDark).fill(false)
     ];
     
-    // Shuffle
+    // Shuffle with a generator seeded by the area: the same layout on the server and in
+    // the browser (Math.random gave each a different one -> hydration mismatch)
+    let seed = 0;
+    for (const ch of String(areaId) + ':' + numDark) seed = (seed * 31 + ch.charCodeAt(0)) >>> 0;
+    const rand = () => {
+      seed = (seed + 0x6D2B79F5) >>> 0;
+      let t = seed;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
     for (let i = tileTypes.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = Math.floor(rand() * (i + 1));
       [tileTypes[i], tileTypes[j]] = [tileTypes[j], tileTypes[i]];
     }
     

@@ -561,6 +561,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import vennTwoSetDiagrams from '@/app/components/probability/venn-explorer/vennTwoSetDiagrams'
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
@@ -1059,6 +1060,14 @@ This page presents the idea of events and shows how they form the basic language
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const ogRelations = { kind: 'dice', svgTitle: 'Two dice: both dice at least 5 lies inside sum at least 10; sum at most 4 shares no outcome with either',
+    events: [{ label: 'B: sum ≥ 10', test: (a, b) => a + b >= 10, color: 'f' }, { label: 'A: both dice ≥ 5', test: (a, b) => a >= 5 && b >= 5, color: 'r' }, { label: 'C: sum ≤ 4', test: (a, b) => a + b <= 4, color: 'g' }],
+    notes: [{ text: 'A ⊆ B: every A cell is in B' }, { text: 'B − A: (4,6) and (6,4)', color: 'f' }, { text: 'C ∩ B = ∅: disjoint', color: 'g' }],
+    caption: 'Subset, difference and disjoint events, cell by cell' };
+  const ogAtLeastOne = { kind: 'dice', svgTitle: 'Two dice: at least one six covers 11 cells, the complement no six covers 5 by 5 = 25',
+    events: [{ label: 'at least one 6', test: (a, b) => a === 6 || b === 6, color: 'r' }],
+    notes: [{ text: 'complement: no 6 at all' }, { text: '5 × 5 = 25 white cells' }, { text: '36 − 25 = 11 cells', color: 'r' }, { text: 'P = 11/36', color: 'r' }],
+    caption: 'At least one: count the complement and subtract' };
   const demoUnits = {
     u_sample_0: demoUnitFrame({
       svg: diceSampleSpaceDiagrams.even,
@@ -1080,6 +1089,16 @@ This page presents the idea of events and shows how they form the basic language
       text: 'Assuming A has occurred discards the lower branch and leaves only the subtree below A, whose branch weights already sum to 1. The conditional probability of B is the weight of the B branch inside that subtree. Adjust the weights and watch the subtree renormalise on the',
       href: '/probability/visual-tools/conditional-probability/tree-diagram',
       linkText: 'conditional probability tree diagram',
+    }),
+    relations: demoUnitFrame({
+      svg: renderOutcomeGrid(ogRelations),
+      caption: 'Relations between events on two dice',
+      text: 'Three events on the 36 outcomes of two dice. A, both dice at least 5, has 4 cells, and every one of them also lies in B, sum at least 10: A is a subset of B. The difference B &#8722; A is what is left of B: the two cells (4,6) and (6,4). C, sum at most 4, sits in the opposite corner and shares no cell with A or B: C and B are disjoint.',
+    }),
+    atLeastOne: demoUnitFrame({
+      svg: renderOutcomeGrid(ogAtLeastOne),
+      caption: '“At least one” through the complement',
+      text: 'The event “at least one six” on two dice is the last row and the last column: 11 cells. Counting them directly double-counts the corner (6,6) unless you are careful. The complement, “no six at all”, is the 5 by 5 block of white cells, 25 outcomes. So the event has 36 &#8722; 25 = 11 outcomes, and P(at least one six) = 11/36.',
     }),
   };
 
@@ -1165,6 +1184,8 @@ export default function EventsPage({
             sectionsContent.relations.content,
             <div key={'relations-table'} style={tableWrapStyle}
                  dangerouslySetInnerHTML={{ __html: relationsTable }} />,
+                  <div key={'unit-relations'} dangerouslySetInnerHTML={{ __html: demoUnits.relations }} />,
+            `A subset can only have a smaller or equal probability: P(A) = 4/36 ≤ P(B) = 6/36.`,
         ]
     },
     {
@@ -1199,6 +1220,8 @@ export default function EventsPage({
         link:'',
         content:[
           sectionsContent.patterns.content,
+                  <div key={'unit-atLeastOne'} dangerouslySetInnerHTML={{ __html: demoUnits.atLeastOne }} />,
+          `The same move works for any number of dice: P(at least one six) = 1 − (5/6)ⁿ.`,
         ]
     },
     {

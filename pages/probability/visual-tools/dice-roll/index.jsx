@@ -186,7 +186,7 @@ For mathematical foundations of convergence and the Law of Large Numbers, see **
 
     obj11: {
       title: `The Full Sample Space for Two Dice`,
-      content: `With two dice selected, the explorer lays out every possible outcome as a card: $(1,1)$, $(1,2)$, and so on through $(6,6)$. There are $6 \times 6 = 36$ of them, and each card notes $P = 1/36$.
+      content: `With two dice selected, the explorer lays out every possible outcome as a card: $(1,1)$, $(1,2)$, and so on through $(6,6)$. There are $6 \\times 6 = 36$ of them, and each card notes $P = 1/36$.
 
 Every outcome is equally likely, and that is the assumption everything else on this page rests on. It holds because the dice are fair and independent — the first die's result tells you nothing about the second.`,
       before: ``,
@@ -199,20 +199,20 @@ Note that the space is of **ordered pairs**: $(2,5)$ and $(5,2)$ are two separat
       title: `Highlighting a Sum: Why 7 Is the Peak`,
       content: `Setting the condition to "sum equals 7" highlights six cards — $(1,6)$, $(2,5)$, $(3,4)$, $(4,3)$, $(5,2)$ and $(6,1)$ — giving
 
-$P(\text{sum} = 7) = \frac{6}{36} = \frac{1}{6} \approx 0.167$
+$P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6} \\approx 0.167$
 
 They form a diagonal stripe across the grid, which is what any fixed sum looks like here.`,
       before: ``,
       after: `Seven is the most likely sum precisely because its stripe is the longest one that fits. A sum of 2 needs $(1,1)$ alone and a sum of 12 needs $(6,6)$ alone, while 7 has six ways — and the sums in between fall off symmetrically, which is the triangular shape the simulator's histogram converges toward.
 
-Counting stripes gives the whole distribution without algebra: the number of ways to make a sum $s$ is the number of cells on that anti-diagonal, $s - 1$ ways for $s \le 7$ and $13 - s$ beyond it.`,
+Counting stripes gives the whole distribution without algebra: the number of ways to make a sum $s$ is the number of cells on that anti-diagonal, $s - 1$ ways for $s \\le 7$ and $13 - s$ beyond it.`,
       link: '',
     },
     obj13: {
       title: `Doubles: a Structural Event`,
       content: `The doubles condition highlights the six cards where both dice match — $(1,1)$ through $(6,6)$ — the main diagonal of the grid.
 
-$P(\text{doubles}) = \frac{6}{36} = \frac{1}{6}$
+$P(\\text{doubles}) = \\frac{6}{36} = \\frac{1}{6}$
 
 The same probability as a sum of 7, reached by a completely different route.`,
       before: ``,
@@ -225,7 +225,7 @@ It also shows why drawing the sample space earns its keep. Both events are immed
       title: `An Even Sum: Half the Grid`,
       content: `Highlighting even sums lights 18 of the 36 cards — exactly half.
 
-$P(\text{sum is even}) = \frac{18}{36} = \frac{1}{2}$
+$P(\\text{sum is even}) = \\frac{18}{36} = \\frac{1}{2}$
 
 The highlighted cells form a checkerboard rather than a stripe or a diagonal.`,
       before: ``,

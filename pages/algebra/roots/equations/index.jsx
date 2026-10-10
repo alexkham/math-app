@@ -8,6 +8,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -609,6 +611,37 @@ const schemas = {
 
 
 
+  const fpExtraneous = { kind: 'pieces', svgTitle: 'sqrt(x+5) = x - 1 meets only at x = 4; x = -1 lies on the negative branch that squaring adds', xRange: [-6, 7], yRange: [-4, 6],
+    pieces: [
+      { fn: (x) => -Math.sqrt(x + 5), from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[-5, 7]], label: { text: 'y = −√(x+5)', x: 2, y: -Math.sqrt(7), pos: 'ne' } },
+      { fn: (x) => Math.sqrt(x + 5), from: -5, to: 7, ends: ['closed', null], color: 'f', label: { text: 'y = √(x+5)', x: -4, y: 1, pos: 'se' } },
+      { fn: (x) => x - 1, from: -2, to: 7, ends: [null, null], color: 'g', label: { text: 'y = x − 1', x: 5.5, y: 4.5, pos: 'w' } },
+    ],
+    points: [{ x: 4, y: 3, label: 'x = 4: 3 = 3', pos: 'nw' }, { x: -1, y: -2 }, { x: -1, y: 2, label: '√4 = 2', pos: 'n' }],
+    notes: [{ x: -5.8, y: -3.6, text: 'x = −1 sits on the −√ branch: extraneous', pos: 'e', color: 'r' }],
+    caption: 'Only x = 4 is a crossing; x = −1 meets the −√ branch instead' };
+  const fpRadicalIneq = { kind: 'pieces', svgTitle: 'sqrt(x - 2) <= 4 holds exactly for 2 <= x <= 18', xRange: [0, 22], yRange: [-1, 6], xStep: 2,
+    pieces: [
+      { fn: () => 4, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0, 22]], label: { text: 'y = 4', x: 6, y: 4, pos: 'n' } },
+      { fn: (x) => Math.sqrt(x - 2), from: 18, to: 22, ends: [null, null], color: 'f' },
+      { fn: (x) => Math.sqrt(x - 2), from: 2, to: 18, ends: ['closed', 'closed'], color: 'f', label: { text: 'y = √(x − 2)', x: 8, y: Math.sqrt(6), pos: 'se' } },
+    ],
+        vlines: [{ x: 18 }],
+    notes: [{ x: 0.4, y: 5.4, text: 'solution 2 ≤ x ≤ 18: curve exists and stays ≤ 4', pos: 'e', color: 'r' }, { x: 0.4, y: -0.6, text: 'x < 2: √ undefined', pos: 'e' }, { x: 2.3, y: 0.35, text: 'x = 2', pos: 'e' }, { x: 17.6, y: 4.4, text: '(18, 4)', pos: 'w' }],
+    caption: '√(x − 2) ≤ 4 needs x ≥ 2 (domain) and x ≤ 18 (squared)' };
+  const demoUnits = {
+    extraneous: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpExtraneous),
+      caption: 'Where the extraneous root comes from',
+      text: 'The section&#8217;s &#8730;(x + 5) = x &#8722; 1 drawn as two graphs. The curve and the line cross once, at x = 4, where both sides equal 3. Squaring also accepts points where &#8722;&#8730;(x + 5) = x &#8722; 1, the dashed branch, and that is where x = &#8722;1 comes from: there the radical is &#8730;4 = 2 while the right side is &#8722;2.',
+    }),
+    radicalIneq: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpRadicalIneq),
+      caption: 'Two conditions, one interval',
+      text: 'The section&#8217;s &#8730;(x &#8722; 2) &#8804; 4. The curve starts at x = 2, where the radicand is 0; to the left of it there is no square root at all. It rises and reaches the level 4 at x = 18. The solution is the stretch where the curve exists and is not above the dashed line: 2 &#8804; x &#8804; 18.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -618,6 +651,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Radical Equations: Solve & Check for Extraneous Solutions | Learn Math Class",
       description: "Learn to solve radical equations: isolate radicals, square both sides, handle extraneous solutions, solve equations with multiple radicals, and verify all answers.",
@@ -631,7 +665,7 @@ return {
    }
 
 
-export default function RootEquationsPage({seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas}) {
+export default function RootEquationsPage({seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -679,6 +713,8 @@ export default function RootEquationsPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-extraneous'} dangerouslySetInnerHTML={{ __html: demoUnits.extraneous }} />,
+          `Squaring cannot tell √(x + 5) from −√(x + 5); only the check can.`,
         ]
     },
     {
@@ -724,6 +760,8 @@ export default function RootEquationsPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <div key={'unit-radicalIneq'} dangerouslySetInnerHTML={{ __html: demoUnits.radicalIneq }} />,
+          `Dropping the domain condition would wrongly admit every x ≤ 18.`,
         ]
     },
     {

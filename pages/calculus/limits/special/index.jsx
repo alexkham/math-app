@@ -9,6 +9,8 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -851,6 +853,35 @@ const schemas = {
 }
 
 
+  const slSinc = (x) => (x === 0 ? 1 : Math.sin(x) / x);
+  const slSeq = (n) => (1 + 1 / n) ** n;
+  const slDots = Array.from({ length: 12 }, (_, i) => ({ fn: slSeq, from: i + 1, to: i + 1, ends: ['closed', 'closed'], color: 'f' }));
+  const fpSincSqueeze = { kind: 'pieces', svgTitle: 'sin x / x lies between cos x and 1 near 0 and has a hole at (0, 1): its limit is 1', xRange: [-3.2, 3.2], yRange: [-1.2, 1.4],
+    pieces: [
+      { fn: () => 1, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[-3.2, 3.2]], label: { text: 'y = 1', x: 2.4, y: 1, pos: 'n' } },
+      { fn: Math.cos, from: -3.2, to: 3.2, ends: [null, null], color: 'g', label: { text: 'cos x', x: 2.2, y: Math.cos(2.2), pos: 'e' } },
+      { fn: slSinc, from: -3.2, to: 0, ends: [null, 'open'], color: 'f' },
+      { fn: slSinc, from: 0, to: 3.2, ends: ['open', null], color: 'f', label: { text: 'sin x / x', x: 1.6, y: slSinc(1.6), pos: 'ne' } },
+    ],
+    notes: [{ x: -3.1, y: 1.25, text: 'cos x < sin x / x < 1 near 0', pos: 'e', color: 'r' }, { x: 0.2, y: -0.3, text: 'hole at (0, 1)', pos: 'e' }],
+    caption: 'Squeezed between cos x and 1, sin x / x must approach 1' };
+  const fpEulerSeq = { kind: 'pieces', svgTitle: '(1 + 1/n)^n for n = 1 to 12: 2, 2.25, 2.37, ... rising toward e = 2.718', xRange: [0, 13], yRange: [1.8, 2.9], xLetter: 'n',
+    pieces: [{ fn: () => Math.E, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[0, 13]], label: { text: 'e ≈ 2.718', x: 12.8, y: Math.E, pos: 'nw' } }, ...slDots],
+    notes: [{ x: 1.2, y: 2.0, text: 'n = 1: 2', pos: 'e', color: 'f' }, { x: 2.2, y: 2.22, text: 'n = 2: 2.25', pos: 'e', color: 'f' }, { x: 10.2, y: 2.55, text: 'n = 12: 2.613', pos: 'e', color: 'f' }],
+    caption: '(1 + 1/n)ⁿ climbs toward e but never reaches it' };
+  const demoUnits = {
+    sincSqueeze: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpSincSqueeze),
+      caption: 'sin x / x between cos x and 1',
+      text: 'The section&#8217;s squeeze, drawn. Near 0 (in radians) the curve sin x / x lies above cos x and below the dashed line y = 1; at x = 0 itself it has no value, only a hole at (0, 1). Both bounds tend to 1 as x &#8594; 0, so the trapped curve tends to 1 as well. That is why lim sin x / x = 1 even though substituting 0 gives 0/0.',
+    }),
+    eulerSeq: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpEulerSeq),
+      caption: 'Compounding toward e',
+      text: 'The terms (1 + 1/n)&#8319; for n = 1 to 12: 2, 2.25, 2.370, 2.441, &#8230;, 2.613. Each one is the growth factor of a year at 100% interest compounded n times. More frequent compounding always helps, so the dots keep rising, but by less and less, and they stay below the dashed level e &#8776; 2.718, which they approach as n grows without bound.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -860,6 +891,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Special Limits: sin(x)/x, e^x, and More | Learn Math Class",
       description: "Master special limits: sin(x)/x, (e^x-1)/x, definition of e, logarithmic limits, and growth rate comparisons. Essential limits to memorize for calculus.",
@@ -872,7 +904,7 @@ return {
 
 }
 
-export default function SpecialPage({seoData, sectionsContent, introContent, obj3Table, obj9Table, summaryTable, faqQuestions, schemas}) {
+export default function SpecialPage({seoData, sectionsContent, introContent, obj3Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -891,6 +923,8 @@ export default function SpecialPage({seoData, sectionsContent, introContent, obj
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-sincSqueeze'} dangerouslySetInnerHTML={{ __html: demoUnits.sincSqueeze }} />,
+          `In degrees the same quotient tends to π/180, which is why calculus uses radians.`,
         ]
     },
     {
@@ -933,6 +967,8 @@ export default function SpecialPage({seoData, sectionsContent, introContent, obj
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-eulerSeq'} dangerouslySetInnerHTML={{ __html: demoUnits.eulerSeq }} />,
+          `The approach is slow: at n = 1000 the value is still 2.7169, short of e by about 0.0014.`,
         ]
     },
     {

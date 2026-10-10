@@ -861,6 +861,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 
@@ -1512,6 +1513,24 @@ const geometricExplanations = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const geP = (k) => 0.3 * 0.7 ** (k - 1);
+  const gePx = (k) => k / 12.5 * 388;
+  const geStems = Array.from({ length: 12 }, (_, i) => ({ from: 0, to: geP(i + 1), color: i === 0 ? 'r' : 'f', dx: gePx(i + 1) }));
+  const geMemStems = [].concat(
+    Array.from({ length: 10 }, (_, i) => ({ from: 0, to: geP(i + 1), color: 'f', dx: gePx(i + 1) - 4 })),
+    Array.from({ length: 8 }, (_, i) => ({ from: 0, to: geP(i + 1), color: 'r', dx: gePx(i + 3) + 4 })));
+  const fpGeoCenters = { kind: 'pieces', svgTitle: 'Geometric PMF with p = 0.3: mode 1, median 2, mean 1/0.3 = 3.33', xRange: [-0.5, 12], yRange: [0, 0.36], xLetter: 'k',
+    pieces: [{ fn: () => 0, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [] }],
+    yBars: geStems,
+    vlines: [{ x: 2, label: 'median' }, { x: 1 / 0.3, label: 'mean' }],
+    notes: [{ x: 5.6, y: 0.3, text: 'mode 1: the tallest bar', pos: 'e', color: 'r' }, { x: 5.6, y: 0.27, text: 'each bar 0.7 × the last', pos: 'e' }],
+    caption: 'p = 0.3: the mode is 1, the median 2, the mean 3.33' };
+  const fpGeoMemory = { kind: 'pieces', svgTitle: 'Geometric PMF with p = 0.3 and the PMF given two failures: the same bars, shifted two trials to the right', xRange: [-0.5, 12], yRange: [0, 0.36], xLetter: 'k',
+    pieces: [{ fn: () => 0, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [] }],
+    yBars: geMemStems,
+    vlines: [{ x: 2.5, label: 'after 2 failures' }],
+    notes: [{ x: 6.8, y: 0.3, text: 'blue: P(X = k)', pos: 'e', color: 'f' }, { x: 6.8, y: 0.27, text: 'amber: given X > 2', pos: 'e', color: 'r' }, { x: 6.8, y: 0.24, text: 'same bars, 2 steps later', pos: 'e' }],
+    caption: 'After failures the count restarts: no memory of the past' };
   const demoUnits = {
     u_4_0: demoUnitFrame({
       svg: discretePmfDiagrams.geometric,
@@ -1526,6 +1545,16 @@ const geometricExplanations = {
       text: 'The event that the first success comes within k trials has probability 1 minus (1 minus p) to the k, the complement of k straight failures. The staircase climbs quickly at first and then flattens as that complement approaches 1. Read the probability of the event X &le; k at any step on the',
       href: '/probability/visual-tools/cdf/discrete',
       linkText: 'discrete CDF explorer',
+    }),
+    geoMemory: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpGeoMemory),
+      caption: 'Restarting after failures',
+      text: 'Blue bars: the probability that the first success comes on trial k, for p = 0.3. Amber bars: the same probabilities once two failures have already happened. They are the blue bars moved two trials to the right, unchanged in height: the chance that success comes 1, 2, 3, &#8230; trials from now does not depend on how many trials have failed so far.',
+    }),
+    geoCenters: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpGeoCenters),
+      caption: 'Mode, median and mean for p = 0.3',
+      text: 'The PMF for p = 0.3. The first bar, P(X = 1) = 0.3, is the tallest, so the mode is 1, and every later bar is 0.7 times the one before. The median is 2, because P(X &#8804; 2) = 0.51 is the first cumulative value to pass one half. The mean, 1/p = 3.33, lies further right: the long tail of rare late successes pulls it up.',
     }),
   };
 
@@ -1578,6 +1607,8 @@ export default function GeometricDistributionPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-geoMemory'} dangerouslySetInnerHTML={{ __html: demoUnits.geoMemory }} />,
+          `This is the discrete counterpart of the exponential distribution's memoryless property.`,
           sectionsContent.links.decide,
           sectionsContent.obj1.example,
           sectionsContent.links.example,
@@ -1666,6 +1697,8 @@ export default function GeometricDistributionPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-geoCenters'} dangerouslySetInnerHTML={{ __html: demoUnits.geoCenters }} />,
+          `For any p the geometric is right-skewed: mode ≤ median ≤ mean.`,
         ]
     },
     {

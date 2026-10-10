@@ -611,7 +611,7 @@ export async function getStaticProps(){
       content: `Choose an operation and a length, then watch the result vector build up one component at a time.
 
 • Use the **Operation** segmented control to switch between **u + v** and **u − v**
-• Set the shared length of $u$ and $v$ with the **Dimensions** stepper — the number of components ranges from 1 to 5
+• Set the shared length of $u$ and $v$ with the **Dimensions** stepper — the number of components ranges from 1 to 10
 • Click play on the scene player to step through each component of $w$, or use the speed selector to slow down or speed up the animation
 
 The hover **?** icon next to the [dimensions](!/linear-algebra/vector-spaces/dimension#1) label explains why $u$ and $v$ must have the same length. Because the operation is component-wise, no other configuration is needed — the visualizer fully determines the symbolic flow from the operation and length alone.`,

@@ -2464,6 +2464,12 @@ function fmt(v) {
   const r = Math.round(v * 100) / 100;
   return Math.abs(r - Math.round(r)) < 1e-4 ? String(Math.round(r)) : String(r);
 }
+// fmt() with a typographic minus, for the Unicode equation text (the TeX builders keep fmt()).
+function fmtU(v) {
+  const s = fmt(v);
+  return s.startsWith('-') ? `\u2212${s.slice(1)}` : s;
+}
+
 
 
 /* ================================================================
@@ -2715,18 +2721,45 @@ const DEFAULT_FAMILIES = FAMILIES;
    EQUATION BUILDERS — Unicode (for inline pills)
    ================================================================ */
 
+// True when str is a sum/difference at its top level ("x − 2", "2·x + 1"), i.e. it
+// needs brackets before it can be multiplied or negated. (), [], {} and |…| group.
+function isSum(str) {
+  let depth = 0, inAbs = false;
+  for (let i = 0; i < str.length; i++) {
+    const ch = str[i];
+    if (ch === '(' || ch === '[' || ch === '{') depth++;
+    else if (ch === ')' || ch === ']' || ch === '}') depth--;
+    else if (ch === '|') inAbs = !inAbs;
+    else if (depth === 0 && !inAbs && i > 0 && str[i - 1] === ' ' && (ch === '+' || ch === '\u2212' || ch === '-')) return true;
+  }
+  return false;
+}
+
 function buildForwardEq(fam, p) {
   const { a, b, h, k } = p;
   let inner = 'x';
   if (h !== 0) inner = `x ${h >= 0 ? '−' : '+'} ${fmt(Math.abs(h))}`;
-  if (b !== 1) inner = h !== 0 ? `${fmt(b)}(${inner})` : `${fmt(b)}x`;
+  if (b === -1) inner = h !== 0 ? `−(${inner})` : '−x';
+  else if (b !== 1) inner = h !== 0 ? `${fmtU(b)}(${inner})` : `${fmtU(b)}x`;
   let body = fam.bodyOf(inner);
+  // A family that does not bracket its input (x, 2·x) gets brackets around a sum or a
+  // leading minus: 2·(x − 2), not 2·x − 2.
+  if ((isSum(inner) || inner.startsWith('−')) && body !== inner && !body.includes(`(${inner})`)
+      && !body.includes(`{${inner}}`) && !body.includes(`|${inner}|`)) body = fam.bodyOf(`(${inner})`);
+  const wrap = isSum(body) || body.startsWith('−');
   let out;
-  if (a === -1) out = `−${body}`;
-  else if (a !== 1) out = `${fmt(a)}·${body}`;
+  if (a === -1) out = wrap ? `−(${body})` : `−${body}`;
+  else if (a !== 1) out = wrap ? `${fmtU(a)}·(${body})` : `${fmtU(a)}·${body}`;
   else out = body;
   if (k !== 0) out += ` ${k >= 0 ? '+' : '−'} ${fmt(Math.abs(k))}`;
   return out;
+}
+
+// "expr / d" with the sign of d pulled to the front: x/(−2) reads −x/2, and /(−1) reads −x.
+function divideBy(expr, d, minus) {
+  if (d === -1) return `${minus}${expr}`;
+  if (d < 0) return `${minus}${expr}/${fmt(-d)}`;
+  return `${expr}/${fmt(d)}`;
 }
 
 function buildInverseEq(fam, p) {
@@ -2734,10 +2767,13 @@ function buildInverseEq(fam, p) {
   // g⁻¹(x) = h + baseInv((x − k) / a) / b
   let inner = 'x';
   if (k !== 0) inner = `x ${k >= 0 ? '−' : '+'} ${fmt(Math.abs(k))}`;
-  if (a !== 1) inner = k !== 0 ? `(${inner})/${fmt(a)}` : `x/${fmt(a)}`;
+  if (a !== 1) inner = divideBy(k !== 0 ? `(${inner})` : 'x', a, '\u2212');
   let body = fam.invBodyOf(inner);
-  if (b !== 1) body = `(${body})/${fmt(b)}`;
-  if (h !== 0) body = `${fmt(h)} ${h >= 0 ? '+' : '−'} ${body.replace(/^−/, '')}`.replace(/\+\s*−/, '− ');
+  if ((isSum(inner) || inner.startsWith('−')) && body !== inner && !body.includes(`(${inner})`)
+      && !body.includes(`{${inner}}`)) body = fam.invBodyOf(`(${inner})`);
+  if (b !== 1) body = divideBy(`(${body})`, b, '\u2212');
+  // h is ADDED: h = −2 reads "−2 + …", and a body that starts with a minus folds into "−2 − …".
+  if (h !== 0) body = body.startsWith('\u2212') ? `${fmtU(h)} \u2212 ${body.slice(1)}` : `${fmtU(h)} + ${body}`;
   return body;
 }
 
@@ -2752,11 +2788,17 @@ function buildForwardEqTex(fam, p) {
   const { a, b, h, k } = p;
   let inner = 'x';
   if (h !== 0) inner = `x ${h >= 0 ? '-' : '+'} ${fmt(Math.abs(h))}`;
-  if (b !== 1) inner = h !== 0 ? `${fmt(b)}(${inner})` : `${fmt(b)}x`;
+  if (b === -1) inner = h !== 0 ? `-(${inner})` : '-x';
+  else if (b !== 1) inner = h !== 0 ? `${fmt(b)}(${inner})` : `${fmt(b)}x`;
   let body = fam.bodyOfTex(inner);
+  // A family that does not bracket its input (x, 2·x) gets brackets around a sum or a
+  // leading minus: 2·(x − 2), not 2·x − 2.
+  if ((isSum(inner) || inner.startsWith('-')) && body !== inner && !body.includes(`(${inner})`)
+      && !body.includes(`{${inner}}`) && !body.includes(`|${inner}|`)) body = fam.bodyOfTex(`(${inner})`);
+  const wrap = isSum(body) || body.startsWith('-');
   let out;
-  if (a === -1) out = `-${body}`;
-  else if (a !== 1) out = `${fmt(a)} \\cdot ${body}`;
+  if (a === -1) out = wrap ? `-(${body})` : `-${body}`;
+  else if (a !== 1) out = wrap ? `${fmt(a)} \\cdot (${body})` : `${fmt(a)} \\cdot ${body}`;
   else out = body;
   if (k !== 0) out += ` ${k >= 0 ? '+' : '-'} ${fmt(Math.abs(k))}`;
   return out;
@@ -2766,10 +2808,12 @@ function buildInverseEqTex(fam, p) {
   const { a, b, h, k } = p;
   let inner = 'x';
   if (k !== 0) inner = `x ${k >= 0 ? '-' : '+'} ${fmt(Math.abs(k))}`;
-  if (a !== 1) inner = k !== 0 ? `(${inner})/${fmt(a)}` : `x/${fmt(a)}`;
+  if (a !== 1) inner = divideBy(k !== 0 ? `(${inner})` : 'x', a, '-');
   let body = fam.invBodyOfTex(inner);
-  if (b !== 1) body = `(${body})/${fmt(b)}`;
-  if (h !== 0) body = `${fmt(h)} ${h >= 0 ? '+' : '-'} ${body.replace(/^-/, '')}`.replace(/\+\s*-/, '- ');
+  if ((isSum(inner) || inner.startsWith('-')) && body !== inner && !body.includes(`(${inner})`)
+      && !body.includes(`{${inner}}`)) body = fam.invBodyOfTex(`(${inner})`);
+  if (b !== 1) body = divideBy(`(${body})`, b, '-');
+  if (h !== 0) body = body.startsWith('-') ? `${fmt(h)} - ${body.slice(1)}` : `${fmt(h)} + ${body}`;
   return body;
 }
 

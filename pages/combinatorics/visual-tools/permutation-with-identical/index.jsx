@@ -558,7 +558,7 @@ To run the visualization:
 
 • Press **Step ▶** to advance one ball at a time.
 
-• Press **◀** to step backward through the animation.
+• Press **◀ Back** to step backward through the animation.
 
 • Adjust the **Speed** slider to control how fast play advances.
 
@@ -608,7 +608,7 @@ Positional dimming is the honest way to animate a multiset: the tool must move o
 
 • [AABBC](!#aabbc-the-longest-run) — two each of $A$ and $B$, one of $C$. $5! / (2! \\cdot 2! \\cdot 1!) = 30$ permutations.
 
-Use the **◀** and **▶** buttons next to *multiset =* to cycle. Each preset resets the build, refreshes the formula in the header, and rebuilds the completed section into the new set of first-item rows.`,
+Use the **◀** and **▶** buttons next to **multiset =** to cycle. Each preset resets the build, refreshes the formula in the header, and rebuilds the completed section into the new set of first-item rows.`,
       before: ``,
       after: ``,
       link: '',
@@ -644,7 +644,7 @@ Unequal group sizes are the feature that separates this tool from the [full perm
       title: `Transport Controls`,
       content: `The control bar offers four transport buttons plus a speed slider:
 
-• **◀** (Step back) — walks the animation one step backward. Useful for re-examining a single arrangement or pausing mid-build.
+• **◀ Back** (Step back) — walks the animation one step backward. Useful for re-examining a single arrangement or pausing mid-build.
 
 • **Step ▶** (Step forward) — advances [one ball into one slot](!#the-build-area). Stop after each step to read the partial arrangement.
 

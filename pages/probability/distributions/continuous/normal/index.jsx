@@ -1086,6 +1086,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 
@@ -1982,6 +1983,22 @@ This convergence explains why the normal distribution appears so frequently in n
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const noN = (m, s) => (x) => Math.exp(-((x - m) ** 2) / (2 * s * s)) / (s * Math.sqrt(2 * Math.PI));
+  const noBars = Array.from({ length: 48 }, (_, i) => { const x = 140 + (i + 0.5) * 60 / 48, d = Math.abs(x - 170); return { from: 0, to: noN(170, 10)(x), color: d <= 10 ? 'f' : d <= 20 ? 'g' : 'r', dx: (x - 130) / 80 * 388 }; });
+  const fpMuSigma = { kind: 'pieces', svgTitle: 'Normal curves N(0, 1), N(3, 1) and N(0, 2^2): mu moves the bell, sigma widens and lowers it', xRange: [-6, 7], yRange: [0, 0.45],
+    pieces: [
+      { fn: noN(0, 1), from: -6, to: 7, ends: [null, null], color: 'f' },
+      { fn: noN(3, 1), from: -6, to: 7, ends: [null, null], color: 'r' },
+      { fn: noN(0, 2), from: -6, to: 7, ends: [null, null], color: 'g' },
+    ],
+    notes: [{ x: 3.8, y: 0.42, text: 'blue: μ = 0, σ = 1', pos: 'e', color: 'f' }, { x: 3.8, y: 0.385, text: 'amber: μ = 3, σ = 1', pos: 'e', color: 'r' }, { x: 3.8, y: 0.35, text: 'navy: μ = 0, σ = 2', pos: 'e', color: 'g' },
+      { x: -5.8, y: 0.42, text: 'μ moves it', pos: 'e', color: 'r' }, { x: -5.8, y: 0.385, text: 'σ widens it', pos: 'e', color: 'g' }],
+    caption: 'μ slides the bell; σ widens it and lowers the peak' };
+  const fpSigmaBands = { kind: 'pieces', svgTitle: 'Heights N(170, 10^2): about 68% within 160-180 cm, 95% within 150-190 cm', xRange: [130, 210], yRange: [0, 0.065], xStep: 10,
+    pieces: [{ fn: noN(170, 10), from: 130, to: 210, ends: [null, null], color: 'f' }],
+    yBars: noBars,
+    notes: [{ x: 131, y: 0.062, text: 'blue: within 1σ, 160–180 cm, about 68%', pos: 'e', color: 'f' }, { x: 131, y: 0.0575, text: 'navy: 1σ to 2σ, together about 95%', pos: 'e', color: 'g' }, { x: 131, y: 0.053, text: 'amber: beyond 2σ, about 5%', pos: 'e', color: 'r' }],
+    caption: 'Heights N(170, 10²): the 68–95 rule as shaded areas' };
   const demoUnits = {
     u_5_0: demoUnitFrame({
       svg: continuousPdfDiagrams['normal-pdf'],
@@ -1996,6 +2013,16 @@ This convergence explains why the normal distribution appears so frequently in n
       text: 'The S-curve passes through one half at the mean and approaches 0 and 1 in the tails; its slope at any point is the density there, which is why it is steepest at the centre. Values are read from tables or software because the integral has no elementary form. Move along the curve and read cumulative probabilities on the',
       href: '/probability/visual-tools/cdf/continuous',
       linkText: 'continuous CDF visualizer',
+    }),
+    muSigma: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpMuSigma),
+      caption: 'What μ and σ each do',
+      text: 'Three normal curves. Changing μ from 0 to 3 (blue to amber) slides the whole bell to the right without changing its shape. Changing σ from 1 to 2 (blue to navy) keeps the centre but spreads the bell out, and since the area must stay 1 the peak drops to half its height. Location and spread are controlled separately, which is why two numbers describe every normal distribution.',
+    }),
+    sigmaBands: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpSigmaBands),
+      caption: 'The 68–95 rule for heights',
+      text: 'The section&#8217;s heights, normal with mean 170 cm and standard deviation 10 cm. The blue area between 160 and 180 cm, within one standard deviation, is about 68% of the total. Adding the navy bands out to 150 and 190 cm, two standard deviations, brings it to about 95%. Only the amber tails, about 5%, lie further out.',
     }),
   };
 
@@ -2077,6 +2104,8 @@ export default function NormalDistributionPage({
            <div key={'parameters-normal'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
                       {processContent(sectionsContent.obj3.content,)}
                   </div>,
+                  <div key={'unit-muSigma'} dangerouslySetInnerHTML={{ __html: demoUnits.muSigma }} />,
+          `Doubling σ halves the peak height: the total area under every normal curve is 1.`,
         ]
     },
     {
@@ -2121,6 +2150,8 @@ export default function NormalDistributionPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-sigmaBands'} dangerouslySetInnerHTML={{ __html: demoUnits.sigmaBands }} />,
+          `Out to three standard deviations, 140 to 200 cm, the share rises to about 99.7%.`,
         ]
     },
     {

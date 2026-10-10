@@ -9,6 +9,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -859,6 +861,49 @@ const schemas = {
   }
 }
 
+  const fpEvenPowers = { kind: 'pieces', svgTitle: 'x^2 and x^4 are never negative, so no real x gives -9', xRange: [-4, 4], yRange: [-12, 18], yStep: 3,
+    pieces: [
+      { fn: () => -9, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[-4, 4]], label: { text: 'y = −9: never reached', x: 1.6, y: -9, pos: 's' } },
+      { fn: (x) => x * x, from: -4, to: 4, ends: [null, null], color: 'f', label: { text: 'y = x²', x: 2.8, y: 7.84, pos: 'se' } },
+      { fn: (x) => x ** 4, from: -2.05, to: 2.05, ends: [null, null], color: 'g', label: { text: 'y = x⁴', x: -1.9, y: 13, pos: 'w' } },
+    ],
+    notes: [{ x: -3.9, y: -4, text: 'even powers are never below 0', pos: 'e', color: 'r' }],
+    caption: 'No real number squares to −9, so √(−9) is not a real number' };
+  const fpOddPower = { kind: 'pieces', svgTitle: 'x^3 takes every real value exactly once: -27 only at x = -3', xRange: [-4, 4], yRange: [-36, 36], yStep: 9,
+    pieces: [
+      { fn: () => -27, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-4, 4]], label: { text: 'y = −27', x: 2.6, y: -27, pos: 'n' } },
+      { fn: () => 27, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-4, 4]], label: { text: 'y = 27', x: -2.6, y: 27, pos: 'n' } },
+      { fn: (x) => x ** 3, from: -3.3, to: 3.3, ends: [null, null], color: 'f', label: { text: 'y = x³', x: 2.2, y: 10.648, pos: 'se' } },
+    ],
+    points: [{ x: -3, y: -27, label: '∛(−27) = −3', pos: 'se' }, { x: 3, y: 27, label: '∛27 = 3', pos: 'nw' }],
+    notes: [{ x: -3.9, y: 15, text: 'one crossing per level: one real cube root', pos: 'e', color: 'r' }],
+    caption: 'Each level meets y = x³ once, so every real number has one cube root' };
+  const fpAbsIdentity = { kind: 'pieces', svgTitle: 'The graph of sqrt(x^2) is the V of |x|, not the line y = x', xRange: [-5, 5], yRange: [-5, 6],
+    pieces: [
+      { fn: (x) => x, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[-5, 0]], label: { text: 'y = x would give −5 here', x: -4.6, y: -4.6, pos: 'e' } },
+      { fn: (x) => Math.sqrt(x * x), from: -5, to: 5, ends: [null, null], color: 'f', label: { text: 'y = √(x²) = |x|', x: 2.6, y: 2.6, pos: 'se' } },
+    ],
+    points: [{ x: -5, y: 5, label: '√((−5)²) = 5', pos: 'ne' }, { x: 5, y: 5, label: '√(5²) = 5', pos: 'nw' }],
+    notes: [{ x: -4.8, y: -1.2, text: 'for x < 0, √(x²) = −x', pos: 'e', color: 'r' }],
+    caption: '√(x²) = |x|: the root of a square is never negative' };
+  const demoUnits = {
+    evenPowers: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpEvenPowers),
+      caption: 'Why even roots refuse negatives',
+      text: 'The graphs of x&#178; and x&#8308; touch 0 at the origin and stay at or above it everywhere else. A square root of &#8722;9 would be a number whose square is &#8722;9, a point where one of these curves meets the dashed level &#8722;9, and there is none. The same holds for every even power, so every even-index root of a negative number fails to be real.',
+    }),
+    oddPower: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpOddPower),
+      caption: 'Every level, one cube root',
+      text: 'The curve y = x&#179; rises through every height, from far below the axis to far above it. The dashed level &#8722;27 meets it exactly once, at x = &#8722;3, and the level 27 exactly once, at x = 3. One crossing for every level is why every real number, negative ones included, has exactly one real cube root.',
+    }),
+    absIdentity: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpAbsIdentity),
+      caption: 'The graph of &#8730;(x&#178;)',
+      text: 'Plotting &#8730;(x&#178;) gives a V, not a line. On the right it agrees with y = x. On the left, squaring removes the sign and the root returns the positive value: x = &#8722;5 gives &#8730;25 = 5, not &#8722;5. The dashed line shows where y = x would have gone. The V is the graph of |x|, which is the identity &#8730;(x&#178;) = |x|.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -868,6 +913,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Properties of Radicals: Even & Odd Index, Principal Root | Learn Math Class",
       description: "Learn radical properties: even vs odd index behavior, principal root convention, domain restrictions, √(x²) = |x| identity, sign behavior, and connection to rational exponents.",
@@ -880,7 +926,7 @@ return {
    }
 
 // export default function PropertiesPage({seoData,sectionsContent , introContent}) {
-export default function PropertiesPage({seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas}) {
+export default function PropertiesPage({seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -899,6 +945,8 @@ export default function PropertiesPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-evenPowers'} dangerouslySetInnerHTML={{ __html: demoUnits.evenPowers }} />,
+          `x⁴ hugs the axis more tightly near 0 but has the same floor: nothing below 0.`,
         ]
     },
     {
@@ -926,6 +974,8 @@ export default function PropertiesPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-oddPower'} dangerouslySetInnerHTML={{ __html: demoUnits.oddPower }} />,
+          `Compare section 1: a parabola never meets a level below 0, a cubic meets every level once.`,
         ]
     },
     {
@@ -942,6 +992,8 @@ export default function PropertiesPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-absIdentity'} dangerouslySetInnerHTML={{ __html: demoUnits.absIdentity }} />,
+          `For ∛(x³) there is no fold: the graph is the whole line y = x.`,
         ]
     },
     {

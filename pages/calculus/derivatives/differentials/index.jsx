@@ -916,6 +916,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionTangentLineDiagrams from '@/app/components/calculus/visualizers/functionTangentLineDiagrams'
 
 
@@ -1643,6 +1644,17 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const dlCol = 2 * 388 / 3;
+  const fpDyDelta = { kind: 'pieces', svgTitle: 'f(x) = x^2 from x = 1 with dx = 1: the tangent rises dy = 2, the curve rises delta y = 3, the gap is 1', xRange: [0, 3], yRange: [-1, 5],
+    pieces: [
+      { fn: () => 1, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[1, 2]], label: { text: 'dx = 1', x: 1.5, y: 1, pos: 's' } },
+      { fn: (x) => 2 * x - 1, from: 0.3, to: 2.2, ends: [null, null], color: 'g', label: { text: 'tangent at x = 1', x: 0.65, y: -0.7, pos: 'e' } },
+      { fn: (x) => x * x, from: 0, to: 2.2, ends: [null, null], color: 'f', label: { text: 'y = x²', x: 1.65, y: 1.65 * 1.65, pos: 'nw' } },
+    ],
+    yBars: [{ from: 1, to: 3, color: 'g', dx: dlCol }, { from: 3, to: 4, color: 'r', dx: dlCol }, { from: 1, to: 4, color: 'f', dx: dlCol + 14 }],
+    points: [{ x: 1, y: 1 }],
+    notes: [{ x: 2.2, y: 4.1, text: 'Δy = 3 (curve)', pos: 'e', color: 'f' }, { x: 2.2, y: 3.45, text: 'error 1', pos: 'e', color: 'r' }, { x: 2.2, y: 2.0, text: 'dy = 2 (tangent)', pos: 'e', color: 'g' }],
+    caption: 'dy follows the tangent, Δy follows the curve; the gap is the error' };
   const demoUnits = {
     linear: demoUnitFrame({
       svg: functionTangentLineDiagrams.pos,
@@ -1650,6 +1662,11 @@ const schemas = {
       text: 'Near the marked point the curve and its tangent line are nearly indistinguishable, and the line&#8217;s slope, 1.89, is the f&#8242;(a) of the formula: moving dx along the line raises it by 1.89&#8201;dx, which is dy. The gap between line and curve, visible only farther out, is the error the differential ignores. Move the point and watch the approximating line follow on the',
       href: '/calculus/visual-tools/tangent-line',
       linkText: 'tangent line at a point tool',
+    }),
+    dyDelta: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpDyDelta),
+      caption: 'dy and &#916;y side by side',
+      text: 'f(x) = x&#178; at x = 1 with dx = 1. Along the tangent line, whose slope is f&#8242;(1) = 2, the run of 1 produces a rise of dy = 2 (navy column). Along the curve, the same run produces &#916;y = f(2) &#8722; f(1) = 3 (blue column). The amber piece on top is the difference &#916;y &#8722; dy = 1, the error of the tangent-line estimate. A smaller dx would shrink the error much faster than it shrinks dx.',
     }),
   };
 
@@ -1702,6 +1719,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-dyDelta'} dangerouslySetInnerHTML={{ __html: demoUnits.dyDelta }} />,
+          `For f(x) = x² the error is exactly (dx)²: halve dx and the error drops to a quarter.`,
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
         ]

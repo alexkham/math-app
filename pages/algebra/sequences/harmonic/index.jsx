@@ -7,6 +7,8 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -356,12 +358,46 @@ const schemas = {
   },
 }
 
+  const haH = (n) => { let s = 0; for (let k = 1; k <= Math.round(n); k++) s += 1 / k; return s; };
+  const haDots = Array.from({ length: 16 }, (_, i) => ({ fn: haH, from: i + 1, to: i + 1, ends: ['closed', 'closed'], color: 'f' }));
+  const haSteps = [0, 1, 2].map((k) => ({ fn: () => 1 + (k + 1) / 2, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[2 ** (k + 1), 2 ** (k + 2)]], label: { text: '≥ ' + (1 + (k + 1) / 2), x: 3 * 2 ** k, y: 1 + (k + 1) / 2, pos: 's' } }));
+  const fpHarmonicGrowth = { kind: 'pieces', svgTitle: 'Partial sums of the harmonic series keep climbing: at least 1.5, 2, 2.5, 3 by n = 2, 4, 8, 16', xRange: [0, 17], yRange: [0, 4], xStep: 2, xLetter: 'n',
+    pieces: [
+      { fn: () => 1, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0, 17]], label: { text: '1/2 + 1/4 + 1/8 + … stops at 1', x: 16.8, y: 1, pos: 'sw' } },
+      ...haSteps, ...haDots,
+    ],
+    notes: [{ x: 0.5, y: 3.7, text: 'blue: Hₙ = 1 + 1/2 + … + 1/n', pos: 'e', color: 'f' }, { x: 0.5, y: 3.35, text: 'amber: each doubling block adds at least 1/2', pos: 'e', color: 'r' }],
+    caption: 'The harmonic sums never level off, unlike the geometric sum' };
+  const fpMeans = { kind: 'pieces', svgTitle: 'For a = 1 and b = x: H = 2x/(1+x) <= G = sqrt x <= A = (1+x)/2, equal only at x = 1', xRange: [0, 9], yRange: [0, 5], xLetter: 'b',
+    pieces: [
+      { fn: (x) => (1 + x) / 2, from: 0, to: 9, ends: [null, null], color: 'g', label: { text: 'A = (1 + b)/2', x: 6, y: 3.5, pos: 'nw' } },
+      { fn: (x) => Math.sqrt(x), from: 0, to: 9, ends: [null, null], color: 'f', label: { text: 'G = √b', x: 8, y: Math.sqrt(8), pos: 'se' } },
+      { fn: (x) => 2 * x / (1 + x), from: 0, to: 9, ends: [null, null], color: 'r', label: { text: 'H = 2b/(1 + b)', x: 8.9, y: 1.8, pos: 'sw' } },
+    ],
+    points: [{ x: 1, y: 1, label: 'all equal at b = 1', pos: 'se' }, { x: 4, y: 2.5 }, { x: 4, y: 2 }, { x: 4, y: 1.6 }],
+    vlines: [{ x: 4 }],
+    notes: [{ x: 4.15, y: 0.5, text: 'b = 4: H = 1.6, G = 2, A = 2.5', pos: 'e', color: 'r' }],
+    caption: 'With a = 1: H ≤ G ≤ A for every b, with equality only at b = 1' };
+  const demoUnits = {
+    harmonicGrowth: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpHarmonicGrowth),
+      caption: 'Oresme&#8217;s blocks on the partial sums',
+      text: 'The dots are the partial sums H&#8345; for n = 1 to 16. The amber dashes are the grouping bounds: one block of terms brings the sum to at least 1.5 by n = 2, the next block to at least 2 by n = 4, then at least 2.5 by n = 8. Every doubling of n adds at least another 1/2, so the dots keep climbing past any level. The geometric sum 1/2 + 1/4 + 1/8 + &#8230; never passes the dashed line at 1.',
+    }),
+    means: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpMeans),
+      caption: 'Three means of 1 and b',
+      text: 'Fix a = 1 and let b vary. The three curves are the arithmetic mean (1 + b)/2, the geometric mean &#8730;b and the harmonic mean 2b/(1 + b). They meet at b = 1, where both numbers are equal. Everywhere else they come in the same order, H below G below A: at b = 4 the dashed line reads 1.6, 2 and 2.5.',
+    }),
+  };
+
   return {
   props:{
      sectionsContent,
      introContent,
      faqQuestions,
      schemas,
+     demoUnits,
      seoData: {
        title: "Harmonic Sequences, Series & Harmonic Mean | Learn Math Class",
        description: "Learn harmonic sequences: definition as reciprocals of arithmetic progressions, divergence of the harmonic series, harmonic mean, and the AM-GM-HM inequality.",
@@ -373,7 +409,7 @@ const schemas = {
 }
    }
 
-export default function HarmonicSequencesPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function HarmonicSequencesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
     
   const genericSections=[
     // {
@@ -406,6 +442,8 @@ export default function HarmonicSequencesPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-harmonicGrowth'} dangerouslySetInnerHTML={{ __html: demoUnits.harmonicGrowth }} />,
+          `The climb is slow: Hₙ grows like ln n, so passing 10 takes over 12,000 terms.`,
         ]
     },
     {
@@ -422,6 +460,8 @@ export default function HarmonicSequencesPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-means'} dangerouslySetInnerHTML={{ __html: demoUnits.means }} />,
+          `Here G² = A · H for every b: √b squared is b, and (1 + b)/2 · 2b/(1 + b) = b.`,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

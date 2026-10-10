@@ -556,7 +556,7 @@ To run the visualization:
 
 • Press **Step ▶** to advance one ball at a time.
 
-• Press **◀** to step backward through the animation.
+• Press **◀ Back** to step backward through the animation.
 
 • Adjust the **Speed** slider to control how fast play advances.
 
@@ -650,7 +650,7 @@ Nine also splits cleanly against its no-repetition counterpart: of the $9$ seque
       title: `Transport Controls`,
       content: `The control bar offers four transport buttons plus a speed slider:
 
-• **◀** (Step back) — walks the animation one step backward. Useful for re-examining a single arrangement or pausing mid-build.
+• **◀ Back** (Step back) — walks the animation one step backward. Useful for re-examining a single arrangement or pausing mid-build.
 
 • **Step ▶** (Step forward) — advances [one ball into one slot](!#the-build-area). Stop after each step to read the partial arrangement.
 

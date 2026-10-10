@@ -647,6 +647,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 
@@ -1079,6 +1080,15 @@ This page explains how counting methods connect to probability calculations, fro
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const ogOrdered = { kind: 'dice', svgTitle: 'Two dice: a 1 and a 2 is two ordered outcomes, (1,2) and (2,1); two 1s is only one, (1,1)',
+    events: [{ label: 'a 1 and a 2', test: (a, b) => (a === 1 && b === 2) || (a === 2 && b === 1), color: 'f' }, { label: 'two 1s', test: (a, b) => a === 1 && b === 1, color: 'r' }],
+    notes: [{ text: 'P(a 1 and a 2) = 2/36', color: 'f' }, { text: 'P(two 1s) = 1/36', color: 'r' }, { text: 'count ordered pairs,' }, { text: 'not unordered sets' }],
+    caption: 'An unordered result can hide two ordered outcomes' };
+  const ogRestricted = { kind: 'dice', svgTitle: 'Two dice given at least one 6: 11 outcomes remain, and only (6,6) is a double, so P(double | a 6) = 1/11',
+    condition: { label: 'no 6: removed', test: (a, b) => a === 6 || b === 6 },
+    events: [{ label: 'double', test: (a, b) => a === b, color: 'r' }],
+    notes: [{ text: 'given at least one 6:' }, { text: '11 outcomes remain' }, { text: 'P(double | a 6) = 1/11', color: 'r' }, { text: 'unconditionally 6/36', color: 'g' }],
+    caption: 'Conditioning removes outcomes, then counts again' };
   const demoUnits = {
     u_1_0: demoUnitFrame({
       svg: diceSampleSpaceDiagrams.sum7,
@@ -1093,6 +1103,16 @@ This page explains how counting methods connect to probability calculations, fro
       text: 'A coin-toss experiment is counted as ordered sequences: three tosses give 2 times 2 times 2, that is 8 outcomes, each with probability 1/8. The labels group the sequences by the number of heads, which is where the binomial coefficients enter. Select a number of heads and count the matching sequences on the',
       href: '/probability/visual-tools/coin-toss',
       linkText: 'coin toss sample space explorer',
+    }),
+    orderedPairs: demoUnitFrame({
+      svg: renderOutcomeGrid(ogOrdered),
+      caption: 'Ordered outcomes behind an unordered result',
+      text: 'The 36 equally likely outcomes of two distinguishable dice. The result a 1 and a 2 does not say which die shows which, so it covers two cells, (1,2) and (2,1), and has probability 2/36. Two 1s is a single cell, (1,1), with probability 1/36. Counting unordered results as if each were one outcome would make them look equally likely; the outcome space has to be defined first, then counted.',
+    }),
+    restricted: demoUnitFrame({
+      svg: renderOutcomeGrid(ogRestricted),
+      caption: 'Conditioning as counting in a smaller space',
+      text: 'Learning that at least one die shows a 6 removes every outcome without a 6 (greyed out). Eleven equally likely outcomes remain, the last row and the last column. Among them only (6,6) is a double, so P(double | at least one 6) = 1/11, below the unconditional 6/36 = 1/6. The probability changed because the space being counted changed.',
     }),
   };
 
@@ -1162,6 +1182,8 @@ export default function CombinatoricsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <div key={'unit-orderedPairs'} dangerouslySetInnerHTML={{ __html: demoUnits.orderedPairs }} />,
+          `With two dice the 21 unordered results are not equally likely; the 36 ordered pairs are.`,
                   <div key={'unit-u_3_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_3_1 }} />,
           `Repeating such counts across trials produces the distributions of the next section.`,
         ]
@@ -1181,6 +1203,8 @@ export default function CombinatoricsPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-restricted'} dangerouslySetInnerHTML={{ __html: demoUnits.restricted }} />,
+          `The same counting on the restricted space is what Bayes' theorem formalizes.`,
         ]
     },
     {

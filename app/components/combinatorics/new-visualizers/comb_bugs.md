@@ -1,0 +1,1 @@
+- perm-with-identical/-repetition/distribution pages: step-back is '◀ Back'; *multiset =* italics fixed. Tools: 'First item:' headers + counts print the letter once in letters mode (4 scenes); repetition at r = 2 'in 3 ways' (no '3 = 3'); distribution header '(kⁿ)' not uppercased. Open: 'Group Red' (balls) vs 'Group A' (letters) is a mode difference, left.

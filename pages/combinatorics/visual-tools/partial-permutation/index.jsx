@@ -956,7 +956,7 @@ The agreement between permutations and combinations at $r = 1$ is worth remember
   // Per-state panel explanations (Line 1). Rendered under the right panel's
   // step rows through processContent — same-page !# anchors work.
   const explanations = {
-    idle: `Fewer slots than source balls — that gap is the scenario: choose r of the n items and put them in order. [Learn more about getting started](!#getting-started) · [Adjusting n and r](!#adjusting-n-and-r)`,
+    idle: `r dashed slots wait below the n source balls — the scenario: choose r of the n items and put them in order (at r = n it is a full permutation). [Learn more about getting started](!#getting-started) · [Adjusting n and r](!#adjusting-n-and-r)`,
     building: `One ordered selection is being built: used items dim, the dotted guide shows the landing, and the build stops after r slots — leaving the rest behind. [Learn more about the build area](!#the-build-area) · [Adjusting n and r](!#adjusting-n-and-r)`,
     default32: `All P(3, 2) = 6 ordered pairs are in: three first-item rows of two — the factoring n × (n−1)!/(n−r)! in miniature. [Learn more about first-item groups](!#grouping-by-first-item) · [Adjusting n and r](!#adjusting-n-and-r)`,
     rEqualsN: `With r = n nothing is left out: the count becomes n!, and the tool momentarily turns into the full permutation visualizer. [Learn more about the r = n limit](!#when-r-equals-n) · [Adjusting n and r](!#adjusting-n-and-r)`,

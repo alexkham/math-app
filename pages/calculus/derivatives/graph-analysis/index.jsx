@@ -13,6 +13,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+
 import functionTangentLineDiagrams from '@/app/components/calculus/visualizers/functionTangentLineDiagrams'
 import functionOptimizationDiagrams from '@/app/components/functions/optimization/functionOptimizationDiagrams'
 import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
@@ -890,6 +891,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     tangent: demoUnitFrame({
       svg: functionTangentLineDiagrams.pos,
@@ -930,6 +932,13 @@ const schemas = {
       svg: functionOptimizationDiagrams['quartic-w'],
       caption: 'x&#8308; &#8722; 4x&#178; on [&#8722;3, 3]: critical points and endpoints',
       text: 'The W-shaped quartic has three critical points, two minima at x = &#177;&#8730;2 and a local maximum at 0, and the tool lists them beside the two endpoints; the absolute extremes on the closed interval are found by comparing just these five values. That is the Extreme Value Theorem turned into a procedure. Narrow the interval and watch the absolute maximum move to an endpoint on the',
+      href: '/calculus/visual-tools/optimization',
+      linkText: 'optimization and critical points visualizer',
+    }),
+    noSignChange: demoUnitFrame({
+      svg: functionOptimizationDiagrams.cubic,
+      caption: 'A critical point that is neither max nor min',
+      text: 'f(x) = x&#179; with f&#8242;(x) = 3x&#178; and f&#8243;(x) = 6x. At x = 0 the derivative touches zero, so 0 is a critical point, but f&#8242; is positive just to the left and just to the right: it does not change sign. By the first derivative test the point is neither a maximum nor a minimum, and the graph keeps rising through it. The second derivative is 0 there too, so only the sign of f&#8242; settles the case. Try other families on the',
       href: '/calculus/visual-tools/optimization',
       linkText: 'optimization and critical points visualizer',
     }),
@@ -1032,6 +1041,8 @@ export default function PageTemplate({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-noSignChange'} dangerouslySetInnerHTML={{ __html: demoUnits.noSignChange }} />,
+          `Compare section 4’s x³ − 3x: there f′ crosses zero at ±1 and the test finds a maximum and a minimum.`,
         ]
     },
     {

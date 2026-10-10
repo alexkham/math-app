@@ -860,6 +860,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 
@@ -1514,6 +1515,28 @@ const poissonExplanations = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const poP = (l, k) => { let p = Math.exp(-l); for (let i = 1; i <= k; i++) p = p * l / i; return p; };
+  const poB = (n, q, k) => { let c = 1; for (let i = 1; i <= k; i++) c = c * (n - k + i) / i; return c * q ** k * (1 - q) ** (n - k); };
+  const poPx = (k, w) => k / w * 388;
+  const poShapeBars = [].concat(
+    Array.from({ length: 19 }, (_, k) => ({ from: 0, to: poP(1, k), color: 'f', dx: poPx(k, 19.5) - 4 })),
+    Array.from({ length: 19 }, (_, k) => ({ from: 0, to: poP(4, k), color: 'r', dx: poPx(k, 19.5) })),
+    Array.from({ length: 19 }, (_, k) => ({ from: 0, to: poP(10, k), color: 'g', dx: poPx(k, 19.5) + 4 }))).filter((b) => b.to > 0.002);
+  const poApproxBars = [].concat(
+    Array.from({ length: 11 }, (_, k) => ({ from: 0, to: poB(10, 0.4, k), color: 'f', dx: poPx(k, 12.5) - 5 })),
+    Array.from({ length: 12 }, (_, k) => ({ from: 0, to: poB(100, 0.04, k), color: 'g', dx: poPx(k, 12.5) })),
+    Array.from({ length: 12 }, (_, k) => ({ from: 0, to: poP(4, k), color: 'r', dx: poPx(k, 12.5) + 5 }))).filter((b) => b.to > 0.002);
+  const poTieBars = Array.from({ length: 14 }, (_, k) => ({ from: 0, to: poP(5, k), color: k === 4 || k === 5 ? 'r' : 'f', dx: poPx(k, 14.5) }));
+  const base = { kind: 'pieces', xRange: [-0.5, 19], pieces: [{ fn: () => 0, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [] }], xLetter: 'k' };
+  const fpPoShapes = { ...base, svgTitle: 'Poisson PMFs for lambda = 1, 4 and 10', yRange: [0, 0.4], xStep: 2, yBars: poShapeBars,
+    notes: [{ x: 10.5, y: 0.37, text: 'blue: λ = 1', pos: 'e', color: 'f' }, { x: 10.5, y: 0.34, text: 'amber: λ = 4', pos: 'e', color: 'r' }, { x: 10.5, y: 0.31, text: 'navy: λ = 10', pos: 'e', color: 'g' }, { x: 10.5, y: 0.28, text: 'mean λ, spread √λ', pos: 'e' }],
+    caption: 'Larger λ: the peak moves right, widens and evens out' };
+  const fpPoApprox = { ...base, xRange: [-0.5, 12], svgTitle: 'Binomial(10, 0.4) and Binomial(100, 0.04) against Poisson with lambda = 4', yRange: [0, 0.3], yBars: poApproxBars,
+    notes: [{ x: 6.3, y: 0.28, text: 'all three have mean 4', pos: 'e' }, { x: 6.3, y: 0.255, text: 'blue: n = 10, p = 0.4', pos: 'e', color: 'f' }, { x: 6.3, y: 0.23, text: 'navy: n = 100, p = 0.04', pos: 'e', color: 'g' }, { x: 6.3, y: 0.205, text: 'amber: Poisson, λ = 4', pos: 'e', color: 'r' }],
+    caption: 'Many trials, small p: the binomial turns into the Poisson' };
+  const fpPoTie = { ...base, xRange: [-0.5, 14], svgTitle: 'Poisson PMF with lambda = 5: the bars at 4 and 5 are equal, two modes', yRange: [0, 0.22], yBars: poTieBars,
+    notes: [{ x: 7.6, y: 0.2, text: 'P(X = 4) = P(X = 5) ≈ 0.175', pos: 'e', color: 'r' }, { x: 7.6, y: 0.18, text: 'ratio of neighbours: λ/k', pos: 'e' }, { x: 7.6, y: 0.16, text: 'k = 5: ratio 5/5 = 1', pos: 'e' }],
+    caption: 'λ = 5, an integer: two equal tallest bars at 4 and 5' };
   const demoUnits = {
     u_4_0: demoUnitFrame({
       svg: discretePmfDiagrams.poisson,
@@ -1528,6 +1551,21 @@ const poissonExplanations = {
       text: 'The event of at most k occurrences has probability equal to the sum of the first k plus 1 bars, and the staircase shows that sum passing one half between 2 and 3 for lambda equal to 3. The final steps are tiny because the tail bars are small. Read P(X &le; k) at any step on the',
       href: '/probability/visual-tools/cdf/discrete',
       linkText: 'discrete CDF explorer',
+    }),
+    poShapes: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpPoShapes),
+      caption: 'What λ does',
+      text: 'Poisson PMFs for &#955; = 1, 4 and 10. For &#955; = 1 the bars at 0 and 1 are equal and tallest, and the rest fall away fast. For &#955; = 4 the peak is at 3 and 4. For &#955; = 10 the peak sits near 10 and the bars spread wider and more evenly on both sides: the mean is &#955; and the standard deviation &#8730;&#955;, so one number sets both where the bars sit and how wide they spread.',
+    }),
+    poApprox: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpPoApprox),
+      caption: 'From binomial to Poisson',
+      text: 'Three distributions with mean 4. Blue: binomial with n = 10, p = 0.4, visibly narrower. Navy: binomial with n = 100, p = 0.04. Amber: Poisson with &#955; = 4. The navy and amber bars are almost the same height at every k: with many trials and a small success probability, the binomial count is close to Poisson with &#955; = np.',
+    }),
+    poTie: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpPoTie),
+      caption: 'Two modes when λ is an integer',
+      text: 'The Poisson PMF for &#955; = 5. Each bar is &#955;/k times the bar before it, so the bars grow while k &lt; 5 and shrink once k &gt; 5. At k = 5 the ratio is exactly 1, so P(X = 5) = P(X = 4) &#8776; 0.175: two equal tallest bars. For a non-integer &#955; such as 4.7 the ratio never equals 1 and the single mode is &#8970;4.7&#8971; = 4.',
     }),
   };
 
@@ -1580,6 +1618,8 @@ export default function PoissonDistributionPage({
         link:sectionsContent.obj1.link,
         content:[
            sectionsContent.obj1.content,
+                  <div key={'unit-poApprox'} dangerouslySetInnerHTML={{ __html: demoUnits.poApprox }} />,
+           `The rule of thumb: n large, p small, and λ = np kept moderate.`,
           sectionsContent.links.decide,
           sectionsContent.obj1.example,
           sectionsContent.links.example,
@@ -1612,6 +1652,8 @@ export default function PoissonDistributionPage({
             <div key={'parameters-poisson'} style={{background: 'linear-gradient(to right, #f8fafc 0%, #f1f5f9 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #cbd5e1',transform:'scale(0.9)'}}>
                         {processContent( sectionsContent.obj2.content)}
                     </div>,
+                  <div key={'unit-poShapes'} dangerouslySetInnerHTML={{ __html: demoUnits.poShapes }} />,
+            `Mean and variance are both λ: the spread grows with the centre.`,
         ]
     },
     {
@@ -1668,6 +1710,8 @@ export default function PoissonDistributionPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-poTie'} dangerouslySetInnerHTML={{ __html: demoUnits.poTie }} />,
+          `The ratio λ/k decides the mode: bars rise while it is above 1 and fall once it is below 1.`,
         ]
     },
     {

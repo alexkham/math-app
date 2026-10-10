@@ -8,6 +8,8 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 
@@ -472,6 +474,46 @@ const schemas = {
   }
 }
 
+  const evStrips = (fn, a, b, n, xr, colorOf, base = 0) => Array.from({ length: n }, (_, i) => { const x = a + (i + 0.5) * (b - a) / n, y = fn(x); return { from: Math.min(base, y), to: Math.max(base, y), color: colorOf(x, y), dx: (x - Math.max(0, xr[0])) / (xr[1] - xr[0]) * 388 }; });
+  const evAbsBars = evStrips(Math.abs, -2, 3, 30, [-3, 4], (x) => (x < 0 ? 'r' : 'f'));
+  const evOddBars = evStrips((x) => x ** 3, -3, 3, 36, [-4, 4], (x, y) => (y >= 0 ? 'f' : 'r'));
+  const fpAbsSplit = { kind: 'pieces', svgTitle: 'The integral of |x| from -2 to 3 is two triangles: area 2 on the left and 9/2 on the right, total 13/2', xRange: [-3, 4], yRange: [-1, 4],
+    pieces: [{ fn: Math.abs, from: -2.6, to: 3.6, ends: [null, null], color: 'f', label: { text: 'y = |x|', x: 3.3, y: 3.3, pos: 'w' } }],
+    yBars: evAbsBars,
+    vlines: [{ x: -2 }, { x: 3 }],
+    notes: [{ x: -1.6, y: 0.55, text: '2', pos: 'e', color: 'r' }, { x: 1.85, y: 0.9, text: '9/2', pos: 'e', color: 'f' }, { x: -2.9, y: 3.6, text: 'split at 0: 2 + 9/2 = 13/2', pos: 'e', color: 'r' }],
+    caption: 'Split where |x| changes formula: −x on the left, x on the right' };
+  const fpOddCancel = { kind: 'pieces', svgTitle: 'x^3 on [-3, 3] is odd: the area below the axis on the left mirrors the area above on the right, so the integral is 0', xRange: [-4, 4], yRange: [-30, 30], yStep: 10,
+    pieces: [{ fn: (x) => x ** 3, from: -3.1, to: 3.1, ends: [null, null], color: 'f', label: { text: 'y = x³', x: 2.2, y: 2.2 ** 3, pos: 'nw' } }],
+    yBars: evOddBars,
+    notes: [{ x: 1.9, y: 4, text: '+81/4', pos: 'e', color: 'f' }, { x: -2.75, y: -5, text: '−81/4', pos: 'e', color: 'r' }, { x: -3.9, y: 26, text: 'odd: the halves cancel, total 0', pos: 'e', color: 'r' }],
+    caption: 'An odd integrand over [−a, a]: mirror-image areas of opposite sign' };
+  const fpImproperTrap = { kind: 'pieces', svgTitle: '1/x^2 is positive on [-1, 1] but unbounded at 0; the naive antiderivative calculation gives -2, which is wrong', xRange: [-1.5, 1.5], yRange: [-3, 12],
+    pieces: [
+      { fn: (x) => 1 / (x * x), from: -1.5, to: -0.29, ends: [null, null], color: 'f' },
+      { fn: (x) => 1 / (x * x), from: 0.29, to: 1.5, ends: [null, null], color: 'f', label: { text: 'y = 1/x²', x: 0.55, y: 1 / 0.3025, pos: 'e' } },
+    ],
+    vlines: [{ x: -1 }, { x: 1 }],
+    notes: [{ x: -1.45, y: 11, text: 'positive, unbounded at 0', pos: 'e' }, { x: -1.45, y: -1.4, text: 'naive [−1/x]: −2', pos: 'e', color: 'r' }, { x: -1.45, y: -2.4, text: 'a negative area: wrong', pos: 'e', color: 'r' }],
+    caption: 'An unbounded integrand makes the integral improper; here it diverges' };
+  const demoUnits = {
+    absSplit: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpAbsSplit),
+      caption: 'Splitting at the sign change',
+      text: 'The section&#8217;s &#8747; from &#8722;2 to 3 of |x| dx. Left of 0 the integrand is &#8722;x and the region is a triangle with base 2 and height 2, area 2 (amber). Right of 0 it is x and the triangle has base 3 and height 3, area 9/2 (blue). The integral is the sum of the two pieces, 13/2; a single antiderivative over the whole interval would miss the change of formula at 0.',
+    }),
+    oddCancel: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpOddCancel),
+      caption: 'Odd symmetry cancels',
+      text: 'The section&#8217;s &#8747; from &#8722;3 to 3 of x&#179; dx. x&#179; is odd, so the region on [&#8722;3, 0] is the region on [0, 3] turned upside down: the same area, 81/4, but below the axis. The two signed areas cancel and the integral is 0 without any antiderivative. For an even function the two halves would match with the same sign, giving twice the right-hand half.',
+    }),
+    improperTrap: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpImproperTrap),
+      caption: 'A positive integrand with a negative answer',
+      text: 'The section&#8217;s &#8747; from &#8722;1 to 1 of dx/x&#178;. The integrand is positive at every x &#8800; 0, so any area it encloses must be positive. Plugging the endpoints into the antiderivative &#8722;1/x gives &#8722;1 &#8722; 1 = &#8722;2, which cannot be right. The fundamental theorem needs a continuous integrand, and 1/x&#178; blows up at 0; treated as an improper integral, each half diverges.',
+    }),
+  };
+
   return {
   props: {
     sectionsContent,
@@ -481,6 +523,7 @@ const schemas = {
     summaryTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Evaluating Integrals: Strategy & Examples | Learn Math Class",
       description: "Master integral evaluation: direct antidifferentiation, recognizing standard forms, definite integral setup, absolute values, piecewise functions, symmetry shortcuts, and avoiding common mistakes.",
@@ -492,7 +535,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -527,6 +570,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <div key={'unit-absSplit'} dangerouslySetInnerHTML={{ __html: demoUnits.absSplit }} />,
+          `Integrating x over the whole interval would give 5/2: the left triangle would count as negative.`,
         ]
     },
     {
@@ -543,6 +588,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <div key={'unit-oddCancel'} dangerouslySetInnerHTML={{ __html: demoUnits.oddCancel }} />,
+          `The shortcut needs a symmetric interval: over [−3, 2] the halves no longer match.`,
           <div key={'obj6-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj6Table }} />,
         ]
@@ -553,6 +600,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-improperTrap'} dangerouslySetInnerHTML={{ __html: demoUnits.improperTrap }} />,
+          `Before evaluating, check that the integrand is continuous on the whole closed interval.`,
           <div key={'obj7-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
         ]

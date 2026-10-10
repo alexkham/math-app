@@ -50,9 +50,11 @@ export async function getStaticProps(){
 • **Green dashed horizontals** mark horizontal asymptotes
 • **Purple dashed slants** mark oblique asymptotes
 
-Below the plot, a **detected asymptotes panel** lists each one as a colored pill with its equation. For vertical asymptotes it also shows the one-sided limits ($x \\to c^-$ and $x \\to c^+$, each tagged $+\\infty$ or $-\\infty$). On the right is the **info panel** with two tabs — Detected (state-specific) and Concepts (general theory).
+Below the plot, a **detected asymptotes panel** lists each one as a colored pill with its equation. For vertical asymptotes it also shows the one-sided limits ($x \\to c^-$ and $x \\to c^+$, each tagged $+\\infty$ or $-\\infty$). On the right is the **info panel** with three tabs — Detected (state-specific), Family (the chosen function) and Concepts (general theory).
 
-The page launches with the [reciprocal function](!#the-reciprocal-function) $1/x$. The plot shows the two-branch hyperbola, a red dashed vertical line at $x = 0$, and a green dashed horizontal at $y = 0$ — the canonical example of a function with both kinds of asymptote.`,
+The page launches with the [reciprocal function](!#the-reciprocal-function) $1/x$. The plot shows the two-branch hyperbola, a red dashed vertical line at $x = 0$, and a green dashed horizontal at $y = 0$ — the canonical example of a function with both kinds of asymptote.
+
+The **S**, **M**, **L** and **XL** buttons above the plot set its height; the curves and readouts stay the same.`,
       before: ``,
       after: ``,
       link: '',

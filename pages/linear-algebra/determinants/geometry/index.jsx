@@ -1154,7 +1154,7 @@ For $A = \\begin{pmatrix} 1 & 3 \\\\ 4 & 0 \\end{pmatrix}$, the determinant is $
         id: 'sign-as-orientation',
         tex: `$\\det(A) < 0$`,
         read: `a negative determinant — the map reverses orientation`,
-        means: `Here the minus sign is **geometric information, not an error**: it records that the transformation flips handedness, turning a counterclockwise pair clockwise. **Orientation** below reads it directly; the algebraic treatment only notes that determinants *can* be negative, without saying what the sign means.`,
+        means: `Here the minus sign is **geometric information, not an error**: it records that the transformation flips handedness, turning a counterclockwise pair clockwise. **Orientation** below reads it directly; the algebraic treatment only notes that determinants can be negative, without saying what the sign means.`,
         cases: `A reflection has $\\det = -1$, a rotation $\\det = +1$, and $\\det = 0$ is the degenerate case where the image collapses to lower dimension — three readings of one number, and the reason "signed area" carries its adjective.`,
         confusedWith: `Reading the sign as a mistake to be dropped. Taking $|\\det|$ too early discards the orientation the sign was carrying — the absolute value is the right move only when a **size** is wanted, which is exactly the next entry's distinction.`,
       },

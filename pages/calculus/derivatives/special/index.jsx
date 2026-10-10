@@ -9,6 +9,8 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 
@@ -766,6 +768,49 @@ const schemas = {
 
  
 
+  const fpArcsin = { kind: 'pieces', svgTitle: 'arcsin x and its derivative 1/sqrt(1 - x^2): the derivative blows up at x = -1 and x = 1 where arcsin has vertical tangents', xRange: [-1.5, 1.5], yRange: [-2, 4],
+    pieces: [
+      { fn: Math.asin, from: -1, to: 1, ends: ['closed', 'closed'], color: 'f', label: { text: 'arcsin x', x: -0.55, y: Math.asin(-0.55), pos: 'se' } },
+      { fn: (x) => 1 / Math.sqrt(1 - x * x), from: -0.97, to: 0.97, ends: [null, null], color: 'r' },
+    ],
+    vlines: [{ x: -1 }, { x: 1 }],
+    notes: [{ x: -1.45, y: 3.6, text: 'slope → ∞ at x = ±1', pos: 'e', color: 'r' }, { x: -0.5, y: 1.55, text: 'f′(x) = 1/√(1 − x²)', pos: 'e', color: 'r' }],
+    caption: 'arcsin x turns vertical at ±1, where its derivative blows up' };
+  const fpArctan = { kind: 'pieces', svgTitle: 'arctan x rises everywhere between the asymptotes y = -pi/2 and pi/2; its derivative 1/(1 + x^2) is positive and tends to 0', xRange: [-6, 6], yRange: [-2, 2],
+    pieces: [
+      { fn: () => Math.PI / 2, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-6, 6]], label: { text: 'y = π/2', x: -5.8, y: Math.PI / 2, pos: 'ne' } },
+      { fn: () => -Math.PI / 2, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-6, 6]], label: { text: 'y = −π/2', x: 4.2, y: -Math.PI / 2, pos: 'ne' } },
+      { fn: Math.atan, from: -6, to: 6, ends: [null, null], color: 'f', label: { text: 'arctan x', x: 2.5, y: Math.atan(2.5), pos: 'se' } },
+      { fn: (x) => 1 / (1 + x * x), from: -6, to: 6, ends: [null, null], color: 'r', label: { text: '1/(1 + x²)', x: -3.4, y: 1 / (1 + 3.4 * 3.4), pos: 'n' } },
+    ],
+    caption: 'Positive derivative fading to 0: arctan rises toward ±π/2' };
+  const fpSmoothJoin = { kind: 'pieces', svgTitle: 'x^2 for x <= 1 and 2x - 1 for x > 1 meet at (1, 1) with the same slope 2: the join is smooth', xRange: [-1, 3], yRange: [-1, 5],
+    pieces: [
+      { fn: (x) => x * x, from: 99, to: 99, ends: [null, null], color: 'f', ghost: [[1, 2.2]] },
+      { fn: (x) => 2 * x - 1, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[-0.2, 1]] },
+      { fn: (x) => x * x, from: -1, to: 1, ends: [null, 'closed'], color: 'f' },
+      { fn: (x) => 2 * x - 1, from: 1, to: 3, ends: ['open', null], color: 'r', label: { text: '2x − 1 (x > 1)', x: 2.3, y: 3.6, pos: 'se' } },
+    ],
+    notes: [{ x: 1.15, y: 0.6, text: 'both pieces: value 1, slope 2 at x = 1', pos: 'e', color: 'r' }, { x: -0.95, y: 2.0, text: 'x² (x ≤ 1)', pos: 'e', color: 'f' }],
+    caption: 'Same value and same slope at the boundary: f′(1) = 2 exists' };
+  const demoUnits = {
+    arcsin: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpArcsin),
+      caption: 'arcsin x and its derivative',
+      text: 'The blue curve is arcsin x on its domain [&#8722;1, 1]; the amber curve is its derivative 1/&#8730;(1 &#8722; x&#178;). In the middle the derivative is close to 1 and the graph rises like a line through the origin. Toward x = &#177;1 the denominator &#8730;(1 &#8722; x&#178;) shrinks to 0, the derivative grows without bound, and the graph of arcsin x turns vertical at its endpoints.',
+    }),
+    arctan: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpArctan),
+      caption: 'arctan x and its derivative',
+      text: 'The derivative 1/(1 + x&#178;) is positive for every x, so arctan x rises everywhere. It is largest, 1, at x = 0, where the graph is steepest, and it fades toward 0 in both directions, so the graph flattens against the dashed asymptotes y = &#177;&#960;/2 without ever reaching them.',
+    }),
+    smoothJoin: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpSmoothJoin),
+      caption: 'A boundary where the pieces join smoothly',
+      text: 'The section&#8217;s f(x) = x&#178; for x &#8804; 1 and 2x &#8722; 1 for x &gt; 1. Both pieces give the value 1 at x = 1, so the graph is unbroken, and both have slope 2 there. The dashed lines continue each piece past the boundary: the line 2x &#8722; 1 is exactly the tangent to x&#178; at x = 1. Same value and same slope from both sides means f&#8242;(1) = 2 exists.',
+    }),
+  };
+
   return {
   props:{
     sectionsContent,
@@ -775,6 +820,7 @@ const schemas = {
     obj8Table,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Special Derivatives: Inverse Trig & Hyperbolic | Learn Math Class",
       description: "Derivatives of inverse trigonometric, hyperbolic, inverse hyperbolic, and piecewise functions. Complete formulas with derivations for arcsin, arctan, sinh, cosh, and more.",
@@ -794,7 +840,8 @@ export default function PageTemplate({
   obj7Table,
   obj8Table,
   faqQuestions,
-  schemas
+  schemas,
+  demoUnits
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -806,6 +853,8 @@ export default function PageTemplate({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-arcsin'} dangerouslySetInnerHTML={{ __html: demoUnits.arcsin }} />,
+          `arccos x has the same picture turned over: its derivative is the negative of this one.`,
         ]
     },
     {
@@ -814,6 +863,8 @@ export default function PageTemplate({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-arctan'} dangerouslySetInnerHTML={{ __html: demoUnits.arctan }} />,
+          `The same 1/(1 + x²) is the integrand whose antiderivative is arctan x + C.`,
         ]
     },
     {
@@ -855,6 +906,8 @@ export default function PageTemplate({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <div key={'unit-smoothJoin'} dangerouslySetInnerHTML={{ __html: demoUnits.smoothJoin }} />,
+          `Replacing 2x − 1 by 3x − 2 keeps the value 1 at x = 1 but gives slope 3: a corner.`,
           <div key={'obj7-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj7Table}}/>,
         ]
     },

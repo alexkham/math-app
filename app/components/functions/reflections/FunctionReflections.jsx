@@ -1716,6 +1716,9 @@ function fmt(v) {
   const r = Math.round(v * 100) / 100;
   return Math.abs(r - Math.round(r)) < 1e-4 ? String(Math.round(r)) : String(r);
 }
+// fmt() with a typographic minus, for plain-text labels (math mode keeps fmt()).
+function fmtU(v) { const t = fmt(v); return t.startsWith('-') ? `\u2212${t.slice(1)}` : t; }
+
 
 /* periodic-branch builders for sin and cos reflections */
 function sineBranches(kMin = -3, kMax = 3) {
@@ -1792,7 +1795,7 @@ const REFLECTIONS = {
       '- When $c = 0$, this reduces to the x-axis reflection.\n' +
       '- Points where $f(x) = c$ are **fixed points** — they sit on the line and don\'t move.',
     fn: (base, c) => x => 2 * c - base(x),
-    eqFor: (fam, p) => `g(x) = ${fmt(2 * p.cY)} − ${fam.bodyOf('x')}`,
+    eqFor: (fam, p) => `g(x) = ${fmtU(2 * p.cY)} − ${fam.bodyOf('x')}`,
   },
   xLine: {
     title: 'Across the vertical line x = c',
@@ -1807,7 +1810,7 @@ const REFLECTIONS = {
       '- When $c = 0$, this reduces to the y-axis reflection.\n' +
       '- Points where $x = c$ are fixed.',
     fn: (base, c) => x => base(2 * c - x),
-    eqFor: (fam, p) => `g(x) = ${fam.bodyOf(`${fmt(2 * p.cX)} − x`)}`,
+    eqFor: (fam, p) => `g(x) = ${fam.bodyOf(`${fmtU(2 * p.cX)} − x`)}`,
   },
   absF: {
     title: '|f(x)| — output absolute value',
@@ -2178,7 +2181,7 @@ export default function FunctionReflections({
       const cv = params.cY;
       arr.push({
         fn: () => cv, color: LINE_COLOR,
-        label: 'axis', formula: `y = ${fmt(cv)}`,
+        label: 'axis', formula: `y = ${fmtU(cv)}`,
         visible: true, stroke: 1.25,
       });
     }
@@ -2240,7 +2243,7 @@ export default function FunctionReflections({
     const generalBody = explanations[activeRef] != null ? explanations[activeRef] : refl.body;
     const content =
       `## ${refl.title}\n` +
-      `\`${refl.formulaPattern}\`\n\n` +
+      `@[${refl.formulaPattern}]@\n\n` +
       `### General\n${generalBody}\n\n` +
       `### Applied to ${fam.name.toLowerCase()}\n${notesFor(activeRef, fam, params)}`;
     return [

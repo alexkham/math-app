@@ -8,6 +8,7 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import binomialCoefficientDiagrams from '@/app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
 
 
@@ -340,6 +341,12 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const trRows = (n) => { const out = []; for (let k = 1; k <= n; k++) for (let i = 1; i <= k; i++) out.push({ fn: () => k, from: i, to: i, ends: ['closed', 'closed'], color: k === n ? 'r' : 'f' }); return out; };
+  const fpTriRows = { kind: 'pieces', svgTitle: 'Triangle of dots with rows of 1, 2, 3, 4 and a new row of 5: T5 = T4 + 5 = 15', xRange: [0, 7], yRange: [0, 6], xLetter: 'i', yLetter: 'k',
+    pieces: trRows(5),
+    notes: [{ x: 3.3, y: 2.5, text: 'rows 1 to 4: T₄ = 10', pos: 'e', color: 'f' }, { x: 5.3, y: 5, text: '+5', pos: 'e', color: 'r' },
+      { x: 1.6, y: 5.6, text: 'new row of 5: T₅ = 10 + 5 = 15', pos: 'e', color: 'r' }],
+    caption: 'Tₙ = Tₙ₋₁ + n: each triangle is the last one plus a row of n dots' };
   const demoUnits = {
     binomial: demoUnitFrame({
       svg: binomialCoefficientDiagrams['pascal-n5'],
@@ -347,6 +354,11 @@ const schemas = {
       text: 'The closed form n(n + 1)/2 is the binomial coefficient C(n + 1, 2), and Pascal&#8217;s triangle shows it: the highlighted entry C(5, 2) is reached by 10 paths, and 10 is the fourth triangular number. The pairing argument of the text and the path count are two derivations of one number. Walk the second diagonal of the triangle on the',
       href: '/algebra/visual-tools/binomial-coefficient',
       linkText: 'binomial coefficient visualizer',
+    }),
+    triRows: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpTriRows),
+      caption: 'Adding a row',
+      text: 'Row k of the triangle holds k dots. The blue rows 1 to 4 make T&#8324; = 1 + 2 + 3 + 4 = 10. The amber row on top is the new row of 5 dots, so T&#8325; = T&#8324; + 5 = 15. Each step adds one more dot than the step before, which is why the increments 1, 2, 3, 4, 5 run through the natural numbers.',
     }),
   };
 
@@ -393,6 +405,8 @@ export default function TriangularNumbersPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <div key={'unit-triRows'} dangerouslySetInnerHTML={{ __html: demoUnits.triRows }} />,
+          `Two copies of this staircase, one turned over, make an n × (n + 1) rectangle: 2Tₙ = n(n + 1).`,
         ]
     },
     {

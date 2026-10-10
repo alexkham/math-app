@@ -145,7 +145,7 @@ export default function ConditionalProbabilityTable2x4({ explanations = null }) 
         How to Use This Table
       </h3>
       <p style={{ marginBottom: '10px' }}>
-        <strong>Main Table (left):</strong> Click any cell to highlight it and see its joint probability. Click marginal totals to highlight related conditional probabilities.
+        <strong>Main Table (left):</strong> Click any cell to highlight it and see its joint probability.
       </p>
       <p style={{ marginBottom: '10px' }}>
         <strong>Conditional Panels (right):</strong> Click any row to highlight the corresponding cell in the main table and its marginal probability. This shows the relationship between joint and conditional probabilities.
@@ -316,9 +316,8 @@ export default function ConditionalProbabilityTable2x4({ explanations = null }) 
 
             <div style={{ padding: '20px', background: 'white', minHeight: '200px' }}>
               {activeTab === 'explanations' && (
-                <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}>
-                  {currentExplanation}
-                </div>
+                <div style={{ fontSize: '14px', lineHeight: '1.6', color: '#475569' }}
+                  dangerouslySetInnerHTML={{ __html: currentExplanation }} />
               )}
               {activeTab === 'controls' && controlsExplanation}
             </div>

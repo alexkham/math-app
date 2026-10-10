@@ -667,7 +667,7 @@ This explains the dramatic drop in the History table's error column when Newton 
       title: `When Newton's Method Fails`,
       content: `Newton's method can break down in three common ways.
 
-- **Flat tangent** — if $f'(x_n)$ is small relative to $f(x_n)$, the correction $f / f'$ blows up and the next iterate lands far from the root. The Stalls scenario shows this directly: at $x_0 = 0.85$ the derivative $f'(x_0) \\approx 0.165$ is too small, and $x_1$ is sent off the chart.
+- **Flat tangent** — if $f'(x_n)$ is small relative to $f(x_n)$, the correction $f / f'$ blows up and the next iterate lands far from the root. The Stalls scenario shows this directly: at $x_0 = 0.85$ the derivative $f'(x_0) \\approx 0.167$ is too small, and $x_1$ is sent off the chart.
 - **Cycles** — for certain functions and starting points the iteration becomes periodic. A classic example is $f(x) = x^3 - 2x + 2$ with $x_0 = 0$, which oscillates between $0$ and $1$ forever.
 - **Divergence** — for slowly growing functions like $\\arctan(x)$, starting too far from the root makes $|x_n|$ grow without bound rather than converge.
 

@@ -982,8 +982,9 @@ Comparing the two flat tangents side by side is the fastest way to see that zero
      Meaning / Theory tabs (divs, targeted by text). A scenario runs a ~4.3 s
      six-step animation and ignores clicks while it runs, so every scenario
      after the first in a demo is preceded by Reset (which cancels it); a
-     scenario is never followed by a tab step. Dragging c is not demoed: the
-     canvas listens to mouse events, the player dispatches pointer events. */
+     scenario is never followed by a tab step. The c handle is dragged on the
+     canvas with { drag, at, to } (fractions of the canvas: x from -2.6 to 2.6,
+     the axis at half height); the player sends mouse events too. */
   const demos = {
     'getting-started': {
       title: 'Readout strip and Reset',
@@ -1007,6 +1008,11 @@ Slope 0.00: flat tangent.` },
 c = −0.50 again.
 Computation tab back on top.` },
         { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+        { say: `DRAG c → 1.50
+f(c) = −0.38, slope 1.25.
+Tangent tilts up: f is rising here.` },
+        { drag: 'canvas', at: [0.4038, 0.5], to: [0.7885, 0.5], ms: 1600 },
         { wait: 2400 },
       ],
     },

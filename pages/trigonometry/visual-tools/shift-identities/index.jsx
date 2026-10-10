@@ -92,7 +92,7 @@ Under the tabs, the **identity bar** writes out the identity being shown, with t
 
 Switching tabs keeps both the shift and the angle, so the three identities for one shift can be compared at the same point. The figure changes only in which leg of P′ is being read and in what the banner checks.
 
-The current function and shift are written into the page address as \`?shiftFn=\` and \`?shift=\`, so a link can open the tool on a particular identity. The [identity table](!#reading-the-identity-table) is a second way to switch.`,
+The current function and shift are written into the page address as @[?shiftFn=]@ and @[?shift=]@, so a link can open the tool on a particular identity. The [identity table](!#reading-the-identity-table) is a second way to switch.`,
       before: ``,
       after: ``,
       link: '',

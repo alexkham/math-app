@@ -607,7 +607,7 @@ Cells are placed in real time as the run progresses. The geometry adapts to the 
 
 • **Speed slider** with tortoise 🐢 and hare 🐇 markers controls the tick delay. The tick interval is roughly $\\max(20, 400 - 35 \\cdot \\text{speed})$ milliseconds — at speed $1$ each number takes about $365$ ms; at speed $10$ each takes about $50$ ms.
 
-While running, the right panel switches into [**now placing** mode](!#right-panel-context) and shows live arithmetic for the most recent number: $n \\div d = q$ remainder $r$, and which slice and row it just landed in. Numbers in the zero class get extra emphasis to call out the divisibility.`,
+While running, the right panel switches into **now placing** mode ([the right panel](!#right-panel-context)) and shows live arithmetic for the most recent number: $n \\div d = q$ remainder $r$, and which slice and row it just landed in. Numbers in the zero class get extra emphasis to call out the divisibility.`,
       before: ``,
       after: `The frozen frame above catches a run mid-flight: seventeen numbers placed, and the log reporting $17 \\div 6 = 2$ remainder $5$ — so 17 has just landed in class 5, row 3. Rows count occurrences: 17 is the third number (after 5 and 11) to leave remainder 5.
 

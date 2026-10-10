@@ -858,8 +858,8 @@ Divisions this tidy are the exception, not the rule — nudge either input by $0
 
   /* Animated demos (ToolDemoPlayer v3) against the real ComplexDivisionVisualizer
      (opens on (4+2i)/(1−i)). Number inputs input[type="number"] nth 0..3 = z1 Re, z1 Im,
-     z2 Re, z2 Im. The drag points use pointer capture, so the demos use presets and
-     typed values instead of drags. */
+     z2 Re, z2 Im. Drag points: circle.drag-point nth 0 = z1 (navy), nth 1 = z2 (orange),
+     dragged with { drag, dx, dy } (screen px in the 0.6 stage). */
   const demos = {
     'getting-started-set-numerator-and-denominator': {
       title: 'The presets',
@@ -913,6 +913,11 @@ Quotient on the positive real axis.`, at: 'tl' },
 θ₁ = 26.57°, θ₂ = −45°.
 26.57° − (−45°) = 71.57°. Quotient 1 + 3i.`, at: 'tl' },
         { click: { button: '(4+2i)/(1−i)', exact: true } },
+        { wait: 2800 },
+        { say: `DRAG z₂ (orange) up
+θ₂ rises from −45°, so θ₁ − θ₂ shrinks:
+the quotient swings clockwise.`, at: 'tl' },
+        { drag: { css: 'circle.drag-point', nth: 1 }, dx: 0, dy: -30, ms: 1600 },
         { wait: 2800 },
       ],
     },

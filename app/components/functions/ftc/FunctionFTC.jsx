@@ -57,7 +57,7 @@ const conceptsContent =
   '$$F\'(x) = f(x).$$\n\n' +
   'Differentiating the accumulator gives back the integrand. **That&apos;s Part 1.**\n\n' +
   '### Why this is huge\n\n' +
-  'It means you can compute $\\int_a^b f(t)\\,dt$ by finding *any* antiderivative G (a function with $G\' = f$) and evaluating $G(b) - G(a)$. No more summing 4000 trapezoids — just take the antiderivative and plug in. **That&apos;s Part 2.**\n\n' +
+  'It means you can compute $\\int_a^b f(t)\\,dt$ by finding any antiderivative G (a function with $G\' = f$) and evaluating $G(b) - G(a)$. No more summing 4000 trapezoids — just take the antiderivative and plug in. **That&apos;s Part 2.**\n\n' +
   '### What the picture shows\n\n' +
   '- Move x to see the shaded area change.\n' +
   '- The height of the F curve at x equals that area.\n' +
@@ -702,7 +702,7 @@ ${explanations[current]}` : '')
                     display: 'flex', alignItems: 'center', gap: 6,
                   }}>
                     <span style={{ width: 8, height: 8, borderRadius: '50%', background: ctok.accentBorder }} />
-                    Area &int;&#8336;&#7517; f(t) dt
+                    Area &int;&#8336;&#739; f(t) dt
                   </div>
                   <div style={{
                     fontFamily: monoStack, fontSize: 18, fontWeight: 700,

@@ -13,6 +13,7 @@
 
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import s from './DiagramsExplorer.module.css';
+import { decodeEntities } from '../../utils/contentProcessor';
 
 const VIEWS = ['gallery', 'sheet', 'spot', 'shelves', 'pages'];
 const VIEW_LABEL = { gallery: 'Gallery', sheet: 'Contact sheet', spot: 'Spotlight', shelves: 'Shelves', pages: 'By page' };
@@ -95,7 +96,12 @@ function writeHash(parts) {
 
 /* ================================================================ */
 export default function DiagramsExplorer({ data, subjectLabel }) {
-  const D = data;
+  // captions, section titles and page names render as plain text: decode their entities
+  // (&epsilon;, &lambda;, &apos; ...) once; explanations go through innerHTML and are fine
+  const D = useMemo(() => {
+    const dec = (o, keys) => { const c = { ...o }; keys.forEach((k) => { if (typeof c[k] === 'string') c[k] = decodeEntities(c[k]); }); return c; };
+    return { ...data, items: data.items.map((it) => dec(it, ['caption', 'secTitle', 'page', 'linkText'])), pages: (data.pages || []).map((pg) => dec(pg, ['title'])) };
+  }, [data]);
   const label = subjectLabel || D.$meta.label;
   const [view, setViewState] = useState('gallery');
   const [chapter, setChapter] = useState(null);

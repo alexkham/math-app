@@ -11,6 +11,7 @@ import SvgDiagram from '@/app/components/diagrams/render-svg/SvgDiagram'
 import { processContent } from '@/app/utils/contentProcessor'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
@@ -1021,6 +1022,23 @@ This section organizes continuous distributions, highlights their shared structu
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const dcNorm = (m, s) => (x) => Math.exp(-((x - m) ** 2) / (2 * s * s)) / (s * Math.sqrt(2 * Math.PI));
+  const fpThreeShapes = { kind: 'pieces', svgTitle: 'Normal(2, 1), uniform on [1, 4] and exponential with rate 1: different supports and shapes, each with total area 1', xRange: [-1.5, 6], yRange: [0, 1.1],
+    pieces: [
+      { fn: dcNorm(2, 1), from: -1.5, to: 6, ends: [null, null], color: 'f' },
+      { fn: () => 1 / 3, from: 1, to: 4, ends: ['closed', 'closed'], color: 'g' },
+      { fn: (x) => Math.exp(-x), from: 0, to: 6, ends: ['closed', null], color: 'r' },
+    ],
+    notes: [{ x: 2.6, y: 1.0, text: 'normal: whole line, symmetric', pos: 'e', color: 'f' }, { x: 2.6, y: 0.9, text: 'uniform: [1, 4], flat', pos: 'e', color: 'g' }, { x: 2.6, y: 0.8, text: 'exponential: [0, ∞), skewed', pos: 'e', color: 'r' }, { x: 2.6, y: 0.68, text: 'each has total area 1', pos: 'e' }],
+    caption: 'Same rule (area 1), different support and shape' };
+  const fpStandardize = { kind: 'pieces', svgTitle: 'X ~ N(5, 2^2) and Z = (X - 5)/2 ~ N(0, 1): subtracting 5 moves the bell to 0, dividing by 2 makes it narrower and taller', xRange: [-4, 11], yRange: [0, 0.45],
+    pieces: [
+      { fn: dcNorm(5, 2), from: -1.5, to: 11, ends: [null, null], color: 'f', label: { text: 'X ~ N(5, 2²)', x: 5.3, y: dcNorm(5, 2)(5.3), pos: 'ne' } },
+      { fn: dcNorm(0, 1), from: -4, to: 4, ends: [null, null], color: 'r', label: { text: 'Z ~ N(0, 1)', x: -1.2, y: dcNorm(0, 1)(-1.2), pos: 'nw' } },
+    ],
+    points: [{ x: 7, y: dcNorm(5, 2)(7), label: 'x = 7', pos: 'se' }, { x: 1, y: dcNorm(0, 1)(1), label: 'z = 1', pos: 'se' }],
+    notes: [{ x: 5.6, y: 0.43, text: 'Z = (X − 5)/2', pos: 'e', color: 'r' }, { x: 5.6, y: 0.39, text: 'x = 7 is one σ above: z = 1', pos: 'e' }],
+    caption: 'Standardizing: shift to mean 0, rescale to spread 1' };
   const demoUnits = {
     u_vs_0: demoUnitFrame({
       svg: continuousPdfDiagrams['uniform-pdf'],
@@ -1042,6 +1060,16 @@ This section organizes continuous distributions, highlights their shared structu
       text: 'Calculations with a continuous distribution go through the CDF: the probability of an interval is F at its right end minus F at its left end, so the area under the density never has to be integrated by hand once F is known. For the exponential family F(x) equals 1 minus e to the minus lambda x, which the curve traces. Pick an interval and read the difference on the',
       href: '/probability/visual-tools/cdf/continuous',
       linkText: 'continuous CDF visualizer',
+    }),
+    threeShapes: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpThreeShapes),
+      caption: 'Three continuous families side by side',
+      text: 'A normal curve with mean 2 and standard deviation 1, a uniform density on [1, 4] and an exponential density with rate 1, on one axis. The normal spreads over the whole line and is symmetric; the uniform is flat on its interval and zero outside it; the exponential starts at its highest point at 0 and decays to the right. Each encloses total area 1. What differs is where the probability can sit and how it is spread.',
+    }),
+    standardize: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpStandardize),
+      caption: 'From X to the standard normal',
+      text: 'X follows a normal distribution with mean 5 and standard deviation 2. Subtracting 5 slides the bell to centre 0; dividing by 2 squeezes it to spread 1, and the curve becomes taller so that its area stays 1. The result Z = (X &#8722; 5)/2 is standard normal. The value x = 7, one standard deviation above the mean, lands at z = 1: positions are kept, only the scale changes.',
     }),
   };
 
@@ -1320,6 +1348,8 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
         link:'',
         content:[
           sectionsContent.differ.content,
+                  <div key={'unit-threeShapes'} dangerouslySetInnerHTML={{ __html: demoUnits.threeShapes }} />,
+          `The exponential's density reaches 1 at 0, yet no single value has positive probability.`,
         ]
     },
     {
@@ -1354,6 +1384,8 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
         link:'',
         content:[
           sectionsContent.transformations.content,
+                  <div key={'unit-standardize'} dangerouslySetInnerHTML={{ __html: demoUnits.standardize }} />,
+          `Every normal curve standardizes to the same Z, which is why one table serves them all.`,
         ]
     },
     {

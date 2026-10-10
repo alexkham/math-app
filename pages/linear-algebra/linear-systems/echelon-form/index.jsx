@@ -1374,9 +1374,9 @@ REF is not unique. Different sequences of row operations applied to the same mat
         id: 'ref-rref',
         tex: `REF, RREF`,
         read: `row echelon form; reduced row echelon form`,
-        means: `Two acronyms one word apart, and the extra word changes the grammar around them. **REF is not unique** — as this section notes, different row operations give different echelon forms — so a matrix has *an* REF. **RREF is unique**, which is what licenses the definite article: *the* RREF of a matrix, the subject of **Uniqueness of RREF** below.`,
+        means: `Two acronyms one word apart, and the extra word changes the grammar around them. **REF is not unique** — as this section notes, different row operations give different echelon forms — so a matrix has an REF. **RREF is unique**, which is what licenses the definite article: the RREF of a matrix, the subject of **Uniqueness of RREF** below.`,
         alsoWritten: `Spelled out in full in most European texts, which avoids the acronym entirely; some sources write $\\operatorname{rref}(A)$ as an operator, treating the unique reduced form as a function of the matrix — a spelling only the reduced version can support, precisely because it is unique.`,
-        confusedWith: `Using "the" with REF. Saying *the* echelon form of a matrix quietly asserts a uniqueness that only the reduced form has; what every echelon form does share is the **set of pivot positions**, not the entries.`,
+        confusedWith: `Using "the" with REF. Saying the echelon form of a matrix quietly asserts a uniqueness that only the reduced form has; what every echelon form does share is the **set of pivot positions**, not the entries.`,
       },
       {
         id: 'pivot-marking',

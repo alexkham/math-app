@@ -632,6 +632,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderJointRectangle from '@/app/utils/illustrations/probability/areas/jointRectangle'
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
 import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
 
@@ -1148,6 +1149,11 @@ This idea is not an add-on to probability theory. Bayes' theorem sits at the int
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const jrBaseRate = { kind: 'split', svgTitle: 'Unit square: sick column 0.1 wide, 90% of it tests positive; healthy column 0.9 wide, 10% tests positive; both positive areas are 0.09, so P(sick | +) = 1/2',
+    pA: 0.1, pBgivenA: 0.9, pBgivenNotA: 0.1, labelA: 'sick', labelNotA: 'healthy', widthLabelA: 'P(sick) = 0.1', widthLabelNotA: 'P(healthy) = 0.9',
+    notes: [{ text: 'coloured parts: tested +' }, { text: 'blue: sick and +', color: 'f' }, { text: '0.1 × 0.9 = 0.09', color: 'f', indent: true }, { text: 'amber: healthy and +', color: 'r' }, { text: '0.9 × 0.1 = 0.09', color: 'r', indent: true },
+      {}, { text: 'P(+ | sick) = 0.9', color: 'f' }, { text: 'P(sick | +)', color: 'r' }, { text: '= 0.09 / 0.18 = 0.5', color: 'r', indent: true }],
+    caption: 'P(sick | +) is the blue share of the coloured area: one half' };
   const demoUnits = {
     u_conditional_0: demoUnitFrame({
       svg: conditionalTreeDiagrams.subtreeGivenA,
@@ -1162,6 +1168,11 @@ This idea is not an add-on to probability theory. Bayes' theorem sits at the int
       text: 'The denominator P(B) collects the highlighted outcome from every branch: each branch contributes P(A<sub>i</sub>) times P(B given A<sub>i</sub>), and the sum of those contributions is the total probability of B. Bayes theorem then asks what share of that sum came from a single branch. Highlight an outcome and read the contributions on the',
       href: '/probability/visual-tools/total-probability',
       linkText: 'law of total probability visualizer',
+    }),
+    baseRate: demoUnitFrame({
+      svg: renderJointRectangle(jrBaseRate),
+      caption: 'P(+ | sick) is not P(sick | +)',
+      text: 'The square is the whole population, total probability 1. The sick column is only 0.1 wide; 90% of it tests positive (blue). The healthy column is 0.9 wide; just 10% of it tests positive (amber). The two coloured parts have the same area, 0.09 each: the test is good, yet false positives from the large healthy group are as common as true ones. So P(+ | sick) = 0.9, while P(sick | +) = 0.09 / 0.18 = 0.5. Swapping the two, or ignoring the column widths, is exactly the mistake this section describes.',
     }),
   };
 
@@ -1303,6 +1314,8 @@ export default function BayesPage({
         link:'',
         content:[
           sectionsContent.mistakes.content,
+                  <div key={'unit-baseRate'} dangerouslySetInnerHTML={{ __html: demoUnits.baseRate }} />,
+          `Halving the sick column to 0.05 would cut P(sick | +) to about 0.32, with the same test.`,
           <div key={'mistakes-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: mistakesTable}}/>,
         ]
     },

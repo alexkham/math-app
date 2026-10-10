@@ -777,7 +777,7 @@ The compact form is also what makes the algebraic properties easy to check. Line
 
   const explanations = {
     pose: note('Nothing is highlighted yet - only squareness has been established.', 'the-opening-scene', 'Learn more about the opening scene'),
-    diagonal: note('Four cells in, twelve out: the trace reads only where the row index equals the column index.', 'revealing-the-diagonal', 'Learn more about the main diagonal'),
+    diagonal: note('n cells in, the other n² − n out: the trace reads only where the row index equals the column index.', 'revealing-the-diagonal', 'Learn more about the main diagonal'),
     sweep: note('Counted, current and pending are three different colours on the same diagonal.', 'the-diagonal-sweep', 'Learn more about the sweep'),
     complete: note('The closed form is size-independent, which is what the dimension control demonstrates.', 'the-completed-trace', 'Learn more about the completed trace'),
   }

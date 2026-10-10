@@ -795,7 +795,7 @@ export default function WeakComposition({ explanations = null }) {
 
               {/* Bin bands + frames (cell-only, alternating accent/highlight) */}
               {binInfo.map((b, i) => {
-                if (b.isEmpty) return null;
+                if (b.isEmpty || !partKnown(i)) return null; // no band before the bar that closes this bin lands
                 return (
                   <g key={`bin-${i}`}>
                     <rect
@@ -909,7 +909,15 @@ export default function WeakComposition({ explanations = null }) {
               )}
 
               {/* Bin brackets below strip (cell-only, progressive labels) */}
-              {binInfo.map((b, i) => {
+              {binInfo.map((b, i, all) => {
+                // Neighbouring empty bins sit ~42px apart, narrower than an "x₁ = 0" label:
+                // drop every other crowded label one row so they do not run together.
+                let lowered = false;
+                for (let j = 1; j <= i; j++) {
+                  const close = Math.abs(all[j].midX - all[j - 1].midX) < 48;
+                  lowered = close ? !lowered : false;
+                }
+                const labelY = bracketLabelY + (lowered ? 14 : 0);
                 const known = partKnown(i);
                 const labelText = `x${SUBSCRIPTS[i]} = ${known ? currentComp[i] : "?"}`;
                 const labelFill = known ? COLORS.accentDeep : COLORS.textFaint;
@@ -942,7 +950,7 @@ export default function WeakComposition({ explanations = null }) {
                       />
                     )}
                     <text
-                      x={b.midX} y={bracketLabelY} textAnchor="middle"
+                      x={b.midX} y={labelY} textAnchor="middle"
                       fontSize="12" fontWeight="700"
                       fontFamily="'JetBrains Mono',monospace"
                       fill={labelFill}
@@ -1017,7 +1025,7 @@ export default function WeakComposition({ explanations = null }) {
                 fontSize="11" fontWeight="600" fill={COLORS.textDim}
                 fontFamily="'JetBrains Mono',monospace"
               >
-                Choose k − 1 = {k - 1} bar positions out of n + k − 1 = {n + k - 1} cells:
+                Choose k − 1 = {k - 1} bar position{k - 1 === 1 ? "" : "s"} out of n + k − 1 = {n + k - 1} cells:
               </text>
               <text
                 x={SVG_W / 2} y={formulaCardTop + 40} textAnchor="middle"

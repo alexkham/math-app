@@ -207,9 +207,9 @@ obj10:{
   title:`Related Concepts and Tools`,
   content:`Euler's formula is the theoretical backbone of the entire visual tools section. Almost everything else here is a consequence of $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ in one way or another.
 
-The most direct application is the [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular). The polar form $re^{i\\theta}$ you see labeled on this plane is exactly what that tool converts to and from. If you set $r = 1$ here and drag $\theta$, you are tracing the same right triangle that converter uses to extract $a = r\\cos\\theta$ and $b = r\\sin\\theta$.
+The most direct application is the [Polar & Rectangular Converter](!/complex-numbers/visual-tools/polar-rectangular). The polar form $re^{i\\theta}$ you see labeled on this plane is exactly what that tool converts to and from. If you set $r = 1$ here and drag $\\theta$, you are tracing the same right triangle that converter uses to extract $a = r\\cos\\theta$ and $b = r\\sin\\theta$.
 
-The reason $e^{i\\theta}$ matters for arithmetic becomes concrete in the [Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication). The key property is $e^{i\\alpha} \cdot e^{i\\beta} = e^{i(\\alpha+\\beta)}$ — multiplying two complex numbers in polar form just adds their angles. That is not a coincidence or a trick; it follows directly from the exponential law you see here.
+The reason $e^{i\\theta}$ matters for arithmetic becomes concrete in the [Multiplication Visualizer](!/complex-numbers/visual-tools/multiplication). The key property is $e^{i\\alpha} \\cdot e^{i\\beta} = e^{i(\\alpha+\\beta)}$ — multiplying two complex numbers in polar form just adds their angles. That is not a coincidence or a trick; it follows directly from the exponential law you see here.
 
 [De Moivre's Theorem](!/complex-numbers/visual-tools/demoivre-visualizer) takes that one step further: $(re^{i\\theta})^n = r^n e^{in\\theta}$. It is Euler's formula combined with the exponent rule, applied $n$ times. Snap $\\theta$ to $\\pi/2$ here and then visit that tool — you will see exactly why the powers of $i$ cycle the way they do.
 

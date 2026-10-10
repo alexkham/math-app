@@ -518,7 +518,7 @@ $E(X) = 4.70$, well to the right of the simple average $3.5$. The blue marker ha
     before: ``,
     after: `Reading the contributions along the axis makes the arithmetic visible: $6 \\times 0.40 = 2.40$ on its own is more than half of $E(X)$, while $1 \\times 0.05 = 0.05$ contributes almost nothing.
 
-That asymmetry is the whole idea of a weighted average. An outcome influences $E(X)$ through the *product* of its value and its probability, so a large value with a small probability and a small value with a large probability can matter equally.`,
+That asymmetry is the whole idea of a weighted average. An outcome influences $E(X)$ through the product of its value and its probability, so a large value with a small probability and a small value with a large probability can matter equally.`,
     link: '',
   },
 
@@ -530,7 +530,7 @@ $E(X) = 2.30$, exactly as far below $3.5$ as Pull Right was above it.`,
     before: ``,
     after: `The symmetry is not a coincidence. Reversing the probabilities on the values $1..6$ reflects the distribution about $3.5$, and reflection about a point maps the mean to its mirror image: $3.5 - 1.2 = 2.3$ where the other gave $3.5 + 1.2 = 4.7$.
 
-Switching between these two presets is the fastest way to see that $E(X)$ is a genuine balance point rather than a summary of which values are *possible* — the possible values never changed.`,
+Switching between these two presets is the fastest way to see that $E(X)$ is a genuine balance point rather than a summary of which values are possible — the possible values never changed.`,
     link: '',
   },
 
@@ -554,7 +554,7 @@ $E(X) = 3.50$ once more, a third distribution sharing the value of [equal weight
     before: ``,
     after: `Three presets, three quite different shapes, one expected value. Pull Center clusters near the middle, Pull Extremes avoids it entirely, and Equal Weights is flat — and all three balance at $3.5$.
 
-Pull Extremes also makes the point that $E(X)$ need not be a likely outcome. The expected value here is $3.5$, which is not even one of the six possible values, and the outcomes closest to it are the *least* likely in the whole distribution. "Expected" is a name for the balance point, not a prediction.`,
+Pull Extremes also makes the point that $E(X)$ need not be a likely outcome. The expected value here is $3.5$, which is not even one of the six possible values, and the outcomes closest to it are the least likely in the whole distribution. "Expected" is a name for the balance point, not a prediction.`,
     link: '',
   },
 
@@ -825,7 +825,7 @@ The result is $P(X = 1) = 0.526$, not $1.00$, with the other five shrunk in prop
     before: ``,
     after: `The renormalisation is what keeps the display a valid probability distribution: the six bars must always sum to $1$, so raising one necessarily lowers the rest.
 
-The practical consequence is that a slider sets a **relative weight**, not a probability. The number under the slider is the value you dragged to; the number the bar reports is what that weight became after rescaling. Dragging the same slider twice does not repeat the same change, because the second drag starts from an already-rescaled distribution.
+The practical consequence is that a slider sets a **relative weight**, not a probability. The number under the slider, like the thumb itself, already shows what that weight became after rescaling, not the value you dragged to. Dragging the same slider twice does not repeat the same change, because the second drag starts from an already-rescaled distribution.
 
 Notice also that the vertical axis rescales between the two states. The tool fits the tallest bar to the plot, so the gridlines mean different probabilities in each — the axis is relative, and only the printed numbers are absolute.`,
     link: '',

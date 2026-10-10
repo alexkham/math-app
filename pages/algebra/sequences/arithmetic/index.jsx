@@ -10,6 +10,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -587,6 +589,38 @@ const schemas = {
   },
 }
 
+  const arUp = (n) => 4 * n - 1, arDown = (n) => 23 - 3 * n;
+  const arDots = (fn, color) => [1, 2, 3, 4, 5].map((n) => ({ fn, from: n, to: n, ends: ['closed', 'closed'], color }));
+  const arPx = (n) => n * 388 / 6;
+  const arCols = [2, 5, 8, 11, 14].flatMap((v, i) => [
+    { from: 0, to: v, color: 'f', dx: arPx(i + 1), label: String(v), labelY: v / 2 - 0.4 },
+    { from: v, to: 16, color: 'r', dx: arPx(i + 1), label: String(16 - v), labelY: (v + 16) / 2 - 0.4 }]);
+  const fpArithLine = { kind: 'pieces', svgTitle: 'Arithmetic terms lie on straight lines: d = 4 rises, d = -3 falls', xRange: [0, 6], yRange: [-2, 24], yStep: 4, xLetter: 'n',
+    pieces: [
+      { fn: arUp, from: 99, to: 99, ends: [null, null], color: 'f', ghost: [[1, 5]] },
+      { fn: arDown, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[1, 5]] },
+      ...arDots(arUp, 'f'), ...arDots(arDown, 'r'),
+    ],
+    notes: [{ x: 2.3, y: 5.4, text: '3, 7, 11, 15, 19: d = 4, slope 4', pos: 'e', color: 'f' }, { x: 2.3, y: 2.4, text: '20, 17, 14, 11, 8: d = −3, slope −3', pos: 'e', color: 'r' }],
+    caption: 'Plotted against n, an arithmetic sequence is a line of slope d' };
+  const fpGaussPairs = { kind: 'pieces', svgTitle: 'Columns 2+14, 5+11, 8+8, 11+5, 14+2 all reach 16, so 2S = 5 x 16', xRange: [0, 6], yRange: [0, 20], yStep: 4, xLetter: 'n',
+    pieces: [{ fn: () => 16, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0.6, 5.4]], label: { text: 'every column: 2 + 14 = 16', x: 3, y: 16, pos: 'n' } }],
+    yBars: arCols,
+    notes: [{ x: 5.45, y: 9, text: '2S₅ = 5 · 16', pos: 'e', color: 'r' }, { x: 5.45, y: 7, text: 'S₅ = 40', pos: 'e', color: 'r' }],
+    caption: 'Forwards (blue) plus backwards (amber): 5 columns of 16 each' };
+  const demoUnits = {
+    arithLine: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpArithLine),
+      caption: 'The common difference is a slope',
+      text: 'The section&#8217;s two sequences plotted as points (n, a&#8345;). Each step to the right adds d to the height, so the points sit on a straight line: 3, 7, 11, &#8230; rises 4 per step, and 20, 17, 14, &#8230; falls 3 per step. The common difference is the slope of that line, which is the link between a&#8345; = a&#8321; + (n &#8722; 1)d and f(x) = mx + b.',
+    }),
+    gaussPairs: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpGaussPairs),
+      caption: 'Forwards plus backwards',
+      text: 'The terms 2, 5, 8, 11, 14 stand as blue columns. The same terms in reverse order, 14, 11, 8, 5, 2, are stacked on top in amber. Each column then reaches 2 + 14 = 16, so the two copies together fill 5 columns of 16: 2S&#8325; = 5 &#183; 16 = 80 and S&#8325; = 40. That is S&#8345; = n(a&#8321; + a&#8345;)/2.',
+    }),
+  };
+
    return {
   props:{
      sectionsContent,
@@ -595,6 +629,7 @@ const schemas = {
      capstoneTable,
      faqQuestions,
      schemas,
+     demoUnits,
      seoData: {
        title: "Arithmetic Sequences: Formula, Series & Mean | Learn Math Class",
        description: "Learn arithmetic sequences: definition, common difference, nth term formula, recursive form, sum of arithmetic series, and arithmetic mean with examples.",
@@ -606,7 +641,7 @@ const schemas = {
 }
    }
 
-export default function ArithmeticSequencesPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas}) {
+export default function ArithmeticSequencesPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -625,6 +660,8 @@ export default function ArithmeticSequencesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <div key={'unit-arithLine'} dangerouslySetInnerHTML={{ __html: demoUnits.arithLine }} />,
+          `A non-arithmetic sequence such as 1, 4, 9, 16 bends away from any line.`,
         ]
     },
     {
@@ -677,6 +714,8 @@ export default function ArithmeticSequencesPage({seoData, sectionsContent, intro
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <div key={'unit-gaussPairs'} dangerouslySetInnerHTML={{ __html: demoUnits.gaussPairs }} />,
+          `Gauss's 1 + 2 + … + 100 is the same picture with 100 columns of 101.`,
         ]
     },
     {
