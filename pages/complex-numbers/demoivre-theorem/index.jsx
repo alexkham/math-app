@@ -1593,7 +1593,7 @@ A square on the unit circle at the four cardinal points.
 
 Write $32 = 32\\text{cis}(0°)$. The roots are $z_k = 2\\text{cis}(72°k)$ for $k = 0, 1, 2, 3, 4$.
 
-$z_0 = 2$, $z_1 = 2\\text{cis}(72°)$, $z_2 = 2\\text{cis}(144°)$, $z_3 = 2\\text{cis}(288°)$, $z_4 = 2\\text{cis}(288°)$
+$z_0 = 2$, $z_1 = 2\\text{cis}(72°)$, $z_2 = 2\\text{cis}(144°)$, $z_3 = 2\\text{cis}(216°)$, $z_4 = 2\\text{cis}(288°)$
 
 A regular pentagon with radius $2$, one vertex on the positive real axis.`,
   after: ``,

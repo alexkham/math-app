@@ -14,6 +14,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 
@@ -103,7 +104,7 @@ export async function getStaticProps(){
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Monotonic-transformation invariance</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">mode(g(X)) = g(mode(X)) for strictly monotonic g</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">mode(g(X)) = g(mode(X)) for strictly monotonic g when X is discrete; fails in general for continuous X</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Location flexibility</td>
@@ -285,7 +286,7 @@ export async function getStaticProps(){
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Key properties</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">linear under aX + b; invariant under monotonic g; robust to outliers; not additive</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">linear under aX + b; invariant under monotonic g for discrete X; robust to outliers; not additive</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">mode(aX + b) = a &middot; mode(X) + b</td>
     </tr>
     <tr style="background: #f8f9fa;">
@@ -707,15 +708,17 @@ The mode operates independently of scale—it tracks peak location, not dispersi
 
 ## Invariance Under Monotonic Transformations
 
-For strictly monotonic functions $g$ (always increasing or always decreasing):
+For a discrete random variable and a strictly monotonic function $g$ (always increasing or always decreasing):
 
 $$\\text{mode}(g(X)) = g(\\text{mode}(X))$$
 
-If $g$ is strictly increasing, it preserves the ordering of probabilities, so the maximum stays at the same relative position.
+A one-to-one $g$ only relabels the values: $P(g(X) = g(x)) = P(X = x)$, so the most likely value moves to $g$ of the old one.
 
-Example: If $X$ has mode $4$, then $Y = X^2$ has mode $16$ (assuming $X > 0$).
+Example: If a discrete $X > 0$ has mode $4$, then $Y = X^2$ has mode $16$.
 
-This property holds for the [median](!/probability/median) as well but fails for the [mean](!/probability/expected-value).
+For a continuous random variable this fails in general. The density of $Y = g(X)$ is $f_X(g^{-1}(y)) \\cdot \\left|\\frac{d}{dy} g^{-1}(y)\\right|$, and the extra factor can move the peak. Take $X$ with density $f(x) = 2x$ on $[0, 1]$, whose mode is $1$. Then $Y = X^2$ is uniform on $[0, 1]$: every point is a mode, not just $1^2 = 1$. Only linear maps $aX + b$ carry the mode along for every continuous variable.
+
+The [median](!/probability/median) is preserved by every strictly increasing $g$, discrete or continuous; the [mean](!/probability/expected-value) is not.
 
 ## Location Flexibility
 
@@ -1418,6 +1421,16 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const moN = (x, m) => Math.exp(-((x - m) ** 2) / 2) / Math.sqrt(2 * Math.PI);
+  const moMix = (x) => 0.5 * moN(x, -2) + 0.5 * moN(x, 2);
+  const fpModeMixture = { kind: 'pieces', svgTitle: 'Equal mixture of normals centred at -2 and 2 with standard deviation 1: two peaks near -2 and 2, the mean 0 sits in the dip between them', xRange: [-5, 5], yRange: [0, 0.3], xStep: 1, yStep: 1, xLetter: 'x', yLetter: 'f(x)',
+    pieces: [{ fn: moMix, from: -5, to: 5, ends: [null, null], color: 'f' },
+      { fn: (x) => 0.5 * moN(x, -2), from: -5, to: -5, ends: [null, null], color: 'g', ghost: [[-5, 5]] },
+      { fn: (x) => 0.5 * moN(x, 2), from: 5, to: 5, ends: [null, null], color: 'g', ghost: [[-5, 5]] }],
+    vlines: [{ x: 0, label: '' }],
+    points: [{ x: -1.998, y: moMix(-1.998), label: 'mode ≈ −2', pos: 'nw' }, { x: 1.998, y: moMix(1.998), label: 'mode ≈ 2', pos: 'ne' }],
+    notes: [{ x: 0, y: 0.285, text: 'mean 0: in the dip', pos: 'e', color: 'g' }, { x: -4.9, y: 0.285, text: '½ N(−2, 1) + ½ N(2, 1)', pos: 'e' }, { x: 3.1, y: 0.2, text: 'dashed: each half', pos: 'e', color: 'g' }],
+    caption: 'Bimodal: two peaks, and the mean between them is rare' };
   const demoUnits = {
     u_2_0: demoUnitFrame({
       svg: discretePmfDiagrams.poisson,
@@ -1432,6 +1445,11 @@ const schemas = {
       text: 'The mode of a continuous distribution is where the density is highest; the exponential density starts at its maximum and only decreases, so its mode is 0, far from its mean of 1 and its median of about 0.69. A symmetric density would put all three together. Compare with the normal and uniform densities on the',
       href: '/probability/visual-tools/probability-function/continuous',
       linkText: 'PDF visualizer',
+    }),
+    modeMixture: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpModeMixture),
+      caption: 'A bimodal mixture',
+      text: 'Half the probability comes from a normal centred at &#8722;2 and half from one centred at 2, both with standard deviation 1 (dashed curves). Their sum, the solid curve, has two peaks, at about &#8722;2 and 2: two modes. The mean is 0, exactly between them, but 0 sits in the dip, where the density is about a quarter of the peak height: the average value is one of the less likely ones.',
     }),
   };
 
@@ -1522,6 +1540,8 @@ export default function ModePage({
           sectionsContent.obj4.content,
           <div key={'modality-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: modalityTable }} />,
+                  <div key={'unit-modeMixture'} dangerouslySetInnerHTML={{ __html: demoUnits.modeMixture }} />,
+            `Move the two centres closer than 2 standard deviations apart and the dip disappears: one mode.`,
         ]
     },
     {

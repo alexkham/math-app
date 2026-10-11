@@ -620,6 +620,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderPushforward from '@/app/utils/illustrations/probability/variables/pushforward'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
@@ -1118,6 +1119,10 @@ distributions, averages, variability, and comparison of outcomes.
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const rvSeqs = ['HHH', 'HHT', 'HTH', 'THH', 'HTT', 'THT', 'TTH', 'TTT'];
+  const rvHeads = (s) => [...s].filter((c) => c === 'H').length;
+  const pwHeadsMap = { kind: 'map-and-stack', svgTitle: 'Three tosses: X = number of heads maps the 8 outcomes to 0, 1, 2, 3 with masses 1/8, 3/8, 3/8, 1/8', outcomes: rvSeqs.map((s) => ({ label: s, value: rvHeads(s) })), range: [0, 3], axisLabel: 'X = heads',
+    notes: [{ text: 'each outcome carries 1/8; the stacks are the PMF of X' }], caption: 'A random variable sends outcomes to numbers' };
   const demoUnits = {
     u_outcomes_0: demoUnitFrame({
       svg: coinSampleSpaceDiagrams.none,
@@ -1139,6 +1144,11 @@ distributions, averages, variability, and comparison of outcomes.
       text: 'A statement such as X &le; k is an event, and its probability is read straight off the CDF as the height of the step at k. Statements such as X = k or a &lt; X &le; b are differences of such heights. Read these probabilities from the staircase on the',
       href: '/probability/visual-tools/cdf/discrete',
       linkText: 'discrete CDF explorer',
+    }),
+    headsMap: demoUnitFrame({
+      svg: renderPushforward(pwHeadsMap),
+      caption: 'Number of heads as a map',
+      text: 'The sample space of three tosses has 8 equally likely outcomes, shown in the box. The random variable X = number of heads assigns each one a number: HHH goes to 3, the three outcomes with two heads go to 2, and so on. Each arrow drops one block of probability 1/8 on its value, so the stacks show the distribution of X: 1/8, 3/8, 3/8, 1/8 on 0, 1, 2, 3.',
     }),
   };
 
@@ -1210,6 +1220,8 @@ export default function RandomVariablesPage({
                      />
                      </div>,
           sectionsContent.definition.content,
+                  <div key={'unit-headsMap'} dangerouslySetInnerHTML={{ __html: demoUnits.headsMap }} />,
+          `The outcomes stay where they are; X only reads a number off each one.`,
         ]
     },
     {

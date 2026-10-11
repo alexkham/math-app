@@ -98,6 +98,10 @@ export async function getStaticProps() {
       title: "Arithmetic",
       link: "/math-symbols/arithmetic"
     },
+    {
+      title: "Mathematical Keyboard",
+      link: "/keyboard"
+    },
   ];
 
   const meta = {

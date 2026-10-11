@@ -1688,7 +1688,7 @@ Managing this infinity is what distinguishes trigonometric equation solving from
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
   // Authored figure, drawn by curveFeature. Uses the section's own example.
-  const cfMultipleAngles = {
+  const cfMultipleAngles = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'pair', title: 'Doubling the angle doubles the solutions',
     xRange: [0, 2 * Math.PI], yRange: [-1.35, 1.55],
     panels: [

@@ -148,7 +148,7 @@ Mean and variance both equal λ, a unique Poisson property. For λ=5, expect 5 e
 
 The PMF formula: P(X=k) = (λ^k × e^(-λ)) / k! where k is the event count. The calculator sums probabilities for cumulative queries. P(X≤3) for λ=5 gives probability of 3 or fewer events, useful for capacity planning.
 
-Apply Poisson to phone calls per hour, website visits per day, radioactive decay counts, rare disease cases, customer arrivals, or any scenario with independent events at constant rate. The distribution assumes infinite potential events in the interval with very small individual probabilities.`,
+Apply Poisson to phone calls per hour, website visits per day, radioactive decay counts, rare disease cases, customer arrivals, or any scenario with independent events at constant rate. The distribution assumes infinite potential events in the interval with very small individual probabilities. For the formula worked out step by step, PMF and CDF charts, and all comparison types, see the [Poisson distribution calculator](!/probability/visual-tools/distributions/poisson).`,
       before: ``,
       after: ``,
       link: '',

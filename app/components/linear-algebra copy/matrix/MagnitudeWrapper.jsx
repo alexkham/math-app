@@ -223,6 +223,9 @@ export function buildScenes(n, scenario = 'unit') {
   ];
 
   const scenes = [];
+  const rootStr = n === 1 ? '√(v<sub>1</sub>²) = |v<sub>1</sub>|'
+    : n === 2 ? '√(v<sub>1</sub>² + v<sub>2</sub>²)'
+    : '√(v<sub>1</sub>² + ⋯ + v<sub>' + n + '</sub>²)';
 
   // Intro
   scenes.push({
@@ -231,7 +234,7 @@ export function buildScenes(n, scenario = 'unit') {
       : `Magnitude ‖v‖`,
     formula:
       `v has ${n} component${n === 1 ? '' : 's'}. Its magnitude is ` +
-      '<strong>‖v‖ = √(v<sub>1</sub>² + ⋯ + v<sub>' + n + '</sub>²)</strong>: ' +
+      '<strong>‖v‖ = ' + rootStr + '</strong>: ' +
       'square every component, add the squares, take the square root. ' +
       (withUnit
         ? 'Dividing each component by that one number then gives the unit vector ' +
@@ -280,14 +283,14 @@ export function buildScenes(n, scenario = 'unit') {
       });
     }
     scenes.push({
-      title: `Phase 2 — sum and root: ‖v‖ = √(v<sub>1</sub>² + ⋯ + v<sub>${n}</sub>²)`,
+      title: `Phase 2 — sum and root: ‖v‖ = ${rootStr}`,
       formula:
         `Add the ${n} square${n === 1 ? '' : 's'} and take the square root of the total. ` +
         'The sum of squares is ‖v‖², the squared length; the root undoes the ' +
         'squaring and returns a length in the same units as the components. ' +
         (n === 2
           ? 'For two components this is exactly the Pythagorean theorem.'
-          : 'This is the Pythagorean theorem applied ' + (n - 1) + ' time' + (n === 2 ? '' : 's') + ' in a row.'),
+          : n === 1 ? 'With a single component there is nothing to add: ‖v‖ = |v<sub>1</sub>|.' : 'This is the Pythagorean theorem applied ' + (n - 1) + ' times in a row.'),
       matrices: { V, S: S(n - 1), N: N(true) },
       layout: layoutA,
       highlights: {
@@ -597,6 +600,7 @@ export default function MagnitudeWrapper({
         <ScenePlayer
           scenes={scenes}
           defaultSpeed={defaultSpeed}
+          speedOptions={[{ value: defaultSpeed + 800, label: 'Slow' }, { value: defaultSpeed, label: 'Normal' }, { value: 700, label: 'Fast' }, { value: 400, label: 'Very Fast' }]}
           showSpeedSelector={true}
           showStepIndicator={true}
           showStepLog={true}

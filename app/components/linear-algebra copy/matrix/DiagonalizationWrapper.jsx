@@ -472,7 +472,7 @@ export function buildScenes(values, power = DEFAULT_POWER) {
       `P is invertible because its columns are independent: det P = ${fmt(detP)} ≠ 0. ` +
       'Row reduce [P | I] until the left half is the identity; the right half is then P⁻¹' +
       (n === 2 ? ', or use the 2×2 formula, swap the diagonal, negate the off-diagonal, divide by the determinant. ' : '. ') +
-      'Fractions are normal here: P has integer columns, so P⁻¹ carries the determinant in its denominators.',
+      (P.every((row) => row.every((x) => Number.isInteger(x))) ? 'Fractions are normal here: P has integer columns, so P⁻¹ carries the determinant in its denominators.' : 'P⁻¹ carries the determinant in its denominators.'),
     matrices: { P: matP(narrow), Q: matPinv(narrow) },
     layout: [
       { type: 'matrix', ref: 'P' },
@@ -550,7 +550,7 @@ export function buildScenes(values, power = DEFAULT_POWER) {
     title: `A<sup>${k}</sup> = P D<sup>${k}</sup> P⁻¹`,
     formula:
       `A<sup>${k}</sup> = (P D P⁻¹)(P D P⁻¹)··· — every inner P⁻¹P cancels, leaving P D<sup>${k}</sup> P⁻¹. ` +
-      `Powering D means powering its diagonal: ${pairs.map((p) => `${fmt(p.lam)}<sup>${k}</sup> = ${fmt(Math.pow(p.lam, k))}`).join(', ')}. ` +
+      `Powering D means powering its diagonal: ${pairs.map((p) => `${/[\/−-]/.test(fmt(p.lam)) ? `(${fmt(p.lam)})` : fmt(p.lam)}<sup>${k}</sup> = ${fmt(Math.pow(p.lam, k))}`).join(', ')}. ` +
       `Two more multiplications give A<sup>${k}</sup> = ${Ak.map((row) => `(${row.map(fmt).join(', ')})`).join(' / ')} — the same as multiplying A by itself ${k - 1} time${k === 2 ? '' : 's'}, ` +
       'but the eigenvalues now say how the powers grow: the largest |λ| dominates.',
     matrices: { Ak: matAk, P: matP(wide), Dk: matDk, Q: matPinv(wide) },
@@ -871,6 +871,7 @@ export default function DiagonalizationWrapper({
         <ScenePlayer
           scenes={scenes}
           defaultSpeed={defaultSpeed}
+          speedOptions={[{ value: defaultSpeed + 800, label: 'Slow' }, { value: defaultSpeed, label: 'Normal' }, { value: 700, label: 'Fast' }, { value: 400, label: 'Very Fast' }]}
           showSpeedSelector={true}
           showStepIndicator={true}
           showStepLog={true}

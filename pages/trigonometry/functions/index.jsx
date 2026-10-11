@@ -2782,7 +2782,7 @@ This shift in perspective opens up the full toolkit of function analysis. Each o
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
   // Authored figures. curveFeature.v3 draws the six-panel grid; relationMap
   // draws the two box-and-arrow scenes. Package docs beside each renderer.
-  const cfDomainRange = {
+  const cfDomainRange = {style: { primary: '#2563EB', secondary: '#06357A', resultStroke: '#B45309' }, 
     kind: 'grid', panelWidth: 186, panelHeight: 128,
     svgTitle: 'The six functions share only two patterns of excluded point',
     rows: [
@@ -2792,7 +2792,7 @@ This shift in perspective opens up the full toolkit of function analysis. Each o
     ],
     note: 'only two patterns of excluded point across all six',
   };
-  const rmReduceToTwo = {
+  const rmReduceToTwo = {style: { primary: '#2563EB', primaryFill: '#EEF4FF', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#FEF6EC' }, 
     kind: 'roots', width: 560, height: 286,
     svgTitle: 'All six functions reduce to sine and cosine',
     rootsLabel: 'the two roots',
@@ -2805,7 +2805,7 @@ This shift in perspective opens up the full toolkit of function analysis. Each o
     ],
     note: 'every other function is written with sine and cosine and nothing else',
   };
-  const rmFromOneValue = {
+  const rmFromOneValue = {style: { primary: '#2563EB', primaryFill: '#EEF4FF', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#FEF6EC' }, 
     kind: 'chain', width: 620, height: 250,
     svgTitle: 'One value plus a quadrant determines the other five',
     steps: [

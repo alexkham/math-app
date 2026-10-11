@@ -1309,6 +1309,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
@@ -2546,6 +2547,21 @@ const generalTable = `
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const pfBox = (h, a, b, c) => [
+    { fn: () => h, from: a, to: b, ends: [null, null], color: c },
+    { fn: (x) => (x - a) * 1e6, from: a, to: a + h / 1e6, ends: [null, null], color: c },
+    { fn: (x) => (b - x) * 1e6, from: b - h / 1e6, to: b, ends: [null, null], color: c }];
+  const pfPx = (x, w) => x / w * 388;
+  const fpDieRange = { kind: 'pieces', svgTitle: 'Fair die PMF with the bars for 2, 3, 4 and 5 highlighted: P(2 to 5) = 4/6', xRange: [-0.5, 7], yRange: [0, 0.25], xLetter: 'k',
+    pieces: [{ fn: () => 0, from: -0.5, to: -0.5, ends: [null, null], color: 'g' }],
+    yBars: [1, 2, 3, 4, 5, 6].map((k) => ({ from: 0, to: 1 / 6, color: k >= 2 && k <= 5 ? 'r' : 'f', dx: pfPx(k, 7.5) })),
+    notes: [{ x: 0.3, y: 0.235, text: 'P(2 ≤ X ≤ 5) = 1/6 + 1/6 + 1/6 + 1/6 = 4/6', pos: 'e', color: 'r' }, { x: 0.3, y: 0.205, text: 'endpoints 2 and 5 included', pos: 'e' }],
+    caption: 'A range probability: add the bars inside it' };
+  const fpSquareCollapse = { kind: 'pieces', svgTitle: 'Y = (X - 3.5) squared for a fair die: faces 3 and 4 give 0.25, faces 2 and 5 give 2.25, faces 1 and 6 give 6.25, each with probability 1/3', xRange: [-0.5, 7], yRange: [0, 0.42], xLetter: 'y', yLetter: 'P(Y = y)',
+    pieces: [{ fn: () => 0, from: -0.5, to: -0.5, ends: [null, null], color: 'g' }],
+    yBars: [0.25, 2.25, 6.25].map((y) => ({ from: 0, to: 1 / 3, color: 'r', dx: pfPx(y, 7.5) })),
+    notes: [{ x: 0.2, y: 0.36, text: 'faces 3, 4', pos: 'ne', color: 'r' }, { x: 2.25, y: 0.36, text: 'faces 2, 5', pos: 'n', color: 'r' }, { x: 6.25, y: 0.36, text: 'faces 1, 6', pos: 'n', color: 'r' }, { x: 3, y: 0.25, text: 'two faces per value:', pos: 'e' }, { x: 3, y: 0.22, text: '1/6 + 1/6 = 1/3 each', pos: 'e' }],
+    caption: 'Six faces, three values: the probabilities pool' };
   const demoUnits = {
     u_1_0: demoUnitFrame({
       svg: discretePmfDiagrams.binomial,
@@ -2567,6 +2583,16 @@ const generalTable = `
       text: 'The catalogue of discrete mass functions ranges from the flat uniform pattern shown here through the peaked binomial and Poisson shapes to the decaying geometric tail; each is a different rule for splitting unit mass across integers. The explorer marks the mean of each. Compare the six families side by side on the',
       href: '/probability/visual-tools/distributions/uniform-discrete',
       linkText: 'distribution explorer',
+    }),
+    dieRange: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpDieRange),
+      caption: 'A range probability as bars',
+      text: 'The fair-die PMF with the four bars for 2, 3, 4 and 5 picked out. A range probability is the sum of the bars inside the range: P(2 &#8804; X &#8804; 5) = 4 &#183; 1/6 = 2/3. Both endpoints count because they are possible values; with a PMF, &#8804; and &lt; give different answers.',
+    }),
+    squareCollapse: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpSquareCollapse),
+      caption: 'A transformation that merges values',
+      text: 'Y = (X &#8722; 3.5)&#178; for a fair die. Faces 3 and 4 are both 0.5 from the mean, so both give Y = 0.25; faces 2 and 5 give 2.25; faces 1 and 6 give 6.25. Six equally likely faces become three values, each collecting two faces: p_Y(y) = 1/6 + 1/6 = 1/3.',
     }),
   };
 
@@ -2725,6 +2751,8 @@ export default function PMFPage({
           sectionsContent.obj6.content,
           <div key={'calculations-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: calculationsTable }} />,
+                  <div key={'unit-dieRange'} dangerouslySetInnerHTML={{ __html: demoUnits.dieRange }} />,
+            `P(2 < X < 5) would drop both end bars: 2/6.`,
         ]
     },
     {
@@ -2751,6 +2779,8 @@ export default function PMFPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+                  <div key={'unit-squareCollapse'} dangerouslySetInnerHTML={{ __html: demoUnits.squareCollapse }} />,
+          `E[Y] = (0.25 + 2.25 + 6.25)/3 = 35/12, the variance of the die.`,
         ]
     },
     {

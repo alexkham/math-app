@@ -694,6 +694,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1255,6 +1257,30 @@ const schemas = {
 
 
 
+  const fbThreeFifths = { kind: 'bars', svgTitle: 'A bar cut into 5 equal parts with 3 shaded: three fifths', rows: [{ n: 5, k: 3, label: '3/5', partLabels: true }],
+    notes: [{ text: 'denominator 5: the whole is cut into 5 equal parts' }, { text: 'numerator 3: three of those parts are taken', color: 'f' }], caption: 'The denominator names the part, the numerator counts them' };
+  const fbProperImproper = { kind: 'bars', svgTitle: '3/4 fits inside one whole; 5/3 fills one whole and two thirds of a second', rows: [{ n: 4, k: 3, label: '3/4', partLabels: true }, { n: 3, k: 5, label: '5/3', color: 'r', partLabels: true }],
+    notes: [{ text: 'proper: 3 of 4 parts, less than one whole', color: 'f' }, { text: 'improper: 5 thirds, one whole and 2 thirds more', color: 'r' }], caption: 'Proper stays inside one whole; improper spills over' };
+  const fbUnitFractions = { kind: 'bars', svgTitle: 'Unit fractions 1/2, 1/4 and 1/8 on bars of the same whole: each is half the one before', rows: [{ n: 2, k: 1, label: '1/2', partLabels: true }, { n: 4, k: 1, label: '1/4', color: 'r', partLabels: true }, { n: 8, k: 1, label: '1/8', color: 'g', partLabels: true }],
+    notes: [{ text: 'same whole, more parts: each part is smaller' }, { text: '1/8 < 1/4 < 1/2' }], caption: 'Larger denominator, smaller unit fraction' };
+  const demoUnits = {
+    threeFifths: demoUnitFrame({
+      svg: renderFractionBar(fbThreeFifths),
+      caption: 'Three fifths as parts of a bar',
+      text: 'The bar is one whole. The denominator 5 cuts it into five equal parts, so each part is one fifth. The numerator 3 counts how many of those parts are taken: the three shaded cells. Together they describe 3/5, three parts of size 1/5.',
+    }),
+    properImproper: demoUnitFrame({
+      svg: renderFractionBar(fbProperImproper),
+      caption: 'Proper and improper on the same whole',
+      text: 'Both bars use the same length for one whole. 3/4 shades three of four quarters and stays inside a single bar: a proper fraction, less than 1. 5/3 needs five thirds, but one bar holds only three, so the shading fills a whole bar and two thirds of a second one: an improper fraction, 5/3 = 1 2/3, greater than 1.',
+    }),
+    unitFractions: demoUnitFrame({
+      svg: renderFractionBar(fbUnitFractions),
+      caption: 'Unit fractions shrink as the denominator grows',
+      text: 'Each bar is the same whole with exactly one part shaded. Cutting into 2, then 4, then 8 equal parts halves the part each time, so 1/2 &gt; 1/4 &gt; 1/8. A larger denominator means more, and therefore smaller, pieces.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -1264,6 +1290,7 @@ return {
     capstoneTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Fractions: Definition, Types & Operations | Learn Math Class",
       description: "Learn fractions from the ground up: numerator and denominator, proper vs improper fractions, unit fractions, operations, and visual models for understanding.",
@@ -1276,7 +1303,7 @@ return {
    }
 
 
-export default function FractionsPage({seoData, sectionsContent, introContent, obj3Table, obj6Table, capstoneTable, faqQuestions, schemas}) {
+export default function FractionsPage({seoData, sectionsContent, introContent, obj3Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1322,6 +1349,8 @@ export default function FractionsPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-threeFifths'} dangerouslySetInnerHTML={{ __html: demoUnits.threeFifths }} />,
+          `Shading all 5 parts would give 5/5 = 1, the whole bar.`,
         ]
     },
     {
@@ -1340,6 +1369,8 @@ export default function FractionsPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-properImproper'} dangerouslySetInnerHTML={{ __html: demoUnits.properImproper }} />,
+          `The numerator against the denominator decides it: below means proper, at or above means improper.`,
         ]
     },
     {
@@ -1348,6 +1379,8 @@ export default function FractionsPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-unitFractions'} dangerouslySetInnerHTML={{ __html: demoUnits.unitFractions }} />,
+          `Three copies of the 1/5 cell make 3/5: every fraction is built from unit fractions.`,
         ]
     },
     {

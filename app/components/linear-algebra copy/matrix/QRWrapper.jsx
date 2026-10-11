@@ -244,7 +244,7 @@ export function buildScenes(k = 3, n = 3) {
 
   scenes.push({
     phase: 'intro',
-    title: `QR decomposition of an ${n}×${k} matrix`,
+    title: `QR decomposition of a ${n}×${k} matrix`,
     formula:
       'A will be written as <strong>A = QR</strong>: Q with <strong>orthonormal columns</strong>, ' +
       'R <strong>upper triangular</strong>. The method is Gram–Schmidt on the columns of A, keeping the ' +
@@ -317,7 +317,7 @@ export function buildScenes(k = 3, n = 3) {
           `Subtract r<sub>${j + 1},${c + 1}</sub> times q<sub>${j + 1}</sub> from the working column, entry by entry. ` +
           `Column ${c + 1} of Q now reads <strong>${uHtml(c, j + 1)}</strong>` +
           (j + 1 === c
-            ? `, perpendicular to ${c === 1 ? 'q<sub>1</sub>' : 'every finished column'}.`
+            ? (c >= n ? `. With only ${n} rows, a<sub>${c + 1}</sub> is a combination of the first ${n} columns: nothing is left, u<sub>${c + 1}</sub> = 0.` : `, perpendicular to ${c === 1 ? 'q<sub>1</sub>' : 'every finished column'}.`)
             : `; ${c - j - 1} projection${c - j - 1 === 1 ? '' : 's'} still to remove.`),
         matrices: snap(),
         layout,
@@ -341,8 +341,11 @@ export function buildScenes(k = 3, n = 3) {
     qState[c] = 'done';
     scenes.push({
       phase: 'norm',
-      title: `r<sub>${c + 1},${c + 1}</sub> = ‖u<sub>${c + 1}</sub>‖, &nbsp; q<sub>${c + 1}</sub> = u<sub>${c + 1}</sub> / r<sub>${c + 1},${c + 1}</sub>`,
-      formula:
+      title: c >= n ? `u<sub>${c + 1}</sub> = 0: r<sub>${c + 1},${c + 1}</sub> = 0, no q<sub>${c + 1}</sub>` : `r<sub>${c + 1},${c + 1}</sub> = ‖u<sub>${c + 1}</sub>‖, &nbsp; q<sub>${c + 1}</sub> = u<sub>${c + 1}</sub> / r<sub>${c + 1},${c + 1}</sub>`,
+      formula: c >= n ? (
+        `The working column is zero, so its length r<sub>${c + 1},${c + 1}</sub> = 0 goes on the diagonal and there is no unit vector to make: ` +
+        `Q keeps only ${n} columns, and column ${c + 1} of R (r<sub>1,${c + 1}</sub>…r<sub>${n},${c + 1}</sub>) already rebuilds a<sub>${c + 1}</sub> from q<sub>1</sub>…q<sub>${n}</sub>.`
+      ) : (
         `The length of the working column goes on the diagonal of R, and the column divided by that length ` +
         `becomes q<sub>${c + 1}</sub>, a unit vector` +
         (c === 0 ? '.' : ` perpendicular to ${c === 1 ? 'q<sub>1</sub>' : `q<sub>1</sub>…q<sub>${c}</sub>`}.`) +
@@ -351,7 +354,7 @@ export function buildScenes(k = 3, n = 3) {
           const terms = [];
           for (let j = 0; j <= c; j++) terms.push(`r<sub>${j + 1},${c + 1}</sub>q<sub>${j + 1}</sub>`);
           return terms.join(' + ');
-        })() + '.',
+        })() + '.'),
       matrices: snap(),
       layout,
       highlights: {
@@ -560,6 +563,7 @@ export default function QRWrapper({
         <ScenePlayer
           scenes={scenes}
           defaultSpeed={defaultSpeed}
+          speedOptions={[{ value: defaultSpeed + 800, label: 'Slow' }, { value: defaultSpeed, label: 'Normal' }, { value: 700, label: 'Fast' }, { value: 400, label: 'Very Fast' }]}
           showSpeedSelector={true}
           showStepIndicator={true}
           showStepLog={true}

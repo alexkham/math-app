@@ -1567,6 +1567,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 
 
@@ -3242,6 +3243,18 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const mdStep = (v, a, b, c, e) => ({ fn: () => v, from: a, to: b, ends: e || ['closed', 'open'], color: c || 'f' });
+  const fpMedianFlat = { kind: 'pieces', svgTitle: 'CDF of the discrete uniform on 1, 2, 3, 4: it equals exactly 0.5 from 2 up to 3, so every value in [2, 3] is a median', xRange: [-0.5, 5], yRange: [0, 1.1], yStep: 0.25, xLetter: 'x', yLetter: 'F(x)',
+    pieces: [mdStep(0, -0.5, 1, 'f', [null, 'open']), mdStep(0.25, 1, 2), mdStep(0.5, 2, 3, 'r'), mdStep(0.75, 3, 4), mdStep(1, 4, 5, 'f', ['closed', null]),
+      { fn: () => 0.5, from: -0.5, to: -0.5, ends: [null, null], color: 'g', ghost: [[-0.5, 5]] }],
+    vlines: [{ x: 2, label: '' }, { x: 3, label: '' }],
+    notes: [{ x: 2.5, y: 0.5, text: 'F = 0.5 on [2, 3)', pos: 's', color: 'r' }, { x: 3.1, y: 0.33, text: 'P(X = k) = 1/4, k = 1..4', pos: 'e' }, { x: 3.1, y: 0.23, text: 'medians: all of [2, 3]', pos: 'e', color: 'r' }],
+    caption: 'A flat stretch at 0.5: the median is not unique' };
+  const fpMedianSkew = { kind: 'pieces', svgTitle: 'Exponential density with rate 1: mode 0, median ln 2 = 0.69, mean 1', xRange: [-0.2, 4], yRange: [0, 1.15], xStep: 1, yStep: 0.5, xLetter: 'x', yLetter: 'f(x)',
+    pieces: [{ fn: (x) => Math.exp(-x), from: 0, to: 4, ends: ['closed', null], color: 'f', label: { text: 'f(x) = e^(−x)', x: 2.2, y: Math.exp(-2.2), pos: 'ne' } }],
+    vlines: [{ x: Math.LN2, label: '' }, { x: 1, label: '' }],
+    notes: [{ x: 0.05, y: 1.0, text: 'mode 0', pos: 'e', color: 'f' }, { x: Math.LN2, y: 1.1, text: 'median 0.69', pos: 'w', color: 'r' }, { x: 1, y: 1.1, text: 'mean 1', pos: 'e', color: 'g' }, { x: 1.6, y: 0.75, text: 'half the area left of 0.69', pos: 'e' }, { x: 1.6, y: 0.65, text: 'the long right tail pulls the mean', pos: 'e' }],
+    caption: 'Right skew: mode < median < mean' };
   const demoUnits = {
     u_3_0: demoUnitFrame({
       svg: continuousCdfDiagrams.exponential,
@@ -3256,6 +3269,16 @@ const schemas = {
       text: 'Finding a continuous median means solving F(m) equal to one half; for a symmetric density such as the normal the solution is the centre of symmetry, here 0, where the S-curve passes through one half. Skewed families put the median away from the mean. Read the crossing point on the',
       href: '/probability/visual-tools/cdf/continuous',
       linkText: 'continuous CDF visualizer',
+    }),
+    medianFlat: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpMedianFlat),
+      caption: 'A median interval',
+      text: 'The CDF of the discrete uniform on {1, 2, 3, 4} climbs in steps of 1/4. At x = 2 it reaches exactly 0.5 and stays there until the jump at 3. Any m from 2 to 3 has P(X &#8804; m) &#8805; 0.5 and P(X &#8805; m) &#8805; 0.5, so both conditions hold along the whole flat stretch: 2, 3 and every value between them are medians.',
+    }),
+    medianSkew: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpMedianSkew),
+      caption: 'Mode, median and mean of a skewed density',
+      text: 'The exponential density with rate 1 is highest at 0, so the mode is 0. Half of the area lies left of ln 2 &#8776; 0.69, which is the median. The mean is 1: the long right tail carries values far from 0, and the mean weighs their size while the median only counts how many lie on each side.',
     }),
   };
 
@@ -3326,6 +3349,8 @@ export default function MedianPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-medianFlat'} dangerouslySetInnerHTML={{ __html: demoUnits.medianFlat }} />,
+          `A CDF that jumps past 0.5 instead, as for {1, 2, 3}, gives a single median.`,
         ]
     },
     {
@@ -3360,6 +3385,8 @@ export default function MedianPage({
           headerFontSize={'18px'}/>,
           </div>,
           sectionsContent.obj5.after,
+                  <div key={'unit-medianSkew'} dangerouslySetInnerHTML={{ __html: demoUnits.medianSkew }} />,
+            `Mirror the density and the order reverses: mean < median < mode for left skew.`,
         ]
     },
     {

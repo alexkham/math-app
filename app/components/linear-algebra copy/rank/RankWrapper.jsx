@@ -324,6 +324,7 @@ export default function RankWrapper({
           playerProps={{
             showStepLog: true,
             defaultSpeed: defaultSpeed,
+            speedOptions: [{ value: defaultSpeed + 800, label: 'Slow' }, { value: defaultSpeed, label: 'Normal' }, { value: 700, label: 'Fast' }, { value: 400, label: 'Very Fast' }],
             stepLogTitle: 'Step explanations'
           }}
         />

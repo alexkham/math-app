@@ -674,6 +674,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
 
 
@@ -1119,6 +1121,16 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const eqTrack = (n, y, c) => [{ fn: () => y, from: 0, to: 1, ends: [null, null], color: 'g' }].concat(Array.from({ length: n + 1 }, (_, k) => ({ fn: () => y, from: k / n, to: k / n, ends: [k / n === 0.5 ? 'closed' : 'open', k / n === 0.5 ? 'closed' : 'open'], color: k / n === 0.5 ? c : 'g' })));
+  const fbEquivBars = { kind: 'bars', svgTitle: '2/3, 4/6 and 8/12 shade the same length of equal wholes', rows: [{ n: 3, k: 2, label: '2/3', partLabels: true }, { n: 6, k: 4, label: '4/6', color: 'r', partLabels: true }, { n: 12, k: 8, label: '8/12', color: 'g' }],
+    notes: [{ text: 'each row cuts the parts of the row above in half' }, { text: 'the shaded length never changes: 2/3 = 4/6 = 8/12' }], caption: 'Finer cuts, the same amount' };
+  const fpEquivLine = { kind: 'pieces', svgTitle: 'Three number lines from 0 to 1 cut into halves, quarters and sixths: 1/2, 2/4 and 3/6 sit at the same point', xRange: [-0.08, 1.1], yRange: [0.3, 3.8], xStep: 0.5, yStep: 10, xLetter: ' ', yLetter: ' ',
+    pieces: [].concat(eqTrack(2, 3, 'f'), eqTrack(4, 2, 'r'), eqTrack(6, 1, 'f')),
+    vlines: [{ x: 0.5, label: '' }],
+    notes: [{ x: 0.5, y: 3, text: '1/2', pos: 'ne', color: 'f' }, { x: 0.5, y: 2, text: '2/4', pos: 'ne', color: 'r' }, { x: 0.5, y: 1, text: '3/6', pos: 'ne', color: 'f' }, { x: 1.02, y: 3, text: 'halves', pos: 'e' }, { x: 1.02, y: 2, text: 'quarters', pos: 'e' }, { x: 1.02, y: 1, text: 'sixths', pos: 'e' }],
+    caption: 'Different labels, one point' };
+  const fbCommonDen = { kind: 'bars', svgTitle: '1/3 = 4/12 and 1/4 = 3/12: both rewritten in twelfths', labelWidth: 78, rows: [{ n: 3, k: 1, label: '1/3', partLabels: true }, { n: 12, k: 4, label: '= 4/12' }, { n: 4, k: 1, label: '1/4', color: 'r', partLabels: true }, { n: 12, k: 3, label: '= 3/12', color: 'r' }],
+    notes: [{ text: '12 is a multiple of both 3 and 4, so both fit into twelfths' }, { text: 'now the parts have the same size and can be compared or added' }], caption: 'A common denominator: one part size for both' };
   const demoUnits = {
     simplify: demoUnitFrame({
       svg: euclideanVisualizerDiagrams.classic,
@@ -1126,6 +1138,21 @@ const schemas = {
       text: 'Simplifying a fraction means dividing numerator and denominator by their greatest common divisor, and the algorithm finds it without factoring: 252 = 105 &#183; 2 + 42, 105 = 42 &#183; 2 + 21, 42 = 21 &#183; 2, so the gcd is 21 and 105/252 = 5/12 in one step. Find the reducing factor for any fraction on the',
       href: '/arithmetic/visual-tools/euclidean-algorithm',
       linkText: 'Euclidean algorithm visualizer',
+    }),
+    equivBars: demoUnitFrame({
+      svg: renderFractionBar(fbEquivBars),
+      caption: 'Same amount, finer cuts',
+      text: 'Three bars of the same length. The first is cut into thirds with 2 shaded. Cutting every third in half gives sixths, and the same shaded length is now 4 sixths; cutting again gives 8 twelfths. The shading never moves, so 2/3 = 4/6 = 8/12: multiplying numerator and denominator by the same number only cuts the same amount more finely.',
+    }),
+    equivLine: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpEquivLine),
+      caption: 'Equivalent fractions share one point',
+      text: 'The interval from 0 to 1 is marked in halves, quarters and sixths. On each line the filled point is half-way: 1/2, 2/4 and 3/6. The dashed line shows that all three are the same point; only the spacing of the marks around it differs.',
+    }),
+    commonDen: demoUnitFrame({
+      svg: renderFractionBar(fbCommonDen),
+      caption: 'Rewriting 1/3 and 1/4 in twelfths',
+      text: '1/3 and 1/4 use parts of different sizes, so they cannot be compared or added part by part. Twelve is a multiple of both 3 and 4: one third is exactly 4 twelfths and one quarter is exactly 3 twelfths. Rewritten as 4/12 and 3/12, both fractions count parts of the same size.',
     }),
   };
 
@@ -1168,6 +1195,8 @@ export default function EquivalentFractionsPage({seoData, sectionsContent, intro
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-equivBars'} dangerouslySetInnerHTML={{ __html: demoUnits.equivBars }} />,
+          `Every fraction has infinitely many such rows: 16/24, 32/48, and so on.`,
         ]
     },
     {
@@ -1212,6 +1241,8 @@ export default function EquivalentFractionsPage({seoData, sectionsContent, intro
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-equivLine'} dangerouslySetInnerHTML={{ __html: demoUnits.equivLine }} />,
+          `Simplifying a fraction never moves its point; it only relabels it.`,
         ]
     },
     {
@@ -1220,6 +1251,8 @@ export default function EquivalentFractionsPage({seoData, sectionsContent, intro
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-commonDen'} dangerouslySetInnerHTML={{ __html: demoUnits.commonDen }} />,
+          `In twelfths, 4/12 > 3/12 shows at once that 1/3 > 1/4.`,
         ]
     },
     {

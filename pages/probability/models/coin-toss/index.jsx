@@ -717,6 +717,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 
@@ -1274,6 +1275,17 @@ From this basic source of randomness, more complex experiments can be constructe
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const mdPx = (k, w) => k / w * 388;
+  const mdSumMax = [].concat(
+    [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((s) => ({ from: 0, to: (6 - Math.abs(s - 7)) / 36, color: 'f', dx: mdPx(s, 13) - 4 })),
+    [1, 2, 3, 4, 5, 6].map((k) => ({ from: 0, to: (2 * k - 1) / 36, color: 'r', dx: mdPx(k, 13) + 4 })));
+  const mdBin = (n, k) => { let c = 1; for (let i = 1; i <= k; i++) c = c * (n - k + i) / i; return c / 2 ** n; };
+  const mdCoinBars = Array.from({ length: 41 }, (_, k) => ({ from: 0, to: mdBin(40, k), color: 'f', dx: mdPx(k, 40) })).filter((b) => b.to > 0.001);
+  const fpCoinNormal = { kind: 'pieces', svgTitle: 'Number of heads in 40 fair tosses, bars, with the normal density of mean 20 and standard deviation 3.16 drawn over them', xRange: [0, 40], yRange: [0, 0.15], xStep: 5, yStep: 1, xLetter: 'heads',
+    pieces: [{ fn: (x) => Math.exp(-((x - 20) ** 2) / 20) / Math.sqrt(20 * Math.PI), from: 5, to: 35, ends: [null, null], color: 'r', label: { text: 'normal, mean 20, sd √10', x: 25, y: 0.09, pos: 'e' } }],
+    yBars: mdCoinBars,
+    notes: [{ x: 1, y: 0.14, text: '40 tosses: 2⁴⁰ sequences', pos: 'e' }, { x: 1, y: 0.127, text: 'bars: P(k heads)', pos: 'e', color: 'f' }, { x: 1, y: 0.114, text: 'P(20 heads) ≈ 0.125', pos: 'e', color: 'f' }],
+    caption: 'Counting heads in many tosses: a smooth bell appears' };
   const demoUnits = {
     u_2_0: demoUnitFrame({
       svg: coinSampleSpaceDiagrams.none,
@@ -1295,6 +1307,11 @@ From this basic source of randomness, more complex experiments can be constructe
       text: 'Repeating the toss and counting heads produces the binomial distribution: ten tosses give eleven possible counts with the bars peaking at 5. Each bar collects all the sequences with the same number of heads. Change n and p and watch the pattern of bars respond on the',
       href: '/probability/visual-tools/probability-function/discrete',
       linkText: 'PMF visualizer',
+    }),
+    coinNormal: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpCoinNormal),
+      caption: 'A bell curve from coin tosses',
+      text: 'Toss a fair coin 40 times and count the heads. The count is discrete, a whole number from 0 to 40, and its probabilities are the blue bars. Their outline already follows the smooth amber curve: the normal density with mean 20 and standard deviation &#8730;10 &#8776; 3.16. P(20 heads) &#8776; 0.125, almost exactly the curve\'s peak height 0.126.',
     }),
   };
 
@@ -1422,6 +1439,8 @@ export default function CoinTossPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+                  <div key={'unit-coinNormal'} dangerouslySetInnerHTML={{ __html: demoUnits.coinNormal }} />,
+          `With more tosses, rescaled to the standardized count, the bars match the curve ever more closely.`,
         ]
     },
     {

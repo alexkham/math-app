@@ -681,6 +681,8 @@ import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1097,6 +1099,23 @@ const schemas = {
 
 
 
+  const fbAreaProduct = { kind: 'area', svgTitle: '2/3 of 4/5: the unit square in 3 columns and 5 rows, the overlap is 8 of 15 cells', cols: [2, 3], rows: [4, 5],
+    notes: [{ text: 'blue columns: 2/3', color: 'f' }, { text: 'navy rows: 4/5', color: 'g' }, { text: '' }, { text: 'overlap: 2 · 4 = 8 cells', color: 'r' }, { text: 'of 3 · 5 = 15 cells', color: 'r' }, { text: '2/3 · 4/5 = 8/15', color: 'r' }], caption: 'Numerators count the overlap, denominators the grid' };
+  const fbRepeatedAdd = { kind: 'bars', svgTitle: '4 times 2/3 as four copies of 2/3, together 8 thirds = 2 2/3', rows: [{ n: 3, k: 2, label: '2/3', partLabels: true }, { n: 3, k: 2, label: '+ 2/3', partLabels: true }, { n: 3, k: 2, label: '+ 2/3', partLabels: true }, { n: 3, k: 2, label: '+ 2/3', partLabels: true }, { n: 3, k: 8, label: '= 8/3', color: 'r' }],
+    notes: [{ text: '4 copies of 2 thirds = 8 thirds = 2 2/3', color: 'r' }], caption: 'A whole number times a fraction: repeated addition' };
+  const demoUnits = {
+    areaProduct: demoUnitFrame({
+      svg: renderFractionBar(fbAreaProduct),
+      caption: 'Two thirds of four fifths',
+      text: 'The unit square is cut into 3 columns and 5 rows, 15 equal cells. Two of the three columns are 2/3 of the square; four of the five rows are 4/5 of it. The cells in both, amber, are 2/3 of 4/5: 2 &#183; 4 = 8 of the 3 &#183; 5 = 15 cells. That is why the numerators multiply and the denominators multiply: 2/3 &#215; 4/5 = 8/15.',
+    }),
+    repeatedAdd: demoUnitFrame({
+      svg: renderFractionBar(fbRepeatedAdd),
+      caption: 'Four times two thirds',
+      text: '4 &#215; 2/3 is four copies of 2/3. Each copy shades 2 thirds, so together they shade 8 thirds. Eight thirds fill two whole bars and two thirds of a third bar: 4 &#215; 2/3 = 8/3 = 2 2/3. The whole number multiplies the numerator; the size of the parts, the denominator, stays the same.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -1104,6 +1123,7 @@ return {
     capstoneTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Multiplying Fractions: Rules, Examples & Cross-Canceling | Learn Math Class",
       description: "Learn how to multiply fractions step by step: basic rule, whole numbers, cross-canceling, mixed numbers, and multiple fractions. Examples and simplification tips.",
@@ -1115,7 +1135,7 @@ return {
 }
    }
 
-export default function MultiplyingPage({seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas}) {
+export default function MultiplyingPage({seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1134,6 +1154,8 @@ export default function MultiplyingPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-areaProduct'} dangerouslySetInnerHTML={{ __html: demoUnits.areaProduct }} />,
+          `The product 8/15 is smaller than both factors, as it must be when both are less than 1.`,
         ]
     },
     {
@@ -1142,6 +1164,8 @@ export default function MultiplyingPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-repeatedAdd'} dangerouslySetInnerHTML={{ __html: demoUnits.repeatedAdd }} />,
+          `The same answer comes from the rule: 4/1 × 2/3 = 8/3.`,
         ]
     },
     {

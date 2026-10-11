@@ -1437,7 +1437,7 @@ Symmetry appears as visual balance. A graph symmetric about the $y$-axis represe
 
 Comparing graphs reveals relationships between functions. Two functions with the same shape but different positions differ by a [transformation](!/functions/transformations). Two functions that intersect share common solutions.
 
-Graphs translate between the algebraic and the visual. The equation $f(x) = x^2 - 4$ states a rule; its graph shows a parabola crossing the $x$-axis at $\\pm 2$ and reaching a minimum at the origin. Both descriptions capture the same function, and fluency in reading both strengthens understanding of each.`,
+Graphs translate between the algebraic and the visual. The equation $f(x) = x^2 - 4$ states a rule; its graph shows a parabola crossing the $x$-axis at $\\pm 2$ and reaching its minimum at $(0, -4)$. Both descriptions capture the same function, and fluency in reading both strengthens understanding of each.`,
     before: ``,
     after: ``,
     link: '',

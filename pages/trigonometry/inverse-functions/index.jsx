@@ -1725,7 +1725,7 @@ The resulting functions — $\\arcsin$, $\\arccos$, $\\arctan$, and their recipr
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
   // Authored figures. curveFeature.v2 draws them; these are data only.
   // Package doc: app/utils/illustrations/trigonometry/curves/curveFeature.v2.md
-  const cfWhyRestrict = {
+  const cfWhyRestrict = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'lineTest', fn: 'sin',
     svgTitle: 'Sine fails the horizontal line test until its domain is cut',
     xRange: [-2 * Math.PI, 2 * Math.PI], yRange: [-1.7, 1.7], cut: 0.5, cutLabel: 'y = \u00bd',
@@ -1735,28 +1735,28 @@ The resulting functions — $\\arcsin$, $\\arccos$, $\\arctan$, and their recipr
     ghostNote: 'four crossings here', ghostNoteAt: -3 * Math.PI / 2,
     keptNote: 'restricted to [\u2212\u03c0/2, \u03c0/2] \u00b7 one crossing',
   };
-  const cfArcsine = {
+  const cfArcsine = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'reflect', fn: 'sin', size: 300, limit: 2.0,
     svgTitle: 'Arcsine is the restricted sine reflected across y = x',
     fnLabel: 'sin', fnLabelAt: 1.2, fnLabelDir: 'se',
     invLabel: 'arcsin', invLabelAt: 0.95, invLabelDir: 'nw',
     note: 'the same curve with x and y exchanged',
   };
-  const cfArccosine = {
+  const cfArccosine = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'reflect', fn: 'cos', size: 310, limit: 3.45,
     svgTitle: 'Arccosine is the restricted cosine reflected across y = x',
     fnLabel: 'cos', fnLabelAt: 2.75, fnLabelDir: 'se',
     invLabel: 'arccos', invLabelAt: 2.6, invLabelDir: 'ne',
     note: 'restricted to [0, \u03c0], then exchanged',
   };
-  const cfArctangent = {
+  const cfArctangent = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'reflect', fn: 'tan', size: 300, limit: 2.45,
     svgTitle: 'Arctangent is the restricted tangent reflected across y = x',
     fnLabel: 'tan', fnLabelAt: 1.05, fnLabelDir: 'w',
     invLabel: 'arctan', invLabelAt: 1.35, invLabelDir: 'se',
     note: 'vertical asymptotes become horizontal ones',
   };
-  const cfCompositionFold = {
+  const cfCompositionFold = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'fold', fn: 'sin',
     svgTitle: 'arcsin(sin x) folds an out-of-range input back into the restricted range',
     xRange: [-0.35, Math.PI + 0.35], yRange: [-1.25, 1.25],
@@ -1766,7 +1766,7 @@ The resulting functions — $\\arcsin$, $\\arccos$, $\\arctan$, and their recipr
     inLabel: '5\u03c0/6  in', outLabel: '\u03c0/6  out', wrongLabel: 'not 5\u03c0/6',
     title: 'arcsin(sin x) folds the input back',
   };
-  const cfInverseRanges = {
+  const cfInverseRanges = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'ranges', panelWidth: 190, panelHeight: 232, gap: 14, limit: 3.4,
     svgTitle: 'Each inverse takes its parent range and returns its parent domain',
     panels: [

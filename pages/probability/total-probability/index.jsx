@@ -943,6 +943,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
 import partitionVennDiagrams from '@/app/components/probability/conditional-probability-demo/partitionVennDiagrams'
 
@@ -1852,6 +1853,21 @@ This structure also sets the stage for Bayes' theorem. Bayes reverses conditiona
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const lsPx = (x, w) => x / w * 388;
+  const lsTp = [[1, 0.8, 0.6], [2, 0.5, 0.3], [3, 0.1, 0.1]];
+  const lsTpBars = [].concat(
+    lsTp.map(([x, c]) => ({ from: 0, to: c, color: 'g', dx: lsPx(x, 6.5) - 5 })),
+    lsTp.map(([x, c, w]) => ({ from: 0, to: c * w, color: 'r', dx: lsPx(x, 6.5) + 5 })),
+    [{ from: 0, to: 0.48, color: 'r', dx: lsPx(5, 6.5) }, { from: 0.48, to: 0.63, color: 'f', dx: lsPx(5, 6.5) }, { from: 0.63, to: 0.64, color: 'g', dx: lsPx(5, 6.5) }]);
+  const lsVarBars = [].concat(
+    [1, 2, 3, 4].map((x) => ({ from: 0, to: (x - 3) * x / 10, color: 'f', dx: lsPx(x, 5.5) - 5 })),
+    [1, 2, 3, 4].map((x) => ({ from: 0, to: (x - 3) ** 2 * x / 10, color: 'r', dx: lsPx(x, 5.5) + 5 })));
+  const fpTotalRun = { kind: 'pieces', svgTitle: 'Running example: P(run | case) and the weighted contributions 0.48, 0.15 and 0.01 for sunny, cloudy and rainy, stacked into the total 0.64', xRange: [-0.5, 6], yRange: [0, 1], xStep: 10, yStep: 0.25, xLetter: ' ', yLetter: 'probability',
+    pieces: [{ fn: () => 0, from: -0.5, to: -0.5, ends: [null, null], color: 'g' }],
+    yBars: lsTpBars,
+    notes: [{ x: 1, y: 0, text: 'sunny', pos: 's' }, { x: 2, y: 0, text: 'cloudy', pos: 's' }, { x: 3, y: 0, text: 'rainy', pos: 's' }, { x: 5, y: 0, text: 'P(run)', pos: 's', color: 'r' },
+      { x: 2.4, y: 0.95, text: 'navy: P(run | case)', pos: 'e', color: 'g' }, { x: 2.4, y: 0.87, text: 'amber: × P(case) = share', pos: 'e', color: 'r' }, { x: 5.15, y: 0.66, text: 'total 0.64', pos: 'e', color: 'r' }, { x: 5.15, y: 0.555, text: '+ 0.15 cloudy', pos: 'e', color: 'f' }, { x: 5.15, y: 0.24, text: '0.48 sunny', pos: 'e', color: 'r' }],
+    caption: 'Weight each case, then stack the contributions' };
   const demoUnits = {
     u_cases_0: demoUnitFrame({
       svg: totalProbabilityDiagrams.overview,
@@ -1873,6 +1889,11 @@ This structure also sets the stage for Bayes' theorem. Bayes reverses conditiona
       text: 'The highlighted branch contributes P(A<sub>1</sub>) times P(B given A<sub>1</sub>), the probability of B occurring by way of the first case. Exactly one case occurs, the cases do not overlap and each piece is a product, which is why the pieces simply add. Highlight each case in turn and add the contributions on the',
       href: '/probability/visual-tools/total-probability',
       linkText: 'law of total probability visualizer',
+    }),
+    totalRun: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpTotalRun),
+      caption: 'Example 3: weighting the cases',
+      text: 'The running example. Navy bars: the chance of running in each case, 0.8, 0.5 and 0.1. Amber bars: each one multiplied by the probability of its case, 0.8 &#215; 0.6 = 0.48, 0.5 &#215; 0.3 = 0.15 and 0.1 &#215; 0.1 = 0.01. Stacked, the three contributions give P(run) = 0.64. The rainy case barely counts: a low chance of running in a rare case adds almost nothing.',
     }),
   };
 
@@ -1989,6 +2010,8 @@ export default function TotalProbabilityPage({
           sectionsContent.examples.content,
           <div key={'examples-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: examplesTable }} />,
+                  <div key={'unit-totalRun'} dangerouslySetInnerHTML={{ __html: demoUnits.totalRun }} />,
+            `Averaging the three navy bars without weights, (0.8 + 0.5 + 0.1)/3 ≈ 0.47, gives the wrong answer.`,
         ]
     },
     {

@@ -721,6 +721,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 
 
@@ -1431,6 +1432,19 @@ This page presents the formal statement of the theorem, clarifies what kind of c
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const llRng = (seed) => () => { seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const llRun = (seed) => { const r = llRng(seed); let h = 0; return Array.from({ length: 300 }, (_, i) => { h += r() < 0.5 ? 1 : 0; return h / (i + 1); }); };
+  const llA = llRun(14), llB = llRun(1);
+  const llAt = (run) => (x) => { const i = Math.min(299, Math.max(0, Math.round(x) - 1)); return run[i]; };
+  const llPieces = (run, c) => [[1, 20], [20, 80], [80, 300]].map(([a, b]) => ({ fn: llAt(run), from: a, to: b, ends: [null, null], color: c }));
+  const fpLlnRuns = { kind: 'pieces', svgTitle: 'Running proportion of heads in two simulated sequences of 300 fair coin flips: wide swings early, both settle near 0.5', xRange: [0, 300], yRange: [0, 1.1], xStep: 50, yStep: 0.25, xLetter: 'n', yLetter: 'share of heads',
+    pieces: [].concat(llPieces(llA, 'f'), llPieces(llB, 'r'), [{ fn: () => 0.5, from: 0, to: 300, ends: [null, null], color: 'g', ghost: [] }]),
+    notes: [{ x: 120, y: 1.02, text: 'two runs of 300 fair coin flips', pos: 'e' }, { x: 120, y: 0.94, text: 'navy line: the true mean 0.5', pos: 'e', color: 'g' }, { x: 120, y: 0.86, text: 'early: large swings', pos: 'e' }, { x: 120, y: 0.78, text: 'later: both hug 0.5', pos: 'e' }],
+    caption: 'The running average settles; single flips stay random' };
+  const fpLlnDilution = { kind: 'pieces', svgTitle: 'Expected share of heads after ten heads in a row: 0.5 + 5/n, falling toward 0.5 without any compensating tails', xRange: [0, 300], yRange: [0, 1.1], xStep: 50, yStep: 0.25, xLetter: 'n', yLetter: 'expected share',
+    pieces: [{ fn: (n) => 0.5 + 5 / n, from: 10, to: 300, ends: ['closed', null], color: 'r', label: { text: '0.5 + 5/n', x: 40, y: 0.625, pos: 'ne' } }, { fn: () => 0.5, from: 0, to: 300, ends: [null, null], color: 'g', ghost: [] }],
+    notes: [{ x: 120, y: 1.02, text: 'start: 10 heads in a row', pos: 'e' }, { x: 120, y: 0.94, text: 'every later flip still 50-50', pos: 'e' }, { x: 120, y: 0.86, text: 'expected heads: 10 + (n − 10)/2', pos: 'e', color: 'r' }, { x: 120, y: 0.78, text: 'n = 200: 0.525', pos: 'e', color: 'r' }],
+    caption: 'The streak is diluted, not cancelled' };
   const demoUnits = {
     u_8_0: demoUnitFrame({
       svg: distributionExplorerDiagrams['normal-pdf'],
@@ -1438,6 +1452,16 @@ This page presents the formal statement of the theorem, clarifies what kind of c
       text: 'The law of large numbers says the sample mean settles at a single value; the central limit theorem adds the shape of the remaining fluctuation around that value, this bell curve, once the deviations are scaled up by the square root of n. Without the scaling the bell would shrink to a spike, which is the law itself. Compare the bell with other density shapes on the',
       href: '/probability/visual-tools/distributions/normal',
       linkText: 'distribution explorer',
+    }),
+    llnRuns: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLlnRuns),
+      caption: 'Two running averages of coin flips',
+      text: 'Two simulated sequences of 300 fair coin flips (fixed for this figure). Each curve is the share of heads after n flips. In the first few dozen flips both swing widely, one starting at 1 and the other dropping toward 0.2. As n grows, each new flip moves the average less, and by n = 300 both sit at 0.5, the true mean. The individual flips never became less random; only their average settled.',
+    }),
+    llnDilution: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpLlnDilution),
+      caption: 'Why tails are never due',
+      text: 'Suppose the first 10 flips of a fair coin are all heads. Every later flip is still heads with probability 1/2, so after n flips the expected number of heads is 10 + (n &#8722; 10)/2 and the expected share is 0.5 + 5/n. The share falls toward 0.5 only because the streak becomes a smaller part of a growing total: no extra tails are needed or expected.',
     }),
   };
 
@@ -1519,6 +1543,8 @@ export default function LargeNumbersLawPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-llnRuns'} dangerouslySetInnerHTML={{ __html: demoUnits.llnRuns }} />,
+          `Run it again and the early paths change completely; the place they settle does not.`,
         ]
     },
     {
@@ -1568,6 +1594,8 @@ export default function LargeNumbersLawPage({
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+                  <div key={'unit-llnDilution'} dangerouslySetInnerHTML={{ __html: demoUnits.llnDilution }} />,
+            `The surplus of 5 heads is still expected at n = 1000; it is just 0.5% of the flips.`,
         ]
     },
     {

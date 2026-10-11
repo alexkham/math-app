@@ -1789,6 +1789,7 @@ export default function LinearCombinationWrapper({
   // the prop changes from outside.
   const [scenarioState, setScenarioState] = useState(defaultScenario);
   const scenario = locked ? mode : scenarioState;
+  const shownSubtitle = scenario === 'vectors' && subtitle === 'Symbolic visualization of \u03B1\u00B7A + \u03B2\u00B7B = C, in three phases: scale, scale, add.' ? 'Symbolic visualization of \u03B1\u00B7u + \u03B2\u00B7v = w, in three phases: scale, scale, add.' : subtitle;
 
   const [vecN, setVecN] = useState(defaultVecN);
   const [rows, setRows] = useState(defaultRows);
@@ -1845,7 +1846,7 @@ export default function LinearCombinationWrapper({
           )} */}
           {subtitle && (
             <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
-              {subtitle}
+              {shownSubtitle}
             </p>
           )}
         </div>

@@ -673,6 +673,7 @@ export default function RankWrapper({
         <ScenePlayer
           scenes={scenes}
           defaultSpeed={defaultSpeed}
+          speedOptions={[{ value: defaultSpeed + 800, label: 'Slow' }, { value: defaultSpeed, label: 'Normal' }, { value: 700, label: 'Fast' }, { value: 400, label: 'Very Fast' }]}
           showSpeedSelector={true}
           showStepIndicator={true}
           showStepLog={true}

@@ -442,6 +442,8 @@ import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton';
 import ExpandableTable from '@/app/components/generic-table/ExpandableTable';
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 
 
 
@@ -687,12 +689,25 @@ export async function getStaticProps(){
 `
       }
   
+  const ogAddRule = { kind: 'dice', svgTitle: 'Two dice: first die 6 has 6 outcomes, doubles has 6, they share only (6,6), so P(A or B) = 6/36 + 6/36 - 1/36 = 11/36',
+    events: [{ label: 'A: first die 6', test: (a) => a === 6, color: 'f' }, { label: 'B: doubles', test: (a, b) => a === b, color: 'r' }],
+    notes: [{ text: 'shared cell: (6,6)', color: 'g' }, { text: 'P(A ∪ B) = 6/36 + 6/36' }, { text: '− 1/36 = 11/36', color: 'r' }, { text: '(6,6) counted once' }],
+    caption: 'The addition rule: subtract the overlap counted twice' };
+  const demoUnits = {
+    addRule: demoUnitFrame({
+      svg: renderOutcomeGrid(ogAddRule),
+      caption: 'The addition rule on two dice',
+      text: 'A, first die 6, is the blue bottom row: 6 outcomes. B, doubles, is the amber diagonal: 6 outcomes. Adding 6/36 + 6/36 counts the corner (6,6) twice, because it is in both. Subtracting P(A &#8745; B) = 1/36 once leaves the 11 distinct outcomes of A &#8746; B: P(A &#8746; B) = 11/36.',
+    }),
+  };
+
       return {
         props:{
           sectionsContent,
           introContent,
           probabilityRulesData,
           summaryTable,
+          demoUnits,
         }
       }
     }
@@ -701,7 +716,7 @@ export async function getStaticProps(){
 export default function ProbabilityRulesPage({ sectionsContent,
     introContent,
     probabilityRulesData,
-    summaryTable }) {
+    summaryTable, demoUnits }) {
 
   
     const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -852,6 +867,8 @@ export default function ProbabilityRulesPage({ sectionsContent,
                  copyableFields={["formula"]}
                  includedFields={ ["rule", "formula", "explanation"]} />
                  </div> ,
+                  <div key={'unit-addRule'} dangerouslySetInnerHTML={{ __html: demoUnits.addRule }} />,
+            `For disjoint events the overlap is empty and the rule reduces to P(A) + P(B).`,
             ]
         },
         {

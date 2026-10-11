@@ -963,6 +963,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import varianceDiagrams from '@/app/components/probability/variance/varianceDiagrams'
 
 
@@ -1820,6 +1821,20 @@ const continuousVarianceFormulasData = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const lsPx = (x, w) => x / w * 388;
+  const lsTp = [[1, 0.8, 0.6], [2, 0.5, 0.3], [3, 0.1, 0.1]];
+  const lsTpBars = [].concat(
+    lsTp.map(([x, c]) => ({ from: 0, to: c, color: 'g', dx: lsPx(x, 6.5) - 5 })),
+    lsTp.map(([x, c, w]) => ({ from: 0, to: c * w, color: 'r', dx: lsPx(x, 6.5) + 5 })),
+    [{ from: 0, to: 0.48, color: 'r', dx: lsPx(5, 6.5) }, { from: 0.48, to: 0.63, color: 'f', dx: lsPx(5, 6.5) }, { from: 0.63, to: 0.64, color: 'g', dx: lsPx(5, 6.5) }]);
+  const lsVarBars = [].concat(
+    [1, 2, 3, 4].map((x) => ({ from: 0, to: (x - 3) * x / 10, color: 'f', dx: lsPx(x, 5.5) - 5 })),
+    [1, 2, 3, 4].map((x) => ({ from: 0, to: (x - 3) ** 2 * x / 10, color: 'r', dx: lsPx(x, 5.5) + 5 })));
+  const fpVarSquare = { kind: 'pieces', svgTitle: 'For p(x) = x/10 on 1 to 4 with mean 3: the weighted deviations -0.2, -0.2, 0, 0.4 sum to 0; the weighted squared deviations 0.4, 0.2, 0, 0.4 sum to the variance 1', xRange: [-0.5, 5], yRange: [-0.3, 0.5], yStep: 0.25, xLetter: 'x', yLetter: ' ',
+    pieces: [{ fn: () => 0, from: -0.5, to: -0.5, ends: [null, null], color: 'g' }],
+    yBars: lsVarBars,
+    notes: [{ x: 2.3, y: -0.08, text: 'p(x) = x/10, mean 3', pos: 'e' }, { x: 2.3, y: -0.14, text: 'blue: (x − 3) · p(x), sum 0', pos: 'e', color: 'f' }, { x: 2.3, y: -0.2, text: 'amber: (x − 3)² · p(x), sum 1', pos: 'e', color: 'r' }],
+    caption: 'Raw deviations cancel; squared ones add up to the variance' };
   const demoUnits = {
     u_notation_0: demoUnitFrame({
       svg: varianceDiagrams.default,
@@ -1841,6 +1856,11 @@ const continuousVarianceFormulasData = {
       text: 'Variance is in squared units, so a wide scatter produces a number far larger than any deviation in the picture; the standard deviation is its square root and returns to the original units, matching the typical distance from the mean that the eye sees. Compare the two readings on the',
       href: '/probability/visual-tools/variance',
       linkText: 'variance visualizer',
+    }),
+    varSquare: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpVarSquare),
+      caption: 'Why the deviations are squared',
+      text: 'The page\'s example: p(x) = x/10 on 1, 2, 3, 4, with mean 3. Blue bars: each deviation times its probability, (x &#8722; 3)p(x) = &#8722;0.2, &#8722;0.2, 0, 0.4. They cancel exactly, as they must for any distribution, so their sum says nothing about spread. Amber bars: the squared deviations times their probabilities, 0.4, 0.2, 0, 0.4. None is negative, and they add up to the variance, 1.',
     }),
   };
 
@@ -2005,6 +2025,8 @@ export default function VariancePage({
         link:'',
         content:[
             sectionsContent.square.content,
+                  <div key={'unit-varSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.varSquare }} />,
+            `The farthest value, x = 1, has the smallest weight but still contributes as much as x = 4.`,
         ]
     },
     {

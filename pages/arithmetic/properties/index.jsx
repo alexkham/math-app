@@ -758,6 +758,8 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
 export async function getStaticProps(){
@@ -1389,6 +1391,21 @@ const schemas = {
 
 
 
+  const prDots = [];
+  for (let r = 1; r <= 3; r++) for (let c = 1; c <= 9; c++) prDots.push({ fn: () => r, from: c, to: c, ends: ['closed', 'closed'], color: c <= 4 ? 'f' : 'r' });
+  const fpDistribArray = { kind: 'pieces', svgTitle: 'A 3 by 9 array of dots split after the fourth column: 3 times 9 = 27 equals 3 times 4 = 12 plus 3 times 5 = 15', xRange: [0.3, 10], yRange: [0.3, 5], xStep: 20, yStep: 20, xLetter: ' ', yLetter: ' ',
+    pieces: prDots,
+    vlines: [{ x: 4.5, label: '' }],
+    notes: [{ x: 2.5, y: 3.6, text: '3 · 4 = 12', pos: 'n', color: 'f' }, { x: 7, y: 3.6, text: '3 · 5 = 15', pos: 'n', color: 'r' }, { x: 5, y: 4.5, text: 'together: 3 · (4 + 5) = 27', pos: 'e' }],
+    caption: 'Split the columns, count each part, add' };
+  const demoUnits = {
+    distribArray: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpDistribArray),
+      caption: 'The distributive property as an array',
+      text: 'Three rows of nine dots make 3 &#183; 9 = 3 &#183; (4 + 5) = 27. A line after the fourth column splits every row into 4 blue dots and 5 amber dots. Counting the parts separately gives 3 &#183; 4 = 12 blue and 3 &#183; 5 = 15 amber, and 12 + 15 = 27: the same dots counted two ways, which is exactly 3(4 + 5) = 3 &#183; 4 + 3 &#183; 5.',
+    }),
+  };
+
   return {
   props:{
      sectionsContent,
@@ -1399,6 +1416,7 @@ const schemas = {
      capstoneTable,
      faqQuestions,
      schemas,
+     demoUnits,
      seoData: {
        title: "Properties of Arithmetic Operations | Learn Math Class",
        description: "Learn the properties of arithmetic operations: commutative, associative, distributive, identity, inverse, sign rules, and zero property explained with examples.",
@@ -1410,7 +1428,7 @@ const schemas = {
 }
    }
 
-export default function ArithmeticProperties({seoData, sectionsContent, introContent, obj5Table, obj9Table, obj12Table, capstoneTable, faqQuestions, schemas}) {
+export default function ArithmeticProperties({seoData, sectionsContent, introContent, obj5Table, obj9Table, obj12Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1463,6 +1481,8 @@ export default function ArithmeticProperties({seoData, sectionsContent, introCon
           sectionsContent.obj5.content,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+                  <div key={'unit-distribArray'} dangerouslySetInnerHTML={{ __html: demoUnits.distribArray }} />,
+            `Read right to left, the same picture is factoring: 12 + 15 = 3 · (4 + 5).`,
         ]
     },
     {

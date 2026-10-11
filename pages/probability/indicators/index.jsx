@@ -674,6 +674,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 
 
@@ -1154,6 +1155,10 @@ This makes them a structural tool for counting and for applying linearity of exp
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const ogCountSixes = { kind: 'dice', svgTitle: 'Two dice: the number of sixes is the indicator of a six on the first die plus the indicator of a six on the second; (6,6) counts twice; expected count 12/36 = 1/3',
+    events: [{ label: 'first die 6: I = 1', test: (a) => a === 6, color: 'f' }, { label: 'second die 6: J = 1', test: (a, b) => b === 6, color: 'r' }],
+    notes: [{ text: 'sixes: X = I + J' }, { text: 'E[I] = E[J] = 6/36' }, { text: '(6,6): X = 2', color: 'g' }, { text: 'E[X] = 12/36 = 1/3', color: 'r' }],
+    caption: 'Count with indicators: add their expectations' };
   const demoUnits = {
     u_1_0: demoUnitFrame({
       svg: coinSampleSpaceDiagrams.majority,
@@ -1161,6 +1166,11 @@ This makes them a structural tool for counting and for applying linearity of exp
       text: 'The highlighted sequences are the event, and the indicator variable is the function that assigns 1 to each of them and 0 to the other four: it turns a set of outcomes into a number that can be added and averaged. Its expected value is the count of highlighted cells over 8. Select other events and read their indicators on the',
       href: '/probability/visual-tools/coin-toss',
       linkText: 'coin toss sample space explorer',
+    }),
+    countSixes: demoUnitFrame({
+      svg: renderOutcomeGrid(ogCountSixes),
+      caption: 'Counting sixes with two indicators',
+      text: 'Roll two dice and let X be the number of sixes. Write X = I + J, where I is 1 on the blue row (first die 6) and J is 1 on the amber column (second die 6). Each indicator is 1 on 6 of the 36 outcomes, so E[I] = E[J] = 6/36. The cell (6,6) lies in both and has X = 2, which the sum handles automatically: E[X] = 6/36 + 6/36 = 1/3, with no need to list the distribution of X.',
     }),
   };
 
@@ -1271,6 +1281,8 @@ export default function IndicatorsPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-countSixes'} dangerouslySetInnerHTML={{ __html: demoUnits.countSixes }} />,
+          `With n dice the same sum of n indicators gives n/6 expected sixes.`,
         ]
     },
     {

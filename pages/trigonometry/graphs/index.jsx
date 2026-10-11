@@ -1734,7 +1734,7 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
   // Authored figures for the four-parameter sections. curveFeature draws the
   // curve; the specs below are data only. Package doc:
   // app/utils/illustrations/trigonometry/curves/curveFeature.md
-  const cfGeneralForm = {
+  const cfGeneralForm = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'single', title: 'The four parameters of y = A sin(Bx - C) + D',
     xRange: [-0.5, 2 * Math.PI + 0.9], yRange: [-2.6, 5.2], panelHeight: 260, panelWidth: 500,
     yTicks: [{ at: 2, label: 'D' }],
@@ -1749,7 +1749,7 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
       ],
     }],
   };
-  const cfAmplitude = {
+  const cfAmplitude = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'pair', title: 'A = 1 against A = 3', xRange: [0, 2 * Math.PI], yRange: [-3.6, 3.6],
     yTicks: [{ at: 3, label: '3' }, { at: 1, label: '1' }, { at: -1, label: '−1' }, { at: -3, label: '−3' }],
     panels: [
@@ -1761,7 +1761,7 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
                 { type: 'bracket', orient: 'v', at: Math.PI / 2, from: 0, to: 3, label: '3', color: 'resultStroke' }] },
     ],
   };
-  const cfPeriod = {
+  const cfPeriod = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'pair', title: 'B = 1 against B = 2', xRange: [0, 2 * Math.PI], yRange: [-1.5, 1.5],
     panels: [
       { title: 'y = sin x   (B = 1)', curves: [{ fn: 'sin', B: 1 }],
@@ -1771,7 +1771,7 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
                 { type: 'vline', at: Math.PI, color: 'hairline' }] },
     ],
   };
-  const cfPhaseShift = {
+  const cfPhaseShift = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'pair', title: 'The shift is C/B, not C', xRange: [0, 2 * Math.PI], yRange: [-1.5, 2.3],
     panels: [
       { title: 'y = sin 2x', curves: [{ fn: 'sin', B: 2 }],
@@ -1784,7 +1784,7 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
         ] },
     ],
   };
-  const cfVerticalShift = {
+  const cfVerticalShift = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'pair', title: 'D = 0 against D = 2', xRange: [0, 2 * Math.PI], yRange: [-1.8, 3.8],
     yTicks: [{ at: 0, label: '0' }, { at: 2, label: '2' }],
     panels: [
@@ -1796,7 +1796,7 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
                 { type: 'bracket', orient: 'v', at: Math.PI / 2, from: 2, to: 3, label: '1', color: 'resultStroke' }] },
     ],
   };
-  const cfEquationFromGraph = {
+  const cfEquationFromGraph = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'single', title: 'Reading A, B, C, D off a graph in order',
     xRange: [-0.4, 2 * Math.PI + 0.6], yRange: [-2.4, 5.0], panelHeight: 250, panelWidth: 500,
     panels: [{
@@ -1809,7 +1809,7 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
       ],
     }],
   };
-  const cfKeyPoints = {
+  const cfKeyPoints = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'single', title: 'Five points fix one period',
     xRange: [-0.35, 2 * Math.PI + 0.35], yRange: [-1.75, 1.75], panelHeight: 220, panelWidth: 480,
     panels: [{

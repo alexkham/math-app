@@ -39,13 +39,13 @@ export async function getStaticProps({ params }) {
   const viewConfig = {
     'tree-diagram': {
       component: 'TreeDiagram',
-      title: "Tree Diagram - Conditional Probability Visualization | Learn Math Class",
-      description: "Interactive probability tree diagram with adjustable P(A), P(B|A), and P(B|Aᶜ). Visualize sequential events, joint probabilities, and Bayes' theorem.",
-      name: "Tree Diagram - Conditional Probability Visualization",
+      title: "Probability Tree Diagram Maker | Learn Math Class",
+      description: "Free probability tree diagram maker. Set P(A), P(B|A) and P(B|Aᶜ) and get joint, total and Bayes' theorem probabilities step by step.",
+      name: "Probability Tree Diagram Maker",
       url: "/probability/visual-tools/conditional-probability/tree-diagram",
       svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="18" y1="40" x2="42" y2="22" stroke="#B5D4F4" stroke-width="1.3"/><line x1="18" y1="40" x2="42" y2="58" stroke="#B5D4F4" stroke-width="1.3"/><line x1="48" y1="18" x2="66" y2="10" stroke="#B5D4F4" stroke-width="1.1"/><line x1="48" y1="26" x2="66" y2="32" stroke="#B5D4F4" stroke-width="1.1"/><line x1="48" y1="54" x2="66" y2="48" stroke="#B5D4F4" stroke-width="1.1"/><line x1="48" y1="62" x2="66" y2="70" stroke="#B5D4F4" stroke-width="1.1"/><circle cx="16" cy="40" r="4.2" fill="#FAC775" stroke="#854F0B" stroke-width="1.2"/><circle cx="45" cy="22" r="4" fill="#85B7EB" stroke="#0C447C" stroke-width="1.1"/><circle cx="45" cy="58" r="4" fill="#97C459" stroke="#27500A" stroke-width="1.1"/><circle cx="69" cy="10" r="3" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="69" cy="32" r="3" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="69" cy="48" r="3" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><circle cx="69" cy="70" r="3" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/><text x="29" y="27" font-family="Georgia,serif" font-size="5.5" fill="#C0DD97" text-anchor="middle">.7</text><text x="29" y="55" font-family="Georgia,serif" font-size="5.5" fill="#C0DD97" text-anchor="middle">.3</text></svg>`,
       category: "Conditional Probability",
-      h1: "Tree Diagram Visualization",
+      h1: "Probability Tree Diagram Maker",
       introTitle: "Visualizing Conditional Probability with Tree Diagrams",
       introContent: "Tree diagrams display probability relationships as branching paths. Each branch represents a possible outcome with its probability labeled along the path. This tool lets you adjust P(A), P(B|A), and P(B|Aᶜ) to see how joint probabilities, marginal probabilities, and Bayes' theorem calculations change in real time.",
       keywords: [

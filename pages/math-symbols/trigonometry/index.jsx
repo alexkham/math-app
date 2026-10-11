@@ -634,9 +634,9 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: 'Trigonometry Symbols: Chart & LaTeX Codes | Learn Math Class',
+    title: 'Trigonometry Symbols – Copy sin, cos, tan, θ, π | Learn Math Class',
     description:
-      'Complete trigonometry symbols chart with LaTeX codes. Covers sine, cosine, tangent, inverse trig, hyperbolic functions, identities, and common notation pitfalls.',
+      'Copy and paste trigonometry symbols: sin, cos, tan, θ, π, inverse and hyperbolic functions. Full chart with meanings and LaTeX codes.',
     keywords: keyWords,
     author: 'LearnMathClass',
     canonical: 'https://www.learnmathclass.com/math-symbols/trigonometry',

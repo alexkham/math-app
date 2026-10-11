@@ -722,8 +722,8 @@ const schemas = {
     }),
     exp: demoUnitFrame({
       svg: functionDerivativeDiagrams.exponential,
-      caption: 'f(x) = e&#710;x and f&#8242;(x) = e&#710;x coincide',
-      text: 'The two curves lie exactly on top of each other: at every x the slope of e&#710;x equals its height, so at x = 1 both readings are e &#8776; 2.72. No other function has this property, which is why e is the natural base. Check any point and see the two readouts agree on the',
+      caption: 'f(x) = e&#739; and f&#8242;(x) = e&#739; coincide',
+      text: 'The two curves lie exactly on top of each other: at every x the slope of e&#739; equals its height, so at x = 1 both readings are e &#8776; 2.72. No other function has this property, which is why e is the natural base. Check any point and see the two readouts agree on the',
       href: '/calculus/visual-tools/derivative',
       linkText: 'derivative explorer',
     }),

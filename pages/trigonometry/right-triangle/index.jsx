@@ -3552,28 +3552,28 @@ Right triangle trigonometry is limited to acute angles: $\\theta$ must satisfy $
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
   // Authored figures. triangleLabel draws them; these are data only.
   // Package doc: app/utils/illustrations/trigonometry/triangles/triangleLabel.md
-  const tlNaming = {
+  const tlNaming = {style: { a: '#B45309', b: '#2563EB', c: '#06357A', fill: '#2563EB', primary: '#2563EB', result: '#B45309' }, 
     kind: 'pair',
     svgTitle: 'Opposite and adjacent swap when the other acute angle is chosen',
     leftTitle: '\u03b8 at the lower right', rightTitle: '\u03b8 at the top',
   };
-  const tlFindingSides = {
+  const tlFindingSides = {style: { a: '#B45309', b: '#2563EB', c: '#06357A', fill: '#2563EB', primary: '#2563EB', result: '#B45309' }, 
     kind: 'ratios',
     svgTitle: 'The ratio you pick is fixed by which two sides are involved',
   };
-  const tlCofunction = {
+  const tlCofunction = {style: { a: '#B45309', b: '#2563EB', c: '#06357A', fill: '#2563EB', primary: '#2563EB', result: '#B45309' }, 
     kind: 'pair',
     svgTitle: 'A function at \u03b8 is its cofunction at 90\u00b0 \u2212 \u03b8 because the legs swap roles',
     leftTitle: 'measured from \u03b8', rightTitle: 'measured from 90\u00b0 \u2212 \u03b8',
     leftEquation: 'sin \u03b8 = opp / hyp', rightEquation: 'cos(90\u00b0 \u2212 \u03b8) = adj / hyp',
     hypLabel: 'same hypotenuse', markShared: true,
   };
-  const tlElevation = {
+  const tlElevation = {style: { a: '#B45309', b: '#2563EB', c: '#06357A', fill: '#2563EB', primary: '#2563EB', result: '#B45309' }, 
     kind: 'parallel',
     svgTitle: 'Elevation from below and depression from above are the same angle',
     note: 'alternate interior angles \u2014 equal',
   };
-  const tlLimitations = {
+  const tlLimitations = {style: { a: '#B45309', b: '#2563EB', c: '#06357A', fill: '#2563EB', primary: '#2563EB', result: '#B45309' }, 
     kind: 'sequence',
     svgTitle: 'The ratio definitions die at 0\u00b0 and 90\u00b0 because a side vanishes',
     panels: [

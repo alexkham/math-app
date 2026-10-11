@@ -117,9 +117,9 @@ export const PRESETS = {
   },
   parabola: {
     label: 'Parabola through 4 points',
-    note: 'b = C + Dt + Et² through (−1, 2), (0, 0), (1, 1), (2, 5)',
+    note: 'b = C + Dt + Et² through (−1, 2), (0, 0), (1, 1), (2, 4)',
     values: [[1, -1, 1], [1, 0, 0], [1, 1, 1], [1, 2, 4]],
-    b: [2, 0, 1, 5],
+    b: [2, 0, 1, 4],
     fit: { kind: 'poly', t: [-1, 0, 1, 2] }
   },
   oneColumn: {
@@ -806,6 +806,7 @@ export default function LeastSquaresWrapper({
         <ScenePlayer
           scenes={scenes}
           defaultSpeed={defaultSpeed}
+          speedOptions={[{ value: defaultSpeed + 800, label: 'Slow' }, { value: defaultSpeed, label: 'Normal' }, { value: 700, label: 'Fast' }, { value: 400, label: 'Very Fast' }]}
           showSpeedSelector={true}
           showStepIndicator={true}
           showStepLog={true}

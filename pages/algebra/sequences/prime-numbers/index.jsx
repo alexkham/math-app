@@ -8,6 +8,7 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import eratosthenesSieveDiagrams from '@/app/components/visualizations/arithmetic/eratosthenesSieveDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { renderFactorSet } from '@/app/utils/illustrations/arithmetic/divisibility/factorSet'
 import { renderPrimeFactorization } from '@/app/utils/illustrations/arithmetic/divisibility/primeFactorization'
@@ -422,6 +423,7 @@ const schemas = {
   const pfTree252 = { kind: 'tree', n: 252, style: prStyle, info: { lines: [
     { kind: 'formula', text: '252 = 2\u00B2 \u00B7 3\u00B2 \u00B7 7', role: 'primary' }, { kind: 'separator' },
     { kind: 'note', text: 'every branch ends in a prime' }, { kind: 'note', text: 'any splitting order gives' }, { kind: 'note', text: 'the same leaves' }] } };
+
   const demoUnits = {
     trialPairs: demoUnitFrame({
       svg: renderFactorSet(pfPairs91),
@@ -437,6 +439,13 @@ const schemas = {
       svg: renderFunctionPlotV4(fpPrimeCount),
       caption: 'Counting primes up to 100',
       text: 'The blue steps are &#960;(n): the count goes up by 1 at each prime 2, 3, 5, 7, &#8230;, 97 and reaches 25 at n = 100. The dashed curve is the estimate n / ln n, which gives about 21.7 there. The steps get longer as n grows because primes spread out; the curve follows that bend, and the ratio of the two tends to 1 as n grows without bound.',
+    }),
+    sieveLastPass: demoUnitFrame({
+      svg: eratosthenesSieveDiagrams.sieve7,
+      caption: 'The sieve after the sweep of 7',
+      text: 'The numbers up to 100 after the multiples of 2, 3, 5 and 7 have been crossed out. The sweep of 7 removes only 49, 77 and 91, because every smaller multiple of 7 was already gone. No further sweep is needed: 11 &#215; 11 = 121 is beyond 100, so every number still standing is prime. Step through the sweeps one prime at a time on the',
+      href: '/arithmetic/visual-tools/eratosthenes-sieve',
+      linkText: 'sieve of Eratosthenes tool',
     }),
   };
 
@@ -491,6 +500,8 @@ export default function PrimeNumbersPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-sieveLastPass'} dangerouslySetInnerHTML={{ __html: demoUnits.sieveLastPass }} />,
+          `Sieving up to n only needs the primes up to √n.`,
         ]
     },
     {

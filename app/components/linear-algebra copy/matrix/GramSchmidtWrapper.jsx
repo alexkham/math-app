@@ -281,7 +281,7 @@ export function buildScenes(k = 3, n = 3) {
           `and subtract that projection, component by component. Row ${r + 1} of U now reads ` +
           `<strong>${uHtml(r, j + 1)}</strong>` +
           (j + 1 === r
-            ? `, and it is perpendicular to ${r === 1 ? 'u<sub>1</sub>' : `every earlier u`}.`
+            ? (r >= n ? `. With only ${n} component${n === 1 ? '' : 's'}, ${r + 1} vectors cannot be independent: v<sub>${r + 1}</sub> was a combination of the earlier ones, so u<sub>${r + 1}</sub> = 0.` : `, and it is perpendicular to ${r === 1 ? 'u<sub>1</sub>' : `every earlier u`}.`)
             : `; it is perpendicular to u<sub>${j + 1}</sub>, with ${r - j - 1} projection${r - j - 1 === 1 ? '' : 's'} still to remove.`),
         matrices: { V, U: U(state) },
         layout: layoutOrth,
@@ -305,11 +305,13 @@ export function buildScenes(k = 3, n = 3) {
   for (let r = 0; r < k; r++) {
     scenes.push({
       phase: 'normalize',
-      title: `e<sub>${r + 1}</sub> = u<sub>${r + 1}</sub> / ‖u<sub>${r + 1}</sub>‖`,
-      formula:
-        `Divide every component of u<sub>${r + 1}</sub> by its length ‖u<sub>${r + 1}</sub>‖ = ` +
-        `√(u<sub>${r + 1}</sub> · u<sub>${r + 1}</sub>). The direction is unchanged, so e<sub>${r + 1}</sub> is still ` +
-        'perpendicular to the others, and its length is now exactly 1.',
+      title: r >= n ? `u<sub>${r + 1}</sub> = 0: no e<sub>${r + 1}</sub>` : `e<sub>${r + 1}</sub> = u<sub>${r + 1}</sub> / ‖u<sub>${r + 1}</sub>‖`,
+      formula: r >= n
+        ? `u<sub>${r + 1}</sub> is the zero vector, so there is no direction to normalize: dividing by ‖u<sub>${r + 1}</sub>‖ = 0 is undefined. ` +
+          `The orthonormal set stops at e<sub>${n}</sub>; the dependent vector is dropped.`
+        : `Divide every component of u<sub>${r + 1}</sub> by its length ‖u<sub>${r + 1}</sub>‖ = ` +
+          `√(u<sub>${r + 1}</sub> · u<sub>${r + 1}</sub>). The direction is unchanged, so e<sub>${r + 1}</sub> is still ` +
+          'perpendicular to the others, and its length is now exactly 1.',
       matrices: { U: U(state), E: E(r) },
       layout: layoutNorm,
       highlights: {
@@ -519,6 +521,7 @@ export default function GramSchmidtWrapper({
         <ScenePlayer
           scenes={scenes}
           defaultSpeed={defaultSpeed}
+          speedOptions={[{ value: defaultSpeed + 800, label: 'Slow' }, { value: defaultSpeed, label: 'Normal' }, { value: 700, label: 'Fast' }, { value: 400, label: 'Very Fast' }]}
           showSpeedSelector={true}
           showStepIndicator={true}
           showStepLog={true}

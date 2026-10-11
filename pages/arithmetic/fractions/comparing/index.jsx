@@ -705,6 +705,9 @@ import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1192,6 +1195,33 @@ const schemas = {
 
 
 
+  const fbSameNumerator = { kind: 'bars', svgTitle: '3/4 and 3/7: three parts each, but quarters are larger than sevenths', rows: [{ n: 4, k: 3, label: '3/4', partLabels: true }, { n: 7, k: 3, label: '3/7', color: 'r', partLabels: true }],
+    notes: [{ text: 'same count of parts, 3 in each row' }, { text: 'quarters are bigger than sevenths, so 3/4 > 3/7' }], caption: 'Same numerator: the smaller denominator wins' };
+  const fbCmpCommonDen = { kind: 'bars', svgTitle: '3/4 = 9/12 and 5/6 = 10/12: in twelfths, 5/6 is one twelfth larger', labelWidth: 80, rows: [{ n: 4, k: 3, label: '3/4', partLabels: true }, { n: 12, k: 9, label: '= 9/12' }, { n: 6, k: 5, label: '5/6', color: 'r', partLabels: true }, { n: 12, k: 10, label: '= 10/12', color: 'r' }],
+    notes: [{ text: 'LCD of 4 and 6 is 12' }, { text: '10/12 > 9/12, so 5/6 > 3/4 by one twelfth' }], caption: 'Common denominator: compare parts of one size' };
+  const fpBenchmark = { kind: 'pieces', svgTitle: 'Number line from 0 to 1 with the benchmark 1/2: 3/8 lies left of it, 5/9 right of it', xRange: [-0.08, 1.1], yRange: [-1, 1.5], xStep: 0.25, yStep: 10, xLetter: ' ', yLetter: ' ',
+    pieces: [{ fn: () => 0, from: 0, to: 1, ends: ['closed', 'closed'], color: 'g' }, { fn: () => 0, from: 3 / 8, to: 3 / 8, ends: ['closed', 'closed'], color: 'f' }, { fn: () => 0, from: 5 / 9, to: 5 / 9, ends: ['closed', 'closed'], color: 'r' }],
+    vlines: [{ x: 0.5, label: '' }],
+    notes: [{ x: 3 / 8, y: 0.15, text: '3/8', pos: 'n', color: 'f' }, { x: 5 / 9, y: 0.15, text: '5/9', pos: 'n', color: 'r' }, { x: 0.5, y: 1.25, text: 'benchmark 1/2', pos: 'e' }, { x: 0.02, y: -0.55, text: '3 < 4: 3/8 is below one half', pos: 'e', color: 'f' }, { x: 0.02, y: -0.8, text: '5 > 4.5: 5/9 is above one half', pos: 'e', color: 'r' }],
+    caption: 'One on each side of 1/2: no calculation needed' };
+  const demoUnits = {
+    sameNumerator: demoUnitFrame({
+      svg: renderFractionBar(fbSameNumerator),
+      caption: 'Three quarters against three sevenths',
+      text: 'Both bars are the same whole and both take 3 parts. The top bar is cut into 4 parts, the bottom into 7, so each seventh is smaller than each quarter. Three larger parts cover more of the bar: 3/4 &gt; 3/7.',
+    }),
+    cmpCommonDen: demoUnitFrame({
+      svg: renderFractionBar(fbCmpCommonDen),
+      caption: 'Comparing 3/4 and 5/6 in twelfths',
+      text: '3/4 and 5/6 cut the whole differently, so their parts cannot be counted against each other. In twelfths, the least common denominator of 4 and 6, 3/4 becomes 9/12 and 5/6 becomes 10/12. Now the parts are the same size and the counts decide: 10 &gt; 9, so 5/6 is larger, by exactly one twelfth.',
+    }),
+    benchmark: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpBenchmark),
+      caption: 'Using 1/2 as a benchmark',
+      text: 'On the line from 0 to 1, the dashed mark is 1/2. Three eighths is less than four eighths, so 3/8 lies left of it; five ninths is more than four and a half ninths, so 5/9 lies right of it. A fraction on each side of the benchmark settles the comparison without any common denominator: 5/9 &gt; 3/8.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -1200,6 +1230,7 @@ return {
     capstoneTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Comparing Fractions: Methods & Examples | Learn Math Class",
       description: "Learn to compare fractions: same denominator, same numerator, cross-multiplication, benchmark fractions, decimal conversion, and ordering multiple fractions.",
@@ -1212,7 +1243,7 @@ return {
    }
 
 
-export default function ComparingPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas}) {
+export default function ComparingPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1239,6 +1270,8 @@ export default function ComparingPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-sameNumerator'} dangerouslySetInnerHTML={{ __html: demoUnits.sameNumerator }} />,
+          `With the same numerator, the larger denominator gives the smaller fraction.`,
         ]
     },
     {
@@ -1247,6 +1280,8 @@ export default function ComparingPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-cmpCommonDen'} dangerouslySetInnerHTML={{ __html: demoUnits.cmpCommonDen }} />,
+          `Any common multiple works; 24 would give 18/24 and 20/24, the same order.`,
         ]
     },
     {
@@ -1263,6 +1298,8 @@ export default function ComparingPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-benchmark'} dangerouslySetInnerHTML={{ __html: demoUnits.benchmark }} />,
+          `When both fractions fall on the same side of 1/2, try 1/4, 3/4 or another method.`,
         ]
     },
     {

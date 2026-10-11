@@ -926,7 +926,7 @@ export async function getStaticProps(){
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/mode" style="${linkStyle}">Mode</a> and <a href="/probability/median" style="${linkStyle}">median</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">mode = ⌊(r − 1)(1 − p) / p⌋ (failures form); median ≈ mean, computed numerically</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">mode = r + ⌊(r − 1)(1 − p) / p⌋ trials; median between mode and mean, computed numerically</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">right-skewed; median typically slightly below mean</td>
     </tr>
     <tr>
@@ -1178,52 +1178,52 @@ The variance of 90 and standard deviation of about 9.5 indicate high variability
   title: `Mode and Median`,
   content: `### Mode
 
-The [mode](!/probability/mode) is the value of $k$ (number of failures before the $r$-th success) with the highest probability—the peak of the [PMF](!/probability/probability-function/pmf).
+The [mode](!/probability/mode) is the value of $k$ (the trial on which the $r$-th success occurs) with the highest probability—the peak of the [PMF](!/probability/probability-function/pmf).
 
 For the negative binomial distribution, the mode depends on the parameters $r$ and $p$:
 
 **If** $r > 1$**:**
-The mode is $\\lfloor \\frac{(r-1)(1-p)}{p} \\rfloor$
+The mode is $r + \\lfloor \\frac{(r-1)(1-p)}{p} \\rfloor$. When $\\frac{(r-1)(1-p)}{p}$ is a whole number, the value one below is a mode too: two values tie.
 
 **If** $r = 1$**:**
-The mode is 0 (this reduces to the [geometric distribution](!/probability/distributions/discrete/geometric))
+The mode is $1$ (this reduces to the [geometric distribution](!/probability/distributions/discrete/geometric): success on the first trial is most likely)
 
-**Intuition:** The mode sits near the [expected value](!/probability/expected-value) $\\frac{r(1-p)}{p}$, representing the most likely number of failures before achieving $r$ successes. As $p$ decreases (success becomes rarer), the mode shifts rightward, reflecting that more failures are expected before accumulating the required successes.
+**Intuition:** The term $\\frac{(r-1)(1-p)}{p}$ counts the most likely number of failures; adding the $r$ successes turns it into a number of trials. The mode sits a little below the [expected value](!/probability/expected-value) $\\frac{r}{p}$. As $p$ decreases (success becomes rarer), the mode shifts rightward.
 
 **Example:** For $r = 5$ and $p = 0.3$:
 
-Mode = $\\lfloor \\frac{(5-1)(1-0.3)}{0.3} \\rfloor = \\lfloor \\frac{4 \\times 0.7}{0.3} \\rfloor = \\lfloor 9.33 \\rfloor = 9$
+Mode = $5 + \\lfloor \\frac{(5-1)(1-0.3)}{0.3} \\rfloor = 5 + \\lfloor \\frac{4 \\times 0.7}{0.3} \\rfloor = 5 + \\lfloor 9.33 \\rfloor = 14$
 
-Getting exactly 9 failures before the 5th success is more likely than any other outcome.
+The 5th success arriving on exactly the 14th trial is more likely than on any other trial.
 
 **Example:** For $r = 1$ and $p = 0.4$:
 
-Mode = 0 (geometric case: most likely to succeed on first trial)
+Mode = 1 (geometric case: most likely to succeed on the first trial)
 
 ### Median
 
 The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) \\geq 0.5$ and $P(X \\geq m) \\geq 0.5$.
 
-For the negative binomial distribution, there is no simple closed-form expression for the median, but it can be found numerically by solving:
+For the negative binomial distribution, there is no simple closed-form expression for the median, but it can be found numerically as the smallest $m$ with:
 
-$$\\sum_{k=0}^{m} \\binom{k+r-1}{k} p^r (1-p)^k \\geq 0.5$$
+$$\\sum_{k=r}^{m} \\binom{k-1}{r-1} p^r (1-p)^{k-r} \\geq 0.5$$
 
 **Properties of the median:**
-• The median is always close to the mean $\\frac{r(1-p)}{p}$
+• The median lies between the mode and the mean $\\frac{r}{p}$ in the examples below
 • For $r = 1$, the median follows the geometric distribution formula
 • The distribution is right-skewed, so median < mean typically
 
 **Example:**
  For $r = 3$ and $p = 0.5$:
-Mean = $\\frac{3(1-0.5)}{0.5} = 3$
+Mean = $\\frac{3}{0.5} = 6$
 
-The median is approximately 2-3 (found numerically)
+$P(X \\leq 4) \\approx 0.31$ and $P(X \\leq 5) = 0.5$ exactly, so both conditions hold for every $m$ from 5 to 6: 5 is the smallest median, and 6 qualifies as well
 
 **Example:** 
 For $r = 5$ and $p = 0.3$:
-Mean = $\\frac{5(1-0.3)}{0.3} \\approx 11.67$
+Mean = $\\frac{5}{0.3} \\approx 16.67$
 
-The median is approximately 11 (close to the mean)
+The median is 16: $P(X \\leq 15) \\approx 0.49$, just short of one half
 
 Unlike continuous distributions where finding the median requires integration, for [discrete](!/probability/distributions/discrete) distributions, the median is found by summing probabilities until reaching 0.5.
   `,

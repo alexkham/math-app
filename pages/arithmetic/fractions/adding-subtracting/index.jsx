@@ -690,6 +690,8 @@ import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1156,6 +1158,30 @@ const schemas = {
 
 
 
+  const fbSameDenAdd = { kind: 'bars', svgTitle: '2/7 plus 3/7 makes 5/7: five sevenths', rows: [{ n: 7, k: 2, label: '2/7', partLabels: true }, { n: 7, k: 3, label: '+ 3/7', color: 'r', partLabels: true }, { n: 7, k: 5, label: '= 5/7', color: 'g', partLabels: true }],
+    notes: [{ text: 'all parts are sevenths: 2 parts + 3 parts = 5 parts' }, { text: 'the denominator stays 7; only the count changes' }], caption: 'Same denominator: add the numerators' };
+  const fbUnlikeAdd = { kind: 'bars', svgTitle: '2/3 plus 1/4: rewritten as 8/12 plus 3/12, the sum is 11/12', labelWidth: 80, rows: [{ n: 3, k: 2, label: '2/3', partLabels: true }, { n: 12, k: 8, label: '= 8/12' }, { n: 4, k: 1, label: '1/4', color: 'r', partLabels: true }, { n: 12, k: 3, label: '= 3/12', color: 'r' }, { n: 12, k: 11, label: '= 11/12', color: 'g' }],
+    notes: [{ text: 'twelfths fit both thirds and quarters (LCD 12)' }, { text: '8 twelfths + 3 twelfths = 11 twelfths' }], caption: 'Unlike denominators: convert, then add' };
+  const fbAddMistake = { kind: 'bars', svgTitle: 'Adding denominators: 1/2 plus 1/3 is not 2/5 but 5/6', labelWidth: 80, rows: [{ n: 2, k: 1, label: '1/2', partLabels: true }, { n: 3, k: 1, label: '+ 1/3', color: 'f', partLabels: true }, { n: 5, k: 2, label: '≠ 2/5', color: 'g', partLabels: true }, { n: 6, k: 5, label: '= 5/6', color: 'r', partLabels: true }],
+    notes: [{ text: '2/5 is shorter than 1/2 alone: a sum cannot shrink' }, { text: 'correct: 3/6 + 2/6 = 5/6', color: 'r' }], caption: 'Never add the denominators' };
+  const demoUnits = {
+    sameDenAdd: demoUnitFrame({
+      svg: renderFractionBar(fbSameDenAdd),
+      caption: 'Adding sevenths',
+      text: 'All three bars are cut into sevenths, so every part has the same size. Two parts and three more parts make five parts: 2/7 + 3/7 = 5/7. The denominator names the size of the parts and does not change; only the number of parts is added.',
+    }),
+    unlikeAdd: demoUnitFrame({
+      svg: renderFractionBar(fbUnlikeAdd),
+      caption: 'Adding 2/3 and 1/4 through twelfths',
+      text: 'Thirds and quarters are different sizes, so 2/3 and 1/4 cannot be added part by part. Cutting both bars into twelfths, the least common denominator, turns 2/3 into 8/12 and 1/4 into 3/12. Now the parts match and the counts add: 8/12 + 3/12 = 11/12, shown on the last bar.',
+    }),
+    addMistake: demoUnitFrame({
+      svg: renderFractionBar(fbAddMistake),
+      caption: 'Why 1/2 + 1/3 is not 2/5',
+      text: 'Adding tops and bottoms gives 2/5, but the 2/5 bar is shorter than the 1/2 bar on its own, and adding a positive amount cannot make something smaller. Converting to sixths gives the true sum: 1/2 = 3/6 and 1/3 = 2/6, so 1/2 + 1/3 = 5/6, the amber bar.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -1164,6 +1190,7 @@ return {
     capstoneTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Adding & Subtracting Fractions: Common Denominators | Learn Math Class",
       description: "Learn to add and subtract fractions: same and different denominators, finding LCD, mixed numbers, borrowing, and avoiding common mistakes. Step-by-step examples.",
@@ -1176,7 +1203,7 @@ return {
    }
 
 
-export default function AddingSubtractingPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas}) {
+export default function AddingSubtractingPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1195,6 +1222,8 @@ export default function AddingSubtractingPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+                  <div key={'unit-sameDenAdd'} dangerouslySetInnerHTML={{ __html: demoUnits.sameDenAdd }} />,
+          `Subtraction works the same way: 5/7 − 3/7 removes 3 parts and leaves 2/7.`,
         ]
     },
     {
@@ -1219,6 +1248,8 @@ export default function AddingSubtractingPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-unlikeAdd'} dangerouslySetInnerHTML={{ __html: demoUnits.unlikeAdd }} />,
+          `11/12 is already in simplest form, since 11 and 12 share no factor.`,
         ]
     },
     {
@@ -1253,6 +1284,8 @@ export default function AddingSubtractingPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-addMistake'} dangerouslySetInnerHTML={{ __html: demoUnits.addMistake }} />,
+          `A quick check: a sum must be at least as large as each fraction in it.`,
         ]
     },
     {

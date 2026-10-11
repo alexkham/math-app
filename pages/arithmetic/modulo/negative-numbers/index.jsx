@@ -775,6 +775,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 
 
@@ -1250,6 +1251,14 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const mdDot = (x, y, c, k) => ({ fn: () => y, from: x, to: x, ends: [k || 'closed', k || 'closed'], color: c });
+  const mdPow = Array.from({ length: 9 }, (_, i) => mdDot(i + 1, [2, 4, 1][i % 3], i % 3 === 0 ? 'r' : 'f'));
+  const fpNegConventions = { kind: 'pieces', svgTitle: 'Number line with multiples of 3: for -7, truncation stops at -6 and leaves -1; flooring goes down to -9 and leaves 2', xRange: [-12.5, 1.5], yRange: [-1.6, 1.6], xStep: 3, yStep: 5, xLetter: ' ', yLetter: ' ',
+    pieces: [].concat([-12, -9, -6, -3, 0].map((m) => mdDot(m, 0, 'g', 'open')), [mdDot(-7, 0, 'r')],
+      [{ fn: () => 0.7, from: -7, to: -6, ends: ['closed', 'closed'], color: 'f', label: { text: 'truncated: q = −2, r = −1', x: -6.5, y: 0.7, pos: 'n' } },
+       { fn: () => -0.7, from: -9, to: -7, ends: ['closed', 'closed'], color: 'r', label: { text: 'floored: q = −3, r = 2', x: -8, y: -0.7, pos: 's' } }]),
+    notes: [{ x: -12.3, y: 1.45, text: '(−7) mod 3, circles: multiples of 3', pos: 'e' }, { x: -7, y: 0, text: '−7', pos: 'sw', color: 'r' }],
+    caption: 'Toward zero gives −1; toward −∞ gives 2' };
   const demoUnits = {
     class: demoUnitFrame({
       svg: modPieWheelDiagrams.classDetail,
@@ -1257,6 +1266,11 @@ const schemas = {
       text: 'Every number in a slot is congruent to every other: &#8722;1 and 2 occupy the same slot mod 3 just as 3, 9 and 15 share a slot mod 6 here, so the two conventions&#8217; answers, &#8722;1 and 2, are two names for one class. The wheel does not care which representative you write. Step backwards through negative numbers on the',
       href: '/arithmetic/visual-tools/modular-wheel',
       linkText: 'modular arithmetic wheel',
+    }),
+    negConventions: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpNegConventions),
+      caption: 'Two ways to divide −7 by 3',
+      text: 'The circles mark the multiples of 3 and the amber dot is &#8722;7. Truncated division rounds &#8722;7 &#247; 3 = &#8722;2.33 toward zero, to q = &#8722;2, and uses the multiple &#8722;6 to the right of &#8722;7: the remainder is &#8722;7 &#8722; (&#8722;6) = &#8722;1. Floored division rounds down, to q = &#8722;3, and uses the multiple &#8722;9 to the left: the remainder is &#8722;7 &#8722; (&#8722;9) = 2. Both satisfy &#8722;7 = 3q + r.',
     }),
   };
 
@@ -1309,6 +1323,8 @@ export default function NegativeNumbersPage({seoData, sectionsContent, introCont
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+                  <div key={'unit-negConventions'} dangerouslySetInnerHTML={{ __html: demoUnits.negConventions }} />,
+          `When the division is not exact, the two remainders differ by exactly n: here 2 − (−1) = 3.`,
         ]
     },
     {

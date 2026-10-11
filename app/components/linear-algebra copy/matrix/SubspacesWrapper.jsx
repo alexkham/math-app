@@ -436,7 +436,7 @@ export function buildScenes(values) {
   const orthLayout = [];
   const orthHl = {};
   if (rowDotNull) {
-    orthMats.B = numMatrix('b', rows, 'rows of A', wide.cellPx, wide.font);
+    orthMats.B = numMatrix('b', rows, 'rows of R', wide.cellPx, wide.font);
     orthMats.N = numMatrix('n', N, 'N(A)', wide.cellPx, wide.font);
     orthMats.Z1 = numMatrix('z', rowDotNull, '0', wide.cellPx, wide.font, { cellStyle: () => ({ color: '#94a3b8' }) });
     orthLayout.push({ type: 'matrix', ref: 'B' }, { type: 'matrix', ref: 'N' }, { type: 'operator', symbol: '=' }, { type: 'matrix', ref: 'Z1' });
@@ -458,7 +458,7 @@ export function buildScenes(values) {
     phase: 'orth',
     title: 'Two pairs of orthogonal complements',
     formula:
-      'Every row of A dotted with every null-space vector is zero — that is what Ax = 0 says, row by row — so the row space ' +
+      'Every row of A — and so every row of its reduced form R, shown here — dotted with every null-space vector is zero; that is what Ax = 0 says, row by row. So the row space ' +
       `and null space are perpendicular, and with dimensions ${r} + ${n - r} = ${n} they are orthogonal complements in R${sup(n)}. ` +
       'Likewise Aᵀy = 0 says every column of A is perpendicular to every left-null vector: the column space and left null ' +
       `space are orthogonal complements in R${sup(m)}, dimensions ${r} + ${m - r} = ${m}. ` +
@@ -768,6 +768,7 @@ export default function SubspacesWrapper({
         <ScenePlayer
           scenes={scenes}
           defaultSpeed={defaultSpeed}
+          speedOptions={[{ value: defaultSpeed + 800, label: 'Slow' }, { value: defaultSpeed, label: 'Normal' }, { value: 700, label: 'Fast' }, { value: 400, label: 'Very Fast' }]}
           showSpeedSelector={true}
           showStepIndicator={true}
           showStepLog={true}

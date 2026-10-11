@@ -1727,6 +1727,7 @@ export default function AdditionWrapper({
   // the prop changes from outside.
   const [scenarioState, setScenarioState] = useState(defaultScenario);
   const scenario = locked ? mode : scenarioState;
+  const shownSubtitle = scenario === 'vectors' && subtitle === 'Symbolic visualization of A ± B = C, cell by cell.' ? 'Symbolic visualization of u ± v = w, component by component.' : subtitle;
 
   const [vecN, setVecN] = useState(defaultVecN);
   const [rows, setRows] = useState(defaultRows);
@@ -1782,7 +1783,7 @@ export default function AdditionWrapper({
           )} */}
           {subtitle && (
             <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
-              {subtitle}
+              {shownSubtitle}
             </p>
           )}
         </div>

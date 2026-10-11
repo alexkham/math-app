@@ -128,6 +128,10 @@ export async function getStaticProps() {
     //   title: "Complex Numbers",
     //   link: "/math-symbols/complex-numbers"
     // },
+    {
+      title: "Mathematical Keyboard",
+      link: "/keyboard"
+    },
   ];
 
   const meta = {

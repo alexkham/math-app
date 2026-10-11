@@ -807,6 +807,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import { renderMultiplesLine } from '@/app/utils/illustrations/arithmetic/divisibility/multiplesLine'
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 
 
@@ -1388,6 +1389,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const prStyle = { primary: '#06357A', secondary: '#2563EB', result: '#FDE7C8', resultStroke: '#B45309', fill: '#FDE7C8', stroke: '#B45309', text: '#1E3A5F', textMuted: '#64748B', neutral: '#64748B', border: '#5A7299', negation: '#C0392B' };
+  const mlMod47 = { kind: 'single-track', range: [0, 50], step: 5, target: 47, mode: 'remainder', style: prStyle, info: { lines: [
+    { kind: 'formula', text: '47 = 5 · 9 + 2' }, { kind: 'separator' },
+    { kind: 'note', text: '47 ÷ 5 = 9.4, keep 9' }, { kind: 'note', text: '9 jumps of 5 reach 45' }, { kind: 'formula', text: '47 mod 5 = 2', role: 'result' }] } };
   const demoUnits = {
     wrap: demoUnitFrame({
       svg: modPieWheelDiagrams.running,
@@ -1409,6 +1414,11 @@ const schemas = {
       text: 'Every number that lands in the same slot shares the same remainder, and those numbers are congruent modulo 6: the slot is the congruence class, and 3 &#8801; 9 &#8801; 15 (mod 6) is the statement that they sit together. Congruence is equality of slots. Highlight a class and read its members on the',
       href: '/arithmetic/visual-tools/modular-wheel',
       linkText: 'modular arithmetic wheel',
+    }),
+    mod47: demoUnitFrame({
+      svg: renderMultiplesLine(mlMod47),
+      caption: 'Finding 47 mod 5 on a number line',
+      text: 'Jumps of 5 from 0 land on 5, 10, 15, &#8230;, 45. A tenth jump would reach 50, past 47, so only 9 jumps fit: that is the integer part of 47 &#247; 5 = 9.4. The nearest multiple of 5 at or below 47 is 9 &#183; 5 = 45, and the gap from 45 to 47 is the remainder: 47 mod 5 = 2.',
     }),
   };
 
@@ -1507,6 +1517,8 @@ export default function ModuloPage({seoData, sectionsContent, introContent, obj1
         link:sectionsContent.obj51.link,
         content:[
           sectionsContent.obj51.content,
+                  <div key={'unit-mod47'} dangerouslySetInnerHTML={{ __html: demoUnits.mod47 }} />,
+          `The remainder is always the gap to the last multiple at or below a, so it stays between 0 and 4.`,
         ]
     },
      {

@@ -1237,7 +1237,7 @@ For $p = 0.3$:
 $$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(0.7)} \\right\\rceil = \\left\\lceil \\frac{0.693}{0.357} \\right\\rceil = \\lceil 1.94 \\rceil = 2$$
 
 **Properties:**
-• The median is always close to $\\frac{1}{p}$ (the [expected value](!/probability/expected-value))
+• The median is about $\\frac{\\ln 2}{p} \\approx \\frac{0.69}{p}$ for small $p$, well below the [expected value](!/probability/expected-value) $\\frac{1}{p}$
 • For high $p$, median = mode = 1
 • For low $p$, median > mode, reflecting right skew
 • The geometric distribution is always right-skewed (median ≥ mode)

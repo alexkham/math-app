@@ -2046,7 +2046,7 @@ These properties govern every computation downstream. Periodicity is the reason 
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
   // Authored figures, drawn by curveFeature. The monotonicity figure is three
   // single-curve renders stacked by demoUnitFrame's svg array - no new layout.
-  const cfBoundedness = {
+  const cfBoundedness = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'single', title: 'Sine stays in the strip; secant never enters it',
     xRange: [-Math.PI / 2, 5 * Math.PI / 2], yRange: [-3.4, 3.4], panelWidth: 520, panelHeight: 260,
     yTicks: [{ at: 1, label: '1' }, { at: -1, label: '\u22121' }],
@@ -2109,7 +2109,7 @@ These properties govern every computation downstream. Periodicity is the reason 
       text: 'The shaded strip is every value from &#8722;1 to 1. Sine never leaves it; secant never enters it, touching its edge only at the points where cosine is &#177;1. That is why sin&#8201;<em>x</em> = 1.5 and sec&#8201;<em>x</em> = 0.5 are both impossible, for opposite reasons.',
     }),
     monotonicity: demoUnitFrame({
-      svg: [renderCurveFeature(cfMonoSin), renderCurveFeature(cfMonoCos), renderCurveFeature(cfMonoTan)],
+      svg: [renderCurveFeature({ ...cfMonoSin, style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' } }), renderCurveFeature({ ...cfMonoCos, style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' } }), renderCurveFeature({ ...cfMonoTan, style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' } })],
       caption: 'One interval each, chosen for a reason',
       text: 'Each highlighted stretch is where the function moves in one direction only and still takes every value it ever takes. Those are the exact intervals the inverse functions are built on &#8212; which is why the choice is not arbitrary.',
     }),

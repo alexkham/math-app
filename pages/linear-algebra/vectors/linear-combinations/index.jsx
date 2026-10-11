@@ -1318,7 +1318,7 @@ const schemas = {
   // rendered as content-array items - never interpolated into sectionsContent.
   const demoUnits = {
     columnPicture: demoUnitFrame({
-      svg: vectorPictureDiagrams.columns.allPieces,
+      svg: vectorPictureDiagrams.columns.allPieces.replace(/url\(#vpd-c-/g, 'url(#vpd-c4-'),
       caption: 'Av assembled from the columns of A',
       text: 'Each column of A has been scaled by its entry of v and laid tail to head, and the last arrow lands on the answer. That walk is the picture behind the question this section asks: b is a linear combination of the columns exactly when some choice of weights ends the walk on b, and no choice of weights can leave the plane the columns span. Set your own weights and watch the walk change on the',
       href: '/linear-algebra/visual-tools/matrix-multiplication-columns',

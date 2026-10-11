@@ -1502,7 +1502,7 @@ The Law of Sines and the Law of Cosines are those tools. Together, they provide 
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
   // Authored figures. triangleLabel.v2 draws them; these are data only.
   // Package doc: app/utils/illustrations/trigonometry/triangles/triangleLabel.v2.md
-  const tlAmbiguousCase = {
+  const tlAmbiguousCase = {style: { a: '#B45309', b: '#2563EB', c: '#06357A', fill: '#2563EB', primary: '#2563EB', result: '#B45309', secondary: '#06357A' }, 
     kind: 'swing', angleDeg: 35, bLength: 150, gap: 12,
     svgTitle: 'The same SSA data can give two triangles, one, or none',
     panels: [
@@ -1512,7 +1512,7 @@ The Law of Sines and the Law of Cosines are those tools. Together, they provide 
       { length: 60, title: 'a < h', note: 'none \u2014 it cannot reach', tone: 'muted' },
     ],
   };
-  const tlAreaSAS = {
+  const tlAreaSAS = {style: { a: '#B45309', b: '#2563EB', c: '#06357A', fill: '#2563EB', primary: '#2563EB', result: '#B45309', secondary: '#06357A' }, 
     kind: 'altitude', width: 500, height: 268, angleDeg: 52, bLength: 170, aLength: 300,
     svgTitle: 'Half a b sin C is the ordinary area formula with b sin C as the height',
     heightLabel: 'h = b sin C', note: 'area = \u00bd \u00b7 a \u00b7 h  =  \u00bd ab sin C',

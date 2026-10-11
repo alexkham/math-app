@@ -13,6 +13,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionMVTDiagrams from '@/app/components/functions/mvt/functionMVTDiagrams'
 
@@ -810,6 +811,16 @@ const schemas = {
     vlines: [{ x: 0.3 }],
     notes: [{ x: -1.55, y: 1.3, text: 'slopes at 0: 2 and 1', pos: 'e', color: 'r' }, { x: 0.4, y: -0.45, text: 'x = 0.3: 0.565 / 0.3 ≈ 1.88', pos: 'e' }, { x: 0.4, y: -0.8, text: 'blue: sin 2x', pos: 'e', color: 'f' }, { x: 0.4, y: -1.05, text: 'navy: y = x', pos: 'e', color: 'g' }, { x: 0.4, y: -1.3, text: 'dashed: y = 2x, tangent at 0', pos: 'e', color: 'r' }],
     caption: 'Near 0 the ratio of heights tends to the ratio of slopes: 2 / 1 = 2' };
+  const prBox = (x0, x1, y0, y1, c) => [
+    { fn: () => y0, from: x0, to: x1, ends: [null, null], color: c }, { fn: () => y1, from: x0, to: x1, ends: [null, null], color: c },
+    { fn: (x) => y0 + (x - x0) * 1e6, from: x0, to: x0 + (y1 - y0) / 1e6, ends: [null, null], color: c },
+    { fn: (x) => y0 + (x1 - x) * 1e6, from: x1 - (y1 - y0) / 1e6, to: x1, ends: [null, null], color: c }];
+  const fpProductRect = { kind: 'pieces', svgTitle: 'Rectangle with sides f and g grown by small steps: the new area is f times g plus two strips g times delta f and f times delta g plus a tiny corner', xRange: [-0.3, 4.6], yRange: [-0.3, 4.1], xStep: 20, yStep: 20, xLetter: ' ', yLetter: ' ',
+    pieces: [].concat(prBox(0, 3, 0, 2, 'g'), prBox(3, 3.6, 0, 2, 'r'), prBox(0, 3, 2, 2.5, 'f'), prBox(3, 3.6, 2, 2.5, 'g')),
+    notes: [{ x: 1.5, y: 1, text: 'f · g', pos: 'n', color: 'g' }, { x: 3.3, y: 1, text: 'g·Δf', pos: 'n', color: 'r' }, { x: 1.5, y: 2.25, text: 'f · Δg', pos: 'e', color: 'f' }, { x: 3.65, y: 2.25, text: 'Δf · Δg', pos: 'e', color: 'g' },
+      { x: 1.5, y: 0, text: 'f', pos: 's', color: 'g' }, { x: 0, y: 1, text: 'g', pos: 'w', color: 'g' },
+      { x: 0.15, y: 3.85, text: 'Δ(fg) = g · Δf + f · Δg + Δf · Δg', pos: 'e' }, { x: 0.15, y: 3.45, text: 'divide by Δx and let Δx → 0: the corner term vanishes', pos: 'e' }, { x: 0.15, y: 3.05, text: '(fg)′ = f′g + fg′', pos: 'e', color: 'r' }],
+    caption: 'Each factor grows while the other stays fixed' };
   const demoUnits = {
     mvt: demoUnitFrame({
       svg: functionMVTDiagrams.quadratic,
@@ -829,6 +840,11 @@ const schemas = {
       svg: renderFunctionPlotV4(fpLhopital),
       caption: 'Why the derivatives decide 0/0',
       text: 'Take lim sin(2x)/x as x &#8594; 0. Both curves pass through the origin, so the quotient starts as 0/0. Close to 0 each curve is almost its tangent line: sin 2x is almost 2x and x is exactly x. The ratio of the heights is then almost the ratio of the slopes, 2/1. At x = 0.3 the heights are 0.565 and 0.3, a ratio of 1.88, and the ratio closes in on 2 as x shrinks.',
+    }),
+    productRect: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpProductRect),
+      caption: 'The product rule as a growing rectangle',
+      text: 'Think of f &#183; g as the area of a rectangle with sides f and g. When x moves a little, f grows by &#916;f and g grows by &#916;g. The new area adds a strip g &#183; &#916;f on the right, a strip f &#183; &#916;g on top, and a small corner &#916;f &#183; &#916;g. Dividing by &#916;x, the strips give f&#8242;g and fg&#8242;, while the corner, a product of two small changes, shrinks to nothing.',
     }),
   };
 
@@ -903,6 +919,8 @@ export default function RulesPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-productRect'} dangerouslySetInnerHTML={{ __html: demoUnits.productRect }} />,
+          `That is why the product rule has two terms and not f′g′: the corner is the only place both factors change.`,
         ]
     },
     {

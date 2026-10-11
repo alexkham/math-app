@@ -3038,7 +3038,7 @@ const schemas = {
 
   // Operation A demonstration unit: frozen tool states + attached explanation
   // panel + tool link, one frame. Rendered as a content-array item.
-  const seInfinite = {
+  const seInfinite = {style: { primary: '#2563EB', primaryLight: '#E3ECFD', secondary: '#06357A', secondaryLight: '#DCE4F0', result: '#B45309', resultFill: '#FDF3E3', text: '#1E3A5F' }, 
     kind: 'pairing', width: 560, height: 380,
     svgTitle: 'An infinite set pairs with a proper part of itself; a finite set cannot',
     panels: [
@@ -3048,11 +3048,11 @@ const schemas = {
         pairs: [[0, 0], [1, 1]], verdict: 'n ↦ 2n: 2 and 3 have no partner', ok: false },
     ],
   };
-  const seListing = {
+  const seListing = {style: { primary: '#2563EB', primaryLight: '#E3ECFD', secondary: '#06357A', secondaryLight: '#DCE4F0', result: '#B45309', resultFill: '#FDF3E3', text: '#1E3A5F' }, 
     kind: 'listing', size: 5,
     svgTitle: 'Walking the grid of fractions diagonal by diagonal lists every positive rational once',
   };
-  const seDiagonal = {
+  const seDiagonal = {style: { primary: '#2563EB', primaryLight: '#E3ECFD', secondary: '#06357A', secondaryLight: '#DCE4F0', result: '#B45309', resultFill: '#FDF3E3', text: '#1E3A5F' }, 
     kind: 'diagonal',
     svgTitle: 'Changing every diagonal digit builds a number missing from any list',
     heading: 'an assumed complete list of numbers between 0 and 1',

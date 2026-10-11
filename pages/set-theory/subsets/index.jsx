@@ -1689,7 +1689,7 @@ const schemas = {
 
   // Operation A demonstration unit: frozen tool state + attached explanation
   // panel + tool link, one frame. Rendered as a content-array item.
-  const seChoices = {
+  const seChoices = {style: { primary: '#2563EB', primaryLight: '#E3ECFD', result: '#B45309', resultFill: '#FDF3E3', text: '#1E3A5F' }, 
     kind: 'choices', elements: ['a', 'b', 'c'],
     svgTitle: 'One in-or-out choice per element builds every subset: 2 \u00d7 2 \u00d7 2 = 8',
   };

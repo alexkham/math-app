@@ -111,6 +111,10 @@ export async function getStaticProps() {
     //   title: "Settings",
     //   link: "/settings"  // Example without icon
     // }
+    {
+      title: "Mathematical Keyboard",
+      link: "/keyboard"
+    },
   ];
  
  

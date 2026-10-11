@@ -696,6 +696,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 
@@ -1234,6 +1235,16 @@ By allowing more than two outcomes, the dice roll model provides a basic framewo
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const mdPx = (k, w) => k / w * 388;
+  const mdSumMax = [].concat(
+    [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((s) => ({ from: 0, to: (6 - Math.abs(s - 7)) / 36, color: 'f', dx: mdPx(s, 13) - 4 })),
+    [1, 2, 3, 4, 5, 6].map((k) => ({ from: 0, to: (2 * k - 1) / 36, color: 'r', dx: mdPx(k, 13) + 4 })));
+  const mdBin = (n, k) => { let c = 1; for (let i = 1; i <= k; i++) c = c * (n - k + i) / i; return c / 2 ** n; };
+  const mdCoinBars = Array.from({ length: 41 }, (_, k) => ({ from: 0, to: mdBin(40, k), color: 'f', dx: mdPx(k, 40) })).filter((b) => b.to > 0.001);
+  const ogMaxL = { kind: 'dice', svgTitle: 'Two dice: maximum at most 3 is a 3 by 3 block of 9 cells; maximum exactly 4 is the L-shaped band of 7 cells around it',
+    events: [{ label: 'max ≤ 3', test: (a, b) => Math.max(a, b) <= 3, color: 'f' }, { label: 'max = 4', test: (a, b) => Math.max(a, b) === 4, color: 'r' }],
+    notes: [{ text: 'P(max ≤ 4) = 16/36' }, { text: 'P(max ≤ 3) = 9/36', color: 'f' }, { text: 'P(max = 4) = 7/36', color: 'r' }, { text: 'in general (2k − 1)/36' }],
+    caption: 'The maximum of two rolls: square blocks and L-shaped bands' };
   const demoUnits = {
     u_2_0: demoUnitFrame({
       svg: diceSampleSpaceDiagrams.none,
@@ -1255,6 +1266,11 @@ By allowing more than two outcomes, the dice roll model provides a basic framewo
       text: 'The face value of a single fair die is a random variable with the discrete uniform distribution: six bars of equal height 1/6 at the values 1 to 6. Any other function of the roll, such as whether the face is even, induces a different distribution on the same model. Change the range and see the bars adjust on the',
       href: '/probability/visual-tools/probability-function/discrete',
       linkText: 'PMF visualizer',
+    }),
+    maxL: demoUnitFrame({
+      svg: renderOutcomeGrid(ogMaxL),
+      caption: 'The maximum of two rolls on the grid',
+      text: 'Roll two dice and record the larger face. The maximum is at most 3 exactly when both dice are at most 3: the blue 3 by 3 block, 9 cells. It is at most 4 on the 4 by 4 block, 16 cells, so it equals 4 on the amber L-shaped band between them: 16 &#8722; 9 = 7 cells, P(max = 4) = 7/36. The same subtraction gives P(max = k) = (k&#178; &#8722; (k &#8722; 1)&#178;)/36 = (2k &#8722; 1)/36.',
     }),
   };
 
@@ -1374,6 +1390,8 @@ export default function DiceRollPage({
           sectionsContent.obj8.content,
           <div key={'constructions-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: constructionsTable }} />,
+                  <div key={'unit-maxL'} dangerouslySetInnerHTML={{ __html: demoUnits.maxL }} />,
+            `Larger faces are more likely as the maximum: P(max = 6) = 11/36, P(max = 1) = 1/36.`,
         ]
     },
     {

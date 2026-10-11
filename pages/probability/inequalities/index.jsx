@@ -683,6 +683,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import varianceDiagrams from '@/app/components/probability/variance/varianceDiagrams'
 import chebyshevDiagrams from '@/app/components/probability/inequalities/chebyshevDiagrams'
 
@@ -1148,6 +1149,13 @@ These results are deliberately general. They apply across wide classes of random
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpIqCompare = { kind: 'pieces', svgTitle: 'For X exponential with mean 1 and variance 1: true tail e to the minus a, Markov bound 1/a, Chebyshev bound 1/(a-1) squared', xRange: [0, 6], yRange: [0, 1.05], yStep: 0.25, xLetter: 'a', yLetter: 'P(X ≥ a)',
+    pieces: [
+      { fn: (a) => 1 / a, from: 1, to: 6, ends: [null, null], color: 'g', label: { text: 'Markov 1/a', x: 4.6, y: 1 / 4.6, pos: 'ne' } },
+      { fn: (a) => 1 / (a - 1) ** 2, from: 2, to: 6, ends: [null, null], color: 'r', label: { text: 'Chebyshev', x: 2.4, y: 1 / 1.96, pos: 'ne' } },
+      { fn: (a) => Math.exp(-a), from: 0, to: 6, ends: [null, null], color: 'f', label: { text: 'true e^(−a)', x: 1.2, y: Math.exp(-1.2), pos: 'ne' } }],
+    notes: [{ x: 3.3, y: 0.95, text: 'X exponential: mean 1, variance 1', pos: 'e' }, { x: 3.3, y: 0.87, text: 'Chebyshev wins past a ≈ 2.6', pos: 'e', color: 'r' }, { x: 3.3, y: 0.79, text: 'both stay above the true tail', pos: 'e', color: 'f' }],
+    caption: 'More information, a tighter bound, still not exact' };
   const demoUnits = {
     u_3_0: demoUnitFrame({
       svg: varianceDiagrams.default,
@@ -1162,6 +1170,11 @@ These results are deliberately general. They apply across wide classes of random
       text: 'The shaded tails are the actual probability of straying at least 3 from the mean and the bound is variance over 9, which sits well above them: the inequality is valid but loose because it uses only the variance. The Markov visualizer shows the even looser bound that uses only the mean. Change the deviation and compare bound and truth on the',
       href: '/probability/visual-tools/inequalities/chebyshev',
       linkText: 'Chebyshev inequality visualizer',
+    }),
+    iqCompare: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpIqCompare),
+      caption: 'Markov and Chebyshev against the true tail',
+      text: 'Take X exponential with mean 1 and variance 1, so the true tail is P(X &#8805; a) = e&#8315;&#7491;. Markov, using only the mean, gives 1/a. Chebyshev, using the variance too, gives 1/(a &#8722; 1)&#178; for a &gt; 1. Past a &#8776; 2.6 Chebyshev is the smaller bound, but both stay well above the true curve: each is a guarantee, not an estimate.',
     }),
   };
 
@@ -1266,6 +1279,8 @@ export default function ProbabilityInequalitiesPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-iqCompare'} dangerouslySetInnerHTML={{ __html: demoUnits.iqCompare }} />,
+          `Neither bound uses the exponential shape; only the true curve does.`,
         ]
     },
     {

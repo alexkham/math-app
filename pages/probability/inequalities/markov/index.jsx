@@ -668,6 +668,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import markovDiagrams from '@/app/components/probability/inequalities/markovDiagrams'
 
 
@@ -1144,6 +1145,12 @@ The result is deliberately simple and broadly applicable. It trades precision fo
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpMarkovCurve = { kind: 'pieces', svgTitle: 'Markov bound 2/a for a non-negative X with mean 2, against the true tail of an exponential with mean 2', xRange: [0, 10], yRange: [0, 1.05], xStep: 2, yStep: 0.25, xLetter: 'a', yLetter: 'P(X ≥ a)',
+    pieces: [
+      { fn: (a) => 2 / a, from: 2, to: 10, ends: ['closed', null], color: 'g', label: { text: 'Markov 2/a', x: 4, y: 0.5, pos: 'ne' } },
+      { fn: (a) => Math.exp(-a / 2), from: 0, to: 10, ends: [null, null], color: 'f', label: { text: 'exponential, mean 2', x: 2.6, y: Math.exp(-1.3), pos: 'ne' } }],
+    notes: [{ x: 5.2, y: 0.95, text: 'any X ≥ 0 with E[X] = 2', pos: 'e' }, { x: 5.2, y: 0.87, text: 'a = 6: bound 0.33, true 0.05', pos: 'e', color: 'g' }, { x: 5.2, y: 0.79, text: 'a ≤ 2: bound ≥ 1 says nothing', pos: 'e' }],
+    caption: 'Larger thresholds, smaller bounds, never below the truth' };
   const demoUnits = {
     u_2_0: demoUnitFrame({
       svg: markovDiagrams['markov-exponential'],
@@ -1158,6 +1165,11 @@ The result is deliberately simple and broadly applicable. It trades precision fo
       text: 'When the threshold is smaller than the mean the ratio is larger than 1, and a probability bound above 1 carries no information. Even for thresholds above the mean the bound is usually far from the truth because it ignores everything except the expected value. Move the threshold across the mean and watch the bound become useless on the',
       href: '/probability/visual-tools/inequalities/markov',
       linkText: 'Markov inequality visualizer',
+    }),
+    markovCurve: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpMarkovCurve),
+      caption: 'The bound across all thresholds',
+      text: 'For any non-negative X with E[X] = 2, Markov gives P(X &#8805; a) &#8804; 2/a. The navy curve is that bound for every threshold a; the blue curve is the true tail of one such variable, an exponential with mean 2. The bound shrinks as a grows and is never below the truth, but at a = 6 it allows 0.33 where the exponential has only 0.05. For a &#8804; 2 the bound is 1 or more and tells nothing.',
     }),
   };
 
@@ -1244,6 +1256,8 @@ export default function MarkovInequalityPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-markovCurve'} dangerouslySetInnerHTML={{ __html: demoUnits.markovCurve }} />,
+          `Doubling the threshold halves the bound: the curve is E[X]/a.`,
         ]
     },
     {

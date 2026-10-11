@@ -659,7 +659,7 @@ $$\\lim_{x \\to a} |f(x)| = \\left|\\lim_{x \\to a} f(x)\\right|$$
 
 The limit of an absolute value is the absolute value of the limit.
 
-The converse does not hold: $\\lim_{x \\to a} |f(x)}|$ may exist even when $\\lim_{x \\to a} f(x)$ does not. For example, $|(-1)^n|}$ equals $1$ for all $n$, but $(-1)^n$ has no limit as $n \\to \\infty$.
+The converse does not hold: $\\lim_{x \\to a} |f(x)|$ may exist even when $\\lim_{x \\to a} f(x)$ does not. For example, $|(-1)^n|$ equals $1$ for all $n$, but $(-1)^n$ has no limit as $n \\to \\infty$.
 `,
     before: ``,
     after: ``,

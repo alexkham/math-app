@@ -744,6 +744,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
@@ -1321,6 +1322,17 @@ They provide a controlled setting in which randomness can be analyzed, compared,
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const mdPx = (k, w) => k / w * 388;
+  const mdSumMax = [].concat(
+    [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((s) => ({ from: 0, to: (6 - Math.abs(s - 7)) / 36, color: 'f', dx: mdPx(s, 13) - 4 })),
+    [1, 2, 3, 4, 5, 6].map((k) => ({ from: 0, to: (2 * k - 1) / 36, color: 'r', dx: mdPx(k, 13) + 4 })));
+  const mdBin = (n, k) => { let c = 1; for (let i = 1; i <= k; i++) c = c * (n - k + i) / i; return c / 2 ** n; };
+  const mdCoinBars = Array.from({ length: 41 }, (_, k) => ({ from: 0, to: mdBin(40, k), color: 'f', dx: mdPx(k, 40) })).filter((b) => b.to > 0.001);
+  const fpModelsTwoVars = { kind: 'pieces', svgTitle: 'One model, two dice with 36 equally likely outcomes, two random variables: the sum has a triangle PMF on 2 to 12, the maximum rises as (2k - 1)/36 on 1 to 6', xRange: [-0.5, 12.5], yRange: [0, 0.34], xLetter: 'value',
+    pieces: [{ fn: () => 0, from: -0.5, to: -0.5, ends: [null, null], color: 'g' }],
+    yBars: mdSumMax,
+    notes: [{ x: 7.6, y: 0.31, text: 'same 36 outcomes', pos: 'e' }, { x: 7.6, y: 0.285, text: 'blue: X = sum', pos: 'e', color: 'f' }, { x: 7.6, y: 0.26, text: 'amber: Y = maximum', pos: 'e', color: 'r' }, { x: 7.6, y: 0.235, text: 'P(Y = 6) = 11/36', pos: 'e', color: 'r' }],
+    caption: 'Two measurements on one model, two distributions' };
   const demoUnits = {
     u_1_0: demoUnitFrame({
       svg: coinSampleSpaceDiagrams.none,
@@ -1342,6 +1354,11 @@ They provide a controlled setting in which randomness can be analyzed, compared,
       text: 'A simple discrete model lists every outcome explicitly: 36 ordered pairs, each with probability 1/36, and every event is a group of cells whose probability is a count over 36. Everything about the model can be checked by counting. Highlight events and count their cells on the',
       href: '/probability/visual-tools/dice-roll',
       linkText: 'dice roll sample space explorer',
+    }),
+    modelsTwoVars: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpModelsTwoVars),
+      caption: 'One model, two random variables',
+      text: 'The model is fixed: two fair dice, 36 equally likely ordered outcomes. Measure the sum and you get the blue PMF, a triangle on 2 to 12 peaked at 7. Measure the larger of the two faces instead and you get the amber PMF on 1 to 6, rising as (2k &#8722; 1)/36 up to P(max = 6) = 11/36. Nothing about the dice changed; only the function applied to each outcome did.',
     }),
   };
 
@@ -1443,6 +1460,8 @@ export default function ModelsPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-modelsTwoVars'} dangerouslySetInnerHTML={{ __html: demoUnits.modelsTwoVars }} />,
+          `A third choice, such as whether the sum is even, would give a third distribution on the same model.`,
         ]
     },
     {

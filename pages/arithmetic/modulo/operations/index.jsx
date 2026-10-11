@@ -838,6 +838,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 
 
@@ -1388,6 +1389,12 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const mdDot = (x, y, c, k) => ({ fn: () => y, from: x, to: x, ends: [k || 'closed', k || 'closed'], color: c });
+  const mdPow = Array.from({ length: 9 }, (_, i) => mdDot(i + 1, [2, 4, 1][i % 3], i % 3 === 0 ? 'r' : 'f'));
+  const fpPowCycle = { kind: 'pieces', svgTitle: 'Powers of 2 mod 7 for k = 1 to 9: 2, 4, 1 repeating with cycle length 3', xRange: [0, 10], yRange: [0, 6.5], xStep: 1, yStep: 1, xLetter: 'k', yLetter: '2ᵏ mod 7',
+    pieces: mdPow,
+    notes: [{ x: 1.2, y: 6.1, text: '2, 4, 1, 2, 4, 1, 2, 4, 1, …', pos: 'e' }, { x: 1.2, y: 5.4, text: 'amber: each new cycle starts', pos: 'e', color: 'r' }, { x: 1.2, y: 4.7, text: '2¹⁰⁰: 100 = 3 · 33 + 1, so 2', pos: 'e', color: 'f' }],
+    caption: 'Finitely many remainders force the powers to cycle' };
   const demoUnits = {
     within: demoUnitFrame({
       svg: modPieWheelDiagrams.idle,
@@ -1395,6 +1402,11 @@ const schemas = {
       text: 'Every number, however large, is reduced to one of the six slots on the wheel, and every operation is carried out slot by slot: adding 4 to a number moves its slot four places round, and the result never leaves the wheel. That is the finite arithmetic this page builds. Watch sums and products stay on the wheel on the',
       href: '/arithmetic/visual-tools/modular-wheel',
       linkText: 'modular arithmetic wheel',
+    }),
+    powCycle: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpPowCycle),
+      caption: 'The powers of 2 modulo 7 repeat',
+      text: 'Each dot is 2&#7503; mod 7 for k = 1 to 9. The values run 2, 4, 1 and then start over, because 2&#179; = 8 &#8801; 1 (mod 7) and multiplying by 2 again returns to 2. The amber dots mark where each new cycle begins, at k = 1, 4, 7. Any exponent can be reduced by the cycle length 3: 100 = 3 &#183; 33 + 1, so 2&#185;&#8304;&#8304; mod 7 equals 2&#185; mod 7 = 2.',
     }),
   };
 
@@ -1492,6 +1504,8 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+                  <div key={'unit-powCycle'} dangerouslySetInnerHTML={{ __html: demoUnits.powCycle }} />,
+            `With only 7 possible remainders, a repeat must come within the first 7 powers.`,
         ]
     },
     {

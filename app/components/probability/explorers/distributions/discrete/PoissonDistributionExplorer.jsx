@@ -33,6 +33,17 @@ export default function PoissonDistributionExplorer({
   maxK = 30
 }) {
   const [lambda, setLambda] = useState(initialLambda);
+  const [lambdaText, setLambdaText] = useState(String(initialLambda));
+  // Typed λ may go beyond the slider range (students often get λ > 20).
+  const maxTypedLambda = 100;
+
+  const handleLambdaText = (text) => {
+    setLambdaText(text);
+    const v = parseFloat(text);
+    if (!isNaN(v) && v >= minLambda && v <= maxTypedLambda) {
+      setLambda(v);
+    }
+  };
 
   const pmfData = useMemo(() => {
     const result = [];
@@ -145,8 +156,12 @@ export default function PoissonDistributionExplorer({
             min={minLambda}
             max={maxLambda}
             step={stepLambda}
-            value={lambda}
-            onChange={(e) => setLambda(parseFloat(e.target.value))}
+            value={Math.min(lambda, maxLambda)}
+            onChange={(e) => {
+              const v = parseFloat(e.target.value);
+              setLambda(v);
+              setLambdaText(String(v));
+            }}
             style={{
               width: '100%',
               height: '6px',
@@ -157,9 +172,119 @@ export default function PoissonDistributionExplorer({
             }}
           />
         </label>
+        <label style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          marginTop: '10px',
+          fontSize: '12px',
+          fontWeight: '600',
+          color: '#2c3e50'
+        }}>
+          Or type λ:
+          <input
+            type="number"
+            min={minLambda}
+            max={maxTypedLambda}
+            step="any"
+            value={lambdaText}
+            onChange={(e) => handleLambdaText(e.target.value)}
+            style={{
+              width: '90px',
+              padding: '6px 8px',
+              border: '2px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '13px',
+              boxSizing: 'border-box'
+            }}
+          />
+          <span style={{ fontWeight: '400', color: '#7f8c8d' }}>
+            ({minLambda} to {maxTypedLambda})
+          </span>
+        </label>
       </div>
     </>
   );
+
+  // Step-by-step working for the Probability Calculator (rendered by GenericDistributionExplorer).
+  const getSteps = (type, x, y) => {
+    const L = Number(lambda.toFixed(4));
+    const fmt = (p) => (p > 0 && p < 0.0001 ? p.toExponential(4) : p.toFixed(6));
+    const term = (i) => (
+      <>P(X = {i}) = e<sup>−{L}</sup> · {L}<sup>{i}</sup> / {i}! = {fmt(poissonPMF(i, lambda))}</>
+    );
+    const sumRange = (from, to) => {
+      let total = 0;
+      for (let i = from; i <= to; i++) total += poissonPMF(i, lambda);
+      return total;
+    };
+    const sumLines = (from, to) => {
+      const lines = [];
+      const n = to - from + 1;
+      if (n <= 6) {
+        for (let i = from; i <= to; i++) lines.push(term(i));
+      } else {
+        for (let i = from; i < from + 3; i++) lines.push(term(i));
+        lines.push(<>… {n - 4} more terms …</>);
+        lines.push(term(to));
+      }
+      return lines;
+    };
+    const sumBlock = (from, to) => {
+      const a = Math.max(from, 0);
+      if (a > to) return [<>No whole numbers fall in this range, so the probability is 0.</>];
+      return [
+        <>Add P(X = x) for x = {a} to {to}:</>,
+        ...sumLines(a, to),
+        <>Sum = <b>{fmt(Math.min(1, sumRange(a, to)))}</b></>
+      ];
+    };
+    const formula = <>Formula: P(X = k) = e<sup>−λ</sup> · λ<sup>k</sup> / k!, with λ = {L}</>;
+
+    if ([x, y].some((v) => v !== undefined && Math.abs(v) > 1000)) return null;
+
+    switch (type) {
+      case 'point':
+        if (x < 0) return [formula, <>X cannot be negative, so P(X = {x}) = 0.</>];
+        return [formula, term(x)];
+      case 'cumulative':
+        return [formula, ...sumBlock(0, x)];
+      case 'strictless':
+        return [formula, <>P(X &lt; {x}) = P(X ≤ {x - 1})</>, ...sumBlock(0, x - 1)];
+      case 'greaterequal': {
+        if (x <= 0) return [<>X is always ≥ 0, so P(X ≥ {x}) = 1.</>];
+        const below = sumRange(0, x - 1);
+        return [
+          formula,
+          <>Use the complement: P(X ≥ {x}) = 1 − P(X ≤ {x - 1})</>,
+          ...sumLines(0, x - 1),
+          <>P(X ≤ {x - 1}) = {fmt(below)}</>,
+          <>1 − {fmt(below)} = <b>{fmt(Math.max(0, 1 - below))}</b></>
+        ];
+      }
+      case 'strictgreater': {
+        if (x < 0) return [<>X is always ≥ 0, so P(X &gt; {x}) = 1.</>];
+        const below = sumRange(0, x);
+        return [
+          formula,
+          <>Use the complement: P(X &gt; {x}) = 1 − P(X ≤ {x})</>,
+          ...sumLines(0, x),
+          <>P(X ≤ {x}) = {fmt(below)}</>,
+          <>1 − {fmt(below)} = <b>{fmt(Math.max(0, 1 - below))}</b></>
+        ];
+      }
+      case 'range':
+        return [formula, ...sumBlock(x, y)];
+      case 'strictrange':
+        return [formula, <>P({x} &lt; X &lt; {y}) = P({x + 1} ≤ X ≤ {y - 1})</>, ...sumBlock(x + 1, y - 1)];
+      case 'leftinc':
+        return [formula, <>P({x} ≤ X &lt; {y}) = P({x} ≤ X ≤ {y - 1})</>, ...sumBlock(x, y - 1)];
+      case 'rightinc':
+        return [formula, <>P({x} &lt; X ≤ {y}) = P({x + 1} ≤ X ≤ {y})</>, ...sumBlock(x + 1, y)];
+      default:
+        return null;
+    }
+  };
 
   const onCalculatePointProbability = (k) => {
     return poissonPMF(k, lambda);
@@ -263,7 +388,8 @@ export default function PoissonDistributionExplorer({
     onCalculateRangeProbability,
     onCalculateStrictRangeProbability,
     onCalculateLeftIncRangeProbability,
-    onCalculateRightIncRangeProbability
+    onCalculateRightIncRangeProbability,
+    getSteps
   };
 
   return <GenericDistributionExplorer distribution={distributionData} />;

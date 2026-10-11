@@ -690,6 +690,8 @@ import '../../../../pages/pages.css';
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1118,6 +1120,23 @@ const schemas = {
   }
 }
 
+  const fbHowManyQuarters = { kind: 'bars', svgTitle: 'How many quarters fit in one half: two, so 1/2 divided by 1/4 is 2', rows: [{ n: 2, k: 1, label: '1/2', partLabels: true }, { n: 4, k: 2, label: '1/4, 1/4', color: 'r', partLabels: true }],
+    notes: [{ text: 'two quarters cover the same length as one half' }, { text: '1/2 ÷ 1/4 = 1/2 × 4 = 2', color: 'r' }], labelWidth: 84, caption: 'Division counts how many pieces fit' };
+  const fbHalveFraction = { kind: 'bars', svgTitle: '3/4 divided by 2: each quarter split in half, 3 of the 8 eighths, 3/8', rows: [{ n: 4, k: 3, label: '3/4', partLabels: true }, { n: 8, k: 3, label: '÷ 2 = 3/8', color: 'r', partLabels: true }],
+    notes: [{ text: 'halving 3 quarters leaves 3 parts half as big' }, { text: '3/4 × 1/2 = 3/8', color: 'r' }], labelWidth: 84, caption: 'Dividing by a whole number makes the parts smaller' };
+  const demoUnits = {
+    howManyQuarters: demoUnitFrame({
+      svg: renderFractionBar(fbHowManyQuarters),
+      caption: 'How many quarters fit in a half',
+      text: '1/2 &#247; 1/4 asks how many quarters fit into one half. On bars of the same whole, the half covers exactly the same length as two quarters, so the answer is 2. Multiplying by the reciprocal gives the same count: 1/2 &#215; 4/1 = 4/2 = 2.',
+    }),
+    halveFraction: demoUnitFrame({
+      svg: renderFractionBar(fbHalveFraction),
+      caption: 'Three quarters divided by 2',
+      text: 'Dividing 3/4 by 2 shares the shaded three quarters into two equal halves. Cutting every quarter in two turns the bar into eighths; half of the 6 shaded eighths is 3 eighths. So 3/4 &#247; 2 = 3/8, the same as 3/4 &#215; 1/2: dividing by a whole number makes the result smaller.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -1125,6 +1144,7 @@ return {
     capstoneTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Dividing Fractions: Keep Change Flip Method | Learn Math Class",
       description: "Learn to divide fractions using keep-change-flip: reciprocals, dividing by whole numbers, mixed numbers, cross-canceling, and real-world applications with examples.",
@@ -1137,7 +1157,7 @@ return {
    }
 
 
-export default function DividingPage({seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas}) {
+export default function DividingPage({seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1172,6 +1192,8 @@ export default function DividingPage({seoData, sectionsContent, introContent, ca
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-howManyQuarters'} dangerouslySetInnerHTML={{ __html: demoUnits.howManyQuarters }} />,
+          `Dividing by a fraction less than 1 gives more than you started with: two pieces from one half.`,
         ]
     },
     {
@@ -1180,6 +1202,8 @@ export default function DividingPage({seoData, sectionsContent, introContent, ca
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+                  <div key={'unit-halveFraction'} dangerouslySetInnerHTML={{ __html: demoUnits.halveFraction }} />,
+          `In the same way 5/6 ÷ 3 = 5/18: each sixth is cut into three.`,
         ]
     },
     {

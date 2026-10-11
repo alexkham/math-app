@@ -4073,7 +4073,7 @@ const schemas = {
 
   const demoUnits = {
     rowPicture: demoUnitFrame({
-      svg: vectorPictureDiagrams.rows.allPieces,
+      svg: vectorPictureDiagrams.rows.allPieces.replace(/url\(#vpd-r-/g, 'url(#vpd-r4-'),
       caption: 'The product assembled from the rows',
       text: 'Every piece drawn here is a row of the right-hand factor scaled by an entry of the left-hand row, laid tail to head until the row of the product is reached. Read this way the product never mentions a single entry: one whole row is consumed per step, which is what the row interpretation above claims and what makes the count of steps equal to the number of rows rather than to the number of entries. Follow one row at a time on the',
       href: '/linear-algebra/visual-tools/matrix-multiplication-rows',

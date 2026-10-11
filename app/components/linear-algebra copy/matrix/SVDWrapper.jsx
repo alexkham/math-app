@@ -570,7 +570,7 @@ export function buildScenes(values) {
       (condition !== null
         ? `Condition number σ₁/σ${SUBS[rank - 1]} = ${fmt4(condition)}${condition > 100 ? ' — ill-conditioned' : condition < 3 ? ' — well-conditioned' : ''}. `
         : 'Condition number ∞: the matrix is singular, some direction is collapsed to zero. ') +
-      `The unit ${n === 2 ? 'circle' : 'sphere'} in the input maps to ${m === 2 ? 'an ellipse' : 'an ellipsoid'} with semi-axes ` +
+      `The unit ${n === 2 ? 'circle' : 'sphere'} in the input maps to ${Math.min(m, n) === 2 ? 'an ellipse' : 'an ellipsoid'} with semi-axes ` +
       `${sig.slice(0, rank).map((s) => sqrtStr(s)).join(', ')} along u${SUBS[0]}${rank > 1 ? `, …, u${SUBS[rank - 1]}` : ''}. ` +
       (m === n && rank === n ? 'A is invertible with A⁻¹ = V Σ⁻¹ Uᵀ. ' : 'The pseudoinverse A⁺ = V Σ⁺ Uᵀ inverts the non-zero singular values and gives least-squares solutions. ') +
       'Columns u₁…u_r span the column space, v₁…v_r the row space, the rest of V the null space, the rest of U the left null space: all four fundamental subspaces, orthonormally.',
@@ -854,6 +854,7 @@ export default function SVDWrapper({
         <ScenePlayer
           scenes={scenes}
           defaultSpeed={defaultSpeed}
+          speedOptions={[{ value: defaultSpeed + 800, label: 'Slow' }, { value: defaultSpeed, label: 'Normal' }, { value: 700, label: 'Fast' }, { value: 400, label: 'Very Fast' }]}
           showSpeedSelector={true}
           showStepIndicator={true}
           showStepLog={true}

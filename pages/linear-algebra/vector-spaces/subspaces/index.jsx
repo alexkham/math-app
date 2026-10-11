@@ -823,6 +823,7 @@ import IdentitySheet from '@/app/components/infographics/linear-algebra/Identity
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 
@@ -1465,6 +1466,7 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+
   const demoUnits = {
     geometry: demoUnitFrame({
       svg: [spanIndependenceDiagrams.independent, spanIndependenceDiagrams.dependent],
@@ -1484,6 +1486,13 @@ const schemas = {
       svg: subspacesDiagrams.trivial,
       caption: 'A null space that is just {0}',
       text: 'An invertible matrix: reducing it leaves a pivot in every column and no free variable, so the only solution of Ax = 0 is x = 0. Its null space is the zero subspace {0} &#8212; the smallest subspace there is, and a subspace all the same. Compare it with a matrix whose null space is a line on the',
+      href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
+      linkText: 'four fundamental subspaces visualizer',
+    }),
+    colspace: demoUnitFrame({
+      svg: subspacesDiagrams.colspace,
+      caption: 'Pivot columns as a basis for the column space',
+      text: 'Row reduction marks the pivot columns; the matching columns of the original matrix, not of the echelon form, span every output Ax and form a basis for Col(A). Their number is the rank. Cycle through all four subspaces of this matrix on the',
       href: '/linear-algebra/visual-tools/four-fundamental-subspaces',
       linkText: 'four fundamental subspaces visualizer',
     }),
@@ -1587,6 +1596,8 @@ export default function SubspacesPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-colspace'} dangerouslySetInnerHTML={{ __html: demoUnits.colspace }} />,
+          `Ax = b is solvable exactly when b is a combination of these pivot columns.`,
         ]
     },
     {

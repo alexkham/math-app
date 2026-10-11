@@ -392,6 +392,7 @@ export function buildScenes(values, startVec, iterations = DEFAULT_ITERATIONS) {
   const exactStr = info.dominant !== null ? fmt(info.dominant) : null;
   const err = info.dominant !== null ? Math.abs(last - info.dominant) : null;
   const trail = estimates.map((e) => fmt(e)).join(', ');
+  const vShow = info.tie || info.complexTop ? null : info.vec;   // no 'x ≈ exact v' when nothing converges
 
   let verdict;
   if (info.complexTop) {
@@ -402,7 +403,7 @@ export function buildScenes(values, startVec, iterations = DEFAULT_ITERATIONS) {
   } else if (info.tie) {
     verdict =
       `Two eigenvalues tie in modulus, ${info.roots.map(rootStr).join(' and ')}. Neither component outgrows the other, so ` +
-      'the vector oscillates between two directions and the estimates alternate instead of converging. Shifting the matrix ' +
+      'the vector oscillates between two directions and the estimates never single out one eigenvalue (the scale factor, read off the largest entry, can even sit still). Shifting the matrix ' +
       '(iterating on A − sI) breaks the tie.';
   } else {
     verdict =
@@ -422,16 +423,16 @@ export function buildScenes(values, startVec, iterations = DEFAULT_ITERATIONS) {
     matrices: {
       A: matA,
       X: xVec(x, estimates.length),
-      ...(info.vec ? { V: colVec('v', info.vec, 'exact v', cellPx, font) } : {})
+      ...(vShow ? { V: colVec('v', vShow, 'exact v', cellPx, font) } : {})
     },
     layout: [
       { type: 'matrix', ref: 'A' },
       { type: 'matrix', ref: 'X' },
-      ...(info.vec ? [{ type: 'operator', symbol: '≈' }, { type: 'matrix', ref: 'V' }] : [])
+      ...(vShow ? [{ type: 'operator', symbol: '≈' }, { type: 'matrix', ref: 'V' }] : [])
     ],
     highlights: {
       X: { cells: x.map((_, i) => [i, 0, info.complexTop || info.tie ? 'secondary' : 'primary']) },
-      ...(info.vec ? { V: { cells: info.vec.map((_, i) => [i, 0, 'target']) } } : {})
+      ...(vShow ? { V: { cells: vShow.map((_, i) => [i, 0, 'target']) } } : {})
     }
   });
 
@@ -741,6 +742,7 @@ export default function PowerIterationWrapper({
         <ScenePlayer
           scenes={scenes}
           defaultSpeed={defaultSpeed}
+          speedOptions={[{ value: defaultSpeed + 800, label: 'Slow' }, { value: defaultSpeed, label: 'Normal' }, { value: 700, label: 'Fast' }, { value: 400, label: 'Very Fast' }]}
           showSpeedSelector={true}
           showStepIndicator={true}
           showStepLog={true}

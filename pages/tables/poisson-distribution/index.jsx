@@ -21,7 +21,7 @@ export async function getStaticProps(){
 
     obj1:{
       title:`What is the Poisson Distribution?`,
-      content:`The Poisson distribution is a discrete probability distribution that models the number of events occurring in a fixed interval of time or space when events happen independently at a constant average rate. It's characterized by a single parameter λ (lambda), representing both the mean and variance. The distribution answers questions like "How many customers arrive per hour?" or "How many defects occur per product batch?"`,
+      content:`The Poisson distribution is a discrete probability distribution that models the number of events occurring in a fixed interval of time or space when events happen independently at a constant average rate. It's characterized by a single parameter λ (lambda), representing both the mean and variance. The distribution answers questions like "How many customers arrive per hour?" or "How many defects occur per product batch?" To get an exact probability for any λ and k with step-by-step working, use the [Poisson distribution calculator](!/probability/visual-tools/distributions/poisson).`,
       before:``,
       after:``,
     },

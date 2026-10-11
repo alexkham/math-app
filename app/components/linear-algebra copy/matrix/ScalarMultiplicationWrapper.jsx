@@ -431,6 +431,7 @@ export default function ScalarMultiplicationWrapper({
   // the prop changes from outside.
   const [scenarioState, setScenarioState] = useState(defaultScenario);
   const scenario = locked ? mode : scenarioState;
+  const shownSubtitle = scenario === 'vectors' && subtitle === 'Symbolic visualization of k · A = C, cell by cell.' ? 'Symbolic visualization of k · u = w, component by component.' : subtitle;
 
   const [vecN, setVecN] = useState(defaultVecN);
   const [rows, setRows] = useState(defaultRows);
@@ -479,7 +480,7 @@ export default function ScalarMultiplicationWrapper({
           )} */}
           {subtitle && (
             <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
-              {subtitle}
+              {shownSubtitle}
             </p>
           )}
         </div>

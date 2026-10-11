@@ -16,6 +16,7 @@ import { renderEuclideanChain } from '../../../../app/utils/illustrations/arithm
 import { renderPrimeFactorization } from '../../../../app/utils/illustrations/arithmetic/divisibility/primeFactorization'
 import { renderRectangleTile } from '../../../../app/utils/illustrations/arithmetic/divisibility/rectangleTile'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+
 import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
 
 
@@ -730,6 +731,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const prStyle = { primary: '#06357A', secondary: '#2563EB', result: '#FDE7C8', resultStroke: '#B45309', fill: '#FDE7C8', stroke: '#B45309', text: '#1E3A5F', textMuted: '#64748B', neutral: '#64748B', border: '#5A7299', negation: '#C0392B' };
+  const fsCoprime = { kind: 'two-set', setA: 8, setB: 15, style: prStyle, info: { lines: [
+    { kind: 'formula', text: 'factors of 8 and 15', role: 'primary' }, { kind: 'separator' },
+    { kind: 'note', text: 'only 1 is shared' }, { kind: 'formula', text: 'gcd(8, 15) = 1', role: 'result' }, { kind: 'note', text: 'coprime, yet neither' }, { kind: 'note', text: 'number is prime' }] } };
   const demoUnits = {
     euclid: demoUnitFrame({
       svg: euclideanVisualizerDiagrams.classic,
@@ -737,6 +742,11 @@ const schemas = {
       text: 'Each line replaces the pair (a, b) by (b, a mod b): the remainder 42 becomes the new divisor, then 21, and when the remainder reaches 0 the divisor standing there, 21, is the answer. Three divisions did the work that factoring 252 and 105 would have taken much longer to do. Watch the pairs shrink for any two numbers on the',
       href: '/arithmetic/visual-tools/euclidean-algorithm',
       linkText: 'Euclidean algorithm visualizer',
+    }),
+    coprime: demoUnitFrame({
+      svg: renderFactorSet(fsCoprime),
+      caption: 'Coprime without being prime',
+      text: 'The factors of 8 are 1, 2, 4, 8; the factors of 15 are 1, 3, 5, 15. The only chip the two rows share is 1, so gcd(8, 15) = 1 and the numbers are coprime. Neither 8 nor 15 is prime: coprimality is about the pair having no common factor, not about either number on its own.',
     }),
   };
 
@@ -937,6 +947,8 @@ rtGcdObj10Tiles, demoUnits}) {
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-coprime'} dangerouslySetInnerHTML={{ __html: demoUnits.coprime }} />,
+          `Compare 9 and 12, whose rows share 1 and 3: gcd = 3, not coprime.`,
         ]
     },
     {

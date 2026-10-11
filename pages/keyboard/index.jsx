@@ -278,8 +278,8 @@ The interface combines click-based symbol insertion with direct keyboard typing.
       schemas,
       toolLinks,
       seoData: {
-        title: "Mathematical Keyboard | Type Math Symbols & Greek Letters",
-        description: "Type mathematical symbols, Greek letters, and special characters instantly. 18 specialized keyboards with subscript/superscript modes. Free online tool for students and educators.",
+        title: "Math Keyboard Online – Type & Copy Math Symbols | Learn Math Class",
+        description: "Free online math keyboard. Type and copy math symbols, Greek letters, fractions, subscripts and superscripts. 18 symbol keyboards, no install, works in any browser.",
         keywords: keyWords.join(", "),
         url: "/keyboard",
         name: "Interactive Mathematical Keyboard"
@@ -350,7 +350,7 @@ export default function KeyboardPage({ seoData, sectionsContent, introContent, s
      
       
       
-      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Mathematical Keyboard</h1>
+      <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Math Keyboard</h1>
        <div style={{transform:'scale(0.95)',margin:'auto',width:'80%'}}>
         <NewMultipleTypeWriter toolLinks={toolLinks}/>
       </div>

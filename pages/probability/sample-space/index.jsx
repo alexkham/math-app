@@ -571,6 +571,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 
@@ -1078,6 +1079,10 @@ Since "all possible outcomes" appears directly in the formula, it makes sense to
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const ogOrderMatters = { kind: 'dice', svgTitle: 'Two dice: the unordered result one 1 and one 2 covers two ordered outcomes, (1,2) and (2,1); a double 1 covers only (1,1)',
+    events: [{ label: '{1, 2}: one 1, one 2', test: (a, b) => (a === 1 && b === 2) || (a === 2 && b === 1), color: 'r' }, { label: '{1, 1}: double 1', test: (a, b) => a === 1 && b === 1, color: 'f' }],
+    notes: [{ text: '{1, 2}: 2 cells, P = 2/36', color: 'r' }, { text: '{1, 1}: 1 cell, P = 1/36', color: 'f' }, { text: '21 unordered results,' }, { text: 'not equally likely' }],
+    caption: 'Drop the order and the outcomes stop being equally likely' };
   const demoUnits = {
     u_definition_0: demoUnitFrame({
       svg: diceSampleSpaceDiagrams.none,
@@ -1099,6 +1104,11 @@ Since "all possible outcomes" appears directly in the formula, it makes sense to
       text: 'Repeating a two-outcome experiment three times gives a sample space of eight ordered sequences, each with probability 1/8. Listing them explicitly is the first step in every question about the experiment. Group the sequences by number of heads on the',
       href: '/probability/visual-tools/coin-toss',
       linkText: 'coin toss sample space explorer',
+    }),
+    orderMatters: demoUnitFrame({
+      svg: renderOutcomeGrid(ogOrderMatters),
+      caption: 'Ignoring order changes the probabilities',
+      text: 'Two dice have 36 equally likely ordered outcomes. If the order is dropped, the result “one 1 and one 2” covers two of them, (1,2) and (2,1), while “double 1” covers only (1,1). The 21 unordered results are therefore not equally likely: P({1, 2}) = 2/36 but P({1, 1}) = 1/36. Treating them as 21 equal outcomes would give 1/21 to each and get both wrong.',
     }),
   };
 
@@ -1229,6 +1239,8 @@ export default function SampleSpacePage({
           sectionsContent.mistakes.content,
           <div key={'mistakes-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+                  <div key={'unit-orderMatters'} dangerouslySetInnerHTML={{ __html: demoUnits.orderMatters }} />,
+            `Counting with ordered pairs keeps every outcome at 1/36, so probabilities can be found by counting cells.`,
         ]
     },
     {

@@ -1273,6 +1273,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import complexAddSubDiagrams from '@/app/components/calculators/complex-numbers/complexAddSubDiagrams'
 import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
@@ -2235,6 +2236,7 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
   const demoUnits = {
     geom: demoUnitFrame({
       svg: conjugateModulusDiagrams.start,
@@ -2256,6 +2258,13 @@ const schemas = {
       text: 'Multiplying numerator and denominator by z&#772;&#8322; turns the denominator into the real number |z&#8322;|&#178;, and the picture shows the quotient at the angle &#952;&#8321; &#8722; &#952;&#8322; that results. Division is multiplication by the conjugate followed by a real scaling. Work any quotient through on the',
       href: '/complex-numbers/visual-tools/division',
       linkText: 'complex division tool',
+    }),
+    conjugatePair: demoUnitFrame({
+      svg: complexAddSubDiagrams.conjugatePair,
+      caption: 'z + z&#772; on the real axis, z &#8722; z&#772; on the imaginary axis',
+      text: 'z = 3 + 2i and its conjugate 3 &#8722; 2i are mirror images across the real axis. Their sum, 6, cancels the imaginary parts and lands on the real axis; their difference, 4i, cancels the real parts and lands on the imaginary axis &#8212; the first two identities of this section, drawn. Move z and watch both results stay on their axes in the',
+      href: '/complex-numbers/visual-tools/addition-subtraction',
+      linkText: 'complex addition and subtraction tool',
     }),
   };
 
@@ -2391,6 +2400,8 @@ export default function ComplexConjugatePage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-conjugatePair'} dangerouslySetInnerHTML={{ __html: demoUnits.conjugatePair }} />,
+          `Halving them gives Re(z) = 3 and Im(z) = 2 back.`,
         ]
     },
     {

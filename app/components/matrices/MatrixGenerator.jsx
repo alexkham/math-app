@@ -312,7 +312,7 @@ const MatrixGenerator = ({ explanations = defaultExplanations }) => {
           {matrix && explanations[matrixType] && (
             <>
               <h3 className={styles.title}>
-                {matrixType.charAt(0).toUpperCase() + matrixType.slice(1)} Matrix
+                {matrixType.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/^./, (c) => c.toUpperCase())} Matrix
               </h3>
               <div className={styles.description}>
                 {processContent(explanations[matrixType].description)}

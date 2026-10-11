@@ -1539,7 +1539,7 @@ schemas: {
       componentName: 'PoissonDistributionExplorer',
       title: 'Poisson Distribution Calculator | Event Rate Calculator | Learn Math Class',
       description: 'Calculate Poisson probabilities for events in fixed intervals. Interactive rate parameter λ control with PMF/CDF visualization and comprehensive probability tools.',
-      h1Title: 'Poisson Distribution Explorer',
+      h1Title: 'Poisson Distribution Calculator',
       url: '/probability/visual-tools/distributions/poisson',
       svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><text x="64" y="18" font-family="Georgia,serif" font-size="12" fill="#FAC775" text-anchor="middle" font-style="italic">&#955;</text><rect x="14" y="52" width="7" height="10" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><rect x="22" y="36" width="7" height="26" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><rect x="30" y="26" width="7" height="36" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><rect x="38" y="32" width="7" height="30" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><rect x="46" y="44" width="7" height="18" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><rect x="54" y="53" width="7" height="9" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><rect x="62" y="58" width="7" height="4" fill="#FAC775" fill-opacity="0.75" stroke="#854F0B" stroke-width="0.8"/><line x1="10" y1="62" x2="74" y2="62" stroke="#B5D4F4" stroke-width="1.1"/></svg>`,
       category: 'Distributions',

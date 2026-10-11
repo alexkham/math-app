@@ -1685,7 +1685,7 @@ const schemas = {
   const VENN_TOOL = '/set-theory/visual-tools/two-sets-basic-venn';
   // Authored figures for the two concepts no set-theory tool demonstrates.
   // setElements draws them; these are data only. Package doc beside the renderer.
-  const seEquivalence = {
+  const seEquivalence = {style: { primary: '#2563EB', primaryLight: '#E3ECFD', secondary: '#06357A', secondaryLight: '#DCE4F0', result: '#B45309', resultFill: '#FDF3E3', text: '#1E3A5F' }, 
     kind: 'pairing', width: 560, height: 290,
     svgTitle: 'Equivalence is decided by pairing elements off, not by comparing them',
     panels: [
@@ -1695,7 +1695,7 @@ const schemas = {
         pairs: [[0, 0], [1, 1]], verdict: 'one left over: |A| \u2260 |C|', ok: false },
     ],
   };
-  const sePartition = {
+  const sePartition = {style: { primary: '#2563EB', primaryLight: '#E3ECFD', secondary: '#06357A', secondaryLight: '#DCE4F0', result: '#B45309', resultFill: '#FDF3E3', text: '#1E3A5F' }, 
     kind: 'partition', width: 520, height: 280,
     svgTitle: 'A partition cuts a set into blocks that cover it with no overlap',
     setLabel: 'S = {1, 2, 3, 4, 5}',

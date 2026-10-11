@@ -251,7 +251,7 @@ export function buildScenes(vectors, wIn) {
     title: `Is w in span{${names.join(', ')}}?`,
     formula:
       `${vectors.map((v, i) => `${names[i]} = ${vecStr(v)}`).join(', ')}, and the test vector w = ${vecStr(w)}, all in R${sup(n)}. ` +
-      `The span is every combination c₁v₁ + … + c${SUBS[k - 1]}v${SUBS[k - 1]}, and w is in it exactly when some coefficients c make ` +
+      `The span is every combination ${k === 1 ? 'c₁v₁' : k === 2 ? 'c₁v₁ + c₂v₂' : `c₁v₁ + … + c${SUBS[k - 1]}v${SUBS[k - 1]}`}, and w is in it exactly when some coefficients c make ` +
       'V c = w with the vᵢ as the columns of V. So the question is whether a linear system is consistent, and row ' +
       'reduction answers it — after first finding how big the span is.',
     matrices: { V: matV(narrow), W: vecW(narrow) },
@@ -672,7 +672,7 @@ export default function SpanMembershipWrapper({
         <div>
           <FieldLabel>Vectors and w</FieldLabel>
           <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-            {vectors.map((v, j) => column(`v${SUBS[j]}`, v, (i) => `v${j},${i}`, (i, raw) => editV(j, i, raw)))}
+            {vectors.map((v, j) => <React.Fragment key={j}>{column(`v${SUBS[j]}`, v, (i) => `v${j},${i}`, (i, raw) => editV(j, i, raw))}</React.Fragment>)}
             <span style={{ color: '#94a3b8', alignSelf: 'center' }}>|</span>
             {column('w', w, (i) => `w${i}`, editW, 'sm-w')}
           </div>
@@ -683,6 +683,7 @@ export default function SpanMembershipWrapper({
         <ScenePlayer
           scenes={scenes}
           defaultSpeed={defaultSpeed}
+          speedOptions={[{ value: defaultSpeed + 800, label: 'Slow' }, { value: defaultSpeed, label: 'Normal' }, { value: 700, label: 'Fast' }, { value: 400, label: 'Very Fast' }]}
           showSpeedSelector={true}
           showStepIndicator={true}
           showStepLog={true}

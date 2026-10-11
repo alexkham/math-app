@@ -9,6 +9,7 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
@@ -976,6 +977,19 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const pfBox = (h, a, b, c) => [
+    { fn: () => h, from: a, to: b, ends: [null, null], color: c },
+    { fn: (x) => (x - a) * 1e6, from: a, to: a + h / 1e6, ends: [null, null], color: c },
+    { fn: (x) => (b - x) * 1e6, from: b - h / 1e6, to: b, ends: [null, null], color: c }];
+  const pfPx = (x, w) => x / w * 388;
+  const fpDensityTall = { kind: 'pieces', svgTitle: 'Uniform density on [0, 0.5]: height 2, width 0.5, total area 1', xRange: [-0.25, 1.4], yRange: [0, 2.5], xStep: 0.25, yStep: 0.5, xLetter: 'x', yLetter: 'f(x)',
+    pieces: pfBox(2, 0, 0.5, 'f'),
+    notes: [{ x: 0.62, y: 2.2, text: 'height f(x) = 2: above 1', pos: 'e', color: 'f' }, { x: 0.62, y: 1.95, text: 'width 0.5', pos: 'e' }, { x: 0.62, y: 1.7, text: 'area 0.5 · 2 = 1', pos: 'e', color: 'r' }, { x: 0.62, y: 1.2, text: 'P(0.1 < X < 0.2) = 0.1 · 2 = 0.2', pos: 'e' }],
+    caption: 'Density can exceed 1; only the total area must be 1' };
+  const fpStretch = { kind: 'pieces', svgTitle: 'X uniform on [0, 1] with density 1, and Y = 3X uniform on [0, 3] with density 1/3: three times as wide, a third as tall', xRange: [-0.3, 3.6], yRange: [0, 1.3], xStep: 0.5, yStep: 0.5, xLetter: 'value', yLetter: 'density',
+    pieces: [].concat(pfBox(1, 0, 1, 'f'), pfBox(1 / 3, 0, 3, 'r')),
+    notes: [{ x: 1.1, y: 1.0, text: 'X uniform on [0, 1]: f = 1', pos: 'e', color: 'f' }, { x: 1.1, y: 0.8, text: 'Y = 3X on [0, 3]: f = 1/3', pos: 'e', color: 'r' }, { x: 1.1, y: 0.6, text: 'both areas equal 1', pos: 'e' }],
+    caption: 'Stretching by 3 divides the density by 3' };
   const demoUnits = {
     u_1_0: demoUnitFrame({
       svg: continuousPdfDiagrams['normal-pdf'],
@@ -997,6 +1011,16 @@ const schemas = {
       text: 'The catalogue of continuous densities includes this decaying curve for waiting times, the flat uniform density and the normal bell; each is a different rule for spreading unit area over the line. The explorer marks the mean on each, here at 1 over lambda. Compare the three shapes and their parameters on the',
       href: '/probability/visual-tools/distributions/exponential',
       linkText: 'distribution explorer',
+    }),
+    densityTall: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpDensityTall),
+      caption: 'A density taller than 1',
+      text: 'The uniform density on [0, 0.5] from the page\'s example. It must enclose area 1 over an interval only 0.5 wide, so its height is 2. That breaks no rule: the axioms ask only that f is never negative and that the total area is 1. Probabilities come from areas, never from heights: P(0.1 &lt; X &lt; 0.2) = 0.1 &#183; 2 = 0.2.',
+    }),
+    stretch: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpStretch),
+      caption: 'Change of variables: Y = 3X',
+      text: 'X is uniform on [0, 1] with density 1 (blue). Multiplying by 3 spreads the same probability over [0, 3], three times as wide, so the density of Y = 3X must drop to 1/3 (amber) for the area to stay 1. This is the factor |d/dy g&#8315;&#185;(y)| = 1/3 in the change-of-variables formula.',
     }),
   };
 
@@ -1070,6 +1094,8 @@ export default function PDFPage({seoData, sectionsContent, introContent, faqQues
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+                  <div key={'unit-densityTall'} dangerouslySetInnerHTML={{ __html: demoUnits.densityTall }} />,
+          `Narrow the interval to [0, 0.1] and the height rises to 10, still a valid density.`,
         ]
     },
     {
@@ -1118,6 +1144,8 @@ export default function PDFPage({seoData, sectionsContent, introContent, faqQues
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+                  <div key={'unit-stretch'} dangerouslySetInnerHTML={{ __html: demoUnits.stretch }} />,
+          `A shift, Y = X + 5, moves the rectangle without changing its height.`,
         ]
     },
     {

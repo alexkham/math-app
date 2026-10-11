@@ -273,7 +273,7 @@ export function buildScenes(values) {
 
   scenes.push({
     phase: 'intro',
-    title: `Spectral decomposition of a ${n}×${n} symmetric matrix`,
+    title: `Spectral decomposition of a ${n}×${n} ${isSymmetric(A) ? 'symmetric ' : ''}matrix`,
     formula:
       'For a symmetric matrix the eigenvalues are real and the eigenvectors can be chosen orthonormal. ' +
       'The plan: find the eigenvalues, one unit eigenvector for each (orthogonalizing inside any repeated eigenspace), ' +
@@ -348,13 +348,14 @@ export function buildScenes(values) {
       cellStyle: (i, j) => (i === j ? { color: '#1e40af' } : null)
     });
     const matR = numMatrix('r', ns.R, 'rref', narrow.cellPx, narrow.font);
+    const shiftStr = (l) => (l < 0 ? `A + ${fmt(-l)}I` : `A − ${fmt(l)}I`);   // never "A − −1I"
     const matV = numMatrix('v', A.map((_, i) => vecs.map((v) => v[i])), vecs.length > 1 ? 'eigenvectors' : 'v', narrow.cellPx, narrow.font);
 
     scenes.push({
       phase: 'eigvec',
-      title: `λ = ${fmt(lam)}: null space of A − ${fmt(lam)}I`,
+      title: `λ = ${fmt(lam)}: null space of ${shiftStr(lam)}`,
       formula:
-        `Row reduce A − ${fmt(lam)}I: ${ns.pivotCols.length} pivot${ns.pivotCols.length === 1 ? '' : 's'}, ` +
+        `Row reduce ${shiftStr(lam)}: ${ns.pivotCols.length} pivot${ns.pivotCols.length === 1 ? '' : 's'}, ` +
         `${vecs.length} free column${vecs.length === 1 ? '' : 's'}, so the eigenspace has dimension ${vecs.length}` +
         (algMult > 1 ? ` — equal to the multiplicity ${algMult}, as the spectral theorem guarantees for symmetric matrices` : '') +
         `. Eigenvector${vecs.length === 1 ? '' : 's'}: ${vecs.map(vecStr).join(' and ')}, scaled to small integers.` +
@@ -839,6 +840,7 @@ export default function SpectralWrapper({
         <ScenePlayer
           scenes={scenes}
           defaultSpeed={defaultSpeed}
+          speedOptions={[{ value: defaultSpeed + 800, label: 'Slow' }, { value: defaultSpeed, label: 'Normal' }, { value: 700, label: 'Fast' }, { value: 400, label: 'Very Fast' }]}
           showSpeedSelector={true}
           showStepIndicator={true}
           showStepLog={true}

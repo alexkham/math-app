@@ -2225,7 +2225,7 @@ The unit circle reveals structure that [right triangle trigonometry](!/trigonome
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
   // Authored figures. circleArc.v2 draws them; these are data only.
   // Package doc: app/utils/illustrations/trigonometry/circle/circleArc.v2.md
-  const caRadiusOne = {
+  const caRadiusOne = {style: { a: '#B45309', b: '#2563EB', c: '#06357A', primary: '#2563EB', fill: '#2563EB', result: '#B45309' }, 
     kind: 'inscribed', width: 540, height: 330, angleDeg: 40, ratioY: 296, dividers: [286],
     svgTitle: 'Radius 1 is what removes the denominator from the ratios',
     panels: [
@@ -2233,7 +2233,7 @@ The unit circle reveals structure that [right triangle trigonometry](!/trigonome
       { cx: 420, cy: 150, r: 62, radiusLabel: '1', title: 'radius 1', ratios: ['sin \u03b8 = y', 'cos \u03b8 = x'] },
     ],
   };
-  const caQuadrantal = {
+  const caQuadrantal = {style: { a: '#B45309', b: '#2563EB', c: '#06357A', primary: '#2563EB', fill: '#2563EB', result: '#B45309' }, 
     kind: 'axisPoints', width: 540, height: 390, cx: 270, cy: 180, r: 104,
     svgTitle: 'At each quadrantal angle exactly two functions are undefined',
     points: [

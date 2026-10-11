@@ -2229,7 +2229,7 @@ For example, the angles $40°$ and $50°$ are complementary ($40° + 50° = 90°
   // panel + tool link, one frame. Rendered as content-array items.
   // Authored figures. circleArc draws them; these are data only.
   // Package doc: app/utils/illustrations/trigonometry/circle/circleArc.md
-  const caOneRadian = {
+  const caOneRadian = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'arc', width: 420, height: 300, cx: 180, cy: 160, r: 110, from: 0, to: 1,
     svgTitle: 'One radian is the angle whose arc equals the radius',
     tickRadii: true, tickArc: true, angleRadius: 34, angleLabel: '\u03b8 = 1', angleLabelOut: 26,
@@ -2240,7 +2240,7 @@ For example, the angles $40°$ and $50°$ are complementary ($40° + 50° = 90°
       { text: 'the angle is one radian', x: 210, y: 268, color: 'text', size: 13 },
     ],
   };
-  const caArcLength = {
+  const caArcLength = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'arc', width: 448, height: 290, cx: 162, cy: 165, r: 108, from: 0, to: 1.9,
     svgTitle: 'Arc length is the radius times the angle, read off directly',
     angleRadius: 36, angleLabel: '\u03b8', angleColor: 'secondary', angleLabelOut: 22, arcWidth: 2.8,
@@ -2251,7 +2251,7 @@ For example, the angles $40°$ and $50°$ are complementary ($40° + 50° = 90°
       { text: 'no conversion factor', x: 336, y: 176, color: 'muted', size: 12, bold: false },
     ],
   };
-  const caSectorArea = {
+  const caSectorArea = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'sector', width: 440, height: 310, cx: 168, cy: 150, r: 110, from: 0, to: 1.25,
     svgTitle: 'The sector is the fraction theta over two pi of the whole disc',
     angleRadius: 38, angleLabel: '\u03b8', angleLabelOut: 22,

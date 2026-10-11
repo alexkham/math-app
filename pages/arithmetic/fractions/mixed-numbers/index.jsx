@@ -683,6 +683,9 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -1198,6 +1201,25 @@ const schemas = {
 }
 
 
+  const fbSeventeenFifths = { kind: 'bars', svgTitle: '17/5 shaded as fifths: three full wholes and 2 fifths of a fourth, 3 2/5', rows: [{ n: 5, k: 17, label: '17/5' }],
+    notes: [{ text: '17 ÷ 5 = 3 remainder 2' }, { text: 'three full bars and 2 fifths more: 17/5 = 3 2/5', color: 'f' }], caption: 'Quotient: whole bars; remainder: the leftover fifths' };
+  const fpMixedLine = { kind: 'pieces', svgTitle: 'Number line from 0 to 3 marked in fifths: 2 2/5 and 12/5 are the same point', xRange: [-0.15, 3.3], yRange: [-1, 1.4], xStep: 1, yStep: 10, xLetter: ' ', yLetter: ' ',
+    pieces: [{ fn: () => 0, from: 0, to: 3, ends: [null, null], color: 'g' }].concat(Array.from({ length: 16 }, (_, i) => ({ fn: () => 0, from: i / 5, to: i / 5, ends: [i === 12 ? 'closed' : 'open', i === 12 ? 'closed' : 'open'], color: i === 12 ? 'r' : 'g' }))),
+    notes: [{ x: 2.4, y: 0.2, text: '2 2/5 = 12/5', pos: 'n', color: 'r' }, { x: 0.05, y: 1.15, text: 'each whole cut into fifths', pos: 'e' }, { x: 0.05, y: -0.6, text: '2 wholes and 2 fifths = 12 fifths', pos: 'e', color: 'r' }],
+    caption: 'One point, two names' };
+  const demoUnits = {
+    seventeenFifths: demoUnitFrame({
+      svg: renderFractionBar(fbSeventeenFifths),
+      caption: 'Seventeen fifths as a mixed number',
+      text: 'Seventeen parts of size 1/5 are laid out on bars of five fifths each. Three bars fill completely, using 15 fifths, and 2 fifths are left over on a fourth bar. That is the division 17 &#247; 5 = 3 remainder 2: the quotient counts the full wholes, the remainder the leftover parts, so 17/5 = 3 2/5.',
+    }),
+    mixedLine: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpMixedLine),
+      caption: '2 2/5 on the number line',
+      text: 'Each whole from 0 to 3 is cut into fifths. Counting two whole steps and then two more fifths lands on the amber point, 2 2/5. Counting fifths from 0 instead takes 12 steps to the same point, so 2 2/5 and 12/5 are two names for one number, lying two fifths of the way from 2 to 3.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -1207,6 +1229,7 @@ return {
     capstoneTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Mixed Numbers & Improper Fractions: Conversions | Learn Math Class",
       description: "Learn mixed numbers and improper fractions: definitions, conversions, comparisons, and operations. Step-by-step methods with examples for adding, multiplying, and dividing.",
@@ -1222,7 +1245,7 @@ return {
 
 
 
-export default function MixedNumbersPage({seoData, sectionsContent, introContent, obj4Table, obj6Table, capstoneTable, faqQuestions, schemas}) {
+export default function MixedNumbersPage({seoData, sectionsContent, introContent, obj4Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1276,6 +1299,8 @@ export default function MixedNumbersPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-seventeenFifths'} dangerouslySetInnerHTML={{ __html: demoUnits.seventeenFifths }} />,
+          `Going back, 3 · 5 + 2 = 17 counts the fifths again: 3 2/5 = 17/5.`,
         ]
     },
     {
@@ -1312,6 +1337,8 @@ export default function MixedNumbersPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-mixedLine'} dangerouslySetInnerHTML={{ __html: demoUnits.mixedLine }} />,
+          `Every mixed number sits between its whole part and the next whole number.`,
         ]
     },
     {

@@ -1439,7 +1439,7 @@ Two methods dominate. The graphical approach plots the function and a horizontal
   // Authored figures. Two renderers: curveFeature for the curve scenes,
   // circleArc for the side-by-side, which takes the curve panel as a
   // pre-rendered string rather than learning to draw curves itself.
-  const cfSolutionsAsIntervals = {
+  const cfSolutionsAsIntervals = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'single', title: 'Points against a stretch',
     xRange: [0, 2 * Math.PI], yRange: [-1.5, 1.6], panelWidth: 500, panelHeight: 250,
     yTicks: [{ at: 0.5, label: '\u00bd' }],
@@ -1451,7 +1451,7 @@ Two methods dominate. The graphical approach plots the function and a horizontal
       { type: 'note', at: Math.PI / 6, y: 1.42, text: 'sin x = \u00bd  \u2014 just these two', anchor: 'start', color: 'negation', size: 11 },
     ] }],
   };
-  const cfCompoundInequality = {
+  const cfCompoundInequality = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'single', title: 'The overlap of two bounds',
     xRange: [0, 2 * Math.PI], yRange: [-2.35, 1.45], panelWidth: 540, panelHeight: 300,
     yTicks: [{ at: 0.5, label: '\u00bd' }, { at: 0.866, label: '\u221a3/2' }],
@@ -1467,7 +1467,7 @@ Two methods dominate. The graphical approach plots the function and a horizontal
       { type: 'bracket', orient: 'h', y: -2.16, from: 2 * Math.PI / 3, to: 5 * Math.PI / 6, label: 'both \u2014 the overlap', color: 'resultStroke' },
     ] }],
   };
-  const caUnitCircleMethod = {
+  const caUnitCircleMethod = {style: { primary: '#2563EB', primaryLight: '#93B4F5', secondary: '#06357A', resultStroke: '#B45309', resultFill: '#D97706' }, 
     kind: 'compare', gap: 22, noteSpace: 26,
     svgTitle: 'The same inequality is one arc on the circle and one band under the curve',
     panels: [

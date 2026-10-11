@@ -697,6 +697,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 
 
 export async function getStaticProps(){
@@ -1155,6 +1157,16 @@ const schemas = {
 }
 
 
+  const fbHalfOverThreeQuarters = { kind: 'bars', svgTitle: '1/2 over 3/4: one half is 2 of the 3 quarters in 3/4, so the value is 2/3', rows: [{ n: 4, k: 3, label: '3/4', partLabels: true }, { n: 4, k: 2, label: '1/2 = 2/4', color: 'r', partLabels: true }],
+    labelWidth: 90, notes: [{ text: '1/2 covers 2 of the 3 quarters that make 3/4' }, { text: '(1/2)/(3/4) = 2/3; × 4/4 gives 2/3 directly', color: 'r' }], caption: 'How much of 3/4 is 1/2? Two thirds of it' };
+  const demoUnits = {
+    halfOverThreeQuarters: demoUnitFrame({
+      svg: renderFractionBar(fbHalfOverThreeQuarters),
+      caption: 'What 1/2 over 3/4 measures',
+      text: 'The complex fraction (1/2)/(3/4) asks what part of 3/4 the amount 1/2 is. In quarters, 3/4 is 3 parts and 1/2 is 2 parts of the same size, so 1/2 is 2 of the 3 parts: 2/3. Multiplying top and bottom by the LCD 4 does the same thing in one step: (1/2 &#183; 4)/(3/4 &#183; 4) = 2/3.',
+    }),
+  };
+
 return {
   props: {
     sectionsContent,
@@ -1163,6 +1175,7 @@ return {
     capstoneTable,
     faqQuestions,
     schemas,
+    demoUnits,
     seoData: {
       title: "Complex Fractions: Simplify Stacked Fractions | Learn Math Class",
       description: "Learn to simplify complex fractions using division and LCD methods. Handle fractions within fractions, mixed numbers, nested fractions, and avoid common errors.",
@@ -1175,7 +1188,7 @@ return {
    }
 
 
-export default function ComplexFractionsPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas}) {
+export default function ComplexFractionsPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1212,6 +1225,8 @@ export default function ComplexFractionsPage({seoData, sectionsContent, introCon
           sectionsContent.obj3.content,
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+                  <div key={'unit-halfOverThreeQuarters'} dangerouslySetInnerHTML={{ __html: demoUnits.halfOverThreeQuarters }} />,
+            `Method 1 agrees: 1/2 ÷ 3/4 = 1/2 × 4/3 = 4/6 = 2/3.`,
         ]
     },
     {

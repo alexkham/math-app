@@ -16,6 +16,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import {renderMultiplesLine} from '../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
 import { renderFactorSet } from '../../../app/utils/illustrations/arithmetic/divisibility/factorSet'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import { renderPrimeFactorization } from '@/app/utils/illustrations/arithmetic/divisibility/primeFactorization'
 import divisibilityTilesDiagrams from '@/app/components/divisibility/divisibilityTilesDiagrams'
 import eratosthenesSieveDiagrams from '@/app/components/visualizations/arithmetic/eratosthenesSieveDiagrams'
 import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
@@ -621,6 +622,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const prStyle = { primary: '#06357A', secondary: '#2563EB', result: '#FDE7C8', resultStroke: '#B45309', fill: '#FDE7C8', stroke: '#B45309', text: '#1E3A5F', textMuted: '#64748B', neutral: '#64748B', border: '#5A7299', negation: '#C0392B' };
+  const pfTree360 = { kind: 'tree', n: 360, style: prStyle, info: { lines: [
+    { kind: 'formula', text: '360 = 2³ · 3² · 5', role: 'primary' }, { kind: 'separator' },
+    { kind: 'note', text: 'exponents 3, 2, 1' }, { kind: 'note', text: 'factors of 360:' }, { kind: 'note', text: '(3+1)(2+1)(1+1) = 24' }] } };
   const demoUnits = {
     divisible: demoUnitFrame({
       svg: divisibilityTilesDiagrams.divisible,
@@ -649,6 +654,11 @@ const schemas = {
       text: 'Each row divides the previous divisor by the previous remainder: 252 = 105 &#183; 2 + 42, then 105 = 42 &#183; 2 + 21, then 42 = 21 &#183; 2 + 0. The last nonzero remainder, 21, is the greatest common divisor, found without factoring either number. Enter any pair and watch the remainders shrink to zero on the',
       href: '/arithmetic/visual-tools/euclidean-algorithm',
       linkText: 'Euclidean algorithm visualizer',
+    }),
+    tree360: demoUnitFrame({
+      svg: renderPrimeFactorization(pfTree360),
+      caption: 'Factoring 360 down to primes',
+      text: 'The factor tree splits 360 until every branch ends in a prime: 360 = 2 &#183; 180 = 2 &#183; 2 &#183; 90, and so on, leaving the leaves 2, 2, 2, 3, 3, 5. Collected, that is 360 = 2&#179; &#183; 3&#178; &#183; 5. A factor of 360 picks 0 to 3 twos, 0 to 2 threes and 0 or 1 five, so the exponents give the count directly: (3 + 1)(2 + 1)(1 + 1) = 24 factors.',
     }),
   };
 
@@ -832,6 +842,8 @@ export default function DivisibilityPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+                  <div key={'unit-tree360'} dangerouslySetInnerHTML={{ __html: demoUnits.tree360 }} />,
+          `Splitting 360 as 10 · 36 first gives a different tree but the same six prime leaves.`,
         ]
     },
     {

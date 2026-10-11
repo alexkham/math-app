@@ -667,6 +667,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
 
@@ -1284,6 +1285,10 @@ The sections below outline how joint probability is represented, how it connects
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const ogJointCount = { kind: 'dice', svgTitle: 'Two dice: first die even has 18 outcomes, sum at least 9 has 10, both together 6, so the joint probability is 6/36',
+    events: [{ label: 'A: first die even', test: (a) => a % 2 === 0, color: 'f' }, { label: 'B: sum ≥ 9', test: (a, b) => a + b >= 9, color: 'r' }],
+    notes: [{ text: 'A and B: the shared cells' }, { text: '(4,5) (4,6) (6,3)', color: 'g' }, { text: '(6,4) (6,5) (6,6)', color: 'g' }, { text: 'P(A, B) = 6/36 = 1/6', color: 'r' }],
+    caption: 'Joint probability by counting combined outcomes' };
   const demoUnits = {
     u_notation_0: demoUnitFrame({
       svg: contingencyTableDiagrams['2x3'],
@@ -1298,6 +1303,11 @@ The sections below outline how joint probability is represented, how it connects
       text: 'The joint probability of the highlighted leaf is the product along its path, P(A) times P(B given A), so conditional probability is the joint divided by the marginal of the conditioning event. The same leaf reached from the other variable first gives the same product. Follow other paths and multiply on the',
       href: '/probability/visual-tools/conditional-probability/tree-diagram',
       linkText: 'conditional probability tree diagram',
+    }),
+    jointCount: demoUnitFrame({
+      svg: renderOutcomeGrid(ogJointCount),
+      caption: 'Method 1: counting combined outcomes',
+      text: 'Two fair dice give 36 equally likely combined outcomes. A, first die even, covers the blue rows (18 cells); B, sum at least 9, covers the amber corner (10 cells). The joint event A and B is the cells that are in both, outlined in navy: (4,5), (4,6), (6,3), (6,4), (6,5), (6,6). Six favourable combined outcomes out of 36 give P(A, B) = 6/36 = 1/6.',
     }),
   };
 
@@ -1392,6 +1402,8 @@ export default function JointProbabilityPage({
             sectionsContent.calculate.content,
             <div key={'calculate-table'} style={tableWrapStyle}
                  dangerouslySetInnerHTML={{ __html: calculateTable }} />,
+                  <div key={'unit-jointCount'} dangerouslySetInnerHTML={{ __html: demoUnits.jointCount }} />,
+            `Not P(A) + P(B) = 28/36, and not P(A) · P(B) = 5/36: A and B are not independent here.`,
         ]
     },
     {

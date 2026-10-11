@@ -1239,6 +1239,49 @@ export default function GenericDistributionExplorer({ distribution }) {
                   )}
                 </>
               )}
+
+              {/* Optional step-by-step working. Shown only when the distribution supplies getSteps. */}
+              {typeof distribution.getSteps === 'function' && (() => {
+                const stepInputs = {
+                  point: [pointK],
+                  strictless: [strictLessK],
+                  cumulative: [cumulativeK],
+                  strictgreater: [strictGreaterK],
+                  greaterequal: [greaterEqualK],
+                  range: [rangeA, rangeB],
+                  strictrange: [strictRangeA, strictRangeB],
+                  leftinc: [leftIncRangeA, leftIncRangeB],
+                  rightinc: [rightIncRangeA, rightIncRangeB]
+                }[calcTab] || [];
+                if (stepInputs.length === 0 || stepInputs.some((v) => v === '' || isNaN(parseInt(v)))) return null;
+                const steps = distribution.getSteps(calcTab, ...stepInputs.map((v) => parseInt(v)));
+                if (!steps || steps.length === 0) return null;
+                return (
+                  <div style={{
+                    marginTop: '10px',
+                    padding: '10px 12px',
+                    background: 'white',
+                    borderRadius: '6px',
+                    borderLeft: '4px solid #c5cdf5'
+                  }}>
+                    <div style={{
+                      fontSize: '11px',
+                      color: '#7f8c8d',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.5px',
+                      marginBottom: '6px'
+                    }}>Steps</div>
+                    {steps.map((line, i) => (
+                      <div key={i} style={{
+                        fontSize: '13px',
+                        color: '#2c3e50',
+                        lineHeight: '1.6',
+                        overflowWrap: 'anywhere'
+                      }}>{line}</div>
+                    ))}
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </div>

@@ -16,6 +16,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import {renderMultiplesLine} from '../../../../app/utils/illustrations/arithmetic/divisibility/multiplesLine'
 import { renderPrimeFactorization } from '../../../../app/utils/illustrations/arithmetic/divisibility/primeFactorization'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+
 import divisibilityTableDiagrams from '@/app/components/divisibility/divisibilityTableDiagrams'
 
 
@@ -700,6 +701,12 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const prStyle = { primary: '#06357A', secondary: '#2563EB', result: '#FDE7C8', resultStroke: '#B45309', fill: '#FDE7C8', stroke: '#B45309', text: '#1E3A5F', textMuted: '#64748B', neutral: '#64748B', border: '#5A7299', negation: '#C0392B' };
+  const mlCoprime79 = { kind: 'two-track', range: [0, 63], trackA: { step: 7 }, trackB: { step: 9 }, highlight: 'lcm', style: prStyle, info: { lines: [
+    { kind: 'formula', text: 'lcm(7, 9) = 63' }, { kind: 'separator' },
+    { kind: 'list', label: 'multiples of 7:', items: '7, 14, 21, … 56, 63', role: 'primary' },
+    { kind: 'list', label: 'multiples of 9:', items: '9, 18, 27, … 54, 63', role: 'secondary' },
+    { kind: 'note', text: 'no meeting before 7 · 9', italic: true }] } };
   const demoUnits = {
     multiples: demoUnitFrame({
       svg: divisibilityTableDiagrams.d6,
@@ -707,6 +714,11 @@ const schemas = {
       text: 'The highlighted column marks every number divisible by 6, which is the list of multiples of 6 the method starts from; the &#247;8 column beside it marks 8, 16, 24, and the first row marked in both columns is 24, the least common multiple. Listing multiples is reading two columns until they agree. Compare any two divisor columns on the',
       href: '/arithmetic/visual-tools/divisibility-table',
       linkText: 'interactive divisibility table',
+    }),
+    coprime79: demoUnitFrame({
+      svg: renderMultiplesLine(mlCoprime79),
+      caption: 'Coprime numbers meet only at their product',
+      text: 'The multiples of 7 and the multiples of 9 run side by side from 0 to 63. Because 7 and 9 share no factor except 1, no multiple of 7 below 63 is also a multiple of 9: the two tracks first line up at 63 = 7 &#183; 9. For coprime numbers the LCM is the full product.',
     }),
   };
 
@@ -913,6 +925,8 @@ obj10SvgBuses,pfLcmObj4, demoUnits}) {
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-coprime79'} dangerouslySetInnerHTML={{ __html: demoUnits.coprime79 }} />,
+          `Shared factors make the tracks meet earlier: 6 and 9 already meet at 18, below 6 · 9 = 54.`,
         ]
     },
     {

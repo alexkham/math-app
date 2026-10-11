@@ -661,6 +661,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import chebyshevDiagrams from '@/app/components/probability/inequalities/chebyshevDiagrams'
 
 
@@ -1134,6 +1135,10 @@ The result is deliberately general. It applies without assuming any particular d
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const fpChebLln = { kind: 'pieces', svgTitle: 'Chebyshev bound on the chance that the average of n die rolls is at least 0.5 away from 3.5: 11.67/n, capped at 1', xRange: [0, 100], yRange: [0, 1.05], xStep: 20, yStep: 0.25, xLetter: 'n', yLetter: 'bound',
+    pieces: [{ fn: (n) => Math.min(1, 35 / 3 / n), from: 1, to: 100, ends: [null, 'closed'], color: 'r', label: { text: '11.67/n', x: 30, y: 35 / 90, pos: 'ne' } }],
+    notes: [{ x: 40, y: 0.95, text: 'average of n die rolls, ε = 0.5', pos: 'e' }, { x: 40, y: 0.87, text: 'σ²/(n ε²) = (35/12)/(0.25 n)', pos: 'e' }, { x: 40, y: 0.79, text: 'n = 100: at most 0.117', pos: 'e', color: 'r' }, { x: 1, y: 1, text: 'n < 12: no information', pos: 'se' }],
+    caption: 'The bound for the average falls like 1/n' };
   const demoUnits = {
     u_2_0: demoUnitFrame({
       svg: chebyshevDiagrams['chebyshev-normal'],
@@ -1148,6 +1153,11 @@ The result is deliberately general. It applies without assuming any particular d
       text: 'For a uniform variable the true tail probability can be zero while the bound stays positive: the inequality knows only the variance and cannot see that the distribution has no tails at all. That gap is the price of generality. Switch between families and see how loose the bound gets on the',
       href: '/probability/visual-tools/inequalities/chebyshev',
       linkText: 'Chebyshev inequality visualizer',
+    }),
+    chebLln: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpChebLln),
+      caption: 'Chebyshev applied to an average',
+      text: 'Roll a die n times and take the average. Each roll has variance 35/12, so the average has variance 35/(12n). Chebyshev with &#949; = 0.5 bounds the chance that the average misses 3.5 by at least 0.5 by (35/12)/(0.25 n) &#8776; 11.67/n. For fewer than 12 rolls the bound is above 1 and says nothing; at n = 100 it is at most 0.117, and it keeps falling toward 0.',
     }),
   };
 
@@ -1258,6 +1268,8 @@ export default function ChebyshevInequalityPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-chebLln'} dangerouslySetInnerHTML={{ __html: demoUnits.chebLln }} />,
+          `A bound that tends to 0 as n grows is exactly what the weak law of large numbers states.`,
         ]
     },
     {

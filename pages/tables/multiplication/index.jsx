@@ -442,7 +442,7 @@ export async function getStaticProps(){
           "@type": "ListItem",
           "position": 4,
           "name": "Multiplication Tables",
-          "item": "https://www.learnmathclass.com/tables/arithmetics/multiplication"
+          "item": "https://www.learnmathclass.com/tables/multiplication"
         }
       ]
     },
