@@ -1248,7 +1248,9 @@ A meeting happens every $8$ days. Another happens every $12$ days. Both occur to
 
 Verify that $8{,}361$ is divisible by $9$. Digit sum: $8 + 3 + 6 + 1 = 18$, then $1 + 8 = 9$. Since $9 \\equiv 0 \\pmod 9$, the number is divisible by $9$. Confirm: $8361 = 9 \\cdot 929$.
 
-Simplify $(2^{50} + 3^{50}) \\bmod 5$. Powers of $2 \\bmod 5$ cycle $\\{2, 4, 3, 1\\}$ with period $4$. Since $50 = 4 \\cdot 12 + 2$, $2^{50} \\equiv 4 \\pmod{5}$. Powers of $3 \\bmod 5$ cycle $\\{3, 4, 2, 1\\}$ with period $4$. Since $50 = 4 \\cdot 12 + 2$, $3^{50} \\equiv 4 \\pmod{5}$. Sum: $4 + 4 = 8 \\to 8 \\bmod 5 = 3$.`,
+Simplify $(2^{50} + 3^{50}) \\bmod 5$. Powers of $2 \\bmod 5$ cycle $\\{2, 4, 3, 1\\}$ with period $4$. Since $50 = 4 \\cdot 12 + 2$, $2^{50} \\equiv 4 \\pmod{5}$. Powers of $3 \\bmod 5$ cycle $\\{3, 4, 2, 1\\}$ with period $4$. Since $50 = 4 \\cdot 12 + 2$, $3^{50} \\equiv 4 \\pmod{5}$. Sum: $4 + 4 = 8 \\to 8 \\bmod 5 = 3$.
+
+To check modular results with your own numbers, use the [modulo calculator](!/calculators/modulo-calculator).`,
   before: ``,
   after: ``,
   link: '',

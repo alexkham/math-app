@@ -143,7 +143,7 @@ For the full treatment, including the full versus reduced forms and [Householder
 • **Orthonormality**: $Q^T Q = I$, so $R = Q^T A$
 • **Nested spans**: the first $m$ columns of $Q$ span the same space as the first $m$ columns of $A$, for every $m$
 • **Determinant** (square case): $|\\det A| = |\\det R| = r_{1,1} r_{2,2} \\cdots r_{k,k}$, since $|\\det Q| = 1$
-• **Column space**: the columns of $Q$ are an orthonormal [basis](!/linear-algebra/vector-spaces#2) of the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) of $A$
+• **Column space**: the columns of $Q$ are an orthonormal [basis](!/linear-algebra/vector-spaces/basis#2) of the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) of $A$
 • **Diagonal as independence test**: $r_{k,k} = 0$ exactly when $\\mathbf{a}_k$ is a combination of the earlier columns
 • **Order matters**: permuting the columns of $A$ changes both $Q$ and $R$
 • **Numerical note**: the classical Gram-Schmidt shown here loses orthogonality in floating point; production code uses modified Gram-Schmidt or Householder reflections, which produce the same $Q$ and $R$`,

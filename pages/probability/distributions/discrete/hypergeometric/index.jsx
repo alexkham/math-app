@@ -1119,6 +1119,8 @@ Consider drawing 5 cards from a standard deck of 52 cards, counting the number o
 $$E[X] = 5 \\cdot \\frac{4}{52} = \\frac{20}{52} \\approx 0.385$$
 
 On average, you expect to draw about 0.385 aces in a 5-card hand, which reflects the 4-in-52 proportion of aces in the deck.
+
+To compute the expected value of a hypergeometric distribution for your own parameters, step by step, use the [hypergeometric expected value calculator](!/probability/calculators/expected-value/hypergeometric).
   `,
   before: ``,
   after: ``,
@@ -1149,7 +1151,7 @@ $n$ = number of draws (sample size)
 
 ### Derivation and Intuition
 
-The derivation involves computing $\\mathbb{E}[X^2]$ using indicator random variables and accounting for the dependency created by sampling without replacement.
+The derivation involves computing $\\mathbb{E}[X^2]$ using [indicator random variables](!/probability/indicators) and accounting for the dependency created by sampling without replacement.
 
 We know from the expected value section that $\\mu = n \\cdot \\frac{K}{N}$.
 

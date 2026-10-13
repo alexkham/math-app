@@ -2388,7 +2388,9 @@ $$\\mathbf{a} \\times \\mathbf{b} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} &
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-Placing vectors rather than numbers in the top row makes this a notational device rather than a genuine determinant. Still, applying cofactor expansion along that top row reproduces the component formula term by term. The determinant layout keeps the six constituent products and their signs organized in a form that is easy to remember and hard to scramble.`,
+Placing vectors rather than numbers in the top row makes this a notational device rather than a genuine determinant. Still, applying cofactor expansion along that top row reproduces the component formula term by term. The determinant layout keeps the six constituent products and their signs organized in a form that is easy to remember and hard to scramble.
+
+To compute the cross product of two specific vectors, use the [vector calculator](!/linear-algebra/calculators/vectors).`,
     before: ``,
     after: ``,
     link: '',

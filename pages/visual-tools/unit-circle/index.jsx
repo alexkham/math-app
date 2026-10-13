@@ -4,6 +4,8 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
 import ScrollUpButton from '@/app/components/scroll-up-button/ScrollUpButton'
 import UnitCircle from '@/app/components/trigo-calculator/UnitCircle'
+import AffiliateBlock from '@/app/components/affiliates/AffiliateBlock'
+import { COURSES } from '@/app/components/affiliates/courses'
 import React from 'react';
 import '../../pages.css'
 import Head from 'next/head'
@@ -1197,11 +1199,10 @@ const baseConverterIcon = (
         {/* <div style={{marginBottom:'-60px',marginTop:'0px'}}>
         <PageIntro data={pageIntroData} icon={baseConverterIcon} theme='blue'/>
         </div> */}
-         <br/>
-         <br/>
-         <br/>
-         <br/>
-           <UnitCircle explanations={explanations}/>
+           <div style={{marginTop:'-18px'}}><UnitCircle explanations={explanations}/></div>
+           <div style={{maxWidth:'1300px',margin:'0 auto',padding:'0 20px'}}>
+           <AffiliateBlock variant="strip" {...COURSES.trigonometry} headline="Learn the trigonometry behind this tool" />
+           </div>
            <br/>
            <br/>
            <SectionTableOfContents sections={unitCircleSections}/>

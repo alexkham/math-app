@@ -736,7 +736,7 @@ That matrix is the default for a reason. Its top-left entry is $0$, so the run c
 
 On the default preset the difference is exact and countable: the echelon run takes 8 steps, the reduced run takes 14. The six extra steps are three scalings and three clearings above a pivot.
 
-**Which to use**: echelon form is cheaper and enough to solve a system, because back-substitution finishes the job. Reduced echelon form costs more but ends with the answer written out, and it is what you want when the [matrix](!/linear-algebra/matrix#1) is standing in for something else — an inverse, a null space [basis](!/linear-algebra/vector-spaces#2), a [rank](!/linear-algebra/matrix/rank#1) computation.`,
+**Which to use**: echelon form is cheaper and enough to solve a system, because back-substitution finishes the job. Reduced echelon form costs more but ends with the answer written out, and it is what you want when the [matrix](!/linear-algebra/matrix#1) is standing in for something else — an inverse, a null space [basis](!/linear-algebra/vector-spaces/basis#2), a [rank](!/linear-algebra/matrix/rank#1) computation.`,
       before: ``,
       after: `The first still is where the plain run stops. Every entry below a pivot is $0$ and the leading entries — $2$, $2$, $3$ — step to the right as you go down. The pivots are not $1$, and the entries above them are still whatever they were, because echelon form does not ask for either.
 

@@ -260,7 +260,9 @@ Consider $P(x) = x^2 - 5x + 6$. Testing $x = 2$ gives $P(2) = 4 - 10 + 6 = 0$. T
 
 Verification is always available through direct substitution. Claim that $r$ is a root, substitute it into $P(x)$, and check whether the result is zero. This test is definitive — no ambiguity, no approximation. A value either satisfies $P(r) = 0$ or it does not.
 
-Roots answer a precise question: for which values of $x$ does $P(x) = 0$? This question drives equation-solving throughout algebra. Setting a polynomial equal to zero and finding its roots is equivalent to solving the corresponding polynomial equation.`,
+Roots answer a precise question: for which values of $x$ does $P(x) = 0$? This question drives equation-solving throughout algebra. Setting a polynomial equal to zero and finding its roots is equivalent to solving the corresponding polynomial equation.
+
+To find the roots of a specific polynomial of degree four or less, use the [polynomial equation solver](!/algebra/calculators/equations/polynomial).`,
   before: ``,
   after: ``,
   link: '',

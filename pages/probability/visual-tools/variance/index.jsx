@@ -8,6 +8,8 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import VarianceVisualizer from '@/app/components/probability/variance/VarianceVisualizer'
+import AffiliateBlock from '@/app/components/affiliates/AffiliateBlock'
+import { COURSES } from '@/app/components/affiliates/courses'
 import varianceDiagrams from '@/app/components/probability/variance/varianceDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
@@ -706,6 +708,9 @@ export default function VarianceVisualizerPage({ instructions, demos,relatedTool
       <br/>
       
       <VarianceVisualizer explanations={explanations}/>
+      <div style={{padding:'0 20px'}}>
+        <AffiliateBlock variant="strip" {...COURSES.probability} headline="See why variance is built from squared deviations" />
+      </div>
       
       <br/>
       

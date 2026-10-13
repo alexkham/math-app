@@ -120,7 +120,7 @@ Shuffle produces integer matrices with small integer eigenvalues; some will have
     },
     obj5: {
       title: `Why It Works`,
-      content: `Suppose $A$ has eigenvalues $|\\lambda_1| > |\\lambda_2| \\geq \\cdots \\geq |\\lambda_n|$ with eigenvectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_n$, and expand the start vector in that [basis](!/linear-algebra/vector-spaces#2):
+      content: `Suppose $A$ has eigenvalues $|\\lambda_1| > |\\lambda_2| \\geq \\cdots \\geq |\\lambda_n|$ with eigenvectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_n$, and expand the start vector in that [basis](!/linear-algebra/vector-spaces/basis#2):
 
 $$\\mathbf{x}_0 = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_n\\mathbf{v}_n$$
 

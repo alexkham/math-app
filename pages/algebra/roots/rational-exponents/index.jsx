@@ -614,7 +614,9 @@ $$\\frac{1}{\\sqrt{x}} = \\frac{1}{x^{1/2}} = x^{-1/2}$$
 
 $$\\frac{1}{\\sqrt[3]{a^2}} = a^{-2/3}$$
 
-This flexibility allows choosing the form best suited to the task. Exponent form for algebraic manipulation; radical form for numerical evaluation or clarity.`,
+This flexibility allows choosing the form best suited to the task. Exponent form for algebraic manipulation; radical form for numerical evaluation or clarity.
+
+To evaluate a root numerically in either form, use the [root calculator](!/calculators/root-calculator).`,
     before: ``,
     after: ``,
     link: '',

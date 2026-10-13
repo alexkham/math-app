@@ -4,6 +4,12 @@
 
 
 const nextConfig = {
+  // One build folder per dev server: several sessions run `next dev` on this
+  // checkout at once, and two servers sharing .next wipe each other's build.
+  // The launcher hands each server its port in PORT; 3000 keeps plain .next.
+  distDir: process.env.NODE_ENV === 'development' && process.env.PORT && process.env.PORT !== '3000'
+    ? `.next-${process.env.PORT}`
+    : '.next',
   trailingSlash: false,
   poweredByHeader: false,
 
@@ -77,6 +83,11 @@ const nextConfig = {
       },
       {
         source: '/tables/arithmetics/pythagorean-triples',
+        destination: '/tables',
+        permanent: true,
+      },
+      {
+        source: '/tables1',
         destination: '/tables',
         permanent: true,
       },

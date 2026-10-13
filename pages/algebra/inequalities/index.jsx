@@ -504,7 +504,9 @@ Endpoint inclusion is the final step. For non-strict inequalities ($\\leq$ or $\
 
 The solving procedure is identical to that of a [linear equation](!/algebra/equations/linear): isolate the variable using addition and multiplication. The only complication arises when dividing by a negative coefficient, which reverses the inequality direction. The inequality $-3x \\geq 12$ becomes $x \\leq -4$ after dividing by $-3$, not $x \\geq -4$.
 
-Compound linear inequalities — chains like $-1 < 2x + 3 \\leq 9$ or disjunctions like $x < -5$ or $x > 2$ — are handled by solving each part and combining the results through intersection (AND) or union (OR). The boundary point in every case is the solution of the corresponding linear equation.`,
+Compound linear inequalities — chains like $-1 < 2x + 3 \\leq 9$ or disjunctions like $x < -5$ or $x > 2$ — are handled by solving each part and combining the results through intersection (AND) or union (OR). The boundary point in every case is the solution of the corresponding linear equation.
+
+To solve a specific inequality, the [linear inequality solver](!/algebra/calculators/inequalities/linear) tracks every direction flip and gives the answer in interval notation.`,
     before: ``,
     after: ``,
     link: '/algebra/inequalities/linear',
@@ -516,7 +518,9 @@ Compound linear inequalities — chains like $-1 < 2x + 3 \\leq 9$ or disjunctio
 
 The discriminant $\\Delta = b^2 - 4ac$ determines the structure before any intervals are tested. When $\\Delta > 0$, two distinct real roots divide the line into three intervals. When $\\Delta = 0$, a single repeated root creates two intervals. When $\\Delta < 0$, no real roots exist and the expression keeps the same sign everywhere — the sign of $a$ alone decides whether the inequality is always true or never true.
 
-The parabola $y = ax^2 + bx + c$ provides a geometric shortcut. The inequality $ax^2 + bx + c > 0$ asks where the parabola lies above the $x$-axis, and $ax^2 + bx + c < 0$ asks where it lies below. The opening direction (upward if $a > 0$, downward if $a < 0$) together with the root locations makes the answer visible.`,
+The parabola $y = ax^2 + bx + c$ provides a geometric shortcut. The inequality $ax^2 + bx + c > 0$ asks where the parabola lies above the $x$-axis, and $ax^2 + bx + c < 0$ asks where it lies below. The opening direction (upward if $a > 0$, downward if $a < 0$) together with the root locations makes the answer visible.
+
+To solve a specific inequality, the [quadratic inequality solver](!/algebra/calculators/inequalities/quadratic) finds the roots, tests each interval and gives the solution in interval notation.`,
     before: ``,
     after: ``,
     link: '/algebra/inequalities/quadratic',

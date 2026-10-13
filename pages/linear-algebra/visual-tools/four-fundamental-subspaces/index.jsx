@@ -61,7 +61,7 @@ export async function getStaticProps(){
     },
     obj1: {
       title: `Getting Started with the Visualizer`,
-      content: `Choose a [matrix](!/linear-algebra/matrix#1) and watch one row reduction produce a [basis](!/linear-algebra/vector-spaces#2) for each of its four subspaces.
+      content: `Choose a [matrix](!/linear-algebra/matrix#1) and watch one row reduction produce a [basis](!/linear-algebra/vector-spaces/basis#2) for each of its four subspaces.
 
 • Use the **Preset** pills for seven matrices: a $3 \\times 3$ of rank $2$ with every [subspace](!/linear-algebra/vector-spaces/subspaces#1) non-trivial, a rank-one matrix, wide and tall matrices of full rank, an invertible matrix, a $4 \\times 3$ of rank $2$, and the zero matrix
 • Use the two **Size** steppers for any shape from $2 \\times 2$ to $4 \\times 4$, and **Shuffle** for a random matrix that usually carries a planted dependency

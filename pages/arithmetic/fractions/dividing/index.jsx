@@ -916,7 +916,9 @@ To compute $3\\frac{1}{2} \\div 1\\frac{3}{4}$, first convert both values. The m
 
 $$\\frac{7}{2} \\div \\frac{7}{4} = \\frac{7}{2} \\times \\frac{4}{7} = \\frac{28}{14} = 2$$
 
-Cross-canceling before multiplying simplifies the work. The 7s cancel, leaving $\\frac{1}{2} \\times \\frac{4}{1} = 2$.`,
+Cross-canceling before multiplying simplifies the work. The 7s cancel, leaving $\\frac{1}{2} \\times \\frac{4}{1} = 2$.
+
+To verify a mixed-number division, use the [fraction calculator](!/calculators/fraction-calculator). It applies keep-change-flip and shows the full working.`,
     before: ``,
     after: ``,
     link: '',

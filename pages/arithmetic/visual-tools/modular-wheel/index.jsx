@@ -753,7 +753,7 @@ Each class $[r]$ is the set $\\{r + kn : k \\in \\mathbb{Z}\\}$ — an infinite 
 
 • Two integers are in the same class iff they're congruent mod $n$.
 
-• Class $[r]$ contains negative numbers too: $-7 \\equiv 5 \\pmod{12}$ because $-7 + 12 = 5$.
+• Class $[r]$ contains [negative numbers](!/arithmetic/modulo/negative-numbers) too: $-7 \\equiv 5 \\pmod{12}$ because $-7 + 12 = 5$.
 
 • Class sizes are infinite in $\\mathbb{Z}$; on the wheel they look finite only because we cut the count at the target.
 

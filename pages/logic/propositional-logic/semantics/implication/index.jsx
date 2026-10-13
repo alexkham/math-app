@@ -10,6 +10,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import vennTruthTableDiagrams from '@/app/components/diagrams/set-theory/vennTruthTableDiagrams'
 
 
 
@@ -189,9 +191,20 @@ const faqQuestions = {
   }
 }
 
+  const demoUnits = {
+    impliesRegion: demoUnitFrame({
+      svg: vennTruthTableDiagrams['named'],
+      caption: 'P &#8594; Q as the region &#172;P &#8744; Q',
+      text: 'Read circle A as the cases where P is true and circle B as the cases where Q is true. P &#8594; Q fails only where P is true and Q is false: the part of A outside B. Everything else is shaded, which is exactly &#172;P &#8744; Q, the complement of A together with B. The whole region outside A is shaded too: when P is false the implication holds whatever Q is. Try other expressions on the',
+      href: '/set-theory/visual-tools/venn-truth-table',
+      linkText: 'Venn truth-table explorer',
+    }),
+  };
+
   return {
     props:{
 
+      demoUnits,
       implicationLaws,
       introContent,
       properties,
@@ -207,7 +220,7 @@ const faqQuestions = {
 
 
 
-export default function ImplicationPage({implicationLaws ,introContent ,properties ,keyWords ,notation ,notationSection ,faqQuestions}) {
+export default function ImplicationPage({demoUnits, implicationLaws ,introContent ,properties ,keyWords ,notation ,notationSection ,faqQuestions}) {
 
 
  
@@ -273,6 +286,8 @@ export default function ImplicationPage({implicationLaws ,introContent ,properti
           `The counterintuitive aspect is that P → Q is true whenever P is false, regardless of Q's value. This is called **"vacuous truth"**. A helpful way to understand this is with a promise analogy: "If it rains, I'll bring an umbrella." If it doesn't rain, the promise remains unbroken whether I bring an umbrella or not.
           Promise may be broken only if it has been given. In case it had been never given (last 2 rows, when $P$ is equal to false)- it can not be broken and the whole statement evaluates to true.`,
           `And to conclude this discussion, **the rule of thumb with logical implication is that whenever the hypotesis is false-the overall expression evaluates to true.**`,
+          <div key={'unit-impliesRegion'} dangerouslySetInnerHTML={{ __html: demoUnits.impliesRegion }} />,
+          `The only unshaded piece is P true and Q false: the one row of the table where P → Q is false.`,
           `<br id='tt_self'></br>`,
           `A special case worth noting is $p \\rightarrow p$, where the **antecedent** and the **consequent** are the same proposition. This implication is always true  (it is a [tautology](!/logic/propositional-logic/semantics/tautology)), as seen directly in the truth table:`,
 `<table  border='1' cellpadding='10' cellspacing='0' style='border-collapse: collapse; width: 100%; margin: 15px 0;'><tr style='background-color: #eef2f7;'><th style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>P</th><th style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>P</th><th style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>P → P</th><th style='padding: 10px; text-align: left; border: 1px solid #bdc9d9;'>Explanation</th></tr><tr><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>T</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>T</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9; color: #2e7d32;'>T</td><td style='padding: 10px; border: 1px solid #bdc9d9;'>When P is true, P → P is true.</td></tr><tr style='background-color: #f8f9fa;'><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>F</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>F</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9; color: #2e7d32;'>T</td><td style='padding: 10px; border: 1px solid #bdc9d9;'>When P is false, P → P is still true.</td></tr></table>`

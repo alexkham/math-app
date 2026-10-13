@@ -44,7 +44,7 @@ The animation is paired with a written step panel that updates as you move forwa
 
     obj2: {
       title: `Learning by Watching Areas Move`,
-      content: `Algebraic identities are usually presented as formulas to memorise. The visual approach replaces memorisation with a physical argument that you can watch happen. Two ideas do most of the work:
+      content: `Algebraic identities are usually presented as formulas to memorise. The [algebraic identities table](!/tables/algebra-identities) lists them that way, by family. The visual approach replaces memorisation with a physical argument that you can watch happen. Two ideas do most of the work:
 
 • **Area is conserved under cutting and rearranging.** Slice a square into pieces and slide them around — the total area never changes. So if a shape can be described two different ways before and after, those two descriptions must be equal as numbers.
 

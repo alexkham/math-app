@@ -749,7 +749,7 @@ The structural fact behind all of this is that $\\mathbb{R}^n$ is a [vector spac
       title: `Why It Matters`,
       content: `Linear combinations are the foundation on which most of linear algebra is built.
 
-• **Span and basis**: the span of a set of vectors is the set of all their linear combinations; a [basis](!/linear-algebra/vector-spaces#2) is a linearly independent set whose span is the whole space
+• **Span and basis**: the span of a set of vectors is the set of all their linear combinations; a [basis](!/linear-algebra/vector-spaces/basis#2) is a linearly independent set whose span is the whole space
 • **Linear independence**: testing whether $c_1 v_1 + \\cdots + c_n v_n = 0$ forces all $c_i = 0$
 • **Solving linear systems**: a system $Ax = b$ asks whether $b$ is a linear combination of the columns of $A$
 • **Subspaces**: a [subspace](!/linear-algebra/vector-spaces/subspaces#1) is a set closed under linear combinations — lines and planes through the origin are the simplest examples

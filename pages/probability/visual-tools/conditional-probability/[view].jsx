@@ -20,6 +20,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
 import ExplanationDetails from '@/app/components/ExplanationDetails'
+import AffiliateBlock from '@/app/components/affiliates/AffiliateBlock'
+import { COURSES } from '@/app/components/affiliates/courses'
 import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
 import { processContent } from '@/app/utils/contentProcessor'
 
@@ -2188,6 +2190,9 @@ export default function ConditionalProbabilityViewPage({
         </div>
       )}
 
+      <div style={{width:'90%',margin:'0 auto'}}>
+        <AffiliateBlock variant="strip" {...COURSES.probability} headline="Learn the probability behind the branches" />
+      </div>
       <br />
       {genericSections.length > 0 && (
         <>

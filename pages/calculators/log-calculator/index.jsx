@@ -273,6 +273,14 @@ const faqQuestions = {
   obj5: {
     question: "Why can't I use base 1?",
     answer: "Base 1 is undefined for logarithms because 1 raised to any power always equals 1 (1¹ = 1, 1² = 1, 1¹⁰⁰ = 1). This means log₁(5) would be asking 'what exponent makes 1 equal 5?' which has no answer. The calculator requires bases greater than 0 and not equal to 1."
+  },
+  obj6: {
+    question: "How do I calculate log base 2 of a number?",
+    answer: "Use the change of base formula: log₂(x) = ln(x) / ln(2). For example, log₂(1000) = 6.9078 / 0.6931 ≈ 9.9658. For powers of 2 the answer is a whole number: log₂(8) = 3, log₂(1024) = 10. In this calculator, choose base 2 and enter the number."
+  },
+  obj7: {
+    question: "What are common log base 2 values?",
+    answer: "log₂(2) = 1, log₂(4) = 2, log₂(8) = 3, log₂(16) = 4, log₂(1024) = 10. For powers of 10: log₂(10) ≈ 3.3219, log₂(100) ≈ 6.6439, log₂(1000) ≈ 9.9658, log₂(10,000) ≈ 13.2877 and log₂(1,000,000) ≈ 19.9316."
   }
 };
 

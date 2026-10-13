@@ -1094,6 +1094,8 @@ In both cases, the underlying idea is identical: expected value is the average o
 **Special Formulas for Common Distributions**  
 Every well-known probability distribution—both discrete and continuous—comes with its own closed-form formula for expected value. These formulas are derived once from the summation or integral definitions and then reused to make calculations much faster. For example, the binomial distribution has $E(X) = np$, the geometric has $E(X) = 1/p$, and the exponential has $E(X) = 1/λ$. Using these established results saves time and avoids repeating long sums or integrals each time.
 
+To compute an expected value from your own values and probabilities, use the [expected value calculator](!/probability/calculators/expected-value/direct-data).
+
 `,
       before:``,
       after:``,

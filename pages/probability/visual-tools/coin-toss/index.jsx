@@ -89,7 +89,7 @@ Auto-flip mode runs indefinitely until stopped. Adjust speed to match your demon
       title: `Understanding the Convergence Graph`,
       content: `The convergence graph plots proportion of heads (y-axis) against number of flips (x-axis). The blue line shows actual results, while the red dashed line marks expected probability. Blue dashed curves above and below represent ±2 standard error confidence bands—the range where results should fall about 95% of the time.
 
-Early in the simulation, the blue line jumps erratically. With few flips, randomness dominates and proportions swing widely. As flips increase, the line stabilizes and converges toward the red line. This visual demonstrates the Law of Large Numbers: short-run volatility versus long-run predictability.
+Early in the simulation, the blue line jumps erratically. With few flips, randomness dominates and proportions swing widely. As flips increase, the line stabilizes and converges toward the red line. This visual demonstrates the [Law of Large Numbers](!/probability/large-numbers-law): short-run volatility versus long-run predictability.
 
 If the actual proportion stays within the confidence bands, results are statistically normal. Excursions outside the bands indicate unusual runs but aren't necessarily impossible—just improbable. The graph updates dynamically, showing the complete history of how probability estimates improved with more data.`,
       before: ``,

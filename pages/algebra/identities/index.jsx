@@ -378,7 +378,9 @@ Over $\\mathbb{R}$ this expression is irreducible; over $\\mathbb{C}$ it splits 
 
     obj7: {
       title: `Summary of Algebraic Identities`,
-      content: `The table below collects every identity from this page in one place. Use it as a reference card — for each pattern, the table shows the canonical form and the contexts where the identity does the most work.`,
+      content: `The table below collects every identity from this page in one place. Use it as a reference card — for each pattern, the table shows the canonical form and the contexts where the identity does the most work.
+
+For every identity in one searchable list, see the [algebraic identities table](!/tables/algebra-identities).`,
       before: ``,
       after: ``,
       link: '',

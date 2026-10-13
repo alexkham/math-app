@@ -843,6 +843,8 @@ If the probability function has several local maxima, determine whether you want
 • **All local modes**: Every peak that's higher than its immediate neighbors
 
 Multimodal distributions require identifying all peaks, not just the tallest.
+
+To find the mode of your own data set, use the [statistics calculator](!/calculators/statistics-calculator).
   `,
   before: ``,
   after: ``,

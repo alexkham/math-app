@@ -136,7 +136,7 @@ The presets are all matrices with complex eigenvalues. Shuffling entries by hand
       title: `Preset Scenarios`,
       content: `Seven matrices in three groups.
 
-**On an ellipse ($r = 1$)** &mdash; Rotate 90° and Rotate 45° are plain rotations, four and eight steps to a lap; Skewed rotation is a 60° rotation in a sheared [basis](!/linear-algebra/vector-spaces#2), whose orbit is an ellipse.
+**On an ellipse ($r = 1$)** &mdash; Rotate 90° and Rotate 45° are plain rotations, four and eight steps to a lap; Skewed rotation is a 60° rotation in a sheared [basis](!/linear-algebra/vector-spaces/basis#2), whose orbit is an ellipse.
 
 **Spiral in ($r < 1$)** &mdash; Spiral in is $0.9$ times a rotation by $36.9°$; Skewed spiral in has $r = 0.866$ and a tilted ellipse.
 

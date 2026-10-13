@@ -1582,6 +1582,11 @@ export default function ExponentCalculator({ explanations: explanationsProp } = 
     return '';
   }, [mode, powerComputed, currentRule, compareComputed, explanations]);
 
+  /* Page-supplied note for the current state: explanations.states["<mode>:<sub>"] or explanations.states["<mode>"]
+     (set only by pages that pass such texts; null otherwise, so nothing changes for other users of the component) */
+  const stateKey = mode === 'power' ? `power:${pwrType}` : mode === 'rules' ? `rules:${currentRule}` : 'compare';
+  const stateNote = (explanations.states && (explanations.states[stateKey] || explanations.states[mode])) || null;
+
   /* Compare verdict + stats render values */
   const compareVerdict = useMemo(() => {
     const { va, vb } = compareComputed;
@@ -2096,6 +2101,14 @@ export default function ExponentCalculator({ explanations: explanationsProp } = 
           <div>
             <section className="card">
               <div className="card-header">How this works</div>
+              {stateNote && (
+                <div className="card-body ec-state-note" style={{ paddingBottom: 0 }}>
+                  <div className="explain-block">
+                    <h3 className="explain-title">{stateNote.title}</h3>
+                    <div className="explain-text">{processContent(stateNote.content)}</div>
+                  </div>
+                </div>
+              )}
               <div
                 className="card-body"
                 dangerouslySetInnerHTML={{ __html: explainHTML }}

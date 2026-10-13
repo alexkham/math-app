@@ -1123,6 +1123,8 @@ Consider rolling a die until you get a 6, where $p = \\frac{1}{6}$:
 $$E[X] = \\frac{1}{1/6} = 6$$
 
 On average, you expect to roll the die 6 times before seeing the first 6. This makes intuitive sense: with a 1-in-6 chance per roll, the average wait is 6 rolls.
+
+To compute the expected value of a geometric distribution for your own parameters, step by step, use the [geometric expected value calculator](!/probability/calculators/expected-value/geometric).
   `,
   before: ``,
   after: ``,

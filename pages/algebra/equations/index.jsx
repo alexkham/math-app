@@ -413,7 +413,7 @@ Algebraic equations form the core of this section. Each degree class has its own
     title: `Linear Equations`,
     content: `A [linear equation](!/algebra/equations/linear) in one variable takes the form $ax + b = 0$ where $a \\neq 0$. The variable appears only to the first power, and the equation has exactly one solution: $x = -\\frac{b}{a}$. There are no special cases regarding the number of solutions — as long as $a$ is nonzero, a unique answer exists.
 
-Solving a linear equation requires nothing beyond the properties of equality: isolate the variable by undoing the operations applied to it, working in reverse order. When the equation involves parentheses, the distributive property clears them first. When fractions appear with numerical denominators, multiplying through by the least common denominator converts the equation to integer coefficients without changing its type. The mechanics are straightforward, but they establish the logical framework — preserving equivalence through reversible operations — that every other equation type builds upon.
+Solving a linear equation requires nothing beyond the properties of equality: isolate the variable by undoing the operations applied to it, working in reverse order. When the equation involves parentheses, the [distributive property](!/arithmetic/properties#5) clears them first. When fractions appear with numerical denominators, multiplying through by the least common denominator converts the equation to integer coefficients without changing its type. The mechanics are straightforward, but they establish the logical framework — preserving equivalence through reversible operations — that every other equation type builds upon.
 
 The structure breaks only when the variable terms cancel entirely during simplification. If the remaining statement is true (like $0 = 0$), the original equation is an identity. If it is false (like $0 = 5$), the equation is a contradiction. These edge cases aside, first-degree equations are the most predictable objects in algebra.`,
     before: ``,
@@ -429,7 +429,9 @@ Three solving methods cover all cases. Factoring works when the quadratic decomp
 
 $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
 
-The formula accepts any coefficients and delivers the roots directly, making it the default tool when factoring is not immediate. Vieta's formulas offer a complementary perspective: the sum of the two roots equals $-\\frac{b}{a}$ and their product equals $\\frac{c}{a}$, connecting solutions back to the coefficients that generated them.`,
+The formula accepts any coefficients and delivers the roots directly, making it the default tool when factoring is not immediate. Vieta's formulas offer a complementary perspective: the sum of the two roots equals $-\\frac{b}{a}$ and their product equals $\\frac{c}{a}$, connecting solutions back to the coefficients that generated them.
+
+To work through a specific equation, the [quadratic equation solver](!/algebra/calculators/equations/quadratic) computes the discriminant, applies the quadratic formula and graphs the parabola step by step.`,
     before: ``,
     after: ``,
     link: '/algebra/equations/quadratic',
@@ -441,7 +443,9 @@ The formula accepts any coefficients and delivers the roots directly, making it 
 
 For cubics and quartics, closed-form solutions exist — Cardano's formula for degree three and Ferrari's method for degree four — though both are cumbersome and rarely used in practice. The Abel–Ruffini theorem draws a hard boundary at degree five: no general formula built from radicals and arithmetic can solve every quintic or higher-degree polynomial. Specific equations beyond degree four may still yield to factoring, the rational root theorem, or substitution tricks, but there is no universal algebraic recipe.
 
-The practical strategy for polynomial equations of any degree begins with the [rational root theorem](!/algebra/polynomials/rules): test the finite list of candidate rational roots, and each confirmed root reduces the degree by one through polynomial division. Once the degree drops to two, the quadratic formula finishes the job. When no rational roots exist, numerical methods provide approximations to any desired accuracy.`,
+The practical strategy for polynomial equations of any degree begins with the [rational root theorem](!/algebra/polynomials/rules): test the finite list of candidate rational roots, and each confirmed root reduces the degree by one through polynomial division. Once the degree drops to two, the quadratic formula finishes the job. When no rational roots exist, numerical methods provide approximations to any desired accuracy.
+
+For equations up to degree four, the [polynomial equation solver](!/algebra/calculators/equations/polynomial) runs this strategy step by step: rational root candidates, synthetic division, and a numerical fallback for irrational roots.`,
     before: ``,
     after: ``,
     link: '/algebra/equations/polynomial',

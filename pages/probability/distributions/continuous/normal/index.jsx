@@ -1395,6 +1395,8 @@ Consider human heights modeled as normally distributed with $\\mu = 170$ cm and 
 $$E[X] = 170 \\text{ cm}$$
 
 The expected height is exactly 170 cm, which is the center of the distribution. Half of all heights fall above this value, and half fall below it.
+
+To compute the expected value of a normal distribution for your own parameters, step by step, use the [normal expected value calculator](!/probability/calculators/expected-value/normal).
   `,
   before: ``,
   after: ``,

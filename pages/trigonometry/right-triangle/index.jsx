@@ -3336,7 +3336,9 @@ $$\\tan(35°) = \\frac{x}{15} \\quad \\Rightarrow \\quad x = 15\\tan(35°)$$
 
 The choice of ratio is not arbitrary — it is dictated by which pair of sides (one known, one unknown) relates to the given angle. Using the wrong ratio is one of the most common errors in triangle problems. A reliable method: label the sides as opposite, adjacent, or hypotenuse relative to the given angle, identify which two are involved (one known, one unknown), and select the ratio that pairs exactly those two.
 
-Calculator usage requires attention to the angle mode. If the angle is given in degrees, the calculator must be in degree mode; if in radians, radian mode. A mismatch produces incorrect results with no error message — the calculator computes the wrong function value silently. This is a persistent source of mistakes, especially early in the subject.`,
+Calculator usage requires attention to the angle mode. If the angle is given in degrees, the calculator must be in degree mode; if in radians, radian mode. A mismatch produces incorrect results with no error message — the calculator computes the wrong function value silently. This is a persistent source of mistakes, especially early in the subject.
+
+To get the decimal value of sine, cosine or tangent for the given angle, use the [trigonometry calculator](!/calculators/trigonometry-calculator).`,
     before: ``,
     after: ``,
     link: ``,

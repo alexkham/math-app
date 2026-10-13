@@ -13605,7 +13605,7 @@ const definitionsRepository = [
     "formula": "A set $\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_n\\}$ that is [linearly independent](!/linear-algebra/definitions#linear_independence) and [spans](!/linear-algebra/definitions#span) the entire [vector space](!/linear-algebra/definitions#vector_space)",
     "link": {
       "label": "Vector Spaces",
-      "url": "/linear-algebra/vector-spaces#2"
+      "url": "/linear-algebra/vector-spaces/basis#2"
     },
     "relatedTools": [
       {

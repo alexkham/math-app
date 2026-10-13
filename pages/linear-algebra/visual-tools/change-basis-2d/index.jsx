@@ -547,7 +547,7 @@ export async function getStaticProps(){
     },
     obj1:{
       title:`Getting Started`,
-      content:`The canvas shows three draggable handles, the standard grid in gray, and a dashed [basis](!/linear-algebra/vector-spaces#2) grid in the colors of $b_1$ (teal) and $b_2$ (purple). The vector $v$ in amber stays in the same place in space no matter how you reshape the basis.
+      content:`The canvas shows three draggable handles, the standard grid in gray, and a dashed [basis](!/linear-algebra/vector-spaces/basis#2) grid in the colors of $b_1$ (teal) and $b_2$ (purple). The vector $v$ in amber stays in the same place in space no matter how you reshape the basis.
 
 Try this sequence to build intuition:
 

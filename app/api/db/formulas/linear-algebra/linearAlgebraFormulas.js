@@ -755,7 +755,7 @@ $$\\text{Area}(\\triangle) = \\tfrac{1}{2}\\|\\mathbf{a} \\times \\mathbf{b}\\|$
     entity: 'basis',
     category: `Basis & Coordinates`,
     formula: `$$\\mathcal{B} = \\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_n\\} \\text{ is a basis for } V \\iff \\begin{cases} \\mathcal{B} \\text{ is linearly independent} \\\\ \\text{Span}(\\mathcal{B}) = V \\end{cases}$$`,
-    link: { label: `Basis: Definition`, url: '/linear-algebra/vector-spaces#2' },
+    link: { label: `Basis: Definition`, url: '/linear-algebra/vector-spaces/basis#2' },
     fields: {
       explanation: `A basis is a set that is independent and spans the space — the two conditions hold simultaneously. Independence guarantees no vector is wasted; spanning guarantees no vector in $V$ is unreachable. Equivalently, a basis is a maximal independent set, or a minimal spanning set.`,
       related_formulas: `- [Linear Independence Equation](!/linear-algebra/formulas#linear_independence_equation)
@@ -772,7 +772,7 @@ $$\\text{Area}(\\triangle) = \\tfrac{1}{2}\\|\\mathbf{a} \\times \\mathbf{b}\\|$
     entity: 'basis',
     category: `Basis & Coordinates`,
     formula: `$$\\forall\\, \\mathbf{v} \\in V,\\ \\exists!\\, (c_1, \\ldots, c_n): \\mathbf{v} = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_n\\mathbf{v}_n$$`,
-    link: { label: `Unique Representation`, url: '/linear-algebra/vector-spaces#3' },
+    link: { label: `Unique Representation`, url: '/linear-algebra/vector-spaces/basis#3' },
     fields: {
       explanation: `Every vector in $V$ admits exactly one representation as a linear combination of basis vectors. Existence follows from the spanning condition, uniqueness from independence: if two coefficient sets both produced $\\mathbf{v}$, their difference would give a nontrivial relation equal to $\\mathbf{0}$. This unique representation is what makes coordinates well-defined.`,
       derivation: `Existence: spanning gives at least one expansion $\\mathbf{v} = \\sum c_i \\mathbf{v}_i$. Uniqueness: if also $\\mathbf{v} = \\sum c'_i \\mathbf{v}_i$, then $\\sum (c_i - c'_i)\\mathbf{v}_i = \\mathbf{0}$. By independence, $c_i - c'_i = 0$ for all $i$, so $c_i = c'_i$.`,
@@ -787,7 +787,7 @@ $$\\text{Area}(\\triangle) = \\tfrac{1}{2}\\|\\mathbf{a} \\times \\mathbf{b}\\|$
     entity: 'basis',
     category: `Basis & Coordinates`,
     formula: `$$[\\mathbf{v}]_\\mathcal{B} = \\begin{pmatrix} c_1 \\\\ c_2 \\\\ \\vdots \\\\ c_n \\end{pmatrix} \\quad \\text{where } \\mathbf{v} = c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n$$`,
-    link: { label: `Coordinates`, url: '/linear-algebra/vector-spaces#4' },
+    link: { label: `Coordinates`, url: '/linear-algebra/vector-spaces/basis#4' },
     fields: {
       explanation: `The coordinate vector of $\\mathbf{v}$ relative to basis $\\mathcal{B}$ packages the unique expansion coefficients into a column in $\\mathbb{F}^n$. Coordinates depend on the choice of basis — the same vector has different coordinates in different bases. For the standard basis of $\\mathbb{R}^n$, coordinates coincide with components.`,
       conditions: `Defined for finite-dimensional $V$ once an ordered basis $\\mathcal{B}$ is fixed. To compute, solve $B\\mathbf{c} = \\mathbf{v}$ where $B = [\\mathbf{v}_1\\ \\cdots\\ \\mathbf{v}_n]$; if $B$ is invertible, $\\mathbf{c} = B^{-1}\\mathbf{v}$.`,
@@ -802,7 +802,7 @@ $$\\text{Area}(\\triangle) = \\tfrac{1}{2}\\|\\mathbf{a} \\times \\mathbf{b}\\|$
     entity: 'basis',
     category: `Basis & Coordinates`,
     formula: `$$\\mathbf{e}_i = (0, \\ldots, 0, \\underset{i\\text{-th}}{1}, 0, \\ldots, 0), \\quad i = 1, \\ldots, n$$`,
-    link: { label: `The Standard Basis for Rⁿ`, url: '/linear-algebra/vector-spaces#5' },
+    link: { label: `The Standard Basis for Rⁿ`, url: '/linear-algebra/vector-spaces/basis#5' },
     fields: {
       explanation: `The standard basis of $\\mathbb{R}^n$ consists of $n$ vectors, each with a $1$ in one position and zeros elsewhere. Independence is immediate: no vector is a combination of the others. Spanning follows from $(v_1, \\ldots, v_n) = v_1\\mathbf{e}_1 + \\cdots + v_n\\mathbf{e}_n$. Coordinates relative to this basis coincide with the components themselves — the reason it is the default choice.`,
       notation: `In $\\mathbb{R}^3$, the alternative notation $\\mathbf{i} = \\mathbf{e}_1$, $\\mathbf{j} = \\mathbf{e}_2$, $\\mathbf{k} = \\mathbf{e}_3$ is also standard.`,
@@ -817,7 +817,7 @@ $$\\text{Area}(\\triangle) = \\tfrac{1}{2}\\|\\mathbf{a} \\times \\mathbf{b}\\|$
     entity: 'basis',
     category: `Basis & Coordinates`,
     formula: `$$[\\mathbf{v}]_\\mathcal{C} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}\\, [\\mathbf{v}]_\\mathcal{B}$$`,
-    link: { label: `Change of Basis`, url: '/linear-algebra/vector-spaces#9' },
+    link: { label: `Change of Basis`, url: '/linear-algebra/vector-spaces/basis#9' },
     fields: {
       explanation: `Coordinates of the same vector in two different bases are related by left-multiplication by the change-of-basis matrix. The columns of $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ are the $\\mathcal{C}$-coordinate vectors of each $\\mathcal{B}$-basis vector. Knowing $[\\mathbf{v}]_\\mathcal{B}$, this matrix produces $[\\mathbf{v}]_\\mathcal{C}$ in one multiplication.`,
       notation: `$P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ converts $\\mathcal{B}$-coordinates into $\\mathcal{C}$-coordinates. The arrow direction in the subscript is read right-to-left: input on the right, output on the left.`,
@@ -831,7 +831,7 @@ $$\\text{Area}(\\triangle) = \\tfrac{1}{2}\\|\\mathbf{a} \\times \\mathbf{b}\\|$
     entity: 'basis',
     category: `Basis & Coordinates`,
     formula: `$$P_{\\mathcal{B} \\leftarrow \\mathcal{C}} = \\bigl(P_{\\mathcal{C} \\leftarrow \\mathcal{B}}\\bigr)^{-1}$$`,
-    link: { label: `Change of Basis`, url: '/linear-algebra/vector-spaces#9' },
+    link: { label: `Change of Basis`, url: '/linear-algebra/vector-spaces/basis#9' },
     fields: {
       explanation: `Reversing the direction of a basis change inverts the matrix. The two change-of-basis matrices in opposite directions are inverses of each other, so once one is computed, the other is obtained by matrix inversion. Both matrices are invertible because basis vectors are linearly independent.`,
       related_formulas: `- [Change of Basis Formula](!/linear-algebra/formulas#change_of_basis_formula)`,
@@ -843,7 +843,7 @@ $$\\text{Area}(\\triangle) = \\tfrac{1}{2}\\|\\mathbf{a} \\times \\mathbf{b}\\|$
     entity: 'basis',
     category: `Basis & Coordinates`,
     formula: `$$[\\mathbf{u} + \\mathbf{v}]_\\mathcal{B} = [\\mathbf{u}]_\\mathcal{B} + [\\mathbf{v}]_\\mathcal{B}, \\qquad [c\\mathbf{v}]_\\mathcal{B} = c\\,[\\mathbf{v}]_\\mathcal{B}$$`,
-    link: { label: `Coordinates and Isomorphism`, url: '/linear-algebra/vector-spaces#10' },
+    link: { label: `Coordinates and Isomorphism`, url: '/linear-algebra/vector-spaces/basis#10' },
     fields: {
       explanation: `The coordinate map $\\mathbf{v} \\mapsto [\\mathbf{v}]_\\mathcal{B}$ preserves both vector operations. Together with bijectivity, this makes it an isomorphism $V \\to \\mathbb{F}^n$. Every $n$-dimensional vector space over $\\mathbb{F}$ is therefore structurally identical to $\\mathbb{F}^n$ — polynomials, matrices, and ODE solution spaces all reduce to coordinate computations once a basis is fixed.`,
       related_formulas: `- [Coordinate Vector](!/linear-algebra/formulas#coordinate_vector)

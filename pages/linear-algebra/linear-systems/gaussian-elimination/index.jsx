@@ -1417,7 +1417,9 @@ $$\\xrightarrow{R_3 - 2R_2} \\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 &
 
 Three pivots in three columns — unique solution. Back substitution: row $3$ gives $-x_3 = 0$, so $x_3 = 0$. Row $2$ gives $x_2 + 3(0) = 2$, so $x_2 = 2$. Row $1$ gives $x_1 + 2(2) - 0 = 3$, so $x_1 = -1$.
 
-Verification: $-1 + 4 - 0 = 3$, $-2 + 10 + 0 = 8$, $-3 + 16 + 0 = 13$. All three equations are satisfied.`,
+Verification: $-1 + 4 - 0 = 3$, $-2 + 10 + 0 = 8$, $-3 + 16 + 0 = 13$. All three equations are satisfied.
+
+To run the same elimination on your own system, use the [linear systems calculator](!/linear-algebra/calculators/linear-systems).`,
     before: ``,
     after: ``,
     link: ``,

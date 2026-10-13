@@ -1061,7 +1061,9 @@ An important property of unit fractions is that larger denominators produce smal
 
 [Dividing fractions](!/arithmetic/fractions/dividing) transforms into multiplication by the reciprocal. To compute $\\frac{2}{3} \\div \\frac{4}{5}$, multiply the first fraction by the flipped second fraction: $\\frac{2}{3} \\times \\frac{5}{4} = \\frac{10}{12}$, which simplifies to $\\frac{5}{6}$.
 
-[Comparing fractions](!/arithmetic/fractions/comparing) determines which of two fractions is larger, smaller, or whether they are equal. Methods include finding common denominators, cross-multiplication, or converting to decimals.`,
+[Comparing fractions](!/arithmetic/fractions/comparing) determines which of two fractions is larger, smaller, or whether they are equal. Methods include finding common denominators, cross-multiplication, or converting to decimals.
+
+To work through any of these operations step by step, use the [fraction calculator](!/calculators/fraction-calculator).`,
     before: ``,
     after: ``,
     link: '',

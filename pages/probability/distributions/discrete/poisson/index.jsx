@@ -1120,6 +1120,8 @@ Consider phone calls arriving at a call center at an average rate of $\\lambda =
 $$E[X] = 12$$
 
 The expected number of calls in one hour is exactly 12, which is the defining parameter of the distribution. This self-referential property makes the Poisson distribution especially natural for modeling count data.
+
+To compute the expected value of a Poisson distribution for your own parameters, step by step, use the [Poisson expected value calculator](!/probability/calculators/expected-value/poisson).
   `,
   before: ``,
   after: ``,

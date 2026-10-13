@@ -614,7 +614,7 @@ For comprehensive theory, see **matrix operations**.`,
 • **Linearity**: $\\text{tr}(A + B) = \\text{tr}(A) + \\text{tr}(B)$ and $\\text{tr}(kA) = k \\cdot \\text{tr}(A)$
 • **Transpose invariance**: $\\text{tr}(A^T) = \\text{tr}(A)$ — the diagonal stays put under transposition
 • **Cyclic property**: $\\text{tr}(AB) = \\text{tr}(BA)$, and more generally $\\text{tr}(ABC) = \\text{tr}(BCA) = \\text{tr}(CAB)$
-• **Similarity invariance**: $\\text{tr}(P^{-1} A P) = \\text{tr}(A)$ — trace doesn't change under change of [basis](!/linear-algebra/vector-spaces#2)
+• **Similarity invariance**: $\\text{tr}(P^{-1} A P) = \\text{tr}(A)$ — trace doesn't change under change of [basis](!/linear-algebra/vector-spaces/basis#2)
 • **Sum of eigenvalues**: for any square $A$, $\\text{tr}(A) = \\sum_i \\lambda_i$ where $\\lambda_i$ are the [eigenvalues](!/linear-algebra/eigen#2) counted with multiplicity
 
 The cyclic property is the workhorse — it's behind nearly every nontrivial trace identity.`,

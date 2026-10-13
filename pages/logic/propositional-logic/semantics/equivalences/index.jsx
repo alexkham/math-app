@@ -434,6 +434,8 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import vennTruthTableDiagrams from '@/app/components/diagrams/set-theory/vennTruthTableDiagrams'
 
 export async function getStaticProps(){
 
@@ -734,8 +736,19 @@ const faqQuestions = {
   }
 }
 
+  const demoUnits = {
+    absorption: demoUnitFrame({
+      svg: vennTruthTableDiagrams['independent'],
+      caption: 'Absorption: P &#8743; (P &#8744; Q) &#8801; P',
+      text: 'Read circle A as the cases where P is true and B as the cases where Q is true. P &#8744; Q covers both circles; intersecting that with A leaves exactly A. The shaded region is the same as P alone, so the two formulas agree in every case and are logically equivalent. The part of B outside A is absorbed. Try the other absorption law on the',
+      href: '/set-theory/visual-tools/venn-truth-table',
+      linkText: 'Venn truth-table explorer',
+    }),
+  };
+
   return {
     props:{
+      demoUnits,
        verify,
        biconditionalEquivalences,
        logicalLaws,
@@ -748,7 +761,7 @@ const faqQuestions = {
   }
 }
 
-export default function EquivalencesPage({verify ,biconditionalEquivalences ,logicalLaws ,logicalEquivalences,
+export default function EquivalencesPage({demoUnits, verify ,biconditionalEquivalences ,logicalLaws ,logicalEquivalences,
   sectionsContent,keyWords ,introContent ,faqQuestions}) {
 
 
@@ -799,6 +812,8 @@ key={1}
  boxed={true} color={'blue'} compact={true} type={'dot'} width={'300px'}/>,
 
  sectionsContent.laws.after,
+ <div key={'unit-absorption'} dangerouslySetInnerHTML={{ __html: demoUnits.absorption }} />,
+ `Equivalent formulas always shade the same region: that is equivalence seen as a picture.`,
 
 ]
           },

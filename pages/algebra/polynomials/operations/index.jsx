@@ -562,7 +562,9 @@ To divide $x^3 - 2x^2 + 5x - 3$ by $x - 1$, begin by dividing the leading term o
 
 The process terminates when the degree of what remains is less than the degree of the divisor. If the remainder is zero, the divisor divides the dividend evenly — meaning the divisor is a [factor](!/algebra/polynomials/factoring) of the dividend.
 
-Missing powers in the dividend require placeholder terms. Dividing $x^3 + 4$ by $x + 1$ requires writing the dividend as $x^3 + 0x^2 + 0x + 4$ to keep terms aligned through each subtraction step.`,
+Missing powers in the dividend require placeholder terms. Dividing $x^3 + 4$ by $x + 1$ requires writing the dividend as $x^3 + 0x^2 + 0x + 4$ to keep terms aligned through each subtraction step.
+
+To divide your own polynomials by long or synthetic division with each step shown, use the [polynomial calculator](!/algebra/calculators/polynomial).`,
     before: ``,
     after: ``,
     link: '',

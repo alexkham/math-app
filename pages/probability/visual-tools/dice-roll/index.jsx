@@ -90,7 +90,7 @@ Watch the histogram evolve. After 100 rolls, you'll see rough patterns. After 10
 
 Early rolls show wild fluctuations—the blue line jumps erratically as individual rolls dominate the average. With more data, fluctuations dampen and the blue line gravitates toward the red expected value line. By 10,000 rolls, the lines typically converge within a few percent.
 
-This visualization proves the Law of Large Numbers: short-term randomness gives way to long-term predictability. Individual rolls remain unpredictable, but aggregate behavior becomes increasingly certain as sample size grows.`,
+This visualization proves the [Law of Large Numbers](!/probability/large-numbers-law): short-term randomness gives way to long-term predictability. Individual rolls remain unpredictable, but aggregate behavior becomes increasingly certain as sample size grows.`,
       before: ``,
       after: ``,
       link: '',

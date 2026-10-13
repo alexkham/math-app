@@ -150,7 +150,7 @@ The four sections that follow freeze one representative of each situation, with 
 
 $$A(B\\mathbf{v}) = (AB)\\,\\mathbf{v} \\quad \\text{for every } \\mathbf{v}$$
 
-This is not a coincidence about matrices; it is the reason [matrix multiplication](!/linear-algebra/formulas#matrix_multiplication) is defined the way it is. The column $j$ of $AB$ is $A$ applied to column $j$ of $B$, which is where the row-times-column rule comes from: the entry $(AB)_{ij} = \\sum_k A_{ik} B_{kj}$ is exactly what falls out of applying $A$ to the image of the $j$-th [basis](!/linear-algebra/vector-spaces#2) vector under $B$.
+This is not a coincidence about matrices; it is the reason [matrix multiplication](!/linear-algebra/formulas#matrix_multiplication) is defined the way it is. The column $j$ of $AB$ is $A$ applied to column $j$ of $B$, which is where the row-times-column rule comes from: the entry $(AB)_{ij} = \\sum_k A_{ik} B_{kj}$ is exactly what falls out of applying $A$ to the image of the $j$-th [basis](!/linear-algebra/vector-spaces/basis#2) vector under $B$.
 
 Two consequences follow immediately. Products read right to left, since the matrix nearest the vector acts first. And products need not commute, because doing two things in different orders need not give the same result: shearing a picture and then rotating it is not the same as rotating and then shearing.
 

@@ -353,6 +353,8 @@ import MyList from '@/app/components/page-components/lists/MyList'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 export async function getStaticProps() {
 
@@ -579,8 +581,29 @@ This section introduces the basic elements of propositional logic syntax, beginn
    }
  }
 
+  const lgN = { root: [5, 4], and: [3, 3], neg: [7, 3], P: [2, 2], Q: [4, 2], R: [7, 2] };
+  const lgEdge = (a, b, c) => { const [x1, y1] = lgN[a], [x2, y2] = lgN[b]; const lo = Math.min(x1, x2), hi = Math.max(x1, x2); if (x1 === x2) return { fn: (x) => y2 + (x - x1) * 1e6, from: x1, to: x1 + (y1 - y2) / 1e6, ends: [null, null], color: c }; return { fn: (x) => y1 + (y2 - y1) * (x - x1) / (x2 - x1), from: lo, to: hi, ends: [null, null], color: c }; };
+  const lgDot = (k, c) => ({ fn: () => lgN[k][1], from: lgN[k][0], to: lgN[k][0], ends: ['closed', 'closed'], color: c });
+  const fpParseTree = { kind: 'pieces', svgTitle: 'Parse tree of ((P and Q) implies not R): leaves P, Q, R; rule 3 joins P and Q with and, rule 2 negates R, rule 3 joins both with the arrow', xRange: [0.6, 10.2], yRange: [1.2, 4.7], xStep: 20, yStep: 20, xLetter: ' ', yLetter: ' ',
+    pieces: [lgEdge('root', 'and', 'g'), lgEdge('root', 'neg', 'g'), lgEdge('and', 'P', 'f'), lgEdge('and', 'Q', 'f'), lgEdge('neg', 'R', 'f'),
+      lgDot('root', 'r'), lgDot('and', 'g'), lgDot('neg', 'g'), lgDot('P', 'f'), lgDot('Q', 'f'), lgDot('R', 'f')],
+    notes: [{ x: 5, y: 4, text: '((P ∧ Q) → ¬R)', pos: 'n', color: 'r' }, { x: 3, y: 3, text: '(P ∧ Q)', pos: 'nw', color: 'g' }, { x: 7, y: 3, text: '¬R', pos: 'ne', color: 'g' },
+      { x: 2, y: 2, text: 'P', pos: 's', color: 'f' }, { x: 4, y: 2, text: 'Q', pos: 's', color: 'f' }, { x: 7, y: 2, text: 'R', pos: 's', color: 'f' },
+      { x: 7.7, y: 4.4, text: 'rule 3: binary connective', pos: 'e', color: 'r' }, { x: 7.7, y: 3.55, text: 'rule 2: negation', pos: 'e', color: 'g' }, { x: 3.2, y: 3.45, text: 'rule 3', pos: 'w', color: 'g' }, { x: 7.7, y: 2.0, text: 'rule 1: atoms', pos: 'e', color: 'f' }],
+    caption: 'Every WFF is built from atoms up, one rule per node' };
+  const demoUnits = {
+    parseTree: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpParseTree),
+      caption: 'How ((P &#8743; Q) &#8594; &#172;R) is built',
+      text: 'Reading the tree from the bottom: rule 1 makes the atoms P, Q and R formulas; rule 3 joins P and Q into (P &#8743; Q); rule 2 negates R into &#172;R; and rule 3 joins those two with &#8594; into the whole formula. Each inner node is one application of a formation rule, and the parentheses record exactly this structure. Build trees for your own formulas on the',
+      href: '/logic/propositional-logic/syntax/tree-builder',
+      linkText: 'proposition tree builder',
+    }),
+  };
+
  return {
    props: {
+     demoUnits,
      sectionContent,
      pageTitle,
      pageDescription,
@@ -594,7 +617,7 @@ This section introduces the basic elements of propositional logic syntax, beginn
  }
 }
 
-export default function LogicPage({
+export default function LogicPage({demoUnits, 
  sectionContent,
  pageTitle,
  pageDescription,
@@ -641,7 +664,9 @@ boxed={true} color={'blue'} compact={true} type={'dot'} width={'650px'} />
     id:'formation',
     title:'Formation Rules',
     content:[
-      sectionContent.formation.description
+      sectionContent.formation.description,
+      <div key={'unit-parseTree'} dangerouslySetInnerHTML={{ __html: demoUnits.parseTree }} />,
+      `A string that cannot be split this way, such as P ∧ ∨ Q, is not a WFF.`,
 
     ]
    },

@@ -354,7 +354,9 @@ The integer $q$ is the quotient — how many complete copies of $n$ fit into $a$
 
 Divisibility corresponds to the case $r = 0$. When the remainder vanishes, the division is exact and $n \\mid a$. When $r \\neq 0$, the division is inexact and $n \\nmid a$.
 
-The operation that extracts $r$ directly is [modulo](!/arithmetic/modulo). The statement $a \\bmod n = 0$ is the computational form of $n \\mid a$. The statement $a \\bmod n \\neq 0$ is the computational form of $n \\nmid a$. Divisibility poses the question; modulo computes the answer.`,
+The operation that extracts $r$ directly is [modulo](!/arithmetic/modulo). The statement $a \\bmod n = 0$ is the computational form of $n \\mid a$. The statement $a \\bmod n \\neq 0$ is the computational form of $n \\nmid a$. Divisibility poses the question; modulo computes the answer.
+
+To find the remainder of any division quickly, use the [modulo calculator](!/calculators/modulo-calculator).`,
   before: ``,
   after: ``,
   link: '',
@@ -414,6 +416,8 @@ The first primes are $2, 3, 5, 7, 11, 13, 17, 19, 23, 29, \\ldots$ — an infini
 
 The number $1$ is not prime. It has only one factor (itself), while the definition requires exactly two. Excluding $1$ is not a technicality — it is necessary to preserve the uniqueness of prime factorization.
 
+To test whether a specific number is prime, use the [prime number checker](!/arithmetic/calculators/prime-calculator).
+
 `,
   before: ``,
   after: ``,
@@ -428,7 +432,9 @@ The number $360$ factors as $2^3 \\cdot 3^2 \\cdot 5$. No other combination of p
 
 Prime factorization reveals the divisor structure of a number. The number of factors of $n = p_1^{a_1} \\cdot p_2^{a_2} \\cdots$ is $(a_1 + 1)(a_2 + 1) \\cdots$ — a formula that reads the answer directly from the exponents.
 
-Factorization also underpins the computation of [GCD](!/arithmetic/divisibility/gcd) and [LCM](!/arithmetic/divisibility/lcm). The GCD takes the minimum exponent of each shared prime; the LCM takes the maximum. These connections are developed on the prime factorization page.`,
+Factorization also underpins the computation of [GCD](!/arithmetic/divisibility/gcd) and [LCM](!/arithmetic/divisibility/lcm). The GCD takes the minimum exponent of each shared prime; the LCM takes the maximum. These connections are developed on the prime factorization page.
+
+To find the prime factorization or all factors of a specific number, use the [factoring calculator](!/algebra/calculators/factoring).`,
   before: ``,
   after: ``,
   link: '',

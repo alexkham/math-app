@@ -122,7 +122,7 @@ and then orthonormal vectors
 
 $$\\mathbf{e}_k = \\frac{\\mathbf{u}_k}{\\|\\mathbf{u}_k\\|}$$
 
-Each $\\mathbf{u}_k$ is $\\mathbf{v}_k$ with its projections onto all the earlier $\\mathbf{u}_j$ removed, so it is perpendicular to every one of them; and since it differs from $\\mathbf{v}_k$ only by a combination of earlier vectors, the [span](!/linear-algebra/formulas#span) is unchanged at every step. The result is an orthonormal [basis](!/linear-algebra/vector-spaces#2) of $\\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$ with the extra property that the first $m$ output vectors span the same space as the first $m$ inputs, for every $m$.
+Each $\\mathbf{u}_k$ is $\\mathbf{v}_k$ with its projections onto all the earlier $\\mathbf{u}_j$ removed, so it is perpendicular to every one of them; and since it differs from $\\mathbf{v}_k$ only by a combination of earlier vectors, the [span](!/linear-algebra/formulas#span) is unchanged at every step. The result is an orthonormal [basis](!/linear-algebra/vector-spaces/basis#2) of $\\operatorname{span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$ with the extra property that the first $m$ output vectors span the same space as the first $m$ inputs, for every $m$.
 
 Why the subtraction works: dot $\\mathbf{u}_k$ with any earlier $\\mathbf{u}_j$. The projections onto the other $\\mathbf{u}_i$ contribute nothing, since they are already perpendicular to $\\mathbf{u}_j$, and the projection onto $\\mathbf{u}_j$ contributes exactly $-\\mathbf{v}_k \\cdot \\mathbf{u}_j$, cancelling the $\\mathbf{v}_k \\cdot \\mathbf{u}_j$ from the first term.
 

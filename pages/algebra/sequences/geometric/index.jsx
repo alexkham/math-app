@@ -441,7 +441,9 @@ Finding the first term: if $a_6 = 96$ and $r = 2$, then $96 = a_1 \\cdot 2^5$, s
 
 Finding the position of a term: if $a_1 = 4$, $r = 3$, and some term equals $2916$, then $2916 = 4 \\cdot 3^{n-1}$, so $3^{n-1} = 729 = 3^6$ and $n = 7$. When the arithmetic does not produce a clean [power](!/algebra/powers), solving for $n$ requires [logarithms](!/algebra/logarithms): $n - 1 = \\frac{\\ln(a_n / a_1)}{\\ln r}$.
 
-When two non-consecutive terms are given — say $a_2 = 6$ and $a_5 = 162$ — write both in terms of $a_1$ and $r$: $a_1 r = 6$ and $a_1 r^4 = 162$. Dividing gives $r^3 = 27$, so $r = 3$, and back-substituting gives $a_1 = 2$.`,
+When two non-consecutive terms are given — say $a_2 = 6$ and $a_5 = 162$ — write both in terms of $a_1$ and $r$: $a_1 r = 6$ and $a_1 r^4 = 162$. Dividing gives $r^3 = 27$, so $r = 3$, and back-substituting gives $a_1 = 2$.
+
+To find any term of your own geometric sequence, use the [geometric sequence calculator](!/algebra/calculators/sequences/geometric-sequence).`,
     before: ``,
     after: ``,
     link: '',

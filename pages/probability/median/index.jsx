@@ -2658,6 +2658,8 @@ Discrete: Examine the cumulative probability plot, find where steps cross 0.5
 Continuous: Locate the area split point on the [PDF](!/probability/probability-function/pdf) curve where left area equals right area
 
 Visual methods provide intuition but lack precision for formal analysis.
+
+To find the median of your own data set, along with the mean, mode and quartiles, use the [statistics calculator](!/calculators/statistics-calculator).
   `,
   before: ``,
   after: ``,

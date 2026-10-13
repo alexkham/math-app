@@ -999,7 +999,7 @@ This page connects counting to probability without duplicating the material cove
       content:`
 In finite probability models, probability values are determined by counting outcomes.
 
-Combinatorics provides the mechanism for measuring [event](!/probability/events) sizes, defining [random variables](!/probability/random-variables), and forming [discrete probability distributions](!/probability/distributions/discrete). It underlies classical probability formulas, conditional probability calculations, and expectation computations based on indicator variables.
+Combinatorics provides the mechanism for measuring [event](!/probability/events) sizes, defining [random variables](!/probability/random-variables), and forming [discrete probability distributions](!/probability/distributions/discrete). It underlies classical [probability formulas](!/probability/formulas), conditional probability calculations, and expectation computations based on [indicator variables](!/probability/indicators).
 
 This page explains how counting is used within probability theory, while all counting techniques themselves are handled in the dedicated combinatorics section. The table below collects each application of counting introduced above — the role counting plays in each, and what counting produces.
 `,

@@ -283,7 +283,9 @@ $$\\begin{array}{c|ccc} & x < 1 & 1 < x < 4 & x > 4 \\\\ \\hline (x-1) & - & + &
 
 The solution to the $> 0$ inequality consists of the intervals where the product is positive: $(-\\infty, 1) \\cup (4, \\infty)$.
 
-When the quadratic does not factor neatly, the roots from the quadratic formula serve the same purpose. The sign chart does not require integer or rational roots — any pair of real numbers works as boundary points. The method fails only when no real roots exist ($\\Delta < 0$), in which case the sign is constant and no chart is needed.`,
+When the quadratic does not factor neatly, the roots from the quadratic formula serve the same purpose. The sign chart does not require integer or rational roots — any pair of real numbers works as boundary points. The method fails only when no real roots exist ($\\Delta < 0$), in which case the sign is constant and no chart is needed.
+
+To solve your own quadratic inequality with each step shown, use the [quadratic inequality solver](!/algebra/calculators/inequalities/quadratic).`,
     before: ``,
     after: ``,
     link: '',

@@ -934,7 +934,9 @@ $$= 1(-25) - 2(-5) + (-1)(15) = -25 + 10 - 15 = -30$$
 
 So $\\det(A) = (-1)^{5} \\cdot 1 \\cdot (-30) = (-1)(-30) = 30$.
 
-The choice of column $2$ reduced the problem from four $3 \\times 3$ determinants down to one. This illustrates why scanning for zeros before expanding is the first step in any hand computation.`,
+The choice of column $2$ reduced the problem from four $3 \\times 3$ determinants down to one. This illustrates why scanning for zeros before expanding is the first step in any hand computation.
+
+To compute the determinant of a specific matrix, use the [matrix calculator](!/linear-algebra/calculators/matrix).`,
     before: ``,
     after: ``,
     link: ``,

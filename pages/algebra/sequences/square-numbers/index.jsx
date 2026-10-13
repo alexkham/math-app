@@ -177,7 +177,9 @@ The name reflects the geometric construction: arrange $n^2$ dots in a square gri
 
 $$1, 4, 9, 16, 25, 36, 49, 64, 81, 100, \\ldots$$
 
-A positive integer is called a **perfect square** if it equals $n^2$ for some integer $n$. Testing whether a number is a perfect square amounts to checking whether its [square root](!/algebra/roots) is an integer.`,
+A positive integer is called a **perfect square** if it equals $n^2$ for some integer $n$. Testing whether a number is a perfect square amounts to checking whether its [square root](!/algebra/roots) is an integer.
+
+To list square numbers or test whether a number is a perfect square, use the [square numbers calculator](!/algebra/calculators/sequences/square-numbers).`,
     before: ``,
     after: ``,
     link: '',

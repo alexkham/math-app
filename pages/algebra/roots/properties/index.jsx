@@ -571,7 +571,9 @@ $$x^2 = 16 \\quad \\Longrightarrow \\quad x = \\pm\\sqrt{16} = \\pm 4$$
 
 The $\\pm$ symbol signals that both positive and negative roots apply. This notation appears frequently when [solving radical equations](!/algebra/roots/equations).
 
-Odd-index radicals need no such convention. Each real number has exactly one real odd root, so no ambiguity exists.`,
+Odd-index radicals need no such convention. Each real number has exactly one real odd root, so no ambiguity exists.
+
+The [root calculator](!/calculators/root-calculator) returns the principal root, following this convention.`,
     before: ``,
     after: ``,
     link: '',

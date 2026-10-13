@@ -983,7 +983,9 @@ $$\\frac{5}{8} = 0.625 \\quad \\text{and} \\quad \\frac{7}{11} \\approx 0.636$$
 
 Since $0.636 > 0.625$, we have $\\frac{7}{11} > \\frac{5}{8}$.
 
-This method is practical with a calculator or for fractions that produce simple decimals. It becomes cumbersome for fractions with long repeating decimals.`,
+This method is practical with a calculator or for fractions that produce simple decimals. It becomes cumbersome for fractions with long repeating decimals.
+
+To convert fractions and decimals quickly, you can use the [fraction calculator](!/calculators/fraction-calculator).`,
     before: ``,
     after: ``,
     link: '',

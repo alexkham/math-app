@@ -82,7 +82,7 @@ The computation is the hand method: [eigenvalues](!/linear-algebra/eigen#2) and 
 • **Eigenvalues and singular values** — $\\lambda_i \\geq 0$ of $A^TA$ in decreasing order and $\\sigma_i = \\sqrt{\\lambda_i}$, with the rank read off and $\\sum\\sigma_i^2$ checked against the sum of squared entries
 • **Right singular vectors** — for each eigenvalue, $A^TA - \\lambda I$ row reduced and one integer vector per free column, orthogonalized inside a repeated [eigenspace](!/linear-algebra/eigen#4), then normalized
 • **Left singular vectors** — $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$ for each $\\sigma_i > 0$, with the length of $A\\mathbf{v}_i$ confirmed as $\\sigma_i$
-• **Complete $U$** — only when there are fewer non-zero singular values than rows: Gram–Schmidt on standard [basis](!/linear-algebra/vector-spaces#2) vectors fills the remaining orthonormal columns
+• **Complete $U$** — only when there are fewer non-zero singular values than rows: Gram–Schmidt on standard [basis](!/linear-algebra/vector-spaces/basis#2) vectors fills the remaining orthonormal columns
 • **Assemble** — $U$, the rectangular $\\Sigma$, and $V^T$
 • **Factor** — $A = U \\cdot \\Sigma \\cdot V^T$ multiplied out
 • **Rank-one sum** — $A = \\sigma_1\\mathbf{u}_1\\mathbf{v}_1^T + \\sigma_2\\mathbf{u}_2\\mathbf{v}_2^T + \\cdots$

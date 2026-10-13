@@ -3664,6 +3664,50 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "factorial calculator",
+          "entity": "factorial_calculator",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "factorial-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/factorial-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Permutations and Combinations'."
+            }
+          ]
+        },
+        {
+          "term": "combinatorics calculator",
+          "entity": "combinatorics_calculator",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "combinatorics-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/combinatorics/calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Standard Scenarios'."
+            }
+          ]
         }
       ]
     },
@@ -5480,6 +5524,28 @@
               "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
             }
           ]
+        },
+        {
+          "term": "matrix calculator",
+          "entity": "matrix_calculator",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "matrix-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/linear-algebra/calculators/matrix",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Computing Small Determinants'."
+            }
+          ]
         }
       ]
     },
@@ -7275,6 +7341,28 @@
               "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
             }
           ]
+        },
+        {
+          "term": "fibonacci sequence",
+          "entity": "fibonacci_sequence",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "fibonacci",
+              "toolKind": "lesson",
+              "target": {
+                "path": "/algebra/sequences/fibonacci",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "indexing links (contextual)"
+            }
+          ]
         }
       ]
     },
@@ -7777,6 +7865,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "linear systems calculator",
+          "entity": "linear_systems_calculator",
+          "sections": [
+            "10"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "10",
+              "tool": "linear-systems-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/linear-algebra/calculators/linear-systems",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Solution Methods Beyond Row Reduction'."
+            }
+          ]
         }
       ]
     },
@@ -8247,6 +8357,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "linear systems calculator",
+          "entity": "linear_systems_calculator",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "linear-systems-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/linear-algebra/calculators/linear-systems",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Worked Example: Unique Solution'."
+            }
+          ]
         }
       ]
     },
@@ -9244,6 +9376,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "matrix calculator",
+          "entity": "matrix_calculator",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "matrix-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/linear-algebra/calculators/matrix",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Computing the Inverse by Row Reduction'."
+            }
+          ]
         }
       ]
     },
@@ -10987,6 +11141,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 6 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "vector calculator",
+          "entity": "vector_calculator",
+          "sections": [
+            "5"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "5",
+              "tool": "vector-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/linear-algebra/calculators/vectors",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Worked Example: Three Vectors in R³'."
+            }
+          ]
         }
       ]
     },
@@ -15318,6 +15494,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 9 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "vector calculator",
+          "entity": "vector_calculator",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "vector-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/linear-algebra/calculators/vectors",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Algebraic Definition'."
+            }
+          ]
         }
       ]
     },
@@ -15489,6 +15687,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 9 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "vector calculator",
+          "entity": "vector_calculator",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "vector-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/linear-algebra/calculators/vectors",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Algebraic Definition'."
+            }
+          ]
         }
       ]
     },
@@ -15855,6 +16075,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 6 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "vector calculator",
+          "entity": "vector_calculator",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "vector-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/linear-algebra/calculators/vectors",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Magnitude in Two and Three Dimensions'."
+            }
+          ]
         }
       ]
     },
@@ -16477,6 +16719,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 4 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "trigonometry calculator",
+          "entity": "trigonometry_calculator",
+          "sections": [
+            "9"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "9",
+              "tool": "trigonometry-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/trigonometry-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Evaluating Trigonometric Functions at Any Angle'."
+            }
+          ]
         }
       ]
     },
@@ -17079,6 +17343,19 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "trigonometry calculator",
+          "entity": "trigonometry_calculator",
+          "sections": [],
+          "status": "dropped",
+          "toolKind": "calculator",
+          "target": {
+            "path": "/calculators/trigonometry-calculator",
+            "section": null
+          },
+          "reason": "Best-fit section (Evaluating Inverse Trigonometric Functions) ends with a lead-in to a reference table; zero-force skip.",
+          "added": "2026-10-11"
         }
       ]
     },
@@ -26256,6 +26533,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "factorial calculator",
+          "entity": "factorial_calculator",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "factorial-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/factorial-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Definition'."
+            }
+          ]
         }
       ]
     },
@@ -26819,6 +27118,28 @@
               "note": "added by the illustration pass (harvest); the Operation A pass had no record for this term on this page"
             }
           ]
+        },
+        {
+          "term": "factorial calculator",
+          "entity": "factorial_calculator",
+          "sections": [
+            "8"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "8",
+              "tool": "factorial-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/factorial-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Derangement'."
+            }
+          ]
         }
       ]
     },
@@ -27072,6 +27393,72 @@
               "added": "2026-09-24"
             }
           ]
+        },
+        {
+          "term": "modulo calculator",
+          "entity": "modulo_calculator",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "modulo-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/modulo-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Divisibility and Remainders'."
+            }
+          ]
+        },
+        {
+          "term": "prime number checker",
+          "entity": "prime_number_checker",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "prime-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/arithmetic/calculators/prime-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Prime Numbers'."
+            }
+          ]
+        },
+        {
+          "term": "factoring calculator",
+          "entity": "factoring_calculator",
+          "sections": [
+            "8"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "8",
+              "tool": "factoring-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/factoring",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Prime Factorization'."
+            }
+          ]
         }
       ]
     },
@@ -27137,6 +27524,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "factoring calculator",
+          "entity": "factoring_calculator",
+          "sections": [
+            "2"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "2",
+              "tool": "factoring-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/factoring",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Finding All Factors'."
+            }
+          ]
         }
       ]
     },
@@ -27587,6 +27996,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 8 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "fraction calculator",
+          "entity": "fraction_calculator",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "fraction-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/fraction-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Operations with Fractions'."
+            }
+          ]
         }
       ]
     },
@@ -27703,6 +28134,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "fraction calculator",
+          "entity": "fraction_calculator",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "fraction-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/fraction-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Adding and Subtracting with Whole Numbers'."
+            }
+          ]
         }
       ]
     },
@@ -27814,6 +28267,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "fraction calculator",
+          "entity": "fraction_calculator",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "fraction-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/fraction-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Decimal Conversion Method'."
+            }
+          ]
         }
       ]
     },
@@ -27927,6 +28402,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "fraction calculator",
+          "entity": "fraction_calculator",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "fraction-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/fraction-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Complex Fractions with Sums or Differences'."
+            }
+          ]
         }
       ]
     },
@@ -28019,6 +28516,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 8 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "fraction calculator",
+          "entity": "fraction_calculator",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "fraction-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/fraction-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Dividing Mixed Numbers'."
+            }
+          ]
         }
       ]
     },
@@ -28130,6 +28649,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "fraction calculator",
+          "entity": "fraction_calculator",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "fraction-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/fraction-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Simplifying Fractions'."
+            }
+          ]
         }
       ]
     },
@@ -28250,6 +28791,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "fraction calculator",
+          "entity": "fraction_calculator",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "fraction-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/fraction-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Operations with Mixed Numbers'."
+            }
+          ]
         }
       ]
     },
@@ -28351,6 +28914,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "fraction calculator",
+          "entity": "fraction_calculator",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "fraction-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/fraction-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Multiplying Mixed Numbers'."
+            }
+          ]
         }
       ]
     },
@@ -28481,6 +29066,28 @@
               "added": "2026-09-24"
             }
           ]
+        },
+        {
+          "term": "modulo calculator",
+          "entity": "modulo_calculator",
+          "sections": [
+            "51"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "51",
+              "tool": "modulo-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/modulo-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'How to Compute a Remainder'."
+            }
+          ]
         }
       ]
     },
@@ -28577,6 +29184,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 10 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "modulo calculator",
+          "entity": "modulo_calculator",
+          "sections": [
+            "11"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "11",
+              "tool": "modulo-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/modulo-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Worked Examples'."
+            }
+          ]
         }
       ]
     },
@@ -28669,6 +29298,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 10 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "modulo calculator",
+          "entity": "modulo_calculator",
+          "sections": [
+            "13"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "13",
+              "tool": "modulo-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/modulo-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Worked Examples'."
+            }
+          ]
         }
       ]
     },
@@ -29187,6 +29838,72 @@
           ],
           "status": "dropped",
           "reason": "Runs through 11 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "quadratic equation solver",
+          "entity": "quadratic_equation_solver",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "quadratic",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/quadratic",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
+        },
+        {
+          "term": "polynomial equation solver",
+          "entity": "polynomial_equation_solver",
+          "sections": [
+            "8"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "8",
+              "tool": "polynomial",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/polynomial",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
+        },
+        {
+          "term": "distributive property",
+          "entity": "distributive_property",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "properties",
+              "toolKind": "lesson",
+              "target": {
+                "path": "/arithmetic/properties",
+                "section": "5"
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "indexing links (contextual)"
+            }
+          ]
         }
       ]
     },
@@ -29357,6 +30074,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 4 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "absolute value equation solver",
+          "entity": "absolute_value_equation_solver",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "eq-absolute-value",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/absolute-value",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Solving Equations of the Form |f(x)| = k'."
+            }
+          ]
         }
       ]
     },
@@ -29565,6 +30304,72 @@
                 "newStates": []
               },
               "added": "2026-09-24"
+            }
+          ]
+        },
+        {
+          "term": "linear equation solver",
+          "entity": "linear_equation_solver",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "eq-linear",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/linear",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Solving Single-Step and Multi-Step Equations'."
+            }
+          ]
+        },
+        {
+          "term": "literal equation solver",
+          "entity": "literal_equation_solver",
+          "sections": [
+            "8"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "8",
+              "tool": "eq-literal",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/literal",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Literal Equations and Formulas'."
+            }
+          ]
+        },
+        {
+          "term": "distributive property",
+          "entity": "distributive_property",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "properties",
+              "toolKind": "lesson",
+              "target": {
+                "path": "/arithmetic/properties",
+                "section": "5"
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "indexing links (contextual)"
             }
           ]
         }
@@ -29934,6 +30739,50 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "polynomial equation solver",
+          "entity": "polynomial_equation_solver",
+          "sections": [
+            "5"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "5",
+              "tool": "eq-polynomial",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/polynomial",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Solving Cubic Equations'."
+            }
+          ]
+        },
+        {
+          "term": "polynomial calculator",
+          "entity": "polynomial_calculator",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "polynomial",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/polynomial",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "indexing links (contextual)"
+            }
+          ]
         }
       ]
     },
@@ -30267,6 +31116,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "quadratic equation solver",
+          "entity": "quadratic_equation_solver",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "eq-quadratic",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/quadratic",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'The Quadratic Formula'."
+            }
+          ]
         }
       ]
     },
@@ -30473,6 +31344,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "rational equation solver",
+          "entity": "rational_equation_solver",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "eq-rational",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/rational",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Solving by Clearing Denominators'."
+            }
+          ]
         }
       ]
     },
@@ -30718,6 +31611,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "algebraic identities table",
+          "entity": "algebraic_identities_table",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "algebra-identities",
+              "toolKind": "table",
+              "target": {
+                "path": "/tables/algebra-identities",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "indexing links (contextual)"
+            }
+          ]
         }
       ]
     },
@@ -31106,6 +32021,50 @@
           ],
           "status": "dropped",
           "reason": "Runs through 9 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "linear inequality solver",
+          "entity": "linear_inequality_solver",
+          "sections": [
+            "9"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "9",
+              "tool": "linear",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/inequalities/linear",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
+        },
+        {
+          "term": "quadratic inequality solver",
+          "entity": "quadratic_inequality_solver",
+          "sections": [
+            "10"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "10",
+              "tool": "quadratic",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/inequalities/quadratic",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
         }
       ]
     },
@@ -31317,6 +32276,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 3 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "absolute value inequality solver",
+          "entity": "absolute_value_inequality_solver",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "in-absolute-value",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/inequalities/absolute-value",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Worked Examples with Linear Expressions'."
+            }
+          ]
         }
       ]
     },
@@ -31518,6 +32499,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "linear inequality solver",
+          "entity": "linear_inequality_solver",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "in-linear",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/inequalities/linear",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Worked Examples'."
+            }
+          ]
         }
       ]
     },
@@ -31954,6 +32957,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "quadratic inequality solver",
+          "entity": "quadratic_inequality_solver",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "in-quadratic",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/inequalities/quadratic",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Sign Chart Method'."
+            }
+          ]
         }
       ]
     },
@@ -32165,6 +33190,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "rational inequality solver",
+          "entity": "rational_inequality_solver",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "in-rational",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/inequalities/rational",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Worked Examples'."
+            }
+          ]
         }
       ]
     },
@@ -32464,6 +33511,72 @@
           ],
           "status": "dropped",
           "reason": "Runs through 3 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "log calculator",
+          "entity": "log_calculator",
+          "sections": [
+            "5"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "5",
+              "tool": "log-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/log-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Common and Natural Logarithms'."
+            }
+          ]
+        },
+        {
+          "term": "logarithmic equation solver",
+          "entity": "logarithmic_equation_solver",
+          "sections": [
+            "8"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "8",
+              "tool": "logarithmic",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/logarithmic",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
+        },
+        {
+          "term": "logarithmic inequality solver",
+          "entity": "logarithmic_inequality_solver",
+          "sections": [
+            "9"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "9",
+              "tool": "logarithmic",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/inequalities/logarithmic",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
         }
       ]
     },
@@ -32556,6 +33669,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "log calculator",
+          "entity": "log_calculator",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "log-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/log-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Calculator Conventions'."
+            }
+          ]
         }
       ]
     },
@@ -32741,6 +33876,50 @@
           ],
           "status": "dropped",
           "reason": "Runs through 5 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "log calculator",
+          "entity": "log_calculator",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "log-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/log-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Solving Exponential Equations via Logarithms'."
+            }
+          ]
+        },
+        {
+          "term": "logarithmic equation solver",
+          "entity": "logarithmic_equation_solver",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "eq-logarithmic",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/logarithmic",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Basic Form: Logarithm Equals a Constant'."
+            }
+          ]
         }
       ]
     },
@@ -32922,6 +34101,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 7 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "logarithmic inequality solver",
+          "entity": "logarithmic_inequality_solver",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "in-logarithmic",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/inequalities/logarithmic",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Base Greater Than One: Direction Preserved'."
+            }
+          ]
         }
       ]
     },
@@ -33052,6 +34253,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "logarithmic equation solver",
+          "entity": "logarithmic_equation_solver",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "logarithmic",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/logarithmic",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
         }
       ]
     },
@@ -33192,6 +34415,21 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "log calculator",
+          "entity": "log_calculator",
+          "sections": [
+            "4"
+          ],
+          "status": "dropped",
+          "toolKind": "calculator",
+          "target": {
+            "path": "/calculators/log-calculator",
+            "section": null
+          },
+          "reason": "The section ends with a lead-in to a table (\"The table below ...\"); an appended sentence would break the flow. Zero-force skip.",
+          "added": "2026-10-11"
         }
       ]
     },
@@ -33537,6 +34775,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 4 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "polynomial calculator",
+          "entity": "polynomial_calculator",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "polynomial-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/polynomial",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Operations on Polynomials'."
+            }
+          ]
         }
       ]
     },
@@ -34492,6 +35752,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 3 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "polynomial calculator",
+          "entity": "polynomial_calculator",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "polynomial-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/polynomial",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Polynomial Long Division'."
+            }
+          ]
         }
       ]
     },
@@ -34815,6 +36097,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "polynomial equation solver",
+          "entity": "polynomial_equation_solver",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "polynomial",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/polynomial",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
         }
       ]
     },
@@ -35343,6 +36647,72 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "exponent calculator",
+          "entity": "exponent_calculator",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "exponent-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/exponent-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Natural Exponents'."
+            }
+          ]
+        },
+        {
+          "term": "exponential equation solver",
+          "entity": "exponential_equation_solver",
+          "sections": [
+            "9"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "9",
+              "tool": "exponential",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/exponential",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
+        },
+        {
+          "term": "exponential inequality solver",
+          "entity": "exponential_inequality_solver",
+          "sections": [
+            "10"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "10",
+              "tool": "exponential",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/inequalities/exponential",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
         }
       ]
     },
@@ -35788,6 +37158,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "exponential equation solver",
+          "entity": "exponential_equation_solver",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "eq-exponential",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/exponential",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Solving Methods Overview'."
+            }
+          ]
         }
       ]
     },
@@ -36054,6 +37446,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "exponential inequality solver",
+          "entity": "exponential_inequality_solver",
+          "sections": [
+            "2"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "2",
+              "tool": "in-exponential",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/inequalities/exponential",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Solving Basic Exponential Inequalities'."
+            }
+          ]
         }
       ]
     },
@@ -36337,6 +37751,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 4 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "exponent calculator",
+          "entity": "exponent_calculator",
+          "sections": [
+            "8"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "8",
+              "tool": "exponent-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/exponent-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Worked Examples'."
+            }
+          ]
         }
       ]
     },
@@ -36460,6 +37896,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "exponent calculator",
+          "entity": "exponent_calculator",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "exponent-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/exponent-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Worked Examples'."
+            }
+          ]
         }
       ]
     },
@@ -36601,6 +38059,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 7 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "exponent calculator",
+          "entity": "exponent_calculator",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "exponent-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/exponent-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Fractional Exponents'."
+            }
+          ]
         }
       ]
     },
@@ -37033,6 +38513,50 @@
           ],
           "status": "dropped",
           "reason": "Runs through 6 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "root calculator",
+          "entity": "root_calculator",
+          "sections": [
+            "2"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "2",
+              "tool": "root-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/root-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Square Roots, Cube Roots, and Beyond'."
+            }
+          ]
+        },
+        {
+          "term": "radical equation solver",
+          "entity": "radical_equation_solver",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "radical",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/radical",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
         }
       ]
     },
@@ -37252,6 +38776,50 @@
           ],
           "status": "dropped",
           "reason": "Runs through 3 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "radical equation solver",
+          "entity": "radical_equation_solver",
+          "sections": [
+            "2"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "2",
+              "tool": "eq-radical",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/equations/radical",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Basic Strategy'."
+            }
+          ]
+        },
+        {
+          "term": "radical inequality solver",
+          "entity": "radical_inequality_solver",
+          "sections": [
+            "9"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "9",
+              "tool": "in-radical",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/inequalities/radical",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Radical Inequalities'."
+            }
+          ]
         }
       ]
     },
@@ -37630,6 +39198,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "distributive property",
+          "entity": "distributive_property",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "properties",
+              "toolKind": "lesson",
+              "target": {
+                "path": "/arithmetic/properties",
+                "section": "5"
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "indexing links (contextual)"
+            }
+          ]
         }
       ]
     },
@@ -37868,6 +39458,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 3 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "root calculator",
+          "entity": "root_calculator",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "root-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/root-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Principal Root Convention'."
+            }
+          ]
         }
       ]
     },
@@ -38310,6 +39922,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 5 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "root calculator",
+          "entity": "root_calculator",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "root-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/root-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Converting Between Forms'."
+            }
+          ]
         }
       ]
     },
@@ -38572,6 +40206,19 @@
           ],
           "status": "dropped",
           "reason": "Runs through 5 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "root calculator",
+          "entity": "root_calculator",
+          "sections": [],
+          "status": "dropped",
+          "toolKind": "calculator",
+          "target": {
+            "path": "/calculators/root-calculator",
+            "section": null
+          },
+          "reason": "Best-fit section (Factoring Out Perfect Powers) ends with a lead-in to a table; zero-force skip.",
+          "added": "2026-10-11"
         }
       ]
     },
@@ -38672,6 +40319,72 @@
           ],
           "status": "dropped",
           "reason": "Runs through 3 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "arithmetic sequence calculator",
+          "entity": "arithmetic_sequence_calculator",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "arithmetic-sequence",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/sequences/arithmetic-sequence",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
+        },
+        {
+          "term": "square numbers calculator",
+          "entity": "square_numbers_calculator",
+          "sections": [
+            "8"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "8",
+              "tool": "square-numbers",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/sequences/square-numbers",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
+        },
+        {
+          "term": "prime numbers calculator",
+          "entity": "prime_numbers_calculator",
+          "sections": [
+            "9"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "9",
+              "tool": "prime-numbers",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/sequences/prime-numbers",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "Operation C (indexing links)"
+            }
+          ]
         }
       ]
     },
@@ -38710,6 +40423,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "arithmetic sequence calculator",
+          "entity": "arithmetic_sequence_calculator",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "seq-arithmetic",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/sequences/arithmetic-sequence",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Finding Terms'."
+            }
+          ]
         }
       ]
     },
@@ -38791,6 +40526,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "Fibonacci sequence calculator",
+          "entity": "Fibonacci_sequence_calculator",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "seq-fibonacci",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/sequences/fibonacci-sequence",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Definition'."
+            }
+          ]
         }
       ]
     },
@@ -38830,6 +40587,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "geometric sequence calculator",
+          "entity": "geometric_sequence_calculator",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "seq-geometric",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/sequences/geometric-sequence",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Finding Terms'."
+            }
+          ]
         }
       ]
     },
@@ -38931,6 +40710,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "prime numbers calculator",
+          "entity": "prime_numbers_calculator",
+          "sections": [
+            "3"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "3",
+              "tool": "seq-primes",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/sequences/prime-numbers",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'The Sieve of Eratosthenes'."
+            }
+          ]
         }
       ]
     },
@@ -38981,6 +40782,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "square numbers calculator",
+          "entity": "square_numbers_calculator",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "seq-square",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/sequences/square-numbers",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Definition'."
+            }
+          ]
         }
       ]
     },
@@ -39043,6 +40866,50 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "tetrahedral numbers calculator",
+          "entity": "tetrahedral_numbers_calculator",
+          "sections": [
+            "4"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "4",
+              "tool": "seq-tetrahedral",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/sequences/tetrahedral-numbers",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Properties'."
+            }
+          ]
+        },
+        {
+          "term": "triangular numbers calculator",
+          "entity": "triangular_numbers_calculator",
+          "sections": [
+            "1"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "1",
+              "tool": "seq-triangular",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/algebra/calculators/sequences/triangular-numbers",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Definition'."
+            }
+          ]
         }
       ]
     },
@@ -39614,6 +41481,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "law of large numbers",
+          "entity": "law_of_large_numbers",
+          "sections": [
+            "8"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "8",
+              "tool": "large-numbers-law",
+              "toolKind": "lesson",
+              "target": {
+                "path": "/probability/large-numbers-law",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "indexing links (contextual)"
+            }
+          ]
         }
       ]
     },
@@ -39732,6 +41621,50 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "indicator variables",
+          "entity": "indicator_variables",
+          "sections": [
+            "9"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "9",
+              "tool": "indicators",
+              "toolKind": "lesson",
+              "target": {
+                "path": "/probability/indicators",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "indexing links (contextual)"
+            }
+          ]
+        },
+        {
+          "term": "probability formulas",
+          "entity": "probability_formulas",
+          "sections": [
+            "9"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "9",
+              "tool": "formulas",
+              "toolKind": "lesson",
+              "target": {
+                "path": "/probability/formulas",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "indexing links (contextual)"
+            }
+          ]
         }
       ]
     },
@@ -40572,6 +42505,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "exponential expected value calculator",
+          "entity": "exponential_expected_value_calculator",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "ev-exponential",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/probability/calculators/expected-value/exponential",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Expected Value (Mean)'."
+            }
+          ]
         }
       ]
     },
@@ -40756,6 +42711,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "normal expected value calculator",
+          "entity": "normal_expected_value_calculator",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "ev-normal",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/probability/calculators/expected-value/normal",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Expected Value (Mean)'."
+            }
+          ]
         }
       ]
     },
@@ -40945,6 +42922,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "continuous uniform expected value calculator",
+          "entity": "continuous_uniform_expected_value_calculator",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "ev-continuous-uniform",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/probability/calculators/expected-value/continuous-uniform",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Expected Value (Mean)'."
+            }
+          ]
         }
       ]
     },
@@ -41304,6 +43303,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 3 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "binomial expected value calculator",
+          "entity": "binomial_expected_value_calculator",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "ev-binomial",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/probability/calculators/expected-value/binomial",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Expected Value (Mean)'."
+            }
+          ]
         }
       ]
     },
@@ -41473,6 +43494,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "geometric expected value calculator",
+          "entity": "geometric_expected_value_calculator",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "ev-geometric",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/probability/calculators/expected-value/geometric",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Expected Value (Mean)'."
+            }
+          ]
         }
       ]
     },
@@ -41653,6 +43696,50 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "hypergeometric expected value calculator",
+          "entity": "hypergeometric_expected_value_calculator",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "ev-hypergeometric",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/probability/calculators/expected-value/hypergeometric",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Expected Value (Mean)'."
+            }
+          ]
+        },
+        {
+          "term": "indicator variables",
+          "entity": "indicator_variables",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "indicators",
+              "toolKind": "lesson",
+              "target": {
+                "path": "/probability/indicators",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "indexing links (contextual)"
+            }
+          ]
         }
       ]
     },
@@ -41835,6 +43922,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "negative binomial expected value calculator",
+          "entity": "negative_binomial_expected_value_calculator",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "ev-negative-binomial",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/probability/calculators/expected-value/negative-binomial",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Expected Value (Mean)'."
+            }
+          ]
         }
       ]
     },
@@ -42030,6 +44139,28 @@
           ],
           "status": "dropped",
           "reason": "Runs through 3 sections as ordinary vocabulary rather than being demonstrated in any one of them; a unit would interrupt the argument instead of carrying it."
+        },
+        {
+          "term": "Poisson expected value calculator",
+          "entity": "Poisson_expected_value_calculator",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "ev-poisson",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/probability/calculators/expected-value/poisson",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Expected Value (Mean)'."
+            }
+          ]
         }
       ]
     },
@@ -42195,6 +44326,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "discrete uniform expected value calculator",
+          "entity": "discrete_uniform_expected_value_calculator",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "ev-discrete-uniform",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/probability/calculators/expected-value/discrete-uniform",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'Expected Value (Mean)'."
+            }
+          ]
         }
       ]
     },
@@ -43748,6 +45901,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "statistics calculator",
+          "entity": "statistics_calculator",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "statistics-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/statistics-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'How to Find the Median'."
+            }
+          ]
         }
       ]
     },
@@ -43917,6 +46092,28 @@
           ],
           "status": "dropped",
           "reason": "Passing mention - the section uses the term but does not engage the concept in a way a live demonstration would enhance."
+        },
+        {
+          "term": "statistics calculator",
+          "entity": "statistics_calculator",
+          "sections": [
+            "7"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "7",
+              "tool": "statistics-calculator",
+              "toolKind": "calculator",
+              "target": {
+                "path": "/calculators/statistics-calculator",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-11",
+              "note": "Operation C (content -> calculators), link-only: one sentence appended to section 'How to Find the Mode'."
+            }
+          ]
         }
       ]
     },
@@ -44227,6 +46424,28 @@
                 "newStates": []
               },
               "added": "2026-09-24"
+            }
+          ]
+        },
+        {
+          "term": "indicator variables",
+          "entity": "indicator_variables",
+          "sections": [
+            "6"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "6",
+              "tool": "indicators",
+              "toolKind": "lesson",
+              "target": {
+                "path": "/probability/indicators",
+                "section": null
+              },
+              "unit": null,
+              "added": "2026-10-12",
+              "note": "indexing links (contextual)"
             }
           ]
         }

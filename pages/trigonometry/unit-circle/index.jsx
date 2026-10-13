@@ -1283,6 +1283,8 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import trigoAngleTypesDiagrams from '@/app/components/trigonometry/angle/types/trigoAngleTypesDiagrams'
+import pythagoreanDiagrams from '@/app/components/trigonometry/identities/pythagorean/pythagoreanDiagrams'
 import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiagrams'
 import quadrantSignsDiagrams from '@/app/components/trigonometry/quadrantSignsDiagrams'
 import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
@@ -2245,6 +2247,7 @@ The unit circle reveals structure that [right triangle trigonometry](!/trigonome
     notes: ['where x = 0, anything divided by cos breaks;', 'where y = 0, anything divided by sin breaks'],
   };
 
+
   const demoUnits = {
     coordinates: demoUnitFrame({
       svg: unitCircleDiagrams.quadrants[1],
@@ -2290,6 +2293,20 @@ The unit circle reveals structure that [right triangle trigonometry](!/trigonome
       svg: renderCircleArcV2(caQuadrantal),
       caption: 'Two functions break at each axis',
       text: 'On the vertical axis the <em>x</em>-coordinate is zero, so every function with cosine in its denominator &#8212; tangent and secant &#8212; is undefined there. On the horizontal axis it is the <em>y</em>-coordinate that vanishes, and cotangent and cosecant go instead.',
+    }),
+    specialAngles: demoUnitFrame({
+      svg: trigoAngleTypesDiagrams.specialOverview,
+      caption: 'The sixteen standard angles on the unit circle',
+      text: 'The dots mark the sixteen standard angles, every multiple of 30&#176; and 45&#176; around the circle; 30&#176; is highlighted. Each dot shares a reference angle of 30&#176;, 45&#176; or 60&#176; with one in the first quadrant, so its coordinates are those values with the signs of its quadrant. Pick any of them on the',
+      href: '/trigonometry/visual-tools/angle-types',
+      linkText: 'angle types tool',
+    }),
+    pythagoreanCircle: demoUnitFrame({
+      svg: pythagoreanDiagrams.sin.overview,
+      caption: 'x&#178; + y&#178; = 1 as a right triangle',
+      text: 'The point (cos θ, sin θ) is at distance 1 from the origin, so the legs cos θ and sin θ and the radius form a right triangle with hypotenuse 1. That is the circle equation x&#178; + y&#178; = 1 read as sin&#178;θ + cos&#178;θ = 1, here solved for sin θ = &#8730;(1 &#8722; cos&#178;θ) at an angle in the first quadrant. Step through the proof on the',
+      href: '/trigonometry/visual-tools/pythagorean-identities',
+      linkText: 'Pythagorean identities tool',
     }),
   };
 
@@ -2431,6 +2448,8 @@ export default function UnitCirclePage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+                  <div key={'unit-specialAngles'} dangerouslySetInnerHTML={{ __html: demoUnits.specialAngles }} />,
+          `Only five magnitudes appear: 0, 1/2, √2/2, √3/2 and 1.`,
         ]
     },
     {
@@ -2439,6 +2458,8 @@ export default function UnitCirclePage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+                  <div key={'unit-pythagoreanCircle'} dangerouslySetInnerHTML={{ __html: demoUnits.pythagoreanCircle }} />,
+          `In the other quadrants the legs carry signs, but their squares still add to 1.`,
         ]
     },
     {

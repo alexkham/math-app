@@ -111,7 +111,9 @@ Arithmetic sequences produce the simplest summation formula in all of mathematic
 
 $$S_n = \\frac{n}{2}(a_1 + a_n)$$
 
-The idea behind the formula is credited to Gauss: pair the first term with the last, the second with the second-to-last, and so on. Each pair sums to $a_1 + a_n$, and there are $\\frac{n}{2}$ such pairs.`,
+The idea behind the formula is credited to Gauss: pair the first term with the last, the second with the second-to-last, and so on. Each pair sums to $a_1 + a_n$, and there are $\\frac{n}{2}$ such pairs.
+
+To find a term, a sum or a missing value for a specific sequence, use the [arithmetic sequence calculator](!/algebra/calculators/sequences/arithmetic-sequence).`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Arithmetic Sequences](!/algebra/sequences/arithmetic) →@`,
@@ -199,7 +201,9 @@ The sum of the first $n$ squares has its own closed form:
 
 $$\\sum_{k=1}^{n} k^2 = \\frac{n(n+1)(2n+1)}{6}$$
 
-This formula appears throughout mathematics — in variance calculations, area approximations, and [polynomial](!/algebra/polynomials) identities.`,
+This formula appears throughout mathematics — in variance calculations, area approximations, and [polynomial](!/algebra/polynomials) identities.
+
+The [square numbers calculator](!/algebra/calculators/sequences/square-numbers) lists square numbers and tests whether a given number is a perfect square.`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Square Numbers](!/algebra/sequences/square-numbers) →@`,
@@ -213,7 +217,9 @@ Unlike every other sequence on this page, the primes follow no algebraic pattern
 
 Euclid proved that the primes are infinite: no finite list can contain them all. The argument assumes finitely many primes $p_1, p_2, \\ldots, p_k$, forms the product $N = p_1 p_2 \\cdots p_k + 1$, and observes that $N$ is not divisible by any prime on the list — so either $N$ itself is prime or it has a prime factor missing from the list.
 
-Although primes never run out, they do thin out. The prime number theorem describes the rate: among integers near $n$, roughly one in every $\\ln n$ is prime. The primes become sparser as numbers grow, but they never vanish entirely.`,
+Although primes never run out, they do thin out. The prime number theorem describes the rate: among integers near $n$, roughly one in every $\\ln n$ is prime. The primes become sparser as numbers grow, but they never vanish entirely.
+
+The [prime numbers calculator](!/algebra/calculators/sequences/prime-numbers) lists the first 10,000 primes, tests whether a number is prime and finds the $n$-th prime.`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Prime Numbers](!/algebra/sequences/prime-numbers) →@`,

@@ -10,6 +10,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import vennTruthTableDiagrams from '@/app/components/diagrams/set-theory/vennTruthTableDiagrams'
 
 
 
@@ -427,8 +429,19 @@ const faqQuestions = {
   }
 }
 
+  const demoUnits = {
+    excludedMiddle: demoUnitFrame({
+      svg: vennTruthTableDiagrams['tautology'],
+      caption: 'P &#8744; &#172;P covers every case',
+      text: 'Let circle A stand for the cases where P is true. P &#8744; &#172;P shades A together with everything outside it, so no case is left unshaded: the formula is true under every assignment, which is what makes it a tautology. Check other formulas on the',
+      href: '/set-theory/visual-tools/venn-truth-table',
+      linkText: 'Venn truth-table explorer',
+    }),
+  };
+
   return {
     props:{
+      demoUnits,
       tautologies,
       introContent,
       sectionsContent,
@@ -441,7 +454,7 @@ const faqQuestions = {
 }
 
 
-export default function TautologyPage({tautologies ,introContent ,sectionsContent,keyWords ,faqQuestions}) {
+export default function TautologyPage({demoUnits, tautologies ,introContent ,sectionsContent,keyWords ,faqQuestions}) {
 
   // const theoremHTML = renderAcademicBlockHTML("Theorem 1.2 (Existence and Uniqueness).\nA system of linear equations has either no solutions, exactly one solution, or infinitely many solutions.", 
   //   "definition");
@@ -457,7 +470,11 @@ export default function TautologyPage({tautologies ,introContent ,sectionsConten
             {
             id:'definition',
             title:sectionsContent.definition.title,
-            content:sectionsContent.definition.content,
+            content:[
+              sectionsContent.definition.content,
+              <div key={'unit-excludedMiddle'} dangerouslySetInnerHTML={{ __html: demoUnits.excludedMiddle }} />,
+              `A tautology always fills the whole diagram; a contradiction always leaves it empty.`,
+            ],
           },
           {
             id:'notation',

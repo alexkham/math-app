@@ -145,7 +145,7 @@ The structural fact behind all of this is that the set of $m \\times n$ matrices
       title: `Why It Matters`,
       content: `Linear combinations are the foundation on which most of linear algebra is built.
 
-• **Span and basis**: the span of a set of matrices is the set of all their linear combinations; a [basis](!/linear-algebra/vector-spaces#2) is a linearly independent set whose span is the whole space
+• **Span and basis**: the span of a set of matrices is the set of all their linear combinations; a [basis](!/linear-algebra/vector-spaces/basis#2) is a linearly independent set whose span is the whole space
 • **Linear independence**: testing whether $c_1 A_1 + \\cdots + c_n A_n = 0$ forces all $c_i = 0$
 • **Solving linear systems**: a system $Ax = b$ asks whether $b$ is a linear combination of the columns of $A$
 • **Subspaces**: a subspace is a set closed under linear combinations

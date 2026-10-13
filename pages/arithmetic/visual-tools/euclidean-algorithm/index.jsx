@@ -183,7 +183,7 @@ Termination and correctness meet in that final line. Every chain, however long, 
 
 • [Coprime numbers](!#coprime-pairs) — try the preset $(35, 54)$. The GCD is $1$, and the chain works through several reductions before finally hitting a remainder of $1$ and then $0$. Coprime pairs tend to produce the **longest** chains relative to the size of the numbers.
 
-• [Consecutive Fibonacci numbers](!#fibonacci-worst-case) — try entering, e.g., $89$ and $144$. These pairs produce the absolute worst-case behavior of the algorithm and the longest chains for their magnitude. The reason is built into the recursive definition of Fibonacci numbers themselves.
+• [Consecutive [Fibonacci numbers](!/algebra/sequences/fibonacci)](!#fibonacci-worst-case) — try entering, e.g., $89$ and $144$. These pairs produce the absolute worst-case behavior of the algorithm and the longest chains for their magnitude. The reason is built into the recursive definition of Fibonacci numbers themselves.
 
 • **Equal numbers** — entering the same number twice gives a one-step chain ending immediately at the GCD, which is that number — the base case $\\gcd(d, 0) = d$ in action, as explained under [why the algorithm works](!#why-the-algorithm-works).
 

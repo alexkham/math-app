@@ -283,7 +283,9 @@ Higher roots follow the same pattern. Fourth roots undo fourth powers, fifth roo
 
 $$\\sqrt[4]{16} = 2, \\quad \\sqrt[5]{32} = 2, \\quad \\sqrt[6]{64} = 2$$
 
-The index matters greatly. Even indices behave differently from odd indices — a distinction explored fully in [properties of radicals](!/algebra/roots/properties). This difference affects domain, sign behavior, and how [simplification](!/algebra/roots/simplifying) proceeds.`,
+The index matters greatly. Even indices behave differently from odd indices — a distinction explored fully in [properties of radicals](!/algebra/roots/properties). This difference affects domain, sign behavior, and how [simplification](!/algebra/roots/simplifying) proceeds.
+
+To compute a square, cube or nth root of any number, use the [root calculator](!/calculators/root-calculator).`,
     before: ``,
     after: ``,
     link: '',
@@ -403,7 +405,9 @@ This process can introduce extraneous solutions — values that satisfy the tran
 
 Equations with multiple radicals may require the process repeated. Cube roots and higher follow the same logic, though odd-index equations rarely produce extraneous solutions due to different [properties](!/algebra/roots/properties).
 
-Full techniques for solving, including equations with multiple radicals and methods for identifying extraneous solutions, appear in [radical equations](!/algebra/roots/equations).`,
+Full techniques for solving, including equations with multiple radicals and methods for identifying extraneous solutions, appear in [radical equations](!/algebra/roots/equations).
+
+To solve a specific equation, the [radical equation solver](!/algebra/calculators/equations/radical) isolates the radical, raises both sides to the right power and checks every candidate for extraneous solutions.`,
     before: ``,
     after: ``,
     link: '/algebra/roots/equations',

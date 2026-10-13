@@ -234,7 +234,9 @@ The inequality $\\left(\\frac{1}{3}\\right)^x > 9$ requires more care. Rewrite $
 
 The inequality $5^{x-1} \\leq 125$ rewrites as $5^{x-1} \\leq 5^3$. Base greater than $1$, direction preserved: $x - 1 \\leq 3$, so $x \\leq 4$.
 
-The procedure is consistent: rewrite both sides with a common base, then read off the inequality between exponents — preserving direction if the base exceeds $1$, reversing it if the base is a proper fraction.`,
+The procedure is consistent: rewrite both sides with a common base, then read off the inequality between exponents — preserving direction if the base exceeds $1$, reversing it if the base is a proper fraction.
+
+To solve your own exponential inequality with each step shown, use the [exponential inequality solver](!/algebra/calculators/inequalities/exponential).`,
   before: ``,
   after: ``,
   link: '',

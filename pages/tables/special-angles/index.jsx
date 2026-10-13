@@ -1183,7 +1183,9 @@ For an interactive exploration of these relationships, see the **interactive uni
 
 The biggest practical benefit is staying in exact form. A problem that uses $\\tfrac{\\sqrt{3}}{2}$ throughout stays clean; the same problem with $0.8660254\\ldots$ accumulates roundoff and obscures algebraic structure.
 
-For computations at non-special angles, use the **trigonometry calculator**.`,
+For computations at non-special angles, use the **trigonometry calculator**.
+
+Once these values are familiar, the [trigonometric identities table](!/tables/trigonometric-identities) collects 115 identities that build on them.`,
         before: ``,
         after: ``,
         link: '',

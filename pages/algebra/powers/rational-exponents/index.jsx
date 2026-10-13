@@ -241,7 +241,9 @@ For $8^{2/3}$, taking the root first is simpler: $8^{1/3} = 2$, then $2^2 = 4$. 
 
 For $27^{4/3}$, the root-first approach gives $27^{1/3} = 3$, then $3^4 = 81$. The power-first approach requires $27^4 = 531441$ and then $\\sqrt[3]{531441} = 81$. The choice is clear.
 
-The general strategy is to take the root first whenever the base has a clean $n$th root. This keeps the numbers manageable and reduces the chance of arithmetic errors.`,
+The general strategy is to take the root first whenever the base has a clean $n$th root. This keeps the numbers manageable and reduces the chance of arithmetic errors.
+
+To evaluate a fractional power such as $100^{2.5}$, use the [exponent calculator](!/calculators/exponent-calculator); it also shows the result in radical form.`,
   before: ``,
   after: ``,
   link: '',

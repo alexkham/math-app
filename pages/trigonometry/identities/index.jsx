@@ -1526,6 +1526,8 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Sections from '@/app/components/page-components/section/Sections'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import AffiliateBlock from '@/app/components/affiliates/AffiliateBlock'
+import { COURSES } from '@/app/components/affiliates/courses'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
 import basicIdentitiesDiagrams from '@/app/components/trigonometry/identities/basic-identities/basicIdentitiesDiagrams'
@@ -1533,6 +1535,10 @@ import doubleAngleDiagrams from '@/app/components/trigonometry/identities/double
 import halfAngleDiagrams from '@/app/components/trigonometry/identities/half-angle/halfAngleDiagrams'
 import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import shiftIdentityDiagrams from '@/app/components/trigonometry/shiftIdentityDiagrams'
+import tripleAngleDiagrams from '@/app/components/trigonometry/tripleAngleDiagrams'
+import pythagoreanDiagrams from '@/app/components/trigonometry/identities/pythagorean/pythagoreanDiagrams'
+import negativeAngleDiagrams from '@/app/components/trigonometry/identities/negative-angle/negativeAngleDiagrams'
 import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
 
 export async function getStaticProps(){
@@ -2526,7 +2532,37 @@ Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\
 
       // Operation A demonstration units: frozen tool state + attached explanation
       // panel + tool link, one frame. Rendered as content-array items.
+      const shiftFrames = shiftIdentityDiagrams()
+      const tripleFrames = tripleAngleDiagrams()
       const demoUnits = {
+        shiftQuarterTurn: demoUnitFrame({
+          svg: shiftFrames['sin:halfPi'],
+          caption: 'sin(&#952; + &#960;/2) = cos &#952;, frozen at &#952; = 35&#176;',
+          text: 'Adding &#960;/2 turns the point P a quarter turn to P&#8242;. The quarter turn swaps the legs: the height of P&#8242; is as long as the horizontal leg of P, so sin(&#952; + &#960;/2) = cos &#952;. Switch the function and the shift on the',
+          href: '/trigonometry/visual-tools/shift-identities',
+          linkText: 'shift identities tool',
+        }),
+        tripleSine: demoUnitFrame({
+          svg: tripleFrames.sin.overview,
+          caption: 'sin 3&#952; derived step by step',
+          text: 'The derivation writes 3&#952; as 2&#952; + &#952;, applies the sum identity, expands the double-angle terms and replaces cos&#178;&#952; by 1 &#8722; sin&#178;&#952;, ending at sin 3&#952; = 3 sin &#952; &#8722; 4 sin&#179;&#952;. Step forward and back through each line on the',
+          href: '/trigonometry/visual-tools/triple-angle-identities',
+          linkText: 'triple angle identities tool',
+        }),
+        pythagoreanProof: demoUnitFrame({
+          svg: pythagoreanDiagrams.cos.overview,
+          caption: 'cos θ from the right triangle in the unit circle',
+          text: 'The point at angle θ on the unit circle makes a right triangle with hypotenuse 1, vertical leg sin θ and horizontal leg cos θ. Pythagoras gives cos&#178;θ + sin&#178;θ = 1, so cos θ = &#8730;(1 &#8722; sin&#178;θ) whenever cos θ is positive, as at the angle shown. Step through the proof and the other five identities on the',
+          href: '/trigonometry/visual-tools/pythagorean-identities',
+          linkText: 'Pythagorean identities tool',
+        }),
+        cosineEven: demoUnitFrame({
+          svg: negativeAngleDiagrams.cos.overview,
+          caption: 'cos(&#8722;θ) = cos θ: a reflection keeps x',
+          text: 'Negating the angle reflects the point P across the x-axis to P&#8242;. The reflection keeps the x-coordinate and flips the y-coordinate, so cos(&#8722;θ) = cos θ: cosine is even. The y-coordinate, sine, changes sign, which makes sine odd. Compare all six functions on the',
+          href: '/trigonometry/visual-tools/negative-angle-identities',
+          linkText: 'negative angle identities tool',
+        }),
         // harvested, no href: this section's prose already links the angle
         // explorer, and one link per term per section holds
         coFunction: demoUnitFrame({
@@ -2704,6 +2740,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
           sectionsContent.pythagorean.after,
+                  <div key={'unit-pythagoreanProof'} dangerouslySetInnerHTML={{ __html: demoUnits.pythagoreanProof }} />,
+            `Dividing that equation by cos²θ or sin²θ gives the other two Pythagorean identities in the table.`,
         
       ]
     },
@@ -2743,6 +2781,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
          sectionsContent.even_odd.after,
+                  <div key={'unit-cosineEven'} dangerouslySetInnerHTML={{ __html: demoUnits.cosineEven }} />,
+            `Secant follows cosine and is even; tangent, cotangent and cosecant follow sine and are odd.`,
 
         
       ]
@@ -2802,6 +2842,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
          sectionsContent.shift.after,        
+                  <div key={'unit-shiftQuarterTurn'} dangerouslySetInnerHTML={{ __html: demoUnits.shiftQuarterTurn }} />,
+         `A half turn, θ + π, sends both coordinates to their negatives instead.`,
         
       ]
     },
@@ -2902,6 +2944,8 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
          sectionsContent.triple.after,
+                  <div key={'unit-tripleSine'} dangerouslySetInnerHTML={{ __html: demoUnits.tripleSine }} />,
+         `The cosine version runs the same way and ends at cos 3θ = 4 cos³θ − 3 cos θ.`,
 
       ]
     },
@@ -3086,6 +3130,9 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
   textColor="#34383c"
 />
     <br/>
+      <div style={{maxWidth:'956px',margin:'0 auto'}}>
+        <AffiliateBlock variant="strip" {...COURSES.trigonometry} headline="Stop memorising identities. Learn where they come from." />
+      </div>
       <KeyTermsCard
       id="0"
       title={sectionsContent.obj0.title}

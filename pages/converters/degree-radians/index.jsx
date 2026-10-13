@@ -6,6 +6,8 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import Head from 'next/head'
 import ContentBlocks from '@/app/components/page-components/content-components/ContentBlocks'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
+import AffiliateBlock from '@/app/components/affiliates/AffiliateBlock'
+import { COURSES } from '@/app/components/affiliates/courses'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 
 const keywords = [
@@ -105,6 +107,10 @@ export default function AngleConverterPage({content,navigationGroup}) {
     
       <br/>
       <br/>
+      <div id="stripAffiliate" style={{marginLeft:'100px',marginRight:'100px'}}>
+        <style>{`@media (max-width: 768px) { #stripAffiliate { margin-left: 12px !important; margin-right: 12px !important; } }`}</style>
+        <AffiliateBlock variant="strip" {...COURSES.trigonometry} headline="Convert in your head" />
+      </div>
       <h1 className='title' id='toc'>Measuring Angles</h1>
       <br/>
       <div style={{marginLeft:'100px',marginRight:'100px'}}>

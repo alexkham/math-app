@@ -997,6 +997,8 @@ The numerator represents the part of $A$ that is compatible with the condition $
 The denominator accounts for the fact that we are now working only inside $B$.
 
 This formula does not introduce a new probability law — it expresses how probabilities behave once the situation has been restricted by known information.
+
+To compute conditional probabilities from your own contingency table, use the [conditional probability calculator](!/probability/calculators/conditional-probability).
 `,
       before:``,
       after:``,

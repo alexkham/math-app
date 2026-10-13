@@ -1081,6 +1081,8 @@ A small table illustrates the idea:
 | $x_2$ | $P(x_2, y_1)$ | $P(x_2, y_2)$ |
 
 This layout makes it easy to read, compare, and analyze how outcomes **pair up** across the two variables.
+
+To compute joint and marginal probabilities from your own 2×2 table, use the [joint probability calculator](!/probability/calculators/joint-probability).
 `,
       before:``,
       after:``,

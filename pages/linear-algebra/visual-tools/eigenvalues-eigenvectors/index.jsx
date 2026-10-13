@@ -130,7 +130,7 @@ $$p(\\lambda) = \\det(A - \\lambda I) = 0$$
 
 This is the characteristic equation, and $p$ is a polynomial of degree $n$ whose roots are the eigenvalues. For a $2 \\times 2$ matrix it is $\\lambda^2 - (\\operatorname{tr} A)\\lambda + \\det A$; in general the coefficient of $\\lambda^{n-1}$ is $\\pm\\operatorname{tr} A$ and the constant is $\\pm\\det A$, which gives the two standard checks: the eigenvalues sum to the trace and multiply to the determinant.
 
-Each eigenvalue then has an eigenspace, the null space of $A - \\lambda I$, found by row reduction. Its [dimension](!/linear-algebra/vector-spaces/dimension#1), the geometric multiplicity, is at least $1$ and at most the algebraic multiplicity. When every eigenvalue has a full set, the eigenvectors form a [basis](!/linear-algebra/vector-spaces#2) and $A$ is diagonalizable: $A = PDP^{-1}$ with the eigenvectors as the columns of $P$.
+Each eigenvalue then has an eigenspace, the null space of $A - \\lambda I$, found by row reduction. Its [dimension](!/linear-algebra/vector-spaces/dimension#1), the geometric multiplicity, is at least $1$ and at most the algebraic multiplicity. When every eigenvalue has a full set, the eigenvectors form a [basis](!/linear-algebra/vector-spaces/basis#2) and $A$ is diagonalizable: $A = PDP^{-1}$ with the eigenvectors as the columns of $P$.
 
 Real matrices can have complex eigenvalues, in conjugate pairs; a $2 \\times 2$ rotation is the standard example. Symmetric matrices never do: their eigenvalues are real and their eigenvectors can be chosen orthogonal. For the full theory, see the [characteristic equation theory page](!/linear-algebra/eigen/characteristic-equation) and the [eigenvalue properties page](!/linear-algebra/eigen/properties).`,
       before: ``,

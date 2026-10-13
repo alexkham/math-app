@@ -963,7 +963,9 @@ For $5 + \\frac{3}{4}$: the result is simply $5\\frac{3}{4}$.
 
 For $5 - \\frac{3}{4}$: rewrite 5 as $4\\frac{4}{4}$, then subtract $4\\frac{4}{4} - \\frac{3}{4} = 4\\frac{1}{4}$.
 
-Alternatively, express 5 as $\\frac{5}{1}$, find a common denominator with $\\frac{3}{4}$, and compute: $\\frac{20}{4} - \\frac{3}{4} = \\frac{17}{4} = 4\\frac{1}{4}$.`,
+Alternatively, express 5 as $\\frac{5}{1}$, find a common denominator with $\\frac{3}{4}$, and compute: $\\frac{20}{4} - \\frac{3}{4} = \\frac{17}{4} = 4\\frac{1}{4}$.
+
+To check a sum or difference that mixes whole numbers, mixed numbers and fractions, enter it in the [fraction calculator](!/calculators/fraction-calculator), which shows each step.`,
     before: ``,
     after: ``,
     link: '',

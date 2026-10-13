@@ -158,7 +158,9 @@ Example: Solve $\\log_5(x) \\leq 2$.
 $$x \\leq 5^2$$
 $$x \\leq 25$$
 
-With domain: $0 < x \\leq 25$.`,
+With domain: $0 < x \\leq 25$.
+
+To solve your own logarithmic inequality with each step shown, use the [logarithmic inequality solver](!/algebra/calculators/inequalities/logarithmic).`,
     before: ``,
     after: ``,
     link: '',

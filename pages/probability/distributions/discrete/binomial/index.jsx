@@ -288,6 +288,8 @@ Consider flipping a fair coin 10 times, where $n = 10$ and $p = 0.5$:
 $$E[X] = 10 \\times 0.5 = 5$$
 
 The expected number of heads in 10 flips is 5, which aligns perfectly with our intuition about a fair coin.
+
+To compute the expected value of a binomial distribution for your own parameters, step by step, use the [binomial expected value calculator](!/probability/calculators/expected-value/binomial).
   `,
   before: ``,
   after: ``,

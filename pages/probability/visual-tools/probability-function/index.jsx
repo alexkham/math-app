@@ -373,6 +373,8 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import AffiliateBlock from '@/app/components/affiliates/AffiliateBlock'
+import { COURSES } from '@/app/components/affiliates/courses'
 import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
@@ -835,6 +837,9 @@ export default function ProbabilityFunctionPage({seoData, sectionsContent, intro
             Visualize PDF and CDF for Normal, Exponential, and Uniform distributions. Toggle between density and cumulative views.
           </div>
         </Link>
+      </div>
+      <div style={{maxWidth:'1200px',margin:'-16px auto 0',padding:'0 20px'}}>
+        <AffiliateBlock variant="strip" {...COURSES.probability} headline="Know what a distribution says before you plot it" />
       </div>
       
       <br/>

@@ -3273,7 +3273,9 @@ $$U = \\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 0 & 14 \\end{pmatrix}
 
 The multipliers fill $L$: $L = \\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & 1 & 0 \\\\ -1 & -3 & 1 \\end{pmatrix}$.
 
-Verification: $LU = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \\end{pmatrix} = A$.`,
+Verification: $LU = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \\end{pmatrix} = A$.
+
+To compute the LU decomposition of your own matrix, use the [matrix calculator](!/linear-algebra/calculators/matrix).`,
     before: ``,
     after: ``,
     link: ``,

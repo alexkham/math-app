@@ -459,7 +459,9 @@ Solve $|5x + 3| < -1$. No conversion needed — absolute value is never negative
 
 Solve $|x - 4| > 0$. Convert: $x - 4 < 0$ or $x - 4 > 0$, meaning $x < 4$ or $x > 4$. This is every real number except $x = 4$. The solution is $(-\\infty, 4) \\cup (4, \\infty)$, or equivalently $\\mathbb{R} \\setminus \\{4\\}$.
 
-In every linear case, the less-than form produces a single bounded interval, and the greater-than form produces two rays. The center of symmetry is the root of $f(x) = 0$, and the radius is determined by $k$.`,
+In every linear case, the less-than form produces a single bounded interval, and the greater-than form produces two rays. The center of symmetry is the root of $f(x) = 0$, and the radius is determined by $k$.
+
+To solve your own absolute value inequality with each step shown, use the [absolute value inequality solver](!/algebra/calculators/inequalities/absolute-value).`,
     before: ``,
     after: ``,
     link: '',

@@ -3,6 +3,7 @@ import PercentageCalculator from '@/app/components/calculators/arithmetics/Perce
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import '../../pages.css'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
+import Head from 'next/head'
 
 export default function PercentageCalculatorPage() {
      
@@ -53,6 +54,14 @@ const navigationGroup=[
     }
   }
 `}</style>
+    <Head>
+      <title>Percentage Calculator – Percent of, Change, Increase &amp; Decrease | Learn Math Class</title>
+      <meta name="description" content="Free percentage calculator. Find a percentage of a number, percentage change, reverse percentage, add or subtract a percent, and convert fractions to percentages." />
+      <meta name="keywords" content={keyWords.join(', ')} />
+      <link rel="canonical" href="https://www.learnmathclass.com/calculators/percentage-calculator" />
+      <meta property="og:title" content="Percentage Calculator | Learn Math Class" />
+      <meta property="og:url" content="https://www.learnmathclass.com/calculators/percentage-calculator" />
+    </Head>
     {/* <GenericNavbar/> */}
     <br/>
     <br/>

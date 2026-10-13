@@ -596,7 +596,7 @@ When alignment is detected, the status strip turns amber and reads <strong>v is 
 Four possible appearances:
 
 &bull; **Two distinct real** &mdash; rows $\\lambda_1$ and $\\lambda_2$ in green, each with its unit eigenvector $(x, y)$. Two green dashed lines on the canvas.
-&bull; **Defective** &mdash; one row in pink with the repeated $\\lambda$ and a single eigenvector, plus a note that a generalized eigenvector is required for a full [basis](!/linear-algebra/vector-spaces#2).
+&bull; **Defective** &mdash; one row in pink with the repeated $\\lambda$ and a single eigenvector, plus a note that a generalized eigenvector is required for a full [basis](!/linear-algebra/vector-spaces/basis#2).
 &bull; **Isotropic** &mdash; one row in green: $\\lambda$ with the message "every direction is eigen". On the canvas, concentric green rings replace the lines.
 &bull; **Complex** &mdash; one row in purple: $\\lambda = a \\pm bi$ with the note "no real eigenvector".
 

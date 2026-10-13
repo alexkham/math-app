@@ -928,7 +928,9 @@ First, combine the numerator: $\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\fr
 
 The complex fraction becomes $\\frac{\\frac{5}{6}}{\\frac{1}{4}} = \\frac{5}{6} \\times \\frac{4}{1} = \\frac{20}{6} = \\frac{10}{3}$.
 
-Alternatively, multiply by the LCD of 2, 3, and 4, which is 12. Both approaches reach the same answer.`,
+Alternatively, multiply by the LCD of 2, 3, and 4, which is 12. Both approaches reach the same answer.
+
+To check the sum or difference in the top or bottom part before dividing, use the [fraction calculator](!/calculators/fraction-calculator).`,
     before: ``,
     after: ``,
     link: '',

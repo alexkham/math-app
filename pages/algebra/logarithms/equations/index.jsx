@@ -198,7 +198,9 @@ When the argument is an expression, solve the resulting equation:
 Example: Solve $\\log_5(2x - 1) = 2$.
 $$2x - 1 = 5^2 = 25$$
 $$2x = 26$$
-$$x = 13$$`,
+$$x = 13$$
+
+To solve your own logarithmic equation with each step shown, use the [logarithmic equation solver](!/algebra/calculators/equations/logarithmic).`,
     before: ``,
     after: ``,
     link: '',
@@ -342,7 +344,9 @@ $$\\ln(5^{2x+1}) = \\ln(12)$$
 $$(2x+1)\\ln(5) = \\ln(12)$$
 $$2x + 1 = \\frac{\\ln(12)}{\\ln(5)}$$
 $$2x = \\frac{\\ln(12)}{\\ln(5)} - 1$$
-$$x = \\frac{1}{2}\\left(\\frac{\\ln(12)}{\\ln(5)} - 1\\right) \\approx 0.271$$`,
+$$x = \\frac{1}{2}\\left(\\frac{\\ln(12)}{\\ln(5)} - 1\\right) \\approx 0.271$$
+
+To evaluate the final logarithm numerically, use the [log calculator](!/calculators/log-calculator).`,
     before: ``,
     after: ``,
     link: '',

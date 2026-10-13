@@ -1003,7 +1003,9 @@ The common logarithm uses base $10$ and is written $\\log(x)$ without a subscrip
 
 The natural logarithm uses base $e \\approx 2.71828$ and is written $\\ln(x)$. The number $e$ emerges from calculus — it is the unique base for which the derivative of $a^x$ equals $a^x$ itself. Natural logarithms dominate theoretical mathematics, physics, and any context involving continuous growth or decay.
 
-Both notations are shorthand. The statement $\\log(100) = 2$ means $\\log_{10}(100) = 2$. The statement $\\ln(e^3) = 3$ means $\\log_e(e^3) = 3$. Converting between bases uses a formula covered in [logarithm rules](!/algebra/logarithms/rules).`,
+Both notations are shorthand. The statement $\\log(100) = 2$ means $\\log_{10}(100) = 2$. The statement $\\ln(e^3) = 3$ means $\\log_e(e^3) = 3$. Converting between bases uses a formula covered in [logarithm rules](!/algebra/logarithms/rules).
+
+To evaluate log, ln or a logarithm in any other base directly, use the [log calculator](!/calculators/log-calculator).`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Common and Natural Logs](!/algebra/logarithms/common-natural) →@`,
   link: '/algebra/logarithms/common-natural',
@@ -1040,7 +1042,7 @@ These rules allow expanding complex logarithms into simpler pieces and condensin
 
 An equation like $\\log_2(x) = 5$ converts directly to exponential form: $x = 2^5 = 32$. The logarithm definition provides the solution method. An equation like $\\log_3(x - 1) = \\log_3(7)$ uses the one-to-one property: since the logarithms are equal and have the same base, the arguments must match, giving $x - 1 = 7$ and $x = 8$.
 
-More complex equations require the [rules](!/algebra/logarithms/rules) to combine or separate logarithms before these techniques apply. Every solution must be checked against domain restrictions — the argument of every logarithm must be positive. Extraneous solutions that violate these restrictions must be rejected.
+More complex equations require the [rules](!/algebra/logarithms/rules) to combine or separate logarithms before these techniques apply. Every solution must be checked against domain restrictions — the argument of every logarithm must be positive. Extraneous solutions that violate these restrictions must be rejected. The [logarithmic equation solver](!/algebra/calculators/equations/logarithmic) works through both forms step by step and rejects answers outside the domain.
 
 Logarithms also solve exponential equations when matching bases fails. An equation like $3^x = 7$ has no integer solution, but taking logarithms of both sides and applying the power rule yields $x = \\log(7)/\\log(3)$.`,
   before: ``,
@@ -1055,7 +1057,9 @@ When the base satisfies $a > 1$, the logarithm is increasing. Larger arguments p
 
 When the base satisfies $0 < a < 1$, the logarithm is decreasing. Larger arguments produce smaller outputs, so inequality direction reverses. If $\\log_{1/2}(x) > 3$, then $x < (1/2)^3 = 1/8$.
 
-Domain restrictions apply throughout. Every argument must remain positive, and this constraint intersects with the algebraic solution. The [properties](!/algebra/logarithms/properties) page covers monotonicity in detail; the [graphs](!/algebra/logarithms/graphs) page shows why direction reversal occurs visually.`,
+Domain restrictions apply throughout. Every argument must remain positive, and this constraint intersects with the algebraic solution. The [properties](!/algebra/logarithms/properties) page covers monotonicity in detail; the [graphs](!/algebra/logarithms/graphs) page shows why direction reversal occurs visually.
+
+The [logarithmic inequality solver](!/algebra/calculators/inequalities/logarithmic) applies the base rule and the domain check step by step.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Logarithmic Inequalities](!/algebra/logarithms/inequalities) →@`,
   link: '/algebra/logarithms/inequalities',

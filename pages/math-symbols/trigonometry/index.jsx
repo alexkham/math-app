@@ -422,6 +422,8 @@ import Head from 'next/head';
 import '../../pages.css'
 import DataWrapper from '@/app/components/generic-table/DataWrapper';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
+import AffiliateBlock from '@/app/components/affiliates/AffiliateBlock';
+import { COURSES } from '@/app/components/affiliates/courses';
 import IntroBar from '../../../app/components/page-components/IntroBar'
 import Sections from '../../../app/components/page-components/section/Sections'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
@@ -509,6 +511,9 @@ const pitfallGenericSections = [
       <IntroBar introBar={introBarData} />
       <div style={{display:'flex',flexDirection:'row',alignItems: 'flex-start' }}>
      
+     <div id="sideAffiliate" style={{alignSelf:'stretch',flex:'none',width:'180px'}}>
+       <style>{`@media (max-width: 768px) { #sideAffiliate { display: none !important; } }`}</style>
+       <AffiliateBlock variant="side" {...COURSES.trigonometry} headline="Know what the symbols mean" cta="See the course" />
      <VerticalButtonGroup 
      items={menuItems}
      width="180px"       
@@ -517,6 +522,7 @@ const pitfallGenericSections = [
      isSticky={true}
      verticalOffset='100px'
      />
+     </div>
       <div
         className="title"
         style={{

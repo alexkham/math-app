@@ -719,7 +719,7 @@ There is a quiet completeness fact here too: the digit sum of any number is cong
       title: `Only Divisible by 1: Prime Suspects`,
       content: `Enter 13 and watch every test from 2 to 12 fail: odd, digit sum 4, ends in 3, no direct hit at 7, alternating sum −2. The summary panel then shows a special yellow note: only divisible by 1—this might be a [prime number](!/arithmetic/divisibility#7), or divisible by something larger than 12.
 
-The hedge in that wording is honest. The tree only tests divisors up to 12, so it can suspect primality but never prove it. 13 happens to be prime; 169 = 13 × 13 produces exactly the same all-red display and is not prime, because its smallest factor is beyond the tree's reach.
+The hedge in that wording is honest. The tree only tests divisors up to 12, so it can suspect primality but never prove it. The [prime number checker](!/arithmetic/calculators/prime-calculator) settles it. 13 happens to be prime; 169 = 13 × 13 produces exactly the same all-red display and is not prime, because its smallest factor is beyond the tree's reach.
 
 Numbers in this state are the tree's most instructive failures: the entire flowchart lights up with red badges, and the [odd shortcut](!#the-odd-shortcut) usually does most of the eliminating in one stroke.`,
       before: ``,

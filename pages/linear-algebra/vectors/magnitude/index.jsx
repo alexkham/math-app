@@ -1122,7 +1122,9 @@ In $\\mathbb{R}^3$, the same reasoning applies in two stages. A vector $\\mathbf
 
 $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + v_3^2}$$
 
-The geometric intuition is the same in both cases: the magnitude is the straight-line distance from the tail of the vector to its tip. The only difference is the number of perpendicular components being combined.`,
+The geometric intuition is the same in both cases: the magnitude is the straight-line distance from the tail of the vector to its tip. The only difference is the number of perpendicular components being combined.
+
+To compute the magnitude of a specific vector, use the [vector calculator](!/linear-algebra/calculators/vectors).`,
     before: ``,
     after: ``,
     link: '',

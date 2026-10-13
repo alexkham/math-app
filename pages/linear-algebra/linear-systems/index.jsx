@@ -933,7 +933,9 @@ The [inverse](!/linear-algebra/matrix/inverse) formula $\\mathbf{x} = A^{-1}\\ma
 
 [LU decomposition](!/linear-algebra/decompositions/lower-upper) factors $A$ into a lower triangular matrix $L$ and an upper triangular matrix $U$. Once the factorization is computed, solving $A\\mathbf{x} = \\mathbf{b}$ reduces to two cheap triangular solves. This is the method of choice when multiple systems share the same coefficient matrix $A$ but have different right-hand sides.
 
-Iterative methods — Jacobi, Gauss-Seidel, conjugate gradient — generate a sequence of approximations converging to the solution. They are preferred for very large sparse systems where direct methods would require too much memory or time. These methods lie at the boundary between linear algebra and numerical analysis.`,
+Iterative methods — Jacobi, Gauss-Seidel, conjugate gradient — generate a sequence of approximations converging to the solution. They are preferred for very large sparse systems where direct methods would require too much memory or time. These methods lie at the boundary between linear algebra and numerical analysis.
+
+To solve a specific system with Gaussian elimination, Gauss-Jordan or Cramer's rule and see each step, use the [linear systems calculator](!/linear-algebra/calculators/linear-systems).`,
     before: ``,
     after: ``,
     link: ``,

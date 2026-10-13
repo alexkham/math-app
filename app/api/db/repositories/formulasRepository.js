@@ -14520,7 +14520,7 @@ const formulasRepository = [
     formula: "$$\\mathcal{B} = \\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_n\\} \\text{ is a basis for } V \\iff \\begin{cases} \\mathcal{B} \\text{ is linearly independent} \\\\ \\text{Span}(\\mathcal{B}) = V \\end{cases}$$",
     link: {
           "label": "Basis: Definition",
-          "url": "/linear-algebra/vector-spaces#2"
+          "url": "/linear-algebra/vector-spaces/basis#2"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -14570,7 +14570,7 @@ const formulasRepository = [
     formula: "$$\\forall\\, \\mathbf{v} \\in V,\\ \\exists!\\, (c_1, \\ldots, c_n): \\mathbf{v} = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_n\\mathbf{v}_n$$",
     link: {
           "label": "Unique Representation",
-          "url": "/linear-algebra/vector-spaces#3"
+          "url": "/linear-algebra/vector-spaces/basis#3"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -14608,7 +14608,7 @@ const formulasRepository = [
     formula: "$$[\\mathbf{v}]_\\mathcal{B} = \\begin{pmatrix} c_1 \\\\ c_2 \\\\ \\vdots \\\\ c_n \\end{pmatrix} \\quad \\text{where } \\mathbf{v} = c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n$$",
     link: {
           "label": "Coordinates",
-          "url": "/linear-algebra/vector-spaces#4"
+          "url": "/linear-algebra/vector-spaces/basis#4"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -14646,7 +14646,7 @@ const formulasRepository = [
     formula: "$$\\mathbf{e}_i = (0, \\ldots, 0, \\underset{i\\text{-th}}{1}, 0, \\ldots, 0), \\quad i = 1, \\ldots, n$$",
     link: {
           "label": "The Standard Basis for Rⁿ",
-          "url": "/linear-algebra/vector-spaces#5"
+          "url": "/linear-algebra/vector-spaces/basis#5"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -14684,7 +14684,7 @@ const formulasRepository = [
     formula: "$$[\\mathbf{v}]_\\mathcal{C} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}\\, [\\mathbf{v}]_\\mathcal{B}$$",
     link: {
           "label": "Change of Basis",
-          "url": "/linear-algebra/vector-spaces#9"
+          "url": "/linear-algebra/vector-spaces/basis#9"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -14718,7 +14718,7 @@ const formulasRepository = [
     formula: "$$P_{\\mathcal{B} \\leftarrow \\mathcal{C}} = \\bigl(P_{\\mathcal{C} \\leftarrow \\mathcal{B}}\\bigr)^{-1}$$",
     link: {
           "label": "Change of Basis",
-          "url": "/linear-algebra/vector-spaces#9"
+          "url": "/linear-algebra/vector-spaces/basis#9"
         },
     relatedTools: [],
     usedOnPages: [],
@@ -14748,7 +14748,7 @@ const formulasRepository = [
     formula: "$$[\\mathbf{u} + \\mathbf{v}]_\\mathcal{B} = [\\mathbf{u}]_\\mathcal{B} + [\\mathbf{v}]_\\mathcal{B}, \\qquad [c\\mathbf{v}]_\\mathcal{B} = c\\,[\\mathbf{v}]_\\mathcal{B}$$",
     link: {
           "label": "Coordinates and Isomorphism",
-          "url": "/linear-algebra/vector-spaces#10"
+          "url": "/linear-algebra/vector-spaces/basis#10"
         },
     relatedTools: [],
     usedOnPages: [],

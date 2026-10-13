@@ -9,9 +9,11 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderVennRegions from '@/app/utils/illustrations/logic/venn/vennRegions'
 
 
-export default function BiconditionalsTruthTablesPage({ keyWords, biconditionalExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent }) {
+export default function BiconditionalsTruthTablesPage({demoUnits,  keyWords, biconditionalExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent }) {
 
     const biconditionalOperators = {
         'P ↔ Q': { 
@@ -119,7 +121,10 @@ export default function BiconditionalsTruthTablesPage({ keyWords, biconditionalE
         id: '3',
         title: sectionsContent.obj3.title,
         link: sectionsContent.obj3.link,
-        content: [sectionsContent.obj3.content]
+        content: [sectionsContent.obj3.content,
+          <div key={'unit-biconditionalRegions'} dangerouslySetInnerHTML={{ __html: demoUnits.biconditionalRegions }} />,
+          `Shading the two crescents instead gives ¬(P ↔ Q), exclusive or.`,
+        ]
       },
       {
         id: '4',
@@ -565,8 +570,18 @@ De Morgan&apos;s laws (the second being P ∨ Q ↔ ¬(¬P ∧ ¬Q)) are essenti
     }
   }
 
+  const vrBiconditional = { kind: 'two', id: 'vrBic', test: (p, q) => p === q, formula: 'P ↔ Q', svgTitle: 'P if and only if Q: the overlap and the region outside both circles are shaded, the two crescents are not', caption: 'True when P and Q agree: both, or neither' };
+  const demoUnits = {
+    biconditionalRegions: demoUnitFrame({
+      svg: renderVennRegions(vrBiconditional),
+      caption: 'P &#8596; Q: both, or neither',
+      text: 'Circle P holds the assignments where P is true, circle Q those where Q is true. P &#8596; Q is true where the two agree: in the overlap, where both are true, and outside both circles, where both are false. The two crescents, where exactly one of them is true, stay empty. These are the TT and FF rows of the truth table; the empty crescents are its TF and FT rows.',
+    }),
+  };
+
   return {
     props: {
+      demoUnits,
       keyWords,
       biconditionalExplanations,
       menuItems,

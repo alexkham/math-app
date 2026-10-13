@@ -1004,7 +1004,9 @@ Comparing fractional parts sometimes requires finding a common denominator or us
 
 [Multiplying mixed numbers](!/arithmetic/fractions/multiplying) requires conversion to improper fractions. To compute $2\\frac{1}{2} \\times 3\\frac{1}{3}$, convert to $\\frac{5}{2} \\times \\frac{10}{3} = \\frac{50}{6} = 8\\frac{2}{6} = 8\\frac{1}{3}$. Attempting to multiply whole parts and fractional parts separately produces incorrect results.
 
-[Dividing mixed numbers](!/arithmetic/fractions/dividing) also demands improper form. Convert both values, apply the reciprocal rule, and simplify. The expression $4\\frac{1}{2} \\div 1\\frac{1}{2}$ becomes $\\frac{9}{2} \\div \\frac{3}{2} = \\frac{9}{2} \\times \\frac{2}{3} = \\frac{18}{6} = 3$.`,
+[Dividing mixed numbers](!/arithmetic/fractions/dividing) also demands improper form. Convert both values, apply the reciprocal rule, and simplify. The expression $4\\frac{1}{2} \\div 1\\frac{1}{2}$ becomes $\\frac{9}{2} \\div \\frac{3}{2} = \\frac{9}{2} \\times \\frac{2}{3} = \\frac{18}{6} = 3$.
+
+The [fraction calculator](!/calculators/fraction-calculator) accepts mixed numbers directly and shows the improper-fraction conversion for each operation.`,
     before: ``,
     after: ``,
     link: '',

@@ -3,6 +3,8 @@ import PermutationsVisualizer2 from '@/app/components/combinatorics/Permutations
 import '../../../pages.css'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import AffiliateBlock from '@/app/components/affiliates/AffiliateBlock'
+import { COURSES } from '@/app/components/affiliates/courses'
 
 export default function PermutationsVisualizerPage() {
   return (
@@ -23,6 +25,9 @@ export default function PermutationsVisualizerPage() {
    <Breadcrumb></Breadcrumb>
    <h1 className='title'  style={{marginBottom:'10px'}}>Permutations Visualizer</h1>
    <PermutationsVisualizer2></PermutationsVisualizer2>
+   <div style={{maxWidth:'1000px',margin:'0 auto',padding:'0 20px'}}>
+     <AffiliateBlock variant="strip" {...COURSES.probability} headline="From counting arrangements to computing probabilities" />
+   </div>
    {/* <ScrollUpButton></ScrollUpButton> */}
    
    </>

@@ -166,7 +166,7 @@ The payoff is functions of $A$. Because $A^k = PD^kP^{-1}$ and $D^k$ is just the
 
 • **Recurrences**: the Fibonacci matrix diagonalized is Binet's closed formula, and the same works for any linear recurrence
 • **Markov chains**: $A^k$ converges to the steady state because the eigenvalue $1$ survives while the others decay; the rate is the second-largest modulus
-• **Systems of differential equations**: $\\dot{\\mathbf{x}} = A\\mathbf{x}$ decouples into $n$ [scalar](!/linear-algebra/vectors#1) equations in the eigenvector [basis](!/linear-algebra/vector-spaces#2), with solutions $e^{\\lambda_i t}$
+• **Systems of differential equations**: $\\dot{\\mathbf{x}} = A\\mathbf{x}$ decouples into $n$ [scalar](!/linear-algebra/vectors#1) equations in the eigenvector [basis](!/linear-algebra/vector-spaces/basis#2), with solutions $e^{\\lambda_i t}$
 • **Matrix exponentials**: $e^{At} = Pe^{Dt}P^{-1}$, the workhorse of linear dynamics and control
 • **Quadratic forms**: for symmetric $A$, $\\mathbf{x}^TA\\mathbf{x}$ becomes a sum of $\\lambda_i y_i^2$ in the eigenvector coordinates, which classifies conics and tests definiteness
 • **Principal component analysis**: diagonalizing a covariance matrix rotates the data onto its axes of greatest variance

@@ -9,6 +9,8 @@ import Head from 'next/head';
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import vennTruthTableDiagrams from '@/app/components/diagrams/set-theory/vennTruthTableDiagrams'
 
 
 export async function getStaticProps(){
@@ -355,9 +357,20 @@ const faqQuestions = {
   }
 }
 
+  const demoUnits = {
+    nonContradiction: demoUnitFrame({
+      svg: vennTruthTableDiagrams['contradiction'],
+      caption: 'P &#8743; &#172;P covers no case',
+      text: 'Let circle A stand for the cases where P is true. P &#8743; &#172;P asks for cases inside A and outside A at once, and there are none, so nothing is shaded: the formula is false under every assignment, which is what makes it a contradiction. Check other formulas on the',
+      href: '/set-theory/visual-tools/venn-truth-table',
+      linkText: 'Venn truth-table explorer',
+    }),
+  };
+
   return{
     props:{
 
+      demoUnits,
       contradictions,
       introContent,
       contradictionContent,
@@ -375,7 +388,7 @@ const faqQuestions = {
   }
 }
 
-export default function ContradictionPage({
+export default function ContradictionPage({demoUnits, 
   seoData,
   contradictions,
   introContent,
@@ -392,7 +405,11 @@ export default function ContradictionPage({
             {
             id:'definition',
             title: contradictionContent.definition.title,
-            content:contradictionContent.definition.description
+            content:[
+              contradictionContent.definition.description,
+              <div key={'unit-nonContradiction'} dangerouslySetInnerHTML={{ __html: demoUnits.nonContradiction }} />,
+              `Its negation, ¬(P ∧ ¬P), shades everything: the negation of a contradiction is a tautology.`,
+            ]
           },
           {
             id:'notation',

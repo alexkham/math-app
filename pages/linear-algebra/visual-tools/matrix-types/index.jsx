@@ -137,7 +137,7 @@ Diagonal matrices are the ones every computation is easiest for:
 
 • The product of two diagonal matrices is diagonal, with the diagonal entries multiplied
 • The determinant is the product $d_1 d_2 \\cdots d_n$
-• The eigenvalues are the diagonal entries themselves, with the standard [basis](!/linear-algebra/vector-spaces#2) vectors as [eigenvectors](!/linear-algebra/eigen#2)
+• The eigenvalues are the diagonal entries themselves, with the standard [basis](!/linear-algebra/vector-spaces/basis#2) vectors as [eigenvectors](!/linear-algebra/eigen#2)
 • The inverse exists exactly when no $d_i$ is zero, and is the diagonal matrix of the reciprocals
 • Powers are computed entry by entry, $D^k$ has diagonal $d_i^k$
 

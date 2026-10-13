@@ -1090,7 +1090,7 @@ A random variable assigns a number to each outcome of the coin toss.
 Different choices of this assignment lead to different interpretations and uses of the same model.
 
 Common constructions include:
-• indicator variables that mark one outcome as success
+• [indicator variables](!/probability/indicators) that mark one outcome as success
 • binary encodings such as 0 and 1
 • signed encodings such as −1 and 1
 

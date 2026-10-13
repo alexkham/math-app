@@ -162,7 +162,7 @@ The tool reduces all the way to reduced form because that is where the three cas
 • **Least squares**: when a system is inconsistent, as measured data usually makes it, the next question is the closest consistent system, which is what [least squares](!/linear-algebra/orthogonality/least-squares#3) answers
 • **Null spaces and eigenvectors**: [eigenvectors](!/linear-algebra/eigen#2) are the non-trivial solutions of the homogeneous system $(A - \\lambda I)\\mathbf{x} = \\mathbf{0}$, read off exactly as in the homogeneous preset
 • **Rank in practice**: the reduction is the practical way to find rank, and the free-variable count is the nullity
-• **Algorithms**: Gauss-Jordan elimination is the [basis](!/linear-algebra/vector-spaces#2) of every direct linear solver, with pivoting added for numerical stability`,
+• **Algorithms**: Gauss-Jordan elimination is the [basis](!/linear-algebra/vector-spaces/basis#2) of every direct linear solver, with pivoting added for numerical stability`,
       before: ``,
       after: ``,
       link: '',

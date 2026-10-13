@@ -451,7 +451,12 @@ export default function FractionCalculator({ explanations = defaultExplanations 
     }
   };
 
-  const currentExplanation = explanations[operation];
+  // nested key first (e.g. 'calculate_fraction:add'), then top-level, then built-in default
+  const nestedKey = operation === 'calculate_fraction' ? `${operation}:${fractionOp}` : null;
+  const currentExplanation =
+    (nestedKey && explanations[nestedKey]) ||
+    explanations[operation] ||
+    defaultExplanations[operation];
   const dynamicExplanation = getDynamicExplanation();
 
   return (

@@ -475,7 +475,9 @@ When $f(x)$ is linear, each case produces a [linear equation](!/algebra/equation
 
 When $f(x)$ is quadratic, each case is a [quadratic equation](!/algebra/equations/quadratic) that may contribute zero, one, or two solutions. The equation $|x^2 - 4| = 5$ splits into $x^2 - 4 = 5$ and $x^2 - 4 = -5$. The first gives $x^2 = 9$, so $x = \\pm 3$. The second gives $x^2 = -1$, which has no real solutions. The complete solution set is $\\{-3, 3\\}$.
 
-The method extends to any expression inside the absolute value. The internal structure determines how hard each case is to solve, but the case-splitting framework is always the same.`,
+The method extends to any expression inside the absolute value. The internal structure determines how hard each case is to solve, but the case-splitting framework is always the same.
+
+To solve your own absolute value equation with each case shown, use the [absolute value equation solver](!/algebra/calculators/equations/absolute-value).`,
     before: ``,
     after: ``,
     link: '',

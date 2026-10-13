@@ -363,7 +363,9 @@ Using **logarithms** takes the log of both sides and brings the exponent down us
 
 Substitution replaces $a^x$ with a temporary variable $t$, converting the exponential equation into a [polynomial](!/algebra/polynomials) — typically a quadratic. It works when the equation involves both $a^{2x}$ and $a^x$, creating a squared-and-linear pattern that [factors](!/algebra/polynomials/factoring) cleanly.
 
-Each method has its natural domain. Matching bases is fastest when it applies. Exponent laws handle multi-term equations. **Logarithms** are the universal fallback. Substitution targets disguised polynomials.`,
+Each method has its natural domain. Matching bases is fastest when it applies. Exponent laws handle multi-term equations. **Logarithms** are the universal fallback. Substitution targets disguised polynomials.
+
+To solve your own exponential equation with each step shown, use the [exponential equation solver](!/algebra/calculators/equations/exponential).`,
     before: ``,
     after: ``,
     link: '',

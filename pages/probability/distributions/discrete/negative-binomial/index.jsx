@@ -1117,6 +1117,8 @@ Consider rolling a die until you get three 6's, where $r = 3$ and $p = \\frac{1}
 $$E[X] = \\frac{3}{1/6} = 18$$
 
 On average, you expect to roll the die 18 times before accumulating three 6's. This is exactly three times the expected wait for a single 6.
+
+To compute the expected value of a negative binomial distribution for your own parameters, step by step, use the [negative binomial expected value calculator](!/probability/calculators/expected-value/negative-binomial).
   `,
   before: ``,
   after: ``,

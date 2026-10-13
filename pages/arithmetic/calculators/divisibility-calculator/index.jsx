@@ -167,7 +167,7 @@ Enter $77$ in Common Divisors mode: no common divisors show green, but this does
 
 For small numbers, Common Divisors mode catches most composites. If any divisor shows green (except cases like $2$ dividing even numbers you already know about), the number is definitely composite. Try $91$: no common divisors, but $91 = 7 × 13$.
 
-To conclusively test primality, you'd need a **prime number checker** that tests all divisors up to the square root. Divisibility testing is a first step: if divisible by $2, 3, 5$, etc., definitely not prime. If not, further testing needed.`,
+To conclusively test primality, you'd need a [prime number checker](!/arithmetic/calculators/prime-calculator) that tests all divisors up to the square root. Divisibility testing is a first step: if divisible by $2, 3, 5$, etc., definitely not prime. If not, further testing needed.`,
     before: ``,
     after: ``,
     link: '',

@@ -268,7 +268,9 @@ Divide both sides by $2$:
 
 $$x = 9$$
 
-The order of these steps is flexible — subtracting $2x$ first or adding $7$ first both reach the same result — but the underlying logic is rigid: every step must preserve equivalence, and each step must bring the equation closer to the form $x = \\text{value}$.`,
+The order of these steps is flexible — subtracting $2x$ first or adding $7$ first both reach the same result — but the underlying logic is rigid: every step must preserve equivalence, and each step must bring the equation closer to the form $x = \\text{value}$.
+
+To solve your own linear equation with each step shown, use the [linear equation solver](!/algebra/calculators/equations/linear).`,
     before: ``,
     after: ``,
     link: '',
@@ -276,7 +278,7 @@ The order of these steps is flexible — subtracting $2x$ first or adding $7$ fi
 
   obj4: {
     title: `Equations with Parentheses`,
-    content: `When an equation contains parentheses, the distributive property clears them before any collecting or isolating takes place. The equation $3(2x - 5) = 4x + 1$ begins with distribution on the left:
+    content: `When an equation contains parentheses, the [distributive property](!/arithmetic/properties#5) clears them before any collecting or isolating takes place. The equation $3(2x - 5) = 4x + 1$ begins with distribution on the left:
 
 $$6x - 15 = 4x + 1$$
 
@@ -363,7 +365,9 @@ Divide by $t$:
 
 $$r = \\frac{1}{t}\\left(\\frac{A}{P} - 1\\right)$$
 
-Each step is a reversible operation that preserves equivalence, applied to letters instead of numbers. The logic is identical to solving $7 = 2(1 + 3x)$ — only the symbols differ.`,
+Each step is a reversible operation that preserves equivalence, applied to letters instead of numbers. The logic is identical to solving $7 = 2(1 + 3x)$ — only the symbols differ.
+
+To rearrange a formula for any variable with each step shown, use the [literal equation solver](!/algebra/calculators/equations/literal).`,
     before: ``,
     after: ``,
     link: '',

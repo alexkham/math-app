@@ -2677,7 +2677,9 @@ Example: evaluate $\\tan(240°)$.
 
 The angle $240°$ is in Quadrant III ($180° < 240° < 270°$). The reference angle is $240° - 180° = 60°$. Tangent is positive in Quadrant III (both sine and cosine are negative, and a negative divided by a negative is positive). Therefore $\\tan(240°) = +\\tan(60°) = \\sqrt{3}$.
 
-This procedure works uniformly for every angle and every function. For non-standard angles — those whose reference angle is not $30°$, $45°$, or $60°$ — a calculator is needed for the reference angle evaluation, but the sign-determination step remains the same.`,
+This procedure works uniformly for every angle and every function. For non-standard angles — those whose reference angle is not $30°$, $45°$, or $60°$ — a calculator is needed for the reference angle evaluation, but the sign-determination step remains the same.
+
+To evaluate sine, cosine or tangent at any angle in degrees or radians, use the [trigonometry calculator](!/calculators/trigonometry-calculator).`,
     before: ``,
     after: ``,
     link: ``,

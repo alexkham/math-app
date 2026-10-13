@@ -358,7 +358,7 @@ Conjugates are essential for [rationalizing denominators](!/algebra/roots/simpli
 
   obj7: {
     title: `Expanding Products with Radicals`,
-    content: `Binomials containing radicals expand using the distributive property, just like algebraic binomials.
+    content: `Binomials containing radicals expand using the [distributive property](!/arithmetic/properties#5), just like algebraic binomials.
 
 $$(2 + \\sqrt{3})(4 - \\sqrt{3})$$
 

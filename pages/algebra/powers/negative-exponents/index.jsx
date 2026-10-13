@@ -335,7 +335,9 @@ Simplify $\\frac{a^{-2}b^3}{a^4b^{-1}}$. Handle each variable separately. For $a
 
 Simplify $\\left(\\frac{x^{-1}}{y^2}\\right)^{-3}$. The negative exponent flips the fraction: $\\left(\\frac{y^2}{x^{-1}}\\right)^3 = \\left(\\frac{y^2 \\cdot x}{1}\\right)^3 = (xy^2)^3 = x^3y^6$.
 
-In each case, the laws reduce the expression step by step. Negative exponents are not obstacles — they are instructions to take reciprocals, and they simplify by the same rules that govern every other exponent.`,
+In each case, the laws reduce the expression step by step. Negative exponents are not obstacles — they are instructions to take reciprocals, and they simplify by the same rules that govern every other exponent.
+
+To check a negative power with your own numbers, use the [exponent calculator](!/calculators/exponent-calculator).`,
   before: ``,
   after: ``,
   link: '',

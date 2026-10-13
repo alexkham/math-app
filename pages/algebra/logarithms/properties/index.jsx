@@ -191,7 +191,9 @@ This follows directly from strict monotonicity. A function that is always increa
 
 The one-to-one property justifies a key technique for solving [equations](!/algebra/logarithms/equations). When an equation has the form $\\log_a(M) = \\log_a(N)$ with the same base on both sides, the arguments must be equal: $M = N$. This reduces a logarithmic equation to an algebraic one.
 
-Example: $\\log_3(2x + 1) = \\log_3(x + 5)$ implies $2x + 1 = x + 5$, giving $x = 4$.`,
+Example: $\\log_3(2x + 1) = \\log_3(x + 5)$ implies $2x + 1 = x + 5$, giving $x = 4$.
+
+The [logarithmic equation solver](!/algebra/calculators/equations/logarithmic) uses this property whenever both sides are single logarithms with the same base.`,
     before: ``,
     after: ``,
     link: '',

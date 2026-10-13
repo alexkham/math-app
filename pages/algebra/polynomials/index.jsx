@@ -420,7 +420,9 @@ Subtraction works the same way, with signs distributed across the second polynom
 
 $$(x + 2)(x - 3) = x^2 - 3x + 2x - 6 = x^2 - x - 6$$
 
-Division introduces more complexity. Unlike the other three operations, dividing one polynomial by another does not always yield a polynomial. When it does not divide evenly, the result includes a quotient and a remainder, much like integer division. Techniques such as long division and synthetic division handle this process systematically.`,
+Division introduces more complexity. Unlike the other three operations, dividing one polynomial by another does not always yield a polynomial. When it does not divide evenly, the result includes a quotient and a remainder, much like integer division. Techniques such as long division and synthetic division handle this process systematically.
+
+To add, subtract, multiply or divide specific polynomials step by step, use the [polynomial calculator](!/algebra/calculators/polynomial).`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Polynomial Operations](!/algebra/polynomials/operations) →@`,
   link: '/algebra/polynomials/operations',

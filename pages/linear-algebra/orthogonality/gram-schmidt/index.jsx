@@ -2312,7 +2312,9 @@ $\\mathbf{u}_3 = (0, 1, 1) - \\frac{2}{3}(1, 1, 1) - (-\\frac{1}{2})(\\frac{1}{3
 
 Check: $\\mathbf{u}_1 \\cdot \\mathbf{u}_3 = -\\frac{1}{2} + 0 + \\frac{1}{2} = 0$ and $\\mathbf{u}_2 \\cdot \\mathbf{u}_3 = -\\frac{1}{6} + 0 + \\frac{1}{6} = 0$.
 
-Normalizing: $\\|\\mathbf{u}_1\\| = \\sqrt{3}$, $\\|\\mathbf{u}_2\\| = \\sqrt{6}/3$, $\\|\\mathbf{u}_3\\| = 1/\\sqrt{2}$. The orthonormal basis is $\\{\\mathbf{u}_1/\\sqrt{3}, \\; 3\\mathbf{u}_2/\\sqrt{6}, \\; \\sqrt{2}\\,\\mathbf{u}_3\\}$.`,
+Normalizing: $\\|\\mathbf{u}_1\\| = \\sqrt{3}$, $\\|\\mathbf{u}_2\\| = \\sqrt{6}/3$, $\\|\\mathbf{u}_3\\| = 1/\\sqrt{2}$. The orthonormal basis is $\\{\\mathbf{u}_1/\\sqrt{3}, \\; 3\\mathbf{u}_2/\\sqrt{6}, \\; \\sqrt{2}\\,\\mathbf{u}_3\\}$.
+
+To run Gram-Schmidt on your own set of vectors, use the [vector calculator](!/linear-algebra/calculators/vectors).`,
     before: ``,
     after: ``,
     link: ``,

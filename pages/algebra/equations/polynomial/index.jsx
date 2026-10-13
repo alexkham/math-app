@@ -468,7 +468,7 @@ The Factor Theorem is the special case where $P(r) = 0$. If substituting $r$ int
 
 This connection creates a degree-reduction strategy. Once a root $r$ is identified — by inspection, by the rational root theorem, or by other means — dividing $P(x)$ by $(x - r)$ produces a quotient $Q(x)$ of degree $n - 1$. The roots of $Q(x)$ are the remaining roots of $P(x)$. Repeating the process reduces the degree one step at a time until the quotient is quadratic, at which point the quadratic formula finishes the job.
 
-[Polynomial division](!/algebra/polynomials/operations) can be carried out using long division or synthetic division. Synthetic division is faster but limited to divisors of the form $(x - r)$, which is exactly the form needed when factoring out a known root.`,
+[Polynomial division](!/algebra/polynomials/operations) can be carried out using long division or synthetic division. The [polynomial calculator](!/algebra/calculators/polynomial) does both and shows every step. Synthetic division is faster but limited to divisors of the form $(x - r)$, which is exactly the form needed when factoring out a known root.`,
     before: ``,
     after: ``,
     link: '',
@@ -502,7 +502,9 @@ Cardano's formula yields all three roots, but its practical use is limited. The 
 
 The practical approach to most cubics encountered in coursework begins with the rational root theorem. If a rational root exists, polynomial division reduces the cubic to a quadratic, and the remaining roots follow from the quadratic formula. When no rational root exists, numerical methods such as Newton's method or graphical estimation provide the real roots to any required precision.
 
-Every cubic with real coefficients has at least one real root. This is a consequence of the intermediate value theorem: a real cubic changes sign as $x$ ranges from $-\\infty$ to $+\\infty$, so it must cross zero somewhere.`,
+Every cubic with real coefficients has at least one real root. This is a consequence of the intermediate value theorem: a real cubic changes sign as $x$ ranges from $-\\infty$ to $+\\infty$, so it must cross zero somewhere.
+
+To solve a specific polynomial equation with each step shown, use the [polynomial equation solver](!/algebra/calculators/equations/polynomial).`,
     before: ``,
     after: ``,
     link: '',

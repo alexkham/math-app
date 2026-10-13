@@ -79,7 +79,7 @@ The eigenvalues are reported rather than derived, since the eigenvalue visualize
 • **Symmetry check** — if $A \\neq A^T$ the run stops, with the offending entries marked
 • **Eigenvalues** — the roots of $\\det(A - \\lambda I)$, all real
 • **Eigenvectors** — for each eigenvalue, $A - \\lambda I$ row reduced and one [vector](!/linear-algebra/vectors#1) per free column, scaled to integers
-• **Gram–Schmidt** — only for a repeated eigenvalue: the second [basis](!/linear-algebra/vector-spaces#2) vector of its eigenspace is replaced by its component perpendicular to the first
+• **Gram–Schmidt** — only for a repeated eigenvalue: the second [basis](!/linear-algebra/vector-spaces/basis#2) vector of its eigenspace is replaced by its component perpendicular to the first
 • **Normalize** — each eigenvector divided by its length; the [unit vectors](!/linear-algebra/vectors/magnitude#5) become the columns of $Q$, the eigenvalues the diagonal of $\\Lambda$
 • **Check** — $Q^TQ = I$
 • **Factor** — $A = Q \\cdot \\Lambda \\cdot Q^T$ multiplied out and compared with $A$

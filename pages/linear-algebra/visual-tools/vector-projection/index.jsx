@@ -158,7 +158,7 @@ For projections onto [subspaces](!/linear-algebra/vector-spaces/subspaces#1), pr
 • **Distance from a point to a line**: the length of the remainder $\\mathbf{u} - \\operatorname{proj}_{\\mathbf{v}} \\mathbf{u}$
 • **Gram-Schmidt**: each new vector is made orthogonal to the previous ones by subtracting its projections onto them
 • **Least squares**: fitting a line or a model is projecting the data vector onto the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) of the design [matrix](!/linear-algebra/matrix#1)
-• **Coordinates in an orthogonal basis**: the coefficient $c$ is exactly the coordinate of $\\mathbf{u}$ along $\\mathbf{v}$ when the [basis](!/linear-algebra/vector-spaces#2) is orthogonal
+• **Coordinates in an orthogonal basis**: the coefficient $c$ is exactly the coordinate of $\\mathbf{u}$ along $\\mathbf{v}$ when the [basis](!/linear-algebra/vector-spaces/basis#2) is orthogonal
 • **Signal processing and statistics**: Fourier coefficients and regression coefficients are projection coefficients`,
       before: ``,
       after: ``,

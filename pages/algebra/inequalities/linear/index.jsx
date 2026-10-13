@@ -327,7 +327,9 @@ A multi-step inequality demands the same sequence as a multi-step equation. Cons
 
 An inequality requiring a direction flip: $-2x + 5 > 13$. Subtract $5$: $-2x > 8$. Divide by $-2$ and reverse the inequality: $x < -4$. The solution is $(-\\infty, -4)$.
 
-A more involved example: $5 - 3(2x + 1) \\geq 4x - 8$. Distribute: $5 - 6x - 3 \\geq 4x - 8$. Simplify the left: $2 - 6x \\geq 4x - 8$. Add $6x$: $2 \\geq 10x - 8$. Add $8$: $10 \\geq 10x$. Divide by $10$: $1 \\geq x$, or equivalently $x \\leq 1$. The solution is $(-\\infty, 1]$.`,
+A more involved example: $5 - 3(2x + 1) \\geq 4x - 8$. Distribute: $5 - 6x - 3 \\geq 4x - 8$. Simplify the left: $2 - 6x \\geq 4x - 8$. Add $6x$: $2 \\geq 10x - 8$. Add $8$: $10 \\geq 10x$. Divide by $10$: $1 \\geq x$, or equivalently $x \\leq 1$. The solution is $(-\\infty, 1]$.
+
+To solve your own linear inequality with each step shown, use the [linear inequality solver](!/algebra/calculators/inequalities/linear).`,
     before: ``,
     after: ``,
     link: '',

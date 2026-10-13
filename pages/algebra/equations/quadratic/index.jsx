@@ -547,7 +547,9 @@ $$x = \\frac{-(-3) \\pm \\sqrt{(-3)^2 - 4(2)(-5)}}{2(2)} = \\frac{3 \\pm \\sqrt{
 
 The two solutions are $x = \\frac{10}{4} = \\frac{5}{2}$ and $x = \\frac{-4}{4} = -1$.
 
-The formula is not a separate technique from completing the square — it is the result of completing the square once, in general form, so that the work never needs repeating. Every specific application of completing the square arrives at the same place the formula reaches in a single substitution.`,
+The formula is not a separate technique from completing the square — it is the result of completing the square once, in general form, so that the work never needs repeating. Every specific application of completing the square arrives at the same place the formula reaches in a single substitution.
+
+To solve your own quadratic equation with each step shown, use the [quadratic equation solver](!/algebra/calculators/equations/quadratic).`,
     before: ``,
     after: ``,
     link: '',

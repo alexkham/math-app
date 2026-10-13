@@ -1356,7 +1356,7 @@ is $c_1 = c_2 = \\cdots = c_k = 0$`,
     name: 'Basis',
     category: 'Vector Spaces',
     formula: `A set $\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_n\\}$ that is [linearly independent](!/linear-algebra/definitions#linear_independence) and [spans](!/linear-algebra/definitions#span) the entire [vector space](!/linear-algebra/definitions#vector_space)`,
-    link: { url: '/linear-algebra/vector-spaces#2', label: 'Vector Spaces' },
+    link: { url: '/linear-algebra/vector-spaces/basis#2', label: 'Vector Spaces' },
     fields: {
       intuition: `A minimal set of vectors that can produce every vector in the space through linear combinations. Every vector has a unique representation as a linear combination of basis vectors.`,
       examples: `• Standard basis for $\\mathbb{R}^3$: $\\{\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_3\\}$

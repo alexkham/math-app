@@ -155,7 +155,7 @@ For the full treatment, including properties of inverses and the row reduction m
       content: `The inverse is the matrix that undoes a [linear transformation](!/linear-algebra/transformations#1), and that idea appears everywhere.
 
 • **Solving linear systems**: $A\\mathbf{x} = \\mathbf{b}$ becomes $\\mathbf{x} = A^{-1}\\mathbf{b}$; in practice the system is solved directly, but the inverse is the concept behind it
-• **Change of basis**: converting coordinates back requires the inverse of the change-of-[basis](!/linear-algebra/vector-spaces#2) matrix
+• **Change of basis**: converting coordinates back requires the inverse of the change-of-[basis](!/linear-algebra/vector-spaces/basis#2) matrix
 • **Undoing transformations**: in graphics and robotics, the inverse of a rotation, scaling or shear returns an object to where it started
 • **Diagonalization**: $A = P D P^{-1}$ needs $P^{-1}$ to move between the standard basis and the eigenbasis
 • **Cramer's rule**: the adjugate formula, applied to $\\mathbf{x} = A^{-1}\\mathbf{b}$, gives each unknown as a ratio of determinants

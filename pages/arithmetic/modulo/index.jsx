@@ -1102,7 +1102,9 @@ The procedure has a compact formula using the floor function $\\lfloor x \\rfloo
 
 $$a \\bmod n = a - n \\cdot \\left\\lfloor \\frac{a}{n} \\right\\rfloor$$
 
-This captures the three-step process in a single expression: divide, truncate to an integer, subtract the product.`,
+This captures the three-step process in a single expression: divide, truncate to an integer, subtract the product.
+
+To get the remainder for any pair of numbers instantly, use the [modulo calculator](!/calculators/modulo-calculator).`,
   before: ``,
   after: ``,
   link: '',

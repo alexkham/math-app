@@ -741,6 +741,8 @@ When the logarithm of a variable is normally distributed. Models income, particl
 
 Classifying distributions into types helps you match real-world problems to the right mathematical model—whether you're analyzing lifetimes, measurements, or proportions. While all continuous distributions share common features like probability density functions and integration-based calculations(like [expected value](!/probability/expected-value), [variance](!/probability/variance) , standard deviation etc), they differ in shape, support, parameters, and the specific phenomena they best represent.
 
+To compute probabilities for the normal, exponential or uniform distribution, use the [continuous distributions calculator](!/probability/calculators/continuous-distributions).
+
 `,
       before:``,
       after:``,

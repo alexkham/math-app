@@ -395,7 +395,9 @@ Finding the first term: if $a_{12} = 50$ and $d = 4$, then $50 = a_1 + 11 \\cdot
 
 Finding the position of a term: if $a_1 = 7$, $d = 5$, and some term equals $52$, then $52 = 7 + (n-1) \\cdot 5$, so $n - 1 = 9$ and $n = 10$. The value $52$ is the $10$th term. If the equation yields a non-integer $n$, the value does not appear in the sequence.
 
-When two non-consecutive terms are given — say $a_3 = 11$ and $a_9 = 35$ — write both in terms of $a_1$ and $d$: $a_1 + 2d = 11$ and $a_1 + 8d = 35$. Subtracting gives $6d = 24$, so $d = 4$, and back-substituting gives $a_1 = 3$.`,
+When two non-consecutive terms are given — say $a_3 = 11$ and $a_9 = 35$ — write both in terms of $a_1$ and $d$: $a_1 + 2d = 11$ and $a_1 + 8d = 35$. Subtracting gives $6d = 24$, so $d = 4$, and back-substituting gives $a_1 = 3$.
+
+To find any term of your own arithmetic sequence, use the [arithmetic sequence calculator](!/algebra/calculators/sequences/arithmetic-sequence).`,
     before: ``,
     after: ``,
     link: '',

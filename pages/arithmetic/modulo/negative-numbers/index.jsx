@@ -1089,7 +1089,9 @@ Determine what Python returns for $(-23) \\% \\; 5$. Python uses floored divisio
 
 Determine what JavaScript returns for the same expression. JavaScript uses truncated division: truncate $-4.6$ to $-4$, remainder $-23 + 20 = -3$. JavaScript returns $-3$.
 
-Ensure non-negative results in JavaScript: $((-23 \\% \\; 5) + 5) \\% \\; 5 = (-3 + 5) \\% \\; 5 = 2 \\% \\; 5 = 2$.`,
+Ensure non-negative results in JavaScript: $((-23 \\% \\; 5) + 5) \\% \\; 5 = (-3 + 5) \\% \\; 5 = 2 \\% \\; 5 = 2$.
+
+To try these cases with your own numbers, use the [modulo calculator](!/calculators/modulo-calculator).`,
   before: ``,
   after: ``,
   link: '',

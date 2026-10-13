@@ -451,7 +451,9 @@ Simplify $\\frac{(a^2b)^3}{a^4b^2}$. Start with the numerator: $(a^2b)^3 = a^6b^
 
 Simplify $\\left(\\frac{3x^2}{y}\\right)^3 \\cdot y^4$. The power of a quotient gives $\\frac{3^3 x^6}{y^3} \\cdot y^4 = \\frac{27x^6 \\cdot y^4}{y^3} = 27x^6y$.
 
-Each step applies one law. When multiple laws are needed, working from the innermost grouping outward — simplifying parentheses first, then combining like bases — produces the cleanest path to the result.`,
+Each step applies one law. When multiple laws are needed, working from the innermost grouping outward — simplifying parentheses first, then combining like bases — produces the cleanest path to the result.
+
+To check results like these with your own numbers, use the [exponent calculator](!/calculators/exponent-calculator).`,
   before: ``,
   after: ``,
   link: '',

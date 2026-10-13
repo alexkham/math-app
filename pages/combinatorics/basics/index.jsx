@@ -1451,6 +1451,8 @@ $$\\binom{n}{r} = \\frac{n!}{r!(n-r)!}.$$
 Variants cover partitioning items into groups, distributing identical items into labeled cells, and weak and strong compositions.
 
 All of these formulas are built from a handful of [combinatorial symbols](!/math-symbols/combinatorics) — the factorial $n!$, the arrangement count $P(n,r)$, the binomial coefficient $\\binom{n}{r}$ — each listed in the symbols reference with the [LaTeX](!/latex) code that produces it, and the [mathematical keyboard](!/keyboard) lets you type them directly.
+
+To evaluate the factorials in these formulas, use the [factorial calculator](!/calculators/factorial-calculator).
 `,
     before: `
 Multiplication-rule problems generate sequences of choices. A single structural question splits all such problems into two families: does the order of the choices matter? The distinction is the most consequential one in the section — every standard counting formula in combinatorics sits on one side of this divide.
@@ -1482,6 +1484,8 @@ Within the two families, problems reduce to ten standard templates — five perm
 • [Weak composition](!/combinatorics/combinations#weak) — distribute $n$ identical items into $r$ bins, bins allowed empty: $\\binom{n+r-1}{r-1}$
 • [Strong composition](!/combinatorics/combinations#strong) — distribute $n$ identical items into $r$ bins, no bin empty: $\\binom{n-1}{r-1}$
 • [Distribution into cells](!/combinatorics/combinations#distribution) — distribute $n$ distinct items into $r$ labeled cells with specified sizes: multinomial coefficient
+
+To count arrangements and selections for your own numbers in each of these scenarios, use the [combinatorics calculator](!/combinatorics/calculator).
 `,
     before: ``,
     between: ``,

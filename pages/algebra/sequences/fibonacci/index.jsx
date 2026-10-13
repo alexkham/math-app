@@ -201,7 +201,9 @@ Each term after the second is the sum of its two immediate predecessors: $2 = 1 
 
 An alternative convention starts with $F_0 = 0$: the sequence becomes $0, 1, 1, 2, 3, 5, 8, \\ldots$. The same recurrence applies — only the indexing shifts. Both conventions appear in the literature, and the choice is a matter of context. This page uses $F_1 = 1$.
 
-The Fibonacci sequence is neither [arithmetic](!/algebra/sequences/arithmetic) (the differences $0, 1, 1, 2, 3, 5, \\ldots$ are not constant) nor [geometric](!/algebra/sequences/geometric) (the ratios $1, 2, 1.5, 1.\\overline{6}, 1.6, \\ldots$ are not constant either, though they converge).`,
+The Fibonacci sequence is neither [arithmetic](!/algebra/sequences/arithmetic) (the differences $0, 1, 1, 2, 3, 5, \\ldots$ are not constant) nor [geometric](!/algebra/sequences/geometric) (the ratios $1, 2, 1.5, 1.\\overline{6}, 1.6, \\ldots$ are not constant either, though they converge).
+
+To compute any Fibonacci number or list a range of terms, use the [Fibonacci sequence calculator](!/algebra/calculators/sequences/fibonacci-sequence).`,
     before: ``,
     after: ``,
     link: '',

@@ -319,7 +319,9 @@ The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — eight in total. The facto
 
 For $n = 36$, test integers from $1$ to $6$ (since $\\sqrt{36} = 6$):
 
-$1 \\mid 36$: pair $(1, 36)$. $2 \\mid 36$: pair $(2, 18)$. $3 \\mid 36$: pair $(3, 12)$. $4 \\mid 36$: pair $(4, 9)$. $5 \\nmid 36$: skip. $6 \\mid 36$: pair $(6, 6)$.`,
+$1 \\mid 36$: pair $(1, 36)$. $2 \\mid 36$: pair $(2, 18)$. $3 \\mid 36$: pair $(3, 12)$. $4 \\mid 36$: pair $(4, 9)$. $5 \\nmid 36$: skip. $6 \\mid 36$: pair $(6, 6)$.
+
+To list all factors of a specific number, use the [factoring calculator](!/algebra/calculators/factoring).`,
     afterFigure: `The complete factor set is $\\{1, 2, 3, 4, 6, 9, 12, 18, 36\\}$ — nine factors, all discovered by testing only six candidates.
 
 For large numbers, [divisibility rules](!/arithmetic/divisibility/rules) speed up the testing. Checking whether $2$, $3$, or $5$ divide $n$ takes a glance at the digits, not a full division.`,

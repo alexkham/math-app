@@ -255,7 +255,9 @@ Square: $x - 2 = 25$
 
 Solve: $x = 27$
 
-Check: $\\sqrt{27 - 2} + 4 = \\sqrt{25} + 4 = 5 + 4 = 9$. Valid.`,
+Check: $\\sqrt{27 - 2} + 4 = \\sqrt{25} + 4 = 5 + 4 = 9$. Valid.
+
+To solve your own radical equation with each step shown, use the [radical equation solver](!/algebra/calculators/equations/radical).`,
     before: ``,
     after: ``,
     link: '',
@@ -457,7 +459,9 @@ Intersection: $2 \\leq x \\leq 18$.
 
 For inequalities, direction may reverse when both sides are squared — but only if squaring a negative. Since principal roots are non-negative, squaring inequalities involving isolated radicals typically preserves direction.
 
-The [properties](!/algebra/roots/properties) page details domain restrictions. Full treatment of inequalities extends beyond radical equations into broader inequality techniques.`,
+The [properties](!/algebra/roots/properties) page details domain restrictions. Full treatment of inequalities extends beyond radical equations into broader inequality techniques.
+
+To solve your own radical inequality with each step shown, use the [radical inequality solver](!/algebra/calculators/inequalities/radical).`,
     before: ``,
     after: ``,
     link: '',

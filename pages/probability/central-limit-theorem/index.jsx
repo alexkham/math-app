@@ -1218,7 +1218,7 @@ The table below sets each misconception alongside the corresponding correct view
     obj8:{
       title:`CLT vs Law of Large Numbers`,
       content:`
-The Central Limit Theorem and the Law of Large Numbers are often confused because both involve sample means and large sample sizes. However, they answer fundamentally different questions.
+The Central Limit Theorem and the [Law of Large Numbers](!/probability/large-numbers-law) are often confused because both involve sample means and large sample sizes. However, they answer fundamentally different questions.
 
 The **Law of Large Numbers (LLN)** tells us that as we collect more observations, the sample mean gets closer and closer to the true population mean. This is a statement about **convergence to a specific value**. If you flip a fair coin many times, the proportion of heads approaches 0.5—that's the LLN at work.
 

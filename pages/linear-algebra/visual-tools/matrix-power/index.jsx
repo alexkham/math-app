@@ -159,7 +159,7 @@ The path reading is literal for adjacency matrices: if $a_{i,j}$ is $1$ when the
 
 • **Markov chains**: if $P$ holds the one-step transition probabilities, $P^n$ holds the $n$-step probabilities, and $P^n$ converging is the chain settling to a steady state
 • **Graph walks**: $(A^n)_{i,j}$ counts walks of length $n$ from vertex $i$ to vertex $j$ in the graph with adjacency matrix $A$
-• **Linear recurrences**: the Fibonacci numbers, and every sequence defined by a fixed linear rule, are read off the powers of a companion matrix
+• **Linear recurrences**: the [Fibonacci numbers](!/algebra/sequences/fibonacci), and every sequence defined by a fixed linear rule, are read off the powers of a companion matrix
 • **Discrete dynamical systems**: population models, coupled oscillators sampled in time, and any system with $\\mathbf{x}_{t+1} = A\\mathbf{x}_t$ have $\\mathbf{x}_t = A^t \\mathbf{x}_0$
 • **The matrix exponential**: $e^{At} = \\sum A^n t^n / n!$ solves linear differential equations, and every term is a matrix power
 • **Eigenvalues by iteration**: power iteration multiplies a [vector](!/linear-algebra/vectors#1) by $A$ repeatedly, and the vector turns toward the dominant eigenvector`,

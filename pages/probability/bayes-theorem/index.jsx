@@ -902,6 +902,8 @@ Bayes' theorem describes how to update the probability of a situation once new i
 The idea is simple in principle. We start with an initial assessment of how likely different possibilities are. We then consider how compatible each possibility is with what we observed. Finally, these assessments are combined and rescaled so that the updated probabilities remain consistent.
 
 This verbal description captures the essence of Bayes' theorem before any symbols appear. The formula that follows is simply a precise way to express this update process using [conditional probability](!/probability/conditional-probability).
+
+To compute a posterior probability from your own prior and likelihoods, use the [Bayes calculator](!/probability/calculators/bayes-calculator).
 `,
       before:``,
       after:``,

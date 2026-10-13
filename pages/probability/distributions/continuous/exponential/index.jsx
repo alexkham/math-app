@@ -1428,6 +1428,8 @@ Suppose customers arrive at a store at an average rate of $\\lambda = 3$ custome
 $$E[X] = \\frac{1}{3} \\text{ hours} = 20 \\text{ minutes}$$
 
 The expected time until the next customer arrives is 20 minutes. If the rate increases to $\\lambda = 6$ customers per hour, the expected wait drops to $\\frac{1}{6}$ hours, or 10 minutes.
+
+To compute the expected value of a exponential distribution for your own parameters, step by step, use the [exponential expected value calculator](!/probability/calculators/expected-value/exponential).
   `,
   before: ``,
   after: ``,

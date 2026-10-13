@@ -876,6 +876,14 @@ const moduloExplanations = {
     title: "Coprime (Relatively Prime) Check",
     content: "Two integers are coprime (or relatively prime) if their Greatest Common Divisor (GCD) is 1. This means they share no common factors other than 1. The concept of coprime numbers is fundamental in number theory and cryptography. For modular arithmetic, when a and m are coprime, a has a multiplicative inverse modulo m, making modular division possible. Euler's totient function counts the numbers coprime to a given integer.",
     example: "Example: 25 and 36 are coprime because GCD(25, 36) = 1. Despite both being composite numbers (25 = 5² and 36 = 2² × 3²), they don't share any prime factors."
+  },
+  obj6: {
+    question: "What is a mod b when a is smaller than b, like 5 mod 10?",
+    answer: "When a is smaller than b and both are positive, b fits into a zero times, so the remainder is a itself. For example, 5 mod 10 = 5, 7 mod 10 = 7 and 3 mod 8 = 3. Only when a reaches b does the result wrap around: 10 mod 10 = 0 and 12 mod 10 = 2."
+  },
+  obj7: {
+    question: "How do I find the last digit of a number using mod 10?",
+    answer: "The last digit of a whole number is its remainder when divided by 10. For example, 347 mod 10 = 7 and 1250 mod 10 = 0. In the same way, n mod 2 tells you whether a number is even (0) or odd (1), and n mod 100 gives its last two digits."
   }
 };
 
@@ -930,7 +938,7 @@ Use the **Reset** button to clear all inputs and start fresh with new calculatio
     title: `Working with Different Number Types`,
     content: `The calculator handles three types of numerical inputs seamlessly. **Integer operations** accept whole numbers and provide exact results for all thirteen operation types. Enter values like 17, 42, or 100 directly.
 
-**Negative numbers** require special handling in modular arithmetic. When you enter $-7$ with modulus $5$, the calculator applies the formula $((a \\bmod b) + b) \\bmod b$ to ensure the result falls within $[0, 4]$. The "Negative Number Handling" operation provides detailed explanations of this adjustment process.
+[Negative numbers](!/arithmetic/modulo/negative-numbers) require special handling in modular arithmetic. When you enter $-7$ with modulus $5$, the calculator applies the formula $((a \\bmod b) + b) \\bmod b$ to ensure the result falls within $[0, 4]$. The "Negative Number Handling" operation provides detailed explanations of this adjustment process.
 
 **Decimal numbers** work with most operations, though GCD, LCM, and coprime checks require integers. For float modulo, the calculator uses $a - b \\times \\lfloor a/b \\rfloor$ to compute remainders with fractional values. This is useful for wrapping coordinates in graphics or handling periodic functions with non-integer periods.
 
@@ -1174,7 +1182,7 @@ return {
     faqQuestions,
     schemas,
     seoData: {
-      title: "Modulo Calculator | Interactive Modular Arithmetic Tool",
+      title: "Modulo Calculator (Mod Calculator) – Find a mod b | Learn Math Class",
       description: "Calculate modulo, modular arithmetic operations, GCD, LCM, and cryptographic functions online. Free calculator supporting integers, decimals, and negative numbers.",
       keywords: keyWords.join(", "),
       url: "/calculators/modulo-calculator",

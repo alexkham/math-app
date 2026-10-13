@@ -163,7 +163,9 @@ The first triangular numbers are:
 
 $$1, 3, 6, 10, 15, 21, 28, 36, 45, 55, \\ldots$$
 
-The closed form $\\frac{n(n+1)}{2}$ follows from the [arithmetic series](!/algebra/sequences/arithmetic#5) formula with $a_1 = 1$ and $d = 1$. The Gauss pairing argument applies directly: $T_n = \\frac{n}{2}(1 + n)$.`,
+The closed form $\\frac{n(n+1)}{2}$ follows from the [arithmetic series](!/algebra/sequences/arithmetic#5) formula with $a_1 = 1$ and $d = 1$. The Gauss pairing argument applies directly: $T_n = \\frac{n}{2}(1 + n)$.
+
+To compute any triangular number with each step shown, use the [triangular numbers calculator](!/algebra/calculators/sequences/triangular-numbers).`,
     before: ``,
     after: ``,
     link: '',
@@ -231,7 +233,9 @@ $$\\sum_{k=1}^{n} T_k = \\frac{n(n+1)(n+2)}{6}$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
-This extends the figurate number idea from two dimensions (triangles) to three (tetrahedra).`,
+This extends the figurate number idea from two dimensions (triangles) to three (tetrahedra).
+
+To compute tetrahedral numbers directly, use the [tetrahedral numbers calculator](!/algebra/calculators/sequences/tetrahedral-numbers).`,
     before: ``,
     after: ``,
     link: '',

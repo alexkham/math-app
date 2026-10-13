@@ -1130,6 +1130,8 @@ Consider rolling a fair six-sided die, where $a = 1$ and $b = 6$:
 $$E[X] = \\frac{1 + 6}{2} = 3.5$$
 
 The expected value is 3.5, which is the arithmetic mean of all possible outcomes $\\{1, 2, 3, 4, 5, 6\\}$. Note that the expected value need not be a possible outcome of the random variable.
+
+To compute the expected value of a discrete uniform distribution for your own parameters, step by step, use the [discrete uniform expected value calculator](!/probability/calculators/expected-value/discrete-uniform).
   `,
   before: ``,
   after: ``,

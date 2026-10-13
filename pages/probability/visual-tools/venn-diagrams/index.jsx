@@ -55,7 +55,9 @@ Named after mathematician John Venn, these diagrams are fundamental tools for un
 
 These diagrams are perfect for visualizing fundamental probability [rules](!/probability/rules). The addition rule $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$ becomes visually obvious - you add both circles but subtract the overlap to avoid double-counting.
 
-Use 2-set diagrams for problems involving two events: medical test accuracy (disease and positive test), quality control (two types of defects), or any scenario with two characteristics.`,
+Use 2-set diagrams for problems involving two events: medical test accuracy (disease and positive test), quality control (two types of defects), or any scenario with two characteristics.
+
+To compute these probabilities from given values, use the [two events probability calculator](!/probability/calculators/two-events).`,
       before: '',
       after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[2-Set Venn Diagram Tool](!/probability/visual-tools/venn-diagrams/two-sets) →@`,
       link: ''
@@ -66,7 +68,9 @@ Use 2-set diagrams for problems involving two events: medical test accuracy (dis
 
 The complexity increases significantly with three sets. The inclusion-exclusion principle $P(A \\cup B \\cup C) = P(A) + P(B) + P(C) - P(A \\cap B) - P(A \\cap C) - P(B \\cap C) + P(A \\cap B \\cap C)$ becomes manageable when you can see each region.
 
-Three-set diagrams handle complex scenarios: survey responses with three categories, quality control with multiple defect types, or medical conditions with three risk factors.`,
+Three-set diagrams handle complex scenarios: survey responses with three categories, quality control with multiple defect types, or medical conditions with three risk factors.
+
+To compute all eight region probabilities from given values, use the [three events probability calculator](!/probability/calculators/three-events).`,
       before: '',
       after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[3-Set Venn Diagram Tool](!/probability/visual-tools/venn-diagrams/three-sets) →@`,
       link: ''

@@ -1539,6 +1539,8 @@ $$\\binom{x}{k} = \\frac{x(x-1)(x-2) \\cdots (x-k+1)}{k!}, \\quad k \\in \\mathb
 Here $x$ can be any real or complex number and $k$ remains a non-negative integer. The numerator is a polynomial of degree $k$ in $x$, so $\\binom{x}{k}$ is itself a polynomial in $x$. This is the form that appears in Newton's generalized binomial theorem, where the upper index is no longer required to be a non-negative integer.
 
 The combinatorial interpretation — the number of [combinations](!/combinatorics/combinations) of $k$ items chosen from $n$ — remains the most intuitive entry point, but the algebraic definition is what extends to non-integer settings.
+
+To evaluate the factorials in this formula for specific values, use the [factorial calculator](!/calculators/factorial-calculator).
 `,
     before: ``,
     between: ``,

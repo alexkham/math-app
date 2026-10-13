@@ -9,9 +9,11 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 
 
-export default function ImplicationsTruthTablesPage({ seoData, keyWords, implicationExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {
+export default function ImplicationsTruthTablesPage({demoUnits,  seoData, keyWords, implicationExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {
 
     const implicationOperators = {
         'P→Q': { symbol: 'P→Q', func: (a, b) => !a || b },
@@ -33,7 +35,10 @@ export default function ImplicationsTruthTablesPage({ seoData, keyWords, implica
         id: '2',
         title: sectionsContent.obj2.title,
         link: sectionsContent.obj2.link,
-        content: [sectionsContent.obj2.content]
+        content: [sectionsContent.obj2.content,
+          <div key={'unit-conditionalSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.conditionalSquare }} />,
+          `Proving ¬Q → ¬P proves P → Q; proving Q → P proves nothing about it.`,
+        ]
       },
       {
         id: '3',
@@ -442,8 +447,28 @@ For example, to prove "if n² is even then n is even," it is simpler to prove th
     }
   }
 
+  const sqP = { tl: [1, 3], tr: [5, 3], bl: [1, 1], br: [5, 1] };
+  const sqLine = (a, b, c) => { const [x1, y1] = sqP[a], [x2, y2] = sqP[b]; if (x1 === x2) return { fn: (x) => Math.min(y1, y2) + (x - x1) * 1e6, from: x1, to: x1 + Math.abs(y1 - y2) / 1e6, ends: [null, null], color: c }; return { fn: (x) => y1 + (y2 - y1) * (x - x1) / (x2 - x1), from: Math.min(x1, x2), to: Math.max(x1, x2), ends: [null, null], color: c }; };
+  const sqDot = (k, c) => ({ fn: () => sqP[k][1], from: sqP[k][0], to: sqP[k][0], ends: ['closed', 'closed'], color: c });
+  const fpConditionalSquare = { kind: 'pieces', svgTitle: 'The four conditionals at the corners of a square: P to Q and its contrapositive not-Q to not-P are equivalent, and so are the converse Q to P and the inverse not-P to not-Q', xRange: [0.2, 6.6], yRange: [0.3, 3.9], xStep: 20, yStep: 20, xLetter: ' ', yLetter: ' ',
+    pieces: [sqLine('tl', 'tr', 'g'), sqLine('tl', 'bl', 'g'), sqLine('bl', 'br', 'g'), sqLine('tr', 'br', 'g'), sqLine('tl', 'br', 'r'), sqLine('tr', 'bl', 'r'), sqDot('tl', 'f'), sqDot('tr', 'g'), sqDot('bl', 'g'), sqDot('br', 'f')],
+    notes: [{ x: 1, y: 3, text: 'P → Q', pos: 'n', color: 'f' }, { x: 5, y: 3, text: 'Q → P', pos: 'n', color: 'g' }, { x: 1, y: 1, text: '¬P → ¬Q', pos: 's', color: 'g' }, { x: 5, y: 1, text: '¬Q → ¬P', pos: 's', color: 'f' },
+      { x: 3, y: 3, text: 'converse', pos: 'n', color: 'g' }, { x: 3, y: 1, text: 'converse', pos: 's', color: 'g' }, { x: 1, y: 2, text: 'inverse', pos: 'e', color: 'g' }, { x: 5, y: 2, text: 'inverse', pos: 'w', color: 'g' },
+      { x: 3, y: 3.55, text: 'diagonals: contrapositive pairs, ≡', pos: 'n', color: 'r' }],
+    caption: 'Amber diagonals join equivalent forms; navy sides do not' };
+  const demoUnits = {
+    conditionalSquare: demoUnitFrame({
+      svg: renderFunctionPlotV4(fpConditionalSquare),
+      caption: 'The four related conditionals',
+      text: 'Each corner is one conditional built from P and Q. The navy sides join forms that are not equivalent: the converse swaps the two sides of the arrow and the inverse negates both. The amber diagonals join contrapositives, which reverse and negate together: P &#8594; Q &#8801; &#172;Q &#8594; &#172;P, and the converse is likewise equivalent to the inverse. Compare all four columns on the',
+      href: '/logic/truth-tables',
+      linkText: 'truth table calculator',
+    }),
+  };
+
   return {
     props: {
+      demoUnits,
       keyWords,
       implicationExplanations,
       menuItems,

@@ -12,8 +12,8 @@
     "lint": "next lint",
     "generate-sitemap": "next build && node generate-sitemap.mjs",
     "build-with-sitemap": "npm run build && npm run generate-sitemap --/test",
-    "diagrams": "node scripts/generate-diagrams.mjs",
-    "diagrams:clean": "node scripts/generate-diagrams.mjs --clean"
+    "diagrams": "node build-diagrams.mjs",
+    "diagrams:verify": "node build-diagrams.mjs --verify"
   },
   "dependencies": {
     "@react-three/fiber": "^8.17.10",

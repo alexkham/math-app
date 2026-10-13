@@ -933,7 +933,9 @@ $$10^6 = 1{,}000{,}000$$
 
 This is where the laws of exponents — the product rule, quotient rule, power-of-a-power rule — are first derived. Each law emerges naturally from counting and regrouping factors. Every extension of exponents to other types preserves these laws by definition.
 
-The [natural exponents](!/algebra/powers/natural-exponents) page develops this case fully: the derivation of each law, worked examples, and the transition toward broader exponent types.`,
+The [natural exponents](!/algebra/powers/natural-exponents) page develops this case fully: the derivation of each law, worked examples, and the transition toward broader exponent types.
+
+To evaluate any power directly, including decimal and negative exponents, use the [exponent calculator](!/calculators/exponent-calculator).`,
     before: ``,
     after: ``,
     link: '/algebra/powers/natural-exponents',
@@ -1023,7 +1025,9 @@ The simplest cases resolve by rewriting both sides with a common base. Since $16
 
 When bases cannot be matched, [logarithms](!/algebra/logarithms) provide the tool. Taking the logarithm of both sides converts the exponent into a coefficient, making the unknown accessible through algebra.
 
-The [exponential equations](!/algebra/powers/exponential-equations) page covers both techniques: base matching for exact solutions and logarithmic methods for the general case.`,
+The [exponential equations](!/algebra/powers/exponential-equations) page covers both techniques: base matching for exact solutions and logarithmic methods for the general case.
+
+To solve a specific equation step by step, the [exponential equation solver](!/algebra/calculators/equations/exponential) tries base matching first and switches to logarithms when the bases cannot be matched.`,
     before: ``,
     after: ``,
     link: '/algebra/powers/exponential-equations',
@@ -1037,7 +1041,9 @@ When the base satisfies $a > 1$, the exponential function is increasing: larger 
 
 When $0 < a < 1$, the function is decreasing: larger exponents produce smaller values. The inequality reverses when solving.
 
-The [exponential inequalities](!/algebra/powers/exponential-inequalities) page develops the solving techniques and the role the base plays in determining direction.`,
+The [exponential inequalities](!/algebra/powers/exponential-inequalities) page develops the solving techniques and the role the base plays in determining direction.
+
+The [exponential inequality solver](!/algebra/calculators/inequalities/exponential) applies these direction rules step by step to a specific inequality.`,
     before: ``,
     after: ``,
     link: '/algebra/powers/exponential-inequalities',

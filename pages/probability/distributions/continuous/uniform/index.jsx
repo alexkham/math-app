@@ -1407,6 +1407,8 @@ Suppose a bus arrives randomly between 2:00 PM and 2:30 PM, modeled as uniform o
 $$E[X] = \\frac{0 + 30}{2} = 15 \\text{ minutes}$$
 
 The expected arrival time is 2:15 PM, exactly halfway through the 30-minute window. If you repeatedly sample random arrival times, the long-run average will converge to 15 minutes after 2:00 PM.
+
+To compute the expected value of a continuous uniform distribution for your own parameters, step by step, use the [continuous uniform expected value calculator](!/probability/calculators/expected-value/continuous-uniform).
   `,
   before: ``,
   after: ``,

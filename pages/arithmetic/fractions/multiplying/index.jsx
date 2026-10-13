@@ -876,7 +876,9 @@ To compute $2\\frac{1}{3} \\times 1\\frac{1}{2}$, first convert both to improper
 
 $$\\frac{7}{3} \\times \\frac{3}{2} = \\frac{21}{6} = \\frac{7}{2} = 3\\frac{1}{2}$$
 
-Cross-canceling applies here too. The 3 in the numerator and the 3 in the denominator cancel, leaving $\\frac{7}{1} \\times \\frac{1}{2} = \\frac{7}{2}$ immediately. See [mixed numbers](!/arithmetic/fractions/mixed-numbers) for conversion methods.`,
+Cross-canceling applies here too. The 3 in the numerator and the 3 in the denominator cancel, leaving $\\frac{7}{1} \\times \\frac{1}{2} = \\frac{7}{2}$ immediately. See [mixed numbers](!/arithmetic/fractions/mixed-numbers) for conversion methods.
+
+You can check any product of mixed numbers with the [fraction calculator](!/calculators/fraction-calculator): it converts them to improper fractions and shows every step.`,
     before: ``,
     after: ``,
     link: '',

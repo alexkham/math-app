@@ -226,7 +226,9 @@ $$x^2 - 2x - 14 = 0$$
 
 The [quadratic formula](!/algebra/equations/quadratic) gives $x = 1 \\pm \\sqrt{15}$. Neither value equals $1$ or $-4$, so both lie within the domain and both are genuine solutions.
 
-The LCD must include every distinct factor that appears in any denominator, each raised to the highest power at which it occurs. Identifying the LCD accurately is essential — using a smaller common multiple leaves some fractions uncleared, while using an unnecessarily large one introduces extra factors that complicate the resulting polynomial without benefit.`,
+The LCD must include every distinct factor that appears in any denominator, each raised to the highest power at which it occurs. Identifying the LCD accurately is essential — using a smaller common multiple leaves some fractions uncleared, while using an unnecessarily large one introduces extra factors that complicate the resulting polynomial without benefit.
+
+To solve your own rational equation with each step shown, use the [rational equation solver](!/algebra/calculators/equations/rational).`,
     before: ``,
     after: ``,
     link: '',

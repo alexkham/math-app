@@ -233,7 +233,9 @@ Start with a list of integers from $2$ to $n$. The smallest unmarked number is $
 
 The process stops once the current prime exceeds $\\sqrt{n}$. Any composite number $\\leq n$ must have a factor $\\leq \\sqrt{n}$, so if it were not already eliminated, one of its factors would have crossed it out in an earlier pass.
 
-For $n = 30$: start with $2, 3, 4, 5, \\ldots, 30$. After sieving by $2$: all even numbers $> 2$ are removed. After $3$: $9, 15, 21, 27$ are removed. After $5$: $25$ is removed. Since $\\sqrt{30} < 6$, the process ends. The surviving numbers $2, 3, 5, 7, 11, 13, 17, 19, 23, 29$ are all primes up to $30$.`,
+For $n = 30$: start with $2, 3, 4, 5, \\ldots, 30$. After sieving by $2$: all even numbers $> 2$ are removed. After $3$: $9, 15, 21, 27$ are removed. After $5$: $25$ is removed. Since $\\sqrt{30} < 6$, the process ends. The surviving numbers $2, 3, 5, 7, 11, 13, 17, 19, 23, 29$ are all primes up to $30$.
+
+To list primes in any range up to 104,729, use the [prime numbers calculator](!/algebra/calculators/sequences/prime-numbers).`,
     before: ``,
     after: ``,
     link: '',

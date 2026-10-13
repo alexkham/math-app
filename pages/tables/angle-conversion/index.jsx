@@ -4,6 +4,8 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import DegreeRadianConversionTable from '@/app/components/tables/conversion-tables/DegreeRadianConversion'
 import '../../pages.css'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
+import AffiliateBlock from '@/app/components/affiliates/AffiliateBlock'
+import { COURSES } from '@/app/components/affiliates/courses'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import Head from 'next/head'
 import Sections from '@/app/components/page-components/section/Sections'
@@ -386,7 +388,9 @@ export default function AngleConversionTable({seoData, sectionsContent, navigati
             verticalOffset='260px'
          /> */}
     <div style={{display: 'flex', alignItems: 'flex-start', gap: '100px', width: '100%'}}>
-       <div style={{flexShrink: 0, width: '200px'}}>
+       <div id="sideAffiliate" style={{flexShrink: 0, width: '200px', alignSelf: 'stretch'}}>
+          <style>{`@media (max-width: 768px) { #sideAffiliate { display: none !important; } }`}</style>
+          <AffiliateBlock variant="side" {...COURSES.trigonometry} headline="Radians, without the table" cta="See the course" />
           <VerticalButtonGroup
              items={navigationGroup}
              width="200px"

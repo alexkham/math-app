@@ -264,7 +264,9 @@ Some programming languages diverge. In Python, the $\\texttt{math.log(x)}$ funct
 
 Spreadsheet software like Excel uses $\\texttt{LOG(x)}$ for common logarithm and $\\texttt{LN(x)}$ for natural logarithm, matching calculator conventions. The function $\\texttt{LOG(x, base)}$ allows arbitrary bases.
 
-When in doubt, test with known values. If the software returns $1$ for $\\log(10)$, it uses base $10$. If it returns $1$ for $\\log(e)$, it uses base $e$.`,
+When in doubt, test with known values. If the software returns $1$ for $\\log(10)$, it uses base $10$. If it returns $1$ for $\\log(e)$, it uses base $e$.
+
+The [log calculator](!/calculators/log-calculator) has separate options for base 10, base e and base 2, plus a custom base, so you do not have to rely on these conventions.`,
     before: ``,
     after: ``,
     link: '',

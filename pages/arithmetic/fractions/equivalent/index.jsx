@@ -880,7 +880,9 @@ Creating equivalent fractions with a specific denominator is essential for [addi
 
 The most efficient approach uses the [greatest common factor](!/arithmetic/divisibility/gcd). For $\\frac{12}{18}$, the GCF of 12 and 18 is 6. Dividing both parts by 6 in one step gives $\\frac{12 \\div 6}{18 \\div 6} = \\frac{2}{3}$.
 
-Simplifying does not change the fraction's value. It produces the same quantity written with smaller numbers, making further calculations easier and results cleaner.`,
+Simplifying does not change the fraction's value. It produces the same quantity written with smaller numbers, making further calculations easier and results cleaner.
+
+The [fraction calculator](!/calculators/fraction-calculator) reduces every result to simplest form, so you can use it to check your own simplification.`,
     before: ``,
     after: ``,
     link: '',

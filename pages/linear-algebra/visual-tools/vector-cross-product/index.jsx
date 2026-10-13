@@ -85,7 +85,7 @@ The component formula is faster by hand. The determinant is easier to remember, 
       content: `Each scene combines highlights, arrows, and a caption.
 
 • In the component method, the two active entries of $\\mathbf{u}$ are highlighted primary, the two active entries of $\\mathbf{v}$ secondary, and the skipped row of each vector is muted; four curved arrows flow into the destination component of $\\mathbf{w}$, highlighted accent
-• In the determinant method, the [pivot](!/linear-algebra/linear-systems/echelon-form#4) [basis](!/linear-algebra/vector-spaces#2) vector is highlighted primary, the struck row and column are greyed and lined through, the $2 \\times 2$ minor is secondary, and one arrow flows from the pivot into the destination component
+• In the determinant method, the [pivot](!/linear-algebra/linear-systems/echelon-form#4) [basis](!/linear-algebra/vector-spaces/basis#2) vector is highlighted primary, the struck row and column are greyed and lined through, the $2 \\times 2$ minor is secondary, and one arrow flows from the pivot into the destination component
 • Filled components of $\\mathbf{w}$ show their symbolic content, $u_a v_b - u_b v_a$, in a wider cell so the two-term expression stays readable
 • The step log on the right keeps a record of every completed component, and clicking any entry jumps back to that scene`,
       before: ``,
