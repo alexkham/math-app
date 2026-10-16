@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
 // Sample explanations object - In actual implementation, this would be passed as a prop
 const sampleExplanations = {
@@ -552,14 +553,16 @@ export default function ModuloCalculator({ explanations = sampleExplanations }) 
           justifyContent: "space-between"
         }}>
           <div>
-            <p style={{ 
+            <div style={{ 
               fontSize: "14px", 
               lineHeight: "1.5", 
               marginBottom: "16px",
               color: "#444"
             }}>
-              {currentExplanation.content}
-            </p>
+              {explanations !== sampleExplanations && typeof currentExplanation.content === 'string'
+                ? processContent(currentExplanation.content)
+                : currentExplanation.content}
+            </div>
             
             <div style={{ 
               padding: "12px", 

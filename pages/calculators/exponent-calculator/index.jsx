@@ -14,6 +14,10 @@ import { processContent } from '@/app/utils/contentProcessor';
 import '../../pages.css';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
 
+/* calculators-mesh: finished 2026-10-12 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+   Registry entry "C:/Program Files/Git/calculators/exponent-calculator" in calculators-mesh-registry.json (same folder): 9 usage sections, each with a demo; 13 panel notes; 25 sections with fixed slug ids.
+   Before editing this page, read the instructions and re-run its checks; keep the section ids and the anchors. */
+
 export async function getStaticProps() {
 
 const navigationGroup=[
@@ -812,8 +816,8 @@ const demoPlayer = (key) => (
     script={demos[key].script}
     title={demos[key].title}
     label={`Demo: ${demos[key].title}`}
-    scale={0.6}
-    minHeight={734}
+    scale={0.4}
+    minHeight={489}
     renderText={processContent}
   >
     <ExponentCalculator explanations={explanations} />

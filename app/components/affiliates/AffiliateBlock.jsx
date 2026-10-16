@@ -4,7 +4,7 @@ const DISCLOSURE_FULL =
   'Affiliate link · I may earn a commission, at no extra cost to you';
 const DISCLOSURE_SHORT = 'Affiliate link';
 
-const VARIANTS = ['panel', 'strip', 'block', 'side'];
+const VARIANTS = ['panel', 'strip', 'block', 'side', 'chat'];
 
 function ExternalIcon() {
   return (
@@ -48,6 +48,11 @@ function Rating({ rating, reviews }) {
  *   strip  one-row banner: rating, headline + text, button
  *   block  full box: headline, title, meta row, description, button
  *   side   narrow stacked card for a ~180px sidebar; no description, outlined link
+ *   chat   card for the Ask AI thread; like side, wider, with a dismiss button
+ *
+ * subId      appended to href as subId1 (impact.com attribution), e.g. subId="askai"
+ * onDismiss  chat only: called when the visitor clicks the cross
+ * onClick    optional: called when the course link is clicked
  *
  * Required: provider, title, description, href.
  * Optional: headline, rating, reviews, hours, instructor, cta, disclosure.
@@ -65,6 +70,9 @@ export default function AffiliateBlock({
   instructor,
   cta = DEFAULT_CTA,
   disclosure,
+  subId,
+  onDismiss,
+  onClick,
 }) {
   const v = VARIANTS.includes(variant) ? variant : 'strip';
   const ctaText = `${cta} on ${provider}`;
@@ -72,11 +80,16 @@ export default function AffiliateBlock({
   const disclosureText =
     disclosure ?? (v === 'block' ? DISCLOSURE_FULL : DISCLOSURE_SHORT);
   const byLine = instructor ? ` by ${instructor}` : '';
+  const trackedHref = subId
+    ? `${href}${href.includes('?') ? '&' : '?'}subId1=${encodeURIComponent(subId)}`
+    : href;
+  const outline = v === 'panel' || v === 'side' || v === 'chat';
 
   const link = (
     <a
-      className={v === 'panel' || v === 'side' ? 'affiliate-link-outline' : 'affiliate-link'}
-      href={href}
+      className={outline ? 'affiliate-link-outline' : 'affiliate-link'}
+      href={trackedHref}
+      onClick={onClick}
       target="_blank"
       rel="sponsored noopener"
       aria-label={ariaLabel}
@@ -120,6 +133,26 @@ export default function AffiliateBlock({
 
       {v === 'side' && (
         <>
+          <div className="affiliate-eyebrow">Recommended course &middot; {provider}</div>
+          <h3 className="affiliate-headline affiliate-h3">{headline}</h3>
+          <p className="affiliate-text">
+            <Rating rating={rating} reviews={reviews} />
+            {(rating || reviews) && ' · '}
+            <span className="affiliate-title-inline">{title}</span>
+            {instructor && `, ${instructor}`}
+          </p>
+          {link}
+          <div className="affiliate-eyebrow affiliate-footnote">{disclosureText}</div>
+        </>
+      )}
+
+      {v === 'chat' && (
+        <>
+          {onDismiss && (
+            <button type="button" className="affiliate-dismiss" aria-label="Hide this suggestion" onClick={onDismiss}>
+              &times;
+            </button>
+          )}
           <div className="affiliate-eyebrow">Recommended course &middot; {provider}</div>
           <h3 className="affiliate-headline affiliate-h3">{headline}</h3>
           <p className="affiliate-text">
@@ -196,6 +229,41 @@ export default function AffiliateBlock({
         }
         .affiliate-side .affiliate-h3 {
           font-size: 13px;
+        }
+        .affiliate-chat {
+          position: relative;
+          max-width: 560px;
+          margin: 10px 0 12px;
+          padding: 10px 32px 10px 14px;
+          border-radius: 8px;
+          font-size: 13px;
+          line-height: 1.45;
+          font-family: inherit;
+        }
+        .affiliate-chat .affiliate-h3 {
+          font-size: 14px;
+        }
+        .affiliate-chat .affiliate-text {
+          margin-bottom: 8px;
+        }
+        .affiliate-dismiss {
+          position: absolute;
+          top: 4px;
+          right: 6px;
+          border: 0;
+          background: transparent;
+          color: #777b90;
+          font-size: 18px;
+          line-height: 1;
+          padding: 4px 6px;
+          cursor: pointer;
+        }
+        .affiliate-dismiss:hover {
+          color: #1a1a2e;
+        }
+        .affiliate-dismiss:focus-visible {
+          outline: 2px solid #b45309;
+          outline-offset: 1px;
         }
         .affiliate-side .affiliate-text {
           margin-bottom: 8px;

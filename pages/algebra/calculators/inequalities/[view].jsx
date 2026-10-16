@@ -508,6 +508,9 @@ import Head from 'next/head'
 import React from 'react'
 import '@/pages/pages.css'
 import SiblingsNav from '@/app/components/SiblingsNav'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 import LinearInequalitySolver from '@/app/components/algebra/solvers/inequalities/LinearInequalitySolver'
 import QuadraticInequalitySolver from '@/app/components/algebra/solvers/inequalities/QuadraticInequalitySolver'
@@ -579,6 +582,115 @@ export async function getStaticProps({ params }) {
     answer: "Pick any value in the proposed solution set and substitute it back into the original inequality; it should produce a true statement. Then pick a value outside the proposed set; it should produce a false statement. This two-point test confirms both the boundary and the direction."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/inequalities/linear" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/inequalities and algebra/inequalities/linear.
+         Before editing this view, read the instructions and re-run its checks (--view linear); keep the section ids and the anchors. */
+      instructions: [
+        `Build the inequality in the display at the top: click the **Var**, **Num** and **Op** buttons, one of the four **Ineq** symbols and the brackets, or type on the keyboard; click inside the display to move the caret. [Learn more about building inequalities](!#building-inequalities-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-inequalities-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the inequality is complete; an expression without an inequality symbol is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random inequality of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the moves, with a separate step whenever the sign flips, and the answer card gives the inequality, a plain-language note and the interval; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `An inequality whose variable cancels ends in All real numbers or No solution instead of a ray. [Learn more about these cases](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one linear inequality in $x$, $y$ or $n$ with $<$, $>$, $\leq$ or $\geq$, expands brackets and collects the terms, moves the variable terms to the left and the constants to the right, and divides by the coefficient, flipping the sign when that coefficient is negative. The answer is a ray, given as an inequality and as an interval; when the variable cancels the inequality is always true or never true. [Learn more about linear inequalities](!#what-is-a-linear-inequality)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: '2x + 3 < 11, Solve, Clear, a missing symbol',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 2, x, +, 3, <, 1, 1\nThe display reads 2x + 3 < 11.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '3', exact: true } },
+            { click: { button: '<', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: '1', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK Solve\nMove the constant, divide by 2: x < 4, the interval (−∞, 4).', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK 2, x, +, 3 and Solve\nNo inequality symbol: "Input must be an inequality".', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '3', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 2800 },
+          ],
+        },
+        'building-inequalities-with-buttons-and-keyboard': {
+          title: 'A negative coefficient, undo, delete, the flip',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK -, 3, x, +, 7, <, 1, 6\nThe display reads −3x + 7 < 16.', at: 'tr' },
+            { click: { button: '-', exact: true } }, { click: { button: '3', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } },
+            { click: { button: '7', exact: true } }, { click: { button: '<', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: '6', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 6 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe 1 before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK 1, 6 and Solve\n−3x < 9, then division by −3 flips the sign: x > −3, (−3, ∞).', at: 'tr' },
+            { click: { button: '1', exact: true } }, { click: { button: '6', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Negative Coefficient\nA random −ax + b ≤ c loads.', at: 'tr' },
+            { click: { button: 'Negative Coefficient' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nThe Divide by Negative Coefficient step flips the sign.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Always True\nAn inequality whose variable cancels replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'Always True' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'Variables on both sides, then no solution',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 3, x, -, 1, ≥, x, +, 5 and Solve\nMove Variable Terms to Left: 2x − 1 ≥ 5, so x ≥ 3, the interval [3, ∞).', at: 'tr' },
+            { click: { button: '3', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '1', exact: true } },
+            { click: { button: '≥', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '5', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK x, +, 1, <, x and Solve\nThe variable cancels and 1 < 0 is never true: No solution, ∅.', at: 'tr' },
+            { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: '<', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-inequalities-with-buttons-and-keyboard', key: 'obj2', demo: 'building-inequalities-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'the-direction-flip-rule-why-it-works', key: 'obj5', demo: null },
+        { id: 'what-is-a-linear-inequality', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -590,7 +702,7 @@ Three quick experiments:
 &bull; Click the &quot;Negative Coefficient&quot; example template &mdash; an inequality with a negative coefficient on the variable loads. Watch the solver flip the inequality sign during the divide-by-negative step.
 &bull; Try the &quot;Always True&quot; template to see the case where the variable cancels and the inequality reduces to a true statement, giving all real numbers as the solution.
 
-The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The dedicated &quot;Ineq&quot; row in the button panel inserts the four inequality symbols: $<$, $>$, $\\leq$, $\\geq$.`,
+The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The dedicated &quot;Ineq&quot; row in the button panel inserts the four inequality symbols: $<$, $>$, $\\leq$, $\\geq$. An expression without one of them is refused with "Input must be an inequality (use <, >, ≤, or ≥)", and a squared variable with "This inequality is not linear". What makes an inequality linear is explained in [what is a linear inequality](!#what-is-a-linear-inequality).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -605,7 +717,7 @@ The Solve button is disabled until you enter something. Pressing Enter on the di
 
 Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type $<$ and $>$ directly, type $<=$ or $>=$ to insert the combined symbols $\\leq$ and $\\geq$, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the one after it.
 
-The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time. The backspace icon on the action row deletes one character to the left of the cursor.`,
+The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time. The backspace icon on the action row deletes one character to the left of the cursor. $-3x + 7 < 16$ is typed with the minus button first; its solution $x > -3$ shows the sign flip. Why the flip is needed is explained in [the direction-flip rule](!#the-direction-flip-rule-why-it-works).`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -621,7 +733,7 @@ The Clear button empties the display entirely; the curved-arrow button steps thr
 &bull; **Fraction Coefficient** &mdash; $x/a + b \\leq c$. The coefficient appears as a division by $a$, but division by a positive constant does not flip direction.
 &bull; **Always True** &mdash; $ax + b < ax + c$ with $b < c$. The variable cancels and the inequality reduces to a true constant statement.
 
-Roughly 80 percent of generated inequalities produce clean integer solutions; the remaining 20 percent exercise unusual or decimal cases.`,
+Roughly 80 percent of generated inequalities produce clean integer solutions; the remaining 20 percent exercise unusual or decimal cases. Loading a template clears the previous solution; click Solve to work the new inequality. The four moves applied to every template are listed in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -635,7 +747,7 @@ Roughly 80 percent of generated inequalities produce clean integer solutions; th
 &bull; **Divide by Coefficient** (when positive and not 1) &mdash; standard division with no flip.
 &bull; **Always True** or **Never True** (when applicable) &mdash; the variable cancels and the remaining statement determines whether all real numbers or no values satisfy the inequality.
 
-The final-answer card at the bottom shows the answer in three forms: the inequality form ($x < c$), a plain-language note (&quot;$x$ is less than $c$&quot;), and the interval notation (such as $(-\\infty, c)$). For empty solution sets the interval is the empty set $\\emptyset$; for all reals it is $(-\\infty, \\infty)$.`,
+The final-answer card at the bottom shows the answer in three forms: the inequality form ($x < c$), a plain-language note (&quot;$x$ is less than $c$&quot;), and the interval notation (such as $(-\\infty, c)$). $3x - 1 \\geq x + 5$ collects the variable on the left and ends in $x \\geq 3$, the interval $[3, \\infty)$; $x + 1 < x$ cancels the variable and ends in No solution. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below; the moves themselves are set out in [the solving process explained](!#the-solving-process-explained). For empty solution sets the interval is the empty set $\\emptyset$; for all reals it is $(-\\infty, \\infty)$.`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -652,7 +764,9 @@ The final-answer card at the bottom shows the answer in three forms: the inequal
 
 **Special case &mdash; multiplication by zero.** Multiplying both sides by zero collapses both sides to zero and produces $0 = 0$, which is true but uninformative. Avoid this move entirely; the solver never inserts it.
 
-For deeper coverage see **linear inequality** and **inequality properties**.`,
+For deeper coverage see **linear inequality** and **inequality properties**.
+
+The rules are stated in [properties of inequalities](!/algebra/inequalities#5) and applied in [solving with the properties of inequality](!/algebra/inequalities/linear#2); why they keep the solution set is [equivalent inequalities](!/algebra/inequalities#7).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -673,7 +787,9 @@ where $\\square$ is one of the four symbols and $a$, $b$, $c$ are real numbers w
 
 **Compound forms.** Two linear inequalities can be joined by AND (both must hold &mdash; the solution is an intersection) or by OR (either may hold &mdash; the solution is a union). This solver handles single inequalities; chained or compound forms are covered separately.
 
-For deeper coverage see **linear inequality**, **interval notation**, and **compound inequality**.`,
+For deeper coverage see **linear inequality**, **interval notation**, and **compound inequality**.
+
+The form is defined in [definition and standard form](!/algebra/inequalities/linear#1), the answer notation in [interval notation](!/algebra/inequalities#3) and [number line representation](!/algebra/inequalities#4), and the place of linear inequalities among the types in [linear inequalities](!/algebra/inequalities#9).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -695,7 +811,9 @@ For deeper coverage see **linear inequality**, **interval notation**, and **comp
 &bull; **Net coefficient is zero, net constant satisfies the inequality** &mdash; all real numbers.
 &bull; **Net coefficient is zero, net constant violates the inequality** &mdash; no solution.
 
-For comprehensive treatment see **solving linear inequalities** and **algebraic manipulation**.`,
+For comprehensive treatment see **solving linear inequalities** and **algebraic manipulation**.
+
+The moves are worked in [solving with the properties of inequality](!/algebra/inequalities/linear#2) and [worked examples](!/algebra/inequalities/linear#3), fractions in [inequalities with fractions and decimals](!/algebra/inequalities/linear#6), and the cancelling cases in [special cases](!/algebra/inequalities/linear#7).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -716,7 +834,9 @@ For comprehensive treatment see **solving linear inequalities** and **algebraic 
 
 **Solution Set** &mdash; the formal name for the collection of values that make the inequality true. For linear inequalities the solution set is always a ray, the empty set, or all of $\\mathbb{R}$.
 
-**Linear Function** &mdash; the function $f(x) = ax + b$ whose comparison with a constant produces a linear inequality. The boundary of the solution is the $x$-intercept of the line $y = ax + b - c$.`,
+**Linear Function** &mdash; the function $f(x) = ax + b$ whose comparison with a constant produces a linear inequality. The boundary of the solution is the $x$-intercept of the line $y = ax + b - c$.
+
+The related tools are the [linear equation solver](!/algebra/calculators/equations/linear), the [quadratic inequality solver](!/algebra/calculators/inequalities/quadratic) and the [absolute value inequality solver](!/algebra/calculators/inequalities/absolute-value); the lessons are [compound inequalities](!/algebra/inequalities#6), [compound linear inequalities](!/algebra/inequalities/linear#5) and [graphing the solution](!/algebra/inequalities/linear#4).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -763,6 +883,117 @@ For comprehensive treatment see **solving linear inequalities** and **algebraic 
     answer: "For a between-the-roots solution, use a single bracketed interval such as the open or closed interval from the first root to the second. For an outside-the-roots solution, use a union of two intervals reaching out to negative and positive infinity. Endpoints use parentheses for strict inequalities and brackets for non-strict."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/inequalities/quadratic" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/inequalities/quadratic, algebra/inequalities, algebra/equations/quadratic.
+         Before editing this view, read the instructions and re-run its checks (--view quadratic); keep the section ids and the anchors. */
+      instructions: [
+        `Build the inequality in the display at the top: click the **Var**, **Num** and **Op** buttons, the **^** or **x²** power buttons, one of the four **Ineq** symbols and the brackets, or type on the keyboard. [Learn more about building inequalities](!#building-inequalities-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-inequalities-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the inequality is complete; an expression without an inequality symbol or without a squared term is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random inequality of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the steps from standard form through the discriminant and the roots to the sign chart, and the answer card gives the inequality, a note and the interval; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `A negative discriminant ends in All real numbers or No solution; a zero discriminant in a single point or all reals except one point. [Learn more about these cases](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one quadratic inequality in $x$, $y$ or $n$ with $<$, $>$, $\leq$ or $\geq$, moves every term to the left, multiplies by $-1$ and flips the sign if the leading coefficient is negative, and computes the discriminant. Two roots give a sign chart with the solution between or outside them; one repeated root gives a single point or everything but that point; no real root gives all real numbers or no solution. The answer is shown as an inequality and as an interval. [Learn more about quadratic inequalities](!#what-is-a-quadratic-inequality)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: 'x² − 5x + 6 < 0, Solve, Clear, no real roots',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK x, x², -, 5, x, +, 6, <, 0\nThe display reads x² − 5x + 6 < 0.', at: 'tr' },
+            { click: { button: 'x', exact: true } }, { click: { button: 'x²', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '5', exact: true } },
+            { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '6', exact: true } }, { click: { button: '<', exact: true } }, { click: { button: '0', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK Solve\nRoots 2 and 3, negative between them: 2 < x < 3, the interval (2, 3).', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK x, x², +, 5, >, 0 and Solve\nNo real roots and the parabola stays above zero: All real numbers.', at: 'tr' },
+            { click: { button: 'x', exact: true } }, { click: { button: 'x²', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '5', exact: true } },
+            { click: { button: '>', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+          ],
+        },
+        'building-inequalities-with-buttons-and-keyboard': {
+          title: 'A negative leading coefficient, undo, delete, Solve',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK -, x, x², +, 4, >, 0\nThe display reads −x² + 4 > 0.', at: 'tr' },
+            { click: { button: '-', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: 'x²', exact: true } }, { click: { button: '+', exact: true } },
+            { click: { button: '4', exact: true } }, { click: { button: '>', exact: true } }, { click: { button: '0', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 0 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe > before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK >, 0 and Solve\nMultiply by −1 flips the sign: x² − 4 < 0, so −2 < x < 2, the interval (−2, 2).', at: 'tr' },
+            { click: { button: '>', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Non-Strict (≥ 0)\nA random x² + bx + c ≥ 0 loads.', at: 'tr' },
+            { click: { button: 'Non-Strict (≥ 0)' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nTwo roots and a closed union outside them.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Negative Leading\nA random −x² + bx + c > 0 replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'Negative Leading' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'A single point, then a union outside the roots',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK x, x², +, 4, x, +, 4, ≤, 0 and Solve\nΔ = 0, repeated root −2: the inequality holds only at the point {−2}.', at: 'tr' },
+            { click: { button: 'x', exact: true } }, { click: { button: 'x²', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '4', exact: true } },
+            { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '4', exact: true } }, { click: { button: '≤', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK x, x², -, x, -, 6, ≥, 0 and Solve\nRoots −2 and 3, positive outside: (−∞, −2] ∪ [3, ∞).', at: 'tr' },
+            { click: { button: 'x', exact: true } }, { click: { button: 'x²', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: '-', exact: true } }, { click: { button: '6', exact: true } }, { click: { button: '≥', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-inequalities-with-buttons-and-keyboard', key: 'obj2', demo: 'building-inequalities-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'the-parabola-method-why-it-works', key: 'obj5', demo: null },
+        { id: 'what-is-a-quadratic-inequality', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -774,7 +1005,7 @@ Three quick experiments:
 &bull; Click the &quot;No Real Roots&quot; example template &mdash; an inequality like $x^2 + 5 > 0$ loads. The discriminant is negative, the parabola sits above the x-axis, and the answer is all real numbers.
 &bull; Try the &quot;Negative Leading&quot; template &mdash; an inequality with $-x^2$. The solver multiplies both sides by $-1$, flips the direction, then proceeds as a standard upward-parabola problem.
 
-The Solve button is disabled until you enter something. The dedicated &quot;Ineq&quot; row inserts the four inequality symbols; the $x^2$ shortcut button inserts a squared variable directly.`,
+The Solve button is disabled until you enter something. The dedicated &quot;Ineq&quot; row inserts the four inequality symbols; the $x^2$ shortcut button inserts the power after a variable you have already typed. An expression without an inequality symbol is refused with "Input must be an inequality (use <, >, ≤, or ≥)", and one without a squared term with a message that points to the linear inequality solver. What makes an inequality quadratic is explained in [what is a quadratic inequality](!#what-is-a-quadratic-inequality).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -789,7 +1020,7 @@ The Solve button is disabled until you enter something. The dedicated &quot;Ineq
 
 The $x^2$ button inserts a caret followed by a 2 (which the display renders as a superscript). For higher powers you can type the caret followed by any number, but the solver only handles quadratic expressions; cubic or higher will produce an error.
 
-Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type $<$ and $>$ directly, type $<=$ or $>=$ to insert the combined symbols $\\leq$ and $\\geq$, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back. The Unicode characters $x^2$ and $x^3$ are recognized directly if pasted.`,
+Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type $<$ and $>$ directly, type $<=$ or $>=$ to insert the combined symbols $\\leq$ and $\\geq$, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time; the ⌫ button deletes the character before the caret. A negative leading coefficient, as in $-x^2 + 4 > 0$, is handled by the Multiply by $-1$ step, which flips the sign and gives $(-2, 2)$. Why the sign of the leading coefficient matters is explained in [the parabola method](!#the-parabola-method-why-it-works). The Unicode characters $x^2$ and $x^3$ are recognized directly if pasted.`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -805,7 +1036,7 @@ Keyboard shortcuts: type letters and digits directly, use star or slash for mult
 &bull; **No real roots** &mdash; $x^2 + c > 0$ with positive $c$. The discriminant is negative and the answer collapses to all reals or no solution depending on the direction.
 &bull; **Non-zero RHS** &mdash; $x^2 + bx < c$ with $c \\neq 0$. Tests the move-everything-to-the-left step before standard analysis.
 
-Roughly 80 percent of generated inequalities produce clean integer roots.`,
+Roughly 80 percent of generated inequalities produce clean integer roots. Loading a template clears the previous solution; click Solve to work the new inequality. The five stages applied to every template are listed in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -821,7 +1052,7 @@ Roughly 80 percent of generated inequalities produce clean integer roots.`,
 &bull; **Sign Chart** &mdash; states which intervals are positive and which are negative based on the upward-opening parabola.
 &bull; **Solution Interval** &mdash; selects the matching interval(s) for the inequality direction.
 
-The final-answer card shows the answer in three forms: the inequality form (such as $r_1 < x < r_2$), a plain-language note (between or outside the roots), and the interval notation.`,
+The final-answer card shows the answer in three forms: the inequality form (such as $r_1 < x < r_2$), a plain-language note (between or outside the roots), and the interval notation. $x^2 + 4x + 4 \\leq 0$ has $\\Delta = 0$ and holds only at the single point $x = -2$, written $\\{-2\\}$; $x^2 - x - 6 \\geq 0$ has the roots $-2$ and $3$ and the outside solution $(-\\infty, -2] \\cup [3, \\infty)$. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. The sign pattern behind every answer is explained in [the parabola method](!#the-parabola-method-why-it-works).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -848,7 +1079,9 @@ The final-answer card shows the answer in three forms: the inequality form (such
 &bull; $f(x) > 0$ with two roots: open union, $(-\\infty, r_1) \\cup (r_2, \\infty)$.
 &bull; $f(x) \\geq 0$ with two roots: closed union, $(-\\infty, r_1] \\cup [r_2, \\infty)$.
 
-For deeper coverage see **quadratic function** and **parabola**.`,
+For deeper coverage see **quadratic function** and **parabola**.
+
+The graph reading is set out in [connection to the parabola](!/algebra/inequalities/quadratic#7), the table form in [sign chart method](!/algebra/inequalities/quadratic#6), and the two-root case in [solving when the discriminant is positive](!/algebra/inequalities/quadratic#3).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -870,7 +1103,9 @@ where $\\square$ is one of the four symbols and $a$, $b$, $c$ are real numbers w
 
 **Discriminant decides the case.** The number $\\Delta = b^2 - 4ac$ classifies which solution shape applies. Positive discriminant means two distinct roots and gives between or union solutions. Zero discriminant means one repeated root and gives point or all-except-point solutions. Negative discriminant means no real roots and gives all-reals or no-solution.
 
-For deeper coverage see **quadratic inequality**, **discriminant**, and **interval notation**.`,
+For deeper coverage see **quadratic inequality**, **discriminant**, and **interval notation**.
+
+The form is defined in [definition and standard form](!/algebra/inequalities/quadratic#1), the classification in [the role of the discriminant](!/algebra/inequalities/quadratic#2), and the place of quadratic inequalities among the types in [quadratic inequalities](!/algebra/inequalities#10).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -893,7 +1128,9 @@ For deeper coverage see **quadratic inequality**, **discriminant**, and **interv
 
 **The implementation.** Internally, after collecting coefficients, the solver hands the problem to a sign-analysis routine that constructs the answer as one of six branch outputs: all reals, no solution, single point, all reals except a point, compound between-the-roots, or union outside-the-roots. The final-answer card adapts its rendering to the matched branch.
 
-For comprehensive treatment see **solving quadratic inequalities** and **sign analysis**.`,
+For comprehensive treatment see **solving quadratic inequalities** and **sign analysis**.
+
+Each discriminant case has its own lesson section: [solving when the discriminant is positive](!/algebra/inequalities/quadratic#3), [solving when the discriminant is zero](!/algebra/inequalities/quadratic#4) and [solving when the discriminant is negative](!/algebra/inequalities/quadratic#5); the cases are summarised in [summary of quadratic inequality cases](!/algebra/inequalities/quadratic#9).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -916,7 +1153,9 @@ For comprehensive treatment see **solving quadratic inequalities** and **sign an
 
 **Completing the Square** &mdash; an alternative way to find the vertex and roots of the parabola, sometimes more illuminating than the quadratic formula for inequality analysis.
 
-**Vertex** &mdash; the turning point of the parabola at $x = -b/(2a)$. For a non-strict inequality with discriminant zero, the vertex is exactly the root and the inequality may hold at this single point.`,
+**Vertex** &mdash; the turning point of the parabola at $x = -b/(2a)$. For a non-strict inequality with discriminant zero, the vertex is exactly the root and the inequality may hold at this single point.
+
+The related tools are the [quadratic equation solver](!/algebra/calculators/equations/quadratic), the [linear inequality solver](!/algebra/calculators/inequalities/linear) and the [polynomial equation solver](!/algebra/calculators/equations/polynomial); the lessons are [sign analysis](!/algebra/inequalities#8), [reducible inequalities](!/algebra/inequalities/quadratic#8) and [the discriminant](!/algebra/equations/quadratic#5).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -963,6 +1202,116 @@ For comprehensive treatment see **solving quadratic inequalities** and **sign an
     answer: "Use a union of intervals matching the chosen sign regions. Parentheses for excluded endpoints (strict inequalities and all denominator zeros), brackets for included endpoints (numerator zeros under non-strict inequalities). Denominator zeros always get parentheses even when the inequality is non-strict."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/inequalities/rational" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/inequalities/rational and algebra/inequalities.
+         Before editing this view, read the instructions and re-run its checks (--view rational); keep the section ids and the anchors. */
+      instructions: [
+        `Build the inequality in the display at the top: click the **Var**, **Num** and **Op** buttons, one of the four **Ineq** symbols, the **x²** or **^** power buttons and the brackets, or type on the keyboard; the ÷ button writes a fraction, so wrap a multi-term denominator in brackets. [Learn more about building inequalities](!#building-inequalities-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-inequalities-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the inequality is complete; an expression without an inequality symbol, or without a variable in a denominator, is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random inequality of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the steps from the excluded values and the combined fraction to the critical points and the sign chart, and the answer card gives the intervals; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `Denominator zeros are never included in the answer; numerator zeros are included only for ≤ and ≥. [Learn more about the endpoints](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one inequality in $x$, $y$ or $n$ with the variable in at least one denominator. It lists the excluded values, moves every term to the left and combines them into a single fraction over the common denominator, finds the zeros of the numerator and of the denominator, tests the sign of the fraction on each interval between them, and keeps the intervals whose sign matches. Numerator zeros are included for $\leq$ and $\geq$; denominator zeros never are. [Learn more about rational inequalities](!#what-is-a-rational-inequality)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: '1/x > 2, Solve, Clear, 1/x > 0',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 1, ÷, x, >, 2\nThe display reads 1/x > 2 with the fraction stacked.', at: 'tr' },
+            { click: { button: '1', exact: true } }, { click: { button: '÷', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '>', exact: true } }, { click: { button: '2', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK Solve\nCombined to (1 − 2x)/x > 0; critical points 0 and 0.5; the answer (0, 0.5).', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK 1, ÷, x, >, 0 and Solve\nOne critical point, 0; positive to its right: (0, ∞).', at: 'tr' },
+            { click: { button: '1', exact: true } }, { click: { button: '÷', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '>', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+          ],
+        },
+        'building-inequalities-with-buttons-and-keyboard': {
+          title: 'Bracketed numerator and denominator, undo, delete, Solve',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK (, x, +, 1, ), ÷, (, x, -, 2, ), ≤, 0\nThe display reads (x + 1)/(x − 2) ≤ 0.', at: 'tr' },
+            { click: { button: '(', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: ')', exact: true } },
+            { click: { button: '÷', exact: true } }, { click: { button: '(', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: ')', exact: true } },
+            { click: { button: '≤', exact: true } }, { click: { button: '0', exact: true } },
+            { wait: 2800 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 0 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe ≤ before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ≤, 0 and Solve\nCritical points −1 and 2; the answer [−1, 2): −1 included, 2 excluded.', at: 'tr' },
+            { click: { button: '≤', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Sum of Fractions\nA random 1/x + 1/(x + a) < b loads.', at: 'tr' },
+            { click: { button: 'Sum of Fractions' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nThe two fractions are combined over a common denominator before the sign chart.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Always Positive\nA random a/x² > 0 replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'Always Positive' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'Three critical points, then an always-true case',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 1, ÷, x, +, 1, ÷, (, x, +, 2, ), <, 0 and Solve\nCombined to (2x + 2)/(x(x + 2)); critical points −2, −1, 0; the answer (−∞, −2) ∪ (−1, 0).', at: 'tr' },
+            { click: { button: '1', exact: true } }, { click: { button: '÷', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } },
+            { click: { button: '1', exact: true } }, { click: { button: '÷', exact: true } }, { click: { button: '(', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: ')', exact: true } },
+            { click: { button: '<', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 4000 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK 1, ÷, x², >, 0 and Solve\nAlways True: all real numbers except the excluded 0.', at: 'tr' },
+            { click: { button: '1', exact: true } }, { click: { button: '÷', exact: true } }, { click: { button: 'x²', exact: true } }, { click: { button: '>', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-inequalities-with-buttons-and-keyboard', key: 'obj2', demo: 'building-inequalities-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'the-sign-chart-method-why-it-works', key: 'obj5', demo: null },
+        { id: 'what-is-a-rational-inequality', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -974,7 +1323,7 @@ Three quick experiments:
 &bull; Click the &quot;Fraction less than or equal to 0&quot; example template &mdash; an inequality of the form $(x + a)/(x + b) \\leq 0$ loads. Note how the solver uses brackets for the numerator-zero endpoint and parentheses for the denominator-zero endpoint.
 &bull; Try the &quot;Sum of Fractions&quot; template to see how the solver finds a common denominator before identifying critical points.
 
-The Solve button is disabled until you enter something. The dedicated &quot;Ineq&quot; row inserts the four inequality symbols.`,
+The Solve button is disabled until you enter something. The dedicated &quot;Ineq&quot; row inserts the four inequality symbols. An expression without one of them is refused with "Input must be an inequality (use <, >, ≤, or ≥)", and one without a variable in a denominator with "This is not a rational inequality". $1/x > 0$ holds exactly for $x > 0$, the interval $(0, \\infty)$. What makes an inequality rational is explained in [what is a rational inequality](!#what-is-a-rational-inequality).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -989,7 +1338,7 @@ The Solve button is disabled until you enter something. The dedicated &quot;Ineq
 
 The division operator is the key tool for this solver: typing $1/x$ creates a fraction structure that the solver recognizes as a rational expression. For multi-term denominators, use parentheses: $1/(x + 2)$ is parsed as one over the quantity $x + 2$, not as $1/x + 2$.
 
-Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type $<$ and $>$ directly, type $<=$ or $>=$ to insert the combined symbols $\\leq$ and $\\geq$, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back.`,
+Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type $<$ and $>$ directly, type $<=$ or $>=$ to insert the combined symbols $\\leq$ and $\\geq$, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time; the ⌫ button deletes the character before the caret. $(x + 1)/(x - 2) \\leq 0$ is typed with both brackets and gives $[-1, 2)$: the numerator zero is included, the denominator zero is not. The endpoint rule is explained in [the sign-chart method](!#the-sign-chart-method-why-it-works).`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -1005,7 +1354,7 @@ Keyboard shortcuts: type letters and digits directly, use star or slash for mult
 &bull; **Always Positive** &mdash; $a/x^2 > 0$. The denominator $x^2$ is non-negative, so the only excluded value is $x = 0$ and the answer is all reals except 0.
 &bull; **Complex Rational** &mdash; $(ax + b)/((x + c)(x + d)) \\geq 0$. Three critical points and shows how multiple denominator factors interact.
 
-Roughly 80 percent of generated inequalities produce clean integer critical points.`,
+Roughly 80 percent of generated inequalities produce clean integer critical points. Loading a template clears the previous solution; click Solve to work the new inequality. The five stages applied to every template are listed in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -1020,7 +1369,7 @@ Roughly 80 percent of generated inequalities produce clean integer critical poin
 &bull; **Sign Chart** &mdash; shows the sign of $P(x)/Q(x)$ on each interval determined by the critical points. The chart displays one $+$ or $-$ per interval.
 &bull; **Solution** &mdash; gives the final answer in interval notation, the union of intervals whose sign matches the inequality direction.
 
-Numerator zeros under a non-strict inequality use brackets (included). All denominator zeros use parentheses (excluded) regardless of inequality strictness. The final-answer card shows the interval notation directly.`,
+Numerator zeros under a non-strict inequality use brackets (included). All denominator zeros use parentheses (excluded) regardless of inequality strictness. The final-answer card shows the interval notation directly. $1/x + 1/(x + 2) < 0$ combines to $(2x + 2) / (x(x + 2)) < 0$ with the critical points $-2$, $-1$ and $0$ and the answer $(-\\infty, -2) \\cup (-1, 0)$; $1/x^2 > 0$ is Always True and the answer is all real numbers except the excluded $0$. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. Why the sign can change only at critical points is explained in [the sign-chart method](!#the-sign-chart-method-why-it-works).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -1043,7 +1392,9 @@ Numerator zeros under a non-strict inequality use brackets (included). All denom
 
 **Repeated factors and bouncing.** If a factor like $(x - 2)^2$ appears, the expression does not change sign as $x$ crosses 2 because the squared factor has even multiplicity. The solver detects this through the test-point evaluation, so the resulting sign chart is correct without special-case logic.
 
-For deeper coverage see **sign chart** and **rational function**.`,
+For deeper coverage see **sign chart** and **rational function**.
+
+The chart is built in [the sign chart method for rational inequalities](!/algebra/inequalities/rational#3), the bracket-or-parenthesis rule in [endpoint inclusion rules](!/algebra/inequalities/rational#4), and the general idea in [sign analysis](!/algebra/inequalities#8).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -1062,7 +1413,9 @@ where $P$ and $Q$ are polynomials, $Q$ contains the variable, and $\\square$ is 
 
 **Why rational inequalities are harder than polynomial inequalities.** Polynomial inequalities have only zeros as critical points and are defined everywhere. Rational inequalities add a second class of critical points (denominator zeros) and forbidden values where the expression has no value at all.
 
-For deeper coverage see **rational inequality**, **rational expression**, and **excluded values**.`,
+For deeper coverage see **rational inequality**, **rational expression**, and **excluded values**.
+
+The form is defined in [definition](!/algebra/inequalities/rational#1), the two kinds of critical points in [critical points](!/algebra/inequalities/rational#2), and the place of rational inequalities among the types in [rational inequalities](!/algebra/inequalities#12).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1089,7 +1442,9 @@ For deeper coverage see **rational inequality**, **rational expression**, and **
 
 **The implementation.** Internally, the solver represents polynomials as coefficient arrays, finds roots via factoring and numerical methods, and constructs the sign chart by evaluating the combined expression at midpoints. The final-answer card formats the result as a union of intervals with correct bracket-or-parenthesis logic per endpoint.
 
-For comprehensive treatment see **solving rational inequalities** and **sign analysis**.`,
+For comprehensive treatment see **solving rational inequalities** and **sign analysis**.
+
+The stages are worked in [getting the inequality into standard form](!/algebra/inequalities/rational#6) and [worked examples](!/algebra/inequalities/rational#7); the move the solver never makes is [a common error: cross-multiplication](!/algebra/inequalities/rational#5); the forms are summarised in [summary of rational inequality forms](!/algebra/inequalities/rational#9).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1116,7 +1471,9 @@ For comprehensive treatment see **solving rational inequalities** and **sign ana
 
 **Common Denominator** &mdash; the technique for combining multiple fractions. Same idea as adding rational numbers, but with polynomials in place of integers.
 
-**Factoring** &mdash; the algebraic tool for finding polynomial roots cleanly. Fully factored numerator and denominator make the critical points immediate by inspection.`,
+**Factoring** &mdash; the algebraic tool for finding polynomial roots cleanly. Fully factored numerator and denominator make the critical points immediate by inspection.
+
+The related tools are the [rational equation solver](!/algebra/calculators/equations/rational), the [quadratic inequality solver](!/algebra/calculators/inequalities/quadratic) and the [linear inequality solver](!/algebra/calculators/inequalities/linear); the lessons are [connection to rational equations](!/algebra/inequalities/rational#8), [polynomial inequalities](!/algebra/inequalities#11) and [interval notation](!/algebra/inequalities#3).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -1162,6 +1519,116 @@ For comprehensive treatment see **solving rational inequalities** and **sign ana
     answer: "Cube roots are defined for every real number and the cube function is monotonically increasing, so cube-root inequalities have no domain restriction and the cubing step never flips direction. Square roots and other even roots require domain analysis and care about signs."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/inequalities/radical" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/roots and algebra/inequalities.
+         Before editing this view, read the instructions and re-run its checks (--view radical); keep the section ids and the anchors. */
+      instructions: [
+        `Build the inequality in the display at the top: click the **Var**, **Num** and **Op** buttons, one of the four **Ineq** symbols, a **Rad** button for a square, cube or fourth root, and the brackets, or type on the keyboard; wrap a multi-term radicand in brackets. [Learn more about building inequalities](!#building-inequalities-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-inequalities-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the inequality is complete; an expression without an inequality symbol or without a radical is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random inequality of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the steps from isolating the radical and raising both sides to a power to the domain step, and the answer card gives the inequality and the interval; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `An even root compared with a negative number ends in No solution or in the whole domain, without any squaring. [Learn more about these cases](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one inequality in $x$, $y$ or $n$ with the variable under a square, cube or fourth root on one side. It isolates the radical, settles the special cases of an even root compared with zero or a negative number, raises both sides to the index of the root, solves the linear inequality that remains, and, for an even root in a less-than form, intersects the result with the domain where the radicand is non-negative. The answer is shown as an inequality and as an interval. [Learn more about radical inequalities](!#what-is-a-radical-inequality)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: '√x > 3, Solve, Clear, no solution',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK √, x, >, 3\nThe display reads √x > 3.', at: 'tr' },
+            { click: { button: '√', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '>', exact: true } }, { click: { button: '3', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK Solve\nBoth sides squared: x > 9, the interval (9, ∞).', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK √, x, +, 5, <, 2 and Solve\nIsolated, √x < −3: a root is never negative, so No solution.', at: 'tr' },
+            { click: { button: '√', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '5', exact: true } },
+            { click: { button: '<', exact: true } }, { click: { button: '2', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+          ],
+        },
+        'building-inequalities-with-buttons-and-keyboard': {
+          title: 'A bracketed radicand, undo, delete, the domain step',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK √, (, 2, x, +, 1, ), ≤, 3\nThe display reads √(2x + 1) ≤ 3.', at: 'tr' },
+            { click: { button: '√', exact: true } }, { click: { button: '(', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '≤', exact: true } }, { click: { button: '3', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 3 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe ≤ before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ≤, 3 and Solve\n2x + 1 ≤ 9 gives x ≤ 4; the domain 2x + 1 ≥ 0 adds x ≥ −0.5: [−0.5, 4].', at: 'tr' },
+            { click: { button: '≤', exact: true } }, { click: { button: '3', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Cube Root\nA random ∛x > c loads.', at: 'tr' },
+            { click: { button: 'Cube Root', nth: 0 } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nBoth sides cubed, no domain step: a ray.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Compare to Zero\nA random √(ax + b) compared with 0 replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'Compare to Zero' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'A cube root, then a coefficient to divide out',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK ∛, (, x, -, 1, ), >, 2 and Solve\nCubed: x − 1 > 8, so x > 9, the interval (9, ∞).', at: 'tr' },
+            { click: { button: '∛', exact: true } }, { click: { button: '(', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } },
+            { click: { button: '1', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '>', exact: true } }, { click: { button: '2', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK 2, ×, √, x, ≥, 4 and Solve\nIsolate Radical Term divides by 2: √x ≥ 2, so x ≥ 4, the interval [4, ∞).', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: '√', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: '≥', exact: true } }, { click: { button: '4', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-inequalities-with-buttons-and-keyboard', key: 'obj2', demo: 'building-inequalities-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'domain-restrictions-and-the-even-root-trap', key: 'obj5', demo: null },
+        { id: 'what-is-a-radical-inequality', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -1173,7 +1640,7 @@ Three quick experiments:
 &bull; Click the &quot;Linear Radicand&quot; example template &mdash; an inequality with $\\sqrt{ax + b}$ loads. The solver squares both sides, solves the linear inequality, and intersects with the domain if the inequality is less-than.
 &bull; Try the &quot;Cube Root&quot; template to see how the solver handles $\\sqrt[3]{x}$. No domain restriction and no direction-flip concerns because the cube function is strictly increasing.
 
-The Solve button is disabled until you enter something. The dedicated &quot;Rad&quot; row inserts the three radical symbols: $\\sqrt{\\;}$, $\\sqrt[3]{\\;}$, $\\sqrt[4]{\\;}$.`,
+The Solve button is disabled until you enter something. The dedicated &quot;Rad&quot; row inserts the three radical symbols: $\\sqrt{\\;}$, $\\sqrt[3]{\\;}$, $\\sqrt[4]{\\;}$. An expression without an inequality symbol is refused with "Input must be an inequality (use <, >, ≤, or ≥)", one without a radical with "No radical found in the inequality", and radicals on both sides are not yet supported. $\\sqrt{x} + 5 < 2$ isolates to $\\sqrt{x} < -3$ and ends in No solution. What makes an inequality radical is explained in [what is a radical inequality](!#what-is-a-radical-inequality).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -1189,7 +1656,7 @@ The Solve button is disabled until you enter something. The dedicated &quot;Rad&
 
 To enter $\\sqrt{2x + 1}$, click the square-root button then open a parenthesis, type the radicand, and close the parenthesis. The solver requires parentheses around any multi-term radicand to parse it correctly.
 
-Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type $<$ and $>$ directly, type $<=$ or $>=$ to insert the combined symbols $\\leq$ and $\\geq$, and press Enter to solve. The Unicode radical symbols can also be typed or pasted directly. **Ctrl+Z** undoes up to fifty edits back.`,
+Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type $<$ and $>$ directly, type $<=$ or $>=$ to insert the combined symbols $\\leq$ and $\\geq$, and press Enter to solve. The Unicode radical symbols can also be typed or pasted directly. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time; the ⌫ button deletes the character before the caret. $\\sqrt{2x + 1} \\leq 3$ squares to $2x + 1 \\leq 9$ and, after the domain $2x + 1 \\geq 0$ is applied, gives $[-0.5, 4]$. Why the domain must be applied is explained in [domain restrictions and the even-root trap](!#domain-restrictions-and-the-even-root-trap). **Ctrl+Z** undoes up to fifty edits back.`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -1205,7 +1672,7 @@ Keyboard shortcuts: type letters and digits directly, use star or slash for mult
 &bull; **Cube Root Linear** &mdash; $\\sqrt[3]{ax + b} > c$. Cube both sides, solve the resulting linear inequality.
 &bull; **Fourth Root** &mdash; $\\sqrt[4]{x} > c$. Even root with index 4; same logic as square root but raise to the fourth power.
 
-Roughly 80 percent of generated inequalities produce clean integer boundaries.`,
+Roughly 80 percent of generated inequalities produce clean integer boundaries. Loading a template clears the previous solution; click Solve to work the new inequality. The four stages applied to every template are listed in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -1220,7 +1687,7 @@ Roughly 80 percent of generated inequalities produce clean integer boundaries.`,
 &bull; **Solve Linear Inequality** &mdash; handles the resulting polynomial inequality in the variable.
 &bull; **Apply Domain Restriction** (for even-root less-than) &mdash; intersects the algebraic solution with the requirement that the radicand be non-negative.
 
-The final-answer card shows the answer in two forms: the inequality form (such as $a \\leq x < b$) and the corresponding interval notation.`,
+The final-answer card shows the answer in two forms: the inequality form (such as $a \\leq x < b$) and the corresponding interval notation. $\\sqrt[3]{x - 1} > 2$ is cubed to $x - 1 > 8$ and gives $x > 9$ with no domain step; $2 \\cdot \\sqrt{x} \\geq 4$ is divided by $2$ first and gives $x \\geq 4$, the interval $[4, \\infty)$. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. When the domain step is needed and when it is not is explained in [domain restrictions and the even-root trap](!#domain-restrictions-and-the-even-root-trap).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -1250,7 +1717,9 @@ which is the intersection of the squared inequality and the domain. The solver b
 &bull; **$\\sqrt{f(x)} \\geq 0$**: solution is the entire domain.
 &bull; **$\\sqrt{f(x)} > 0$**: solution is the domain minus the points where the radicand is zero.
 
-For deeper coverage see **domain restrictions** and **principal square root**.`,
+For deeper coverage see **domain restrictions** and **principal square root**.
+
+Why an even root is never negative is set out in [principal roots](!/algebra/roots#3) and [when radicands are negative](!/algebra/roots#9); the moves allowed on an inequality are [properties of inequalities](!/algebra/inequalities#5).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -1277,7 +1746,9 @@ where $n \\geq 2$ is the index, $f(x)$ is the radicand, $g(x)$ is the other side
 
 **The pivotal move.** Raising both sides to the index $n$ removes the radical. This move preserves direction when both sides are non-negative (even-root case after isolation) or when the function is increasing (odd-root case). Both of these conditions are sustained by the structural setup, so no direction-flip occurs in standard radical inequality solving.
 
-For deeper coverage see **radical inequality**, **principal nth root**, and **interval notation**.`,
+For deeper coverage see **radical inequality**, **principal nth root**, and **interval notation**.
+
+Roots of every index are defined in [square roots, cube roots, and beyond](!/algebra/roots#2) and graphed in [radicals as functions](!/algebra/roots#8); inequalities outside the polynomial family are surveyed in [inequalities beyond algebra](!/algebra/inequalities#14).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1307,7 +1778,9 @@ For deeper coverage see **radical inequality**, **principal nth root**, and **in
 
 **The implementation.** Internally, the solver navigates this decision tree based on the index, the inequality direction, and the sign of $c$. The output ranges from a simple ray to a compound bounded interval depending on which branch applies.
 
-For comprehensive treatment see **solving radical inequalities** and **squaring both sides**.`,
+For comprehensive treatment see **solving radical inequalities** and **squaring both sides**.
+
+Raising both sides to a power is worked for equations in [equations with radicals](!/algebra/roots#7); why the moves keep the solution set is [equivalent inequalities](!/algebra/inequalities#7), and the answer notation is [interval notation](!/algebra/inequalities#3).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1332,7 +1805,9 @@ For comprehensive treatment see **solving radical inequalities** and **squaring 
 
 **Interval Notation** &mdash; the standard way to express the solution. Parentheses for excluded endpoints, brackets for included endpoints, infinity always with parentheses.
 
-**Rational Exponent** &mdash; the alternative notation $f(x)^{1/n}$ for $\\sqrt[n]{f(x)}$. The inequality $f(x)^{1/n} \\geq c$ is identical to $\\sqrt[n]{f(x)} \\geq c$; the underlying analysis is the same.`,
+**Rational Exponent** &mdash; the alternative notation $f(x)^{1/n}$ for $\\sqrt[n]{f(x)}$. The inequality $f(x)^{1/n} \\geq c$ is identical to $\\sqrt[n]{f(x)} \\geq c$; the underlying analysis is the same.
+
+The related tools are the [radical equation solver](!/algebra/calculators/equations/radical), the [quadratic inequality solver](!/algebra/calculators/inequalities/quadratic) and the [root calculator](!/calculators/root-calculator); the lessons are [radical and exponent notation](!/algebra/roots#4), [connection to powers](!/algebra/roots#10) and [compound inequalities](!/algebra/inequalities#6).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -1378,6 +1853,114 @@ For comprehensive treatment see **solving radical inequalities** and **squaring 
     answer: "Both work; the choice affects only how the answer is written. For the base e (natural exponential), the natural log gives a clean answer. For another base b, you can use log base b directly or use the change-of-base formula to express the answer in terms of natural log or common log."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/inequalities/exponential" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/powers/exponential-inequalities, algebra/powers, algebra/powers/exponential-equations, algebra/logarithms, algebra/inequalities.
+         Before editing this view, read the instructions and re-run its checks (--view exponential); keep the section ids and the anchors. */
+      instructions: [
+        `Build the inequality in the display at the top: click the **Var**, **Num** and **Op** buttons, with **^** for the exponent and **e** for the natural base, one of the four **Ineq** symbols and the brackets, or type on the keyboard; wrap a multi-term exponent in brackets. [Learn more about building inequalities](!#building-inequalities-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-inequalities-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the inequality is complete; an expression without an inequality symbol or without a variable in an exponent is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random inequality of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the steps from isolating the exponential to the logarithm and the linear inequality, with a separate step whenever the sign flips, and the answer card gives the inequality and the interval; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `An exponential compared with zero or a negative number ends in All real numbers or No solution without any logarithm. [Learn more about these cases](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one inequality in $x$, $y$ or $n$ with the variable in an exponent, such as $a \cdot b^{f(x)}$ compared with $c$ for a positive base $b \neq 1$. It isolates the exponential, flipping the sign if it divides by a negative coefficient, settles the comparisons with zero or a negative number at once, then takes the logarithm of both sides, flipping the sign again when the base is below $1$, and solves the linear inequality that remains. A right side that is a whole power of the base gives an exact boundary. [Learn more about exponential inequalities](!#what-is-an-exponential-inequality)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: '2^x > 8, Solve, Clear, no solution',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 2, ^, x, >, 8\nThe display reads 2^x > 8 with the exponent raised.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: '^', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '>', exact: true } }, { click: { button: '8', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK Solve\n8 = 2^3, so x > 3, the interval (3, ∞).', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK 2, ^, x, <, 0 and Solve\nA power of 2 is always positive: No solution.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: '^', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '<', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+          ],
+        },
+        'building-inequalities-with-buttons-and-keyboard': {
+          title: 'A base below 1, undo, delete, the flip',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 0, ., 5, ^, x, <, 0, ., 1, 2, 5\nThe display reads 0.5^x < 0.125.', at: 'tr' },
+            { click: { button: '0', exact: true } }, { click: { button: '.', exact: true } }, { click: { button: '5', exact: true } }, { click: { button: '^', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: '<', exact: true } }, { click: { button: '0', exact: true } }, { click: { button: '.', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: '5', exact: true } },
+            { wait: 2800 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 5 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe 2 before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK 2, 5 and Solve\nApply Logarithm (Base < 1) flips the sign: x > 3, the interval (3, ∞).', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: '5', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Base < 1 (Flips!)\nA random inequality with a base below 1 loads.', at: 'tr' },
+            { click: { button: 'Base < 1' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nThe logarithm step flips the sign.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Compare to Zero\nA random power compared with zero or a negative number replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'Compare to Zero' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'A linear exponent, then the natural base',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 3, ^, (, 2, x, -, 1, ), ≤, 2, 7 and Solve\n27 = 3^3, so 2x − 1 ≤ 3 and x ≤ 2, the interval (−∞, 2].', at: 'tr' },
+            { click: { button: '3', exact: true } }, { click: { button: '^', exact: true } }, { click: { button: '(', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: '-', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '≤', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: '7', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3800 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK e, ^, x, ≥, 1 and Solve\nThe natural log of 1 is 0: x ≥ 0, the interval [0, ∞).', at: 'tr' },
+            { click: { button: 'e', exact: true } }, { click: { button: '^', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '≥', exact: true } }, { click: { button: '1', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-inequalities-with-buttons-and-keyboard', key: 'obj2', demo: 'building-inequalities-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'the-two-direction-flip-triggers', key: 'obj5', demo: null },
+        { id: 'what-is-an-exponential-inequality', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -1389,7 +1972,7 @@ Three quick experiments:
 &bull; Click the &quot;Base less than 1&quot; example template &mdash; an inequality with base $0.5$ loads. Watch the solver flip the inequality direction when applying the logarithm because the log of a decreasing exponential reverses comparisons.
 &bull; Try the &quot;Compare to Zero&quot; template to see how the solver handles a positive base raised to any power being compared with zero or a negative number &mdash; one direction is always-true, the other has no solution.
 
-The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The dedicated &quot;Ineq&quot; row inserts the four inequality symbols. The $e$ button inserts the natural exponential base.`,
+The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The dedicated &quot;Ineq&quot; row inserts the four inequality symbols. The $e$ button inserts the natural exponential base. An expression without an inequality symbol is refused with "Input must be an inequality (use <, >, ≤, or ≥)", one without a variable in an exponent with "No variable found in any exponent", and exponentials on both sides are not yet supported. $2^x < 0$ ends in No solution before any logarithm. What makes an inequality exponential is explained in [what is an exponential inequality](!#what-is-an-exponential-inequality).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -1404,7 +1987,7 @@ The Solve button is disabled until you enter something. Pressing Enter on the di
 
 The caret operator is the key tool for this solver: typing $2$ then caret then $x$ creates $2^x$, which the display renders with the exponent as a superscript. For multi-term exponents use parentheses: $2^{(3x + 1)}$ requires parentheses around the exponent to bind it correctly.
 
-Keyboard shortcuts: type letters and digits directly, use the caret key for exponentiation, star or slash for multiplication and division, type $<$ and $>$ directly, type $<=$ or $>=$ to insert $\\leq$ and $\\geq$, and press Enter to solve. Type $e$ for Euler's number; the parser recognizes it as the natural base only when not followed by another letter. **Ctrl+Z** undoes up to fifty edits back.`,
+Keyboard shortcuts: type letters and digits directly, use the caret key for exponentiation, star or slash for multiplication and division, type $<$ and $>$ directly, type $<=$ or $>=$ to insert $\\leq$ and $\\geq$, and press Enter to solve. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time; the ⌫ button deletes the character before the caret. $0.5^x < 0.125$ is typed with the decimal point; its logarithm step flips the sign and gives $x > 3$. Why a base below $1$ flips the sign is explained in [the two direction-flip triggers](!#the-two-direction-flip-triggers). Type $e$ for Euler's number; the parser recognizes it as the natural base only when not followed by another letter. **Ctrl+Z** undoes up to fifty edits back.`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -1420,7 +2003,7 @@ Keyboard shortcuts: type letters and digits directly, use the caret key for expo
 &bull; **Compare to Zero** &mdash; $b^x > 0$ or $b^x < $ negative. Exercises the always-true and no-solution edge cases.
 &bull; **Natural Linear** &mdash; $e^{mx + n} > c$. Combines the natural base with a linear exponent.
 
-Roughly 80 percent of generated inequalities use clean bases and right-hand sides that produce exact integer or rational answers.`,
+Roughly 80 percent of generated inequalities use clean bases and right-hand sides that produce exact integer or rational answers. Loading a template clears the previous solution; click Solve to work the new inequality. The five stages applied to every template are listed in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -1437,7 +2020,7 @@ Roughly 80 percent of generated inequalities use clean bases and right-hand side
 &bull; **Simplify Logarithm** (when exponent is linear) &mdash; restates the post-logarithm inequality in terms of the original variable.
 &bull; **Solve Linear Inequality** &mdash; solves for the variable using the standard linear-inequality moves. May trigger another direction flip if the variable coefficient inside the exponent is negative.
 
-The final-answer card shows the answer as the inequality form plus the matching interval notation.`,
+The final-answer card shows the answer as the inequality form plus the matching interval notation. $3^{2x - 1} \\leq 27$ recognises $27 = 3^3$, reduces to $2x - 1 \\leq 3$ and gives $x \\leq 2$, the interval $(-\\infty, 2]$; $e^x \\geq 1$ gives $x \\geq 0$. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. Where the sign can flip is explained in [the two direction-flip triggers](!#the-two-direction-flip-triggers).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -1454,7 +2037,9 @@ The final-answer card shows the answer as the inequality form plus the matching 
 
 **Cumulative flips.** If both triggers fire (negative coefficient outside the exponential, base less than 1), the two flips cancel and the original direction is restored. The solver tracks them step by step rather than computing parity.
 
-For deeper coverage see **exponential function** and **logarithm**.`,
+For deeper coverage see **exponential function** and **logarithm**.
+
+The base rule is the subject of [key principle: base determines direction](!/algebra/powers/exponential-inequalities#1); the sign rules for the other moves are [properties of inequalities](!/algebra/inequalities#5), and the logarithm as the inverse of the exponential is [inverse identities](!/algebra/logarithms#4).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -1481,7 +2066,9 @@ These cases are dispatched immediately without applying any logarithm.
 
 **Solution form.** Once isolated to $b^{f(x)} \\square c$ with $c > 0$, the inequality reduces to $f(x) \\square \\log_b c$ (with possible direction flip for $b < 1$). The result is then a linear inequality in $x$, whose solution is a ray on the number line.
 
-For deeper coverage see **exponential function**, **exponential equation**, and **logarithm**.`,
+For deeper coverage see **exponential function**, **exponential equation**, and **logarithm**.
+
+The basic form is solved in [solving basic exponential inequalities](!/algebra/powers/exponential-inequalities#2), the comparisons with zero in [domain and sign considerations](!/algebra/powers/exponential-inequalities#4), and the place of these inequalities among the power topics in [exponential inequalities](!/algebra/powers#10).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1504,7 +2091,9 @@ For deeper coverage see **exponential function**, **exponential equation**, and 
 
 **The implementation.** Internally, the solver navigates this five-stage process based on the structure of the input AST. It detects base regime, applies special-case shortcuts where possible, and assembles the answer as an inequality of the form $x \\square v$ with the matching interval notation.
 
-For comprehensive treatment see **solving exponential inequalities** and **logarithms**.`,
+For comprehensive treatment see **solving exponential inequalities** and **logarithms**.
+
+The isolation stage is worked in [inequalities requiring simplification](!/algebra/powers/exponential-inequalities#3), the logarithm stage in [method: using logarithms](!/algebra/powers/exponential-equations#7), and the cases are summarised in [summary of cases](!/algebra/powers/exponential-inequalities#6).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1529,7 +2118,9 @@ For comprehensive treatment see **solving exponential inequalities** and **logar
 
 **e (Euler&apos;s Number)** &mdash; the natural exponential base, approximately 2.71828. Appears in continuous compounding, calculus, probability, and complex analysis.
 
-**Interval Notation** &mdash; the standard way to write the solution as an open or closed ray. Parentheses for excluded endpoints (strict inequalities), brackets for included endpoints (non-strict), infinity always with parentheses.`,
+**Interval Notation** &mdash; the standard way to write the solution as an open or closed ray. Parentheses for excluded endpoints (strict inequalities), brackets for included endpoints (non-strict), infinity always with parentheses.
+
+The related tools are the [exponential equation solver](!/algebra/calculators/equations/exponential), the [logarithmic inequality solver](!/algebra/calculators/inequalities/logarithmic) and the [exponent calculator](!/calculators/exponent-calculator); the lessons are [compound inequalities](!/algebra/powers/exponential-inequalities#5), [common and natural logarithms](!/algebra/logarithms#5) and [interval notation](!/algebra/inequalities#3).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -1575,6 +2166,114 @@ For comprehensive treatment see **solving exponential inequalities** and **logar
     answer: "If both sides are logarithms with the same base, the comparison reduces to a comparison of their arguments. With base greater than 1 the direction is preserved; with base less than 1 the direction flips. Both arguments must be positive in the final solution."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/inequalities/logarithmic" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/logarithms/inequalities and algebra/logarithms.
+         Before editing this view, read the instructions and re-run its checks (--view logarithmic); keep the section ids and the anchors. */
+      instructions: [
+        `Build the inequality in the display at the top: click a **Log** button for ln, log or a base, then the argument and a closing bracket, then one of the four **Ineq** symbols and the rest with the **Var**, **Num** and **Op** buttons, or type on the keyboard. [Learn more about building inequalities](!#building-inequalities-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-inequalities-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the inequality is complete; an expression without an inequality symbol or without a logarithm of the variable is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random inequality of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the steps from isolating the logarithm to the exponential form and the domain, and the answer card gives the inequality and the interval; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `The argument of every logarithm must stay positive, so a less-than answer becomes a bounded interval and an impossible one becomes No solution. [Learn more about the domain](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one inequality in $x$, $y$ or $n$ with the variable inside a logarithm, in base $e$, $10$ or any positive base other than $1$. When both sides are logarithms with the same base it compares the arguments; otherwise it isolates the logarithm, rewrites $\log_b(A)$ compared with $c$ as $A$ compared with $b^c$, flipping the sign when the base is below $1$, solves the linear inequality that remains and intersects the result with the domain where the argument is positive. The answer is shown as an inequality and as an interval. [Learn more about logarithmic inequalities](!#what-is-a-logarithmic-inequality)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: 'log₂(x) > 3, Solve, Clear, the domain at work',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK log₂, x, ), >, 3\nThe display reads log₂(x) > 3.', at: 'tr' },
+            { click: { button: 'log2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '>', exact: true } }, { click: { button: '3', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK Solve\nConverted to x > 2³ = 8; the domain x > 0 is automatic: (8, ∞).', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK log₂, x, ), <, 3 and Solve\nx < 8 together with the domain x > 0: the interval (0, 8).', at: 'tr' },
+            { click: { button: 'log2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '<', exact: true } }, { click: { button: '3', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+          ],
+        },
+        'building-inequalities-with-buttons-and-keyboard': {
+          title: 'A linear argument, undo, delete, Solve',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK log₂, 2, x, +, 1, ), >, 3\nThe display reads log₂(2x + 1) > 3.', at: 'tr' },
+            { click: { button: 'log2', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } },
+            { click: { button: '1', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '>', exact: true } }, { click: { button: '3', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 3 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe > before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK >, 3 and Solve\n2x + 1 > 8, so x > 3.5, the interval (3.5, ∞).', at: 'tr' },
+            { click: { button: '>', exact: true } }, { click: { button: '3', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Same Base Both Sides\nA random log_b(f(x)) compared with log_b(c) loads.', at: 'tr' },
+            { click: { button: 'Same Base Both Sides' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nCompare Logarithms: the arguments are compared directly, then the domain is applied.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Negative Right Side\nA random log_b(x) compared with a negative number replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'Negative Right Side' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'A coefficient to divide out, then the natural log',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 2, ×, log, x, ), ≤, 4 and Solve\nIsolate Logarithm divides by 2: log(x) ≤ 2, so x ≤ 100; with the domain, (0, 100].', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: 'log', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: ')', exact: true } }, { click: { button: '≤', exact: true } }, { click: { button: '4', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3800 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ln, x, ), ≥, 0 and Solve\ne⁰ = 1, so x ≥ 1, the interval [1, ∞).', at: 'tr' },
+            { click: { button: 'ln', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '≥', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-inequalities-with-buttons-and-keyboard', key: 'obj2', demo: 'building-inequalities-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'domain-and-direction-the-two-hazards', key: 'obj5', demo: null },
+        { id: 'what-is-a-logarithmic-inequality', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -1586,7 +2285,7 @@ Three quick experiments:
 &bull; Click the &quot;Linear Argument&quot; example template &mdash; an inequality like $\\log_2(2x + 1) > 3$ loads. The solver converts to $2x + 1 > 8$, solves the linear inequality, then intersects with the domain $2x + 1 > 0$.
 &bull; Try the &quot;Negative Right Side&quot; template &mdash; an inequality such as $\\log_2(x) > -3$. Converting gives $x > 2^{-3} = 1/8$, automatically positive so the domain is satisfied.
 
-The Solve button is disabled until you enter something. The dedicated &quot;Log&quot; row inserts $\\ln$, $\\log$ (base 10), $\\log_2$, $\\log_3$, and $\\log_5$ as single button clicks.`,
+The Solve button is disabled until you enter something. The dedicated &quot;Log&quot; row inserts $\\ln$, $\\log$ (base 10), $\\log_2$, $\\log_3$, and $\\log_5$ as single button clicks. An expression without an inequality symbol is refused with "Input must be an inequality (use <, >, ≤, or ≥)", one without a logarithm of the variable with "No logarithm with variable found in inequality", and different bases on the two sides are not yet supported. $\\log_2(x) < 3$ converts to $x < 8$ and, with the domain $x > 0$, gives $(0, 8)$. What makes an inequality logarithmic is explained in [what is a logarithmic inequality](!#what-is-a-logarithmic-inequality).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -1602,7 +2301,7 @@ The Solve button is disabled until you enter something. The dedicated &quot;Log&
 
 For non-standard bases, type $\\log$ then underscore then the base number then open parenthesis: $\\log\\_7(x)$ for $\\log_7(x)$. The parser recognizes both the underscore-base form and the bare $\\log$ (default base 10) and $\\ln$ (base $e$) forms.
 
-Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type $<$ and $>$ directly, type $<=$ or $>=$ to insert $\\leq$ and $\\geq$, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back.`,
+Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type $<$ and $>$ directly, type $<=$ or $>=$ to insert $\\leq$ and $\\geq$, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time; the ⌫ button deletes the character before the caret. $\\log_2(2x + 1) > 3$ is typed by clicking the base button, then $2x + 1$ and the closing bracket; it converts to $2x + 1 > 8$ and gives $x > 3.5$. Why the domain must be checked is explained in [domain and direction](!#domain-and-direction-the-two-hazards).`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -1618,7 +2317,7 @@ Keyboard shortcuts: type letters and digits directly, use star or slash for mult
 &bull; **Same Base Both Sides** &mdash; $\\log_b(f(x)) > \\log_b(c)$. Exercises the same-base comparison shortcut: the arguments are compared directly.
 &bull; **Negative Right Side** &mdash; $\\log_b(x) > -c$. Tests the case where the exponential value $b^{-c}$ is a small positive number rather than zero or negative.
 
-Roughly 80 percent of generated inequalities use clean bases and right-hand sides that produce exact integer or rational boundary values.`,
+Roughly 80 percent of generated inequalities use clean bases and right-hand sides that produce exact integer or rational boundary values. Loading a template clears the previous solution; click Solve to work the new inequality. The five stages applied to every template are listed in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -1635,7 +2334,7 @@ Roughly 80 percent of generated inequalities use clean bases and right-hand side
 &bull; **Solve Linear Inequality** &mdash; finishes the post-conversion linear inequality in the variable.
 &bull; **Apply Domain Constraint** &mdash; intersects the algebraic solution with the requirement that the argument be positive. May produce a bounded interval rather than a single ray.
 
-The final-answer card shows the result as an inequality form plus interval notation.`,
+The final-answer card shows the result as an inequality form plus interval notation. $2 \\cdot \\log(x) \\leq 4$ is divided by $2$ first, converts to $x \\leq 100$ and, with the domain, gives $(0, 100]$; $\\ln(x) \\geq 0$ gives $x \\geq 1$, the interval $[1, \\infty)$. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. The two things that can go wrong are explained in [domain and direction](!#domain-and-direction-the-two-hazards).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -1661,7 +2360,9 @@ The final-answer card shows the result as an inequality form plus interval notat
 &bull; $\\log_2(x) > -3$ becomes $x > 1/8$ with domain $x > 0$. Domain is automatic since $1/8 > 0$. Final answer: $x > 1/8$.
 &bull; $\\log_2(x) < -3$ becomes $x < 1/8$ with domain $x > 0$. Intersection: $0 < x < 1/8$.
 
-For deeper coverage see **logarithm** and **domain of a function**.`,
+For deeper coverage see **logarithm** and **domain of a function**.
+
+The domain hazard is treated in [domain considerations](!/algebra/logarithms/inequalities#4); the direction rule in [base greater than one: direction preserved](!/algebra/logarithms/inequalities#1) and [base between zero and one: direction reversed](!/algebra/logarithms/inequalities#2).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -1690,7 +2391,9 @@ where $b > 0$ and $b \\neq 1$ is the base, $f(x)$ is a function of the variable 
 
 **Same-base shortcut.** When both sides are logarithms with the same base, the conversion can be skipped: $\\log_b(A) \\square \\log_b(B)$ becomes $A \\square B$ directly, with direction reversed for bases less than 1. Both arguments must still be positive.
 
-For deeper coverage see **logarithmic inequality**, **logarithm**, and **exponential function**.`,
+For deeper coverage see **logarithmic inequality**, **logarithm**, and **exponential function**.
+
+The place of these inequalities among the logarithm topics is [logarithmic inequalities](!/algebra/logarithms#9), the picture behind the solution shapes is [graphical interpretation](!/algebra/logarithms/inequalities#7), and the allowed inputs are [restrictions on base and argument](!/algebra/logarithms#2).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1715,7 +2418,9 @@ For deeper coverage see **logarithmic inequality**, **logarithm**, and **exponen
 &bull; **Domain automatic** &mdash; when $b^c > 0$ trivially satisfies the domain (which is always true since $b > 0$).
 &bull; **Bounded interval** &mdash; when the algebraic answer caps from above and the domain caps from below (or vice versa).
 
-For comprehensive treatment see **solving logarithmic inequalities** and **logarithm rules**.`,
+For comprehensive treatment see **solving logarithmic inequalities** and **logarithm rules**.
+
+The same-base shortcut is [logarithms on both sides](!/algebra/logarithms/inequalities#3), merging several logarithms first is [inequalities with combined logarithms](!/algebra/logarithms/inequalities#6), and the whole procedure is summarised in [summary of techniques](!/algebra/logarithms/inequalities#8).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1746,7 +2451,9 @@ For comprehensive treatment see **solving logarithmic inequalities** and **logar
 
 **Decibel** &mdash; another logarithmic quantity. Sound levels measured in decibels follow logarithm rules; threshold-comparison problems are logarithmic inequalities.
 
-**Interval Notation** &mdash; the standard way to write the solution. Parentheses for excluded endpoints, brackets for included endpoints, infinity always with parentheses.`,
+**Interval Notation** &mdash; the standard way to write the solution. Parentheses for excluded endpoints, brackets for included endpoints, infinity always with parentheses.
+
+The related tools are the [logarithmic equation solver](!/algebra/calculators/equations/logarithmic), the [exponential inequality solver](!/algebra/calculators/inequalities/exponential) and the [logarithm calculator](!/calculators/log-calculator); the lessons are [compound inequalities](!/algebra/logarithms/inequalities#5), [logarithm rules](!/algebra/logarithms#7) and [common and natural logarithms](!/algebra/logarithms#5).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -1792,6 +2499,117 @@ For comprehensive treatment see **solving logarithmic inequalities** and **logar
     answer: "Isolate the absolute value first. Subtract any added constants. Divide by any coefficient multiplying the absolute value. If the coefficient is negative, the inequality direction flips once during the division. Once isolated to the absolute value compared to a constant, apply the case split."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/inequalities/absolute-value" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/inequalities/absolute-value, algebra/inequalities, algebra/equations/absolute-value.
+         Before editing this view, read the instructions and re-run its checks (--view absolute-value); keep the section ids and the anchors. */
+      instructions: [
+        `Build the inequality in the display at the top: click the **| |** button once before and once after the expression inside the bars, one of the four **Ineq** symbols, and the **Var**, **Num** and **Op** buttons or the brackets for the rest, or type on the keyboard. [Learn more about building inequalities](!#building-inequalities-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-inequalities-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the inequality is complete; an expression without an inequality symbol or without bars is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random inequality of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the steps from isolating the bars to the compound or union form and its solution, and the answer card gives the inequality, a note and the interval; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `Bars compared with a negative number end in No solution or All real numbers at once; bars compared with zero give a single point or everything but one point. [Learn more about these cases](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one inequality in $x$, $y$ or $n$ with a linear expression between absolute value bars. It isolates the bars by moving constants and dividing out a coefficient, flipping the sign if that coefficient is negative, settles the comparisons with zero or a negative number at once, then rewrites a less-than form as the chain $-c < A < c$ and a greater-than form as the union $A < -c$ or $A > c$, solves the linear pieces and reports the answer as an inequality and as an interval. [Learn more about absolute value inequalities](!#what-is-an-absolute-value-inequality)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: '|x − 3| < 5, Solve, Clear, no solution',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK | |, x, -, 3, | |, <, 5\nThe display reads |x − 3| < 5.', at: 'tr' },
+            { click: { button: '| |', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '3', exact: true } },
+            { click: { button: '| |', exact: true } }, { click: { button: '<', exact: true } }, { click: { button: '5', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK Solve\nThe chain −5 < x − 3 < 5 gives −2 < x < 8, the interval (−2, 8).', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK | |, x, | |, +, 3, <, 1 and Solve\nIsolated to |x| < −2: No solution.', at: 'tr' },
+            { click: { button: '| |', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '| |', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '3', exact: true } },
+            { click: { button: '<', exact: true } }, { click: { button: '1', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+          ],
+        },
+        'building-inequalities-with-buttons-and-keyboard': {
+          title: 'A coefficient and a constant, undo, delete, a union',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 2, ×, | |, x, +, 1, | |, -, 4, >, 6\nThe display reads 2 · |x + 1| − 4 > 6.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: '| |', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } },
+            { click: { button: '1', exact: true } }, { click: { button: '| |', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '4', exact: true } }, { click: { button: '>', exact: true } }, { click: { button: '6', exact: true } },
+            { wait: 2800 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 6 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe > before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK >, 6 and Solve\nIsolated to |x + 1| > 5: x < −6 or x > 4, (−∞, −6) ∪ (4, ∞).', at: 'tr' },
+            { click: { button: '>', exact: true } }, { click: { button: '6', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Greater or Equal\nA random |ax + b| ≥ c loads.', at: 'tr' },
+            { click: { button: 'Greater or Equal' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nA union of two closed rays.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK All Reals\nBars compared with zero or a negative number replace it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'All Reals' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'A single point, then a non-strict union',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK | |, x, -, 5, | |, ≤, 0 and Solve\nThe Zero Case: the inside must be 0, so x = 5.', at: 'tr' },
+            { click: { button: '| |', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '5', exact: true } }, { click: { button: '| |', exact: true } },
+            { click: { button: '≤', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK | |, 2, x, +, 1, | |, ≥, 3 and Solve\n2x + 1 ≤ −3 or 2x + 1 ≥ 3: (−∞, −2] ∪ [1, ∞).', at: 'tr' },
+            { click: { button: '| |', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: '| |', exact: true } },
+            { click: { button: '≥', exact: true } }, { click: { button: '3', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-inequalities-with-buttons-and-keyboard', key: 'obj2', demo: 'building-inequalities-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'the-two-cases-why-they-work', key: 'obj5', demo: null },
+        { id: 'what-is-an-absolute-value-inequality', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -1803,7 +2621,7 @@ Three quick experiments:
 &bull; Click the &quot;Simple Greater Than&quot; example template &mdash; an inequality like $|x + 2| > 4$ loads. The solver rewrites as a union, $x + 2 < -4$ or $x + 2 > 4$, and reports the union answer $x < -6$ or $x > 2$.
 &bull; Try the &quot;No Solution&quot; template &mdash; an inequality with a negative right side loads. The solver detects the impossibility immediately and reports no solution.
 
-The Solve button is disabled until you enter something. The special row includes the absolute value bars button (rendered as $|$ $|$).`,
+The Solve button is disabled until you enter something. The special row includes the absolute value bars button (rendered as $|$ $|$). An expression without an inequality symbol is refused with "Input must be an inequality (use <, >, ≤, or ≥)", and one without bars with "No absolute value found". $|x| + 3 < 1$ isolates to $|x| < -2$ and ends in No solution. What the bars mean for an inequality is explained in [what is an absolute value inequality](!#what-is-an-absolute-value-inequality).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -1818,7 +2636,7 @@ The Solve button is disabled until you enter something. The special row includes
 
 The absolute value bars button inserts a single $|$ character; click it twice to surround an expression. Keyboard users can type the vertical-bar character directly. For multi-term expressions inside the bars, type the terms between the two bars: $|2x + 1|$.
 
-Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type $<$ and $>$ directly, type $<=$ or $>=$ to insert $\\leq$ and $\\geq$, type the vertical bar for absolute value, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back.`,
+Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type $<$ and $>$ directly, type $<=$ or $>=$ to insert $\\leq$ and $\\geq$, type the vertical bar for absolute value, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time; the ⌫ button deletes the character before the caret. $2 \\cdot |x + 1| - 4 > 6$ is isolated to $|x + 1| > 5$ and gives the union $x < -6$ or $x > 4$. Why a greater-than form becomes a union is explained in [the two cases](!#the-two-cases-why-they-work).`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -1834,7 +2652,7 @@ Keyboard shortcuts: type letters and digits directly, use star or slash for mult
 &bull; **No Solution** &mdash; $|expression| < $ negative. Tests the impossible-case branch.
 &bull; **All Reals** &mdash; $|expression| \\geq 0$. Tests the always-true branch.
 
-Roughly 80 percent of generated inequalities produce clean integer boundary values.`,
+Roughly 80 percent of generated inequalities produce clean integer boundary values. Loading a template clears the previous solution; click Solve to work the new inequality. The four stages applied to every template are listed in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -1849,7 +2667,7 @@ Roughly 80 percent of generated inequalities produce clean integer boundary valu
 &bull; **Solve Both Sides** (compound) or **Solve Both Branches** (union) &mdash; finishes each linear sub-inequality.
 &bull; **Solution Interval** or **Solution** &mdash; states the final compound or union answer.
 
-The final-answer card shows the answer in three forms: the inequality form ($a < x < b$ or $x < a$ or $x > b$), a plain-language note about the bounds, and the interval notation.`,
+The final-answer card shows the answer in three forms: the inequality form ($a < x < b$ or $x < a$ or $x > b$), a plain-language note about the bounds, and the interval notation. $|x - 5| \\leq 0$ is the Zero Case and holds only at $x = 5$; $|2x + 1| \\geq 3$ splits into $2x + 1 \\leq -3$ or $2x + 1 \\geq 3$ and gives $(-\\infty, -2] \\cup [1, \\infty)$. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. The split behind every answer is explained in [the two cases](!#the-two-cases-why-they-work).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -1879,7 +2697,9 @@ Geometrically: on the number line, &quot;more than $c$ away from zero&quot; mean
 &bull; $|A| > 0$: all reals except where $A = 0$.
 &bull; $|A| < 0$: no solution.
 
-For deeper coverage see **absolute value inequality** and **compound inequality**.`,
+For deeper coverage see **absolute value inequality** and **compound inequality**.
+
+The two forms are set out in [two fundamental forms](!/algebra/inequalities/absolute-value#1), [solving the less-than form](!/algebra/inequalities/absolute-value#2) and [solving the greater-than form](!/algebra/inequalities/absolute-value#3).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -1903,7 +2723,9 @@ where $f(x)$ is a linear expression (usually $ax + b$), $c$ is a real number, an
 
 **Standard form for non-trivial cases.** Once isolated to $|ax + b| \\square c$ with $c > 0$, the linear-isolation case split applies cleanly: compound for less-than, union for greater-than.
 
-For deeper coverage see **absolute value inequality**, **absolute value**, and **interval notation**.`,
+For deeper coverage see **absolute value inequality**, **absolute value**, and **interval notation**.
+
+The place of these inequalities among the types is [absolute value inequalities](!/algebra/inequalities#13), the distance reading is [geometric interpretation](!/algebra/inequalities/absolute-value#7), and the bars themselves are defined in [definition of absolute value](!/algebra/equations/absolute-value#1).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1928,7 +2750,9 @@ For deeper coverage see **absolute value inequality**, **absolute value**, and *
 
 **The implementation.** Internally, the solver collects linear terms inside the absolute value to extract coefficient $a$ and constant $b$. It then performs the case split symbolically, solves each sub-inequality, and assembles the final answer in the appropriate compound, union, point, or special-case form. The final-answer card adapts to the matched branch.
 
-For comprehensive treatment see **solving absolute value inequalities** and **case analysis**.`,
+For comprehensive treatment see **solving absolute value inequalities** and **case analysis**.
+
+The stages are worked in [worked examples with linear expressions](!/algebra/inequalities/absolute-value#4) and summarised in [summary of absolute value inequality forms](!/algebra/inequalities/absolute-value#8); the chain form of the answer is [compound inequalities](!/algebra/inequalities#6).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1955,7 +2779,9 @@ For comprehensive treatment see **solving absolute value inequalities** and **ca
 
 **Modulus** &mdash; the generalization to complex numbers. $|a + bi| = \\sqrt{a^2 + b^2}$. Real absolute value is the special case where the imaginary part is zero.
 
-**Number Line Graphing** &mdash; the geometric representation of the solution. A compound solution is a single shaded segment; a union solution is two shaded rays extending outward.`,
+**Number Line Graphing** &mdash; the geometric representation of the solution. A compound solution is a single shaded segment; a union solution is two shaded rays extending outward.
+
+The related tools are the [absolute value equation solver](!/algebra/calculators/equations/absolute-value), the [linear inequality solver](!/algebra/calculators/inequalities/linear) and the [quadratic inequality solver](!/algebra/calculators/inequalities/quadratic); the lessons are [absolute value inequalities with quadratic or other expressions](!/algebra/inequalities/absolute-value#5), [inequalities with absolute value on both sides](!/algebra/inequalities/absolute-value#6) and [interval notation](!/algebra/inequalities#3).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -2032,7 +2858,11 @@ For comprehensive treatment see **solving absolute value inequalities** and **ca
       },
       currentView: params.view,
       componentName: currentConfig.component,
-      h1Title: currentConfig.h1
+      h1Title: currentConfig.h1,
+      instructions: currentConfig.instructions || [],
+      explanations: currentConfig.explanations || null,
+      demos: currentConfig.demos || {},
+      sectionOrder: currentConfig.sectionOrder || []
     }
   }
 }
@@ -2094,10 +2924,15 @@ export default function AlgebraInequalityViewPage({
   schemas,
   currentView,
   componentName,
-  h1Title
+  h1Title,
+  instructions = [],
+  explanations = null,
+  demos = {},
+  sectionOrder = []
 }) {
 
-  const genericSections = Object.keys(sectionsContent).length > 0
+  // the file's old fixed list, kept for views without a sectionOrder yet
+  const buildOldGenericSections = () => Object.keys(sectionsContent).length > 0
     ? [
         { id: '1', title: sectionsContent.obj1?.title || '', link: '', content: sectionsContent.obj1?.content || '' },
         { id: '2', title: sectionsContent.obj2?.title || '', link: '', content: sectionsContent.obj2?.content || '' },
@@ -2109,6 +2944,43 @@ export default function AlgebraInequalityViewPage({
         { id: '8', title: sectionsContent.obj8?.title || '', link: '', content: sectionsContent.obj8?.content || '' },
       ].filter(section => section.title)
     : []
+
+  const renderCalculator = (demoProps = {}) => {
+    if (componentName === 'LinearInequalitySolver') return <LinearInequalitySolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'QuadraticInequalitySolver') return <QuadraticInequalitySolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'RationalInequalitySolver') return <RationalInequalitySolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'RadicalInequalitySolver') return <RadicalInequalitySolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'ExponentialInequalitySolver') return <ExponentialInequalitySolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'LogarithmicInequalitySolver') return <LogarithmicInequalitySolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'AbsValueInequalitySolver') return <AbsValueInequalitySolver explanations={explanations || undefined} {...demoProps} />;
+    return null;
+  };
+
+  const demoOptOut = {};
+
+  const genericSections = sectionOrder.length > 0
+    ? sectionOrder.map((s) => ({
+        id: s.id,
+        title: sectionsContent[s.key].title,
+        link: sectionsContent[s.key].link || '',
+        content: [
+          ...[s.demo, s.demo2].filter(Boolean).map((d) => (
+            <ToolDemoPlayer
+              key={`demo-${s.id}-${d}`}
+              script={demos[d].script}
+              title={demos[d].title}
+              label={`Demo: ${demos[d].title}`}
+              scale={demos[d].scale || 0.6}
+              minHeight={demos[d].minHeight || undefined}
+              renderText={processContent}
+            >
+              {renderCalculator(demoOptOut)}
+            </ToolDemoPlayer>
+          )),
+          sectionsContent[s.key].content,
+        ],
+      }))
+    : buildOldGenericSections()
 
   return (
     <>
@@ -2149,6 +3021,11 @@ export default function AlgebraInequalityViewPage({
       <br />
       <br />
       <h1 className='title' style={{marginTop:'0px',marginBottom:'30px'}}>{h1Title}</h1>
+      {instructions.length > 0 && (
+        <div style={{ marginBottom: '20px' }}>
+          <ExplanationDetails instructions={instructions} title={`How to use ${h1Title}`} />
+        </div>
+      )}
 
       <SiblingsNav
         title="Inequalities"
@@ -2180,13 +3057,7 @@ export default function AlgebraInequalityViewPage({
               margin-right: 0 !important;
             }
           ` }} />
-          {componentName === 'LinearInequalitySolver' && <LinearInequalitySolver />}
-          {componentName === 'QuadraticInequalitySolver' && <QuadraticInequalitySolver />}
-          {componentName === 'RationalInequalitySolver' && <RationalInequalitySolver />}
-          {componentName === 'RadicalInequalitySolver' && <RadicalInequalitySolver />}
-          {componentName === 'ExponentialInequalitySolver' && <ExponentialInequalitySolver />}
-          {componentName === 'LogarithmicInequalitySolver' && <LogarithmicInequalitySolver />}
-          {componentName === 'AbsValueInequalitySolver' && <AbsValueInequalitySolver />}
+          {renderCalculator()}
         </div>
       </SiblingsNav>
 

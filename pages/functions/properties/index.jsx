@@ -2518,7 +2518,7 @@ An infinite discontinuity occurs when the function approaches infinity (or negat
 
 An oscillating discontinuity occurs when the function oscillates infinitely often near a point without settling to any limit. The function $f(x) = \\sin(1/x)$ near $x = 0$ is the classic example.
 
-Identifying the type of discontinuity guides how to handle it — removable discontinuities can be eliminated by redefining the function; others cannot. The table below collects the four standard discontinuity types with the behavior that defines each.`,
+Identifying the type of discontinuity guides how to handle it — removable discontinuities can be eliminated by redefining the function; others cannot. The table below collects the four standard discontinuity types with the behavior that defines each. For the two-group view, repairable or not, see the [discontinuity tree on the continuity page](!/calculus/limits/continuity#discontinuity-types).`,
     before: ``,
     after: ``,
     link: '',

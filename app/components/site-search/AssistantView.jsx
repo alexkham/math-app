@@ -7,6 +7,8 @@ import { TOKENS, UI_TEXT, ASSIST, ASK_SUGGESTIONS_PAGE, ASK_SUGGESTIONS_GENERAL 
 import { SendIcon, StopIcon, ArrowIcon } from './searchIcons';
 import AssistantMessage, { ANSWER_CLASS, errorText } from './AssistantMessage';
 import { navigateToUrl, isModifiedClick } from './navigate';
+import { courseForSources, isCourseIntent } from '@/app/components/affiliates/courseForPath';
+import { trackAssistant } from './assistantClient';
 
 /**
  * AssistantView: the body of the palette in Ask AI mode. Welcome screen (no messages yet),
@@ -84,6 +86,33 @@ export default function AssistantView({ pagePath = '', isMobile = false, fullPag
   const sendRef = useRef(() => {});
 
   const effectivePage = usePage ? pagePath : '';
+
+  // Course card: under the first finished answer whose sources (or page) match a course,
+  // once per conversation, hidden for the session when dismissed.
+  const COURSE_DISMISS_KEY = 'lmc-ask-course-dismissed';
+  const [courseDismissed, setCourseDismissed] = useState(false);
+  useEffect(() => {
+    try { setCourseDismissed(window.sessionStorage.getItem(COURSE_DISMISS_KEY) === '1'); } catch { /* ignore */ }
+  }, []);
+  const dismissCourse = useCallback(() => {
+    setCourseDismissed(true);
+    try { window.sessionStorage.setItem(COURSE_DISMISS_KEY, '1'); } catch { /* ignore */ }
+    trackAssistant('course_dismiss');
+  }, []);
+  let courseMessageId = null;
+  let course = null;
+  if (!courseDismissed) {
+    for (const message of messages) {
+      if (message.role !== 'assistant' || (message.status !== 'done' && message.status !== 'stopped')) continue;
+      const previous = messages[messages.indexOf(message) - 1];
+      const asked = previous && previous.role === 'user' ? previous.content : '';
+      const found = courseForSources(message.sources, effectivePage, asked);
+      if (found) { courseMessageId = message.id; course = found; break; }
+    }
+  }
+  const courseHeadline = (question) => (isCourseIntent(question)
+    ? `Want a structured course on ${course.topic}?`
+    : `Learn the ${course.topic} behind this answer`);
   const hasMessages = messages.length > 0;
 
   const focusComposer = useCallback(() => {
@@ -247,6 +276,10 @@ export default function AssistantView({ pagePath = '', isMobile = false, fullPag
                 onSearchInstead={onSearchInstead}
                 onVote={setVote}
                 onShowAll={showAllSources}
+                course={message.id === courseMessageId ? course : null}
+                courseHeadline={message.id === courseMessageId ? courseHeadline(questionFor(index)) : ''}
+                onCourseDismiss={dismissCourse}
+                onCourseClick={() => trackAssistant('course_click', { topic: course ? course.topic : '' })}
               />
             )
           ))}

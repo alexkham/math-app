@@ -1098,6 +1098,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import complexExplorerDiagrams from '@/app/components/calculators/complex-numbers/complexExplorerDiagrams'
 import iPowersDiagrams from '@/app/components/calculators/complex-numbers/iPowersDiagrams'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
 
 
@@ -1909,9 +1911,49 @@ const schemas = {
     }),
   };
 
+  const numberSystemLadder = {
+    root: {
+      id: 'N', rank: 'start', symbol: '$\\mathbb{N}$', name: 'Natural numbers', sub: 'the counting numbers 1, 2, 3, …',
+      panel: { text: 'Counting is where number begins. Every later system is forced into existence by a problem the one before it cannot answer.' },
+      children: [{
+        id: 'Z', rank: '1st extension', symbol: '$\\mathbb{Z}$', name: 'Integers', sub: 'the negatives join the counting numbers',
+        edge: { label: 'subtraction demands answers beyond the counting numbers', tip: '$3 - 5$ has no answer among the counting numbers' },
+        panel: { text: 'Negative numbers emerged when subtraction demanded answers beyond the counting numbers: $3 - 5$ needs a number below zero.' },
+        children: [{
+          id: 'Q', rank: '2nd extension', symbol: '$\\mathbb{Q}$', name: 'Rational numbers', sub: 'fractions: every division now has an exact result',
+          edge: { label: 'division insists on exactness', tip: '$1 \\div 3$ is no integer' },
+          panel: { text: 'Fractions appeared when division insisted on exactness: $1 \\div 3$ is not an integer, so the integers cannot hold it.' },
+          children: [{
+            id: 'R', rank: '3rd extension', symbol: '$\\mathbb{R}$', name: 'Real numbers', sub: 'the irrationals fill the line',
+            edge: { label: 'geometry requires lengths no fraction can capture', tip: 'the diagonal of a unit square is $\\sqrt{2}$' },
+            panel: { text: 'Irrational numbers surfaced when geometry required lengths like $\\sqrt{2}$, the diagonal of a unit square, that no fraction could capture.' },
+            children: [{
+              id: 'C', rank: '4th extension', symbol: '$\\mathbb{C}$', name: 'Complex numbers', sub: 'a new unit $i$ with $i^2 = -1$, perpendicular to the real line',
+              edge: { label: '$x^2 + 1 = 0$ has no real solution', tip: 'positive, negative and zero all square to a result that is never negative' },
+              panel: { text: 'No real number squares to $-1$: positives and negatives both square to a positive, and zero squares to zero. Rather than abandon the equation, mathematicians introduced the imaginary unit $i$, defined by the single property $i^2 = -1$.' },
+            }],
+          }],
+        }],
+      }],
+    },
+    rule: { label: 'Each time', text: 'declare the problem unsolvable, or expand what counts as a number. Mathematics chose to expand.' },
+    walk: [
+      { text: '$\\mathbb{N}$', tip: 'counting' },
+      { text: '→', sep: true, tip: '$3 - 5$' },
+      { text: '$\\mathbb{Z}$', tip: 'negatives' },
+      { text: '→', sep: true, tip: '$1 \\div 3$' },
+      { text: '$\\mathbb{Q}$', tip: 'fractions' },
+      { text: '→', sep: true, tip: '$\\sqrt{2}$' },
+      { text: '$\\mathbb{R}$', tip: 'irrationals' },
+      { text: '→', sep: true, tip: '$x^2 + 1 = 0$' },
+      { text: '$\\mathbb{C}$', tip: 'the imaginary unit $i$' },
+    ],
+  };
+
   return {
   props:{
     demoUnits,
+    numberSystemLadder,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1933,8 +1975,16 @@ const schemas = {
 
 
 
+const siteTheme = {
+  title: '#06357A', titleSoft: '#bfdbfe', titleLine: '#2563EB',
+  accent: '#2563EB', indigoSoft: '#dbeafe', line2: '#bfdbfe',
+  panelSoft: '#eff6ff', panelSofter: '#f8fafc',
+  warm: '#B45309', warmSoft: '#fef3c7', warmLine: '#fcd34d', warmInk: '#92400e',
+}
+
 export default function ImaginaryNumbersPage({
   seoData,
+  numberSystemLadder,
   sectionsContent,
   introContent,
   obj2Table,
@@ -1963,6 +2013,16 @@ export default function ImaginaryNumbersPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          `Five systems, each forced by a problem the one before could not answer: the counting numbers $\\mathbb{N}$ cannot give $3 - 5$, the integers $\\mathbb{Z}$ cannot give $1 \\div 3$, the rationals $\\mathbb{Q}$ cannot give the diagonal of a unit square, $\\sqrt{2}$, and the reals $\\mathbb{R}$ cannot solve $x^2 + 1 = 0$. The complex numbers $\\mathbb{C}$ can. Read the chain downward; each arrow carries the problem that forced the next step.`,
+          <DiagramFrame
+            key={'obj1-diagram'}
+            id="number-system-ladder"
+            title="Five number systems, each forced by a problem the last could not solve"
+            source="/complex-numbers/imaginary-numbers"
+          >
+            <Hierarchy data={numberSystemLadder} variant="derivation" exportable={false} theme={siteTheme} />
+          </DiagramFrame>,
+          `Nothing is lost on the way down. Each system keeps the arithmetic of the one above it and adds the missing answers, so the complex numbers extend the reals rather than replace them: a real number is a complex number whose imaginary part is zero. What the chain also shows is that $i$ is not a stranger act than the others; admitting $\\sqrt{2}$ was once the same kind of step.`,
         ]
     },
     {

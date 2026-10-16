@@ -1,0 +1,51 @@
+{
+  "_about": "Affiliate ad registry. One record per tracking link. Read by app/components/affiliates/courses.js (page strips) and courseForPath.js (Ask AI matching). Tracking links come from impact.com, Udemy program, media property www.learnmathclass.com. status: active | paused. placements: pages | askai.",
+  "courses": [
+    {
+      "id": "udemy-trigonometry-krista-king",
+      "key": "trigonometry",
+      "status": "active",
+      "provider": "Udemy",
+      "title": "Become a Trigonometry & Precalculus Master",
+      "instructor": "Krista King",
+      "rating": "4.8",
+      "reviews": 4930,
+      "hours": "19.5",
+      "description": "Covers the unit circle, radians, graphing and trig identities with 470+ practice questions.",
+      "courseUrl": "https://www.udemy.com/course/trig-by-krista-king/",
+      "href": "https://trk.udemy.com/NGVE9O",
+      "topics": ["trigonometry"],
+      "paths": [
+        "/trigonometry",
+        "/visual-tools/unit-circle",
+        "/math-symbols/trigonometry",
+        "/tables/trigonometry",
+        "/tables/angle-conversion",
+        "/converters/degree-radians",
+        "/calculators/trigonometry-calculator"
+      ],
+      "keywords": ["sine", "cosine", "tangent", "radian", "radians", "unit circle", "trig", "trigonometry", "hypotenuse", "identity", "identities"],
+      "placements": ["pages", "askai"],
+      "createdAt": "2026-10-11"
+    },
+    {
+      "id": "udemy-probability-krista-king",
+      "key": "probability",
+      "status": "active",
+      "provider": "Udemy",
+      "title": "Become a Probability & Statistics Master",
+      "instructor": "Krista King",
+      "rating": "4.8",
+      "reviews": 14821,
+      "hours": "15",
+      "description": "Covers probability rules, conditional probability and Bayes, random variables, variance, distributions and hypothesis testing, with practice questions throughout.",
+      "courseUrl": "https://www.udemy.com/course/statistics-probability/",
+      "href": "https://trk.udemy.com/PzZgqe",
+      "topics": ["probability", "combinatorics"],
+      "paths": ["/probability", "/combinatorics"],
+      "keywords": ["probability", "dice", "coin", "expected value", "variance", "distribution", "bayes", "conditional", "permutation", "combination", "random variable"],
+      "placements": ["pages", "askai"],
+      "createdAt": "2026-10-12"
+    }
+  ]
+}

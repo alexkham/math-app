@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
 // Factorial calculation
 const factorial = (n) => {
@@ -15,7 +16,7 @@ const poissonPMF = (k, lambda) => {
   return (Math.pow(lambda, k) * Math.exp(-lambda)) / factorial(k);
 };
 
-const PoissonExpectedValueCalculator = () => {
+const PoissonExpectedValueCalculator = ({ explanations = null }) => {
   const [lambda, setLambda] = useState(3);
   const [activeTab, setActiveTab] = useState('visualization');
   const [showAdditionalStats, setShowAdditionalStats] = useState(false);
@@ -517,6 +518,13 @@ const PoissonExpectedValueCalculator = () => {
       </div>
 
       <div style={styles.explanation}>
+        {explanations && explanations.main ? (
+          <>
+            <h3 style={styles.h3}>{explanations.main.title}</h3>
+            <div style={styles.p}>{typeof explanations.main.content === 'string' ? processContent(explanations.main.content) : explanations.main.content}</div>
+          </>
+        ) : (
+          <>
         <h3 style={styles.h3}>Understanding Expected Value for Poisson Distribution</h3>
         
         <div style={styles.explainGrid}>
@@ -560,6 +568,8 @@ const PoissonExpectedValueCalculator = () => {
             </p>
           </div>
         </div>
+          </>
+        )}
       </div>
     </div>
   );

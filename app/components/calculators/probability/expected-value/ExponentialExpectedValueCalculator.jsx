@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-const ExponentialExpectedValueCalculator = () => {
+const ExponentialExpectedValueCalculator = ({ explanations = null }) => {
   const [lambda, setLambda] = useState(0.5);
   const [activeTab, setActiveTab] = useState('visualization');
   const [showAdditionalStats, setShowAdditionalStats] = useState(false);
@@ -448,6 +449,13 @@ const ExponentialExpectedValueCalculator = () => {
       </div>
 
       <div style={styles.explanation}>
+        {explanations && explanations.main ? (
+          <>
+            <h3 style={styles.h3}>{explanations.main.title}</h3>
+            <div style={styles.p}>{typeof explanations.main.content === 'string' ? processContent(explanations.main.content) : explanations.main.content}</div>
+          </>
+        ) : (
+          <>
         <h3 style={styles.h3}>Understanding Expected Value for Exponential Distribution</h3>
         
         <div style={styles.explainGrid}>
@@ -490,6 +498,8 @@ const ExponentialExpectedValueCalculator = () => {
             </p>
           </div>
         </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -1785,6 +1785,12 @@ import '../../pages.css'
 import FactorialCalculator from '@/app/components/calculators/arithmetics/FactorialCalculator'
 import Head from 'next/head'
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
+
+/* calculators-mesh: finished 2026-10-13 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+   Registry entry "C:/Program Files/Git/calculators/factorial-calculator" in calculators-mesh-registry.json (same folder): 6 usage sections, each with a demo; 5 panel texts with anchors; 16 sections with fixed slug ids.
+   Before editing this page, read the instructions and re-run its checks; keep the section ids and the anchors. */
 
 export async function getStaticProps() {
 
@@ -1806,31 +1812,31 @@ const navigationGroup=[
 
 const factorialActualExplanations = {
   basic: {
-    text: `The basic factorial ($n!$) is the product of all positive integers less than or equal to $n$. For example, $5! = 5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$. By convention, $0! = 1$. Factorials grow extremely rapidly and are fundamental in combinatorics, probability, and algebra.`,
+    text: `The basic factorial ($n!$) is the product of all positive integers less than or equal to $n$. For example, $5! = 5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$. By convention, $0! = 1$. Factorials grow extremely rapidly and are fundamental in combinatorics, probability, and algebra. [Learn more about factorials](!#what-are-factorials)`,
     // links: [
     //   // { title: "Learn more about Factorials", link: "/factorial" }
     // ]
   },
   double: {
-    text: `The double factorial ($n!!$) is the product of all integers from $1$ to $n$ that have the same parity (odd or even) as $n$. For example, $8!! = 8 \\times 6 \\times 4 \\times 2 = 384$ and $7!! = 7 \\times 5 \\times 3 \\times 1 = 105$. Double factorials appear in combinatorial problems and calculus.`,
+    text: `The double factorial ($n!!$) is the product of all integers from $1$ to $n$ that have the same parity (odd or even) as $n$. For example, $8!! = 8 \\times 6 \\times 4 \\times 2 = 384$ and $7!! = 7 \\times 5 \\times 3 \\times 1 = 105$. Double factorials appear in combinatorial problems and calculus. [Learn more about double factorials](!#double-factorials)`,
     // links: [
     //   // { title: "Learn more about Double Factorials", link: "/factorial" }
     // ]
   },
   sub: {
-    text: `The subfactorial ($!n$) counts the number of derangements of $n$ objects - permutations where no element appears in its original position. For example, $!3 = 2$ because there are $2$ ways to arrange $3$ items so none are in their original spots. Subfactorials are used in probability and combinatorics.`,
+    text: `The subfactorial ($!n$) counts the number of derangements of $n$ objects - permutations where no element appears in its original position. For example, $!3 = 2$ because there are $2$ ways to arrange $3$ items so none are in their original spots. Subfactorials are used in probability and combinatorics. [Learn more about subfactorials](!#subfactorials-and-derangements)`,
     // links: [
     //   // { title: "Learn more about Subfactorials", link: "/factorial" }
     // ]
   },
   multi: {
-    text: `The multifactorial ($n(k)!$) is a generalization where you multiply every $k$-th number. For example, with $k=3$, $10(3)! = 10 \\times 7 \\times 4 \\times 1 = 280$. When $k=1$ it's a regular factorial, $k=2$ is double factorial. Multifactorials extend factorial concepts to broader mathematical contexts.`,
+    text: `The multifactorial ($n(k)!$) is a generalization where you multiply every $k$-th number. For example, with $k=3$, $10(3)! = 10 \\times 7 \\times 4 \\times 1 = 280$. When $k=1$ it's a regular factorial, $k=2$ is double factorial. Multifactorials extend factorial concepts to broader mathematical contexts. [Learn more about multifactorials](!#multifactorials)`,
     // links: [
     //   // { title: "Learn more about Multifactorials", link: "/factorial" }
     // ]
   },
   primorial: {
-    text: `The primorial ($n\\#$) is the product of all prime numbers less than or equal to $n$. For example, $10\\# = 2 \\times 3 \\times 5 \\times 7 = 210$. Primorials are important in number theory, particularly in studying prime number distributions and appear in various mathematical theorems.`,
+    text: `The primorial ($n\\#$) is the product of all prime numbers less than or equal to $n$. For example, $10\\# = 2 \\times 3 \\times 5 \\times 7 = 210$. Primorials are important in number theory, particularly in studying prime number distributions and appear in various mathematical theorems. [Learn more about primorials](!#primorials)`,
     // links: [
     //   // { title: "Learn more about Primorials", link: "/factorial" }
     // ]
@@ -1838,12 +1844,135 @@ const factorialActualExplanations = {
 };
 
 const detailInstructions = [
-  "Select the type of factorial you want to calculate (Basic, Double, Subfactorial, Multifactorial, or Primorial)",
-  "Enter your number n in the first input field",
-  "For Multifactorial, also enter the step value k in the second field",
-  "Click Calculate to see the result",
-  "Hover over ? icons for additional help"
+  `Pick the type with the five buttons at the top: **Basic (n!)**, **Double (n!!)**, **Subfactorial (!n)**, **Multifactorial (n(k)!)** or **Primorial (n#)**. [Learn more about the types](!#getting-started-with-the-calculator)`,
+  `Type a whole number from 0 upward in the **n** box. [Learn more about the number n](!#using-basic-factorial)`,
+  `For Multifactorial only, type the step size in the **k** box that appears. [Learn more about the step k](!#understanding-multifactorial)`,
+  `Click **Calculate**. The result appears after the equals sign; results beyond 21 digits switch to scientific notation. [Learn more about results](!#getting-started-with-the-calculator)`,
+  `The panel under the form explains the chosen type, and its link opens the section below that treats it in full. Hover over a **?** icon for a short hint. [Learn more about the panel](!#getting-started-with-the-calculator)`,
+  `Click **Reset** to clear the boxes and the result and return to Basic. A red message replaces the result when n is negative or not a number. [Learn more about messages](!#getting-started-with-the-calculator)`,
 ];
+
+const demos = {
+  'getting-started-with-the-calculator': {
+    title: 'Pick a type, calculate, reset',
+    script: [
+      { say: 'CLICK Double (n!!)\nThe panel switches to double factorials.', at: 'tr' },
+      { click: 'input[type=radio][value=double]' },
+      { wait: 2000 },
+      { say: 'TYPE 6 as n', at: 'tr' },
+      { set: 'input[placeholder="Enter n"]', value: '6' },
+      { wait: 1600 },
+      { say: 'CLICK Calculate\n6!! = 6 × 4 × 2 = 48.', at: 'tr' },
+      { click: { button: 'Calculate' } },
+      { wait: 2400 },
+      { say: 'CLICK Reset\nBoxes and result cleared.\nBack to Basic (n!).', at: 'tr' },
+      { click: { button: 'Reset' } },
+      { wait: 2200 },
+    ],
+  },
+  'using-basic-factorial': {
+    title: 'Basic factorials, small and large',
+    script: [
+      { say: 'TYPE 5 as n', at: 'tr' },
+      { set: 'input[placeholder="Enter n"]', value: '5' },
+      { wait: 1600 },
+      { say: 'CLICK Calculate\n5! = 5 × 4 × 3 × 2 × 1 = 120.', at: 'tr' },
+      { click: { button: 'Calculate' } },
+      { wait: 2400 },
+      { say: 'TYPE 20 as n', at: 'tr' },
+      { set: 'input[placeholder="Enter n"]', value: '20' },
+      { wait: 1600 },
+      { say: 'CLICK Calculate\n20! = 2432902008176640000, printed in full.', at: 'tr' },
+      { click: { button: 'Calculate' } },
+      { wait: 2600 },
+      { say: 'TYPE 25 and CLICK Calculate\nBeyond 21 digits: scientific notation, 1.5511…e+25.', at: 'tr' },
+      { set: 'input[placeholder="Enter n"]', value: '25' },
+      { click: { button: 'Calculate' } },
+      { wait: 2800 },
+    ],
+  },
+  'calculating-double-factorials': {
+    title: 'Even and odd double factorials',
+    script: [
+      { say: 'CLICK Double (n!!)', at: 'tr' },
+      { click: 'input[type=radio][value=double]' },
+      { wait: 1800 },
+      { say: 'TYPE 8 as n', at: 'tr' },
+      { set: 'input[placeholder="Enter n"]', value: '8' },
+      { wait: 1600 },
+      { say: 'CLICK Calculate\n8!! = 8 × 6 × 4 × 2 = 384.', at: 'tr' },
+      { click: { button: 'Calculate' } },
+      { wait: 2400 },
+      { say: 'TYPE 7 as n', at: 'tr' },
+      { set: 'input[placeholder="Enter n"]', value: '7' },
+      { wait: 1600 },
+      { say: 'CLICK Calculate\n7!! = 7 × 5 × 3 × 1 = 105.', at: 'tr' },
+      { click: { button: 'Calculate' } },
+      { wait: 2600 },
+    ],
+  },
+  'working-with-subfactorials': {
+    title: 'Counting derangements',
+    script: [
+      { say: 'CLICK Subfactorial (!n)', at: 'tr' },
+      { click: 'input[type=radio][value=sub]' },
+      { wait: 1800 },
+      { say: 'TYPE 3 as n', at: 'tr' },
+      { set: 'input[placeholder="Enter n"]', value: '3' },
+      { wait: 1600 },
+      { say: 'CLICK Calculate\n!3 = 2: two ways to move every item.', at: 'tr' },
+      { click: { button: 'Calculate' } },
+      { wait: 2400 },
+      { say: 'TYPE 4 as n', at: 'tr' },
+      { set: 'input[placeholder="Enter n"]', value: '4' },
+      { wait: 1600 },
+      { say: 'CLICK Calculate\n!4 = 9 of the 24 arrangements.', at: 'tr' },
+      { click: { button: 'Calculate' } },
+      { wait: 2600 },
+    ],
+  },
+  'understanding-multifactorial': {
+    title: 'A step size of your own',
+    script: [
+      { say: 'CLICK Multifactorial (n(k)!)\nA second box for k appears.', at: 'tr' },
+      { click: 'input[type=radio][value=multi]' },
+      { wait: 2000 },
+      { say: 'TYPE 10 as n', at: 'tr' },
+      { set: 'input[placeholder="Enter n"]', value: '10' },
+      { wait: 1500 },
+      { say: 'TYPE 3 as k', at: 'tr' },
+      { set: 'input[placeholder="Enter k"]', value: '3' },
+      { wait: 1500 },
+      { say: 'CLICK Calculate\n10(3)! = 10 × 7 × 4 × 1 = 280.', at: 'tr' },
+      { click: { button: 'Calculate' } },
+      { wait: 2400 },
+      { say: 'TYPE 4 as k and CLICK Calculate\n10(4)! = 10 × 6 × 2 = 120.', at: 'tr' },
+      { set: 'input[placeholder="Enter k"]', value: '4' },
+      { click: { button: 'Calculate' } },
+      { wait: 2600 },
+    ],
+  },
+  'computing-primorials': {
+    title: 'Products of primes',
+    script: [
+      { say: 'CLICK Primorial (n#)', at: 'tr' },
+      { click: 'input[type=radio][value=primorial]' },
+      { wait: 1800 },
+      { say: 'TYPE 10 as n', at: 'tr' },
+      { set: 'input[placeholder="Enter n"]', value: '10' },
+      { wait: 1600 },
+      { say: 'CLICK Calculate\n10# = 2 × 3 × 5 × 7 = 210.', at: 'tr' },
+      { click: { button: 'Calculate' } },
+      { wait: 2400 },
+      { say: 'TYPE 13 as n', at: 'tr' },
+      { set: 'input[placeholder="Enter n"]', value: '13' },
+      { wait: 1600 },
+      { say: 'CLICK Calculate\n13# = 2 × 3 × 5 × 7 × 11 × 13 = 30030.', at: 'tr' },
+      { click: { button: 'Calculate' } },
+      { wait: 2600 },
+    ],
+  },
+};
 
 const keyWords = [
   'factorial calculator',
@@ -1872,7 +2001,7 @@ For most calculations, you'll use **Basic (n!)**—the standard factorial that m
 
 The other types are specialized: **Double** for even/odd sequences, **Subfactorial** for counting arrangements, **Multifactorial** for custom step sizes (requires two inputs), and **Primorial** for prime number products. Select the type that matches your problem.
 
-After entering your number (and $k$ value for multifactorial), click the blue **Calculate** button. Your result appears on the right side of the equals sign. Use **Reset** to clear everything and start over.`,
+After entering your number (and $k$ value for multifactorial), click the blue **Calculate** button. Your result appears on the right side of the equals sign, for example $6!! = 48$ with Double selected. The panel under the form explains the chosen type, and a **?** icon next to each box shows a hint. Use **Reset** to clear everything, return to Basic and start over; a red message such as **Error: Invalid input** replaces the result when $n$ is negative or not a number. What a factorial is, and why $0! = 1$, is explained in [what are factorials](!#what-are-factorials).`,
     before: ``,
     after: ``,
     link: '',
@@ -1886,7 +2015,7 @@ Start with small numbers to understand the pattern. Calculate $3!$ and get $6$ (
 
 **Special case**: Enter $0$ and get $1$. This isn't a mistake—by mathematical definition, $0! = 1$. This convention makes many formulas work correctly. Similarly, $1! = 1$ because there's only one number to multiply.
 
-The calculator handles large numbers using scientific notation. Try $20!$ and see a result like $2.432902e+18$ (meaning $2.432902 \\times 10^{18}$ or about $2.4$ quintillion). For very large numbers, the calculator shows $e^{\\text{value}}$ format to represent the enormous result.`,
+The calculator prints results up to $21$ digits in full: $20! = 2432902008176640000$, about $2.4$ quintillion. Longer results switch to scientific notation, so $25!$ appears as $1.5511210043330985984e+25$, meaning $1.5511 \\times 10^{25}$. Beyond $170!$ the calculator shows the result as a power of $e$, such as $e^{\\text{value}}$. How fast the numbers grow is shown in [how factorials grow](!#how-factorials-grow).`,
     before: ``,
     after: ``,
     link: '',
@@ -1900,7 +2029,7 @@ Try $8!!$ by entering $8$ with Double selected. The result is $384$ because $8!!
 
 For odd numbers, try $7!!$ and get $105$ because $7!! = 7 \\times 5 \\times 3 \\times 1 = 105$. This skips all even numbers ($6, 4, 2$). The pattern depends on whether your starting number is even or odd.
 
-Small examples: $4!! = 4 \\times 2 = 8$, $5!! = 5 \\times 3 \\times 1 = 15$, $6!! = 6 \\times 4 \\times 2 = 48$. Double factorials appear in physics formulas, probability calculations, and certain mathematical sequences.`,
+Small examples: $4!! = 4 \\times 2 = 8$, $5!! = 5 \\times 3 \\times 1 = 15$, $6!! = 6 \\times 4 \\times 2 = 48$. Double factorials appear in physics formulas, probability calculations, and certain mathematical sequences. The definition and the link to ordinary factorials are in [double factorials](!#double-factorials).`,
     before: ``,
     after: ``,
     link: '',
@@ -1914,7 +2043,7 @@ Start with $!3$ (enter $3$ with Subfactorial selected). The result is $2$ becaus
 
 Try $!4$ and get $9$. For four items, there are $9$ derangements out of the $24$ total arrangements (which is $4!$). The subfactorial is always less than the regular factorial because it counts only specific arrangements, not all of them.
 
-Examples: $!2 = 1$ (only one way to swap two items), $!5 = 44$, $!6 = 265$. Subfactorials are used in probability (like the "hat check problem") and combinatorics when calculating arrangements with restrictions.`,
+Examples: $!2 = 1$ (only one way to swap two items), $!5 = 44$, $!6 = 265$. Subfactorials are used in probability (like the "hat check problem") and combinatorics when calculating arrangements with restrictions. The formula behind the count is in [subfactorials and derangements](!#subfactorials-and-derangements).`,
     before: ``,
     after: ``,
     link: '',
@@ -1928,7 +2057,7 @@ Select Multifactorial and two boxes appear. Enter $10$ in the first box and $3$ 
 
 When $k=1$, multifactorial equals basic factorial: $5(1)! = 5! = 120$. When $k=2$, it equals double factorial: $8(2)! = 8!! = 384$. Multifactorial generalizes both of these.
 
-Try $12$ with $k=4$: get $12(4)! = 12 \\times 8 \\times 4 = 384$. Or $9$ with $k=3$: get $9(3)! = 9 \\times 6 \\times 3 = 162$. Choose $k$ based on the pattern you need—it controls which numbers get multiplied together.`,
+Try $12$ with $k=4$: get $12(4)! = 12 \\times 8 \\times 4 = 384$. Or $9$ with $k=3$: get $9(3)! = 9 \\times 6 \\times 3 = 162$, and $10$ with $k=4$: $10(4)! = 10 \\times 6 \\times 2 = 120$. Choose $k$ based on the pattern you need—it controls which numbers get multiplied together. Where the product stops is explained in [multifactorials](!#multifactorials).`,
     before: ``,
     after: ``,
     link: '',
@@ -1942,7 +2071,7 @@ Try $10\\#$ by entering $10$ with Primorial selected. The result is $210$ becaus
 
 Small examples: $5\\# = 2 \\times 3 \\times 5 = 30$, $7\\# = 2 \\times 3 \\times 5 \\times 7 = 210$, $11\\# = 2 \\times 3 \\times 5 \\times 7 \\times 11 = 2310$. Notice $7\\#$ and $10\\#$ are the same because there are no primes between $7$ and $10$.
 
-If you enter a prime number itself, it includes that prime. Try $13\\#$ and get $30030$ because it multiplies all primes up to and including $13$: $2 \\times 3 \\times 5 \\times 7 \\times 11 \\times 13 = 30030$. Primorials are used in number theory and studying prime distributions.`,
+If you enter a prime number itself, it includes that prime. Try $13\\#$ and get $30030$ because it multiplies all primes up to and including $13$: $2 \\times 3 \\times 5 \\times 7 \\times 11 \\times 13 = 30030$. Primorials are used in number theory and studying prime distributions, as explained in [primorials](!#primorials).`,
     before: ``,
     after: ``,
     link: '',
@@ -1956,7 +2085,9 @@ For example, $4!$ means $4 \\times 3 \\times 2 \\times 1 = 24$. You start at $4$
 
 Factorials count **how many ways you can arrange things**. If you have $4$ books, there are $4! = 24$ different ways to order them on a shelf. First book has $4$ choices, second has $3$ remaining choices, third has $2$, last has $1$—multiply these together.
 
-**Why does 0! equal 1?** By definition, there's exactly one way to arrange zero items: do nothing. This might seem strange, but it makes mathematical formulas work correctly. Think of it as the "empty arrangement"—there's one way to arrange nothing.`,
+**Why does 0! equal 1?** By definition, there's exactly one way to arrange zero items: do nothing. This might seem strange, but it makes mathematical formulas work correctly. Think of it as the "empty arrangement"—there's one way to arrange nothing.
+
+In the calculator this is the **Basic (n!)** type. Counting arrangements is the subject of [permutation (full)](!/combinatorics/permutations#full), and the reason the choices multiply is [the multiplication rule](!/combinatorics/counting-principles#2).`,
     before: ``,
     after: ``,
     link: '',
@@ -1968,9 +2099,9 @@ Factorials count **how many ways you can arrange things**. If you have $4$ books
 
 By $10!$ you reach $3,628,800$—over three million. By $15!$ you're at $1,307,674,368,000$—over a trillion. By $20!$ you hit $2,432,902,008,176,640,000$—that's $2.4$ quintillion. The numbers become so large that writing them fully is impractical.
 
-This rapid growth is why the calculator uses scientific notation for large results. When you see $1.234e+18$, that's $1.234 \\times 10^{18}$ or $1.234$ followed by $18$ more digits. For very large factorials (like $100!$), the calculator shows $e^{\\text{number}}$ format instead.
+This rapid growth is why the calculator switches to scientific notation once a result passes $21$ digits. When you see $1.5511e+25$, that's $1.5511 \\times 10^{25}$: $1.5511$ followed by $21$ more digits. Beyond $170!$ the calculator shows $e^{\\text{number}}$ format instead.
 
-**Practical limit**: Most real-world factorial problems use numbers under $20$. Calculating $70!$ gives a number with over $100$ digits. Only specialized applications (like cryptography or advanced statistics) work with such enormous factorials.`,
+**Practical limit**: Most real-world factorial problems use numbers under $20$. Calculating $70!$ gives a number with over $100$ digits. Only specialized applications (like cryptography or advanced statistics) work with such enormous factorials. The count that grows this fast, the number of orderings of $n$ items, is explained in [permutation (full)](!/combinatorics/permutations#full).`,
     before: ``,
     after: ``,
     link: '',
@@ -1984,7 +2115,7 @@ This rapid growth is why the calculator uses scientific notation for large resul
 
 **Factorials in fractions**: The expression $\\frac{n!}{(n-2)!}$ equals $n \\times (n-1)$. Try with $5$: $\\frac{5!}{3!} = \\frac{120}{6} = 20 = 5 \\times 4$. This pattern appears in permutation formulas.
 
-**Zero factorial rule**: Remember $0! = 1$, not $0$. This makes formulas work: the binomial coefficient $\\binom{n}{0} = \\frac{n!}{0! \\times n!} = \\frac{n!}{1 \\times n!} = 1$. If $0!$ were $0$, you'd divide by zero and the formula would break.`,
+**Zero factorial rule**: Remember $0! = 1$, not $0$. This makes formulas work: the binomial coefficient $\\binom{n}{0} = \\frac{n!}{0! \\times n!} = \\frac{n!}{1 \\times n!} = 1$. If $0!$ were $0$, you'd divide by zero and the formula would break. The quotient $\\frac{n!}{(n-r)!}$ is the subject of [partial permutation without repetition](!/combinatorics/permutations#without), and the binomial coefficient of [its definition](!/combinatorics/binomial-coefficient#1).`,
     before: ``,
     after: ``,
     link: '',
@@ -2002,7 +2133,7 @@ This rapid growth is why the calculator uses scientific notation for large resul
 
 **Primorials**: Calculate $12\\#$ and $15\\#$. Answers: $2310$ (multiply primes $2, 3, 5, 7, 11$) and $30030$ (multiply primes $2, 3, 5, 7, 11, 13$). List the primes first, then multiply.
 
-**Multifactorial**: Compute $15(5)!$ (step by $5$). Answer: $15 \\times 10 \\times 5 = 750$.`,
+**Multifactorial**: Compute $15(5)!$ (step by $5$). Answer: $15 \\times 10 \\times 5 = 750$. More counting problems with full solutions are in [derangement](!/combinatorics/permutations#8) and [permutations and combinations](!/combinatorics/basics#3).`,
     before: ``,
     after: ``,
     link: '',
@@ -2018,7 +2149,7 @@ This rapid growth is why the calculator uses scientific notation for large resul
 
 **Tournament scheduling**: Arranging $8$ teams in a bracket uses factorial math. The number of possible matchup orders is related to $8!$, though the actual formula is more complex. Sports schedulers use these calculations.
 
-**Scientific formulas**: Factorials appear in Taylor series (calculus), Stirling's approximation (statistics), and binomial expansions (algebra). The function $e^x$ can be written as $1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + ...$`,
+**Scientific formulas**: Factorials appear in Taylor series (calculus), Stirling's approximation (statistics), and binomial expansions (algebra). The function $e^x$ can be written as $1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + ...$ The selections are counted in [simple combinations](!/combinatorics/combinations#combinations), the PIN count in [partial permutation without repetition](!/combinatorics/permutations#without), and the series in [higher-order derivatives and Taylor series](!/calculus/derivatives/higher-order#8).`,
     before: ``,
     after: ``,
     link: '',
@@ -2035,6 +2166,60 @@ This rapid growth is why the calculator uses scientific notation for large resul
 **Gamma Function** extends factorials to non-integer values. While regular factorials only work for whole numbers, the gamma function $\\Gamma(n) = (n-1)!$ works for any number. This appears in advanced calculus and statistics.
 
 For deeper learning, explore permutations and combinations, probability theory, binomial theorem, and how factorials appear in mathematical series and approximations.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj13: {
+    title: `Double Factorials`,
+    content: `The double factorial $n!!$ multiplies $n$ by every second number below it, down to $2$ or $1$: $8!! = 8 \\times 6 \\times 4 \\times 2 = 384$ and $7!! = 7 \\times 5 \\times 3 \\times 1 = 105$. An even $n$ collects the even numbers, an odd $n$ the odd ones. By convention $0!! = 1$ and $(-1)!! = 1$.
+
+The two kinds fit together: $n! = n!! \\times (n-1)!!$, so $8! = 8!! \\times 7!! = 384 \\times 105 = 40320$. For an even number there is a closed form, $(2k)!! = 2^k \\times k!$: $8!! = 2^4 \\times 4! = 16 \\times 24 = 384$. For an odd number, $(2k+1)!! = \\frac{(2k+1)!}{2^k \\times k!}$: $7!! = \\frac{5040}{16 \\times 3} = 105$.
+
+Double factorials count the ways to pair up $2k$ objects, $(2k-1)!!$, and appear in the integrals of powers of sine and cosine. The common mistake is to read $n!!$ as $(n!)!$: $3!!$ is $3 \\times 1 = 3$, while $(3!)! = 6! = 720$.
+
+The notation is listed in [permutation notation](!/combinatorics/permutations#notation).`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj14: {
+    title: `Subfactorials and Derangements`,
+    content: `The subfactorial $!n$ counts the derangements of $n$ objects: the arrangements in which no object stays in its own place. For three letters $A, B, C$ there are $3! = 6$ arrangements, and only $(B, C, A)$ and $(C, A, B)$ move every letter, so $!3 = 2$.
+
+The formula comes from inclusion and exclusion: $!n = n! \\left(1 - \\frac{1}{1!} + \\frac{1}{2!} - \\frac{1}{3!} + \\dots \\pm \\frac{1}{n!}\\right)$. For $n = 4$: $24 \\left(1 - 1 + \\frac{1}{2} - \\frac{1}{6} + \\frac{1}{24}\\right) = 24 \\times \\frac{9}{24} = 9$. A quicker recurrence is $!n = (n-1)\\left(!(n-1) + !(n-2)\\right)$: $!5 = 4 \\times (9 + 2) = 44$. The first values are $!1 = 0$, $!2 = 1$, $!3 = 2$, $!4 = 9$, $!5 = 44$, $!6 = 265$.
+
+The bracket converges to $1/e$, so $!n$ is the integer nearest to $n!/e$: $24 / 2.71828 \\approx 8.83$, which rounds to $9$. That is the hat-check result: when $n$ people take hats at random, the chance that nobody gets their own is about $1/e \\approx 0.3679$, whatever $n$ is. The common mistake is to expect $!n$ to be a fixed fraction of $n!$ that shrinks; it settles near $0.37$.
+
+See [derangement](!/combinatorics/permutations#8) and [application: counting derangements](!/combinatorics/inclusion-exclusion#5).`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj15: {
+    title: `Multifactorials`,
+    content: `The multifactorial $n(k)!$, also written $n!^{(k)}$ or with $k$ exclamation marks, multiplies $n$ by every $k$-th number below it while the factor stays positive: $10(3)! = 10 \\times 7 \\times 4 \\times 1 = 280$, $12(4)! = 12 \\times 8 \\times 4 = 384$, $9(3)! = 9 \\times 6 \\times 3 = 162$.
+
+The product stops at the last factor above $0$: from $9$ in steps of $3$ the next factor would be $0$, so the product ends at $3$; from $10$ it ends at $1$. The ordinary factorial is the case $k = 1$ and the double factorial the case $k = 2$: $5(1)! = 120$ and $8(2)! = 8!! = 384$.
+
+Multifactorials appear when a product skips a fixed number of terms, for example in the coefficients of certain series and in counting problems that pair, triple or group objects in a cycle. The common mistake is to include $0$ or a negative factor and get $0$; the product never goes below $1$. The step $k$ must be a positive whole number; the calculator refuses other values with **Error: Invalid k value**.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj16: {
+    title: `Primorials`,
+    content: `The primorial $n\\#$ is the product of all prime numbers up to $n$: $10\\# = 2 \\times 3 \\times 5 \\times 7 = 210$, $13\\# = 2 \\times 3 \\times 5 \\times 7 \\times 11 \\times 13 = 30030$. Composite numbers are skipped, so the primorial changes only when $n$ reaches a new prime: $7\\#$, $8\\#$, $9\\#$ and $10\\#$ are all $210$.
+
+Primorials grow much more slowly than factorials, $10! = 3628800$ against $10\\# = 210$, because only the primes contribute. They are the smallest numbers divisible by every prime up to $n$, which makes them useful as moduli in sieves and in Euclid's argument that the primes never end: $n\\# + 1$ is divisible by no prime up to $n$, so a larger prime must exist.
+
+The common mistake is to multiply every number up to $n$, which is $n!$, or to leave out $2$ because it is even; $2$ is prime and always the first factor. The calculator tests each number for primality before multiplying, so the result is exact up to $1000\\#$ and shown as a power of $e$ beyond that.
+
+Primes and their products are introduced in [prime numbers](!/arithmetic/divisibility#7) and [prime factorization](!/arithmetic/divisibility#8).`,
     before: ``,
     after: ``,
     link: '',
@@ -2153,6 +2338,7 @@ return {
     navigationGroup,
     factorialActualExplanations,
     detailInstructions,
+    demos,
     sectionsContent,
     faqQuestions,
     schemas
@@ -2160,14 +2346,120 @@ return {
 }
 }
 
-export default function FactorialCalculatorPage({ seoData, keyWords, navigationGroup, factorialActualExplanations, detailInstructions, sectionsContent, faqQuestions, schemas}) {
+export default function FactorialCalculatorPage({ seoData, keyWords, navigationGroup, factorialActualExplanations, detailInstructions, demos, sectionsContent, faqQuestions, schemas}) {
 
-const genericSections = Object.keys(sectionsContent).map((key, index) => ({
-  id: `${index + 1}`,
-  title: sectionsContent[key].title,
-  link: sectionsContent[key].link,
-  content: [sectionsContent[key].content]
-}));
+const demoPlayer = (key) => (
+  <ToolDemoPlayer
+    key={`demo-${key}`}
+    script={demos[key].script}
+    title={demos[key].title}
+    label={`Demo: ${demos[key].title}`}
+    scale={0.6}
+    minHeight={327}
+    renderText={processContent}
+  >
+    <FactorialCalculator explanations={factorialActualExplanations} />
+  </ToolDemoPlayer>
+);
+
+const genericSections = [
+  {
+    id: 'getting-started-with-the-calculator',
+    title: sectionsContent.obj1.title,
+    link: sectionsContent.obj1.link,
+    content: [demoPlayer('getting-started-with-the-calculator'), sectionsContent.obj1.content],
+  },
+  {
+    id: 'using-basic-factorial',
+    title: sectionsContent.obj2.title,
+    link: sectionsContent.obj2.link,
+    content: [demoPlayer('using-basic-factorial'), sectionsContent.obj2.content],
+  },
+  {
+    id: 'calculating-double-factorials',
+    title: sectionsContent.obj3.title,
+    link: sectionsContent.obj3.link,
+    content: [demoPlayer('calculating-double-factorials'), sectionsContent.obj3.content],
+  },
+  {
+    id: 'working-with-subfactorials',
+    title: sectionsContent.obj4.title,
+    link: sectionsContent.obj4.link,
+    content: [demoPlayer('working-with-subfactorials'), sectionsContent.obj4.content],
+  },
+  {
+    id: 'understanding-multifactorial',
+    title: sectionsContent.obj5.title,
+    link: sectionsContent.obj5.link,
+    content: [demoPlayer('understanding-multifactorial'), sectionsContent.obj5.content],
+  },
+  {
+    id: 'computing-primorials',
+    title: sectionsContent.obj6.title,
+    link: sectionsContent.obj6.link,
+    content: [demoPlayer('computing-primorials'), sectionsContent.obj6.content],
+  },
+  {
+    id: 'what-are-factorials',
+    title: sectionsContent.obj7.title,
+    link: sectionsContent.obj7.link,
+    content: [sectionsContent.obj7.content],
+  },
+  {
+    id: 'double-factorials',
+    title: sectionsContent.obj13.title,
+    link: sectionsContent.obj13.link,
+    content: [sectionsContent.obj13.content],
+  },
+  {
+    id: 'subfactorials-and-derangements',
+    title: sectionsContent.obj14.title,
+    link: sectionsContent.obj14.link,
+    content: [sectionsContent.obj14.content],
+  },
+  {
+    id: 'multifactorials',
+    title: sectionsContent.obj15.title,
+    link: sectionsContent.obj15.link,
+    content: [sectionsContent.obj15.content],
+  },
+  {
+    id: 'primorials',
+    title: sectionsContent.obj16.title,
+    link: sectionsContent.obj16.link,
+    content: [sectionsContent.obj16.content],
+  },
+  {
+    id: 'how-factorials-grow',
+    title: sectionsContent.obj8.title,
+    link: sectionsContent.obj8.link,
+    content: [sectionsContent.obj8.content],
+  },
+  {
+    id: 'simple-factorial-patterns',
+    title: sectionsContent.obj9.title,
+    link: sectionsContent.obj9.link,
+    content: [sectionsContent.obj9.content],
+  },
+  {
+    id: 'practice-problems-to-try',
+    title: sectionsContent.obj10.title,
+    link: sectionsContent.obj10.link,
+    content: [sectionsContent.obj10.content],
+  },
+  {
+    id: 'where-factorials-are-used',
+    title: sectionsContent.obj11.title,
+    link: sectionsContent.obj11.link,
+    content: [sectionsContent.obj11.content],
+  },
+  {
+    id: 'related-calculators-and-concepts',
+    title: sectionsContent.obj12.title,
+    link: sectionsContent.obj12.link,
+    content: [sectionsContent.obj12.content],
+  },
+];
 
 return (
   <>

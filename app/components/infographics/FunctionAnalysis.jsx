@@ -140,6 +140,13 @@
 */
 
 import React from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
+
+/* HTML text fields go through the site's processContent when they are strings
+   ($math$, **bold**, [label](!/path)); ReactNodes pass through untouched.
+   Not applied inside the SVG (strip labels, signs, tick text): processContent
+   returns HTML elements, which cannot live inside an SVG <text>. */
+const rc = (v) => (typeof v === 'string' ? processContent(v) : v);
 
 /* ------------------------------------------------------------------ */
 /*  theme                                                              */
@@ -541,16 +548,16 @@ function Head({ header, quickStats }) {
   return (
     <div className="fa-head">
       <div>
-        {header.kicker && <div className="fa-kicker">{header.kicker}</div>}
-        <h2>{header.title}</h2>
-        {header.formula && <div className="fa-formula">{header.formula}</div>}
+        {header.kicker && <div className="fa-kicker">{rc(header.kicker)}</div>}
+        <h2>{rc(header.title)}</h2>
+        {header.formula && <div className="fa-formula">{rc(header.formula)}</div>}
       </div>
       {quickStats && quickStats.length > 0 && (
         <div className="fa-stats">
           {quickStats.map((s, i) => (
             <div className="fa-stat" key={i}>
-              <div className="fa-n">{s.n}</div>
-              <div className="fa-l">{s.label}</div>
+              <div className="fa-n">{rc(s.n)}</div>
+              <div className="fa-l">{rc(s.label)}</div>
             </div>
           ))}
         </div>
@@ -564,11 +571,11 @@ function SectionHead({ meta, fallback }) {
   return (
     <div className="fa-section-head">
       {(m.number || fallback.number) && (
-        <span className="fa-sn">{m.number || fallback.number}</span>
+        <span className="fa-sn">{rc(m.number || fallback.number)}</span>
       )}
-      <span className="fa-sname">{m.name || fallback.name}</span>
+      <span className="fa-sname">{rc(m.name || fallback.name)}</span>
       {(m.hint || fallback.hint) && (
-        <span className="fa-shint">{m.hint || fallback.hint}</span>
+        <span className="fa-shint">{rc(m.hint || fallback.hint)}</span>
       )}
     </div>
   );
@@ -831,9 +838,9 @@ function Properties({ groups, features, numbers }) {
       {groups.map((g, gi) => (
         <div className="fa-pgroup" key={gi}>
           <div className="fa-ghead">
-            {g.letter && <span className="fa-gn">{g.letter}</span>}
-            <span className="fa-gname">{g.name}</span>
-            {g.note && <span className="fa-gnote">{g.note}</span>}
+            {g.letter && <span className="fa-gn">{rc(g.letter)}</span>}
+            <span className="fa-gname">{rc(g.name)}</span>
+            {g.note && <span className="fa-gnote">{rc(g.note)}</span>}
           </div>
           <div className="fa-prows">
             {g.rows.map((r, ri) => {
@@ -847,10 +854,10 @@ function Properties({ groups, features, numbers }) {
                   ) : (
                     <div className="fa-b fa-empty"></div>
                   )}
-                  <div className="fa-k">{r.label}</div>
+                  <div className="fa-k">{rc(r.label)}</div>
                   <div className={'fa-v' + tone}>
-                    {r.value}
-                    {r.sub && <span className="fa-vsub">{r.sub}</span>}
+                    {rc(r.value)}
+                    {r.sub && <span className="fa-vsub">{rc(r.sub)}</span>}
                   </div>
                 </div>
               );

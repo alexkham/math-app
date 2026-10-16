@@ -246,6 +246,7 @@
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import defaultExplanations from './logarithmCalculatorExplanations';
+import { processContent } from '@/app/utils/contentProcessor';
 
 /* =====================================================================
    Utilities (module scope)
@@ -1459,6 +1460,11 @@ export default function LogarithmCalculator({ explanations: explanationsProp } =
     return { a: sideA, b: sideB };
   }, [aBase, aArg, bBase, bArg]);
 
+  /* Page-supplied note for the current state: explanations.states["<mode>:<sub>"] or explanations.states["<mode>"]
+     (set only by pages that pass such texts; null otherwise, so nothing changes for other users of the component) */
+  const stateKey = mode === 'calc' ? `calc:${btype}` : mode === 'laws' ? `laws:${currentLaw}` : 'compare';
+  const stateNote = (explanations.states && (explanations.states[stateKey] || explanations.states[mode])) || null;
+
   const compareVerdict = useMemo(() => {
     const { a, b } = compareSides;
     if (!isFinite(a.val) || !isFinite(b.val)) {
@@ -1922,6 +1928,14 @@ export default function LogarithmCalculator({ explanations: explanationsProp } =
           <div className="right-col">
             <section className="card">
               <div className="card-header">How this works</div>
+              {stateNote && (
+                <div className="card-body lc-state-note" style={{ paddingBottom: 0 }}>
+                  <div className="explain-block">
+                    <h3 className="explain-title">{stateNote.title}</h3>
+                    <div className="explain-text">{processContent(stateNote.content)}</div>
+                  </div>
+                </div>
+              )}
               <div
                 className="card-body"
                 dangerouslySetInnerHTML={{ __html: explainHTML }}

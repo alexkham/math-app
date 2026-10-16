@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-const DirectExpectedValueCalculator = () => {
+const DirectExpectedValueCalculator = ({ explanations = null }) => {
   const [outcomes, setOutcomes] = useState([
     { value: 100, probability: 0.25 },
     { value: 50, probability: 0.5 },
@@ -300,6 +301,13 @@ const DirectExpectedValueCalculator = () => {
       </div>
 
       <div style={styles.explanation}>
+        {explanations && explanations.main ? (
+          <>
+            <h3 style={styles.h3}>{explanations.main.title}</h3>
+            <div style={styles.p}>{typeof explanations.main.content === 'string' ? processContent(explanations.main.content) : explanations.main.content}</div>
+          </>
+        ) : (
+          <>
         <h3 style={styles.h3}>Understanding Expected Value</h3>
         
         <div style={styles.explainGrid}>
@@ -343,6 +351,8 @@ const DirectExpectedValueCalculator = () => {
             </ul>
           </div>
         </div>
+          </>
+        )}
       </div>
     </div>
   );

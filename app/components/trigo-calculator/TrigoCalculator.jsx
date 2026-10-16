@@ -561,7 +561,8 @@
 
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 import { capitalizeWords ,range} from '@/app/utils/utils-functions';
 import './TrigoCalculator.css';
 import Link from 'next/link';
@@ -744,7 +745,7 @@ const TrigoCalculator = ({explanations}) => {
               {explanations && explanations[selectedFunction] ? (
                 <div className="explanation-content">
                   <h3>{selectedFunction.toUpperCase()}</h3>
-                  <p>{explanations[selectedFunction].description}</p>
+                  <div>{typeof explanations[selectedFunction].description === 'string' ? processContent(explanations[selectedFunction].description) : explanations[selectedFunction].description}</div>
                   {explanations[selectedFunction].link && (
                     <a href={explanations[selectedFunction].link} target="_blank" rel="noopener noreferrer">
                       Learn more

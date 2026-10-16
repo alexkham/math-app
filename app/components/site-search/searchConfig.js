@@ -128,7 +128,7 @@ export const UI_TEXT = {
   askWelcomeText: 'Answers are built from Learn Math Class pages and link to where each idea is explained.',
   askPlaceholder: 'Ask a math question…',
   askPlaceholderFollowUp: 'Ask a follow-up…',
-  askDisclaimer: 'AI answers can contain mistakes. Check important results on the linked pages.',
+  askDisclaimer: 'AI answers can contain mistakes. Check important results on the linked pages. Course suggestions are affiliate links.',
   askUsingPage: 'Using this page:',
   askUsePage: 'Use this page',
   askUsePageTitle: 'Answers use this page first',

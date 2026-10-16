@@ -994,6 +994,8 @@ import functionSymmetryDiagrams from '@/app/components/functions/symmetry/functi
 import functionAsymptotesDiagrams from '@/app/components/functions/asymptotes/functionAsymptotesDiagrams'
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
+import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
 
 export async function getStaticProps(){
@@ -1715,9 +1717,78 @@ const faqQuestions = {
     }),
   };
 
+  /* the profile of f(x) = x^3 - 3x, the cubic the extrema example below uses;
+     sampled here because getStaticProps props must be plain data (no functions) */
+  const cubicSamples = Array.from({ length: 261 }, (_, i) => {
+    const x = -2.6 + i * 0.02;
+    return [Number(x.toFixed(2)), Number((x * x * x - 3 * x).toFixed(4))];
+  });
+  const cubicProfile = {
+    header: {
+      kicker: 'one function, every feature',
+      title: 'The profile of $f(x) = x^3 - 3x$',
+      formula: '$f(x) = x^3 - 3x = x(x^2 - 3)$',
+    },
+    quickStats: [
+      { n: '3', label: 'x-intercepts' },
+      { n: '2', label: 'local extrema' },
+      { n: 'odd', label: 'symmetry' },
+    ],
+    graph: {
+      xRange: [-2.6, 2.6], yRange: [-4.8, 4.8],
+      points: cubicSamples,
+      xTicks: [-2, -1, 0, 1, 2], yTicks: [-4, -2, 0, 2, 4],
+    },
+    features: [
+      { id: 'xint', kind: 'accent', dropLine: true, points: [{ x: -1.732, y: 0, dx: -26, dy: 22 }, { x: 0, y: 0, dx: 10, dy: 22 }, { x: 1.732, y: 0, dx: 8, dy: 22 }] },
+      { id: 'max', kind: 'warm', dropLine: true, points: [{ x: -1, y: 2 }] },
+      { id: 'min', kind: 'warm', dropLine: true, points: [{ x: 1, y: -2, dx: 10, dy: 10 }] },
+    ],
+    intervals: [
+      { label: 'sign of f', spans: [
+        { from: null, to: -1.732, kind: 'neg', sign: '−' },
+        { from: -1.732, to: 0, kind: 'pos', sign: '+' },
+        { from: 0, to: 1.732, kind: 'neg', sign: '−' },
+        { from: 1.732, to: null, kind: 'pos', sign: '+' },
+      ] },
+      { label: 'direction', spans: [
+        { from: null, to: -1, kind: 'pos', text: 'increasing', arrow: 'right' },
+        { from: -1, to: 1, kind: 'neg', text: 'decreasing' },
+        { from: 1, to: null, kind: 'pos', text: 'increasing', arrow: 'right' },
+      ] },
+    ],
+    properties: [
+      { letter: 'A', name: 'Domain and range', rows: [
+        { label: 'Domain', value: '$(-\\infty, \\infty)$', sub: 'a polynomial accepts every real input' },
+        { label: 'Range', value: '$(-\\infty, \\infty)$', sub: 'the two arms run off without bound' },
+      ] },
+      { letter: 'B', name: 'Intercepts', rows: [
+        { featureId: 'xint', label: 'x-intercepts', value: '$x = -\\sqrt{3},\\; 0,\\; \\sqrt{3}$', sub: 'from $x(x^2 - 3) = 0$' },
+        { featureId: 'xint', label: 'y-intercept', value: '$(0, 0)$' },
+      ] },
+      { letter: 'C', name: 'Increase, decrease, extrema', rows: [
+        { featureId: 'max', label: 'Local maximum', value: '$(-1, 2)$', tone: 'warm' },
+        { featureId: 'min', label: 'Local minimum', value: '$(1, -2)$', tone: 'warm' },
+        { label: 'Increasing on', value: '$(-\\infty, -1)$ and $(1, \\infty)$' },
+        { label: 'Decreasing on', value: '$(-1, 1)$' },
+      ] },
+      { letter: 'D', name: 'Symmetry, periodicity, end behaviour', rows: [
+        { label: 'Symmetry', value: 'odd: $f(-x) = -f(x)$', sub: 'the graph lands on itself after a half turn about the origin' },
+        { label: 'Periodicity', value: 'none', tone: 'na' },
+        { label: 'End behaviour', value: '$f(x) \\to -\\infty$ as $x \\to -\\infty$; $f(x) \\to +\\infty$ as $x \\to +\\infty$' },
+        { label: 'Discontinuities', value: 'none', tone: 'na' },
+      ] },
+    ],
+    sections: {
+      plot: { name: 'The graph, with the sign of f and its direction along x' },
+      props: { name: 'The profile, feature by feature', hint: 'numbered rows match the badges on the graph' },
+    },
+  };
+
    return {
       props:{
     demoUnits,
+    cubicProfile,
          sectionsContent,
          introContent,
          obj4Table,
@@ -1739,8 +1810,14 @@ const faqQuestions = {
     }
    }
 
+const siteTheme = {
+  title: '#06357A', accent: '#2563EB', warm: '#B45309',
+  panelSoft: '#eff6ff', panelSofter: '#f8fafc', indigoSoft: '#dbeafe', warmSoft: '#fef3c7',
+}
+
 export default function AnalyzingFunctionsPage({
   seoData,
+  cubicProfile,
   sectionsContent,
   introContent,
   obj4Table,
@@ -1770,6 +1847,16 @@ export default function AnalyzingFunctionsPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          `Here is such a profile for one function, $f(x) = x^3 - 3x$, the cubic that the extrema example further down this page uses. Its domain and range are all real numbers. It crosses the x-axis at $-\\sqrt{3}$, $0$ and $\\sqrt{3}$, because $x^3 - 3x = x(x^2 - 3)$, and passes through the origin. It rises on $(-\\infty, -1)$, falls on $(-1, 1)$ and rises again on $(1, \\infty)$, so it has a local maximum at $(-1, 2)$ and a local minimum at $(1, -2)$. It is odd, has no period, no discontinuities, and runs off to $-\\infty$ on the left and $+\\infty$ on the right.`,
+          <DiagramFrame
+            key={'obj1-diagram'}
+            id="function-profile-cubic"
+            title="The profile of f(x) = x³ − 3x"
+            source="/functions/analyzing"
+          >
+            <FunctionAnalysis data={cubicProfile} variant="full" theme={siteTheme} />
+          </DiagramFrame>,
+          `Each row of the profile is one of the questions the sections below take up in turn. The numbered badges tie every fact to the spot on the graph where it shows, and the two strips under the graph make the sign of $f$ and its direction readable at a glance. That picture, all features together and none missing, is what a complete analysis produces.`,
         ]
     },
     {

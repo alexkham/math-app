@@ -73,6 +73,31 @@
     ]
   },
   {
+    "id": "conditional-probability-anatomy",
+    "title": "Conditional probability, part by part",
+    "source": "/probability/conditional-probability",
+    "section": "probability",
+    "width": 840,
+    "height": 1302,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "covariance-sign-cases",
+    "title": "What the sign of the covariance says",
+    "source": "/probability/covariance",
+    "section": "probability",
+    "width": 840,
+    "height": 715,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "cross-product-laws",
     "title": "Properties of the cross product",
     "source": "/linear-algebra/vectors/cross-product",
@@ -182,6 +207,18 @@
     ]
   },
   {
+    "id": "discontinuity-types",
+    "title": "Four discontinuities, two groups: repairable or not",
+    "source": "/calculus/limits/continuity",
+    "section": "calculus",
+    "width": 840,
+    "height": 533,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "dot-product-laws",
     "title": "Properties of the dot product",
     "source": "/linear-algebra/vectors/dot-product",
@@ -212,6 +249,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 1108,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "function-profile-cubic",
+    "title": "The profile of f(x) = x³ − 3x",
+    "source": "/functions/analyzing",
+    "section": "functions",
+    "width": 840,
+    "height": 1480,
     "formats": [
       "png",
       "pdf"
@@ -393,6 +442,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 1389,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "number-system-ladder",
+    "title": "Five number systems, each forced by a problem the last could not solve",
+    "source": "/complex-numbers/imaginary-numbers",
+    "section": "complex-numbers",
+    "width": 840,
+    "height": 1445,
     "formats": [
       "png",
       "pdf"

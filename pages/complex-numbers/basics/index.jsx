@@ -1369,7 +1369,7 @@ Certain equations showcase the interplay between conjugation and powers. The equ
   id: "intro",
   title: "The Evolution of Numbers: From Counting to Complexity",
   content: `
-  Mathematics began with natural numbers ($\\mathbb{N}$) for counting, but as we attempted to solve more equations, we had to "expand the bag". We added whole numbers ($\\mathbb{Z}$) for negatives, rational numbers ($\\mathbb{Q}$) for quotients, and real numbers ($\\mathbb{R}$) for values like $\\sqrt{2}$. However, the "R-bag" failed to solve the equation $x^2 + 1 = 0$, leading to the birth of the Complex Numbers ($\\mathbb{C}$).
+  Mathematics began with natural numbers ($\\mathbb{N}$) for counting, but as we attempted to solve more equations, we had to "expand the bag". We added whole numbers ($\\mathbb{Z}$) for negatives, rational numbers ($\\mathbb{Q}$) for quotients, and real numbers ($\\mathbb{R}$) for values like $\\sqrt{2}$. However, the "R-bag" failed to solve the equation $x^2 + 1 = 0$, leading to the birth of the Complex Numbers ($\\mathbb{C}$). The [imaginary numbers page](!/complex-numbers/imaginary-numbers#number-system-ladder) draws the whole chain, with the problem that forced each step.
   `
 }
 

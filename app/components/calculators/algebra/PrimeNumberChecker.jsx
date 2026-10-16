@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
 function PrimeNumberChecker({ explanations }) {
   const [number, setNumber] = useState('');
@@ -77,7 +78,7 @@ function PrimeNumberChecker({ explanations }) {
     setFactors([]);
   };
 
-  const processContent = (text) => text;
+  // page texts (explanations prop) are rendered with the site's processContent; the built-in defaults stay plain text
 
   const defaultExplanations = {
     check: {
@@ -422,7 +423,7 @@ function PrimeNumberChecker({ explanations }) {
               lineHeight: '1.6',
               marginBottom: '20px'
             }}>
-              {processContent(displayExplanations[mode].text)}
+              {explanations && typeof displayExplanations[mode].text === 'string' ? processContent(displayExplanations[mode].text) : displayExplanations[mode].text}
             </div>
             
             {displayExplanations[mode].links && (

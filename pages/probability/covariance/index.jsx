@@ -666,6 +666,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import CaseSplit from '@/app/components/infographics/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
 
 export async function getStaticProps(){
@@ -1149,9 +1151,44 @@ variable.
     }),
   };
 
+  const covarianceSignCases = {
+    parent: {
+      formula: '$\\operatorname{Cov}(X, Y) = E[(X - \\mu_X)(Y - \\mu_Y)]$',
+      desc: 'One number computed from paired observations. Its sign is read in three ways; its size on its own is not the message.',
+      splitBy: 'sign of $\\operatorname{Cov}(X, Y)$',
+    },
+    cases: [
+      {
+        id: 'positive', number: '01', condition: '$\\operatorname{Cov} > 0$', color: 'a',
+        headline: 'Deviations move the same way',
+        desc: 'higher-than-average $X$ tends to come with higher-than-average $Y$, and lower with lower',
+        count: { n: '+', label: 'the mean product of deviations is positive' },
+        formula: 'products $(X - \\mu_X)(Y - \\mu_Y)$ are mostly $> 0$',
+        example: 'height and weight across people',
+      },
+      {
+        id: 'negative', number: '02', condition: '$\\operatorname{Cov} < 0$', color: 'b',
+        headline: 'Deviations move opposite ways',
+        desc: 'higher-than-average $X$ tends to come with lower-than-average $Y$',
+        count: { n: '−', label: 'the mean product of deviations is negative' },
+        formula: 'products $(X - \\mu_X)(Y - \\mu_Y)$ are mostly $< 0$',
+        example: 'outdoor temperature and heating use',
+      },
+      {
+        id: 'zero', number: '03', condition: '$\\operatorname{Cov} = 0$', color: 'c',
+        headline: 'No consistent linear relationship',
+        desc: 'the deviations show no steady direction; this does **not** mean the variables are independent',
+        count: { n: '0', label: 'the mean product of deviations is zero' },
+        formula: 'the products cancel out',
+        example: '$Y = X^2$ with $X$ symmetric about $0$: $Y$ is fixed by $X$, yet the covariance is $0$',
+      },
+    ],
+  };
+
   return {
     props: {
       sectionsContent,
+      covarianceSignCases,
       introContent,
       summaryTable,
       faqQuestions,
@@ -1168,7 +1205,12 @@ variable.
   }
 }
 
-export default function CovariancePage({seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas, demoUnits}) {
+const siteTheme = {
+  title: '#06357A', accent: '#2563EB', warm: '#B45309',
+  panelSoft: '#eff6ff', panelSofter: '#f8fafc',
+}
+
+export default function CovariancePage({seoData, sectionsContent, introContent, covarianceSignCases, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1206,6 +1248,16 @@ export default function CovariancePage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          `The sign is the whole message: as the section says, covariance reports direction, not strength. Two of the pairs listed later on this page show the first two signs. Height and weight across people deviate the same way, so their covariance is positive; outdoor temperature and heating use deviate opposite ways, so theirs is negative.`,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="covariance-sign-cases"
+            title="What the sign of the covariance says"
+            source="/probability/covariance"
+          >
+            <CaseSplit data={covarianceSignCases} variant="parallel" theme={siteTheme} />
+          </DiagramFrame>,
+          `The third card is the one to read twice. A covariance of zero rules out a consistent linear tendency and nothing more; the next section shows that two variables can depend on each other completely and still have covariance exactly zero.`,
         ]
     },
     {

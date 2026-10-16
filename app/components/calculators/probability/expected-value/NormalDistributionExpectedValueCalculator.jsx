@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-const NormalExpectedValueCalculator = () => {
+const NormalExpectedValueCalculator = ({ explanations = null }) => {
   const [dataInput, setDataInput] = useState('98, 102, 105, 97, 100, 103, 99, 101, 104, 98');
   const [activeTab, setActiveTab] = useState('visualization');
   const [showAdditionalStats, setShowAdditionalStats] = useState(false);
@@ -457,6 +458,13 @@ const NormalExpectedValueCalculator = () => {
       </div>
 
       <div style={styles.explanation}>
+        {explanations && explanations.main ? (
+          <>
+            <h3 style={styles.h3}>{explanations.main.title}</h3>
+            <div style={styles.p}>{typeof explanations.main.content === 'string' ? processContent(explanations.main.content) : explanations.main.content}</div>
+          </>
+        ) : (
+          <>
         <h3 style={styles.h3}>Understanding Expected Value Estimation for Normal Distribution</h3>
         
         <div style={styles.explainGrid}>
@@ -501,6 +509,8 @@ const NormalExpectedValueCalculator = () => {
             </p>
           </div>
         </div>
+          </>
+        )}
       </div>
     </div>
   );

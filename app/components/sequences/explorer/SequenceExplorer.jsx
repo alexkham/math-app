@@ -512,7 +512,7 @@ const SE_STYLES = `
   }
 `;
 
-function SequenceExplorer({ name = 'triangular' }) {
+function SequenceExplorer({ name = 'triangular', explanations = null }) {
   // Hammer hydration fix: render a layout-reserving placeholder on the server
   // and during initial client hydration. Switch to the real UI only after the
   // first client-only effect fires. Server HTML == initial client HTML, so
@@ -842,8 +842,8 @@ function SequenceExplorer({ name = 'triangular' }) {
           {modeExp && (
             <>
               <section className="se-aside-section">
-                <h3 className="se-aside-heading">How it works</h3>
-                <div className="se-aside-content">{processContent(modeExp.theory)}</div>
+                <h3 className="se-aside-heading">{explanations && explanations[activeTab] ? explanations[activeTab].title : 'How it works'}</h3>
+                <div className="se-aside-content">{explanations && explanations[activeTab] && typeof explanations[activeTab].content === 'string' ? processContent(explanations[activeTab].content) : processContent(modeExp.theory)}</div>
               </section>
               <section className="se-aside-section">
                 <h3 className="se-aside-heading">Walkthrough</h3>

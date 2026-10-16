@@ -620,6 +620,8 @@ import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/ou
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
 import partitionVennDiagrams from '@/app/components/probability/conditional-probability-demo/partitionVennDiagrams'
 import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
+import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
 
 export async function getStaticProps(){
@@ -1208,9 +1210,40 @@ The rest of the page explains how this change of viewpoint works, how it is expr
     }),
   };
 
+  const conditionalFormulaAnatomy = {
+    header: {
+      kicker: 'the formula, part by part',
+      title: 'Conditional probability',
+      lede: 'one rule: keep the part of A that lies inside B, then rescale by the size of B',
+    },
+    formula: [
+      { kind: 'part', id: 'left', children: [
+        { kind: 'op', text: 'P(' }, { kind: 'var', text: 'A' }, { kind: 'op', text: ' | ' }, { kind: 'var', text: 'B' }, { kind: 'op', text: ')' },
+      ] },
+      { kind: 'op', text: ' = ' },
+      { kind: 'frac',
+        num: [ { kind: 'part', id: 'num', children: [
+          { kind: 'op', text: 'P(' }, { kind: 'var', text: 'A' }, { kind: 'op', text: ' ∩ ' }, { kind: 'var', text: 'B' }, { kind: 'op', text: ')' },
+        ] } ],
+        den: [ { kind: 'part', id: 'den', children: [
+          { kind: 'op', text: 'P(' }, { kind: 'var', text: 'B' }, { kind: 'op', text: ')' },
+        ] } ],
+      },
+    ],
+    parts: [
+      { id: 'left', color: '#06357A', chip: 'what is asked', title: 'Probability of A given B', side: 'top',
+        desc: 'The chance of $A$ once $B$ is known to have occurred. The bar reads "given": everything to its right is the restricted world we now live in.' },
+      { id: 'num', color: '#2563EB', chip: 'numerator', title: 'The part of A inside B', side: 'top',
+        desc: 'Only the outcomes where both $A$ and $B$ happen count. The rest of $A$ lies outside the condition and is dropped.' },
+      { id: 'den', color: '#B45309', chip: 'denominator', title: 'Rescale to the world of B', side: 'bottom',
+        desc: 'Dividing by $P(B)$ makes the probabilities inside $B$ add up to one again. It is a rescaling, not a new law of probability.' },
+    ],
+  };
+
   return {
     props: {
     demoUnits,
+    conditionalFormulaAnatomy,
       sectionsContent,
       introContent,
       examplesTable,
@@ -1230,8 +1263,13 @@ The rest of the page explains how this change of viewpoint works, how it is expr
   }
 }
 
+const siteTheme = {
+  title: '#06357A', accent: '#2563EB', panelSoft: '#eff6ff', panelSofter: '#f8fafc',
+}
+
 export default function ConditionalProbabilityPage({
   seoData,
+  conditionalFormulaAnatomy,
   sectionsContent,
   introContent,
   examplesTable,
@@ -1299,6 +1337,16 @@ export default function ConditionalProbabilityPage({
         link:'',
         content:[
             sectionsContent.formula.content,
+          `The formula has three parts, and the lines above have named each of them: the conditional probability on the left, the joint probability $P(A \\cap B)$ in the numerator, and the probability of the condition, $P(B)$, in the denominator. Here they are taken apart and labelled.`,
+          <DiagramFrame
+            key={'formula-diagram'}
+            id="conditional-probability-anatomy"
+            title="Conditional probability, part by part"
+            source="/probability/conditional-probability"
+          >
+            <FormulaAnatomy data={conditionalFormulaAnatomy} variant="poster" theme={siteTheme} />
+          </DiagramFrame>,
+          `The part most often misread is the bar. $P(A \\mid B)$ and $P(B \\mid A)$ share the same numerator but divide by different events, so they are different numbers; [Bayes' theorem](!/probability/bayes-theorem) is the rule for converting one into the other.`,
         ]
     },
     {

@@ -5,11 +5,14 @@ import { TOKENS, KIND_META, UI_TEXT, ASSIST } from './searchConfig';
 import { SparkIcon, SearchIcon, KindIcon, CopyIcon, ThumbUpIcon, ThumbDownIcon } from './searchIcons';
 import { renderAnswer } from './assistantMarkdown';
 import { textButtonStyle, textButtonHover } from './AssistantHeader';
+import AffiliateBlock from '@/app/components/affiliates/AffiliateBlock';
 
 /**
  * AssistantMessage: one assistant reply in the Ask AI thread.
  *
- *   <AssistantMessage message question isMobile onRetry onSearchInstead onVote onShowAll />
+ *   <AssistantMessage message question isMobile onRetry onSearchInstead onVote onShowAll
+ *                     course courseHeadline onCourseDismiss onCourseClick />
+ *   course: a COURSES entry (with key, topic) to show as a card under the sources, or null.
  *
  * By message.status:
  *   waiting / reading   progress row ("Looking for related pages" / "Reading n pages from Learn Math Class")
@@ -206,7 +209,7 @@ function Actions({ message, onVote }) {
   );
 }
 
-export default function AssistantMessage({ message, question = '', isMobile = false, onRetry, onSearchInstead, onVote, onShowAll }) {
+export default function AssistantMessage({ message, question = '', isMobile = false, onRetry, onSearchInstead, onVote, onShowAll, course = null, courseHeadline = '', onCourseDismiss, onCourseClick }) {
   const { status } = message;
   const sources = Array.isArray(message.sources) ? message.sources : [];
   const retry = () => onRetry(message.id);
@@ -256,6 +259,17 @@ export default function AssistantMessage({ message, question = '', isMobile = fa
         )}
         {!streaming && sources.length > 0 && (
           <Sources sources={sources} showAll={message.showAllSources} onShowAll={() => onShowAll(message.id)} isMobile={isMobile} />
+        )}
+        {!streaming && course && (
+          <AffiliateBlock
+            variant="chat"
+            {...course}
+            headline={courseHeadline || undefined}
+            cta="See the course"
+            subId="askai"
+            onDismiss={onCourseDismiss}
+            onClick={onCourseClick}
+          />
         )}
         {!streaming && <Actions message={message} onVote={(value) => onVote(message.id, value)} />}
       </>

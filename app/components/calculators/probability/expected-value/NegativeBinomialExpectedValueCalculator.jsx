@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
 // Binomial coefficient: C(n, k)
 const binomialCoefficient = (n, k) => {
@@ -17,7 +18,7 @@ const negativeBinomialPMF = (k, r, p) => {
   return binomialCoefficient(k + r - 1, k) * Math.pow(p, r) * Math.pow(1 - p, k);
 };
 
-const NegativeBinomialExpectedValueCalculator = () => {
+const NegativeBinomialExpectedValueCalculator = ({ explanations = null }) => {
   const [r, setR] = useState(3);
   const [p, setP] = useState(0.3);
   const [activeTab, setActiveTab] = useState('visualization');
@@ -570,6 +571,13 @@ const NegativeBinomialExpectedValueCalculator = () => {
       </div>
 
       <div style={styles.explanation}>
+        {explanations && explanations.main ? (
+          <>
+            <h3 style={styles.h3}>{explanations.main.title}</h3>
+            <div style={styles.p}>{typeof explanations.main.content === 'string' ? processContent(explanations.main.content) : explanations.main.content}</div>
+          </>
+        ) : (
+          <>
         <h3 style={styles.h3}>Understanding Expected Value for Negative Binomial Distribution</h3>
         
         <div style={styles.explainGrid}>
@@ -611,6 +619,8 @@ const NegativeBinomialExpectedValueCalculator = () => {
             </p>
           </div>
         </div>
+          </>
+        )}
       </div>
     </div>
   );

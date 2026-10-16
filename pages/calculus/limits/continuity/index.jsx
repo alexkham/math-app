@@ -15,6 +15,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 
 
 export async function getStaticProps(){
@@ -891,9 +893,36 @@ const schemas = {
     }),
   };
 
+  const discontinuityTypes = {
+    legend: [
+      { label: 'the limit exists: one value repairs it', tone: 'accent' },
+      { label: 'the limit does not exist: nothing repairs it', tone: 'warm' },
+    ],
+    nodes: [
+      {
+        name: 'Removable',
+        def: 'the limit exists; the fault is a single value, so redefining $f(a)$ makes the function continuous',
+        children: [
+          { name: '[Hole](!/calculus/limits/continuity#5)', def: '$f(a)$ is undefined', example: '$(x^2 - 1)/(x - 1)$ at $x = 1$: limit $2$, no value' },
+          { name: 'Misplaced value', def: '$f(a)$ exists but differs from the limit', example: 'the point sits off the curve' },
+        ],
+      },
+      {
+        name: 'Non-removable',
+        def: 'the limit does not exist; no single value of $f(a)$ can fix it',
+        children: [
+          { name: '[Jump](!/calculus/limits/continuity#6)', def: 'both one-sided limits exist but differ', example: '$\\lfloor x \\rfloor$ at $x = 2$: $1$ from the left, $2$ from the right', flag: true },
+          { name: '[Infinite](!/calculus/limits/continuity#7)', def: 'at least one one-sided limit is $\\pm\\infty$', example: '$1/x$ at $x = 0$', flag: true },
+          { name: '[Oscillating](!/calculus/limits/continuity#8)', def: 'the limit fails to exist because the function oscillates without settling', example: '$\\sin(1/x)$ at $x = 0$', flag: true },
+        ],
+      },
+    ],
+  };
+
 return {
   props: {
     demoUnits,
+    discontinuityTypes,
     sectionsContent,
     introContent,
     obj8Table,
@@ -912,7 +941,14 @@ return {
 }
    }
 
-export default function ContinuityPage({seoData, sectionsContent, introContent, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+const siteTheme = {
+  title: '#06357A', titleSoft: '#bfdbfe', titleLine: '#2563EB',
+  accent: '#2563EB', indigoSoft: '#dbeafe', line2: '#bfdbfe',
+  panelSoft: '#eff6ff', panelSofter: '#f8fafc',
+  warm: '#B45309', warmSoft: '#fef3c7', warmLine: '#fcd34d', warmInk: '#92400e',
+}
+
+export default function ContinuityPage({seoData, sectionsContent, introContent, discontinuityTypes, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -968,6 +1004,16 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `The four types sort into two groups by one question: does the limit at the point exist? If it does, the fault is confined to a single value and can be repaired by redefining $f(a)$. If it does not, no choice of $f(a)$ can help, and the three ways the limit can fail give the three remaining types.`,
+          <DiagramFrame
+            key={'obj4-diagram'}
+            id="discontinuity-types"
+            title="Four discontinuities, two groups: repairable or not"
+            source="/calculus/limits/continuity"
+          >
+            <TaxonomyOutline data={discontinuityTypes} variant="outline" exportable={false} theme={siteTheme} />
+          </DiagramFrame>,
+          `The group is settled before $f(a)$ is even looked at: compute the two one-sided limits. If they agree and are finite, the discontinuity is removable and only $f(a)$ needs checking. If they disagree, it is a jump; if one of them is infinite, it is infinite; if neither settles on a value, it is oscillating. Each type is taken up in its own section below.`,
         ]
     },
     {

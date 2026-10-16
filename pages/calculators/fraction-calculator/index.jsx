@@ -762,6 +762,10 @@ import { processContent } from '@/app/utils/contentProcessor';
 import '../../pages.css';
 import VerticalButtonGroup from '@/app/components/vertical-buttons/VerticalButtonGroup';
 
+/* calculators-mesh: finished 2026-10-12 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+   Registry entry "C:/Program Files/Git/calculators/fraction-calculator" in calculators-mesh-registry.json (same folder): 6 usage sections, each with a demo; 14 panel notes; 23 sections with fixed slug ids.
+   Before editing this page, read the instructions and re-run its checks; keep the section ids and the anchors. */
+
 export async function getStaticProps() {
 
 const navigationGroup = [

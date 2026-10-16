@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
 function LCMCalculator({ explanations }) {
   const [numbers, setNumbers] = useState(['', '']);
@@ -63,7 +64,7 @@ function LCMCalculator({ explanations }) {
     setResult('');
   };
 
-  const processContent = (text) => text;
+  // page texts (explanations prop) are rendered with the site's processContent; the built-in defaults stay plain text
 
   const defaultExplanations = {
     prime: {
@@ -435,7 +436,7 @@ function LCMCalculator({ explanations }) {
               lineHeight: '1.6',
               marginBottom: '20px'
             }}>
-              {processContent(displayExplanations[method].text)}
+              {explanations && typeof displayExplanations[method].text === 'string' ? processContent(displayExplanations[method].text) : displayExplanations[method].text}
             </div>
             
             {displayExplanations[method].links && (

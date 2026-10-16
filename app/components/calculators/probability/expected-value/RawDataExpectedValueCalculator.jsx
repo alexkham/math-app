@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-const RawDataExpectedValueCalculator = () => {
+const RawDataExpectedValueCalculator = ({ explanations = null }) => {
   const [rawInput, setRawInput] = useState('5, 7, 5, 9, 5, 8, 7, 5, 6');
   const [activeTab, setActiveTab] = useState('distribution');
 
@@ -341,6 +342,13 @@ const RawDataExpectedValueCalculator = () => {
       </div>
 
       <div style={styles.explanation}>
+        {explanations && explanations.main ? (
+          <>
+            <h3 style={styles.h3}>{explanations.main.title}</h3>
+            <div style={styles.p}>{typeof explanations.main.content === 'string' ? processContent(explanations.main.content) : explanations.main.content}</div>
+          </>
+        ) : (
+          <>
         <h3 style={styles.h3}>Understanding Raw Data Expected Value</h3>
         
         <div style={styles.explainGrid}>
@@ -383,6 +391,8 @@ const RawDataExpectedValueCalculator = () => {
             </ul>
           </div>
         </div>
+          </>
+        )}
       </div>
     </div>
   );

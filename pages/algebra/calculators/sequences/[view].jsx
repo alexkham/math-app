@@ -6,6 +6,9 @@ import SiblingsNav from '../../../../app/components/SiblingsNav'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import '@/pages/pages.css'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 // Adjust if your actual paths differ.
 import SequenceExplorer from '../../../../app/components/sequences/explorer/SequenceExplorer'
@@ -83,6 +86,143 @@ const viewConfig = {
     answer: "Triangular numbers appear in combinatorics (the number of unordered pairs from n plus 1 objects equals T sub n), in algebra (the number of handshakes among n plus 1 people), in geometry (lattice points in a triangle), and as a row of Pascal's triangle. They also appear in the partial sums of arithmetic series and in the Gauss summation identity."
 }
 },
+   /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+      Registry entry "/algebra/calculators/sequences/triangular-numbers" in calculators-mesh-registry.json (same folder): 6 instructions, 4 explanation texts with anchors, 12 sections (4 usage with demos), lesson links to algebra/sequences and algebra/sequences/triangular-numbers.
+      Before editing this view, read the instructions and re-run its checks (--view triangular-numbers); keep the section ids and the anchors. */
+   instructions: [
+     `Pick a mode with the four tabs across the top of the card: **List first N**, **List a – b**, **Test a number** or **Lookup by index**; the ? beside each tab describes it. [Learn more about the modes](!#listing-the-first-n-terms)`,
+     `In **List first N**, type how many terms to show in **Show first** and click **Update**; the cards give the count, the largest term and the sum, and the tiles list every term. [Learn more about listing terms](!#listing-the-first-n-terms)`,
+     `In **List a – b**, type the **From index** and the **To index** and click **List range**; a red box explains a bad range. [Learn more about ranges](!#listing-a-range-of-indexes)`,
+     `In **Test a number**, type a positive integer in **Test number** and click **Check**; a green box names the index, a red box says it is not triangular. [Learn more about the test](!#testing-a-number)`,
+     `In **Lookup by index**, type the position in **Index n** and click **Get term**. [Learn more about lookups](!#looking-up-a-term-by-index)`,
+     `The panel on the right explains the current mode and walks through the arithmetic with your own numbers; it changes with every tab and click. [Learn more about the panel](!#looking-up-a-term-by-index)`
+   ],
+   explanations: {
+     browse: {
+       title: 'List first N',
+       content: `Shows the first $N$ triangular numbers $T_1, \ldots, T_N$ from the closed form $T_n = n(n+1)/2$, with the largest term and the running sum, which is the tetrahedral number $N(N+1)(N+2)/6$. $N$ is capped at $200$. [Learn more about triangular numbers](!#what-is-a-triangular-number)`
+     },
+     range: {
+       title: 'List a – b',
+       content: `Lists $T_a$ to $T_b$ for two positive indexes with $a \leq b$ and at most $200$ terms, with the smallest and the largest term of the range. [Learn more about the closed form](!#the-closed-form-and-why-it-works)`
+     },
+     member: {
+       title: 'Test a number',
+       content: `Decides whether $m$ is triangular by checking whether $8m + 1$ is a perfect square; if it is, the index is $(\sqrt{8m + 1} - 1)/2$, otherwise the two nearest triangular numbers are shown. [Learn more about the membership test](!#the-membership-test)`
+     },
+     lookup: {
+       title: 'Lookup by index',
+       content: `Computes the single term $T_n = n(n+1)/2$ for a positive integer index $n$ and shows the arithmetic in the walkthrough. [Learn more about the closed form](!#the-closed-form-and-why-it-works)`
+     }
+   },
+   demos: {
+     'listing-the-first-n-terms': {
+       title: 'Ten terms, thirty terms, the cap, one term',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'TYPE 10 and CLICK Update\nShowing 10 terms, largest T₁₀ = 55, sum 220.', at: 'tr' },
+         { set: '#se-b-n', value: '10' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 30 and CLICK Update\nT₃₀ = 465, sum 4,960.', at: 'tr' },
+         { set: '#se-b-n', value: '30' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 300 and CLICK Update\nCapped at 200 terms: T₂₀₀ = 20,100, sum 1,353,400.', at: 'tr' },
+         { set: '#se-b-n', value: '300' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and CLICK Update\nOne term: T₁ = 1.', at: 'tr' },
+         { set: '#se-b-n', value: '1' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'listing-a-range-of-indexes': {
+       title: 'The range tab, 10 to 20, two bad ranges',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK List a – b\nThe tab opens with indexes 5 to 15: eleven terms from 15 to 120.', at: 'tr' },
+         { click: { button: 'List a' } },
+         { wait: 2600 },
+         { say: 'TYPE 10 and 20, CLICK List range\nCount 11, smallest T₁₀ = 55, largest T₂₀ = 210.', at: 'tr' },
+         { set: '#se-r-a', value: '10' },
+         { set: '#se-r-b', value: '20' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 20 and 10, CLICK List range\nThe red box: from-index must be less than or equal to to-index.', at: 'tr' },
+         { set: '#se-r-a', value: '20' },
+         { set: '#se-r-b', value: '10' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and 300, CLICK List range\nRange too wide: the cap is 200 terms.', at: 'tr' },
+         { set: '#se-r-a', value: '1' },
+         { set: '#se-r-b', value: '300' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+       ],
+     },
+     'testing-a-number': {
+       title: 'The test tab, 100, 5050, 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Test a number\nThe tab opens with 120: a tick, it is T₁₅.', at: 'tr' },
+         { click: { button: 'Test a number' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Check\nA cross: 100 is not triangular; the walkthrough shows T₁₃ = 91 and T₁₄ = 105.', at: 'tr' },
+         { set: '#se-m-n', value: '100' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 3000 },
+         { say: 'TYPE 5050 and CLICK Check\nA tick: 5,050 is T₁₀₀.', at: 'tr' },
+         { set: '#se-m-n', value: '5050' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Check\nRefused: enter a positive integer.', at: 'tr' },
+         { set: '#se-m-n', value: '0' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'looking-up-a-term-by-index': {
+       title: 'The lookup tab, n = 100, n = 1000, n = 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Lookup by index\nThe tab opens with n = 42: T₄₂ = 903, and the walkthrough shows 42 · 43 / 2.', at: 'tr' },
+         { click: { button: 'Lookup by index' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Get term\nT₁₀₀ = 5,050.', at: 'tr' },
+         { set: '#se-l-n', value: '100' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1000 and CLICK Get term\nT₁₀₀₀ = 500,500.', at: 'tr' },
+         { set: '#se-l-n', value: '1000' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Get term\nRefused: enter a positive integer index.', at: 'tr' },
+         { set: '#se-l-n', value: '0' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+   },
+   sectionOrder: [
+     { id: 'listing-the-first-n-terms', key: 'obj9', demo: 'listing-the-first-n-terms' },
+     { id: 'listing-a-range-of-indexes', key: 'obj10', demo: 'listing-a-range-of-indexes' },
+     { id: 'testing-a-number', key: 'obj11', demo: 'testing-a-number' },
+     { id: 'looking-up-a-term-by-index', key: 'obj12', demo: 'looking-up-a-term-by-index' },
+     { id: 'what-is-a-triangular-number', key: 'obj1', demo: null },
+     { id: 'the-closed-form-and-why-it-works', key: 'obj2', demo: null },
+     { id: 'the-membership-test', key: 'obj3', demo: null },
+     { id: 'properties-and-identities', key: 'obj4', demo: null },
+     { id: 'common-applications', key: 'obj5', demo: null },
+     { id: 'triangular-numbers-and-pascals-triangle', key: 'obj6', demo: null },
+     { id: 'common-mistakes', key: 'obj7', demo: null },
+     { id: 'related-sequences-and-concepts', key: 'obj8', demo: null },
+   ],
 sectionsContent: {
   obj1: {
     title: `What is a Triangular Number?`,
@@ -98,7 +238,9 @@ This sum has a famous closed form, sometimes called the Gauss formula:
 
 $$T_n = \\frac{n(n+1)}{2}$$
 
-The pairing trick that produces the formula: write the sum forward and backward, add term by term to get $n$ pairs of $n + 1$, divide by 2. Carl Friedrich Gauss is said to have rediscovered this at age 9. For deeper coverage see **triangular number**, **arithmetic series**, and **Gauss summation**.`,
+The pairing trick that produces the formula: write the sum forward and backward, add term by term to get $n$ pairs of $n + 1$, divide by 2. Carl Friedrich Gauss is said to have rediscovered this at age 9. For deeper coverage see **triangular number**, **arithmetic series**, and **Gauss summation**.
+
+The definition is given in [definition](!/algebra/sequences/triangular-numbers#1) and the sequence is placed among the others in [triangular numbers](!/algebra/sequences#7).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -117,7 +259,9 @@ $$2S = n(n+1) \\implies S = \\frac{n(n+1)}{2}$$
 
 $$T_n = \\frac{n(n+1)}{2}$$
 
-**Why the formula is always an integer.** Of $n$ and $n + 1$, one is even, so the product is divisible by 2. The formula produces an integer for every positive integer $n$.`,
+**Why the formula is always an integer.** Of $n$ and $n + 1$, one is even, so the product is divisible by 2. The formula produces an integer for every positive integer $n$.
+
+The same derivation is written out in [derivation of the closed form](!/algebra/sequences/triangular-numbers#3).`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -136,7 +280,9 @@ So $8m + 1$ is a perfect square exactly when $m$ is triangular, and the square r
 
 **Example.** Is 120 triangular? Compute $8 \\cdot 120 + 1 = 961$. Then $\\sqrt{961} = 31$, an integer. So $n = (31 - 1)/2 = 15$, meaning $120 = T_{15}$. Indeed $15 \\cdot 16 / 2 = 120$.
 
-**Non-example.** Is 100 triangular? Compute $8 \\cdot 100 + 1 = 801$. Then $\\sqrt{801} \\approx 28.30$, not an integer. So 100 is not triangular. The nearest triangular numbers are $T_{13} = 91$ and $T_{14} = 105$.`,
+**Non-example.** Is 100 triangular? Compute $8 \\cdot 100 + 1 = 801$. Then $\\sqrt{801} \\approx 28.30$, not an integer. So 100 is not triangular. The nearest triangular numbers are $T_{13} = 91$ and $T_{14} = 105$.
+
+The identities the test rests on are collected in [properties](!/algebra/sequences/triangular-numbers#4).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -149,7 +295,9 @@ So $8m + 1$ is a perfect square exactly when $m$ is triangular, and the square r
 • **Sum of first $n$ triangulars**: $T_1 + T_2 + \\cdots + T_n = \\frac{n(n+1)(n+2)}{6} = \\mathrm{Te}_n$, the $n$-th **tetrahedral number**.
 • **Sum of first $n$ cubes**: $1^3 + 2^3 + \\cdots + n^3 = T_n^2$. The sum of the first $n$ cubes equals the square of the $n$-th triangular number.
 • **Hexagonal connection**: every hexagonal number is also triangular: $H_n = T_{2n-1}$.
-• **Square triangulars**: a triangular number that is also a perfect square satisfies a Pell equation; examples are 1, 36, 1225, 41616, infinitely many but sparse.`,
+• **Square triangulars**: a triangular number that is also a perfect square satisfies a Pell equation; examples are 1, 36, 1225, 41616, infinitely many but sparse.
+
+The recurrence is the subject of [recursive form](!/algebra/sequences/triangular-numbers#2) and the other identities of [properties](!/algebra/sequences/triangular-numbers#4).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -162,7 +310,9 @@ So $8m + 1$ is a perfect square exactly when $m$ is triangular, and the square r
 • **Edges in a complete graph.** The complete graph on $n + 1$ vertices, $K_{n+1}$, has $T_n$ edges.
 • **Diagonals plus sides.** An $(n + 1)$-gon has $T_n$ total segments (diagonals plus sides) connecting its vertices.
 • **Stacked objects.** Bowling pins, billiard balls, and any triangularly-stacked array of $n$ rows contain $T_n$ objects.
-• **Lazy caterer.** The maximum number of pieces from $n$ straight cuts of a pizza is $T_n + 1$ — the cake number minus a constant.`,
+• **Lazy caterer.** The maximum number of pieces from $n$ straight cuts of a pizza is $T_n + 1$ — the cake number minus a constant.
+
+The counting identity behind these uses is in [properties](!/algebra/sequences/triangular-numbers#4); the sequence's place among the classic ones is [triangular numbers](!/algebra/sequences#7).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -177,7 +327,9 @@ The identity $T_n = \\binom{n+1}{2}$ says: the $n$-th triangular number equals t
 • **Diagonal 3**: 1, 4, 10, 20, the **tetrahedral numbers** (3D triangle pyramid counts).
 • **Diagonal 4**: 1, 5, 15, 35, the pentatope numbers (4D simplex counts).
 
-This nesting is captured by the **hockey-stick identity**: summing any diagonal up to a point gives the next diagonal's entry. The sum of the first $n$ triangular numbers being $\\mathrm{Te}_n$ is one instance.`,
+This nesting is captured by the **hockey-stick identity**: summing any diagonal up to a point gives the next diagonal's entry. The sum of the first $n$ triangular numbers being $\\mathrm{Te}_n$ is one instance.
+
+The binomial form of $T_n$ is listed in [properties](!/algebra/sequences/triangular-numbers#4); the neighbouring diagonal of squares is [square numbers](!/algebra/sequences#8).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -190,7 +342,9 @@ This nesting is captured by the **hockey-stick identity**: summing any diagonal 
 
 • **Negative or fractional indexes.** The closed form $n(n+1)/2$ technically extends to all real $n$, but only positive integers are triangular numbers in the standard sense. $T_{1.5}$ has no combinatorial meaning.
 
-• **Confusing the sum with the count.** $T_n$ is the sum of the first $n$ integers, not the count. The count is $n$ itself.`,
+• **Confusing the sum with the count.** $T_n$ is the sum of the first $n$ integers, not the count. The count is $n$ itself.
+
+Index conventions and the two ways of defining a sequence are explained in [definition and notation](!/algebra/sequences#1) and [explicit and recursive definitions](!/algebra/sequences#2).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -217,7 +371,37 @@ This nesting is captured by the **hockey-stick identity**: summing any diagonal 
 
 **Figurate Numbers** — the general family of polygonal and polyhedral counts. Triangular numbers are the 2D, 3-sided case.
 
-**Polygonal Numbers** — the umbrella term for triangular, square, pentagonal, hexagonal, heptagonal, octagonal, and so on. The $r$-gonal number formula is $P_n^{(r)} = \\frac{n[(r-2)n - (r-4)]}{2}$.`,
+**Polygonal Numbers** — the umbrella term for triangular, square, pentagonal, hexagonal, heptagonal, octagonal, and so on. The $r$-gonal number formula is $P_n^{(r)} = \\frac{n[(r-2)n - (r-4)]}{2}$.
+
+The neighbouring calculators are the [square numbers calculator](!/algebra/calculators/sequences/square-numbers), the [pentagonal numbers calculator](!/algebra/calculators/sequences/pentagonal-numbers), the [tetrahedral numbers calculator](!/algebra/calculators/sequences/tetrahedral-numbers) and the [arithmetic sequence calculator](!/algebra/calculators/sequences/arithmetic-sequence); the lessons are [square numbers](!/algebra/sequences#8) and [arithmetic sequences](!/algebra/sequences#3).`,
+    before: ``, after: ``, link: ''
+  },
+  obj9: {
+    title: `Listing the First N Terms`,
+    content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for triangular numbers is the tetrahedral number $N(N+1)(N+2)/6$. Under the cards every term is laid out as a tile with its index above its value, so $T_1 = 1$ to $T_N$ can be read in order.
+
+The box accepts $1$ to $200$: $10$ gives $T_{10} = 55$ with the sum $220$, $30$ gives $T_{30} = 465$ with the sum $4{,}960$, and $300$ is capped at $200$ terms, ending at $T_{200} = 20{,}100$ with the sum $1{,}353{,}400$; a single term gives $T_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the closed form the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. Why the terms are the sums $1 + 2 + \\cdots + n$ is explained in [what is a triangular number](!#what-is-a-triangular-number).`,
+    before: ``, after: ``, link: ''
+  },
+  obj10: {
+    title: `Listing a Range of Indexes`,
+    content: `Click the **List a – b** tab to list the terms between two positions instead of starting from $1$. Type the **From index** and the **To index** and click **List range** or press Enter. The cards give the **Count** $b - a + 1$, the **Smallest** term $T_a$ and the **Largest** term $T_b$, and the tiles below list every term in between with its index. The tab opens with $5$ to $15$, eleven terms from $T_5 = 15$ to $T_{15} = 120$; indexes $10$ to $20$ give eleven terms from $55$ to $210$.
+
+Both boxes must hold positive integers, the first no larger than the second, and the range may hold at most $200$ terms; otherwise a red box explains: "Enter two positive integer indexes", "From-index must be less than or equal to to-index", or "Range too wide — cap is 200 terms". The panel on the right, **List a – b**, explains the mode, and its walkthrough names the smallest and largest term of your range. The formula each tile uses is proved in [the closed form and why it works](!#the-closed-form-and-why-it-works).`,
+    before: ``, after: ``, link: ''
+  },
+  obj11: {
+    title: `Testing a Number`,
+    content: `Click the **Test a number** tab to ask whether a given positive integer is triangular. Type it in the **Test number** box and click **Check** or press Enter. A green box with a tick answers yes and names the index, as for the opening value $120$, which is $T_{15}$; a red box with a cross answers no, as for $100$, and the walkthrough on the right then shows the two nearest triangular numbers, $T_{13} = 91$ and $T_{14} = 105$. A large value is handled the same way: $5{,}050$ is $T_{100}$.
+
+The box takes positive integers only; $0$, a negative number or a decimal is refused with "Enter a positive integer". The test behind the answer is exact: the explorer checks whether $8m + 1$ is a perfect square and, when it is, reads the index off its square root, so no list has to be searched. The panel on the right, **Test a number**, states this rule, and its walkthrough carries out the arithmetic for your number. The rule itself is derived in [the membership test](!#the-membership-test).`,
+    before: ``, after: ``, link: ''
+  },
+  obj12: {
+    title: `Looking Up a Term by Index`,
+    content: `Click the **Lookup by index** tab to compute one term directly. Type the position in the **Index n** box and click **Get term** or press Enter. Two cards answer: **Index** repeats $n$ and **Value** gives $T_n$ with its index as a subscript. The tab opens with $n = 42$, which gives $T_{42} = 903$; $n = 100$ gives $5{,}050$ and $n = 1{,}000$ gives $500{,}500$. The box takes positive integers only; $0$ is refused with "Enter a positive integer index".
+
+The panel on the right has two parts in every mode. **How it works** names the rule the mode uses, here the closed form $T_n = n(n+1)/2$, and links to the section of this page that explains it; **Walkthrough** applies the rule to the numbers you typed, so for the lookup it shows $n(n+1)/2$ with your $n$ filled in and the product worked out. Both change as soon as you switch tabs or click a button. The closed form and its two proofs are in [the closed form and why it works](!#the-closed-form-and-why-it-works).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -259,6 +443,143 @@ This nesting is captured by the **hockey-stick identity**: summing any diagonal 
     answer: "Square numbers appear in geometry (the area of a square with side n), in algebra (the discriminant of a quadratic, perfect-square completion), in number theory (Lagrange's four-square theorem, Pythagorean triples), in combinatorics, and as a diagonal of figurate-number tables. Sums of squares appear in physics and statistics."
 }
 },
+   /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+      Registry entry "/algebra/calculators/sequences/square-numbers" in calculators-mesh-registry.json (same folder): 6 instructions, 4 explanation texts with anchors, 12 sections (4 usage with demos), lesson links in every theory section.
+      Before editing this view, read the instructions and re-run its checks (--view square-numbers); keep the section ids and the anchors. */
+   instructions: [
+     `Pick a mode with the four tabs across the top of the card: **List first N**, **List a – b**, **Test a number** or **Lookup by index**; the ? beside each tab describes it. [Learn more about the modes](!#listing-the-first-n-terms)`,
+     `In **List first N**, type how many terms to show in **Show first** and click **Update**; the cards give the count, the largest term and the sum, and the tiles list every term. [Learn more about listing terms](!#listing-the-first-n-terms)`,
+     `In **List a – b**, type the **From index** and the **To index** and click **List range**; a red box explains a bad range. [Learn more about ranges](!#listing-a-range-of-indexes)`,
+     `In **Test a number**, type a positive integer in **Test number** and click **Check**; a green box names the index, a red box says it is not a square number. [Learn more about the test](!#testing-a-number)`,
+     `In **Lookup by index**, type the position in **Index n** and click **Get term**. [Learn more about lookups](!#looking-up-a-term-by-index)`,
+     `The panel on the right explains the current mode and walks through the arithmetic with your own numbers; it changes with every tab and click. [Learn more about the panel](!#looking-up-a-term-by-index)`
+   ],
+   explanations: {
+     browse: {
+       title: 'List first N',
+       content: `Shows the first $N$ square numbers $S_1, \ldots, S_N$ from the rule $S_n = n^2$, with the largest term and the running sum, which for square numbers is $N(N+1)(2N+1)/6$. $N$ is capped at $200$. [Learn more about square numbers](!#what-is-a-square-number)`
+     },
+     range: {
+       title: 'List a – b',
+       content: `Lists $S_a$ to $S_b$ for two positive indexes with $a \leq b$ and at most $200$ terms, with the smallest and the largest term of the range. [Learn more about the rule](!#the-closed-form-and-the-gnomon)`
+     },
+     member: {
+       title: 'Test a number',
+       content: `Decides whether $m$ is a square number by checking whether the square root of $m$ is a whole number; if it is, the index is reported, otherwise the two nearest square numbers are shown. [Learn more about the test](!#the-membership-test)`
+     },
+     lookup: {
+       title: 'Lookup by index',
+       content: `Computes the single term $S_n$ from $S_n = n^2$ for a positive integer index $n$ and shows the arithmetic in the walkthrough. [Learn more about the rule](!#the-closed-form-and-the-gnomon)`
+     }
+   },
+   demos: {
+     'listing-the-first-n-terms': {
+       title: 'Ten terms, thirty terms, the cap, one term',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'TYPE 10 and CLICK Update\nShowing 10 terms, largest S₁₀ = 100, sum 385.', at: 'tr' },
+         { set: '#se-b-n', value: '10' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 30 and CLICK Update\nS₃₀ = 900, sum 9,455.', at: 'tr' },
+         { set: '#se-b-n', value: '30' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 300 and CLICK Update\nCapped at 200 terms: S₂₀₀ = 40,000, sum 2,686,700.', at: 'tr' },
+         { set: '#se-b-n', value: '300' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and CLICK Update\nOne term: S₁ = 1.', at: 'tr' },
+         { set: '#se-b-n', value: '1' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'listing-a-range-of-indexes': {
+       title: 'The range tab, a new range, two bad ranges',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK List a – b\nThe tab opens with indexes 5 to 15: 11 terms from 25 to 225.', at: 'tr' },
+         { click: { button: 'List a' } },
+         { wait: 2600 },
+         { say: 'TYPE 10 and 20, CLICK List range\nCount 11, smallest S₁₀ = 100, largest S₂₀ = 400.', at: 'tr' },
+         { set: '#se-r-a', value: '10' },
+         { set: '#se-r-b', value: '20' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 20 and 10, CLICK List range\nThe red box: from-index must be less than or equal to to-index.', at: 'tr' },
+         { set: '#se-r-a', value: '20' },
+         { set: '#se-r-b', value: '10' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and 300, CLICK List range\nRange too wide: the cap is 200 terms.', at: 'tr' },
+         { set: '#se-r-a', value: '1' },
+         { set: '#se-r-b', value: '300' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+       ],
+     },
+     'testing-a-number': {
+       title: 'The test tab, a non-member, a member, 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Test a number\nThe tab opens with 169: a tick, it is S₁₃.', at: 'tr' },
+         { click: { button: 'Test a number' } },
+         { wait: 2600 },
+         { say: 'TYPE 200 and CLICK Check\nA cross: 200 is not a square number; the walkthrough shows S₁₄ = 196 and S₁₅ = 225.', at: 'tr' },
+         { set: '#se-m-n', value: '200' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 3000 },
+         { say: 'TYPE 10000 and CLICK Check\nA tick: 10,000 is S₁₀₀.', at: 'tr' },
+         { set: '#se-m-n', value: '10000' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Check\nRefused: enter a positive integer.', at: 'tr' },
+         { set: '#se-m-n', value: '0' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'looking-up-a-term-by-index': {
+       title: 'The lookup tab, two indexes, n = 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Lookup by index\nThe tab opens with n = 25: S₂₅ = 625.', at: 'tr' },
+         { click: { button: 'Lookup by index' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Get term\nS₁₀₀ = 10,000.', at: 'tr' },
+         { set: '#se-l-n', value: '100' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1000 and CLICK Get term\nS₁₀₀₀ = 1,000,000.', at: 'tr' },
+         { set: '#se-l-n', value: '1000' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Get term\nRefused: enter a positive integer index.', at: 'tr' },
+         { set: '#se-l-n', value: '0' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+   },
+   sectionOrder: [
+     { id: 'listing-the-first-n-terms', key: 'obj9', demo: 'listing-the-first-n-terms' },
+     { id: 'listing-a-range-of-indexes', key: 'obj10', demo: 'listing-a-range-of-indexes' },
+     { id: 'testing-a-number', key: 'obj11', demo: 'testing-a-number' },
+     { id: 'looking-up-a-term-by-index', key: 'obj12', demo: 'looking-up-a-term-by-index' },
+     { id: 'what-is-a-square-number', key: 'obj1', demo: null },
+     { id: 'the-closed-form-and-the-gnomon', key: 'obj2', demo: null },
+     { id: 'the-membership-test', key: 'obj3', demo: null },
+     { id: 'properties-and-identities', key: 'obj4', demo: null },
+     { id: 'common-applications', key: 'obj5', demo: null },
+     { id: 'square-numbers-in-number-theory', key: 'obj6', demo: null },
+     { id: 'common-mistakes', key: 'obj7', demo: null },
+     { id: 'related-sequences-and-concepts', key: 'obj8', demo: null },
+   ],
 sectionsContent: {
   obj1: {
     title: `What is a Square Number?`,
@@ -278,7 +599,17 @@ $$\\begin{aligned} 1 &= 1 = S_1 \\\\ 1 + 3 &= 4 = S_2 \\\\ 1 + 3 + 5 &= 9 = S_3 
 
 In general, $S_n = 1 + 3 + 5 + \\cdots + (2n - 1)$, the sum of the first $n$ odd numbers.
 
-For deeper coverage see **square number**, **perfect square**, and **figurate numbers**.`,
+For deeper coverage see **square number**, **perfect square**, and **figurate numbers**.
+
+The definition is given in [definition](!/algebra/sequences/square-numbers#1) and the sequence is placed among the others in [square numbers](!/algebra/sequences#8).
+
+The gnomon is the subject of [recursive form and odd number sums](!/algebra/sequences/square-numbers#2).
+
+The square-root test and the other properties are collected in [properties](!/algebra/sequences/square-numbers#3).
+
+The sum identity is proved in [sum of squares](!/algebra/sequences/square-numbers#4) and the triangular link in [connections to triangular numbers](!/algebra/sequences/square-numbers#5).
+
+The counting identities behind these uses are in [properties](!/algebra/sequences/square-numbers#3).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -359,7 +690,9 @@ Three squares aren't enough: $7$ cannot be written as the sum of three perfect s
 
 **Pell equation.** $x^2 - D y^2 = 1$ for non-square $D$. Solutions involve continued fractions and generate the square-triangular numbers and other figurate intersections.
 
-**Perfect squares in Pascal's triangle.** Row sums and column sums produce squares in surprising places, including the identity $\\sum \\binom{n}{k}^2 = \\binom{2n}{n}$.`,
+**Perfect squares in Pascal's triangle.** Row sums and column sums produce squares in surprising places, including the identity $\\sum \\binom{n}{k}^2 = \\binom{2n}{n}$.
+
+The number-theoretic facts are gathered in [properties](!/algebra/sequences/square-numbers#3); the neighbouring sequence is [triangular numbers](!/algebra/sequences#7).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -374,7 +707,9 @@ Three squares aren't enough: $7$ cannot be written as the sum of three perfect s
 
 • **Off-by-one when summing.** The sum $1 + 4 + 9 + \\cdots + n^2$ has $n$ terms, equal to $n(n+1)(2n+1)/6$. The sum $1 + 4 + 9 + \\cdots + N$ where $N$ is itself a square (so $N = n^2$) ends at the same place — just stated differently.
 
-• **Last-digit rejection over-eagerness.** A number ending in 0, 1, 4, 5, 6, or 9 might be a perfect square — but only might. $11$, $14$, $19$ are not. The last-digit test only rejects, never confirms.`,
+• **Last-digit rejection over-eagerness.** A number ending in 0, 1, 4, 5, 6, or 9 might be a perfect square — but only might. $11$, $14$, $19$ are not. The last-digit test only rejects, never confirms.
+
+Index conventions and the two ways of defining a sequence are explained in [definition and notation](!/algebra/sequences#1) and [explicit and recursive definitions](!/algebra/sequences#2).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -401,7 +736,37 @@ Three squares aren't enough: $7$ cannot be written as the sum of three perfect s
 
 **Quadratic Residue** — modular arithmetic concept. $a$ is a residue mod $p$ if $a \\equiv x^2 \\pmod p$. Half of nonzero residues mod a prime are quadratic residues.
 
-**Variance and Standard Deviation** — statistical measures involving squared deviations. The "least squares" approach to regression and the central limit theorem depend on the algebra of squares.`,
+**Variance and Standard Deviation** — statistical measures involving squared deviations. The "least squares" approach to regression and the central limit theorem depend on the algebra of squares.
+
+The neighbouring calculators are the [triangular numbers calculator](!/algebra/calculators/sequences/triangular-numbers), the [pentagonal numbers calculator](!/algebra/calculators/sequences/pentagonal-numbers) and the [geometric sequence calculator](!/algebra/calculators/sequences/geometric-sequence); the lessons are [triangular numbers](!/algebra/sequences#7) and [connections to triangular numbers](!/algebra/sequences/square-numbers#5).`,
+    before: ``, after: ``, link: ''
+  },
+  obj9: {
+    title: `Listing the First N Terms`,
+    content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for square numbers is $N(N+1)(2N+1)/6$. Under the cards every term is laid out as a tile with its index above its value, so $S_1 = 1$ to $S_N$ can be read in order.
+
+The box accepts $1$ to $200$: $10$ gives $S_{10} = 100$ with the sum $385$, $30$ gives $S_{30} = 900$ with the sum $9,455$, and $300$ is capped at $200$ terms, ending at $S_{200} = 40,000$ with the sum $2,686,700$; a single term gives $S_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a square number](!#what-is-a-square-number).`,
+    before: ``, after: ``, link: ''
+  },
+  obj10: {
+    title: `Listing a Range of Indexes`,
+    content: `Click the **List a – b** tab to list the terms between two positions instead of starting from $1$. Type the **From index** and the **To index** and click **List range** or press Enter. The cards give the **Count** $b - a + 1$, the **Smallest** term $S_a$ and the **Largest** term $S_b$, and the tiles below list every term in between with its index. The tab opens with $5$ to $15$, 11 terms from $S_{5} = 25$ to $S_{15} = 225$; indexes $10$ to $20$ give 11 terms from $100$ to $400$.
+
+Both boxes must hold positive integers, the first no larger than the second, and the range may hold at most $200$ terms; otherwise a red box explains: "Enter two positive integer indexes", "From-index must be less than or equal to to-index", or "Range too wide — cap is 200 terms". The panel on the right, **List a – b**, explains the mode, and its walkthrough names the smallest and largest term of your range. The rule each tile uses is explained in [the closed form and the gnomon](!#the-closed-form-and-the-gnomon).`,
+    before: ``, after: ``, link: ''
+  },
+  obj11: {
+    title: `Testing a Number`,
+    content: `Click the **Test a number** tab to ask whether a given positive integer is a square number. Type it in the **Test number** box and click **Check** or press Enter. A green box with a tick answers yes and names the index, as for the opening value $169$, which is $S_{13}$; a red box with a cross answers no, as for $200$, and the walkthrough on the right then shows the two nearest square numbers, $S_{14} = 196$ and $S_{15} = 225$. A large value is handled the same way: $10,000$ is $S_{100}$.
+
+The box takes positive integers only; $0$, a negative number or a decimal is refused with "Enter a positive integer". The test behind the answer is exact: the explorer checks whether $\\sqrt{m}$ is a whole number; if it is, that whole number is the index, otherwise the two nearest squares are shown, so no list has to be searched. The panel on the right, **Test a number**, states this rule, and its walkthrough carries out the arithmetic for your number. The rule itself is explained in [the membership test](!#the-membership-test).`,
+    before: ``, after: ``, link: ''
+  },
+  obj12: {
+    title: `Looking Up a Term by Index`,
+    content: `Click the **Lookup by index** tab to compute one term directly. Type the position in the **Index n** box and click **Get term** or press Enter. Two cards answer: **Index** repeats $n$ and **Value** gives $S_n$ with its index as a subscript. The tab opens with $n = 25$, which gives $S_{25} = 625$; $n = 100$ gives $10,000$ and $n = 1000$ gives $1,000,000$. The box takes positive integers only; $0$ is refused with "Enter a positive integer index".
+
+The panel on the right has two parts in every mode. **How it works** names the rule the mode uses, here $S_n = n^2$, and links to the section of this page that explains it; **Walkthrough** applies the rule to the numbers you typed, so for the lookup it shows the arithmetic with your $n$ filled in. Both change as soon as you switch tabs or click a button. The rule and where it comes from are in [the closed form and the gnomon](!#the-closed-form-and-the-gnomon).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -444,6 +809,143 @@ Three squares aren't enough: $7$ cannot be written as the sum of three perfect s
     answer: "Pentagonal numbers appear in Euler's pentagonal number theorem (a foundational result in the theory of partitions and modular forms), in geometry (lattice counts in nested pentagons), and as the standard polygonal-number family extending triangular, square, hexagonal, and beyond. They also appear in combinatorial identities involving partitions of integers."
 }
 },
+   /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+      Registry entry "/algebra/calculators/sequences/pentagonal-numbers" in calculators-mesh-registry.json (same folder): 6 instructions, 4 explanation texts with anchors, 12 sections (4 usage with demos), lesson links in every theory section.
+      Before editing this view, read the instructions and re-run its checks (--view pentagonal-numbers); keep the section ids and the anchors. */
+   instructions: [
+     `Pick a mode with the four tabs across the top of the card: **List first N**, **List a – b**, **Test a number** or **Lookup by index**; the ? beside each tab describes it. [Learn more about the modes](!#listing-the-first-n-terms)`,
+     `In **List first N**, type how many terms to show in **Show first** and click **Update**; the cards give the count, the largest term and the sum, and the tiles list every term. [Learn more about listing terms](!#listing-the-first-n-terms)`,
+     `In **List a – b**, type the **From index** and the **To index** and click **List range**; a red box explains a bad range. [Learn more about ranges](!#listing-a-range-of-indexes)`,
+     `In **Test a number**, type a positive integer in **Test number** and click **Check**; a green box names the index, a red box says it is not a pentagonal number. [Learn more about the test](!#testing-a-number)`,
+     `In **Lookup by index**, type the position in **Index n** and click **Get term**. [Learn more about lookups](!#looking-up-a-term-by-index)`,
+     `The panel on the right explains the current mode and walks through the arithmetic with your own numbers; it changes with every tab and click. [Learn more about the panel](!#looking-up-a-term-by-index)`
+   ],
+   explanations: {
+     browse: {
+       title: 'List first N',
+       content: `Shows the first $N$ pentagonal numbers $P_1, \ldots, P_N$ from the rule $P_n = n(3n-1)/2$, with the largest term and the running sum, which for pentagonal numbers is $N^2(N+1)/2$. $N$ is capped at $200$. [Learn more about pentagonal numbers](!#what-is-a-pentagonal-number)`
+     },
+     range: {
+       title: 'List a – b',
+       content: `Lists $P_a$ to $P_b$ for two positive indexes with $a \leq b$ and at most $200$ terms, with the smallest and the largest term of the range. [Learn more about the rule](!#the-closed-form-derivation)`
+     },
+     member: {
+       title: 'Test a number',
+       content: `Decides whether $m$ is a pentagonal number by checking whether $24m + 1$ is a perfect square of the right form; if it is, the index is reported, otherwise the two nearest pentagonal numbers are shown. [Learn more about the test](!#the-membership-test)`
+     },
+     lookup: {
+       title: 'Lookup by index',
+       content: `Computes the single term $P_n$ from $P_n = n(3n-1)/2$ for a positive integer index $n$ and shows the arithmetic in the walkthrough. [Learn more about the rule](!#the-closed-form-derivation)`
+     }
+   },
+   demos: {
+     'listing-the-first-n-terms': {
+       title: 'Ten terms, thirty terms, the cap, one term',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'TYPE 10 and CLICK Update\nShowing 10 terms, largest P₁₀ = 145, sum 550.', at: 'tr' },
+         { set: '#se-b-n', value: '10' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 30 and CLICK Update\nP₃₀ = 1,335, sum 13,950.', at: 'tr' },
+         { set: '#se-b-n', value: '30' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 300 and CLICK Update\nCapped at 200 terms: P₂₀₀ = 59,900, sum 4,020,000.', at: 'tr' },
+         { set: '#se-b-n', value: '300' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and CLICK Update\nOne term: P₁ = 1.', at: 'tr' },
+         { set: '#se-b-n', value: '1' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'listing-a-range-of-indexes': {
+       title: 'The range tab, a new range, two bad ranges',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK List a – b\nThe tab opens with indexes 5 to 15: 11 terms from 35 to 330.', at: 'tr' },
+         { click: { button: 'List a' } },
+         { wait: 2600 },
+         { say: 'TYPE 10 and 20, CLICK List range\nCount 11, smallest P₁₀ = 145, largest P₂₀ = 590.', at: 'tr' },
+         { set: '#se-r-a', value: '10' },
+         { set: '#se-r-b', value: '20' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 20 and 10, CLICK List range\nThe red box: from-index must be less than or equal to to-index.', at: 'tr' },
+         { set: '#se-r-a', value: '20' },
+         { set: '#se-r-b', value: '10' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and 300, CLICK List range\nRange too wide: the cap is 200 terms.', at: 'tr' },
+         { set: '#se-r-a', value: '1' },
+         { set: '#se-r-b', value: '300' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+       ],
+     },
+     'testing-a-number': {
+       title: 'The test tab, a non-member, a member, 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Test a number\nThe tab opens with 117: a tick, it is P₉.', at: 'tr' },
+         { click: { button: 'Test a number' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Check\nA cross: 100 is not a pentagonal number; the walkthrough shows P₈ = 92 and P₉ = 117.', at: 'tr' },
+         { set: '#se-m-n', value: '100' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 3000 },
+         { say: 'TYPE 10045 and CLICK Check\nA tick: 10,045 is P₈₂.', at: 'tr' },
+         { set: '#se-m-n', value: '10045' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Check\nRefused: enter a positive integer.', at: 'tr' },
+         { set: '#se-m-n', value: '0' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'looking-up-a-term-by-index': {
+       title: 'The lookup tab, two indexes, n = 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Lookup by index\nThe tab opens with n = 25: P₂₅ = 925.', at: 'tr' },
+         { click: { button: 'Lookup by index' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Get term\nP₁₀₀ = 14,950.', at: 'tr' },
+         { set: '#se-l-n', value: '100' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1000 and CLICK Get term\nP₁₀₀₀ = 1,499,500.', at: 'tr' },
+         { set: '#se-l-n', value: '1000' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Get term\nRefused: enter a positive integer index.', at: 'tr' },
+         { set: '#se-l-n', value: '0' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+   },
+   sectionOrder: [
+     { id: 'listing-the-first-n-terms', key: 'obj9', demo: 'listing-the-first-n-terms' },
+     { id: 'listing-a-range-of-indexes', key: 'obj10', demo: 'listing-a-range-of-indexes' },
+     { id: 'testing-a-number', key: 'obj11', demo: 'testing-a-number' },
+     { id: 'looking-up-a-term-by-index', key: 'obj12', demo: 'looking-up-a-term-by-index' },
+     { id: 'what-is-a-pentagonal-number', key: 'obj1', demo: null },
+     { id: 'the-closed-form-derivation', key: 'obj2', demo: null },
+     { id: 'the-membership-test', key: 'obj3', demo: null },
+     { id: 'properties-and-identities', key: 'obj4', demo: null },
+     { id: 'eulers-pentagonal-number-theorem', key: 'obj5', demo: null },
+     { id: 'common-applications', key: 'obj6', demo: null },
+     { id: 'common-mistakes', key: 'obj7', demo: null },
+     { id: 'related-sequences-and-concepts', key: 'obj8', demo: null },
+   ],
 sectionsContent: {
   obj1: {
     title: `What is a Pentagonal Number?`,
@@ -463,7 +965,17 @@ specializes to the pentagonal case at $r = 5$.
 
 **Sum-of-arithmetic-series form.** $P_n = 1 + 4 + 7 + 10 + \\cdots + (3n - 2)$, the sum of the first $n$ terms of the arithmetic series with $a_1 = 1$ and common difference $d = 3$. The first term 1 and the step 3 reflect the geometry: the first pentagon has 1 dot, and each new layer adds 3 dots times $n$ minus an adjustment for the shared vertex.
 
-For deeper coverage see **pentagonal number**, **polygonal numbers**, and **Euler's pentagonal number theorem**.`,
+For deeper coverage see **pentagonal number**, **polygonal numbers**, and **Euler's pentagonal number theorem**.
+
+Figurate numbers are introduced through their simplest case in [triangular numbers](!/algebra/sequences#7); the general idea of an explicit formula is [explicit and recursive definitions](!/algebra/sequences#2).
+
+The same pairing argument for the triangular case is written out in [derivation of the closed form](!/algebra/sequences/triangular-numbers#3).
+
+The square-root test it generalises is the one for triangular numbers in [properties](!/algebra/sequences/triangular-numbers#4).
+
+The triangular identities these build on are in [properties](!/algebra/sequences/triangular-numbers#4).
+
+The sequences the theorem relates are introduced in [definition and notation](!/algebra/sequences#1) and [triangular numbers](!/algebra/sequences#7).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -543,7 +1055,9 @@ The signs follow a $++--++--$ pattern, and the subtractions stop when the argume
 • **Combinatorial identities.** Many partition identities, including Jacobi's triple product, build on Euler's pentagonal-number theorem.
 • **Geometric counting.** Pentagonal numbers count dots in nested-pentagon patterns; the dual of triangular and square configurations.
 • **Lattice problems.** Some 2D lattice-counting problems on pentagonal regions or 5-fold-symmetric structures involve pentagonal-number boundaries.
-• **Recreational mathematics.** Pentagonal numbers appear in puzzles, sequences, and figurate-number problems where one extends the polygon-counting paradigm beyond triangles and squares.`,
+• **Recreational mathematics.** Pentagonal numbers appear in puzzles, sequences, and figurate-number problems where one extends the polygon-counting paradigm beyond triangles and squares.
+
+The counting ideas behind these uses start from [properties](!/algebra/sequences/triangular-numbers#4).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -556,7 +1070,9 @@ The signs follow a $++--++--$ pattern, and the subtractions stop when the argume
 
 • **Misapplying the closed form.** $P_n = n(3n - 1)/2$ is exact for positive integer $n$. Extending to fractional or negative $n$ requires the generalized formulation.
 
-• **Confusing $P_n$ with the partition function $p(n)$.** Both use the letter $p$, but $p(n)$ counts integer partitions while $P_n$ is the $n$-th pentagonal number. The two are connected via Euler's theorem but distinct.`,
+• **Confusing $P_n$ with the partition function $p(n)$.** Both use the letter $p$, but $p(n)$ counts integer partitions while $P_n$ is the $n$-th pentagonal number. The two are connected via Euler's theorem but distinct.
+
+Index conventions and the two ways of defining a sequence are explained in [definition and notation](!/algebra/sequences#1) and [explicit and recursive definitions](!/algebra/sequences#2).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -581,7 +1097,37 @@ The signs follow a $++--++--$ pattern, and the subtractions stop when the argume
 
 **Figurate Numbers** — the umbrella term covering all polygonal, pyramidal, and higher-dimensional analogs. Pentagonal is one entry in a vast taxonomy.
 
-**Generating Function** — the formal power-series tool that connects pentagonal numbers to partitions, modular forms, and combinatorial identities.`,
+**Generating Function** — the formal power-series tool that connects pentagonal numbers to partitions, modular forms, and combinatorial identities.
+
+The neighbouring calculators are the [triangular numbers calculator](!/algebra/calculators/sequences/triangular-numbers), the [square numbers calculator](!/algebra/calculators/sequences/square-numbers) and the [hexagonal numbers calculator](!/algebra/calculators/sequences/hexagonal-numbers); the lessons are [triangular numbers](!/algebra/sequences#7) and [square numbers](!/algebra/sequences#8).`,
+    before: ``, after: ``, link: ''
+  },
+  obj9: {
+    title: `Listing the First N Terms`,
+    content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for pentagonal numbers is $N^2(N+1)/2$. Under the cards every term is laid out as a tile with its index above its value, so $P_1 = 1$ to $P_N$ can be read in order.
+
+The box accepts $1$ to $200$: $10$ gives $P_{10} = 145$ with the sum $550$, $30$ gives $P_{30} = 1,335$ with the sum $13,950$, and $300$ is capped at $200$ terms, ending at $P_{200} = 59,900$ with the sum $4,020,000$; a single term gives $P_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a pentagonal number](!#what-is-a-pentagonal-number).`,
+    before: ``, after: ``, link: ''
+  },
+  obj10: {
+    title: `Listing a Range of Indexes`,
+    content: `Click the **List a – b** tab to list the terms between two positions instead of starting from $1$. Type the **From index** and the **To index** and click **List range** or press Enter. The cards give the **Count** $b - a + 1$, the **Smallest** term $P_a$ and the **Largest** term $P_b$, and the tiles below list every term in between with its index. The tab opens with $5$ to $15$, 11 terms from $P_{5} = 35$ to $P_{15} = 330$; indexes $10$ to $20$ give 11 terms from $145$ to $590$.
+
+Both boxes must hold positive integers, the first no larger than the second, and the range may hold at most $200$ terms; otherwise a red box explains: "Enter two positive integer indexes", "From-index must be less than or equal to to-index", or "Range too wide — cap is 200 terms". The panel on the right, **List a – b**, explains the mode, and its walkthrough names the smallest and largest term of your range. The rule each tile uses is explained in [the closed form derivation](!#the-closed-form-derivation).`,
+    before: ``, after: ``, link: ''
+  },
+  obj11: {
+    title: `Testing a Number`,
+    content: `Click the **Test a number** tab to ask whether a given positive integer is a pentagonal number. Type it in the **Test number** box and click **Check** or press Enter. A green box with a tick answers yes and names the index, as for the opening value $117$, which is $P_{9}$; a red box with a cross answers no, as for $100$, and the walkthrough on the right then shows the two nearest pentagonal numbers, $P_{8} = 92$ and $P_{9} = 117$. A large value is handled the same way: $10,045$ is $P_{82}$.
+
+The box takes positive integers only; $0$, a negative number or a decimal is refused with "Enter a positive integer". The test behind the answer is exact: the explorer checks whether $24m + 1$ is a perfect square whose root is $5$ more than a multiple of $6$; if it is, the index is $(\\sqrt{24m + 1} + 1)/6$, otherwise the two nearest pentagonal numbers are shown, so no list has to be searched. The panel on the right, **Test a number**, states this rule, and its walkthrough carries out the arithmetic for your number. The rule itself is explained in [the membership test](!#the-membership-test).`,
+    before: ``, after: ``, link: ''
+  },
+  obj12: {
+    title: `Looking Up a Term by Index`,
+    content: `Click the **Lookup by index** tab to compute one term directly. Type the position in the **Index n** box and click **Get term** or press Enter. Two cards answer: **Index** repeats $n$ and **Value** gives $P_n$ with its index as a subscript. The tab opens with $n = 25$, which gives $P_{25} = 925$; $n = 100$ gives $14,950$ and $n = 1000$ gives $1,499,500$. The box takes positive integers only; $0$ is refused with "Enter a positive integer index".
+
+The panel on the right has two parts in every mode. **How it works** names the rule the mode uses, here $P_n = n(3n-1)/2$, and links to the section of this page that explains it; **Walkthrough** applies the rule to the numbers you typed, so for the lookup it shows the arithmetic with your $n$ filled in. Both change as soon as you switch tabs or click a button. The rule and where it comes from are in [the closed form derivation](!#the-closed-form-derivation).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -624,6 +1170,143 @@ The signs follow a $++--++--$ pattern, and the subtractions stop when the argume
     answer: "Hexagonal numbers appear in geometry (centered and non-centered hexagonal lattices), in combinatorics (the dots in a hexagonal pattern, hexagonal tile counts), in chemistry (atomic packing in close-packed structures), and as the natural fourth member of the polygonal number family after triangular, square, and pentagonal."
 }
 },
+   /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+      Registry entry "/algebra/calculators/sequences/hexagonal-numbers" in calculators-mesh-registry.json (same folder): 6 instructions, 4 explanation texts with anchors, 12 sections (4 usage with demos), lesson links in every theory section.
+      Before editing this view, read the instructions and re-run its checks (--view hexagonal-numbers); keep the section ids and the anchors. */
+   instructions: [
+     `Pick a mode with the four tabs across the top of the card: **List first N**, **List a – b**, **Test a number** or **Lookup by index**; the ? beside each tab describes it. [Learn more about the modes](!#listing-the-first-n-terms)`,
+     `In **List first N**, type how many terms to show in **Show first** and click **Update**; the cards give the count, the largest term and the sum, and the tiles list every term. [Learn more about listing terms](!#listing-the-first-n-terms)`,
+     `In **List a – b**, type the **From index** and the **To index** and click **List range**; a red box explains a bad range. [Learn more about ranges](!#listing-a-range-of-indexes)`,
+     `In **Test a number**, type a positive integer in **Test number** and click **Check**; a green box names the index, a red box says it is not a hexagonal number. [Learn more about the test](!#testing-a-number)`,
+     `In **Lookup by index**, type the position in **Index n** and click **Get term**. [Learn more about lookups](!#looking-up-a-term-by-index)`,
+     `The panel on the right explains the current mode and walks through the arithmetic with your own numbers; it changes with every tab and click. [Learn more about the panel](!#looking-up-a-term-by-index)`
+   ],
+   explanations: {
+     browse: {
+       title: 'List first N',
+       content: `Shows the first $N$ hexagonal numbers $H_1, \ldots, H_N$ from the rule $H_n = n(2n-1)$, with the largest term and the running sum, which for hexagonal numbers is $N(N+1)(4N-1)/6$. $N$ is capped at $200$. [Learn more about hexagonal numbers](!#what-is-a-hexagonal-number)`
+     },
+     range: {
+       title: 'List a – b',
+       content: `Lists $H_a$ to $H_b$ for two positive indexes with $a \leq b$ and at most $200$ terms, with the smallest and the largest term of the range. [Learn more about the rule](!#the-closed-form-and-the-triangular-connection)`
+     },
+     member: {
+       title: 'Test a number',
+       content: `Decides whether $m$ is a hexagonal number by checking whether $8m + 1$ is a perfect square of the right form; if it is, the index is reported, otherwise the two nearest hexagonal numbers are shown. [Learn more about the test](!#the-membership-test)`
+     },
+     lookup: {
+       title: 'Lookup by index',
+       content: `Computes the single term $H_n$ from $H_n = n(2n-1)$ for a positive integer index $n$ and shows the arithmetic in the walkthrough. [Learn more about the rule](!#the-closed-form-and-the-triangular-connection)`
+     }
+   },
+   demos: {
+     'listing-the-first-n-terms': {
+       title: 'Ten terms, thirty terms, the cap, one term',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'TYPE 10 and CLICK Update\nShowing 10 terms, largest H₁₀ = 190, sum 715.', at: 'tr' },
+         { set: '#se-b-n', value: '10' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 30 and CLICK Update\nH₃₀ = 1,770, sum 18,445.', at: 'tr' },
+         { set: '#se-b-n', value: '30' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 300 and CLICK Update\nCapped at 200 terms: H₂₀₀ = 79,800, sum 5,353,300.', at: 'tr' },
+         { set: '#se-b-n', value: '300' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and CLICK Update\nOne term: H₁ = 1.', at: 'tr' },
+         { set: '#se-b-n', value: '1' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'listing-a-range-of-indexes': {
+       title: 'The range tab, a new range, two bad ranges',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK List a – b\nThe tab opens with indexes 5 to 15: 11 terms from 45 to 435.', at: 'tr' },
+         { click: { button: 'List a' } },
+         { wait: 2600 },
+         { say: 'TYPE 10 and 20, CLICK List range\nCount 11, smallest H₁₀ = 190, largest H₂₀ = 780.', at: 'tr' },
+         { set: '#se-r-a', value: '10' },
+         { set: '#se-r-b', value: '20' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 20 and 10, CLICK List range\nThe red box: from-index must be less than or equal to to-index.', at: 'tr' },
+         { set: '#se-r-a', value: '20' },
+         { set: '#se-r-b', value: '10' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and 300, CLICK List range\nRange too wide: the cap is 200 terms.', at: 'tr' },
+         { set: '#se-r-a', value: '1' },
+         { set: '#se-r-b', value: '300' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+       ],
+     },
+     'testing-a-number': {
+       title: 'The test tab, a non-member, a member, 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Test a number\nThe tab opens with 190: a tick, it is H₁₀.', at: 'tr' },
+         { click: { button: 'Test a number' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Check\nA cross: 100 is not a hexagonal number; the walkthrough shows H₇ = 91 and H₈ = 120.', at: 'tr' },
+         { set: '#se-m-n', value: '100' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 3000 },
+         { say: 'TYPE 4950 and CLICK Check\nA tick: 4,950 is H₅₀.', at: 'tr' },
+         { set: '#se-m-n', value: '4950' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Check\nRefused: enter a positive integer.', at: 'tr' },
+         { set: '#se-m-n', value: '0' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'looking-up-a-term-by-index': {
+       title: 'The lookup tab, two indexes, n = 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Lookup by index\nThe tab opens with n = 25: H₂₅ = 1,225.', at: 'tr' },
+         { click: { button: 'Lookup by index' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Get term\nH₁₀₀ = 19,900.', at: 'tr' },
+         { set: '#se-l-n', value: '100' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1000 and CLICK Get term\nH₁₀₀₀ = 1,999,000.', at: 'tr' },
+         { set: '#se-l-n', value: '1000' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Get term\nRefused: enter a positive integer index.', at: 'tr' },
+         { set: '#se-l-n', value: '0' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+   },
+   sectionOrder: [
+     { id: 'listing-the-first-n-terms', key: 'obj9', demo: 'listing-the-first-n-terms' },
+     { id: 'listing-a-range-of-indexes', key: 'obj10', demo: 'listing-a-range-of-indexes' },
+     { id: 'testing-a-number', key: 'obj11', demo: 'testing-a-number' },
+     { id: 'looking-up-a-term-by-index', key: 'obj12', demo: 'looking-up-a-term-by-index' },
+     { id: 'what-is-a-hexagonal-number', key: 'obj1', demo: null },
+     { id: 'the-closed-form-and-the-triangular-connection', key: 'obj2', demo: null },
+     { id: 'the-membership-test', key: 'obj3', demo: null },
+     { id: 'properties-and-identities', key: 'obj4', demo: null },
+     { id: 'hexagonal-numbers-vs-centered-hexagonal-numbers', key: 'obj5', demo: null },
+     { id: 'common-applications', key: 'obj6', demo: null },
+     { id: 'common-mistakes', key: 'obj7', demo: null },
+     { id: 'related-sequences-and-concepts', key: 'obj8', demo: null },
+   ],
 sectionsContent: {
   obj1: {
     title: `What is a Hexagonal Number?`,
@@ -643,7 +1326,17 @@ This means hexagonal numbers are exactly the **odd-indexed** triangular numbers.
 
 **Sum-of-arithmetic-series form.** $H_n = 1 + 5 + 9 + \\cdots + (4n - 3)$, the sum of the first $n$ terms of the arithmetic series with $a_1 = 1$ and common difference $d = 4$.
 
-For deeper coverage see **hexagonal number**, **polygonal numbers**, and **figurate numbers**.`,
+For deeper coverage see **hexagonal number**, **polygonal numbers**, and **figurate numbers**.
+
+Figurate numbers are introduced through their simplest case in [triangular numbers](!/algebra/sequences#7); the general idea of an explicit formula is [explicit and recursive definitions](!/algebra/sequences#2).
+
+The triangular numbers every hexagonal number equals are defined in [definition](!/algebra/sequences/triangular-numbers#1) and derived in [derivation of the closed form](!/algebra/sequences/triangular-numbers#3).
+
+The test it generalises is the triangular one in [properties](!/algebra/sequences/triangular-numbers#4).
+
+The triangular identities these build on are in [properties](!/algebra/sequences/triangular-numbers#4).
+
+Both families count dots in a hexagon; the simplest figurate family is [triangular numbers](!/algebra/sequences#7).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -725,7 +1418,9 @@ This page covers the **traditional polygonal hexagonal numbers** following the p
 • **Combinatorics.** $H_n = \\binom{2n}{2}/2$ gives an unusual binomial-coefficient identity (this is $H_n = T_{2n-1}$ in disguise via $T_k = \\binom{k+1}{2}$).
 • **Partition theory.** Hexagonal numbers appear in some partition-counting identities, though pentagonal numbers play the more prominent role.
 • **Recreational mathematics.** Hexagonal numbers are studied alongside triangular and square numbers in figurate-number puzzles and problems.
-• **Number theory.** Many results about polygonal numbers (Fermat's polygonal number theorem, for instance) include hexagonal as a special case.`,
+• **Number theory.** Many results about polygonal numbers (Fermat's polygonal number theorem, for instance) include hexagonal as a special case.
+
+The counting ideas behind these uses start from [properties](!/algebra/sequences/triangular-numbers#4).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -740,7 +1435,9 @@ This page covers the **traditional polygonal hexagonal numbers** following the p
 
 • **Confusing with hexagonal pyramidal numbers.** The 3D analog $\\mathrm{HP}_n = n(n+1)(4n-1)/6$ counts dots in a hexagonal pyramid, not a flat hexagon. Different sequence, different formula.
 
-• **Treating the membership test as equivalent to the triangular test.** Triangular membership uses one condition; hexagonal requires two. Skipping the divisibility check misclassifies even-indexed triangulars as hexagonal.`,
+• **Treating the membership test as equivalent to the triangular test.** Triangular membership uses one condition; hexagonal requires two. Skipping the divisibility check misclassifies even-indexed triangulars as hexagonal.
+
+Index conventions and the two ways of defining a sequence are explained in [definition and notation](!/algebra/sequences#1) and [explicit and recursive definitions](!/algebra/sequences#2).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -767,7 +1464,37 @@ This page covers the **traditional polygonal hexagonal numbers** following the p
 
 **Figurate Numbers** — the umbrella family. Hexagonal numbers are 2D, 6-sided.
 
-**Hexagonal Lattice** — the regular lattice of hexagons; relevant to centered hexagonals more than to polygonal hexagonals, but worth knowing in context.`,
+**Hexagonal Lattice** — the regular lattice of hexagons; relevant to centered hexagonals more than to polygonal hexagonals, but worth knowing in context.
+
+The neighbouring calculators are the [triangular numbers calculator](!/algebra/calculators/sequences/triangular-numbers), the [pentagonal numbers calculator](!/algebra/calculators/sequences/pentagonal-numbers) and the [heptagonal numbers calculator](!/algebra/calculators/sequences/heptagonal-numbers); the lessons are [triangular numbers](!/algebra/sequences#7) and [square numbers](!/algebra/sequences#8).`,
+    before: ``, after: ``, link: ''
+  },
+  obj9: {
+    title: `Listing the First N Terms`,
+    content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for hexagonal numbers is $N(N+1)(4N-1)/6$. Under the cards every term is laid out as a tile with its index above its value, so $H_1 = 1$ to $H_N$ can be read in order.
+
+The box accepts $1$ to $200$: $10$ gives $H_{10} = 190$ with the sum $715$, $30$ gives $H_{30} = 1,770$ with the sum $18,445$, and $300$ is capped at $200$ terms, ending at $H_{200} = 79,800$ with the sum $5,353,300$; a single term gives $H_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a hexagonal number](!#what-is-a-hexagonal-number).`,
+    before: ``, after: ``, link: ''
+  },
+  obj10: {
+    title: `Listing a Range of Indexes`,
+    content: `Click the **List a – b** tab to list the terms between two positions instead of starting from $1$. Type the **From index** and the **To index** and click **List range** or press Enter. The cards give the **Count** $b - a + 1$, the **Smallest** term $H_a$ and the **Largest** term $H_b$, and the tiles below list every term in between with its index. The tab opens with $5$ to $15$, 11 terms from $H_{5} = 45$ to $H_{15} = 435$; indexes $10$ to $20$ give 11 terms from $190$ to $780$.
+
+Both boxes must hold positive integers, the first no larger than the second, and the range may hold at most $200$ terms; otherwise a red box explains: "Enter two positive integer indexes", "From-index must be less than or equal to to-index", or "Range too wide — cap is 200 terms". The panel on the right, **List a – b**, explains the mode, and its walkthrough names the smallest and largest term of your range. The rule each tile uses is explained in [the closed form and the triangular connection](!#the-closed-form-and-the-triangular-connection).`,
+    before: ``, after: ``, link: ''
+  },
+  obj11: {
+    title: `Testing a Number`,
+    content: `Click the **Test a number** tab to ask whether a given positive integer is a hexagonal number. Type it in the **Test number** box and click **Check** or press Enter. A green box with a tick answers yes and names the index, as for the opening value $190$, which is $H_{10}$; a red box with a cross answers no, as for $100$, and the walkthrough on the right then shows the two nearest hexagonal numbers, $H_{7} = 91$ and $H_{8} = 120$. A large value is handled the same way: $4,950$ is $H_{50}$.
+
+The box takes positive integers only; $0$, a negative number or a decimal is refused with "Enter a positive integer". The test behind the answer is exact: the explorer checks whether $8m + 1$ is a perfect square whose root is $3$ more than a multiple of $4$; if it is, the index is $(\\sqrt{8m + 1} + 1)/4$, otherwise the two nearest hexagonal numbers are shown, so no list has to be searched. The panel on the right, **Test a number**, states this rule, and its walkthrough carries out the arithmetic for your number. The rule itself is explained in [the membership test](!#the-membership-test).`,
+    before: ``, after: ``, link: ''
+  },
+  obj12: {
+    title: `Looking Up a Term by Index`,
+    content: `Click the **Lookup by index** tab to compute one term directly. Type the position in the **Index n** box and click **Get term** or press Enter. Two cards answer: **Index** repeats $n$ and **Value** gives $H_n$ with its index as a subscript. The tab opens with $n = 25$, which gives $H_{25} = 1,225$; $n = 100$ gives $19,900$ and $n = 1000$ gives $1,999,000$. The box takes positive integers only; $0$ is refused with "Enter a positive integer index".
+
+The panel on the right has two parts in every mode. **How it works** names the rule the mode uses, here $H_n = n(2n-1)$, and links to the section of this page that explains it; **Walkthrough** applies the rule to the numbers you typed, so for the lookup it shows the arithmetic with your $n$ filled in. Both change as soon as you switch tabs or click a button. The rule and where it comes from are in [the closed form and the triangular connection](!#the-closed-form-and-the-triangular-connection).`,
     before: ``, after: ``, link: ''
   }
 },
@@ -810,6 +1537,143 @@ This page covers the **traditional polygonal hexagonal numbers** following the p
     answer: "Heptagonal numbers appear primarily as the natural fifth term in the polygonal-number family. Unlike pentagonal numbers (which feature in Euler's theorem) or hexagonal numbers (which equal odd-indexed triangulars), heptagonal numbers have fewer celebrated identities, but they appear in figurate-number tables, polygonal-number theorems, and combinatorial problems involving 7-sided arrangements."
 }
 },
+   /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+      Registry entry "/algebra/calculators/sequences/heptagonal-numbers" in calculators-mesh-registry.json (same folder): 6 instructions, 4 explanation texts with anchors, 12 sections (4 usage with demos), lesson links in every theory section.
+      Before editing this view, read the instructions and re-run its checks (--view heptagonal-numbers); keep the section ids and the anchors. */
+   instructions: [
+     `Pick a mode with the four tabs across the top of the card: **List first N**, **List a – b**, **Test a number** or **Lookup by index**; the ? beside each tab describes it. [Learn more about the modes](!#listing-the-first-n-terms)`,
+     `In **List first N**, type how many terms to show in **Show first** and click **Update**; the cards give the count, the largest term and the sum, and the tiles list every term. [Learn more about listing terms](!#listing-the-first-n-terms)`,
+     `In **List a – b**, type the **From index** and the **To index** and click **List range**; a red box explains a bad range. [Learn more about ranges](!#listing-a-range-of-indexes)`,
+     `In **Test a number**, type a positive integer in **Test number** and click **Check**; a green box names the index, a red box says it is not a heptagonal number. [Learn more about the test](!#testing-a-number)`,
+     `In **Lookup by index**, type the position in **Index n** and click **Get term**. [Learn more about lookups](!#looking-up-a-term-by-index)`,
+     `The panel on the right explains the current mode and walks through the arithmetic with your own numbers; it changes with every tab and click. [Learn more about the panel](!#looking-up-a-term-by-index)`
+   ],
+   explanations: {
+     browse: {
+       title: 'List first N',
+       content: `Shows the first $N$ heptagonal numbers $Hp_1, \ldots, Hp_N$ from the rule $Hp_n = n(5n-3)/2$, with the largest term and the running sum, which for heptagonal numbers is $N(N+1)(5N-2)/6$. $N$ is capped at $200$. [Learn more about heptagonal numbers](!#what-is-a-heptagonal-number)`
+     },
+     range: {
+       title: 'List a – b',
+       content: `Lists $Hp_a$ to $Hp_b$ for two positive indexes with $a \leq b$ and at most $200$ terms, with the smallest and the largest term of the range. [Learn more about the rule](!#the-closed-form-derivation)`
+     },
+     member: {
+       title: 'Test a number',
+       content: `Decides whether $m$ is a heptagonal number by checking whether $40m + 9$ is a perfect square of the right form; if it is, the index is reported, otherwise the two nearest heptagonal numbers are shown. [Learn more about the test](!#the-membership-test)`
+     },
+     lookup: {
+       title: 'Lookup by index',
+       content: `Computes the single term $Hp_n$ from $Hp_n = n(5n-3)/2$ for a positive integer index $n$ and shows the arithmetic in the walkthrough. [Learn more about the rule](!#the-closed-form-derivation)`
+     }
+   },
+   demos: {
+     'listing-the-first-n-terms': {
+       title: 'Ten terms, thirty terms, the cap, one term',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'TYPE 10 and CLICK Update\nShowing 10 terms, largest Hp₁₀ = 235, sum 880.', at: 'tr' },
+         { set: '#se-b-n', value: '10' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 30 and CLICK Update\nHp₃₀ = 2,205, sum 22,940.', at: 'tr' },
+         { set: '#se-b-n', value: '30' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 300 and CLICK Update\nCapped at 200 terms: Hp₂₀₀ = 99,700, sum 6,686,600.', at: 'tr' },
+         { set: '#se-b-n', value: '300' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and CLICK Update\nOne term: Hp₁ = 1.', at: 'tr' },
+         { set: '#se-b-n', value: '1' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'listing-a-range-of-indexes': {
+       title: 'The range tab, a new range, two bad ranges',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK List a – b\nThe tab opens with indexes 5 to 15: 11 terms from 55 to 540.', at: 'tr' },
+         { click: { button: 'List a' } },
+         { wait: 2600 },
+         { say: 'TYPE 10 and 20, CLICK List range\nCount 11, smallest Hp₁₀ = 235, largest Hp₂₀ = 970.', at: 'tr' },
+         { set: '#se-r-a', value: '10' },
+         { set: '#se-r-b', value: '20' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 20 and 10, CLICK List range\nThe red box: from-index must be less than or equal to to-index.', at: 'tr' },
+         { set: '#se-r-a', value: '20' },
+         { set: '#se-r-b', value: '10' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and 300, CLICK List range\nRange too wide: the cap is 200 terms.', at: 'tr' },
+         { set: '#se-r-a', value: '1' },
+         { set: '#se-r-b', value: '300' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+       ],
+     },
+     'testing-a-number': {
+       title: 'The test tab, a non-member, a member, 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Test a number\nThe tab opens with 189: a tick, it is Hp₉.', at: 'tr' },
+         { click: { button: 'Test a number' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Check\nA cross: 100 is not a heptagonal number; the walkthrough shows Hp₆ = 81 and Hp₇ = 112.', at: 'tr' },
+         { set: '#se-m-n', value: '100' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 3000 },
+         { say: 'TYPE 3940 and CLICK Check\nA tick: 3,940 is Hp₄₀.', at: 'tr' },
+         { set: '#se-m-n', value: '3940' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Check\nRefused: enter a positive integer.', at: 'tr' },
+         { set: '#se-m-n', value: '0' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'looking-up-a-term-by-index': {
+       title: 'The lookup tab, two indexes, n = 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Lookup by index\nThe tab opens with n = 25: Hp₂₅ = 1,525.', at: 'tr' },
+         { click: { button: 'Lookup by index' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Get term\nHp₁₀₀ = 24,850.', at: 'tr' },
+         { set: '#se-l-n', value: '100' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1000 and CLICK Get term\nHp₁₀₀₀ = 2,498,500.', at: 'tr' },
+         { set: '#se-l-n', value: '1000' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Get term\nRefused: enter a positive integer index.', at: 'tr' },
+         { set: '#se-l-n', value: '0' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+   },
+   sectionOrder: [
+     { id: 'listing-the-first-n-terms', key: 'obj9', demo: 'listing-the-first-n-terms' },
+     { id: 'listing-a-range-of-indexes', key: 'obj10', demo: 'listing-a-range-of-indexes' },
+     { id: 'testing-a-number', key: 'obj11', demo: 'testing-a-number' },
+     { id: 'looking-up-a-term-by-index', key: 'obj12', demo: 'looking-up-a-term-by-index' },
+     { id: 'what-is-a-heptagonal-number', key: 'obj1', demo: null },
+     { id: 'the-closed-form-derivation', key: 'obj2', demo: null },
+     { id: 'the-membership-test', key: 'obj3', demo: null },
+     { id: 'properties-and-identities', key: 'obj4', demo: null },
+     { id: 'common-applications', key: 'obj5', demo: null },
+     { id: 'heptagonal-vs-centered-heptagonal-numbers', key: 'obj6', demo: null },
+     { id: 'common-mistakes', key: 'obj7', demo: null },
+     { id: 'related-sequences-and-concepts', key: 'obj8', demo: null },
+   ],
 sectionsContent: {
   obj1: {
     title: `What is a Heptagonal Number?`,
@@ -829,7 +1693,17 @@ specializes to heptagonal at $r = 7$, giving $\\mathrm{Hp}_n = n(5n - 3)/2$.
 
 **Sum-of-arithmetic-series form.** $\\mathrm{Hp}_n$ is the sum of the first $n$ terms of the arithmetic series $1, 6, 11, 16, 21, \\ldots$ with $a_1 = 1$ and $d = 5$. The common difference is one less than $r - 2 = 5$ — well, exactly 5, since $r = 7$ gives $r - 2 = 5$.
 
-For deeper coverage see **heptagonal number**, **polygonal numbers**, and **figurate numbers**.`,
+For deeper coverage see **heptagonal number**, **polygonal numbers**, and **figurate numbers**.
+
+Figurate numbers are introduced through their simplest case in [triangular numbers](!/algebra/sequences#7); the general idea of an explicit formula is [explicit and recursive definitions](!/algebra/sequences#2).
+
+The same pairing argument for the triangular case is written out in [derivation of the closed form](!/algebra/sequences/triangular-numbers#3).
+
+The test it generalises is the triangular one in [properties](!/algebra/sequences/triangular-numbers#4).
+
+The triangular identities these build on are in [properties](!/algebra/sequences/triangular-numbers#4).
+
+The counting ideas behind these uses start from [properties](!/algebra/sequences/triangular-numbers#4).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -905,7 +1779,9 @@ So $40m + 9$ is a perfect square iff $10n - 3$ is an integer (which it is for in
 
 The two sequences are different both numerically and geometrically. The "centered" version has more visual symmetry but is mathematically a separate object.
 
-When literature refers to "heptagonal numbers" without qualification, it almost always means the polygonal sequence covered here. Centered heptagonals require the "centered" qualifier.`,
+When literature refers to "heptagonal numbers" without qualification, it almost always means the polygonal sequence covered here. Centered heptagonals require the "centered" qualifier.
+
+Both families count dots in a heptagon; the simplest figurate family is [triangular numbers](!/algebra/sequences#7).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -920,7 +1796,9 @@ When literature refers to "heptagonal numbers" without qualification, it almost 
 
 • **Off-by-one in the index.** $\\mathrm{Hp}_1 = 1$, not $\\mathrm{Hp}_0 = 0$. Some sources start at $n = 0$ with $\\mathrm{Hp}_0 = 0$ for consistency with the closed form's behavior at $n = 0$. This explorer uses $n = 1$.
 
-• **Membership-test discriminant errors.** The correct discriminant for heptagonals is $40m + 9$. Using $24m + 1$ (pentagonal) or $8m + 1$ (triangular) gives wrong results.`,
+• **Membership-test discriminant errors.** The correct discriminant for heptagonals is $40m + 9$. Using $24m + 1$ (pentagonal) or $8m + 1$ (triangular) gives wrong results.
+
+Index conventions and the two ways of defining a sequence are explained in [definition and notation](!/algebra/sequences#1) and [explicit and recursive definitions](!/algebra/sequences#2).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -947,7 +1825,37 @@ When literature refers to "heptagonal numbers" without qualification, it almost 
 
 **Generalized Polygonal Numbers** — extensions where the index ranges over all integers (positive, zero, negative). The pentagonal case features in Euler's theorem; the heptagonal generalization is less prominent.
 
-**Sum of Three Heptagonals** — for sufficiently large $m$, $m$ can be written as a sum of just three heptagonal numbers (a refinement of Fermat's theorem due to Bell and Cauchy).`,
+**Sum of Three Heptagonals** — for sufficiently large $m$, $m$ can be written as a sum of just three heptagonal numbers (a refinement of Fermat's theorem due to Bell and Cauchy).
+
+The neighbouring calculators are the [hexagonal numbers calculator](!/algebra/calculators/sequences/hexagonal-numbers), the [octagonal numbers calculator](!/algebra/calculators/sequences/octagonal-numbers) and the [triangular numbers calculator](!/algebra/calculators/sequences/triangular-numbers); the lessons are [triangular numbers](!/algebra/sequences#7) and [square numbers](!/algebra/sequences#8).`,
+    before: ``, after: ``, link: ''
+  },
+  obj9: {
+    title: `Listing the First N Terms`,
+    content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for heptagonal numbers is $N(N+1)(5N-2)/6$. Under the cards every term is laid out as a tile with its index above its value, so $Hp_1 = 1$ to $Hp_N$ can be read in order.
+
+The box accepts $1$ to $200$: $10$ gives $Hp_{10} = 235$ with the sum $880$, $30$ gives $Hp_{30} = 2,205$ with the sum $22,940$, and $300$ is capped at $200$ terms, ending at $Hp_{200} = 99,700$ with the sum $6,686,600$; a single term gives $Hp_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a heptagonal number](!#what-is-a-heptagonal-number).`,
+    before: ``, after: ``, link: ''
+  },
+  obj10: {
+    title: `Listing a Range of Indexes`,
+    content: `Click the **List a – b** tab to list the terms between two positions instead of starting from $1$. Type the **From index** and the **To index** and click **List range** or press Enter. The cards give the **Count** $b - a + 1$, the **Smallest** term $Hp_a$ and the **Largest** term $Hp_b$, and the tiles below list every term in between with its index. The tab opens with $5$ to $15$, 11 terms from $Hp_{5} = 55$ to $Hp_{15} = 540$; indexes $10$ to $20$ give 11 terms from $235$ to $970$.
+
+Both boxes must hold positive integers, the first no larger than the second, and the range may hold at most $200$ terms; otherwise a red box explains: "Enter two positive integer indexes", "From-index must be less than or equal to to-index", or "Range too wide — cap is 200 terms". The panel on the right, **List a – b**, explains the mode, and its walkthrough names the smallest and largest term of your range. The rule each tile uses is explained in [the closed form derivation](!#the-closed-form-derivation).`,
+    before: ``, after: ``, link: ''
+  },
+  obj11: {
+    title: `Testing a Number`,
+    content: `Click the **Test a number** tab to ask whether a given positive integer is a heptagonal number. Type it in the **Test number** box and click **Check** or press Enter. A green box with a tick answers yes and names the index, as for the opening value $189$, which is $Hp_{9}$; a red box with a cross answers no, as for $100$, and the walkthrough on the right then shows the two nearest heptagonal numbers, $Hp_{6} = 81$ and $Hp_{7} = 112$. A large value is handled the same way: $3,940$ is $Hp_{40}$.
+
+The box takes positive integers only; $0$, a negative number or a decimal is refused with "Enter a positive integer". The test behind the answer is exact: the explorer checks whether $40m + 9$ is a perfect square whose root is $7$ more than a multiple of $10$; if it is, the index is $(\\sqrt{40m + 9} + 3)/10$, otherwise the two nearest heptagonal numbers are shown, so no list has to be searched. The panel on the right, **Test a number**, states this rule, and its walkthrough carries out the arithmetic for your number. The rule itself is explained in [the membership test](!#the-membership-test).`,
+    before: ``, after: ``, link: ''
+  },
+  obj12: {
+    title: `Looking Up a Term by Index`,
+    content: `Click the **Lookup by index** tab to compute one term directly. Type the position in the **Index n** box and click **Get term** or press Enter. Two cards answer: **Index** repeats $n$ and **Value** gives $Hp_n$ with its index as a subscript. The tab opens with $n = 25$, which gives $Hp_{25} = 1,525$; $n = 100$ gives $24,850$ and $n = 1000$ gives $2,498,500$. The box takes positive integers only; $0$ is refused with "Enter a positive integer index".
+
+The panel on the right has two parts in every mode. **How it works** names the rule the mode uses, here $Hp_n = n(5n-3)/2$, and links to the section of this page that explains it; **Walkthrough** applies the rule to the numbers you typed, so for the lookup it shows the arithmetic with your $n$ filled in. Both change as soon as you switch tabs or click a button. The rule and where it comes from are in [the closed form derivation](!#the-closed-form-derivation).`,
     before: ``, after: ``, link: ''
   }
 },
@@ -990,6 +1898,143 @@ When literature refers to "heptagonal numbers" without qualification, it almost 
     answer: "Octagonal numbers appear in the polygonal-number family as the r equals 8 case, in Fermat's polygonal number theorem (every positive integer is a sum of at most 8 octagonal numbers), in lattice-counting problems on octagonal regions, and in combinatorial identities involving 8-sided arrangements and figurate-number relations."
 }
 },
+   /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+      Registry entry "/algebra/calculators/sequences/octagonal-numbers" in calculators-mesh-registry.json (same folder): 6 instructions, 4 explanation texts with anchors, 12 sections (4 usage with demos), lesson links in every theory section.
+      Before editing this view, read the instructions and re-run its checks (--view octagonal-numbers); keep the section ids and the anchors. */
+   instructions: [
+     `Pick a mode with the four tabs across the top of the card: **List first N**, **List a – b**, **Test a number** or **Lookup by index**; the ? beside each tab describes it. [Learn more about the modes](!#listing-the-first-n-terms)`,
+     `In **List first N**, type how many terms to show in **Show first** and click **Update**; the cards give the count, the largest term and the sum, and the tiles list every term. [Learn more about listing terms](!#listing-the-first-n-terms)`,
+     `In **List a – b**, type the **From index** and the **To index** and click **List range**; a red box explains a bad range. [Learn more about ranges](!#listing-a-range-of-indexes)`,
+     `In **Test a number**, type a positive integer in **Test number** and click **Check**; a green box names the index, a red box says it is not an octagonal number. [Learn more about the test](!#testing-a-number)`,
+     `In **Lookup by index**, type the position in **Index n** and click **Get term**. [Learn more about lookups](!#looking-up-a-term-by-index)`,
+     `The panel on the right explains the current mode and walks through the arithmetic with your own numbers; it changes with every tab and click. [Learn more about the panel](!#looking-up-a-term-by-index)`
+   ],
+   explanations: {
+     browse: {
+       title: 'List first N',
+       content: `Shows the first $N$ octagonal numbers $O_1, \ldots, O_N$ from the rule $O_n = n(3n-2)$, with the largest term and the running sum, which for octagonal numbers is $N(N+1)(2N-1)/2$. $N$ is capped at $200$. [Learn more about octagonal numbers](!#what-is-an-octagonal-number)`
+     },
+     range: {
+       title: 'List a – b',
+       content: `Lists $O_a$ to $O_b$ for two positive indexes with $a \leq b$ and at most $200$ terms, with the smallest and the largest term of the range. [Learn more about the rule](!#the-closed-form-derivation)`
+     },
+     member: {
+       title: 'Test a number',
+       content: `Decides whether $m$ is an octagonal number by checking whether $3m + 1$ is a perfect square of the right form; if it is, the index is reported, otherwise the two nearest octagonal numbers are shown. [Learn more about the test](!#the-membership-test)`
+     },
+     lookup: {
+       title: 'Lookup by index',
+       content: `Computes the single term $O_n$ from $O_n = n(3n-2)$ for a positive integer index $n$ and shows the arithmetic in the walkthrough. [Learn more about the rule](!#the-closed-form-derivation)`
+     }
+   },
+   demos: {
+     'listing-the-first-n-terms': {
+       title: 'Ten terms, thirty terms, the cap, one term',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'TYPE 10 and CLICK Update\nShowing 10 terms, largest O₁₀ = 280, sum 1,045.', at: 'tr' },
+         { set: '#se-b-n', value: '10' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 30 and CLICK Update\nO₃₀ = 2,640, sum 27,435.', at: 'tr' },
+         { set: '#se-b-n', value: '30' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 300 and CLICK Update\nCapped at 200 terms: O₂₀₀ = 119,600, sum 8,019,900.', at: 'tr' },
+         { set: '#se-b-n', value: '300' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and CLICK Update\nOne term: O₁ = 1.', at: 'tr' },
+         { set: '#se-b-n', value: '1' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'listing-a-range-of-indexes': {
+       title: 'The range tab, a new range, two bad ranges',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK List a – b\nThe tab opens with indexes 5 to 15: 11 terms from 65 to 645.', at: 'tr' },
+         { click: { button: 'List a' } },
+         { wait: 2600 },
+         { say: 'TYPE 10 and 20, CLICK List range\nCount 11, smallest O₁₀ = 280, largest O₂₀ = 1,160.', at: 'tr' },
+         { set: '#se-r-a', value: '10' },
+         { set: '#se-r-b', value: '20' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 20 and 10, CLICK List range\nThe red box: from-index must be less than or equal to to-index.', at: 'tr' },
+         { set: '#se-r-a', value: '20' },
+         { set: '#se-r-b', value: '10' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and 300, CLICK List range\nRange too wide: the cap is 200 terms.', at: 'tr' },
+         { set: '#se-r-a', value: '1' },
+         { set: '#se-r-b', value: '300' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+       ],
+     },
+     'testing-a-number': {
+       title: 'The test tab, a non-member, a member, 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Test a number\nThe tab opens with 225: a tick, it is O₉.', at: 'tr' },
+         { click: { button: 'Test a number' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Check\nA cross: 100 is not an octagonal number; the walkthrough shows O₆ = 96 and O₇ = 133.', at: 'tr' },
+         { set: '#se-m-n', value: '100' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 3000 },
+         { say: 'TYPE 4720 and CLICK Check\nA tick: 4,720 is O₄₀.', at: 'tr' },
+         { set: '#se-m-n', value: '4720' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Check\nRefused: enter a positive integer.', at: 'tr' },
+         { set: '#se-m-n', value: '0' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'looking-up-a-term-by-index': {
+       title: 'The lookup tab, two indexes, n = 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Lookup by index\nThe tab opens with n = 25: O₂₅ = 1,825.', at: 'tr' },
+         { click: { button: 'Lookup by index' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Get term\nO₁₀₀ = 29,800.', at: 'tr' },
+         { set: '#se-l-n', value: '100' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1000 and CLICK Get term\nO₁₀₀₀ = 2,998,000.', at: 'tr' },
+         { set: '#se-l-n', value: '1000' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Get term\nRefused: enter a positive integer index.', at: 'tr' },
+         { set: '#se-l-n', value: '0' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+   },
+   sectionOrder: [
+     { id: 'listing-the-first-n-terms', key: 'obj9', demo: 'listing-the-first-n-terms' },
+     { id: 'listing-a-range-of-indexes', key: 'obj10', demo: 'listing-a-range-of-indexes' },
+     { id: 'testing-a-number', key: 'obj11', demo: 'testing-a-number' },
+     { id: 'looking-up-a-term-by-index', key: 'obj12', demo: 'looking-up-a-term-by-index' },
+     { id: 'what-is-an-octagonal-number', key: 'obj1', demo: null },
+     { id: 'the-closed-form-derivation', key: 'obj2', demo: null },
+     { id: 'the-membership-test', key: 'obj3', demo: null },
+     { id: 'properties-and-identities', key: 'obj4', demo: null },
+     { id: 'common-applications', key: 'obj5', demo: null },
+     { id: 'octagonal-vs-centered-octagonal-numbers', key: 'obj6', demo: null },
+     { id: 'common-mistakes', key: 'obj7', demo: null },
+     { id: 'related-sequences-and-concepts', key: 'obj8', demo: null },
+   ],
 sectionsContent: {
   obj1: {
     title: `What is an Octagonal Number?`,
@@ -1009,7 +2054,17 @@ specializes to octagonal at $r = 8$, giving $O_n = n(6n - 4)/2 = n(3n - 2)$.
 
 **Sum-of-arithmetic-series form.** $O_n$ is the sum of the first $n$ terms of the arithmetic series $1, 7, 13, 19, 25, \\ldots$ with $a_1 = 1$ and common difference $d = 6$. The step 6 reflects that $r - 2 = 6$ for $r = 8$.
 
-For deeper coverage see **octagonal number**, **polygonal numbers**, and **figurate numbers**.`,
+For deeper coverage see **octagonal number**, **polygonal numbers**, and **figurate numbers**.
+
+Figurate numbers are introduced through their simplest case in [triangular numbers](!/algebra/sequences#7); the general idea of an explicit formula is [explicit and recursive definitions](!/algebra/sequences#2).
+
+The same pairing argument for the triangular case is written out in [derivation of the closed form](!/algebra/sequences/triangular-numbers#3).
+
+The test it generalises is the triangular one in [properties](!/algebra/sequences/triangular-numbers#4).
+
+The triangular and square identities these build on are in [properties](!/algebra/sequences/triangular-numbers#4) and [properties](!/algebra/sequences/square-numbers#3).
+
+The counting ideas behind these uses start from [properties](!/algebra/sequences/triangular-numbers#4).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -1096,7 +2151,9 @@ So $3m + 1$ must be a perfect square, and the numerator $1 + \\sqrt{3m + 1}$ mus
 
 Notably, centered octagonal numbers are exactly the odd perfect squares: $C_n^{(8)} = (2n - 1)^2$. This unexpected identity makes the centered version more famous in some contexts.
 
-When literature refers to "octagonal numbers" without qualification, it almost always means the polygonal sequence covered here. Centered octagonals require the "centered" qualifier.`,
+When literature refers to "octagonal numbers" without qualification, it almost always means the polygonal sequence covered here. Centered octagonals require the "centered" qualifier.
+
+Both families count dots in an octagon; the simplest figurate family is [triangular numbers](!/algebra/sequences#7).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1111,7 +2168,9 @@ When literature refers to "octagonal numbers" without qualification, it almost a
 
 • **Off-by-one in arithmetic series.** The series is $1, 7, 13, 19, \\ldots$ with general term $6k - 5$ (where $k$ starts at 1). Writing $6k + 1$ or $6k - 1$ gives different sequences.
 
-• **Confusing polygonal index with side count.** $O_n$ is the $n$-th octagonal number, not the count of dots in an octagon with side $n$ (though they happen to coincide for the polygonal definition; the indexing can be subtle).`,
+• **Confusing polygonal index with side count.** $O_n$ is the $n$-th octagonal number, not the count of dots in an octagon with side $n$ (though they happen to coincide for the polygonal definition; the indexing can be subtle).
+
+Index conventions and the two ways of defining a sequence are explained in [definition and notation](!/algebra/sequences#1) and [explicit and recursive definitions](!/algebra/sequences#2).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1140,7 +2199,37 @@ When literature refers to "octagonal numbers" without qualification, it almost a
 
 **Octagonal Pyramidal Numbers** — the 3D analog: $n(n+1)(2n - 1)/2$ wait, actually the formula is more involved. They count dots in an octagonal pyramid.
 
-**Generalized Polygonal Numbers** — extension where indexes can be negative; less famous for octagonals than for pentagonals.`,
+**Generalized Polygonal Numbers** — extension where indexes can be negative; less famous for octagonals than for pentagonals.
+
+The neighbouring calculators are the [heptagonal numbers calculator](!/algebra/calculators/sequences/heptagonal-numbers), the [hexagonal numbers calculator](!/algebra/calculators/sequences/hexagonal-numbers) and the [square numbers calculator](!/algebra/calculators/sequences/square-numbers); the lessons are [triangular numbers](!/algebra/sequences#7) and [square numbers](!/algebra/sequences#8).`,
+    before: ``, after: ``, link: ''
+  },
+  obj9: {
+    title: `Listing the First N Terms`,
+    content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for octagonal numbers is $N(N+1)(2N-1)/2$. Under the cards every term is laid out as a tile with its index above its value, so $O_1 = 1$ to $O_N$ can be read in order.
+
+The box accepts $1$ to $200$: $10$ gives $O_{10} = 280$ with the sum $1,045$, $30$ gives $O_{30} = 2,640$ with the sum $27,435$, and $300$ is capped at $200$ terms, ending at $O_{200} = 119,600$ with the sum $8,019,900$; a single term gives $O_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is an octagonal number](!#what-is-an-octagonal-number).`,
+    before: ``, after: ``, link: ''
+  },
+  obj10: {
+    title: `Listing a Range of Indexes`,
+    content: `Click the **List a – b** tab to list the terms between two positions instead of starting from $1$. Type the **From index** and the **To index** and click **List range** or press Enter. The cards give the **Count** $b - a + 1$, the **Smallest** term $O_a$ and the **Largest** term $O_b$, and the tiles below list every term in between with its index. The tab opens with $5$ to $15$, 11 terms from $O_{5} = 65$ to $O_{15} = 645$; indexes $10$ to $20$ give 11 terms from $280$ to $1,160$.
+
+Both boxes must hold positive integers, the first no larger than the second, and the range may hold at most $200$ terms; otherwise a red box explains: "Enter two positive integer indexes", "From-index must be less than or equal to to-index", or "Range too wide — cap is 200 terms". The panel on the right, **List a – b**, explains the mode, and its walkthrough names the smallest and largest term of your range. The rule each tile uses is explained in [the closed form derivation](!#the-closed-form-derivation).`,
+    before: ``, after: ``, link: ''
+  },
+  obj11: {
+    title: `Testing a Number`,
+    content: `Click the **Test a number** tab to ask whether a given positive integer is an octagonal number. Type it in the **Test number** box and click **Check** or press Enter. A green box with a tick answers yes and names the index, as for the opening value $225$, which is $O_{9}$; a red box with a cross answers no, as for $100$, and the walkthrough on the right then shows the two nearest octagonal numbers, $O_{6} = 96$ and $O_{7} = 133$. A large value is handled the same way: $4,720$ is $O_{40}$.
+
+The box takes positive integers only; $0$, a negative number or a decimal is refused with "Enter a positive integer". The test behind the answer is exact: the explorer checks whether $3m + 1$ is a perfect square whose root is $2$ more than a multiple of $3$; if it is, the index is $(\\sqrt{3m + 1} + 1)/3$, otherwise the two nearest octagonal numbers are shown, so no list has to be searched. The panel on the right, **Test a number**, states this rule, and its walkthrough carries out the arithmetic for your number. The rule itself is explained in [the membership test](!#the-membership-test).`,
+    before: ``, after: ``, link: ''
+  },
+  obj12: {
+    title: `Looking Up a Term by Index`,
+    content: `Click the **Lookup by index** tab to compute one term directly. Type the position in the **Index n** box and click **Get term** or press Enter. Two cards answer: **Index** repeats $n$ and **Value** gives $O_n$ with its index as a subscript. The tab opens with $n = 25$, which gives $O_{25} = 1,825$; $n = 100$ gives $29,800$ and $n = 1000$ gives $2,998,000$. The box takes positive integers only; $0$ is refused with "Enter a positive integer index".
+
+The panel on the right has two parts in every mode. **How it works** names the rule the mode uses, here $O_n = n(3n-2)$, and links to the section of this page that explains it; **Walkthrough** applies the rule to the numbers you typed, so for the lookup it shows the arithmetic with your $n$ filled in. Both change as soon as you switch tabs or click a button. The rule and where it comes from are in [the closed form derivation](!#the-closed-form-derivation).`,
     before: ``, after: ``, link: ''
   }
 },
@@ -1182,6 +2271,143 @@ When literature refers to "octagonal numbers" without qualification, it almost a
     answer: "Tetrahedral numbers appear as a diagonal of Pascal's triangle, as the binomial coefficient C(n+2, 3), in 3D crystal-packing problems, in counting trios of objects (the number of unordered triples from n plus 2 items is Te sub n), and in the hockey-stick identity. They also appear in the cannonball problem: stacking cannonballs in a tetrahedral pile."
 }
 },
+   /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+      Registry entry "/algebra/calculators/sequences/tetrahedral-numbers" in calculators-mesh-registry.json (same folder): 6 instructions, 4 explanation texts with anchors, 12 sections (4 usage with demos), lesson links in every theory section.
+      Before editing this view, read the instructions and re-run its checks (--view tetrahedral-numbers); keep the section ids and the anchors. */
+   instructions: [
+     `Pick a mode with the four tabs across the top of the card: **List first N**, **List a – b**, **Test a number** or **Lookup by index**; the ? beside each tab describes it. [Learn more about the modes](!#listing-the-first-n-terms)`,
+     `In **List first N**, type how many terms to show in **Show first** and click **Update**; the cards give the count, the largest term and the sum, and the tiles list every term. [Learn more about listing terms](!#listing-the-first-n-terms)`,
+     `In **List a – b**, type the **From index** and the **To index** and click **List range**; a red box explains a bad range. [Learn more about ranges](!#listing-a-range-of-indexes)`,
+     `In **Test a number**, type a positive integer in **Test number** and click **Check**; a green box names the index, a red box says it is not a tetrahedral number. [Learn more about the test](!#testing-a-number)`,
+     `In **Lookup by index**, type the position in **Index n** and click **Get term**. [Learn more about lookups](!#looking-up-a-term-by-index)`,
+     `The panel on the right explains the current mode and walks through the arithmetic with your own numbers; it changes with every tab and click. [Learn more about the panel](!#looking-up-a-term-by-index)`
+   ],
+   explanations: {
+     browse: {
+       title: 'List first N',
+       content: `Shows the first $N$ tetrahedral numbers $Te_1, \ldots, Te_N$ from the rule $\mathrm{Te}_n = n(n+1)(n+2)/6$, with the largest term and the running sum, which for tetrahedral numbers is the pentatope number $N(N+1)(N+2)(N+3)/24$. $N$ is capped at $200$. [Learn more about tetrahedral numbers](!#what-is-a-tetrahedral-number)`
+     },
+     range: {
+       title: 'List a – b',
+       content: `Lists $Te_a$ to $Te_b$ for two positive indexes with $a \leq b$ and at most $200$ terms, with the smallest and the largest term of the range. [Learn more about the rule](!#the-closed-form-and-its-derivations)`
+     },
+     member: {
+       title: 'Test a number',
+       content: `Decides whether $m$ is a tetrahedral number by checking whether a whole number $n$ satisfies $n(n+1)(n+2) = 6m$; if it is, the index is reported, otherwise the two nearest tetrahedral numbers are shown. [Learn more about the test](!#the-membership-test-why-its-harder)`
+     },
+     lookup: {
+       title: 'Lookup by index',
+       content: `Computes the single term $Te_n$ from $\mathrm{Te}_n = n(n+1)(n+2)/6$ for a positive integer index $n$ and shows the arithmetic in the walkthrough. [Learn more about the rule](!#the-closed-form-and-its-derivations)`
+     }
+   },
+   demos: {
+     'listing-the-first-n-terms': {
+       title: 'Ten terms, thirty terms, the cap, one term',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'TYPE 10 and CLICK Update\nShowing 10 terms, largest Te₁₀ = 220, sum 715.', at: 'tr' },
+         { set: '#se-b-n', value: '10' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 30 and CLICK Update\nTe₃₀ = 4,960, sum 40,920.', at: 'tr' },
+         { set: '#se-b-n', value: '30' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 300 and CLICK Update\nCapped at 200 terms: Te₂₀₀ = 1,353,400, sum 68,685,050.', at: 'tr' },
+         { set: '#se-b-n', value: '300' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and CLICK Update\nOne term: Te₁ = 1.', at: 'tr' },
+         { set: '#se-b-n', value: '1' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'listing-a-range-of-indexes': {
+       title: 'The range tab, a new range, two bad ranges',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK List a – b\nThe tab opens with indexes 5 to 15: 11 terms from 35 to 680.', at: 'tr' },
+         { click: { button: 'List a' } },
+         { wait: 2600 },
+         { say: 'TYPE 10 and 20, CLICK List range\nCount 11, smallest Te₁₀ = 220, largest Te₂₀ = 1,540.', at: 'tr' },
+         { set: '#se-r-a', value: '10' },
+         { set: '#se-r-b', value: '20' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 20 and 10, CLICK List range\nThe red box: from-index must be less than or equal to to-index.', at: 'tr' },
+         { set: '#se-r-a', value: '20' },
+         { set: '#se-r-b', value: '10' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and 300, CLICK List range\nRange too wide: the cap is 200 terms.', at: 'tr' },
+         { set: '#se-r-a', value: '1' },
+         { set: '#se-r-b', value: '300' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+       ],
+     },
+     'testing-a-number': {
+       title: 'The test tab, a non-member, a member, 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Test a number\nThe tab opens with 120: a tick, it is Te₈.', at: 'tr' },
+         { click: { button: 'Test a number' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Check\nA cross: 100 is not a tetrahedral number; the walkthrough shows Te₇ = 84 and Te₈ = 120.', at: 'tr' },
+         { set: '#se-m-n', value: '100' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 3000 },
+         { say: 'TYPE 1540 and CLICK Check\nA tick: 1,540 is Te₂₀.', at: 'tr' },
+         { set: '#se-m-n', value: '1540' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Check\nRefused: enter a positive integer.', at: 'tr' },
+         { set: '#se-m-n', value: '0' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'looking-up-a-term-by-index': {
+       title: 'The lookup tab, two indexes, n = 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Lookup by index\nThe tab opens with n = 20: Te₂₀ = 1,540.', at: 'tr' },
+         { click: { button: 'Lookup by index' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Get term\nTe₁₀₀ = 171,700.', at: 'tr' },
+         { set: '#se-l-n', value: '100' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1000 and CLICK Get term\nTe₁₀₀₀ = 167,167,000.', at: 'tr' },
+         { set: '#se-l-n', value: '1000' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Get term\nRefused: enter a positive integer index.', at: 'tr' },
+         { set: '#se-l-n', value: '0' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+   },
+   sectionOrder: [
+     { id: 'listing-the-first-n-terms', key: 'obj9', demo: 'listing-the-first-n-terms' },
+     { id: 'listing-a-range-of-indexes', key: 'obj10', demo: 'listing-a-range-of-indexes' },
+     { id: 'testing-a-number', key: 'obj11', demo: 'testing-a-number' },
+     { id: 'looking-up-a-term-by-index', key: 'obj12', demo: 'looking-up-a-term-by-index' },
+     { id: 'what-is-a-tetrahedral-number', key: 'obj1', demo: null },
+     { id: 'the-closed-form-and-its-derivations', key: 'obj2', demo: null },
+     { id: 'the-membership-test-why-its-harder', key: 'obj3', demo: null },
+     { id: 'properties-and-identities', key: 'obj4', demo: null },
+     { id: 'tetrahedral-numbers-and-the-cannonball-problem', key: 'obj5', demo: null },
+     { id: 'pascals-triangle-and-hockey-stick-identity', key: 'obj6', demo: null },
+     { id: 'common-mistakes', key: 'obj7', demo: null },
+     { id: 'related-sequences-and-concepts', key: 'obj8', demo: null },
+   ],
 sectionsContent: {
   obj1: {
     title: `What is a Tetrahedral Number?`,
@@ -1199,7 +2425,17 @@ $$\\mathrm{Te}_n = \\frac{n(n+1)(n+2)}{6}$$
 
 **As a 3D figurate number.** Tetrahedral numbers are the 3D analog of triangular numbers, the simplest 3-dimensional pyramidal sequence. They count dots in a triangular pyramid the way triangulars count dots in a triangle.
 
-For deeper coverage see **tetrahedral number**, **pyramidal numbers**, and **triangular number**.`,
+For deeper coverage see **tetrahedral number**, **pyramidal numbers**, and **triangular number**.
+
+The triangular layers are defined in [definition](!/algebra/sequences/triangular-numbers#1); the sequence family is introduced in [triangular numbers](!/algebra/sequences#7).
+
+The triangular closed form the derivation stacks is proved in [derivation of the closed form](!/algebra/sequences/triangular-numbers#3).
+
+The one-step test it is compared with is the triangular one in [properties](!/algebra/sequences/triangular-numbers#4).
+
+The triangular identities these build on are in [recursive form](!/algebra/sequences/triangular-numbers#2) and [properties](!/algebra/sequences/triangular-numbers#4).
+
+The square numbers that appear in the cannonball problem are treated in [sum of squares](!/algebra/sequences/square-numbers#4).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -1297,7 +2533,9 @@ $$\\binom{2}{2} + \\binom{3}{2} + \\cdots + \\binom{n+1}{2} = \\binom{n+2}{3}$$
 
 The left side is $T_1 + T_2 + \\cdots + T_n$ (triangular numbers); the right side is $\\mathrm{Te}_n$. This is the cleanest proof that the sum of the first $n$ triangulars is the $n$-th tetrahedral.
 
-**Geometric meaning.** A tetrahedron of side $n$ is built from triangular layers of sides $n, n-1, \\ldots, 1$. The total dot count is the sum of layer dot counts, which is the sum of triangulars.`,
+**Geometric meaning.** A tetrahedron of side $n$ is built from triangular layers of sides $n, n-1, \\ldots, 1$. The total dot count is the sum of layer dot counts, which is the sum of triangulars.
+
+The binomial form of the triangular numbers on the neighbouring diagonal is in [properties](!/algebra/sequences/triangular-numbers#4).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1314,7 +2552,9 @@ The left side is $T_1 + T_2 + \\cdots + T_n$ (triangular numbers); the right sid
 
 • **Off-by-one indexing.** $\\mathrm{Te}_1 = 1$, not $\\mathrm{Te}_0 = 0$. Some sources start at $n = 0$; this explorer uses $n = 1$.
 
-• **Confusing the cannonball problem variants.** The tetrahedral cannonball problem has three solutions (n = 1, 2, 48). The square pyramidal cannonball problem has just two non-trivial solutions ($n = 1$ and $n = 24$, where the latter gives $1 + 4 + \\cdots + 576 = 4900 = 70^2$).`,
+• **Confusing the cannonball problem variants.** The tetrahedral cannonball problem has three solutions (n = 1, 2, 48). The square pyramidal cannonball problem has just two non-trivial solutions ($n = 1$ and $n = 24$, where the latter gives $1 + 4 + \\cdots + 576 = 4900 = 70^2$).
+
+Index conventions and the two ways of defining a sequence are explained in [definition and notation](!/algebra/sequences#1) and [explicit and recursive definitions](!/algebra/sequences#2).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1341,7 +2581,37 @@ The left side is $T_1 + T_2 + \\cdots + T_n$ (triangular numbers); the right sid
 
 **3-Simplex** — the technical name for a tetrahedron in higher-dimensional terminology. The $k$-simplex generalizes to $k$ dimensions; the $k$-th simplex numbers are $\\binom{n + k - 1}{k}$.
 
-**Mordell's Theorem** — the deep result enabling the proof that only finitely many tetrahedral numbers are squares.`,
+**Mordell's Theorem** — the deep result enabling the proof that only finitely many tetrahedral numbers are squares.
+
+The neighbouring calculators are the [triangular numbers calculator](!/algebra/calculators/sequences/triangular-numbers), the [square numbers calculator](!/algebra/calculators/sequences/square-numbers) and the [arithmetic sequence calculator](!/algebra/calculators/sequences/arithmetic-sequence); the lessons are [triangular numbers](!/algebra/sequences#7) and [square numbers](!/algebra/sequences#8).`,
+    before: ``, after: ``, link: ''
+  },
+  obj9: {
+    title: `Listing the First N Terms`,
+    content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for tetrahedral numbers is the pentatope number $N(N+1)(N+2)(N+3)/24$. Under the cards every term is laid out as a tile with its index above its value, so $Te_1 = 1$ to $Te_N$ can be read in order.
+
+The box accepts $1$ to $200$: $10$ gives $Te_{10} = 220$ with the sum $715$, $30$ gives $Te_{30} = 4,960$ with the sum $40,920$, and $300$ is capped at $200$ terms, ending at $Te_{200} = 1,353,400$ with the sum $68,685,050$; a single term gives $Te_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a tetrahedral number](!#what-is-a-tetrahedral-number).`,
+    before: ``, after: ``, link: ''
+  },
+  obj10: {
+    title: `Listing a Range of Indexes`,
+    content: `Click the **List a – b** tab to list the terms between two positions instead of starting from $1$. Type the **From index** and the **To index** and click **List range** or press Enter. The cards give the **Count** $b - a + 1$, the **Smallest** term $Te_a$ and the **Largest** term $Te_b$, and the tiles below list every term in between with its index. The tab opens with $5$ to $15$, 11 terms from $Te_{5} = 35$ to $Te_{15} = 680$; indexes $10$ to $20$ give 11 terms from $220$ to $1,540$.
+
+Both boxes must hold positive integers, the first no larger than the second, and the range may hold at most $200$ terms; otherwise a red box explains: "Enter two positive integer indexes", "From-index must be less than or equal to to-index", or "Range too wide — cap is 200 terms". The panel on the right, **List a – b**, explains the mode, and its walkthrough names the smallest and largest term of your range. The rule each tile uses is explained in [the closed form and its derivations](!#the-closed-form-and-its-derivations).`,
+    before: ``, after: ``, link: ''
+  },
+  obj11: {
+    title: `Testing a Number`,
+    content: `Click the **Test a number** tab to ask whether a given positive integer is a tetrahedral number. Type it in the **Test number** box and click **Check** or press Enter. A green box with a tick answers yes and names the index, as for the opening value $120$, which is $Te_{8}$; a red box with a cross answers no, as for $100$, and the walkthrough on the right then shows the two nearest tetrahedral numbers, $Te_{7} = 84$ and $Te_{8} = 120$. A large value is handled the same way: $1,540$ is $Te_{20}$.
+
+The box takes positive integers only; $0$, a negative number or a decimal is refused with "Enter a positive integer". The test behind the answer is exact: the explorer solves the cubic $n(n+1)(n+2) = 6m$ for a whole number $n$ by a rounded cube root and a direct check; if one fits, that is the index, otherwise the two nearest tetrahedral numbers are shown, so no list has to be searched. The panel on the right, **Test a number**, states this rule, and its walkthrough carries out the arithmetic for your number. The rule itself is explained in [the membership test — why it's harder](!#the-membership-test-why-its-harder).`,
+    before: ``, after: ``, link: ''
+  },
+  obj12: {
+    title: `Looking Up a Term by Index`,
+    content: `Click the **Lookup by index** tab to compute one term directly. Type the position in the **Index n** box and click **Get term** or press Enter. Two cards answer: **Index** repeats $n$ and **Value** gives $Te_n$ with its index as a subscript. The tab opens with $n = 20$, which gives $Te_{20} = 1,540$; $n = 100$ gives $171,700$ and $n = 1000$ gives $167,167,000$. The box takes positive integers only; $0$ is refused with "Enter a positive integer index".
+
+The panel on the right has two parts in every mode. **How it works** names the rule the mode uses, here $\\mathrm{Te}_n = n(n+1)(n+2)/6$, and links to the section of this page that explains it; **Walkthrough** applies the rule to the numbers you typed, so for the lookup it shows the arithmetic with your $n$ filled in. Both change as soon as you switch tabs or click a button. The rule and where it comes from are in [the closed form and its derivations](!#the-closed-form-and-its-derivations).`,
     before: ``, after: ``, link: ''
   }
 },
@@ -1384,6 +2654,143 @@ The left side is $T_1 + T_2 + \\cdots + T_n$ (triangular numbers); the right sid
     answer: "Fibonacci numbers appear in number theory (Zeckendorf's theorem, Lucas sequences), in combinatorics (tilings, paths in graphs, compositions of integers), in computer science (recursive algorithms, Fibonacci heaps), and in nature (spiral patterns in plants, the arrangement of petals, leaves, and seeds). The golden ratio appears in art, architecture, and design."
 }
 },
+   /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+      Registry entry "/algebra/calculators/sequences/fibonacci-sequence" in calculators-mesh-registry.json (same folder): 6 instructions, 4 explanation texts with anchors, 12 sections (4 usage with demos), lesson links in every theory section.
+      Before editing this view, read the instructions and re-run its checks (--view fibonacci-sequence); keep the section ids and the anchors. */
+   instructions: [
+     `Pick a mode with the four tabs across the top of the card: **List first N**, **List a – b**, **Test a number** or **Lookup by index**; the ? beside each tab describes it. [Learn more about the modes](!#listing-the-first-n-terms)`,
+     `In **List first N**, type how many terms to show in **Show first** and click **Update**; the cards give the count, the largest term and the sum, and the tiles list every term. [Learn more about listing terms](!#listing-the-first-n-terms)`,
+     `In **List a – b**, type the **From index** and the **To index** and click **List range**; a red box explains a bad range. [Learn more about ranges](!#listing-a-range-of-indexes)`,
+     `In **Test a number**, type a positive integer in **Test number** and click **Check**; a green box names the index, a red box says it is not a Fibonacci number. [Learn more about the test](!#testing-a-number)`,
+     `In **Lookup by index**, type the position in **Index n** and click **Get term**. [Learn more about lookups](!#looking-up-a-term-by-index)`,
+     `The panel on the right explains the current mode and walks through the arithmetic with your own numbers; it changes with every tab and click. [Learn more about the panel](!#looking-up-a-term-by-index)`
+   ],
+   explanations: {
+     browse: {
+       title: 'List first N',
+       content: `Shows the first $N$ Fibonacci numbers $F_1, \ldots, F_N$ from the rule $F_n = F_{n-1} + F_{n-2}$ with $F_1 = F_2 = 1$, with the largest term and the running sum, which for Fibonacci numbers is $F_{N+2} - 1$. $N$ is capped at $100$. [Learn more about Fibonacci numbers](!#what-is-the-fibonacci-sequence)`
+     },
+     range: {
+       title: 'List a – b',
+       content: `Lists $F_a$ to $F_b$ for two positive indexes with $a \leq b$ and at most $100$ terms, with the smallest and the largest term of the range. [Learn more about the rule](!#the-recurrence-and-binets-formula)`
+     },
+     member: {
+       title: 'Test a number',
+       content: `Decides whether $m$ is a Fibonacci number by checking whether $5m^2 + 4$ or $5m^2 - 4$ is a perfect square; if it is, the index is reported, otherwise the two nearest Fibonacci numbers are shown. [Learn more about the test](!#the-membership-test-gessels-identity)`
+     },
+     lookup: {
+       title: 'Lookup by index',
+       content: `Computes the single term $F_n$ from $F_n = F_{n-1} + F_{n-2}$ with $F_1 = F_2 = 1$ for a positive integer index $n$ and shows the arithmetic in the walkthrough. [Learn more about the rule](!#the-recurrence-and-binets-formula)`
+     }
+   },
+   demos: {
+     'listing-the-first-n-terms': {
+       title: 'Ten terms, thirty terms, the cap, one term',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'TYPE 10 and CLICK Update\nShowing 10 terms, largest F₁₀ = 55, sum 143.', at: 'tr' },
+         { set: '#se-b-n', value: '10' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 30 and CLICK Update\nF₃₀ = 832,040, sum 2,178,308.', at: 'tr' },
+         { set: '#se-b-n', value: '30' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 200 and CLICK Update\nCapped at 100 terms: F₁₀₀ = 354,224,848,179,261,915,075, sum 927,372,692,193,078,999,175.', at: 'tr' },
+         { set: '#se-b-n', value: '200' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and CLICK Update\nOne term: F₁ = 1.', at: 'tr' },
+         { set: '#se-b-n', value: '1' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'listing-a-range-of-indexes': {
+       title: 'The range tab, a new range, two bad ranges',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK List a – b\nThe tab opens with indexes 5 to 15: 11 terms from 5 to 610.', at: 'tr' },
+         { click: { button: 'List a' } },
+         { wait: 2600 },
+         { say: 'TYPE 10 and 20, CLICK List range\nCount 11, smallest F₁₀ = 55, largest F₂₀ = 6,765.', at: 'tr' },
+         { set: '#se-r-a', value: '10' },
+         { set: '#se-r-b', value: '20' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 20 and 10, CLICK List range\nThe red box: from-index must be less than or equal to to-index.', at: 'tr' },
+         { set: '#se-r-a', value: '20' },
+         { set: '#se-r-b', value: '10' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and 200, CLICK List range\nRange too wide: the cap is 100 terms.', at: 'tr' },
+         { set: '#se-r-a', value: '1' },
+         { set: '#se-r-b', value: '200' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+       ],
+     },
+     'testing-a-number': {
+       title: 'The test tab, a non-member, a member, 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Test a number\nThe tab opens with 144: a tick, it is F₁₂.', at: 'tr' },
+         { click: { button: 'Test a number' } },
+         { wait: 2600 },
+         { say: 'TYPE 100 and CLICK Check\nA cross: 100 is not a Fibonacci number; the walkthrough shows F₁₁ = 89 and F₁₂ = 144.', at: 'tr' },
+         { set: '#se-m-n', value: '100' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 3000 },
+         { say: 'TYPE 6765 and CLICK Check\nA tick: 6,765 is F₂₀.', at: 'tr' },
+         { set: '#se-m-n', value: '6765' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Check\nRefused: enter a positive integer.', at: 'tr' },
+         { set: '#se-m-n', value: '0' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'looking-up-a-term-by-index': {
+       title: 'The lookup tab, two indexes, n = 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Lookup by index\nThe tab opens with n = 50: F₅₀ = 12,586,269,025.', at: 'tr' },
+         { click: { button: 'Lookup by index' } },
+         { wait: 2600 },
+         { say: 'TYPE 60 and CLICK Get term\nF₆₀ = 1,548,008,755,920.', at: 'tr' },
+         { set: '#se-l-n', value: '60' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 90 and CLICK Get term\nF₉₀ = 2,880,067,194,370,816,120.', at: 'tr' },
+         { set: '#se-l-n', value: '90' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Get term\nRefused: enter a positive integer index.', at: 'tr' },
+         { set: '#se-l-n', value: '0' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+   },
+   sectionOrder: [
+     { id: 'listing-the-first-n-terms', key: 'obj9', demo: 'listing-the-first-n-terms' },
+     { id: 'listing-a-range-of-indexes', key: 'obj10', demo: 'listing-a-range-of-indexes' },
+     { id: 'testing-a-number', key: 'obj11', demo: 'testing-a-number' },
+     { id: 'looking-up-a-term-by-index', key: 'obj12', demo: 'looking-up-a-term-by-index' },
+     { id: 'what-is-the-fibonacci-sequence', key: 'obj1', demo: null },
+     { id: 'the-recurrence-and-binets-formula', key: 'obj2', demo: null },
+     { id: 'the-membership-test-gessels-identity', key: 'obj3', demo: null },
+     { id: 'properties-and-identities', key: 'obj4', demo: null },
+     { id: 'fibonacci-in-nature-and-application', key: 'obj5', demo: null },
+     { id: 'fibonacci-and-the-golden-ratio', key: 'obj6', demo: null },
+     { id: 'common-mistakes', key: 'obj7', demo: null },
+     { id: 'related-sequences-and-concepts', key: 'obj8', demo: null },
+   ],
 sectionsContent: {
   obj1: {
     title: `What is the Fibonacci Sequence?`,
@@ -1403,7 +2810,17 @@ Each term is the sum of the two before. Despite the simplicity of the rule, the 
 
 **Exact computation.** Fibonacci numbers grow exponentially — $F_{100}$ has 21 digits, $F_{1000}$ has 209 digits. The explorer uses arbitrary-precision integers (BigInt) so every term is exact at any index, with no floating-point error.
 
-For deeper coverage see **Fibonacci sequence**, **golden ratio**, and **linear recurrence**.`,
+For deeper coverage see **Fibonacci sequence**, **golden ratio**, and **linear recurrence**.
+
+The definition is given in [definition](!/algebra/sequences/fibonacci#1) and the sequence is placed among the others in [Fibonacci numbers](!/algebra/sequences#6).
+
+The closed form is derived in [Binet](!/algebra/sequences/fibonacci#3).
+
+The identities the test rests on are collected in [identities and properties](!/algebra/sequences/fibonacci#4).
+
+More identities, with proofs, are in [identities and properties](!/algebra/sequences/fibonacci#4); the companion sequence is [Lucas numbers](!/algebra/sequences/fibonacci#5).
+
+The sequence is summarised in [Fibonacci at a glance](!/algebra/sequences/fibonacci#6).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -1507,7 +2924,9 @@ Even for modest $n$, the ratio is close to $\\varphi$: $F_{11}/F_{10} = 89/55 = 
 
 **The golden rectangle.** A rectangle with side ratio $\\varphi : 1$ has the property that cutting off a square leaves a smaller rectangle with the same side ratio. Drawing diagonals of these nested rectangles approximates the **logarithmic spiral**, which itself is closely related to natural growth patterns.
 
-**Other irrational appearances.** The continued-fraction expansion of $\\varphi$ is $[1; 1, 1, 1, \\ldots]$ — the simplest possible continued fraction. This makes $\\varphi$ the **most irrational** number in the sense of being hardest to approximate by rationals.`,
+**Other irrational appearances.** The continued-fraction expansion of $\\varphi$ is $[1; 1, 1, 1, \\ldots]$ — the simplest possible continued fraction. This makes $\\varphi$ the **most irrational** number in the sense of being hardest to approximate by rationals.
+
+The ratio is the subject of [the golden ratio](!/algebra/sequences/fibonacci#2).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1522,7 +2941,9 @@ Even for modest $n$, the ratio is close to $\\varphi$: $F_{11}/F_{10} = 89/55 = 
 
 • **Confusing Fibonacci with Lucas numbers.** Lucas numbers $L_n$ satisfy the same recurrence with $L_1 = 1, L_2 = 3$. They share many identities with Fibonacci but are a distinct sequence: 1, 3, 4, 7, 11, 18, 29, 47, ...
 
-• **Overclaiming nature appearances.** Fibonacci spirals appear in many plants but not all. Spurious claims (e.g., "the Mona Lisa uses golden-ratio proportions") are common but often unsupported by careful measurement.`,
+• **Overclaiming nature appearances.** Fibonacci spirals appear in many plants but not all. Spurious claims (e.g., "the Mona Lisa uses golden-ratio proportions") are common but often unsupported by careful measurement.
+
+Index conventions and recursive definitions are explained in [definition and notation](!/algebra/sequences#1) and [explicit and recursive definitions](!/algebra/sequences#2).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1551,7 +2972,37 @@ Even for modest $n$, the ratio is close to $\\varphi$: $F_{11}/F_{10} = 89/55 = 
 
 **Wythoff Sequences** — pairs of sequences whose union is all positive integers, defined using $\\varphi$. The "lower" Wythoff sequence is $\\lfloor n \\varphi \\rfloor$ and the "upper" is $\\lfloor n \\varphi^2 \\rfloor$.
 
-**Spiral and Phyllotaxis** — the natural appearance of Fibonacci numbers in plant arrangements, sunflower seed spirals, pinecone scales, etc.`,
+**Spiral and Phyllotaxis** — the natural appearance of Fibonacci numbers in plant arrangements, sunflower seed spirals, pinecone scales, etc.
+
+The neighbouring calculators are the [geometric sequence calculator](!/algebra/calculators/sequences/geometric-sequence), the [prime numbers calculator](!/algebra/calculators/sequences/prime-numbers) and the [triangular numbers calculator](!/algebra/calculators/sequences/triangular-numbers); the lessons are [Lucas numbers](!/algebra/sequences/fibonacci#5) and [geometric sequences](!/algebra/sequences#4).`,
+    before: ``, after: ``, link: ''
+  },
+  obj9: {
+    title: `Listing the First N Terms`,
+    content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for Fibonacci numbers is $F_{N+2} - 1$. Under the cards every term is laid out as a tile with its index above its value, so $F_1 = 1$ to $F_N$ can be read in order.
+
+The box accepts $1$ to $100$: $10$ gives $F_{10} = 55$ with the sum $143$, $30$ gives $F_{30} = 832,040$ with the sum $2,178,308$, and $200$ is capped at $100$ terms, ending at $F_{100} = 354,224,848,179,261,915,075$ with the sum $927,372,692,193,078,999,175$; a single term gives $F_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is the fibonacci sequence](!#what-is-the-fibonacci-sequence).`,
+    before: ``, after: ``, link: ''
+  },
+  obj10: {
+    title: `Listing a Range of Indexes`,
+    content: `Click the **List a – b** tab to list the terms between two positions instead of starting from $1$. Type the **From index** and the **To index** and click **List range** or press Enter. The cards give the **Count** $b - a + 1$, the **Smallest** term $F_a$ and the **Largest** term $F_b$, and the tiles below list every term in between with its index. The tab opens with $5$ to $15$, 11 terms from $F_{5} = 5$ to $F_{15} = 610$; indexes $10$ to $20$ give 11 terms from $55$ to $6,765$.
+
+Both boxes must hold positive integers, the first no larger than the second, and the range may hold at most $100$ terms; otherwise a red box explains: "Enter two positive integer indexes", "From-index must be less than or equal to to-index", or "Range too wide — cap is 100 terms". The panel on the right, **List a – b**, explains the mode, and its walkthrough names the smallest and largest term of your range. The rule each tile uses is explained in [the recurrence and binet's formula](!#the-recurrence-and-binets-formula).`,
+    before: ``, after: ``, link: ''
+  },
+  obj11: {
+    title: `Testing a Number`,
+    content: `Click the **Test a number** tab to ask whether a given positive integer is a Fibonacci number. Type it in the **Test number** box and click **Check** or press Enter. A green box with a tick answers yes and names the index, as for the opening value $144$, which is $F_{12}$; a red box with a cross answers no, as for $100$, and the walkthrough on the right then shows the two nearest Fibonacci numbers, $F_{11} = 89$ and $F_{12} = 144$. A large value is handled the same way: $6,765$ is $F_{20}$.
+
+The box takes positive integers only; $0$, a negative number or a decimal is refused with "Enter a positive integer". The test behind the answer is exact: the explorer uses the identity that $m$ is a Fibonacci number exactly when $5m^2 + 4$ or $5m^2 - 4$ is a perfect square; if it is, the index is found, otherwise the two nearest Fibonacci numbers are shown, so no list has to be searched. The panel on the right, **Test a number**, states this rule, and its walkthrough carries out the arithmetic for your number. The rule itself is explained in [the membership test — gessel's identity](!#the-membership-test-gessels-identity).`,
+    before: ``, after: ``, link: ''
+  },
+  obj12: {
+    title: `Looking Up a Term by Index`,
+    content: `Click the **Lookup by index** tab to compute one term directly. Type the position in the **Index n** box and click **Get term** or press Enter. Two cards answer: **Index** repeats $n$ and **Value** gives $F_n$ with its index as a subscript. The tab opens with $n = 50$, which gives $F_{50} = 12,586,269,025$; $n = 60$ gives $1,548,008,755,920$ and $n = 90$ gives $2,880,067,194,370,816,120$. The box takes positive integers only; $0$ is refused with "Enter a positive integer index".
+
+The panel on the right has two parts in every mode. **How it works** names the rule the mode uses, here $F_n = F_{n-1} + F_{n-2}$ with $F_1 = F_2 = 1$, and links to the section of this page that explains it; **Walkthrough** applies the rule to the numbers you typed, so for the lookup it shows the arithmetic with your $n$ filled in. Both change as soon as you switch tabs or click a button. The rule and where it comes from are in [the recurrence and binet's formula](!#the-recurrence-and-binets-formula).`,
     before: ``, after: ``, link: ''
   }
 },
@@ -1594,6 +3045,143 @@ Even for modest $n$, the ratio is close to $\\varphi$: $F_{11}/F_{10} = 89/55 = 
     answer: "Primes are the building blocks of integers via the fundamental theorem of arithmetic: every integer greater than 1 factors uniquely into primes. They underpin RSA encryption and other public-key cryptography systems, appear throughout number theory (Riemann hypothesis, Goldbach conjecture, twin primes), and play central roles in algebraic number theory, analytic number theory, and combinatorics."
 }
 },
+   /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+      Registry entry "/algebra/calculators/sequences/prime-numbers" in calculators-mesh-registry.json (same folder): 6 instructions, 4 explanation texts with anchors, 12 sections (4 usage with demos), lesson links in every theory section.
+      Before editing this view, read the instructions and re-run its checks (--view prime-numbers); keep the section ids and the anchors. */
+   instructions: [
+     `Pick a mode with the four tabs across the top of the card: **List first N**, **List a – b**, **Test a number** or **Lookup by index**; the ? beside each tab describes it. [Learn more about the modes](!#listing-the-first-n-terms)`,
+     `In **List first N**, type how many terms to show in **Show first** and click **Update**; the cards give the count, the largest term and the sum, and the tiles list every term. [Learn more about listing terms](!#listing-the-first-n-terms)`,
+     `In **List a – b**, type the **From index** and the **To index** and click **List range**; a red box explains a bad range. [Learn more about ranges](!#listing-a-range-of-indexes)`,
+     `In **Test a number**, type a positive integer in **Test number** and click **Check**; a green box names the index, a red box says it is not prime. [Learn more about the test](!#testing-a-number)`,
+     `In **Lookup by index**, type the position in **Index n** and click **Get term**. [Learn more about lookups](!#looking-up-a-term-by-index)`,
+     `The panel on the right explains the current mode and walks through the arithmetic with your own numbers; it changes with every tab and click. [Learn more about the panel](!#looking-up-a-term-by-index)`
+   ],
+   explanations: {
+     browse: {
+       title: 'List first N',
+       content: `Shows the first $N$ prime numbers $p_1, \ldots, p_N$ from the rule $p_n$, the $n$-th prime, with the largest term and the running sum, the sum of the first $N$ primes. $N$ is capped at $1,000$. [Learn more about prime numbers](!#what-is-a-prime-number)`
+     },
+     range: {
+       title: 'List a – b',
+       content: `Lists $p_a$ to $p_b$ for two positive indexes with $a \leq b$ and at most $1,000$ terms, with the smallest and the largest term of the range. [Learn more about the rule](!#the-fundamental-theorem-of-arithmetic)`
+     },
+     member: {
+       title: 'Test a number',
+       content: `Decides whether $m$ is prime by checking the precomputed list of the first $1{,}000$ primes; if it is, the index is reported, otherwise the two nearest prime numbers are shown. [Learn more about the test](!#primality-testing-how-the-explorer-decides)`
+     },
+     lookup: {
+       title: 'Lookup by index',
+       content: `Computes the single term $p_n$ from $p_n$, the $n$-th prime for a positive integer index $n$ and shows the arithmetic in the walkthrough. [Learn more about the rule](!#the-fundamental-theorem-of-arithmetic)`
+     }
+   },
+   demos: {
+     'listing-the-first-n-terms': {
+       title: 'Ten terms, thirty terms, the cap, one term',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'TYPE 10 and CLICK Update\nShowing 10 terms, largest p₁₀ = 29, sum 129.', at: 'tr' },
+         { set: '#se-b-n', value: '10' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 30 and CLICK Update\np₃₀ = 113, sum 1,593.', at: 'tr' },
+         { set: '#se-b-n', value: '30' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1100 and CLICK Update\nCapped at 1,000 terms: p₁₀₀₀ = 7,919, sum 3,682,913.', at: 'tr' },
+         { set: '#se-b-n', value: '1100' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and CLICK Update\nOne term: p₁ = 2.', at: 'tr' },
+         { set: '#se-b-n', value: '1' },
+         { click: { button: 'Update', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'listing-a-range-of-indexes': {
+       title: 'The range tab, a new range, two bad ranges',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK List a – b\nThe tab opens with indexes 10 to 30: 21 terms from 29 to 113.', at: 'tr' },
+         { click: { button: 'List a' } },
+         { wait: 2600 },
+         { say: 'TYPE 40 and 60, CLICK List range\nCount 21, smallest p₄₀ = 173, largest p₆₀ = 281.', at: 'tr' },
+         { set: '#se-r-a', value: '40' },
+         { set: '#se-r-b', value: '60' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 60 and 40, CLICK List range\nThe red box: from-index must be less than or equal to to-index.', at: 'tr' },
+         { set: '#se-r-a', value: '60' },
+         { set: '#se-r-b', value: '40' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1 and 1100, CLICK List range\nRange too wide: the cap is 1,000 terms.', at: 'tr' },
+         { set: '#se-r-a', value: '1' },
+         { set: '#se-r-b', value: '1100' },
+         { click: { button: 'List range', exact: true } },
+         { wait: 2800 },
+       ],
+     },
+     'testing-a-number': {
+       title: 'The test tab, a non-member, a member, 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Test a number\nThe tab opens with 97: a tick, it is p₂₅.', at: 'tr' },
+         { click: { button: 'Test a number' } },
+         { wait: 2600 },
+         { say: 'TYPE 91 and CLICK Check\nA cross: 91 is not prime; the walkthrough shows p₂₄ = 89 and p₂₅ = 97.', at: 'tr' },
+         { set: '#se-m-n', value: '91' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 3000 },
+         { say: 'TYPE 7919 and CLICK Check\nA tick: 7,919 is p₁₀₀₀.', at: 'tr' },
+         { set: '#se-m-n', value: '7919' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Check\nRefused: enter a positive integer.', at: 'tr' },
+         { set: '#se-m-n', value: '0' },
+         { click: { button: 'Check', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+     'looking-up-a-term-by-index': {
+       title: 'The lookup tab, two indexes, n = 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Lookup by index\nThe tab opens with n = 100: p₁₀₀ = 541.', at: 'tr' },
+         { click: { button: 'Lookup by index' } },
+         { wait: 2600 },
+         { say: 'TYPE 500 and CLICK Get term\np₅₀₀ = 3,571.', at: 'tr' },
+         { set: '#se-l-n', value: '500' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 1000 and CLICK Get term\np₁₀₀₀ = 7,919.', at: 'tr' },
+         { set: '#se-l-n', value: '1000' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2800 },
+         { say: 'TYPE 0 and CLICK Get term\nRefused: enter a positive integer index.', at: 'tr' },
+         { set: '#se-l-n', value: '0' },
+         { click: { button: 'Get term', exact: true } },
+         { wait: 2600 },
+       ],
+     },
+   },
+   sectionOrder: [
+     { id: 'listing-the-first-n-terms', key: 'obj9', demo: 'listing-the-first-n-terms' },
+     { id: 'listing-a-range-of-indexes', key: 'obj10', demo: 'listing-a-range-of-indexes' },
+     { id: 'testing-a-number', key: 'obj11', demo: 'testing-a-number' },
+     { id: 'looking-up-a-term-by-index', key: 'obj12', demo: 'looking-up-a-term-by-index' },
+     { id: 'what-is-a-prime-number', key: 'obj1', demo: null },
+     { id: 'the-fundamental-theorem-of-arithmetic', key: 'obj2', demo: null },
+     { id: 'primality-testing-how-the-explorer-decides', key: 'obj3', demo: null },
+     { id: 'the-prime-counting-function-and-distribution', key: 'obj4', demo: null },
+     { id: 'famous-conjectures-and-open-problems', key: 'obj5', demo: null },
+     { id: 'primes-in-cryptography', key: 'obj6', demo: null },
+     { id: 'common-mistakes', key: 'obj7', demo: null },
+     { id: 'related-sequences-and-concepts', key: 'obj8', demo: null },
+   ],
 sectionsContent: {
   obj1: {
     title: `What is a Prime Number?`,
@@ -1609,7 +3197,17 @@ $$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73
 
 **Scope of this explorer.** This tool uses a precomputed list of the first 10,000 primes, with maximum value 104,729 (the 10,000th prime). Lookups and membership tests within this range are constant-time. For larger numbers, dedicated primality-testing tools are needed.
 
-For deeper coverage see **prime number**, **fundamental theorem of arithmetic**, and **primality test**.`,
+For deeper coverage see **prime number**, **fundamental theorem of arithmetic**, and **primality test**.
+
+The definition is given in [definition](!/algebra/sequences/prime-numbers#1) and in [prime numbers](!/arithmetic/divisibility#7); the sequence is placed among the others in [prime numbers](!/algebra/sequences#9).
+
+Unique factorisation is the subject of [prime factorization](!/algebra/sequences/prime-numbers#5).
+
+Trial division and its alternatives are compared in [primality testing](!/algebra/sequences/prime-numbers#4); the sieve is [the sieve of Eratosthenes](!/algebra/sequences/prime-numbers#3).
+
+The thinning of the primes is stated in [the prime number theorem](!/algebra/sequences/prime-numbers#6).
+
+Why the primes never run out is proved in [infinitude of primes](!/algebra/sequences/prime-numbers#2); the named families are in [types of primes](!/algebra/sequences/prime-numbers#7).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -1713,7 +3311,9 @@ Breaking RSA is equivalent to factoring large semi-primes. The best classical al
 
 **Why primality is necessary.** The mathematical structure (cyclic groups, modular inverses, Fermat's little theorem) requires primes or carefully chosen prime-related moduli. Replacing $p$ with a composite breaks the algorithms in subtle but devastating ways.
 
-**Post-quantum cryptography.** Lattice-based, code-based, and hash-based schemes aim to replace RSA and Diffie-Hellman without relying on factoring or discrete logs. Active area of standardization (NIST).`,
+**Post-quantum cryptography.** Lattice-based, code-based, and hash-based schemes aim to replace RSA and Diffie-Hellman without relying on factoring or discrete logs. Active area of standardization (NIST).
+
+The factorisation the ciphers rely on is [prime factorization](!/algebra/sequences/prime-numbers#5).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1732,7 +3332,9 @@ Breaking RSA is equivalent to factoring large semi-primes. The best classical al
 
 • **Misremembering Goldbach.** Goldbach's conjecture is about **even** integers, not all integers. The corresponding statement for odd integers — every odd $\\geq 7$ is a sum of three primes — was settled (Helfgott 2013, building on Vinogradov).
 
-• **Mersenne-Fermat prime confusion.** Mersenne: $2^p - 1$. Fermat: $2^{2^n} + 1$. Different forms, different open problems.`,
+• **Mersenne-Fermat prime confusion.** Mersenne: $2^p - 1$. Fermat: $2^{2^n} + 1$. Different forms, different open problems.
+
+Index conventions are explained in [definition and notation](!/algebra/sequences#1); what counts as prime is settled in [definition](!/algebra/sequences/prime-numbers#1).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1775,7 +3377,37 @@ Breaking RSA is equivalent to factoring large semi-primes. The best classical al
 
 **Prime Gaps** — the differences $p_{n+1} - p_n$. The largest known prime gaps are surprisingly large; the average is $\\sim \\ln p_n$.
 
-**Green-Tao Theorem** — the primes contain arbitrarily long arithmetic progressions.`,
+**Green-Tao Theorem** — the primes contain arbitrarily long arithmetic progressions.
+
+The neighbouring calculators are the [prime number checker](!/arithmetic/calculators/prime-calculator), the [factoring calculator](!/algebra/calculators/factoring) and the [Fibonacci sequence calculator](!/algebra/calculators/sequences/fibonacci-sequence); the lessons are [types of primes](!/algebra/sequences/prime-numbers#7) and [prime factorization](!/arithmetic/divisibility#8).`,
+    before: ``, after: ``, link: ''
+  },
+  obj9: {
+    title: `Listing the First N Terms`,
+    content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, the sum of the first $N$ primes. Under the cards every term is laid out as a tile with its index above its value, so $p_1 = 2$ to $p_N$ can be read in order.
+
+The box accepts $1$ to $1,000$: $10$ gives $p_{10} = 29$ with the sum $129$, $30$ gives $p_{30} = 113$ with the sum $1,593$, and $1,100$ is capped at $1,000$ terms, ending at $p_{1,000} = 7,919$ with the sum $3,682,913$; a single term gives $p_1 = 2$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a prime number](!#what-is-a-prime-number).`,
+    before: ``, after: ``, link: ''
+  },
+  obj10: {
+    title: `Listing a Range of Indexes`,
+    content: `Click the **List a – b** tab to list the terms between two positions instead of starting from $1$. Type the **From index** and the **To index** and click **List range** or press Enter. The cards give the **Count** $b - a + 1$, the **Smallest** term $p_a$ and the **Largest** term $p_b$, and the tiles below list every term in between with its index. The tab opens with $10$ to $30$, 21 terms from $p_{10} = 29$ to $p_{30} = 113$; indexes $40$ to $60$ give 21 terms from $173$ to $281$.
+
+Both boxes must hold positive integers, the first no larger than the second, and the range may hold at most $1,000$ terms; otherwise a red box explains: "Enter two positive integer indexes", "From-index must be less than or equal to to-index", or "Range too wide — cap is 1,000 terms". The panel on the right, **List a – b**, explains the mode, and its walkthrough names the smallest and largest term of your range. The rule each tile uses is explained in [the fundamental theorem of arithmetic](!#the-fundamental-theorem-of-arithmetic).`,
+    before: ``, after: ``, link: ''
+  },
+  obj11: {
+    title: `Testing a Number`,
+    content: `Click the **Test a number** tab to ask whether a given positive integer is prime. Type it in the **Test number** box and click **Check** or press Enter. A green box with a tick answers yes and names the index, as for the opening value $97$, which is $p_{25}$; a red box with a cross answers no, as for $91$, and the walkthrough on the right then shows the two nearest prime numbers, $p_{24} = 89$ and $p_{25} = 97$. A large value is handled the same way: $7,919$ is $p_{1000}$.
+
+The box takes positive integers only; $0$, a negative number or a decimal is refused with "Enter a positive integer". The test behind the answer is exact: the explorer looks the number up in its precomputed list of the first $1{,}000$ primes (up to $7{,}919$); a hit gives the index, a miss shows the two nearest primes, and a number above $7{,}919$ is reported as not prime. The panel on the right, **Test a number**, states this rule, and its walkthrough carries out the arithmetic for your number. The rule itself is explained in [primality testing — how the explorer decides](!#primality-testing-how-the-explorer-decides).`,
+    before: ``, after: ``, link: ''
+  },
+  obj12: {
+    title: `Looking Up a Term by Index`,
+    content: `Click the **Lookup by index** tab to compute one term directly. Type the position in the **Index n** box and click **Get term** or press Enter. Two cards answer: **Index** repeats $n$ and **Value** gives $p_n$ with its index as a subscript. The tab opens with $n = 100$, which gives $p_{100} = 541$; $n = 500$ gives $3,571$ and $n = 1000$ gives $7,919$. The box takes positive integers only; $0$ is refused with "Enter a positive integer index".
+
+The panel on the right has two parts in every mode. **How it works** names the rule the mode uses, here $p_n$, the $n$-th prime, and links to the section of this page that explains it; **Walkthrough** applies the rule to the numbers you typed, so for the lookup it shows the arithmetic with your $n$ filled in. Both change as soon as you switch tabs or click a button. The rule and where it comes from are in [the fundamental theorem of arithmetic](!#the-fundamental-theorem-of-arithmetic).`,
     before: ``, after: ``, link: ''
   }
 },
@@ -1818,6 +3450,198 @@ Breaking RSA is equivalent to factoring large semi-primes. The best classical al
     answer: "An arithmetic sequence adds a constant common difference d at each step; a geometric sequence multiplies by a constant common ratio r at each step. Arithmetic grows linearly: a sub n equals a sub 1 plus the quantity n minus 1, times d. Geometric grows exponentially: a sub n equals a sub 1 times r to the power of n minus 1. Both are foundational sequence types in algebra."
 }
 },
+   /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+      Registry entry "/algebra/calculators/sequences/arithmetic-sequence" in calculators-mesh-registry.json (same folder): 8 instructions, 5 explanation texts with anchors, 14 sections (6 usage with demos), lesson links in every theory section.
+      Before editing this view, read the instructions and re-run its checks (--view arithmetic-sequence); keep the section ids and the anchors. */
+   instructions: [
+     `Set **First term a₁** and **Common difference d** in the Parameters row and click **Apply**; every tab recomputes with the new rule. [Learn more about the parameters](!#setting-the-parameters)`,
+     `Pick a mode with the five tabs across the top of the card: **List first N**, **List a – b**, **Test a number**, **Lookup by index** or **Solver**; the ? beside each tab describes it. [Learn more about the modes](!#listing-the-first-n-terms)`,
+     `In **List first N**, type how many terms to show in **Show first** and click **Update**; the cards give the count, the largest term and the sum, and the tiles list every term. [Learn more about listing terms](!#listing-the-first-n-terms)`,
+     `In **List a – b**, type the **From index** and the **To index** and click **List range**; a red box explains a bad range. [Learn more about ranges](!#listing-a-range-of-indexes)`,
+     `In **Test a number**, type a number in **Test number** and click **Check**; a green box names the index, a red box says it is not a term. [Learn more about the test](!#testing-a-number)`,
+     `In **Lookup by index**, type the position in **Index n** and click **Get term**. [Learn more about lookups](!#looking-up-a-term-by-index)`,
+     `In **Solver**, pick **Find term (aₙ)** or **Sum Sₙ**, fill three boxes, leave the one marked **solve** empty and click **Solve**; move the radio to change the unknown. [Learn more about the solver](!#using-the-solver-tab)`,
+     `The panel on the right explains the current mode and walks through the arithmetic with your own numbers; it changes with every tab and click. [Learn more about the panel](!#looking-up-a-term-by-index)`
+   ],
+   explanations: {
+     browse: {
+       title: 'List first N',
+       content: `Shows the first $N$ terms $a_1, \\ldots, a_N$ from the rule $a_n = a_1 + (n - 1) \\cdot d$ with the current $a_1$ and $d$, with the largest term and the running sum, $S_N = \\frac{N}{2}(a_1 + a_N)$. $N$ is capped at $500$. [Learn more about the rule](!#the-n-th-term-formula)`
+     },
+     range: {
+       title: 'List a – b',
+       content: `Lists $a_a$ to $a_b$ for two positive indexes with $a \\leq b$ and at most $500$ terms, with the smallest and the largest term of the range. [Learn more about the rule](!#the-n-th-term-formula)`
+     },
+     member: {
+       title: 'Test a number',
+       content: `Decides whether $m$ is a term by checking whether $(m - a_1) / d$ is a whole number $k \\geq 0$, which makes $m = a_{k+1}$; if it is, the index is reported, otherwise the two nearest terms are shown. [Learn more about the test](!#testing-a-number)`
+     },
+     lookup: {
+       title: 'Lookup by index',
+       content: `Computes the single term $a_n$ from $a_n = a_1 + (n - 1) \\cdot d$ for a positive integer index $n$ and shows the arithmetic in the walkthrough. [Learn more about the rule](!#the-n-th-term-formula)`
+     },
+     solver: {
+       title: 'Solver',
+       content: `Fill three of $a_1$, $d$, $n$ and $a_n$ (or $S_n$) and the solver isolates the fourth from $a_n = a_1 + (n - 1) \\cdot d$ or $S_n = \\frac{n}{2}(2a_1 + (n - 1) \\cdot d)$. [Learn more about the solver](!#using-the-solver-five-quantities-four-relations)`
+     }
+   },
+   demos: {
+     'setting-the-parameters': {
+       title: 'Two new parameter pairs, then the opening pair again',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'TYPE 5 and 2, CLICK Apply\nThe tiles now run 5, 7, …, 19; sum 96.', at: 'tr' },
+         {'set': '#se-param-a1', 'value': '5'},
+         {'set': '#se-param-d', 'value': '2'},
+         {'click': {'button': 'Apply', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 10 and −3, CLICK Apply\nThe terms fall from 10 to −11; sum −4.', at: 'tr' },
+         {'set': '#se-param-a1', 'value': '10'},
+         {'set': '#se-param-d', 'value': '-3'},
+         {'click': {'button': 'Apply', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 2 and 3, CLICK Apply\nBack to the opening sequence 2, 5, 8, …, 23.', at: 'tr' },
+         {'set': '#se-param-a1', 'value': '2'},
+         {'set': '#se-param-d', 'value': '3'},
+         {'click': {'button': 'Apply', 'exact': true}},
+         {'wait': 2800},
+       ]
+     },
+     'listing-the-first-n-terms': {
+       title: 'Three counts in List first N',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'TYPE 10 and CLICK Update\na₁₀ = 29, sum 155.', at: 'tr' },
+         {'set': '#se-b-n', 'value': '10'},
+         {'click': {'button': 'Update', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 600 and CLICK Update\nCapped at 500 terms: a₅₀₀ = 1,499, sum 375,250.', at: 'tr' },
+         {'set': '#se-b-n', 'value': '600'},
+         {'click': {'button': 'Update', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 1 and CLICK Update\nOne term: a₁ = 2.', at: 'tr' },
+         {'set': '#se-b-n', 'value': '1'},
+         {'click': {'button': 'Update', 'exact': true}},
+         {'wait': 2800},
+       ]
+     },
+     'listing-a-range-of-indexes': {
+       title: 'The range tab, a new range, two bad ranges',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK List a – b\nThe tab opens with indexes 5 to 12: 8 terms from 14 to 35.', at: 'tr' },
+         {'click': {'button': 'List a'}},
+         {'wait': 2600},
+         { say: 'TYPE 10 and 20, CLICK List range\nCount 11, smallest a₁₀ = 29, largest a₂₀ = 59.', at: 'tr' },
+         {'set': '#se-r-a', 'value': '10'},
+         {'set': '#se-r-b', 'value': '20'},
+         {'click': {'button': 'List range', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 20 and 10, CLICK List range\nThe red box: from-index must be less than or equal to to-index.', at: 'tr' },
+         {'set': '#se-r-a', 'value': '20'},
+         {'set': '#se-r-b', 'value': '10'},
+         {'click': {'button': 'List range', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 1 and 600, CLICK List range\nRange too wide: the cap is 500 terms.', at: 'tr' },
+         {'set': '#se-r-a', 'value': '1'},
+         {'set': '#se-r-b', 'value': '600'},
+         {'click': {'button': 'List range', 'exact': true}},
+         {'wait': 2800},
+       ]
+     },
+     'testing-a-number': {
+       title: 'The test tab, a non-member, a member, a decimal',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Test a number\nThe tab opens with 47: a tick, it is a₁₆.', at: 'tr' },
+         {'click': {'button': 'Test a number'}},
+         {'wait': 2600},
+         { say: 'TYPE 49 and CLICK Check\nA cross: 49 is not a term; the walkthrough shows a₁₆ = 47 and a₁₇ = 50.', at: 'tr' },
+         {'set': '#se-m-n', 'value': '49'},
+         {'click': {'button': 'Check', 'exact': true}},
+         {'wait': 3000},
+         { say: 'TYPE 2999 and CLICK Check\nA tick: 2,999 is a₁₀₀₀.', at: 'tr' },
+         {'set': '#se-m-n', 'value': '2999'},
+         {'click': {'button': 'Check', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 3.5 and CLICK Check\n3.5 is not a term either: the neighbours are a₁ = 2 and a₂ = 5.', at: 'tr' },
+         {'set': '#se-m-n', 'value': '3.5'},
+         {'click': {'button': 'Check', 'exact': true}},
+         {'wait': 2800},
+       ]
+     },
+     'looking-up-a-term-by-index': {
+       title: 'The lookup tab, two indexes, n = 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Lookup by index\nThe tab opens with n = 20: a₂₀ = 59.', at: 'tr' },
+         {'click': {'button': 'Lookup by index'}},
+         {'wait': 2600},
+         { say: 'TYPE 100 and CLICK Get term\na₁₀₀ = 299.', at: 'tr' },
+         {'set': '#se-l-n', 'value': '100'},
+         {'click': {'button': 'Get term', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 1000 and CLICK Get term\na₁₀₀₀ = 2,999.', at: 'tr' },
+         {'set': '#se-l-n', 'value': '1000'},
+         {'click': {'button': 'Get term', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 0 and CLICK Get term\nRefused: enter a positive integer index.', at: 'tr' },
+         {'set': '#se-l-n', 'value': '0'},
+         {'click': {'button': 'Get term', 'exact': true}},
+         {'wait': 2600},
+       ]
+     },
+     'using-the-solver-tab': {
+       title: 'The solver tab: a term, an unknown moved, a sum',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Solver, TYPE 2, 3, 20, CLICK Solve\na₂₀ = 2 + 19 · 3 = 59.', at: 'tr' },
+         {'click': {'button': 'Solver'}},
+         {'set': {'css': '.se-solver-input', 'nth': 0}, 'value': '2'},
+         {'set': {'css': '.se-solver-input', 'nth': 1}, 'value': '3'},
+         {'set': {'css': '.se-solver-input', 'nth': 2}, 'value': '20'},
+         {'click': {'button': 'Solve', 'exact': true}},
+         {'wait': 2800},
+         { say: 'CLICK solve beside n, TYPE 299 as aₙ, CLICK Solve\nn = (299 − 2) / 3 + 1 = 100.', at: 'tr' },
+         {'click': {'css': '.se-solver-radio input', 'nth': 2}},
+         {'set': {'css': '.se-solver-input', 'nth': 3}, 'value': '299'},
+         {'click': {'button': 'Solve', 'exact': true}},
+         {'wait': 2800},
+         { say: 'CLICK Sum Sₙ, then Solve\nThe boxes are cleared: fill all fields except the one being solved for.', at: 'tr' },
+         {'click': {'button': 'Sum S'}},
+         {'click': {'button': 'Solve', 'exact': true}},
+         {'wait': 2600},
+         { say: 'TYPE 2, 3, 10, CLICK Solve\nS₁₀ = 5 · (4 + 27) = 155.', at: 'tr' },
+         {'set': {'css': '.se-solver-input', 'nth': 0}, 'value': '2'},
+         {'set': {'css': '.se-solver-input', 'nth': 1}, 'value': '3'},
+         {'set': {'css': '.se-solver-input', 'nth': 2}, 'value': '10'},
+         {'click': {'button': 'Solve', 'exact': true}},
+         {'wait': 2800},
+       ]
+     },
+   },
+   sectionOrder: [
+     { id: 'setting-the-parameters', key: 'obj9', demo: 'setting-the-parameters' },
+     { id: 'listing-the-first-n-terms', key: 'obj10', demo: 'listing-the-first-n-terms' },
+     { id: 'listing-a-range-of-indexes', key: 'obj11', demo: 'listing-a-range-of-indexes' },
+     { id: 'testing-a-number', key: 'obj12', demo: 'testing-a-number' },
+     { id: 'looking-up-a-term-by-index', key: 'obj13', demo: 'looking-up-a-term-by-index' },
+     { id: 'using-the-solver-tab', key: 'obj14', demo: 'using-the-solver-tab' },
+     { id: 'what-is-an-arithmetic-sequence', key: 'obj1', demo: null },
+     { id: 'the-n-th-term-formula', key: 'obj2', demo: null },
+     { id: 'the-sum-formula-and-gausss-trick', key: 'obj3', demo: null },
+     { id: 'using-the-solver-five-quantities-four-relations', key: 'obj4', demo: null },
+     { id: 'properties-and-identities', key: 'obj5', demo: null },
+     { id: 'common-applications', key: 'obj6', demo: null },
+     { id: 'common-mistakes', key: 'obj7', demo: null },
+     { id: 'related-sequences-and-concepts', key: 'obj8', demo: null },
+   ],
 sectionsContent: {
   obj1: {
     title: `What is an Arithmetic Sequence?`,
@@ -1840,7 +3664,17 @@ $$a_1, \\;\\; a_1 + d, \\;\\; a_1 + 2d, \\;\\; a_1 + 3d, \\;\\; \\ldots$$
 
 **Parametric nature.** Unlike triangular or square numbers (where the sequence is fixed), an arithmetic sequence depends on two parameters: $a_1$ and $d$. Different choices give different sequences. This explorer lets you set both parameters and explore the resulting sequence.
 
-For deeper coverage see **arithmetic sequence**, **arithmetic progression**, and **series**.`,
+For deeper coverage see **arithmetic sequence**, **arithmetic progression**, and **series**.
+
+The definition and the notation are explained in [Arithmetic sequences: definition](!/algebra/sequences/arithmetic#1) and [Sequence notation](!/algebra/sequences/arithmetic#notation); the overview page compares the main types in [Arithmetic sequences](!/algebra/sequences#3).
+
+[Finding terms](!/algebra/sequences/arithmetic#3) works the formula through more examples, and [Recursive formula](!/algebra/sequences/arithmetic#4) gives the step-by-step form $a_n = a_{n-1} + d$.
+
+[Arithmetic series](!/algebra/sequences/arithmetic#5) proves the sum formula and applies it; [Explicit and recursive definitions](!/algebra/sequences#2) places sums next to the term rules.
+
+Each relation the solver uses is derived in [Finding terms](!/algebra/sequences/arithmetic#3) and [Arithmetic series](!/algebra/sequences/arithmetic#5).
+
+The mean property is the subject of [Arithmetic mean](!/algebra/sequences/arithmetic#6); the recurrence is in [Recursive formula](!/algebra/sequences/arithmetic#4).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -1937,7 +3771,9 @@ The quadratic formula gives $n$. There can be two positive solutions; the smalle
 • **Tournament round counts.** Round-robin and elimination tournaments often have round counts following arithmetic patterns.
 • **Stack and pile counts.** Arrangements of objects with constant-difference layer counts (rare in nature, common in puzzles).
 • **Simple interest.** Account balance grows by $P r$ each year, an arithmetic sequence with $a_1 = P$ and $d = P r$. (Compound interest is geometric.)
-• **Solving word problems.** Many classical algebra problems reduce to arithmetic sequences: "Anna's salary increases by \\$3,000 each year. After 10 years she earns \\$70,000. What was her starting salary?" — find $a_1$ given $a_{11} = 70000$ and $d = 3000$.`,
+• **Solving word problems.** Many classical algebra problems reduce to arithmetic sequences: "Anna's salary increases by \\$3,000 each year. After 10 years she earns \\$70,000. What was her starting salary?" — find $a_1$ given $a_{11} = 70000$ and $d = 3000$.
+
+[Identifying arithmetic sequences](!/algebra/sequences/arithmetic#2) shows how to spot a constant difference in data; [Arithmetic sequences at a glance](!/algebra/sequences/arithmetic#7) collects the formulas used here.`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1956,7 +3792,9 @@ The quadratic formula gives $n$. There can be two positive solutions; the smalle
 
 • **Forgetting the second positive root in sum-for-$n$ quadratic.** The quadratic $d n^2 + (2 a_1 - d) n - 2 S_n = 0$ can have two positive solutions. The smaller (usually integer) one is the intended answer; the other might be an extraneous positive root or a valid second possibility for specific $S_n$ values.
 
-• **Treating $d = 0$ as a special exception incorrectly.** When $d = 0$, the sequence is constant, $a_n = a_1$ for all $n$, and $S_n = n a_1$. Many formulas still work; just verify before applying.`,
+• **Treating $d = 0$ as a special exception incorrectly.** When $d = 0$, the sequence is constant, $a_n = a_1$ for all $n$, and $S_n = n a_1$. Many formulas still work; just verify before applying.
+
+The one-page summary [Arithmetic sequences at a glance](!/algebra/sequences/arithmetic#7) is a quick check against these slips; the definition is in [Arithmetic sequences: definition](!/algebra/sequences/arithmetic#1).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1987,7 +3825,51 @@ The quadratic formula gives $n$. There can be two positive solutions; the smalle
 
 **Gauss Summation** — the classical identity $1 + 2 + \\cdots + n = n(n+1)/2$, a special case of the arithmetic-series formula.
 
-**Simple Interest** — financial application; account balance grows arithmetically with annual interest.`,
+**Simple Interest** — financial application; account balance grows arithmetically with annual interest.
+
+[Geometric sequences](!/algebra/sequences#4), [Harmonic sequences](!/algebra/sequences#5) and [Triangular numbers](!/algebra/sequences#7) are introduced on the sequences overview page; the geometric case has its own lesson in [Geometric sequences: definition](!/algebra/sequences/geometric#1).`,
+    before: ``, after: ``, link: ''
+  },
+  obj9: {
+    title: `Setting the Parameters`,
+    content: `The card opens with the **Sequence** drop-down set to Arithmetic sequence; the other entry switches the card to the Geometric sequence, which has its own page, [Geometric sequence calculator](!/algebra/calculators/sequences/geometric-sequence). Under it the **Parameters** row holds the two numbers that fix the sequence, **First term a₁** and **Common difference d**, opening with $a_1 = 2$ and $d = 3$. Type new values and click **Apply** or press Enter; every tab recomputes at once with the rule $a_n = a_1 + (n - 1) \\cdot d$. With $a_1 = 5$ and $d = 2$ the first eight terms run $5, 7, \\ldots, 19$ with the sum $96$; with $a_1 = 10$ and $d = -3$ they fall from $10$ to $-11$ and the sum is $-4$.
+
+Both boxes take any decimal, negative values included; a blank box makes every term read NaN, so fill both before applying. Which two numbers define the sequence is explained in [what is an arithmetic sequence](!#what-is-an-arithmetic-sequence).`,
+    before: ``, after: ``, link: ''
+  },
+  obj10: {
+    title: `Listing the First N Terms`,
+    content: `The explorer opens on the **List first N** tab, one of five tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, $S_N = \\frac{N}{2}(a_1 + a_N)$. Under the cards every term is laid out as a tile with its index above its value.
+
+With the opening parameters the box accepts $1$ to $500$: $8$ gives $a_8 = 23$ with the sum $100$, $10$ gives $a_{10} = 29$ with the sum $155$, and $600$ is capped at $500$ terms, ending at $a_{500} = 1,499$ with the sum $375,250$; a single term gives $a_1 = 2$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. The rule is explained in [the n-th term formula](!#the-n-th-term-formula) and the sum in [the sum formula and gauss's trick](!#the-sum-formula-and-gausss-trick).`,
+    before: ``, after: ``, link: ''
+  },
+  obj11: {
+    title: `Listing a Range of Indexes`,
+    content: `Click the **List a – b** tab to list the terms between two positions instead of starting from $1$. Type the **From index** and the **To index** and click **List range** or press Enter. The cards give the **Count** $b - a + 1$, the **Smallest** term $a_a$ and the **Largest** term $a_b$, and the tiles below list every term in between with its index. The tab opens with $5$ to $12$, 8 terms from $a_{5} = 14$ to $a_{12} = 35$; indexes $10$ to $20$ give 11 terms from $29$ to $59$.
+
+Both boxes must hold positive integers, the first no larger than the second, and the range may hold at most $500$ terms; otherwise a red box explains: "Enter two positive integer indexes", "From-index must be less than or equal to to-index", or "Range too wide — cap is 500 terms". The panel on the right, **List a – b**, explains the mode, and its walkthrough names the smallest and largest term of your range. The rule each tile uses is explained in [the n-th term formula](!#the-n-th-term-formula).`,
+    before: ``, after: ``, link: ''
+  },
+  obj12: {
+    title: `Testing a Number`,
+    content: `Click the **Test a number** tab to ask whether a given number is a term of the sequence. Type it in the **Test number** box and click **Check** or press Enter. A green box with a tick answers yes and names the index, as for the opening value $47$, which is $a_{16}$; a red box with a cross answers no, as for $49$, and the walkthrough on the right then shows the two nearest terms, $a_{16} = 47$ and $a_{17} = 50$. A large value is handled the same way: $2,999$ is $a_{1000}$.
+
+The box takes any number, decimals and negatives included, since the parameters may be decimals too; an empty box is refused with "Enter a number". The test is exact: the explorer computes $k = (m - a_1) / d$ and accepts $m$ only when $k$ is a whole number that is not negative; the index is then $k + 1$. The panel on the right, **Test a number**, states this rule, and its walkthrough carries out the arithmetic for your number. The formula behind it is in [the n-th term formula](!#the-n-th-term-formula).`,
+    before: ``, after: ``, link: ''
+  },
+  obj13: {
+    title: `Looking Up a Term by Index`,
+    content: `Click the **Lookup by index** tab to compute one term directly. Type the position in the **Index n** box and click **Get term** or press Enter. Two cards answer: **Index** repeats $n$ and **Value** gives $a_n$ with its index as a subscript. The tab opens with $n = 20$, which gives $a_{20} = 59$; $n = 100$ gives $299$ and $n = 1000$ gives $2,999$. The box takes positive integers only; $0$ is refused with "Enter a positive integer index".
+
+The panel on the right has two parts in every mode. **How it works** names the rule the mode uses, here $a_n = a_1 + (n - 1) \\cdot d$, and links to the section of this page that explains it; **Walkthrough** applies the rule to the numbers you typed, so for the lookup it shows the arithmetic with your $n$ and the current parameters filled in. Both change as soon as you switch tabs or click a button. The rule and where it comes from are in [the n-th term formula](!#the-n-th-term-formula).`,
+    before: ``, after: ``, link: ''
+  },
+  obj14: {
+    title: `Using the Solver Tab`,
+    content: `Click the **Solver** tab, the fifth tab, to work the formulas backwards. Two buttons choose the relation: **Find term (aₙ)** uses $a_n = a_1 + (n - 1) \\cdot d$ and **Sum Sₙ** uses $S_n = \\frac{n}{2}(2a_1 + (n - 1) \\cdot d)$. Each relation has four boxes; the one marked **solve** with a ? is the unknown and the other three must be filled. The unknown opens as $a_n$ or $S_n$; click the **solve** radio beside another box to make that the unknown. Click **Solve** or press Enter and the answer appears under the grid, while the walkthrough on the right shows the substitution.
+
+With $a_1 = 2$, $d = 3$ and $n = 20$ the term is $a_{20} = 59$; with $a_n = 299$ and the unknown moved to $n$ the solver returns $n = 100$; with $n = 10$ the sum is $S_{10} = 155$. Switching the relation clears the boxes, and clicking Solve with a box empty gives the message "Fill all fields except the one being solved for". Solving $S_n$ for $n$ solves a quadratic and reports "No positive solution for n" when none fits. The solver boxes are independent of the Parameters row. Every relation is explained in [using the solver — five quantities, four relations](!#using-the-solver-five-quantities-four-relations).`,
     before: ``, after: ``, link: ''
   }
 },
@@ -2030,6 +3912,200 @@ The quadratic formula gives $n$. There can be two positive solutions; the smalle
     answer: "An arithmetic sequence adds a constant common difference d at each step; a geometric sequence multiplies by a constant common ratio r at each step. Arithmetic grows linearly. Geometric grows or decays exponentially. The two are the fundamental building blocks of sequence theory in algebra."
 }
 },
+   /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+      Registry entry "/algebra/calculators/sequences/geometric-sequence" in calculators-mesh-registry.json (same folder): 8 instructions, 5 explanation texts with anchors, 14 sections (6 usage with demos), lesson links in every theory section.
+      Before editing this view, read the instructions and re-run its checks (--view geometric-sequence); keep the section ids and the anchors. */
+   instructions: [
+     `Set **First term a₁** and **Common ratio r** in the Parameters row and click **Apply**; every tab recomputes with the new rule. [Learn more about the parameters](!#setting-the-parameters)`,
+     `Pick a mode with the five tabs across the top of the card: **List first N**, **List a – b**, **Test a number**, **Lookup by index** or **Solver**; the ? beside each tab describes it. [Learn more about the modes](!#listing-the-first-n-terms)`,
+     `In **List first N**, type how many terms to show in **Show first** and click **Update**; the cards give the count, the largest term and the sum, and the tiles list every term. [Learn more about listing terms](!#listing-the-first-n-terms)`,
+     `In **List a – b**, type the **From index** and the **To index** and click **List range**; a red box explains a bad range. [Learn more about ranges](!#listing-a-range-of-indexes)`,
+     `In **Test a number**, type a number in **Test number** and click **Check**; a green box names the index, a red box says it is not a term. [Learn more about the test](!#testing-a-number)`,
+     `In **Lookup by index**, type the position in **Index n** and click **Get term**. [Learn more about lookups](!#looking-up-a-term-by-index)`,
+     `In **Solver**, pick **Find term (aₙ)**, **Sum Sₙ** or **Infinite sum S∞**, fill every box but the one marked **solve** and click **Solve**; move the radio to change the unknown. [Learn more about the solver](!#using-the-solver-tab)`,
+     `The panel on the right explains the current mode and walks through the arithmetic with your own numbers; it changes with every tab and click. [Learn more about the panel](!#looking-up-a-term-by-index)`
+   ],
+   explanations: {
+     browse: {
+       title: 'List first N',
+       content: `Shows the first $N$ terms $a_1, \\ldots, a_N$ from the rule $a_n = a_1 \\cdot r^{n-1}$ with the current $a_1$ and $r$, with the largest term and the running sum, $S_N = a_1 \\frac{r^N - 1}{r - 1}$. $N$ is capped at $100$. [Learn more about the rule](!#the-n-th-term-formula)`
+     },
+     range: {
+       title: 'List a – b',
+       content: `Lists $a_a$ to $a_b$ for two positive indexes with $a \\leq b$ and at most $100$ terms, with the smallest and the largest term of the range. [Learn more about the rule](!#the-n-th-term-formula)`
+     },
+     member: {
+       title: 'Test a number',
+       content: `Decides whether $m$ is a term by checking whether repeated multiplication of $a_1$ by $r$ ever lands exactly on $m$; if it is, the index is reported, otherwise the two nearest terms are shown. [Learn more about the test](!#testing-a-number)`
+     },
+     lookup: {
+       title: 'Lookup by index',
+       content: `Computes the single term $a_n$ from $a_n = a_1 \\cdot r^{n-1}$ for a positive integer index $n$ and shows the arithmetic in the walkthrough. [Learn more about the rule](!#the-n-th-term-formula)`
+     },
+     solver: {
+       title: 'Solver',
+       content: `Fill all boxes but the unknown and the solver isolates it from $a_n = a_1 \\cdot r^{n-1}$, $S_n = a_1 \\frac{r^n - 1}{r - 1}$ or $S_\\infty = \\frac{a_1}{1 - r}$, the last one only for $|r| < 1$. [Learn more about the solver](!#using-the-solver-three-modes)`
+     }
+   },
+   demos: {
+     'setting-the-parameters': {
+       title: 'Two new parameter pairs, then the opening pair again',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'TYPE 1 and 2, CLICK Apply\nThe tiles now show the powers of two 1, 2, 4, …, 128; sum 255.', at: 'tr' },
+         {'set': '#se-param-a1', 'value': '1'},
+         {'set': '#se-param-r', 'value': '2'},
+         {'click': {'button': 'Apply', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 3 and 0.5, CLICK Apply\nThe terms halve from 3 to 0.0234375; sum 5.9765625.', at: 'tr' },
+         {'set': '#se-param-a1', 'value': '3'},
+         {'set': '#se-param-r', 'value': '0.5'},
+         {'click': {'button': 'Apply', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 2 and 3, CLICK Apply\nBack to the opening sequence 2, 6, 18, …, 4,374.', at: 'tr' },
+         {'set': '#se-param-a1', 'value': '2'},
+         {'set': '#se-param-r', 'value': '3'},
+         {'click': {'button': 'Apply', 'exact': true}},
+         {'wait': 2800},
+       ]
+     },
+     'listing-the-first-n-terms': {
+       title: 'Three counts in List first N',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'TYPE 12 and CLICK Update\na₁₂ = 354,294, sum 531,440.', at: 'tr' },
+         {'set': '#se-b-n', 'value': '12'},
+         {'click': {'button': 'Update', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 4 and CLICK Update\na₄ = 54, sum 80.', at: 'tr' },
+         {'set': '#se-b-n', 'value': '4'},
+         {'click': {'button': 'Update', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 1 and CLICK Update\nOne term: a₁ = 2.', at: 'tr' },
+         {'set': '#se-b-n', 'value': '1'},
+         {'click': {'button': 'Update', 'exact': true}},
+         {'wait': 2800},
+       ]
+     },
+     'listing-a-range-of-indexes': {
+       title: 'The range tab, a new range, two bad ranges',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK List a – b\nThe tab opens with indexes 1 to 6: 6 terms from 2 to 486.', at: 'tr' },
+         {'click': {'button': 'List a'}},
+         {'wait': 2600},
+         { say: 'TYPE 4 and 9, CLICK List range\nCount 6, smallest a₄ = 54, largest a₉ = 13,122.', at: 'tr' },
+         {'set': '#se-r-a', 'value': '4'},
+         {'set': '#se-r-b', 'value': '9'},
+         {'click': {'button': 'List range', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 9 and 4, CLICK List range\nThe red box: from-index must be less than or equal to to-index.', at: 'tr' },
+         {'set': '#se-r-a', 'value': '9'},
+         {'set': '#se-r-b', 'value': '4'},
+         {'click': {'button': 'List range', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 1 and 200, CLICK List range\nRange too wide: the cap is 100 terms.', at: 'tr' },
+         {'set': '#se-r-a', 'value': '1'},
+         {'set': '#se-r-b', 'value': '200'},
+         {'click': {'button': 'List range', 'exact': true}},
+         {'wait': 2800},
+       ]
+     },
+     'testing-a-number': {
+       title: 'The test tab, a non-member, a member, a decimal',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Test a number\nThe tab opens with 162: a tick, it is a₅.', at: 'tr' },
+         {'click': {'button': 'Test a number'}},
+         {'wait': 2600},
+         { say: 'TYPE 100 and CLICK Check\nA cross: 100 is not a term; the walkthrough shows a₄ = 54 and a₅ = 162.', at: 'tr' },
+         {'set': '#se-m-n', 'value': '100'},
+         {'click': {'button': 'Check', 'exact': true}},
+         {'wait': 3000},
+         { say: 'TYPE 39366 and CLICK Check\nA tick: 39,366 is a₁₀.', at: 'tr' },
+         {'set': '#se-m-n', 'value': '39366'},
+         {'click': {'button': 'Check', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 1000 and CLICK Check\n1,000 is not a term either: the neighbours are a₆ = 486 and a₇ = 1,458.', at: 'tr' },
+         {'set': '#se-m-n', 'value': '1000'},
+         {'click': {'button': 'Check', 'exact': true}},
+         {'wait': 2800},
+       ]
+     },
+     'looking-up-a-term-by-index': {
+       title: 'The lookup tab, two indexes, n = 0',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Lookup by index\nThe tab opens with n = 10: a₁₀ = 39,366.', at: 'tr' },
+         {'click': {'button': 'Lookup by index'}},
+         {'wait': 2600},
+         { say: 'TYPE 15 and CLICK Get term\na₁₅ = 9,565,938.', at: 'tr' },
+         {'set': '#se-l-n', 'value': '15'},
+         {'click': {'button': 'Get term', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 20 and CLICK Get term\na₂₀ = 2,324,522,934.', at: 'tr' },
+         {'set': '#se-l-n', 'value': '20'},
+         {'click': {'button': 'Get term', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 0 and CLICK Get term\nRefused: enter a positive integer index.', at: 'tr' },
+         {'set': '#se-l-n', 'value': '0'},
+         {'click': {'button': 'Get term', 'exact': true}},
+         {'wait': 2600},
+       ]
+     },
+     'using-the-solver-tab': {
+       title: 'The solver tab: a term, an unknown moved, a sum',
+       scale: 0.5,
+       minHeight: 377,
+       script: [
+         { say: 'CLICK Solver, TYPE 2, 3, 10, CLICK Solve\na₁₀ = 2 · 3⁹ = 39,366.', at: 'tr' },
+         {'click': {'button': 'Solver'}},
+         {'set': {'css': '.se-solver-input', 'nth': 0}, 'value': '2'},
+         {'set': {'css': '.se-solver-input', 'nth': 1}, 'value': '3'},
+         {'set': {'css': '.se-solver-input', 'nth': 2}, 'value': '10'},
+         {'click': {'button': 'Solve', 'exact': true}},
+         {'wait': 2800},
+         { say: 'CLICK Sum Sₙ, TYPE 2, 3, 5, CLICK Solve\nS₅ = 2 · (243 − 1) / 2 = 242.', at: 'tr' },
+         {'click': {'button': 'Sum S'}},
+         {'set': {'css': '.se-solver-input', 'nth': 0}, 'value': '2'},
+         {'set': {'css': '.se-solver-input', 'nth': 1}, 'value': '3'},
+         {'set': {'css': '.se-solver-input', 'nth': 2}, 'value': '5'},
+         {'click': {'button': 'Solve', 'exact': true}},
+         {'wait': 2800},
+         { say: 'CLICK Infinite sum S∞, TYPE 2 and 0.5, CLICK Solve\nS∞ = 2 / (1 − 0.5) = 4.', at: 'tr' },
+         {'click': {'button': 'Infinite sum'}},
+         {'set': {'css': '.se-solver-input', 'nth': 0}, 'value': '2'},
+         {'set': {'css': '.se-solver-input', 'nth': 1}, 'value': '0.5'},
+         {'click': {'button': 'Solve', 'exact': true}},
+         {'wait': 2800},
+         { say: 'TYPE 3 as r, CLICK Solve\nRefused: the series diverges when |r| ≥ 1.', at: 'tr' },
+         {'set': {'css': '.se-solver-input', 'nth': 1}, 'value': '3'},
+         {'click': {'button': 'Solve', 'exact': true}},
+         {'wait': 2600},
+       ]
+     },
+   },
+   sectionOrder: [
+     { id: 'setting-the-parameters', key: 'obj9', demo: 'setting-the-parameters' },
+     { id: 'listing-the-first-n-terms', key: 'obj10', demo: 'listing-the-first-n-terms' },
+     { id: 'listing-a-range-of-indexes', key: 'obj11', demo: 'listing-a-range-of-indexes' },
+     { id: 'testing-a-number', key: 'obj12', demo: 'testing-a-number' },
+     { id: 'looking-up-a-term-by-index', key: 'obj13', demo: 'looking-up-a-term-by-index' },
+     { id: 'using-the-solver-tab', key: 'obj14', demo: 'using-the-solver-tab' },
+     { id: 'what-is-a-geometric-sequence', key: 'obj1', demo: null },
+     { id: 'the-n-th-term-formula', key: 'obj2', demo: null },
+     { id: 'the-finite-sum-formula', key: 'obj3', demo: null },
+     { id: 'the-infinite-sum-and-convergence', key: 'obj4', demo: null },
+     { id: 'using-the-solver-three-modes', key: 'obj5', demo: null },
+     { id: 'common-applications', key: 'obj6', demo: null },
+     { id: 'common-mistakes', key: 'obj7', demo: null },
+     { id: 'related-sequences-and-concepts', key: 'obj8', demo: null },
+   ],
 sectionsContent: {
   obj1: {
     title: `What is a Geometric Sequence?`,
@@ -2053,7 +4129,17 @@ $$a_1, \\;\\; a_1 r, \\;\\; a_1 r^2, \\;\\; a_1 r^3, \\;\\; \\ldots$$
 
 **Parametric nature.** Like arithmetic sequences, geometric sequences depend on two parameters: $a_1$ and $r$. The explorer lets you set both and explore the resulting sequence and sums.
 
-For deeper coverage see **geometric sequence**, **geometric series**, and **exponential function**.`,
+For deeper coverage see **geometric sequence**, **geometric series**, and **exponential function**.
+
+The definition is explained in [Geometric sequences: definition](!/algebra/sequences/geometric#1), and the overview page compares the main types in [Geometric sequences](!/algebra/sequences#4).
+
+[Finding terms](!/algebra/sequences/geometric#3) works the formula through more examples, and [Recursive formula](!/algebra/sequences/geometric#4) gives the step-by-step form $a_n = r \\cdot a_{n-1}$.
+
+[Finite geometric series](!/algebra/sequences/geometric#5) proves the formula and applies it.
+
+[Infinite geometric series](!/algebra/sequences/geometric#6) explains convergence and the limit in detail.
+
+Each relation the solver uses is derived in [Finding terms](!/algebra/sequences/geometric#3), [Finite geometric series](!/algebra/sequences/geometric#5) and [Infinite geometric series](!/algebra/sequences/geometric#6).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -2181,7 +4267,9 @@ $$S_\\infty = \\frac{a_1}{1 - r}$$
 • **Repeating decimals as fractions.** $0.\\overline{abc} = abc/999$, derived from the geometric-series formula.
 • **Pyramid schemes.** Each level multiplies participants by some ratio $r$. Total participants grow exponentially until the scheme exceeds the population.
 • **Music tuning.** Equal-temperament tuning divides the octave into 12 equal ratios, each $\\sqrt[12]{2} \\approx 1.0595$. Frequencies follow a geometric sequence.
-• **Light absorption.** Light passing through a medium of uniform absorption loses a fixed fraction per unit length — Beer's law, an exponential decay (geometric in the discrete approximation).`,
+• **Light absorption.** Light passing through a medium of uniform absorption loses a fixed fraction per unit length — Beer's law, an exponential decay (geometric in the discrete approximation).
+
+[Identifying geometric sequences](!/algebra/sequences/geometric#2) shows how to spot a constant ratio in data; [Geometric mean](!/algebra/sequences/geometric#7) is the average that fits such data.`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -2202,7 +4290,9 @@ $$S_\\infty = \\frac{a_1}{1 - r}$$
 
 • **Floating-point errors with non-integer ratios.** $r = 1/3$ is exact in mathematics but approximate in floating-point. Computing $a_{100}$ with $r = 1/3$ accumulates rounding error. Use symbolic computation or rational arithmetic for exact results.
 
-• **Conflating geometric series with arithmetic series for ratio.** "Common ratio" is for geometric; "common difference" is for arithmetic. The terms are not interchangeable.`,
+• **Conflating geometric series with arithmetic series for ratio.** "Common ratio" is for geometric; "common difference" is for arithmetic. The terms are not interchangeable.
+
+The one-page summary [Geometric sequences at a glance](!/algebra/sequences/geometric#8) is a quick check against these slips.`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -2241,7 +4331,51 @@ $$S_\\infty = \\frac{a_1}{1 - r}$$
 
 **Beer's Law** — light absorption following exponential (geometric in discrete steps) decay through a medium.
 
-**Self-Similarity and Fractals** — geometric scaling underlies fractal structures; iteration counts follow geometric sequences.`,
+**Self-Similarity and Fractals** — geometric scaling underlies fractal structures; iteration counts follow geometric sequences.
+
+[Arithmetic sequences](!/algebra/sequences#3) and [Harmonic sequences](!/algebra/sequences#5) are introduced on the sequences overview page; the arithmetic case has its own lesson in [Arithmetic sequences: definition](!/algebra/sequences/arithmetic#1).`,
+    before: ``, after: ``, link: ''
+  },
+  obj9: {
+    title: `Setting the Parameters`,
+    content: `The card opens with the **Sequence** drop-down set to Geometric sequence; the other entry switches the card to the Arithmetic sequence, which has its own page, [Arithmetic sequence calculator](!/algebra/calculators/sequences/arithmetic-sequence). Under it the **Parameters** row holds the two numbers that fix the sequence, **First term a₁** and **Common ratio r**, opening with $a_1 = 2$ and $r = 3$. Type new values and click **Apply** or press Enter; every tab recomputes at once with the rule $a_n = a_1 \\cdot r^{n-1}$. With $a_1 = 1$ and $r = 2$ the first eight terms are the powers of two from $1$ to $128$ with the sum $255$; with $a_1 = 3$ and $r = 0.5$ they halve from $3$ to $0.0234375$ and the sum is $5.9765625$.
+
+Both boxes take any decimal, negative values included; a blank box makes every term read NaN, so fill both before applying. Which two numbers define the sequence is explained in [what is a geometric sequence](!#what-is-a-geometric-sequence).`,
+    before: ``, after: ``, link: ''
+  },
+  obj10: {
+    title: `Listing the First N Terms`,
+    content: `The explorer opens on the **List first N** tab, one of five tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, $S_N = a_1 \\frac{r^N - 1}{r - 1}$. Under the cards every term is laid out as a tile with its index above its value.
+
+With the opening parameters the box accepts $1$ to $100$: $8$ gives $a_8 = 4,374$ with the sum $6,560$, $12$ gives $a_{12} = 354,294$ with the sum $531,440$, and the box is capped at $100$ terms; a single term gives $a_1 = 2$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. The rule is explained in [the n-th term formula](!#the-n-th-term-formula) and the sum in [the finite sum formula](!#the-finite-sum-formula).`,
+    before: ``, after: ``, link: ''
+  },
+  obj11: {
+    title: `Listing a Range of Indexes`,
+    content: `Click the **List a – b** tab to list the terms between two positions instead of starting from $1$. Type the **From index** and the **To index** and click **List range** or press Enter. The cards give the **Count** $b - a + 1$, the **Smallest** term $a_a$ and the **Largest** term $a_b$, and the tiles below list every term in between with its index. The tab opens with $1$ to $6$, 6 terms from $a_{1} = 2$ to $a_{6} = 486$; indexes $4$ to $9$ give 6 terms from $54$ to $13,122$.
+
+Both boxes must hold positive integers, the first no larger than the second, and the range may hold at most $100$ terms; otherwise a red box explains: "Enter two positive integer indexes", "From-index must be less than or equal to to-index", or "Range too wide — cap is 100 terms". The panel on the right, **List a – b**, explains the mode, and its walkthrough names the smallest and largest term of your range. The rule each tile uses is explained in [the n-th term formula](!#the-n-th-term-formula).`,
+    before: ``, after: ``, link: ''
+  },
+  obj12: {
+    title: `Testing a Number`,
+    content: `Click the **Test a number** tab to ask whether a given number is a term of the sequence. Type it in the **Test number** box and click **Check** or press Enter. A green box with a tick answers yes and names the index, as for the opening value $162$, which is $a_{5}$; a red box with a cross answers no, as for $100$, and the walkthrough on the right then shows the two nearest terms, $a_{4} = 54$ and $a_{5} = 162$. A large value is handled the same way: $39,366$ is $a_{10}$.
+
+The box takes any number, decimals and negatives included, since the parameters may be decimals too; an empty box is refused with "Enter a number". The test is exact: the explorer multiplies $a_1$ by $r$ step by step and stops as soon as the running term reaches $m$ or passes it. The panel on the right, **Test a number**, states this rule, and its walkthrough carries out the arithmetic for your number. The formula behind it is in [the n-th term formula](!#the-n-th-term-formula).`,
+    before: ``, after: ``, link: ''
+  },
+  obj13: {
+    title: `Looking Up a Term by Index`,
+    content: `Click the **Lookup by index** tab to compute one term directly. Type the position in the **Index n** box and click **Get term** or press Enter. Two cards answer: **Index** repeats $n$ and **Value** gives $a_n$ with its index as a subscript. The tab opens with $n = 10$, which gives $a_{10} = 39,366$; $n = 15$ gives $9,565,938$ and $n = 20$ gives $2,324,522,934$. The box takes positive integers only; $0$ is refused with "Enter a positive integer index".
+
+The panel on the right has two parts in every mode. **How it works** names the rule the mode uses, here $a_n = a_1 \\cdot r^{n-1}$, and links to the section of this page that explains it; **Walkthrough** applies the rule to the numbers you typed, so for the lookup it shows the arithmetic with your $n$ and the current parameters filled in. Both change as soon as you switch tabs or click a button. The rule and where it comes from are in [the n-th term formula](!#the-n-th-term-formula).`,
+    before: ``, after: ``, link: ''
+  },
+  obj14: {
+    title: `Using the Solver Tab`,
+    content: `Click the **Solver** tab, the fifth tab, to work the formulas backwards. Three buttons choose the relation: **Find term (aₙ)** uses $a_n = a_1 \\cdot r^{n-1}$, **Sum Sₙ** uses $S_n = a_1 \\frac{r^n - 1}{r - 1}$ and **Infinite sum S∞** uses $S_\\infty = \\frac{a_1}{1 - r}$ for $|r| < 1$. The first two have four boxes and the third has three; the one marked **solve** with a ? is the unknown and the others must be filled. The unknown opens as $a_n$, $S_n$ or $S_\\infty$; click the **solve** radio beside another box to make that the unknown. Click **Solve** or press Enter and the answer appears under the grid, while the walkthrough on the right shows the substitution.
+
+With $a_1 = 2$, $r = 3$ and $n = 10$ the term is $a_{10} = 39,366$; with $n = 5$ the sum is $S_5 = 242$; with $a_1 = 2$ and $r = 0.5$ the infinite sum is $4$, while $r = 3$ is refused with "Series diverges when |r| ≥ 1". Switching the relation clears the boxes, and clicking Solve with a box empty gives "Fill all fields except the one being solved for". Solving $S_n$ for $r$ is not supported, and solving for $n$ needs $r > 0$. The solver boxes are independent of the Parameters row. Every relation is explained in [using the solver — three modes](!#using-the-solver-three-modes).`,
     before: ``, after: ``, link: ''
   }
 },
@@ -2299,8 +4433,15 @@ export default function SequenceCalculatorPage({ view, cfg, seoData }) {
   const ExplorerComponent =
     cfg.kind === 'parametric' ? ParametricSequenceExplorer : SequenceExplorer
 
+  // per-view items of the calculators mesh (empty for views not done yet)
+  const instructions = cfg.instructions || []
+  const explanations = cfg.explanations || null
+  const demos = cfg.demos || {}
+  const sectionOrder = cfg.sectionOrder || []
+
   const sectionsContent = cfg.sectionsContent || {}
-  const genericSections = Object.keys(sectionsContent).length > 0
+  // the file's old fixed list, kept for views without a sectionOrder yet
+  const buildOldGenericSections = () => Object.keys(sectionsContent).length > 0
     ? [
         { id: '1', title: sectionsContent.obj1?.title || '', link: '', content: sectionsContent.obj1?.content || '' },
         { id: '2', title: sectionsContent.obj2?.title || '', link: '', content: sectionsContent.obj2?.content || '' },
@@ -2312,6 +4453,48 @@ export default function SequenceCalculatorPage({ view, cfg, seoData }) {
         { id: '8', title: sectionsContent.obj8?.title || '', link: '', content: sectionsContent.obj8?.content || '' },
       ].filter(section => section.title)
     : []
+
+  const renderCalculator = (demoProps = {}) => (
+    cfg.kind === 'parametric'
+      ? <ParametricSequenceExplorer name={cfg.key} explanations={explanations || undefined} {...demoProps} />
+      : <SequenceExplorer name={cfg.key} explanations={explanations || undefined} {...demoProps} />
+  )
+
+  const demoOptOut = {}
+
+  const genericSections = sectionOrder.length > 0
+    ? sectionOrder.map((s) => ({
+        id: s.id,
+        title: sectionsContent[s.key].title,
+        link: sectionsContent[s.key].link || '',
+        content: [
+          ...[s.demo, s.demo2].filter(Boolean).map((d) => (
+            <ToolDemoPlayer
+              key={`demo-${s.id}-${d}`}
+              script={demos[d].script}
+              title={demos[d].title}
+              label={`Demo: ${demos[d].title}`}
+              scale={demos[d].scale || 0.6}
+              minHeight={demos[d].minHeight || undefined}
+              renderText={processContent}
+            >
+              {renderCalculator(demoOptOut)}
+            </ToolDemoPlayer>
+          )),
+          sectionsContent[s.key].content,
+        ],
+      }))
+    : buildOldGenericSections()
+
+  const faqSchema = cfg.faqQuestions ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: Object.keys(cfg.faqQuestions).map((key) => ({
+      '@type': 'Question',
+      name: cfg.faqQuestions[key].question,
+      acceptedAnswer: { '@type': 'Answer', text: cfg.faqQuestions[key].answer },
+    })),
+  } : null
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -2365,6 +4548,12 @@ export default function SequenceCalculatorPage({ view, cfg, seoData }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
+        {faqSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          />
+        )}
       </Head>
 
       <br/>
@@ -2386,6 +4575,11 @@ export default function SequenceCalculatorPage({ view, cfg, seoData }) {
       <h1 className='title' style={{ marginTop: '0px', marginBottom: '40px' }}>
         {cfg.h1}
       </h1>
+      {instructions.length > 0 && (
+        <div style={{ marginBottom: '20px' }}>
+          <ExplanationDetails instructions={instructions} title={`How to use ${cfg.h1}`} />
+        </div>
+      )}
 
       <SiblingsNav
         title="Sequences"
@@ -2411,7 +4605,7 @@ export default function SequenceCalculatorPage({ view, cfg, seoData }) {
               margin-right: 0 !important;
             }
           ` }} />
-          <ExplorerComponent name={cfg.key} />
+          {renderCalculator()}
         </div>
       </SiblingsNav>
 

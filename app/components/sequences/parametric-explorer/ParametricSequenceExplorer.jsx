@@ -650,7 +650,7 @@ const SE_STYLES = `
   }
 `;
 
-function ParametricSequenceExplorer({ name = 'arithmetic' }) {
+function ParametricSequenceExplorer({ name = 'arithmetic', explanations = null }) {
   // Mount gate — server and initial client render produce the same placeholder.
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
@@ -809,6 +809,9 @@ function ParametricSequenceExplorer({ name = 'arithmetic' }) {
   }[activeTab];
 
   const modeExp = sequence.modeExplanations && sequence.modeExplanations[activeTab];
+  // Page-supplied aside texts apply to the page's own sequence only; the picker may show another one.
+  const pageExp = explanations && currentName === safeName && explanations[activeTab] ? explanations[activeTab] : null;
+  const pageExpText = pageExp && typeof pageExp.content === 'string' ? processContent(pageExp.content) : (pageExp ? pageExp.content : null);
 
   const sequenceKeys = Object.keys(sequences);
 
@@ -1146,9 +1149,9 @@ function ParametricSequenceExplorer({ name = 'arithmetic' }) {
           {activeTab === 'solver' && currentSolverMode ? (
             <>
               <section className="se-aside-section">
-                <h3 className="se-aside-heading">How it works</h3>
+                <h3 className="se-aside-heading">{pageExp ? pageExp.title : 'How it works'}</h3>
                 <div className="se-aside-content">
-                  {currentSolverMode.theory ? processContent(currentSolverMode.theory) : null}
+                  {pageExp ? pageExpText : (currentSolverMode.theory ? processContent(currentSolverMode.theory) : null)}
                 </div>
               </section>
               <section className="se-aside-section">
@@ -1163,8 +1166,8 @@ function ParametricSequenceExplorer({ name = 'arithmetic' }) {
           ) : modeExp ? (
             <>
               <section className="se-aside-section">
-                <h3 className="se-aside-heading">How it works</h3>
-                <div className="se-aside-content">{processContent(modeExp.theory)}</div>
+                <h3 className="se-aside-heading">{pageExp ? pageExp.title : 'How it works'}</h3>
+                <div className="se-aside-content">{pageExp ? pageExpText : processContent(modeExp.theory)}</div>
               </section>
               <section className="se-aside-section">
                 <h3 className="se-aside-heading">Walkthrough</h3>

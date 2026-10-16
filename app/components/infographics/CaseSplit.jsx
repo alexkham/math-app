@@ -57,6 +57,11 @@
 */
 
 import React from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
+
+/* every text field goes through the site's processContent when it is a string
+   ($math$, **bold**, [label](!/path)); ReactNodes pass through untouched */
+const rc = (v) => (typeof v === 'string' ? processContent(v) : v);
 
 /* ------------------------------------------------------------------ */
 /*  theme                                                              */
@@ -438,9 +443,9 @@ const CSS = `
 function Head({ header }) {
   return (
     <div className="cs-head">
-      {header.kicker && <div className="cs-kicker">{header.kicker}</div>}
-      <h2>{header.title}</h2>
-      {header.lede && <div className="cs-lede">{header.lede}</div>}
+      {header.kicker && <div className="cs-kicker">{rc(header.kicker)}</div>}
+      <h2>{rc(header.title)}</h2>
+      {header.lede && <div className="cs-lede">{rc(header.lede)}</div>}
     </div>
   );
 }
@@ -482,31 +487,31 @@ function BranchCase({ c, theme }) {
     <div className="cs-branch-case cs-case" style={style}>
       <div className="cs-cond">
         <span className="cs-n">Case {c.number}</span>
-        <span className="cs-expr">{c.condition}</span>
+        <span className="cs-expr">{rc(c.condition)}</span>
       </div>
       <div className="cs-result">
-        <div className="cs-lbl">{c.count.label}</div>
-        <div className="cs-count">{c.count.n}</div>
+        <div className="cs-lbl">{rc(c.count.label)}</div>
+        <div className="cs-count">{rc(c.count.n)}</div>
       </div>
       <div className="cs-rows">
         {c.formula !== undefined && (
           <div className="cs-row">
             <span className="cs-k">Values</span>
             <span className={'cs-v' + (c.na ? ' cs-na' : '')}>
-              {c.na ? c.formula : c.formula}
+              {rc(c.formula)}
             </span>
           </div>
         )}
         {c.example !== undefined && (
           <div className="cs-row">
             <span className="cs-k">Example</span>
-            <span className="cs-v">{c.example}</span>
+            <span className="cs-v">{rc(c.example)}</span>
           </div>
         )}
         {c.picture && (
           <div className="cs-row">
             <span className="cs-k">Picture</span>
-            <span className={'cs-v' + (c.na ? ' cs-na' : '')}>{c.picture}</span>
+            <span className={'cs-v' + (c.na ? ' cs-na' : '')}>{rc(c.picture)}</span>
           </div>
         )}
       </div>
@@ -521,10 +526,10 @@ function Branch({ data, theme }) {
       {data.header && <Head header={data.header} />}
       <div className="cs-branch-body">
         <div className="cs-branch-parent">
-          {data.parent.kicker && <div className="cs-parent-kicker">{data.parent.kicker}</div>}
-          <div className="cs-parent-formula">{data.parent.formula}</div>
+          {data.parent.kicker && <div className="cs-parent-kicker">{rc(data.parent.kicker)}</div>}
+          <div className="cs-parent-formula">{rc(data.parent.formula)}</div>
           <div className="cs-parent-splitby">
-            split by <strong>{data.parent.splitBy}</strong>
+            split by <strong>{rc(data.parent.splitBy)}</strong>
           </div>
         </div>
         <Connectors cases={data.cases} theme={theme} />
@@ -550,23 +555,23 @@ function ParallelCase({ c, theme }) {
     <div className="cs-parallel-case cs-case" style={style}>
       <div className="cs-head-c">
         <span className="cs-n">Case {c.number}</span>
-        <span className="cs-exp">{c.condition}</span>
+        <span className="cs-exp">{rc(c.condition)}</span>
       </div>
       <div className="cs-name">
-        {c.headline}
-        {c.desc && <span className="cs-sub">{c.desc}</span>}
+        {rc(c.headline)}
+        {c.desc && <span className="cs-sub">{rc(c.desc)}</span>}
       </div>
       <div className="cs-solutions">
-        <span className="cs-count">{c.count.n}</span>
-        <span className="cs-txt">{c.count.label}</span>
+        <span className="cs-count">{rc(c.count.n)}</span>
+        <span className="cs-txt">{rc(c.count.label)}</span>
       </div>
       {c.formula !== undefined && (
-        <div className={'cs-formula' + (c.na ? ' cs-na' : '')}>{c.formula}</div>
+        <div className={'cs-formula' + (c.na ? ' cs-na' : '')}>{rc(c.formula)}</div>
       )}
       {c.example !== undefined && (
         <div className="cs-example">
           <span className="cs-lbl">Example</span>
-          {c.example}
+          {rc(c.example)}
         </div>
       )}
     </div>
@@ -580,12 +585,12 @@ function Parallel({ data, theme }) {
       {data.header && <Head header={data.header} />}
       <div className="cs-parallel-setup">
         <div>
-          <div className="cs-parent-formula">{data.parent.formula}</div>
+          <div className="cs-parent-formula">{rc(data.parent.formula)}</div>
           {data.parent.desc && (
-            <div className="cs-parent-desc">{data.parent.desc}</div>
+            <div className="cs-parent-desc">{rc(data.parent.desc)}</div>
           )}
         </div>
-        <div className="cs-switch">{data.parent.splitBy}</div>
+        <div className="cs-switch">{rc(data.parent.splitBy)}</div>
       </div>
       <div
         className="cs-parallel-cases"

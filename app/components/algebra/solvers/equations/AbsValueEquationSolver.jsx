@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback, forwardRef, useImperativeHandle } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 import SolutionPanel from '../SolutionPanel';
 import THEME_CSS from '../MathSolverThemes';
 
@@ -954,7 +955,17 @@ const equationForms = [
    WRAPPER COMPONENT
    ===================================================== */
 
-const AbsValueEquationSolver = () => {
+// explanation panel (texts come from the page through the explanations prop; without it the component renders exactly as before)
+const PANEL = {
+  wrapper: { display: 'flex', gap: '24px', alignItems: 'flex-start', flexWrap: 'wrap' },
+  main: { flex: '1 1 420px', minWidth: 0 },
+  sidebar: { flex: '0 1 320px', display: 'flex', flexDirection: 'column', gap: '16px' },
+  panel: { backgroundColor: '#f0f6ff', borderRadius: '10px', border: '1px solid #dbeafe', padding: '18px' },
+  panelTitle: { margin: '0 0 8px', fontSize: '17px', color: '#1e3a5f' },
+  panelText: { margin: 0, fontSize: '14.5px', lineHeight: 1.6, color: '#1e3a5f' },
+};
+
+const AbsValueEquationSolver = ({ explanations = null }) => {
   const engineRef = React.useRef(null);
   const [solveResult, setSolveResult] = useState(null);
   const [selectedForm, setSelectedForm] = useState(null);
@@ -1029,7 +1040,7 @@ const AbsValueEquationSolver = () => {
     );
   };
 
-  return (
+  const inner = (
     <div style={wStyles.container}>
       <style>{THEME_CSS}</style>
       <div style={wStyles.inner}>
@@ -1072,6 +1083,19 @@ const AbsValueEquationSolver = () => {
               stepsTitle="Solution Steps" renderStepContent={renderStepContent} stepCardClass={() => ''} />
             {renderFinalAnswer()}
           </div>
+        </div>
+      </div>
+    </div>
+  );
+  const panelText = explanations && explanations.main ? explanations.main : null;
+  if (!panelText) return inner;
+  return (
+    <div style={PANEL.wrapper}>
+      <div style={PANEL.main}>{inner}</div>
+      <div style={PANEL.sidebar}>
+        <div style={PANEL.panel}>
+          <h3 style={PANEL.panelTitle}>{panelText.title}</h3>
+          <div style={PANEL.panelText}>{typeof panelText.content === 'string' ? processContent(panelText.content) : panelText.content}</div>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
 // Binomial coefficient: C(n, k)
 const binomialCoefficient = (n, k) => {
@@ -22,7 +23,7 @@ const hypergeometricPMF = (x, N, K, n) => {
   return numerator / denominator;
 };
 
-const HypergeometricExpectedValueCalculator = () => {
+const HypergeometricExpectedValueCalculator = ({ explanations = null }) => {
   const [N, setN] = useState(50);
   const [K, setK] = useState(20);
   const [n, setNSmall] = useState(10);
@@ -630,6 +631,13 @@ const HypergeometricExpectedValueCalculator = () => {
       </div>
 
       <div style={styles.explanation}>
+        {explanations && explanations.main ? (
+          <>
+            <h3 style={styles.h3}>{explanations.main.title}</h3>
+            <div style={styles.p}>{typeof explanations.main.content === 'string' ? processContent(explanations.main.content) : explanations.main.content}</div>
+          </>
+        ) : (
+          <>
         <h3 style={styles.h3}>Understanding Expected Value for Hypergeometric Distribution</h3>
         
         <div style={styles.explainGrid}>
@@ -673,6 +681,8 @@ const HypergeometricExpectedValueCalculator = () => {
             </p>
           </div>
         </div>
+          </>
+        )}
       </div>
     </div>
   );

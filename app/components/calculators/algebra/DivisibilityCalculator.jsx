@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
 function DivisibilityCalculator({ explanations }) {
   const [number, setNumber] = useState('');
@@ -60,7 +61,7 @@ function DivisibilityCalculator({ explanations }) {
     setCommonResults({});
   };
 
-  const processContent = (text) => text;
+  // page texts (explanations prop) are rendered with the site's processContent; the built-in defaults stay plain text
 
   const defaultExplanations = {
     single: {
@@ -498,7 +499,7 @@ function DivisibilityCalculator({ explanations }) {
               lineHeight: '1.6',
               marginBottom: '20px'
             }}>
-              {processContent(displayExplanations[mode].text)}
+              {explanations && typeof displayExplanations[mode].text === 'string' ? processContent(displayExplanations[mode].text) : displayExplanations[mode].text}
             </div>
             
             {displayExplanations[mode].links && (

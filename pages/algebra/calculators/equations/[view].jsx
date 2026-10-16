@@ -7,6 +7,9 @@ import Head from 'next/head'
 import React from 'react'
 import '@/pages/pages.css'
 import SiblingsNav from '@/app/components/SiblingsNav'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 import LinearEquationSolver from '@/app/components/algebra/solvers/equations/LinearEquationSolver'
 import QuadraticEquationSolver from '@/app/components/algebra/solvers/equations/QuadraticEquationSolver'
@@ -85,6 +88,140 @@ export async function getStaticProps({ params }) {
     answer: "Yes. Use the bracket buttons or type parentheses to group terms; use the division operator for fractions like x divided by 2. The solver expands brackets, combines like terms, and handles fractional coefficients automatically while showing each step."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/equations/linear" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (5 usage with demos), lesson links to algebra/equations and algebra/equations/linear.
+         Before editing this view, read the instructions and re-run its checks (--view linear); keep the section ids and the anchors. */
+      instructions: [
+        `Build the equation in the display at the top: click the **Var**, **Num**, **Op** and bracket buttons, or type on the keyboard; click inside the display to move the caret. [Learn more about building equations](!#building-equations-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-equations-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the equation is complete; an expression without an equals sign is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random equation of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the solution steps, the answer card gives the value marked Exact or Approximate, and the graph shows the line; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `An equation whose variable terms cancel ends in All real numbers or No solution instead of a value. [Learn more about special cases](!#identity-contradiction-and-special-cases)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one linear equation in $x$, $y$ or $n$, expands any brackets and collects the terms, then moves the variable terms to the left and the constants to the right and divides by the coefficient. Each move is listed as a step on the right, and the graph draws the left side as a line with the solution on the horizontal axis. When the variable terms cancel, the equation is reported as an identity (all real numbers) or a contradiction (no solution). [Learn more about linear equations](!#what-is-a-linear-equation)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: '2x + 3 = 11, Solve, Clear, a missing equals sign',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 2, x, +, 3, =, 1, 1\nThe display reads 2x + 3 = 11.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } },
+            { click: { button: '3', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: '1', exact: true } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nThree steps on the right and the answer x = 4, marked Exact.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3000 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied; Solve is greyed out.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2400 },
+            { say: 'CLICK 2, x, +, 3 and Solve\nNo equals sign: "Input must be an equation (use = sign)".', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '3', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 2800 },
+          ],
+        },
+        'building-equations-with-buttons-and-keyboard': {
+          title: 'Brackets, undo, delete, Solve',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 3, ×, (, x, +, 2, ), =, 1, 5\nThe display reads 3 · (x + 2) = 15.', at: 'tr' },
+            { click: { button: '3', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: '(', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: '+', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '=', exact: true } },
+            { click: { button: '1', exact: true } }, { click: { button: '5', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 5 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe character before the caret, the 1, is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK 1, 5 and Solve\nx = 3.', at: 'tr' },
+            { click: { button: '1', exact: true } }, { click: { button: '5', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3000 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Two Step\nA random ax + b = c loads into the display.', at: 'tr' },
+            { click: { button: 'Two Step' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nThe steps and the answer for that equation.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3000 },
+            { say: 'CLICK Distributive\nA random a(x + b) = c replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'Distributive' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'Variables on both sides, then a fraction answer',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 4, x, -, 5, =, 2, x, +, 7 and Solve\nFour steps; the answer x = 6, marked Exact.', at: 'tr' },
+            { click: { button: '4', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '5', exact: true } },
+            { click: { button: '=', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '7', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK 3, x, =, 7 and Solve\nx = 2.333333, marked Approximate.', at: 'tr' },
+            { click: { button: '3', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '7', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3000 },
+          ],
+        },
+        'identity-contradiction-and-special-cases': {
+          title: 'An identity, a contradiction, the Identity template',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 2, x, +, 1, =, 2, x, +, 1 and Solve\nAll real numbers: an identity.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } },
+            { click: { button: '=', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+            { say: 'CLICK Clear', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 1800 },
+            { say: 'CLICK 2, x, +, 1, =, 2, x, +, 5 and Solve\nNo solution: a contradiction.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } },
+            { click: { button: '=', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '5', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+            { say: 'CLICK Try an Example, then Identity\nA random identity loads; Solve would report all real numbers.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { click: { button: 'Identity' } },
+            { wait: 2800 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-equations-with-buttons-and-keyboard', key: 'obj2', demo: 'building-equations-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'identity-contradiction-and-special-cases', key: 'obj5', demo: 'identity-contradiction-and-special-cases' },
+        { id: 'what-is-a-linear-equation', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -96,7 +233,7 @@ Three quick experiments:
 &bull; Click an example template like &quot;Two Step&quot; &mdash; a random equation of that form loads into the display.
 &bull; Use brackets and the multiplication operator to enter things like $3 \\cdot (x + 2) = 15$.
 
-The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The graph panel shows the underlying line $y = ax + b$ with the solution marked on the x-axis.`,
+The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The graph panel shows the underlying line $y = ax + b$ with the solution marked on the x-axis. An expression without an equals sign is refused with the message "Input must be an equation (use = sign)", and an equation of higher degree with "This equation is not linear". What makes an equation linear is explained in [what is a linear equation](!#what-is-a-linear-equation).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -110,7 +247,7 @@ The Solve button is disabled until you enter something. Pressing Enter on the di
 
 Keyboard shortcuts work as expected: type letters and digits directly, use star or slash for multiplication and division (auto-converted to proper symbols on display), and press Enter to solve. **Ctrl+Z** undoes the last action up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the character after it.
 
-The Clear button empties the display entirely; the curved-arrow button steps back through the undo stack one edit at a time.`,
+The Clear button empties the display entirely; the curved-arrow button steps back through the undo stack one edit at a time; the ⌫ button deletes the character before the caret, like Backspace. Why these few symbols are all a linear equation needs is explained in [what is a linear equation](!#what-is-a-linear-equation).`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -126,7 +263,7 @@ The Clear button empties the display entirely; the curved-arrow button steps bac
 &bull; **Contradiction** &mdash; $ax + b = ax + c$ with $b \\neq c$. Never true.
 &bull; **Multi-Step** &mdash; $a(bx + c) + d = e$. Combines multiple techniques.
 
-Roughly 80 percent of generated equations have clean integer solutions; the rest produce fractional answers to practice exact computation.`,
+Roughly 80 percent of generated equations have clean integer solutions; the rest produce fractional answers to practice exact computation. Loading a template clears the previous solution; click Solve to work the new equation. The moves the solver applies to every template are listed in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -140,7 +277,9 @@ Roughly 80 percent of generated equations have clean integer solutions; the rest
 
 Each step displays the equation in its before-and-after form with a transformation arrow between them. The final answer card at the bottom shows $x =$ value, marked as **Exact** when the solution is a clean integer or fraction, or **Approximate** when it requires decimal expansion.
 
-For equations with brackets, the solver expands them implicitly when collecting terms &mdash; the display applies distribution before identifying coefficients rather than showing it as a separate visible step.`,
+For equations with brackets, the solver expands them implicitly when collecting terms &mdash; the display applies distribution before identifying coefficients rather than showing it as a separate visible step.
+
+Only whole-number answers are marked Exact: $3x = 7$ gives $x = 2.333333$ marked Approximate, although $\\frac{7}{3}$ is exact. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. The three moves are justified in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -152,7 +291,7 @@ For equations with brackets, the solver expands them implicitly when collecting 
 
 These cases arise naturally when both sides of the equation are scalar multiples of each other, or when they differ only by a constant. The solver flags them explicitly rather than producing a meaningless numerical answer or crashing on division by zero.
 
-Try the Identity and Contradiction templates from the example panel to see both cases in action.`,
+Try the Identity and Contradiction templates from the example panel to see both cases in action. Why the variable can cancel is explained in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -169,7 +308,9 @@ The defining property: each side is a polynomial of degree at most 1 in the vari
 
 Geometrically, $y = ax + b$ defines a straight line in the plane. Solving $ax + b = c$ amounts to finding the x-coordinate where that line crosses the horizontal line $y = c$. The graph panel in the solver shows exactly this intersection point.
 
-For deeper coverage see **linear equations theory**, **slope-intercept form**, and **first-degree polynomials**.`,
+For deeper coverage see **linear equations theory**, **slope-intercept form**, and **first-degree polynomials**.
+
+The standard form is defined in [definition and standard form](!/algebra/equations/linear#1), the place of linear equations among the equation types in [linear equations](!/algebra/equations#6), and what an equation is at all in [what an equation is](!/algebra/equations#1).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -184,7 +325,9 @@ If $a_1 - a_2 = 0$, the variable cancels. Then either $b_1 = b_2$ (identity, eve
 
 Each move preserves the solution set because applying the same operation to both sides of an equation yields an equivalent equation.
 
-For comprehensive treatment see **solving linear equations**, **balancing equations**, and **equivalent equations**.`,
+For comprehensive treatment see **solving linear equations**, **balancing equations**, and **equivalent equations**.
+
+The moves rest on [properties of equality](!/algebra/equations/linear#2) and [equivalent equations](!/algebra/equations#4); they are practised in [solving single-step and multi-step equations](!/algebra/equations/linear#3), [equations with parentheses](!/algebra/equations/linear#4) and [equations with fractions](!/algebra/equations/linear#5); the cancelling case is [special cases](!/algebra/equations/linear#7).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -201,7 +344,9 @@ For comprehensive treatment see **solving linear equations**, **balancing equati
 
 **Linear Functions** &mdash; functions of the form $f(x) = mx + b$. The graph is a straight line.
 
-**Identity vs Contradiction** &mdash; the two degenerate cases of linear equations where no unique numerical solution exists.`,
+**Identity vs Contradiction** &mdash; the two degenerate cases of linear equations where no unique numerical solution exists.
+
+The related tools are the [linear inequality solver](!/algebra/calculators/inequalities/linear), the [linear systems calculator](!/linear-algebra/calculators/linear-systems), the [literal equation solver](!/algebra/calculators/equations/literal) and the [quadratic equation solver](!/algebra/calculators/equations/quadratic); the lessons are [literal equations and formulas](!/algebra/equations/linear#8), [quadratic equations](!/algebra/equations#7) and [summary of linear equation forms](!/algebra/equations/linear#9).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -253,6 +398,118 @@ For comprehensive treatment see **solving linear equations**, **balancing equati
     answer: "Use the x squared button to insert x followed by the power symbol and the digit 2. You can also type the caret symbol followed by 2, or directly type the unicode superscript 2 character. The display renders the exponent as a proper superscript."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/equations/quadratic" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/equations/quadratic, algebra/equations, algebra/equations/polynomial.
+         Before editing this view, read the instructions and re-run its checks (--view quadratic); keep the section ids and the anchors. */
+      instructions: [
+        `Build the equation in the display at the top: click the **Var**, **Num** and **Op** buttons, the **^** or **x²** power buttons and the brackets, or type on the keyboard; click inside the display to move the caret. [Learn more about building equations](!#building-equations-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-equations-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the equation is complete; an expression without an equals sign or without a squared term is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random equation of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the steps from standard form through the discriminant to the roots, the answer card gives the roots marked Exact or Approximate, and the graph shows the parabola; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `A negative discriminant ends in No real solutions; a zero discriminant in one repeated root. [Learn more about the discriminant](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one equation of degree $2$ in $x$, $y$ or $n$, moves every term to the left to reach $ax^2 + bx + c = 0$, and computes the discriminant $\Delta = b^2 - 4ac$. A positive $\Delta$ gives two roots by the quadratic formula, shown factored first when $\Delta$ is a perfect square; $\Delta = 0$ gives one repeated root $-b / (2a)$; a negative $\Delta$ gives no real solution. Each move is listed as a step on the right, and the graph draws the parabola with its roots and vertex. [Learn more about quadratic equations](!#what-is-a-quadratic-equation)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: 'x² − 5x + 6 = 0, Solve, Clear, no real solutions',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK x, x², -, 5, x, +, 6, =, 0\nThe display reads x² − 5x + 6 = 0.', at: 'tr' },
+            { click: { button: 'x', exact: true } }, { click: { button: 'x²', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '5', exact: true } },
+            { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '6', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK Solve\nΔ = 25 − 24 = 1, the factored form (x − 2)(x − 3) = 0, the roots x = 2 or x = 3, marked Exact.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK x, x², +, 1, =, 0 and Solve\nΔ = −4: No real solutions.', at: 'tr' },
+            { click: { button: 'x', exact: true } }, { click: { button: 'x²', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } },
+            { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3000 },
+          ],
+        },
+        'building-equations-with-buttons-and-keyboard': {
+          title: 'The power button, undo, delete, Solve',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 2, x, ^, 2, +, 3, x, -, 2, =, 0\nThe display reads 2x² + 3x − 2 = 0, with the power as a superscript.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '^', exact: true } }, { click: { button: '2', exact: true } },
+            { click: { button: '+', exact: true } }, { click: { button: '3', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } },
+            { click: { button: '2', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 0 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe equals sign before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK =, 0 and Solve\nΔ = 9 + 16 = 25: x = 0.5 or x = −2, Exact.', at: 'tr' },
+            { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Perfect Square\nA random equation with a repeated root loads.', at: 'tr' },
+            { click: { button: 'Perfect Square' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nΔ = 0 and one repeated root.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3000 },
+            { say: 'CLICK Difference of Squares\nA random x² − a² = 0 replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'Difference of Squares' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'Irrational roots, then a repeated root',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK x, x², -, 2, x, -, 4, =, 0 and Solve\nΔ = 20: two roots, 3.236068 and −1.236068, marked Approximate.', at: 'tr' },
+            { click: { button: 'x', exact: true } }, { click: { button: 'x²', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '2', exact: true } },
+            { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '4', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK x, x², +, 4, x, +, 4, =, 0 and Solve\nΔ = 0: the repeated root x = −2.', at: 'tr' },
+            { click: { button: 'x', exact: true } }, { click: { button: 'x²', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '4', exact: true } },
+            { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '4', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-equations-with-buttons-and-keyboard', key: 'obj2', demo: 'building-equations-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'the-discriminant-three-cases', key: 'obj5', demo: null },
+        { id: 'what-is-a-quadratic-equation', key: 'obj6', demo: null },
+        { id: 'three-solution-methods', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -264,7 +521,7 @@ Three quick experiments:
 &bull; Click an example template like &quot;Perfect Square&quot; &mdash; a random equation with a repeated root loads into the display.
 &bull; Enter $x^2 + 1 = 0$ to see the no-real-solutions case &mdash; $\\Delta = -4 < 0$.
 
-The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The graph panel renders the parabola $y = ax^2 + bx + c$ with roots marked on the x-axis and the vertex highlighted.`,
+The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The graph panel renders the parabola $y = ax^2 + bx + c$ with roots marked on the x-axis and the vertex highlighted. An expression without an equals sign is refused with "Input must be an equation (use = sign)", and an equation without a squared term with a message that points to the linear solver. What makes an equation quadratic is explained in [what is a quadratic equation](!#what-is-a-quadratic-equation).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -278,7 +535,7 @@ The Solve button is disabled until you enter something. Pressing Enter on the di
 
 Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division (auto-converted to proper symbols on display), and press Enter to solve. The caret key inserts the power operator. The display renders exponents as proper superscripts.
 
-**Ctrl+Z** undoes the last action up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the character after it. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time.`,
+**Ctrl+Z** undoes the last action up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the character after it. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time; the ⌫ button deletes the character before the caret. The $x^2$ button inserts only the power, so click the variable first and then $x^2$. Why a square is the highest power allowed is explained in [what is a quadratic equation](!#what-is-a-quadratic-equation).`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -294,7 +551,7 @@ Keyboard shortcuts: type letters and digits directly, use star or slash for mult
 &bull; **No Real Roots** &mdash; constructed with $\\Delta < 0$. The solver flags this case.
 &bull; **Non-Zero RHS** &mdash; $x^2 + bx = c$. The solver moves all terms to the left and proceeds.
 
-Roughly 80 percent of generated equations produce clean integer roots; the rest exercise irrational or fractional cases.`,
+Roughly 80 percent of generated equations produce clean integer roots; the rest exercise irrational or fractional cases. Loading a template clears the previous solution; click Solve to work the new equation. The methods the solver applies to every template are compared in [three solution methods](!#three-solution-methods).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -308,7 +565,7 @@ Roughly 80 percent of generated equations produce clean integer roots; the rest 
 &bull; **Apply Quadratic Formula** &mdash; substitutes into $x = (-b \\pm \\sqrt{\\Delta}) / (2a)$ and shows the numerical result.
 &bull; **First Root and Second Root** &mdash; separate steps for each branch of the plus-or-minus sign.
 
-The final answer card at the bottom displays both roots (or the repeated root, or the no-solutions message) along with the discriminant value and whether the answer is exact or approximate.`,
+The final answer card at the bottom displays both roots (or the repeated root, or the no-solutions message) along with the discriminant value and whether the answer is exact or approximate. Exact means the discriminant is a perfect square: $x^2 - 2x - 4 = 0$ has $\\Delta = 20$ and the roots $3.236068$ and $-1.236068$ are marked Approximate, while $x^2 + 4x + 4 = 0$ has $\\Delta = 0$ and the repeated root $x = -2$. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. The formula every case rests on is derived in [three solution methods](!#three-solution-methods).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -321,7 +578,9 @@ The final answer card at the bottom displays both roots (or the repeated root, o
 
 The discriminant also determines whether the roots are rational. If $a$, $b$, $c$ are integers and $\\Delta$ is a perfect square, both roots are rational and the equation can be factored over the integers.
 
-For coverage of the complex case see **complex roots of quadratics** and **the imaginary unit**.`,
+For coverage of the complex case see **complex roots of quadratics** and **the imaginary unit**.
+
+The three cases are worked through in [the discriminant](!/algebra/equations/quadratic#5) and the link between roots and the graph in [connection to graphing](!/algebra/equations/quadratic#8).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -338,7 +597,9 @@ The vertex of the parabola sits at $x = -b / (2a)$, with y-coordinate $y_{\\text
 
 Quadratic equations appear in projectile motion, optimization problems, area calculations, financial models with compounding, and any setting where a quantity depends on the square of another.
 
-For deeper coverage see **quadratic functions**, **parabola graph**, and **vertex form**.`,
+For deeper coverage see **quadratic functions**, **parabola graph**, and **vertex form**.
+
+The standard form is defined in [definition and standard form](!/algebra/equations/quadratic#1), the place of quadratics among the equation types in [quadratic equations](!/algebra/equations#7), and the vertex and the crossings in [connection to graphing](!/algebra/equations/quadratic#8).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -357,7 +618,9 @@ For special cases, simpler approaches work:
 &bull; If $c = 0$: factor out $x$ to get $x(ax + b) = 0$, so $x = 0$ or $x = -b/a$.
 &bull; If the equation is a perfect square trinomial: recognize it directly and use the resulting linear equation.
 
-For comprehensive treatment see **factoring quadratics**, **completing the square**, and **the quadratic formula derivation**.`,
+For comprehensive treatment see **factoring quadratics**, **completing the square**, and **the quadratic formula derivation**.
+
+Each method has its own lesson section: [solving by factoring](!/algebra/equations/quadratic#2), [solving by completing the square](!/algebra/equations/quadratic#3) and [the quadratic formula](!/algebra/equations/quadratic#4); they are compared in [summary of solving methods](!/algebra/equations/quadratic#9).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -376,7 +639,9 @@ For comprehensive treatment see **factoring quadratics**, **completing the squar
 
 **Polynomial Equations of Higher Degree** &mdash; cubic, quartic, and beyond. The polynomial solver handles up to degree 4.
 
-**Complex Roots** &mdash; when $\\Delta < 0$, the roots are complex conjugates of the form $\\alpha \\pm \\beta i$.`,
+**Complex Roots** &mdash; when $\\Delta < 0$, the roots are complex conjugates of the form $\\alpha \\pm \\beta i$.
+
+The related tools are the [quadratic inequality solver](!/algebra/calculators/inequalities/quadratic), the [polynomial equation solver](!/algebra/calculators/equations/polynomial) and the [linear equation solver](!/algebra/calculators/equations/linear); the lessons are [Vieta](!/algebra/equations/quadratic#6), [reducible equations](!/algebra/equations/quadratic#7) and [definition and degree](!/algebra/equations/polynomial#1) of polynomial equations.`,
     before: ``, after: ``, link: ''
   }
 }
@@ -426,6 +691,117 @@ For comprehensive treatment see **factoring quadratics**, **completing the squar
     answer: "Polynomials of degree 4 and below have closed-form solution methods (factoring, the quadratic formula, Cardano's formula, Ferrari's method). For degree 5 and above, the Abel-Ruffini theorem proves no general algebraic formula exists, and any solver would have to be purely numerical."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/equations/polynomial" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/equations/polynomial and algebra/equations.
+         Before editing this view, read the instructions and re-run its checks (--view polynomial); keep the section ids and the anchors. */
+      instructions: [
+        `Build the equation in the display at the top: click the **Var**, **Num** and **Op** buttons, the **x²**, **x³**, **x⁴** or **^** power buttons and the brackets, or type on the keyboard; click inside the display to move the caret. [Learn more about building equations](!#building-equations-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-equations-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the equation is complete; an expression without an equals sign, or of degree above $4$, is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random equation of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the steps, from standard form through the rational root theorem and the divisions to the last quadratic, and the answer card lists every real root marked Exact or Approximate; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `When no rational root is left, a Numeric Method step appears and the answer is marked Approximate. [Learn more about the numeric fallback](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one polynomial equation of degree $1$ to $4$ in $x$, $y$ or $n$, moves every term to the left, and reduces the degree step by step: a zero constant term gives the root $0$, then the rational root theorem lists the candidates $\pm p/q$, each root found is divided out, and the quadratic or linear remainder is solved exactly. If no rational root is left at degree $3$ or $4$, Newton's method finds a real root numerically and the answer is marked Approximate. Only real roots are reported. [Learn more about polynomial equations](!#what-is-a-polynomial)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: 'A cubic with three roots, Clear, no real solutions',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK x³, -, 6, x², +, 1, 1, x, -, 6, =, 0\nThe display reads x³ − 6x² + 11x − 6 = 0.', at: 'tr' },
+            { click: { button: 'x³', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '6', exact: true } }, { click: { button: 'x²', exact: true } },
+            { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: '-', exact: true } }, { click: { button: '6', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { wait: 2800 },
+            { say: 'CLICK Solve\nThe rational root theorem finds x = 1, the division leaves a quadratic, and the roots are 1, 2 and 3.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK x², +, 1, =, 0 and Solve\nNo real solutions.', at: 'tr' },
+            { click: { button: 'x²', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3000 },
+          ],
+        },
+        'building-equations-with-buttons-and-keyboard': {
+          title: 'The power buttons, undo, delete, Solve',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 2, x³, -, 3, x², -, 8, x, +, 1, 2, =, 0\nThe display reads 2x³ − 3x² − 8x + 12 = 0.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: 'x³', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '3', exact: true } }, { click: { button: 'x²', exact: true } },
+            { click: { button: '-', exact: true } }, { click: { button: '8', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: '2', exact: true } },
+            { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { wait: 2800 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 0 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe equals sign before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK =, 0 and Solve\nThe candidates ±p/q include 3/2; the roots are 1.5, 2 and −2.', at: 'tr' },
+            { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Cubic (rational roots)\nA random cubic with three integer roots loads.', at: 'tr' },
+            { click: { button: 'Cubic (rational roots)' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nRational root, division, quadratic: three roots.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Quartic (rational roots)\nA random degree-4 equation replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'Quartic (rational roots)' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'Four exact roots, then a numeric root',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK x⁴, -, 5, x², +, 4, =, 0 and Solve\nFour roots, 1, −1, 2 and −2, marked Exact.', at: 'tr' },
+            { click: { button: 'x⁴', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '5', exact: true } }, { click: { button: 'x²', exact: true } },
+            { click: { button: '+', exact: true } }, { click: { button: '4', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3800 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK x³, -, 2, =, 0 and Solve\nNo rational root: the Numeric Method step and x = 1.259921, marked Approximate.', at: 'tr' },
+            { click: { button: 'x³', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-equations-with-buttons-and-keyboard', key: 'obj2', demo: 'building-equations-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'the-solving-strategy-reduce-solve-combine', key: 'obj5', demo: null },
+        { id: 'what-is-a-polynomial', key: 'obj6', demo: null },
+        { id: 'the-rational-root-theorem', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -437,7 +813,7 @@ Three quick experiments:
 &bull; Click an example template like &quot;Cubic (rational roots)&quot; &mdash; a random cubic with three integer roots loads into the display.
 &bull; Use the $x^2$, $x^3$, $x^4$ shortcut buttons to insert the proper Unicode superscripts, or use the caret operator for arbitrary exponents.
 
-The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve.`,
+The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. An expression without an equals sign is refused with "Input must be an equation (use = sign)", and a power above $4$ with "Only polynomials up to degree 4 are supported"; $x^2 + 1 = 0$ ends in No real solutions. What counts as a polynomial equation is explained in [what is a polynomial](!#what-is-a-polynomial).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -451,7 +827,7 @@ The Solve button is disabled until you enter something. Pressing Enter on the di
 
 Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division (auto-converted on display), and press Enter to solve. You can paste Unicode superscript characters &mdash; the tokenizer recognizes them as power operations.
 
-**Ctrl+Z** undoes up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the one after it. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time.`,
+**Ctrl+Z** undoes up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the one after it. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time; the ⌫ button deletes the character before the caret. The $x^2$, $x^3$ and $x^4$ buttons insert the variable together with its power, so $2x^3$ is typed as $2$ followed by the $x^3$ button. Why integer powers are all a polynomial allows is explained in [what is a polynomial](!#what-is-a-polynomial).`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -467,7 +843,7 @@ Keyboard shortcuts: type letters and digits directly, use star or slash for mult
 &bull; **No Real Roots** &mdash; $x^2 + c = 0$ with $c > 0$. The solver flags negative discriminant.
 &bull; **Perfect Square** &mdash; $(x + a)^2 = 0$ expanded. Produces a repeated root.
 
-Roughly 80 percent of generated equations have clean integer solutions; the rest exercise rational, irrational, or numerical cases.`,
+Roughly 80 percent of generated equations have clean integer solutions; the rest exercise rational, irrational, or numerical cases. Loading a template clears the previous solution; click Solve to work the new equation. The pipeline applied to every template is described in [the solving strategy](!#the-solving-strategy-reduce-solve-combine).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -482,7 +858,7 @@ Roughly 80 percent of generated equations have clean integer solutions; the rest
 &bull; **Numeric Method** &mdash; appears when no further rational roots exist; switches to Newton's method.
 &bull; **Quadratic Formula** &mdash; applied to the final quadratic factor once the degree is reduced to 2.
 
-The final answer card lists every root found. If at least one root required numerical approximation, the entire answer is flagged as approximate.`,
+The final answer card lists every root found. If at least one root required numerical approximation, the entire answer is flagged as approximate: $x^4 - 5x^2 + 4 = 0$ gives the four roots $1$, $-1$, $2$, $-2$ marked Exact, while $x^3 - 2 = 0$ has no rational root, so the Numeric Method step appears and the answer $1.259921$ is marked Approximate. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. The theorem behind the candidate list is stated in [the rational root theorem](!#the-rational-root-theorem).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -497,7 +873,9 @@ The final answer card lists every root found. If at least one root required nume
 
 &bull; **Step 4 (fallback): Newton's method.** If the polynomial still has degree 3 or higher after the rational root pass, no further closed-form factor exists over the rationals. The solver tries Newton's iteration from a fixed grid of starting points, isolates one real root numerically, divides it out, and recurses.
 
-This pipeline handles every polynomial up to degree 4 the solver supports. Polynomials with all rational roots resolve exactly; mixed cases produce some exact and some approximate roots; pure-irrational cases give all approximate roots.`,
+This pipeline handles every polynomial up to degree 4 the solver supports. Polynomials with all rational roots resolve exactly; mixed cases produce some exact and some approximate roots; pure-irrational cases give all approximate roots.
+
+The degree-by-degree methods are set out in [solving cubic equations](!/algebra/equations/polynomial#5) and [solving quartic equations](!/algebra/equations/polynomial#6); why the strategy stops at degree $4$ is explained in [degree five and beyond](!/algebra/equations/polynomial#7).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -514,7 +892,9 @@ The fundamental theorem of algebra guarantees a polynomial of degree $n$ has exa
 
 Polynomials of small degree have special names: degree 1 is linear, degree 2 is quadratic, degree 3 is cubic, degree 4 is quartic.
 
-For deeper coverage see **polynomials**, **polynomial functions**, and **fundamental theorem of algebra**.`,
+For deeper coverage see **polynomials**, **polynomial functions**, and **fundamental theorem of algebra**.
+
+The degree and the standard form are defined in [definition and degree](!/algebra/equations/polynomial#1), the count of roots in [the fundamental theorem of algebra](!/algebra/equations/polynomial#2), and repeated roots in [root multiplicity](!/algebra/equations/polynomial#8); the place of polynomial equations among the equation types is [polynomial equations](!/algebra/equations#8).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -529,7 +909,9 @@ For deeper coverage see **polynomials**, **polynomial functions**, and **fundame
 
 **Limitations.** The theorem says nothing about irrational roots. If a polynomial has only irrational or complex roots, the candidate list returns no hits and a numerical method is needed.
 
-For comprehensive treatment see **rational root theorem**, **synthetic division**, and **polynomial factoring**.`,
+For comprehensive treatment see **rational root theorem**, **synthetic division**, and **polynomial factoring**.
+
+The theorem is proved in [the rational root theorem](!/algebra/equations/polynomial#4), the division that follows each root in [the factor theorem and remainder theorem](!/algebra/equations/polynomial#3), and the whole procedure is summarised in [summary by degree](!/algebra/equations/polynomial#10).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -552,7 +934,9 @@ For comprehensive treatment see **rational root theorem**, **synthetic division*
 
 **Fundamental Theorem of Algebra** &mdash; every non-constant polynomial of degree $n$ has exactly $n$ roots over the complex numbers.
 
-**Vieta's Formulas** &mdash; relate the coefficients of a polynomial to symmetric functions of its roots (sum, sum of pairwise products, and so on).`,
+**Vieta's Formulas** &mdash; relate the coefficients of a polynomial to symmetric functions of its roots (sum, sum of pairwise products, and so on).
+
+The related tools are the [linear equation solver](!/algebra/calculators/equations/linear), the [quadratic equation solver](!/algebra/calculators/equations/quadratic), the [factoring calculator](!/algebra/calculators/factoring) and the [polynomial calculator](!/algebra/calculators/polynomial); the lessons are [relationships between roots and coefficients](!/algebra/equations/polynomial#9) and [degree five and beyond](!/algebra/equations/polynomial#7).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -601,6 +985,117 @@ For comprehensive treatment see **rational root theorem**, **synthetic division*
     answer: "Multiplying both sides by the LCD can introduce roots that did not exist in the original equation. These extraneous roots are valid solutions of the polynomial but invalid for the original rational equation. Checking each candidate against the restricted-value list catches them before they are reported as final answers."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/equations/rational" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/equations/rational and algebra/equations.
+         Before editing this view, read the instructions and re-run its checks (--view rational); keep the section ids and the anchors. */
+      instructions: [
+        `Build the equation in the display at the top: click the **Var**, **Num** and **Op** buttons, the **x²** or **^** power buttons and the brackets, or type on the keyboard; the ÷ button writes a fraction, so wrap a multi-term denominator in brackets. [Learn more about building equations](!#building-equations-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-equations-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the equation is complete; an expression without an equals sign, or without a variable in a denominator, is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random equation of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the steps from the restricted values and the LCD to the candidates and the check, and the answer card gives the valid roots; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `A candidate that makes a denominator zero is flagged as extraneous; when none is left the answer is No solution. [Learn more about extraneous candidates](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one equation in $x$, $y$ or $n$ with the variable in at least one denominator. It first lists the restricted values that make a denominator zero, then multiplies both sides by the least common denominator to clear the fractions, solves the polynomial that remains (up to degree $4$), and checks every candidate against the restricted values; a candidate that makes a denominator zero is extraneous and dropped. Each move is listed as a step on the right. [Learn more about rational equations](!#what-is-a-rational-equation)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: '1/x + 1/2 = 3/4, Solve, Clear, a reciprocal',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 1, ÷, x, +, 1, ÷, 2, =, 3, ÷, 4\nThe display reads 1/x + 1/2 = 3/4 with the fractions stacked.', at: 'tr' },
+            { click: { button: '1', exact: true } }, { click: { button: '÷', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } },
+            { click: { button: '1', exact: true } }, { click: { button: '÷', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: '=', exact: true } },
+            { click: { button: '3', exact: true } }, { click: { button: '÷', exact: true } }, { click: { button: '4', exact: true } },
+            { wait: 2800 },
+            { say: 'CLICK Solve\nRestriction x ≠ 0, LCD 4x, the cleared equation, and x = 4 passes the check.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK 3, ÷, x, =, 6 and Solve\nx = 0.5.', at: 'tr' },
+            { click: { button: '3', exact: true } }, { click: { button: '÷', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '6', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3000 },
+          ],
+        },
+        'building-equations-with-buttons-and-keyboard': {
+          title: 'Bracketed denominators, undo, delete, an extraneous root',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK x, ÷, (, x, -, 3, ), =, 3, ÷, (, x, -, 3, ), +, 2\nThe display reads x/(x − 3) = 3/(x − 3) + 2.', at: 'tr' },
+            { click: { button: 'x', exact: true } }, { click: { button: '÷', exact: true } }, { click: { button: '(', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '3', exact: true } }, { click: { button: ')', exact: true } },
+            { click: { button: '=', exact: true } }, { click: { button: '3', exact: true } }, { click: { button: '÷', exact: true } }, { click: { button: '(', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '3', exact: true } }, { click: { button: ')', exact: true } },
+            { click: { button: '+', exact: true } }, { click: { button: '2', exact: true } },
+            { wait: 3000 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 2 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe plus sign before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK +, 2 and Solve\nThe candidate x = 3 makes a denominator zero: extraneous, No solution.', at: 'tr' },
+            { click: { button: '+', exact: true } }, { click: { button: '2', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Sum of Fractions\nA random 1/x + 1/(x + a) = b loads.', at: 'tr' },
+            { click: { button: 'Sum of Fractions' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nTwo denominators, their product as the LCD, a quadratic, the check.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Quadratic After Clearing\nA random x + a/x = b replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'Quadratic After Clearing' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'A quadratic after clearing, then a contradiction',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK x, +, 6, ÷, x, =, 5 and Solve\nLCD x, then x² − 5x + 6 = 0: x = 2 or x = 3, both valid.', at: 'tr' },
+            { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '6', exact: true } }, { click: { button: '÷', exact: true } },
+            { click: { button: 'x', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '5', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3800 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK 1, ÷, x, =, 0 and Solve\nClearing gives 1 = 0: a contradiction, No solution.', at: 'tr' },
+            { click: { button: '1', exact: true } }, { click: { button: '÷', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-equations-with-buttons-and-keyboard', key: 'obj2', demo: 'building-equations-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'the-lcd-method-why-it-works', key: 'obj5', demo: null },
+        { id: 'what-is-a-rational-equation', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -612,7 +1107,7 @@ Three quick experiments:
 &bull; Click an example template like &quot;Has Extraneous Root&quot; &mdash; the solver finds a candidate root that turns out to make a denominator zero and rejects it.
 &bull; Enter $x / (x - 3) = 3 / (x - 3) + 2$ to see the extraneous-solution mechanic in action.
 
-The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve.`,
+The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. An expression without an equals sign is refused with "Input must be an equation (use = sign)", and an equation with no variable in a denominator with "This is not a rational equation". A simple reciprocal such as $3 / x = 6$ gives $x = 0.5$. What makes an equation rational is explained in [what is a rational equation](!#what-is-a-rational-equation).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -626,7 +1121,7 @@ The Solve button is disabled until you enter something. Pressing Enter on the di
 
 The division symbol always introduces a fraction in the display, with the numerator above and the denominator below. For multi-term denominators wrap them in parentheses: $1/(x + 3)$ not $1/x + 3$.
 
-Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division (auto-converted on display), and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the one after it. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time.`,
+Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division (auto-converted on display), and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the one after it. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time; the ⌫ button deletes the character before the caret. Why the denominators decide which values are allowed is explained in [what is a rational equation](!#what-is-a-rational-equation).`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -642,7 +1137,7 @@ Keyboard shortcuts: type letters and digits directly, use star or slash for mult
 &bull; **Variable Numerator** &mdash; $(ax + b) / (cx + d) = e$. Standard rational form with linear numerator and denominator.
 &bull; **No Solution** &mdash; $1/(x - a) = 1/(x - a) + b$ for $b \\neq 0$. Reduces to $0 = b$, a contradiction.
 
-Roughly 80 percent of generated equations produce clean integer or rational solutions; the rest exercise irrational and extraneous cases.`,
+Roughly 80 percent of generated equations produce clean integer or rational solutions; the rest exercise irrational and extraneous cases. Loading a template clears the previous solution; click Solve to work the new equation. The four steps applied to every template are listed in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -657,7 +1152,7 @@ Roughly 80 percent of generated equations produce clean integer or rational solu
 &bull; **Check for Extraneous Solutions** &mdash; compares each candidate against the restricted values; flags any matches as extraneous.
 &bull; **Solution** &mdash; reports the valid roots that remain after the extraneous check.
 
-If every candidate turns out to be extraneous, the equation has no solution and the final answer card displays the contradiction with a cross mark.`,
+If every candidate turns out to be extraneous, the equation has no solution and the final answer card displays the contradiction with a cross mark. $x + 6 / x = 5$ clears to $x^2 - 5x + 6 = 0$ and ends with $x = 2$ or $x = 3$; $1 / x = 0$ clears to $1 = 0$ and ends in No solution. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. Why clearing the fractions is allowed, and what it can add, is explained in [the LCD method](!#the-lcd-method-why-it-works).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -674,7 +1169,9 @@ This is a polynomial equation, solvable by standard methods.
 
 **The catch.** Multiplying by an expression that can equal zero is not an equivalence operation. If the LCD evaluates to zero at some candidate solution, that candidate was created by the multiplication and is not a true solution of the original equation. This is why the extraneous-check step matters.
 
-For deeper coverage see **least common denominator**, **clearing fractions**, and **equivalent equations**.`,
+For deeper coverage see **least common denominator**, **clearing fractions**, and **equivalent equations**.
+
+The method is set out in [solving by clearing denominators](!/algebra/equations/rational#3), the catch in [extraneous solutions](!/algebra/equations/rational#4), and the rule it rests on in [equivalent equations](!/algebra/equations#4).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -693,7 +1190,9 @@ The graph of $y = P(x) / Q(x)$ typically has vertical asymptotes at the restrict
 
 Rational equations appear in physics (lens formulas, parallel resistors), chemistry (concentrations, reaction rates), economics (average cost per unit), and any setting where two quantities are combined as inverses or ratios.
 
-For deeper coverage see **rational expressions**, **rational functions**, and **vertical asymptotes**.`,
+For deeper coverage see **rational expressions**, **rational functions**, and **vertical asymptotes**.
+
+The form is defined in [definition](!/algebra/equations/rational#1), the excluded values in [domain restrictions](!/algebra/equations/rational#2), and the place of rational equations among the equation types in [rational equations](!/algebra/equations#9).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -710,7 +1209,9 @@ For deeper coverage see **rational expressions**, **rational functions**, and **
 
 If the polynomial has no real roots, the equation has no solution. If every root is extraneous, the equation also has no solution.
 
-For comprehensive treatment see **solving rational equations**, **extraneous solutions**, and **cross multiplication**.`,
+For comprehensive treatment see **solving rational equations**, **extraneous solutions**, and **cross multiplication**.
+
+The steps are worked in [solving by clearing denominators](!/algebra/equations/rational#3) and [extraneous solutions](!/algebra/equations/rational#4); the proportion shortcut is [proportions and cross-multiplication](!/algebra/equations/rational#7), and the subtypes are summarised in [summary of rational equation subtypes](!/algebra/equations/rational#9).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -729,7 +1230,9 @@ For comprehensive treatment see **solving rational equations**, **extraneous sol
 
 **Domain Restrictions** &mdash; the set of values a variable cannot take. For rational expressions, the domain excludes all zeros of the denominator.
 
-**Extraneous Roots** &mdash; candidate solutions introduced by an operation that is not equivalence-preserving. Common in rational and radical equations.`,
+**Extraneous Roots** &mdash; candidate solutions introduced by an operation that is not equivalence-preserving. Common in rational and radical equations.
+
+The related tools are the [polynomial equation solver](!/algebra/calculators/equations/polynomial), the [rational inequality solver](!/algebra/calculators/inequalities/rational) and the [radical equation solver](!/algebra/calculators/equations/radical); the lessons are [equations with monomial denominators](!/algebra/equations/rational#5), [equations with polynomial denominators](!/algebra/equations/rational#6) and [equations reducible to rational form](!/algebra/equations/rational#8).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -778,6 +1281,117 @@ For comprehensive treatment see **solving rational equations**, **extraneous sol
     answer: "Use the radical buttons in the Rad row to insert the square root, cube root, or fourth root symbol. Then type the radicand or wrap it in parentheses. For example, square root of (2x + 1) is entered by clicking the square root button, an opening parenthesis, then typing 2x + 1, then a closing parenthesis."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/equations/radical" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/roots and algebra/equations.
+         Before editing this view, read the instructions and re-run its checks (--view radical); keep the section ids and the anchors. */
+      instructions: [
+        `Build the equation in the display at the top: click the **Var**, **Num** and **Op** buttons, the **Rad** buttons for a square, cube or fourth root, and the brackets, or type on the keyboard; wrap a multi-term radicand in brackets. [Learn more about building equations](!#building-equations-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-equations-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the equation is complete; an expression without an equals sign or without a radical is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random equation of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the steps from isolating the radical and raising both sides to a power to the check, and the answer card gives the valid roots marked Exact or Approximate; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `A candidate that fails the original equation is flagged as extraneous; an even root set equal to a negative number ends in No real solution at once. [Learn more about the check](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one equation in $x$, $y$ or $n$ with the variable under a square, cube or fourth root. It isolates the radical by moving constants and dividing out a coefficient, raises both sides to the power of the index, solves the linear or quadratic equation that remains, and substitutes every candidate back into the original equation; a candidate that fails is extraneous and dropped. An even root set equal to a negative number is reported as having no real solution before any squaring. [Learn more about radical equations](!#what-is-a-radical-equation)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: '√(2x + 1) = 3, Solve, Clear, no real solution',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK √, (, 2, x, +, 1, ), =, 3\nThe display reads √(2x + 1) = 3.', at: 'tr' },
+            { click: { button: '√', exact: true } }, { click: { button: '(', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '3', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK Solve\nBoth sides squared: 2x + 1 = 9, so x = 4, and the check passes.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK √, x, +, 5, =, 2 and Solve\nIsolated, √x = −3: No real solution.', at: 'tr' },
+            { click: { button: '√', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '5', exact: true } },
+            { click: { button: '=', exact: true } }, { click: { button: '2', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3000 },
+          ],
+        },
+        'building-equations-with-buttons-and-keyboard': {
+          title: 'A cube root, undo, delete, Solve',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK ∛, (, x, -, 1, ), =, 2\nThe display reads ∛(x − 1) = 2.', at: 'tr' },
+            { click: { button: '∛', exact: true } }, { click: { button: '(', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } },
+            { click: { button: '1', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '2', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 2 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe equals sign before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK =, 2 and Solve\nBoth sides cubed: x − 1 = 8, so x = 9.', at: 'tr' },
+            { click: { button: '=', exact: true } }, { click: { button: '2', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Linear Radicand\nA random √(ax + b) = c loads.', at: 'tr' },
+            { click: { button: 'Linear Radicand' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nSquare both sides, solve the linear equation, check.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Extraneous Trap\nA √x equal to a negative number replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'Extraneous Trap' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'A coefficient to divide out, then a quadratic radicand',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 2, ×, √, x, =, 8 and Solve\nIsolate Radical Term divides by 2: √x = 4, so x = 16, Exact.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: '√', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: '=', exact: true } }, { click: { button: '8', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK √, (, x, ^, 2, +, 9, ), =, 5 and Solve\nSquared: x² + 9 = 25, so x = 4 or x = −4; both pass the check.', at: 'tr' },
+            { click: { button: '√', exact: true } }, { click: { button: '(', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '^', exact: true } }, { click: { button: '2', exact: true } },
+            { click: { button: '+', exact: true } }, { click: { button: '9', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '5', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-equations-with-buttons-and-keyboard', key: 'obj2', demo: 'building-equations-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'extraneous-solutions-why-and-how-to-check', key: 'obj5', demo: null },
+        { id: 'what-is-a-radical-equation', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -789,7 +1403,7 @@ Three quick experiments:
 &bull; Click the &quot;Extraneous Trap&quot; example template &mdash; the solver finds the candidate, checks it against the original equation, and rejects it.
 &bull; Try the cube root button on $-8$ to see odd-index handling: cube roots accept negative inputs, unlike square roots.
 
-The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The Rad row offers square root, cube root, and fourth root buttons.`,
+The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The Rad row offers square root, cube root, and fourth root buttons. An expression without an equals sign is refused with "Input must be an equation (use = sign)", and one without a radical with "No radical found in the equation". $\\sqrt{x} + 5 = 2$ isolates to $\\sqrt{x} = -3$ and ends in No real solution without squaring. What makes an equation radical is explained in [what is a radical equation](!#what-is-a-radical-equation).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -804,7 +1418,7 @@ The Solve button is disabled until you enter something. Pressing Enter on the di
 
 When entering a multi-term radicand, wrap it in parentheses: $\\sqrt{2x + 1}$ is entered as square root then open parenthesis then $2x + 1$ then close parenthesis. A single-term radicand can omit the parentheses.
 
-Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, and press Enter to solve. You can also paste the Unicode radical characters directly. **Ctrl+Z** undoes up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the one after it.`,
+Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, and press Enter to solve. You can also paste the Unicode radical characters directly. **Ctrl+Z** undoes up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the one after it. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time; the ⌫ button deletes the character before the caret. Why the index of the radical decides the domain is explained in [what is a radical equation](!#what-is-a-radical-equation).`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -820,7 +1434,7 @@ Keyboard shortcuts: type letters and digits directly, use star or slash for mult
 &bull; **Radical = Radical** &mdash; $\\sqrt{ax + b} = \\sqrt{cx + d}$. Squaring eliminates both radicals in one step.
 &bull; **Extraneous Trap** &mdash; $\\sqrt{x} = $ negative. The solver detects this case immediately without squaring.
 
-Roughly 80 percent of generated equations produce clean integer solutions; the rest exercise the extraneous-check pathway.`,
+Roughly 80 percent of generated equations produce clean integer solutions; the rest exercise the extraneous-check pathway. Loading a template clears the previous solution; click Solve to work the new equation. The four steps applied to every template are listed in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -834,7 +1448,7 @@ Roughly 80 percent of generated equations produce clean integer solutions; the r
 &bull; **Solve Linear Equation** or **Solve Quadratic** &mdash; handles the polynomial that results from the previous step.
 &bull; **Check for Extraneous Solutions** &mdash; substitutes each candidate back into the original equation and confirms both sides match.
 
-For even-index radicals, the solver also flags the immediate no-solution case: if the radical equals a negative number after isolation, the equation has no real solution and the squaring step is skipped entirely.`,
+For even-index radicals, the solver also flags the immediate no-solution case: if the radical equals a negative number after isolation, the equation has no real solution and the squaring step is skipped entirely. $2 \\cdot \\sqrt{x} = 8$ is divided by $2$ before squaring and gives $x = 16$; $\\sqrt{x^2 + 9} = 5$ squares to $x^2 + 9 = 25$ and gives $x = 4$ or $x = -4$, both passing the check. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. Why the check is needed is explained in [extraneous solutions](!#extraneous-solutions-why-and-how-to-check).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -853,7 +1467,9 @@ For even-index radicals, the solver also flags the immediate no-solution case: i
 
 The solver performs the check automatically by evaluating both sides of the original equation at each candidate. If they match (within numerical tolerance), the candidate is valid. Otherwise the candidate is flagged as extraneous and excluded from the final answer.
 
-For deeper coverage see **extraneous solutions** and **squaring both sides**.`,
+For deeper coverage see **extraneous solutions** and **squaring both sides**.
+
+Why an even root is never negative is set out in [principal roots](!/algebra/roots#3) and [when radicands are negative](!/algebra/roots#9); the check itself is part of [equations with radicals](!/algebra/roots#7).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -873,7 +1489,9 @@ The graph of $y = \\sqrt{x}$ is a half-parabola starting at the origin and incre
 
 Radical equations appear in geometry (distance formulas, Pythagorean theorem), physics (orbital periods, pendulum periods), and any context where a quantity depends on the root of another quantity.
 
-For deeper coverage see **radicals**, **nth root**, and **rational exponents**.`,
+For deeper coverage see **radicals**, **nth root**, and **rational exponents**.
+
+Roots are defined in [what is a root](!/algebra/roots#1) and [square roots, cube roots, and beyond](!/algebra/roots#2), the notation in [radical and exponent notation](!/algebra/roots#4), and the graphs in [radicals as functions](!/algebra/roots#8).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -896,7 +1514,9 @@ For deeper coverage see **radicals**, **nth root**, and **rational exponents**.`
 &bull; Discriminant negative after squaring: no real solution to the polynomial.
 &bull; All candidates extraneous: no real solution to the radical equation.
 
-For comprehensive treatment see **solving radical equations**, **isolating the radical**, and **rationalization**.`,
+For comprehensive treatment see **solving radical equations**, **isolating the radical**, and **rationalization**.
+
+The steps are worked in [equations with radicals](!/algebra/roots#7); the rules used when raising both sides to a power are [rules for radicals](!/algebra/roots#5) and [simplifying and operating](!/algebra/roots#6).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -917,7 +1537,9 @@ For comprehensive treatment see **solving radical equations**, **isolating the r
 
 **Domain Restrictions** &mdash; for even radicals, the radicand must be non-negative. The check happens implicitly through the extraneous-solution verification.
 
-**Pythagorean Theorem and Distance Formula** &mdash; common geometric sources of radical equations: solving for an unknown side of a right triangle, or for an unknown coordinate that produces a target distance.`,
+**Pythagorean Theorem and Distance Formula** &mdash; common geometric sources of radical equations: solving for an unknown side of a right triangle, or for an unknown coordinate that produces a target distance.
+
+The related tools are the [radical inequality solver](!/algebra/calculators/inequalities/radical), the [root calculator](!/calculators/root-calculator) and the [polynomial equation solver](!/algebra/calculators/equations/polynomial); the lessons are [connection to powers](!/algebra/roots#10), [the roots subtree at a glance](!/algebra/roots#11) and [algebraic equations](!/algebra/equations#5).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -965,6 +1587,115 @@ For comprehensive treatment see **solving radical equations**, **isolating the r
     answer: "Yes. An exponential expression b to the x with positive base is always positive, so any equation setting it equal to zero or a negative number has no real solution. The solver detects this case immediately and reports it without attempting to take a logarithm."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/equations/exponential" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/powers/exponential-equations, algebra/powers, algebra/logarithms, algebra/logarithms/equations.
+         Before editing this view, read the instructions and re-run its checks (--view exponential); keep the section ids and the anchors. */
+      instructions: [
+        `Build the equation in the display at the top: click the **Var**, **Num** and **Op** buttons, with **^** for the exponent and **e** for the natural base, or type on the keyboard; wrap a multi-term exponent in brackets. [Learn more about building equations](!#building-equations-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-equations-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the equation is complete; an expression without an equals sign, or with a right side of zero or below, is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random equation of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the steps from isolating the exponential to matching bases or taking a logarithm, and the answer card gives the value marked Exact or Approximate; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `A right side that is a whole power of the base gives an exact answer; any other gives a logarithm, marked Approximate. [Learn more about the two methods](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one equation in $x$, $y$ or $n$ with the variable in an exponent, such as $a \cdot b^{f(x)} = c$ with a positive base $b \neq 1$. It isolates the exponential term, then tries to write $c$ as a whole power of $b$ and equate the exponents; when that fails it takes the natural logarithm of both sides and divides by $\ln b$. A linear exponent leaves a linear equation to finish. Answers from base matching are Exact, answers from logarithms Approximate, and a right side of zero or below has no solution. [Learn more about exponential equations](!#what-is-an-exponential-equation)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: '2^x = 32, Solve, Clear, 2^x = 5',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 2, ^, x, =, 3, 2\nThe display reads 2^x = 32 with the exponent raised.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: '^', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '=', exact: true } },
+            { click: { button: '3', exact: true } }, { click: { button: '2', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK Solve\n32 is recognised as 2^5, the bases are matched, and x = 5 is Exact.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK 2, ^, x, =, 5 and Solve\nNo base match: the natural log gives x = ln 5 / ln 2 = 2.321928, Approximate.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: '^', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '5', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+          ],
+        },
+        'building-equations-with-buttons-and-keyboard': {
+          title: 'A bracketed exponent, undo, delete, Solve',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 3, ^, (, 2, x, +, 1, ), =, 8, 1\nThe display reads 3^(2x + 1) = 81.', at: 'tr' },
+            { click: { button: '3', exact: true } }, { click: { button: '^', exact: true } }, { click: { button: '(', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '8', exact: true } }, { click: { button: '1', exact: true } },
+            { wait: 2800 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 1 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe 8 before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK 8, 1 and Solve\n81 = 3^4, so 2x + 1 = 4 and x = 1.5.', at: 'tr' },
+            { click: { button: '8', exact: true } }, { click: { button: '1', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Natural Base\nA random e^x = c loads.', at: 'tr' },
+            { click: { button: 'Natural Base' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nThe natural log of both sides: x = ln c.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK With Constant\nA random b^x + c = d replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'With Constant' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'A coefficient and a base match, then a natural log',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 5, ×, 2, ^, x, =, 4, 0 and Solve\nDivided by 5: 2^x = 8 = 2^3, so x = 3, Exact.', at: 'tr' },
+            { click: { button: '5', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: '^', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: '=', exact: true } }, { click: { button: '4', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK e, ^, x, =, 2, 0 and Solve\nApply Logarithm: x = ln 20 = 2.995732, Approximate.', at: 'tr' },
+            { click: { button: 'e', exact: true } }, { click: { button: '^', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-equations-with-buttons-and-keyboard', key: 'obj2', demo: 'building-equations-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'base-matching-vs-logarithms', key: 'obj5', demo: null },
+        { id: 'what-is-an-exponential-equation', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -976,7 +1707,7 @@ Three quick experiments:
 &bull; Click the &quot;Natural Base&quot; example template &mdash; an equation $e^x = c$ loads into the display. The solver applies the natural log to give $x = \\ln c$.
 &bull; Try $3^{2x + 1} = 81$ to see the base-matching pipeline with a linear exponent: the solver finds $81 = 3^4$, equates $2x + 1 = 4$, and solves to $x = 3/2$.
 
-The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The special row offers $e$ for the natural base.`,
+The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The special row offers $e$ for the natural base. An expression without an equals sign is refused with "Input must be an equation (use = sign)", a right side of zero or below with "Exponential equations cannot equal zero or negative numbers", and exponentials on both sides are not yet supported. $2^x = 5$ has no base match and gives $x = 2.321928$ by logarithms. What makes an equation exponential is explained in [what is an exponential equation](!#what-is-an-exponential-equation).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -990,7 +1721,7 @@ The Solve button is disabled until you enter something. Pressing Enter on the di
 
 To enter $b^x$, type the base, the caret, then the exponent. The display renders the exponent as a proper superscript. For multi-term exponents like $2x + 1$, wrap them in parentheses: $3 \\hat{} (2x + 1)$.
 
-Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type a lowercase $e$ for Euler's number (the tokenizer distinguishes it from a variable), and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the one after it.`,
+Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type a lowercase $e$ for Euler's number (the tokenizer distinguishes it from a variable), and press Enter to solve. The ⌫ button deletes the character before the caret. Why the base must be positive and not $1$ is explained in [what is an exponential equation](!#what-is-an-exponential-equation). **Ctrl+Z** undoes up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the one after it.`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -1006,7 +1737,7 @@ Keyboard shortcuts: type letters and digits directly, use star or slash for mult
 &bull; **Natural Base** &mdash; $e^x = c$. Applies the natural log directly.
 &bull; **Natural Linear** &mdash; $e^{mx + n} = c$. Same as Linear Exponent but with base $e$.
 
-Roughly 80 percent of generated equations produce clean integer or rational solutions via base matching; the rest exercise the logarithm fallback.`,
+Roughly 80 percent of generated equations produce clean integer or rational solutions via base matching; the rest exercise the logarithm fallback. Loading a template clears the previous solution; click Solve to work the new equation. The two methods applied to every template are compared in [base matching vs logarithms](!#base-matching-vs-logarithms).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -1023,7 +1754,7 @@ Roughly 80 percent of generated equations produce clean integer or rational solu
 &bull; **Calculate** &mdash; substitutes the logarithm value and reports the numerical answer.
 &bull; **Solve for Variable** &mdash; for linear exponents, solves the resulting linear equation.
 
-Solutions from base matching are flagged as exact; solutions from logarithms are flagged as approximate.`,
+Solutions from base matching are flagged as exact; solutions from logarithms are flagged as approximate. $5 \\cdot 2^x = 40$ is divided by $5$ first, $8 = 2^3$ is recognised and $x = 3$ is Exact; $e^x = 20$ takes the natural log and gives $x = 2.995732$, Approximate. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. The three stages are set out in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -1044,7 +1775,9 @@ Solutions from base matching are flagged as exact; solutions from logarithms are
 
 For linear exponents $b^{mx + n} = c$, apply the log to both sides, giving $(mx + n) \\ln b = \\ln c$. Then solve the linear equation in $x$.
 
-For deeper coverage see **exponential and logarithmic functions** and **change of base formula**.`,
+For deeper coverage see **exponential and logarithmic functions** and **change of base formula**.
+
+Both methods have their own lesson sections, [method: matching bases](!/algebra/powers/exponential-equations#5) and [method: using logarithms](!/algebra/powers/exponential-equations#7); the logarithms used are [common and natural logarithms](!/algebra/logarithms#5), and the choice between them is discussed in [choosing common or natural logarithm](!/algebra/logarithms/equations#9).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -1064,7 +1797,9 @@ where $b > 0$ and $b \\neq 1$ is the **base**, $a$ is a constant coefficient, $f
 
 Exponential equations appear in compound interest, population growth, radioactive decay, cooling laws, pH calculations, and any model where a quantity changes by a constant multiplicative factor over equal time intervals.
 
-For deeper coverage see **exponential functions**, **the number e**, and **growth and decay models**.`,
+For deeper coverage see **exponential functions**, **the number e**, and **growth and decay models**.
+
+The form is defined in [what is an exponential equation](!/algebra/powers/exponential-equations#1) and its variants in [forms of exponential equations](!/algebra/powers/exponential-equations#2); the function behind it is [exponential functions](!/algebra/powers#11), and the inverse pairing with the logarithm is [inverse identities](!/algebra/logarithms#4).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1093,7 +1828,9 @@ Solve for $f(x)$, then for $x$. The answer is typically a decimal approximation.
 &bull; Base 1 or non-positive: invalid equation, error.
 &bull; Multiple exponential terms on the same side or different bases on each side: not currently supported; throws a clear error.
 
-For comprehensive treatment see **solving exponential equations**, **logarithms**, and **change of base**.`,
+For comprehensive treatment see **solving exponential equations**, **logarithms**, and **change of base**.
+
+The stages are worked in [preparing the equation](!/algebra/powers/exponential-equations#3), [solving methods overview](!/algebra/powers/exponential-equations#4) and [solving exponential equations via logarithms](!/algebra/logarithms/equations#7); the final check is [checking solutions](!/algebra/powers/exponential-equations#10).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1116,7 +1853,9 @@ For comprehensive treatment see **solving exponential equations**, **logarithms*
 
 **Exponential Growth and Decay** &mdash; $N(t) = N_0 \\cdot b^t$ models populations, radioactive isotopes, and any process with constant multiplicative rate.
 
-**Exponential Inequalities** &mdash; same form with $<$, $>$, $\\leq$, or $\\geq$. Solved by the same methods, with attention to whether the base is greater or less than 1 (which flips inequality direction).`,
+**Exponential Inequalities** &mdash; same form with $<$, $>$, $\\leq$, or $\\geq$. Solved by the same methods, with attention to whether the base is greater or less than 1 (which flips inequality direction).
+
+The related tools are the [logarithmic equation solver](!/algebra/calculators/equations/logarithmic), the [exponential inequality solver](!/algebra/calculators/inequalities/exponential), the [exponent calculator](!/calculators/exponent-calculator) and the [logarithm calculator](!/calculators/log-calculator); the lessons are [laws of exponents](!/algebra/powers#8), [method: substitution](!/algebra/powers/exponential-equations#8) and [exponentials on both sides](!/algebra/logarithms/equations#8).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -1165,6 +1904,115 @@ For comprehensive treatment see **solving exponential equations**, **logarithms*
     answer: "The Log row offers buttons for ln (natural log), log (base 10), and log base 2, 3, and 5. To use a different base, type log_b where b is the base. The solver parses ln(x), log(x), and log_b(x) as logarithms with appropriate bases."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/equations/logarithmic" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/logarithms and algebra/logarithms/equations.
+         Before editing this view, read the instructions and re-run its checks (--view logarithmic); keep the section ids and the anchors. */
+      instructions: [
+        `Build the equation in the display at the top: click a **Log** button for ln, log or a base, then the argument, a closing bracket and the rest with the **Var**, **Num** and **Op** buttons, or type on the keyboard. [Learn more about building equations](!#building-equations-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-equations-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the equation is complete; an expression without an equals sign or without a logarithm is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random equation of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the steps from isolating the logarithm to the exponential form and the linear equation, and the answer card gives the value marked Exact or Approximate; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `A candidate that makes a logarithm's argument zero or negative is rejected with a message. [Learn more about the domain check](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one equation in $x$, $y$ or $n$ with the variable inside a logarithm, in base $e$, $10$ or any positive base other than $1$. When both sides are logarithms with the same base it equates the arguments; otherwise it isolates the logarithm by dividing out a coefficient and moving constants, rewrites $\log_b(A) = c$ as $A = b^c$, evaluates the power and solves the linear argument for the variable. Every candidate is checked to keep the argument positive. Whole-number powers give Exact answers, others Approximate. [Learn more about logarithmic equations](!#what-is-a-logarithmic-equation)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: 'log₂(x) = 5, Solve, Clear, ln(x) = 2',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK log₂, x, ), =, 5\nThe display reads log₂(x) = 5.', at: 'tr' },
+            { click: { button: 'log2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '5', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK Solve\nConverted to exponential form, x = 2^5 = 32, Exact.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ln, x, ), =, 2 and Solve\nx = e^2 = 7.389056, Approximate.', at: 'tr' },
+            { click: { button: 'ln', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '2', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+          ],
+        },
+        'building-equations-with-buttons-and-keyboard': {
+          title: 'A linear argument, undo, delete, Solve',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK log₂, 3, x, -, 1, ), =, 4\nThe display reads log₂(3x − 1) = 4.', at: 'tr' },
+            { click: { button: 'log2', exact: true } }, { click: { button: '3', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } },
+            { click: { button: '1', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '4', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 4 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe equals sign before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK =, 4 and Solve\n3x − 1 = 2^4 = 16, so x = 5.666667.', at: 'tr' },
+            { click: { button: '=', exact: true } }, { click: { button: '4', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Same Base Both Sides\nA random log_b(f(x)) = log_b(c) loads.', at: 'tr' },
+            { click: { button: 'Same Base Both Sides' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nThe equal-logarithms property: the arguments are equated.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK With Coefficient\nA random a · log_b(x) = c replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'With Coefficient' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'A coefficient to divide out, then a constant to move',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 2, ×, log, x, ), =, 4 and Solve\nIsolate Logarithm divides by 2: log(x) = 2, so x = 100, Exact.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: 'log', exact: true } }, { click: { button: 'x', exact: true } },
+            { click: { button: ')', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '4', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK log₃, x, ), +, 1, =, 2 and Solve\nSubtract 1: log₃(x) = 1, so x = 3.', at: 'tr' },
+            { click: { button: 'log3', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: ')', exact: true } }, { click: { button: '+', exact: true } },
+            { click: { button: '1', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '2', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-equations-with-buttons-and-keyboard', key: 'obj2', demo: 'building-equations-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'two-solving-strategies', key: 'obj5', demo: null },
+        { id: 'what-is-a-logarithmic-equation', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -1176,7 +2024,7 @@ Three quick experiments:
 &bull; Click the &quot;Natural Log&quot; example template &mdash; an equation $\\ln x = c$ loads. The solver returns $x = e^c$.
 &bull; Try $\\log_2(3x - 1) = 4$ to see the linear-argument pathway: the solver converts to $3x - 1 = 16$, then solves to $x = 17/3$.
 
-The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The Log row offers ln, log (base 10), and bases 2, 3, and 5; the special row offers $e$.`,
+The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The Log row offers ln, log (base 10), and bases 2, 3, and 5; the special row offers $e$. An expression without an equals sign is refused with "Input must be an equation (use = sign)", one without a logarithm with "No logarithm found in equation", and different bases on the two sides are not yet supported. $\\ln(x) = 2$ gives $x = e^2 = 7.389056$. What makes an equation logarithmic is explained in [what is a logarithmic equation](!#what-is-a-logarithmic-equation).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -1191,7 +2039,7 @@ The Solve button is disabled until you enter something. Pressing Enter on the di
 
 To enter a custom-base log via keyboard, type $\\text{log}\\_b$ where $b$ is the base number. For example, $\\log_7(x)$ is typed as $\\text{log}\\_7(x)$. The underscore separates the function name from the base subscript.
 
-Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the one after it; **Escape** clears the display.`,
+Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the one after it; **Escape** clears the display. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time; the ⌫ button deletes the character before the caret. Why the argument of every logarithm must stay positive is explained in [what is a logarithmic equation](!#what-is-a-logarithmic-equation).`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -1207,7 +2055,7 @@ Keyboard shortcuts: type letters and digits directly, use star or slash for mult
 &bull; **Same Base Both Sides** &mdash; $\\log_b(f(x)) = \\log_b(c)$. Applies the equal-logarithms property to skip the conversion step.
 &bull; **Natural with Coefficient** &mdash; $a \\cdot \\ln(x) = c$. Coefficient case with natural log.
 
-Roughly 80 percent of generated equations produce clean integer or rational solutions; the rest exercise decimal cases where $b^c$ is irrational.`,
+Roughly 80 percent of generated equations produce clean integer or rational solutions; the rest exercise decimal cases where $b^c$ is irrational. Loading a template clears the previous solution; click Solve to work the new equation. The two strategies applied to the templates are compared in [two solving strategies](!#two-solving-strategies).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -1223,7 +2071,7 @@ Roughly 80 percent of generated equations produce clean integer or rational solu
 &bull; **Solve Linear Equation** (when argument is linear) &mdash; solves the resulting $mx + n = b^c$ for $x$.
 &bull; **Isolate Variable** &mdash; final algebraic step to get $x$ alone.
 
-Each step renders the before-and-after equation using a math layout that displays fractions, exponents, and log subscripts in their standard typographic form.`,
+Each step renders the before-and-after equation using a math layout that displays fractions, exponents, and log subscripts in their standard typographic form. The answer card marks the value Exact or Approximate: $2 \\cdot \\log(x) = 4$ is divided by $2$ first and gives $x = 10^2 = 100$, Exact; $\\log_3(x) + 1 = 2$ subtracts $1$ first and gives $x = 3$. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. The four steps are set out in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -1246,7 +2094,9 @@ $$\\log_b(A) = c \\iff A = b^c$$
 
 **Domain check.** After finding a candidate solution, verify that every logarithm argument in the original equation is positive at that value. A logarithm of zero or a negative number is undefined, so any candidate that violates this is extraneous and must be rejected.
 
-For deeper coverage see **logarithm properties** and **change of base formula**.`,
+For deeper coverage see **logarithm properties** and **change of base formula**.
+
+The two strategies have their own lesson sections, [logarithms on both sides](!/algebra/logarithms/equations#2) and [basic form: logarithm equals a constant](!/algebra/logarithms/equations#1); merging several logarithms first is [combining logarithms](!/algebra/logarithms/equations#3), using the [logarithm rules](!/algebra/logarithms#7).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -1274,7 +2124,9 @@ A **logarithmic equation** contains at least one logarithm with the variable in 
 
 Logarithmic equations appear when solving exponential equations for the exponent, when computing time-to-double or half-life, in information theory (entropy), and in many engineering scales (decibels, Richter scale, magnitudes).
 
-For deeper coverage see **logarithms**, **natural logarithm**, and **logarithmic functions**.`,
+For deeper coverage see **logarithms**, **natural logarithm**, and **logarithmic functions**.
+
+The logarithm is defined in [what is a logarithm](!/algebra/logarithms#1), its allowed inputs in [restrictions on base and argument](!/algebra/logarithms#2), the two usual bases in [common and natural logarithms](!/algebra/logarithms#5), and the graph in [graphing logarithmic functions](!/algebra/logarithms#10).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1297,7 +2149,9 @@ For deeper coverage see **logarithms**, **natural logarithm**, and **logarithmic
 &bull; Coefficient of zero on the logarithm: invalid equation, error.
 &bull; Different bases on both sides: requires change-of-base; not currently supported.
 
-For comprehensive treatment see **solving logarithmic equations**, **logarithm properties**, and **the change of base formula**.`,
+For comprehensive treatment see **solving logarithmic equations**, **logarithm properties**, and **the change of base formula**.
+
+The steps are worked in [domain restrictions](!/algebra/logarithms/equations#4) and [extraneous solutions](!/algebra/logarithms/equations#5), the rules they use in [properties of logarithms](!/algebra/logarithms#6), and the whole procedure is summarised in [summary of solving methods](!/algebra/logarithms/equations#10).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1320,7 +2174,9 @@ For comprehensive treatment see **solving logarithmic equations**, **logarithm p
 
 **pH, Decibels, and Magnitudes** &mdash; real-world scales defined as logarithms: pH measures hydrogen ion concentration; decibels measure sound intensity; the Richter scale measures earthquake amplitude. Each translates a multiplicative quantity into an additive scale.
 
-**Entropy** &mdash; in information theory, the information content of a probability distribution is computed using $\\log_2$.`,
+**Entropy** &mdash; in information theory, the information content of a probability distribution is computed using $\\log_2$.
+
+The related tools are the [exponential equation solver](!/algebra/calculators/equations/exponential), the [logarithmic inequality solver](!/algebra/calculators/inequalities/logarithmic) and the [logarithm calculator](!/calculators/log-calculator); the lessons are [logarithmic equations](!/algebra/logarithms#8), [logarithmic inequalities](!/algebra/logarithms#9) and [equations requiring substitution](!/algebra/logarithms/equations#6).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -1368,6 +2224,117 @@ For comprehensive treatment see **solving logarithmic equations**, **logarithm p
     answer: "When both sides are absolute values, two cases arise: A equals B, or A equals negative B. Solve each as a linear equation. Equating A with positive B gives one candidate; equating A with negative B gives another. Both are valid solutions of the original equation."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/equations/absolute-value" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/equations/absolute-value and algebra/equations.
+         Before editing this view, read the instructions and re-run its checks (--view absolute-value); keep the section ids and the anchors. */
+      instructions: [
+        `Build the equation in the display at the top: click the **| |** button once before and once after the expression inside the bars, and the **Var**, **Num** and **Op** buttons or the brackets for the rest, or type on the keyboard. [Learn more about building equations](!#building-equations-with-buttons-and-keyboard)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-equations-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once the equation is complete; an expression without an equals sign or without bars is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a random equation of that form. [Learn more about the templates](!#try-an-example-eight-form-templates)`,
+        `The right panel lists the steps from isolating the bars to the two cases and their check, and the answer card gives one value, two values or No solution; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`,
+        `Bars equal to a negative number end in No solution; bars equal to zero give one value instead of two. [Learn more about the special cases](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one equation in $x$, $y$ or $n$ with a linear expression between absolute value bars. It isolates the bars by moving constants and dividing out a coefficient, then looks at the other side: a negative number means no solution, zero means the inside is zero, and a positive number $c$ splits the equation into the inside equal to $c$ and equal to $-c$, each solved as a linear equation and checked. With bars on both sides it uses the cases $A = B$ and $A = -B$. [Learn more about absolute value](!#what-is-absolute-value)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: '|x − 3| = 5, Solve, Clear, bars equal to zero',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK | |, x, -, 3, | |, =, 5\nThe display reads |x − 3| = 5.', at: 'tr' },
+            { click: { button: '| |', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '3', exact: true } },
+            { click: { button: '| |', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '5', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK Solve\nTwo cases, x − 3 = 5 and x − 3 = −5: x = 8 or x = −2, Exact.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+            { say: 'CLICK Clear\nThe display and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK | |, 2, x, +, 1, | |, =, 0 and Solve\nThe zero case: one solution, x = −0.5.', at: 'tr' },
+            { click: { button: '| |', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '1', exact: true } },
+            { click: { button: '| |', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '0', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+          ],
+        },
+        'building-equations-with-buttons-and-keyboard': {
+          title: 'A coefficient and a constant, undo, delete, Solve',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK 2, ×, | |, x, +, 1, | |, -, 4, =, 6\nThe display reads 2 · |x + 1| − 4 = 6.', at: 'tr' },
+            { click: { button: '2', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: '| |', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } },
+            { click: { button: '1', exact: true } }, { click: { button: '| |', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '4', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '6', exact: true } },
+            { wait: 2800 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the 6 is gone.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe equals sign before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK =, 6 and Solve\nIsolated to |x + 1| = 5: x = 4 or x = −6.', at: 'tr' },
+            { click: { button: '=', exact: true } }, { click: { button: '6', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+        'try-an-example-eight-form-templates': {
+          title: 'Open the templates, load two forms',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nEight cards, one per form.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK No Solution\nBars equal to a negative number load.', at: 'tr' },
+            { click: { button: 'No Solution' } },
+            { wait: 2400 },
+            { say: 'CLICK Solve\nNo solution: an absolute value cannot be negative.', at: 'tr' },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+            { say: 'CLICK Abs Both Sides\nA random |ax + b| = |cx + d| replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'Abs Both Sides' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'Bars on both sides, then no solution',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK | |, x, -, 1, | |, =, | |, 2, x, +, 4, | | and Solve\nCase 1 A = B gives x = −5, case 2 A = −B gives x = −1.', at: 'tr' },
+            { click: { button: '| |', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '-', exact: true } }, { click: { button: '1', exact: true } }, { click: { button: '| |', exact: true } },
+            { click: { button: '=', exact: true } }, { click: { button: '| |', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '4', exact: true } }, { click: { button: '| |', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3800 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK | |, x, | |, +, 3, =, 1 and Solve\nIsolated to |x| = −2: No solution.', at: 'tr' },
+            { click: { button: '| |', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '| |', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: '3', exact: true } },
+            { click: { button: '=', exact: true } }, { click: { button: '1', exact: true } },
+            { click: { button: 'Solve' } },
+            { wait: 3200 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-equations-with-buttons-and-keyboard', key: 'obj2', demo: 'building-equations-with-buttons-and-keyboard' },
+        { id: 'try-an-example-eight-form-templates', key: 'obj3', demo: 'try-an-example-eight-form-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'the-two-case-split-why-it-works', key: 'obj5', demo: null },
+        { id: 'what-is-absolute-value', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -1379,7 +2346,7 @@ Three quick experiments:
 &bull; Click the &quot;No Solution&quot; example template &mdash; an equation with a negative right side loads. The solver detects this immediately and reports no solution.
 &bull; Enter $|2x + 1| = 0$ to see the zero case: only one solution exists because zero has only one absolute value preimage.
 
-The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The special row offers the absolute value bars button (rendered as $|$ $|$).`,
+The Solve button is disabled until you enter something. Pressing Enter on the display is equivalent to clicking Solve. The special row offers the absolute value bars button (rendered as $|$ $|$). An expression without an equals sign is refused with "Input must be an equation (use = sign)", one without bars with "No absolute value found", and a non-linear expression inside the bars with its own message. $|2x + 1| = 0$ gives the single solution $x = -0.5$. What the bars mean is explained in [what is absolute value](!#what-is-absolute-value).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -1393,7 +2360,7 @@ The Solve button is disabled until you enter something. Pressing Enter on the di
 
 The absolute value bars button inserts a single $|$ character; click it twice to surround an expression. Keyboard users can type the vertical bar character directly. For multi-term expressions inside the bars, type them between the two bars: $|2x + 3|$.
 
-Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the one after it. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time.`,
+Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back; **Backspace** deletes the character before the cursor; **Delete** removes the one after it. The Clear button empties the display entirely; the curved-arrow button steps through the undo stack one edit at a time; the ⌫ button deletes the character before the caret. Why the bars make two cases out of one equation is explained in [what is absolute value](!#what-is-absolute-value).`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -1409,7 +2376,7 @@ Keyboard shortcuts: type letters and digits directly, use star or slash for mult
 &bull; **Abs Both Sides** &mdash; $|ax + b| = |cx + d|$. Uses the $A = B$ or $A = -B$ case split.
 &bull; **Fraction Inside** &mdash; $|x/a + b| = c$. Tests fractional-coefficient handling inside the bars.
 
-Roughly 80 percent of generated equations produce clean integer solutions; the rest exercise the special cases and edge scenarios.`,
+Roughly 80 percent of generated equations produce clean integer solutions; the rest exercise the special cases and edge scenarios. Loading a template clears the previous solution; click Solve to work the new equation. The split applied to every template is justified in [the two-case split](!#the-two-case-split-why-it-works).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -1425,7 +2392,7 @@ Roughly 80 percent of generated equations produce clean integer solutions; the r
 &bull; **Case 2: Negative** &mdash; solves the linear equation $A = -c$ for the variable.
 &bull; **Verify Both Solutions** &mdash; substitutes each candidate back into the original to confirm the absolute value evaluates to the right side.
 
-For $|A| = |B|$ equations, the solver uses **Case 1: A = B** and **Case 2: A = -B** instead of the positive/negative split.`,
+For $|A| = |B|$ equations, the solver uses **Case 1: A = B** and **Case 2: A = -B** instead of the positive/negative split. $|x - 1| = |2x + 4|$ gives $x = -5$ or $x = -1$; $|x| + 3 = 1$ isolates to $|x| = -2$ and ends in No solution. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. The three stages are set out in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -1451,7 +2418,9 @@ Check: $|11 - 4| = |7| = 7$ ✓ and $|{-3} - 4| = |{-7}| = 7$ ✓. Both solution
 &bull; **$|A| = 0$**: one solution. The inner expression must be exactly zero, so the two cases collapse.
 &bull; **$|A| = |B|$**: two cases on inputs rather than outputs. Either $A = B$ or $A = -B$. The principle is the same: both sign assignments of the right-hand expression must be checked.
 
-For deeper coverage see **absolute value** and **piecewise definition of absolute value**.`,
+For deeper coverage see **absolute value** and **piecewise definition of absolute value**.
+
+The split is worked in [the basic equation](!/algebra/equations/absolute-value#2) and [solving equations of the form |f(x)| = k](!/algebra/equations/absolute-value#3); when a case can fail is [absolute value and extraneous solutions](!/algebra/equations/absolute-value#6).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -1473,7 +2442,9 @@ Equivalently, $|x| = \\sqrt{x^2}$. Absolute value is always non-negative: $|x| \
 
 **Geometric interpretation.** $|x - a|$ is the distance between $x$ and $a$ on the number line. The equation $|x - a| = c$ asks: which points are exactly $c$ units from $a$? Answer: $a + c$ and $a - c$.
 
-For deeper coverage see **absolute value function**, **distance on the number line**, and **piecewise functions**.`,
+For deeper coverage see **absolute value function**, **distance on the number line**, and **piecewise functions**.
+
+The definition is given in [definition of absolute value](!/algebra/equations/absolute-value#1), the distance reading in [geometric interpretation](!/algebra/equations/absolute-value#7), and the place of these equations among the equation types in [absolute value equations](!/algebra/equations#10).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1499,7 +2470,9 @@ For deeper coverage see **absolute value function**, **distance on the number li
 
 **Variant with coefficient outside**: $a \\cdot |A| + d = c$. Subtract $d$, divide by $a$, then proceed with the standard split.
 
-For comprehensive treatment see **solving absolute value equations** and **case analysis**.`,
+For comprehensive treatment see **solving absolute value equations** and **case analysis**.
+
+The stages are worked in [solving equations of the form |f(x)| = k](!/algebra/equations/absolute-value#3) and [equations with absolute value on both sides](!/algebra/equations/absolute-value#4); several bars at once are treated in [equations with multiple absolute value terms](!/algebra/equations/absolute-value#5), and the forms are summarised in [summary of absolute value equation forms](!/algebra/equations/absolute-value#8).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1520,7 +2493,9 @@ For comprehensive treatment see **solving absolute value equations** and **case 
 
 **Linear Equations** &mdash; the equation type that results after splitting cases. The solver routes each case through a linear-equation step.
 
-**Compound Inequalities** &mdash; used to express the solution set of an absolute value inequality. The form $|x - a| \\leq c$ corresponds to the compound inequality $a - c \\leq x \\leq a + c$.`,
+**Compound Inequalities** &mdash; used to express the solution set of an absolute value inequality. The form $|x - a| \\leq c$ corresponds to the compound inequality $a - c \\leq x \\leq a + c$.
+
+The related tools are the [absolute value inequality solver](!/algebra/calculators/inequalities/absolute-value), the [linear equation solver](!/algebra/calculators/equations/linear) and the [complex numbers calculator](!/calculators/complex-numbers) for the modulus; the lessons are [geometric interpretation](!/algebra/equations/absolute-value#7) and [absolute value equations](!/algebra/equations#10).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -1569,6 +2544,124 @@ For comprehensive treatment see **solving absolute value equations** and **case 
     answer: "After entering the formula, every distinct letter is detected and listed as a target button under the equation display. Click the variable you want to isolate; it highlights in the equation. Then click Solve. The solver rearranges the formula and shows the result."
 }
 },
+      /* calculators-mesh: view finished 2026-10-15 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+         Registry entry "/algebra/calculators/equations/literal" in calculators-mesh-registry.json (same folder): 6 instructions, 1 explanation text with anchor, 8 sections (4 usage with demos), lesson links to algebra/equations/linear, algebra/equations, algebra/roots, algebra/equations/quadratic.
+         Before editing this view, read the instructions and re-run its checks (--view literal); keep the section ids and the anchors. */
+      instructions: [
+        `Build the formula in the display at the top: click the letter buttons in the **Var** rows, the **Num** and **Op** buttons, **π**, **^**, **²** and the brackets, or type any letter on the keyboard. [Learn more about building formulas](!#building-formulas-with-buttons-and-keyboard)`,
+        `Under the display, click the letter you want to solve for in the **Solve for** row; it is underlined in the formula. [Learn more about the target](!#getting-started)`,
+        `**Clear** empties the display, the curved arrow undoes the last edit and the ⌫ button deletes the character before the caret. [Learn more about editing](!#building-formulas-with-buttons-and-keyboard)`,
+        `Click **Solve**, or press Enter in the display, once a formula and a target are set; a target that appears in a power or a denominator is refused. [Learn more about solving](!#getting-started)`,
+        `Open **Try an Example** and click a card to load a formula from algebra, geometry, physics or finance. [Learn more about the templates](!#try-an-example-ten-formula-templates)`,
+        `The right panel lists the moves from the original formula to the division by the coefficient, and the answer card gives the target in terms of the other letters; the box under the solver explains the method. [Learn more about the solution](!#reading-the-step-by-step-solution)`
+      ],
+      explanations: {
+        main: {
+          title: 'How the solver works',
+          content: `The solver reads one formula with several letters and a target letter chosen under the display. It expands brackets that hold the target, moves every term with the target to one side and the rest to the other, factors the target out if it appears more than once, and divides by its coefficient, so the answer is the target in terms of the other letters. The target must appear to the first power and outside denominators; otherwise the solver says so. [Learn more about literal equations](!#what-is-a-literal-equation)`
+        }
+      },
+      demos: {
+        'getting-started': {
+          title: 'd = r · t, a target, Solve, Clear',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK d, =, r, ×, t\nThe display reads d = r · t and the Solve for row shows d, r, t.', at: 'tr' },
+            { click: { button: 'd', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: 'r', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: 't', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK t in the Solve for row, then Solve\nThe target is underlined; Isolate the Term and Divide Both Sides give t = d / r.', at: 'tr' },
+            { click: { button: 't', exact: true, nth: 0 } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK r in the Solve for row, then Solve\nThe same formula rearranged for r: r = d / t.', at: 'tr' },
+            { click: { button: 'r', exact: true, nth: 0 } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Clear\nThe display, the targets and the solution are emptied.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+          ],
+        },
+        'building-formulas-with-buttons-and-keyboard': {
+          title: 'The perimeter formula, undo, delete, solve for w',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK P, =, 2, ×, l, +, 2, ×, w\nThe display reads P = 2 · l + 2 · w.', at: 'tr' },
+            { click: { button: 'P', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: 'l', exact: true } },
+            { click: { button: '+', exact: true } }, { click: { button: '2', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: 'w', exact: true } },
+            { wait: 2600 },
+            { say: 'CLICK the curved arrow\nThe last edit is undone: the w is gone, and so is its target button.', at: 'tr' },
+            { click: { button: '↶', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ⌫\nThe × before the caret is deleted.', at: 'tr' },
+            { click: { button: '⌫', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK ×, w, then w in the Solve for row, then Solve\nw = (P − 2 · l) / 2.', at: 'tr' },
+            { click: { button: '×', exact: true } }, { click: { button: 'w', exact: true } },
+            { click: { button: 'w', exact: true, nth: 0 } },
+            { click: { button: 'Solve' } },
+            { wait: 3600 },
+          ],
+        },
+        'try-an-example-ten-formula-templates': {
+          title: 'Open the templates, load two formulas',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK Try an Example\nTen cards, one per formula.', at: 'tr' },
+            { click: { button: 'Try an Example' } },
+            { wait: 2400 },
+            { say: 'CLICK Slope-Intercept\ny = m · x + b loads with the targets y, m, x, b.', at: 'tr' },
+            { click: { button: 'Slope-Intercept' } },
+            { wait: 2400 },
+            { say: 'CLICK m in the Solve for row, then Solve\nm = (y − b) / x.', at: 'tr' },
+            { click: { button: 'm', exact: true, nth: 0 } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK Temperature\nF = 9 ÷ 5 · C + 32 replaces it; the old solution is cleared.', at: 'tr' },
+            { click: { button: 'Temperature' } },
+            { wait: 2600 },
+          ],
+        },
+        'reading-the-step-by-step-solution': {
+          title: 'A bracket to expand, then a target that is not linear',
+          scale: 0.4,
+          minHeight: 384,
+          script: [
+            { say: 'CLICK A, =, P, ×, (, 1, +, r, ×, t, ), then r in the Solve for row, then Solve\nThe bracket is expanded and r is isolated in terms of A, P and t.', at: 'tr' },
+            { click: { button: 'A', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: 'P', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: '(', exact: true } },
+            { click: { button: '1', exact: true } }, { click: { button: '+', exact: true } }, { click: { button: 'r', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: 't', exact: true } }, { click: { button: ')', exact: true } },
+            { click: { button: 'r', exact: true, nth: 0 } },
+            { click: { button: 'Solve' } },
+            { wait: 3800 },
+            { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
+            { click: { button: 'Clear', exact: true } },
+            { wait: 2200 },
+            { say: 'CLICK V, =, π, ×, r, ², ×, h, then r as the target, then Solve\nr is squared: the solver refuses with a message naming r.', at: 'tr' },
+            { click: { button: 'V', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: 'π', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: 'r', exact: true } },
+            { click: { button: '²', exact: true } }, { click: { button: '×', exact: true } }, { click: { button: 'h', exact: true } },
+            { click: { button: 'r', exact: true, nth: 0 } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+            { say: 'CLICK h as the target, then Solve\nh = V / (π · r²).', at: 'tr' },
+            { click: { button: 'h', exact: true, nth: 0 } },
+            { click: { button: 'Solve' } },
+            { wait: 3400 },
+          ],
+        },
+      },
+      sectionOrder: [
+        { id: 'getting-started', key: 'obj1', demo: 'getting-started' },
+        { id: 'building-formulas-with-buttons-and-keyboard', key: 'obj2', demo: 'building-formulas-with-buttons-and-keyboard' },
+        { id: 'try-an-example-ten-formula-templates', key: 'obj3', demo: 'try-an-example-ten-formula-templates' },
+        { id: 'reading-the-step-by-step-solution', key: 'obj4', demo: 'reading-the-step-by-step-solution' },
+        { id: 'when-the-solver-can-and-cannot-help', key: 'obj5', demo: null },
+        { id: 'what-is-a-literal-equation', key: 'obj6', demo: null },
+        { id: 'the-solving-process-explained', key: 'obj7', demo: null },
+        { id: 'related-concepts', key: 'obj8', demo: null },
+      ],
 sectionsContent: {
   obj1: {
     title: `Getting Started`,
@@ -1580,7 +2673,7 @@ Three quick experiments:
 &bull; Click the &quot;Slope-Intercept&quot; example template &mdash; $y = mx + b$ loads. Pick $m$ as the target and the result is $m = (y - b) / x$.
 &bull; Try the &quot;Cylinder Volume&quot; template: $V = \\pi r^2 h$. Solve for $h$ to get $h = V / (\\pi r^2)$. Try solving for $r$ &mdash; the solver flags an error because $r$ appears squared.
 
-The Solve button is disabled until you both enter a formula and select a target variable. The selected target is underlined in yellow in the display.`,
+The Solve button is disabled until you both enter a formula and select a target variable. The selected target is underlined in yellow in the display. The target buttons appear under the display as soon as letters are typed; for $d = r \\cdot t$ the targets are $d$, $r$ and $t$, and solving for $t$ gives $t = d / r$. What a literal equation is, and why one formula has several rearranged forms, is explained in [what is a literal equation](!#what-is-a-literal-equation).`,
     before: ``, after: ``, link: ''
   },
   obj2: {
@@ -1594,7 +2687,7 @@ The Solve button is disabled until you both enter a formula and select a target 
 
 The variable palette is case-sensitive: capital $A$ and lowercase $a$ are treated as different variables. This matters for formulas like the simple-interest formula $A = P(1 + rt)$ where $A$ is amount and $a$ might be acceleration in a different context.
 
-Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type $\\pi$ as the Unicode character, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back; **Backspace** and **Delete** behave as expected. Clearing the formula also resets the target variable selection.`,
+Keyboard shortcuts: type letters and digits directly, use star or slash for multiplication and division, type $\\pi$ as the Unicode character, and press Enter to solve. **Ctrl+Z** undoes up to fifty edits back; **Backspace** and **Delete** behave as expected. The Clear button empties the display; the curved-arrow button steps through the undo stack one edit at a time; the ⌫ button deletes the character before the caret. Why only linear formulas can be rearranged this way is explained in [when the solver can and cannot help](!#when-the-solver-can-and-cannot-help). Clearing the formula also resets the target variable selection.`,
     before: ``, after: ``, link: ''
   },
   obj3: {
@@ -1612,7 +2705,7 @@ Keyboard shortcuts: type letters and digits directly, use star or slash for mult
 &bull; **Simple Interest** &mdash; $A = P(1 + rt)$. Solve for $P$, $r$, or $t$.
 &bull; **Ohm's Law** &mdash; $V = IR$. Solve for $I$ or $R$.
 
-These cover common formulas from algebra, geometry, physics, and finance &mdash; the typical use cases for literal equation rearrangement.`,
+These cover common formulas from algebra, geometry, physics, and finance &mdash; the typical use cases for literal equation rearrangement. Loading a template clears the previous solution; pick a target, then click Solve. The moves applied to every template are listed in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj4: {
@@ -1627,7 +2720,7 @@ These cover common formulas from algebra, geometry, physics, and finance &mdash;
 
 The final-answer card at the bottom renders the result with proper fraction notation: numerator above a horizontal bar, denominator below. This makes the symbolic answer easy to read at a glance.
 
-For identity cases (the target cancels out and both sides are equal), the solver reports &quot;Identity&quot;. For contradictions (the target cancels but the constants do not match), it reports &quot;No solution&quot;.`,
+For identity cases (the target cancels out and both sides are equal), the solver reports &quot;Identity&quot;. For contradictions (the target cancels but the constants do not match), it reports &quot;No solution&quot;. A target that is not linear, such as $r$ in $V = \\pi r^2 h$, is refused with a message naming the variable, while $h$ in the same formula gives $h = V / (\\pi r^2)$. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. The four moves are set out in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -1650,7 +2743,9 @@ For identity cases (the target cancels out and both sides are equal), the solver
 
 For non-linear cases, manual rearrangement combining the radical-equation or quadratic-equation techniques is needed. The solver guides you to the right tool by flagging the structural issue.
 
-For deeper coverage see **rearranging formulas** and **symbolic manipulation**.`,
+For deeper coverage see **rearranging formulas** and **symbolic manipulation**.
+
+The linear case is treated in [literal equations and formulas](!/algebra/equations/linear#8); the cases the solver refuses need [equations with radicals](!/algebra/roots#7) or [the quadratic formula](!/algebra/equations/quadratic#4).`,
     before: ``, after: ``, link: ''
   },
   obj6: {
@@ -1667,7 +2762,9 @@ For deeper coverage see **rearranging formulas** and **symbolic manipulation**.`
 
 The same formula can be solved for any of its variables, yielding a different rearranged form each time. For example, $V = IR$ gives three useful forms: $V = IR$, $I = V/R$, and $R = V/I$.
 
-For deeper coverage see **formulas**, **algebraic manipulation**, and **changing the subject of a formula**.`,
+For deeper coverage see **formulas**, **algebraic manipulation**, and **changing the subject of a formula**.
+
+Formulas as equations are introduced in [what an equation is](!/algebra/equations#1), the rearrangement in [literal equations and formulas](!/algebra/equations/linear#8), and the forms a linear equation can take in [summary of linear equation forms](!/algebra/equations/linear#9).`,
     before: ``, after: ``, link: ''
   },
   obj7: {
@@ -1686,7 +2783,9 @@ Each move preserves the equality. Symbolic manipulation works the same as numeri
 
 **The solver implementation.** Internally, the solver builds an expression-tree representation of the equation and computes the linear decomposition $\\text{coeff} \\cdot \\text{target} + \\text{constant} = 0$ where coeff and constant are symbolic expressions (not numbers). The solution is then $\\text{target} = -\\text{constant} / \\text{coeff}$, simplified for readability.
 
-For comprehensive treatment see **solving formulas for a variable** and **symbolic algebra**.`,
+For comprehensive treatment see **solving formulas for a variable** and **symbolic algebra**.
+
+The moves rest on [properties of equality](!/algebra/equations/linear#2) and [equivalent equations](!/algebra/equations#4); they are practised with numbers in [solving single-step and multi-step equations](!/algebra/equations/linear#3) and [equations with parentheses](!/algebra/equations/linear#4).`,
     before: ``, after: ``, link: ''
   },
   obj8: {
@@ -1707,7 +2806,9 @@ For comprehensive treatment see **solving formulas for a variable** and **symbol
 
 **Physical Formulas** &mdash; many appear in textbooks in one form and must be rearranged to compute different quantities. The kinematic equation $d = v_0 t + (1/2) a t^2$ commonly needs rearrangement for $v_0$ or $a$.
 
-**Geometry Formulas** &mdash; area, volume, and surface-area formulas commonly require solving for dimensions when other quantities are given. Example: the volume of a cylinder is $V = \\pi r^2 h$, solved for $h$ when $V$ and $r$ are known.`,
+**Geometry Formulas** &mdash; area, volume, and surface-area formulas commonly require solving for dimensions when other quantities are given. Example: the volume of a cylinder is $V = \\pi r^2 h$, solved for $h$ when $V$ and $r$ are known.
+
+The related tools are the [linear equation solver](!/algebra/calculators/equations/linear), the [quadratic equation solver](!/algebra/calculators/equations/quadratic) and the [radical equation solver](!/algebra/calculators/equations/radical); the lessons are [literal equations and formulas](!/algebra/equations/linear#8) and [quadratic equations](!/algebra/equations#7).`,
     before: ``, after: ``, link: ''
   }
 }
@@ -1804,7 +2905,11 @@ For comprehensive treatment see **solving formulas for a variable** and **symbol
       },
       currentView: params.view,
       componentName: currentConfig.component,
-      h1Title: currentConfig.h1
+      h1Title: currentConfig.h1,
+      instructions: currentConfig.instructions || [],
+      explanations: currentConfig.explanations || null,
+      demos: currentConfig.demos || {},
+      sectionOrder: currentConfig.sectionOrder || []
     }
   }
 }
@@ -1878,10 +2983,15 @@ export default function AlgebraEquationViewPage({
   schemas,
   currentView,
   componentName,
-  h1Title
+  h1Title,
+  instructions = [],
+  explanations = null,
+  demos = {},
+  sectionOrder = []
 }) {
 
-  const genericSections = Object.keys(sectionsContent).length > 0
+  // the file's old fixed list, kept for views without a sectionOrder yet
+  const buildOldGenericSections = () => Object.keys(sectionsContent).length > 0
     ? [
         { id: '1', title: sectionsContent.obj1?.title || '', link: '', content: sectionsContent.obj1?.content || '' },
         { id: '2', title: sectionsContent.obj2?.title || '', link: '', content: sectionsContent.obj2?.content || '' },
@@ -1893,6 +3003,45 @@ export default function AlgebraEquationViewPage({
         { id: '8', title: sectionsContent.obj8?.title || '', link: '', content: sectionsContent.obj8?.content || '' },
       ].filter(section => section.title)
     : []
+
+  const renderCalculator = (demoProps = {}) => {
+    if (componentName === 'LinearEquationSolver') return <LinearEquationSolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'QuadraticEquationSolver') return <QuadraticEquationSolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'PolynomialEquationSolver') return <PolynomialEquationSolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'RationalEquationSolver') return <RationalEquationSolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'RadicalEquationSolver') return <RadicalEquationSolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'ExponentialEquationSolver') return <ExponentialEquationSolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'LogarithmicEquationSolver') return <LogarithmicEquationSolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'AbsValueEquationSolver') return <AbsValueEquationSolver explanations={explanations || undefined} {...demoProps} />;
+    if (componentName === 'LiteralEquationSolver') return <LiteralEquationSolver explanations={explanations || undefined} {...demoProps} />;
+    return null;
+  };
+
+  const demoOptOut = {};
+
+  const genericSections = sectionOrder.length > 0
+    ? sectionOrder.map((s) => ({
+        id: s.id,
+        title: sectionsContent[s.key].title,
+        link: sectionsContent[s.key].link || '',
+        content: [
+          ...[s.demo, s.demo2].filter(Boolean).map((d) => (
+            <ToolDemoPlayer
+              key={`demo-${s.id}-${d}`}
+              script={demos[d].script}
+              title={demos[d].title}
+              label={`Demo: ${demos[d].title}`}
+              scale={demos[d].scale || 0.6}
+              minHeight={demos[d].minHeight || undefined}
+              renderText={processContent}
+            >
+              {renderCalculator(demoOptOut)}
+            </ToolDemoPlayer>
+          )),
+          sectionsContent[s.key].content,
+        ],
+      }))
+    : buildOldGenericSections()
 
   return (
     <>
@@ -1950,6 +3099,11 @@ export default function AlgebraEquationViewPage({
       <br />
       <br />
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>{h1Title}</h1>
+      {instructions.length > 0 && (
+        <div style={{ marginBottom: '20px' }}>
+          <ExplanationDetails instructions={instructions} title={`How to use ${h1Title}`} />
+        </div>
+      )}
 
       <SiblingsNav
         title="Equations"
@@ -1981,15 +3135,7 @@ export default function AlgebraEquationViewPage({
               margin-right: 0 !important;
             }
           ` }} />
-          {componentName === 'LinearEquationSolver' && <LinearEquationSolver />}
-          {componentName === 'QuadraticEquationSolver' && <QuadraticEquationSolver />}
-          {componentName === 'PolynomialEquationSolver' && <PolynomialEquationSolver />}
-          {componentName === 'RationalEquationSolver' && <RationalEquationSolver />}
-          {componentName === 'RadicalEquationSolver' && <RadicalEquationSolver />}
-          {componentName === 'ExponentialEquationSolver' && <ExponentialEquationSolver />}
-          {componentName === 'LogarithmicEquationSolver' && <LogarithmicEquationSolver />}
-          {componentName === 'AbsValueEquationSolver' && <AbsValueEquationSolver />}
-          {componentName === 'LiteralEquationSolver' && <LiteralEquationSolver />}
+          {renderCalculator()}
         </div>
       </SiblingsNav>
 
