@@ -129,7 +129,7 @@ export const DEFAULT_OPERATIONS = {
     demoInputs: ['x + 2', 'x - 3', '2x + 1'],
     result: {
       primaryLabel: 'Product',
-      primaryMath: '2x^3 - 3x^2 - 13x - 6',
+      primaryMath: '2x^3 - x^2 - 13x - 6',
       meta: [
         { label: 'Degree', value: '3' },
         { label: 'Leading', value: '2' },
@@ -143,7 +143,7 @@ export const DEFAULT_OPERATIONS = {
       { title: 'Bring in $P_3$', math: '$(x^2 - x - 6)(2x + 1)$', note: 'Distribute every trinomial term across every binomial term.' },
       { title: 'Distribute term by term', math: '$2x^3 + x^2 - 2x^2 - x - 12x - 6$', note: 'Six products total — three from each term of the trinomial.' },
       { title: 'Group by degree', math: '$2x^3 + (1 - 2)x^2 + (-1 - 12)x - 6$', note: 'Collect coefficients of matching powers.' },
-      { title: 'Combine like terms', math: '$2x^3 - 3x^2 - 13x - 6$', note: 'Now we have the final simplified cubic.' },
+      { title: 'Combine like terms', math: '$2x^3 - x^2 - 13x - 6$', note: 'Now we have the final simplified cubic.' },
     ],
     about: {
       text: 'When multiplying three or more polynomials, expand them pairwise from the left. Multiplication is associative, so any grouping works — but left-to-right keeps intermediate degrees small.',

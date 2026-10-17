@@ -243,8 +243,14 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import TwoEventsProbabilityCalculator from '@/app/components/calculators/probability/events/TwoEventsProbabilityCalculator'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 
+/* calculators-mesh: finished 2026-10-17 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+   Registry entry "/probability/calculators/two-events" in calculators-mesh-registry.json (same folder): 7 usage sections, each with a demo; 5 panel notes; 16 sections with fixed slug ids.
+   Before editing this page, read the instructions and re-run its checks; keep the section ids and the anchors. */
 export async function getStaticProps(){
 
   const keyWords = [
@@ -293,7 +299,8 @@ export async function getStaticProps(){
 
 **Given P(A∪B)** mode starts with union probability—at least one event occurring. Provide P(A), P(B), and P(A∪B), and the calculator computes P(A∩B) by rearranging the addition rule. Use when you know total probability coverage but need overlap.
 
-**Mutually Exclusive** mode applies when events cannot occur simultaneously—if one happens, the other cannot. This forces P(A∩B)=0 and simplifies union: P(A∪B) = P(A) + P(B). Use for non-overlapping outcomes like rolling exactly 3 versus exactly 5 on a die.`,
+**Mutually Exclusive** mode applies when events cannot occur simultaneously—if one happens, the other cannot. This forces P(A∩B)=0 and simplifies union: P(A∪B) = P(A) + P(B). Use for non-overlapping outcomes like rolling exactly 3 versus exactly 5 on a die.
+The five buttons sit under **Calculation Mode** at the top of the card; the boxes under **Input Probabilities** change with the choice, and every box opens with an example value ($P(A) = 0.5$, $P(B) = 0.4$, $P(B \\mid A) = 0.4$, $P(A \\mid B) = 0.6$, $P(A \\cap B) = 0.2$, $P(A \\cup B) = 0.7$), so Calculate works at once. The rule each mode applies has its own section, from [The Multiplication Rule for Independent Events](!#the-multiplication-rule-for-independent-events) to [Mutually Exclusive Events](!#mutually-exclusive-events).`,
       before: ``,
       after: ``,
       link: '',
@@ -311,7 +318,8 @@ The results panel shows all derived probabilities with expandable step-by-step c
 
 Common independent scenarios: coin flips (each flip independent), dice rolls (dice don't influence each other), sampling with replacement (each draw independent), separate random processes (traffic delays and power outages typically independent).
 
-**Non-independent detection**: If you calculate with independent mode but conditional probabilities don't match marginals, the results show independence as "No," indicating your events actually depend on each other despite mode selection.`,
+**Non-independent detection**: If you calculate with independent mode but conditional probabilities don't match marginals, the results show independence as "No," indicating your events actually depend on each other despite mode selection.
+With the opening values $0.5$ and $0.4$ the result rows read $P(A \\cap B) = 0.2000$ and $P(A \\cup B) = 0.7000$; with $0.6$ and $0.5$ they read $0.3000$ and $0.8000$. A probability of $0$ for an event makes the conditional probability given that event undefined, and the calculator says so under the results instead of dividing by zero. The rule is explained in [The Multiplication Rule for Independent Events](!#the-multiplication-rule-for-independent-events).`,
       before: ``,
       after: ``,
       link: '',
@@ -329,7 +337,8 @@ In conditional mode, provide P(A), P(B), and **either** P(B|A) **or** P(A|B)—n
 
 The **step-by-step calculations** show the multiplication rule application. Expand the P(A∩B) row to see: formula, substitution, and result. Other probabilities cascade from this intersection using standard rules.
 
-Conditional probability scenarios: drawing cards without replacement (later draws depend on earlier), disease diagnosis (test results depend on disease presence), weather forecasting (tomorrow's weather depends on today's), quality control (defect rates may depend on machine used).`,
+Conditional probability scenarios: drawing cards without replacement (later draws depend on earlier), disease diagnosis (test results depend on disease presence), weather forecasting (tomorrow's weather depends on today's), quality control (defect rates may depend on machine used).
+Both conditional boxes open filled, so the first Calculate in this mode shows the error; clear one of them and calculate again: with $P(B \\mid A) = 0.4$ and $P(A) = 0.5$ the intersection is $0.2000$ and $P(A \\mid B) = 0.5000$; with $P(B \\mid A) = 0.7$ it is $0.3500$. The general multiplication rule is explained in [Conditional Probability and the General Multiplication Rule](!#conditional-probability-and-the-general-multiplication-rule).`,
       before: ``,
       after: ``,
       link: '',
@@ -347,7 +356,8 @@ The calculator computes conditional probabilities from the intersection: P(A|B) 
 
 For P(A)=0.6, P(B)=0.5, P(A∪B)=0.9, intersection becomes 0.6 + 0.5 - 0.9 = 0.2. The calculator validates P(A∪B) ≥ max(P(A), P(B))—union must at least cover the larger individual probability. It also checks P(A∪B) ≤ 1.0.
 
-Both modes derive the complete probability space: complements, conditional probabilities, and exclusive regions (A without B, B without A, neither). The **Venn diagrams** clearly show how intersection and union relate geometrically, with shading indicating each probability's region.`,
+Both modes derive the complete probability space: complements, conditional probabilities, and exclusive regions (A without B, B without A, neither). The **Venn diagrams** clearly show how intersection and union relate geometrically, with shading indicating each probability's region.
+The two modes are explained in [From the Intersection to the Union](!#from-the-intersection-to-the-union) and [From the Union to the Intersection](!#from-the-union-to-the-intersection); a union smaller than the larger event, such as $0.5$ with $P(A) = 0.6$, is refused as an axiom violation.`,
       before: ``,
       after: ``,
       link: '',
@@ -373,7 +383,8 @@ Both modes derive the complete probability space: complements, conditional proba
 
 **P(A') and P(B') - Complements**: The entire area outside one circle is shaded, showing all outcomes where that event doesn't occur. These diagrams include outcomes inside the other circle.
 
-The diagrams use consistent colors: dark blue for target regions, light blue for conditioning regions, faded outlines for reference circles. Diagrams appear at 90×60 pixels—compact but clear.`,
+The diagrams use consistent colors: dark blue for target regions, light blue for conditioning regions, faded outlines for reference circles. Diagrams appear at 90×60 pixels—compact but clear.
+With $P(A) = 0.8$ and $P(B) = 0.3$ in independent mode the overlap grows to $0.2400$ and the union to $0.8600$, and in Mutually Exclusive mode with $0.5$ and $0.4$ the intersection diagram is empty and the union reads $0.9000$. What the regions mean is explained in [Probability Rules for Two Events](!#probability-rules-for-two-events).`,
       before: ``,
       after: ``,
       link: '',
@@ -393,7 +404,8 @@ Each calculation follows a three-step format: **(1) Formula** showing the genera
 
 Calculations reference previously computed values, showing dependency chains. For instance, P(A|B) calculation references P(A∩B) computed earlier. This demonstrates how complex probabilities build from simpler ones.
 
-The steps validate your understanding of probability rules. Compare manual calculations to the displayed steps to verify your approach. The explicit formula application clarifies which rule applies to each probability type.`,
+The steps validate your understanding of probability rules. Compare manual calculations to the displayed steps to verify your approach. The explicit formula application clarifies which rule applies to each probability type.
+Clicking a row a second time folds the steps away again. The rules the steps apply are explained in [Probability Rules for Two Events](!#probability-rules-for-two-events).`,
       before: ``,
       after: ``,
       link: '',
@@ -413,7 +425,8 @@ When mutually exclusive, the union simplifies: P(A∪B) = P(A) + P(B) exactly. C
 
 **Important**: Events cannot be both independent and mutually exclusive unless one has probability zero. If P(A)>0 and P(B)>0, and events are mutually exclusive (P(A∩B)=0), then they're dependent because P(A)×P(B) ≠ 0. Independence with nonzero probabilities requires P(A∩B) > 0, contradicting mutual exclusivity.
 
-The properties section helps verify your mode selection matches reality. If you select independent mode but get independence "No", your events actually depend on each other despite your assumption.`,
+The properties section helps verify your mode selection matches reality. If you select independent mode but get independence "No", your events actually depend on each other despite your assumption.
+In Given P(A ∩ B) mode with $0.5$, $0.4$ and $0.3$ the Independent line reads No, since $0.3 \\ne 0.2$; in Mutually Exclusive mode the Mutually Exclusive line reads Yes and the union is $0.9000$. The two properties are compared in [Independence vs Mutual Exclusivity](!#independence-vs-mutual-exclusivity).`,
       before: ``,
       after: ``,
       link: '',
@@ -435,7 +448,9 @@ The properties section helps verify your mode selection matches reality. If you 
 
 **Conditional Probability Definition**: P(A|B) = P(A∩B)/P(B) for P(B)>0. This restricts the sample space to outcomes where B occurred, then finds A's proportion within that restricted space. If P(B)=0, conditional probability is undefined (the calculator notes this).
 
-The calculator chains these rules systematically: given initial information, it applies appropriate rules to derive the complete two-event probability space (10-12 distinct probabilities depending on zero denominators).`,
+The calculator chains these rules systematically: given initial information, it applies appropriate rules to derive the complete two-event probability space (10-12 distinct probabilities depending on zero denominators).
+
+The five modes of the calculator are the five ways of applying these rules, each with its own section: [The Multiplication Rule for Independent Events](!#the-multiplication-rule-for-independent-events), [Conditional Probability and the General Multiplication Rule](!#conditional-probability-and-the-general-multiplication-rule), [From the Intersection to the Union](!#from-the-intersection-to-the-union), [From the Union to the Intersection](!#from-the-union-to-the-intersection) and [Mutually Exclusive Events](!#mutually-exclusive-events). The rules are taught in [The addition rule](!/probability/rules#additive), [The multiplication rule](!/probability/rules#multy) and [Set operations on events](!/probability/events#sets).`,
       before: ``,
       after: ``,
       link: '',
@@ -457,7 +472,7 @@ The calculator chains these rules systematically: given initial information, it 
 
 The calculator's event properties section shows these distinctions. Independent mode produces independence "Yes", mutually exclusive "No" (unless you enter P(A)=0 or P(B)=0). Mutually exclusive mode produces mutually exclusive "Yes", independent "No" (unless zero probabilities).
 
-For comprehensive theory on independence and mutual exclusivity including formal definitions and examples, see **probability independence theory** and **mutually exclusive events theory**.`,
+For comprehensive theory on independence and mutual exclusivity including formal definitions and examples, see [probability independence theory](!/probability/independence#definition) and [mutually exclusive events theory](!/probability/events#relations).`,
       before: ``,
       after: ``,
       link: '',
@@ -479,7 +494,9 @@ For comprehensive theory on independence and mutual exclusivity including formal
 
 **Component consistency**: Derived probabilities like P(A∩B') = P(A) - P(A∩B) must be non-negative. This checks if P(A∩B) ≤ P(A), ensuring the intersection doesn't exceed its containing event. Similarly for P(B∩A') = P(B) - P(A∩B).
 
-When axioms are violated, the calculator displays all violations in a red error box at the top of results. Error messages specify which axiom failed and suggest checking input values. No results appear until inputs satisfy all axioms—this prevents working with impossible probability configurations.`,
+When axioms are violated, the calculator displays all violations in a red error box at the top of results. Error messages specify which axiom failed and suggest checking input values. No results appear until inputs satisfy all axioms—this prevents working with impossible probability configurations.
+
+The axioms are stated in [The axioms of probability](!/probability/basics#axioms) and the basic rules that follow from them in [The basic rules](!/probability/rules#basic).`,
       before: ``,
       after: ``,
       link: '',
@@ -505,7 +522,54 @@ When axioms are violated, the calculator displays all violations in a red error 
 
 **Binomial Probability Calculator** - Compute probabilities for fixed trials with constant success probability.
 
-**Independence Test Calculator** - Determine statistical independence from observed frequency data with chi-square tests.`,
+**Independence Test Calculator** - Determine statistical independence from observed frequency data with chi-square tests.
+
+The theory behind these tools is taught in [Relations between events](!/probability/events#relations), [Independence](!/probability/events#independence) and [Conditional events](!/probability/events#conditional).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj12: {
+      title: `The Multiplication Rule for Independent Events`,
+      content: `Two events are independent when the occurrence of one does not change the probability of the other, $P(A \\mid B) = P(A)$. For independent events the probability of both is the product, $P(A \\cap B) = P(A)\\,P(B)$, and the union follows from the addition rule. The Independent Events mode needs only $P(A)$ and $P(B)$: with $0.5$ and $0.4$, $P(A \\cap B) = 0.2$ and $P(A \\cup B) = 0.5 + 0.4 - 0.2 = 0.7$; the rest of the probability space follows, $P(A \\cap B') = 0.3$, $P(A' \\cap B) = 0.2$, $P(A' \\cap B') = 0.3$.
+
+The common mistake is to use the product for events that are not independent, such as two draws from one deck without replacement; then the general rule with a conditional probability is needed. Independence is defined in [Independence](!/probability/events#independence) and the product rule in [The multiplication rule](!/probability/rules#multy); the formal treatment is in [Definition](!/probability/independence#definition) and [The formula](!/probability/independence#formula) of the independence lesson.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj13: {
+      title: `Conditional Probability and the General Multiplication Rule`,
+      content: `The conditional probability $P(B \\mid A)$ is the probability of $B$ among the outcomes where $A$ happened, $P(B \\mid A) = \\frac{P(A \\cap B)}{P(A)}$. Read backwards it is the general multiplication rule, $P(A \\cap B) = P(B \\mid A)\\,P(A) = P(A \\mid B)\\,P(B)$, which holds for any two events. The Conditional Probability mode takes $P(A)$, $P(B)$ and one of the two conditionals: with $P(A) = 0.5$, $P(B) = 0.4$ and $P(B \\mid A) = 0.4$ the intersection is $0.2$ and the other conditional follows, $P(A \\mid B) = 0.2 / 0.4 = 0.5$; with $P(B \\mid A) = 0.7$ the intersection is $0.35$.
+
+The calculator refuses two conditionals at once, because they would fix the intersection twice and could disagree. The common mistake is to confuse $P(B \\mid A)$ with $P(A \\mid B)$; they differ unless $P(A) = P(B)$. See [The conditional probability formula](!/probability/conditional-probability#formula), [Conditional events](!/probability/events#conditional) and [Independence and conditional probability](!/probability/independence#conditional).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj14: {
+      title: `From the Intersection to the Union`,
+      content: `When the probability of both events is known, the addition rule gives the probability of at least one: $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$. The subtraction removes the overlap, which the sum $P(A) + P(B)$ counts twice. The Given P(A ∩ B) mode takes $P(A)$, $P(B)$ and $P(A \\cap B)$: with $0.6$, $0.5$ and $0.3$ the union is $0.8$, and the two conditionals are $P(A \\mid B) = 0.3 / 0.5 = 0.6$ and $P(B \\mid A) = 0.3 / 0.6 = 0.5$.
+
+The intersection cannot exceed the smaller of the two events, and the calculator refuses a value that does. The common mistake is to add the two probabilities without subtracting the overlap, which gives $1.1$ here. See [The addition rule](!/probability/rules#additive) and [Set operations on events](!/probability/events#sets).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj15: {
+      title: `From the Union to the Intersection`,
+      content: `When the probability of at least one event is known instead, the addition rule is rearranged: $P(A \\cap B) = P(A) + P(B) - P(A \\cup B)$. The Given P(A ∪ B) mode takes $P(A)$, $P(B)$ and $P(A \\cup B)$: with $0.6$, $0.5$ and $0.9$ the intersection is $0.2$, and the conditionals follow as $P(A \\mid B) = 0.4$ and $P(B \\mid A) = 0.333$.
+
+The union must be at least as large as the larger event and at most $1$; $P(A \\cup B) = 0.5$ with $P(A) = 0.6$ is refused as an axiom violation, since the union would be smaller than $A$ itself. The common mistake is to read the union as "exactly one event", which is $P(A \\cup B) - P(A \\cap B)$. See [The addition rule](!/probability/rules#additive) and [The axioms of probability](!/probability/basics#axioms).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj16: {
+      title: `Mutually Exclusive Events`,
+      content: `Two events are mutually exclusive when they cannot happen together, so $P(A \\cap B) = 0$ and the addition rule loses its correction term: $P(A \\cup B) = P(A) + P(B)$. The Mutually Exclusive mode takes only $P(A)$ and $P(B)$: with $0.5$ and $0.4$ the union is $0.9$, the intersection diagram is empty, and the conditional probabilities are $0$, since if one event happens the other cannot.
+
+Mutually exclusive events with positive probabilities are never independent: knowing that $A$ happened tells you that $B$ did not. The common mistake is to treat the two notions as the same thing. See [Relations between events](!/probability/events#relations) and [The addition rule](!/probability/rules#additive).`,
       before: ``,
       after: ``,
       link: '',
@@ -625,6 +689,157 @@ When axioms are violated, the calculator displays all violations in a red error 
     content: ``
   }
 
+  const detailInstructions = [
+    `Pick a mode under **Calculation Mode**: **Independent Events**, **Conditional Probability**, **Given P(A ∩ B)**, **Given P(A ∪ B)** or **Mutually Exclusive**; the boxes below change with it. [Learn more about the modes](!#selecting-calculation-modes)`,
+    `Type **P(A)** and **P(B)** (0 to 1); they open with 0.5 and 0.4. [Learn more about independent events](!#working-with-independent-events-mode)`,
+    `In Conditional Probability mode fill exactly one of **P(B|A)** and **P(A|B)** and clear the other. [Learn more about conditional mode](!#using-conditional-probability-mode)`,
+    `In the two Given modes type **P(A ∩ B)** or **P(A ∪ B)**; the calculator checks that the value is possible. [Learn more about the Given modes](!#given-intersection-and-union-modes)`,
+    `Click **Calculate**; the result rows list ten probabilities, each with a Venn sketch, or a red box lists the problems. **Reset** restores the example values. [Learn more about the Venn sketches](!#understanding-venn-diagram-visualizations)`,
+    `Click a result row to open its step-by-step calculation; click again to close it. [Learn more about the steps](!#reading-step-by-step-calculations)`,
+    `Read **Event Properties** for the independence and mutual exclusivity verdicts, and the panel on the right for the rule of the current mode. [Learn more about the properties](!#interpreting-event-properties)`,
+  ];
+  const teExplanations = {
+    independent: { title: `Independent events`, content: `Multiplies the two probabilities for both events, $P(A \cap B) = P(A)P(B)$, then fills the rest of the probability space with the addition and complement rules. [Learn more about independent events](!#the-multiplication-rule-for-independent-events) · [All rules](!#probability-rules-for-two-events)` },
+    conditional: { title: `Conditional probability`, content: `Uses the general multiplication rule, $P(A \cap B) = P(B \mid A)P(A)$ or $P(A \mid B)P(B)$, from the one conditional probability you give. [Learn more about conditional probability](!#conditional-probability-and-the-general-multiplication-rule) · [All rules](!#probability-rules-for-two-events)` },
+    intersection: { title: `Given the intersection`, content: `Takes $P(A \cap B)$ as given and finds the union with the addition rule, $P(A \cup B) = P(A) + P(B) - P(A \cap B)$. [Learn more about starting from the intersection](!#from-the-intersection-to-the-union) · [All rules](!#probability-rules-for-two-events)` },
+    union: { title: `Given the union`, content: `Takes $P(A \cup B)$ as given and finds the intersection by rearranging the addition rule, $P(A \cap B) = P(A) + P(B) - P(A \cup B)$. [Learn more about starting from the union](!#from-the-union-to-the-intersection) · [All rules](!#probability-rules-for-two-events)` },
+    mutuallyExclusive: { title: `Mutually exclusive events`, content: `Sets $P(A \cap B) = 0$ and adds the two probabilities for the union, $P(A \cup B) = P(A) + P(B)$. [Learn more about mutually exclusive events](!#mutually-exclusive-events) · [All rules](!#probability-rules-for-two-events)` },
+  };
+  const demos = {
+    'selecting-calculation-modes': {
+      title: 'Three of the five modes',
+      scale: 0.5,
+      minHeight: 256,
+      script: [
+        { say: 'CLICK Conditional Probability\nTwo more boxes, P(B|A) and P(A|B), both filled with example values.', at: 'tr' },
+        { click: { button: 'Conditional Probability', exact: true } },
+        { wait: 2600 },
+        { say: 'CLICK Given P(A ∩ B)\nOne extra box, P(A ∩ B) = 0.2.', at: 'tr' },
+        { click: { button: 'Given P(A ∩ B)', exact: true } },
+        { wait: 2600 },
+        { say: 'CLICK Mutually Exclusive\nNo extra box: the intersection is zero by assumption.', at: 'tr' },
+        { click: { button: 'Mutually Exclusive', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'working-with-independent-events-mode': {
+      title: 'The example values, new values, a zero probability',
+      scale: 0.5,
+      minHeight: 256,
+      script: [
+        { say: 'CLICK Calculate\nP(A ∩ B) = 0.2000, P(A ∪ B) = 0.7000; Event Properties: Independent Yes.', at: 'tr' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3000 },
+        { say: 'TYPE 0.6 and 0.5, CLICK Calculate\nP(A ∩ B) = 0.3000, P(A ∪ B) = 0.8000.', at: 'tr' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '0.6' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '0.5' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3000 },
+        { say: 'TYPE 0 as P(A), CLICK Calculate\nP(B|A) is undefined because P(A) = 0: a note under the results.', at: 'tr' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '0' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'using-conditional-probability-mode': {
+      title: 'Two conditionals refused, one conditional used, a new value',
+      scale: 0.5,
+      minHeight: 256,
+      script: [
+        { say: 'CLICK Conditional Probability, CLICK Calculate\nBoth conditional boxes are filled: the calculator asks for only one.', at: 'tr' },
+        { click: { button: 'Conditional Probability', exact: true } },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 2800 },
+        { say: 'TYPE 0.7 as P(B|A), CLICK Calculate\nStill refused: P(A|B) is filled too. Clear one box by hand to compute.', at: 'tr' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0.7' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 2800 },
+        { say: 'CLICK Reset\nThe example values return and the error box is gone.', at: 'tr' },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'given-intersection-and-union-modes': {
+      title: 'From the intersection, from the union, a union refused',
+      scale: 0.5,
+      minHeight: 256,
+      script: [
+        { say: 'CLICK Given P(A ∩ B), TYPE 0.6, 0.5 and 0.3, CLICK Calculate\nP(A ∪ B) = 0.8000; P(A|B) = 0.6000, P(B|A) = 0.5000.', at: 'tr' },
+        { click: { button: 'Given P(A ∩ B)', exact: true } },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '0.6' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '0.5' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0.3' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3200 },
+        { say: 'CLICK Given P(A ∪ B), TYPE 0.9, CLICK Calculate\nP(A ∩ B) = 0.6 + 0.5 − 0.9 = 0.2000.', at: 'tr' },
+        { click: { button: 'Given P(A ∪ B)', exact: true } },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0.9' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3000 },
+        { say: 'TYPE 0.5 as P(A ∪ B), CLICK Calculate\nAxiom violation: the union cannot be less than P(A) = 0.6.', at: 'tr' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0.5' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'understanding-venn-diagram-visualizations': {
+      title: 'Sketches for the example values, a bigger overlap, no overlap',
+      scale: 0.5,
+      minHeight: 256,
+      script: [
+        { say: 'CLICK Calculate\nEvery result row gets a two-circle sketch: the lens for P(A ∩ B), both circles for P(A ∪ B).', at: 'tr' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3000 },
+        { say: 'TYPE 0.8 and 0.3, CLICK Calculate\nP(A ∩ B) = 0.2400 and P(A ∪ B) = 0.8600; the shaded regions change size.', at: 'tr' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '0.8' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '0.3' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3000 },
+        { say: 'CLICK Mutually Exclusive, TYPE 0.5 and 0.4, CLICK Calculate\nThe intersection sketch is empty; P(A ∪ B) = 0.9000.', at: 'tr' },
+        { click: { button: 'Mutually Exclusive', exact: true } },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '0.5' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '0.4' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+    'reading-step-by-step-calculations': {
+      title: 'Opening two step lists',
+      scale: 0.5,
+      minHeight: 256,
+      script: [
+        { say: 'CLICK Calculate\nThe result rows appear, each closed.', at: 'tr' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 2800 },
+        { say: 'CLICK the P(A ∩ B) row\nFormula, substitution 0.5 × 0.4, result 0.2000.', at: 'tr' },
+        { click: { text: 'P(A ∩ B)', exact: true } },
+        { wait: 2800 },
+        { say: 'CLICK the P(A ∪ B) row\nThe addition rule: 0.5 + 0.4 − 0.2000 = 0.7000.', at: 'tr' },
+        { click: { text: 'P(A ∪ B)', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'interpreting-event-properties': {
+      title: 'Independent, then dependent, then mutually exclusive',
+      scale: 0.5,
+      minHeight: 256,
+      script: [
+        { say: 'CLICK Calculate\nEvent Properties: Independent Yes, Mutually Exclusive No.', at: 'tr' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 2800 },
+        { say: 'CLICK Given P(A ∩ B), TYPE 0.3, CLICK Calculate\nIndependent No: 0.3 is not 0.5 × 0.4.', at: 'tr' },
+        { click: { button: 'Given P(A ∩ B)', exact: true } },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0.3' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3000 },
+        { say: 'CLICK Mutually Exclusive, CLICK Calculate\nMutually Exclusive Yes; P(A ∪ B) = 0.9000.', at: 'tr' },
+        { click: { button: 'Mutually Exclusive', exact: true } },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+  };
+
   return {
     props: {
       sectionsContent,
@@ -632,6 +847,9 @@ When axioms are violated, the calculator displays all violations in a red error 
       faqQuestions,
       schemas,
       menuItems,
+      detailInstructions,
+      teExplanations,
+      demos,
       seoData: {
         title: "Two Events Probability Calculator | Venn Diagram & Step-by-Step",
         description: "Calculate probabilities for two events with independent, conditional, and mutually exclusive modes. Features Venn diagrams and step-by-step solutions.",
@@ -643,14 +861,39 @@ When axioms are violated, the calculator displays all violations in a red error 
   }
 }
 
-export default function TwoEventsCalculatorPage({seoData, sectionsContent, introContent, faqQuestions, schemas, menuItems}) {
+export default function TwoEventsCalculatorPage({seoData, sectionsContent, introContent, faqQuestions, schemas, menuItems, detailInstructions = [], teExplanations = null, demos = {}}) {
 
-  const genericSections = Object.keys(sectionsContent).map((key, index) => ({
-    id: `${index + 1}`,
-    title: sectionsContent[key].title,
-    link: sectionsContent[key].link,
-    content: [sectionsContent[key].content]
-  }))
+  const demoPlayer = (slug) => (
+    <ToolDemoPlayer
+      key={`demo-${slug}`}
+      script={demos[slug].script}
+      title={demos[slug].title}
+      label={`Demo: ${demos[slug].title}`}
+      scale={demos[slug].scale || 0.5}
+      minHeight={demos[slug].minHeight || undefined}
+      renderText={processContent}
+    >
+      <TwoEventsProbabilityCalculator explanations={teExplanations || undefined} />
+    </ToolDemoPlayer>
+  )
+  const genericSections = [
+    { id: 'selecting-calculation-modes', title: sectionsContent.obj1.title, link: sectionsContent.obj1.link, content: [demoPlayer('selecting-calculation-modes'), sectionsContent.obj1.content] },
+    { id: 'working-with-independent-events-mode', title: sectionsContent.obj2.title, link: sectionsContent.obj2.link, content: [demoPlayer('working-with-independent-events-mode'), sectionsContent.obj2.content] },
+    { id: 'using-conditional-probability-mode', title: sectionsContent.obj3.title, link: sectionsContent.obj3.link, content: [demoPlayer('using-conditional-probability-mode'), sectionsContent.obj3.content] },
+    { id: 'given-intersection-and-union-modes', title: sectionsContent.obj4.title, link: sectionsContent.obj4.link, content: [demoPlayer('given-intersection-and-union-modes'), sectionsContent.obj4.content] },
+    { id: 'understanding-venn-diagram-visualizations', title: sectionsContent.obj5.title, link: sectionsContent.obj5.link, content: [demoPlayer('understanding-venn-diagram-visualizations'), sectionsContent.obj5.content] },
+    { id: 'reading-step-by-step-calculations', title: sectionsContent.obj6.title, link: sectionsContent.obj6.link, content: [demoPlayer('reading-step-by-step-calculations'), sectionsContent.obj6.content] },
+    { id: 'interpreting-event-properties', title: sectionsContent.obj7.title, link: sectionsContent.obj7.link, content: [demoPlayer('interpreting-event-properties'), sectionsContent.obj7.content] },
+    { id: 'probability-rules-for-two-events', title: sectionsContent.obj8.title, link: sectionsContent.obj8.link, content: [sectionsContent.obj8.content] },
+    { id: 'the-multiplication-rule-for-independent-events', title: sectionsContent.obj12.title, link: sectionsContent.obj12.link, content: [sectionsContent.obj12.content] },
+    { id: 'conditional-probability-and-the-general-multiplication-rule', title: sectionsContent.obj13.title, link: sectionsContent.obj13.link, content: [sectionsContent.obj13.content] },
+    { id: 'from-the-intersection-to-the-union', title: sectionsContent.obj14.title, link: sectionsContent.obj14.link, content: [sectionsContent.obj14.content] },
+    { id: 'from-the-union-to-the-intersection', title: sectionsContent.obj15.title, link: sectionsContent.obj15.link, content: [sectionsContent.obj15.content] },
+    { id: 'mutually-exclusive-events', title: sectionsContent.obj16.title, link: sectionsContent.obj16.link, content: [sectionsContent.obj16.content] },
+    { id: 'independence-vs-mutual-exclusivity', title: sectionsContent.obj9.title, link: sectionsContent.obj9.link, content: [sectionsContent.obj9.content] },
+    { id: 'probability-axioms-and-validation', title: sectionsContent.obj10.title, link: sectionsContent.obj10.link, content: [sectionsContent.obj10.content] },
+    { id: 'related-probability-tools-and-calculators', title: sectionsContent.obj11.title, link: sectionsContent.obj11.link, content: [sectionsContent.obj11.content] },
+  ]
 
   return (
     <>
@@ -703,6 +946,9 @@ export default function TwoEventsCalculatorPage({seoData, sectionsContent, intro
    
      
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Two Events Probability Calculator</h1>
+      <div style={{marginBottom:'20px'}}>
+        <ExplanationDetails instructions={detailInstructions} title='How to use Two Events Probability Calculator' />
+      </div>
       <br/>
       <br/>
       {/* <VerticalButtonGroup 
@@ -713,7 +959,7 @@ export default function TwoEventsCalculatorPage({seoData, sectionsContent, intro
         verticalOffset='200px'
       /> */}
       <div style={{marginTop:'-50px'}} className="calculator-widget">
-        <TwoEventsProbabilityCalculator />
+        <TwoEventsProbabilityCalculator explanations={teExplanations || undefined} />
       </div>
       <br/>
       <br/>

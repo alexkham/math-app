@@ -1719,7 +1719,7 @@ function SystemGraph({ coeffs, constants, solution, numEqs, numVars }) {
 const METHODS = ['Gaussian Elimination', 'Gauss-Jordan', "Cramer's Rule", 'Inverse Method'];
 const SQUARE_ONLY = ["Cramer's Rule", 'Inverse Method'];
 
-export default function LinearSystemsCalculator({ descriptions: descriptionsProp } = {}) {
+export default function LinearSystemsCalculator({ descriptions: descriptionsProp, explanations = null } = {}) {
   const [numEqs, setNumEqs] = useState(3);
   const [numVars, setNumVars] = useState(3);
   const [coeffs, setCoeffs] = useState(() => makeEmpty(3, 3));
@@ -1731,8 +1731,8 @@ export default function LinearSystemsCalculator({ descriptions: descriptionsProp
   const [rightTab, setRightTab] = useState('theory');
 
   /* ── merge descriptions: props override defaults ── */
-  const mergedDescriptions = descriptionsProp
-    ? { ...defaultDescriptions, ...descriptionsProp }
+  const mergedDescriptions = descriptionsProp || explanations
+    ? { ...defaultDescriptions, ...(descriptionsProp || {}), ...(explanations || {}) }
     : defaultDescriptions;
 
   function makeEmpty(rows, cols) {
@@ -1960,7 +1960,7 @@ export default function LinearSystemsCalculator({ descriptions: descriptionsProp
       return (
         <>
           <h4 style={s.explTitle}>{method}</h4>
-          <p style={s.explBody}>{processContent(desc)}</p>
+          <div style={s.explBody}>{processContent(desc)}</div>
         </>
       );
     }

@@ -1589,10 +1589,15 @@ export default function FactoringCalculator({ explanations: explanationsProp } =
     [factorRes]
   );
 
-  const explainBlocks =
+  const modeBlocks =
     mode === 'factor' ? factorExplainBlocks
     : mode === 'laws' ? lawsExplainBlocks
     : gcdExplainBlocks;
+  // page note for the current state (sub-option first, then the mode); absent unless the page passes explanations.<mode>.notes
+  const notes = (explanations[mode] && explanations[mode].notes) || null;
+  const subKey = mode === 'factor' ? ftype : mode === 'laws' ? currentLaw : 'main';
+  const pageNote = notes ? (notes[subKey] || notes.main || null) : null;
+  const explainBlocks = pageNote ? [{ title: pageNote.title, content: pageNote.content }, ...modeBlocks] : modeBlocks;
 
   return (
     <div className="fc-root">

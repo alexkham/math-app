@@ -2,8 +2,9 @@
 import { useState, useCallback } from 'react';
 import styles from './ConditionalProbabilityTable.module.css';
 import { scenarios } from './scenarios';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function ConditionalProbabilityTable() {
+export default function ConditionalProbabilityTable({ explanations = null }) {
   const [currentScenario, setCurrentScenario] = useState('medical');
   const [conditionName, setConditionName] = useState('Disease');
   const [outcomeName, setOutcomeName] = useState('Test+');
@@ -256,7 +257,11 @@ export default function ConditionalProbabilityTable() {
           
           <div className={styles.rightSidebar}>
             <div className={styles.interpretation}>
-              <h3>Understanding the Results</h3>
+              <h3>{explanations && explanations.main ? explanations.main.title : 'Understanding the Results'}</h3>
+              {explanations && explanations.main ? (
+                <div className={styles.keyInsight}>{typeof explanations.main.content === 'string' ? processContent(explanations.main.content) : explanations.main.content}</div>
+              ) : (
+                <>
               
               <div className={styles.keyInsight}>
                 <strong>Key Insight:</strong> Conditional probability focuses on a subset of the data. When we calculate P(B|A), we only look at the rows/columns where A occurred.
@@ -269,6 +274,8 @@ export default function ConditionalProbabilityTable() {
                 <li><strong>The intersection cell</strong> represents both events happening together</li>
                 <li><strong>Marginal totals</strong> show the unconditional probabilities</li>
               </ul>
+                </>
+              )}
               
               {currentScenario !== 'custom' && scenarios[currentScenario] && (
                 <div className={styles.keyInsight}>

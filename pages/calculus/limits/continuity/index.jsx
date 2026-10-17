@@ -16,7 +16,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){

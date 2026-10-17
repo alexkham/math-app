@@ -5540,12 +5540,13 @@ export default function PolynomialCalculator({
   initialOperation = 1,
   operations: operationsProp,
   operationOrder: operationOrderProp,
+  explanations = null,   // page texts: { <operationKey>: { note: { title, content }, ...overrides } }, merged over the defaults
 }) {
   const [mounted, setMounted] = useState(false);
 
   const operations = useMemo(
-    () => mergeOperations(DEFAULT_OPERATIONS, operationsProp),
-    [operationsProp]
+    () => mergeOperations(DEFAULT_OPERATIONS, operationsProp || explanations),
+    [operationsProp, explanations]
   );
   const operationOrder = useMemo(
     () => (operationOrderProp && operationOrderProp.length ? operationOrderProp : DEFAULT_OPERATION_ORDER),
@@ -5897,6 +5898,12 @@ export default function PolynomialCalculator({
                   </div>
                 )}
 
+                {op.note && (op.note.title || op.note.content) && (
+                  <div className="pcalc-section-block">
+                    <h3 className="pcalc-section-title">{op.note.title}</h3>
+                    <div className="pcalc-method-text">{typeof op.note.content === 'string' ? processContent(op.note.content) : op.note.content}</div>
+                  </div>
+                )}
                 {hasAbout && (
                   <div className="pcalc-section-block">
                     <h3 className="pcalc-section-title">About this method</h3>

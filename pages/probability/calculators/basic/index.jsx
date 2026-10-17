@@ -446,7 +446,21 @@ import Head from 'next/head'
 import GenericMultiComponentFrame from '@/app/components/GenericMulticomponentFrame'
 import SingleEventProbabilityCalculator from '@/app/components/calculators/probability/SingleEventCalculator'
 import TwoIndependentEventsCalculator from '@/app/components/calculators/probability/TwoIndependentEventsCalculator'
+import Sections from '@/app/components/page-components/section/Sections'
+import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
+// the two calculators of the frame (module scope, so the frame's tab state is not reset by a re-render)
+const BASIC_COMPONENTS = [
+  { id: 1, name: 'Single Event Probability Calculator', slug: 'single-event', key: 'single-event', component: SingleEventProbabilityCalculator },
+  { id: 2, name: 'Two Independent Events Probability Calculator', slug: 'two-independent-events', key: 'two-independent-events', component: TwoIndependentEventsCalculator },
+]
+
+/* calculators-mesh: finished 2026-10-17 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+   Registry entry "/probability/calculators/basic" in calculators-mesh-registry.json (same folder): 3 usage sections, each with a demo; 2 panel notes; 15 sections with fixed slug ids.
+   Before editing this page, read the instructions and re-run its checks; keep the section ids and the anchors. */
 export async function getStaticProps(){
 
   const keyWords = [
@@ -474,7 +488,8 @@ export async function getStaticProps(){
 
 Each calculator is designed for specific probability scenarios. Some compute basic event probabilities, while others handle **conditional probability**, **joint probability**, or apply specialized theorems like **Bayes' theorem**. Distribution calculators work with both **discrete probability distributions** (like binomial or Poisson) and **continuous distributions** (like normal or exponential).
 
-Using these calculators saves time and reduces calculation errors. Instead of manually computing complex probability formulas, you input your parameters and receive instant, accurate results with step-by-step explanations where applicable.`,
+Using these calculators saves time and reduces calculation errors. Instead of manually computing complex probability formulas, you input your parameters and receive instant, accurate results with step-by-step explanations where applicable.
+The two tools on this page are explained in [Single Event Probability](!#single-event-probability) and [Two Independent Events](!#two-independent-events); the ideas they rest on are introduced in [Basic concepts](!/probability/basics#concepts).`,
       before: ``,
       after: ``,
       link: ''
@@ -490,7 +505,8 @@ Using these calculators saves time and reduces calculation errors. Instead of ma
 
 **Advanced Calculators** include tools for **conditional probability** (events dependent on prior outcomes), **joint probability** (multiple events occurring together), **Bayes' theorem** (updating probabilities with new evidence), and **expected value** (calculating average outcomes).
 
-Each calculator type serves distinct purposes. Understanding which category fits your problem helps you choose the right tool quickly.`,
+Each calculator type serves distinct purposes. Understanding which category fits your problem helps you choose the right tool quickly.
+The event types behind these categories are described in [Types of events](!/probability/events#types) and the distributions in [Distributions](!/probability/basics#distributions).`,
       before: ``,
       after: ``,
       link: ''
@@ -504,7 +520,8 @@ The **Two Independent Events Calculator** steps up complexity by computing proba
 
 For scenarios with three or more events, the **Three Events Probability Calculator** extends these concepts further. Choose this when dealing with multiple independent outcomes that need combined probability analysis.
 
-The key distinction: single event for one outcome, multiple events when analyzing combinations or sequences of outcomes.`,
+The key distinction: single event for one outcome, multiple events when analyzing combinations or sequences of outcomes.
+What makes two events independent is defined in [Independence](!/probability/events#independence), and the rule the two-event tool applies in [The multiplication rule](!/probability/rules#multy).`,
       before: ``,
       after: ``,
       link: ''
@@ -526,7 +543,8 @@ The key distinction: single event for one outcome, multiple events when analyzin
 
 **Use Bayes' Theorem Calculator when:** You're updating probabilities based on new evidence or information.
 
-**Use Expected Value Calculator when:** You need to find the average outcome of a probability distribution or gambling scenario.`,
+**Use Expected Value Calculator when:** You need to find the average outcome of a probability distribution or gambling scenario.
+The rules the calculators apply are collected in [Probability rules](!/probability/basics#rules).`,
       before: ``,
       after: ``,
       link: ''
@@ -546,7 +564,8 @@ The key distinction: single event for one outcome, multiple events when analyzin
 • **Exponential Distribution**: Time between events in a Poisson process
 • **Uniform Distribution**: All values equally likely within a range
 
-The distinction is simple: Can you count the possibilities? Use discrete. Are you measuring a continuous quantity? Use continuous.`,
+The distinction is simple: Can you count the possibilities? Use discrete. Are you measuring a continuous quantity? Use continuous.
+See [Distributions](!/probability/basics#distributions) in the basics lesson.`,
       before: ``,
       after: ``,
       link: ''
@@ -560,7 +579,8 @@ Common scenarios include: medical testing (probability of disease given a positi
 
 **Joint Probability** calculates P(A ∩ B)—the probability that both events A and B occur together. Unlike conditional probability, joint probability doesn't assume one event has already happened. The **Joint Probability Calculator** handles scenarios where you need the probability of simultaneous or combined outcomes.
 
-These calculators are crucial for more sophisticated probability problems where events interact or occur in sequence. Many real-world scenarios involve conditional or joint probabilities rather than simple independent events.`,
+These calculators are crucial for more sophisticated probability problems where events interact or occur in sequence. Many real-world scenarios involve conditional or joint probabilities rather than simple independent events.
+See [Conditional probability](!/probability/basics#conditional) in the basics lesson and [Conditional events](!/probability/events#conditional) in the events lesson.`,
       before: ``,
       after: ``,
       link: ''
@@ -574,7 +594,8 @@ Classic applications include medical diagnosis (updating disease probability aft
 
 **Expected Value Calculators** compute the average outcome you'd expect over many repetitions of a probability experiment. This is crucial for decision-making in gambling, investing, insurance, and any scenario where you weigh outcomes by their probabilities.
 
-Expected value, written as E(X), multiplies each possible outcome by its probability and sums the results. It tells you the long-run average, helping you make rational decisions even when individual outcomes are uncertain.`,
+Expected value, written as E(X), multiplies each possible outcome by its probability and sums the results. It tells you the long-run average, helping you make rational decisions even when individual outcomes are uncertain.
+The theorem is taught in [Bayes' theorem](!/probability/bayes-theorem#formula).`,
       before: ``,
       after: ``,
       link: ''
@@ -592,7 +613,8 @@ Expected value, written as E(X), multiplies each possible outcome by its probabi
 
 **Education and Learning**: All calculators serve as learning tools for probability theory, helping students verify homework, explore concepts interactively, and build intuition about probability relationships.
 
-**Engineering and Quality Control**: Distribution calculators for reliability analysis, conditional probability for failure prediction, Poisson distribution for defect rates.`,
+**Engineering and Quality Control**: Distribution calculators for reliability analysis, conditional probability for failure prediction, Poisson distribution for defect rates.
+The vocabulary these fields share is in [Basic concepts](!/probability/basics#concepts).`,
       before: ``,
       after: ``,
       link: ''
@@ -618,7 +640,8 @@ Expected value, written as E(X), multiplies each possible outcome by its probabi
 • Average outcome calculation → Expected Value Calculator
 • Three or more events → Three Events Calculator
 
-Each calculator provides immediate results. For learning, most include step-by-step explanations showing the formulas and logic behind the calculations.`,
+Each calculator provides immediate results. For learning, most include step-by-step explanations showing the formulas and logic behind the calculations.
+The notation used in the results is listed in [Symbols](!/probability/basics#symbols).`,
       before: ``,
       after: ``,
       link: ''
@@ -636,11 +659,61 @@ Each calculator provides immediate results. For learning, most include step-by-s
 
 **Advanced Topics** include **joint and marginal probability**, **probability density functions**, **cumulative distribution functions**, and **moment generating functions**.
 
-These resources complement the calculators by building conceptual understanding. Use calculators for computation, and use visual tools and guides for learning the underlying theory and intuition.`,
+These resources complement the calculators by building conceptual understanding. Use calculators for computation, and use visual tools and guides for learning the underlying theory and intuition.
+Start with [Basic concepts](!/probability/basics#concepts) and [The sample space](!/probability/sample-space#definition).`,
       before: ``,
       after: ``,
       link: ''
-    }
+    },
+    obj11: {
+      title: `Switching Between the Two Calculators`,
+      content: `The row of buttons above the card holds the two tools of this page: **Single Event Probability Calculator** and **Two Independent Events Probability Calculator**. The page opens on the first; click a button to switch, and the heading of the card names the active tool. Each tool keeps its own boxes, so numbers typed into one are not carried into the other, and the result of the tool you leave is dropped when you come back to it.
+
+The buttons also change the page address: ?calc=single-event or ?calc=two-independent-events is added after it, so a link to either tool can be shared and opens that tool directly. Both tools have the same shape: two boxes, a **Calculate** and a **Reset** button, and a result area; the single-event tool adds a **Visualization** and an **Explanations** tab under the result, the two-event tool a panel on the right. Which tool fits which question is explained in [Single Event vs Multiple Event Calculators](!#single-event-vs-multiple-event-calculators).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj12: {
+      title: `Using the Single Event Calculator`,
+      content: `Type the **Number of Favorable Outcomes** and the **Total Number of Possible Outcomes**, two positive whole numbers, and click **Calculate**. The **Result** box gives the probability of the event as a fraction, a decimal and a percentage, the probability of the event not happening, and the odds in favour and against. For one face of a die, $1$ and $6$: $P(A) = 1/6 \\approx 16.67\\%$, $P(A') \\approx 83.33\\%$, odds in favour $1:5$, odds against $5:1$; for an ace from a deck, $4$ and $52$: $1/13 \\approx 7.69\\%$.
+
+The boxes refuse an empty field ("Please fill in both fields"), letters ("Please enter valid numbers only"), decimals ("Please enter whole numbers only (no decimals)"), negatives and a total of zero. Under the result, the **Visualization** tab draws the probability as a pie, the favourable share against its complement, and the **Explanations** tab gives the definitions with a link to the section of this page that explains them; the tabs do not change the result. **Reset** empties both boxes and the result. The formula is explained in [Single Event Probability](!#single-event-probability).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj13: {
+      title: `Using the Two Independent Events Calculator`,
+      content: `Type **P(A)** and **P(B)**, the probabilities of two independent events, each a decimal from $0$ to $1$ (digits and a point only), and click **Calculate**; the button stays grey until both boxes hold a valid value, and a value above $1$ is flagged under its box with "Must be between 0 and 1". The result lists ten probabilities to four decimals: $P(A)$, $P(B)$, the two complements, both events ($A \\cap B$), at least one ($A \\cup B$), exactly one ($A \\,\\triangle\\, B$), neither, $A$ without $B$ and $B$ without $A$, each with a Venn sketch.
+
+For $P(A) = 0.6$ and $P(B) = 0.5$: both $0.3000$, at least one $0.8000$, exactly one $0.5000$, neither $0.2000$. Every line follows from the product rule for independent events, $P(A \\cap B) = P(A)\\,P(B)$, and the complement and addition rules. **Reset** empties the boxes and removes the result. The panel on the right explains the rule and links to the section of this page that derives the ten lines, [Two Independent Events](!#two-independent-events).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj14: {
+      title: `Single Event Probability`,
+      content: `For an experiment whose outcomes are equally likely, the probability of an event $A$ is the number of favourable outcomes divided by the total number of outcomes: $P(A) = \\frac{\\text{favourable}}{\\text{total}}$. Rolling a $3$ on a die has one favourable outcome out of six, $P = \\frac{1}{6} \\approx 16.67\\%$; drawing an ace has four out of fifty-two, $\\frac{4}{52} = \\frac{1}{13} \\approx 7.69\\%$. The complement, that the event does not happen, is $P(A') = 1 - P(A)$, here $\\frac{5}{6}$.
+
+Odds restate the same count as a ratio: odds in favour are favourable to unfavourable, $1:5$ for the die, and odds against are the reverse, $5:1$. A probability is always between $0$ and $1$; the common mistake is to divide favourable by unfavourable (which gives the odds) or to count outcomes that are not equally likely as if they were.
+
+See [The basic rules](!/probability/rules#basic) in the rules lesson, [The sample space](!/probability/sample-space#definition) and [Events and the sample space](!/probability/events#sample).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj15: {
+      title: `Two Independent Events`,
+      content: `Two events are independent when the occurrence of one does not change the probability of the other, as for two coin flips or two dice. For independent $A$ and $B$ the probability that both happen is the product, $P(A \\cap B) = P(A)\\,P(B)$; every other combination follows from it with the complement and addition rules: at least one, $P(A \\cup B) = P(A) + P(B) - P(A)P(B)$; exactly one, $P(A) + P(B) - 2P(A)P(B)$; neither, $(1 - P(A))(1 - P(B))$; $A$ without $B$, $P(A)(1 - P(B))$.
+
+For $P(A) = 0.6$ and $P(B) = 0.5$: both $0.30$, at least one $0.80$, exactly one $0.50$, neither $0.20$, $A$ without $B$ $0.30$, $B$ without $A$ $0.20$; the four cases both, $A$ only, $B$ only and neither add up to $1$. The common mistake is to use the product rule for events that are not independent, such as drawing two cards without replacement; then $P(A \\cap B)$ needs a conditional probability.
+
+See [Independence](!/probability/events#independence) in the events lesson, [The multiplication rule](!/probability/rules#multy) and [The addition rule](!/probability/rules#additive).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
   }
 
   const faqQuestions = {
@@ -744,11 +817,98 @@ These resources complement the calculators by building conceptual understanding.
     }
   }
 
+  const detailInstructions = [
+    `Pick a tool with the two buttons above the card: **Single Event Probability Calculator** or **Two Independent Events Probability Calculator**; each keeps its own numbers. [Learn more about switching tools](!#switching-between-the-two-calculators)`,
+    `In the single-event tool, type the **Number of Favorable Outcomes** and the **Total Number of Possible Outcomes** (whole numbers) and click **Calculate**; read the fraction, the percentage, the complement and the odds, then the **Visualization** and **Explanations** tabs. [Learn more about the single-event tool](!#using-the-single-event-calculator)`,
+    `In the two-event tool, type **P(A)** and **P(B)** as decimals from 0 to 1 and click **Calculate**; ten probabilities with Venn sketches follow, and the panel on the right explains the rule. [Learn more about the two-event tool](!#using-the-two-independent-events-calculator)`,
+    `Click **Reset** in either tool to empty its boxes and remove its result. [Learn more about the results](!#using-the-single-event-calculator)`,
+  ];
+  const basicExplanations = {
+    'single-event': {
+      main: {
+        title: `Single event probability`,
+        content: `Divides the favourable outcomes by the total outcomes, $P(A) = \frac{\text{favourable}}{\text{total}}$, and reports the complement $1 - P(A)$ and the odds for and against. [Learn more about single event probability](!#single-event-probability)`,
+      },
+    },
+    'two-independent-events': {
+      main: {
+        title: `Two independent events`,
+        content: `Multiplies the two probabilities for both events, $P(A \cap B) = P(A)P(B)$, and derives at least one, exactly one, neither and each event alone with the complement and addition rules. [Learn more about two independent events](!#two-independent-events)`,
+      },
+    },
+  };
+  const demos = {
+    'switching-between-the-two-calculators': {
+      title: 'The two tools',
+      component: 'frame',
+      scale: 0.5,
+      minHeight: 392,
+      script: [
+        { say: 'CLICK Two Independent Events Probability Calculator\nThe card changes: P(A) and P(B) boxes, a panel on the right.', at: 'tr' },
+        { click: { button: 'Two Independent Events Probability Calculator', exact: true } },
+        { wait: 2800 },
+        { say: 'CLICK Single Event Probability Calculator\nBack to the first tool: favorable and total outcomes.', at: 'tr' },
+        { click: { button: 'Single Event Probability Calculator', exact: true } },
+        { wait: 2600 },
+        { say: 'CLICK Two Independent Events Probability Calculator\nThe second tool again; each tool keeps its own boxes.', at: 'tr' },
+        { click: { button: 'Two Independent Events Probability Calculator', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'using-the-single-event-calculator': {
+      title: 'A die, the Explanations tab, an ace, a decimal refused',
+      component: 'single-event',
+      scale: 0.5,
+      minHeight: 392,
+      script: [
+        { say: 'TYPE 1 and 6, CLICK Calculate\nP(A) = 1/6 ≈ 16.67%, P(A\') ≈ 83.33%, odds 1:5 and 5:1.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 0 }, value: '1' },
+        { set: { css: 'input[type="text"]', nth: 1 }, value: '6' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3000 },
+        { say: 'CLICK Explanations\nThe tab under the result gives the definitions and a link to the section below.', at: 'tr' },
+        { click: { button: 'Explanations', exact: true } },
+        { wait: 2600 },
+        { say: 'TYPE 4 and 52, CLICK Calculate\nAn ace from a deck: 1/13 ≈ 7.69%.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 0 }, value: '4' },
+        { set: { css: 'input[type="text"]', nth: 1 }, value: '52' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3000 },
+        { say: 'TYPE 2.5 as the favorable outcomes, CLICK Calculate\nRefused: please enter whole numbers only.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 0 }, value: '2.5' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'using-the-two-independent-events-calculator': {
+      title: 'Two probabilities, a value refused, Reset',
+      component: 'two-independent-events',
+      scale: 0.5,
+      minHeight: 392,
+      script: [
+        { say: 'TYPE 0.6 and 0.5, CLICK Calculate\nBoth 0.3000, at least one 0.8000, exactly one 0.5000, neither 0.2000.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 0 }, value: '0.6' },
+        { set: { css: 'input[type="text"]', nth: 1 }, value: '0.5' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3200 },
+        { say: 'TYPE 1.5 as P(A)\nFlagged under the box: must be between 0 and 1; Calculate greys out.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 0 }, value: '1.5' },
+        { wait: 2600 },
+        { say: 'CLICK Reset\nBoth boxes empty; the result is gone.', at: 'tr' },
+        { click: { button: 'Reset', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+  };
+
   return {
     props: {
       sectionsContent,
       faqQuestions,
       schemas,
+      detailInstructions,
+      basicExplanations,
+      demos,
       seoData: {
         title: "Probability Calculators - 10 Free Interactive Tools | Learn Math Class",
         description: "Calculate probabilities instantly with 10 specialized calculators: single events, multiple events, distributions, conditional probability, Bayes' theorem, and expected value.",
@@ -760,14 +920,45 @@ These resources complement the calculators by building conceptual understanding.
   }
 }
 
-export default function ProbabilityCalculator({seoData, sectionsContent, faqQuestions, schemas}) {
+export default function ProbabilityCalculator({seoData, sectionsContent, faqQuestions, schemas, detailInstructions = [], basicExplanations = null, demos = {}}) {
 
-  const genericSections = Object.keys(sectionsContent).map((key, index) => ({
-    id: `${index + 1}`,
-    title: sectionsContent[key].title,
-    link: sectionsContent[key].link,
-    content: [sectionsContent[key].content]
-  }))
+  // the calculator a demo drives: the whole frame (without URL sync) or one tool with its own panel texts
+  const demoTool = (slug) => {
+    const d = demos[slug]
+    if (d.component === 'frame') return <GenericMultiComponentFrame components={BASIC_COMPONENTS} explanations={basicExplanations || {}} syncUrl={false} initialActive={1} buttonMinWidth="160px" primaryColor="#007bff" />
+    const Tool = BASIC_COMPONENTS.find((c) => c.key === d.component).component
+    return <Tool explanations={basicExplanations ? basicExplanations[d.component] : undefined} />
+  }
+  const demoPlayer = (slug) => (
+    <ToolDemoPlayer
+      key={`demo-${slug}`}
+      script={demos[slug].script}
+      title={demos[slug].title}
+      label={`Demo: ${demos[slug].title}`}
+      scale={demos[slug].scale || 0.5}
+      minHeight={demos[slug].minHeight || undefined}
+      renderText={processContent}
+    >
+      {demoTool(slug)}
+    </ToolDemoPlayer>
+  )
+  const genericSections = [
+    { id: 'switching-between-the-two-calculators', title: sectionsContent.obj11.title, link: sectionsContent.obj11.link, content: [demoPlayer('switching-between-the-two-calculators'), sectionsContent.obj11.content] },
+    { id: 'using-the-single-event-calculator', title: sectionsContent.obj12.title, link: sectionsContent.obj12.link, content: [demoPlayer('using-the-single-event-calculator'), sectionsContent.obj12.content] },
+    { id: 'using-the-two-independent-events-calculator', title: sectionsContent.obj13.title, link: sectionsContent.obj13.link, content: [demoPlayer('using-the-two-independent-events-calculator'), sectionsContent.obj13.content] },
+    { id: 'what-are-probability-calculators', title: sectionsContent.obj1.title, link: sectionsContent.obj1.link, content: [sectionsContent.obj1.content] },
+    { id: 'single-event-probability', title: sectionsContent.obj14.title, link: sectionsContent.obj14.link, content: [sectionsContent.obj14.content] },
+    { id: 'two-independent-events', title: sectionsContent.obj15.title, link: sectionsContent.obj15.link, content: [sectionsContent.obj15.content] },
+    { id: 'types-of-probability-calculators', title: sectionsContent.obj2.title, link: sectionsContent.obj2.link, content: [sectionsContent.obj2.content] },
+    { id: 'single-event-vs-multiple-event-calculators', title: sectionsContent.obj3.title, link: sectionsContent.obj3.link, content: [sectionsContent.obj3.content] },
+    { id: 'choosing-the-right-calculator', title: sectionsContent.obj4.title, link: sectionsContent.obj4.link, content: [sectionsContent.obj4.content] },
+    { id: 'distribution-calculators-discrete-vs-continuous', title: sectionsContent.obj5.title, link: sectionsContent.obj5.link, content: [sectionsContent.obj5.content] },
+    { id: 'conditional-and-joint-probability', title: sectionsContent.obj6.title, link: sectionsContent.obj6.link, content: [sectionsContent.obj6.content] },
+    { id: 'bayes-theorem-and-expected-value-calculators', title: sectionsContent.obj7.title, link: sectionsContent.obj7.link, content: [sectionsContent.obj7.content] },
+    { id: 'common-use-cases-by-field', title: sectionsContent.obj8.title, link: sectionsContent.obj8.link, content: [sectionsContent.obj8.content] },
+    { id: 'quick-reference-guide', title: sectionsContent.obj9.title, link: sectionsContent.obj9.link, content: [sectionsContent.obj9.content] },
+    { id: 'related-probability-resources', title: sectionsContent.obj10.title, link: sectionsContent.obj10.link, content: [sectionsContent.obj10.content] },
+  ]
 
   return (
     <>
@@ -829,6 +1020,9 @@ export default function ProbabilityCalculator({seoData, sectionsContent, faqQues
       <br/>
       
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Basic Probability Calculators</h1>
+      <div style={{marginBottom:'20px'}}>
+        <ExplanationDetails instructions={detailInstructions} title='How to use the Basic Probability Calculators' />
+      </div>
       
       <br/>
       
@@ -836,40 +1030,18 @@ export default function ProbabilityCalculator({seoData, sectionsContent, faqQues
       className="calculator-widget"
         paramName="calc"
         defaultSlug="single-event"
-        components={[
-          { 
-            id: 1, 
-            name: 'Single Event Probability Calculator', 
-            slug: 'single-event',
-            key: 'probCalc', 
-            component: SingleEventProbabilityCalculator 
-          },
-          { 
-            id: 2, 
-            name: 'Two Independent Events Probability Calculator', 
-            slug: 'two-independent-events',
-            key: 'probCalc', 
-            component: TwoIndependentEventsCalculator 
-          },
-        //   { id: 3, name: 'Discrete Distributions Calculator',  href: '/probability/calculators/discrete-distributions'  },
-        //   { id: 4, name: 'Continuous Distributions Calculator',  href: '/probability/calculators/continuous-distributions'  },
-        //   { id: 5, name: 'Joint Probability Calculator',  href: '/probability/calculators/joint-probability'  },
-        //   { id: 10, name: 'Conditional Probability Calculator',  href: '/probability/calculators/conditional-probability'  },
-        //   { id: 6, name: 'Two Events Probability Calculator',  href: '/probability/calculators/two-events'  },
-        //   { id: 7, name: 'Three Events Probability Calculator',  href: '/probability/calculators/three-events'  },
-        //   { id: 8, name: "Bayes' Theorem Calculator",  href: '/probability/calculators/bayes-calculator'  },
-        //   { id: 9, name: "Expected Value Calculators",  href: '/probability/calculators/expected-value'  },
-        ]}
+        components={BASIC_COMPONENTS}
+        explanations={basicExplanations || {}}
         buttonMinWidth="160px"
         primaryColor="#007bff"
       />
 
       <br/>
-      {/* <SectionTableOfContents sections={genericSections}/> */}
+      <SectionTableOfContents sections={genericSections}/>
       <br/>
       <br/>
       <br/>
-      {/* <Sections sections={genericSections}/> */}
+      <Sections sections={genericSections}/>
       <br/>
       <br/>
       <br/>

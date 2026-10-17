@@ -995,7 +995,7 @@ import functionAsymptotesDiagrams from '@/app/components/functions/asymptotes/fu
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){

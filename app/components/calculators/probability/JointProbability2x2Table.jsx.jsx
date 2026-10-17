@@ -2139,8 +2139,9 @@
 
 
 import React, { useState, useEffect } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function JointProbability2x2Table() {
+export default function JointProbability2x2Table({ explanations = null }) {
   const [eventAName, setEventAName] = useState('A');
   const [eventBName, setEventBName] = useState('B');
   
@@ -3797,11 +3798,20 @@ export default function JointProbability2x2Table() {
             borderRadius: '8px',
             boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
           }}>
-            <h3 style={{ margin: '0 0 12px 0', fontSize: '18px', fontWeight: 'bold' }}>What is Joint Probability?</h3>
-            <p style={{ margin: '0 0 10px 0', fontSize: '14px', lineHeight: '1.6' }}>
-              Joint probability measures the likelihood that two events occur together. For events {eventAName} and {eventBName}, 
-              P({eventAName}∩{eventBName}) represents the probability that both happen simultaneously.
-            </p>
+            {explanations && explanations.main ? (
+              <>
+                <h3 style={{ margin: '0 0 12px 0', fontSize: '18px', fontWeight: 'bold' }}>{explanations.main.title}</h3>
+                <div style={{ margin: '0 0 10px 0', fontSize: '14px', lineHeight: '1.6' }}>{typeof explanations.main.content === 'string' ? processContent(explanations.main.content) : explanations.main.content}</div>
+              </>
+            ) : (
+              <>
+                <h3 style={{ margin: '0 0 12px 0', fontSize: '18px', fontWeight: 'bold' }}>What is Joint Probability?</h3>
+                <p style={{ margin: '0 0 10px 0', fontSize: '14px', lineHeight: '1.6' }}>
+                  Joint probability measures the likelihood that two events occur together. For events {eventAName} and {eventBName}, 
+                  P({eventAName}∩{eventBName}) represents the probability that both happen simultaneously.
+                </p>
+              </>
+            )}
           </div>
 
           <div style={{ 

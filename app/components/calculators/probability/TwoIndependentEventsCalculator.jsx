@@ -2,8 +2,19 @@
 
 
 import React, { useState } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function TwoIndependentEventsCalculator() {
+// explanation panel (texts come from the page through the explanations prop; without it the component renders exactly as before)
+const PANEL = {
+  wrapper: { display: 'flex', gap: '24px', alignItems: 'flex-start', flexWrap: 'wrap' },
+  main: { flex: '1 1 420px', minWidth: 0 },
+  sidebar: { flex: '0 1 320px', display: 'flex', flexDirection: 'column', gap: '16px', paddingTop: '20px' },
+  panel: { backgroundColor: '#f0f6ff', borderRadius: '10px', border: '1px solid #dbeafe', padding: '18px' },
+  panelTitle: { margin: '0 0 8px', fontSize: '17px', color: '#1e3a5f' },
+  panelText: { margin: 0, fontSize: '14.5px', lineHeight: 1.6, color: '#1e3a5f' },
+};
+
+export default function TwoIndependentEventsCalculator({ explanations = null }) {
   const [pA, setPA] = useState('');
   const [pB, setPB] = useState('');
   const [results, setResults] = useState(null);
@@ -182,7 +193,7 @@ export default function TwoIndependentEventsCalculator() {
 
   const canCalculate = pA !== '' && pB !== '' && !errors.pA && !errors.pB;
 
-  return (
+  const inner = (
     <div style={{
       minHeight: '100vh',
       // background: '#f5f7fa',
@@ -399,6 +410,19 @@ export default function TwoIndependentEventsCalculator() {
               </div>
             )}
           </div>
+        </div>
+      </div>
+    </div>
+  );
+  const panelText = explanations && explanations.main ? explanations.main : null;
+  if (!panelText) return inner;
+  return (
+    <div style={PANEL.wrapper}>
+      <div style={PANEL.main}>{inner}</div>
+      <div style={PANEL.sidebar}>
+        <div style={PANEL.panel}>
+          <h3 style={PANEL.panelTitle}>{panelText.title}</h3>
+          <div style={PANEL.panelText}>{typeof panelText.content === 'string' ? processContent(panelText.content) : panelText.content}</div>
         </div>
       </div>
     </div>

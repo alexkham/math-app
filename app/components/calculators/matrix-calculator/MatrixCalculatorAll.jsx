@@ -849,7 +849,7 @@ function formatHistoryInputs(entry) {
 
 /* ── component ────────────────────────────────────────────────── */
 
-export default function MatrixCalculator({ descriptions: descriptionsProp } = {}) {
+export default function MatrixCalculator({ descriptions: descriptionsProp, explanations = null } = {}) {
   const [step, setStep] = useState('operation-type');
   const [operationType, setOperationType] = useState('');
   const [dimensions, setDimensions] = useState({ rows: 3, cols: 3 });
@@ -866,11 +866,12 @@ export default function MatrixCalculator({ descriptions: descriptionsProp } = {}
   const [fillValues, setFillValues] = useState({});
 
   /* ── merge descriptions: props override defaults ── */
-  const mergedDescriptions = descriptionsProp
+  const mergedDescriptions = descriptionsProp || explanations
     ? Object.keys(defaultDescriptions).reduce((acc, cat) => {
         acc[cat] = {
           ...defaultDescriptions[cat],
-          ...(descriptionsProp[cat] || {}),
+          ...((descriptionsProp || {})[cat] || {}),
+          ...((explanations || {})[cat] || {}),
         };
         return acc;
       }, {})
@@ -1636,7 +1637,7 @@ export default function MatrixCalculator({ descriptions: descriptionsProp } = {}
             {/* ▸ RIGHT — explanation panel */}
             <div style={s.explanationPanel}>
               <h4 style={s.explanationTitle}>{getExplanationHeading()}</h4>
-              <p style={s.explanationBody}>{processContent(getDescription())}</p>
+              <div style={s.explanationBody}>{processContent(getDescription())}</div>
 
               {computedSteps && computedSteps.length > 0 && (
                 <>

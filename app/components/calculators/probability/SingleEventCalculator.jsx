@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function SingleEventProbabilityCalculator() {
+export default function SingleEventProbabilityCalculator({ explanations = null }) {
   const [favorableOutcomes, setFavorableOutcomes] = useState('');
   const [totalOutcomes, setTotalOutcomes] = useState('');
   const [result, setResult] = useState(null);
@@ -169,6 +170,15 @@ export default function SingleEventProbabilityCalculator() {
   };
 
   const renderExplanations = () => {
+    const pageText = explanations && explanations.main ? explanations.main : null;
+    if (pageText) {
+      return (
+        <div style={styles.explanationsContent}>
+          <h4 style={styles.explanationTitle}>{pageText.title}</h4>
+          <div style={styles.explanationText}>{typeof pageText.content === 'string' ? processContent(pageText.content) : pageText.content}</div>
+        </div>
+      );
+    }
     return (
       <div style={styles.explanationsContent}>
         <h4 style={styles.explanationTitle}>Understanding Single Event Probability</h4>

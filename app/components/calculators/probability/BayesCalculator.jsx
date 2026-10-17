@@ -1,8 +1,19 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function BayesTheoremCalculator() {
+// explanation panel (texts come from the page through the explanations prop; without it the component renders exactly as before)
+const PANEL = {
+  wrapper: { display: 'flex', gap: '24px', alignItems: 'flex-start', flexWrap: 'wrap' },
+  main: { flex: '1 1 420px', minWidth: 0 },
+  sidebar: { flex: '0 1 320px', display: 'flex', flexDirection: 'column', gap: '16px', paddingTop: '20px' },
+  panel: { backgroundColor: '#f0f6ff', borderRadius: '10px', border: '1px solid #dbeafe', padding: '18px' },
+  panelTitle: { margin: '0 0 8px', fontSize: '17px', color: '#1e3a5f' },
+  panelText: { margin: 0, fontSize: '14.5px', lineHeight: 1.6, color: '#1e3a5f' },
+};
+
+export default function BayesTheoremCalculator({ explanations = null }) {
   const instanceId = useMemo(() => Math.random().toString(36).substr(2, 9), []);
   
   const [mode, setMode] = useState('general');
@@ -316,7 +327,7 @@ export default function BayesTheoremCalculator() {
     setHypotheses(newHypotheses);
   };
 
-  return (
+  const inner = (
     <div style={{ maxWidth: '1800px', margin: '0 auto', padding: '20px', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
       
       <div style={{ 
@@ -964,6 +975,19 @@ export default function BayesTheoremCalculator() {
               </div>
             </div>
           )}
+        </div>
+      </div>
+    </div>
+  );
+  const panelText = explanations ? (explanations[mode] || explanations.main || null) : null;
+  if (!panelText) return inner;
+  return (
+    <div style={PANEL.wrapper}>
+      <div style={PANEL.main}>{inner}</div>
+      <div style={PANEL.sidebar}>
+        <div style={PANEL.panel}>
+          <h3 style={PANEL.panelTitle}>{panelText.title}</h3>
+          <div style={PANEL.panelText}>{typeof panelText.content === 'string' ? processContent(panelText.content) : panelText.content}</div>
         </div>
       </div>
     </div>

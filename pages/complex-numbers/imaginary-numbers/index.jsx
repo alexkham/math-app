@@ -1099,7 +1099,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import complexExplorerDiagrams from '@/app/components/calculators/complex-numbers/complexExplorerDiagrams'
 import iPowersDiagrams from '@/app/components/calculators/complex-numbers/iPowersDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 

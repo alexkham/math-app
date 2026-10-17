@@ -621,7 +621,7 @@ import conditionalTreeDiagrams from '@/app/components/probability/conditional-pr
 import partitionVennDiagrams from '@/app/components/probability/conditional-probability-demo/partitionVennDiagrams'
 import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){

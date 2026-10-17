@@ -225,8 +225,14 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import ThreeEventsProbabilityCalculator from '@/app/components/calculators/probability/events/ThreeEventsProbabilityCalculator'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 
+/* calculators-mesh: finished 2026-10-17 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+   Registry entry "/probability/calculators/three-events" in calculators-mesh-registry.json (same folder): 6 usage sections, each with a demo; 5 panel notes; 16 sections with fixed slug ids.
+   Before editing this page, read the instructions and re-run its checks; keep the section ids and the anchors. */
 export async function getStaticProps(){
 
   const keyWords = [
@@ -258,7 +264,8 @@ export async function getStaticProps(){
 
 **Given P(A∪B∪C)** mode starts with the union—at least one event occurring. Provide P(A), P(B), P(C), P(A∪B∪C), and the three pairwise intersections. The calculator solves for P(A∩B∩C) by rearranging inclusion-exclusion: P(A∩B∩C) = P(A) + P(B) + P(C) - P(A∩B) - P(A∩C) - P(B∩C) - P(A∪B∪C).
 
-**Given Pairwise Intersections** mode provides all three pairwise intersections P(A∩B), P(A∩C), P(B∩C) plus the triple intersection P(A∩B∩C). The calculator computes the union via inclusion-exclusion. This mode suits situations where you know how pairs relate but need overall coverage.`,
+**Given Pairwise Intersections** mode provides all three pairwise intersections P(A∩B), P(A∩C), P(B∩C) plus the triple intersection P(A∩B∩C). The calculator computes the union via inclusion-exclusion. This mode suits situations where you know how pairs relate but need overall coverage.
+The five buttons sit under **Calculation Mode** at the top of the card, and the boxes change with the choice: $P(A)$, $P(B)$ and $P(C)$ always, then $P(A \\cap B \\cap C)$ or $P(A \\cup B \\cup C)$ and the three pairwise intersections for the three Given modes. Every box opens with an example value ($0.5$, $0.4$, $0.3$; $0.06$; $0.82$; $0.2$, $0.15$, $0.12$), so Calculate works at once. Each mode has its own section, from [Three Mutually Independent Events](!#three-mutually-independent-events) to [Starting from the Pairwise Intersections](!#starting-from-the-pairwise-intersections).`,
       before: ``,
       after: ``,
       link: '',
@@ -284,7 +291,8 @@ export async function getStaticProps(){
 
 **Region 8 - P(A'∩B'∩C')**: None of the events occur. Equals 1 - P(A∪B∪C), the complement of the union. This region lies outside all three circles.
 
-Each result row displays a Venn diagram highlighting the corresponding region, making the geometric relationships clear. All eight probabilities sum to exactly 1, confirming complete sample space partition.`,
+Each result row displays a Venn diagram highlighting the corresponding region, making the geometric relationships clear. All eight probabilities sum to exactly 1, confirming complete sample space partition.
+With the example values in Mutually Independent mode the eight rows read $0.0600$, $0.1400$, $0.0900$, $0.0600$, $0.2100$, $0.1400$, $0.0900$ and $0.2100$, which add up to $1$; in Mutually Exclusive mode with $0.2$, $0.3$ and $0.4$ the seven overlap regions are $0$ and the outside region is $0.1000$. The formulas behind the regions are explained in [The Inclusion-Exclusion Principle for Three Events](!#the-inclusion-exclusion-principle-for-three-events).`,
       before: ``,
       after: ``,
       link: '',
@@ -302,7 +310,9 @@ Each result row displays a Venn diagram highlighting the corresponding region, m
 
 The calculator displays this calculation in step-by-step format. For P(A)=0.5, P(B)=0.4, P(C)=0.3, P(A∩B)=0.2, P(A∩C)=0.15, P(B∩C)=0.12, P(A∩B∩C)=0.06: Union = 0.5 + 0.4 + 0.3 - 0.2 - 0.15 - 0.12 + 0.06 = 0.79.
 
-The principle extends to any number of events with alternating signs: add singles, subtract pairs, add triples, subtract quadruples, etc. For three events, it stops at the triple intersection.`,
+The principle extends to any number of events with alternating signs: add singles, subtract pairs, add triples, subtract quadruples, etc. For three events, it stops at the triple intersection.
+
+The rule is taught for two events in [The addition rule](!/probability/rules#additive) and for sets in [Set operations on events](!/probability/events#sets).`,
       before: ``,
       after: ``,
       link: '',
@@ -318,7 +328,9 @@ The principle extends to any number of events with alternating signs: add single
 
 The calculator's **Event Properties** section checks both conditions. "Pairwise Independent" shows Yes when all three pairs multiply within tolerance. "Mutually Independent" shows Yes only when pairwise independence holds AND the triple intersection multiplies. If mutually independent shows Yes, pairwise independent automatically shows Yes. The reverse isn't guaranteed.
 
-Mutually independent mode produces both properties showing Yes by construction. Other modes check these conditions against computed probabilities.`,
+Mutually independent mode produces both properties showing Yes by construction. Other modes check these conditions against computed probabilities.
+
+The definitions are in [Independence](!/probability/events#independence) and, formally, in [Definition](!/probability/independence#definition) and [The formula](!/probability/independence#formula) of the independence lesson.`,
       before: ``,
       after: ``,
       link: '',
@@ -338,7 +350,8 @@ Mutually independent mode produces both properties showing Yes by construction. 
 
 **Exterior region** (outside all circles): P(A'∩B'∩C') - none of the events occur. This rectangular background region completes the sample space.
 
-**Visual encoding**: The target region shades in blue (opacity 0.7). Conditioning regions (for conditional probabilities) shade light blue (opacity 0.5) showing the restricted sample space. Circle outlines use consistent stroke weights—solid lines (1.5px) for reference circles, thicker lines (2px) for conditioning events. Opacity variations (0.3 for faded, 0.7 for active) guide visual attention to relevant regions.`,
+**Visual encoding**: The target region shades in blue (opacity 0.7). Conditioning regions (for conditional probabilities) shade light blue (opacity 0.5) showing the restricted sample space. Circle outlines use consistent stroke weights—solid lines (1.5px) for reference circles, thicker lines (2px) for conditioning events. Opacity variations (0.3 for faded, 0.7 for active) guide visual attention to relevant regions.
+With the example values the central triangle holds $0.0600$; in Given P(A∩B∩C) mode with $0.1$ it holds $0.1000$ and the three lenses shrink to $0.1000$, $0.0500$ and $0.0200$. The regions are listed in [Working with the Eight Venn Diagram Regions](!#working-with-the-eight-venn-diagram-regions).`,
       before: ``,
       after: ``,
       link: '',
@@ -358,7 +371,9 @@ The Venn diagram for P(A|B∩C) highlights circle B and C with light blue (the c
 
 **Important**: These conditionals differ from simple two-event conditionals. P(A|B) uses just one conditioning event, while P(A|B∩C) uses two. The conditioning set is more restrictive—both B and C must occur—so the conditional probability can differ substantially from P(A|B) or P(A|C) individually.
 
-The calculator also computes simple pairwise conditionals: P(A|B), P(A|C), P(B|C), using formulas like P(A|B) = P(A∩B)/P(B). These appear in the Additional Probabilities section alongside unions and intersections.`,
+The calculator also computes simple pairwise conditionals: P(A|B), P(A|C), P(B|C), using formulas like P(A|B) = P(A∩B)/P(B). These appear in the Additional Probabilities section alongside unions and intersections.
+
+Conditioning on an event is defined in [The conditional probability formula](!/probability/conditional-probability#formula) and [Conditional events](!/probability/events#conditional).`,
       before: ``,
       after: ``,
       link: '',
@@ -376,7 +391,8 @@ The calculator also computes simple pairwise conditionals: P(A|B), P(A|C), P(B|C
 
 **Example - Conditional P(A|B∩C)**: Step 1 shows "P(A|B∩C) = P(A∩B∩C) / P(B∩C)", the conditional probability definition. Step 2 shows division with actual values. Step 3 computes the quotient.
 
-The calculations reference previously computed values, showing dependency chains. P(A|B∩C) references P(A∩B∩C) and P(B∩C), both calculated earlier. This demonstrates how complex probabilities build from simpler ones through probability rules.`,
+The calculations reference previously computed values, showing dependency chains. P(A|B∩C) references P(A∩B∩C) and P(B∩C), both calculated earlier. This demonstrates how complex probabilities build from simpler ones through probability rules.
+Clicking a row a second time folds the steps away. The formulas the steps apply are explained in [The Inclusion-Exclusion Principle for Three Events](!#the-inclusion-exclusion-principle-for-three-events).`,
       before: ``,
       after: ``,
       link: '',
@@ -396,7 +412,9 @@ The calculations reference previously computed values, showing dependency chains
 
 **Inclusion-exclusion consistency**: P(A∪B∪C) = P(A) + P(B) + P(C) - P(A∩B) - P(A∩C) - P(B∩C) + P(A∩B∩C) must hold exactly (within 0.0001 tolerance). This fundamental relationship connects all seven input probabilities. Violation means the inputs don't describe a valid probability configuration together.
 
-When axioms are violated, all violations appear in a red error box. No results display until inputs satisfy all axioms—this prevents working with impossible probability spaces.`,
+When axioms are violated, all violations appear in a red error box. No results display until inputs satisfy all axioms—this prevents working with impossible probability spaces.
+
+The axioms are stated in [The axioms of probability](!/probability/basics#axioms); the regions are events of the sample space described in [Events](!/probability/sample-space#events).`,
       before: ``,
       after: ``,
       link: '',
@@ -416,7 +434,8 @@ When axioms are violated, all violations appear in a red error box. No results d
 
 The **Additional Probabilities** section displays all these derived probabilities with their Venn diagrams. Pairwise union diagrams shade two circles completely. Pairwise intersection diagrams shade only the lens where two circles overlap. These visualizations help understand how events relate in pairs within the three-event framework.
 
-These probabilities are useful because real scenarios often involve questions about subsets of the three events: "What if we only care about A and B?", "What's the coverage if either A or C happens?" The calculator provides these marginal views automatically.`,
+These probabilities are useful because real scenarios often involve questions about subsets of the three events: "What if we only care about A and B?", "What's the coverage if either A or C happens?" The calculator provides these marginal views automatically.
+With the example values the section reads $P(A \\cup B) = 0.7000$, $P(A \\mid B \\cap C) = 0.5000$ and $P(A') = 0.5000$; in Given P(A∩B∩C) mode with $0.1$ the conditional rises to $0.8333$, and in Given P(A∪B∪C) mode with the example union $0.82$ it is $0.7500$. The conditionals are explained in [Conditional Probabilities with Three Events](!#conditional-probabilities-with-three-events).`,
       before: ``,
       after: ``,
       link: '',
@@ -436,7 +455,8 @@ These probabilities are useful because real scenarios often involve questions ab
 
 The properties section helps verify mode assumptions. Independent mode produces mutual independence "Yes" by construction. Mutually exclusive mode produces mutual exclusivity "Yes". Other modes check these properties against computed probabilities—you might discover events are actually independent even though you didn't use independent mode.
 
-For comprehensive theory on three-event probability including proofs, examples, and extensions to n events, see **three events probability theory**.`,
+For comprehensive theory on three-event probability including proofs, examples, and extensions to n events, see [three events probability theory](!/probability/events#independence).
+With the example values the panel reads Mutually Independent Yes, Pairwise Independent Yes, Mutually Exclusive No; in Given P(A∩B∩C) mode with $0.1$ the first line turns to No while the pairs stay independent; in Mutually Exclusive mode the last line reads Yes. The two kinds of independence are compared in [Mutual Independence vs Pairwise Independence](!#mutual-independence-vs-pairwise-independence).`,
       before: ``,
       after: ``,
       link: '',
@@ -462,7 +482,54 @@ For comprehensive theory on three-event probability including proofs, examples, 
 
 **Combination and Permutation Calculator** - Compute counting fundamentals for probability problems with distinct and repeated elements.
 
-**Expected Value Calculator** - Calculate expected values, variance, and standard deviation for discrete probability distributions.`,
+**Expected Value Calculator** - Calculate expected values, variance, and standard deviation for discrete probability distributions.
+
+The theory behind these tools is taught in [Relations between events](!/probability/events#relations), [Independence](!/probability/events#independence) and [The multiplication rule](!/probability/rules#multy).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj12: {
+      title: `Three Mutually Independent Events`,
+      content: `Three events are mutually independent when every intersection factors: $P(A \\cap B) = P(A)P(B)$, $P(A \\cap C) = P(A)P(C)$, $P(B \\cap C) = P(B)P(C)$ and $P(A \\cap B \\cap C) = P(A)P(B)P(C)$. The Mutually Independent mode takes only $P(A)$, $P(B)$ and $P(C)$ and builds every other probability from these products: with $0.5$, $0.4$ and $0.3$ the pairs are $0.2$, $0.15$ and $0.12$, the triple is $0.06$, and the union is $0.5 + 0.4 + 0.3 - 0.2 - 0.15 - 0.12 + 0.06 = 0.79$.
+
+The eight regions then follow by subtraction: $A$ and $B$ without $C$ is $0.2 - 0.06 = 0.14$, $A$ alone is $0.5 - 0.2 - 0.15 + 0.06 = 0.21$, none is $1 - 0.79 = 0.21$. The common mistake is to check the pairs only; three events can be pairwise independent without the triple product holding, as explained in [Mutual Independence vs Pairwise Independence](!#mutual-independence-vs-pairwise-independence). See [Independence](!/probability/events#independence) and [The formula](!/probability/independence#formula).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj13: {
+      title: `Three Mutually Exclusive Events`,
+      content: `Three events are mutually exclusive when no two of them can happen together, so every intersection has probability $0$ and the union is the plain sum, $P(A \\cup B \\cup C) = P(A) + P(B) + P(C)$. The Mutually Exclusive mode takes only the three probabilities: with $0.2$, $0.3$ and $0.4$ the union is $0.9$, the seven overlap regions are $0$, and the outside region is $0.1$.
+
+The three probabilities must sum to at most $1$; with the example values $0.5$, $0.4$ and $0.3$ the sum is $1.2$ and the calculator refuses the union as an axiom violation. The common mistake is to call events mutually exclusive when only the triple intersection is empty; the mode requires every pair to be disjoint. See [Relations between events](!/probability/events#relations) and [The addition rule](!/probability/rules#additive).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj14: {
+      title: `Starting from the Triple Intersection`,
+      content: `When the probability of all three events together is known along with the three pairwise intersections, the eight regions follow by subtraction and the union by inclusion-exclusion. The Given P(A∩B∩C) mode takes $P(A)$, $P(B)$, $P(C)$, $P(A \\cap B \\cap C)$ and the three pairs: with the example values and $P(A \\cap B \\cap C) = 0.1$ the union is $1.2 - 0.47 + 0.1 = 0.83$, the lens $A \\cap B$ without $C$ is $0.2 - 0.1 = 0.1$, $A$ alone is $0.5 - 0.35 + 0.1 = 0.25$, and $P(A \\mid B \\cap C) = 0.1 / 0.12 \\approx 0.8333$.
+
+The triple intersection cannot exceed any pairwise intersection, and each pair cannot exceed either of its events; the calculator refuses values that break these bounds. The common mistake is to enter the triple intersection larger than a pair, which would make a lens region negative. See [The axioms of probability](!/probability/basics#axioms) and [Set operations on events](!/probability/events#sets).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj15: {
+      title: `Starting from the Union`,
+      content: `When the probability of at least one event is known instead of the triple intersection, inclusion-exclusion is solved for the missing term: $P(A \\cap B \\cap C) = P(A \\cup B \\cup C) - P(A) - P(B) - P(C) + P(A \\cap B) + P(A \\cap C) + P(B \\cap C)$. The Given P(A∪B∪C) mode takes $P(A)$, $P(B)$, $P(C)$, the union and the three pairs: with the example values and a union of $0.82$ the triple intersection is $0.82 - 1.2 + 0.47 = 0.09$, and $P(A \\mid B \\cap C) = 0.09 / 0.12 = 0.75$.
+
+The union must be at least the largest single event and at most $1$, and the derived triple intersection must be non-negative and no larger than any pair. The common mistake is to read the union as "exactly one event". See [The addition rule](!/probability/rules#additive) and [The axioms of probability](!/probability/basics#axioms).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj16: {
+      title: `Starting from the Pairwise Intersections`,
+      content: `The Given Pairwise Intersections mode takes $P(A)$, $P(B)$, $P(C)$, the three pairwise intersections and the triple intersection, the full set of seven numbers that fixes a three-event space, and computes the union by inclusion-exclusion together with every region, conditional probability and complement. With the example values the result is the same as in the independent case, union $0.79$, because the example pairs and triple happen to be the products of the three probabilities.
+
+Use this mode when the overlaps were measured directly, for example from a survey that counted members of each pair of groups; the Event Properties panel then tells you whether the counts are consistent with independence. The common mistake is to enter pairs that exceed one of their events. See [The multiplication rule](!/probability/rules#multy) and [Set operations on events](!/probability/events#sets).`,
       before: ``,
       after: ``,
       link: '',
@@ -582,12 +649,151 @@ For comprehensive theory on three-event probability including proofs, examples, 
     content: ``
   }
 
+  const detailInstructions = [
+    `Pick a mode under **Calculation Mode**: **Mutually Independent**, **Mutually Exclusive**, **Given P(A∩B∩C)**, **Given P(A∪B∪C)** or **Given Pairwise Intersections**; the boxes below change with it. [Learn more about the modes](!#understanding-calculation-modes-for-three-events)`,
+    `Type **P(A)**, **P(B)** and **P(C)** (0 to 1) and, in the Given modes, the triple intersection or the union and the three pairwise intersections; every box opens with an example value. [Learn more about the eight regions](!#working-with-the-eight-venn-diagram-regions)`,
+    `Click **Calculate**; the eight region rows appear, each with a three-circle sketch, followed by the Additional Probabilities, or a red box lists the axiom violations. **Reset** restores the example values. [Learn more about the sketches](!#reading-three-circle-venn-diagrams)`,
+    `Click a result row to open its step-by-step calculation; click again to close it. [Learn more about the steps](!#step-by-step-calculations-and-formulas)`,
+    `Read the **Additional Probabilities** section for the pairwise unions, intersections, conditionals and complements. [Learn more about the additional probabilities](!#additional-probabilities-pairwise-unions-and-intersections)`,
+    `Read **Event Properties** for the two kinds of independence and mutual exclusivity, and the panel on the right for the rule of the current mode. [Learn more about the properties](!#interpreting-event-properties-for-three-events)`,
+  ];
+  const thExplanations = {
+    independent: { title: `Mutually independent events`, content: `Multiplies the three probabilities for every intersection, $P(A \cap B \cap C) = P(A)P(B)P(C)$ and the pairs likewise, then fills the eight regions and the union. [Learn more about mutually independent events](!#three-mutually-independent-events)` },
+    mutuallyExclusive: { title: `Mutually exclusive events`, content: `Sets every intersection to $0$ and adds the three probabilities for the union, $P(A \cup B \cup C) = P(A) + P(B) + P(C)$. [Learn more about mutually exclusive events](!#three-mutually-exclusive-events)` },
+    givenIntersection: { title: `Given the triple intersection`, content: `Takes $P(A \cap B \cap C)$ and the three pairs as given and finds the eight regions by subtraction and the union by inclusion-exclusion. [Learn more about starting from the triple intersection](!#starting-from-the-triple-intersection)` },
+    givenUnion: { title: `Given the union`, content: `Solves inclusion-exclusion for the triple intersection from $P(A \cup B \cup C)$ and the three pairs, then fills the regions. [Learn more about starting from the union](!#starting-from-the-union)` },
+    givenPairwise: { title: `Given the pairwise intersections`, content: `Takes the three pairs and the triple intersection as given and computes the union by inclusion-exclusion with every region and conditional. [Learn more about starting from the pairs](!#starting-from-the-pairwise-intersections)` },
+  };
+  const demos = {
+    'understanding-calculation-modes-for-three-events': {
+      title: 'Three of the five modes',
+      scale: 0.5,
+      minHeight: 295,
+      script: [
+        { say: 'CLICK Mutually Exclusive\nOnly P(A), P(B) and P(C) remain.', at: 'tr' },
+        { click: { button: 'Mutually Exclusive', exact: true } },
+        { wait: 2600 },
+        { say: 'CLICK Given P(A∩B∩C)\nFour more boxes: the triple intersection and the three pairs, all with example values.', at: 'tr' },
+        { click: { button: 'Given P(A∩B∩C)', exact: true } },
+        { wait: 2600 },
+        { say: 'CLICK Given P(A∪B∪C)\nThe union box, 0.82, replaces the triple intersection.', at: 'tr' },
+        { click: { button: 'Given P(A∪B∪C)', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'working-with-the-eight-venn-diagram-regions': {
+      title: 'Eight regions for the example values, then for disjoint events',
+      scale: 0.5,
+      minHeight: 295,
+      script: [
+        { say: 'CLICK Calculate\nEight rows: 0.0600, 0.1400, 0.0900, 0.0600, 0.2100, 0.1400, 0.0900, 0.2100; they add up to 1.', at: 'tr' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3200 },
+        { say: 'TYPE 0.6, 0.5 and 0.2, CLICK Calculate\nNew products: the central region reads 0.0600 again, but the other seven change.', at: 'tr' },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '0.6' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '0.5' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0.2' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3200 },
+        { say: 'CLICK Mutually Exclusive, TYPE 0.2, 0.3 and 0.4, CLICK Calculate\nSeven regions read 0; the outside region reads 0.1000.', at: 'tr' },
+        { click: { button: 'Mutually Exclusive', exact: true } },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '0.2' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '0.3' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0.4' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3200 },
+      ],
+    },
+    'reading-three-circle-venn-diagrams': {
+      title: 'Sketches for three inputs',
+      scale: 0.5,
+      minHeight: 295,
+      script: [
+        { say: 'CLICK Calculate\nEvery row gets a three-circle sketch; the central triangle holds 0.0600.', at: 'tr' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3000 },
+        { say: 'CLICK Given P(A∩B∩C), TYPE 0.1, CLICK Calculate\nThe triangle holds 0.1000; the lenses shrink to 0.1000, 0.0500 and 0.0200.', at: 'tr' },
+        { click: { button: 'Given P(A∩B∩C)', exact: true } },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: '0.1' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3200 },
+        { say: 'CLICK Mutually Exclusive, TYPE 0.2, 0.3 and 0.4, CLICK Calculate\nNo overlap is shaded; only the three crescents and the outside.', at: 'tr' },
+        { click: { button: 'Mutually Exclusive', exact: true } },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '0.2' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '0.3' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0.4' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3200 },
+      ],
+    },
+    'step-by-step-calculations-and-formulas': {
+      title: 'Opening two step lists',
+      scale: 0.5,
+      minHeight: 295,
+      script: [
+        { say: 'CLICK Calculate\nThe rows appear, each closed.', at: 'tr' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 2800 },
+        { say: 'CLICK the P(A∩B∩C) row\nThe product rule: 0.5 × 0.4 × 0.3 = 0.0600.', at: 'tr' },
+        { click: { text: 'P(A∩B∩C)', exact: true } },
+        { wait: 2800 },
+        { say: 'CLICK the P(A∪B∪C) row\nInclusion-exclusion with its seven terms: 0.7900.', at: 'tr' },
+        { click: { text: 'P(A∪B∪C)', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'additional-probabilities-pairwise-unions-and-intersections': {
+      title: 'Pairwise and conditional values in three modes',
+      scale: 0.5,
+      minHeight: 295,
+      script: [
+        { say: 'CLICK Calculate\nP(A∪B) = 0.7000, P(A|B∩C) = 0.5000, P(A\') = 0.5000.', at: 'tr' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3000 },
+        { say: 'CLICK Given P(A∩B∩C), TYPE 0.1, CLICK Calculate\nP(A|B∩C) = 0.1 / 0.12 = 0.8333.', at: 'tr' },
+        { click: { button: 'Given P(A∩B∩C)', exact: true } },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: '0.1' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3200 },
+        { say: 'CLICK Given P(A∪B∪C), CLICK Calculate\nFrom the union 0.82 the triple intersection is 0.0900 and P(A|B∩C) = 0.7500.', at: 'tr' },
+        { click: { button: 'Given P(A∪B∪C)', exact: true } },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3200 },
+      ],
+    },
+    'interpreting-event-properties-for-three-events': {
+      title: 'The three verdicts in three modes',
+      scale: 0.5,
+      minHeight: 295,
+      script: [
+        { say: 'CLICK Calculate\nMutually Independent Yes, Pairwise Independent Yes, Mutually Exclusive No.', at: 'tr' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3000 },
+        { say: 'CLICK Given P(A∩B∩C), TYPE 0.1, CLICK Calculate\nMutually Independent No: 0.1 is not 0.5 × 0.4 × 0.3; the pairs still multiply.', at: 'tr' },
+        { click: { button: 'Given P(A∩B∩C)', exact: true } },
+        { set: { css: 'input[type="number"]', nth: 3 }, value: '0.1' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3200 },
+        { say: 'CLICK Mutually Exclusive, TYPE 0.2, 0.3 and 0.4, CLICK Calculate\nMutually Exclusive Yes.', at: 'tr' },
+        { click: { button: 'Mutually Exclusive', exact: true } },
+        { set: { css: 'input[type="number"]', nth: 0 }, value: '0.2' },
+        { set: { css: 'input[type="number"]', nth: 1 }, value: '0.3' },
+        { set: { css: 'input[type="number"]', nth: 2 }, value: '0.4' },
+        { click: { button: 'Calculate', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      detailInstructions,
+      thExplanations,
+      demos,
       seoData: {
         title: "Three Events Probability Calculator | 8-Region Venn Diagram",
         description: "Calculate probabilities for three events with inclusion-exclusion, 8-region Venn diagrams, and independence detection. Step-by-step solutions.",
@@ -599,14 +805,39 @@ For comprehensive theory on three-event probability including proofs, examples, 
   }
 }
 
-export default function ThreeEventsCalculatorPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function ThreeEventsCalculatorPage({seoData, sectionsContent, introContent, faqQuestions, schemas, detailInstructions = [], thExplanations = null, demos = {}}) {
 
-  const genericSections = Object.keys(sectionsContent).map((key, index) => ({
-    id: `${index + 1}`,
-    title: sectionsContent[key].title,
-    link: sectionsContent[key].link,
-    content: [sectionsContent[key].content]
-  }))
+  const demoPlayer = (slug) => (
+    <ToolDemoPlayer
+      key={`demo-${slug}`}
+      script={demos[slug].script}
+      title={demos[slug].title}
+      label={`Demo: ${demos[slug].title}`}
+      scale={demos[slug].scale || 0.5}
+      minHeight={demos[slug].minHeight || undefined}
+      renderText={processContent}
+    >
+      <ThreeEventsProbabilityCalculator explanations={thExplanations || undefined} />
+    </ToolDemoPlayer>
+  )
+  const genericSections = [
+    { id: 'understanding-calculation-modes-for-three-events', title: sectionsContent.obj1.title, link: sectionsContent.obj1.link, content: [demoPlayer('understanding-calculation-modes-for-three-events'), sectionsContent.obj1.content] },
+    { id: 'working-with-the-eight-venn-diagram-regions', title: sectionsContent.obj2.title, link: sectionsContent.obj2.link, content: [demoPlayer('working-with-the-eight-venn-diagram-regions'), sectionsContent.obj2.content] },
+    { id: 'reading-three-circle-venn-diagrams', title: sectionsContent.obj5.title, link: sectionsContent.obj5.link, content: [demoPlayer('reading-three-circle-venn-diagrams'), sectionsContent.obj5.content] },
+    { id: 'step-by-step-calculations-and-formulas', title: sectionsContent.obj7.title, link: sectionsContent.obj7.link, content: [demoPlayer('step-by-step-calculations-and-formulas'), sectionsContent.obj7.content] },
+    { id: 'additional-probabilities-pairwise-unions-and-intersections', title: sectionsContent.obj9.title, link: sectionsContent.obj9.link, content: [demoPlayer('additional-probabilities-pairwise-unions-and-intersections'), sectionsContent.obj9.content] },
+    { id: 'interpreting-event-properties-for-three-events', title: sectionsContent.obj10.title, link: sectionsContent.obj10.link, content: [demoPlayer('interpreting-event-properties-for-three-events'), sectionsContent.obj10.content] },
+    { id: 'three-mutually-independent-events', title: sectionsContent.obj12.title, link: sectionsContent.obj12.link, content: [sectionsContent.obj12.content] },
+    { id: 'three-mutually-exclusive-events', title: sectionsContent.obj13.title, link: sectionsContent.obj13.link, content: [sectionsContent.obj13.content] },
+    { id: 'starting-from-the-triple-intersection', title: sectionsContent.obj14.title, link: sectionsContent.obj14.link, content: [sectionsContent.obj14.content] },
+    { id: 'starting-from-the-union', title: sectionsContent.obj15.title, link: sectionsContent.obj15.link, content: [sectionsContent.obj15.content] },
+    { id: 'starting-from-the-pairwise-intersections', title: sectionsContent.obj16.title, link: sectionsContent.obj16.link, content: [sectionsContent.obj16.content] },
+    { id: 'the-inclusion-exclusion-principle-for-three-events', title: sectionsContent.obj3.title, link: sectionsContent.obj3.link, content: [sectionsContent.obj3.content] },
+    { id: 'mutual-independence-vs-pairwise-independence', title: sectionsContent.obj4.title, link: sectionsContent.obj4.link, content: [sectionsContent.obj4.content] },
+    { id: 'conditional-probabilities-with-three-events', title: sectionsContent.obj6.title, link: sectionsContent.obj6.link, content: [sectionsContent.obj6.content] },
+    { id: 'axiom-validation-for-three-event-probabilities', title: sectionsContent.obj8.title, link: sectionsContent.obj8.link, content: [sectionsContent.obj8.content] },
+    { id: 'related-probability-tools-and-calculators', title: sectionsContent.obj11.title, link: sectionsContent.obj11.link, content: [sectionsContent.obj11.content] },
+  ]
 
   return (
     <>
@@ -658,8 +889,11 @@ export default function ThreeEventsCalculatorPage({seoData, sectionsContent, int
       <Breadcrumb/>
       
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Three Events Probability Calculator</h1>
+      <div style={{marginBottom:'20px'}}>
+        <ExplanationDetails instructions={detailInstructions} title='How to use Three Events Probability Calculator' />
+      </div>
       <br/>
-      <ThreeEventsProbabilityCalculator className="calculator-widget"/>
+      <ThreeEventsProbabilityCalculator className="calculator-widget" explanations={thExplanations || undefined} />
       <br/>
       <SectionTableOfContents sections={genericSections}/>
       <br/>

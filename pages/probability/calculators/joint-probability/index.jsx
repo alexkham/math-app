@@ -7,8 +7,14 @@ import React from 'react'
 import '../../../../pages/pages.css'
 import Head from 'next/head'
 import JointProbability2x2Table from '@/app/components/calculators/probability/JointProbability2x2Table.jsx'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 
+/* calculators-mesh: finished 2026-10-17 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+   Registry entry "/probability/calculators/joint-probability" in calculators-mesh-registry.json (same folder): 7 usage sections, each with a demo; 1 panel note; 11 sections with fixed slug ids.
+   Before editing this page, read the instructions and re-run its checks; keep the section ids and the anchors. */
 export async function getStaticProps(){
 
   const keyWords = [
@@ -32,13 +38,9 @@ export async function getStaticProps(){
   const sectionsContent = {
     obj1: {
       title: `Entering Joint Probabilities`,
-      content: `The calculator's 2×2 table contains four editable cells representing joint probabilities for all combinations of events A and B. Enter probabilities as decimals between 0 and 1 in each cell. **P(A∩B)** is the probability both events occur simultaneously. **P(A∩B̄)** gives the probability A occurs but B doesn't. **P(Ā∩B)** represents B occurring without A. **P(Ā∩B̄)** is the probability neither event occurs.
+      content: `The 2×2 table holds four white cells in the middle, one for each combination of the two events: $P(A \\cap B)$ and $P(A^c \\cap B)$ in the top row, $P(A \\cap B^c)$ and $P(A^c \\cap B^c)$ in the second row. Type a decimal from $0$ to $1$ in a cell; the placeholder reads $0.000$ and values the calculator fills in itself are written with three decimals. The four cells partition the sample space, so they must add up to exactly $1$: a line under the table reports their sum once all four are filled, and a red message appears when the sum exceeds $1$.
 
-All four values must sum to exactly 1, as they partition the entire sample space. The calculator validates this constraint and displays an error message if the sum deviates from 1. Adjust values incrementally to maintain the sum—when increasing one cell, decrease another.
-
-Default values demonstrate a valid distribution: P(A∩B)=0.25, P(A∩B̄)=0.25, P(Ā∩B)=0.15, P(Ā∩B̄)=0.35. These sum to 1.00 and automatically populate marginal probabilities. Modify any cell by typing a new decimal value or using the increment arrows.
-
-Each cell displays mathematical notation above the input field. Hover over the question mark icon next to any notation for tooltip explanations. This helps distinguish intersection symbols (∩), complement notation (Ā, B̄), and marginal probability labels.`,
+The table completes itself as you type. As soon as two of the three values in a row or a column are known, the third is filled in: typing $0.3$ and $0.15$ in the top row writes $0.450$ into the marginal $P(B)$, and typing $0.2$ and $0.35$ in the second row writes $0.550$ into $P(B^c)$ and $0.500$ into $P(A)$ and $P(A^c)$. Changing a cell afterwards recomputes the margins: $0.4$ instead of $0.3$ lifts $P(B)$ to $0.550$ and the sum to $1.100$, which the message flags. What the four cells mean is explained in [What is Joint Probability?](!#what-is-joint-probability).`,
       before: ``,
       after: ``,
       link: '',
@@ -46,29 +48,19 @@ Each cell displays mathematical notation above the input field. Hover over the q
 
     obj2: {
       title: `Understanding Marginal Probabilities`,
-      content: `Marginal probabilities appear in the highlighted yellow cells along the right column and bottom row, calculated automatically from joint probabilities. These read-only values cannot be edited directly—they update as you modify joint probabilities.
+      content: `The marginal probabilities sit in the column headed **Marginal P(B)** on the right, $P(B)$ and $P(B^c)$, and in the row headed **Marginal P(A)** at the bottom, $P(A)$ and $P(A^c)$; the corner cell shows the **Total**, $1.000$. Each marginal is the sum of its row or column of joint probabilities, by the sum rule, and the calculator writes it in as soon as both cells of that line are known. When a marginal box is left empty but its cells are filled, the computed value is shown under the box as "$= 0.450$".
 
-**P(B)** in the right column equals P(A∩B) + P(Ā∩B), summing the first row. This gives the total probability of B occurring regardless of A's status. Similarly, **P(B̄)** equals P(A∩B̄) + P(Ā∩B̄), summing the second row for the probability B doesn't occur.
-
-**P(A)** in the bottom row equals P(A∩B) + P(A∩B̄), summing the first column. This marginal probability represents A occurring regardless of B. **P(Ā)** sums the second column: P(Ā∩B) + P(Ā∩B̄), giving the probability A doesn't occur.
-
-The bottom-right cell shows Σ=1, confirming all probabilities sum to 1. Marginals must also satisfy P(A) + P(Ā) = 1 and P(B) + P(B̄) = 1. The calculator enforces these relationships automatically through the joint probability constraint.
-
-Marginal probabilities derive from the **sum rule** (law of total probability): to find the probability of one event, sum over all possible states of the other event. The table structure makes this summation visually clear through row and column totals.`,
+The marginal boxes can also be typed into. Typing $P(A) = 0.5$ writes the complement $P(A^c) = 0.500$ at once, and $P(B) = 0.45$ writes $P(B^c) = 0.550$; with the margins in place, one joint probability fixes the rest, so $P(A \\cap B) = 0.3$ fills $P(A \\cap B^c) = 0.200$, $P(A^c \\cap B) = 0.150$ and $P(A^c \\cap B^c) = 0.350$. A typed marginal that disagrees with its cells, or a pair of marginals that does not add up to $1$, is reported in the message box. The rule behind the margins is explained in [Sum Rule and Probability Tables](!#sum-rule-and-probability-tables).`,
       before: ``,
       after: ``,
       link: '',
     },
 
     obj3: {
-      title: `Using Random and Reset Buttons`,
-      content: `The **Random** button generates a valid joint probability distribution by creating four random values that sum to exactly 1. The algorithm generates four random numbers, normalizes them to sum to 1, then rounds to three decimal places. The final value adjusts slightly to ensure the sum equals 1.000 after rounding.
+      title: `Using the Random, Calculate from Marginals and Clear All Buttons`,
+      content: `Three buttons sit above the table. **Generate Random Example** fills the four joint cells with random values that add up to exactly $1$, clears the marginal boxes so that they are recomputed from the cells, and is the quickest way to see a complete table; click it again for another example. **Calculate from Marginals** builds the four cells from the other direction: type $P(A)$ or $P(A^c)$, $P(B)$ or $P(B^c)$, and the joint probability $P(A \\cap B)$, then click it, and the three remaining cells are filled by subtraction. **Clear All** empties every box, cells and margins alike, and removes the message.
 
-Random distributions help explore how different joint probabilities produce varying marginal probabilities. Generate multiple random examples to see relationships between joint and marginal distributions. Notice how changing joint probabilities shifts marginals, and how certain patterns (like independence) appear in the numbers.
-
-The **Reset** button restores default values: P(A∩B)=0.25, P(A∩B̄)=0.25, P(Ā∩B)=0.15, P(Ā∩B̄)=0.35. Use reset to clear custom values and return to the example distribution. This default demonstrates a case where A and B are not independent—P(A∩B) ≠ P(A)×P(B).
-
-Both buttons provide quick ways to populate the table without manual entry. Random is useful for experimentation; reset provides a clean starting point for new calculations.`,
+There is no Reset to a default example; the page opens with every box empty, and Generate Random Example is the way to get a filled table at once. Where the random values and the subtractions come from is explained in [Sum Rule and Probability Tables](!#sum-rule-and-probability-tables).`,
       before: ``,
       after: ``,
       link: '',
@@ -76,15 +68,9 @@ Both buttons provide quick ways to populate the table without manual entry. Rand
 
     obj4: {
       title: `Reading the Probability Table Structure`,
-      content: `The table follows standard contingency table layout with events as row and column headers. Rows partition by event B (top row for B, bottom row for B̄). Columns partition by event A (left column for A, right column for Ā). Each interior cell represents the joint probability of its row and column events.
+      content: `The table follows the usual layout of a contingency table. The columns are headed $A$ and $A^c$, the rows $B$ and $B^c$; the superscript $c$ marks the complement, the event not occurring, so the four white cells read $P(A \\cap B)$, $P(A^c \\cap B)$, $P(A \\cap B^c)$ and $P(A^c \\cap B^c)$. Each cell carries its notation above the box and a small **?** that opens a hint. The right-hand column, **Marginal P(B)**, holds $P(B)$ and $P(B^c)$, the sums of the two rows; the bottom row, **Marginal P(A)**, holds $P(A)$ and $P(A^c)$, the sums of the two columns; and the corner holds the **Total** $1.000$.
 
-**Event headers** appear in the leftmost column and top row, showing A, Ā, B, and B̄ in mathematical notation. The overline notation (Ā, B̄) indicates complements—events not occurring. Headers establish which combination each cell represents.
-
-**Interior cells** contain editable joint probabilities with white backgrounds. These four cells partition the sample space into mutually exclusive, exhaustive events. Exactly one of these four outcomes must occur in any trial.
-
-**Marginal cells** have yellow backgrounds distinguishing them from joint probabilities. Right column marginals sum across rows; bottom row marginals sum down columns. These read-only cells update automatically as joint probabilities change.
-
-The table's grid structure makes probability relationships visible: row sums, column sums, and the total sum all maintain probability axioms. This visual organization clarifies how joint probabilities relate to marginals through summation.`,
+The event names in the headers are the ones typed in the **Event 1** and **Event 2** boxes above the table, so with "Rain" and "Cloudy" the first cell reads $P(\\text{Rain} \\cap \\text{Cloudy})$. Typing two cells of a row fills its marginal, and **Clear All** empties the whole grid again. The layout is explained in [Sum Rule and Probability Tables](!#sum-rule-and-probability-tables).`,
       before: ``,
       after: ``,
       link: '',
@@ -92,15 +78,9 @@ The table's grid structure makes probability relationships visible: row sums, co
 
     obj5: {
       title: `Interpreting Tooltips and Mathematical Notation`,
-      content: `Hover over any question mark icon (?) next to probability notation to see explanatory tooltips. These tooltips define what each probability represents in plain English. For P(A∩B), the tooltip reads "Probability of both A and B occurring." For P(Ā∩B̄), it explains "Probability of neither A nor B occurring."
+      content: `Every header and cell has a small **?** beside its notation. Hovering over it opens a hint: for a column header, which outcomes the column collects ("Column for outcomes where A occurs"); for a joint cell, that it is a joint probability and what it means ("Both A and B occur"), with the current value of the box once one is typed; for a marginal box, that it is the sum of its row or column, with the formula. Move the pointer away and the hint closes.
 
-The **intersection symbol** ∩ denotes "and"—both events happening simultaneously. P(A∩B) means A and B both occur. This differs from union (∪, meaning "or") which isn't used in this table since cells represent exclusive combinations.
-
-The **overline** (Ā, B̄) represents complement—the event not occurring. Ā means "not A" or "A does not occur." Every event splits into event and complement with probabilities summing to 1: P(A) + P(Ā) = 1.
-
-**Marginal notation** appears as "Marginal A" or "Marginal B" in bold, indicating these are totals summed over the other event. Tooltips explain "Total probability for event A (sum of column)" to clarify these represent unconditional probabilities obtained by summing joint probabilities.
-
-The notation uses standard probability theory conventions. Understanding ∩ for intersection and overline for complement is essential for reading any probability table or formula.`,
+The notation uses $\\cap$ for "and" and the superscript $c$ for the complement: $P(A^c \\cap B)$ is the probability that $A$ does not occur while $B$ does. The names inside the symbols follow the **Event 1** and **Event 2** boxes, so renaming $A$ to "Rain" turns every $P(A \\ldots)$ into $P(\\text{Rain} \\ldots)$. The symbols are explained in [Joint vs Marginal vs Conditional Probability](!#joint-vs-marginal-vs-conditional-probability).`,
       before: ``,
       after: ``,
       link: '',
@@ -116,7 +96,9 @@ Joint probabilities satisfy probability axioms: they're non-negative (≥0) and 
 
 Joint distributions specify complete probabilistic relationships between events. Knowing all joint probabilities allows calculating any related probability: marginals, conditionals, unions, or intersections. The joint distribution contains maximum information about how events relate.
 
-For comprehensive theory on joint probability including derivations, properties, and applications to multiple events, see **joint probability theory**.`,
+For comprehensive theory on joint probability including derivations, properties, and applications to multiple events, see [joint probability theory](!/probability/joint-probability#definition).
+
+The lesson defines it in [Definition](!/probability/joint-probability#definition) and [Notation](!/probability/joint-probability#notation), and covers the computations in [Calculating joint probabilities](!/probability/joint-probability#calculate).`,
       before: ``,
       after: ``,
       link: '',
@@ -132,7 +114,9 @@ For comprehensive theory on joint probability including derivations, properties,
 
 These three probability types answer different questions using the same underlying joint distribution. Joint probabilities are most fundamental—they determine both marginals (through summation) and conditionals (through division). This table displays joint and marginal probabilities; conditionals require additional calculation.
 
-The calculator doesn't compute conditionals directly, but you can calculate them manually: divide any joint probability by its corresponding marginal. For example, P(A|B) = P(A∩B)/P(B) using values from the table.`,
+The calculator doesn't compute conditionals directly, but you can calculate them manually: divide any joint probability by its corresponding marginal. For example, P(A|B) = P(A∩B)/P(B) using values from the table.
+
+The three are compared in [Marginal probability](!/probability/joint-probability#marginal) and [From joint to conditional](!/probability/joint-probability#conditional); the conditional formula is in [The conditional probability formula](!/probability/conditional-probability#formula) and the independence case in [Independence](!/probability/joint-probability#independence).`,
       before: ``,
       after: ``,
       link: '',
@@ -148,7 +132,9 @@ This rule explains how marginal probabilities in the table's edges derive from j
 
 The sum rule connects joint and marginal distributions, allowing you to work backward and forward. Given marginals and independence, you can construct joints (P(A∩B) = P(A)×P(B) when independent). Given joints, you compute marginals through summation.
 
-Understanding the sum rule clarifies why the table has its specific structure: interior cells represent joint probabilities, edge cells show marginals computed by summing, and the corner displays the total sum verifying probability axioms.`,
+Understanding the sum rule clarifies why the table has its specific structure: interior cells represent joint probabilities, edge cells show marginals computed by summing, and the corner displays the total sum verifying probability axioms.
+
+The rule is taught as [The law of total probability](!/probability/total-probability#law) and applied to tables in [Joint probability tables](!/probability/joint-probability#tables).`,
       before: ``,
       after: ``,
       link: '',
@@ -170,7 +156,27 @@ Understanding the sum rule clarifies why the table has its specific structure: i
 
 **Multinomial Distribution Calculator** - Handle multiple categorical events with joint probabilities over many categories.
 
-**Contingency Table Analysis** - Perform chi-square tests and compute measures of association for categorical data.`,
+**Contingency Table Analysis** - Perform chi-square tests and compute measures of association for categorical data.
+
+The theory behind these tools is taught in [Joint probability tables](!/probability/joint-probability#tables), [From joint to conditional](!/probability/joint-probability#conditional) and [Independence](!/probability/independence#definition).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj10: {
+      title: `Naming the Events`,
+      content: `The two boxes above the buttons, **Event 1** and **Event 2**, hold the names of the events, $A$ and $B$ when the page opens. Type any short label, "Rain" and "Cloudy" for example, and every header, cell notation, hint and message is rewritten with it at once: the columns become Rain and Rain$^c$, the first cell $P(\\text{Rain} \\cap \\text{Cloudy})$, the marginal row Marginal P(Rain). The numbers are not touched by a rename.
+
+Short names keep the table readable, since each appears several times in every cell. The names are also used in the validation messages, so "P(Rain) = 1.100 is invalid" names the margin that went wrong. What the two events and their complements stand for is explained in [What is Joint Probability?](!#what-is-joint-probability).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj11: {
+      title: `Reading the Validation Messages`,
+      content: `A message box appears above the table as soon as the numbers break a rule, and disappears when they are corrected. A red **Invalid** message names the rule: a joint cell larger than its marginal ("$P(A \\cap B) = 0.600$ cannot exceed $P(A) = 0.500$"), a marginal outside $0$ to $1$, a typed marginal that disagrees with the sum of its cells, a pair of complements that does not add up to $1.000$, or four joint cells whose sum exceeds $1$ ("Sum of joint probabilities is $1.400$, which exceeds 1"). Typing $0.6$ and $0.5$ in the top row, for example, makes $P(B) = 1.100$ and is refused; lowering the first cell to $0.4$ clears the message.
+
+The checks run on every keystroke, so a message may appear halfway through typing a number and vanish once it is complete. They enforce the axioms that every probability lies between $0$ and $1$ and that the four joint probabilities partition the sample space. Why these rules hold is explained in [Sum Rule and Probability Tables](!#sum-rule-and-probability-tables).`,
       before: ``,
       after: ``,
       link: '',
@@ -290,12 +296,153 @@ Understanding the sum rule clarifies why the table has its specific structure: i
     content: ``
   }
 
+  const detailInstructions = [
+    `Type the names of the two events in **Event 1** and **Event 2**; every header and cell notation follows them. [Learn more about naming the events](!#naming-the-events)`,
+    `Type decimals from 0 to 1 in the four white cells; once two values of a row or column are known the third is filled in, and the margins follow. [Learn more about entering joint probabilities](!#entering-joint-probabilities)`,
+    `Or type the margins, **P(A)** and **P(B)** with one joint probability, and let the calculator fill the cells. [Learn more about the marginal probabilities](!#understanding-marginal-probabilities)`,
+    `Click **Generate Random Example** for a valid table at once, **Calculate from Marginals** to build the cells from the margins, or **Clear All** to start again. [Learn more about the buttons](!#using-the-random-calculate-from-marginals-and-clear-all-buttons)`,
+    `Read the table: joint cells in the middle, **Marginal P(B)** on the right, **Marginal P(A)** at the bottom, the **Total** in the corner. [Learn more about the table](!#reading-the-probability-table-structure)`,
+    `Hover a **?** for the meaning of a header, cell or margin and its current value. [Learn more about the hints](!#interpreting-tooltips-and-mathematical-notation)`,
+    `Watch the message box above the table: a red message names the rule a value breaks. [Learn more about the messages](!#reading-the-validation-messages)`,
+  ];
+  const jpExplanations = {
+    main: {
+      title: `What is Joint Probability?`,
+      content: `Joint probability is the chance that two events happen together, $P(A \cap B)$; the four joint cells of the table partition the sample space and add up to $1$, and each marginal is the sum of its row or column. [Learn more about joint probability](!#what-is-joint-probability)`,
+    },
+  };
+  const demos = {
+    'entering-joint-probabilities': {
+      title: 'Four cells, a sum above 1, the sum corrected',
+      scale: 0.5,
+      minHeight: 454,
+      script: [
+        { say: 'TYPE 0.3, 0.15, 0.2 and 0.35 in the four cells\nThe margins fill themselves: P(B) 0.450, P(B^c) 0.550, P(A) 0.500, P(A^c) 0.500.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 2 }, value: '0.3' },
+        { set: { css: 'input[type="text"]', nth: 3 }, value: '0.15' },
+        { set: { css: 'input[type="text"]', nth: 5 }, value: '0.2' },
+        { set: { css: 'input[type="text"]', nth: 6 }, value: '0.35' },
+        { wait: 3200 },
+        { say: 'TYPE 0.4 in the first cell\nThe margins update and the sum reads 1.100: a red message says the four cells exceed 1.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 2 }, value: '0.4' },
+        { wait: 3000 },
+        { say: 'TYPE 0.3 in the first cell again\nThe sum is 1.000 and the message is gone.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 2 }, value: '0.3' },
+        { wait: 2800 },
+      ],
+    },
+    'understanding-marginal-probabilities': {
+      title: 'Margins first, then one joint cell',
+      scale: 0.5,
+      minHeight: 454,
+      script: [
+        { say: 'TYPE 0.5 as P(A)\nIts complement P(A^c) = 0.500 is written at once.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 8 }, value: '0.5' },
+        { wait: 2800 },
+        { say: 'TYPE 0.45 as P(B)\nP(B^c) = 0.550 follows.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 4 }, value: '0.45' },
+        { wait: 2800 },
+        { say: 'TYPE 0.3 as P(A ∩ B)\nThe other three cells fill in: 0.200, 0.150, 0.350.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 2 }, value: '0.3' },
+        { wait: 3200 },
+      ],
+    },
+    'using-the-random-calculate-from-marginals-and-clear-all-buttons': {
+      title: 'A random example, Clear All, another example',
+      scale: 0.5,
+      minHeight: 454,
+      script: [
+        { say: 'CLICK Generate Random Example\nFour random joint cells that add up to 1.000; the margins follow.', at: 'tr' },
+        { click: { button: 'Generate Random Example', exact: true } },
+        { wait: 3000 },
+        { say: 'CLICK Clear All\nEvery box is empty again.', at: 'tr' },
+        { click: { button: 'Clear All', exact: true } },
+        { wait: 2600 },
+        { say: 'CLICK Generate Random Example\nAnother valid table.', at: 'tr' },
+        { click: { button: 'Generate Random Example', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+    'reading-the-probability-table-structure': {
+      title: 'Named events, a filled row, the grid cleared',
+      scale: 0.5,
+      minHeight: 454,
+      script: [
+        { say: 'TYPE Rain and Cloudy as the event names\nThe headers read Rain, Rain^c, Cloudy, Cloudy^c.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 0 }, value: 'Rain' },
+        { set: { css: 'input[type="text"]', nth: 1 }, value: 'Cloudy' },
+        { wait: 2800 },
+        { say: 'TYPE 0.3 and 0.15 in the top row\nThe row margin P(Cloudy) reads 0.450.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 2 }, value: '0.3' },
+        { set: { css: 'input[type="text"]', nth: 3 }, value: '0.15' },
+        { wait: 3000 },
+        { say: 'CLICK Clear All\nThe grid is empty; the names stay.', at: 'tr' },
+        { click: { button: 'Clear All', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'interpreting-tooltips-and-mathematical-notation': {
+      title: 'Two hints, then renamed notation',
+      scale: 0.5,
+      minHeight: 454,
+      script: [
+        { say: 'HOVER the ? of the first column header\nThe hint: Event A, the column for outcomes where A occurs.', at: 'tr' },
+        { hover: { text: '?', css: 'th div', exact: true } },
+        { wait: 2800 },
+        { say: 'TYPE 0.3 in the first cell, HOVER its ?\nJoint Probability: both A and B occur; Current: 0.3.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 2 }, value: '0.3' },
+        { hover: { text: '?', css: 'td div', exact: true } },
+        { wait: 3000 },
+        { say: 'TYPE Rain as Event 1\nEvery notation now reads P(Rain ∩ B), P(Rain^c ∩ B) and so on.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 0 }, value: 'Rain' },
+        { wait: 2800 },
+      ],
+    },
+    'naming-the-events': {
+      title: 'Two names and a cell',
+      scale: 0.5,
+      minHeight: 454,
+      script: [
+        { say: 'TYPE Rain as Event 1\nThe columns become Rain and Rain^c.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 0 }, value: 'Rain' },
+        { wait: 2600 },
+        { say: 'TYPE Cloudy as Event 2\nThe rows become Cloudy and Cloudy^c; the first cell reads P(Rain ∩ Cloudy).', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 1 }, value: 'Cloudy' },
+        { wait: 2600 },
+        { say: 'TYPE 0.3 in the first cell\nA value for P(Rain ∩ Cloudy); the numbers are independent of the names.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 2 }, value: '0.3' },
+        { wait: 2800 },
+      ],
+    },
+    'reading-the-validation-messages': {
+      title: 'A margin above 1, corrected, then four cells above 1',
+      scale: 0.5,
+      minHeight: 454,
+      script: [
+        { say: 'TYPE 0.6 and 0.5 in the top row\nP(B) would be 1.100: a red message.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 2 }, value: '0.6' },
+        { set: { css: 'input[type="text"]', nth: 3 }, value: '0.5' },
+        { wait: 3000 },
+        { say: 'TYPE 0.4 in the first cell\nP(B) = 0.900: the message is gone.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 2 }, value: '0.4' },
+        { wait: 2800 },
+        { say: 'TYPE 0.3 and 0.2 in the second row\nThe four cells add up to 1.400: the sum message.', at: 'tr' },
+        { set: { css: 'input[type="text"]', nth: 5 }, value: '0.3' },
+        { set: { css: 'input[type="text"]', nth: 6 }, value: '0.2' },
+        { wait: 3000 },
+      ],
+    },
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      detailInstructions,
+      jpExplanations,
+      demos,
       seoData: {
         title: "Joint Probability Calculator | 2x2 Probability Table Tool",
         description: "Calculate joint and marginal probabilities for two events with interactive 2x2 probability table. Includes validation, random generation, and tooltips.",
@@ -307,14 +454,34 @@ Understanding the sum rule clarifies why the table has its specific structure: i
   }
 }
 
-export default function JointProbabilityCalculatorPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function JointProbabilityCalculatorPage({seoData, sectionsContent, introContent, faqQuestions, schemas, detailInstructions = [], jpExplanations = null, demos = {}}) {
 
-  const genericSections = Object.keys(sectionsContent).map((key, index) => ({
-    id: `${index + 1}`,
-    title: sectionsContent[key].title,
-    link: sectionsContent[key].link,
-    content: [sectionsContent[key].content]
-  }))
+  const demoPlayer = (slug) => (
+    <ToolDemoPlayer
+      key={`demo-${slug}`}
+      script={demos[slug].script}
+      title={demos[slug].title}
+      label={`Demo: ${demos[slug].title}`}
+      scale={demos[slug].scale || 0.5}
+      minHeight={demos[slug].minHeight || undefined}
+      renderText={processContent}
+    >
+      <JointProbability2x2Table explanations={jpExplanations || undefined} />
+    </ToolDemoPlayer>
+  )
+  const genericSections = [
+    { id: 'naming-the-events', title: sectionsContent.obj10.title, link: sectionsContent.obj10.link, content: [demoPlayer('naming-the-events'), sectionsContent.obj10.content] },
+    { id: 'entering-joint-probabilities', title: sectionsContent.obj1.title, link: sectionsContent.obj1.link, content: [demoPlayer('entering-joint-probabilities'), sectionsContent.obj1.content] },
+    { id: 'understanding-marginal-probabilities', title: sectionsContent.obj2.title, link: sectionsContent.obj2.link, content: [demoPlayer('understanding-marginal-probabilities'), sectionsContent.obj2.content] },
+    { id: 'using-the-random-calculate-from-marginals-and-clear-all-buttons', title: sectionsContent.obj3.title, link: sectionsContent.obj3.link, content: [demoPlayer('using-the-random-calculate-from-marginals-and-clear-all-buttons'), sectionsContent.obj3.content] },
+    { id: 'reading-the-probability-table-structure', title: sectionsContent.obj4.title, link: sectionsContent.obj4.link, content: [demoPlayer('reading-the-probability-table-structure'), sectionsContent.obj4.content] },
+    { id: 'interpreting-tooltips-and-mathematical-notation', title: sectionsContent.obj5.title, link: sectionsContent.obj5.link, content: [demoPlayer('interpreting-tooltips-and-mathematical-notation'), sectionsContent.obj5.content] },
+    { id: 'reading-the-validation-messages', title: sectionsContent.obj11.title, link: sectionsContent.obj11.link, content: [demoPlayer('reading-the-validation-messages'), sectionsContent.obj11.content] },
+    { id: 'what-is-joint-probability', title: sectionsContent.obj6.title, link: sectionsContent.obj6.link, content: [sectionsContent.obj6.content] },
+    { id: 'joint-vs-marginal-vs-conditional-probability', title: sectionsContent.obj7.title, link: sectionsContent.obj7.link, content: [sectionsContent.obj7.content] },
+    { id: 'sum-rule-and-probability-tables', title: sectionsContent.obj8.title, link: sectionsContent.obj8.link, content: [sectionsContent.obj8.content] },
+    { id: 'related-probability-tools-and-calculators', title: sectionsContent.obj9.title, link: sectionsContent.obj9.link, content: [sectionsContent.obj9.content] },
+  ]
 
   return (
     <>
@@ -366,8 +533,11 @@ export default function JointProbabilityCalculatorPage({seoData, sectionsContent
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Joint Probability Calculator</h1>
+      <div style={{marginBottom:'20px'}}>
+        <ExplanationDetails instructions={detailInstructions} title='How to use Joint Probability Calculator' />
+      </div>
       <br/>
-      <JointProbability2x2Table/>
+      <JointProbability2x2Table explanations={jpExplanations || undefined} />
       <br/>
       <br/>
       <SectionTableOfContents sections={genericSections}/>

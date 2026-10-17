@@ -495,8 +495,14 @@ import '@/pages/pages.css'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import PolynomialCalculator from '../../../../app/components/calculators/algebra/polynomial/PolynomialCalculator'
 import { useSearchParams } from 'next/navigation'
+import ExplanationDetails from '@/app/components/ExplanationDetails'
+import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
+import { processContent } from '@/app/utils/contentProcessor'
 
 
+/* calculators-mesh: finished 2026-10-16 with session-docs/methodology/linking/calculators-mesh/calculators-mesh-instructions-v1.md.
+   Registry entry "/algebra/calculators/polynomial" in calculators-mesh-registry.json (same folder): 5 usage sections, each with a demo; 8 panel notes; 18 sections with fixed slug ids.
+   Before editing this page, read the instructions and re-run its checks; keep the section ids and the anchors. */
 export async function getStaticProps(){
 
   const keyWords = [
@@ -537,7 +543,8 @@ export async function getStaticProps(){
 
 **Synthetic division** — a shortcut for dividing by a linear monic divisor $(x - c)$. Faster but more limited in scope.
 
-**Quotient and remainder** — when $P_1$ is divided by $P_2$, the result $Q$ and $R$ satisfy $P_1 = P_2 \\cdot Q + R$ with $\\deg R < \\deg P_2$.`,
+**Quotient and remainder** — when $P_1$ is divided by $P_2$, the result $Q$ and $R$ satisfy $P_1 = P_2 \\cdot Q + R$ with $\\deg R < \\deg P_2$.
+The words are defined at length in [Vocabulary](!/algebra/polynomials#2) and [Degree](!/algebra/polynomials#3) of the polynomials lesson.`,
       before: ``,
       after: ``,
       link: '',
@@ -557,7 +564,8 @@ The layout has three main areas:
 
 To switch input modes, use the **Keypad / Slots** toggle above the polynomial list. The two modes are interchangeable for the same polynomial &mdash; pick whichever feels faster for the polynomial you&apos;re entering.
 
-The URL supports an **&apos;op&apos;** query parameter: append &apos;?op=3&apos; to land directly on the Multiply tab, &apos;?op=4&apos; for Long division, and so on. The numbers follow the order of the operation strip.`,
+The URL supports an **&apos;op&apos;** query parameter: append &apos;?op=3&apos; to land directly on the Multiply tab, &apos;?op=4&apos; for Long division, and so on. The numbers follow the order of the operation strip.
+The strip holds eight buttons: Add, Subtract, Multiply, Long division, Synthetic, Factor, Find zeros and Simplify; clicking one loads that operation's example polynomials, its result and its steps, so the Subtract button shows $3x^2 + 2x - 5$ and $x^2 - 4x + 1$ with the difference $2x^2 + 6x - 6$, and Long division shows a Dividend and a Divisor with the quotient $x^2 - x - 1$ and the remainder $3$. What each operation does is explained in [The Eight Operations](!#the-eight-operations) and in the theory sections below, starting with [Adding and Subtracting Polynomials](!#adding-and-subtracting-polynomials).`,
       before: ``,
       after: ``,
       link: '',
@@ -585,7 +593,8 @@ The URL supports an **&apos;op&apos;** query parameter: append &apos;?op=3&apos;
 
 Each operation has its own demo inputs that load when you switch to it, so you can see a worked example immediately. The **Clear** button restores those defaults.
 
-For each operation the calculator reports the **primary result**, optional **extras** (e.g., the remainder in division), and **meta info** like degree, leading coefficient, and constant term.`,
+For each operation the calculator reports the **primary result**, optional **extras** (e.g., the remainder in division), and **meta info** like degree, leading coefficient, and constant term.
+Multiply opens with three polynomials, $(x + 2)(x - 3)(2x + 1) = 2x^3 - x^2 - 13x - 6$, and is one of the operations with a Graph button; Factor opens with one box, $x^3 - 2x^2 - x + 2 = (x - 1)(x + 1)(x - 2)$; Simplify opens with $3x + 2x^2 - 5 + x - 2x^2 + 4 = 4x - 1$. In this version the result and the steps belong to each operation's example polynomials: editing a polynomial changes the input boxes, not the solution. The mathematics of every operation is explained in its own section, from [Adding Polynomials](!#adding-polynomials) to [Simplifying Polynomials](!#simplifying-polynomials).`,
       before: ``,
       after: ``,
       link: '',
@@ -613,7 +622,8 @@ For each operation the calculator reports the **primary result**, optional **ext
 
 • A live **Reads as** preview shows the polynomial built from the current slot values in math notation.
 
-Click any polynomial box in the input list to open the editor in your current mode. Press **Save** to commit, **Cancel** to discard.`,
+Click any polynomial box in the input list to open the editor in your current mode. Press **Save** to commit, **Cancel** to discard.
+The editor header names the box and the mode, for example "Editing Polynomial 1 · Keypad"; Cancel closes it with the polynomial unchanged, and the Keypad / Slots toggle decides which editor the next click opens. The notation the slots use, one coefficient per power, is explained in [Simplifying Polynomials](!#simplifying-polynomials).`,
       before: ``,
       after: ``,
       link: '',
@@ -641,7 +651,8 @@ Below the step list, three more sections give context:
 
 • **Related tools** &mdash; chips linking to related calculators and theory pages.
 
-The result card on the left shows the primary answer along with **Copy LaTeX**, **Share**, and (for graphable results) a **Graph** button.`,
+The result card on the left shows the primary answer along with **Copy LaTeX**, **Share**, and (for graphable results) a **Graph** button.
+Switching to Multiply changes the badge to that operation's step count and the About this method text to the pairwise expansion rule; Synthetic adds the **Remainder** $3$ as an extra under the quotient; Find zeros lists $x = 1$, $x = -1$, $x = 2$ with the meta info "Real roots: 3". The Copy LaTeX, Share and Graph buttons on the result card are placeholders in this version and do nothing yet. The steps of each operation are explained in the theory sections, for example [Polynomial Long Division](!#polynomial-long-division).`,
       before: ``,
       after: ``,
       link: '',
@@ -667,7 +678,8 @@ $$P_1 - P_2 = (3 - 1) x^2 + (2 - (-4)) x + (-5 - 1) = 2x^2 + 6x - 6$$
 
 The key step in subtraction is distributing the minus sign across every term of $P_2$. The single most common error is negating only the leading term and leaving the rest untouched. The calculator shows the distribution explicitly in step 1 of every subtraction.
 
-The Add and Subtract operations both support **more than two** inputs &mdash; use **+ Add another polynomial** to extend the chain.`,
+The Add and Subtract operations both support **more than two** inputs &mdash; use **+ Add another polynomial** to extend the chain.
+Each of the two operations has its own section with the worked steps: [Adding Polynomials](!#adding-polynomials) and [Subtracting Polynomials](!#subtracting-polynomials). The lesson covers them in [Adding polynomials](!/algebra/polynomials/operations#1), [Subtracting polynomials](!/algebra/polynomials/operations#2) and the summary [The four operations at a glance](!/algebra/polynomials/operations#9).`,
       before: ``,
       after: ``,
       link: '',
@@ -693,7 +705,8 @@ $$P_1 \\cdot P_2 \\cdot P_3 = (P_1 \\cdot P_2) \\cdot P_3 = P_1 \\cdot (P_2 \\cd
 
 Left-to-right grouping is usually fastest because each intermediate product stays as small as possible.
 
-For a **visual** treatment of pairwise multiplication, see the **polynomial multiplication visualizer**, which shows every $a_i b_j$ product as a colored cell in a grid, then collects like-term diagonals into the final answer.`,
+For a **visual** treatment of pairwise multiplication, see the **polynomial multiplication visualizer**, which shows every $a_i b_j$ product as a colored cell in a grid, then collects like-term diagonals into the final answer.
+The lesson works the method through in [Multiplying polynomials](!/algebra/polynomials/operations#3), the [FOIL method](!/algebra/polynomials/operations#5) and [Special products](!/algebra/polynomials/operations#4); the degree rule is in [Degree and operations](!/algebra/polynomials/operations#8).`,
       before: ``,
       after: ``,
       link: '',
@@ -729,7 +742,8 @@ The calculator implements two division algorithms.
 
 **When synthetic division does not work**: any time the divisor is not of the form $(x - c)$. A divisor like $x^2 - 1$, $2x - 3$, or $(x - 1)(x + 1)$ requires long division. The calculator&apos;s Synthetic tab assumes the divisor is monic and linear; for anything else, switch to Long division.
 
-A useful corollary &mdash; the **remainder theorem**: when dividing $P(x)$ by $(x - c)$, the remainder equals $P(c)$. This makes synthetic division a fast way to evaluate a polynomial at a point.`,
+A useful corollary &mdash; the **remainder theorem**: when dividing $P(x)$ by $(x - c)$, the remainder equals $P(c)$. This makes synthetic division a fast way to evaluate a polynomial at a point.
+Each algorithm has its own section with the example $x^3 - 2x^2 + 4$ divided by $x - 1$: [Polynomial Long Division](!#polynomial-long-division) and [Synthetic Division](!#synthetic-division). The lesson covers them in [Polynomial long division](!/algebra/polynomials/operations#6) and [Synthetic division](!/algebra/polynomials/operations#7), and the corollary in [The remainder theorem](!/algebra/polynomials/rules#1).`,
       before: ``,
       after: ``,
       link: '',
@@ -753,7 +767,8 @@ A useful corollary &mdash; the **remainder theorem**: when dividing $P(x)$ by $(
 
 **Zeros output format**: the calculator lists every root with its multiplicity, separating real and complex roots in the meta info. A double root like the &quot;1&quot; in $(x - 1)^2 (x + 2)$ counts twice in the multiplicity total but is listed once with its multiplicity called out.
 
-The **Common pitfalls** card for these operations flags issues like stopping too early, forgetting complex roots, and counting multiplicities incorrectly.`,
+The **Common pitfalls** card for these operations flags issues like stopping too early, forgetting complex roots, and counting multiplicities incorrectly.
+The two operations have their own sections with the example $x^3 - 2x^2 - x + 2$: [Factoring a Polynomial](!#factoring-a-polynomial) and [Finding the Zeros of a Polynomial](!#finding-the-zeros-of-a-polynomial). The lesson covers the strategy in [Factoring strategy](!/algebra/polynomials/factoring#10), the root methods in [Finding roots by factoring](!/algebra/polynomials/roots#5) and [The rational root theorem](!/algebra/polynomials/rules#5), and the counting theorem in [The fundamental theorem of algebra](!/algebra/polynomials/rules#11).`,
       before: ``,
       after: ``,
       link: '',
@@ -783,7 +798,8 @@ $$a_n x^n + a_{n-1} x^{n-1} + \\ldots + a_1 x + a_0$$
 
 with $a_n \\ne 0$. Coefficients of cancelled terms are not written, but if a middle term has coefficient zero you typically omit it entirely rather than writing $0 \\cdot x^k$.
 
-**When to use Simplify** vs. other operations: Simplify takes a single messy polynomial and tidies it up. If you have two or more polynomials to combine, use Add (or Subtract or Multiply) instead &mdash; those operations end in a simplified result anyway.`,
+**When to use Simplify** vs. other operations: Simplify takes a single messy polynomial and tidies it up. If you have two or more polynomials to combine, use Add (or Subtract or Multiply) instead &mdash; those operations end in a simplified result anyway.
+Standard form and the vocabulary around it are taught in [Standard form](!/algebra/polynomials#5) and [Vocabulary](!/algebra/polynomials#2) of the polynomials lesson.`,
       before: ``,
       after: ``,
       link: '',
@@ -803,17 +819,88 @@ with $a_n \\ne 0$. Coefficients of cancelled terms are not written, but if a mid
 
 **Fundamental theorem of algebra** &mdash; the existence statement behind &quot;degree $n$ polynomials have $n$ complex roots.&quot;
 
-**Calculator extensions on calculatematrix.com** &mdash; for polynomials in multiple variables, polynomial GCD, partial fraction decomposition, and other operations not in this calculator, see the dedicated **polynomial calculators** page on the sister site.`,
+**Calculator extensions on calculatematrix.com** &mdash; for polynomials in multiple variables, polynomial GCD, partial fraction decomposition, and other operations not in this calculator, see the dedicated **polynomial calculators** page on the sister site.
+The theorems named here are collected in [Key theorems](!/algebra/polynomials#11) and in the [Master toolkit of polynomial theorems](!/algebra/polynomials/rules#14).`,
       before: ``,
       after: ``,
       link: '',
     },
 
-    obj11: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj12: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj13: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj14: { title: ``, content: ``, before: ``, after: ``, link: '' },
-    obj15: { title: ``, content: ``, before: ``, after: ``, link: '' }
+    obj11: {
+      title: `Adding, Removing and Resetting Polynomials`,
+      content: `For Add, Subtract and Multiply the input card works on a list of polynomials, and the **+ Add another polynomial** button under the list appends a new box holding $x + 1$, labelled $P_3$, $P_4$ and so on, with the operation sign between the boxes. Each box beyond the second has a **✕** button on its right that removes it; with only two boxes left the button is hidden, since every one of these operations needs two inputs. Long division and Synthetic always have exactly two boxes, Dividend and Divisor, and Factor, Find zeros and Simplify have one, so the add button is not shown for them.
+
+The two buttons under the list, the operation button labelled with the operation's name and **Clear**, finish the card. **Clear** puts back the operation's example polynomials, two for Add, three for Multiply, and removes any boxes you added. The operation button is a label in this version: the result card already shows the solution for the example polynomials, and clicking the button starts nothing. Where the two example polynomials of Add come from and how they are summed is explained in [Adding Polynomials](!#adding-polynomials).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj12: {
+      title: `Adding Polynomials`,
+      content: `To add polynomials, line up the terms with the same power of $x$ and add their coefficients; the powers themselves do not change. The example loaded by the Add operation is $P_1 = 2x^2 + 3x - 1$ and $P_2 = x^2 - 5x + 4$: the $x^2$ coefficients give $2 + 1 = 3$, the $x$ coefficients $3 + (-5) = -2$, the constants $-1 + 4 = 3$, so $P_1 + P_2 = 3x^2 - 2x + 3$, of degree $2$ with leading coefficient $3$.
+
+The degree of a sum is at most the larger of the two degrees, and it is smaller when the leading terms cancel, as in $(x^2 + x) + (-x^2 + 1) = x + 1$. The common mistake is to add unlike terms, treating $x^2$ and $x$ as if they combined; a missing power is a zero coefficient and stays zero.
+
+The lesson teaches the method in [Adding polynomials](!/algebra/polynomials/operations#1) and the degree rule in [Degree and operations](!/algebra/polynomials/operations#8).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj13: {
+      title: `Subtracting Polynomials`,
+      content: `Subtraction is addition of the opposite: $P_1 - P_2 = P_1 + (-P_2)$, so every sign in the second polynomial flips before the like terms are combined. The Subtract example is $P_1 = 3x^2 + 2x - 5$ and $P_2 = x^2 - 4x + 1$: flipping gives $-x^2 + 4x - 1$, and adding gives $(3 - 1)x^2 + (2 + 4)x + (-5 - 1) = 2x^2 + 6x - 6$.
+
+The common mistake, and the one the first step of the calculator makes visible, is to negate only the first term of $P_2$ and leave the others as they are, which here would give $2x^2 - 2x - 6$ instead. Subtraction is not commutative: $P_2 - P_1 = -2x^2 - 6x + 6$, the negative of the answer above.
+
+The lesson teaches the method in [Subtracting polynomials](!/algebra/polynomials/operations#2), with the sign rule it depends on in [Degree and operations](!/algebra/polynomials/operations#8).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj14: {
+      title: `Polynomial Long Division`,
+      content: `Long division divides one polynomial by another of lower or equal degree and returns a quotient $Q$ and a remainder $R$ with $P_1 = P_2 \\cdot Q + R$ and $\\deg R < \\deg P_2$. Each round divides the leading terms, multiplies the divisor by that term, subtracts, and brings down the next term. The example is $x^3 - 2x^2 + 4$ divided by $x - 1$: $x^3 \\div x = x^2$, subtracting $x^2(x - 1)$ leaves $-x^2 + 0x$; then $-x$, leaving $-x + 4$; then $-1$, leaving the remainder $3$. So $Q = x^2 - x - 1$, $R = 3$, and the identity reads $\\dfrac{x^3 - 2x^2 + 4}{x - 1} = x^2 - x - 1 + \\dfrac{3}{x - 1}$.
+
+The missing $x$ term of the dividend is written as $0x$ so that the columns line up; forgetting the placeholder is the common mistake. Long division works for any divisor, including $x^2 - 1$ or $2x - 3$, which synthetic division cannot handle.
+
+The lesson works the algorithm in [Polynomial long division](!/algebra/polynomials/operations#6); the remainder's meaning is in [The remainder theorem](!/algebra/polynomials/rules#1).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj15: {
+      title: `Synthetic Division`,
+      content: `Synthetic division is the shortcut for dividing by a monic linear divisor $x - c$. Write the coefficients of the dividend with placeholder zeros, bring down the first, then repeat: multiply by $c$ and add to the next coefficient. For $x^3 - 2x^2 + 4$ and $x - 1$, so $c = 1$: the row $1, -2, 0, 4$ gives $1$; $1 \\cdot 1 + (-2) = -1$; $-1 \\cdot 1 + 0 = -1$; $-1 \\cdot 1 + 4 = 3$. The first three numbers are the quotient $x^2 - x - 1$ and the last is the remainder $3$, the same answer as long division in a third of the writing.
+
+The remainder equals $P(c)$: here $P(1) = 1 - 2 + 4 = 3$, which is the remainder theorem and the reason synthetic division is also a fast way to evaluate a polynomial. The common mistake is to use the sign of the divisor as written, $-1$ instead of $c = 1$ for $x - 1$, which gives a wrong row; the Synthetic tab of the calculator expects a monic divisor and falls back to long division otherwise.
+
+See [Synthetic division](!/algebra/polynomials/operations#7) in the operations lesson and [Finding roots by synthetic division](!/algebra/polynomials/roots#8) in the roots lesson.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj16: {
+      title: `Factoring a Polynomial`,
+      content: `Factoring writes a polynomial as a product of polynomials of lower degree, down to factors that cannot be split further over the real numbers. The calculator tries the strategies in a fixed order: greatest common factor, grouping, special forms, rational roots. The example $x^3 - 2x^2 - x + 2$ factors by grouping: $x^2(x - 2) - (x - 2) = (x^2 - 1)(x - 2)$, and the difference of squares finishes it, $(x - 1)(x + 1)(x - 2)$. Multiplying back, $(x - 1)(x + 1) = x^2 - 1$ and $(x^2 - 1)(x - 2) = x^3 - 2x^2 - x + 2$, checks the answer.
+
+Each linear factor $x - c$ names a zero $c$ of the polynomial, so the factored form is also the list of zeros, which is why the Factor and Find zeros operations share one algorithm. The common mistake is to stop at $(x^2 - 1)(x - 2)$ with a factor that still splits.
+
+The strategy and its order are taught in [Factoring strategy](!/algebra/polynomials/factoring#10) and [Factoring by grouping](!/algebra/polynomials/factoring#3) of the factoring lesson; the overview is [Factoring polynomials](!/algebra/polynomials#8).`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+    obj17: {
+      title: `Finding the Zeros of a Polynomial`,
+      content: `A zero of $P$ is a value $c$ with $P(c) = 0$. For a polynomial with integer coefficients the rational root theorem lists the candidates, $\\pm p/q$ with $p$ dividing the constant and $q$ dividing the leading coefficient; for $x^3 - 2x^2 - x + 2$ the candidates are $\\pm 1$ and $\\pm 2$, and testing gives $P(1) = 0$, $P(-1) = 0$, $P(2) = 0$. So the zeros are $x = 1$, $x = -1$, $x = 2$, three real roots and no complex ones, matching the factored form $(x - 1)(x + 1)(x - 2)$. A root found by testing is divided out by synthetic division and the search continues on the quotient.
+
+The fundamental theorem of algebra fixes the count: a polynomial of degree $n$ has exactly $n$ complex roots counted with multiplicity, so a cubic with three real roots has no complex ones left. The common mistake is to forget the multiplicity, counting the double root of $(x - 1)^2(x + 2)$ once.
+
+See [Finding roots by factoring](!/algebra/polynomials/roots#5), [The rational root theorem](!/algebra/polynomials/roots#7) and [Multiplicity](!/algebra/polynomials/roots#4) in the roots lesson, and [The fundamental theorem of algebra](!/algebra/polynomials/rules#11).`,
+      before: ``,
+      after: ``,
+      link: '',
+    }
 
   }
 
@@ -925,12 +1012,119 @@ with $a_n \\ne 0$. Coefficients of cancelled terms are not written, but if a mid
   }
 
 
+  const detailInstructions = [
+    `Pick an operation in the strip at the top: **Add**, **Subtract**, **Multiply**, **Long division**, **Synthetic**, **Factor**, **Find zeros** or **Simplify**; each loads its example polynomials, result and steps. [Learn more about getting started](!#getting-started)`,
+    `Read the title and the ? tooltip to see what the operation does; the Result card shows the primary answer with its degree, leading coefficient and constant. [Learn more about the eight operations](!#the-eight-operations)`,
+    `Click a polynomial box to open the editor in the current mode, **Keypad** or **Slots**, and press **Save** or **Cancel**; the toggle above the list switches the mode. [Learn more about the input modes](!#input-modes-keypad-and-slots)`,
+    `For Add, Subtract and Multiply, click **+ Add another polynomial** to append a box, **✕** to remove one, and **Clear** to restore the example polynomials. [Learn more about adding and removing polynomials](!#adding-removing-and-resetting-polynomials)`,
+    `Read the **Solution & explanation** card on the right: the numbered steps, the note on the operation, About this method, and Common pitfalls. [Learn more about the step-by-step](!#reading-the-step-by-step)`,
+  ];
+  const polynomialExplanations = {
+    add: { note: { title: 'Add', content: `Lines up like terms and sums their coefficients; the degree is at most the larger input degree. [Learn more about adding polynomials](!#adding-polynomials) · [All addition and subtraction](!#adding-and-subtracting-polynomials)` } },
+    subtract: { note: { title: 'Subtract', content: `Flips every sign of the second polynomial, then adds like terms. [Learn more about subtracting polynomials](!#subtracting-polynomials) · [All addition and subtraction](!#adding-and-subtracting-polynomials)` } },
+    multiply: { note: { title: 'Multiply', content: `Multiplies every term by every term and collects like terms; the degrees add. [Learn more about multiplying polynomials](!#multiplying-polynomials)` } },
+    long_div: { note: { title: 'Long division', content: `Divides leading terms, multiplies back, subtracts and brings down until the remainder has a smaller degree than the divisor. [Learn more about long division](!#polynomial-long-division) · [All division](!#polynomial-division-long-and-synthetic)` } },
+    synth_div: { note: { title: 'Synthetic division', content: `Divides by a monic linear divisor $x - c$ with the coefficients alone: bring down, multiply by $c$, add; the last number is the remainder $P(c)$. [Learn more about synthetic division](!#synthetic-division) · [All division](!#polynomial-division-long-and-synthetic)` } },
+    factor: { note: { title: 'Factor', content: `Tries the greatest common factor, grouping, special forms and rational roots, in that order, until every factor is irreducible. [Learn more about factoring](!#factoring-a-polynomial) · [All factoring and zeros](!#factoring-and-finding-zeros)` } },
+    zeros: { note: { title: 'Find zeros', content: `Tests the rational root candidates, divides each root out, and lists every real and complex zero with its multiplicity. [Learn more about finding zeros](!#finding-the-zeros-of-a-polynomial) · [All factoring and zeros](!#factoring-and-finding-zeros)` } },
+    simplify: { note: { title: 'Simplify', content: `Combines like terms, drops zero terms and orders the rest by descending degree. [Learn more about simplifying](!#simplifying-polynomials)` } },
+  };
+  const demos = {
+    'getting-started': {
+      title: 'Three operations from the strip',
+      scale: 0.4,
+      minHeight: 451,
+      script: [
+        { say: 'CLICK Subtract\nTwo new polynomials, 3x² + 2x − 5 and x² − 4x + 1; the Difference 2x² + 6x − 6.', at: 'tr' },
+        { click: { button: 'Subtract', exact: true } },
+        { wait: 3000 },
+        { say: 'CLICK Long division\nDividend and Divisor boxes; Quotient x² − x − 1, Remainder 3.', at: 'tr' },
+        { click: { button: 'Long division', exact: true } },
+        { wait: 3000 },
+        { say: 'CLICK Add\nBack to the opening operation and its two polynomials.', at: 'tr' },
+        { click: { button: 'Add', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'the-eight-operations': {
+      title: 'Multiply, Factor, Simplify',
+      scale: 0.4,
+      minHeight: 451,
+      script: [
+        { say: 'CLICK Multiply\nThree boxes: (x + 2)(x − 3)(2x + 1) = 2x³ − x² − 13x − 6; a Graph button appears.', at: 'tr' },
+        { click: { button: 'Multiply', exact: true } },
+        { wait: 3000 },
+        { say: 'CLICK Factor\nOne box: x³ − 2x² − x + 2 = (x − 1)(x + 1)(x − 2).', at: 'tr' },
+        { click: { button: 'Factor', exact: true } },
+        { wait: 3000 },
+        { say: 'CLICK Simplify\n3x + 2x² − 5 + x − 2x² + 4 = 4x − 1; the x² terms cancel.', at: 'tr' },
+        { click: { button: 'Simplify', exact: true } },
+        { wait: 2800 },
+      ],
+    },
+    'input-modes-keypad-and-slots': {
+      title: 'The Keypad editor, then the Slots editor',
+      scale: 0.4,
+      minHeight: 451,
+      script: [
+        { say: 'CLICK the first polynomial box\nThe Keypad editor opens: Editing Polynomial 1 · Keypad, with the power dial and the digit grid.', at: 'tr' },
+        { click: { css: '.pcalc-poly-box', nth: 0 } },
+        { wait: 3000 },
+        { say: 'CLICK Cancel\nThe editor closes; the polynomial is unchanged.', at: 'tr' },
+        { click: { button: 'Cancel', exact: true } },
+        { wait: 2400 },
+        { say: 'CLICK Slots, then the first box\nThe Slots editor: one coefficient per power, Degree + and −, a Reads as preview.', at: 'tr' },
+        { click: { css: '.pcalc-mode-toggle button', nth: 1 } },
+        { click: { css: '.pcalc-poly-box', nth: 0 } },
+        { wait: 3000 },
+        { say: 'CLICK Cancel\nBack to the list; the toggle stays on Slots.', at: 'tr' },
+        { click: { button: 'Cancel', exact: true } },
+        { wait: 2400 },
+      ],
+    },
+    'adding-removing-and-resetting-polynomials': {
+      title: 'Two boxes added, then Clear',
+      scale: 0.4,
+      minHeight: 451,
+      script: [
+        { say: 'CLICK + Add another polynomial\nA third box, P₃ = x + 1, joins the sum.', at: 'tr' },
+        { click: { button: '+ Add another polynomial', exact: true } },
+        { wait: 2800 },
+        { say: 'CLICK + Add another polynomial\nA fourth box; each extra box has a ✕ button.', at: 'tr' },
+        { click: { button: '+ Add another polynomial', exact: true } },
+        { wait: 2800 },
+        { say: 'CLICK Clear\nBack to the two example polynomials of Add.', at: 'tr' },
+        { click: { button: 'Clear', exact: true } },
+        { wait: 2600 },
+      ],
+    },
+    'reading-the-step-by-step': {
+      title: 'The steps for Multiply, Synthetic and Find zeros',
+      scale: 0.4,
+      minHeight: 451,
+      script: [
+        { say: 'CLICK Multiply\nThe step badge changes; About this method explains the pairwise expansion.', at: 'tr' },
+        { click: { button: 'Multiply', exact: true } },
+        { wait: 3000 },
+        { say: 'CLICK Synthetic\nThe Result card adds Remainder: 3 under the quotient; the steps show the coefficient row.', at: 'tr' },
+        { click: { button: 'Synthetic', exact: true } },
+        { wait: 3000 },
+        { say: 'CLICK Find zeros\nZeros x = 1, x = −1, x = 2; Real roots: 3, Complex roots: 0.', at: 'tr' },
+        { click: { button: 'Find zeros', exact: true } },
+        { wait: 3000 },
+      ],
+    },
+  };
+
   return {
     props: {
       sectionsContent,
       introContent,
       faqQuestions,
       schemas,
+      detailInstructions,
+      polynomialExplanations,
+      demos,
       seoData: {
         title: "Polynomial Calculator: All Operations | Learn Math Class",
         description: "Add, subtract, multiply, divide, factor, or simplify polynomials with full step-by-step solutions. Switch between long division and synthetic for any divisor.",
@@ -989,142 +1183,44 @@ with $a_n \\ne 0$. Coefficients of cancelled terms are not written, but if a mid
   }
 }
 
-export default function PolynomialCalculatorPage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+export default function PolynomialCalculatorPage({seoData, sectionsContent, introContent, faqQuestions, schemas, detailInstructions = [], polynomialExplanations = null, demos = {}}) {
 
   const params = useSearchParams()
   const op = parseInt(params?.get('op'), 10) || 1
 
 
+  const demoPlayer = (slug) => (
+    <ToolDemoPlayer
+      key={`demo-${slug}`}
+      script={demos[slug].script}
+      title={demos[slug].title}
+      label={`Demo: ${demos[slug].title}`}
+      scale={demos[slug].scale || 0.4}
+      minHeight={demos[slug].minHeight || undefined}
+      renderText={processContent}
+    >
+      <PolynomialCalculator initialOperation={1} explanations={polynomialExplanations || undefined} />
+    </ToolDemoPlayer>
+  )
   const genericSections = [
-    {
-      id: '0',
-      title: sectionsContent.obj0.title,
-      link: sectionsContent.obj0.link,
-      content: [
-        sectionsContent.obj0.content,
-      ]
-    },
-    {
-      id: '1',
-      title: sectionsContent.obj1.title,
-      link: sectionsContent.obj1.link,
-      content: [
-        sectionsContent.obj1.content,
-      ]
-    },
-    {
-      id: '2',
-      title: sectionsContent.obj2.title,
-      link: sectionsContent.obj2.link,
-      content: [
-        sectionsContent.obj2.content,
-      ]
-    },
-    {
-      id: '3',
-      title: sectionsContent.obj3.title,
-      link: sectionsContent.obj3.link,
-      content: [
-        sectionsContent.obj3.content,
-      ]
-    },
-    {
-      id: '4',
-      title: sectionsContent.obj4.title,
-      link: sectionsContent.obj4.link,
-      content: [
-        sectionsContent.obj4.content,
-      ]
-    },
-    {
-      id: '5',
-      title: sectionsContent.obj5.title,
-      link: sectionsContent.obj5.link,
-      content: [
-        sectionsContent.obj5.content,
-      ]
-    },
-    {
-      id: '6',
-      title: sectionsContent.obj6.title,
-      link: sectionsContent.obj6.link,
-      content: [
-        sectionsContent.obj6.content,
-      ]
-    },
-    {
-      id: '7',
-      title: sectionsContent.obj7.title,
-      link: sectionsContent.obj7.link,
-      content: [
-        sectionsContent.obj7.content,
-      ]
-    },
-    {
-      id: '8',
-      title: sectionsContent.obj8.title,
-      link: sectionsContent.obj8.link,
-      content: [
-        sectionsContent.obj8.content,
-      ]
-    },
-    {
-      id: '9',
-      title: sectionsContent.obj9.title,
-      link: sectionsContent.obj9.link,
-      content: [
-        sectionsContent.obj9.content,
-      ]
-    },
-    {
-      id: '10',
-      title: sectionsContent.obj10.title,
-      link: sectionsContent.obj10.link,
-      content: [
-        sectionsContent.obj10.content,
-      ]
-    },
-    // {
-    //     id:'11',
-    //     title:sectionsContent.obj11.title,
-    //     link:sectionsContent.obj11.link,
-    //     content:[
-    //       sectionsContent.obj11.content,
-    //     ]
-    // },
-    // {
-    //     id:'12',
-    //     title:sectionsContent.obj12.title,
-    //     link:sectionsContent.obj12.link,
-    //     content:[
-    //       sectionsContent.obj12.content,
-    //     ]
-    // },
-    // {
-    //     id:'13',
-    //     title:sectionsContent.obj13.title,
-    //     link:sectionsContent.obj13.link,
-    //     content:[
-    //       sectionsContent.obj13.content,
-    //     ]
-    // },
-    // {
-    //     id:'14',
-    //     title:sectionsContent.obj14.title,
-    //     link:sectionsContent.obj14.link,
-    //     content:[
-    //       sectionsContent.obj14.content,
-    //     ]
-    // },
-    // {
-    //     id:'15',
-    //     title:sectionsContent.obj15.title,
-    //     link:sectionsContent.obj15.link,
-    //     content:[
-    //       sectionsContent.obj15.content,
-    //     ]
-    // },
-
+    { id: 'key-terms', title: sectionsContent.obj0.title, link: sectionsContent.obj0.link, content: [sectionsContent.obj0.content] },
+    { id: 'getting-started', title: sectionsContent.obj1.title, link: sectionsContent.obj1.link, content: [demoPlayer('getting-started'), sectionsContent.obj1.content] },
+    { id: 'the-eight-operations', title: sectionsContent.obj2.title, link: sectionsContent.obj2.link, content: [demoPlayer('the-eight-operations'), sectionsContent.obj2.content] },
+    { id: 'input-modes-keypad-and-slots', title: sectionsContent.obj3.title, link: sectionsContent.obj3.link, content: [demoPlayer('input-modes-keypad-and-slots'), sectionsContent.obj3.content] },
+    { id: 'adding-removing-and-resetting-polynomials', title: sectionsContent.obj11.title, link: sectionsContent.obj11.link, content: [demoPlayer('adding-removing-and-resetting-polynomials'), sectionsContent.obj11.content] },
+    { id: 'reading-the-step-by-step', title: sectionsContent.obj4.title, link: sectionsContent.obj4.link, content: [demoPlayer('reading-the-step-by-step'), sectionsContent.obj4.content] },
+    { id: 'adding-and-subtracting-polynomials', title: sectionsContent.obj5.title, link: sectionsContent.obj5.link, content: [sectionsContent.obj5.content] },
+    { id: 'adding-polynomials', title: sectionsContent.obj12.title, link: sectionsContent.obj12.link, content: [sectionsContent.obj12.content] },
+    { id: 'subtracting-polynomials', title: sectionsContent.obj13.title, link: sectionsContent.obj13.link, content: [sectionsContent.obj13.content] },
+    { id: 'multiplying-polynomials', title: sectionsContent.obj6.title, link: sectionsContent.obj6.link, content: [sectionsContent.obj6.content] },
+    { id: 'polynomial-division-long-and-synthetic', title: sectionsContent.obj7.title, link: sectionsContent.obj7.link, content: [sectionsContent.obj7.content] },
+    { id: 'polynomial-long-division', title: sectionsContent.obj14.title, link: sectionsContent.obj14.link, content: [sectionsContent.obj14.content] },
+    { id: 'synthetic-division', title: sectionsContent.obj15.title, link: sectionsContent.obj15.link, content: [sectionsContent.obj15.content] },
+    { id: 'factoring-and-finding-zeros', title: sectionsContent.obj8.title, link: sectionsContent.obj8.link, content: [sectionsContent.obj8.content] },
+    { id: 'factoring-a-polynomial', title: sectionsContent.obj16.title, link: sectionsContent.obj16.link, content: [sectionsContent.obj16.content] },
+    { id: 'finding-the-zeros-of-a-polynomial', title: sectionsContent.obj17.title, link: sectionsContent.obj17.link, content: [sectionsContent.obj17.content] },
+    { id: 'simplifying-polynomials', title: sectionsContent.obj9.title, link: sectionsContent.obj9.link, content: [sectionsContent.obj9.content] },
+    { id: 'related-concepts-and-tools', title: sectionsContent.obj10.title, link: sectionsContent.obj10.link, content: [sectionsContent.obj10.content] },
   ]
 
   return (
@@ -1180,9 +1276,12 @@ export default function PolynomialCalculatorPage({seoData, sectionsContent, intr
       <br/>
       <br/>
       <h1 className='title' style={{marginTop:'0px',marginBottom:'-50px'}}>Polynomial Calculator</h1>
+      <div style={{marginTop:'60px',marginBottom:'20px'}}>
+        <ExplanationDetails instructions={detailInstructions} title='How to use Polynomial Calculator' />
+      </div>
       <br/>
       <div style={{transform:'scale(0.9)'}}>
-      <PolynomialCalculator initialOperation={op} />
+      <PolynomialCalculator initialOperation={op} explanations={polynomialExplanations || undefined} />
       </div>
       <br/>
       <SectionTableOfContents sections={genericSections}

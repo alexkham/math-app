@@ -2,8 +2,9 @@
 'use client';
 import React, { useState } from 'react';
 import styles from './PercentageCalculator.module.css';
+import { processContent } from '@/app/utils/contentProcessor';
 
-function PercentageCalculator() {
+function PercentageCalculator({ explanations = null }) {
   const [mode, setMode] = useState('percentageOf');
   const [number1, setNumber1] = useState('');
   const [number2, setNumber2] = useState('');
@@ -114,6 +115,11 @@ function PercentageCalculator() {
         return '';
     }
   };
+
+  // page text for the current state: the Add/Subtract option first (mode:option), then the mode; null without the prop
+  const pageText = explanations
+    ? (explanations[mode + ':' + addSubtractOption] || explanations[mode] || null)
+    : null;
 
   return (
     <div className={styles.container}>
@@ -252,7 +258,12 @@ function PercentageCalculator() {
       </div>
       <br></br>
       <div className={styles.explanation}>
-        {getExplanation()}
+        {pageText ? (
+          <>
+            {pageText.title && <div><strong>{pageText.title}</strong></div>}
+            {typeof pageText.content === 'string' ? processContent(pageText.content) : pageText.content}
+          </>
+        ) : getExplanation()}
       </div>
     </div>
   );

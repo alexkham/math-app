@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
+import { processContent } from '@/app/utils/contentProcessor';
 
-export default function NormalDistributionCalculator({ links }) {
+// explanation panel (texts come from the page through the explanations prop; without it the component renders exactly as before)
+const PANEL = {
+  wrapper: { display: 'flex', gap: '24px', alignItems: 'flex-start', flexWrap: 'wrap' },
+  main: { flex: '1 1 420px', minWidth: 0 },
+  sidebar: { flex: '0 1 320px', display: 'flex', flexDirection: 'column', gap: '16px', paddingTop: '20px' },
+  panel: { backgroundColor: '#f0f6ff', borderRadius: '10px', border: '1px solid #dbeafe', padding: '18px' },
+  panelTitle: { margin: '0 0 8px', fontSize: '17px', color: '#1e3a5f' },
+  panelText: { margin: 0, fontSize: '14.5px', lineHeight: 1.6, color: '#1e3a5f' },
+};
+
+export default function NormalDistributionCalculator({ links, explanations = null }) {
   const [mean, setMean] = useState('');
   const [stdDev, setStdDev] = useState('');
   const [x1, setX1] = useState('');
@@ -414,7 +425,7 @@ export default function NormalDistributionCalculator({ links }) {
      (needsRange && x1 !== '' && x2 !== '' && !errors.x1 && !errors.x2) ||
      (needsSingleValue && x1 !== '' && !errors.x1));
 
-  return (
+  const inner = (
     <div style={{
       minHeight: '100vh',
       padding: '20px',
@@ -939,6 +950,19 @@ export default function NormalDistributionCalculator({ links }) {
               </div>
             )}
           </div>
+        </div>
+      </div>
+    </div>
+  );
+  const panelText = explanations ? (explanations[queryType] || explanations.main || null) : null;
+  if (!panelText) return inner;
+  return (
+    <div style={PANEL.wrapper}>
+      <div style={PANEL.main}>{inner}</div>
+      <div style={PANEL.sidebar}>
+        <div style={PANEL.panel}>
+          <h3 style={PANEL.panelTitle}>{panelText.title}</h3>
+          <div style={PANEL.panelText}>{typeof panelText.content === 'string' ? processContent(panelText.content) : panelText.content}</div>
         </div>
       </div>
     </div>
