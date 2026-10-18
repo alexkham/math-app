@@ -237,11 +237,12 @@ For [definite integrals](!/calculus/integrals/definite), correct setup is essent
 
 **Determine bounds:** Where does accumulation begin and end?
 
-**Example:** Find the area under $y = x^2$ from $x = 0$ to $x = 3$.
+@academic[example:Example
+Find the area under $y = x^2$ from $x = 0$ to $x = 3$.
 
 $$\\text{Area} = \\int_0^3 x^2\\, dx = \\frac{x^3}{3}\\Big|_0^3 = \\frac{27}{3} - 0 = 9$$
 
-Check reasonableness: the area should be positive and between $0 \\cdot 3 = 0$ and $9 \\cdot 3 = 27$.
+Check reasonableness: the area should be positive and between $0 \\cdot 3 = 0$ and $9 \\cdot 3 = 27$.]@
 `,
     before: ``,
     after: ``,
@@ -273,11 +274,12 @@ Split the integral at boundaries between pieces and apply [additivity](!/calculu
 
 $$\\int_a^c f(x)\\, dx = \\int_a^b f(x)\\, dx + \\int_b^c f(x)\\, dx$$
 
-**Example:** For $f(x) = \\begin{cases} x^2 & x < 1 \\\\ 2x & x \\geq 1 \\end{cases}$, evaluate $\\int_0^2 f(x)\\, dx$.
+@academic[example:Example
+For $f(x) = \\begin{cases} x^2 & x < 1 \\\\ 2x & x \\geq 1 \\end{cases}$, evaluate $\\int_0^2 f(x)\\, dx$.
 
 $$= \\int_0^1 x^2\\, dx + \\int_1^2 2x\\, dx = \\frac{x^3}{3}\\Big|_0^1 + x^2\\Big|_1^2$$
 
-$$= \\frac{1}{3} + (4 - 1) = \\frac{1}{3} + 3 = \\frac{10}{3}$$
+$$= \\frac{1}{3} + (4 - 1) = \\frac{1}{3} + 3 = \\frac{10}{3}$$]@
 `,
     before: ``,
     after: ``,
@@ -303,11 +305,11 @@ $$\\int_{-a}^{a} f(x)\\, dx = 0 \\quad \\text{when } f(-x) = -f(x)$$
 @academic[formulas_link:Browse all integral formulas
 /calculus/formulas]@
 
-**Example:**
+@academic[example:Example
 
 $$\\int_{-3}^{3} x^3\\, dx = 0 \\quad \\text{(odd function)}$$
 
-$$\\int_{-2}^{2} x^4\\, dx = 2\\int_0^2 x^4\\, dx = 2 \\cdot \\frac{32}{5} = \\frac{64}{5} \\quad \\text{(even function)}$$
+$$\\int_{-2}^{2} x^4\\, dx = 2\\int_0^2 x^4\\, dx = 2 \\cdot \\frac{32}{5} = \\frac{64}{5} \\quad \\text{(even function)}$$]@
 `,
     before: ``,
     after: ``,

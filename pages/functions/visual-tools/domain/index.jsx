@@ -185,7 +185,7 @@ The distinction between open and closed endpoints matters for continuity, limits
       title: `Related Concepts and Tools`,
       content: `[Range of a Function](!/functions/visual-tools/range) — the partner concept showing which outputs the function can produce. Use the companion range visualizer to see how the mirror rule works — only $a$ and $k$ (not $b$ and $h$) affect the range.
 
-**Functions** — general theory of functions, including formal definitions of domain, range, and image.
+**[Functions](!/functions/basics)** — general theory of functions, including formal definitions of domain, range, and image.
 
 [Function Transformations](!/functions/visual-tools/transformations) — visualizer for $a$, $k$, $b$, $h$ alone, useful for separating the effects of each parameter before adding the domain analysis on top.
 
@@ -195,7 +195,7 @@ The distinction between open and closed endpoints matters for continuity, limits
 
 [Asymptotes](!/functions/visual-tools/asymptotes) — vertical asymptotes correspond to excluded values in the domain (like $x = 0$ for the reciprocal). The visualizer's red × marker is one geometric expression of this idea.
 
-**Limits and Continuity** — the open/closed endpoint distinction shown in the visualizer is foundational for continuity at boundary points and for one-sided limits.
+**[Limits and Continuity](!/calculus/limits)** — the open/closed endpoint distinction shown in the visualizer is foundational for continuity at boundary points and for one-sided limits.
 
 [Function Composition](!/functions/visual-tools/composition) — the domain of $f \\circ g$ is narrower than the domain of $g$ whenever $g$ can produce a value $f$ rejects.
 
@@ -203,7 +203,7 @@ The distinction between open and closed endpoints matters for continuity, limits
 
 [Function Reflections](!/functions/visual-tools/reflections) — a [horizontal reflection](!/functions/transformations#6) mirrors the domain about the origin, while a [vertical reflection](!/functions/transformations#5) leaves it untouched.
 
-**Function Symmetry** — [even and odd symmetry](!/functions/visual-tools/symmetry) can only be tested on a domain that is itself symmetric about the origin.
+**[Function Symmetry](!/functions/properties#2)** — [even and odd symmetry](!/functions/visual-tools/symmetry) can only be tested on a domain that is itself symmetric about the origin.
 
 [Tangent Line Visualizer](!/functions/visual-tools/tangent-line) — a tangent line exists only where the function is defined and smooth, so the domain bounds where you can drag the point.`,
       before: ``,

@@ -977,9 +977,9 @@ The Poisson distribution is especially effective for representing rare or sponta
       after:``,
       link:'',
       example:`
-      **Example**:
+      @academic[example:Example
 
-Counting the number of emails received by a support desk in one hour when emails arrive randomly but at a stable average rate. The exact timing does not matter — only the total count within the hour.
+Counting the number of emails received by a support desk in one hour when emails arrive randomly but at a stable average rate. The exact timing does not matter — only the total count within the hour.]@
       `,
   
   
@@ -1015,7 +1015,12 @@ Counting the number of emails received by a support desk in one hour when emails
       content:`
       The **probability mass function (PMF)** of a **Poisson distribution** is given by:
 
+@academic[formula_callout:Poisson PMF
 $$P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad k = 0, 1, 2, \\ldots$$
+/probability/formulas#poisson_pmf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
  **Counting Rare Events**: The Poisson distribution models the number of events occurring in a fixed interval of time or space when events occur independently at a constant average rate.
 
@@ -1030,7 +1035,8 @@ $$P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad k = 0, 1, 2, \\ldots$$
   * $k!$: Accounts for the number of ways $k$ events can be ordered
   * The total probability sums to 1:
   
-  $$\\sum_{k=0}^{\\infty} P(X = k) = \\sum_{k=0}^{\\infty} \\frac{\\lambda^k e^{-\\lambda}}{k!} = e^{-\\lambda} \\sum_{k=0}^{\\infty} \\frac{\\lambda^k}{k!} = e^{-\\lambda} \\cdot e^{\\lambda} = 1$$
+@academic[formula_callout:Probability Mass Function (PMF) and Support (Range)
+  $$\\sum_{k=0}^{\\infty} P(X = k) = \\sum_{k=0}^{\\infty} \\frac{\\lambda^k e^{-\\lambda}}{k!} = e^{-\\lambda} \\sum_{k=0}^{\\infty} \\frac{\\lambda^k}{k!} = e^{-\\lambda} \\cdot e^{\\lambda} = 1$$]@
   
    This uses the Taylor series expansion: $e^{\\lambda} = \\sum_{k=0}^{\\infty} \\frac{\\lambda^k}{k!}$
 
@@ -1046,7 +1052,8 @@ $$P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad k = 0, 1, 2, \\ldots$$
   content:`
 The [cumulative distribution function (CDF)](!/probability/cdf) of a **Poisson distribution** is given by:
 
-$$F_X(k) = P(X \\leq k) = \\sum_{i=0}^{k} \\frac{\\lambda^i e^{-\\lambda}}{i!}$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$F_X(k) = P(X \\leq k) = \\sum_{i=0}^{k} \\frac{\\lambda^i e^{-\\lambda}}{i!}$$]@
 
 Where:
 $\\lambda$ = average rate of occurrence (expected number of events, $\\lambda > 0$)
@@ -1060,19 +1067,22 @@ $e$ = Euler's number (approximately 2.71828)
 **Summation of Probabilities**: 
 We sum the individual probabilities from 0 events up to $k$ events:
 
-$$P(X \\leq k) = P(X=0) + P(X=1) + P(X=2) + \\cdots + P(X=k)$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$P(X \\leq k) = P(X=0) + P(X=1) + P(X=2) + \\cdots + P(X=k)$$]@
 
 **Alternative Formulation via Incomplete Gamma Function**:
 The CDF can be expressed using the regularized incomplete gamma function:
 
-$$F_X(k) = \\frac{\\Gamma(k+1, \\lambda)}{k!} = Q(k+1, \\lambda)$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$F_X(k) = \\frac{\\Gamma(k+1, \\lambda)}{k!} = Q(k+1, \\lambda)$$]@
 
 This relationship is often used in statistical software for efficient computation, especially for large values of $k$.
 
 **Complementary Probability**: 
 For "more than $k$ events":
 
-$$P(X > k) = 1 - F_X(k)$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$P(X > k) = 1 - F_X(k)$$]@
 
 **Infinite Support**: Unlike finite discrete distributions, the Poisson distribution has infinite support ($k$ can be arbitrarily large), though probabilities decrease rapidly for $k \\gg \\lambda$.
   `,
@@ -1086,13 +1096,23 @@ $$P(X > k) = 1 - F_X(k)$$
   content: `
 As explained in the [general case for calculating expected value](!/probability/expected-value#general), the expected value of a discrete random variable is computed as a weighted sum where each possible value is multiplied by its probability:
 
+@academic[formula_callout:Expected Value (Discrete)
 $$E[X] = \\sum_{x} x \\cdot P(X = x)$$
+/probability/formulas#expected_value_discrete]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 For the **Poisson distribution**, we apply this general formula to the specific probability mass function of this distribution.
 
 ### Formula
 
+@academic[formula_callout:Poisson Mean
 $$E[X] = \\lambda$$
+/probability/formulas#poisson_mean]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $\\lambda$ = average rate of occurrence (expected number of events per interval)
@@ -1101,15 +1121,18 @@ $\\lambda$ = average rate of occurrence (expected number of events per interval)
 
 Starting from the general definition and substituting the PMF $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}$ for $k = 0, 1, 2, \\ldots$:
 
-$$E[X] = \\sum_{k=0}^{\\infty} k \\cdot \\frac{\\lambda^k e^{-\\lambda}}{k!}$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\sum_{k=0}^{\\infty} k \\cdot \\frac{\\lambda^k e^{-\\lambda}}{k!}$$]@
 
 The $k = 0$ term vanishes, so we start from $k = 1$:
 
-$$E[X] = \\sum_{k=1}^{\\infty} k \\cdot \\frac{\\lambda^k e^{-\\lambda}}{k!} = e^{-\\lambda} \\sum_{k=1}^{\\infty} \\frac{k \\cdot \\lambda^k}{k!} = e^{-\\lambda} \\sum_{k=1}^{\\infty} \\frac{\\lambda^k}{(k-1)!}$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\sum_{k=1}^{\\infty} k \\cdot \\frac{\\lambda^k e^{-\\lambda}}{k!} = e^{-\\lambda} \\sum_{k=1}^{\\infty} \\frac{k \\cdot \\lambda^k}{k!} = e^{-\\lambda} \\sum_{k=1}^{\\infty} \\frac{\\lambda^k}{(k-1)!}$$]@
 
 Substituting $j = k - 1$:
 
-$$E[X] = e^{-\\lambda} \\lambda \\sum_{j=0}^{\\infty} \\frac{\\lambda^j}{j!} = e^{-\\lambda} \\lambda \\cdot e^{\\lambda} = \\lambda$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = e^{-\\lambda} \\lambda \\sum_{j=0}^{\\infty} \\frac{\\lambda^j}{j!} = e^{-\\lambda} \\lambda \\cdot e^{\\lambda} = \\lambda$$]@
 
 The result $E[X] = \\lambda$ has a particularly elegant interpretation: the parameter $\\lambda$ is both the rate of occurrence and the expected value. The Poisson distribution is parameterized directly by its mean.
 
@@ -1117,7 +1140,8 @@ The result $E[X] = \\lambda$ has a particularly elegant interpretation: the para
 
 Consider phone calls arriving at a call center at an average rate of $\\lambda = 12$ calls per hour:
 
-$$E[X] = 12$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = 12$$]@
 
 The expected number of calls in one hour is exactly 12, which is the defining parameter of the distribution. This self-referential property makes the Poisson distribution especially natural for modeling count data.
 
@@ -1133,17 +1157,24 @@ To compute the expected value of a Poisson distribution for your own parameters,
   content: `
 The [variance](!/probability/variance#calculate) of a discrete random variable measures how spread out the values are around the expected value. It is computed as:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$]@
 
 Or using the shortcut formula:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$]@
 
 For the **Poisson distribution**, we apply this formula to derive the variance.
 
 ### Formula
 
+@academic[formula_callout:Poisson Variance
 $$\\mathrm{Var}(X) = \\lambda$$
+/probability/formulas#poisson_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $\\lambda$ = average rate of occurrence (expected number of events per interval)
@@ -1156,15 +1187,18 @@ We know from the expected value section that $\\mu = \\lambda$.
 
 Using the PMF $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}$:
 
-$$\\mathbb{E}[X^2] = \\sum_{k=0}^{\\infty} k^2 \\cdot \\frac{\\lambda^k e^{-\\lambda}}{k!}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathbb{E}[X^2] = \\sum_{k=0}^{\\infty} k^2 \\cdot \\frac{\\lambda^k e^{-\\lambda}}{k!}$$]@
 
 Through algebraic manipulation using properties of the exponential series:
 
-$$\\mathbb{E}[X^2] = \\lambda^2 + \\lambda$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathbb{E}[X^2] = \\lambda^2 + \\lambda$$]@
 
 Applying the shortcut formula:
 
-$$\\mathrm{Var}(X) = (\\lambda^2 + \\lambda) - \\lambda^2 = \\lambda$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = (\\lambda^2 + \\lambda) - \\lambda^2 = \\lambda$$]@
 
 The result $\\mathrm{Var}(X) = \\lambda$ reveals a remarkable property: **the Poisson distribution's variance equals its mean**. This makes the Poisson distribution unique among common distributions. The single parameter $\\lambda$ completely determines both the center and the spread of the distribution.
 
@@ -1172,15 +1206,18 @@ This property provides a practical test: if observed count data has variance app
 
 ### Standard Deviation
 
-$$\\sigma = \\sqrt{\\lambda}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = \\sqrt{\\lambda}$$]@
 
 ### Example
 
 Consider phone calls arriving at a rate of $\\lambda = 16$ calls per hour:
 
-$$\\mathrm{Var}(X) = 16$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = 16$$]@
 
-$$\\sigma = \\sqrt{16} = 4$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = \\sqrt{16} = 4$$]@
 
 The variance equals the expected value (16), and the standard deviation of 4 indicates that in most hours, the number of calls will fall within roughly 12 to 20 calls (within one standard deviation of the mean).
   `,
@@ -1205,17 +1242,17 @@ The mode is $\\lfloor \\lambda \\rfloor$
 
 **Intuition:** The mode sits at or just below the [expected value](!/probability/expected-value) $\\lambda$, representing the most likely number of events. The Poisson distribution models rare events, and the mode indicates the count that balances the competing effects of increasing event likelihood with decreasing probability of higher counts.
 
-**Example:**
+@academic[example:Example
  For $\\lambda = 4.7$:
 
 Mode = $\\lfloor 4.7 \\rfloor = 4$
 
-Getting exactly 4 events is more likely than any other outcome.
+Getting exactly 4 events is more likely than any other outcome.]@
 
-**Example:**
+@academic[example:Example
  For $\\lambda = 5$:
 
-Modes = 4 and 5 (both equally likely)
+Modes = 4 and 5 (both equally likely)]@
 
 ### Median
 
@@ -1223,24 +1260,25 @@ The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) \\ge
 
 For the Poisson distribution, there is no simple closed-form expression for the median, but it can be found numerically by solving:
 
-$$\\sum_{k=0}^{m} \\frac{\\lambda^k e^{-\\lambda}}{k!} \\geq 0.5$$
+@academic[formula_callout:Mode and Median
+$$\\sum_{k=0}^{m} \\frac{\\lambda^k e^{-\\lambda}}{k!} \\geq 0.5$$]@
 
 **Properties of the median:**
 • The median is approximately $\\lambda + \\frac{1}{3} - \\frac{0.02}{\\lambda}$ for large $\\lambda$
 • For integer $\\lambda$, median $\\approx \\lambda$
 • The distribution approaches symmetry as $\\lambda$ increases
 
-**Example:**
+@academic[example:Example
 For $\\lambda = 5$:
 Mean = 5
 
-The median is approximately 5 (nearly symmetric)
+The median is approximately 5 (nearly symmetric)]@
 
-**Example:** 
+@academic[example:Example
 For $\\lambda = 2$:
 Mean = 2
 
-The median is approximately 2 (found numerically)
+The median is approximately 2 (found numerically)]@
 
 Unlike continuous distributions where finding the median requires integration, for [discrete](!/probability/distributions/discrete) distributions, the median is found by summing probabilities until reaching 0.5.
   
@@ -1277,6 +1315,15 @@ $P(X = 6) = \\frac{4^6 e^{-4}}{6!} = \\frac{4096 \\cdot 0.0183}{720} \\approx 0.
 This means there's about a 10.4% chance of receiving exactly 6 calls in an hour.
 
 Note: The Poisson distribution is often used as an approximation to the binomial distribution when $n$ is large and $p$ is small, with $\\lambda = np$.
+
+Poisson variables also add: independent Poisson counts combine into another Poisson count whose rate is the sum of the rates.
+
+@academic[formula_callout:Poisson Sum (Independent)
+$$X \\sim \\text{Poisson}(\\lambda_X),\\; Y \\sim \\text{Poisson}(\\lambda_Y) \\implies X + Y \\sim \\text{Poisson}(\\lambda_X + \\lambda_Y)$$
+/probability/formulas#poisson_sum_independent]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
       `,
       before:``,
       after:``,

@@ -197,11 +197,11 @@ The order matters: swapping the two reflections reverses the rotation. And the c
 
 [Eigenvectors](!/linear-algebra/visual-tools/eigen-vectors-2d) &mdash; the mirror and its perpendicular, with eigenvalues $\\pm 1$.
 
-**Rotations** &mdash; products of two reflections.
+**[Rotations](!/linear-algebra/transformations/geometric#3)** &mdash; products of two reflections.
 
 [Orthogonal matrices](!/linear-algebra/visual-tools/orthogonal-matrices) &mdash; the family that reflections and rotations together make up.
 
-**Householder reflections** &mdash; the higher-dimensional version $I - 2\\mathbf{u}\\mathbf{u}^T$, the workhorse of QR factorization.
+**[Householder reflections](!/linear-algebra/decompositions/qr#3)** &mdash; the higher-dimensional version $I - 2\\mathbf{u}\\mathbf{u}^T$, the workhorse of QR factorization.
 
 [Change of basis](!/linear-algebra/visual-tools/change-basis-2d) &mdash; an orientation-reversing basis, such as one with a flipped axis, is a reflection of the standard one.`,
       before: ``,

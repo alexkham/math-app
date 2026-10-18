@@ -762,11 +762,11 @@ The exponent is what makes this the fastest-growing count in the permutation fam
 
 [Combination with repetition](!/combinatorics/visual-tools/combination) — the unordered companion of the permutation with repetition. Counts multisets of size $r$ from $n$ types, formula $\\binom{n + r - 1}{r}$.
 
-**Multiplication principle** — the foundational counting rule behind $n^r$. With $r$ independent positions and $n$ options for each, the total is the product of all $r$ factors.
+**[Multiplication principle](!/combinatorics/counting-principles#2)** — the foundational counting rule behind $n^r$. With $r$ independent positions and $n$ options for each, the total is the product of all $r$ factors.
 
 **Cartesian product** — the set-theoretic name for the collection of $r$-tuples this tool enumerates: $\\{1, \\dots, n\\}^r$.
 
-**Combinatorics calculator** — to compute $n^r$ for arbitrary $n$ and $r$, see the **permutation with repetition calculator**.
+**[Combinatorics calculator](!/combinatorics/calculator#permutation-with-repetition)** — to compute $n^r$ for arbitrary $n$ and $r$, see the **permutation with repetition calculator**.
 
 [Distribution into cells](!/combinatorics/visual-tools/distribution) — assigning each of $n$ distinct items to one of $k$ cells is $k^n$, the same $n^r$ counting read the other way round.
 

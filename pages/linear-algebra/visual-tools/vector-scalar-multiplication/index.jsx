@@ -778,9 +778,9 @@ Geometrically, $3v$ points the same direction as $v$ but is three times as long,
 
 [Linear combination](!/linear-algebra/visual-tools/vector-linear-combination) — $c_1 v_1 + \\cdots + c_n v_n$, the central object built from scalar multiplication and addition.
 
-**Vector space** — the abstract structure vectors form under addition and scalar multiplication.
+**[Vector space](!/linear-algebra/vector-spaces)** — the abstract structure vectors form under addition and scalar multiplication.
 
-**Unit vector** — a vector of norm $1$, obtained by multiplying $v$ by the scalar $1/\\|v\\|$.
+**[Unit vector](!/linear-algebra/vectors/magnitude#5)** — a vector of norm $1$, obtained by multiplying $v$ by the scalar $1/\\|v\\|$.
 
 **Zero vector** — the result of multiplying any vector by the scalar $0$.
 

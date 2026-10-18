@@ -869,6 +869,36 @@ export default function ProbabilityRulesPage({ sectionsContent,
                  </div> ,
                   <div key={'unit-addRule'} dangerouslySetInnerHTML={{ __html: demoUnits.addRule }} />,
             `For disjoint events the overlap is empty and the rule reduces to P(A) + P(B).`,
+            `
+The additive rules, stated formally:
+
+@academic[formula_callout:Complement Rule
+$$P(A^c) = 1 - P(A)$$
+/probability/formulas#complement_rule]@
+
+@academic[formula_callout:Monotonicity Rule
+$$A \\subseteq B \\implies P(A) \\leq P(B)$$
+/probability/formulas#monotonicity_rule]@
+
+@academic[formula_callout:Difference Rule
+$$P(A \\setminus B) = P(A) - P(A \\cap B)$$
+/probability/formulas#difference_rule]@
+
+@academic[formula_callout:Addition Rule
+$$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$$
+/probability/formulas#addition_rule]@
+
+@academic[formula_callout:Inclusion-Exclusion Principle
+$$P(A \\cup B \\cup C) = P(A) + P(B) + P(C) - P(A \\cap B) - P(A \\cap C) - P(B \\cap C) + P(A \\cap B \\cap C)$$
+/probability/formulas#inclusion-exclusion_principle]@
+
+@academic[formula_callout:Booles Inequality
+$$P\\!\\left(\\bigcup_{i=1}^{n} A_i\\right) \\leq \\sum_{i=1}^{n} P(A_i)$$
+/probability/formulas#booles_inequality]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+`,
             ]
         },
         {
@@ -883,6 +913,20 @@ export default function ProbabilityRulesPage({ sectionsContent,
                  copyableFields={["formula"]}
                  includedFields={ ["rule", "formula", "explanation"]} />
                  </div> ,
+            `
+The multiplicative rules, stated formally:
+
+@academic[formula_callout:Multiplication Rule
+$$P(A \\cap B) = P(A)\\,P(B \\mid A) = P(B)\\,P(A \\mid B)$$
+/probability/formulas#multiplication_rule]@
+
+@academic[formula_callout:Chain Rule
+$$P(A_1 \\cap A_2 \\cap \\cdots \\cap A_n) = P(A_1)\\,P(A_2 \\mid A_1)\\,P(A_3 \\mid A_1 \\cap A_2) \\cdots P(A_n \\mid A_1 \\cap \\cdots \\cap A_{n-1})$$
+/probability/formulas#chain_rule]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+`,
             ]
         },
         {

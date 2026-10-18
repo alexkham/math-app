@@ -202,17 +202,17 @@ Beyond these, composition is the algebraic backbone of category theory, group th
 
 [Function Transformations](!/functions/visual-tools/transformations) — visualizer for the affine composition pattern $a \\cdot f(b(x-h)) + k$. Composition with $bx - bh$ on the inside and $ay + k$ on the outside.
 
-**Chain Rule** — calculus theory for differentiating compositions. Reads directly from the inner-outer structure the picker exposes.
+**[Chain Rule](!/calculus/derivatives/rules#7)** — calculus theory for differentiating compositions. Reads directly from the inner-outer structure the picker exposes.
 
-**Function Types** — the catalog of base [function families](!/functions/visual-tools/types) used as building blocks. Every entry in the picker comes from this catalog.
+**[Function Types](!/functions/families)** — the catalog of base [function families](!/functions/visual-tools/types) used as building blocks. Every entry in the picker comes from this catalog.
 
 [Domain of a Function](!/functions/visual-tools/domain) — composed functions often have restricted domains that neither original function had. The Domain visualizer helps reason about these restrictions.
 
 [Function Symmetry](!/functions/visual-tools/symmetry) — composing two [even functions](!/functions/properties#1) stays even; composing two [odd functions](!/functions/properties#1) stays odd; mixed compositions may break both. A nice cross-cutting exercise.
 
-**Trigonometric Identities** — many trig identities are statements about specific compositions: $\\sin^2 + \\cos^2 = 1$, double-angle formulas involve compositions of trig with doubling.
+**[Trigonometric Identities](!/trigonometry/identities)** — many trig identities are statements about specific compositions: $\\sin^2 + \\cos^2 = 1$, double-angle formulas involve compositions of trig with doubling.
 
-**Polynomial Functions** — the closure of polynomials under composition is the foundation of polynomial algebra.
+**[Polynomial Functions](!/algebra/polynomials)** — the closure of polynomials under composition is the foundation of polynomial algebra.
 
 [Piecewise Function Builder](!/functions/visual-tools/piecewise) — composing with a [piecewise function](!/functions/piecewise#1) means tracking which branch each input lands in, one piece at a time.
 

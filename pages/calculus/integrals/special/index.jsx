@@ -583,11 +583,11 @@ $$\\int \\frac{f'(x)}{f(x)}\\, dx = \\ln|f(x)| + C$$
 
 This pattern appears frequently in disguise.
 
-**Example:**
+@academic[example:Example
 
 $$\\int \\tan x\\, dx = \\int \\frac{\\sin x}{\\cos x}\\, dx = -\\ln|\\cos x| + C$$
 
-Here $f(x) = \\cos x$ and $f'(x) = -\\sin x$, so the integrand is $-f'(x)/f(x)$.
+Here $f(x) = \\cos x$ and $f'(x) = -\\sin x$, so the integrand is $-f'(x)/f(x)$.]@
 `,
     before: ``,
     after: ``,

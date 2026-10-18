@@ -12,6 +12,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -557,8 +559,35 @@ const schemas = {
     }),
   };
 
+  const literalInequalityCases = {
+    prefaceTitle: 'Why the answer splits',
+    preface: 'Solving $ax + b > c$ for $x$: subtracting $b$ gives $ax > c - b$. To divide by $a$, its sign matters, and in a literal inequality that sign may not be known.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'Both cases must be stated, because without knowing $a$ neither can be discarded. Omitting one produces an answer that is wrong half the time.',
+    parent: {
+      kicker: 'Literal inequality',
+      formula: '$ax > c - b$',
+      splitBy: 'the sign of $a$',
+    },
+    cases: [
+      {
+        id: 'positive', condition: '$a > 0$',
+        count: { n: '+' },
+        headline: 'Direction preserved',
+        formula: '$x > \\dfrac{c - b}{a}$',
+      },
+      {
+        id: 'negative', condition: '$a < 0$',
+        count: { n: '−' },
+        headline: 'Direction reverses',
+        formula: '$x < \\dfrac{c - b}{a}$',
+      },
+    ],
+  };
+
    return {
   props: {
+    literalInequalityCases,
     sectionsContent,
     introContent,
     obj2Table,
@@ -580,7 +609,9 @@ const schemas = {
    }
 
 
-   export default function LinearInequalitiesPage({
+   const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function LinearInequalitiesPage({literalInequalityCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -714,6 +745,14 @@ const schemas = {
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="literal-inequality-sign-cases"
+            title="Literal inequalities: the sign of the coefficient"
+            source="/algebra/inequalities/linear"
+          >
+            <CaseSplit data={literalInequalityCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
 

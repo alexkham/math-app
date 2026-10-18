@@ -1,4 +1,6 @@
 
+// // tables-optimized: v4 | 2026-05-23 | 1 table (capstone summary)
+
 
 // import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 // import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
@@ -9,6 +11,13 @@
 // import '../../../pages/pages.css'
 // import Head from 'next/head'
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+// import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+// import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+// import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+// import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+// import { tableHeaders } from '@/app/styles/theme'
+// import CaseSplit from '@/app/components/infographics/CaseSplit'
+// import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 // export async function getStaticProps(){
@@ -29,26 +38,101 @@
 //     "covariance examples"
 //   ]
 
+//   const linkStyle = 'color: inherit; text-decoration: underline;'
+
+//   // ---------- TABLE ----------
+
+//   // capstone — summary: Covariance at a Glance
+//   const summaryTable = `
+// <table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+//   <thead>
+//     <tr>
+//       <th style="${tableHeaders.summary}">Aspect</th>
+//       <th style="${tableHeaders.summary}">Statement</th>
+//       <th style="${tableHeaders.summary}">Note / example</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Definition</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Cov(X, Y) = E[(X − μ<sub>X</sub>)(Y − μ<sub>Y</sub>)]</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">extends <a href="/probability/variance" style="${linkStyle}">variance</a> from one variable to a pair</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Symmetry</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Cov(X, Y) = Cov(Y, X)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">order of the variables doesn&apos;t matter</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Self-covariance</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Cov(X, X) = Var(X)</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">pairing a variable with itself recovers its variance</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Positive covariance</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Cov(X, Y) &gt; 0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">both variables tend to be above (or below) their averages together</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Negative covariance</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Cov(X, Y) &lt; 0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one variable above its average tends to occur with the other below its average</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Zero covariance</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Cov(X, Y) = 0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no consistent <em>linear</em> relationship — non-linear dependence may still exist</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/independence" style="${linkStyle}">Independence</a></td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">X, Y independent ⟹ Cov(X, Y) = 0</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the converse does <strong>not</strong> hold — zero covariance ≠ independence</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">What it captures</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">direction (not strength) of the linear relationship</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">magnitude depends on the units; normalize via correlation ρ for scale-free strength</td>
+//     </tr>
+//     <tr style="background: #f8f9fa;">
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Typical examples</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">height &amp; weight; study time &amp; exam score; temperature &amp; energy use; returns of two assets</td>
+//       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">paired numerical quantities recorded from the same observations</td>
+//     </tr>
+//     <tr>
+//       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Leads to</td>
+//       <td style="padding: 12px 15px; color: #34495e;">correlation coefficient ρ; covariance matrices; joint distributions</td>
+//       <td style="padding: 12px 15px; color: #34495e;">basis for multivariate models, linear regression, and portfolio theory</td>
+//     </tr>
+//   </tbody>
+// </table>
+// `
+
+//   // FAQ pass: "what covariance is", "what positive covariance means" and
+//   // "common examples" each name their own h2. Kept the zero-covariance
+//   // question — the claim the independence page deferred here, and which its
+//   // notation section already links to as covariance#7 — and reframed the
+//   // variance comparison around the Cov(X,X) identity. Added correlation,
+//   // which no heading on this page mentions at all.
 //   const faqQuestions = {
 //     obj1: {
-//       question: "What is covariance in probability?",
-//       answer: "Covariance measures how two random variables are related by examining how their values deviate from their respective averages across the same observations. It extends the concept of variance from single variables to pairs of variables, focusing on their joint behavior."
+//       question: "Does zero covariance mean independence?",
+//       answer: "No — the implication runs one way only. Independence forces covariance to zero, but zero covariance does not force independence. Covariance detects linear association, so a relationship with no linear component slips past it: for a perfect parabola the variables determine each other completely, yet the covariance can be exactly zero. Zero covariance means uncorrelated, which is strictly weaker.",
+//       sectionId: "4"
 //     },
 //     obj2: {
-//       question: "What does positive covariance mean?",
-//       answer: "Positive covariance indicates that higher-than-average values of one variable tend to occur with higher-than-average values of the other variable. Both variables move in the same direction relative to their averages."
+//       question: "What is the difference between covariance and correlation?",
+//       answer: "Units. Covariance carries the product of both variables' units, so its size means nothing on its own — you cannot tell a large covariance from a small one without knowing the scales. Correlation divides that out, forcing the value into [−1, 1] and making different pairs comparable. Both detect linear association only, and neither carries causation.",
+//       sectionId: "7"
 //     },
 //     obj3: {
-//       question: "Does zero covariance mean independence?",
-//       answer: "No. While independent random variables always have zero covariance, the reverse is not true. Zero covariance only indicates no consistent linear relationship, but structured non-linear dependencies may still exist between the variables."
+//       question: "Why does Cov(X, X) equal the variance?",
+//       answer: "Because feeding the same variable into both slots reproduces the variance definition. Cov(X, Y) is E[(X − μ_X)(Y − μ_Y)]; set Y = X and the two factors become identical, giving E[(X − μ_X)²], which is Var(X). Variance is the special case of covariance where a variable is paired with itself, which is why the two operators share a family.",
+//       sectionId: "7"
 //     },
 //     obj4: {
-//       question: "How is covariance different from variance?",
-//       answer: "Variance measures the spread of a single random variable around its mean, while covariance measures the joint behavior of two random variables. When covariance is calculated for a variable with itself, it equals that variable's variance."
-//     },
-//     obj5: {
-//       question: "What are common examples of covariance in practice?",
-//       answer: "Covariance arises when recording paired numerical quantities from the same observations, such as height and weight, study time and exam scores, daily temperature and energy usage, or returns of two financial assets. It describes how these quantities relate across observations."
+//       question: "Is σ_XY the same as σ_X times σ_Y?",
+//       answer: "No. σ_XY is a single symbol with a two-letter subscript naming a pair — it is the covariance, not a product. The product σ_X σ_Y is a different quantity, and it appears in the denominator of the correlation coefficient. Reading the subscript as multiplication gives something with the wrong units and the wrong value.",
+//       sectionId: "7"
 //     }
 //   }
 
@@ -115,19 +199,6 @@
 //           "item": "https://www.learnmathclass.com/probability/covariance"
 //         }
 //       ]
-//     },
-
-//     faq: {
-//       "@context": "https://schema.org",
-//       "@type": "FAQPage",
-//       "mainEntity": Object.keys(faqQuestions).map(key => ({
-//         "@type": "Question",
-//         "name": faqQuestions[key].question,
-//         "acceptedAnswer": {
-//           "@type": "Answer",
-//           "text": faqQuestions[key].answer
-//         }
-//       }))
 //     }
 //   }
 
@@ -180,6 +251,15 @@
 
 // In this way, covariance summarizes the directional relationship between the deviations
 // of two [random variable](!/probability/random-variables).
+
+// Formally, covariance is the average product of the two deviations from the means:
+
+// @academic[formula_callout:Covariance Definition
+// $$\\operatorname{Cov}(X, Y) = E\\!\\left[(X - \\mu_X)(Y - \\mu_Y)\\right]$$
+// /probability/formulas#covariance_definition]@
+
+// @academic[formulas_link:Browse all probability formulas
+// /probability/formulas]@
 // `,
 //       before:``,
 //       after:``,
@@ -261,21 +341,43 @@
   
 //     },
 //     obj7:{
-//       title:`Notation & Naming Conventions`,
-//       content:`
-// Covariance between two [random variables](!/probability/random-variables) is written as $\\operatorname{Cov}(X,Y)$.  
-// The order of the variables does not affect the value, so $\\operatorname{Cov}(X,Y)$ and
-// $\\operatorname{Cov}(Y,X)$ represent the same quantity.
-
-// When a [random variable](!/probability/random-variables)e is paired with itself, covariance reduces to [variance](!/probability/variance).  
-// This relationship links covariance directly to concepts introduced earlier.
-
-
-// `,
+//       title:`Covariance Notation`,
+//       lead:`A two-argument operator, its subscripted Greek shorthand, and the normalized cousin that strips the units away. All are catalogued among the [probability symbols](!/math-symbols/probability).`,
+//       inherited:`$X$, $Y$ and the expectation $E[\\cdot]$ come from the [probability function](!/probability/probability-function#notation) and [expected value notation](!/probability/expected-value#notation); $\\sigma^2$, $\\sigma$ and $\\mu$ from [variance notation](!/probability/variance#notation).`,
+//       entries:[
+//         {
+//           id:'cov-operator',
+//           tex:`$\\operatorname{Cov}(X, Y)$`,
+//           read:`the covariance of X and Y`,
+//           means:`A two-argument operator: it consumes a **pair** of random variables and returns one number measuring how they move together — $E[(X - \\mu_X)(Y - \\mu_Y)]$. Print sets the name upright, like $\\operatorname{Var}$ and $E$.`,
+//           cases:`The arguments commute — $\\operatorname{Cov}(X,Y) = \\operatorname{Cov}(Y,X)$ — and feeding the same variable twice collapses it to [variance](!/probability/variance#notation): $\\operatorname{Cov}(X,X) = \\operatorname{Var}(X)$, which is why the two operators share a family.`,
+//           confusedWith:`A statement about dependence. $\\operatorname{Cov}(X,Y) = 0$ means uncorrelated, not independent — the two coincide only in special cases, as **Covariance and Independence** above explains; independence forces zero covariance, never the reverse.`,
+//         },
+//         {
+//           id:'sigma-xy',
+//           tex:`$\\sigma_{XY}$`,
+//           read:`sigma X Y — the covariance`,
+//           means:`The parameter-side spelling, matching the $\\sigma^2$ of [variance](!/probability/variance#notation): a double subscript names the pair. With this convention $\\sigma_{XX}$ is just $\\sigma_X^2$, and the whole family collects into a covariance matrix.`,
+//           cases:`Matrix work makes the subscripts indices — $\\sigma_{ij}$ for the covariance of the $i$-th and $j$-th variables — the [coordinate-slot subscript job](!/linear-algebra/vectors/basic-operations#notation) applied to a pair rather than a position.`,
+//           confusedWith:`A product of sigmas. $\\sigma_{XY}$ is one symbol with a two-letter subscript, not $\\sigma_X \\cdot \\sigma_Y$ — that product appears in the denominator of the correlation below, which is a different quantity entirely.`,
+//         },
+//         {
+//           id:'rho-correlation',
+//           tex:`$\\rho_{XY}$`,
+//           read:`rho — the correlation coefficient`,
+//           means:`Covariance with the units divided out: $\\rho = \\dfrac{\\operatorname{Cov}(X,Y)}{\\sigma_X \\sigma_Y}$, which forces the value into $[-1, 1]$ and makes different variable pairs comparable — something raw covariance, carrying the product of two units, can never be.`,
+//           alsoWritten:`$\\operatorname{Corr}(X,Y)$ — the spelled-out operator, preferred where $\\rho$ is already taken; sample estimates switch to Latin $r$, following the [population-versus-estimate convention](!/probability/expected-value#notation) that pairs $\\mu$ with $\\bar{x}$.`,
+//           confusedWith:`A measure of any relationship. $\\rho$ detects **linear** association only — a perfect parabola can have $\\rho = 0$ while the variables determine each other completely; the sign carries direction, the magnitude carries linear strength, and neither carries causation.`,
+//         },
+//       ],
+//       symbolsHref:`/math-symbols/probability`,
+//       symbolsLabel:`All probability symbols`,
+//       parentHref:`/probability`,
+//       parentLabel:`Probability`,
 //       before:``,
-//       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
+//       after:``,
 //       link:'',
-  
+
 //     },
 //     obj8:{
 //       title:`What Comes Next`,
@@ -286,6 +388,19 @@
 // It leads directly to correlation, covariance matrices, and the study of joint
 // distributions. These tools extend the ideas introduced here to broader multivariate
 // settings and applications.
+
+// Correlation rescales covariance by the two standard deviations, and its value always stays within a fixed range:
+
+// @academic[formula_callout:Correlation Coefficient Definition
+// $$\\rho_{XY} = \\frac{\\operatorname{Cov}(X, Y)}{\\sigma_X\\,\\sigma_Y}$$
+// /probability/formulas#correlation_coefficient_definition]@
+
+// @academic[formula_callout:Correlation Bounds
+// $$-1 \\leq \\rho_{XY} \\leq 1$$
+// /probability/formulas#correlation_bounds]@
+
+// @academic[formulas_link:Browse all probability formulas
+// /probability/formulas]@
 // `,
 //       before:``,
 //       after:``,
@@ -352,6 +467,14 @@
 //       after:``,
 //       link:'',
   
+//     },
+
+//     capstone:{
+//       title:`Covariance at a Glance`,
+//       content:`The table below collects covariance into a single reference card — its definition, the symmetry and self-covariance identities, the sign interpretation (positive, negative, zero), the one-way relationship with independence, what covariance does and does not capture, common examples of paired quantities, and the concepts it leads into.`,
+//       before:``,
+//       after:``,
+//       link:'',
 //     }
   
 //   }
@@ -374,12 +497,75 @@
 // `
 //   }
 
+//   const cvPts = [[1, 2], [1.5, 3.5], [2, 1.5], [2.5, 3], [3, 4.5], [3.5, 2.5], [4, 5], [4.5, 4], [5, 6], [5.5, 5], [6, 6.5], [2.2, 4.4]];
+//   const cvMx = cvPts.reduce((s, p) => s + p[0], 0) / cvPts.length, cvMy = cvPts.reduce((s, p) => s + p[1], 0) / cvPts.length;
+//   const cvDots = cvPts.map(([x, y]) => ({ fn: () => y, from: x, to: x, ends: ['closed', 'closed'], color: (x - cvMx) * (y - cvMy) >= 0 ? 'f' : 'r' }));
+//   const cvParab = [-2, -1, 0, 1, 2].map((x) => ({ fn: () => x * x, from: x, to: x, ends: ['closed', 'closed'], color: 'f' }));
+//   const fpCovSign = { kind: 'pieces', svgTitle: 'Twelve paired observations with dashed lines at the two means: most points sit above-and-above or below-and-below, so the covariance is positive', xRange: [0, 7], yRange: [0, 7.5], xLetter: 'x', yLetter: 'y',
+//     pieces: [{ fn: () => cvMy, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0, 7]], label: { text: 'mean of y', x: 6.95, y: cvMy, pos: 'nw' } }, ...cvDots],
+//     vlines: [{ x: cvMx, label: 'mean of x' }],
+//     notes: [{ x: 0.2, y: 7.0, text: 'blue: deviations agree', pos: 'e', color: 'f' }, { x: 0.2, y: 6.4, text: 'amber: deviations disagree', pos: 'e', color: 'r' }],
+//     caption: 'Most deviations agree in sign, so the covariance is positive' };
+//   const fpZeroCov = { kind: 'pieces', svgTitle: 'X takes -2, -1, 0, 1, 2 equally and Y = X^2: Y is fixed by X, yet Cov(X, Y) = 0', xRange: [-3, 5], yRange: [-0.5, 5],
+//     pieces: [{ fn: (x) => x * x, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-2.2, 2.2]] }, ...cvParab],
+//     notes: [{ x: 2.45, y: 4.5, text: 'Y = X²: dependent', pos: 'e', color: 'r' }, { x: 2.45, y: 4.0, text: 'yet Cov(X, Y) = 0', pos: 'e', color: 'f' }, { x: 2.45, y: 3.5, text: 'the halves cancel', pos: 'e' }],
+//     caption: 'Zero covariance yet total dependence: only linear trends count' };
+//   const demoUnits = {
+//     covSign: demoUnitFrame({
+//       svg: renderFunctionPlotV4(fpCovSign),
+//       caption: 'Deviations that agree in sign',
+//       text: 'Twelve paired observations, with dashed lines at the mean of x and the mean of y. Each point&#8217;s deviation from the two means is either the same sign (both above or both below: blue) or opposite signs (amber). Covariance averages the products of the two deviations; here the blue points dominate, so the products are mostly positive and the covariance is positive: high x tends to come with high y.',
+//     }),
+//     zeroCov: demoUnitFrame({
+//       svg: renderFunctionPlotV4(fpZeroCov),
+//       caption: 'Dependent, with zero covariance',
+//       text: 'Let X take the values &#8722;2, &#8722;1, 0, 1, 2 with equal probability and set Y = X&#178;. Knowing X fixes Y completely. Yet the points on the left of the parabola mirror those on the right: every positive product of deviations is matched by a negative one, so Cov(X, Y) = E[X&#179;] &#8722; E[X]E[X&#178;] = 0. Covariance measures linear tendency only, and a symmetric curve has none.',
+//     }),
+//   };
+
+//   const covarianceSignCases = {
+//     parent: {
+//       formula: '$\\operatorname{Cov}(X, Y) = E[(X - \\mu_X)(Y - \\mu_Y)]$',
+//       desc: 'One number computed from paired observations. Its sign is read in three ways; its size on its own is not the message.',
+//       splitBy: 'sign of $\\operatorname{Cov}(X, Y)$',
+//     },
+//     cases: [
+//       {
+//         id: 'positive', number: '01', condition: '$\\operatorname{Cov} > 0$', color: 'a',
+//         headline: 'Deviations move the same way',
+//         desc: 'higher-than-average $X$ tends to come with higher-than-average $Y$, and lower with lower',
+//         count: { n: '+', label: 'the mean product of deviations is positive' },
+//         formula: 'products $(X - \\mu_X)(Y - \\mu_Y)$ are mostly $> 0$',
+//         example: 'height and weight across people',
+//       },
+//       {
+//         id: 'negative', number: '02', condition: '$\\operatorname{Cov} < 0$', color: 'b',
+//         headline: 'Deviations move opposite ways',
+//         desc: 'higher-than-average $X$ tends to come with lower-than-average $Y$',
+//         count: { n: '−', label: 'the mean product of deviations is negative' },
+//         formula: 'products $(X - \\mu_X)(Y - \\mu_Y)$ are mostly $< 0$',
+//         example: 'driving speed and trip time',
+//       },
+//       {
+//         id: 'zero', number: '03', condition: '$\\operatorname{Cov} = 0$', color: 'c',
+//         headline: 'No consistent linear relationship',
+//         desc: 'the deviations show no steady direction; this does **not** mean the variables are independent',
+//         count: { n: '0', label: 'the mean product of deviations is zero' },
+//         formula: 'the products cancel out',
+//         example: '$Y = X^2$ with $X$ symmetric about $0$: $Y$ is fixed by $X$, yet the covariance is $0$',
+//       },
+//     ],
+//   };
+
 //   return {
 //     props: {
 //       sectionsContent,
+//       covarianceSignCases,
 //       introContent,
+//       summaryTable,
 //       faqQuestions,
 //       schemas,
+//       demoUnits,
 //       seoData: {
 //         title: "Covariance: Joint Behavior of Random Variables | Learn Math Class",
 //         description: "Learn how covariance measures joint behavior of random variables. Understand positive, negative, and zero covariance, independence relationships, and applications.",
@@ -391,9 +577,15 @@
 //   }
 // }
 
-// export default function CovariancePage({seoData, sectionsContent, introContent, faqQuestions, schemas}) {
+// const siteTheme = {
+//   title: '#06357A', accent: '#2563EB', warm: '#B45309',
+//   panelSoft: '#eff6ff', panelSofter: '#f8fafc',
+// }
 
-    
+// export default function CovariancePage({seoData, sectionsContent, introContent, covarianceSignCases, summaryTable, faqQuestions, schemas, demoUnits}) {
+
+//   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
 //   const genericSections=[
 //      {
 //         id:'0',
@@ -418,6 +610,8 @@
 //         link:sectionsContent.obj2.link,
 //         content:[
 //           sectionsContent.obj2.content,
+//           <div key={'unit-covSign'} dangerouslySetInnerHTML={{ __html: demoUnits.covSign }} />,
+//           `If the amber points dominated instead, the covariance would be negative.`,
 //         ]
 //     },
 //     {
@@ -426,6 +620,16 @@
 //         link:sectionsContent.obj3.link,
 //         content:[
 //           sectionsContent.obj3.content,
+//           `The sign is the whole message: as the section says, covariance reports direction, not strength. Two of the pairs listed later on this page, height and weight and study time and exam score, tend to deviate the same way, so their covariance is positive. A pair that deviates in opposite ways, such as driving speed and the time a trip takes, has a negative covariance.`,
+//           <DiagramFrame
+//             key={'obj3-diagram'}
+//             id="covariance-sign-cases"
+//             title="What the sign of the covariance says"
+//             source="/probability/covariance"
+//           >
+//             <CaseSplit data={covarianceSignCases}  theme={siteTheme} />
+//           </DiagramFrame>,
+//           `The third card is the one to read twice. A covariance of zero rules out a consistent linear tendency and nothing more; the next section shows that two variables can depend on each other completely and still have covariance exactly zero.`,
 //         ]
 //     },
 //     {
@@ -434,6 +638,8 @@
 //         link:sectionsContent.obj4.link,
 //         content:[
 //           sectionsContent.obj4.content,
+//           <div key={'unit-zeroCov'} dangerouslySetInnerHTML={{ __html: demoUnits.zeroCov }} />,
+//           `So independence implies zero covariance, but zero covariance does not imply independence.`,
 //         ]
 //     },
 //     {
@@ -455,10 +661,38 @@
 //     {
 //         id:'7',
 //         title:sectionsContent.obj7.title,
-//         link:sectionsContent.obj7.link,
+//         link:``,
 //         content:[
-//           sectionsContent.obj7.content,
-//           sectionsContent.obj7.after,
+//           <NotationSection
+//             key={'notation'}
+//             title={sectionsContent.obj7.title}
+//             lead={sectionsContent.obj7.lead}
+//             inherited={sectionsContent.obj7.inherited}
+//             entries={sectionsContent.obj7.entries}
+//             symbolsHref={sectionsContent.obj7.symbolsHref}
+//             symbolsLabel={sectionsContent.obj7.symbolsLabel}
+//             parentHref={sectionsContent.obj7.parentHref}
+//             parentLabel={sectionsContent.obj7.parentLabel}
+//             theme={'navy'}
+//           />,
+//           `
+// Three identities describe how covariance is computed and how it behaves:
+
+// @academic[formula_callout:Covariance Computational Formula
+// $$\\operatorname{Cov}(X, Y) = E[XY] - E[X]\\,E[Y]$$
+// /probability/formulas#covariance_computational_formula]@
+
+// @academic[formula_callout:Covariance Self-Identity
+// $$\\operatorname{Cov}(X, X) = \\operatorname{Var}(X)$$
+// /probability/formulas#covariance_self-identity]@
+
+// @academic[formula_callout:Covariance Bilinearity
+// $$\\operatorname{Cov}(aX + b,\\; cY + d) = ac\\,\\operatorname{Cov}(X, Y)$$
+// /probability/formulas#covariance_bilinearity]@
+
+// @academic[formulas_link:Browse all probability formulas
+// /probability/formulas]@
+// `,
 //         ]
 //     },
 //     {
@@ -467,6 +701,32 @@
 //         link:sectionsContent.obj8.link,
 //         content:[
 //           sectionsContent.obj8.content,
+//         ]
+//     },
+//     {
+//         id:'capstone',
+//         title:sectionsContent.capstone.title,
+//         link:sectionsContent.capstone.link,
+//         content:[
+//           sectionsContent.capstone.content,
+//           <div key={'summary-table'} style={tableWrapStyle}
+//                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+//         ]
+//     },
+//     // faq: rendered component — must be built here, not in getStaticProps
+//     {
+//         id:'faq',
+//         title:`Covariance FAQ`,
+//         link:``,
+//         content:[
+//           <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+//             <FAQSection
+//               faqQuestions={faqQuestions}
+//               theme={'leftBorder'}
+//               width={'100%'}
+//               openFirst={false}
+//             />
+//           </div>,
 //         ]
 //     },
 //     // {
@@ -585,13 +845,6 @@
 //       __html: JSON.stringify(schemas.breadcrumb)
 //     }}
 //   />
-
-//   <script 
-//     type="application/ld+json"
-//     dangerouslySetInnerHTML={{ 
-//       __html: JSON.stringify(schemas.faq)
-//     }}
-//   />
 // </Head>
 //    {/* <GenericNavbar/> */}
 //    <br/>
@@ -648,7 +901,6 @@
 // }
 
 
-
 // tables-optimized: v4 | 2026-05-23 | 1 table (capstone summary)
 
 
@@ -666,7 +918,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
-import CaseSplit from '@/app/components/infographics/CaseSplit'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
@@ -901,6 +1153,15 @@ reflects an opposing pattern.
 
 In this way, covariance summarizes the directional relationship between the deviations
 of two [random variable](!/probability/random-variables).
+
+Formally, covariance is the average product of the two deviations from the means:
+
+@academic[formula_callout:Covariance Definition
+$$\\operatorname{Cov}(X, Y) = E\\!\\left[(X - \\mu_X)(Y - \\mu_Y)\\right]$$
+/probability/formulas#covariance_definition]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 `,
       before:``,
       after:``,
@@ -1029,6 +1290,19 @@ between multiple [random variables](!/probability/random-variables).
 It leads directly to correlation, covariance matrices, and the study of joint
 distributions. These tools extend the ideas introduced here to broader multivariate
 settings and applications.
+
+Correlation rescales covariance by the two standard deviations, and its value always stays within a fixed range:
+
+@academic[formula_callout:Correlation Coefficient Definition
+$$\\rho_{XY} = \\frac{\\operatorname{Cov}(X, Y)}{\\sigma_X\\,\\sigma_Y}$$
+/probability/formulas#correlation_coefficient_definition]@
+
+@academic[formula_callout:Correlation Bounds
+$$-1 \\leq \\rho_{XY} \\leq 1$$
+/probability/formulas#correlation_bounds]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 `,
       before:``,
       after:``,
@@ -1152,6 +1426,10 @@ variable.
   };
 
   const covarianceSignCases = {
+    prefaceTitle: 'Overview',
+    preface: 'Covariance averages the products of the two deviations from the means. Only its **sign** is read here: it reports the direction of the linear relationship, not its strength.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'To compare strength across different pairs, divide by $\\sigma_X \\sigma_Y$: the correlation $\\rho_{XY}$ strips the units away and always lies in $[-1, 1]$.',
     parent: {
       formula: '$\\operatorname{Cov}(X, Y) = E[(X - \\mu_X)(Y - \\mu_Y)]$',
       desc: 'One number computed from paired observations. Its sign is read in three ways; its size on its own is not the message.',
@@ -1172,7 +1450,7 @@ variable.
         desc: 'higher-than-average $X$ tends to come with lower-than-average $Y$',
         count: { n: '−', label: 'the mean product of deviations is negative' },
         formula: 'products $(X - \\mu_X)(Y - \\mu_Y)$ are mostly $< 0$',
-        example: 'outdoor temperature and heating use',
+        example: 'driving speed and trip time',
       },
       {
         id: 'zero', number: '03', condition: '$\\operatorname{Cov} = 0$', color: 'c',
@@ -1248,14 +1526,14 @@ export default function CovariancePage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          `The sign is the whole message: as the section says, covariance reports direction, not strength. Two of the pairs listed later on this page show the first two signs. Height and weight across people deviate the same way, so their covariance is positive; outdoor temperature and heating use deviate opposite ways, so theirs is negative.`,
+          `The sign is the whole message: as the section says, covariance reports direction, not strength. Two of the pairs listed later on this page, height and weight and study time and exam score, tend to deviate the same way, so their covariance is positive. A pair that deviates in opposite ways, such as driving speed and the time a trip takes, has a negative covariance.`,
           <DiagramFrame
             key={'obj3-diagram'}
             id="covariance-sign-cases"
             title="What the sign of the covariance says"
             source="/probability/covariance"
           >
-            <CaseSplit data={covarianceSignCases} variant="parallel" theme={siteTheme} />
+            <CaseSplit data={covarianceSignCases} variant="poster" proseStyle="cards" theme={siteTheme} />
           </DiagramFrame>,
           `The third card is the one to read twice. A covariance of zero rules out a consistent linear tendency and nothing more; the next section shows that two variables can depend on each other completely and still have covariance exactly zero.`,
         ]
@@ -1303,6 +1581,24 @@ export default function CovariancePage({seoData, sectionsContent, introContent, 
             parentLabel={sectionsContent.obj7.parentLabel}
             theme={'navy'}
           />,
+          `
+Three identities describe how covariance is computed and how it behaves:
+
+@academic[formula_callout:Covariance Computational Formula
+$$\\operatorname{Cov}(X, Y) = E[XY] - E[X]\\,E[Y]$$
+/probability/formulas#covariance_computational_formula]@
+
+@academic[formula_callout:Covariance Self-Identity
+$$\\operatorname{Cov}(X, X) = \\operatorname{Var}(X)$$
+/probability/formulas#covariance_self-identity]@
+
+@academic[formula_callout:Covariance Bilinearity
+$$\\operatorname{Cov}(aX + b,\\; cY + d) = ac\\,\\operatorname{Cov}(X, Y)$$
+/probability/formulas#covariance_bilinearity]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+`,
         ]
     },
     {

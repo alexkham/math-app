@@ -178,9 +178,9 @@ Check our [equivalence validator](!/logic/propositional-logic/semantics/equivale
 
 ## 1. [Tautology](!/logic/propositional-logic/semantics/tautology) 
 A proposition that is **always true**, no matter what.
-**Example**:     
+@academic[example:Example
 \t\t\t\t\t\t$p \\lor \\neg p$
-("Either it will rain or it won’t"—this is always true.)
+("Either it will rain or it won’t"—this is always true.)]@
 **Validity and Tautologies**
 A proposition is valid if it is true in all possible interpretations—in other words, if it is a [tautology](!/logic/propositional-logic/semantics/tautology).
 If a proposition is valid, it means there is no possible scenario where it is false.
@@ -190,9 +190,9 @@ If a proposition is valid, it means there is no possible scenario where it is fa
 
 ## 2. [Contradiction](!/logic/propositional-logic/semantics/contradiction) 
 A proposition that is **always false**, no matter what. 
-**Example**:     
+@academic[example:Example
 \t\t\t\t\t\t$p \\land \\neg p$   
-("It is raining and it is not raining"—this is never true.)
+("It is raining and it is not raining"—this is never true.)]@
 **Unsatisfiability and Contradictions**
 A proposition is unsatisfiable if it is false in every possible interpretation—which means it is a contradiction.
 

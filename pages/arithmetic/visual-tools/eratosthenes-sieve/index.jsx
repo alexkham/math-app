@@ -195,11 +195,11 @@ Twin primes — pairs differing by 2 like (11,13) and (17,19) — appear scatter
       title: `Related Concepts`,
       content: `The Sieve of Eratosthenes connects to many topics in number theory and computer science:
 
-**Prime Factorization**: Every composite crossed by the sieve has a smallest prime factor. Collecting these factors decomposes any number into primes.
+**[Prime Factorization](!/arithmetic/divisibility#8)**: Every composite crossed by the sieve has a smallest prime factor. Collecting these factors decomposes any number into primes.
 
-**Divisibility**: The sieve visually demonstrates divisibility — colored stripes show which small primes divide each composite.
+**[Divisibility](!/arithmetic/divisibility)**: The sieve visually demonstrates divisibility — colored stripes show which small primes divide each composite.
 
-**GCD and LCM**: Finding greatest common divisors and least common multiples relies on [prime factorizations](!/arithmetic/divisibility#8) that the sieve helps identify.
+**[GCD and LCM](!/arithmetic/divisibility#9)**: Finding greatest common divisors and least common multiples relies on [prime factorizations](!/arithmetic/divisibility#8) that the sieve helps identify.
 
 **Cryptography**: Large primes are essential for RSA encryption. While the basic sieve handles small ranges, related algorithms generate the massive primes used in security.
 

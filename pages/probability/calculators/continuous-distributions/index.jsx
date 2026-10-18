@@ -561,15 +561,15 @@ Each of the three distributions has its own section on this page: [The Continuou
 
     obj10: {
       title: `Related Probability Tools and Calculators`,
-      content: `**Discrete Distributions Calculator** - Compute probabilities for binomial, Poisson, geometric, and other discrete distributions with PMF charts.
+      content: `**[Discrete Distributions Calculator](!/probability/calculators/discrete-distributions)** - Compute probabilities for binomial, Poisson, geometric, and other discrete distributions with PMF charts.
 
 **Z-Score Calculator** - Convert between raw scores and z-scores for normal distributions with percentile lookups.
 
-**Probability Distribution Explorer** - Interactive visualization comparing multiple distributions side-by-side with parameter adjustments.
+**[Probability Distribution Explorer](!/probability/visual-tools/distributions)** - Interactive visualization comparing multiple distributions side-by-side with parameter adjustments.
 
-**CDF Visualizer** - Generate cumulative distribution function plots for discrete and continuous distributions.
+**[CDF Visualizer](!/probability/visual-tools/cdf)** - Generate cumulative distribution function plots for discrete and continuous distributions.
 
-**Statistical Distribution Reference** - Comprehensive guide to all probability distributions with formulas, properties, and use cases.
+**[Statistical Distribution Reference](!/probability/distributions)** - Comprehensive guide to all probability distributions with formulas, properties, and use cases.
 
 **Confidence Interval Calculator** - Compute confidence intervals using normal, t, and other distributions.
 

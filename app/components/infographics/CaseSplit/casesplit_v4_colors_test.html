@@ -1,0 +1,3031 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"><style>body{margin:0;padding:24px;background:#f8fafc;font-family:Inter,sans-serif}.g{display:grid;grid-template-columns:1fr 1fr;gap:18px}.v{font:600 11px monospace;color:#64748b;margin:22px 0 8px}</style></head><body><div class="v">cards: defaults (left) · custom colours from data (right)</div><div class="g"><div><style>
+.cs-root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--cs-ink);
+  line-height: 1.5;
+}
+.cs-root *, .cs-root *::before, .cs-root *::after { box-sizing: border-box; }
+
+.cs-root .cs-card {
+  background: var(--cs-bg);
+  border: 1px solid var(--cs-line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15,23,42,.04);
+}
+
+/* ---- header ---- */
+.cs-root .cs-head { padding: 18px 24px 0; }
+.cs-root .cs-head .cs-kicker {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cs-title); opacity: .8;
+  margin-bottom: 4px;
+}
+.cs-root .cs-head h2 {
+  margin: 0; font-size: 17px; font-weight: 700;
+  color: var(--cs-title); letter-spacing: -0.01em;
+}
+.cs-root .cs-head .cs-lede { margin-top: 4px; font-size: 13px; color: var(--cs-muted); max-width: 640px; }
+
+/* ---- split-by pill ---- */
+.cs-root .cs-by {
+  display: inline-block;
+  font-size: 11.5px; color: var(--cs-muted);
+  background: var(--cs-bg);
+  border: 1px solid var(--cs-line);
+  border-radius: 999px;
+  padding: 2px 11px;
+}
+.cs-root .cs-by b { color: var(--cs-title); font-weight: 600; }
+.cs-root .cs-by-inv {
+  display: inline-block;
+  font-size: 11.5px;
+  color: var(--cs-parent-text);
+  background: color-mix(in srgb, var(--cs-parent-text) 14%, transparent);
+  border-radius: 999px;
+  padding: 2px 11px;
+}
+.cs-root .cs-by-inv .cs-by-l { opacity: .75; }
+.cs-root .cs-by-inv b { font-weight: 600; }
+
+/* ---- parent block (shared look) ---- */
+.cs-root .cs-pk {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  opacity: .7; margin-bottom: 4px;
+}
+.cs-root .cs-pdesc { font-size: 12.5px; opacity: .8; margin-top: 8px; line-height: 1.45; }
+
+/* ---- badge (count.n) ---- */
+.cs-root .cs-badge {
+  flex: none;
+  min-width: 26px; height: 26px; padding: 0 8px;
+  border-radius: 999px;
+  background: var(--c); color: var(--on);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; line-height: 1;
+  white-space: nowrap;
+}
+.cs-root .cs-badge.cs-wide { font-size: 12px; letter-spacing: .02em; }
+
+/* ---- verdict block ---- */
+.cs-root .cs-vtext { display: flex; flex-direction: column; min-width: 0; }
+.cs-root .cs-vh { font-size: 14.5px; font-weight: 700; color: var(--c); line-height: 1.25; }
+.cs-root .cs-vl { font-size: 11.5px; color: var(--cs-muted); line-height: 1.3; }
+
+/* ---- body lines ---- */
+.cs-root .cs-desc { font-size: 13.5px; line-height: 1.5; color: var(--tx); }
+.cs-root .cs-formula { font-size: 14px; color: var(--tx); }
+.cs-root .cs-formula.cs-na { color: var(--cs-muted); font-style: italic; font-size: 13px; }
+
+/* ---- example strip ---- */
+.cs-root .cs-ex { font-size: 12.5px; color: var(--tx); }
+.cs-root .cs-ex .cs-lbl {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--c); margin-right: 6px;
+}
+.cs-root .cs-ex .cs-pic { display: block; margin-top: 2px; color: var(--cs-muted); }
+
+/* ---- expandable details ---- */
+.cs-root .cs-more { border-top: 1px solid color-mix(in srgb, var(--c) 18%, #ffffff); }
+.cs-root .cs-more > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  font-size: 12px; font-weight: 600;
+  color: var(--c);
+}
+.cs-root .cs-more > summary::-webkit-details-marker { display: none; }
+.cs-root .cs-more > summary::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform .15s ease;
+  margin-right: 2px;
+}
+.cs-root .cs-more[open] > summary::before { transform: rotate(45deg); }
+.cs-root .cs-more > summary:hover { background: var(--t); }
+.cs-root .cs-more-body {
+  padding: 2px 14px 12px;
+  font-size: 13px; line-height: 1.55;
+  color: var(--tx);
+}
+.cs-root .cs-more-body p { margin: 0 0 6px; }
+.cs-root .cs-more-body p:last-child { margin-bottom: 0; }
+
+/* ================================================================= */
+/*  POSTER                                                             */
+/* ================================================================= */
+
+.cs-root .cs-p-top {
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  text-align: center;
+  padding: 18px 20px 16px;
+}
+.cs-root .cs-p-top .cs-pf { font-size: 21px; }
+.cs-root .cs-p-top .cs-by-inv { margin-top: 10px; }
+.cs-root .cs-p-top .cs-pdesc { max-width: 620px; margin-left: auto; margin-right: auto; }
+
+.cs-root .cs-p-tiles { display: grid; gap: 14px; padding: 22px 18px 18px; }
+.cs-root .cs-p-tile {
+  position: relative;
+  background: var(--t);
+  border: 1px solid color-mix(in srgb, var(--c) 28%, #ffffff);
+  border-top: 3px solid var(--c);
+  border-radius: 10px;
+  text-align: center;
+  display: flex; flex-direction: column;
+  min-width: 0;
+}
+.cs-root .cs-p-tile::before {
+  content: '';
+  position: absolute; top: -26px; left: calc(50% - 6px);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--cs-parent-bg);
+}
+.cs-root .cs-p-main {
+  flex: 1;
+  padding: 20px 16px 14px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.cs-root .cs-p-main .cs-badge {
+  min-width: 46px; height: 46px; padding: 0 14px;
+  font-size: 24px; font-weight: 800;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 14%, transparent);
+}
+.cs-root .cs-p-main .cs-badge.cs-wide { font-size: 15px; }
+.cs-root .cs-p-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--c); opacity: .8;
+  margin-top: 12px;
+}
+.cs-root .cs-p-cond { margin-top: 2px; font-size: 18px; color: var(--c); }
+.cs-root .cs-p-main .cs-vh { margin-top: 4px; font-size: 15px; color: var(--tx); }
+.cs-root .cs-p-main .cs-vl { margin-top: 1px; }
+.cs-root .cs-p-main .cs-desc { margin-top: 6px; font-size: 13px; color: var(--cs-muted); max-width: 240px; }
+.cs-root .cs-p-main .cs-formula { margin-top: 8px; }
+.cs-root .cs-p-main .cs-ex {
+  margin-top: 12px;
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 25%, #ffffff);
+  border-radius: 14px;
+  padding: 4px 12px;
+  font-size: 12px;
+}
+.cs-root .cs-p-tile .cs-more { text-align: left; }
+.cs-root .cs-p-tile .cs-more > summary { justify-content: center; }
+
+/* ================================================================= */
+/*  TREE                                                               */
+/* ================================================================= */
+
+.cs-root .cs-t-body { padding: 22px 24px 22px; }
+.cs-root .cs-t-parent {
+  width: fit-content; max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  border-radius: 10px;
+  padding: 12px 24px 11px;
+  box-shadow: 0 4px 14px rgba(30,58,138,.18);
+}
+.cs-root .cs-t-parent .cs-pf { font-size: 19px; }
+.cs-root .cs-t-parent .cs-pdesc { max-width: 520px; }
+.cs-root .cs-t-by { text-align: center; margin-top: 10px; }
+
+.cs-root .cs-t-stem { width: 1.5px; height: 14px; background: var(--cs-trunk); margin: 0 auto; }
+.cs-root .cs-t-tree { display: grid; }
+.cs-root .cs-t-br { position: relative; padding: 24px 9px 0; min-width: 0; }
+.cs-root .cs-t-br::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  border-top: 1.5px solid var(--cs-trunk);
+}
+.cs-root .cs-t-br:first-child::before { left: 50%; }
+.cs-root .cs-t-br:last-child::before  { right: 50%; }
+.cs-root .cs-t-br::after {
+  content: ''; position: absolute; top: 0; left: calc(50% - .75px);
+  width: 1.5px; height: 24px; background: var(--c);
+}
+.cs-root .cs-t-tip {
+  position: absolute; top: 18px; left: calc(50% - 4.5px);
+  border-left: 4.5px solid transparent;
+  border-right: 4.5px solid transparent;
+  border-top: 6px solid var(--c);
+}
+
+.cs-root .cs-t-card {
+  height: 100%;
+  display: flex; flex-direction: column;
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, #ffffff);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.cs-root .cs-t-cond {
+  background: var(--c); color: var(--on);
+  padding: 10px 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.cs-root .cs-t-cond .cs-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  opacity: .75; white-space: nowrap;
+}
+.cs-root .cs-t-cond .cs-expr { font-size: 18px; text-align: right; }
+.cs-root .cs-t-verdict {
+  background: var(--t);
+  padding: 11px 14px;
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--c) 15%, #ffffff);
+}
+.cs-root .cs-t-main { flex: 1; padding: 11px 14px 4px; display: flex; flex-direction: column; gap: 6px; }
+.cs-root .cs-t-card .cs-ex {
+  margin: 8px 14px 13px;
+  padding: 7px 10px;
+  background: var(--t);
+  border-radius: 6px;
+}
+
+/* ================================================================= */
+/*  FORK                                                               */
+/* ================================================================= */
+
+.cs-root .cs-f-body {
+  padding: 20px 24px 22px;
+  display: grid;
+  grid-template-columns: fit-content(320px) 1fr;
+  align-items: center;
+}
+.cs-root .cs-f-parent {
+  position: relative;
+  min-width: 170px;
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  border-radius: 10px;
+  padding: 16px 14px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(30,58,138,.18);
+}
+.cs-root .cs-f-parent .cs-pf { font-size: 18px; }
+.cs-root .cs-f-parent .cs-by-inv { margin-top: 8px; }
+.cs-root .cs-f-parent::after {
+  content: ''; position: absolute; right: -22px; top: calc(50% - .75px);
+  width: 22px; height: 1.5px; background: var(--cs-trunk);
+}
+
+.cs-root .cs-f-rows { padding-left: 22px; display: flex; flex-direction: column; min-width: 0; }
+.cs-root .cs-f-row { position: relative; padding: 6px 0 6px 28px; }
+.cs-root .cs-f-row::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  border-left: 1.5px solid var(--cs-trunk);
+}
+.cs-root .cs-f-row:first-child::before { top: 50%; }
+.cs-root .cs-f-row:last-child::before  { bottom: 50%; }
+.cs-root .cs-f-row::after {
+  content: ''; position: absolute; left: 0; top: calc(50% - .75px);
+  width: 22px; height: 1.5px; background: var(--c);
+}
+.cs-root .cs-f-tip {
+  position: absolute; left: 20px; top: calc(50% - 4.5px);
+  border-top: 4.5px solid transparent;
+  border-bottom: 4.5px solid transparent;
+  border-left: 6px solid var(--c);
+}
+/* with an open details panel the row grows; keep connectors on the top part */
+.cs-root .cs-f-row.cs-has-more::after,
+.cs-root .cs-f-row.cs-has-more .cs-f-tip { top: 42px; }
+.cs-root .cs-f-row.cs-has-more:first-child::before { top: 42px; }
+
+.cs-root .cs-f-case {
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, #ffffff);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.cs-root .cs-f-grid {
+  display: grid;
+  grid-template-columns: 130px 180px 1fr;
+  align-items: stretch;
+  min-height: 72px;
+}
+.cs-root .cs-f-cond {
+  background: var(--c); color: var(--on);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 10px; font-size: 17px; text-align: center;
+}
+.cs-root .cs-f-cond .cs-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9.5px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  opacity: .75; margin-bottom: 2px;
+}
+.cs-root .cs-f-verdict {
+  background: var(--t);
+  display: flex; align-items: center; gap: 9px;
+  padding: 10px 14px;
+  border-right: 1px solid color-mix(in srgb, var(--c) 15%, #ffffff);
+  min-width: 0;
+}
+.cs-root .cs-f-detail {
+  padding: 10px 16px;
+  display: flex; flex-direction: column; justify-content: center; gap: 3px;
+  min-width: 0;
+}
+.cs-root .cs-f-detail .cs-ex { color: var(--cs-muted); }
+
+
+/* ================================================================= */
+/*  PROSE: preface + conclusion  (proseStyle: cards | gradient | tabs) */
+/* ================================================================= */
+
+.cs-root .cs-preface { padding: 16px 24px 0; }
+.cs-root .cs-concl { margin: 0 24px 22px; }
+.cs-root .cs-pre-body p,
+.cs-root .cs-concl-body p { margin: 0 0 8px; }
+.cs-root .cs-pre-body p:last-child,
+.cs-root .cs-concl-body p:last-child { margin-bottom: 0; }
+.cs-root .cs-pre-body { font-size: 14px; line-height: 1.6; color: var(--cs-pre-text); }
+.cs-root .cs-concl-body { font-size: 14px; line-height: 1.6; color: var(--cs-con-text); }
+.cs-root .cs-concl-body .katex { color: var(--cs-con-text); }
+.cs-root .cs-pre-ic,
+.cs-root .cs-concl-ic { display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.cs-root .cs-pre-head { color: var(--cs-pre-label); }
+.cs-root .cs-concl-lbl { color: var(--cs-con-label); }
+
+/* ---- cards ---- */
+.cs-root.cs-prose-cards .cs-pre-box {
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-left: 4px solid var(--cs-pre-accent);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-cards .cs-pre-head {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.cs-root.cs-prose-cards .cs-concl {
+  display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-left: 4px solid var(--cs-con-accent);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-cards .cs-concl-ic {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--cs-con-accent); color: var(--cs-con-icon);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cs-con-accent) 18%, transparent);
+}
+.cs-root.cs-prose-cards .cs-concl.cs-no-title { align-items: center; }
+.cs-root.cs-prose-cards .cs-concl-lbl {
+  display: block;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+/* ---- gradient ---- */
+.cs-root.cs-prose-gradient .cs-pre-box {
+  position: relative;
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+.cs-root.cs-prose-gradient .cs-pre-box.cs-has-title { padding-top: 22px; margin-top: 8px; }
+.cs-root.cs-prose-gradient .cs-pre-head {
+  display: inline-flex; align-items: center; gap: 6px;
+  position: absolute; top: -11px; left: 16px;
+  background: var(--cs-bg); border: 1px solid var(--cs-pre-border); border-radius: 999px;
+  padding: 2px 11px 2px 8px;
+  font-size: 11.5px; font-weight: 700;
+}
+.cs-root.cs-prose-gradient .cs-pre-ic { color: var(--cs-pre-accent); }
+.cs-root.cs-prose-gradient .cs-concl {
+  display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: center;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 6px 18px rgba(30,58,138,.22);
+}
+.cs-root.cs-prose-gradient .cs-concl-ic {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--cs-con-accent); color: var(--cs-con-icon);
+}
+.cs-root.cs-prose-gradient .cs-concl-lbl {
+  display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* ---- tabs ---- */
+.cs-root.cs-prose-tabs .cs-pre-box {
+  position: relative;
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-tabs .cs-concl {
+  position: relative;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-tabs .cs-pre-box.cs-has-title,
+.cs-root.cs-prose-tabs .cs-concl.cs-has-title { border-top-left-radius: 0; }
+.cs-root.cs-prose-tabs .cs-preface.cs-has-title { padding-top: 34px; }
+.cs-root.cs-prose-tabs .cs-concl.cs-has-title { margin-top: 28px; }
+.cs-root.cs-prose-tabs .cs-concl-ic { display: none; }
+.cs-root.cs-prose-tabs .cs-pre-head,
+.cs-root.cs-prose-tabs .cs-concl-lbl {
+  display: inline-flex; align-items: center; gap: 6px;
+  position: absolute; bottom: 100%; left: -1px;
+  color: #ffffff;
+  border-radius: 7px 7px 0 0;
+  padding: 3px 12px 3px 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: .04em;
+}
+.cs-root.cs-prose-tabs .cs-pre-head { background: var(--cs-pre-label); }
+.cs-root.cs-prose-tabs .cs-concl-lbl { background: var(--cs-con-label); }
+
+/* ---- title only (no body) ---- */
+.cs-root .cs-pre-box.cs-no-body .cs-pre-head { margin-bottom: 0; }
+.cs-root .cs-concl.cs-no-body { align-items: center; }
+.cs-root .cs-concl.cs-no-body .cs-concl-lbl { margin-bottom: 0; }
+.cs-root.cs-prose-gradient .cs-pre-box.cs-no-body { padding: 10px 14px; margin-top: 0; }
+.cs-root.cs-prose-gradient .cs-pre-box.cs-no-body .cs-pre-head { position: static; }
+.cs-root.cs-prose-tabs .cs-preface.cs-no-body { padding-top: 16px; }
+.cs-root.cs-prose-tabs .cs-pre-box.cs-no-body,
+.cs-root.cs-prose-tabs .cs-concl.cs-no-body { background: none; border: none; padding: 0; margin-top: 0; }
+.cs-root.cs-prose-tabs .cs-pre-box.cs-no-body .cs-pre-head,
+.cs-root.cs-prose-tabs .cs-concl.cs-no-body .cs-concl-lbl { position: static; border-radius: 7px; }
+
+/* ---- inline helper ---- */
+.cs-root .cs-var { font-style: italic; }
+
+/* ---- responsive ---- */
+@media (max-width: 760px) {
+  .cs-root .cs-p-tiles,
+  .cs-root .cs-t-tree { grid-template-columns: 1fr !important; }
+  .cs-root .cs-p-tile + .cs-p-tile::before { display: none; }
+  .cs-root .cs-t-br { padding: 20px 0 0; }
+  .cs-root .cs-t-br::before { display: none; }
+  .cs-root .cs-t-br::after { height: 20px; }
+  .cs-root .cs-t-tip { top: 14px; }
+  .cs-root .cs-f-body { grid-template-columns: 1fr; }
+  .cs-root .cs-f-parent::after {
+    right: auto; left: calc(50% - .75px);
+    top: auto; bottom: -18px; width: 1.5px; height: 18px;
+  }
+  .cs-root .cs-f-rows { padding: 18px 0 0; }
+  .cs-root .cs-f-grid { grid-template-columns: 1fr; }
+  .cs-root .cs-f-verdict { border-right: none; }
+}
+</style><div class="cs-root cs-prose-cards" style="--cs-bg:#ffffff;--cs-ink:#0f172a;--cs-title:#1e3a8a;--cs-muted:#64748b;--cs-line:#e2e8f0;--cs-trunk:#94a3b8;--cs-parent-bg:#1e3a8a;--cs-parent-text:#ffffff"><div class="cs-card"><div class="cs-head"><div class="cs-kicker">Algebra</div><h2>Solutions of |x| = k</h2></div><div class="cs-preface cs-has-title" style="--cs-pre-bg:#eff6ff;--cs-pre-border:#bfdbfe;--cs-pre-accent:#2563eb;--cs-pre-label:#1e3a8a;--cs-pre-text:#1e293b"><div class="cs-pre-box cs-has-title"><div class="cs-pre-head"><span class="cs-pre-ic"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 7v4.2M8 4.6v.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg></span>Overview</div><div class="cs-pre-body">Preface body with <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">|x| = k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>.</div></div></div><div class="cs-t-body"><div class="cs-t-parent"><div class="cs-pf"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">|x| = k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span></div></div><div class="cs-t-by"><span class="cs-by">split by <b>value of <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span></b></span></div><div class="cs-t-stem"></div><div class="cs-t-tree" style="grid-template-columns:repeat(5, 1fr)"><div class="cs-t-br" style="--c:#2563eb;--t:color-mix(in srgb, #2563eb 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 1</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k &gt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Two roots</span></span></div><div class="cs-t-main"><div class="cs-desc">Mirror points.</div></div><div class="cs-ex"><span class="cs-lbl">e.g.</span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">|x|=5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">5</span></span></span></span></span></div></div></div><div class="cs-t-br" style="--c:#ea580c;--t:color-mix(in srgb, #ea580c 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 2</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">1</span><span class="cs-vtext"><span class="cs-vh">One root</span></span></div><div class="cs-t-main"><div class="cs-desc">Single point.</div></div></div></div><div class="cs-t-br" style="--c:#64748b;--t:color-mix(in srgb, #64748b 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 3</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k &lt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">0</span><span class="cs-vtext"><span class="cs-vh">No roots</span></span></div><div class="cs-t-main"><div class="cs-desc">Impossible.</div></div></div></div><div class="cs-t-br" style="--c:#0d9488;--t:color-mix(in srgb, #0d9488 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 4</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Unit case</span></span></div><div class="cs-t-main"><div class="cs-desc">Roots at one.</div></div></div></div><div class="cs-t-br" style="--c:#7c3aed;--t:color-mix(in srgb, #7c3aed 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 5</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">k = 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Two case</span></span></div><div class="cs-t-main"><div class="cs-desc">Roots at two.</div></div></div></div></div></div><div class="cs-concl cs-has-title" style="--cs-con-bg:#fffbeb;--cs-con-border:#fde68a;--cs-con-accent:#d97706;--cs-con-icon:#ffffff;--cs-con-label:#b45309;--cs-con-text:#1e293b"><span class="cs-concl-ic"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><div class="cs-concl-main"><span class="cs-concl-lbl">Takeaway</span><div class="cs-concl-body">Conclusion body with <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">\pm k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord">±</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>.</div></div></div></div></div></div><div><style>
+.cs-root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--cs-ink);
+  line-height: 1.5;
+}
+.cs-root *, .cs-root *::before, .cs-root *::after { box-sizing: border-box; }
+
+.cs-root .cs-card {
+  background: var(--cs-bg);
+  border: 1px solid var(--cs-line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15,23,42,.04);
+}
+
+/* ---- header ---- */
+.cs-root .cs-head { padding: 18px 24px 0; }
+.cs-root .cs-head .cs-kicker {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cs-title); opacity: .8;
+  margin-bottom: 4px;
+}
+.cs-root .cs-head h2 {
+  margin: 0; font-size: 17px; font-weight: 700;
+  color: var(--cs-title); letter-spacing: -0.01em;
+}
+.cs-root .cs-head .cs-lede { margin-top: 4px; font-size: 13px; color: var(--cs-muted); max-width: 640px; }
+
+/* ---- split-by pill ---- */
+.cs-root .cs-by {
+  display: inline-block;
+  font-size: 11.5px; color: var(--cs-muted);
+  background: var(--cs-bg);
+  border: 1px solid var(--cs-line);
+  border-radius: 999px;
+  padding: 2px 11px;
+}
+.cs-root .cs-by b { color: var(--cs-title); font-weight: 600; }
+.cs-root .cs-by-inv {
+  display: inline-block;
+  font-size: 11.5px;
+  color: var(--cs-parent-text);
+  background: color-mix(in srgb, var(--cs-parent-text) 14%, transparent);
+  border-radius: 999px;
+  padding: 2px 11px;
+}
+.cs-root .cs-by-inv .cs-by-l { opacity: .75; }
+.cs-root .cs-by-inv b { font-weight: 600; }
+
+/* ---- parent block (shared look) ---- */
+.cs-root .cs-pk {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  opacity: .7; margin-bottom: 4px;
+}
+.cs-root .cs-pdesc { font-size: 12.5px; opacity: .8; margin-top: 8px; line-height: 1.45; }
+
+/* ---- badge (count.n) ---- */
+.cs-root .cs-badge {
+  flex: none;
+  min-width: 26px; height: 26px; padding: 0 8px;
+  border-radius: 999px;
+  background: var(--c); color: var(--on);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; line-height: 1;
+  white-space: nowrap;
+}
+.cs-root .cs-badge.cs-wide { font-size: 12px; letter-spacing: .02em; }
+
+/* ---- verdict block ---- */
+.cs-root .cs-vtext { display: flex; flex-direction: column; min-width: 0; }
+.cs-root .cs-vh { font-size: 14.5px; font-weight: 700; color: var(--c); line-height: 1.25; }
+.cs-root .cs-vl { font-size: 11.5px; color: var(--cs-muted); line-height: 1.3; }
+
+/* ---- body lines ---- */
+.cs-root .cs-desc { font-size: 13.5px; line-height: 1.5; color: var(--tx); }
+.cs-root .cs-formula { font-size: 14px; color: var(--tx); }
+.cs-root .cs-formula.cs-na { color: var(--cs-muted); font-style: italic; font-size: 13px; }
+
+/* ---- example strip ---- */
+.cs-root .cs-ex { font-size: 12.5px; color: var(--tx); }
+.cs-root .cs-ex .cs-lbl {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--c); margin-right: 6px;
+}
+.cs-root .cs-ex .cs-pic { display: block; margin-top: 2px; color: var(--cs-muted); }
+
+/* ---- expandable details ---- */
+.cs-root .cs-more { border-top: 1px solid color-mix(in srgb, var(--c) 18%, #ffffff); }
+.cs-root .cs-more > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  font-size: 12px; font-weight: 600;
+  color: var(--c);
+}
+.cs-root .cs-more > summary::-webkit-details-marker { display: none; }
+.cs-root .cs-more > summary::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform .15s ease;
+  margin-right: 2px;
+}
+.cs-root .cs-more[open] > summary::before { transform: rotate(45deg); }
+.cs-root .cs-more > summary:hover { background: var(--t); }
+.cs-root .cs-more-body {
+  padding: 2px 14px 12px;
+  font-size: 13px; line-height: 1.55;
+  color: var(--tx);
+}
+.cs-root .cs-more-body p { margin: 0 0 6px; }
+.cs-root .cs-more-body p:last-child { margin-bottom: 0; }
+
+/* ================================================================= */
+/*  POSTER                                                             */
+/* ================================================================= */
+
+.cs-root .cs-p-top {
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  text-align: center;
+  padding: 18px 20px 16px;
+}
+.cs-root .cs-p-top .cs-pf { font-size: 21px; }
+.cs-root .cs-p-top .cs-by-inv { margin-top: 10px; }
+.cs-root .cs-p-top .cs-pdesc { max-width: 620px; margin-left: auto; margin-right: auto; }
+
+.cs-root .cs-p-tiles { display: grid; gap: 14px; padding: 22px 18px 18px; }
+.cs-root .cs-p-tile {
+  position: relative;
+  background: var(--t);
+  border: 1px solid color-mix(in srgb, var(--c) 28%, #ffffff);
+  border-top: 3px solid var(--c);
+  border-radius: 10px;
+  text-align: center;
+  display: flex; flex-direction: column;
+  min-width: 0;
+}
+.cs-root .cs-p-tile::before {
+  content: '';
+  position: absolute; top: -26px; left: calc(50% - 6px);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--cs-parent-bg);
+}
+.cs-root .cs-p-main {
+  flex: 1;
+  padding: 20px 16px 14px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.cs-root .cs-p-main .cs-badge {
+  min-width: 46px; height: 46px; padding: 0 14px;
+  font-size: 24px; font-weight: 800;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 14%, transparent);
+}
+.cs-root .cs-p-main .cs-badge.cs-wide { font-size: 15px; }
+.cs-root .cs-p-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--c); opacity: .8;
+  margin-top: 12px;
+}
+.cs-root .cs-p-cond { margin-top: 2px; font-size: 18px; color: var(--c); }
+.cs-root .cs-p-main .cs-vh { margin-top: 4px; font-size: 15px; color: var(--tx); }
+.cs-root .cs-p-main .cs-vl { margin-top: 1px; }
+.cs-root .cs-p-main .cs-desc { margin-top: 6px; font-size: 13px; color: var(--cs-muted); max-width: 240px; }
+.cs-root .cs-p-main .cs-formula { margin-top: 8px; }
+.cs-root .cs-p-main .cs-ex {
+  margin-top: 12px;
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 25%, #ffffff);
+  border-radius: 14px;
+  padding: 4px 12px;
+  font-size: 12px;
+}
+.cs-root .cs-p-tile .cs-more { text-align: left; }
+.cs-root .cs-p-tile .cs-more > summary { justify-content: center; }
+
+/* ================================================================= */
+/*  TREE                                                               */
+/* ================================================================= */
+
+.cs-root .cs-t-body { padding: 22px 24px 22px; }
+.cs-root .cs-t-parent {
+  width: fit-content; max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  border-radius: 10px;
+  padding: 12px 24px 11px;
+  box-shadow: 0 4px 14px rgba(30,58,138,.18);
+}
+.cs-root .cs-t-parent .cs-pf { font-size: 19px; }
+.cs-root .cs-t-parent .cs-pdesc { max-width: 520px; }
+.cs-root .cs-t-by { text-align: center; margin-top: 10px; }
+
+.cs-root .cs-t-stem { width: 1.5px; height: 14px; background: var(--cs-trunk); margin: 0 auto; }
+.cs-root .cs-t-tree { display: grid; }
+.cs-root .cs-t-br { position: relative; padding: 24px 9px 0; min-width: 0; }
+.cs-root .cs-t-br::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  border-top: 1.5px solid var(--cs-trunk);
+}
+.cs-root .cs-t-br:first-child::before { left: 50%; }
+.cs-root .cs-t-br:last-child::before  { right: 50%; }
+.cs-root .cs-t-br::after {
+  content: ''; position: absolute; top: 0; left: calc(50% - .75px);
+  width: 1.5px; height: 24px; background: var(--c);
+}
+.cs-root .cs-t-tip {
+  position: absolute; top: 18px; left: calc(50% - 4.5px);
+  border-left: 4.5px solid transparent;
+  border-right: 4.5px solid transparent;
+  border-top: 6px solid var(--c);
+}
+
+.cs-root .cs-t-card {
+  height: 100%;
+  display: flex; flex-direction: column;
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, #ffffff);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.cs-root .cs-t-cond {
+  background: var(--c); color: var(--on);
+  padding: 10px 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.cs-root .cs-t-cond .cs-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  opacity: .75; white-space: nowrap;
+}
+.cs-root .cs-t-cond .cs-expr { font-size: 18px; text-align: right; }
+.cs-root .cs-t-verdict {
+  background: var(--t);
+  padding: 11px 14px;
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--c) 15%, #ffffff);
+}
+.cs-root .cs-t-main { flex: 1; padding: 11px 14px 4px; display: flex; flex-direction: column; gap: 6px; }
+.cs-root .cs-t-card .cs-ex {
+  margin: 8px 14px 13px;
+  padding: 7px 10px;
+  background: var(--t);
+  border-radius: 6px;
+}
+
+/* ================================================================= */
+/*  FORK                                                               */
+/* ================================================================= */
+
+.cs-root .cs-f-body {
+  padding: 20px 24px 22px;
+  display: grid;
+  grid-template-columns: fit-content(320px) 1fr;
+  align-items: center;
+}
+.cs-root .cs-f-parent {
+  position: relative;
+  min-width: 170px;
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  border-radius: 10px;
+  padding: 16px 14px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(30,58,138,.18);
+}
+.cs-root .cs-f-parent .cs-pf { font-size: 18px; }
+.cs-root .cs-f-parent .cs-by-inv { margin-top: 8px; }
+.cs-root .cs-f-parent::after {
+  content: ''; position: absolute; right: -22px; top: calc(50% - .75px);
+  width: 22px; height: 1.5px; background: var(--cs-trunk);
+}
+
+.cs-root .cs-f-rows { padding-left: 22px; display: flex; flex-direction: column; min-width: 0; }
+.cs-root .cs-f-row { position: relative; padding: 6px 0 6px 28px; }
+.cs-root .cs-f-row::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  border-left: 1.5px solid var(--cs-trunk);
+}
+.cs-root .cs-f-row:first-child::before { top: 50%; }
+.cs-root .cs-f-row:last-child::before  { bottom: 50%; }
+.cs-root .cs-f-row::after {
+  content: ''; position: absolute; left: 0; top: calc(50% - .75px);
+  width: 22px; height: 1.5px; background: var(--c);
+}
+.cs-root .cs-f-tip {
+  position: absolute; left: 20px; top: calc(50% - 4.5px);
+  border-top: 4.5px solid transparent;
+  border-bottom: 4.5px solid transparent;
+  border-left: 6px solid var(--c);
+}
+/* with an open details panel the row grows; keep connectors on the top part */
+.cs-root .cs-f-row.cs-has-more::after,
+.cs-root .cs-f-row.cs-has-more .cs-f-tip { top: 42px; }
+.cs-root .cs-f-row.cs-has-more:first-child::before { top: 42px; }
+
+.cs-root .cs-f-case {
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, #ffffff);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.cs-root .cs-f-grid {
+  display: grid;
+  grid-template-columns: 130px 180px 1fr;
+  align-items: stretch;
+  min-height: 72px;
+}
+.cs-root .cs-f-cond {
+  background: var(--c); color: var(--on);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 10px; font-size: 17px; text-align: center;
+}
+.cs-root .cs-f-cond .cs-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9.5px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  opacity: .75; margin-bottom: 2px;
+}
+.cs-root .cs-f-verdict {
+  background: var(--t);
+  display: flex; align-items: center; gap: 9px;
+  padding: 10px 14px;
+  border-right: 1px solid color-mix(in srgb, var(--c) 15%, #ffffff);
+  min-width: 0;
+}
+.cs-root .cs-f-detail {
+  padding: 10px 16px;
+  display: flex; flex-direction: column; justify-content: center; gap: 3px;
+  min-width: 0;
+}
+.cs-root .cs-f-detail .cs-ex { color: var(--cs-muted); }
+
+
+/* ================================================================= */
+/*  PROSE: preface + conclusion  (proseStyle: cards | gradient | tabs) */
+/* ================================================================= */
+
+.cs-root .cs-preface { padding: 16px 24px 0; }
+.cs-root .cs-concl { margin: 0 24px 22px; }
+.cs-root .cs-pre-body p,
+.cs-root .cs-concl-body p { margin: 0 0 8px; }
+.cs-root .cs-pre-body p:last-child,
+.cs-root .cs-concl-body p:last-child { margin-bottom: 0; }
+.cs-root .cs-pre-body { font-size: 14px; line-height: 1.6; color: var(--cs-pre-text); }
+.cs-root .cs-concl-body { font-size: 14px; line-height: 1.6; color: var(--cs-con-text); }
+.cs-root .cs-concl-body .katex { color: var(--cs-con-text); }
+.cs-root .cs-pre-ic,
+.cs-root .cs-concl-ic { display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.cs-root .cs-pre-head { color: var(--cs-pre-label); }
+.cs-root .cs-concl-lbl { color: var(--cs-con-label); }
+
+/* ---- cards ---- */
+.cs-root.cs-prose-cards .cs-pre-box {
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-left: 4px solid var(--cs-pre-accent);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-cards .cs-pre-head {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.cs-root.cs-prose-cards .cs-concl {
+  display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-left: 4px solid var(--cs-con-accent);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-cards .cs-concl-ic {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--cs-con-accent); color: var(--cs-con-icon);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cs-con-accent) 18%, transparent);
+}
+.cs-root.cs-prose-cards .cs-concl.cs-no-title { align-items: center; }
+.cs-root.cs-prose-cards .cs-concl-lbl {
+  display: block;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+/* ---- gradient ---- */
+.cs-root.cs-prose-gradient .cs-pre-box {
+  position: relative;
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+.cs-root.cs-prose-gradient .cs-pre-box.cs-has-title { padding-top: 22px; margin-top: 8px; }
+.cs-root.cs-prose-gradient .cs-pre-head {
+  display: inline-flex; align-items: center; gap: 6px;
+  position: absolute; top: -11px; left: 16px;
+  background: var(--cs-bg); border: 1px solid var(--cs-pre-border); border-radius: 999px;
+  padding: 2px 11px 2px 8px;
+  font-size: 11.5px; font-weight: 700;
+}
+.cs-root.cs-prose-gradient .cs-pre-ic { color: var(--cs-pre-accent); }
+.cs-root.cs-prose-gradient .cs-concl {
+  display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: center;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 6px 18px rgba(30,58,138,.22);
+}
+.cs-root.cs-prose-gradient .cs-concl-ic {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--cs-con-accent); color: var(--cs-con-icon);
+}
+.cs-root.cs-prose-gradient .cs-concl-lbl {
+  display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* ---- tabs ---- */
+.cs-root.cs-prose-tabs .cs-pre-box {
+  position: relative;
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-tabs .cs-concl {
+  position: relative;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-tabs .cs-pre-box.cs-has-title,
+.cs-root.cs-prose-tabs .cs-concl.cs-has-title { border-top-left-radius: 0; }
+.cs-root.cs-prose-tabs .cs-preface.cs-has-title { padding-top: 34px; }
+.cs-root.cs-prose-tabs .cs-concl.cs-has-title { margin-top: 28px; }
+.cs-root.cs-prose-tabs .cs-concl-ic { display: none; }
+.cs-root.cs-prose-tabs .cs-pre-head,
+.cs-root.cs-prose-tabs .cs-concl-lbl {
+  display: inline-flex; align-items: center; gap: 6px;
+  position: absolute; bottom: 100%; left: -1px;
+  color: #ffffff;
+  border-radius: 7px 7px 0 0;
+  padding: 3px 12px 3px 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: .04em;
+}
+.cs-root.cs-prose-tabs .cs-pre-head { background: var(--cs-pre-label); }
+.cs-root.cs-prose-tabs .cs-concl-lbl { background: var(--cs-con-label); }
+
+/* ---- title only (no body) ---- */
+.cs-root .cs-pre-box.cs-no-body .cs-pre-head { margin-bottom: 0; }
+.cs-root .cs-concl.cs-no-body { align-items: center; }
+.cs-root .cs-concl.cs-no-body .cs-concl-lbl { margin-bottom: 0; }
+.cs-root.cs-prose-gradient .cs-pre-box.cs-no-body { padding: 10px 14px; margin-top: 0; }
+.cs-root.cs-prose-gradient .cs-pre-box.cs-no-body .cs-pre-head { position: static; }
+.cs-root.cs-prose-tabs .cs-preface.cs-no-body { padding-top: 16px; }
+.cs-root.cs-prose-tabs .cs-pre-box.cs-no-body,
+.cs-root.cs-prose-tabs .cs-concl.cs-no-body { background: none; border: none; padding: 0; margin-top: 0; }
+.cs-root.cs-prose-tabs .cs-pre-box.cs-no-body .cs-pre-head,
+.cs-root.cs-prose-tabs .cs-concl.cs-no-body .cs-concl-lbl { position: static; border-radius: 7px; }
+
+/* ---- inline helper ---- */
+.cs-root .cs-var { font-style: italic; }
+
+/* ---- responsive ---- */
+@media (max-width: 760px) {
+  .cs-root .cs-p-tiles,
+  .cs-root .cs-t-tree { grid-template-columns: 1fr !important; }
+  .cs-root .cs-p-tile + .cs-p-tile::before { display: none; }
+  .cs-root .cs-t-br { padding: 20px 0 0; }
+  .cs-root .cs-t-br::before { display: none; }
+  .cs-root .cs-t-br::after { height: 20px; }
+  .cs-root .cs-t-tip { top: 14px; }
+  .cs-root .cs-f-body { grid-template-columns: 1fr; }
+  .cs-root .cs-f-parent::after {
+    right: auto; left: calc(50% - .75px);
+    top: auto; bottom: -18px; width: 1.5px; height: 18px;
+  }
+  .cs-root .cs-f-rows { padding: 18px 0 0; }
+  .cs-root .cs-f-grid { grid-template-columns: 1fr; }
+  .cs-root .cs-f-verdict { border-right: none; }
+}
+</style><div class="cs-root cs-prose-cards" style="--cs-bg:#fdfcf7;--cs-ink:#3b2f1e;--cs-title:#7c2d12;--cs-muted:#64748b;--cs-line:#e7dcc4;--cs-trunk:#94a3b8;--cs-parent-bg:#7c2d12;--cs-parent-text:#ffffff"><div class="cs-card"><div class="cs-head"><div class="cs-kicker">Algebra</div><h2>Solutions of |x| = k</h2></div><div class="cs-preface cs-has-title" style="--cs-pre-bg:#fef3c7;--cs-pre-border:#fcd34d;--cs-pre-accent:#b45309;--cs-pre-label:#7c2d12;--cs-pre-text:#3b2f1e"><div class="cs-pre-box cs-has-title"><div class="cs-pre-head"><span class="cs-pre-ic"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 7v4.2M8 4.6v.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg></span>Overview</div><div class="cs-pre-body">Preface body with <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">|x| = k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>.</div></div></div><div class="cs-t-body"><div class="cs-t-parent"><div class="cs-pf"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">|x| = k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span></div></div><div class="cs-t-by"><span class="cs-by">split by <b>value of <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span></b></span></div><div class="cs-t-stem"></div><div class="cs-t-tree" style="grid-template-columns:repeat(5, 1fr)"><div class="cs-t-br" style="--c:#b45309;--t:color-mix(in srgb, #b45309 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 1</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k &gt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Two roots</span></span></div><div class="cs-t-main"><div class="cs-desc">Mirror points.</div></div><div class="cs-ex"><span class="cs-lbl">e.g.</span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">|x|=5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">5</span></span></span></span></span></div></div></div><div class="cs-t-br" style="--c:#0f766e;--t:color-mix(in srgb, #0f766e 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 2</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">1</span><span class="cs-vtext"><span class="cs-vh">One root</span></span></div><div class="cs-t-main"><div class="cs-desc">Single point.</div></div></div></div><div class="cs-t-br" style="--c:#64748b;--t:color-mix(in srgb, #64748b 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 3</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k &lt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">0</span><span class="cs-vtext"><span class="cs-vh">No roots</span></span></div><div class="cs-t-main"><div class="cs-desc">Impossible.</div></div></div></div><div class="cs-t-br" style="--c:#0d9488;--t:color-mix(in srgb, #0d9488 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 4</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Unit case</span></span></div><div class="cs-t-main"><div class="cs-desc">Roots at one.</div></div></div></div><div class="cs-t-br" style="--c:#7c3aed;--t:color-mix(in srgb, #7c3aed 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 5</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">k = 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Two case</span></span></div><div class="cs-t-main"><div class="cs-desc">Roots at two.</div></div></div></div></div></div><div class="cs-concl cs-has-title" style="--cs-con-bg:#ecfeff;--cs-con-border:#67e8f9;--cs-con-accent:#0e7490;--cs-con-icon:#ffffff;--cs-con-label:#155e75;--cs-con-text:#164e63"><span class="cs-concl-ic"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><div class="cs-concl-main"><span class="cs-concl-lbl">Takeaway</span><div class="cs-concl-body">Conclusion body with <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">\pm k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord">±</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>.</div></div></div></div></div></div></div><div class="v">gradient: defaults (left) · custom colours from data (right)</div><div class="g"><div><style>
+.cs-root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--cs-ink);
+  line-height: 1.5;
+}
+.cs-root *, .cs-root *::before, .cs-root *::after { box-sizing: border-box; }
+
+.cs-root .cs-card {
+  background: var(--cs-bg);
+  border: 1px solid var(--cs-line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15,23,42,.04);
+}
+
+/* ---- header ---- */
+.cs-root .cs-head { padding: 18px 24px 0; }
+.cs-root .cs-head .cs-kicker {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cs-title); opacity: .8;
+  margin-bottom: 4px;
+}
+.cs-root .cs-head h2 {
+  margin: 0; font-size: 17px; font-weight: 700;
+  color: var(--cs-title); letter-spacing: -0.01em;
+}
+.cs-root .cs-head .cs-lede { margin-top: 4px; font-size: 13px; color: var(--cs-muted); max-width: 640px; }
+
+/* ---- split-by pill ---- */
+.cs-root .cs-by {
+  display: inline-block;
+  font-size: 11.5px; color: var(--cs-muted);
+  background: var(--cs-bg);
+  border: 1px solid var(--cs-line);
+  border-radius: 999px;
+  padding: 2px 11px;
+}
+.cs-root .cs-by b { color: var(--cs-title); font-weight: 600; }
+.cs-root .cs-by-inv {
+  display: inline-block;
+  font-size: 11.5px;
+  color: var(--cs-parent-text);
+  background: color-mix(in srgb, var(--cs-parent-text) 14%, transparent);
+  border-radius: 999px;
+  padding: 2px 11px;
+}
+.cs-root .cs-by-inv .cs-by-l { opacity: .75; }
+.cs-root .cs-by-inv b { font-weight: 600; }
+
+/* ---- parent block (shared look) ---- */
+.cs-root .cs-pk {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  opacity: .7; margin-bottom: 4px;
+}
+.cs-root .cs-pdesc { font-size: 12.5px; opacity: .8; margin-top: 8px; line-height: 1.45; }
+
+/* ---- badge (count.n) ---- */
+.cs-root .cs-badge {
+  flex: none;
+  min-width: 26px; height: 26px; padding: 0 8px;
+  border-radius: 999px;
+  background: var(--c); color: var(--on);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; line-height: 1;
+  white-space: nowrap;
+}
+.cs-root .cs-badge.cs-wide { font-size: 12px; letter-spacing: .02em; }
+
+/* ---- verdict block ---- */
+.cs-root .cs-vtext { display: flex; flex-direction: column; min-width: 0; }
+.cs-root .cs-vh { font-size: 14.5px; font-weight: 700; color: var(--c); line-height: 1.25; }
+.cs-root .cs-vl { font-size: 11.5px; color: var(--cs-muted); line-height: 1.3; }
+
+/* ---- body lines ---- */
+.cs-root .cs-desc { font-size: 13.5px; line-height: 1.5; color: var(--tx); }
+.cs-root .cs-formula { font-size: 14px; color: var(--tx); }
+.cs-root .cs-formula.cs-na { color: var(--cs-muted); font-style: italic; font-size: 13px; }
+
+/* ---- example strip ---- */
+.cs-root .cs-ex { font-size: 12.5px; color: var(--tx); }
+.cs-root .cs-ex .cs-lbl {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--c); margin-right: 6px;
+}
+.cs-root .cs-ex .cs-pic { display: block; margin-top: 2px; color: var(--cs-muted); }
+
+/* ---- expandable details ---- */
+.cs-root .cs-more { border-top: 1px solid color-mix(in srgb, var(--c) 18%, #ffffff); }
+.cs-root .cs-more > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  font-size: 12px; font-weight: 600;
+  color: var(--c);
+}
+.cs-root .cs-more > summary::-webkit-details-marker { display: none; }
+.cs-root .cs-more > summary::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform .15s ease;
+  margin-right: 2px;
+}
+.cs-root .cs-more[open] > summary::before { transform: rotate(45deg); }
+.cs-root .cs-more > summary:hover { background: var(--t); }
+.cs-root .cs-more-body {
+  padding: 2px 14px 12px;
+  font-size: 13px; line-height: 1.55;
+  color: var(--tx);
+}
+.cs-root .cs-more-body p { margin: 0 0 6px; }
+.cs-root .cs-more-body p:last-child { margin-bottom: 0; }
+
+/* ================================================================= */
+/*  POSTER                                                             */
+/* ================================================================= */
+
+.cs-root .cs-p-top {
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  text-align: center;
+  padding: 18px 20px 16px;
+}
+.cs-root .cs-p-top .cs-pf { font-size: 21px; }
+.cs-root .cs-p-top .cs-by-inv { margin-top: 10px; }
+.cs-root .cs-p-top .cs-pdesc { max-width: 620px; margin-left: auto; margin-right: auto; }
+
+.cs-root .cs-p-tiles { display: grid; gap: 14px; padding: 22px 18px 18px; }
+.cs-root .cs-p-tile {
+  position: relative;
+  background: var(--t);
+  border: 1px solid color-mix(in srgb, var(--c) 28%, #ffffff);
+  border-top: 3px solid var(--c);
+  border-radius: 10px;
+  text-align: center;
+  display: flex; flex-direction: column;
+  min-width: 0;
+}
+.cs-root .cs-p-tile::before {
+  content: '';
+  position: absolute; top: -26px; left: calc(50% - 6px);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--cs-parent-bg);
+}
+.cs-root .cs-p-main {
+  flex: 1;
+  padding: 20px 16px 14px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.cs-root .cs-p-main .cs-badge {
+  min-width: 46px; height: 46px; padding: 0 14px;
+  font-size: 24px; font-weight: 800;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 14%, transparent);
+}
+.cs-root .cs-p-main .cs-badge.cs-wide { font-size: 15px; }
+.cs-root .cs-p-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--c); opacity: .8;
+  margin-top: 12px;
+}
+.cs-root .cs-p-cond { margin-top: 2px; font-size: 18px; color: var(--c); }
+.cs-root .cs-p-main .cs-vh { margin-top: 4px; font-size: 15px; color: var(--tx); }
+.cs-root .cs-p-main .cs-vl { margin-top: 1px; }
+.cs-root .cs-p-main .cs-desc { margin-top: 6px; font-size: 13px; color: var(--cs-muted); max-width: 240px; }
+.cs-root .cs-p-main .cs-formula { margin-top: 8px; }
+.cs-root .cs-p-main .cs-ex {
+  margin-top: 12px;
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 25%, #ffffff);
+  border-radius: 14px;
+  padding: 4px 12px;
+  font-size: 12px;
+}
+.cs-root .cs-p-tile .cs-more { text-align: left; }
+.cs-root .cs-p-tile .cs-more > summary { justify-content: center; }
+
+/* ================================================================= */
+/*  TREE                                                               */
+/* ================================================================= */
+
+.cs-root .cs-t-body { padding: 22px 24px 22px; }
+.cs-root .cs-t-parent {
+  width: fit-content; max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  border-radius: 10px;
+  padding: 12px 24px 11px;
+  box-shadow: 0 4px 14px rgba(30,58,138,.18);
+}
+.cs-root .cs-t-parent .cs-pf { font-size: 19px; }
+.cs-root .cs-t-parent .cs-pdesc { max-width: 520px; }
+.cs-root .cs-t-by { text-align: center; margin-top: 10px; }
+
+.cs-root .cs-t-stem { width: 1.5px; height: 14px; background: var(--cs-trunk); margin: 0 auto; }
+.cs-root .cs-t-tree { display: grid; }
+.cs-root .cs-t-br { position: relative; padding: 24px 9px 0; min-width: 0; }
+.cs-root .cs-t-br::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  border-top: 1.5px solid var(--cs-trunk);
+}
+.cs-root .cs-t-br:first-child::before { left: 50%; }
+.cs-root .cs-t-br:last-child::before  { right: 50%; }
+.cs-root .cs-t-br::after {
+  content: ''; position: absolute; top: 0; left: calc(50% - .75px);
+  width: 1.5px; height: 24px; background: var(--c);
+}
+.cs-root .cs-t-tip {
+  position: absolute; top: 18px; left: calc(50% - 4.5px);
+  border-left: 4.5px solid transparent;
+  border-right: 4.5px solid transparent;
+  border-top: 6px solid var(--c);
+}
+
+.cs-root .cs-t-card {
+  height: 100%;
+  display: flex; flex-direction: column;
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, #ffffff);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.cs-root .cs-t-cond {
+  background: var(--c); color: var(--on);
+  padding: 10px 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.cs-root .cs-t-cond .cs-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  opacity: .75; white-space: nowrap;
+}
+.cs-root .cs-t-cond .cs-expr { font-size: 18px; text-align: right; }
+.cs-root .cs-t-verdict {
+  background: var(--t);
+  padding: 11px 14px;
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--c) 15%, #ffffff);
+}
+.cs-root .cs-t-main { flex: 1; padding: 11px 14px 4px; display: flex; flex-direction: column; gap: 6px; }
+.cs-root .cs-t-card .cs-ex {
+  margin: 8px 14px 13px;
+  padding: 7px 10px;
+  background: var(--t);
+  border-radius: 6px;
+}
+
+/* ================================================================= */
+/*  FORK                                                               */
+/* ================================================================= */
+
+.cs-root .cs-f-body {
+  padding: 20px 24px 22px;
+  display: grid;
+  grid-template-columns: fit-content(320px) 1fr;
+  align-items: center;
+}
+.cs-root .cs-f-parent {
+  position: relative;
+  min-width: 170px;
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  border-radius: 10px;
+  padding: 16px 14px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(30,58,138,.18);
+}
+.cs-root .cs-f-parent .cs-pf { font-size: 18px; }
+.cs-root .cs-f-parent .cs-by-inv { margin-top: 8px; }
+.cs-root .cs-f-parent::after {
+  content: ''; position: absolute; right: -22px; top: calc(50% - .75px);
+  width: 22px; height: 1.5px; background: var(--cs-trunk);
+}
+
+.cs-root .cs-f-rows { padding-left: 22px; display: flex; flex-direction: column; min-width: 0; }
+.cs-root .cs-f-row { position: relative; padding: 6px 0 6px 28px; }
+.cs-root .cs-f-row::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  border-left: 1.5px solid var(--cs-trunk);
+}
+.cs-root .cs-f-row:first-child::before { top: 50%; }
+.cs-root .cs-f-row:last-child::before  { bottom: 50%; }
+.cs-root .cs-f-row::after {
+  content: ''; position: absolute; left: 0; top: calc(50% - .75px);
+  width: 22px; height: 1.5px; background: var(--c);
+}
+.cs-root .cs-f-tip {
+  position: absolute; left: 20px; top: calc(50% - 4.5px);
+  border-top: 4.5px solid transparent;
+  border-bottom: 4.5px solid transparent;
+  border-left: 6px solid var(--c);
+}
+/* with an open details panel the row grows; keep connectors on the top part */
+.cs-root .cs-f-row.cs-has-more::after,
+.cs-root .cs-f-row.cs-has-more .cs-f-tip { top: 42px; }
+.cs-root .cs-f-row.cs-has-more:first-child::before { top: 42px; }
+
+.cs-root .cs-f-case {
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, #ffffff);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.cs-root .cs-f-grid {
+  display: grid;
+  grid-template-columns: 130px 180px 1fr;
+  align-items: stretch;
+  min-height: 72px;
+}
+.cs-root .cs-f-cond {
+  background: var(--c); color: var(--on);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 10px; font-size: 17px; text-align: center;
+}
+.cs-root .cs-f-cond .cs-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9.5px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  opacity: .75; margin-bottom: 2px;
+}
+.cs-root .cs-f-verdict {
+  background: var(--t);
+  display: flex; align-items: center; gap: 9px;
+  padding: 10px 14px;
+  border-right: 1px solid color-mix(in srgb, var(--c) 15%, #ffffff);
+  min-width: 0;
+}
+.cs-root .cs-f-detail {
+  padding: 10px 16px;
+  display: flex; flex-direction: column; justify-content: center; gap: 3px;
+  min-width: 0;
+}
+.cs-root .cs-f-detail .cs-ex { color: var(--cs-muted); }
+
+
+/* ================================================================= */
+/*  PROSE: preface + conclusion  (proseStyle: cards | gradient | tabs) */
+/* ================================================================= */
+
+.cs-root .cs-preface { padding: 16px 24px 0; }
+.cs-root .cs-concl { margin: 0 24px 22px; }
+.cs-root .cs-pre-body p,
+.cs-root .cs-concl-body p { margin: 0 0 8px; }
+.cs-root .cs-pre-body p:last-child,
+.cs-root .cs-concl-body p:last-child { margin-bottom: 0; }
+.cs-root .cs-pre-body { font-size: 14px; line-height: 1.6; color: var(--cs-pre-text); }
+.cs-root .cs-concl-body { font-size: 14px; line-height: 1.6; color: var(--cs-con-text); }
+.cs-root .cs-concl-body .katex { color: var(--cs-con-text); }
+.cs-root .cs-pre-ic,
+.cs-root .cs-concl-ic { display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.cs-root .cs-pre-head { color: var(--cs-pre-label); }
+.cs-root .cs-concl-lbl { color: var(--cs-con-label); }
+
+/* ---- cards ---- */
+.cs-root.cs-prose-cards .cs-pre-box {
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-left: 4px solid var(--cs-pre-accent);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-cards .cs-pre-head {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.cs-root.cs-prose-cards .cs-concl {
+  display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-left: 4px solid var(--cs-con-accent);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-cards .cs-concl-ic {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--cs-con-accent); color: var(--cs-con-icon);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cs-con-accent) 18%, transparent);
+}
+.cs-root.cs-prose-cards .cs-concl.cs-no-title { align-items: center; }
+.cs-root.cs-prose-cards .cs-concl-lbl {
+  display: block;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+/* ---- gradient ---- */
+.cs-root.cs-prose-gradient .cs-pre-box {
+  position: relative;
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+.cs-root.cs-prose-gradient .cs-pre-box.cs-has-title { padding-top: 22px; margin-top: 8px; }
+.cs-root.cs-prose-gradient .cs-pre-head {
+  display: inline-flex; align-items: center; gap: 6px;
+  position: absolute; top: -11px; left: 16px;
+  background: var(--cs-bg); border: 1px solid var(--cs-pre-border); border-radius: 999px;
+  padding: 2px 11px 2px 8px;
+  font-size: 11.5px; font-weight: 700;
+}
+.cs-root.cs-prose-gradient .cs-pre-ic { color: var(--cs-pre-accent); }
+.cs-root.cs-prose-gradient .cs-concl {
+  display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: center;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 6px 18px rgba(30,58,138,.22);
+}
+.cs-root.cs-prose-gradient .cs-concl-ic {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--cs-con-accent); color: var(--cs-con-icon);
+}
+.cs-root.cs-prose-gradient .cs-concl-lbl {
+  display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* ---- tabs ---- */
+.cs-root.cs-prose-tabs .cs-pre-box {
+  position: relative;
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-tabs .cs-concl {
+  position: relative;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-tabs .cs-pre-box.cs-has-title,
+.cs-root.cs-prose-tabs .cs-concl.cs-has-title { border-top-left-radius: 0; }
+.cs-root.cs-prose-tabs .cs-preface.cs-has-title { padding-top: 34px; }
+.cs-root.cs-prose-tabs .cs-concl.cs-has-title { margin-top: 28px; }
+.cs-root.cs-prose-tabs .cs-concl-ic { display: none; }
+.cs-root.cs-prose-tabs .cs-pre-head,
+.cs-root.cs-prose-tabs .cs-concl-lbl {
+  display: inline-flex; align-items: center; gap: 6px;
+  position: absolute; bottom: 100%; left: -1px;
+  color: #ffffff;
+  border-radius: 7px 7px 0 0;
+  padding: 3px 12px 3px 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: .04em;
+}
+.cs-root.cs-prose-tabs .cs-pre-head { background: var(--cs-pre-label); }
+.cs-root.cs-prose-tabs .cs-concl-lbl { background: var(--cs-con-label); }
+
+/* ---- title only (no body) ---- */
+.cs-root .cs-pre-box.cs-no-body .cs-pre-head { margin-bottom: 0; }
+.cs-root .cs-concl.cs-no-body { align-items: center; }
+.cs-root .cs-concl.cs-no-body .cs-concl-lbl { margin-bottom: 0; }
+.cs-root.cs-prose-gradient .cs-pre-box.cs-no-body { padding: 10px 14px; margin-top: 0; }
+.cs-root.cs-prose-gradient .cs-pre-box.cs-no-body .cs-pre-head { position: static; }
+.cs-root.cs-prose-tabs .cs-preface.cs-no-body { padding-top: 16px; }
+.cs-root.cs-prose-tabs .cs-pre-box.cs-no-body,
+.cs-root.cs-prose-tabs .cs-concl.cs-no-body { background: none; border: none; padding: 0; margin-top: 0; }
+.cs-root.cs-prose-tabs .cs-pre-box.cs-no-body .cs-pre-head,
+.cs-root.cs-prose-tabs .cs-concl.cs-no-body .cs-concl-lbl { position: static; border-radius: 7px; }
+
+/* ---- inline helper ---- */
+.cs-root .cs-var { font-style: italic; }
+
+/* ---- responsive ---- */
+@media (max-width: 760px) {
+  .cs-root .cs-p-tiles,
+  .cs-root .cs-t-tree { grid-template-columns: 1fr !important; }
+  .cs-root .cs-p-tile + .cs-p-tile::before { display: none; }
+  .cs-root .cs-t-br { padding: 20px 0 0; }
+  .cs-root .cs-t-br::before { display: none; }
+  .cs-root .cs-t-br::after { height: 20px; }
+  .cs-root .cs-t-tip { top: 14px; }
+  .cs-root .cs-f-body { grid-template-columns: 1fr; }
+  .cs-root .cs-f-parent::after {
+    right: auto; left: calc(50% - .75px);
+    top: auto; bottom: -18px; width: 1.5px; height: 18px;
+  }
+  .cs-root .cs-f-rows { padding: 18px 0 0; }
+  .cs-root .cs-f-grid { grid-template-columns: 1fr; }
+  .cs-root .cs-f-verdict { border-right: none; }
+}
+</style><div class="cs-root cs-prose-gradient" style="--cs-bg:#ffffff;--cs-ink:#0f172a;--cs-title:#1e3a8a;--cs-muted:#64748b;--cs-line:#e2e8f0;--cs-trunk:#94a3b8;--cs-parent-bg:#1e3a8a;--cs-parent-text:#ffffff"><div class="cs-card"><div class="cs-head"><div class="cs-kicker">Algebra</div><h2>Solutions of |x| = k</h2></div><div class="cs-preface cs-has-title" style="--cs-pre-bg:linear-gradient(135deg, #eff6ff 0%, #eef2ff 55%, #f5f3ff 100%);--cs-pre-border:#c7d2fe;--cs-pre-accent:#2563eb;--cs-pre-label:#1e3a8a;--cs-pre-text:#1e293b"><div class="cs-pre-box cs-has-title"><div class="cs-pre-head"><span class="cs-pre-ic"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 7v4.2M8 4.6v.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg></span>Overview</div><div class="cs-pre-body">Preface body with <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">|x| = k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>.</div></div></div><div class="cs-t-body"><div class="cs-t-parent"><div class="cs-pf"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">|x| = k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span></div></div><div class="cs-t-by"><span class="cs-by">split by <b>value of <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span></b></span></div><div class="cs-t-stem"></div><div class="cs-t-tree" style="grid-template-columns:repeat(5, 1fr)"><div class="cs-t-br" style="--c:#2563eb;--t:color-mix(in srgb, #2563eb 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 1</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k &gt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Two roots</span></span></div><div class="cs-t-main"><div class="cs-desc">Mirror points.</div></div><div class="cs-ex"><span class="cs-lbl">e.g.</span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">|x|=5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">5</span></span></span></span></span></div></div></div><div class="cs-t-br" style="--c:#ea580c;--t:color-mix(in srgb, #ea580c 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 2</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">1</span><span class="cs-vtext"><span class="cs-vh">One root</span></span></div><div class="cs-t-main"><div class="cs-desc">Single point.</div></div></div></div><div class="cs-t-br" style="--c:#64748b;--t:color-mix(in srgb, #64748b 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 3</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k &lt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">0</span><span class="cs-vtext"><span class="cs-vh">No roots</span></span></div><div class="cs-t-main"><div class="cs-desc">Impossible.</div></div></div></div><div class="cs-t-br" style="--c:#0d9488;--t:color-mix(in srgb, #0d9488 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 4</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Unit case</span></span></div><div class="cs-t-main"><div class="cs-desc">Roots at one.</div></div></div></div><div class="cs-t-br" style="--c:#7c3aed;--t:color-mix(in srgb, #7c3aed 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 5</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">k = 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Two case</span></span></div><div class="cs-t-main"><div class="cs-desc">Roots at two.</div></div></div></div></div></div><div class="cs-concl cs-has-title" style="--cs-con-bg:linear-gradient(120deg, #1e3a8a 0%, #1d4ed8 100%);--cs-con-border:transparent;--cs-con-accent:#ffffff;--cs-con-icon:#2563eb;--cs-con-label:#bfdbfe;--cs-con-text:#ffffff"><span class="cs-concl-ic"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><div class="cs-concl-main"><span class="cs-concl-lbl">Takeaway</span><div class="cs-concl-body">Conclusion body with <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">\pm k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord">±</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>.</div></div></div></div></div></div><div><style>
+.cs-root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--cs-ink);
+  line-height: 1.5;
+}
+.cs-root *, .cs-root *::before, .cs-root *::after { box-sizing: border-box; }
+
+.cs-root .cs-card {
+  background: var(--cs-bg);
+  border: 1px solid var(--cs-line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15,23,42,.04);
+}
+
+/* ---- header ---- */
+.cs-root .cs-head { padding: 18px 24px 0; }
+.cs-root .cs-head .cs-kicker {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cs-title); opacity: .8;
+  margin-bottom: 4px;
+}
+.cs-root .cs-head h2 {
+  margin: 0; font-size: 17px; font-weight: 700;
+  color: var(--cs-title); letter-spacing: -0.01em;
+}
+.cs-root .cs-head .cs-lede { margin-top: 4px; font-size: 13px; color: var(--cs-muted); max-width: 640px; }
+
+/* ---- split-by pill ---- */
+.cs-root .cs-by {
+  display: inline-block;
+  font-size: 11.5px; color: var(--cs-muted);
+  background: var(--cs-bg);
+  border: 1px solid var(--cs-line);
+  border-radius: 999px;
+  padding: 2px 11px;
+}
+.cs-root .cs-by b { color: var(--cs-title); font-weight: 600; }
+.cs-root .cs-by-inv {
+  display: inline-block;
+  font-size: 11.5px;
+  color: var(--cs-parent-text);
+  background: color-mix(in srgb, var(--cs-parent-text) 14%, transparent);
+  border-radius: 999px;
+  padding: 2px 11px;
+}
+.cs-root .cs-by-inv .cs-by-l { opacity: .75; }
+.cs-root .cs-by-inv b { font-weight: 600; }
+
+/* ---- parent block (shared look) ---- */
+.cs-root .cs-pk {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  opacity: .7; margin-bottom: 4px;
+}
+.cs-root .cs-pdesc { font-size: 12.5px; opacity: .8; margin-top: 8px; line-height: 1.45; }
+
+/* ---- badge (count.n) ---- */
+.cs-root .cs-badge {
+  flex: none;
+  min-width: 26px; height: 26px; padding: 0 8px;
+  border-radius: 999px;
+  background: var(--c); color: var(--on);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; line-height: 1;
+  white-space: nowrap;
+}
+.cs-root .cs-badge.cs-wide { font-size: 12px; letter-spacing: .02em; }
+
+/* ---- verdict block ---- */
+.cs-root .cs-vtext { display: flex; flex-direction: column; min-width: 0; }
+.cs-root .cs-vh { font-size: 14.5px; font-weight: 700; color: var(--c); line-height: 1.25; }
+.cs-root .cs-vl { font-size: 11.5px; color: var(--cs-muted); line-height: 1.3; }
+
+/* ---- body lines ---- */
+.cs-root .cs-desc { font-size: 13.5px; line-height: 1.5; color: var(--tx); }
+.cs-root .cs-formula { font-size: 14px; color: var(--tx); }
+.cs-root .cs-formula.cs-na { color: var(--cs-muted); font-style: italic; font-size: 13px; }
+
+/* ---- example strip ---- */
+.cs-root .cs-ex { font-size: 12.5px; color: var(--tx); }
+.cs-root .cs-ex .cs-lbl {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--c); margin-right: 6px;
+}
+.cs-root .cs-ex .cs-pic { display: block; margin-top: 2px; color: var(--cs-muted); }
+
+/* ---- expandable details ---- */
+.cs-root .cs-more { border-top: 1px solid color-mix(in srgb, var(--c) 18%, #ffffff); }
+.cs-root .cs-more > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  font-size: 12px; font-weight: 600;
+  color: var(--c);
+}
+.cs-root .cs-more > summary::-webkit-details-marker { display: none; }
+.cs-root .cs-more > summary::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform .15s ease;
+  margin-right: 2px;
+}
+.cs-root .cs-more[open] > summary::before { transform: rotate(45deg); }
+.cs-root .cs-more > summary:hover { background: var(--t); }
+.cs-root .cs-more-body {
+  padding: 2px 14px 12px;
+  font-size: 13px; line-height: 1.55;
+  color: var(--tx);
+}
+.cs-root .cs-more-body p { margin: 0 0 6px; }
+.cs-root .cs-more-body p:last-child { margin-bottom: 0; }
+
+/* ================================================================= */
+/*  POSTER                                                             */
+/* ================================================================= */
+
+.cs-root .cs-p-top {
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  text-align: center;
+  padding: 18px 20px 16px;
+}
+.cs-root .cs-p-top .cs-pf { font-size: 21px; }
+.cs-root .cs-p-top .cs-by-inv { margin-top: 10px; }
+.cs-root .cs-p-top .cs-pdesc { max-width: 620px; margin-left: auto; margin-right: auto; }
+
+.cs-root .cs-p-tiles { display: grid; gap: 14px; padding: 22px 18px 18px; }
+.cs-root .cs-p-tile {
+  position: relative;
+  background: var(--t);
+  border: 1px solid color-mix(in srgb, var(--c) 28%, #ffffff);
+  border-top: 3px solid var(--c);
+  border-radius: 10px;
+  text-align: center;
+  display: flex; flex-direction: column;
+  min-width: 0;
+}
+.cs-root .cs-p-tile::before {
+  content: '';
+  position: absolute; top: -26px; left: calc(50% - 6px);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--cs-parent-bg);
+}
+.cs-root .cs-p-main {
+  flex: 1;
+  padding: 20px 16px 14px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.cs-root .cs-p-main .cs-badge {
+  min-width: 46px; height: 46px; padding: 0 14px;
+  font-size: 24px; font-weight: 800;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 14%, transparent);
+}
+.cs-root .cs-p-main .cs-badge.cs-wide { font-size: 15px; }
+.cs-root .cs-p-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--c); opacity: .8;
+  margin-top: 12px;
+}
+.cs-root .cs-p-cond { margin-top: 2px; font-size: 18px; color: var(--c); }
+.cs-root .cs-p-main .cs-vh { margin-top: 4px; font-size: 15px; color: var(--tx); }
+.cs-root .cs-p-main .cs-vl { margin-top: 1px; }
+.cs-root .cs-p-main .cs-desc { margin-top: 6px; font-size: 13px; color: var(--cs-muted); max-width: 240px; }
+.cs-root .cs-p-main .cs-formula { margin-top: 8px; }
+.cs-root .cs-p-main .cs-ex {
+  margin-top: 12px;
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 25%, #ffffff);
+  border-radius: 14px;
+  padding: 4px 12px;
+  font-size: 12px;
+}
+.cs-root .cs-p-tile .cs-more { text-align: left; }
+.cs-root .cs-p-tile .cs-more > summary { justify-content: center; }
+
+/* ================================================================= */
+/*  TREE                                                               */
+/* ================================================================= */
+
+.cs-root .cs-t-body { padding: 22px 24px 22px; }
+.cs-root .cs-t-parent {
+  width: fit-content; max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  border-radius: 10px;
+  padding: 12px 24px 11px;
+  box-shadow: 0 4px 14px rgba(30,58,138,.18);
+}
+.cs-root .cs-t-parent .cs-pf { font-size: 19px; }
+.cs-root .cs-t-parent .cs-pdesc { max-width: 520px; }
+.cs-root .cs-t-by { text-align: center; margin-top: 10px; }
+
+.cs-root .cs-t-stem { width: 1.5px; height: 14px; background: var(--cs-trunk); margin: 0 auto; }
+.cs-root .cs-t-tree { display: grid; }
+.cs-root .cs-t-br { position: relative; padding: 24px 9px 0; min-width: 0; }
+.cs-root .cs-t-br::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  border-top: 1.5px solid var(--cs-trunk);
+}
+.cs-root .cs-t-br:first-child::before { left: 50%; }
+.cs-root .cs-t-br:last-child::before  { right: 50%; }
+.cs-root .cs-t-br::after {
+  content: ''; position: absolute; top: 0; left: calc(50% - .75px);
+  width: 1.5px; height: 24px; background: var(--c);
+}
+.cs-root .cs-t-tip {
+  position: absolute; top: 18px; left: calc(50% - 4.5px);
+  border-left: 4.5px solid transparent;
+  border-right: 4.5px solid transparent;
+  border-top: 6px solid var(--c);
+}
+
+.cs-root .cs-t-card {
+  height: 100%;
+  display: flex; flex-direction: column;
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, #ffffff);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.cs-root .cs-t-cond {
+  background: var(--c); color: var(--on);
+  padding: 10px 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.cs-root .cs-t-cond .cs-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  opacity: .75; white-space: nowrap;
+}
+.cs-root .cs-t-cond .cs-expr { font-size: 18px; text-align: right; }
+.cs-root .cs-t-verdict {
+  background: var(--t);
+  padding: 11px 14px;
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--c) 15%, #ffffff);
+}
+.cs-root .cs-t-main { flex: 1; padding: 11px 14px 4px; display: flex; flex-direction: column; gap: 6px; }
+.cs-root .cs-t-card .cs-ex {
+  margin: 8px 14px 13px;
+  padding: 7px 10px;
+  background: var(--t);
+  border-radius: 6px;
+}
+
+/* ================================================================= */
+/*  FORK                                                               */
+/* ================================================================= */
+
+.cs-root .cs-f-body {
+  padding: 20px 24px 22px;
+  display: grid;
+  grid-template-columns: fit-content(320px) 1fr;
+  align-items: center;
+}
+.cs-root .cs-f-parent {
+  position: relative;
+  min-width: 170px;
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  border-radius: 10px;
+  padding: 16px 14px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(30,58,138,.18);
+}
+.cs-root .cs-f-parent .cs-pf { font-size: 18px; }
+.cs-root .cs-f-parent .cs-by-inv { margin-top: 8px; }
+.cs-root .cs-f-parent::after {
+  content: ''; position: absolute; right: -22px; top: calc(50% - .75px);
+  width: 22px; height: 1.5px; background: var(--cs-trunk);
+}
+
+.cs-root .cs-f-rows { padding-left: 22px; display: flex; flex-direction: column; min-width: 0; }
+.cs-root .cs-f-row { position: relative; padding: 6px 0 6px 28px; }
+.cs-root .cs-f-row::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  border-left: 1.5px solid var(--cs-trunk);
+}
+.cs-root .cs-f-row:first-child::before { top: 50%; }
+.cs-root .cs-f-row:last-child::before  { bottom: 50%; }
+.cs-root .cs-f-row::after {
+  content: ''; position: absolute; left: 0; top: calc(50% - .75px);
+  width: 22px; height: 1.5px; background: var(--c);
+}
+.cs-root .cs-f-tip {
+  position: absolute; left: 20px; top: calc(50% - 4.5px);
+  border-top: 4.5px solid transparent;
+  border-bottom: 4.5px solid transparent;
+  border-left: 6px solid var(--c);
+}
+/* with an open details panel the row grows; keep connectors on the top part */
+.cs-root .cs-f-row.cs-has-more::after,
+.cs-root .cs-f-row.cs-has-more .cs-f-tip { top: 42px; }
+.cs-root .cs-f-row.cs-has-more:first-child::before { top: 42px; }
+
+.cs-root .cs-f-case {
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, #ffffff);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.cs-root .cs-f-grid {
+  display: grid;
+  grid-template-columns: 130px 180px 1fr;
+  align-items: stretch;
+  min-height: 72px;
+}
+.cs-root .cs-f-cond {
+  background: var(--c); color: var(--on);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 10px; font-size: 17px; text-align: center;
+}
+.cs-root .cs-f-cond .cs-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9.5px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  opacity: .75; margin-bottom: 2px;
+}
+.cs-root .cs-f-verdict {
+  background: var(--t);
+  display: flex; align-items: center; gap: 9px;
+  padding: 10px 14px;
+  border-right: 1px solid color-mix(in srgb, var(--c) 15%, #ffffff);
+  min-width: 0;
+}
+.cs-root .cs-f-detail {
+  padding: 10px 16px;
+  display: flex; flex-direction: column; justify-content: center; gap: 3px;
+  min-width: 0;
+}
+.cs-root .cs-f-detail .cs-ex { color: var(--cs-muted); }
+
+
+/* ================================================================= */
+/*  PROSE: preface + conclusion  (proseStyle: cards | gradient | tabs) */
+/* ================================================================= */
+
+.cs-root .cs-preface { padding: 16px 24px 0; }
+.cs-root .cs-concl { margin: 0 24px 22px; }
+.cs-root .cs-pre-body p,
+.cs-root .cs-concl-body p { margin: 0 0 8px; }
+.cs-root .cs-pre-body p:last-child,
+.cs-root .cs-concl-body p:last-child { margin-bottom: 0; }
+.cs-root .cs-pre-body { font-size: 14px; line-height: 1.6; color: var(--cs-pre-text); }
+.cs-root .cs-concl-body { font-size: 14px; line-height: 1.6; color: var(--cs-con-text); }
+.cs-root .cs-concl-body .katex { color: var(--cs-con-text); }
+.cs-root .cs-pre-ic,
+.cs-root .cs-concl-ic { display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.cs-root .cs-pre-head { color: var(--cs-pre-label); }
+.cs-root .cs-concl-lbl { color: var(--cs-con-label); }
+
+/* ---- cards ---- */
+.cs-root.cs-prose-cards .cs-pre-box {
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-left: 4px solid var(--cs-pre-accent);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-cards .cs-pre-head {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.cs-root.cs-prose-cards .cs-concl {
+  display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-left: 4px solid var(--cs-con-accent);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-cards .cs-concl-ic {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--cs-con-accent); color: var(--cs-con-icon);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cs-con-accent) 18%, transparent);
+}
+.cs-root.cs-prose-cards .cs-concl.cs-no-title { align-items: center; }
+.cs-root.cs-prose-cards .cs-concl-lbl {
+  display: block;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+/* ---- gradient ---- */
+.cs-root.cs-prose-gradient .cs-pre-box {
+  position: relative;
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+.cs-root.cs-prose-gradient .cs-pre-box.cs-has-title { padding-top: 22px; margin-top: 8px; }
+.cs-root.cs-prose-gradient .cs-pre-head {
+  display: inline-flex; align-items: center; gap: 6px;
+  position: absolute; top: -11px; left: 16px;
+  background: var(--cs-bg); border: 1px solid var(--cs-pre-border); border-radius: 999px;
+  padding: 2px 11px 2px 8px;
+  font-size: 11.5px; font-weight: 700;
+}
+.cs-root.cs-prose-gradient .cs-pre-ic { color: var(--cs-pre-accent); }
+.cs-root.cs-prose-gradient .cs-concl {
+  display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: center;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 6px 18px rgba(30,58,138,.22);
+}
+.cs-root.cs-prose-gradient .cs-concl-ic {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--cs-con-accent); color: var(--cs-con-icon);
+}
+.cs-root.cs-prose-gradient .cs-concl-lbl {
+  display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* ---- tabs ---- */
+.cs-root.cs-prose-tabs .cs-pre-box {
+  position: relative;
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-tabs .cs-concl {
+  position: relative;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-tabs .cs-pre-box.cs-has-title,
+.cs-root.cs-prose-tabs .cs-concl.cs-has-title { border-top-left-radius: 0; }
+.cs-root.cs-prose-tabs .cs-preface.cs-has-title { padding-top: 34px; }
+.cs-root.cs-prose-tabs .cs-concl.cs-has-title { margin-top: 28px; }
+.cs-root.cs-prose-tabs .cs-concl-ic { display: none; }
+.cs-root.cs-prose-tabs .cs-pre-head,
+.cs-root.cs-prose-tabs .cs-concl-lbl {
+  display: inline-flex; align-items: center; gap: 6px;
+  position: absolute; bottom: 100%; left: -1px;
+  color: #ffffff;
+  border-radius: 7px 7px 0 0;
+  padding: 3px 12px 3px 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: .04em;
+}
+.cs-root.cs-prose-tabs .cs-pre-head { background: var(--cs-pre-label); }
+.cs-root.cs-prose-tabs .cs-concl-lbl { background: var(--cs-con-label); }
+
+/* ---- title only (no body) ---- */
+.cs-root .cs-pre-box.cs-no-body .cs-pre-head { margin-bottom: 0; }
+.cs-root .cs-concl.cs-no-body { align-items: center; }
+.cs-root .cs-concl.cs-no-body .cs-concl-lbl { margin-bottom: 0; }
+.cs-root.cs-prose-gradient .cs-pre-box.cs-no-body { padding: 10px 14px; margin-top: 0; }
+.cs-root.cs-prose-gradient .cs-pre-box.cs-no-body .cs-pre-head { position: static; }
+.cs-root.cs-prose-tabs .cs-preface.cs-no-body { padding-top: 16px; }
+.cs-root.cs-prose-tabs .cs-pre-box.cs-no-body,
+.cs-root.cs-prose-tabs .cs-concl.cs-no-body { background: none; border: none; padding: 0; margin-top: 0; }
+.cs-root.cs-prose-tabs .cs-pre-box.cs-no-body .cs-pre-head,
+.cs-root.cs-prose-tabs .cs-concl.cs-no-body .cs-concl-lbl { position: static; border-radius: 7px; }
+
+/* ---- inline helper ---- */
+.cs-root .cs-var { font-style: italic; }
+
+/* ---- responsive ---- */
+@media (max-width: 760px) {
+  .cs-root .cs-p-tiles,
+  .cs-root .cs-t-tree { grid-template-columns: 1fr !important; }
+  .cs-root .cs-p-tile + .cs-p-tile::before { display: none; }
+  .cs-root .cs-t-br { padding: 20px 0 0; }
+  .cs-root .cs-t-br::before { display: none; }
+  .cs-root .cs-t-br::after { height: 20px; }
+  .cs-root .cs-t-tip { top: 14px; }
+  .cs-root .cs-f-body { grid-template-columns: 1fr; }
+  .cs-root .cs-f-parent::after {
+    right: auto; left: calc(50% - .75px);
+    top: auto; bottom: -18px; width: 1.5px; height: 18px;
+  }
+  .cs-root .cs-f-rows { padding: 18px 0 0; }
+  .cs-root .cs-f-grid { grid-template-columns: 1fr; }
+  .cs-root .cs-f-verdict { border-right: none; }
+}
+</style><div class="cs-root cs-prose-gradient" style="--cs-bg:#fdfcf7;--cs-ink:#3b2f1e;--cs-title:#7c2d12;--cs-muted:#64748b;--cs-line:#e7dcc4;--cs-trunk:#94a3b8;--cs-parent-bg:#7c2d12;--cs-parent-text:#ffffff"><div class="cs-card"><div class="cs-head"><div class="cs-kicker">Algebra</div><h2>Solutions of |x| = k</h2></div><div class="cs-preface cs-has-title" style="--cs-pre-bg:#fef3c7;--cs-pre-border:#fcd34d;--cs-pre-accent:#b45309;--cs-pre-label:#7c2d12;--cs-pre-text:#3b2f1e"><div class="cs-pre-box cs-has-title"><div class="cs-pre-head"><span class="cs-pre-ic"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 7v4.2M8 4.6v.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg></span>Overview</div><div class="cs-pre-body">Preface body with <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">|x| = k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>.</div></div></div><div class="cs-t-body"><div class="cs-t-parent"><div class="cs-pf"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">|x| = k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span></div></div><div class="cs-t-by"><span class="cs-by">split by <b>value of <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span></b></span></div><div class="cs-t-stem"></div><div class="cs-t-tree" style="grid-template-columns:repeat(5, 1fr)"><div class="cs-t-br" style="--c:#b45309;--t:color-mix(in srgb, #b45309 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 1</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k &gt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Two roots</span></span></div><div class="cs-t-main"><div class="cs-desc">Mirror points.</div></div><div class="cs-ex"><span class="cs-lbl">e.g.</span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">|x|=5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">5</span></span></span></span></span></div></div></div><div class="cs-t-br" style="--c:#0f766e;--t:color-mix(in srgb, #0f766e 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 2</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">1</span><span class="cs-vtext"><span class="cs-vh">One root</span></span></div><div class="cs-t-main"><div class="cs-desc">Single point.</div></div></div></div><div class="cs-t-br" style="--c:#64748b;--t:color-mix(in srgb, #64748b 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 3</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k &lt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">0</span><span class="cs-vtext"><span class="cs-vh">No roots</span></span></div><div class="cs-t-main"><div class="cs-desc">Impossible.</div></div></div></div><div class="cs-t-br" style="--c:#0d9488;--t:color-mix(in srgb, #0d9488 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 4</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Unit case</span></span></div><div class="cs-t-main"><div class="cs-desc">Roots at one.</div></div></div></div><div class="cs-t-br" style="--c:#7c3aed;--t:color-mix(in srgb, #7c3aed 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 5</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">k = 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Two case</span></span></div><div class="cs-t-main"><div class="cs-desc">Roots at two.</div></div></div></div></div></div><div class="cs-concl cs-has-title" style="--cs-con-bg:#ecfeff;--cs-con-border:#67e8f9;--cs-con-accent:#0e7490;--cs-con-icon:#ffffff;--cs-con-label:#155e75;--cs-con-text:#164e63"><span class="cs-concl-ic"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><div class="cs-concl-main"><span class="cs-concl-lbl">Takeaway</span><div class="cs-concl-body">Conclusion body with <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">\pm k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord">±</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>.</div></div></div></div></div></div></div><div class="v">tabs: defaults (left) · custom colours from data (right)</div><div class="g"><div><style>
+.cs-root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--cs-ink);
+  line-height: 1.5;
+}
+.cs-root *, .cs-root *::before, .cs-root *::after { box-sizing: border-box; }
+
+.cs-root .cs-card {
+  background: var(--cs-bg);
+  border: 1px solid var(--cs-line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15,23,42,.04);
+}
+
+/* ---- header ---- */
+.cs-root .cs-head { padding: 18px 24px 0; }
+.cs-root .cs-head .cs-kicker {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cs-title); opacity: .8;
+  margin-bottom: 4px;
+}
+.cs-root .cs-head h2 {
+  margin: 0; font-size: 17px; font-weight: 700;
+  color: var(--cs-title); letter-spacing: -0.01em;
+}
+.cs-root .cs-head .cs-lede { margin-top: 4px; font-size: 13px; color: var(--cs-muted); max-width: 640px; }
+
+/* ---- split-by pill ---- */
+.cs-root .cs-by {
+  display: inline-block;
+  font-size: 11.5px; color: var(--cs-muted);
+  background: var(--cs-bg);
+  border: 1px solid var(--cs-line);
+  border-radius: 999px;
+  padding: 2px 11px;
+}
+.cs-root .cs-by b { color: var(--cs-title); font-weight: 600; }
+.cs-root .cs-by-inv {
+  display: inline-block;
+  font-size: 11.5px;
+  color: var(--cs-parent-text);
+  background: color-mix(in srgb, var(--cs-parent-text) 14%, transparent);
+  border-radius: 999px;
+  padding: 2px 11px;
+}
+.cs-root .cs-by-inv .cs-by-l { opacity: .75; }
+.cs-root .cs-by-inv b { font-weight: 600; }
+
+/* ---- parent block (shared look) ---- */
+.cs-root .cs-pk {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  opacity: .7; margin-bottom: 4px;
+}
+.cs-root .cs-pdesc { font-size: 12.5px; opacity: .8; margin-top: 8px; line-height: 1.45; }
+
+/* ---- badge (count.n) ---- */
+.cs-root .cs-badge {
+  flex: none;
+  min-width: 26px; height: 26px; padding: 0 8px;
+  border-radius: 999px;
+  background: var(--c); color: var(--on);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; line-height: 1;
+  white-space: nowrap;
+}
+.cs-root .cs-badge.cs-wide { font-size: 12px; letter-spacing: .02em; }
+
+/* ---- verdict block ---- */
+.cs-root .cs-vtext { display: flex; flex-direction: column; min-width: 0; }
+.cs-root .cs-vh { font-size: 14.5px; font-weight: 700; color: var(--c); line-height: 1.25; }
+.cs-root .cs-vl { font-size: 11.5px; color: var(--cs-muted); line-height: 1.3; }
+
+/* ---- body lines ---- */
+.cs-root .cs-desc { font-size: 13.5px; line-height: 1.5; color: var(--tx); }
+.cs-root .cs-formula { font-size: 14px; color: var(--tx); }
+.cs-root .cs-formula.cs-na { color: var(--cs-muted); font-style: italic; font-size: 13px; }
+
+/* ---- example strip ---- */
+.cs-root .cs-ex { font-size: 12.5px; color: var(--tx); }
+.cs-root .cs-ex .cs-lbl {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--c); margin-right: 6px;
+}
+.cs-root .cs-ex .cs-pic { display: block; margin-top: 2px; color: var(--cs-muted); }
+
+/* ---- expandable details ---- */
+.cs-root .cs-more { border-top: 1px solid color-mix(in srgb, var(--c) 18%, #ffffff); }
+.cs-root .cs-more > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  font-size: 12px; font-weight: 600;
+  color: var(--c);
+}
+.cs-root .cs-more > summary::-webkit-details-marker { display: none; }
+.cs-root .cs-more > summary::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform .15s ease;
+  margin-right: 2px;
+}
+.cs-root .cs-more[open] > summary::before { transform: rotate(45deg); }
+.cs-root .cs-more > summary:hover { background: var(--t); }
+.cs-root .cs-more-body {
+  padding: 2px 14px 12px;
+  font-size: 13px; line-height: 1.55;
+  color: var(--tx);
+}
+.cs-root .cs-more-body p { margin: 0 0 6px; }
+.cs-root .cs-more-body p:last-child { margin-bottom: 0; }
+
+/* ================================================================= */
+/*  POSTER                                                             */
+/* ================================================================= */
+
+.cs-root .cs-p-top {
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  text-align: center;
+  padding: 18px 20px 16px;
+}
+.cs-root .cs-p-top .cs-pf { font-size: 21px; }
+.cs-root .cs-p-top .cs-by-inv { margin-top: 10px; }
+.cs-root .cs-p-top .cs-pdesc { max-width: 620px; margin-left: auto; margin-right: auto; }
+
+.cs-root .cs-p-tiles { display: grid; gap: 14px; padding: 22px 18px 18px; }
+.cs-root .cs-p-tile {
+  position: relative;
+  background: var(--t);
+  border: 1px solid color-mix(in srgb, var(--c) 28%, #ffffff);
+  border-top: 3px solid var(--c);
+  border-radius: 10px;
+  text-align: center;
+  display: flex; flex-direction: column;
+  min-width: 0;
+}
+.cs-root .cs-p-tile::before {
+  content: '';
+  position: absolute; top: -26px; left: calc(50% - 6px);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--cs-parent-bg);
+}
+.cs-root .cs-p-main {
+  flex: 1;
+  padding: 20px 16px 14px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.cs-root .cs-p-main .cs-badge {
+  min-width: 46px; height: 46px; padding: 0 14px;
+  font-size: 24px; font-weight: 800;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 14%, transparent);
+}
+.cs-root .cs-p-main .cs-badge.cs-wide { font-size: 15px; }
+.cs-root .cs-p-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--c); opacity: .8;
+  margin-top: 12px;
+}
+.cs-root .cs-p-cond { margin-top: 2px; font-size: 18px; color: var(--c); }
+.cs-root .cs-p-main .cs-vh { margin-top: 4px; font-size: 15px; color: var(--tx); }
+.cs-root .cs-p-main .cs-vl { margin-top: 1px; }
+.cs-root .cs-p-main .cs-desc { margin-top: 6px; font-size: 13px; color: var(--cs-muted); max-width: 240px; }
+.cs-root .cs-p-main .cs-formula { margin-top: 8px; }
+.cs-root .cs-p-main .cs-ex {
+  margin-top: 12px;
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 25%, #ffffff);
+  border-radius: 14px;
+  padding: 4px 12px;
+  font-size: 12px;
+}
+.cs-root .cs-p-tile .cs-more { text-align: left; }
+.cs-root .cs-p-tile .cs-more > summary { justify-content: center; }
+
+/* ================================================================= */
+/*  TREE                                                               */
+/* ================================================================= */
+
+.cs-root .cs-t-body { padding: 22px 24px 22px; }
+.cs-root .cs-t-parent {
+  width: fit-content; max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  border-radius: 10px;
+  padding: 12px 24px 11px;
+  box-shadow: 0 4px 14px rgba(30,58,138,.18);
+}
+.cs-root .cs-t-parent .cs-pf { font-size: 19px; }
+.cs-root .cs-t-parent .cs-pdesc { max-width: 520px; }
+.cs-root .cs-t-by { text-align: center; margin-top: 10px; }
+
+.cs-root .cs-t-stem { width: 1.5px; height: 14px; background: var(--cs-trunk); margin: 0 auto; }
+.cs-root .cs-t-tree { display: grid; }
+.cs-root .cs-t-br { position: relative; padding: 24px 9px 0; min-width: 0; }
+.cs-root .cs-t-br::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  border-top: 1.5px solid var(--cs-trunk);
+}
+.cs-root .cs-t-br:first-child::before { left: 50%; }
+.cs-root .cs-t-br:last-child::before  { right: 50%; }
+.cs-root .cs-t-br::after {
+  content: ''; position: absolute; top: 0; left: calc(50% - .75px);
+  width: 1.5px; height: 24px; background: var(--c);
+}
+.cs-root .cs-t-tip {
+  position: absolute; top: 18px; left: calc(50% - 4.5px);
+  border-left: 4.5px solid transparent;
+  border-right: 4.5px solid transparent;
+  border-top: 6px solid var(--c);
+}
+
+.cs-root .cs-t-card {
+  height: 100%;
+  display: flex; flex-direction: column;
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, #ffffff);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.cs-root .cs-t-cond {
+  background: var(--c); color: var(--on);
+  padding: 10px 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.cs-root .cs-t-cond .cs-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  opacity: .75; white-space: nowrap;
+}
+.cs-root .cs-t-cond .cs-expr { font-size: 18px; text-align: right; }
+.cs-root .cs-t-verdict {
+  background: var(--t);
+  padding: 11px 14px;
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--c) 15%, #ffffff);
+}
+.cs-root .cs-t-main { flex: 1; padding: 11px 14px 4px; display: flex; flex-direction: column; gap: 6px; }
+.cs-root .cs-t-card .cs-ex {
+  margin: 8px 14px 13px;
+  padding: 7px 10px;
+  background: var(--t);
+  border-radius: 6px;
+}
+
+/* ================================================================= */
+/*  FORK                                                               */
+/* ================================================================= */
+
+.cs-root .cs-f-body {
+  padding: 20px 24px 22px;
+  display: grid;
+  grid-template-columns: fit-content(320px) 1fr;
+  align-items: center;
+}
+.cs-root .cs-f-parent {
+  position: relative;
+  min-width: 170px;
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  border-radius: 10px;
+  padding: 16px 14px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(30,58,138,.18);
+}
+.cs-root .cs-f-parent .cs-pf { font-size: 18px; }
+.cs-root .cs-f-parent .cs-by-inv { margin-top: 8px; }
+.cs-root .cs-f-parent::after {
+  content: ''; position: absolute; right: -22px; top: calc(50% - .75px);
+  width: 22px; height: 1.5px; background: var(--cs-trunk);
+}
+
+.cs-root .cs-f-rows { padding-left: 22px; display: flex; flex-direction: column; min-width: 0; }
+.cs-root .cs-f-row { position: relative; padding: 6px 0 6px 28px; }
+.cs-root .cs-f-row::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  border-left: 1.5px solid var(--cs-trunk);
+}
+.cs-root .cs-f-row:first-child::before { top: 50%; }
+.cs-root .cs-f-row:last-child::before  { bottom: 50%; }
+.cs-root .cs-f-row::after {
+  content: ''; position: absolute; left: 0; top: calc(50% - .75px);
+  width: 22px; height: 1.5px; background: var(--c);
+}
+.cs-root .cs-f-tip {
+  position: absolute; left: 20px; top: calc(50% - 4.5px);
+  border-top: 4.5px solid transparent;
+  border-bottom: 4.5px solid transparent;
+  border-left: 6px solid var(--c);
+}
+/* with an open details panel the row grows; keep connectors on the top part */
+.cs-root .cs-f-row.cs-has-more::after,
+.cs-root .cs-f-row.cs-has-more .cs-f-tip { top: 42px; }
+.cs-root .cs-f-row.cs-has-more:first-child::before { top: 42px; }
+
+.cs-root .cs-f-case {
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, #ffffff);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.cs-root .cs-f-grid {
+  display: grid;
+  grid-template-columns: 130px 180px 1fr;
+  align-items: stretch;
+  min-height: 72px;
+}
+.cs-root .cs-f-cond {
+  background: var(--c); color: var(--on);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 10px; font-size: 17px; text-align: center;
+}
+.cs-root .cs-f-cond .cs-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9.5px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  opacity: .75; margin-bottom: 2px;
+}
+.cs-root .cs-f-verdict {
+  background: var(--t);
+  display: flex; align-items: center; gap: 9px;
+  padding: 10px 14px;
+  border-right: 1px solid color-mix(in srgb, var(--c) 15%, #ffffff);
+  min-width: 0;
+}
+.cs-root .cs-f-detail {
+  padding: 10px 16px;
+  display: flex; flex-direction: column; justify-content: center; gap: 3px;
+  min-width: 0;
+}
+.cs-root .cs-f-detail .cs-ex { color: var(--cs-muted); }
+
+
+/* ================================================================= */
+/*  PROSE: preface + conclusion  (proseStyle: cards | gradient | tabs) */
+/* ================================================================= */
+
+.cs-root .cs-preface { padding: 16px 24px 0; }
+.cs-root .cs-concl { margin: 0 24px 22px; }
+.cs-root .cs-pre-body p,
+.cs-root .cs-concl-body p { margin: 0 0 8px; }
+.cs-root .cs-pre-body p:last-child,
+.cs-root .cs-concl-body p:last-child { margin-bottom: 0; }
+.cs-root .cs-pre-body { font-size: 14px; line-height: 1.6; color: var(--cs-pre-text); }
+.cs-root .cs-concl-body { font-size: 14px; line-height: 1.6; color: var(--cs-con-text); }
+.cs-root .cs-concl-body .katex { color: var(--cs-con-text); }
+.cs-root .cs-pre-ic,
+.cs-root .cs-concl-ic { display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.cs-root .cs-pre-head { color: var(--cs-pre-label); }
+.cs-root .cs-concl-lbl { color: var(--cs-con-label); }
+
+/* ---- cards ---- */
+.cs-root.cs-prose-cards .cs-pre-box {
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-left: 4px solid var(--cs-pre-accent);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-cards .cs-pre-head {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.cs-root.cs-prose-cards .cs-concl {
+  display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-left: 4px solid var(--cs-con-accent);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-cards .cs-concl-ic {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--cs-con-accent); color: var(--cs-con-icon);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cs-con-accent) 18%, transparent);
+}
+.cs-root.cs-prose-cards .cs-concl.cs-no-title { align-items: center; }
+.cs-root.cs-prose-cards .cs-concl-lbl {
+  display: block;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+/* ---- gradient ---- */
+.cs-root.cs-prose-gradient .cs-pre-box {
+  position: relative;
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+.cs-root.cs-prose-gradient .cs-pre-box.cs-has-title { padding-top: 22px; margin-top: 8px; }
+.cs-root.cs-prose-gradient .cs-pre-head {
+  display: inline-flex; align-items: center; gap: 6px;
+  position: absolute; top: -11px; left: 16px;
+  background: var(--cs-bg); border: 1px solid var(--cs-pre-border); border-radius: 999px;
+  padding: 2px 11px 2px 8px;
+  font-size: 11.5px; font-weight: 700;
+}
+.cs-root.cs-prose-gradient .cs-pre-ic { color: var(--cs-pre-accent); }
+.cs-root.cs-prose-gradient .cs-concl {
+  display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: center;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 6px 18px rgba(30,58,138,.22);
+}
+.cs-root.cs-prose-gradient .cs-concl-ic {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--cs-con-accent); color: var(--cs-con-icon);
+}
+.cs-root.cs-prose-gradient .cs-concl-lbl {
+  display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* ---- tabs ---- */
+.cs-root.cs-prose-tabs .cs-pre-box {
+  position: relative;
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-tabs .cs-concl {
+  position: relative;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-tabs .cs-pre-box.cs-has-title,
+.cs-root.cs-prose-tabs .cs-concl.cs-has-title { border-top-left-radius: 0; }
+.cs-root.cs-prose-tabs .cs-preface.cs-has-title { padding-top: 34px; }
+.cs-root.cs-prose-tabs .cs-concl.cs-has-title { margin-top: 28px; }
+.cs-root.cs-prose-tabs .cs-concl-ic { display: none; }
+.cs-root.cs-prose-tabs .cs-pre-head,
+.cs-root.cs-prose-tabs .cs-concl-lbl {
+  display: inline-flex; align-items: center; gap: 6px;
+  position: absolute; bottom: 100%; left: -1px;
+  color: #ffffff;
+  border-radius: 7px 7px 0 0;
+  padding: 3px 12px 3px 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: .04em;
+}
+.cs-root.cs-prose-tabs .cs-pre-head { background: var(--cs-pre-label); }
+.cs-root.cs-prose-tabs .cs-concl-lbl { background: var(--cs-con-label); }
+
+/* ---- title only (no body) ---- */
+.cs-root .cs-pre-box.cs-no-body .cs-pre-head { margin-bottom: 0; }
+.cs-root .cs-concl.cs-no-body { align-items: center; }
+.cs-root .cs-concl.cs-no-body .cs-concl-lbl { margin-bottom: 0; }
+.cs-root.cs-prose-gradient .cs-pre-box.cs-no-body { padding: 10px 14px; margin-top: 0; }
+.cs-root.cs-prose-gradient .cs-pre-box.cs-no-body .cs-pre-head { position: static; }
+.cs-root.cs-prose-tabs .cs-preface.cs-no-body { padding-top: 16px; }
+.cs-root.cs-prose-tabs .cs-pre-box.cs-no-body,
+.cs-root.cs-prose-tabs .cs-concl.cs-no-body { background: none; border: none; padding: 0; margin-top: 0; }
+.cs-root.cs-prose-tabs .cs-pre-box.cs-no-body .cs-pre-head,
+.cs-root.cs-prose-tabs .cs-concl.cs-no-body .cs-concl-lbl { position: static; border-radius: 7px; }
+
+/* ---- inline helper ---- */
+.cs-root .cs-var { font-style: italic; }
+
+/* ---- responsive ---- */
+@media (max-width: 760px) {
+  .cs-root .cs-p-tiles,
+  .cs-root .cs-t-tree { grid-template-columns: 1fr !important; }
+  .cs-root .cs-p-tile + .cs-p-tile::before { display: none; }
+  .cs-root .cs-t-br { padding: 20px 0 0; }
+  .cs-root .cs-t-br::before { display: none; }
+  .cs-root .cs-t-br::after { height: 20px; }
+  .cs-root .cs-t-tip { top: 14px; }
+  .cs-root .cs-f-body { grid-template-columns: 1fr; }
+  .cs-root .cs-f-parent::after {
+    right: auto; left: calc(50% - .75px);
+    top: auto; bottom: -18px; width: 1.5px; height: 18px;
+  }
+  .cs-root .cs-f-rows { padding: 18px 0 0; }
+  .cs-root .cs-f-grid { grid-template-columns: 1fr; }
+  .cs-root .cs-f-verdict { border-right: none; }
+}
+</style><div class="cs-root cs-prose-tabs" style="--cs-bg:#ffffff;--cs-ink:#0f172a;--cs-title:#1e3a8a;--cs-muted:#64748b;--cs-line:#e2e8f0;--cs-trunk:#94a3b8;--cs-parent-bg:#1e3a8a;--cs-parent-text:#ffffff"><div class="cs-card"><div class="cs-head"><div class="cs-kicker">Algebra</div><h2>Solutions of |x| = k</h2></div><div class="cs-preface cs-has-title" style="--cs-pre-bg:#eff6ff;--cs-pre-border:#bfdbfe;--cs-pre-accent:#2563eb;--cs-pre-label:#1e3a8a;--cs-pre-text:#1e293b"><div class="cs-pre-box cs-has-title"><div class="cs-pre-head"><span class="cs-pre-ic"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 7v4.2M8 4.6v.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg></span>Overview</div><div class="cs-pre-body">Preface body with <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">|x| = k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>.</div></div></div><div class="cs-t-body"><div class="cs-t-parent"><div class="cs-pf"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">|x| = k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span></div></div><div class="cs-t-by"><span class="cs-by">split by <b>value of <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span></b></span></div><div class="cs-t-stem"></div><div class="cs-t-tree" style="grid-template-columns:repeat(5, 1fr)"><div class="cs-t-br" style="--c:#2563eb;--t:color-mix(in srgb, #2563eb 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 1</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k &gt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Two roots</span></span></div><div class="cs-t-main"><div class="cs-desc">Mirror points.</div></div><div class="cs-ex"><span class="cs-lbl">e.g.</span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">|x|=5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">5</span></span></span></span></span></div></div></div><div class="cs-t-br" style="--c:#ea580c;--t:color-mix(in srgb, #ea580c 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 2</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">1</span><span class="cs-vtext"><span class="cs-vh">One root</span></span></div><div class="cs-t-main"><div class="cs-desc">Single point.</div></div></div></div><div class="cs-t-br" style="--c:#64748b;--t:color-mix(in srgb, #64748b 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 3</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k &lt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">0</span><span class="cs-vtext"><span class="cs-vh">No roots</span></span></div><div class="cs-t-main"><div class="cs-desc">Impossible.</div></div></div></div><div class="cs-t-br" style="--c:#0d9488;--t:color-mix(in srgb, #0d9488 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 4</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Unit case</span></span></div><div class="cs-t-main"><div class="cs-desc">Roots at one.</div></div></div></div><div class="cs-t-br" style="--c:#7c3aed;--t:color-mix(in srgb, #7c3aed 7%, #ffffff);--tx:#0f172a;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 5</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">k = 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Two case</span></span></div><div class="cs-t-main"><div class="cs-desc">Roots at two.</div></div></div></div></div></div><div class="cs-concl cs-has-title" style="--cs-con-bg:#eff6ff;--cs-con-border:#bfdbfe;--cs-con-accent:#1e3a8a;--cs-con-icon:#ffffff;--cs-con-label:#1e3a8a;--cs-con-text:#1e293b"><span class="cs-concl-ic"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><div class="cs-concl-main"><span class="cs-concl-lbl">Takeaway</span><div class="cs-concl-body">Conclusion body with <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">\pm k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord">±</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>.</div></div></div></div></div></div><div><style>
+.cs-root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--cs-ink);
+  line-height: 1.5;
+}
+.cs-root *, .cs-root *::before, .cs-root *::after { box-sizing: border-box; }
+
+.cs-root .cs-card {
+  background: var(--cs-bg);
+  border: 1px solid var(--cs-line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15,23,42,.04);
+}
+
+/* ---- header ---- */
+.cs-root .cs-head { padding: 18px 24px 0; }
+.cs-root .cs-head .cs-kicker {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--cs-title); opacity: .8;
+  margin-bottom: 4px;
+}
+.cs-root .cs-head h2 {
+  margin: 0; font-size: 17px; font-weight: 700;
+  color: var(--cs-title); letter-spacing: -0.01em;
+}
+.cs-root .cs-head .cs-lede { margin-top: 4px; font-size: 13px; color: var(--cs-muted); max-width: 640px; }
+
+/* ---- split-by pill ---- */
+.cs-root .cs-by {
+  display: inline-block;
+  font-size: 11.5px; color: var(--cs-muted);
+  background: var(--cs-bg);
+  border: 1px solid var(--cs-line);
+  border-radius: 999px;
+  padding: 2px 11px;
+}
+.cs-root .cs-by b { color: var(--cs-title); font-weight: 600; }
+.cs-root .cs-by-inv {
+  display: inline-block;
+  font-size: 11.5px;
+  color: var(--cs-parent-text);
+  background: color-mix(in srgb, var(--cs-parent-text) 14%, transparent);
+  border-radius: 999px;
+  padding: 2px 11px;
+}
+.cs-root .cs-by-inv .cs-by-l { opacity: .75; }
+.cs-root .cs-by-inv b { font-weight: 600; }
+
+/* ---- parent block (shared look) ---- */
+.cs-root .cs-pk {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  opacity: .7; margin-bottom: 4px;
+}
+.cs-root .cs-pdesc { font-size: 12.5px; opacity: .8; margin-top: 8px; line-height: 1.45; }
+
+/* ---- badge (count.n) ---- */
+.cs-root .cs-badge {
+  flex: none;
+  min-width: 26px; height: 26px; padding: 0 8px;
+  border-radius: 999px;
+  background: var(--c); color: var(--on);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; line-height: 1;
+  white-space: nowrap;
+}
+.cs-root .cs-badge.cs-wide { font-size: 12px; letter-spacing: .02em; }
+
+/* ---- verdict block ---- */
+.cs-root .cs-vtext { display: flex; flex-direction: column; min-width: 0; }
+.cs-root .cs-vh { font-size: 14.5px; font-weight: 700; color: var(--c); line-height: 1.25; }
+.cs-root .cs-vl { font-size: 11.5px; color: var(--cs-muted); line-height: 1.3; }
+
+/* ---- body lines ---- */
+.cs-root .cs-desc { font-size: 13.5px; line-height: 1.5; color: var(--tx); }
+.cs-root .cs-formula { font-size: 14px; color: var(--tx); }
+.cs-root .cs-formula.cs-na { color: var(--cs-muted); font-style: italic; font-size: 13px; }
+
+/* ---- example strip ---- */
+.cs-root .cs-ex { font-size: 12.5px; color: var(--tx); }
+.cs-root .cs-ex .cs-lbl {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--c); margin-right: 6px;
+}
+.cs-root .cs-ex .cs-pic { display: block; margin-top: 2px; color: var(--cs-muted); }
+
+/* ---- expandable details ---- */
+.cs-root .cs-more { border-top: 1px solid color-mix(in srgb, var(--c) 18%, #ffffff); }
+.cs-root .cs-more > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  font-size: 12px; font-weight: 600;
+  color: var(--c);
+}
+.cs-root .cs-more > summary::-webkit-details-marker { display: none; }
+.cs-root .cs-more > summary::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform .15s ease;
+  margin-right: 2px;
+}
+.cs-root .cs-more[open] > summary::before { transform: rotate(45deg); }
+.cs-root .cs-more > summary:hover { background: var(--t); }
+.cs-root .cs-more-body {
+  padding: 2px 14px 12px;
+  font-size: 13px; line-height: 1.55;
+  color: var(--tx);
+}
+.cs-root .cs-more-body p { margin: 0 0 6px; }
+.cs-root .cs-more-body p:last-child { margin-bottom: 0; }
+
+/* ================================================================= */
+/*  POSTER                                                             */
+/* ================================================================= */
+
+.cs-root .cs-p-top {
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  text-align: center;
+  padding: 18px 20px 16px;
+}
+.cs-root .cs-p-top .cs-pf { font-size: 21px; }
+.cs-root .cs-p-top .cs-by-inv { margin-top: 10px; }
+.cs-root .cs-p-top .cs-pdesc { max-width: 620px; margin-left: auto; margin-right: auto; }
+
+.cs-root .cs-p-tiles { display: grid; gap: 14px; padding: 22px 18px 18px; }
+.cs-root .cs-p-tile {
+  position: relative;
+  background: var(--t);
+  border: 1px solid color-mix(in srgb, var(--c) 28%, #ffffff);
+  border-top: 3px solid var(--c);
+  border-radius: 10px;
+  text-align: center;
+  display: flex; flex-direction: column;
+  min-width: 0;
+}
+.cs-root .cs-p-tile::before {
+  content: '';
+  position: absolute; top: -26px; left: calc(50% - 6px);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--cs-parent-bg);
+}
+.cs-root .cs-p-main {
+  flex: 1;
+  padding: 20px 16px 14px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.cs-root .cs-p-main .cs-badge {
+  min-width: 46px; height: 46px; padding: 0 14px;
+  font-size: 24px; font-weight: 800;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 14%, transparent);
+}
+.cs-root .cs-p-main .cs-badge.cs-wide { font-size: 15px; }
+.cs-root .cs-p-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--c); opacity: .8;
+  margin-top: 12px;
+}
+.cs-root .cs-p-cond { margin-top: 2px; font-size: 18px; color: var(--c); }
+.cs-root .cs-p-main .cs-vh { margin-top: 4px; font-size: 15px; color: var(--tx); }
+.cs-root .cs-p-main .cs-vl { margin-top: 1px; }
+.cs-root .cs-p-main .cs-desc { margin-top: 6px; font-size: 13px; color: var(--cs-muted); max-width: 240px; }
+.cs-root .cs-p-main .cs-formula { margin-top: 8px; }
+.cs-root .cs-p-main .cs-ex {
+  margin-top: 12px;
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 25%, #ffffff);
+  border-radius: 14px;
+  padding: 4px 12px;
+  font-size: 12px;
+}
+.cs-root .cs-p-tile .cs-more { text-align: left; }
+.cs-root .cs-p-tile .cs-more > summary { justify-content: center; }
+
+/* ================================================================= */
+/*  TREE                                                               */
+/* ================================================================= */
+
+.cs-root .cs-t-body { padding: 22px 24px 22px; }
+.cs-root .cs-t-parent {
+  width: fit-content; max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  border-radius: 10px;
+  padding: 12px 24px 11px;
+  box-shadow: 0 4px 14px rgba(30,58,138,.18);
+}
+.cs-root .cs-t-parent .cs-pf { font-size: 19px; }
+.cs-root .cs-t-parent .cs-pdesc { max-width: 520px; }
+.cs-root .cs-t-by { text-align: center; margin-top: 10px; }
+
+.cs-root .cs-t-stem { width: 1.5px; height: 14px; background: var(--cs-trunk); margin: 0 auto; }
+.cs-root .cs-t-tree { display: grid; }
+.cs-root .cs-t-br { position: relative; padding: 24px 9px 0; min-width: 0; }
+.cs-root .cs-t-br::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  border-top: 1.5px solid var(--cs-trunk);
+}
+.cs-root .cs-t-br:first-child::before { left: 50%; }
+.cs-root .cs-t-br:last-child::before  { right: 50%; }
+.cs-root .cs-t-br::after {
+  content: ''; position: absolute; top: 0; left: calc(50% - .75px);
+  width: 1.5px; height: 24px; background: var(--c);
+}
+.cs-root .cs-t-tip {
+  position: absolute; top: 18px; left: calc(50% - 4.5px);
+  border-left: 4.5px solid transparent;
+  border-right: 4.5px solid transparent;
+  border-top: 6px solid var(--c);
+}
+
+.cs-root .cs-t-card {
+  height: 100%;
+  display: flex; flex-direction: column;
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, #ffffff);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.cs-root .cs-t-cond {
+  background: var(--c); color: var(--on);
+  padding: 10px 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.cs-root .cs-t-cond .cs-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  opacity: .75; white-space: nowrap;
+}
+.cs-root .cs-t-cond .cs-expr { font-size: 18px; text-align: right; }
+.cs-root .cs-t-verdict {
+  background: var(--t);
+  padding: 11px 14px;
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--c) 15%, #ffffff);
+}
+.cs-root .cs-t-main { flex: 1; padding: 11px 14px 4px; display: flex; flex-direction: column; gap: 6px; }
+.cs-root .cs-t-card .cs-ex {
+  margin: 8px 14px 13px;
+  padding: 7px 10px;
+  background: var(--t);
+  border-radius: 6px;
+}
+
+/* ================================================================= */
+/*  FORK                                                               */
+/* ================================================================= */
+
+.cs-root .cs-f-body {
+  padding: 20px 24px 22px;
+  display: grid;
+  grid-template-columns: fit-content(320px) 1fr;
+  align-items: center;
+}
+.cs-root .cs-f-parent {
+  position: relative;
+  min-width: 170px;
+  background: var(--cs-parent-bg);
+  color: var(--cs-parent-text);
+  border-radius: 10px;
+  padding: 16px 14px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(30,58,138,.18);
+}
+.cs-root .cs-f-parent .cs-pf { font-size: 18px; }
+.cs-root .cs-f-parent .cs-by-inv { margin-top: 8px; }
+.cs-root .cs-f-parent::after {
+  content: ''; position: absolute; right: -22px; top: calc(50% - .75px);
+  width: 22px; height: 1.5px; background: var(--cs-trunk);
+}
+
+.cs-root .cs-f-rows { padding-left: 22px; display: flex; flex-direction: column; min-width: 0; }
+.cs-root .cs-f-row { position: relative; padding: 6px 0 6px 28px; }
+.cs-root .cs-f-row::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  border-left: 1.5px solid var(--cs-trunk);
+}
+.cs-root .cs-f-row:first-child::before { top: 50%; }
+.cs-root .cs-f-row:last-child::before  { bottom: 50%; }
+.cs-root .cs-f-row::after {
+  content: ''; position: absolute; left: 0; top: calc(50% - .75px);
+  width: 22px; height: 1.5px; background: var(--c);
+}
+.cs-root .cs-f-tip {
+  position: absolute; left: 20px; top: calc(50% - 4.5px);
+  border-top: 4.5px solid transparent;
+  border-bottom: 4.5px solid transparent;
+  border-left: 6px solid var(--c);
+}
+/* with an open details panel the row grows; keep connectors on the top part */
+.cs-root .cs-f-row.cs-has-more::after,
+.cs-root .cs-f-row.cs-has-more .cs-f-tip { top: 42px; }
+.cs-root .cs-f-row.cs-has-more:first-child::before { top: 42px; }
+
+.cs-root .cs-f-case {
+  background: var(--cs-bg);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, #ffffff);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,.05);
+}
+.cs-root .cs-f-grid {
+  display: grid;
+  grid-template-columns: 130px 180px 1fr;
+  align-items: stretch;
+  min-height: 72px;
+}
+.cs-root .cs-f-cond {
+  background: var(--c); color: var(--on);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 10px; font-size: 17px; text-align: center;
+}
+.cs-root .cs-f-cond .cs-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9.5px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  opacity: .75; margin-bottom: 2px;
+}
+.cs-root .cs-f-verdict {
+  background: var(--t);
+  display: flex; align-items: center; gap: 9px;
+  padding: 10px 14px;
+  border-right: 1px solid color-mix(in srgb, var(--c) 15%, #ffffff);
+  min-width: 0;
+}
+.cs-root .cs-f-detail {
+  padding: 10px 16px;
+  display: flex; flex-direction: column; justify-content: center; gap: 3px;
+  min-width: 0;
+}
+.cs-root .cs-f-detail .cs-ex { color: var(--cs-muted); }
+
+
+/* ================================================================= */
+/*  PROSE: preface + conclusion  (proseStyle: cards | gradient | tabs) */
+/* ================================================================= */
+
+.cs-root .cs-preface { padding: 16px 24px 0; }
+.cs-root .cs-concl { margin: 0 24px 22px; }
+.cs-root .cs-pre-body p,
+.cs-root .cs-concl-body p { margin: 0 0 8px; }
+.cs-root .cs-pre-body p:last-child,
+.cs-root .cs-concl-body p:last-child { margin-bottom: 0; }
+.cs-root .cs-pre-body { font-size: 14px; line-height: 1.6; color: var(--cs-pre-text); }
+.cs-root .cs-concl-body { font-size: 14px; line-height: 1.6; color: var(--cs-con-text); }
+.cs-root .cs-concl-body .katex { color: var(--cs-con-text); }
+.cs-root .cs-pre-ic,
+.cs-root .cs-concl-ic { display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.cs-root .cs-pre-head { color: var(--cs-pre-label); }
+.cs-root .cs-concl-lbl { color: var(--cs-con-label); }
+
+/* ---- cards ---- */
+.cs-root.cs-prose-cards .cs-pre-box {
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-left: 4px solid var(--cs-pre-accent);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-cards .cs-pre-head {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.cs-root.cs-prose-cards .cs-concl {
+  display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-left: 4px solid var(--cs-con-accent);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-cards .cs-concl-ic {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--cs-con-accent); color: var(--cs-con-icon);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cs-con-accent) 18%, transparent);
+}
+.cs-root.cs-prose-cards .cs-concl.cs-no-title { align-items: center; }
+.cs-root.cs-prose-cards .cs-concl-lbl {
+  display: block;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+/* ---- gradient ---- */
+.cs-root.cs-prose-gradient .cs-pre-box {
+  position: relative;
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+.cs-root.cs-prose-gradient .cs-pre-box.cs-has-title { padding-top: 22px; margin-top: 8px; }
+.cs-root.cs-prose-gradient .cs-pre-head {
+  display: inline-flex; align-items: center; gap: 6px;
+  position: absolute; top: -11px; left: 16px;
+  background: var(--cs-bg); border: 1px solid var(--cs-pre-border); border-radius: 999px;
+  padding: 2px 11px 2px 8px;
+  font-size: 11.5px; font-weight: 700;
+}
+.cs-root.cs-prose-gradient .cs-pre-ic { color: var(--cs-pre-accent); }
+.cs-root.cs-prose-gradient .cs-concl {
+  display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: center;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 6px 18px rgba(30,58,138,.22);
+}
+.cs-root.cs-prose-gradient .cs-concl-ic {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--cs-con-accent); color: var(--cs-con-icon);
+}
+.cs-root.cs-prose-gradient .cs-concl-lbl {
+  display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* ---- tabs ---- */
+.cs-root.cs-prose-tabs .cs-pre-box {
+  position: relative;
+  background: var(--cs-pre-bg);
+  border: 1px solid var(--cs-pre-border);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-tabs .cs-concl {
+  position: relative;
+  background: var(--cs-con-bg);
+  border: 1px solid var(--cs-con-border);
+  border-radius: 10px;
+  padding: 12px 16px 13px;
+}
+.cs-root.cs-prose-tabs .cs-pre-box.cs-has-title,
+.cs-root.cs-prose-tabs .cs-concl.cs-has-title { border-top-left-radius: 0; }
+.cs-root.cs-prose-tabs .cs-preface.cs-has-title { padding-top: 34px; }
+.cs-root.cs-prose-tabs .cs-concl.cs-has-title { margin-top: 28px; }
+.cs-root.cs-prose-tabs .cs-concl-ic { display: none; }
+.cs-root.cs-prose-tabs .cs-pre-head,
+.cs-root.cs-prose-tabs .cs-concl-lbl {
+  display: inline-flex; align-items: center; gap: 6px;
+  position: absolute; bottom: 100%; left: -1px;
+  color: #ffffff;
+  border-radius: 7px 7px 0 0;
+  padding: 3px 12px 3px 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: .04em;
+}
+.cs-root.cs-prose-tabs .cs-pre-head { background: var(--cs-pre-label); }
+.cs-root.cs-prose-tabs .cs-concl-lbl { background: var(--cs-con-label); }
+
+/* ---- title only (no body) ---- */
+.cs-root .cs-pre-box.cs-no-body .cs-pre-head { margin-bottom: 0; }
+.cs-root .cs-concl.cs-no-body { align-items: center; }
+.cs-root .cs-concl.cs-no-body .cs-concl-lbl { margin-bottom: 0; }
+.cs-root.cs-prose-gradient .cs-pre-box.cs-no-body { padding: 10px 14px; margin-top: 0; }
+.cs-root.cs-prose-gradient .cs-pre-box.cs-no-body .cs-pre-head { position: static; }
+.cs-root.cs-prose-tabs .cs-preface.cs-no-body { padding-top: 16px; }
+.cs-root.cs-prose-tabs .cs-pre-box.cs-no-body,
+.cs-root.cs-prose-tabs .cs-concl.cs-no-body { background: none; border: none; padding: 0; margin-top: 0; }
+.cs-root.cs-prose-tabs .cs-pre-box.cs-no-body .cs-pre-head,
+.cs-root.cs-prose-tabs .cs-concl.cs-no-body .cs-concl-lbl { position: static; border-radius: 7px; }
+
+/* ---- inline helper ---- */
+.cs-root .cs-var { font-style: italic; }
+
+/* ---- responsive ---- */
+@media (max-width: 760px) {
+  .cs-root .cs-p-tiles,
+  .cs-root .cs-t-tree { grid-template-columns: 1fr !important; }
+  .cs-root .cs-p-tile + .cs-p-tile::before { display: none; }
+  .cs-root .cs-t-br { padding: 20px 0 0; }
+  .cs-root .cs-t-br::before { display: none; }
+  .cs-root .cs-t-br::after { height: 20px; }
+  .cs-root .cs-t-tip { top: 14px; }
+  .cs-root .cs-f-body { grid-template-columns: 1fr; }
+  .cs-root .cs-f-parent::after {
+    right: auto; left: calc(50% - .75px);
+    top: auto; bottom: -18px; width: 1.5px; height: 18px;
+  }
+  .cs-root .cs-f-rows { padding: 18px 0 0; }
+  .cs-root .cs-f-grid { grid-template-columns: 1fr; }
+  .cs-root .cs-f-verdict { border-right: none; }
+}
+</style><div class="cs-root cs-prose-tabs" style="--cs-bg:#fdfcf7;--cs-ink:#3b2f1e;--cs-title:#7c2d12;--cs-muted:#64748b;--cs-line:#e7dcc4;--cs-trunk:#94a3b8;--cs-parent-bg:#7c2d12;--cs-parent-text:#ffffff"><div class="cs-card"><div class="cs-head"><div class="cs-kicker">Algebra</div><h2>Solutions of |x| = k</h2></div><div class="cs-preface cs-has-title" style="--cs-pre-bg:#fef3c7;--cs-pre-border:#fcd34d;--cs-pre-accent:#b45309;--cs-pre-label:#7c2d12;--cs-pre-text:#3b2f1e"><div class="cs-pre-box cs-has-title"><div class="cs-pre-head"><span class="cs-pre-ic"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 7v4.2M8 4.6v.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg></span>Overview</div><div class="cs-pre-body">Preface body with <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">|x| = k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>.</div></div></div><div class="cs-t-body"><div class="cs-t-parent"><div class="cs-pf"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">|x| = k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span></div></div><div class="cs-t-by"><span class="cs-by">split by <b>value of <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span></b></span></div><div class="cs-t-stem"></div><div class="cs-t-tree" style="grid-template-columns:repeat(5, 1fr)"><div class="cs-t-br" style="--c:#b45309;--t:color-mix(in srgb, #b45309 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 1</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k &gt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Two roots</span></span></div><div class="cs-t-main"><div class="cs-desc">Mirror points.</div></div><div class="cs-ex"><span class="cs-lbl">e.g.</span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">|x|=5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal">x</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">5</span></span></span></span></span></div></div></div><div class="cs-t-br" style="--c:#0f766e;--t:color-mix(in srgb, #0f766e 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 2</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">1</span><span class="cs-vtext"><span class="cs-vh">One root</span></span></div><div class="cs-t-main"><div class="cs-desc">Single point.</div></div></div></div><div class="cs-t-br" style="--c:#64748b;--t:color-mix(in srgb, #64748b 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 3</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k &lt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">0</span><span class="cs-vtext"><span class="cs-vh">No roots</span></span></div><div class="cs-t-main"><div class="cs-desc">Impossible.</div></div></div></div><div class="cs-t-br" style="--c:#0d9488;--t:color-mix(in srgb, #0d9488 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 4</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Unit case</span></span></div><div class="cs-t-main"><div class="cs-desc">Roots at one.</div></div></div></div><div class="cs-t-br" style="--c:#7c3aed;--t:color-mix(in srgb, #7c3aed 7%, #ffffff);--tx:#3b2f1e;--on:#ffffff"><i class="cs-t-tip"></i><div class="cs-t-card"><div class="cs-t-cond"><span class="cs-n">Case 5</span><span class="cs-expr"><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">k = 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span></span></span></div><div class="cs-t-verdict"><span class="cs-badge">2</span><span class="cs-vtext"><span class="cs-vh">Two case</span></span></div><div class="cs-t-main"><div class="cs-desc">Roots at two.</div></div></div></div></div></div><div class="cs-concl cs-has-title" style="--cs-con-bg:#ecfeff;--cs-con-border:#67e8f9;--cs-con-accent:#0e7490;--cs-con-icon:#ffffff;--cs-con-label:#155e75;--cs-con-text:#164e63"><span class="cs-concl-ic"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><div class="cs-concl-main"><span class="cs-concl-lbl">Takeaway</span><div class="cs-concl-body">Conclusion body with <span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">\pm k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord">±</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span></span>.</div></div></div></div></div></div></div></body></html>

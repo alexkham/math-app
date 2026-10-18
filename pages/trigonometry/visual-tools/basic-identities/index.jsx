@@ -201,7 +201,7 @@ For deeper coverage, see **periodicity** and **reference angles**.`,
 
 [Double angle identities](!/trigonometry/visual-tools/double-angle-identities) — geometric derivations for $\\sin 2\\theta$ and $\\cos 2\\theta$
 
-**Unit circle** — the geometric setup every identity here is read from
+**[Unit circle](!/trigonometry/unit-circle)** — the geometric setup every identity here is read from
 
 [Angle explorer](!/trigonometry/visual-tools/angle-explorer) — quadrants, reference angles and coterminal angles for any input angle
 

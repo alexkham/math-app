@@ -1392,13 +1392,14 @@ $$A = \\sqrt{s(s-a)(s-b)(s-c)}$$
 @academic[formulas_link:Browse all trigonometry formulas
 /trigonometry/formulas]@
 
-**Example:** A triangle with sides $a = 5$, $b = 7$, $c = 9$.
+@academic[example:Example
+A triangle with sides $a = 5$, $b = 7$, $c = 9$.
 
 $$s = \\frac{5 + 7 + 9}{2} = \\frac{21}{2} = 10.5$$
 
 $$A = \\sqrt{10.5 \\times 5.5 \\times 3.5 \\times 1.5} = \\sqrt{10.5 \\times 5.5 \\times 3.5 \\times 1.5}$$
 
-$$= \\sqrt{303.1875} \\approx 17.41$$
+$$= \\sqrt{303.1875} \\approx 17.41$$]@
 
 Heron&apos;s formula can be derived from the trigonometric area formula $\\frac{1}{2}ab\\sin C$ combined with the Law of Cosines. Express $\\cos C$ in terms of the sides, use $\\sin^2 C = 1 - \\cos^2 C$ to find $\\sin C$, substitute into the area formula, and simplify. The algebra is substantial but the result is elegant.
 

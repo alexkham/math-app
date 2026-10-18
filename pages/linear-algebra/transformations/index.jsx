@@ -994,7 +994,12 @@ const sectionsContent = {
     title: `What a Linear Transformation Is`,
     content: `A linear transformation is a function $T: V \\to W$ between [vector spaces](!/linear-algebra/vector-spaces) that preserves the two fundamental operations. For all vectors $\\mathbf{u}, \\mathbf{v} \\in V$ and all scalars $c, d$:
 
+@academic[formula_callout:Linear Transformation Definition
 $$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$
+/linear-algebra/formulas#linear_transformation_definition]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 This single condition packages two requirements: $T$ preserves addition ($T(\\mathbf{u} + \\mathbf{v}) = T(\\mathbf{u}) + T(\\mathbf{v})$) and $T$ preserves scalar multiplication ($T(c\\mathbf{v}) = cT(\\mathbf{v})$). A function satisfying both is called linear. A function violating either is not.
 

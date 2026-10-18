@@ -805,11 +805,11 @@ Set the visualizer to length $3$ and step through to see the three phases animat
 
 [Linear independence](!/linear-algebra/visual-tools/span-independence-2d) — the property that no vector in a set is a linear combination of the others.
 
-**Basis** — a linearly independent set whose linear combinations produce every vector in the space.
+**[Basis](!/linear-algebra/vector-spaces/basis#2)** — a linearly independent set whose linear combinations produce every vector in the space.
 
-**Subspace** — a set closed under linear combinations.
+**[Subspace](!/linear-algebra/vector-spaces/subspaces)** — a set closed under linear combinations.
 
-**Vector space** — the abstract setting in which linear combinations live.
+**[Vector space](!/linear-algebra/vector-spaces)** — the abstract setting in which linear combinations live.
 
 **Affine combination** — a linear combination whose coefficients sum to 1; produces lines and planes that need not pass through the origin.`,
       before: ``,

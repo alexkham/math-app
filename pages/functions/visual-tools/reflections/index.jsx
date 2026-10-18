@@ -691,13 +691,13 @@ These symmetries are encoded in the visualizer&apos;s explanation panel, which r
 
 [Inverse Functions](!/functions/visual-tools/inverse-function) — the formal theory of $f^{-1}$, when it exists, and how to compute it analytically.
 
-**Even and Odd Functions** — full treatment of the two main [symmetry](!/functions/visual-tools/symmetry) types and their consequences for integration and Fourier series.
+**[Even and Odd Functions](!/functions/properties#1)** — full treatment of the two main [symmetry](!/functions/visual-tools/symmetry) types and their consequences for integration and Fourier series.
 
 [Composition of Functions](!/functions/visual-tools/composition) — how multiple reflections can be chained (two reflections in a row give a rotation or [translation](!/functions/transformations#3)).
 
-**Parent Functions** — the canonical untransformed members of each family used as the base here.
+**[Parent Functions](!/functions/transformations#1)** — the canonical untransformed members of each family used as the base here.
 
-**Absolute Value Function** — the specific function $|x|$, whose graph appears in both the $|f(x)|$ and $f(|x|)$ partial reflections.
+**[Absolute Value Function](!/functions/families#12)** — the specific function $|x|$, whose graph appears in both the $|f(x)|$ and $f(|x|)$ partial reflections.
 
 **Symmetry in Geometry** — broader perspective on reflection as a geometric operation, beyond functions.`,
       before: ``,

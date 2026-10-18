@@ -141,17 +141,17 @@ For detailed comparison of probability functions including when to use each, see
 
     obj10: {
       title: `Related Probability Tools and Concepts`,
-      content: `**Discrete Distribution Calculators** - Compute exact probabilities, means, and [variances](!/probability/variance) for all six distributions with parameter input.
+      content: `**[Discrete Distribution Calculators](!/probability/calculators/discrete-distributions)** - Compute exact probabilities, means, and [variances](!/probability/variance) for all six distributions with parameter input.
 
 [PMF Visualizers](!/probability/visual-tools/probability-function) - Display probability mass functions as bar charts showing individual probabilities rather than cumulative values.
 
 [Continuous Distribution CDFs](!/probability/visual-tools/cdf/continuous) - Explore cumulative distribution functions for continuous random variables where CDFs are smooth curves rather than step functions.
 
-**Probability Mass Function Theory** - Understand the mathematical foundation of discrete probability functions and their properties.
+**[Probability Mass Function Theory](!/probability/probability-function/pmf)** - Understand the mathematical foundation of discrete probability functions and their properties.
 
-**Random Variables** - Learn the fundamental concept underlying all probability distributions and how they map outcomes to numerical values.
+**[Random Variables](!/probability/random-variables)** - Learn the fundamental concept underlying all probability distributions and how they map outcomes to numerical values.
 
-**Discrete Distributions Overview** - Comprehensive guide to all [discrete probability distributions](!/probability/visual-tools/probability-function/discrete) including when to use each type.
+**[Discrete Distributions Overview](!/probability/distributions/discrete)** - Comprehensive guide to all [discrete probability distributions](!/probability/visual-tools/probability-function/discrete) including when to use each type.
 
 [Dice Roll Simulator](!/probability/visual-tools/dice-roll) - A concrete sample space whose cumulative probabilities these steps record.
 

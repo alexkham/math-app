@@ -108,8 +108,8 @@ z^n for positive integer n
 • Use De Moivre's theorem for efficiency
 • Convert to polar form for higher powers
 
-**Note:**
-This operation requires additional implementation for the power value input.
+**Input:**
+Type z₁ and the whole-number exponent n in the box that replaces z₂ (negative n gives 1 / z₁ⁿ).
 `
     }
   }
@@ -194,6 +194,9 @@ This operation requires additional implementation for the power value input.
         }
         resultReal = (a * c + b * d) / denominator
         resultImaginary = (b * c - a * d) / denominator
+        // shown rounded to 4 decimals, like the last step
+        resultReal = parseFloat(resultReal.toFixed(4))
+        resultImaginary = parseFloat(resultImaginary.toFixed(4))
         steps = [
           `(${a} + ${b}i) ÷ (${c} + ${d}i)`,
           `= (${a} + ${b}i) × (${c} - ${d}i) ÷ ((${c} + ${d}i) × (${c} - ${d}i))`,
@@ -201,6 +204,49 @@ This operation requires additional implementation for the power value input.
           `= ${resultReal.toFixed(4)} + ${resultImaginary.toFixed(4)}i`
         ]
         break
+
+      case 'power': {
+        // z1 to a whole-number power n, by repeated multiplication (exact for integers), shown with De Moivre
+        const nExp = parseFloat(z2.real)
+        if (!Number.isInteger(nExp)) {
+          setResult({ error: 'The exponent n must be a whole number' })
+          return
+        }
+        if (Math.abs(nExp) > 100) {
+          setResult({ error: 'The exponent n must be between -100 and 100' })
+          return
+        }
+        const kk = Math.abs(nExp)
+        let pr = 1, pim = 0
+        for (let s = 0; s < kk; s++) {
+          const nr = pr * a - pim * b
+          pim = pr * b + pim * a
+          pr = nr
+        }
+        if (nExp < 0) {
+          const den = pr * pr + pim * pim
+          if (den === 0) {
+            setResult({ error: 'Division by zero (z₁ is 0 and n is negative)' })
+            return
+          }
+          resultReal = pr / den
+          resultImaginary = -pim / den
+        } else {
+          resultReal = pr
+          resultImaginary = pim
+        }
+        const modz = Math.sqrt(a * a + b * b)
+        const argz = Math.atan2(b, a)
+        const sig6 = (x) => parseFloat(x.toPrecision(6))
+        steps = [
+          `(${a} + ${b}i)^${nExp}`,
+          `Polar form: r = ${sig6(modz)}, θ = ${sig6(argz)} rad`,
+          `De Moivre: r^n (cos nθ + i sin nθ) with n = ${nExp}`,
+          `= ${sig6(Math.pow(modz, nExp))} (cos ${sig6(nExp * argz)} + i sin ${sig6(nExp * argz)})`,
+          `= ${parseFloat(resultReal.toPrecision(12))} + ${parseFloat(resultImaginary.toPrecision(12))}i`
+        ]
+        break
+      }
 
       case 'conjugate':
         resultReal = a
@@ -332,7 +378,7 @@ This operation requires additional implementation for the power value input.
               border: '2px solid #dee2e6'
             }}>
               <h3 style={{ color: '#495057', marginBottom: '15px', textAlign: 'center' }}>
-                Second Number (z₂)
+                {operation === 'power' ? 'Exponent (n)' : 'Second Number (z₂)'}
               </h3>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
                 <input
@@ -348,8 +394,8 @@ This operation requires additional implementation for the power value input.
                     textAlign: 'center'
                   }}
                 />
-                <span style={{ fontSize: '18px', fontWeight: 'bold' }}>+</span>
-                <input
+                {operation !== 'power' && <span style={{ fontSize: '18px', fontWeight: 'bold' }}>+</span>}
+                {operation !== 'power' && <input
                   type="number"
                   value={z2.imaginary}
                   onChange={(e) => setZ2({...z2, imaginary: e.target.value})}
@@ -361,11 +407,11 @@ This operation requires additional implementation for the power value input.
                     width: '100px',
                     textAlign: 'center'
                   }}
-                />
-                <span style={{ fontSize: '18px', fontWeight: 'bold' }}>i</span>
+                />}
+                {operation !== 'power' && <span style={{ fontSize: '18px', fontWeight: 'bold' }}>i</span>}
               </div>
               <div style={{ textAlign: 'center', marginTop: '10px', fontSize: '16px', color: '#666' }}>
-                {formatComplex(z2.real, z2.imaginary) || 'Enter values'}
+                {operation === 'power' ? (z2.real !== '' ? `n = ${z2.real}` : 'Enter a whole number') : (formatComplex(z2.real, z2.imaginary) || 'Enter values')}
               </div>
             </div>
           )}

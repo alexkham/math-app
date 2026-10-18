@@ -247,17 +247,17 @@ In **set theory** proper, the power set drives Cantor’s theorem: $|P(A)|$ is a
 
     obj11:{
       title:`Related Concepts and Tools`,
-      content:`**Set Theory** — sets, membership, and the notation the whole page is written in.
+      content:`**[Set Theory](!/set-theory/basics)** — sets, membership, and the notation the whole page is written in.
 
-**Subsets** — the containment relation, proper subsets, and how to prove one set sits inside another.
+**[Subsets](!/set-theory/subsets)** — the containment relation, proper subsets, and how to prove one set sits inside another.
 
-**Set Operations** — [union](!/set-theory/operations#1), [intersection](!/set-theory/operations#2), difference, and [complement](!/set-theory/operations#3), defined on the same sets whose subsets are drawn here.
+**[Set Operations](!/set-theory/operations)** — [union](!/set-theory/operations#1), [intersection](!/set-theory/operations#2), difference, and [complement](!/set-theory/operations#3), defined on the same sets whose subsets are drawn here.
 
-**Cardinality** — sizes of sets, finite and infinite, and Cantor’s theorem about the power set.
+**[Cardinality](!/set-theory/cardinality)** — sizes of sets, finite and infinite, and Cantor’s theorem about the power set.
 
-**Combinations** — the $\\binom{n}{k}$ counts that fill each level of the lattice.
+**[Combinations](!/combinatorics/combinations#combinations)** — the $\\binom{n}{k}$ counts that fill each level of the lattice.
 
-**Pascal’s Triangle** — where those level counts come from, and why they are symmetric.
+**[Pascal’s Triangle](!/combinatorics/visual-tools/pascal-triangle)** — where those level counts come from, and why they are symmetric.
 
 [Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — the companion tool for shading set expressions rather than enumerating subsets.
 

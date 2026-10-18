@@ -29,7 +29,8 @@ function FactorialCalculator({ explanations = factorialExplanations }) {
   };
 
   const calculateFactorial = () => {
-    const n = parseInt(value);
+    // whole numbers only: 2.5 or 3abc is invalid, not truncated
+    const n = /^\s*\d+\s*$/.test(String(value)) ? parseInt(value, 10) : NaN;
     if (isNaN(n) || n < 0) {
       setResult('Error: Invalid input');
       return;
@@ -48,7 +49,7 @@ function FactorialCalculator({ explanations = factorialExplanations }) {
           factorialResult = subfactorial(n);
           break;
         case 'multi':
-          const k = parseInt(kValue);
+          const k = /^\s*\d+\s*$/.test(String(kValue)) ? parseInt(kValue, 10) : NaN;
           if (isNaN(k) || k <= 0) {
             setResult('Error: Invalid k value');
             return;

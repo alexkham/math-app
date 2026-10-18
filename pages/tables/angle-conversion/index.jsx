@@ -200,15 +200,15 @@ A common workflow: think and design in degrees, convert to radians when feeding 
       title:`Related Tools and Concepts`,
       content:`This table answers "what is X° in radians" (or vice versa). For related work:
 
-- **Unit Circle** — the visual companion to this table. Shows where each reference angle sits on the circle and gives the sine and cosine values at each.
-- **Trigonometry Calculator** — once an angle is converted, compute its trig function values (sin, cos, tan, and the rest) at that angle.
-- **Angle Converter** — useful for non-whole-degree inputs (like 17.4°) that aren't in this table. Accepts arbitrary decimal values in either unit.
-- **Trigonometry Tables** — sin, cos, tan values at the standard reference angles, in both degrees and radians.
+- **[Unit Circle](!/visual-tools/unit-circle)** — the visual companion to this table. Shows where each reference angle sits on the circle and gives the sine and cosine values at each.
+- **[Trigonometry Calculator](!/calculators/trigonometry-calculator)** — once an angle is converted, compute its trig function values (sin, cos, tan, and the rest) at that angle.
+- **[Angle Converter](!/converters/degree-radians)** — useful for non-whole-degree inputs (like 17.4°) that aren't in this table. Accepts arbitrary decimal values in either unit.
+- **[Trigonometry Tables](!/tables/special-angles)** — sin, cos, tan values at the standard reference angles, in both degrees and radians.
 
 Related concepts you'll meet elsewhere:
 
-- **Arc length** — the radian definition: arc length = radius × angle in radians.
-- **Sector area** — $A = \\frac{1}{2} r^2 \\theta$ when $\\theta$ is in radians.
+- **[Arc length](!/trigonometry/degrees-radians#4)** — the radian definition: arc length = radius × angle in radians.
+- **[Sector area](!/trigonometry/degrees-radians#5)** — $A = \\frac{1}{2} r^2 \\theta$ when $\\theta$ is in radians.
 - **Angular velocity** — measured in radians per second, almost never in degrees per second.
 
 The sidebar to the left of the table holds direct links to the related tools.`,

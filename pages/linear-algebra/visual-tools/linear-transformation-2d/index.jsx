@@ -716,9 +716,9 @@ For comprehensive treatment see **eigenvalues and eigenvectors**, **matrix rank*
 
 [Eigenvalues and Eigenvectors](!/linear-algebra/visual-tools/eigenvalues-eigenvectors) &mdash; the invariant directions and scaling factors of $A$.
 
-**Kernel and Image** &mdash; what gets collapsed and what gets reached, especially visible for singular matrices.
+**[Kernel and Image](!/linear-algebra/transformations/image-kernel)** &mdash; what gets collapsed and what gets reached, especially visible for singular matrices.
 
-**Rank-Nullity Theorem** &mdash; $\\text{rank}(A) + \\text{nullity}(A) = 2$ for any $2 \\times 2$ matrix.
+**[Rank-Nullity Theorem](!/linear-algebra/transformations/image-kernel#6)** &mdash; $\\text{rank}(A) + \\text{nullity}(A) = 2$ for any $2 \\times 2$ matrix.
 
 [Change of Basis](!/linear-algebra/visual-tools/change-basis-2d) &mdash; expressing $A$ in a different basis. In the eigenbasis, $A$ becomes diagonal.
 

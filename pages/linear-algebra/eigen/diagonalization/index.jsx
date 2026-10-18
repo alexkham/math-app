@@ -3104,7 +3104,7 @@ Equivalently, $A$ is diagonalizable if and only if $\\mathbb{R}^n$ has a basis c
       },
       {
         id: 'defective',
-        tex: `defective`,
+        tex: `$defective$`,
         read: `a matrix with too few independent eigenvectors to diagonalise`,
         means: `The one-word name for failure, and it is a statement about **counts**: a matrix is defective when some eigenvalue's geometric multiplicity falls short of its algebraic one, so the eigenvectors cannot fill a basis — **When Diagonalization Fails** below.`,
         cases: `The word is unusually specific: it never means singular, ill-conditioned, or wrong. A defective matrix can be invertible and perfectly well behaved; it simply has no $P$, and the [Jordan form](!/linear-algebra/eigen/characteristic-equation#notation) is what replaces $D$ when it does not exist.`,

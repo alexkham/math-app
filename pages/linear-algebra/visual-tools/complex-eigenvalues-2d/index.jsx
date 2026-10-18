@@ -210,11 +210,11 @@ The dynamical reading is the important one. For $\\mathbf{x}_{k+1} = A\\mathbf{x
 
 [Linear transformations in 2D](!/linear-algebra/visual-tools/linear-transformation-2d) &mdash; how a matrix moves the grid; a rotation-scaling turns squares into rotated, scaled parallelograms.
 
-**Discrete dynamical systems and stability** &mdash; $\\mathbf{x}_{k+1} = A\\mathbf{x}_k$ oscillates when eigenvalues are complex, and $|\\lambda|$ decides growth or decay.
+**[Discrete dynamical systems and stability](!/linear-algebra/eigen/complex#7)** &mdash; $\\mathbf{x}_{k+1} = A\\mathbf{x}_k$ oscillates when eigenvalues are complex, and $|\\lambda|$ decides growth or decay.
 
 [Power iteration](!/linear-algebra/visual-tools/power-iteration) &mdash; which fails to converge for exactly these matrices, since the vector keeps turning.
 
-**Complex numbers** &mdash; multiplication by $a + bi$ is itself rotation by $\\arg$ and scaling by the modulus, which is the whole story in one line.`,
+**[Complex numbers](!/complex-numbers/basics)** &mdash; multiplication by $a + bi$ is itself rotation by $\\arg$ and scaling by the modulus, which is the whole story in one line.`,
       before: ``,
       after: ``,
       link: '',

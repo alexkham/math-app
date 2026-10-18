@@ -26,13 +26,15 @@ function PrimeNumberChecker({ explanations }) {
   };
 
   const getFactors = (num) => {
+    // divisors in pairs up to the square root (fast for large numbers), then sorted
     const factorsList = [];
-    for (let i = 1; i <= num; i++) {
+    for (let i = 1; i * i <= num; i++) {
       if (num % i === 0) {
         factorsList.push(i);
+        if (i !== num / i) factorsList.push(num / i);
       }
     }
-    return factorsList;
+    return factorsList.sort((a, b) => a - b);
   };
 
   const getPrimeFactors = (num) => {
@@ -59,9 +61,13 @@ function PrimeNumberChecker({ explanations }) {
 
     const prime = isPrime(num);
 
-    if (prime) {
+    if (num === 1) {
+      // 1 has one factor and is neither prime nor composite
+      setResult('1 is neither prime nor composite');
+      setFactors(mode === 'detailed' ? [1] : []);
+    } else if (prime) {
       setResult(`${num} is a PRIME number`);
-      setFactors([1, num]);
+      setFactors(mode === 'detailed' ? [1, num] : []);
     } else {
       setResult(`${num} is NOT a prime number (composite)`);
       

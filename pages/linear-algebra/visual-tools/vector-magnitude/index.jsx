@@ -199,17 +199,17 @@ A two-component example is the classic $3$-$4$-$5$ triangle: for $\\mathbf{v} = 
 
 [Scalar multiplication](!/linear-algebra/visual-tools/vector-scalar-multiplication) — normalization is scalar multiplication by $1/\\|\\mathbf{v}\\|$.
 
-**Distance** — $\\|\\mathbf{u} - \\mathbf{v}\\|$, the magnitude of a difference vector.
+**[Distance](!/linear-algebra/vectors/magnitude#4)** — $\\|\\mathbf{u} - \\mathbf{v}\\|$, the magnitude of a difference vector.
 
-**Angle between vectors** — defined through the dot product divided by the two magnitudes.
+**[Angle between vectors](!/linear-algebra/vectors/dot-product#5)** — defined through the dot product divided by the two magnitudes.
 
-**Orthonormal basis** — a basis of mutually perpendicular unit vectors; normalization is the last step in building one.
+**[Orthonormal basis](!/linear-algebra/orthogonality/orthogonal-sets#4)** — a basis of mutually perpendicular unit vectors; normalization is the last step in building one.
 
 **Other norms** — the $\\ell^1$ norm (sum of absolute values), the $\\ell^\\infty$ norm (largest absolute value), and the general $\\ell^p$ family.
 
-**Pythagorean theorem** — the magnitude formula is the theorem in $n$ dimensions.
+**[Pythagorean theorem](!/linear-algebra/orthogonality/inner-product#10)** — the magnitude formula is the theorem in $n$ dimensions.
 
-**Inner product space** — the abstract setting in which every inner product defines a norm by $\\|\\mathbf{v}\\| = \\sqrt{\\langle \\mathbf{v}, \\mathbf{v} \\rangle}$.
+**[Inner product space](!/linear-algebra/orthogonality/inner-product#8)** — the abstract setting in which every inner product defines a norm by $\\|\\mathbf{v}\\| = \\sqrt{\\langle \\mathbf{v}, \\mathbf{v} \\rangle}$.
 
 [Vector projection](!/linear-algebra/visual-tools/vector-projection) — its coefficient divides by $\\|\\mathbf{v}\\|^2$, the squared magnitude of the vector being projected onto, so every projection is a magnitude calculation in disguise.
 

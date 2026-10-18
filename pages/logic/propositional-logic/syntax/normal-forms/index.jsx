@@ -299,11 +299,11 @@ Normal forms also appear in other areas of mathematics and computer science. Dat
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Propositional logic syntax** defines the grammar rules for building well-formed formulas. Normal form conversion assumes a valid input expression that conforms to these rules.
+      content: `**[Propositional logic syntax](!/logic/propositional-logic/syntax)** defines the grammar rules for building well-formed formulas. Normal form conversion assumes a valid input expression that conforms to these rules.
 
-**Truth tables** are the exhaustive evaluation method that underpins both DNF and CNF construction. The converter builds one internally for every input expression.
+**[Truth tables](!/logic/truth-tables)** are the exhaustive evaluation method that underpins both DNF and CNF construction. The converter builds one internally for every input expression.
 
-**Logical equivalence** means two expressions produce identical truth tables. A formula and its DNF or CNF are always logically equivalent by construction.
+**[Logical equivalence](!/logic/propositional-logic/semantics/equivalences)** means two expressions produce identical truth tables. A formula and its DNF or CNF are always logically equivalent by construction.
 
 **Boolean algebra** provides algebraic laws such as De Morgan's laws and the distributive law that can simplify normal form expressions after conversion.
 

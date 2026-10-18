@@ -720,21 +720,21 @@ For deeper coverage of integration techniques and antiderivative tables, see the
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Definite integrals** — the area under a curve between two specific bounds. The output of the FTC&apos;s Part 2 evaluation.
+      content: `**[Definite integrals](!/calculus/integrals/definite)** — the area under a curve between two specific bounds. The output of the FTC&apos;s Part 2 evaluation.
 
-**Indefinite integrals** — the family of antiderivatives, written $\\int f(x)\\, dx = G(x) + C$. The constant $C$ disappears in any definite integral.
+**[Indefinite integrals](!/calculus/integrals/indefinite)** — the family of antiderivatives, written $\\int f(x)\\, dx = G(x) + C$. The constant $C$ disappears in any definite integral.
 
-**Riemann sums** — the construction that defines the integral as a limit of rectangle-area sums. The FTC turns this limit into a finite computation. See the [Riemann sum visualizer](!/calculus/visual-tools/riemann-sum).
+**[Riemann sums](!/calculus/integrals/definite#1)** — the construction that defines the integral as a limit of rectangle-area sums. The FTC turns this limit into a finite computation. See the [Riemann sum visualizer](!/calculus/visual-tools/riemann-sum).
 
-**Antiderivative rules** — power rule, exponential rule, trig integrals. The reverse direction of the differentiation rules.
+**[Antiderivative rules](!/calculus/integrals/indefinite#4)** — power rule, exponential rule, trig integrals. The reverse direction of the differentiation rules.
 
-**Substitution and integration by parts** — techniques for finding antiderivatives of more complicated integrands.
+**[Substitution and integration by parts](!/calculus/integrals/techniques)** — techniques for finding antiderivatives of more complicated integrands.
 
-**Improper integrals** — integrals where the bounds are infinite or the integrand is unbounded. The FTC still applies after a limiting process.
+**[Improper integrals](!/calculus/integrals/improper)** — integrals where the bounds are infinite or the integrand is unbounded. The FTC still applies after a limiting process.
 
 [Derivatives](!/calculus/visual-tools/derivative) — the inverse operation. The FTC is the explicit statement of that inverse relationship.
 
-**Visual tools for calculus** — other interactive visualizers covering [limits](!/calculus/visual-tools/limit), [continuity](!/calculus/visual-tools/continuity), derivatives, and [Riemann sums](!/calculus/integrals/definite#1).`,
+**[Visual tools for calculus](!/calculus/visual-tools)** — other interactive visualizers covering [limits](!/calculus/visual-tools/limit), [continuity](!/calculus/visual-tools/continuity), derivatives, and [Riemann sums](!/calculus/integrals/definite#1).`,
       before: ``,
       after: ``,
       link: '',

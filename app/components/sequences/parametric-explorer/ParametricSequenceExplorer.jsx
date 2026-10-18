@@ -40,7 +40,13 @@ const initialDraftsFor = (seq) => {
 // =====================================================
 function computeBrowse(rawN, sequence, max, params) {
   const cap = max || 200;
-  const n = Math.max(1, Math.min(cap, parseInt(rawN, 10) || 20));
+  // a whole number from 1 up; anything else (0, a decimal, a blank box) is refused, a larger number is cut to the cap
+  const rawStr = String(rawN).trim();
+  const parsed = Number(rawStr);
+  if (rawStr === '' || !Number.isInteger(parsed) || parsed < 1) {
+    return { error: 'Enter a positive integer.' };
+  }
+  const n = Math.min(cap, parsed);
   const terms = [];
   let sum = sequence.zero ?? 0;
   for (let i = 1; i <= n; i++) {
@@ -663,6 +669,7 @@ function ParametricSequenceExplorer({ name = 'arithmetic', explanations = null }
   // Parameters
   const [paramValues, setParamValues] = useState(() => initialParamsFor(sequence));
   const [paramDrafts, setParamDrafts] = useState(() => initialDraftsFor(sequence));
+  const [paramError, setParamError] = useState('');
 
   const inputs = sequence.initialInputs || {};
 
@@ -746,12 +753,24 @@ function ParametricSequenceExplorer({ name = 'arithmetic', explanations = null }
     setSolverFields({});
     setSolverResult(null);
     setActiveTab('browse');
+    setParamError('');
     isFirstSolverModeRun.current = true;
   }, [currentName]);
 
   const applyParams = () => {
     const newParams = {};
-    Object.keys(paramDrafts).forEach((k) => { newParams[k] = parseFloat(paramDrafts[k]); });
+    let blank = false;
+    Object.keys(paramDrafts).forEach((k) => {
+      const s = String(paramDrafts[k]).trim();
+      const v = Number(s);
+      if (s === '' || !Number.isFinite(v)) blank = true;
+      newParams[k] = v;
+    });
+    if (blank) {
+      setParamError('Enter a number in every parameter box.');
+      return;
+    }
+    setParamError('');
     setParamValues(newParams);
     setBrowseResult(computeBrowse(browseN, sequence, sequence.maxBrowseCount, newParams));
     setRangeResult(computeRange(rangeA, rangeB, sequence, sequence.maxRangeSpan, newParams));
@@ -864,6 +883,12 @@ function ParametricSequenceExplorer({ name = 'arithmetic', explanations = null }
                   </div>
                 ))}
                 <button className="se-apply" onClick={applyParams}>Apply</button>
+                {paramError && (
+                  <div className="se-alert se-alert-err" role="alert">
+                    <div className="se-alert-icon">!</div>
+                    <div>{paramError}</div>
+                  </div>
+                )}
               </div>
             )}
 
@@ -901,6 +926,13 @@ function ParametricSequenceExplorer({ name = 'arithmetic', explanations = null }
                     <button className="se-action" onClick={runBrowse}>Update</button>
                   </div>
 
+                  {browseResult.error ? (
+                    <div className="se-alert se-alert-err">
+                      <div className="se-alert-icon">!</div>
+                      <div>{browseResult.error}</div>
+                    </div>
+                  ) : (
+                    <>
                   <div className="se-stats">
                     <div className="se-stat">
                       <div className="se-stat-label">Showing</div>
@@ -931,6 +963,8 @@ function ParametricSequenceExplorer({ name = 'arithmetic', explanations = null }
                       ))}
                     </div>
                   </div>
+                    </>
+                  )}
                 </div>
               )}
 
@@ -1172,7 +1206,7 @@ function ParametricSequenceExplorer({ name = 'arithmetic', explanations = null }
               <section className="se-aside-section">
                 <h3 className="se-aside-heading">Walkthrough</h3>
                 <div className="se-aside-content">
-                  {processContent(modeExp.renderWalkthrough(currentResult, paramValues))}
+                  {processContent(currentResult && currentResult.error ? `**Cannot compute:** ${currentResult.error}` : modeExp.renderWalkthrough(currentResult, paramValues))}
                 </div>
               </section>
             </>

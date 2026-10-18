@@ -212,17 +212,17 @@ For the algebraic proofs and the general $n$-set form, see **De Morgan's laws**.
       title: `Related Concepts and Tools`,
       content: `[Two-Set Basic Identities](!/set-theory/visual-tools/two-sets-basic-venn) — the companion explorer for shading individual operations (union, intersection, complement, differences) rather than identity equations.
 
-**Set Operations** — formal definitions of union, intersection, complement, difference, and symmetric difference.
+**[Set Operations](!/set-theory/operations)** — formal definitions of union, intersection, complement, difference, and symmetric difference.
 
-**Venn Diagrams** — overview of one-set, two-set, and three-set diagrams.
+**[Venn Diagrams](!/set-theory/venn-diagrams)** — overview of one-set, two-set, and three-set diagrams.
 
-**De Morgan's Laws** — algebraic proofs and the $n$-set generalization.
+**[De Morgan's Laws](!/set-theory/rules#de_morgan)** — algebraic proofs and the $n$-set generalization.
 
-**Set Laws and Identities** — the full algebraic catalog of laws on sets.
+**[Set Laws and Identities](!/set-theory/rules)** — the full algebraic catalog of laws on sets.
 
 [Three-Set Venn Diagram](!/set-theory/visual-tools/three-sets-basic-venn) — extends visual proof techniques to three [overlapping sets](!/set-theory/relationships#4).
 
-**Set Theory Definitions** — glossary of foundational terms used throughout set algebra.
+**[Set Theory Definitions](!/set-theory/definitions)** — glossary of foundational terms used throughout set algebra.
 
 [Three-Set Laws and Identities Explorer](!/set-theory/visual-tools/three-sets-laws-venn) — the same catalogue of laws on three sets.
 

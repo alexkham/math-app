@@ -690,15 +690,15 @@ These laws are essentially the De Morgan and distributive laws translated into d
 
 [Three-Set Basic Identities](!/set-theory/visual-tools/three-sets-basic-venn) — the companion explorer for shading individual three-set expressions (triple union, triple intersection, "exactly two", and so on) rather than identity equations.
 
-**Set Operations** — formal definitions of union, intersection, complement, difference, and symmetric difference.
+**[Set Operations](!/set-theory/operations)** — formal definitions of union, intersection, complement, difference, and symmetric difference.
 
-**Venn Diagrams** — overview of one-set, two-set, and three-set diagrams.
+**[Venn Diagrams](!/set-theory/venn-diagrams)** — overview of one-set, two-set, and three-set diagrams.
 
-**De Morgan's Laws** — algebraic proofs and the $n$-set generalization.
+**[De Morgan's Laws](!/set-theory/rules#de_morgan)** — algebraic proofs and the $n$-set generalization.
 
-**Set Laws and Identities** — the full algebraic catalog including associativity, distributivity, and absorption.
+**[Set Laws and Identities](!/set-theory/rules)** — the full algebraic catalog including associativity, distributivity, and absorption.
 
-**Set Theory Definitions** — glossary of foundational terms used throughout set algebra.
+**[Set Theory Definitions](!/set-theory/definitions)** — glossary of foundational terms used throughout set algebra.
 
 [Venn Diagram and Truth Table Explorer](!/set-theory/visual-tools/venn-truth-table) — the same identities verified as matching truth-table columns.
 

@@ -687,14 +687,15 @@ $$f(a) < 0 \\quad \\text{and} \\quad f(b) > 0$$
 
 then $f(c) = 0$ for some $c \\in (a, b)$.
 
-**Example:** Show that $x^3 - x - 1 = 0$ has a solution in $(1, 2)$.
+@academic[example:Example
+Show that $x^3 - x - 1 = 0$ has a solution in $(1, 2)$.
 
 Let $f(x) = x^3 - x - 1$.
 
 $$f(1) = 1 - 1 - 1 = -1 < 0$$
 $$f(2) = 8 - 2 - 1 = 5 > 0$$
 
-Since $f$ is continuous and changes sign, IVT guarantees a root between $1$ and $2$.
+Since $f$ is continuous and changes sign, IVT guarantees a root between $1$ and $2$.]@
 
 The bisection method refines this: repeatedly halve the interval, keeping the half where the sign change occurs, to approximate the root to any desired precision.
 `,

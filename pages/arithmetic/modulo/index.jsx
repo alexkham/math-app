@@ -809,6 +809,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import { renderMultiplesLine } from '@/app/utils/illustrations/arithmetic/divisibility/multiplesLine'
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1424,8 +1426,39 @@ const schemas = {
     }),
   };
 
+  const moduloDivisibilityCases = {
+    prefaceTitle: 'Two sides of the same coin',
+    preface: 'Divisibility asks whether one integer divides another exactly. Modulo computes the evidence: the remainder answers the question.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'Divisibility is the yes-or-no question; modulo is the tool that answers it and, when the answer is no, quantifies the shortfall.',
+    parent: {
+      kicker: 'Modulo and divisibility',
+      formula: '$a \\bmod n$',
+      splitBy: 'whether the remainder is $0$',
+    },
+    cases: [
+      {
+        id: 'divides', condition: '$a \\bmod n = 0$',
+        count: { n: '✓' },
+        headline: '$n$ divides $a$',
+        desc: 'the remainder vanishes: $n$ divides $a$ with nothing left over',
+        formula: '$n \\mid a$',
+        example: '$24 \\bmod 6 = 0$, so $6 \\mid 24$',
+      },
+      {
+        id: 'not-divides', condition: '$a \\bmod n \\neq 0$',
+        count: { n: '✗' },
+        headline: '$n$ does not divide $a$',
+        desc: 'the remainder is positive and tells by how much the division misses',
+        formula: '$n \\nmid a$',
+        example: '$25 \\bmod 6 = 1$, so $6 \\nmid 25$',
+      },
+    ],
+  };
+
 return {
   props:{
+    moduloDivisibilityCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1449,7 +1482,9 @@ return {
 
 
 
-export default function ModuloPage({seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function ModuloPage({moduloDivisibilityCases, seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1499,6 +1534,14 @@ export default function ModuloPage({seoData, sectionsContent, introContent, obj1
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="modulo-divisibility-cases"
+            title="Modulo and divisibility: is the remainder zero?"
+            source="/arithmetic/modulo"
+          >
+            <CaseSplit data={moduloDivisibilityCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

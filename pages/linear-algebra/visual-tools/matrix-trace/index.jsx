@@ -679,7 +679,7 @@ Set the visualizer to $3 \\times 3$ and step through to see this picking-out pro
 
 [Transpose](!/linear-algebra/visual-tools/matrix-transpose) — leaves the trace unchanged: $\\text{tr}(A^T) = \\text{tr}(A)$.
 
-**Similarity transformation** — leaves the trace invariant.
+**[Similarity transformation](!/linear-algebra/transformations/basis-change#3)** — leaves the trace invariant.
 
 [Identity matrix](!/linear-algebra/visual-tools/matrix-types) — $\\text{tr}(I_n) = n$, since every diagonal entry equals 1.
 

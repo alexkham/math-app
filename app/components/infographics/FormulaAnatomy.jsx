@@ -443,7 +443,7 @@ function Poster({ data }) {
           {data.header.lede && <div className="lede">{processContent(data.header.lede)}</div>}
         </div>
       )}
-      <div className="fa-poster" ref={containerRef}>
+      <div className="fa-poster" ref={containerRef} data-keep-position="">
         {topParts.length > 0 && (
           <div className="fa-callout-row top"
                style={{ gridTemplateColumns: `repeat(${topCols}, 1fr)` }}>
@@ -463,6 +463,7 @@ function Poster({ data }) {
         )}
         <svg
           className="fa-conn-svg"
+          data-keep-position=""
           viewBox={`0 0 ${dims.w || 1} ${dims.h || 1}`}
           preserveAspectRatio="none"
         >

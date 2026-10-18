@@ -211,7 +211,7 @@ Check: $1 + 2 + 3 = 6$, $2 - 2 + 3 = 3$, $1 + 4 - 3 = 2$. Four $3 \\times 3$ det
 
 [Homogeneous systems](!/linear-algebra/visual-tools/linear-system-solutions) — the case $\\mathbf{b} = \\mathbf{0}$, where the rule gives only the trivial solution.
 
-**Solution sets** — unique, none, or infinitely many, of which the rule handles the first.`,
+**[Solution sets](!/linear-algebra/linear-systems/solvability#4)** — unique, none, or infinitely many, of which the rule handles the first.`,
       before: ``,
       after: ``,
       link: '',

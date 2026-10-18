@@ -484,7 +484,7 @@ The spread the calculator reports beside the mean is defined in [variance for di
       },
       obj4: {
         title: `Entering Ranges and Frequencies`,
-        content: `The table on the left holds one row per class: **Range Start** and **Range End** in the boxes marked Min and Max, and the class **Frequency** in the box marked Count. The **Midpoint** column shows $(\\text{start} + \\text{end}) / 2$ as soon as the range is valid, and a dash until then. A row counts only when its end is greater than its start and its frequency is greater than $0$; a row that fails is drawn with red borders and left out. **Valid Groups** under the table tells how many rows count, and **Total Frequency** adds their frequencies.
+        content: `The table on the left holds one row per class: **Range Start** and **Range End** in the boxes marked Min and Max, and the class **Frequency** in the box marked Count. The **Midpoint** column shows $(\\text{start} + \\text{end}) / 2$ as soon as the range is valid, and a dash until then. A row counts only when its end is greater than its start and its frequency is greater than $0$; a row that fails is drawn with red borders and left out. **Valid Groups** under the table tells how many rows count, and **Total Frequency** adds their frequencies. If two counted rows overlap, an amber note above those totals names them ("Ranges 1 and 2 overlap, so some values are counted twice"); rows typed out of order get a note too, though the result is the same.
 
 Click **+ Add Range** for another row; it starts with $0$, $0$, $0$ and is ignored until you fill it. The **×** at the end of a row removes it; the last remaining row cannot be removed. **Reset**, at the top right, does not empty the table: it restores the sample classes $10$–$20$ (frequency $5$), $20$–$30$ ($12$) and $30$–$40$ ($8$), whose estimated mean is $26.2$. There is no Calculate button; everything recomputes as you type.
 
@@ -1998,7 +1998,7 @@ On the left, under the parameters, the **Percentiles** box lists the minimum, th
         title: `Comparing Two Intervals`,
         content: `Click **▶ Compare** under the parameter box to open an **Alt a** and **Alt b**. The panel then shows the current interval with its $E(X)$, the alternative interval with its $E(X)$, and the difference as a percentage of the current value, marked with an arrow. The alternative opens as $[5, 15]$: against $[0, 10]$ that is $E(X) = 10.00$, $100.0\\%$ higher than $5.00$. Set the alternative $b$ to $5$ and the alternative is no longer an interval, so its result disappears; set the alternative $a$ to $-5$ and the alternative $[-5, 5]$ has $E(X) = 0.00$, $100.0\\%$ lower. When the two midpoints agree the panel says "Same".
 
-The comparison uses only the midpoints, so intervals of different width tie whenever they share a centre, as $[0, 10]$ and $[-5, 15]$ do; their variances, $8.3333$ and $33.3333$, tell them apart. A current interval centred on $0$ makes the percentage undefined, and the panel then shows no percentage. Why the midpoint alone fixes $E(X)$ is explained in [the continuous uniform distribution](!#the-continuous-uniform-distribution).`,
+The comparison uses only the midpoints, so intervals of different width tie whenever they share a centre, as $[0, 10]$ and $[-5, 15]$ do; their variances, $8.3333$ and $33.3333$, tell them apart. A current interval centred on $0$ makes the percentage undefined, so the panel then shows the plain difference of the two midpoints with the note "no percentage: E(X) is 0". Why the midpoint alone fixes $E(X)$ is explained in [the continuous uniform distribution](!#the-continuous-uniform-distribution).`,
         link: '',
       },
       obj7: {
@@ -2417,7 +2417,7 @@ The box opens with ten measurements around $100$, whose mean is $100.70$. Five h
         title: `Reading the Sample Statistics`,
         content: `Under the data box, **Sample Statistics** lists the minimum, **Q1**, the **Median**, the **Mean (E(X))**, **Q3** and the maximum. The quartiles are read off the sorted list at a quarter and three quarters of the way through it, and the median is the middle value, or the average of the two middle values when $n$ is even. For the ten heights $162$, $170$, $178$, $166$, $174$, $170$, $158$, $182$, $170$, $170$ the six numbers read $158.00$, $166.00$, $170.00$, $170.00$, $174.00$ and $182.00$.
 
-The right panel is built around **E(X) ≈** the sample mean, to two decimals, with $\\bar{x} = \\sum x / n$ filled in. Click **▶ Additional Statistics** to open the **Sample Variance** $s^2$, which divides by $n - 1$, the **Sample Std Dev** $s$, the **Standard Error** $s / \\sqrt{n}$, the **95% CI for μ**, $\\bar{x} \\pm 1.96 \\cdot s / \\sqrt{n}$, and the **Margin of Error**. For the ten heights they read $49.7778$, $7.0553$, $2.2311$, $[165.63, 174.37]$ and $\\pm 4.373$; for the pair $170$, $180$ they read $50.0000$, $7.0711$, $5.0000$, $[165.20, 184.80]$ and $\\pm 9.800$, a wide interval because two values say little. The interval uses the factor $1.96$ whatever the sample size, so for small samples it is narrower than a $t$-interval would be. Below the chart, a context box repeats the estimate, the interval and the range $\\bar{x} \\pm s$.
+The right panel is built around **E(X) ≈** the sample mean, to two decimals, with $\\bar{x} = \\sum x / n$ filled in. Click **▶ Additional Statistics** to open the **Sample Variance** $s^2$, which divides by $n - 1$, the **Sample Std Dev** $s$, the **Standard Error** $s / \\sqrt{n}$, the **95% CI for μ**, $\\bar{x} \\pm t \\cdot s / \\sqrt{n}$, and the **Margin of Error**. For the ten heights they read $49.7778$, $7.0553$, $2.2311$, $[164.95, 175.05]$ and $\\pm 5.047$; for the pair $170$, $180$ they read $50.0000$, $7.0711$, $5.0000$, $[111.47, 238.53]$ and $\\pm 63.530$, a very wide interval because two values say little. The factor $t$ is Student's value for $n - 1$ degrees of freedom, $2.262$ for ten values and $12.706$ for two, and it approaches $1.96$ as the sample grows, so a small sample gets a wider interval than the normal factor would give. Below the chart, a context box repeats the estimate, the interval and the range $\\bar{x} \\pm s$.
 
 The box under the calculator, **Understanding Expected Value Estimation for Normal Distribution**, explains what the estimate means, lists four settings and says why $\\bar{x}$ is the right estimator; its link opens the first section below. The parameters the estimate stands for are in [formula and worked example](!#formula-and-worked-example).`,
         link: '',
@@ -2431,7 +2431,7 @@ The comparison looks only at the means, not at the spread or the sample sizes, s
       },
       obj7: {
         title: `The Two Tabs`,
-        content: `Under the statistics are two tabs; they change what is drawn, not the numbers. **Visualization** (the default) draws the bell curve with the sample mean and sample standard deviation, marks the data points along the axis and shades the $95\\%$ interval for the mean; typing the ten heights moves the bell from $100.7$ to $170$ and widens it, because their standard deviation is $7.06$ against $2.75$. **Calculation** writes the estimate in four steps: the sum of the data, the count, the quotient and the result, for the heights $1700.00 / 10 = 170.0000$, followed by a **Confidence Interval** block with the standard error $7.055 / \\sqrt{10} = 2.2311$ and the interval $[165.627, 174.373]$, and a sentence on how larger samples narrow it.
+        content: `Under the statistics are two tabs; they change what is drawn, not the numbers. **Visualization** (the default) draws the bell curve with the sample mean and sample standard deviation, marks the data points along the axis and shades the $95\\%$ interval for the mean; typing the ten heights moves the bell from $100.7$ to $170$ and widens it, because their standard deviation is $7.06$ against $2.75$. **Calculation** writes the estimate in four steps: the sum of the data, the count, the quotient and the result, for the heights $1700.00 / 10 = 170.0000$, followed by a **Confidence Interval** block with the standard error $7.055 / \\sqrt{10} = 2.2311$ and the interval $[164.953, 175.047]$ with $t = 2.262$, and a sentence on how larger samples narrow it.
 
 Use the calculation tab to check a homework answer and the visualization to see where the data sit under the bell and how wide the interval is. Reset returns to the visualization tab. The parameters behind the bell are those of [formula and worked example](!#formula-and-worked-example).`,
         link: '',
@@ -2527,10 +2527,10 @@ Use the calculation tab to check a homework answer and the visualization to see 
             { say: 'TYPE the ten heights\nMin 158.00, Q1 166.00, median 170.00, mean 170.00, Q3 174.00, max 182.00.', at: 'tr' },
             { set: { css: 'textarea', nth: 0 }, value: '162, 170, 178, 166, 174, 170, 158, 182, 170, 170' },
             { wait: 3200 },
-            { say: 'CLICK Additional Statistics\ns² 49.7778, s 7.0553, standard error 2.2311, 95% CI [165.63, 174.37], margin ±4.373.', at: 'tr' },
+            { say: 'CLICK Additional Statistics\ns² 49.7778, s 7.0553, standard error 2.2311, 95% CI [164.95, 175.05], margin ±5.047.', at: 'tr' },
             { click: { button: '▶ Additional Statistics' } },
             { wait: 3200 },
-            { say: 'TYPE 170, 180\ns² 50.0000, s 7.0711, standard error 5.0000, CI [165.20, 184.80], margin ±9.800.', at: 'tr' },
+            { say: 'TYPE 170, 180\ns² 50.0000, s 7.0711, standard error 5.0000, CI [111.47, 238.53], margin ±63.530.', at: 'tr' },
             { set: { css: 'textarea', nth: 0 }, value: '170, 180' },
             { wait: 3200 },
           ],
@@ -2559,7 +2559,7 @@ Use the calculation tab to check a homework answer and the visualization to see 
             { say: 'TYPE the ten heights\nThe bell moves to 170 and widens.', at: 'tr' },
             { set: { css: 'textarea', nth: 0 }, value: '162, 170, 178, 166, 174, 170, 158, 182, 170, 170' },
             { wait: 3000 },
-            { say: 'CLICK Calculation\nΣx = 1700.00, n = 10, x̄ = 170.0000; SE 2.2311; CI [165.627, 174.373].', at: 'tr' },
+            { say: 'CLICK Calculation\nΣx = 1700.00, n = 10, x̄ = 170.0000; SE 2.2311; t = 2.262; CI [164.953, 175.047].', at: 'tr' },
             { click: { button: 'Calculation', exact: true } },
             { wait: 3200 },
             { say: 'CLICK Visualization\nThe bell is back.', at: 'tr' },

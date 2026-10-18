@@ -819,7 +819,12 @@ A solution is an assignment of values to $x_1, \\dots, x_n$ that satisfies every
     title: `Writing a System in Matrix Form`,
     content: `The entire system can be compressed into a single [matrix](!/linear-algebra/matrix) equation:
 
+@academic[formula_callout:Linear System Matrix Form
 $$A\\mathbf{x} = \\mathbf{b}$$
+/linear-algebra/formulas#linear_system_matrix_form]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 where $A$ is the $m \\times n$ coefficient matrix with entry $a_{ij}$ in row $i$, column $j$; $\\mathbf{x} = (x_1, x_2, \\dots, x_n)^T$ is the unknown vector; and $\\mathbf{b} = (b_1, b_2, \\dots, b_m)^T$ is the right-hand side.
 
@@ -836,7 +841,12 @@ Asking whether $A\\mathbf{x} = \\mathbf{b}$ has a solution is therefore equivale
     title: `The Augmented Matrix`,
     content: `The augmented matrix packages the coefficient matrix and the right-hand side into a single object:
 
+@academic[formula_callout:Augmented Matrix Construction
 $$[A \\mid \\mathbf{b}] = \\left(\\begin{array}{cccc|c} a_{11} & a_{12} & \\cdots & a_{1n} & b_1 \\\\ a_{21} & a_{22} & \\cdots & a_{2n} & b_2 \\\\ \\vdots & \\vdots & \\ddots & \\vdots & \\vdots \\\\ a_{m1} & a_{m2} & \\cdots & a_{mn} & b_m \\end{array}\\right)$$
+/linear-algebra/formulas#augmented_matrix_construction]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The vertical bar separates the coefficients from the constants but is purely notational — the augmented matrix is an $m \\times (n+1)$ matrix on which row operations are performed. Every row operation on $[A \\mid \\mathbf{b}]$ corresponds to a legal algebraic manipulation of the equations: swapping two equations, multiplying an equation by a nonzero scalar, or adding a multiple of one equation to another. None of these changes the solution set.
 

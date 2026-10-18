@@ -1767,6 +1767,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
 import spanMembershipDiagrams from '@/app/components/linear-algebra copy/matrix/spanMembershipDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 
 
 export async function getStaticProps(){
@@ -2139,7 +2140,7 @@ The two questions are independent — existence can hold without uniqueness, and
     entries: [
       {
         id: 'consistent-vocabulary',
-        tex: `consistent / inconsistent`,
+        tex: `$consistent / inconsistent$`,
         read: `the system has at least one solution — or none at all`,
         means: `A two-word classification applied to the **system**, not to any solution: consistent means at least one exists, inconsistent means none does. The words settle existence only and say nothing about how many, which is why **The Two Questions** above keeps existence and uniqueness apart.`,
         cases: `The marks that detect inconsistency are visual: a row reading $[\\,0 \\; \\cdots \\; 0 \\mid d\\,]$ with $d \\neq 0$ asserts $0 = d$, so a single such row in the [augmented matrix](!/linear-algebra/linear-systems/gaussian-elimination#notation) decides the whole system.`,
@@ -2456,8 +2457,36 @@ const schemas = {
     }),
   };
 
+  const squareSystemCases = {
+    prefaceTitle: 'The sharpest diagnostic',
+    preface: 'When $A$ is $n \\times n$, the determinant decides whether the coefficient matrix is adequate; when it is not, the rank comparison with the augmented matrix decides whether the specific $\\mathbf{b}$ is reachable.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'With $\\det(A) \\neq 0$ the right-hand side does not matter. With $\\det(A) = 0$ everything depends on whether $\\mathbf{b}$ lies in the column space.',
+    parent: {
+      kicker: 'Square system',
+      formula: '$A\\mathbf{x} = \\mathbf{b}$, $A$ is $n \\times n$',
+      splitBy: '$\\det(A)$',
+    },
+    cases: [
+      {
+        id: 'invertible', condition: '$\\det(A) \\neq 0$',
+        count: { n: '1', label: 'solution for every $\\mathbf{b}$' },
+        headline: 'Exactly one',
+        desc: 'the matrix is invertible and the rank is $n$; existence and uniqueness both hold universally',
+        formula: '$\\mathbf{x} = A^{-1}\\mathbf{b}$',
+      },
+      {
+        id: 'singular', condition: '$\\det(A) = 0$',
+        count: { n: '∞ or 0', label: 'depends on $\\mathbf{b}$' },
+        headline: 'Infinitely many or none',
+        desc: 'the matrix is singular and the rank is less than $n$: infinitely many solutions for $\\mathbf{b}$ in the column space, none for $\\mathbf{b}$ outside it',
+      },
+    ],
+  };
+
 return {
   props:{
+    squareSystemCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -2478,7 +2507,9 @@ return {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function SolvabilityPage({
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function SolvabilityPage({squareSystemCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -2565,6 +2596,14 @@ export default function SolvabilityPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-diagram'}
+            id="square-system-determinant-cases"
+            title="Square systems: what the determinant decides"
+            source="/linear-algebra/linear-systems/solvability"
+          >
+            <CaseSplit data={squareSystemCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

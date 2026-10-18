@@ -137,7 +137,7 @@ The boxes accept decimals and negative numbers; the percent sign is never typed,
     title: `Calculating, Reading the Result and Resetting`,
     content: `Click **Calculate** and the answer appears after the equals sign at the end of the row, rounded to two decimals. In three modes it carries a percent sign: the percentage change, the percentage ratio and the fraction to percentage, so $80$ changed to $100$ reads $25.00\\%$, $30$ is what $\\%$ of $120$ reads $25.00\\%$ and $3 / 8$ reads $37.50\\%$. In the other two the answer is an amount: $20\\%$ of $150$ reads $30.00$, and $15\\%$ subtracted from $200$ reads $170.00$. A decrease shows as a negative change, $100$ changed to $80$ gives $-20.00\\%$.
 
-If a box is empty or holds something that is not a number, the row reads "Error: Invalid input"; type both numbers and click Calculate again. A percentage change from an original value of $0$ has no answer, and the row shows Infinity. **Reset** returns the calculator to its opening state: the first mode, both boxes empty, the drop-down back on "% added to". The result of a mode change is also a cleared row, since the two boxes are emptied. How each answer is formed is explained in [The Five Percentage Calculations](!#the-five-percentage-calculations).`,
+If a box is empty or holds something that is not a number, the row reads "Error: Invalid input"; type both numbers and click Calculate again. A percentage change from an original value of $0$ has no answer, and the row says "Error: The original value cannot be 0"; a whole or a denominator of $0$ is refused the same way. Typing in either box clears the old answer. **Reset** returns the calculator to its opening state: the first mode, both boxes empty, the drop-down back on "% added to". The result of a mode change is also a cleared row, since the two boxes are emptied. How each answer is formed is explained in [The Five Percentage Calculations](!#the-five-percentage-calculations).`,
     before: ``,
     after: ``,
     link: '',
@@ -173,7 +173,7 @@ This is the calculation behind tips, discounts and shares of a total: a $15\\%$ 
     title: `Percentage Change`,
     content: `The percentage change from an old value to a new one is the difference divided by the old value, times $100$: $\\frac{\\text{new} - \\text{old}}{\\text{old}} \\cdot 100$. From $80$ to $100$ the change is $\\frac{20}{80} \\cdot 100 = 25\\%$; from $100$ back to $80$ it is $\\frac{-20}{100} \\cdot 100 = -20\\%$, not $-25\\%$, because the base has changed. The calculator's second mode takes the original value first and the new value second and marks a decrease with a minus sign.
 
-The base is always the starting value, which is the usual mistake: dividing by the new value, or by the difference. A change from $0$ has no percentage, since nothing can be divided by the starting value; the calculator shows Infinity in that case. Percentage points are a different measure: a rate moving from $4\\%$ to $5\\%$ rises by one point but by $25\\%$ in relative terms.`,
+The base is always the starting value, which is the usual mistake: dividing by the new value, or by the difference. A change from $0$ has no percentage, since nothing can be divided by the starting value; the calculator answers "The original value cannot be 0" in that case. Percentage points are a different measure: a rate moving from $4\\%$ to $5\\%$ rises by one point but by $25\\%$ in relative terms.`,
     before: ``,
     after: ``,
     link: '',

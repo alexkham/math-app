@@ -578,6 +578,12 @@ function toAnchorId(name) {
   return String(name || '').toLowerCase().replace(/\s+/g, '_');
 }
 
+// Formula item anchors come from FormulaTOC.jsx's toId, which also drops
+// apostrophes and parentheses — keep in sync with it.
+function toFormulaAnchorId(name) {
+  return String(name || '').toLowerCase().replace(/['’()]/g, '').replace(/\s+/g, '_');
+}
+
 async function processFormulas(parentSlug) {
   // The template literal must be inline in import() — webpack needs the
   // static path prefix to build a module context; a fully dynamic
@@ -601,7 +607,7 @@ async function processFormulas(parentSlug) {
       title: item.title || item.name || '',
       formula: item.formula || item.latex || item.tex || '',
       category: catKey,
-      anchor: toAnchorId(item.name || item.title || ''),
+      anchor: toFormulaAnchorId(item.name || item.title || ''),
     });
   });
   return { categories: Object.values(categoryMap), items, totalCount: items.length };

@@ -727,21 +727,21 @@ For deeper coverage, see the **Rolle&apos;s theorem** page.`,
       title: `Related Concepts`,
       content: `[Derivatives](!/calculus/visual-tools/derivative) — the slope of the tangent at $c$. The MVT relates this local quantity to a global quantity (the [secant slope](!/calculus/visual-tools/average-rate-of-change)). See the **derivative visualizer**.
 
-**Rolle&apos;s theorem** — the special case of the MVT when the endpoint values agree.
+**[Rolle&apos;s theorem](!/calculus/derivatives/rules#9)** — the special case of the MVT when the endpoint values agree.
 
 **Cauchy mean value theorem** — a generalization to two functions simultaneously. Used to prove L&apos;Hôpital&apos;s rule.
 
-**L&apos;Hôpital&apos;s rule** — for indeterminate [limits](!/calculus/visual-tools/limit) of the form $0/0$ or $\\infty/\\infty$. A direct application of the Cauchy MVT.
+**[L&apos;Hôpital&apos;s rule](!/calculus/derivatives/rules#10)** — for indeterminate [limits](!/calculus/visual-tools/limit) of the form $0/0$ or $\\infty/\\infty$. A direct application of the Cauchy MVT.
 
-**Increasing and decreasing functions** — the MVT proves that $f' > 0$ on an interval implies $f$ is strictly increasing there. One of the most useful consequences.
+**[Increasing and decreasing functions](!/calculus/derivatives/graph-analysis#3)** — the MVT proves that $f' > 0$ on an interval implies $f$ is strictly increasing there. One of the most useful consequences.
 
 **Constant function theorem** — if $f' = 0$ everywhere on an interval, then $f$ is constant. Comes directly from the MVT.
 
-**Antiderivatives** — two [antiderivatives](!/calculus/integrals/indefinite#1) of the same function differ by a constant. Proved by the constant function theorem above.
+**[Antiderivatives](!/calculus/integrals/indefinite#1)** — two [antiderivatives](!/calculus/integrals/indefinite#1) of the same function differ by a constant. Proved by the constant function theorem above.
 
-**Visual tools for calculus** — [limits](!/calculus/limits#1), [continuity](!/calculus/visual-tools/continuity), derivatives, FTC, [Riemann sums](!/calculus/visual-tools/riemann-sum).
+**[Visual tools for calculus](!/calculus/visual-tools)** — [limits](!/calculus/limits#1), [continuity](!/calculus/visual-tools/continuity), derivatives, FTC, [Riemann sums](!/calculus/visual-tools/riemann-sum).
 
-**Optimization** — the proof runs through Rolle's theorem, which locates an interior [critical point](!/calculus/visual-tools/optimization) exactly as optimization does.`,
+**[Optimization](!/calculus/visual-tools/optimization)** — the proof runs through Rolle's theorem, which locates an interior [critical point](!/calculus/visual-tools/optimization) exactly as optimization does.`,
       before: ``,
       after: ``,
       link: '',

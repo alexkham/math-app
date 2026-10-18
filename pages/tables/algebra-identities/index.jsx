@@ -249,15 +249,15 @@ Useful when only the sum or product is needed — no need to solve the equation.
       title: `Related Concepts`,
       content: `[Field axioms](!/tables/algebra-identities#sec-properties) — the structural rules (commutativity, associativity, distributivity, identity elements, inverse elements) that justify every identity in the table. Listed at the bottom of this page below the categories grid. Worth a glance for the underlying logic, especially when an identity seems arbitrary.
 
-**Algebra formulas** — the formula index where each identity in this table has a derivation page. Card details panels link directly to the relevant entry.
+**[Algebra formulas](!/algebra/formulas)** — the formula index where each identity in this table has a derivation page. Card details panels link directly to the relevant entry.
 
-**Polynomial factoring** — the practical application of the [factoring family](!/tables/algebra-identities#factoring). See the polynomial factoring topic for step-by-step worked examples.
+**[Polynomial factoring](!/algebra/polynomials/factoring)** — the practical application of the [factoring family](!/tables/algebra-identities#factoring). See the polynomial factoring topic for step-by-step worked examples.
 
-**Quadratic equations** — uses the [polynomial family](!/tables/algebra-identities#polynomial) heavily. Quadratic formula, discriminant analysis, Vieta's formulas, and completing the square all derive from there.
+**[Quadratic equations](!/algebra/equations/quadratic)** — uses the [polynomial family](!/tables/algebra-identities#polynomial) heavily. Quadratic formula, discriminant analysis, Vieta's formulas, and completing the square all derive from there.
 
-**Exponent rules** and **logarithm rules** — the topic pages that develop the [exponent](!/tables/algebra-identities#exponent) and [logarithm](!/tables/algebra-identities#logarithm) families with examples and exercises.
+**[Exponent rules](!/algebra/powers/exponent-rules)** and **logarithm rules** — the topic pages that develop the [exponent](!/tables/algebra-identities#exponent) and [logarithm](!/tables/algebra-identities#logarithm) families with examples and exercises.
 
-**Binomial theorem** — the combinatorial backbone of the [binomial expansion family](!/tables/algebra-identities#binomial). See the binomial theorem topic for proofs and applications to probability and series.`,
+**[Binomial theorem](!/combinatorics/binomial-theorem)** — the combinatorial backbone of the [binomial expansion family](!/tables/algebra-identities#binomial). See the binomial theorem topic for proofs and applications to probability and series.`,
       before: ``, after: ``, link: '#sec-properties'
     },
 

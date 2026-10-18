@@ -1488,7 +1488,7 @@ Cramer's rule proves that each solution component is a rational function of the 
     entries: [
       {
         id: `column-replacement-subscript`,
-        tex: `x_i = \\frac{\\det(A_i)}{\\det(A)}`,
+        tex: `$x_i = \\frac{\\det(A_i)}{\\det(A)}$`,
         read: `x sub i is the determinant of A sub i over the determinant of A`,
         means: `$A_i$ is not an entry, a row, a column or a member of a sequence. It is a whole matrix built for the occasion: $A$ with its $i$-th column thrown away and $\\mathbf{b}$ put in its place, every other column untouched. The subscript names a construction the notation never describes.`,
         cases: `The two subscripts in the formula do different jobs. On the left, $i$ selects a component of the solution; on the right, the same $i$ selects which column was replaced. They match because the rule pairs them, not because the symbols are the same kind of thing.`,
@@ -1498,7 +1498,7 @@ Cramer's rule proves that each solution component is a rational function of the 
       },
       {
         id: `wronskian-two-argument-lists`,
-        tex: `W(f_1, \\dots, f_n)(x)`,
+        tex: `$W(f_1, \\dots, f_n)(x)$`,
         read: `the Wronskian of f one through f n, evaluated at x`,
         means: `Two bracketed lists in a row, and they hold different kinds of thing. The first takes the functions and fixes which determinant is being formed; the second supplies the point at which that determinant is worked out. $W$ consumes functions and returns a function, so the answer varies with $x$ and a single number is never the whole object.`,
         cases: `Inside the matrix, one symbol carries two indices with unrelated jobs: in $f_1^{(n-1)}$ the subscript picks the function and the parenthesised superscript gives the order of differentiation. The parentheses are what keep it from reading as a power.`,
@@ -1508,7 +1508,7 @@ Cramer's rule proves that each solution component is a rational function of the 
       },
       {
         id: `product-over-pairs`,
-        tex: `\\det(V) = \\prod_{1 \\leq i < j \\leq n} (x_j - x_i)`,
+        tex: `$\\det(V) = \\prod_{1 \\leq i < j \\leq n} (x_j - x_i)$`,
         read: `the product over all pairs i less than j between one and n, of x j minus x i`,
         means: `What sits under the product sign is a condition, not a counter running from a start to a finish. It selects every pair of indices with $i$ below $j$ and multiplies one factor for each, which is $\\binom{n}{2}$ factors rather than $n$.`,
         cases: `The condition also fixes the order inside each factor: the larger index comes first, so every difference is written $x_j - x_i$. Swapping them in one factor flips the sign of the whole product, which is why the inequality is part of the notation rather than a remark about it.`,
@@ -1518,7 +1518,7 @@ Cramer's rule proves that each solution component is a rational function of the 
       },
       {
         id: `size-indexed-determinant`,
-        tex: `D_n = a_nD_{n-1} - b_nc_nD_{n-2}`,
+        tex: `$D_n = a_nD_{n-1} - b_nc_nD_{n-2}$`,
         read: `D sub n equals a sub n times D sub n minus one, minus b sub n c sub n times D sub n minus two`,
         means: `The subscript on $D$ is a matrix size. $D_n$ is the determinant of the $n \\times n$ tridiagonal matrix, $D_{n-1}$ the determinant of a smaller one, so the recurrence relates numbers coming from matrices of three different dimensions in a single line.`,
         cases: `The subscripts on $a$, $b$ and $c$ mean something else in the same equation: they locate entries within one matrix. Two subscript conventions sit side by side, and only the letter tells them apart.`,

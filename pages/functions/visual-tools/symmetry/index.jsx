@@ -190,7 +190,7 @@ The runtime verdict captures all of this automatically. You can use the sliders 
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Even and Odd Functions** — formal theory page covering definitions, proofs, sum and product rules for even and odd functions, and Fourier-series connections.
+      content: `**[Even and Odd Functions](!/functions/properties#1)** — formal theory page covering definitions, proofs, sum and product rules for even and odd functions, and Fourier-series connections.
 
 [Function Transformations](!/functions/visual-tools/transformations) — visualizer for $a$, $k$, $b$, $h$ alone, useful for separating the effects of each parameter before bringing symmetry on top.
 
@@ -198,11 +198,11 @@ The runtime verdict captures all of this automatically. You can use the sliders 
 
 [Reflections](!/functions/visual-tools/reflections) — geometric operations on graphs; even and odd are the two special cases where a reflection or rotation lands the graph on itself.
 
-**Periodic Functions** — a different kind of symmetry: $f(x + T) = f(x)$ for some period $T$. Sine and cosine are both periodic **and** have parity symmetry; most periodic functions only have one or the other.
+**[Periodic Functions](!/functions/properties#15)** — a different kind of symmetry: $f(x + T) = f(x)$ for some period $T$. Sine and cosine are both periodic **and** have parity symmetry; most periodic functions only have one or the other.
 
 [Inverse Functions](!/functions/visual-tools/inverse-function) — graph reflection across the line $y = x$; another kind of symmetric relationship between two functions, though strictly speaking not a symmetry of one graph alone.
 
-**Trigonometric Identities** — the identities $\\sin(-x) = -\\sin(x)$ and $\\cos(-x) = \\cos(x)$ are exactly the parity statements visualized here, written algebraically.
+**[Trigonometric Identities](!/trigonometry/identities)** — the identities $\\sin(-x) = -\\sin(x)$ and $\\cos(-x) = \\cos(x)$ are exactly the parity statements visualized here, written algebraically.
 
 [Function Asymptotes](!/functions/visual-tools/asymptotes) — symmetry carries over to the [asymptotes](!/functions/properties#13): an odd function's vertical asymptotes come in $\\pm c$ pairs.
 

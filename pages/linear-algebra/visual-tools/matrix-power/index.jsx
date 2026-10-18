@@ -214,7 +214,7 @@ Check one entry of $A^4$ against the path formula: $(A^4)_{1,1}$ is the sum over
 
 **Adjacency matrices** — powers count walks in a graph.
 
-**Matrix exponential** — the infinite series of powers that solves linear differential equations.`,
+**[Matrix exponential](!/linear-algebra/eigen/diagonalization#8)** — the infinite series of powers that solves linear differential equations.`,
       before: ``,
       after: ``,
       link: '',

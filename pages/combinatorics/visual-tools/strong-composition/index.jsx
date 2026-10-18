@@ -756,9 +756,9 @@ That translation is why the two scenarios share a formula shape while counting d
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Weak composition** — same setup but empty bins allowed. Formula $\\binom{n + k - 1}{k - 1}$. Always at least as large as the strong count because zero parts are permitted.
+      content: `**[Weak composition](!/combinatorics/visual-tools/weak-composition)** — same setup but empty bins allowed. Formula $\\binom{n + k - 1}{k - 1}$. Always at least as large as the strong count because zero parts are permitted.
 
-**Simple combination** — the no-repetition unordered selection. $\\binom{n}{r}$. The strong-composition formula is itself a [binomial coefficient](!/combinatorics/visual-tools/combination), $\\binom{n - 1}{k - 1}$ — choosing gap positions out of available gaps.
+**[Simple combination](!/combinatorics/combinations#combinations)** — the no-repetition unordered selection. $\\binom{n}{r}$. The strong-composition formula is itself a [binomial coefficient](!/combinatorics/visual-tools/combination), $\\binom{n - 1}{k - 1}$ — choosing gap positions out of available gaps.
 
 [Distribution into cells](!/combinatorics/visual-tools/distribution) — distributes $n$ **distinct** items (not identical) into $k$ labeled cells with no capacity rule. Formula $k^n$.
 
@@ -768,9 +768,9 @@ That translation is why the two scenarios share a formula shape while counting d
 
 **Bijection $x_i \\mapsto x_i - 1$** — converts strong compositions of $n$ into $k$ parts into [weak compositions](!/combinatorics/visual-tools/weak-composition) of $n - k$ into $k$ parts. Both counted by $\\binom{n - 1}{k - 1}$, as the [gap-choice argument](!#the-gap-choice-argument) shows.
 
-**Hockey-stick identity** — [grouping by x₁](!#grouping-by-first-bin-count) proves $\\sum_{j=1}^{n-k+1} \\binom{n - j - 1}{k - 2} = \\binom{n - 1}{k - 1}$.
+**[Hockey-stick identity](!/combinatorics/visual-tools/pascal-triangle#mode-2-hockey-stick)** — [grouping by x₁](!#grouping-by-first-bin-count) proves $\\sum_{j=1}^{n-k+1} \\binom{n - j - 1}{k - 2} = \\binom{n - 1}{k - 1}$.
 
-**Combinatorics calculator** — to compute $\\binom{n - 1}{k - 1}$ for any $n$ and $k$, see the **strong composition calculator**.`,
+**[Combinatorics calculator](!/combinatorics/calculator#strong-composition)** — to compute $\\binom{n - 1}{k - 1}$ for any $n$ and $k$, see the **strong composition calculator**.`,
       before: ``,
       after: ``,
       link: '',

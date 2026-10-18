@@ -119,11 +119,11 @@ CDFs also facilitate distribution comparison. Plotting multiple CDFs on the same
 
     obj6: {
       title: `Related Probability Visualization Tools`,
-      content: `**Probability Mass Function Visualizers** - Display discrete probabilities as bar charts showing $P(X = k)$ at each value rather than cumulative probability.
+      content: `**[Probability Mass Function Visualizers](!/probability/visual-tools/probability-function)** - Display discrete probabilities as bar charts showing $P(X = k)$ at each value rather than cumulative probability.
 
-**Probability Density Function Visualizers** - Show continuous probability density curves where area under the curve represents probability.
+**[Probability Density Function Visualizers](!/probability/visual-tools/probability-function)** - Show continuous probability density curves where area under the curve represents probability.
 
-**Distribution Calculators** - Compute exact probabilities, quantiles, moments, and other statistical measures for specific distribution parameters.
+**[Distribution Calculators](!/probability/visual-tools/distributions)** - Compute exact probabilities, quantiles, moments, and other statistical measures for specific distribution parameters.
 
 **Random Variable Simulators** - Generate random samples from distributions to observe empirical behavior and convergence to theoretical probabilities.
 

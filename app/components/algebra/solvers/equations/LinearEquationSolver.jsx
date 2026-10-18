@@ -423,7 +423,16 @@ function solveLinearEquation(ast) {
     });
   }
 
-  const isExact = Number.isInteger(solution) || (Number.isInteger(totalConst) && Number.isInteger(totalVarCoeff) && totalConst % totalVarCoeff === 0);
+  // whole-number inputs always give an exact answer: a whole number or a reduced fraction such as 7/3
+  const wholeInputs = Number.isInteger(totalConst) && Number.isInteger(totalVarCoeff) && totalVarCoeff !== 0;
+  let fraction = null;
+  if (wholeInputs && !Number.isInteger(solution)) {
+    const gcdInt = (a, b) => (b === 0 ? Math.abs(a) : gcdInt(b, a % b));
+    const g = gcdInt(totalConst, totalVarCoeff);
+    const sign = totalVarCoeff < 0 ? -1 : 1;
+    fraction = { n: (sign * totalConst) / g, d: (sign * totalVarCoeff) / g };
+  }
+  const isExact = Number.isInteger(solution) || fraction !== null;
 
   graphData = {
     type: 'linear',
@@ -432,7 +441,7 @@ function solveLinearEquation(ast) {
     solution: { x: solution, y: 0 }
   };
 
-  return { steps, solution: { variable: varName, value: solution, exact: isExact }, graphData };
+  return { steps, solution: { variable: varName, value: solution, exact: isExact, fraction }, graphData };
 }
 
 /* =====================================================
@@ -1230,10 +1239,12 @@ const LinearEquationSolver = ({ explanations = null }) => {
                     <div style={wStyles.answerValue}>
                       <span style={wStyles.answerVar}>{solveResult.solution.variable}</span>
                       <span style={wStyles.answerEq}> = </span>
-                      <span style={wStyles.answerNum}>{formatNumber(solveResult.solution.value)}</span>
+                      <span style={wStyles.answerNum}>{solveResult.solution.fraction ? `${solveResult.solution.fraction.n}/${solveResult.solution.fraction.d}` : formatNumber(solveResult.solution.value)}</span>
                     </div>
                     <div style={wStyles.answerNote}>
-                      {solveResult.solution.exact ? '\u2713 Exact solution' : '\u2248 Approximate value'}
+                      {solveResult.solution.exact
+                        ? (solveResult.solution.fraction ? `\u2713 Exact solution (\u2248 ${formatNumber(solveResult.solution.value)})` : '\u2713 Exact solution')
+                        : '\u2248 Approximate value'}
                     </div>
                   </div>
                 )}

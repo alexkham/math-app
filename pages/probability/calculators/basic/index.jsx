@@ -651,7 +651,7 @@ The notation used in the results is listed in [Symbols](!/probability/basics#sym
       title: `Related Probability Resources`,
       content: `Beyond these calculators, explore our comprehensive probability learning resources:
 
-**Visual Tools** provide interactive demonstrations of probability concepts. See **conditional probability visualizations** with tree diagrams, Venn diagrams, and waffle charts that make abstract concepts concrete.
+**[Visual Tools](!/probability/visual-tools)** provide interactive demonstrations of probability concepts. See **conditional probability visualizations** with tree diagrams, Venn diagrams, and waffle charts that make abstract concepts concrete.
 
 **Theoretical Guides** cover fundamental concepts in depth. Learn about **probability theory**, **probability distributions**, **Bayes' theorem**, **expected value**, and **random variables**.
 
@@ -678,7 +678,7 @@ The buttons also change the page address: ?calc=single-event or ?calc=two-indepe
       title: `Using the Single Event Calculator`,
       content: `Type the **Number of Favorable Outcomes** and the **Total Number of Possible Outcomes**, two positive whole numbers, and click **Calculate**. The **Result** box gives the probability of the event as a fraction, a decimal and a percentage, the probability of the event not happening, and the odds in favour and against. For one face of a die, $1$ and $6$: $P(A) = 1/6 \\approx 16.67\\%$, $P(A') \\approx 83.33\\%$, odds in favour $1:5$, odds against $5:1$; for an ace from a deck, $4$ and $52$: $1/13 \\approx 7.69\\%$.
 
-The boxes refuse an empty field ("Please fill in both fields"), letters ("Please enter valid numbers only"), decimals ("Please enter whole numbers only (no decimals)"), negatives and a total of zero. Under the result, the **Visualization** tab draws the probability as a pie, the favourable share against its complement, and the **Explanations** tab gives the definitions with a link to the section of this page that explains them; the tabs do not change the result. **Reset** empties both boxes and the result. The formula is explained in [Single Event Probability](!#single-event-probability).`,
+The boxes refuse an empty field ("Please fill in both fields"), letters ("Please enter valid numbers only"), decimals ("Please enter whole numbers only (no decimals)"), negatives, a total of zero and more favourable outcomes than total outcomes ("Favorable outcomes cannot be more than total outcomes"). Under the result, the **Visualization** tab draws the probability as a pie, the favourable share against its complement, and the **Explanations** tab gives the definitions with a link to the section of this page that explains them; the tabs do not change the result. **Reset** empties both boxes and the result. The formula is explained in [Single Event Probability](!#single-event-probability).`,
       before: ``,
       after: ``,
       link: '',

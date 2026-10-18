@@ -397,7 +397,7 @@ export async function getStaticProps() {
   const sectionsContent = {
     obj1: {
       title: `Switching Between the Three Calculators`,
-      content: `Three options sit above the tool. **Standard Trigonometry Functions** takes an angle and returns its sine, cosine, tangent, cosecant, secant and cotangent. **Inverse Trigonometry Functions** takes a ratio and returns the angle whose sine, cosine or tangent it is. **Angle Explorer** is a visual tool for looking at an angle in standard position; it has no explanation panel.
+      content: `Three options sit above the tool. **Standard Trigonometry Functions** takes an angle and returns its sine, cosine, tangent, cosecant, secant and cotangent. **Inverse Trigonometry Functions** takes a ratio and returns the angle whose sine, cosine or tangent it is. **Angle Explorer** is a visual tool for looking at an angle in standard position; a short caption above it says how to use it, and it has no explanation panel of its own.
 
 Click an option and the tool below changes at once. Each calculator keeps its own numbers while you look at another, so you can switch back without retyping. The standard calculator opens first, with the Angle box empty and **Degrees** selected, so typing $30$ gives the angle $30^\\circ$.
 
@@ -467,7 +467,7 @@ Which angle the calculator returns when several would fit is explained in [the i
 
 Messages appear in red under the form. The inverse calculator warns when the ratio lies outside $-1$ to $1$: arcsine and arccosine are undefined there, arctangent is still computed, for example arctan $1.5 = 0.98279$ radians. The standard calculator reports **Failed to fetch data** when the server does not answer; try again in a moment.
 
-In the standard calculator, Reset also submits the form, so clicking it sends an empty request to the server; the table clears either way. The demo above therefore shows Reset on the inverse calculator.
+Reset clears the angle and the table in both calculators and sends nothing to the server.
 
 The range rule behind the inverse calculator's message is explained in [arcsine](!#arcsine) and [arccosine](!#arccosine).`,
       before: ``, after: ``, link: '',

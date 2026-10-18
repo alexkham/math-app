@@ -211,7 +211,7 @@ Check the first row of $A A^{-1}$: $(1, 2, 3)$ against the columns gives $-24 + 
       title: `Related Concepts`,
       content: `[Determinant](!/linear-algebra/visual-tools/matrix-determinant) — the divisor in the formula and the test for existence.
 
-**Cofactor expansion** — phases 1 and 3 are cofactor expansions; the same signed minors serve both.
+**[Cofactor expansion](!/linear-algebra/determinants/cofactors)** — phases 1 and 3 are cofactor expansions; the same signed minors serve both.
 
 [Transpose](!/linear-algebra/visual-tools/matrix-transpose) — phase 2, turning the cofactor matrix into the adjugate.
 

@@ -910,13 +910,13 @@ Rolling a die → {1, 2, 3, 4, 5, 6}
 Different scenarios produce different kinds of sample spaces. They generally fall into a few common categories:
 
 - **Finite sample spaces:** a limited number of outcomes, e.g. rolling a die  
-  $\(\\Omega = \{1,2,3,4,5,6\}\)$
+  $\\Omega = \\{1,2,3,4,5,6\\}$
 
 - **Countably infinite sample spaces:** outcomes can be listed in sequence, e.g. number of trials until first success  
-  $\(\\Omega = \{1,2,3,\\ldots\}\)$
+  $\\Omega = \\{1,2,3,\\ldots\\}$
 
 - **Uncountable or continuous sample spaces:** outcomes fill an interval or region, e.g. measuring time or height  
-  $\(\\Omega = [0,\\infty)\)$
+  $\\Omega = [0,\\infty)$
 
 These categories help determine how probabilities are assigned and what tools are used to work with the sample space.
 `,
@@ -930,22 +930,22 @@ These categories help determine how probabilities are assigned and what tools ar
 Once the sample space is identified, it can be written in different ways depending on the scenario and the size of the outcome set:
 
 - **Explicit lists** for small finite spaces, e.g.  
-  $\(\\Omega = \{1,2,3,4,5,6\}\)$
+  $\\Omega = \\{1,2,3,4,5,6\\}$
 
 - **Ordered pairs** for multi-step experiments, e.g. two coin tosses  
-  $\(\\Omega = \{(H,H), (H,T), (T,H), (T,T)\}\)$
+  $\\Omega = \\{(H,H), (H,T), (T,H), (T,T)\\}$
 
 - **Sequences or tuples** when more than two components are involved, e.g. three dice  
-  $\(\\Omega = \{(x_1, x_2, x_3) : x_i \\in \{1,\\ldots,6\}\}\)$
+  $\\Omega = \\{(x_1, x_2, x_3) : x_i \\in \\{1,\\ldots,6\\}\\}$
 
 - **Intervals** when outcomes vary continuously, e.g. a measurement  
-  $\(\\Omega = [0,1]\)$
+  $\\Omega = [0,1]$
 
 - **Set-builder notation** for describing outcomes by a rule, e.g.  
-  $\(\\Omega = \{x : 0 \\le x \\le 10\}\)$
+  $\\Omega = \\{x : 0 \\le x \\le 10\\}$
 
 - **Cartesian products** for combining simpler spaces, e.g.  
-  $\(\\Omega = A \\times B\)$
+  $\\Omega = A \\times B$
 
 These representations make it easier to see how outcomes are organized and how events will be formed from them.
 `,
@@ -962,9 +962,18 @@ A sample space is not just any set—it must satisfy a few basic requirements so
 • It must exclude outcomes that **cannot** occur.
 • Its outcomes must be **mutually exclusive** (only one outcome happens in a single trial).
 • Its outcomes must be **collectively exhaustive** (something from the set must occur).
-• Events are formed by selecting subsets of the sample space: \(A \subseteq \Omega\).
+• Events are formed by selecting subsets of the sample space: $A \\subseteq \\Omega$.
 
 These properties ensure that probabilities assigned to events make sense and behave consistently.
+
+When the outcomes are equally likely, probability reduces to counting:
+
+@academic[formula_callout:Classical Probability Formula
+$$P(A) = \\frac{|A|}{|\\Omega|}$$
+/probability/formulas#classical_probability_formula]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 `,
       before:``,
       after:``,
@@ -973,14 +982,14 @@ These properties ensure that probabilities assigned to events make sense and beh
     events:{
       title:`Relationship to Events`,
       content:`
-Events are built directly from the sample space. An event is simply a subset of \(\Omega\) that collects the outcomes we care about in a particular question.
+Events are built directly from the sample space. An event is simply a subset of $\\Omega$ that collects the outcomes we care about in a particular question.
 
-• If $\(\\Omega\)$ describes everything that can happen, an event selects the outcomes where something specific happens.
-• For a die roll with $\(\\Omega = \{1,2,3,4,5,6\}\)$, the event "roll an even number" is \(\{2,4,6\}\).
-• For two coin tosses with $\(\\Omega = \{(H,H),(H,T),(T,H),(T,T)\}\)$, the event "at least one head" is \(\{(H,H),(H,T),(T,H)\}\).
-• For a continuous outcome like height, an event might be an interval such as \([1.6, 1.8]\).
+• If $\\Omega$ describes everything that can happen, an event selects the outcomes where something specific happens.
+• For a die roll with $\\Omega = \\{1,2,3,4,5,6\\}$, the event "roll an even number" is $\\{2,4,6\\}$.
+• For two coin tosses with $\\Omega = \\{(H,H),(H,T),(T,H),(T,T)\\}$, the event "at least one head" is $\\{(H,H),(H,T),(T,H)\\}$.
+• For a continuous outcome like height, an event might be an interval such as $[1.6, 1.8]$.
 
-Viewing events as subsets of $\(\\Omega\)$ makes probability assignments consistent and ties every event back to the underlying structure of the scenario.
+Viewing events as subsets of $\\Omega$ makes probability assignments consistent and ties every event back to the underlying structure of the scenario.
 `,
       before:``,
       after:``,
@@ -991,14 +1000,14 @@ Viewing events as subsets of $\(\\Omega\)$ makes probability assignments consist
       content:`
 Different situations lead to different forms of sample spaces. A few common examples show how the idea appears in everyday probability questions:
 
-• A die roll: $\(\\Omega = \{1,2,3,4,5,6\}\)$
-• A deck draw: $\(\\Omega =\)$ all 52 individual cards
-• Two coin tosses: $\(\\Omega = \{(H,H), (H,T), (T,H), (T,T)\}\)$
-• Measuring a person's height: $\(\\Omega = [0,3]\)$
-• Time until an event occurs: $\(\\Omega = [0,\\infty)\)$
+• A die roll: $\\Omega = \\{1,2,3,4,5,6\\}$
+• A deck draw: $\\Omega =$ all 52 individual cards
+• Two coin tosses: $\\Omega = \\{(H,H), (H,T), (T,H), (T,T)\\}$
+• Measuring a person's height: $\\Omega = [0,3]$
+• Time until an event occurs: $\\Omega = [0,\\infty)$
 • Choosing two items without replacement: outcomes are ordered pairs of objects
 
-These examples show how the structure of $\(\\Omega\)$ changes with the scenario, but the idea remains the same: it captures every outcome the situation can produce.
+These examples show how the structure of $\\Omega$ changes with the scenario, but the idea remains the same: it captures every outcome the situation can produce.
 `,
       before:``,
       after:``,
@@ -1011,7 +1020,7 @@ These examples show how the structure of $\(\\Omega\)$ changes with the scenario
 • Including outcomes that cannot occur  
 • Ignoring the order of outcomes when order matters  
 • Mixing outcomes of different types within the same sample space  
-• Using an incomplete \(\Omega\), which leads to incorrect event definitions or wrong probabilities  
+• Using an incomplete $\\Omega$, which leads to incorrect event definitions or wrong probabilities  
 
 A correct sample space removes ambiguity and prevents errors in later calculations.
 `,
@@ -1022,11 +1031,11 @@ A correct sample space removes ambiguity and prevents errors in later calculatio
     connection:{
       title:`Connections to Other Concepts`,
       content:`
-• Events are subsets of $\(\\Omega\)$, built directly from the sample space  
-• Probability of events is defined only after $\(\\Omega\)$ is fixed  
-• Random variables map outcomes in $\(\\Omega\)$ to numerical values  
+• Events are subsets of $\\Omega$, built directly from the sample space  
+• Probability of events is defined only after $\\Omega$ is fixed  
+• Random variables map outcomes in $\\Omega$ to numerical values  
 • Joint sample spaces describe outcomes of several variables together  
-• Independence and dependence are interpreted through how outcomes combine in $\(\\Omega\)$  
+• Independence and dependence are interpreted through how outcomes combine in $\\Omega$  
 
 The sample space anchors every other concept in probability, making it the natural starting point for the entire subject.
 `,

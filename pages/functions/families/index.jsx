@@ -1636,6 +1636,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionTypesDiagrams from '@/app/components/functions/types/functionTypesDiagrams'
 import functionPiecewiseDiagrams from '@/app/components/functions/piecewise/functionPiecewiseDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -3008,8 +3010,42 @@ const faqQuestions = {
     }),
   };
 
+  const rationalAsymptoteCases = {
+    prefaceTitle: 'End behavior',
+    preface: 'Horizontal asymptotes describe the end behavior of a rational function. Which one appears depends only on how the degree of the numerator compares with the degree of the denominator.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'Vertical asymptotes and holes come from the zeros of $Q$; horizontal asymptotes come from comparing degrees. The two questions are separate.',
+    parent: {
+      kicker: 'Rational function',
+      formula: '$f(x) = \\dfrac{P(x)}{Q(x)}$',
+      splitBy: '$\\deg P$ compared with $\\deg Q$',
+    },
+    cases: [
+      {
+        id: 'equal', condition: '$\\deg P = \\deg Q$',
+        count: { n: '=' },
+        headline: 'Ratio of leading coefficients',
+        formula: '$y = \\dfrac{a_n}{b_m}$',
+      },
+      {
+        id: 'lower', condition: '$\\deg P < \\deg Q$',
+        count: { n: '<' },
+        headline: 'The $x$-axis',
+        formula: '$y = 0$',
+        example: '$f(x) = \\dfrac{1}{x}$, horizontal asymptote $y = 0$',
+      },
+      {
+        id: 'higher', condition: '$\\deg P > \\deg Q$',
+        count: { n: '>' },
+        headline: 'No horizontal asymptote',
+        desc: 'an oblique asymptote appears when the degree difference is exactly $1$',
+      },
+    ],
+  };
+
    return {
       props:{
+    rationalAsymptoteCases,
     demoUnits,
          sectionsContent,
          introContent,
@@ -3030,7 +3066,9 @@ const faqQuestions = {
     }
    }
 
-export default function FamiliesPage({
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function FamiliesPage({rationalAsymptoteCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -3126,6 +3164,14 @@ export default function FamiliesPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="rational-function-horizontal-asymptote-cases"
+            title="Horizontal asymptotes: comparing degrees"
+            source="/functions/families"
+          >
+            <CaseSplit data={rationalAsymptoteCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
                   <div key={'unit-rational'} dangerouslySetInnerHTML={{ __html: demoUnits.rational }} />,
           `Where the denominator has a root, the graph either breaks or has a hole; nothing else in the family list does this.`,
         ]

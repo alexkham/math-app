@@ -193,13 +193,13 @@ This is the same as the geometric fact that reflecting across $y = x$ swaps hori
 
 [Composition of Functions](!/functions/visual-tools/composition) — the operation behind the inverse identity $g \\circ g^{-1} = \\text{id}$. Inverses are defined precisely as compositional partners.
 
-**One-to-One Functions** — the formal property a function must have to be invertible. Equivalent to passing the horizontal line test.
+**[One-to-One Functions](!/functions/properties#3)** — the formal property a function must have to be invertible. Equivalent to passing the horizontal line test.
 
-**Inverse Trigonometric Functions** — focused treatment of $\\arcsin$, $\\arccos$, $\\arctan$, and the standard principal-branch conventions used here.
+**[Inverse Trigonometric Functions](!/trigonometry/inverse-functions)** — focused treatment of $\\arcsin$, $\\arccos$, $\\arctan$, and the standard principal-branch conventions used here.
 
 **Logarithm and Exponential** — paired study of the canonical example of inverse functions, with $\\ln$ and $e^x$ as exact inverses.
 
-**Derivative of an Inverse Function** — the rule $\\left(f^{-1}\\right)'(x) = 1 / f'(f^{-1}(x))$; a calculus follow-up to the geometric [reflection](!/functions/visual-tools/reflections) studied here.
+**[Derivative of an Inverse Function](!/calculus/derivatives/techniques#4)** — the rule $\\left(f^{-1}\\right)'(x) = 1 / f'(f^{-1}(x))$; a calculus follow-up to the geometric [reflection](!/functions/visual-tools/reflections) studied here.
 
 [Range of a Function](!/functions/visual-tools/range) — the [range](!/functions/range#1) of $f$ is the [domain](!/functions/visual-tools/domain) of $f^{-1}$, which is why restricting one forces a restriction on the other.
 

@@ -177,17 +177,17 @@ The plot's fixed default zoom makes these comparisons consistent — you are alw
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Functions** — the general theory of functions: [domain](!/functions/visual-tools/domain), [range](!/functions/visual-tools/range), [composition](!/functions/visual-tools/composition), inverses, and classification.
+      content: `**[Functions](!/functions/basics)** — the general theory of functions: [domain](!/functions/visual-tools/domain), [range](!/functions/visual-tools/range), [composition](!/functions/visual-tools/composition), inverses, and classification.
 
 [Function Transformations](!/functions/visual-tools/transformations) — visualizers for vertical and horizontal shifts, stretches, and [reflections](!/functions/visual-tools/reflections) applied to any base function.
 
-**Polynomial Functions** — focused theory and tools for the polynomial subfamilies covered here (linear, quadratic, cubic, and higher).
+**[Polynomial Functions](!/algebra/polynomials)** — focused theory and tools for the polynomial subfamilies covered here (linear, quadratic, cubic, and higher).
 
 **Exponential and Logarithmic Functions** — paired study of [inverse function](!/functions/visual-tools/inverse-function) families, growth and decay models, and natural log.
 
-**Trigonometric Functions** — full coverage of sine, cosine, tangent, and their reciprocals beyond the gallery's brief introduction.
+**[Trigonometric Functions](!/trigonometry/functions)** — full coverage of sine, cosine, tangent, and their reciprocals beyond the gallery's brief introduction.
 
-**Rational Functions** — [asymptote](!/functions/visual-tools/asymptotes) analysis, partial fractions, and behavior near poles.
+**[Rational Functions](!/functions/families#8)** — [asymptote](!/functions/visual-tools/asymptotes) analysis, partial fractions, and behavior near poles.
 
 **Equations and Inequalities Visualizer** — companion tools for solving $f(x) = n$ and $f(x) > 0$ across all the same function families.
 

@@ -754,15 +754,15 @@ That two-to-one pairing **is** the formula. The division by $r!$ is not an algeb
 
 [Combination with repetition](!/combinatorics/visual-tools/permutation-with-repetition) — relaxes the no-reuse rule, counting multisets of size $r$ from $n$ types. Formula $\\binom{n + r - 1}{r}$.
 
-**Binomial theorem** — the algebraic context for $\\binom{n}{r}$: the expansion of $(x + y)^n$ has coefficients $\\binom{n}{r}$ on $x^r y^{n - r}$.
+**[Binomial theorem](!/combinatorics/binomial-theorem)** — the algebraic context for $\\binom{n}{r}$: the expansion of $(x + y)^n$ has coefficients $\\binom{n}{r}$ on $x^r y^{n - r}$.
 
 [Pascal's triangle](!/combinatorics/visual-tools/pascal-triangle) — every entry is a binomial coefficient $\\binom{n}{r}$. Adjacent rows satisfy $\\binom{n}{r} = \\binom{n - 1}{r - 1} + \\binom{n - 1}{r}$, the rule that builds the triangle.
 
-**Pascal's identity** — the [smallest-element grouping](!#grouping-by-smallest-item) in this tool gives a direct visual proof: $\\binom{n}{r} = \\sum_{i} \\binom{n - 1 - i}{r - 1}$ summed over valid smallest indices.
+**[Pascal's identity](!/combinatorics/visual-tools/pascal-triangle#mode-1-pascals-identity)** — the [smallest-element grouping](!#grouping-by-smallest-item) in this tool gives a direct visual proof: $\\binom{n}{r} = \\sum_{i} \\binom{n - 1 - i}{r - 1}$ summed over valid smallest indices.
 
-**Multinomial coefficient** — generalizes $\\binom{n}{r}$ to more than two groups: $\\binom{n}{k_1, k_2, \\dots, k_m} = n! / (k_1! \\cdots k_m!)$.
+**[Multinomial coefficient](!/combinatorics/binomial-coefficient#4)** — generalizes $\\binom{n}{r}$ to more than two groups: $\\binom{n}{k_1, k_2, \\dots, k_m} = n! / (k_1! \\cdots k_m!)$.
 
-**Combinatorics calculator** — to compute $C(n, r)$ for arbitrary $n$ and $r$, see the **combination calculator**.
+**[Combinatorics calculator](!/combinatorics/calculator#simple-combination)** — to compute $C(n, r)$ for arbitrary $n$ and $r$, see the **combination calculator**.
 
 [Circular permutation](!/combinatorics/visual-tools/circular-permutation) — arranging the chosen items around a circle instead of leaving them unordered multiplies the count by $(r-1)!$.
 
@@ -774,7 +774,7 @@ That two-to-one pairing **is** the formula. The division by $r!$ is not an algeb
 
 [Permutation with identical items](!/combinatorics/visual-tools/permutation-with-identical) — a multiset arrangement is a sequence of combinations, one per distinct item type.
 
-**Strong composition** — the number of [strong compositions](!/combinatorics/visual-tools/strong-composition) of $n$ into $k$ parts is the single binomial coefficient $\\binom{n-1}{k-1}$.
+**[Strong composition](!/combinatorics/visual-tools/strong-composition)** — the number of [strong compositions](!/combinatorics/visual-tools/strong-composition) of $n$ into $k$ parts is the single binomial coefficient $\\binom{n-1}{k-1}$.
 
 [Weak composition](!/combinatorics/visual-tools/weak-composition) — the stars-and-bars argument turns the count into $\\binom{n+k-1}{k-1}$, another binomial coefficient.`,
       before: ``,

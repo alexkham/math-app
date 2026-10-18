@@ -166,11 +166,11 @@ For mathematical foundations of convergence and the Law of Large Numbers, see **
 
 [Binomial Distribution Calculators](!/probability/visual-tools/distributions/binomial) - Analyze repeated independent trials, which dice rolls exemplify when tracking specific outcomes.
 
-**Discrete Distribution Visualizers** - Compare [probability mass functions](!/probability/probability-function) across different discrete probability models.
+**[Discrete Distribution Visualizers](!/probability/visual-tools/distributions#3)** - Compare [probability mass functions](!/probability/probability-function) across different discrete probability models.
 
-**Expected Value Calculators** - Compute weighted averages for games, bets, and random processes involving dice.
+**[Expected Value Calculators](!/probability/calculators/expected-value)** - Compute weighted averages for games, bets, and random processes involving dice.
 
-**Combinatorics Tools** - Understand how to count dice outcomes and calculate probabilities through permutations and combinations.
+**[Combinatorics Tools](!/combinatorics/visual-tools)** - Understand how to count dice outcomes and calculate probabilities through permutations and combinations.
 
 **Sample Space Calculators** - Explore sample spaces for various probability experiments beyond dice rolling.
 

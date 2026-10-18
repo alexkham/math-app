@@ -260,19 +260,19 @@ The triangle&apos;s rows are built up using this rule alone: start with $\\binom
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Binomial theorem** — the identity that names the coefficients. Generalizes to non-integer and [negative exponents](!/algebra/powers/negative-exponents) through the generalized binomial series.
+      content: `**[Binomial theorem](!/combinatorics/binomial-theorem)** — the identity that names the coefficients. Generalizes to non-integer and [negative exponents](!/algebra/powers/negative-exponents) through the generalized binomial series.
 
-**Multinomial coefficients** — generalize to more than two terms: $\\binom{n}{k_1, k_2, \\dots, k_m}$ counts ways to split $n$ items into groups of given sizes. Appears in the expansion of $(x_1 + x_2 + \\dots + x_m)^n$.
+**[Multinomial coefficients](!/combinatorics/binomial-coefficient#4)** — generalize to more than two terms: $\\binom{n}{k_1, k_2, \\dots, k_m}$ counts ways to split $n$ items into groups of given sizes. Appears in the expansion of $(x_1 + x_2 + \\dots + x_m)^n$.
 
-**Combinations and permutations** — the two foundational counting concepts. Binomial coefficients are exactly combinations: $\\binom{n}{k} = C(n, k)$.
+**[Combinations and permutations](!/combinatorics/basics#3)** — the two foundational counting concepts. Binomial coefficients are exactly combinations: $\\binom{n}{k} = C(n, k)$.
 
 [Polynomial multiplication](!/algebra/visual-tools/polynomial-multiplication) — binomial expansion is a special case. The multiplication grid for $(a + b) \\cdot (a + b)$ has four cells; for $(a + b)^n$ the grid is $n$-dimensional, and the diagonals collect [like terms](!/algebra/polynomials/operations#1).
 
-**Probability** — binomial coefficients drive the **binomial distribution**: $P(X = k) = \\binom{n}{k} p^k (1 - p)^{n-k}$. The same $\\binom{n}{k}$ that appears in $(a + b)^n$ counts the success patterns.
+**[Probability](!/probability/distributions/discrete#binomial)** — binomial coefficients drive the **binomial distribution**: $P(X = k) = \\binom{n}{k} p^k (1 - p)^{n-k}$. The same $\\binom{n}{k}$ that appears in $(a + b)^n$ counts the success patterns.
 
 **Catalan numbers and other combinatorial sequences** — many counting sequences are built from binomial coefficients via simple combinations.
 
-**Algebra calculator** — for symbolic expansions of $(a + b)^n$ at arbitrary $n$, see the **binomial expansion calculator** in the algebra calculators section.
+**[Algebra calculator](!/algebra/calculators)** — for symbolic expansions of $(a + b)^n$ at arbitrary $n$, see the **binomial expansion calculator** in the algebra calculators section.
 
 [Powers Table](!/algebra/visual-tools/powers-table) — the powers of two that each row of Pascal's triangle sums to, and the powers of the base inside every expansion term.
 

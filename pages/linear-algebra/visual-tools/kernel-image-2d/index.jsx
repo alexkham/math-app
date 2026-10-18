@@ -699,7 +699,7 @@ For comprehensive coverage see **rank-nullity theorem**, **dimension formula**, 
       title:`Related Concepts`,
       content:`[Column Space](!/linear-algebra/visual-tools/four-fundamental-subspaces) &mdash; same as the image; spanned by the columns of $A$.
 
-**Null Space** &mdash; same as the kernel; solutions to $Av = 0$.
+**[Null Space](!/linear-algebra/vector-spaces/fundamental-spaces#4)** &mdash; same as the kernel; solutions to $Av = 0$.
 
 [Rank of a Matrix](!/linear-algebra/visual-tools/matrix-rank) &mdash; the [dimension](!/linear-algebra/vector-spaces/dimension#1) of the image, equal to the number of linearly independent columns.
 
@@ -709,9 +709,9 @@ For comprehensive coverage see **rank-nullity theorem**, **dimension formula**, 
 
 [Invertible Matrices](!/linear-algebra/visual-tools/matrix-inverse) &mdash; the case where kernel is trivial and image is the full codomain.
 
-**Row Space and Four Fundamental Subspaces** &mdash; kernel and image of $A$ together with kernel and image of $A^T$ form the four fundamental subspaces of linear algebra.
+**[Row Space and Four Fundamental Subspaces](!/linear-algebra/vector-spaces/fundamental-spaces)** &mdash; kernel and image of $A$ together with kernel and image of $A^T$ form the four fundamental subspaces of linear algebra.
 
-**Rank-Nullity Theorem** &mdash; the dimension equation that ties kernel and image together.`,
+**[Rank-Nullity Theorem](!/linear-algebra/transformations/image-kernel#6)** &mdash; the dimension equation that ties kernel and image together.`,
       before:``,
       after:``,
       link:'',

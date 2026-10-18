@@ -176,13 +176,13 @@ The visualizer makes this concrete: drag $h$ to $+3$ and watch the curve slide r
       title: `Related Concepts and Tools`,
       content: `[Functions Families Gallery](!/functions/visual-tools/types) — companion tool plotting twelve standard function families with parameter sliders; the natural prerequisite for this visualizer.
 
-**Functions** — general theory of functions: [domain](!/functions/visual-tools/domain), [range](!/functions/visual-tools/range), composition, inverses.
+**[Functions](!/functions/basics)** — general theory of functions: [domain](!/functions/visual-tools/domain), [range](!/functions/visual-tools/range), composition, inverses.
 
-**Graphing Functions** — broader treatment of graph features (intercepts, [asymptotes](!/functions/visual-tools/asymptotes), end behavior) that transformations preserve or change.
+**[Graphing Functions](!/functions/graphs)** — broader treatment of graph features (intercepts, [asymptotes](!/functions/visual-tools/asymptotes), end behavior) that transformations preserve or change.
 
-**Parent Functions** — the canonical untransformed members of each family used as the starting point here.
+**[Parent Functions](!/functions/transformations#1)** — the canonical untransformed members of each family used as the starting point here.
 
-**Composition of Functions** — how [function composition](!/functions/visual-tools/composition) relates to and generalizes the four affine transformations.
+**[Composition of Functions](!/functions/composition)** — how [function composition](!/functions/visual-tools/composition) relates to and generalizes the four affine transformations.
 
 [Inverse Functions](!/functions/visual-tools/inverse-function) — reflecting a graph across the line $y = x$, a transformation not covered here but built from the same conceptual toolkit.
 

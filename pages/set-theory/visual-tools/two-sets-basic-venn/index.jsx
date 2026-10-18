@@ -203,19 +203,19 @@ For algebraic proofs, the general $n$-set form, and applications to propositiona
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Set Operations** — formal definitions and properties of union, intersection, complement, difference, and symmetric difference.
+      content: `**[Set Operations](!/set-theory/operations)** — formal definitions and properties of union, intersection, complement, difference, and symmetric difference.
 
-**Venn Diagrams** — overview of one-set, two-set, and three-set diagrams, drawing conventions, and when each is appropriate.
+**[Venn Diagrams](!/set-theory/venn-diagrams)** — overview of one-set, two-set, and three-set diagrams, drawing conventions, and when each is appropriate.
 
-**De Morgan's Laws** — algebraic proofs of both two-set laws and the generalization to arbitrary collections of sets.
+**[De Morgan's Laws](!/set-theory/rules#de_morgan)** — algebraic proofs of both two-set laws and the generalization to arbitrary collections of sets.
 
-**Set Relations** — definitions of subset, [proper subset](!/set-theory/subsets#2), disjoint sets, and equal sets, with examples.
+**[Set Relations](!/set-theory/relationships)** — definitions of subset, [proper subset](!/set-theory/subsets#2), disjoint sets, and equal sets, with examples.
 
-**Set Theory Definitions** — glossary of foundational terms used throughout set algebra.
+**[Set Theory Definitions](!/set-theory/definitions)** — glossary of foundational terms used throughout set algebra.
 
 [Three-Set Venn Diagram](!/set-theory/visual-tools/three-sets-basic-venn) — extends the same visual approach to three [overlapping sets](!/set-theory/relationships#4) and the eight regions they produce, including the three-set De Morgan's laws.
 
-**Set Laws and Identities** — algebraic catalog of commutative, associative, distributive, absorption, and complement laws on sets.
+**[Set Laws and Identities](!/set-theory/rules)** — algebraic catalog of commutative, associative, distributive, absorption, and complement laws on sets.
 
 [Two-Set Laws and Identities Explorer](!/set-theory/visual-tools/two-sets-laws-venn) — the identity equations on the same four regions.
 

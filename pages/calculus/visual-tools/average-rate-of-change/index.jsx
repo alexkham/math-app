@@ -690,15 +690,15 @@ For deeper coverage, see the **critical points page** and the **extrema classifi
 - **Slope formula** — the algebraic origin of the average rate of change.
 - [Derivative](!/calculus/visual-tools/derivative) — the [limit](!/calculus/visual-tools/limit) of the average rate of change as the interval shrinks to a single point.
 - [Tangent line](!/calculus/visual-tools/tangent-line) — the limiting position of the secant line as the two points coincide.
-- **Monotonicity** — the property of being increasing or decreasing, controlled by the sign of $f'$.
+- **[Monotonicity](!/functions/properties#7)** — the property of being increasing or decreasing, controlled by the sign of $f'$.
 - [Critical points](!/calculus/visual-tools/optimization) — points where the derivative is zero or undefined, the candidates for local extrema.
 - [Mean value theorem](!/calculus/visual-tools/mean-value-theorem) — guarantees that on a closed interval the derivative somewhere equals the average rate of change.
 
 **Related tools:**
 
-- **Function derivative visualizer** — explore the derivative as a function in its own right.
-- **Tangent line visualizer** — see the tangent line rotate as the point of tangency moves.
-- **Limit visualizer** — watch a quantity approach a limit from both sides.`,
+- **[Function derivative visualizer](!/calculus/visual-tools/derivative)** — explore the derivative as a function in its own right.
+- **[Tangent line visualizer](!/calculus/visual-tools/tangent-line)** — see the tangent line rotate as the point of tangency moves.
+- **[Limit visualizer](!/calculus/visual-tools/limit)** — watch a quantity approach a limit from both sides.`,
       before: ``,
       after: ``,
       link: '',

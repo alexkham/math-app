@@ -266,11 +266,11 @@ The "vacuous truth" cases — where P is false and the implication is true regar
       title: `Related Forms: Converse, Inverse, and Contrapositive`,
       content: `Every implication P → Q gives rise to three related conditionals:
 
-• **Converse**: Q → P — reverses the direction. Not logically equivalent to P → Q.
+• **[Converse](!/logic/truth-tables/implications#4)**: Q → P — reverses the direction. Not logically equivalent to P → Q.
 
-• **Inverse**: ¬P → ¬Q — negates both antecedent and consequent. Not logically equivalent to P → Q.
+• **[Inverse](!/logic/truth-tables/implications#7)**: ¬P → ¬Q — negates both antecedent and consequent. Not logically equivalent to P → Q.
 
-• **Contrapositive**: ¬Q → ¬P — reverses and negates. Logically equivalent to P → Q.
+• **[Contrapositive](!/logic/truth-tables/implications#8)**: ¬Q → ¬P — reverses and negates. Logically equivalent to P → Q.
 
 The contrapositive equivalence (P → Q ≡ ¬Q → ¬P) is one of the most important results in propositional logic. It is the basis of proof by contrapositive: to prove "if P then Q," it suffices to prove "if not Q then not P." The converse and inverse, while related to each other (each is the contrapositive of the other), are independent of the original implication.`,
       before: ``,

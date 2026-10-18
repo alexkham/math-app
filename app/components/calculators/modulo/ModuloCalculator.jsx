@@ -221,7 +221,8 @@ export default function ModuloCalculator({ explanations = sampleExplanations }) 
 
         case 'float':
           // Handling decimal/floating point numbers
-          const decimalResult = numA - numB * Math.floor(numA / numB);
+          // rounded to 12 significant digits so 7.5 mod 2.2 reads 0.9, not 0.8999999999999995
+          const decimalResult = parseFloat((numA - numB * Math.floor(numA / numB)).toPrecision(12));
           setResult(`${numA} mod ${numB} = ${decimalResult}`);
           break;
 

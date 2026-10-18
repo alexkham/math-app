@@ -411,10 +411,8 @@ export default function BayesTheoremCalculator({ explanations = null }) {
                     max="1"
                     value={pA}
                     onChange={(e) => {
-                      const val = parseFloat(e.target.value);
-                      if (e.target.value === '' || (val >= 0 && val <= 1)) {
-                        setPA(e.target.value);
-                      }
+                      // the value is kept as typed; Calculate names any box outside 0 to 1
+                      setPA(e.target.value);
                     }}
                     placeholder="0.00 - 1.00"
                     style={{
@@ -441,10 +439,8 @@ export default function BayesTheoremCalculator({ explanations = null }) {
                     max="1"
                     value={pBgivenA}
                     onChange={(e) => {
-                      const val = parseFloat(e.target.value);
-                      if (e.target.value === '' || (val >= 0 && val <= 1)) {
-                        setPBgivenA(e.target.value);
-                      }
+                      // the value is kept as typed; Calculate names any box outside 0 to 1
+                      setPBgivenA(e.target.value);
                     }}
                     placeholder="0.00 - 1.00"
                     style={{
@@ -471,10 +467,8 @@ export default function BayesTheoremCalculator({ explanations = null }) {
                     max="1"
                     value={pBgivenNotA}
                     onChange={(e) => {
-                      const val = parseFloat(e.target.value);
-                      if (e.target.value === '' || (val >= 0 && val <= 1)) {
-                        setPBgivenNotA(e.target.value);
-                      }
+                      // the value is kept as typed; Calculate names any box outside 0 to 1
+                      setPBgivenNotA(e.target.value);
                     }}
                     placeholder="0.00 - 1.00"
                     style={{
@@ -505,10 +499,8 @@ export default function BayesTheoremCalculator({ explanations = null }) {
                     max="1"
                     value={prevalence}
                     onChange={(e) => {
-                      const val = parseFloat(e.target.value);
-                      if (e.target.value === '' || (val >= 0 && val <= 1)) {
-                        setPrevalence(e.target.value);
-                      }
+                      // the value is kept as typed; Calculate names any box outside 0 to 1
+                      setPrevalence(e.target.value);
                     }}
                     placeholder="0.000 - 1.000"
                     style={{
@@ -535,10 +527,8 @@ export default function BayesTheoremCalculator({ explanations = null }) {
                     max="1"
                     value={sensitivity}
                     onChange={(e) => {
-                      const val = parseFloat(e.target.value);
-                      if (e.target.value === '' || (val >= 0 && val <= 1)) {
-                        setSensitivity(e.target.value);
-                      }
+                      // the value is kept as typed; Calculate names any box outside 0 to 1
+                      setSensitivity(e.target.value);
                     }}
                     placeholder="0.00 - 1.00"
                     style={{
@@ -565,10 +555,8 @@ export default function BayesTheoremCalculator({ explanations = null }) {
                     max="1"
                     value={specificity}
                     onChange={(e) => {
-                      const val = parseFloat(e.target.value);
-                      if (e.target.value === '' || (val >= 0 && val <= 1)) {
-                        setSpecificity(e.target.value);
-                      }
+                      // the value is kept as typed; Calculate names any box outside 0 to 1
+                      setSpecificity(e.target.value);
                     }}
                     placeholder="0.00 - 1.00"
                     style={{
@@ -634,10 +622,8 @@ export default function BayesTheoremCalculator({ explanations = null }) {
                           max="1"
                           value={h.prior}
                           onChange={(e) => {
-                            const val = parseFloat(e.target.value);
-                            if (e.target.value === '' || (val >= 0 && val <= 1)) {
-                              handleHypothesisChange(idx, 'prior', e.target.value);
-                            }
+                            // the value is kept as typed; Calculate names any box outside 0 to 1
+                            handleHypothesisChange(idx, 'prior', e.target.value);
                           }}
                           placeholder="0.00"
                           style={{
@@ -660,10 +646,8 @@ export default function BayesTheoremCalculator({ explanations = null }) {
                           max="1"
                           value={h.conditionalProb}
                           onChange={(e) => {
-                            const val = parseFloat(e.target.value);
-                            if (e.target.value === '' || (val >= 0 && val <= 1)) {
-                              handleHypothesisChange(idx, 'conditionalProb', e.target.value);
-                            }
+                            // the value is kept as typed; Calculate names any box outside 0 to 1
+                            handleHypothesisChange(idx, 'conditionalProb', e.target.value);
                           }}
                           placeholder="0.00"
                           style={{

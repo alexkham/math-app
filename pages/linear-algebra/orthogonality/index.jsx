@@ -935,7 +935,12 @@ Orthogonality is the foundation of coordinate systems. Axes that are perpendicul
     title: `Orthogonal Complements`,
     content: `For a [subspace](!/linear-algebra/vector-spaces/subspaces) $W$ of $\\mathbb{R}^n$, the orthogonal complement $W^\\perp$ is the set of all vectors perpendicular to everything in $W$:
 
+@academic[formula_callout:Orthogonal Complement Definition
 $$W^\\perp = \\{\\mathbf{v} \\in \\mathbb{R}^n : \\mathbf{v} \\cdot \\mathbf{w} = 0 \\text{ for all } \\mathbf{w} \\in W\\}$$
+/linear-algebra/formulas#orthogonal_complement_definition]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The orthogonal complement is itself a subspace. Its [dimension](!/linear-algebra/vector-spaces/dimension) satisfies $\\dim(W) + \\dim(W^\\perp) = n$, and taking the complement twice returns to the original: $(W^\\perp)^\\perp = W$.
 

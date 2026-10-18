@@ -678,7 +678,7 @@ For a full treatment see **matrix inverse**, **determinant**, and **matrix multi
     },
     obj10:{
       title:`Related Concepts`,
-      content:`**Basis of a Vector Space** &mdash; the underlying definition of what makes a valid coordinate system.
+      content:`**[Basis of a Vector Space](!/linear-algebra/vector-spaces/basis#2)** &mdash; the underlying definition of what makes a valid coordinate system.
 
 [Linear Independence](!/linear-algebra/visual-tools/span-independence-2d) &mdash; the condition $b_1$ and $b_2$ must satisfy for $B$ to be invertible.
 

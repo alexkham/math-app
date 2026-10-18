@@ -201,21 +201,21 @@ Tables of this kind are introduced in [Joint probability tables](!/probability/j
 
     obj9: {
       title: `Related Probability Tools and Calculators`,
-      content: `**Bayes' Theorem Calculator** - Calculate posterior probabilities by reversing conditional probabilities, essential for medical diagnosis and hypothesis updating.
+      content: `**[Bayes' Theorem Calculator](!/probability/calculators/bayes-calculator)** - Calculate posterior probabilities by reversing conditional probabilities, essential for medical diagnosis and hypothesis updating.
 
-**Joint Probability Calculator** - Compute probabilities for intersections and unions of multiple events with Venn diagrams.
+**[Joint Probability Calculator](!/probability/calculators/joint-probability)** - Compute probabilities for intersections and unions of multiple events with Venn diagrams.
 
 **Independence Test Calculator** - Determine whether two events are independent using chi-square tests on contingency tables.
 
 **Probability Tree Diagram Generator** - Visualize conditional probabilities through branching tree structures for sequential events.
 
-**Law of Total Probability Calculator** - Calculate marginal probabilities by partitioning across conditional probabilities.
+**[Law of Total Probability Calculator](!/probability/visual-tools/total-probability)** - Calculate marginal probabilities by partitioning across conditional probabilities.
 
 **Sensitivity and Specificity Calculator** - Analyze medical test performance metrics including positive and negative predictive values.
 
-**Conditional Probability Visualizer** - Interactive Venn diagrams showing conditional probability as restricted sample space.
+**[Conditional Probability Visualizer](!/probability/visual-tools/conditional-probability)** - Interactive Venn diagrams showing conditional probability as restricted sample space.
 
-**Two-Way Table Analysis Tool** - Perform comprehensive statistical analysis on contingency tables including chi-square tests.
+**[Two-Way Table Analysis Tool](!/probability/visual-tools/contingency-tables)** - Perform comprehensive statistical analysis on contingency tables including chi-square tests.
 
 The two results these tools build on are taught in [Bayes' theorem](!/probability/bayes-theorem#formula) and the [law of total probability](!/probability/total-probability#law).`,
       before: ``,

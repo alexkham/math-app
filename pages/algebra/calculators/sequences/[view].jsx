@@ -278,7 +278,8 @@ $$4n^2 + 4n + 1 = 8m + 1 \\implies (2n+1)^2 = 8m + 1$$
 
 So $8m + 1$ is a perfect square exactly when $m$ is triangular, and the square root recovers $n$.
 
-**Example.** Is 120 triangular? Compute $8 \\cdot 120 + 1 = 961$. Then $\\sqrt{961} = 31$, an integer. So $n = (31 - 1)/2 = 15$, meaning $120 = T_{15}$. Indeed $15 \\cdot 16 / 2 = 120$.
+@academic[example:Example
+Is 120 triangular? Compute $8 \\cdot 120 + 1 = 961$. Then $\\sqrt{961} = 31$, an integer. So $n = (31 - 1)/2 = 15$, meaning $120 = T_{15}$. Indeed $15 \\cdot 16 / 2 = 120$.]@
 
 **Non-example.** Is 100 triangular? Compute $8 \\cdot 100 + 1 = 801$. Then $\\sqrt{801} \\approx 28.30$, not an integer. So 100 is not triangular. The nearest triangular numbers are $T_{13} = 91$ and $T_{14} = 105$.
 
@@ -380,7 +381,7 @@ The neighbouring calculators are the [square numbers calculator](!/algebra/calcu
     title: `Listing the First N Terms`,
     content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for triangular numbers is the tetrahedral number $N(N+1)(N+2)/6$. Under the cards every term is laid out as a tile with its index above its value, so $T_1 = 1$ to $T_N$ can be read in order.
 
-The box accepts $1$ to $200$: $10$ gives $T_{10} = 55$ with the sum $220$, $30$ gives $T_{30} = 465$ with the sum $4{,}960$, and $300$ is capped at $200$ terms, ending at $T_{200} = 20{,}100$ with the sum $1{,}353{,}400$; a single term gives $T_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the closed form the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. Why the terms are the sums $1 + 2 + \\cdots + n$ is explained in [what is a triangular number](!#what-is-a-triangular-number).`,
+The box accepts $1$ to $200$: $10$ gives $T_{10} = 55$ with the sum $220$, $30$ gives $T_{30} = 465$ with the sum $4{,}960$, and $300$ is capped at $200$ terms, ending at $T_{200} = 20{,}100$ with the sum $1{,}353{,}400$; a single term gives $T_1 = 1$. Large values are printed with thousands separators. A count of 0, a decimal or an empty box is refused with "Enter a positive integer." There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the closed form the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. Why the terms are the sums $1 + 2 + \\cdots + n$ is explained in [what is a triangular number](!#what-is-a-triangular-number).`,
     before: ``, after: ``, link: ''
   },
   obj10: {
@@ -639,7 +640,8 @@ This formula appears in calculus (Riemann sums approaching $x^3/3$), in finance 
 
 **Why rounding is needed.** Floating-point square root is approximate. $\\sqrt{169}$ might compute to $12.9999999\\ldots$ instead of exactly $13$. Rounding before the verification step avoids missing valid squares.
 
-**Example.** Is 169 a perfect square? Compute $\\sqrt{169} = 13$. Verify $13^2 = 169$. Yes — $169 = S_{13}$.
+@academic[example:Example
+Is 169 a perfect square? Compute $\\sqrt{169} = 13$. Verify $13^2 = 169$. Yes — $169 = S_{13}$.]@
 
 **Non-example.** Is 200 a perfect square? Compute $\\sqrt{200} \\approx 14.14$. Round to $14$; verify $14^2 = 196 \\neq 200$. So 200 is not a perfect square. The nearest are $S_{14} = 196$ and $S_{15} = 225$.
 
@@ -745,7 +747,7 @@ The neighbouring calculators are the [triangular numbers calculator](!/algebra/c
     title: `Listing the First N Terms`,
     content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for square numbers is $N(N+1)(2N+1)/6$. Under the cards every term is laid out as a tile with its index above its value, so $S_1 = 1$ to $S_N$ can be read in order.
 
-The box accepts $1$ to $200$: $10$ gives $S_{10} = 100$ with the sum $385$, $30$ gives $S_{30} = 900$ with the sum $9,455$, and $300$ is capped at $200$ terms, ending at $S_{200} = 40,000$ with the sum $2,686,700$; a single term gives $S_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a square number](!#what-is-a-square-number).`,
+The box accepts $1$ to $200$: $10$ gives $S_{10} = 100$ with the sum $385$, $30$ gives $S_{30} = 900$ with the sum $9,455$, and $300$ is capped at $200$ terms, ending at $S_{200} = 40,000$ with the sum $2,686,700$; a single term gives $S_1 = 1$. Large values are printed with thousands separators. A count of 0, a decimal or an empty box is refused with "Enter a positive integer." There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a square number](!#what-is-a-square-number).`,
     before: ``, after: ``, link: ''
   },
   obj10: {
@@ -1012,7 +1014,8 @@ $$n = \\frac{1 + \\sqrt{24m + 1}}{6}$$
 
 **Why both checks are needed.** From $P_n = n(3n - 1)/2 = m$, the quadratic $3n^2 - n - 2m = 0$ has discriminant $1 + 24m$, which must be a perfect square. But the quadratic formula gives $n = (1 \\pm \\sqrt{24m + 1})/6$, and we need $n$ to be a positive integer, hence the divisibility condition.
 
-**Example.** Is 117 pentagonal? Compute $24 \\cdot 117 + 1 = 2809 = 53^2$ — a perfect square. Then $(1 + 53)/6 = 9$, an integer. So $117 = P_9$. Verify: $9 \\cdot 26 / 2 = 117$. Confirmed.
+@academic[example:Example
+Is 117 pentagonal? Compute $24 \\cdot 117 + 1 = 2809 = 53^2$ — a perfect square. Then $(1 + 53)/6 = 9$, an integer. So $117 = P_9$. Verify: $9 \\cdot 26 / 2 = 117$. Confirmed.]@
 
 **Non-example.** Is 50 pentagonal? Compute $24 \\cdot 50 + 1 = 1201$. Then $\\sqrt{1201} \\approx 34.66$ — not a perfect square. So 50 is not pentagonal. The nearest are $P_5 = 35$ and $P_6 = 51$.
 
@@ -1106,7 +1109,7 @@ The neighbouring calculators are the [triangular numbers calculator](!/algebra/c
     title: `Listing the First N Terms`,
     content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for pentagonal numbers is $N^2(N+1)/2$. Under the cards every term is laid out as a tile with its index above its value, so $P_1 = 1$ to $P_N$ can be read in order.
 
-The box accepts $1$ to $200$: $10$ gives $P_{10} = 145$ with the sum $550$, $30$ gives $P_{30} = 1,335$ with the sum $13,950$, and $300$ is capped at $200$ terms, ending at $P_{200} = 59,900$ with the sum $4,020,000$; a single term gives $P_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a pentagonal number](!#what-is-a-pentagonal-number).`,
+The box accepts $1$ to $200$: $10$ gives $P_{10} = 145$ with the sum $550$, $30$ gives $P_{30} = 1,335$ with the sum $13,950$, and $300$ is capped at $200$ terms, ending at $P_{200} = 59,900$ with the sum $4,020,000$; a single term gives $P_1 = 1$. Large values are printed with thousands separators. A count of 0, a decimal or an empty box is refused with "Enter a positive integer." There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a pentagonal number](!#what-is-a-pentagonal-number).`,
     before: ``, after: ``, link: ''
   },
   obj10: {
@@ -1376,7 +1379,8 @@ $$n = \\frac{1 + \\sqrt{8m + 1}}{4}$$
 
 **Why both checks.** Note that condition 1 ($8m + 1$ is a perfect square) is the **triangular** test. So every hexagonal number is triangular (as expected). But not every triangular number is hexagonal — only those where $1 + \\sqrt{8m + 1}$ is also divisible by 4. The divisibility check is what distinguishes odd-indexed triangulars (which are hexagonal) from even-indexed triangulars (which are not).
 
-**Example.** Is 190 hexagonal? Compute $8 \\cdot 190 + 1 = 1521 = 39^2$ — a perfect square. Then $(1 + 39)/4 = 10$, an integer. So $190 = H_{10}$. Verify: $10 \\cdot 19 = 190$. Confirmed.
+@academic[example:Example
+Is 190 hexagonal? Compute $8 \\cdot 190 + 1 = 1521 = 39^2$ — a perfect square. Then $(1 + 39)/4 = 10$, an integer. So $190 = H_{10}$. Verify: $10 \\cdot 19 = 190$. Confirmed.]@
 
 **Triangular but not hexagonal.** Is 10 hexagonal? Compute $8 \\cdot 10 + 1 = 81 = 9^2$ — perfect square, so 10 is triangular ($10 = T_4$). But $(1 + 9)/4 = 10/4 = 2.5$ — not an integer. So 10 is not hexagonal. Indeed $T_4$ has even index 4, not odd.
 
@@ -1473,7 +1477,7 @@ The neighbouring calculators are the [triangular numbers calculator](!/algebra/c
     title: `Listing the First N Terms`,
     content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for hexagonal numbers is $N(N+1)(4N-1)/6$. Under the cards every term is laid out as a tile with its index above its value, so $H_1 = 1$ to $H_N$ can be read in order.
 
-The box accepts $1$ to $200$: $10$ gives $H_{10} = 190$ with the sum $715$, $30$ gives $H_{30} = 1,770$ with the sum $18,445$, and $300$ is capped at $200$ terms, ending at $H_{200} = 79,800$ with the sum $5,353,300$; a single term gives $H_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a hexagonal number](!#what-is-a-hexagonal-number).`,
+The box accepts $1$ to $200$: $10$ gives $H_{10} = 190$ with the sum $715$, $30$ gives $H_{30} = 1,770$ with the sum $18,445$, and $300$ is capped at $200$ terms, ending at $H_{200} = 79,800$ with the sum $5,353,300$; a single term gives $H_1 = 1$. Large values are printed with thousands separators. A count of 0, a decimal or an empty box is refused with "Enter a positive integer." There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a hexagonal number](!#what-is-a-hexagonal-number).`,
     before: ``, after: ``, link: ''
   },
   obj10: {
@@ -1742,7 +1746,8 @@ $$100 n^2 - 60n + 9 = 40m + 9 \\implies (10n - 3)^2 = 40m + 9$$
 
 So $40m + 9$ is a perfect square iff $10n - 3$ is an integer (which it is for integer $n$), and $\\sqrt{40m + 9} = 10n - 3$, giving $n = (\\sqrt{40m + 9} + 3)/10$.
 
-**Example.** Is 189 heptagonal? Compute $40 \\cdot 189 + 9 = 7569 = 87^2$ — a perfect square. Then $(3 + 87)/10 = 9$, an integer. So $189 = \\mathrm{Hp}_9$. Verify: $9 \\cdot 42/2 = 189$. Confirmed.
+@academic[example:Example
+Is 189 heptagonal? Compute $40 \\cdot 189 + 9 = 7569 = 87^2$ — a perfect square. Then $(3 + 87)/10 = 9$, an integer. So $189 = \\mathrm{Hp}_9$. Verify: $9 \\cdot 42/2 = 189$. Confirmed.]@
 
 **Non-example.** Is 100 heptagonal? Compute $40 \\cdot 100 + 9 = 4009$. Then $\\sqrt{4009} \\approx 63.32$ — not a perfect square. So 100 is not heptagonal.`,
     before: ``, after: ``, link: ''
@@ -1834,7 +1839,7 @@ The neighbouring calculators are the [hexagonal numbers calculator](!/algebra/ca
     title: `Listing the First N Terms`,
     content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for heptagonal numbers is $N(N+1)(5N-2)/6$. Under the cards every term is laid out as a tile with its index above its value, so $Hp_1 = 1$ to $Hp_N$ can be read in order.
 
-The box accepts $1$ to $200$: $10$ gives $Hp_{10} = 235$ with the sum $880$, $30$ gives $Hp_{30} = 2,205$ with the sum $22,940$, and $300$ is capped at $200$ terms, ending at $Hp_{200} = 99,700$ with the sum $6,686,600$; a single term gives $Hp_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a heptagonal number](!#what-is-a-heptagonal-number).`,
+The box accepts $1$ to $200$: $10$ gives $Hp_{10} = 235$ with the sum $880$, $30$ gives $Hp_{30} = 2,205$ with the sum $22,940$, and $300$ is capped at $200$ terms, ending at $Hp_{200} = 99,700$ with the sum $6,686,600$; a single term gives $Hp_1 = 1$. Large values are printed with thousands separators. A count of 0, a decimal or an empty box is refused with "Enter a positive integer." There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a heptagonal number](!#what-is-a-heptagonal-number).`,
     before: ``, after: ``, link: ''
   },
   obj10: {
@@ -2111,7 +2116,8 @@ $$n = \\frac{2 + 2\\sqrt{1 + 3m}}{6} = \\frac{1 + \\sqrt{3m + 1}}{3}$$
 
 So $3m + 1$ must be a perfect square, and the numerator $1 + \\sqrt{3m + 1}$ must be a multiple of 3.
 
-**Example.** Is 225 octagonal? Compute $3 \\cdot 225 + 1 = 676 = 26^2$ — perfect square. Then $(1 + 26)/3 = 9$, an integer. So $225 = O_9$. Verify: $9 \\cdot 25 = 225$. Confirmed.
+@academic[example:Example
+Is 225 octagonal? Compute $3 \\cdot 225 + 1 = 676 = 26^2$ — perfect square. Then $(1 + 26)/3 = 9$, an integer. So $225 = O_9$. Verify: $9 \\cdot 25 = 225$. Confirmed.]@
 
 **Triangular but not octagonal.** Is 15 octagonal? Compute $3 \\cdot 15 + 1 = 46$. $\\sqrt{46} \\approx 6.78$ — not a perfect square. So 15 is not octagonal, even though it is triangular ($T_5 = 15$) and hexagonal ($H_3 = 15$).
 
@@ -2208,7 +2214,7 @@ The neighbouring calculators are the [heptagonal numbers calculator](!/algebra/c
     title: `Listing the First N Terms`,
     content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for octagonal numbers is $N(N+1)(2N-1)/2$. Under the cards every term is laid out as a tile with its index above its value, so $O_1 = 1$ to $O_N$ can be read in order.
 
-The box accepts $1$ to $200$: $10$ gives $O_{10} = 280$ with the sum $1,045$, $30$ gives $O_{30} = 2,640$ with the sum $27,435$, and $300$ is capped at $200$ terms, ending at $O_{200} = 119,600$ with the sum $8,019,900$; a single term gives $O_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is an octagonal number](!#what-is-an-octagonal-number).`,
+The box accepts $1$ to $200$: $10$ gives $O_{10} = 280$ with the sum $1,045$, $30$ gives $O_{30} = 2,640$ with the sum $27,435$, and $300$ is capped at $200$ terms, ending at $O_{200} = 119,600$ with the sum $8,019,900$; a single term gives $O_1 = 1$. Large values are printed with thousands separators. A count of 0, a decimal or an empty box is refused with "Enter a positive integer." There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is an octagonal number](!#what-is-an-octagonal-number).`,
     before: ``, after: ``, link: ''
   },
   obj10: {
@@ -2469,7 +2475,8 @@ $$\\mathrm{Te}_n = \\frac{n(n+1)}{2} \\cdot \\frac{(2n+1) + 3}{6} = \\frac{n(n+1
 
 Why a window of three? The estimate $\\sqrt[3]{6m}$ is accurate to within a small constant for all $m$, so verifying nearby integers handles rounding errors and edge cases.
 
-**Example.** Is 120 tetrahedral? Estimate $\\sqrt[3]{6 \\cdot 120} = \\sqrt[3]{720} \\approx 8.96$. Round to 9. Check $\\mathrm{Te}_8 = 120$, $\\mathrm{Te}_9 = 165$, $\\mathrm{Te}_7 = 84$. Match at $k = 8$: $120 = \\mathrm{Te}_8$. Verified: $8 \\cdot 9 \\cdot 10 / 6 = 120$.
+@academic[example:Example
+Is 120 tetrahedral? Estimate $\\sqrt[3]{6 \\cdot 120} = \\sqrt[3]{720} \\approx 8.96$. Round to 9. Check $\\mathrm{Te}_8 = 120$, $\\mathrm{Te}_9 = 165$, $\\mathrm{Te}_7 = 84$. Match at $k = 8$: $120 = \\mathrm{Te}_8$. Verified: $8 \\cdot 9 \\cdot 10 / 6 = 120$.]@
 
 **Non-example.** Is 100 tetrahedral? Estimate $\\sqrt[3]{600} \\approx 8.43$. Round to 8. Check $\\mathrm{Te}_7 = 84$, $\\mathrm{Te}_8 = 120$, $\\mathrm{Te}_9 = 165$. None equals 100. So 100 is not tetrahedral.
 
@@ -2590,7 +2597,7 @@ The neighbouring calculators are the [triangular numbers calculator](!/algebra/c
     title: `Listing the First N Terms`,
     content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for tetrahedral numbers is the pentatope number $N(N+1)(N+2)(N+3)/24$. Under the cards every term is laid out as a tile with its index above its value, so $Te_1 = 1$ to $Te_N$ can be read in order.
 
-The box accepts $1$ to $200$: $10$ gives $Te_{10} = 220$ with the sum $715$, $30$ gives $Te_{30} = 4,960$ with the sum $40,920$, and $300$ is capped at $200$ terms, ending at $Te_{200} = 1,353,400$ with the sum $68,685,050$; a single term gives $Te_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a tetrahedral number](!#what-is-a-tetrahedral-number).`,
+The box accepts $1$ to $200$: $10$ gives $Te_{10} = 220$ with the sum $715$, $30$ gives $Te_{30} = 4,960$ with the sum $40,920$, and $300$ is capped at $200$ terms, ending at $Te_{200} = 1,353,400$ with the sum $68,685,050$; a single term gives $Te_1 = 1$. Large values are printed with thousands separators. A count of 0, a decimal or an empty box is refused with "Enter a positive integer." There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a tetrahedral number](!#what-is-a-tetrahedral-number).`,
     before: ``, after: ``, link: ''
   },
   obj10: {
@@ -2864,7 +2871,8 @@ is a perfect square. Once one of these is a perfect square, the index $n$ is fou
 
 So $5 F_n^2 + 4$ is a perfect square (equal to $L_n^2$) when $n$ is odd, and $5 F_n^2 - 4$ is a perfect square when $n$ is even. Together, the two cases cover all Fibonacci numbers.
 
-**Example.** Is 144 Fibonacci? Compute $5 \\cdot 144^2 = 103680$. Then $103680 + 4 = 103684$; $\\sqrt{103684} \\approx 321.99\\ldots$, not a perfect square. Try $103680 - 4 = 103676$; $\\sqrt{103676} = 322$, a perfect square. So 144 is Fibonacci. Iterating the recurrence: $1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144$ — that's $F_{12}$. So $144 = F_{12}$.
+@academic[example:Example
+Is 144 Fibonacci? Compute $5 \\cdot 144^2 = 103680$. Then $103680 + 4 = 103684$; $\\sqrt{103684} \\approx 321.99\\ldots$, not a perfect square. Try $103680 - 4 = 103676$; $\\sqrt{103676} = 322$, a perfect square. So 144 is Fibonacci. Iterating the recurrence: $1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144$ — that's $F_{12}$. So $144 = F_{12}$.]@
 
 **Non-example.** Is 100 Fibonacci? $5 \\cdot 100^2 = 50000$. Then $50000 + 4 = 50004$; $\\sqrt{50004} \\approx 223.61$, not a perfect square. $50000 - 4 = 49996$; $\\sqrt{49996} \\approx 223.59$, not a perfect square either. So 100 is not Fibonacci. The nearest are $F_{11} = 89$ and $F_{12} = 144$.
 
@@ -2981,7 +2989,7 @@ The neighbouring calculators are the [geometric sequence calculator](!/algebra/c
     title: `Listing the First N Terms`,
     content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, which for Fibonacci numbers is $F_{N+2} - 1$. Under the cards every term is laid out as a tile with its index above its value, so $F_1 = 1$ to $F_N$ can be read in order.
 
-The box accepts $1$ to $100$: $10$ gives $F_{10} = 55$ with the sum $143$, $30$ gives $F_{30} = 832,040$ with the sum $2,178,308$, and $200$ is capped at $100$ terms, ending at $F_{100} = 354,224,848,179,261,915,075$ with the sum $927,372,692,193,078,999,175$; a single term gives $F_1 = 1$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is the fibonacci sequence](!#what-is-the-fibonacci-sequence).`,
+The box accepts $1$ to $100$: $10$ gives $F_{10} = 55$ with the sum $143$, $30$ gives $F_{30} = 832,040$ with the sum $2,178,308$, and $200$ is capped at $100$ terms, ending at $F_{100} = 354,224,848,179,261,915,075$ with the sum $927,372,692,193,078,999,175$; a single term gives $F_1 = 1$. Large values are printed with thousands separators. A count of 0, a decimal or an empty box is refused with "Enter a positive integer." There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is the fibonacci sequence](!#what-is-the-fibonacci-sequence).`,
     before: ``, after: ``, link: ''
   },
   obj10: {
@@ -3386,7 +3394,7 @@ The neighbouring calculators are the [prime number checker](!/arithmetic/calcula
     title: `Listing the First N Terms`,
     content: `The explorer opens on the **List first N** tab, one of four tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, the sum of the first $N$ primes. Under the cards every term is laid out as a tile with its index above its value, so $p_1 = 2$ to $p_N$ can be read in order.
 
-The box accepts $1$ to $1,000$: $10$ gives $p_{10} = 29$ with the sum $129$, $30$ gives $p_{30} = 113$ with the sum $1,593$, and $1,100$ is capped at $1,000$ terms, ending at $p_{1,000} = 7,919$ with the sum $3,682,913$; a single term gives $p_1 = 2$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a prime number](!#what-is-a-prime-number).`,
+The box accepts $1$ to $1,000$: $10$ gives $p_{10} = 29$ with the sum $129$, $30$ gives $p_{30} = 113$ with the sum $1,593$, and $1,100$ is capped at $1,000$ terms, ending at $p_{1,000} = 7,919$ with the sum $3,682,913$; a single term gives $p_1 = 2$. Large values are printed with thousands separators. A count of 0, a decimal or an empty box is refused with "Enter a positive integer." There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. What the terms are is explained in [what is a prime number](!#what-is-a-prime-number).`,
     before: ``, after: ``, link: ''
   },
   obj10: {
@@ -3834,14 +3842,14 @@ The one-page summary [Arithmetic sequences at a glance](!/algebra/sequences/arit
     title: `Setting the Parameters`,
     content: `The card opens with the **Sequence** drop-down set to Arithmetic sequence; the other entry switches the card to the Geometric sequence, which has its own page, [Geometric sequence calculator](!/algebra/calculators/sequences/geometric-sequence). Under it the **Parameters** row holds the two numbers that fix the sequence, **First term a₁** and **Common difference d**, opening with $a_1 = 2$ and $d = 3$. Type new values and click **Apply** or press Enter; every tab recomputes at once with the rule $a_n = a_1 + (n - 1) \\cdot d$. With $a_1 = 5$ and $d = 2$ the first eight terms run $5, 7, \\ldots, 19$ with the sum $96$; with $a_1 = 10$ and $d = -3$ they fall from $10$ to $-11$ and the sum is $-4$.
 
-Both boxes take any decimal, negative values included; a blank box makes every term read NaN, so fill both before applying. Which two numbers define the sequence is explained in [what is an arithmetic sequence](!#what-is-an-arithmetic-sequence).`,
+Both boxes take any decimal, negative values included; a blank or non-numeric box is refused with "Enter a number in every parameter box." and the tabs keep their last values. Which two numbers define the sequence is explained in [what is an arithmetic sequence](!#what-is-an-arithmetic-sequence).`,
     before: ``, after: ``, link: ''
   },
   obj10: {
     title: `Listing the First N Terms`,
     content: `The explorer opens on the **List first N** tab, one of five tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, $S_N = \\frac{N}{2}(a_1 + a_N)$. Under the cards every term is laid out as a tile with its index above its value.
 
-With the opening parameters the box accepts $1$ to $500$: $8$ gives $a_8 = 23$ with the sum $100$, $10$ gives $a_{10} = 29$ with the sum $155$, and $600$ is capped at $500$ terms, ending at $a_{500} = 1,499$ with the sum $375,250$; a single term gives $a_1 = 2$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. The rule is explained in [the n-th term formula](!#the-n-th-term-formula) and the sum in [the sum formula and gauss's trick](!#the-sum-formula-and-gausss-trick).`,
+With the opening parameters the box accepts $1$ to $500$: $8$ gives $a_8 = 23$ with the sum $100$, $10$ gives $a_{10} = 29$ with the sum $155$, and $600$ is capped at $500$ terms, ending at $a_{500} = 1,499$ with the sum $375,250$; a single term gives $a_1 = 2$. Large values are printed with thousands separators. A count of 0, a decimal or an empty box is refused with "Enter a positive integer." There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. The rule is explained in [the n-th term formula](!#the-n-th-term-formula) and the sum in [the sum formula and gauss's trick](!#the-sum-formula-and-gausss-trick).`,
     before: ``, after: ``, link: ''
   },
   obj11: {
@@ -4340,14 +4348,14 @@ The one-page summary [Geometric sequences at a glance](!/algebra/sequences/geome
     title: `Setting the Parameters`,
     content: `The card opens with the **Sequence** drop-down set to Geometric sequence; the other entry switches the card to the Arithmetic sequence, which has its own page, [Arithmetic sequence calculator](!/algebra/calculators/sequences/arithmetic-sequence). Under it the **Parameters** row holds the two numbers that fix the sequence, **First term a₁** and **Common ratio r**, opening with $a_1 = 2$ and $r = 3$. Type new values and click **Apply** or press Enter; every tab recomputes at once with the rule $a_n = a_1 \\cdot r^{n-1}$. With $a_1 = 1$ and $r = 2$ the first eight terms are the powers of two from $1$ to $128$ with the sum $255$; with $a_1 = 3$ and $r = 0.5$ they halve from $3$ to $0.0234375$ and the sum is $5.9765625$.
 
-Both boxes take any decimal, negative values included; a blank box makes every term read NaN, so fill both before applying. Which two numbers define the sequence is explained in [what is a geometric sequence](!#what-is-a-geometric-sequence).`,
+Both boxes take any decimal, negative values included; a blank or non-numeric box is refused with "Enter a number in every parameter box." and the tabs keep their last values. Which two numbers define the sequence is explained in [what is a geometric sequence](!#what-is-a-geometric-sequence).`,
     before: ``, after: ``, link: ''
   },
   obj10: {
     title: `Listing the First N Terms`,
     content: `The explorer opens on the **List first N** tab, one of five tabs across the top of the card; the small ? beside each tab shows what the mode does. Type how many terms you want in the **Show first** box and click **Update** or press Enter. Three cards answer at once: **Showing** gives the count, **Largest** the last term with its index, and **Sum** the total of the listed terms, $S_N = a_1 \\frac{r^N - 1}{r - 1}$. Under the cards every term is laid out as a tile with its index above its value.
 
-With the opening parameters the box accepts $1$ to $100$: $8$ gives $a_8 = 4,374$ with the sum $6,560$, $12$ gives $a_{12} = 354,294$ with the sum $531,440$, and the box is capped at $100$ terms; a single term gives $a_1 = 2$. Large values are printed with thousands separators. There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. The rule is explained in [the n-th term formula](!#the-n-th-term-formula) and the sum in [the finite sum formula](!#the-finite-sum-formula).`,
+With the opening parameters the box accepts $1$ to $100$: $8$ gives $a_8 = 4,374$ with the sum $6,560$, $12$ gives $a_{12} = 354,294$ with the sum $531,440$, and the box is capped at $100$ terms; a single term gives $a_1 = 2$. Large values are printed with thousands separators. A count of 0, a decimal or an empty box is refused with "Enter a positive integer." There is no Reset button: type a new count and click Update again. The panel on the right, **List first N**, states the rule the tiles come from, and its walkthrough repeats the last term and the sum with your own $N$. The rule is explained in [the n-th term formula](!#the-n-th-term-formula) and the sum in [the finite sum formula](!#the-finite-sum-formula).`,
     before: ``, after: ``, link: ''
   },
   obj11: {

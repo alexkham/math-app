@@ -197,19 +197,19 @@ For the inequality version of the same idea, see **inequalities visualizer**.`,
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Equations** — the general theory of equations, methods of solution, and classification by type.
+      content: `**[Equations](!/algebra/equations)** — the general theory of equations, methods of solution, and classification by type.
 
 [Inequalities Visualizer](!/algebra/visual-tools/inequality) — the companion tool for $f(x) < n$, $f(x) \\leq n$, and the strict and non-strict comparisons; uses the same marble-and-sign-chart layout.
 
-**Linear Equations** — the simplest case, where $f$ is a degree-one [polynomial](!/algebra/polynomials); the visualizer always produces a single solution unless $f$ is constant.
+**[Linear Equations](!/algebra/equations/linear)** — the simplest case, where $f$ is a degree-one [polynomial](!/algebra/polynomials); the visualizer always produces a single solution unless $f$ is constant.
 
-**Quadratic Equations** — degree-two case, where the equation has zero, one, or two real solutions depending on the discriminant of $f(x) - n$.
+**[Quadratic Equations](!/algebra/equations/quadratic)** — degree-two case, where the equation has zero, one, or two real solutions depending on the discriminant of $f(x) - n$.
 
-**Polynomial Equations** — higher-degree cases, where the [fundamental theorem of algebra](!/algebra/polynomials/rules#11) bounds the number of complex solutions by the degree.
+**[Polynomial Equations](!/algebra/equations/polynomial)** — higher-degree cases, where the [fundamental theorem of algebra](!/algebra/polynomials/rules#11) bounds the number of complex solutions by the degree.
 
-**Sign Charts** — the general technique for tracking the sign of a function across intervals, used here and throughout calculus.
+**[Sign Charts](!/algebra/inequalities#8)** — the general technique for tracking the sign of a function across intervals, used here and throughout calculus.
 
-**Function Graphs** — visualizers for plotting $y = f(x)$ on its own, without comparison to a target.
+**[Function Graphs](!/functions/graphs)** — visualizers for plotting $y = f(x)$ on its own, without comparison to a target.
 
 **Equation Solving Step by Step** — written walkthroughs of standard solution methods for each equation type.
 

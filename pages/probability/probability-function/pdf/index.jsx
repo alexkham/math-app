@@ -94,7 +94,8 @@ Think of it like the density of a material. A steel rod doesn't have "weight at 
 
 For any specific value $a$:
 
-$$P(X = a) = 0$$
+@academic[formula_callout:Definition & Physical Intuition
+$$P(X = a) = 0$$]@
 
 This seems impossible. How can every individual outcome have zero probability, yet something must happen?
 
@@ -106,7 +107,12 @@ Example: Pick a random number between 0 and 1. What's $P(X = 0.5)$? Exactly zero
 
 The PDF value $f(x)$ is **not** a probability. It's a density—a rate of probability per unit.
 
+@academic[formula_callout:Probability of Interval Continuous
 $$P(a \\leq X \\leq b) = \\int_a^b f(x)dx$$
+/probability/formulas#probability_of_interval_continuous]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Probability is the **area** under the curve, not the height. This means $f(x)$ can exceed 1, unlike a PMF where $p(x) \\leq 1$ always.
 
@@ -134,7 +140,8 @@ The PDF uses specific notation to represent density functions.
 
 For [random variable](!/probability/random-variables) $X$:
 
-$$f_X(x)$$
+@academic[formula_callout:Notation
+$$f_X(x)$$]@
 
 $f_X(x)$: The PDF of random variable $X$ evaluated at value $x$.
 
@@ -154,7 +161,12 @@ With only one variable in context, you can drop the subscript and write $f(x)$.
 
 The PDF connects to probability through integration:
 
+@academic[formula_callout:Probability of Interval Continuous
 $$P(a \\leq X \\leq b) = \\int_a^b f_X(x)dx$$
+/probability/formulas#probability_of_interval_continuous]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The density function $f_X(x)$ must be integrated over an interval to yield probability.
 
@@ -219,7 +231,12 @@ Every valid PDF must satisfy two non-negotiable rules. Just like the [PMF](!/pro
 
 ## Axiom 1: Non-Negativity
 
+@academic[formula_callout:PDF Non-negativity
 $$f_X(x) \\geq 0 \\text{ for all } x$$
+/probability/formulas#pdf_non-negativity]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Density cannot be negative. Ever.
 
@@ -227,7 +244,12 @@ Each point gets zero or positive density. If $f(5) = -0.3$, you've made an error
 
 ## Axiom 2: Normalization
 
+@academic[formula_callout:PDF Normalization
 $$\\int_{-\\infty}^{\\infty} f_X(x)dx = 1$$
+/probability/formulas#pdf_normalization]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The total area under the density curve must equal exactly 1.
 
@@ -286,17 +308,19 @@ Often piece-wise, depending on the support:
 
 Example: [Uniform distribution](!/probability/distributions/continuous/uniform) on $[a, b]$:
 
+@academic[formula_callout:Representations: The Three Views
 $$f(x) = \\begin{cases} 
 \\frac{1}{b-a} & \\text{if } x \\in [a, b] \\\\
 0 & \\text{otherwise}
-\\end{cases}$$
+\\end{cases}$$]@
 
 Example: [Exponential distribution](!/probability/distributions/continuous/exponential):
 
+@academic[formula_callout:Representations: The Three Views
 $$f(x) = \\begin{cases} 
 \\lambda e^{-\\lambda x} & \\text{if } x \\geq 0 \\\\
 0 & \\text{if } x < 0
-\\end{cases}$$
+\\end{cases}$$]@
 
 The functional form makes computation possible—you can integrate it to find probabilities.
 
@@ -353,7 +377,8 @@ Methods:
 
 Example: Lightbulb with constant failure rate $\\lambda$. The memoryless property suggests:
 
-$$f(t) = \\lambda e^{-\\lambda t} \\text{ for } t \\geq 0$$
+@academic[formula_callout:Building a PDF (From Story to Math)
+$$f(t) = \\lambda e^{-\\lambda t} \\text{ for } t \\geq 0$$]@
 
 **Step 4: Verify the Axioms**
 
@@ -361,7 +386,8 @@ Check non-negativity: Is $f(x) \\geq 0$ everywhere? Yes, exponential is always p
 
 Check normalization: Does it integrate to 1?
 
-$$\\int_0^{\\infty} \\lambda e^{-\\lambda t}dt = \\lambda \\cdot \\frac{1}{\\lambda} = 1$$ ✓
+@academic[formula_callout:Building a PDF (From Story to Math)
+$$\\int_0^{\\infty} \\lambda e^{-\\lambda t}dt = \\lambda \\cdot \\frac{1}{\\lambda} = 1$$ ✓]@
 
 See [axioms](!/probability/axioms) for the fundamental requirements.
 
@@ -369,10 +395,11 @@ See [axioms](!/probability/axioms) for the fundamental requirements.
 
 Express the function clearly, including the support.
 
+@academic[formula_callout:Building a PDF (From Story to Math)
 $$f_T(t) = \\begin{cases} 
 \\lambda e^{-\\lambda t} & \\text{if } t \\geq 0 \\\\
 0 & \\text{if } t < 0
-\\end{cases}$$
+\\end{cases}$$]@
 
 ## From Physical Setup to Mathematical Object
 
@@ -397,23 +424,33 @@ Once you have a PDF, you can compute probabilities for any [event](!/probability
 
 The core calculation: probability over an interval equals the area under the curve.
 
+@academic[formula_callout:Probability of Interval Continuous
 $$P(a \\leq X \\leq b) = \\int_a^b f_X(x)dx$$
+/probability/formulas#probability_of_interval_continuous]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Example: [Uniform distribution](!/probability/distributions/continuous/uniform) on $[0, 10]$ with $f(x) = \\frac{1}{10}$.
 
-$$P(3 \\leq X \\leq 7) = \\int_3^7 \\frac{1}{10}dx = \\frac{1}{10} \\cdot 4 = 0.4$$
+@academic[formula_callout:Calculations Using the PDF
+$$P(3 \\leq X \\leq 7) = \\int_3^7 \\frac{1}{10}dx = \\frac{1}{10} \\cdot 4 = 0.4$$]@
 
 Example: [Exponential distribution](!/probability/distributions/continuous/exponential) with $f(x) = 2e^{-2x}$ for $x \\geq 0$.
 
-$$P(1 \\leq X \\leq 3) = \\int_1^3 2e^{-2x}dx = [-e^{-2x}]_1^3 = e^{-2} - e^{-6} \\approx 0.133$$
+@academic[formula_callout:Calculations Using the PDF
+$$P(1 \\leq X \\leq 3) = \\int_1^3 2e^{-2x}dx = [-e^{-2x}]_1^3 = e^{-2} - e^{-6} \\approx 0.133$$]@
 
 ## Inequalities Are Irrelevant
 
 For continuous variables, endpoint inclusion doesn't matter:
 
-$$P(X < a) = P(X \\leq a)$$
-$$P(X > a) = P(X \\geq a)$$
-$$P(a < X < b) = P(a \\leq X \\leq b)$$
+@academic[formula_callout:Calculations Using the PDF
+$$P(X < a) = P(X \\leq a)$$]@
+@academic[formula_callout:Calculations Using the PDF
+$$P(X > a) = P(X \\geq a)$$]@
+@academic[formula_callout:Calculations Using the PDF
+$$P(a < X < b) = P(a \\leq X \\leq b)$$]@
 
 Why? Because $P(X = a) = 0$ for any single point. Adding or removing a zero-probability point doesn't change the total.
 
@@ -423,19 +460,23 @@ Example: $P(X < 5) = P(X \\leq 5)$ exactly. No approximation, no difference.
 
 Probability beyond a threshold:
 
-$$P(X > a) = \\int_a^{\\infty} f_X(x)dx = 1 - P(X \\leq a)$$
+@academic[formula_callout:Calculations Using the PDF
+$$P(X > a) = \\int_a^{\\infty} f_X(x)dx = 1 - P(X \\leq a)$$]@
 
-$$P(X < a) = \\int_{-\\infty}^a f_X(x)dx$$
+@academic[formula_callout:Calculations Using the PDF
+$$P(X < a) = \\int_{-\\infty}^a f_X(x)dx$$]@
 
 Example: [Exponential](!/probability/distributions/continuous/exponential) with $\\lambda = 0.5$.
 
-$$P(X > 2) = \\int_2^{\\infty} 0.5e^{-0.5x}dx = e^{-1} \\approx 0.368$$
+@academic[formula_callout:Calculations Using the PDF
+$$P(X > 2) = \\int_2^{\\infty} 0.5e^{-0.5x}dx = e^{-1} \\approx 0.368$$]@
 
 ## Complement Rule
 
 Use the complement when integration is easier in the opposite direction:
 
-$$P(X \\notin A) = 1 - P(X \\in A)$$
+@academic[formula_callout:Calculations Using the PDF
+$$P(X \\notin A) = 1 - P(X \\in A)$$]@
 
 Example: $P(X > 10) = 1 - P(X \\leq 10)$
 
@@ -463,19 +504,26 @@ The PDF contains all the information about a [random variable](!/probability/ran
 
 The [expected value](!/probability/expected-value) is the probability-weighted average across all possible values, computed via integration.
 
+@academic[formula_callout:Expected Value (Continuous)
 $$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot f_X(x)dx$$
+/probability/formulas#expected_value_continuous]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Each value $x$ contributes based on its density weight. Think of it as the balance point of the density curve.
 
 Example: [Uniform distribution](!/probability/distributions/continuous/uniform) on $[0, 10]$ with $f(x) = \\frac{1}{10}$.
 
-$$E[X] = \\int_0^{10} x \\cdot \\frac{1}{10}dx = \\frac{1}{10} \\cdot \\frac{x^2}{2}\\Big|_0^{10} = \\frac{1}{10} \\cdot 50 = 5$$
+@academic[formula_callout:Derived Properties: Location Measures
+$$E[X] = \\int_0^{10} x \\cdot \\frac{1}{10}dx = \\frac{1}{10} \\cdot \\frac{x^2}{2}\\Big|_0^{10} = \\frac{1}{10} \\cdot 50 = 5$$]@
 
 The mean sits at the midpoint, as expected from symmetry.
 
 Example: [Exponential distribution](!/probability/distributions/continuous/exponential) with $f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$.
 
-$$E[X] = \\int_0^{\\infty} x \\cdot \\lambda e^{-\\lambda x}dx = \\frac{1}{\\lambda}$$
+@academic[formula_callout:Derived Properties: Location Measures
+$$E[X] = \\int_0^{\\infty} x \\cdot \\lambda e^{-\\lambda x}dx = \\frac{1}{\\lambda}$$]@
 
 The mean depends inversely on the rate parameter.
 
@@ -483,15 +531,18 @@ The mean depends inversely on the rate parameter.
 
 The median is the value $m$ that splits the probability in half.
 
-$$P(X \\leq m) = \\int_{-\\infty}^m f_X(x)dx = 0.5$$
+@academic[formula_callout:Derived Properties: Location Measures
+$$P(X \\leq m) = \\int_{-\\infty}^m f_X(x)dx = 0.5$$]@
 
 It's the point where the [CDF](!/probability/cdf) equals 0.5.
 
 Example: [Exponential distribution](!/probability/distributions/continuous/exponential) with parameter $\\lambda$.
 
-$$\\int_0^m \\lambda e^{-\\lambda x}dx = 1 - e^{-\\lambda m} = 0.5$$
+@academic[formula_callout:Derived Properties: Location Measures
+$$\\int_0^m \\lambda e^{-\\lambda x}dx = 1 - e^{-\\lambda m} = 0.5$$]@
 
-$$e^{-\\lambda m} = 0.5 \\implies m = \\frac{\\ln(2)}{\\lambda}$$
+@academic[formula_callout:Derived Properties: Location Measures
+$$e^{-\\lambda m} = 0.5 \\implies m = \\frac{\\ln(2)}{\\lambda}$$]@
 
 For symmetric distributions, median equals mean. For skewed distributions, they differ.
 
@@ -499,7 +550,8 @@ For symmetric distributions, median equals mean. For skewed distributions, they 
 
 The mode is the value where the PDF reaches its maximum.
 
-$$\\text{mode} = \\arg\\max_x f_X(x)$$
+@academic[formula_callout:Derived Properties: Location Measures
+$$\\text{mode} = \\arg\\max_x f_X(x)$$]@
 
 Found by solving $f'_X(x) = 0$ and checking the second derivative.
 
@@ -527,25 +579,41 @@ Location tells you where the distribution centers. Spread tells you how widely v
 
 [Variance](!/probability/variance) quantifies the average squared deviation from the mean, computed through integration.
 
-$$\\text{Var}(X) = \\int_{-\\infty}^{\\infty} (x - E[X])^2 \\cdot f_X(x)dx$$
+@academic[formula_callout:Derived Properties: Spread Measures
+$$\\text{Var}(X) = \\int_{-\\infty}^{\\infty} (x - E[X])^2 \\cdot f_X(x)dx$$]@
 
 Each squared distance from the mean is weighted by density. High-density regions far from the mean contribute heavily to variance.
 
 Computational shortcut:
 
+@academic[formula_callout:Variance Computational Formula
 $$\\text{Var}(X) = E[X^2] - (E[X])^2$$
+/probability/formulas#variance_computational_formula]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 where $E[X^2] = \\int_{-\\infty}^{\\infty} x^2 \\cdot f_X(x)dx$
 
 Example: [Uniform distribution](!/probability/distributions/continuous/uniform) on $[a, b]$.
 
+@academic[formula_callout:Continuous Uniform Variance
 $$\\text{Var}(X) = \\frac{(b-a)^2}{12}$$
+/probability/formulas#continuous_uniform_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Wider intervals produce larger variance.
 
 Example: [Exponential distribution](!/probability/distributions/continuous/exponential) with parameter $\\lambda$.
 
+@academic[formula_callout:Exponential Variance
 $$\\text{Var}(X) = \\frac{1}{\\lambda^2}$$
+/probability/formulas#exponential_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Variance decreases as the rate parameter increases.
 
@@ -553,7 +621,8 @@ Variance decreases as the rate parameter increases.
 
 Standard deviation is $\\sqrt{\\text{Var}(X)}$, bringing spread back to the original measurement units.
 
-$$\\text{SD}(X) = \\sqrt{\\text{Var}(X)}$$
+@academic[formula_callout:Derived Properties: Spread Measures
+$$\\text{SD}(X) = \\sqrt{\\text{Var}(X)}$$]@
 
 For the [exponential](!/probability/distributions/continuous/exponential): $\\text{SD}(X) = \\frac{1}{\\lambda}$
 
@@ -563,7 +632,8 @@ Standard deviation has the same dimensionality as $X$ itself, making interpretat
 
 The IQR measures spread using percentiles rather than deviations from the mean.
 
-$$\\text{IQR} = Q_3 - Q_1$$
+@academic[formula_callout:Derived Properties: Spread Measures
+$$\\text{IQR} = Q_3 - Q_1$$]@
 
 where $Q_1$ is the 25th percentile and $Q_3$ is the 75th percentile.
 
@@ -598,35 +668,58 @@ The new PDF $f_Y(y)$ must account for how $g$ stretches or compresses intervals�
 
 For $Y = aX + b$ where $a \\neq 0$:
 
+@academic[formula_callout:PDF of Linear Transformation
 $$f_Y(y) = \\frac{1}{|a|} f_X\\left(\\frac{y - b}{a}\\right)$$
+/probability/formulas#pdf_of_linear_transformation]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The factor $\\frac{1}{|a|}$ appears because scaling the variable by $a$ compresses or stretches the density axis.
 
 Example: If $X$ is [uniform](!/probability/distributions/continuous/uniform) on $[0, 1]$ with $f_X(x) = 1$, then $Y = 3X$ has:
 
-$$f_Y(y) = \\frac{1}{3} \\cdot 1 = \\frac{1}{3} \\text{ for } y \\in [0, 3]$$
+@academic[formula_callout:Transformations (Change of Variables)
+$$f_Y(y) = \\frac{1}{3} \\cdot 1 = \\frac{1}{3} \\text{ for } y \\in [0, 3]$$]@
 
 The density drops to $\\frac{1}{3}$ because the interval stretched by factor 3.
 
 Example: $Y = X + 5$ shifts the distribution but doesn't change density shape:
 
-$$f_Y(y) = f_X(y - 5)$$
+@academic[formula_callout:Transformations (Change of Variables)
+$$f_Y(y) = f_X(y - 5)$$]@
 
 ## General Transformations (Invertible)
 
 For invertible $g$ (strictly increasing or decreasing), the transformation formula includes the Jacobian:
 
+@academic[formula_callout:PDF of Monotone Transformation
 $$f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left|\\frac{d}{dy}g^{-1}(y)\\right|$$
+/probability/formulas#pdf_of_monotone_transformation]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The derivative term $\\left|\\frac{d}{dy}g^{-1}(y)\\right|$ is the Jacobian—it measures how $g$ locally stretches or compresses space.
 
 Alternative form using $g'(x)$:
 
-$$f_Y(y) = f_X(x) \\cdot \\frac{1}{|g'(x)|}$$ where $x = g^{-1}(y)$
+@academic[formula_callout:Transformations (Change of Variables)
+$$f_Y(y) = f_X(x) \\cdot \\frac{1}{|g'(x)|}$$ where $x = g^{-1}(y)$]@
 
 Example: $Y = X^2$ for $X > 0$. Then $g^{-1}(y) = \\sqrt{y}$ and $\\frac{d}{dy}\\sqrt{y} = \\frac{1}{2\\sqrt{y}}$.
 
-$$f_Y(y) = f_X(\\sqrt{y}) \\cdot \\frac{1}{2\\sqrt{y}}$$
+@academic[formula_callout:Transformations (Change of Variables)
+$$f_Y(y) = f_X(\\sqrt{y}) \\cdot \\frac{1}{2\\sqrt{y}}$$]@
+
+Another route to the same density goes through the CDF of $Y$: find $F_Y$ first, then differentiate.
+
+@academic[formula_callout:CDF Method for Transformations
+$$F_Y(y) = P(g(X) \\leq y)$$
+/probability/formulas#cdf_method_for_transformations]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 ## Why the Absolute Value?
 
@@ -640,7 +733,8 @@ The Jacobian ensures total area under the new PDF still integrates to 1.
 
 When $g$ is not one-to-one, multiple $x$ values map to the same $y$. Sum their contributions:
 
-$$f_Y(y) = \\sum_{x: g(x) = y} f_X(x) \\cdot \\left|\\frac{d}{dy}g^{-1}(y)\\right|$$
+@academic[formula_callout:Transformations (Change of Variables)
+$$f_Y(y) = \\sum_{x: g(x) = y} f_X(x) \\cdot \\left|\\frac{d}{dy}g^{-1}(y)\\right|$$]@
 
 This generalizes the invertible case by collecting all pre-images.
 
@@ -663,17 +757,20 @@ The PDF and the [CDF](!/probability/cdf) (Cumulative Distribution Function) are 
 
 The CDF accumulates probability from the PDF through integration:
 
-$$F_X(x) = P(X \\leq x) = \\int_{-\\infty}^x f_X(t)dt$$
+@academic[formula_callout:Connection to CDF (The Fundamental Theorem)
+$$F_X(x) = P(X \\leq x) = \\int_{-\\infty}^x f_X(t)dt$$]@
 
 The CDF at any point equals the total area under the PDF curve from $-\\infty$ up to that point.
 
 Example: [Exponential distribution](!/probability/distributions/continuous/exponential) with $f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$.
 
-$$F_X(x) = \\int_0^x \\lambda e^{-\\lambda t}dt = 1 - e^{-\\lambda x} \\text{ for } x \\geq 0$$
+@academic[formula_callout:Connection to CDF (The Fundamental Theorem)
+$$F_X(x) = \\int_0^x \\lambda e^{-\\lambda t}dt = 1 - e^{-\\lambda x} \\text{ for } x \\geq 0$$]@
 
 Example: [Uniform distribution](!/probability/distributions/continuous/uniform) on $[0, 10]$ with $f(x) = \\frac{1}{10}$.
 
-$$F_X(x) = \\int_0^x \\frac{1}{10}dt = \\frac{x}{10} \\text{ for } x \\in [0, 10]$$
+@academic[formula_callout:Connection to CDF (The Fundamental Theorem)
+$$F_X(x) = \\int_0^x \\frac{1}{10}dt = \\frac{x}{10} \\text{ for } x \\in [0, 10]$$]@
 
 The CDF is continuous and always increasing (or at least non-decreasing) for continuous [random variables](!/probability/random-variables).
 
@@ -681,17 +778,24 @@ The CDF is continuous and always increasing (or at least non-decreasing) for con
 
 The PDF is the derivative of the CDF:
 
+@academic[formula_callout:PDF as CDF Derivative
 $$f_X(x) = \\frac{d}{dx}F_X(x)$$
+/probability/formulas#pdf_as_cdf_derivative]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The PDF gives the instantaneous rate at which probability accumulates—the slope of the CDF curve.
 
 Example: [Exponential](!/probability/distributions/continuous/exponential) with $F_X(x) = 1 - e^{-\\lambda x}$.
 
-$$f_X(x) = \\frac{d}{dx}(1 - e^{-\\lambda x}) = \\lambda e^{-\\lambda x}$$
+@academic[formula_callout:Connection to CDF (The Fundamental Theorem)
+$$f_X(x) = \\frac{d}{dx}(1 - e^{-\\lambda x}) = \\lambda e^{-\\lambda x}$$]@
 
 Example: [Uniform](!/probability/distributions/continuous/uniform) with $F_X(x) = \\frac{x}{10}$ on $[0, 10]$.
 
-$$f_X(x) = \\frac{d}{dx}\\left(\\frac{x}{10}\\right) = \\frac{1}{10}$$
+@academic[formula_callout:Connection to CDF (The Fundamental Theorem)
+$$f_X(x) = \\frac{d}{dx}\\left(\\frac{x}{10}\\right) = \\frac{1}{10}$$]@
 
 Constant derivative produces constant density.
 
@@ -699,14 +803,15 @@ Constant derivative produces constant density.
 
 This relationship is the Fundamental Theorem of Calculus applied to probability:
 
-$$\\frac{d}{dx}\\int_{-\\infty}^x f_X(t)dt = f_X(x)$$
+@academic[formula_callout:Connection to CDF (The Fundamental Theorem)
+$$\\frac{d}{dx}\\int_{-\\infty}^x f_X(t)dt = f_X(x)$$]@
 
 Integration builds up cumulative probability. Differentiation recovers the density function. They are inverse operations.
 
 ## Graphical Relationship
 
 - **PDF:** Shows where density concentrates (peaks and valleys)
-- **CDF:** Shows accumulated probability (always rising, reaches 1)
+- **[CDF](!/probability/cdf):** Shows accumulated probability (always rising, reaches 1)
 
 The steeper the CDF at point $x$, the higher the PDF at that point. Flat regions in the CDF correspond to zero density in the PDF.
 

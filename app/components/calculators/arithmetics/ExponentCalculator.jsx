@@ -11,7 +11,10 @@ import {processContent}  from '../../../../app/utils/contentProcessor'
 
 function parseNum(s) {
   if (s === '' || s === '-' || s === '.' || s == null) return NaN;
-  const n = parseFloat(s);
+  // strict: '3abc' is not a number (parseFloat would keep the leading 3)
+  const str = String(s).trim();
+  if (!/^[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?$/.test(str)) return NaN;
+  const n = Number(str);
   return isNaN(n) ? NaN : n;
 }
 

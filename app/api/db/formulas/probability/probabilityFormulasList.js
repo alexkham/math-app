@@ -1209,7 +1209,7 @@ $|\\Omega|$ — total number of outcomes in the sample space`,
   // ─── Conditional Probability (3) ─────────────────────────────────
 
   {
-    name: 'Conditional Probability Definition',
+    name: 'Conditional Probability',
     entity: 'conditional_probability',
     category: 'Conditional Probability',
     formula: `$$P(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}$$`,
@@ -1234,7 +1234,7 @@ $|\\Omega|$ — total number of outcomes in the sample space`,
     fields: {
       explanation: `Algebraic rearrangement of the conditional probability definition. The probability that two events both occur is the probability of one times the conditional probability of the other given the first.`,
       derivation: `Multiplying both sides of $P(B \\mid A) = P(A \\cap B)/P(A)$ by $P(A)$ gives $P(A \\cap B) = P(A)\\,P(B \\mid A)$. The symmetric form follows by swapping $A$ and $B$.`,
-      related_formulas: `- [Conditional Probability Definition](!/probability/formulas#conditional_probability_definition)
+      related_formulas: `- [Conditional Probability](!/probability/formulas#conditional_probability)
 - [Chain Rule](!/probability/formulas#chain_rule)
 - [Independence Formula](!/probability/formulas#independence_formula)`,
       related_definitions: `- [Event](!/probability/definitions#event)`,
@@ -1288,7 +1288,7 @@ $$P(A \\mid B) = P(A) \\quad\\text{and}\\quad P(B \\mid A) = P(B)$$`,
       conditions: `Requires $P(C) > 0$.`,
       variants: `Equivalent form: $P(A \\mid B \\cap C) = P(A \\mid C)$ when $P(B \\cap C) > 0$.`,
       related_formulas: `- [Independence Formula](!/probability/formulas#independence_formula)
-- [Conditional Probability Definition](!/probability/formulas#conditional_probability_definition)`,
+- [Conditional Probability](!/probability/formulas#conditional_probability)`,
       related_definitions: `- [Independent Events](!/probability/definitions#independent_events)`,
     },
   },
@@ -1326,7 +1326,7 @@ $$P(A \\mid B) = P(A) \\quad\\text{and}\\quad P(B \\mid A) = P(B)$$`,
       conditions: `Requires $P(B) > 0$. The expanded form additionally requires $\\{A_i\\}$ to partition $\\Omega$ with $P(A_i) > 0$.`,
       variants: `Expanded form using the law of total probability for the denominator: $$P(A_k \\mid B) = \\frac{P(B \\mid A_k)\\,P(A_k)}{\\sum_{i} P(B \\mid A_i)\\,P(A_i)}$$`,
       derivation: `From the symmetric multiplication rule $P(A \\cap B) = P(B \\mid A)P(A) = P(A \\mid B)P(B)$, divide by $P(B)$.`,
-      related_formulas: `- [Conditional Probability Definition](!/probability/formulas#conditional_probability_definition)
+      related_formulas: `- [Conditional Probability](!/probability/formulas#conditional_probability)
 - [Law of Total Probability](!/probability/formulas#law_of_total_probability)
 - [Multiplication Rule](!/probability/formulas#multiplication_rule)`,
       related_definitions: `- [Conditional Probability](!/probability/definitions#conditional_probability)

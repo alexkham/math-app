@@ -651,15 +651,15 @@ The decision tree's structure reflects these mathematical relationships, groupin
       title: `Related Concepts and Tools`,
       content: `Divisibility connects to several fundamental number theory concepts:
 
-**Prime Numbers**: Numbers divisible only by 1 and themselves. If the tree shows a number [divisible only by 1](!#only-divisible-by-1), it may be prime or divisible by something larger than 12.
+**[Prime Numbers](!/algebra/sequences/prime-numbers)**: Numbers divisible only by 1 and themselves. If the tree shows a number [divisible only by 1](!#only-divisible-by-1), it may be prime or divisible by something larger than 12.
 
-**Prime Factorization**: Breaking numbers into prime factors reveals all divisibility relationships. A number is divisible by 6 because $6 = 2 × 3$.
+**[Prime Factorization](!/arithmetic/divisibility#8)**: Breaking numbers into prime factors reveals all divisibility relationships. A number is divisible by 6 because $6 = 2 × 3$.
 
-**Greatest Common Divisor (GCD)**: The largest number dividing two integers evenly. Divisibility rules help identify shared factors quickly.
+**[Greatest Common Divisor (GCD)](!/arithmetic/divisibility/gcd)**: The largest number dividing two integers evenly. Divisibility rules help identify shared factors quickly.
 
-**Least Common Multiple (LCM)**: The smallest number divisible by two given integers. Understanding divisibility simplifies LCM calculations.
+**[Least Common Multiple (LCM)](!/arithmetic/divisibility/lcm)**: The smallest number divisible by two given integers. Understanding divisibility simplifies LCM calculations.
 
-**Modular Arithmetic**: The remainder operation generalizes divisibility. A number is divisible by $n$ when its remainder modulo $n$ equals zero.
+**[Modular Arithmetic](!/arithmetic/modulo)**: The remainder operation generalizes divisibility. A number is divisible by $n$ when its remainder modulo $n$ equals zero.
 
 [Divisibility Table](!/arithmetic/visual-tools/divisibility-table): Every rule tested at once for one number, instead of one branch at a time.
 

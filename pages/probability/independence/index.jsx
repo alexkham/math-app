@@ -945,7 +945,12 @@ This definition focuses on the idea of unchanged information. If the occurrence 
       content:`
 The intuitive idea of independence becomes precise when expressed in terms of probabilities. Two events are independent exactly when their joint occurrence behaves like the product of their separate chances:
 
-- $P(A \\cap B) = P(A) \\, P(B)$
+@academic[formula_callout:Independence Formula
+$$P(A \\cap B) = P(A) \\, P(B)$$
+/probability/formulas#independence_formula]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 This statement captures the idea that combining the events does not introduce any new influence between them. It is the compact formal expression of "no change in information."  
 
@@ -1027,6 +1032,15 @@ In some situations, two events may influence each other in general, but become u
 
 Here, the relationship between events depends on a third event or condition. Knowing this extra information can block the flow of influence between them, so that learning about one event no longer changes how we think about the other.
 
+In symbols, for events $A$ and $B$ given a third event $C$:
+
+@academic[formula_callout:Conditional Independence
+$$P(A \\cap B \\mid C) = P(A \\mid C)\\,P(B \\mid C)$$
+/probability/formulas#conditional_independence]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
 This idea appears frequently in real systems: hidden variables, background conditions, or common causes can create apparent dependence that disappears once the underlying factor is taken into account. Conditional independence plays a central role in probabilistic modeling, graphical models, and Bayesian reasoning.
 `,
       before:``,
@@ -1070,11 +1084,11 @@ The pitfalls above can be packaged with the underlying confusion and the correct
       content:`
 Independence does not stand alone. It interacts directly with many of the central ideas in probability.
 
-- **Conditional probability** explains how probabilities change when information is known; independence describes when they do not change.
-- **Total probability** combines contributions from different cases and often relies on independence assumptions to simplify models.
-- **Bayes' reasoning** depends critically on understanding when events are independent or conditionally independent.
-- **Random variables** extend independence from events to numerical quantities.
-- **Joint distributions** reflect independence through their factorization structure.
+- **[Conditional probability](!/probability/conditional-probability)** explains how probabilities change when information is known; independence describes when they do not change.
+- **[Total probability](!/probability/total-probability)** combines contributions from different cases and often relies on independence assumptions to simplify models.
+- **[Bayes' reasoning](!/probability/bayes-theorem#independence)** depends critically on understanding when events are independent or conditionally independent.
+- **[Random variables](!/probability/random-variables)** extend independence from events to numerical quantities.
+- **[Joint distributions](!/probability/joint-probability#distributions)** reflect independence through their factorization structure.
 
 Seeing these connections makes independence easier to recognize and prevents it from being treated as an isolated rule rather than a structural idea running through probability.
 `,

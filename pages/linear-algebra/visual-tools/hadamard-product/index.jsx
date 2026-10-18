@@ -685,7 +685,7 @@ Compare with the standard product $A \\times B$: it is undefined here because $A
 
 [Matrix addition](!/linear-algebra/visual-tools/matrix-addition) — the additive element-wise operation; same shape requirement, same result-shape behavior as Hadamard.
 
-**Kronecker product** — a different "tensor" product of two matrices producing a much larger result; sometimes confused with Hadamard but unrelated.
+**[Kronecker product](!/linear-algebra/calculators/matrix#kronecker-product)** — a different "tensor" product of two matrices producing a much larger result; sometimes confused with Hadamard but unrelated.
 
 [Outer product](!/linear-algebra/visual-tools/vector-outer-product) — the vector-vector product producing a rank-1 matrix; another distinct operation.
 

@@ -755,17 +755,17 @@ Similar reasoning explains other rules. For [divisibility by 4](!#divisibility-r
       title: `Related Concepts`,
       content: `Divisibility connects to many fundamental arithmetic and number theory concepts:
 
-• **Factors and Multiples** - If a is divisible by b, then b is a factor of a, and a is a multiple of b
+• **[Factors and Multiples](!/arithmetic/divisibility/factors)** - If a is divisible by b, then b is a factor of a, and a is a multiple of b
 
-• **Prime Numbers** - Numbers divisible only by 1 and themselves. Primes have exactly two divisors
+• **[Prime Numbers](!/algebra/sequences/prime-numbers)** - Numbers divisible only by 1 and themselves. Primes have exactly two divisors
 
-• **Greatest Common Divisor (GCD)** - The largest number that divides two integers. Found using divisibility relationships
+• **[Greatest Common Divisor (GCD)](!/arithmetic/divisibility/gcd)** - The largest number that divides two integers. Found using divisibility relationships
 
-• **Least Common Multiple (LCM)** - The smallest number divisible by two integers
+• **[Least Common Multiple (LCM)](!/arithmetic/divisibility/lcm)** - The smallest number divisible by two integers
 
-• **Prime Factorization** - Breaking numbers into prime factors reveals all divisibility relationships
+• **[Prime Factorization](!/arithmetic/divisibility#8)** - Breaking numbers into prime factors reveals all divisibility relationships
 
-• **Modular Arithmetic** - [Divisibility rules](!#the-twelve-divisibility-rules) are applications of modular arithmetic, where a is divisible by b means a ≡ 0 (mod b)
+• **[Modular Arithmetic](!/arithmetic/modulo)** - [Divisibility rules](!#the-twelve-divisibility-rules) are applications of modular arithmetic, where a is divisible by b means a ≡ 0 (mod b)
 • [Divisibility Tiles](!/arithmetic/visual-tools/divisibility-tiles) - The same rules shown as tiles arranged in rows, with the remainder left over in the last row
 • [Divisibility Decision Tree](!/arithmetic/visual-tools/divisibility-tree) - The rules applied one after another as a yes/no tree for a single number
 • [Modular Arithmetic Wheel](!/arithmetic/visual-tools/modular-wheel) - Divisibility by n is remainder zero on the wheel with n positions

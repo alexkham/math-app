@@ -677,6 +677,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import determinantDiagrams from '@/app/components/linear-algebra copy/determinants/determinantDiagrams'
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -857,7 +859,12 @@ $$A = \\begin{pmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\
 
 the determinant is computed by expanding along the first row:
 
+@academic[formula_callout:Determinant 3x3
 $$\\det(A) = a_{11}(a_{22}a_{33} - a_{23}a_{32}) - a_{12}(a_{21}a_{33} - a_{23}a_{31}) + a_{13}(a_{21}a_{32} - a_{22}a_{31})$$
+/linear-algebra/formulas#determinant_3x3]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Each first-row entry multiplies the $2 \\times 2$ determinant of the submatrix that remains after deleting that entry's row and column. The signs alternate: $+, -, +$.
 
@@ -1132,8 +1139,37 @@ const schemas = {
     }),
   };
 
+  const singularCases = {
+    prefaceTitle: 'A sharp dividing line',
+    preface: 'The value $\\det(A) = 0$ splits square matrices in two. The determinant answers the single most important structural question about a square matrix in a single number.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'A nonsingular matrix stretches or compresses volumes by $|\\det(A)|$ without collapsing any dimension; a singular one flattens regions of positive volume down to zero volume.',
+    parent: {
+      kicker: 'Square matrix',
+      formula: '$\\det(A)$, $A$ is $n \\times n$',
+      splitBy: 'whether $\\det(A) = 0$',
+    },
+    cases: [
+      {
+        id: 'singular', condition: '$\\det(A) = 0$',
+        count: { n: '0' },
+        headline: 'Singular',
+        desc: 'the columns are linearly dependent, $Ax = \\mathbf{0}$ has nontrivial solutions, the rank is less than $n$, and at least one dimension collapses',
+        details: 'See [linear dependence](!/linear-algebra/vector-spaces/linear-independence).',
+      },
+      {
+        id: 'nonsingular', condition: '$\\det(A) \\neq 0$',
+        count: { n: '✓' },
+        headline: 'Nonsingular (invertible)',
+        desc: 'the columns form a basis, $Ax = \\mathbf{b}$ has exactly one solution for every $\\mathbf{b}$, and $A^{-1}$ exists',
+        details: 'The map $x \\mapsto Ax$ is a bijection from $\\mathbb{R}^n$ to itself. See [basis](!/linear-algebra/vector-spaces/basis).',
+      },
+    ],
+  };
+
   return {
   props: {
+    singularCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1151,7 +1187,9 @@ const schemas = {
   }
 }
    }
-export default function DeterminantsPage({
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function DeterminantsPage({singularCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1206,6 +1244,14 @@ export default function DeterminantsPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="determinant-singular-nonsingular-cases"
+            title="Singular or nonsingular: what det(A) = 0 decides"
+            source="/linear-algebra/determinants"
+          >
+            <CaseSplit data={singularCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

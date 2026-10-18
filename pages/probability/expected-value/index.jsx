@@ -1064,11 +1064,13 @@ Expected value is always computed the same way: we take each possible value of t
 When probabilities are obtained from data or observations rather than a formula, we still compute expected value as a weighted sum. Each observed value $x_i$ is multiplied by its corresponding probability $P(X = x_i)$, and these products are summed.
 
 This gives the formula:
-$$E[X] = \\sum_{i} x_i \\cdot P(X = x_i)$$
+@academic[formula_callout:**How to Calculate Expected Value**
+$$E[X] = \\sum_{i} x_i \\cdot P(X = x_i)$$]@
 
 or equivalently, using $p_i$ to denote the probability of outcome $i$:
 
-$$E[X] = \\sum_{i} x_i \\cdot p_i$$
+@academic[formula_callout:**How to Calculate Expected Value**
+$$E[X] = \\sum_{i} x_i \\cdot p_i$$]@
 
 This is the same weighted average principle, but applied to a specific set of values and their empirically determined probabilities—such as those found in a probability table or derived from experimental data.
 
@@ -1076,7 +1078,8 @@ This is the same weighted average principle, but applied to a specific set of va
 For discrete variables, we use a weighted sum: multiply each value $x$ by its probability $p(x)$, then add all these products together. 
 
 This gives the formula:
-$$E(X) = Σ x · p(x)$$
+@academic[formula_callout:**How to Calculate Expected Value**
+$$E(X) = Σ x · p(x)$$]@
 
 It is simply a probability-weighted average of all possible outcomes.
 
@@ -1085,7 +1088,8 @@ For continuous variables, we replace the weighted sum with a weighted integral: 
 
 This gives the formula: 
 
-$$E(X) = ∫ x · f(x) dx$$ 
+@academic[formula_callout:**How to Calculate Expected Value**
+$$E(X) = ∫ x · f(x) dx$$ ]@
 
 Here, the density $f(x)$ plays a role similar to $p(x)$, except probabilities come from the area under the curve rather than point values.
 
@@ -1107,12 +1111,60 @@ To compute an expected value from your own values and probabilities, use the [ex
 Sometimes we are not interested in the expected value of $X$ itself, but in the expected value of some function of $X$. This happens in many situations: when computing variance, when working with powers of $X$, when modeling profits or losses, or any time we transform the random variable into something new. The idea is exactly the same as before: we weight the values of $g(X)$ by the probability function of $X$.
 
 **Discrete Case**  
-For discrete variables, we take all possible values of $X$, apply the function $g$ to each one, multiply by the probability $p(x)$, and add the results. The formula is $E[g(X)] = Σ g(x) · p(x)$. This gives the long-run average of the transformed quantity $g(X)$.
+For discrete variables, we take all possible values of $X$, apply the function $g$ to each one, multiply by the probability $p(x)$, and add the results. The formula is $E[g(X)] = Σ g(x) · p(x)$.
+
+@academic[formula_callout:LOTUS Discrete
+$$E[g(X)] = \\sum_{x} g(x)\\,p_X(x)$$
+/probability/formulas#lotus_discrete]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
+This gives the long-run average of the transformed quantity $g(X)$.
 
 **Continuous Case**  
-For continuous variables, we do the same but with an integral instead of a sum. We multiply $g(x)$ by the density $f(x)$ and integrate across all possible values. The formula is $E[g(X)] = ∫ g(x) f(x) dx$. The density determines how much each transformed value contributes to the final average.
+For continuous variables, we do the same but with an integral instead of a sum. We multiply $g(x)$ by the density $f(x)$ and integrate across all possible values. The formula is $E[g(X)] = ∫ g(x) f(x) dx$.
+
+@academic[formula_callout:LOTUS Continuous
+$$E[g(X)] = \\int_{-\\infty}^{\\infty} g(x)\\,f_X(x)\\,dx$$
+/probability/formulas#lotus_continuous]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
+The density determines how much each transformed value contributes to the final average.
 
 Expected value of a function is a fundamental idea because it appears everywhere: in variance, in risk analysis, in moments of distributions, and in many applied calculations where the quantity of interest is built from $X$ rather than $X$ itself.
+
+Choosing $g(X) = e^{tX}$ gives the moment generating function, and $g(X) = X^k$ gives the $k$th moment:
+
+@academic[formula_callout:MGF Definition
+$$M_X(t) = E\\!\\left[e^{tX}\\right]$$
+/probability/formulas#mgf_definition]@
+
+@academic[formula_callout:MGF Moments
+$$M_X^{(k)}(0) = E[X^k]$$
+/probability/formulas#mgf_moments]@
+
+@academic[formula_callout:MGF of Sum (Independent)
+$$M_{X + Y}(t) = M_X(t) \\cdot M_Y(t)$$
+/probability/formulas#mgf_of_sum_independent]@
+
+@academic[formula_callout:kth Moment
+$$E[X^k]$$
+/probability/formulas#kth_moment]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
+Expectation can also be taken given the value of another variable:
+
+@academic[formula_callout:Conditional Expectation Definition
+$$E[X \\mid Y = y] = \\sum_{x} x\\,p_{X \\mid Y}(x \\mid y) \\quad \\text{or} \\quad \\int x\\,f_{X \\mid Y}(x \\mid y)\\,dx$$
+/probability/formulas#conditional_expectation_definition]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 `,
       before:``,
       after:``,
@@ -1134,8 +1186,28 @@ If we multiply a random variable by a constant or shift it by adding a constant,
  $E(aX + b) = aE(X) + b$. 
 This shows how expectation responds to changes of units, rescaling, or adding fixed adjustments.
 
+**Expected value of a constant**  
+A constant has no randomness, so its expected value is the constant itself:
+
+@academic[formula_callout:Expected Value of Constant
+$$E[c] = c$$
+/probability/formulas#expected_value_of_constant]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
 **Expectation of a Product (Independence Case)**  
 For independent variables, expectation interacts cleanly with multiplication: $E(XY) = E(X)E(Y)$. This is not true in general when X and Y are dependent, but it is an important special case that appears often in probability and statistics.
+
+**Law of Iterated Expectation**  
+Averaging the conditional expectation over $Y$ recovers the overall expectation:
+
+@academic[formula_callout:Law of Iterated Expectation
+$$E\\!\\left[E[X \\mid Y]\\right] = E[X]$$
+/probability/formulas#law_of_iterated_expectation]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 **When Expected Value Exists**  
 Expected value is not guaranteed to be finite for every distribution. Some distributions, such as the Cauchy distribution, have no defined expected value because the integral diverges. This reminds us that expectation is a mathematical quantity that depends on the shape and behavior of the probability function.
@@ -1153,6 +1225,15 @@ The rules above can be lined up as a single reference, pairing each property wit
       title:`**Expected Value of a Sum**`,
       content:`
 A key fact about expected value is that it adds up cleanly when random variables are added. If we combine two random variables by adding them, the expected value of the total is simply the sum of their individual expected values. In symbols, $E(X + Y) = E(X) + E(Y)$. This rule works whether the variables are independent or dependent, which makes it unusually powerful.
+
+More generally, for constants $a$ and $b$:
+
+@academic[formula_callout:Linearity of Expectation
+$$E[aX + bY] = a\\,E[X] + b\\,E[Y]$$
+/probability/formulas#linearity_of_expectation]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The same idea extends to any number of variables: $E(X1 + X2 + ... + Xn) = E(X1) + E(X2) + ... + E(Xn)$. This property allows complicated expressions to be handled piece by piece, turning difficult problems into simple ones whose individual expectations are easy to compute. Because of this, linearity of expectation is one of the most widely used tools in probability.
 `,
@@ -1226,7 +1307,8 @@ Suppose we define some [discrete random variable](!/probability/random-variables
 
 The expected value is calculated by multiplying each value by its probability and summing:
 
-$$E[X] = 0\\cdot0.1 + 1\\cdot0.3 + 2\\cdot0.4 + 3\\cdot0.2 = 1.7$$
+@academic[formula_callout:**Calculating Expected Value: General Case**
+$$E[X] = 0\\cdot0.1 + 1\\cdot0.3 + 2\\cdot0.4 + 3\\cdot0.2 = 1.7$$]@
 
 ### Intuition :
 
@@ -1248,7 +1330,12 @@ In both discrete and continuous settings, the underlying calculation principle i
 
 If a discrete random variable $X$ has probability mass function $p(x)=P(X=x)$, its expected value is defined by
 
+@academic[formula_callout:Expected Value (Discrete)
 $$E[X]=∑x⋅p(x)$$
+/probability/formulas#expected_value_discrete]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The summation runs over all values in the support of $X$. The PMF provides the weights, and the summation combines all weighted contributions into a single number.
 
@@ -1262,21 +1349,25 @@ This formulation is especially useful when probabilities follow a clear rule or 
 
 Let a discrete random variable $X$ take the values $1, 2, 3, 4$, and suppose its probability mass function is defined by the formula
 
-$$p(x) = P(X = x) = \\frac{x}{10}, \\quad x = 1, 2, 3, 4.$$
+@academic[formula_callout:**Expected Value for Discrete Random Variables (PMF)**
+$$p(x) = P(X = x) = \\frac{x}{10}, \\quad x = 1, 2, 3, 4.$$]@
 
 (Indeed, $\\frac{1+2+3+4}{10} = 1$, so this is a valid PMF.)
 
 Using the definition of expected value for a discrete random variable,
 
-$$E[X] = \\sum_{x} x \\cdot p(x),$$
+@academic[formula_callout:**Expected Value for Discrete Random Variables (PMF)**
+$$E[X] = \\sum_{x} x \\cdot p(x),$$]@
 
 we substitute the PMF formula directly:
 
-$$E[X] = \\sum_{x=1}^{4} x \\cdot \\frac{x}{10} = \\frac{1}{10} \\sum_{x=1}^{4} x^2.$$
+@academic[formula_callout:**Expected Value for Discrete Random Variables (PMF)**
+$$E[X] = \\sum_{x=1}^{4} x \\cdot \\frac{x}{10} = \\frac{1}{10} \\sum_{x=1}^{4} x^2.$$]@
 
 Now compute the sum:
 
-$$E[X] = \\frac{1}{10}(1^2 + 2^2 + 3^2 + 4^2) = \\frac{1}{10}(1 + 4 + 9 + 16) = \\frac{30}{10} = 3.$$
+@academic[formula_callout:**Expected Value for Discrete Random Variables (PMF)**
+$$E[X] = \\frac{1}{10}(1^2 + 2^2 + 3^2 + 4^2) = \\frac{1}{10}(1 + 4 + 9 + 16) = \\frac{30}{10} = 3.$$]@
 
 This example shows how expected value can be calculated directly from a probability function formula, without listing probabilities individually. The structure of the PMF determines the calculation.
       
@@ -1291,7 +1382,12 @@ When a continuous random variable is described by a probability density function
 
 If a continuous random variable $X$ has probability density function $f(x)$, its expected value is defined by
 
+@academic[formula_callout:Expected Value (Continuous)
 $$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot f(x) \\, dx$$
+/probability/formulas#expected_value_continuous]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The integral runs over all values in the support of $X$. The PDF provides the weights, and the integration combines all weighted contributions into a single number.
 
@@ -1301,21 +1397,25 @@ This formulation is especially useful when densities follow a clear rule or patt
 
 Let a continuous random variable $X$ be defined on the interval $[0, 2]$, and suppose its probability density function is defined by the formula
 
-$$f(x) = \\frac{x}{2}, \\quad 0 \\leq x \\leq 2.$$
+@academic[formula_callout:**Continuous Random Variables (using a PDF)**
+$$f(x) = \\frac{x}{2}, \\quad 0 \\leq x \\leq 2.$$]@
 
 (Indeed, $\\int_{0}^{2} \\frac{x}{2} \\, dx = \\frac{1}{2} \\cdot \\frac{x^2}{2} \\bigg|_{0}^{2} = \\frac{4}{4} = 1$, so this is a valid PDF.)
 
 Using the definition of expected value for a continuous random variable,
 
-$$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot f(x) \\, dx,$$
+@academic[formula_callout:**Continuous Random Variables (using a PDF)**
+$$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot f(x) \\, dx,$$]@
 
 we substitute the PDF formula directly:
 
-$$E[X] = \\int_{0}^{2} x \\cdot \\frac{x}{2} \\, dx = \\frac{1}{2} \\int_{0}^{2} x^2 \\, dx.$$
+@academic[formula_callout:**Continuous Random Variables (using a PDF)**
+$$E[X] = \\int_{0}^{2} x \\cdot \\frac{x}{2} \\, dx = \\frac{1}{2} \\int_{0}^{2} x^2 \\, dx.$$]@
 
 Now compute the integral:
 
-$$E[X] = \\frac{1}{2} \\cdot \\frac{x^3}{3} \\bigg|_{0}^{2} = \\frac{1}{2} \\cdot \\frac{8}{3} = \\frac{4}{3} \\approx 1.33.$$
+@academic[formula_callout:**Continuous Random Variables (using a PDF)**
+$$E[X] = \\frac{1}{2} \\cdot \\frac{x^3}{3} \\bigg|_{0}^{2} = \\frac{1}{2} \\cdot \\frac{8}{3} = \\frac{4}{3} \\approx 1.33.$$]@
 
 This example shows how expected value can be calculated directly from a probability density function formula, without approximating with discrete intervals. The structure of the PDF determines the calculation.
       

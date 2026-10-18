@@ -652,15 +652,15 @@ Use the Divisibility Tiles tool to verify these rules visually. Enter a number, 
       title: `Related Concepts and Tools`,
       content: `Divisibility connects to many foundational arithmetic and number theory topics:
 
-**Factors and Multiples**: Understanding which numbers divide evenly leads to finding all factors of a number and recognizing multiples of common divisors.
+**[Factors and Multiples](!/arithmetic/divisibility/factors)**: Understanding which numbers divide evenly leads to finding all factors of a number and recognizing multiples of common divisors.
 
-**Greatest Common Divisor (GCD)**: The largest number that divides two integers evenly. Essential for simplifying **fractions** to lowest terms.
+**[Greatest Common Divisor (GCD)](!/arithmetic/divisibility/gcd)**: The largest number that divides two integers evenly. Essential for simplifying **fractions** to lowest terms.
 
-**Least Common Multiple (LCM)**: The smallest number divisible by two given integers. Used when adding fractions with different [denominators](!/arithmetic/fractions#2).
+**[Least Common Multiple (LCM)](!/arithmetic/divisibility/lcm)**: The smallest number divisible by two given integers. Used when adding fractions with different [denominators](!/arithmetic/fractions#2).
 
-**Prime Factorization**: Breaking numbers into prime factors reveals all divisibility relationships and provides a systematic approach to finding GCD and LCM.
+**[Prime Factorization](!/arithmetic/divisibility#8)**: Breaking numbers into prime factors reveals all divisibility relationships and provides a systematic approach to finding GCD and LCM.
 
-**Modular Arithmetic**: Extends [remainder concepts](!#division-quotients-and-remainders) into a complete number system used in cryptography, computer science, and advanced mathematics.
+**[Modular Arithmetic](!/arithmetic/modulo)**: Extends [remainder concepts](!#division-quotients-and-remainders) into a complete number system used in cryptography, computer science, and advanced mathematics.
 
 [Divisibility Table](!/arithmetic/visual-tools/divisibility-table): The same twelve rules stated and tested for any number, side by side.
 

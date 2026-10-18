@@ -205,13 +205,13 @@ Step through the visualizer with either method to see the same three expressions
 
 [Determinant](!/linear-algebra/visual-tools/matrix-determinant) — the $2 \\times 2$ determinants inside each component, and the $3 \\times 3$ mnemonic that organises them.
 
-**Scalar triple product** — $\\mathbf{u} \\cdot (\\mathbf{v} \\times \\mathbf{w})$, the signed volume of a parallelepiped.
+**[Scalar triple product](!/linear-algebra/vectors/cross-product#7)** — $\\mathbf{u} \\cdot (\\mathbf{v} \\times \\mathbf{w})$, the signed volume of a parallelepiped.
 
 **Normal vector** — a vector perpendicular to a plane or surface; cross products are the usual way to produce one.
 
-**Right-hand rule** — the orientation convention that picks the sign of the cross product.
+**[Right-hand rule](!/linear-algebra/vectors/cross-product#4)** — the orientation convention that picks the sign of the cross product.
 
-**Orthogonality** — the relationship the cross product guarantees between its output and each of its inputs.
+**[Orthogonality](!/linear-algebra/orthogonality)** — the relationship the cross product guarantees between its output and each of its inputs.
 
 **Wedge product** — the generalization to any dimension, returning an oriented area rather than a vector.
 

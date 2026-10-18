@@ -896,7 +896,12 @@ This construction converts an event into a numerical object defined on the same 
 Let $A$ be an event in a probability experiment.  
 The indicator [random variable](!/probability/random-variables) of $A$, denoted by $I_A$, is defined by
 
- $I_A(\\omega)=\\begin{cases}1, & \\text{if } \\omega \\in A \\\\ 0, & \\text{if } \\omega \\notin A\\end{cases}$
+@academic[formula_callout:Indicator Random Variable Definition
+$$I_A(\\omega)=\\begin{cases}1, & \\text{if } \\omega \\in A \\\\ 0, & \\text{if } \\omega \\notin A\\end{cases}$$
+/probability/formulas#indicator_random_variable_definition]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 
 The indicator $I_A$ is a [random variable](!/probability/random-variables) defined on the same [sample space](!/probability/sample-space) as the experiment.  
@@ -965,6 +970,28 @@ Simple relationships follow directly from the definition:
 • The indicator of the complement event equals $1 - I_A$
 • Indicators reflect set operations at the level of outcomes
 
+Stated formally, for events $A$ and $B$:
+
+@academic[formula_callout:Indicator of Intersection
+$$I_{A \\cap B} = I_A \\cdot I_B$$
+/probability/formulas#indicator_of_intersection]@
+
+@academic[formula_callout:Indicator of Complement
+$$I_{A^c} = 1 - I_A$$
+/probability/formulas#indicator_of_complement]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
+Because an indicator takes only the values $0$ and $1$, its variance is fixed by the probability of the event:
+
+@academic[formula_callout:Variance of Indicator
+$$\\operatorname{Var}(I_A) = P(A)\\bigl(1 - P(A)\\bigr)$$
+/probability/formulas#variance_of_indicator]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
 These properties allow indicators to be combined and manipulated algebraically without introducing new probability assumptions.
 `,
       before:``,
@@ -978,7 +1005,13 @@ These properties allow indicators to be combined and manipulated algebraically w
 The expected value of an indicator random variable equals the probability of its event.
 
 For an event $A$ with indicator $I_A$,
-$E[I_A]=P(A)$
+
+@academic[formula_callout:Expectation of Indicator
+$$E[I_A]=P(A)$$
+/probability/formulas#expectation_of_indicator]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 This holds because $I_A$ takes the value $1$ exactly on outcomes in $A$ and $0$ otherwise.  
 Expectation therefore counts how often the event occurs in probability terms.

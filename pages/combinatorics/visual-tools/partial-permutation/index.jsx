@@ -757,9 +757,9 @@ Sixty is also where enumeration starts arguing for the formula: every card is on
 
 [Combination](!/combinatorics/visual-tools/combination) — the unordered companion of the partial permutation. Drops the order requirement, so $C(n, r) = P(n, r) / r!$.
 
-**Multiplication principle** — the [foundational counting rule](!#deriving-p-n-r-step-by-step) that produces $P(n, r)$ as the product of choices at each successive position.
+**[Multiplication principle](!/combinatorics/counting-principles#2)** — the [foundational counting rule](!#deriving-p-n-r-step-by-step) that produces $P(n, r)$ as the product of choices at each successive position.
 
-**Combinatorics calculator** — to compute $P(n, r)$ for arbitrary values of $n$ and $r$, see the **partial permutation calculator**.`,
+**[Combinatorics calculator](!/combinatorics/calculator#partial-permutation-without-repetition)** — to compute $P(n, r)$ for arbitrary values of $n$ and $r$, see the **partial permutation calculator**.`,
       before: ``,
       after: ``,
       link: '',

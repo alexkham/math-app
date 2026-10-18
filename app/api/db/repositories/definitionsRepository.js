@@ -19716,7 +19716,7 @@ const definitionsRepository = [
         "url": "/probability/formulas#equally_likely_events"
       },
       {
-        "name": "Conditional Probability Definition",
+        "name": "Conditional Probability",
         "url": "/probability/formulas#conditional_probability"
       },
       {

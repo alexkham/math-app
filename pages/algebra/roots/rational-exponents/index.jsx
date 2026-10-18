@@ -11,6 +11,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -888,8 +890,37 @@ const schemas = {
     }),
   };
 
+  const ratExpDomainCases = {
+    prefaceTitle: 'Inherited from radicals',
+    preface: 'Rational exponents inherit the domain restrictions of radicals. Whether a negative base is allowed depends on the denominator of the exponent.',
+    conclusionTitle: 'One more restriction',
+    conclusion: 'When the exponent is negative, $a \\neq 0$ is required as well: division by zero is undefined. The restrictions apply equally to $\\sqrt[n]{a}$ and $a^{1/n}$.',
+    parent: {
+      kicker: 'Rational exponent',
+      formula: '$a^{m/n}$',
+      splitBy: 'whether the denominator $n$ is even or odd',
+    },
+    cases: [
+      {
+        id: 'even', condition: '$n$ even',
+        count: { n: '≥0' },
+        headline: 'Base must be non-negative',
+        desc: 'no real number squares to a negative number; the expression would require complex numbers',
+        example: '$(-4)^{1/2}$ is not real',
+      },
+      {
+        id: 'odd', condition: '$n$ odd',
+        count: { n: 'ℝ' },
+        headline: 'Any real base',
+        desc: 'negative bases have real odd roots',
+        example: '$(-8)^{1/3} = -2$',
+      },
+    ],
+  };
+
 return {
   props: {
+    ratExpDomainCases,
     sectionsContent,
     introContent,
     obj4Table,
@@ -912,7 +943,9 @@ return {
 // export default function RationalExponentsPage({seoData,sectionsContent , introContent}) {
 
 
-export default function RationalExponentsPage({seoData, sectionsContent, introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function RationalExponentsPage({ratExpDomainCases, seoData, sectionsContent, introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -970,6 +1003,14 @@ export default function RationalExponentsPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="rational-exponent-domain-cases"
+            title="Rational exponents: which bases are allowed"
+            source="/algebra/roots/rational-exponents"
+          >
+            <CaseSplit data={ratExpDomainCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

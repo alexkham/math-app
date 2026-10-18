@@ -195,7 +195,7 @@ The visualizer above mirrors this process symbolically — set the dimensions to
     },
     obj10: {
       title: `Related Concepts`,
-      content: `**Matrix operations** — the broader family that includes addition, subtraction, multiplication, transposition, and inversion.
+      content: `**[Matrix operations](!/linear-algebra/matrix/operations)** — the broader family that includes addition, subtraction, multiplication, transposition, and inversion.
 
 [Scalar multiplication](!/linear-algebra/visual-tools/matrix-scalar-multiplication) — multiplying every entry of a matrix by a number; like addition, it is element-wise and preserves shape.
 
@@ -205,7 +205,7 @@ The visualizer above mirrors this process symbolically — set the dimensions to
 
 [Vector addition](!/linear-algebra/visual-tools/vector-addition) — the special case where both matrices are row or column vectors; the same element-wise rule applies.
 
-**Zero matrix** — the additive identity, with every entry equal to zero.
+**[Zero matrix](!/linear-algebra/matrix#3)** — the additive identity, with every entry equal to zero.
 
 [Transpose](!/linear-algebra/visual-tools/matrix-transpose) — reflecting a matrix across its main diagonal; useful when combining matrices of incompatible shapes through related operations.`,
       before: ``,

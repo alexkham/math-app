@@ -21,7 +21,13 @@ const fmt = (n) => {
 // =====================================================
 function computeBrowse(rawN, sequence, max) {
   const cap = max || 200;
-  const n = Math.max(1, Math.min(cap, parseInt(rawN, 10) || 20));
+  // a whole number from 1 up; anything else (0, a decimal, a blank box) is refused, a larger number is cut to the cap
+  const rawStr = String(rawN).trim();
+  const parsed = Number(rawStr);
+  if (rawStr === '' || !Number.isInteger(parsed) || parsed < 1) {
+    return { error: 'Enter a positive integer.' };
+  }
+  const n = Math.min(cap, parsed);
   const terms = [];
   let sum = sequence.zero ?? 0;
   for (let i = 1; i <= n; i++) {
@@ -673,6 +679,13 @@ function SequenceExplorer({ name = 'triangular', explanations = null }) {
                     <button className="se-action" onClick={runBrowse}>Update</button>
                   </div>
 
+                  {browseResult.error ? (
+                    <div className="se-alert se-alert-err">
+                      <div className="se-alert-icon">!</div>
+                      <div>{browseResult.error}</div>
+                    </div>
+                  ) : (
+                    <>
                   <div className="se-stats">
                     <div className="se-stat">
                       <div className="se-stat-label">Showing</div>
@@ -703,6 +716,8 @@ function SequenceExplorer({ name = 'triangular', explanations = null }) {
                       ))}
                     </div>
                   </div>
+                    </>
+                  )}
                 </div>
               )}
 
@@ -847,7 +862,7 @@ function SequenceExplorer({ name = 'triangular', explanations = null }) {
               </section>
               <section className="se-aside-section">
                 <h3 className="se-aside-heading">Walkthrough</h3>
-                <div className="se-aside-content">{processContent(modeExp.renderWalkthrough(currentResult))}</div>
+                <div className="se-aside-content">{processContent(currentResult && currentResult.error ? `**Cannot compute:** ${currentResult.error}` : modeExp.renderWalkthrough(currentResult))}</div>
               </section>
             </>
           )}

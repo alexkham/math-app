@@ -187,11 +187,11 @@ This page explores contradictions in detail, examining their properties, relatio
       title:'Definition',
       description:`A **contradiction** is a proposition that is always false, regardless of the truth values of its components. In [propositional logic](!/logic/propositional-logic), a contradiction is a formula that evaluates to false under all possible truth assignments.
 
-**Example**:
+@academic[example:Example
 
 \t\t\t\t\t$P∧¬P$
 
-(The [law](!/logic/propositional-logic/laws) of non-contradiction: "P and not P" is always false.)
+(The [law](!/logic/propositional-logic/laws) of non-contradiction: "P and not P" is always false.)]@
 `
     },
 

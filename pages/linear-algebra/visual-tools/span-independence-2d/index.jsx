@@ -194,7 +194,7 @@ The test is exact in arithmetic but delicate in floating point. The near-aligned
       title: `Related Concepts`,
       content: `[Linear combination](!/linear-algebra/visual-tools/matrix-linear-combination) &mdash; the operation whose outputs make up the span.
 
-**Basis** &mdash; an independent set that spans; two independent vectors in $\\mathbb{R}^2$ are a basis of the plane.
+**[Basis](!/linear-algebra/vector-spaces/basis#2)** &mdash; an independent set that spans; two independent vectors in $\\mathbb{R}^2$ are a basis of the plane.
 
 [Determinant](!/linear-algebra/visual-tools/matrix-determinant) &mdash; the area test for independence of two vectors, and its generalization to $n$ vectors in $\\mathbb{R}^n$.
 
@@ -202,11 +202,11 @@ The test is exact in arithmetic but delicate in floating point. The near-aligned
 
 [Change of basis](!/linear-algebra/visual-tools/change-basis-2d) &mdash; what an independent pair lets you do: give every vector coordinates.
 
-**Subspace** &mdash; the span of any set of vectors is a subspace; a line or plane through the origin.
+**[Subspace](!/linear-algebra/vector-spaces/subspaces)** &mdash; the span of any set of vectors is a subspace; a line or plane through the origin.
 
 [Cross product](!/linear-algebra/visual-tools/vector-cross-product) &mdash; in $\\mathbb{R}^3$ the analogous area test: $\\mathbf{a} \\times \\mathbf{b} = \\mathbf{0}$ exactly when the pair is dependent.
 
-**Dimension** &mdash; the size of a basis; the rank of the pair is the dimension of its span.`,
+**[Dimension](!/linear-algebra/vector-spaces/dimension)** &mdash; the size of a basis; the rank of the pair is the dimension of its span.`,
       before: ``,
       after: ``,
       link: '',

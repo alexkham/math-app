@@ -63,7 +63,7 @@
  */
 
 import React, { useState, useMemo, useCallback, useRef, isValidElement } from 'react';
-import { processContent } from './processContent';
+import { processContent } from '@/app/utils/contentProcessor';
 import { useExport } from './utils/useExport';
 import ExportButton from './utils/ExportButton';
 

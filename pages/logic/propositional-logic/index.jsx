@@ -195,30 +195,30 @@ In addition to these core concepts, **syntax trees** are used to visually repres
 ## 1.Logical Equivalence:
 
 Two propositions $P$ and $Q$ are logically equivalent (denoted $P≡Q$) if they have the same truth value in every possible interpretation.
-**Example**:
+@academic[example:Example
 \t\t\t\t\t\t$P∨Q≡Q∨P$
-(Commutativity of disjunction)
+(Commutativity of disjunction)]@
 Read more about [equivalence](!/logic/propositional-logic/semantics/equivalences).
 ## 2.Consistency & Inconsistency:
 
 A set of propositions is consistent if it is possible for all of them to be true at the same time.
 A set of propositions is inconsistent if they cannot all be true simultaneously (i.e., they lead to a contradiction).
-**Example**:
+@academic[example:Example
 The set {"It is raining", "It is not raining"} is inconsistent.
-The set {"It is raining", "The ground is wet"} is consistent.
+The set {"It is raining", "The ground is wet"} is consistent.]@
 ## 3.Implication (Entailment / Logical Consequence):
 
 A proposition $Q$ is a logical consequence of $P$ (denoted $P⊨Q$ — the [double turnstile](!/logic/propositional-logic/semantics/tautology#notation), one of the standard [logic symbols](!/math-symbols/math-logic)) if whenever $P$ is true, $Q$ must also be true.
-**Example**:
+@academic[example:Example
 \t\t\t\t\t\t$P=$ "It is raining."
 \t\t\t\t\t\t$Q=$ "The ground is wet."
-If $P$ is true, then $Q$ logically follows (assuming no weird circumstances).
+If $P$ is true, then $Q$ logically follows (assuming no weird circumstances).]@
 Read more about logical [implications](!/logic/propositional-logic/semantics/implication).
 ## 4. Independence:
 
 A proposition is independent of another if neither one logically determines the truth value of the other.
-**Example**:
-"It is raining" and "The stock market is up" are independent because knowing one does not tell us anything about the other.
+@academic[example:Example
+"It is raining" and "The stock market is up" are independent because knowing one does not tell us anything about the other.]@
 ## 5.Validity & Invalidity:
 
 A proposition is valid if it is true in all possible interpretations (i.e., a [tautology](!/logic/propositional-logic/semantics/tautology)).

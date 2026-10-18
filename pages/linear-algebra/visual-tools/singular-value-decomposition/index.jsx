@@ -232,11 +232,11 @@ $$U = \\frac{1}{\\sqrt{10}}\\begin{pmatrix} 1 & 3 \\\\ 3 & -1 \\end{pmatrix}, \\
 
 [Least squares and the pseudoinverse](!/linear-algebra/visual-tools/least-squares) — $A^+ = V\\Sigma^+U^T$.
 
-**Matrix norms and condition number** — $\\sigma_1$, $\\sqrt{\\sum\\sigma_i^2}$, and $\\sigma_1/\\sigma_r$.
+**[Matrix norms and condition number](!/linear-algebra/decompositions/svd#13)** — $\\sigma_1$, $\\sqrt{\\sum\\sigma_i^2}$, and $\\sigma_1/\\sigma_r$.
 
 [Linear transformations in 2D](!/linear-algebra/visual-tools/linear-transformation-2d) — the ellipse picture: unit circle to ellipse with semi-axes $\\sigma_i$.
 
-**Principal component analysis** — the SVD of a data matrix.`,
+**[Principal component analysis](!/linear-algebra/decompositions/spectral#7)** — the SVD of a data matrix.`,
       before: ``,
       after: ``,
       link: '',

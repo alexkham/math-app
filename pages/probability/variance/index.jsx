@@ -1277,6 +1277,15 @@ Variance of a [random variable](!/probability/random-variables) is a quantitativ
 
 To calculate it, we take each possible outcome, find how far it is from the mean, square that distance, and then average all those squared distances according to the probability of each outcome.
 
+In symbols, with $\\mu$ the mean:
+
+@academic[formula_callout:Variance Definition
+$$\\operatorname{Var}(X) = E\\!\\left[(X - \\mu)^2\\right]$$
+/probability/formulas#variance_definition]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
 The squaring step is crucial: it ensures that deviations above and below the mean both contribute positively to the measure, and it emphasizes larger deviations more heavily than smaller ones. A [random variable](!/probability/random-variables) with high variance produces outcomes that tend to be far from its expected value, while low variance indicates outcomes cluster tightly around the mean.
 
 This measure gives us our first quantitative tool for describing not where a distribution is centered, but how spread out or concentrated it is around that center.`,
@@ -1379,13 +1388,19 @@ calculate:{
   content:`
 The variance of a [random variable](!/probability/random-variables) $X$ with [expected value](!/probability/expected-value) $\\mu$ is formally defined as:
 
+@academic[formula_callout:Variance Definition
 $$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$$
+/probability/formulas#variance_definition]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 This is the expected value of the squared deviation from the mean.
 
 A computationally convenient alternative is the **shortcut formula**:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+@academic[formula_callout:How to Calculate Variance
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$]@
 
 This expresses variance as the difference between the expected value of the square and the square of the expected value.
 
@@ -1403,13 +1418,16 @@ When working with empirical data or tabulated probabilities (rather than a formu
 For a discrete [random variable](!/probability/random-variables) $X$ with observed values $x_1, x_2, \\ldots, x_n$ and corresponding probabilities $p_1, p_2, \\ldots, p_n$:
 
 **Step 1**: Calculate the [mean (expected value)](!/probability/expected-value):
-$$\\mu = \\sum_{i=1}^{n} x_i p_i$$
+@academic[formula_callout:Calculating Variance: General Case
+$$\\mu = \\sum_{i=1}^{n} x_i p_i$$]@
 
 **Step 2**: Calculate variance using the definition:
-$$\\mathrm{Var}(X) = \\sum_{i=1}^{n} (x_i - \\mu)^2 p_i$$
+@academic[formula_callout:Calculating Variance: General Case
+$$\\mathrm{Var}(X) = \\sum_{i=1}^{n} (x_i - \\mu)^2 p_i$$]@
 
 Or using the shortcut formula:
-$$\\mathrm{Var}(X) = \\left(\\sum_{i=1}^{n} x_i^2 p_i\\right) - \\mu^2$$
+@academic[formula_callout:Calculating Variance: General Case
+$$\\mathrm{Var}(X) = \\left(\\sum_{i=1}^{n} x_i^2 p_i\\right) - \\mu^2$$]@
 
 ### Example
 
@@ -1423,15 +1441,18 @@ Consider a small shop where the number of items sold on a given morning varies r
 
  This is the same data from the [expected value general case](!/probability/expected-value#general). First, we calculate the mean:
 
-$$\\mu = E[X] = 0(0.1) + 1(0.3) + 2(0.4) + 3(0.2) = 0 + 0.3 + 0.8 + 0.6 = 1.7$$
+@academic[formula_callout:Calculating Variance: General Case
+$$\\mu = E[X] = 0(0.1) + 1(0.3) + 2(0.4) + 3(0.2) = 0 + 0.3 + 0.8 + 0.6 = 1.7$$]@
 
 Now we calculate how spread out the sales are around this average of 1.7 items.
 
 Using the shortcut formula for variance:
 
-$$\\mathbb{E}[X^2] = 0^2(0.1) + 1^2(0.3) + 2^2(0.4) + 3^2(0.2) = 0 + 0.3 + 1.6 + 1.8 = 3.7$$
+@academic[formula_callout:Calculating Variance: General Case
+$$\\mathbb{E}[X^2] = 0^2(0.1) + 1^2(0.3) + 2^2(0.4) + 3^2(0.2) = 0 + 0.3 + 1.6 + 1.8 = 3.7$$]@
 
-$$\\mathrm{Var}(X) = 3.7 - (1.7)^2 = 3.7 - 2.89 = 0.81$$
+@academic[formula_callout:Calculating Variance: General Case
+$$\\mathrm{Var}(X) = 3.7 - (1.7)^2 = 3.7 - 2.89 = 0.81$$]@
 
 The variance is 0.81, indicating moderate spread around the mean of 1.7 items.
   `,
@@ -1442,11 +1463,13 @@ discrete:{
   content:`
 When a [discrete random variable](!/probability/random-variables#types) is described by a [probability mass function](!/probability/probability-function) $p(x) = P(X = x)$ given in formula form, variance is computed directly from that function.
 
-$$\\mathrm{Var}(X) = \\sum_{x} (x - \\mu)^2 p(x)$$
+@academic[formula_callout:Variance for Discrete Random Variables (PMF)
+$$\\mathrm{Var}(X) = \\sum_{x} (x - \\mu)^2 p(x)$$]@
 
 Or using the shortcut formula:
 
-$$\\mathrm{Var}(X) = \\sum_{x} x^2 p(x) - \\mu^2$$
+@academic[formula_callout:Variance for Discrete Random Variables (PMF)
+$$\\mathrm{Var}(X) = \\sum_{x} x^2 p(x) - \\mu^2$$]@
 
 where the sum runs over all values in the support of $X$.
 
@@ -1458,11 +1481,13 @@ From the [expected value example](!/probability/expected-value#discrete), we kno
 
 Calculate $\\mathbb{E}[X^2]$:
 
-$$\\mathbb{E}[X^2] = \\sum_{x=1}^{4} x^2 \\cdot \\frac{x}{10} = \\frac{1}{10}\\sum_{x=1}^{4} x^3 = \\frac{1}{10}(1 + 8 + 27 + 64) = \\frac{100}{10} = 10$$
+@academic[formula_callout:Variance for Discrete Random Variables (PMF)
+$$\\mathbb{E}[X^2] = \\sum_{x=1}^{4} x^2 \\cdot \\frac{x}{10} = \\frac{1}{10}\\sum_{x=1}^{4} x^3 = \\frac{1}{10}(1 + 8 + 27 + 64) = \\frac{100}{10} = 10$$]@
 
 Using the shortcut formula:
 
-$$\\mathrm{Var}(X) = 10 - 3^2 = 10 - 9 = 1$$
+@academic[formula_callout:Variance for Discrete Random Variables (PMF)
+$$\\mathrm{Var}(X) = 10 - 3^2 = 10 - 9 = 1$$]@
 
 The variance is 1, with standard deviation $\\sigma = \\sqrt{1} = 1$.
   `,
@@ -1475,11 +1500,13 @@ continuous:{
   content:`
 When a [continuous random variable](!/probability/random-variables#types) is described by a [probability density function](!/probability/probability-function) $f(x)$, variance is computed using integration.
 
-$$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 f(x) \\, dx$$
+@academic[formula_callout:Variance for Continuous Random Variables (PDF)
+$$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 f(x) \\, dx$$]@
 
 Or using the shortcut formula:
 
-$$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} x^2 f(x) \\, dx - \\mu^2$$
+@academic[formula_callout:Variance for Continuous Random Variables (PDF)
+$$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} x^2 f(x) \\, dx - \\mu^2$$]@
 
 ### Example
 
@@ -1489,11 +1516,13 @@ From the [expected value example](!/probability/expected-value#continuous), we k
 
 Calculate $\\mathbb{E}[X^2]$:
 
-$$\\mathbb{E}[X^2] = \\int_{0}^{2} x^2 \\cdot \\frac{x}{2} \\, dx = \\frac{1}{2}\\int_{0}^{2} x^3 \\, dx = \\frac{1}{2} \\cdot \\frac{x^4}{4}\\bigg|_{0}^{2} = \\frac{1}{8}(16) = 2$$
+@academic[formula_callout:Variance for Continuous Random Variables (PDF)
+$$\\mathbb{E}[X^2] = \\int_{0}^{2} x^2 \\cdot \\frac{x}{2} \\, dx = \\frac{1}{2}\\int_{0}^{2} x^3 \\, dx = \\frac{1}{2} \\cdot \\frac{x^4}{4}\\bigg|_{0}^{2} = \\frac{1}{8}(16) = 2$$]@
 
 Using the shortcut formula:
 
-$$\\mathrm{Var}(X) = 2 - \\left(\\frac{4}{3}\\right)^2 = 2 - \\frac{16}{9} = \\frac{18 - 16}{9} = \\frac{2}{9} \\approx 0.222$$
+@academic[formula_callout:Variance for Continuous Random Variables (PDF)
+$$\\mathrm{Var}(X) = 2 - \\left(\\frac{4}{3}\\right)^2 = 2 - \\frac{16}{9} = \\frac{18 - 16}{9} = \\frac{2}{9} \\approx 0.222$$]@
 
 The variance is $\\frac{2}{9}$, with standard deviation $\\sigma = \\sqrt{\\frac{2}{9}} = \\frac{\\sqrt{2}}{3} \\approx 0.471$.
   `,
@@ -1545,23 +1574,61 @@ Variance behaves according to several fundamental rules that govern how it respo
 
 **Scaling rule**: Multiplying a random variable by a constant $a$ scales its variance by $a^2$:
 
-$$\\mathrm{Var}(aX) = a^2 \\mathrm{Var}(X)$$
+@academic[formula_callout:Properties of Variance
+$$\\mathrm{Var}(aX) = a^2 \\mathrm{Var}(X)$$]@
 
 This quadratic relationship reflects the squaring in the definition. Doubling a random variable quadruples its variance.
 
 **Shifting rule**: Adding a constant $b$ to a random variable does not change its variance:
 
-$$\\mathrm{Var}(X + b) = \\mathrm{Var}(X)$$
+@academic[formula_callout:Properties of Variance
+$$\\mathrm{Var}(X + b) = \\mathrm{Var}(X)$$]@
 
 Shifting all outcomes by the same amount shifts the mean by the same amount, leaving all deviations unchanged.
 
+Together, the two rules give the variance of a linear transformation:
+
+@academic[formula_callout:Variance of Linear Transform
+$$\\operatorname{Var}(aX + b) = a^2\\,\\operatorname{Var}(X)$$
+/probability/formulas#variance_of_linear_transform]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
+**Computational formula**: Variance can also be computed from the first two moments:
+
+@academic[formula_callout:Variance Computational Formula
+$$\\operatorname{Var}(X) = E[X^2] - (E[X])^2$$
+/probability/formulas#variance_computational_formula]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
 **Independence and additivity**: For independent random variables $X$ and $Y$, variances add:
 
+@academic[formula_callout:Variance of Sum (Independent)
 $$\\mathrm{Var}(X + Y) = \\mathrm{Var}(X) + \\mathrm{Var}(Y)$$
+/probability/formulas#variance_of_sum_independent]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 This holds only when the variables are independent. Dependence introduces additional terms.
 
 **Variance is not linear**: Unlike expectation, variance does not distribute linearly over sums. The rule $\\mathrm{Var}(X + Y) \\neq \\mathrm{Var}(X) + \\mathrm{Var}(Y)$ in general makes variance more complex to work with than expectation.
+
+The same definition extends to variance given another variable, and to higher powers of the deviation:
+
+@academic[formula_callout:Conditional Variance Definition
+$$\\operatorname{Var}(X \\mid Y = y) = E\\!\\left[(X - E[X \\mid Y = y])^2 \\;\\big|\\; Y = y\\right]$$
+/probability/formulas#conditional_variance_definition]@
+
+@academic[formula_callout:kth Central Moment
+$$E\\!\\left[(X - \\mu)^k\\right]$$
+/probability/formulas#kth_central_moment]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 `,
       before:``,
@@ -1575,19 +1642,35 @@ When combining random variables, understanding how their variances interact is e
 
 **Independent case**: When $X$ and $Y$ are independent random variables, the variance of their sum equals the sum of their variances:
 
+@academic[formula_callout:Variance of Sum (Independent)
 $$\\mathrm{Var}(X + Y) = \\mathrm{Var}(X) + \\mathrm{Var}(Y)$$
+/probability/formulas#variance_of_sum_independent]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 This result extends to any finite collection of independent variables. For $X_1, X_2, \\ldots, X_n$ independent:
 
-$$\\mathrm{Var}(X_1 + X_2 + \\cdots + X_n) = \\mathrm{Var}(X_1) + \\mathrm{Var}(X_2) + \\cdots + \\mathrm{Var}(X_n)$$
+@academic[formula_callout:Variance of a Sum
+$$\\mathrm{Var}(X_1 + X_2 + \\cdots + X_n) = \\mathrm{Var}(X_1) + \\mathrm{Var}(X_2) + \\cdots + \\mathrm{Var}(X_n)$$]@
 
 **General case with dependence**: When $X$ and $Y$ are not independent, an additional term appears:
 
-$$\\mathrm{Var}(X + Y) = \\mathrm{Var}(X) + \\mathrm{Var}(Y) + 2\\mathrm{Cov}(X, Y)$$
+@academic[formula_callout:Variance of a Sum
+$$\\mathrm{Var}(X + Y) = \\mathrm{Var}(X) + \\mathrm{Var}(Y) + 2\\mathrm{Cov}(X, Y)$$]@
 
 The quantity $\\mathrm{Cov}(X, Y)$ is the covariance between $X$ and $Y$, which measures how the two variables vary together. Positive covariance increases the variance of the sum, while negative covariance decreases it.
 
 When variables are independent, their covariance is zero, recovering the simpler formula.
+
+When $X$ is split by the value of another variable $Y$, the variance decomposes into two parts:
+
+@academic[formula_callout:Law of Total Variance
+$$\\operatorname{Var}(X) = E\\!\\left[\\operatorname{Var}(X \\mid Y)\\right] + \\operatorname{Var}\\!\\left(E[X \\mid Y]\\right)$$
+/probability/formulas#law_of_total_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 For a deeper understanding of how variables interact, see the [covariance](!/probability/covariance) page.`,
       before:``,
@@ -1600,27 +1683,57 @@ For a deeper understanding of how variables interact, see the [covariance](!/pro
 Many commonly used probability distributions have closed-form expressions for their variance. The following table provides these formulas without derivation:
 
 **Bernoulli distribution** (parameter $p$):
+@academic[formula_callout:Bernoulli Variance
 $$\\mathrm{Var}(X) = p(1-p)$$
+/probability/formulas#bernoulli_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 
 **Binomial distribution** (parameters $n$, $p$):
+@academic[formula_callout:Binomial Variance
 $$\\mathrm{Var}(X) = np(1-p)$$
+/probability/formulas#binomial_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 See the [binomial distribution](!/probability/distributions/discrete#binomial) page.
 
 **Poisson distribution** (parameter $\\lambda$):
+@academic[formula_callout:Poisson Variance
 $$\\mathrm{Var}(X) = \\lambda$$
+/probability/formulas#poisson_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 See the [Poisson distribution](!/probability/distributions/discrete#poisson) page.
 
 **Uniform distribution** on $[a, b]$:
+@academic[formula_callout:Continuous Uniform Variance
 $$\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$$
+/probability/formulas#continuous_uniform_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 See the [uniform distribution](!/probability/distributions/continuous#uniform) page.
 
 **Exponential distribution** (parameter $\\lambda$):
+@academic[formula_callout:Exponential Variance
 $$\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$$
+/probability/formulas#exponential_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 See the [exponential distribution](!/probability/distributions/continuous#exponential) page.
 
 **Normal distribution** (parameters $\\mu$, $\\sigma^2$):
+@academic[formula_callout:Normal Variance
 $$\\mathrm{Var}(X) = \\sigma^2$$
+/probability/formulas#normal_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 See the [normal distribution](!/probability/distributions/continuous#normal) page.
 
 Each distribution's page contains derivations and detailed explanations of these variance formulas.`,
@@ -1637,7 +1750,12 @@ Variance is expressed in squared units. If a random variable $X$ measures distan
 
 Standard deviation, denoted $\\sigma$, returns to the original scale by taking the square root of variance:
 
+@academic[formula_callout:Standard Deviation Definition
 $$\\sigma = \\sqrt{\\mathrm{Var}(X)}$$
+/probability/formulas#standard_deviation_definition]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Because standard deviation shares the same units as the random variable itself, it provides a more intuitive sense of typical deviation magnitude. A standard deviation of 5 meters directly describes spread in meters, while a variance of 25 square meters requires mental conversion.
 
@@ -1681,13 +1799,19 @@ Variance is built directly from expectation. The formula $\\mathrm{Var}(X) = \\m
 [Covariance](!/probability/covariance): 
 When working with multiple random variables, covariance extends the concept of variance to measure how two variables vary together. Variance is actually a special case of covariance: 
 
-$$\\mathrm{Var}(X) = \\mathrm{Cov}(X, X)$$. 
+@academic[formula_callout:Connections to Other Probability Concepts
+$$\\mathrm{Var}(X) = \\mathrm{Cov}(X, X)$$. ]@
 
 See the [covariance](!/probability/covariance) page.
 
-**Linear combinations**: Variance plays a central role in analyzing weighted sums of random variables, particularly through formulas like
+**[Linear combinations](!/probability/variance#sum)**: Variance plays a central role in analyzing weighted sums of random variables, particularly through formulas like
  
+@academic[formula_callout:Variance of Linear Transform
 $$\\mathrm{Var}(aX + b) = a^2\\mathrm{Var}(X)$$ 
+/probability/formulas#variance_of_linear_transform]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
  
  and rules for variance of sums. These appear throughout statistical modeling and experimental design.
 

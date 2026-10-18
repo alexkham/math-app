@@ -695,21 +695,21 @@ To classify a critical point, examine the sign change of $f'$ across $c$ or use 
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Derivative** — The fundamental operation: rate of change of $f$ at a point, defined as the [limit](!/calculus/visual-tools/limit) of secant slopes.
+      content: `**[Derivative](!/calculus/derivatives)** — The fundamental operation: rate of change of $f$ at a point, defined as the [limit](!/calculus/visual-tools/limit) of secant slopes.
 
 [Average rate of change](!/calculus/visual-tools/average-rate-of-change) — The slope of a secant line over an interval; the discrete cousin of $f'(c)$.
 
-**Linearization** — The tangent line viewed as a function $L(x) = f(c) + f'(c)(x - c)$, used for approximation.
+**[Linearization](!/calculus/derivatives/differentials#4)** — The tangent line viewed as a function $L(x) = f(c) + f'(c)(x - c)$, used for approximation.
 
-**Critical points** — Where $f'(c) = 0$ or is undefined; the starting set for finding extrema.
+**[Critical points](!/calculus/derivatives/graph-analysis#4)** — Where $f'(c) = 0$ or is undefined; the starting set for finding extrema.
 
 [First derivative test](!/calculus/visual-tools/optimization) — Sign analysis of $f'$ to classify critical points as maxima, minima, or neither.
 
 [Inflection points](!/calculus/visual-tools/inflection-points) — Points where the second derivative changes sign and the tangent crosses the curve.
 
-**Newton&apos;s method** — Numerical root-finding algorithm that iteratively follows tangent lines back to the x-axis.
+**[Newton&apos;s method](!/calculus/visual-tools/newtons-method)** — Numerical root-finding algorithm that iteratively follows tangent lines back to the x-axis.
 
-**Taylor series** — Higher-order generalization of linearization, using all [derivatives](!/calculus/visual-tools/derivative) at $c$.
+**[Taylor series](!/calculus/derivatives/higher-order#8)** — Higher-order generalization of linearization, using all [derivatives](!/calculus/visual-tools/derivative) at $c$.
 
 [Mean Value Theorem](!/calculus/visual-tools/mean-value-theorem) — the theorem guarantees a point where the tangent line is parallel to the secant across the interval.
 

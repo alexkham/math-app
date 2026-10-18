@@ -866,7 +866,7 @@ The tool guards against the first two by construction: the rows of $B$ are linke
 
 [Rank](!/linear-algebra/visual-tools/matrix-rank) — the rank of $AB$ is at most the smaller of the ranks of $A$ and $B$, a consequence of the column and row readings.
 
-**Linear transformation** — the geometric meaning of a matrix; multiplication of matrices is composition of transformations.
+**[Linear transformation](!/linear-algebra/transformations)** — the geometric meaning of a matrix; multiplication of matrices is composition of transformations.
 
 [Hadamard product](!/linear-algebra/visual-tools/hadamard-product) — the entrywise product $a_{i,j} b_{i,j}$, a different operation with a different symbol.
 

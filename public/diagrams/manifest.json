@@ -1,5 +1,17 @@
 [
   {
+    "id": "arithmetic-sequence-difference-cases",
+    "title": null,
+    "source": "/algebra/sequences",
+    "section": "algebra",
+    "width": 690,
+    "height": 1113,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "canonical-forms",
     "title": "How simple the matrix can be made",
     "source": "/linear-algebra/transformations/basis-change",
@@ -74,11 +86,11 @@
   },
   {
     "id": "conditional-probability-anatomy",
-    "title": "Conditional probability, part by part",
+    "title": null,
     "source": "/probability/conditional-probability",
     "section": "probability",
-    "width": 840,
-    "height": 1302,
+    "width": 690,
+    "height": 789,
     "formats": [
       "png",
       "svg",
@@ -87,11 +99,11 @@
   },
   {
     "id": "covariance-sign-cases",
-    "title": "What the sign of the covariance says",
+    "title": null,
     "source": "/probability/covariance",
     "section": "probability",
-    "width": 840,
-    "height": 715,
+    "width": 690,
+    "height": 876,
     "formats": [
       "png",
       "pdf"
@@ -183,6 +195,42 @@
     ]
   },
   {
+    "id": "determinant-sign-volume-cases",
+    "title": "The sign of the determinant in three dimensions",
+    "source": "/linear-algebra/determinants/geometry",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 746,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "determinant-singular-nonsingular-cases",
+    "title": null,
+    "source": "/linear-algebra/determinants",
+    "section": "linear-algebra",
+    "width": 690,
+    "height": 1088,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "determinant-volume-scaling-cases",
+    "title": "The size of the determinant: four regimes",
+    "source": "/linear-algebra/determinants/geometry",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 803,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "diagonalizability-cases",
     "title": "Which matrices diagonalize",
     "source": "/linear-algebra/eigen/diagonalization",
@@ -208,11 +256,11 @@
   },
   {
     "id": "discontinuity-types",
-    "title": "Four discontinuities, two groups: repairable or not",
+    "title": null,
     "source": "/calculus/limits/continuity",
     "section": "calculus",
-    "width": 840,
-    "height": 533,
+    "width": 690,
+    "height": 637,
     "formats": [
       "png",
       "pdf"
@@ -243,6 +291,18 @@
     ]
   },
   {
+    "id": "exponent-quotient-rule-cases",
+    "title": null,
+    "source": "/algebra/powers/exponent-rules",
+    "section": "algebra",
+    "width": 690,
+    "height": 1260,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "four-subspace-card",
     "title": "The four fundamental subspaces",
     "source": "/linear-algebra/vector-spaces/fundamental-spaces",
@@ -256,11 +316,11 @@
   },
   {
     "id": "function-profile-cubic",
-    "title": "The profile of f(x) = x³ − 3x",
+    "title": null,
     "source": "/functions/analyzing",
     "section": "functions",
-    "width": 840,
-    "height": 1480,
+    "width": 690,
+    "height": 1717,
     "formats": [
       "png",
       "pdf"
@@ -364,12 +424,72 @@
     ]
   },
   {
+    "id": "limit-quotient-rule-cases",
+    "title": null,
+    "source": "/calculus/limits/rules",
+    "section": "calculus",
+    "width": 690,
+    "height": 1274,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "linear-map-combinations",
     "title": "How linear maps combine",
     "source": "/linear-algebra/transformations/properties",
     "section": "linear-algebra",
     "width": 840,
     "height": 1389,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "linear-polynomial-slope-sign-cases",
+    "title": null,
+    "source": "/algebra/polynomials/graphing",
+    "section": "algebra",
+    "width": 690,
+    "height": 922,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "literal-inequality-sign-cases",
+    "title": null,
+    "source": "/algebra/inequalities/linear",
+    "section": "algebra",
+    "width": 690,
+    "height": 931,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "logarithm-monotonicity-base-cases",
+    "title": null,
+    "source": "/algebra/logarithms/properties",
+    "section": "algebra",
+    "width": 690,
+    "height": 1038,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "logarithmic-inequality-base-cases",
+    "title": null,
+    "source": "/algebra/logarithms",
+    "section": "algebra",
+    "width": 690,
+    "height": 1018,
     "formats": [
       "png",
       "pdf"
@@ -436,6 +556,18 @@
     ]
   },
   {
+    "id": "modulo-divisibility-cases",
+    "title": null,
+    "source": "/arithmetic/modulo",
+    "section": "arithmetic",
+    "width": 690,
+    "height": 1055,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "norm-properties",
     "title": "Properties of the norm",
     "source": "/linear-algebra/vectors/magnitude",
@@ -449,11 +581,11 @@
   },
   {
     "id": "number-system-ladder",
-    "title": "Five number systems, each forced by a problem the last could not solve",
+    "title": null,
     "source": "/complex-numbers/imaginary-numbers",
     "section": "complex-numbers",
-    "width": 840,
-    "height": 1445,
+    "width": 690,
+    "height": 1467,
     "formats": [
       "png",
       "pdf"
@@ -556,12 +688,48 @@
     ]
   },
   {
+    "id": "rank-full-deficient-cases",
+    "title": "Full rank or rank-deficient",
+    "source": "/linear-algebra/matrix/rank",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 764,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "rank-properties",
     "title": "Properties of rank",
     "source": "/linear-algebra/matrix/rank",
     "section": "linear-algebra",
     "width": 840,
     "height": 1711,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "rational-exponent-domain-cases",
+    "title": null,
+    "source": "/algebra/roots/rational-exponents",
+    "section": "algebra",
+    "width": 690,
+    "height": 1017,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "rational-function-horizontal-asymptote-cases",
+    "title": null,
+    "source": "/functions/families",
+    "section": "functions",
+    "width": 690,
+    "height": 1217,
     "formats": [
       "png",
       "pdf"
@@ -670,6 +838,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 804,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "square-system-determinant-cases",
+    "title": "Square systems: what the determinant decides",
+    "source": "/linear-algebra/linear-systems/solvability",
+    "section": "linear-algebra",
+    "width": 840,
+    "height": 753,
     "formats": [
       "png",
       "pdf"

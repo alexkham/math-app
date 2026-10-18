@@ -714,7 +714,7 @@ For applications and worked examples, see the **trigonometric identities applica
 • [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — interactive triangles with built-in [law of sines](!/trigonometry/sines-cosines-law#2) and law of cosines.
 • [Negative Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) — the parity rules that fix the sign of each formula at $-\\theta$.
 • [Supplementary Angle Identities](!/trigonometry/visual-tools/supplementary-angle-identities) — how $\\pi - \\theta$ interacts with the double-angle results.
-• **Basic Trigonometric Identities** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) used in the derived tan, csc, sec and cot forms.`,
+• **[Basic Trigonometric Identities](!/trigonometry/visual-tools/basic-identities)** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) used in the derived tan, csc, sec and cot forms.`,
       before:``,
       after:``,
       link:'',

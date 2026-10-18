@@ -209,7 +209,7 @@ These six patterns plus a handful of operators cover the vast majority of practi
     },
     obj10:{
       title:`Related Tools`,
-      content:`**Math Symbols Reference** - Catalogs of LaTeX command names organized by topic. Useful when you know the symbol's visual shape but cannot recall its command name.
+      content:`**[Math Symbols Reference](!/math-symbols)** - Catalogs of LaTeX command names organized by topic. Useful when you know the symbol's visual shape but cannot recall its command name.
 
 **Formula Pages** - Domain-specific formula collections (algebra, probability, calculus) where each formula is rendered alongside its LaTeX source. Browse for patterns you can copy and adapt.
 

@@ -1107,7 +1107,12 @@ This axiom states that every event is assigned a probability that is zero or gre
 
 In symbolic form, the axiom is written as:
 
-$P(A) \\ge 0 \\quad \\text{for every event } A$
+@academic[formula_callout:Non-negativity Axiom
+$$P(A) \\ge 0 \\quad \\text{for every event } A$$
+/probability/formulas#non-negativity_axiom]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Non-negativity is a structural constraint, not a computational rule. Any assignment that violates it cannot represent a valid probability model, regardless of how the probabilities were obtained.
 
@@ -1126,7 +1131,12 @@ This axiom states that the probability of the entire sample space is equal to on
 
 In symbolic form, the axiom is written as:
 
-$P(\\Omega) = 1$
+@academic[formula_callout:Normalization Axiom
+$$P(\\Omega) = 1$$
+/probability/formulas#normalization_axiom]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Normalization does not describe a particular event. It fixes the scale of probability itself. Without it, probability values would have no consistent meaning across different models.
 
@@ -1147,6 +1157,15 @@ This axiom states that if events share no common outcomes, the probability that 
 In symbolic form, the axiom is written as:
 
 $P(A \\cup B) = P(A) + P(B)$  whenever $A \\cap B = \\varnothing$
+
+More generally, for any countable family of pairwise disjoint events:
+
+@academic[formula_callout:Countable Additivity Axiom
+$$P\\!\\left(\\bigcup_{i=1}^{\\infty} A_i\\right) = \\sum_{i=1}^{\\infty} P(A_i)$$
+/probability/formulas#countable_additivity_axiom]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Additivity captures the idea that probability accumulates across exclusive alternatives. It is the mechanism that allows probability to be built up from separate cases into a complete description of uncertainty.
 `,
@@ -1171,6 +1190,19 @@ Once the axioms are in place, several basic results follow automatically. These 
 
 - **Additivity for two events**  
   For any two events, the probability of their union can be expressed by combining their individual probabilities while correcting for any overlap.
+
+Two of these results, written out:
+
+@academic[formula_callout:Probability Bounds
+$$0 \\leq P(A) \\leq 1$$
+/probability/formulas#probability_bounds]@
+
+@academic[formula_callout:Probability of Empty Event
+$$P(\\emptyset) = 0$$
+/probability/formulas#probability_of_empty_event]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 These results show how much structure is already enforced by the axioms alone. Many familiar probability rules emerge without introducing any new principles. The table below names each consequence with its formal statement and the line of reasoning that produces it from the axioms.
 `,
@@ -1234,12 +1266,12 @@ In practice, the axioms act as a safeguard. Any model that violates them may pro
       content:`
 The probability axioms form the base layer of the entire probability framework.
 
-- **Events** are the objects to which probabilities are assigned.
-- **Sample spaces** define the universe in which those events live.
-- **Conditional probability** arises by applying the axioms under restricted information.
-- **Total probability** follows from additivity across cases.
-- **Independence** describes special situations where conditioning has no effect.
-- **Random variables** and **probability distributions** extend the axioms to numerical outcomes.
+- **[Events](!/probability/events)** are the objects to which probabilities are assigned.
+- **[Sample spaces](!/probability/sample-space)** define the universe in which those events live.
+- **[Conditional probability](!/probability/conditional-probability)** arises by applying the axioms under restricted information.
+- **[Total probability](!/probability/total-probability#cases)** follows from additivity across cases.
+- **[Independence](!/probability/independence)** describes special situations where conditioning has no effect.
+- **[Random variables](!/probability/random-variables)** and **[probability distributions](!/probability/distributions)** extend the axioms to numerical outcomes.
 
 Every probability concept ultimately traces back to these axioms, making them the unifying foundation of the subject.
 `,

@@ -1248,12 +1248,12 @@ The pitfalls above can be lined up with what makes each one a misreading and wha
   
       title:`Connections to Other Probability Concepts`,
       content:`
-- **Conditional probability:** built directly from the joint distribution  
-- **Independence:** defined in terms of how the joint breaks into marginals  
-- **Marginal probability:** obtained by summing or integrating the joint  
-- **Covariance and correlation:** measure how variables move together, visible first in the joint  
-- **Bayes' theorem:** emerges from the relationship between joint and conditional probabilities  
-- **Multivariate distributions:** extend joint probability to higher dimensions
+- **[Conditional probability](!/probability/conditional-probability#meaning):** built directly from the joint distribution  
+- **[Independence](!/probability/independence#formula):** defined in terms of how the joint breaks into marginals  
+- **[Marginal probability](!/probability/joint-probability#marginal):** obtained by summing or integrating the joint  
+- **[Covariance and correlation](!/probability/covariance):** measure how variables move together, visible first in the joint  
+- **[Bayes' theorem](!/probability/bayes-theorem#chain):** emerges from the relationship between joint and conditional probabilities  
+- **[Multivariate distributions](!/probability/joint-probability#distributions):** extend joint probability to higher dimensions
 `,
       before:``,
       after:``,

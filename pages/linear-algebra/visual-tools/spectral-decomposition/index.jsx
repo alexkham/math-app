@@ -218,7 +218,7 @@ $$Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}, \\q
 
 [Orthogonal matrices](!/linear-algebra/visual-tools/orthogonal-matrices) — what $Q$ is; rotations and reflections of the axes.
 
-**Quadratic forms and conics** — the geometric reading of $\\Lambda$ and $Q$.
+**[Quadratic forms and conics](!/linear-algebra/decompositions/spectral#6)** — the geometric reading of $\\Lambda$ and $Q$.
 
 [Positive definite matrices and Cholesky](!/linear-algebra/visual-tools/cholesky-decomposition) — the all-positive case, and its other factorization.
 

@@ -9,6 +9,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import binomialCoefficientDiagrams from '@/app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -329,8 +331,42 @@ const schemas = {
     }),
   };
 
+  const arithmeticDiffCases = {
+    prefaceTitle: 'What the common difference decides',
+    preface: 'Each term of an arithmetic sequence is the previous one plus the same fixed value $d$. The sign of $d$ governs the direction of the whole sequence.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'The size of $d$ sets the spacing; its sign sets the direction. The sequence $7, 3, -1, -5, \\ldots$ has $d = -4$, each term falling four units below the previous.',
+    parent: {
+      kicker: 'Arithmetic sequence',
+      formula: '$a_n = a_1 + (n - 1)d$',
+      splitBy: 'the sign of $d$',
+    },
+    cases: [
+      {
+        id: 'up', condition: '$d > 0$',
+        count: { n: '↑' },
+        headline: 'Increases',
+        desc: 'each term is larger than the one before',
+      },
+      {
+        id: 'down', condition: '$d < 0$',
+        count: { n: '↓' },
+        headline: 'Decreases',
+        desc: 'each term is smaller than the one before',
+        example: '$7, 3, -1, -5, \\ldots$ with $d = -4$',
+      },
+      {
+        id: 'flat', condition: '$d = 0$',
+        count: { n: '=' },
+        headline: 'Constant',
+        desc: 'every term is identical',
+      },
+    ],
+  };
+
    return {
   props:{
+    arithmeticDiffCases,
     demoUnits,
      sectionsContent,
      introContent,
@@ -346,7 +382,9 @@ const schemas = {
 }
    }
 
-export default function SequencesPage({seoData, sectionsContent, introContent, schemas, demoUnits}) {
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function SequencesPage({arithmeticDiffCases, seoData, sectionsContent, introContent, schemas, demoUnits}) {
     
   const genericSections=[
     // {
@@ -379,6 +417,14 @@ export default function SequencesPage({seoData, sectionsContent, introContent, s
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="arithmetic-sequence-difference-cases"
+            title="The sign of the common difference"
+            source="/algebra/sequences"
+          >
+            <CaseSplit data={arithmeticDiffCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

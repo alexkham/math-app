@@ -5833,8 +5833,9 @@ const StatisticsCalculator = ({explanations: propsExplanations}) => {
   
       const q1Index = Math.floor(n / 4);
       const q3Index = Math.floor((3 * n) / 4);
-      const q1 = n % 2 === 0 ? (sortedData[q1Index - 1] + sortedData[q1Index]) / 2 : sortedData[q1Index];
-      const q3 = n % 2 === 0 ? (sortedData[q3Index - 1] + sortedData[q3Index]) / 2 : sortedData[q3Index];
+      // two values: the quartiles are the two values themselves (the general rule would read index -1)
+      const q1 = n === 2 ? sortedData[0] : n % 2 === 0 ? (sortedData[q1Index - 1] + sortedData[q1Index]) / 2 : sortedData[q1Index];
+      const q3 = n === 2 ? sortedData[1] : n % 2 === 0 ? (sortedData[q3Index - 1] + sortedData[q3Index]) / 2 : sortedData[q3Index];
       const iqr = q3 - q1;
   
       const skewness = sortedData.reduce((acc, val) => acc + Math.pow(val - mean, 3), 0) / (n * Math.pow(standardDeviationN, 3));
@@ -6359,12 +6360,12 @@ const StatisticsCalculator = ({explanations: propsExplanations}) => {
               { 
                 label: 'Variance', 
                 key: 'variance', 
-                value: stats && (stats.sampleSize < 30 || preferredCalculation === 'n-1' ? stats.varianceN1 : stats.varianceN) 
+                value: stats && ((preferredCalculation === 'n-1' || (preferredCalculation === 'auto' && stats.sampleSize < 30)) ? stats.varianceN1 : stats.varianceN) 
               },
               { 
                 label: 'Standard Deviation', 
                 key: 'standardDeviation', 
-                value: stats && (stats.sampleSize < 30 || preferredCalculation === 'n-1' ? stats.standardDeviationN1 : stats.standardDeviationN) 
+                value: stats && ((preferredCalculation === 'n-1' || (preferredCalculation === 'auto' && stats.sampleSize < 30)) ? stats.standardDeviationN1 : stats.standardDeviationN) 
               },
               { label: 'Q1 (First Quartile)', key: 'q1', value: stats?.q1 },
               { label: 'Q3 (Third Quartile)', key: 'q3', value: stats?.q3 },

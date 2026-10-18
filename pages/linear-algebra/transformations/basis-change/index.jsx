@@ -1184,7 +1184,7 @@ To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (5, 1)$: solve $P\\math
     entries: [
       {
         id: `prime-and-side`,
-        tex: `A' = P^{-1}AP`,
+        tex: `$A' = P^{-1}AP$`,
         read: `A prime equals P inverse A P`,
         means: `The prime says **same transformation, different basis**. It is not a derivative, not a transpose, and not a new matrix built from $A$ by some operation on its entries. $A$ and $A'$ are two descriptions of one object, and the prime is the only thing recording that they describe the same thing.`,
         cases: `Which side $P^{-1}$ takes is decided by the direction $P$ converts, not by preference. With $P$ carrying $\\mathcal{B}$-coordinates into $\\mathcal{C}$-coordinates, the conversion has to undo itself on the way in and redo itself on the way out, which puts the inverse on the left. Reverse the direction of $P$ and the same relation is written $A = PA'P^{-1}$, with the letters unchanged and the sides swapped.`,
@@ -1194,7 +1194,7 @@ To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (5, 1)$: solve $P\\math
       },
       {
         id: `equal-endpoints`,
-        tex: `T: V \\to V`,
+        tex: `$T: V \\to V$`,
         read: `T maps V to V`,
         means: `Both ends of the arrow name the same space, and that repetition is what makes this page possible. Because input and output live in one space, a single basis choice governs both, so a single $P$ appears twice in the relation — once undoing the choice and once redoing it.`,
         cases: `A map between different spaces, $T: V \\to W$, needs two independent basis choices and the relation becomes $A' = Q^{-1}AP$ with two unrelated matrices. Similarity is the special case in which the two collapse into one.`,
@@ -1204,7 +1204,7 @@ To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (5, 1)$: solve $P\\math
       },
       {
         id: `unwritten-similarity-symbol`,
-        tex: `A \\sim B`,
+        tex: `$A \\sim B$`,
         read: `A is similar to B`,
         means: `This page names the relation in words and never writes it with a symbol, which is a deliberate omission. The tilde is already spoken for: at [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) $A \\sim B$ means row equivalence, a different relation entirely.`,
         cases: `The two relations disagree on the things this page cares about. Row-equivalent matrices generally have different eigenvalues and different determinants; similar matrices always share both. A tilde read with the wrong meaning turns a true statement into a false one without changing a symbol.`,

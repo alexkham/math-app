@@ -352,8 +352,8 @@ export async function getStaticProps() {
        In probability theory, the objects to which probabilities are assigned are called [events](!/probability/events).
 By definition, an [event](!/probability/events) is any subset of the [sample space](!/probability/sample-space). This includes single outcomes, collections of outcomes, the empty set, and the entire sample space itself.
        @academic[theorem:Probability Event is simply any subset of the sample space.]@
-         **Example:**
-   In case of dice roll the sample space would be $S = \\{1, 2, 3, 4, 5, 6\\}$
+         @academic[example:Example
+   In case of dice roll the sample space would be $S = \\{1, 2, 3, 4, 5, 6\\}$]@
    **Some possible events:**
  Event $A = \\{2, 4, 6\\}$ (rolling an even number)
  Event $B = \\{5\\}$ (rolling exactly 5)

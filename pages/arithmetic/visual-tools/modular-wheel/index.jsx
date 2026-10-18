@@ -773,7 +773,7 @@ Each class $[r]$ is the set $\\{r + kn : k \\in \\mathbb{Z}\\}$ — an infinite 
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Greatest common divisor (gcd)** — closely tied to modular arithmetic. The [Euclidean algorithm](!/arithmetic/visual-tools/euclidean-algorithm) computes $\\gcd(a, b)$ using repeated modular reduction. An integer $a$ has a multiplicative inverse mod $n$ iff $\\gcd(a, n) = 1$.
+      content: `**[Greatest common divisor (gcd)](!/arithmetic/divisibility/gcd)** — closely tied to modular arithmetic. The [Euclidean algorithm](!/arithmetic/visual-tools/euclidean-algorithm) computes $\\gcd(a, b)$ using repeated modular reduction. An integer $a$ has a multiplicative inverse mod $n$ iff $\\gcd(a, n) = 1$.
 
 **Euler's totient** $\\varphi(n)$ — counts integers in $\\{1, \\dots, n - 1\\}$ that are coprime to $n$. Equivalently, the number of invertible classes in $\\mathbb{Z}/n\\mathbb{Z}$. For prime $n$, $\\varphi(n) = n - 1$.
 
@@ -781,7 +781,7 @@ Each class $[r]$ is the set $\\{r + kn : k \\in \\mathbb{Z}\\}$ — an infinite 
 
 **Chinese Remainder Theorem** — if $\\gcd(m, n) = 1$, the system $x \\equiv a \\pmod m$ and $x \\equiv b \\pmod n$ has a unique solution mod $mn$. Lets you reconstruct an integer from its residues in different moduli.
 
-**Modular exponentiation** — computing $a^k \\bmod n$ efficiently via repeated squaring. The core operation in RSA.
+**[Modular exponentiation](!/arithmetic/modulo/operations#6)** — computing $a^k \\bmod n$ efficiently via repeated squaring. The core operation in RSA.
 
 **Discrete logarithm** — given $g, h, n$, find $k$ with $g^k \\equiv h \\pmod n$. Hard in general; security of Diffie-Hellman depends on it.
 
@@ -789,7 +789,7 @@ Each class $[r]$ is the set $\\{r + kn : k \\in \\mathbb{Z}\\}$ — an infinite 
 
 **Congruence equations** — solving $ax \\equiv b \\pmod n$. Has a solution iff $\\gcd(a, n)$ divides $b$.
 
-**Modulo calculator** — to compute $a \\bmod n$ for arbitrary integers, see the **modulo calculator**.
+**[Modulo calculator](!/calculators/modulo-calculator)** — to compute $a \\bmod n$ for arbitrary integers, see the **modulo calculator**.
 
 [Base Converter](!/arithmetic/visual-tools/base-converter) — the units digit of $N$ in base $b$ is $N \\bmod b$, the position $N$ lands on around a wheel of $b$ slots.
 

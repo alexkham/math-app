@@ -11,6 +11,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -834,8 +836,44 @@ const schemas = {
     }),
   };
 
+  const expQuotientCases = {
+    prefaceTitle: 'Three outcomes of one rule',
+    preface: 'Dividing two powers of the same base subtracts the exponents. Whether $m - n$ comes out positive, zero or negative decides what the result looks like.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'All three cases are natural consequences of subtracting exponents, and all three require $a \\neq 0$ and identical bases.',
+    parent: {
+      kicker: 'Quotient rule',
+      formula: '$\\dfrac{a^m}{a^n} = a^{m-n}$',
+      splitBy: '$m$ compared with $n$',
+      desc: 'requires $a \\neq 0$',
+    },
+    cases: [
+      {
+        id: 'greater', condition: '$m > n$',
+        count: { n: '+' },
+        headline: 'A positive power',
+        formula: '$a^{m-n}$ with $m - n > 0$',
+        example: '$\\dfrac{x^7}{x^2} = x^5$',
+      },
+      {
+        id: 'equal', condition: '$m = n$',
+        count: { n: '1' },
+        headline: 'The result is 1',
+        formula: '$a^0 = 1$',
+      },
+      {
+        id: 'less', condition: '$m < n$',
+        count: { n: '−' },
+        headline: 'A negative exponent',
+        desc: 'a reciprocal; see [negative exponents](!/algebra/powers/negative-exponents)',
+        example: '$\\dfrac{5^3}{5^5} = 5^{-2} = \\dfrac{1}{25}$',
+      },
+    ],
+  };
+
   return {
   props: {
+    expQuotientCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -856,7 +894,9 @@ const schemas = {
    }
 
 // export default function RulesPage({seoData,sectionsContent , introContent}) {
-export default function RulesPage({seoData, sectionsContent, introContent, obj9Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function RulesPage({expQuotientCases, seoData, sectionsContent, introContent, obj9Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -885,6 +925,14 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj9T
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-diagram'}
+            id="exponent-quotient-rule-cases"
+            title="The quotient rule for exponents: three outcomes"
+            source="/algebra/powers/exponent-rules"
+          >
+            <CaseSplit data={expQuotientCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

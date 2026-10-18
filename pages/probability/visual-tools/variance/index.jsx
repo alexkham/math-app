@@ -197,13 +197,13 @@ The visualizer shows both so you can see their relationship: $\\sigma = \\sqrt{\
       title: `Related Statistical Concepts`,
       content: `Variance connects to many other important statistical measures:
 
-**Expected Value** — The mean that variance measures spread around.
+**[Expected Value](!/probability/expected-value)** — The mean that variance measures spread around.
 
-**Standard Deviation** — The square root of variance, in original units.
+**[Standard Deviation](!/probability/variance#sd)** — The square root of variance, in original units.
 
 **Coefficient of Variation** — Compares variance across different scales.
 
-**Probability Distributions** — Many distributions are characterized by their variance parameters.
+**[Probability Distributions](!/probability/distributions)** — Many distributions are characterized by their variance parameters.
 
 Variance is a fundamental building block in statistics. Mastering it through interactive exploration prepares you for more advanced topics in [probability](!/probability/axioms), hypothesis testing, and data analysis.
 

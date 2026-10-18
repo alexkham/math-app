@@ -249,15 +249,15 @@ The limitation is not really about infinity, either. A finite set of ten thousan
 
     obj11:{
       title:`Related Concepts and Tools`,
-      content:`**Set Theory Definitions** — the vocabulary this page assumes: element, membership, domain, [subset](!/set-theory/subsets#1).
+      content:`**[Set Theory Definitions](!/set-theory/definitions)** — the vocabulary this page assumes: element, membership, domain, [subset](!/set-theory/subsets#1).
 
-**Set Operations** — intersection, union, difference, and complement, the operations conditions correspond to.
+**[Set Operations](!/set-theory/operations)** — intersection, union, difference, and complement, the operations conditions correspond to.
 
-**Set Notation** — roster form, interval notation, and the symbols used across the subject.
+**[Set Notation](!/set-theory/basics#2)** — roster form, interval notation, and the symbols used across the subject.
 
-**Cardinality** — finite, countable, and [uncountable sets](!/set-theory/cardinality#5), and why listing stops working.
+**[Cardinality](!/set-theory/cardinality)** — finite, countable, and [uncountable sets](!/set-theory/cardinality#5), and why listing stops working.
 
-**Propositional Logic** — the and, or and not that join conditions.
+**[Propositional Logic](!/logic/propositional-logic)** — the and, or and not that join conditions.
 
 [Power Set Explorer](!/set-theory/visual-tools/power-set) — every subset of a small set, drawn as a lattice.
 

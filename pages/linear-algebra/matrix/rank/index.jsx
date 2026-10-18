@@ -2001,6 +2001,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import rankDiagrams from '@/app/components/linear-algebra copy/matrix/rankDiagrams'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 import kernelImageDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/kernel-image/kernelImageDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 
 
 export async function getStaticProps(){
@@ -2867,8 +2868,37 @@ const schemas = {
     }),
   };
 
+  const rankCases = {
+    prefaceTitle: 'How much dimensionality is used',
+    preface: 'The rank of an $m \\times n$ matrix is a single non-negative integer that can never exceed $\\min(m, n)$. Whether it reaches that ceiling splits matrices into two conditions.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'The rank does not say which row or column is redundant, often more than one subset works; it only gives the effective count.',
+    parent: {
+      kicker: 'Rank bounds',
+      formula: '$0 \\leq \\text{rank}(A) \\leq \\min(m, n)$',
+      splitBy: '$\\text{rank}(A)$ compared with $\\min(m, n)$',
+    },
+    cases: [
+      {
+        id: 'full', condition: '$\\text{rank}(A) = \\min(m, n)$',
+        count: { n: '✓' },
+        headline: 'Full rank',
+        desc: 'every row and every column contributes something that no combination of the others can reproduce',
+        example: 'a $5 \\times 3$ matrix with rank $3$ uses all three column directions',
+      },
+      {
+        id: 'deficient', condition: '$\\text{rank}(A) < \\min(m, n)$',
+        count: { n: '−' },
+        headline: 'Rank-deficient',
+        desc: 'at least one row or column is a [linear combination](!/linear-algebra/vectors/linear-combinations) of the others',
+        example: 'a $5 \\times 3$ matrix with rank $2$ has one redundant column, in the span of the other two',
+      },
+    ],
+  };
+
    return {
   props: {
+    rankCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -2890,7 +2920,9 @@ const schemas = {
 }
    }
 
-export default function MatrixRankPage({seoData, sectionsContent, introContent, obj5Table, specialRanks, obj9Table, summaryTable, rankProperties, faqQuestions, schemas, demoUnits}) {
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function MatrixRankPage({rankCases, seoData, sectionsContent, introContent, obj5Table, specialRanks, obj9Table, summaryTable, rankProperties, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2901,6 +2933,14 @@ export default function MatrixRankPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <DiagramFrame
+            key={'obj1-diagram'}
+            id="rank-full-deficient-cases"
+            title="Full rank or rank-deficient"
+            source="/linear-algebra/matrix/rank"
+          >
+            <CaseSplit data={rankCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

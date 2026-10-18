@@ -242,23 +242,23 @@ The six query types of the calculators are each explained in their own section: 
 
     obj11: {
       title: `Related Probability Tools and Calculators`,
-      content: `**Continuous Distributions Calculator** - Compute probabilities for normal, exponential, and uniform continuous distributions with PDF and CDF.
+      content: `**[Continuous Distributions Calculator](!/probability/calculators/continuous-distributions)** - Compute probabilities for normal, exponential, and uniform continuous distributions with PDF and CDF.
 
-**Probability Distribution Explorer** - Interactive visualization comparing multiple distributions side-by-side with parameter adjustments.
+**[Probability Distribution Explorer](!/probability/visual-tools/distributions)** - Interactive visualization comparing multiple distributions side-by-side with parameter adjustments.
 
-**Expected Value Calculator** - Calculate expected values, variance, and higher moments for discrete and continuous distributions.
+**[Expected Value Calculator](!/probability/calculators/expected-value)** - Calculate expected values, variance, and higher moments for discrete and continuous distributions.
 
-**CDF Visualizer** - Generate cumulative distribution function plots for discrete and continuous distributions.
+**[CDF Visualizer](!/probability/visual-tools/cdf)** - Generate cumulative distribution function plots for discrete and continuous distributions.
 
-**Normal Distribution Calculator** - Dedicated normal distribution tool with z-score calculations and percentile lookups.
+**[Normal Distribution Calculator](!/probability/calculators/continuous-distributions#working-with-normal-distribution-calculator)** - Dedicated normal distribution tool with z-score calculations and percentile lookups.
 
-**Binomial Probability Calculator** - Standalone binomial calculator with additional features for hypothesis testing.
+**[Binomial Probability Calculator](!/probability/calculators/discrete-distributions#calculating-binomial-distribution-probabilities)** - Standalone binomial calculator with additional features for hypothesis testing.
 
 **Poisson Process Simulator** - Simulate Poisson processes over time with arrival visualization and statistics.
 
-**Probability Mass Function Plotter** - Create custom PMF plots for user-defined discrete distributions.
+**[Probability Mass Function Plotter](!/probability/visual-tools/probability-function)** - Create custom PMF plots for user-defined discrete distributions.
 
-**Statistical Distribution Reference** - Comprehensive guide to all probability distributions with formulas, properties, and applications.
+**[Statistical Distribution Reference](!/probability/distributions)** - Comprehensive guide to all probability distributions with formulas, properties, and applications.
 
 The distributions behind these tools are taught in [Discrete distributions](!/probability/distributions/discrete#what) and the PMF they share in [PMFs of common discrete distributions](!/probability/probability-function/pmf#11).`,
       before: ``,

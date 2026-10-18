@@ -1305,6 +1305,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import { pmfData } from '@/app/api/db/diagrams/pages/probability/probability-function/pmf/template'
 import DiscreteProbabilityDistributions from '@/app/components/visualizations/probability/discrete-distribution/DiscreteProbabilityDistributions'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
@@ -1726,7 +1727,12 @@ Every valid PMF must satisfy two non-negotiable rules. Break either one, and you
 
 ## Axiom 1: Non-Negativity
 
+@academic[formula_callout:PMF Non-negativity
 $$p_X(x) \\geq 0 \\text{ for all } x$$
+/probability/formulas#pmf_non-negativity]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Probabilities cannot be negative. Ever.
 
@@ -1734,7 +1740,12 @@ Each point gets zero or positive mass. If $p_X(5) = -0.2$, you've made an error.
 
 ## Axiom 2: Normalization
 
+@academic[formula_callout:PMF Normalization
 $$\\sum_{x \\in \\text{Support}} p_X(x) = 1$$
+/probability/formulas#pmf_normalization]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 All probabilities across the entire support must sum to exactly 1.
 
@@ -1789,14 +1800,16 @@ The PMF is defined by an explicit mathematical formula $p_X(k)$.
 
 Example: Fair die:
 
+@academic[formula_callout:Representations: The Three Views
 $$p_X(k) = \\begin{cases} 
 \\frac{1}{6} & \\text{if } k \\in \\{1, 2, 3, 4, 5, 6\\} \\\\
 0 & \\text{otherwise}
-\\end{cases}$$
+\\end{cases}$$]@
 
 Example: [Geometric distribution](!/probability/distributions/discrete/geometric):
 
-$$p_X(k) = (1-p)^{k-1}p \\text{ for } k \\in \\{1, 2, 3, \\ldots\\}$$
+@academic[formula_callout:Representations: The Three Views
+$$p_X(k) = (1-p)^{k-1}p \\text{ for } k \\in \\{1, 2, 3, \\ldots\\}$$]@
 
 The functional form allows direct computation of probabilities and derivation of properties like [expected value](!/probability/expected-value) and [variance](!/probability/variance).
 
@@ -1947,13 +1960,15 @@ The PMF contains all the information about a [random variable](!/probability/ran
 
 The [expected value](!/probability/expected-value) is the probability-weighted average of all possible values.
 
-$$E[X] = \\sum_{k \\in \\text{Support}} k \\cdot p_X(k)$$
+@academic[formula_callout:Derived Properties: Location Measures
+$$E[X] = \\sum_{k \\in \\text{Support}} k \\cdot p_X(k)$$]@
 
 Think of it as the center of mass. Each value $k$ contributes based on its probability weight.
 
 Example: Fair die. 
 
-$$E[X] = 1 \\cdot \\frac{1}{6} + 2 \\cdot \\frac{1}{6} + 3 \\cdot \\frac{1}{6} + 4 \\cdot \\frac{1}{6} + 5 \\cdot \\frac{1}{6} + 6 \\cdot \\frac{1}{6} = \\frac{21}{6} = 3.5$$
+@academic[formula_callout:Derived Properties: Location Measures
+$$E[X] = 1 \\cdot \\frac{1}{6} + 2 \\cdot \\frac{1}{6} + 3 \\cdot \\frac{1}{6} + 4 \\cdot \\frac{1}{6} + 5 \\cdot \\frac{1}{6} + 6 \\cdot \\frac{1}{6} = \\frac{21}{6} = 3.5$$]@
 
 The average outcome over many rolls is 3.5.
 
@@ -1969,7 +1984,8 @@ Example: Fair die. The median is between 3 and 4, often reported as 3.5.
 
 The mode is the value with the highest probability.
 
-$$\\text{mode} = \\arg\\max_k p_X(k)$$
+@academic[formula_callout:Derived Properties: Location Measures
+$$\\text{mode} = \\arg\\max_k p_X(k)$$]@
 
 Example: Loaded die with $p_X(6) = \\frac{1}{2}$ and $p_X(k) = \\frac{1}{10}$ for $k \\in \\{1,2,3,4,5\\}$. Mode is 6.
 
@@ -1999,7 +2015,8 @@ While [location](!/probability/probability-function/pmf#7) tells you where the d
 
 [Variance](!/probability/variance) quantifies the average squared deviation from the mean. It's calculated directly from the PMF:
 
-$$\\text{Var}(X) = \\sum_{k \\in \\text{Support}} (k - E[X])^2 \\cdot p_X(k)$$
+@academic[formula_callout:Derived Properties: Spread Measures
+$$\\text{Var}(X) = \\sum_{k \\in \\text{Support}} (k - E[X])^2 \\cdot p_X(k)$$]@
 
 Each value's squared distance from the mean is weighted by its probability. High-probability values far from the mean increase variance significantly.
 
@@ -2049,7 +2066,8 @@ Apply function $g$ to get $Y = g(X)$.
 
 The new PMF $p_Y(y)$ is found by collecting all the probability mass from $X$ values that map to each $y$ value.
 
-$$p_Y(y) = \\sum_{x: g(x) = y} p_X(x)$$
+@academic[formula_callout:Transformations
+$$p_Y(y) = \\sum_{x: g(x) = y} p_X(x)$$]@
 
 Sum over all $x$ values that produce the same $y$ after transformation.
 
@@ -2057,7 +2075,8 @@ Sum over all $x$ values that produce the same $y$ after transformation.
 
 For $Y = aX + b$ where $a \\neq 0$:
 
-$$p_Y(y) = p_X\\left(\\frac{y - b}{a}\\right)$$
+@academic[formula_callout:Transformations
+$$p_Y(y) = p_X\\left(\\frac{y - b}{a}\\right)$$]@
 
 The support shifts and scales accordingly.
 
@@ -2080,7 +2099,12 @@ Multiple values map to the same squared distance:
 
 For any transformation $g$:
 
+@academic[formula_callout:LOTUS Discrete
 $$E[g(X)] = \\sum_{x} g(x) \\cdot p_X(x)$$
+/probability/formulas#lotus_discrete]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 You don't need to find $p_Y(y)$ first. Work directly with the original PMF.
 
@@ -2112,7 +2136,8 @@ The PMF and the [CDF](!/probability/cdf) (Cumulative Distribution Function) are 
 
 The [CDF](!/probability/cdf) accumulates probability from the PMF:
 
-$$F_X(x) = P(X \\leq x) = \\sum_{k \\leq x} p_X(k)$$
+@academic[formula_callout:Connection to CDF
+$$F_X(x) = P(X \\leq x) = \\sum_{k \\leq x} p_X(k)$$]@
 
 The CDF at any point equals the sum of all PMF values up to and including that point.
 
@@ -2126,7 +2151,8 @@ The CDF is a step function for discrete variables—it jumps at each value in th
 
 Recover the PMF by taking differences in the CDF:
 
-$$p_X(k) = F_X(k) - F_X(k^-)$$
+@academic[formula_callout:Connection to CDF
+$$p_X(k) = F_X(k) - F_X(k^-)$$]@
 
 where $k^-$ represents the value just before $k$ in the support.
 
@@ -2322,8 +2348,46 @@ Always check whether your variable is discrete or continuous before choosing met
     link: '',
   },
   obj13: {
-    title: `Notation`,
-    content: `The PMF uses specific notation to map outcomes to probabilities.
+    title: `PMF Notation`,
+    lead: `Three marks on this page are not about $p$ itself but about the set it is summed over, and each writes that set a different way.`,
+    inherited: `The capital/lowercase split $X$ versus $x$, the operator $P(\\cdot)$ and the mass/density pair $p$ versus $f$ all belong to [the probability function](!/probability/probability-function#notation). The cumulative $F_X$ and the $\\leq$ convention are at [the CDF](!/probability/cdf#notation), and the signature $X: \\Omega \\to \\mathbb{R}$ at [random variables](!/probability/random-variables#notation).`,
+    entries: [
+      {
+        id: `support-set-builder`,
+        tex: `$\\{x : p_X(x) > 0\\}$`,
+        read: `the set of x such that p of x is greater than zero — the support of X`,
+        means: `The support is defined by a condition, not listed. The strict $> 0$ is the whole definition: a value belongs exactly when it carries probability, so values the variable can never take are excluded rather than assigned zero.`,
+        cases: `The PMF itself is defined everywhere and returns $0$ off the support, so the function's domain and its support are different sets. Only the support matters in a sum, since the rest contributes nothing.`,
+        alsoWritten: `Written $\\operatorname{supp}(X)$, or named $S$ or $S_X$ and then used as a set. Concrete supports are given as rosters instead — $\\{1,2,3,4,5,6\\}$ for a die, $\\{0,1,2,\\ldots\\}$ with an ellipsis when infinite.`,
+        confusedWith: `Reading the support as the list of values the variable **is** rather than the values it **can be with positive probability**. A value sitting inside the roster but carrying probability $0$ is not in the support.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `sum-over-a-set`,
+        tex: `$\\sum_{x \\in \\text{Support}} p_X(x) = 1$`,
+        read: `the sum of p of x, over all x in the support, equals one`,
+        means: `The index under the sigma is a **set membership**, not a counter running from one bound to another. There is no start value and no end value — the sum ranges over whatever the support contains, which may be finite or infinite.`,
+        cases: `Because off-support values contribute $0$, summing over the support and summing over every real $x$ give the same answer. The support form is written because it is the one that can actually be computed.`,
+        alsoWritten: `Compressed to $\\sum_x p_X(x) = 1$ with the set left implicit, or spelled $\\sum_{k=0}^{n}$ once the support is known to be a run of integers.`,
+        confusedWith: `Treating it as an ordinary indexed sum and looking for the limits. There are none to find; the limits are replaced by a membership test.`,
+        sameGlyphElsewhere: ``,
+      },
+      {
+        id: `sum-over-a-condition`,
+        tex: `$p_Y(y) = \\sum_{x\\,:\\,g(x) = y} p_X(x)$`,
+        read: `p of y equals the sum of p of x over every x for which g of x equals y`,
+        means: `Here the index is a **condition on the answer**: collect every input the transformation sends to this particular $y$, and add their probabilities. The colon reads **such that**, the same role it plays in the support above.`,
+        cases: `When $g$ is one-to-one the condition picks out a single $x$ and the sum has one term, which is why the linear case collapses to $p_X\\!\\left(\\frac{y-b}{a}\\right)$ with no sigma at all. The sum is there for the many-to-one case, where probability from several inputs piles onto one output.`,
+        alsoWritten: `Written $\\sum_{x \\in g^{-1}(y)}$ using the preimage, which says the same thing as a set rather than as a test.`,
+        confusedWith: `Expecting $p_Y$ to be $p_X$ with $y$ substituted in. Transforming a variable moves mass and can merge it; the sigma is the merging.`,
+        sameGlyphElsewhere: ``,
+      },
+    ],
+    symbolsHref: `/math-symbols/probability`,
+    symbolsLabel: `All probability symbols`,
+    parentHref: `/probability/probability-function`,
+    parentLabel: `Probability function`,
+    legacy: `The PMF uses specific notation to map outcomes to probabilities.
 
 For random variable $X$:
 
@@ -2700,9 +2764,20 @@ export default function PMFPage({
      {
         id:'13',
         title:sectionsContent.obj13.title,
-        link:sectionsContent.obj13.link,
+        link:'',
         content:[
-          sectionsContent.obj13.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.obj13.title}
+            lead={sectionsContent.obj13.lead}
+            inherited={sectionsContent.obj13.inherited}
+            entries={sectionsContent.obj13.entries}
+            symbolsHref={sectionsContent.obj13.symbolsHref}
+            symbolsLabel={sectionsContent.obj13.symbolsLabel}
+            parentHref={sectionsContent.obj13.parentHref}
+            parentLabel={sectionsContent.obj13.parentLabel}
+            theme={'navy'}
+          />,
         ]
     },
     {

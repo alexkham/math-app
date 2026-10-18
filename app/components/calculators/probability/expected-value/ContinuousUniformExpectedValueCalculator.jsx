@@ -294,11 +294,11 @@ const ContinuousUniformExpectedValueCalculator = ({ explanations = null }) => {
                       <div style={styles.comparisonDiff}>
                         {comparisonCalc.expectedValue > calculations.expectedValue ? (
                           <span style={styles.comparisonHigher}>
-                            ↑ {((comparisonCalc.expectedValue - calculations.expectedValue) / Math.abs(calculations.expectedValue) * 100).toFixed(1)}%
+                            ↑ {calculations.expectedValue === 0 ? `${(comparisonCalc.expectedValue - calculations.expectedValue).toFixed(2)} (no percentage: E(X) is 0)` : `${((comparisonCalc.expectedValue - calculations.expectedValue) / Math.abs(calculations.expectedValue) * 100).toFixed(1)}%`}
                           </span>
                         ) : comparisonCalc.expectedValue < calculations.expectedValue ? (
                           <span style={styles.comparisonLower}>
-                            ↓ {((calculations.expectedValue - comparisonCalc.expectedValue) / Math.abs(calculations.expectedValue) * 100).toFixed(1)}%
+                            ↓ {calculations.expectedValue === 0 ? `${(calculations.expectedValue - comparisonCalc.expectedValue).toFixed(2)} (no percentage: E(X) is 0)` : `${((calculations.expectedValue - comparisonCalc.expectedValue) / Math.abs(calculations.expectedValue) * 100).toFixed(1)}%`}
                           </span>
                         ) : (
                           <span>Same</span>

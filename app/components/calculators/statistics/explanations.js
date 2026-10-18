@@ -25,9 +25,9 @@ const explanations = {
     
     iqr: "The interquartile range, calculated as Q3 - Q1. It represents the middle 50% of the data and is a measure of statistical dispersion.",
     
-    skewness: "A measure of the asymmetry of the probability distribution. Positive skewness indicates a longer tail on the right side, while negative skewness indicates a longer tail on the left. Formula: Skewness = [n / (n-1)(n-2)] * Σ[(x - x̄)³ / s³], where n is the sample size, x is each value, x̄ is the mean, and s is the standard deviation.",
+    skewness: "A measure of the asymmetry of the probability distribution. Positive skewness indicates a longer tail on the right side, while negative skewness indicates a longer tail on the left. Formula (as computed here): Skewness = [Σ(x - x̄)³ / n] / σ³, where n is the number of values, x is each value, x̄ is the mean, and σ is the population standard deviation (divisor n).",
     
-    kurtosis: "A measure of the 'tailedness' of the probability distribution. Higher kurtosis means more of the variance is due to infrequent extreme deviations, as opposed to frequent modestly-sized deviations. Formula: Kurtosis = [n(n+1) / (n-1)(n-2)(n-3)] * [Σ(x - x̄)⁴ / s⁴] - [3(n-1)² / (n-2)(n-3)], where n is the sample size, x is each value, x̄ is the mean, and s is the standard deviation.",
+    kurtosis: "A measure of the 'tailedness' of the probability distribution. Higher kurtosis means more of the variance is due to infrequent extreme deviations, as opposed to frequent modestly-sized deviations. Formula (as computed here, excess kurtosis): Kurtosis = [Σ(x - x̄)⁴ / n] / σ⁴ - 3, where n is the number of values, x is each value, x̄ is the mean, and σ is the population standard deviation (divisor n). A normal distribution scores 0.",
     
     coefficientOfVariation: "The ratio of the standard deviation to the mean, expressed as a percentage. It shows the extent of variability in relation to the mean. Formula: CV = (s / x̄) * 100, where s is the standard deviation and x̄ is the mean.",
     

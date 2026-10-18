@@ -49,6 +49,11 @@ export default function SingleEventProbabilityCalculator({ explanations = null }
       return;
     }
 
+    if (favorable > total) {
+      setError('Favorable outcomes cannot be more than total outcomes');
+      return;
+    }
+
     let probability;
     let complement;
     

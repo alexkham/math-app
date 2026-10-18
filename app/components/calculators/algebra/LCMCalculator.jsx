@@ -1,9 +1,27 @@
 import React, { useState } from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
 
+// prime factorization for the step display: [[prime, exponent], ...]; null when the number is too large for trial division
+const SUP = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹' };
+const sup = (e) => String(e).split('').map((c) => SUP[c]).join('');
+function factorize(n) {
+  if (n > 1e12) return null;
+  const out = [];
+  let m = n;
+  for (let p = 2; p * p <= m; p += (p === 2 ? 1 : 2)) {
+    let e = 0;
+    while (m % p === 0) { m /= p; e += 1; }
+    if (e) out.push([p, e]);
+  }
+  if (m > 1) out.push([m, 1]);
+  return out;
+}
+const showFactors = (f) => (f.length === 0 ? '1' : f.map(([p, e]) => (e === 1 ? String(p) : p + sup(e))).join(' · '));
+
 function LCMCalculator({ explanations }) {
   const [numbers, setNumbers] = useState(['', '']);
   const [result, setResult] = useState('');
+  const [details, setDetails] = useState([]);
   const [activeTooltip, setActiveTooltip] = useState(null);
   const [method, setMethod] = useState('prime');
 
@@ -11,6 +29,9 @@ function LCMCalculator({ explanations }) {
     const newNumbers = [...numbers];
     newNumbers[index] = value;
     setNumbers(newNumbers);
+    // an answer for the old numbers must not stay on screen
+    setResult('');
+    setDetails([]);
   };
 
   const addNumberField = () => {
@@ -23,6 +44,8 @@ function LCMCalculator({ explanations }) {
     if (numbers.length > 2) {
       const newNumbers = numbers.filter((_, i) => i !== index);
       setNumbers(newNumbers);
+      setResult('');
+      setDetails([]);
     }
   };
 
@@ -42,26 +65,59 @@ function LCMCalculator({ explanations }) {
   };
 
   const calculateLCM = () => {
-    const validNumbers = numbers
-      .map(n => parseFloat(n))
-      .filter(n => !isNaN(n) && Number.isInteger(n) && n !== 0);
+    // every filled box must hold a positive whole number; blank boxes are skipped
+    const entries = numbers.map((n) => String(n).trim()).filter((s) => s !== '');
+    const bad = entries.find((s) => !/^\d+$/.test(s) || Number(s) === 0);
+    if (bad !== undefined) {
+      setDetails([]);
+      setResult(`Error: "${bad}" is not a positive whole number`);
+      return;
+    }
+    const validNumbers = entries.map(Number);
 
     if (validNumbers.length < 2) {
+      setDetails([]);
       setResult('Error: Enter at least 2 valid integers');
       return;
     }
 
     let lcmResult = validNumbers[0];
+    const chain = [];
     for (let i = 1; i < validNumbers.length; i++) {
-      lcmResult = lcm(lcmResult, validNumbers[i]);
+      const g = gcd(lcmResult, validNumbers[i]);
+      const next = lcm(lcmResult, validNumbers[i]);
+      chain.push(`LCM(${lcmResult}, ${validNumbers[i]}) = ${lcmResult} × ${validNumbers[i]} / GCF(${lcmResult}, ${validNumbers[i]}) = ${lcmResult * validNumbers[i]} / ${g} = ${next}`);
+      lcmResult = next;
+    }
+    if (!Number.isSafeInteger(lcmResult)) {
+      setDetails([]);
+      setResult('Error: The result is too large to show exactly');
+      return;
     }
 
+    let lines = [];
+    if (method === 'prime') {
+      const facs = validNumbers.map(factorize);
+      if (facs.every((f) => f !== null)) {
+        const best = {};
+        facs.forEach((f) => f.forEach(([p, e]) => { best[p] = Math.max(best[p] || 0, e); }));
+        const merged = Object.keys(best).map(Number).sort((a, b) => a - b).map((p) => [p, best[p]]);
+        lines = validNumbers.map((n, k) => `${n} = ${showFactors(facs[k])}`);
+        lines.push(`Highest power of each prime: ${showFactors(merged)} = ${lcmResult}`);
+      } else {
+        lines = ['A number above 10¹² is too large to factor here; the result was found with GCF.'];
+      }
+    } else {
+      lines = chain;
+    }
+    setDetails(lines);
     setResult(lcmResult.toString());
   };
 
   const resetAll = () => {
     setNumbers(['', '']);
     setResult('');
+    setDetails([]);
   };
 
   // page texts (explanations prop) are rendered with the site's processContent; the built-in defaults stay plain text
@@ -348,6 +404,11 @@ function LCMCalculator({ explanations }) {
               }}>
                 {result || '—'}
               </div>
+              {details.length > 0 && (
+                <div style={{ marginTop: '12px', paddingTop: '10px', borderTop: '1px solid #e2e8f0', fontSize: '14px', color: '#475569', lineHeight: 1.6, textAlign: 'left' }}>
+                  {details.map((line, i) => (<div key={i}>{line}</div>))}
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -566,17 +566,17 @@ For formal statements, see **set identities**.`,
 
     obj11: {
       title: `Related Concepts and Tools`,
-      content: `**Set Theory** - Sets, membership, subsets, and the universe the diagram divides.
+      content: `**[Set Theory](!/set-theory/basics)** - Sets, membership, subsets, and the universe the diagram divides.
 
-**Set Operations** - Formal definitions of intersection, union, difference, complement, and symmetric difference.
+**[Set Operations](!/set-theory/operations)** - Formal definitions of intersection, union, difference, complement, and symmetric difference.
 
-**De Morgan's Laws** - The two complement identities the Compare box confirms fastest.
+**[De Morgan's Laws](!/set-theory/rules#de_morgan)** - The two complement identities the Compare box confirms fastest.
 
-**Cardinality** - Counting elements, and the inclusion-exclusion rule the Elements tab lets you verify.
+**[Cardinality](!/set-theory/cardinality)** - Counting elements, and the inclusion-exclusion rule the Elements tab lets you verify.
 
-**Logic** - Set operations mirror the logical connectives: intersection is AND, union is OR, complement is NOT.
+**[Logic](!/logic)** - Set operations mirror the logical connectives: intersection is AND, union is OR, complement is NOT.
 
-**Probability** - Events are sets, so the same diagrams carry over to probability rules for unions and complements.
+**[Probability](!/probability)** - Events are sets, so the same diagrams carry over to probability rules for unions and complements.
 
 [Two-Set Venn Diagram](!/set-theory/visual-tools/two-sets-basic-venn) - The four regions of two sets, one operation at a time.
 

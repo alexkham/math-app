@@ -292,15 +292,15 @@ Understanding the connection between divisibility and modulo helps solve **congr
 
   obj10: {
     title: `Related Calculators and Concepts`,
-    content: `**Modulo Calculator** - Calculate remainders directly. Complements divisibility testing by showing $a \\bmod b$ for any numbers. Divisibility occurs when modulo equals zero.
+    content: `**[Modulo Calculator](!/calculators/modulo-calculator)** - Calculate remainders directly. Complements divisibility testing by showing $a \\bmod b$ for any numbers. Divisibility occurs when modulo equals zero.
 
-**Factoring Calculator** - Find all factors of a number. Every factor represents a number that divides evenly. Combines divisibility testing with complete factor enumeration.
+**[Factoring Calculator](!/algebra/calculators/factoring)** - Find all factors of a number. Every factor represents a number that divides evenly. Combines divisibility testing with complete factor enumeration.
 
-**GCF Calculator** - Find greatest common factor. Uses divisibility to identify which numbers divide into multiple inputs. Essential for fraction simplification.
+**[GCF Calculator](!/arithmetic/calculators/gcf-calculator)** - Find greatest common factor. Uses divisibility to identify which numbers divide into multiple inputs. Essential for fraction simplification.
 
-**Prime Number Checker** - Test if a number is prime. A number is prime only if it's divisible by exactly two numbers: $1$ and itself.
+**[Prime Number Checker](!/arithmetic/calculators/prime-calculator)** - Test if a number is prime. A number is prime only if it's divisible by exactly two numbers: $1$ and itself.
 
-**LCM Calculator** - Find least common multiple. The LCM is divisible by all input numbers—it's the smallest such number. Divisibility is central to understanding multiples.`,
+**[LCM Calculator](!/arithmetic/calculators/lcm-calculator)** - Find least common multiple. The LCM is divisible by all input numbers—it's the smallest such number. Divisibility is central to understanding multiples.`,
     before: ``,
     after: ``,
     link: '',

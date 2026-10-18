@@ -746,11 +746,11 @@ The collapse ratio is the same for every card, which is why plain division works
 
 [Circular permutation](!/combinatorics/visual-tools/circular-permutation) — arrange items around a circle where rotations are identical. Formula $(n - 1)!$.
 
-**Multinomial coefficient** — the direct algebraic name for $n! / (k_1! \\cdot k_2! \\cdots)$. Generalizes the [binomial coefficient](!/combinatorics/visual-tools/combination) and appears in the [multinomial theorem](!/combinatorics/binomial-theorem#4).
+**[Multinomial coefficient](!/combinatorics/binomial-coefficient#4)** — the direct algebraic name for $n! / (k_1! \\cdot k_2! \\cdots)$. Generalizes the [binomial coefficient](!/combinatorics/visual-tools/combination) and appears in the [multinomial theorem](!/combinatorics/binomial-theorem#4).
 
-**Binomial coefficient** — the special case with exactly two groups: $\\binom{n}{k} = n! / (k! \\cdot (n - k)!)$. Counts arrangements of a multiset with two distinct items.
+**[Binomial coefficient](!/combinatorics/binomial-coefficient)** — the special case with exactly two groups: $\\binom{n}{k} = n! / (k! \\cdot (n - k)!)$. Counts arrangements of a multiset with two distinct items.
 
-**Combinatorics calculator** — to compute $n! / (k_1! \\cdot k_2! \\cdots)$ for any multiset, see the **multiset permutation calculator**.
+**[Combinatorics calculator](!/combinatorics/calculator#permutation-with-identical-items)** — to compute $n! / (k_1! \\cdot k_2! \\cdots)$ for any multiset, see the **multiset permutation calculator**.
 
 [Partition into groups](!/combinatorics/visual-tools/partition) — the same multinomial coefficient, read as box sizes rather than as repeat counts.
 

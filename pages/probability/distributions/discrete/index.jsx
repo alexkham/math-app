@@ -1129,6 +1129,23 @@ A **Bernoulli trial** is a **single random experiment** with exactly **two possi
 * **Failure (0)** with probability ( $1 - p$ )
 
 This setup makes it the most basic probabilistic experiment. A classic example is a **single coin flip**, where heads is defined as success. The outcome is binary, and the probabilities are fixed.
+
+The Bernoulli distribution of a single trial with success probability $p$ has:
+
+@academic[formula_callout:Bernoulli PMF
+$$P(X = k) = p^k(1-p)^{1-k}, \\quad k \\in \\{0, 1\\}$$
+/probability/formulas#bernoulli_pmf]@
+
+@academic[formula_callout:Bernoulli Mean
+$$E[X] = p$$
+/probability/formulas#bernoulli_mean]@
+
+@academic[formula_callout:Bernoulli Variance
+$$\\operatorname{Var}(X) = p(1-p)$$
+/probability/formulas#bernoulli_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
       `,
       after:`
 ###  Bernoulli Trial as a Building Block for Discrete Distributions Models
@@ -1242,35 +1259,45 @@ Although the six main discrete distributions model different scenarios, they sha
 
 At the core of every discrete distribution sits the [probability mass function (PMF)](!/probability/probability-function#pmf), denoted 
 
-$$P(X = k)$$
+@academic[formula_callout:Shared Properties Across Discrete Distributions
+$$P(X = k)$$]@
 
 This function answers the question: what's the chance of observing exactly value $k$? 
 
 Two rules always hold: [non-negativity](!/probability/axioms#axiom1):
 
-$$P(X = k) \\geq 0$$ 
+@academic[formula_callout:Shared Properties Across Discrete Distributions
+$$P(X = k) \\geq 0$$ ]@
 
 for all $k$, and [normalization](!/probability/axioms#axiom2):
 
-$$\\sum_{\\text{all } k} P(X = k) = 1$$
+@academic[formula_callout:Shared Properties Across Discrete Distributions
+$$\\sum_{\\text{all } k} P(X = k) = 1$$]@
 
 No probability can be negative, and when you add up all probabilities across the support, you must get exactly 1.
 
 Beyond the PMF, each distribution provides the [cumulative distribution function (CDF)](!/probability/cdf), defined as:
 
-$$F(x) = P(X \\leq x)$$
+@academic[formula_callout:Shared Properties Across Discrete Distributions
+$$F(x) = P(X \\leq x)$$]@
 
 This gives the probability of observing a value up to and including some threshold $x$. Unlike [continuous distributions](!/probability/distributions/continuous) where the CDF forms a smooth curve, discrete [CDFs](!/probability/cdf) climb in distinct jumps — flat between values, then leaping upward by $P(X = k)$ at each point $k$ in the support.
 
 Every discrete distribution has an [expected value (mean)](!/probability/expected-value) and [variance](!probability/variance). The [expected value](!/probability/expected-value) for discrete distributions is calculated as 
 
-$$E[X] = \\sum_k k \\cdot P(X = k)$$
+@academic[formula_callout:Shared Properties Across Discrete Distributions
+$$E[X] = \\sum_k k \\cdot P(X = k)$$]@
 
 representing where the distribution balances — the long-run average if you repeated the experiment infinitely. 
 
 The [variance](!/probability/variance) is 
 
+@academic[formula_callout:Variance Computational Formula
 $$\\text{Var}(X) = E[X^2] - (E[X])^2$$
+/probability/formulas#variance_computational_formula]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 quantifying how tightly or loosely probability concentrates around the mean. Different distributions yield different formulas when you compute these sums, but the definitions apply universally.
 
@@ -1404,7 +1431,8 @@ There is no closed-form formula applicable to all discrete distributions. Instea
 
 The median $m$ satisfies:
 
-$$P(X \\leq m) \\geq 0.5 \\quad \\text{and} \\quad P(X \\geq m) \\geq 0.5$$
+@academic[formula_callout:Median
+$$P(X \\leq m) \\geq 0.5 \\quad \\text{and} \\quad P(X \\geq m) \\geq 0.5$$]@
 
 ## Distribution-Specific Results
 

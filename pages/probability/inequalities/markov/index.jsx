@@ -900,7 +900,8 @@ Let $X$ be a non-negative random variable with finite expected value $\\mathbb{E
 
 For any real number $a > 0$, Markov's inequality states:
 
-$$\\mathbb{P}(X \\ge a) \\le \\frac{\\mathbb{E}[X]}{a}$$
+@academic[formula_callout:Statement of Markov's Inequality
+$$\\mathbb{P}(X \\ge a) \\le \\frac{\\mathbb{E}[X]}{a}$$]@
 
 This inequality provides an upper bound on the probability that $X$ exceeds a given threshold, expressed solely in terms of its expectation.
 

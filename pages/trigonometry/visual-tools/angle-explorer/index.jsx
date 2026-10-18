@@ -197,11 +197,11 @@ For full definitions, see [complementary angles](!/trigonometry/definitions#comp
       content:`Continue exploring with these connected resources:
 
 • [Unit Circle](!/visual-tools/unit-circle) — visualize how angle position determines $\\sin$, $\\cos$, and $\\tan$ on a circle of radius $1$.
-• **Degrees and Radians Converter** — quick numeric conversion without the diagram.
+• **[Degrees and Radians Converter](!/converters/degree-radians)** — quick numeric conversion without the diagram.
 • [Arc and Sector Explorer](!/trigonometry/visual-tools/arc-sector) — what a radian actually measures: drag the angle and radius and watch the arc length $s = r	heta$ and the sector area follow.
-• **Trigonometric Functions** — full theory of sine, cosine, tangent, and their reciprocals.
-• **Special Angles Table** — exact values at $0°$, $30°$, $45°$, $60°$, $90°$, and beyond.
-• **Coterminal Angles** — practice problems and proofs for angles sharing a terminal side.
+• **[Trigonometric Functions](!/trigonometry/functions)** — full theory of sine, cosine, tangent, and their reciprocals.
+• **[Special Angles Table](!/tables/special-angles)** — exact values at $0°$, $30°$, $45°$, $60°$, $90°$, and beyond.
+• **[Coterminal Angles](!/trigonometry/degrees-radians#7)** — practice problems and proofs for angles sharing a terminal side.
 • **Reference Angle Calculator** — focused tool for the reduction rules across quadrants.
 • [Angle Types Explorer](!/trigonometry/visual-tools/angle-types) — acute, right, obtuse, straight and reflex angles, with complementary and supplementary pairs side by side.
 • [Function Signs by Quadrant](!/trigonometry/visual-tools/functions-signs) — which of the six functions are positive in the quadrant an angle lands in.

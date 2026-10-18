@@ -1076,11 +1076,13 @@ A probability model defines a space of outcomes and their probabilities.
 
 A **random variable** is a function defined on that space:
 
-$$X : S \\rightarrow \\mathbb{R}$$
+@academic[formula_callout:Models, Random Variables, and Distributions
+$$X : S \\rightarrow \\mathbb{R}$$]@
 
 A **distribution** is the probability law induced by that function:
 
-$$P(X \\in A)$$
+@academic[formula_callout:Models, Random Variables, and Distributions
+$$P(X \\in A)$$]@
 
 The order is fixed:
 
@@ -1122,11 +1124,13 @@ Fix a probability model $(S,\\mathcal{E},P)$ — the [probability-space triple](
 
 Different random variables can be defined on the same model:
 
-$$X_1, X_2, \\dots : S \\rightarrow \\mathbb{R}$$
+@academic[formula_callout:One Model, Many Distributions
+$$X_1, X_2, \\dots : S \\rightarrow \\mathbb{R}$$]@
 
 Each choice produces its own distribution:
 
-$$P(X_k \\in A), \\quad A \\subseteq \\mathbb{R}$$
+@academic[formula_callout:One Model, Many Distributions
+$$P(X_k \\in A), \\quad A \\subseteq \\mathbb{R}$$]@
 
 By changing the mapping (not the model), the resulting distribution may be:
 • discrete

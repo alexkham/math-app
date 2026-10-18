@@ -190,7 +190,7 @@ Set the visualizer to a $2 \\times 3$ shape and try each method to see this tran
     },
     obj10: {
       title: `Related Concepts`,
-      content: `**Matrix operations** — the broader family that includes addition, subtraction, multiplication, transpose, and inversion.
+      content: `**[Matrix operations](!/linear-algebra/matrix/operations)** — the broader family that includes addition, subtraction, multiplication, transpose, and inversion.
 
 [Matrix addition](!/linear-algebra/visual-tools/matrix-addition) — element-wise combination of two matrices of the same shape.
 

@@ -155,15 +155,15 @@ For the formal definition and behavior of [exponential functions](!/algebra/powe
 
     obj9: {
       title: `Related Concepts and Tools`,
-      content: `**Exponents and Powers** — Theory of exponents, including negative powers, fractional exponents, and the laws of exponents.
+      content: `**[Exponents and Powers](!/algebra/powers)** — Theory of exponents, including negative powers, fractional exponents, and the laws of exponents.
 
-**Exponential Function** — How $b^x$ behaves as a continuous function of $x$, including the special role of base $e$.
+**[Exponential Function](!/algebra/powers/exponential-functions)** — How $b^x$ behaves as a continuous function of $x$, including the special role of base $e$.
 
-**Logarithms** — The inverse operation of exponentiation: if $b^n = v$, then $\\log_b v = n$. Use [logarithms](!/algebra/logarithms) to find the exponent given the base and the value.
+**[Logarithms](!/algebra/logarithms)** — The inverse operation of exponentiation: if $b^n = v$, then $\\log_b v = n$. Use [logarithms](!/algebra/logarithms) to find the exponent given the base and the value.
 
-**Algebraic Identities Visualizers** — Geometric proofs of squared identities like $(a+b)^2$ and $(a-b)^2$, showing where powers of 2 appear in algebra.
+**[Algebraic Identities Visualizers](!/algebra/visual-tools/identities)** — Geometric proofs of squared identities like $(a+b)^2$ and $(a-b)^2$, showing where powers of 2 appear in algebra.
 
-**Algebra Visual Tools** — Index of all interactive tools for algebra topics including identity proofs and the powers table itself.
+**[Algebra Visual Tools](!/algebra/visual-tools)** — Index of all interactive tools for algebra topics including identity proofs and the powers table itself.
 
 [Polynomial Multiplication Visualizer](!/algebra/visual-tools/polynomial-multiplication) — Where the law $b^m \\cdot b^n = b^{m+n}$ is applied cell by cell.
 

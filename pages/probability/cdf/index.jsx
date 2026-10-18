@@ -970,7 +970,12 @@ This perspective is what makes the CDF so powerful. It focuses on accumulation r
       content:`
 Formally, the cumulative distribution function of a random variable $X$ is defined by
 
-$F_X(x) = P(X \\le x)$
+@academic[formula_callout:CDF Definition
+$$F_X(x) = P(X \\le x)$$
+/probability/formulas#cdf_definition]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 For each real number $x$, the CDF assigns the probability that the random variable takes a value less than or equal to $x$. The function $F_X$ maps numbers on the real line to values between 0 and 1.
 
@@ -1037,6 +1042,23 @@ The cumulative distribution function obeys several fundamental properties that f
   As $x \\to -\\infty$, $F_X(x) \\to 0$.  
   As $x \\to +\\infty$, $F_X(x) \\to 1$.
 
+Stated formally:
+
+@academic[formula_callout:CDF Limits at Infinity
+$$\\lim_{x \\to -\\infty} F_X(x) = 0, \\qquad \\lim_{x \\to +\\infty} F_X(x) = 1$$
+/probability/formulas#cdf_limits_at_infinity]@
+
+@academic[formula_callout:CDF Monotonicity
+$$x_1 \\leq x_2 \\implies F_X(x_1) \\leq F_X(x_2)$$
+/probability/formulas#cdf_monotonicity]@
+
+@academic[formula_callout:CDF Right-continuity
+$$\\lim_{y \\to x^+} F_X(y) = F_X(x)$$
+/probability/formulas#cdf_right-continuity]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
 These properties are what distinguish a valid CDF from an arbitrary function and guarantee that it represents a genuine probability distribution. The table below names each property, states it formally, and gives the structural guarantee it provides.
 `,
       before:``,
@@ -1050,6 +1072,15 @@ For a discrete random variable, probability is concentrated at specific values. 
 
 In this case, the CDF is a step function. Each jump corresponds to a value the random variable can take, and the size of the jump equals the probability assigned to that value.
 
+Formally, the CDF adds up the probabilities of all values up to $x$:
+
+@academic[formula_callout:CDF from PMF
+$$F_X(x) = \\sum_{k \\leq x} p_X(k)$$
+/probability/formulas#cdf_from_pmf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
 This makes the connection to the probability mass function clear: the PMF determines the jump sizes, while the CDF accumulates those jumps as the value increases. Reading the CDF from left to right shows how probability builds up one possible value at a time.
 `,
       before:``,
@@ -1062,6 +1093,19 @@ This makes the connection to the probability mass function clear: the PMF determ
 For a continuous random variable, probability is spread smoothly over intervals rather than concentrated at individual points. As a result, the CDF increases continuously instead of jumping.
 
 In this setting, the CDF describes how probability accumulates as the value grows along the real line. The slope of this accumulation is captured by the probability density function, which indicates how rapidly probability is building at each point.
+
+In symbols, the CDF accumulates the density, and the density is the slope of the CDF:
+
+@academic[formula_callout:CDF from PDF
+$$F_X(x) = \\int_{-\\infty}^{x} f_X(t)\\,dt$$
+/probability/formulas#cdf_from_pdf]@
+
+@academic[formula_callout:PDF as CDF Derivative
+$$f_X(x) = \\frac{d}{dx} F_X(x)$$
+/probability/formulas#pdf_as_cdf_derivative]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 A key consequence is that a continuous random variable assigns zero probability to any single exact value. Probabilities are obtained only by looking at intervals, and the CDF provides a direct way to compute them.
 `,
@@ -1089,9 +1133,23 @@ One of the main advantages of the cumulative distribution function is that it al
 
 For any two numbers $a < b$, the probability that the random variable lies between them is obtained by subtracting accumulated probabilities:
 
-$P(a < X \\le b) = F_X(b) - F_X(a)$
+@academic[formula_callout:Probability of Interval via CDF
+$$P(a < X \\le b) = F_X(b) - F_X(a)$$
+/probability/formulas#probability_of_interval_via_cdf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 This works uniformly for discrete, continuous, and mixed random variables. One-sided probabilities are handled just as easily by reading the CDF at a single point.
+
+For a continuous random variable the same probability is the area under the density:
+
+@academic[formula_callout:Probability of Interval Continuous
+$$P(a \\leq X \\leq b) = \\int_{a}^{b} f_X(x)\\,dx$$
+/probability/formulas#probability_of_interval_continuous]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Because of this, the CDF often simplifies probability calculations by replacing sums or integrals with simple evaluations of a single function.
 `,
@@ -1168,7 +1226,7 @@ The CDF ties together several core ideas in probability.
 • [Random variables](!/probability/random-variables) provide the numerical structure the CDF describes.  
 • [PMF](!/probability/probability-function#pmf) and [PDF](!/probability/probability-function#pdf) are specific ways probability is distributed, both derived from the CDF.  
 • [Probability axioms](!/probability/axioms) guarantee the basic properties of the CDF.  
-• **Quantiles and percentiles** are defined by inverting the CDF.  
+• **[Quantiles and percentiles](!/probability/median#8)** are defined by inverting the CDF.  
 • [Expectation](!/probability/expected-value) and [variance](!/probability/variance) can be expressed using the CDF.
 
 Through these connections, the CDF serves as a unifying object that links foundational probability concepts with practical calculations.

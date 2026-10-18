@@ -248,15 +248,15 @@ The unions are worth comparing too, and they are less dramatic: $(0, 1]$ against
 
     obj11:{
       title:`Related Concepts and Tools`,
-      content:`**Set Operations** — union and intersection for two sets, which these operators generalise.
+      content:`**[Set Operations](!/set-theory/operations)** — union and intersection for two sets, which these operators generalise.
 
-**Set Notation** — interval notation, the brackets that decide the limits on this page.
+**[Set Notation](!/set-theory/basics#2)** — interval notation, the brackets that decide the limits on this page.
 
-**Set Laws and Identities** — De Morgan's laws, stated here for arbitrary families.
+**[Set Laws and Identities](!/set-theory/rules)** — De Morgan's laws, stated here for arbitrary families.
 
-**Cardinality** — countable and uncountable index sets.
+**[Cardinality](!/set-theory/cardinality)** — countable and uncountable index sets.
 
-**Propositional Logic** — the existential and universal quantifiers the operators translate into.
+**[Propositional Logic](!/logic/propositional-logic)** — the existential and universal quantifiers the operators translate into.
 
 [Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — for the finite case, with expressions rather than families.
 

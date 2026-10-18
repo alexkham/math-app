@@ -726,17 +726,17 @@ Sliding $x_0$ through the tool with both curves visible makes this dictionary vi
 
 [Continuity](!/calculus/visual-tools/continuity) — every differentiable function is continuous, though not the other way around. The absolute value function is continuous at $0$ but not differentiable there.
 
-**Differentiation rules** — power rule, product rule, quotient rule, chain rule. The mechanical toolkit for computing derivatives without going back to the limit definition.
+**[Differentiation rules](!/calculus/derivatives/rules)** — power rule, product rule, quotient rule, chain rule. The mechanical toolkit for computing derivatives without going back to the limit definition.
 
-**Second derivative** — the derivative of $f'$ itself, written $f''$. Measures [concavity](!/calculus/visual-tools/inflection-points) and acceleration.
+**[Second derivative](!/calculus/derivatives/higher-order#2)** — the derivative of $f'$ itself, written $f''$. Measures [concavity](!/calculus/visual-tools/inflection-points) and acceleration.
 
-**Critical points and optimization** — finding where $f'(x) = 0$ to locate [maxima and minima](!/calculus/visual-tools/optimization). The basis of single-variable optimization.
+**[Critical points and optimization](!/calculus/visual-tools/optimization)** — finding where $f'(x) = 0$ to locate [maxima and minima](!/calculus/visual-tools/optimization). The basis of single-variable optimization.
 
 [Mean Value Theorem](!/calculus/visual-tools/mean-value-theorem) — guarantees that on a smooth interval the average slope equals the instantaneous slope at some point.
 
-**Integrals** — the inverse operation. Integration recovers $f$ from $f'$ up to a constant.
+**[Integrals](!/calculus/integrals)** — the inverse operation. Integration recovers $f$ from $f'$ up to a constant.
 
-**Visual tools for calculus** — other interactive visualizers covering limits, [continuity](!/calculus/limits/continuity#2), [Riemann sums](!/calculus/visual-tools/riemann-sum), and integrals.
+**[Visual tools for calculus](!/calculus/visual-tools)** — other interactive visualizers covering limits, [continuity](!/calculus/limits/continuity#2), [Riemann sums](!/calculus/visual-tools/riemann-sum), and integrals.
 
 [Fundamental Theorem of Calculus](!/calculus/visual-tools/fundamental-theorem) — differentiating an accumulation function gives the [integrand](!/calculus/integrals#3) back, which is the theorem's first half.
 

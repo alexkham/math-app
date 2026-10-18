@@ -138,7 +138,7 @@ For detailed comparison of [probability functions](!/probability/random-variable
 
     obj10: {
       title: `Related Probability Tools and Concepts`,
-      content: `**Continuous Distribution Calculators** - Compute exact probabilities, quantiles, means, and [variances](!/probability/variance) for normal, exponential, uniform, and other continuous distributions.
+      content: `**[Continuous Distribution Calculators](!/probability/calculators/continuous-distributions)** - Compute exact probabilities, quantiles, means, and [variances](!/probability/variance) for normal, exponential, uniform, and other continuous distributions.
 
 [PDF Visualizers](!/probability/visual-tools/probability-function) - Display probability density functions as curves showing where values are most likely rather than cumulative probability.
 
@@ -146,9 +146,9 @@ For detailed comparison of [probability functions](!/probability/random-variable
 
 [Normal Distribution Tables](!/probability/visual-tools/distributions/normal) - Standard normal (Z) tables showing cumulative probabilities for the standard normal distribution.
 
-**Probability Density Function Theory** - Understand the mathematical foundation of continuous probability functions and integration.
+**[Probability Density Function Theory](!/probability/probability-function/pdf)** - Understand the mathematical foundation of continuous probability functions and integration.
 
-**Continuous Distributions Overview** - Comprehensive guide to [continuous probability distributions](!/probability/visual-tools/probability-function/continuous) including when to use each type.
+**[Continuous Distributions Overview](!/probability/distributions/continuous)** - Comprehensive guide to [continuous probability distributions](!/probability/visual-tools/probability-function/continuous) including when to use each type.
 
 [Distribution Explorers](!/probability/visual-tools/distributions) - Each continuous family with its density and parameters, the curves these CDFs accumulate.
 

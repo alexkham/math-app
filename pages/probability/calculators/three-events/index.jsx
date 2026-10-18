@@ -385,11 +385,14 @@ Conditioning on an event is defined in [The conditional probability formula](!/p
 
 **Example - Triple intersection for independent events**: Step 1 shows "P(A∩B∩C) = P(A) × P(B) × P(C) (independent)", stating the multiplication rule. Step 2 shows "P(A∩B∩C) = 0.5 × 0.4 × 0.3", substituting provided probabilities. Step 3 shows "P(A∩B∩C) = 0.0600", the computed probability.
 
-**Example - Region "A only"**: Step 1 shows "P(A ∩ B' ∩ C') = P(A) - P(A∩B) - P(A∩C) + P(A∩B∩C)", the inclusion-exclusion formula for this region. Step 2 substitutes all values. Step 3 computes the result. This formula subtracts both pairwise intersections from P(A), but adds back P(A∩B∩C) because it was subtracted twice.
+@academic[example:Example - Region "A only"
+Step 1 shows "P(A ∩ B' ∩ C') = P(A) - P(A∩B) - P(A∩C) + P(A∩B∩C)", the inclusion-exclusion formula for this region. Step 2 substitutes all values. Step 3 computes the result. This formula subtracts both pairwise intersections from P(A), but adds back P(A∩B∩C) because it was subtracted twice.]@
 
-**Example - Union via inclusion-exclusion**: Step 1 shows the full inclusion-exclusion formula with seven terms. Step 2 substitutes all probabilities. Step 3 performs the arithmetic: addition of individuals, subtraction of pairs, addition of triple. The step-by-step format makes this complex calculation transparent.
+@academic[example:Example - Union via inclusion-exclusion
+Step 1 shows the full inclusion-exclusion formula with seven terms. Step 2 substitutes all probabilities. Step 3 performs the arithmetic: addition of individuals, subtraction of pairs, addition of triple. The step-by-step format makes this complex calculation transparent.]@
 
-**Example - Conditional P(A|B∩C)**: Step 1 shows "P(A|B∩C) = P(A∩B∩C) / P(B∩C)", the conditional probability definition. Step 2 shows division with actual values. Step 3 computes the quotient.
+@academic[example:Example - Conditional P(A|B∩C)
+Step 1 shows "P(A|B∩C) = P(A∩B∩C) / P(B∩C)", the conditional probability definition. Step 2 shows division with actual values. Step 3 computes the quotient.]@
 
 The calculations reference previously computed values, showing dependency chains. P(A|B∩C) references P(A∩B∩C) and P(B∩C), both calculated earlier. This demonstrates how complex probabilities build from simpler ones through probability rules.
 Clicking a row a second time folds the steps away. The formulas the steps apply are explained in [The Inclusion-Exclusion Principle for Three Events](!#the-inclusion-exclusion-principle-for-three-events).`,
@@ -464,15 +467,15 @@ With the example values the panel reads Mutually Independent Yes, Pairwise Indep
 
     obj11: {
       title: `Related Probability Tools and Calculators`,
-      content: `**Two Events Probability Calculator** - Calculate probabilities for two events with five modes including independent, conditional, and mutually exclusive.
+      content: `**[Two Events Probability Calculator](!/probability/calculators/two-events)** - Calculate probabilities for two events with five modes including independent, conditional, and mutually exclusive.
 
-**Conditional Probability Calculator** - Interactive contingency table for computing P(A|B) with frequency counts and probability normalization.
+**[Conditional Probability Calculator](!/probability/calculators/conditional-probability)** - Interactive contingency table for computing P(A|B) with frequency counts and probability normalization.
 
-**Bayes' Theorem Calculator** - Calculate posterior probabilities with multiple modes including medical testing and hypothesis updating.
+**[Bayes' Theorem Calculator](!/probability/calculators/bayes-calculator)** - Calculate posterior probabilities with multiple modes including medical testing and hypothesis updating.
 
-**Joint Probability Calculator** - 2×2 joint probability table with automatic marginal calculation and validation.
+**[Joint Probability Calculator](!/probability/calculators/joint-probability)** - 2×2 joint probability table with automatic marginal calculation and validation.
 
-**Venn Diagram Generator** - Create custom Venn diagrams for 2-3 sets with area-proportional regions and labels.
+**[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator)** - Create custom Venn diagrams for 2-3 sets with area-proportional regions and labels.
 
 **Probability Tree Diagram Tool** - Build probability trees for sequential events with automatic branch probability calculation.
 
@@ -480,9 +483,9 @@ With the example values the panel reads Mutually Independent Yes, Pairwise Indep
 
 **Set Operations Calculator** - Compute unions, intersections, complements, and differences for multiple sets.
 
-**Combination and Permutation Calculator** - Compute counting fundamentals for probability problems with distinct and repeated elements.
+**[Combination and Permutation Calculator](!/combinatorics/calculator)** - Compute counting fundamentals for probability problems with distinct and repeated elements.
 
-**Expected Value Calculator** - Calculate expected values, variance, and standard deviation for discrete probability distributions.
+**[Expected Value Calculator](!/probability/calculators/expected-value)** - Calculate expected values, variance, and standard deviation for discrete probability distributions.
 
 The theory behind these tools is taught in [Relations between events](!/probability/events#relations), [Independence](!/probability/events#independence) and [The multiplication rule](!/probability/rules#multy).`,
       before: ``,

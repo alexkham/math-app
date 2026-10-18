@@ -220,9 +220,9 @@ export async function getStaticProps() {
 
     iqr: "The interquartile range, calculated as Q3 - Q1. It represents the middle 50% of the data and is a measure of statistical dispersion. [Learn more about the interquartile range](!#quartiles-and-the-interquartile-range)",
 
-    skewness: "A measure of the asymmetry of the probability distribution. Positive skewness indicates a longer tail on the right side, while negative skewness indicates a longer tail on the left. Formula: Skewness = [n / (n-1)(n-2)] * Σ[(x - x̄)³ / s³], where n is the sample size, x is each value, x̄ is the mean, and s is the standard deviation. [Learn more about skewness](!#skewness-kurtosis-and-other-means)",
+    skewness: "A measure of the asymmetry of the probability distribution. Positive skewness indicates a longer tail on the right side, while negative skewness indicates a longer tail on the left. Formula (as computed here): Skewness = [Σ(x - x̄)³ / n] / σ³, where n is the number of values, x is each value, x̄ is the mean, and σ is the population standard deviation (divisor n). [Learn more about skewness](!#skewness-kurtosis-and-other-means)",
 
-    kurtosis: "A measure of the 'tailedness' of the probability distribution. Higher kurtosis means more of the variance is due to infrequent extreme deviations, as opposed to frequent modestly-sized deviations. Formula: Kurtosis = [n(n+1) / (n-1)(n-2)(n-3)] * [Σ(x - x̄)⁴ / s⁴] - [3(n-1)² / (n-2)(n-3)], where n is the sample size, x is each value, x̄ is the mean, and s is the standard deviation. [Learn more about kurtosis](!#skewness-kurtosis-and-other-means)",
+    kurtosis: "A measure of the 'tailedness' of the probability distribution. Higher kurtosis means more of the variance is due to infrequent extreme deviations, as opposed to frequent modestly-sized deviations. Formula (as computed here, excess kurtosis): Kurtosis = [Σ(x - x̄)⁴ / n] / σ⁴ - 3, where n is the number of values, x is each value, x̄ is the mean, and σ is the population standard deviation (divisor n). A normal distribution scores 0. [Learn more about kurtosis](!#skewness-kurtosis-and-other-means)",
 
     coefficientOfVariation: "The ratio of the standard deviation to the mean, expressed as a percentage. It shows the extent of variability in relation to the mean. Formula: CV = (s / x̄) * 100, where s is the standard deviation and x̄ is the mean. [Learn more about the coefficient of variation](!#variance-and-standard-deviation)",
 
@@ -336,8 +336,8 @@ export async function getStaticProps() {
         { say: 'CLICK the i next to Variance\nThe panel shows both formulas, n - 1 and N.', at: 'tr' },
         { click: { css: 'span[style*="border-radius: 50%"]', nth: 8 } },
         { wait: 2600 },
-        { say: 'READ the three radios\nAuto, Always use n-1, Always use n.\nWith fewer than 30 values the table keeps n - 1.', at: 'bl' },
-        { move: { text: 'Always use n (Population)' }, ms: 900 },
+        { say: 'CLICK Always use n (Population)\nVariance 4.40, standard deviation 2.10.\nAuto keeps n - 1 below 30 values; this radio overrides it.', at: 'bl' },
+        { click: { css: 'input[type="radio"][value="n"]' } },
         { wait: 2800 },
       ],
     },
@@ -443,7 +443,7 @@ Click **Manual Input** to return to the boxes; the file's numbers are kept until
 
 For the values $1$, $2$, $2$, $3$ and $7$ the sample formula gives a variance of $5.50$ and a standard deviation of $2.35$; the population formula would give $4.40$ and $2.10$. The table reports the sample values here, because $n = 5$ is below $30$.
 
-Note that with fewer than $30$ values the table shows the $n - 1$ result whichever radio is selected, so the population choice only takes effect from $30$ values upward. The coefficient of variation, the skewness and the kurtosis always use the population standard deviation.
+Choosing **Always use n (Population)** switches the table to the $n$ result at any size; for the five values above it shows $4.40$ and $2.10$. The coefficient of variation, the skewness and the kurtosis always use the population standard deviation.
 
 Which formula fits which situation, and why the correction is $n - 1$, is explained in [variance and standard deviation](!#variance-and-standard-deviation).`,
       before: ``,
@@ -456,7 +456,7 @@ Which formula fits which situation, and why the correction is $n - 1$, is explai
 
 Values are rounded to two decimal places, except the sample size, the mode, the minimum and the maximum, which are printed as entered. The coefficient of variation carries a percent sign. For the values $3$, $5$, $5$, $8$ and $9$ the table reads: sample size $5$, sum $30.00$, mean $6.00$, median $5.00$, mode $5$, minimum $3$, maximum $9$, range $6$, variance $6.00$, standard deviation $2.45$, quartiles $5.00$ and $8.00$, interquartile range $3.00$, skewness $0.11$, kurtosis $-1.44$, coefficient of variation $36.51\\%$, geometric mean $5.58$, harmonic mean $5.16$ and root mean square $6.39$.
 
-When every value occurs equally often the mode reads **No unique mode**. With only two values the quartiles are not defined and the table shows **NaN** for the first quartile and the interquartile range.
+When every value occurs equally often the mode reads **No unique mode**. With only two values the quartiles are the two values themselves, so for $4$ and $8$ the first quartile is $4.00$, the third $8.00$ and the interquartile range $4.00$.
 
 The averages are compared in [mean, median and mode](!#mean-median-and-mode).`,
       before: ``,

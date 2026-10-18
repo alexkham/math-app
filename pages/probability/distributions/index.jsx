@@ -126,7 +126,8 @@ A probability distribution is a mathematical model that assigns probabilities to
 
 Formally, given a [probability space](!/probability/sample-space) $(\\Omega, \\mathcal{F}, \\mathbb{P})$ and a [random variable](!/probability/random-variables) $X : \\Omega \\to \\mathbb{R}$, the probability distribution of $X$ is the probability measure induced by $X$ on the measurable subsets of $\\mathbb{R}$, defined by 
 
-$$\\mathbb{P}_X(A) = \\mathbb{P}(X \\in A)$$ 
+@academic[formula_callout:What a Probability Distribution Is
+$$\\mathbb{P}_X(A) = \\mathbb{P}(X \\in A)$$ ]@
 
 for all measurable sets $A$. This induced measure encapsulates all probabilistic information about $X$ and serves as the primary object of analysis in statistical inference and probabilistic modeling.
 
@@ -233,7 +234,12 @@ Distributions bridge probability theory and data science. They connect theoretic
         title:`Cumulative Distribution Function (CDF)`,
         content:`While the [probability function](!/probability/probability-function) (PMF or PDF) focuses on the likelihood of specific values or densities, the **Cumulative Distribution Function (CDF)** captures the accumulation of probability across the variable's range. The CDF, typically denoted as $F_X(x)$, defines the probability that a [random variable](!/probability/random-variables) $X$ takes a value less than or equal to $x$:
 
+@academic[formula_callout:CDF Definition
 $$F_X(x) = \\mathbb{P}(X \\leq x)$$
+/probability/formulas#cdf_definition]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 This function serves as a complete characterization of any [random variable](!/probability/random-variables), whether [discrete](!/probability/distributions/discrete) or [continuous](!/probability/distributions/continuous). In the discrete case, the CDF forms a step function that increases in jumps at each outcome. In the continuous case, it appears as a smooth, continuous curve that represents the integral of the density function from $-\\infty$ to $x$.
 

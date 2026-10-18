@@ -248,17 +248,17 @@ The diagram shows the same fact geometrically. If an expression ignores $B$, its
 
     obj11:{
       title:`Related Concepts and Tools`,
-      content:`**Set Operations** — formal definitions of intersection, union, difference, complement, and symmetric difference.
+      content:`**[Set Operations](!/set-theory/operations)** — formal definitions of intersection, union, difference, complement, and symmetric difference.
 
-**Truth Tables** — the propositional-logic treatment, with connectives, tautologies, and contradictions.
+**[Truth Tables](!/logic/truth-tables)** — the propositional-logic treatment, with connectives, tautologies, and contradictions.
 
-**De Morgan's Laws** — the identity pair whose columns this tool matches fastest.
+**[De Morgan's Laws](!/set-theory/rules#de_morgan)** — the identity pair whose columns this tool matches fastest.
 
-**Set Laws and Identities** — the algebraic catalog, including the absorption law behind ignored sets.
+**[Set Laws and Identities](!/set-theory/rules)** — the algebraic catalog, including the absorption law behind ignored sets.
 
-**Propositional Logic** — syntax and semantics of the notation in the As logic line.
+**[Propositional Logic](!/logic/propositional-logic)** — syntax and semantics of the notation in the As logic line.
 
-**Venn Diagrams** — the diagram side on its own, for two and three sets.
+**[Venn Diagrams](!/set-theory/venn-diagrams)** — the diagram side on its own, for two and three sets.
 
 [Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — the companion tool, which shades expressions on up to five sets but does not build the table.
 

@@ -197,21 +197,21 @@ The swap itself is worth a note: the algorithm never needs to be told which numb
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Greatest Common Divisor** — the mathematical concept the visualizer computes; the theoretical companion page to this tool.
+      content: `**[Greatest Common Divisor](!/arithmetic/divisibility/gcd)** — the mathematical concept the visualizer computes; the theoretical companion page to this tool.
 
-**Least Common Multiple (LCM)** — the dual concept, related to the GCD by $\\text{lcm}(a, b) = a \\cdot b / \\gcd(a, b)$.
+**[Least Common Multiple (LCM)](!/arithmetic/divisibility/lcm)** — the dual concept, related to the GCD by $\\text{lcm}(a, b) = a \\cdot b / \\gcd(a, b)$.
 
-**Division Algorithm** — the basic theorem that for any positive integers $a$ and $b$, there exist unique $q$ and $r$ with $0 \\leq r < b$ such that $a = b \\cdot q + r$. [Every row of the visualizer](!#reading-a-division-row) is one application of this.
+**[Division Algorithm](!/arithmetic/divisibility#4)** — the basic theorem that for any positive integers $a$ and $b$, there exist unique $q$ and $r$ with $0 \\leq r < b$ such that $a = b \\cdot q + r$. [Every row of the visualizer](!#reading-a-division-row) is one application of this.
 
-**Coprime Integers** — pairs with GCD equal to $1$; foundational for modular arithmetic and number theory.
+**[Coprime Integers](!/arithmetic/divisibility/gcd#7)** — pairs with GCD equal to $1$; foundational for modular arithmetic and number theory.
 
-**Prime Factorization** — an alternative route to the GCD via factoring both numbers and multiplying their shared prime powers. Slower for large numbers than the Euclidean algorithm but more transparent for small ones.
+**[Prime Factorization](!/arithmetic/divisibility#8)** — an alternative route to the GCD via factoring both numbers and multiplying their shared prime powers. Slower for large numbers than the Euclidean algorithm but more transparent for small ones.
 
 **Bezout's Identity** — the extended Euclidean algorithm finds integers $x$ and $y$ such that $ax + by = \\gcd(a, b)$. A natural follow-up tool to this one.
 
-**Modular Arithmetic** — the GCD underlies which numbers are invertible modulo $n$ and is the foundation of many cryptographic schemes.
+**[Modular Arithmetic](!/arithmetic/modulo)** — the GCD underlies which numbers are invertible modulo $n$ and is the foundation of many cryptographic schemes.
 
-**Fibonacci Numbers** — the [worst-case inputs](!#fibonacci-worst-case) for the Euclidean algorithm, related to it through deep recursive structure.
+**[Fibonacci Numbers](!/algebra/sequences/fibonacci)** — the [worst-case inputs](!#fibonacci-worst-case) for the Euclidean algorithm, related to it through deep recursive structure.
 
 [Modular Arithmetic Wheel](!/arithmetic/visual-tools/modular-wheel) — each division row is one reduction modulo the divisor; the wheel shows where the remainder lands.
 

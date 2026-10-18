@@ -196,13 +196,13 @@ $$\\int f(g(x))\\, g'(x)\\, dx = \\int f(u)\\, du \\quad \\text{with } u = g(x)$
 @academic[formulas_link:Browse all integral formulas
 /calculus/formulas]@
 
-**Example:**
+@academic[example:Example
 
 $$\\int 2x \\cos(x^2)\\, dx$$
 
 Let $u = x^2$, so $du = 2x\\, dx$:
 
-$$= \\int \\cos u\\, du = \\sin u + C = \\sin(x^2) + C$$
+$$= \\int \\cos u\\, du = \\sin u + C = \\sin(x^2) + C$$]@
 
 For definite integrals, convert the limits: when $x = a$, $u = g(a)$; when $x = b$, $u = g(b)$.
 `,
@@ -262,13 +262,13 @@ $$\\int u\\, dv = uv - \\int v\\, du$$
 
 **Method:** Identify factors $u$ and $dv$ in the integrand. Differentiate $u$ to get $du$; integrate $dv$ to get $v$. Apply the formula.
 
-**Example:**
+@academic[example:Example
 
 $$\\int x e^x\\, dx$$
 
 Let $u = x$ and $dv = e^x\\, dx$. Then $du = dx$ and $v = e^x$:
 
-$$= xe^x - \\int e^x\\, dx = xe^x - e^x + C = e^x(x - 1) + C$$
+$$= xe^x - \\int e^x\\, dx = xe^x - e^x + C = e^x(x - 1) + C$$]@
 
 **Choosing the first factor:** LIATE guides selection—Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential. Earlier types typically make better choices for $u$.
 `,
@@ -289,13 +289,13 @@ Integrals involving powers of sine and cosine require strategic use of identitie
 
 $$\\sin^2 x = \\frac{1 - \\cos 2x}{2} \\qquad \\cos^2 x = \\frac{1 + \\cos 2x}{2}$$
 
-**Example:**
+@academic[example:Example
 
 $$\\int \\sin^3 x\\, dx = \\int \\sin x (1 - \\cos^2 x)\\, dx$$
 
 Let $u = \\cos x$:
 
-$$= -\\int (1 - u^2)\\, du = -u + \\frac{u^3}{3} + C = -\\cos x + \\frac{\\cos^3 x}{3} + C$$
+$$= -\\int (1 - u^2)\\, du = -u + \\frac{u^3}{3} + C = -\\cos x + \\frac{\\cos^3 x}{3} + C$$]@
 `,
     before: ``,
     after: ``,
@@ -312,13 +312,13 @@ Square roots of quadratics suggest trigonometric substitutions.
 
 **For** $\\sqrt{x^2 - a^2}$**:** Let $x = a\\sec\\theta$, so $\\sqrt{x^2 - a^2} = a\\tan\\theta$
 
-**Example:**
+@academic[example:Example
 
 $$\\int \\frac{1}{\\sqrt{1 - x^2}}\\, dx$$
 
 Let $x = \\sin\\theta$, so $dx = \\cos\\theta\\, d\\theta$ and $\\sqrt{1 - x^2} = \\cos\\theta$:
 
-$$= \\int \\frac{\\cos\\theta}{\\cos\\theta}\\, d\\theta = \\int d\\theta = \\theta + C = \\arcsin x + C$$
+$$= \\int \\frac{\\cos\\theta}{\\cos\\theta}\\, d\\theta = \\int d\\theta = \\theta + C = \\arcsin x + C$$]@
 `,
     before: ``,
     after: ``,
@@ -331,7 +331,7 @@ Rational functions—polynomials divided by polynomials—decompose into simpler
 
 **Method:** Factor the denominator. Write the fraction as a sum of terms with linear or irreducible quadratic denominators. Solve for coefficients. Integrate each term.
 
-**Example:**
+@academic[example:Example
 
 $$\\int \\frac{1}{x^2 - 1}\\, dx = \\int \\frac{1}{(x-1)(x+1)}\\, dx$$
 
@@ -341,7 +341,7 @@ $$\\frac{1}{(x-1)(x+1)} = \\frac{A}{x-1} + \\frac{B}{x+1}$$
 
 Solving gives $A = 1/2$, $B = -1/2$:
 
-$$= \\frac{1}{2}\\int \\frac{1}{x-1}\\, dx - \\frac{1}{2}\\int \\frac{1}{x+1}\\, dx = \\frac{1}{2}\\ln|x-1| - \\frac{1}{2}\\ln|x+1| + C$$
+$$= \\frac{1}{2}\\int \\frac{1}{x-1}\\, dx - \\frac{1}{2}\\int \\frac{1}{x+1}\\, dx = \\frac{1}{2}\\ln|x-1| - \\frac{1}{2}\\ln|x+1| + C$$]@
 `,
     before: ``,
     after: ``,

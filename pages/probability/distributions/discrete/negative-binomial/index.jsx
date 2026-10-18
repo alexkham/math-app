@@ -1014,7 +1014,12 @@ $r$ controls the target (how many successes), and $p$ controls the chance of ach
       content:`
       The **probability mass function (PMF)** of a **negative binomial distribution** is given by:
 
+@academic[formula_callout:Negative Binomial PMF
 $$P(X = k) = \\binom{k-1}{r-1} p^r (1-p)^{k-r}, \\quad k = r, r+1, r+2, \\ldots$$
+/probability/formulas#negative_binomial_pmf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 where $\\binom{k-1}{r-1} = \\frac{(k-1)!}{(r-1)!(k-r)!}$ is the binomial coefficient.
 
@@ -1047,7 +1052,8 @@ where $\\binom{k-1}{r-1} = \\frac{(k-1)!}{(r-1)!(k-r)!}$ is the binomial coeffic
   content:`
 The [cumulative distribution function (CDF)](!/probability/cdf) of a **negative binomial distribution** is given by:
 
-$$F_X(k) = P(X \\leq k) = \\sum_{i=r}^{k} \\binom{i-1}{r-1} p^r (1-p)^{i-r}$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$F_X(k) = P(X \\leq k) = \\sum_{i=r}^{k} \\binom{i-1}{r-1} p^r (1-p)^{i-r}$$]@
 
 Where:
 $r$ = number of successes desired (fixed, positive integer)
@@ -1062,19 +1068,22 @@ $\\binom{i-1}{r-1}$ = binomial coefficient
 **Summation of Probabilities**: 
 We sum the PMF values from the minimum possible value ($r$ trials) up to $k$ trials:
 
-$$P(X \\leq k) = P(X=r) + P(X=r+1) + P(X=r+2) + \\cdots + P(X=k)$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$P(X \\leq k) = P(X=r) + P(X=r+1) + P(X=r+2) + \\cdots + P(X=k)$$]@
 
 **Alternative Formulation via Regularized Incomplete Beta Function**:
 The CDF can also be expressed using the regularized incomplete beta function:
 
-$$F_X(k) = I_p(r, k-r+1)$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$F_X(k) = I_p(r, k-r+1)$$]@
 
 This relationship connects the negative binomial distribution to the beta distribution and is often used in statistical software for efficient computation.
 
 **Complementary Form**: 
 The probability that the $r$-th success occurs after trial $k$ is:
 
-$$P(X > k) = 1 - F_X(k)$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$P(X > k) = 1 - F_X(k)$$]@
   `,
   before:``,
   after:``,
@@ -1086,13 +1095,23 @@ $$P(X > k) = 1 - F_X(k)$$
   content: `
 As explained in the [general case for calculating expected value](!/probability/expected-value#general), the expected value of a discrete random variable is computed as a weighted sum where each possible value is multiplied by its probability:
 
+@academic[formula_callout:Expected Value (Discrete)
 $$E[X] = \\sum_{x} x \\cdot P(X = x)$$
+/probability/formulas#expected_value_discrete]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 For the **negative binomial distribution**, we apply this general formula to the specific probability mass function of this distribution.
 
 ### Formula
 
+@academic[formula_callout:Negative Binomial Mean
 $$E[X] = \\frac{r}{p}$$
+/probability/formulas#negative_binomial_mean]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $r$ = number of successes desired (fixed, positive integer)
@@ -1104,7 +1123,8 @@ The negative binomial random variable $X$ represents the number of trials needed
 
 Since each geometric variable has expected value $\\frac{1}{p}$, and we need $r$ such successes:
 
-$$E[X] = r \\cdot \\frac{1}{p} = \\frac{r}{p}$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = r \\cdot \\frac{1}{p} = \\frac{r}{p}$$]@
 
 This result follows directly from the linearity of expectation applied to the sum of $r$ geometric random variables.
 
@@ -1114,7 +1134,8 @@ The result $E[X] = \\frac{r}{p}$ extends the geometric distribution's intuition:
 
 Consider rolling a die until you get three 6's, where $r = 3$ and $p = \\frac{1}{6}$:
 
-$$E[X] = \\frac{3}{1/6} = 18$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\frac{3}{1/6} = 18$$]@
 
 On average, you expect to roll the die 18 times before accumulating three 6's. This is exactly three times the expected wait for a single 6.
 
@@ -1130,17 +1151,24 @@ To compute the expected value of a negative binomial distribution for your own p
   content: `
 The [variance](!/probability/variance#calculate) of a discrete random variable measures how spread out the values are around the expected value. It is computed as:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$]@
 
 Or using the shortcut formula:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$]@
 
 For the **negative binomial distribution**, we apply this formula to derive the variance.
 
 ### Formula
 
+@academic[formula_callout:Negative Binomial Variance
 $$\\mathrm{Var}(X) = \\frac{r(1-p)}{p^2}$$
+/probability/formulas#negative_binomial_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $r$ = number of successes desired (fixed, positive integer)
@@ -1153,21 +1181,25 @@ The negative binomial random variable can be viewed as the sum of $r$ independen
 
 Since each geometric variable has variance $\\frac{1-p}{p^2}$, and variances add for independent variables:
 
-$$\\mathrm{Var}(X) = r \\cdot \\frac{1-p}{p^2} = \\frac{r(1-p)}{p^2}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = r \\cdot \\frac{1-p}{p^2} = \\frac{r(1-p)}{p^2}$$]@
 
 The result $\\mathrm{Var}(X) = \\frac{r(1-p)}{p^2}$ extends the geometric distribution's variance by a factor of $r$. As with the geometric case, variance increases rapidly as $p$ decreases (rare successes create high variability) and grows linearly with the number of required successes $r$.
 
 ### Standard Deviation
 
-$$\\sigma = \\sqrt{\\frac{r(1-p)}{p^2}} = \\frac{\\sqrt{r(1-p)}}{p}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = \\sqrt{\\frac{r(1-p)}{p^2}} = \\frac{\\sqrt{r(1-p)}}{p}$$]@
 
 ### Example
 
 Consider rolling a die until you get three 6's, where $r = 3$ and $p = \\frac{1}{6}$:
 
-$$\\mathrm{Var}(X) = \\frac{3 \\times \\frac{5}{6}}{(\\frac{1}{6})^2} = \\frac{\\frac{15}{6}}{\\frac{1}{36}} = \\frac{5}{2} \\times 36 = 90$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\frac{3 \\times \\frac{5}{6}}{(\\frac{1}{6})^2} = \\frac{\\frac{15}{6}}{\\frac{1}{36}} = \\frac{5}{2} \\times 36 = 90$$]@
 
-$$\\sigma = \\sqrt{90} \\approx 9.487$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = \\sqrt{90} \\approx 9.487$$]@
 
 The variance of 90 and standard deviation of about 9.5 indicate high variability around the expected 18 rolls. The actual number of rolls needed could vary substantially from this average.
   `,
@@ -1192,15 +1224,17 @@ The mode is $1$ (this reduces to the [geometric distribution](!/probability/dist
 
 **Intuition:** The term $\\frac{(r-1)(1-p)}{p}$ counts the most likely number of failures; adding the $r$ successes turns it into a number of trials. The mode sits a little below the [expected value](!/probability/expected-value) $\\frac{r}{p}$. As $p$ decreases (success becomes rarer), the mode shifts rightward.
 
-**Example:** For $r = 5$ and $p = 0.3$:
+@academic[example:Example
+For $r = 5$ and $p = 0.3$:
 
 Mode = $5 + \\lfloor \\frac{(5-1)(1-0.3)}{0.3} \\rfloor = 5 + \\lfloor \\frac{4 \\times 0.7}{0.3} \\rfloor = 5 + \\lfloor 9.33 \\rfloor = 14$
 
-The 5th success arriving on exactly the 14th trial is more likely than on any other trial.
+The 5th success arriving on exactly the 14th trial is more likely than on any other trial.]@
 
-**Example:** For $r = 1$ and $p = 0.4$:
+@academic[example:Example
+For $r = 1$ and $p = 0.4$:
 
-Mode = 1 (geometric case: most likely to succeed on the first trial)
+Mode = 1 (geometric case: most likely to succeed on the first trial)]@
 
 ### Median
 
@@ -1208,24 +1242,25 @@ The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) \\ge
 
 For the negative binomial distribution, there is no simple closed-form expression for the median, but it can be found numerically as the smallest $m$ with:
 
-$$\\sum_{k=r}^{m} \\binom{k-1}{r-1} p^r (1-p)^{k-r} \\geq 0.5$$
+@academic[formula_callout:Mode and Median
+$$\\sum_{k=r}^{m} \\binom{k-1}{r-1} p^r (1-p)^{k-r} \\geq 0.5$$]@
 
 **Properties of the median:**
 • The median lies between the mode and the mean $\\frac{r}{p}$ in the examples below
 • For $r = 1$, the median follows the geometric distribution formula
 • The distribution is right-skewed, so median < mean typically
 
-**Example:**
+@academic[example:Example
  For $r = 3$ and $p = 0.5$:
 Mean = $\\frac{3}{0.5} = 6$
 
-$P(X \\leq 4) \\approx 0.31$ and $P(X \\leq 5) = 0.5$ exactly, so both conditions hold for every $m$ from 5 to 6: 5 is the smallest median, and 6 qualifies as well
+$P(X \\leq 4) \\approx 0.31$ and $P(X \\leq 5) = 0.5$ exactly, so both conditions hold for every $m$ from 5 to 6: 5 is the smallest median, and 6 qualifies as well]@
 
-**Example:** 
+@academic[example:Example
 For $r = 5$ and $p = 0.3$:
 Mean = $\\frac{5}{0.3} \\approx 16.67$
 
-The median is 16: $P(X \\leq 15) \\approx 0.49$, just short of one half
+The median is 16: $P(X \\leq 15) \\approx 0.49$, just short of one half]@
 
 Unlike continuous distributions where finding the median requires integration, for [discrete](!/probability/distributions/discrete) distributions, the median is found by summing probabilities until reaching 0.5.
   `,

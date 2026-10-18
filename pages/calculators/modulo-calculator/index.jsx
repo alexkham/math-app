@@ -1226,7 +1226,7 @@ The two conventions are compared in [two conventions](!/arithmetic/modulo/negati
 
 Decimal modulo is used for anything that repeats with a non-integer period: an angle reduced to $[0, 360)$, a time of day in hours, or a wave with period $2\\pi$.
 
-The common mistake is a rounding surprise: a computer stores most decimals approximately, so $7.5 \\bmod 2.2$ comes out as $0.8999999999999995$ rather than $0.9$. Read such a result as $0.9$; the difference is floating-point error, not mathematics.
+The common mistake is a rounding surprise: a computer stores most decimals approximately, so the raw result of $7.5 \\bmod 2.2$ is $0.8999999999999995$ rather than $0.9$. The calculator rounds the result to twelve significant digits, so it shows $0.9$; when you compute by hand or in code, read such a result as $0.9$, since the difference is floating-point error, not mathematics.
 
 The floor formula is the same one that defines the modulo of negative numbers; see [floored division](!/arithmetic/modulo/negative-numbers#4) and [how to compute a remainder](!/arithmetic/modulo#51).`,
     before: ``,

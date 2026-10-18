@@ -27252,7 +27252,7 @@ const formulasRepository = [
   // ------------------------------------------------------------------------
 
   {
-    name: "Conditional Probability Definition",
+    name: "Conditional Probability",
     section: "probability",
     category: "Conditional Probability",
     entity: "conditional_probability",
@@ -27310,8 +27310,8 @@ const formulasRepository = [
         ],
     relatedFormulas: [
           {
-            "name": "Conditional Probability Definition",
-            "url": "/probability/formulas#conditional_probability_definition"
+            "name": "Conditional Probability",
+            "url": "/probability/formulas#conditional_probability"
           },
           {
             "name": "Chain Rule",
@@ -27425,8 +27425,8 @@ const formulasRepository = [
             "url": "/probability/formulas#independence_formula"
           },
           {
-            "name": "Conditional Probability Definition",
-            "url": "/probability/formulas#conditional_probability_definition"
+            "name": "Conditional Probability",
+            "url": "/probability/formulas#conditional_probability"
           }
         ],
     relatedTheorems: [],
@@ -27506,8 +27506,8 @@ const formulasRepository = [
         ],
     relatedFormulas: [
           {
-            "name": "Conditional Probability Definition",
-            "url": "/probability/formulas#conditional_probability_definition"
+            "name": "Conditional Probability",
+            "url": "/probability/formulas#conditional_probability"
           },
           {
             "name": "Law of Total Probability",

@@ -1167,7 +1167,7 @@ Both conditions must hold for every choice of vectors and scalars — not just f
     entries: [
       {
         id: `two-spaces-one-notation`,
-        tex: `T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})`,
+        tex: `$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$`,
         read: `T of c u plus d v equals c times T of u plus d times T of v`,
         means: `Four operations appear here and they are not the same four. The addition and the scaling on the left are performed in $V$, before $T$ is applied; the ones on the right are performed in $W$, after. One glyph is reused for both, and the equation is precisely the claim that the two structures agree.`,
         cases: `Setting $c = d = 1$ leaves additivity; setting $\\mathbf{v} = \\mathbf{0}$ leaves homogeneity. The single line is not a shorthand for the pair — it implies both, and both together imply it.`,
@@ -1177,7 +1177,7 @@ Both conditions must hold for every choice of vectors and scalars — not just f
       },
       {
         id: `space-subscripts`,
-        tex: `T(\\mathbf{0}_V) = \\mathbf{0}_W, \\qquad T^{-1} \\circ T = I_V`,
+        tex: `$T(\\mathbf{0}_V) = \\mathbf{0}_W, \\qquad T^{-1} \\circ T = I_V$`,
         read: `T of the zero of V is the zero of W; T inverse after T is the identity on V`,
         means: `The subscripts name which space the object belongs to. There are two zero vectors here and two identity maps, and without the labels the first equation reads as though nothing happened and the second as though one identity were being used twice.`,
         cases: `When $V$ and $W$ are the same space the subscripts are dropped and nothing is lost. They earn their place exactly when a map crosses between spaces, which is also when the statement stops being obvious.`,
@@ -1187,7 +1187,7 @@ Both conditions must hold for every choice of vectors and scalars — not just f
       },
       {
         id: `parentheses-double-duty`,
-        tex: `T(x, y, z) = (2x - y, \\; x + 3z)`,
+        tex: `$T(x, y, z) = (2x - y, \\; x + 3z)$`,
         read: `T of the triple x, y, z is the pair two x minus y, x plus three z`,
         means: `The parentheses after $T$ are doing two jobs at once. Written strictly the line would begin $T\\big((x, y, z)\\big)$, with the inner pair building a vector and the outer pair applying the function; one pair is dropped by convention. $T$ takes a single argument, not three.`,
         cases: `On the right the parentheses have only the tuple job — there is no function being applied there. The same glyph carries two meanings on the left and one on the right, in a single line.`,
@@ -1197,7 +1197,7 @@ Both conditions must hold for every choice of vectors and scalars — not just f
       },
       {
         id: `space-of-maps`,
-        tex: `\\mathcal{L}(V, W)`,
+        tex: `$\\mathcal{L}(V, W)$`,
         read: `the space of linear maps from V to W`,
         means: `This notation turns functions into elements. Once sums and scalar multiples of transformations are defined pointwise, the collection of all linear maps from $V$ to $W$ satisfies the vector space conditions itself, and the script letter marks that change of level — its members are maps, and they are being treated as vectors.`,
         cases: `Its dimension is $\\dim(V) \\cdot \\dim(W)$, which is the number of entries in a representing matrix. The zero element is the map sending everything to $\\mathbf{0}_W$, and the additive inverse of $T$ is $(-1)T$.`,

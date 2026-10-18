@@ -1187,13 +1187,14 @@ The two regimes — equation and inequality — contrast on every structural att
 
 **Step 4: Read the solution intervals.** For $\\sin(x) > a$: the intervals where the curve lies above the horizontal line. For $\\sin(x) < a$: the intervals where the curve lies below.
 
-**Example:** Solve $\\cos(x) > \\frac{1}{2}$ on $[0, 2\\pi)$.
+@academic[example:Example
+Solve $\\cos(x) > \\frac{1}{2}$ on $[0, 2\\pi)$.
 
 The equation $\\cos(x) = \\frac{1}{2}$ has solutions $x = \\frac{\\pi}{3}$ and $x = \\frac{5\\pi}{3}$ on this interval. The cosine graph starts at $1$ (above $\\frac{1}{2}$), drops to $\\frac{1}{2}$ at $\\frac{\\pi}{3}$, continues below $\\frac{1}{2}$ through the middle of the interval, rises back to $\\frac{1}{2}$ at $\\frac{5\\pi}{3}$, and returns to $1$ at $2\\pi$. The curve is above the line $y = \\frac{1}{2}$ on:
 
 $$x \\in \\left[0, \\frac{\\pi}{3}\\right) \\cup \\left(\\frac{5\\pi}{3}, 2\\pi\\right)$$
 
-The endpoints $\\frac{\\pi}{3}$ and $\\frac{5\\pi}{3}$ are excluded because the inequality is strict ($>$, not $\\geq$). The endpoint $0$ is included because the interval $[0, 2\\pi)$ starts there and $\\cos(0) = 1 > \\frac{1}{2}$.
+The endpoints $\\frac{\\pi}{3}$ and $\\frac{5\\pi}{3}$ are excluded because the inequality is strict ($>$, not $\\geq$). The endpoint $0$ is included because the interval $[0, 2\\pi)$ starts there and $\\cos(0) = 1 > \\frac{1}{2}$.]@
 
 The graphical method is especially useful for transformed functions — $2\\sin(3x) - 1 > 0$ is harder to handle algebraically, but sketching the transformed graph and reading off the solution intervals is straightforward once the [transformations](!/trigonometry/graphs) are understood.`,
     before: ``,
@@ -1212,11 +1213,12 @@ Draw the horizontal line $y = a$ across the unit circle. It intersects the circl
 
 Draw the vertical line $x = a$ across the unit circle. The arc to the right of this line gives the solution.
 
-**Example:** Solve $\\sin(x) \\geq \\frac{\\sqrt{2}}{2}$ on $[0, 2\\pi)$.
+@academic[example:Example
+Solve $\\sin(x) \\geq \\frac{\\sqrt{2}}{2}$ on $[0, 2\\pi)$.
 
 On the unit circle, the horizontal line $y = \\frac{\\sqrt{2}}{2}$ intersects the circle at angles $\\frac{\\pi}{4}$ and $\\frac{3\\pi}{4}$. The arc from $\\frac{\\pi}{4}$ to $\\frac{3\\pi}{4}$ (going counterclockwise through the top of the circle) lies above this line. Since the inequality includes equality ($\\geq$), the endpoints are included:
 
-$$x \\in \\left[\\frac{\\pi}{4}, \\frac{3\\pi}{4}\\right]$$
+$$x \\in \\left[\\frac{\\pi}{4}, \\frac{3\\pi}{4}\\right]$$]@
 
 **For tangent inequalities:** the unit circle method is less direct, since tangent does not correspond to a single coordinate. One approach is to interpret $\\tan\\theta$ as the slope of the terminal side and identify which slopes satisfy the inequality. Alternatively, convert to $\\frac{\\sin\\theta}{\\cos\\theta}$ and reason about the signs and magnitudes separately. In practice, the graphical method is often simpler for tangent inequalities.
 
@@ -1328,7 +1330,8 @@ Vertical shifts ($+D$) and amplitude changes ($A$) affect the threshold value af
     title: `Domain Considerations for Reciprocal and Quotient Functions`,
     content: `Inequalities involving tangent, cotangent, secant, or cosecant require attention to the domains of these functions — specifically, the vertical asymptotes where they are undefined.
 
-**Example:** Solve $\\sec(x) \\geq 2$ on $[0, 2\\pi)$.
+@academic[example:Example
+Solve $\\sec(x) \\geq 2$ on $[0, 2\\pi)$.
 
 Rewrite using the reciprocal: $\\frac{1}{\\cos(x)} \\geq 2$. This requires two conditions simultaneously:
 
@@ -1343,7 +1346,7 @@ $\\cos(x) \\leq \\frac{1}{2}$ on $\\left[\\frac{\\pi}{3}, \\frac{5\\pi}{3}\\righ
 
 Intersection: $\\left[\\frac{\\pi}{3}, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{3\\pi}{2}, \\frac{5\\pi}{3}\\right]$
 
-The points $x = \\frac{\\pi}{2}$ and $x = \\frac{3\\pi}{2}$ are excluded because secant is undefined there (vertical asymptotes on the [graph](!/trigonometry/graphs)).
+The points $x = \\frac{\\pi}{2}$ and $x = \\frac{3\\pi}{2}$ are excluded because secant is undefined there (vertical asymptotes on the [graph](!/trigonometry/graphs)).]@
 
 The reversal of the inequality direction when taking the reciprocal deserves emphasis. If $\\cos(x) > 0$ and $\\frac{1}{\\cos(x)} \\geq 2$, then $\\cos(x) \\leq \\frac{1}{2}$. If $\\cos(x) < 0$ and $\\frac{1}{\\cos(x)} \\geq 2$, there is no solution — a negative reciprocal cannot exceed 2. This case analysis — splitting based on the sign of the denominator — is essential for all inequalities involving reciprocal or quotient [functions](!/trigonometry/functions).`,
     before: ``,

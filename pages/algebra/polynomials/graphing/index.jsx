@@ -13,6 +13,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -633,8 +635,35 @@ const schemas = {
     }),
   };
 
+  const linearPolyCases = {
+    prefaceTitle: 'One coefficient, one direction',
+    preface: 'The graph of $P(x) = ax + b$ is a single straight line with no curvature and no turning points. The coefficient $a$ governs its direction and steepness.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'Two points fix the whole graph: $(0, b)$ on the vertical axis and the root at $x = -\\dfrac{b}{a}$. Doubling $a$ doubles the steepness.',
+    parent: {
+      kicker: 'Linear polynomial',
+      formula: '$P(x) = ax + b$',
+      splitBy: 'the sign of $a$',
+    },
+    cases: [
+      {
+        id: 'climbs', condition: '$a > 0$',
+        count: { n: '↗' },
+        headline: 'Climbs from left to right',
+        desc: 'increases everywhere and never changes direction',
+      },
+      {
+        id: 'descends', condition: '$a < 0$',
+        count: { n: '↘' },
+        headline: 'Descends from left to right',
+        desc: 'decreases everywhere and never changes direction',
+      },
+    ],
+  };
+
 return {
   props:{
+    linearPolyCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -657,7 +686,9 @@ return {
 
 // export default function GraphingPage({seoData,sectionsContent , introContent}) {
 
-export default function GraphingPage({seoData, sectionsContent, introContent, obj3Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function GraphingPage({linearPolyCases, seoData, sectionsContent, introContent, obj3Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -744,6 +775,14 @@ export default function GraphingPage({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="linear-polynomial-slope-sign-cases"
+            title="Linear polynomials: the sign of a"
+            source="/algebra/polynomials/graphing"
+          >
+            <CaseSplit data={linearPolyCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

@@ -1208,7 +1208,7 @@ These two forms are simply two versions of the same concept — the probability 
   – by summing the PMF in the discrete case,
   – by integrating the PDF in the continuous case.
 
-**4. Probability Models**
+**4. [Probability Models](!/probability/models)**
 • A probability model combines:
 \t-[the sample space](!/probability/sample-space),
 \t-[the events](!/probability/events),
@@ -1249,12 +1249,22 @@ Here's the core problem: if a variable can be literally any value between 0 and 
 The PDF $f(x)$ solves this by measuring probability concentration rather than probability itself. Where $f(x)$ is high, values cluster. Where it's low, they're sparse. But $f(x) = 0.8$ doesn't mean "80% probability"—it means that region has high density compared to other regions.
 
 To get actual probabilities, you need intervals. Integration gives you the area under the curve:
+@academic[formula_callout:Probability of Interval Continuous
 $$P(a \\leq X \\leq b) = \\int_{a}^{b} f(x)\\,dx$$
+/probability/formulas#probability_of_interval_continuous]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 This area represents the actual probability of landing between $a$ and $b$.
 
 For any legitimate PDF: first, $f(x) \\geq 0$ always (negative density makes no sense), and second, the total area under the entire curve must equal 1 since the variable has to take **some** value:
+@academic[formula_callout:PDF Normalization
 $$\\int_{-\\infty}^{\\infty} f(x)\\,dx = 1$$
+/probability/formulas#pdf_normalization]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The takeaway: PDFs show you where probability concentrates through their shape. Tall peaks mean common values. Only areas—not heights—give you probabilities.
 

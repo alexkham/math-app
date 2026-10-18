@@ -98,19 +98,19 @@ This is why the visualizers reward repeated viewing. The first pass at default s
 
 **Theoretical Foundations:**
 
-• **Polynomials** — Polynomial structure, terms, degrees, and standard operations.
+• **[Polynomials](!/algebra/polynomials)** — Polynomial structure, terms, degrees, and standard operations.
 
-• **Factoring** — Common polynomial factorings including the difference of squares and perfect square trinomials.
+• **[Factoring](!/algebra/polynomials/factoring)** — Common polynomial factorings including the difference of squares and perfect square trinomials.
 
-• **Exponents and Powers** — Power rules and the laws of exponents that underlie squaring and higher powers.
+• **[Exponents and Powers](!/algebra/powers)** — Power rules and the laws of exponents that underlie squaring and higher powers.
 
 **Reference Tools:**
 
-• **Powers Table** — Searchable reference of integer powers, useful for spotting perfect squares and computing $(a+b)^2$ for specific values.
+• **[Powers Table](!/algebra/visual-tools/powers-table)** — Searchable reference of integer powers, useful for spotting perfect squares and computing $(a+b)^2$ for specific values.
 
 **More Visual Tools:**
 
-• **Algebra Visual Tools** — Index of all interactive algebra visualizations and proofs, including this identity collection.`,
+• **[Algebra Visual Tools](!/algebra/visual-tools)** — Index of all interactive algebra visualizations and proofs, including this identity collection.`,
       before: ``,
       after: ``,
       link: '',

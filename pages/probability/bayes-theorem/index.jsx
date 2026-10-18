@@ -978,7 +978,12 @@ Because of this, Bayes' theorem cannot be understood in isolation. It is a direc
       content:`
 Bayes' theorem expresses the update of probability in a single relation built from conditional probability:
 
+@academic[formula_callout:Bayes Theorem
 $$P(A \\mid B) = \\dfrac{P(B \\mid A)\\,P(A)}{P(B)}$$
+/probability/formulas#bayes_theorem]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Each part of the formula has a clear role.
 
@@ -1102,7 +1107,7 @@ Bayes' theorem connects directly to many of the core ideas in probability and he
 • [Conditional probability](!/probability/conditional-probability) provides the basic mechanism Bayes' theorem reorganizes.
 • [Total probability](!/probability/total-probability) supplies the normalization that keeps updated probabilities consistent.
 • [Independence](!/probability/independence) identifies special cases where the update simplifies.
-• **Chain rule** explains Bayes' theorem as a rearrangement of joint probability.
+• **[Chain rule](!/probability/bayes-theorem#chain)** explains Bayes' theorem as a rearrangement of joint probability.
 • [Probability axioms](!/probability/axioms) guarantee that the update follows consistent rules.
 • [Random variables](!/probability/random-variables) and [distributions](!/probability/distributions) extend Bayes' theorem beyond events to numerical outcomes.
 

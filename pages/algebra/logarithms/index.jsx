@@ -696,6 +696,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1246,8 +1248,37 @@ const schemas = {
     }),
   };
 
+  const logInequalityCases = {
+    prefaceTitle: 'The one extra check',
+    preface: 'Logarithmic inequalities are solved with the same algebraic steps as equations, with one critical addition: the base decides whether the inequality direction is kept or reversed.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'Domain restrictions apply in both cases: every argument must stay positive, and that constraint intersects with the algebraic solution.',
+    parent: {
+      kicker: 'Logarithmic inequality',
+      formula: '$\\log_a(x) > c$',
+      splitBy: 'the base $a$',
+    },
+    cases: [
+      {
+        id: 'increasing', condition: '$a > 1$',
+        count: { n: '↑' },
+        headline: 'Direction preserved',
+        desc: 'the logarithm is increasing: larger arguments produce larger outputs',
+        example: '$\\log_2(x) > 3 \\Rightarrow x > 2^3 = 8$',
+      },
+      {
+        id: 'decreasing', condition: '$0 < a < 1$',
+        count: { n: '↓' },
+        headline: 'Direction reversed',
+        desc: 'the logarithm is decreasing: larger arguments produce smaller outputs',
+        example: '$\\log_{1/2}(x) > 3 \\Rightarrow x < (1/2)^3 = 1/8$',
+      },
+    ],
+  };
+
    return {
   props: {
+    logInequalityCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1267,7 +1298,9 @@ const schemas = {
 }
    }
 
-export default function LogarithmsPage({
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function LogarithmsPage({logInequalityCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1380,6 +1413,14 @@ export default function LogarithmsPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-diagram'}
+            id="logarithmic-inequality-base-cases"
+            title="Logarithmic inequalities: the base decides the direction"
+            source="/algebra/logarithms"
+          >
+            <CaseSplit data={logInequalityCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

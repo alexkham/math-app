@@ -1020,7 +1020,12 @@ This distribution is used when there's no reason to favor any outcome over anoth
       content:`
       The **probability mass function (PMF)** of a **discrete uniform distribution** is given by:
 
+@academic[formula_callout:Discrete Uniform PMF
 $$P(X = x) = \\frac{1}{b - a + 1} = \\frac{1}{n}, \\quad x \\in \\{x_1, x_2, \\dots, x_n\\}$$
+/probability/formulas#discrete_uniform_pmf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where :
 $a$ = lower bound (integer)
@@ -1061,7 +1066,12 @@ obj5:{
   content:`
 The [cumulative distribution function (CDF)](!/probability/cdf) of a **discrete uniform distribution** is given by:
 
+@academic[formula_callout:Discrete Uniform CDF
 $$F_X(x) = P(X \\leq x) = \\begin{cases} 0, & x < a \\\\ \\frac{\\lfloor x \\rfloor - a + 1}{b - a + 1}, & a \\leq x \\leq b \\\\ 1, & x > b \\end{cases}$$
+/probability/formulas#discrete_uniform_cdf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $a$ = lower bound (integer)
@@ -1095,13 +1105,23 @@ obj6: {
   content: `
 As explained in the [general case for calculating expected value](!/probability/expected-value#general), the expected value of a discrete random variable is computed as a weighted sum where each possible value is multiplied by its probability:
 
+@academic[formula_callout:Expected Value (Discrete)
 $$E[X] = \\sum_{x} x \\cdot P(X = x)$$
+/probability/formulas#expected_value_discrete]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 For the **discrete uniform distribution**, we apply this general formula to the specific probability mass function of this distribution.
 
 ### Formula
 
+@academic[formula_callout:Discrete Uniform Mean
 $$E[X] = \\frac{a + b}{2}$$
+/probability/formulas#discrete_uniform_mean]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $a$ = minimum value (lower bound)
@@ -1111,15 +1131,18 @@ $b$ = maximum value (upper bound)
 
 Starting from the general definition and substituting the PMF $P(X = x) = \\frac{1}{b - a + 1}$ for each $x \\in \\{a, a+1, \\ldots, b\\}$:
 
-$$E[X] = \\sum_{x=a}^{b} x \\cdot \\frac{1}{b - a + 1} = \\frac{1}{b - a + 1} \\sum_{x=a}^{b} x$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\sum_{x=a}^{b} x \\cdot \\frac{1}{b - a + 1} = \\frac{1}{b - a + 1} \\sum_{x=a}^{b} x$$]@
 
 The sum of integers from $a$ to $b$ is:
 
-$$\\sum_{x=a}^{b} x = \\frac{(b - a + 1)(a + b)}{2}$$
+@academic[formula_callout:Expected Value (Mean)
+$$\\sum_{x=a}^{b} x = \\frac{(b - a + 1)(a + b)}{2}$$]@
 
 Substituting back:
 
-$$E[X] = \\frac{1}{b - a + 1} \\cdot \\frac{(b - a + 1)(a + b)}{2} = \\frac{a + b}{2}$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\frac{1}{b - a + 1} \\cdot \\frac{(b - a + 1)(a + b)}{2} = \\frac{a + b}{2}$$]@
 
 The result $E[X] = \\frac{a + b}{2}$ captures the symmetry of the uniform distribution: the expected value is simply the midpoint between the minimum and maximum values. Since all outcomes are equally likely, the average naturally falls at the center of the range.
 
@@ -1127,7 +1150,8 @@ The result $E[X] = \\frac{a + b}{2}$ captures the symmetry of the uniform distri
 
 Consider rolling a fair six-sided die, where $a = 1$ and $b = 6$:
 
-$$E[X] = \\frac{1 + 6}{2} = 3.5$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\frac{1 + 6}{2} = 3.5$$]@
 
 The expected value is 3.5, which is the arithmetic mean of all possible outcomes $\\{1, 2, 3, 4, 5, 6\\}$. Note that the expected value need not be a possible outcome of the random variable.
 
@@ -1143,17 +1167,24 @@ obj7: {
   content: `
   The [variance](!/probability/variance#calculate) of a discrete random variable measures how spread out the values are around the expected value. It is computed as:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$]@
 
 Or using the shortcut formula:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$]@
 
 For the **discrete uniform distribution**, we apply this formula to derive the variance.
 
 ### Formula
 
+@academic[formula_callout:Discrete Uniform Variance
 $$\\mathrm{Var}(X) = \\frac{(b - a + 1)^2 - 1}{12}$$
+/probability/formulas#discrete_uniform_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $a$ = minimum value (lower bound)
@@ -1167,27 +1198,32 @@ We know from the expected value section that $\\mu = \\frac{a + b}{2}$.
 
 For $\\mathbb{E}[X^2]$, using the PMF $P(X = x) = \\frac{1}{b - a + 1}$:
 
-$$\\mathbb{E}[X^2] = \\sum_{x=a}^{b} x^2 \\cdot \\frac{1}{b - a + 1} = \\frac{1}{b - a + 1} \\sum_{x=a}^{b} x^2$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathbb{E}[X^2] = \\sum_{x=a}^{b} x^2 \\cdot \\frac{1}{b - a + 1} = \\frac{1}{b - a + 1} \\sum_{x=a}^{b} x^2$$]@
 
 Using the formula for sum of squares: $\\sum_{x=a}^{b} x^2 = \\frac{(b - a + 1)(2b^2 + 2ab + 2a^2 - a - b)}{6}$
 
 After algebraic manipulation:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2 = \\frac{(b - a + 1)^2 - 1}{12}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2 = \\frac{(b - a + 1)^2 - 1}{12}$$]@
 
 The result shows that variance depends on the range width $(b - a + 1)$ squared. A wider range of equally likely values produces higher variance. The formula is symmetric and increases quadratically with the spread between $a$ and $b$.
 
 ### Standard Deviation
 
-$$\\sigma = \\sqrt{\\mathrm{Var}(X)} = \\sqrt{\\frac{(b - a + 1)^2 - 1}{12}}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = \\sqrt{\\mathrm{Var}(X)} = \\sqrt{\\frac{(b - a + 1)^2 - 1}{12}}$$]@
 
 ### Example
 
 For a fair six-sided die where $a = 1$ and $b = 6$:
 
-$$\\mathrm{Var}(X) = \\frac{(6 - 1 + 1)^2 - 1}{12} = \\frac{36 - 1}{12} = \\frac{35}{12} \\approx 2.917$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\frac{(6 - 1 + 1)^2 - 1}{12} = \\frac{36 - 1}{12} = \\frac{35}{12} \\approx 2.917$$]@
 
-$$\\sigma = \\sqrt{\\frac{35}{12}} \\approx 1.708$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = \\sqrt{\\frac{35}{12}} \\approx 1.708$$]@
 
 The variance of approximately 2.917 indicates moderate spread around the mean of 3.5, with outcomes ranging from 1 to 6.
   `,
@@ -1210,15 +1246,15 @@ The distribution is multimodal with $b - a + 1$ modes.
 
 **Intuition:** Since the discrete uniform distribution assigns equal probability $\\frac{1}{b-a+1}$ to each value, no single outcome is more likely than any other. This reflects complete uncertainty within the specified range—all outcomes are equally probable.
 
-**Example:**
+@academic[example:Example
  For $a = 1$, $b = 6$ (rolling a fair die):
 
-Modes = 1, 2, 3, 4, 5, 6 (all equally likely with probability $\\frac{1}{6}$)
+Modes = 1, 2, 3, 4, 5, 6 (all equally likely with probability $\\frac{1}{6}$)]@
 
-**Example:** 
+@academic[example:Example
 For $a = 0$, $b = 4$:
 
-Modes = 0, 1, 2, 3, 4 (all equally likely with probability $\\frac{1}{5}$)
+Modes = 0, 1, 2, 3, 4 (all equally likely with probability $\\frac{1}{5}$)]@
 
 ### Median
 
@@ -1237,17 +1273,17 @@ Any value between $\\frac{a + b - 1}{2}$ and $\\frac{a + b + 1}{2}$ can be consi
 • For symmetric distributions, median = mode = mean (when appropriately defined)
 • The median represents the center of the distribution
 
-**Example:** 
+@academic[example:Example
 For $a = 1$, $b = 6$:
 Mean = $\\frac{1 + 6}{2} = 3.5$
 
-Median = 3.5 (between 3 and 4)
+Median = 3.5 (between 3 and 4)]@
 
-**Example:**
+@academic[example:Example
  For $a = 1$, $b = 5$:
 Mean = $\\frac{1 + 5}{2} = 3$
 
-Median = 3 (the exact middle value)
+Median = 3 (the exact middle value)]@
 
 Unlike [continuous distributions](!/probability/distributions/continuous) where finding the median requires integration, for [discrete](!/probability/distributions/discrete) distributions, the median is found by identifying the middle value(s) when outcomes are equally spaced and equally probable.
   `,

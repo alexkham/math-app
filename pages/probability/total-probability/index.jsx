@@ -1404,11 +1404,18 @@ If an event A can occur through several disjoint cases B₁, B₂, ..., Bₙ tha
 
 **The formula:**
 
+@academic[formula_callout:Law of Total Probability
 $$P(A) = P(A | B₁)·P(B₁) + P(A | B₂)·P(B₂) + ... + P(A | Bₙ)·P(Bₙ)$$
+/probability/formulas#law_of_total_probability]@
 
 Or using summation notation:
 
-\t\t\t\t\t\t$P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)$
+@academic[formula_callout:Law of Total Probability
+$$P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)$$
+/probability/formulas#law_of_total_probability]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 **What each term means:**
 
@@ -1425,7 +1432,8 @@ This is the form shown above, used when you have a finite or countable number of
 
 When the partition becomes continuous (like a range of values), the sum becomes an integral:
 
-$$P(A) = ∫ P(A | B=b)·f(b) db$$
+@academic[formula_callout:The Law of Total Probability
+$$P(A) = ∫ P(A | B=b)·f(b) db$$]@
 
 where $f(b)$ is the probability density of the conditioning variable.
 
@@ -1467,7 +1475,7 @@ All three diagrams show the same phenomenon: $A$'s probability distributes acros
   
       title:`Examples`,
       content:`
-**Example 1: Medical testing**
+@academic[example:Example 1: Medical testing
 
 A disease affects 1% of the population. A test is 95% accurate for infected people (true positive rate) and 90% accurate for healthy people (true negative rate, so 10% false positive rate).
 
@@ -1483,9 +1491,9 @@ $P(\\text{positive}) = P(\\text{positive} | B₁)·P(B₁) + P(\\text{positive} 
             $= 0.0095 + 0.099$
             $= 0.1085$
 
-About $10.85$% of tests come back positive.
+About $10.85$% of tests come back positive.]@
 
-**Example 2: Manufacturing defects**
+@academic[example:Example 2: Manufacturing defects
 
 A factory has three machines producing parts. Machine A makes 50% of parts with 2% defect rate. Machine B makes 30% with 3% defect rate. Machine C makes 20% with 5% defect rate.
 
@@ -1501,9 +1509,9 @@ $P(\\text{defective}) = 0.02 × 0.50 + 0.03 × 0.30 + 0.05 × 0.20$
              $= 0.010 + 0.009 + 0.010$
              $= 0.029$
 
-$2.9$% of all parts are defective.
+$2.9$% of all parts are defective.]@
 
-**Example 3: Weather scenarios**
+@academic[example:Example 3: Weather scenarios
 
 Tomorrow will be sunny, cloudy, or rainy with probabilities 0.6, 0.3, and 0.1. You'll go running with probability 0.8 if sunny, 0.5 if cloudy, and 0.1 if rainy.
 
@@ -1519,7 +1527,7 @@ $P(\\text{run}) = 0.8 × 0.6 + 0.5 × 0.3 + 0.1 × 0.1$
        $= 0.48 + 0.15 + 0.01$
        $= 0.64$
 
-$64$% chance you'll go running.
+$64$% chance you'll go running.]@
 
 In each example, the total probability emerges from weighted contributions across distinct scenarios.`,
       before:``,
@@ -1544,11 +1552,17 @@ The event $A$ might occur in any of the cases. We can split A into pieces: the p
 
 Since the cases don't overlap, the pieces of A don't overlap either. When you have disjoint events, their probabilities add:
 
-$$P(A) = P(A ∩ B₁) + P(A ∩ B₂) + ... + P(A ∩ Bₙ)$$
+@academic[formula_callout:Why the Law Works
+$$P(A) = P(A ∩ B₁) + P(A ∩ B₂) + ... + P(A ∩ Bₙ)$$]@
 
 Now use the definition of conditional probability. We know $P(A ∩ Bᵢ) = P(A | Bᵢ)·P(Bᵢ)$. Substitute this into the sum:
 
+@academic[formula_callout:Law of Total Probability
 $$P(A) = P(A | B₁)·P(B₁) + P(A | B₂)·P(B₂) + ... + P(A | Bₙ)·P(Bₙ)$$
+/probability/formulas#law_of_total_probability]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 That's the law of total probability.
 
@@ -1567,7 +1581,7 @@ It's the simplest possible accounting: count every way $A$ can happen, weight by
       content:`
 Total probability is built entirely from conditional probabilities. It shows how an unconditional probability emerges from conditional pieces.
 
-**Conditional probability tells you:**
+**[Conditional probability](!/probability/conditional-probability) tells you:**
 
 Given that you're in a specific case, what's the probability of the event? That's $P(A | Bᵢ)$.
 
@@ -1577,7 +1591,12 @@ When you don't know which case you're in, combine the conditional probabilities 
 
 **The relationship:**
 
+@academic[formula_callout:Law of Total Probability
 $$P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)$$
+/probability/formulas#law_of_total_probability]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The left side is unconditional — no assumptions about which case occurred.
 The right side is entirely conditional — every $P(A | Bᵢ)$ assumes you know the case.
@@ -1609,11 +1628,21 @@ Total probability and the chain rule work together but serve different purposes.
 
 The chain rule breaks a joint probability into a sequence of conditional steps:
 
+@academic[formula_callout:Multiplication Rule
 $$P(A ∩ B) = P(A | B)·P(B)$$
+/probability/formulas#multiplication_rule]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Or for longer sequences:
 
+@academic[formula_callout:Chain Rule
 $$P(A ∩ B ∩ C) = P(A | B ∩ C)·P(B | C)·P(C)$$
+/probability/formulas#chain_rule]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 You multiply conditional probabilities along a specific pathway to get the joint probability of that pathway.
 
@@ -1621,7 +1650,12 @@ You multiply conditional probabilities along a specific pathway to get the joint
 
 Total probability adds contributions from different pathways:
 
+@academic[formula_callout:Law of Total Probability
 $$P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)$$
+/probability/formulas#law_of_total_probability]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Each term $P(A | Bᵢ)·P(Bᵢ)$ is actually $P(A ∩ Bᵢ)$ by the chain rule. So total probability is summing $P(A ∩ Bᵢ)$ across all cases.
 
@@ -1649,7 +1683,12 @@ Bayes' theorem cannot exist without total probability. They're inseparable.
 
 **Bayes' theorem:**
 
+@academic[formula_callout:Bayes Theorem
 $$P(Bᵢ | A) = P(A | Bᵢ)·P(Bᵢ) / P(A)$$
+/probability/formulas#bayes_theorem]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 This reverses conditioning: you know $P(A | Bᵢ)$ but want $P(Bᵢ | A)$.
 
@@ -1657,11 +1696,21 @@ This reverses conditioning: you know $P(A | Bᵢ)$ but want $P(Bᵢ | A)$.
 
 The denominator $P(A)$ is computed using total probability:
 
+@academic[formula_callout:Law of Total Probability
 $$P(A) = ∑ P(A | Bⱼ)·P(Bⱼ)$$
+/probability/formulas#law_of_total_probability]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The sum runs over all cases, giving:
 
+@academic[formula_callout:Bayes Theorem
 $$P(Bᵢ | A) = P(A | Bᵢ)·P(Bᵢ) / [∑ P(A | Bⱼ)·P(Bⱼ)]$$
+/probability/formulas#bayes_theorem]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 **Why this matters:**
 
@@ -1776,31 +1825,31 @@ Without this framework, you'd be forced to treat heterogeneous systems as if the
       content:`
 Total probability connects to fundamental concepts across probability theory.
 
-**Conditional probability:**
+**[Conditional probability](!/probability/conditional-probability):**
 Total probability is built entirely from conditional pieces. It shows how to reconstruct unconditional probabilities from conditional ones.
 
-**Chain rule:**
+**[Chain rule](!/probability/rules#multy):**
 Each term $P(A | Bᵢ)·P(Bᵢ)$ equals $P(A ∩ Bᵢ)$ by the chain rule. Total probability sums these joint probabilities across cases.
 
-**Bayes' theorem:**
+**[Bayes' theorem](!/probability/bayes-theorem#total):**
 Bayes uses total probability as its denominator. The normalization constant $P(A)$ comes from summing $P(A | Bᵢ)·P(Bᵢ)$ over all cases.
 
-**Partitions:**
+**[Partitions](!/probability/events#relations):**
 Total probability requires a partition — disjoint, exhaustive cases. Any partition of the sample space enables total probability reasoning.
 
-**Mixture distributions:**
+**[Mixture distributions](!/probability/distributions):**
 A mixture distribution is a probability distribution formed by combining multiple component distributions, weighted by mixing probabilities. This is exactly the structure of total probability.
 
-**Weighted averages:**
+**[Weighted averages](!/probability/expected-value):**
 The formula $P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)$ is a weighted average of conditional probabilities, with weights $P(Bᵢ)$. The overall probability is the expectation of $P(A | B)$ over the distribution of $B$.
 
-**Joint probability:**
+**[Joint probability](!/probability/joint-probability):**
 Total probability decomposes $P(A)$ into pieces $P(A ∩ Bᵢ)$. It marginalizes over the cases: $P(A) = ∑ P(A ∩ Bᵢ)$.
 
-**Law of total expectation:**
+**[Law of total expectation](!/probability/expected-value):**
 The expectation version states $E[X] = ∑ E[X | Bᵢ]·P(Bᵢ)$. Same structure, different quantity.
 
-**Independence:**
+**[Independence](!/probability/independence):**
 If $A$ is independent of all $Bᵢ$, then $P(A | Bᵢ) = P(A)$ for all $i$, and total probability becomes trivial: $P(A) = P(A)·∑ P(Bᵢ) = P(A)$. The interesting cases involve dependence.
 
 Total probability sits at the center of a web of interconnected ideas. Master it, and the rest of probability theory becomes clearer.`,

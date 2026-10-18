@@ -186,19 +186,19 @@ In both cases, the calculation is "pair, multiply, sum" — no row-column gymnas
     },
     obj10: {
       title: `Related Concepts`,
-      content: `**Dot product** — the inner product on real vectors; the vectors scenario of this tool.
+      content: `**[Dot product](!/linear-algebra/vectors/dot-product)** — the inner product on real vectors; the vectors scenario of this tool.
 
-**Frobenius inner product** — the matrix version; the matrices scenario of this tool.
+**[Frobenius inner product](!/linear-algebra/matrix/trace#7)** — the matrix version; the matrices scenario of this tool.
 
 [Outer product](!/linear-algebra/visual-tools/vector-outer-product) — the dual operation that takes two vectors and returns a matrix.
 
 [Norm](!/linear-algebra/visual-tools/vector-magnitude) — the length of a vector or matrix, defined through the inner product as $\\|x\\| = \\sqrt{\\langle x, x \\rangle}$.
 
-**Orthogonality** — the condition $\\langle u, v \\rangle = 0$, central to Gram-Schmidt and orthogonal decompositions.
+**[Orthogonality](!/linear-algebra/orthogonality)** — the condition $\\langle u, v \\rangle = 0$, central to Gram-Schmidt and orthogonal decompositions.
 
 [Projection](!/linear-algebra/visual-tools/vector-projection) — the component of one vector along another, computed with the inner product.
 
-**Cauchy-Schwarz inequality** — $|\\langle u, v \\rangle| \\leq \\|u\\| \\|v\\|$, a universal bound on inner products.
+**[Cauchy-Schwarz inequality](!/linear-algebra/orthogonality/inner-product#6)** — $|\\langle u, v \\rangle| \\leq \\|u\\| \\|v\\|$, a universal bound on inner products.
 
 [Matrix multiplication](!/visual-tools/matrix-multiplication) — uses inner products of rows and columns as its building block.`,
       before: ``,

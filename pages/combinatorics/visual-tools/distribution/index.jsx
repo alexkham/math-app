@@ -770,11 +770,11 @@ Eighty-one is also where this tool and its mirror meet: the permutation-with-rep
 
 **Functions from a set to a set** — the algebraic reading. Counting functions $f: A \\to B$ with $|A| = n$ and $|B| = k$ gives $k^n$, sometimes written $B^A$.
 
-**Surjective functions** — functions where every cell is hit. Counted by $k! \\cdot S(n, k)$ where $S(n, k)$ is the Stirling number of the second kind. Always at most $k^n$.
+**[Surjective functions](!/functions/properties#4)** — functions where every cell is hit. Counted by $k! \\cdot S(n, k)$ where $S(n, k)$ is the Stirling number of the second kind. Always at most $k^n$.
 
-**Pigeonhole principle** — when $n > k$, at least one cell must contain more than one item, as [the 81-card run](!#deriving-k-n) shows card by card. The distribution count $k^n$ includes every such forced overlap.
+**[Pigeonhole principle](!/combinatorics/counting-principles#5)** — when $n > k$, at least one cell must contain more than one item, as [the 81-card run](!#deriving-k-n) shows card by card. The distribution count $k^n$ includes every such forced overlap.
 
-**Combinatorics calculator** — to compute $k^n$ for arbitrary $n$ and $k$, see the **distribution into cells calculator**.`,
+**[Combinatorics calculator](!/combinatorics/calculator#distribution-into-cells)** — to compute $k^n$ for arbitrary $n$ and $k$, see the **distribution into cells calculator**.`,
       before: ``,
       after: ``,
       link: '',

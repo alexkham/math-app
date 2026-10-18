@@ -2081,7 +2081,8 @@ For [discrete distributions](!/probability/distributions/discrete), the median i
 
 The median of a discrete [random variable](!/probability/random-variables) $X$ is the smallest value $m$ satisfying both conditions:
 
-$$P(X \\leq m) \\geq 0.5 \\quad \\text{and} \\quad P(X \\geq m) \\geq 0.5$$
+@academic[formula_callout:Median for Discrete Distributions
+$$P(X \\leq m) \\geq 0.5 \\quad \\text{and} \\quad P(X \\geq m) \\geq 0.5$$]@
 
 This ensures that at least half the probability lies below (or at) $m$, and at least half lies above (or at) $m$.
 
@@ -2170,11 +2171,13 @@ For [continuous distributions](!/probability/distributions/continuous), the medi
 
 The median of a continuous [random variable](!/probability/random-variables) $X$ is the value $m$ satisfying:
 
-$$F(m) = P(X \\leq m) = 0.5$$
+@academic[formula_callout:Median for Continuous Distributions
+$$F(m) = P(X \\leq m) = 0.5$$]@
 
 Equivalently, using the [probability density function](!/probability/probability-function/pdf):
 
-$$\\int_{-\\infty}^{m} f(x)dx = 0.5$$
+@academic[formula_callout:Median for Continuous Distributions
+$$\\int_{-\\infty}^{m} f(x)dx = 0.5$$]@
 
 This is the point that divides the area under the density curve into two equal halves.
 
@@ -2209,11 +2212,14 @@ Median: $m = \\frac{\\ln(2)}{\\lambda} \\approx \\frac{0.693}{\\lambda}$
 
 Derivation: The CDF is $F(x) = 1 - e^{-\\lambda x}$. Setting $F(m) = 0.5$ gives:
 
-$$1 - e^{-\\lambda m} = 0.5$$
+@academic[formula_callout:Median for Continuous Distributions
+$$1 - e^{-\\lambda m} = 0.5$$]@
 
-$$e^{-\\lambda m} = 0.5$$
+@academic[formula_callout:Median for Continuous Distributions
+$$e^{-\\lambda m} = 0.5$$]@
 
-$$m = \\frac{\\ln(2)}{\\lambda}$$
+@academic[formula_callout:Median for Continuous Distributions
+$$m = \\frac{\\ln(2)}{\\lambda}$$]@
 
 Beta Distribution with parameters $\\alpha, \\beta$
 
@@ -2391,7 +2397,8 @@ Asymmetry separates the three measures in consistent patterns.
 
 Right skew (tail stretches toward larger values):
 
-$$\\text{mode} < \\text{median} < \\text{mean}$$
+@academic[formula_callout:Median, Mean, and Mode Compared
+$$\\text{mode} < \\text{median} < \\text{mean}$$]@
 
 Extreme large values drag the mean rightward. The median holds closer to the probability bulk. The mode stays fixed at the density peak.
 
@@ -2399,7 +2406,8 @@ Extreme large values drag the mean rightward. The median holds closer to the pro
 
 Left skew (tail stretches toward smaller values):
 
-$$\\text{mean} < \\text{median} < \\text{mode}$$
+@academic[formula_callout:Median, Mean, and Mode Compared
+$$\\text{mean} < \\text{median} < \\text{mode}$$]@
 
 The ordering reverses—mean pulled left, mode anchored at the right peak.
 
@@ -2458,7 +2466,8 @@ The median exhibits specific mathematical behaviors that distinguish it from oth
 
 The median minimizes the [expected value](!/probability/expected-value) of absolute deviation:
 
-$$\\text{median}(X) = \\arg\\min_m E[|X - m|]$$
+@academic[formula_callout:Properties of the Median
+$$\\text{median}(X) = \\arg\\min_m E[|X - m|]$$]@
 
 Among all possible values $m$, the median produces the smallest average absolute distance from $X$. This contrasts with the [mean](!/probability/expected-value), which minimizes squared deviations: $E[(X - \\mu)^2]$.
 
@@ -2468,7 +2477,8 @@ For a [random variable](!/probability/random-variables) $X$ with median $m$, con
 
 The median of $Y$ is:
 
-$$\\text{median}(Y) = a \\cdot \\text{median}(X) + b$$
+@academic[formula_callout:Properties of the Median
+$$\\text{median}(Y) = a \\cdot \\text{median}(X) + b$$]@
 
 Linear transformations shift and scale the median predictably. Multiply by $a$, add $b$—the middle point moves accordingly.
 
@@ -2478,7 +2488,8 @@ Example: If $X$ has median $4$, then $Y = 3X - 2$ has median $3(4) - 2 = 10$.
 
 For strictly monotonic functions $g$ (always increasing or always decreasing):
 
-$$\\text{median}(g(X)) = g(\\text{median}(X))$$
+@academic[formula_callout:Properties of the Median
+$$\\text{median}(g(X)) = g(\\text{median}(X))$$]@
 
 If $g$ is strictly increasing, it preserves the ordering of values, so the 50th percentile stays at the same relative position.
 
@@ -2504,7 +2515,8 @@ This makes the median ideal for data with contamination or measurement errors in
 
 For symmetric distributions centered at $c$:
 
-$$\\text{median}(X) = c = \\text{mean}(X)$$
+@academic[formula_callout:Properties of the Median
+$$\\text{median}(X) = c = \\text{mean}(X)$$]@
 
 Symmetry forces the 50th percentile and the balance point to coincide at the center of symmetry.
 
@@ -2522,7 +2534,8 @@ The median operates independently of scale—it tracks the probability midpoint,
 
 Unlike the [mean](!/probability/expected-value), medians don't add:
 
-$$\\text{median}(X + Y) \\neq \\text{median}(X) + \\text{median}(Y)$$
+@academic[formula_callout:Properties of the Median
+$$\\text{median}(X + Y) \\neq \\text{median}(X) + \\text{median}(Y)$$]@
 
 Even for independent $X$ and $Y$, the 50th percentile of the sum doesn't generally equal the sum of individual 50th percentiles.
 
@@ -2560,11 +2573,12 @@ Check that both $P(X \\leq k) \\geq 0.5$ and $P(X \\geq k) \\geq 0.5$ hold.
 
 If multiple consecutive values satisfy both conditions, any of them qualifies as a median. Report the smallest value or acknowledge the interval.
 
-**Example**: [Binomial](!/probability/distributions/discrete/binomial) with $n = 10, p = 0.5$
+@academic[example:Example
+[Binomial](!/probability/distributions/discrete/binomial) with $n = 10, p = 0.5$
 
 Compute CDF values for $k = 0, 1, 2, \\ldots, 10$. The CDF reaches $F(5) = 0.623 \\geq 0.5$, and $P(X \\geq 5) = 0.623 \\geq 0.5$.
 
-Median = $5$.
+Median = $5$.]@
 
 **Shortcut for known distributions**: Many standard distributions have analytical approximations or tables:
 • [Geometric](!/probability/distributions/discrete/geometric): median = $\\lceil \\frac{-\\ln(2)}{\\ln(1-p)} \\rceil$
@@ -2599,23 +2613,28 @@ The CDF is $F(x) = 1 - e^{-\\lambda x}$.
 
 Setting $F(m) = 0.5$:
 
-$$1 - e^{-\\lambda m} = 0.5$$
+@academic[formula_callout:How to Find the Median
+$$1 - e^{-\\lambda m} = 0.5$$]@
 
-$$e^{-\\lambda m} = 0.5$$
+@academic[formula_callout:How to Find the Median
+$$e^{-\\lambda m} = 0.5$$]@
 
-$$-\\lambda m = \\ln(0.5)$$
+@academic[formula_callout:How to Find the Median
+$$-\\lambda m = \\ln(0.5)$$]@
 
-$$m = \\frac{-\\ln(0.5)}{\\lambda} = \\frac{\\ln(2)}{\\lambda}$$
+@academic[formula_callout:How to Find the Median
+$$m = \\frac{-\\ln(0.5)}{\\lambda} = \\frac{\\ln(2)}{\\lambda}$$]@
 
 Median = $\\frac{\\ln(2)}{\\lambda}$.
 
-**Example**: [Normal distribution](!/probability/distributions/continuous/normal) with parameters $\\mu, \\sigma$
+@academic[example:Example
+[Normal distribution](!/probability/distributions/continuous/normal) with parameters $\\mu, \\sigma$
 
 By symmetry, the median equals the [mean](!/probability/expected-value):
 
 Median = $\\mu$.
 
-No calculation needed for symmetric distributions.
+No calculation needed for symmetric distributions.]@
 
 ## Using Statistical Software
 
@@ -2637,17 +2656,19 @@ For odd sample size $n$: median = $x_{(n+1)/2}$
 
 For even sample size $n$: median = $\\frac{x_{n/2} + x_{n/2+1}}{2}$
 
-**Example**: Data $\\{3, 7, 1, 9, 5\\}$
+@academic[example:Example
+Data $\\{3, 7, 1, 9, 5\\}$
 
 Sorted: $\\{1, 3, 5, 7, 9\\}$
 
-Median = $5$ (middle value).
+Median = $5$ (middle value).]@
 
-**Example**: Data $\\{3, 7, 1, 9\\}$
+@academic[example:Example
+Data $\\{3, 7, 1, 9\\}$
 
 Sorted: $\\{1, 3, 7, 9\\}$
 
-Median = $\\frac{3 + 7}{2} = 5$.
+Median = $\\frac{3 + 7}{2} = 5$.]@
 
 ## Visual Methods
 
@@ -2675,11 +2696,13 @@ The median is the 50th percentile of a distribution—the value below which 50% 
 
 A percentile divides a distribution at a specific cumulative probability. The $p$-th percentile is the value $x_p$ where:
 
-$$P(X \\leq x_p) = \\frac{p}{100}$$
+@academic[formula_callout:Median as the 50th Percentile
+$$P(X \\leq x_p) = \\frac{p}{100}$$]@
 
 The median is the special case where $p = 50$:
 
-$$P(X \\leq m) = 0.5$$
+@academic[formula_callout:Median as the 50th Percentile
+$$P(X \\leq m) = 0.5$$]@
 
 Quantiles use fractional notation instead of percentages. The 0.5-quantile equals the 50th percentile equals the median.
 
@@ -2697,7 +2720,8 @@ The median sits at the center of the quartile structure, with equal probability 
 
 The median anchors the five-number summary used in descriptive statistics:
 
-$$\\text{Minimum, } Q_1, \\text{ Median, } Q_3, \\text{ Maximum}$$
+@academic[formula_callout:Median as the 50th Percentile
+$$\\text{Minimum, } Q_1, \\text{ Median, } Q_3, \\text{ Maximum}$$]@
 
 This summary captures distribution shape through five key positions. Box plots visualize this summary, displaying the median as the central line inside the box.
 
@@ -2705,7 +2729,8 @@ This summary captures distribution shape through five key positions. Box plots v
 
 The interquartile range (IQR) measures spread using quartiles:
 
-$$\\text{IQR} = Q_3 - Q_1$$
+@academic[formula_callout:Median as the 50th Percentile
+$$\\text{IQR} = Q_3 - Q_1$$]@
 
 This range contains the middle 50% of the distribution, centered at the median. The IQR provides a robust measure of spread that ignores extreme values, complementing the median's role as a robust measure of center.
 
@@ -2713,17 +2738,20 @@ This range contains the middle 50% of the distribution, centered at the median. 
 
 For continuous distributions, the $p$-th percentile solves:
 
-$$F(x_p) = p$$
+@academic[formula_callout:Median as the 50th Percentile
+$$F(x_p) = p$$]@
 
 Using the inverse [CDF](!/probability/cdf):
 
-$$x_p = F^{-1}(p)$$
+@academic[formula_callout:Median as the 50th Percentile
+$$x_p = F^{-1}(p)$$]@
 
 The median is $F^{-1}(0.5)$.
 
 For discrete distributions, the $p$-th percentile is the smallest value $x$ where:
 
-$$P(X \\leq x) \\geq p$$
+@academic[formula_callout:Median as the 50th Percentile
+$$P(X \\leq x) \\geq p$$]@
 
 ## Extension to Other Percentiles
 

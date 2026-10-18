@@ -2157,11 +2157,11 @@ This rapid growth is why the calculator switches to scientific notation once a r
 
   obj12: {
     title: `Related Calculators and Concepts`,
-    content: `**Combination Calculator** uses factorials to count selections. The formula for choosing $r$ items from $n$ is $\\frac{n!}{r!(n-r)!}$. This calculator helps you compute combinations without calculating each factorial separately.
+    content: `**[Combination Calculator](!/combinatorics/calculator#simple-combination)** uses factorials to count selections. The formula for choosing $r$ items from $n$ is $\\frac{n!}{r!(n-r)!}$. This calculator helps you compute combinations without calculating each factorial separately.
 
-**Permutation Calculator** also uses factorials for counting arrangements where order matters. The formula $\\frac{n!}{(n-r)!}$ counts ways to arrange $r$ items from $n$ total items.
+**[Permutation Calculator](!/combinatorics/calculator#permutations)** also uses factorials for counting arrangements where order matters. The formula $\\frac{n!}{(n-r)!}$ counts ways to arrange $r$ items from $n$ total items.
 
-**Binomial Coefficient** (written $\\binom{n}{k}$) equals $\\frac{n!}{k!(n-k)!}$ and appears in probability, Pascal's triangle, and the binomial theorem. Understanding factorials is essential for working with binomial coefficients.
+**[Binomial Coefficient](!/combinatorics/binomial-coefficient)** (written $\\binom{n}{k}$) equals $\\frac{n!}{k!(n-k)!}$ and appears in probability, Pascal's triangle, and the binomial theorem. Understanding factorials is essential for working with binomial coefficients.
 
 **Gamma Function** extends factorials to non-integer values. While regular factorials only work for whole numbers, the gamma function $\\Gamma(n) = (n-1)!$ works for any number. This appears in advanced calculus and statistics.
 

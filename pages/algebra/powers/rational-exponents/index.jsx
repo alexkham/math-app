@@ -273,7 +273,7 @@ To evaluate a fractional power such as $100^{2.5}$, use the [exponent calculator
       },
       {
         id: 'linear-form',
-        tex: `@[8^(1/3)]@ vs @[8^1/3]@`,
+        tex: `$@[8^(1/3)]@ vs @[8^1/3]@$`,
         read: `Eight to the one-third — only if the parentheses are there`,
         means: `Linear text has no raised slot, so the grouping must be spelled out: @[8^1/3]@ parses as $\\frac{8^1}{3} = \\frac{8}{3}$, not $2$ — the caret binds tighter than the slash.`,
         cases: `Same rule in spreadsheets and code (@[8**(1/3)]@). Languages with integer division add a second layer: @[1/3]@ evaluating to $0$ turns the whole expression into $8^0 = 1$.`,

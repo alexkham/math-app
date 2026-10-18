@@ -1337,7 +1337,7 @@ For $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$, the eigenvalue $\\la
     entries: [
       {
         id: `fixed-vector-template`,
-        tex: `A\\mathbf{v} = \\lambda\\mathbf{v} \\;\\Rightarrow\\; f(A)\\mathbf{v} = f(\\lambda)\\mathbf{v}`,
+        tex: `$A\\mathbf{v} = \\lambda\\mathbf{v} \\;\\Rightarrow\\; f(A)\\mathbf{v} = f(\\lambda)\\mathbf{v}$`,
         read: `if v is an eigenvector of A with eigenvalue lambda, then v is still an eigenvector after the operation, and only the eigenvalue has moved`,
         means: `The claim sits in the letter that stays put. Both sides carry the same $\\mathbf{v}$, and that repetition is the assertion: the operation left the direction alone and rescaled it differently. Readers watch the $\\lambda$ side, where something visibly happens, and take the fixed $\\mathbf{v}$ for background.`,
         cases: `Five operations on this page fit the shape: the inverse sends $\\lambda$ to $1/\\lambda$, the $k$-th power to $\\lambda^k$, a polynomial to $q(\\lambda)$, a shift to $\\lambda + c$, a scaling to $c\\lambda$. The arrow is also read one vector at a time. It says nothing about a vector that was not already an eigenvector of $A$.`,
@@ -1347,7 +1347,7 @@ For $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$, the eigenvalue $\\la
       },
       {
         id: `polynomial-at-a-matrix`,
-        tex: `q(\\lambda) = c_0 + c_1\\lambda + \\cdots + c_m\\lambda^m \\;\\longrightarrow\\; q(A) = c_0 I + c_1 A + \\cdots + c_m A^m`,
+        tex: `$q(\\lambda) = c_0 + c_1\\lambda + \\cdots + c_m\\lambda^m \\;\\longrightarrow\\; q(A) = c_0 I + c_1 A + \\cdots + c_m A^m$`,
         read: `the polynomial q evaluated at the matrix A`,
         means: `One letter $q$ is fed two different kinds of object: a number on the left, a square matrix on the right. Substitution is mechanical everywhere except at the constant term. A bare $c_0$ is a number and cannot be added to a matrix, so it becomes $c_0 I$ — the notation $q(A)$ performs that swap without announcing it.`,
         cases: `Exponents on $A$ mean repeated matrix multiplication, so $A$ must be square. Any two polynomials in the same $A$ commute with each other and with $A$, which is why the expansion in the proof may be reordered freely.`,
@@ -1357,7 +1357,7 @@ For $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$, the eigenvalue $\\la
       },
       {
         id: `left-eigenvector`,
-        tex: `\\mathbf{w}^{T} A = \\lambda \\mathbf{w}^{T}`,
+        tex: `$\\mathbf{w}^{T} A = \\lambda \\mathbf{w}^{T}$`,
         read: `w transpose A equals lambda times w transpose — w is a left eigenvector of A`,
         means: `The side of the multiplication is the whole distinction. Unqualified, **eigenvector** always means the right one, with $A$ acting from the left on a column. Here the vector stands to the left of $A$, so it has to be a row, and the $T$ is what makes the product legal rather than a statement about $\\mathbf{w}$ itself.`,
         cases: `Transposing the equation gives $A^{T}\\mathbf{w} = \\lambda\\mathbf{w}$, so the left eigenvectors of $A$ are the ordinary eigenvectors of $A^{T}$, sharing $\\lambda$ with the right eigenvectors of $A$.`,

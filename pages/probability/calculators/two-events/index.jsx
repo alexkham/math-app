@@ -396,11 +396,14 @@ With $P(A) = 0.8$ and $P(B) = 0.3$ in independent mode the overlap grows to $0.2
 
 Each calculation follows a three-step format: **(1) Formula** showing the general probability rule, **(2) Substitution** replacing variables with actual values, **(3) Result** computing the final probability. Steps are indented for clarity.
 
-**Example - Independent P(A∩B)**: Step 1 shows "P(A ∩ B) = P(A) × P(B) (independent events)", establishing the multiplication rule. Step 2 shows "P(A ∩ B) = 0.5 × 0.4", substituting provided values. Step 3 shows "P(A ∩ B) = 0.2000", the computed result.
+@academic[example:Example - Independent P(A∩B)
+Step 1 shows "P(A ∩ B) = P(A) × P(B) (independent events)", establishing the multiplication rule. Step 2 shows "P(A ∩ B) = 0.5 × 0.4", substituting provided values. Step 3 shows "P(A ∩ B) = 0.2000", the computed result.]@
 
-**Example - Conditional P(A|B)**: Step 1 shows "P(A|B) = P(A ∩ B) / P(B)", the definition of conditional probability. Step 2 shows "P(A|B) = 0.2000 / 0.4", using the derived intersection. Step 3 shows "P(A|B) = 0.5000", the conditional probability.
+@academic[example:Example - Conditional P(A|B)
+Step 1 shows "P(A|B) = P(A ∩ B) / P(B)", the definition of conditional probability. Step 2 shows "P(A|B) = 0.2000 / 0.4", using the derived intersection. Step 3 shows "P(A|B) = 0.5000", the conditional probability.]@
 
-**Example - Union from addition rule**: Step 1 shows "P(A ∪ B) = P(A) + P(B) - P(A ∩ B)", the addition rule. Step 2 shows "P(A ∪ B) = 0.5 + 0.4 - 0.2000", substituting all values. Step 3 shows "P(A ∪ B) = 0.7000", the total coverage.
+@academic[example:Example - Union from addition rule
+Step 1 shows "P(A ∪ B) = P(A) + P(B) - P(A ∩ B)", the addition rule. Step 2 shows "P(A ∪ B) = 0.5 + 0.4 - 0.2000", substituting all values. Step 3 shows "P(A ∪ B) = 0.7000", the total coverage.]@
 
 Calculations reference previously computed values, showing dependency chains. For instance, P(A|B) calculation references P(A∩B) computed earlier. This demonstrates how complex probabilities build from simpler ones.
 
@@ -504,23 +507,23 @@ The axioms are stated in [The axioms of probability](!/probability/basics#axioms
 
     obj11: {
       title: `Related Probability Tools and Calculators`,
-      content: `**Conditional Probability Calculator** - Interactive contingency table for computing P(A|B) with frequency counts and probability normalization.
+      content: `**[Conditional Probability Calculator](!/probability/calculators/conditional-probability)** - Interactive contingency table for computing P(A|B) with frequency counts and probability normalization.
 
-**Bayes' Theorem Calculator** - Calculate posterior probabilities with multiple modes including medical testing and hypothesis updating.
+**[Bayes' Theorem Calculator](!/probability/calculators/bayes-calculator)** - Calculate posterior probabilities with multiple modes including medical testing and hypothesis updating.
 
-**Joint Probability Calculator** - 2×2 joint probability table with automatic marginal calculation and validation.
+**[Joint Probability Calculator](!/probability/calculators/joint-probability)** - 2×2 joint probability table with automatic marginal calculation and validation.
 
-**Three Events Probability Calculator** - Extend to three events with intersection, union, and conditional probabilities.
+**[Three Events Probability Calculator](!/probability/calculators/three-events)** - Extend to three events with intersection, union, and conditional probabilities.
 
-**Venn Diagram Generator** - Create custom Venn diagrams for 2-3 sets with area-proportional regions and labels.
+**[Venn Diagram Generator](!/set-theory/visual-tools/venn-generator)** - Create custom Venn diagrams for 2-3 sets with area-proportional regions and labels.
 
 **Probability Tree Diagram Tool** - Build probability trees for sequential events with automatic branch probability calculation.
 
-**Combination and Permutation Calculator** - Compute counting fundamentals for probability problems with distinct and repeated elements.
+**[Combination and Permutation Calculator](!/combinatorics/calculator)** - Compute counting fundamentals for probability problems with distinct and repeated elements.
 
-**Expected Value Calculator** - Calculate expected values, variance, and standard deviation for discrete probability distributions.
+**[Expected Value Calculator](!/probability/calculators/expected-value)** - Calculate expected values, variance, and standard deviation for discrete probability distributions.
 
-**Binomial Probability Calculator** - Compute probabilities for fixed trials with constant success probability.
+**[Binomial Probability Calculator](!/probability/calculators/discrete-distributions#calculating-binomial-distribution-probabilities)** - Compute probabilities for fixed trials with constant success probability.
 
 **Independence Test Calculator** - Determine statistical independence from observed frequency data with chi-square tests.
 

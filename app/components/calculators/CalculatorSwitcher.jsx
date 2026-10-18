@@ -95,7 +95,12 @@ const CalculatorSwitcher = ({ standardExplanations, inverseExplanations, scale =
         ) : activeCalculator === 'inverse' ? (
           <InverseTrigoCalculator explanations={inverseExplanations} />
         ) : (
-          <AngleExplorer />
+          <>
+            <p style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 12px', fontSize: '15px', color: '#4a5568', lineHeight: 1.5 }}>
+              Type an angle or click a quick angle, in degrees or radians. The unit circle shows it with its quadrant and reference angle, the tables list its related and coterminal angles and its trigonometric values, and the checkboxes add the complementary and supplementary angles.
+            </p>
+            <AngleExplorer />
+          </>
         )}
       </div>
     </div>

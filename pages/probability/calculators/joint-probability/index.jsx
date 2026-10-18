@@ -142,21 +142,21 @@ The rule is taught as [The law of total probability](!/probability/total-probabi
 
     obj9: {
       title: `Related Probability Tools and Calculators`,
-      content: `**Conditional Probability Calculator** - Compute P(A|B) from joint and marginal probabilities with contingency tables and Venn diagrams.
+      content: `**[Conditional Probability Calculator](!/probability/calculators/conditional-probability)** - Compute P(A|B) from joint and marginal probabilities with contingency tables and Venn diagrams.
 
-**Bayes' Theorem Calculator** - Calculate posterior probabilities reversing conditional probabilities for diagnostic and inference problems.
+**[Bayes' Theorem Calculator](!/probability/calculators/bayes-calculator)** - Calculate posterior probabilities reversing conditional probabilities for diagnostic and inference problems.
 
 **Probability Tree Diagram Generator** - Visualize joint, marginal, and conditional probabilities through branching tree structures.
 
 **Independence Test Calculator** - Determine whether events are independent by comparing P(A∩B) with P(A)×P(B).
 
-**Venn Diagram Probability Calculator** - Calculate probabilities for intersections, unions, and complements using visual set diagrams.
+**[Venn Diagram Probability Calculator](!/probability/visual-tools/venn-diagrams)** - Calculate probabilities for intersections, unions, and complements using visual set diagrams.
 
-**Three-Event Probability Calculator** - Extend to three events with 8 joint probabilities and three-dimensional relationships.
+**[Three-Event Probability Calculator](!/probability/calculators/three-events)** - Extend to three events with 8 joint probabilities and three-dimensional relationships.
 
 **Multinomial Distribution Calculator** - Handle multiple categorical events with joint probabilities over many categories.
 
-**Contingency Table Analysis** - Perform chi-square tests and compute measures of association for categorical data.
+**[Contingency Table Analysis](!/probability/visual-tools/contingency-tables)** - Perform chi-square tests and compute measures of association for categorical data.
 
 The theory behind these tools is taught in [Joint probability tables](!/probability/joint-probability#tables), [From joint to conditional](!/probability/joint-probability#conditional) and [Independence](!/probability/independence#definition).`,
       before: ``,

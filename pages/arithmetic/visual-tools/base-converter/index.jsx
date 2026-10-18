@@ -222,19 +222,19 @@ Notice the grouping between binary and the two power-of-two bases: $1\\ 100\\ 10
       title: `Related Concepts`,
       content: `**Place value** — the principle every base shares: a digit's contribution is its value times the power of the base at its position.
 
-**Powers and exponents** — the place values are the powers $b^0, b^1, b^2, \\ldots$ of the base.
+**[Powers and exponents](!/algebra/powers)** — the place values are the powers $b^0, b^1, b^2, \\ldots$ of the base.
 
-**Division with remainder** — the operation repeated division is built from, $N = b q + r$ with $0 \\le r < b$.
+**[Division with remainder](!/arithmetic/divisibility#4)** — the operation repeated division is built from, $N = b q + r$ with $0 \\le r < b$.
 
-**Modular arithmetic** — the remainder on division by $b$ is $N \\bmod b$, the units digit in base $b$.
+**[Modular arithmetic](!/arithmetic/modulo)** — the remainder on division by $b$ is $N \\bmod b$, the units digit in base $b$.
 
-**Divisibility rules** — facts about digits in a particular base, derived from the base's remainders modulo the divisor.
+**[Divisibility rules](!/arithmetic/divisibility/rules)** — facts about digits in a particular base, derived from the base's remainders modulo the divisor.
 
-**Logarithms** — the number of digits of $N$ in base $b$ is about $\\log_b N$.
+**[Logarithms](!/algebra/logarithms)** — the number of digits of $N$ in base $b$ is about $\\log_b N$.
 
 **Binary arithmetic** — addition and multiplication carried out directly in base $2$, the next step after conversion.
 
-**Base conversion table** — the reference table on this site for quick lookup, alongside the numeric base converter for larger inputs.
+**[Base conversion table](!/tables/base-conversion)** — the reference table on this site for quick lookup, alongside the numeric base converter for larger inputs.
 
 [Modular Arithmetic Wheel](!/arithmetic/visual-tools/modular-wheel) — the remainder of each division step is where the running quotient lands on a wheel with $b$ slots.
 

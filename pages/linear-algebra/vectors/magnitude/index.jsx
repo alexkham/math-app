@@ -1199,13 +1199,23 @@ The sum of squared components is never negative, and its square root is zero onl
 
 ## Scaling
 
+@academic[formula_callout:Norm Scaling Property
 $$\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$$
+/linear-algebra/formulas#norm_scaling_property]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Multiplying a vector by a scalar $c$ multiplies its length by $|c|$. The absolute value is necessary because a negative scalar reverses the direction without producing a negative length. This property connects the norm directly to [scalar multiplication](!/linear-algebra/vectors/basic-operations): scaling a vector by $c$ does exactly what the geometric picture suggests — it stretches or compresses by $|c|$ and possibly flips.
 
 ## Triangle Inequality
 
+@academic[formula_callout:Triangle Inequality
 $$\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$$
+/linear-algebra/formulas#triangle_inequality]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The length of a sum never exceeds the sum of the individual lengths. Geometrically, in the tip-to-tail picture of vector addition, the direct path from start to finish (the sum) is never longer than the path that follows both vectors end to end. Equality holds only when $\\mathbf{a}$ and $\\mathbf{b}$ point in the same direction — when the path is already straight. The triangle inequality is proved using the Cauchy–Schwarz inequality, which is developed on the [dot product](!/linear-algebra/vectors/dot-product) page.`,
     before: ``,

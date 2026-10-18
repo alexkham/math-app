@@ -229,19 +229,19 @@ For comprehensive treatment, see **set laws and identities**.`,
 
     obj11: {
       title: `Related Concepts and Tools`,
-      content: `**Set Operations** — formal definitions and properties of union, intersection, complement, difference, and symmetric difference.
+      content: `**[Set Operations](!/set-theory/operations)** — formal definitions and properties of union, intersection, complement, difference, and symmetric difference.
 
-**Venn Diagrams** — overview of one-set, two-set, and three-set diagrams, drawing conventions, and when each is appropriate.
+**[Venn Diagrams](!/set-theory/venn-diagrams)** — overview of one-set, two-set, and three-set diagrams, drawing conventions, and when each is appropriate.
 
-**De Morgan's Laws** — algebraic proofs of the two-set and three-set forms and the generalization to arbitrary collections of sets.
+**[De Morgan's Laws](!/set-theory/rules#de_morgan)** — algebraic proofs of the two-set and three-set forms and the generalization to arbitrary collections of sets.
 
 [Two-Set Venn Diagram](!/set-theory/visual-tools/two-sets-basic-venn) — the simpler two-circle case with four regions; useful for first exposure to the visual approach.
 
 [Inclusion-Exclusion Principle](!/set-theory/visual-tools/inclusion-exclusion) — the counting formula $|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C| + |A \\cap B \\cap C|$, which depends on the eight-region decomposition.
 
-**Set Theory Definitions** — glossary of foundational terms used throughout set algebra.
+**[Set Theory Definitions](!/set-theory/definitions)** — glossary of foundational terms used throughout set algebra.
 
-**Set Laws and Identities** — algebraic catalog of commutative, associative, distributive, absorption, and complement laws on sets.
+**[Set Laws and Identities](!/set-theory/rules)** — algebraic catalog of commutative, associative, distributive, absorption, and complement laws on sets.
 
 [Three-Set Laws and Identities Explorer](!/set-theory/visual-tools/three-sets-laws-venn) — the identity equations on the same eight regions, proved side by side.
 

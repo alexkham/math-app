@@ -720,7 +720,7 @@ Two other sign conventions are also handled correctly:
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Definite integrals** — the limit of Riemann sums as $n \\to \\infty$. The exact area the approximations are converging to.
+      content: `**[Definite integrals](!/calculus/integrals/definite)** — the limit of Riemann sums as $n \\to \\infty$. The exact area the approximations are converging to.
 
 [Fundamental Theorem of Calculus](!/calculus/visual-tools/fundamental-theorem) — the shortcut for computing definite integrals: find an antiderivative, evaluate at the endpoints, subtract. See the **FTC visualizer**.
 
@@ -728,11 +728,11 @@ Two other sign conventions are also handled correctly:
 
 **Gaussian quadrature** — an even higher-order family of numerical integration methods using carefully chosen sample points and weights. Used in production numerical libraries.
 
-**Improper integrals** — integrals over unbounded intervals or with unbounded integrands. Defined as [limits](!/calculus/visual-tools/limit) of ordinary integrals.
+**[Improper integrals](!/calculus/integrals/improper)** — integrals over unbounded intervals or with unbounded integrands. Defined as [limits](!/calculus/visual-tools/limit) of ordinary integrals.
 
-**Average value of a function** — equal to $\\frac{1}{b-a} \\int_a^b f(x)\\, dx$. The mean of $f$ over the interval.
+**[Average value of a function](!/calculus/integrals/definite#7)** — equal to $\\frac{1}{b-a} \\int_a^b f(x)\\, dx$. The mean of $f$ over the interval.
 
-**Visual tools for calculus** — limits, [continuity](!/calculus/visual-tools/continuity), [derivatives](!/calculus/visual-tools/derivative), FTC, MVT, [optimization](!/calculus/visual-tools/optimization).
+**[Visual tools for calculus](!/calculus/visual-tools)** — limits, [continuity](!/calculus/visual-tools/continuity), [derivatives](!/calculus/visual-tools/derivative), FTC, MVT, [optimization](!/calculus/visual-tools/optimization).
 
 [Mean Value Theorem](!/calculus/visual-tools/mean-value-theorem) — its integral form says some point in the interval attains the average value the sums converge to.`,
       before: ``,

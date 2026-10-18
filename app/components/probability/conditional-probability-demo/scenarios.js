@@ -17,7 +17,7 @@ export const scenarios = {
     cell10: 10,
     cell01: 200,
     cell00: 740,
-    interpretation: 'If an email contains "ASAP", there\'s an 83.3% chance it\'s spam. However, if an email is spam, there\'s only a 20% chance it contains "ASAP".'
+    interpretation: 'If an email is spam, there\'s an 83.3% chance it contains "ASAP". However, if an email contains "ASAP", there\'s only a 20% chance it\'s spam.'
   },
   weather: {
     label: 'Weather Prediction',

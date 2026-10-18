@@ -12,6 +12,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import renderLineTestV2 from '@/app/utils/illustrations/functions/graphs/lineTest.v2'
 import { tableHeaders } from '@/app/styles/theme'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -397,8 +399,39 @@ const schemas = {
     }),
   };
 
+  const logMonotonicityCases = {
+    prefaceTitle: 'Always one direction',
+    preface: 'Logarithmic functions are strictly monotonic: either always increasing or always decreasing throughout their domain. The base decides which.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'This is why taking logarithms preserves inequality direction when $a > 1$ and reverses it when $0 < a < 1$; see [inequalities](!/algebra/logarithms/inequalities).',
+    parent: {
+      kicker: 'Monotonicity',
+      formula: '$f(x) = \\log_a(x)$',
+      splitBy: 'the base $a$',
+    },
+    cases: [
+      {
+        id: 'increasing', condition: '$a > 1$',
+        count: { n: '↑' },
+        headline: 'Strictly increasing',
+        desc: 'larger inputs produce larger outputs',
+        formula: '$x_1 < x_2 \\Rightarrow \\log_a(x_1) < \\log_a(x_2)$',
+        example: '$\\log_2(x)$, $\\log_{10}(x)$, $\\ln(x)$',
+      },
+      {
+        id: 'decreasing', condition: '$0 < a < 1$',
+        count: { n: '↓' },
+        headline: 'Strictly decreasing',
+        desc: 'larger inputs produce smaller outputs',
+        formula: '$x_1 < x_2 \\Rightarrow \\log_a(x_1) > \\log_a(x_2)$',
+        example: '$\\log_{1/2}(x)$',
+      },
+    ],
+  };
+
 return {
   props: {
+    logMonotonicityCases,
     sectionsContent,
     introContent,
     obj7Table,
@@ -418,7 +451,9 @@ return {
    }
 
 // export default function PropertiesPage({seoData,sectionsContent , introContent}) {
-export default function PropertiesPage({
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function PropertiesPage({logMonotonicityCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -464,6 +499,14 @@ export default function PropertiesPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="logarithm-monotonicity-base-cases"
+            title="Monotonicity of the logarithm: the base decides"
+            source="/algebra/logarithms/properties"
+          >
+            <CaseSplit data={logMonotonicityCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

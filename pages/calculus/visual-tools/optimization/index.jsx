@@ -744,7 +744,7 @@ When $f''(c) = 0$ the test fails because the curve&apos;s [concavity](!/calculus
       title: `Related Concepts`,
       content: `[Derivatives](!/calculus/visual-tools/derivative) — the foundation. The fact that $f'(c) = 0$ at a smooth extremum is what makes the whole technique work. See the **derivative visualizer**.
 
-**Critical points** — full theory of critical points, including the case where $f'$ is undefined.
+**[Critical points](!/calculus/derivatives/graph-analysis#4)** — full theory of critical points, including the case where $f'$ is undefined.
 
 [Concavity and inflection points](!/calculus/visual-tools/inflection-points) — the geometric companion to the second-derivative test. Where $f''$ changes sign you get an inflection point of $f$.
 
@@ -752,9 +752,9 @@ When $f''(c) = 0$ the test fails because the curve&apos;s [concavity](!/calculus
 
 **Extreme Value Theorem** — guarantees that a [continuous function](!/calculus/visual-tools/continuity) on a closed bounded interval attains its max and min. The reason endpoint checks are part of the optimization recipe.
 
-**Applied optimization** — real-world setup of optimization problems: largest box from a given sheet, shortest path, cheapest cost. The calculus is always the same; the modeling step is the hard part.
+**[Applied optimization](!/calculus/derivatives/graph-analysis#10)** — real-world setup of optimization problems: largest box from a given sheet, shortest path, cheapest cost. The calculus is always the same; the modeling step is the hard part.
 
-**Visual tools for calculus** — [limits](!/calculus/visual-tools/limit), [continuity](!/calculus/limits/continuity#2), derivatives, FTC, MVT, [Riemann sums](!/calculus/visual-tools/riemann-sum).
+**[Visual tools for calculus](!/calculus/visual-tools)** — [limits](!/calculus/visual-tools/limit), [continuity](!/calculus/limits/continuity#2), derivatives, FTC, MVT, [Riemann sums](!/calculus/visual-tools/riemann-sum).
 
 [Average Rate of Change](!/calculus/visual-tools/average-rate-of-change) — a critical point is where the instantaneous rate is zero, so averaging across it changes sign.
 

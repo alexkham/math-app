@@ -408,7 +408,8 @@ For [discrete distributions](!/probability/distributions/discrete), the mode is 
 
 The mode of a discrete [random variable](!/probability/random-variables) $X$ is the value $k$ that maximizes the probability mass function:
 
-$$\\text{mode} = \\arg\\max_k P(X = k)$$
+@academic[formula_callout:Mode for Discrete Distributions
+$$\\text{mode} = \\arg\\max_k P(X = k)$$]@
 
 This is the outcome with the highest probability among all possible values in the support.
 
@@ -458,7 +459,8 @@ For [continuous distributions](!/probability/distributions/continuous), the mode
 
 The mode of a continuous [random variable](!/probability/random-variables) $X$ is the value $x$ that maximizes the probability density function:
 
-$$\\text{mode} = \\arg\\max_x f(x)$$
+@academic[formula_callout:Mode for Continuous Distributions
+$$\\text{mode} = \\arg\\max_x f(x)$$]@
 
 This is the point where density concentrates most heavily, not the point with highest probability (which is always zero for continuous variables).
 
@@ -547,7 +549,8 @@ Example: Mixture distributions like $0.5 \\cdot N(\\mu_1, \\sigma_1^2) + 0.5 \\c
 
 Combining two or more distributions creates multimodal patterns naturally. A mixture of normals:
 
-$$f(x) = w_1 f_1(x) + w_2 f_2(x)$$
+@academic[formula_callout:Multiple Modes (Modality)
+$$f(x) = w_1 f_1(x) + w_2 f_2(x)$$]@
 
 produces peaks at the modes of the component distributions, weighted by $w_1$ and $w_2$.
 
@@ -603,7 +606,8 @@ Asymmetry separates the three measures in consistent patterns.
 
 **Right skew** (tail stretches toward larger values):
 
-$$\\text{mode} < \\text{median} < \\text{mean}$$
+@academic[formula_callout:Mode, Mean, and Median Compared
+$$\\text{mode} < \\text{median} < \\text{mean}$$]@
 
 Extreme large values drag the mean rightward. The median holds closer to the probability bulk. The mode stays fixed at the density peak.
 
@@ -611,7 +615,8 @@ Extreme large values drag the mean rightward. The median holds closer to the pro
 
 **Left skew** (tail stretches toward smaller values):
 
-$$\\text{mean} < \\text{median} < \\text{mode}$$
+@academic[formula_callout:Mode, Mean, and Median Compared
+$$\\text{mean} < \\text{median} < \\text{mode}$$]@
 
 The ordering reverses—mean pulled left, mode anchored at the right peak.
 
@@ -671,7 +676,8 @@ For a [random variable](!/probability/random-variables) $X$ with mode $m$, consi
 
 The mode of $Y$ is:
 
-$$\\text{mode}(Y) = a \\cdot \\text{mode}(X) + b$$
+@academic[formula_callout:Properties of the Mode
+$$\\text{mode}(Y) = a \\cdot \\text{mode}(X) + b$$]@
 
 Linear transformations shift and scale the mode predictably. Multiply by $a$, add $b$—the peak moves accordingly.
 
@@ -710,7 +716,8 @@ The mode operates independently of scale—it tracks peak location, not dispersi
 
 For a discrete random variable and a strictly monotonic function $g$ (always increasing or always decreasing):
 
-$$\\text{mode}(g(X)) = g(\\text{mode}(X))$$
+@academic[formula_callout:Properties of the Mode
+$$\\text{mode}(g(X)) = g(\\text{mode}(X))$$]@
 
 A one-to-one $g$ only relabels the values: $P(g(X) = g(x)) = P(X = x)$, so the most likely value moves to $g$ of the old one.
 
@@ -732,7 +739,8 @@ The mode can even sit at distribution boundaries when density peaks at the edge 
 
 Unlike the [mean](!/probability/expected-value), modes don't add:
 
-$$\\text{mode}(X + Y) \\neq \\text{mode}(X) + \\text{mode}(Y)$$
+@academic[formula_callout:Properties of the Mode
+$$\\text{mode}(X + Y) \\neq \\text{mode}(X) + \\text{mode}(Y)$$]@
 
 Even for independent $X$ and $Y$, the peak of the convolution (sum) doesn't generally equal the sum of individual peaks.
 
@@ -761,11 +769,12 @@ Calculate $P(X = k)$ for every $k$ in the support using the [probability mass fu
 
 Find which value(s) produce the largest probability. If multiple values tie, all are modes.
 
-**Example**: [Binomial](!/probability/distributions/discrete/binomial) with $n = 10, p = 0.3$
+@academic[example:Example
+[Binomial](!/probability/distributions/discrete/binomial) with $n = 10, p = 0.3$
 
 Compute $P(X = k)$ for $k = 0, 1, 2, \\ldots, 10$. The maximum occurs at $k = 3$ with probability approximately $0.267$.
 
-Mode = $3$.
+Mode = $3$.]@
 
 **Shortcut for known distributions**: Many standard distributions have analytical expressions:
 • [Geometric](!/probability/distributions/discrete/geometric): mode = $1$ always
@@ -798,7 +807,8 @@ If the support is restricted (e.g., $[0, \\infty)$), evaluate $f(x)$ at the boun
 
 **Example**: [Normal distribution](!/probability/distributions/continuous/normal) with PDF:
 
-$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$$
+@academic[formula_callout:How to Find the Mode
+$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$$]@
 
 Taking the derivative and setting to zero yields $x = \\mu$.
 
@@ -808,7 +818,12 @@ Mode = $\\mu$.
 
 **Example**: [Exponential distribution](!/probability/distributions/continuous/exponential) with PDF:
 
+@academic[formula_callout:Exponential PDF
 $$f(x) = \\lambda e^{-\\lambda x}, \\quad x \\geq 0$$
+/probability/formulas#exponential_pdf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The derivative $f'(x) = -\\lambda^2 e^{-\\lambda x} < 0$ everywhere.
 
@@ -1020,7 +1035,8 @@ The mode sits far left of the mean, which gets pulled right by the long tail.
 
 Combining multiple distributions creates multiple peaks:
 
-$$f(x) = 0.3 \\cdot N(0, 1) + 0.7 \\cdot N(5, 1)$$
+@academic[formula_callout:Special Cases and Edge Cases
+$$f(x) = 0.3 \\cdot N(0, 1) + 0.7 \\cdot N(5, 1)$$]@
 
 This mixture has two modes near $0$ and $5$, weighted by the mixture coefficients.
 

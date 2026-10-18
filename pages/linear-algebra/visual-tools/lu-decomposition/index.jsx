@@ -202,7 +202,7 @@ For the swap preset, the $(1,1)$ entry is $0$, so $R_1 \\leftrightarrow R_2$ com
 
 [Matrix rank](!/linear-algebra/visual-tools/matrix-rank) — the same elimination, counting pivots instead of storing multipliers.
 
-**Elementary matrices** — the row operations as matrices; $L$ is the inverse of their product.
+**[Elementary matrices](!/linear-algebra/matrix/operations#10)** — the row operations as matrices; $L$ is the inverse of their product.
 
 [Determinant](!/linear-algebra/visual-tools/matrix-determinant) — the product of the diagonal of $U$, with a sign for the permutation.
 

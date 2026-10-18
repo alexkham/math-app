@@ -993,7 +993,12 @@ The idea of conditioning becomes precise through a simple normalization rule. Wh
 
 This leads to the formula:
 
-$P(A \\mid B) = \\dfrac{P(A \\cap B)}{P(B)}$
+@academic[formula_callout:Conditional Probability
+$$P(A \\mid B) = \\dfrac{P(A \\cap B)}{P(B)}$$
+/probability/formulas#conditional_probability]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The numerator represents the part of $A$ that is compatible with the condition $B$.  
 The denominator accounts for the fact that we are now working only inside $B$.
@@ -1122,12 +1127,12 @@ Without conditional probability, probability theory would be unable to describe 
       content:`
 Conditional probability connects directly to many central ideas in probability.
 
-- **Events** provide the objects being conditioned on.  
-- **Independence** describes when conditioning has no effect.  
-- **Total probability** combines conditional probabilities across cases.  
-- **Chain rule** builds joint probabilities from conditional ones.  
-- **Bayes theorem** inverts conditional probabilities to update beliefs.  
-- **Random variables and distributions** extend conditioning to numerical outcomes.
+- **[Events](!/probability/events#conditional)** provide the objects being conditioned on.  
+- **[Independence](!/probability/independence#meaning)** describes when conditioning has no effect.  
+- **[Total probability](!/probability/total-probability#cases)** combines conditional probabilities across cases.  
+- **[Chain rule](!/probability/rules#multy)** builds joint probabilities from conditional ones.  
+- **[Bayes theorem](!/probability/bayes-theorem)** inverts conditional probabilities to update beliefs.  
+- **[Random variables](!/probability/random-variables) and [distributions](!/probability/distributions)** extend conditioning to numerical outcomes.
 
 Understanding conditional probability clarifies how these concepts fit together into a single coherent framework.
 `,
@@ -1337,7 +1342,9 @@ export default function ConditionalProbabilityPage({
         link:'',
         content:[
             sectionsContent.formula.content,
-          `The formula has three parts, and the lines above have named each of them: the conditional probability on the left, the joint probability $P(A \\cap B)$ in the numerator, and the probability of the condition, $P(B)$, in the denominator. Here they are taken apart and labelled.`,
+          `
+
+The formula has three parts, and the lines above have named each of them: the conditional probability on the left, the joint probability $P(A \\cap B)$ in the numerator, and the probability of the condition, $P(B)$, in the denominator. Here they are taken apart and labelled.`,
           <DiagramFrame
             key={'formula-diagram'}
             id="conditional-probability-anatomy"
@@ -1346,7 +1353,9 @@ export default function ConditionalProbabilityPage({
           >
             <FormulaAnatomy data={conditionalFormulaAnatomy} variant="poster" theme={siteTheme} />
           </DiagramFrame>,
-          `The part most often misread is the bar. $P(A \\mid B)$ and $P(B \\mid A)$ share the same numerator but divide by different events, so they are different numbers; [Bayes' theorem](!/probability/bayes-theorem) is the rule for converting one into the other.`,
+          `
+
+The part most often misread is the bar. $P(A \\mid B)$ and $P(B \\mid A)$ share the same numerator but divide by different events, so they are different numbers; [Bayes' theorem](!/probability/bayes-theorem) is the rule for converting one into the other.`,
         ]
     },
     {

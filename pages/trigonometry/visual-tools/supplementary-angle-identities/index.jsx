@@ -804,7 +804,7 @@ For the partner family, see the **complementary angle identities visualizer**.`,
       title: `Related Concepts and Tools`,
       content: `**Related Concepts:**
 
-**Complementary Angle Identities** — Partner identity family covering the case $\\pi/2 - \\theta$.
+**[Complementary Angle Identities](!/trigonometry/identities#co-function)** — Partner identity family covering the case $\\pi/2 - \\theta$.
 
 [Opposite Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) — Behavior of trig functions at $-\\theta$ (reflection across the x-axis).
 
@@ -818,11 +818,11 @@ For the partner family, see the **complementary angle identities visualizer**.`,
 
 [Trigonometric Function Graphs](!/trigonometry/visual-tools/functions-graphs) — Plots that show the symmetries underlying these identities visually.
 
-**Trig Identities Reference** — Comprehensive collection of all major identity families with proofs.
+**[Trig Identities Reference](!/tables/trigonometric-identities)** — Comprehensive collection of all major identity families with proofs.
 
 [Pythagorean Identities](!/trigonometry/visual-tools/pythagorean-identities) — Relations between $\\sin^2$ and $\\cos^2$ that reflection across the $y$-axis leaves intact.
 
-**Basic Trigonometric Identities** — The [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) used to extend the [sine](!/trigonometry/functions#1) and [cosine](!/trigonometry/functions#2) results to the other four functions.`,
+**[Basic Trigonometric Identities](!/trigonometry/visual-tools/basic-identities)** — The [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) used to extend the [sine](!/trigonometry/functions#1) and [cosine](!/trigonometry/functions#2) results to the other four functions.`,
       before: ``,
       after: ``,
       link: '',

@@ -754,19 +754,19 @@ For deeper coverage of one-sided limits, see the **one-sided limits** page.`,
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Continuity** — a function is continuous at $c$ exactly when the limit at $c$ exists, $f(c)$ is defined, and they agree. The limit is one of the three conditions in the continuity definition. See the [continuity checker](!/calculus/visual-tools/continuity).
+      content: `**[Continuity](!/calculus/limits/continuity)** — a function is continuous at $c$ exactly when the limit at $c$ exists, $f(c)$ is defined, and they agree. The limit is one of the three conditions in the continuity definition. See the [continuity checker](!/calculus/visual-tools/continuity).
 
-**Limit laws** — the algebraic rules for combining limits: limits of sums, products, quotients, compositions. Most limit computations reduce to applying the laws and evaluating at the point.
+**[Limit laws](!/calculus/limits/rules)** — the algebraic rules for combining limits: limits of sums, products, quotients, compositions. Most limit computations reduce to applying the laws and evaluating at the point.
 
-**Limits at infinity** — the behavior of $f(x)$ as $x \\to \\pm\\infty$. Determines horizontal asymptotes.
+**[Limits at infinity](!/calculus/limits/infinity#2)** — the behavior of $f(x)$ as $x \\to \\pm\\infty$. Determines horizontal asymptotes.
 
-**Indeterminate forms** — limits where direct substitution gives $0/0$, $\\infty/\\infty$, $0 \\cdot \\infty$, or $\\infty - \\infty$. Resolved by algebraic manipulation or **L&apos;Hôpital&apos;s rule**.
+**[Indeterminate forms](!/calculus/limits/evaluating#3)** — limits where direct substitution gives $0/0$, $\\infty/\\infty$, $0 \\cdot \\infty$, or $\\infty - \\infty$. Resolved by algebraic manipulation or **L&apos;Hôpital&apos;s rule**.
 
-**Squeeze theorem** — if $g(x) \\le f(x) \\le h(x)$ near $c$ and $\\lim g = \\lim h = L$, then $\\lim f = L$. Useful for oscillating functions trapped between bounds.
+**[Squeeze theorem](!/calculus/limits/rules#14)** — if $g(x) \\le f(x) \\le h(x)$ near $c$ and $\\lim g = \\lim h = L$, then $\\lim f = L$. Useful for oscillating functions trapped between bounds.
 
 [Derivatives](!/calculus/visual-tools/derivative) — defined as a limit of secant slopes. See the **derivative visualizer**.
 
-**Definite integrals** — defined as limits of [Riemann sums](!/calculus/integrals/definite#1). See the [Riemann sum visualizer](!/calculus/visual-tools/riemann-sum).
+**[Definite integrals](!/calculus/integrals/definite)** — defined as limits of [Riemann sums](!/calculus/integrals/definite#1). See the [Riemann sum visualizer](!/calculus/visual-tools/riemann-sum).
 
 [Average Rate of Change](!/calculus/visual-tools/average-rate-of-change) — shrinking the interval turns the average rate into a limit, which is how the [derivative](!/calculus/derivatives#1) is defined.
 

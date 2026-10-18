@@ -1370,7 +1370,7 @@ The tool uses the anchoring approach because it produces unique arrangements dir
 
 **Cyclic groups** — the algebraic structure behind rotational symmetry. The group of rotations of a circle with $n$ marked positions is $\\mathbb{Z}/n\\mathbb{Z}$.
 
-**Combinatorics calculator** — to compute $(n - 1)!$ for arbitrary $n$ values beyond the visual cap, see the **circular permutation calculator**.
+**[Combinatorics calculator](!/combinatorics/calculator#circular-permutation)** — to compute $(n - 1)!$ for arbitrary $n$ values beyond the visual cap, see the **circular permutation calculator**.
 
 [Permutation with repetition](!/combinatorics/visual-tools/permutation-with-repetition) — reusing items around a circle breaks the rotation argument, because rotations of a repeated pattern can coincide.`,
       before: ``,

@@ -112,6 +112,24 @@ const GroupedDataExpectedValueCalculator = ({ explanations = null }) => {
     };
   }, [groups]);
 
+  // warnings about the ranges: overlaps double-count values; out-of-order ranges give the same result
+  const rangeWarnings = (() => {
+    const rows = groups
+      .map((g, i) => ({ i: i + 1, min: parseFloat(g.rangeMin), max: parseFloat(g.rangeMax), freq: parseFloat(g.frequency) }))
+      .filter((r) => !isNaN(r.min) && !isNaN(r.max) && !isNaN(r.freq) && r.freq > 0 && r.max > r.min);
+    const out = [];
+    for (let a = 0; a < rows.length; a++) {
+      for (let c = a + 1; c < rows.length; c++) {
+        if (rows[a].min < rows[c].max && rows[c].min < rows[a].max) {
+          out.push(`Ranges ${rows[a].i} and ${rows[c].i} overlap, so some values are counted twice.`);
+        }
+      }
+    }
+    const sorted = rows.every((r, k) => k === 0 || r.min >= rows[k - 1].min);
+    if (out.length === 0 && !sorted) out.push('The ranges are not in increasing order; the result is the same.');
+    return out;
+  })();
+
   return (
     <div style={styles.container}>
       <h2 style={styles.h2}>Expected Value Calculator - Grouped/Frequency Data Method</h2>
@@ -214,6 +232,12 @@ const GroupedDataExpectedValueCalculator = ({ explanations = null }) => {
             <button onClick={addGroup} style={styles.addBtn}>
               + Add Range
             </button>
+
+            {rangeWarnings.length > 0 && (
+              <div role="alert" style={{ margin: '10px 0', padding: '10px 12px', background: '#fffbeb', border: '1px solid #f59e0b', borderRadius: '6px', color: '#92400e', fontSize: '14px' }}>
+                {rangeWarnings.map((w, k) => (<div key={k}>{'⚠ ' + w}</div>))}
+              </div>
+            )}
 
             <div style={styles.dataStats}>
               <div style={styles.statItem}>

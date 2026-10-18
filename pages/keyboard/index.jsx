@@ -156,9 +156,9 @@ Greek letters integrate seamlessly with all keyboard modes and categories. Hover
 
 **Mathematical Notation Guide** explains how to properly format expressions, use spacing conventions, and follow standard typesetting rules. Essential for creating professional-looking mathematical documents.
 
-**LaTeX Math Mode** documentation shows how to convert keyboard-generated text into proper LaTeX notation. Many symbols insert as Unicode that can be copied into LaTeX documents or converted using reference tables.
+**[LaTeX Math Mode](!/latex)** documentation shows how to convert keyboard-generated text into proper LaTeX notation. Many symbols insert as Unicode that can be copied into LaTeX documents or converted using reference tables.
 
-**Equation Editors** like the **Formula Builder Tool** offer WYSIWYG interfaces for complex equations. Combine with this keyboard for quick symbol insertion into longer expressions.
+**[Equation Editors](!/latex/editor)** like the **Formula Builder Tool** offer WYSIWYG interfaces for complex equations. Combine with this keyboard for quick symbol insertion into longer expressions.
 
 **Symbol Search Tools** let you find unfamiliar notation by description or appearance. Useful when you recognize a symbol but don't know its category or name.`,
       before: ``,

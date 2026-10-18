@@ -466,7 +466,7 @@ obj10: {
 
 [Modulo](!/arithmetic/modulo) is the computational counterpart. Where divisibility asks a yes-or-no question — does $n$ divide $a$? — modulo computes the remainder that answers it. The statement $a \\bmod n = 0$ and the statement $n \\mid a$ are two forms of the same fact.
 
-**Fractions** arise when division is not exact. The expression $\\frac{a}{b}$ in lowest terms requires dividing both numerator and denominator by their GCD — a divisibility operation. Simplifying fractions is, at its core, factoring out common divisors.
+**[Fractions](!/arithmetic/fractions)** arise when division is not exact. The expression $\\frac{a}{b}$ in lowest terms requires dividing both numerator and denominator by their GCD — a divisibility operation. Simplifying fractions is, at its core, factoring out common divisors.
 
 [Modular arithmetic](!/arithmetic/modulo/operations) extends divisibility into a full arithmetic system where numbers are classified by their remainders. The [divisibility rules](!/arithmetic/divisibility/rules) for $3$, $9$, and $11$ are consequences of how $10$ behaves under [modular arithmetic](!/arithmetic/modulo/operations) — shortcuts derived from congruence properties of the base of our number system.`,
   before: ``,

@@ -169,10 +169,10 @@ const demos = {
       { say: 'TYPE 4 in Number 1 only', at: 'tr' },
       { set: 'input[placeholder="Number 1"]', value: '4' },
       { wait: 1600 },
-      { say: 'TYPE 3.14 as Number 2\nA decimal is ignored.', at: 'tr' },
+      { say: 'TYPE 3.14 as Number 2\nA decimal is not a positive whole number.', at: 'tr' },
       { set: 'input[placeholder="Number 2"]', value: '3.14' },
       { wait: 1800 },
-      { say: 'CLICK Calculate\nOnly one valid number.\nRed message: Error: Enter at least 2 valid integers.', at: 'tr' },
+      { say: 'CLICK Calculate\nRed message: Error: "3.14" is not a positive whole number.', at: 'tr' },
       { click: { button: 'Calculate' } },
       { wait: 2600 },
       { say: 'TYPE 6 as Number 2, CLICK Calculate\nLCM Result: 12.', at: 'tr' },
@@ -220,7 +220,7 @@ Click the blue **Calculate** button to see your result instantly. The LCM appear
     title: `Using Prime Factorization Method`,
     content: `Select **Prime Factorization** to see how LCM works through prime factors. This method breaks each number into primes, then takes the highest power of each prime that appears. The result is the smallest number containing all prime factors from all inputs.
 
-For LCM($12$, $18$): Break $12 = 2^2 × 3$ and $18 = 2 × 3^2$. Take the highest power of each prime: $2^2$ and $3^2$. Multiply them: LCM = $2^2 × 3^2 = 4 × 9 = 36$. This is the smallest number divisible by both $12$ and $18$.
+For LCM($12$, $18$): Break $12 = 2^2 × 3$ and $18 = 2 × 3^2$. Take the highest power of each prime: $2^2$ and $3^2$. Multiply them: LCM = $2^2 × 3^2 = 4 × 9 = 36$. This is the smallest number divisible by both $12$ and $18$. After Calculate, the box under the result shows these factorizations and the highest power of each prime.
 
 Try LCM($8$, $12$, $18$): Factor as $8 = 2^3$, $12 = 2^2 × 3$, $18 = 2 × 3^2$. Highest powers: $2^3$, $3^2$. Result: $2^3 × 3^2 = 8 × 9 = 72$. You can verify: $72 ÷ 8 = 9$, $72 ÷ 12 = 6$, $72 ÷ 18 = 4$.
 
@@ -234,7 +234,7 @@ This method visualizes why LCM works and connects to other number theory concept
     title: `Using GCF Formula Method`,
     content: `Switch to **GCF Formula** to use the mathematical relationship: LCM($a$, $b$) = $\\frac{a × b}{\\text{GCF}(a, b)}$. This formula calculates LCM quickly using the greatest common factor. The calculator computes GCF first, then applies the formula automatically.
 
-For LCM($12$, $18$): Calculate GCF($12$, $18$) = $6$. Then LCM = $\\frac{12 × 18}{6} = \\frac{216}{6} = 36$. This method is computationally faster than prime factorization for large numbers.
+For LCM($12$, $18$): Calculate GCF($12$, $18$) = $6$. Then LCM = $\\frac{12 × 18}{6} = \\frac{216}{6} = 36$. This method is computationally faster than prime factorization for large numbers. The box under the result shows each pair as LCM(a, b) = a × b / GCF(a, b) with the numbers filled in.
 
 The relationship between GCF and LCM is fundamental: GCF finds the largest shared divisor (breaking down), while LCM finds the smallest shared multiple (building up). Notice that GCF($12$, $18$) × LCM($12$, $18$) = $6 × 36 = 216 = 12 × 18$.
 
@@ -274,13 +274,13 @@ The LCM result always appears as a positive integer. Mathematically, LCM is defi
 
   obj6: {
     title: `Reading Error Messages`,
-    content: `The calculator validates inputs before computing. If you see **"Error: Enter at least 2 valid integers"** in red, you either left fields empty, entered fewer than two numbers, or typed non-numeric characters.
+    content: `The calculator validates inputs before computing. If you see **"Error: Enter at least 2 valid integers"** in red, you left fields empty or entered fewer than two numbers. If you see **Error: "…" is not a positive whole number**, one of the boxes holds something else: a letter, a decimal, a negative number or zero.
 
-Each field should contain a positive whole number. A decimal such as $3.14$ or $4.5$ is ignored, so with only one other number the same message appears; a fraction such as $\\frac{1}{2}$ cannot be typed at all. A negative number is used by its absolute value, since LCM is defined for positive integers.
+Each field should contain a positive whole number. A decimal such as $3.14$ or $4.5$ is refused with the message that names it; a fraction such as $\\frac{1}{2}$ cannot be typed at all. A negative number is refused too, since LCM is defined here for positive integers.
 
 Blank fields are ignored during calculation. If you create six fields but only fill four, the calculator computes LCM using those four numbers. For cleaner results, remove unused fields with the × button.
 
-Zero is ignored because LCM involving $0$ is mathematically undefined or trivial (every number divides $0$, but there's no "least" multiple). Keep all inputs as positive integers greater than zero. Why zero has no least multiple follows from the definition in [what is the least common multiple](!#what-is-the-least-common-multiple).`,
+Zero is refused because LCM involving $0$ is mathematically undefined or trivial (every number divides $0$, but there's no "least" multiple). Keep all inputs as positive integers greater than zero. Why zero has no least multiple follows from the definition in [what is the least common multiple](!#what-is-the-least-common-multiple).`,
     before: ``,
     after: ``,
     link: '',
@@ -334,15 +334,15 @@ In the calculator this is the **GCF Formula** method: the GCF is found with the 
 
   obj10: {
     title: `Related Calculators and Concepts`,
-    content: `**GCF Calculator** - Find the greatest common factor. Essential companion to LCM since LCM($a$, $b$) = $\\frac{a × b}{\\text{GCF}(a, b)}$. Both concepts work together in fraction operations.
+    content: `**[GCF Calculator](!/arithmetic/calculators/gcf-calculator)** - Find the greatest common factor. Essential companion to LCM since LCM($a$, $b$) = $\\frac{a × b}{\\text{GCF}(a, b)}$. Both concepts work together in fraction operations.
 
-**Factoring Calculator** - Break numbers into prime factors. Understanding prime factorization is key to seeing how LCM works and computing it manually.
+**[Factoring Calculator](!/algebra/calculators/factoring)** - Break numbers into prime factors. Understanding prime factorization is key to seeing how LCM works and computing it manually.
 
-**Fraction Calculator** - Add, subtract, multiply, and divide fractions with automatic LCM calculation for common denominators. Combines fraction operations with LCM.
+**[Fraction Calculator](!/calculators/fraction-calculator)** - Add, subtract, multiply, and divide fractions with automatic LCM calculation for common denominators. Combines fraction operations with LCM.
 
-**Divisibility Calculator** - Test if the LCM divides evenly into other numbers or verify that your inputs divide evenly into the LCM result.
+**[Divisibility Calculator](!/arithmetic/calculators/divisibility-calculator)** - Test if the LCM divides evenly into other numbers or verify that your inputs divide evenly into the LCM result.
 
-**Modulo Calculator** - Find remainders when dividing. Related to LCM because LCM is the first number where all inputs give remainder $0$.`,
+**[Modulo Calculator](!/calculators/modulo-calculator)** - Find remainders when dividing. Related to LCM because LCM is the first number where all inputs give remainder $0$.`,
     before: ``,
     after: ``,
     link: '',

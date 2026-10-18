@@ -181,7 +181,7 @@ export async function getStaticProps({ params }) {
             { say: 'CLICK Clear\nBack to the placeholder on the right.', at: 'tr' },
             { click: { button: 'Clear', exact: true } },
             { wait: 2200 },
-            { say: 'CLICK 3, x, =, 7 and Solve\nx = 2.333333, marked Approximate.', at: 'tr' },
+            { say: 'CLICK 3, x, =, 7 and Solve\nx = 7/3, marked Exact (≈ 2.333333).', at: 'tr' },
             { click: { button: '3', exact: true } }, { click: { button: 'x', exact: true } }, { click: { button: '=', exact: true } }, { click: { button: '7', exact: true } },
             { click: { button: 'Solve' } },
             { wait: 3000 },
@@ -279,7 +279,7 @@ Each step displays the equation in its before-and-after form with a transformati
 
 For equations with brackets, the solver expands them implicitly when collecting terms &mdash; the display applies distribution before identifying coefficients rather than showing it as a separate visible step.
 
-Only whole-number answers are marked Exact: $3x = 7$ gives $x = 2.333333$ marked Approximate, although $\\frac{7}{3}$ is exact. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. The three moves are justified in [the solving process explained](!#the-solving-process-explained).`,
+A whole number or a fraction is marked Exact: $3x = 7$ gives $x = 7/3$, marked Exact with its decimal value $2.333333$ in the note, while an answer that needed a decimal expansion is marked Approximate. The box under the solver, **How the solver works**, summarises the method in a few lines and links to the theory below. The three moves are justified in [the solving process explained](!#the-solving-process-explained).`,
     before: ``, after: ``, link: ''
   },
   obj5: {
@@ -905,7 +905,8 @@ The degree and the standard form are defined in [definition and degree](!/algebr
 
 **Consequence.** The set of candidate rational roots is finite. List all divisors $p$ of $|a_0|$ and all divisors $q$ of $|a_n|$, then enumerate $\\pm p/q$. Every rational root must appear in this list. Test each candidate by plugging it in: if $P(p/q) = 0$, it is a root.
 
-**Example.** For $2x^3 - 3x^2 - 8x + 12 = 0$, divisors of 12 are $\\{1, 2, 3, 4, 6, 12\\}$ and divisors of 2 are $\\{1, 2\\}$. Candidates are $\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm 1/2, \\pm 3/2$. Testing reveals $x = 3/2$, $x = 2$, $x = -2$ as the three roots.
+@academic[example:Example
+For $2x^3 - 3x^2 - 8x + 12 = 0$, divisors of 12 are $\\{1, 2, 3, 4, 6, 12\\}$ and divisors of 2 are $\\{1, 2\\}$. Candidates are $\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm 1/2, \\pm 3/2$. Testing reveals $x = 3/2$, $x = 2$, $x = -2$ as the three roots.]@
 
 **Limitations.** The theorem says nothing about irrational roots. If a polynomial has only irrational or complex roots, the candidate list returns no hits and a numerical method is needed.
 
@@ -1161,11 +1162,12 @@ If every candidate turns out to be extraneous, the equation has no solution and 
 
 **Construction.** If the unique denominators in the equation are $d_1, d_2, \\ldots, d_k$, the solver builds the LCD as their product $d_1 \\cdot d_2 \\cdots d_k$ (factoring out common factors when feasible). For each fraction $n_i / d_i$, multiplying by the LCD leaves $n_i \\cdot (\\text{LCD} / d_i)$ &mdash; a polynomial.
 
-**Example.** For $\\frac{1}{x} + \\frac{1}{x + 2} = \\frac{3}{4}$, the unique denominators are $x$, $x + 2$, and $4$, so $\\text{LCD} = 4x(x + 2)$. Multiplying every term by $4x(x + 2)$:
+@academic[example:Example
+For $\\frac{1}{x} + \\frac{1}{x + 2} = \\frac{3}{4}$, the unique denominators are $x$, $x + 2$, and $4$, so $\\text{LCD} = 4x(x + 2)$. Multiplying every term by $4x(x + 2)$:
 
 $$4(x + 2) + 4x = 3x(x + 2)$$
 
-This is a polynomial equation, solvable by standard methods.
+This is a polynomial equation, solvable by standard methods.]@
 
 **The catch.** Multiplying by an expression that can equal zero is not an equivalence operation. If the LCD evaluates to zero at some candidate solution, that candidate was created by the multiplication and is not a true solution of the original equation. This is why the extraneous-check step matters.
 
@@ -2405,12 +2407,13 @@ $$|A| = \\begin{cases} A & \\text{if } A \\geq 0 \\\\ -A & \\text{if } A < 0 \\e
 
 So $|A| = c$ does not determine the sign of $A$. Both $A = c$ and $A = -c$ satisfy the equation. The solver must consider both possibilities and produce both solutions (or whichever turns out to be valid).
 
-**Example.** $|x - 4| = 7$. The expression inside is $x - 4$. Two cases:
+@academic[example:Example
+$|x - 4| = 7$. The expression inside is $x - 4$. Two cases:
 
 &bull; **Case 1**: $x - 4 = 7$, so $x = 11$.
 &bull; **Case 2**: $x - 4 = -7$, so $x = -3$.
 
-Check: $|11 - 4| = |7| = 7$ ✓ and $|{-3} - 4| = |{-7}| = 7$ ✓. Both solutions are valid.
+Check: $|11 - 4| = |7| = 7$ ✓ and $|{-3} - 4| = |{-7}| = 7$ ✓. Both solutions are valid.]@
 
 **Edge cases the solver detects automatically.**
 

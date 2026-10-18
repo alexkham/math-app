@@ -192,8 +192,8 @@ This means you only need to memorize the signs of three functions ($\\sin$, $\\c
 • [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — visualize any angle, its quadrant, and its reference angle.
 • [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — see how signs translate into the shapes of $\\sin$, $\\cos$, and $\\tan$ curves.
 • **Reference Angle Calculator** — reduce any angle to a first-quadrant equivalent.
-• **Trigonometric Identities** — Pythagorean, reciprocal, and quotient identities that interact with these signs.
-• **Special Angles Table** — exact values across all four quadrants.
+• **[Trigonometric Identities](!/trigonometry/identities)** — Pythagorean, reciprocal, and quotient identities that interact with these signs.
+• **[Special Angles Table](!/tables/special-angles)** — exact values across all four quadrants.
 • [Angle Types Explorer](!/trigonometry/visual-tools/angle-types) — how an angle's classification decides the quadrant it lands in.
 • [Basic Trigonometric Identities](!/trigonometry/visual-tools/basic-identities) — reciprocal pairs share a sign; the identities explain why.`,
       before:``,

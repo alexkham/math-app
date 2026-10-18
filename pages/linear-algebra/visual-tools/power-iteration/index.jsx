@@ -218,11 +218,11 @@ The errors in the estimate are $1, 0.5, 0.22, 0.093, 0.038, 0.015$; each is abou
 
 **Inverse iteration and shifts** — the same loop on $(A - sI)^{-1}$, targeting any eigenvalue.
 
-**QR algorithm** — power iteration applied to a whole basis at once, with orthogonalization, giving all eigenvalues.
+**[QR algorithm](!/linear-algebra/decompositions/qr#7)** — power iteration applied to a whole basis at once, with orthogonalization, giving all eigenvalues.
 
 **Spectral radius** — the largest $|\\lambda|$, which the method estimates directly.
 
-**Matrix norms** — the operator norm is the square root of the dominant eigenvalue of $A^TA$, another power-iteration target.`,
+**[Matrix norms](!/linear-algebra/decompositions/svd#9)** — the operator norm is the square root of the dominant eigenvalue of $A^TA$, another power-iteration target.`,
       before: ``,
       after: ``,
       link: '',

@@ -387,8 +387,8 @@ z = a + bi where a is real part, b is imaginary part
 • Add imaginary parts together
 • Combine the results
 
-**Example:**
-(3 + 2i) + (1 + 4i) = 4 + 6i
+@academic[example:Example
+(3 + 2i) + (1 + 4i) = 4 + 6i]@
 [Learn more about adding](!#adding-complex-numbers) · [All four operations](!#how-complex-number-operations-work)
 `,
     subtract: `
@@ -400,8 +400,8 @@ z = a + bi where a is real part, b is imaginary part
 • Subtract imaginary parts
 • Combine the results
 
-**Example:**
-(5 + 3i) - (2 + 1i) = 3 + 2i
+@academic[example:Example
+(5 + 3i) - (2 + 1i) = 3 + 2i]@
 [Learn more about subtracting](!#subtracting-complex-numbers) · [All four operations](!#how-complex-number-operations-work)
 `,
     multiply: `
@@ -413,9 +413,9 @@ z = a + bi where a is real part, b is imaginary part
 • Remember: i² = -1
 • Combine like terms
 
-**Example:**
+@academic[example:Example
 (2 + 3i)(1 + 4i) = 2 + 8i + 3i + 12i²
-= 2 + 11i - 12 = -10 + 11i
+= 2 + 11i - 12 = -10 + 11i]@
 [Learn more about multiplying](!#multiplying-complex-numbers) · [All four operations](!#how-complex-number-operations-work)
 `,
     divide: `
@@ -472,8 +472,8 @@ z^n for positive integer n
 • Use De Moivre's theorem for efficiency
 • Convert to polar form for higher powers
 
-**Note:**
-This operation requires additional implementation for the power value input.
+**Input:**
+z₁ and a whole-number exponent n (the second box becomes n; negative n gives 1 / z₁ⁿ).
 [Learn more about powers](!#powers-of-a-complex-number)
 `
   }
@@ -591,9 +591,14 @@ const demos = {
       { say: 'CLICK Modulus\nOperation Guide: the distance formula.\nThe second number disappears.', at: 'tr' },
       { click: { button: 'Modulus' } },
       { wait: 2200 },
-      { say: 'CLICK Power\nOperation Guide: De Moivre.\nThis button computes nothing yet.', at: 'tr' },
+      { say: 'CLICK Power\nOperation Guide: De Moivre.\nThe second box becomes the exponent n.', at: 'tr' },
       { click: { button: 'Power' } },
-      { wait: 2600 },
+      { wait: 2200 },
+      { say: 'TYPE 1 + 1i and n = 4\n(1 + i)⁴ = −4, found by repeated multiplication and checked with De Moivre.', at: 'tr' },
+      { set: { css: 'input[type="number"]', nth: 0 }, value: '1' },
+      { set: { css: 'input[type="number"]', nth: 1 }, value: '1' },
+      { set: { css: 'input[type="number"]', nth: 2 }, value: '4' },
+      { wait: 2800 },
     ],
   },
 };
@@ -747,13 +752,13 @@ The modulus is always non-negative (zero or positive). For $0 + 0i$, the modulus
     title: `Related Calculators and Mathematical Tools`,
     content: `**Quadratic Equation Solver** - Solve equations like $x^2 + 1 = 0$ that have complex solutions. When the discriminant is negative, the roots are complex numbers. Use the complex calculator to verify and work with these solutions.
 
-**Polynomial Calculator** - Factor and solve polynomials with complex roots. Every polynomial can be factored into linear factors over the complex numbers, following the Fundamental Theorem of Algebra.
+**[Polynomial Calculator](!/algebra/calculators/polynomial)** - Factor and solve polynomials with complex roots. Every polynomial can be factored into linear factors over the complex numbers, following the Fundamental Theorem of Algebra.
 
-**Trigonometry Calculator** - Complex numbers connect deeply with trigonometry through Euler's formula: $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$. This links exponential, trigonometric, and complex functions.
+**[Trigonometry Calculator](!/calculators/trigonometry-calculator)** - Complex numbers connect deeply with trigonometry through Euler's formula: $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$. This links exponential, trigonometric, and complex functions.
 
-**Matrix Calculator** - Matrices can have complex number entries. Use complex arithmetic for eigenvalues, eigenvectors, and matrix operations in quantum mechanics and signal processing.
+**[Matrix Calculator](!/linear-algebra/calculators/matrix)** - Matrices can have complex number entries. Use complex arithmetic for eigenvalues, eigenvectors, and matrix operations in quantum mechanics and signal processing.
 
-**Vector Calculator** - Complex numbers can be viewed as two-dimensional vectors. Addition works like vector addition, and the modulus is the vector magnitude.
+**[Vector Calculator](!/linear-algebra/calculators/vectors)** - Complex numbers can be viewed as two-dimensional vectors. Addition works like vector addition, and the modulus is the vector magnitude.
 
 For theoretical background, explore **complex number theory**, **complex plane visualization**, **polar form of complex numbers**, **De Moivre's theorem**, **Euler's formula**, and **applications in engineering and physics**.`,
     before: ``,
@@ -851,7 +856,7 @@ See [definition of modulus](!/complex-numbers/absolute-value#1), [properties of 
 
 For larger exponents, De Moivre's theorem is quicker. Write $z$ in trigonometric form, $z = r(\\cos\\theta + i\\sin\\theta)$ with $r = |z|$; then $z^n = r^n(\\cos n\\theta + i\\sin n\\theta)$. For $1 + i$: $r = \\sqrt{2}$ and $\\theta = 45^\\circ$, so $(1 + i)^4 = (\\sqrt{2})^4(\\cos 180^\\circ + i\\sin 180^\\circ) = 4 \\cdot (-1) = -4$, as before. The modulus is raised to the power and the angle is multiplied by it.
 
-The calculator lists **Power** among its buttons and shows the guide for it, but it does not compute a power yet; use repeated multiplication with the Multiplication button instead. The common mistake is to raise the real part and the imaginary part separately: $(1 + i)^2$ is not $1 + i^2 = 0$.
+The **Power** button computes $z_1^n$ for a whole number $n$ from $-100$ to $100$: the second box becomes the exponent, and the steps show the polar form and De Moivre's formula; for $1 + i$ and $n = 4$ the result is $-4$. A fractional exponent is refused with a message. The common mistake is to raise the real part and the imaginary part separately: $(1 + i)^2$ is not $1 + i^2 = 0$.
 
 See [De Moivre](!/complex-numbers/demoivre-theorem#2) and [powers in exponential form](!/complex-numbers/exponential-form#8).`,
     before: ``,

@@ -220,7 +220,7 @@ Three eigenvalues, three independent eigenvectors: $A$ is diagonalizable. Note t
 
 [Eigenvectors in 2D](!/linear-algebra/visual-tools/eigen-vectors-2d) — the geometric picture of the same computation, with the vectors that keep their direction drawn on the plane.
 
-**Complex numbers** — where the eigenvalues of a rotation live.
+**[Complex numbers](!/complex-numbers/basics)** — where the eigenvalues of a rotation live.
 
 [Trace and determinant](!/linear-algebra/visual-tools/matrix-trace) — the two invariants the eigenvalues must reproduce.`,
       before: ``,

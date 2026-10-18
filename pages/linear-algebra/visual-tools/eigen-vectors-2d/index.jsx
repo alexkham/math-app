@@ -683,7 +683,7 @@ For full treatment see **characteristic polynomial**, **defective matrices**, an
       title:`Related Concepts`,
       content:`[Eigenvalues](!/linear-algebra/visual-tools/eigenvalues-eigenvectors) &mdash; the scalar stretch factors that pair with each eigenvector.
 
-**Characteristic Polynomial** &mdash; the source equation $\\det(A - \\lambda I) = 0$ whose roots are the eigenvalues.
+**[Characteristic Polynomial](!/linear-algebra/eigen/characteristic-equation#2)** &mdash; the source equation $\\det(A - \\lambda I) = 0$ whose roots are the eigenvalues.
 
 [Diagonalization](!/linear-algebra/visual-tools/matrix-diagonalization) &mdash; rewriting $A$ as $PDP^{-1}$ where $D$ is diagonal and $P$ has eigenvectors as columns.
 

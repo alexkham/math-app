@@ -689,19 +689,19 @@ This is exactly why the visualizer&apos;s Inflection scenario emphasizes the sig
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Concavity** — General theory of how curves bend, with worked examples across multiple function families.
+      content: `**[Concavity](!/calculus/derivatives/graph-analysis#7)** — General theory of how curves bend, with worked examples across multiple function families.
 
 [Second derivative](!/calculus/visual-tools/derivative) — Definition, computation rules, and geometric interpretation as the rate of change of slope.
 
-**Critical points** — Points where $f'(x) = 0$ or is undefined; the starting set for finding maxima, minima, and inflection candidates.
+**[Critical points](!/calculus/derivatives/graph-analysis#4)** — Points where $f'(x) = 0$ or is undefined; the starting set for finding maxima, minima, and inflection candidates.
 
 [First derivative test](!/calculus/visual-tools/optimization) — Sign analysis of $f'$ for classifying critical points as maxima, minima, or neither.
 
-**Local extrema** — Local maxima and minima, the second derivative test, and the relationship to concavity.
+**[Local extrema](!/functions/properties#9)** — Local maxima and minima, the second derivative test, and the relationship to concavity.
 
-**Curve sketching** — Combining intervals of increase/decrease, concavity, [asymptotes](!/calculus/limits/infinity#3), and intercepts to draw an accurate graph of any function.
+**[Curve sketching](!/calculus/derivatives/graph-analysis#9)** — Combining intervals of increase/decrease, concavity, [asymptotes](!/calculus/limits/infinity#3), and intercepts to draw an accurate graph of any function.
 
-**Optimization problems** — Real-world applications where finding extrema and inflection points reveals optimal solutions.
+**[Optimization problems](!/calculus/derivatives/graph-analysis#10)** — Real-world applications where finding extrema and inflection points reveals optimal solutions.
 
 [Average Rate of Change](!/calculus/visual-tools/average-rate-of-change) — concavity is exactly what makes the average rate over an interval differ from the instantaneous rate at its midpoint.
 

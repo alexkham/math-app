@@ -216,14 +216,14 @@ Use it when you know two sides and the included angle, or all three sides. When 
       title:`Related Concepts and Tools`,
       content:`Continue exploring with these connected resources:
 
-• **Trigonometric Functions** — $\\sin$, $\\cos$, $\\tan$ and their reciprocals.
+• **[Trigonometric Functions](!/trigonometry/functions)** — $\\sin$, $\\cos$, $\\tan$ and their reciprocals.
 • [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — visualize any angle, its quadrant, and its [reference angle](!/trigonometry/unit-circle#5).
-• **Special Right Triangles** — exact ratios for $45$-$45$-$90$ and $30$-$60$-$90$.
-• **SOH CAH TOA** — mnemonic for trig ratios in right triangles.
+• **[Special Right Triangles](!/trigonometry/right-triangle)** — exact ratios for $45$-$45$-$90$ and $30$-$60$-$90$.
+• **[SOH CAH TOA](!/trigonometry/right-triangle#2)** — mnemonic for trig ratios in right triangles.
 • **Triangle Solver** — compute missing sides and angles given partial information.
-• **Trigonometric Identities** — Pythagorean, sum, and [double-angle formulas](!/trigonometry/visual-tools/double-angle-identities) built on these triangles.
+• **[Trigonometric Identities](!/trigonometry/identities)** — Pythagorean, sum, and [double-angle formulas](!/trigonometry/visual-tools/double-angle-identities) built on these triangles.
 • [Pythagorean Identities](!/trigonometry/visual-tools/pythagorean-identities) — $\\sin^2\\theta + \\cos^2\\theta = 1$ is the Pythagorean theorem on a hypotenuse of length $1$.
-• **Basic Trigonometric Identities** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) behind the ratios in the stats bar.`,
+• **[Basic Trigonometric Identities](!/trigonometry/visual-tools/basic-identities)** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) behind the ratios in the stats bar.`,
       before:``,
       after:``,
       link:'',

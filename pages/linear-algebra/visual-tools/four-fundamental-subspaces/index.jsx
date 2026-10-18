@@ -217,7 +217,7 @@ $$A = \\begin{pmatrix} 1 & 2 & 1 \\\\ 2 & 4 & 3 \\\\ 3 & 6 & 4 \\end{pmatrix}$$
 
 [Span and linear independence](!/linear-algebra/visual-tools/span-independence-2d) — the column space is a span, and the null space is the record of the dependencies.
 
-**Basis and dimension** — each subspace scene produces a basis, and rank–nullity is the dimension count.
+**[Basis and dimension](!/linear-algebra/vector-spaces/basis)** — each subspace scene produces a basis, and rank–nullity is the dimension count.
 
 [Orthogonal complements and projections](!/linear-algebra/visual-tools/least-squares) — the two pairs of subspaces are complements, and least squares projects onto the column space.
 

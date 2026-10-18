@@ -560,11 +560,11 @@ The layout has three main areas:
 
 • **Input card** on the left holds your polynomial(s). For single-input operations (Factor, Find zeros, Simplify) there is one input box. For division (Long, Synthetic) there are two labeled boxes &mdash; Dividend and Divisor. For Add, Subtract, and Multiply you can have two or more inputs and add more with the **+ Add another polynomial** button.
 
-• **Solution &amp; explanation card** on the right shows the step-by-step work, the method description, common pitfalls, and related tools.
+• **Solution &amp; explanation card** on the right shows the step-by-step work, the method description and the common pitfalls.
 
 To switch input modes, use the **Keypad / Slots** toggle above the polynomial list. The two modes are interchangeable for the same polynomial &mdash; pick whichever feels faster for the polynomial you&apos;re entering.
 
-The URL supports an **&apos;op&apos;** query parameter: append &apos;?op=3&apos; to land directly on the Multiply tab, &apos;?op=4&apos; for Long division, and so on. The numbers follow the order of the operation strip.
+The URL supports an **&apos;op&apos;** query parameter: append &apos;?op=3&apos; to land directly on the Multiply tab, &apos;?op=4&apos; for Long division, and so on. The numbers follow the order of the operation strip. The **Share** button on the result card builds a link of this kind with your polynomials added, so whoever opens it sees the same inputs and the same result.
 The strip holds eight buttons: Add, Subtract, Multiply, Long division, Synthetic, Factor, Find zeros and Simplify; clicking one loads that operation's example polynomials, its result and its steps, so the Subtract button shows $3x^2 + 2x - 5$ and $x^2 - 4x + 1$ with the difference $2x^2 + 6x - 6$, and Long division shows a Dividend and a Divisor with the quotient $x^2 - x - 1$ and the remainder $3$. What each operation does is explained in [The Eight Operations](!#the-eight-operations) and in the theory sections below, starting with [Adding and Subtracting Polynomials](!#adding-and-subtracting-polynomials).`,
       before: ``,
       after: ``,
@@ -585,16 +585,16 @@ The strip holds eight buttons: Add, Subtract, Multiply, Long division, Synthetic
 
 • **Synthetic division** — fast shortcut when the divisor is linear and monic, $(x - c)$.
 
-• **Factor** — break the polynomial into irreducible factors using GCF, grouping, special forms, and rational roots in sequence.
+• **Factor** — pull out the greatest common factor, then use the rational root theorem to split off every linear factor; what is left with no rational root stays as one factor.
 
-• **Find zeros** — list every real and complex root with its multiplicity.
+• **Find zeros** — list every real and complex root with its multiplicity: rational roots exactly, the rest from the quadratic formula or a numeric method.
 
 • **Simplify** — combine like terms, drop zero coefficients, and rewrite in standard form.
 
 Each operation has its own demo inputs that load when you switch to it, so you can see a worked example immediately. The **Clear** button restores those defaults.
 
 For each operation the calculator reports the **primary result**, optional **extras** (e.g., the remainder in division), and **meta info** like degree, leading coefficient, and constant term.
-Multiply opens with three polynomials, $(x + 2)(x - 3)(2x + 1) = 2x^3 - x^2 - 13x - 6$, and is one of the operations with a Graph button; Factor opens with one box, $x^3 - 2x^2 - x + 2 = (x - 1)(x + 1)(x - 2)$; Simplify opens with $3x + 2x^2 - 5 + x - 2x^2 + 4 = 4x - 1$. In this version the result and the steps belong to each operation's example polynomials: editing a polynomial changes the input boxes, not the solution. The mathematics of every operation is explained in its own section, from [Adding Polynomials](!#adding-polynomials) to [Simplifying Polynomials](!#simplifying-polynomials).`,
+Multiply opens with three polynomials, $(x + 2)(x - 3)(2x + 1) = 2x^3 - x^2 - 13x - 6$, and is one of the operations with a Graph button; Factor opens with one box, $x^3 - 2x^2 - x + 2 = (x + 1)(x - 1)(x - 2)$; Simplify opens with $3x + 2x^2 - 5 + x - 2x^2 + 4 = 4x - 1$. Everything on the result card is computed from the boxes: edit a polynomial, press the operation button, and the result and the steps are worked out for your polynomials, not for the example. Until you press the button the card still shows the previous answer, and a short note under the buttons says so. Brackets, products like $(x + 1)(x - 2)$, powers and division by a number are all accepted; an input that cannot be read gives a message in place of the result. The mathematics of every operation is explained in its own section, from [Adding Polynomials](!#adding-polynomials) to [Simplifying Polynomials](!#simplifying-polynomials).`,
       before: ``,
       after: ``,
       link: '',
@@ -643,16 +643,14 @@ Each step has three parts:
 
 When the step list is long, a fading gradient and a bouncing chevron arrow appear at the bottom of the section to indicate scrollable content. Click the chevron or scroll directly to see more steps.
 
-Below the step list, three more sections give context:
+Below the step list, two more sections give context:
 
 • **About this method** &mdash; a short prose description of the algorithm and the relevant formula.
 
 • **Common pitfalls** &mdash; a bullet list of the most frequent mistakes for this operation.
 
-• **Related tools** &mdash; chips linking to related calculators and theory pages.
-
-The result card on the left shows the primary answer along with **Copy LaTeX**, **Share**, and (for graphable results) a **Graph** button.
-Switching to Multiply changes the badge to that operation's step count and the About this method text to the pairwise expansion rule; Synthetic adds the **Remainder** $3$ as an extra under the quotient; Find zeros lists $x = 1$, $x = -1$, $x = 2$ with the meta info "Real roots: 3". The Copy LaTeX, Share and Graph buttons on the result card are placeholders in this version and do nothing yet. The steps of each operation are explained in the theory sections, for example [Polynomial Long Division](!#polynomial-long-division).`,
+The result card on the left shows the primary answer along with **Copy LaTeX** (copies the answer as LaTeX), **Share** (copies a link that reopens the same operation with your polynomials) and, for the graphable operations, a **Graph** button that draws the polynomial with its real zeros marked.
+Switching to Multiply changes the badge to that operation's step count and the About this method text to the pairwise expansion rule; Synthetic adds the **Remainder** $3$ as an extra under the quotient; Find zeros lists $x = -1$, $x = 1$, $x = 2$ with the meta info "Real roots: 3". The steps are written for the polynomials in the boxes, so a different input gives different steps and a different step count. The steps of each operation are explained in the theory sections, for example [Polynomial Long Division](!#polynomial-long-division).`,
       before: ``,
       after: ``,
       link: '',
@@ -807,17 +805,17 @@ Standard form and the vocabulary around it are taught in [Standard form](!/algeb
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Polynomial multiplication visualizer** &mdash; an interactive grid showing every pairwise product as a colored cell, with like-term diagonals collected into the final answer. Useful for building intuition before trusting the calculator&apos;s step-by-step.
+      content: `**[Polynomial multiplication visualizer](!/algebra/visual-tools/polynomial-multiplication)** &mdash; an interactive grid showing every pairwise product as a colored cell, with like-term diagonals collected into the final answer. Useful for building intuition before trusting the calculator&apos;s step-by-step.
 
-**Binomial coefficient visualizer** &mdash; three views of $(a + b)^n$: a decision tree, an animated product expansion, and Pascal&apos;s triangle as a path counter. The right place to internalize where the coefficients in $(a + b)^n$ come from.
+**[Binomial coefficient visualizer](!/algebra/visual-tools/binomial-coefficient)** &mdash; three views of $(a + b)^n$: a decision tree, an animated product expansion, and Pascal&apos;s triangle as a path counter. The right place to internalize where the coefficients in $(a + b)^n$ come from.
 
-**Completing the square visualizer** &mdash; for quadratic polynomials, the geometric reading of the algebraic technique that converts $ax^2 + bx + c$ to vertex form.
+**[Completing the square visualizer](!/algebra/visual-tools/completing-square)** &mdash; for quadratic polynomials, the geometric reading of the algebraic technique that converts $ax^2 + bx + c$ to vertex form.
 
-**Rational root theorem** &mdash; theoretical underpinning for the Factor and Find zeros operations on higher-degree polynomials.
+**[Rational root theorem](!/algebra/polynomials/rules#5)** &mdash; theoretical underpinning for the Factor and Find zeros operations on higher-degree polynomials.
 
-**Remainder theorem** &mdash; the corollary of polynomial division that says $P(c)$ equals the remainder when dividing by $(x - c)$. Provides the link between division and evaluation.
+**[Remainder theorem](!/algebra/polynomials/rules#1)** &mdash; the corollary of polynomial division that says $P(c)$ equals the remainder when dividing by $(x - c)$. Provides the link between division and evaluation.
 
-**Fundamental theorem of algebra** &mdash; the existence statement behind &quot;degree $n$ polynomials have $n$ complex roots.&quot;
+**[Fundamental theorem of algebra](!/algebra/polynomials/rules#11)** &mdash; the existence statement behind &quot;degree $n$ polynomials have $n$ complex roots.&quot;
 
 **Calculator extensions on calculatematrix.com** &mdash; for polynomials in multiple variables, polynomial GCD, partial fraction decomposition, and other operations not in this calculator, see the dedicated **polynomial calculators** page on the sister site.
 The theorems named here are collected in [Key theorems](!/algebra/polynomials#11) and in the [Master toolkit of polynomial theorems](!/algebra/polynomials/rules#14).`,
@@ -830,7 +828,7 @@ The theorems named here are collected in [Key theorems](!/algebra/polynomials#11
       title: `Adding, Removing and Resetting Polynomials`,
       content: `For Add, Subtract and Multiply the input card works on a list of polynomials, and the **+ Add another polynomial** button under the list appends a new box holding $x + 1$, labelled $P_3$, $P_4$ and so on, with the operation sign between the boxes. Each box beyond the second has a **✕** button on its right that removes it; with only two boxes left the button is hidden, since every one of these operations needs two inputs. Long division and Synthetic always have exactly two boxes, Dividend and Divisor, and Factor, Find zeros and Simplify have one, so the add button is not shown for them.
 
-The two buttons under the list, the operation button labelled with the operation's name and **Clear**, finish the card. **Clear** puts back the operation's example polynomials, two for Add, three for Multiply, and removes any boxes you added. The operation button is a label in this version: the result card already shows the solution for the example polynomials, and clicking the button starts nothing. Where the two example polynomials of Add come from and how they are summed is explained in [Adding Polynomials](!#adding-polynomials).`,
+The two buttons under the list, the operation button labelled with the operation's name and **Clear**, finish the card. **Clear** puts back the operation's example polynomials, two for Add, three for Multiply, and removes any boxes you added. The operation button works out the result and the steps for the polynomials in the boxes; if you have changed a box and not yet pressed it, a note under the buttons reminds you. Clear also resets the result to the example. Where the two example polynomials of Add come from and how they are summed is explained in [Adding Polynomials](!#adding-polynomials).`,
       before: ``,
       after: ``,
       link: '',
@@ -881,7 +879,7 @@ See [Synthetic division](!/algebra/polynomials/operations#7) in the operations l
     },
     obj16: {
       title: `Factoring a Polynomial`,
-      content: `Factoring writes a polynomial as a product of polynomials of lower degree, down to factors that cannot be split further over the real numbers. The calculator tries the strategies in a fixed order: greatest common factor, grouping, special forms, rational roots. The example $x^3 - 2x^2 - x + 2$ factors by grouping: $x^2(x - 2) - (x - 2) = (x^2 - 1)(x - 2)$, and the difference of squares finishes it, $(x - 1)(x + 1)(x - 2)$. Multiplying back, $(x - 1)(x + 1) = x^2 - 1$ and $(x^2 - 1)(x - 2) = x^3 - 2x^2 - x + 2$, checks the answer.
+      content: `Factoring writes a polynomial as a product of polynomials of lower degree, down to factors that cannot be split further over the real numbers. The calculator first pulls out the greatest common factor, then tests the rational root candidates and divides each root out; a leftover quadratic is split when its discriminant is a perfect square, and any other leftover stays as one factor. Grouping and special forms are done by hand, as in the example $x^3 - 2x^2 - x + 2$ factors by grouping: $x^2(x - 2) - (x - 2) = (x^2 - 1)(x - 2)$, and the difference of squares finishes it, $(x - 1)(x + 1)(x - 2)$. Multiplying back, $(x - 1)(x + 1) = x^2 - 1$ and $(x^2 - 1)(x - 2) = x^3 - 2x^2 - x + 2$, checks the answer.
 
 Each linear factor $x - c$ names a zero $c$ of the polynomial, so the factored form is also the list of zeros, which is why the Factor and Find zeros operations share one algorithm. The common mistake is to stop at $(x^2 - 1)(x - 2)$ with a factor that still splits.
 
@@ -892,7 +890,7 @@ The strategy and its order are taught in [Factoring strategy](!/algebra/polynomi
     },
     obj17: {
       title: `Finding the Zeros of a Polynomial`,
-      content: `A zero of $P$ is a value $c$ with $P(c) = 0$. For a polynomial with integer coefficients the rational root theorem lists the candidates, $\\pm p/q$ with $p$ dividing the constant and $q$ dividing the leading coefficient; for $x^3 - 2x^2 - x + 2$ the candidates are $\\pm 1$ and $\\pm 2$, and testing gives $P(1) = 0$, $P(-1) = 0$, $P(2) = 0$. So the zeros are $x = 1$, $x = -1$, $x = 2$, three real roots and no complex ones, matching the factored form $(x - 1)(x + 1)(x - 2)$. A root found by testing is divided out by synthetic division and the search continues on the quotient.
+      content: `A zero of $P$ is a value $c$ with $P(c) = 0$. For a polynomial with integer coefficients the rational root theorem lists the candidates, $\\pm p/q$ with $p$ dividing the constant and $q$ dividing the leading coefficient; for $x^3 - 2x^2 - x + 2$ the candidates are $\\pm 1$ and $\\pm 2$, and testing gives $P(1) = 0$, $P(-1) = 0$, $P(2) = 0$. So the zeros are $x = -1$, $x = 1$, $x = 2$, three real roots and no complex ones, matching the factored form $(x + 1)(x - 1)(x - 2)$. A root found by testing is divided out by synthetic division and the search continues on the quotient.
 
 The fundamental theorem of algebra fixes the count: a polynomial of degree $n$ has exactly $n$ complex roots counted with multiplicity, so a cubic with three real roots has no complex ones left. The common mistake is to forget the multiplicity, counting the double root of $(x - 1)^2(x + 2)$ once.
 
@@ -1025,8 +1023,8 @@ See [Finding roots by factoring](!/algebra/polynomials/roots#5), [The rational r
     multiply: { note: { title: 'Multiply', content: `Multiplies every term by every term and collects like terms; the degrees add. [Learn more about multiplying polynomials](!#multiplying-polynomials)` } },
     long_div: { note: { title: 'Long division', content: `Divides leading terms, multiplies back, subtracts and brings down until the remainder has a smaller degree than the divisor. [Learn more about long division](!#polynomial-long-division) · [All division](!#polynomial-division-long-and-synthetic)` } },
     synth_div: { note: { title: 'Synthetic division', content: `Divides by a monic linear divisor $x - c$ with the coefficients alone: bring down, multiply by $c$, add; the last number is the remainder $P(c)$. [Learn more about synthetic division](!#synthetic-division) · [All division](!#polynomial-division-long-and-synthetic)` } },
-    factor: { note: { title: 'Factor', content: `Tries the greatest common factor, grouping, special forms and rational roots, in that order, until every factor is irreducible. [Learn more about factoring](!#factoring-a-polynomial) · [All factoring and zeros](!#factoring-and-finding-zeros)` } },
-    zeros: { note: { title: 'Find zeros', content: `Tests the rational root candidates, divides each root out, and lists every real and complex zero with its multiplicity. [Learn more about finding zeros](!#finding-the-zeros-of-a-polynomial) · [All factoring and zeros](!#factoring-and-finding-zeros)` } },
+    factor: { note: { title: 'Factor', content: `Pulls out the greatest common factor, tests the rational root candidates and divides each root out; a leftover with no rational root stays as one factor. [Learn more about factoring](!#factoring-a-polynomial) · [All factoring and zeros](!#factoring-and-finding-zeros)` } },
+    zeros: { note: { title: 'Find zeros', content: `Tests the rational root candidates, divides each root out, and solves what is left with the quadratic formula or a numeric method; every real and complex zero is listed with its multiplicity. [Learn more about finding zeros](!#finding-the-zeros-of-a-polynomial) · [All factoring and zeros](!#factoring-and-finding-zeros)` } },
     simplify: { note: { title: 'Simplify', content: `Combines like terms, drops zero terms and orders the rest by descending degree. [Learn more about simplifying](!#simplifying-polynomials)` } },
   };
   const demos = {
@@ -1054,7 +1052,7 @@ See [Finding roots by factoring](!/algebra/polynomials/roots#5), [The rational r
         { say: 'CLICK Multiply\nThree boxes: (x + 2)(x − 3)(2x + 1) = 2x³ − x² − 13x − 6; a Graph button appears.', at: 'tr' },
         { click: { button: 'Multiply', exact: true } },
         { wait: 3000 },
-        { say: 'CLICK Factor\nOne box: x³ − 2x² − x + 2 = (x − 1)(x + 1)(x − 2).', at: 'tr' },
+        { say: 'CLICK Factor\nOne box: x³ − 2x² − x + 2 = (x + 1)(x − 1)(x − 2).', at: 'tr' },
         { click: { button: 'Factor', exact: true } },
         { wait: 3000 },
         { say: 'CLICK Simplify\n3x + 2x² − 5 + x − 2x² + 4 = 4x − 1; the x² terms cancel.', at: 'tr' },
@@ -1087,13 +1085,13 @@ See [Finding roots by factoring](!/algebra/polynomials/roots#5), [The rational r
       scale: 0.4,
       minHeight: 451,
       script: [
-        { say: 'CLICK + Add another polynomial\nA third box, P₃ = x + 1, joins the sum.', at: 'tr' },
+        { say: 'CLICK + Add another polynomial\nA third box, P₃ = x + 1; a note says the result is not updated yet.', at: 'tr' },
         { click: { button: '+ Add another polynomial', exact: true } },
         { wait: 2800 },
-        { say: 'CLICK + Add another polynomial\nA fourth box; each extra box has a ✕ button.', at: 'tr' },
-        { click: { button: '+ Add another polynomial', exact: true } },
-        { wait: 2800 },
-        { say: 'CLICK Clear\nBack to the two example polynomials of Add.', at: 'tr' },
+        { say: 'CLICK Add\nThe Sum now includes P₃: 3x² − x + 4, with new steps.', at: 'tr' },
+        { click: { button: 'Add', exact: true, nth: 1 } },
+        { wait: 3000 },
+        { say: 'CLICK Clear\nBack to the two example polynomials of Add and their sum.', at: 'tr' },
         { click: { button: 'Clear', exact: true } },
         { wait: 2600 },
       ],
@@ -1109,7 +1107,7 @@ See [Finding roots by factoring](!/algebra/polynomials/roots#5), [The rational r
         { say: 'CLICK Synthetic\nThe Result card adds Remainder: 3 under the quotient; the steps show the coefficient row.', at: 'tr' },
         { click: { button: 'Synthetic', exact: true } },
         { wait: 3000 },
-        { say: 'CLICK Find zeros\nZeros x = 1, x = −1, x = 2; Real roots: 3, Complex roots: 0.', at: 'tr' },
+        { say: 'CLICK Find zeros\nZeros x = −1, x = 1, x = 2; Real roots: 3, Complex roots: 0.', at: 'tr' },
         { click: { button: 'Find zeros', exact: true } },
         { wait: 3000 },
       ],

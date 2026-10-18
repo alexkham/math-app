@@ -190,7 +190,7 @@ The distinction between open and closed endpoints is genuinely important in calc
       title: `Related Concepts and Tools`,
       content: `[Domain of a Function](!/functions/visual-tools/domain) — the partner concept showing which inputs are allowed. Use the companion domain visualizer to see how domain transformations work and why $b$ and $h$ (not $a$ and $k$) affect it — the mirror image of the rule shown here.
 
-**Functions** — general theory of functions, including formal definitions of domain, range, and image.
+**[Functions](!/functions/basics)** — general theory of functions, including formal definitions of domain, range, and image.
 
 [Function Transformations](!/functions/visual-tools/transformations) — visualizer for $a$, $k$, $b$, $h$ alone, useful for separating the effects of each parameter before bringing range analysis on top.
 
@@ -198,7 +198,7 @@ The distinction between open and closed endpoints is genuinely important in calc
 
 [Inverse Functions](!/functions/visual-tools/inverse-function) — visualizer for reflecting a function across $y = x$. The range of $f$ becomes the domain of $f^{-1}$ — a fundamental duality that the inverse and domain/range tools together make concrete.
 
-**Bounded Functions** — functions whose range fits inside an interval; the trigonometric examples in this visualizer are the canonical examples.
+**[Bounded Functions](!/functions/properties#8)** — functions whose range fits inside an interval; the trigonometric examples in this visualizer are the canonical examples.
 
 [Asymptotes](!/functions/visual-tools/asymptotes) — horizontal asymptotes are values the function approaches but never reaches, and they are exactly the open endpoints and excluded values of the range. The reciprocal's $y = 0$ asymptote is a worked example.
 

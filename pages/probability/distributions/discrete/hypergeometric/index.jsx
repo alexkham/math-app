@@ -974,9 +974,9 @@ This distribution captures situations where resources are limited or where selec
       after:``,
       link:'',
       example:`
-      **Example**:
+      @academic[example:Example
 
-Drawing $5$ cards from a standard deck without replacement and counting how many are hearts. Each draw changes the probabilities for subsequent draws, because the deck composition changes.
+Drawing $5$ cards from a standard deck without replacement and counting how many are hearts. Each draw changes the probabilities for subsequent draws, because the deck composition changes.]@
       `,
   
   
@@ -1014,7 +1014,12 @@ Unlike the [binomial distribution](!/probability/distributions/discrete/binomial
       content:`
       The **probability mass function (PMF)** of a **hypergeometric distribution** is given by:
 
+@academic[formula_callout:Hypergeometric PMF
 $$P(X = k) = \\frac{\\binom{K}{k} \\binom{N-K}{n-k}}{\\binom{N}{n}}, \\quad k = \\max(0, n-N+K), \\ldots, \\min(n, K)$$
+/probability/formulas#hypergeometric_pmf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 where $\\binom{a}{b} = \\frac{a!}{b!(a-b)!}$ is the binomial coefficient.
 
@@ -1048,7 +1053,8 @@ where $\\binom{a}{b} = \\frac{a!}{b!(a-b)!}$ is the binomial coefficient.
   content:`
 The [cumulative distribution function (CDF)](!/probability/cdf) of a **hypergeometric distribution** is given by:
 
-$$F_X(k) = P(X \\leq k) = \\sum_{i=0}^{k} \\frac{\\binom{K}{i}\\binom{N-K}{n-i}}{\\binom{N}{n}}$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$F_X(k) = P(X \\leq k) = \\sum_{i=0}^{k} \\frac{\\binom{K}{i}\\binom{N-K}{n-i}}{\\binom{N}{n}}$$]@
 
 Where:
 $N$ = total population size
@@ -1063,7 +1069,8 @@ $k$ = number of observed successes in the sample (where $\\max(0, n-N+K) \\leq k
 **Summation of Probabilities**: 
 We sum the individual probabilities from the minimum possible value up to $k$:
 
-$$P(X \\leq k) = P(X=0) + P(X=1) + P(X=2) + \\cdots + P(X=k)$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$P(X \\leq k) = P(X=0) + P(X=1) + P(X=2) + \\cdots + P(X=k)$$]@
 
 **Without Replacement Effect**: Unlike the binomial distribution, the hypergeometric CDF accounts for sampling without replacement. Each draw changes the composition of the remaining population, creating dependency between draws.
 
@@ -1075,7 +1082,8 @@ The support is bounded by physical constraints:
 **Complementary Probability**: 
 For "more than $k$ successes":
 
-$$P(X > k) = 1 - F_X(k)$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$P(X > k) = 1 - F_X(k)$$]@
   `,
   before:``,
   after:``,
@@ -1087,13 +1095,23 @@ $$P(X > k) = 1 - F_X(k)$$
   content: `
 As explained in the [general case for calculating expected value](!/probability/expected-value#general), the expected value of a discrete random variable is computed as a weighted sum where each possible value is multiplied by its probability:
 
+@academic[formula_callout:Expected Value (Discrete)
 $$E[X] = \\sum_{x} x \\cdot P(X = x)$$
+/probability/formulas#expected_value_discrete]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 For the **hypergeometric distribution**, we apply this general formula to the specific probability mass function of this distribution.
 
 ### Formula
 
+@academic[formula_callout:Hypergeometric Mean
 $$E[X] = n \\cdot \\frac{K}{N}$$
+/probability/formulas#hypergeometric_mean]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $N$ = total population size
@@ -1108,7 +1126,12 @@ The proportion of successes in the population is $\\frac{K}{N}$. When drawing $n
 
 By symmetry and linearity of expectation, the expected number of successes in $n$ draws is:
 
+@academic[formula_callout:Hypergeometric Mean
 $$E[X] = n \\cdot \\frac{K}{N}$$
+/probability/formulas#hypergeometric_mean]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The result $E[X] = n \\cdot \\frac{K}{N}$ captures the intuition that the expected proportion of successes in the sample matches the proportion in the population. If you sample $n$ items from a population where the success rate is $\\frac{K}{N}$, you expect $n \\cdot \\frac{K}{N}$ successes on average.
 
@@ -1116,7 +1139,8 @@ The result $E[X] = n \\cdot \\frac{K}{N}$ captures the intuition that the expect
 
 Consider drawing 5 cards from a standard deck of 52 cards, counting the number of aces. Here $N = 52$, $K = 4$, and $n = 5$:
 
-$$E[X] = 5 \\cdot \\frac{4}{52} = \\frac{20}{52} \\approx 0.385$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = 5 \\cdot \\frac{4}{52} = \\frac{20}{52} \\approx 0.385$$]@
 
 On average, you expect to draw about 0.385 aces in a 5-card hand, which reflects the 4-in-52 proportion of aces in the deck.
 
@@ -1132,17 +1156,24 @@ To compute the expected value of a hypergeometric distribution for your own para
   content: `
 The [variance](!/probability/variance#calculate) of a discrete random variable measures how spread out the values are around the expected value. It is computed as:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$]@
 
 Or using the shortcut formula:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$]@
 
 For the **hypergeometric distribution**, we apply this formula to derive the variance.
 
 ### Formula
 
+@academic[formula_callout:Hypergeometric Variance
 $$\\mathrm{Var}(X) = n \\cdot \\frac{K}{N} \\cdot \\frac{N-K}{N} \\cdot \\frac{N-n}{N-1}$$
+/probability/formulas#hypergeometric_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $N$ = total population size
@@ -1157,7 +1188,8 @@ We know from the expected value section that $\\mu = n \\cdot \\frac{K}{N}$.
 
 The variance formula can be rewritten to show its relationship to the binomial variance:
 
-$$\\mathrm{Var}(X) = n \\cdot \\frac{K}{N} \\cdot \\left(1 - \\frac{K}{N}\\right) \\cdot \\frac{N-n}{N-1}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = n \\cdot \\frac{K}{N} \\cdot \\left(1 - \\frac{K}{N}\\right) \\cdot \\frac{N-n}{N-1}$$]@
 
 The first three terms $n \\cdot \\frac{K}{N} \\cdot \\left(1 - \\frac{K}{N}\\right)$ match the binomial variance formula with $p = \\frac{K}{N}$.
 
@@ -1165,17 +1197,21 @@ The additional factor $\\frac{N-n}{N-1}$ is called the **finite population corre
 
 ### Standard Deviation
 
-$$\\sigma = \\sqrt{n \\cdot \\frac{K}{N} \\cdot \\frac{N-K}{N} \\cdot \\frac{N-n}{N-1}}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = \\sqrt{n \\cdot \\frac{K}{N} \\cdot \\frac{N-K}{N} \\cdot \\frac{N-n}{N-1}}$$]@
 
 ### Example
 
 Consider drawing 5 cards from a standard deck of 52, counting aces. Here $N = 52$, $K = 4$, $n = 5$:
 
-$$\\mathrm{Var}(X) = 5 \\cdot \\frac{4}{52} \\cdot \\frac{48}{52} \\cdot \\frac{47}{51}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = 5 \\cdot \\frac{4}{52} \\cdot \\frac{48}{52} \\cdot \\frac{47}{51}$$]@
 
-$$= 5 \\cdot \\frac{1}{13} \\cdot \\frac{12}{13} \\cdot \\frac{47}{51} \\approx 0.331$$
+@academic[formula_callout:Variance and Standard Deviation
+$$= 5 \\cdot \\frac{1}{13} \\cdot \\frac{12}{13} \\cdot \\frac{47}{51} \\approx 0.331$$]@
 
-$$\\sigma \\approx \\sqrt{0.331} \\approx 0.575$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma \\approx \\sqrt{0.331} \\approx 0.575$$]@
 
 The relatively small variance reflects the limited range of possible outcomes (0 to 4 aces) and the constraining effect of sampling without replacement from a finite deck.
   `,
@@ -1196,17 +1232,17 @@ The mode is $\\lfloor \\frac{(n+1)(K+1)}{N+2} \\rfloor$
 
 **Intuition:** The mode sits near the [expected value](!/probability/expected-value) $\\frac{nK}{N}$, representing the most likely number of successes when sampling without replacement. Unlike the [binomial](!/probability/distributions/discrete/binomial) where trials are independent, the hypergeometric mode reflects how depletion of the population affects the probability distribution.
 
-**Example:** 
+@academic[example:Example
 For $N = 50$, $K = 20$, $n = 10$:
 
 Mode = $\\lfloor \\frac{(10+1)(20+1)}{50+2} \\rfloor = \\lfloor \\frac{11 \\times 21}{52} \\rfloor = \\lfloor 4.44 \\rfloor = 4$
 
-Getting exactly 4 successes is more likely than any other outcome.
+Getting exactly 4 successes is more likely than any other outcome.]@
 
-**Example:** 
+@academic[example:Example
 For $N = 100$, $K = 30$, $n = 20$:
 
-Mode = $\\lfloor \\frac{21 \\times 31}{102} \\rfloor = \\lfloor 6.38 \\rfloor = 6$
+Mode = $\\lfloor \\frac{21 \\times 31}{102} \\rfloor = \\lfloor 6.38 \\rfloor = 6$]@
 
 ### Median
 
@@ -1214,24 +1250,25 @@ The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) \\ge
 
 For the hypergeometric distribution, there is no simple closed-form expression for the median, but it can be found numerically by solving:
 
-$$\\sum_{k=0}^{m} \\frac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}} \\geq 0.5$$
+@academic[formula_callout:Mode and Median
+$$\\sum_{k=0}^{m} \\frac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}} \\geq 0.5$$]@
 
 **Properties of the median:**
 • The median is always close to the mean $\\frac{nK}{N}$
 • For large $N$, the hypergeometric approaches the binomial, and median behavior converges
 • The distribution can be symmetric or skewed depending on parameters
 
-**Example:**
+@academic[example:Example
 For $N = 50$, $K = 25$, $n = 10$:
 Mean = $\\frac{10 \\times 25}{50} = 5$
 
-The median is 5 (by symmetry, since $K = N/2$)
+The median is 5 (by symmetry, since $K = N/2$)]@
 
-**Example:** 
+@academic[example:Example
 For $N = 100$, $K = 30$, $n = 20$:
 Mean = $\\frac{20 \\times 30}{100} = 6$
 
-The median is approximately 6 (close to the mean)
+The median is approximately 6 (close to the mean)]@
 
 Unlike continuous distributions where finding the median requires integration, for [discrete](!/probability/distributions/discrete) distributions, the median is found by summing probabilities until reaching 0.5.
   `,
@@ -1262,7 +1299,8 @@ Unlike continuous distributions where finding the median requires integration, f
 
 Suppose you have a deck of $N = 52$ cards containing $K = 13$ hearts. You draw $n = 5$ cards without replacement. The probability of getting exactly $k = 2$ hearts is:
 
-$$P(X = 2) = \\frac{\\binom{13}{2} \\binom{52-13}{5-2}}{\\binom{52}{5}} = \\frac{\\binom{13}{2} \\binom{39}{3}}{\\binom{52}{5}} = \\frac{78 \\cdot 9139}{2598960} \\approx 0.274$$
+@academic[formula_callout:Applications and Examples
+$$P(X = 2) = \\frac{\\binom{13}{2} \\binom{52-13}{5-2}}{\\binom{52}{5}} = \\frac{\\binom{13}{2} \\binom{39}{3}}{\\binom{52}{5}} = \\frac{78 \\cdot 9139}{2598960} \\approx 0.274$$]@
 
 This means there's about a 27.4% chance of getting exactly 2 hearts when drawing 5 cards from a standard deck.
 

@@ -108,7 +108,7 @@ const demos = {
       { set: 'input[placeholder="Number 1"]', value: '12' },
       { set: 'input[placeholder="Number 2"]', value: '18' },
       { wait: 1600 },
-      { say: 'CLICK Calculate\n12 = 2·2·3, 18 = 2·3·3: common 2·3 = 6.', at: 'tr' },
+      { say: 'CLICK Calculate\nUnder the result: 12 = 2² · 3, 18 = 2 · 3²; lowest shared powers 2 · 3 = 6.', at: 'tr' },
       { click: { button: 'Calculate' } },
       { wait: 2600 },
       { say: 'TYPE 24 and 36, CLICK Calculate\n24 = 2·2·2·3, 36 = 2·2·3·3: common 2·2·3 = 12.', at: 'tr' },
@@ -132,7 +132,7 @@ const demos = {
       { set: 'input[placeholder="Number 4"]', value: '30' },
       { click: { button: 'Calculate' } },
       { wait: 2600 },
-      { say: 'CLICK × beside Number 4\nThe field is gone; the result stays until you recalculate.', at: 'tr' },
+      { say: 'CLICK × beside Number 4\nThe field is gone and the old result is cleared.', at: 'tr' },
       { click: { button: '×', exact: true, nth: 3 } },
       { wait: 2000 },
       { say: 'TYPE 8 in Number 3 and CLICK Calculate\nGCF(12, 18, 8) = 2.', at: 'tr' },
@@ -223,7 +223,7 @@ After entering your numbers, click the blue **Calculate** button. The GCF result
 
 The algorithm repeatedly divides the larger number by the smaller number, then replaces the larger number with the smaller and the smaller with the remainder. This continues until the remainder is $0$. Try finding GCF($48$, $18$): divide $48 ÷ 18 = 2$ remainder $12$, then $18 ÷ 12 = 1$ remainder $6$, then $12 ÷ 6 = 2$ remainder $0$. The GCF is $6$.
 
-For more than two numbers, the calculator applies this method repeatedly. It finds GCF(first, second), then finds GCF(result, third), and so on. Enter $12$, $18$, and $24$ to see this in action—the GCF is $6$ because it divides evenly into all three numbers.
+The division steps of each pair are listed under the result. For more than two numbers, the calculator applies this method repeatedly. It finds GCF(first, second), then finds GCF(result, third), and so on. Enter $12$, $18$, and $24$ to see this in action—the GCF is $6$ because it divides evenly into all three numbers.
 
 This method is mathematically proven to always find the correct GCF. It's faster than prime factorization for numbers with hundreds or thousands of digits, making it the preferred method for computational efficiency in computer science and cryptography. A larger example: GCF($1071$, $462$) = $21$ after three divisions. The division chain is written out in [how the Euclidean algorithm works](!#how-the-euclidean-algorithm-works).`,
     before: ``,
@@ -233,7 +233,7 @@ This method is mathematically proven to always find the correct GCF. It's faster
 
   obj3: {
     title: `Using the Prime Factorization Method`,
-    content: `Switch to **Prime Factorization** mode to read how GCF works through prime factors: the panel on the right explains the method, and the result box shows the same GCF as the Euclidean method. This method breaks each number into its prime building blocks, then multiplies the common primes together. The calculator reports only the final GCF; the factor work is shown below and in [how prime factorization finds the GCF](!#how-prime-factorization-finds-the-gcf).
+    content: `Switch to **Prime Factorization** mode to read how GCF works through prime factors: the panel on the right explains the method, and the result box shows the same GCF as the Euclidean method. This method breaks each number into its prime building blocks, then multiplies the common primes together. Under the result the calculator lists the factorization of every number and the lowest power of each shared prime; the method is explained further in [how prime factorization finds the GCF](!#how-prime-factorization-finds-the-gcf).
 
 For example, to find GCF($12$, $18$): Break $12 = 2 × 2 × 3$ and $18 = 2 × 3 × 3$. The common prime factors are one $2$ and one $3$, so GCF = $2 × 3 = 6$. The calculator performs this factorization automatically for any numbers you enter.
 
@@ -359,7 +359,7 @@ The lessons behind this calculator are [greatest common divisor](!/arithmetic/di
 
 For $48$ and $18$: $48 = 2 × 18 + 12$, then $18 = 1 × 12 + 6$, then $12 = 2 × 6 + 0$. The last non-zero remainder, $6$, is the GCF. For $1071$ and $462$: $1071 = 2 × 462 + 147$, $462 = 3 × 147 + 21$, $147 = 7 × 21 + 0$, so GCF = $21$.
 
-The remainders shrink at every step, so the algorithm always stops, and it needs at most about $5$ times the number of digits of the smaller number in divisions. That is why the calculator uses it for every input, including the **Prime Factorization** mode, whose panel explains the other method while the result is computed by division.
+The remainders shrink at every step, so the algorithm always stops, and it needs at most about $5$ times the number of digits of the smaller number in divisions. That is why the calculator uses it to compute every result; in **Prime Factorization** mode it additionally shows the factorizations, and in **Euclidean Algorithm** mode it lists the division steps under the result.
 
 For three or more numbers the calculator chains the pair rule: GCF($a$, $b$, $c$) = GCF(GCF($a$, $b$), $c$). The algorithm is presented in [method 3: Euclidean algorithm](!/arithmetic/divisibility/gcd#5) and traced in [Euclidean algorithm step by step](!/arithmetic/divisibility/gcd#6); the chaining is justified in [GCD of more than two numbers](!/arithmetic/divisibility/gcd#9).`,
     before: ``,

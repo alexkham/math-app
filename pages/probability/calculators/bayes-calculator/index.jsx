@@ -56,7 +56,7 @@ The three buttons sit under **Calculation Mode** at the top of the card, each wi
 **P(B|A)** specifies the conditional probability of observing evidence B when A is true. If a medical test correctly identifies disease 95% of the time, enter 0.95. This represents how strongly B indicates A.
 
 **P(B|A')** gives the conditional probability of observing B when A is false. For the medical test, if false positive rate is 5%, enter 0.05. This quantifies how often B occurs even without A. The calculator uses these three values to compute posterior probability P(A|B)—the updated probability of A given that you've observed B.
-Each box accepts values from $0$ to $1$ and refuses anything larger as you type; a box left empty is reported at Calculate time with "P(A) must be between 0 and 1" and its two siblings. With $P(A) = 0.01$, $P(B \\mid A) = 0.95$ and $P(B \\mid A') = 0.05$ the posterior is $P(A \\mid B) = 16.10\\%$, with $P(B) = 5.90\\%$, prior odds $0.01$ and a likelihood ratio of $19.00$; raising the prior to $P(A) = 0.5$ lifts the posterior to $95.00\\%$. The formula behind the three numbers is in [What is Bayes' Theorem?](!#what-is-bayes-theorem).`,
+Each box takes a value from $0$ to $1$. A value outside that range, or a box left empty, is reported at Calculate time with "P(A) must be between 0 and 1" or the message of its sibling box. With $P(A) = 0.01$, $P(B \\mid A) = 0.95$ and $P(B \\mid A') = 0.05$ the posterior is $P(A \\mid B) = 16.10\\%$, with $P(B) = 5.90\\%$, prior odds $0.01$ and a likelihood ratio of $19.00$; raising the prior to $P(A) = 0.5$ lifts the posterior to $95.00\\%$. The formula behind the three numbers is in [What is Bayes' Theorem?](!#what-is-bayes-theorem).`,
       before: ``,
       after: ``,
       link: '',
@@ -69,7 +69,7 @@ Each box accepts values from $0$ to $1$ and refuses anything larger as you type;
 **Sensitivity** measures the true positive rate: P(Positive Test|Disease). A sensitivity of 0.90 means the test correctly identifies 90% of actual cases. Higher sensitivity reduces false negatives—sick patients who test negative.
 
 **Specificity** measures the true negative rate: P(Negative Test|No Disease). A specificity of 0.95 means the test correctly identifies 95% of healthy individuals. The calculator automatically computes false positive rate as 1 minus specificity. Results show P(Disease|Positive Test)—the crucial probability that a positive test actually indicates disease, which is often surprisingly low when prevalence is rare.
-With prevalence $0.01$, sensitivity $0.90$ and specificity $0.95$ the result reads $P(\\text{Disease} \\mid \\text{Positive Test}) = 15.38\\%$ and $P(\\text{No Disease} \\mid +) = 84.62\\%$; a prevalence of $0.1$ raises the first to $66.67\\%$. The boxes refuse values above $1$ as you type, and an empty box is reported as "Prevalence must be between 0 and 1" or its siblings. Why a positive test on a rare disease stays unconvincing is explained in [The Medical Test Form of Bayes' Theorem](!#the-medical-test-form-of-bayes-theorem).`,
+With prevalence $0.01$, sensitivity $0.90$ and specificity $0.95$ the result reads $P(\\text{Disease} \\mid \\text{Positive Test}) = 15.38\\%$ and $P(\\text{No Disease} \\mid +) = 84.62\\%$; a prevalence of $0.1$ raises the first to $66.67\\%$. A value above $1$ or an empty box is reported at Calculate time as "Prevalence must be between 0 and 1" or the message of its sibling box. Why a positive test on a rare disease stays unconvincing is explained in [The Medical Test Form of Bayes' Theorem](!#the-medical-test-form-of-bayes-theorem).`,
       before: ``,
       after: ``,
       link: '',
@@ -160,21 +160,21 @@ The odds form and its connections are covered in [The formula](!/probability/bay
 
     obj10: {
       title: `Related Probability Tools and Calculators`,
-      content: `**Conditional Probability Calculator** - Compute P(A|B) for various probability scenarios with Venn diagram visualizations.
+      content: `**[Conditional Probability Calculator](!/probability/calculators/conditional-probability)** - Compute P(A|B) for various probability scenarios with Venn diagram visualizations.
 
-**Law of Total Probability Calculator** - Calculate marginal probabilities by partitioning sample space across multiple events.
+**[Law of Total Probability Calculator](!/probability/visual-tools/total-probability)** - Calculate marginal probabilities by partitioning sample space across multiple events.
 
 **Sensitivity and Specificity Calculator** - Analyze medical test performance metrics including positive/negative predictive values.
 
-**Probability Distribution Calculators** - Compute probabilities for discrete and continuous distributions in Bayesian contexts.
+**[Probability Distribution Calculators](!/probability/visual-tools/distributions)** - Compute probabilities for discrete and continuous distributions in Bayesian contexts.
 
-**Expected Value Calculator** - Calculate expected outcomes incorporating probabilities and payoffs for decision analysis.
+**[Expected Value Calculator](!/probability/calculators/expected-value)** - Calculate expected outcomes incorporating probabilities and payoffs for decision analysis.
 
 **Hypothesis Testing Tools** - Perform statistical hypothesis tests using frequentist and Bayesian approaches.
 
 **Probability Tree Diagram Generator** - Create custom probability trees for complex multi-stage random processes.
 
-**Joint Probability Calculator** - Calculate probabilities for intersections and unions of multiple events.
+**[Joint Probability Calculator](!/probability/calculators/joint-probability)** - Calculate probabilities for intersections and unions of multiple events.
 
 The theory behind these tools is taught in [Bayes' theorem](!/probability/bayes-theorem#formula), [The law of total probability](!/probability/total-probability#law) and [The conditional probability formula](!/probability/conditional-probability#formula).`,
       before: ``,

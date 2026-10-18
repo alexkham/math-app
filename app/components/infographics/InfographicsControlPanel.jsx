@@ -171,11 +171,15 @@ export default function InfographicsControlPanel({
   };
   const quiet = menuMode;
 
-  /* a button: icon + label, or icon-only with the label as tooltip */
-  const Btn = ({ as: Tag = 'button', icon, label, tip, hint, primary, className: extra, ...rest }) => {
+  /* a button: icon + label, or icon-only with the label as tooltip.
+     Called as a plain function, not as <Btn />: a component defined inside the
+     render gets a new type on every render, so the tooltip's re-render on hover
+     remounted the button under the mouse and the click was lost. */
+  const btn = ({ key, as: Tag = 'button', icon, label, tip, hint, primary, className: extra, ...rest }) => {
     const tipText = iconOnly ? (tip ? label + ' · ' + tip : label) : tip;
     return (
       <Tag
+        key={key}
         {...rest}
         className={cls('icp-btn', quiet && !primary && 'icp-quiet', primary && 'icp-primary', iconOnly && 'icp-icon', extra)}
         aria-label={iconOnly ? label : undefined}
@@ -242,18 +246,16 @@ export default function InfographicsControlPanel({
           {heading ? <span className="icp-heading">{heading}</span> : null}
           {downloads.map((d, i) => {
             const m = fmt(d);
-            return (
-              <Btn
-                key={d.format}
-                as="a"
-                href={d.href}
-                download
-                icon={iconOnly ? m.icon : 'download'}
-                label={m.label}
-                tip={d.tip || m.tip || undefined}
-                hint={d.hint || m.hint || undefined}
-              />
-            );
+            return btn({
+              key: d.format,
+              as: 'a',
+              href: d.href,
+              download: true,
+              icon: iconOnly ? m.icon : 'download',
+              label: m.label,
+              tip: d.tip || m.tip || undefined,
+              hint: d.hint || m.hint || undefined,
+            });
           })}
         </div>
       );
@@ -261,32 +263,28 @@ export default function InfographicsControlPanel({
   }
 
   /* ---- copy link ---- */
-  const copyBlock = copyLink ? (
-    <Btn
-      type="button"
-      icon={copied ? 'check' : 'link'}
-      label={copied ? 'Copied' : 'Copy link'}
-      tip={copied ? undefined : 'Link to this diagram'}
-      className={copied ? 'icp-done' : undefined}
-      onClick={handleCopy}
-    />
-  ) : null;
+  const copyBlock = copyLink ? btn({
+    type: 'button',
+    icon: copied ? 'check' : 'link',
+    label: copied ? 'Copied' : 'Copy link',
+    tip: copied ? undefined : 'Link to this diagram',
+    className: copied ? 'icp-done' : undefined,
+    onClick: handleCopy,
+  }) : null;
 
   /* ---- diagram controls ---- */
   const controlsBlock = controls.length > 0 ? (
     <div className="icp-group icp-ctl" role="group" aria-label="Diagram controls">
       {isRail && !iconOnly ? <span className="icp-heading">Diagram</span> : null}
-      {controls.map((c) => (
-        <Btn
-          key={c.id}
-          type="button"
-          icon={c.icon || 'reset'}
-          label={c.label}
-          tip={c.title}
-          disabled={c.disabled}
-          onClick={c.onClick}
-        />
-      ))}
+      {controls.map((c) => btn({
+        key: c.id,
+        type: 'button',
+        icon: c.icon || 'reset',
+        label: c.label,
+        tip: c.title,
+        disabled: c.disabled,
+        onClick: c.onClick,
+      }))}
     </div>
   ) : null;
 
@@ -412,7 +410,8 @@ const CSS = `
 .icp-seg{display:inline-flex;border:1.5px solid var(--icp-line2);border-radius:8px;overflow:hidden;background:var(--icp-paper);box-shadow:0 1px 2px rgba(15,23,42,.06)}
 .icp-seg .icp-btn{border:0;border-radius:0;box-shadow:none}
 .icp-seg .icp-btn+.icp-btn{border-left:1.5px solid var(--icp-line2)}
-.icp-seg .icp-on{background:transparent;color:var(--icp-gray-dark);border-color:var(--icp-gray-dark)}
+.icp-seg .icp-on{background:var(--icp-gray-tint);color:var(--icp-gray-dark);font-weight:700}
+.icp-seg .icp-btn:not(.icp-on):hover{background:var(--icp-gray-tint)}
 
 /* split button + menu */
 .icp-split{position:relative;display:inline-flex}

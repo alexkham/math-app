@@ -214,9 +214,9 @@ Check column 2 of $QR$: $\\tfrac{1}{\\sqrt{2}}\\mathbf{q}_1 + \\sqrt{3/2}\\,\\ma
 
 [Determinant](!/linear-algebra/visual-tools/matrix-determinant) — $|\\det A|$ is the product of the diagonal of $R$.
 
-**Householder reflections** — the numerically preferred way to compute the same $Q$ and $R$.
+**[Householder reflections](!/linear-algebra/decompositions/qr#3)** — the numerically preferred way to compute the same $Q$ and $R$.
 
-**QR algorithm** — repeated QR factorization as an eigenvalue method.`,
+**[QR algorithm](!/linear-algebra/decompositions/qr#7)** — repeated QR factorization as an eigenvalue method.`,
       before: ``,
       after: ``,
       link: '',

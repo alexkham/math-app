@@ -724,19 +724,19 @@ After the grid fills, the **like-term collection** step groups cells whose expon
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Distributive property** — the algebraic law $a(b + c) = ab + ac$. Polynomial multiplication is repeated distribution.
+      content: `**[Distributive property](!/arithmetic/properties#5)** — the algebraic law $a(b + c) = ab + ac$. Polynomial multiplication is repeated distribution.
 
-**Polynomial addition and subtraction** — combine like terms across two polynomials. The companion operations to multiplication.
+**[Polynomial addition and subtraction](!/algebra/polynomials/operations)** — combine like terms across two polynomials. The companion operations to multiplication.
 
-**Polynomial division** — long division or [synthetic division](!/algebra/polynomials/operations#7). The inverse operation of multiplication.
+**[Polynomial division](!/algebra/polynomials/operations#6)** — long division or [synthetic division](!/algebra/polynomials/operations#7). The inverse operation of multiplication.
 
-**Binomial theorem** — gives the expansion of $(a + b)^n$ directly using [binomial coefficients](!/algebra/identities#3). A shortcut when one of the polynomials is a power.
+**[Binomial theorem](!/combinatorics/binomial-theorem)** — gives the expansion of $(a + b)^n$ directly using [binomial coefficients](!/algebra/identities#3). A shortcut when one of the polynomials is a power.
 
 [Completing the square](!/algebra/visual-tools/completing-square) — uses controlled polynomial manipulation to rewrite a quadratic in vertex form.
 
-**Special products** — recognizable patterns like $(a + b)^2 = a^2 + 2ab + b^2$, $(a - b)^2 = a^2 - 2ab + b^2$, and $(a + b)(a - b) = a^2 - b^2$. Worth memorizing because they appear constantly.
+**[Special products](!/algebra/polynomials/operations#4)** — recognizable patterns like $(a + b)^2 = a^2 + 2ab + b^2$, $(a - b)^2 = a^2 - 2ab + b^2$, and $(a + b)(a - b) = a^2 - b^2$. Worth memorizing because they appear constantly.
 
-**Algebra calculator** — for symbolic manipulation beyond what fits in a 36-cell grid, see the dedicated **polynomial multiplication calculator** in the algebra calculators section.
+**[Algebra calculator](!/algebra/calculators)** — for symbolic manipulation beyond what fits in a 36-cell grid, see the dedicated **polynomial multiplication calculator** in the algebra calculators section.
 
 [Binomial Coefficient Visualizer](!/algebra/visual-tools/binomial-coefficient) — the coefficients of $(a + b)^n$, counted as paths in Pascal's triangle.
 

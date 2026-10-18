@@ -362,7 +362,7 @@ The visualizer sizes every strategy card to the sizes it is valid for, which rul
       title: `Related Concepts`,
       content: `[Matrix inverse](!/linear-algebra/visual-tools/matrix-inverse) — exists exactly when the determinant is non-zero, and the adjugate formula divides by it; the inverse tool's cofactor phase is this tool's expansion repeated for every entry.
 
-**Cofactor and adjugate** — the signed minors, and the transposed matrix of them; the bridge from determinants to inverses.
+**[Cofactor and adjugate](!/linear-algebra/determinants/cofactors)** — the signed minors, and the transposed matrix of them; the bridge from determinants to inverses.
 
 [Cross product](!/linear-algebra/visual-tools/vector-cross-product) — a symbolic $3 \\times 3$ determinant expanded along its first row.
 
@@ -380,7 +380,7 @@ The visualizer sizes every strategy card to the sizes it is valid for, which rul
 
 [Cramer's rule](!/linear-algebra/visual-tools/cramers-rule) — solving systems by ratios of determinants.
 
-**Permutations** — the general definition of the determinant is a signed sum over them, one term per permutation.
+**[Permutations](!/combinatorics/permutations)** — the general definition of the determinant is a signed sum over them, one term per permutation.
 
 [Span and independence](!/linear-algebra/visual-tools/span-independence-2d) — the determinant test for whether a set of vectors is dependent.`,
       before: ``,

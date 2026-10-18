@@ -190,21 +190,21 @@ For the companion equation case, see **equations visualizer**.`,
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Inequalities** — the general theory of inequalities, methods of solution, and classification by type.
+      content: `**[Inequalities](!/algebra/inequalities)** — the general theory of inequalities, methods of solution, and classification by type.
 
 [Equation Visualizer](!/algebra/visual-tools/equation) — the companion tool for $f(x) = n$; uses the same marble-and-sign-chart layout but solves for discrete points rather than interval sets.
 
-**Linear Inequalities** — the simplest case, where $f$ is degree one and the solution is a single half-line.
+**[Linear Inequalities](!/algebra/inequalities/linear)** — the simplest case, where $f$ is degree one and the solution is a single half-line.
 
-**Quadratic Inequalities** — degree-two case, where the discriminant determines whether the solution is a bounded interval, two unbounded intervals, the empty set, or the whole real line.
+**[Quadratic Inequalities](!/algebra/inequalities/quadratic)** — degree-two case, where the discriminant determines whether the solution is a bounded interval, two unbounded intervals, the empty set, or the whole real line.
 
-**Polynomial Inequalities** — higher-degree cases that can have arbitrarily many intervals in their solution set, each bounded by a real root.
+**[Polynomial Inequalities](!/algebra/inequalities/polynomial)** — higher-degree cases that can have arbitrarily many intervals in their solution set, each bounded by a real root.
 
-**Rational Inequalities** — inequalities of the form $p(x)/q(x) > 0$, where poles at zeros of $q$ are always excluded from the solution.
+**[Rational Inequalities](!/algebra/inequalities/rational)** — inequalities of the form $p(x)/q(x) > 0$, where poles at zeros of $q$ are always excluded from the solution.
 
-**Sign Charts** — the general technique for tracking the sign of a function across intervals.
+**[Sign Charts](!/algebra/inequalities#8)** — the general technique for tracking the sign of a function across intervals.
 
-**Interval Notation** — the standard notation for expressing inequality solution sets as unions of intervals.
+**[Interval Notation](!/algebra/inequalities#3)** — the standard notation for expressing inequality solution sets as unions of intervals.
 
 [Completing the Square Visualizer](!/algebra/visual-tools/completing-square) — vertex form shows at once where a quadratic is positive or negative.
 

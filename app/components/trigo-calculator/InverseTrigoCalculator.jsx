@@ -164,7 +164,7 @@
 //                                    </select>
 //                                </div>
 //                                <button style={buttonStyle1} type="submit" disabled={loading}>Calculate</button>
-//                                <button onClick={resetAll} style={buttonStyle2}>Reset</button>
+//                                <button type="button" onClick={resetAll} style={buttonStyle2}>Reset</button>
 //                            </form>
 //                            <div className="calculator-right">
 //                                {selectedFunction && explanations[selectedFunction] && (
@@ -204,7 +204,7 @@
 //                                                return (
 //                                                    <td key={index}>
 //                                                        Undefined
-//                                                        <button onClick={() => copyToClipboard("Undefined")}>
+//                                                        <button type="button" onClick={() => copyToClipboard("Undefined")}>
 //                                                            Copy
 //                                                        </button>
 //                                                    </td>
@@ -214,7 +214,7 @@
 //                                                return (
 //                                                    <td key={index}>
 //                                                        ...
-//                                                        <button onClick={() => copyToClipboard("...")}>
+//                                                        <button type="button" onClick={() => copyToClipboard("...")}>
 //                                                            Copy
 //                                                        </button>
 //                                                    </td>
@@ -226,7 +226,7 @@
 //                                            return (
 //                                                <td key={index}>
 //                                                    {displayValue}
-//                                                    <button onClick={() => copyToClipboard(displayValue)}>
+//                                                    <button type="button" onClick={() => copyToClipboard(displayValue)}>
 //                                                        Copy
 //                                                    </button>
 //                                                </td>
@@ -425,7 +425,7 @@ const InverseTrigoCalculator = ({ explanations }) => {
                                    </select>
                                </div>
                                <button style={buttonStyle1} type="submit" disabled={loading}>Calculate</button>
-                               <button onClick={resetAll} style={buttonStyle2}>Reset</button>
+                               <button type="button" onClick={resetAll} style={buttonStyle2}>Reset</button>
                            </form>
                            <div className="calculator-right">
                                {selectedFunction && explanations[selectedFunction] && (
@@ -465,7 +465,7 @@ const InverseTrigoCalculator = ({ explanations }) => {
                                                return (
                                                    <td key={index}>
                                                        Undefined
-                                                       <button onClick={() => copyToClipboard("Undefined")}>
+                                                       <button type="button" onClick={() => copyToClipboard("Undefined")}>
                                                            Copy
                                                        </button>
                                                    </td>
@@ -475,7 +475,7 @@ const InverseTrigoCalculator = ({ explanations }) => {
                                                return (
                                                    <td key={index}>
                                                        ...
-                                                       <button onClick={() => copyToClipboard("...")}>
+                                                       <button type="button" onClick={() => copyToClipboard("...")}>
                                                            Copy
                                                        </button>
                                                    </td>
@@ -487,7 +487,7 @@ const InverseTrigoCalculator = ({ explanations }) => {
                                            return (
                                                <td key={index}>
                                                    {displayValue}
-                                                   <button onClick={() => copyToClipboard(displayValue)}>
+                                                   <button type="button" onClick={() => copyToClipboard(displayValue)}>
                                                        Copy
                                                    </button>
                                                </td>

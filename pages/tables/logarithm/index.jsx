@@ -171,17 +171,17 @@ The mantissa stays the same when you shift the decimal point — only the charac
       title:`Related Tools and Concepts`,
       content:`**Related Tools:**
 
-**Logarithm Calculator** - Computes $\\log_{10}$ and $\\ln$ directly for any positive input without a lookup.
+**[Logarithm Calculator](!/calculators/log-calculator)** - Computes $\\log_{10}$ and $\\ln$ directly for any positive input without a lookup.
 
 **Antilogarithm Table** - The inverse lookup: given a logarithm, find the original number.
 
 **Related Concepts:**
 
-**Logarithm Rules** - Product, quotient, and power rules for combining logarithms.
+**[Logarithm Rules](!/algebra/logarithms/rules)** - Product, quotient, and power rules for combining logarithms.
 
-**Change of Base** - Convert a logarithm in any base into another base.
+**[Change of Base](!/algebra/logarithms/rules#4)** - Convert a logarithm in any base into another base.
 
-**Exponential Functions** - Inverses of logarithms; $\\log_b$ inverts $b^x$.
+**[Exponential Functions](!/algebra/powers/exponential-functions)** - Inverses of logarithms; $\\log_b$ inverts $b^x$.
 
 **Slide Rule** - The mechanical computer built on logarithm tables, superseded by electronic calculators.`,
       before:``,

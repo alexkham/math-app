@@ -717,7 +717,7 @@ For applications and worked examples, see the **trigonometric identities applica
 • [Triangle Explorer](!/trigonometry/visual-tools/triangle-explorer) — interactive triangles with built-in Pythagoras verification.
 • [Negative Angle Identities](!/trigonometry/visual-tools/negative-angle-identities) — parity does not disturb $\\sin^2 + \\cos^2 = 1$, and this tool shows why.
 • [Supplementary Angle Identities](!/trigonometry/visual-tools/supplementary-angle-identities) — reflection across the $y$-axis leaves every Pythagorean relation intact.
-• **Basic Trigonometric Identities** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) that turn one Pythagorean identity into three.`,
+• **[Basic Trigonometric Identities](!/trigonometry/visual-tools/basic-identities)** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) that turn one Pythagorean identity into three.`,
       before:``,
       after:``,
       link:'',

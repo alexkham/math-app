@@ -190,10 +190,10 @@ The explorer reports "undefined" at these inputs and the curve appears to break 
 
 • [Unit Circle](!/visual-tools/unit-circle) — the geometric source of every trig function value.
 • [Angle Explorer](!/trigonometry/visual-tools/angle-explorer) — visualize angles, quadrants, [reference angles](!/trigonometry/unit-circle#5), and related-angle relationships.
-• **Trigonometric Identities** — Pythagorean, reciprocal, quotient, and angle-sum formulas.
+• **[Trigonometric Identities](!/trigonometry/identities)** — Pythagorean, reciprocal, quotient, and angle-sum formulas.
 • [Inverse Trigonometric Functions](!/trigonometry/visual-tools/inverse-functions) — arcsin, arccos, arctan and their restricted domains, built step by step: line test, restriction, reflection across $y = x$.
 • **Trig Equations Solver** — practice solving equations involving [sine](!/trigonometry/functions#1), [cosine](!/trigonometry/functions#2), and [tangent](!/trigonometry/functions#3).
-• **Special Angles Table** — exact values at $0°$, $30°$, $45°$, $60°$, $90°$, and beyond.
+• **[Special Angles Table](!/tables/special-angles)** — exact values at $0°$, $30°$, $45°$, $60°$, $90°$, and beyond.
 • [Function Signs by Quadrant](!/trigonometry/visual-tools/functions-signs) — why each curve sits above or below the axis in each quadrant.
 • [Trigonometric Function Parameters](!/trigonometry/visual-tools/function-parameters) — the next step from these six graphs: change $A$, $B$, $C$ and $D$ in $y = Af(Bx - C) + D$ and watch amplitude, period, phase shift and midline move on one curve.
 • [Basic Trigonometric Identities](!/trigonometry/visual-tools/basic-identities) — the six functions defined on the unit circle, then traced onto these graphs.

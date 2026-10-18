@@ -981,15 +981,24 @@ Each trial is a [Bernoulli experiment](!/probability/distributions/discrete#bern
 
 A defining characteristic of the geometric distribution is the memoryless property: the probability that success occurs in future trials does not depend on how many failures have already occurred. The process effectively "restarts" after each failure.
 
+In symbols:
+
+@academic[formula_callout:Geometric Memoryless
+$$P(X > m + n \\mid X > m) = P(X > n)$$
+/probability/formulas#geometric_memoryless]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
  
 `,
       before:``,
       after:``,
       link:'',
       example:`
-      **Example**:
+      @academic[example:Example
 
-Flipping a [coin](!/probability/models/coin-toss) repeatedly until the first heads appears. If $X=4$, this means the first three flips were tails and the fourth flip was heads. The experiment stops as soon as success occurs.
+Flipping a [coin](!/probability/models/coin-toss) repeatedly until the first heads appears. If $X=4$, this means the first three flips were tails and the fourth flip was heads. The experiment stops as soon as success occurs.]@
      
       `
   
@@ -1026,7 +1035,12 @@ The outcomes are positive integers: $1,2,3,…$ where each value represents the 
       content:`
          The **probability mass function (PMF)** of a **geometric distribution** is given by:
 
+@academic[formula_callout:Geometric PMF
 $$P(X = k) = (1-p)^{k-1} p, \\quad k = 1, 2, 3, \\ldots$$
+/probability/formulas#geometric_pmf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 
 * **First Success**: The geometric distribution models the number of trials needed to get the first success in a sequence of independent Bernoulli trials.
@@ -1056,7 +1070,12 @@ $$P(X = k) = (1-p)^{k-1} p, \\quad k = 1, 2, 3, \\ldots$$
   content:`
 The [cumulative distribution function (CDF)](!/probability/cdf) of a **geometric distribution** is given by:
 
+@academic[formula_callout:Geometric CDF
 $$F_X(k) = P(X \\leq k) = 1 - (1-p)^k$$
+/probability/formulas#geometric_cdf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $p$ = probability of success on each trial
@@ -1070,12 +1089,14 @@ $(1-p)$ = probability of failure on each trial
 **Complement Approach**: 
 Instead of summing probabilities from 1 to $k$, it's easier to use the complement. The event "first success on or before trial $k$" is the complement of "first success after trial $k$", which means all of the first $k$ trials are failures:
 
-$$P(X \\leq k) = 1 - P(\\text{all first } k \\text{ trials fail}) = 1 - (1-p)^k$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$P(X \\leq k) = 1 - P(\\text{all first } k \\text{ trials fail}) = 1 - (1-p)^k$$]@
 
 **Verification by Summation**:
 We can verify this by summing the PMF:
 
-$$P(X \\leq k) = \\sum_{i=1}^{k} (1-p)^{i-1}p = p\\sum_{i=0}^{k-1} (1-p)^i = p \\cdot \\frac{1-(1-p)^k}{1-(1-p)} = 1-(1-p)^k$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$P(X \\leq k) = \\sum_{i=1}^{k} (1-p)^{i-1}p = p\\sum_{i=0}^{k-1} (1-p)^i = p \\cdot \\frac{1-(1-p)^k}{1-(1-p)} = 1-(1-p)^k$$]@
 
 **Monotonic Property**: As $k$ increases, $(1-p)^k$ decreases toward 0, so $F_X(k)$ increases toward 1, which reflects the increasing certainty that success will eventually occur.
   `,
@@ -1089,13 +1110,23 @@ $$P(X \\leq k) = \\sum_{i=1}^{k} (1-p)^{i-1}p = p\\sum_{i=0}^{k-1} (1-p)^i = p \
   content: `
 As explained in the [general case for calculating expected value](!/probability/expected-value#general), the expected value of a discrete random variable is computed as a weighted sum where each possible value is multiplied by its probability:
 
+@academic[formula_callout:Expected Value (Discrete)
 $$E[X] = \\sum_{x} x \\cdot P(X = x)$$
+/probability/formulas#expected_value_discrete]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 For the **geometric distribution**, we apply this general formula to the specific probability mass function of this distribution.
 
 ### Formula
 
+@academic[formula_callout:Geometric Mean
 $$E[X] = \\frac{1}{p}$$
+/probability/formulas#geometric_mean]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $p$ = probability of success on each trial
@@ -1104,15 +1135,18 @@ $p$ = probability of success on each trial
 
 Starting from the general definition and substituting the PMF $P(X = k) = (1-p)^{k-1}p$ for $k = 1, 2, 3, \\ldots$:
 
-$$E[X] = \\sum_{k=1}^{\\infty} k \\cdot (1-p)^{k-1} p = p \\sum_{k=1}^{\\infty} k \\cdot (1-p)^{k-1}$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\sum_{k=1}^{\\infty} k \\cdot (1-p)^{k-1} p = p \\sum_{k=1}^{\\infty} k \\cdot (1-p)^{k-1}$$]@
 
 Using the formula for the derivative of a geometric series, we recognize that:
 
-$$\\sum_{k=1}^{\\infty} k \\cdot r^{k-1} = \\frac{1}{(1-r)^2}$$
+@academic[formula_callout:Expected Value (Mean)
+$$\\sum_{k=1}^{\\infty} k \\cdot r^{k-1} = \\frac{1}{(1-r)^2}$$]@
 
 Substituting $r = 1-p$:
 
-$$E[X] = p \\cdot \\frac{1}{(1-(1-p))^2} = p \\cdot \\frac{1}{p^2} = \\frac{1}{p}$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = p \\cdot \\frac{1}{(1-(1-p))^2} = p \\cdot \\frac{1}{p^2} = \\frac{1}{p}$$]@
 
 The result $E[X] = \\frac{1}{p}$ captures an intuitive relationship: if the probability of success on each trial is $p$, then on average you need $\\frac{1}{p}$ trials to achieve the first success. The smaller the probability of success, the more trials you expect to need.
 
@@ -1120,7 +1154,8 @@ The result $E[X] = \\frac{1}{p}$ captures an intuitive relationship: if the prob
 
 Consider rolling a die until you get a 6, where $p = \\frac{1}{6}$:
 
-$$E[X] = \\frac{1}{1/6} = 6$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\frac{1}{1/6} = 6$$]@
 
 On average, you expect to roll the die 6 times before seeing the first 6. This makes intuitive sense: with a 1-in-6 chance per roll, the average wait is 6 rolls.
 
@@ -1136,17 +1171,24 @@ To compute the expected value of a geometric distribution for your own parameter
   content: `
 The [variance](!/probability/variance#calculate) of a discrete random variable measures how spread out the values are around the expected value. It is computed as:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$]@
 
 Or using the shortcut formula:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$]@
 
 For the **geometric distribution**, we apply this formula to derive the variance.
 
 ### Formula
 
+@academic[formula_callout:Geometric Variance
 $$\\mathrm{Var}(X) = \\frac{1-p}{p^2}$$
+/probability/formulas#geometric_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $p$ = probability of success on each trial
@@ -1160,25 +1202,30 @@ We know from the expected value section that $\\mu = \\frac{1}{p}$.
 
 Using the PMF $P(X = k) = (1-p)^{k-1}p$ and applying summation techniques involving derivatives of geometric series:
 
-$$\\mathbb{E}[X^2] = \\sum_{k=1}^{\\infty} k^2 (1-p)^{k-1} p = \\frac{2-p}{p^2}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathbb{E}[X^2] = \\sum_{k=1}^{\\infty} k^2 (1-p)^{k-1} p = \\frac{2-p}{p^2}$$]@
 
 Applying the shortcut formula:
 
-$$\\mathrm{Var}(X) = \\frac{2-p}{p^2} - \\left(\\frac{1}{p}\\right)^2 = \\frac{2-p}{p^2} - \\frac{1}{p^2} = \\frac{1-p}{p^2}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\frac{2-p}{p^2} - \\left(\\frac{1}{p}\\right)^2 = \\frac{2-p}{p^2} - \\frac{1}{p^2} = \\frac{1-p}{p^2}$$]@
 
 The result $\\mathrm{Var}(X) = \\frac{1-p}{p^2}$ shows that variance increases as $p$ decreases. When success is rare (small $p$), the waiting time becomes highly variable—sometimes you succeed quickly, sometimes you wait a very long time. The quadratic relationship with $p$ in the denominator means variance grows rapidly as $p$ approaches zero.
 
 ### Standard Deviation
 
-$$\\sigma = \\sqrt{\\frac{1-p}{p^2}} = \\frac{\\sqrt{1-p}}{p}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = \\sqrt{\\frac{1-p}{p^2}} = \\frac{\\sqrt{1-p}}{p}$$]@
 
 ### Example
 
 Consider rolling a die until you get a 6, where $p = \\frac{1}{6}$:
 
-$$\\mathrm{Var}(X) = \\frac{1 - \\frac{1}{6}}{(\\frac{1}{6})^2} = \\frac{\\frac{5}{6}}{\\frac{1}{36}} = \\frac{5}{6} \\times 36 = 30$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\frac{1 - \\frac{1}{6}}{(\\frac{1}{6})^2} = \\frac{\\frac{5}{6}}{\\frac{1}{36}} = \\frac{5}{6} \\times 36 = 30$$]@
 
-$$\\sigma = \\sqrt{30} \\approx 5.477$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = \\sqrt{30} \\approx 5.477$$]@
 
 The variance of 30 and standard deviation of about 5.5 indicate substantial variability around the expected wait time of 6 rolls. You might get lucky and succeed on roll 2, or unlucky and wait 15+ rolls.
   `,
@@ -1194,17 +1241,18 @@ The [mode](!/probability/mode) is the value of $k$ (number of trials until first
 
 For the geometric distribution, the [mode](!/probability/mode) is always:
 
-$$\\text{Mode} = 1$$
+@academic[formula_callout:Mode and Median
+$$\\text{Mode} = 1$$]@
 
 **Intuition:** The geometric [PMF](!/probability/probability-function/pmf) is $p_X(k) = (1-p)^{k-1}p$, which decreases monotonically. The probability is highest at the first trial and decreases exponentially with each subsequent trial. Since each additional trial multiplies the probability by $(1-p) < 1$, the maximum probability always occurs at $k = 1$.
 
-**Example:** 
+@academic[example:Example
 For $p = 0.3$:
 • $P(X = 1) = 0.3$
 • $P(X = 2) = 0.7 \\times 0.3 = 0.21$
 • $P(X = 3) = 0.49 \\times 0.3 = 0.147$
 
-The [mode](!/probability/mode) is 1, representing that getting success on the first trial is always the most likely single outcome.
+The [mode](!/probability/mode) is 1, representing that getting success on the first trial is always the most likely single outcome.]@
 
 This holds regardless of the value of $p$—whether success is rare ($p$ near 0) or common ($p$ near 1), the first trial is always most probable.
 
@@ -1214,29 +1262,36 @@ The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) \\ge
 
 For the geometric distribution, the [median](!/probability/median) can be found by solving:
 
-$$\\sum_{k=1}^{m} (1-p)^{k-1}p \\geq 0.5$$
+@academic[formula_callout:Mode and Median
+$$\\sum_{k=1}^{m} (1-p)^{k-1}p \\geq 0.5$$]@
 
 Using the [CDF](!/probability/cdf) $F(k) = 1 - (1-p)^k$, we solve:
 
-$$1 - (1-p)^m \\geq 0.5$$
+@academic[formula_callout:Mode and Median
+$$1 - (1-p)^m \\geq 0.5$$]@
 
-$$(1-p)^m \\leq 0.5$$
+@academic[formula_callout:Mode and Median
+$$(1-p)^m \\leq 0.5$$]@
 
-$$m \\geq \\frac{\\ln(0.5)}{\\ln(1-p)} = \\frac{-\\ln(2)}{\\ln(1-p)}$$
+@academic[formula_callout:Mode and Median
+$$m \\geq \\frac{\\ln(0.5)}{\\ln(1-p)} = \\frac{-\\ln(2)}{\\ln(1-p)}$$]@
 
 The median is:
 
-$$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(1-p)} \\right\\rceil$$
+@academic[formula_callout:Mode and Median
+$$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(1-p)} \\right\\rceil$$]@
 
 **Example:**
  For $p = 0.5$:
 
-$$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(0.5)} \\right\\rceil = \\left\\lceil \\frac{0.693}{0.693} \\right\\rceil = 1$$
+@academic[formula_callout:Mode and Median
+$$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(0.5)} \\right\\rceil = \\left\\lceil \\frac{0.693}{0.693} \\right\\rceil = 1$$]@
 
 **Example:** 
 For $p = 0.3$:
 
-$$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(0.7)} \\right\\rceil = \\left\\lceil \\frac{0.693}{0.357} \\right\\rceil = \\lceil 1.94 \\rceil = 2$$
+@academic[formula_callout:Mode and Median
+$$\\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(0.7)} \\right\\rceil = \\left\\lceil \\frac{0.693}{0.357} \\right\\rceil = \\lceil 1.94 \\rceil = 2$$]@
 
 **Properties:**
 • The median is about $\\frac{\\ln 2}{p} \\approx \\frac{0.69}{p}$ for small $p$, well below the [expected value](!/probability/expected-value) $\\frac{1}{p}$

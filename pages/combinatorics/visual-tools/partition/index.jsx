@@ -756,7 +756,7 @@ Six is also small enough to expose the labeled-boxes convention: cards like $\\{
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Simple combination** — the two-group special case. $C(n, r) = \\binom{n}{r, n - r} = n! / (r! (n - r)!)$.
+      content: `**[Simple combination](!/combinatorics/combinations#combinations)** — the two-group special case. $C(n, r) = \\binom{n}{r, n - r} = n! / (r! (n - r)!)$.
 
 [Permutation with identical items](!/combinatorics/visual-tools/permutation-with-identical) — algebraically the same formula $n! / (k_1! k_2! \\cdots)$, but a different scenario. There the $k_i$ are repeat counts of identical items, and the question is distinct multiset arrangements. Here the $n_i$ are box sizes, the items are all distinct, and the question is distinct box assignments.
 
@@ -764,9 +764,9 @@ Six is also small enough to expose the labeled-boxes convention: cards like $\\{
 
 **Stirling numbers of the second kind $S(n, k)$** — the **unlabeled** counterpart. Counts partitions of $n$ distinct items into $k$ unlabeled non-empty subsets. To convert: a labeled-box partition with all distinct sizes corresponds to $k!$ labeled versions of one unlabeled partition — the distinction explored under [equal boxes](!#three-plus-one-plus-one-equal-boxes).
 
-**Multinomial theorem** — the algebraic context: $(x_1 + x_2 + \\dots + x_k)^n$ expands with multinomial coefficients $\\binom{n}{n_1, \\dots, n_k}$ on each monomial $x_1^{n_1} \\cdots x_k^{n_k}$.
+**[Multinomial theorem](!/combinatorics/binomial-theorem#4)** — the algebraic context: $(x_1 + x_2 + \\dots + x_k)^n$ expands with multinomial coefficients $\\binom{n}{n_1, \\dots, n_k}$ on each monomial $x_1^{n_1} \\cdots x_k^{n_k}$.
 
-**Combinatorics calculator** — to compute the multinomial coefficient $n!/(n_1! \\cdots n_k!)$ for any partition shape, see the **partition into groups calculator**.
+**[Combinatorics calculator](!/combinatorics/calculator#partition-into-groups)** — to compute the multinomial coefficient $n!/(n_1! \\cdots n_k!)$ for any partition shape, see the **partition into groups calculator**.
 
 [Pascal's triangle](!/combinatorics/visual-tools/pascal-triangle) — the two-group case of a partition is a [binomial coefficient](!/combinatorics/visual-tools/combination), so the triangle is the partition count in miniature.
 

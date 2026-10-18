@@ -103,16 +103,16 @@ This equivalence is useful in proof techniques, especially proof by contrapositi
 `**Material Implication (Alternative Form)**:
 $p→q$ is equivalent to $¬p∨q$.
 This means that "If $p$ then $q$" can be rewritten as "Either $p$ is false or $q$ is true."
-**Example**:
+@academic[example:Example
 "If it's a dog, then it's an animal."
-This is logically the same as saying: "It's not a dog, or it's an animal."
+This is logically the same as saying: "It's not a dog, or it's an animal."]@
 This equivalence is a key rule in propositional logic and is used in proofs and simplifications.`,
 `**Asymmetry**:
 ($p→q$) is equivalent to ($¬p∨q$), but not equivalent to ($q→p$).
 This means that implication is not symmetric. Just because $p→q$ is true does not mean $q→p$ is true.
-**Example**:
+@academic[example:Example
 "If you are a mother, then you are a woman" ($p→q$) is true.
-But "If you are a woman, then you are a mother" ($q→p$) is not necessarily true.`
+But "If you are a woman, then you are a mother" ($q→p$) is not necessarily true.]@`
 
 ]
 
@@ -315,7 +315,8 @@ export default function ImplicationPage({demoUnits, implicationLaws ,introConten
               
               `The rationale behind this definition is that an implication is only false in the specific case where the hypothesis ($p$) is true and the conclusion ($q$) is false. If the hypothesis is not satisfied, then the implication is not violated, and thus the overall statement is true.`,
               
-              `**Example**: "If I win the lottery, then I will buy a new car." If I do not win the lottery, the statement remains valid regardless of whether I buy a car.`,
+              `@academic[example:Example
+"If I win the lottery, then I will buy a new car." If I do not win the lottery, the statement remains valid regardless of whether I buy a car.]@`,
               
               `Another common misunderstanding is to assume that $p \\rightarrow q$ is equivalent to $q \\rightarrow p$. This is incorrect: implication is not symmetric, and such an inference does not hold logically.`
             ]
@@ -328,7 +329,8 @@ export default function ImplicationPage({demoUnits, implicationLaws ,introConten
               
               `Another essential technique is **proof by contraposition**, which leverages the equivalence of $p \\rightarrow q$ and $\\neg q \\rightarrow \\neg p$. In many cases, this approach is more straightforward than a direct proof.`,
               
-              `**Example**: To prove "If $n^2$ is even, then $n$ is even," one may instead prove the contrapositive: "If $n$ is odd, then $n^2$ is odd."`,
+              `@academic[example:Example
+To prove "If $n^2$ is even, then $n$ is even," one may instead prove the contrapositive: "If $n$ is odd, then $n^2$ is odd."]@`,
               
               `Logical implication also underpins **proof by contradiction**, where the assumption of $p$ being true and $q$ being false leads to a contradiction. This contradiction implies that the original implication $p \\rightarrow q$ must be valid.`
             ]

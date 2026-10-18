@@ -1243,9 +1243,9 @@ Like the [discrete uniform distribution](!/probability/distributions/discrete/un
       after:``,
       link:'',
       example:`
-      **Example**:
+      @academic[example:Example
 
-Choose a real number at random between 0 and 10, with no additional information. The chance that the number lies between 2 and 4 depends only on the interval length (2 units), not on where it sits inside the range.
+Choose a real number at random between 0 and 10, with no additional information. The chance that the number lies between 2 and 4 depends only on the interval length (2 units), not on where it sits inside the range.]@
       `,
   
   
@@ -1319,7 +1319,12 @@ The continuous uniform distribution is fully characterized by these two paramete
       <h3 style="color: #1e40af;">Probability Density Function (PDF)</h3>
 The **probability density function (PDF)** of a **continuous uniform distribution** is given by:
 
+@academic[formula_callout:Continuous Uniform PDF
 $$f(x) = \\begin{cases} \\frac{1}{b-a} & \\text{if } a \\leq x \\leq b \\\\ 0 & \\text{otherwise} \\end{cases}$$
+/probability/formulas#continuous_uniform_pdf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 ### Intuition Behind the Formula
 
@@ -1341,7 +1346,8 @@ $$f(x) = \\begin{cases} \\frac{1}{b-a} & \\text{if } a \\leq x \\leq b \\\\ 0 & 
   • All subintervals of the same length have equal probability
   • The total area under the curve equals 1:
   
-  $$\\int_{a}^{b} \\frac{1}{b-a}\\,dx = \\frac{1}{b-a} \\cdot (b-a) = 1$$
+@academic[formula_callout:Probability Density Function (PDF) and Support (Range)
+  $$\\int_{a}^{b} \\frac{1}{b-a}\\,dx = \\frac{1}{b-a} \\cdot (b-a) = 1$$]@
 
 **Practical Example:** A bus arrives at a stop every 10 minutes. If you arrive at a random time, your wait time $X$ follows $U(0, 10)$. The PDF is $f(x) = \\frac{1}{10} = 0.1$ for $0 \\leq x \\leq 10$. Any 2-minute interval within this range has the same probability: $P(3 \\leq X \\leq 5) = P(7 \\leq X \\leq 9) = 0.1 \\times 2 = 0.2$.
       `,
@@ -1355,7 +1361,12 @@ $$f(x) = \\begin{cases} \\frac{1}{b-a} & \\text{if } a \\leq x \\leq b \\\\ 0 & 
       content:`<h3 style="color: #1e3a8a;">Cumulative Distribution Function (CDF)</h3>
 The **cumulative distribution function (CDF)** gives the probability that $X$ is less than or equal to a specific value:
 
+@academic[formula_callout:Continuous Uniform CDF
 $$F(x) = \\begin{cases} 0 & \\text{if } x < a \\\\ \\frac{x-a}{b-a} & \\text{if } a \\leq x \\leq b \\\\ 1 & \\text{if } x > b \\end{cases}$$
+/probability/formulas#continuous_uniform_cdf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 **Key Properties**:
  • $F(a) = 0$ (no probability mass below the lower bound)
@@ -1376,11 +1387,21 @@ $$F(x) = \\begin{cases} 0 & \\text{if } x < a \\\\ \\frac{x-a}{b-a} & \\text{if 
   content: `
 For continuous distributions, the expected value emerges from integrating the product of each value with its density across the entire support. Applying the [continuous expected value definition](!/probability/expected-value#continuous) to the uniform distribution:
 
+@academic[formula_callout:Expected Value (Continuous)
 $$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot f(x) \\, dx$$
+/probability/formulas#expected_value_continuous]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 ### Formula
 
+@academic[formula_callout:Continuous Uniform Mean
 $$E[X] = \\frac{a + b}{2}$$
+/probability/formulas#continuous_uniform_mean]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $a$ = minimum value of the interval
@@ -1390,11 +1411,14 @@ $b$ = maximum value of the interval
 
 The continuous uniform distribution has PDF $f(x) = \\frac{1}{b-a}$ for $a \\leq x \\leq b$, and 0 elsewhere. Computing the expected value:
 
-$$E[X] = \\int_{a}^{b} x \\cdot \\frac{1}{b-a} \\, dx = \\frac{1}{b-a} \\int_{a}^{b} x \\, dx$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\int_{a}^{b} x \\cdot \\frac{1}{b-a} \\, dx = \\frac{1}{b-a} \\int_{a}^{b} x \\, dx$$]@
 
-$$E[X] = \\frac{1}{b-a} \\left[\\frac{x^2}{2}\\right]_{a}^{b} = \\frac{1}{b-a} \\cdot \\frac{b^2 - a^2}{2}$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\frac{1}{b-a} \\left[\\frac{x^2}{2}\\right]_{a}^{b} = \\frac{1}{b-a} \\cdot \\frac{b^2 - a^2}{2}$$]@
 
-$$E[X] = \\frac{1}{b-a} \\cdot \\frac{(b-a)(b+a)}{2} = \\frac{b+a}{2}$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\frac{1}{b-a} \\cdot \\frac{(b-a)(b+a)}{2} = \\frac{b+a}{2}$$]@
 
 The result $E[X] = \\frac{a+b}{2}$ is the midpoint of the interval $[a, b]$. This makes perfect intuitive sense: when all values in an interval are equally likely, the average value is simply the center of that interval. The distribution is perfectly symmetric, and the expected value is the balance point.
 
@@ -1404,7 +1428,8 @@ This formula is identical to the [discrete uniform distribution](!/probability/d
 
 Suppose a bus arrives randomly between 2:00 PM and 2:30 PM, modeled as uniform on the interval $[0, 30]$ minutes after 2:00 PM:
 
-$$E[X] = \\frac{0 + 30}{2} = 15 \\text{ minutes}$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\frac{0 + 30}{2} = 15 \\text{ minutes}$$]@
 
 The expected arrival time is 2:15 PM, exactly halfway through the 30-minute window. If you repeatedly sample random arrival times, the long-run average will converge to 15 minutes after 2:00 PM.
 
@@ -1420,17 +1445,24 @@ To compute the expected value of a continuous uniform distribution for your own 
   content: `
 The [variance](!/probability/variance#calculate) of a continuous random variable quantifies the spread of values around the [expected value (mean)](!/probability/expected-value). For continuous distributions, it is calculated through integration:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 f(x) \\, dx$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 f(x) \\, dx$$]@
 
 Alternatively, using the computational formula:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$]@
 
 For the **continuous uniform distribution**, this calculation produces a simple relationship with the interval length.
 
 ### Formula
 
+@academic[formula_callout:Continuous Uniform Variance
 $$\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$$
+/probability/formulas#continuous_uniform_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $a$ = minimum value of the interval
@@ -1444,21 +1476,30 @@ We know from the expected value section that $\\mu = \\frac{a+b}{2}$.
 
 The continuous uniform distribution has PDF $f(x) = \\frac{1}{b-a}$ for $a \\leq x \\leq b$:
 
-$$\\mathbb{E}[X^2] = \\int_{a}^{b} x^2 \\cdot \\frac{1}{b-a} \\, dx = \\frac{1}{b-a} \\int_{a}^{b} x^2 \\, dx$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathbb{E}[X^2] = \\int_{a}^{b} x^2 \\cdot \\frac{1}{b-a} \\, dx = \\frac{1}{b-a} \\int_{a}^{b} x^2 \\, dx$$]@
 
-$$\\mathbb{E}[X^2] = \\frac{1}{b-a} \\left[\\frac{x^3}{3}\\right]_{a}^{b} = \\frac{1}{b-a} \\cdot \\frac{b^3 - a^3}{3}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathbb{E}[X^2] = \\frac{1}{b-a} \\left[\\frac{x^3}{3}\\right]_{a}^{b} = \\frac{1}{b-a} \\cdot \\frac{b^3 - a^3}{3}$$]@
 
 Using the factorization $b^3 - a^3 = (b-a)(b^2 + ab + a^2)$:
 
-$$\\mathbb{E}[X^2] = \\frac{b^2 + ab + a^2}{3}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathbb{E}[X^2] = \\frac{b^2 + ab + a^2}{3}$$]@
 
 Applying the computational formula:
 
-$$\\mathrm{Var}(X) = \\frac{b^2 + ab + a^2}{3} - \\left(\\frac{a+b}{2}\\right)^2$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\frac{b^2 + ab + a^2}{3} - \\left(\\frac{a+b}{2}\\right)^2$$]@
 
 After algebraic simplification:
 
+@academic[formula_callout:Continuous Uniform Variance
 $$\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$$
+/probability/formulas#continuous_uniform_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The result $\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$ shows that variance depends only on the interval width $(b-a)$. The divisor of 12 appears because probability mass is spread uniformly—not concentrated anywhere. A wider interval means greater spread; location doesn't matter, only the range size.
 
@@ -1466,15 +1507,18 @@ This formula mirrors the [discrete uniform distribution](!/probability/distribut
 
 ### Standard Deviation
 
-$$\\sigma = \\frac{b-a}{\\sqrt{12}} = \\frac{b-a}{2\\sqrt{3}} \\approx 0.289(b-a)$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = \\frac{b-a}{\\sqrt{12}} = \\frac{b-a}{2\\sqrt{3}} \\approx 0.289(b-a)$$]@
 
 ### Example
 
 Suppose a bus arrives randomly between 2:00 PM and 2:30 PM, modeled as uniform on the interval $[0, 30]$ minutes:
 
-$$\\mathrm{Var}(X) = \\frac{(30-0)^2}{12} = \\frac{900}{12} = 75 \\text{ minutes}^2$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\frac{(30-0)^2}{12} = \\frac{900}{12} = 75 \\text{ minutes}^2$$]@
 
-$$\\sigma = \\frac{30}{\\sqrt{12}} \\approx 8.66 \\text{ minutes}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = \\frac{30}{\\sqrt{12}} \\approx 8.66 \\text{ minutes}$$]@
 
 The variance of 75 min² and standard deviation of about 8.66 minutes indicate moderate spread. While the expected arrival is 15 minutes after 2:00 PM, typical variations are around ±8.66 minutes, meaning arrivals between roughly 6 and 24 minutes are common.
   `,
@@ -1491,22 +1535,24 @@ The [mode](!/probability/mode) is the value where the [probability density funct
 
 For the continuous uniform distribution, every value in the support has the same density:
 
-$$\\text{Mode} = \\text{Any value in } [a, b]$$
+@academic[formula_callout:Mode and Median
+$$\\text{Mode} = \\text{Any value in } [a, b]$$]@
 
 **Intuition:** The continuous uniform [PDF](!/probability/probability-function/pdf) is constant:
 
-$$f(x) = \\frac{1}{b-a} \\text{ for } a \\leq x \\leq b$$
+@academic[formula_callout:Mode and Median
+$$f(x) = \\frac{1}{b-a} \\text{ for } a \\leq x \\leq b$$]@
 
 Since the density function is flat across the entire interval, there is no single peak. Every point in $[a, b]$ is equally probable in terms of density, so every value is technically a [mode](!/probability/mode).
 
 This is the continuous analog of the [discrete uniform distribution](!/probability/distributions/discrete/uniform#mode), where all outcomes are equally likely.
 
-**Example:** 
+@academic[example:Example
 For a bus arriving uniformly between 2:00 PM and 2:30 PM (interval $[0, 30]$ minutes):
 
 Mode = Any value in [0, 30]
 
-There is no "most likely" arrival time—all times are equally probable. The density is constant at $f(x) = \\frac{1}{30}$ across the entire half-hour window.
+There is no "most likely" arrival time—all times are equally probable. The density is constant at $f(x) = \\frac{1}{30}$ across the entire half-hour window.]@
 
 ### Median
 
@@ -1514,26 +1560,32 @@ The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) = 0.
 
 For the continuous uniform distribution, the [median](!/probability/median) is:
 
-$$\\text{Median} = \\frac{a + b}{2}$$
+@academic[formula_callout:Mode and Median
+$$\\text{Median} = \\frac{a + b}{2}$$]@
 
 **Derivation:** Using the [CDF](!/probability/cdf) for the uniform distribution:
 
-$$F(x) = \\frac{x - a}{b - a} \\text{ for } a \\leq x \\leq b$$
+@academic[formula_callout:Mode and Median
+$$F(x) = \\frac{x - a}{b - a} \\text{ for } a \\leq x \\leq b$$]@
 
 Setting $F(m) = 0.5$:
 
-$$\\frac{m - a}{b - a} = 0.5$$
+@academic[formula_callout:Mode and Median
+$$\\frac{m - a}{b - a} = 0.5$$]@
 
-$$m - a = 0.5(b - a)$$
+@academic[formula_callout:Mode and Median
+$$m - a = 0.5(b - a)$$]@
 
-$$m = a + 0.5(b - a) = \\frac{a + b}{2}$$
+@academic[formula_callout:Mode and Median
+$$m = a + 0.5(b - a) = \\frac{a + b}{2}$$]@
 
 **Intuition:** Because the distribution is perfectly symmetric and uniform, the point that divides probability in half is simply the midpoint of the interval. This also equals the [mean](!/probability/expected-value), as with all symmetric distributions.
 
 **Example:**
 For a bus arriving uniformly between 2:00 PM and 2:30 PM (interval $[0, 30]$ minutes):
 
-$$\\text{Median} = \\frac{0 + 30}{2} = 15 \\text{ minutes}$$
+@academic[formula_callout:Mode and Median
+$$\\text{Median} = \\frac{0 + 30}{2} = 15 \\text{ minutes}$$]@
 
 Half of arrivals occur before 2:15 PM, and half occur after. This is also the [mean](!/probability/expected-value) arrival time.
 
@@ -1554,7 +1606,8 @@ Half of arrivals occur before 2:15 PM, and half occur after. This is also the [m
   content: `
 A **quantile** is a value that divides the distribution at a specific probability threshold. The $p$-th quantile $x_p$ satisfies:
 
-$$P(X \\leq x_p) = p$$
+@academic[formula_callout:Quantiles/Percentiles
+$$P(X \\leq x_p) = p$$]@
 
 where $0 < p < 1$. 
 
@@ -1566,19 +1619,24 @@ Quantiles are found by inverting the [CDF](!/probability/cdf): if $F(x_p) = p$, 
 
 For a continuous uniform distribution on the interval $[a, b]$, the [CDF](!/probability/cdf) is:
 
-$$F(x) = \\frac{x - a}{b - a} \\text{ for } a \\leq x \\leq b$$
+@academic[formula_callout:Quantiles/Percentiles
+$$F(x) = \\frac{x - a}{b - a} \\text{ for } a \\leq x \\leq b$$]@
 
 To find the $p$-th quantile, we solve $F(x_p) = p$:
 
-$$\\frac{x_p - a}{b - a} = p$$
+@academic[formula_callout:Quantiles/Percentiles
+$$\\frac{x_p - a}{b - a} = p$$]@
 
-$$x_p - a = p(b - a)$$
+@academic[formula_callout:Quantiles/Percentiles
+$$x_p - a = p(b - a)$$]@
 
-$$x_p = a + p(b - a)$$
+@academic[formula_callout:Quantiles/Percentiles
+$$x_p = a + p(b - a)$$]@
 
 This gives the simple quantile formula:
 
-$$x_p = a + p(b - a)$$
+@academic[formula_callout:Quantiles/Percentiles
+$$x_p = a + p(b - a)$$]@
 
 The $p$-th quantile is located a fraction $p$ of the way from $a$ to $b$ along the interval. This linear relationship makes quantiles for the uniform distribution particularly intuitive.
 
@@ -1586,25 +1644,29 @@ The $p$-th quantile is located a fraction $p$ of the way from $a$ to $b$ along t
 
 **25th Percentile (First Quartile, Q1):**
 
-$$x_{0.25} = a + 0.25(b - a) = a + \\frac{b - a}{4} = \\frac{3a + b}{4}$$
+@academic[formula_callout:Quantiles/Percentiles
+$$x_{0.25} = a + 0.25(b - a) = a + \\frac{b - a}{4} = \\frac{3a + b}{4}$$]@
 
 About 25% of values fall below this point, located one-quarter of the way from $a$ to $b$.
 
 **50th Percentile (Median, Q2):**
 
-$$x_{0.50} = a + 0.50(b - a) = a + \\frac{b - a}{2} = \\frac{a + b}{2}$$
+@academic[formula_callout:Quantiles/Percentiles
+$$x_{0.50} = a + 0.50(b - a) = a + \\frac{b - a}{2} = \\frac{a + b}{2}$$]@
 
 This is the [median](!/probability/median), located exactly at the midpoint.
 
 **75th Percentile (Third Quartile, Q3):**
 
-$$x_{0.75} = a + 0.75(b - a) = a + \\frac{3(b - a)}{4} = \\frac{a + 3b}{4}$$
+@academic[formula_callout:Quantiles/Percentiles
+$$x_{0.75} = a + 0.75(b - a) = a + \\frac{3(b - a)}{4} = \\frac{a + 3b}{4}$$]@
 
 About 75% of values fall below this point, located three-quarters of the way from $a$ to $b$.
 
 **Interquartile Range (IQR):**
 
-$$\\text{IQR} = Q3 - Q1 = \\frac{a + 3b}{4} - \\frac{3a + b}{4} = \\frac{b - a}{2}$$
+@academic[formula_callout:Quantiles/Percentiles
+$$\\text{IQR} = Q3 - Q1 = \\frac{a + 3b}{4} - \\frac{3a + b}{4} = \\frac{b - a}{2}$$]@
 
 The IQR spans exactly half the total interval width, containing the middle 50% of the distribution.
 
@@ -1716,19 +1778,22 @@ The continuous uniform distribution, while mathematically simple, exhibits sever
 
 When $a = 0$ and $b = 1$, we obtain the **standard uniform distribution** $\\text{Uniform}(0, 1)$:
 
-$$f(x) = 1 \\text{ for } 0 \\leq x \\leq 1$$
+@academic[formula_callout:Special Cases
+$$f(x) = 1 \\text{ for } 0 \\leq x \\leq 1$$]@
 
 This is the fundamental distribution in random number generation—all other continuous distributions can be generated by transforming uniform $[0, 1]$ random variables using the inverse [CDF](!/probability/cdf) method.
 
 Any uniform random variable $X \\sim \\text{Uniform}(a, b)$ can be transformed to standard uniform:
 
-$$U = \\frac{X - a}{b - a} \\sim \\text{Uniform}(0, 1)$$
+@academic[formula_callout:Special Cases
+$$U = \\frac{X - a}{b - a} \\sim \\text{Uniform}(0, 1)$$]@
 
 ### As Interval Width Approaches Zero
 
 As $b - a \\to 0$ (with midpoint $\\frac{a+b}{2}$ held constant), the uniform distribution degenerates to a point mass:
 
-$$\\lim_{b \\to a} \\text{Uniform}(a, b) = \\delta_{\\frac{a+b}{2}}$$
+@academic[formula_callout:Special Cases
+$$\\lim_{b \\to a} \\text{Uniform}(a, b) = \\delta_{\\frac{a+b}{2}}$$]@
 
 All probability concentrates at a single value. The distribution becomes deterministic—no randomness remains.
 
@@ -1746,7 +1811,8 @@ Unlike the normal distribution, a uniform distribution over $(-\\infty, \\infty)
 
 When $a = -c$ and $b = c$ for some $c > 0$, the distribution is symmetric around zero:
 
-$$X \\sim \\text{Uniform}(-c, c)$$
+@academic[formula_callout:Special Cases
+$$X \\sim \\text{Uniform}(-c, c)$$]@
 
 Properties:
 • [Mean](!/probability/expected-value) $= 0$
@@ -1758,7 +1824,8 @@ Properties:
 **Relationship to Discrete Uniform:**
 The continuous uniform is the limiting case of the [discrete uniform distribution](!/probability/distributions/discrete/uniform) as the number of possible values increases and their spacing decreases:
 
-$$\\lim_{n \\to \\infty} \\text{DiscreteUniform}\\{a, a + \\Delta, a + 2\\Delta, \\ldots, b\\} \\to \\text{Uniform}(a, b)$$
+@academic[formula_callout:Special Cases
+$$\\lim_{n \\to \\infty} \\text{DiscreteUniform}\\{a, a + \\Delta, a + 2\\Delta, \\ldots, b\\} \\to \\text{Uniform}(a, b)$$]@
 
 where $\\Delta = \\frac{b-a}{n}$ as the grid becomes infinitely fine.
 
@@ -1790,7 +1857,8 @@ The continuous uniform distribution has simple mathematical properties stemming 
 
 The uniform distribution is **perfectly symmetric** around its midpoint $\\frac{a+b}{2}$:
 
-$$f\\left(\\frac{a+b}{2} + x\\right) = f\\left(\\frac{a+b}{2} - x\\right) \\text{ for } |x| \\leq \\frac{b-a}{2}$$
+@academic[formula_callout:Properties
+$$f\\left(\\frac{a+b}{2} + x\\right) = f\\left(\\frac{a+b}{2} - x\\right) \\text{ for } |x| \\leq \\frac{b-a}{2}$$]@
 
 This symmetry implies:
 • [Mean](!/probability/expected-value) = [Median](!/probability/median) = $\\frac{a+b}{2}$
@@ -1799,15 +1867,18 @@ This symmetry implies:
 
 ### Skewness
 
-$$\\text{Skewness} = 0$$
+@academic[formula_callout:Properties
+$$\\text{Skewness} = 0$$]@
 
 Zero skewness confirms perfect symmetry. The uniform distribution has no tendency toward either tail—both sides balance exactly.
 
 ### Kurtosis
 
-$$\\text{Kurtosis} = 1.8$$
+@academic[formula_callout:Properties
+$$\\text{Kurtosis} = 1.8$$]@
 
-$$\\text{Excess Kurtosis} = -1.2$$
+@academic[formula_callout:Properties
+$$\\text{Excess Kurtosis} = -1.2$$]@
 
 The uniform distribution has **negative excess kurtosis** (platykurtic). With kurtosis 1.8 < 3, it has lighter tails than the normal distribution. The flat shape means probability is spread evenly rather than concentrated at the center or in the tails.
 
@@ -1815,7 +1886,8 @@ The uniform distribution has **negative excess kurtosis** (platykurtic). With ku
 
 The uniform distribution has **no tails** in the traditional sense:
 
-$$f(x) = \\begin{cases} \\frac{1}{b-a} & \\text{for } a \\leq x \\leq b \\\\ 0 & \\text{otherwise} \\end{cases}$$
+@academic[formula_callout:Properties
+$$f(x) = \\begin{cases} \\frac{1}{b-a} & \\text{for } a \\leq x \\leq b \\\\ 0 & \\text{otherwise} \\end{cases}$$]@
 
 Probability density is constant within $[a, b]$ and exactly zero outside this interval. There is an abrupt cutoff at the boundaries—no gradual decay.
 
@@ -1829,58 +1901,67 @@ This represents the opposite extreme from heavy-tailed distributions:
 **Constant Density:**
 The defining property is uniform density:
 
-$$f(x) = \\frac{1}{b-a} \\text{ for all } x \\in [a, b]$$
+@academic[formula_callout:Properties
+$$f(x) = \\frac{1}{b-a} \\text{ for all } x \\in [a, b]$$]@
 
 This makes many calculations algebraically simple.
 
 **Maximum Entropy on Bounded Interval:**
 Among all continuous distributions on $[a, b]$, the uniform distribution has the highest entropy:
 
-$$H = \\ln(b - a)$$
+@academic[formula_callout:Properties
+$$H = \\ln(b - a)$$]@
 
 It represents maximum uncertainty or minimum information—complete ignorance about where in $[a, b]$ a value falls.
 
 **Probability Proportional to Length:**
 For any subinterval $[c, d] \\subseteq [a, b]$:
 
-$$P(c \\leq X \\leq d) = \\frac{d - c}{b - a}$$
+@academic[formula_callout:Properties
+$$P(c \\leq X \\leq d) = \\frac{d - c}{b - a}$$]@
 
 Probability is simply the length of the subinterval divided by the total interval length.
 
 **Independence from Location:**
 The distribution shape depends only on interval width $b - a$, not on location. Shifting the interval preserves all distributional properties:
 
-$$\\text{Uniform}(a, b) \\stackrel{d}{=} \\text{Uniform}(a+c, b+c) \\text{ for any } c$$
+@academic[formula_callout:Properties
+$$\\text{Uniform}(a, b) \\stackrel{d}{=} \\text{Uniform}(a+c, b+c) \\text{ for any } c$$]@
 
 ### Useful Identities
 
 **Linear Transformation:**
 If $X \\sim \\text{Uniform}(a, b)$, then:
 
-$$Y = cX + d \\sim \\text{Uniform}(ca + d, cb + d) \\text{ for } c > 0$$
+@academic[formula_callout:Properties
+$$Y = cX + d \\sim \\text{Uniform}(ca + d, cb + d) \\text{ for } c > 0$$]@
 
 Linear transformations preserve uniformity (with appropriate parameter adjustments).
 
 **Standardization:**
 Any uniform variable can be transformed to standard uniform:
 
-$$U = \\frac{X - a}{b - a} \\sim \\text{Uniform}(0, 1)$$
+@academic[formula_callout:Properties
+$$U = \\frac{X - a}{b - a} \\sim \\text{Uniform}(0, 1)$$]@
 
 **Inverse CDF Method:**
 The uniform [CDF](!/probability/cdf) is:
 
-$$F(x) = \\frac{x - a}{b - a}$$
+@academic[formula_callout:Properties
+$$F(x) = \\frac{x - a}{b - a}$$]@
 
 with inverse:
 
-$$F^{-1}(p) = a + p(b - a)$$
+@academic[formula_callout:Properties
+$$F^{-1}(p) = a + p(b - a)$$]@
 
 This makes generating uniform random variables and computing [quantiles](!/probability/median) trivial.
 
 **Order Statistics:**
 For $n$ independent $\\text{Uniform}(0, 1)$ variables, the $k$-th order statistic follows a Beta$(k, n-k+1)$ distribution. The minimum and maximum have simple distributions:
 
-$$\\min(X_1, \\ldots, X_n) \\sim \\text{Uniform}(a, a + \\frac{b-a}{n})$$ (approximately, for large $n$)
+@academic[formula_callout:Properties
+$$\\min(X_1, \\ldots, X_n) \\sim \\text{Uniform}(a, a + \\frac{b-a}{n})$$ (approximately, for large $n$)]@
 
 **Not Closed Under Addition:**
 Unlike the normal distribution, sums of independent uniform variables do **not** remain uniform. Instead, the sum approaches normal by the [Central Limit Theorem](!/probability/central-limit-theorem).

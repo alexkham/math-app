@@ -1401,9 +1401,9 @@ Seen against the six-card and twenty-four-card views reached by [adjusting n](!#
 
 [Combinations](!/combinatorics/visual-tools/combination) — selection where order doesn't matter. The companion concept; full permutations divide $n!$ by $1$ to keep all orderings, [combinations](!/combinatorics/combinations#combinations) divide further to remove ordering.
 
-**Multiplication principle** — the [foundational counting rule](!#deriving-n-step-by-step) behind $n!$. If choice $A$ has $a$ options and choice $B$ has $b$ options, the combined choice has $a \\times b$ options.
+**[Multiplication principle](!/combinatorics/counting-principles#2)** — the [foundational counting rule](!#deriving-n-step-by-step) behind $n!$. If choice $A$ has $a$ options and choice $B$ has $b$ options, the combined choice has $a \\times b$ options.
 
-**Combinatorics calculator** — to compute $n!$ for arbitrary $n$, see the **full permutation calculator**.
+**[Combinatorics calculator](!/combinatorics/calculator)** — to compute $n!$ for arbitrary $n$, see the **full permutation calculator**.
 
 [Pascal's triangle](!/combinatorics/visual-tools/pascal-triangle) — each row of the triangle sums to $2^n$, while ordering every item instead gives $n!$.`,
       before: ``,

@@ -227,7 +227,7 @@ The three equations are inconsistent: no line passes through all three points.
 
 [Symmetric and projection matrices](!/linear-algebra/visual-tools/projection-2d) — $P$ is symmetric with eigenvalues $0$ and $1$.
 
-**Regression and statistics** — the same computation with a different vocabulary.`,
+**[Regression and statistics](!/linear-algebra/orthogonality/least-squares#9)** — the same computation with a different vocabulary.`,
       before: ``,
       after: ``,
       link: '',

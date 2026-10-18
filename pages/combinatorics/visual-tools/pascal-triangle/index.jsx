@@ -760,15 +760,15 @@ Together, these four are sufficient to derive most other binomial identities by 
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Simple combination** — the no-repetition unordered selection. Formula $\\binom{n}{r}$ exactly; the triangle is the lookup table for all such values.
+      content: `**[Simple combination](!/combinatorics/combinations#combinations)** — the no-repetition unordered selection. Formula $\\binom{n}{r}$ exactly; the triangle is the lookup table for all such values.
 
-**Binomial theorem** — $(a + b)^n = \\sum_{r=0}^{n} \\binom{n}{r} a^{n-r} b^r$. The triangle visualizes this expansion row by row, as [the banner](!#the-polynomial-banner) shows.
+**[Binomial theorem](!/combinatorics/binomial-theorem)** — $(a + b)^n = \\sum_{r=0}^{n} \\binom{n}{r} a^{n-r} b^r$. The triangle visualizes this expansion row by row, as [the banner](!#the-polynomial-banner) shows.
 
-**Multinomial coefficient** — generalizes the binomial to more than two parts: $\\binom{n}{n_1, n_2, \\dots, n_k} = n! / (n_1! \\cdots n_k!)$. The binomial is the $k = 2$ case.
+**[Multinomial coefficient](!/combinatorics/binomial-coefficient#4)** — generalizes the binomial to more than two parts: $\\binom{n}{n_1, n_2, \\dots, n_k} = n! / (n_1! \\cdots n_k!)$. The binomial is the $k = 2$ case.
 
 [Combination with repetition](!/combinatorics/visual-tools/permutation-with-repetition) — counts multisets, $\\binom{n + r - 1}{r}$. Different formula, different position in the triangle.
 
-**Permutation** — ordered selections, $n!/(n-r)!$. Related but distinct from the unordered combinations shown here.
+**[Permutation](!/combinatorics/permutations)** — ordered selections, $n!/(n-r)!$. Related but distinct from the unordered combinations shown here.
 
 **Catalan numbers** — appear in Pascal's triangle along a specific diagonal: $C_n = \\binom{2n}{n} / (n + 1)$.
 

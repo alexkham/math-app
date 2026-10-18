@@ -215,15 +215,15 @@ Two pivots, so $\\operatorname{rank} A = 2$. The pivot columns are $1$ and $2$, 
       title: `Related Concepts`,
       content: `[Gaussian elimination](!/linear-algebra/visual-tools/gauss-elimination) — the row reduction this tool performs; the same procedure solves linear systems.
 
-**Row echelon form** — the target shape, in which the pivots are visible.
+**[Row echelon form](!/linear-algebra/linear-systems/echelon-form#1)** — the target shape, in which the pivots are visible.
 
 [Linear independence](!/linear-algebra/visual-tools/span-independence-2d) — the columns are independent exactly when the rank equals their number.
 
 [Column space and row space](!/linear-algebra/visual-tools/four-fundamental-subspaces) — the two subspaces whose common dimension is the rank.
 
-**Null space** — the free columns count its dimension, the nullity.
+**[Null space](!/linear-algebra/vector-spaces/fundamental-spaces#4)** — the free columns count its dimension, the nullity.
 
-**Rank-nullity theorem** — rank plus nullity equals the number of columns.
+**[Rank-nullity theorem](!/linear-algebra/matrix/rank#6)** — rank plus nullity equals the number of columns.
 
 [Determinant](!/linear-algebra/visual-tools/matrix-determinant) — zero exactly when a square matrix fails to have full rank.
 

@@ -178,15 +178,15 @@ In all three cases the derivative does not exist at the affected point. Sliding 
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Derivative** — the function $f'(x)$ whose value at any $x$ equals the slope of the tangent at that point. The tangent line at $x_0$ is the geometric realization of $f'(x_0)$.
+      content: `**[Derivative](!/calculus/derivatives)** — the function $f'(x)$ whose value at any $x$ equals the slope of the tangent at that point. The tangent line at $x_0$ is the geometric realization of $f'(x_0)$.
 
 **Secant Line** — the line through two distinct points on the curve; the tangent emerges as the secant's limit as the two points merge.
 
-**Critical Points** — points where the derivative is zero or undefined; candidates for local maxima, minima, and saddle points.
+**[Critical Points](!/calculus/derivatives/graph-analysis#4)** — points where the derivative is zero or undefined; candidates for local maxima, minima, and saddle points.
 
-**Differentiability** — the property of having a well-defined derivative at a point. The visualizer's three "tangent undefined" cases are the three standard failures.
+**[Differentiability](!/calculus/derivatives/differentiability)** — the property of having a well-defined derivative at a point. The visualizer's three "tangent undefined" cases are the three standard failures.
 
-**Linear Approximation** — using the tangent line as a substitute for the function near $x_0$, the basis of Newton's method and Taylor series.
+**[Linear Approximation](!/calculus/derivatives/differentials#4)** — using the tangent line as a substitute for the function near $x_0$, the basis of Newton's method and Taylor series.
 
 [Function Transformations](!/functions/visual-tools/transformations) — the companion visualizer for $a$, $k$, $b$, $h$ alone, without the tangent overlay.
 

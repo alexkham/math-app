@@ -19,16 +19,20 @@ function PercentageCalculator({ explanations = null }) {
     setResult('');
   };
 
+  // an answer for the old numbers must not stay on screen
   const handleNumber1Change = (event) => {
     setNumber1(event.target.value);
+    setResult('');
   };
 
   const handleNumber2Change = (event) => {
     setNumber2(event.target.value);
+    setResult('');
   };
 
   const handleAddSubtractChange = (event) => {
     setAddSubtractOption(event.target.value);
+    setResult('');
   };
 
   const calculatePercentage = () => {
@@ -39,6 +43,11 @@ function PercentageCalculator({ explanations = null }) {
       setResult('Error: Invalid input');
       return;
     }
+
+    // a zero base has no percentage: say so instead of printing Infinity or NaN
+    if (mode === 'percentageChange' && num1 === 0) { setResult('Error: The original value cannot be 0'); return; }
+    if (mode === 'reversePercentage' && num2 === 0) { setResult('Error: The whole cannot be 0'); return; }
+    if (mode === 'fractionToPercentage' && num2 === 0) { setResult('Error: The denominator cannot be 0'); return; }
 
     let calculatedResult;
     switch (mode) {
@@ -235,7 +244,7 @@ function PercentageCalculator({ explanations = null }) {
                   </div>
                 </td>
                 <td className={styles.resultCell}>
-                  = {result}{(mode === 'percentageChange'&&result || mode === 'reversePercentage'&&result || mode === 'fractionToPercentage'&&result) ? '%' : ''}
+                  = {result}{(!String(result).startsWith('Error') && (mode === 'percentageChange'&&result || mode === 'reversePercentage'&&result || mode === 'fractionToPercentage'&&result)) ? '%' : ''}
                 </td>
               </tr>
             </tbody>

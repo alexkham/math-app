@@ -894,11 +894,13 @@ Let $X$ be a random variable with finite mean $\\mu$ and finite variance $\\sigm
 
 For any real number $k > 0$, Chebyshev's inequality states:
 
-$$\\mathbb{P}\\big(|X - \\mu| \\ge k\\,\\sigma\\big) \\le \\frac{1}{k^2}$$
+@academic[formula_callout:Statement of Chebyshev's Inequality
+$$\\mathbb{P}\\big(|X - \\mu| \\ge k\\,\\sigma\\big) \\le \\frac{1}{k^2}$$]@
 
 Equivalently, for any $\\varepsilon > 0$,
 
-$$\\mathbb{P}\\big(|X - \\mu| \\ge \\varepsilon\\big) \\le \\frac{\\sigma^2}{\\varepsilon^2}$$
+@academic[formula_callout:Statement of Chebyshev's Inequality
+$$\\mathbb{P}\\big(|X - \\mu| \\ge \\varepsilon\\big) \\le \\frac{\\sigma^2}{\\varepsilon^2}$$]@
 
 The bound depends only on the variance and makes no assumptions about the form of the distribution.
 `,

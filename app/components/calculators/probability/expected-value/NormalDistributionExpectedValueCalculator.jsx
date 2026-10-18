@@ -1,6 +1,20 @@
 import { useState, useMemo } from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
 
+// two-sided 95% critical values of Student's t by degrees of freedom (the normal value 1.96 only for very large samples)
+const T95 = { 1: 12.706, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571, 6: 2.447, 7: 2.365, 8: 2.306, 9: 2.262, 10: 2.228, 11: 2.201, 12: 2.179, 13: 2.160, 14: 2.145, 15: 2.131, 16: 2.120, 17: 2.110, 18: 2.101, 19: 2.093, 20: 2.086, 21: 2.080, 22: 2.074, 23: 2.069, 24: 2.064, 25: 2.060, 26: 2.056, 27: 2.052, 28: 2.048, 29: 2.045, 30: 2.042, 40: 2.021, 60: 2.000, 120: 1.980 };
+function tCritical95(df) {
+  if (df < 1) return NaN;
+  if (T95[df] !== undefined) return T95[df];
+  if (df > 120) return 1.96;
+  // between the tabulated 40, 60 and 120: interpolate on 1/df
+  const keys = [30, 40, 60, 120];
+  let lo = keys[0], hi = keys[keys.length - 1];
+  for (let k = 0; k < keys.length - 1; k++) if (df > keys[k] && df < keys[k + 1]) { lo = keys[k]; hi = keys[k + 1]; }
+  const w = (1 / lo - 1 / df) / (1 / lo - 1 / hi);
+  return T95[lo] + w * (T95[hi] - T95[lo]);
+}
+
 const NormalExpectedValueCalculator = ({ explanations = null }) => {
   const [dataInput, setDataInput] = useState('98, 102, 105, 97, 100, 103, 99, 101, 104, 98');
   const [activeTab, setActiveTab] = useState('visualization');
@@ -63,7 +77,7 @@ const NormalExpectedValueCalculator = ({ explanations = null }) => {
     const q3 = sorted[q3Index];
     
     // Calculate 95% confidence interval for the mean
-    const tCritical = 1.96; // Approximate for large samples; for small samples should use t-distribution
+    const tCritical = tCritical95(n - 1); // two-sided 95% value of the t-distribution with n - 1 degrees of freedom
     const marginOfError = tCritical * (standardDeviation / Math.sqrt(n));
     const ciLower = mean - marginOfError;
     const ciUpper = mean + marginOfError;
@@ -72,6 +86,7 @@ const NormalExpectedValueCalculator = ({ explanations = null }) => {
       isValid: true,
       data: data,
       n: n,
+      tCritical: tCritical,
       expectedValue: mean,
       variance: variance,
       standardDeviation: standardDeviation,
@@ -415,7 +430,7 @@ const NormalExpectedValueCalculator = ({ explanations = null }) => {
                         = {(calculations.standardDeviation / Math.sqrt(calculations.n)).toFixed(4)}
                       </div>
                       <div style={styles.integralStep}>
-                        95% CI: x̄ ± 1.96 × SE
+                        95% CI: x̄ ± t × SE, with t = {calculations.tCritical.toFixed(3)} (df = {calculations.n - 1})
                       </div>
                       <div style={styles.integralStep}>
                         <strong>= [{calculations.ciLower.toFixed(3)}, {calculations.ciUpper.toFixed(3)}]</strong>

@@ -2129,7 +2129,7 @@ The factorization is unique: for a given symmetric positive definite $A$, there 
     entries: [
       {
         id: `one-letter-twice`,
-        tex: `A = LL^{T}`,
+        tex: `$A = LL^{T}$`,
         read: `A equals L times L transpose`,
         means: `Every other factorisation on this site names its factors with separate letters. Here there is one factor, written twice, and the second appearance is fully determined by the first. That is the notation carrying a fact: $LL^{T}$ comes out symmetric no matter what $L$ is, so the shape of the equation already restricts which matrices can appear on the left.`,
         cases: `Only the lower triangle of $L$ is ever stored. The transposed copy is the same array of numbers read in the other direction, which is where the halved storage comes from.`,
@@ -2139,7 +2139,7 @@ The factorization is unique: for a given symmetric positive definite $A$, there 
       },
       {
         id: `positive-definite-form`,
-        tex: `\\mathbf{x}^{T}A\\mathbf{x} > 0 \\quad \\text{for all } \\mathbf{x} \\neq \\mathbf{0}`,
+        tex: `$\\mathbf{x}^{T}A\\mathbf{x} > 0 \\quad \\text{for all } \\mathbf{x} \\neq \\mathbf{0}$`,
         read: `x transpose A x is greater than zero for every nonzero vector x`,
         means: `The sandwich collapses to a single number: a row times a matrix times a column leaves a scalar, not a matrix. **Positive** in the name **positive definite** describes those numbers and nothing else. **Definite** carries the strictness — every nonzero $\\mathbf{x}$, with no exceptions allowed.`,
         cases: `Semi-definite weakens $>$ to $\\geq$, admitting vectors the form sends to zero. Indefinite means both signs occur. Each weakening changes exactly one symbol and changes which factorisation exists.`,
@@ -2149,7 +2149,7 @@ The factorization is unique: for a given symmetric positive definite $A$, there 
       },
       {
         id: `square-root-quotes`,
-        tex: `LL^{T} = A, \\qquad LL \\neq A`,
+        tex: `$LL^{T} = A, \\qquad LL \\neq A$`,
         read: `L times L transpose is A, but L times L is not`,
         means: `$L$ is described as a matrix square root, and the quotation marks around that phrase are doing real work. A square root normally multiplies by itself; this one multiplies by its transpose. $LL$ is again lower triangular and cannot equal a full symmetric $A$.`,
         cases: `A genuine matrix square root exists: the unique symmetric positive definite $S$ with $SS = A$, built from the eigenvalues. It is a different matrix from $L$ — $S$ is symmetric, $L$ is triangular — and it costs far more to compute.`,
@@ -2159,7 +2159,7 @@ The factorization is unique: for a given symmetric positive definite $A$, there 
       },
       {
         id: `two-sided-permutation`,
-        tex: `PAP^{T} = LL^{T}`,
+        tex: `$PAP^{T} = LL^{T}$`,
         read: `P A P transpose equals L L transpose`,
         means: `$P$ stands on both sides because one side alone would break the symmetry the method depends on. Multiplying on the left reorders the rows; multiplying by $P^{T}$ on the right applies the same reordering to the columns, so an entry and its mirror image move together and the result is still symmetric.`,
         cases: `Since $P$ is a permutation, $P^{T} = P^{-1}$, so $PAP^{T}$ is [similar](!/linear-algebra/transformations/basis-change) to $A$: the eigenvalues are untouched, and with them positive definiteness. Reordering is safe here in a way that is not obvious from the symbols.`,
@@ -2169,7 +2169,7 @@ The factorization is unique: for a given symmetric positive definite $A$, there 
       },
       {
         id: `ldl-variant`,
-        tex: `A = LDL^{T}, \\qquad L_{\\text{Chol}} = L_UD^{1/2}`,
+        tex: `$A = LDL^{T}, \\qquad L_{\\text{Chol}} = L_UD^{1/2}$`,
         read: `A equals L D L transpose, and the Cholesky factor is the unit lower triangular L times the square root of D`,
         means: `The two factorisations differ only in whether the diagonal is carried separately. In $LDL^{T}$ the triangular factor has ones on its diagonal and $D$ holds the positive numbers; the Cholesky factor absorbs $\\sqrt{D}$ and gives up the ones.`,
         cases: `$D^{1/2}$ means the diagonal matrix of square roots of the entries. For a diagonal matrix that happens to agree with the genuine matrix square root, which is why the exponent passes here without comment and would not for a general matrix.`,

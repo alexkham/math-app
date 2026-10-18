@@ -306,13 +306,13 @@ When an error appears, read the message carefully. It usually points to the exac
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Propositional logic syntax** is the formal grammar that defines which strings count as well-formed formulas. This analyzer applies those rules automatically during parsing.
+      content: `**[Propositional logic syntax](!/logic/propositional-logic/syntax)** is the formal grammar that defines which strings count as well-formed formulas. This analyzer applies those rules automatically during parsing.
 
-**Truth tables** are the standard method for determining the truth value of compound propositions. The table generated here covers all $2^n$ rows for $n$ distinct variables.
+**[Truth tables](!/logic/truth-tables)** are the standard method for determining the truth value of compound propositions. The table generated here covers all $2^n$ rows for $n$ distinct variables.
 
-**Tautologies and contradictions** play central roles in formal proof systems, where identifying logically valid formulas is a prerequisite for constructing sound arguments.
+**[Tautologies and contradictions](!/logic/propositional-logic/semantics)** play central roles in formal proof systems, where identifying logically valid formulas is a prerequisite for constructing sound arguments.
 
-**Logical equivalence** can be tested by entering two expressions connected with the biconditional operator and checking whether the result is a tautology.
+**[Logical equivalence](!/logic/propositional-logic/semantics/equivalences)** can be tested by entering two expressions connected with the biconditional operator and checking whether the result is a tautology.
 
 **Digital logic design** uses the same connectives to model logic gates. AND, OR, NOT, and XOR gates correspond directly to the operators available in this tool, making it useful for verifying simple circuit behavior.`,
       before: ``,

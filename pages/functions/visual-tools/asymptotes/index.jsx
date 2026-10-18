@@ -196,19 +196,19 @@ The visualizer lets you build intuition by watching the dashed lines emerge from
 
     obj10: {
       title: `Related Concepts and Tools`,
-      content: `**Limits at Infinity** — formal theory of $\\lim_{x \\to \\infty} f(x)$. Horizontal and oblique asymptotes are exactly these limits made visible.
+      content: `**[Limits at Infinity](!/calculus/limits/infinity#2)** — formal theory of $\\lim_{x \\to \\infty} f(x)$. Horizontal and oblique asymptotes are exactly these limits made visible.
 
-**One-Sided Limits** — the $x \\to c^-$ and $x \\to c^+$ notation in the VA panel. Vertical asymptotes correspond to one-sided limits being $\\pm\\infty$.
+**[One-Sided Limits](!/calculus/limits/one-sided)** — the $x \\to c^-$ and $x \\to c^+$ notation in the VA panel. Vertical asymptotes correspond to one-sided limits being $\\pm\\infty$.
 
-**Rational Functions** — the natural home of asymptotes. Polynomial-division and degree comparisons let you find HAs and OAs algebraically; setting the denominator to zero gives VA candidates.
+**[Rational Functions](!/functions/families#8)** — the natural home of asymptotes. Polynomial-division and degree comparisons let you find HAs and OAs algebraically; setting the denominator to zero gives VA candidates.
 
 [Domain of a Function](!/functions/visual-tools/domain) — VAs always sit at points where the function is undefined, but not every undefined point is a VA (removable singularities exist). The Domain visualizer complements this one.
 
 [Function Symmetry](!/functions/visual-tools/symmetry) — another structural property in the Function Properties group. Combined with asymptotes, symmetry pins down a function's gross shape.
 
-**Logarithmic Functions**, **Tangent Function**, **Exponential Functions** — the elementary functions whose asymptotic behavior is foundational for everything else.
+**[Logarithmic Functions](!/functions/families#15)**, **Tangent Function**, **Exponential Functions** — the elementary functions whose asymptotic behavior is foundational for everything else.
 
-**Continuity and Discontinuity** — VAs are a specific type of essential discontinuity; the theory connects directly to limit theory.
+**[Continuity and Discontinuity](!/calculus/limits/continuity)** — VAs are a specific type of essential discontinuity; the theory connects directly to limit theory.
 
 [Function Composition](!/functions/visual-tools/composition) — composing with a rational function can create new vertical asymptotes where the inner function hits an excluded value.
 

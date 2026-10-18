@@ -725,19 +725,19 @@ For the general $ax^2 + bx + c$, first factor $a$ out of the $x^2$ and $x$ terms
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Quadratic formula** — derived directly by completing the square on the general $ax^2 + bx + c = 0$. Gives the roots $x = \\dfrac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$.
+      content: `**[Quadratic formula](!/algebra/equations/quadratic#4)** — derived directly by completing the square on the general $ax^2 + bx + c = 0$. Gives the roots $x = \\dfrac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$.
 
-**Discriminant** — the expression $b^2 - 4ac$ that appears under the square root in the quadratic formula. Determines whether the roots are real and distinct, repeated, or complex.
+**[Discriminant](!/algebra/equations/quadratic#5)** — the expression $b^2 - 4ac$ that appears under the square root in the quadratic formula. Determines whether the roots are real and distinct, repeated, or complex.
 
 **Vertex form** — the rewriting $y = a(x - h)^2 + k$ that completing the square produces. Makes the vertex and axis of symmetry immediately readable.
 
-**Standard form** — the alternative $y = ax^2 + bx + c$. Useful for identifying [intercepts](!/algebra/polynomials#2) and applying the quadratic formula, less convenient for graphing the vertex.
+**[Standard form](!/algebra/equations/quadratic#1)** — the alternative $y = ax^2 + bx + c$. Useful for identifying [intercepts](!/algebra/polynomials#2) and applying the quadratic formula, less convenient for graphing the vertex.
 
 **Factored form** — $y = a(x - r_1)(x - r_2)$, where $r_1$ and $r_2$ are the roots. Useful when the quadratic factors over the rationals; not always available.
 
-**Parabola** — the graph of a quadratic. The vertex form makes its shape, vertex, and orientation directly visible.
+**[Parabola](!/algebra/polynomials/graphing#8)** — the graph of a quadratic. The vertex form makes its shape, vertex, and orientation directly visible.
 
-**Algebra calculator** — for symbolic completion of the square on more complex expressions, see the dedicated **completing the square calculator** in the algebra calculators section.
+**[Algebra calculator](!/algebra/calculators)** — for symbolic completion of the square on more complex expressions, see the dedicated **completing the square calculator** in the algebra calculators section.
 
 [Equation Visual Explorer](!/algebra/visual-tools/equation) — solve $ax^2 + bx + c = n$ on a sign chart, the same roots the completed square hands you.
 

@@ -210,7 +210,7 @@ For contrast, the not-positive-definite preset has $\\ell_{1,1} = 1$, $\\ell_{2,
 
 [Symmetric matrices](!/linear-algebra/visual-tools/matrix-types) — the class this applies to, and whose transpose invariance makes one factor enough.
 
-**Positive definiteness** — the condition, tested by the factorization itself.
+**[Positive definiteness](!/linear-algebra/decompositions/cholesky#7)** — the condition, tested by the factorization itself.
 
 [Determinant](!/linear-algebra/visual-tools/matrix-determinant) — the product of the squared diagonal, always positive here.
 

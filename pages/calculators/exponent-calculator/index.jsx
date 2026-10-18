@@ -658,11 +658,11 @@ See [key principle: base determines direction](!/algebra/powers/exponential-ineq
 
   obj12: {
     title: `Related Calculators and Resources`,
-    content: `**Root Calculator** performs the inverse of exponents. Instead of $2^3 = 8$, find what number cubed equals $8$ (answer: $2$). Use this when you know the result and need to find the base.
+    content: `**[Root Calculator](!/calculators/root-calculator)** performs the inverse of exponents. Instead of $2^3 = 8$, find what number cubed equals $8$ (answer: $2$). Use this when you know the result and need to find the base.
 
-**Logarithm Calculator** solves for exponents. If $2^x = 32$, logarithms tell you $x = 5$. Logarithms and exponents are inverse operations, like addition and subtraction.
+**[Logarithm Calculator](!/calculators/log-calculator)** solves for exponents. If $2^x = 32$, logarithms tell you $x = 5$. Logarithms and exponents are inverse operations, like addition and subtraction.
 
-**Exponential Tables** show pre-calculated powers for quick reference. Look up $2^1$ through $2^{20}$ or other common bases without calculating each time.
+**[Exponential Tables](!/tables/powers-table)** show pre-calculated powers for quick reference. Look up $2^1$ through $2^{20}$ or other common bases without calculating each time.
 
 **Scientific Calculator** combines exponents with other operations for complex equations. Use it when exponents are part of larger formulas requiring multiple steps.
 

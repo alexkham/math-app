@@ -812,6 +812,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 import reflectionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/reflection/reflectionDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 
 
 export async function getStaticProps(){
@@ -1446,8 +1447,84 @@ const schemas = {
     }),
   };
 
+  const detScaleCases = {
+    prefaceTitle: 'What the size of the determinant says',
+    preface: 'For an $n \\times n$ matrix $A$, the map $x \\mapsto Ax$ scales every $n$-dimensional volume by the same factor $|\\det(A)|$. Comparing that factor with $1$ and with $0$ gives four regimes.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'The absolute value discards the sign: a rotation and a reflection both have $|\\det(A)| = 1$. The sign itself, orientation, is read separately.',
+    parent: {
+      kicker: 'Volume scaling',
+      formula: '$\\operatorname{vol}(A(S)) = |\\det(A)| \\cdot \\operatorname{vol}(S)$',
+      splitBy: 'the size of $|\\det(A)|$',
+    },
+    cases: [
+      {
+        id: 'expand', condition: '$|\\det(A)| > 1$',
+        count: { n: '↑' },
+        headline: 'Expands volumes',
+        desc: 'every region comes out larger than it went in',
+      },
+      {
+        id: 'compress', condition: '$0 < |\\det(A)| < 1$',
+        count: { n: '↓' },
+        headline: 'Compresses volumes',
+        desc: 'every region comes out smaller',
+      },
+      {
+        id: 'preserve', condition: '$|\\det(A)| = 1$',
+        count: { n: '=' },
+        headline: 'Volume-preserving',
+        desc: 'volumes are unchanged',
+        example: 'rotations and reflections',
+      },
+      {
+        id: 'collapse', condition: '$\\det(A) = 0$',
+        count: { n: '0' },
+        headline: 'Collapses a dimension',
+        desc: 'the image is a subspace of dimension less than $n$, and all $n$-dimensional volumes map to zero',
+        example: 'a hyperplane, a line or a point',
+      },
+    ],
+  };
+
+  const detSignCases = {
+    prefaceTitle: 'What the sign says',
+    preface: 'For three vectors $\\mathbf{a}$, $\\mathbf{b}$, $\\mathbf{c}$ in $\\mathbb{R}^3$, the determinant of the matrix with those columns is the signed volume of the parallelepiped they span. Its sign reflects handedness.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'Swapping two columns flips the sign but not the volume: the box with $\\det = 6$ becomes $\\det = -6$, left-handed instead of right-handed.',
+    parent: {
+      kicker: 'Signed volume',
+      formula: '$\\det(A) = \\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})$',
+      splitBy: 'the sign of $\\det(A)$',
+    },
+    cases: [
+      {
+        id: 'right', condition: '$\\det(A) > 0$',
+        count: { n: '+' },
+        headline: 'Right-handed',
+        desc: 'the same orientation as the standard basis $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_3$',
+        example: 'columns $(1,0,0)$, $(0,2,0)$, $(0,0,3)$: $\\det = 6$',
+      },
+      {
+        id: 'left', condition: '$\\det(A) < 0$',
+        count: { n: '−' },
+        headline: 'Left-handed',
+        desc: 'the opposite orientation; the volume is $|\\det(A)|$',
+        example: 'the same columns with the first two swapped: $\\det = -6$',
+      },
+      {
+        id: 'flat', condition: '$\\det(A) = 0$',
+        count: { n: '0' },
+        headline: 'Flat',
+        desc: 'the three vectors are coplanar and the parallelepiped has no volume',
+      },
+    ],
+  };
+
    return {
   props: {
+    detSignCases,
+    detScaleCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1467,7 +1544,9 @@ const schemas = {
 }
    }
 
- export default function DeterminantGeometryPage({
+ const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function DeterminantGeometryPage({detSignCases, detScaleCases, 
    seoData,
    sectionsContent,
    introContent,
@@ -1516,6 +1595,14 @@ const schemas = {
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-diagram'}
+            id="determinant-sign-volume-cases"
+            title="The sign of the determinant in three dimensions"
+            source="/linear-algebra/determinants/geometry"
+          >
+            <CaseSplit data={detSignCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1524,6 +1611,14 @@ const schemas = {
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="determinant-volume-scaling-cases"
+            title="The size of the determinant: four regimes"
+            source="/linear-algebra/determinants/geometry"
+          >
+            <CaseSplit data={detScaleCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

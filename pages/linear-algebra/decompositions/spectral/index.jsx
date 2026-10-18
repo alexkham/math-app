@@ -2128,7 +2128,7 @@ This is the [diagonalization](!/linear-algebra/eigen/diagonalization) $A = PDP^{
     entries: [
       {
         id: `transpose-for-inverse`,
-        tex: `A = QDQ^{T}`,
+        tex: `$A = QDQ^{T}$`,
         read: `A equals Q D Q transpose`,
         means: `This is $A = PDP^{-1}$ with one superscript changed, and the change is the entire content. Writing $Q^{T}$ where an inverse is required asserts that $Q^{-1} = Q^{T}$, which holds only for an orthogonal matrix. The line therefore states the spectral theorem in a superscript: the eigenvector matrix can be chosen orthogonal, so no inversion is ever needed.`,
         cases: `The guarantee is unconditional for a real symmetric $A$, including when eigenvalues repeat. Where general diagonalization can fail outright, this factorisation always exists, and the letter $Q$ rather than $P$ is what announces it.`,
@@ -2138,7 +2138,7 @@ This is the [diagonalization](!/linear-algebra/eigen/diagonalization) $A = PDP^{
       },
       {
         id: `product-form-versus-sum-form`,
-        tex: `A = QDQ^{T} = \\lambda_1\\mathbf{q}_1\\mathbf{q}_1^{T} + \\cdots + \\lambda_n\\mathbf{q}_n\\mathbf{q}_n^{T}`,
+        tex: `$A = QDQ^{T} = \\lambda_1\\mathbf{q}_1\\mathbf{q}_1^{T} + \\cdots + \\lambda_n\\mathbf{q}_n\\mathbf{q}_n^{T}$`,
         read: `A equals Q D Q transpose, which also equals a sum of n rank-one terms`,
         means: `One decomposition written in two shapes that share no visible structure. On the left, three matrices multiplied. On the right, $n$ matrices added. Nothing in either expression records that they are the same thing; the equality comes from expanding the product column by column, and it has to be supplied by the reader.`,
         cases: `Each term $\\lambda_i\\mathbf{q}_i\\mathbf{q}_i^{T}$ is a rank-one matrix, and the factor $\\mathbf{q}_i\\mathbf{q}_i^{T}$ on its own is the [projection](!/linear-algebra/orthogonality/projections) onto the line through $\\mathbf{q}_i$. The sum form is the one that shows what $A$ does; the product form is the one that computes.`,
@@ -2148,7 +2148,7 @@ This is the [diagonalization](!/linear-algebra/eigen/diagonalization) $A = PDP^{
       },
       {
         id: `quadratic-form-change-of-variables`,
-        tex: `\\mathbf{x}^{T}A\\mathbf{x} = \\mathbf{y}^{T}D\\mathbf{y} = \\sum_{i=1}^{n}\\lambda_iy_i^2, \\qquad \\mathbf{x} = Q\\mathbf{y}`,
+        tex: `$\\mathbf{x}^{T}A\\mathbf{x} = \\mathbf{y}^{T}D\\mathbf{y} = \\sum_{i=1}^{n}\\lambda_iy_i^2, \\qquad \\mathbf{x} = Q\\mathbf{y}$`,
         read: `x transpose A x equals y transpose D y, which equals the sum of lambda i times y i squared, where x is Q y`,
         means: `The two sandwiches describe one number, and the substitution written to the right is what licenses the equality. Replacing $A$ by $D$ is not a simplification of the matrix; it is the same form measured in different coordinates, and $\\mathbf{y}$ names the coordinates of $\\mathbf{x}$ along the eigenvectors.`,
         cases: `Because $D$ is diagonal, the middle expression has no cross terms, which is what the final sum makes visible: $n$ independent squares, each weighted by an eigenvalue. The cross terms did not cancel — they were absorbed into the change of variables.`,
@@ -2158,7 +2158,7 @@ This is the [diagonalization](!/linear-algebra/eigen/diagonalization) $A = PDP^{
       },
       {
         id: `letters-collapsing`,
-        tex: `U = V = Q, \\qquad \\sigma_i = |\\lambda_i|`,
+        tex: `$U = V = Q, \\qquad \\sigma_i = |\\lambda_i|$`,
         read: `U and V both become Q, and each singular value is the absolute value of an eigenvalue`,
         means: `The three-letter form $A = U\\Sigma V^{T}$ and the two-letter form $A = QDQ^{T}$ describe the same matrix when $A$ is symmetric with non-negative eigenvalues. The separate names for the outer factors exist to allow them to differ; symmetry removes the need, and the notation contracts.`,
         cases: `When an eigenvalue is negative the collapse is incomplete. Singular values are never negative, so $\\sigma_i = |\\lambda_i|$, and the discarded sign is stored by negating the matching column of $U$ relative to $V$. The bars are doing bookkeeping, not measurement.`,

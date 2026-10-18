@@ -1216,9 +1216,9 @@ This experiment explains why many natural and measurement-based quantities clust
       after:``,
       link:'',
       example:`
-      **Example**:
+      @academic[example:Example
 
-Human height results from genetics, nutrition, environment, and random biological variation. No single factor determines the outcome, but together they produce values concentrated around an average, with fewer extremely short or tall individuals.
+Human height results from genetics, nutrition, environment, and random biological variation. No single factor determines the outcome, but together they produce values concentrated around an average, with fewer extremely short or tall individuals.]@
       `,
   
   
@@ -1296,7 +1296,12 @@ The normal distribution is fully characterized by these two parameters.
       <h3 style="color: #1e40af;">Probability Density Function (PDF)</h3>
 The **probability density function (PDF)** of a **normal distribution** is given by:
 
+@academic[formula_callout:Normal PDF
 $$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}, \\quad -\\infty < x < \\infty$$
+/probability/formulas#normal_pdf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 ### Intuition Behind the Formula
 
@@ -1318,7 +1323,12 @@ $$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}, \\
   • $e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$: Exponential decay as you move away from $\\mu$
   • The total area under the curve equals 1:
   
+@academic[formula_callout:PDF Normalization
   $$\\int_{-\\infty}^{\\infty} f(x)\\,dx = 1$$
+/probability/formulas#pdf_normalization]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 **Practical Example:** Human heights follow approximately a normal distribution. If adult male heights have $\\mu = 175$ cm and $\\sigma = 7$ cm, then $X \\sim N(175, 49)$. The PDF tells us the relative likelihood of observing different heights, with the peak at 175 cm and decreasing probability as we move toward very short or very tall individuals.
       `,
@@ -1332,11 +1342,13 @@ $$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}, \\
       content:`<h3 style="color: #1e3a8a;">Cumulative Distribution Function (CDF)</h3>
 The **cumulative distribution function (CDF)** gives the probability that $X$ is less than or equal to a specific value:
 
-$$F(x) = P(X \\leq x) = \\int_{-\\infty}^{x} \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(t-\\mu)^2}{2\\sigma^2}}\\,dt$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$F(x) = P(X \\leq x) = \\int_{-\\infty}^{x} \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(t-\\mu)^2}{2\\sigma^2}}\\,dt$$]@
 
 **Standard Normal CDF**: For the standard normal distribution $N(0, 1)$, the CDF is traditionally denoted by $\\Phi(z)$:
 
-$$\\Phi(z) = P(Z \\leq z) = \\int_{-\\infty}^{z} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{t^2}{2}}\\,dt$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$\\Phi(z) = P(Z \\leq z) = \\int_{-\\infty}^{z} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{t^2}{2}}\\,dt$$]@
 
 **Key Properties**:
 • $F(-\\infty) = 0$ and $F(+\\infty) = 1$
@@ -1357,11 +1369,21 @@ $$\\Phi(z) = P(Z \\leq z) = \\int_{-\\infty}^{z} \\frac{1}{\\sqrt{2\\pi}} e^{-\\
   content: `
 The mean of a continuous random variable requires integrating across all possible values, with each value weighted by its density. For the normal distribution, this computation follows the [standard continuous expected value formula](!/probability/expected-value#continuous):
 
+@academic[formula_callout:Expected Value (Continuous)
 $$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot f(x) \\, dx$$
+/probability/formulas#expected_value_continuous]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 ### Formula
 
+@academic[formula_callout:Normal Mean
 $$E[X] = \\mu$$
+/probability/formulas#normal_mean]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $\\mu$ = the location parameter of the distribution
@@ -1370,17 +1392,21 @@ $\\mu$ = the location parameter of the distribution
 
 The normal distribution has PDF:
 
-$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$$
+@academic[formula_callout:Expected Value (Mean)
+$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$$]@
 
 Computing the expected value:
 
-$$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}} \\, dx$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}} \\, dx$$]@
 
 Using the substitution $z = \\frac{x-\\mu}{\\sigma}$, we get $x = \\mu + \\sigma z$ and $dx = \\sigma \\, dz$:
 
-$$E[X] = \\int_{-\\infty}^{\\infty} (\\mu + \\sigma z) \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\int_{-\\infty}^{\\infty} (\\mu + \\sigma z) \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz$$]@
 
-$$E[X] = \\mu \\int_{-\\infty}^{\\infty} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz + \\sigma \\int_{-\\infty}^{\\infty} z \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = \\mu \\int_{-\\infty}^{\\infty} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz + \\sigma \\int_{-\\infty}^{\\infty} z \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz$$]@
 
 The first integral equals 1 (total probability of standard normal). The second integral equals 0 by symmetry (integrating an odd function over a symmetric interval).
 
@@ -1392,7 +1418,8 @@ The result $E[X] = \\mu$ reveals a fundamental property of the normal distributi
 
 Consider human heights modeled as normally distributed with $\\mu = 170$ cm and $\\sigma = 10$ cm:
 
-$$E[X] = 170 \\text{ cm}$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = 170 \\text{ cm}$$]@
 
 The expected height is exactly 170 cm, which is the center of the distribution. Half of all heights fall above this value, and half fall below it.
 
@@ -1408,17 +1435,24 @@ To compute the expected value of a normal distribution for your own parameters, 
   content: `
 The [variance](!/probability/variance#calculate) of a continuous random variable quantifies the spread of values around the mean. For continuous distributions, it is calculated through integration:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 f(x) \\, dx$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 f(x) \\, dx$$]@
 
 Alternatively, using the computational formula:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$]@
 
 For the **normal distribution**, this calculation yields a direct relationship with the distribution parameter.
 
 ### Formula
 
+@academic[formula_callout:Normal Variance
 $$\\mathrm{Var}(X) = \\sigma^2$$
+/probability/formulas#normal_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $\\sigma$ = the scale parameter of the distribution
@@ -1427,15 +1461,18 @@ $\\sigma$ = the scale parameter of the distribution
 
 The normal distribution has PDF:
 
-$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$$]@
 
 We know from the expected value section that $\\mu = E[X]$. Computing the variance:
 
-$$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 \\cdot \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}} \\, dx$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 \\cdot \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}} \\, dx$$]@
 
 Using the substitution $z = \\frac{x-\\mu}{\\sigma}$, we get $(x-\\mu) = \\sigma z$ and $dx = \\sigma \\, dz$:
 
-$$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (\\sigma z)^2 \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz = \\sigma^2 \\int_{-\\infty}^{\\infty} z^2 \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (\\sigma z)^2 \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz = \\sigma^2 \\int_{-\\infty}^{\\infty} z^2 \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz$$]@
 
 The integral equals 1 (this is the variance of the standard normal distribution).
 
@@ -1445,7 +1482,8 @@ The result $\\mathrm{Var}(X) = \\sigma^2$ reveals that the parameter $\\sigma$ d
 
 ### Standard Deviation
 
-$$\\sigma$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma$$]@
 
 The standard deviation is simply the parameter $\\sigma$ itself, which is why it's called the standard deviation parameter. This makes interpretation straightforward: about 68% of values fall within one standard deviation of the mean, about 95% within two standard deviations, and about 99.7% within three standard deviations.
 
@@ -1453,9 +1491,11 @@ The standard deviation is simply the parameter $\\sigma$ itself, which is why it
 
 Consider human heights modeled as normally distributed with $\\mu = 170$ cm and $\\sigma = 10$ cm:
 
-$$\\mathrm{Var}(X) = (10)^2 = 100 \\text{ cm}^2$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = (10)^2 = 100 \\text{ cm}^2$$]@
 
-$$\\sigma = 10 \\text{ cm}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = 10 \\text{ cm}$$]@
 
 The variance of 100 cm² and standard deviation of 10 cm indicate that most heights cluster within 10 cm of the mean. We expect about 68% of heights to fall between 160 cm and 180 cm, and about 95% between 150 cm and 190 cm.
   `,
@@ -1472,22 +1512,24 @@ The [mode](!/probability/mode) is the value where the [probability density funct
 
 For the normal distribution, the [mode](!/probability/mode) is:
 
-$$\\text{Mode} = \\mu$$
+@academic[formula_callout:Mode and Median
+$$\\text{Mode} = \\mu$$]@
 
 **Intuition:** The normal [PDF](!/probability/probability-function/pdf) is:
 
-$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$$
+@academic[formula_callout:Mode and Median
+$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$$]@
 
 The exponential term $e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$ is maximized when the exponent equals zero, which occurs when $(x-\\mu)^2 = 0$, giving $x = \\mu$.
 
 The normal distribution is perfectly symmetric around $\\mu$, making this point simultaneously the center of mass, the highest point, and the balance point. No other value has higher probability density.
 
-**Example:** 
+@academic[example:Example
 For human heights with $\\mu = 170$ cm and $\\sigma = 10$ cm:
 
 Mode = 170 cm
 
-This is the most common height—the peak of the bell curve. Heights become progressively less common as you move away from 170 cm in either direction.
+This is the most common height—the peak of the bell curve. Heights become progressively less common as you move away from 170 cm in either direction.]@
 
 ### Median
 
@@ -1495,20 +1537,22 @@ The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) = 0.
 
 For the normal distribution, the [median](!/probability/median) is:
 
-$$\\text{Median} = \\mu$$
+@academic[formula_callout:Mode and Median
+$$\\text{Median} = \\mu$$]@
 
 **Intuition:** Because the normal distribution is perfectly symmetric around $\\mu$, exactly half the probability mass lies below $\\mu$ and half lies above. The [CDF](!/probability/cdf) evaluated at $\\mu$ gives:
 
-$$F(\\mu) = 0.5$$
+@academic[formula_callout:Mode and Median
+$$F(\\mu) = 0.5$$]@
 
 This symmetry means that [mode](!/probability/mode) = [median](!/probability/median) = [mean](!/probability/expected-value) = $\\mu$, a unique property that holds only for symmetric distributions.
 
-**Example:**
+@academic[example:Example
 For human heights with $\\mu = 170$ cm and $\\sigma = 10$ cm:
 
 Median = 170 cm
 
-Half of all heights fall below 170 cm, and half fall above. This coincides with both the mean and mode.
+Half of all heights fall below 170 cm, and half fall above. This coincides with both the mean and mode.]@
 
 **Properties:**
 • For the normal distribution: mode = median = mean (all equal $\\mu$)
@@ -1526,7 +1570,8 @@ Half of all heights fall below 170 cm, and half fall above. This coincides with 
   content: `
 A **quantile** is a value that divides the distribution at a specific probability threshold. The $p$-th quantile $x_p$ satisfies:
 
-$$P(X \\leq x_p) = p$$
+@academic[formula_callout:Quantiles/Percentiles
+$$P(X \\leq x_p) = p$$]@
 
 where $0 < p < 1$. 
 
@@ -1538,7 +1583,8 @@ Quantiles are found by inverting the [CDF](!/probability/cdf): if $F(x_p) = p$, 
 
 For a normal distribution with [mean](!/probability/expected-value) $\\mu$ and standard deviation $\\sigma$, the $p$-th quantile is:
 
-$$x_p = \\mu + \\sigma \\cdot z_p$$
+@academic[formula_callout:Quantiles/Percentiles
+$$x_p = \\mu + \\sigma \\cdot z_p$$]@
 
 where $z_p$ is the $p$-th quantile of the standard normal distribution (mean 0, standard deviation 1).
 
@@ -1551,25 +1597,29 @@ The standard normal quantiles $z_p$ cannot be expressed in closed form and must 
 
 **25th Percentile (First Quartile, Q1):**
 
-$$x_{0.25} = \\mu + \\sigma \\cdot z_{0.25} = \\mu - 0.674\\sigma$$
+@academic[formula_callout:Quantiles/Percentiles
+$$x_{0.25} = \\mu + \\sigma \\cdot z_{0.25} = \\mu - 0.674\\sigma$$]@
 
 About 25% of values fall below this point.
 
 **50th Percentile (Median, Q2):**
 
-$$x_{0.50} = \\mu + \\sigma \\cdot z_{0.50} = \\mu$$
+@academic[formula_callout:Quantiles/Percentiles
+$$x_{0.50} = \\mu + \\sigma \\cdot z_{0.50} = \\mu$$]@
 
 This is the [median](!/probability/median), dividing the distribution in half.
 
 **75th Percentile (Third Quartile, Q3):**
 
-$$x_{0.75} = \\mu + \\sigma \\cdot z_{0.75} = \\mu + 0.674\\sigma$$
+@academic[formula_callout:Quantiles/Percentiles
+$$x_{0.75} = \\mu + \\sigma \\cdot z_{0.75} = \\mu + 0.674\\sigma$$]@
 
 About 75% of values fall below this point.
 
 **Interquartile Range (IQR):**
 
-$$\\text{IQR} = Q3 - Q1 = 1.349\\sigma$$
+@academic[formula_callout:Quantiles/Percentiles
+$$\\text{IQR} = Q3 - Q1 = 1.349\\sigma$$]@
 
 The IQR contains the middle 50% of the distribution.
 
@@ -1679,11 +1729,21 @@ The normal distribution exhibits several important special cases and limiting be
 
 When $\\mu = 0$ and $\\sigma = 1$, we obtain the **standard normal distribution** $Z \\sim N(0, 1)$:
 
+@academic[formula_callout:Standard Normal PDF
 $$f(z) = \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}}$$
+/probability/formulas#standard_normal_pdf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Any normal random variable $X \\sim N(\\mu, \\sigma^2)$ can be standardized:
 
+@academic[formula_callout:Normal Standardization
 $$Z = \\frac{X - \\mu}{\\sigma} \\sim N(0, 1)$$
+/probability/formulas#normal_standardization]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 This transformation is the foundation for z-scores, hypothesis testing, and normal probability tables.
 
@@ -1691,7 +1751,8 @@ This transformation is the foundation for z-scores, hypothesis testing, and norm
 
 As $\\sigma \\to 0$, the normal distribution converges to a point mass at $\\mu$:
 
-$$\\lim_{\\sigma \\to 0} N(\\mu, \\sigma^2) = \\delta_{\\mu}$$
+@academic[formula_callout:Special Cases
+$$\\lim_{\\sigma \\to 0} N(\\mu, \\sigma^2) = \\delta_{\\mu}$$]@
 
 All probability concentrates at a single value, and the distribution becomes deterministic. This represents the limiting case of no variability.
 
@@ -1711,7 +1772,8 @@ The normal distribution emerges as the limit of many other distributions. For ex
 **Sum of Normals:**
 If $X_1 \\sim N(\\mu_1, \\sigma_1^2)$ and $X_2 \\sim N(\\mu_2, \\sigma_2^2)$ are independent, then:
 
-$$X_1 + X_2 \\sim N(\\mu_1 + \\mu_2, \\sigma_1^2 + \\sigma_2^2)$$
+@academic[formula_callout:Special Cases
+$$X_1 + X_2 \\sim N(\\mu_1 + \\mu_2, \\sigma_1^2 + \\sigma_2^2)$$]@
 
 The normal distribution is **closed under addition**—sums of normal variables remain normal.
 
@@ -1737,7 +1799,8 @@ The normal distribution possesses several distinctive mathematical properties th
 
 The normal distribution is **perfectly symmetric** around its [mean](!/probability/expected-value) $\\mu$:
 
-$$f(\\mu + x) = f(\\mu - x) \\text{ for all } x$$
+@academic[formula_callout:Properties
+$$f(\\mu + x) = f(\\mu - x) \\text{ for all } x$$]@
 
 This symmetry implies:
 • [Mean](!/probability/expected-value) = [Median](!/probability/median) = [Mode](!/probability/mode) = $\\mu$
@@ -1746,15 +1809,18 @@ This symmetry implies:
 
 ### Skewness
 
-$$\\text{Skewness} = 0$$
+@academic[formula_callout:Properties
+$$\\text{Skewness} = 0$$]@
 
 The skewness coefficient measures asymmetry. Zero skewness confirms perfect symmetry—there is no tendency toward either tail.
 
 ### Kurtosis
 
-$$\\text{Kurtosis} = 3$$
+@academic[formula_callout:Properties
+$$\\text{Kurtosis} = 3$$]@
 
-$$\\text{Excess Kurtosis} = 0$$
+@academic[formula_callout:Properties
+$$\\text{Excess Kurtosis} = 0$$]@
 
 Kurtosis measures tail weight and peakedness. The normal distribution defines the baseline (kurtosis = 3), so excess kurtosis is zero by definition. Distributions with kurtosis > 3 have heavier tails than normal; kurtosis < 3 indicates lighter tails.
 
@@ -1762,7 +1828,8 @@ Kurtosis measures tail weight and peakedness. The normal distribution defines th
 
 The normal distribution has **exponentially decaying tails**:
 
-$$f(x) \\sim e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}} \\text{ as } |x - \\mu| \\to \\infty$$
+@academic[formula_callout:Properties
+$$f(x) \\sim e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}} \\text{ as } |x - \\mu| \\to \\infty$$]@
 
 Probabilities in the tails decrease rapidly:
 • $P(|X - \\mu| > 2\\sigma) \\approx 0.05$ (5%)
@@ -1773,15 +1840,35 @@ The tails are "thin"—extreme values are increasingly rare. This is lighter tha
 
 ### Unique Mathematical Properties
 
+**Standardization:**
+Every normal variable converts to the standard normal by subtracting its mean and dividing by its standard deviation:
+
+@academic[formula_callout:Normal Standardization
+$$Z = \\frac{X - \\mu}{\\sigma} \\sim N(0, 1)$$
+/probability/formulas#normal_standardization]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
 **Closure Under Linear Transformation:**
 If $X \\sim N(\\mu, \\sigma^2)$, then for constants $a$ and $b$:
 
+@academic[formula_callout:Normal Linear Transform
 $$aX + b \\sim N(a\\mu + b, a^2\\sigma^2)$$
+/probability/formulas#normal_linear_transform]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 **Closure Under Addition:**
 If $X_1 \\sim N(\\mu_1, \\sigma_1^2)$ and $X_2 \\sim N(\\mu_2, \\sigma_2^2)$ are independent:
 
+@academic[formula_callout:Sum of Independent Normals
 $$X_1 + X_2 \\sim N(\\mu_1 + \\mu_2, \\sigma_1^2 + \\sigma_2^2)$$
+/probability/formulas#sum_of_independent_normals]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Sums of independent normal variables remain normal—a rare property called **stability** or **reproductive property**.
 
@@ -1789,7 +1876,8 @@ Sums of independent normal variables remain normal—a rare property called **st
 Among all continuous distributions on $(-\\infty, \\infty)$ with specified [mean](!/probability/expected-value) $\\mu$ and [variance](!/probability/variance) $\\sigma^2$, the normal distribution has the highest entropy. It represents maximum uncertainty given only these two constraints.
 
 **Characteristic Function:**
-$$\\phi(t) = E[e^{itX}] = e^{i\\mu t - \\frac{\\sigma^2 t^2}{2}}$$
+@academic[formula_callout:Properties
+$$\\phi(t) = E[e^{itX}] = e^{i\\mu t - \\frac{\\sigma^2 t^2}{2}}$$]@
 
 This simple exponential form makes analytical work tractable.
 
@@ -1801,17 +1889,20 @@ This simple exponential form makes analytical work tractable.
 • Approximately 99.7% of values lie within $\\mu \\pm 3\\sigma$
 
 **Moment Generating Function:**
-$$M(t) = E[e^{tX}] = e^{\\mu t + \\frac{\\sigma^2 t^2}{2}}$$
+@academic[formula_callout:Properties
+$$M(t) = E[e^{tX}] = e^{\\mu t + \\frac{\\sigma^2 t^2}{2}}$$]@
 
 **Linear Combinations:**
 For independent normal variables $X_i \\sim N(\\mu_i, \\sigma_i^2)$ and constants $a_i$:
 
-$$\\sum_{i=1}^n a_i X_i \\sim N\\left(\\sum_{i=1}^n a_i \\mu_i, \\sum_{i=1}^n a_i^2 \\sigma_i^2\\right)$$
+@academic[formula_callout:Properties
+$$\\sum_{i=1}^n a_i X_i \\sim N\\left(\\sum_{i=1}^n a_i \\mu_i, \\sum_{i=1}^n a_i^2 \\sigma_i^2\\right)$$]@
 
 **Central Limit Theorem:**
 For i.i.d. random variables $X_1, X_2, \\ldots, X_n$ with [mean](!/probability/expected-value) $\\mu$ and [variance](!/probability/variance) $\\sigma^2$:
 
-$$\\frac{\\bar{X}_n - \\mu}{\\sigma/\\sqrt{n}} \\xrightarrow{d} N(0, 1) \\text{ as } n \\to \\infty$$
+@academic[formula_callout:Properties
+$$\\frac{\\bar{X}_n - \\mu}{\\sigma/\\sqrt{n}} \\xrightarrow{d} N(0, 1) \\text{ as } n \\to \\infty$$]@
 
 This convergence explains why the normal distribution appears so frequently in nature and statistics.
   `,

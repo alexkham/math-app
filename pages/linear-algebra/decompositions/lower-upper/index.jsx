@@ -3206,7 +3206,7 @@ The factorization captures the entire elimination process in a reusable form. In
     entries: [
       {
         id: `lu-letter-contract`,
-        tex: `A = LU`,
+        tex: `$A = LU$`,
         read: `A equals L U — A written as a lower triangular matrix times an upper triangular one`,
         means: `The letters are mnemonic rather than arbitrary: $L$ is lower, $U$ is upper. That is unusual. Most factorisations pick letters for the role a factor plays, and here they name the shape instead, which is why the equation can be read off without a legend.`,
         cases: `The two factors are not interchangeable. $UL$ is a different product describing a different matrix, and the order in $A = LU$ is fixed by the elimination that produced it — the lower factor records what was done, the upper factor records what was left.`,
@@ -3216,7 +3216,7 @@ The factorization captures the entire elimination process in a reusable form. In
       },
       {
         id: `unit-diagonal-normalisation`,
-        tex: `L = \\begin{pmatrix} 1 & 0 & 0 \\\\ l_{21} & 1 & 0 \\\\ l_{31} & l_{32} & 1 \\end{pmatrix}`,
+        tex: `$L = \\begin{pmatrix} 1 & 0 & 0 \\\\ l_{21} & 1 & 0 \\\\ l_{31} & l_{32} & 1 \\end{pmatrix}$`,
         read: `L is unit lower triangular — ones along the diagonal, multipliers below it`,
         means: `**Unit** here refers to the diagonal entries being $1$ and to nothing else. The ones are a normalisation that has to be supplied from outside, because $A = LU$ on its own does not determine the factors: for any invertible diagonal $D$, the pair $LD$ and $D^{-1}U$ multiplies to the same $A$. Fixing $L$ to carry ones removes the freedom and makes the factorisation unique.`,
         cases: `The three-factor form $A = LDU$ makes the choice visible instead of silent, putting the pivots in $D$ and leaving both triangular factors with unit diagonals.`,
@@ -3226,7 +3226,7 @@ The factorization captures the entire elimination process in a reusable form. In
       },
       {
         id: `permutation-side`,
-        tex: `PA = LU`,
+        tex: `$PA = LU$`,
         read: `P A equals L U — permute the rows of A, then factor the result`,
         means: `Which side $P$ stands on is the whole content of the line. On the left it multiplies the rows of $A$, and the equation asserts an order of events: the swaps are decided first, and elimination runs on the reordered matrix. The factorisation belongs to $PA$, not to $A$.`,
         cases: `Rearranged forms say the same thing: since $P$ is a permutation, $P^{-1} = P^{T}$, so $A = P^{T}LU$. Numerical libraries commonly return the transposed permutation and report $A = PLU$ — the same letter naming the inverse matrix, which is worth checking before mixing output from two sources.`,
@@ -3236,7 +3236,7 @@ The factorization captures the entire elimination process in a reusable form. In
       },
       {
         id: `multiplier-entries`,
-        tex: `l_{ij}, \\quad i > j`,
+        tex: `$l_{ij}, \\quad i > j$`,
         read: `the entry of L in row i, column j, below the diagonal`,
         means: `These entries are a transcript, not a computation on $A$. Each one is the multiplier that cleared position $(i, j)$ during forward elimination, so $L$ is a record of the procedure and $U$ is its result.`,
         cases: `The sign follows subtraction. Subtracting $2$ times row $1$ from row $2$ stores $+2$; adding row $1$ to row $3$ stores $-1$. The number in $L$ therefore reads with the opposite sign to the operation as it is usually spoken.`,

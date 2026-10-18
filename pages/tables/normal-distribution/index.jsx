@@ -179,23 +179,23 @@ Wherever a continuous variable is well-approximated by a normal distribution and
       title:`Related Tables and Tools`,
       content:`**Related Tables:**
 
-**Binomial Distribution Table** - Cumulative binomial probabilities; the binomial converges to a normal distribution for large $n$.
+**[Binomial Distribution Table](!/tables/binomial-distribution)** - Cumulative binomial probabilities; the binomial converges to a normal distribution for large $n$.
 
-**Poisson Distribution Table** - Cumulative Poisson probabilities; approximated by the normal for large means.
+**[Poisson Distribution Table](!/tables/poisson-distribution)** - Cumulative Poisson probabilities; approximated by the normal for large means.
 
-**t Distribution Table** - Critical values for small-sample inference; converges to standard normal as degrees of freedom grow.
+**[t Distribution Table](!/tables/t-distribution)** - Critical values for small-sample inference; converges to standard normal as degrees of freedom grow.
 
 **Related Tools:**
 
-**Normal Distribution Calculator** - Returns exact $P(Z \\leq z)$ for any $z$ without lookup or interpolation.
+**[Normal Distribution Calculator](!/probability/calculators/continuous-distributions#working-with-normal-distribution-calculator)** - Returns exact $P(Z \\leq z)$ for any $z$ without lookup or interpolation.
 
 **Z-Score Calculator** - Converts a raw value $x$ to a $z$-score given $\\mu$ and $\\sigma$.
 
 **Related Concepts:**
 
-**Central Limit Theorem** - Why the normal distribution shows up so widely across applied statistics.
+**[Central Limit Theorem](!/probability/central-limit-theorem)** - Why the normal distribution shows up so widely across applied statistics.
 
-**Empirical Rule** - The $68$-$95$-$99.7$ summary of normal-distribution spread.`,
+**[Empirical Rule](!/tables/normal-distribution#8)** - The $68$-$95$-$99.7$ summary of normal-distribution spread.`,
       before:``,
       after:``,
       link:'',

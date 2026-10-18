@@ -702,19 +702,19 @@ For a tool focused on the limit step alone — including an $\\varepsilon$ slide
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Limits** — the foundation continuity is built on. [One-sided limits](!/calculus/visual-tools/limit) and two-sided limits, formal definitions, and limit laws.
+      content: `**[Limits](!/calculus/limits)** — the foundation continuity is built on. [One-sided limits](!/calculus/visual-tools/limit) and two-sided limits, formal definitions, and limit laws.
 
-**Discontinuity** — full classification of removable, jump, infinite, and essential discontinuities, with examples of each.
+**[Discontinuity](!/calculus/limits/continuity#4)** — full classification of removable, jump, infinite, and essential discontinuities, with examples of each.
 
-**Differentiability** — every differentiable function is continuous, but not every continuous function is differentiable. The absolute value function is continuous at $0$ but not differentiable there.
+**[Differentiability](!/calculus/derivatives/differentiability)** — every differentiable function is continuous, but not every continuous function is differentiable. The absolute value function is continuous at $0$ but not differentiable there.
 
-**Intermediate Value Theorem** — continuous functions on closed intervals take every value between their endpoints. The most useful direct consequence of continuity.
+**[Intermediate Value Theorem](!/calculus/limits/continuity#11)** — continuous functions on closed intervals take every value between their endpoints. The most useful direct consequence of continuity.
 
 **Extreme Value Theorem** — continuous functions on closed bounded intervals attain a maximum and minimum.
 
-**Piecewise functions** — the most common source of jump and removable discontinuities. See the **piecewise function builder** for an interactive view.
+**[Piecewise functions](!/functions/piecewise)** — the most common source of jump and removable discontinuities. See the **piecewise function builder** for an interactive view.
 
-**Asymptotes** — vertical asymptotes are infinite discontinuities; horizontal asymptotes describe end behavior.
+**[Asymptotes](!/functions/properties#13)** — vertical asymptotes are infinite discontinuities; horizontal asymptotes describe end behavior.
 
 [Derivative](!/calculus/visual-tools/derivative) — [differentiability](!/calculus/derivatives/differentiability#1) is the stronger condition: every differentiable function is continuous, and the explorer shows where that implication stops.
 

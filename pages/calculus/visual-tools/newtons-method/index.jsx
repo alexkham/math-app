@@ -692,7 +692,7 @@ Production root finders defend against these failures by bracketing the root wit
 
 - **Bisection method visualizer** — watch a bracket shrink to a root one halving at a time.
 - **Secant method visualizer** — see how a secant line approximates the tangent.
-- **Tangent line visualizer** — explore the tangent on its own as the point of tangency moves.`,
+- **[Tangent line visualizer](!/calculus/visual-tools/tangent-line)** — explore the tangent on its own as the point of tangency moves.`,
       before: ``,
       after: ``,
       link: '',

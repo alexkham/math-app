@@ -943,15 +943,18 @@ export async function getStaticProps(){
 Let $X_1, X_2, \\dots, X_n$ be independent and identically distributed [random variables](!/probability/random-variables) with finite mean $\\mu$.  
 Let $\\bar X_n$ denote their sample mean:
 
-$$\\displaystyle \\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i$$
+@academic[formula_callout:Formal Statement of the Law of Large Numbers
+$$\\displaystyle \\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i$$]@
 
 As the sample size $n$ increases, the sample mean converges to the population mean in probability:
 
-$$\\displaystyle \\bar X_n \\xrightarrow{P} \\mu$$
+@academic[formula_callout:Formal Statement of the Law of Large Numbers
+$$\\displaystyle \\bar X_n \\xrightarrow{P} \\mu$$]@
 
 This means that for any $\\varepsilon > 0$, no matter how small:
 
-$$\\displaystyle \\lim_{n \\to \\infty} P(|\\bar X_n - \\mu| > \\varepsilon) = 0$$
+@academic[formula_callout:Formal Statement of the Law of Large Numbers
+$$\\displaystyle \\lim_{n \\to \\infty} P(|\\bar X_n - \\mu| > \\varepsilon) = 0$$]@
 
 The probability that the sample mean differs from $\\mu$ by more than any fixed amount approaches zero as the sample size grows.
 
@@ -1001,7 +1004,8 @@ The Law of Large Numbers involves several distinct mathematical objects, each pl
 
  **Sample mean** ($\\bar X_n$)  
   The average of the first $n$ observations,
-  $$\\displaystyle \\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i$$
+@academic[formula_callout:Objects Involved in the Theorem
+  $$\\displaystyle \\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i$$]@
   This is itself a [random variable](!/probability/random-variables)—before data is collected, its value is uncertain. As $n$ increases, this random quantity becomes less random, concentrating near $\\mu$.
 
  **Sample size** ($n$)  
@@ -1051,13 +1055,15 @@ The Law of Large Numbers actually comes in two versions, differing in the streng
 
 **Weak Law of Large Numbers (WLLN)**  
 For any $\\varepsilon > 0$, no matter how small:
-$$\\displaystyle \\lim_{n \\to \\infty} P(|\\bar X_n - \\mu| > \\varepsilon) = 0$$
+@academic[formula_callout:Weak vs Strong Law of Large Numbers
+$$\\displaystyle \\lim_{n \\to \\infty} P(|\\bar X_n - \\mu| > \\varepsilon) = 0$$]@
 
 This says: the probability of the sample mean deviating from $\\mu$ by more than any fixed amount shrinks to zero. The sample mean converges to $\\mu$ **in probability**. This is a statement about probabilities, not about individual sequences.
 
 **Strong Law of Large Numbers (SLLN)**  
 With probability 1:
-$$\\displaystyle \\bar X_n \\to \\mu \\text{ as } n \\to \\infty$$
+@academic[formula_callout:Weak vs Strong Law of Large Numbers
+$$\\displaystyle \\bar X_n \\to \\mu \\text{ as } n \\to \\infty$$]@
 
 This says: for almost every sequence of observations, the sample mean actually converges to $\\mu$. This is **almost sure convergence**—a stronger form of convergence than the weak law provides. The set of sequences that fail to converge has probability zero.
 
@@ -1182,7 +1188,8 @@ The Law of Large Numbers and the [Central Limit Theorem](!/probability/central-l
 Tells us that as we collect more observations, the sample mean gets closer and closer to the true population mean. This is a statement about **convergence to a specific value**. If you flip a fair coin many times, the proportion of heads approaches 0.5—that's the LLN at work.
 
 Mathematically:
-$$\\displaystyle \\bar X_n \\xrightarrow{P} \\mu$$
+@academic[formula_callout:LLN vs Central Limit Theorem
+$$\\displaystyle \\bar X_n \\xrightarrow{P} \\mu$$]@
 
 The sample mean converges to a number. This is deterministic behavior emerging from randomness.
 
@@ -1190,7 +1197,8 @@ The sample mean converges to a number. This is deterministic behavior emerging f
 Tells us something else entirely: it describes the **shape of the distribution** that sample means follow. Even if individual observations are far from normal, the CLT guarantees that the distribution of sample means will be approximately normal, centered at the population mean, with spread determined by the sample size.
 
 Mathematically:
-$$\\displaystyle \\frac{\\bar X_n - \\mu}{\\sigma / \\sqrt{n}} \\xrightarrow{d} \\mathcal{N}(0,1)$$
+@academic[formula_callout:LLN vs Central Limit Theorem
+$$\\displaystyle \\frac{\\bar X_n - \\mu}{\\sigma / \\sqrt{n}} \\xrightarrow{d} \\mathcal{N}(0,1)$$]@
 
 The sample mean follows a distribution. This is probabilistic structure revealed by aggregation.
 

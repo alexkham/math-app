@@ -214,7 +214,7 @@ For applications and examples, see the **trigonometric identities applications p
 • [Unit Circle](!/visual-tools/unit-circle) — geometric setup for the reflection used in this tool.
 • [Trigonometric Functions Graphs](!/trigonometry/visual-tools/functions-graphs) — see the parity visually in each function's graph.
 • [Supplementary Angle Identities](!/trigonometry/visual-tools/supplementary-angle-identities) — the other reflection, across the $y$-axis, and how it combines with parity.
-• **Basic Trigonometric Identities** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) that carry parity from sine and cosine to the other four functions.`,
+• **[Basic Trigonometric Identities](!/trigonometry/visual-tools/basic-identities)** — the [reciprocal and quotient identities](!/trigonometry/visual-tools/basic-identities) that carry parity from sine and cosine to the other four functions.`,
       before:``,
       after:``,
       link:'',

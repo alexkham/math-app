@@ -1115,7 +1115,7 @@ Dimension is fixed by the space, not by the vector. Every vector in $\\mathbb{R}
     entries: [
       {
         id: `intrinsic-versus-relational-shape`,
-        tex: `\\|\\mathbf{v}\\| \\quad\\text{versus}\\quad \\mathbf{a} \\parallel \\mathbf{b}`,
+        tex: `$\\|\\mathbf{v}\\| \\quad\\text{versus}\\quad \\mathbf{a} \\parallel \\mathbf{b}$`,
         read: `something applied to one vector, against something written between two`,
         means: `The two kinds of property on this page are distinguishable before the symbols are read. An intrinsic property is written as an operation on a single vector and returns a number. A relational property is written as a sign standing between two vectors and returns a yes or no.`,
         cases: `Magnitude, direction and dimension take one argument. Equality, parallelism and orthogonality take two and assert nothing about either vector on its own — a vector is not parallel, it is parallel **to** something.`,
@@ -1125,7 +1125,7 @@ Dimension is fixed by the space, not by the vector. Every vector in $\\mathbb{R}
       },
       {
         id: `parallel-sign`,
-        tex: `\\mathbf{a} \\parallel \\mathbf{b} \\iff \\mathbf{a} = c\\mathbf{b}`,
+        tex: `$\\mathbf{a} \\parallel \\mathbf{b} \\iff \\mathbf{a} = c\\mathbf{b}$`,
         read: `a is parallel to b exactly when a is some scalar multiple of b`,
         means: `The sign is borrowed from elementary geometry, where it joins two lines. Here it joins two vectors, and the definition it stands for is wider than the word suggests: any scalar $c$ qualifies, including negative ones, so a vector and its reverse are parallel.`,
         cases: `The symbol records no distinction between $c > 0$ and $c < 0$. The second case is called anti-parallel when the difference matters, and it needs the word because the mark cannot carry it.`,
@@ -1135,7 +1135,7 @@ Dimension is fixed by the space, not by the vector. Every vector in $\\mathbb{R}
       },
       {
         id: `zero-vector-both-conventions`,
-        tex: `\\mathbf{0} \\parallel \\mathbf{v} \\quad\\text{and}\\quad \\mathbf{0} \\perp \\mathbf{v} \\quad \\text{for every } \\mathbf{v}`,
+        tex: `$\\mathbf{0} \\parallel \\mathbf{v} \\quad\\text{and}\\quad \\mathbf{0} \\perp \\mathbf{v} \\quad \\text{for every } \\mathbf{v}$`,
         read: `the zero vector is parallel to every vector, and orthogonal to every vector`,
         means: `Parallelism and orthogonality are presented as opposite extremes, and one object sits at both. Neither statement is forced by geometry — the zero vector has no direction to align or oppose. They are conventions, adopted so that theorems about parallel or orthogonal vectors need no clause excluding $\\mathbf{0}$.`,
         cases: `Each convention has a computation behind it that comes out the right way: $\\mathbf{0} = 0\\mathbf{v}$ satisfies the definition of parallel, and $\\mathbf{0} \\cdot \\mathbf{v} = 0$ satisfies the definition of orthogonal. The definitions were written in a form that admits the zero vector rather than being patched afterwards.`,
@@ -1145,7 +1145,7 @@ Dimension is fixed by the space, not by the vector. Every vector in $\\mathbb{R}
       },
       {
         id: `ratio-chain-test`,
-        tex: `\\frac{a_1}{b_1} = \\frac{a_2}{b_2} = \\cdots = \\frac{a_n}{b_n}`,
+        tex: `$\\frac{a_1}{b_1} = \\frac{a_2}{b_2} = \\cdots = \\frac{a_n}{b_n}$`,
         read: `the component ratios are all equal`,
         means: `A test written as a chain of equalities, each link comparing one pair of components. The chain says the ratio is the same throughout, and that shared value is the scalar $c$ that the definition of parallelism asks for, recovered without being solved for.`,
         cases: `The form is undefined exactly where it is most likely to be used. Any zero component of $\\mathbf{b}$ puts a zero in a denominator, and the vectors may still be parallel — $(0, 3)$ and $(0, 6)$ are, while the first ratio cannot be written.`,

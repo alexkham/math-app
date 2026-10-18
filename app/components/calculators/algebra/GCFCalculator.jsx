@@ -1,9 +1,27 @@
 import React, { useState } from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
 
+// prime factorization for the step display: [[prime, exponent], ...]; null when the number is too large for trial division
+const SUP = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹' };
+const sup = (e) => String(e).split('').map((c) => SUP[c]).join('');
+function factorize(n) {
+  if (n > 1e12) return null;
+  const out = [];
+  let m = n;
+  for (let p = 2; p * p <= m; p += (p === 2 ? 1 : 2)) {
+    let e = 0;
+    while (m % p === 0) { m /= p; e += 1; }
+    if (e) out.push([p, e]);
+  }
+  if (m > 1) out.push([m, 1]);
+  return out;
+}
+const showFactors = (f) => (f.length === 0 ? '1' : f.map(([p, e]) => (e === 1 ? String(p) : p + sup(e))).join(' · '));
+
 function GCFCalculator({ explanations }) {
   const [numbers, setNumbers] = useState(['', '']);
   const [result, setResult] = useState('');
+  const [details, setDetails] = useState([]);
   const [activeTooltip, setActiveTooltip] = useState(null);
   const [method, setMethod] = useState('euclidean');
 
@@ -11,6 +29,9 @@ function GCFCalculator({ explanations }) {
     const newNumbers = [...numbers];
     newNumbers[index] = value;
     setNumbers(newNumbers);
+    // an answer for the old numbers must not stay on screen
+    setResult('');
+    setDetails([]);
   };
 
   const addNumberField = () => {
@@ -23,6 +44,8 @@ function GCFCalculator({ explanations }) {
     if (numbers.length > 2) {
       const newNumbers = numbers.filter((_, i) => i !== index);
       setNumbers(newNumbers);
+      setResult('');
+      setDetails([]);
     }
   };
 
@@ -43,21 +66,58 @@ function GCFCalculator({ explanations }) {
       .filter(n => !isNaN(n) && Number.isInteger(n) && n !== 0);
 
     if (validNumbers.length < 2) {
+      setDetails([]);
       setResult('Error: Enter at least 2 valid integers');
       return;
     }
 
     let gcfResult = validNumbers[0];
+    const chain = [];
     for (let i = 1; i < validNumbers.length; i++) {
+      // Euclid's steps for this pair, on absolute values
+      let a = Math.abs(gcfResult);
+      let b = Math.abs(validNumbers[i]);
+      const first = a, second = b;
+      const steps = [];
+      while (b !== 0) {
+        steps.push(`${a} = ${Math.floor(a / b)} × ${b} + ${a % b}`);
+        const r = a % b;
+        a = b;
+        b = r;
+      }
+      chain.push(`GCF(${first}, ${second}): ${steps.join('; ')} → ${a}`);
       gcfResult = gcd(gcfResult, validNumbers[i]);
     }
 
+    let lines = [];
+    if (method === 'prime') {
+      const abs = validNumbers.map((n) => Math.abs(n));
+      const facs = abs.map(factorize);
+      if (facs.every((f) => f !== null)) {
+        lines = abs.map((n, k) => `${n} = ${showFactors(facs[k])}`);
+        const common = [];
+        Object.keys(Object.fromEntries(facs[0])).map(Number).forEach((p) => {
+          const exps = facs.map((f) => { const hit = f.find(([q]) => q === p); return hit ? hit[1] : 0; });
+          const lo = Math.min(...exps);
+          if (lo > 0) common.push([p, lo]);
+        });
+        lines.push(common.length === 0
+          ? 'No prime is shared by all the numbers, so the GCF is 1'
+          : `Lowest power of each shared prime: ${showFactors(common)} = ${gcfResult}`);
+      } else {
+        lines = ['A number above 10¹² is too large to factor here; the result was found with the Euclidean algorithm.'];
+      }
+    } else {
+      lines = chain;
+    }
+    setDetails(lines);
     setResult(gcfResult.toString());
   };
 
   const resetAll = () => {
     setNumbers(['', '']);
     setResult('');
+    setDetails([]);
   };
 
   // page texts (explanations prop) are rendered with the site's processContent; the built-in defaults stay plain text
@@ -345,6 +405,11 @@ function GCFCalculator({ explanations }) {
               }}>
                 {result || '—'}
               </div>
+              {details.length > 0 && (
+                <div style={{ marginTop: '12px', paddingTop: '10px', borderTop: '1px solid #e2e8f0', fontSize: '14px', color: '#475569', lineHeight: 1.6, textAlign: 'left' }}>
+                  {details.map((line, i) => (<div key={i}>{line}</div>))}
+                </div>
+              )}
             </div>
           </div>
         </div>

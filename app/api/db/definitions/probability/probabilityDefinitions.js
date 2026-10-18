@@ -1133,7 +1133,7 @@ $\\omega$ — a single outcome (element of $\\Omega$)`,
 - [Mutually Exclusive Events](!/probability/events#relations)
 - [Independence](!/probability/independence)`,
       'related formulas': `- [Classical Probability Formula](!/probability/formulas#equally_likely_events)
-- [Conditional Probability Definition](!/probability/formulas#conditional_probability)
+- [Conditional Probability](!/probability/formulas#conditional_probability)
 - [Indicator Random Variable Definition](!/probability/formulas#indicator_random_variable)
 - [Law of Total Probability](!/probability/formulas#total_probability)
 - [Non-negativity Axiom](!/probability/formulas#probability_measure)

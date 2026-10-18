@@ -1343,13 +1343,13 @@ Use mixed numbers for measurements and real-world quantities like "$2\\frac{1}{2
 
   obj10: {
     title: `Related Calculators and Visual Tools`,
-    content: `**Fractions Visualizer** - See fractions as visual shapes and diagrams. Watch how $\\frac{1}{2} + \\frac{1}{4}$ combines graphically, making abstract fraction operations concrete and understandable.
+    content: `**[Fractions Visualizer](!/visual-tools/fractions-visualizer)** - See fractions as visual shapes and diagrams. Watch how $\\frac{1}{2} + \\frac{1}{4}$ combines graphically, making abstract fraction operations concrete and understandable.
 
-**Percentage Calculator** - Convert between fractions, decimals, and percentages. The fraction $\\frac{3}{4}$ equals $75\\%$, and understanding these relationships helps with real-world applications.
+**[Percentage Calculator](!/calculators/percentage-calculator)** - Convert between fractions, decimals, and percentages. The fraction $\\frac{3}{4}$ equals $75\\%$, and understanding these relationships helps with real-world applications.
 
-**GCD Calculator** - Find the greatest common divisor for simplifying fractions. If you need to reduce $\\frac{24}{36}$, find $GCD(24, 36) = 12$ and divide both parts by $12$ to get $\\frac{2}{3}$.
+**[GCD Calculator](!/arithmetic/calculators/gcf-calculator)** - Find the greatest common divisor for simplifying fractions. If you need to reduce $\\frac{24}{36}$, find $GCD(24, 36) = 12$ and divide both parts by $12$ to get $\\frac{2}{3}$.
 
-**LCM Calculator** - Calculate the least common multiple for finding common denominators. To add $\\frac{1}{6} + \\frac{1}{8}$, find $LCM(6, 8) = 24$ as your common denominator.
+**[LCM Calculator](!/arithmetic/calculators/lcm-calculator)** - Calculate the least common multiple for finding common denominators. To add $\\frac{1}{6} + \\frac{1}{8}$, find $LCM(6, 8) = 24$ as your common denominator.
 
 **Ratio Calculator** - Work with ratios, which are closely related to fractions. The ratio $3:4$ is the same as the fraction $\\frac{3}{4}$.
 

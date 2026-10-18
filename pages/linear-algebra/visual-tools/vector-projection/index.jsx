@@ -215,7 +215,7 @@ A planar example: $\\mathbf{u} = (3, 1)$, $\\mathbf{v} = (2, 2)$ gives $\\mathbf
 
 [Vector subtraction](!/linear-algebra/visual-tools/vector-addition) — phase 6 is $\\mathbf{u}$ minus the projection.
 
-**Orthogonality** — the remainder is orthogonal to $\\mathbf{v}$ by construction.
+**[Orthogonality](!/linear-algebra/orthogonality)** — the remainder is orthogonal to $\\mathbf{v}$ by construction.
 
 [Gram-Schmidt process](!/linear-algebra/visual-tools/gram-schmidt) — repeated subtraction of projections to build an orthogonal basis.
 

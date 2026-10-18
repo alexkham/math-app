@@ -171,15 +171,15 @@ Think of it this way: addition rule combines alternatives (A or B), while total 
 
     obj11: {
       title: `Related Probability Concepts`,
-      content: `**Conditional Probability** forms the foundation of total probability. Understanding P(B|A) is essential before applying the total probability theorem. For detailed coverage of conditional probability, see **conditional probability theory** and [conditional probability visualizations](!/probability/visual-tools/conditional-probability).
+      content: `**[Conditional Probability](!/probability/conditional-probability)** forms the foundation of total probability. Understanding P(B|A) is essential before applying the total probability theorem. For detailed coverage of conditional probability, see **conditional probability theory** and [conditional probability visualizations](!/probability/visual-tools/conditional-probability).
 
-**Bayes' Theorem** reverses the conditioning in total probability problems. After computing P(B) using total probability, Bayes' theorem finds P(Aᵢ|B). These theorems work as a pair in many applications. Learn more at **Bayes' theorem calculator** and **Bayes' theorem examples**.
+**[Bayes' Theorem](!/probability/bayes-theorem)** reverses the conditioning in total probability problems. After computing P(B) using total probability, Bayes' theorem finds P(Aᵢ|B). These theorems work as a pair in many applications. Learn more at **Bayes' theorem calculator** and **Bayes' theorem examples**.
 
-**Independence** provides an important special case. When B is independent of the partition, P(B|Aᵢ) equals P(B) for all i, and total probability simplifies to P(B) = Σ P(Aᵢ)·P(B) = P(B). Explore independence at **independent events** and **testing independence**.
+**[Independence](!/probability/independence)** provides an important special case. When B is independent of the partition, P(B|Aᵢ) equals P(B) for all i, and total probability simplifies to P(B) = Σ P(Aᵢ)·P(B) = P(B). Explore independence at **independent events** and **testing independence**.
 
-**Probability distributions** can be analyzed using total probability by conditioning on parameter values or mixture components. See **mixture distributions** and **conditional distributions** for applications in statistical modeling.
+**[Probability distributions](!/probability/distributions)** can be analyzed using total probability by conditioning on parameter values or mixture components. See **mixture distributions** and **conditional distributions** for applications in statistical modeling.
 
-**Conditional Probability Visualizers** — the $P(B \\mid A_i)$ terms the theorem multiplies and sums, drawn one condition at a time.
+**[Conditional Probability Visualizers](!/probability/visual-tools/conditional-probability)** — the $P(B \\mid A_i)$ terms the theorem multiplies and sums, drawn one condition at a time.
 
 [Contingency Tables Explorer](!/probability/visual-tools/contingency-tables) — a two-way table is the law of total probability written as row and column sums.
 

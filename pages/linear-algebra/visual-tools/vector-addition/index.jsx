@@ -745,7 +745,7 @@ Geometrically, $u + v$ is the diagonal of the parallelogram spanned by $u$ and $
     },
     obj10: {
       title: `Related Concepts`,
-      content: `**Vector operations** — the broader family that includes addition, subtraction, scalar multiplication, dot product, and cross product.
+      content: `**[Vector operations](!/linear-algebra/vectors)** — the broader family that includes addition, subtraction, scalar multiplication, dot product, and cross product.
 
 [Scalar multiplication of vectors](!/linear-algebra/visual-tools/vector-scalar-multiplication) — multiplying every component of a vector by a number; like addition, it is component-wise and preserves length.
 
@@ -757,7 +757,7 @@ Geometrically, $u + v$ is the diagonal of the parallelogram spanned by $u$ and $
 
 **Zero vector** — the additive identity, with every component equal to zero.
 
-**Vector space** — the abstract structure built on vector addition and scalar multiplication; $\\mathbb{R}^n$ is the prototypical example.`,
+**[Vector space](!/linear-algebra/vector-spaces)** — the abstract structure built on vector addition and scalar multiplication; $\\mathbb{R}^n$ is the prototypical example.`,
       before: ``,
       after: ``,
       link: '',

@@ -216,7 +216,7 @@ For contrast, the **infinitely many** preset reduces to rows $(1, 2, 0 \\mid 4)$
 
 [Null space](!/linear-algebra/visual-tools/four-fundamental-subspaces) — the solution set of the homogeneous system, spanned by the direction vectors.
 
-**Column space** — consistency means $\\mathbf{b}$ lies in it.
+**[Column space](!/linear-algebra/vector-spaces/fundamental-spaces#2)** — consistency means $\\mathbf{b}$ lies in it.
 
 [Least squares](!/linear-algebra/visual-tools/least-squares) — what to do when the system is inconsistent.
 

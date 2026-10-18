@@ -230,17 +230,17 @@ All three are easy to catch by the same habit: step through and check that every
 
     obj10:{
       title:`Related Concepts and Tools`,
-      content:`**Cardinality** — sizes of sets, and the general statement of the principle for $n$ sets.
+      content:`**[Cardinality](!/set-theory/cardinality)** — sizes of sets, and the general statement of the principle for $n$ sets.
 
-**Set Operations** — union and intersection, the operations the formula relates.
+**[Set Operations](!/set-theory/operations)** — union and intersection, the operations the formula relates.
 
-**Venn Diagrams** — the two- and three-set pictures the regions come from.
+**[Venn Diagrams](!/set-theory/venn-diagrams)** — the two- and three-set pictures the regions come from.
 
-**Binomial Coefficients** — the $\\binom{k}{j}$ counts that make the alternating sum collapse to one.
+**[Binomial Coefficients](!/combinatorics/binomial-coefficient)** — the $\\binom{k}{j}$ counts that make the alternating sum collapse to one.
 
-**Probability Rules** — the addition rule, which is this principle stated for measures.
+**[Probability Rules](!/probability/rules)** — the addition rule, which is this principle stated for measures.
 
-**Combinatorics** — counting problems where the principle does the heavy lifting.
+**[Combinatorics](!/combinatorics)** — counting problems where the principle does the heavy lifting.
 
 [Venn Diagram Generator](!/set-theory/visual-tools/venn-generator) — for shading expressions rather than counting them.
 

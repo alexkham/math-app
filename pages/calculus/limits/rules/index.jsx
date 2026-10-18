@@ -13,6 +13,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -914,9 +916,44 @@ const schemas = {
     }),
   };
 
+  const quotientRuleCases = {
+    prefaceTitle: 'When the quotient rule applies',
+    preface: 'The limit of a quotient is the quotient of the limits, provided the denominator\'s limit is nonzero. When it is zero the rule fails, and the numerator\'s limit decides what happens instead.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'Check $M$ first. Only when $M = 0$ does $L$ matter: a nonzero $L$ means the quotient grows without bound, and $L = 0$ leaves the indeterminate form $0/0$.',
+    parent: {
+      kicker: 'Quotient rule',
+      formula: '$\\lim_{x \\to a} \\dfrac{f(x)}{g(x)}$',
+      splitBy: 'the limits $L$ of $f$ and $M$ of $g$',
+      desc: '$L = \\lim_{x \\to a} f(x)$ and $M = \\lim_{x \\to a} g(x)$',
+    },
+    cases: [
+      {
+        id: 'nonzero', condition: '$M \\neq 0$',
+        count: { n: '✓' },
+        headline: 'The rule applies',
+        desc: 'the limit of the quotient is the quotient of the limits',
+        formula: '$\\dfrac{L}{M}$',
+      },
+      {
+        id: 'infinite', condition: '$M = 0,\\ L \\neq 0$',
+        count: { n: '∞' },
+        headline: 'Typically infinite',
+        desc: 'analyze the sign from each side to decide between $+\\infty$ and $-\\infty$',
+      },
+      {
+        id: 'indeterminate', condition: '$M = 0,\\ L = 0$',
+        count: { n: '?' },
+        headline: 'Indeterminate form $0/0$',
+        desc: 'carries no information until the expression is rewritten; see [further techniques](!/calculus/limits/evaluating)',
+      },
+    ],
+  };
+
   return {
   props: {
     sectionsContent,
+    quotientRuleCases,
     introContent,
     obj12Table,
     obj15Table,
@@ -935,7 +972,9 @@ const schemas = {
 }
    }
 
-export default function RulesPage({seoData, sectionsContent, introContent, obj12Table, obj15Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function RulesPage({seoData, sectionsContent, introContent, quotientRuleCases, obj12Table, obj15Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -994,6 +1033,14 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj12
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="limit-quotient-rule-cases"
+            title="The quotient rule for limits: three outcomes"
+            source="/calculus/limits/rules"
+          >
+            <CaseSplit data={quotientRuleCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

@@ -477,13 +477,13 @@ Laws mode also covers the [change of base](!#change-of-base) formula and the [in
 
   obj12: {
     title: `Related Calculators and Tools`,
-    content: `**Exponent Calculator** performs the opposite operation. Instead of finding what exponent gives a result, you calculate the result from a known base and exponent. Use it to verify logarithms: if $\\log_2(8) = 3$, check that $2^3 = 8$ using the exponent calculator.
+    content: `**[Exponent Calculator](!/calculators/exponent-calculator)** performs the opposite operation. Instead of finding what exponent gives a result, you calculate the result from a known base and exponent. Use it to verify logarithms: if $\\log_2(8) = 3$, check that $2^3 = 8$ using the exponent calculator.
 
-**Root Calculator** finds roots, which are fractional exponents. The square root of $16$ equals $16^{0.5}$, and you can verify this using logarithms: $0.5 \\cdot \\log(16) = \\log(4)$. Roots and logarithms are related through exponent rules.
+**[Root Calculator](!/calculators/root-calculator)** finds roots, which are fractional exponents. The square root of $16$ equals $16^{0.5}$, and you can verify this using logarithms: $0.5 \\cdot \\log(16) = \\log(4)$. Roots and logarithms are related through exponent rules.
 
 **Scientific Calculator** combines logarithms with other operations for complex formulas. Use it when logarithms are part of longer calculations involving multiple steps, parentheses, or different operations.
 
-**Logarithmic Tables** provide pre-calculated values for common logarithms. Before calculators existed, people looked up logarithms in books. Our tables page shows logarithms for reference and helps you understand patterns in logarithmic values.
+**[Logarithmic Tables](!/tables/logarithm)** provide pre-calculated values for common logarithms. Before calculators existed, people looked up logarithms in books. Our tables page shows logarithms for reference and helps you understand patterns in logarithmic values.
 
 For deeper learning, explore exponential growth and decay, logarithmic scales in science, change of base formula, and how logarithms simplify multiplication and division in complex calculations.`,
     before: ``,

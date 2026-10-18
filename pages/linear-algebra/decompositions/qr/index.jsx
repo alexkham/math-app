@@ -2034,7 +2034,7 @@ The columns of $Q$ form an orthonormal [basis](!/linear-algebra/vector-spaces) f
     entries: [
       {
         id: `thin-versus-full`,
-        tex: `A = Q_1R_1 \\qquad \\text{versus} \\qquad A = QR`,
+        tex: `$A = Q_1R_1 \\qquad \\text{versus} \\qquad A = QR$`,
         read: `A equals Q one R one — the thin factorisation — against A equals Q R, the full one`,
         means: `The letters match and the matrices do not. Thin: $Q_1$ is $m \\times n$ with orthonormal columns and $R_1$ is $n \\times n$. Full: $Q$ is square $m \\times m$ and $R$ is $m \\times n$, carrying $m - n$ rows of zeros underneath. The line $A = QR$ records neither shape, so which version is meant has to come from the surrounding sentence.`,
         cases: `The subscript $1$ marks the thin factors only when both versions are in play; on their own the thin factors are usually written $Q$ and $R$ as well. Gram-Schmidt produces the thin version, and the full one is reached by appending $m - n$ columns that span the orthogonal complement of the column space.`,
@@ -2044,7 +2044,7 @@ The columns of $Q$ form an orthonormal [basis](!/linear-algebra/vector-spaces) f
       },
       {
         id: `column-versus-row-identity`,
-        tex: `Q^{T}Q = I_n, \\qquad QQ^{T} \\neq I_m`,
+        tex: `$Q^{T}Q = I_n, \\qquad QQ^{T} \\neq I_m$`,
         read: `Q transpose Q is the n by n identity; Q Q transpose is not the identity`,
         means: `For a thin $Q$ the order of the product decides whether the statement is true. Orthonormal columns give $Q^{T}Q = I_n$ directly. Reversing the factors gives $QQ^{T}$, the [projection](!/linear-algebra/orthogonality/projections) onto the column space of $A$ — equal to the identity only when $Q$ is square and there is nothing left over to project away.`,
         cases: `In the full factorisation $Q$ is square and both products give $I_m$, which is the case set out at [orthogonal sets](!/linear-algebra/orthogonality/orthogonal-sets). This page needs the other one, and that is why $QQ^{T}$ appears here as a projection matrix rather than as a way of writing $I$.`,
@@ -2054,7 +2054,7 @@ The columns of $Q$ form an orthonormal [basis](!/linear-algebra/vector-spaces) f
       },
       {
         id: `positive-diagonal-convention`,
-        tex: `R_{jj} = \\|\\mathbf{u}_j\\| > 0`,
+        tex: `$R_{jj} = \\|\\mathbf{u}_j\\| > 0$`,
         read: `the j-th diagonal entry of R is the norm of the j-th orthogonal vector, and it is positive`,
         means: `Positivity buys uniqueness and is a convention, not something the factorisation forces. Multiplying a column of $Q$ by $-1$ and the matching row of $R$ by $-1$ leaves the product untouched, so without the sign rule an $n$-column matrix has $2^n$ different QR factorisations. The line $A = QR$ records none of that.`,
         cases: `Gram-Schmidt gets the positive diagonal for free, since each $R_{jj}$ is a norm. Householder reflections do not, and numerical libraries generally do not enforce the convention — two correct computed factorisations of one matrix can differ by a column of sign flips with nothing wrong in either.`,
@@ -2064,7 +2064,7 @@ The columns of $Q$ form an orthonormal [basis](!/linear-algebra/vector-spaces) f
       },
       {
         id: `qr-iteration`,
-        tex: `A_k = Q_kR_k, \\qquad A_{k+1} = R_kQ_k`,
+        tex: `$A_k = Q_kR_k, \\qquad A_{k+1} = R_kQ_k$`,
         read: `factor A sub k into Q sub k times R sub k, then multiply those same factors back in the opposite order`,
         means: `The letters $Q$ and $R$ name a factorisation everywhere else on this page and an iteration here. The whole method sits in the reversal: the second line multiplies the factors just produced in swapped order, which amounts to $A_{k+1} = Q_k^{T}A_kQ_k$ — a [similarity](!/linear-algebra/transformations/basis-change) transformation, so the eigenvalues survive while the sub-diagonal shrinks.`,
         cases: `The subscript $k$ counts iteration steps. It is the only subscript on the page that indexes time rather than a column, a row or an entry, and $Q_k$ is a different matrix at every step.`,
@@ -2074,7 +2074,7 @@ The columns of $Q$ form an orthonormal [basis](!/linear-algebra/vector-spaces) f
       },
       {
         id: `householder-outer-inner`,
-        tex: `H = I - \\frac{2\\mathbf{v}\\mathbf{v}^{T}}{\\mathbf{v}^{T}\\mathbf{v}}`,
+        tex: `$H = I - \\frac{2\\mathbf{v}\\mathbf{v}^{T}}{\\mathbf{v}^{T}\\mathbf{v}}$`,
         read: `H equals the identity minus two times v v transpose, over v transpose v`,
         means: `One vector appears four times in two products that are not the same operation. $\\mathbf{v}\\mathbf{v}^{T}$ is an $m \\times m$ matrix of rank one; $\\mathbf{v}^{T}\\mathbf{v}$ is a single number, the squared length. Only the position of the transpose separates them, and it determines the shape of the result.`,
         cases: `The numerator is a matrix and the denominator a scalar, so the fraction is ordinary scaling of a matrix and the subtraction from $I$ is well formed. Writing $\\mathbf{v}$ as a unit vector makes the denominator $1$ and shortens the formula to $I - 2\\mathbf{v}\\mathbf{v}^{T}$, the form most texts quote — the same reflection either way.`,

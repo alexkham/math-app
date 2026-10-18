@@ -148,9 +148,9 @@ The binomial distribution captures variability caused by chance alone when condi
       after:``,
       link:'',
       example:`
-      **Example**:
+      @academic[example:Example
 
-Flipping a coin $10$ times and counting how many times it lands heads. Each flip is independent, the probability of heads stays the same, and the total number of flips is fixed before starting.
+Flipping a coin $10$ times and counting how many times it lands heads. Each flip is independent, the probability of heads stays the same, and the total number of flips is fixed before starting.]@
 `,
   
   
@@ -188,7 +188,12 @@ It's useful to compare with the negative binomial, where instead of fixing how m
       content:`
 The **probability mass function (PMF)** of a **binomial distribution** is given by:
 
+@academic[formula_callout:Binomial PMF
 $$P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}, \\quad k = 0, 1, 2, \\ldots, n$$
+/probability/formulas#binomial_pmf]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 where $\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$ is the binomial coefficient.
 
@@ -221,7 +226,8 @@ where $\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$ is the binomial coefficient.
   content:`
 The [cumulative distribution function (CDF)](!/probability/cdf) of a **binomial distribution** is given by:
 
-$$F_X(k) = P(X \\leq k) = \\sum_{i=0}^{k} \\binom{n}{i} p^i (1-p)^{n-i}$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$F_X(k) = P(X \\leq k) = \\sum_{i=0}^{k} \\binom{n}{i} p^i (1-p)^{n-i}$$]@
 
 Where:
 $n$ = number of trials
@@ -236,16 +242,19 @@ $\\binom{n}{i}$ = binomial coefficient "$n$ choose $i$"
 **Summation of Probabilities**: 
 Since we want the probability of getting **at most** $k$ successes, we sum the individual probabilities from 0 successes up to $k$ successes:
 
-$$P(X \\leq k) = P(X=0) + P(X=1) + P(X=2) + \\cdots + P(X=k)$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$P(X \\leq k) = P(X=0) + P(X=1) + P(X=2) + \\cdots + P(X=k)$$]@
 
 **Discrete Nature**: Unlike continuous distributions, the binomial CDF is a step function that jumps at each integer value from 0 to $n$. Between integers, the CDF remains constant.
 
 **Complementary Probabilities**: 
 For calculations involving "more than $k$ successes," use:
-$$P(X > k) = 1 - P(X \\leq k) = 1 - F_X(k)$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$P(X > k) = 1 - P(X \\leq k) = 1 - F_X(k)$$]@
 
 For "at least $k$ successes":
-$$P(X \\geq k) = 1 - P(X \\leq k-1) = 1 - F_X(k-1)$$
+@academic[formula_callout:Cumulative Distribution Function (CDF)
+$$P(X \\geq k) = 1 - P(X \\leq k-1) = 1 - F_X(k-1)$$]@
   `,
   before:``,
   after:``,
@@ -257,13 +266,23 @@ $$P(X \\geq k) = 1 - P(X \\leq k-1) = 1 - F_X(k-1)$$
   content: `
 As explained in the [general case for calculating expected value](!/probability/expected-value#general), the expected value of a discrete random variable is computed as a weighted sum where each possible value is multiplied by its probability:
 
+@academic[formula_callout:Expected Value (Discrete)
 $$E[X] = \\sum_{x} x \\cdot P(X = x)$$
+/probability/formulas#expected_value_discrete]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 For the **binomial distribution**, we apply this general formula to the specific probability mass function of this distribution.
 
 ### Formula
 
+@academic[formula_callout:Binomial Mean
 $$E[X] = np$$
+/probability/formulas#binomial_mean]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $n$ = number of independent trials
@@ -277,7 +296,8 @@ Each Bernoulli variable has expected value $E[X_i] = p$.
 
 By the linearity of expectation:
 
-$$E[X] = E[X_1 + X_2 + \\cdots + X_n] = E[X_1] + E[X_2] + \\cdots + E[X_n] = p + p + \\cdots + p = np$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = E[X_1 + X_2 + \\cdots + X_n] = E[X_1] + E[X_2] + \\cdots + E[X_n] = p + p + \\cdots + p = np$$]@
 
 The result $E[X] = np$ captures a simple and intuitive fact: if you perform $n$ trials, each with probability $p$ of success, you expect on average to get $np$ successes. This is the most natural interpretation of "average number of successes."
 
@@ -285,7 +305,8 @@ The result $E[X] = np$ captures a simple and intuitive fact: if you perform $n$ 
 
 Consider flipping a fair coin 10 times, where $n = 10$ and $p = 0.5$:
 
-$$E[X] = 10 \\times 0.5 = 5$$
+@academic[formula_callout:Expected Value (Mean)
+$$E[X] = 10 \\times 0.5 = 5$$]@
 
 The expected number of heads in 10 flips is 5, which aligns perfectly with our intuition about a fair coin.
 
@@ -301,17 +322,24 @@ obj7: {
   content: `
 The [variance](!/probability/variance#calculate) of a discrete random variable measures how spread out the values are around the expected value. It is computed as:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2] = \\sum_{x} (x - \\mu)^2 P(X = x)$$]@
 
 Or using the shortcut formula:
 
-$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$$]@
 
 For the **binomial distribution**, we apply this formula to derive the variance.
 
 ### Formula
 
+@academic[formula_callout:Binomial Variance
 $$\\mathrm{Var}(X) = np(1-p)$$
+/probability/formulas#binomial_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 Where:
 $n$ = number of independent trials
@@ -322,27 +350,36 @@ $(1-p) = q$ = probability of failure on each trial
 
 Since the binomial random variable can be expressed as the sum of $n$ independent Bernoulli variables: $X = X_1 + X_2 + \\cdots + X_n$, and for independent variables variances add:
 
-$$\\mathrm{Var}(X) = \\mathrm{Var}(X_1) + \\mathrm{Var}(X_2) + \\cdots + \\mathrm{Var}(X_n)$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = \\mathrm{Var}(X_1) + \\mathrm{Var}(X_2) + \\cdots + \\mathrm{Var}(X_n)$$]@
 
 Each Bernoulli variable has variance $\\mathrm{Var}(X_i) = p(1-p)$.
 
 Therefore:
 
+@academic[formula_callout:Binomial Variance
 $$\\mathrm{Var}(X) = np(1-p)$$
+/probability/formulas#binomial_variance]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
 
 The result $\\mathrm{Var}(X) = np(1-p)$ shows that variance depends on both the number of trials and the probability structure. The term $p(1-p)$ is maximized when $p = 0.5$ (a fair coin), meaning maximum variability occurs when success and failure are equally likely. As $p$ approaches 0 or 1, variance decreases because outcomes become more predictable.
 
 ### Standard Deviation
 
-$$\\sigma = \\sqrt{np(1-p)}$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = \\sqrt{np(1-p)}$$]@
 
 ### Example
 
 Consider flipping a fair coin 100 times, where $n = 100$ and $p = 0.5$:
 
-$$\\mathrm{Var}(X) = 100 \\times 0.5 \\times 0.5 = 25$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\mathrm{Var}(X) = 100 \\times 0.5 \\times 0.5 = 25$$]@
 
-$$\\sigma = \\sqrt{25} = 5$$
+@academic[formula_callout:Variance and Standard Deviation
+$$\\sigma = \\sqrt{25} = 5$$]@
 
 The variance of 25 and standard deviation of 5 indicate that while we expect 50 heads on average, typical outcomes will deviate by about 5 heads in either direction.
   `,
@@ -365,21 +402,28 @@ The distribution has two modes: $(n+1)p - 1$ and $(n+1)p$
 **If** $(n+1)p$ **is not an integer:**
 The mode is $\\lfloor (n+1)p \\rfloor$ (the floor of $(n+1)p$)
 
+@academic[formula_callout:Binomial Mode
+$$\\text{Mode} = \\lfloor (n+1)p \\rfloor$$
+/probability/formulas#binomial_mode]@
+
+@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@
+
 **Intuition:** The mode sits near the [expected value](!/probability/expected-value) $np$, representing the most likely number of successes. When $p = 0.5$, the distribution is symmetric and the mode equals the mean (for appropriate $n$). As $p$ moves toward 0 or 1, the mode shifts accordingly.
 
-**Example:**
+@academic[example:Example
 For $n = 10$ and $p = 0.3$:
 $(n+1)p = 11 \\times 0.3 = 3.3$
 
 Mode = $\\lfloor 3.3 \\rfloor = 3$
 
-Getting exactly 3 successes is more likely than any other outcome.
+Getting exactly 3 successes is more likely than any other outcome.]@
 
-**Example:**
+@academic[example:Example
 For $n = 9$ and $p = 0.5$:
 $(n+1)p = 10 \\times 0.5 = 5$ (integer)
 
-Modes = 4 and 5 (both equally likely)
+Modes = 4 and 5 (both equally likely)]@
 
 ### Median
 
@@ -387,24 +431,25 @@ The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) \\ge
 
 For the [binomial distribution](!/probability/distributions/discrete/binomial), there is no simple closed-form expression for the median, but it can be found numerically by solving:
 
-$$\\sum_{k=0}^{m} \\binom{n}{k} p^k (1-p)^{n-k} \\geq 0.5$$
+@academic[formula_callout:Mode and Median
+$$\\sum_{k=0}^{m} \\binom{n}{k} p^k (1-p)^{n-k} \\geq 0.5$$]@
 
 **Properties of the median:**
 • The median is always within one unit of the mean $np$
 • For symmetric cases ($p = 0.5$), median = mode = mean
 • For skewed distributions, median lies between mean and mode
 
-**Example:**
+@academic[example:Example
 For $n = 10$ and $p = 0.5$:
 Mean = $10 \\times 0.5 = 5$
 
-The median is also 5 (by symmetry)
+The median is also 5 (by symmetry)]@
 
-**Example:** 
+@academic[example:Example
 For $n = 10$ and $p = 0.3$:
 Mean = $10 \\times 0.3 = 3$
 
-The median is also 3 (close to the mean)
+The median is also 3 (close to the mean)]@
 
 Unlike continuous distributions where finding the median requires integration, for discrete distributions like [binomial](!/probability/distributions/discrete/binomial), the median is found by summing probabilities until reaching 0.5.
  

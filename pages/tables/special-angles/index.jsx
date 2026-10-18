@@ -1197,7 +1197,7 @@ Once these values are familiar, the [trigonometric identities table](!/tables/tr
 
 **Related tables:**
 
-• **Trigonometric identities table** — 115 identities across 15 families, including Pythagorean, sum-angle, double-angle, half-angle, and reduction formulas
+• **[Trigonometric identities table](!/tables/trigonometric-identities)** — 115 identities across 15 families, including Pythagorean, sum-angle, double-angle, half-angle, and reduction formulas
 • **Inverse trigonometric functions table** — exact values of $\\arcsin$, $\\arccos$, and $\\arctan$ at standard inputs
 • **Sum, difference, double, triple, and half-angle formulas** — one focused table per multi-angle family
 • **Negative, complement, and supplement angle formulas** — sign-flip and reflection identities
@@ -1205,9 +1205,9 @@ Once these values are familiar, the [trigonometric identities table](!/tables/tr
 
 **Companion tools:**
 
-• **Interactive unit circle** — drag a point around the circle and watch $\\sin$, $\\cos$, and $\\tan$ values update in real time
-• **Trigonometry calculator** — compute trig values at any angle, special or not
-• **Angle converter** — convert between degrees and radians
+• **[Interactive unit circle](!/visual-tools/unit-circle)** — drag a point around the circle and watch $\\sin$, $\\cos$, and $\\tan$ values update in real time
+• **[Trigonometry calculator](!/calculators/trigonometry-calculator)** — compute trig values at any angle, special or not
+• **[Angle converter](!/converters/degree-radians)** — convert between degrees and radians
 
 For the underlying theory, see the **trigonometry overview**.`,
         before: ``,

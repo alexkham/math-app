@@ -186,11 +186,11 @@ Set the visualizer to $2 \\times 3$ and step through to see this animated symbol
 
 [Linear combination](!/linear-algebra/visual-tools/matrix-linear-combination) — $c_1 A_1 + \\cdots + c_n A_n$, the central object built from scalar multiplication and addition.
 
-**Vector space** — the abstract structure matrices form under addition and scalar multiplication.
+**[Vector space](!/linear-algebra/vector-spaces)** — the abstract structure matrices form under addition and scalar multiplication.
 
 [Norm](!/linear-algebra/visual-tools/vector-magnitude) — multiplying $A$ by $1/\\|A\\|$ produces a unit-norm matrix.
 
-**Zero matrix** — the result of multiplying any matrix by the scalar 0.`,
+**[Zero matrix](!/linear-algebra/matrix#3)** — the result of multiplying any matrix by the scalar 0.`,
       before: ``,
       after: ``,
       link: '',

@@ -1346,13 +1346,14 @@ $$\\sin\\theta = k \\implies \\theta = (-1)^n \\arcsin k + n\\pi$$
 @academic[formulas_link:Browse all trigonometry formulas
 /trigonometry/formulas]@
 
-**Example:** Solve $\\sin(x) = -\\frac{\\sqrt{3}}{2}$.
+@academic[example:Example
+Solve $\\sin(x) = -\\frac{\\sqrt{3}}{2}$.
 
 Reference angle: $\\alpha = \\arcsin\\left(\\frac{\\sqrt{3}}{2}\\right) = \\frac{\\pi}{3}$. Sine is negative → Quadrants III and IV:
 
 $$x = \\pi + \\frac{\\pi}{3} = \\frac{4\\pi}{3} \\quad \\text{or} \\quad x = 2\\pi - \\frac{\\pi}{3} = \\frac{5\\pi}{3}$$
 
-General solution: $x = \\frac{4\\pi}{3} + 2n\\pi$ or $x = \\frac{5\\pi}{3} + 2n\\pi$.`,
+General solution: $x = \\frac{4\\pi}{3} + 2n\\pi$ or $x = \\frac{5\\pi}{3} + 2n\\pi$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1385,11 +1386,12 @@ $$\\cos\\theta = k \\implies \\theta = \\pm\\arccos k + 2n\\pi$$
 
 This compact form captures both solutions (the $+\\alpha$ branch and the $-\\alpha$ branch) in a single expression.
 
-**Example:** Solve $\\cos(x) = -\\frac{1}{2}$ on $[0, 2\\pi)$.
+@academic[example:Example
+Solve $\\cos(x) = -\\frac{1}{2}$ on $[0, 2\\pi)$.
 
 Reference angle: $\\alpha = \\arccos\\left(\\frac{1}{2}\\right) = \\frac{\\pi}{3}$. Cosine is negative → Quadrants II and III:
 
-$$x = \\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3} \\quad \\text{or} \\quad x = \\pi + \\frac{\\pi}{3} = \\frac{4\\pi}{3}$$`,
+$$x = \\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3} \\quad \\text{or} \\quad x = \\pi + \\frac{\\pi}{3} = \\frac{4\\pi}{3}$$]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1411,21 +1413,23 @@ $$\\tan\\theta = k \\implies \\theta = \\arctan k + n\\pi$$
 
 No quadrant analysis is needed — the single principal value $\\alpha$, repeated at intervals of $\\pi$, captures every solution. This is more compact than the sine and cosine cases, where two solutions per period require two separate expressions.
 
-**Example:** Solve $\\tan(x) = \\sqrt{3}$.
+@academic[example:Example
+Solve $\\tan(x) = \\sqrt{3}$.
 
 Principal value: $\\alpha = \\arctan(\\sqrt{3}) = \\frac{\\pi}{3}$.
 
 General solution: $x = \\frac{\\pi}{3} + n\\pi$.
 
-On $[0, 2\\pi)$: $x = \\frac{\\pi}{3}$ (from $n = 0$) and $x = \\frac{\\pi}{3} + \\pi = \\frac{4\\pi}{3}$ (from $n = 1$).
+On $[0, 2\\pi)$: $x = \\frac{\\pi}{3}$ (from $n = 0$) and $x = \\frac{\\pi}{3} + \\pi = \\frac{4\\pi}{3}$ (from $n = 1$).]@
 
-**Example:** Solve $\\tan(x) = -1$.
+@academic[example:Example
+Solve $\\tan(x) = -1$.
 
 Principal value: $\\alpha = \\arctan(-1) = -\\frac{\\pi}{4}$.
 
 General solution: $x = -\\frac{\\pi}{4} + n\\pi$.
 
-On $[0, 2\\pi)$: $x = -\\frac{\\pi}{4} + \\pi = \\frac{3\\pi}{4}$ and $x = -\\frac{\\pi}{4} + 2\\pi = \\frac{7\\pi}{4}$.`,
+On $[0, 2\\pi)$: $x = -\\frac{\\pi}{4} + \\pi = \\frac{3\\pi}{4}$ and $x = -\\frac{\\pi}{4} + 2\\pi = \\frac{7\\pi}{4}$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1552,7 +1556,8 @@ Quadratic-type equations often arise after identity substitution. An equation th
     title: `Equations with Multiple Angles`,
     content: `When the argument of the trigonometric function is a multiple of the variable — $\\sin(2x) = a$, $\\cos(3x) = a$, $\\tan\\left(\\frac{x}{2}\\right) = a$ — the solving process adds an extra step: solve for the inner argument first, then recover $x$.
 
-**Example:** Solve $\\sin(2x) = \\frac{\\sqrt{3}}{2}$ on $[0, 2\\pi)$.
+@academic[example:Example
+Solve $\\sin(2x) = \\frac{\\sqrt{3}}{2}$ on $[0, 2\\pi)$.
 
 Let $u = 2x$. The equation $\\sin(u) = \\frac{\\sqrt{3}}{2}$ has solutions:
 
@@ -1567,7 +1572,7 @@ Now find which values fall in $[0, 2\\pi)$:
 - $x = \\frac{\\pi}{6}$ ($n=0$), $x = \\frac{\\pi}{6} + \\pi = \\frac{7\\pi}{6}$ ($n=1$)
 - $x = \\frac{\\pi}{3}$ ($n=0$), $x = \\frac{\\pi}{3} + \\pi = \\frac{4\\pi}{3}$ ($n=1$)
 
-Four solutions: $\\left\\{\\frac{\\pi}{6}, \\frac{\\pi}{3}, \\frac{7\\pi}{6}, \\frac{4\\pi}{3}\\right\\}$.
+Four solutions: $\\left\\{\\frac{\\pi}{6}, \\frac{\\pi}{3}, \\frac{7\\pi}{6}, \\frac{4\\pi}{3}\\right\\}$.]@
 
 The critical point: the factor of 2 in the argument doubles the number of solutions within a $2\\pi$ interval. A factor of 3 would triple it. In general, $\\sin(nx) = a$ on $[0, 2\\pi)$ can produce up to $2n$ solutions (for $|a| < 1$). This multiplication is the most common source of missed solutions — students who solve for $u$ but forget to generate all valid $x$ values within the target interval.
 
@@ -1580,7 +1585,8 @@ When the interval for $x$ is $[0, 2\\pi)$ and the argument is $2x$, the effectiv
     title: `Extraneous Solutions`,
     content: `Certain solving techniques — most notably squaring both sides — can produce values that satisfy the transformed equation but not the original. These are extraneous solutions, and they must be identified and discarded.
 
-**Example:** Solve $\\sin(x) + \\cos(x) = 1$.
+@academic[example:Example
+Solve $\\sin(x) + \\cos(x) = 1$.
 
 Square both sides:
 
@@ -1599,7 +1605,7 @@ Now check each in the original equation $\\sin(x) + \\cos(x) = 1$:
 - $x = \\pi$: $0 + (-1) = -1 \\neq 1$ ✗
 - $x = \\frac{3\\pi}{2}$: $-1 + 0 = -1 \\neq 1$ ✗
 
-Only $x = 0$ and $x = \\frac{\\pi}{2}$ are valid. The squaring step introduced two extraneous solutions where $\\sin(x) + \\cos(x) = -1$ — the negative square root that squaring fails to distinguish from the positive.
+Only $x = 0$ and $x = \\frac{\\pi}{2}$ are valid. The squaring step introduced two extraneous solutions where $\\sin(x) + \\cos(x) = -1$ — the negative square root that squaring fails to distinguish from the positive.]@
 
 Extraneous solutions arise whenever a non-reversible operation is applied:
 

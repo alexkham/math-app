@@ -415,17 +415,17 @@ Laws mode also covers [nested radicals](!#nested-radicals), [rationalizing the d
 
   obj10: {
     title: `Related Calculators and Mathematical Tools`,
-    content: `**Exponent Calculator** - Compute powers and exponents, the inverse operation of roots. If roots ask "what base gives this result," exponents compute the result directly. Use both calculators together to understand the relationship between powers and roots.
+    content: `**[Exponent Calculator](!/calculators/exponent-calculator)** - Compute powers and exponents, the inverse operation of roots. If roots ask "what base gives this result," exponents compute the result directly. Use both calculators together to understand the relationship between powers and roots.
 
-**Logarithm Calculator** - Find exponents when you know the base and result. Logarithms, exponents, and roots form a connected triangle of inverse operations in mathematics.
+**[Logarithm Calculator](!/calculators/log-calculator)** - Find exponents when you know the base and result. Logarithms, exponents, and roots form a connected triangle of inverse operations in mathematics.
 
-**Fraction Calculator** - Simplify radical expressions that produce fractions. Many root calculations yield fractional results, and this calculator helps reduce them to lowest terms.
+**[Fraction Calculator](!/calculators/fraction-calculator)** - Simplify radical expressions that produce fractions. Many root calculations yield fractional results, and this calculator helps reduce them to lowest terms.
 
-**Complex Numbers Calculator** - Handle square roots of negative numbers by working with imaginary numbers. While the root calculator rejects negative square roots, complex numbers extend mathematics to include them.
+**[Complex Numbers Calculator](!/calculators/complex-numbers)** - Handle square roots of negative numbers by working with imaginary numbers. While the root calculator rejects negative square roots, complex numbers extend mathematics to include them.
 
-**Perfect Squares Table** - Reference chart showing squares and square roots of common integers. Quickly check if a number is a perfect square.
+**[Perfect Squares Table](!/tables/perfect-squares)** - Reference chart showing squares and square roots of common integers. Quickly check if a number is a perfect square.
 
-**Perfect Cubes Table** - Reference chart showing cubes and cube roots of common integers. Identify perfect cubes at a glance.
+**[Perfect Cubes Table](!/tables/perfect-cubes)** - Reference chart showing cubes and cube roots of common integers. Identify perfect cubes at a glance.
 
 For deeper theoretical understanding, explore **radical expressions**, **rational exponents**, **root simplification**, **irrational numbers**, and **nth root functions**.`,
     before: ``,

@@ -410,25 +410,25 @@ For these and similar problems the table answers a single lookup faster than rec
       title:`Related Tables and Tools`,
       content:`**Related Tables:**
 
-**Normal Distribution Table** - Standard normal cumulative probabilities; useful when $n$ is large and the normal approximation to the binomial applies.
+**[Normal Distribution Table](!/tables/normal-distribution)** - Standard normal cumulative probabilities; useful when $n$ is large and the normal approximation to the binomial applies.
 
-**Poisson Distribution Table** - Cumulative Poisson probabilities; useful when $n$ is large and $p$ is small, so $np$ stays moderate.
+**[Poisson Distribution Table](!/tables/poisson-distribution)** - Cumulative Poisson probabilities; useful when $n$ is large and $p$ is small, so $np$ stays moderate.
 
-**t Distribution Table** - Critical values for small-sample inference.
+**[t Distribution Table](!/tables/t-distribution)** - Critical values for small-sample inference.
 
 **Related Tools:**
 
-**Binomial Distribution Calculator** - Returns exact probabilities for any $(n, x, p)$ without snapping to a tabulated $p$.
+**[Binomial Distribution Calculator](!/probability/calculators/discrete-distributions#calculating-binomial-distribution-probabilities)** - Returns exact probabilities for any $(n, x, p)$ without snapping to a tabulated $p$.
 
-**Binomial Distribution Visualizer** - Shows the PMF and CDF as bar charts that update as $n$ and $p$ change.
+**[Binomial Distribution Visualizer](!/probability/visual-tools/distributions#3)** - Shows the PMF and CDF as bar charts that update as $n$ and $p$ change.
 
 **Related Concepts:**
 
 **Bernoulli Trials** - The single-trial building block of the binomial.
 
-**Binomial Coefficient** - The combinatorial count $\\binom{n}{x}$.
+**[Binomial Coefficient](!/combinatorics/binomial-coefficient)** - The combinatorial count $\\binom{n}{x}$.
 
-**Expected Value and Variance** - The summary statistics $np$ and $np(1 - p)$.`,
+**[Expected Value and Variance](!/probability/distributions/discrete/binomial)** - The summary statistics $np$ and $np(1 - p)$.`,
       before:``,
       after:``,
       link:'',

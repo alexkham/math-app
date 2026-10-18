@@ -395,9 +395,9 @@ For step-by-step conversion with worked examples, see the **base conversion theo
       title:`Related Tools and Concepts`,
       content:`**Related Tools:**
 
-**Base Converter** - Convert a single value between any two bases without scanning a table.
+**[Base Converter](!/converters/base-converter)** - Convert a single value between any two bases without scanning a table.
 
-**Base Conversion Visualizer** - Step through the repeated-division algorithm with visual digit accumulation.
+**[Base Conversion Visualizer](!/arithmetic/visual-tools/base-converter)** - Step through the repeated-division algorithm with visual digit accumulation.
 
 **Related Concepts:**
 

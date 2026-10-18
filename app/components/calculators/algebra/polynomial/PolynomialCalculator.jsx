@@ -4591,6 +4591,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { processContent } from '../../../../utils/contentProcessor';
 import { DEFAULT_OPERATIONS, DEFAULT_OPERATION_ORDER } from './polynomialCalculatorData';
+import { computeOperation, parsePoly } from './polynomialEngine';
 
 /* ============================================================================
    PolynomialCalculator — v10
@@ -4703,7 +4704,7 @@ function exprToDisplayLatex(expr) {
 
 function isExprParseable(expr) {
   if (!expr || !expr.trim()) return false;
-  return parsePolynomial(expr) !== null;
+  try { parsePoly(expr); return true; } catch (e) { return false; }
 }
 
 function slotTextToNum(t) {
@@ -4997,6 +4998,12 @@ const CSS = `
   border-radius: 8px; cursor: pointer; transition: all 0.12s;
 }
 .pcalc-icon-btn:hover { background: #fff; border-color: var(--ms-primary, #1d4ed8); }
+.pcalc-dirty { margin: 0.6rem 0 0; font-size: 0.82rem; color: #B45309; }
+.pcalc-error { margin: 0 0 0.5rem; padding: 0.7rem 0.9rem; border: 1px solid #FCA5A5; background: #FEF2F2; color: #991B1B; border-radius: 8px; font-size: 0.9rem; }
+.pcalc-toast { align-self: center; font-size: 0.82rem; color: #166534; }
+.pcalc-graph { margin-top: 0.75rem; }
+.pcalc-graph svg { display: block; width: 100%; max-width: 420px; height: auto; background: #fff; border: 1px solid #E2E8F0; border-radius: 8px; }
+.pcalc-graph-note { margin-top: 0.3rem; font-size: 0.8rem; color: #475569; }
 
 .pcalc-section-block { padding: 0.85rem 0; border-bottom: 1px solid var(--ms-border, #e2e8f0); }
 .pcalc-section-block:first-child { padding-top: 0; }
@@ -5536,6 +5543,67 @@ function KeypadInput({ initialValue, label, onSave, onCancel }) {
 
 /* ===== Main component ==================================================== */
 
+/* ===== Copy and graph helpers ============================================ */
+
+function copyViaFallback(text) {
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  } catch (e) { return false; }
+}
+
+function GraphPanel({ graph }) {
+  const W = 420, H = 240, PAD = 30;
+  const coefs = graph.coefs || [0];
+  const roots = (graph.roots || []).filter(r => typeof r === 'number' && isFinite(r));
+  let xmin = -5, xmax = 5;
+  if (roots.length) {
+    xmin = Math.min(-2, Math.min(...roots) - 1.5);
+    xmax = Math.max(2, Math.max(...roots) + 1.5);
+  }
+  const f = x => coefs.reduceRight((acc, c) => acc * x + c, 0);
+  const N = 240;
+  const pts = [];
+  let ymin = 0, ymax = 0;
+  for (let i = 0; i <= N; i++) {
+    const x = xmin + (xmax - xmin) * i / N;
+    const y = f(x);
+    pts.push([x, y]);
+    if (y < ymin) ymin = y;
+    if (y > ymax) ymax = y;
+  }
+  if (ymax - ymin < 1e-9) { ymax += 1; ymin -= 1; }
+  const padY = (ymax - ymin) * 0.08;
+  ymin -= padY; ymax += padY;
+  const sx = x => PAD + (x - xmin) / (xmax - xmin) * (W - 2 * PAD);
+  const sy = y => H - PAD - (y - ymin) / (ymax - ymin) * (H - 2 * PAD);
+  const d = pts.map((p, i) => (i === 0 ? 'M' : 'L') + sx(p[0]).toFixed(1) + ' ' + sy(p[1]).toFixed(1)).join(' ');
+  const fmt = v => String(parseFloat(v.toPrecision(3)));
+  return (
+    <div className="pcalc-graph">
+      <svg viewBox={'0 0 ' + W + ' ' + H} role="img" aria-label="Graph of the polynomial">
+        <line x1={PAD} y1={sy(0)} x2={W - PAD} y2={sy(0)} stroke="#94A3B8" strokeWidth="1" />
+        <line x1={sx(0)} y1={PAD} x2={sx(0)} y2={H - PAD} stroke="#94A3B8" strokeWidth="1" />
+        <path d={d} fill="none" stroke="#2563EB" strokeWidth="2.2" strokeLinejoin="round" />
+        {roots.map((r, i) => (<circle key={i} cx={sx(r)} cy={sy(0)} r="4.5" fill="#B45309" />))}
+        <text x={PAD} y={H - 8} fontSize="11" fill="#475569">{fmt(xmin)}</text>
+        <text x={W - PAD} y={H - 8} fontSize="11" fill="#475569" textAnchor="end">{fmt(xmax)}</text>
+        <text x={4} y={PAD} fontSize="11" fill="#475569">{fmt(ymax)}</text>
+        <text x={4} y={H - PAD} fontSize="11" fill="#475569">{fmt(ymin)}</text>
+      </svg>
+      <div className="pcalc-graph-note">{roots.length ? 'Amber dots mark the real zeros.' : 'This curve has no real zero to mark.'}</div>
+    </div>
+  );
+}
+
 export default function PolynomialCalculator({
   initialOperation = 1,
   operations: operationsProp,
@@ -5567,6 +5635,10 @@ export default function PolynomialCalculator({
   const [editingIndex, setEditingIndex] = useState(null);
   const [showFade, setShowFade] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
+  const [applied, setApplied] = useState(() => operations[indexToKey(initialOperation)].demoInputs);
+  const [graphOpen, setGraphOpen] = useState(false);
+  const [toast, setToast] = useState('');
+  const pendingShare = useRef(null);
 
   const stepsScrollRef = useRef(null);
   const helpWrapRef = useRef(null);
@@ -5579,11 +5651,32 @@ export default function PolynomialCalculator({
     setOpKey(indexToKey(initialOperation));
   }, [initialOperation, indexToKey]);
 
+  // A shared link carries ?op=<key>&p0=...&p1=...
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const rawOp = params.get('op');
+      const key = /^[0-9]+$/.test(rawOp || '') ? operationOrder[Number(rawOp) - 1] : rawOp;
+      if (!key || !operations[key]) return;
+      const polys = [];
+      for (let i = 0; params.has('p' + i) && i < 12; i++) polys.push(params.get('p' + i));
+      if (!polys.length) return;
+      pendingShare.current = { op: key, polys };
+      setOpKey(key);
+    } catch (e) { /* no query string available */ }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     if (!operations[opKey]) return;
-    setPolynomials(operations[opKey].demoInputs);
+    let start = operations[opKey].demoInputs;
+    const shared = pendingShare.current;
+    if (shared && shared.op === opKey) { start = shared.polys; pendingShare.current = null; }
+    setPolynomials(start);
+    setApplied(start);
     setEditingIndex(null);
     setHelpOpen(false);
+    setGraphOpen(false);
   }, [opKey, operations]);
 
   const updateFade = useCallback(() => {
@@ -5636,6 +5729,30 @@ export default function PolynomialCalculator({
       return next;
     });
     setEditingIndex(null);
+  };
+
+  const view = useMemo(() => computeOperation(opKey, applied), [opKey, applied]);
+  const dirty = JSON.stringify(polynomials) !== JSON.stringify(applied);
+
+  const handleCompute = () => { setApplied(polynomials.slice()); setEditingIndex(null); };
+  const handleClear = () => { setPolynomials(op.demoInputs); setApplied(op.demoInputs); setEditingIndex(null); };
+
+  const flash = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(''), 1800);
+  };
+  const copyText = (text, okMsg) => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => flash(okMsg), () => flash(copyViaFallback(text) ? okMsg : 'Copy failed'));
+    } else {
+      flash(copyViaFallback(text) ? okMsg : 'Copy failed');
+    }
+  };
+  const handleCopyLatex = () => { if (view.ok) copyText(view.copy, 'LaTeX copied'); };
+  const handleShare = () => {
+    const url = window.location.origin + window.location.pathname + '?op=' + (operationOrder.indexOf(opKey) + 1) +
+      applied.map((p, i) => '&p' + i + '=' + encodeURIComponent(p)).join('');
+    copyText(url, 'Link copied');
   };
 
   const handleScrollStepsDown = () => {
@@ -5726,7 +5843,9 @@ export default function PolynomialCalculator({
     return out;
   };
 
-  const hasSteps    = Array.isArray(op.steps) && op.steps.length > 0;
+  const steps       = view.ok ? view.steps : [];
+  const result      = view.ok ? view.result : null;
+  const hasSteps    = steps.length > 0;
   const hasAbout    = !!op.about && (op.about.text || op.about.formula);
   const hasPitfalls = Array.isArray(op.pitfalls) && op.pitfalls.length > 0;
   const hasRelated  = Array.isArray(op.related) && op.related.length > 0;
@@ -5809,9 +5928,12 @@ export default function PolynomialCalculator({
                 )}
 
                 <div className="pcalc-actions">
-                  <button type="button" className="pcalc-btn pcalc-btn-primary">{op.actionLabel}</button>
-                  <button type="button" className="pcalc-btn pcalc-btn-secondary" onClick={() => setPolynomials(op.demoInputs)}>Clear</button>
+                  <button type="button" className="pcalc-btn pcalc-btn-primary" onClick={handleCompute}>{op.actionLabel}</button>
+                  <button type="button" className="pcalc-btn pcalc-btn-secondary" onClick={handleClear}>Clear</button>
                 </div>
+                {dirty && (
+                  <p className="pcalc-dirty" role="status">The inputs changed. Press {op.actionLabel} to update the result.</p>
+                )}
 
               </div>
             </section>
@@ -5820,13 +5942,17 @@ export default function PolynomialCalculator({
               <div className="pcalc-card-header">Result</div>
               <div className="pcalc-card-body" style={{ padding: 0 }}>
                 <div className="pcalc-result">
-                  <div className="pcalc-result-eyebrow">{op.result.primaryLabel}</div>
+                  {!view.ok && (
+                    <div className="pcalc-error" role="alert">{view.message}</div>
+                  )}
+                  {result && (<>
+                  <div className="pcalc-result-eyebrow">{result.primaryLabel}</div>
                   <div className="pcalc-result-math">
-                    {processContent('$' + op.result.primaryMath + '$')}
+                    {processContent('$' + result.primaryMath + '$')}
                   </div>
-                  {op.result.extras && op.result.extras.length > 0 && (
+                  {result.extras && result.extras.length > 0 && (
                     <div className="pcalc-result-extras">
-                      {op.result.extras.map((ex, i) => (
+                      {result.extras.map((ex, i) => (
                         <div className="pcalc-result-extra" key={i}>
                           <span className="pcalc-result-extra-label">{ex.label}:</span>
                           <span>{processContent('$' + ex.math + '$')}</span>
@@ -5834,25 +5960,33 @@ export default function PolynomialCalculator({
                       ))}
                     </div>
                   )}
-                  {op.result.identity && (
+                  {result.identity && (
                     <div className="pcalc-result-identity">
-                      {processContent('$' + op.result.identity + '$')}
+                      {processContent('$' + result.identity + '$')}
                     </div>
                   )}
-                  {op.result.meta && op.result.meta.length > 0 && (
+                  {result.meta && result.meta.length > 0 && (
                     <div className="pcalc-result-subline">
-                      {op.result.meta.map((m, i) => (
+                      {result.meta.map((m, i) => (
                         <span key={i}>{m.label}: <strong>{m.value}</strong></span>
                       ))}
                     </div>
                   )}
                   <div className="pcalc-result-actions">
-                    <button type="button" className="pcalc-icon-btn">⧉ Copy LaTeX</button>
-                    <button type="button" className="pcalc-icon-btn">↗ Share</button>
+                    <button type="button" className="pcalc-icon-btn" onClick={handleCopyLatex}>⧉ Copy LaTeX</button>
+                    <button type="button" className="pcalc-icon-btn" onClick={handleShare}>↗ Share</button>
                     {op.hasGraph && (
-                      <button type="button" className="pcalc-icon-btn">📈 Graph</button>
+                      <button type="button" className="pcalc-icon-btn" aria-pressed={graphOpen} onClick={() => setGraphOpen(g => !g)}>📈 Graph</button>
                     )}
+                    {toast && <span className="pcalc-toast" role="status">{toast}</span>}
                   </div>
+                  {graphOpen && op.hasGraph && view.graph && <GraphPanel graph={view.graph} />}
+                  </>)}
+                  {!result && (
+                    <div className="pcalc-result-actions">
+                      {toast && <span className="pcalc-toast" role="status">{toast}</span>}
+                    </div>
+                  )}
                 </div>
               </div>
             </section>
@@ -5867,10 +6001,10 @@ export default function PolynomialCalculator({
                   <div className="pcalc-section-block pcalc-steps-section">
                     <h3 className="pcalc-section-title">
                       Step-by-step
-                      <span className="pcalc-section-badge">{op.steps.length} steps</span>
+                      <span className="pcalc-section-badge">{steps.length} {steps.length === 1 ? 'step' : 'steps'}</span>
                     </h3>
                     <div className="pcalc-steps-scroll" ref={stepsScrollRef}>
-                      {op.steps.map((step, i) => (
+                      {steps.map((step, i) => (
                         <div className="pcalc-step" key={i}>
                           <div className="pcalc-step-num">{i + 1}</div>
                           <div>

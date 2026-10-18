@@ -356,9 +356,10 @@ If $f(x) \\leq g(x)$ and $\\int g$ converges, then $\\int f$ converges.
 
 If $f(x) \\geq g(x)$ and $\\int g$ diverges, then $\\int f$ diverges.
 
-**Example:** Does $\\int_1^{\\infty} \\frac{1}{x^2 + 1}\\, dx$ converge?
+@academic[example:Example
+Does $\\int_1^{\\infty} \\frac{1}{x^2 + 1}\\, dx$ converge?
 
-Since $\\dfrac{1}{x^2 + 1} < \\dfrac{1}{x^2}$ and $\\int_1^{\\infty} \\dfrac{1}{x^2}\\, dx$ converges, the given integral converges by comparison.
+Since $\\dfrac{1}{x^2 + 1} < \\dfrac{1}{x^2}$ and $\\int_1^{\\infty} \\dfrac{1}{x^2}\\, dx$ converges, the given integral converges by comparison.]@
 `,
     before: ``,
     after: ``,
@@ -375,13 +376,14 @@ $$\\lim_{x \\to \\infty} \\frac{f(x)}{g(x)} = L \\quad \\text{where } 0 < L < \\
 
 then $\\int f$ and $\\int g$ both converge or both diverge.
 
-**Example:** Does $\\int_1^{\\infty} \\frac{x}{x^3 + 5}\\, dx$ converge?
+@academic[example:Example
+Does $\\int_1^{\\infty} \\frac{x}{x^3 + 5}\\, dx$ converge?
 
 Compare to $g(x) = 1/x^2$:
 
 $$\\lim_{x \\to \\infty} \\frac{x/(x^3 + 5)}{1/x^2} = \\lim_{x \\to \\infty} \\frac{x^3}{x^3 + 5} = 1$$
 
-Since $\\int_1^{\\infty} 1/x^2\\, dx$ converges, so does the given integral.
+Since $\\int_1^{\\infty} 1/x^2\\, dx$ converges, so does the given integral.]@
 `,
     before: ``,
     after: ``,

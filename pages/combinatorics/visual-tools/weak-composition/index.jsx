@@ -766,9 +766,9 @@ With one bar the binomial collapses to $\\binom{5}{1} = 5$, and the composition 
 
 **Multiset coefficient** — the doubled-parenthesis notation $\\left(\\!\\!\\binom{k}{n}\\!\\!\\right)$ for the weak composition count, emphasizing that the outcome is a size-$n$ multiset over a $k$-element ground set.
 
-**Hockey-stick identity** — the [grouping by x₁](!#grouping-by-first-bin-count) proves $\\sum_{j=0}^{n} \\binom{n - j + k - 2}{k - 2} = \\binom{n + k - 1}{k - 1}$.
+**[Hockey-stick identity](!/combinatorics/visual-tools/pascal-triangle#mode-2-hockey-stick)** — the [grouping by x₁](!#grouping-by-first-bin-count) proves $\\sum_{j=0}^{n} \\binom{n - j + k - 2}{k - 2} = \\binom{n + k - 1}{k - 1}$.
 
-**Combinatorics calculator** — to compute $\\binom{n + k - 1}{k - 1}$ for any $n$ and $k$, see the **weak composition calculator**.`,
+**[Combinatorics calculator](!/combinatorics/calculator#weak-composition)** — to compute $\\binom{n + k - 1}{k - 1}$ for any $n$ and $k$, see the **weak composition calculator**.`,
       before: ``,
       after: ``,
       link: '',

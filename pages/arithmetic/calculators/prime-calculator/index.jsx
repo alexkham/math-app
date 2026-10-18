@@ -42,7 +42,7 @@ const detailInstructions = [
   `Pick a mode with the two buttons under **Check Mode**: **Quick Check** or **Show Factors**; switching clears the result. [Learn more about the modes](!#getting-started-with-the-prime-number-checker)`,
   `Type a positive whole number in the box. [Learn more about the input](!#using-quick-check-mode)`,
   `Click **Check**. Green means prime, orange means composite. [Learn more about the result](!#reading-results-and-factor-lists)`,
-  `In Show Factors mode a composite number lists all its factors and their count; a prime shows $1$ and itself in either mode. [Learn more about factor lists](!#using-show-factors-mode)`,
+  `In Show Factors mode a composite number lists all its factors and their count; a prime shows $1$ and itself, and the number $1$ shows just $1$. [Learn more about factor lists](!#using-show-factors-mode)`,
   `A red message appears for a blank box, a decimal, zero or a negative number. [Learn more about messages](!#reading-results-and-factor-lists)`,
   `Click **Reset** to clear the box and the result. [Learn more about Reset](!#getting-started-with-the-prime-number-checker)`,
 ];
@@ -60,7 +60,7 @@ const demos = {
   'getting-started-with-the-prime-number-checker': {
     title: 'A prime, then a composite with its factors',
     script: [
-      { say: 'TYPE 17 and CLICK Check\n17 is a PRIME number, in green; factors 1, 17.', at: 'tr' },
+      { say: 'TYPE 17 and CLICK Check\n17 is a PRIME number, in green; Quick Check shows no factor list.', at: 'tr' },
       { set: 'input[placeholder="Enter a positive integer"]', value: '17' },
       { click: { button: 'Check' } },
       { wait: 2600 },
@@ -162,7 +162,7 @@ const sectionsContent = {
 
 Enter any positive integer in the input field. Try small numbers first: $7$ is prime, $8$ is composite. The checker works instantly for numbers up to millions. Type $17$ and click Check to verify it's prime.
 
-For **Quick Check** mode, you get a simple result: "$17$ is a PRIME number" in green, or "$18$ is NOT a prime number (composite)" in orange. A prime also shows its two factors, $1$ and itself, in either mode. This mode is fastest when you just need a yes/no answer.
+For **Quick Check** mode, you get a simple result: "$17$ is a PRIME number" in green, or "$18$ is NOT a prime number (composite)" in orange. No factor list is shown in this mode, for primes and composites alike; switch to Show Factors to see it. This mode is fastest when you just need a yes/no answer.
 
 Switch to **Show Factors** mode to see why a number is composite; switching modes clears the result but keeps the number. Try $12$: the checker shows it's composite and lists all factors: $1, 2, 3, 4, 6, 12$. This helps understand the number's structure. Use **Reset** to test another number. What makes a number prime is explained in [understanding prime numbers](!#understanding-prime-numbers).`,
     before: ``,
@@ -280,7 +280,7 @@ The remainder arithmetic behind RSA and hashing is introduced in [congruence](!/
 
   obj9: {
     title: `Special Cases and Edge Numbers`,
-    content: `**The number 1**: Not prime (only one factor) and not composite (definition requires at least two prime factors). Historically sometimes called prime, but modern mathematics excludes it for cleaner theorems. The checker has only two answers, so for $1$ it prints "NOT a prime number (composite)"; read that as "not prime".
+    content: `**The number 1**: Not prime (only one factor) and not composite (definition requires at least two prime factors). Historically sometimes called prime, but modern mathematics excludes it for cleaner theorems. For $1$ the checker prints "1 is neither prime nor composite", and in Show Factors mode it lists the single factor $1$.
 
 **The number 2**: The only even prime and the smallest prime. All other even numbers are divisible by $2$, making them composite. This makes $2$ unique in prime theory.
 

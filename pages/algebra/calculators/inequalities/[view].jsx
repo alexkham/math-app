@@ -756,7 +756,8 @@ The final-answer card at the bottom shows the answer in three forms: the inequal
 
 **The principle.** Negation reverses order on the number line. If $a < b$ then $-a > -b$. The smaller number, once negated, becomes the larger. Multiplying or dividing both sides of an inequality by a negative number applies this negation, so the comparison direction must flip to preserve truth.
 
-**Example.** Start with $3 < 5$ &mdash; clearly true. Multiply both sides by $-2$. Without flipping: $-6 < -10$, false. With flipping: $-6 > -10$, true. The flip is required for the inequality to remain valid.
+@academic[example:Example
+Start with $3 < 5$ &mdash; clearly true. Multiply both sides by $-2$. Without flipping: $-6 < -10$, false. With flipping: $-6 > -10$, true. The flip is required for the inequality to remain valid.]@
 
 **In linear inequality solving** the rule applies whenever you divide by the coefficient of the variable and that coefficient is negative. For $-3x + 7 < 16$, subtract 7 to get $-3x < 9$, then divide by $-3$ and flip: $x > -3$. The solver shows this step explicitly so the flip is never missed.
 

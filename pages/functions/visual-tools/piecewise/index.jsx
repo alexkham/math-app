@@ -724,19 +724,19 @@ For the full theory of limits and continuity, see the **continuity** page.`,
 
     obj10: {
       title: `Related Concepts`,
-      content: `**Functions** — the general theory of functions, [domain](!/functions/visual-tools/domain), [range](!/functions/visual-tools/range), and notation. The foundation behind piecewise definitions.
+      content: `**[Functions](!/functions/basics)** — the general theory of functions, [domain](!/functions/visual-tools/domain), [range](!/functions/visual-tools/range), and notation. The foundation behind piecewise definitions.
 
-**Continuity** — the formal definition of continuous functions and the classification of discontinuities (jump, removable, essential).
+**[Continuity](!/calculus/limits/continuity)** — the formal definition of continuous functions and the classification of discontinuities (jump, removable, essential).
 
-**Limits** — one-sided and two-sided limits, the machinery used to classify boundary behavior on piecewise functions.
+**[Limits](!/calculus/limits)** — one-sided and two-sided limits, the machinery used to classify boundary behavior on piecewise functions.
 
-**Domain and range** — how the domain of a piecewise function is the union of the individual piece domains.
+**[Domain and range](!/functions/piecewise#5)** — how the domain of a piecewise function is the union of the individual piece domains.
 
-**Absolute value function** — a canonical piecewise example, with its own page covering algebraic properties and graphing.
+**[Absolute value function](!/functions/families#12)** — a canonical piecewise example, with its own page covering algebraic properties and graphing.
 
-**Step functions** — piecewise constants used to model on/off behavior, indicator functions, and quantized signals.
+**[Step functions](!/functions/families#13)** — piecewise constants used to model on/off behavior, indicator functions, and quantized signals.
 
-**Visual tools for functions** — other interactive visualizers covering [composition](!/functions/visual-tools/composition), [transformations](!/functions/visual-tools/transformations), inverses, and graphing.
+**[Visual tools for functions](!/functions/visual-tools)** — other interactive visualizers covering [composition](!/functions/visual-tools/composition), [transformations](!/functions/visual-tools/transformations), inverses, and graphing.
 
 [Function Reflections](!/functions/visual-tools/reflections) — reflecting a piecewise function reflects every branch and swaps which side of a boundary each piece occupies.`,
       before: ``,
