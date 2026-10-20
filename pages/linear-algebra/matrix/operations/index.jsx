@@ -3688,7 +3688,8 @@ const sectionsContent = {
 
 For example,
 
-$$\\begin{pmatrix} 1 & 4 \\\\ -2 & 3 \\\\ 0 & 5 \\end{pmatrix} + \\begin{pmatrix} 3 & -1 \\\\ 6 & 0 \\\\ 2 & -4 \\end{pmatrix} = \\begin{pmatrix} 4 & 3 \\\\ 4 & 3 \\\\ 2 & 1 \\end{pmatrix}$$
+@academic[formula_callout:Matrix Addition
+$$\\begin{pmatrix} 1 & 4 \\\\ -2 & 3 \\\\ 0 & 5 \\end{pmatrix} + \\begin{pmatrix} 3 & -1 \\\\ 6 & 0 \\\\ 2 & -4 \\end{pmatrix} = \\begin{pmatrix} 4 & 3 \\\\ 4 & 3 \\\\ 2 & 1 \\end{pmatrix}$$]@
 
 If the dimensions do not match, the sum is undefined — there is no way to add a $2 \\times 3$ matrix to a $3 \\times 2$ matrix.
 
@@ -3756,7 +3757,8 @@ Entry by entry, $(A - B)_{ij} = a_{ij} - b_{ij}$. The same dimension requirement
 
 For example,
 
-$$-2 \\begin{pmatrix} 1 & 3 & -4 \\\\ 0 & 5 & 2 \\end{pmatrix} = \\begin{pmatrix} -2 & -6 & 8 \\\\ 0 & -10 & -4 \\end{pmatrix}$$
+@academic[formula_callout:Scalar Multiplication
+$$-2 \\begin{pmatrix} 1 & 3 & -4 \\\\ 0 & 5 & 2 \\end{pmatrix} = \\begin{pmatrix} -2 & -6 & 8 \\\\ 0 & -10 & -4 \\end{pmatrix}$$]@
 
 Scalar multiplication distributes over matrix addition ($c(A + B) = cA + cB$), distributes over scalar addition ($(c + d)A = cA + dA$), associates with itself ($c(dA) = (cd)A$), and has $1$ as its identity ($1 \\cdot A = A$). Multiplying by $0$ produces the zero matrix.`,
     before: ``,
@@ -3767,7 +3769,8 @@ Scalar multiplication distributes over matrix addition ($c(A + B) = cA + cB$), d
     title: `Linear Combinations of Matrices`,
     content: `Given matrices $A_1, A_2, \\dots, A_k$ of the same size and scalars $c_1, c_2, \\dots, c_k$, the expression
 
-$$c_1 A_1 + c_2 A_2 + \\cdots + c_k A_k$$
+@academic[formula_callout:Linear Combinations of Matrices
+$$c_1 A_1 + c_2 A_2 + \\cdots + c_k A_k$$]@
 
 is a linear combination of matrices. Addition and scalar multiplication together give the set of all $m \\times n$ matrices the structure of a [vector space](!/linear-algebra/vector-spaces). The dimension of this space is $mn$ — one degree of freedom for each entry. The standard basis consists of the $mn$ matrices that have a single $1$ in one position and zeros everywhere else.`,
     before: ``,
@@ -3785,15 +3788,19 @@ The number of columns of $A$ must equal the number of rows of $B$. If this compa
 
 ## Worked Example
 
-$$\\begin{pmatrix} 1 & 0 & 3 \\\\ 2 & -1 & 4 \\end{pmatrix} \\begin{pmatrix} 5 & 1 \\\\ 2 & -3 \\\\ 0 & 6 \\end{pmatrix}$$
+@academic[formula_callout:Matrix Multiplication — Definition
+$$\\begin{pmatrix} 1 & 0 & 3 \\\\ 2 & -1 & 4 \\end{pmatrix} \\begin{pmatrix} 5 & 1 \\\\ 2 & -3 \\\\ 0 & 6 \\end{pmatrix}$$]@
 
 The left matrix is $2 \\times 3$ and the right is $3 \\times 2$, so the product is $2 \\times 2$. Computing each entry:
 
-$$(1)(5) + (0)(2) + (3)(0) = 5, \\quad (1)(1) + (0)(-3) + (3)(6) = 19$$
+@academic[formula_callout:Matrix Multiplication — Definition
+$$(1)(5) + (0)(2) + (3)(0) = 5, \\quad (1)(1) + (0)(-3) + (3)(6) = 19$$]@
 
-$$(2)(5) + (-1)(2) + (4)(0) = 8, \\quad (2)(1) + (-1)(-3) + (4)(6) = 29$$
+@academic[formula_callout:Matrix Multiplication — Definition
+$$(2)(5) + (-1)(2) + (4)(0) = 8, \\quad (2)(1) + (-1)(-3) + (4)(6) = 29$$]@
 
-$$AB = \\begin{pmatrix} 5 & 19 \\\\ 8 & 29 \\end{pmatrix}$$
+@academic[formula_callout:Matrix Multiplication — Definition
+$$AB = \\begin{pmatrix} 5 & 19 \\\\ 8 & 29 \\end{pmatrix}$$]@
 
 Each entry required $n = 3$ multiplications and $n - 1 = 2$ additions. The full product required $m \\times p = 4$ such computations.`,
     before: ``,
@@ -3819,7 +3826,7 @@ Scalars pass through freely: $c(AB) = (cA)B = A(cB)$. The identity matrix satisf
 Commutativity, however, fails:
 
 @academic[formula_callout:matrix_multiplication_non_commutativity|Matrix Multiplication Non-Commutativity|$$AB \\neq BA \\text{ in general}$$]@
-@academic[formulas_link:/linear-algebra/formulas#matrix_multiplication_non_commutativity]@
+@academic[formulas_link:/linear-algebra/formulas#matrix_multiplication_non-commutativity]@
 
 Even when both products happen to be defined, they generally produce different results. For a concrete counterexample, take $A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\end{pmatrix}$ and $B = \\begin{pmatrix} 0 & 0 \\\\ 3 & 4 \\end{pmatrix}$. Then $AB = \\begin{pmatrix} 6 & 8 \\\\ 0 & 0 \\end{pmatrix}$ while $BA = \\begin{pmatrix} 0 & 0 \\\\ 3 & 6 \\end{pmatrix}$.
 
@@ -3834,7 +3841,8 @@ Two further properties distinguish matrix multiplication from scalar multiplicat
 
 The column interpretation says that column $j$ of $AB$ is obtained by multiplying $A$ times column $j$ of $B$:
 
-$$AB = \\begin{pmatrix} A\\mathbf{b}_1 & A\\mathbf{b}_2 & \\cdots & A\\mathbf{b}_p \\end{pmatrix}$$
+@academic[formula_callout:Matrix Multiplication — Column and Row Interpretations
+$$AB = \\begin{pmatrix} A\\mathbf{b}_1 & A\\mathbf{b}_2 & \\cdots & A\\mathbf{b}_p \\end{pmatrix}$$]@
 
 Each column of the product is a linear combination of the columns of $A$, with weights given by the corresponding column of $B$. This is the view that connects matrix multiplication to [linear transformations](!/linear-algebra/transformations): the product $AB$ applies the transformation $A$ to each column of $B$ independently.
 
@@ -3842,7 +3850,8 @@ The row interpretation says that row $i$ of $AB$ equals row $i$ of $A$ times the
 
 A third perspective writes the product as a sum of rank-one outer products:
 
-$$AB = \\sum_{k=1}^{n} (\\text{column } k \\text{ of } A)(\\text{row } k \\text{ of } B)$$
+@academic[formula_callout:Matrix Multiplication — Column and Row Interpretations
+$$AB = \\sum_{k=1}^{n} (\\text{column } k \\text{ of } A)(\\text{row } k \\text{ of } B)$$]@
 
 Each term is an $m \\times p$ matrix of [rank](!/linear-algebra/matrix/rank) at most one, and their sum is the full product. This decomposition appears in low-rank approximation theory and in the analysis of the singular value decomposition.`,
     before: ``,
@@ -3858,7 +3867,8 @@ Each term is an $m \\times p$ matrix of [rank](!/linear-algebra/matrix/rank) at 
 
 For example,
 
-$$A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix} \\quad \\Longrightarrow \\quad A^T = \\begin{pmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{pmatrix}$$
+@academic[formula_callout:The Transpose
+$$A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix} \\quad \\Longrightarrow \\quad A^T = \\begin{pmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{pmatrix}$$]@
 
 Applying the transpose twice recovers the original matrix:
 
@@ -3952,7 +3962,8 @@ The [Hadamard product](!/linear-algebra/definitions#hadamard_product) $A \\circ 
 
 The [outer product](!/linear-algebra/definitions#outer_product) $\\mathbf{u}\\mathbf{v}^T$ is ordinary matrix multiplication applied to a column with $m$ entries and a row with $n$ entries. The inner dimensions are both $1$, so the product exists for any two lengths and gives an $m \\times n$ matrix with entries $u_i v_j$:
 
-$$\\mathbf{u}\\mathbf{v}^T = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} \\begin{pmatrix} 3 & 4 & 5 \\end{pmatrix} = \\begin{pmatrix} 3 & 4 & 5 \\\\ 6 & 8 & 10 \\end{pmatrix}$$
+@academic[formula_callout:Two More Products: Hadamard and Outer
+$$\\mathbf{u}\\mathbf{v}^T = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} \\begin{pmatrix} 3 & 4 & 5 \\end{pmatrix} = \\begin{pmatrix} 3 & 4 & 5 \\\\ 6 & 8 & 10 \\end{pmatrix}$$]@
 
 Every column is a multiple of $\\mathbf{u}$ and every row a multiple of $\\mathbf{v}^T$, so the result has [rank](!/linear-algebra/matrix/rank) one whenever both vectors are non-zero. The [dot product](!/linear-algebra/vectors/dot-product) is the same two vectors multiplied in the other order, $\\mathbf{v}^T\\mathbf{u}$, which collapses to a single number; the outer product spreads them into a table instead.
 

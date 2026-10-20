@@ -272,7 +272,8 @@ const fsMainObj6 = renderFactorSet({
   title: `What is Divisibility?`,
   content: `An integer $a$ divides an integer $b$ when $b$ equals $a$ multiplied by some integer $k$, with no remainder:
 
-$$a \\mid b \\quad \\text{means} \\quad b = a \\cdot k \\;\\text{ for some integer } k$$
+@academic[formula_callout:What is Divisibility?
+$$a \\mid b \\quad \\text{means} \\quad b = a \\cdot k \\;\\text{ for some integer } k$$]@
 
 The expression $3 \\mid 12$ is true because $12 = 3 \\cdot 4$. The expression $5 \\mid 12$ is false because no integer $k$ satisfies $12 = 5 \\cdot k$ — the closest are $5 \\cdot 2 = 10$ and $5 \\cdot 3 = 15$, neither of which equals $12$.
 
@@ -348,7 +349,8 @@ obj4: {
   title: `Divisibility and Remainders`,
   content: `For any integers $a$ and $n$ with $n > 0$, the division algorithm guarantees:
 
-$$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$
+@academic[formula_callout:Divisibility and Remainders
+$$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$]@
 
 The integer $q$ is the quotient — how many complete copies of $n$ fit into $a$. The integer $r$ is the remainder — what is left after those copies are removed.
 
@@ -449,7 +451,8 @@ The least common multiple runs in the opposite direction. It is the smallest pos
 
 The two quantities are linked by a clean identity:
 
-$$a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$$
+@academic[formula_callout:GCD and LCM
+$$a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$$]@
 
 For $4$ and $6$: $4 \\cdot 6 = 24$, and $\\gcd(4,6) \\cdot \\text{lcm}(4,6) = 2 \\cdot 12 = 24$.
 

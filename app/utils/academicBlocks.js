@@ -19,6 +19,9 @@ const FORMULA_CALLOUT_DEFAULTS = {
   arrow: '\u2192',                       // →
 };
 
+// ─── Warning triangle drawn before the title of `pitfall` blocks ───
+const PITFALL_ICON = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;margin-right:6px;"><path d="M12 3.5 22 20.5H2Z"/><path d="M12 10v4.5"/><circle cx="12" cy="17.3" r="0.6" fill="#B45309"/></svg>';
+
 // ─── Centralized constants for "browse all formulas" links ───
 // These sit directly under a formula_callout card.
 // Negative marginTop pulls them tight against the card above.
@@ -144,7 +147,7 @@ export const renderAcademicBlockHTML = (
     theorem:    { border: '2px solid #0040a0', background: '#f8f9ff', color: '#0040a0', label: 'Theorem' },
     definition: { border: '2px solid #006000', background: '#f0fff0', color: '#006000', label: 'Definition' },
     lemma:      { border: '2px solid #800060', background: '#fff8ff', color: '#800060', label: 'Lemma' },
-    example:    { border: '2px solid #404080', borderLeft: '8px solid #404080', background: '#f8f8ff', color: '#404080', label: 'Example' },
+    example:    { border: '2px solid #404080', borderLeft: '8px solid #404080', background: '#f6f6f7', color: '#404080', label: 'Example' },
     proof:      { border: '1px solid #505050', background: '#fafafa', color: '#505050', label: 'Proof' },
 
     // Thick-left
@@ -167,6 +170,10 @@ export const renderAcademicBlockHTML = (
     solution:   { border: '1px dashed #ea580c', background: '#fffbf5', color: '#ea580c', label: 'Solution', tightTop: true },
     intuition:  { border: '1px solid #f59e0b', background: '#fffbeb', color: '#b45309', label: '\ud83d\udca1 Intuition' },
     recall:     { border: '1px dashed #2563eb', background: '#eff6ff', color: '#2563eb', label: '\u21a9 Recall' },
+
+    // Common mistakes \u2014 site amber, thin border all round; `pitfall` shows the triangle, `pitfall_plain` does not
+    pitfall:       { border: '1px solid #B45309', background: '#FDF3E3', color: '#B45309', label: 'Pitfall', icon: PITFALL_ICON },
+    pitfall_plain: { border: '1px solid #B45309', background: '#FDF3E3', color: '#B45309', label: 'Pitfall' },
 
     // Notation variants (7 color options for mathematical notation entries)
     notation_slate:    { border: '1px solid #5b7ca3', borderLeft: '6px solid #5b7ca3', background: '#eef2f7',    color: '#3f5c7e', label: 'Notation' },
@@ -193,7 +200,9 @@ export const renderAcademicBlockHTML = (
     out = out.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     out = out.replace(/\[([^\]]+)\]\((!?)([^)]+)\)/g, (m, text, sameTab, url) => {
       const cleanUrl = sameTab ? url.substring(1) : url;
-      const finalUrl = sameTab ? (cleanUrl.startsWith('/') ? cleanUrl : `/${cleanUrl}`) : url;
+      let finalUrl = sameTab ? (cleanUrl.startsWith('/') ? cleanUrl : `/${cleanUrl}`) : url;
+      // In-page anchor, e.g. [Details](!#pitfalls): keep it as "#pitfalls".
+      if (sameTab && url.startsWith('#')) finalUrl = url;
       return `<a href="${finalUrl}" ${!sameTab ? 'target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`;
     });
     out = out.replace(
@@ -345,6 +354,32 @@ export const renderAcademicBlockHTML = (
     `.trim();
   }
 
+  // ─── Rules, theorems, axioms, corollaries — one quiet box, a kind tag before the title ───
+  //   rule | rule_theorem | rule_axiom | rule_corollary   first line = name, rest = statement
+  //   …_plain                                             tag only: the whole text is the statement
+  const ruleMatch = type.match(/^rule(?:_(theorem|axiom|corollary))?(_plain)?$/);
+  if (ruleMatch) {
+    const kind = (ruleMatch[1] || 'rule').toUpperCase();
+    const plain = !!ruleMatch[2];
+    const lines = content.trim().split(/\r?\n/);
+    const name = plain ? '' : processInline(lines[0].trim());
+    const statement = processAcademicContent(plain ? lines.join('\n') : lines.slice(1).join('\n'));
+    // No width given: the box is only as wide as its text (never wider than the column), left-aligned with the text.
+    // Width given: exactly that wide; the text wraps inside it.
+    const widthRule = customWidth ? `width:${customWidth};max-width:100%;` : 'width:fit-content;max-width:100%;';
+    let marginRule = 'margin:20px 0;';
+    if (customAlign === 'center') marginRule = 'margin:20px auto;';
+    if (customAlign === 'right') marginRule = 'margin:20px 0 20px auto;';
+    return `
+      <div style="display:block;box-sizing:border-box;${marginRule}padding:12px 16px;border-radius:8px;border:1px solid #2563EB;background-color:#E8F0FE;font-size:1rem;line-height:1.6;${widthRule}">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px;font-weight:bold;color:#06357A;line-height:1.4;">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.04em;color:#ffffff;background:#2563EB;border-radius:4px;padding:1px 6px;">${kind}</span>${name ? `<span>${name}</span>` : ''}
+        </div>
+        <div style="font-size:1em;line-height:1.6;">${statement}</div>
+      </div>
+    `.trim();
+  }
+
   // theorem+proof combo
   if (type === 'theorem+proof' || type === 'lemma+proof' || type === 'corollary+proof') {
     const baseType = type.replace('+proof', '');
@@ -381,6 +416,9 @@ export const renderAcademicBlockHTML = (
   if (styles[type]) style = styles[type];
   else if (type.startsWith('thick_left_')) style = styles[type] || styles.thick_left_theorem;
   else style = styles.theorem;
+
+  // Only styles that define `icon` get one; every other block renders as before.
+  const iconHTML = style.icon || '';
 
   if (number) titleProcessed = `${style.label} ${number} \u2014 ${titleProcessed}`;
 
@@ -423,7 +461,7 @@ export const renderAcademicBlockHTML = (
   if (aside) {
     return `
       <div style="float:right;width:${customWidth || '40%'};margin:0 0 12px 20px;box-sizing:border-box;padding:12px 16px;border-radius:8px;border:${style.border};border-left:${style.borderLeft || style.border};background:${style.background};font-size:14px;${italicRule}">
-        <div style="font-weight:bold;color:${style.color};margin-bottom:6px;${monoTitleRule}">${style.label}: ${titleProcessed}</div>
+        <div style="font-weight:bold;color:${style.color};margin-bottom:6px;${monoTitleRule}">${iconHTML}${style.label}: ${titleProcessed}</div>
         ${tagsHTML}
         <div>${bodyProcessed}</div>
         ${citeHTML}
@@ -435,7 +473,7 @@ export const renderAcademicBlockHTML = (
     return `
       <details style="display:block;box-sizing:border-box;${marginRule}padding:0;border-radius:8px;border:${style.border};border-left:${style.borderLeft || style.border};background:${style.background};${widthRule}">
         <summary style="font-weight:bold;color:${style.color};padding:12px 18px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;${monoTitleRule}">
-          <span>${titleProcessed}</span>
+          <span>${iconHTML}${titleProcessed}</span>
           <span style="font-size:12px;">\u25bc</span>
         </summary>
         <div style="padding:0 18px 16px;">
@@ -450,7 +488,7 @@ export const renderAcademicBlockHTML = (
   if (compact) {
     return `
       <div style="display:block;box-sizing:border-box;margin:8px 0;padding:${padding};border-radius:6px;border:${style.border};border-left:${style.borderLeft || style.border};background:${style.background};font-size:${fontSize};${widthRule}${italicRule}">
-        <span style="font-weight:bold;color:${style.color};${monoTitleRule}">${titleProcessed}:</span>
+        <span style="font-weight:bold;color:${style.color};${monoTitleRule}">${iconHTML}${titleProcessed}:</span>
         <span>${bodyRaw.split(/\r?\n/).filter(Boolean).map(processInline).join(' ')}</span>
       </div>
     `.trim();
@@ -479,7 +517,7 @@ export const renderAcademicBlockHTML = (
         line-height: 1.4;
         ${monoTitleRule}
         ${style.italic ? 'font-style: normal;' : ''}
-      ">${titleProcessed}</div>
+      ">${iconHTML}${titleProcessed}</div>
       ${tagsHTML}
       <div style="font-size: 1em; line-height: 1.6;">${bodyProcessed}</div>
       ${citeHTML}

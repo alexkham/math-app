@@ -184,21 +184,25 @@ const sectionsContent = {
 
 Convert to exponential form using the definition: $\\log_a(x) = k$ means $a^k = x$.
 
-Example: Solve $\\log_2(x) = 5$.
-$$x = 2^5 = 32$$
+@academic[example:Example
+Solve $\\log_2(x) = 5$.
+$$x = 2^5 = 32$$]@
 
-Example: Solve $\\log_3(x) = -2$.
-$$x = 3^{-2} = \\frac{1}{9}$$
+@academic[example:Example
+Solve $\\log_3(x) = -2$.
+$$x = 3^{-2} = \\frac{1}{9}$$]@
 
-Example: Solve $\\ln(x) = 4$.
-$$x = e^4 \\approx 54.598$$
+@academic[example:Example
+Solve $\\ln(x) = 4$.
+$$x = e^4 \\approx 54.598$$]@
 
 When the argument is an expression, solve the resulting equation:
 
-Example: Solve $\\log_5(2x - 1) = 2$.
+@academic[example:Example
+Solve $\\log_5(2x - 1) = 2$.
 $$2x - 1 = 5^2 = 25$$
 $$2x = 26$$
-$$x = 13$$
+$$x = 13$$]@
 
 To solve your own logarithmic equation with each step shown, use the [logarithmic equation solver](!/algebra/calculators/equations/logarithmic).`,
     before: ``,
@@ -209,18 +213,20 @@ To solve your own logarithmic equation with each step shown, use the [logarithmi
     title: `Logarithms on Both Sides`,
     content: `When the same logarithm base appears on both sides, apply the one-to-one property: if $\\log_a(M) = \\log_a(N)$, then $M = N$.
 
-Example: Solve $\\log_4(3x + 2) = \\log_4(x + 10)$.
+@academic[example:Example
+Solve $\\log_4(3x + 2) = \\log_4(x + 10)$.
 $$3x + 2 = x + 10$$
 $$2x = 8$$
 $$x = 4$$
 
-Verification: $\\log_4(3(4) + 2) = \\log_4(14)$ and $\\log_4(4 + 10) = \\log_4(14)$. Both arguments are positive, and the equation holds.
+Verification: $\\log_4(3(4) + 2) = \\log_4(14)$ and $\\log_4(4 + 10) = \\log_4(14)$. Both arguments are positive, and the equation holds.]@
 
-Example: Solve $\\ln(x^2) = \\ln(9)$.
+@academic[example:Example
+Solve $\\ln(x^2) = \\ln(9)$.
 $$x^2 = 9$$
 $$x = \\pm 3$$
 
-Check both: $\\ln((-3)^2) = \\ln(9)$ works, and $\\ln((3)^2) = \\ln(9)$ works. Both solutions are valid.`,
+Check both: $\\ln((-3)^2) = \\ln(9)$ works, and $\\ln((3)^2) = \\ln(9)$ works. Both solutions are valid.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -229,7 +235,8 @@ Check both: $\\ln((-3)^2) = \\ln(9)$ works, and $\\ln((3)^2) = \\ln(9)$ works. B
     title: `Combining Logarithms`,
     content: `When multiple logarithms appear, use the [rules](!/algebra/logarithms/rules) to condense them into a single logarithm, then apply previous techniques.
 
-Example: Solve $\\log_2(x) + \\log_2(x - 2) = 3$.
+@academic[example:Example
+Solve $\\log_2(x) + \\log_2(x - 2) = 3$.
 
 Condense using the product rule:
 $$\\log_2(x(x - 2)) = 3$$
@@ -243,7 +250,7 @@ $$x = 4 \\text{ or } x = -2$$
 
 Check domain: $x = 4$ gives $\\log_2(4) + \\log_2(2)$, both defined. $x = -2$ gives $\\log_2(-2)$, undefined. Reject $x = -2$.
 
-Solution: $x = 4$.`,
+Solution: $x = 4$.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -254,18 +261,24 @@ Solution: $x = 4$.`,
 
 For $\\log_a(f(x))$ to be defined, $f(x) > 0$.
 
-Example: In $\\log_3(x - 5) + \\log_3(x + 1) = 2$, the restrictions are:
+@academic[example:Example
+In $\\log_3(x - 5) + \\log_3(x + 1) = 2$, the restrictions are:
 $$x - 5 > 0 \\implies x > 5$$
 $$x + 1 > 0 \\implies x > -1$$
 
-The intersection is $x > 5$. Any solution must satisfy $x > 5$.
+The intersection is $x > 5$. Any solution must satisfy $x > 5$.]@
 
 Solving:
-$$\\log_3((x-5)(x+1)) = 2$$
-$$(x-5)(x+1) = 9$$
-$$x^2 - 4x - 5 = 9$$
-$$x^2 - 4x - 14 = 0$$
-$$x = \\frac{4 \\pm \\sqrt{16 + 56}}{2} = \\frac{4 \\pm \\sqrt{72}}{2} = 2 \\pm 3\\sqrt{2}$$
+@academic[formula_callout:Domain Restrictions
+$$\\log_3((x-5)(x+1)) = 2$$]@
+@academic[formula_callout:Domain Restrictions
+$$(x-5)(x+1) = 9$$]@
+@academic[formula_callout:Domain Restrictions
+$$x^2 - 4x - 5 = 9$$]@
+@academic[formula_callout:Domain Restrictions
+$$x^2 - 4x - 14 = 0$$]@
+@academic[formula_callout:Domain Restrictions
+$$x = \\frac{4 \\pm \\sqrt{16 + 56}}{2} = \\frac{4 \\pm \\sqrt{72}}{2} = 2 \\pm 3\\sqrt{2}$$]@
 
 Since $3\\sqrt{2} \\approx 4.24$, we have $x \\approx 6.24$ or $x \\approx -2.24$. Only $x = 2 + 3\\sqrt{2}$ satisfies $x > 5$.`,
     before: ``,
@@ -276,7 +289,8 @@ Since $3\\sqrt{2} \\approx 4.24$, we have $x \\approx 6.24$ or $x \\approx -2.24
     title: `Extraneous Solutions`,
     content: `Extraneous solutions arise when algebraic manipulation produces values that violate the original equation's domain. Always substitute back into the original equation.
 
-Example: Solve $\\log(x) + \\log(x - 3) = 1$.
+@academic[example:Example
+Solve $\\log(x) + \\log(x - 3) = 1$.
 
 $$\\log(x(x-3)) = 1$$
 $$x(x-3) = 10$$
@@ -286,7 +300,7 @@ $$x = 5 \\text{ or } x = -2$$
 
 Check $x = 5$: $\\log(5) + \\log(2)$ — both defined, sum equals $\\log(10) = 1$. Valid.
 
-Check $x = -2$: $\\log(-2)$ — undefined. Extraneous.
+Check $x = -2$: $\\log(-2)$ — undefined. Extraneous.]@
 
 The squaring, factoring, or combining steps do not "create" these solutions — they were always algebraic solutions to the transformed equation. The domain restrictions eliminate them.
 
@@ -299,7 +313,8 @@ The same discipline applies across every equation that combines logarithms. The 
     title: `Equations Requiring Substitution`,
     content: `Some equations have a quadratic structure in the logarithm. Substitution simplifies the algebra.
 
-Example: Solve $(\\log_2(x))^2 - 5\\log_2(x) + 6 = 0$.
+@academic[example:Example
+Solve $(\\log_2(x))^2 - 5\\log_2(x) + 6 = 0$.
 
 Let $u = \\log_2(x)$:
 $$u^2 - 5u + 6 = 0$$
@@ -310,9 +325,10 @@ Back-substitute:
 $$\\log_2(x) = 2 \\implies x = 4$$
 $$\\log_2(x) = 3 \\implies x = 8$$
 
-Both satisfy $x > 0$. Solutions: $x = 4$ and $x = 8$.
+Both satisfy $x > 0$. Solutions: $x = 4$ and $x = 8$.]@
 
-Example: Solve $\\ln(x) + \\frac{6}{\\ln(x)} = 5$.
+@academic[example:Example
+Solve $\\ln(x) + \\frac{6}{\\ln(x)} = 5$.
 
 Let $u = \\ln(x)$:
 $$u + \\frac{6}{u} = 5$$
@@ -320,7 +336,7 @@ $$u^2 + 6 = 5u$$
 $$u^2 - 5u + 6 = 0$$
 $$(u-2)(u-3) = 0$$
 
-Back-substitute: $x = e^2$ or $x = e^3$.`,
+Back-substitute: $x = e^2$ or $x = e^3$.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -329,22 +345,24 @@ Back-substitute: $x = e^2$ or $x = e^3$.`,
     title: `Solving Exponential Equations via Logarithms`,
     content: `When an exponential equation cannot be solved by matching bases, take the logarithm of both sides.
 
-Example: Solve $3^x = 7$.
+@academic[example:Example
+Solve $3^x = 7$.
 
 No integer power of $3$ equals $7$. Take logarithms:
 $$\\log(3^x) = \\log(7)$$
 $$x \\cdot \\log(3) = \\log(7)$$
-$$x = \\frac{\\log(7)}{\\log(3)} \\approx \\frac{0.845}{0.477} \\approx 1.771$$
+$$x = \\frac{\\log(7)}{\\log(3)} \\approx \\frac{0.845}{0.477} \\approx 1.771$$]@
 
 Either $\\log$ or $\\ln$ works — the ratio is identical.
 
-Example: Solve $5^{2x+1} = 12$.
+@academic[example:Example
+Solve $5^{2x+1} = 12$.
 
 $$\\ln(5^{2x+1}) = \\ln(12)$$
 $$(2x+1)\\ln(5) = \\ln(12)$$
 $$2x + 1 = \\frac{\\ln(12)}{\\ln(5)}$$
 $$2x = \\frac{\\ln(12)}{\\ln(5)} - 1$$
-$$x = \\frac{1}{2}\\left(\\frac{\\ln(12)}{\\ln(5)} - 1\\right) \\approx 0.271$$
+$$x = \\frac{1}{2}\\left(\\frac{\\ln(12)}{\\ln(5)} - 1\\right) \\approx 0.271$$]@
 
 To evaluate the final logarithm numerically, use the [log calculator](!/calculators/log-calculator).`,
     before: ``,
@@ -355,7 +373,8 @@ To evaluate the final logarithm numerically, use the [log calculator](!/calculat
     title: `Exponentials on Both Sides`,
     content: `When exponential expressions with different bases appear on both sides, logarithms bring down both exponents.
 
-Example: Solve $2^{x+3} = 5^{x-1}$.
+@academic[example:Example
+Solve $2^{x+3} = 5^{x-1}$.
 
 Take logarithms:
 $$\\ln(2^{x+3}) = \\ln(5^{x-1})$$
@@ -369,7 +388,7 @@ $$x\\ln(2) - x\\ln(5) = -\\ln(5) - 3\\ln(2)$$
 $$x(\\ln(2) - \\ln(5)) = -\\ln(5) - 3\\ln(2)$$
 $$x = \\frac{-\\ln(5) - 3\\ln(2)}{\\ln(2) - \\ln(5)} = \\frac{\\ln(5) + 3\\ln(2)}{\\ln(5) - \\ln(2)}$$
 
-Numerically: $x = \\frac{1.609 + 2.079}{1.609 - 0.693} = \\frac{3.688}{0.916} \\approx 4.026$.`,
+Numerically: $x = \\frac{1.609 + 2.079}{1.609 - 0.693} = \\frac{3.688}{0.916} \\approx 4.026$.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -379,7 +398,8 @@ Numerically: $x = \\frac{1.609 + 2.079}{1.609 - 0.693} = \\frac{3.688}{0.916} \\
     content: `When taking logarithms to solve exponential equations, either base produces the same answer.
 
 For $3^x = 7$:
-$$x = \\frac{\\log(7)}{\\log(3)} = \\frac{\\ln(7)}{\\ln(3)} = \\log_3(7)$$
+@academic[formula_callout:Choosing Common or Natural Logarithm
+$$x = \\frac{\\log(7)}{\\log(3)} = \\frac{\\ln(7)}{\\ln(3)} = \\log_3(7)$$]@
 
 All three expressions are equal by the change of base formula.
 

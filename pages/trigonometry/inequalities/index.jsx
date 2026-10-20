@@ -1274,7 +1274,8 @@ The asymptotes must always be excluded from the solution, regardless of whether 
     title: `Compound Inequalities`,
     content: `A compound trigonometric inequality imposes two simultaneous bounds. For example:
 
-$$\\frac{1}{2} < \\sin(x) \\leq \\frac{\\sqrt{3}}{2}$$
+@academic[formula_callout:Compound Inequalities
+$$\\frac{1}{2} < \\sin(x) \\leq \\frac{\\sqrt{3}}{2}$$]@
 
 This requires $\\sin(x) > \\frac{1}{2}$ and $\\sin(x) \\leq \\frac{\\sqrt{3}}{2}$ simultaneously.
 
@@ -1288,7 +1289,8 @@ $\\sin(x) \\leq \\frac{\\sqrt{3}}{2}$ on $[0, 2\\pi)$: $x \\in \\left[0, \\frac{
 
 The intersection is the set of $x$ values that satisfy both conditions:
 
-$$x \\in \\left(\\frac{\\pi}{6}, \\frac{\\pi}{3}\\right] \\cup \\left[\\frac{2\\pi}{3}, \\frac{5\\pi}{6}\\right)$$
+@academic[formula_callout:Compound Inequalities
+$$x \\in \\left(\\frac{\\pi}{6}, \\frac{\\pi}{3}\\right] \\cup \\left[\\frac{2\\pi}{3}, \\frac{5\\pi}{6}\\right)$$]@
 
 Graphically, this corresponds to the region where the sine curve lies strictly above $y = \\frac{1}{2}$ and at or below $y = \\frac{\\sqrt{3}}{2}$ — the band between the two horizontal lines, with appropriate endpoint inclusion.
 
@@ -1303,15 +1305,18 @@ obj7: {
 
 **Step 1: Isolate the trigonometric expression.** Rearrange to place the function on one side:
 
-$$2\\sin(3x) > 1 \\quad \\Rightarrow \\quad \\sin(3x) > \\frac{1}{2}$$
+@academic[formula_callout:Inequalities Involving Transformed Functions
+$$2\\sin(3x) > 1 \\quad \\Rightarrow \\quad \\sin(3x) > \\frac{1}{2}$$]@
 
 **Step 2: Solve for the inner argument.** Let $u = 3x$. The inequality $\\sin(u) > \\frac{1}{2}$ has the solution — an interval whose endpoints carry the integer parameter of the [general-solution notation](!/trigonometry/equations#notation):
 
-$$u \\in \\left(\\frac{\\pi}{6} + 2n\\pi, \\quad \\frac{5\\pi}{6} + 2n\\pi\\right)$$
+@academic[formula_callout:Inequalities Involving Transformed Functions
+$$u \\in \\left(\\frac{\\pi}{6} + 2n\\pi, \\quad \\frac{5\\pi}{6} + 2n\\pi\\right)$$]@
 
 **Step 3: Recover the variable.** Divide by 3:
 
-$$x \\in \\left(\\frac{\\pi}{18} + \\frac{2n\\pi}{3}, \\quad \\frac{5\\pi}{18} + \\frac{2n\\pi}{3}\\right)$$
+@academic[formula_callout:Inequalities Involving Transformed Functions
+$$x \\in \\left(\\frac{\\pi}{18} + \\frac{2n\\pi}{3}, \\quad \\frac{5\\pi}{18} + \\frac{2n\\pi}{3}\\right)$$]@
 
 **Step 4: Restrict to the target interval.** On $[0, 2\\pi)$, substitute $n = 0, 1, 2$ (since the period of $\\sin(3x)$ is $\\frac{2\\pi}{3}$, three periods fit within $[0, 2\\pi)$):
 

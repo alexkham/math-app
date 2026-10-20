@@ -3626,23 +3626,28 @@ Each row operation is left-multiplication by an elementary matrix. If the sequen
 
 ## Worked Example
 
-$$A = \\begin{pmatrix} 1 & 2 & 1 \\\\ 2 & 5 & 3 \\\\ 1 & 3 & 3 \\end{pmatrix}$$
+@academic[formula_callout:Computing the Inverse by Row Reduction
+$$A = \\begin{pmatrix} 1 & 2 & 1 \\\\ 2 & 5 & 3 \\\\ 1 & 3 & 3 \\end{pmatrix}$$]@
 
 Form $[A \\mid I]$ and reduce. Subtract $2$ times row $1$ from row $2$, and subtract row $1$ from row $3$:
 
-$$\\begin{pmatrix} 1 & 2 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -2 & 1 & 0 \\\\ 0 & 1 & 2 & -1 & 0 & 1 \\end{pmatrix}$$
+@academic[formula_callout:Computing the Inverse by Row Reduction
+$$\\begin{pmatrix} 1 & 2 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -2 & 1 & 0 \\\\ 0 & 1 & 2 & -1 & 0 & 1 \\end{pmatrix}$$]@
 
 Subtract row $2$ from row $3$:
 
-$$\\begin{pmatrix} 1 & 2 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -2 & 1 & 0 \\\\ 0 & 0 & 1 & 1 & -1 & 1 \\end{pmatrix}$$
+@academic[formula_callout:Computing the Inverse by Row Reduction
+$$\\begin{pmatrix} 1 & 2 & 1 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -2 & 1 & 0 \\\\ 0 & 0 & 1 & 1 & -1 & 1 \\end{pmatrix}$$]@
 
 Subtract row $3$ from row $2$, and subtract row $3$ from row $1$:
 
-$$\\begin{pmatrix} 1 & 2 & 0 & 0 & 1 & -1 \\\\ 0 & 1 & 0 & -3 & 2 & -1 \\\\ 0 & 0 & 1 & 1 & -1 & 1 \\end{pmatrix}$$
+@academic[formula_callout:Computing the Inverse by Row Reduction
+$$\\begin{pmatrix} 1 & 2 & 0 & 0 & 1 & -1 \\\\ 0 & 1 & 0 & -3 & 2 & -1 \\\\ 0 & 0 & 1 & 1 & -1 & 1 \\end{pmatrix}$$]@
 
 Subtract $2$ times row $2$ from row $1$:
 
-$$\\begin{pmatrix} 1 & 0 & 0 & 6 & -3 & 1 \\\\ 0 & 1 & 0 & -3 & 2 & -1 \\\\ 0 & 0 & 1 & 1 & -1 & 1 \\end{pmatrix}$$
+@academic[formula_callout:Computing the Inverse by Row Reduction
+$$\\begin{pmatrix} 1 & 0 & 0 & 6 & -3 & 1 \\\\ 0 & 1 & 0 & -3 & 2 & -1 \\\\ 0 & 0 & 1 & 1 & -1 & 1 \\end{pmatrix}$$]@
 
 So $A^{-1} = \\begin{pmatrix} 6 & -3 & 1 \\\\ -3 & 2 & -1 \\\\ 1 & -1 & 1 \\end{pmatrix}$.
 

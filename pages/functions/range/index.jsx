@@ -1192,20 +1192,24 @@ A function is onto (or surjective) when every element of the codomain is actuall
 
 For $f(x) = 2x + 5$, write $y = 2x + 5$ and solve:
 
-$$x = \\frac{y - 5}{2}$$
+@academic[formula_callout:Finding Range Algebraically
+$$x = \\frac{y - 5}{2}$$]@
 
 This produces a real $x$ for every real $y$. The range is $(-\\infty, \\infty)$.
 
 For $f(x) = x^2$, write $y = x^2$ and solve:
 
-$$x = \\pm\\sqrt{y}$$
+@academic[formula_callout:Finding Range Algebraically
+$$x = \\pm\\sqrt{y}$$]@
 
 This produces real solutions only when $y \\geq 0$. The range is $[0, \\infty)$.
 
 For $f(x) = \\dfrac{1}{x - 3}$, write $y = \\dfrac{1}{x - 3}$ and solve:
 
-$$x - 3 = \\frac{1}{y}$$
-$$x = 3 + \\frac{1}{y}$$
+@academic[formula_callout:Finding Range Algebraically
+$$x - 3 = \\frac{1}{y}$$]@
+@academic[formula_callout:Finding Range Algebraically
+$$x = 3 + \\frac{1}{y}$$]@
 
 This requires $y \\neq 0$. The range is $(-\\infty, 0) \\cup (0, \\infty)$.
 

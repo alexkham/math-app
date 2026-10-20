@@ -3516,7 +3516,8 @@ The four subspaces are not independent of each other. They pair off into [orthog
     title: `The Column Space`,
     content: `The column space of $A$ is the [span](!/linear-algebra/vector-spaces/span) of the columns of $A$:
 
-$$\\text{Col}(A) = \\{A\\mathbf{x} : \\mathbf{x} \\in \\mathbb{R}^n\\} = \\text{Span}\\{\\mathbf{a}_1, \\mathbf{a}_2, \\dots, \\mathbf{a}_n\\}$$
+@academic[formula_callout:The Column Space
+$$\\text{Col}(A) = \\{A\\mathbf{x} : \\mathbf{x} \\in \\mathbb{R}^n\\} = \\text{Span}\\{\\mathbf{a}_1, \\mathbf{a}_2, \\dots, \\mathbf{a}_n\\}$$]@
 
 It is the set of all possible outputs of the [linear transformation](!/linear-algebra/transformations) $\\mathbf{x} \\mapsto A\\mathbf{x}$, and it lives in $\\mathbb{R}^m$. Its dimension is $r = \\text{rank}(A)$.
 
@@ -3526,11 +3527,13 @@ To find a [basis](!/linear-algebra/vector-spaces) for the column space, row redu
 
 ## Worked Example
 
-$$A = \\begin{pmatrix} 1 & 3 & 2 & -1 \\\\ 2 & 6 & 5 & 0 \\\\ -1 & -3 & 0 & 3 \\end{pmatrix}$$
+@academic[formula_callout:The Column Space
+$$A = \\begin{pmatrix} 1 & 3 & 2 & -1 \\\\ 2 & 6 & 5 & 0 \\\\ -1 & -3 & 0 & 3 \\end{pmatrix}$$]@
 
 Row reduction gives pivots in columns $1$ and $3$. The column space basis consists of the first and third columns of the original $A$:
 
-$$\\left\\{\\begin{pmatrix} 1 \\\\ 2 \\\\ -1 \\end{pmatrix}, \\begin{pmatrix} 2 \\\\ 5 \\\\ 0 \\end{pmatrix}\\right\\}$$
+@academic[formula_callout:The Column Space
+$$\\left\\{\\begin{pmatrix} 1 \\\\ 2 \\\\ -1 \\end{pmatrix}, \\begin{pmatrix} 2 \\\\ 5 \\\\ 0 \\end{pmatrix}\\right\\}$$]@
 
 The column space is a two-dimensional subspace (a plane through the origin) in $\\mathbb{R}^3$. The rank is $2$.`,
     before: ``,
@@ -3541,7 +3544,8 @@ The column space is a two-dimensional subspace (a plane through the origin) in $
     title: `The Row Space`,
     content: `The row space of $A$ is the span of the rows, viewed as vectors in $\\mathbb{R}^n$:
 
-$$\\text{Row}(A) = \\text{Col}(A^T)$$
+@academic[formula_callout:The Row Space
+$$\\text{Row}(A) = \\text{Col}(A^T)$$]@
 
 It lives in $\\mathbb{R}^n$ and has dimension $r$ — the same as the column space, despite the two subspaces living in different ambient spaces.
 
@@ -3560,7 +3564,8 @@ A key fact that distinguishes the row space from the column space: row reduction
     title: `The Null Space`,
     content: `The null space of $A$ is the set of all vectors that $A$ maps to zero:
 
-$$\\text{Null}(A) = \\{\\mathbf{x} \\in \\mathbb{R}^n : A\\mathbf{x} = \\mathbf{0}\\}$$
+@academic[formula_callout:The Null Space
+$$\\text{Null}(A) = \\{\\mathbf{x} \\in \\mathbb{R}^n : A\\mathbf{x} = \\mathbf{0}\\}$$]@
 
 It lives in $\\mathbb{R}^n$ and has dimension $n - r$, where $r$ is the rank. This dimension is the nullity, and the identity $r + (n - r) = n$ is the [rank-nullity theorem](!/linear-algebra/matrix/rank).
 
@@ -3579,7 +3584,8 @@ The $3 \\times 4$ matrix has rank $2$, so the null space has dimension $4 - 2 = 
     title: `The Left Null Space`,
     content: `The left null space is the null space of the [transpose](!/linear-algebra/matrix/operations):
 
-$$\\text{Null}(A^T) = \\{\\mathbf{y} \\in \\mathbb{R}^m : A^T\\mathbf{y} = \\mathbf{0}\\}$$
+@academic[formula_callout:The Left Null Space
+$$\\text{Null}(A^T) = \\{\\mathbf{y} \\in \\mathbb{R}^m : A^T\\mathbf{y} = \\mathbf{0}\\}$$]@
 
 Equivalently, it consists of all vectors $\\mathbf{y}$ satisfying $\\mathbf{y}^T A = \\mathbf{0}^T$ — hence the name "left" null space, since $\\mathbf{y}$ multiplies $A$ from the left.
 
@@ -3609,11 +3615,13 @@ $$\\begin{aligned} \\dim(\\text{Col}\\,A) &= r & \\dim(\\text{Row}\\,A) &= r \\\
 
 In the domain $\\mathbb{R}^n$:
 
-$$\\dim(\\text{Row}(A)) + \\dim(\\text{Null}(A)) = r + (n - r) = n$$
+@academic[formula_callout:Dimension Accounting
+$$\\dim(\\text{Row}(A)) + \\dim(\\text{Null}(A)) = r + (n - r) = n$$]@
 
 In the codomain $\\mathbb{R}^m$:
 
-$$\\dim(\\text{Col}(A)) + \\dim(\\text{Null}(A^T)) = r + (m - r) = m$$
+@academic[formula_callout:Dimension Accounting
+$$\\dim(\\text{Col}(A)) + \\dim(\\text{Null}(A^T)) = r + (m - r) = m$$]@
 
 The first equation is the rank-nullity theorem. The second is its transpose analogue. Together they say that the four subspaces account for every dimension of both the domain and the codomain — nothing is missing and nothing is double-counted.
 

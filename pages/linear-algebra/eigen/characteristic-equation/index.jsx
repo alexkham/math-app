@@ -1257,7 +1257,8 @@ The eigenvalues are precisely the roots of $p(\\lambda) = 0$. Every root is an e
     title: `Computing the Characteristic Polynomial: 2×2`,
     content: `For $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, the characteristic polynomial is
 
-$$p(\\lambda) = \\det\\begin{pmatrix} a - \\lambda & b \\\\ c & d - \\lambda \\end{pmatrix} = (a - \\lambda)(d - \\lambda) - bc = \\lambda^2 - (a + d)\\lambda + (ad - bc)$$
+@academic[formula_callout:Computing the Characteristic Polynomial: 2×2
+$$p(\\lambda) = \\det\\begin{pmatrix} a - \\lambda & b \\\\ c & d - \\lambda \\end{pmatrix} = (a - \\lambda)(d - \\lambda) - bc = \\lambda^2 - (a + d)\\lambda + (ad - bc)$$]@
 
 Rewritten in terms of trace and determinant:
 
@@ -1266,13 +1267,14 @@ Rewritten in terms of trace and determinant:
 
 The eigenvalues follow from the quadratic formula:
 
-$$\\lambda = \\frac{\\text{tr}(A) \\pm \\sqrt{\\text{tr}(A)^2 - 4\\det(A)}}{2}$$
+@academic[formula_callout:Computing the Characteristic Polynomial: 2×2
+$$\\lambda = \\frac{\\text{tr}(A) \\pm \\sqrt{\\text{tr}(A)^2 - 4\\det(A)}}{2}$$]@
 
 The discriminant $\\Delta = \\text{tr}(A)^2 - 4\\det(A)$ classifies the eigenvalue type. When $\\Delta > 0$, there are two distinct real eigenvalues. When $\\Delta = 0$, there is one repeated real eigenvalue. When $\\Delta < 0$, the eigenvalues are a [complex](!/linear-algebra/eigen/complex) conjugate pair.
 
-## Worked Example
+@academic[example:Worked Example
 
-For $A = \\begin{pmatrix} 5 & 2 \\\\ 3 & 4 \\end{pmatrix}$: $\\text{tr}(A) = 9$, $\\det(A) = 14$, $\\Delta = 81 - 56 = 25$. The eigenvalues are $\\lambda = \\frac{9 \\pm 5}{2}$, giving $\\lambda_1 = 7$ and $\\lambda_2 = 2$.`,
+For $A = \\begin{pmatrix} 5 & 2 \\\\ 3 & 4 \\end{pmatrix}$: $\\text{tr}(A) = 9$, $\\det(A) = 14$, $\\Delta = 81 - 56 = 25$. The eigenvalues are $\\lambda = \\frac{9 \\pm 5}{2}$, giving $\\lambda_1 = 7$ and $\\lambda_2 = 2$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1281,7 +1283,8 @@ For $A = \\begin{pmatrix} 5 & 2 \\\\ 3 & 4 \\end{pmatrix}$: $\\text{tr}(A) = 9$,
     title: `Computing the Characteristic Polynomial: 3×3`,
     content: `For a $3 \\times 3$ matrix, expanding $\\det(A - \\lambda I)$ using [cofactor](!/linear-algebra/determinants/cofactors) expansion produces a cubic polynomial:
 
-$$p(\\lambda) = -\\lambda^3 + \\text{tr}(A)\\lambda^2 - (\\text{sum of } 2 \\times 2 \\text{ principal minors})\\lambda + \\det(A)$$
+@academic[formula_callout:Computing the Characteristic Polynomial: 3×3
+$$p(\\lambda) = -\\lambda^3 + \\text{tr}(A)\\lambda^2 - (\\text{sum of } 2 \\times 2 \\text{ principal minors})\\lambda + \\det(A)$$]@
 
 The computation is lengthier but follows the same cofactor mechanics as any $3 \\times 3$ determinant.
 
@@ -1289,7 +1292,8 @@ The computation is lengthier but follows the same cofactor mechanics as any $3 \
 
 For $A = \\begin{pmatrix} 2 & 1 & 0 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & 1 \\end{pmatrix}$, this is upper [triangular](!/linear-algebra/matrix/types), so $A - \\lambda I$ is also upper triangular with diagonal entries $2 - \\lambda$, $3 - \\lambda$, $1 - \\lambda$:
 
-$$p(\\lambda) = (2 - \\lambda)(3 - \\lambda)(1 - \\lambda)$$
+@academic[formula_callout:Computing the Characteristic Polynomial: 3×3
+$$p(\\lambda) = (2 - \\lambda)(3 - \\lambda)(1 - \\lambda)$$]@
 
 The eigenvalues are $\\lambda = 1, 2, 3$ — readable directly from the diagonal. For triangular matrices, the characteristic polynomial always factors as the product of the diagonal terms, making the eigenvalues visible by inspection.
 
@@ -1326,7 +1330,7 @@ The algebraic multiplicity is an upper bound for the geometric multiplicity: $1 
 
 Row reduce $A - \\lambda_i I$ and express the general solution in parametric form. Each free variable contributes one [basis](!/linear-algebra/vector-spaces) vector for the eigenspace $E_{\\lambda_i}$.
 
-## Worked Example
+@academic[example:Worked Example
 
 For $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$, the characteristic polynomial is $\\lambda^2 - 4\\lambda - 5 = (\\lambda - 5)(\\lambda + 1)$. Eigenvalues: $\\lambda_1 = 5$, $\\lambda_2 = -1$.
 
@@ -1334,7 +1338,7 @@ For $\\lambda_1 = 5$: $A - 5I = \\begin{pmatrix} -4 & 2 \\\\ 4 & -2 \\end{pmatri
 
 For $\\lambda_2 = -1$: $A + I = \\begin{pmatrix} 2 & 2 \\\\ 4 & 4 \\end{pmatrix}$. Row reducing: $\\begin{pmatrix} 1 & 1 \\\\ 0 & 0 \\end{pmatrix}$. Free variable $v_2 = t$, so $v_1 = -t$. Eigenvector: $\\mathbf{v}_2 = (-1, 1)^T$.
 
-Verification: $A\\mathbf{v}_1 = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix} = 5\\mathbf{v}_1$ and $A\\mathbf{v}_2 = \\begin{pmatrix} 1 \\\\ -1 \\end{pmatrix} = -1 \\cdot \\mathbf{v}_2$.`,
+Verification: $A\\mathbf{v}_1 = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix} = 5\\mathbf{v}_1$ and $A\\mathbf{v}_2 = \\begin{pmatrix} 1 \\\\ -1 \\end{pmatrix} = -1 \\cdot \\mathbf{v}_2$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1344,7 +1348,7 @@ Verification: $A\\mathbf{v}_1 = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix} = 5\\m
     content: `Every square matrix satisfies its own characteristic polynomial. If $p(\\lambda) = \\det(A - \\lambda I)$ is the characteristic polynomial, then
 
 @academic[formula_callout:cayley_hamilton|Cayley-Hamilton|$$p(A) = O$$]@
-@academic[formulas_link:/linear-algebra/formulas#cayley_hamilton]@
+@academic[formulas_link:/linear-algebra/formulas#cayley-hamilton]@
 
 where $O$ is the zero matrix and $\\lambda$ is replaced by $A$ (with constant terms multiplied by $I$).
 
@@ -1359,7 +1363,8 @@ The theorem also shows that any power $A^k$ with $k \\geq n$ can be reduced to a
     title: `Characteristic Polynomial and Similarity`,
     content: `[Similar](!/linear-algebra/transformations/basis-change) matrices have the same characteristic polynomial:
 
-$$\\det(P^{-1}AP - \\lambda I) = \\det(P^{-1}(A - \\lambda I)P) = \\det(A - \\lambda I)$$
+@academic[formula_callout:Characteristic Polynomial and Similarity
+$$\\det(P^{-1}AP - \\lambda I) = \\det(P^{-1}(A - \\lambda I)P) = \\det(A - \\lambda I)$$]@
 
 The second equality uses the [multiplicative property](!/linear-algebra/determinants/properties) of the determinant: $\\det(P^{-1})\\det(A - \\lambda I)\\det(P) = \\det(A - \\lambda I)$, since $\\det(P^{-1})\\det(P) = 1$.
 

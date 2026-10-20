@@ -751,7 +751,8 @@ export default function ComplexEigenvalues2DPage({ instructions, demos,seoData, 
    </div>
    <br/>
    <br/>
-   <div style={{transform:'scale(0.9)'}}>
+   {/* zoom, not transform: scale keeps the full layout height and leaves empty space above and below the tool */}
+   <div style={{ zoom: 0.9}}>
    <ComplexEigen explanationOverride={explanationOverride}/>
    </div>
    <br/>

@@ -298,7 +298,8 @@ obj0: {
     title: `What is a Polynomial?`,
     content: `A polynomial in the variable $x$ is an expression of the form:
 
-$$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_2x^2 + a_1x + a_0$$
+@academic[formula_callout:What is a Polynomial?
+$$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_2x^2 + a_1x + a_0$$]@
 
 The components are straightforward. The variable $x$ represents an unknown quantity. The coefficients $a_0, a_1, \\ldots, a_n$ are fixed numbers — typically real numbers, though complex coefficients appear in advanced contexts. The exponents on $x$ must be non-negative integers: $0, 1, 2, 3$, and so on.
 
@@ -388,13 +389,15 @@ Converting to standard form is mechanical. Identify the degree of each term, the
 
 For a polynomial $P(x)$, the notation $P(a)$ represents the value obtained by replacing every $x$ with $a$. If $P(x) = 2x^2 - 3x + 1$, then $P(4)$ means substituting $4$ for $x$:
 
-$$P(4) = 2(4)^2 - 3(4) + 1 = 2(16) - 12 + 1 = 32 - 12 + 1 = 21$$
+@academic[formula_callout:Evaluating Polynomials
+$$P(4) = 2(4)^2 - 3(4) + 1 = 2(16) - 12 + 1 = 32 - 12 + 1 = 21$$]@
 
 The polynomial evaluates to $21$ when $x = 4$.
 
 Negative values require careful attention to signs. For the same polynomial, $P(-2)$ gives:
 
-$$P(-2) = 2(-2)^2 - 3(-2) + 1 = 2(4) + 6 + 1 = 8 + 6 + 1 = 15$$
+@academic[formula_callout:Evaluating Polynomials
+$$P(-2) = 2(-2)^2 - 3(-2) + 1 = 2(4) + 6 + 1 = 8 + 6 + 1 = 15$$]@
 
 The squared term produces a positive result, and subtracting a negative becomes addition.
 
@@ -414,11 +417,13 @@ Evaluation also detects [roots](!/algebra/polynomials/roots). If $P(a) = 0$, the
 
 Adding polynomials means collecting like terms — terms that share the same power of $x$. The sum of $3x^2 + 2x - 1$ and $x^2 - 5x + 4$ groups the $x^2$ terms, the $x$ terms, and the constants:
 
-$$(3x^2 + 2x - 1) + (x^2 - 5x + 4) = 4x^2 - 3x + 3$$
+@academic[formula_callout:Operations on Polynomials
+$$(3x^2 + 2x - 1) + (x^2 - 5x + 4) = 4x^2 - 3x + 3$$]@
 
 Subtraction works the same way, with signs distributed across the second polynomial. Multiplying polynomials requires the distributive property — each term of one polynomial multiplies every term of the other, and the results are combined. For two binomials:
 
-$$(x + 2)(x - 3) = x^2 - 3x + 2x - 6 = x^2 - x - 6$$
+@academic[formula_callout:Operations on Polynomials
+$$(x + 2)(x - 3) = x^2 - 3x + 2x - 6 = x^2 - x - 6$$]@
 
 Division introduces more complexity. Unlike the other three operations, dividing one polynomial by another does not always yield a polynomial. When it does not divide evenly, the result includes a quotient and a remainder, much like integer division. Techniques such as long division and synthetic division handle this process systematically.
 
@@ -458,7 +463,10 @@ Roots and [factors](!/algebra/polynomials/factoring) are two faces of the same r
 
 A polynomial of degree $n$ has at most $n$ roots. A quadratic has at most two, a cubic at most three, and so on. Some roots may be repeated — the polynomial $(x - 1)^3$ has root $x = 1$ with multiplicity three. Multiplicity affects how the graph behaves at that root, whether it crosses the x-axis or merely touches it.
 
-Not all roots are real numbers. The polynomial $x^2 + 1$ has no real roots, but it has two complex roots: $x = i$ and $x = -i$. The Fundamental Theorem of Algebra guarantees that every polynomial of degree $n \\geq 1$ has exactly $n$ roots when counted with multiplicity over the complex numbers.`,
+Not all roots are real numbers. The polynomial $x^2 + 1$ has no real roots, but it has two complex roots: $x = i$ and $x = -i$.
+
+@academic[rule_theorem:Fundamental Theorem of Algebra
+The Fundamental Theorem of Algebra guarantees that every polynomial of degree $n \\geq 1$ has exactly $n$ roots when counted with multiplicity over the complex numbers.]@`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Finding Roots](!/algebra/polynomials/roots) →@`,
   link: '/algebra/polynomials/roots',

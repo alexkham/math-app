@@ -184,9 +184,9 @@ This page explores tautologies comprehensively, examining their properties, rela
     definition:{
       title:'Definition',
       content:`A **tautology** is a proposition that is always true, regardless of the truth values of its components. In [propositional logic](!/logic/propositional-logic), a tautology is a formula that evaluates to true under all possible truth assignments.
-            Example:
+            @academic[example:Example
 \t\t\t\t\t\t$P∨¬P$
-(The [law](!/logic/propositional-logic/laws) of the excluded middle: "P or not P" is always true.)
+(The [law](!/logic/propositional-logic/laws) of the excluded middle: "P or not P" is always true.)]@
 `
 
     },

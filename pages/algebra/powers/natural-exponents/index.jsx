@@ -232,7 +232,8 @@ const keyWords = [
   title: `Definition`,
   content: `For a natural number $n \\geq 1$, the expression $a^n$ means the product of $n$ copies of $a$:
 
-$$a^n = \\underbrace{a \\cdot a \\cdot a \\cdots a}_{n \\text{ times}}$$
+@academic[formula_callout:Definition
+$$a^n = \\underbrace{a \\cdot a \\cdot a \\cdots a}_{n \\text{ times}}$$]@
 
 The base $a$ can be any real number — positive, negative, or zero. The exponent $n$ counts the repetitions.
 
@@ -321,7 +322,12 @@ Parentheses determine what counts as the base. The expression $(-3)^2$ squares t
 
 The pattern generalizes to any base:
 
+@academic[formula_callout:Product Rule (Exponents)
 $$a^m \\cdot a^n = a^{m+n}$$
+/algebra/formulas#product_rule_exponents]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 Three factors of $a$ followed by four more gives seven total — the exponents add. This holds for any natural numbers $m$ and $n$ and any base $a$.
 
@@ -345,7 +351,8 @@ The bases must match for the rule to apply. The product $2^3 \\cdot 3^4$ cannot 
 
 The general rule subtracts exponents:
 
-$$\\frac{a^m}{a^n} = a^{m-n} \\qquad (m > n,\\; a \\neq 0)$$
+@academic[formula_callout:The Quotient Rule
+$$\\frac{a^m}{a^n} = a^{m-n} \\qquad (m > n,\\; a \\neq 0)$$]@
 
 Five factors in the numerator minus three in the denominator leaves two — the exponent of the result is the difference.
 
@@ -368,7 +375,12 @@ For natural exponents, the rule requires $m > n$ to keep the result within the n
 
 The general rule follows the same logic:
 
+@academic[formula_callout:Power of a Power
 $$(a^m)^n = a^{m \\cdot n}$$
+/algebra/formulas#power_of_a_power]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The outer exponent $n$ creates $n$ copies of $a^m$. The product rule then adds $m$ to itself $n$ times, producing $m \\cdot n$.
 
@@ -395,7 +407,12 @@ Care is needed with notation. The expression $a^{m^n}$ is not the same as $(a^m)
 
 The general rule:
 
+@academic[formula_callout:Power of a Product
 $$(ab)^n = a^n \\cdot b^n$$
+/algebra/formulas#power_of_a_product]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 Each factor in the product acquires the exponent independently. This extends to any number of factors: $(abc)^n = a^n b^n c^n$.
 
@@ -419,7 +436,8 @@ The rule works because multiplication is commutative and associative — the ord
 
 The general rule:
 
-$$\\left(\\frac{a}{b}\\right)^n = \\frac{a^n}{b^n} \\qquad (b \\neq 0)$$
+@academic[formula_callout:Power of a Quotient
+$$\\left(\\frac{a}{b}\\right)^n = \\frac{a^n}{b^n} \\qquad (b \\neq 0)$$]@
 
 The logic mirrors the power of a product rule. Multiplying $n$ copies of $\\frac{a}{b}$ means multiplying $n$ copies of $a$ in the numerator and $n$ copies of $b$ in the denominator. The restriction $b \\neq 0$ is inherited from the requirement that the original fraction be defined.
 

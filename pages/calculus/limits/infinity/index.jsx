@@ -14,6 +14,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -241,11 +243,13 @@ The notation distinguishes two cases:
 
 **Limits at infinity:** The input grows without bound.
 
-$$\\lim_{x \\to \\infty} f(x) \\qquad \\lim_{x \\to -\\infty} f(x)$$
+@academic[formula_callout:Two Distinct Concepts
+$$\\lim_{x \\to \\infty} f(x) \\qquad \\lim_{x \\to -\\infty} f(x)$$]@
 
 **Infinite limits:** The output grows without bound.
 
-$$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$
+@academic[formula_callout:Two Distinct Concepts
+$$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@
 
 In the first case, $x$ escapes to infinity while we track where $f(x)$ goes. In the second case, $x$ approaches a finite value $a$ while $f(x)$ escapes to infinity.
 
@@ -260,13 +264,15 @@ Both use the infinity symbol, but in opposite roles.
     content: `
 The limit
 
-$$\\lim_{x \\to \\infty} f(x) = L$$
+@academic[formula_callout:Limits at Infinity — Horizontal Behavior
+$$\\lim_{x \\to \\infty} f(x) = L$$]@
 
 means $f(x)$ approaches $L$ as $x$ increases without bound. No matter how close to $L$ you demand, sufficiently large $x$ will place $f(x)$ within that tolerance.
 
 Similarly:
 
-$$\\lim_{x \\to -\\infty} f(x) = M$$
+@academic[formula_callout:Limits at Infinity — Horizontal Behavior
+$$\\lim_{x \\to -\\infty} f(x) = M$$]@
 
 means $f(x)$ approaches $M$ as $x$ decreases without bound.
 
@@ -296,9 +302,11 @@ A function can have:
 
 For example:
 
-$$f(x) = \\frac{2x + 1}{x - 3}$$
+@academic[formula_callout:Horizontal Asymptotes
+$$f(x) = \\frac{2x + 1}{x - 3}$$]@
 
-$$\\lim_{x \\to \\infty} f(x) = 2 \\qquad \\lim_{x \\to -\\infty} f(x) = 2$$
+@academic[formula_callout:Horizontal Asymptotes
+$$\\lim_{x \\to \\infty} f(x) = 2 \\qquad \\lim_{x \\to -\\infty} f(x) = 2$$]@
 
 The line $y = 2$ is a horizontal asymptote in both directions.
 `,
@@ -311,11 +319,13 @@ The line $y = 2$ is a horizontal asymptote in both directions.
     content: `
 For rational functions, divide numerator and denominator by the highest power of $x$ in the denominator.
 
-$$\\lim_{x \\to \\infty} \\frac{3x^2 + 5x - 1}{2x^2 - 7}$$
+@academic[formula_callout:Evaluating Limits at Infinity — Rational Functions
+$$\\lim_{x \\to \\infty} \\frac{3x^2 + 5x - 1}{2x^2 - 7}$$]@
 
 Divide by $x^2$:
 
-$$= \\lim_{x \\to \\infty} \\frac{3 + \\frac{5}{x} - \\frac{1}{x^2}}{2 - \\frac{7}{x^2}} = \\frac{3 + 0 - 0}{2 - 0} = \\frac{3}{2}$$
+@academic[formula_callout:Evaluating Limits at Infinity — Rational Functions
+$$= \\lim_{x \\to \\infty} \\frac{3 + \\frac{5}{x} - \\frac{1}{x^2}}{2 - \\frac{7}{x^2}} = \\frac{3 + 0 - 0}{2 - 0} = \\frac{3}{2}$$]@
 
 Terms with $x$ in the denominator vanish as $x \\to \\infty$. Only the leading coefficients survive.
 `,
@@ -332,15 +342,18 @@ For $\\dfrac{p(x)}{q(x)}$ where $p$ has degree $m$ and $q$ has degree $n$:
 
 **Case** $m < n$**:** The limit is $0$. The denominator grows faster.
 
-$$\\lim_{x \\to \\infty} \\frac{x + 1}{x^3 - 2} = 0$$
+@academic[formula_callout:Dominant Term Analysis
+$$\\lim_{x \\to \\infty} \\frac{x + 1}{x^3 - 2} = 0$$]@
 
 **Case** $m = n$**:** The limit is the ratio of leading coefficients.
 
-$$\\lim_{x \\to \\infty} \\frac{4x^2 + x}{2x^2 + 5} = \\frac{4}{2} = 2$$
+@academic[formula_callout:Dominant Term Analysis
+$$\\lim_{x \\to \\infty} \\frac{4x^2 + x}{2x^2 + 5} = \\frac{4}{2} = 2$$]@
 
 **Case** $m > n$**:** The limit is $\\pm\\infty$. The numerator grows faster.
 
-$$\\lim_{x \\to \\infty} \\frac{x^3}{x + 1} = \\infty$$
+@academic[formula_callout:Dominant Term Analysis
+$$\\lim_{x \\to \\infty} \\frac{x^3}{x + 1} = \\infty$$]@
 `,
     before: ``,
     after: ``,
@@ -351,15 +364,26 @@ $$\\lim_{x \\to \\infty} \\frac{x^3}{x + 1} = \\infty$$
     content: `
 Different function types grow at fundamentally different rates as $x \\to \\infty$:
 
-$$\\text{logarithmic} \\ll \\text{polynomial} \\ll \\text{exponential}$$
+@academic[formula_callout:Growth Rates — The Hierarchy
+$$\\text{logarithmic} \\ll \\text{polynomial} \\ll \\text{exponential}$$]@
 
 Any exponential eventually overtakes any polynomial:
 
+@academic[formula_callout:Exponential Beats Polynomial
 $$\\lim_{x \\to \\infty} \\frac{x^n}{e^x} = 0 \\quad \\text{for any } n$$
+/calculus/formulas#exponential_beats_polynomial]@
+
+@academic[formulas_link:Browse all limit formulas
+/calculus/formulas]@
 
 Any polynomial eventually overtakes any logarithm:
 
+@academic[formula_callout:Polynomial Beats Logarithm
 $$\\lim_{x \\to \\infty} \\frac{\\ln x}{x^n} = 0 \\quad \\text{for any } n > 0$$
+/calculus/formulas#polynomial_beats_logarithm]@
+
+@academic[formulas_link:Browse all limit formulas
+/calculus/formulas]@
 
 These [special limits](!/calculus/limits/special) determine which terms dominate in mixed expressions.
 `,
@@ -372,13 +396,15 @@ These [special limits](!/calculus/limits/special) determine which terms dominate
     content: `
 The notation
 
-$$\\lim_{x \\to a} f(x) = \\infty$$
+@academic[formula_callout:Infinite Limits — Vertical Behavior
+$$\\lim_{x \\to a} f(x) = \\infty$$]@
 
 means $f(x)$ grows without bound as $x$ approaches $a$. For any large number $M$, values of $x$ sufficiently close to $a$ make $f(x) > M$.
 
 Similarly:
 
-$$\\lim_{x \\to a} f(x) = -\\infty$$
+@academic[formula_callout:Infinite Limits — Vertical Behavior
+$$\\lim_{x \\to a} f(x) = -\\infty$$]@
 
 means $f(x)$ becomes arbitrarily negative.
 
@@ -415,15 +441,18 @@ For $f(x) = \\dfrac{1}{x - 2}$, the denominator vanishes at $x = 2$. The line $x
     content: `
 To determine whether a limit is $+\\infty$ or $-\\infty$, analyze the sign of the expression near the point.
 
-$$\\lim_{x \\to 2^+} \\frac{1}{x - 2}$$
+@academic[formula_callout:Sign Analysis for Infinite Limits
+$$\\lim_{x \\to 2^+} \\frac{1}{x - 2}$$]@
 
 For $x$ slightly greater than $2$: $x - 2 > 0$ (small positive), so $\\dfrac{1}{x-2}$ is large positive.
 
-$$\\lim_{x \\to 2^+} \\frac{1}{x - 2} = +\\infty$$
+@academic[formula_callout:Sign Analysis for Infinite Limits
+$$\\lim_{x \\to 2^+} \\frac{1}{x - 2} = +\\infty$$]@
 
 For $x$ slightly less than $2$: $x - 2 < 0$ (small negative), so $\\dfrac{1}{x-2}$ is large negative.
 
-$$\\lim_{x \\to 2^-} \\frac{1}{x - 2} = -\\infty$$
+@academic[formula_callout:Sign Analysis for Infinite Limits
+$$\\lim_{x \\to 2^-} \\frac{1}{x - 2} = -\\infty$$]@
 `,
     before: ``,
     after: ``,
@@ -436,13 +465,15 @@ The [one-sided limits](!/calculus/limits/one-sided) from the left and right may 
 
 For $f(x) = \\dfrac{1}{x - 2}$:
 
-$$\\lim_{x \\to 2^-} f(x) = -\\infty \\qquad \\lim_{x \\to 2^+} f(x) = +\\infty$$
+@academic[formula_callout:One-Sided Infinite Limits
+$$\\lim_{x \\to 2^-} f(x) = -\\infty \\qquad \\lim_{x \\to 2^+} f(x) = +\\infty$$]@
 
 The two-sided limit does not exist because the sides disagree—even though both are "infinite."
 
 For $f(x) = \\dfrac{1}{(x-2)^2}$:
 
-$$\\lim_{x \\to 2^-} f(x) = +\\infty \\qquad \\lim_{x \\to 2^+} f(x) = +\\infty$$
+@academic[formula_callout:One-Sided Infinite Limits
+$$\\lim_{x \\to 2^-} f(x) = +\\infty \\qquad \\lim_{x \\to 2^+} f(x) = +\\infty$$]@
 
 Both sides agree, so we write $\\lim_{x \\to 2} f(x) = +\\infty$.
 `,
@@ -505,9 +536,11 @@ As $x \\to \\infty$, exponential growth is unbounded. As $x \\to -\\infty$, the 
 
 For $e^{-x}$, the behavior reverses:
 
-$$\\lim_{x \\to \\infty} e^{-x} = 0$$
+@academic[formula_callout:Limits of Exponentials at Infinity
+$$\\lim_{x \\to \\infty} e^{-x} = 0$$]@
 
-$$\\lim_{x \\to -\\infty} e^{-x} = \\infty$$
+@academic[formula_callout:Limits of Exponentials at Infinity
+$$\\lim_{x \\to -\\infty} e^{-x} = \\infty$$]@
 
 The horizontal asymptote $y = 0$ appears in the direction where the exponent goes to $-\\infty$.
 `,
@@ -520,11 +553,13 @@ The horizontal asymptote $y = 0$ appears in the direction where the exponent goe
     content: `
 The natural logarithm is defined only for $x > 0$. Its behavior at the boundaries:
 
-$$\\lim_{x \\to \\infty} \\ln x = \\infty$$
+@academic[formula_callout:Limits of Logarithms Toward Zero and Infinity
+$$\\lim_{x \\to \\infty} \\ln x = \\infty$$]@
 
 The logarithm grows without bound, but slowly—slower than any positive power of $x$.
 
-$$\\lim_{x \\to 0^+} \\ln x = -\\infty$$
+@academic[formula_callout:Limits of Logarithms Toward Zero and Infinity
+$$\\lim_{x \\to 0^+} \\ln x = -\\infty$$]@
 
 As $x$ approaches zero from the right, $\\ln x$ plunges to $-\\infty$. The line $x = 0$ is a vertical asymptote for $\\ln x$.
 
@@ -719,8 +754,24 @@ const schemas = {
     }),
   };
 
+  const growthRateLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Who wins as $x \\to \\infty$',
+    preface: 'Different function types grow at fundamentally different rates. Each level eventually overtakes every function on the levels below it.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'What the rank buys',
+    conclusion: 'Any exponential beats any polynomial, $\\lim_{x \\to \\infty} \\frac{x^n}{e^x} = 0$, and any polynomial beats any logarithm, $\\lim_{x \\to \\infty} \\frac{\\ln x}{x^n} = 0$ for $n > 0$.',
+    axis: { top: 'fastest', label: 'growth rate', bottom: 'slowest' },
+    levels: [
+      { id: 'exp', name: 'Exponential', sub: '$e^x$, $2^x$' },
+      { id: 'poly', name: 'Polynomial', sub: '$x^n$' },
+      { id: 'log', name: 'Logarithmic', sub: '$\\ln x$' },
+    ],
+  };
+
 return {
   props: {
+    growthRateLevels,
     demoUnits,
     sectionsContent,
     introContent,
@@ -741,7 +792,9 @@ return {
 }
    }
 
-export default function InfinityPage({seoData, sectionsContent, introContent, obj5Table, obj10Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function InfinityPage({growthRateLevels, seoData, sectionsContent, introContent, obj5Table, obj10Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -798,6 +851,14 @@ export default function InfinityPage({seoData, sectionsContent, introContent, ob
           sectionsContent.obj6.content,
           <div key={'unit-growthRace'} dangerouslySetInnerHTML={{ __html: demoUnits.growthRace }} />,
           `For x¹⁰ the crossing with eˣ comes only near x ≈ 35.8, but it does come.`,
+          <DiagramFrame
+            key={'obj6-diagram'}
+            id="growth-rate-pyramid"
+            title="Growth rates as x → ∞"
+            source="/calculus/limits/infinity"
+          >
+            <Hierarchy data={growthRateLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+          </DiagramFrame>,
         ]
     },
     {

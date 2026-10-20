@@ -801,7 +801,12 @@ Geometrically, a vector appears as a directed line segment: an arrow drawn from 
 
 Algebraically, a vector in $\\mathbb{R}^n$ is an ordered $n$-tuple of real numbers:
 
+@academic[formula_callout:Vector Component Form
 $$\\mathbf{v} = (v_1, v_2, \\ldots, v_n)$$
+/linear-algebra/formulas#vector_component_form]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Each entry $v_i$ is called a component. In $\\mathbb{R}^2$, a vector has two components and can be plotted on a coordinate plane. In $\\mathbb{R}^3$, three components place it in three-dimensional space. For $n > 3$, direct visualization is no longer possible, but the algebraic framework continues to function identically. The components of a vector encode both its magnitude and its direction numerically, linking the geometric and algebraic viewpoints into a single coherent object.`,
     before: ``,
@@ -812,17 +817,20 @@ Each entry $v_i$ is called a component. In $\\mathbb{R}^2$, a vector has two com
     title: `Notation and Representation`,
     content: `Several notational conventions exist for vectors, and the choice often depends on context. Boldface lowercase letters are standard in printed text:
 
-$$\\mathbf{v},\\quad \\mathbf{u},\\quad \\mathbf{w}$$
+@academic[formula_callout:Notation and Representation
+$$\\mathbf{v},\\quad \\mathbf{u},\\quad \\mathbf{w}$$]@
 
 In handwritten work, an arrow placed above the letter serves the same purpose: $\\vec{v}$, $\\vec{u}$, $\\vec{w}$. When a vector runs from a specific point $A$ to a specific point $B$, the notation $\\vec{AB}$ identifies both the direction and the endpoints explicitly.
 
 The components of a vector can be written as a row or as a column. Row notation lists the entries horizontally:
 
-$$\\mathbf{v} = (v_1, v_2, \\ldots, v_n)$$
+@academic[formula_callout:Notation and Representation
+$$\\mathbf{v} = (v_1, v_2, \\ldots, v_n)$$]@
 
 Column notation stacks them vertically:
 
-$$\\mathbf{v} = \\begin{pmatrix} v_1 \\\\ v_2 \\\\ \\vdots \\\\ v_n \\end{pmatrix}$$
+@academic[formula_callout:Notation and Representation
+$$\\mathbf{v} = \\begin{pmatrix} v_1 \\\\ v_2 \\\\ \\vdots \\\\ v_n \\end{pmatrix}$$]@
 
 The distinction matters when vectors interact with [matrices](!/linear-algebra/matrix): matrix multiplication requires column vectors on the right side of the product. Throughout this section, both formats appear depending on which is clearer for the situation at hand.
 
@@ -830,7 +838,8 @@ The distinction matters when vectors interact with [matrices](!/linear-algebra/m
 
 In any $\\mathbb{R}^n$, the standard basis consists of $n$ vectors, each with a $1$ in exactly one position and $0$ everywhere else. In $\\mathbb{R}^3$, these are commonly written as $\\mathbf{i}$, $\\mathbf{j}$, and $\\mathbf{k}$:
 
-$$\\mathbf{i} = (1, 0, 0), \\quad \\mathbf{j} = (0, 1, 0), \\quad \\mathbf{k} = (0, 0, 1)$$
+@academic[formula_callout:Notation and Representation
+$$\\mathbf{i} = (1, 0, 0), \\quad \\mathbf{j} = (0, 1, 0), \\quad \\mathbf{k} = (0, 0, 1)$$]@
 
 In general $\\mathbb{R}^n$, the notation $\\mathbf{e}_1, \\mathbf{e}_2, \\ldots, \\mathbf{e}_n$ is used. Any vector can be decomposed as a sum of scaled basis vectors: $\\mathbf{v} = v_1\\mathbf{e}_1 + v_2\\mathbf{e}_2 + \\cdots + v_n\\mathbf{e}_n$. This decomposition makes the components explicit and connects directly to the idea of a [linear combination](!/linear-algebra/vectors/linear-combinations).`,
     before: ``,
@@ -892,7 +901,8 @@ Scalar multiplication scales a vector by a real number. Multiplying by a positiv
     title: `Magnitude and the Norm`,
     content: `The magnitude of a vector quantifies its length as a single non-negative number. In $\\mathbb{R}^2$, this is the hypotenuse of the right triangle formed by the components. In $\\mathbb{R}^3$, the same idea extends through a second application of the Pythagorean theorem. The general formula for any $\\mathbb{R}^n$ is:
 
-$$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$
+@academic[formula_callout:Magnitude and the Norm
+$$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$]@
 
 This quantity is called the Euclidean norm, and it satisfies three fundamental properties: it is never negative, it scales predictably under scalar multiplication ($\\|c\\mathbf{v}\\| = |c|\\|\\mathbf{v}\\|$), and it obeys the triangle inequality ($\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$).
 
@@ -905,7 +915,8 @@ The norm also provides a natural notion of distance: the distance between two ve
     title: `The Dot Product`,
     content: `The [dot product](!/linear-algebra/vectors/dot-product) is the first operation in this section that does not return a vector. It takes two vectors and produces a scalar, computed by multiplying corresponding components and summing the results:
 
-$$\\mathbf{a} \\cdot \\mathbf{b} = a_1b_1 + a_2b_2 + \\cdots + a_nb_n$$
+@academic[formula_callout:The Dot Product
+$$\\mathbf{a} \\cdot \\mathbf{b} = a_1b_1 + a_2b_2 + \\cdots + a_nb_n$$]@
 
 This algebraic formula has a geometric equivalent: $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\|\\mathbf{b}\\|\\cos\\theta$, where $\\theta$ is the angle between the two vectors. The geometric form reveals what the dot product actually measures — how much two vectors align directionally. When the dot product is positive, the vectors point roughly the same way. When it is negative, they point roughly in opposite directions. When it equals zero, the vectors are orthogonal: perpendicular in the geometric sense.
 
@@ -920,7 +931,12 @@ This connection to angles makes the dot product the gateway to projection: decom
 
 The cross product is defined exclusively in $\\mathbb{R}^3$. For vectors $\\mathbf{a} = (a_1, a_2, a_3)$ and $\\mathbf{b} = (b_1, b_2, b_3)$:
 
+@academic[formula_callout:Cross Product (Component Form)
 $$\\mathbf{a} \\times \\mathbf{b} = (a_2b_3 - a_3b_2,\\ a_3b_1 - a_1b_3,\\ a_1b_2 - a_2b_1)$$
+/linear-algebra/formulas#cross_product_component_form]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The magnitude $\\|\\mathbf{a} \\times \\mathbf{b}\\| = \\|\\mathbf{a}\\|\\|\\mathbf{b}\\|\\sin\\theta$ equals the area of the parallelogram that the two vectors span. The direction is determined by the right-hand rule, which introduces the concept of orientation — a handedness to three-dimensional space that has no analogue in the dot product. Unlike most operations encountered so far, the cross product is anti-commutative: swapping the order of the inputs reverses the direction of the result.`,
     before: ``,
@@ -931,7 +947,12 @@ The magnitude $\\|\\mathbf{a} \\times \\mathbf{b}\\| = \\|\\mathbf{a}\\|\\|\\mat
     title: `Linear Combinations`,
     content: `Every operation covered so far — addition, subtraction, scalar multiplication — is a special case of a single unifying idea: the [linear combination](!/linear-algebra/vectors/linear-combinations). Given vectors $\\mathbf{v}_1, \\mathbf{v}_2, \\ldots, \\mathbf{v}_k$ and scalars $c_1, c_2, \\ldots, c_k$, the expression
 
+@academic[formula_callout:Linear Combination
 $$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$$
+/linear-algebra/formulas#linear_combination]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 is a linear combination of those vectors. Adding two vectors is the special case where $k = 2$ and both scalars equal $1$. Scalar multiplication is the case $k = 1$.
 

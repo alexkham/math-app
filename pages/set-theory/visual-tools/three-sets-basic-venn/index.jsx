@@ -1284,7 +1284,8 @@ export default function ThreeSetsBasicVennPage({ instructions, demos,relatedTool
           activeBg="#dde9f7"
 
         /> */}
-      <div style={{transform:'scale(0.85)'}}>
+      {/* zoom, not transform: scale keeps the full layout height and leaves empty space above and below the tool */}
+      <div style={{ zoom: 0.85}}>
 
        <ThreeSetBasicIdentitiesExplorer explanations={explanations}/>
 

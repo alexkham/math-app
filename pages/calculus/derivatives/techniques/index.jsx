@@ -469,7 +469,12 @@ The inverse function formula, combined with implicit differentiation, produces t
 
 For $y = \\arcsin x$: the defining equation is $\\sin y = x$ with $y \\in [-\\pi/2, \\pi/2]$. Differentiating implicitly: $\\cos y \\cdot \\frac{dy}{dx} = 1$, so $\\frac{dy}{dx} = \\frac{1}{\\cos y}$. Since $\\cos y = \\sqrt{1 - \\sin^2 y} = \\sqrt{1 - x^2}$ (positive because $y$ is in the first or fourth quadrant), the result is
 
+@academic[formula_callout:Derivative of Arcsine
 $$\\frac{d}{dx}[\\arcsin x] = \\frac{1}{\\sqrt{1 - x^2}}$$
+/calculus/formulas#derivative_of_arcsine]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/formulas]@
 
 For $y = \\arctan x$: the defining equation is $\\tan y = x$. Differentiating: $\\sec^2 y \\cdot \\frac{dy}{dx} = 1$, so $\\frac{dy}{dx} = \\frac{1}{\\sec^2 y} = \\frac{1}{1 + \\tan^2 y} = \\frac{1}{1 + x^2}$.
 

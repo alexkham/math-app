@@ -201,7 +201,8 @@ const sectionsContent = {
     title: `Definition and Standard Form`,
     content: `A quadratic inequality in one variable is any inequality that can be written as
 
-$$ax^2 + bx + c > 0$$
+@academic[formula_callout:Definition and Standard Form
+$$ax^2 + bx + c > 0$$]@
 
 (or with $<$, $\\leq$, or $\\geq$), where $a$, $b$, $c$ are real constants and $a \\neq 0$. The expression on the left is a quadratic polynomial, and the inequality asks where that polynomial takes positive or negative values.
 
@@ -279,7 +280,8 @@ No sign chart is needed in this case. The absence of real roots means no critica
 
 For the inequality $(x - 1)(x - 4) > 0$, the roots are $r_1 = 1$ and $r_2 = 4$, creating three intervals. In the interval $(-\\infty, 1)$, both factors $x - 1$ and $x - 4$ are negative, so their product is positive. In $(1, 4)$, the factor $x - 1$ is positive while $x - 4$ is negative, so the product is negative. In $(4, \\infty)$, both factors are positive, so the product is positive. The sign chart summarizes this:
 
-$$\\begin{array}{c|ccc} & x < 1 & 1 < x < 4 & x > 4 \\\\ \\hline (x-1) & - & + & + \\\\ (x-4) & - & - & + \\\\ \\hline \\text{product} & + & - & + \\end{array}$$
+@academic[formula_callout:Sign Chart Method
+$$\\begin{array}{c|ccc} & x < 1 & 1 < x < 4 & x > 4 \\\\ \\hline (x-1) & - & + & + \\\\ (x-4) & - & - & + \\\\ \\hline \\text{product} & + & - & + \\end{array}$$]@
 
 The solution to the $> 0$ inequality consists of the intervals where the product is positive: $(-\\infty, 1) \\cup (4, \\infty)$.
 

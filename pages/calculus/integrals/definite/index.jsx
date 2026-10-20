@@ -302,11 +302,13 @@ The definite integral arises as a limit of approximating sums.
 
 Partition the interval $[a, b]$ into $n$ subintervals of width $\\Delta x = (b - a)/n$. In each subinterval, choose a sample point $x_i^*$ and form the rectangle with height $f(x_i^*)$ and width $\\Delta x$. The total area of these rectangles is the Riemann sum:
 
-$$S_n = \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$
+@academic[formula_callout:The Riemann Sum Construction
+$$S_n = \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$]@
 
 As $n \\to \\infty$ and the rectangles become infinitely thin, the Riemann sum approaches the definite integral:
 
-$$\\int_a^b f(x)\\, dx = \\lim_{n \\to \\infty} \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$
+@academic[formula_callout:The Riemann Sum Construction
+$$\\int_a^b f(x)\\, dx = \\lim_{n \\to \\infty} \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$]@
 
 The choice of sample points—left endpoints, right endpoints, midpoints—affects individual Riemann sums but not the limit, provided $f$ is integrable.
 `,
@@ -370,7 +372,8 @@ Where $f(x) > 0$, the region between the curve and the $x$-axis lies above the a
 
 The integral sums these signed contributions:
 
-$$\\int_a^b f(x)\\, dx = (\\text{area above}) - (\\text{area below})$$
+@academic[formula_callout:Signed Area Interpretation
+$$\\int_a^b f(x)\\, dx = (\\text{area above}) - (\\text{area below})$$]@
 
 This means the integral can be zero even when substantial area exists—positive and negative regions may cancel. It can also be negative when the curve lies predominantly below the axis.
 
@@ -394,19 +397,35 @@ Definite integrals satisfy several fundamental properties.
 
 **Additivity over intervals:**
 
+@academic[formula_callout:Additivity Over Intervals
 $$\\int_a^b f(x)\\, dx + \\int_b^c f(x)\\, dx = \\int_a^c f(x)\\, dx$$
+/calculus/formulas#additivity_over_intervals]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/formulas]@
 
 **Reversing limits negates the integral:**
 
+@academic[formula_callout:Reversing Limits of Integration
 $$\\int_a^b f(x)\\, dx = -\\int_b^a f(x)\\, dx$$
+/calculus/formulas#reversing_limits_of_integration]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/formulas]@
 
 **Zero-width interval:**
 
+@academic[formula_callout:Zero-Width Interval
 $$\\int_a^a f(x)\\, dx = 0$$
+/calculus/formulas#zero-width_interval]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/formulas]@
 
 **Comparison:** If $f(x) \\leq g(x)$ on $[a, b]$, then
 
-$$\\int_a^b f(x)\\, dx \\leq \\int_a^b g(x)\\, dx$$
+@academic[formula_callout:Properties of Definite Integrals
+$$\\int_a^b f(x)\\, dx \\leq \\int_a^b g(x)\\, dx$$]@
 `,
     before: ``,
     after: ``,
@@ -419,11 +438,13 @@ Definite integrals respect addition and scalar multiplication.
 
 **Sum rule:**
 
-$$\\int_a^b [f(x) + g(x)]\\, dx = \\int_a^b f(x)\\, dx + \\int_a^b g(x)\\, dx$$
+@academic[formula_callout:Linearity
+$$\\int_a^b [f(x) + g(x)]\\, dx = \\int_a^b f(x)\\, dx + \\int_a^b g(x)\\, dx$$]@
 
 **Constant multiple rule:**
 
-$$\\int_a^b c \\cdot f(x)\\, dx = c \\int_a^b f(x)\\, dx$$
+@academic[formula_callout:Linearity
+$$\\int_a^b c \\cdot f(x)\\, dx = c \\int_a^b f(x)\\, dx$$]@
 
 These [rules](!/calculus/integrals/rules) allow complex integrands to be broken into simpler pieces, each integrated separately and then combined.
 `,
@@ -438,7 +459,8 @@ Direct computation via Riemann sums is tedious. The Fundamental Theorem of Calcu
 
 If $F$ is any antiderivative of $f$—meaning $F'(x) = f(x)$—then:
 
-$$\\int_a^b f(x)\\, dx = F(b) - F(a)$$
+@academic[formula_callout:Computing Definite Integrals
+$$\\int_a^b f(x)\\, dx = F(b) - F(a)$$]@
 
 This result, detailed on the [rules](!/calculus/integrals/rules) page, transforms integration from a limiting process into a two-step procedure: find an antiderivative, then evaluate at the endpoints.
 
@@ -464,7 +486,8 @@ This generalizes the familiar average of discrete values. The integral computes 
 
 Geometrically, $f_{\\text{avg}}$ is the height of a rectangle with base $[a, b]$ whose area equals the area under the curve. The Mean Value Theorem for Integrals guarantees that a continuous function actually attains this average value at some point $c$ in $(a, b)$:
 
-$$f(c) = f_{\\text{avg}}$$
+@academic[formula_callout:Average Value of a Function
+$$f(c) = f_{\\text{avg}}$$]@
 `,
     before: ``,
     after: ``,
@@ -490,7 +513,8 @@ The definite integral answers a concrete question: what is the total accumulated
 
 The notation
 
-$$\\int_a^b f(x)\\, dx$$
+@academic[formula_callout:Summary: Three Lenses on the Definite Integral
+$$\\int_a^b f(x)\\, dx$$]@
 
 specifies the integrand $f(x)$, the variable of integration $x$, and the bounds from $a$ to $b$. The result is a single number, not a function. This number represents net accumulation: the sum of infinitely many infinitesimal contributions $f(x)\\, dx$ as $x$ traverses the interval.
 

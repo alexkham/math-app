@@ -1352,7 +1352,8 @@ const sectionsContent = {
 
 These conditions create a staircase pattern that descends from upper-left to lower-right:
 
-$$\\begin{pmatrix} \\boxed{2} & 3 & -1 & 4 & 7 \\\\ 0 & \\boxed{1} & 5 & 0 & 2 \\\\ 0 & 0 & 0 & \\boxed{4} & -3 \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$
+@academic[formula_callout:Row Echelon Form
+$$\\begin{pmatrix} \\boxed{2} & 3 & -1 & 4 & 7 \\\\ 0 & \\boxed{1} & 5 & 0 & 2 \\\\ 0 & 0 & 0 & \\boxed{4} & -3 \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$]@
 
 The boxed entries are pivots. Each sits to the right of and below the previous one, with zeros filling in below and to the left. The bottom row is all zeros. In general schematic form, with $\\boxed{\\ast}$ marking pivots and $\\bullet$ any entry:
 
@@ -1409,7 +1410,8 @@ REF is not unique. Different sequences of row operations applied to the same mat
 
 Applying these conditions to the previous example:
 
-$$\\begin{pmatrix} 1 & 0 & -16 & 0 & \\frac{29}{4} \\\\ 0 & 1 & 5 & 0 & 2 \\\\ 0 & 0 & 0 & 1 & -\\frac{3}{4} \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$
+@academic[formula_callout:Reduced Row Echelon Form
+$$\\begin{pmatrix} 1 & 0 & -16 & 0 & \\frac{29}{4} \\\\ 0 & 1 & 5 & 0 & 2 \\\\ 0 & 0 & 0 & 1 & -\\frac{3}{4} \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$]@
 
 Every pivot is $1$, and every other entry in a pivot column is $0$. The pivot columns are clean unit vectors within the matrix. The non-pivot columns (columns $3$ and $5$ in this example) can contain anything. In general schematic form:
 
@@ -1457,7 +1459,8 @@ For the RREF example above, columns $1$, $2$, and $4$ are pivot columns, while c
 
 ## Worked Example
 
-$$\\left(\\begin{array}{ccc|c} 1 & 3 & -2 & 5 \\\\ 0 & 1 & 4 & -1 \\\\ 0 & 0 & 1 & 2 \\end{array}\\right)$$
+@academic[formula_callout:Reading Solutions from REF
+$$\\left(\\begin{array}{ccc|c} 1 & 3 & -2 & 5 \\\\ 0 & 1 & 4 & -1 \\\\ 0 & 0 & 1 & 2 \\end{array}\\right)$$]@
 
 Row $3$: $x_3 = 2$.
 
@@ -1478,13 +1481,15 @@ Each step uses values computed in previous steps. The process requires $n$ subst
 
 The same system in RREF:
 
-$$\\left(\\begin{array}{ccc|c} 1 & 0 & 0 & 36 \\\\ 0 & 1 & 0 & -9 \\\\ 0 & 0 & 1 & 2 \\end{array}\\right)$$
+@academic[formula_callout:Reading Solutions from RREF
+$$\\left(\\begin{array}{ccc|c} 1 & 0 & 0 & 36 \\\\ 0 & 1 & 0 & -9 \\\\ 0 & 0 & 1 & 2 \\end{array}\\right)$$]@
 
 Reading directly: $x_1 = 36$, $x_2 = -9$, $x_3 = 2$.
 
 When free variables are present, RREF isolates each pivot variable in terms of the free variables:
 
-$$\\left(\\begin{array}{cccc|c} 1 & 0 & 3 & 0 & 7 \\\\ 0 & 1 & -2 & 0 & 1 \\\\ 0 & 0 & 0 & 1 & 4 \\end{array}\\right)$$
+@academic[formula_callout:Reading Solutions from RREF
+$$\\left(\\begin{array}{cccc|c} 1 & 0 & 3 & 0 & 7 \\\\ 0 & 1 & -2 & 0 & 1 \\\\ 0 & 0 & 0 & 1 & 4 \\end{array}\\right)$$]@
 
 Column $3$ is free. Reading off: $x_1 = 7 - 3x_3$, $x_2 = 1 + 2x_3$, $x_4 = 4$, and $x_3$ is free. Setting $x_3 = t$ gives the parametric solution without any backward solving.`,
     before: ``,
@@ -1497,11 +1502,13 @@ Column $3$ is free. Reading off: $x_1 = 7 - 3x_3$, $x_2 = 1 + 2x_3$, $x_4 = 4$, 
 
 For the system with RREF
 
-$$\\left(\\begin{array}{cccc|c} 1 & 2 & 0 & -1 & 5 \\\\ 0 & 0 & 1 & 3 & -2 \\end{array}\\right)$$
+@academic[formula_callout:Parametric Vector Form
+$$\\left(\\begin{array}{cccc|c} 1 & 2 & 0 & -1 & 5 \\\\ 0 & 0 & 1 & 3 & -2 \\end{array}\\right)$$]@
 
 Pivots in columns $1$ and $3$. Free variables: $x_2 = s$, $x_4 = t$. Reading off: $x_1 = 5 - 2s + t$, $x_3 = -2 - 3t$.
 
-$$\\mathbf{x} = \\begin{pmatrix} 5 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} -2 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 1 \\\\ 0 \\\\ -3 \\\\ 1 \\end{pmatrix}$$
+@academic[formula_callout:Parametric Vector Form
+$$\\mathbf{x} = \\begin{pmatrix} 5 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} -2 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 1 \\\\ 0 \\\\ -3 \\\\ 1 \\end{pmatrix}$$]@
 
 The first vector is a particular solution $\\mathbf{x}_p$. The two direction vectors form a [basis](!/linear-algebra/vector-spaces) for the null space of the coefficient matrix. The solution set is the null space translated by $\\mathbf{x}_p$ — an affine subspace of dimension $2$ in $\\mathbb{R}^4$.
 
@@ -1514,7 +1521,8 @@ For a [homogeneous](!/linear-algebra/linear-systems/homogeneous) system ($\\math
     title: `Detecting Inconsistency`,
     content: `A system is inconsistent — has no solution — if and only if the echelon form of the augmented matrix contains a row of the form
 
-$$[0 \\quad 0 \\quad \\cdots \\quad 0 \\mid d] \\qquad \\text{with } d \\neq 0$$
+@academic[formula_callout:Detecting Inconsistency
+$$[0 \\quad 0 \\quad \\cdots \\quad 0 \\mid d] \\qquad \\text{with } d \\neq 0$$]@
 
 This row represents the equation $0 = d$, which no values of the unknowns can satisfy.
 

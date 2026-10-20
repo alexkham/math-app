@@ -235,7 +235,8 @@ const sectionsContent = {
     title: `The Square Root Function`,
     content: `The parent square root function is:
 
-$$f(x) = \\sqrt{x}$$
+@academic[formula_callout:The Square Root Function
+$$f(x) = \\sqrt{x}$$]@
 
 For each non-negative input, it returns the principal square root.
 
@@ -245,7 +246,8 @@ Range: $[0, \\infty)$ — outputs are non-negative by the principal root convent
 
 Key points on the graph:
 
-$$(0, 0), \\quad (1, 1), \\quad (4, 2), \\quad (9, 3), \\quad (16, 4)$$
+@academic[formula_callout:The Square Root Function
+$$(0, 0), \\quad (1, 1), \\quad (4, 2), \\quad (9, 3), \\quad (16, 4)$$]@
 
 The graph starts at the origin and rises to the right. It increases throughout its domain but the rate of increase slows — the curve bends downward, concave down.
 
@@ -263,7 +265,8 @@ At $x = 0$, the graph has an endpoint — no values exist to the left.
 
 As $x$ increases, $\\sqrt{x}$ increases, but each additional unit of input produces less additional output. From $x = 0$ to $x = 1$, the output increases by 1. From $x = 1$ to $x = 4$, only another 1. From $x = 4$ to $x = 9$, another 1.
 
-$$\\sqrt{100} = 10, \\quad \\sqrt{10000} = 100$$
+@academic[formula_callout:Graph of the Square Root Function
+$$\\sqrt{100} = 10, \\quad \\sqrt{10000} = 100$$]@
 
 Multiplying the input by 100 only multiplies the output by 10.
 
@@ -277,7 +280,8 @@ The curve is the upper half of a parabola lying on its side. This connection bec
     title: `The Cube Root Function`,
     content: `The parent cube root function is:
 
-$$f(x) = \\sqrt[3]{x}$$
+@academic[formula_callout:The Cube Root Function
+$$f(x) = \\sqrt[3]{x}$$]@
 
 Unlike the square root, it accepts all real inputs.
 
@@ -287,7 +291,8 @@ Range: $(-\\infty, \\infty)$ — outputs span all real numbers.
 
 Key points:
 
-$$(-8, -2), \\quad (-1, -1), \\quad (0, 0), \\quad (1, 1), \\quad (8, 2)$$
+@academic[formula_callout:The Cube Root Function
+$$(-8, -2), \\quad (-1, -1), \\quad (0, 0), \\quad (1, 1), \\quad (8, 2)$$]@
 
 The graph passes through the origin and extends in both directions. Negative inputs yield negative outputs; positive inputs yield positive outputs. The function preserves sign, consistent with [properties](!/algebra/roots/properties) of odd-index radicals.
 
@@ -307,13 +312,15 @@ For $x > 0$, the curve rises but flattens as $x$ increases. For $x < 0$, it fall
 
 The function is symmetric about the origin:
 
-$$f(-x) = -f(x)$$
+@academic[formula_callout:Graph of the Cube Root Function
+$$f(-x) = -f(x)$$]@
 
 This is odd symmetry. Reflecting the graph across both axes leaves it unchanged.
 
 Growth is slow. Large inputs produce relatively modest outputs:
 
-$$\\sqrt[3]{1000} = 10, \\quad \\sqrt[3]{1000000} = 100$$
+@academic[formula_callout:Graph of the Cube Root Function
+$$\\sqrt[3]{1000} = 10, \\quad \\sqrt[3]{1000000} = 100$$]@
 
 Cube roots tame large numbers, compressing wide ranges into narrower ones.`,
     before: ``,
@@ -325,7 +332,8 @@ Cube roots tame large numbers, compressing wide ranges into narrower ones.`,
     title: `General Nth Root Functions`,
     content: `The pattern extends to any positive integer index:
 
-$$f(x) = \\sqrt[n]{x}$$
+@academic[formula_callout:General Nth Root Functions
+$$f(x) = \\sqrt[n]{x}$$]@
 
 For even $n$ (fourth root, sixth root, etc.):
 
@@ -357,21 +365,26 @@ All $n$th root functions are one-to-one and serve as inverses to the correspondi
     title: `Domain of Radical Functions`,
     content: `When the radicand is an expression, solve for valid inputs.
 
-$$f(x) = \\sqrt{x - 3}$$
+@academic[formula_callout:Domain of Radical Functions
+$$f(x) = \\sqrt{x - 3}$$]@
 
 The radicand $x - 3$ must be non-negative:
 
-$$x - 3 \\geq 0 \\quad \\Rightarrow \\quad x \\geq 3$$
+@academic[formula_callout:Domain of Radical Functions
+$$x - 3 \\geq 0 \\quad \\Rightarrow \\quad x \\geq 3$$]@
 
 Domain: $[3, \\infty)$.
 
-$$g(x) = \\sqrt{5 - 2x}$$
+@academic[formula_callout:Domain of Radical Functions
+$$g(x) = \\sqrt{5 - 2x}$$]@
 
-$$5 - 2x \\geq 0 \\quad \\Rightarrow \\quad x \\leq \\frac{5}{2}$$
+@academic[formula_callout:Domain of Radical Functions
+$$5 - 2x \\geq 0 \\quad \\Rightarrow \\quad x \\leq \\frac{5}{2}$$]@
 
 Domain: $(-\\infty, \\frac{5}{2}]$.
 
-$$h(x) = \\sqrt[3]{x + 4}$$
+@academic[formula_callout:Domain of Radical Functions
+$$h(x) = \\sqrt[3]{x + 4}$$]@
 
 Odd index — no restriction on the radicand.
 
@@ -409,7 +422,8 @@ The graph reflects horizontally. Domain becomes $(-\\infty, 0]$.
 
 Combined example:
 
-$$f(x) = 2\\sqrt{x - 1} + 3$$
+@academic[formula_callout:Transformations
+$$f(x) = 2\\sqrt{x - 1} + 3$$]@
 
 Start at $(1, 3)$, stretched vertically by factor 2, rising to the right.`,
     before: ``,
@@ -423,15 +437,19 @@ Start at $(1, 3)$, stretched vertically by factor 2, rising to the right.`,
 
 The square root function $f(x) = \\sqrt{x}$ is the inverse of $g(x) = x^2$ when $g$ is restricted to $x \\geq 0$.
 
-$$f(g(x)) = \\sqrt{x^2} = x \\quad \\text{for } x \\geq 0$$
+@academic[formula_callout:Inverse Relationship with Power Functions
+$$f(g(x)) = \\sqrt{x^2} = x \\quad \\text{for } x \\geq 0$$]@
 
-$$g(f(x)) = (\\sqrt{x})^2 = x \\quad \\text{for } x \\geq 0$$
+@academic[formula_callout:Inverse Relationship with Power Functions
+$$g(f(x)) = (\\sqrt{x})^2 = x \\quad \\text{for } x \\geq 0$$]@
 
 The cube root function $f(x) = \\sqrt[3]{x}$ is the inverse of $g(x) = x^3$ with no restriction needed.
 
-$$f(g(x)) = \\sqrt[3]{x^3} = x \\quad \\text{for all real } x$$
+@academic[formula_callout:Inverse Relationship with Power Functions
+$$f(g(x)) = \\sqrt[3]{x^3} = x \\quad \\text{for all real } x$$]@
 
-$$g(f(x)) = (\\sqrt[3]{x})^3 = x \\quad \\text{for all real } x$$
+@academic[formula_callout:Inverse Relationship with Power Functions
+$$g(f(x)) = (\\sqrt[3]{x})^3 = x \\quad \\text{for all real } x$$]@
 
 Graphically, inverse functions reflect across the line $y = x$. The parabola $y = x^2$ and the square root curve are mirror images across this diagonal.
 
@@ -445,7 +463,8 @@ The identity $\\sqrt{x^2} = |x|$ from [properties](!/algebra/roots/properties) e
     title: `Finding Inverses of Radical Functions`,
     content: `To find the inverse of a radical function, swap $x$ and $y$, then solve.
 
-$$f(x) = \\sqrt{x - 5}, \\quad x \\geq 5$$
+@academic[formula_callout:Finding Inverses of Radical Functions
+$$f(x) = \\sqrt{x - 5}, \\quad x \\geq 5$$]@
 
 Write as $y = \\sqrt{x - 5}$.
 
@@ -455,7 +474,8 @@ Solve: $x^2 = y - 5$, so $y = x^2 + 5$
 
 The inverse is $f^{-1}(x) = x^2 + 5$, with domain $x \\geq 0$ (matching the range of the original).
 
-$$g(x) = \\sqrt[3]{2x + 1}$$
+@academic[formula_callout:Finding Inverses of Radical Functions
+$$g(x) = \\sqrt[3]{2x + 1}$$]@
 
 Swap: $x = \\sqrt[3]{2y + 1}$
 
@@ -485,7 +505,8 @@ Plot additional points using the transformed function.
 
 Sketch the curve, respecting concavity — down for even index, changing at inflection for odd index.
 
-Example: $f(x) = -\\sqrt{x + 2} + 4$
+@academic[example:Example
+$f(x) = -\\sqrt{x + 2} + 4$
 
 Parent: $\\sqrt{x}$
 
@@ -497,7 +518,7 @@ Reflected over $x$-axis, so the curve descends to the right.
 
 Additional point: $x = 2$ gives $f(2) = -\\sqrt{4} + 4 = -2 + 4 = 2$
 
-The graph starts at $(-2, 4)$ and curves downward to the right.`,
+The graph starts at $(-2, 4)$ and curves downward to the right.]@`,
     before: ``,
     after: ``,
     link: '',

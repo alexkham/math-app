@@ -92,10 +92,10 @@ the **antecedent** and the **consequent** are the same-$p→p$ is always true si
 The expression is always true ([tautology](!/logic/propositional-logic/semantics/tautology)).`,
 `**Transitivity**:
 If $p→q$ and $q→r$, then $p→r$.
-Example:
+@academic[example:Example
 "If it rains, the ground gets wet." ($p→q$)
 "If the ground gets wet, the grass grows." ($q→r$)
-Conclusion: "If it rains, the grass grows." ($p→r$)`,
+Conclusion: "If it rains, the grass grows." ($p→r$)]@`,
 `**Contraposition**:
 $p→q$ is logically equivalent to $¬q→¬p$.
 This means: If "If it rains, then the ground is wet" is true, then "If the ground is not wet, then it did not rain" must also be true.

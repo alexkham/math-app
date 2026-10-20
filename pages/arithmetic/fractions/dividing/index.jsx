@@ -856,7 +856,8 @@ Zero has no reciprocal. Flipping $\\frac{0}{1}$ produces $\\frac{1}{0}$, which i
     title: `Dividing Fractions — Basic Rule`,
     content: `To divide one fraction by another, multiply the first fraction by the reciprocal of the second. For fractions $\\frac{a}{b}$ and $\\frac{c}{d}$:
 
-$$\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c} = \\frac{a \\times d}{b \\times c}$$
+@academic[formula_callout:Dividing Fractions — Basic Rule
+$$\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c} = \\frac{a \\times d}{b \\times c}$$]@
 
 For example, $\\frac{2}{3} \\div \\frac{4}{5} = \\frac{2}{3} \\times \\frac{5}{4} = \\frac{10}{12} = \\frac{5}{6}$.
 
@@ -884,7 +885,8 @@ The method works because multiplying by a reciprocal undoes multiplication. If $
     title: `Dividing Fractions by Whole Numbers`,
     content: `A whole number can be written as a fraction with denominator 1. To divide a fraction by a whole number, multiply by the reciprocal of that whole number.
 
-$$\\frac{3}{4} \\div 2 = \\frac{3}{4} \\div \\frac{2}{1} = \\frac{3}{4} \\times \\frac{1}{2} = \\frac{3}{8}$$
+@academic[formula_callout:Dividing Fractions by Whole Numbers
+$$\\frac{3}{4} \\div 2 = \\frac{3}{4} \\div \\frac{2}{1} = \\frac{3}{4} \\times \\frac{1}{2} = \\frac{3}{8}$$]@
 
 The result is smaller than the original fraction, which makes sense: dividing something into more parts yields smaller pieces.
 
@@ -898,7 +900,8 @@ Another example: $\\frac{5}{6} \\div 3 = \\frac{5}{6} \\times \\frac{1}{3} = \\f
     title: `Dividing Whole Numbers by Fractions`,
     content: `Dividing a whole number by a fraction produces a result larger than the original whole number when the fraction is less than 1. This reflects the question: how many small pieces fit into the whole?
 
-$$6 \\div \\frac{1}{2} = 6 \\times \\frac{2}{1} = 12$$
+@academic[formula_callout:Dividing Whole Numbers by Fractions
+$$6 \\div \\frac{1}{2} = 6 \\times \\frac{2}{1} = 12$$]@
 
 Six wholes contain twelve halves. The reciprocal method captures this directly.
 
@@ -914,7 +917,8 @@ Another example: $4 \\div \\frac{2}{3} = 4 \\times \\frac{3}{2} = \\frac{12}{2} 
 
 To compute $3\\frac{1}{2} \\div 1\\frac{3}{4}$, first convert both values. The mixed number $3\\frac{1}{2}$ becomes $\\frac{7}{2}$ and $1\\frac{3}{4}$ becomes $\\frac{7}{4}$.
 
-$$\\frac{7}{2} \\div \\frac{7}{4} = \\frac{7}{2} \\times \\frac{4}{7} = \\frac{28}{14} = 2$$
+@academic[formula_callout:Dividing Mixed Numbers
+$$\\frac{7}{2} \\div \\frac{7}{4} = \\frac{7}{2} \\times \\frac{4}{7} = \\frac{28}{14} = 2$$]@
 
 Cross-canceling before multiplying simplifies the work. The 7s cancel, leaving $\\frac{1}{2} \\times \\frac{4}{1} = 2$.
 
@@ -930,7 +934,8 @@ To verify a mixed-number division, use the [fraction calculator](!/calculators/f
 
 For $\\frac{8}{9} \\div \\frac{4}{3}$, rewrite as $\\frac{8}{9} \\times \\frac{3}{4}$. The 8 and 4 share a factor of 4, and the 9 and 3 share a factor of 3:
 
-$$\\frac{8}{9} \\times \\frac{3}{4} = \\frac{2}{3} \\times \\frac{1}{1} = \\frac{2}{3}$$
+@academic[formula_callout:Simplifying and Cross-Canceling
+$$\\frac{8}{9} \\times \\frac{3}{4} = \\frac{2}{3} \\times \\frac{1}{1} = \\frac{2}{3}$$]@
 
 Without cross-canceling, the product $\\frac{24}{36}$ requires reduction using the [GCD](!/arithmetic/divisibility/gcd). Canceling first avoids larger numbers entirely.`,
     before: ``,

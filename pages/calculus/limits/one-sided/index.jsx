@@ -2303,7 +2303,8 @@ const sectionsContent = {
     content: `
 The left-hand limit uses a minus superscript:
 
-$$\\lim_{x \\to a^-} f(x)$$
+@academic[formula_callout:Left-Hand Limits
+$$\\lim_{x \\to a^-} f(x)$$]@
 
 This notation means $x$ approaches $a$ through values strictly less than $a$. You move along the $x$-axis from the left, getting closer to $a$ but never reaching or passing it.
 
@@ -2320,7 +2321,8 @@ The left-hand limit asks: as $x$ increases toward $a$, what value does $f(x)$ ap
     content: `
 The right-hand limit uses a plus superscript:
 
-$$\\lim_{x \\to a^+} f(x)$$
+@academic[formula_callout:Right-Hand Limits
+$$\\lim_{x \\to a^+} f(x)$$]@
 
 This notation means $x$ approaches $a$ through values strictly greater than $a$. You move along the $x$-axis from the right, getting closer to $a$ but never reaching or passing it.
 
@@ -2337,7 +2339,8 @@ The right-hand limit asks: as $x$ decreases toward $a$, what value does $f(x)$ a
     content: `
 The [two-sided limit](!/calculus/limits/two-sided) exists if and only if both one-sided limits exist and are equal:
 
-$$\\lim_{x \\to a} f(x) = L \\quad \\Longleftrightarrow \\quad \\lim_{x \\to a^-} f(x) = L \\;\\text{ and }\\; \\lim_{x \\to a^+} f(x) = L$$
+@academic[formula_callout:The Connection to Two-Sided Limits
+$$\\lim_{x \\to a} f(x) = L \\quad \\Longleftrightarrow \\quad \\lim_{x \\to a^-} f(x) = L \\;\\text{ and }\\; \\lim_{x \\to a^+} f(x) = L$$]@
 
 One-sided limits decompose the two-sided limit into its directional components. Checking whether a two-sided limit exists often begins with computing the one-sided limits separately.
 
@@ -2396,15 +2399,18 @@ Functions defined by different formulas on different intervals require one-sided
 
 Consider:
 
-$$f(x) = \\begin{cases} x^2 & x < 2 \\\\ 3x - 2 & x \\geq 2 \\end{cases}$$
+@academic[formula_callout:Piecewise Functions
+$$f(x) = \\begin{cases} x^2 & x < 2 \\\\ 3x - 2 & x \\geq 2 \\end{cases}$$]@
 
 At $x = 2$, the left-hand limit uses the formula $x^2$:
 
-$$\\lim_{x \\to 2^-} x^2 = 4$$
+@academic[formula_callout:Piecewise Functions
+$$\\lim_{x \\to 2^-} x^2 = 4$$]@
 
 The right-hand limit uses the formula $3x - 2$:
 
-$$\\lim_{x \\to 2^+} (3x - 2) = 4$$
+@academic[formula_callout:Piecewise Functions
+$$\\lim_{x \\to 2^+} (3x - 2) = 4$$]@
 
 Since both one-sided limits equal $4$, the two-sided limit exists and equals $4$. If the formulas had produced different values, the two-sided limit would not exist.
 `,
@@ -2419,9 +2425,11 @@ A [jump discontinuity](!/calculus/limits/continuity) occurs when both one-sided 
 
 The floor function $\\lfloor x \\rfloor$ provides a standard example. At any integer $n$:
 
-$$\\lim_{x \\to n^-} \\lfloor x \\rfloor = n - 1$$
+@academic[formula_callout:Jump Discontinuities
+$$\\lim_{x \\to n^-} \\lfloor x \\rfloor = n - 1$$]@
 
-$$\\lim_{x \\to n^+} \\lfloor x \\rfloor = n$$
+@academic[formula_callout:Jump Discontinuities
+$$\\lim_{x \\to n^+} \\lfloor x \\rfloor = n$$]@
 
 The left-hand limit gives the integer below, while the right-hand limit gives the integer itself. The function jumps by $1$ at each integer. No two-sided limit exists at these points because the one-sided limits disagree.
 `,
@@ -2436,9 +2444,11 @@ Near a vertical asymptote, one-sided limits typically equal $+\\infty$ or $-\\in
 
 For $f(x) = \\dfrac{1}{x - 2}$:
 
-$$\\lim_{x \\to 2^-} \\frac{1}{x - 2} = -\\infty$$
+@academic[formula_callout:One-Sided Limits at Vertical Asymptotes
+$$\\lim_{x \\to 2^-} \\frac{1}{x - 2} = -\\infty$$]@
 
-$$\\lim_{x \\to 2^+} \\frac{1}{x - 2} = +\\infty$$
+@academic[formula_callout:One-Sided Limits at Vertical Asymptotes
+$$\\lim_{x \\to 2^+} \\frac{1}{x - 2} = +\\infty$$]@
 
 From the left, $x - 2$ is a small negative number, so the reciprocal is a large negative number. From the right, $x - 2$ is a small positive number, so the reciprocal is a large positive number.
 
@@ -2455,11 +2465,13 @@ Expressions involving square roots often force one-sided analysis due to domain 
 
 The expression $\\sqrt{4 - x}$ requires $4 - x \\geq 0$, meaning $x \\leq 4$. At $x = 4$, only the left-hand limit is meaningful:
 
-$$\\lim_{x \\to 4^-} \\sqrt{4 - x} = 0$$
+@academic[formula_callout:One-Sided Limits and Square Roots
+$$\\lim_{x \\to 4^-} \\sqrt{4 - x} = 0$$]@
 
 Similarly, $\\sqrt{x - 4}$ requires $x \\geq 4$, so at $x = 4$, only the right-hand limit applies:
 
-$$\\lim_{x \\to 4^+} \\sqrt{x - 4} = 0$$
+@academic[formula_callout:One-Sided Limits and Square Roots
+$$\\lim_{x \\to 4^+} \\sqrt{x - 4} = 0$$]@
 
 Domain boundaries naturally restrict limits to one side.
 `,
@@ -2474,9 +2486,11 @@ The same [techniques](!/calculus/limits/evaluating) used for two-sided limits ap
 
 Sign analysis becomes critical. For the expression $\\dfrac{|x|}{x}$:
 
-$$\\lim_{x \\to 0^+} \\frac{|x|}{x} = \\frac{x}{x} = 1$$
+@academic[formula_callout:Evaluating One-Sided Limits
+$$\\lim_{x \\to 0^+} \\frac{|x|}{x} = \\frac{x}{x} = 1$$]@
 
-$$\\lim_{x \\to 0^-} \\frac{|x|}{x} = \\frac{-x}{x} = -1$$
+@academic[formula_callout:Evaluating One-Sided Limits
+$$\\lim_{x \\to 0^-} \\frac{|x|}{x} = \\frac{-x}{x} = -1$$]@
 
 When $x > 0$, the absolute value $|x| = x$. When $x < 0$, the absolute value $|x| = -x$. The direction of approach determines which case applies.
 `,
@@ -2491,15 +2505,17 @@ A function can be [continuous](!/calculus/limits/continuity) from one side witho
 
 Continuous from the left at $a$:
 
-$$\\lim_{x \\to a^-} f(x) = f(a)$$
+@academic[formula_callout:One-Sided Continuity
+$$\\lim_{x \\to a^-} f(x) = f(a)$$]@
 
 Continuous from the right at $a$:
 
-$$\\lim_{x \\to a^+} f(x) = f(a)$$
+@academic[formula_callout:One-Sided Continuity
+$$\\lim_{x \\to a^+} f(x) = f(a)$$]@
 
 @academic[formula_callout:One-Sided Continuity
 $$f \\text{ right-continuous at } a \\iff \\lim_{x \\to a^+} f(x) = f(a); \\quad f \\text{ left-continuous at } a \\iff \\lim_{x \\to a^-} f(x) = f(a)$$
-/calculus/formulas#one_sided_continuity]@
+/calculus/formulas#one-sided_continuity]@
 
 @academic[formulas_link:Browse all limit formulas
 /calculus/formulas]@

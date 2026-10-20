@@ -193,7 +193,8 @@ This follows directly from strict monotonicity. A function that is always increa
 
 The one-to-one property justifies a key technique for solving [equations](!/algebra/logarithms/equations). When an equation has the form $\\log_a(M) = \\log_a(N)$ with the same base on both sides, the arguments must be equal: $M = N$. This reduces a logarithmic equation to an algebraic one.
 
-Example: $\\log_3(2x + 1) = \\log_3(x + 5)$ implies $2x + 1 = x + 5$, giving $x = 4$.
+@academic[example:Example
+$\\log_3(2x + 1) = \\log_3(x + 5)$ implies $2x + 1 = x + 5$, giving $x = 4$.]@
 
 The [logarithmic equation solver](!/algebra/calculators/equations/logarithmic) uses this property whenever both sides are single logarithms with the same base.`,
     before: ``,
@@ -216,14 +217,18 @@ At the boundary $x = 0$, continuity fails — the function is not defined there.
     content: `The line $x = 0$ (the $y$-axis) is a vertical asymptote for every logarithmic function.
 
 As $x \\to 0^+$ (approaching zero from the right):
-$$\\lim_{x \\to 0^+} \\log_a(x) = -\\infty \\quad \\text{when } a > 1$$
-$$\\lim_{x \\to 0^+} \\log_a(x) = +\\infty \\quad \\text{when } 0 < a < 1$$
+@academic[formula_callout:Asymptotic Behavior
+$$\\lim_{x \\to 0^+} \\log_a(x) = -\\infty \\quad \\text{when } a > 1$$]@
+@academic[formula_callout:Asymptotic Behavior
+$$\\lim_{x \\to 0^+} \\log_a(x) = +\\infty \\quad \\text{when } 0 < a < 1$$]@
 
 The graph approaches the $y$-axis without touching it, plunging downward (for $a > 1$) or rising upward (for $0 < a < 1$).
 
 As $x \\to \\infty$:
-$$\\lim_{x \\to \\infty} \\log_a(x) = +\\infty \\quad \\text{when } a > 1$$
-$$\\lim_{x \\to \\infty} \\log_a(x) = -\\infty \\quad \\text{when } 0 < a < 1$$
+@academic[formula_callout:Asymptotic Behavior
+$$\\lim_{x \\to \\infty} \\log_a(x) = +\\infty \\quad \\text{when } a > 1$$]@
+@academic[formula_callout:Asymptotic Behavior
+$$\\lim_{x \\to \\infty} \\log_a(x) = -\\infty \\quad \\text{when } 0 < a < 1$$]@
 
 Growth toward infinity is slow. For $a > 1$, the logarithm increases without bound but at a decelerating rate — doubling the input adds only a fixed constant to the output.`,
     before: ``,
@@ -235,8 +240,10 @@ Growth toward infinity is slow. For $a > 1$, the logarithm increases without bou
     content: `The functions $f(x) = \\log_a(x)$ and $g(x) = a^x$ are inverses of each other.
 
 Composition in either order returns the input:
-$$f(g(x)) = \\log_a(a^x) = x \\quad \\text{for all real } x$$
-$$g(f(x)) = a^{\\log_a(x)} = x \\quad \\text{for all } x > 0$$
+@academic[formula_callout:Inverse Relationship with Exponential Functions
+$$f(g(x)) = \\log_a(a^x) = x \\quad \\text{for all real } x$$]@
+@academic[formula_callout:Inverse Relationship with Exponential Functions
+$$g(f(x)) = a^{\\log_a(x)} = x \\quad \\text{for all } x > 0$$]@
 
 Graphically, the curves $y = \\log_a(x)$ and $y = a^x$ are reflections of each other across the line $y = x$. Points $(p, q)$ on one curve correspond to points $(q, p)$ on the other.
 

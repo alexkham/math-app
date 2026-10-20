@@ -1042,13 +1042,15 @@ This is why the properties below appear in dual form. Each section presents the 
  
 ## For Addition
  
-$$a + b = b + a$$
+@academic[formula_callout:Commutative Property
+$$a + b = b + a$$]@
  
 The expressions $7 + 4$ and $4 + 7$ both equal $11$. The order of the two addends is irrelevant.
  
 ## For Multiplication
  
-$$a \\cdot b = b \\cdot a$$
+@academic[formula_callout:Commutative Property
+$$a \\cdot b = b \\cdot a$$]@
  
 The expressions $7 \\cdot 4$ and $4 \\cdot 7$ both equal $28$. Reversing the factors does not affect the product. The dot $\\cdot$, the cross $\\times$, and plain juxtaposition ($ab$) all denote the same multiplication — the three forms are listed among the [arithmetic symbols](!/math-symbols/arithmetic).
  
@@ -1067,13 +1069,15 @@ Neither subtraction nor division shares this property. The expressions $7 - 4$ a
  
 ## For Addition
  
-$$(a + b) + c = a + (b + c)$$
+@academic[formula_callout:Associative Property
+$$(a + b) + c = a + (b + c)$$]@
  
 To compute $2 + 3 + 5$, the order in which the additions are performed makes no difference. Adding $2 + 3$ first and then adding $5$ gives $10$. Adding $3 + 5$ first and then adding $2$ gives the same. The parentheses can be moved without consequence.
  
 ## For Multiplication
  
-$$(a \\cdot b) \\cdot c = a \\cdot (b \\cdot c)$$
+@academic[formula_callout:Associative Property
+$$(a \\cdot b) \\cdot c = a \\cdot (b \\cdot c)$$]@
  
 To compute $2 \\cdot 3 \\cdot 5$, the grouping $(2 \\cdot 3) \\cdot 5 = 6 \\cdot 5 = 30$ matches $2 \\cdot (3 \\cdot 5) = 2 \\cdot 15 = 30$.
  
@@ -1094,17 +1098,20 @@ The associative property extends to any number of terms or factors. A sum like $
     title: `Distributive Property`,
     content: `The distributive property connects addition and multiplication. It states that multiplying a sum by a number gives the same result as multiplying each addend separately and then adding.
  
-$$a(b + c) = ab + ac$$
+@academic[formula_callout:Distributive Property
+$$a(b + c) = ab + ac$$]@
  
 For $3(4 + 5)$: applying the formula gives $3 \\cdot 4 + 3 \\cdot 5 = 12 + 15 = 27$. Computing directly gives $3 \\cdot 9 = 27$. The two routes agree.
  
 The right form mirrors the left:
  
-$$(b + c)a = ba + ca$$
+@academic[formula_callout:Distributive Property
+$$(b + c)a = ba + ca$$]@
  
 The property also distributes over subtraction:
  
-$$a(b - c) = ab - ac$$
+@academic[formula_callout:Distributive Property
+$$a(b - c) = ab - ac$$]@
  
 This works because subtraction is a special case of addition — see [subtraction as inverse addition](!/arithmetic/properties#10).
  
@@ -1127,13 +1134,15 @@ Distribution is the only property linking the two main operations. Without it, a
  
 ## Additive Identity
  
-$$a + 0 = a$$
+@academic[formula_callout:Identity Elements
+$$a + 0 = a$$]@
  
 Zero is the additive identity. Adding it to any number returns that number unchanged. The property holds in both directions: $0 + a = a$ as well.
  
 ## Multiplicative Identity
  
-$$a \\cdot 1 = a$$
+@academic[formula_callout:Identity Elements
+$$a \\cdot 1 = a$$]@
  
 One is the multiplicative identity. Multiplying any number by $1$ returns that number unchanged. Like the additive case, this works in both directions: $1 \\cdot a = a$.
  
@@ -1154,13 +1163,15 @@ Identities are essential for defining inverses. The next section explains how ev
  
 ## Additive Inverse
  
-$$a + (-a) = 0$$
+@academic[formula_callout:Inverse Elements
+$$a + (-a) = 0$$]@
  
 For every real number $a$, the value $-a$ is its additive inverse. The two combine to produce the [additive identity](!/arithmetic/properties#6). Every real number has exactly one additive inverse.
  
 ## Multiplicative Inverse
  
-$$a \\cdot \\frac{1}{a} = 1, \\quad a \\neq 0$$
+@academic[formula_callout:Inverse Elements
+$$a \\cdot \\frac{1}{a} = 1, \\quad a \\neq 0$$]@
  
 For every nonzero real number $a$, the value $\\frac{1}{a}$ — also called its [reciprocal](!/arithmetic/fractions/dividing#1) — is its multiplicative inverse. The two combine to produce the [multiplicative identity](!/arithmetic/properties#6).
  
@@ -1192,15 +1203,18 @@ The zero property is what prevents zero from having a multiplicative inverse, as
     title: `Sign Rules`,
     content: `Three rules govern signs in multiplication.
  
-$$(-a)(-b) = ab$$
+@academic[formula_callout:Sign Rules
+$$(-a)(-b) = ab$$]@
  
 The product of two negatives is positive. Multiplying $-3$ by $-4$ gives $12$, not $-12$.
  
-$$(-a)(b) = -(ab)$$
+@academic[formula_callout:Sign Rules
+$$(-a)(b) = -(ab)$$]@
  
 The product of a negative and a positive is negative. Multiplying $-3$ by $4$ gives $-12$.
  
-$$-(-a) = a$$
+@academic[formula_callout:Sign Rules
+$$-(-a) = a$$]@
  
 The negative of a negative is the original number. The expression $-(-5)$ equals $5$.
  

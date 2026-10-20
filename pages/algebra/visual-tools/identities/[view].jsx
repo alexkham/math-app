@@ -2074,25 +2074,25 @@ export default function AlgebraicIdentityViewPage({
   activeBg="#dde9f7"
       >
         {componentName === 'SquareOfSum' && (
-          <div style={{ transform: 'scale(0.9)' }}>
+          <div style={{ zoom: 0.9 }}>
             <SquareOfSum explanations={explanations} />
           </div>
         )}
 
         {componentName === 'SquareOfDifference' && (
-          <div style={{ transform: 'scale(0.9)' }}>
+          <div style={{ zoom: 0.9 }}>
             <SquareOfDifference explanations={explanations} />
           </div>
         )}
 
         {componentName === 'SquareOfTrinomial' && (
-          <div style={{ transform: 'scale(0.9)' }}>
+          <div style={{ zoom: 0.9 }}>
             <SquareOfTrinomial explanations={explanations} />
           </div>
         )}
 
         {componentName === 'DifferenceOfSquares' && (
-          <div style={{ transform: 'scale(0.9)' }}>
+          <div style={{ zoom: 0.9 }}>
             <DifferenceOfSquares explanations={explanations} />
           </div>
         )}

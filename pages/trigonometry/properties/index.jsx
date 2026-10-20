@@ -1831,13 +1831,15 @@ On the [graphs](!/trigonometry/graphs), even symmetry (cosine, secant) produces 
     title: `Boundedness`,
     content: `A function is bounded if its output never exceeds some fixed value in absolute terms. Among the six trigonometric functions, only sine and cosine are bounded:
 
-$$-1 \\leq \\sin(\\theta) \\leq 1, \\quad -1 \\leq \\cos(\\theta) \\leq 1$$
+@academic[formula_callout:Boundedness
+$$-1 \\leq \\sin(\\theta) \\leq 1, \\quad -1 \\leq \\cos(\\theta) \\leq 1$$]@
 
 This follows directly from the [unit circle](!/trigonometry/unit-circle). The coordinates of any point on a circle of radius 1 satisfy $x^2 + y^2 = 1$, which forces $|x| \\leq 1$ and $|y| \\leq 1$. No amount of rotation will ever produce a sine or cosine value outside $[-1, 1]$. The bounds are achieved: $\\sin\\theta = 1$ at $\\theta = \\frac{\\pi}{2}$ and $\\sin\\theta = -1$ at $\\theta = \\frac{3\\pi}{2}$, with analogous extremes for cosine.
 
 Cosecant and secant are bounded away from zero but unbounded overall:
 
-$$|\\csc(\\theta)| \\geq 1, \\quad |\\sec(\\theta)| \\geq 1$$
+@academic[formula_callout:Boundedness
+$$|\\csc(\\theta)| \\geq 1, \\quad |\\sec(\\theta)| \\geq 1$$]@
 
 Since $|\\sin\\theta| \\leq 1$, the reciprocal $|\\csc\\theta| = \\frac{1}{|\\sin\\theta|} \\geq 1$. As $\\sin\\theta$ approaches zero, $\\csc\\theta$ grows without bound. The range of both cosecant and secant is $(-\\infty, -1] \\cup [1, \\infty)$ — they can be arbitrarily large in magnitude but can never take a value between $-1$ and $1$.
 
@@ -1861,23 +1863,27 @@ Recognizing these range constraints before attempting to solve prevents wasted e
 
 **Sine** equals zero when the $y$-coordinate on the unit circle is zero — when the terminal side lies on the $x$-axis:
 
-$$\\sin(\\theta) = 0 \\quad \\text{at} \\quad \\theta = n\\pi \\quad (n \\in \\mathbb{Z})$$
+@academic[formula_callout:Zeros
+$$\\sin(\\theta) = 0 \\quad \\text{at} \\quad \\theta = n\\pi \\quad (n \\in \\mathbb{Z})$$]@
 
 That is: $\\ldots, -2\\pi, -\\pi, 0, \\pi, 2\\pi, \\ldots$
 
 **Cosine** equals zero when the $x$-coordinate is zero — when the terminal side lies on the $y$-axis:
 
-$$\\cos(\\theta) = 0 \\quad \\text{at} \\quad \\theta = \\frac{\\pi}{2} + n\\pi \\quad (n \\in \\mathbb{Z})$$
+@academic[formula_callout:Zeros
+$$\\cos(\\theta) = 0 \\quad \\text{at} \\quad \\theta = \\frac{\\pi}{2} + n\\pi \\quad (n \\in \\mathbb{Z})$$]@
 
 That is: $\\ldots, -\\frac{3\\pi}{2}, -\\frac{\\pi}{2}, \\frac{\\pi}{2}, \\frac{3\\pi}{2}, \\ldots$
 
 **Tangent** equals zero when $\\sin\\theta = 0$ and $\\cos\\theta \\neq 0$ — at the same points as sine:
 
-$$\\tan(\\theta) = 0 \\quad \\text{at} \\quad \\theta = n\\pi$$
+@academic[formula_callout:Zeros
+$$\\tan(\\theta) = 0 \\quad \\text{at} \\quad \\theta = n\\pi$$]@
 
 **Cotangent** equals zero when $\\cos\\theta = 0$ and $\\sin\\theta \\neq 0$ — at the same points as cosine:
 
-$$\\cot(\\theta) = 0 \\quad \\text{at} \\quad \\theta = \\frac{\\pi}{2} + n\\pi$$
+@academic[formula_callout:Zeros
+$$\\cot(\\theta) = 0 \\quad \\text{at} \\quad \\theta = \\frac{\\pi}{2} + n\\pi$$]@
 
 **Cosecant and secant have no zeros.** Since $\\csc\\theta = \\frac{1}{\\sin\\theta}$, a zero would require $\\frac{1}{\\sin\\theta} = 0$, which has no solution — no reciprocal of a real number equals zero. The same applies to secant. Their ranges, $(-\\infty, -1] \\cup [1, \\infty)$, confirm this: zero is not in the range.
 
@@ -1945,7 +1951,8 @@ The principal intervals of monotonicity are precisely the domains used to constr
 
 For transformed functions like $y = A\\sin(Bx - C) + D$, the extrema are:
 
-$$\\text{maximum} = D + |A|, \\quad \\text{minimum} = D - |A|$$
+@academic[formula_callout:Extrema
+$$\\text{maximum} = D + |A|, \\quad \\text{minimum} = D - |A|$$]@
 
 These occur at the same relative positions within each period as for the standard function, shifted according to the phase shift and compressed or stretched according to the period.`,
     before: ``,

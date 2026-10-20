@@ -954,7 +954,8 @@ obj2: {
   title: `Two Conventions`,
   content: `Both conventions start from the same equation:
 
-$$a = n \\cdot q + r$$
+@academic[formula_callout:Two Conventions
+$$a = n \\cdot q + r$$]@
 
 They agree that $a$ and $n$ are given and that $q$ and $r$ must be determined. They disagree on how to choose $q$ — and that single choice determines everything.
 
@@ -1024,7 +1025,8 @@ The addition is only needed when the remainder is negative. For positive dividen
 
 A universal formula handles both cases automatically:
 
-$$\\text{floored remainder} = ((a \\% \\; n) + n) \\% \\; n$$
+@academic[formula_callout:Converting Between Conventions
+$$\\text{floored remainder} = ((a \\% \\; n) + n) \\% \\; n$$]@
 
 This works in any language regardless of which convention its $\\%$ operator uses. If the initial remainder is already non-negative, adding $n$ and reducing again leaves it unchanged. If it is negative, the addition shifts it into the correct range.`,
   before: ``,

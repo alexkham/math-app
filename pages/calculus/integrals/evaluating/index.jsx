@@ -191,15 +191,18 @@ const sectionsContent = {
     content: `
 Try the straightforward approach first. Does the integrand match a standard form?
 
-$$\\int (3x^2 + 5e^x - \\sec^2 x)\\, dx$$
+@academic[formula_callout:Direct Antidifferentiation
+$$\\int (3x^2 + 5e^x - \\sec^2 x)\\, dx$$]@
 
 Apply linearity and known formulas:
 
-$$= 3 \\cdot \\frac{x^3}{3} + 5e^x - \\tan x + C = x^3 + 5e^x - \\tan x + C$$
+@academic[formula_callout:Direct Antidifferentiation
+$$= 3 \\cdot \\frac{x^3}{3} + 5e^x - \\tan x + C = x^3 + 5e^x - \\tan x + C$$]@
 
 Algebraic simplification often reveals standard forms:
 
-$$\\int \\frac{x^3 + 1}{x}\\, dx = \\int \\left(x^2 + \\frac{1}{x}\\right)\\, dx = \\frac{x^3}{3} + \\ln|x| + C$$
+@academic[formula_callout:Direct Antidifferentiation
+$$\\int \\frac{x^3 + 1}{x}\\, dx = \\int \\left(x^2 + \\frac{1}{x}\\right)\\, dx = \\frac{x^3}{3} + \\ln|x| + C$$]@
 
 Expand, simplify, and separate before reaching for techniques.
 `,
@@ -214,13 +217,15 @@ Many integrals are disguised versions of basic formulas.
 
 **Completing the square** transforms quadratics:
 
-$$\\int \\frac{1}{x^2 + 4x + 8}\\, dx = \\int \\frac{1}{(x+2)^2 + 4}\\, dx$$
+@academic[formula_callout:Recognizing Standard Forms
+$$\\int \\frac{1}{x^2 + 4x + 8}\\, dx = \\int \\frac{1}{(x+2)^2 + 4}\\, dx$$]@
 
 This matches $\\int \\dfrac{1}{u^2 + a^2}\\, du = \\dfrac{1}{a}\\arctan\\dfrac{u}{a} + C$ with $u = x + 2$ and $a = 2$.
 
 **Rewriting constants** exposes patterns:
 
-$$\\int \\frac{1}{\\sqrt{9 - x^2}}\\, dx = \\int \\frac{1}{\\sqrt{3^2 - x^2}}\\, dx = \\arcsin\\frac{x}{3} + C$$
+@academic[formula_callout:Recognizing Standard Forms
+$$\\int \\frac{1}{\\sqrt{9 - x^2}}\\, dx = \\int \\frac{1}{\\sqrt{3^2 - x^2}}\\, dx = \\arcsin\\frac{x}{3} + C$$]@
 `,
     before: ``,
     after: ``,
@@ -253,13 +258,16 @@ Check reasonableness: the area should be positive and between $0 \\cdot 3 = 0$ a
     content: `
 Absolute values require splitting the integral where the argument changes sign.
 
-$$\\int_{-2}^{3} |x|\\, dx$$
+@academic[formula_callout:Handling Absolute Values
+$$\\int_{-2}^{3} |x|\\, dx$$]@
 
 Since $|x| = -x$ for $x < 0$ and $|x| = x$ for $x \\geq 0$:
 
-$$= \\int_{-2}^{0} (-x)\\, dx + \\int_0^3 x\\, dx$$
+@academic[formula_callout:Handling Absolute Values
+$$= \\int_{-2}^{0} (-x)\\, dx + \\int_0^3 x\\, dx$$]@
 
-$$= \\left[-\\frac{x^2}{2}\\right]_{-2}^{0} + \\left[\\frac{x^2}{2}\\right]_0^3 = (0 - (-2)) + \\left(\\frac{9}{2} - 0\\right) = 2 + \\frac{9}{2} = \\frac{13}{2}$$
+@academic[formula_callout:Handling Absolute Values
+$$= \\left[-\\frac{x^2}{2}\\right]_{-2}^{0} + \\left[\\frac{x^2}{2}\\right]_0^3 = (0 - (-2)) + \\left(\\frac{9}{2} - 0\\right) = 2 + \\frac{9}{2} = \\frac{13}{2}$$]@
 
 Note: $\\left|\\int f\\right| \\neq \\int |f|$ in general.
 `,
@@ -272,7 +280,8 @@ Note: $\\left|\\int f\\right| \\neq \\int |f|$ in general.
     content: `
 Split the integral at boundaries between pieces and apply [additivity](!/calculus/integrals/rules):
 
-$$\\int_a^c f(x)\\, dx = \\int_a^b f(x)\\, dx + \\int_b^c f(x)\\, dx$$
+@academic[formula_callout:Piecewise Functions
+$$\\int_a^c f(x)\\, dx = \\int_a^b f(x)\\, dx + \\int_b^c f(x)\\, dx$$]@
 
 @academic[example:Example
 For $f(x) = \\begin{cases} x^2 & x < 1 \\\\ 2x & x \\geq 1 \\end{cases}$, evaluate $\\int_0^2 f(x)\\, dx$.

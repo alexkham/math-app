@@ -1097,11 +1097,12 @@ $$(a + bi) + (c + di) = (a + c) + (b + d)i$$
 
 The operation treats the real and imaginary components independently. No interaction occurs between them during addition — the real sum $a + c$ ignores the imaginary values, and the imaginary sum $b + d$ ignores the real values.
 
-Example: Add $3 + 2i$ and $1 - 5i$.
+@academic[example:Example
+Add $3 + 2i$ and $1 - 5i$.
 
 $$(3 + 2i) + (1 - 5i) = (3 + 1) + (2 + (-5))i = 4 + (-3)i = 4 - 3i$$
 
-The real parts $3$ and $1$ sum to $4$. The imaginary parts $2$ and $-5$ sum to $-3$. The result is $4 - 3i$.
+The real parts $3$ and $1$ sum to $4$. The imaginary parts $2$ and $-5$ sum to $-3$. The result is $4 - 3i$.]@
 
 On the [complex plane](!/complex-numbers/geometric-representation), addition corresponds to vector addition. Place the two complex numbers as arrows from the origin. Position the second arrow so its tail sits at the head of the first. The sum extends from the origin to the final head — the familiar parallelogram or tip-to-tail rule from physics and geometry. This geometric interpretation makes addition visual and connects complex arithmetic to vector mechanics.
 
@@ -1127,15 +1128,17 @@ $$(a + bi) - (c + di) = (a - c) + (b - d)i$$
 
 Each component undergoes its own subtraction independently.
 
-Example: Compute $(7 + 4i) - (2 + 6i)$.
+@academic[example:Example
+Compute $(7 + 4i) - (2 + 6i)$.
 
 $$(7 + 4i) - (2 + 6i) = (7 - 2) + (4 - 6)i = 5 + (-2)i = 5 - 2i$$
 
-The real parts $7 - 2 = 5$. The imaginary parts $4 - 6 = -2$. The result is $5 - 2i$.
+The real parts $7 - 2 = 5$. The imaginary parts $4 - 6 = -2$. The result is $5 - 2i$.]@
 
 A common error occurs when the second number has a negative imaginary part. Consider $(5 + 3i) - (2 - 4i)$. The subtraction must distribute across both terms:
 
-$$(5 + 3i) - (2 - 4i) = 5 + 3i - 2 + 4i = 3 + 7i$$
+@academic[formula_callout:Subtraction of Complex Numbers
+$$(5 + 3i) - (2 - 4i) = 5 + 3i - 2 + 4i = 3 + 7i$$]@
 
 Forgetting to negate the $-4i$ term — leaving it as $-4i$ instead of $+4i$ — produces the wrong answer $3 - i$. Always distribute the negative sign before combining terms.
 
@@ -1153,7 +1156,8 @@ Geometrically, $z_1 - z_2$ represents the vector from $z_2$ to $z_1$. Its [modul
 
 For $z_1 = a + bi$ and $z_2 = c + di$, expand using distribution (the FOIL method):
 
-$$(a + bi)(c + di) = ac + adi + bci + bdi^2$$
+@academic[formula_callout:Multiplication of Complex Numbers
+$$(a + bi)(c + di) = ac + adi + bci + bdi^2$$]@
 
 The term $bdi^2$ contains $i^2 = -1$, so $bdi^2 = -bd$. Collecting real and imaginary parts:
 
@@ -1202,7 +1206,8 @@ Identify the conjugate of the denominator: $\\overline{1 - 4i} = 1 + 4i$.
 
 Multiply numerator and denominator:
 
-$$\\frac{3 + 2i}{1 - 4i} \\cdot \\frac{1 + 4i}{1 + 4i} = \\frac{(3 + 2i)(1 + 4i)}{(1 - 4i)(1 + 4i)}$$
+@academic[formula_callout:Division of Complex Numbers
+$$\\frac{3 + 2i}{1 - 4i} \\cdot \\frac{1 + 4i}{1 + 4i} = \\frac{(3 + 2i)(1 + 4i)}{(1 - 4i)(1 + 4i)}$$]@
 
 Compute the denominator: $(1 - 4i)(1 + 4i) = 1 - 16i^2 = 1 + 16 = 17$.
 
@@ -1222,19 +1227,22 @@ The result sits in standard form with real denominator eliminated.`,
 
 **Commutativity** holds for both addition and multiplication:
 
-$$z_1 + z_2 = z_2 + z_1 \\qquad z_1 \\cdot z_2 = z_2 \\cdot z_1$$
+@academic[formula_callout:Properties of Complex Arithmetic
+$$z_1 + z_2 = z_2 + z_1 \\qquad z_1 \\cdot z_2 = z_2 \\cdot z_1$$]@
 
 Order does not matter. Adding $3 + 2i$ to $1 - 5i$ yields the same result as adding $1 - 5i$ to $3 + 2i$. The same holds for products.
 
 **Associativity** allows regrouping without changing results:
 
-$$(z_1 + z_2) + z_3 = z_1 + (z_2 + z_3) \\qquad (z_1 \\cdot z_2) \\cdot z_3 = z_1 \\cdot (z_2 \\cdot z_3)$$
+@academic[formula_callout:Properties of Complex Arithmetic
+$$(z_1 + z_2) + z_3 = z_1 + (z_2 + z_3) \\qquad (z_1 \\cdot z_2) \\cdot z_3 = z_1 \\cdot (z_2 \\cdot z_3)$$]@
 
 When adding or multiplying three or more complex numbers, parentheses may be placed anywhere.
 
 **Distributivity** connects addition and multiplication:
 
-$$z_1 \\cdot (z_2 + z_3) = z_1 \\cdot z_2 + z_1 \\cdot z_3$$
+@academic[formula_callout:Properties of Complex Arithmetic
+$$z_1 \\cdot (z_2 + z_3) = z_1 \\cdot z_2 + z_1 \\cdot z_3$$]@
 
 Multiplication distributes over sums, enabling expansion of products and factoring of expressions.
 
@@ -1253,11 +1261,13 @@ Multiplication distributes over sums, enabling expansion of products and factori
 
 For $z = a + bi \\neq 0$, the multiplicative inverse is:
 
-$$z^{-1} = \\frac{1}{z} = \\frac{\\bar{z}}{|z|^2} = \\frac{a - bi}{a^2 + b^2}$$
+@academic[formula_callout:The Multiplicative Inverse
+$$z^{-1} = \\frac{1}{z} = \\frac{\\bar{z}}{|z|^2} = \\frac{a - bi}{a^2 + b^2}$$]@
 
 The formula multiplies $1/z$ by $\\bar{z}/\\bar{z}$, converting the denominator to the real value $|z|^2 = a^2 + b^2$. The result expresses $z^{-1}$ in standard algebraic form.
 
-Example: Find the multiplicative inverse of $3 + 4i$.
+@academic[example:Example
+Find the multiplicative inverse of $3 + 4i$.
 
 Compute the modulus squared: $|3 + 4i|^2 = 9 + 16 = 25$.
 
@@ -1265,7 +1275,7 @@ Find the conjugate: $\\overline{3 + 4i} = 3 - 4i$.
 
 Apply the formula: $(3 + 4i)^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$.
 
-Verification: $(3 + 4i) \\cdot \\left(\\frac{3}{25} - \\frac{4}{25}i\\right) = \\frac{9}{25} - \\frac{12}{25}i + \\frac{12}{25}i - \\frac{16}{25}i^2 = \\frac{9}{25} + \\frac{16}{25} = \\frac{25}{25} = 1$.
+Verification: $(3 + 4i) \\cdot \\left(\\frac{3}{25} - \\frac{4}{25}i\\right) = \\frac{9}{25} - \\frac{12}{25}i + \\frac{12}{25}i - \\frac{16}{25}i^2 = \\frac{9}{25} + \\frac{16}{25} = \\frac{25}{25} = 1$.]@
 
 The inverse exists precisely when $|z|^2 \\neq 0$, which occurs exactly when $z \\neq 0$. Division by zero remains undefined in $\\mathbb{C}$ as in $\\mathbb{R}$ — the number $0$ has no multiplicative inverse.
 

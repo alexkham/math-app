@@ -2629,17 +2629,20 @@ Let $f(x) = x^2 - 4$ and $g(x) = 2x + 1$. Find $(f \\circ g)(x)$.
 
 Start with $f(x) = x^2 - 4$. Replace every $x$ with $g(x) = 2x + 1$:
 
-$$f(g(x)) = (2x + 1)^2 - 4$$
+@academic[formula_callout:Finding Composite Functions Algebraically
+$$f(g(x)) = (2x + 1)^2 - 4$$]@
 
 Expand and simplify:
 
-$$(2x + 1)^2 - 4 = 4x^2 + 4x + 1 - 4 = 4x^2 + 4x - 3$$
+@academic[formula_callout:Finding Composite Functions Algebraically
+$$(2x + 1)^2 - 4 = 4x^2 + 4x + 1 - 4 = 4x^2 + 4x - 3$$]@
 
 So $(f \\circ g)(x) = 4x^2 + 4x - 3$.
 
 Now find $(g \\circ f)(x)$. Start with $g(x) = 2x + 1$. Replace $x$ with $f(x) = x^2 - 4$:
 
-$$g(f(x)) = 2(x^2 - 4) + 1 = 2x^2 - 8 + 1 = 2x^2 - 7$$
+@academic[formula_callout:Finding Composite Functions Algebraically
+$$g(f(x)) = 2(x^2 - 4) + 1 = 2x^2 - 8 + 1 = 2x^2 - 7$$]@
 
 So $(g \\circ f)(x) = 2x^2 - 7$.
 
@@ -2720,7 +2723,8 @@ The table below sets $f \\circ g$ and $g \\circ f$ side by side for this pair to
 
 For three functions $f$, $g$, and $h$:
 
-$$(f \\circ g \\circ h)(x) = f(g(h(x)))$$
+@academic[formula_callout:Composing More Than Two Functions
+$$(f \\circ g \\circ h)(x) = f(g(h(x)))$$]@
 
 The function $h$ acts first on $x$, producing $h(x)$. Then $g$ acts on that result, producing $g(h(x))$. Finally $f$ acts, producing $f(g(h(x)))$.
 
@@ -2736,9 +2740,12 @@ So $(f \\circ g \\circ h)(3) = 49$.
 
 The algebraic formula:
 
-$$h(x) = 2x$$
-$$g(h(x)) = 2x + 1$$
-$$f(g(h(x))) = (2x + 1)^2 = 4x^2 + 4x + 1$$
+@academic[formula_callout:Composing More Than Two Functions
+$$h(x) = 2x$$]@
+@academic[formula_callout:Composing More Than Two Functions
+$$g(h(x)) = 2x + 1$$]@
+@academic[formula_callout:Composing More Than Two Functions
+$$f(g(h(x))) = (2x + 1)^2 = 4x^2 + 4x + 1$$]@
 
 Composition is associative: grouping does not affect the result, though order still matters.
 
@@ -2759,13 +2766,15 @@ $$(f \\circ g) \\circ h = f \\circ (g \\circ h)$$
 
 Let $f(x) = 2x$. Then:
 
-$$f(f(x)) = f(2x) = 2(2x) = 4x$$
+@academic[formula_callout:Composition with Itself
+$$f(f(x)) = f(2x) = 2(2x) = 4x$$]@
 
 Applying $f$ twice multiplies by $4$. Applying three times gives $f(f(f(x))) = 8x$. Each application doubles the input.
 
 Let $f(x) = x^2$. Then:
 
-$$f(f(x)) = f(x^2) = (x^2)^2 = x^4$$
+@academic[formula_callout:Composition with Itself
+$$f(f(x)) = f(x^2) = (x^2)^2 = x^4$$]@
 
 Squaring twice yields the fourth power.
 
@@ -2809,17 +2818,21 @@ The table below collects the worked decompositions covered above with their inne
     title: `Composition and Inverse Functions`,
     content: `Composition provides the defining property of [inverse functions](!/functions/inverse). If $f^{-1}$ is the inverse of $f$, then:
 
-$$(f \\circ f^{-1})(x) = f(f^{-1}(x)) = x$$
+@academic[formula_callout:Composition and Inverse Functions
+$$(f \\circ f^{-1})(x) = f(f^{-1}(x)) = x$$]@
 
-$$(f^{-1} \\circ f)(x) = f^{-1}(f(x)) = x$$
+@academic[formula_callout:Composition and Inverse Functions
+$$(f^{-1} \\circ f)(x) = f^{-1}(f(x)) = x$$]@
 
 Each composition yields the identity function — the function that returns its input unchanged.
 
 Let $f(x) = 2x + 3$ and $f^{-1}(x) = \\dfrac{x - 3}{2}$. Verify:
 
-$$f(f^{-1}(x)) = f\\left(\\frac{x - 3}{2}\\right) = 2 \\cdot \\frac{x - 3}{2} + 3 = (x - 3) + 3 = x \\checkmark$$
+@academic[formula_callout:Composition and Inverse Functions
+$$f(f^{-1}(x)) = f\\left(\\frac{x - 3}{2}\\right) = 2 \\cdot \\frac{x - 3}{2} + 3 = (x - 3) + 3 = x \\checkmark$$]@
 
-$$f^{-1}(f(x)) = f^{-1}(2x + 3) = \\frac{(2x + 3) - 3}{2} = \\frac{2x}{2} = x \\checkmark$$
+@academic[formula_callout:Composition and Inverse Functions
+$$f^{-1}(f(x)) = f^{-1}(2x + 3) = \\frac{(2x + 3) - 3}{2} = \\frac{2x}{2} = x \\checkmark$$]@
 
 This verification method confirms that two functions are inverses. If either composition fails to produce $x$, the functions are not inverses.
 
@@ -2855,11 +2868,13 @@ Graphical composition is most useful for specific point evaluations or for under
 
 Unit conversions often chain. To convert Celsius to Kelvin, add $273.15$. To convert Kelvin to Rankine, multiply by $1.8$. The composition converts Celsius directly to Rankine:
 
-$$R(C) = 1.8(C + 273.15) = 1.8C + 491.67$$
+@academic[formula_callout:Applications of Composition
+$$R(C) = 1.8(C + 273.15) = 1.8C + 491.67$$]@
 
 Pricing calculations chain. A $20\\%$ discount applies first: $g(p) = 0.8p$. Then $8\\%$ tax applies: $f(x) = 1.08x$. The final price:
 
-$$f(g(p)) = 1.08(0.8p) = 0.864p$$
+@academic[formula_callout:Applications of Composition
+$$f(g(p)) = 1.08(0.8p) = 0.864p$$]@
 
 The order matters: tax on the discounted price differs from discount on the taxed price.
 

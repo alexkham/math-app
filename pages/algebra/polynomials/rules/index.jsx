@@ -562,13 +562,15 @@ The theorem applies to any polynomial and any value of $c$. If $P(x) = 2x^4 - x^
     title: `Why the Remainder Theorem Works`,
     content: `The proof follows directly from the division algorithm. Dividing $P(x)$ by $(x - c)$ produces a quotient $Q(x)$ and a remainder $R$:
 
-$$P(x) = (x - c) \\cdot Q(x) + R$$
+@academic[formula_callout:Why the Remainder Theorem Works
+$$P(x) = (x - c) \\cdot Q(x) + R$$]@
 
 Because the divisor $(x - c)$ has degree $1$, the remainder $R$ must have degree less than $1$ — meaning $R$ is a constant, independent of $x$.
 
 Now substitute $x = c$ into both sides:
 
-$$P(c) = (c - c) \\cdot Q(c) + R = 0 \\cdot Q(c) + R = R$$
+@academic[formula_callout:Why the Remainder Theorem Works
+$$P(c) = (c - c) \\cdot Q(c) + R = 0 \\cdot Q(c) + R = R$$]@
 
 The factor $(c - c)$ annihilates the quotient term, leaving $P(c) = R$. Evaluation and division are not separate operations — evaluating $P$ at $c$ is equivalent to extracting the remainder of division by $(x - c)$.`,
     before: ``,
@@ -607,7 +609,8 @@ To test potential roots, substitute each candidate into $P(x)$ and check for zer
 
 To construct a polynomial from its roots, reverse the process. If a cubic polynomial has roots $1$, $-2$, and $4$, the Factor Theorem guarantees that $(x - 1)$, $(x + 2)$, and $(x - 4)$ are all factors. Their product gives:
 
-$$(x - 1)(x + 2)(x - 4) = x^3 - 3x^2 - 6x + 8$$
+@academic[formula_callout:Using the Factor Theorem
+$$(x - 1)(x + 2)(x - 4) = x^3 - 3x^2 - 6x + 8$$]@
 
 Any nonzero scalar multiple $a(x - 1)(x + 2)(x - 4)$ shares the same roots, so the polynomial is determined up to a constant factor unless additional information — such as a specific function value — pins it down.`,
     before: ``,
@@ -632,7 +635,8 @@ This transforms an infinite search into a finite one. Instead of testing every r
 
 For $P(x) = 2x^3 + x^2 - 13x + 6$, the constant term is $6$ with divisors $\\pm 1, \\pm 2, \\pm 3, \\pm 6$, and the leading coefficient is $2$ with divisors $\\pm 1, \\pm 2$. The candidate list is:
 
-$$\\pm 1, \\pm 2, \\pm 3, \\pm 6, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$$
+@academic[formula_callout:The Rational Root Theorem
+$$\\pm 1, \\pm 2, \\pm 3, \\pm 6, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$$]@
 
 Twelve candidates replace infinitely many possibilities. Each can be tested by substitution or synthetic division until all rational roots are found or the list is exhausted.`,
     before: ``,
@@ -672,7 +676,10 @@ The theorem is best understood as a first filter, not a complete solution. When 
 
   obj8: {
     title: `The Integer Root Theorem`,
-    content: `When the leading coefficient of a polynomial is $1$ — a monic polynomial — the Rational Root Theorem simplifies considerably. Every rational root $\\frac{p}{q}$ has $q$ dividing $1$, which forces $q = \\pm 1$, which means $\\frac{p}{q}$ is an integer. So all rational roots of a monic polynomial are integers, and they must divide the constant term.
+    content: `When the leading coefficient of a polynomial is $1$ — a monic polynomial — the Rational Root Theorem simplifies considerably. Every rational root $\\frac{p}{q}$ has $q$ dividing $1$, which forces $q = \\pm 1$, which means $\\frac{p}{q}$ is an integer.
+
+@academic[rule_theorem:Integer Root Theorem
+So all rational roots of a monic polynomial are integers, and they must divide the constant term.]@
 
 For $x^3 - 6x^2 + 11x - 6$, the only candidates are the divisors of $-6$: $\\pm 1, \\pm 2, \\pm 3, \\pm 6$. No fractions need to be considered.
 
@@ -716,7 +723,8 @@ These bounds are especially useful when combined with the Rational Root Theorem,
 
   obj11: {
     title: `The Fundamental Theorem of Algebra`,
-    content: `The Fundamental Theorem of Algebra makes a sweeping guarantee: every polynomial of degree $n \\geq 1$ with complex coefficients has exactly $n$ roots in the [complex numbers](!/complex-numbers), counted with multiplicity.
+    content: `@academic[rule_theorem:Fundamental Theorem of Algebra
+The Fundamental Theorem of Algebra makes a sweeping guarantee: every polynomial of degree $n \\geq 1$ with complex coefficients has exactly $n$ roots in the [complex numbers](!/complex-numbers), counted with multiplicity.]@
 
 A quadratic has $2$ roots. A cubic has $3$. A degree-$10$ polynomial has $10$. No polynomial of positive degree can avoid having roots — the theorem eliminates the possibility of a polynomial that simply never equals zero.
 
@@ -736,17 +744,21 @@ The theorem guarantees existence but offers no method for finding roots. For deg
 
 For a monic quadratic $x^2 + bx + c$ with roots $r_1$ and $r_2$:
 
-$$r_1 + r_2 = -b \\qquad r_1 \\cdot r_2 = c$$
+@academic[formula_callout:Vieta's Formulas
+$$r_1 + r_2 = -b \\qquad r_1 \\cdot r_2 = c$$]@
 
 The sum of the roots equals the negative of the linear coefficient, and the product equals the constant term.
 
 For a monic cubic $x^3 + bx^2 + cx + d$ with roots $r_1$, $r_2$, $r_3$:
 
-$$r_1 + r_2 + r_3 = -b$$
+@academic[formula_callout:Vieta's Formulas
+$$r_1 + r_2 + r_3 = -b$$]@
 
-$$r_1r_2 + r_1r_3 + r_2r_3 = c$$
+@academic[formula_callout:Vieta's Formulas
+$$r_1r_2 + r_1r_3 + r_2r_3 = c$$]@
 
-$$r_1 \\cdot r_2 \\cdot r_3 = -d$$
+@academic[formula_callout:Vieta's Formulas
+$$r_1 \\cdot r_2 \\cdot r_3 = -d$$]@
 
 The pattern extends to any degree: the $k$-th elementary symmetric polynomial of the roots equals $(-1)^k$ times the coefficient of $x^{n-k}$ in a monic degree-$n$ polynomial.
 

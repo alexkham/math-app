@@ -1923,7 +1923,8 @@ const sectionsContent={
     title: `Definition and Equation`,
     content: `The unit circle is defined by two conditions: its center is at the origin of the coordinate plane, and its radius is 1. Every point $(x, y)$ on the circle satisfies:
 
-$$x^2 + y^2 = 1$$
+@academic[formula_callout:Definition and Equation
+$$x^2 + y^2 = 1$$]@
 
 This equation is a direct application of the Pythagorean theorem (or equivalently, the distance formula): a point lies on the unit circle if and only if its distance from the origin is exactly 1.
 
@@ -1938,19 +1939,24 @@ Any circle of radius $r$ could serve a similar purpose — the values would just
     title: `Coordinates as Trigonometric Values`,
     content: `For any angle $\\theta$ placed in standard position (vertex at the origin, initial side along the positive $x$-axis), the terminal side intersects the unit circle at exactly one point. The coordinates of that point define cosine and sine:
 
-$$(\\cos\\theta, \\sin\\theta)$$
+@academic[formula_callout:Coordinates as Trigonometric Values
+$$(\\cos\\theta, \\sin\\theta)$$]@
 
 The $x$-coordinate is $\\cos\\theta$. The $y$-coordinate is $\\sin\\theta$. This is the definition — not a derived result, not an approximation, but the way sine and cosine are defined for arbitrary angles.
 
 From these, the remaining four functions follow:
 
-$$\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta} = \\frac{y}{x} \\quad (x \\neq 0)$$
+@academic[formula_callout:Coordinates as Trigonometric Values
+$$\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta} = \\frac{y}{x} \\quad (x \\neq 0)$$]@
 
-$$\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta} = \\frac{x}{y} \\quad (y \\neq 0)$$
+@academic[formula_callout:Coordinates as Trigonometric Values
+$$\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta} = \\frac{x}{y} \\quad (y \\neq 0)$$]@
 
-$$\\sec\\theta = \\frac{1}{\\cos\\theta} = \\frac{1}{x} \\quad (x \\neq 0)$$
+@academic[formula_callout:Coordinates as Trigonometric Values
+$$\\sec\\theta = \\frac{1}{\\cos\\theta} = \\frac{1}{x} \\quad (x \\neq 0)$$]@
 
-$$\\csc\\theta = \\frac{1}{\\sin\\theta} = \\frac{1}{y} \\quad (y \\neq 0)$$
+@academic[formula_callout:Coordinates as Trigonometric Values
+$$\\csc\\theta = \\frac{1}{\\sin\\theta} = \\frac{1}{y} \\quad (y \\neq 0)$$]@
 
 For acute angles in the first quadrant, this definition agrees perfectly with the right triangle ratios. Dropping a perpendicular from the point $P = (\\cos\\theta, \\sin\\theta)$ to the $x$-axis creates a right triangle with hypotenuse 1 (the radius), horizontal leg $\\cos\\theta$, and vertical leg $\\sin\\theta$. The ratios opposite/hypotenuse and adjacent/hypotenuse reproduce $\\sin\\theta$ and $\\cos\\theta$ exactly. The unit circle definition is a generalization that preserves everything from the triangle definition while removing the constraint that $\\theta$ be acute.`,
     before: ``,
@@ -2045,7 +2051,8 @@ The computation depends on the quadrant:
 
 The key property: the trigonometric function values at any angle $\\theta$ equal the function values at the reference angle, up to a sign determined by the quadrant. Formally:
 
-$$|\\sin\\theta| = \\sin(\\text{reference angle}), \\quad |\\cos\\theta| = \\cos(\\text{reference angle})$$
+@academic[formula_callout:Reference Angles
+$$|\\sin\\theta| = \\sin(\\text{reference angle}), \\quad |\\cos\\theta| = \\cos(\\text{reference angle})$$]@
 
 This reduces every trigonometric evaluation to two steps: (1) find the reference angle and evaluate the function there (using the known values from the [special right triangles](!/trigonometry/right-triangle)), and (2) attach the correct sign based on the quadrant.
 
@@ -2096,7 +2103,8 @@ This is the Pythagorean identity — the most fundamental equation in trigonomet
 
 The identity has two standard rearrangements:
 
-$$\\sin^2\\theta = 1 - \\cos^2\\theta \\qquad \\text{and} \\qquad \\cos^2\\theta = 1 - \\sin^2\\theta$$
+@academic[formula_callout:The Pythagorean Identity
+$$\\sin^2\\theta = 1 - \\cos^2\\theta \\qquad \\text{and} \\qquad \\cos^2\\theta = 1 - \\sin^2\\theta$$]@
 
 These substitutions appear constantly in simplification and equation solving. If an expression contains $\\sin^2\\theta$ and it would be simpler in terms of $\\cos\\theta$, replace $\\sin^2\\theta$ with $1 - \\cos^2\\theta$. The reverse substitution is equally common.
 

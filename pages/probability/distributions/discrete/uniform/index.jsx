@@ -978,9 +978,9 @@ Due to this simplicity, the discrete uniform distribution often serves as a base
       after:``,
       link:'',
       example:`
-      Example:
+      @academic[example:Example
 
-Rolling a [fair six-sided die](!/probability/models/dice-roll) once. The possible outcomes are $\{1,2,3,4,5,6\}$, and each value has the same probability. No outcome is favored over another by the mechanism of the experiment.
+Rolling a [fair six-sided die](!/probability/models/dice-roll) once. The possible outcomes are $\{1,2,3,4,5,6\}$, and each value has the same probability. No outcome is favored over another by the mechanism of the experiment.]@
       `,
   
   

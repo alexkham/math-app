@@ -1215,7 +1215,8 @@ export default function TangentLineVisualizer({ instructions, demos,relatedTools
    </div>
    <br/>
    <br/>
-  <div style={{transform:'scale(0.9)',width:'80%',margin:'auto'}}>
+  {/* zoom, not transform: scale keeps the full layout height and leaves empty space above and below the tool */}
+  <div style={{ zoom: 0.9,width:'80%',margin:'auto'}}>
    <FunctionTangentLine explanations={explanations}/>
    </div>
    <br/>

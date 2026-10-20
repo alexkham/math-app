@@ -974,9 +974,9 @@ This distribution is useful when success must occur multiple times before stoppi
       after:``,
       link:'',
       example:`
-      Example:
+      @academic[example:Example
 
-Flipping a coin until you obtain $3$ heads. If $X=7$, this means the third head appears on the seventh flip. The sequence ends at the moment the third success occurs.
+Flipping a coin until you obtain $3$ heads. If $X=7$, this means the third head appears on the seventh flip. The sequence ends at the moment the third success occurs.]@
       `,
   
   

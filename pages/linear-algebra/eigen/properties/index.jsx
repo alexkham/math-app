@@ -1290,7 +1290,8 @@ const sectionsContent = {
     title: `Trace and Eigenvalues`,
     content: `The [trace](!/linear-algebra/matrix/trace) of $A$ equals the sum of its eigenvalues, counted with algebraic multiplicity:
 
-$$\\text{tr}(A) = \\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n$$
+@academic[formula_callout:Trace and Eigenvalues
+$$\\text{tr}(A) = \\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n$$]@
 
 This follows from the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation). The coefficient of $\\lambda^{n-1}$ in $p(\\lambda) = \\det(A - \\lambda I)$ is $(-1)^{n-1}\\text{tr}(A)$, and by Vieta&apos;s formulas, the sum of the roots of a degree-$n$ polynomial equals (up to sign) the coefficient of the $(n-1)$-th power term.
 
@@ -1303,7 +1304,12 @@ The trace provides a quick consistency check. A $3 \\times 3$ matrix with diagon
     title: `Determinant and Eigenvalues`,
     content: `The [determinant](!/linear-algebra/determinants) of $A$ equals the product of its eigenvalues:
 
+@academic[formula_callout:Determinant Product of Eigenvalues
 $$\\det(A) = \\lambda_1 \\cdot \\lambda_2 \\cdots \\lambda_n$$
+/linear-algebra/formulas#determinant_product_of_eigenvalues]@
+
+@academic[formulas_link:/linear-algebra/formulas#multiplicity_inequality]@
+/linear-algebra/formulas]@
 
 This follows from evaluating the characteristic polynomial at $\\lambda = 0$: $p(0) = \\det(A - 0 \\cdot I) = \\det(A)$, and since the roots of $p$ are $\\lambda_1, \\dots, \\lambda_n$, the constant term is (up to sign) their product.
 
@@ -1408,7 +1414,8 @@ More generally, if $q(\\lambda) = c_0 + c_1\\lambda + \\cdots + c_m\\lambda^m$ i
 
 This follows by expansion:
 
-$$q(A)\\mathbf{v} = (c_0 I + c_1 A + \\cdots + c_m A^m)\\mathbf{v} = (c_0 + c_1\\lambda + \\cdots + c_m\\lambda^m)\\mathbf{v} = q(\\lambda)\\mathbf{v}$$
+@academic[formula_callout:Eigenvalues of Powers and Polynomials
+$$q(A)\\mathbf{v} = (c_0 I + c_1 A + \\cdots + c_m A^m)\\mathbf{v} = (c_0 + c_1\\lambda + \\cdots + c_m\\lambda^m)\\mathbf{v} = q(\\lambda)\\mathbf{v}$$]@
 
 If $A$ has eigenvalue $3$, then $2A^2 - A + 4I$ has eigenvalue $2(9) - 3 + 4 = 19$ for the same eigenvector.`,
     before: ``,
@@ -1435,7 +1442,8 @@ These operations are useful in practice. Adding $cI$ can shift all eigenvalues t
     title: `Eigenvalues of the Transpose`,
     content: `A matrix $A$ and its [transpose](!/linear-algebra/matrix/operations) $A^T$ have the same eigenvalues. The characteristic polynomials are identical:
 
-$$\\det(A^T - \\lambda I) = \\det((A - \\lambda I)^T) = \\det(A - \\lambda I)$$
+@academic[formula_callout:Eigenvalues of the Transpose
+$$\\det(A^T - \\lambda I) = \\det((A - \\lambda I)^T) = \\det(A - \\lambda I)$$]@
 
 The second equality uses [transpose invariance](!/linear-algebra/determinants/properties) of the determinant.
 
@@ -1508,13 +1516,15 @@ The [trace](!/linear-algebra/matrix/trace), [determinant](!/linear-algebra/deter
     title: `The Dominant Eigenvalue and Power Iteration`,
     content: `Among the eigenvalues of $A$, the one of largest absolute value is the [dominant eigenvalue](!/linear-algebra/definitions#dominant_eigenvalue) $\\lambda_1$, with $|\\lambda_1| > |\\lambda_2| \\geq \\cdots \\geq |\\lambda_n|$. It controls the long-run behaviour of the powers $A^k$. Expand a starting vector in the eigenbasis, $\\mathbf{x}_0 = c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n$; then
 
-$$A^k\\mathbf{x}_0 = \\lambda_1^k\\left(c_1\\mathbf{v}_1 + c_2\\left(\\tfrac{\\lambda_2}{\\lambda_1}\\right)^k\\mathbf{v}_2 + \\cdots + c_n\\left(\\tfrac{\\lambda_n}{\\lambda_1}\\right)^k\\mathbf{v}_n\\right)$$
+@academic[formula_callout:The Dominant Eigenvalue and Power Iteration
+$$A^k\\mathbf{x}_0 = \\lambda_1^k\\left(c_1\\mathbf{v}_1 + c_2\\left(\\tfrac{\\lambda_2}{\\lambda_1}\\right)^k\\mathbf{v}_2 + \\cdots + c_n\\left(\\tfrac{\\lambda_n}{\\lambda_1}\\right)^k\\mathbf{v}_n\\right)$$]@
 
 Every ratio $|\\lambda_i / \\lambda_1|$ is below $1$, so all the other components die away and the direction of $A^k\\mathbf{x}_0$ swings toward $\\mathbf{v}_1$.
 
 Power iteration turns this into an algorithm. Start with any vector having $c_1 \\neq 0$, multiply by $A$, rescale to unit length, and repeat: $\\mathbf{x}_{k+1} = A\\mathbf{x}_k / \\|A\\mathbf{x}_k\\|$. The iterates converge to the dominant eigenvector, and the eigenvalue is read off from the [Rayleigh quotient](!/linear-algebra/definitions#rayleigh_quotient)
 
-$$R(\\mathbf{x}) = \\frac{\\mathbf{x}^T A\\,\\mathbf{x}}{\\mathbf{x}^T \\mathbf{x}}$$
+@academic[formula_callout:The Dominant Eigenvalue and Power Iteration
+$$R(\\mathbf{x}) = \\frac{\\mathbf{x}^T A\\,\\mathbf{x}}{\\mathbf{x}^T \\mathbf{x}}$$]@
 
 which equals $\\lambda$ exactly when $\\mathbf{x}$ is an eigenvector for $\\lambda$, and for a [symmetric matrix](!/linear-algebra/decompositions/spectral) always lies between the smallest and largest eigenvalues. Convergence is geometric with ratio $|\\lambda_2 / \\lambda_1|$: a wide gap between the top two eigenvalues means fast convergence, a narrow one means slow.
 

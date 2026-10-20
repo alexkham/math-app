@@ -1958,7 +1958,8 @@ Degrees are intuitive and widely understood outside of mathematics. Compass bear
     title: `Radian Measurement`,
     content: `A radian is defined by a direct geometric relationship: it is the angle subtended at the center of a circle by an arc whose length equals the radius of that circle. If a circle has radius $r$ and an arc of length $s$ is marked along its circumference, the central angle $\\theta$ in radians is:
 
-$$\\theta = \\frac{s}{r}$$
+@academic[formula_callout:Radian Measurement
+$$\\theta = \\frac{s}{r}$$]@
 
 Because both $s$ and $r$ are lengths, their ratio is dimensionless — radians carry no physical unit. This is not a technicality; it is the reason radians integrate seamlessly into formulas where degrees would introduce unwanted conversion factors.
 
@@ -2021,7 +2022,8 @@ $$\\theta_{\\text{rad}} = \\theta_{\\text{deg}} \\times \\frac{\\pi}{180}$$
 
 To convert radians to degrees, multiply by $\\frac{180}{\\pi}$:
 
-$$\\theta_{\\text{deg}} = \\theta_{\\text{rad}} \\times \\frac{180}{\\pi}$$
+@academic[formula_callout:Converting Between Degrees and Radians
+$$\\theta_{\\text{deg}} = \\theta_{\\text{rad}} \\times \\frac{180}{\\pi}$$]@
 
 The standard angles that appear throughout trigonometry should be known in both units without computation:
 
@@ -2061,7 +2063,8 @@ This formula is a direct consequence of the radian definition. Since $\\theta = 
 
 If the angle is given in degrees, the formula requires adjustment:
 
-$$s = \\frac{\\theta}{360} \\times 2\\pi r = \\frac{\\pi r \\theta}{180}$$
+@academic[formula_callout:Arc Length
+$$s = \\frac{\\theta}{360} \\times 2\\pi r = \\frac{\\pi r \\theta}{180}$$]@
 
 The additional factors are the price of using a unit not inherently tied to the circle. This is one of the clearest practical demonstrations of why radians simplify computation.
 
@@ -2083,11 +2086,13 @@ $$A = \\frac{1}{2}r^2\\theta$$
 
 where $\\theta$ is in radians. The derivation is straightforward: the sector represents $\\frac{\\theta}{2\\pi}$ of the full circle, and the full circle has area $\\pi r^2$, so:
 
-$$A = \\frac{\\theta}{2\\pi} \\times \\pi r^2 = \\frac{1}{2}r^2\\theta$$
+@academic[formula_callout:Sector Area
+$$A = \\frac{\\theta}{2\\pi} \\times \\pi r^2 = \\frac{1}{2}r^2\\theta$$]@
 
 If the angle is given in degrees:
 
-$$A = \\frac{\\theta}{360} \\times \\pi r^2$$
+@academic[formula_callout:Sector Area
+$$A = \\frac{\\theta}{360} \\times \\pi r^2$$]@
 
 As with arc length, the radian version is simpler and is the standard in mathematical work. Problems involving sector area follow the same pattern as arc length: three quantities ($A$, $r$, $\\theta$), any one computable from the other two. A typical application is finding the area swept by a rotating object — a windshield wiper, a radar beam, a door opening through a measured angle.
 

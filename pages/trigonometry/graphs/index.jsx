@@ -1440,7 +1440,8 @@ The graph is symmetric about the $y$-axis — the hallmark of an even function. 
 
 The horizontal shift between sine and cosine is precisely $\\frac{\\pi}{2}$:
 
-$$\\cos(x) = \\sin\\left(x + \\frac{\\pi}{2}\\right)$$
+@academic[formula_callout:Graph of the Cosine Function
+$$\\cos(x) = \\sin\\left(x + \\frac{\\pi}{2}\\right)$$]@
 
 This means any statement about the sine graph can be translated into a statement about the cosine graph by shifting the reference point. The two functions are, in a sense, the same function observed from two different starting positions on the [unit circle](!/trigonometry/unit-circle) — one starting at the rightmost point (cosine) and the other starting at the top (sine, after a quarter turn).
 
@@ -1497,7 +1498,8 @@ The key points for cotangent in one period $(0, \\pi)$:
     title: `The General Sinusoidal Form`,
     content: `The graphs of sine and cosine can be transformed by four operations — vertical stretching, horizontal stretching, horizontal shifting, and vertical shifting — each controlled by a parameter in the general form:
 
-$$y = A\\sin(Bx - C) + D$$
+@academic[formula_callout:The General Sinusoidal Form
+$$y = A\\sin(Bx - C) + D$$]@
 
 The same framework applies to cosine: $y = A\\cos(Bx - C) + D$. Understanding what each parameter does is essential for modeling periodic phenomena and for reading equations from graphs.
 
@@ -1533,11 +1535,13 @@ Amplitude is specific to bounded oscillating functions. It applies naturally to 
 
 For $y = A\\sin(Bx - C) + D$, the period is:
 
-$$T = \\frac{2\\pi}{|B|}$$
+@academic[formula_callout:Period
+$$T = \\frac{2\\pi}{|B|}$$]@
 
 For tangent and cotangent:
 
-$$T = \\frac{\\pi}{|B|}$$
+@academic[formula_callout:Period
+$$T = \\frac{\\pi}{|B|}$$]@
 
 When $|B| > 1$, the period shrinks — more cycles fit into the same horizontal interval. The function oscillates faster. When $0 < |B| < 1$, the period grows — fewer cycles fit, and the oscillation is slower.
 
@@ -1556,7 +1560,8 @@ The period is arguably the most important parameter for applications. When model
     title: `Phase Shift`,
     content: `Phase shift is the horizontal displacement of the graph from its standard starting position. For $y = A\\sin(Bx - C) + D$, the phase shift is:
 
-$$\\text{phase shift} = \\frac{C}{B}$$
+@academic[formula_callout:Phase Shift
+$$\\text{phase shift} = \\frac{C}{B}$$]@
 
 A positive phase shift moves the graph to the right; a negative one moves it to the left. The shift is found by setting the argument of the function equal to zero: $Bx - C = 0$ gives $x = \\frac{C}{B}$, which is where the "standard" cycle begins.
 
@@ -1582,11 +1587,13 @@ Examples:
 
 Reading the midline from a graph is straightforward: it is the horizontal line halfway between the maximum and minimum values. Algebraically:
 
-$$D = \\frac{\\text{max} + \\text{min}}{2}$$
+@academic[formula_callout:Vertical Shift and Midline
+$$D = \\frac{\\text{max} + \\text{min}}{2}$$]@
 
 And the amplitude is:
 
-$$|A| = \\frac{\\text{max} - \\text{min}}{2}$$
+@academic[formula_callout:Vertical Shift and Midline
+$$|A| = \\frac{\\text{max} - \\text{min}}{2}$$]@
 
 These two readings — midline and amplitude — are usually the first step in determining the equation of a sinusoidal graph. The period is read next (the horizontal distance for one full cycle), and the phase shift is determined last by identifying where a standard cycle begins relative to the $y$-axis.`,
     before: ``,

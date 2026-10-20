@@ -2010,39 +2010,63 @@ These eleven properties guarantee that complex arithmetic behaves consistently a
 
 ## Conjugate of a Conjugate
 
+@academic[formula_callout:Conjugate of a Conjugate
 $$\\overline{\\overline{z}} = z$$
+/complex-numbers/formulas#conjugate_of_a_conjugate]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 Conjugating twice returns the original number.
 
 ## Conjugate of a Sum
 
+@academic[formula_callout:Conjugate of a Sum
 $$\\overline{z_1 + z_2} = \\overline{z_1} + \\overline{z_2}$$
+/complex-numbers/formulas#conjugate_of_a_sum]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The conjugate of a sum equals the sum of conjugates.
 
 ## Conjugate of a Difference
 
-$$\\overline{z_1 - z_2} = \\overline{z_1} - \\overline{z_2}$$
+@academic[formula_callout:Properties of the Conjugate
+$$\\overline{z_1 - z_2} = \\overline{z_1} - \\overline{z_2}$$]@
 
 ## Conjugate of a Product
 
+@academic[formula_callout:Conjugate of a Product
 $$\\overline{z_1 \\cdot z_2} = \\overline{z_1} \\cdot \\overline{z_2}$$
+/complex-numbers/formulas#conjugate_of_a_product]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The conjugate of a product equals the product of conjugates.
 
 ## Conjugate of a Quotient
 
+@academic[formula_callout:Conjugate of a Quotient
 $$\\overline{\\left(\\frac{z_1}{z_2}\\right)} = \\frac{\\overline{z_1}}{\\overline{z_2}}$$
+/complex-numbers/formulas#conjugate_of_a_quotient]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 ## Extracting Real and Imaginary Parts
 
-$$z + \\overline{z} = 2\\text{Re}(z)$$
+@academic[formula_callout:Properties of the Conjugate
+$$z + \\overline{z} = 2\\text{Re}(z)$$]@
 
-$$z - \\overline{z} = 2i \\cdot \\text{Im}(z)$$
+@academic[formula_callout:Properties of the Conjugate
+$$z - \\overline{z} = 2i \\cdot \\text{Im}(z)$$]@
 
 ## Product with Conjugate
 
-$$z \\cdot \\overline{z} = |z|^2$$
+@academic[formula_callout:Properties of the Conjugate
+$$z \\cdot \\overline{z} = |z|^2$$]@
 
 A complex number multiplied by its conjugate yields the square of its [modulus](!/complex-numbers/absolute-value) — always a non-negative real number. This property is essential for [division](!/complex-numbers/operations) of complex numbers.`,
   before: ``,
@@ -2056,41 +2080,73 @@ A complex number multiplied by its conjugate yields the square of its [modulus](
 
 ## Non-Negativity
 
-$$|z| \\geq 0$$
+@academic[formula_callout:Properties of the Modulus
+$$|z| \\geq 0$$]@
 
-$$|z| = 0 \\iff z = 0$$
+@academic[formula_callout:Properties of the Modulus
+$$|z| = 0 \\iff z = 0$$]@
 
 The modulus is zero only for the number zero itself.
 
 ## Modulus of a Conjugate
 
+@academic[formula_callout:Modulus of Conjugate
 $$|\\overline{z}| = |z|$$
+/complex-numbers/formulas#modulus_of_conjugate]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 A number and its [conjugate](!/complex-numbers/complex-conjugate) have equal moduli.
 
 ## Modulus of a Product
 
+@academic[formula_callout:Modulus of a Product
 $$|z_1 \\cdot z_2| = |z_1| \\cdot |z_2|$$
+/complex-numbers/formulas#modulus_of_a_product]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The modulus of a product equals the product of moduli.
 
 ## Modulus of a Quotient
 
+@academic[formula_callout:Modulus of a Quotient
 $$\\left|\\frac{z_1}{z_2}\\right| = \\frac{|z_1|}{|z_2|}$$
+/complex-numbers/formulas#modulus_of_a_quotient]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 ## Modulus of a Power
 
+@academic[formula_callout:Modulus of a Power
 $$|z^n| = |z|^n$$
+/complex-numbers/formulas#modulus_of_a_power]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 ## Triangle Inequality
 
+@academic[formula_callout:Triangle Inequality
 $$|z_1 + z_2| \\leq |z_1| + |z_2|$$
+/complex-numbers/formulas#triangle_inequality]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The distance from the origin to $z_1 + z_2$ never exceeds the sum of individual distances. Geometrically, one side of a triangle cannot exceed the sum of the other two sides.
 
 ## Reverse Triangle Inequality
 
+@academic[formula_callout:Reverse Triangle Inequality
 $$\\big||z_1| - |z_2|\\big| \\leq |z_1 - z_2|$$
+/complex-numbers/formulas#reverse_triangle_inequality]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The difference of moduli never exceeds the modulus of the difference.`,
   before: ``,
@@ -2186,7 +2242,8 @@ In $\\mathbb{C}$, the equation $x^2 + 1 = 0$ has two solutions: $x = i$ and $x =
 
 When factoring polynomials over $\\mathbb{C}$, every polynomial of degree $n$ factors completely into $n$ linear factors:
 
-$$p(z) = a_n(z - r_1)(z - r_2)\\cdots(z - r_n)$$
+@academic[formula_callout:Algebraic Closure
+$$p(z) = a_n(z - r_1)(z - r_2)\\cdots(z - r_n)$$]@
 
 Over $\\mathbb{R}$, some polynomials resist complete factorization. Over $\\mathbb{C}$, none do.
 

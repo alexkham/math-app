@@ -49,7 +49,8 @@ export default function SquareRootVisualizerPage({ explanationsRoots, keyWords }
       <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>
         Square Root Visualizer
       </h1>
-      <div style={{transform:'scale(0.85)'}}>
+      {/* zoom, not transform: scale keeps the full layout height and leaves empty space above and below the tool */}
+      <div style={{ zoom: 0.85}}>
         <SquareRootVisualizer explanations={explanationsRoots}/>
       </div>
       <br/>

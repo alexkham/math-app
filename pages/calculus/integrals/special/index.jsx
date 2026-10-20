@@ -489,7 +489,8 @@ The factor $1/\\ln a$ compensates for the chain rule in $(a^x)' = a^x \\ln a$.
 
 With a linear argument:
 
-$$\\int e^{kx}\\, dx = \\frac{e^{kx}}{k} + C$$
+@academic[formula_callout:Exponential Functions
+$$\\int e^{kx}\\, dx = \\frac{e^{kx}}{k} + C$$]@
 `,
     before: ``,
     after: ``,
@@ -510,11 +511,11 @@ $$\\int \\cos x\\, dx = \\sin x + C$$
 
 @academic[formula_callout:Antiderivative of Sec Squared
 $$\\int \\sec^2 x\\, dx = \\tan x + C$$
-/calculus/formulas#antiderivative_of_sec_squared]@
+/calculus/formulas#antiderivative_of_secant_squared]@
 
 @academic[formula_callout:Antiderivative of Csc Squared
 $$\\int \\csc^2 x\\, dx = -\\cot x + C$$
-/calculus/formulas#antiderivative_of_csc_squared]@
+/calculus/formulas#antiderivative_of_cosecant_squared]@
 
 @academic[formula_callout:Antiderivative of Sec Tan
 $$\\int \\sec x \\tan x\\, dx = \\sec x + C$$
@@ -555,9 +556,16 @@ $$\\int \\frac{1}{x\\sqrt{x^2 - 1}}\\, dx = \\operatorname{arcsec}|x| + C$$
 
 More generally, with constant $a > 0$:
 
+@academic[formula_callout:Arctangent Form
 $$\\int \\frac{1}{a^2 + x^2}\\, dx = \\frac{1}{a}\\arctan\\frac{x}{a} + C$$
+/calculus/formulas#arctangent_form]@
 
+@academic[formula_callout:Arcsine Form
 $$\\int \\frac{1}{\\sqrt{a^2 - x^2}}\\, dx = \\arcsin\\frac{x}{a} + C$$
+/calculus/formulas#arcsine_form]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/formulas]@
 `,
     before: ``,
     after: ``,

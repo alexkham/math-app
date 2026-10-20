@@ -1169,7 +1169,8 @@ const sectionsContent = {
     title: `Definition`,
     content: `A homogeneous linear system is one where every equation has zero on the right-hand side:
 
-$$A\\mathbf{x} = \\mathbf{0}$$
+@academic[formula_callout:Definition
+$$A\\mathbf{x} = \\mathbf{0}$$]@
 
 The augmented matrix is $[A \\mid \\mathbf{0}]$. Since the last column is all zeros, row operations on the augmented matrix never produce a contradictory row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$. A homogeneous system is always consistent.
 
@@ -1238,7 +1239,8 @@ The rank of an $m \\times n$ matrix cannot exceed $m$, and when $m < n$, the ran
     title: `The Solution Set Is the Null Space`,
     content: `The set of all solutions to $A\\mathbf{x} = \\mathbf{0}$ is the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$:
 
-$$\\text{Null}(A) = \\{\\mathbf{x} \\in \\mathbb{R}^n : A\\mathbf{x} = \\mathbf{0}\\}$$
+@academic[formula_callout:The Solution Set Is the Null Space
+$$\\text{Null}(A) = \\{\\mathbf{x} \\in \\mathbb{R}^n : A\\mathbf{x} = \\mathbf{0}\\}$$]@
 
 The null space is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$. It contains $\\mathbf{0}$, and it is closed under addition and scalar multiplication: if $A\\mathbf{u} = \\mathbf{0}$ and $A\\mathbf{v} = \\mathbf{0}$, then $A(\\mathbf{u} + \\mathbf{v}) = \\mathbf{0}$ and $A(c\\mathbf{u}) = \\mathbf{0}$.
 
@@ -1258,11 +1260,13 @@ When the nullity is $0$, the null space is $\\{\\mathbf{0}\\}$ and only the triv
 
 ## Worked Example
 
-$$A = \\begin{pmatrix} 1 & 2 & -1 & 0 & 3 \\\\ 2 & 4 & 0 & 2 & 8 \\\\ -1 & -2 & 2 & 1 & 0 \\end{pmatrix}$$
+@academic[formula_callout:Finding the Null Space
+$$A = \\begin{pmatrix} 1 & 2 & -1 & 0 & 3 \\\\ 2 & 4 & 0 & 2 & 8 \\\\ -1 & -2 & 2 & 1 & 0 \\end{pmatrix}$$]@
 
 Row reduce:
 
-$$\\xrightarrow{R_2 - 2R_1,\\; R_3 + R_1} \\begin{pmatrix} 1 & 2 & -1 & 0 & 3 \\\\ 0 & 0 & 2 & 2 & 2 \\\\ 0 & 0 & 1 & 1 & 3 \\end{pmatrix} \\xrightarrow{R_3 - \\frac{1}{2}R_2} \\begin{pmatrix} 1 & 2 & -1 & 0 & 3 \\\\ 0 & 0 & 2 & 2 & 2 \\\\ 0 & 0 & 0 & 0 & 2 \\end{pmatrix}$$
+@academic[formula_callout:Finding the Null Space
+$$\\xrightarrow{R_2 - 2R_1,\\; R_3 + R_1} \\begin{pmatrix} 1 & 2 & -1 & 0 & 3 \\\\ 0 & 0 & 2 & 2 & 2 \\\\ 0 & 0 & 1 & 1 & 3 \\end{pmatrix} \\xrightarrow{R_3 - \\frac{1}{2}R_2} \\begin{pmatrix} 1 & 2 & -1 & 0 & 3 \\\\ 0 & 0 & 2 & 2 & 2 \\\\ 0 & 0 & 0 & 0 & 2 \\end{pmatrix}$$]@
 
 Pivots in columns $1$, $3$, $5$. Free variables: $x_2 = s$, $x_4 = t$. Row $3$: $2x_5 = 0 \\Rightarrow x_5 = 0$. Row $2$: $2x_3 + 2t = 0 \\Rightarrow x_3 = -t$. Row $1$: $x_1 + 2s + t + 0 = 0 \\Rightarrow x_1 = -2s - t$.
 
@@ -1277,7 +1281,8 @@ The null space is $\\text{Span}\\{\\mathbf{v}_1, \\mathbf{v}_2\\}$, a two-dimens
     title: `Parametric Vector Form`,
     content: `The general solution to $A\\mathbf{x} = \\mathbf{0}$ is a linear combination of the null-space basis vectors:
 
-$$\\mathbf{x} = t_1\\mathbf{v}_1 + t_2\\mathbf{v}_2 + \\cdots + t_k\\mathbf{v}_k$$
+@academic[formula_callout:Parametric Vector Form
+$$\\mathbf{x} = t_1\\mathbf{v}_1 + t_2\\mathbf{v}_2 + \\cdots + t_k\\mathbf{v}_k$$]@
 
 where $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$ are the basis vectors found by the algorithm above and $t_1, \\dots, t_k$ are free parameters ranging over all real numbers. The number of parameters $k = n - \\text{rank}(A)$ is the nullity.
 
@@ -1292,7 +1297,8 @@ There is no particular solution $\\mathbf{x}_p$ to add because the right-hand si
     title: `The Superposition Principle`,
     content: `If $\\mathbf{x}_1$ and $\\mathbf{x}_2$ are solutions to $A\\mathbf{x} = \\mathbf{0}$, then any linear combination $c_1\\mathbf{x}_1 + c_2\\mathbf{x}_2$ is also a solution:
 
-$$A(c_1\\mathbf{x}_1 + c_2\\mathbf{x}_2) = c_1 A\\mathbf{x}_1 + c_2 A\\mathbf{x}_2 = c_1\\mathbf{0} + c_2\\mathbf{0} = \\mathbf{0}$$
+@academic[formula_callout:The Superposition Principle
+$$A(c_1\\mathbf{x}_1 + c_2\\mathbf{x}_2) = c_1 A\\mathbf{x}_1 + c_2 A\\mathbf{x}_2 = c_1\\mathbf{0} + c_2\\mathbf{0} = \\mathbf{0}$$]@
 
 This is precisely the statement that the solution set is a [subspace](!/linear-algebra/vector-spaces/subspaces) — it is closed under addition and scalar multiplication. The superposition principle is the reason the general solution is a linear combination of basis vectors, and it is the reason the null space has the clean structure of a [vector space](!/linear-algebra/vector-spaces) rather than an arbitrary collection of points.
 
@@ -1305,7 +1311,8 @@ Superposition holds only for homogeneous systems. For a non-homogeneous system $
     title: `Homogeneous vs. Non-Homogeneous`,
     content: `The homogeneous system $A\\mathbf{x} = \\mathbf{0}$ and the non-homogeneous system $A\\mathbf{x} = \\mathbf{b}$ are deeply connected. If $\\mathbf{x}_p$ is any particular solution to $A\\mathbf{x} = \\mathbf{b}$, then every solution has the form
 
-$$\\mathbf{x} = \\mathbf{x}_p + \\mathbf{x}_h$$
+@academic[formula_callout:Homogeneous vs. Non-Homogeneous
+$$\\mathbf{x} = \\mathbf{x}_p + \\mathbf{x}_h$$]@
 
 where $\\mathbf{x}_h \\in \\text{Null}(A)$ is a solution to the homogeneous system. The particular solution accounts for $\\mathbf{b}$; the null-space component accounts for the freedom.
 
@@ -1331,7 +1338,8 @@ This is the computational link between homogeneous systems and independence. Row
     title: `The Eigenvalue Connection`,
     content: `The [eigenvalue](!/linear-algebra/eigen) equation $A\\mathbf{x} = \\lambda\\mathbf{x}$ can be rewritten as
 
-$$(A - \\lambda I)\\mathbf{x} = \\mathbf{0}$$
+@academic[formula_callout:The Eigenvalue Connection
+$$(A - \\lambda I)\\mathbf{x} = \\mathbf{0}$$]@
 
 This is a homogeneous system with coefficient matrix $A - \\lambda I$. Eigenvectors are precisely the nontrivial solutions. They exist when and only when $A - \\lambda I$ is singular — that is, when $\\det(A - \\lambda I) = 0$.
 

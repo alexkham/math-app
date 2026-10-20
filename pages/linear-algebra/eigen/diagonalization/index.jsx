@@ -2811,6 +2811,8 @@ import MatrixOperation from '@/app/components/infographics/linear-algebra/Matrix
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import diagonalizationDiagrams from '@/app/components/linear-algebra copy/matrix/diagonalizationDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -3071,7 +3073,8 @@ const sectionsContent = {
     title: `What Diagonalization Means`,
     content: `An $n \\times n$ [matrix](!/linear-algebra/matrix) $A$ is diagonalizable if there exists an [invertible](!/linear-algebra/matrix/inverse) matrix $P$ and a [diagonal](!/linear-algebra/matrix/types) matrix $D$ such that
 
-$$A = PDP^{-1}$$
+@academic[formula_callout:What Diagonalization Means
+$$A = PDP^{-1}$$]@
 
 The columns of $P$ are eigenvectors of $A$. The diagonal entries of $D$ are the corresponding eigenvalues, in the same order. The factorization says that in the [basis](!/linear-algebra/vector-spaces) of eigenvectors, the [transformation](!/linear-algebra/transformations) acts by pure scaling along each axis — the most transparent possible description.
 
@@ -3136,7 +3139,8 @@ For $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$, the characteristic p
 
 For $\\lambda_1 = 5$: eigenvector $\\mathbf{v}_1 = (1, 2)^T$. For $\\lambda_2 = -1$: eigenvector $\\mathbf{v}_2 = (-1, 1)^T$.
 
-$$P = \\begin{pmatrix} 1 & -1 \\\\ 2 & 1 \\end{pmatrix}, \\quad D = \\begin{pmatrix} 5 & 0 \\\\ 0 & -1 \\end{pmatrix}$$
+@academic[formula_callout:Constructing the Diagonalization
+$$P = \\begin{pmatrix} 1 & -1 \\\\ 2 & 1 \\end{pmatrix}, \\quad D = \\begin{pmatrix} 5 & 0 \\\\ 0 & -1 \\end{pmatrix}$$]@
 
 Verification: $AP = \\begin{pmatrix} 5 & 1 \\\\ 10 & -1 \\end{pmatrix} = PD = \\begin{pmatrix} 1 & -1 \\\\ 2 & 1 \\end{pmatrix}\\begin{pmatrix} 5 & 0 \\\\ 0 & -1 \\end{pmatrix} = \\begin{pmatrix} 5 & 1 \\\\ 10 & -1 \\end{pmatrix}$.`,
     before: ``,
@@ -3159,9 +3163,9 @@ Eigenvectors for distinct eigenvalues are [linearly independent](!/linear-algebr
 
 When eigenvalues repeat, diagonalizability depends on the eigenspaces. A repeated eigenvalue $\\lambda$ with algebraic multiplicity $k$ must have a $k$-dimensional eigenspace. If the eigenspace falls short — dimension less than $k$ — there are not enough eigenvectors, and the matrix cannot be diagonalized.
 
-## Example of Failure
+@academic[example:Example of Failure
 
-$A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ has eigenvalue $\\lambda = 2$ with $m_a = 2$, but $A - 2I = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ has null space of dimension $1$. Only one independent eigenvector exists, so $P$ cannot be built. The matrix is defective.`,
+$A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ has eigenvalue $\\lambda = 2$ with $m_a = 2$, but $A - 2I = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ has null space of dimension $1$. Only one independent eigenvector exists, so $P$ cannot be built. The matrix is defective.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -3170,7 +3174,8 @@ $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ has eigenvalue $\\lambda 
     title: `Matrix Powers`,
     content: `The primary computational payoff of diagonalization is the simplification of matrix powers:
 
-$$A^k = PD^kP^{-1} = P\\,\\text{diag}(\\lambda_1^k, \\lambda_2^k, \\dots, \\lambda_n^k)\\,P^{-1}$$
+@academic[formula_callout:Matrix Powers
+$$A^k = PD^kP^{-1} = P\\,\\text{diag}(\\lambda_1^k, \\lambda_2^k, \\dots, \\lambda_n^k)\\,P^{-1}$$]@
 
 Raising a diagonal matrix to a power means raising each diagonal entry independently. The entire cost of $A^k$, for any $k$, is one [matrix inversion](!/linear-algebra/matrix/inverse) and two matrix multiplications — the same cost regardless of whether $k$ is $2$ or $2$ million.
 
@@ -3178,9 +3183,11 @@ Raising a diagonal matrix to a power means raising each diagonal entry independe
 
 Using the diagonalization from section $2$: $P^{-1} = \\frac{1}{3}\\begin{pmatrix} 1 & 1 \\\\ -2 & 1 \\end{pmatrix}$.
 
-$$A^4 = P\\begin{pmatrix} 5^4 & 0 \\\\ 0 & (-1)^4 \\end{pmatrix}P^{-1} = \\begin{pmatrix} 1 & -1 \\\\ 2 & 1 \\end{pmatrix}\\begin{pmatrix} 625 & 0 \\\\ 0 & 1 \\end{pmatrix}\\frac{1}{3}\\begin{pmatrix} 1 & 1 \\\\ -2 & 1 \\end{pmatrix}$$
+@academic[formula_callout:Matrix Powers
+$$A^4 = P\\begin{pmatrix} 5^4 & 0 \\\\ 0 & (-1)^4 \\end{pmatrix}P^{-1} = \\begin{pmatrix} 1 & -1 \\\\ 2 & 1 \\end{pmatrix}\\begin{pmatrix} 625 & 0 \\\\ 0 & 1 \\end{pmatrix}\\frac{1}{3}\\begin{pmatrix} 1 & 1 \\\\ -2 & 1 \\end{pmatrix}$$]@
 
-$$= \\frac{1}{3}\\begin{pmatrix} 625 & -1 \\\\ 1250 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\\\ -2 & 1 \\end{pmatrix} = \\frac{1}{3}\\begin{pmatrix} 627 & 624 \\\\ 1248 & 1251 \\end{pmatrix} = \\begin{pmatrix} 209 & 208 \\\\ 416 & 417 \\end{pmatrix}$$
+@academic[formula_callout:Matrix Powers
+$$= \\frac{1}{3}\\begin{pmatrix} 625 & -1 \\\\ 1250 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\\\ -2 & 1 \\end{pmatrix} = \\frac{1}{3}\\begin{pmatrix} 627 & 624 \\\\ 1248 & 1251 \\end{pmatrix} = \\begin{pmatrix} 209 & 208 \\\\ 416 & 417 \\end{pmatrix}$$]@
 
 Without diagonalization, computing $A^4$ requires three sequential matrix multiplications.`,
     before: ``,
@@ -3193,7 +3200,8 @@ Without diagonalization, computing $A^4$ requires three sequential matrix multip
 
 Converting back to the original basis, the general solution is
 
-$$\\mathbf{x}(t) = c_1 e^{\\lambda_1 t}\\mathbf{v}_1 + c_2 e^{\\lambda_2 t}\\mathbf{v}_2 + \\cdots + c_n e^{\\lambda_n t}\\mathbf{v}_n$$
+@academic[formula_callout:Systems of Differential Equations
+$$\\mathbf{x}(t) = c_1 e^{\\lambda_1 t}\\mathbf{v}_1 + c_2 e^{\\lambda_2 t}\\mathbf{v}_2 + \\cdots + c_n e^{\\lambda_n t}\\mathbf{v}_n$$]@
 
 Each eigenvalue determines the behavior along its eigenvector direction. Positive eigenvalues produce exponential growth, negative eigenvalues produce decay, and zero eigenvalues produce constant components. [Complex](!/linear-algebra/eigen/complex) eigenvalues produce oscillatory terms involving sines and cosines modulated by exponential envelopes.
 
@@ -3206,7 +3214,8 @@ The constants $c_1, \\dots, c_n$ are determined by the initial condition $\\math
     title: `Recurrence Relations`,
     content: `The discrete system $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$ has solution $\\mathbf{x}_n = A^n\\mathbf{x}_0$. When $A$ is diagonalizable, this becomes
 
-$$\\mathbf{x}_n = PD^nP^{-1}\\mathbf{x}_0 = c_1 \\lambda_1^n \\mathbf{v}_1 + c_2 \\lambda_2^n \\mathbf{v}_2 + \\cdots + c_n \\lambda_n^n \\mathbf{v}_n$$
+@academic[formula_callout:Recurrence Relations
+$$\\mathbf{x}_n = PD^nP^{-1}\\mathbf{x}_0 = c_1 \\lambda_1^n \\mathbf{v}_1 + c_2 \\lambda_2^n \\mathbf{v}_2 + \\cdots + c_n \\lambda_n^n \\mathbf{v}_n$$]@
 
 The dominant eigenvalue — the eigenvalue with the largest absolute value — determines the long-term growth rate. As $n \\to \\infty$, the term $c_i \\lambda_i^n \\mathbf{v}_i$ with the largest $|\\lambda_i|$ dominates all others.
 
@@ -3260,7 +3269,8 @@ When $A$ has [complex](!/linear-algebra/eigen/complex) eigenvalues $a \\pm bi$, 
 
 The Jordan form is block diagonal, with each block a Jordan block:
 
-$$J_k(\\lambda) = \\begin{pmatrix} \\lambda & 1 & 0 & \\cdots & 0 \\\\ 0 & \\lambda & 1 & \\cdots & 0 \\\\ \\vdots & & \\ddots & \\ddots & \\vdots \\\\ 0 & & & \\lambda & 1 \\\\ 0 & & & & \\lambda \\end{pmatrix}$$
+@academic[formula_callout:When Diagonalization Fails
+$$J_k(\\lambda) = \\begin{pmatrix} \\lambda & 1 & 0 & \\cdots & 0 \\\\ 0 & \\lambda & 1 & \\cdots & 0 \\\\ \\vdots & & \\ddots & \\ddots & \\vdots \\\\ 0 & & & \\lambda & 1 \\\\ 0 & & & & \\lambda \\end{pmatrix}$$]@
 
 A $k \\times k$ Jordan block has the eigenvalue $\\lambda$ on the diagonal and ones on the superdiagonal. A diagonalizable eigenvalue contributes $1 \\times 1$ Jordan blocks. A defective eigenvalue contributes blocks larger than $1 \\times 1$.
 
@@ -3432,8 +3442,44 @@ const schemas = {
     }),
   };
 
+  const odeEigenCases = {
+    prefaceTitle: 'One direction at a time',
+    preface: 'When $A$ is diagonalizable, $\\mathbf{x}\' = A\\mathbf{x}$ decouples into independent equations $y_i\' = \\lambda_i y_i$ with solutions $c_i e^{\\lambda_i t}$. Each eigenvalue decides the behavior along its own eigenvector.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'The constants $c_1, \\dots, c_n$ come from the initial condition: write $\\mathbf{x}(0)$ as a combination of the eigenvectors and read off the coefficients.',
+    parent: {
+      kicker: 'Along eigenvector $\\mathbf{v}_i$',
+      formula: '$c_i e^{\\lambda_i t}\\mathbf{v}_i$',
+      splitBy: 'the eigenvalue $\\lambda_i$',
+    },
+    cases: [
+      {
+        id: 'pos', condition: '$\\lambda_i > 0$',
+        count: { n: '↑' },
+        headline: 'Exponential growth',
+      },
+      {
+        id: 'neg', condition: '$\\lambda_i < 0$',
+        count: { n: '↓' },
+        headline: 'Decay',
+      },
+      {
+        id: 'zero', condition: '$\\lambda_i = 0$',
+        count: { n: '=' },
+        headline: 'Constant component',
+      },
+      {
+        id: 'complex', condition: '$\\lambda_i$ complex',
+        count: { n: '~' },
+        headline: 'Oscillation',
+        desc: 'sines and cosines modulated by exponential envelopes; see [complex eigenvalues](!/linear-algebra/eigen/complex)',
+      },
+    ],
+  };
+
    return {
   props: {
+    odeEigenCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -3455,7 +3501,9 @@ const schemas = {
    }
 
 
-   export default function DiagonalizationPage({
+   const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function DiagonalizationPage({odeEigenCases, 
      seoData,
      sectionsContent,
      introContent,
@@ -3541,6 +3589,14 @@ const schemas = {
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrameV2
+            key={'obj5-diagram'}
+            id="ode-eigenvalue-direction-cases"
+            title="x' = Ax: behavior along each eigenvector"
+            source="/linear-algebra/eigen/diagonalization"
+          >
+            <CaseSplit data={odeEigenCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrameV2>,
         ]
     },
     {

@@ -3244,7 +3244,8 @@ This labeling is relational, not absolute. The same side can be "opposite" or "a
     title: `Defining Sine, Cosine, and Tangent`,
     content: `The three primary trigonometric functions are defined as ratios of the sides of a right triangle relative to an acute angle $\\theta$:
 
-$$\\sin(\\theta) = \\frac{\\text{opposite}}{\\text{hypotenuse}}, \\quad \\cos(\\theta) = \\frac{\\text{adjacent}}{\\text{hypotenuse}}, \\quad \\tan(\\theta) = \\frac{\\text{opposite}}{\\text{adjacent}}$$
+@academic[formula_callout:Defining Sine, Cosine, and Tangent
+$$\\sin(\\theta) = \\frac{\\text{opposite}}{\\text{hypotenuse}}, \\quad \\cos(\\theta) = \\frac{\\text{adjacent}}{\\text{hypotenuse}}, \\quad \\tan(\\theta) = \\frac{\\text{opposite}}{\\text{adjacent}}$$]@
 
 The mnemonic SOH-CAH-TOA encodes these definitions: Sine = Opposite/Hypotenuse, Cosine = Adjacent/Hypotenuse, Tangent = Opposite/Adjacent.
 
@@ -3263,11 +3264,14 @@ The function names themselves are standardized abbreviations — sin, cos, tan a
     title: `The Reciprocal Functions: Cosecant, Secant, Cotangent`,
     content: `Each primary ratio has a reciprocal:
 
-$$\\csc(\\theta) = \\frac{\\text{hypotenuse}}{\\text{opposite}} = \\frac{1}{\\sin(\\theta)}$$
+@academic[formula_callout:The Reciprocal Functions: Cosecant, Secant, Cotangent
+$$\\csc(\\theta) = \\frac{\\text{hypotenuse}}{\\text{opposite}} = \\frac{1}{\\sin(\\theta)}$$]@
 
-$$\\sec(\\theta) = \\frac{\\text{hypotenuse}}{\\text{adjacent}} = \\frac{1}{\\cos(\\theta)}$$
+@academic[formula_callout:The Reciprocal Functions: Cosecant, Secant, Cotangent
+$$\\sec(\\theta) = \\frac{\\text{hypotenuse}}{\\text{adjacent}} = \\frac{1}{\\cos(\\theta)}$$]@
 
-$$\\cot(\\theta) = \\frac{\\text{adjacent}}{\\text{opposite}} = \\frac{1}{\\tan(\\theta)}$$
+@academic[formula_callout:The Reciprocal Functions: Cosecant, Secant, Cotangent
+$$\\cot(\\theta) = \\frac{\\text{adjacent}}{\\text{opposite}} = \\frac{1}{\\tan(\\theta)}$$]@
 
 These three functions — cosecant, secant, and cotangent — do not introduce new information. They repackage the same side relationships in inverted form. If $\\sin(\\theta) = \\frac{3}{5}$, then $\\csc(\\theta) = \\frac{5}{3}$. If $\\cos(\\theta) = \\frac{4}{5}$, then $\\sec(\\theta) = \\frac{5}{4}$.
 
@@ -3324,15 +3328,18 @@ The six ratios — three primary and three reciprocal — collect into one defin
 
 Suppose a right triangle has an acute angle $\\theta = 35°$ and a hypotenuse of length 20. To find the opposite side, use sine:
 
-$$\\sin(35°) = \\frac{x}{20} \\quad \\Rightarrow \\quad x = 20\\sin(35°)$$
+@academic[formula_callout:Finding Missing Sides
+$$\\sin(35°) = \\frac{x}{20} \\quad \\Rightarrow \\quad x = 20\\sin(35°)$$]@
 
 To find the adjacent side, use cosine:
 
-$$\\cos(35°) = \\frac{y}{20} \\quad \\Rightarrow \\quad y = 20\\cos(35°)$$
+@academic[formula_callout:Finding Missing Sides
+$$\\cos(35°) = \\frac{y}{20} \\quad \\Rightarrow \\quad y = 20\\cos(35°)$$]@
 
 If instead the adjacent side is known (say, 15) and the opposite side is sought, tangent is the appropriate ratio:
 
-$$\\tan(35°) = \\frac{x}{15} \\quad \\Rightarrow \\quad x = 15\\tan(35°)$$
+@academic[formula_callout:Finding Missing Sides
+$$\\tan(35°) = \\frac{x}{15} \\quad \\Rightarrow \\quad x = 15\\tan(35°)$$]@
 
 The choice of ratio is not arbitrary — it is dictated by which pair of sides (one known, one unknown) relates to the given angle. Using the wrong ratio is one of the most common errors in triangle problems. A reliable method: label the sides as opposite, adjacent, or hypotenuse relative to the given angle, identify which two are involved (one known, one unknown), and select the ratio that pairs exactly those two.
 
@@ -3349,11 +3356,13 @@ To get the decimal value of sine, cosine or tangent for the given angle, use the
 
 For example, in a right triangle with opposite side 5 and hypotenuse 13:
 
-$$\\sin(\\theta) = \\frac{5}{13} \\quad \\Rightarrow \\quad \\theta = \\arcsin\\left(\\frac{5}{13}\\right) \\approx 22.6°$$
+@academic[formula_callout:Finding Missing Angles
+$$\\sin(\\theta) = \\frac{5}{13} \\quad \\Rightarrow \\quad \\theta = \\arcsin\\left(\\frac{5}{13}\\right) \\approx 22.6°$$]@
 
 Given adjacent side 7 and opposite side 10:
 
-$$\\tan(\\theta) = \\frac{10}{7} \\quad \\Rightarrow \\quad \\theta = \\arctan\\left(\\frac{10}{7}\\right) \\approx 55.0°$$
+@academic[formula_callout:Finding Missing Angles
+$$\\tan(\\theta) = \\frac{10}{7} \\quad \\Rightarrow \\quad \\theta = \\arctan\\left(\\frac{10}{7}\\right) \\approx 55.0°$$]@
 
 Once one acute angle is found, the other follows immediately: the two acute angles in a right triangle always sum to $90°$. If $\\theta \\approx 22.6°$, the other acute angle is approximately $90° - 22.6° = 67.4°$.
 
@@ -3374,7 +3383,8 @@ Alternatively, the triangle arises by cutting a square along its diagonal. The d
 
 The trigonometric values follow directly from the side ratios:
 
-$$\\sin(45°) = \\frac{1}{\\sqrt{2}} = \\frac{\\sqrt{2}}{2}, \\quad \\cos(45°) = \\frac{1}{\\sqrt{2}} = \\frac{\\sqrt{2}}{2}, \\quad \\tan(45°) = \\frac{1}{1} = 1$$
+@academic[formula_callout:The 45-45-90 Triangle
+$$\\sin(45°) = \\frac{1}{\\sqrt{2}} = \\frac{\\sqrt{2}}{2}, \\quad \\cos(45°) = \\frac{1}{\\sqrt{2}} = \\frac{\\sqrt{2}}{2}, \\quad \\tan(45°) = \\frac{1}{1} = 1$$]@
 
 The equality $\\sin(45°) = \\cos(45°)$ is a direct consequence of the triangle&apos;s symmetry: the two legs are equal, so opposite and adjacent are identical. This is the only acute angle for which sine and cosine are equal. Tangent equals 1, meaning the opposite and adjacent sides have the same length — the angle bisects the range between $0°$ and $90°$ in a very concrete geometric sense.
 
@@ -3391,11 +3401,13 @@ This triangle arises from bisecting an equilateral triangle. An equilateral tria
 
 The trigonometric values at $30°$:
 
-$$\\sin(30°) = \\frac{1}{2}, \\quad \\cos(30°) = \\frac{\\sqrt{3}}{2}, \\quad \\tan(30°) = \\frac{1}{\\sqrt{3}} = \\frac{\\sqrt{3}}{3}$$
+@academic[formula_callout:The 30-60-90 Triangle
+$$\\sin(30°) = \\frac{1}{2}, \\quad \\cos(30°) = \\frac{\\sqrt{3}}{2}, \\quad \\tan(30°) = \\frac{1}{\\sqrt{3}} = \\frac{\\sqrt{3}}{3}$$]@
 
 The trigonometric values at $60°$:
 
-$$\\sin(60°) = \\frac{\\sqrt{3}}{2}, \\quad \\cos(60°) = \\frac{1}{2}, \\quad \\tan(60°) = \\sqrt{3}$$
+@academic[formula_callout:The 30-60-90 Triangle
+$$\\sin(60°) = \\frac{\\sqrt{3}}{2}, \\quad \\cos(60°) = \\frac{1}{2}, \\quad \\tan(60°) = \\sqrt{3}$$]@
 
 Notice the swap: $\\sin(30°) = \\cos(60°)$ and $\\cos(30°) = \\sin(60°)$. This is the cofunction relationship at work — $30°$ and $60°$ are complements, so the sine of one equals the cosine of the other.
 
@@ -3410,13 +3422,17 @@ Together with the 45-45-90 values, these produce exact trigonometric values at $
 
 Consider an acute angle $\\theta$ in a right triangle. The other acute angle is $90° - \\theta$. The side that is opposite $\\theta$ is adjacent to $90° - \\theta$, and the side that is adjacent to $\\theta$ is opposite $90° - \\theta$. The hypotenuse is shared. Therefore:
 
-$$\\sin(\\theta) = \\frac{\\text{opposite}}{\\text{hypotenuse}} = \\cos(90° - \\theta)$$
+@academic[formula_callout:Cofunction Relationships
+$$\\sin(\\theta) = \\frac{\\text{opposite}}{\\text{hypotenuse}} = \\cos(90° - \\theta)$$]@
 
-$$\\cos(\\theta) = \\frac{\\text{adjacent}}{\\text{hypotenuse}} = \\sin(90° - \\theta)$$
+@academic[formula_callout:Cofunction Relationships
+$$\\cos(\\theta) = \\frac{\\text{adjacent}}{\\text{hypotenuse}} = \\sin(90° - \\theta)$$]@
 
-$$\\tan(\\theta) = \\frac{\\text{opposite}}{\\text{adjacent}} = \\cot(90° - \\theta)$$
+@academic[formula_callout:Cofunction Relationships
+$$\\tan(\\theta) = \\frac{\\text{opposite}}{\\text{adjacent}} = \\cot(90° - \\theta)$$]@
 
-$$\\sec(\\theta) = \\frac{\\text{hypotenuse}}{\\text{adjacent}} = \\csc(90° - \\theta)$$
+@academic[formula_callout:Cofunction Relationships
+$$\\sec(\\theta) = \\frac{\\text{hypotenuse}}{\\text{adjacent}} = \\csc(90° - \\theta)$$]@
 
 Each function, evaluated at an angle, equals its cofunction evaluated at the complementary angle. The prefix "co-" in cosine, cotangent, and cosecant is not accidental — it stands for "complement." Cosine is literally the sine of the complement. Cotangent is the tangent of the complement. Cosecant is the secant of the complement.
 
@@ -3462,7 +3478,8 @@ A key geometric fact simplifies many problems: when a horizontal line from the o
 
 The standard problem structure: the observer stands at a known distance from the base of an object, measures the angle of elevation to the top, and seeks the height. This produces a right triangle where the known distance is the adjacent side, the unknown height is the opposite side, and tangent is the relevant ratio:
 
-$$\\tan(\\theta) = \\frac{\\text{height}}{\\text{distance}} \\quad \\Rightarrow \\quad \\text{height} = \\text{distance} \\times \\tan(\\theta)$$
+@academic[formula_callout:Angles of Elevation and Depression
+$$\\tan(\\theta) = \\frac{\\text{height}}{\\text{distance}} \\quad \\Rightarrow \\quad \\text{height} = \\text{distance} \\times \\tan(\\theta)$$]@
 
 Variations include: finding the distance given the height and angle, finding the angle given the height and distance, problems involving two observation points at different distances, and problems where the observer&apos;s own height adds to the triangle.`,
     before: ``,

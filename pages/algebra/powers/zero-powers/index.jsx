@@ -240,7 +240,8 @@ obj0: {
   title: `Zero as a Base — Positive Exponents`,
   content: `Raising zero to any positive power gives zero. No amount of repetition changes the outcome:
 
-$$0^1 = 0 \\qquad 0^2 = 0 \\qquad 0^3 = 0 \\qquad 0^{100} = 0$$
+@academic[formula_callout:Zero as a Base — Positive Exponents
+$$0^1 = 0 \\qquad 0^2 = 0 \\qquad 0^3 = 0 \\qquad 0^{100} = 0$$]@
 
 Each multiplication introduces another factor of $0$, and a single zero factor is enough to force the entire product to $0$. This holds whether the exponent is a [natural number](!/algebra/powers/natural-exponents), a positive [rational](!/algebra/powers/rational-exponents), or a positive irrational.
 
@@ -254,7 +255,8 @@ obj2: {
   title: `Zero as a Base — Negative Exponents`,
   content: `[Negative exponents](!/algebra/powers/negative-exponents) take reciprocals: $a^{-n} = \\frac{1}{a^n}$. Applying this to a base of zero gives:
 
-$$0^{-n} = \\frac{1}{0^n} = \\frac{1}{0}$$
+@academic[formula_callout:Zero as a Base — Negative Exponents
+$$0^{-n} = \\frac{1}{0^n} = \\frac{1}{0}$$]@
 
 Division by zero is undefined. The expression $0^{-1}$, $0^{-2}$, $0^{-100}$ — none of them produce a real number.
 

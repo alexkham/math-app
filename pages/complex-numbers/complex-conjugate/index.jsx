@@ -1913,13 +1913,15 @@ for any integer $n$. Repeated application of the product rule establishes this f
   before: ``,
   content: `A fundamental identity connects the conjugate to the [modulus](!/complex-numbers/absolute-value):
 
-$$z \\cdot \\bar{z} = |z|^2$$
+@academic[formula_callout:Conjugate and Modulus
+$$z \\cdot \\bar{z} = |z|^2$$]@
 
 The product of any complex number with its conjugate yields the square of its modulus — a real, non-negative value. This relationship lies at the heart of complex arithmetic.
 
 The proof follows from direct expansion. Let $z = a + bi$, so $\\bar{z} = a - bi$. The product becomes:
 
-$$z \\cdot \\bar{z} = (a + bi)(a - bi) = a^2 - abi + abi - b^2i^2 = a^2 - b^2(-1) = a^2 + b^2$$
+@academic[formula_callout:Conjugate and Modulus
+$$z \\cdot \\bar{z} = (a + bi)(a - bi) = a^2 - abi + abi - b^2i^2 = a^2 - b^2(-1) = a^2 + b^2$$]@
 
 The middle terms cancel, and $i^2 = -1$ converts the final term to positive. The result $a^2 + b^2$ matches the definition $|z|^2 = a^2 + b^2$ exactly.
 
@@ -1980,19 +1982,22 @@ Geometrically, pure imaginaries sit on the imaginary axis, perpendicular to the 
 
 The sum of a number and its conjugate isolates the real part:
 
-$$z + \\bar{z} = (a + bi) + (a - bi) = 2a$$
+@academic[formula_callout:Useful Identities
+$$z + \\bar{z} = (a + bi) + (a - bi) = 2a$$]@
 
 The imaginary terms cancel, leaving twice the real part. Rearranging provides a formula: $Re(z) = \\frac{z + \\bar{z}}{2}$. This identity guarantees that $z + \\bar{z}$ is always real, regardless of the original number. Encountering this sum in any calculation signals that the result lies on the real axis.
 
 The difference between a number and its conjugate isolates the imaginary part:
 
-$$z - \\bar{z} = (a + bi) - (a - bi) = 2bi$$
+@academic[formula_callout:Useful Identities
+$$z - \\bar{z} = (a + bi) - (a - bi) = 2bi$$]@
 
 The real terms cancel, leaving twice the imaginary term. Rearranging: $Im(z) = \\frac{z - \\bar{z}}{2i}$. This identity guarantees that $z - \\bar{z}$ is always pure imaginary. The result necessarily sits on the vertical axis.
 
 The product of a number and its conjugate yields the squared modulus:
 
-$$z \\cdot \\bar{z} = a^2 + b^2 = |z|^2$$
+@academic[formula_callout:Useful Identities
+$$z \\cdot \\bar{z} = a^2 + b^2 = |z|^2$$]@
 
 This result is always real and always non-negative. It equals zero only when $z = 0$. The identity underlies division, modulus computation, and countless proofs.
 
@@ -2009,7 +2014,8 @@ These three identities — sum, difference, and product with the conjugate — f
 
 Consider the division $\\frac{w}{z}$ where both $w$ and $z$ are complex. The denominator $z = c + di$ contains an imaginary part, preventing direct interpretation as a number in standard form. The strategy: multiply both numerator and denominator by $\\bar{z}$, the conjugate of the denominator.
 
-$$\\frac{w}{z} = \\frac{w}{z} \\cdot \\frac{\\bar{z}}{\\bar{z}} = \\frac{w \\cdot \\bar{z}}{z \\cdot \\bar{z}} = \\frac{w \\cdot \\bar{z}}{|z|^2}$$
+@academic[formula_callout:Applications to Division
+$$\\frac{w}{z} = \\frac{w}{z} \\cdot \\frac{\\bar{z}}{\\bar{z}} = \\frac{w \\cdot \\bar{z}}{z \\cdot \\bar{z}} = \\frac{w \\cdot \\bar{z}}{|z|^2}$$]@
 
 The denominator becomes $z \\cdot \\bar{z} = |z|^2$, a real number. The numerator $w \\cdot \\bar{z}$ is some complex number that can be computed by standard multiplication. Dividing a complex number by a real number simply scales both components, yielding standard form.
 
@@ -2017,7 +2023,8 @@ A complete example: compute $\\frac{3 + 2i}{1 - 4i}$.
 
 The denominator is $1 - 4i$, so its conjugate is $1 + 4i$. Multiply numerator and denominator:
 
-$$\\frac{3 + 2i}{1 - 4i} \\cdot \\frac{1 + 4i}{1 + 4i} = \\frac{(3 + 2i)(1 + 4i)}{(1 - 4i)(1 + 4i)}$$
+@academic[formula_callout:Applications to Division
+$$\\frac{3 + 2i}{1 - 4i} \\cdot \\frac{1 + 4i}{1 + 4i} = \\frac{(3 + 2i)(1 + 4i)}{(1 - 4i)(1 + 4i)}$$]@
 
 The denominator: $(1 - 4i)(1 + 4i) = 1 - 16i^2 = 1 + 16 = 17$.
 
@@ -2042,7 +2049,8 @@ The theorem states: let $p(z) = a_nz^n + a_{n-1}z^{n-1} + \\cdots + a_1z + a_0$ 
 
 The proof exploits how conjugation interacts with polynomial evaluation. Since conjugation distributes over sums and products, and since conjugating a real number leaves it unchanged:
 
-$$\\overline{p(z_0)} = \\overline{a_nz_0^n + \\cdots + a_0} = a_n\\overline{z_0^n} + \\cdots + a_0 = a_n(\\bar{z_0})^n + \\cdots + a_0 = p(\\bar{z_0})$$
+@academic[formula_callout:Conjugate Pairs in Polynomials
+$$\\overline{p(z_0)} = \\overline{a_nz_0^n + \\cdots + a_0} = a_n\\overline{z_0^n} + \\cdots + a_0 = a_n(\\bar{z_0})^n + \\cdots + a_0 = p(\\bar{z_0})$$]@
 
 The key step uses $\\overline{a_k} = a_k$ because each coefficient is real. If $p(z_0) = 0$, then $\\overline{p(z_0)} = \\bar{0} = 0$, so $p(\\bar{z_0}) = 0$.
 

@@ -1646,7 +1646,8 @@ If a nontrivial solution exists — any assignment of scalars, not all zero, tha
 
 Dependence means at least one vector in the set can be expressed as a linear combination of the others. If $c_j \\neq 0$ in a nontrivial relation, then dividing by $c_j$ isolates $\\mathbf{v}_j$:
 
-$$\\mathbf{v}_j = -\\frac{c_1}{c_j}\\mathbf{v}_1 - \\cdots - \\frac{c_{j-1}}{c_j}\\mathbf{v}_{j-1} - \\frac{c_{j+1}}{c_j}\\mathbf{v}_{j+1} - \\cdots - \\frac{c_k}{c_j}\\mathbf{v}_k$$
+@academic[formula_callout:Definition
+$$\\mathbf{v}_j = -\\frac{c_1}{c_j}\\mathbf{v}_1 - \\cdots - \\frac{c_{j-1}}{c_j}\\mathbf{v}_{j-1} - \\frac{c_{j+1}}{c_j}\\mathbf{v}_{j+1} - \\cdots - \\frac{c_k}{c_j}\\mathbf{v}_k$$]@
 
 A single nonzero vector is always independent — the equation $c\\mathbf{v} = \\mathbf{0}$ with $\\mathbf{v} \\neq \\mathbf{0}$ forces $c = 0$. The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mathbf{0}$ is a nontrivial relation. Any set containing the zero vector is therefore dependent.`,
     before: ``,
@@ -1723,13 +1724,14 @@ Row reduce $A$. The vectors are independent if and only if every column contains
 
 Test whether $\\mathbf{v}_1 = (1, 2, -1)$, $\\mathbf{v}_2 = (0, 1, 3)$, $\\mathbf{v}_3 = (2, 0, 1)$ are independent. Form the matrix and reduce:
 
-$$A = \\begin{pmatrix} 1 & 0 & 2 \\\\ 2 & 1 & 0 \\\\ -1 & 3 & 1 \\end{pmatrix} \\xrightarrow{R_2 - 2R_1,\\; R_3 + R_1} \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & -4 \\\\ 0 & 3 & 3 \\end{pmatrix} \\xrightarrow{R_3 - 3R_2} \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & -4 \\\\ 0 & 0 & 15 \\end{pmatrix}$$
+@academic[formula_callout:Testing Independence: The Homogeneous System
+$$A = \\begin{pmatrix} 1 & 0 & 2 \\\\ 2 & 1 & 0 \\\\ -1 & 3 & 1 \\end{pmatrix} \\xrightarrow{R_2 - 2R_1,\\; R_3 + R_1} \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & -4 \\\\ 0 & 3 & 3 \\end{pmatrix} \\xrightarrow{R_3 - 3R_2} \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & -4 \\\\ 0 & 0 & 15 \\end{pmatrix}$$]@
 
 Three pivots in three columns — no free variables. The set is independent.
 
-## Worked Example: Dependent Set
+@academic[example:Worked Example: Dependent Set
 
-Test $\\mathbf{v}_1 = (1, 0, 2)$, $\\mathbf{v}_2 = (3, 1, 4)$, $\\mathbf{v}_3 = (5, 2, 6)$, $\\mathbf{v}_4 = (0, 1, -2)$ in $\\mathbb{R}^3$. The matrix is $3 \\times 4$ — four columns but only three rows, so at most three pivots. At least one column must be free. The set is dependent without any computation, simply because four vectors in $\\mathbb{R}^3$ cannot be independent.`,
+Test $\\mathbf{v}_1 = (1, 0, 2)$, $\\mathbf{v}_2 = (3, 1, 4)$, $\\mathbf{v}_3 = (5, 2, 6)$, $\\mathbf{v}_4 = (0, 1, -2)$ in $\\mathbb{R}^3$. The matrix is $3 \\times 4$ — four columns but only three rows, so at most three pivots. At least one column must be free. The set is dependent without any computation, simply because four vectors in $\\mathbb{R}^3$ cannot be independent.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1751,7 +1753,8 @@ This follows from the [invertibility equivalence](!/linear-algebra/determinants/
 
 Test whether $(1, 3)$ and $(2, 5)$ are independent in $\\mathbb{R}^2$:
 
-$$\\det\\begin{pmatrix} 1 & 2 \\\\ 3 & 5 \\end{pmatrix} = 5 - 6 = -1 \\neq 0$$
+@academic[formula_callout:Testing Independence: The Determinant
+$$\\det\\begin{pmatrix} 1 & 2 \\\\ 3 & 5 \\end{pmatrix} = 5 - 6 = -1 \\neq 0$$]@
 
 The vectors are independent.
 
@@ -1816,7 +1819,8 @@ In the polynomial space $\\mathcal{P}_n$, the set $\\{1, x, x^2, \\dots, x^n\\}$
 
 In the [matrix](!/linear-algebra/matrix) space $\\mathbb{R}^{2 \\times 2}$, the four matrices
 
-$$E_{11} = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}, \\quad E_{12} = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}, \\quad E_{21} = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}, \\quad E_{22} = \\begin{pmatrix} 0 & 0 \\\\ 0 & 1 \\end{pmatrix}$$
+@academic[formula_callout:Independence in Abstract Vector Spaces
+$$E_{11} = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}, \\quad E_{12} = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}, \\quad E_{21} = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}, \\quad E_{22} = \\begin{pmatrix} 0 & 0 \\\\ 0 & 1 \\end{pmatrix}$$]@
 
 are independent. The equation $c_1 E_{11} + c_2 E_{12} + c_3 E_{21} + c_4 E_{22} = O$ gives $\\begin{pmatrix} c_1 & c_2 \\\\ c_3 & c_4 \\end{pmatrix} = \\begin{pmatrix} 0 & 0 \\\\ 0 & 0 \\end{pmatrix}$, which forces all four scalars to zero.
 

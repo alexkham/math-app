@@ -246,7 +246,8 @@ const sectionsContent = {
     title: `Definition`,
     content: `A polynomial inequality has the form
 
-$$P(x) > 0$$
+@academic[formula_callout:Definition
+$$P(x) > 0$$]@
 
 (or $<$, $\\leq$, $\\geq$), where $P(x)$ is a polynomial of degree $n \\geq 3$. The inequality asks where the polynomial takes positive or negative values — not where it equals zero, but which stretches of the number line lie above or below the horizontal axis.
 

@@ -1429,9 +1429,9 @@ Or using the shortcut formula:
 @academic[formula_callout:Calculating Variance: General Case
 $$\\mathrm{Var}(X) = \\left(\\sum_{i=1}^{n} x_i^2 p_i\\right) - \\mu^2$$]@
 
-### Example
+@academic[example:Example
 
-Consider a small shop where the number of items sold on a given morning varies randomly. Let $X$ represent the number of items sold. Based on past observations, the probabilities for different sales outcomes are:
+Consider a small shop where the number of items sold on a given morning varies randomly. Let $X$ represent the number of items sold. Based on past observations, the probabilities for different sales outcomes are:]@
 
 
 

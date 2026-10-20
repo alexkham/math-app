@@ -428,7 +428,8 @@ Both representations define the same sequence. The explicit form is better for c
     title: `Arithmetic Series`,
     content: `The sum of the first $n$ terms of an arithmetic sequence is called an **arithmetic series**, denoted $S_n$:
 
-$$S_n = a_1 + a_2 + a_3 + \\cdots + a_n$$
+@academic[formula_callout:Arithmetic Series
+$$S_n = a_1 + a_2 + a_3 + \\cdots + a_n$$]@
 
 The closed-form formula is:
 
@@ -441,17 +442,21 @@ $$S_n = \\frac{n}{2}(a_1 + a_n)$$
 
 The derivation is straightforward. Write the sum forwards and backwards:
 
-$$S_n = a_1 + (a_1 + d) + (a_1 + 2d) + \\cdots + a_n$$
+@academic[formula_callout:Arithmetic Series
+$$S_n = a_1 + (a_1 + d) + (a_1 + 2d) + \\cdots + a_n$$]@
 
-$$S_n = a_n + (a_n - d) + (a_n - 2d) + \\cdots + a_1$$
+@academic[formula_callout:Arithmetic Series
+$$S_n = a_n + (a_n - d) + (a_n - 2d) + \\cdots + a_1$$]@
 
 Adding these two expressions term by term, every pair sums to $a_1 + a_n$, and there are $n$ such pairs:
 
-$$2S_n = n(a_1 + a_n)$$
+@academic[formula_callout:Arithmetic Series
+$$2S_n = n(a_1 + a_n)$$]@
 
 Dividing by $2$ gives the result. An equivalent form replaces $a_n$ with $a_1 + (n-1)d$:
 
-$$S_n = \\frac{n}{2}(2a_1 + (n-1)d)$$
+@academic[formula_callout:Arithmetic Series
+$$S_n = \\frac{n}{2}(2a_1 + (n-1)d)$$]@
 
 This version is useful when $a_n$ is not known directly.
 

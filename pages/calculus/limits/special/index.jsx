@@ -492,15 +492,18 @@ This limit requires $x$ measured in radians. Direct substitution gives $0/0$, re
 
 The standard proof uses the unit circle. For small positive $x$, three quantities satisfy:
 
-$$\\sin x < x < \\tan x$$
+@academic[formula_callout:The Fundamental Trigonometric Limit
+$$\\sin x < x < \\tan x$$]@
 
 Dividing by $\\sin x$:
 
-$$1 < \\frac{x}{\\sin x} < \\frac{1}{\\cos x}$$
+@academic[formula_callout:The Fundamental Trigonometric Limit
+$$1 < \\frac{x}{\\sin x} < \\frac{1}{\\cos x}$$]@
 
 Taking reciprocals and applying the [Squeeze Theorem](!/calculus/limits/rules):
 
-$$\\cos x < \\frac{\\sin x}{x} < 1$$
+@academic[formula_callout:The Fundamental Trigonometric Limit
+$$\\cos x < \\frac{\\sin x}{x} < 1$$]@
 
 As $x \\to 0$, $\\cos x \\to 1$, so $\\dfrac{\\sin x}{x}$ is squeezed to $1$.
 
@@ -530,7 +533,8 @@ $$\\lim_{x \\to 0} \\frac{\\tan x}{x} = 1$$
 @academic[formulas_link:Browse all limit formulas
 /calculus/formulas]@
 
-$$\\lim_{x \\to 0} \\frac{x}{\\sin x} = 1$$
+@academic[formula_callout:Related Trigonometric Limits
+$$\\lim_{x \\to 0} \\frac{x}{\\sin x} = 1$$]@
 
 The last follows by taking the reciprocal: if $\\dfrac{\\sin x}{x} \\to 1$, then $\\dfrac{x}{\\sin x} \\to 1$ as well.
 `,
@@ -543,19 +547,23 @@ The last follows by taking the reciprocal: if $\\dfrac{\\sin x}{x} \\to 1$, then
     content: `
 Start with the expression and multiply by the conjugate:
 
-$$\\frac{1 - \\cos x}{x} \\cdot \\frac{1 + \\cos x}{1 + \\cos x} = \\frac{1 - \\cos^2 x}{x(1 + \\cos x)} = \\frac{\\sin^2 x}{x(1 + \\cos x)}$$
+@academic[formula_callout:Deriving (1 − cos x)/x = 0
+$$\\frac{1 - \\cos x}{x} \\cdot \\frac{1 + \\cos x}{1 + \\cos x} = \\frac{1 - \\cos^2 x}{x(1 + \\cos x)} = \\frac{\\sin^2 x}{x(1 + \\cos x)}$$]@
 
 Rewrite as a product:
 
-$$= \\frac{\\sin x}{x} \\cdot \\frac{\\sin x}{1 + \\cos x}$$
+@academic[formula_callout:Deriving (1 − cos x)/x = 0
+$$= \\frac{\\sin x}{x} \\cdot \\frac{\\sin x}{1 + \\cos x}$$]@
 
 As $x \\to 0$:
 
-$$\\frac{\\sin x}{x} \\to 1 \\qquad \\frac{\\sin x}{1 + \\cos x} \\to \\frac{0}{2} = 0$$
+@academic[formula_callout:Deriving (1 − cos x)/x = 0
+$$\\frac{\\sin x}{x} \\to 1 \\qquad \\frac{\\sin x}{1 + \\cos x} \\to \\frac{0}{2} = 0$$]@
 
 Therefore:
 
-$$\\lim_{x \\to 0} \\frac{1 - \\cos x}{x} = 1 \\cdot 0 = 0$$
+@academic[formula_callout:Deriving (1 − cos x)/x = 0
+$$\\lim_{x \\to 0} \\frac{1 - \\cos x}{x} = 1 \\cdot 0 = 0$$]@
 `,
     before: ``,
     after: ``,
@@ -573,13 +581,15 @@ $$\\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1$$
 
 Direct substitution gives $0/0$. This limit defines the derivative of $e^x$ at $x = 0$:
 
-$$\\frac{d}{dx} e^x \\bigg|_{x=0} = \\lim_{h \\to 0} \\frac{e^{0+h} - e^0}{h} = \\lim_{h \\to 0} \\frac{e^h - 1}{h} = 1$$
+@academic[formula_callout:The Natural Exponential Limit
+$$\\frac{d}{dx} e^x \\bigg|_{x=0} = \\lim_{h \\to 0} \\frac{e^{0+h} - e^0}{h} = \\lim_{h \\to 0} \\frac{e^h - 1}{h} = 1$$]@
 
 The exponential function is the unique function satisfying $f'(x) = f(x)$ with $f(0) = 1$. This limit is the cornerstone of that property.
 
 An equivalent form:
 
-$$\\lim_{h \\to 0} \\frac{e^h - 1}{h} = 1$$
+@academic[formula_callout:The Natural Exponential Limit
+$$\\lim_{h \\to 0} \\frac{e^h - 1}{h} = 1$$]@
 `,
     before: ``,
     after: ``,
@@ -590,7 +600,8 @@ $$\\lim_{h \\to 0} \\frac{e^h - 1}{h} = 1$$
     content: `
 For any base $a > 0$:
 
-$$\\lim_{x \\to 0} \\frac{a^x - 1}{x} = \\ln a$$
+@academic[formula_callout:Related Exponential Limits
+$$\\lim_{x \\to 0} \\frac{a^x - 1}{x} = \\ln a$$]@
 
 When $a = e$, this reduces to the natural exponential limit since $\\ln e = 1$.
 
@@ -605,7 +616,8 @@ $$\\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = 1$$
 
 This can be seen by substituting $u = \\ln(1 + x)$, so $e^u = 1 + x$ and $x = e^u - 1$. As $x \\to 0$, $u \\to 0$:
 
-$$\\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = \\lim_{u \\to 0} \\frac{u}{e^u - 1} = 1$$
+@academic[formula_callout:Related Exponential Limits
+$$\\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = \\lim_{u \\to 0} \\frac{u}{e^u - 1} = 1$$]@
 `,
     before: ``,
     after: ``,
@@ -625,11 +637,13 @@ $$\\lim_{x \\to \\infty} \\left(1 + \\frac{1}{x}\\right)^x = e$$
 
 Equivalently, using discrete notation:
 
-$$\\lim_{n \\to \\infty} \\left(1 + \\frac{1}{n}\\right)^n = e$$
+@academic[formula_callout:The Definition of e
+$$\\lim_{n \\to \\infty} \\left(1 + \\frac{1}{n}\\right)^n = e$$]@
 
 Another form with $x \\to 0$:
 
-$$\\lim_{x \\to 0} (1 + x)^{1/x} = e$$
+@academic[formula_callout:The Definition of e
+$$\\lim_{x \\to 0} (1 + x)^{1/x} = e$$]@
 
 The value is $e \\approx 2.71828$. This limit arises naturally in compound interest: if interest is compounded $n$ times per year at annual rate $100\\%$, the growth factor over one year is $(1 + 1/n)^n$, which approaches $e$ as $n \\to \\infty$.
 `,
@@ -651,13 +665,15 @@ $$\\lim_{x \\to 0^+} x \\ln x = 0$$
 
 This is a $0 \\cdot (-\\infty)$ form. As $x \\to 0^+$, $x$ vanishes while $\\ln x \\to -\\infty$. The factor $x$ wins: the product approaches $0$.
 
-$$\\lim_{x \\to \\infty} \\frac{\\ln x}{x} = 0$$
+@academic[formula_callout:Limits Involving Logarithms
+$$\\lim_{x \\to \\infty} \\frac{\\ln x}{x} = 0$$]@
 
 As $x \\to \\infty$, both numerator and denominator grow, but $x$ grows faster than $\\ln x$. The ratio vanishes.
 
 More generally, for any $n > 0$:
 
-$$\\lim_{x \\to \\infty} \\frac{\\ln x}{x^n} = 0 \\qquad \\lim_{x \\to 0^+} x^n \\ln x = 0$$
+@academic[formula_callout:Limits Involving Logarithms
+$$\\lim_{x \\to \\infty} \\frac{\\ln x}{x^n} = 0 \\qquad \\lim_{x \\to 0^+} x^n \\ln x = 0$$]@
 
 Logarithms lose to any positive power.
 `,
@@ -670,7 +686,8 @@ Logarithms lose to any positive power.
     content: `
 As $x \\to \\infty$, functions grow at different rates. The hierarchy:
 
-$$\\text{logarithmic} \\ll \\text{polynomial} \\ll \\text{exponential}$$
+@academic[formula_callout:Growth Rate Comparisons
+$$\\text{logarithmic} \\ll \\text{polynomial} \\ll \\text{exponential}$$]@
 
 Specifically:
 
@@ -685,7 +702,8 @@ $$\\lim_{x \\to \\infty} \\frac{x^n}{e^x} = 0$$
 @academic[formulas_link:Browse all limit formulas
 /calculus/formulas]@
 
-$$\\lim_{x \\to \\infty} \\frac{x^n}{a^x} = 0 \\quad \\text{for any } a > 1 \\text{ and any } n$$
+@academic[formula_callout:Growth Rate Comparisons
+$$\\lim_{x \\to \\infty} \\frac{x^n}{a^x} = 0 \\quad \\text{for any } a > 1 \\text{ and any } n$$]@
 
 Exponentials dominate polynomials, which dominate logarithms. These comparisons determine which terms control behavior in [limits at infinity](!/calculus/limits/infinity).
 `,
@@ -700,23 +718,28 @@ Rewrite expressions to match known forms.
 
 ## Example 1
 
-$$\\lim_{x \\to 0} \\frac{\\sin 5x}{3x}$$
+@academic[formula_callout:Using Special Limits
+$$\\lim_{x \\to 0} \\frac{\\sin 5x}{3x}$$]@
 
 Rewrite to expose the standard form:
 
-$$= \\frac{5}{3} \\cdot \\lim_{x \\to 0} \\frac{\\sin 5x}{5x} = \\frac{5}{3} \\cdot 1 = \\frac{5}{3}$$
+@academic[formula_callout:Using Special Limits
+$$= \\frac{5}{3} \\cdot \\lim_{x \\to 0} \\frac{\\sin 5x}{5x} = \\frac{5}{3} \\cdot 1 = \\frac{5}{3}$$]@
 
 ## Example 2
 
-$$\\lim_{x \\to 0} \\frac{e^{4x} - 1}{x}$$
+@academic[formula_callout:Using Special Limits
+$$\\lim_{x \\to 0} \\frac{e^{4x} - 1}{x}$$]@
 
 Factor out the coefficient:
 
-$$= 4 \\cdot \\lim_{x \\to 0} \\frac{e^{4x} - 1}{4x} = 4 \\cdot 1 = 4$$
+@academic[formula_callout:Using Special Limits
+$$= 4 \\cdot \\lim_{x \\to 0} \\frac{e^{4x} - 1}{4x} = 4 \\cdot 1 = 4$$]@
 
 ## Example 3
 
-$$\\lim_{x \\to 0} \\frac{\\tan x}{x} = \\lim_{x \\to 0} \\frac{\\sin x}{x} \\cdot \\frac{1}{\\cos x} = 1 \\cdot 1 = 1$$
+@academic[formula_callout:Using Special Limits
+$$\\lim_{x \\to 0} \\frac{\\tan x}{x} = \\lim_{x \\to 0} \\frac{\\sin x}{x} \\cdot \\frac{1}{\\cos x} = 1 \\cdot 1 = 1$$]@
 
 Recognizing patterns and factoring to match special limits streamlines computation.
 `,

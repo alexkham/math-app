@@ -383,10 +383,12 @@ Multiplication inside the argument becomes addition outside.
 
 Derivation: Let $\\log_a(x) = m$ and $\\log_a(y) = n$. Then $x = a^m$ and $y = a^n$. The product $xy = a^m \\cdot a^n = a^{m+n}$. Taking the logarithm: $\\log_a(xy) = m + n = \\log_a(x) + \\log_a(y)$.
 
-Example: $\\log_2(8 \\cdot 4) = \\log_2(8) + \\log_2(4) = 3 + 2 = 5$. Verification: $8 \\cdot 4 = 32 = 2^5$.
+@academic[example:Example
+$\\log_2(8 \\cdot 4) = \\log_2(8) + \\log_2(4) = 3 + 2 = 5$. Verification: $8 \\cdot 4 = 32 = 2^5$.]@
 
 The rule extends to any number of factors:
-$$\\log_a(xyz) = \\log_a(x) + \\log_a(y) + \\log_a(z)$$`,
+@academic[formula_callout:The Product Rule
+$$\\log_a(xyz) = \\log_a(x) + \\log_a(y) + \\log_a(z)$$]@`,
     before: ``,
     after: ``,
     link: '',
@@ -407,7 +409,8 @@ Division inside the argument becomes subtraction outside.
 
 Derivation: Let $\\log_a(x) = m$ and $\\log_a(y) = n$. Then $x = a^m$ and $y = a^n$. The quotient $\\frac{x}{y} = \\frac{a^m}{a^n} = a^{m-n}$. Taking the logarithm: $\\log_a(x/y) = m - n = \\log_a(x) - \\log_a(y)$.
 
-Example: $\\log_3(81/9) = \\log_3(81) - \\log_3(9) = 4 - 2 = 2$. Verification: $81/9 = 9 = 3^2$.
+@academic[example:Example
+$\\log_3(81/9) = \\log_3(81) - \\log_3(9) = 4 - 2 = 2$. Verification: $81/9 = 9 = 3^2$.]@
 
 The quotient rule also yields: $\\log_a(1/x) = \\log_a(1) - \\log_a(x) = 0 - \\log_a(x) = -\\log_a(x)$.`,
     before: ``,
@@ -430,11 +433,14 @@ Exponents inside the argument become coefficients outside.
 
 Derivation: Let $\\log_a(x) = m$, so $x = a^m$. Then $x^n = (a^m)^n = a^{mn}$. Taking the logarithm: $\\log_a(x^n) = mn = n \\cdot \\log_a(x)$.
 
-Example: $\\log_2(8^4) = 4 \\cdot \\log_2(8) = 4 \\cdot 3 = 12$. Verification: $8^4 = 4096 = 2^{12}$.
+@academic[example:Example
+$\\log_2(8^4) = 4 \\cdot \\log_2(8) = 4 \\cdot 3 = 12$. Verification: $8^4 = 4096 = 2^{12}$.]@
 
 The rule holds for any real exponent $n$, including fractions and negatives:
-$$\\log_a(\\sqrt{x}) = \\log_a(x^{1/2}) = \\frac{1}{2}\\log_a(x)$$
-$$\\log_a(x^{-3}) = -3\\log_a(x)$$`,
+@academic[formula_callout:The Power Rule
+$$\\log_a(\\sqrt{x}) = \\log_a(x^{1/2}) = \\frac{1}{2}\\log_a(x)$$]@
+@academic[formula_callout:The Power Rule
+$$\\log_a(x^{-3}) = -3\\log_a(x)$$]@`,
     before: ``,
     after: ``,
     link: '',
@@ -456,8 +462,10 @@ This formula converts logarithms to a convenient base — typically $10$ or $e$ 
 Derivation: Let $\\log_a(x) = y$, so $a^y = x$. Taking $\\log_b$ of both sides: $\\log_b(a^y) = \\log_b(x)$. By the power rule: $y \\cdot \\log_b(a) = \\log_b(x)$. Solving for $y$: $y = \\frac{\\log_b(x)}{\\log_b(a)}$.
 
 Common applications:
-$$\\log_2(10) = \\frac{\\log(10)}{\\log(2)} = \\frac{1}{0.301} \\approx 3.322$$
-$$\\log_5(7) = \\frac{\\ln(7)}{\\ln(5)} = \\frac{1.946}{1.609} \\approx 1.209$$
+@academic[formula_callout:The Change of Base Formula
+$$\\log_2(10) = \\frac{\\log(10)}{\\log(2)} = \\frac{1}{0.301} \\approx 3.322$$]@
+@academic[formula_callout:The Change of Base Formula
+$$\\log_5(7) = \\frac{\\ln(7)}{\\ln(5)} = \\frac{1.946}{1.609} \\approx 1.209$$]@
 
 A useful special case: $\\log_a(b) = \\frac{1}{\\log_b(a)}$. The logarithms are reciprocals when arguments and bases swap.
 
@@ -471,16 +479,18 @@ The four rules above all follow the same shape: name the logarithms, convert to 
     title: `Expanding Logarithmic Expressions`,
     content: `A single logarithm with a compound argument can be written as a sum or difference of simpler logarithms, with exponents pulled out as coefficients. The product rule splits multiplication, the quotient rule splits division, and the power rule extracts exponents.
 
-Example: Expand $\\log_2\\left(\\frac{x^3 y}{z^2}\\right)$.
+@academic[example:Example
+Expand $\\log_2\\left(\\frac{x^3 y}{z^2}\\right)$.
 
 $$\\log_2\\left(\\frac{x^3 y}{z^2}\\right) = \\log_2(x^3 y) - \\log_2(z^2)$$
 $$= \\log_2(x^3) + \\log_2(y) - \\log_2(z^2)$$
-$$= 3\\log_2(x) + \\log_2(y) - 2\\log_2(z)$$
+$$= 3\\log_2(x) + \\log_2(y) - 2\\log_2(z)$$]@
 
-Example: Expand $\\ln\\left(\\sqrt{\\frac{a}{b^3}}\\right)$.
+@academic[example:Example
+Expand $\\ln\\left(\\sqrt{\\frac{a}{b^3}}\\right)$.
 
 $$\\ln\\left(\\sqrt{\\frac{a}{b^3}}\\right) = \\ln\\left(\\frac{a}{b^3}\\right)^{1/2} = \\frac{1}{2}\\ln\\left(\\frac{a}{b^3}\\right)$$
-$$= \\frac{1}{2}\\left(\\ln(a) - \\ln(b^3)\\right) = \\frac{1}{2}\\ln(a) - \\frac{3}{2}\\ln(b)$$`,
+$$= \\frac{1}{2}\\left(\\ln(a) - \\ln(b^3)\\right) = \\frac{1}{2}\\ln(a) - \\frac{3}{2}\\ln(b)$$]@`,
     before: ``,
     after: ``,
     link: '',
@@ -490,15 +500,17 @@ $$= \\frac{1}{2}\\left(\\ln(a) - \\ln(b^3)\\right) = \\frac{1}{2}\\ln(a) - \\fra
     title: `Condensing Logarithmic Expressions`,
     content: `Multiple logarithms can be combined into a single logarithm by reversing the expansion process. Coefficients become exponents through the power rule, sums become products through the product rule, and differences become quotients through the quotient rule.
 
-Example: Condense $2\\log(x) + \\log(y) - 3\\log(z)$.
+@academic[example:Example
+Condense $2\\log(x) + \\log(y) - 3\\log(z)$.
 
 $$2\\log(x) + \\log(y) - 3\\log(z) = \\log(x^2) + \\log(y) - \\log(z^3)$$
-$$= \\log(x^2 y) - \\log(z^3) = \\log\\left(\\frac{x^2 y}{z^3}\\right)$$
+$$= \\log(x^2 y) - \\log(z^3) = \\log\\left(\\frac{x^2 y}{z^3}\\right)$$]@
 
-Example: Condense $\\frac{1}{2}\\ln(a+1) - \\ln(b) - \\ln(c)$.
+@academic[example:Example
+Condense $\\frac{1}{2}\\ln(a+1) - \\ln(b) - \\ln(c)$.
 
 $$\\frac{1}{2}\\ln(a+1) - \\ln(b) - \\ln(c) = \\ln(a+1)^{1/2} - \\ln(b) - \\ln(c)$$
-$$= \\ln\\sqrt{a+1} - \\ln(bc) = \\ln\\left(\\frac{\\sqrt{a+1}}{bc}\\right)$$
+$$= \\ln\\sqrt{a+1} - \\ln(bc) = \\ln\\left(\\frac{\\sqrt{a+1}}{bc}\\right)$$]@
 
 Condensing is essential for solving [equations](!/algebra/logarithms/equations) where multiple logarithms must combine before applying the one-to-one [property](!/algebra/logarithms/properties).`,
     before: ``,
@@ -510,23 +522,28 @@ Condensing is essential for solving [equations](!/algebra/logarithms/equations) 
     title: `Common Errors`,
     content: `Several incorrect "rules" persistently appear. None of the following equalities hold:
 
-$$\\log_a(x + y) \\neq \\log_a(x) + \\log_a(y)$$
+@academic[formula_callout:Common Errors
+$$\\log_a(x + y) \\neq \\log_a(x) + \\log_a(y)$$]@
 
 The logarithm of a sum does not split. There is no simplification for $\\log_a(x + y)$.
 
-$$\\log_a(x - y) \\neq \\log_a(x) - \\log_a(y)$$
+@academic[formula_callout:Common Errors
+$$\\log_a(x - y) \\neq \\log_a(x) - \\log_a(y)$$]@
 
 The logarithm of a difference does not split either.
 
-$$\\log_a(x) \\cdot \\log_a(y) \\neq \\log_a(xy)$$
+@academic[formula_callout:Common Errors
+$$\\log_a(x) \\cdot \\log_a(y) \\neq \\log_a(xy)$$]@
 
 Multiplying logarithms is not the same as the logarithm of a product.
 
-$$\\frac{\\log_a(x)}{\\log_a(y)} \\neq \\log_a\\left(\\frac{x}{y}\\right)$$
+@academic[formula_callout:Common Errors
+$$\\frac{\\log_a(x)}{\\log_a(y)} \\neq \\log_a\\left(\\frac{x}{y}\\right)$$]@
 
 Dividing logarithms is not the same as the logarithm of a quotient. However, note that $\\frac{\\log_a(x)}{\\log_a(y)} = \\log_y(x)$ by the change of base formula.
 
-$$(\\log_a(x))^n \\neq n\\log_a(x)$$
+@academic[formula_callout:Common Errors
+$$(\\log_a(x))^n \\neq n\\log_a(x)$$]@
 
 Raising a logarithm to a power is not the same as multiplying by that power. The power rule applies to exponents inside the argument, not outside.`,
     before: ``,

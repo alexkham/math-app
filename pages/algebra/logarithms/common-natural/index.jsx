@@ -241,11 +241,13 @@ The values $\\ln(1) = 0$ and $\\ln(e) = 1$ follow from the general [properties](
 
 One definition comes from compound interest. If $\\$1$ earns $100\\%$ interest per year, compounded $n$ times, the year-end balance is $(1 + 1/n)^n$. As $n$ increases — daily, hourly, every second, continuously — this expression approaches $e$:
 
-$$e = \\lim_{n \\to \\infty} \\left(1 + \\frac{1}{n}\\right)^n$$
+@academic[formula_callout:The Number e
+$$e = \\lim_{n \\to \\infty} \\left(1 + \\frac{1}{n}\\right)^n$$]@
 
 Another definition uses an infinite series:
 
-$$e = 1 + 1 + \\frac{1}{2!} + \\frac{1}{3!} + \\frac{1}{4!} + \\cdots = \\sum_{n=0}^{\\infty} \\frac{1}{n!}$$
+@academic[formula_callout:The Number e
+$$e = 1 + 1 + \\frac{1}{2!} + \\frac{1}{3!} + \\frac{1}{4!} + \\cdots = \\sum_{n=0}^{\\infty} \\frac{1}{n!}$$]@
 
 The number appears throughout mathematics far beyond logarithms — in probability, complex analysis, differential equations, and number theory. Its ubiquity justifies elevating $\\log_e$ to the status of "natural."
 
@@ -288,23 +290,32 @@ For solving general exponential [equations](!/algebra/logarithms/equations), eit
     title: `Converting Between Bases`,
     content: `The change of base formula from [logarithm rules](!/algebra/logarithms/rules) enables conversion between common and natural logarithms:
 
+@academic[formula_callout:Change of Base Formula
 $$\\log_a(x) = \\frac{\\log_b(x)}{\\log_b(a)}$$
+/algebra/formulas#change_of_base_formula]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 To convert a logarithm of any base to common logarithms:
 
-$$\\log_a(x) = \\frac{\\log(x)}{\\log(a)}$$
+@academic[formula_callout:Converting Between Bases
+$$\\log_a(x) = \\frac{\\log(x)}{\\log(a)}$$]@
 
 To convert to natural logarithms:
 
-$$\\log_a(x) = \\frac{\\ln(x)}{\\ln(a)}$$
+@academic[formula_callout:Converting Between Bases
+$$\\log_a(x) = \\frac{\\ln(x)}{\\ln(a)}$$]@
 
 For example, $\\log_2(10) = \\frac{\\ln(10)}{\\ln(2)} = \\frac{2.303}{0.693} \\approx 3.322$. Verification: $2^{3.322} \\approx 10$.
 
 Converting between common and natural logarithms directly uses $\\ln(10) \\approx 2.303$:
 
-$$\\ln(x) = \\log(x) \\cdot \\ln(10) \\approx 2.303 \\cdot \\log(x)$$
+@academic[formula_callout:Converting Between Bases
+$$\\ln(x) = \\log(x) \\cdot \\ln(10) \\approx 2.303 \\cdot \\log(x)$$]@
 
-$$\\log(x) = \\frac{\\ln(x)}{\\ln(10)} \\approx \\frac{\\ln(x)}{2.303}$$
+@academic[formula_callout:Converting Between Bases
+$$\\log(x) = \\frac{\\ln(x)}{\\ln(10)} \\approx \\frac{\\ln(x)}{2.303}$$]@
 
 These conversions allow computation with any base using only the $\\log$ and $\\ln$ buttons available on standard calculators.`,
     before: ``,

@@ -17,7 +17,9 @@ const Sections = ({ sections,leftMargin='220px' }) => {
    if (!content) return null;
    
    if (!Array.isArray(content)) {
-     return React.isValidElement(content) ? content : processContent(content);
+     return React.isValidElement(content)
+       ? content
+       : <div className={styles.proseContent}>{processContent(content)}</div>;
    }
 
    let currentGroup = [];
@@ -46,7 +48,12 @@ const Sections = ({ sections,leftMargin='220px' }) => {
    return groups.map((group, groupIndex) => {
      if (group.length === 1 && group[0].layout === 'vertical') {
        return (
-         <div key={groupIndex} className={styles.verticalContent}>
+         <div
+           key={groupIndex}
+           className={React.isValidElement(group[0].content)
+             ? styles.verticalContent
+             : `${styles.verticalContent} ${styles.proseContent}`}
+         >
            {React.isValidElement(group[0].content) 
              ? group[0].content 
              : processContent(group[0].content)}

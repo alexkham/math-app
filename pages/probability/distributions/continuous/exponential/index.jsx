@@ -1678,7 +1678,7 @@ $$\\text{IQR} = Q3 - Q1 = \\frac{1.386}{\\lambda} - \\frac{0.288}{\\lambda} = \\
 
 The IQR contains the middle 50% of the distribution.
 
-### Example
+@academic[example:Example
 
 For customer arrivals with $\\lambda = 3$ per hour:
 
@@ -1696,7 +1696,7 @@ Half of waits are less than 13.9 minutes (the [median](!/probability/median)).
 
 **IQR:** $\\frac{1.098}{3} = 0.366$ hours $\\approx 22$ minutes
 
-The middle 50% of waiting times span about 22 minutes.
+The middle 50% of waiting times span about 22 minutes.]@
 
 ### Other Notable Percentiles
 
@@ -1757,11 +1757,11 @@ The exponential distribution is the continuous analog of the [geometric distribu
 
 The **memoryless property** makes it unique: $P(X > s + t \\mid X > s) = P(X > t)$. Past waiting time provides no information about future waiting time.
 
-### Example Application
+@academic[example:Example Application
 
 A web server receives requests at an average rate of 120 per hour ($\\lambda = 2$ per minute). The time between consecutive requests follows $\\text{Exp}(2)$.
 
-The [median](!/probability/median) wait between requests is $\\frac{\\ln(2)}{2} \\approx 0.35$ minutes (21 seconds). However, 10% of inter-arrival times exceed $\\frac{2.3}{2} = 1.15$ minutes, requiring server capacity planning for occasional gaps.
+The [median](!/probability/median) wait between requests is $\\frac{\\ln(2)}{2} \\approx 0.35$ minutes (21 seconds). However, 10% of inter-arrival times exceed $\\frac{2.3}{2} = 1.15$ minutes, requiring server capacity planning for occasional gaps.]@
   `,
   before: ``,
   after: ``,

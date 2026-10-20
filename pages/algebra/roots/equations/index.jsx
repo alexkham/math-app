@@ -11,6 +11,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -213,11 +215,14 @@ const sectionsContent = {
     title: `What is a Radical Equation`,
     content: `A radical equation contains a variable under a radical sign.
 
-$$\\sqrt{x} = 5$$
+@academic[formula_callout:What is a Radical Equation
+$$\\sqrt{x} = 5$$]@
 
-$$\\sqrt{x + 3} = x - 1$$
+@academic[formula_callout:What is a Radical Equation
+$$\\sqrt{x + 3} = x - 1$$]@
 
-$$\\sqrt[3]{2x - 1} = 3$$
+@academic[formula_callout:What is a Radical Equation
+$$\\sqrt[3]{2x - 1} = 3$$]@
 
 The variable may appear only under the radical, or both under and outside. It may appear under multiple radicals. Each configuration requires slightly different handling, but the core strategy remains: isolate and eliminate.
 
@@ -239,15 +244,18 @@ Solve the resulting equation.
 
 Check all solutions in the original equation.
 
-$$\\sqrt{x} = 7$$
+@academic[formula_callout:Basic Strategy
+$$\\sqrt{x} = 7$$]@
 
 The radical is already isolated. Square both sides:
 
-$$x = 49$$
+@academic[formula_callout:Basic Strategy
+$$x = 49$$]@
 
 Check: $\\sqrt{49} = 7$. Valid.
 
-$$\\sqrt{x - 2} + 4 = 9$$
+@academic[formula_callout:Basic Strategy
+$$\\sqrt{x - 2} + 4 = 9$$]@
 
 Isolate first: $\\sqrt{x - 2} = 5$
 
@@ -269,17 +277,21 @@ To solve your own radical equation with each step shown, use the [radical equati
 
 Consider $\\sqrt{x} + 3 = 7$ handled incorrectly:
 
-$$(\\sqrt{x} + 3)^2 = 49$$
+@academic[formula_callout:Why Isolation Comes First
+$$(\\sqrt{x} + 3)^2 = 49$$]@
 
-$$x + 6\\sqrt{x} + 9 = 49$$
+@academic[formula_callout:Why Isolation Comes First
+$$x + 6\\sqrt{x} + 9 = 49$$]@
 
 The radical remains. The equation is now harder, not easier.
 
 Correct approach — isolate first:
 
-$$\\sqrt{x} = 4$$
+@academic[formula_callout:Why Isolation Comes First
+$$\\sqrt{x} = 4$$]@
 
-$$x = 16$$
+@academic[formula_callout:Why Isolation Comes First
+$$x = 16$$]@
 
 Check: $\\sqrt{16} + 3 = 4 + 3 = 7$. Valid.
 
@@ -293,7 +305,8 @@ Isolation ensures that raising to a power actually eliminates the radical. The t
     title: `Extraneous Solutions`,
     content: `Squaring both sides can introduce false solutions — values that satisfy the squared equation but not the original.
 
-$$\\sqrt{x} = -3$$
+@academic[formula_callout:Extraneous Solutions
+$$\\sqrt{x} = -3$$]@
 
 Squaring gives $x = 9$. But $\\sqrt{9} = 3 \\neq -3$.
 
@@ -301,7 +314,8 @@ The original equation has no solution. The principal square root is never negati
 
 Another example:
 
-$$\\sqrt{x + 5} = x - 1$$
+@academic[formula_callout:Extraneous Solutions
+$$\\sqrt{x + 5} = x - 1$$]@
 
 Square: $x + 5 = x^2 - 2x + 1$
 
@@ -341,23 +355,29 @@ Odd-index equations rarely produce extraneous solutions because odd roots accept
     title: `Equations with Two Radicals`,
     content: `When two radicals appear, isolate one and square. Then isolate the remaining radical and square again.
 
-$$\\sqrt{x + 5} - \\sqrt{x} = 1$$
+@academic[formula_callout:Equations with Two Radicals
+$$\\sqrt{x + 5} - \\sqrt{x} = 1$$]@
 
 Isolate one radical:
 
-$$\\sqrt{x + 5} = \\sqrt{x} + 1$$
+@academic[formula_callout:Equations with Two Radicals
+$$\\sqrt{x + 5} = \\sqrt{x} + 1$$]@
 
 Square both sides:
 
-$$x + 5 = x + 2\\sqrt{x} + 1$$
+@academic[formula_callout:Equations with Two Radicals
+$$x + 5 = x + 2\\sqrt{x} + 1$$]@
 
 Simplify:
 
-$$4 = 2\\sqrt{x}$$
+@academic[formula_callout:Equations with Two Radicals
+$$4 = 2\\sqrt{x}$$]@
 
-$$\\sqrt{x} = 2$$
+@academic[formula_callout:Equations with Two Radicals
+$$\\sqrt{x} = 2$$]@
 
-$$x = 4$$
+@academic[formula_callout:Equations with Two Radicals
+$$x = 4$$]@
 
 Check: $\\sqrt{9} - \\sqrt{4} = 3 - 2 = 1$. Valid.
 
@@ -371,13 +391,16 @@ The first squaring did not eliminate all radicals — a radical remained from ex
     title: `Equations with Radicals on Both Sides`,
     content: `When each side has a single radical, square directly.
 
-$$\\sqrt{2x + 3} = \\sqrt{x + 7}$$
+@academic[formula_callout:Equations with Radicals on Both Sides
+$$\\sqrt{2x + 3} = \\sqrt{x + 7}$$]@
 
 Square:
 
-$$2x + 3 = x + 7$$
+@academic[formula_callout:Equations with Radicals on Both Sides
+$$2x + 3 = x + 7$$]@
 
-$$x = 4$$
+@academic[formula_callout:Equations with Radicals on Both Sides
+$$x = 4$$]@
 
 Check: $\\sqrt{11} = \\sqrt{11}$. Valid.
 
@@ -385,19 +408,24 @@ This configuration rarely produces extraneous solutions because both sides have 
 
 More complex cases:
 
-$$\\sqrt{3x + 1} = \\sqrt{x - 1} + 2$$
+@academic[formula_callout:Equations with Radicals on Both Sides
+$$\\sqrt{3x + 1} = \\sqrt{x - 1} + 2$$]@
 
 Isolate before squaring:
 
-$$\\sqrt{3x + 1} - 2 = \\sqrt{x - 1}$$
+@academic[formula_callout:Equations with Radicals on Both Sides
+$$\\sqrt{3x + 1} - 2 = \\sqrt{x - 1}$$]@
 
 Square:
 
-$$3x + 1 - 4\\sqrt{3x + 1} + 4 = x - 1$$
+@academic[formula_callout:Equations with Radicals on Both Sides
+$$3x + 1 - 4\\sqrt{3x + 1} + 4 = x - 1$$]@
 
-$$2x + 6 = 4\\sqrt{3x + 1}$$
+@academic[formula_callout:Equations with Radicals on Both Sides
+$$2x + 6 = 4\\sqrt{3x + 1}$$]@
 
-$$x + 3 = 2\\sqrt{3x + 1}$$
+@academic[formula_callout:Equations with Radicals on Both Sides
+$$x + 3 = 2\\sqrt{3x + 1}$$]@
 
 Square again and solve. Check all candidates.`,
     before: ``,
@@ -409,23 +437,29 @@ Square again and solve. Check all candidates.`,
     title: `Cube Roots and Higher`,
     content: `Odd-index equations follow the same process but raise to the appropriate power.
 
-$$\\sqrt[3]{x - 2} = 4$$
+@academic[formula_callout:Cube Roots and Higher
+$$\\sqrt[3]{x - 2} = 4$$]@
 
 Cube both sides:
 
-$$x - 2 = 64$$
+@academic[formula_callout:Cube Roots and Higher
+$$x - 2 = 64$$]@
 
-$$x = 66$$
+@academic[formula_callout:Cube Roots and Higher
+$$x = 66$$]@
 
 Check: $\\sqrt[3]{64} = 4$. Valid.
 
-$$\\sqrt[3]{2x + 1} = \\sqrt[3]{x - 3}$$
+@academic[formula_callout:Cube Roots and Higher
+$$\\sqrt[3]{2x + 1} = \\sqrt[3]{x - 3}$$]@
 
 Cube:
 
-$$2x + 1 = x - 3$$
+@academic[formula_callout:Cube Roots and Higher
+$$2x + 1 = x - 3$$]@
 
-$$x = -4$$
+@academic[formula_callout:Cube Roots and Higher
+$$x = -4$$]@
 
 Check: $\\sqrt[3]{-7} = \\sqrt[3]{-7}$. Valid.
 
@@ -441,7 +475,8 @@ Fourth roots, sixth roots, and other even-index equations behave like square roo
     title: `Radical Inequalities`,
     content: `Inequalities involving radicals require attention to domain.
 
-$$\\sqrt{x} > 3$$
+@academic[formula_callout:Radical Inequalities
+$$\\sqrt{x} > 3$$]@
 
 Square: $x > 9$
 
@@ -449,7 +484,8 @@ But also: the radicand must satisfy $x \\geq 0$ for the square root to exist.
 
 Intersection: $x > 9$. The domain restriction $x \\geq 0$ is automatically satisfied.
 
-$$\\sqrt{x - 2} \\leq 4$$
+@academic[formula_callout:Radical Inequalities
+$$\\sqrt{x - 2} \\leq 4$$]@
 
 Square: $x - 2 \\leq 16$, so $x \\leq 18$
 
@@ -479,7 +515,8 @@ Compare: if they match, the solution is valid. If not, it is extraneous.
 
 This step cannot be skipped. It is part of solving radical equations, not merely a check on arithmetic.
 
-$$\\sqrt{2x + 1} = x - 1$$
+@academic[formula_callout:Verification Process
+$$\\sqrt{2x + 1} = x - 1$$]@
 
 After solving, suppose candidates are $x = 4$ and $x = 0$.
 
@@ -646,8 +683,36 @@ const schemas = {
     }),
   };
 
+  const radicalEquationCases = {
+    prefaceTitle: 'Same process, different risks',
+    preface: 'Radical equations are solved by raising both sides to the index. Whether that step can create false answers depends on whether the index is odd or even.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'Check every candidate in the original equation when the index is even; see [properties](!/algebra/roots/properties) for why odd roots handle negative radicands.',
+    parent: {
+      kicker: 'Radical equation',
+      formula: '$\\sqrt[n]{f(x)} = g(x)$',
+      splitBy: 'whether the index $n$ is odd or even',
+    },
+    cases: [
+      {
+        id: 'odd', condition: 'odd index',
+        count: { n: '✓' },
+        headline: 'Extraneous solutions are rare',
+        desc: 'negative radicands are handled naturally; cubing preserves sign',
+        example: '$\\sqrt[3]{x - 2} = 4 \\Rightarrow x = 66$',
+      },
+      {
+        id: 'even', condition: 'even index',
+        count: { n: '!' },
+        headline: 'Extraneous solutions can arise',
+        desc: 'fourth, sixth and other even roots behave like square roots: domain restrictions apply',
+      },
+    ],
+  };
+
 return {
   props: {
+    radicalEquationCases,
     sectionsContent,
     introContent,
     obj2Table,
@@ -669,7 +734,9 @@ return {
    }
 
 
-export default function RootEquationsPage({seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function RootEquationsPage({radicalEquationCases, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -756,6 +823,14 @@ export default function RootEquationsPage({seoData, sectionsContent, introConten
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="radical-equation-index-cases"
+            title="Radical equations: odd or even index"
+            source="/algebra/roots/equations"
+          >
+            <CaseSplit data={radicalEquationCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

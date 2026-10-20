@@ -2613,7 +2613,8 @@ This is the slope of the secant line connecting the points $(a, f(a))$ and $(b, 
 
 For $f(x) = x^2$ on $[1, 3]$:
 
-$$\\frac{f(3) - f(1)}{3 - 1} = \\frac{9 - 1}{2} = 4$$
+@academic[formula_callout:Average Rate of Change
+$$\\frac{f(3) - f(1)}{3 - 1} = \\frac{9 - 1}{2} = 4$$]@
 
 The function increases by an average of $4$ units in output for each unit of input over this interval.
 

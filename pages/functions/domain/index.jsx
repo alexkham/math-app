@@ -1218,11 +1218,13 @@ To find the domain of a rational function, set the denominator equal to zero and
 
 For $f(x) = \\dfrac{x + 3}{x - 2}$, set $x - 2 = 0$ to find $x = 2$. The domain is all real numbers except $2$:
 
-$$(-\\infty, 2) \\cup (2, \\infty)$$
+@academic[formula_callout:Finding Domain: Rational Functions
+$$(-\\infty, 2) \\cup (2, \\infty)$$]@
 
 For $g(x) = \\dfrac{5}{x^2 - 9}$, factor the denominator: $x^2 - 9 = (x-3)(x+3)$. Setting each factor to zero gives $x = 3$ and $x = -3$. The domain is:
 
-$$(-\\infty, -3) \\cup (-3, 3) \\cup (3, \\infty)$$
+@academic[formula_callout:Finding Domain: Rational Functions
+$$(-\\infty, -3) \\cup (-3, 3) \\cup (3, \\infty)$$]@
 
 For $h(x) = \\dfrac{x}{x^2 + 1}$, the denominator $x^2 + 1$ is always positive — it has no real roots. No value of $x$ makes it zero. The domain is all real numbers: $(-\\infty, \\infty)$.
 
@@ -1242,8 +1244,10 @@ Odd roots (cube root, fifth root) accept any real number. The cube root of $-8$ 
 
 More complex radicands require solving inequalities. For $f(x) = \\sqrt{6 - 2x}$, set $6 - 2x \\geq 0$:
 
-$$6 \\geq 2x$$
-$$3 \\geq x$$
+@academic[formula_callout:Finding Domain: Radical Functions
+$$6 \\geq 2x$$]@
+@academic[formula_callout:Finding Domain: Radical Functions
+$$3 \\geq x$$]@
 
 The domain is $(-\\infty, 3]$.
 
@@ -1261,19 +1265,22 @@ For $f(x) = \\log(x)$ or $f(x) = \\ln(x)$, the domain is $(0, \\infty)$ — all 
 
 When the argument is an expression, set that expression greater than zero and solve. For $f(x) = \\ln(x - 4)$, require $x - 4 > 0$:
 
-$$x > 4$$
+@academic[formula_callout:Finding Domain: Logarithmic Functions
+$$x > 4$$]@
 
 The domain is $(4, \\infty)$.
 
 For $g(x) = \\log(3 - x)$, require $3 - x > 0$:
 
-$$3 > x$$
+@academic[formula_callout:Finding Domain: Logarithmic Functions
+$$3 > x$$]@
 
 The domain is $(-\\infty, 3)$.
 
 Quadratic or factorable arguments require careful sign analysis. For $h(x) = \\ln(x^2 - 4)$, factor: $x^2 - 4 = (x-2)(x+2)$. This expression is positive when $x < -2$ or $x > 2$. The domain is:
 
-$$(-\\infty, -2) \\cup (2, \\infty)$$
+@academic[formula_callout:Finding Domain: Logarithmic Functions
+$$(-\\infty, -2) \\cup (2, \\infty)$$]@
 
 Note the strict inequality: unlike square roots, logarithms exclude the boundary where the argument equals zero.`,
     before: ``,

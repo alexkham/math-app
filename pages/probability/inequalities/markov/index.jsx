@@ -670,6 +670,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import markovDiagrams from '@/app/components/probability/inequalities/markovDiagrams'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1174,8 +1176,24 @@ The result is deliberately simple and broadly applicable. It trades precision fo
     }),
   };
 
+  const markovFamilyLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'A family of bounds',
+    preface: 'Markov\'s inequality is the most basic member of a larger family of probability bounds. Each level up uses more information about the random variable and gets a tighter bound.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Markov is the starting point',
+    conclusion: 'Many stronger probability inequalities are extensions or refinements built on its idea. Chebyshev is Markov applied to squared deviations.',
+    axis: { top: 'tightest', label: 'strength of the bound', bottom: 'weakest' },
+    levels: [
+      { id: 'higher', name: 'Further inequalities', sub: 'higher moments or independence: sharper still' },
+      { id: 'chebyshev', name: '[Chebyshev](!/probability/inequalities/chebyshev)', sub: 'adds the variance: tighter' },
+      { id: 'markov', name: 'Markov', sub: 'expectation only: broad but weak' },
+    ],
+  };
+
   return {
     props: {
+    markovFamilyLevels,
     demoUnits,
       sectionsContent,
       introContent,
@@ -1193,7 +1211,9 @@ The result is deliberately simple and broadly applicable. It trades precision fo
   }
 }
 
-export default function MarkovInequalityPage({
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function MarkovInequalityPage({markovFamilyLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -1283,6 +1303,14 @@ export default function MarkovInequalityPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-diagram'}
+            id="markov-inequality-family-ladder"
+            title="From Markov to tighter bounds"
+            source="/probability/inequalities/markov"
+          >
+            <Hierarchy data={markovFamilyLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+          </DiagramFrame>,
         ]
     },
     {

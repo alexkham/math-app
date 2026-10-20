@@ -268,15 +268,18 @@ The structural pattern — descending powers of $a$, ascending powers of $b$, sy
       title: `Higher Powers and the Binomial Theorem`,
       content: `The pattern in $(a+b)^2$ and $(a+b)^3$ generalizes. For any positive integer $n$:
 
-$$(a+b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^k$$
+@academic[formula_callout:Higher Powers and the Binomial Theorem
+$$(a+b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^k$$]@
 
 This is the [binomial theorem](!/combinatorics/binomial-theorem). The expansion has $n+1$ terms; the powers of $a$ descend from $n$ to $0$ while the powers of $b$ ascend from $0$ to $n$. The numerical coefficients are the [binomial coefficients](!/combinatorics/binomial-coefficient) $\\binom{n}{k}$, which can be read directly off Pascal's triangle.
 
 The fourth and fifth powers expand to:
 
-$$(a+b)^4 = a^4 + 4a^3b + 6a^2b^2 + 4ab^3 + b^4$$
+@academic[formula_callout:Higher Powers and the Binomial Theorem
+$$(a+b)^4 = a^4 + 4a^3b + 6a^2b^2 + 4ab^3 + b^4$$]@
 
-$$(a+b)^5 = a^5 + 5a^4b + 10a^3b^2 + 10a^2b^3 + 5ab^4 + b^5$$
+@academic[formula_callout:Higher Powers and the Binomial Theorem
+$$(a+b)^5 = a^5 + 5a^4b + 10a^3b^2 + 10a^2b^3 + 5ab^4 + b^5$$]@
 
 The coefficients $1,4,6,4,1$ and $1,5,10,10,5,1$ are the corresponding rows of Pascal's triangle. For a difference $(a-b)^n$, the same coefficients appear with alternating signs: every odd-indexed term (counting from $k=0$) flips sign, since $(-b)^k$ is negative when $k$ is odd.
 
@@ -292,13 +295,15 @@ Memorizing every higher power is unnecessary. The formula handles them all. What
 
 The square of a trinomial follows directly from term-by-term [multiplication](!/algebra/polynomials/operations#5):
 
-$$(a+b+c)^2 = a^2 + b^2 + c^2 + 2ab + 2ac + 2bc$$
+@academic[formula_callout:Trinomial Expansions
+$$(a+b+c)^2 = a^2 + b^2 + c^2 + 2ab + 2ac + 2bc$$]@
 
 Three squared terms and three doubled cross-products — one for each pair of original terms. The pattern generalizes: squaring a sum of $k$ terms produces $k$ squares plus $\\binom{k}{2}$ doubled cross-products.
 
 The cube of a trinomial is heavier:
 
-$$(a+b+c)^3 = a^3 + b^3 + c^3 + 3(a^2b + a^2c + ab^2 + b^2c + ac^2 + bc^2) + 6abc$$
+@academic[formula_callout:Trinomial Expansions
+$$(a+b+c)^3 = a^3 + b^3 + c^3 + 3(a^2b + a^2c + ab^2 + b^2c + ac^2 + bc^2) + 6abc$$]@
 
 Three cubed terms, six trinomial cross-products of the form $a^2b$ each with coefficient $3$, and one central term $6abc$ where every variable appears once. The full multinomial theorem governs expansions like these in general, but for three variables at degree two or three, memorizing the pattern is faster than recomputing.
 
@@ -316,19 +321,28 @@ The difference of squares $a^2 - b^2 = (a+b)(a-b)$ is the most-used factoring id
 
 The cubes split cleanly in both directions:
 
+@academic[formula_callout:Difference of Cubes
 $$a^3 - b^3 = (a-b)(a^2 + ab + b^2)$$
+/algebra/formulas#difference_of_cubes]@
 
+@academic[formula_callout:Sum of Cubes
 $$a^3 + b^3 = (a+b)(a^2 - ab + b^2)$$
+/algebra/formulas#sum_of_cubes]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The quadratic factors $a^2 \\pm ab + b^2$ are irreducible over the reals (their discriminants are negative), so this factorization is the end of the line for cubes over $\\mathbb{R}$.
 
 For higher powers, two general patterns govern everything. The difference $a^n - b^n$ always factors — $(a-b)$ divides it for any positive integer $n$:
 
-$$a^n - b^n = (a-b)(a^{n-1} + a^{n-2}b + a^{n-3}b^2 + \\cdots + b^{n-1})$$
+@academic[formula_callout:Sums and Differences of Powers
+$$a^n - b^n = (a-b)(a^{n-1} + a^{n-2}b + a^{n-3}b^2 + \\cdots + b^{n-1})$$]@
 
 The sum $a^n + b^n$ factors only when $n$ is odd, with $(a+b)$ as the divisor:
 
-$$a^n + b^n = (a+b)(a^{n-1} - a^{n-2}b + a^{n-3}b^2 - \\cdots + b^{n-1}) \\quad (n \\text{ odd})$$
+@academic[formula_callout:Sums and Differences of Powers
+$$a^n + b^n = (a+b)(a^{n-1} - a^{n-2}b + a^{n-3}b^2 - \\cdots + b^{n-1}) \\quad (n \\text{ odd})$$]@
 
 When $n$ is even, $a^n + b^n$ is irreducible over the reals. The case $a^4 - b^4$ is worth noting separately because it factors twice — first as a difference of squares, then again because $a^2 - b^2$ factors further: $(a-b)(a+b)(a^2+b^2)$.`,
       before: ``,
@@ -342,33 +356,39 @@ When $n$ is even, $a^n + b^n$ is irreducible over the reals. The case $a^4 - b^4
 
 The Sophie Germain identity factors $a^4 + 4b^4$, an expression that looks irreducible at first glance:
 
-$$a^4 + 4b^4 = (a^2 + 2ab + 2b^2)(a^2 - 2ab + 2b^2)$$
+@academic[formula_callout:Useful Specials
+$$a^4 + 4b^4 = (a^2 + 2ab + 2b^2)(a^2 - 2ab + 2b^2)$$]@
 
 It surfaces in number theory and contest problems where $a^4 + 4b^4$ appears and would otherwise resist factoring.
 
 Two paired identities link sums and differences of squared binomials:
 
-$$(a+b)^2 + (a-b)^2 = 2(a^2 + b^2)$$
+@academic[formula_callout:Useful Specials
+$$(a+b)^2 + (a-b)^2 = 2(a^2 + b^2)$$]@
 
-$$(a+b)^2 - (a-b)^2 = 4ab$$
+@academic[formula_callout:Useful Specials
+$$(a+b)^2 - (a-b)^2 = 4ab$$]@
 
 The first reduces a sum of squared sum and squared difference; the second extracts the product $ab$ from the same pair. Both are useful when manipulating expressions where $a+b$ and $a-b$ appear together.
 
 A symmetric three-variable identity:
 
-$$a^2 + b^2 + c^2 - ab - ac - bc = \\tfrac{1}{2}\\left[(a-b)^2 + (b-c)^2 + (a-c)^2\\right]$$
+@academic[formula_callout:Useful Specials
+$$a^2 + b^2 + c^2 - ab - ac - bc = \\tfrac{1}{2}\\left[(a-b)^2 + (b-c)^2 + (a-c)^2\\right]$$]@
 
 Recognizing this form proves the expression is non-negative for all real $a, b, c$, which is otherwise non-obvious.
 
 A factorable quartic that is not a perfect square:
 
-$$a^4 + a^2b^2 + b^4 = (a^2 + ab + b^2)(a^2 - ab + b^2)$$
+@academic[formula_callout:Useful Specials
+$$a^4 + a^2b^2 + b^4 = (a^2 + ab + b^2)(a^2 - ab + b^2)$$]@
 
 This one looks like a difference of squares hiding inside a sum, and it appears in factoring problems where the standard patterns fail.
 
 Finally, over the [complex numbers](!/complex-numbers), the sum of two squares factors using the imaginary unit:
 
-$$a^2 + b^2 = (a + bi)(a - bi)$$
+@academic[formula_callout:Useful Specials
+$$a^2 + b^2 = (a + bi)(a - bi)$$]@
 
 Over $\\mathbb{R}$ this expression is irreducible; over $\\mathbb{C}$ it splits cleanly, and the factorization is the basis for using complex conjugates to handle expressions that have no real factorization.`,
       before: ``,

@@ -554,9 +554,13 @@ A common and dangerous shortcut is cross-multiplying to clear the denominator. B
     title: `Absolute Value Inequalities`,
     content: `An [absolute value inequality](!/algebra/inequalities/absolute-value) translates into a compound inequality through two standard conversions, one for each direction.
 
-The "less than" form $|f(x)| < k$ (with $k > 0$) says that $f(x)$ lies within $k$ units of zero. This converts to the conjunction $-k < f(x) < k$, a bounded compound inequality whose solution is an interval. The inequality $|2x - 3| < 5$ becomes $-5 < 2x - 3 < 5$, which solves to $-1 < x < 4$.
+@academic[rule_plain:The "less than" form $|f(x)| < k$ (with $k > 0$) says that $f(x)$ lies within $k$ units of zero. This converts to the conjunction $-k < f(x) < k$, a bounded compound inequality whose solution is an interval.]@
 
-The "greater than" form $|f(x)| > k$ says that $f(x)$ lies more than $k$ units from zero. This converts to the disjunction $f(x) < -k$ or $f(x) > k$, producing two rays as the solution. The inequality $|x + 1| \\geq 4$ becomes $x + 1 \\leq -4$ or $x + 1 \\geq 4$, giving $x \\leq -5$ or $x \\geq 3$.
+The inequality $|2x - 3| < 5$ becomes $-5 < 2x - 3 < 5$, which solves to $-1 < x < 4$.
+
+@academic[rule_plain:The "greater than" form $|f(x)| > k$ says that $f(x)$ lies more than $k$ units from zero. This converts to the disjunction $f(x) < -k$ or $f(x) > k$, producing two rays as the solution.]@
+
+The inequality $|x + 1| \\geq 4$ becomes $x + 1 \\leq -4$ or $x + 1 \\geq 4$, giving $x \\leq -5$ or $x \\geq 3$.
 
 The geometric reading — absolute value as distance on the number line — provides immediate intuition. The inequality $|x - a| < d$ describes all points within distance $d$ of $a$, forming the interval $(a - d, a + d)$. The inequality $|x - a| > d$ describes all points farther than $d$ from $a$, forming two rays.`,
     before: ``,

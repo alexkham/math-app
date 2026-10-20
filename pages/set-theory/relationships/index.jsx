@@ -1459,7 +1459,8 @@ const sectionsContent = {
     content: `
 Two sets $A$ and $B$ are equal if they contain exactly the same elements:
 
-$$A = B \\iff \\forall x\\,(x \\in A \\iff x \\in B)$$
+@academic[formula_callout:Equal Sets
+$$A = B \\iff \\forall x\\,(x \\in A \\iff x \\in B)$$]@
 
 The two [logic symbols](!/math-symbols/math-logic) in this criterion read naturally: $\\forall$ means 'for all' and $\\iff$ means 'if and only if'.
 
@@ -1485,7 +1486,8 @@ This reduces the problem to two subset proofs: show every element of $A$ belongs
     content: `
 Two sets are equivalent if they have the same [cardinality](!/set-theory/cardinality):
 
-$$|A| = |B|$$
+@academic[formula_callout:Equivalent Sets
+$$|A| = |B|$$]@
 
 This means a bijection exists between $A$ and $B$ — a one-to-one correspondence pairing each element of $A$ with exactly one element of $B$.
 
@@ -1502,13 +1504,15 @@ The sets $\\{a, b, c\\}$ and $\\{1, 2, 3\\}$ are equivalent (both have cardinali
     content: `
 Two sets are disjoint if they have no elements in common:
 
-$$A \\cap B = \\emptyset$$
+@academic[formula_callout:Disjoint Sets
+$$A \\cap B = \\emptyset$$]@
 
 The sets $\\{1, 2, 3\\}$ and $\\{4, 5, 6\\}$ are disjoint. The set of even integers and the set of odd integers are disjoint.
 
 For a collection of more than two sets, the sets are pairwise disjoint if every pair is disjoint:
 
-$$A_i \\cap A_j = \\emptyset \\quad \\text{for all } i \\neq j$$
+@academic[formula_callout:Disjoint Sets
+$$A_i \\cap A_j = \\emptyset \\quad \\text{for all } i \\neq j$$]@
 
 Pairwise disjoint sets have no overlap whatsoever — no element belongs to more than one set in the collection.
 
@@ -1523,7 +1527,8 @@ In [probability](!/probability/events), disjoint events are called mutually excl
     content: `
 Two sets overlap if they share at least one element but neither is a [subset](!/set-theory/subsets) of the other:
 
-$$A \\cap B \\neq \\emptyset \\quad \\text{and} \\quad A \\not\\subseteq B \\quad \\text{and} \\quad B \\not\\subseteq A$$
+@academic[formula_callout:Overlapping Sets
+$$A \\cap B \\neq \\emptyset \\quad \\text{and} \\quad A \\not\\subseteq B \\quad \\text{and} \\quad B \\not\\subseteq A$$]@
 
 This means each set contains elements the other lacks, yet they also have common elements.
 
@@ -1540,7 +1545,8 @@ In a [Venn diagram](!/set-theory/venn-diagrams), overlapping sets appear as circ
     content: `
 A partition of a set $S$ is a collection of non-empty, pairwise disjoint subsets whose union equals $S$:
 
-$$\\{A_1, A_2, \\ldots, A_n\\} \\text{ partitions } S \\iff \\begin{cases} A_i \\neq \\emptyset & \\text{for all } i \\\\ A_i \\cap A_j = \\emptyset & \\text{for } i \\neq j \\\\ A_1 \\cup A_2 \\cup \\cdots \\cup A_n = S \\end{cases}$$
+@academic[formula_callout:Partitions
+$$\\{A_1, A_2, \\ldots, A_n\\} \\text{ partitions } S \\iff \\begin{cases} A_i \\neq \\emptyset & \\text{for all } i \\\\ A_i \\cap A_j = \\emptyset & \\text{for } i \\neq j \\\\ A_1 \\cup A_2 \\cup \\cdots \\cup A_n = S \\end{cases}$$]@
 
 Every element of $S$ belongs to exactly one subset in the partition.
 

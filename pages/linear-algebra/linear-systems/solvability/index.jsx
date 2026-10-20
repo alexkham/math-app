@@ -1768,6 +1768,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
 import spanMembershipDiagrams from '@/app/components/linear-algebra copy/matrix/spanMembershipDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -2176,7 +2177,8 @@ The two questions are independent — existence can hold without uniqueness, and
     title: `The Existence Condition`,
     content: `The system $A\\mathbf{x} = \\mathbf{b}$ has at least one solution if and only if
 
-$$\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}])$$
+@academic[formula_callout:The Existence Condition
+$$\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}])$$]@
 
 When this condition holds, $\\mathbf{b}$ is already a linear combination of the columns of $A$, so appending $\\mathbf{b}$ as an extra column does not introduce a new independent direction — the rank stays the same.
 
@@ -2191,7 +2193,8 @@ Since appending one column can increase the rank by at most $1$, the only possib
     title: `The Uniqueness Condition`,
     content: `When a solution exists, it is unique if and only if
 
-$$\\text{rank}(A) = n$$
+@academic[formula_callout:The Uniqueness Condition
+$$\\text{rank}(A) = n$$]@
 
 where $n$ is the number of unknowns. Full column rank means every column of $A$ contains a pivot, leaving no free variables. The null space is $\\{\\mathbf{0}\\}$, so the particular solution $\\mathbf{x}_p$ stands alone with nothing to add.
 
@@ -2484,8 +2487,35 @@ const schemas = {
     ],
   };
 
+  const existenceCases = {
+    prefaceTitle: 'Only two possibilities',
+    preface: 'Appending $\\mathbf{b}$ as an extra column can raise the rank by at most $1$. So comparing the two ranks leaves exactly two outcomes.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'Existence is a question about $\\mathbf{b}$ alone: is it already a linear combination of the columns of $A$?',
+    parent: {
+      kicker: 'Existence',
+      formula: '$A\\mathbf{x} = \\mathbf{b}$',
+      splitBy: '$\\text{rank}([A \\mid \\mathbf{b}])$ compared with $\\text{rank}(A)$',
+    },
+    cases: [
+      {
+        id: 'consistent', condition: '$\\text{rank}([A \\mid \\mathbf{b}]) = \\text{rank}(A)$',
+        count: { n: '✓' },
+        headline: 'Consistent',
+        desc: '$\\mathbf{b}$ is a linear combination of the columns; appending it adds no new independent direction',
+      },
+      {
+        id: 'inconsistent', condition: '$\\text{rank}([A \\mid \\mathbf{b}]) = \\text{rank}(A) + 1$',
+        count: { n: '✗' },
+        headline: 'Inconsistent',
+        desc: '$\\mathbf{b}$ is not in the column space; echelon form shows a row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$',
+      },
+    ],
+  };
+
 return {
   props:{
+    existenceCases,
     squareSystemCases,
     demoUnits,
     sectionsContent,
@@ -2509,7 +2539,7 @@ return {
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function SolvabilityPage({squareSystemCases, 
+export default function SolvabilityPage({existenceCases, squareSystemCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -2556,6 +2586,14 @@ export default function SolvabilityPage({squareSystemCases,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrameV2
+            key={'obj2-diagram'}
+            id="existence-condition-rank-cases"
+            title="Existence: comparing the two ranks"
+            source="/linear-algebra/linear-systems/solvability"
+          >
+            <CaseSplit data={existenceCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrameV2>,
           <div key={'unit-existsIn'} dangerouslySetInnerHTML={{ __html: demoUnits.existsIn }} />,
           `Existence is a question about b alone: is it one of the vectors the columns can reach?`,
         ]
@@ -2596,14 +2634,14 @@ export default function SolvabilityPage({squareSystemCases,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <DiagramFrame
+          <DiagramFrameV2
             key={'obj6-diagram'}
             id="square-system-determinant-cases"
             title="Square systems: what the determinant decides"
             source="/linear-algebra/linear-systems/solvability"
           >
             <CaseSplit data={squareSystemCases} variant="poster" proseStyle="cards" theme={figureTheme} />
-          </DiagramFrame>,
+          </DiagramFrameV2>,
         ]
     },
     {

@@ -877,9 +877,11 @@ const keyWords = [
     title: `Same Denominator — The Simple Case`,
     content: `When fractions share a denominator, add or subtract the numerators and keep the denominator unchanged.
 
-$$\\frac{a}{c} + \\frac{b}{c} = \\frac{a + b}{c}$$
+@academic[formula_callout:Same Denominator — The Simple Case
+$$\\frac{a}{c} + \\frac{b}{c} = \\frac{a + b}{c}$$]@
 
-$$\\frac{a}{c} - \\frac{b}{c} = \\frac{a - b}{c}$$
+@academic[formula_callout:Same Denominator — The Simple Case
+$$\\frac{a}{c} - \\frac{b}{c} = \\frac{a - b}{c}$$]@
 
 For example, $\\frac{2}{7} + \\frac{3}{7} = \\frac{5}{7}$ and $\\frac{5}{8} - \\frac{2}{8} = \\frac{3}{8}$.
 
@@ -919,11 +921,14 @@ Finding the LCD uses the [least common multiple](!/arithmetic/divisibility/lcm).
 
 To add $\\frac{2}{3} + \\frac{1}{4}$ with LCD 12:
 
-$$\\frac{2}{3} = \\frac{2 \\times 4}{3 \\times 4} = \\frac{8}{12}$$
+@academic[formula_callout:Converting to Common Denominator
+$$\\frac{2}{3} = \\frac{2 \\times 4}{3 \\times 4} = \\frac{8}{12}$$]@
 
-$$\\frac{1}{4} = \\frac{1 \\times 3}{4 \\times 3} = \\frac{3}{12}$$
+@academic[formula_callout:Converting to Common Denominator
+$$\\frac{1}{4} = \\frac{1 \\times 3}{4 \\times 3} = \\frac{3}{12}$$]@
 
-$$\\frac{8}{12} + \\frac{3}{12} = \\frac{11}{12}$$
+@academic[formula_callout:Converting to Common Denominator
+$$\\frac{8}{12} + \\frac{3}{12} = \\frac{11}{12}$$]@
 
 For subtraction, the process is identical. To compute $\\frac{5}{6} - \\frac{1}{4}$ with LCD 12: convert to $\\frac{10}{12} - \\frac{3}{12} = \\frac{7}{12}$.`,
     before: ``,

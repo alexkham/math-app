@@ -1370,6 +1370,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoivreDiagrams'
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -1971,7 +1973,8 @@ const sectionsContent={
   title: `Multiplicative Inverse in Real Numbers`,
   content: `For any nonzero real number $a$, the multiplicative inverse is $\\frac{1}{a}$, also written $a^{-1}$. The defining property is:
 
-$$a \\cdot \\frac{1}{a} = 1$$
+@academic[formula_callout:Multiplicative Inverse in Real Numbers
+$$a \\cdot \\frac{1}{a} = 1$$]@
 
 The product of a number and its multiplicative inverse always equals one.
 
@@ -1999,11 +2002,13 @@ This expression uses the [conjugate](!/complex-numbers/complex-conjugate) $\\ove
 
 Separating into real and imaginary parts:
 
-$$z^{-1} = \\frac{a}{a^2 + b^2} - \\frac{b}{a^2 + b^2}i$$
+@academic[formula_callout:Multiplicative Inverse of a Complex Number
+$$z^{-1} = \\frac{a}{a^2 + b^2} - \\frac{b}{a^2 + b^2}i$$]@
 
 Consider $z = 3 + 4i$. The conjugate is $\\overline{z} = 3 - 4i$ and the modulus squared is $|z|^2 = 9 + 16 = 25$. The multiplicative inverse is:
 
-$$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$
+@academic[formula_callout:Multiplicative Inverse of a Complex Number
+$$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@
 
 Verification: $(3 + 4i)\\left(\\frac{3}{25} - \\frac{4}{25}i\\right) = \\frac{9}{25} - \\frac{12}{25}i + \\frac{12}{25}i - \\frac{16}{25}i^2 = \\frac{9}{25} + \\frac{16}{25} = 1$.
 
@@ -2019,21 +2024,25 @@ obj3: {
 
 Starting with $\\frac{1}{z} = \\frac{1}{a + bi}$, the goal is to rewrite this with a real denominator. Multiply numerator and denominator by the [conjugate](!/complex-numbers/complex-conjugate):
 
-$$\\frac{1}{a + bi} = \\frac{1}{a + bi} \\cdot \\frac{a - bi}{a - bi} = \\frac{a - bi}{(a + bi)(a - bi)}$$
+@academic[formula_callout:Why the Formula Works
+$$\\frac{1}{a + bi} = \\frac{1}{a + bi} \\cdot \\frac{a - bi}{a - bi} = \\frac{a - bi}{(a + bi)(a - bi)}$$]@
 
 The denominator simplifies using the identity $z \\cdot \\overline{z} = |z|^2$:
 
-$$(a + bi)(a - bi) = a^2 - (bi)^2 = a^2 - b^2i^2 = a^2 + b^2$$
+@academic[formula_callout:Why the Formula Works
+$$(a + bi)(a - bi) = a^2 - (bi)^2 = a^2 - b^2i^2 = a^2 + b^2$$]@
 
 This is a real number — the square of the modulus. The result:
 
-$$\\frac{1}{z} = \\frac{a - bi}{a^2 + b^2} = \\frac{\\overline{z}}{|z|^2}$$
+@academic[formula_callout:Why the Formula Works
+$$\\frac{1}{z} = \\frac{a - bi}{a^2 + b^2} = \\frac{\\overline{z}}{|z|^2}$$]@
 
 The key insight is that multiplying any complex number by its conjugate produces a real number. This property converts division by a complex number into division by a real number, which is straightforward.
 
 Verification confirms the formula works:
 
-$$z \\cdot z^{-1} = z \\cdot \\frac{\\overline{z}}{|z|^2} = \\frac{z \\cdot \\overline{z}}{|z|^2} = \\frac{|z|^2}{|z|^2} = 1$$
+@academic[formula_callout:Why the Formula Works
+$$z \\cdot z^{-1} = z \\cdot \\frac{\\overline{z}}{|z|^2} = \\frac{z \\cdot \\overline{z}}{|z|^2} = \\frac{|z|^2}{|z|^2} = 1$$]@
 
 The product of $z$ and $\\overline{z}$ in the numerator equals $|z|^2$, canceling the denominator exactly.`,
   before: ``,
@@ -2098,7 +2107,8 @@ Numbers on the unit circle — those with $|z| = 1$ — have inverses also on th
 
 The argument negates:
 
-$$\\arg(z^{-1}) = -\\arg(z)$$
+@academic[formula_callout:Geometric Interpretation
+$$\\arg(z^{-1}) = -\\arg(z)$$]@
 
 If $z$ points in direction $\\theta$, then $z^{-1}$ points in direction $-\\theta$. A number in the upper half-plane has its inverse in the lower half-plane, and vice versa. A number at angle $\\frac{\\pi}{4}$ (northeast) has its inverse at angle $-\\frac{\\pi}{4}$ (southeast).
 
@@ -2115,33 +2125,43 @@ obj6: {
 
 Double inversion returns the original number:
 
-$$(z^{-1})^{-1} = z$$
+@academic[formula_callout:Properties of Multiplicative Inverse
+$$(z^{-1})^{-1} = z$$]@
 
 Taking the multiplicative inverse twice leaves $z$ unchanged. If $w$ is the inverse of $z$, then $z$ is the inverse of $w$.
 
 The inverse of a product equals the product of inverses:
 
-$$(z_1 \\cdot z_2)^{-1} = z_1^{-1} \\cdot z_2^{-1}$$
+@academic[formula_callout:Properties of Multiplicative Inverse
+$$(z_1 \\cdot z_2)^{-1} = z_1^{-1} \\cdot z_2^{-1}$$]@
 
 To invert a product, invert each factor. Order does not matter since multiplication is commutative.
 
 Inversion and [conjugation](!/complex-numbers/complex-conjugate) commute:
 
-$$(\\overline{z})^{-1} = \\overline{z^{-1}}$$
+@academic[formula_callout:Properties of Multiplicative Inverse
+$$(\\overline{z})^{-1} = \\overline{z^{-1}}$$]@
 
 Conjugating first and then inverting produces the same result as inverting first and then conjugating.
 
 The modulus inverts:
 
+@academic[formula_callout:Modulus of Inverse
 $$|z^{-1}| = \\frac{1}{|z|}$$
+/complex-numbers/formulas#modulus_of_inverse]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The argument negates:
 
-$$\\arg(z^{-1}) = -\\arg(z)$$
+@academic[formula_callout:Properties of Multiplicative Inverse
+$$\\arg(z^{-1}) = -\\arg(z)$$]@
 
 Powers and inverses interact naturally:
 
-$$(z^n)^{-1} = (z^{-1})^n = z^{-n}$$
+@academic[formula_callout:Properties of Multiplicative Inverse
+$$(z^n)^{-1} = (z^{-1})^n = z^{-n}$$]@
 
 The inverse of $z^n$ equals the $n$th power of $z^{-1}$, and both equal $z^{-n}$. This consistency allows negative exponents to work seamlessly with complex numbers, just as they do with real numbers.`,
   before: ``,
@@ -2163,7 +2183,8 @@ Geometrically, conjugation reflects across the real axis while preserving the mo
 
 The relationship between them is:
 
-$$z^{-1} = \\frac{\\overline{z}}{|z|^2}$$
+@academic[formula_callout:Multiplicative Inverse vs. Complex Conjugate
+$$z^{-1} = \\frac{\\overline{z}}{|z|^2}$$]@
 
 When are they equal? Only when $|z|^2 = 1$, meaning $|z| = 1$. On the unit circle, $z^{-1} = \\overline{z}$. For $z = \\frac{3}{5} + \\frac{4}{5}i$, which has modulus $1$, the inverse and conjugate are both $\\frac{3}{5} - \\frac{4}{5}i$. Off the unit circle, they always differ.`,
   before: ``,
@@ -2193,19 +2214,22 @@ obj9: {
   title: `Connection to Division`,
   content: `Division of complex numbers is multiplication by the multiplicative inverse:
 
-$$\\frac{z_1}{z_2} = z_1 \\cdot z_2^{-1}$$
+@academic[formula_callout:Connection to Division
+$$\\frac{z_1}{z_2} = z_1 \\cdot z_2^{-1}$$]@
 
 This definition reduces division to multiplication, which is already well understood. Every property of division follows from properties of multiplication combined with properties of the inverse.
 
 Substituting the formula for $z_2^{-1}$:
 
-$$\\frac{z_1}{z_2} = z_1 \\cdot \\frac{\\overline{z_2}}{|z_2|^2} = \\frac{z_1 \\cdot \\overline{z_2}}{|z_2|^2}$$
+@academic[formula_callout:Connection to Division
+$$\\frac{z_1}{z_2} = z_1 \\cdot \\frac{\\overline{z_2}}{|z_2|^2} = \\frac{z_1 \\cdot \\overline{z_2}}{|z_2|^2}$$]@
 
 This is the standard method for dividing complex numbers: multiply the numerator by the conjugate of the denominator, then divide by the modulus squared.
 
 Consider $\\frac{5 + 3i}{1 + 2i}$. The conjugate of the denominator is $1 - 2i$, and $|1 + 2i|^2 = 1 + 4 = 5$. Computing:
 
-$$\\frac{5 + 3i}{1 + 2i} = \\frac{(5 + 3i)(1 - 2i)}{5} = \\frac{5 - 10i + 3i - 6i^2}{5} = \\frac{5 - 7i + 6}{5} = \\frac{11 - 7i}{5} = \\frac{11}{5} - \\frac{7}{5}i$$
+@academic[formula_callout:Connection to Division
+$$\\frac{5 + 3i}{1 + 2i} = \\frac{(5 + 3i)(1 - 2i)}{5} = \\frac{5 - 10i + 3i - 6i^2}{5} = \\frac{5 - 7i + 6}{5} = \\frac{11 - 7i}{5} = \\frac{11}{5} - \\frac{7}{5}i$$]@
 
 The connection explains why division by zero is undefined: zero has no multiplicative inverse, so $z_1 \\cdot 0^{-1}$ is meaningless.
 
@@ -2224,7 +2248,8 @@ Existence is established by the formula: for any $z = a + bi$ with $z \\neq 0$, 
 
 Uniqueness follows from a short argument. Suppose $w_1$ and $w_2$ both satisfy $z \\cdot w_1 = 1$ and $z \\cdot w_2 = 1$. Then:
 
-$$w_1 = w_1 \\cdot 1 = w_1 \\cdot (z \\cdot w_2) = (w_1 \\cdot z) \\cdot w_2 = 1 \\cdot w_2 = w_2$$
+@academic[formula_callout:Uniqueness
+$$w_1 = w_1 \\cdot 1 = w_1 \\cdot (z \\cdot w_2) = (w_1 \\cdot z) \\cdot w_2 = 1 \\cdot w_2 = w_2$$]@
 
 Any two multiplicative inverses of the same number must be equal.
 
@@ -2429,8 +2454,82 @@ const schemas = {
     }),
   };
 
+  const complexInverseCases = {
+    prefaceTitle: 'The modulus inverts',
+    preface: 'The inverse of $z$ has modulus $\\dfrac{1}{|z|}$: a number far from the origin has an inverse close to it, and vice versa. Comparing $|z|$ with $1$ decides which.',
+    conclusionTitle: 'The argument negates',
+    conclusion: 'In every case $\\arg(z^{-1}) = -\\arg(z)$: the inverse reflects $z$ across the real axis and scales its distance by $\\dfrac{1}{|z|^2}$.',
+    parent: {
+      kicker: 'Multiplicative inverse',
+      formula: '$|z^{-1}| = \\dfrac{1}{|z|}$',
+      splitBy: '$|z|$ compared with $1$',
+    },
+    cases: [
+      {
+        id: 'far', condition: '$|z| > 1$',
+        count: { n: '↓' },
+        headline: 'Moves closer',
+        desc: 'the inverse has modulus less than one',
+        example: '$|z| = 5 \\Rightarrow |z^{-1}| = \\frac{1}{5}$',
+      },
+      {
+        id: 'near', condition: '$|z| < 1$',
+        count: { n: '↑' },
+        headline: 'Moves farther out',
+        desc: 'the inverse has modulus greater than one',
+        example: '$|z| = \\frac{1}{3} \\Rightarrow |z^{-1}| = 3$',
+      },
+      {
+        id: 'unit', condition: '$|z| = 1$',
+        count: { n: '=' },
+        headline: 'Stays on the unit circle',
+        desc: 'the same distance from the origin after inversion',
+      },
+    ],
+  };
+
+  const realInverseCases = {
+    prefaceTitle: 'Reciprocal distance',
+    preface: 'For a nonzero real number $a$, the inverse $\\frac{1}{a}$ satisfies $a \\cdot \\frac{1}{a} = 1$. On the number line, its distance from the origin is the reciprocal of the distance of $a$.',
+    conclusionTitle: 'Carries over',
+    conclusion: 'The exception for zero carries over to complex numbers.',
+    parent: {
+      kicker: 'Inverse of a real number',
+      formula: '$a \\cdot \\dfrac{1}{a} = 1$',
+      splitBy: '$|a|$ compared with $1$',
+    },
+    cases: [
+      {
+        id: 'big', condition: '$|a| > 1$',
+        count: { n: '↓' },
+        headline: 'Inverse is closer to 0',
+        example: '$5 \\to \\frac{1}{5}$',
+      },
+      {
+        id: 'small', condition: '$0 < |a| < 1$',
+        count: { n: '↑' },
+        headline: 'Inverse is farther from 0',
+        example: '$\\frac{1}{4} \\to 4$',
+      },
+      {
+        id: 'one', condition: '$|a| = 1$',
+        count: { n: '=' },
+        headline: 'Its own inverse',
+        desc: 'just $1$ and $-1$',
+      },
+      {
+        id: 'zero', condition: '$a = 0$',
+        count: { n: '✗' },
+        headline: 'No inverse',
+        desc: 'no real $x$ satisfies $0 \\cdot x = 1$',
+      },
+    ],
+  };
+
   return {
   props:{
+    realInverseCases,
+    complexInverseCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -2452,7 +2551,9 @@ const schemas = {
 }
    }
 
-export default function MultiplicativeInversePage({
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function MultiplicativeInversePage({realInverseCases, complexInverseCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -2483,6 +2584,14 @@ export default function MultiplicativeInversePage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <DiagramFrame
+            key={'obj1-diagram'}
+            id="real-inverse-distance-cases"
+            title="The inverse of a real number"
+            source="/complex-numbers/multiplicative-inverse"
+          >
+            <CaseSplit data={realInverseCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2528,6 +2637,14 @@ export default function MultiplicativeInversePage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="complex-inverse-modulus-cases"
+            title="The inverse of z: closer, farther or on the circle"
+            source="/complex-numbers/multiplicative-inverse"
+          >
+            <CaseSplit data={complexInverseCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

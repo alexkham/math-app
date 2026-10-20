@@ -1017,6 +1017,8 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import Head from 'next/head'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -1421,7 +1423,12 @@ The addition rule has a quiet requirement — the options must be mutually exclu
 
 The inclusion–exclusion principle is the systematic correction. For two sets:
 
+@academic[formula_callout:Inclusion-Exclusion Principle (Two Sets)
 $$|A \\cup B| = |A| + |B| - |A \\cap B|.$$
+/combinatorics/formulas#inclusion-exclusion_principle_two_sets]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 For three sets the pattern continues — add singles, subtract pairwise intersections, add the triple intersection. For $n$ sets the signs alternate down the line, with one term for every non-empty subset of the sets involved.
 
@@ -1440,13 +1447,19 @@ The principle also has a complementary form, counting elements that belong to no
     content: `
 A **permutation** is an ordered arrangement of items. Arranging $n$ distinct items in a row gives $n!$ permutations — the factorial and arrangement marks are unpacked in [permutation notation](!/combinatorics/permutations#notation). Selecting and arranging $r$ items from $n$ gives
 
-$$P(n,r) = \\frac{n!}{(n-r)!}.$$
+@academic[formula_callout:Permutations and Combinations
+$$P(n,r) = \\frac{n!}{(n-r)!}.$$]@
 
 Variants of the basic problem cover arrangements with repetition allowed, arrangements containing identical items, circular arrangements, and arrangements with positional constraints.
 
 A **combination** is an unordered selection of items. Choosing $r$ items from $n$ without regard to order gives
 
+@academic[formula_callout:Combination
 $$\\binom{n}{r} = \\frac{n!}{r!(n-r)!}.$$
+/combinatorics/formulas#combination]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 Variants cover partitioning items into groups, distributing identical items into labeled cells, and weak and strong compositions.
 
@@ -1502,7 +1515,8 @@ The combination formula $\\binom{n}{r}$ counts how many $r$-element subsets exis
 
 The coefficient satisfies relations that are not visible from the counting interpretation. The symmetry $\\binom{n}{k} = \\binom{n}{n-k}$ follows immediately from the definition. Pascal's rule,
 
-$$\\binom{n}{k} = \\binom{n-1}{k-1} + \\binom{n-1}{k},$$
+@academic[formula_callout:The Binomial Coefficient
+$$\\binom{n}{k} = \\binom{n-1}{k-1} + \\binom{n-1}{k},$$]@
 
 arranges all binomial coefficients into Pascal's triangle, where each interior entry is the sum of the two directly above. Further identities organize entire row sums and diagonal patterns.
 
@@ -1521,7 +1535,12 @@ The coefficient also generalizes to the multinomial coefficient $\\binom{n}{k_1,
     content: `
 The binomial coefficient's algebraic side becomes explicit in the expansion of $(a+b)^n$. Multiplying out the product distributes into terms of the form $a^{n-k} b^k$. The number of times each such term appears equals the number of ways to choose $k$ of the $n$ factors to contribute a $b$ — which is exactly $\\binom{n}{k}$. The result is the binomial theorem:
 
+@academic[formula_callout:Binomial Theorem
 $$(a+b)^n = \\sum_{k=0}^{n} \\binom{n}{k} \\, a^{n-k} b^k.$$
+/combinatorics/formulas#binomial_theorem]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 The theorem generalizes — the multinomial theorem expands $(x_1 + x_2 + \\cdots + x_r)^n$ using multinomial coefficients.
 `,
@@ -1671,8 +1690,37 @@ const schemas = {
     }),
   };
 
+  const permCombCases = {
+    prefaceTitle: 'One question first',
+    preface: 'Selecting $r$ items from $n$ distinct items: whether the order of the selected items matters decides which count applies.',
+    conclusionTitle: 'Variants',
+    conclusion: 'Each family has variants: repetition, identical items, circular arrangements and constraints for permutations; groups, distributions and compositions for combinations.',
+    parent: {
+      kicker: 'Selecting r from n',
+      formula: '$r$ items from $n$',
+      splitBy: 'whether order matters',
+    },
+    cases: [
+      {
+        id: 'perm', condition: 'order matters',
+        count: { n: 'P' },
+        headline: 'Permutation',
+        desc: 'an ordered arrangement; see [permutations](!/combinatorics/permutations)',
+        formula: '$P(n,r) = \\dfrac{n!}{(n-r)!}$',
+      },
+      {
+        id: 'comb', condition: 'order does not matter',
+        count: { n: 'C' },
+        headline: 'Combination',
+        desc: 'an unordered selection',
+        formula: '$\\dbinom{n}{r} = \\dfrac{n!}{r!(n-r)!}$',
+      },
+    ],
+  };
+
     return {
   props:{
+    permCombCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1694,7 +1742,9 @@ const schemas = {
 }
     }
    
-export default function CombinatoricsBasicsPage({sectionsContent, introContent,
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function CombinatoricsBasicsPage({permCombCases, sectionsContent, introContent,
   combinatoricsScenariosData, countingPrinciplesData, countingPrinciplesDiagram,
   seoData, faqQuestions, schemas, demoUnits}) {
 
@@ -1731,6 +1781,14 @@ export default function CombinatoricsBasicsPage({sectionsContent, introContent,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="permutation-combination-order-cases"
+            title="Permutation or combination: does order matter?"
+            source="/combinatorics/basics"
+          >
+            <CaseSplit data={permCombCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

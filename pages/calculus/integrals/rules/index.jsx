@@ -362,7 +362,8 @@ These rules apply to both definite and indefinite integrals. They allow complex 
 
 For example:
 
-$$\\int (x^3 + \\sin x)\\, dx = \\int x^3\\, dx + \\int \\sin x\\, dx = \\frac{x^4}{4} - \\cos x + C$$
+@academic[formula_callout:Sum and Difference Rules
+$$\\int (x^3 + \\sin x)\\, dx = \\int x^3\\, dx + \\int \\sin x\\, dx = \\frac{x^4}{4} - \\cos x + C$$]@
 `,
     before: ``,
     after: ``,
@@ -384,11 +385,13 @@ This holds for any constant $c$. The rule simplifies computation by separating n
 
 For example:
 
-$$\\int 7e^x\\, dx = 7 \\int e^x\\, dx = 7e^x + C$$
+@academic[formula_callout:Constant Multiple Rule
+$$\\int 7e^x\\, dx = 7 \\int e^x\\, dx = 7e^x + C$$]@
 
 Combined with the sum rule, linearity handles any linear combination:
 
-$$\\int [af(x) + bg(x)]\\, dx = a\\int f(x)\\, dx + b\\int g(x)\\, dx$$
+@academic[formula_callout:Constant Multiple Rule
+$$\\int [af(x) + bg(x)]\\, dx = a\\int f(x)\\, dx + b\\int g(x)\\, dx$$]@
 `,
     before: ``,
     after: ``,
@@ -429,7 +432,7 @@ A useful consequence: if $a = b$, the integral vanishes:
 
 @academic[formula_callout:Zero-Width Interval
 $$\\int_a^a f(x)\\, dx = 0$$
-/calculus/formulas#zero_width_interval]@
+/calculus/formulas#zero-width_interval]@
 
 @academic[formulas_link:Browse all integral formulas
 /calculus/formulas]@
@@ -445,15 +448,17 @@ No interval means no accumulation.
     content: `
 Define the accumulation function:
 
-$$F(x) = \\int_a^x f(t)\\, dt$$
+@academic[formula_callout:Fundamental Theorem of Calculus — Part 1
+$$F(x) = \\int_a^x f(t)\\, dt$$]@
 
 Part 1 of the Fundamental Theorem states that if $f$ is continuous, then $F$ is differentiable and:
 
-$$F'(x) = f(x)$$
+@academic[formula_callout:Fundamental Theorem of Calculus — Part 1
+$$F'(x) = f(x)$$]@
 
 @academic[formula_callout:Fundamental Theorem of Calculus, Part 1
 $$\\frac{d}{dx}\\left[\\int_a^x f(t)\\, dt\\right] = f(x) \\quad \\text{when } f \\text{ is continuous}$$
-/calculus/formulas#fundamental_theorem_of_calculus_part_1]@
+/calculus/formulas#fundamental_theorem_of_calculus,_part_1]@
 
 @academic[formulas_link:Browse all integral formulas
 /calculus/formulas]@
@@ -473,7 +478,7 @@ If $F$ is any antiderivative of $f$ (meaning $F'(x) = f(x)$), then:
 
 @academic[formula_callout:Fundamental Theorem of Calculus, Part 2
 $$\\int_a^b f(x)\\, dx = F(b) - F(a) \\quad \\text{where } F'(x) = f(x)$$
-/calculus/formulas#fundamental_theorem_of_calculus_part_2]@
+/calculus/formulas#fundamental_theorem_of_calculus,_part_2]@
 
 @academic[formulas_link:Browse all integral formulas
 /calculus/formulas]@
@@ -484,7 +489,8 @@ The notation $F(x)\\Big|_a^b$ or $[F(x)]_a^b$ means $F(b) - F(a)$.
 
 Example:
 
-$$\\int_1^3 x^2\\, dx = \\frac{x^3}{3}\\Big|_1^3 = \\frac{27}{3} - \\frac{1}{3} = \\frac{26}{3}$$
+@academic[formula_callout:Fundamental Theorem of Calculus — Part 2
+$$\\int_1^3 x^2\\, dx = \\frac{x^3}{3}\\Big|_1^3 = \\frac{27}{3} - \\frac{1}{3} = \\frac{26}{3}$$]@
 `,
     before: ``,
     after: ``,
@@ -497,11 +503,17 @@ The two parts of the Fundamental Theorem express inverse relationships.
 
 **Part 1:** Differentiating an integral recovers the integrand.
 
+@academic[formula_callout:Fundamental Theorem of Calculus, Part 1
 $$\\frac{d}{dx} \\int_a^x f(t)\\, dt = f(x)$$
+/calculus/formulas#fundamental_theorem_of_calculus,_part_1]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/formulas]@
 
 **Part 2:** Integrating a derivative recovers the function (up to boundary values).
 
-$$\\int_a^b F'(x)\\, dx = F(b) - F(a)$$
+@academic[formula_callout:Why Differentiation and Integration Are Inverses
+$$\\int_a^b F'(x)\\, dx = F(b) - F(a)$$]@
 
 These are two directions of the same relationship. Integration accumulates; differentiation measures instantaneous rate. Each operation undoes the other, connecting the geometry of area to the algebra of rates of change.
 `,
@@ -516,7 +528,8 @@ Inequalities between integrands yield inequalities between integrals.
 
 **Nonnegativity:** If $f(x) \\geq 0$ on $[a, b]$, then:
 
-$$\\int_a^b f(x)\\, dx \\geq 0$$
+@academic[formula_callout:Comparison Properties
+$$\\int_a^b f(x)\\, dx \\geq 0$$]@
 
 **Monotonicity:** If $f(x) \\leq g(x)$ on $[a, b]$, then:
 
@@ -560,7 +573,8 @@ Integration obeys algebraic rules that mirror those of differentiation. Sums spl
 
 The deepest result is the Fundamental Theorem of Calculus, which bridges the two faces of integration. Part 1 says differentiation undoes integration. Part 2 says definite integrals can be computed via antiderivatives:
 
-$$\\int_a^b f(x)\\, dx = F(b) - F(a)$$
+@academic[formula_callout:Summary: All Integration Rules at a Glance
+$$\\int_a^b f(x)\\, dx = F(b) - F(a)$$]@
 
 This theorem converts area computation—a limiting process involving infinite sums—into simple evaluation of an antiderivative at two points. It explains why mastering indefinite integration unlocks definite integration as well.
 `

@@ -528,9 +528,11 @@ Multiplying conjugate binomials — a sum and a difference of the same two terms
 
 The cubic identities extend the same logic one degree further:
 
-$$(a + b)(a^2 - ab + b^2) = a^3 + b^3$$
+@academic[formula_callout:Special Products
+$$(a + b)(a^2 - ab + b^2) = a^3 + b^3$$]@
 
-$$(a - b)(a^2 + ab + b^2) = a^3 - b^3$$
+@academic[formula_callout:Special Products
+$$(a - b)(a^2 + ab + b^2) = a^3 - b^3$$]@
 
 Each pairs a linear factor with a quadratic factor to produce a two-term cubic. These patterns are the multiplication side of the sum and difference of cubes formulas used in factoring — the same identities read in the opposite direction.`,
     before: ``,
@@ -556,7 +558,8 @@ The method does not extend beyond binomials. Attempting to apply FOIL to a binom
     title: `Polynomial Long Division`,
     content: `Dividing one polynomial by another follows a process that mirrors numerical long division. The idea is to find a quotient and a remainder that satisfy:
 
-$$\\text{dividend} = (\\text{divisor} \\times \\text{quotient}) + \\text{remainder}$$
+@academic[formula_callout:Polynomial Long Division
+$$\\text{dividend} = (\\text{divisor} \\times \\text{quotient}) + \\text{remainder}$$]@
 
 To divide $x^3 - 2x^2 + 5x - 3$ by $x - 1$, begin by dividing the leading term of the dividend by the leading term of the divisor: $x^3 \\div x = x^2$. Multiply $x^2$ by the entire divisor: $x^2(x - 1) = x^3 - x^2$. Subtract this from the dividend to get $-x^2 + 5x - 3$. Repeat: $-x^2 \\div x = -x$, multiply $-x(x - 1) = -x^2 + x$, subtract to get $4x - 3$. One more pass: $4x \\div x = 4$, multiply $4(x - 1) = 4x - 4$, subtract to get $1$. The quotient is $x^2 - x + 4$ with remainder $1$.
 

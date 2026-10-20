@@ -2448,7 +2448,8 @@ This ratio is undefined whenever $\\cos\\theta = 0$ — that is, at $\\theta = \
 
 The domain of tangent is all real numbers except the odd multiples of $\\frac{\\pi}{2}$:
 
-$$\\theta \\neq \\frac{\\pi}{2} + n\\pi, \\quad n \\in \\mathbb{Z}$$
+@academic[formula_callout:The Tangent Function
+$$\\theta \\neq \\frac{\\pi}{2} + n\\pi, \\quad n \\in \\mathbb{Z}$$]@
 
 The range, by contrast, is the entire real line $(-\\infty, \\infty)$. As $\\theta$ approaches an excluded value, $\\cos(\\theta)$ approaches zero while $\\sin(\\theta)$ approaches $\\pm 1$, driving the ratio toward $+\\infty$ or $-\\infty$. On the [graph](!/trigonometry/graphs), these excluded points correspond to vertical asymptotes.
 
@@ -2629,7 +2630,8 @@ Combining reciprocal and quotient relationships, any expression involving the si
 
 The relationships also imply that the six functions naturally pair off. Sine and cosecant are reciprocals. Cosine and secant are reciprocals. Tangent and cotangent are reciprocals. Within each pair, the product is always 1:
 
-$$\\sin\\theta \\cdot \\csc\\theta = 1, \\quad \\cos\\theta \\cdot \\sec\\theta = 1, \\quad \\tan\\theta \\cdot \\cot\\theta = 1$$
+@academic[formula_callout:Reciprocal and Quotient Relationships
+$$\\sin\\theta \\cdot \\csc\\theta = 1, \\quad \\cos\\theta \\cdot \\sec\\theta = 1, \\quad \\tan\\theta \\cdot \\cot\\theta = 1$$]@
 
 These hold at every point where both functions in the pair are defined. They are among the simplest of the trigonometric [identities](!/trigonometry/identities), but their utility is pervasive.`,
     before: ``,
@@ -2669,13 +2671,15 @@ Several patterns are worth noting. Tangent and secant share the same excluded po
 
 **Step 4: Evaluate and assign the sign.** Look up the function value at the reference angle, then apply the sign from Step 2.
 
-Example: evaluate $\\cos\\left(\\frac{7\\pi}{4}\\right)$.
+@academic[example:Example
+evaluate $\\cos\\left(\\frac{7\\pi}{4}\\right)$.
 
-The angle $\\frac{7\\pi}{4}$ is in $[0, 2\\pi)$, so no coterminal reduction is needed. It lies in Quadrant IV (since $\\frac{3\\pi}{2} < \\frac{7\\pi}{4} < 2\\pi$). The reference angle is $2\\pi - \\frac{7\\pi}{4} = \\frac{\\pi}{4}$. Cosine is positive in Quadrant IV. Therefore $\\cos\\left(\\frac{7\\pi}{4}\\right) = +\\cos\\left(\\frac{\\pi}{4}\\right) = \\frac{\\sqrt{2}}{2}$.
+The angle $\\frac{7\\pi}{4}$ is in $[0, 2\\pi)$, so no coterminal reduction is needed. It lies in Quadrant IV (since $\\frac{3\\pi}{2} < \\frac{7\\pi}{4} < 2\\pi$). The reference angle is $2\\pi - \\frac{7\\pi}{4} = \\frac{\\pi}{4}$. Cosine is positive in Quadrant IV. Therefore $\\cos\\left(\\frac{7\\pi}{4}\\right) = +\\cos\\left(\\frac{\\pi}{4}\\right) = \\frac{\\sqrt{2}}{2}$.]@
 
-Example: evaluate $\\tan(240°)$.
+@academic[example:Example
+evaluate $\\tan(240°)$.
 
-The angle $240°$ is in Quadrant III ($180° < 240° < 270°$). The reference angle is $240° - 180° = 60°$. Tangent is positive in Quadrant III (both sine and cosine are negative, and a negative divided by a negative is positive). Therefore $\\tan(240°) = +\\tan(60°) = \\sqrt{3}$.
+The angle $240°$ is in Quadrant III ($180° < 240° < 270°$). The reference angle is $240° - 180° = 60°$. Tangent is positive in Quadrant III (both sine and cosine are negative, and a negative divided by a negative is positive). Therefore $\\tan(240°) = +\\tan(60°) = \\sqrt{3}$.]@
 
 This procedure works uniformly for every angle and every function. For non-standard angles — those whose reference angle is not $30°$, $45°$, or $60°$ — a calculator is needed for the reference angle evaluation, but the sign-determination step remains the same.
 
@@ -2690,19 +2694,24 @@ To evaluate sine, cosine or tangent at any angle in degrees or radians, use the 
 
 Suppose $\\sin\\theta = \\frac{3}{5}$ and $\\theta$ is in Quadrant II. The Pythagorean identity gives:
 
-$$\\cos^2\\theta = 1 - \\sin^2\\theta = 1 - \\frac{9}{25} = \\frac{16}{25}$$
+@academic[formula_callout:Finding All Function Values from One Known Value
+$$\\cos^2\\theta = 1 - \\sin^2\\theta = 1 - \\frac{9}{25} = \\frac{16}{25}$$]@
 
 So $\\cos\\theta = \\pm\\frac{4}{5}$. Since $\\theta$ is in Quadrant II, where cosine is negative: $\\cos\\theta = -\\frac{4}{5}$.
 
 From here, the remaining four functions follow:
 
-$$\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta} = \\frac{3/5}{-4/5} = -\\frac{3}{4}$$
+@academic[formula_callout:Finding All Function Values from One Known Value
+$$\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta} = \\frac{3/5}{-4/5} = -\\frac{3}{4}$$]@
 
-$$\\cot\\theta = \\frac{1}{\\tan\\theta} = -\\frac{4}{3}$$
+@academic[formula_callout:Finding All Function Values from One Known Value
+$$\\cot\\theta = \\frac{1}{\\tan\\theta} = -\\frac{4}{3}$$]@
 
-$$\\sec\\theta = \\frac{1}{\\cos\\theta} = -\\frac{5}{4}$$
+@academic[formula_callout:Finding All Function Values from One Known Value
+$$\\sec\\theta = \\frac{1}{\\cos\\theta} = -\\frac{5}{4}$$]@
 
-$$\\csc\\theta = \\frac{1}{\\sin\\theta} = \\frac{5}{3}$$
+@academic[formula_callout:Finding All Function Values from One Known Value
+$$\\csc\\theta = \\frac{1}{\\sin\\theta} = \\frac{5}{3}$$]@
 
 The quadrant information is essential. Without it, $\\cos\\theta$ could be $+\\frac{4}{5}$ or $-\\frac{4}{5}$, and half the remaining values would change sign. The Pythagorean identity determines the magnitude; the quadrant determines the sign.
 

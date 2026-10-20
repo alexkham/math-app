@@ -1623,7 +1623,7 @@ $$\\text{IQR} = Q3 - Q1 = 1.349\\sigma$$]@
 
 The IQR contains the middle 50% of the distribution.
 
-### Example
+@academic[example:Example
 
 For human heights with $\\mu = 170$ cm and $\\sigma = 10$ cm:
 
@@ -1641,7 +1641,7 @@ Half of people are shorter than 170 cm (the [median](!/probability/median)).
 
 **IQR:** $176.74 - 163.26 = 13.48$ cm
 
-The middle 50% of heights span about 13.5 cm.
+The middle 50% of heights span about 13.5 cm.]@
 
 ### Other Notable Percentiles
 
@@ -1700,11 +1700,11 @@ The normal distribution appears throughout nature and human activity whenever ma
 
 The [Central Limit Theorem](!/probability/central-limit-theorem) explains why the normal distribution is ubiquitous: when many independent random effects add together, their sum tends toward normal regardless of the individual distributions. This makes it the natural model for aggregate phenomena.
 
-### Example Application
+@academic[example:Example Application
 
 A factory produces bolts with target diameter 10 mm. Due to manufacturing variation, actual diameters follow $N(10, 0.1^2)$. Quality standards require diameters between 9.8 mm and 10.2 mm.
 
-Using the normal distribution, we can calculate that approximately 95.4% of bolts meet specifications, helping determine acceptable defect rates and production costs.
+Using the normal distribution, we can calculate that approximately 95.4% of bolts meet specifications, helping determine acceptable defect rates and production costs.]@
   `,
   before: ``,
   after: ``,

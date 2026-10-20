@@ -278,8 +278,7 @@ $$4n^2 + 4n + 1 = 8m + 1 \\implies (2n+1)^2 = 8m + 1$$
 
 So $8m + 1$ is a perfect square exactly when $m$ is triangular, and the square root recovers $n$.
 
-@academic[example:Example
-Is 120 triangular? Compute $8 \\cdot 120 + 1 = 961$. Then $\\sqrt{961} = 31$, an integer. So $n = (31 - 1)/2 = 15$, meaning $120 = T_{15}$. Indeed $15 \\cdot 16 / 2 = 120$.]@
+**Example.** Is 120 triangular? Compute $8 \\cdot 120 + 1 = 961$. Then $\\sqrt{961} = 31$, an integer. So $n = (31 - 1)/2 = 15$, meaning $120 = T_{15}$. Indeed $15 \\cdot 16 / 2 = 120$.
 
 **Non-example.** Is 100 triangular? Compute $8 \\cdot 100 + 1 = 801$. Then $\\sqrt{801} \\approx 28.30$, not an integer. So 100 is not triangular. The nearest triangular numbers are $T_{13} = 91$ and $T_{14} = 105$.
 
@@ -640,8 +639,7 @@ This formula appears in calculus (Riemann sums approaching $x^3/3$), in finance 
 
 **Why rounding is needed.** Floating-point square root is approximate. $\\sqrt{169}$ might compute to $12.9999999\\ldots$ instead of exactly $13$. Rounding before the verification step avoids missing valid squares.
 
-@academic[example:Example
-Is 169 a perfect square? Compute $\\sqrt{169} = 13$. Verify $13^2 = 169$. Yes — $169 = S_{13}$.]@
+**Example.** Is 169 a perfect square? Compute $\\sqrt{169} = 13$. Verify $13^2 = 169$. Yes — $169 = S_{13}$.
 
 **Non-example.** Is 200 a perfect square? Compute $\\sqrt{200} \\approx 14.14$. Round to $14$; verify $14^2 = 196 \\neq 200$. So 200 is not a perfect square. The nearest are $S_{14} = 196$ and $S_{15} = 225$.
 
@@ -1014,8 +1012,7 @@ $$n = \\frac{1 + \\sqrt{24m + 1}}{6}$$
 
 **Why both checks are needed.** From $P_n = n(3n - 1)/2 = m$, the quadratic $3n^2 - n - 2m = 0$ has discriminant $1 + 24m$, which must be a perfect square. But the quadratic formula gives $n = (1 \\pm \\sqrt{24m + 1})/6$, and we need $n$ to be a positive integer, hence the divisibility condition.
 
-@academic[example:Example
-Is 117 pentagonal? Compute $24 \\cdot 117 + 1 = 2809 = 53^2$ — a perfect square. Then $(1 + 53)/6 = 9$, an integer. So $117 = P_9$. Verify: $9 \\cdot 26 / 2 = 117$. Confirmed.]@
+**Example.** Is 117 pentagonal? Compute $24 \\cdot 117 + 1 = 2809 = 53^2$ — a perfect square. Then $(1 + 53)/6 = 9$, an integer. So $117 = P_9$. Verify: $9 \\cdot 26 / 2 = 117$. Confirmed.
 
 **Non-example.** Is 50 pentagonal? Compute $24 \\cdot 50 + 1 = 1201$. Then $\\sqrt{1201} \\approx 34.66$ — not a perfect square. So 50 is not pentagonal. The nearest are $P_5 = 35$ and $P_6 = 51$.
 
@@ -1379,8 +1376,7 @@ $$n = \\frac{1 + \\sqrt{8m + 1}}{4}$$
 
 **Why both checks.** Note that condition 1 ($8m + 1$ is a perfect square) is the **triangular** test. So every hexagonal number is triangular (as expected). But not every triangular number is hexagonal — only those where $1 + \\sqrt{8m + 1}$ is also divisible by 4. The divisibility check is what distinguishes odd-indexed triangulars (which are hexagonal) from even-indexed triangulars (which are not).
 
-@academic[example:Example
-Is 190 hexagonal? Compute $8 \\cdot 190 + 1 = 1521 = 39^2$ — a perfect square. Then $(1 + 39)/4 = 10$, an integer. So $190 = H_{10}$. Verify: $10 \\cdot 19 = 190$. Confirmed.]@
+**Example.** Is 190 hexagonal? Compute $8 \\cdot 190 + 1 = 1521 = 39^2$ — a perfect square. Then $(1 + 39)/4 = 10$, an integer. So $190 = H_{10}$. Verify: $10 \\cdot 19 = 190$. Confirmed.
 
 **Triangular but not hexagonal.** Is 10 hexagonal? Compute $8 \\cdot 10 + 1 = 81 = 9^2$ — perfect square, so 10 is triangular ($10 = T_4$). But $(1 + 9)/4 = 10/4 = 2.5$ — not an integer. So 10 is not hexagonal. Indeed $T_4$ has even index 4, not odd.
 
@@ -1746,8 +1742,7 @@ $$100 n^2 - 60n + 9 = 40m + 9 \\implies (10n - 3)^2 = 40m + 9$$
 
 So $40m + 9$ is a perfect square iff $10n - 3$ is an integer (which it is for integer $n$), and $\\sqrt{40m + 9} = 10n - 3$, giving $n = (\\sqrt{40m + 9} + 3)/10$.
 
-@academic[example:Example
-Is 189 heptagonal? Compute $40 \\cdot 189 + 9 = 7569 = 87^2$ — a perfect square. Then $(3 + 87)/10 = 9$, an integer. So $189 = \\mathrm{Hp}_9$. Verify: $9 \\cdot 42/2 = 189$. Confirmed.]@
+**Example.** Is 189 heptagonal? Compute $40 \\cdot 189 + 9 = 7569 = 87^2$ — a perfect square. Then $(3 + 87)/10 = 9$, an integer. So $189 = \\mathrm{Hp}_9$. Verify: $9 \\cdot 42/2 = 189$. Confirmed.
 
 **Non-example.** Is 100 heptagonal? Compute $40 \\cdot 100 + 9 = 4009$. Then $\\sqrt{4009} \\approx 63.32$ — not a perfect square. So 100 is not heptagonal.`,
     before: ``, after: ``, link: ''
@@ -2116,8 +2111,7 @@ $$n = \\frac{2 + 2\\sqrt{1 + 3m}}{6} = \\frac{1 + \\sqrt{3m + 1}}{3}$$
 
 So $3m + 1$ must be a perfect square, and the numerator $1 + \\sqrt{3m + 1}$ must be a multiple of 3.
 
-@academic[example:Example
-Is 225 octagonal? Compute $3 \\cdot 225 + 1 = 676 = 26^2$ — perfect square. Then $(1 + 26)/3 = 9$, an integer. So $225 = O_9$. Verify: $9 \\cdot 25 = 225$. Confirmed.]@
+**Example.** Is 225 octagonal? Compute $3 \\cdot 225 + 1 = 676 = 26^2$ — perfect square. Then $(1 + 26)/3 = 9$, an integer. So $225 = O_9$. Verify: $9 \\cdot 25 = 225$. Confirmed.
 
 **Triangular but not octagonal.** Is 15 octagonal? Compute $3 \\cdot 15 + 1 = 46$. $\\sqrt{46} \\approx 6.78$ — not a perfect square. So 15 is not octagonal, even though it is triangular ($T_5 = 15$) and hexagonal ($H_3 = 15$).
 
@@ -2475,8 +2469,7 @@ $$\\mathrm{Te}_n = \\frac{n(n+1)}{2} \\cdot \\frac{(2n+1) + 3}{6} = \\frac{n(n+1
 
 Why a window of three? The estimate $\\sqrt[3]{6m}$ is accurate to within a small constant for all $m$, so verifying nearby integers handles rounding errors and edge cases.
 
-@academic[example:Example
-Is 120 tetrahedral? Estimate $\\sqrt[3]{6 \\cdot 120} = \\sqrt[3]{720} \\approx 8.96$. Round to 9. Check $\\mathrm{Te}_8 = 120$, $\\mathrm{Te}_9 = 165$, $\\mathrm{Te}_7 = 84$. Match at $k = 8$: $120 = \\mathrm{Te}_8$. Verified: $8 \\cdot 9 \\cdot 10 / 6 = 120$.]@
+**Example.** Is 120 tetrahedral? Estimate $\\sqrt[3]{6 \\cdot 120} = \\sqrt[3]{720} \\approx 8.96$. Round to 9. Check $\\mathrm{Te}_8 = 120$, $\\mathrm{Te}_9 = 165$, $\\mathrm{Te}_7 = 84$. Match at $k = 8$: $120 = \\mathrm{Te}_8$. Verified: $8 \\cdot 9 \\cdot 10 / 6 = 120$.
 
 **Non-example.** Is 100 tetrahedral? Estimate $\\sqrt[3]{600} \\approx 8.43$. Round to 8. Check $\\mathrm{Te}_7 = 84$, $\\mathrm{Te}_8 = 120$, $\\mathrm{Te}_9 = 165$. None equals 100. So 100 is not tetrahedral.
 
@@ -2871,8 +2864,7 @@ is a perfect square. Once one of these is a perfect square, the index $n$ is fou
 
 So $5 F_n^2 + 4$ is a perfect square (equal to $L_n^2$) when $n$ is odd, and $5 F_n^2 - 4$ is a perfect square when $n$ is even. Together, the two cases cover all Fibonacci numbers.
 
-@academic[example:Example
-Is 144 Fibonacci? Compute $5 \\cdot 144^2 = 103680$. Then $103680 + 4 = 103684$; $\\sqrt{103684} \\approx 321.99\\ldots$, not a perfect square. Try $103680 - 4 = 103676$; $\\sqrt{103676} = 322$, a perfect square. So 144 is Fibonacci. Iterating the recurrence: $1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144$ — that's $F_{12}$. So $144 = F_{12}$.]@
+**Example.** Is 144 Fibonacci? Compute $5 \\cdot 144^2 = 103680$. Then $103680 + 4 = 103684$; $\\sqrt{103684} \\approx 321.99\\ldots$, not a perfect square. Try $103680 - 4 = 103676$; $\\sqrt{103676} = 322$, a perfect square. So 144 is Fibonacci. Iterating the recurrence: $1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144$ — that's $F_{12}$. So $144 = F_{12}$.
 
 **Non-example.** Is 100 Fibonacci? $5 \\cdot 100^2 = 50000$. Then $50000 + 4 = 50004$; $\\sqrt{50004} \\approx 223.61$, not a perfect square. $50000 - 4 = 49996$; $\\sqrt{49996} \\approx 223.59$, not a perfect square either. So 100 is not Fibonacci. The nearest are $F_{11} = 89$ and $F_{12} = 144$.
 

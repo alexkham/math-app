@@ -292,7 +292,8 @@ const sectionsContent = {
     content: `
 The standard limit notation
 
-$$\\lim_{x \\to a} f(x) = L$$
+@academic[formula_callout:What is a Two-Sided Limit?
+$$\\lim_{x \\to a} f(x) = L$$]@
 
 means $x$ approaches $a$ from both directions. Values slightly less than $a$ and values slightly greater than $a$ must both send $f(x)$ toward the same number $L$.
 
@@ -311,7 +312,7 @@ A two-sided limit exists if and only if both [one-sided limits](!/calculus/limit
 
 @academic[formula_callout:Two-Sided Limit Existence Theorem
 $$\\lim_{x \\to a} f(x) = L \\iff \\lim_{x \\to a^-} f(x) = L \\;\\text{ and }\\; \\lim_{x \\to a^+} f(x) = L$$
-/calculus/formulas#two_sided_limit_existence_theorem]@
+/calculus/formulas#two-sided_limit_existence_theorem]@
 
 @academic[formulas_link:Browse all limit formulas
 /calculus/formulas]@
@@ -385,7 +386,8 @@ Several scenarios cause two-sided limits to fail.
 
 The left-hand and right-hand limits both exist but differ. For a piecewise function defined by
 
-$$f(x) = \\begin{cases} x + 1 & x < 3 \\\\ x - 1 & x \\geq 3 \\end{cases}$$
+@academic[formula_callout:When Two-Sided Limits Fail to Exist
+$$f(x) = \\begin{cases} x + 1 & x < 3 \\\\ x - 1 & x \\geq 3 \\end{cases}$$]@
 
 the left-hand limit at $x = 3$ is $4$ while the right-hand limit is $2$. No single value works for both directions.
 
@@ -408,7 +410,8 @@ Each failure mode reveals different information about the function's structure n
     content: `
 For [continuous](!/calculus/limits/continuity) functions, evaluating limits is straightforward: substitute and compute. The definition of continuity at $x = a$ requires
 
-$$\\lim_{x \\to a} f(x) = f(a)$$
+@academic[formula_callout:Continuous Functions and Two-Sided Limits
+$$\\lim_{x \\to a} f(x) = f(a)$$]@
 
 When this holds, the limit equals the function value. Polynomials, exponentials, sine, cosine, and many standard functions are continuous everywhere on their domains. For these, direct substitution yields the limit immediately.
 
@@ -423,13 +426,15 @@ Rational functions are continuous wherever the denominator is nonzero. At points
     content: `
 Begin with direct substitution. If $f(a)$ is defined and no indeterminate form arises, then
 
-$$\\lim_{x \\to a} f(x) = f(a)$$
+@academic[formula_callout:Evaluating Two-Sided Limits
+$$\\lim_{x \\to a} f(x) = f(a)$$]@
 
 If substitution produces $0/0$, $\\infty/\\infty$, or another indeterminate form, algebraic manipulation is required. Factor and cancel common terms, rationalize radicals, or simplify complex fractions until substitution becomes possible.
 
 For example:
 
-$$\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3} = \\lim_{x \\to 3} \\frac{(x-3)(x+3)}{x-3} = \\lim_{x \\to 3} (x + 3) = 6$$
+@academic[formula_callout:Evaluating Two-Sided Limits
+$$\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3} = \\lim_{x \\to 3} \\frac{(x-3)(x+3)}{x-3} = \\lim_{x \\to 3} (x + 3) = 6$$]@
 
 The [evaluating limits](!/calculus/limits/evaluating) page covers these techniques in detail.
 `,
@@ -442,7 +447,8 @@ The [evaluating limits](!/calculus/limits/evaluating) page covers these techniqu
     content: `
 At the edge of a function's domain, only one direction of approach is available. The square root function $\\sqrt{x}$ is defined only for $x \\geq 0$, so at $x = 0$, only the right-hand limit makes sense:
 
-$$\\lim_{x \\to 0^+} \\sqrt{x} = 0$$
+@academic[formula_callout:Two-Sided Limits at Boundary Points
+$$\\lim_{x \\to 0^+} \\sqrt{x} = 0$$]@
 
 There is no left-hand limit because negative inputs lie outside the domain. In such cases, the [one-sided limit](!/calculus/limits/one-sided) is the only meaningful limit.
 
@@ -457,7 +463,8 @@ Context determines interpretation. When a function's domain naturally restricts 
     content: `
 The derivative of $f$ at $x = a$ is defined as a two-sided limit:
 
-$$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$
+@academic[formula_callout:Relationship to Derivatives
+$$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@
 
 The variable $h$ approaches $0$ from both positive and negative values. Positive $h$ corresponds to approaching from the right; negative $h$ corresponds to approaching from the left. Differentiability requires the same rate of change from both directions.
 
@@ -489,7 +496,8 @@ When we write the limit notation without any superscript—just $x \\to a$—we 
 
 The formal statement
 
-$$\\lim_{x \\to a} f(x) = L$$
+@academic[formula_callout:Summary: Where Two-Sided Limits Appear in Calculus
+$$\\lim_{x \\to a} f(x) = L$$]@
 
 requires that $f(x)$ approach $L$ as $x$ approaches $a$ through values both less than and greater than $a$. Neither direction gets special treatment. If the function behaves differently on the left than on the right, no two-sided limit exists.
 

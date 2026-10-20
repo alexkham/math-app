@@ -660,7 +660,8 @@ export default function CDFDiscreteVisualizerPage({ instructions, demos,relatedT
      <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
    </div>
    <br/>
-      <div style={{transform:'scale(0.8)'}}>
+      {/* zoom, not transform: scale keeps the full layout height and leaves empty space above and below the tool */}
+      <div style={{ zoom: 0.8}}>
         <DiscreteDistributionsCDF explanationsAppend={explanationsAppend}/>
       </div>
       

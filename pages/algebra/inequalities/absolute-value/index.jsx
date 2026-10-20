@@ -397,13 +397,15 @@ $$|p| < b \\implies -b < p < b \\qquad |p| > b \\implies p < -b \\text{ or } p >
 
 The "less than" form $|f(x)| < k$ states that the expression $f(x)$ is within $k$ units of zero. This converts to a conjunction — a double inequality:
 
-$$-k < f(x) < k$$
+@academic[formula_callout:Two Fundamental Forms
+$$-k < f(x) < k$$]@
 
 Both conditions must hold simultaneously. The solution is the set of $x$ values for which $f(x)$ lies strictly between $-k$ and $k$.
 
 The "greater than" form $|f(x)| > k$ states that $f(x)$ is more than $k$ units from zero. This converts to a disjunction — two separate inequalities:
 
-$$f(x) < -k \\quad \\text{or} \\quad f(x) > k$$
+@academic[formula_callout:Two Fundamental Forms
+$$f(x) < -k \\quad \\text{or} \\quad f(x) > k$$]@
 
 At least one condition must hold. The solution is the set of $x$ values for which $f(x)$ falls outside the interval $[-k, k]$.
 
@@ -499,7 +501,8 @@ The absolute value conversion reduces the problem to standard inequality types. 
 
 The squaring method exploits the fact that $|A| < |B|$ if and only if $A^2 < B^2$ (since both sides are non-negative). The inequality $|f(x)| < |g(x)|$ becomes $[f(x)]^2 < [g(x)]^2$, which rearranges to $[g(x)]^2 - [f(x)]^2 > 0$. Factoring the difference of squares:
 
-$$(g(x) - f(x))(g(x) + f(x)) > 0$$
+@academic[formula_callout:Inequalities with Absolute Value on Both Sides
+$$(g(x) - f(x))(g(x) + f(x)) > 0$$]@
 
 This is a [polynomial inequality](!/algebra/inequalities/polynomial) solvable by sign chart. The critical points are the roots of $g(x) - f(x) = 0$ and $g(x) + f(x) = 0$.
 

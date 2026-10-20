@@ -578,9 +578,9 @@ const sectionsContent = {
 - [Trinomial Factoring Pattern](!/algebra/formulas#trinomial_factoring_pattern) — $x^2 + (a + b)x + ab = (x + a)(x + b)$
 - [Sum of Cubes](!/algebra/formulas#sum_of_cubes) — $a^3 + b^3 = (a + b)(a^2 - ab + b^2)$
 - [Difference of Cubes](!/algebra/formulas#difference_of_cubes) — $a^3 - b^3 = (a - b)(a^2 + ab + b^2)$
-- [General Difference of Even Powers](!/algebra/formulas#general_difference_even_powers) — $x^{2n} - a^{2n} = (x^n - a^n)(x^n + a^n)$
-- [General Difference of Powers (odd n)](!/algebra/formulas#general_difference_odd) — $x^n - a^n = (x - a)(x^{n-1} + ax^{n-2} + \\cdots + a^{n-1})$
-- [General Sum of Powers (odd n)](!/algebra/formulas#general_sum_odd) — $x^n + a^n = (x + a)(x^{n-1} - ax^{n-2} + \\cdots + a^{n-1})$
+- [General Difference of Even Powers](!/algebra/formulas#general_difference_of_even_powers) — $x^{2n} - a^{2n} = (x^n - a^n)(x^n + a^n)$
+- [General Difference of Powers (odd n)](!/algebra/formulas#general_difference_of_powers_odd_n) — $x^n - a^n = (x - a)(x^{n-1} + ax^{n-2} + \\cdots + a^{n-1})$
+- [General Sum of Powers (odd n)](!/algebra/formulas#general_sum_of_powers_odd_n) — $x^n + a^n = (x + a)(x^{n-1} - ax^{n-2} + \\cdots + a^{n-1})$
 
 `,
     before: ``,
@@ -700,9 +700,11 @@ The sum of squares $a^2 + b^2$ has no factorization over the real numbers. No re
     title: `Perfect Square Trinomials`,
     content: `Two closely related patterns arise when a binomial is squared:
 
-$$a^2 + 2ab + b^2 = (a + b)^2$$
+@academic[formula_callout:Perfect Square Trinomials
+$$a^2 + 2ab + b^2 = (a + b)^2$$]@
 
-$$a^2 - 2ab + b^2 = (a - b)^2$$
+@academic[formula_callout:Perfect Square Trinomials
+$$a^2 - 2ab + b^2 = (a - b)^2$$]@
 
 The test for a perfect square trinomial has three parts: the first term must be a perfect square, the last term must be a perfect square, and the middle term must equal twice the product of their square roots. If all three conditions hold, the trinomial is the square of a binomial.
 
@@ -757,22 +759,25 @@ These specific patterns generalize to arbitrary degrees:
 
 @academic[formula_callout:General Difference of Even Powers
 $$x^{2n} - a^{2n} = (x^n - a^n)(x^n + a^n)$$
-/algebra/formulas#general_difference_even_powers]@
+/algebra/formulas#general_difference_of_even_powers]@
 
 @academic[formula_callout:General Difference of Powers (odd n)
 $$x^n - a^n = (x - a)(x^{n-1} + ax^{n-2} + \\cdots + a^{n-1})$$
-/algebra/formulas#general_difference_odd]@
+/algebra/formulas#general_difference_of_powers_odd_n]@
 
 @academic[formula_callout:General Sum of Powers (odd n)
 $$x^n + a^n = (x + a)(x^{n-1} - ax^{n-2} + \\cdots + a^{n-1})$$
-/algebra/formulas#general_sum_odd]@
+/algebra/formulas#general_sum_of_powers_odd_n]@
 
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
 Known roots provide another entry point. If $r$ is a root of a polynomial $P(x)$, then $(x - r)$ is a factor, and polynomial [division](!/algebra/polynomials/operations) produces the remaining quotient. For instance, if direct substitution shows that $P(2) = 0$, then $(x - 2)$ divides $P(x)$ evenly, and the quotient can be factored further using any applicable technique.
 
-The [Fundamental Theorem of Algebra](!/complex-numbers/equations-polynomials) guarantees that every polynomial of degree $n$ has exactly $n$ roots over the [complex numbers](!/complex-numbers), counted with multiplicity. This means complete factorization into linear factors is always possible in that setting.`,
+@academic[rule_theorem:Fundamental Theorem of Algebra
+The [Fundamental Theorem of Algebra](!/complex-numbers/equations-polynomials) guarantees that every polynomial of degree $n$ has exactly $n$ roots over the [complex numbers](!/complex-numbers), counted with multiplicity.]@
+
+This means complete factorization into linear factors is always possible in that setting.`,
     before: ``,
     after: ``,
     link: '',

@@ -2452,7 +2452,12 @@ Across the six basic transformations covered in obj3–obj8, a single pattern em
     title: `Combining Transformations`,
     content: `Multiple transformations can act together. The general form
 
+@academic[formula_callout:General Transformation
 $$g(x) = a \\cdot f(b(x - h)) + k$$
+/functions/formulas#general_transformation]@
+
+@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@
 
 combines all four types:
 
@@ -2524,7 +2529,8 @@ Step 4: Determine vertical scaling and reflection. Compare the steepness or ampl
 
 Step 5: Write the equation. For a parabola with vertex $(3, -2)$ opening downward with steepness $2$:
 
-$$y = -2(x - 3)^2 - 2$$
+@academic[formula_callout:Writing Equations from Transformed Graphs
+$$y = -2(x - 3)^2 - 2$$]@
 
 Step 6: Verify by checking a point. Substitute another visible point into the equation and confirm equality.`,
     before: ``,

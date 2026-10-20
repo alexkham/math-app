@@ -1266,7 +1266,8 @@ Each representation captures the same underlying relationship. Converting betwee
 
 From an equation, evaluation is substitution. To find $f(5)$ when $f(x) = 2x^2 - 3x + 1$, replace every $x$ with $5$:
 
-$$f(5) = 2(5)^2 - 3(5) + 1 = 50 - 15 + 1 = 36$$
+@academic[formula_callout:Evaluating Functions
+$$f(5) = 2(5)^2 - 3(5) + 1 = 50 - 15 + 1 = 36$$]@
 
 From a table, evaluation is lookup. Find the input value in one column and read the corresponding output from the other column. If the exact input is not listed, the table does not directly provide the answer.
 
@@ -1274,7 +1275,8 @@ From a graph, evaluation is geometric. Locate the input value on the horizontal 
 
 Evaluating with expressions as input requires careful substitution. For $f(x) = x^2 + 1$, finding $f(a + 2)$ means replacing $x$ with $a + 2$:
 
-$$f(a + 2) = (a + 2)^2 + 1 = a^2 + 4a + 4 + 1 = a^2 + 4a + 5$$
+@academic[formula_callout:Evaluating Functions
+$$f(a + 2) = (a + 2)^2 + 1 = a^2 + 4a + 4 + 1 = a^2 + 4a + 5$$]@
 
 The parentheses around $a + 2$ are essential — without them, order of operations produces errors.`,
     before: ``,

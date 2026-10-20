@@ -1345,7 +1345,7 @@ For two sets $A$ and $B$, the size of the union is
 
 @academic[formula_callout:Inclusion-Exclusion Principle (Two Sets)
 $$|A \\cup B| = |A| + |B| - |A \\cap B|.$$
-/combinatorics/formulas#inclusion_exclusion_principle_two_sets]@
+/combinatorics/formulas#inclusion-exclusion_principle_two_sets]@
 
 @academic[formulas_link:Browse all combinatorics formulas
 /combinatorics/formulas]@
@@ -1354,13 +1354,13 @@ The [set symbols](!/math-symbols/set-theory) in the formula read naturally: $\\c
 
 Every element of $A \\cup B$ should be counted once on the left side. On the right, an element belonging to only $A$ is counted once (by $|A|$), an element belonging to only $B$ is counted once (by $|B|$), and an element in both is counted twice — once by $|A|$ and once by $|B|$. Subtracting $|A \\cap B|$ removes that extra count, restoring the correct total.
 
-## Example
+@academic[example:Example
 
 In a group of 30 students, 18 take French and 15 take Spanish, with 7 taking both. The number taking at least one of the two languages is
 
 $$18 + 15 - 7 = 26.$$
 
-The remaining 4 students take neither.
+The remaining 4 students take neither.]@
 `,
     before: ``,
     between: ``,
@@ -1375,18 +1375,18 @@ For three sets, the same logic extends with one more correction:
 
 @academic[formula_callout:Inclusion-Exclusion Principle (Three Sets)
 $$|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C| + |A \\cap B \\cap C|.$$
-/combinatorics/formulas#inclusion_exclusion_principle_three_sets]@
+/combinatorics/formulas#inclusion-exclusion_principle_three_sets]@
 
 @academic[formulas_link:Browse all combinatorics formulas
 /combinatorics/formulas]@
 
 An element belonging to exactly one of the three sets is counted once on the right. An element in exactly two is counted twice by the singles and subtracted once by its single pairwise intersection — net count $1$. An element in all three is counted three times by the singles, subtracted three times by the pairwise intersections, and added back once by the triple intersection — net count $3 - 3 + 1 = 1$. Every element ends up counted exactly once.
 
-## Example
+@academic[example:Example
 
 Among the integers from 1 to 100, the number divisible by 2, 3, or 5 is computed by applying the three-set formula to the divisibility sets. With $|A| = 50$ (multiples of 2), $|B| = 33$ (multiples of 3), $|C| = 20$ (multiples of 5), and the pairwise and triple intersections counting multiples of $6$, $10$, $15$, and $30$:
 
-$$50 + 33 + 20 - 16 - 10 - 6 + 3 = 74.$$
+$$50 + 33 + 20 - 16 - 10 - 6 + 3 = 74.$$]@
 `,
     before: ``,
     between: ``,
@@ -1399,13 +1399,14 @@ $$50 + 33 + 20 - 16 - 10 - 6 + 3 = 74.$$
     content: `
 For $n$ sets $A_1, A_2, \\ldots, A_n$:
 
-$$\\left| \\bigcup_{i=1}^{n} A_i \\right| = \\sum_{i} |A_i| - \\sum_{i<j} |A_i \\cap A_j| + \\sum_{i<j<k} |A_i \\cap A_j \\cap A_k| - \\cdots + (-1)^{n+1} |A_1 \\cap A_2 \\cap \\cdots \\cap A_n|.$$
+@academic[formula_callout:The General Formula
+$$\\left| \\bigcup_{i=1}^{n} A_i \\right| = \\sum_{i} |A_i| - \\sum_{i<j} |A_i \\cap A_j| + \\sum_{i<j<k} |A_i \\cap A_j \\cap A_k| - \\cdots + (-1)^{n+1} |A_1 \\cap A_2 \\cap \\cdots \\cap A_n|.$$]@
 
 In compact form,
 
 @academic[formula_callout:Inclusion-Exclusion Principle (General)
 $$\\left| \\bigcup_{i=1}^{n} A_i \\right| = \\sum_{k=1}^{n} (-1)^{k+1} \\sum_{1 \\le i_1 < i_2 < \\cdots < i_k \\le n} |A_{i_1} \\cap A_{i_2} \\cap \\cdots \\cap A_{i_k}|.$$
-/combinatorics/formulas#inclusion_exclusion_principle_general]@
+/combinatorics/formulas#inclusion-exclusion_principle_general]@
 
 @academic[formulas_link:Browse all combinatorics formulas
 /combinatorics/formulas]@
@@ -1414,7 +1415,8 @@ $$\\left| \\bigcup_{i=1}^{n} A_i \\right| = \\sum_{k=1}^{n} (-1)^{k+1} \\sum_{1 
 
 The number of terms at level $k$ — meaning the number of $k$-fold intersections being summed — is the [binomial coefficient](!/combinatorics/binomial-coefficient#notation) $\\binom{n}{k}$, one term for each $k$-subset of the $n$ sets. The total number of terms across all levels is
 
-$$\\sum_{k=1}^{n} \\binom{n}{k} = 2^n - 1,$$
+@academic[formula_callout:The General Formula
+$$\\sum_{k=1}^{n} \\binom{n}{k} = 2^n - 1,$$]@
 
 which is the number of non-empty subsets of the $n$ sets. Every non-empty subset contributes exactly one term to the formula.
 
@@ -1422,11 +1424,13 @@ which is the number of non-empty subsets of the $n$ sets. Every non-empty subset
 
 An element belonging to exactly $m$ of the $n$ sets is counted
 
-$$\\binom{m}{1} - \\binom{m}{2} + \\binom{m}{3} - \\cdots + (-1)^{m+1} \\binom{m}{m}$$
+@academic[formula_callout:The General Formula
+$$\\binom{m}{1} - \\binom{m}{2} + \\binom{m}{3} - \\cdots + (-1)^{m+1} \\binom{m}{m}$$]@
 
 times by the right-hand side. By the [binomial theorem](!/combinatorics/binomial-theorem) with $a = 1$ and $b = -1$,
 
-$$\\sum_{k=0}^{m} (-1)^k \\binom{m}{k} = 0,$$
+@academic[formula_callout:The General Formula
+$$\\sum_{k=0}^{m} (-1)^k \\binom{m}{k} = 0,$$]@
 
 so $\\binom{m}{0} = 1$ minus the alternating sum from $k=1$ to $m$ gives $1$. Every element in the union is counted exactly once, as required.
 `,
@@ -1443,14 +1447,15 @@ Often the question is not how many elements belong to some of the $A_i$, but how
 
 @academic[formula_callout:Inclusion-Exclusion Complementary Form
 $$\\left| \\overline{A_1} \\cap \\overline{A_2} \\cap \\cdots \\cap \\overline{A_n} \\right| = |U| - \\left| A_1 \\cup A_2 \\cup \\cdots \\cup A_n \\right|.$$
-/combinatorics/formulas#inclusion_exclusion_complementary_form]@
+/combinatorics/formulas#inclusion-exclusion_complementary_form]@
 
 @academic[formulas_link:Browse all combinatorics formulas
 /combinatorics/formulas]@
 
 Expanding the right side using the general formula gives a direct expression for the count of elements satisfying none of the conditions defined by $A_1, \\ldots, A_n$:
 
-$$|U| - \\sum_{i} |A_i| + \\sum_{i<j} |A_i \\cap A_j| - \\sum_{i<j<k} |A_i \\cap A_j \\cap A_k| + \\cdots + (-1)^n |A_1 \\cap \\cdots \\cap A_n|.$$
+@academic[formula_callout:The Complementary Form
+$$|U| - \\sum_{i} |A_i| + \\sum_{i<j} |A_i \\cap A_j| - \\sum_{i<j<k} |A_i \\cap A_j \\cap A_k| + \\cdots + (-1)^n |A_1 \\cap \\cdots \\cap A_n|.$$]@
 
 This is the natural form for problems phrased as "how many elements avoid all of the following conditions" — derangements, surjective functions, arrangements with forbidden positions, and divisibility problems requiring relative primality to several primes.
 `,
@@ -1477,11 +1482,17 @@ The size of any $k$-fold intersection $A_{i_1} \\cap A_{i_2} \\cap \\cdots \\cap
 
 The total number of permutations is $n!$. Applying the complementary form of inclusion–exclusion:
 
-$$!n = n! - \\binom{n}{1}(n-1)! + \\binom{n}{2}(n-2)! - \\cdots + (-1)^n \\binom{n}{n} \\cdot 0!.$$
+@academic[formula_callout:Application: Counting Derangements
+$$!n = n! - \\binom{n}{1}(n-1)! + \\binom{n}{2}(n-2)! - \\cdots + (-1)^n \\binom{n}{n} \\cdot 0!.$$]@
 
 Simplifying each term using $\\binom{n}{k}(n-k)! = \\frac{n!}{k!}$ gives the explicit derangement formula:
 
+@academic[formula_callout:Derangement
 $$!n = n! \\sum_{k=0}^{n} \\frac{(-1)^k}{k!}.$$
+/combinatorics/formulas#derangement]@
+
+@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@
 
 The permutations page states this formula and applies it. The derivation above is what justifies it.
 `,
@@ -1502,7 +1513,8 @@ How many integers from 1 to 100 are divisible by none of 2, 3, or 5?
 
 Let $A_i$ be the set of integers divisible by the $i$-th prime in the list. From the three-set example above, $|A \\cup B \\cup C| = 74$. The complementary count is
 
-$$100 - 74 = 26.$$
+@academic[formula_callout:Worked Examples
+$$100 - 74 = 26.$$]@
 
 These are the integers from 1 to 100 that share no prime factor with 30.
 

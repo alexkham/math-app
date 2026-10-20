@@ -222,7 +222,8 @@ obj0: {
     title: `Definition and Standard Form`,
     content: `A linear equation in one variable is any equation that can be written as
 
-$$ax + b = 0$$
+@academic[formula_callout:Definition and Standard Form
+$$ax + b = 0$$]@
 
 where $a$ and $b$ are real constants and $a \\neq 0$. The variable $x$ appears only to the first power — no $x^2$, no $\\sqrt{x}$, no $x$ in a denominator. The word "linear" reflects the geometric fact that the graph of $y = ax + b$ is a straight line, and the solution of $ax + b = 0$ is the point where that line crosses the horizontal axis.
 
@@ -238,9 +239,15 @@ The solution is immediate from standard form. Subtracting $b$ and dividing by $a
     title: `Properties of Equality`,
     content: `Solving a linear equation means transforming it into an equivalent equation where the variable stands alone. Two properties of equality make this possible, and they are the only tools required.
 
-The addition property states that adding or subtracting the same quantity on both sides of an equation produces an equivalent equation. If $x + 5 = 12$, then subtracting $5$ from both sides gives $x = 7$. The solution set has not changed — it has only become visible. This property works because equality is preserved when identical operations are applied symmetrically.
+@academic[rule:Addition property
+The addition property states that adding or subtracting the same quantity on both sides of an equation produces an equivalent equation.]@
 
-The multiplication property states that multiplying or dividing both sides by any nonzero constant also produces an equivalent equation. If $3x = 21$, then dividing both sides by $3$ gives $x = 7$. The restriction to nonzero multipliers is critical: multiplying both sides by zero collapses every equation to $0 = 0$, destroying all information about the original solution.
+If $x + 5 = 12$, then subtracting $5$ from both sides gives $x = 7$. The solution set has not changed — it has only become visible. This property works because equality is preserved when identical operations are applied symmetrically.
+
+@academic[rule:Multiplication property
+The multiplication property states that multiplying or dividing both sides by any nonzero constant also produces an equivalent equation.]@
+
+If $3x = 21$, then dividing both sides by $3$ gives $x = 7$. The restriction to nonzero multipliers is critical: multiplying both sides by zero collapses every equation to $0 = 0$, destroying all information about the original solution.
 
 These two properties generate every valid algebraic step in the solution of a linear equation. Combining them in sequence — first clearing additive terms, then clearing the coefficient of $x$ — isolates the variable systematically.`,
     before: ``,
@@ -254,19 +261,23 @@ These two properties generate every valid algebraic step in the solution of a li
 
 Multi-step equations demand a sequence of operations. Consider $4x - 7 = 2x + 11$. The variable appears on both sides and constants are mixed in. The strategy proceeds in stages: gather all variable terms on one side and all constant terms on the other, then isolate the variable.
 
-$$4x - 7 = 2x + 11$$
+@academic[formula_callout:Solving Single-Step and Multi-Step Equations
+$$4x - 7 = 2x + 11$$]@
 
 Subtract $2x$ from both sides:
 
-$$2x - 7 = 11$$
+@academic[formula_callout:Solving Single-Step and Multi-Step Equations
+$$2x - 7 = 11$$]@
 
 Add $7$ to both sides:
 
-$$2x = 18$$
+@academic[formula_callout:Solving Single-Step and Multi-Step Equations
+$$2x = 18$$]@
 
 Divide both sides by $2$:
 
-$$x = 9$$
+@academic[formula_callout:Solving Single-Step and Multi-Step Equations
+$$x = 9$$]@
 
 The order of these steps is flexible — subtracting $2x$ first or adding $7$ first both reach the same result — but the underlying logic is rigid: every step must preserve equivalence, and each step must bring the equation closer to the form $x = \\text{value}$.
 
@@ -280,7 +291,8 @@ To solve your own linear equation with each step shown, use the [linear equation
     title: `Equations with Parentheses`,
     content: `When an equation contains parentheses, the [distributive property](!/arithmetic/properties#5) clears them before any collecting or isolating takes place. The equation $3(2x - 5) = 4x + 1$ begins with distribution on the left:
 
-$$6x - 15 = 4x + 1$$
+@academic[formula_callout:Equations with Parentheses
+$$6x - 15 = 4x + 1$$]@
 
 From here, the procedure is identical to any multi-step equation. Subtract $4x$ from both sides to get $2x - 15 = 1$, add $15$ to get $2x = 16$, and divide by $2$ to reach $x = 8$.
 
@@ -298,13 +310,17 @@ A persistent source of error is the negative sign preceding parentheses. In the 
 
 Consider the equation $\\frac{x}{3} + \\frac{x - 2}{4} = 5$. The LCD of $3$ and $4$ is $12$. Multiplying every term by $12$ gives:
 
-$$4x + 3(x - 2) = 60$$
+@academic[formula_callout:Equations with Fractions
+$$4x + 3(x - 2) = 60$$]@
 
 Distributing and collecting:
 
-$$4x + 3x - 6 = 60$$
-$$7x = 66$$
-$$x = \\frac{66}{7}$$
+@academic[formula_callout:Equations with Fractions
+$$4x + 3x - 6 = 60$$]@
+@academic[formula_callout:Equations with Fractions
+$$7x = 66$$]@
+@academic[formula_callout:Equations with Fractions
+$$x = \\frac{66}{7}$$]@
 
 The multiplication by $12$ is valid because $12$ is a nonzero constant — it does not depend on $x$. The solution set is preserved exactly. After clearing, the equation is a standard multi-step linear equation with integer coefficients.
 
@@ -320,12 +336,15 @@ A crucial distinction separates these equations from [rational equations](!/alge
 
 The equation $0.3x + 1.25 = 0.8x - 0.5$ has decimals extending to the hundredths place. Multiplying every term by $100$ produces:
 
-$$30x + 125 = 80x - 50$$
+@academic[formula_callout:Equations with Decimals
+$$30x + 125 = 80x - 50$$]@
 
 Collecting variable terms on the right and constants on the left:
 
-$$175 = 50x$$
-$$x = \\frac{175}{50} = \\frac{7}{2}$$
+@academic[formula_callout:Equations with Decimals
+$$175 = 50x$$]@
+@academic[formula_callout:Equations with Decimals
+$$x = \\frac{175}{50} = \\frac{7}{2}$$]@
 
 The choice of multiplier depends on the finest decimal present. If the most decimal places in any coefficient is one, multiply by $10$. If two, multiply by $100$. This is equivalent to rewriting each decimal as a fraction and clearing denominators, compressed into a single step.`,
     before: ``,
@@ -355,15 +374,18 @@ Consider the equation $d = rt$, which relates distance, rate, and time. Solving 
 
 More involved formulas demand the same multi-step approach used for numerical linear equations. To isolate $r$ in the formula $A = P(1 + rt)$, begin by dividing both sides by $P$:
 
-$$\\frac{A}{P} = 1 + rt$$
+@academic[formula_callout:Literal Equations and Formulas
+$$\\frac{A}{P} = 1 + rt$$]@
 
 Subtract $1$:
 
-$$\\frac{A}{P} - 1 = rt$$
+@academic[formula_callout:Literal Equations and Formulas
+$$\\frac{A}{P} - 1 = rt$$]@
 
 Divide by $t$:
 
-$$r = \\frac{1}{t}\\left(\\frac{A}{P} - 1\\right)$$
+@academic[formula_callout:Literal Equations and Formulas
+$$r = \\frac{1}{t}\\left(\\frac{A}{P} - 1\\right)$$]@
 
 Each step is a reversible operation that preserves equivalence, applied to letters instead of numbers. The logic is identical to solving $7 = 2(1 + 3x)$ — only the symbols differ.
 

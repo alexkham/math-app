@@ -408,7 +408,8 @@ The primes appearing in both factorizations are $2$ and $3$. The prime $5$ appea
 
 Take the smaller exponent for each shared prime: $\\min(4, 2) = 2$ for the prime $2$, and $\\min(1, 2) = 1$ for the prime $3$.
 
-$$\\gcd(48, 180) = 2^2 \\cdot 3^1 = 4 \\cdot 3 = 12$$`,
+@academic[formula_callout:Method 2: Prime Factorization
+$$\\gcd(48, 180) = 2^2 \\cdot 3^1 = 4 \\cdot 3 = 12$$]@`,
   afterFigure: `This method is efficient when the factorizations are easy to find. For numbers whose prime factors are not immediately apparent, the Euclidean algorithm is faster.`,
   before: ``,
   after: ``,
@@ -506,7 +507,8 @@ obj9: {
   title: `GCD of More Than Two Numbers`,
   content: `The GCD extends to any number of inputs by applying it pairwise. The key identity is:
 
-$$\\gcd(a, b, c) = \\gcd(\\gcd(a, b), \\; c)$$
+@academic[formula_callout:GCD of More Than Two Numbers
+$$\\gcd(a, b, c) = \\gcd(\\gcd(a, b), \\; c)$$]@
 
 Compute the GCD of the first two numbers, then take the GCD of that result with the third number. The process chains to any length.
 

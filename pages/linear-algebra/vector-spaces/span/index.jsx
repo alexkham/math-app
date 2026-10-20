@@ -1416,7 +1416,8 @@ Row reduce the augmented matrix $[A \\mid \\mathbf{b}]$. If a row of the form $[
 
 Is $\\mathbf{b} = (5, 3, 7)$ in $\\text{Span}\\{(1, 0, 1), (0, 1, 2)\\}$? Form and reduce:
 
-$$\\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 1 & 2 & 7 \\end{pmatrix} \\xrightarrow{R_3 - R_1} \\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 0 & 2 & 2 \\end{pmatrix} \\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 0 & 0 & -4 \\end{pmatrix}$$
+@academic[formula_callout:Testing Whether a Vector Is in a Span
+$$\\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 1 & 2 & 7 \\end{pmatrix} \\xrightarrow{R_3 - R_1} \\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 0 & 2 & 2 \\end{pmatrix} \\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 0 & 0 & -4 \\end{pmatrix}$$]@
 
 The last row reads $0 = -4$, a contradiction. So $\\mathbf{b}$ is not in the span.
 
@@ -1424,7 +1425,8 @@ The last row reads $0 = -4$, a contradiction. So $\\mathbf{b}$ is not in the spa
 
 Changing the target to $\\mathbf{b} = (5, 3, 11)$ and repeating:
 
-$$\\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 1 & 2 & 11 \\end{pmatrix} \\xrightarrow{R_3 - R_1} \\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 0 & 2 & 6 \\end{pmatrix} \\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 0 & 0 & 0 \\end{pmatrix}$$
+@academic[formula_callout:Testing Whether a Vector Is in a Span
+$$\\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 1 & 2 & 11 \\end{pmatrix} \\xrightarrow{R_3 - R_1} \\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 0 & 2 & 6 \\end{pmatrix} \\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 0 & 0 & 0 \\end{pmatrix}$$]@
 
 No contradiction. The solution is $c_1 = 5$, $c_2 = 3$, so $(5, 3, 11) = 5(1, 0, 1) + 3(0, 1, 2)$.`,
     before: ``,
@@ -1448,7 +1450,8 @@ Fewer than $n$ vectors can never span $\\mathbb{R}^n$. An $n \\times k$ matrix w
     title: `Span and Column Space`,
     content: `The [column space](!/linear-algebra/vector-spaces/subspaces) of a matrix $A$ is exactly the span of its columns:
 
-$$\\text{Col}(A) = \\text{Span}\\{\\mathbf{a}_1, \\mathbf{a}_2, \\dots, \\mathbf{a}_n\\}$$
+@academic[formula_callout:Span and Column Space
+$$\\text{Col}(A) = \\text{Span}\\{\\mathbf{a}_1, \\mathbf{a}_2, \\dots, \\mathbf{a}_n\\}$$]@
 
 This identity connects the abstract concept of span to the concrete question of system solvability. The system $A\\mathbf{x} = \\mathbf{b}$ has a solution if and only if $\\mathbf{b}$ lies in the column space of $A$ — that is, if and only if $\\mathbf{b}$ is in the span of the columns.
 
@@ -1463,7 +1466,8 @@ This also explains why row reduction is the universal computational tool for spa
     title: `Redundancy and Reduction`,
     content: `A spanning set may contain more vectors than necessary. A vector $\\mathbf{v}_j$ in a spanning set is redundant if removing it does not shrink the span:
 
-$$\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\} = \\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_{j-1}, \\mathbf{v}_{j+1}, \\dots, \\mathbf{v}_k\\}$$
+@academic[formula_callout:Redundancy and Reduction
+$$\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\} = \\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_{j-1}, \\mathbf{v}_{j+1}, \\dots, \\mathbf{v}_k\\}$$]@
 
 This happens exactly when $\\mathbf{v}_j$ is already a linear combination of the other vectors — it contributes no new directions.
 

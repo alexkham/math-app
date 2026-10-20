@@ -1955,19 +1955,23 @@ The significance extends beyond elegance. Euler's formula transforms complex ari
 
 The exponential function has the Taylor series:
 
-$$e^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\frac{x^4}{4!} + \\cdots$$
+@academic[formula_callout:Understanding Euler's Formula
+$$e^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\frac{x^4}{4!} + \\cdots$$]@
 
 Substituting $x = i\\theta$:
 
-$$e^{i\\theta} = 1 + i\\theta + \\frac{(i\\theta)^2}{2!} + \\frac{(i\\theta)^3}{3!} + \\frac{(i\\theta)^4}{4!} + \\cdots$$
+@academic[formula_callout:Understanding Euler's Formula
+$$e^{i\\theta} = 1 + i\\theta + \\frac{(i\\theta)^2}{2!} + \\frac{(i\\theta)^3}{3!} + \\frac{(i\\theta)^4}{4!} + \\cdots$$]@
 
 The powers of $i$ cycle: $i^2 = -1$, $i^3 = -i$, $i^4 = 1$, and so on. Substituting:
 
-$$= 1 + i\\theta - \\frac{\\theta^2}{2!} - \\frac{i\\theta^3}{3!} + \\frac{\\theta^4}{4!} + \\frac{i\\theta^5}{5!} - \\cdots$$
+@academic[formula_callout:Understanding Euler's Formula
+$$= 1 + i\\theta - \\frac{\\theta^2}{2!} - \\frac{i\\theta^3}{3!} + \\frac{\\theta^4}{4!} + \\frac{i\\theta^5}{5!} - \\cdots$$]@
 
 Separating real and imaginary parts:
 
-$$= \\left(1 - \\frac{\\theta^2}{2!} + \\frac{\\theta^4}{4!} - \\cdots\\right) + i\\left(\\theta - \\frac{\\theta^3}{3!} + \\frac{\\theta^5}{5!} - \\cdots\\right)$$
+@academic[formula_callout:Understanding Euler's Formula
+$$= \\left(1 - \\frac{\\theta^2}{2!} + \\frac{\\theta^4}{4!} - \\cdots\\right) + i\\left(\\theta - \\frac{\\theta^3}{3!} + \\frac{\\theta^5}{5!} - \\cdots\\right)$$]@
 
 The real part is the Taylor series for $\\cos\\theta$. The imaginary part is the Taylor series for $\\sin\\theta$. Therefore $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$.
 
@@ -1982,7 +1986,8 @@ Geometrically, as $\\theta$ increases from $0$, the point $e^{i\\theta}$ traces 
   before: ``,
   content: `A special case of Euler's formula achieves legendary status. Substituting $\\theta = \\pi$:
 
-$$e^{i\\pi} = \\cos\\pi + i\\sin\\pi = -1 + 0 = -1$$
+@academic[formula_callout:Euler's Identity
+$$e^{i\\pi} = \\cos\\pi + i\\sin\\pi = -1 + 0 = -1$$]@
 
 Rearranging:
 
@@ -2022,7 +2027,8 @@ Here $r = |z|$ is the [modulus](!/complex-numbers/absolute-value) and $\\theta =
 
 The three representations of a complex number are equivalent:
 
-$$z = a + bi = r(\\cos\\theta + i\\sin\\theta) = r\\text{cis}\\theta = re^{i\\theta}$$
+@academic[formula_callout:The Exponential Form of a Complex Number
+$$z = a + bi = r(\\cos\\theta + i\\sin\\theta) = r\\text{cis}\\theta = re^{i\\theta}$$]@
 
 Algebraic form displays the real and imaginary components directly. Trigonometric form emphasizes modulus and argument through explicit trigonometric functions. Exponential form achieves the same emphasis with more economical notation.
 
@@ -2080,13 +2086,16 @@ notation: {
 
 Given $z = a + bi$, find $r$ and $\\theta$:
 
-$$r = \\sqrt{a^2 + b^2}$$
+@academic[formula_callout:Converting Between Forms
+$$r = \\sqrt{a^2 + b^2}$$]@
 
-$$\\theta = \\begin{cases} \\arctan(b/a) & \\text{if } a > 0 \\\\ \\arctan(b/a) + \\pi & \\text{if } a < 0, b \\geq 0 \\\\ \\arctan(b/a) - \\pi & \\text{if } a < 0, b < 0 \\\\ \\pi/2 & \\text{if } a = 0, b > 0 \\\\ -\\pi/2 & \\text{if } a = 0, b < 0 \\end{cases}$$
+@academic[formula_callout:Converting Between Forms
+$$\\theta = \\begin{cases} \\arctan(b/a) & \\text{if } a > 0 \\\\ \\arctan(b/a) + \\pi & \\text{if } a < 0, b \\geq 0 \\\\ \\arctan(b/a) - \\pi & \\text{if } a < 0, b < 0 \\\\ \\pi/2 & \\text{if } a = 0, b > 0 \\\\ -\\pi/2 & \\text{if } a = 0, b < 0 \\end{cases}$$]@
 
 Then write $z = re^{i\\theta}$.
 
-Example: Convert $z = 1 + i$. The modulus is $r = \\sqrt{1 + 1} = \\sqrt{2}$. With $a = 1 > 0$ and $b = 1 > 0$, the argument is $\\theta = \\arctan(1) = \\pi/4$. Thus $1 + i = \\sqrt{2}e^{i\\pi/4}$.
+@academic[example:Example
+Convert $z = 1 + i$. The modulus is $r = \\sqrt{1 + 1} = \\sqrt{2}$. With $a = 1 > 0$ and $b = 1 > 0$, the argument is $\\theta = \\arctan(1) = \\pi/4$. Thus $1 + i = \\sqrt{2}e^{i\\pi/4}$.]@
 
 **Exponential to Algebraic:**
 
@@ -2101,7 +2110,8 @@ $$a = r\\cos\\theta, \\qquad b = r\\sin\\theta$$
 
 Then write $z = a + bi$.
 
-Example: Convert $z = 4e^{i(2\\pi/3)}$. The real part is $a = 4\\cos(2\\pi/3) = 4(-1/2) = -2$. The imaginary part is $b = 4\\sin(2\\pi/3) = 4(\\sqrt{3}/2) = 2\\sqrt{3}$. Thus $4e^{i(2\\pi/3)} = -2 + 2\\sqrt{3}i$.
+@academic[example:Example
+Convert $z = 4e^{i(2\\pi/3)}$. The real part is $a = 4\\cos(2\\pi/3) = 4(-1/2) = -2$. The imaginary part is $b = 4\\sin(2\\pi/3) = 4(\\sqrt{3}/2) = 2\\sqrt{3}$. Thus $4e^{i(2\\pi/3)} = -2 + 2\\sqrt{3}i$.]@
 
 Both conversions are routine once the formulas are memorized. The exponential form serves computation; the algebraic form displays components explicitly.`,
   after: ``,
@@ -2114,7 +2124,8 @@ Both conversions are routine once the formulas are memorized. The exponential fo
   before: ``,
   content: `Multiplying complex numbers in exponential form reduces to elementary exponent rules. Given $z_1 = r_1e^{i\\theta_1}$ and $z_2 = r_2e^{i\\theta_2}$:
 
-$$z_1 \\cdot z_2 = r_1e^{i\\theta_1} \\cdot r_2e^{i\\theta_2} = r_1r_2 \\cdot e^{i\\theta_1} \\cdot e^{i\\theta_2} = r_1r_2 \\cdot e^{i(\\theta_1 + \\theta_2)}$$
+@academic[formula_callout:Multiplication in Exponential Form
+$$z_1 \\cdot z_2 = r_1e^{i\\theta_1} \\cdot r_2e^{i\\theta_2} = r_1r_2 \\cdot e^{i\\theta_1} \\cdot e^{i\\theta_2} = r_1r_2 \\cdot e^{i(\\theta_1 + \\theta_2)}$$]@
 
 The moduli multiply: $|z_1 \\cdot z_2| = r_1r_2$. The arguments add: $\\arg(z_1 \\cdot z_2) = \\theta_1 + \\theta_2$.
 
@@ -2122,12 +2133,13 @@ This rule follows from the standard law of exponents: $e^a \\cdot e^b = e^{a+b}$
 
 Geometrically, multiplication scales and rotates. Multiplying by $z_2 = r_2e^{i\\theta_2}$ stretches lengths by factor $r_2$ and rotates counterclockwise by angle $\\theta_2$. Multiplying by $e^{i\\pi/2} = i$ rotates by $90°$ without changing length. Multiplying by $2$ doubles length without rotation. Multiplying by $2e^{i\\pi/4}$ doubles length and rotates $45°$.
 
-Example: Compute $(3e^{i\\pi/6})(2e^{i\\pi/3})$.
+@academic[example:Example
+Compute $(3e^{i\\pi/6})(2e^{i\\pi/3})$.
 
 Multiply moduli: $3 \\cdot 2 = 6$.
 Add arguments: $\\pi/6 + \\pi/3 = \\pi/6 + 2\\pi/6 = 3\\pi/6 = \\pi/2$.
 
-Result: $6e^{i\\pi/2} = 6i$.
+Result: $6e^{i\\pi/2} = 6i$.]@
 
 Compare this to multiplying the equivalent algebraic forms and simplifying — the exponential approach is faster and less error-prone.`,
   after: ``,
@@ -2140,7 +2152,8 @@ Compare this to multiplying the equivalent algebraic forms and simplifying — t
   before: ``,
   content: `Division mirrors multiplication with subtraction replacing addition. Given $z_1 = r_1e^{i\\theta_1}$ and $z_2 = r_2e^{i\\theta_2}$ with $z_2 \\neq 0$:
 
-$$\\frac{z_1}{z_2} = \\frac{r_1e^{i\\theta_1}}{r_2e^{i\\theta_2}} = \\frac{r_1}{r_2} \\cdot \\frac{e^{i\\theta_1}}{e^{i\\theta_2}} = \\frac{r_1}{r_2} \\cdot e^{i(\\theta_1 - \\theta_2)}$$
+@academic[formula_callout:Division in Exponential Form
+$$\\frac{z_1}{z_2} = \\frac{r_1e^{i\\theta_1}}{r_2e^{i\\theta_2}} = \\frac{r_1}{r_2} \\cdot \\frac{e^{i\\theta_1}}{e^{i\\theta_2}} = \\frac{r_1}{r_2} \\cdot e^{i(\\theta_1 - \\theta_2)}$$]@
 
 The moduli divide: $|z_1/z_2| = r_1/r_2$. The arguments subtract: $\\arg(z_1/z_2) = \\theta_1 - \\theta_2$.
 
@@ -2148,12 +2161,13 @@ The exponent law $e^a / e^b = e^{a-b}$ governs the calculation, just as with rea
 
 Geometrically, dividing by $z_2$ shrinks by factor $1/r_2$ and rotates clockwise by angle $\\theta_2$ (equivalently, counterclockwise by $-\\theta_2$). Division undoes multiplication: if $w = z_1 \\cdot z_2$, then $z_1 = w/z_2$ recovers the original factor.
 
-Example: Compute $\\frac{8e^{i(5\\pi/6)}}{2e^{i(\\pi/3)}}$.
+@academic[example:Example
+Compute $\\frac{8e^{i(5\\pi/6)}}{2e^{i(\\pi/3)}}$.
 
 Divide moduli: $8/2 = 4$.
 Subtract arguments: $5\\pi/6 - \\pi/3 = 5\\pi/6 - 2\\pi/6 = 3\\pi/6 = \\pi/2$.
 
-Result: $4e^{i\\pi/2} = 4i$.
+Result: $4e^{i\\pi/2} = 4i$.]@
 
 In [algebraic form](!/complex-numbers/algebraic-form), this division would require multiplying by the [conjugate](!/complex-numbers/complex-conjugate) of the denominator and simplifying — a lengthier process. Exponential form bypasses that machinery entirely.`,
   after: ``,
@@ -2177,7 +2191,8 @@ The modulus raises to the $n$-th power. The argument multiplies by $n$. Both ope
 
 This is [De Moivre's theorem](!/complex-numbers/demoivre-theorem) expressed in exponential notation. The trigonometric statement $(\\text{cis}\\theta)^n = \\text{cis}(n\\theta)$ becomes the exponential statement $(e^{i\\theta})^n = e^{in\\theta}$, a direct consequence of the power rule for exponents.
 
-Example: Compute $(1 + i)^{12}$.
+@academic[example:Example
+Compute $(1 + i)^{12}$.
 
 Convert to exponential form: $1 + i = \\sqrt{2}e^{i\\pi/4}$.
 
@@ -2185,7 +2200,7 @@ Apply the power rule: $(\\sqrt{2}e^{i\\pi/4})^{12} = (\\sqrt{2})^{12} \\cdot e^{
 
 Simplify the argument: $3\\pi = 2\\pi + \\pi$, so $e^{i \\cdot 3\\pi} = e^{i\\pi} = -1$.
 
-Result: $64 \\cdot (-1) = -64$.
+Result: $64 \\cdot (-1) = -64$.]@
 
 The computation required no binomial expansion, no tracking of $i$ powers, no collection of terms. Converting to exponential form, applying the power rule, and simplifying completed the calculation in a few lines.`,
   after: ``,
@@ -2198,13 +2213,15 @@ The computation required no binomial expansion, no tracking of $i$ powers, no co
   before: ``,
   content: `Finding $n$-th roots inverts the power operation. Given $w = Re^{i\\phi}$, the solutions to $z^n = w$ are:
 
-$$z_k = R^{1/n} e^{i(\\phi + 2\\pi k)/n} \\quad \\text{for } k = 0, 1, 2, \\ldots, n-1$$
+@academic[formula_callout:Roots in Exponential Form
+$$z_k = R^{1/n} e^{i(\\phi + 2\\pi k)/n} \\quad \\text{for } k = 0, 1, 2, \\ldots, n-1$$]@
 
 Each value of $k$ produces a distinct root. Beyond $k = n-1$, the arguments differ by full rotations of $2\\pi$, repeating previous roots.
 
 All $n$ roots share the same modulus $R^{1/n}$, placing them on a circle of that radius in the [complex plane](!/complex-numbers/geometric-representation). Their arguments differ by $2\\pi/n$, spacing them evenly around the circle. The roots form vertices of a regular $n$-gon.
 
-Example: Find the cube roots of $8$.
+@academic[example:Example
+Find the cube roots of $8$.
 
 Write $8 = 8e^{i \\cdot 0}$ (modulus $8$, argument $0$).
 
@@ -2212,7 +2229,7 @@ Apply the formula: $z_k = 8^{1/3} e^{i(0 + 2\\pi k)/3} = 2e^{i \\cdot 2\\pi k/3}
 
 $z_0 = 2e^{i \\cdot 0} = 2$
 $z_1 = 2e^{i \\cdot 2\\pi/3} = 2(-\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i) = -1 + \\sqrt{3}i$
-$z_2 = 2e^{i \\cdot 4\\pi/3} = 2(-\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i) = -1 - \\sqrt{3}i$
+$z_2 = 2e^{i \\cdot 4\\pi/3} = 2(-\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i) = -1 - \\sqrt{3}i$]@
 
 Three roots forming an equilateral triangle of radius $2$, one vertex at $2$ on the positive real axis.
 

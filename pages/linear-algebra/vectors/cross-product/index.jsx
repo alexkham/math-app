@@ -2446,7 +2446,8 @@ $$\\mathbf{i} \\times \\mathbf{j} = \\mathbf{k}, \\quad \\mathbf{j} \\times \\ma
 
 Swapping the two factors in any of these pairs flips the sign:
 
-$$\\mathbf{j} \\times \\mathbf{i} = -\\mathbf{k}, \\quad \\mathbf{k} \\times \\mathbf{j} = -\\mathbf{i}, \\quad \\mathbf{i} \\times \\mathbf{k} = -\\mathbf{j}$$
+@academic[formula_callout:Standard Basis Cross Products
+$$\\mathbf{j} \\times \\mathbf{i} = -\\mathbf{k}, \\quad \\mathbf{k} \\times \\mathbf{j} = -\\mathbf{i}, \\quad \\mathbf{i} \\times \\mathbf{k} = -\\mathbf{j}$$]@
 
 The organizing principle is a directed loop $\\mathbf{i} \\to \\mathbf{j} \\to \\mathbf{k} \\to \\mathbf{i}$. Traversing it in the forward direction yields a positive basis vector; going against the loop negates the outcome. Any basis vector crossed with a copy of itself gives $\\mathbf{0}$: $\\mathbf{i} \\times \\mathbf{i} = \\mathbf{j} \\times \\mathbf{j} = \\mathbf{k} \\times \\mathbf{k} = \\mathbf{0}$.
 
@@ -2507,7 +2508,7 @@ Embedded in the right-hand rule is the concept of orientation. A coordinate syst
 
 @academic[formula_callout:Cross Product Anti-Commutativity
 $$\\mathbf{a} \\times \\mathbf{b} = -(\\mathbf{b} \\times \\mathbf{a})$$
-/linear-algebra/formulas#cross_product_anti_commutativity]@
+/linear-algebra/formulas#cross_product_anti-commutativity]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
@@ -2516,19 +2517,22 @@ Exchanging the two inputs flips the output vector. In the language of the right-
 
 ## Distributivity
 
-$$\\mathbf{a} \\times (\\mathbf{b} + \\mathbf{c}) = \\mathbf{a} \\times \\mathbf{b} + \\mathbf{a} \\times \\mathbf{c}$$
+@academic[formula_callout:Properties of the Cross Product
+$$\\mathbf{a} \\times (\\mathbf{b} + \\mathbf{c}) = \\mathbf{a} \\times \\mathbf{b} + \\mathbf{a} \\times \\mathbf{c}$$]@
 
 The cross product spreads across sums on either side. Because of anti-commutativity, distributing from the right introduces a sign change relative to distributing from the left.
 
 ## Scalar Factoring
 
-$$(c\\mathbf{a}) \\times \\mathbf{b} = c(\\mathbf{a} \\times \\mathbf{b}) = \\mathbf{a} \\times (c\\mathbf{b})$$
+@academic[formula_callout:Properties of the Cross Product
+$$(c\\mathbf{a}) \\times \\mathbf{b} = c(\\mathbf{a} \\times \\mathbf{b}) = \\mathbf{a} \\times (c\\mathbf{b})$$]@
 
 A scalar coefficient can migrate freely between the inputs and the output. This makes the cross product linear in each slot independently.
 
 ## Non-Associativity
 
-$$\\mathbf{a} \\times (\\mathbf{b} \\times \\mathbf{c}) \\neq (\\mathbf{a} \\times \\mathbf{b}) \\times \\mathbf{c} \\quad \\text{in general}$$
+@academic[formula_callout:Properties of the Cross Product
+$$\\mathbf{a} \\times (\\mathbf{b} \\times \\mathbf{c}) \\neq (\\mathbf{a} \\times \\mathbf{b}) \\times \\mathbf{c} \\quad \\text{in general}$$]@
 
 Regrouping the factors produces a different vector. This stands in stark contrast to addition and scalar multiplication, where parentheses can be shifted without consequence. The vector triple product expansion provides a workaround for simplifying nested cross products:
 
@@ -2552,7 +2556,8 @@ Setting $\\mathbf{c} = \\mathbf{a}$ and $\\mathbf{d} = \\mathbf{b}$ recovers the
 
 ## Self-Cross Product
 
-$$\\mathbf{a} \\times \\mathbf{a} = \\mathbf{0}$$
+@academic[formula_callout:Properties of the Cross Product
+$$\\mathbf{a} \\times \\mathbf{a} = \\mathbf{0}$$]@
 
 Crossing a vector with itself always returns the zero vector. Anti-commutativity forces this: $\\mathbf{a} \\times \\mathbf{a} = -(\\mathbf{a} \\times \\mathbf{a})$ has the unique solution $\\mathbf{0}$. From the geometric side, a single vector does not span any area — the parallelogram degenerates to a segment — and no unique perpendicular direction can be extracted.`,
     before: ``,
@@ -2581,7 +2586,8 @@ This criterion pairs naturally with the dot product's test for orthogonality. A 
     title: `The Scalar Triple Product`,
     content: `Three vectors in $\\mathbb{R}^3$ can be combined into a single scalar by nesting the cross product inside a dot product:
 
-$$\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})$$
+@academic[formula_callout:The Scalar Triple Product
+$$\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})$$]@
 
 The inner operation $\\mathbf{b} \\times \\mathbf{c}$ yields a vector orthogonal to both $\\mathbf{b}$ and $\\mathbf{c}$, whose length equals the area of the parallelogram they outline. The outer dot product then projects $\\mathbf{a}$ onto that orthogonal direction, effectively extracting the component of $\\mathbf{a}$ that rises out of the $\\mathbf{b}$-$\\mathbf{c}$ plane. Multiplying base area by height produces a volume: the result is the signed volume of the parallelepiped whose edges are $\\mathbf{a}$, $\\mathbf{b}$, $\\mathbf{c}$.
 

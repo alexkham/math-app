@@ -1192,7 +1192,8 @@ export default function AverageRateOfChangeVisualizer({ instructions, demos,rela
    </div>
    <br/>
    <br/>
-   <div style={{transform:'scale(0.95)',width:'80%',margin:'auto'}}>
+   {/* zoom, not transform: scale keeps the full layout height and leaves empty space above and below the tool */}
+   <div style={{ zoom: 0.95,width:'80%',margin:'auto'}}>
    <FunctionDerivativeLocal explanations={explanations}/>
    </div>
    <br/>

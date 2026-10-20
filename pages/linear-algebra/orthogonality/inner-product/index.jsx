@@ -1266,7 +1266,8 @@ const sectionsContent = {
     title: `The Dot Product`,
     content: `The dot product of two vectors $\\mathbf{u} = (u_1, \\dots, u_n)$ and $\\mathbf{v} = (v_1, \\dots, v_n)$ in $\\mathbb{R}^n$ is
 
-$$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = \\mathbf{u}^T\\mathbf{v}$$
+@academic[formula_callout:The Dot Product
+$$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = \\mathbf{u}^T\\mathbf{v}$$]@
 
 The result is a scalar, not a [vector](!/linear-algebra/vectors). The matrix form $\\mathbf{u}^T\\mathbf{v}$ treats $\\mathbf{u}$ as a $1 \\times n$ row and $\\mathbf{v}$ as an $n \\times 1$ column, making the dot product a $1 \\times 1$ [matrix multiplication](!/linear-algebra/matrix/operations).
 
@@ -1296,7 +1297,8 @@ These three properties — symmetry, linearity, positive definiteness — are no
     title: `Length`,
     content: `The length (or norm) of a vector $\\mathbf{v}$ is
 
-$$\\|\\mathbf{v}\\| = \\sqrt{\\mathbf{v} \\cdot \\mathbf{v}} = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$
+@academic[formula_callout:Length
+$$\\|\\mathbf{v}\\| = \\sqrt{\\mathbf{v} \\cdot \\mathbf{v}} = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$]@
 
 This is the Euclidean norm — the generalization of the Pythagorean theorem to $n$ dimensions. In $\\mathbb{R}^2$, $\\|(3, 4)\\| = \\sqrt{9 + 16} = 5$. In $\\mathbb{R}^3$, $\\|(1, 2, 2)\\| = \\sqrt{1 + 4 + 4} = 3$.
 
@@ -1316,7 +1318,8 @@ A unit vector has $\\|\\mathbf{v}\\| = 1$. Any nonzero vector can be normalized 
 
 Expanded coordinate-wise, this becomes
 
-$$d(\\mathbf{u}, \\mathbf{v}) = \\sqrt{(u_1 - v_1)^2 + (u_2 - v_2)^2 + \\cdots + (u_n - v_n)^2}$$
+@academic[formula_callout:Distance
+$$d(\\mathbf{u}, \\mathbf{v}) = \\sqrt{(u_1 - v_1)^2 + (u_2 - v_2)^2 + \\cdots + (u_n - v_n)^2}$$]@
 
 the Euclidean distance — the straight-line separation between two points in $\\mathbb{R}^n$.
 
@@ -1329,7 +1332,8 @@ Distance satisfies the properties of a metric: $d(\\mathbf{u}, \\mathbf{v}) \\ge
     title: `Angle Between Vectors`,
     content: `For nonzero vectors $\\mathbf{u}$ and $\\mathbf{v}$, the angle $\\theta$ between them satisfies
 
-$$\\cos\\theta = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{u}\\|\\|\\mathbf{v}\\|}$$
+@academic[formula_callout:Angle Between Vectors
+$$\\cos\\theta = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{u}\\|\\|\\mathbf{v}\\|}$$]@
 
 The Cauchy-Schwarz inequality (next section) guarantees that the right-hand side lies between $-1$ and $1$, so the formula always produces a well-defined angle $\\theta \\in [0, \\pi]$.
 
@@ -1347,7 +1351,7 @@ For $\\mathbf{u} = (1, 2, 3)$ and $\\mathbf{v} = (4, -1, 2)$: $\\mathbf{u} \\cdo
     content: `For all vectors $\\mathbf{u}$ and $\\mathbf{v}$ in $\\mathbb{R}^n$:
 
 @academic[formula_callout:cauchy_schwarz_inequality|Cauchy-Schwarz Inequality|$$|\\mathbf{u} \\cdot \\mathbf{v}| \\leq \\|\\mathbf{u}\\| \\, \\|\\mathbf{v}\\|$$]@
-@academic[formulas_link:/linear-algebra/formulas#cauchy_schwarz_inequality]@
+@academic[formulas_link:/linear-algebra/formulas#cauchy-schwarz_inequality]@
 
 Equality holds if and only if one vector is a scalar multiple of the other — they are parallel.
 
@@ -1452,7 +1456,8 @@ The proof is a one-line expansion: $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\mathbf
 
 The theorem extends to any number of mutually orthogonal vectors: if $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$ are pairwise orthogonal, then
 
-$$\\|\\mathbf{v}_1 + \\mathbf{v}_2 + \\cdots + \\mathbf{v}_k\\|^2 = \\|\\mathbf{v}_1\\|^2 + \\|\\mathbf{v}_2\\|^2 + \\cdots + \\|\\mathbf{v}_k\\|^2$$
+@academic[formula_callout:The Pythagorean Theorem
+$$\\|\\mathbf{v}_1 + \\mathbf{v}_2 + \\cdots + \\mathbf{v}_k\\|^2 = \\|\\mathbf{v}_1\\|^2 + \\|\\mathbf{v}_2\\|^2 + \\cdots + \\|\\mathbf{v}_k\\|^2$$]@
 
 All cross terms vanish because every pair has dot product zero. This is not a special property of $\\mathbb{R}^2$ or $\\mathbb{R}^3$ — it holds in any inner product space. The Pythagorean theorem is a direct consequence of the inner product axioms, and it is the reason that orthogonal decompositions are so computationally clean: lengths decompose into independent, additive contributions from each perpendicular direction.`,
     before: ``,

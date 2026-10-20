@@ -427,13 +427,15 @@ Unlike [expected value](!/probability/expected-value) or [variance](!/probabilit
 
 [Binomial](!/probability/distributions/discrete/binomial): The mode is $\\lfloor (n+1)p \\rfloor$ when $(n+1)p$ is not an integer. When $(n+1)p$ is an integer, both $(n+1)p - 1$ and $(n+1)p$ are modes.
 
-Example: For $n=10, p=0.3$, we have $(n+1)p = 3.3$, so mode $= 3$.
+@academic[example:Example
+For $n=10, p=0.3$, we have $(n+1)p = 3.3$, so mode $= 3$.]@
 
 [Geometric](!/probability/distributions/discrete/geometric): The mode is always $1$. Since $P(X = k) = (1-p)^{k-1}p$ decreases monotonically, the first trial has the highest probability.
 
 [Poisson](!/probability/distributions/discrete/poisson): The mode is $\\lfloor \\lambda \\rfloor$ when $\\lambda$ is not an integer. When $\\lambda$ is an integer, both $\\lambda - 1$ and $\\lambda$ are modes.
 
-Example: For $\\lambda = 5.7$, mode $= 5$. For $\\lambda = 6$, modes are $5$ and $6$.
+@academic[example:Example
+For $\\lambda = 5.7$, mode $= 5$. For $\\lambda = 6$, modes are $5$ and $6$.]@
 
 ## Visual Identification
 
@@ -681,7 +683,8 @@ $$\\text{mode}(Y) = a \\cdot \\text{mode}(X) + b$$]@
 
 Linear transformations shift and scale the mode predictably. Multiply by $a$, add $b$—the peak moves accordingly.
 
-Example: If $X$ has mode $5$, then $Y = 2X + 3$ has mode $2(5) + 3 = 13$.
+@academic[example:Example
+If $X$ has mode $5$, then $Y = 2X + 3$ has mode $2(5) + 3 = 13$.]@
 
 This differs from [variance](!/probability/variance), which scales by $a^2$, not $a$.
 
@@ -708,7 +711,8 @@ This makes mode ideal for data with contamination or measurement errors in the t
 
 The mode reveals nothing about [variance](!/probability/variance) or spread. Two distributions can share the same mode while having vastly different variability.
 
-Example: [Normal distributions](!/probability/distributions/continuous/normal) $N(0, 1)$ and $N(0, 100)$ both have mode $0$, yet spread differs by a factor of 100.
+@academic[example:Example
+[Normal distributions](!/probability/distributions/continuous/normal) $N(0, 1)$ and $N(0, 100)$ both have mode $0$, yet spread differs by a factor of 100.]@
 
 The mode operates independently of scale—it tracks peak location, not dispersion.
 
@@ -721,7 +725,8 @@ $$\\text{mode}(g(X)) = g(\\text{mode}(X))$$]@
 
 A one-to-one $g$ only relabels the values: $P(g(X) = g(x)) = P(X = x)$, so the most likely value moves to $g$ of the old one.
 
-Example: If a discrete $X > 0$ has mode $4$, then $Y = X^2$ has mode $16$.
+@academic[example:Example
+If a discrete $X > 0$ has mode $4$, then $Y = X^2$ has mode $16$.]@
 
 For a continuous random variable this fails in general. The density of $Y = g(X)$ is $f_X(g^{-1}(y)) \\cdot \\left|\\frac{d}{dy} g^{-1}(y)\\right|$, and the extra factor can move the peak. Take $X$ with density $f(x) = 2x$ on $[0, 1]$, whose mode is $1$. Then $Y = X^2$ is uniform on $[0, 1]$: every point is a mode, not just $1^2 = 1$. Only linear maps $aX + b$ carry the mode along for every continuous variable.
 
@@ -1011,11 +1016,13 @@ Boundary modes indicate strong concentration near the support edge—probability
 
 [Binomial](!/probability/distributions/discrete/binomial): When $(n+1)p$ equals an integer, two adjacent values share the maximum probability.
 
-Example: $n = 5, p = 0.5$ gives $(n+1)p = 3$, producing modes at $k = 2$ and $k = 3$.
+@academic[example:Example
+$n = 5, p = 0.5$ gives $(n+1)p = 3$, producing modes at $k = 2$ and $k = 3$.]@
 
 [Poisson](!/probability/distributions/discrete/poisson): When $\\lambda$ is an integer, both $\\lambda - 1$ and $\\lambda$ are modes.
 
-Example: $\\lambda = 4$ creates modes at $k = 3$ and $k = 4$.
+@academic[example:Example
+$\\lambda = 4$ creates modes at $k = 3$ and $k = 4$.]@
 
 These bimodal situations arise from the discrete nature of the distributions combined with specific parameter values creating exact probability ties.
 

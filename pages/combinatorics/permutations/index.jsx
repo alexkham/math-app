@@ -2403,13 +2403,13 @@ The first few subfactorials:
 • $!5 = 44$
 • $!6 = 265$
 
-## Example
+@academic[example:Example
 
 In the hat-check problem with 4 guests, the number of orderings in which no guest receives their own hat is
 
 $$!4 = 4! \\sum_{k=0}^{4} \\frac{(-1)^k}{k!} = 24 \\left(1 - 1 + \\tfrac{1}{2} - \\tfrac{1}{6} + \\tfrac{1}{24}\\right) = 9.$$
 
-Out of the $4! = 24$ possible orderings of the four hats, exactly 9 satisfy the no-fixed-point condition.
+Out of the $4! = 24$ possible orderings of the four hats, exactly 9 satisfy the no-fixed-point condition.]@
 
 The [factorial calculator](!/calculators/factorial-calculator) also computes the subfactorial $!n$, which counts derangements directly.
 `,

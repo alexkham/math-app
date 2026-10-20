@@ -234,7 +234,8 @@ const sectionsContent = {
     title: `Definition`,
     content: `A rational inequality is any inequality involving at least one fraction in which the variable appears in the denominator. The inequality
 
-$$\\frac{x - 2}{x + 1} > 0$$
+@academic[formula_callout:Definition
+$$\\frac{x - 2}{x + 1} > 0$$]@
 
 is rational because the variable $x$ sits inside the denominator $x + 1$. The inequality $\\frac{x + 3}{5} \\leq 1$ is not rational — its denominator is a constant, making it a [linear inequality](!/algebra/inequalities/linear) in disguise.
 
@@ -322,17 +323,21 @@ The sign chart handled it cleanly. Cross-multiplication would have required spli
 
 The inequality $\\frac{P(x)}{Q(x)} > k$ is rewritten as $\\frac{P(x)}{Q(x)} - k > 0$. The two terms are then combined into a single fraction over a common denominator:
 
-$$\\frac{P(x) - k \\cdot Q(x)}{Q(x)} > 0$$
+@academic[formula_callout:Getting the Inequality Into Standard Form
+$$\\frac{P(x) - k \\cdot Q(x)}{Q(x)} > 0$$]@
 
 This is now a standard rational inequality with everything on one side and zero on the other. The numerator $P(x) - k \\cdot Q(x)$ and the denominator $Q(x)$ are factored, critical points are identified, and the sign chart proceeds as usual.
 
 For the inequality $\\frac{1}{x - 3} \\leq \\frac{2}{x + 1}$, subtract the right side: $\\frac{1}{x - 3} - \\frac{2}{x + 1} \\leq 0$. The common denominator is $(x - 3)(x + 1)$:
 
-$$\\frac{(x + 1) - 2(x - 3)}{(x - 3)(x + 1)} \\leq 0$$
+@academic[formula_callout:Getting the Inequality Into Standard Form
+$$\\frac{(x + 1) - 2(x - 3)}{(x - 3)(x + 1)} \\leq 0$$]@
 
-$$\\frac{x + 1 - 2x + 6}{(x - 3)(x + 1)} \\leq 0$$
+@academic[formula_callout:Getting the Inequality Into Standard Form
+$$\\frac{x + 1 - 2x + 6}{(x - 3)(x + 1)} \\leq 0$$]@
 
-$$\\frac{-x + 7}{(x - 3)(x + 1)} \\leq 0$$
+@academic[formula_callout:Getting the Inequality Into Standard Form
+$$\\frac{-x + 7}{(x - 3)(x + 1)} \\leq 0$$]@
 
 The critical points are $x = 7$ (numerator zero), $x = 3$ and $x = -1$ (denominator zeros). The sign chart takes over from here.
 

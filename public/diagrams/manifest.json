@@ -12,12 +12,36 @@
     ]
   },
   {
+    "id": "bayes-foundation-ladder",
+    "title": null,
+    "source": "/probability/bayes-theorem",
+    "section": "probability",
+    "width": 933,
+    "height": 739,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "canonical-forms",
     "title": "How simple the matrix can be made",
     "source": "/linear-algebra/transformations/basis-change",
     "section": "linear-algebra",
     "width": 840,
     "height": 973,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "cardinality-hierarchy-pyramid",
+    "title": null,
+    "source": "/set-theory/cardinality",
+    "section": "set-theory",
+    "width": 933,
+    "height": 833,
     "formats": [
       "png",
       "pdf"
@@ -85,6 +109,18 @@
     ]
   },
   {
+    "id": "complex-inverse-modulus-cases",
+    "title": null,
+    "source": "/complex-numbers/multiplicative-inverse",
+    "section": "complex-numbers",
+    "width": 690,
+    "height": 1258,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "conditional-probability-anatomy",
     "title": null,
     "source": "/probability/conditional-probability",
@@ -94,6 +130,18 @@
     "formats": [
       "png",
       "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "conjugate-classification-cases",
+    "title": null,
+    "source": "/complex-numbers/algebraic-form",
+    "section": "complex-numbers",
+    "width": 690,
+    "height": 1152,
+    "formats": [
+      "png",
       "pdf"
     ]
   },
@@ -196,11 +244,23 @@
   },
   {
     "id": "determinant-sign-volume-cases",
-    "title": "The sign of the determinant in three dimensions",
+    "title": null,
     "source": "/linear-algebra/determinants/geometry",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 746,
+    "width": 690,
+    "height": 1239,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "determinant-signed-area-cases",
+    "title": null,
+    "source": "/linear-algebra/determinants/geometry",
+    "section": "linear-algebra",
+    "width": 690,
+    "height": 1193,
     "formats": [
       "png",
       "pdf"
@@ -220,11 +280,11 @@
   },
   {
     "id": "determinant-volume-scaling-cases",
-    "title": "The size of the determinant: four regimes",
+    "title": null,
     "source": "/linear-algebra/determinants/geometry",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 803,
+    "width": 690,
+    "height": 1440,
     "formats": [
       "png",
       "pdf"
@@ -279,12 +339,60 @@
     ]
   },
   {
+    "id": "eigenvalue-long-term-behavior-cases",
+    "title": null,
+    "source": "/linear-algebra/eigen",
+    "section": "linear-algebra",
+    "width": 690,
+    "height": 996,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "elimination-stages",
     "title": "Gaussian elimination, stage by stage",
     "source": "/linear-algebra/linear-systems/gaussian-elimination",
     "section": "linear-algebra",
     "width": 840,
     "height": 981,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "existence-condition-rank-cases",
+    "title": null,
+    "source": "/linear-algebra/linear-systems/solvability",
+    "section": "linear-algebra",
+    "width": 690,
+    "height": 976,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "expected-value-type-cases",
+    "title": null,
+    "source": "/probability/expected-value",
+    "section": "probability",
+    "width": 690,
+    "height": 1029,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "exponent-base-restriction-ladder",
+    "title": null,
+    "source": "/algebra/powers/irrational-exponents",
+    "section": "algebra",
+    "width": 933,
+    "height": 739,
     "formats": [
       "png",
       "pdf"
@@ -303,12 +411,36 @@
     ]
   },
   {
+    "id": "exponent-type-domain-cases",
+    "title": null,
+    "source": "/algebra/powers",
+    "section": "algebra",
+    "width": 690,
+    "height": 1230,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "four-subspace-card",
     "title": "The four fundamental subspaces",
     "source": "/linear-algebra/vector-spaces/fundamental-spaces",
     "section": "linear-algebra",
     "width": 840,
     "height": 1108,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "function-family-growth-pyramid",
+    "title": null,
+    "source": "/functions/families",
+    "section": "functions",
+    "width": 933,
+    "height": 810,
     "formats": [
       "png",
       "pdf"
@@ -333,6 +465,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 1102,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "growth-rate-pyramid",
+    "title": null,
+    "source": "/calculus/limits/infinity",
+    "section": "calculus",
+    "width": 933,
+    "height": 668,
     "formats": [
       "png",
       "pdf"
@@ -408,6 +552,18 @@
     "formats": [
       "png",
       "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "law-of-sines-cosines-choice-cases",
+    "title": null,
+    "source": "/trigonometry/sines-cosines-law",
+    "section": "trigonometry",
+    "width": 690,
+    "height": 1173,
+    "formats": [
+      "png",
       "pdf"
     ]
   },
@@ -520,6 +676,30 @@
     ]
   },
   {
+    "id": "lu-to-cholesky-ladder",
+    "title": null,
+    "source": "/linear-algebra/decompositions/cholesky",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 691,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "markov-inequality-family-ladder",
+    "title": null,
+    "source": "/probability/inequalities/markov",
+    "section": "probability",
+    "width": 933,
+    "height": 691,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "matrix-powers-by-hand",
     "title": "Four powers, computed the long way",
     "source": "/linear-algebra/eigen/diagonalization",
@@ -556,6 +736,19 @@
     ]
   },
   {
+    "id": "mean-inequality-pyramid",
+    "title": null,
+    "source": "/algebra/sequences/harmonic",
+    "section": "algebra",
+    "width": 933,
+    "height": 691,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
     "id": "modulo-divisibility-cases",
     "title": null,
     "source": "/arithmetic/modulo",
@@ -580,6 +773,18 @@
     ]
   },
   {
+    "id": "normal-equations-rank-cases",
+    "title": null,
+    "source": "/linear-algebra/orthogonality/least-squares",
+    "section": "linear-algebra",
+    "width": 690,
+    "height": 978,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "number-system-ladder",
     "title": null,
     "source": "/complex-numbers/imaginary-numbers",
@@ -592,12 +797,60 @@
     ]
   },
   {
+    "id": "ode-eigenvalue-direction-cases",
+    "title": null,
+    "source": "/linear-algebra/eigen/diagonalization",
+    "section": "linear-algebra",
+    "width": 690,
+    "height": 1264,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "orthonormal-operations",
     "title": "Operations in an orthonormal basis",
     "source": "/linear-algebra/orthogonality/orthogonal-sets",
     "section": "linear-algebra",
     "width": 840,
     "height": 1092,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "parallel-vectors-scalar-cases",
+    "title": null,
+    "source": "/linear-algebra/vectors/properties",
+    "section": "linear-algebra",
+    "width": 690,
+    "height": 1093,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "permutation-combination-order-cases",
+    "title": null,
+    "source": "/combinatorics/basics",
+    "section": "combinatorics",
+    "width": 651,
+    "height": 1034,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "principal-root-index-cases",
+    "title": null,
+    "source": "/algebra/roots/properties",
+    "section": "algebra",
+    "width": 690,
+    "height": 959,
     "formats": [
       "png",
       "pdf"
@@ -676,6 +929,18 @@
     ]
   },
   {
+    "id": "qr-method-stability-chain",
+    "title": null,
+    "source": "/linear-algebra/decompositions/qr",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 691,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "qr-routes",
     "title": "Four routes to the same factorization",
     "source": "/linear-algebra/decompositions/qr",
@@ -688,12 +953,36 @@
     ]
   },
   {
+    "id": "radical-equation-index-cases",
+    "title": null,
+    "source": "/algebra/roots/equations",
+    "section": "algebra",
+    "width": 690,
+    "height": 970,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "radical-function-index-cases",
+    "title": null,
+    "source": "/algebra/roots",
+    "section": "algebra",
+    "width": 690,
+    "height": 951,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "rank-full-deficient-cases",
-    "title": "Full rank or rank-deficient",
+    "title": null,
     "source": "/linear-algebra/matrix/rank",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 764,
+    "width": 690,
+    "height": 1010,
     "formats": [
       "png",
       "pdf"
@@ -736,6 +1025,18 @@
     ]
   },
   {
+    "id": "real-inverse-distance-cases",
+    "title": null,
+    "source": "/complex-numbers/multiplicative-inverse",
+    "section": "complex-numbers",
+    "width": 690,
+    "height": 1304,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "reflection-cases",
     "title": "Reflections in the plane",
     "source": "/linear-algebra/transformations/geometric",
@@ -748,12 +1049,36 @@
     ]
   },
   {
+    "id": "roots-of-unity-parity-cases",
+    "title": null,
+    "source": "/complex-numbers/demoivre-theorem",
+    "section": "complex-numbers",
+    "width": 690,
+    "height": 903,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "rref-readings",
     "title": "Everything readable from the RREF",
     "source": "/linear-algebra/linear-systems/echelon-form",
     "section": "linear-algebra",
     "width": 840,
     "height": 1230,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "smoothness-class-pyramid",
+    "title": null,
+    "source": "/calculus/derivatives/higher-order",
+    "section": "calculus",
+    "width": 933,
+    "height": 763,
     "formats": [
       "png",
       "pdf"
@@ -845,11 +1170,11 @@
   },
   {
     "id": "square-system-determinant-cases",
-    "title": "Square systems: what the determinant decides",
+    "title": null,
     "source": "/linear-algebra/linear-systems/solvability",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 753,
+    "width": 690,
+    "height": 1063,
     "formats": [
       "png",
       "pdf"
@@ -874,6 +1199,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 1168,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "subspace-dimension-ladder",
+    "title": null,
+    "source": "/linear-algebra/vector-spaces/dimension",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 739,
     "formats": [
       "png",
       "pdf"
@@ -982,6 +1319,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 983,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "two-lines-solution-cases",
+    "title": null,
+    "source": "/linear-algebra/linear-systems",
+    "section": "linear-algebra",
+    "width": 690,
+    "height": 1211,
     "formats": [
       "png",
       "pdf"

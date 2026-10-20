@@ -830,11 +830,13 @@ The determinant encodes a remarkable amount of structural information. Its most 
     title: `The 2×2 Formula`,
     content: `For a $2 \\times 2$ matrix
 
-$$A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$$
+@academic[formula_callout:The 2×2 Formula
+$$A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$$]@
 
 the determinant is
 
-$$\\det(A) = ad - bc$$
+@academic[formula_callout:The 2×2 Formula
+$$\\det(A) = ad - bc$$]@
 
 One way to see where this formula comes from is to solve the system $Ax = \\mathbf{v}$ for a general right-hand side. Applying elimination, the solution involves dividing by $ad - bc$ at every step. When $ad - bc = 0$, the system either has no solution or infinitely many, and the matrix cannot be inverted. When $ad - bc \\neq 0$, there is a unique solution for every $\\mathbf{v}$, and the inverse exists.
 
@@ -855,7 +857,8 @@ For $A = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$, the determinant is 
     title: `The 3×3 Formula`,
     content: `For a $3 \\times 3$ matrix
 
-$$A = \\begin{pmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{pmatrix}$$
+@academic[formula_callout:The 3×3 Formula
+$$A = \\begin{pmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{pmatrix}$$]@
 
 the determinant is computed by expanding along the first row:
 
@@ -872,7 +875,8 @@ Each first-row entry multiplies the $2 \\times 2$ determinant of the submatrix t
 
 A shortcut for the $3 \\times 3$ case is the rule of Sarrus. Write the matrix and copy its first two columns to the right:
 
-$$\\begin{pmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{pmatrix} \\begin{matrix} a_{11} & a_{12} \\\\ a_{21} & a_{22} \\\\ a_{31} & a_{32} \\end{matrix}$$
+@academic[formula_callout:The 3×3 Formula
+$$\\begin{pmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{pmatrix} \\begin{matrix} a_{11} & a_{12} \\\\ a_{21} & a_{22} \\\\ a_{31} & a_{32} \\end{matrix}$$]@
 
 Sum the three products along the downward diagonals, then subtract the three products along the upward diagonals. This gives the same result as the first-row expansion. The Sarrus rule works only for $3 \\times 3$ matrices — there is no analogous diagonal trick for $4 \\times 4$ or larger.
 
@@ -880,9 +884,11 @@ Sum the three products along the downward diagonals, then subtract the three pro
 
 For $A = \\begin{pmatrix} 2 & 3 & 1 \\\\ 0 & -1 & 4 \\\\ 5 & 2 & 3 \\end{pmatrix}$, expanding along the first row:
 
-$$\\det(A) = 2[(-1)(3) - (4)(2)] - 3[(0)(3) - (4)(5)] + 1[(0)(2) - (-1)(5)]$$
+@academic[formula_callout:The 3×3 Formula
+$$\\det(A) = 2[(-1)(3) - (4)(2)] - 3[(0)(3) - (4)(5)] + 1[(0)(2) - (-1)(5)]$$]@
 
-$$= 2(-3 - 8) - 3(0 - 20) + 1(0 + 5) = 2(-11) - 3(-20) + 5 = -22 + 60 + 5 = 43$$
+@academic[formula_callout:The 3×3 Formula
+$$= 2(-3 - 8) - 3(0 - 20) + 1(0 + 5) = 2(-11) - 3(-20) + 5 = -22 + 60 + 5 = 43$$]@
 
 The same result follows from the Sarrus rule: downward diagonals give $2(-1)(3) + 3(4)(5) + 1(0)(2) = -6 + 60 + 0 = 54$; upward diagonals give $1(-1)(5) + 2(4)(2) + 3(0)(3) = -5 + 16 + 0 = 11$; the determinant is $54 - 11 = 43$.`,
     before: ``,
@@ -893,7 +899,8 @@ The same result follows from the Sarrus rule: downward diagonals give $2(-1)(3) 
     title: `The General n×n Determinant`,
     content: `The pattern from the $3 \\times 3$ case extends to any dimension. For an $n \\times n$ matrix, expand along the first row:
 
-$$\\det(A) = \\sum_{j=1}^{n} (-1)^{1+j} \\, a_{1j} \\, M_{1j}$$
+@academic[formula_callout:The General n×n Determinant
+$$\\det(A) = \\sum_{j=1}^{n} (-1)^{1+j} \\, a_{1j} \\, M_{1j}$$]@
 
 where $M_{1j}$ is the determinant of the $(n-1) \\times (n-1)$ submatrix obtained by deleting row $1$ and column $j$. This is a recursive definition: each $n \\times n$ determinant reduces to $n$ determinants of size $(n-1) \\times (n-1)$, each of which reduces further, until reaching the base case of $1 \\times 1$ matrices where $\\det(a) = a$.
 
@@ -923,21 +930,26 @@ The determinant thus answers the single most important structural question about
 
 ## A 4×4 Example
 
-$$A = \\begin{pmatrix} 1 & 0 & 2 & -1 \\\\ 3 & 0 & 0 & 5 \\\\ 2 & 1 & 4 & -3 \\\\ 1 & 0 & 5 & 0 \\end{pmatrix}$$
+@academic[formula_callout:Computing Small Determinants
+$$A = \\begin{pmatrix} 1 & 0 & 2 & -1 \\\\ 3 & 0 & 0 & 5 \\\\ 2 & 1 & 4 & -3 \\\\ 1 & 0 & 5 & 0 \\end{pmatrix}$$]@
 
 Column $2$ has three zeros and a single $1$ in position $(3,2)$, making it the best expansion axis. Expanding along column $2$:
 
-$$\\det(A) = (-1)^{3+2} \\cdot 1 \\cdot M_{32}$$
+@academic[formula_callout:Computing Small Determinants
+$$\\det(A) = (-1)^{3+2} \\cdot 1 \\cdot M_{32}$$]@
 
 where $M_{32}$ is the $3 \\times 3$ determinant obtained by deleting row $3$ and column $2$:
 
-$$M_{32} = \\det\\begin{pmatrix} 1 & 2 & -1 \\\\ 3 & 0 & 5 \\\\ 1 & 5 & 0 \\end{pmatrix}$$
+@academic[formula_callout:Computing Small Determinants
+$$M_{32} = \\det\\begin{pmatrix} 1 & 2 & -1 \\\\ 3 & 0 & 5 \\\\ 1 & 5 & 0 \\end{pmatrix}$$]@
 
 Expanding this along its first row:
 
-$$M_{32} = 1(0 \\cdot 0 - 5 \\cdot 5) - 2(3 \\cdot 0 - 5 \\cdot 1) + (-1)(3 \\cdot 5 - 0 \\cdot 1)$$
+@academic[formula_callout:Computing Small Determinants
+$$M_{32} = 1(0 \\cdot 0 - 5 \\cdot 5) - 2(3 \\cdot 0 - 5 \\cdot 1) + (-1)(3 \\cdot 5 - 0 \\cdot 1)$$]@
 
-$$= 1(-25) - 2(-5) + (-1)(15) = -25 + 10 - 15 = -30$$
+@academic[formula_callout:Computing Small Determinants
+$$= 1(-25) - 2(-5) + (-1)(15) = -25 + 10 - 15 = -30$$]@
 
 So $\\det(A) = (-1)^{5} \\cdot 1 \\cdot (-30) = (-1)(-30) = 30$.
 
@@ -952,19 +964,27 @@ To compute the determinant of a specific matrix, use the [matrix calculator](!/l
     title: `Expanding by Minors and Cofactors`,
     content: `The sub-determinants appearing in cofactor expansion have their own terminology. The $(i,j)$ minor $M_{ij}$ is the determinant of the submatrix formed by deleting row $i$ and column $j$ from $A$. The $(i,j)$ cofactor is the signed version:
 
+@academic[formula_callout:Cofactor Definition
 $$C_{ij} = (-1)^{i+j} M_{ij}$$
+/linear-algebra/formulas#cofactor_definition]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The sign factor $(-1)^{i+j}$ follows a checkerboard pattern starting with $+$ at position $(1,1)$:
 
-$$\\begin{pmatrix} + & - & + & - & \\cdots \\\\ - & + & - & + & \\cdots \\\\ + & - & + & - & \\cdots \\\\ \\vdots & & & & \\ddots \\end{pmatrix}$$
+@academic[formula_callout:Expanding by Minors and Cofactors
+$$\\begin{pmatrix} + & - & + & - & \\cdots \\\\ - & + & - & + & \\cdots \\\\ + & - & + & - & \\cdots \\\\ \\vdots & & & & \\ddots \\end{pmatrix}$$]@
 
 Using this notation, the Laplace expansion along row $i$ takes the compact form
 
-$$\\det(A) = \\sum_{j=1}^{n} a_{ij} \\, C_{ij}$$
+@academic[formula_callout:Expanding by Minors and Cofactors
+$$\\det(A) = \\sum_{j=1}^{n} a_{ij} \\, C_{ij}$$]@
 
 and the expansion along column $j$ is
 
-$$\\det(A) = \\sum_{i=1}^{n} a_{ij} \\, C_{ij}$$
+@academic[formula_callout:Expanding by Minors and Cofactors
+$$\\det(A) = \\sum_{i=1}^{n} a_{ij} \\, C_{ij}$$]@
 
 Both give the same result regardless of which row or column is chosen. Collecting all cofactors into a matrix and transposing produces the [adjugate](!/linear-algebra/determinants/cofactors), which leads to an explicit formula for the matrix inverse. The full development of minors, cofactors, the adjugate, and the structural results they enable is on the [cofactors](!/linear-algebra/determinants/cofactors) page.`,
     before: ``,

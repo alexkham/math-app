@@ -161,7 +161,8 @@ The name comes from a geometric construction: arrange dots in rows of increasing
 
 The first triangular numbers are:
 
-$$1, 3, 6, 10, 15, 21, 28, 36, 45, 55, \\ldots$$
+@academic[formula_callout:Definition
+$$1, 3, 6, 10, 15, 21, 28, 36, 45, 55, \\ldots$$]@
 
 The closed form $\\frac{n(n+1)}{2}$ follows from the [arithmetic series](!/algebra/sequences/arithmetic#5) formula with $a_1 = 1$ and $d = 1$. The Gauss pairing argument applies directly: $T_n = \\frac{n}{2}(1 + n)$.
 
@@ -192,9 +193,11 @@ The increments form an [arithmetic sequence](!/algebra/sequences/arithmetic) wit
     title: `Derivation of the Closed Form`,
     content: `The formula $T_n = \\frac{n(n+1)}{2}$ can be derived by the pairing method. Write the sum forwards and backwards:
 
-$$S = 1 + 2 + 3 + \\cdots + n$$
+@academic[formula_callout:Derivation of the Closed Form
+$$S = 1 + 2 + 3 + \\cdots + n$$]@
 
-$$S = n + (n-1) + (n-2) + \\cdots + 1$$
+@academic[formula_callout:Derivation of the Closed Form
+$$S = n + (n-1) + (n-2) + \\cdots + 1$$]@
 
 Adding term by term: each pair sums to $n + 1$, and there are $n$ pairs, giving $2S = n(n+1)$ and $S = \\frac{n(n+1)}{2}$.
 

@@ -2167,25 +2167,25 @@ export default function ConditionalProbabilityViewPage({
       <br/>
 
       {componentName === 'WaffleChart' && (
-        <div style={{ transform: 'scale(0.9)' }}>
+        <div style={{ zoom: 0.9 }}>
           <WaffleChart />
         </div>
       )}
 
       {componentName === 'TreeDiagram' && (
-        <div style={{ transform: 'scale(0.9)' }}>
+        <div style={{ zoom: 0.9 }}>
           <ConditionalProbabilityTree2 />
         </div>
       )}
 
       {componentName === 'VennDiagram' && (
-        <div style={{ transform: 'scale(0.9)' }}>
+        <div style={{ zoom: 0.9 }}>
           <ConditionalProbabilityVenn />
         </div>
       )}
 
       {componentName === 'ContingencyTable' && (
-        <div style={{ transform: 'scale(0.9)' }}>
+        <div style={{ zoom: 0.9 }}>
           <ConditionalProbabilityTable2 explanations={explanations2x2} />
         </div>
       )}

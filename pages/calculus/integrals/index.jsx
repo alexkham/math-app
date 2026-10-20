@@ -265,7 +265,8 @@ Integration answers questions about totals. Given how fast something changes at 
 
 Consider velocity. If $v(t)$ gives your speed at time $t$, then the integral
 
-$$\\int_a^b v(t)\\, dt$$
+@academic[formula_callout:The Idea of Accumulation
+$$\\int_a^b v(t)\\, dt$$]@
 
 computes the total distance traveled from time $a$ to time $b$. The function $v(t)$ describes instantaneous rates; the integral accumulates those rates into a total.
 
@@ -289,13 +290,15 @@ The integral symbol carries two distinct meanings depending on context.
 
 ## Definite Integrals
 
-$$\\int_a^b f(x)\\, dx$$
+@academic[formula_callout:Two Types of Integrals
+$$\\int_a^b f(x)\\, dx$$]@
 
 The limits $a$ and $b$ bound the region of integration. The result is a number representing accumulated quantity—area, volume, total change, or another aggregate measure.
 
 ## Indefinite Integrals
 
-$$\\int f(x)\\, dx = F(x) + C$$
+@academic[formula_callout:Two Types of Integrals
+$$\\int f(x)\\, dx = F(x) + C$$]@
 
 No limits appear. The result is a family of functions—all antiderivatives of $f(x)$, differing by an arbitrary constant $C$.
 
@@ -318,7 +321,8 @@ The differential $dx$ indicates the variable of integration and represents an in
 
 For definite integrals, the limits of integration $a$ and $b$ specify where accumulation begins and ends:
 
-$$\\int_a^b f(x)\\, dx$$
+@academic[formula_callout:Notation and Terminology
+$$\\int_a^b f(x)\\, dx$$]@
 
 The lower limit $a$ appears at the bottom of the integral sign, the upper limit $b$ at the top.
 
@@ -334,7 +338,8 @@ The lower limit $a$ appears at the bottom of the integral sign, the upper limit 
     content: `
 The [definite integral](!/calculus/integrals/definite) computes signed area—the area between a curve and the $x$-axis, with regions below the axis counted as negative.
 
-$$\\int_a^b f(x)\\, dx$$
+@academic[formula_callout:Definite Integrals
+$$\\int_a^b f(x)\\, dx$$]@
 
 Positive where $f(x) > 0$, negative where $f(x) < 0$. The integral sums these signed contributions.
 
@@ -349,7 +354,8 @@ Rigorously, the definite integral arises as a limit of Riemann sums. Partition t
     content: `
 The [indefinite integral](!/calculus/integrals/indefinite) reverses differentiation. If $F'(x) = f(x)$, then $F$ is an antiderivative of $f$, and we write:
 
-$$\\int f(x)\\, dx = F(x) + C$$
+@academic[formula_callout:Indefinite Integrals
+$$\\int f(x)\\, dx = F(x) + C$$]@
 
 The constant $C$ is essential. Since the derivative of any constant is zero, infinitely many functions share the same derivative. The "$+ C$" represents this entire family.
 
@@ -366,13 +372,20 @@ Finding antiderivatives is the core skill of indefinite integration. Unlike diff
 
 Linearity allows integrals to be split and scaled:
 
-$$\\int [f(x) + g(x)]\\, dx = \\int f(x)\\, dx + \\int g(x)\\, dx$$
+@academic[formula_callout:Integration Rules
+$$\\int [f(x) + g(x)]\\, dx = \\int f(x)\\, dx + \\int g(x)\\, dx$$]@
 
+@academic[formula_callout:Constant Multiple Rule (Integrals)
 $$\\int c \\cdot f(x)\\, dx = c \\int f(x)\\, dx$$
+/calculus/formulas#constant_multiple_rule_integrals]@
+
+@academic[formulas_link:Browse all calculus formulas
+/calculus/formulas]@
 
 The Fundamental Theorem of Calculus connects definite and indefinite integrals. If $F$ is any antiderivative of $f$:
 
-$$\\int_a^b f(x)\\, dx = F(b) - F(a)$$
+@academic[formula_callout:Integration Rules
+$$\\int_a^b f(x)\\, dx = F(b) - F(a)$$]@
 
 This theorem transforms the problem of computing areas into the problem of finding antiderivatives—a profound simplification.
 `,
@@ -389,7 +402,12 @@ Not every function yields to direct antidifferentiation. [Integration techniques
 
 **Integration by parts** reverses the product rule:
 
+@academic[formula_callout:Integration by Parts
 $$\\int u\\, dv = uv - \\int v\\, du$$
+/calculus/formulas#integration_by_parts]@
+
+@academic[formulas_link:Browse all calculus formulas
+/calculus/formulas]@
 
 **Partial fractions** decompose rational functions into simpler pieces. **Trigonometric substitution** handles integrals involving square roots of quadratics.
 
@@ -404,15 +422,23 @@ Choosing the right technique is an acquired skill—pattern recognition develope
     content: `
 Certain [special integrals](!/calculus/integrals/special) appear so frequently that memorizing them accelerates all subsequent work.
 
+@academic[formula_callout:Power Rule (Integrals)
 $$\\int x^n\\, dx = \\frac{x^{n+1}}{n+1} + C \\quad (n \\neq -1)$$
+/calculus/formulas#power_rule_integrals]@
 
+@academic[formula_callout:Reciprocal Antiderivative
 $$\\int \\frac{1}{x}\\, dx = \\ln|x| + C$$
+/calculus/formulas#reciprocal_antiderivative]@
 
+@academic[formula_callout:Exponential Antiderivative
 $$\\int e^x\\, dx = e^x + C$$
+/calculus/formulas#exponential_antiderivative]@
 
-$$\\int \\sin x\\, dx = -\\cos x + C \\qquad \\int \\cos x\\, dx = \\sin x + C$$
+@academic[formula_callout:Special Integrals
+$$\\int \\sin x\\, dx = -\\cos x + C \\qquad \\int \\cos x\\, dx = \\sin x + C$$]@
 
-$$\\int \\frac{1}{1 + x^2}\\, dx = \\arctan x + C$$
+@academic[formula_callout:Special Integrals
+$$\\int \\frac{1}{1 + x^2}\\, dx = \\arctan x + C$$]@
 
 These formulas serve as building blocks. Complex integrals often reduce to combinations of these standard forms.
 `,
@@ -427,11 +453,13 @@ Standard definite integrals require finite intervals and bounded integrands. [Im
 
 Integrals over infinite intervals:
 
-$$\\int_1^{\\infty} \\frac{1}{x^2}\\, dx = \\lim_{b \\to \\infty} \\int_1^b \\frac{1}{x^2}\\, dx = 1$$
+@academic[formula_callout:Improper Integrals
+$$\\int_1^{\\infty} \\frac{1}{x^2}\\, dx = \\lim_{b \\to \\infty} \\int_1^b \\frac{1}{x^2}\\, dx = 1$$]@
 
 Integrals of unbounded functions:
 
-$$\\int_0^1 \\frac{1}{\\sqrt{x}}\\, dx = \\lim_{a \\to 0^+} \\int_a^1 \\frac{1}{\\sqrt{x}}\\, dx = 2$$
+@academic[formula_callout:Improper Integrals
+$$\\int_0^1 \\frac{1}{\\sqrt{x}}\\, dx = \\lim_{a \\to 0^+} \\int_a^1 \\frac{1}{\\sqrt{x}}\\, dx = 2$$]@
 
 An improper integral converges if the limit exists and is finite; otherwise it diverges. The distinction matters—some infinite regions have finite area, others do not.
 `,
@@ -476,11 +504,13 @@ The integral sign $\\int$ represents summation taken to its limit—adding infin
 
 Two distinct but related concepts share this notation. The definite integral
 
-$$\\int_a^b f(x)\\, dx$$
+@academic[formula_callout:Summary: A Map of the Integrals Subtree
+$$\\int_a^b f(x)\\, dx$$]@
 
 computes a number—the signed area under a curve, the accumulated quantity between two bounds. The indefinite integral
 
-$$\\int f(x)\\, dx$$
+@academic[formula_callout:Summary: A Map of the Integrals Subtree
+$$\\int f(x)\\, dx$$]@
 
 finds a function—the antiderivative whose derivative returns the original integrand. The Fundamental Theorem of Calculus reveals these as two faces of the same idea.
 `

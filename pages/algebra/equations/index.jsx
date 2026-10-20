@@ -334,8 +334,8 @@ obj0: {
 - [Completing the Square](!/algebra/formulas#completing_the_square) — $x^2 + bx = \\left(x + \\frac{b}{2}\\right)^2 - \\frac{b^2}{4}$
 - [Absolute Value Equation](!/algebra/formulas#absolute_value_equation) — $|p| = b \\implies p = b \\text{ or } p = -b$
 - [Absolute Value Inequalities](!/algebra/formulas#absolute_value_inequalities) — $|p| < b \\implies -b < p < b$
-- [Vieta's Formulas (Quadratic)](!/algebra/formulas#vietas_quadratic) — $x_1 + x_2 = -\\frac{b}{a}$
-- [Vieta's Formulas (General)](!/algebra/formulas#vietas_cubic) — $r_1 + r_2 + r_3 = -a_{n-1}$
+- [Vieta's Formulas (Quadratic)](!/algebra/formulas#vietas_formulas_quadratic) — $x_1 + x_2 = -\\frac{b}{a}$
+- [Vieta's Formulas (General)](!/algebra/formulas#vietas_formulas_general) — $r_1 + r_2 + r_3 = -a_{n-1}$
 `,
     before: ``,
     after: `
@@ -427,7 +427,12 @@ The structure breaks only when the variable terms cancel entirely during simplif
 
 Three solving methods cover all cases. Factoring works when the quadratic decomposes into a product of two binomials with rational coefficients, but not every quadratic factors neatly. Completing the square works universally by rewriting the left side as a perfect square, and this technique is what produces the quadratic formula:
 
+@academic[formula_callout:Quadratic Formula
 $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
+/algebra/formulas#quadratic_formula]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The formula accepts any coefficients and delivers the roots directly, making it the default tool when factoring is not immediate. Vieta's formulas offer a complementary perspective: the sum of the two roots equals $-\\frac{b}{a}$ and their product equals $\\frac{c}{a}$, connecting solutions back to the coefficients that generated them.
 

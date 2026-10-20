@@ -1867,7 +1867,8 @@ $$z \\cdot \\overline{z} = |z|^2 = a^2 + b^2$$
 
 The proof follows from direct computation. Let $z = a + bi$, so $\\bar{z} = a - bi$. Their product expands as:
 
-$$z \\cdot \\bar{z} = (a + bi)(a - bi) = a^2 - (bi)^2 = a^2 - b^2i^2 = a^2 + b^2$$
+@academic[formula_callout:Modulus and the Conjugate
+$$z \\cdot \\bar{z} = (a + bi)(a - bi) = a^2 - (bi)^2 = a^2 - b^2i^2 = a^2 + b^2$$]@
 
 The cross terms cancel, and since $i^2 = -1$, the imaginary square becomes positive. The result $a^2 + b^2$ is precisely $|z|^2$ by definition of modulus.
 
@@ -1875,7 +1876,8 @@ This identity appears everywhere in complex analysis. It explains why multiplyin
 
 The identity also enables [division](!/complex-numbers/operations). To compute $\\frac{w}{z}$, multiply numerator and denominator by $\\bar{z}$:
 
-$$\\frac{w}{z} = \\frac{w \\cdot \\bar{z}}{z \\cdot \\bar{z}} = \\frac{w \\cdot \\bar{z}}{|z|^2}$$
+@academic[formula_callout:Modulus and the Conjugate
+$$\\frac{w}{z} = \\frac{w \\cdot \\bar{z}}{z \\cdot \\bar{z}} = \\frac{w \\cdot \\bar{z}}{|z|^2}$$]@
 
 The denominator becomes the real number $|z|^2$, converting the quotient to standard [algebraic form](!/complex-numbers/algebraic-form). Without the identity $z \\cdot \\bar{z} = |z|^2$, division of complex numbers would require far more cumbersome techniques.`,
   after: ``,
@@ -1973,19 +1975,23 @@ The inequality extends to any finite sum: $|z_1 + z_2 + \\cdots + z_n| \\leq |z_
 
 Begin with the squared modulus of the sum:
 
-$$|z_1 + z_2|^2 = (z_1 + z_2) \\cdot \\overline{(z_1 + z_2)} = (z_1 + z_2)(\\bar{z_1} + \\bar{z_2})$$
+@academic[formula_callout:Proving the Triangle Inequality
+$$|z_1 + z_2|^2 = (z_1 + z_2) \\cdot \\overline{(z_1 + z_2)} = (z_1 + z_2)(\\bar{z_1} + \\bar{z_2})$$]@
 
 Expanding the product:
 
-$$= z_1\\bar{z_1} + z_1\\bar{z_2} + z_2\\bar{z_1} + z_2\\bar{z_2} = |z_1|^2 + z_1\\bar{z_2} + \\overline{z_1\\bar{z_2}} + |z_2|^2$$
+@academic[formula_callout:Proving the Triangle Inequality
+$$= z_1\\bar{z_1} + z_1\\bar{z_2} + z_2\\bar{z_1} + z_2\\bar{z_2} = |z_1|^2 + z_1\\bar{z_2} + \\overline{z_1\\bar{z_2}} + |z_2|^2$$]@
 
 The middle terms $z_1\\bar{z_2}$ and $\\overline{z_1\\bar{z_2}}$ are [conjugates](!/complex-numbers/complex-conjugate) of each other. Their sum equals $2\\text{Re}(z_1\\bar{z_2})$, twice the real part. Thus:
 
-$$|z_1 + z_2|^2 = |z_1|^2 + 2\\text{Re}(z_1\\bar{z_2}) + |z_2|^2$$
+@academic[formula_callout:Proving the Triangle Inequality
+$$|z_1 + z_2|^2 = |z_1|^2 + 2\\text{Re}(z_1\\bar{z_2}) + |z_2|^2$$]@
 
 The key observation: the real part of any complex number never exceeds its modulus, so $\\text{Re}(z_1\\bar{z_2}) \\leq |z_1\\bar{z_2}| = |z_1||z_2|$. Substituting:
 
-$$|z_1 + z_2|^2 \\leq |z_1|^2 + 2|z_1||z_2| + |z_2|^2 = (|z_1| + |z_2|)^2$$
+@academic[formula_callout:Proving the Triangle Inequality
+$$|z_1 + z_2|^2 \\leq |z_1|^2 + 2|z_1||z_2| + |z_2|^2 = (|z_1| + |z_2|)^2$$]@
 
 Taking square roots of both sides (valid since all quantities are non-negative) yields the triangle inequality.
 
@@ -2011,11 +2017,13 @@ The absolute difference of two moduli never exceeds the modulus of the differenc
 
 The proof derives from the standard triangle inequality. Write $z_1 = (z_1 - z_2) + z_2$. Applying the triangle inequality:
 
-$$|z_1| = |(z_1 - z_2) + z_2| \\leq |z_1 - z_2| + |z_2|$$
+@academic[formula_callout:The Reverse Triangle Inequality
+$$|z_1| = |(z_1 - z_2) + z_2| \\leq |z_1 - z_2| + |z_2|$$]@
 
 Rearranging gives $|z_1| - |z_2| \\leq |z_1 - z_2|$. The same argument with roles reversed yields $|z_2| - |z_1| \\leq |z_2 - z_1| = |z_1 - z_2|$. Combining both inequalities:
 
-$$-|z_1 - z_2| \\leq |z_1| - |z_2| \\leq |z_1 - z_2|$$
+@academic[formula_callout:The Reverse Triangle Inequality
+$$-|z_1 - z_2| \\leq |z_1| - |z_2| \\leq |z_1 - z_2|$$]@
 
 This is equivalent to $\\big||z_1| - |z_2|\\big| \\leq |z_1 - z_2|$.
 

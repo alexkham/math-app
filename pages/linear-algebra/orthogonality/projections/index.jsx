@@ -2149,17 +2149,20 @@ const sectionsContent = {
     title: `Projection onto a Vector`,
     content: `The orthogonal projection of $\\mathbf{b}$ onto a nonzero vector $\\mathbf{a}$ is the point on the line through $\\mathbf{a}$ nearest to $\\mathbf{b}$:
 
-$$\\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}\\,\\mathbf{a}$$
+@academic[formula_callout:Projection onto a Vector
+$$\\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}\\,\\mathbf{a}$$]@
 
 The scalar $\\hat{c} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}$ is the component of $\\mathbf{b}$ in the direction of $\\mathbf{a}$. The projection $\\hat{c}\\,\\mathbf{a}$ lies on the line through $\\mathbf{a}$, and the residual $\\mathbf{b} - \\hat{c}\\,\\mathbf{a}$ is [orthogonal](!/linear-algebra/orthogonality) to $\\mathbf{a}$:
 
-$$(\\mathbf{b} - \\hat{c}\\,\\mathbf{a}) \\cdot \\mathbf{a} = \\mathbf{b} \\cdot \\mathbf{a} - \\hat{c}(\\mathbf{a} \\cdot \\mathbf{a}) = \\mathbf{b} \\cdot \\mathbf{a} - \\mathbf{b} \\cdot \\mathbf{a} = 0$$
+@academic[formula_callout:Projection onto a Vector
+$$(\\mathbf{b} - \\hat{c}\\,\\mathbf{a}) \\cdot \\mathbf{a} = \\mathbf{b} \\cdot \\mathbf{a} - \\hat{c}(\\mathbf{a} \\cdot \\mathbf{a}) = \\mathbf{b} \\cdot \\mathbf{a} - \\mathbf{b} \\cdot \\mathbf{a} = 0$$]@
 
 ## Worked Example
 
 Project $\\mathbf{b} = (3, 4, 0)$ onto $\\mathbf{a} = (1, 1, 1)$:
 
-$$\\hat{c} = \\frac{3 + 4 + 0}{1 + 1 + 1} = \\frac{7}{3}, \\quad \\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{7}{3}(1, 1, 1) = \\left(\\frac{7}{3}, \\frac{7}{3}, \\frac{7}{3}\\right)$$
+@academic[formula_callout:Projection onto a Vector
+$$\\hat{c} = \\frac{3 + 4 + 0}{1 + 1 + 1} = \\frac{7}{3}, \\quad \\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{7}{3}(1, 1, 1) = \\left(\\frac{7}{3}, \\frac{7}{3}, \\frac{7}{3}\\right)$$]@
 
 Residual: $\\mathbf{b} - \\text{proj}_{\\mathbf{a}}\\mathbf{b} = (\\frac{2}{3}, \\frac{5}{3}, -\\frac{7}{3})$. Check: $(\\frac{2}{3})(1) + (\\frac{5}{3})(1) + (-\\frac{7}{3})(1) = 0$.`,
     before: ``,
@@ -2215,7 +2218,8 @@ The component $\\hat{\\mathbf{b}}$ is the orthogonal projection of $\\mathbf{b}$
 
 The projection $\\hat{\\mathbf{b}}$ is the closest point in $W$ to $\\mathbf{b}$. For any other vector $\\mathbf{w} \\in W$:
 
-$$\\|\\mathbf{b} - \\mathbf{w}\\|^2 = \\|\\mathbf{z}\\|^2 + \\|\\hat{\\mathbf{b}} - \\mathbf{w}\\|^2 \\geq \\|\\mathbf{z}\\|^2 = \\|\\mathbf{b} - \\hat{\\mathbf{b}}\\|^2$$
+@academic[formula_callout:The Orthogonal Decomposition
+$$\\|\\mathbf{b} - \\mathbf{w}\\|^2 = \\|\\mathbf{z}\\|^2 + \\|\\hat{\\mathbf{b}} - \\mathbf{w}\\|^2 \\geq \\|\\mathbf{z}\\|^2 = \\|\\mathbf{b} - \\hat{\\mathbf{b}}\\|^2$$]@
 
 The inequality follows from the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product): $\\mathbf{z}$ is orthogonal to $\\hat{\\mathbf{b}} - \\mathbf{w}$ (both $\\hat{\\mathbf{b}}$ and $\\mathbf{w}$ are in $W$, so their difference is in $W$, and $\\mathbf{z} \\in W^\\perp$). The minimum distance $\\|\\mathbf{z}\\|$ is achieved uniquely at $\\mathbf{w} = \\hat{\\mathbf{b}}$.`,
     before: ``,
@@ -2226,7 +2230,8 @@ The inequality follows from the [Pythagorean theorem](!/linear-algebra/orthogona
     title: `Projection with an Orthogonal Basis`,
     content: `When $W = \\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_k\\}$ and the [basis](!/linear-algebra/vector-spaces) $\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_k\\}$ is orthogonal, the projection of $\\mathbf{b}$ onto $W$ decomposes into independent vector projections:
 
-$$\\text{proj}_W \\mathbf{b} = \\frac{\\mathbf{u}_1 \\cdot \\mathbf{b}}{\\mathbf{u}_1 \\cdot \\mathbf{u}_1}\\,\\mathbf{u}_1 + \\frac{\\mathbf{u}_2 \\cdot \\mathbf{b}}{\\mathbf{u}_2 \\cdot \\mathbf{u}_2}\\,\\mathbf{u}_2 + \\cdots + \\frac{\\mathbf{u}_k \\cdot \\mathbf{b}}{\\mathbf{u}_k \\cdot \\mathbf{u}_k}\\,\\mathbf{u}_k$$
+@academic[formula_callout:Projection with an Orthogonal Basis
+$$\\text{proj}_W \\mathbf{b} = \\frac{\\mathbf{u}_1 \\cdot \\mathbf{b}}{\\mathbf{u}_1 \\cdot \\mathbf{u}_1}\\,\\mathbf{u}_1 + \\frac{\\mathbf{u}_2 \\cdot \\mathbf{b}}{\\mathbf{u}_2 \\cdot \\mathbf{u}_2}\\,\\mathbf{u}_2 + \\cdots + \\frac{\\mathbf{u}_k \\cdot \\mathbf{b}}{\\mathbf{u}_k \\cdot \\mathbf{u}_k}\\,\\mathbf{u}_k$$]@
 
 Each term is the projection of $\\mathbf{b}$ onto one basis vector. Orthogonality prevents interference: projecting onto $\\mathbf{u}_1$ does not affect the component along $\\mathbf{u}_2$, because $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = 0$.
 
@@ -2303,7 +2308,8 @@ The error $\\|\\mathbf{b} - P\\mathbf{b}\\|$ is the distance from $\\mathbf{b}$ 
     title: `Projection and Least Squares`,
     content: `When the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ has no solution — when $\\mathbf{b}$ is not in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ — the [least-squares](!/linear-algebra/orthogonality/least-squares) solution $\\hat{\\mathbf{x}}$ produces the projection of $\\mathbf{b}$ onto $\\text{Col}(A)$:
 
-$$A\\hat{\\mathbf{x}} = \\hat{\\mathbf{b}} = P\\mathbf{b}$$
+@academic[formula_callout:Projection and Least Squares
+$$A\\hat{\\mathbf{x}} = \\hat{\\mathbf{b}} = P\\mathbf{b}$$]@
 
 The least-squares solution does not solve $A\\mathbf{x} = \\mathbf{b}$. It solves $A\\mathbf{x} = \\hat{\\mathbf{b}}$, where $\\hat{\\mathbf{b}}$ is the closest reachable vector to $\\mathbf{b}$.
 
@@ -2320,15 +2326,20 @@ Every least-squares problem is a projection problem. Solving least squares means
 
 The basis is not orthogonal: $(1, 0, 1) \\cdot (0, 1, 1) = 0 + 0 + 1 = 1 \\neq 0$. Use the general formula. Set $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$.
 
-$$A^TA = \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: Full Projection Computation
+$$A^TA = \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$$]@
 
-$$(A^TA)^{-1} = \\frac{1}{3}\\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: Full Projection Computation
+$$(A^TA)^{-1} = \\frac{1}{3}\\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix}$$]@
 
-$$A^T\\mathbf{b} = \\begin{pmatrix} 1 + 0 + 3 \\\\ 0 + 2 + 3 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 5 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: Full Projection Computation
+$$A^T\\mathbf{b} = \\begin{pmatrix} 1 + 0 + 3 \\\\ 0 + 2 + 3 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 5 \\end{pmatrix}$$]@
 
-$$\\hat{\\mathbf{x}} = \\frac{1}{3}\\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix}\\begin{pmatrix} 4 \\\\ 5 \\end{pmatrix} = \\frac{1}{3}\\begin{pmatrix} 3 \\\\ 6 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: Full Projection Computation
+$$\\hat{\\mathbf{x}} = \\frac{1}{3}\\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix}\\begin{pmatrix} 4 \\\\ 5 \\end{pmatrix} = \\frac{1}{3}\\begin{pmatrix} 3 \\\\ 6 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}$$]@
 
-$$\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}} = 1\\begin{pmatrix} 1 \\\\ 0 \\\\ 1 \\end{pmatrix} + 2\\begin{pmatrix} 0 \\\\ 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: Full Projection Computation
+$$\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}} = 1\\begin{pmatrix} 1 \\\\ 0 \\\\ 1 \\end{pmatrix} + 2\\begin{pmatrix} 0 \\\\ 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix}$$]@
 
 The projection equals $\\mathbf{b}$ itself — meaning $\\mathbf{b}$ was already in $W$. The residual is $\\mathbf{0}$, confirming $\\mathbf{b} \\in \\text{Span}\\{(1, 0, 1), (0, 1, 1)\\}$. Indeed: $(1, 2, 3) = 1 \\cdot (1, 0, 1) + 2 \\cdot (0, 1, 1)$.`,
     before: ``,

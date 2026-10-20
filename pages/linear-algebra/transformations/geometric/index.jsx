@@ -2404,11 +2404,13 @@ $$R_x(\\theta) = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & \\cos\\theta & -\\sin\\thet
 
 Rotation by $\\theta$ about the $z$-axis leaves the $z$-coordinate unchanged and rotates the $xy$-plane:
 
-$$R_z(\\theta) = \\begin{pmatrix} \\cos\\theta & -\\sin\\theta & 0 \\\\ \\sin\\theta & \\cos\\theta & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$$
+@academic[formula_callout:Rotations in R³
+$$R_z(\\theta) = \\begin{pmatrix} \\cos\\theta & -\\sin\\theta & 0 \\\\ \\sin\\theta & \\cos\\theta & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$$]@
 
 Rotations about the $x$-axis and $y$-axis have the same $2 \\times 2$ rotation block embedded in different positions:
 
-$$R_x(\\theta) = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & \\cos\\theta & -\\sin\\theta \\\\ 0 & \\sin\\theta & \\cos\\theta \\end{pmatrix}, \\quad R_y(\\theta) = \\begin{pmatrix} \\cos\\theta & 0 & \\sin\\theta \\\\ 0 & 1 & 0 \\\\ -\\sin\\theta & 0 & \\cos\\theta \\end{pmatrix}$$
+@academic[formula_callout:Rotations in R³
+$$R_x(\\theta) = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & \\cos\\theta & -\\sin\\theta \\\\ 0 & \\sin\\theta & \\cos\\theta \\end{pmatrix}, \\quad R_y(\\theta) = \\begin{pmatrix} \\cos\\theta & 0 & \\sin\\theta \\\\ 0 & 1 & 0 \\\\ -\\sin\\theta & 0 & \\cos\\theta \\end{pmatrix}$$]@
 
 Every $3 \\times 3$ rotation matrix is orthogonal with determinant $+1$. The axis of rotation is the [eigenvector](!/linear-algebra/eigen) with eigenvalue $1$ — the direction that remains fixed. Any rotation in $\\mathbb{R}^3$ can be decomposed into rotations about the coordinate axes (Euler angles), though the decomposition is not unique.`,
     before: ``,
@@ -2497,11 +2499,13 @@ $$\\text{Shear}_x = \\begin{pmatrix} 1 & k \\\\ 0 & 1 \\end{pmatrix}, \\qquad \\
 
 In $\\mathbb{R}^2$, a horizontal shear shifts the $x$-coordinate by $k$ times the $y$-coordinate:
 
-$$T(x, y) = (x + ky, \\; y), \\quad \\text{matrix } \\begin{pmatrix} 1 & k \\\\ 0 & 1 \\end{pmatrix}$$
+@academic[formula_callout:Shears
+$$T(x, y) = (x + ky, \\; y), \\quad \\text{matrix } \\begin{pmatrix} 1 & k \\\\ 0 & 1 \\end{pmatrix}$$]@
 
 A vertical shear shifts the $y$-coordinate by $k$ times the $x$-coordinate:
 
-$$T(x, y) = (x, \\; kx + y), \\quad \\text{matrix } \\begin{pmatrix} 1 & 0 \\\\ k & 1 \\end{pmatrix}$$
+@academic[formula_callout:Shears
+$$T(x, y) = (x, \\; kx + y), \\quad \\text{matrix } \\begin{pmatrix} 1 & 0 \\\\ k & 1 \\end{pmatrix}$$]@
 
 Both are [triangular](!/linear-algebra/matrix/types) matrices with determinant $1$: shears are area-preserving and orientation-preserving. They are not orthogonal — angles are distorted. A square sheared horizontally becomes a parallelogram of the same area but with tilted sides.
 

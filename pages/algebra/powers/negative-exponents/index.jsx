@@ -225,7 +225,8 @@ obj2: {
   title: `The Zero Exponent`,
   content: `For any nonzero $a$:
 
-$$a^0 = 1$$
+@academic[formula_callout:The Zero Exponent
+$$a^0 = 1$$]@
 
 The quotient rule provides one proof: $a^0 = a^{n-n} = \\frac{a^n}{a^n} = 1$. But the same conclusion emerges from a purely numerical pattern. The powers of $3$ descend by a factor of $3$ at each step: $3^3 = 27$, $3^2 = 9$, $3^1 = 3$. Continuing the pattern — dividing by $3$ each time — gives $3^0 = 1$. The same sequence works for any nonzero base: $5^0 = 1$, $(-7)^0 = 1$, $(0.01)^0 = 1$.
 
@@ -239,7 +240,8 @@ obj3: {
   title: `Definition of Negative Exponents`,
   content: `For any nonzero $a$ and any natural number $n$:
 
-$$a^{-n} = \\frac{1}{a^n}$$
+@academic[formula_callout:Definition of Negative Exponents
+$$a^{-n} = \\frac{1}{a^n}$$]@
 
 A negative exponent produces the reciprocal of the corresponding positive power. The expression $2^{-3} = \\frac{1}{2^3} = \\frac{1}{8}$. The expression $5^{-1} = \\frac{1}{5}$. The expression $10^{-4} = \\frac{1}{10000} = 0.0001$.
 
@@ -295,7 +297,12 @@ obj4: {
 
 A negative exponent on a fraction inverts it:
 
+@academic[formula_callout:Negative Exponent Flip
 $$\\left(\\frac{a}{b}\\right)^{-n} = \\left(\\frac{b}{a}\\right)^n$$
+/algebra/formulas#negative_exponent_flip]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The expression $\\left(\\frac{2}{5}\\right)^{-3} = \\left(\\frac{5}{2}\\right)^3 = \\frac{125}{8}$. The negative exponent flips the fraction, and the positive exponent that remains is applied normally.
 

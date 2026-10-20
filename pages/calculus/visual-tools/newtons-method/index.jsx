@@ -1176,7 +1176,8 @@ export default function NewtonsMethodVisualizer({ instructions, demos,relatedToo
    </div>
    <br/>
    <br/>
-   <div style={{transform:'scale(0.9)',width:'80%',margin:'auto'}}>
+   {/* zoom, not transform: scale keeps the full layout height and leaves empty space above and below the tool */}
+   <div style={{ zoom: 0.9,width:'80%',margin:'auto'}}>
    <FunctionNewtonMethod explanations={explanations}/>
    </div>
    <br/>

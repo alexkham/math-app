@@ -396,7 +396,12 @@ const sectionsContent = {
     content: `
 For any constant $c$:
 
+@academic[formula_callout:Constant Rule (Derivatives)
 $$\\frac{d}{dx}[c] = 0$$
+/calculus/formulas#constant_rule_derivatives]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/formulas]@
 
 The graph of a constant function is a horizontal line. Every secant line through two points on it has slope zero, so the tangent line at every point also has slope zero. From the limit definition, the difference quotient $\\frac{c - c}{h} = 0$ for all $h \\neq 0$, and the limit is $0$.
 
@@ -411,7 +416,12 @@ Under differentiation, constant terms vanish. In any sum $f(x) + c$, the constan
     content: `
 For any real exponent $n$:
 
+@academic[formula_callout:Power Rule (Derivatives)
 $$\\frac{d}{dx}[x^n] = nx^{n-1}$$
+/calculus/formulas#power_rule_derivatives]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/formulas]@
 
 The rule applies uniformly across exponent types. Positive integers: $\\frac{d}{dx}[x^5] = 5x^4$. Negative integers: $\\frac{d}{dx}[x^{-3}] = -3x^{-4}$. Fractions: $\\frac{d}{dx}[x^{1/2}] = \\frac{1}{2}x^{-1/2} = \\frac{1}{2\\sqrt{x}}$. Irrational exponents: $\\frac{d}{dx}[x^\\pi] = \\pi x^{\\pi - 1}$.
 
@@ -428,7 +438,8 @@ Extension to negative and fractional exponents uses the quotient rule and the ch
     content: `
 A polynomial $p(x) = a_n x^n + a_{n-1}x^{n-1} + \\cdots + a_1 x + a_0$ is differentiated term by term using the power rule, constant multiple rule, and sum rule:
 
-$$p'(x) = na_n x^{n-1} + (n-1)a_{n-1}x^{n-2} + \\cdots + a_1$$
+@academic[formula_callout:Polynomials
+$$p'(x) = na_n x^{n-1} + (n-1)a_{n-1}x^{n-2} + \\cdots + a_1$$]@
 
 Each term drops its degree by one. The constant term $a_0$ disappears. A polynomial of degree $n$ has a derivative of degree $n - 1$.
 
@@ -456,7 +467,8 @@ $$\\frac{d}{dx}[\\cos x] = -\\sin x$$
 
 The sine derivative is proved from the limit definition. Expanding $\\sin(x + h)$ using the angle addition formula gives $\\sin x \\cos h + \\cos x \\sin h$. The difference quotient becomes
 
-$$\\frac{\\sin x(\\cos h - 1) + \\cos x \\sin h}{h} = \\sin x \\cdot \\frac{\\cos h - 1}{h} + \\cos x \\cdot \\frac{\\sin h}{h}$$
+@academic[formula_callout:Trigonometric Functions — Sine and Cosine
+$$\\frac{\\sin x(\\cos h - 1) + \\cos x \\sin h}{h} = \\sin x \\cdot \\frac{\\cos h - 1}{h} + \\cos x \\cdot \\frac{\\sin h}{h}$$]@
 
 The [special limits](!/calculus/limits/special) $\\lim_{h \\to 0} \\frac{\\sin h}{h} = 1$ and $\\lim_{h \\to 0} \\frac{\\cos h - 1}{h} = 0$ yield the result: $\\cos x$.
 
@@ -565,17 +577,23 @@ The function $\\ln|x|$ extends the domain to all $x \\neq 0$, and its derivative
     content: `
 The complete set of common derivative formulas:
 
-$$\\frac{d}{dx}[c] = 0 \\qquad \\frac{d}{dx}[x^n] = nx^{n-1}$$
+@academic[formula_callout:Summary of Common Derivatives
+$$\\frac{d}{dx}[c] = 0 \\qquad \\frac{d}{dx}[x^n] = nx^{n-1}$$]@
 
-$$\\frac{d}{dx}[\\sin x] = \\cos x \\qquad \\frac{d}{dx}[\\cos x] = -\\sin x$$
+@academic[formula_callout:Summary of Common Derivatives
+$$\\frac{d}{dx}[\\sin x] = \\cos x \\qquad \\frac{d}{dx}[\\cos x] = -\\sin x$$]@
 
-$$\\frac{d}{dx}[\\tan x] = \\sec^2 x \\qquad \\frac{d}{dx}[\\cot x] = -\\csc^2 x$$
+@academic[formula_callout:Summary of Common Derivatives
+$$\\frac{d}{dx}[\\tan x] = \\sec^2 x \\qquad \\frac{d}{dx}[\\cot x] = -\\csc^2 x$$]@
 
-$$\\frac{d}{dx}[\\sec x] = \\sec x \\tan x \\qquad \\frac{d}{dx}[\\csc x] = -\\csc x \\cot x$$
+@academic[formula_callout:Summary of Common Derivatives
+$$\\frac{d}{dx}[\\sec x] = \\sec x \\tan x \\qquad \\frac{d}{dx}[\\csc x] = -\\csc x \\cot x$$]@
 
-$$\\frac{d}{dx}[e^x] = e^x \\qquad \\frac{d}{dx}[a^x] = a^x \\ln a$$
+@academic[formula_callout:Summary of Common Derivatives
+$$\\frac{d}{dx}[e^x] = e^x \\qquad \\frac{d}{dx}[a^x] = a^x \\ln a$$]@
 
-$$\\frac{d}{dx}[\\ln x] = \\frac{1}{x} \\qquad \\frac{d}{dx}[\\log_a x] = \\frac{1}{x \\ln a}$$
+@academic[formula_callout:Summary of Common Derivatives
+$$\\frac{d}{dx}[\\ln x] = \\frac{1}{x} \\qquad \\frac{d}{dx}[\\log_a x] = \\frac{1}{x \\ln a}$$]@
 
 These twelve formulas, combined with the [differentiation rules](!/calculus/derivatives/rules), handle every explicit function built from powers, trigonometric functions, exponentials, and logarithms. Functions involving inverse trigonometric, hyperbolic, or piecewise definitions require the additional formulas collected in [derivatives of special functions](!/calculus/derivatives/special). The master reference card below collects everything in one place, grouped by function family for quick lookup.
 `,

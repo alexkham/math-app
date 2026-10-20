@@ -257,7 +257,8 @@ obj0: {
     title: `Definition and Standard Form`,
     content: `A linear inequality in one variable is any inequality that can be written as
 
-$$ax + b < 0$$
+@academic[formula_callout:Definition and Standard Form
+$$ax + b < 0$$]@
 
 (or with $>$, $\\leq$, or $\\geq$ in place of $<$), where $a$ and $b$ are real constants and $a \\neq 0$. The variable $x$ appears only to the first power — no squares, no roots, no $x$ in a denominator.
 
@@ -311,9 +312,13 @@ Not every linear inequality arrives in standard form. The inequality $3x - 7 > 2
     title: `Solving with the Properties of Inequality`,
     content: `Two properties govern the manipulation of linear inequalities, directly paralleling the properties used for [equations](!/algebra/equations).
 
-The addition property states that adding or subtracting the same quantity on both sides preserves the direction of the inequality. If $x - 5 > 3$, then adding $5$ to both sides gives $x > 8$. The direction $>$ is unchanged.
+@academic[rule:Addition property
+The addition property states that adding or subtracting the same quantity on both sides preserves the direction of the inequality.]@
 
-The multiplication property has two cases. Multiplying or dividing by a positive number preserves the direction: from $3x \\leq 21$, dividing by $3$ gives $x \\leq 7$. Multiplying or dividing by a negative number reverses the direction: from $-2x \\leq 8$, dividing by $-2$ gives $x \\geq -4$. The inequality flips from $\\leq$ to $\\geq$.
+If $x - 5 > 3$, then adding $5$ to both sides gives $x > 8$. The direction $>$ is unchanged.
+
+@academic[rule:Multiplication property
+The multiplication property has two cases. Multiplying or dividing by a positive number preserves the direction: from $3x \\leq 21$, dividing by $3$ gives $x \\leq 7$. Multiplying or dividing by a negative number reverses the direction: from $-2x \\leq 8$, dividing by $-2$ gives $x \\geq -4$. The inequality flips from $\\leq$ to $\\geq$.]@
 
 The reversal is the entire difference between solving equations and solving inequalities. Every other step — collecting terms, distributing, clearing fractions — is mechanically identical. Missing the flip when dividing by a negative is the single most common error, and it produces the exact complement of the correct solution: the wrong half of the number line.`,
     before: ``,
@@ -373,13 +378,17 @@ The choice between AND and OR depends on the problem's structure. Conjunctions n
 
 Consider $\\frac{x}{3} - \\frac{x + 2}{4} > 1$. The LCD of $3$ and $4$ is $12$. Multiplying every term by $12$:
 
-$$4x - 3(x + 2) > 12$$
+@academic[formula_callout:Inequalities with Fractions and Decimals
+$$4x - 3(x + 2) > 12$$]@
 
 Distributing and collecting:
 
-$$4x - 3x - 6 > 12$$
-$$x - 6 > 12$$
-$$x > 18$$
+@academic[formula_callout:Inequalities with Fractions and Decimals
+$$4x - 3x - 6 > 12$$]@
+@academic[formula_callout:Inequalities with Fractions and Decimals
+$$x - 6 > 12$$]@
+@academic[formula_callout:Inequalities with Fractions and Decimals
+$$x > 18$$]@
 
 The solution is $(18, \\infty)$. The multiplication by $12$ is safe because $12 > 0$, so the direction is preserved.
 

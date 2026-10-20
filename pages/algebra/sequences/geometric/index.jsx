@@ -472,7 +472,8 @@ Both representations define the same sequence. The explicit form is better for c
     title: `Finite Geometric Series`,
     content: `The sum of the first $n$ terms of a geometric sequence is:
 
-$$S_n = a_1 + a_1 r + a_1 r^2 + \\cdots + a_1 r^{n-1}$$
+@academic[formula_callout:Finite Geometric Series
+$$S_n = a_1 + a_1 r + a_1 r^2 + \\cdots + a_1 r^{n-1}$$]@
 
 The closed form is:
 
@@ -485,21 +486,25 @@ $$S_n = a_1 \\cdot \\frac{1 - r^n}{1 - r} \\quad (r \\neq 1)$$
 
 The derivation uses a telescoping trick. Multiply $S_n$ by $r$:
 
-$$rS_n = a_1 r + a_1 r^2 + \\cdots + a_1 r^n$$
+@academic[formula_callout:Finite Geometric Series
+$$rS_n = a_1 r + a_1 r^2 + \\cdots + a_1 r^n$$]@
 
 Subtract from the original sum:
 
-$$S_n - rS_n = a_1 - a_1 r^n$$
+@academic[formula_callout:Finite Geometric Series
+$$S_n - rS_n = a_1 - a_1 r^n$$]@
 
 Factor:
 
-$$S_n(1 - r) = a_1(1 - r^n)$$
+@academic[formula_callout:Finite Geometric Series
+$$S_n(1 - r) = a_1(1 - r^n)$$]@
 
 Divide by $1 - r$ to isolate $S_n$. When $r = 1$, every term equals $a_1$ and $S_n = na_1$.
 
 For example, the sum $1 + 2 + 4 + 8 + \\cdots + 2^9$ has $a_1 = 1$, $r = 2$, and $n = 10$:
 
-$$S_{10} = 1 \\cdot \\frac{1 - 2^{10}}{1 - 2} = \\frac{1 - 1024}{-1} = 1023$$`,
+@academic[formula_callout:Finite Geometric Series
+$$S_{10} = 1 \\cdot \\frac{1 - 2^{10}}{1 - 2} = \\frac{1 - 1024}{-1} = 1023$$]@`,
     before: ``,
     after: ``,
     link: '',
@@ -547,7 +552,8 @@ Inserting geometric means between two positive values $a$ and $b$ requires placi
 
 The AM–GM inequality states that for any set of positive numbers, the geometric mean never exceeds the [arithmetic mean](!/algebra/sequences/arithmetic#6):
 
-$$G \\leq A$$
+@academic[formula_callout:Geometric Mean
+$$G \\leq A$$]@
 
 Equality holds only when all values are identical. This inequality extends to include the [harmonic mean](!/algebra/sequences/harmonic#4): $H \\leq G \\leq A$.`,
     before: ``,

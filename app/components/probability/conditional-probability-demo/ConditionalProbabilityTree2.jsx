@@ -514,10 +514,6 @@ export default function ConditionalProbabilityTree2() {
         </div>
       </div>
 
-      {/* Instructions */}
-      <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af' }}>
-        <strong>How to use:</strong> Adjust the sliders to change probabilities. Click on any joint probability block to highlight its path through the tree.
-      </div>
     </div>
   );
 }

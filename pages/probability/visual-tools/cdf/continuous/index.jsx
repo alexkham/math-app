@@ -604,7 +604,8 @@ export default function CDFContinuousVisualizerPage({ instructions, demos,relate
    </div>
    <br/>
       
-      <div style={{transform:'scale(0.8)'}}>
+      {/* zoom, not transform: scale keeps the full layout height and leaves empty space above and below the tool */}
+      <div style={{ zoom: 0.8}}>
         <ContinuousCDFVisualizer explanationsAppend={explanationsAppend}/>
       </div>
       

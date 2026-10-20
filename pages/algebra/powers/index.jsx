@@ -675,6 +675,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -891,7 +893,8 @@ const sectionsContent = {
     title: `Definition and Terminology`,
     content: `The expression $a^n$ is called a power. The number $a$ is the base — the quantity being repeatedly multiplied. The number $n$ is the exponent — it controls how many times the base appears as a factor.
 
-$$a^n = \\underbrace{a \\cdot a \\cdot a \\cdots a}_{n \\text{ times}}$$
+@academic[formula_callout:Definition and Terminology
+$$a^n = \\underbrace{a \\cdot a \\cdot a \\cdots a}_{n \\text{ times}}$$]@
 
 This definition works when $n$ is a positive integer. The expression $2^5$ means $2 \\cdot 2 \\cdot 2 \\cdot 2 \\cdot 2 = 32$. Five factors of 2.
 
@@ -907,15 +910,18 @@ Two exponents have special names. The exponent 2 gives "squared": $a^2$ is "a sq
     title: `Notation and Conventions`,
     content: `Parentheses determine what the exponent applies to. Without parentheses, the exponent binds only to the symbol immediately before it:
 
-$$-2^2 = -(2^2) = -4$$
+@academic[formula_callout:Notation and Conventions
+$$-2^2 = -(2^2) = -4$$]@
 
-$$(-2)^2 = (-2) \\cdot (-2) = 4$$
+@academic[formula_callout:Notation and Conventions
+$$(-2)^2 = (-2) \\cdot (-2) = 4$$]@
 
 In the first expression, the exponent applies to 2 alone; the negative sign is applied afterward. In the second, the parentheses force the exponent to apply to $-2$ as a whole.
 
 Stacked exponents are read from the top down:
 
-$$a^{2^3} = a^8$$
+@academic[formula_callout:Notation and Conventions
+$$a^{2^3} = a^8$$]@
 
 This is not the same as $(a^2)^3 = a^6$. Without parentheses, $2^3$ is computed first to produce the exponent 8. The full rules governing expressions like $(a^m)^n$ appear on the [exponent rules](!/algebra/powers/exponent-rules) page.`,
     before: ``,
@@ -927,9 +933,11 @@ This is not the same as $(a^2)^3 = a^6$. Without parentheses, $2^3$ is computed 
     title: `Natural Exponents`,
     content: `When the exponent is a positive integer, the power is a product of repeated factors. The exponent simply counts how many copies of the base are multiplied together.
 
-$$3^4 = 3 \\cdot 3 \\cdot 3 \\cdot 3 = 81$$
+@academic[formula_callout:Natural Exponents
+$$3^4 = 3 \\cdot 3 \\cdot 3 \\cdot 3 = 81$$]@
 
-$$10^6 = 1{,}000{,}000$$
+@academic[formula_callout:Natural Exponents
+$$10^6 = 1{,}000{,}000$$]@
 
 This is where the laws of exponents — the product rule, quotient rule, power-of-a-power rule — are first derived. Each law emerges naturally from counting and regrouping factors. Every extension of exponents to other types preserves these laws by definition.
 
@@ -959,7 +967,8 @@ The case $0^0$ is genuinely ambiguous. Different conventions assign it the value
     title: `Negative Exponents`,
     content: `A negative exponent produces the reciprocal of the corresponding positive power:
 
-$$a^{-n} = \\frac{1}{a^n}, \\quad a \\neq 0$$
+@academic[formula_callout:Negative Exponents
+$$a^{-n} = \\frac{1}{a^n}, \\quad a \\neq 0$$]@
 
 The definition extends the descending pattern below $a^0$. From $3^1 = 3$ and $3^0 = 1$, dividing by 3 once more gives $3^{-1} = 1/3$. Then $3^{-2} = 1/9$, $3^{-3} = 1/27$, and so on.
 
@@ -975,7 +984,8 @@ Negative exponents rewrite fractions without denominators: $1/a^3 = a^{-3}$. Thi
     title: `Rational Exponents`,
     content: `When the exponent is a fraction $m/n$, the denominator indicates a root and the numerator indicates a power:
 
-$$a^{m/n} = \\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$
+@academic[formula_callout:Rational Exponents
+$$a^{m/n} = \\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$]@
 
 This equivalence bridges exponents and [roots](!/algebra/roots). Computing $8^{2/3}$: the denominator 3 means cube root, the numerator 2 means square. So $8^{2/3} = (\\sqrt[3]{8})^2 = 2^2 = 4$.
 
@@ -991,7 +1001,8 @@ Rational exponents provide a single framework for roots and powers. The [rationa
     title: `Irrational Exponents`,
     content: `An irrational exponent like $\\pi$ or $\\sqrt{2}$ cannot be expressed as a fraction, so the rational-exponent definition does not apply directly. Instead, $2^\\pi$ is defined as the limit of $2^r$ where rational values $r$ approach $\\pi$:
 
-$$2^3 = 8, \\quad 2^{3.1} \\approx 8.574, \\quad 2^{3.14} \\approx 8.815, \\quad 2^{3.1415} \\approx 8.824$$
+@academic[formula_callout:Irrational Exponents
+$$2^3 = 8, \\quad 2^{3.1} \\approx 8.574, \\quad 2^{3.14} \\approx 8.815, \\quad 2^{3.1415} \\approx 8.824$$]@
 
 The values converge, and the limit is $2^\\pi$.
 
@@ -1175,8 +1186,43 @@ const schemas = {
     }),
   };
 
+  const exponentTypeCases = {
+    prefaceTitle: 'One set of laws, tighter bases',
+    preface: 'The product, quotient and power-of-a-power rules hold for every exponent type. What changes is which bases are allowed: the restrictions tighten as the exponent type broadens.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'Each new exponent type is defined so that the same laws stay valid. The [exponent rules](!/algebra/powers/exponent-rules) page has every law with its full domain conditions.',
+    parent: {
+      kicker: 'Laws of exponents',
+      formula: '$a^m \\cdot a^n = a^{m+n}$',
+      splitBy: 'the type of exponent',
+    },
+    cases: [
+      {
+        id: 'natural', condition: 'natural',
+        count: { n: 'ℝ' },
+        headline: 'Any base',
+      },
+      {
+        id: 'zero-neg', condition: 'zero or negative',
+        count: { n: '≠0' },
+        headline: 'Excludes $a = 0$',
+      },
+      {
+        id: 'rational', condition: 'rational, even denominator',
+        count: { n: '≥0' },
+        headline: 'Requires $a \\geq 0$',
+      },
+      {
+        id: 'irrational', condition: 'irrational',
+        count: { n: '>0' },
+        headline: 'Requires $a > 0$',
+      },
+    ],
+  };
+
    return {
   props: {
+    exponentTypeCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1196,7 +1242,9 @@ const schemas = {
    }
 
 
- export default function PowersAndExponentsPage({seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, schemas, demoUnits}) {
+ const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function PowersAndExponentsPage({exponentTypeCases, seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -1275,6 +1323,14 @@ const schemas = {
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="exponent-type-domain-cases"
+            title="Laws of exponents: which bases each exponent type allows"
+            source="/algebra/powers"
+          >
+            <CaseSplit data={exponentTypeCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

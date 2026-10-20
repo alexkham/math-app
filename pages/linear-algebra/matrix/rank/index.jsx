@@ -2002,6 +2002,7 @@ import rankDiagrams from '@/app/components/linear-algebra copy/matrix/rankDiagra
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 import kernelImageDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/kernel-image/kernelImageDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -2563,7 +2564,8 @@ The row rank is the dimension of the row space — the subspace of $\\mathbb{R}^
 
 A fundamental theorem states that these two numbers are always equal:
 
-$$\\text{column rank of } A = \\text{row rank of } A$$
+@academic[formula_callout:Column Rank and Row Rank
+$$\\text{column rank of } A = \\text{row rank of } A$$]@
 
 This common value is called the rank of $A$, written $\\text{rank}(A)$ or $\\text{rk}(A)$.
 
@@ -2578,23 +2580,28 @@ The equality is not obvious. The columns live in $\\mathbb{R}^m$ and the rows li
 
 ## Worked Example
 
-$$A = \\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 2 & 4 & 1 & 0 & 5 \\\\ -1 & -2 & 3 & 4 & 1 \\\\ 0 & 0 & 2 & 3 & -1 \\end{pmatrix}$$
+@academic[formula_callout:Computing Rank via Row Reduction
+$$A = \\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 2 & 4 & 1 & 0 & 5 \\\\ -1 & -2 & 3 & 4 & 1 \\\\ 0 & 0 & 2 & 3 & -1 \\end{pmatrix}$$]@
 
 Subtract $2$ times row $1$ from row $2$, and add row $1$ to row $3$:
 
-$$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 3 & 3 & 4 \\\\ 0 & 0 & 2 & 3 & -1 \\end{pmatrix}$$
+@academic[formula_callout:Computing Rank via Row Reduction
+$$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 3 & 3 & 4 \\\\ 0 & 0 & 2 & 3 & -1 \\end{pmatrix}$$]@
 
 Subtract $3$ times row $2$ from row $3$, and subtract $2$ times row $2$ from row $4$:
 
-$$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 0 & -3 & 7 \\\\ 0 & 0 & 0 & -1 & 1 \\end{pmatrix}$$
+@academic[formula_callout:Computing Rank via Row Reduction
+$$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 0 & -3 & 7 \\\\ 0 & 0 & 0 & -1 & 1 \\end{pmatrix}$$]@
 
 Subtract $3$ times row $4$ from row $3$:
 
-$$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 0 & 0 & 4 \\\\ 0 & 0 & 0 & -1 & 1 \\end{pmatrix}$$
+@academic[formula_callout:Computing Rank via Row Reduction
+$$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 0 & 0 & 4 \\\\ 0 & 0 & 0 & -1 & 1 \\end{pmatrix}$$]@
 
 Swap rows $3$ and $4$ to place the pivot:
 
-$$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 0 & -1 & 1 \\\\ 0 & 0 & 0 & 0 & 4 \\end{pmatrix}$$
+@academic[formula_callout:Computing Rank via Row Reduction
+$$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 0 & -1 & 1 \\\\ 0 & 0 & 0 & 0 & 4 \\end{pmatrix}$$]@
 
 There are four pivots, in columns $1$, $3$, $4$, and $5$. So $\\text{rank}(A) = 4$. Column $2$ is the only non-pivot column, corresponding to the single free variable if this matrix were the coefficient matrix of a system.`,
     before: ``,
@@ -2633,7 +2640,8 @@ There is no scenario with a finite number of solutions greater than one. A linea
     title: `The Rank-Nullity Theorem`,
     content: `For an $m \\times n$ matrix $A$, the rank and the nullity — the dimension of the null space $\\{\\mathbf{x} : A\\mathbf{x} = \\mathbf{0}\\}$ — satisfy
 
-$$\\text{rank}(A) + \\text{nullity}(A) = n$$
+@academic[formula_callout:The Rank-Nullity Theorem
+$$\\text{rank}(A) + \\text{nullity}(A) = n$$]@
 
 The $n$ columns of $A$ partition into two groups: the pivot columns, which contribute to the column space and drive the rank, and the free columns, which contribute to the null space and drive the nullity. Every column does exactly one of these things.
 
@@ -2699,7 +2707,7 @@ A [diagonal](!/linear-algebra/matrix/types) matrix has rank equal to the number 
 A rank-$1$ matrix has the form of an outer product of two nonzero vectors:
 
 @academic[formula_callout:rank_one_outer_product|Rank-One Outer Product|$$A = \\mathbf{u}\\mathbf{v}^T, \\quad \\text{rank}(A) = 1$$]@
-@academic[formulas_link:/linear-algebra/formulas#rank_one_outer_product]@
+@academic[formulas_link:/linear-algebra/formulas#rank-one_outer_product]@
 
 Every column of $A$ is a scalar multiple of $\\mathbf{u}$, so the column space is the one-dimensional line through $\\mathbf{u}$. Equivalently, every row is a scalar multiple of $\\mathbf{v}^T$. Rank-$1$ matrices are the building blocks of the outer product decomposition of matrix multiplication.
 
@@ -2933,14 +2941,14 @@ export default function MatrixRankPage({rankCases, seoData, sectionsContent, int
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
-          <DiagramFrame
+          <DiagramFrameV2
             key={'obj1-diagram'}
             id="rank-full-deficient-cases"
             title="Full rank or rank-deficient"
             source="/linear-algebra/matrix/rank"
           >
             <CaseSplit data={rankCases} variant="poster" proseStyle="cards" theme={figureTheme} />
-          </DiagramFrame>,
+          </DiagramFrameV2>,
         ]
     },
     {

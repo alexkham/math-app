@@ -1842,7 +1842,8 @@ const sectionsContent={
 
 For any real number $a$, the additive inverse is $-a$. The defining property is:
 
-$$a + (-a) = 0$$
+@academic[formula_callout:Additive Inverse in Real Numbers
+$$a + (-a) = 0$$]@
 
 The sum of a number and its additive inverse always equals zero.
 
@@ -1880,11 +1881,13 @@ $$-z = -a - bi \\quad \\text{for} \\;\\; z = a + bi$$
 
 Both the real part and the imaginary part are negated. The defining property remains unchanged:
 
-$$z + (-z) = 0$$
+@academic[formula_callout:Additive Inverse of a Complex Number
+$$z + (-z) = 0$$]@
 
 Verification is straightforward. Adding $z = a + bi$ to $-z = -a - bi$ gives:
 
-$$(a + bi) + (-a - bi) = (a + (-a)) + (b + (-b))i = 0 + 0i = 0$$
+@academic[formula_callout:Additive Inverse of a Complex Number
+$$(a + bi) + (-a - bi) = (a + (-a)) + (b + (-b))i = 0 + 0i = 0$$]@
 
 The real components cancel and the imaginary components cancel, leaving zero.
 
@@ -1938,13 +1941,19 @@ The additive inverse is the reflection of $z$ through the origin. Not across the
 
 The [modulus](!/complex-numbers/absolute-value) remains unchanged under this reflection:
 
-$$|-z| = |z|$$
+@academic[formula_callout:Geometric Interpretation
+$$|-z| = |z|$$]@
 
 Both $z$ and $-z$ lie at the same distance from the origin. They occupy opposite ends of a diameter of the circle centered at the origin with radius $|z|$.
 
 The [argument](!/complex-numbers/trigonometric-form) shifts by exactly $\\pi$ radians:
 
+@academic[formula_callout:Argument of Negative
 $$\\arg(-z) = \\arg(z) + \\pi$$
+/complex-numbers/formulas#argument_of_negative]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 If $z$ points in direction $\\theta$, then $-z$ points in direction $\\theta + \\pi$ — the exact opposite direction. A rotation of $180°$ about the origin carries $z$ to $-z$.
 
@@ -1959,31 +1968,40 @@ obj5: {
 
 Double negation returns the original number:
 
-$$-(-z) = z$$
+@academic[formula_callout:Properties of Additive Inverse
+$$-(-z) = z$$]@
 
 Taking the additive inverse twice leaves $z$ unchanged. Reflecting through the origin twice brings you back to where you started.
 
 Negation distributes over addition:
 
-$$-(z_1 + z_2) = -z_1 - z_2$$
+@academic[formula_callout:Properties of Additive Inverse
+$$-(z_1 + z_2) = -z_1 - z_2$$]@
 
 The inverse of a sum equals the sum of the inverses. This property underlies the familiar rule for expanding expressions like $-(3 + 2i + 4 - i)$.
 
 Negation and [conjugation](!/complex-numbers/complex-conjugate) commute:
 
-$$-\\overline{z} = \\overline{-z}$$
+@academic[formula_callout:Properties of Additive Inverse
+$$-\\overline{z} = \\overline{-z}$$]@
 
 It does not matter whether you conjugate first and then negate, or negate first and then conjugate. For $z = 3 + 2i$, we have $\\overline{z} = 3 - 2i$ and $-\\overline{z} = -3 + 2i$. Alternatively, $-z = -3 - 2i$ and $\\overline{-z} = -3 + 2i$. Both paths arrive at the same destination.
 
 The [modulus](!/complex-numbers/absolute-value) is unchanged:
 
-$$|-z| = |z|$$
+@academic[formula_callout:Properties of Additive Inverse
+$$|-z| = |z|$$]@
 
 Distance from the origin depends only on position, not direction.
 
 The [argument](!/complex-numbers/trigonometric-form) shifts by $\\pi$:
 
+@academic[formula_callout:Argument of Negative
 $$\\arg(-z) = \\arg(z) + \\pi$$
+/complex-numbers/formulas#argument_of_negative]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 Direction reverses completely, adding half a full rotation.`,
   before: ``,
@@ -2020,7 +2038,8 @@ obj7: {
 
 For $z = 0 = 0 + 0i$, the additive inverse is:
 
-$$-0 = -0 - 0i = 0 + 0i = 0$$
+@academic[formula_callout:The Zero Case
+$$-0 = -0 - 0i = 0 + 0i = 0$$]@
 
 Negating zero returns zero. The equation $0 + 0 = 0$ confirms the defining property: zero added to its inverse yields zero.
 
@@ -2038,13 +2057,15 @@ obj8: {
   title: `Connection to Subtraction`,
   content: `Subtraction of complex numbers is not a separate operation but rather addition in disguise. To subtract one complex number from another, add the additive inverse:
 
-$$z_1 - z_2 = z_1 + (-z_2)$$
+@academic[formula_callout:Connection to Subtraction
+$$z_1 - z_2 = z_1 + (-z_2)$$]@
 
 This definition reduces subtraction to addition, which is already well understood. All properties of subtraction follow from properties of addition combined with properties of the additive inverse.
 
 Consider $(5 + 3i) - (2 + 7i)$. The additive inverse of $2 + 7i$ is $-2 - 7i$. Adding:
 
-$$(5 + 3i) + (-2 - 7i) = (5 + (-2)) + (3 + (-7))i = 3 - 4i$$
+@academic[formula_callout:Connection to Subtraction
+$$(5 + 3i) + (-2 - 7i) = (5 + (-2)) + (3 + (-7))i = 3 - 4i$$]@
 
 This matches the component-wise subtraction rule: subtract real parts and subtract imaginary parts. The rule works precisely because subtraction means adding the inverse, and the inverse negates both components.
 
@@ -2065,7 +2086,8 @@ The existence is clear: for any $z = a + bi$, the number $-z = -a - bi$ satisfie
 
 Uniqueness requires a short argument. Suppose $w_1$ and $w_2$ are both additive inverses of $z$, meaning $z + w_1 = 0$ and $z + w_2 = 0$. Then:
 
-$$w_1 = w_1 + 0 = w_1 + (z + w_2) = (w_1 + z) + w_2 = 0 + w_2 = w_2$$
+@academic[formula_callout:Uniqueness
+$$w_1 = w_1 + 0 = w_1 + (z + w_2) = (w_1 + z) + w_2 = 0 + w_2 = w_2$$]@
 
 The two supposed inverses must be the same. No complex number admits two different additive inverses.
 
@@ -2091,7 +2113,8 @@ Confusion between $-z$ and $\\overline{z}$ underlies both mistakes. The conjugat
 
 Sign mistakes compound in subtraction. Computing $(5 + 2i) - (3 - 4i)$ requires the additive inverse of $3 - 4i$, which is $-3 + 4i$. The full calculation:
 
-$$(5 + 2i) + (-3 + 4i) = 2 + 6i$$
+@academic[formula_callout:Common Mistakes
+$$(5 + 2i) + (-3 + 4i) = 2 + 6i$$]@
 
 A common error is writing $(5 + 2i) - (3 - 4i) = 5 + 2i - 3 - 4i = 2 - 2i$, forgetting that subtracting $-4i$ means adding $+4i$. Distributing the negative sign completely — to both the real and imaginary parts of the subtracted number — eliminates this mistake.
 

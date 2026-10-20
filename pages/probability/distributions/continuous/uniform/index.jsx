@@ -1670,7 +1670,7 @@ $$\\text{IQR} = Q3 - Q1 = \\frac{a + 3b}{4} - \\frac{3a + b}{4} = \\frac{b - a}{
 
 The IQR spans exactly half the total interval width, containing the middle 50% of the distribution.
 
-### Example
+@academic[example:Example
 
 For a bus arriving uniformly between 2:00 PM and 2:30 PM (interval $[0, 30]$ minutes):
 
@@ -1688,7 +1688,7 @@ Half of arrivals occur before 2:15 PM (the [median](!/probability/median)).
 
 **IQR:** $22.5 - 7.5 = 15$ minutes
 
-The middle 50% of arrivals span a 15-minute window from 2:07:30 PM to 2:22:30 PM.
+The middle 50% of arrivals span a 15-minute window from 2:07:30 PM to 2:22:30 PM.]@
 
 ### Other Notable Percentiles
 
@@ -1749,11 +1749,11 @@ The uniform distribution represents maximum entropy—when you know only the min
 
 It also serves as the foundation for generating other distributions: by transforming uniform $[0,1]$ random variables using inverse [CDF](!/probability/cdf) methods, any continuous distribution can be simulated.
 
-### Example Application
+@academic[example:Example Application
 
 A digital clock displays time in whole minutes. When you glance at it, the actual time has passed some fraction into the current minute. This fraction is uniformly distributed on $[0, 1)$ minutes, with [mean](!/probability/expected-value) 30 seconds.
 
-For scheduling, if a bus arrives "sometime between 2:00 and 2:30" with no further information, modeling arrival time as $\\text{Uniform}(0, 30)$ minutes reflects complete uncertainty, giving an expected wait of 15 minutes.
+For scheduling, if a bus arrives "sometime between 2:00 and 2:30" with no further information, modeling arrival time as $\\text{Uniform}(0, 30)$ minutes reflects complete uncertainty, giving an expected wait of 15 minutes.]@
   `,
   before: ``,
   after: ``,

@@ -1050,6 +1050,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoivreDiagrams'
 import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1313,13 +1315,15 @@ In the condensed notation: $(\\text{cis}\\theta)^n = \\text{cis}(n\\theta)$.
 
 The formula extends naturally to complex numbers with arbitrary [modulus](!/complex-numbers/absolute-value). If $z = r\\text{cis}\\theta$, then:
 
-$$z^n = (r\\text{cis}\\theta)^n = r^n\\text{cis}(n\\theta)$$
+@academic[formula_callout:De Moivre's Formula
+$$z^n = (r\\text{cis}\\theta)^n = r^n\\text{cis}(n\\theta)$$]@
 
 The modulus raises to the $n$-th power while the argument multiplies by $n$. Both operations are elementary. The number $2\\text{cis}(30°)$ raised to the sixth power becomes $2^6\\text{cis}(180°) = 64\\text{cis}(180°) = -64$. What would require extensive algebra in rectangular form reduces to mental arithmetic in trigonometric form.
 
 The formula works for negative integers as well. Since $z^{-n} = 1/z^n$, we have:
 
-$$z^{-n} = r^{-n}\\text{cis}(-n\\theta)$$
+@academic[formula_callout:De Moivre's Formula
+$$z^{-n} = r^{-n}\\text{cis}(-n\\theta)$$]@
 
 Negative exponents invert the modulus and negate the angle multiplier, maintaining the same structural simplicity.`,
   after: ``,
@@ -1338,21 +1342,25 @@ The base case $n = 1$ holds trivially: $(\\cos\\theta + i\\sin\\theta)^1 = \\cos
 
 For the inductive step, assume the formula holds for $n = k$:
 
-$$(\\cos\\theta + i\\sin\\theta)^k = \\cos(k\\theta) + i\\sin(k\\theta)$$
+@academic[formula_callout:Proof of De Moivre's Theorem
+$$(\\cos\\theta + i\\sin\\theta)^k = \\cos(k\\theta) + i\\sin(k\\theta)$$]@
 
 We must prove it holds for $n = k + 1$. Multiply both sides by $\\cos\\theta + i\\sin\\theta$:
 
-$$(\\cos\\theta + i\\sin\\theta)^{k+1} = (\\cos(k\\theta) + i\\sin(k\\theta))(\\cos\\theta + i\\sin\\theta)$$
+@academic[formula_callout:Proof of De Moivre's Theorem
+$$(\\cos\\theta + i\\sin\\theta)^{k+1} = (\\cos(k\\theta) + i\\sin(k\\theta))(\\cos\\theta + i\\sin\\theta)$$]@
 
 The right side is a product of two numbers in trigonometric form. By the multiplication rule, we add arguments:
 
-$$= \\cos(k\\theta + \\theta) + i\\sin(k\\theta + \\theta) = \\cos((k+1)\\theta) + i\\sin((k+1)\\theta)$$
+@academic[formula_callout:Proof of De Moivre's Theorem
+$$= \\cos(k\\theta + \\theta) + i\\sin(k\\theta + \\theta) = \\cos((k+1)\\theta) + i\\sin((k+1)\\theta)$$]@
 
 This completes the induction. The theorem holds for all positive integers.
 
 Extension to negative integers follows from the reciprocal. For $n > 0$:
 
-$$z^{-n} = \\frac{1}{z^n} = \\frac{1}{r^n\\text{cis}(n\\theta)} = \\frac{1}{r^n} \\cdot \\text{cis}(-n\\theta) = r^{-n}\\text{cis}(-n\\theta)$$
+@academic[formula_callout:Proof of De Moivre's Theorem
+$$z^{-n} = \\frac{1}{z^n} = \\frac{1}{r^n\\text{cis}(n\\theta)} = \\frac{1}{r^n} \\cdot \\text{cis}(-n\\theta) = r^{-n}\\text{cis}(-n\\theta)$$]@
 
 The formula $z^n = r^n\\text{cis}(n\\theta)$ thus holds for all integers $n$, positive, negative, or zero.`,
   after: ``,
@@ -1373,11 +1381,13 @@ Step 1: Convert $1 + i$ to trigonometric form. The modulus is $|1 + i| = \\sqrt{
 
 Step 2: Apply De Moivre's theorem.
 
-$$(1 + i)^{10} = (\\sqrt{2})^{10}\\text{cis}(10 \\times 45°) = 2^5\\text{cis}(450°) = 32\\text{cis}(450°)$$
+@academic[formula_callout:Applying De Moivre's Theorem to Powers
+$$(1 + i)^{10} = (\\sqrt{2})^{10}\\text{cis}(10 \\times 45°) = 2^5\\text{cis}(450°) = 32\\text{cis}(450°)$$]@
 
 Since $450° = 360° + 90°$, the angle reduces to $90°$:
 
-$$= 32\\text{cis}(90°) = 32(\\cos 90° + i\\sin 90°) = 32(0 + i) = 32i$$
+@academic[formula_callout:Applying De Moivre's Theorem to Powers
+$$= 32\\text{cis}(90°) = 32(\\cos 90° + i\\sin 90°) = 32(0 + i) = 32i$$]@
 
 Step 3: The answer $32i$ is already in algebraic form.
 
@@ -1385,7 +1395,8 @@ Verification through direct calculation would require multiplying $1 + i$ by its
 
 Another example: find $(\\sqrt{3} - i)^6$. The modulus is $\\sqrt{3 + 1} = 2$. The argument, with $a = \\sqrt{3} > 0$ and $b = -1 < 0$, lies in the fourth quadrant: $\\theta = -30°$. So $\\sqrt{3} - i = 2\\text{cis}(-30°)$, and:
 
-$$(\\sqrt{3} - i)^6 = 2^6\\text{cis}(-180°) = 64\\text{cis}(-180°) = 64(-1) = -64$$`,
+@academic[formula_callout:Applying De Moivre's Theorem to Powers
+$$(\\sqrt{3} - i)^6 = 2^6\\text{cis}(-180°) = 64\\text{cis}(-180°) = 64(-1) = -64$$]@`,
   after: ``,
   link: '',
 },
@@ -1423,7 +1434,8 @@ $$z_k = R^{1/n} \\bigl[\\cos\\!\\left(\\tfrac{\\phi + 2\\pi k}{n}\\right) + i\\s
 
 In degree measure:
 
-$$z_k = R^{1/n}\\text{cis}\\left(\\frac{\\phi + 360°k}{n}\\right) \\quad \\text{for } k = 0, 1, 2, \\ldots, n-1$$
+@academic[formula_callout:The Formula for $n$-th Roots
+$$z_k = R^{1/n}\\text{cis}\\left(\\frac{\\phi + 360°k}{n}\\right) \\quad \\text{for } k = 0, 1, 2, \\ldots, n-1$$]@
 
 Each root has the same modulus: $|z_k| = R^{1/n}$, the positive real $n$-th root of the original modulus. The roots differ only in their arguments.
 
@@ -1431,7 +1443,8 @@ The first root ($k = 0$) has argument $\\phi/n$, the original angle divided by $
 
 Consider finding the cube roots of $8$. Write $8 = 8\\text{cis}(0°)$, so $R = 8$ and $\\phi = 0°$. The formula gives:
 
-$$z_k = 8^{1/3}\\text{cis}\\left(\\frac{0° + 360°k}{3}\\right) = 2\\text{cis}(120°k)$$
+@academic[formula_callout:The Formula for $n$-th Roots
+$$z_k = 8^{1/3}\\text{cis}\\left(\\frac{0° + 360°k}{3}\\right) = 2\\text{cis}(120°k)$$]@
 
 For $k = 0$: $z_0 = 2\\text{cis}(0°) = 2$.
 For $k = 1$: $z_1 = 2\\text{cis}(120°) = 2(-\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i) = -1 + \\sqrt{3}i$.
@@ -1543,7 +1556,8 @@ Geometrically, the roots form a regular polygon centered at the origin. Their ve
 
 The product of all $n$-th roots of unity follows a pattern:
 
-$$\\prod_{k=0}^{n-1} z_k = (-1)^{n+1}$$
+@academic[formula_callout:Properties of Roots of Unity
+$$\\prod_{k=0}^{n-1} z_k = (-1)^{n+1}$$]@
 
 For odd $n$, the product is $1$. For even $n$, the product is $-1$. This connects to the constant term in the polynomial $z^n - 1$, which factors as $(z - z_0)(z - z_1)\\cdots(z - z_{n-1})$.
 
@@ -1795,8 +1809,35 @@ const schemas = {
     }),
   };
 
+  const unityParityCases = {
+    prefaceTitle: 'Odd or even n',
+    preface: 'The $n$-th roots of unity always sum to zero. Their product and which of them are real depend on whether $n$ is odd or even.',
+    conclusionTitle: 'Why',
+    conclusion: 'The product is the constant term of $z^n - 1 = (z - z_0)(z - z_1)\\cdots(z - z_{n-1})$, which gives $(-1)^{n+1}$. Every other root has its conjugate among the roots.',
+    parent: {
+      kicker: 'Roots of unity',
+      formula: '$\\prod_{k=0}^{n-1} z_k = (-1)^{n+1}$',
+      splitBy: 'the parity of $n$',
+    },
+    cases: [
+      {
+        id: 'odd', condition: '$n$ odd',
+        count: { n: '1', label: 'product of all roots' },
+        headline: 'Product is 1',
+        desc: 'only $z = 1$ sits on the real axis',
+      },
+      {
+        id: 'even', condition: '$n$ even',
+        count: { n: '−1', label: 'product of all roots' },
+        headline: 'Product is −1',
+        desc: '$z = 1$ and $z = -1$ sit on the real axis',
+      },
+    ],
+  };
+
   return {
   props:{
+    unityParityCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1819,7 +1860,9 @@ const schemas = {
 
 
 
-export default function DeMoivreTheoremPage({
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function DeMoivreTheoremPage({unityParityCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1953,6 +1996,14 @@ export default function DeMoivreTheoremPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-diagram'}
+            id="roots-of-unity-parity-cases"
+            title="Roots of unity: odd or even n"
+            source="/complex-numbers/demoivre-theorem"
+          >
+            <CaseSplit data={unityParityCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

@@ -216,11 +216,14 @@ const sectionsContent = {
     title: `Like Radicals`,
     content: `Like radicals share the same index and the same radicand. Only like radicals can be added or subtracted.
 
-$$3\\sqrt{5} \\text{ and } 7\\sqrt{5} \\quad \\text{are like radicals}$$
+@academic[formula_callout:Like Radicals
+$$3\\sqrt{5} \\text{ and } 7\\sqrt{5} \\quad \\text{are like radicals}$$]@
 
-$$\\sqrt{3} \\text{ and } \\sqrt{5} \\quad \\text{are not like — different radicands}$$
+@academic[formula_callout:Like Radicals
+$$\\sqrt{3} \\text{ and } \\sqrt{5} \\quad \\text{are not like — different radicands}$$]@
 
-$$\\sqrt{2} \\text{ and } \\sqrt[3]{2} \\quad \\text{are not like — different indices}$$
+@academic[formula_callout:Like Radicals
+$$\\sqrt{2} \\text{ and } \\sqrt[3]{2} \\quad \\text{are not like — different indices}$$]@
 
 The concept parallels like terms in algebra. Just as $3x$ and $7x$ can combine but $3x$ and $7y$ cannot, radicals combine only when their radical parts match exactly.
 
@@ -234,21 +237,26 @@ Recognizing like radicals sometimes requires [simplification](!/algebra/roots/si
     title: `Adding and Subtracting Like Radicals`,
     content: `To add or subtract like radicals, combine the coefficients and keep the radical unchanged.
 
-$$3\\sqrt{5} + 7\\sqrt{5} = 10\\sqrt{5}$$
+@academic[formula_callout:Adding and Subtracting Like Radicals
+$$3\\sqrt{5} + 7\\sqrt{5} = 10\\sqrt{5}$$]@
 
-$$8\\sqrt[3]{2} - 3\\sqrt[3]{2} = 5\\sqrt[3]{2}$$
+@academic[formula_callout:Adding and Subtracting Like Radicals
+$$8\\sqrt[3]{2} - 3\\sqrt[3]{2} = 5\\sqrt[3]{2}$$]@
 
-$$\\frac{1}{2}\\sqrt{7} + \\frac{3}{4}\\sqrt{7} = \\frac{5}{4}\\sqrt{7}$$
+@academic[formula_callout:Adding and Subtracting Like Radicals
+$$\\frac{1}{2}\\sqrt{7} + \\frac{3}{4}\\sqrt{7} = \\frac{5}{4}\\sqrt{7}$$]@
 
 Unlike radicals cannot be combined:
 
-$$\\sqrt{2} + \\sqrt{3}$$
+@academic[formula_callout:Adding and Subtracting Like Radicals
+$$\\sqrt{2} + \\sqrt{3}$$]@
 
 This expression is already in simplest form. No further reduction is possible.
 
 When radicals appear unlike but can be simplified to like form:
 
-$$\\sqrt{12} + \\sqrt{27} = 2\\sqrt{3} + 3\\sqrt{3} = 5\\sqrt{3}$$
+@academic[formula_callout:Adding and Subtracting Like Radicals
+$$\\sqrt{12} + \\sqrt{27} = 2\\sqrt{3} + 3\\sqrt{3} = 5\\sqrt{3}$$]@
 
 Always [simplify](!/algebra/roots/simplifying) each radical before attempting to add or subtract.`,
     before: ``,
@@ -260,23 +268,29 @@ Always [simplify](!/algebra/roots/simplifying) each radical before attempting to
     title: `Multiplying Radicals with the Same Index`,
     content: `When radicals share the same index, multiply the radicands and keep the index.
 
-$$\\sqrt{a} \\cdot \\sqrt{b} = \\sqrt{ab}$$
+@academic[formula_callout:Multiplying Radicals with the Same Index
+$$\\sqrt{a} \\cdot \\sqrt{b} = \\sqrt{ab}$$]@
 
 This is the product rule from [radical rules](!/algebra/roots/radical-rules).
 
-$$\\sqrt{3} \\cdot \\sqrt{12} = \\sqrt{36} = 6$$
+@academic[formula_callout:Multiplying Radicals with the Same Index
+$$\\sqrt{3} \\cdot \\sqrt{12} = \\sqrt{36} = 6$$]@
 
-$$\\sqrt[3]{4} \\cdot \\sqrt[3]{2} = \\sqrt[3]{8} = 2$$
+@academic[formula_callout:Multiplying Radicals with the Same Index
+$$\\sqrt[3]{4} \\cdot \\sqrt[3]{2} = \\sqrt[3]{8} = 2$$]@
 
 When coefficients are present, multiply them separately:
 
-$$3\\sqrt{2} \\cdot 4\\sqrt{5} = 12\\sqrt{10}$$
+@academic[formula_callout:Multiplying Radicals with the Same Index
+$$3\\sqrt{2} \\cdot 4\\sqrt{5} = 12\\sqrt{10}$$]@
 
-$$(2\\sqrt{3})^2 = 2^2 \\cdot (\\sqrt{3})^2 = 4 \\cdot 3 = 12$$
+@academic[formula_callout:Multiplying Radicals with the Same Index
+$$(2\\sqrt{3})^2 = 2^2 \\cdot (\\sqrt{3})^2 = 4 \\cdot 3 = 12$$]@
 
 Multiplication often produces results that can be [simplified](!/algebra/roots/simplifying):
 
-$$\\sqrt{6} \\cdot \\sqrt{8} = \\sqrt{48} = \\sqrt{16 \\cdot 3} = 4\\sqrt{3}$$`,
+@academic[formula_callout:Multiplying Radicals with the Same Index
+$$\\sqrt{6} \\cdot \\sqrt{8} = \\sqrt{48} = \\sqrt{16 \\cdot 3} = 4\\sqrt{3}$$]@`,
     before: ``,
     after: ``,
     link: '',
@@ -286,19 +300,24 @@ $$\\sqrt{6} \\cdot \\sqrt{8} = \\sqrt{48} = \\sqrt{16 \\cdot 3} = 4\\sqrt{3}$$`,
     title: `Multiplying Radicals with Different Indices`,
     content: `When indices differ, the product rule does not apply directly. Convert to [rational exponents](!/algebra/roots/rational-exponents), find a common denominator, then proceed.
 
-$$\\sqrt{2} \\cdot \\sqrt[3]{2} = 2^{1/2} \\cdot 2^{1/3}$$
+@academic[formula_callout:Multiplying Radicals with Different Indices
+$$\\sqrt{2} \\cdot \\sqrt[3]{2} = 2^{1/2} \\cdot 2^{1/3}$$]@
 
 Find a common denominator for the exponents:
 
-$$= 2^{3/6} \\cdot 2^{2/6} = 2^{5/6} = \\sqrt[6]{2^5} = \\sqrt[6]{32}$$
+@academic[formula_callout:Multiplying Radicals with Different Indices
+$$= 2^{3/6} \\cdot 2^{2/6} = 2^{5/6} = \\sqrt[6]{2^5} = \\sqrt[6]{32}$$]@
 
 Alternatively, convert both radicals to the same index first:
 
-$$\\sqrt{2} = \\sqrt[6]{2^3} = \\sqrt[6]{8}$$
+@academic[formula_callout:Multiplying Radicals with Different Indices
+$$\\sqrt{2} = \\sqrt[6]{2^3} = \\sqrt[6]{8}$$]@
 
-$$\\sqrt[3]{2} = \\sqrt[6]{2^2} = \\sqrt[6]{4}$$
+@academic[formula_callout:Multiplying Radicals with Different Indices
+$$\\sqrt[3]{2} = \\sqrt[6]{2^2} = \\sqrt[6]{4}$$]@
 
-$$\\sqrt[6]{8} \\cdot \\sqrt[6]{4} = \\sqrt[6]{32}$$
+@academic[formula_callout:Multiplying Radicals with Different Indices
+$$\\sqrt[6]{8} \\cdot \\sqrt[6]{4} = \\sqrt[6]{32}$$]@
 
 Both methods reach the same result. The exponent approach is often more efficient for complex expressions.`,
     before: ``,
@@ -310,19 +329,24 @@ Both methods reach the same result. The exponent approach is often more efficien
     title: `Dividing Radicals`,
     content: `Division follows the quotient rule from [radical rules](!/algebra/roots/radical-rules):
 
-$$\\frac{\\sqrt{a}}{\\sqrt{b}} = \\sqrt{\\frac{a}{b}}$$
+@academic[formula_callout:Dividing Radicals
+$$\\frac{\\sqrt{a}}{\\sqrt{b}} = \\sqrt{\\frac{a}{b}}$$]@
 
-$$\\frac{\\sqrt{50}}{\\sqrt{2}} = \\sqrt{\\frac{50}{2}} = \\sqrt{25} = 5$$
+@academic[formula_callout:Dividing Radicals
+$$\\frac{\\sqrt{50}}{\\sqrt{2}} = \\sqrt{\\frac{50}{2}} = \\sqrt{25} = 5$$]@
 
-$$\\frac{\\sqrt[3]{54}}{\\sqrt[3]{2}} = \\sqrt[3]{\\frac{54}{2}} = \\sqrt[3]{27} = 3$$
+@academic[formula_callout:Dividing Radicals
+$$\\frac{\\sqrt[3]{54}}{\\sqrt[3]{2}} = \\sqrt[3]{\\frac{54}{2}} = \\sqrt[3]{27} = 3$$]@
 
 With coefficients:
 
-$$\\frac{12\\sqrt{15}}{4\\sqrt{3}} = \\frac{12}{4} \\cdot \\sqrt{\\frac{15}{3}} = 3\\sqrt{5}$$
+@academic[formula_callout:Dividing Radicals
+$$\\frac{12\\sqrt{15}}{4\\sqrt{3}} = \\frac{12}{4} \\cdot \\sqrt{\\frac{15}{3}} = 3\\sqrt{5}$$]@
 
 When indices differ, convert to [rational exponents](!/algebra/roots/rational-exponents):
 
-$$\\frac{\\sqrt{8}}{\\sqrt[3]{4}} = \\frac{2^{3/2}}{2^{2/3}} = 2^{3/2 - 2/3} = 2^{9/6 - 4/6} = 2^{5/6} = \\sqrt[6]{32}$$
+@academic[formula_callout:Dividing Radicals
+$$\\frac{\\sqrt{8}}{\\sqrt[3]{4}} = \\frac{2^{3/2}}{2^{2/3}} = 2^{3/2 - 2/3} = 2^{9/6 - 4/6} = 2^{5/6} = \\sqrt[6]{32}$$]@
 
 If the result leaves a radical in the denominator, [rationalize](!/algebra/roots/simplifying) to achieve simplest form.`,
     before: ``,
@@ -340,15 +364,19 @@ Conjugate of $\\sqrt{a} - \\sqrt{b}$ is $\\sqrt{a} + \\sqrt{b}$.
 
 The key property: multiplying conjugates eliminates radicals.
 
-$$(a + \\sqrt{b})(a - \\sqrt{b}) = a^2 - b$$
+@academic[formula_callout:Conjugates
+$$(a + \\sqrt{b})(a - \\sqrt{b}) = a^2 - b$$]@
 
-$$(\\sqrt{a} + \\sqrt{b})(\\sqrt{a} - \\sqrt{b}) = a - b$$
+@academic[formula_callout:Conjugates
+$$(\\sqrt{a} + \\sqrt{b})(\\sqrt{a} - \\sqrt{b}) = a - b$$]@
 
 These are difference of squares patterns.
 
-$$( 3 + \\sqrt{2})(3 - \\sqrt{2}) = 9 - 2 = 7$$
+@academic[formula_callout:Conjugates
+$$( 3 + \\sqrt{2})(3 - \\sqrt{2}) = 9 - 2 = 7$$]@
 
-$$(\\sqrt{7} + \\sqrt{3})(\\sqrt{7} - \\sqrt{3}) = 7 - 3 = 4$$
+@academic[formula_callout:Conjugates
+$$(\\sqrt{7} + \\sqrt{3})(\\sqrt{7} - \\sqrt{3}) = 7 - 3 = 4$$]@
 
 Conjugates are essential for [rationalizing denominators](!/algebra/roots/simplifying) and appear in solving certain [radical equations](!/algebra/roots/equations).`,
     before: ``,
@@ -360,21 +388,27 @@ Conjugates are essential for [rationalizing denominators](!/algebra/roots/simpli
     title: `Expanding Products with Radicals`,
     content: `Binomials containing radicals expand using the [distributive property](!/arithmetic/properties#5), just like algebraic binomials.
 
-$$(2 + \\sqrt{3})(4 - \\sqrt{3})$$
+@academic[formula_callout:Expanding Products with Radicals
+$$(2 + \\sqrt{3})(4 - \\sqrt{3})$$]@
 
 Apply FOIL:
 
-$$= 2 \\cdot 4 + 2 \\cdot (-\\sqrt{3}) + \\sqrt{3} \\cdot 4 + \\sqrt{3} \\cdot (-\\sqrt{3})$$
+@academic[formula_callout:Expanding Products with Radicals
+$$= 2 \\cdot 4 + 2 \\cdot (-\\sqrt{3}) + \\sqrt{3} \\cdot 4 + \\sqrt{3} \\cdot (-\\sqrt{3})$$]@
 
-$$= 8 - 2\\sqrt{3} + 4\\sqrt{3} - 3$$
+@academic[formula_callout:Expanding Products with Radicals
+$$= 8 - 2\\sqrt{3} + 4\\sqrt{3} - 3$$]@
 
-$$= 5 + 2\\sqrt{3}$$
+@academic[formula_callout:Expanding Products with Radicals
+$$= 5 + 2\\sqrt{3}$$]@
 
 Squaring a binomial:
 
-$$(\\sqrt{5} + \\sqrt{2})^2 = (\\sqrt{5})^2 + 2\\sqrt{5}\\sqrt{2} + (\\sqrt{2})^2$$
+@academic[formula_callout:Expanding Products with Radicals
+$$(\\sqrt{5} + \\sqrt{2})^2 = (\\sqrt{5})^2 + 2\\sqrt{5}\\sqrt{2} + (\\sqrt{2})^2$$]@
 
-$$= 5 + 2\\sqrt{10} + 2 = 7 + 2\\sqrt{10}$$
+@academic[formula_callout:Expanding Products with Radicals
+$$= 5 + 2\\sqrt{10} + 2 = 7 + 2\\sqrt{10}$$]@
 
 Common error: $(a + \\sqrt{b})^2 \\neq a^2 + b$. The middle term $2a\\sqrt{b}$ must not be forgotten.
 
@@ -388,15 +422,19 @@ These expansions appear frequently in [radical equations](!/algebra/roots/equati
     title: `Squaring Radical Expressions`,
     content: `Squaring eliminates square roots:
 
-$$(\\sqrt{x})^2 = x$$
+@academic[formula_callout:Squaring Radical Expressions
+$$(\\sqrt{x})^2 = x$$]@
 
-$$(3\\sqrt{5})^2 = 9 \\cdot 5 = 45$$
+@academic[formula_callout:Squaring Radical Expressions
+$$(3\\sqrt{5})^2 = 9 \\cdot 5 = 45$$]@
 
 For binomials, expand fully:
 
-$$(\\sqrt{x} + 3)^2 = x + 6\\sqrt{x} + 9$$
+@academic[formula_callout:Squaring Radical Expressions
+$$(\\sqrt{x} + 3)^2 = x + 6\\sqrt{x} + 9$$]@
 
-$$(\\sqrt{x + 1} - 2)^2 = (x + 1) - 4\\sqrt{x + 1} + 4 = x + 5 - 4\\sqrt{x + 1}$$
+@academic[formula_callout:Squaring Radical Expressions
+$$(\\sqrt{x + 1} - 2)^2 = (x + 1) - 4\\sqrt{x + 1} + 4 = x + 5 - 4\\sqrt{x + 1}$$]@
 
 When solving [radical equations](!/algebra/roots/equations), squaring both sides is the primary technique for eliminating radicals. The expressions above show what results from squaring — and why squaring a binomial with a radical does not fully eliminate the radical unless conjugates are involved.
 

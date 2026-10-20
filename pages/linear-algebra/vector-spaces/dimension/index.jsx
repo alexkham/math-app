@@ -2301,6 +2301,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -3006,7 +3008,7 @@ For example, in $\\mathbb{R}^3$, let $W_1$ be the $xy$-plane (dimension $2$) and
 
 @academic[formula_callout:Rank-Nullity Theorem (Matrix Form)
 $$\\dim(\\text{Col}\\,A) + \\dim(\\text{Null}\\,A) = n$$
-/linear-algebra/formulas#rank_nullity_theorem_matrix_form]@
+/linear-algebra/formulas#rank-nullity_theorem_matrix_form]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
@@ -3178,8 +3180,25 @@ const schemas = {
     }),
   };
 
+  const subspaceDimLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Subspaces of $\\mathbb{R}^3$ by dimension',
+    preface: 'If $W$ is a subspace of $V$, then $\\dim(W) \\leq \\dim(V)$, with equality only when $W = V$. In $\\mathbb{R}^3$ that leaves exactly four possible dimensions.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Always a whole number',
+    conclusion: 'There is no subspace of dimension $\\frac{3}{2}$ or $\\pi$: dimension is always a non-negative integer. See [subspaces](!/linear-algebra/vector-spaces/subspaces) for these four kinds.',
+    axis: { top: 'smallest', label: 'dimension', bottom: 'largest' },
+    levels: [
+      { id: 'zero', name: 'The zero vector', sub: '$\\dim = 0$' },
+      { id: 'line', name: 'Line through the origin', sub: '$\\dim = 1$' },
+      { id: 'plane', name: 'Plane through the origin', sub: '$\\dim = 2$' },
+      { id: 'space', name: '$\\mathbb{R}^3$ itself', sub: '$\\dim = 3$' },
+    ],
+  };
+
 return {
   props:{
+    subspaceDimLevels,
     demoUnits,
     sectionsContent,
     introContent,
@@ -3202,7 +3221,9 @@ return {
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
 
-export default function DimensionPage({seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas, demoUnits}) {
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function DimensionPage({subspaceDimLevels, seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3290,6 +3311,14 @@ export default function DimensionPage({seoData, sectionsContent, introContent, s
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrameV2
+            key={'obj7-diagram'}
+            id="subspace-dimension-ladder"
+            title="Subspaces of R³ by dimension"
+            source="/linear-algebra/vector-spaces/dimension"
+          >
+            <Hierarchy data={subspaceDimLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+          </DiagramFrameV2>,
         ]
     },
     {

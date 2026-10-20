@@ -287,7 +287,8 @@ Integrals involving powers of sine and cosine require strategic use of identitie
 
 **Both powers even:** Use half-angle identities:
 
-$$\\sin^2 x = \\frac{1 - \\cos 2x}{2} \\qquad \\cos^2 x = \\frac{1 + \\cos 2x}{2}$$
+@academic[formula_callout:Trigonometric Integrals
+$$\\sin^2 x = \\frac{1 - \\cos 2x}{2} \\qquad \\cos^2 x = \\frac{1 + \\cos 2x}{2}$$]@
 
 @academic[example:Example
 

@@ -939,6 +939,8 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import leastSquaresDiagrams from '@/app/components/linear-algebra copy/matrix/leastSquaresDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -1294,7 +1296,8 @@ const sectionsContent = {
 
 When no exact solution exists, the goal shifts from solving $A\\mathbf{x} = \\mathbf{b}$ to minimizing the error:
 
-$$\\hat{\\mathbf{x}} = \\arg\\min_{\\mathbf{x}} \\|A\\mathbf{x} - \\mathbf{b}\\|^2$$
+@academic[formula_callout:The Problem
+$$\\hat{\\mathbf{x}} = \\arg\\min_{\\mathbf{x}} \\|A\\mathbf{x} - \\mathbf{b}\\|^2$$]@
 
 The quantity $\\|A\\mathbf{x} - \\mathbf{b}\\|^2 = \\sum_i (A\\mathbf{x} - \\mathbf{b})_i^2$ is the sum of squared residuals. The vector $\\hat{\\mathbf{x}}$ that minimizes this sum is the least-squares solution.`,
     before: ``,
@@ -1364,7 +1367,7 @@ These are the normal equations. They form a square $n \\times n$ system regardle
 The [matrix](!/linear-algebra/matrix) $A^TA$ is always [symmetric](!/linear-algebra/matrix/types) and positive semi-definite. When $A$ has full column rank (the columns are [linearly independent](!/linear-algebra/vector-spaces/linear-independence)), $A^TA$ is positive definite and [invertible](!/linear-algebra/matrix/inverse), giving a unique least-squares solution:
 
 @academic[formula_callout:least_squares_solution|Least Squares Solution|$$\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$$]@
-@academic[formulas_link:/linear-algebra/formulas#least_squares_solution]@
+@academic[formulas_link:/linear-algebra/formulas#least-squares_solution]@
 
 When $A$ does not have full column rank, $A^TA$ is singular and the normal equations have infinitely many solutions. All produce the same projection $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}}$, but the $\\hat{\\mathbf{x}}$ vectors differ. The minimum-norm solution — the one with smallest $\\|\\hat{\\mathbf{x}}\\|$ — is selected by the pseudoinverse.`,
     before: ``,
@@ -1377,15 +1380,18 @@ When $A$ does not have full column rank, $A^TA$ is singular and the normal equat
 
 The model $y_i = c_0 + c_1 x_i$ for each data point gives the system $A\\mathbf{c} = \\mathbf{y}$ with
 
-$$A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\\\ 1 & 3 \\\\ 1 & 4 \\end{pmatrix}, \\quad \\mathbf{y} = \\begin{pmatrix} 2 \\\\ 3 \\\\ 6 \\\\ 7 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: Fitting a Line
+$$A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\\\ 1 & 3 \\\\ 1 & 4 \\end{pmatrix}, \\quad \\mathbf{y} = \\begin{pmatrix} 2 \\\\ 3 \\\\ 6 \\\\ 7 \\end{pmatrix}$$]@
 
 Four equations in two unknowns — overdetermined. The normal equations:
 
-$$A^TA = \\begin{pmatrix} 4 & 10 \\\\ 10 & 30 \\end{pmatrix}, \\quad A^T\\mathbf{y} = \\begin{pmatrix} 18 \\\\ 53 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: Fitting a Line
+$$A^TA = \\begin{pmatrix} 4 & 10 \\\\ 10 & 30 \\end{pmatrix}, \\quad A^T\\mathbf{y} = \\begin{pmatrix} 18 \\\\ 53 \\end{pmatrix}$$]@
 
 Solving: $\\det(A^TA) = 120 - 100 = 20$. $(A^TA)^{-1} = \\frac{1}{20}\\begin{pmatrix} 30 & -10 \\\\ -10 & 4 \\end{pmatrix}$.
 
-$$\\hat{\\mathbf{c}} = \\frac{1}{20}\\begin{pmatrix} 30 & -10 \\\\ -10 & 4 \\end{pmatrix}\\begin{pmatrix} 18 \\\\ 53 \\end{pmatrix} = \\frac{1}{20}\\begin{pmatrix} 540 - 530 \\\\ -180 + 212 \\end{pmatrix} = \\frac{1}{20}\\begin{pmatrix} 10 \\\\ 32 \\end{pmatrix} = \\begin{pmatrix} 0.5 \\\\ 1.6 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: Fitting a Line
+$$\\hat{\\mathbf{c}} = \\frac{1}{20}\\begin{pmatrix} 30 & -10 \\\\ -10 & 4 \\end{pmatrix}\\begin{pmatrix} 18 \\\\ 53 \\end{pmatrix} = \\frac{1}{20}\\begin{pmatrix} 540 - 530 \\\\ -180 + 212 \\end{pmatrix} = \\frac{1}{20}\\begin{pmatrix} 10 \\\\ 32 \\end{pmatrix} = \\begin{pmatrix} 0.5 \\\\ 1.6 \\end{pmatrix}$$]@
 
 The best-fit line is $y = 0.5 + 1.6x$. The residuals are $2 - 2.1 = -0.1$, $3 - 3.7 = -0.7$, $6 - 5.3 = 0.7$, $7 - 6.9 = 0.1$. Their sum of squares $0.01 + 0.49 + 0.49 + 0.01 = 1.0$ is the minimum achievable error for any line through these data.`,
     before: ``,
@@ -1398,7 +1404,8 @@ The best-fit line is $y = 0.5 + 1.6x$. The residuals are $2 - 2.1 = -0.1$, $3 - 
 
 The design matrix gains a third column:
 
-$$A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 4 \\\\ 1 & 3 & 9 \\\\ 1 & 4 & 16 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: Fitting a Parabola
+$$A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 4 \\\\ 1 & 3 & 9 \\\\ 1 & 4 & 16 \\end{pmatrix}$$]@
 
 The normal equations $A^TA\\hat{\\mathbf{c}} = A^T\\mathbf{y}$ now form a $3 \\times 3$ system. The machinery is identical — only the model matrix changes. A higher-degree model provides a closer fit (the residual sum of squares cannot increase when the model gains flexibility), but it also risks fitting noise rather than signal.
 
@@ -1411,7 +1418,8 @@ The framework generalizes to any linear model: $y = c_0 f_0(x) + c_1 f_1(x) + \\
     title: `The Projection Matrix`,
     content: `The [projection](!/linear-algebra/orthogonality/projections) of $\\mathbf{b}$ onto the column space is $\\hat{\\mathbf{b}} = P\\mathbf{b}$ where
 
-$$P = A(A^TA)^{-1}A^T$$
+@academic[formula_callout:The Projection Matrix
+$$P = A(A^TA)^{-1}A^T$$]@
 
 When the columns of $A$ are [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) ($A = Q$ with $Q^TQ = I$), this simplifies to $P = QQ^T$.
 
@@ -1419,7 +1427,8 @@ The projection matrix is [symmetric](!/linear-algebra/matrix/types) ($P^T = P$) 
 
 The minimum squared error is
 
-$$\\|\\mathbf{r}\\|^2 = \\|(I - P)\\mathbf{b}\\|^2 = \\|\\mathbf{b}\\|^2 - \\|P\\mathbf{b}\\|^2$$
+@academic[formula_callout:The Projection Matrix
+$$\\|\\mathbf{r}\\|^2 = \\|(I - P)\\mathbf{b}\\|^2 = \\|\\mathbf{b}\\|^2 - \\|P\\mathbf{b}\\|^2$$]@
 
 by the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product), since $P\\mathbf{b}$ and $(I - P)\\mathbf{b}$ are orthogonal.`,
     before: ``,
@@ -1444,7 +1453,7 @@ When $A$ does not have full column rank, the Moore-Penrose pseudoinverse $A^+$ i
 Substituting $A = QR$ into $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ gives $R^TQ^TQR\\hat{\\mathbf{x}} = R^TQ^T\\mathbf{b}$. Since $Q^TQ = I$, this simplifies to $R^TR\\hat{\\mathbf{x}} = R^TQ^T\\mathbf{b}$. Multiplying both sides by $(R^T)^{-1}$:
 
 @academic[formula_callout:least_squares_via_qr|Least Squares via QR|$$R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$$]@
-@academic[formulas_link:/linear-algebra/formulas#least_squares_via_qr]@
+@academic[formulas_link:/linear-algebra/formulas#least-squares_via_qr]@
 
 The right-hand side $Q^T\\mathbf{b}$ is a vector of $n$ dot products. The left-hand side is an upper [triangular](!/linear-algebra/matrix/types) system, solved by back substitution.
 
@@ -1472,7 +1481,8 @@ The projection matrix $P = X(X^TX)^{-1}X^T$ is called the hat matrix in statisti
 
 By the Pythagorean theorem, since $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}}$ and $\\mathbf{r} = \\mathbf{b} - \\hat{\\mathbf{b}}$ are perpendicular:
 
-$$\\|\\mathbf{b}\\|^2 = \\|\\hat{\\mathbf{b}}\\|^2 + \\|\\mathbf{r}\\|^2$$
+@academic[formula_callout:The Minimum Error
+$$\\|\\mathbf{b}\\|^2 = \\|\\hat{\\mathbf{b}}\\|^2 + \\|\\mathbf{r}\\|^2$$]@
 
 The error is what remains after the projection accounts for as much of $\\mathbf{b}$ as possible. The ratio $\\|\\hat{\\mathbf{b}}\\|^2 / \\|\\mathbf{b}\\|^2$ (computed with centered data in regression) is the coefficient of determination $R^2$ — the fraction of the total variation explained by the model. An $R^2$ close to $1$ means the column space captures nearly all of $\\mathbf{b}$; close to $0$ means the model explains little.
 
@@ -1648,8 +1658,36 @@ const schemas = {
     }),
   };
 
+  const normalEqCases = {
+    prefaceTitle: 'One question about the columns',
+    preface: 'The normal equations are always a square $n \\times n$ system, and $A^TA$ is always symmetric and positive semi-definite. Whether the least-squares solution is unique depends on the columns of $A$.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'Every solution produces the same projection $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}}$; only the $\\hat{\\mathbf{x}}$ vectors differ.',
+    parent: {
+      kicker: 'Normal equations',
+      formula: '$A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$',
+      splitBy: 'whether $A$ has full column rank',
+    },
+    cases: [
+      {
+        id: 'full', condition: 'full column rank',
+        count: { n: '1', label: 'least-squares solution' },
+        headline: 'Unique',
+        desc: '$A^TA$ is positive definite and invertible',
+        formula: '$\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$',
+      },
+      {
+        id: 'deficient', condition: 'not full column rank',
+        count: { n: '∞', label: 'solutions' },
+        headline: 'Infinitely many',
+        desc: '$A^TA$ is singular; the pseudoinverse selects the minimum-norm solution',
+      },
+    ],
+  };
+
   return {
   props:{
+    normalEqCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1670,7 +1708,9 @@ const schemas = {
    }
 
 // export default function LeastSquaresPage({seoData,sectionsContent , introContent}) {
-export default function LeastSquaresPage({
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function LeastSquaresPage({normalEqCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1729,6 +1769,14 @@ export default function LeastSquaresPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrameV2
+            key={'obj3-diagram'}
+            id="normal-equations-rank-cases"
+            title="Normal equations: unique or infinitely many"
+            source="/linear-algebra/orthogonality/least-squares"
+          >
+            <CaseSplit data={normalEqCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrameV2>,
                   <div key={'unit-normal'} dangerouslySetInnerHTML={{ __html: demoUnits.normal }} />,
           `These equations are the classical route and the least numerically stable one, which is why QR is preferred in practice.`,
         ]

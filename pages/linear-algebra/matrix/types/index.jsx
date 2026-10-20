@@ -1219,7 +1219,8 @@ Only square matrices have a [determinant](!/linear-algebra/determinants). Only s
 
 For example,
 
-$$I_3 = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$$
+@academic[formula_callout:The Identity Matrix
+$$I_3 = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$$]@
 
 It is the multiplicative identity, leaving any compatible matrix unchanged:
 
@@ -1242,14 +1243,16 @@ The identity is simultaneously diagonal, symmetric, orthogonal, upper triangular
 
 Diagonal matrices are the easiest matrices to work with. Their arithmetic reduces to operations on the diagonal entries alone:
 
-$$\\text{diag}(d_1, \\dots, d_n) \\cdot \\text{diag}(e_1, \\dots, e_n) = \\text{diag}(d_1 e_1, \\dots, d_n e_n)$$
+@academic[formula_callout:Diagonal Matrices
+$$\\text{diag}(d_1, \\dots, d_n) \\cdot \\text{diag}(e_1, \\dots, e_n) = \\text{diag}(d_1 e_1, \\dots, d_n e_n)$$]@
 
 Powers act entry-wise on the diagonal:
 
 @academic[formula_callout:diagonal_matrix_power|Diagonal Matrix Power|$$D^k = \\text{diag}(d_1^k, \\dots, d_n^k)$$]@
 @academic[formulas_link:/linear-algebra/formulas#diagonal_matrix_power]@
 
-$$D^{-1} = \\text{diag}(1/d_1, \\dots, 1/d_n)$$
+@academic[formula_callout:Diagonal Matrices
+$$D^{-1} = \\text{diag}(1/d_1, \\dots, 1/d_n)$$]@
 
 The inverse exists if and only if every diagonal entry is nonzero. The determinant is the product of the diagonal entries:
 
@@ -1265,11 +1268,13 @@ and the eigenvalues are the diagonal entries themselves. As a transformation, a 
     title: `Triangular Matrices`,
     content: `An upper triangular matrix has all entries below the main diagonal equal to zero:
 
-$$U = \\begin{pmatrix} u_{11} & u_{12} & u_{13} \\\\ 0 & u_{22} & u_{23} \\\\ 0 & 0 & u_{33} \\end{pmatrix}$$
+@academic[formula_callout:Triangular Matrices
+$$U = \\begin{pmatrix} u_{11} & u_{12} & u_{13} \\\\ 0 & u_{22} & u_{23} \\\\ 0 & 0 & u_{33} \\end{pmatrix}$$]@
 
 A lower triangular matrix has all entries above the main diagonal equal to zero:
 
-$$L = \\begin{pmatrix} l_{11} & 0 & 0 \\\\ l_{21} & l_{22} & 0 \\\\ l_{31} & l_{32} & l_{33} \\end{pmatrix}$$
+@academic[formula_callout:Triangular Matrices
+$$L = \\begin{pmatrix} l_{11} & 0 & 0 \\\\ l_{21} & l_{22} & 0 \\\\ l_{31} & l_{32} & l_{33} \\end{pmatrix}$$]@
 
 Triangular matrices share several convenient properties with diagonal matrices. The [determinant](!/linear-algebra/determinants) is the product of the diagonal entries:
 
@@ -1287,7 +1292,8 @@ These properties make triangular matrices the natural endpoint of [Gaussian elim
     title: `Permutation Matrices`,
     content: `A permutation matrix is a square matrix with exactly one entry equal to $1$ in each row and each column, and zeros everywhere else. Equivalently, it is the [identity matrix](!/linear-algebra/matrix/types#2) with its rows rearranged:
 
-$$P = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 1 & 0 & 0 \\end{pmatrix}$$
+@academic[formula_callout:Permutation Matrices
+$$P = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 1 & 0 & 0 \\end{pmatrix}$$]@
 
 The condition is a pattern of zeros, like the diagonal and triangular conditions above — a permutation matrix can be recognised by sight, without computing anything. What separates it from those two is that the nonzero positions are not tied to the diagonal.
 
@@ -1295,7 +1301,8 @@ Every [permutation](!/combinatorics/permutations) $\\sigma$ of $\\{1, \\dots, n\
 
 **What multiplication does.** Left-multiplication reorders rows, right-multiplication reorders columns:
 
-$$P A \\;=\\; \\text{rows of } A \\text{ permuted}, \\qquad A P \\;=\\; \\text{columns of } A \\text{ permuted}$$
+@academic[formula_callout:Permutation Matrices
+$$P A \\;=\\; \\text{rows of } A \\text{ permuted}, \\qquad A P \\;=\\; \\text{columns of } A \\text{ permuted}$$]@
 
 Nothing is scaled and nothing is combined — entries are only moved. This is why permutation matrices cost no arithmetic in practice: a library applies one by reindexing, never by multiplying.
 
@@ -1317,7 +1324,12 @@ Inside that group, the matrices that swap exactly two rows are the row-swap [ele
 
 **Where it shows up.** [LU decomposition](!/linear-algebra/decompositions/lower-upper) with partial pivoting cannot always factor $A$ directly, because a zero may sit where a pivot is needed. Recording the row swaps in a permutation matrix repairs this, and the factorisation is stated as
 
+@academic[formula_callout:PA LU Partial Pivoting
 $$PA = LU$$
+/linear-algebra/formulas#pa_lu_partial_pivoting]@
+
+@academic[formulas_link:/linear-algebra/formulas#identity_matrix_definition]@
+/linear-algebra/formulas]@
 
 The $P$ is exactly the bookkeeping of which rows were exchanged on the way to upper triangular form.
 
@@ -1349,7 +1361,7 @@ A symmetric matrix is called positive definite if $\\mathbf{x}^T A \\mathbf{x} >
     content: `A square matrix is skew-symmetric if its transpose equals its negative, meaning $a_{ij} = -a_{ji}$ for all $i, j$:
 
 @academic[formula_callout:skew_symmetric_matrix_definition|Skew-Symmetric Matrix Definition|$$A^T = -A$$]@
-@academic[formulas_link:/linear-algebra/formulas#skew_symmetric_matrix_definition]@
+@academic[formulas_link:/linear-algebra/formulas#skew-symmetric_matrix_definition]@
 
 Setting $i = j$ forces $a_{ii} = -a_{ii}$, so every diagonal entry must be zero.
 

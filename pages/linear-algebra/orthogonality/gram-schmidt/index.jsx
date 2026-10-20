@@ -2210,17 +2210,18 @@ Set $\\mathbf{u}_1 = \\mathbf{v}_1$.
 
 Subtract the [projection](!/linear-algebra/orthogonality/projections) of $\\mathbf{v}_2$ onto $\\mathbf{u}_1$:
 
-$$\\mathbf{u}_2 = \\mathbf{v}_2 - \\frac{\\mathbf{u}_1 \\cdot \\mathbf{v}_2}{\\mathbf{u}_1 \\cdot \\mathbf{u}_1}\\,\\mathbf{u}_1$$
+@academic[formula_callout:The Algorithm: Two Vectors
+$$\\mathbf{u}_2 = \\mathbf{v}_2 - \\frac{\\mathbf{u}_1 \\cdot \\mathbf{v}_2}{\\mathbf{u}_1 \\cdot \\mathbf{u}_1}\\,\\mathbf{u}_1$$]@
 
 The subtracted term is the component of $\\mathbf{v}_2$ along $\\mathbf{u}_1$. Removing it leaves only the component perpendicular to $\\mathbf{u}_1$, so $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = 0$.
 
-## Worked Example
+@academic[example:Worked Example
 
 $\\mathbf{v}_1 = (1, 1, 0)$, $\\mathbf{v}_2 = (1, 0, 1)$.
 
 $\\mathbf{u}_1 = (1, 1, 0)$. $\\frac{\\mathbf{u}_1 \\cdot \\mathbf{v}_2}{\\mathbf{u}_1 \\cdot \\mathbf{u}_1} = \\frac{1}{2}$. $\\mathbf{u}_2 = (1, 0, 1) - \\frac{1}{2}(1, 1, 0) = (\\frac{1}{2}, -\\frac{1}{2}, 1)$.
 
-Check: $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = \\frac{1}{2} - \\frac{1}{2} + 0 = 0$.`,
+Check: $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = \\frac{1}{2} - \\frac{1}{2} + 0 = 0$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2229,10 +2230,11 @@ Check: $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = \\frac{1}{2} - \\frac{1}{2} + 0 = 0
     title: `The Algorithm: General Case`,
     content: `For $k$ independent vectors $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$:
 
-$$\\mathbf{u}_1 = \\mathbf{v}_1$$
+@academic[formula_callout:The Algorithm: General Case
+$$\\mathbf{u}_1 = \\mathbf{v}_1$$]@
 
 @academic[formula_callout:gram_schmidt_process|Gram-Schmidt Process|$$\\mathbf{u}_j = \\mathbf{v}_j - \\sum_{i=1}^{j-1} \\frac{\\mathbf{u}_i \\cdot \\mathbf{v}_j}{\\mathbf{u}_i \\cdot \\mathbf{u}_i}\\,\\mathbf{u}_i \\quad \\text{for } j = 2, 3, \\dots, k$$]@
-@academic[formulas_link:/linear-algebra/formulas#gram_schmidt_process]@
+@academic[formulas_link:/linear-algebra/formulas#gram-schmidt_process]@
 
 At each step, $\\mathbf{v}_j$ has its projections onto all previously computed orthogonal vectors subtracted. What remains is the component of $\\mathbf{v}_j$ perpendicular to $\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}\\}$.
 
@@ -2287,7 +2289,8 @@ At every stage, $\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_j\\} = \\text
     title: `Normalization`,
     content: `After computing the orthogonal set $\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_k\\}$, normalization produces an orthonormal set:
 
-$$\\mathbf{q}_i = \\frac{\\mathbf{u}_i}{\\|\\mathbf{u}_i\\|}$$
+@academic[formula_callout:Normalization
+$$\\mathbf{q}_i = \\frac{\\mathbf{u}_i}{\\|\\mathbf{u}_i\\|}$$]@
 
 Each vector is divided by its length, making $\\|\\mathbf{q}_i\\| = 1$ while preserving direction. The resulting set satisfies $\\mathbf{q}_i \\cdot \\mathbf{q}_j = \\delta_{ij}$.
 
@@ -2334,7 +2337,12 @@ The span is preserved at each step. Each $\\mathbf{u}_j$ is a linear combination
     title: `The QR Decomposition`,
     content: `Applying Gram-Schmidt to the columns $\\mathbf{a}_1, \\dots, \\mathbf{a}_n$ of an $m \\times n$ [matrix](!/linear-algebra/matrix) $A$ (with independent columns) produces the [QR decomposition](!/linear-algebra/decompositions/qr):
 
+@academic[formula_callout:QR Decomposition
 $$A = QR$$
+/linear-algebra/formulas#qr_decomposition]@
+
+@academic[formulas_link:/linear-algebra/formulas#gram-schmidt_process]@
+/linear-algebra/formulas]@
 
 $Q$ is $m \\times n$ with [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) columns (the normalized $\\mathbf{q}_i$&apos;s). $R$ is $n \\times n$ upper [triangular](!/linear-algebra/matrix/types) with positive diagonal entries.
 
@@ -2351,7 +2359,8 @@ The factorization captures two complementary pieces of information. $Q$ stores t
 
 The normal equations $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ can be rewritten using $A = QR$. Since $A^TA = R^TQ^TQR = R^TR$ and $A^T\\mathbf{b} = R^TQ^T\\mathbf{b}$, the normal equations become $R^TR\\hat{\\mathbf{x}} = R^TQ^T\\mathbf{b}$. Canceling $R^T$ (which is invertible since $R$ has positive diagonal):
 
-$$R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$$
+@academic[formula_callout:QR and Least Squares
+$$R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$$]@
 
 This is an upper triangular system, solved by back substitution. The computation $Q^T\\mathbf{b}$ is just $n$ dot products (one per column of $Q$).
 
@@ -2375,7 +2384,8 @@ Householder reflections provide an even more robust alternative for computing th
     title: `Gram-Schmidt on Abstract Inner Product Spaces`,
     content: `The algorithm works in any [inner product](!/linear-algebra/orthogonality/inner-product) space — the dot product is replaced by the general inner product $\\langle \\cdot, \\cdot \\rangle$, and the formulas are otherwise identical:
 
-$$\\mathbf{u}_j = \\mathbf{v}_j - \\sum_{i=1}^{j-1} \\frac{\\langle \\mathbf{u}_i, \\mathbf{v}_j \\rangle}{\\langle \\mathbf{u}_i, \\mathbf{u}_i \\rangle}\\,\\mathbf{u}_i$$
+@academic[formula_callout:Gram-Schmidt on Abstract Inner Product Spaces
+$$\\mathbf{u}_j = \\mathbf{v}_j - \\sum_{i=1}^{j-1} \\frac{\\langle \\mathbf{u}_i, \\mathbf{v}_j \\rangle}{\\langle \\mathbf{u}_i, \\mathbf{u}_i \\rangle}\\,\\mathbf{u}_i$$]@
 
 Orthogonalizing $\\{1, x, x^2\\}$ in the polynomial space $\\mathcal{P}_2$ with the inner product $\\langle p, q \\rangle = \\int_{-1}^{1} p(x)q(x)\\,dx$ produces the Legendre polynomials (up to normalization): $P_0(x) = 1$, $P_1(x) = x$, $P_2(x) = \\frac{1}{2}(3x^2 - 1)$. The polynomial $x$ is already orthogonal to $1$ under this inner product (the integral of an odd function over a symmetric interval is zero), so the first subtraction has no effect.
 

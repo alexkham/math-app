@@ -914,6 +914,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import triangleDiagrams from '@/app/components/trigonometry/triangle/triangleDiagrams'
 import renderTriangleLabelV2 from '@/app/utils/illustrations/trigonometry/triangles/triangleLabel.v2'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1206,13 +1208,15 @@ $$\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C}$$
 
 Equivalently, the sines are proportional to their opposite sides:
 
-$$\\frac{\\sin A}{a} = \\frac{\\sin B}{b} = \\frac{\\sin C}{c}$$
+@academic[formula_callout:The Law of Sines
+$$\\frac{\\sin A}{a} = \\frac{\\sin B}{b} = \\frac{\\sin C}{c}$$]@
 
 The common ratio $\\frac{a}{\\sin A}$ has a geometric interpretation: it equals the diameter of the circumscribed circle (the circle passing through all three vertices). If $R$ is the circumradius, then $\\frac{a}{\\sin A} = 2R$.
 
 The derivation proceeds by dropping an altitude from one vertex to the opposite side. In a triangle with vertices $A$, $B$, $C$, drop an altitude $h$ from $C$ to side $c$. This altitude can be expressed two ways:
 
-$$h = b\\sin A \\quad \\text{and} \\quad h = a\\sin B$$
+@academic[formula_callout:The Law of Sines
+$$h = b\\sin A \\quad \\text{and} \\quad h = a\\sin B$$]@
 
 Setting these equal: $b\\sin A = a\\sin B$, which rearranges to $\\frac{a}{\\sin A} = \\frac{b}{\\sin B}$. Repeating with an altitude from a different vertex produces the full three-way equality.
 
@@ -1229,7 +1233,8 @@ The derivation works whether the triangle is acute or obtuse, though the obtuse 
 
 Example: $A = 40°$, $B = 70°$, $a = 10$. Then $C = 180° - 40° - 70° = 70°$. From the Law of Sines:
 
-$$\\frac{10}{\\sin 40°} = \\frac{b}{\\sin 70°} \\quad \\Rightarrow \\quad b = \\frac{10\\sin 70°}{\\sin 40°}$$
+@academic[formula_callout:When to Use the Law of Sines
+$$\\frac{10}{\\sin 40°} = \\frac{b}{\\sin 70°} \\quad \\Rightarrow \\quad b = \\frac{10\\sin 70°}{\\sin 40°}$$]@
 
 **ASA (Angle-Side-Angle):** Two angles and the included side are known. The third angle is computed first, then the Law of Sines provides the remaining sides. The distinction from AAS is organizational — the method is identical once the third angle is found.
 
@@ -1278,22 +1283,27 @@ $$c^2 = a^2 + b^2 - 2ab\\cos C$$
 
 Equivalently:
 
-$$a^2 = b^2 + c^2 - 2bc\\cos A$$
-$$b^2 = a^2 + c^2 - 2ac\\cos B$$
+@academic[formula_callout:The Law of Cosines
+$$a^2 = b^2 + c^2 - 2bc\\cos A$$]@
+@academic[formula_callout:The Law of Cosines
+$$b^2 = a^2 + c^2 - 2ac\\cos B$$]@
 
 Each form involves one angle and all three sides. The formula generalizes the Pythagorean theorem: when $C = 90°$, $\\cos C = 0$, and the equation reduces to $c^2 = a^2 + b^2$. The correction term $-2ab\\cos C$ accounts for the deviation from a right angle. When $C < 90°$ (acute), $\\cos C > 0$, and $c^2 < a^2 + b^2$. When $C > 90°$ (obtuse), $\\cos C < 0$, and $c^2 > a^2 + b^2$.
 
 The derivation uses coordinate geometry. Place the triangle with vertex $C$ at the origin, side $a$ along the positive $x$-axis. Then $B = (a, 0)$ and $A = (b\\cos C, b\\sin C)$. The distance from $A$ to $B$ is:
 
-$$c = \\sqrt{(b\\cos C - a)^2 + (b\\sin C)^2}$$
+@academic[formula_callout:The Law of Cosines
+$$c = \\sqrt{(b\\cos C - a)^2 + (b\\sin C)^2}$$]@
 
 Squaring and expanding:
 
-$$c^2 = b^2\\cos^2 C - 2ab\\cos C + a^2 + b^2\\sin^2 C = a^2 + b^2(\\cos^2 C + \\sin^2 C) - 2ab\\cos C$$
+@academic[formula_callout:The Law of Cosines
+$$c^2 = b^2\\cos^2 C - 2ab\\cos C + a^2 + b^2\\sin^2 C = a^2 + b^2(\\cos^2 C + \\sin^2 C) - 2ab\\cos C$$]@
 
 Since $\\cos^2 C + \\sin^2 C = 1$ (the Pythagorean [identity](!/trigonometry/identities)):
 
-$$c^2 = a^2 + b^2 - 2ab\\cos C$$`,
+@academic[formula_callout:The Law of Cosines
+$$c^2 = a^2 + b^2 - 2ab\\cos C$$]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1306,13 +1316,16 @@ $$c^2 = a^2 + b^2 - 2ab\\cos C$$`,
 
 Example: $a = 8$, $b = 6$, $C = 50°$. Find $c$:
 
-$$c^2 = 8^2 + 6^2 - 2(8)(6)\\cos 50° = 64 + 36 - 96\\cos 50° \\approx 100 - 61.7 = 38.3$$
+@academic[formula_callout:When to Use the Law of Cosines
+$$c^2 = 8^2 + 6^2 - 2(8)(6)\\cos 50° = 64 + 36 - 96\\cos 50° \\approx 100 - 61.7 = 38.3$$]@
 
-$$c \\approx 6.19$$
+@academic[formula_callout:When to Use the Law of Cosines
+$$c \\approx 6.19$$]@
 
 **SSS (Side-Side-Side):** All three sides are known, and the angles must be found. Rearrange the Law of Cosines to solve for an angle:
 
-$$\\cos C = \\frac{a^2 + b^2 - c^2}{2ab}$$
+@academic[formula_callout:When to Use the Law of Cosines
+$$\\cos C = \\frac{a^2 + b^2 - c^2}{2ab}$$]@
 
 Compute $\\cos C$, then apply [arccosine](!/trigonometry/inverse-functions) to find $C$. Repeat for another angle, or use $A + B + C = 180°$ for the third.
 
@@ -1364,7 +1377,8 @@ where $a$ and $b$ are two sides and $C$ is the angle between them.
 
 The derivation is direct. Drop an altitude $h$ from vertex $C$ to side $c$. Then $h = a\\sin B$ (from the right triangle formed). But the formula is more naturally derived as $h = b\\sin A$ from one perspective or $h = a\\sin B$ from another. Using $h = b\\sin A$:
 
-$$\\text{Area} = \\frac{1}{2} \\times a \\times h = \\frac{1}{2} \\times a \\times b\\sin C$$
+@academic[formula_callout:Area of a Triangle Using Trigonometry
+$$\\text{Area} = \\frac{1}{2} \\times a \\times h = \\frac{1}{2} \\times a \\times b\\sin C$$]@
 
 This holds for all triangles — acute, right, or obtuse. For a right triangle with $C = 90°$, $\\sin C = 1$, and the formula reduces to $\\frac{1}{2}ab$, consistent with the standard formula (where $a$ and $b$ are the legs).
 
@@ -1381,7 +1395,8 @@ Note that $\\sin C > 0$ for all valid triangle angles ($0° < C < 180°$), so th
 
 Compute the semi-perimeter:
 
-$$s = \\frac{a + b + c}{2}$$
+@academic[formula_callout:Heron&apos;s Formula
+$$s = \\frac{a + b + c}{2}$$]@
 
 Then the area is:
 
@@ -1546,8 +1561,41 @@ The Law of Sines and the Law of Cosines are those tools. Together, they provide 
     }),
   };
 
+  const lawChoiceCases = {
+    prefaceTitle: 'What is given decides',
+    preface: 'Which law to start with depends entirely on what information is available, and in particular on whether a complete side-angle pair $(a, A)$ is given or immediately obtainable.',
+    conclusionTitle: 'In combination',
+    conclusion: 'Many problems use both: a typical SAS problem finds the third side with the Law of Cosines, then switches to the Law of Sines for the remaining angles.',
+    parent: {
+      kicker: 'Solving a triangle',
+      formula: 'three of the six parts given',
+      splitBy: 'whether a complete side-angle pair is available',
+    },
+    cases: [
+      {
+        id: 'sines', condition: 'AAS, ASA, SSA',
+        count: { n: 'S' },
+        headline: 'Start with the Law of Sines',
+        desc: 'a complete pair is given or immediately obtainable; watch for the ambiguous case with SSA',
+      },
+      {
+        id: 'cosines', condition: 'SAS, SSS',
+        count: { n: 'C' },
+        headline: 'Start with the Law of Cosines',
+        desc: 'no complete pair exists until after the first computation',
+      },
+      {
+        id: 'none', condition: 'AAA, or fewer than three parts',
+        count: { n: '✗' },
+        headline: 'Not solvable',
+        desc: 'AAA fixes the shape but not the size; fewer pieces cannot determine a triangle',
+      },
+    ],
+  };
+
    return {
       props:{
+    lawChoiceCases,
     demoUnits,
          sectionsContent,
          introContent,
@@ -1568,7 +1616,9 @@ The Law of Sines and the Law of Cosines are those tools. Together, they provide 
     }
    }
 
-export default function SinesCosinesLawPage({
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function SinesCosinesLawPage({lawChoiceCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1665,6 +1715,14 @@ export default function SinesCosinesLawPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="law-of-sines-cosines-choice-cases"
+            title="Which law to start with"
+            source="/trigonometry/sines-cosines-law"
+          >
+            <CaseSplit data={lawChoiceCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

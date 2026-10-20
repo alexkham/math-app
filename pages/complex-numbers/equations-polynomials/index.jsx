@@ -1232,13 +1232,19 @@ The theorem's proof lies beyond elementary methods, requiring tools from analysi
 
 For a polynomial $p(z) = a_nz^n + a_{n-1}z^{n-1} + \\cdots + a_1z + a_0$, the complete factorization takes the form:
 
+@academic[formula_callout:Fundamental Theorem of Algebra
 $$p(z) = a_n(z - z_1)(z - z_2)\\cdots(z - z_n)$$
+/complex-numbers/formulas#fundamental_theorem_of_algebra]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The roots $z_1, z_2, \\ldots, z_n$ may repeat. A root appearing $m$ times is said to have [multiplicity](!/algebra/polynomials/roots#notation) $m$. The polynomial $p(z) = (z - 2)^3(z + i)(z - i)$ has degree $5$, with root $2$ of multiplicity $3$ and simple roots $\\pm i$.
 
 The factorization of $z^3 - 1$ illustrates the interplay with [roots of unity](!/complex-numbers/demoivre-theorem). The roots satisfy $z^3 = 1$, giving $z_0 = 1$, $z_1 = \\text{cis}(120°) = -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i$, and $z_2 = \\text{cis}(240°) = -\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i$. Writing $\\omega = \\text{cis}(120°)$:
 
-$$z^3 - 1 = (z - 1)(z - \\omega)(z - \\omega^2)$$
+@academic[formula_callout:Factoring Polynomials over $\\mathbb{C}$
+$$z^3 - 1 = (z - 1)(z - \\omega)(z - \\omega^2)$$]@
 
 Multiplying the last two factors produces a real quadratic: $(z - \\omega)(z - \\omega^2) = z^2 + z + 1$. Thus $z^3 - 1 = (z - 1)(z^2 + z + 1)$, the familiar factorization over $\\mathbb{R}$. Over $\\mathbb{C}$, we factor further into linear terms.
 
@@ -1266,9 +1272,12 @@ The sum of roots equals the negative of the linear coefficient. The product of r
 
 For a monic cubic $z^3 + bz^2 + cz + d = 0$ with roots $z_1$, $z_2$, $z_3$:
 
-$$z_1 + z_2 + z_3 = -b$$
-$$z_1z_2 + z_1z_3 + z_2z_3 = c$$
-$$z_1z_2z_3 = -d$$
+@academic[formula_callout:Vieta's Formulas
+$$z_1 + z_2 + z_3 = -b$$]@
+@academic[formula_callout:Vieta's Formulas
+$$z_1z_2 + z_1z_3 + z_2z_3 = c$$]@
+@academic[formula_callout:Vieta's Formulas
+$$z_1z_2z_3 = -d$$]@
 
 The pattern continues for higher degrees. The $k$-th symmetric sum of roots (all products of $k$ roots) equals $(-1)^k$ times the coefficient of $z^{n-k}$ in a monic polynomial of degree $n$. Formally:
 
@@ -1298,7 +1307,8 @@ $$p(z_0) = 0 \\;\\Rightarrow\\; p(\\overline{z_0}) = 0 \\quad \\text{(real coeff
 
 The proof exploits how conjugation interacts with polynomial evaluation. Let $p(z) = a_nz^n + a_{n-1}z^{n-1} + \\cdots + a_0$ with all $a_k$ real. For any complex $z$:
 
-$$\\overline{p(z)} = \\overline{a_nz^n + \\cdots + a_0} = a_n\\overline{z^n} + \\cdots + a_0 = a_n(\\bar{z})^n + \\cdots + a_0 = p(\\bar{z})$$
+@academic[formula_callout:Polynomials with Real Coefficients
+$$\\overline{p(z)} = \\overline{a_nz^n + \\cdots + a_0} = a_n\\overline{z^n} + \\cdots + a_0 = a_n(\\bar{z})^n + \\cdots + a_0 = p(\\bar{z})$$]@
 
 The key step uses $\\overline{a_k} = a_k$ since each coefficient is real, and the property $\\overline{z^k} = (\\bar{z})^k$.
 
@@ -1331,13 +1341,15 @@ The formula remains valid, but a new challenge emerges: the discriminant $\\Delt
 
 Consider $z^2 + 2iz - 1 = 0$. Here $a = 1$, $b = 2i$, $c = -1$. The discriminant is:
 
-$$\\Delta = (2i)^2 - 4(1)(-1) = -4 + 4 = 0$$
+@academic[formula_callout:Quadratic Equations with Complex Coefficients
+$$\\Delta = (2i)^2 - 4(1)(-1) = -4 + 4 = 0$$]@
 
 With discriminant zero, one repeated root exists: $z = \\frac{-2i}{2} = -i$.
 
 For a case with complex discriminant, take $z^2 + z + (1 - i) = 0$. The discriminant is:
 
-$$\\Delta = 1 - 4(1 - i) = 1 - 4 + 4i = -3 + 4i$$
+@academic[formula_callout:Quadratic Equations with Complex Coefficients
+$$\\Delta = 1 - 4(1 - i) = 1 - 4 + 4i = -3 + 4i$$]@
 
 Finding $\\sqrt{-3 + 4i}$ requires the technique from [De Moivre's theorem](!/complex-numbers/demoivre-theorem). Convert $-3 + 4i$ to [trigonometric form](!/complex-numbers/trigonometric-form): modulus $\\sqrt{9 + 16} = 5$, argument $\\theta = \\arctan(4/(-3))$ adjusted to the second quadrant. The square roots have modulus $\\sqrt{5}$ and arguments $\\theta/2$ and $\\theta/2 + 180°$.
 
@@ -1358,7 +1370,8 @@ The procedure:
 2. Apply the root formula: $z_k = R^{1/n}\\text{cis}\\left(\\frac{\\phi + 360°k}{n}\\right)$ for $k = 0, 1, \\ldots, n-1$
 3. Convert to [algebraic form](!/complex-numbers/algebraic-form) if needed
 
-Example: Solve $z^4 = -16$.
+@academic[example:Example
+Solve $z^4 = -16$.
 
 First write $-16$ in trigonometric form. The [modulus](!/complex-numbers/absolute-value) is $16$, and the argument is $180°$ (negative real axis). So $-16 = 16\\text{cis}(180°)$.
 
@@ -1370,7 +1383,7 @@ $z_1 = 2\\text{cis}(135°) = 2 \\cdot \\frac{\\sqrt{2}}{2}(-1 + i) = \\sqrt{2}(-
 
 $z_2 = 2\\text{cis}(225°) = 2 \\cdot \\frac{\\sqrt{2}}{2}(-1 - i) = \\sqrt{2}(-1 - i)$
 
-$z_3 = 2\\text{cis}(315°) = 2 \\cdot \\frac{\\sqrt{2}}{2}(1 - i) = \\sqrt{2}(1 - i)$
+$z_3 = 2\\text{cis}(315°) = 2 \\cdot \\frac{\\sqrt{2}}{2}(1 - i) = \\sqrt{2}(1 - i)$]@
 
 Four roots forming a square on a circle of radius $2$, rotated $45°$ from the axes. Each satisfies $(z_k)^4 = -16$.`,
   after: ``,
@@ -1384,7 +1397,8 @@ Four roots forming a square on a circle of radius $2$, rotated $45°$ from the a
 
 Begin by writing $z = re^{i\\theta}$ in [exponential form](!/complex-numbers/exponential-form). Then $z^n = r^ne^{in\\theta}$ and $\\bar{z} = re^{-i\\theta}$. The equation becomes:
 
-$$r^ne^{in\\theta} = re^{-i\\theta}$$
+@academic[formula_callout:Solving $z^n = \\bar{z}$
+$$r^ne^{in\\theta} = re^{-i\\theta}$$]@
 
 Two conditions emerge from matching moduli and arguments.
 
@@ -1398,12 +1412,13 @@ The solutions with $r^{n-1} = 1$ require $r = 1$ (since $r \\geq 0$). These solu
 
 Counting: one solution at the origin, plus $n + 1$ solutions on the unit circle, totaling $n + 2$ solutions.
 
-Example: $z^2 = \\bar{z}$ has $2 + 2 = 4$ solutions.
+@academic[example:Example
+$z^2 = \\bar{z}$ has $2 + 2 = 4$ solutions.
 
 From $r^2 = r$: $r = 0$ or $r = 1$.
 From $3\\theta = 360°k$: $\\theta = 0°, 120°, 240°$.
 
-Solutions: $z = 0$, $z = 1$, $z = \\text{cis}(120°) = -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i$, $z = \\text{cis}(240°) = -\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i$.`,
+Solutions: $z = 0$, $z = 1$, $z = \\text{cis}(120°) = -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i$, $z = \\text{cis}(240°) = -\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i$.]@`,
   after: ``,
   link: '',
 },
@@ -1426,7 +1441,8 @@ Since $z - \\bar{z} = 2bi$, the equation becomes $2bi = ki$, so $b = k/2$. The s
 Since $z \\cdot \\bar{z} = |z|^2$, the equation becomes $|z|^2 = k$, or $|z| = \\sqrt{k}$. The solution set is the circle centered at the origin with radius $\\sqrt{k}$.
 
 **Combining conditions** produces intersections of these loci. The system:
-$$z + \\bar{z} = 4 \\quad \\text{and} \\quad z \\cdot \\bar{z} = 5$$
+@academic[formula_callout:Equations Involving Conjugates
+$$z + \\bar{z} = 4 \\quad \\text{and} \\quad z \\cdot \\bar{z} = 5$$]@
 
 The first equation restricts to the vertical line $\\text{Re}(z) = 2$. The second restricts to the circle $|z| = \\sqrt{5}$. Their intersection: points with real part $2$ on the circle of radius $\\sqrt{5}$. Writing $z = 2 + bi$, we need $4 + b^2 = 5$, so $b = \\pm 1$. Solutions: $z = 2 + i$ and $z = 2 - i$.
 

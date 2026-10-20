@@ -8787,9 +8787,9 @@ Form $A^TA$ (symmetric, $n \\times n$). Find its eigenvalues $\\lambda_1 \\geq \
 
 The singular values are $\\sigma_i = \\sqrt{\\lambda_i}$. The left singular vectors are computed from the right ones: $\\mathbf{u}_i = \\frac{1}{\\sigma_i}A\\mathbf{v}_i$ for each nonzero $\\sigma_i$. If $r < m$, extend $\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_r\\}$ to an [orthonormal basis](!/linear-algebra/orthogonality/orthogonal-sets) for $\\mathbb{R}^m$.
 
-## Worked Example
+@academic[example:Worked Example
 
-For $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$: $A^TA = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$, eigenvalues $3$ and $1$, eigenvectors $\\frac{1}{\\sqrt{2}}(1, 1)^T$ and $\\frac{1}{\\sqrt{2}}(1, -1)^T$. Singular values: $\\sqrt{3}$ and $1$. Left singular vectors: $\\mathbf{u}_1 = \\frac{1}{\\sqrt{3}}A\\mathbf{v}_1 = \\frac{1}{\\sqrt{6}}(1, 1, 2)^T$, $\\mathbf{u}_2 = A\\mathbf{v}_2 = \\frac{1}{\\sqrt{2}}(1, -1, 0)^T$. Extend with $\\mathbf{u}_3 = \\frac{1}{\\sqrt{3}}(-1, -1, 1)^T$.`,
+For $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$: $A^TA = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$, eigenvalues $3$ and $1$, eigenvectors $\\frac{1}{\\sqrt{2}}(1, 1)^T$ and $\\frac{1}{\\sqrt{2}}(1, -1)^T$. Singular values: $\\sqrt{3}$ and $1$. Left singular vectors: $\\mathbf{u}_1 = \\frac{1}{\\sqrt{3}}A\\mathbf{v}_1 = \\frac{1}{\\sqrt{6}}(1, 1, 2)^T$, $\\mathbf{u}_2 = A\\mathbf{v}_2 = \\frac{1}{\\sqrt{2}}(1, -1, 0)^T$. Extend with $\\mathbf{u}_3 = \\frac{1}{\\sqrt{3}}(-1, -1, 1)^T$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -8832,7 +8832,7 @@ No other factorization provides all four bases simultaneously, and no other meth
     content: `The Moore-Penrose pseudoinverse $A^+$ is computed directly from the SVD:
 
 @academic[formula_callout:moore_penrose_pseudoinverse|Moore-Penrose Pseudoinverse|$$A^+ = V\\Sigma^+ U^T$$]@
-@academic[formulas_link:/linear-algebra/formulas#moore_penrose_pseudoinverse]@
+@academic[formulas_link:/linear-algebra/formulas#moore-penrose_pseudoinverse]@
 
 The matrix $\\Sigma^+$ is formed by reciprocating each nonzero singular value and transposing the shape: if $\\Sigma$ is $m \\times n$ with diagonal entries $\\sigma_1, \\dots, \\sigma_r, 0, \\dots, 0$, then $\\Sigma^+$ is $n \\times m$ with diagonal entries $1/\\sigma_1, \\dots, 1/\\sigma_r, 0, \\dots, 0$.
 
@@ -8848,7 +8848,7 @@ For a full-rank overdetermined system ($m > n$, rank $= n$), $A^+\\mathbf{b}$ gi
     content: `The best rank-$k$ approximation to $A$ in either the operator norm or the Frobenius norm is obtained by truncating the SVD at $k$ terms:
 
 @academic[formula_callout:eckart_young_low_rank_approximation|Eckart-Young Low-Rank Approximation|$$A_k = \\sum_{i=1}^{k} \\sigma_i \\mathbf{u}_i \\mathbf{v}_i^T, \\qquad \\|A - A_k\\|_2 = \\sigma_{k+1}, \\quad \\|A - A_k\\|_F = \\sqrt{\\sum_{i=k+1}^{r}\\sigma_i^2}$$]@
-@academic[formulas_link:/linear-algebra/formulas#eckart_young_low_rank_approximation]@
+@academic[formulas_link:/linear-algebra/formulas#eckart-young_low-rank_approximation]@
 
 This is the Eckart-Young-Mirsky theorem. Among all matrices of rank at most $k$, $A_k$ is the closest to $A$. The approximation error equals $\\sigma_{k+1}$ (the first discarded singular value) in the operator norm, and $\\sqrt{\\sigma_{k+1}^2 + \\cdots + \\sigma_r^2}$ in the Frobenius norm.
 
@@ -8945,17 +8945,20 @@ The six structural quantities the SVD exposes — rank, the four fundamental sub
 
 The [spectral norm](!/linear-algebra/definitions#spectral_norm) is the worst-case stretch factor:
 
-$$\\|A\\|_2 = \\max_{\\mathbf{x} \\neq \\mathbf{0}} \\frac{\\|A\\mathbf{x}\\|}{\\|\\mathbf{x}\\|} = \\sigma_1$$
+@academic[formula_callout:Spectral Norm and Condition Number
+$$\\|A\\|_2 = \\max_{\\mathbf{x} \\neq \\mathbf{0}} \\frac{\\|A\\mathbf{x}\\|}{\\|\\mathbf{x}\\|} = \\sigma_1$$]@
 
 Write $\\mathbf{x}$ in the orthonormal basis $\\mathbf{v}_1, \\dots, \\mathbf{v}_n$ of right singular vectors; $A$ scales the $i$-th coefficient by $\\sigma_i$ and hands it to $\\mathbf{u}_i$, so the ratio is largest when $\\mathbf{x} = \\mathbf{v}_1$ and equals $\\sigma_1$. Geometrically, $\\sigma_1$ is the longest semi-axis of the ellipse that the unit circle is mapped to. This differs from the [Frobenius norm](!/linear-algebra/definitions#frobenius_norm) $\\sqrt{\\sigma_1^2 + \\cdots + \\sigma_r^2}$, which adds up every stretch rather than reporting the largest.
 
 The [condition number](!/linear-algebra/definitions#condition_number) is the ratio of the largest stretch to the smallest:
 
-$$\\kappa(A) = \\frac{\\sigma_1}{\\sigma_n} = \\|A\\|_2\\,\\|A^{-1}\\|_2$$
+@academic[formula_callout:Spectral Norm and Condition Number
+$$\\kappa(A) = \\frac{\\sigma_1}{\\sigma_n} = \\|A\\|_2\\,\\|A^{-1}\\|_2$$]@
 
 for an invertible square matrix, since the largest singular value of $A^{-1}$ is $1 / \\sigma_n$. It bounds how a relative error in $\\mathbf{b}$ propagates to the solution of $A\\mathbf{x} = \\mathbf{b}$:
 
-$$\\frac{\\|\\delta\\mathbf{x}\\|}{\\|\\mathbf{x}\\|} \\leq \\kappa(A)\\,\\frac{\\|\\delta\\mathbf{b}\\|}{\\|\\mathbf{b}\\|}$$
+@academic[formula_callout:Spectral Norm and Condition Number
+$$\\frac{\\|\\delta\\mathbf{x}\\|}{\\|\\mathbf{x}\\|} \\leq \\kappa(A)\\,\\frac{\\|\\delta\\mathbf{b}\\|}{\\|\\mathbf{b}\\|}$$]@
 
 A condition number near $1$ means errors pass through unamplified, and [orthogonal matrices](!/linear-algebra/orthogonality/orthogonal-sets) achieve exactly $1$. A condition number of $10^k$ means roughly $k$ decimal digits of accuracy can be lost in solving the system. An infinite condition number means $\\sigma_n = 0$: the matrix is singular.
 

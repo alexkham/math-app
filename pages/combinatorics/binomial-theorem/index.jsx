@@ -1604,7 +1604,8 @@ The expansion has exactly $n+1$ terms, indexed by $k$ from $0$ through $n$. The 
 
 Write $(a+b)^n$ as the product
 
-$$\\underbrace{(a+b)(a+b)\\cdots(a+b)}_{n \\text{ factors}}.$$
+@academic[formula_callout:The Theorem
+$$\\underbrace{(a+b)(a+b)\\cdots(a+b)}_{n \\text{ factors}}.$$]@
 
 Expanding the product means forming every possible term by choosing either $a$ or $b$ from each factor and multiplying the selections. A term equal to $a^{n-k} b^k$ arises whenever exactly $k$ of the $n$ factors contribute a $b$, and there are $\\binom{n}{k}$ ways to make that selection. Summing over all $k$ gives the theorem.
 
@@ -1670,19 +1671,22 @@ Specific substitutions for $a$ and $b$ convert the theorem into useful identitie
 
 ## Setting $a = 1, b = 1$
 
-$$(1+1)^n = 2^n = \\sum_{k=0}^{n} \\binom{n}{k}.$$
+@academic[formula_callout:Special Cases
+$$(1+1)^n = 2^n = \\sum_{k=0}^{n} \\binom{n}{k}.$$]@
 
 This is the algebraic counterpart of the row-sum identity from Pascal's triangle: the entries of row $n$ sum to $2^n$, which is also the number of subsets of an $n$-set.
 
 ## Setting $a = 1, b = -1$
 
-$$(1-1)^n = 0 = \\sum_{k=0}^{n} (-1)^k \\binom{n}{k} \\quad \\text{for } n \\ge 1.$$
+@academic[formula_callout:Special Cases
+$$(1-1)^n = 0 = \\sum_{k=0}^{n} (-1)^k \\binom{n}{k} \\quad \\text{for } n \\ge 1.$$]@
 
 The alternating row sum is zero, which means the number of even-sized subsets of an $n$-set equals the number of odd-sized subsets.
 
 ## Setting $a = 1, b = x$
 
-$$(1+x)^n = \\sum_{k=0}^{n} \\binom{n}{k} x^k.$$
+@academic[formula_callout:Special Cases
+$$(1+x)^n = \\sum_{k=0}^{n} \\binom{n}{k} x^k.$$]@
 
 This is the form most commonly encountered in algebra. The right side is the generating function for the binomial coefficients of row $n$ — a polynomial whose coefficients encode the entire row.
 
@@ -1763,7 +1767,8 @@ where the sum runs over all tuples $(k_1, k_2, \\ldots, k_r)$ of non-negative in
 
 The coefficient is the [multinomial coefficient](!/combinatorics/binomial-coefficient#multinomial)
 
-$$\\binom{n}{k_1, k_2, \\ldots, k_r} = \\frac{n!}{k_1! \\, k_2! \\, \\cdots \\, k_r!},$$
+@academic[formula_callout:The Multinomial Theorem
+$$\\binom{n}{k_1, k_2, \\ldots, k_r} = \\frac{n!}{k_1! \\, k_2! \\, \\cdots \\, k_r!},$$]@
 
 which counts the number of ways to partition $n$ items into $r$ labeled groups of the specified sizes. The binomial theorem is the case $r = 2$: the coefficient $\\binom{n}{k, \\, n-k}$ collapses to the ordinary binomial coefficient $\\binom{n}{k}$.
 
@@ -1771,7 +1776,8 @@ which counts the number of ways to partition $n$ items into $r$ labeled groups o
 
 The number of distinct terms in the multinomial expansion equals the number of tuples of non-negative integers summing to $n$, which is a [weak composition](!/combinatorics/combinations#weak) count:
 
-$$\\binom{n+r-1}{r-1}.$$
+@academic[formula_callout:The Multinomial Theorem
+$$\\binom{n+r-1}{r-1}.$$]@
 
 For the binomial case $r = 2$ this gives $\\binom{n+1}{1} = n+1$, matching the count from the binomial theorem.
 `,
@@ -1790,17 +1796,20 @@ Four worked examples covering the standard problem types.
 
 Substitute $a = x$ and $b = 2$. The coefficients are row 4 of Pascal's triangle: $1, 4, 6, 4, 1$. The expansion is
 
-$$(x+2)^4 = x^4 + 4x^3(2) + 6x^2(4) + 4x(8) + 16 = x^4 + 8x^3 + 24x^2 + 32x + 16.$$
+@academic[formula_callout:Worked Expansions
+$$(x+2)^4 = x^4 + 4x^3(2) + 6x^2(4) + 4x(8) + 16 = x^4 + 8x^3 + 24x^2 + 32x + 16.$$]@
 
 ## Expansion with Signs: $(2a - 3b)^3$
 
 Substitute the first base as $2a$ and the second as $-3b$. Row 3 coefficients are $1, 3, 3, 1$:
 
-$$(2a - 3b)^3 = (2a)^3 + 3(2a)^2(-3b) + 3(2a)(-3b)^2 + (-3b)^3.$$
+@academic[formula_callout:Worked Expansions
+$$(2a - 3b)^3 = (2a)^3 + 3(2a)^2(-3b) + 3(2a)(-3b)^2 + (-3b)^3.$$]@
 
 Simplifying each term:
 
-$$(2a - 3b)^3 = 8a^3 - 36a^2 b + 54a b^2 - 27 b^3.$$
+@academic[formula_callout:Worked Expansions
+$$(2a - 3b)^3 = 8a^3 - 36a^2 b + 54a b^2 - 27 b^3.$$]@
 
 The alternating signs come directly from the powers of $-3b$.
 
@@ -1808,7 +1817,8 @@ The alternating signs come directly from the powers of $-3b$.
 
 The general term of $(1+x)^8$ is $T_{k+1} = \\binom{8}{k} x^k$. The coefficient of $x^5$ comes from $k = 5$:
 
-$$\\binom{8}{5} = 56.$$
+@academic[formula_callout:Worked Expansions
+$$\\binom{8}{5} = 56.$$]@
 
 No need to expand the full polynomial.
 
@@ -1816,17 +1826,20 @@ No need to expand the full polynomial.
 
 The general term is
 
-$$T_{k+1} = \\binom{10}{k} x^{10-k} \\left(\\frac{1}{x}\\right)^k = \\binom{10}{k} x^{10 - 2k}.$$
+@academic[formula_callout:Worked Expansions
+$$T_{k+1} = \\binom{10}{k} x^{10-k} \\left(\\frac{1}{x}\\right)^k = \\binom{10}{k} x^{10 - 2k}.$$]@
 
 The term is independent of $x$ when $10 - 2k = 0$, i.e. $k = 5$. The constant term is
 
-$$\\binom{10}{5} = 252.$$
+@academic[formula_callout:Worked Expansions
+$$\\binom{10}{5} = 252.$$]@
 
 ## Multinomial Expansion: $(a+b+c)^3$
 
 The tuples $(k_1, k_2, k_3)$ of non-negative integers summing to 3 are: $(3,0,0)$, $(0,3,0)$, $(0,0,3)$, $(2,1,0)$, $(2,0,1)$, $(1,2,0)$, $(0,2,1)$, $(1,0,2)$, $(0,1,2)$, $(1,1,1)$. The corresponding coefficients are $1, 1, 1, 3, 3, 3, 3, 3, 3, 6$:
 
-$$(a+b+c)^3 = a^3 + b^3 + c^3 + 3a^2 b + 3a^2 c + 3a b^2 + 3 b^2 c + 3a c^2 + 3 b c^2 + 6abc.$$
+@academic[formula_callout:Worked Expansions
+$$(a+b+c)^3 = a^3 + b^3 + c^3 + 3a^2 b + 3a^2 c + 3a b^2 + 3 b^2 c + 3a c^2 + 3 b c^2 + 6abc.$$]@
 
 The number of terms, $\\binom{3+3-1}{3-1} = \\binom{5}{2} = 10$, matches the count of distinct monomials above.
 `,

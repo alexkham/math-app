@@ -175,7 +175,8 @@ $$S_n = n^2$$
 
 The name reflects the geometric construction: arrange $n^2$ dots in a square grid with $n$ rows and $n$ columns. The first square numbers are:
 
-$$1, 4, 9, 16, 25, 36, 49, 64, 81, 100, \\ldots$$
+@academic[formula_callout:Definition
+$$1, 4, 9, 16, 25, 36, 49, 64, 81, 100, \\ldots$$]@
 
 A positive integer is called a **perfect square** if it equals $n^2$ for some integer $n$. Testing whether a number is a perfect square amounts to checking whether its [square root](!/algebra/roots) is an integer.
 
@@ -234,7 +235,8 @@ $$\\sum_{k=1}^{n} k^2 = \\frac{n(n+1)(2n+1)}{6}$$
 
 One derivation uses the telescoping identity $(k+1)^3 - k^3 = 3k^2 + 3k + 1$. Summing both sides from $k = 1$ to $n$:
 
-$$(n+1)^3 - 1 = 3\\sum k^2 + 3\\sum k + n$$
+@academic[formula_callout:Sum of Squares
+$$(n+1)^3 - 1 = 3\\sum k^2 + 3\\sum k + n$$]@
 
 Substituting $\\sum k = \\frac{n(n+1)}{2}$ and solving for $\\sum k^2$ gives the result.
 
@@ -249,7 +251,8 @@ This formula contrasts with the [triangular number](!/algebra/sequences/triangul
     title: `Connections to Triangular Numbers`,
     content: `Square numbers and [triangular numbers](!/algebra/sequences/triangular-numbers) are linked by the identity:
 
-$$S_n = T_n + T_{n-1}$$
+@academic[formula_callout:Connections to Triangular Numbers
+$$S_n = T_n + T_{n-1}$$]@
 
 Every perfect square is the sum of two consecutive triangular numbers. For $n = 4$: $16 = T_4 + T_3 = 10 + 6$. The geometric proof is direct: cut a square grid of $n^2$ dots along the diagonal staircase. The dots on and above the staircase form a triangle with $n$ rows ($T_n$ dots), and the dots below form a triangle with $n-1$ rows ($T_{n-1}$ dots).
 

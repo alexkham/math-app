@@ -635,6 +635,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderJointRectangle from '@/app/utils/illustrations/probability/areas/jointRectangle'
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
 import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1183,8 +1185,25 @@ This idea is not an add-on to probability theory. Bayes' theorem sits at the int
     }),
   };
 
+  const bayesFoundationLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Bayes\' theorem does not stand alone',
+    preface: 'It sits where several core probability ideas meet. Read the pyramid from the base up: each idea rests on the one beneath it.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'One update mechanism',
+    conclusion: 'Bayes\' theorem is not an isolated formula but a structural link connecting these parts of probability. In special cases, [independence](!/probability/independence) simplifies its structure and interpretation.',
+    axis: { top: 'built on the rest', label: 'dependence', bottom: 'foundation' },
+    levels: [
+      { id: 'bayes', name: 'Bayes\' theorem', sub: 'the update' },
+      { id: 'total', name: '[Total probability](!/probability/total-probability)', sub: 'every way an observation can occur' },
+      { id: 'conditional', name: '[Conditional probability](!/probability/conditional-probability)', sub: 'Bayes is built directly from it' },
+      { id: 'axioms', name: '[Axioms](!/probability/axioms)', sub: 'consistent probability assignments' },
+    ],
+  };
+
   return {
     props: {
+    bayesFoundationLevels,
     demoUnits,
       sectionsContent,
       introContent,
@@ -1204,7 +1223,9 @@ This idea is not an add-on to probability theory. Bayes' theorem sits at the int
   }
 }
 
-export default function BayesPage({
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function BayesPage({bayesFoundationLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -1340,6 +1361,14 @@ export default function BayesPage({
         link:'',
         content:[
           sectionsContent.fits.content,
+          <DiagramFrame
+            key={'fits-diagram'}
+            id="bayes-foundation-ladder"
+            title="What Bayes' theorem is built on"
+            source="/probability/bayes-theorem"
+          >
+            <Hierarchy data={bayesFoundationLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+          </DiagramFrame>,
         ]
     },
     {

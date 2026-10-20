@@ -250,11 +250,6 @@ export default function TotalProbabilityVisualizerV2({ explanations = null } = {
   return (
     <div style={{ padding: '20px', maxWidth: '1700px', margin: '0 auto', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
       
-      {/* Instructions at top */}
-      <div style={{ padding: '15px', background: '#eff6ff', borderRadius: '6px', fontSize: '14px', color: '#1e40af', marginBottom: '20px' }}>
-        <strong>How to use:</strong> Select number of A events and B outcomes (inverse relationship). Adjust probabilities with sliders. Click on outcomes or marginal probabilities to highlight paths.
-      </div>
-
       {/* Main Layout */}
       {line1Note && (
         <div

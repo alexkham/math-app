@@ -331,7 +331,8 @@ const sectionsContent = {
     content: `
 A function $f$ is differentiable at $x = a$ if the limit
 
-$$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$
+@academic[formula_callout:The Definition of Differentiability
+$$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@
 
 exists and is finite. This is a two-sided [limit](!/calculus/limits/two-sided): the difference quotient must approach the same finite value whether $h \\to 0^+$ or $h \\to 0^-$.
 
@@ -395,7 +396,8 @@ $$f \\text{ differentiable at } a \\implies f \\text{ continuous at } a$$
 
 Rewrite $f(x) - f(a)$ as
 
-$$f(x) - f(a) = \\frac{f(x) - f(a)}{x - a} \\cdot (x - a)$$
+@academic[formula_callout:Differentiability Implies Continuity
+$$f(x) - f(a) = \\frac{f(x) - f(a)}{x - a} \\cdot (x - a)$$]@
 
 As $x \\to a$, the first factor approaches $f'(a)$ (which exists by assumption) and the second factor approaches $0$. Their product approaches $f'(a) \\cdot 0 = 0$, so $\\lim_{x \\to a} f(x) = f(a)$.
 
@@ -410,7 +412,8 @@ This establishes a hierarchy: differentiability is a stronger condition than con
     content: `
 A corner occurs when the left-hand and right-hand derivatives both exist as finite numbers but disagree.
 
-$$\\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h} \\neq \\lim_{h \\to 0^+} \\frac{f(a + h) - f(a)}{h}$$
+@academic[formula_callout:Corners
+$$\\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h} \\neq \\lim_{h \\to 0^+} \\frac{f(a + h) - f(a)}{h}$$]@
 
 The graph makes a sharp turn at $x = a$—two distinct tangent directions meeting at a single point. The function is continuous at $a$ (no break in the graph), but the two-sided limit of the difference quotient fails to exist because the one-sided limits differ.
 
@@ -464,15 +467,17 @@ Discontinuities are the most straightforward obstruction to differentiability. T
     content: `
 The left-hand derivative of $f$ at $a$ is
 
-$$f'_-(a) = \\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h}$$
+@academic[formula_callout:One-Sided Derivatives
+$$f'_-(a) = \\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h}$$]@
 
 and the right-hand derivative is
 
-$$f'_+(a) = \\lim_{h \\to 0^+} \\frac{f(a + h) - f(a)}{h}$$
+@academic[formula_callout:One-Sided Derivatives
+$$f'_+(a) = \\lim_{h \\to 0^+} \\frac{f(a + h) - f(a)}{h}$$]@
 
 @academic[formula_callout:One-Sided Derivative
 $$f'_-(a) = \\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h} \\qquad f'_+(a) = \\lim_{h \\to 0^+} \\frac{f(a + h) - f(a)}{h}$$
-/calculus/formulas#one_sided_derivative]@
+/calculus/formulas#one-sided_derivative]@
 
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@

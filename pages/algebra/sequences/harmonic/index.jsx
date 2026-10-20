@@ -9,6 +9,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -194,13 +196,15 @@ Unlike arithmetic and geometric sequences, harmonic sequences have no closed-for
     title: `The Harmonic Series`,
     content: `The harmonic series is the infinite sum of reciprocals of the natural numbers:
 
-$$\\sum_{n=1}^{\\infty} \\frac{1}{n} = 1 + \\frac{1}{2} + \\frac{1}{3} + \\frac{1}{4} + \\cdots$$
+@academic[formula_callout:The Harmonic Series
+$$\\sum_{n=1}^{\\infty} \\frac{1}{n} = 1 + \\frac{1}{2} + \\frac{1}{3} + \\frac{1}{4} + \\cdots$$]@
 
 This series diverges — its partial sums grow without bound, even though the individual terms shrink to zero.
 
 The proof by grouping (attributed to Oresme, 14th century) is among the most elegant in mathematics. Group the terms after the first as follows:
 
-$$1 + \\frac{1}{2} + \\left(\\frac{1}{3} + \\frac{1}{4}\\right) + \\left(\\frac{1}{5} + \\frac{1}{6} + \\frac{1}{7} + \\frac{1}{8}\\right) + \\cdots$$
+@academic[formula_callout:The Harmonic Series
+$$1 + \\frac{1}{2} + \\left(\\frac{1}{3} + \\frac{1}{4}\\right) + \\left(\\frac{1}{5} + \\frac{1}{6} + \\frac{1}{7} + \\frac{1}{8}\\right) + \\cdots$$]@
 
 The first group contains $1$ term summing to at least $\\frac{1}{2}$. The next group contains $2$ terms, each at least $\\frac{1}{4}$, summing to at least $\\frac{1}{2}$. The next contains $4$ terms, each at least $\\frac{1}{8}$, again summing to at least $\\frac{1}{2}$. Each doubling block contributes at least $\\frac{1}{2}$, and there are infinitely many blocks.
 
@@ -224,7 +228,8 @@ $$H = \\frac{n}{\\frac{1}{a_1} + \\frac{1}{a_2} + \\cdots + \\frac{1}{a_n}}$$
 
 For two numbers, this simplifies to:
 
-$$H = \\frac{2ab}{a + b}$$
+@academic[formula_callout:Harmonic Mean
+$$H = \\frac{2ab}{a + b}$$]@
 
 In a harmonic sequence, every term (except the first and last) is the harmonic mean of its two neighbors. This follows from the fact that the reciprocals form an arithmetic sequence: the reciprocal of each term is the [arithmetic mean](!/algebra/sequences/arithmetic#6) of the reciprocals of its neighbors, and taking reciprocals back gives the harmonic mean relationship.
 
@@ -239,7 +244,7 @@ Inserting $k$ harmonic means between two values $a$ and $b$ reduces to inserting
 
 @academic[formula_callout:AM-GM-HM Inequality
 $$H \\leq G \\leq A$$
-/algebra/formulas#am_gm_hm_inequality]@
+/algebra/formulas#am-gm-hm_inequality]@
 
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
@@ -248,7 +253,8 @@ The harmonic mean is never greater than the [geometric mean](!/algebra/sequences
 
 For two positive numbers $a$ and $b$:
 
-$$\\frac{2ab}{a+b} \\leq \\sqrt{ab} \\leq \\frac{a+b}{2}$$
+@academic[formula_callout:The Mean Inequality
+$$\\frac{2ab}{a+b} \\leq \\sqrt{ab} \\leq \\frac{a+b}{2}$$]@
 
 This chain links the three types of sequences through their associated means. Each mean captures a different notion of "average": arithmetic for additive processes, geometric for multiplicative processes, and harmonic for rates and reciprocals.
 
@@ -391,8 +397,24 @@ const schemas = {
     }),
   };
 
+  const meanOrderLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Three averages, one fixed order',
+    preface: 'For any set of positive numbers the three means always line up the same way: the harmonic mean never exceeds the geometric mean, which never exceeds the arithmetic mean.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Equality only when all numbers are equal',
+    conclusion: 'The chain becomes equality throughout exactly when all the numbers are identical. The $G \\leq A$ part is used extensively in optimization and in proving [inequalities](!/algebra/inequalities).',
+    axis: { top: 'largest', label: 'size of the mean', bottom: 'smallest' },
+    levels: [
+      { id: 'a', name: '[Arithmetic mean](!/algebra/sequences/arithmetic)', sub: '$\\frac{a+b}{2}$ — additive processes' },
+      { id: 'g', name: '[Geometric mean](!/algebra/sequences/geometric#7)', sub: '$\\sqrt{ab}$ — multiplicative processes' },
+      { id: 'h', name: 'Harmonic mean', sub: '$\\frac{2ab}{a+b}$ — rates and reciprocals' },
+    ],
+  };
+
   return {
   props:{
+    meanOrderLevels,
      sectionsContent,
      introContent,
      faqQuestions,
@@ -409,7 +431,9 @@ const schemas = {
 }
    }
 
-export default function HarmonicSequencesPage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function HarmonicSequencesPage({meanOrderLevels, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
     
   const genericSections=[
     // {
@@ -462,6 +486,14 @@ export default function HarmonicSequencesPage({seoData, sectionsContent, introCo
           sectionsContent.obj5.content,
           <div key={'unit-means'} dangerouslySetInnerHTML={{ __html: demoUnits.means }} />,
           `Here G² = A · H for every b: √b squared is b, and (1 + b)/2 · 2b/(1 + b) = b.`,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="mean-inequality-pyramid"
+            title="The mean inequality: H ≤ G ≤ A"
+            source="/algebra/sequences/harmonic"
+          >
+            <Hierarchy data={meanOrderLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

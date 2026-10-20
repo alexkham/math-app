@@ -1159,7 +1159,8 @@ $T(\\mathbf{e}_2) = T(0, 1, 0) = (-1, 0)$
 
 $T(\\mathbf{e}_3) = T(0, 0, 1) = (3, 5)$
 
-$$A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}$$
+@academic[formula_callout:Constructing the Standard Matrix
+$$A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}$$]@
 
 Verification: $A\\begin{pmatrix} x \\\\ y \\\\ z \\end{pmatrix} = \\begin{pmatrix} 2x - y + 3z \\\\ 4x + 5z \\end{pmatrix} = T(x, y, z)$.`,
     before: ``,
@@ -1207,7 +1208,8 @@ $T(x) = 1 = 1 \\cdot 1 + 0 \\cdot x$, so column $2$ is $(1, 0)^T$.
 
 $T(x^2) = 2x = 0 \\cdot 1 + 2 \\cdot x$, so column $3$ is $(0, 2)^T$.
 
-$$[T] = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: Differentiation
+$$[T] = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix}$$]@
 
 The $2 \\times 3$ shape reflects $\\dim(\\mathcal{P}_1) = 2$ rows and $\\dim(\\mathcal{P}_2) = 3$ columns. The [rank](!/linear-algebra/matrix/rank) is $2$ — differentiation maps $\\mathcal{P}_2$ onto all of $\\mathcal{P}_1$. The [null space](!/linear-algebra/vector-spaces/fundamental-spaces) is one-dimensional, spanned by the constant polynomial $1$ — the only polynomials whose derivative is zero.`,
     before: ``,

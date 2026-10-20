@@ -396,14 +396,11 @@ With $P(A) = 0.8$ and $P(B) = 0.3$ in independent mode the overlap grows to $0.2
 
 Each calculation follows a three-step format: **(1) Formula** showing the general probability rule, **(2) Substitution** replacing variables with actual values, **(3) Result** computing the final probability. Steps are indented for clarity.
 
-@academic[example:Example - Independent P(A∩B)
-Step 1 shows "P(A ∩ B) = P(A) × P(B) (independent events)", establishing the multiplication rule. Step 2 shows "P(A ∩ B) = 0.5 × 0.4", substituting provided values. Step 3 shows "P(A ∩ B) = 0.2000", the computed result.]@
+**Example - Independent P(A∩B)**: Step 1 shows "P(A ∩ B) = P(A) × P(B) (independent events)", establishing the multiplication rule. Step 2 shows "P(A ∩ B) = 0.5 × 0.4", substituting provided values. Step 3 shows "P(A ∩ B) = 0.2000", the computed result.
 
-@academic[example:Example - Conditional P(A|B)
-Step 1 shows "P(A|B) = P(A ∩ B) / P(B)", the definition of conditional probability. Step 2 shows "P(A|B) = 0.2000 / 0.4", using the derived intersection. Step 3 shows "P(A|B) = 0.5000", the conditional probability.]@
+**Example - Conditional P(A|B)**: Step 1 shows "P(A|B) = P(A ∩ B) / P(B)", the definition of conditional probability. Step 2 shows "P(A|B) = 0.2000 / 0.4", using the derived intersection. Step 3 shows "P(A|B) = 0.5000", the conditional probability.
 
-@academic[example:Example - Union from addition rule
-Step 1 shows "P(A ∪ B) = P(A) + P(B) - P(A ∩ B)", the addition rule. Step 2 shows "P(A ∪ B) = 0.5 + 0.4 - 0.2000", substituting all values. Step 3 shows "P(A ∪ B) = 0.7000", the total coverage.]@
+**Example - Union from addition rule**: Step 1 shows "P(A ∪ B) = P(A) + P(B) - P(A ∩ B)", the addition rule. Step 2 shows "P(A ∪ B) = 0.5 + 0.4 - 0.2000", substituting all values. Step 3 shows "P(A ∪ B) = 0.7000", the total coverage.
 
 Calculations reference previously computed values, showing dependency chains. For instance, P(A|B) calculation references P(A∩B) computed earlier. This demonstrates how complex probabilities build from simpler ones.
 

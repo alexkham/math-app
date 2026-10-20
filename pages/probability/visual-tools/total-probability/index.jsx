@@ -650,8 +650,8 @@ export default function TotalProbabilityPage({ instructions, demos,relatedTools,
      <ExplanationDetails title='How to use' instructions={instructions} accent='#4F46E5' />
    </div>
    <br/>
-      <br/>
-      <div style={{transform:'scale(0.85)'}}>
+      {/* zoom, not transform: scale keeps the full layout height and left a gap under How to use */}
+      <div style={{zoom:0.85}}>
         <TotalProbabilityVisualizerV2 explanations={explanations}/>
       </div>
       <br/>

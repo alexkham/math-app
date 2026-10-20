@@ -1381,7 +1381,8 @@ The last nonzero row contains the fewest unknowns — typically one pivot variab
 
 ## Worked Example
 
-$$\\left(\\begin{array}{ccc|c} 2 & -1 & 3 & 9 \\\\ 0 & 4 & -2 & 6 \\\\ 0 & 0 & 5 & 10 \\end{array}\\right)$$
+@academic[formula_callout:Back Substitution
+$$\\left(\\begin{array}{ccc|c} 2 & -1 & 3 & 9 \\\\ 0 & 4 & -2 & 6 \\\\ 0 & 0 & 5 & 10 \\end{array}\\right)$$]@
 
 The bottom row gives $5x_3 = 10$, so $x_3 = 2$. The middle row gives $4x_2 - 2(2) = 6$, so $4x_2 = 10$ and $x_2 = 5/2$. The top row gives $2x_1 - 5/2 + 3(2) = 9$, so $2x_1 = 9 + 5/2 - 6 = 11/2$ and $x_1 = 11/4$.
 
@@ -1407,13 +1408,16 @@ For hand computation, the choice between back substitution (stop at REF) and Gau
     title: `Worked Example: Unique Solution`,
     content: `Solve the system
 
-$$x_1 + 2x_2 - x_3 = 3, \\quad 2x_1 + 5x_2 + x_3 = 8, \\quad 3x_1 + 8x_2 + 2x_3 = 13$$
+@academic[formula_callout:Worked Example: Unique Solution
+$$x_1 + 2x_2 - x_3 = 3, \\quad 2x_1 + 5x_2 + x_3 = 8, \\quad 3x_1 + 8x_2 + 2x_3 = 13$$]@
 
 Form the augmented matrix and apply forward elimination:
 
-$$\\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 2 & 5 & 1 & 8 \\\\ 3 & 8 & 2 & 13 \\end{array}\\right) \\xrightarrow{R_2 - 2R_1,\\; R_3 - 3R_1} \\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 & 1 & 3 & 2 \\\\ 0 & 2 & 5 & 4 \\end{array}\\right)$$
+@academic[formula_callout:Worked Example: Unique Solution
+$$\\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 2 & 5 & 1 & 8 \\\\ 3 & 8 & 2 & 13 \\end{array}\\right) \\xrightarrow{R_2 - 2R_1,\\; R_3 - 3R_1} \\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 & 1 & 3 & 2 \\\\ 0 & 2 & 5 & 4 \\end{array}\\right)$$]@
 
-$$\\xrightarrow{R_3 - 2R_2} \\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 & 1 & 3 & 2 \\\\ 0 & 0 & -1 & 0 \\end{array}\\right)$$
+@academic[formula_callout:Worked Example: Unique Solution
+$$\\xrightarrow{R_3 - 2R_2} \\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 & 1 & 3 & 2 \\\\ 0 & 0 & -1 & 0 \\end{array}\\right)$$]@
 
 Three pivots in three columns — unique solution. Back substitution: row $3$ gives $-x_3 = 0$, so $x_3 = 0$. Row $2$ gives $x_2 + 3(0) = 2$, so $x_2 = 2$. Row $1$ gives $x_1 + 2(2) - 0 = 3$, so $x_1 = -1$.
 
@@ -1428,17 +1432,20 @@ To run the same elimination on your own system, use the [linear systems calculat
     title: `Worked Example: Infinitely Many Solutions`,
     content: `Solve the system
 
-$$x_1 - x_2 + 2x_3 + x_4 = 3, \\quad 2x_1 - 2x_2 + 5x_3 + 4x_4 = 8$$
+@academic[formula_callout:Worked Example: Infinitely Many Solutions
+$$x_1 - x_2 + 2x_3 + x_4 = 3, \\quad 2x_1 - 2x_2 + 5x_3 + 4x_4 = 8$$]@
 
 Two equations in four unknowns — more unknowns than equations, so the solution (if it exists) cannot be unique. Form and reduce:
 
-$$\\left(\\begin{array}{cccc|c} 1 & -1 & 2 & 1 & 3 \\\\ 2 & -2 & 5 & 4 & 8 \\end{array}\\right) \\xrightarrow{R_2 - 2R_1} \\left(\\begin{array}{cccc|c} 1 & -1 & 2 & 1 & 3 \\\\ 0 & 0 & 1 & 2 & 2 \\end{array}\\right)$$
+@academic[formula_callout:Worked Example: Infinitely Many Solutions
+$$\\left(\\begin{array}{cccc|c} 1 & -1 & 2 & 1 & 3 \\\\ 2 & -2 & 5 & 4 & 8 \\end{array}\\right) \\xrightarrow{R_2 - 2R_1} \\left(\\begin{array}{cccc|c} 1 & -1 & 2 & 1 & 3 \\\\ 0 & 0 & 1 & 2 & 2 \\end{array}\\right)$$]@
 
 Pivots in columns $1$ and $3$. Columns $2$ and $4$ are free. Let $x_2 = s$ and $x_4 = t$. Row $2$ gives $x_3 = 2 - 2t$. Row $1$ gives $x_1 = 3 + s - 2(2 - 2t) - t = -1 + s + 3t$.
 
 The general solution in parametric vector form:
 
-$$\\mathbf{x} = \\begin{pmatrix} -1 \\\\ 0 \\\\ 2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 3 \\\\ 0 \\\\ -2 \\\\ 1 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: Infinitely Many Solutions
+$$\\mathbf{x} = \\begin{pmatrix} -1 \\\\ 0 \\\\ 2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 3 \\\\ 0 \\\\ -2 \\\\ 1 \\end{pmatrix}$$]@
 
 The solution set is a two-dimensional plane in $\\mathbb{R}^4$, passing through $(-1, 0, 2, 0)$ and spanned by two direction vectors.`,
     before: ``,
@@ -1449,11 +1456,13 @@ The solution set is a two-dimensional plane in $\\mathbb{R}^4$, passing through 
     title: `Worked Example: No Solution`,
     content: `Solve the system
 
-$$x_1 + x_2 = 2, \\quad 2x_1 + 2x_2 = 3$$
+@academic[formula_callout:Worked Example: No Solution
+$$x_1 + x_2 = 2, \\quad 2x_1 + 2x_2 = 3$$]@
 
 Form and reduce:
 
-$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 2 & 2 & 3 \\end{array}\\right) \\xrightarrow{R_2 - 2R_1} \\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 0 & 0 & -1 \\end{array}\\right)$$
+@academic[formula_callout:Worked Example: No Solution
+$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 2 & 2 & 3 \\end{array}\\right) \\xrightarrow{R_2 - 2R_1} \\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 0 & 0 & -1 \\end{array}\\right)$$]@
 
 The second row reads $0x_1 + 0x_2 = -1$, which is the equation $0 = -1$. This is a contradiction — no values of $x_1$ and $x_2$ can satisfy it.
 

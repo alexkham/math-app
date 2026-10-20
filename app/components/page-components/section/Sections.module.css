@@ -160,5 +160,21 @@
 
  .section {
   scroll-padding-top: 150px; /* Adjust to your header height */
-  width: 100%;
+  /* auto, not 100%: with margin-left: 50px a 100% width pushed the card 50px past its
+     container, under the fixed right icon bar */
+  width: auto;
+}
+
+/* Text parts of a section (strings run through processContent) stop at a readable line
+   length; tables, diagrams and other React items keep the full section width. */
+.proseContent {
+  max-width: 90%; /* text column: 90% of the section, centred (5% space each side) */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .proseContent {
+    max-width: none; /* phones and small tablets: use the full width */
+  }
 }

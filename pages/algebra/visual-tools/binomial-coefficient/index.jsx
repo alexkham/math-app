@@ -910,7 +910,8 @@ export default function BinomialCoefficientVisualizerPage({ instructions, demos,
    </div>
    <br/>
       <br/>
-      <div style={{transform:'scale(0.85)'}}>
+      {/* zoom, not transform: scale keeps the full layout height and leaves empty space above and below the tool */}
+      <div style={{ zoom: 0.85}}>
         <BinomialCoefficientsVisualizer explanations={explanations}/>
       </div>
       <br/>

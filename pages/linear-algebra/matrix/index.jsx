@@ -870,7 +870,8 @@ const sectionsContent = {
 
 In full generality, an $m \\times n$ matrix looks like
 
-$$A = \\begin{pmatrix} a_{11} & a_{12} & \\cdots & a_{1n} \\\\ a_{21} & a_{22} & \\cdots & a_{2n} \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ a_{m1} & a_{m2} & \\cdots & a_{mn} \\end{pmatrix}$$
+@academic[formula_callout:What a Matrix Is
+$$A = \\begin{pmatrix} a_{11} & a_{12} & \\cdots & a_{1n} \\\\ a_{21} & a_{22} & \\cdots & a_{2n} \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ a_{m1} & a_{m2} & \\cdots & a_{mn} \\end{pmatrix}$$]@
 
 The entries can be real numbers, complex numbers, or elements of any algebraic field. Throughout this site, entries are real unless explicitly stated otherwise.`,
     before: ``,
@@ -901,13 +902,19 @@ The zero matrix is the $m \\times n$ matrix whose every entry is zero, written $
     title: `Matrices as Collections of Vectors`,
     content: `An $m \\times n$ matrix can be viewed as a collection of $n$ column vectors in $\\mathbb{R}^m$, arranged side by side:
 
-$$A = \\begin{pmatrix} | & | & & | \\\\ \\mathbf{a}_1 & \\mathbf{a}_2 & \\cdots & \\mathbf{a}_n \\\\ | & | & & | \\end{pmatrix}$$
+@academic[formula_callout:Matrices as Collections of Vectors
+$$A = \\begin{pmatrix} | & | & & | \\\\ \\mathbf{a}_1 & \\mathbf{a}_2 & \\cdots & \\mathbf{a}_n \\\\ | & | & & | \\end{pmatrix}$$]@
 
 Equivalently, it is a stack of $m$ row vectors in $\\mathbb{R}^n$. Both perspectives are useful, and choosing the right one often simplifies a problem considerably. The column view connects the matrix to concepts like [span](!/linear-algebra/vector-spaces/span), [linear independence](!/linear-algebra/vector-spaces/linear-independence), and column space. The row view connects it to systems of equations and row space.
 
 The column perspective also gives a powerful interpretation of the matrix-vector product. If $\\mathbf{x} = (x_1, x_2, \\dots, x_n)^T$, then
 
+@academic[formula_callout:Matrix-Vector Product (Column Form)
 $$A\\mathbf{x} = x_1 \\mathbf{a}_1 + x_2 \\mathbf{a}_2 + \\cdots + x_n \\mathbf{a}_n$$
+/linear-algebra/formulas#matrix-vector_product_column_form]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The product $A\\mathbf{x}$ is a [linear combination](!/linear-algebra/vectors/linear-combinations) of the columns of $A$, weighted by the entries of $\\mathbf{x}$. This single observation underlies the theory of linear systems, transformations, and virtually everything else involving matrices.`,
     before: ``,
@@ -948,7 +955,8 @@ These and several other [types](!/linear-algebra/matrix/types) — including ske
 
 Not every square matrix has an inverse. The dividing line is the [determinant](!/linear-algebra/determinants): $A$ is invertible if and only if $\\det(A) \\neq 0$. For a $2 \\times 2$ matrix $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, the inverse has the explicit formula
 
-$$A^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$
+@academic[formula_callout:The Inverse of a Matrix
+$$A^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$]@
 
 which breaks down precisely when $ad - bc = 0$. For larger matrices, the inverse can be computed by row reduction or through the adjugate formula, though in practice solving $Ax = \\mathbf{b}$ directly is almost always more efficient than computing $A^{-1}$.`,
     before: ``,
@@ -970,7 +978,8 @@ The [trace](!/linear-algebra/matrix/trace) is defined only for square matrices: 
     title: `Matrices and Systems of Equations`,
     content: `A system of $m$ linear equations in $n$ unknowns can be written compactly as
 
-$$Ax = \\mathbf{b}$$
+@academic[formula_callout:Matrices and Systems of Equations
+$$Ax = \\mathbf{b}$$]@
 
 where $A$ is the $m \\times n$ coefficient matrix, $\\mathbf{x}$ is the $n \\times 1$ vector of unknowns, and $\\mathbf{b}$ is the $m \\times 1$ vector of right-hand sides. The augmented matrix $[A \\mid \\mathbf{b}]$ appends $\\mathbf{b}$ as an extra column, creating the compact representation used in [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination).
 

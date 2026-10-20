@@ -381,7 +381,8 @@ For full coverage, see the **binary numbers page**, **octal numbers page**, and 
 - Replace $N$ with the quotient and repeat
 - Stop when the quotient reaches $0$; reading remainders bottom-up gives the digits
 
-Example: converting $13$ to base $2$ gives remainders $1, 0, 1, 1$ read upward, so $13_{10} = 1101_2$.
+@academic[example:Example
+converting $13$ to base $2$ gives remainders $1, 0, 1, 1$ read upward, so $13_{10} = 1101_2$.]@
 
 The reverse direction — base $b$ to decimal — uses the positional expansion shown earlier: multiply each digit by the appropriate power of $b$ and sum.
 

@@ -1304,7 +1304,7 @@ For matrix transformations between spaces of the same dimension, bijectivity is 
 
 @academic[formula_callout:Rank-Nullity for Maps
 $$\\dim\\text{Im}(T) + \\dim\\ker(T) = \\dim V$$
-/linear-algebra/formulas#rank_nullity_for_maps]@
+/linear-algebra/formulas#rank-nullity_for_maps]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
@@ -1341,9 +1341,9 @@ The kernel is the null space of $A$: solve $A\\mathbf{x} = \\mathbf{0}$, reduce 
 
 The image is the column space of $A$: row reduce $A$, identify the pivot columns, and take the corresponding columns of the original matrix $A$ as a basis for $\\text{Im}(T)$.
 
-## Worked Example
+@academic[example:Worked Example
 
-For $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 1 \\\\ 1 & 3 & 4 \\end{pmatrix}$, row reduction gives $\\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$. Pivots in columns $1$ and $2$. The image has basis $\\{(1, 0, 1), (2, 1, 3)\\}$ — two-dimensional. The kernel has one free variable ($x_3 = t$), giving $\\ker(T) = \\text{Span}\\{(-1, -1, 1)\\}$ — one-dimensional. Check: $2 + 1 = 3 = n$.`,
+For $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 1 \\\\ 1 & 3 & 4 \\end{pmatrix}$, row reduction gives $\\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$. Pivots in columns $1$ and $2$. The image has basis $\\{(1, 0, 1), (2, 1, 3)\\}$ — two-dimensional. The kernel has one free variable ($x_3 = t$), giving $\\ker(T) = \\text{Span}\\{(-1, -1, 1)\\}$ — one-dimensional. Check: $2 + 1 = 3 = n$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1352,7 +1352,8 @@ For $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 1 \\\\ 1 & 3 & 4 \\end{pmatrix}
     title: `The Fundamental Decomposition`,
     content: `The rank-nullity theorem has a structural interpretation that goes beyond dimension counting. The domain $V$ decomposes as a direct sum:
 
-$$V = \\ker(T) \\oplus (\\text{a complement of } \\ker(T))$$
+@academic[formula_callout:The Fundamental Decomposition
+$$V = \\ker(T) \\oplus (\\text{a complement of } \\ker(T))$$]@
 
 The transformation $T$ kills everything in the kernel and maps the complement bijectively onto the image. Every vector $\\mathbf{v} \\in V$ splits as $\\mathbf{v} = \\mathbf{v}_k + \\mathbf{v}_c$ where $\\mathbf{v}_k \\in \\ker(T)$ and $\\mathbf{v}_c$ is in the complement. Then $T(\\mathbf{v}) = T(\\mathbf{v}_c)$, and the restriction of $T$ to the complement is a bijection onto $\\text{Im}(T)$.
 

@@ -411,7 +411,7 @@ const sectionsContent = {
 - [Discriminant](!/algebra/formulas#discriminant) — $\\Delta = b^2 - 4ac$
 - [Square Root Property](!/algebra/formulas#square_root_property) — $x^2 = p \\implies x = \\pm\\sqrt{p}$
 - [Completing the Square](!/algebra/formulas#completing_the_square) — $x^2 + bx = \\left(x + \\frac{b}{2}\\right)^2 - \\frac{b^2}{4}$
-- [Vieta's Formulas (Quadratic)](!/algebra/formulas#vietas_quadratic) — $x_1 + x_2 = -\\frac{b}{a}$, $x_1 \\cdot x_2 = \\frac{c}{a}$
+- [Vieta's Formulas (Quadratic)](!/algebra/formulas#vietas_formulas_quadratic) — $x_1 + x_2 = -\\frac{b}{a}$, $x_1 \\cdot x_2 = \\frac{c}{a}$
 `,
     before: ``,
     after: `
@@ -426,7 +426,8 @@ const sectionsContent = {
     title: `Definition and Standard Form`,
     content: `A quadratic equation in one variable is any equation that can be written as
 
-$$ax^2 + bx + c = 0$$
+@academic[formula_callout:Definition and Standard Form
+$$ax^2 + bx + c = 0$$]@
 
 where $a$, $b$, and $c$ are real constants and $a \\neq 0$. The requirement $a \\neq 0$ is what makes the equation genuinely quadratic — if $a$ were zero, the $x^2$ term would vanish and the equation would reduce to a [linear equation](!/algebra/equations/linear).
 
@@ -510,15 +511,18 @@ $$x^2 + bx = \\left(x + \\frac{b}{2}\\right)^2 - \\frac{b^2}{4}$$
 
 Starting from $ax^2 + bx + c = 0$, divide every term by $a$ to obtain $x^2 + \\frac{b}{a}x + \\frac{c}{a} = 0$. Move the constant to the right side:
 
-$$x^2 + \\frac{b}{a}x = -\\frac{c}{a}$$
+@academic[formula_callout:Solving by Completing the Square
+$$x^2 + \\frac{b}{a}x = -\\frac{c}{a}$$]@
 
 The left side is almost a perfect square trinomial. Adding $\\left(\\frac{b}{2a}\\right)^2$ to both sides completes it:
 
-$$x^2 + \\frac{b}{a}x + \\frac{b^2}{4a^2} = \\frac{b^2}{4a^2} - \\frac{c}{a}$$
+@academic[formula_callout:Solving by Completing the Square
+$$x^2 + \\frac{b}{a}x + \\frac{b^2}{4a^2} = \\frac{b^2}{4a^2} - \\frac{c}{a}$$]@
 
 The left side factors as a perfect square:
 
-$$\\left(x + \\frac{b}{2a}\\right)^2 = \\frac{b^2 - 4ac}{4a^2}$$
+@academic[formula_callout:Solving by Completing the Square
+$$\\left(x + \\frac{b}{2a}\\right)^2 = \\frac{b^2 - 4ac}{4a^2}$$]@
 
 Taking the square root of both sides and isolating $x$ gives the two solutions. The expression under the square root, $b^2 - 4ac$, determines whether those solutions are real or complex.
 
@@ -543,7 +547,8 @@ This is the quadratic formula. It accepts any real coefficients $a$, $b$, $c$ (w
 
 For the equation $2x^2 - 3x - 5 = 0$, the coefficients are $a = 2$, $b = -3$, $c = -5$. Substituting:
 
-$$x = \\frac{-(-3) \\pm \\sqrt{(-3)^2 - 4(2)(-5)}}{2(2)} = \\frac{3 \\pm \\sqrt{9 + 40}}{4} = \\frac{3 \\pm \\sqrt{49}}{4} = \\frac{3 \\pm 7}{4}$$
+@academic[formula_callout:The Quadratic Formula
+$$x = \\frac{-(-3) \\pm \\sqrt{(-3)^2 - 4(2)(-5)}}{2(2)} = \\frac{3 \\pm \\sqrt{9 + 40}}{4} = \\frac{3 \\pm \\sqrt{49}}{4} = \\frac{3 \\pm 7}{4}$$]@
 
 The two solutions are $x = \\frac{10}{4} = \\frac{5}{2}$ and $x = \\frac{-4}{4} = -1$.
 

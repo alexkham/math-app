@@ -554,7 +554,8 @@ A removable discontinuity occurs when the limit exists but differs from the func
 
 Consider:
 
-$$f(x) = \\frac{x^2 - 1}{x - 1}$$
+@academic[formula_callout:Removable Discontinuity
+$$f(x) = \\frac{x^2 - 1}{x - 1}$$]@
 
 For $x \\neq 1$, this simplifies to $x + 1$. The limit as $x \\to 1$ is $2$. But $f(1)$ is undefined—division by zero.
 
@@ -571,13 +572,15 @@ Removable discontinuities are "accidents" that can be repaired with a single poi
     content: `
 A jump discontinuity occurs when both [one-sided limits](!/calculus/limits/one-sided) exist but are unequal:
 
-$$\\lim_{x \\to a^-} f(x) \\neq \\lim_{x \\to a^+} f(x)$$
+@academic[formula_callout:Jump Discontinuity
+$$\\lim_{x \\to a^-} f(x) \\neq \\lim_{x \\to a^+} f(x)$$]@
 
 The function "jumps" from one value to another at $x = a$.
 
 The floor function $\\lfloor x \\rfloor$ jumps at every integer. At $x = 2$:
 
-$$\\lim_{x \\to 2^-} \\lfloor x \\rfloor = 1 \\qquad \\lim_{x \\to 2^+} \\lfloor x \\rfloor = 2$$
+@academic[formula_callout:Jump Discontinuity
+$$\\lim_{x \\to 2^-} \\lfloor x \\rfloor = 1 \\qquad \\lim_{x \\to 2^+} \\lfloor x \\rfloor = 2$$]@
 
 No single value of $f(2)$ can equal both one-sided limits. The discontinuity cannot be removed—the gap is intrinsic to the function's definition.
 `,
@@ -592,7 +595,8 @@ An infinite discontinuity occurs when the function blows up—at least one one-s
 
 For $f(x) = \\dfrac{1}{x}$ at $x = 0$:
 
-$$\\lim_{x \\to 0^-} \\frac{1}{x} = -\\infty \\qquad \\lim_{x \\to 0^+} \\frac{1}{x} = +\\infty$$
+@academic[formula_callout:Infinite Discontinuity
+$$\\lim_{x \\to 0^-} \\frac{1}{x} = -\\infty \\qquad \\lim_{x \\to 0^+} \\frac{1}{x} = +\\infty$$]@
 
 The graph has a [vertical asymptote](!/calculus/limits/infinity) at $x = 0$. No finite value can serve as $f(0)$ because the function escapes to infinity from both sides.
 
@@ -683,7 +687,8 @@ This theorem guarantees existence. It says a $c$ exists but does not tell you wh
     content: `
 A sign change guarantees a root. If $f$ is continuous on $[a, b]$ with:
 
-$$f(a) < 0 \\quad \\text{and} \\quad f(b) > 0$$
+@academic[formula_callout:Using IVT to Locate Roots
+$$f(a) < 0 \\quad \\text{and} \\quad f(b) > 0$$]@
 
 then $f(c) = 0$ for some $c \\in (a, b)$.
 

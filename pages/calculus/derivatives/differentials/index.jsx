@@ -1330,9 +1330,11 @@ For a linear function $f(x) = mx + b$, the differential $dy = m \\cdot dx$ equal
     content: `
 Two quantities measure the change in $y$ when $x$ changes by $dx$:
 
-$$\\Delta y = f(x + dx) - f(x) \\qquad \\text{(actual change)}$$
+@academic[formula_callout:dy Versus Δy
+$$\\Delta y = f(x + dx) - f(x) \\qquad \\text{(actual change)}$$]@
 
-$$dy = f'(x) \\cdot dx \\qquad \\text{(tangent line estimate)}$$
+@academic[formula_callout:dy Versus Δy
+$$dy = f'(x) \\cdot dx \\qquad \\text{(tangent line estimate)}$$]@
 
 The actual change $\\Delta y$ follows the curve. The differential $dy$ follows the tangent line. The difference $\\Delta y - dy$ is the error introduced by the linear approximation.
 
@@ -1422,13 +1424,15 @@ The linearization can also be written as $L(x) = f(a) + f'(a)(x - a)$, the tange
     content: `
 If a quantity $x$ is measured with error $dx$, the computed value $f(x)$ inherits an error approximately equal to the differential:
 
-$$\\text{absolute error in } f \\approx |dy| = |f'(x)| \\cdot |dx|$$
+@academic[formula_callout:Error Estimation
+$$\\text{absolute error in } f \\approx |dy| = |f'(x)| \\cdot |dx|$$]@
 
 The derivative acts as an error amplification factor. Where $|f'(x)|$ is large, small measurement errors in $x$ produce large errors in $f(x)$. Where $|f'(x)|$ is small, errors are suppressed.
 
 The relative error normalizes by the function value:
 
-$$\\frac{|dy|}{|f(x)|} = \\frac{|f'(x)|}{|f(x)|} \\cdot |dx|$$
+@academic[formula_callout:Error Estimation
+$$\\frac{|dy|}{|f(x)|} = \\frac{|f'(x)|}{|f(x)|} \\cdot |dx|$$]@
 
 The ratio $\\frac{f'(x)}{f(x)} = \\frac{d}{dx}[\\ln|f(x)|]$ is the logarithmic derivative. Relative error in the output equals the logarithmic derivative times the absolute error in the input.
 
@@ -1492,17 +1496,20 @@ Separation of variables in differential equations—writing $\\frac{dy}{dx} = g(
     content: `
 If $dx$ is held constant (treated as a fixed increment), the second differential of $y$ is
 
-$$d^2 y = f''(x) \\cdot (dx)^2$$
+@academic[formula_callout:Higher-Order Differentials
+$$d^2 y = f''(x) \\cdot (dx)^2$$]@
 
 The notation $d^2 y / dx^2$ for the [second derivative](!/calculus/derivatives/higher-order) arises from dividing both sides by $(dx)^2$:
 
-$$\\frac{d^2 y}{dx^2} = \\frac{d^2 y}{(dx)^2} = f''(x)$$
+@academic[formula_callout:Higher-Order Differentials
+$$\\frac{d^2 y}{dx^2} = \\frac{d^2 y}{(dx)^2} = f''(x)$$]@
 
 This explains the Leibniz notation for higher derivatives. The superscript on $d^2 y$ counts the number of times the differential operator $d$ has been applied. The square on $dx^2$ reflects that $dx$ appears as a factor twice—not that $dx$ is squared in a power sense.
 
 Higher-order differentials extend the approximation. The second-order estimate of the change in $y$ is
 
-$$\\Delta y \\approx f'(x)\\,dx + \\frac{1}{2}f''(x)(dx)^2$$
+@academic[formula_callout:Higher-Order Differentials
+$$\\Delta y \\approx f'(x)\\,dx + \\frac{1}{2}f''(x)(dx)^2$$]@
 
 This is the beginning of the Taylor expansion written in differential notation: $f(x + dx) \\approx f(x) + f'(x)\\,dx + \\frac{1}{2}f''(x)(dx)^2 + \\cdots$. Each additional term uses a higher-order derivative and a higher power of $dx$, improving the approximation at the cost of more computation.
 `,

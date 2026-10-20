@@ -1,0 +1,4022 @@
+{
+  "$meta": {
+    "version": "1.0.0",
+    "description": "Examples registry: every worked example on the site that sits in an @academic[example:…]@ block, plus the labelled examples that were left unwrapped because the spot is already taken. Pages stay the source of truth; this file only points at them.",
+    "generated": "2026-10-18",
+    "generatedBy": "example-block scan — regenerate, never hand-edit",
+    "source": "http://localhost:3000",
+    "conventions": {
+      "id": "'<page>#<section>/<n>' — n is the example's position inside its section (1-based). Changes if an example is inserted above it. '<page>#/<n>' when the example is not inside a page section (e.g. the calculator's operation guide).",
+      "sectionKey": "'<page>#<section>' — the same key as sections.json id; null when the section anchor could not be read.",
+      "example": "One solved problem: the task, the steps, the answer. Lists of quick instances and comments after the answer are not examples.",
+      "task": "First line of the example body as authored (LaTeX kept, markdown kept).",
+      "result": "Last line of the example body as authored; null for one-line examples.",
+      "source": "file and line are a snapshot at generation time; view is the dynamic-route view key, null for static pages.",
+      "status": "wrapped (inside an example block) | skipped (labelled example left as text; see reason)"
+    },
+    "counts": {
+      "examples": 209,
+      "wrapped": 202,
+      "skipped": 7,
+      "pages": 58,
+      "bySubject": {
+        "algebra": 35,
+        "calculus": 12,
+        "combinatorics": 6,
+        "complex-numbers": 18,
+        "functions": 2,
+        "linear-algebra": 15,
+        "logic": 14,
+        "probability": 92,
+        "tables": 3,
+        "trigonometry": 12
+      }
+    },
+    "warnings": [
+      "8 example blocks hold a formula, not a solved problem (not registered): pages/combinatorics/permutations/index.jsx:2091 pages/combinatorics/permutations/index.jsx:2103 pages/combinatorics/permutations/index.jsx:2123 pages/combinatorics/permutations/index.jsx:2161 pages/combinatorics/permutations/index.jsx:2231 pages/combinatorics/permutations/index.jsx:2268 pages/combinatorics/permutations/index.jsx:2322 pages/combinatorics/permutations/index.jsx:2339",
+      "7 rendered example blocks without a source match on /combinatorics/permutations",
+      "not on the page at load (shown only after a click, or not rendered): pages/probability/probability-function/pdf/index.jsx:898",
+      "13 section keys not in sections.json (inventory generated 2026-08-23): /combinatorics/permutations#8 /logic/propositional-logic#properties /logic/propositional-logic/semantics#contigency /logic/propositional-logic/semantics/contradiction#definition /logic/propositional-logic/semantics/implication#misconceptions /logic/propositional-logic/semantics/implication#proofs /logic/propositional-logic/semantics/implication#properties /logic/propositional-logic/semantics/tautology#definition …"
+    ]
+  },
+  "examples": [
+    {
+      "id": "/algebra/logarithms/equations#1/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "1",
+      "sectionKey": "/algebra/logarithms/equations#1",
+      "sectionTitle": "Basic Form: Logarithm Equals a Constant",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\log_2(x) = 5$.",
+      "result": "$$x = 2^5 = 32$$",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 187,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/equations#1/2",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "1",
+      "sectionKey": "/algebra/logarithms/equations#1",
+      "sectionTitle": "Basic Form: Logarithm Equals a Constant",
+      "order": 2,
+      "title": "Example",
+      "task": "Solve $\\log_3(x) = -2$.",
+      "result": "$$x = 3^{-2} = \\frac{1}{9}$$",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 191,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/equations#1/3",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "1",
+      "sectionKey": "/algebra/logarithms/equations#1",
+      "sectionTitle": "Basic Form: Logarithm Equals a Constant",
+      "order": 3,
+      "title": "Example",
+      "task": "Solve $\\ln(x) = 4$.",
+      "result": "$$x = e^4 \\approx 54.598$$",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 195,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/equations#1/4",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "1",
+      "sectionKey": "/algebra/logarithms/equations#1",
+      "sectionTitle": "Basic Form: Logarithm Equals a Constant",
+      "order": 4,
+      "title": "Example",
+      "task": "Solve $\\log_5(2x - 1) = 2$.",
+      "result": "$$x = 13$$",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 201,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/equations#2/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "2",
+      "sectionKey": "/algebra/logarithms/equations#2",
+      "sectionTitle": "Logarithms on Both Sides",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\log_4(3x + 2) = \\log_4(x + 10)$.",
+      "result": "Verification: $\\log_4(3(4) + 2) = \\log_4(14)$ and $\\log_4(4 + 10) = \\log_4(14)$. Both arguments are positive, and the equation holds.",
+      "bodyLines": 5,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 216,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/equations#2/2",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "2",
+      "sectionKey": "/algebra/logarithms/equations#2",
+      "sectionTitle": "Logarithms on Both Sides",
+      "order": 2,
+      "title": "Example",
+      "task": "Solve $\\ln(x^2) = \\ln(9)$.",
+      "result": "Check both: $\\ln((-3)^2) = \\ln(9)$ works, and $\\ln((3)^2) = \\ln(9)$ works. Both solutions are valid.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 224,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/equations#3/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "3",
+      "sectionKey": "/algebra/logarithms/equations#3",
+      "sectionTitle": "Combining Logarithms",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\log_2(x) + \\log_2(x - 2) = 3$.",
+      "result": "Solution: $x = 4$.",
+      "bodyLines": 11,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 238,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/equations#4/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "4",
+      "sectionKey": "/algebra/logarithms/equations#4",
+      "sectionTitle": "Domain Restrictions",
+      "order": 1,
+      "title": "Example",
+      "task": "In $\\log_3(x - 5) + \\log_3(x + 1) = 2$, the restrictions are:",
+      "result": "The intersection is $x > 5$. Any solution must satisfy $x > 5$.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 264,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/equations#5/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "5",
+      "sectionKey": "/algebra/logarithms/equations#5",
+      "sectionTitle": "Extraneous Solutions",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\log(x) + \\log(x - 3) = 1$.",
+      "result": "Check $x = -2$: $\\log(-2)$ — undefined. Extraneous.",
+      "bodyLines": 8,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 292,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/equations#6/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "6",
+      "sectionKey": "/algebra/logarithms/equations#6",
+      "sectionTitle": "Equations Requiring Substitution",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $(\\log_2(x))^2 - 5\\log_2(x) + 6 = 0$.",
+      "result": "Both satisfy $x > 0$. Solutions: $x = 4$ and $x = 8$.",
+      "bodyLines": 9,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 316,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/equations#6/2",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "6",
+      "sectionKey": "/algebra/logarithms/equations#6",
+      "sectionTitle": "Equations Requiring Substitution",
+      "order": 2,
+      "title": "Example",
+      "task": "Solve $\\ln(x) + \\frac{6}{\\ln(x)} = 5$.",
+      "result": "Back-substitute: $x = e^2$ or $x = e^3$.",
+      "bodyLines": 7,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 330,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/equations#7/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "7",
+      "sectionKey": "/algebra/logarithms/equations#7",
+      "sectionTitle": "Solving Exponential Equations via Logarithms",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $3^x = 7$.",
+      "result": "$$x = \\frac{\\log(7)}{\\log(3)} \\approx \\frac{0.845}{0.477} \\approx 1.771$$",
+      "bodyLines": 5,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 348,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/equations#7/2",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "7",
+      "sectionKey": "/algebra/logarithms/equations#7",
+      "sectionTitle": "Solving Exponential Equations via Logarithms",
+      "order": 2,
+      "title": "Example",
+      "task": "Solve $5^{2x+1} = 12$.",
+      "result": "$$x = \\frac{1}{2}\\left(\\frac{\\ln(12)}{\\ln(5)} - 1\\right) \\approx 0.271$$",
+      "bodyLines": 6,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 358,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/equations#8/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/equations",
+      "section": "8",
+      "sectionKey": "/algebra/logarithms/equations#8",
+      "sectionTitle": "Exponentials on Both Sides",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $2^{x+3} = 5^{x-1}$.",
+      "result": "Numerically: $x = \\frac{1.609 + 2.079}{1.609 - 0.693} = \\frac{3.688}{0.916} \\approx 4.026$.",
+      "bodyLines": 11,
+      "source": {
+        "file": "pages/algebra/logarithms/equations/index.jsx",
+        "line": 376,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/graphs#10/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/graphs",
+      "section": "10",
+      "sectionKey": "/algebra/logarithms/graphs#10",
+      "sectionTitle": "Writing Equations from Graphs",
+      "order": 1,
+      "title": "Example",
+      "task": "A graph has asymptote at $x = 2$, passes through $(3, 0)$ and $(4, 1)$.",
+      "result": "Equation: $y = \\log_2(x - 2)$.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/algebra/logarithms/graphs/index.jsx",
+        "line": 319,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/inequalities#1/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/inequalities",
+      "section": "1",
+      "sectionKey": "/algebra/logarithms/inequalities#1",
+      "sectionTitle": "Base Greater Than One: Direction Preserved",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\log_2(x) > 3$.",
+      "result": "Combined with the domain requirement $x > 0$, the solution is $x > 8$.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/algebra/logarithms/inequalities/index.jsx",
+        "line": 153,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/inequalities#1/2",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/inequalities",
+      "section": "1",
+      "sectionKey": "/algebra/logarithms/inequalities#1",
+      "sectionTitle": "Base Greater Than One: Direction Preserved",
+      "order": 2,
+      "title": "Example",
+      "task": "Solve $\\log_5(x) \\leq 2$.",
+      "result": "With domain: $0 < x \\leq 25$.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/algebra/logarithms/inequalities/index.jsx",
+        "line": 160,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/inequalities#2/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/inequalities",
+      "section": "2",
+      "sectionKey": "/algebra/logarithms/inequalities#2",
+      "sectionTitle": "Base Between Zero and One: Direction Reversed",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\log_{1/2}(x) > 3$.",
+      "result": "With domain: $0 < x < \\frac{1}{8}$.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/algebra/logarithms/inequalities/index.jsx",
+        "line": 184,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/inequalities#2/2",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/inequalities",
+      "section": "2",
+      "sectionKey": "/algebra/logarithms/inequalities#2",
+      "sectionTitle": "Base Between Zero and One: Direction Reversed",
+      "order": 2,
+      "title": "Example",
+      "task": "Solve $\\log_{0.1}(x) \\leq -2$.",
+      "result": "Solution: $x \\geq 100$.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/algebra/logarithms/inequalities/index.jsx",
+        "line": 192,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/inequalities#3/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/inequalities",
+      "section": "3",
+      "sectionKey": "/algebra/logarithms/inequalities#3",
+      "sectionTitle": "Logarithms on Both Sides",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\log_3(2x + 1) > \\log_3(x + 4)$ where base $3 > 1$.",
+      "result": "Check domain: $2x + 1 > 0$ requires $x > -1/2$; $x + 4 > 0$ requires $x > -4$. The intersection with $x > 3$ is simply $x > 3$.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/algebra/logarithms/inequalities/index.jsx",
+        "line": 215,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/inequalities#3/2",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/inequalities",
+      "section": "3",
+      "sectionKey": "/algebra/logarithms/inequalities#3",
+      "sectionTitle": "Logarithms on Both Sides",
+      "order": 2,
+      "title": "Example",
+      "task": "Solve $\\log_{1/3}(x - 1) < \\log_{1/3}(5)$ where base $1/3 < 1$.",
+      "result": "Domain requires $x - 1 > 0$, so $x > 1$. Final solution: $x > 6$.",
+      "bodyLines": 5,
+      "source": {
+        "file": "pages/algebra/logarithms/inequalities/index.jsx",
+        "line": 222,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/inequalities#4/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/inequalities",
+      "section": "4",
+      "sectionKey": "/algebra/logarithms/inequalities#4",
+      "sectionTitle": "Domain Considerations",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\log_2(x - 3) > 1$.",
+      "result": "Intersection: $x > 5$ satisfies $x > 3$, so the solution is $x > 5$.",
+      "bodyLines": 6,
+      "source": {
+        "file": "pages/algebra/logarithms/inequalities/index.jsx",
+        "line": 238,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/inequalities#4/2",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/inequalities",
+      "section": "4",
+      "sectionKey": "/algebra/logarithms/inequalities#4",
+      "sectionTitle": "Domain Considerations",
+      "order": 2,
+      "title": "Example",
+      "task": "Solve $\\log_4(x + 2) < 0$.",
+      "result": "Intersection: $-2 < x < -1$.",
+      "bodyLines": 6,
+      "source": {
+        "file": "pages/algebra/logarithms/inequalities/index.jsx",
+        "line": 249,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/inequalities#5/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/inequalities",
+      "section": "5",
+      "sectionKey": "/algebra/logarithms/inequalities#5",
+      "sectionTitle": "Compound Inequalities",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $1 < \\log_2(x) < 4$.",
+      "result": "Combined: $2 < x < 16$.",
+      "bodyLines": 5,
+      "source": {
+        "file": "pages/algebra/logarithms/inequalities/index.jsx",
+        "line": 269,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/inequalities#5/2",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/inequalities",
+      "section": "5",
+      "sectionKey": "/algebra/logarithms/inequalities#5",
+      "sectionTitle": "Compound Inequalities",
+      "order": 2,
+      "title": "Example",
+      "task": "Solve $-1 \\leq \\log_3(x + 1) \\leq 2$.",
+      "result": "Solution: $-\\frac{2}{3} \\leq x \\leq 8$.",
+      "bodyLines": 6,
+      "source": {
+        "file": "pages/algebra/logarithms/inequalities/index.jsx",
+        "line": 278,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/inequalities#6/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/inequalities",
+      "section": "6",
+      "sectionKey": "/algebra/logarithms/inequalities#6",
+      "sectionTitle": "Inequalities with Combined Logarithms",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\log_2(x) + \\log_2(x - 2) > 3$.",
+      "result": "Intersection with $x > 4$ or $x < -2$: only $x > 4$ survives.",
+      "bodyLines": 11,
+      "source": {
+        "file": "pages/algebra/logarithms/inequalities/index.jsx",
+        "line": 297,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/properties#4/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/properties",
+      "section": "4",
+      "sectionKey": "/algebra/logarithms/properties#4",
+      "sectionTitle": "One-to-One Property",
+      "order": 1,
+      "title": "Example",
+      "task": "$\\log_3(2x + 1) = \\log_3(x + 5)$ implies $2x + 1 = x + 5$, giving $x = 4$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/algebra/logarithms/properties/index.jsx",
+        "line": 196,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/rules#1/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/rules",
+      "section": "1",
+      "sectionKey": "/algebra/logarithms/rules#1",
+      "sectionTitle": "The Product Rule",
+      "order": 1,
+      "title": "Example",
+      "task": "$\\log_2(8 \\cdot 4) = \\log_2(8) + \\log_2(4) = 3 + 2 = 5$. Verification: $8 \\cdot 4 = 32 = 2^5$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/algebra/logarithms/rules/index.jsx",
+        "line": 386,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/rules#2/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/rules",
+      "section": "2",
+      "sectionKey": "/algebra/logarithms/rules#2",
+      "sectionTitle": "The Quotient Rule",
+      "order": 1,
+      "title": "Example",
+      "task": "$\\log_3(81/9) = \\log_3(81) - \\log_3(9) = 4 - 2 = 2$. Verification: $81/9 = 9 = 3^2$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/algebra/logarithms/rules/index.jsx",
+        "line": 412,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/rules#3/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/rules",
+      "section": "3",
+      "sectionKey": "/algebra/logarithms/rules#3",
+      "sectionTitle": "The Power Rule",
+      "order": 1,
+      "title": "Example",
+      "task": "$\\log_2(8^4) = 4 \\cdot \\log_2(8) = 4 \\cdot 3 = 12$. Verification: $8^4 = 4096 = 2^{12}$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/algebra/logarithms/rules/index.jsx",
+        "line": 436,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/rules#5/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/rules",
+      "section": "5",
+      "sectionKey": "/algebra/logarithms/rules#5",
+      "sectionTitle": "Expanding Logarithmic Expressions",
+      "order": 1,
+      "title": "Example",
+      "task": "Expand $\\log_2\\left(\\frac{x^3 y}{z^2}\\right)$.",
+      "result": "$$= 3\\log_2(x) + \\log_2(y) - 2\\log_2(z)$$",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/algebra/logarithms/rules/index.jsx",
+        "line": 482,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/rules#5/2",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/rules",
+      "section": "5",
+      "sectionKey": "/algebra/logarithms/rules#5",
+      "sectionTitle": "Expanding Logarithmic Expressions",
+      "order": 2,
+      "title": "Example",
+      "task": "Expand $\\ln\\left(\\sqrt{\\frac{a}{b^3}}\\right)$.",
+      "result": "$$= \\frac{1}{2}\\left(\\ln(a) - \\ln(b^3)\\right) = \\frac{1}{2}\\ln(a) - \\frac{3}{2}\\ln(b)$$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/algebra/logarithms/rules/index.jsx",
+        "line": 489,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/rules#6/1",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/rules",
+      "section": "6",
+      "sectionKey": "/algebra/logarithms/rules#6",
+      "sectionTitle": "Condensing Logarithmic Expressions",
+      "order": 1,
+      "title": "Example",
+      "task": "Condense $2\\log(x) + \\log(y) - 3\\log(z)$.",
+      "result": "$$= \\log(x^2 y) - \\log(z^3) = \\log\\left(\\frac{x^2 y}{z^3}\\right)$$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/algebra/logarithms/rules/index.jsx",
+        "line": 503,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/logarithms/rules#6/2",
+      "subject": "algebra",
+      "page": "/algebra/logarithms/rules",
+      "section": "6",
+      "sectionKey": "/algebra/logarithms/rules#6",
+      "sectionTitle": "Condensing Logarithmic Expressions",
+      "order": 2,
+      "title": "Example",
+      "task": "Condense $\\frac{1}{2}\\ln(a+1) - \\ln(b) - \\ln(c)$.",
+      "result": "$$= \\ln\\sqrt{a+1} - \\ln(bc) = \\ln\\left(\\frac{\\sqrt{a+1}}{bc}\\right)$$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/algebra/logarithms/rules/index.jsx",
+        "line": 509,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/algebra/roots/functions#10/1",
+      "subject": "algebra",
+      "page": "/algebra/roots/functions",
+      "section": "10",
+      "sectionKey": "/algebra/roots/functions#10",
+      "sectionTitle": "Graphing Strategy",
+      "order": 1,
+      "title": "Example",
+      "task": "$f(x) = -\\sqrt{x + 2} + 4$",
+      "result": "The graph starts at $(-2, 4)$ and curves downward to the right.",
+      "bodyLines": 7,
+      "source": {
+        "file": "pages/algebra/roots/functions/index.jsx",
+        "line": 508,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/calculus/integrals/evaluating#3/1",
+      "subject": "calculus",
+      "page": "/calculus/integrals/evaluating",
+      "section": "3",
+      "sectionKey": "/calculus/integrals/evaluating#3",
+      "sectionTitle": "Setting Up Definite Integrals",
+      "order": 1,
+      "title": "Example",
+      "task": "Find the area under $y = x^2$ from $x = 0$ to $x = 3$.",
+      "result": "Check reasonableness: the area should be positive and between $0 \\cdot 3 = 0$ and $9 \\cdot 3 = 27$.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/calculus/integrals/evaluating/index.jsx",
+        "line": 245,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/calculus/integrals/evaluating#5/1",
+      "subject": "calculus",
+      "page": "/calculus/integrals/evaluating",
+      "section": "5",
+      "sectionKey": "/calculus/integrals/evaluating#5",
+      "sectionTitle": "Piecewise Functions",
+      "order": 1,
+      "title": "Example",
+      "task": "For $f(x) = \\begin{cases} x^2 & x < 1 \\\\ 2x & x \\geq 1 \\end{cases}$, evaluate $\\int_0^2 f(x)\\, dx$.",
+      "result": "$$= \\frac{1}{3} + (4 - 1) = \\frac{1}{3} + 3 = \\frac{10}{3}$$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/calculus/integrals/evaluating/index.jsx",
+        "line": 286,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/calculus/integrals/evaluating#6/1",
+      "subject": "calculus",
+      "page": "/calculus/integrals/evaluating",
+      "section": "6",
+      "sectionKey": "/calculus/integrals/evaluating#6",
+      "sectionTitle": "Symmetry Shortcuts",
+      "order": 1,
+      "title": "Example",
+      "task": "$$\\int_{-3}^{3} x^3\\, dx = 0 \\quad \\text{(odd function)}$$",
+      "result": "$$\\int_{-2}^{2} x^4\\, dx = 2\\int_0^2 x^4\\, dx = 2 \\cdot \\frac{32}{5} = \\frac{64}{5} \\quad \\text{(even function)}$$",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/calculus/integrals/evaluating/index.jsx",
+        "line": 317,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/calculus/integrals/improper#6/1",
+      "subject": "calculus",
+      "page": "/calculus/integrals/improper",
+      "section": "6",
+      "sectionKey": "/calculus/integrals/improper#6",
+      "sectionTitle": "Comparison Test",
+      "order": 1,
+      "title": "Example",
+      "task": "Does $\\int_1^{\\infty} \\frac{1}{x^2 + 1}\\, dx$ converge?",
+      "result": "Since $\\dfrac{1}{x^2 + 1} < \\dfrac{1}{x^2}$ and $\\int_1^{\\infty} \\dfrac{1}{x^2}\\, dx$ converges, the given integral converges by comparison.",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/calculus/integrals/improper/index.jsx",
+        "line": 366,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/calculus/integrals/improper#7/1",
+      "subject": "calculus",
+      "page": "/calculus/integrals/improper",
+      "section": "7",
+      "sectionKey": "/calculus/integrals/improper#7",
+      "sectionTitle": "Limit Comparison Test",
+      "order": 1,
+      "title": "Example",
+      "task": "Does $\\int_1^{\\infty} \\frac{x}{x^3 + 5}\\, dx$ converge?",
+      "result": "Since $\\int_1^{\\infty} 1/x^2\\, dx$ converges, so does the given integral.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/calculus/integrals/improper/index.jsx",
+        "line": 387,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/calculus/integrals/special#6/1",
+      "subject": "calculus",
+      "page": "/calculus/integrals/special",
+      "section": "6",
+      "sectionKey": "/calculus/integrals/special#6",
+      "sectionTitle": "Logarithmic Integrals",
+      "order": 1,
+      "title": "Example",
+      "task": "$$\\int \\tan x\\, dx = \\int \\frac{\\sin x}{\\cos x}\\, dx = -\\ln|\\cos x| + C$$",
+      "result": "Here $f(x) = \\cos x$ and $f'(x) = -\\sin x$, so the integrand is $-f'(x)/f(x)$.",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/calculus/integrals/special/index.jsx",
+        "line": 594,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/calculus/integrals/techniques#2/1",
+      "subject": "calculus",
+      "page": "/calculus/integrals/techniques",
+      "section": "2",
+      "sectionKey": "/calculus/integrals/techniques#2",
+      "sectionTitle": "Substitution (u-Substitution)",
+      "order": 1,
+      "title": "Example",
+      "task": "$$\\int 2x \\cos(x^2)\\, dx$$",
+      "result": "$$= \\int \\cos u\\, du = \\sin u + C = \\sin(x^2) + C$$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/calculus/integrals/techniques/index.jsx",
+        "line": 199,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/calculus/integrals/techniques#3/1",
+      "subject": "calculus",
+      "page": "/calculus/integrals/techniques",
+      "section": "3",
+      "sectionKey": "/calculus/integrals/techniques#3",
+      "sectionTitle": "Integration by Parts",
+      "order": 1,
+      "title": "Example",
+      "task": "$$\\int x e^x\\, dx$$",
+      "result": "$$= xe^x - \\int e^x\\, dx = xe^x - e^x + C = e^x(x - 1) + C$$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/calculus/integrals/techniques/index.jsx",
+        "line": 265,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/calculus/integrals/techniques#4/1",
+      "subject": "calculus",
+      "page": "/calculus/integrals/techniques",
+      "section": "4",
+      "sectionKey": "/calculus/integrals/techniques#4",
+      "sectionTitle": "Trigonometric Integrals",
+      "order": 1,
+      "title": "Example",
+      "task": "$$\\int \\sin^3 x\\, dx = \\int \\sin x (1 - \\cos^2 x)\\, dx$$",
+      "result": "$$= -\\int (1 - u^2)\\, du = -u + \\frac{u^3}{3} + C = -\\cos x + \\frac{\\cos^3 x}{3} + C$$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/calculus/integrals/techniques/index.jsx",
+        "line": 293,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/calculus/integrals/techniques#5/1",
+      "subject": "calculus",
+      "page": "/calculus/integrals/techniques",
+      "section": "5",
+      "sectionKey": "/calculus/integrals/techniques#5",
+      "sectionTitle": "Trigonometric Substitution",
+      "order": 1,
+      "title": "Example",
+      "task": "$$\\int \\frac{1}{\\sqrt{1 - x^2}}\\, dx$$",
+      "result": "$$= \\int \\frac{\\cos\\theta}{\\cos\\theta}\\, d\\theta = \\int d\\theta = \\theta + C = \\arcsin x + C$$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/calculus/integrals/techniques/index.jsx",
+        "line": 316,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/calculus/integrals/techniques#6/1",
+      "subject": "calculus",
+      "page": "/calculus/integrals/techniques",
+      "section": "6",
+      "sectionKey": "/calculus/integrals/techniques#6",
+      "sectionTitle": "Partial Fractions",
+      "order": 1,
+      "title": "Example",
+      "task": "$$\\int \\frac{1}{x^2 - 1}\\, dx = \\int \\frac{1}{(x-1)(x+1)}\\, dx$$",
+      "result": "$$= \\frac{1}{2}\\int \\frac{1}{x-1}\\, dx - \\frac{1}{2}\\int \\frac{1}{x+1}\\, dx = \\frac{1}{2}\\ln|x-1| - \\frac{1}{2}\\ln|x+1| + C$$",
+      "bodyLines": 5,
+      "source": {
+        "file": "pages/calculus/integrals/techniques/index.jsx",
+        "line": 335,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/calculus/limits/continuity#12/1",
+      "subject": "calculus",
+      "page": "/calculus/limits/continuity",
+      "section": "12",
+      "sectionKey": "/calculus/limits/continuity#12",
+      "sectionTitle": "Using IVT to Locate Roots",
+      "order": 1,
+      "title": "Example",
+      "task": "Show that $x^3 - x - 1 = 0$ has a solution in $(1, 2)$.",
+      "result": "Since $f$ is continuous and changes sign, IVT guarantees a root between $1$ and $2$.",
+      "bodyLines": 5,
+      "source": {
+        "file": "pages/calculus/limits/continuity/index.jsx",
+        "line": 695,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/combinatorics/counting-principles#1/1",
+      "subject": "combinatorics",
+      "page": "/combinatorics/counting-principles",
+      "section": "1",
+      "sectionKey": "/combinatorics/counting-principles#1",
+      "sectionTitle": "The Addition Rule",
+      "order": 1,
+      "title": "Example",
+      "task": "A traveller can reach the city by 2 bus routes, by 3 train routes, or by 4 taxi routes. Since these options are mutually exclusive — one trip uses one mode of transport — the total number of route choices is",
+      "result": "$$2 + 3 + 4 = 9.$$",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/combinatorics/counting-principles/index.jsx",
+        "line": 1388,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/combinatorics/counting-principles#2/1",
+      "subject": "combinatorics",
+      "page": "/combinatorics/counting-principles",
+      "section": "2",
+      "sectionKey": "/combinatorics/counting-principles#2",
+      "sectionTitle": "The Multiplication Rule",
+      "order": 1,
+      "title": "Example",
+      "task": "A lunch combo is built from 3 main courses, 2 drinks, and 4 desserts. Each main can be paired with each drink, and each pairing with each dessert, giving",
+      "result": "possible meals.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/combinatorics/counting-principles/index.jsx",
+        "line": 1422,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/combinatorics/counting-principles#3/1",
+      "subject": "combinatorics",
+      "page": "/combinatorics/counting-principles",
+      "section": "3",
+      "sectionKey": "/combinatorics/counting-principles#3",
+      "sectionTitle": "Complementary Counting",
+      "order": 1,
+      "title": "Example",
+      "task": "The number of arrangements of $n$ distinct items in which at least one item ends up in a specific designated position is awkward to count directly — multiple items can satisfy the condition independently, and the cases overlap. The complementary count — arrangements in which no item is in that position — partitions cleanly: the designated position holds one of the $n-1$ non-designated items, and the remaining $n-1$ items fill the rest. Subtracting this count from $n!$ gives the desired number.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/combinatorics/counting-principles/index.jsx",
+        "line": 1458,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/combinatorics/inclusion-exclusion#1/1",
+      "subject": "combinatorics",
+      "page": "/combinatorics/inclusion-exclusion",
+      "section": "1",
+      "sectionKey": "/combinatorics/inclusion-exclusion#1",
+      "sectionTitle": "Two Sets",
+      "order": 1,
+      "title": "Example",
+      "task": "In a group of 30 students, 18 take French and 15 take Spanish, with 7 taking both. The number taking at least one of the two languages is",
+      "result": "The remaining 4 students take neither.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/combinatorics/inclusion-exclusion/index.jsx",
+        "line": 1357,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/combinatorics/inclusion-exclusion#2/1",
+      "subject": "combinatorics",
+      "page": "/combinatorics/inclusion-exclusion",
+      "section": "2",
+      "sectionKey": "/combinatorics/inclusion-exclusion#2",
+      "sectionTitle": "Three Sets",
+      "order": 1,
+      "title": "Example",
+      "task": "Among the integers from 1 to 100, the number divisible by 2, 3, or 5 is computed by applying the three-set formula to the divisibility sets. With $|A| = 50$ (multiples of 2), $|B| = 33$ (multiples of 3), $|C| = 20$ (multiples of 5), and the pairwise and triple intersections counting multiples of $6$, $10$, $15$, and $30$:",
+      "result": "$$50 + 33 + 20 - 16 - 10 - 6 + 3 = 74.$$",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/combinatorics/inclusion-exclusion/index.jsx",
+        "line": 1385,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/combinatorics/permutations#8/1",
+      "subject": "combinatorics",
+      "page": "/combinatorics/permutations",
+      "section": "8",
+      "sectionKey": "/combinatorics/permutations#8",
+      "sectionTitle": "Derangement",
+      "order": 1,
+      "title": "Example",
+      "task": "In the hat-check problem with 4 guests, the number of orderings in which no guest receives their own hat is",
+      "result": "Out of the $4! = 24$ possible orderings of the four hats, exactly 9 satisfy the no-fixed-point condition.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/combinatorics/permutations/index.jsx",
+        "line": 2406,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/equations-polynomials#7/1",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/equations-polynomials",
+      "section": "7",
+      "sectionKey": "/complex-numbers/equations-polynomials#7",
+      "sectionTitle": "Solving zn=wz^n = wzn=w",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $z^4 = -16$.",
+      "result": "$z_3 = 2\\text{cis}(315°) = 2 \\cdot \\frac{\\sqrt{2}}{2}(1 - i) = \\sqrt{2}(1 - i)$",
+      "bodyLines": 7,
+      "source": {
+        "file": "pages/complex-numbers/equations-polynomials/index.jsx",
+        "line": 1373,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/equations-polynomials#8/1",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/equations-polynomials",
+      "section": "8",
+      "sectionKey": "/complex-numbers/equations-polynomials#8",
+      "sectionTitle": "Solving zn=zˉz^n = \\bar{z}zn=zˉ",
+      "order": 1,
+      "title": "Example",
+      "task": "$z^2 = \\bar{z}$ has $2 + 2 = 4$ solutions.",
+      "result": "Solutions: $z = 0$, $z = 1$, $z = \\text{cis}(120°) = -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i$, $z = \\text{cis}(240°) = -\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i$.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/complex-numbers/equations-polynomials/index.jsx",
+        "line": 1415,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/exponential-form#5/1",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/exponential-form",
+      "section": "5",
+      "sectionKey": "/complex-numbers/exponential-form#5",
+      "sectionTitle": "Converting Between Forms",
+      "order": 1,
+      "title": "Example",
+      "task": "Convert $z = 1 + i$. The modulus is $r = \\sqrt{1 + 1} = \\sqrt{2}$. With $a = 1 > 0$ and $b = 1 > 0$, the argument is $\\theta = \\arctan(1) = \\pi/4$. Thus $1 + i = \\sqrt{2}e^{i\\pi/4}$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/complex-numbers/exponential-form/index.jsx",
+        "line": 2097,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/exponential-form#5/2",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/exponential-form",
+      "section": "5",
+      "sectionKey": "/complex-numbers/exponential-form#5",
+      "sectionTitle": "Converting Between Forms",
+      "order": 2,
+      "title": "Example",
+      "task": "Convert $z = 4e^{i(2\\pi/3)}$. The real part is $a = 4\\cos(2\\pi/3) = 4(-1/2) = -2$. The imaginary part is $b = 4\\sin(2\\pi/3) = 4(\\sqrt{3}/2) = 2\\sqrt{3}$. Thus $4e^{i(2\\pi/3)} = -2 + 2\\sqrt{3}i$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/complex-numbers/exponential-form/index.jsx",
+        "line": 2113,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/exponential-form#6/1",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/exponential-form",
+      "section": "6",
+      "sectionKey": "/complex-numbers/exponential-form#6",
+      "sectionTitle": "Multiplication in Exponential Form",
+      "order": 1,
+      "title": "Example",
+      "task": "Compute $(3e^{i\\pi/6})(2e^{i\\pi/3})$.",
+      "result": "Result: $6e^{i\\pi/2} = 6i$.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/complex-numbers/exponential-form/index.jsx",
+        "line": 2136,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/exponential-form#7/1",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/exponential-form",
+      "section": "7",
+      "sectionKey": "/complex-numbers/exponential-form#7",
+      "sectionTitle": "Division in Exponential Form",
+      "order": 1,
+      "title": "Example",
+      "task": "Compute $\\frac{8e^{i(5\\pi/6)}}{2e^{i(\\pi/3)}}$.",
+      "result": "Result: $4e^{i\\pi/2} = 4i$.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/complex-numbers/exponential-form/index.jsx",
+        "line": 2164,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/exponential-form#8/1",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/exponential-form",
+      "section": "8",
+      "sectionKey": "/complex-numbers/exponential-form#8",
+      "sectionTitle": "Powers in Exponential Form",
+      "order": 1,
+      "title": "Example",
+      "task": "Compute $(1 + i)^{12}$.",
+      "result": "Result: $64 \\cdot (-1) = -64$.",
+      "bodyLines": 5,
+      "source": {
+        "file": "pages/complex-numbers/exponential-form/index.jsx",
+        "line": 2194,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/exponential-form#9/1",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/exponential-form",
+      "section": "9",
+      "sectionKey": "/complex-numbers/exponential-form#9",
+      "sectionTitle": "Roots in Exponential Form",
+      "order": 1,
+      "title": "Example",
+      "task": "Find the cube roots of $8$.",
+      "result": "$z_2 = 2e^{i \\cdot 4\\pi/3} = 2(-\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i) = -1 - \\sqrt{3}i$",
+      "bodyLines": 6,
+      "source": {
+        "file": "pages/complex-numbers/exponential-form/index.jsx",
+        "line": 2223,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/operations#1/1",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/operations",
+      "section": "1",
+      "sectionKey": "/complex-numbers/operations#1",
+      "sectionTitle": "Addition of Complex Numbers",
+      "order": 1,
+      "title": "Example",
+      "task": "Add $3 + 2i$ and $1 - 5i$.",
+      "result": "The real parts $3$ and $1$ sum to $4$. The imaginary parts $2$ and $-5$ sum to $-3$. The result is $4 - 3i$.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/complex-numbers/operations/index.jsx",
+        "line": 1100,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/operations#2/1",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/operations",
+      "section": "2",
+      "sectionKey": "/complex-numbers/operations#2",
+      "sectionTitle": "Subtraction of Complex Numbers",
+      "order": 1,
+      "title": "Example",
+      "task": "Compute $(7 + 4i) - (2 + 6i)$.",
+      "result": "The real parts $7 - 2 = 5$. The imaginary parts $4 - 6 = -2$. The result is $5 - 2i$.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/complex-numbers/operations/index.jsx",
+        "line": 1131,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/operations#6/1",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/operations",
+      "section": "6",
+      "sectionKey": "/complex-numbers/operations#6",
+      "sectionTitle": "The Multiplicative Inverse",
+      "order": 1,
+      "title": "Example",
+      "task": "Find the multiplicative inverse of $3 + 4i$.",
+      "result": "Verification: $(3 + 4i) \\cdot \\left(\\frac{3}{25} - \\frac{4}{25}i\\right) = \\frac{9}{25} - \\frac{12}{25}i + \\frac{12}{25}i - \\frac{16}{25}i^2 = \\frac{9}{25} + \\frac{16}{25} = \\frac{25}{25} = 1$.",
+      "bodyLines": 5,
+      "source": {
+        "file": "pages/complex-numbers/operations/index.jsx",
+        "line": 1269,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/trigonometric-form#8/1",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/trigonometric-form",
+      "section": "8",
+      "sectionKey": "/complex-numbers/trigonometric-form#8",
+      "sectionTitle": "Converting Algebraic to Trigonometric",
+      "order": 1,
+      "title": "Example 1: Convert $z = 1 + \\\\sqrt{3}i$",
+      "task": "Step 1: $r = \\sqrt{1^2 + (\\sqrt{3})^2} = \\sqrt{1 + 3} = \\sqrt{4} = 2$",
+      "result": "Step 3: $z = 2\\,\\text{cis}\\,\\frac{\\pi}{3}$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/complex-numbers/trigonometric-form/index.jsx",
+        "line": 2483,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/trigonometric-form#8/2",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/trigonometric-form",
+      "section": "8",
+      "sectionKey": "/complex-numbers/trigonometric-form#8",
+      "sectionTitle": "Converting Algebraic to Trigonometric",
+      "order": 2,
+      "title": "Example 2: Convert $z = -3 - 3i$",
+      "task": "Step 1: $r = \\sqrt{(-3)^2 + (-3)^2} = \\sqrt{9 + 9} = \\sqrt{18} = 3\\sqrt{2}$",
+      "result": "Step 3: $z = 3\\sqrt{2}\\,\\text{cis}\\left(-\\frac{3\\pi}{4}\\right)$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/complex-numbers/trigonometric-form/index.jsx",
+        "line": 2491,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/trigonometric-form#9/1",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/trigonometric-form",
+      "section": "9",
+      "sectionKey": "/complex-numbers/trigonometric-form#9",
+      "sectionTitle": "Converting Trigonometric to Algebraic",
+      "order": 1,
+      "title": "Example 1: Convert $z = 4\\\\,\\\\text{cis}\\\\,60°$",
+      "task": "Step 1: $a = 4\\cos 60° = 4 \\cdot \\frac{1}{2} = 2$",
+      "result": "Step 3: $z = 2 + 2\\sqrt{3}i$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/complex-numbers/trigonometric-form/index.jsx",
+        "line": 2517,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/trigonometric-form#9/2",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/trigonometric-form",
+      "section": "9",
+      "sectionKey": "/complex-numbers/trigonometric-form#9",
+      "sectionTitle": "Converting Trigonometric to Algebraic",
+      "order": 2,
+      "title": "Example 2: Convert $z = 5\\\\,\\\\text{cis}\\\\,\\\\frac{3\\\\pi}{2}$",
+      "task": "Step 1: $a = 5\\cos\\frac{3\\pi}{2} = 5 \\cdot 0 = 0$",
+      "result": "Step 3: $z = 0 + (-5)i = -5i$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/complex-numbers/trigonometric-form/index.jsx",
+        "line": 2525,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/trigonometric-form#9/3",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/trigonometric-form",
+      "section": "9",
+      "sectionKey": "/complex-numbers/trigonometric-form#9",
+      "sectionTitle": "Converting Trigonometric to Algebraic",
+      "order": 3,
+      "title": "Example 3: Convert $z = 2\\\\,\\\\text{cis}\\\\,\\\\frac{5\\\\pi}{6}$",
+      "task": "Step 1: $a = 2\\cos\\frac{5\\pi}{6} = 2 \\cdot \\left(-\\frac{\\sqrt{3}}{2}\\right) = -\\sqrt{3}$",
+      "result": "Step 3: $z = -\\sqrt{3} + i$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/complex-numbers/trigonometric-form/index.jsx",
+        "line": 2533,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/trigonometric-form#10/1",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/trigonometric-form",
+      "section": "10",
+      "sectionKey": "/complex-numbers/trigonometric-form#10",
+      "sectionTitle": "Multiplication and Division in Trigonometric Form",
+      "order": 1,
+      "title": "Example: Multiplication",
+      "task": "Let $z_1 = 2\\,\\text{cis}\\,30°$ and $z_2 = 3\\,\\text{cis}\\,45°$.",
+      "result": "$$z_1 \\cdot z_2 = (2)(3)\\,\\text{cis}(30° + 45°) = 6\\,\\text{cis}\\,75°$$",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/complex-numbers/trigonometric-form/index.jsx",
+        "line": 2575,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/complex-numbers/trigonometric-form#10/2",
+      "subject": "complex-numbers",
+      "page": "/complex-numbers/trigonometric-form",
+      "section": "10",
+      "sectionKey": "/complex-numbers/trigonometric-form#10",
+      "sectionTitle": "Multiplication and Division in Trigonometric Form",
+      "order": 2,
+      "title": "Example: Division",
+      "task": "Let $z_1 = 10\\,\\text{cis}\\,\\frac{2\\pi}{3}$ and $z_2 = 2\\,\\text{cis}\\,\\frac{\\pi}{6}$.",
+      "result": "These formulas extend naturally to [De Moivre's theorem](!/complex-numbers/demoivre-theorem), which handles powers and roots with equal elegance.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/complex-numbers/trigonometric-form/index.jsx",
+        "line": 2581,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/functions/inverse#4/1",
+      "subject": "functions",
+      "page": "/functions/inverse",
+      "section": "4",
+      "sectionKey": "/functions/inverse#4",
+      "sectionTitle": "Finding Inverse Algebraically",
+      "order": 1,
+      "title": "Example",
+      "task": "Find the inverse of $f(x) = 3x - 7$.",
+      "result": "Step 4: $f^{-1}(x) = \\dfrac{x + 7}{3}$",
+      "bodyLines": 5,
+      "source": {
+        "file": "pages/functions/inverse/index.jsx",
+        "line": 2070,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/functions/inverse#4/2",
+      "subject": "functions",
+      "page": "/functions/inverse",
+      "section": "4",
+      "sectionKey": "/functions/inverse#4",
+      "sectionTitle": "Finding Inverse Algebraically",
+      "order": 2,
+      "title": "Example",
+      "task": "Find the inverse of $f(x) = \\dfrac{2x + 1}{x - 3}$.",
+      "result": "Step 4: $f^{-1}(x) = \\dfrac{3x + 1}{x - 2}$",
+      "bodyLines": 5,
+      "source": {
+        "file": "pages/functions/inverse/index.jsx",
+        "line": 2081,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/decompositions/qr#2/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/decompositions/qr",
+      "section": "2",
+      "sectionKey": "/linear-algebra/decompositions/qr#2",
+      "sectionTitle": "QR via Gram-Schmidt",
+      "order": 1,
+      "title": "Worked Example",
+      "task": "For $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$: Gram-Schmidt on the two columns gives $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 0, 1)^T$ and $\\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(1, 2, -1)^T$. Then $R = \\begin{pmatrix} \\sqrt{2} & 1/\\sqrt{2} \\\\ 0 & 3/\\sqrt{6} \\end{pmatrix}$ and $A = QR$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/linear-algebra/decompositions/qr/index.jsx",
+        "line": 2110,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/decompositions/spectral#4/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/decompositions/spectral",
+      "section": "4",
+      "sectionKey": "/linear-algebra/decompositions/spectral#4",
+      "sectionTitle": "Computing the Spectral Decomposition",
+      "order": 1,
+      "title": "Worked Example",
+      "task": "For $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$: eigenvalues are $\\lambda_1 = 4$, $\\lambda_2 = 2$. Eigenvectors: $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 1)^T$, $\\mathbf{q}_2 = \\frac{1}{\\sqrt{2}}(1, -1)^T$. Then $A = 4 \\cdot \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix} + 2 \\cdot \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix} = \\begin{pmatrix} 2 & 2 \\\\ 2 & 2 \\end{pmatrix} + \\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix} = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/linear-algebra/decompositions/spectral/index.jsx",
+        "line": 2220,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/decompositions/svd#4/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/decompositions/svd",
+      "section": "4",
+      "sectionKey": "/linear-algebra/decompositions/svd#4",
+      "sectionTitle": "Computing the SVD",
+      "order": 1,
+      "title": "Worked Example",
+      "task": "For $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$: $A^TA = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$, eigenvalues $3$ and $1$, eigenvectors $\\frac{1}{\\sqrt{2}}(1, 1)^T$ and $\\frac{1}{\\sqrt{2}}(1, -1)^T$. Singular values: $\\sqrt{3}$ and $1$. Left singular vectors: $\\mathbf{u}_1 = \\frac{1}{\\sqrt{3}}A\\mathbf{v}_1 = \\frac{1}{\\sqrt{6}}(1, 1, 2)^T$, $\\mathbf{u}_2 = A\\mathbf{v}_2 = \\frac{1}{\\sqrt{2}}(1, -1, 0)^T$. Extend with $\\mathbf{u}_3 = \\frac{1}{\\sqrt{3}}(-1, -1, 1)^T$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/linear-algebra/decompositions/svd/index.jsx",
+        "line": 8790,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/determinants/geometry#1/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/determinants/geometry",
+      "section": "1",
+      "sectionKey": "/linear-algebra/determinants/geometry#1",
+      "sectionTitle": "Signed Area in Two Dimensions",
+      "order": 1,
+      "title": "Example",
+      "task": "For $A = \\begin{pmatrix} 3 & 1 \\\\ 0 & 4 \\end{pmatrix}$, the columns are $(3, 0)$ and $(1, 4)$. The determinant is $3 \\cdot 4 - 1 \\cdot 0 = 12$. The parallelogram has area $12$, and since the sign is positive, the columns are counterclockwise-ordered.",
+      "result": "For $A = \\begin{pmatrix} 1 & 3 \\\\ 4 & 0 \\end{pmatrix}$, the determinant is $1 \\cdot 0 - 3 \\cdot 4 = -12$. The area is still $12$, but the negative sign means the columns are clockwise-ordered — swapping the columns reversed the orientation.",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/linear-algebra/determinants/geometry/index.jsx",
+        "line": 1140,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/determinants/geometry#2/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/determinants/geometry",
+      "section": "2",
+      "sectionKey": "/linear-algebra/determinants/geometry#2",
+      "sectionTitle": "Signed Volume in Three Dimensions",
+      "order": 1,
+      "title": "Example",
+      "task": "Let $\\mathbf{a} = (1, 0, 0)$, $\\mathbf{b} = (0, 2, 0)$, $\\mathbf{c} = (0, 0, 3)$. The matrix $A = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 3 \\end{pmatrix}$ has $\\det(A) = 6$. The parallelepiped is an axis-aligned box with side lengths $1, 2, 3$ and volume $6$, oriented right-handedly.",
+      "result": "Swapping two columns — say placing $\\mathbf{b}$ first and $\\mathbf{a}$ second — gives $\\det = -6$. The volume is unchanged, but the orientation flips to left-handed.",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/linear-algebra/determinants/geometry/index.jsx",
+        "line": 1202,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/eigen#6/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/eigen",
+      "section": "6",
+      "sectionKey": "/linear-algebra/eigen#6",
+      "sectionTitle": "Examples",
+      "order": 1,
+      "title": "Worked Example",
+      "task": "For $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$, the characteristic equation is $\\det(A - \\lambda I) = (4 - \\lambda)(3 - \\lambda) - 2 = \\lambda^2 - 7\\lambda + 10 = (\\lambda - 2)(\\lambda - 5) = 0$. The eigenvalues are $\\lambda_1 = 2$ and $\\lambda_2 = 5$.",
+      "result": "For $\\lambda_2 = 5$: $(A - 5I)\\mathbf{v} = \\begin{pmatrix} -1 & 2 \\\\ 1 & -2 \\end{pmatrix}\\mathbf{v} = \\mathbf{0}$ gives $\\mathbf{v}_2 = (2, 1)^T$.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/linear-algebra/eigen/index.jsx",
+        "line": 818,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/eigen/characteristic-equation#3/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/eigen/characteristic-equation",
+      "section": "3",
+      "sectionKey": "/linear-algebra/eigen/characteristic-equation#3",
+      "sectionTitle": "Computing the Characteristic Polynomial: 2×2",
+      "order": 1,
+      "title": "Worked Example",
+      "task": "For $A = \\begin{pmatrix} 5 & 2 \\\\ 3 & 4 \\end{pmatrix}$: $\\text{tr}(A) = 9$, $\\det(A) = 14$, $\\Delta = 81 - 56 = 25$. The eigenvalues are $\\lambda = \\frac{9 \\pm 5}{2}$, giving $\\lambda_1 = 7$ and $\\lambda_2 = 2$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/linear-algebra/eigen/characteristic-equation/index.jsx",
+        "line": 1275,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/eigen/characteristic-equation#7/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/eigen/characteristic-equation",
+      "section": "7",
+      "sectionKey": "/linear-algebra/eigen/characteristic-equation#7",
+      "sectionTitle": "Finding Eigenvectors After Finding Eigenvalues",
+      "order": 1,
+      "title": "Worked Example",
+      "task": "For $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$, the characteristic polynomial is $\\lambda^2 - 4\\lambda - 5 = (\\lambda - 5)(\\lambda + 1)$. Eigenvalues: $\\lambda_1 = 5$, $\\lambda_2 = -1$.",
+      "result": "Verification: $A\\mathbf{v}_1 = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix} = 5\\mathbf{v}_1$ and $A\\mathbf{v}_2 = \\begin{pmatrix} 1 \\\\ -1 \\end{pmatrix} = -1 \\cdot \\mathbf{v}_2$.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/linear-algebra/eigen/characteristic-equation/index.jsx",
+        "line": 1333,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/eigen/diagonalization#3/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/eigen/diagonalization",
+      "section": "3",
+      "sectionKey": "/linear-algebra/eigen/diagonalization#3",
+      "sectionTitle": "When Is a Matrix Diagonalizable?",
+      "order": 1,
+      "title": "Example of Failure",
+      "task": "$A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ has eigenvalue $\\lambda = 2$ with $m_a = 2$, but $A - 2I = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ has null space of dimension $1$. Only one independent eigenvector exists, so $P$ cannot be built. The matrix is defective.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/linear-algebra/eigen/diagonalization/index.jsx",
+        "line": 3166,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/orthogonality/gram-schmidt#2/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/orthogonality/gram-schmidt",
+      "section": "2",
+      "sectionKey": "/linear-algebra/orthogonality/gram-schmidt#2",
+      "sectionTitle": "The Algorithm: Two Vectors",
+      "order": 1,
+      "title": "Worked Example",
+      "task": "$\\mathbf{v}_1 = (1, 1, 0)$, $\\mathbf{v}_2 = (1, 0, 1)$.",
+      "result": "Check: $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = \\frac{1}{2} - \\frac{1}{2} + 0 = 0$.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/linear-algebra/orthogonality/gram-schmidt/index.jsx",
+        "line": 2218,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/orthogonality/orthogonal-sets#5/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/orthogonality/orthogonal-sets",
+      "section": "5",
+      "sectionKey": "/linear-algebra/orthogonality/orthogonal-sets#5",
+      "sectionTitle": "Coordinates via Dot Products",
+      "order": 1,
+      "title": "Worked Example",
+      "task": "Let $\\{\\mathbf{q}_1, \\mathbf{q}_2, \\mathbf{q}_3\\}$ be an orthonormal basis for $\\mathbb{R}^3$ with $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 1, 0)$, $\\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(1, -1, 2)$, $\\mathbf{q}_3 = \\frac{1}{\\sqrt{3}}(-1, 1, 1)$.",
+      "result": "So $\\mathbf{x} = 2\\sqrt{2}\\,\\mathbf{q}_1 + \\sqrt{6}\\,\\mathbf{q}_2 + 0 \\cdot \\mathbf{q}_3$. The zero third coordinate means $\\mathbf{x}$ has no component in the $\\mathbf{q}_3$ direction — it is orthogonal to $\\mathbf{q}_3$.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/linear-algebra/orthogonality/orthogonal-sets/index.jsx",
+        "line": 1312,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/transformations/image-kernel#8/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/transformations/image-kernel",
+      "section": "8",
+      "sectionKey": "/linear-algebra/transformations/image-kernel#8",
+      "sectionTitle": "Computing the Image and Kernel",
+      "order": 1,
+      "title": "Worked Example",
+      "task": "For $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 1 \\\\ 1 & 3 & 4 \\end{pmatrix}$, row reduction gives $\\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$. Pivots in columns $1$ and $2$. The image has basis $\\{(1, 0, 1), (2, 1, 3)\\}$ — two-dimensional. The kernel has one free variable ($x_3 = t$), giving $\\ker(T) = \\text{Span}\\{(-1, -1, 1)\\}$ — one-dimensional. Check: $2 + 1 = 3 = n$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/linear-algebra/transformations/image-kernel/index.jsx",
+        "line": 1344,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/vector-spaces/basis#7/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/vector-spaces/basis",
+      "section": "7",
+      "sectionKey": "/linear-algebra/vector-spaces/basis#7",
+      "sectionTitle": "Finding a Basis for a Subspace",
+      "order": 1,
+      "title": "Worked Example",
+      "task": "For $A = \\begin{pmatrix} 1 & 2 & 0 & 1 \\\\ 2 & 4 & 1 & 3 \\\\ 3 & 6 & 1 & 4 \\end{pmatrix}$, row reduction gives $\\begin{pmatrix} 1 & 2 & 0 & 1 \\\\ 0 & 0 & 1 & 1 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$. Pivots are in columns $1$ and $3$. The column space basis is $\\{(1, 2, 3), (0, 1, 1)\\}$ — the first and third columns of the original $A$. The row space basis is $\\{(1, 2, 0, 1), (0, 0, 1, 1)\\}$. The null space has two free variables (columns $2$ and $4$), and solving yields a two-dimensional null space.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/linear-algebra/vector-spaces/basis/index.jsx",
+        "line": 1214,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/vector-spaces/basis#9/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/vector-spaces/basis",
+      "section": "9",
+      "sectionKey": "/linear-algebra/vector-spaces/basis#9",
+      "sectionTitle": "Change of Basis",
+      "order": 1,
+      "title": "Worked Example",
+      "task": "In $\\mathbb{R}^2$, let $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$ and let $\\mathcal{C}$ be the standard basis. The $\\mathcal{C}$-coordinates of $(1, 1)$ are just $(1, 1)$, and the $\\mathcal{C}$-coordinates of $(1, -1)$ are $(1, -1)$. So $P_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (3, 1)$: solve $P\\mathbf{c} = (3, 1)$, giving $\\mathbf{c} = P^{-1}(3, 1) = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = (2, 1)$. So $[\\mathbf{v}]_\\mathcal{B} = (2, 1)$, meaning $\\mathbf{v} = 2(1, 1) + 1(1, -1)$.",
+      "result": "Change of basis connects to [similarity](!/linear-algebra/transformations/basis-change): if a [linear transformation](!/linear-algebra/transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $P^{-1}AP$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigen/diagonalization).",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/linear-algebra/vector-spaces/basis/index.jsx",
+        "line": 1256,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/linear-algebra/vector-spaces/linear-independence#3/1",
+      "subject": "linear-algebra",
+      "page": "/linear-algebra/vector-spaces/linear-independence",
+      "section": "3",
+      "sectionKey": "/linear-algebra/vector-spaces/linear-independence#3",
+      "sectionTitle": "Testing Independence: The Homogeneous System",
+      "order": 1,
+      "title": "Worked Example: Dependent Set",
+      "task": "Test $\\mathbf{v}_1 = (1, 0, 2)$, $\\mathbf{v}_2 = (3, 1, 4)$, $\\mathbf{v}_3 = (5, 2, 6)$, $\\mathbf{v}_4 = (0, 1, -2)$ in $\\mathbb{R}^3$. The matrix is $3 \\times 4$ — four columns but only three rows, so at most three pivots. At least one column must be free. The set is dependent without any computation, simply because four vectors in $\\mathbb{R}^3$ cannot be independent.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/linear-algebra/vector-spaces/linear-independence/index.jsx",
+        "line": 1732,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic#properties/1",
+      "subject": "logic",
+      "page": "/logic/propositional-logic",
+      "section": "properties",
+      "sectionKey": "/logic/propositional-logic#properties",
+      "sectionTitle": "Properties of Propositions",
+      "order": 1,
+      "title": "Example",
+      "task": "\\t\\t\\t\\t\\t\\t$P∨Q≡Q∨P$",
+      "result": "(Commutativity of disjunction)",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/logic/propositional-logic/index.jsx",
+        "line": 198,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic#properties/2",
+      "subject": "logic",
+      "page": "/logic/propositional-logic",
+      "section": "properties",
+      "sectionKey": "/logic/propositional-logic#properties",
+      "sectionTitle": "Properties of Propositions",
+      "order": 2,
+      "title": "Example",
+      "task": "The set {\"It is raining\", \"It is not raining\"} is inconsistent.",
+      "result": "The set {\"It is raining\", \"The ground is wet\"} is consistent.",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/logic/propositional-logic/index.jsx",
+        "line": 206,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic#properties/3",
+      "subject": "logic",
+      "page": "/logic/propositional-logic",
+      "section": "properties",
+      "sectionKey": "/logic/propositional-logic#properties",
+      "sectionTitle": "Properties of Propositions",
+      "order": 3,
+      "title": "Example",
+      "task": "\\t\\t\\t\\t\\t\\t$P=$ \"It is raining.\"",
+      "result": "If $P$ is true, then $Q$ logically follows (assuming no weird circumstances).",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/logic/propositional-logic/index.jsx",
+        "line": 212,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic#properties/4",
+      "subject": "logic",
+      "page": "/logic/propositional-logic",
+      "section": "properties",
+      "sectionKey": "/logic/propositional-logic#properties",
+      "sectionTitle": "Properties of Propositions",
+      "order": 4,
+      "title": "Example",
+      "task": "\"It is raining\" and \"The stock market is up\" are independent because knowing one does not tell us anything about the other.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/logic/propositional-logic/index.jsx",
+        "line": 220,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic/semantics#contigency/1",
+      "subject": "logic",
+      "page": "/logic/propositional-logic/semantics",
+      "section": "contigency",
+      "sectionKey": "/logic/propositional-logic/semantics#contigency",
+      "sectionTitle": "Contigency, Tautology or Contradiction",
+      "order": 1,
+      "title": "Example",
+      "task": "\\t\\t\\t\\t\\t\\t$p \\lor \\neg p$",
+      "result": "(\"Either it will rain or it won’t\"—this is always true.)",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/logic/propositional-logic/semantics/index.jsx",
+        "line": 181,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic/semantics#contigency/2",
+      "subject": "logic",
+      "page": "/logic/propositional-logic/semantics",
+      "section": "contigency",
+      "sectionKey": "/logic/propositional-logic/semantics#contigency",
+      "sectionTitle": "Contigency, Tautology or Contradiction",
+      "order": 2,
+      "title": "Example",
+      "task": "\\t\\t\\t\\t\\t\\t$p \\land \\neg p$",
+      "result": "(\"It is raining and it is not raining\"—this is never true.)",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/logic/propositional-logic/semantics/index.jsx",
+        "line": 193,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic/semantics/contradiction#definition/1",
+      "subject": "logic",
+      "page": "/logic/propositional-logic/semantics/contradiction",
+      "section": "definition",
+      "sectionKey": "/logic/propositional-logic/semantics/contradiction#definition",
+      "sectionTitle": "Definition",
+      "order": 1,
+      "title": "Example",
+      "task": "\\t\\t\\t\\t\\t$P∧¬P$",
+      "result": "(The [law](!/logic/propositional-logic/laws) of non-contradiction: \"P and not P\" is always false.)",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/logic/propositional-logic/semantics/contradiction/index.jsx",
+        "line": 190,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic/semantics/implication#properties/1",
+      "subject": "logic",
+      "page": "/logic/propositional-logic/semantics/implication",
+      "section": "properties",
+      "sectionKey": "/logic/propositional-logic/semantics/implication#properties",
+      "sectionTitle": "Properties of Implication",
+      "order": 1,
+      "title": "Example",
+      "task": "\"If it rains, the ground gets wet.\" ($p→q$)",
+      "result": "Conclusion: \"If it rains, the grass grows.\" ($p→r$)",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/logic/propositional-logic/semantics/implication/index.jsx",
+        "line": 95,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic/semantics/implication#properties/2",
+      "subject": "logic",
+      "page": "/logic/propositional-logic/semantics/implication",
+      "section": "properties",
+      "sectionKey": "/logic/propositional-logic/semantics/implication#properties",
+      "sectionTitle": "Properties of Implication",
+      "order": 2,
+      "title": "Example",
+      "task": "\"If it's a dog, then it's an animal.\"",
+      "result": "This is logically the same as saying: \"It's not a dog, or it's an animal.\"",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/logic/propositional-logic/semantics/implication/index.jsx",
+        "line": 106,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic/semantics/implication#properties/3",
+      "subject": "logic",
+      "page": "/logic/propositional-logic/semantics/implication",
+      "section": "properties",
+      "sectionKey": "/logic/propositional-logic/semantics/implication#properties",
+      "sectionTitle": "Properties of Implication",
+      "order": 3,
+      "title": "Example",
+      "task": "\"If you are a mother, then you are a woman\" ($p→q$) is true.",
+      "result": "But \"If you are a woman, then you are a mother\" ($q→p$) is not necessarily true.",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/logic/propositional-logic/semantics/implication/index.jsx",
+        "line": 113,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic/semantics/implication#misconceptions/1",
+      "subject": "logic",
+      "page": "/logic/propositional-logic/semantics/implication",
+      "section": "misconceptions",
+      "sectionKey": "/logic/propositional-logic/semantics/implication#misconceptions",
+      "sectionTitle": "Common Misconceptions",
+      "order": 1,
+      "title": "Example",
+      "task": "\"If I win the lottery, then I will buy a new car.\" If I do not win the lottery, the statement remains valid regardless of whether I buy a car.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/logic/propositional-logic/semantics/implication/index.jsx",
+        "line": 318,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic/semantics/implication#proofs/1",
+      "subject": "logic",
+      "page": "/logic/propositional-logic/semantics/implication",
+      "section": "proofs",
+      "sectionKey": "/logic/propositional-logic/semantics/implication#proofs",
+      "sectionTitle": "Implication in Mathematical Proofs",
+      "order": 1,
+      "title": "Example",
+      "task": "To prove \"If $n^2$ is even, then $n$ is even,\" one may instead prove the contrapositive: \"If $n$ is odd, then $n^2$ is odd.\"",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/logic/propositional-logic/semantics/implication/index.jsx",
+        "line": 332,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic/semantics/tautology#definition/1",
+      "subject": "logic",
+      "page": "/logic/propositional-logic/semantics/tautology",
+      "section": "definition",
+      "sectionKey": "/logic/propositional-logic/semantics/tautology#definition",
+      "sectionTitle": "Definition",
+      "order": 1,
+      "title": "Example",
+      "task": "\\t\\t\\t\\t\\t\\t$P∨¬P$",
+      "result": "(The [law](!/logic/propositional-logic/laws) of the excluded middle: \"P or not P\" is always true.)",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/logic/propositional-logic/semantics/tautology/index.jsx",
+        "line": 187,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/logic/propositional-logic/semantics/tautology#tautology_vs_equivalence/1",
+      "subject": "logic",
+      "page": "/logic/propositional-logic/semantics/tautology",
+      "section": "tautology_vs_equivalence",
+      "sectionKey": "/logic/propositional-logic/semantics/tautology#tautology_vs_equivalence",
+      "sectionTitle": "Tautology vs Equivalence",
+      "order": 1,
+      "title": "Example",
+      "task": "\\t\\t\\t\\t\\t\\t$(P→Q)≡(¬P∨Q)$",
+      "result": "So the final answer to that question is **YES** , as long as equivalence is valid- it is a tautology.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/logic/propositional-logic/semantics/tautology/index.jsx",
+        "line": 241,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/basics#concepts/1",
+      "subject": "probability",
+      "page": "/probability/basics",
+      "section": "concepts",
+      "sectionKey": "/probability/basics#concepts",
+      "sectionTitle": "Main Concepts",
+      "order": 1,
+      "title": "Example",
+      "task": "In case of dice roll the sample space would be $S = \\{1, 2, 3, 4, 5, 6\\}$",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/basics/index.jsx",
+        "line": 355,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/basics#set/1",
+      "subject": "probability",
+      "page": "/probability/basics",
+      "section": "set",
+      "sectionKey": "/probability/basics#set",
+      "sectionTitle": "Set Theory & Event Algebra",
+      "order": 1,
+      "title": "Consider the classical probability formula:",
+      "task": "$P(E) = \\frac{\\text{Number of favorable outcomes for event E}}{\\text{Total number of possible outcomes in the sample space S}}$.",
+      "result": "If we literally counted individual points (dots), each with zero \"probability mass,\" we'd face the paradox that every single outcome has probability zero, yet their sum must equal one.",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/probability/basics/index.jsx",
+        "line": 380,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/basics#conditional/1",
+      "subject": "probability",
+      "page": "/probability/basics",
+      "section": "conditional",
+      "sectionKey": "/probability/basics#conditional",
+      "sectionTitle": "Conditional Probability & Independence",
+      "order": 1,
+      "title": "Conditional probability is simply the chance of something happening once you already know something else has happened. It tells you how your outlook on an event shifts when you gain new information about another event's occurence.",
+      "task": null,
+      "result": null,
+      "bodyLines": 0,
+      "source": {
+        "file": "pages/probability/basics/index.jsx",
+        "line": 528,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/continuous/exponential#1/1",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/exponential",
+      "section": "1",
+      "sectionKey": "/probability/distributions/continuous/exponential#1",
+      "sectionTitle": "The Probabilistic Experiment Behind exponential distribution",
+      "order": 1,
+      "title": "Example",
+      "task": "Consider the time until the next phone call arrives at a quiet call center where calls come in at a stable average rate. Whether the last call arrived a second ago or an hour ago does not affect the likelihood of receiving the next one in the coming minute.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/distributions/continuous/exponential/index.jsx",
+        "line": 1259,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/continuous/exponential#9/1",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/exponential",
+      "section": "9",
+      "sectionKey": "/probability/distributions/continuous/exponential#9",
+      "sectionTitle": "Mode and Median",
+      "order": 1,
+      "title": "Example",
+      "task": "For customer arrivals with $\\lambda = 3$ per hour:",
+      "result": "The density is highest at zero waiting time, then decays exponentially. While you can't actually wait exactly zero time, the probability density is concentrated near zero, making very short waits most likely.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/continuous/exponential/index.jsx",
+        "line": 1557,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/continuous/exponential#9/2",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/exponential",
+      "section": "9",
+      "sectionKey": "/probability/distributions/continuous/exponential#9",
+      "sectionTitle": "Mode and Median",
+      "order": 2,
+      "title": "Example",
+      "task": "For customer arrivals with $\\lambda = 3$ per hour:",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/distributions/continuous/exponential/index.jsx",
+        "line": 1589,
+        "view": null
+      },
+      "status": "skipped",
+      "reason": "a formula_callout block sits inside the example; blocks cannot nest"
+    },
+    {
+      "id": "/probability/distributions/continuous/exponential#10/1",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/exponential",
+      "section": "10",
+      "sectionKey": "/probability/distributions/continuous/exponential#10",
+      "sectionTitle": "Quantiles/Percentiles",
+      "order": 1,
+      "title": "Example",
+      "task": "For customer arrivals with $\\lambda = 3$ per hour:",
+      "result": "The middle 50% of waiting times span about 22 minutes.",
+      "bodyLines": 9,
+      "source": {
+        "file": "pages/probability/distributions/continuous/exponential/index.jsx",
+        "line": 1681,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/continuous/exponential#12/1",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/exponential",
+      "section": "12",
+      "sectionKey": "/probability/distributions/continuous/exponential#12",
+      "sectionTitle": "Real-World Examples and Common Applications",
+      "order": 1,
+      "title": "Example Application",
+      "task": "A web server receives requests at an average rate of 120 per hour ($\\lambda = 2$ per minute). The time between consecutive requests follows $\\text{Exp}(2)$.",
+      "result": "The [median](!/probability/median) wait between requests is $\\frac{\\ln(2)}{2} \\approx 0.35$ minutes (21 seconds). However, 10% of inter-arrival times exceed $\\frac{2.3}{2} = 1.15$ minutes, requiring server capacity planning for occasional gaps.",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/probability/distributions/continuous/exponential/index.jsx",
+        "line": 1760,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/continuous/normal#1/1",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/normal",
+      "section": "1",
+      "sectionKey": "/probability/distributions/continuous/normal#1",
+      "sectionTitle": "The Probabilistic Experiment Behind normal distribution",
+      "order": 1,
+      "title": "Example",
+      "task": "Human height results from genetics, nutrition, environment, and random biological variation. No single factor determines the outcome, but together they produce values concentrated around an average, with fewer extremely short or tall individuals.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/distributions/continuous/normal/index.jsx",
+        "line": 1219,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/continuous/normal#9/1",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/normal",
+      "section": "9",
+      "sectionKey": "/probability/distributions/continuous/normal#9",
+      "sectionTitle": "Mode and Median",
+      "order": 1,
+      "title": "Example",
+      "task": "For human heights with $\\mu = 170$ cm and $\\sigma = 10$ cm:",
+      "result": "This is the most common height—the peak of the bell curve. Heights become progressively less common as you move away from 170 cm in either direction.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/continuous/normal/index.jsx",
+        "line": 1527,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/continuous/normal#9/2",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/normal",
+      "section": "9",
+      "sectionKey": "/probability/distributions/continuous/normal#9",
+      "sectionTitle": "Mode and Median",
+      "order": 2,
+      "title": "Example",
+      "task": "For human heights with $\\mu = 170$ cm and $\\sigma = 10$ cm:",
+      "result": "Half of all heights fall below 170 cm, and half fall above. This coincides with both the mean and mode.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/continuous/normal/index.jsx",
+        "line": 1550,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/continuous/normal#10/1",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/normal",
+      "section": "10",
+      "sectionKey": "/probability/distributions/continuous/normal#10",
+      "sectionTitle": "Quantiles/Percentiles",
+      "order": 1,
+      "title": "Example",
+      "task": "For human heights with $\\mu = 170$ cm and $\\sigma = 10$ cm:",
+      "result": "The middle 50% of heights span about 13.5 cm.",
+      "bodyLines": 9,
+      "source": {
+        "file": "pages/probability/distributions/continuous/normal/index.jsx",
+        "line": 1626,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/continuous/normal#12/1",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/normal",
+      "section": "12",
+      "sectionKey": "/probability/distributions/continuous/normal#12",
+      "sectionTitle": "Real-World Examples and Common Applications",
+      "order": 1,
+      "title": "Example Application",
+      "task": "A factory produces bolts with target diameter 10 mm. Due to manufacturing variation, actual diameters follow $N(10, 0.1^2)$. Quality standards require diameters between 9.8 mm and 10.2 mm.",
+      "result": "Using the normal distribution, we can calculate that approximately 95.4% of bolts meet specifications, helping determine acceptable defect rates and production costs.",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/probability/distributions/continuous/normal/index.jsx",
+        "line": 1703,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/continuous/uniform#1/1",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/uniform",
+      "section": "1",
+      "sectionKey": "/probability/distributions/continuous/uniform#1",
+      "sectionTitle": "The Probabilistic Experiment Behind continuous uniform distribution",
+      "order": 1,
+      "title": "Example",
+      "task": "Choose a real number at random between 0 and 10, with no additional information. The chance that the number lies between 2 and 4 depends only on the interval length (2 units), not on where it sits inside the range.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/distributions/continuous/uniform/index.jsx",
+        "line": 1246,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/continuous/uniform#9/1",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/uniform",
+      "section": "9",
+      "sectionKey": "/probability/distributions/continuous/uniform#9",
+      "sectionTitle": "Mode and Median",
+      "order": 1,
+      "title": "Example",
+      "task": "For a bus arriving uniformly between 2:00 PM and 2:30 PM (interval $[0, 30]$ minutes):",
+      "result": "There is no \"most likely\" arrival time—all times are equally probable. The density is constant at $f(x) = \\frac{1}{30}$ across the entire half-hour window.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/continuous/uniform/index.jsx",
+        "line": 1550,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/continuous/uniform#9/2",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/uniform",
+      "section": "9",
+      "sectionKey": "/probability/distributions/continuous/uniform#9",
+      "sectionTitle": "Mode and Median",
+      "order": 2,
+      "title": "Example",
+      "task": "For a bus arriving uniformly between 2:00 PM and 2:30 PM (interval $[0, 30]$ minutes):",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/distributions/continuous/uniform/index.jsx",
+        "line": 1584,
+        "view": null
+      },
+      "status": "skipped",
+      "reason": "a formula_callout block sits inside the example; blocks cannot nest"
+    },
+    {
+      "id": "/probability/distributions/continuous/uniform#10/1",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/uniform",
+      "section": "10",
+      "sectionKey": "/probability/distributions/continuous/uniform#10",
+      "sectionTitle": "Quantiles/Percentiles",
+      "order": 1,
+      "title": "Example",
+      "task": "For a bus arriving uniformly between 2:00 PM and 2:30 PM (interval $[0, 30]$ minutes):",
+      "result": "The middle 50% of arrivals span a 15-minute window from 2:07:30 PM to 2:22:30 PM.",
+      "bodyLines": 9,
+      "source": {
+        "file": "pages/probability/distributions/continuous/uniform/index.jsx",
+        "line": 1673,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/continuous/uniform#12/1",
+      "subject": "probability",
+      "page": "/probability/distributions/continuous/uniform",
+      "section": "12",
+      "sectionKey": "/probability/distributions/continuous/uniform#12",
+      "sectionTitle": "Real-World Examples and Common Applications",
+      "order": 1,
+      "title": "Example Application",
+      "task": "A digital clock displays time in whole minutes. When you glance at it, the actual time has passed some fraction into the current minute. This fraction is uniformly distributed on $[0, 1)$ minutes, with [mean](!/probability/expected-value) 30 seconds.",
+      "result": "For scheduling, if a bus arrives \"sometime between 2:00 and 2:30\" with no further information, modeling arrival time as $\\text{Uniform}(0, 30)$ minutes reflects complete uncertainty, giving an expected wait of 15 minutes.",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/probability/distributions/continuous/uniform/index.jsx",
+        "line": 1752,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/binomial#1/1",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/binomial",
+      "section": "1",
+      "sectionKey": "/probability/distributions/discrete/binomial#1",
+      "sectionTitle": "The Probabilistic Experiment Behind binomial distribution",
+      "order": 1,
+      "title": "Example",
+      "task": "Flipping a coin $10$ times and counting how many times it lands heads. Each flip is independent, the probability of heads stays the same, and the total number of flips is fixed before starting.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/distributions/discrete/binomial/index.jsx",
+        "line": 151,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/binomial#8/1",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/binomial",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/binomial#8",
+      "sectionTitle": "Mode and Median",
+      "order": 1,
+      "title": "Example",
+      "task": "For $n = 10$ and $p = 0.3$:",
+      "result": "Getting exactly 3 successes is more likely than any other outcome.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/probability/distributions/discrete/binomial/index.jsx",
+        "line": 414,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/binomial#8/2",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/binomial",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/binomial#8",
+      "sectionTitle": "Mode and Median",
+      "order": 2,
+      "title": "Example",
+      "task": "For $n = 9$ and $p = 0.5$:",
+      "result": "Modes = 4 and 5 (both equally likely)",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/binomial/index.jsx",
+        "line": 422,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/binomial#8/3",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/binomial",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/binomial#8",
+      "sectionTitle": "Mode and Median",
+      "order": 3,
+      "title": "Example",
+      "task": "For $n = 10$ and $p = 0.5$:",
+      "result": "The median is also 5 (by symmetry)",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/binomial/index.jsx",
+        "line": 442,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/binomial#8/4",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/binomial",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/binomial#8",
+      "sectionTitle": "Mode and Median",
+      "order": 4,
+      "title": "Example",
+      "task": "For $n = 10$ and $p = 0.3$:",
+      "result": "The median is also 3 (close to the mean)",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/binomial/index.jsx",
+        "line": 448,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/geometric#1/1",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/geometric",
+      "section": "1",
+      "sectionKey": "/probability/distributions/discrete/geometric#1",
+      "sectionTitle": "The Probabilistic Experiment Behind geometric distribution",
+      "order": 1,
+      "title": "Example",
+      "task": "Flipping a [coin](!/probability/models/coin-toss) repeatedly until the first heads appears. If $X=4$, this means the first three flips were tails and the fourth flip was heads. The experiment stops as soon as success occurs.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/distributions/discrete/geometric/index.jsx",
+        "line": 999,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/geometric#8/1",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/geometric",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/geometric#8",
+      "sectionTitle": "Mode and Median",
+      "order": 1,
+      "title": "Example",
+      "task": "For $p = 0.3$:",
+      "result": "The [mode](!/probability/mode) is 1, representing that getting success on the first trial is always the most likely single outcome.",
+      "bodyLines": 5,
+      "source": {
+        "file": "pages/probability/distributions/discrete/geometric/index.jsx",
+        "line": 1249,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/geometric#8/2",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/geometric",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/geometric#8",
+      "sectionTitle": "Mode and Median",
+      "order": 2,
+      "title": "Example",
+      "task": "For $p = 0.5$:",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/distributions/discrete/geometric/index.jsx",
+        "line": 1284,
+        "view": null
+      },
+      "status": "skipped",
+      "reason": "a formula_callout block sits inside the example; blocks cannot nest"
+    },
+    {
+      "id": "/probability/distributions/discrete/geometric#8/3",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/geometric",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/geometric#8",
+      "sectionTitle": "Mode and Median",
+      "order": 3,
+      "title": "Example",
+      "task": "For $p = 0.3$:",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/distributions/discrete/geometric/index.jsx",
+        "line": 1290,
+        "view": null
+      },
+      "status": "skipped",
+      "reason": "a formula_callout block sits inside the example; blocks cannot nest"
+    },
+    {
+      "id": "/probability/distributions/discrete/hypergeometric#1/1",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/hypergeometric",
+      "section": "1",
+      "sectionKey": "/probability/distributions/discrete/hypergeometric#1",
+      "sectionTitle": "The Probabilistic Experiment Behind hypergeometric distribution",
+      "order": 1,
+      "title": "Example",
+      "task": "Drawing $5$ cards from a standard deck without replacement and counting how many are hearts. Each draw changes the probabilities for subsequent draws, because the deck composition changes.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/distributions/discrete/hypergeometric/index.jsx",
+        "line": 977,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/hypergeometric#8/1",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/hypergeometric",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/hypergeometric#8",
+      "sectionTitle": "Mode and Median",
+      "order": 1,
+      "title": "Example",
+      "task": "For $N = 50$, $K = 20$, $n = 10$:",
+      "result": "Getting exactly 4 successes is more likely than any other outcome.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/hypergeometric/index.jsx",
+        "line": 1235,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/hypergeometric#8/2",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/hypergeometric",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/hypergeometric#8",
+      "sectionTitle": "Mode and Median",
+      "order": 2,
+      "title": "Example",
+      "task": "For $N = 100$, $K = 30$, $n = 20$:",
+      "result": "Mode = $\\lfloor \\frac{21 \\times 31}{102} \\rfloor = \\lfloor 6.38 \\rfloor = 6$",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/probability/distributions/discrete/hypergeometric/index.jsx",
+        "line": 1242,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/hypergeometric#8/3",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/hypergeometric",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/hypergeometric#8",
+      "sectionTitle": "Mode and Median",
+      "order": 3,
+      "title": "Example",
+      "task": "For $N = 50$, $K = 25$, $n = 10$:",
+      "result": "The median is 5 (by symmetry, since $K = N/2$)",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/hypergeometric/index.jsx",
+        "line": 1261,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/hypergeometric#8/4",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/hypergeometric",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/hypergeometric#8",
+      "sectionTitle": "Mode and Median",
+      "order": 4,
+      "title": "Example",
+      "task": "For $N = 100$, $K = 30$, $n = 20$:",
+      "result": "The median is approximately 6 (close to the mean)",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/hypergeometric/index.jsx",
+        "line": 1267,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/negative-binomial#1/1",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/negative-binomial",
+      "section": "1",
+      "sectionKey": "/probability/distributions/discrete/negative-binomial#1",
+      "sectionTitle": "The Probabilistic Experiment Behind negative binomial distribution",
+      "order": 1,
+      "title": "Example",
+      "task": "Flipping a coin until you obtain $3$ heads. If $X=7$, this means the third head appears on the seventh flip. The sequence ends at the moment the third success occurs.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/distributions/discrete/negative-binomial/index.jsx",
+        "line": 977,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/negative-binomial#8/1",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/negative-binomial",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/negative-binomial#8",
+      "sectionTitle": "Mode and Median",
+      "order": 1,
+      "title": "Example",
+      "task": "For $r = 5$ and $p = 0.3$:",
+      "result": "The 5th success arriving on exactly the 14th trial is more likely than on any other trial.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/negative-binomial/index.jsx",
+        "line": 1227,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/negative-binomial#8/2",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/negative-binomial",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/negative-binomial#8",
+      "sectionTitle": "Mode and Median",
+      "order": 2,
+      "title": "Example",
+      "task": "For $r = 1$ and $p = 0.4$:",
+      "result": "Mode = 1 (geometric case: most likely to succeed on the first trial)",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/probability/distributions/discrete/negative-binomial/index.jsx",
+        "line": 1234,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/negative-binomial#8/3",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/negative-binomial",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/negative-binomial#8",
+      "sectionTitle": "Mode and Median",
+      "order": 3,
+      "title": "Example",
+      "task": "For $r = 3$ and $p = 0.5$:",
+      "result": "$P(X \\leq 4) \\approx 0.31$ and $P(X \\leq 5) = 0.5$ exactly, so both conditions hold for every $m$ from 5 to 6: 5 is the smallest median, and 6 qualifies as well",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/negative-binomial/index.jsx",
+        "line": 1253,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/negative-binomial#8/4",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/negative-binomial",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/negative-binomial#8",
+      "sectionTitle": "Mode and Median",
+      "order": 4,
+      "title": "Example",
+      "task": "For $r = 5$ and $p = 0.3$:",
+      "result": "The median is 16: $P(X \\leq 15) \\approx 0.49$, just short of one half",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/negative-binomial/index.jsx",
+        "line": 1259,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/poisson#1/1",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/poisson",
+      "section": "1",
+      "sectionKey": "/probability/distributions/discrete/poisson#1",
+      "sectionTitle": "The Probabilistic Experiment Behind Poisson distribution",
+      "order": 1,
+      "title": "Example",
+      "task": "Counting the number of emails received by a support desk in one hour when emails arrive randomly but at a stable average rate. The exact timing does not matter — only the total count within the hour.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/distributions/discrete/poisson/index.jsx",
+        "line": 980,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/poisson#8/1",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/poisson",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/poisson#8",
+      "sectionTitle": "Mode and Median",
+      "order": 1,
+      "title": "Example",
+      "task": "For $\\lambda = 4.7$:",
+      "result": "Getting exactly 4 events is more likely than any other outcome.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/poisson/index.jsx",
+        "line": 1245,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/poisson#8/2",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/poisson",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/poisson#8",
+      "sectionTitle": "Mode and Median",
+      "order": 2,
+      "title": "Example",
+      "task": "For $\\lambda = 5$:",
+      "result": "Modes = 4 and 5 (both equally likely)",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/probability/distributions/discrete/poisson/index.jsx",
+        "line": 1252,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/poisson#8/3",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/poisson",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/poisson#8",
+      "sectionTitle": "Mode and Median",
+      "order": 3,
+      "title": "Example",
+      "task": "For $\\lambda = 5$:",
+      "result": "The median is approximately 5 (nearly symmetric)",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/poisson/index.jsx",
+        "line": 1271,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/poisson#8/4",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/poisson",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/poisson#8",
+      "sectionTitle": "Mode and Median",
+      "order": 4,
+      "title": "Example",
+      "task": "For $\\lambda = 2$:",
+      "result": "The median is approximately 2 (found numerically)",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/poisson/index.jsx",
+        "line": 1277,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/uniform#1/1",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/uniform",
+      "section": "1",
+      "sectionKey": "/probability/distributions/discrete/uniform#1",
+      "sectionTitle": "The Probabilistic Experiment Behind Discrete Uniform distribution",
+      "order": 1,
+      "title": "Example",
+      "task": "Rolling a [fair six-sided die](!/probability/models/dice-roll) once. The possible outcomes are $\\{1,2,3,4,5,6\\}$, and each value has the same probability. No outcome is favored over another by the mechanism of the experiment.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/distributions/discrete/uniform/index.jsx",
+        "line": 981,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/uniform#8/1",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/uniform",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/uniform#8",
+      "sectionTitle": "Mode and Median",
+      "order": 1,
+      "title": "Example",
+      "task": "For $a = 1$, $b = 6$ (rolling a fair die):",
+      "result": "Modes = 1, 2, 3, 4, 5, 6 (all equally likely with probability $\\frac{1}{6}$)",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/probability/distributions/discrete/uniform/index.jsx",
+        "line": 1249,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/uniform#8/2",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/uniform",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/uniform#8",
+      "sectionTitle": "Mode and Median",
+      "order": 2,
+      "title": "Example",
+      "task": "For $a = 0$, $b = 4$:",
+      "result": "Modes = 0, 1, 2, 3, 4 (all equally likely with probability $\\frac{1}{5}$)",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/probability/distributions/discrete/uniform/index.jsx",
+        "line": 1254,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/uniform#8/3",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/uniform",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/uniform#8",
+      "sectionTitle": "Mode and Median",
+      "order": 3,
+      "title": "Example",
+      "task": "For $a = 1$, $b = 6$:",
+      "result": "Median = 3.5 (between 3 and 4)",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/uniform/index.jsx",
+        "line": 1276,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/distributions/discrete/uniform#8/4",
+      "subject": "probability",
+      "page": "/probability/distributions/discrete/uniform",
+      "section": "8",
+      "sectionKey": "/probability/distributions/discrete/uniform#8",
+      "sectionTitle": "Mode and Median",
+      "order": 4,
+      "title": "Example",
+      "task": "For $a = 1$, $b = 5$:",
+      "result": "Median = 3 (the exact middle value)",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/distributions/discrete/uniform/index.jsx",
+        "line": 1282,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#2/1",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "2",
+      "sectionKey": "/probability/median#2",
+      "sectionTitle": "Median for Discrete Distributions",
+      "order": 1,
+      "title": "Example",
+      "task": "Uniform on $\\{1,2,3,4,5\\}$ has median $3$",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2112,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#2/2",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "2",
+      "sectionKey": "/probability/median#2",
+      "sectionTitle": "Median for Discrete Distributions",
+      "order": 2,
+      "title": "Example",
+      "task": "For $n=10, p=0.5$, numerical evaluation gives median $= 5$",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2121,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#2/3",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "2",
+      "sectionKey": "/probability/median#2",
+      "sectionTitle": "Median for Discrete Distributions",
+      "order": 3,
+      "title": "Example",
+      "task": "For $p = 0.3$, median $= \\lceil 1.98 \\rceil = 2$",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2128,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#2/4",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "2",
+      "sectionKey": "/probability/median#2",
+      "sectionTitle": "Median for Discrete Distributions",
+      "order": 4,
+      "title": "Example",
+      "task": "[Discrete Uniform](!/probability/distributions/discrete/uniform) on $\\{1, 2, 3, 4\\}$ has CDF values $0.25, 0.5, 0.75, 1.0$. Both $2$ and $3$ satisfy the median conditions. Either value is a valid median.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2149,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#4/1",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "4",
+      "sectionKey": "/probability/median#4",
+      "sectionTitle": "Discrete vs Continuous Median",
+      "order": 1,
+      "title": "Example",
+      "task": "Discrete uniform on $\\{1, 2, 3, 4\\}$ has both 2 and 3 as valid medians.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2310,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#6/1",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "6",
+      "sectionKey": "/probability/median#6",
+      "sectionTitle": "Properties of the Median",
+      "order": 1,
+      "title": "Example",
+      "task": "If $X$ has median $4$, then $Y = 3X - 2$ has median $3(4) - 2 = 10$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2490,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#6/2",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "6",
+      "sectionKey": "/probability/median#6",
+      "sectionTitle": "Properties of the Median",
+      "order": 2,
+      "title": "Example",
+      "task": "If $X$ has median $5$, then $Y = X^2$ has median $25$ (assuming $X > 0$).",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2502,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#6/3",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "6",
+      "sectionKey": "/probability/median#6",
+      "sectionTitle": "Properties of the Median",
+      "order": 3,
+      "title": "Example",
+      "task": "[Normal distributions](!/probability/distributions/continuous/normal) $N(0, 1)$ and $N(0, 100)$ both have median $0$, yet spread differs by a factor of 100.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2536,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#7/1",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "7",
+      "sectionKey": "/probability/median#7",
+      "sectionTitle": "How to Find the Median",
+      "order": 1,
+      "title": "Example",
+      "task": "[Binomial](!/probability/distributions/discrete/binomial) with $n = 10, p = 0.5$",
+      "result": "Median = $5$.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2584,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#7/2",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "7",
+      "sectionKey": "/probability/median#7",
+      "sectionTitle": "How to Find the Median",
+      "order": 2,
+      "title": "Example",
+      "task": "[Exponential distribution](!/probability/distributions/continuous/exponential) with rate $\\lambda$",
+      "result": "Setting $F(m) = 0.5$:",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2618,
+        "view": null
+      },
+      "status": "skipped",
+      "reason": "a formula_callout block sits inside the example; blocks cannot nest"
+    },
+    {
+      "id": "/probability/median#7/3",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "7",
+      "sectionKey": "/probability/median#7",
+      "sectionTitle": "How to Find the Median",
+      "order": 3,
+      "title": "Example",
+      "task": "[Normal distribution](!/probability/distributions/continuous/normal) with parameters $\\mu, \\sigma$",
+      "result": "No calculation needed for symmetric distributions.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2638,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#7/4",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "7",
+      "sectionKey": "/probability/median#7",
+      "sectionTitle": "How to Find the Median",
+      "order": 4,
+      "title": "Example",
+      "task": "Data $\\{3, 7, 1, 9, 5\\}$",
+      "result": "Median = $5$ (middle value).",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2667,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#7/5",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "7",
+      "sectionKey": "/probability/median#7",
+      "sectionTitle": "How to Find the Median",
+      "order": 5,
+      "title": "Example",
+      "task": "Data $\\{3, 7, 1, 9\\}$",
+      "result": "Median = $\\frac{3 + 7}{2} = 5$.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2674,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#11/1",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "11",
+      "sectionKey": "/probability/median#11",
+      "sectionTitle": "Special Cases and Edge Cases",
+      "order": 1,
+      "title": "Example",
+      "task": "Uniform on $\\{1,2,3,4\\}$ has medians at both $2$ and $3$ since the [CDF](!/probability/cdf) equals exactly $0.5$ at $2$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2853,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#11/2",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "11",
+      "sectionKey": "/probability/median#11",
+      "sectionTitle": "Special Cases and Edge Cases",
+      "order": 2,
+      "title": "Example",
+      "task": "Support $\\{1, 2, 5, 6\\}$ with equal probabilities. The CDF jumps from $0.5$ at $k=2$ to $0.75$ at $k=5$. The median is $2$ since it's the smallest value where $F(k) \\geq 0.5$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2902,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/median#13/1",
+      "subject": "probability",
+      "page": "/probability/median",
+      "section": "13",
+      "sectionKey": "/probability/median#13",
+      "sectionTitle": "Common Mistakes",
+      "order": 1,
+      "title": "Example",
+      "task": "[Discrete Uniform](!/probability/distributions/discrete/uniform) on $\\{1,2,3,4\\}$ has both $2$ and $3$ as valid medians.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/median/index.jsx",
+        "line": 2994,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/mode#2/1",
+      "subject": "probability",
+      "page": "/probability/mode",
+      "section": "2",
+      "sectionKey": "/probability/mode#2",
+      "sectionTitle": "Mode for Discrete Distributions",
+      "order": 1,
+      "title": "Example",
+      "task": "For $n=10, p=0.3$, we have $(n+1)p = 3.3$, so mode $= 3$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/mode/index.jsx",
+        "line": 430,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/mode#2/2",
+      "subject": "probability",
+      "page": "/probability/mode",
+      "section": "2",
+      "sectionKey": "/probability/mode#2",
+      "sectionTitle": "Mode for Discrete Distributions",
+      "order": 2,
+      "title": "Example",
+      "task": "For $\\lambda = 5.7$, mode $= 5$. For $\\lambda = 6$, modes are $5$ and $6$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/mode/index.jsx",
+        "line": 437,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/mode#6/1",
+      "subject": "probability",
+      "page": "/probability/mode",
+      "section": "6",
+      "sectionKey": "/probability/mode#6",
+      "sectionTitle": "Properties of the Mode",
+      "order": 1,
+      "title": "Example",
+      "task": "If $X$ has mode $5$, then $Y = 2X + 3$ has mode $2(5) + 3 = 13$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/mode/index.jsx",
+        "line": 686,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/mode#6/2",
+      "subject": "probability",
+      "page": "/probability/mode",
+      "section": "6",
+      "sectionKey": "/probability/mode#6",
+      "sectionTitle": "Properties of the Mode",
+      "order": 2,
+      "title": "Example",
+      "task": "[Normal distributions](!/probability/distributions/continuous/normal) $N(0, 1)$ and $N(0, 100)$ both have mode $0$, yet spread differs by a factor of 100.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/mode/index.jsx",
+        "line": 714,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/mode#6/3",
+      "subject": "probability",
+      "page": "/probability/mode",
+      "section": "6",
+      "sectionKey": "/probability/mode#6",
+      "sectionTitle": "Properties of the Mode",
+      "order": 3,
+      "title": "Example",
+      "task": "If a discrete $X > 0$ has mode $4$, then $Y = X^2$ has mode $16$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/mode/index.jsx",
+        "line": 728,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/mode#7/1",
+      "subject": "probability",
+      "page": "/probability/mode",
+      "section": "7",
+      "sectionKey": "/probability/mode#7",
+      "sectionTitle": "How to Find the Mode",
+      "order": 1,
+      "title": "Example",
+      "task": "[Binomial](!/probability/distributions/discrete/binomial) with $n = 10, p = 0.3$",
+      "result": "Mode = $3$.",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/mode/index.jsx",
+        "line": 777,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/mode#7/2",
+      "subject": "probability",
+      "page": "/probability/mode",
+      "section": "7",
+      "sectionKey": "/probability/mode#7",
+      "sectionTitle": "How to Find the Mode",
+      "order": 2,
+      "title": "Example",
+      "task": "[Normal distribution](!/probability/distributions/continuous/normal) with PDF:",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/mode/index.jsx",
+        "line": 813,
+        "view": null
+      },
+      "status": "skipped",
+      "reason": "a formula_callout block sits inside the example; blocks cannot nest"
+    },
+    {
+      "id": "/probability/mode#7/3",
+      "subject": "probability",
+      "page": "/probability/mode",
+      "section": "7",
+      "sectionKey": "/probability/mode#7",
+      "sectionTitle": "How to Find the Mode",
+      "order": 3,
+      "title": "Example",
+      "task": "[Exponential distribution](!/probability/distributions/continuous/exponential) with PDF:",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/mode/index.jsx",
+        "line": 824,
+        "view": null
+      },
+      "status": "skipped",
+      "reason": "a formula_callout block sits inside the example; blocks cannot nest"
+    },
+    {
+      "id": "/probability/mode#10/1",
+      "subject": "probability",
+      "page": "/probability/mode",
+      "section": "10",
+      "sectionKey": "/probability/mode#10",
+      "sectionTitle": "Special Cases and Edge Cases",
+      "order": 1,
+      "title": "Example",
+      "task": "$n = 5, p = 0.5$ gives $(n+1)p = 3$, producing modes at $k = 2$ and $k = 3$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/mode/index.jsx",
+        "line": 1019,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/mode#10/2",
+      "subject": "probability",
+      "page": "/probability/mode",
+      "section": "10",
+      "sectionKey": "/probability/mode#10",
+      "sectionTitle": "Special Cases and Edge Cases",
+      "order": 2,
+      "title": "Example",
+      "task": "$\\lambda = 4$ creates modes at $k = 3$ and $k = 4$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/mode/index.jsx",
+        "line": 1024,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pdf#1/1",
+      "subject": "probability",
+      "page": "/probability/probability-function/pdf",
+      "section": "1",
+      "sectionKey": "/probability/probability-function/pdf#1",
+      "sectionTitle": "Definition & Physical Intuition",
+      "order": 1,
+      "title": "Example",
+      "task": "Pick a random number between 0 and 1. What's $P(X = 0.5)$? Exactly zero. What's $P(0.49 < X < 0.51)$? Positive. Probability only exists across ranges.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/probability-function/pdf/index.jsx",
+        "line": 104,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pdf#1/2",
+      "subject": "probability",
+      "page": "/probability/probability-function/pdf",
+      "section": "1",
+      "sectionKey": "/probability/probability-function/pdf#1",
+      "sectionTitle": "Definition & Physical Intuition",
+      "order": 2,
+      "title": "Example",
+      "task": "Uniform [distribution](!/probability/distributions) on $[0, 0.5]$ has $f(x) = 2$. The density is 2, but the total probability integrates to 1.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/probability-function/pdf/index.jsx",
+        "line": 120,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pdf#5/1",
+      "subject": "probability",
+      "page": "/probability/probability-function/pdf",
+      "section": "5",
+      "sectionKey": "/probability/probability-function/pdf#5",
+      "sectionTitle": "The Two Fundamental Axioms",
+      "order": 1,
+      "title": "Example",
+      "task": "[Uniform distribution](!/probability/distributions/continuous/uniform) on $[0, 2]$ has $f(x) = \\frac{1}{2}$ for $x \\in [0,2]$.",
+      "result": "Check: $\\int_0^2 \\frac{1}{2}dx = \\frac{1}{2} \\cdot 2 = 1$. ✓",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/probability/probability-function/pdf/index.jsx",
+        "line": 260,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pdf#5/2",
+      "subject": "probability",
+      "page": "/probability/probability-function/pdf",
+      "section": "5",
+      "sectionKey": "/probability/probability-function/pdf#5",
+      "sectionTitle": "The Two Fundamental Axioms",
+      "order": 2,
+      "title": "Example",
+      "task": "[Exponential distribution](!/probability/distributions/continuous/exponential) with $f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$.",
+      "result": "Check: $\\int_0^{\\infty} \\lambda e^{-\\lambda x}dx = \\lambda \\cdot \\frac{1}{\\lambda} = 1$. ✓",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/probability/probability-function/pdf/index.jsx",
+        "line": 265,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pdf#8/1",
+      "subject": "probability",
+      "page": "/probability/probability-function/pdf",
+      "section": "8",
+      "sectionKey": "/probability/probability-function/pdf#8",
+      "sectionTitle": "Calculations Using the PDF",
+      "order": 1,
+      "title": "Example",
+      "task": "$P(X < 5) = P(X \\leq 5)$ exactly. No approximation, no difference.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/probability-function/pdf/index.jsx",
+        "line": 461,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pdf#/1",
+      "subject": "probability",
+      "page": "/probability/probability-function/pdf",
+      "section": null,
+      "sectionKey": null,
+      "sectionTitle": null,
+      "order": 1,
+      "title": "Example",
+      "task": "[Uniform distribution](!/probability/distributions/continuous/uniform) on $[0, 0.1]$ has $f(x) = 10$. This is perfectly valid.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/probability-function/pdf/index.jsx",
+        "line": 898,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pmf#3/1",
+      "subject": "probability",
+      "page": "/probability/probability-function/pmf",
+      "section": "3",
+      "sectionKey": "/probability/probability-function/pmf#3",
+      "sectionTitle": "The Two Fundamental Axioms",
+      "order": 1,
+      "title": "Example",
+      "task": "Fair die. $p_X(k) = \\frac{1}{6}$ for $k \\in \\{1,2,3,4,5,6\\}$.",
+      "result": "Check: $6 \\times \\frac{1}{6} = 1$. ✓",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/probability/probability-function/pmf/index.jsx",
+        "line": 1754,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pmf#3/2",
+      "subject": "probability",
+      "page": "/probability/probability-function/pmf",
+      "section": "3",
+      "sectionKey": "/probability/probability-function/pmf#3",
+      "sectionTitle": "The Two Fundamental Axioms",
+      "order": 2,
+      "title": "Example",
+      "task": "Loaded die with $p_X(6) = \\frac{1}{2}$ and $p_X(k) = \\frac{1}{10}$ for $k \\in \\{1,2,3,4,5\\}$.",
+      "result": "Check: $\\frac{1}{2} + 5 \\times \\frac{1}{10} = \\frac{1}{2} + \\frac{1}{2} = 1$. ✓",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/probability/probability-function/pmf/index.jsx",
+        "line": 1759,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pmf#5/1",
+      "subject": "probability",
+      "page": "/probability/probability-function/pmf",
+      "section": "5",
+      "sectionKey": "/probability/probability-function/pmf#5",
+      "sectionTitle": "Building a PMF (From Story to Math)",
+      "order": 1,
+      "title": "Example",
+      "task": "Fair coin, 3 flips.",
+      "result": "• $P(X = 3) = \\frac{1}{8}$ (only HHH)",
+      "bodyLines": 5,
+      "source": {
+        "file": "pages/probability/probability-function/pmf/index.jsx",
+        "line": 1866,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pmf#6/1",
+      "subject": "probability",
+      "page": "/probability/probability-function/pmf",
+      "section": "6",
+      "sectionKey": "/probability/probability-function/pmf#6",
+      "sectionTitle": "Calculations Using the PMF",
+      "order": 1,
+      "title": "Example",
+      "task": "Roll a fair die. $P(X = 4) = \\frac{1}{6}$",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/probability-function/pmf/index.jsx",
+        "line": 1915,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pmf#6/2",
+      "subject": "probability",
+      "page": "/probability/probability-function/pmf",
+      "section": "6",
+      "sectionKey": "/probability/probability-function/pmf#6",
+      "sectionTitle": "Calculations Using the PMF",
+      "order": 2,
+      "title": "Example",
+      "task": "$P(X > 3) = 1 - P(X \\leq 3) = 1 - \\frac{1}{2} = \\frac{1}{2}$",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/probability-function/pmf/index.jsx",
+        "line": 1934,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pmf#7/1",
+      "subject": "probability",
+      "page": "/probability/probability-function/pmf",
+      "section": "7",
+      "sectionKey": "/probability/probability-function/pmf#7",
+      "sectionTitle": "Derived Properties: Location Measures",
+      "order": 1,
+      "title": "Example",
+      "task": "Fair die. The median is between 3 and 4, often reported as 3.5.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/probability-function/pmf/index.jsx",
+        "line": 1986,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pmf#7/2",
+      "subject": "probability",
+      "page": "/probability/probability-function/pmf",
+      "section": "7",
+      "sectionKey": "/probability/probability-function/pmf#7",
+      "sectionTitle": "Derived Properties: Location Measures",
+      "order": 2,
+      "title": "Example",
+      "task": "Loaded die with $p_X(6) = \\frac{1}{2}$ and $p_X(k) = \\frac{1}{10}$ for $k \\in \\{1,2,3,4,5\\}$. Mode is 6.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/probability-function/pmf/index.jsx",
+        "line": 1996,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pmf#9/1",
+      "subject": "probability",
+      "page": "/probability/probability-function/pmf",
+      "section": "9",
+      "sectionKey": "/probability/probability-function/pmf#9",
+      "sectionTitle": "Transformations",
+      "order": 1,
+      "title": "Example",
+      "task": "$X$ is a fair die, $Y = (X - 3.5)^2$ (squared distance from mean).",
+      "result": "• $p_Y(0.25) = p_X(3) + p_X(4) = \\frac{1}{3}$",
+      "bodyLines": 5,
+      "source": {
+        "file": "pages/probability/probability-function/pmf/index.jsx",
+        "line": 2098,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/probability-function/pmf#10/1",
+      "subject": "probability",
+      "page": "/probability/probability-function/pmf",
+      "section": "10",
+      "sectionKey": "/probability/probability-function/pmf#10",
+      "sectionTitle": "Connection to CDF",
+      "order": 1,
+      "title": "Example",
+      "task": "Fair die.",
+      "result": "- $F_X(5.7) = p_X(1) + \\cdots + p_X(5) = \\frac{5}{6}$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/probability/probability-function/pmf/index.jsx",
+        "line": 2152,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/total-probability#examples/1",
+      "subject": "probability",
+      "page": "/probability/total-probability",
+      "section": "examples",
+      "sectionKey": "/probability/total-probability#examples",
+      "sectionTitle": "Examples",
+      "order": 1,
+      "title": "Example 1: Medical testing",
+      "task": "A disease affects 1% of the population. A test is 95% accurate for infected people (true positive rate) and 90% accurate for healthy people (true negative rate, so 10% false positive rate).",
+      "result": "About $10.85$% of tests come back positive.",
+      "bodyLines": 11,
+      "source": {
+        "file": "pages/probability/total-probability/index.jsx",
+        "line": 1478,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/total-probability#examples/2",
+      "subject": "probability",
+      "page": "/probability/total-probability",
+      "section": "examples",
+      "sectionKey": "/probability/total-probability#examples",
+      "sectionTitle": "Examples",
+      "order": 2,
+      "title": "Example 2: Manufacturing defects",
+      "task": "A factory has three machines producing parts. Machine A makes 50% of parts with 2% defect rate. Machine B makes 30% with 3% defect rate. Machine C makes 20% with 5% defect rate.",
+      "result": "$2.9$% of all parts are defective.",
+      "bodyLines": 11,
+      "source": {
+        "file": "pages/probability/total-probability/index.jsx",
+        "line": 1496,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/total-probability#examples/3",
+      "subject": "probability",
+      "page": "/probability/total-probability",
+      "section": "examples",
+      "sectionKey": "/probability/total-probability#examples",
+      "sectionTitle": "Examples",
+      "order": 3,
+      "title": "Example 3: Weather scenarios",
+      "task": "Tomorrow will be sunny, cloudy, or rainy with probabilities 0.6, 0.3, and 0.1. You'll go running with probability 0.8 if sunny, 0.5 if cloudy, and 0.1 if rainy.",
+      "result": "$64$% chance you'll go running.",
+      "bodyLines": 11,
+      "source": {
+        "file": "pages/probability/total-probability/index.jsx",
+        "line": 1514,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/probability/variance#general/1",
+      "subject": "probability",
+      "page": "/probability/variance",
+      "section": "general",
+      "sectionKey": "/probability/variance#general",
+      "sectionTitle": "Calculating Variance: General Case",
+      "order": 1,
+      "title": "Example",
+      "task": "Consider a small shop where the number of items sold on a given morning varies randomly. Let $X$ represent the number of items sold. Based on past observations, the probabilities for different sales outcomes are:",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/probability/variance/index.jsx",
+        "line": 1432,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/tables/angle-conversion#5/1",
+      "subject": "tables",
+      "page": "/tables/angle-conversion",
+      "section": "5",
+      "sectionKey": "/tables/angle-conversion#5",
+      "sectionTitle": "The Conversion Formulas",
+      "order": 1,
+      "title": "Worked example",
+      "task": "converting 60° to radians:",
+      "result": "$$60 \\times \\frac{\\pi}{180} = \\frac{60\\pi}{180} = \\frac{\\pi}{3}$$",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/tables/angle-conversion/index.jsx",
+        "line": 136,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/tables/angle-conversion#5/2",
+      "subject": "tables",
+      "page": "/tables/angle-conversion",
+      "section": "5",
+      "sectionKey": "/tables/angle-conversion#5",
+      "sectionTitle": "The Conversion Formulas",
+      "order": 2,
+      "title": "Worked example",
+      "task": "converting $\\pi/4$ radians to degrees:",
+      "result": "$$\\frac{\\pi}{4} \\times \\frac{180}{\\pi} = \\frac{180}{4} = 45°$$",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/tables/angle-conversion/index.jsx",
+        "line": 141,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/tables/base-conversion#8/1",
+      "subject": "tables",
+      "page": "/tables/base-conversion",
+      "section": "8",
+      "sectionKey": "/tables/base-conversion#8",
+      "sectionTitle": "How Base Conversion Works",
+      "order": 1,
+      "title": "Example",
+      "task": "converting $13$ to base $2$ gives remainders $1, 0, 1, 1$ read upward, so $13_{10} = 1101_2$.",
+      "result": null,
+      "bodyLines": 1,
+      "source": {
+        "file": "pages/tables/base-conversion/index.jsx",
+        "line": 384,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/trigonometry/equations#2/1",
+      "subject": "trigonometry",
+      "page": "/trigonometry/equations",
+      "section": "2",
+      "sectionKey": "/trigonometry/equations#2",
+      "sectionTitle": "Solving Basic Sine Equations",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\sin(x) = -\\frac{\\sqrt{3}}{2}$.",
+      "result": "General solution: $x = \\frac{4\\pi}{3} + 2n\\pi$ or $x = \\frac{5\\pi}{3} + 2n\\pi$.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/trigonometry/equations/index.jsx",
+        "line": 1351,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/trigonometry/equations#3/1",
+      "subject": "trigonometry",
+      "page": "/trigonometry/equations",
+      "section": "3",
+      "sectionKey": "/trigonometry/equations#3",
+      "sectionTitle": "Solving Basic Cosine Equations",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\cos(x) = -\\frac{1}{2}$ on $[0, 2\\pi)$.",
+      "result": "$$x = \\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3} \\quad \\text{or} \\quad x = \\pi + \\frac{\\pi}{3} = \\frac{4\\pi}{3}$$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/trigonometry/equations/index.jsx",
+        "line": 1391,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/trigonometry/equations#4/1",
+      "subject": "trigonometry",
+      "page": "/trigonometry/equations",
+      "section": "4",
+      "sectionKey": "/trigonometry/equations#4",
+      "sectionTitle": "Solving Basic Tangent Equations",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\tan(x) = \\sqrt{3}$.",
+      "result": "On $[0, 2\\pi)$: $x = \\frac{\\pi}{3}$ (from $n = 0$) and $x = \\frac{\\pi}{3} + \\pi = \\frac{4\\pi}{3}$ (from $n = 1$).",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/trigonometry/equations/index.jsx",
+        "line": 1418,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/trigonometry/equations#4/2",
+      "subject": "trigonometry",
+      "page": "/trigonometry/equations",
+      "section": "4",
+      "sectionKey": "/trigonometry/equations#4",
+      "sectionTitle": "Solving Basic Tangent Equations",
+      "order": 2,
+      "title": "Example",
+      "task": "Solve $\\tan(x) = -1$.",
+      "result": "On $[0, 2\\pi)$: $x = -\\frac{\\pi}{4} + \\pi = \\frac{3\\pi}{4}$ and $x = -\\frac{\\pi}{4} + 2\\pi = \\frac{7\\pi}{4}$.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/trigonometry/equations/index.jsx",
+        "line": 1427,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/trigonometry/equations#8/1",
+      "subject": "trigonometry",
+      "page": "/trigonometry/equations",
+      "section": "8",
+      "sectionKey": "/trigonometry/equations#8",
+      "sectionTitle": "Equations with Multiple Angles",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\sin(2x) = \\frac{\\sqrt{3}}{2}$ on $[0, 2\\pi)$.",
+      "result": "Four solutions: $\\left\\{\\frac{\\pi}{6}, \\frac{\\pi}{3}, \\frac{7\\pi}{6}, \\frac{4\\pi}{3}\\right\\}$.",
+      "bodyLines": 9,
+      "source": {
+        "file": "pages/trigonometry/equations/index.jsx",
+        "line": 1568,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/trigonometry/equations#9/1",
+      "subject": "trigonometry",
+      "page": "/trigonometry/equations",
+      "section": "9",
+      "sectionKey": "/trigonometry/equations#9",
+      "sectionTitle": "Extraneous Solutions",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\sin(x) + \\cos(x) = 1$.",
+      "result": "Only $x = 0$ and $x = \\frac{\\pi}{2}$ are valid. The squaring step introduced two extraneous solutions where $\\sin(x) + \\cos(x) = -1$ — the negative square root that squaring fails to distinguish from the positive.",
+      "bodyLines": 12,
+      "source": {
+        "file": "pages/trigonometry/equations/index.jsx",
+        "line": 1597,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/trigonometry/functions#9/1",
+      "subject": "trigonometry",
+      "page": "/trigonometry/functions",
+      "section": "9",
+      "sectionKey": "/trigonometry/functions#9",
+      "sectionTitle": "Evaluating Trigonometric Functions at Any Angle",
+      "order": 1,
+      "title": "Example",
+      "task": "evaluate $\\cos\\left(\\frac{7\\pi}{4}\\right)$.",
+      "result": "The angle $\\frac{7\\pi}{4}$ is in $[0, 2\\pi)$, so no coterminal reduction is needed. It lies in Quadrant IV (since $\\frac{3\\pi}{2} < \\frac{7\\pi}{4} < 2\\pi$). The reference angle is $2\\pi - \\frac{7\\pi}{4} = \\frac{\\pi}{4}$. Cosine is positive in Quadrant IV. Therefore $\\cos\\left(\\frac{7\\pi}{4}\\right) = +\\cos\\left(\\frac{\\pi}{4}\\right) = \\frac{\\sqrt{2}}{2}$.",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/trigonometry/functions/index.jsx",
+        "line": 2674,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/trigonometry/functions#9/2",
+      "subject": "trigonometry",
+      "page": "/trigonometry/functions",
+      "section": "9",
+      "sectionKey": "/trigonometry/functions#9",
+      "sectionTitle": "Evaluating Trigonometric Functions at Any Angle",
+      "order": 2,
+      "title": "Example",
+      "task": "evaluate $\\tan(240°)$.",
+      "result": "The angle $240°$ is in Quadrant III ($180° < 240° < 270°$). The reference angle is $240° - 180° = 60°$. Tangent is positive in Quadrant III (both sine and cosine are negative, and a negative divided by a negative is positive). Therefore $\\tan(240°) = +\\tan(60°) = \\sqrt{3}$.",
+      "bodyLines": 2,
+      "source": {
+        "file": "pages/trigonometry/functions/index.jsx",
+        "line": 2679,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/trigonometry/inequalities#2/1",
+      "subject": "trigonometry",
+      "page": "/trigonometry/inequalities",
+      "section": "2",
+      "sectionKey": "/trigonometry/inequalities#2",
+      "sectionTitle": "The Graphical Method",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\cos(x) > \\frac{1}{2}$ on $[0, 2\\pi)$.",
+      "result": "The endpoints $\\frac{\\pi}{3}$ and $\\frac{5\\pi}{3}$ are excluded because the inequality is strict ($>$, not $\\geq$). The endpoint $0$ is included because the interval $[0, 2\\pi)$ starts there and $\\cos(0) = 1 > \\frac{1}{2}$.",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/trigonometry/inequalities/index.jsx",
+        "line": 1190,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/trigonometry/inequalities#3/1",
+      "subject": "trigonometry",
+      "page": "/trigonometry/inequalities",
+      "section": "3",
+      "sectionKey": "/trigonometry/inequalities#3",
+      "sectionTitle": "The Unit Circle Method",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\sin(x) \\geq \\frac{\\sqrt{2}}{2}$ on $[0, 2\\pi)$.",
+      "result": "$$x \\in \\left[\\frac{\\pi}{4}, \\frac{3\\pi}{4}\\right]$$",
+      "bodyLines": 3,
+      "source": {
+        "file": "pages/trigonometry/inequalities/index.jsx",
+        "line": 1216,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/trigonometry/inequalities#8/1",
+      "subject": "trigonometry",
+      "page": "/trigonometry/inequalities",
+      "section": "8",
+      "sectionKey": "/trigonometry/inequalities#8",
+      "sectionTitle": "Domain Considerations for Reciprocal and Quotient Functions",
+      "order": 1,
+      "title": "Example",
+      "task": "Solve $\\sec(x) \\geq 2$ on $[0, 2\\pi)$.",
+      "result": "The points $x = \\frac{\\pi}{2}$ and $x = \\frac{3\\pi}{2}$ are excluded because secant is undefined there (vertical asymptotes on the [graph](!/trigonometry/graphs)).",
+      "bodyLines": 9,
+      "source": {
+        "file": "pages/trigonometry/inequalities/index.jsx",
+        "line": 1338,
+        "view": null
+      },
+      "status": "wrapped"
+    },
+    {
+      "id": "/trigonometry/sines-cosines-law#9/1",
+      "subject": "trigonometry",
+      "page": "/trigonometry/sines-cosines-law",
+      "section": "9",
+      "sectionKey": "/trigonometry/sines-cosines-law#9",
+      "sectionTitle": "Heron's Formula",
+      "order": 1,
+      "title": "Example",
+      "task": "A triangle with sides $a = 5$, $b = 7$, $c = 9$.",
+      "result": "$$= \\sqrt{303.1875} \\approx 17.41$$",
+      "bodyLines": 4,
+      "source": {
+        "file": "pages/trigonometry/sines-cosines-law/index.jsx",
+        "line": 1410,
+        "view": null
+      },
+      "status": "wrapped"
+    }
+  ]
+}

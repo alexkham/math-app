@@ -385,14 +385,11 @@ Conditioning on an event is defined in [The conditional probability formula](!/p
 
 **Example - Triple intersection for independent events**: Step 1 shows "P(A∩B∩C) = P(A) × P(B) × P(C) (independent)", stating the multiplication rule. Step 2 shows "P(A∩B∩C) = 0.5 × 0.4 × 0.3", substituting provided probabilities. Step 3 shows "P(A∩B∩C) = 0.0600", the computed probability.
 
-@academic[example:Example - Region "A only"
-Step 1 shows "P(A ∩ B' ∩ C') = P(A) - P(A∩B) - P(A∩C) + P(A∩B∩C)", the inclusion-exclusion formula for this region. Step 2 substitutes all values. Step 3 computes the result. This formula subtracts both pairwise intersections from P(A), but adds back P(A∩B∩C) because it was subtracted twice.]@
+**Example - Region "A only"**: Step 1 shows "P(A ∩ B' ∩ C') = P(A) - P(A∩B) - P(A∩C) + P(A∩B∩C)", the inclusion-exclusion formula for this region. Step 2 substitutes all values. Step 3 computes the result. This formula subtracts both pairwise intersections from P(A), but adds back P(A∩B∩C) because it was subtracted twice.
 
-@academic[example:Example - Union via inclusion-exclusion
-Step 1 shows the full inclusion-exclusion formula with seven terms. Step 2 substitutes all probabilities. Step 3 performs the arithmetic: addition of individuals, subtraction of pairs, addition of triple. The step-by-step format makes this complex calculation transparent.]@
+**Example - Union via inclusion-exclusion**: Step 1 shows the full inclusion-exclusion formula with seven terms. Step 2 substitutes all probabilities. Step 3 performs the arithmetic: addition of individuals, subtraction of pairs, addition of triple. The step-by-step format makes this complex calculation transparent.
 
-@academic[example:Example - Conditional P(A|B∩C)
-Step 1 shows "P(A|B∩C) = P(A∩B∩C) / P(B∩C)", the conditional probability definition. Step 2 shows division with actual values. Step 3 computes the quotient.]@
+**Example - Conditional P(A|B∩C)**: Step 1 shows "P(A|B∩C) = P(A∩B∩C) / P(B∩C)", the conditional probability definition. Step 2 shows division with actual values. Step 3 computes the quotient.
 
 The calculations reference previously computed values, showing dependency chains. P(A|B∩C) references P(A∩B∩C) and P(B∩C), both calculated earlier. This demonstrates how complex probabilities build from simpler ones through probability rules.
 Clicking a row a second time folds the steps away. The formulas the steps apply are explained in [The Inclusion-Exclusion Principle for Three Events](!#the-inclusion-exclusion-principle-for-three-events).`,

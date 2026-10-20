@@ -526,15 +526,19 @@ $$\\sqrt[n]{a} = a^{1/n}$$
 
 The denominator becomes the index. The base remains the radicand.
 
-$$25^{1/2} = \\sqrt{25} = 5$$
+@academic[formula_callout:Unit Fraction Exponents
+$$25^{1/2} = \\sqrt{25} = 5$$]@
 
-$$8^{1/3} = \\sqrt[3]{8} = 2$$
+@academic[formula_callout:Unit Fraction Exponents
+$$8^{1/3} = \\sqrt[3]{8} = 2$$]@
 
-$$81^{1/4} = \\sqrt[4]{81} = 3$$
+@academic[formula_callout:Unit Fraction Exponents
+$$81^{1/4} = \\sqrt[4]{81} = 3$$]@
 
 This definition is forced by the laws of exponents. If exponent laws hold, then:
 
-$$(a^{1/2})^2 = a^{(1/2) \\cdot 2} = a^1 = a$$
+@academic[formula_callout:Unit Fraction Exponents
+$$(a^{1/2})^2 = a^{(1/2) \\cdot 2} = a^1 = a$$]@
 
 The only number whose square is $a$ is $\\sqrt{a}$. Therefore $a^{1/2} = \\sqrt{a}$.
 
@@ -550,17 +554,21 @@ This connection to the [powers](!/algebra/powers) section shows that rational ex
     title: `General Rational Exponents`,
     content: `When the numerator is not 1, both root and power apply.
 
-$$a^{m/n} = \\sqrt[n]{a^m} = (\\sqrt[n]{a})^m$$
+@academic[formula_callout:General Rational Exponents
+$$a^{m/n} = \\sqrt[n]{a^m} = (\\sqrt[n]{a})^m$$]@
 
 Either interpretation gives the same result. The root can be taken first, or the power can be applied first.
 
-$$8^{2/3} = \\sqrt[3]{8^2} = \\sqrt[3]{64} = 4$$
+@academic[formula_callout:General Rational Exponents
+$$8^{2/3} = \\sqrt[3]{8^2} = \\sqrt[3]{64} = 4$$]@
 
-$$8^{2/3} = (\\sqrt[3]{8})^2 = 2^2 = 4$$
+@academic[formula_callout:General Rational Exponents
+$$8^{2/3} = (\\sqrt[3]{8})^2 = 2^2 = 4$$]@
 
 Taking the root first often produces smaller numbers, making mental calculation easier.
 
-$$27^{4/3} = (\\sqrt[3]{27})^4 = 3^4 = 81$$
+@academic[formula_callout:General Rational Exponents
+$$27^{4/3} = (\\sqrt[3]{27})^4 = 3^4 = 81$$]@
 
 Computing $27^4 = 531441$ first and then taking $\\sqrt[3]{531441}$ reaches the same answer but with harder arithmetic.
 
@@ -574,15 +582,19 @@ The [radical rules](!/algebra/roots/radical-rules) translate directly: the power
     title: `Negative Rational Exponents`,
     content: `A negative exponent indicates a reciprocal. Combined with a fractional exponent:
 
-$$a^{-m/n} = \\frac{1}{a^{m/n}}$$
+@academic[formula_callout:Negative Rational Exponents
+$$a^{-m/n} = \\frac{1}{a^{m/n}}$$]@
 
-$$8^{-2/3} = \\frac{1}{8^{2/3}} = \\frac{1}{4}$$
+@academic[formula_callout:Negative Rational Exponents
+$$8^{-2/3} = \\frac{1}{8^{2/3}} = \\frac{1}{4}$$]@
 
-$$16^{-3/4} = \\frac{1}{16^{3/4}} = \\frac{1}{(\\sqrt[4]{16})^3} = \\frac{1}{2^3} = \\frac{1}{8}$$
+@academic[formula_callout:Negative Rational Exponents
+$$16^{-3/4} = \\frac{1}{16^{3/4}} = \\frac{1}{(\\sqrt[4]{16})^3} = \\frac{1}{2^3} = \\frac{1}{8}$$]@
 
 Alternatively, the reciprocal can be taken first:
 
-$$8^{-2/3} = \\left(\\frac{1}{8}\\right)^{2/3} = \\frac{1}{8^{2/3}} = \\frac{1}{4}$$
+@academic[formula_callout:Negative Rational Exponents
+$$8^{-2/3} = \\left(\\frac{1}{8}\\right)^{2/3} = \\frac{1}{8^{2/3}} = \\frac{1}{4}$$]@
 
 Negative rational exponents combine the rules for negative exponents from [powers](!/algebra/powers) with rational exponent definitions. The base must still satisfy domain restrictions — nonzero for negative exponents, non-negative for even roots.`,
     before: ``,
@@ -594,27 +606,37 @@ Negative rational exponents combine the rules for negative exponents from [power
     title: `Converting Between Forms`,
     content: `Any radical converts to exponent form:
 
+@academic[formula_callout:Power Rule (Radicals)
 $$\\sqrt[n]{a^m} = a^{m/n}$$
+/algebra/formulas#power_rule_radicals]@
 
-$$\\sqrt{x} = x^{1/2}$$
+@academic[formula_callout:Converting Between Forms
+$$\\sqrt{x} = x^{1/2}$$]@
 
-$$\\sqrt[3]{y^2} = y^{2/3}$$
+@academic[formula_callout:Converting Between Forms
+$$\\sqrt[3]{y^2} = y^{2/3}$$]@
 
-$$\\sqrt[5]{z^4} = z^{4/5}$$
+@academic[formula_callout:Converting Between Forms
+$$\\sqrt[5]{z^4} = z^{4/5}$$]@
 
 Any rational exponent converts to radical form:
 
-$$a^{m/n} = \\sqrt[n]{a^m}$$
+@academic[formula_callout:Converting Between Forms
+$$a^{m/n} = \\sqrt[n]{a^m}$$]@
 
-$$x^{3/4} = \\sqrt[4]{x^3}$$
+@academic[formula_callout:Converting Between Forms
+$$x^{3/4} = \\sqrt[4]{x^3}$$]@
 
-$$y^{-2/5} = \\frac{1}{\\sqrt[5]{y^2}}$$
+@academic[formula_callout:Converting Between Forms
+$$y^{-2/5} = \\frac{1}{\\sqrt[5]{y^2}}$$]@
 
 Expressions in denominators convert similarly:
 
-$$\\frac{1}{\\sqrt{x}} = \\frac{1}{x^{1/2}} = x^{-1/2}$$
+@academic[formula_callout:Converting Between Forms
+$$\\frac{1}{\\sqrt{x}} = \\frac{1}{x^{1/2}} = x^{-1/2}$$]@
 
-$$\\frac{1}{\\sqrt[3]{a^2}} = a^{-2/3}$$
+@academic[formula_callout:Converting Between Forms
+$$\\frac{1}{\\sqrt[3]{a^2}} = a^{-2/3}$$]@
 
 This flexibility allows choosing the form best suited to the task. Exponent form for algebraic manipulation; radical form for numerical evaluation or clarity.
 
@@ -630,13 +652,15 @@ To evaluate a root numerically in either form, use the [root calculator](!/calcu
 
 When the denominator of the exponent is even, the base must be non-negative.
 
-$$(-4)^{1/2} \\quad \\text{is not real}$$
+@academic[formula_callout:Domain Restrictions
+$$(-4)^{1/2} \\quad \\text{is not real}$$]@
 
 No real number squares to $-4$. The expression requires complex numbers.
 
 When the denominator is odd, any real base is permitted.
 
-$$(-8)^{1/3} = -2$$
+@academic[formula_callout:Domain Restrictions
+$$(-8)^{1/3} = -2$$]@
 
 Negative bases have real odd roots.
 
@@ -656,21 +680,27 @@ These domain considerations matter when [simplifying](!/algebra/roots/simplifyin
 
 Product rule — same base, add exponents:
 
-$$a^{m/n} \\cdot a^{p/q} = a^{m/n + p/q}$$
+@academic[formula_callout:Laws of Exponents with Rationals
+$$a^{m/n} \\cdot a^{p/q} = a^{m/n + p/q}$$]@
 
-$$x^{1/2} \\cdot x^{1/3} = x^{3/6 + 2/6} = x^{5/6}$$
+@academic[formula_callout:Laws of Exponents with Rationals
+$$x^{1/2} \\cdot x^{1/3} = x^{3/6 + 2/6} = x^{5/6}$$]@
 
 Quotient rule — same base, subtract exponents:
 
-$$\\frac{a^{m/n}}{a^{p/q}} = a^{m/n - p/q}$$
+@academic[formula_callout:Laws of Exponents with Rationals
+$$\\frac{a^{m/n}}{a^{p/q}} = a^{m/n - p/q}$$]@
 
-$$\\frac{y^{3/4}}{y^{1/2}} = y^{3/4 - 2/4} = y^{1/4}$$
+@academic[formula_callout:Laws of Exponents with Rationals
+$$\\frac{y^{3/4}}{y^{1/2}} = y^{3/4 - 2/4} = y^{1/4}$$]@
 
 Power of a power — multiply exponents:
 
-$$(a^{m/n})^{p/q} = a^{(m/n)(p/q)} = a^{mp/(nq)}$$
+@academic[formula_callout:Laws of Exponents with Rationals
+$$(a^{m/n})^{p/q} = a^{(m/n)(p/q)} = a^{mp/(nq)}$$]@
 
-$$(x^{2/3})^{3/4} = x^{6/12} = x^{1/2}$$
+@academic[formula_callout:Laws of Exponents with Rationals
+$$(x^{2/3})^{3/4} = x^{6/12} = x^{1/2}$$]@
 
 These are the same laws from [powers](!/algebra/powers), now with fractional arithmetic. Finding common denominators is often necessary when adding or subtracting exponents.`,
     before: ``,
@@ -682,21 +712,25 @@ These are the same laws from [powers](!/algebra/powers), now with fractional ari
     title: `Simplifying with Rational Exponents`,
     content: `Exponent form often simplifies manipulation that would be awkward with radicals.
 
-$$\\sqrt{x} \\cdot \\sqrt[3]{x} = x^{1/2} \\cdot x^{1/3} = x^{5/6}$$
+@academic[formula_callout:Simplifying with Rational Exponents
+$$\\sqrt{x} \\cdot \\sqrt[3]{x} = x^{1/2} \\cdot x^{1/3} = x^{5/6}$$]@
 
 In radical form, this requires converting to a common index. In exponent form, it requires only adding fractions.
 
-$$\\frac{\\sqrt[4]{a^3}}{\\sqrt{a}} = \\frac{a^{3/4}}{a^{1/2}} = a^{3/4 - 2/4} = a^{1/4} = \\sqrt[4]{a}$$
+@academic[formula_callout:Simplifying with Rational Exponents
+$$\\frac{\\sqrt[4]{a^3}}{\\sqrt{a}} = \\frac{a^{3/4}}{a^{1/2}} = a^{3/4 - 2/4} = a^{1/4} = \\sqrt[4]{a}$$]@
 
 Factoring with rational exponents:
 
-$$x^{1/2} + x^{3/2} = x^{1/2}(1 + x)$$
+@academic[formula_callout:Simplifying with Rational Exponents
+$$x^{1/2} + x^{3/2} = x^{1/2}(1 + x)$$]@
 
 The smallest exponent factors out, just as with integer exponents.
 
 Reducing exponents to lowest terms simplifies radicals:
 
-$$x^{4/6} = x^{2/3}$$
+@academic[formula_callout:Simplifying with Rational Exponents
+$$x^{4/6} = x^{2/3}$$]@
 
 This corresponds to reducing the index from 6 to 3, a technique from [simplifying radicals](!/algebra/roots/simplifying).`,
     before: ``,
@@ -708,23 +742,28 @@ This corresponds to reducing the index from 6 to 3, a technique from [simplifyin
     title: `Combining Radicals via Exponents`,
     content: `When radicals have different indices, direct combination is impossible. Converting to exponents provides a path.
 
-$$\\sqrt{2} \\cdot \\sqrt[3]{4}$$
+@academic[formula_callout:Combining Radicals via Exponents
+$$\\sqrt{2} \\cdot \\sqrt[3]{4}$$]@
 
 Convert:
 
-$$= 2^{1/2} \\cdot 4^{1/3} = 2^{1/2} \\cdot (2^2)^{1/3} = 2^{1/2} \\cdot 2^{2/3}$$
+@academic[formula_callout:Combining Radicals via Exponents
+$$= 2^{1/2} \\cdot 4^{1/3} = 2^{1/2} \\cdot (2^2)^{1/3} = 2^{1/2} \\cdot 2^{2/3}$$]@
 
 Add exponents:
 
-$$= 2^{3/6 + 4/6} = 2^{7/6}$$
+@academic[formula_callout:Combining Radicals via Exponents
+$$= 2^{3/6 + 4/6} = 2^{7/6}$$]@
 
 Convert back if desired:
 
-$$= \\sqrt[6]{2^7} = \\sqrt[6]{128}$$
+@academic[formula_callout:Combining Radicals via Exponents
+$$= \\sqrt[6]{2^7} = \\sqrt[6]{128}$$]@
 
 Division works similarly:
 
-$$\\frac{\\sqrt[3]{x}}{\\sqrt[4]{x}} = \\frac{x^{1/3}}{x^{1/4}} = x^{4/12 - 3/12} = x^{1/12} = \\sqrt[12]{x}$$
+@academic[formula_callout:Combining Radicals via Exponents
+$$\\frac{\\sqrt[3]{x}}{\\sqrt[4]{x}} = \\frac{x^{1/3}}{x^{1/4}} = x^{4/12 - 3/12} = x^{1/12} = \\sqrt[12]{x}$$]@
 
 The exponent approach handles [operations](!/algebra/roots/operations) that radical notation makes cumbersome.`,
     before: ``,

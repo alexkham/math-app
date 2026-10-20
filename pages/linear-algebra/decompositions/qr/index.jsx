@@ -1731,6 +1731,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import qrDiagrams from '@/app/components/linear-algebra copy/matrix/qrDiagrams'
 
 import gramSchmidtDiagrams from '@/app/components/linear-algebra copy/matrix/gramSchmidtDiagrams'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -2098,17 +2100,18 @@ The columns of $Q$ form an orthonormal [basis](!/linear-algebra/vector-spaces) f
 The entries of $R$ are the dot products computed during Gram-Schmidt:
 
 @academic[formula_callout:qr_gram_schmidt_r_entries|QR Gram-Schmidt R Entries|$$R_{ij} = \\mathbf{q}_i \\cdot \\mathbf{a}_j \\;\\; (i \\leq j), \\qquad R_{ij} = 0 \\;\\; (i > j), \\qquad R_{jj} = \\|\\mathbf{u}_j\\|$$]@
-@academic[formulas_link:/linear-algebra/formulas#qr_gram_schmidt_r_entries]@
+@academic[formulas_link:/linear-algebra/formulas#qr_gram-schmidt_r_entries]@
 
 Each column of $A$ decomposes as
 
-$$\\mathbf{a}_j = R_{1j}\\mathbf{q}_1 + R_{2j}\\mathbf{q}_2 + \\cdots + R_{jj}\\mathbf{q}_j$$
+@academic[formula_callout:QR via Gram-Schmidt
+$$\\mathbf{a}_j = R_{1j}\\mathbf{q}_1 + R_{2j}\\mathbf{q}_2 + \\cdots + R_{jj}\\mathbf{q}_j$$]@
 
 The diagonal entry $R_{jj} = \\|\\mathbf{u}_j\\|$ — the norm of the $j$-th orthogonal vector before normalization — is always positive, which makes $R$ unique.
 
-## Worked Example
+@academic[example:Worked Example
 
-For $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$: Gram-Schmidt on the two columns gives $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 0, 1)^T$ and $\\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(1, 2, -1)^T$. Then $R = \\begin{pmatrix} \\sqrt{2} & 1/\\sqrt{2} \\\\ 0 & 3/\\sqrt{6} \\end{pmatrix}$ and $A = QR$.`,
+For $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$: Gram-Schmidt on the two columns gives $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 0, 1)^T$ and $\\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(1, 2, -1)^T$. Then $R = \\begin{pmatrix} \\sqrt{2} & 1/\\sqrt{2} \\\\ 0 & 3/\\sqrt{6} \\end{pmatrix}$ and $A = QR$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2150,7 +2153,8 @@ The thin QR factorization with positive diagonal entries on $R$ is unique. If ne
     title: `Solving Least Squares with QR`,
     content: `The [normal equations](!/linear-algebra/orthogonality/least-squares) $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ transform under $A = QR$. Since $A^TA = R^TQ^TQR = R^TR$ and $A^T\\mathbf{b} = R^TQ^T\\mathbf{b}$, the normal equations become $R^TR\\hat{\\mathbf{x}} = R^TQ^T\\mathbf{b}$. Canceling $R^T$ (invertible because $R$ has positive diagonal):
 
-$$R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$$
+@academic[formula_callout:Solving Least Squares with QR
+$$R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$$]@
 
 The right-hand side $Q^T\\mathbf{b}$ is computed by $n$ [dot products](!/linear-algebra/vectors/dot-product). The system $R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$ is upper triangular, solved by back substitution in $O(n^2)$ operations.
 
@@ -2351,8 +2355,24 @@ const schemas = {
     }),
   };
 
+  const qrStabilityLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Same result, different stability',
+    preface: 'All three methods produce the same QR factorization in exact arithmetic. In floating-point arithmetic they rank by how well the computed columns of $Q$ stay orthogonal.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'In practice',
+    conclusion: 'Householder is the default for dense matrices, Givens rotations for sparse ones, and modified [Gram-Schmidt](!/linear-algebra/orthogonality/gram-schmidt) when $Q$ is needed explicitly.',
+    axis: { top: 'most stable', label: 'numerical stability', bottom: 'least stable' },
+    levels: [
+      { id: 'hh', name: 'Householder reflections', sub: 'backward stable' },
+      { id: 'mgs', name: 'Modified Gram-Schmidt', sub: 'significantly better' },
+      { id: 'cgs', name: 'Classical Gram-Schmidt', sub: 'can lose orthogonality' },
+    ],
+  };
+
   return {
   props:{
+    qrStabilityLevels,
     demoUnits,
     sectionsContent,
     introContent,
@@ -2372,7 +2392,9 @@ const schemas = {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function QRDecompositionPage({
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function QRDecompositionPage({qrStabilityLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -2487,6 +2509,14 @@ export default function QRDecompositionPage({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrameV2
+            key={'obj9-diagram'}
+            id="qr-method-stability-chain"
+            title="QR methods ranked by numerical stability"
+            source="/linear-algebra/decompositions/qr"
+          >
+            <Hierarchy data={qrStabilityLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+          </DiagramFrameV2>,
         ]
     },
     {

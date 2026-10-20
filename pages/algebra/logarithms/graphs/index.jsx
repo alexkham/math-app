@@ -198,8 +198,10 @@ No horizontal asymptote exists. As $x \\to \\infty$, the function continues incr
     content: `The line $x = 0$ is a vertical asymptote for every logarithmic function.
 
 As $x \\to 0^+$:
-$$\\lim_{x \\to 0^+} \\log_a(x) = -\\infty \\quad \\text{for } a > 1$$
-$$\\lim_{x \\to 0^+} \\log_a(x) = +\\infty \\quad \\text{for } 0 < a < 1$$
+@academic[formula_callout:The Vertical Asymptote
+$$\\lim_{x \\to 0^+} \\log_a(x) = -\\infty \\quad \\text{for } a > 1$$]@
+@academic[formula_callout:The Vertical Asymptote
+$$\\lim_{x \\to 0^+} \\log_a(x) = +\\infty \\quad \\text{for } 0 < a < 1$$]@
 
 The graph approaches the $y$-axis but never touches or crosses it. For $a > 1$, the curve plunges downward as it nears the asymptote. For $0 < a < 1$, the curve rises upward.
 
@@ -314,11 +316,12 @@ Step 3: Check for vertical stretch/compression by comparing the vertical distanc
 
 Step 4: Check for vertical shift by noting if $(1 + h, k)$ lies on the curve for $k \\neq 0$.
 
-Example: A graph has asymptote at $x = 2$, passes through $(3, 0)$ and $(4, 1)$.
+@academic[example:Example
+A graph has asymptote at $x = 2$, passes through $(3, 0)$ and $(4, 1)$.
 
 Asymptote at $x = 2$ suggests $y = \\log_a(x - 2)$. The point $(3, 0)$ confirms: $\\log_a(3 - 2) = \\log_a(1) = 0$. The point $(4, 1)$ gives: $\\log_a(2) = 1$, so $a = 2$.
 
-Equation: $y = \\log_2(x - 2)$.`,
+Equation: $y = \\log_2(x - 2)$.]@`,
     before: ``,
     after: ``,
     link: '',

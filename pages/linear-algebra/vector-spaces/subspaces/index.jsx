@@ -1282,7 +1282,8 @@ The geometric intuition is that subspaces are the "flat" subsets that pass throu
     title: `The Null Space`,
     content: `For an $m \\times n$ [matrix](!/linear-algebra/matrix) $A$, the null space is
 
-$$\\text{Null}(A) = \\{\\mathbf{x} \\in \\mathbb{R}^n : A\\mathbf{x} = \\mathbf{0}\\}$$
+@academic[formula_callout:The Null Space
+$$\\text{Null}(A) = \\{\\mathbf{x} \\in \\mathbb{R}^n : A\\mathbf{x} = \\mathbf{0}\\}$$]@
 
 the set of all vectors that $A$ maps to the zero vector. This is a subspace of $\\mathbb{R}^n$.
 
@@ -1297,7 +1298,8 @@ The dimension of the null space is the nullity. By the [rank-nullity theorem](!/
     title: `The Column Space`,
     content: `For an $m \\times n$ matrix $A$ with columns $\\mathbf{a}_1, \\dots, \\mathbf{a}_n$, the column space is
 
-$$\\text{Col}(A) = \\{A\\mathbf{x} : \\mathbf{x} \\in \\mathbb{R}^n\\} = \\text{Span}\\{\\mathbf{a}_1, \\mathbf{a}_2, \\dots, \\mathbf{a}_n\\}$$
+@academic[formula_callout:The Column Space
+$$\\text{Col}(A) = \\{A\\mathbf{x} : \\mathbf{x} \\in \\mathbb{R}^n\\} = \\text{Span}\\{\\mathbf{a}_1, \\mathbf{a}_2, \\dots, \\mathbf{a}_n\\}$$]@
 
 It is the set of all possible outputs of the [linear transformation](!/linear-algebra/transformations) $\\mathbf{x} \\mapsto A\\mathbf{x}$, and it lives in $\\mathbb{R}^m$.
 
@@ -1314,7 +1316,8 @@ To find a [basis](!/linear-algebra/vector-spaces/basis) for the column space, ro
     title: `The Row Space`,
     content: `The row space of an $m \\times n$ matrix $A$ is the [span](!/linear-algebra/vector-spaces/span) of the rows of $A$, viewed as vectors in $\\mathbb{R}^n$. Equivalently, it is the column space of $A^T$:
 
-$$\\text{Row}(A) = \\text{Col}(A^T)$$
+@academic[formula_callout:The Row Space
+$$\\text{Row}(A) = \\text{Col}(A^T)$$]@
 
 The row space lives in $\\mathbb{R}^n$ and has dimension equal to the rank of $A$ — the same dimension as the column space, despite the two spaces living in different ambient spaces.
 
@@ -1335,7 +1338,12 @@ The union of two subspaces is almost never a subspace. If $\\mathbf{u} \\in W_1 
 
 The sum $W_1 + W_2 = \\{\\mathbf{w}_1 + \\mathbf{w}_2 : \\mathbf{w}_1 \\in W_1, \\mathbf{w}_2 \\in W_2\\}$ is always a subspace — it is the smallest subspace containing both $W_1$ and $W_2$. Its dimension satisfies
 
+@academic[formula_callout:Dimension Sum Formula
 $$\\dim(W_1 + W_2) = \\dim(W_1) + \\dim(W_2) - \\dim(W_1 \\cap W_2)$$
+/linear-algebra/formulas#dimension_sum_formula]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 When $W_1 \\cap W_2 = \\{\\mathbf{0}\\}$, the sum is called a direct sum, written $W_1 \\oplus W_2$, and every vector in the sum has a unique decomposition as $\\mathbf{w}_1 + \\mathbf{w}_2$.`,
     before: ``,
@@ -1350,7 +1358,8 @@ When $\\mathbf{b} \\neq \\mathbf{0}$, the solution set is not a subspace. It doe
 
 If $\\mathbf{x}_p$ is any one particular solution to $A\\mathbf{x} = \\mathbf{b}$, then every solution has the form
 
-$$\\mathbf{x} = \\mathbf{x}_p + \\mathbf{x}_h$$
+@academic[formula_callout:Solution Sets and Subspaces
+$$\\mathbf{x} = \\mathbf{x}_p + \\mathbf{x}_h$$]@
 
 where $\\mathbf{x}_h \\in \\text{Null}(A)$ is a solution to the homogeneous system $A\\mathbf{x} = \\mathbf{0}$. The full solution set is a translated copy of the null space — shifted away from the origin by the vector $\\mathbf{x}_p$. In geometry, this is an affine subspace (also called a coset or a flat): a subspace that has been displaced from the origin.
 

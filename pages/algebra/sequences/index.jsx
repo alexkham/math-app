@@ -105,13 +105,23 @@ Some sequences admit both forms. The [arithmetic sequence](!/algebra/sequences/a
     title: `Arithmetic Sequences`,
     content: `An arithmetic sequence is built by adding the same fixed value — the **common difference** $d$ — to each term to produce the next. Starting from an initial term $a_1$, the sequence unfolds as $a_1, a_1 + d, a_1 + 2d, a_1 + 3d, \\ldots$, and the general term is:
 
+@academic[formula_callout:General Term (Arithmetic Sequence)
 $$a_n = a_1 + (n - 1)d$$
+/algebra/formulas#general_term_arithmetic_sequence]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The common difference governs direction and spacing. When $d > 0$, the sequence increases; when $d < 0$, it decreases; when $d = 0$, every term is identical. The sequence $7, 3, -1, -5, \\ldots$ has $d = -4$, each term falling four units below the previous.
 
 Arithmetic sequences produce the simplest summation formula in all of mathematics. The sum of the first $n$ terms — the arithmetic series — is:
 
+@academic[formula_callout:Arithmetic Series Sum
 $$S_n = \\frac{n}{2}(a_1 + a_n)$$
+/algebra/formulas#arithmetic_series_sum]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The idea behind the formula is credited to Gauss: pair the first term with the last, the second with the second-to-last, and so on. Each pair sums to $a_1 + a_n$, and there are $\\frac{n}{2}$ such pairs.
 
@@ -125,13 +135,19 @@ To find a term, a sum or a missing value for a specific sequence, use the [arith
     title: `Geometric Sequences`,
     content: `A geometric sequence is built by multiplying each term by a fixed value — the **common ratio** $r$ — to produce the next. Starting from $a_1$, the terms are $a_1, a_1 r, a_1 r^2, a_1 r^3, \\ldots$, and the general term is:
 
+@academic[formula_callout:General Term (Geometric Sequence)
 $$a_n = a_1 \\cdot r^{n-1}$$
+/algebra/formulas#general_term_geometric_sequence]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 Where arithmetic sequences grow (or shrink) by equal steps, geometric sequences grow (or shrink) by equal factors. The sequence $3, 12, 48, 192, \\ldots$ has $r = 4$; the sequence $100, -50, 25, -12.5, \\ldots$ has $r = -\\frac{1}{2}$, alternating in sign with each term.
 
 The sum of a finite geometric series has its own closed form:
 
-$$S_n = a_1 \\cdot \\frac{1 - r^n}{1 - r} \\quad (r \\neq 1)$$
+@academic[formula_callout:Geometric Sequences
+$$S_n = a_1 \\cdot \\frac{1 - r^n}{1 - r} \\quad (r \\neq 1)$$]@
 
 When $|r| < 1$, the terms shrink toward zero fast enough that the infinite series converges to $S = \\frac{a_1}{1 - r}$. When $|r| \\geq 1$, the terms do not diminish and the series diverges.`,
     before: ``,
@@ -143,7 +159,12 @@ When $|r| < 1$, the terms shrink toward zero fast enough that the infinite serie
     title: `Harmonic Sequences`,
     content: `A harmonic sequence is formed by taking the reciprocals of an arithmetic sequence. If the arithmetic progression has first term $b_1$ and common difference $d$, the harmonic sequence is:
 
+@academic[formula_callout:General Term (Harmonic Sequence)
 $$a_n = \\frac{1}{b_1 + (n-1)d}$$
+/algebra/formulas#general_term_harmonic_sequence]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The simplest example is $1, \\frac{1}{2}, \\frac{1}{3}, \\frac{1}{4}, \\ldots$ — the reciprocals of the natural numbers. The terms decrease toward zero, but they do so slowly. Unlike arithmetic and geometric sequences, harmonic sequences have no closed-form expression for their partial sums.
 
@@ -159,13 +180,16 @@ The harmonic sequence connects to the other two progressions through the inequal
     title: `Fibonacci Numbers`,
     content: `The Fibonacci sequence is defined by a two-term recurrence: each term is the sum of its two immediate predecessors.
 
-$$F_1 = 1, \\quad F_2 = 1, \\quad F_n = F_{n-1} + F_{n-2} \\quad (n \\geq 3)$$
+@academic[formula_callout:Fibonacci Numbers
+$$F_1 = 1, \\quad F_2 = 1, \\quad F_n = F_{n-1} + F_{n-2} \\quad (n \\geq 3)$$]@
 
 This produces the sequence $1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, \\ldots$, where growth accelerates because each new term inherits the size of both its parents.
 
 The ratio of consecutive Fibonacci numbers $\\frac{F_{n+1}}{F_n}$ converges to the golden ratio $\\phi = \\frac{1 + \\sqrt{5}}{2} \\approx 1.618$, a number that satisfies $\\phi^2 = \\phi + 1$. Despite its recursive definition, the Fibonacci sequence has a closed-form expression known as Binet's formula:
 
+@academic[formula_callout:Binet's Formula
 $$F_n = \\frac{\\phi^n - \\psi^n}{\\sqrt{5}}$$
+/algebra/formulas#binets_formula]@
 
 where $\\psi = \\frac{1 - \\sqrt{5}}{2}$. The formula involves irrational numbers yet always yields an integer — a striking consequence of the algebraic relationship between $\\phi$ and $\\psi$.`,
     before: ``,
@@ -177,7 +201,8 @@ where $\\psi = \\frac{1 - \\sqrt{5}}{2}$. The formula involves irrational number
     title: `Triangular Numbers`,
     content: `The triangular numbers count dots arranged in successively larger equilateral triangles: one dot in the first row, two in the second, three in the third, and so on. The $n$-th triangular number is the sum of the first $n$ natural numbers:
 
-$$T_n = 1 + 2 + 3 + \\cdots + n = \\frac{n(n+1)}{2}$$
+@academic[formula_callout:Triangular Numbers
+$$T_n = 1 + 2 + 3 + \\cdots + n = \\frac{n(n+1)}{2}$$]@
 
 The first terms are $1, 3, 6, 10, 15, 21, 28, 36, \\ldots$. Recursively, $T_n = T_{n-1} + n$ — each triangular number is built from the previous one by adding a new row.
 
@@ -195,13 +220,19 @@ A key identity ties triangular and square numbers together: the sum of two conse
 
 Recursively, the sequence satisfies $S_n = S_{n-1} + (2n - 1)$. Each new square is built from the previous one by adding an L-shaped border of $2n - 1$ dots. This means every perfect square is a sum of consecutive odd numbers:
 
-$$n^2 = 1 + 3 + 5 + \\cdots + (2n - 1)$$
+@academic[formula_callout:Square Numbers
+$$n^2 = 1 + 3 + 5 + \\cdots + (2n - 1)$$]@
 
 The difference between consecutive squares is always odd: $S_n - S_{n-1} = 2n - 1$. This connects square numbers to [arithmetic sequences](!/algebra/sequences/arithmetic), since the odd numbers $1, 3, 5, 7, \\ldots$ form an arithmetic progression with common difference $2$.
 
 The sum of the first $n$ squares has its own closed form:
 
+@academic[formula_callout:Sum of Squares
 $$\\sum_{k=1}^{n} k^2 = \\frac{n(n+1)(2n+1)}{6}$$
+/algebra/formulas#sum_of_squares]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 This formula appears throughout mathematics — in variance calculations, area approximations, and [polynomial](!/algebra/polynomials) identities.
 

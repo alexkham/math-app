@@ -1216,25 +1216,29 @@ Geometrically, vector addition has two equivalent visualizations. In the tip-to-
 
 ## Commutativity
 
-$$\\mathbf{a} + \\mathbf{b} = \\mathbf{b} + \\mathbf{a}$$
+@academic[formula_callout:Properties of Addition
+$$\\mathbf{a} + \\mathbf{b} = \\mathbf{b} + \\mathbf{a}$$]@
 
 The order in which two vectors are added does not affect the result. Geometrically, the parallelogram has the same diagonal regardless of which vector is placed first. At the component level, this follows directly from commutativity of real number addition: $a_i + b_i = b_i + a_i$ for every component.
 
 ## Associativity
 
-$$(\\mathbf{a} + \\mathbf{b}) + \\mathbf{c} = \\mathbf{a} + (\\mathbf{b} + \\mathbf{c})$$
+@academic[formula_callout:Properties of Addition
+$$(\\mathbf{a} + \\mathbf{b}) + \\mathbf{c} = \\mathbf{a} + (\\mathbf{b} + \\mathbf{c})$$]@
 
 When adding three or more vectors, grouping does not matter. The tip-to-tail construction confirms this: chaining $\\mathbf{a}$, $\\mathbf{b}$, and $\\mathbf{c}$ end to end produces the same resultant vector no matter which pair is summed first. This property allows sums of multiple vectors to be written without parentheses.
 
 ## Additive Identity
 
-$$\\mathbf{a} + \\mathbf{0} = \\mathbf{a}$$
+@academic[formula_callout:Properties of Addition
+$$\\mathbf{a} + \\mathbf{0} = \\mathbf{a}$$]@
 
 The zero vector $\\mathbf{0} = (0, 0, \\ldots, 0)$ leaves any vector unchanged under addition. It functions as the neutral element: adding it contributes nothing to any component. Geometrically, the zero vector is a point with no length and no direction — appending it tip-to-tail adds no displacement.
 
 ## Additive Inverse
 
-$$\\mathbf{a} + (-\\mathbf{a}) = \\mathbf{0}$$
+@academic[formula_callout:Properties of Addition
+$$\\mathbf{a} + (-\\mathbf{a}) = \\mathbf{0}$$]@
 
 Every vector $\\mathbf{a}$ has a corresponding vector $-\\mathbf{a} = (-a_1, -a_2, \\ldots, -a_n)$ that cancels it exactly. The inverse has the same [magnitude](!/linear-algebra/vectors/magnitude) as $\\mathbf{a}$ but points in the opposite direction. Adding a vector to its inverse returns to the origin — the displacements undo each other completely.`,
     before: ``,
@@ -1285,25 +1289,29 @@ Because scalar multiplication only ever stretches, compresses, or reverses a vec
 
 ## Associativity with Scalars
 
-$$c(d\\mathbf{a}) = (cd)\\mathbf{a}$$
+@academic[formula_callout:Properties of Scalar Multiplication
+$$c(d\\mathbf{a}) = (cd)\\mathbf{a}$$]@
 
 Scaling a vector by $d$ and then by $c$ produces the same result as scaling once by the product $cd$. The operations collapse into a single multiplication on the scalar side.
 
 ## Distributivity over Vector Addition
 
-$$c(\\mathbf{a} + \\mathbf{b}) = c\\mathbf{a} + c\\mathbf{b}$$
+@academic[formula_callout:Properties of Scalar Multiplication
+$$c(\\mathbf{a} + \\mathbf{b}) = c\\mathbf{a} + c\\mathbf{b}$$]@
 
 A scalar applied to a sum distributes across both terms. Geometrically, scaling the diagonal of a parallelogram by $c$ yields the same vector as scaling both sides by $c$ and then forming the new parallelogram.
 
 ## Distributivity over Scalar Addition
 
-$$(c + d)\\mathbf{a} = c\\mathbf{a} + d\\mathbf{a}$$
+@academic[formula_callout:Properties of Scalar Multiplication
+$$(c + d)\\mathbf{a} = c\\mathbf{a} + d\\mathbf{a}$$]@
 
 Two scalars summed before multiplication produce the same result as two separate scalings added afterward. This rule links the arithmetic of real numbers to the algebra of vectors.
 
 ## Multiplicative Identity
 
-$$1\\mathbf{a} = \\mathbf{a}$$
+@academic[formula_callout:Properties of Scalar Multiplication
+$$1\\mathbf{a} = \\mathbf{a}$$]@
 
 Scaling by $1$ leaves a vector unchanged. This ensures that the scalar $1$ acts neutrally, just as the zero vector acts neutrally under addition.
 

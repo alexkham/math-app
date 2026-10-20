@@ -1693,13 +1693,16 @@ On this site, the scalar field is $\\mathbb{R}$ unless explicitly stated otherwi
     title: `The Standard Example: Rⁿ`,
     content: `The most concrete vector space is $\\mathbb{R}^n$, the set of all ordered $n$-tuples of real numbers:
 
-$$\\mathbb{R}^n = \\{(v_1, v_2, \\dots, v_n) : v_i \\in \\mathbb{R}\\}$$
+@academic[formula_callout:The Standard Example: Rⁿ
+$$\\mathbb{R}^n = \\{(v_1, v_2, \\dots, v_n) : v_i \\in \\mathbb{R}\\}$$]@
 
 Addition and scalar multiplication are defined entry by entry:
 
-$$(u_1, \\dots, u_n) + (v_1, \\dots, v_n) = (u_1 + v_1, \\dots, u_n + v_n)$$
+@academic[formula_callout:The Standard Example: Rⁿ
+$$(u_1, \\dots, u_n) + (v_1, \\dots, v_n) = (u_1 + v_1, \\dots, u_n + v_n)$$]@
 
-$$c(v_1, \\dots, v_n) = (cv_1, \\dots, cv_n)$$
+@academic[formula_callout:The Standard Example: Rⁿ
+$$c(v_1, \\dots, v_n) = (cv_1, \\dots, cv_n)$$]@
 
 All ten axioms hold. Closure is immediate — sums and scalar products of $n$-tuples are $n$-tuples. Commutativity and associativity of vector addition follow from commutativity and associativity of real number addition applied to each component. The zero vector is $(0, 0, \\dots, 0)$, and the additive inverse of $(v_1, \\dots, v_n)$ is $(-v_1, \\dots, -v_n)$. The scalar multiplication axioms all reduce to properties of real number arithmetic applied entry by entry.
 
@@ -1738,7 +1741,8 @@ The fact that matrices form a vector space means that the concepts of linear ind
     title: `Function Spaces`,
     content: `The set $C[a, b]$ of all continuous real-valued functions on the interval $[a, b]$ is a vector space with pointwise operations:
 
-$$(f + g)(x) = f(x) + g(x), \\qquad (cf)(x) = c \\cdot f(x)$$
+@academic[formula_callout:Function Spaces
+$$(f + g)(x) = f(x) + g(x), \\qquad (cf)(x) = c \\cdot f(x)$$]@
 
 The zero vector is the function that is identically zero: $z(x) = 0$ for all $x \\in [a, b]$. The additive inverse of $f$ is $-f$, defined by $(-f)(x) = -f(x)$.
 
@@ -1772,7 +1776,7 @@ The scalar zero and the zero vector both annihilate under scalar multiplication:
 
 @academic[formula_callout:Scalar-Zero Property
 $$0\\mathbf{v} = \\mathbf{0}, \\quad c\\mathbf{0} = \\mathbf{0}$$
-/linear-algebra/formulas#scalar_zero_property]@
+/linear-algebra/formulas#scalar-zero_property]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@

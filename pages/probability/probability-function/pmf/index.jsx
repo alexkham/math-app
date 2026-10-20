@@ -1751,13 +1751,15 @@ All probabilities across the entire support must sum to exactly 1.
 
 This is your total probability budget. You must allocate all of it, and you can't overspend.
 
-Example: Fair die. $p_X(k) = \\frac{1}{6}$ for $k \\in \\{1,2,3,4,5,6\\}$.
+@academic[example:Example
+Fair die. $p_X(k) = \\frac{1}{6}$ for $k \\in \\{1,2,3,4,5,6\\}$.
 
-Check: $6 \\times \\frac{1}{6} = 1$. ✓
+Check: $6 \\times \\frac{1}{6} = 1$. ✓]@
 
-Example: Loaded die with $p_X(6) = \\frac{1}{2}$ and $p_X(k) = \\frac{1}{10}$ for $k \\in \\{1,2,3,4,5\\}$.
+@academic[example:Example
+Loaded die with $p_X(6) = \\frac{1}{2}$ and $p_X(k) = \\frac{1}{10}$ for $k \\in \\{1,2,3,4,5\\}$.
 
-Check: $\\frac{1}{2} + 5 \\times \\frac{1}{10} = \\frac{1}{2} + \\frac{1}{2} = 1$. ✓
+Check: $\\frac{1}{2} + 5 \\times \\frac{1}{10} = \\frac{1}{2} + \\frac{1}{2} = 1$. ✓]@
 
 ## What These Axioms Guarantee
 
@@ -1861,11 +1863,12 @@ Example: $X$ can be 0, 1, 2, or 3. Support is $\\{0, 1, 2, 3\\}$.
 
 For each value in the support, determine its probability. Use counting, [combinatorics](!/probability/combinatorics), symmetry, or physical reasoning.
 
-Example: Fair coin, 3 flips.
+@academic[example:Example
+Fair coin, 3 flips.
 • $P(X = 0) = \\frac{1}{8}$ (only TTT)
 • $P(X = 1) = \\frac{3}{8}$ (HTT, THT, TTH)
 • $P(X = 2) = \\frac{3}{8}$ (HHT, HTH, THH)
-• $P(X = 3) = \\frac{1}{8}$ (only HHH)
+• $P(X = 3) = \\frac{1}{8}$ (only HHH)]@
 
 **Step 4: Verify the Axioms**
 
@@ -1909,7 +1912,8 @@ The PMF directly gives the probability of any specific value.
 
 $P(X = k) = p_X(k)$
 
-Example: Roll a fair die. $P(X = 4) = \\frac{1}{6}$
+@academic[example:Example
+Roll a fair die. $P(X = 4) = \\frac{1}{6}$]@
 
 ## Range Probabilities
 
@@ -1927,7 +1931,8 @@ To find $P(X \\notin A)$, use the complement rule.
 
 $P(X \\notin A) = 1 - P(X \\in A)$
 
-Example: $P(X > 3) = 1 - P(X \\leq 3) = 1 - \\frac{1}{2} = \\frac{1}{2}$
+@academic[example:Example
+$P(X > 3) = 1 - P(X \\leq 3) = 1 - \\frac{1}{2} = \\frac{1}{2}$]@
 
 ## The Core Pattern
 
@@ -1978,7 +1983,8 @@ The median is the value that splits the probability in half. It's the point wher
 
 For discrete distributions, the median may not be unique if probability mass is concentrated at specific points.
 
-Example: Fair die. The median is between 3 and 4, often reported as 3.5.
+@academic[example:Example
+Fair die. The median is between 3 and 4, often reported as 3.5.]@
 
 ## Mode
 
@@ -1987,7 +1993,8 @@ The mode is the value with the highest probability.
 @academic[formula_callout:Derived Properties: Location Measures
 $$\\text{mode} = \\arg\\max_k p_X(k)$$]@
 
-Example: Loaded die with $p_X(6) = \\frac{1}{2}$ and $p_X(k) = \\frac{1}{10}$ for $k \\in \\{1,2,3,4,5\\}$. Mode is 6.
+@academic[example:Example
+Loaded die with $p_X(6) = \\frac{1}{2}$ and $p_X(k) = \\frac{1}{10}$ for $k \\in \\{1,2,3,4,5\\}$. Mode is 6.]@
 
 A distribution can have multiple modes if several values share the maximum probability.
 
@@ -2088,12 +2095,13 @@ Example: $Y = X + 3$ shifts the die to support $\\{4, 5, 6, 7, 8, 9\\}$ with pro
 
 When multiple $x$ values map to the same $y$, their probabilities combine.
 
-Example: $X$ is a fair die, $Y = (X - 3.5)^2$ (squared distance from mean).
+@academic[example:Example
+$X$ is a fair die, $Y = (X - 3.5)^2$ (squared distance from mean).
 
 Multiple values map to the same squared distance:
 • $p_Y(6.25) = p_X(1) + p_X(6) = \\frac{1}{6} + \\frac{1}{6} = \\frac{1}{3}$
 • $p_Y(2.25) = p_X(2) + p_X(5) = \\frac{1}{3}$
-• $p_Y(0.25) = p_X(3) + p_X(4) = \\frac{1}{3}$
+• $p_Y(0.25) = p_X(3) + p_X(4) = \\frac{1}{3}$]@
 
 ## Effect on Expected Value
 
@@ -2141,9 +2149,10 @@ $$F_X(x) = P(X \\leq x) = \\sum_{k \\leq x} p_X(k)$$]@
 
 The CDF at any point equals the sum of all PMF values up to and including that point.
 
-Example: Fair die.
+@academic[example:Example
+Fair die.
 - $F_X(3) = p_X(1) + p_X(2) + p_X(3) = \\frac{1}{6} + \\frac{1}{6} + \\frac{1}{6} = \\frac{1}{2}$
-- $F_X(5.7) = p_X(1) + \\cdots + p_X(5) = \\frac{5}{6}$
+- $F_X(5.7) = p_X(1) + \\cdots + p_X(5) = \\frac{5}{6}$]@
 
 The CDF is a step function for discrete variables—it jumps at each value in the support, with jump height equal to the PMF at that point.
 

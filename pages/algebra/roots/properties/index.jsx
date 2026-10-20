@@ -12,6 +12,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -481,13 +483,15 @@ const sectionsContent = {
     title: `Even Index Radicals`,
     content: `Square roots, fourth roots, sixth roots — any radical with an even index — require non-negative radicands in the real number system.
 
-$$\\sqrt{16} = 4, \\quad \\sqrt[4]{81} = 3, \\quad \\sqrt[6]{64} = 2$$
+@academic[formula_callout:Even Index Radicals
+$$\\sqrt{16} = 4, \\quad \\sqrt[4]{81} = 3, \\quad \\sqrt[6]{64} = 2$$]@
 
 No real number, when raised to an even power, produces a negative result. Positive numbers raised to even powers give positives. Negative numbers raised to even powers also give positives. Zero raised to any positive power gives zero.
 
 Therefore $\\sqrt{-9}$ has no real value. No real number squares to $-9$.
 
-$$\\sqrt{-9} \\quad \\text{is not a real number}$$
+@academic[formula_callout:Even Index Radicals
+$$\\sqrt{-9} \\quad \\text{is not a real number}$$]@
 
 Even-index radicals also produce only non-negative outputs. The principal root convention guarantees this: $\\sqrt{25} = 5$, not $-5$. Both 5 and $-5$ square to 25, but the radical symbol returns only the non-negative root.
 
@@ -539,11 +543,13 @@ This restriction affects the domain of [radical functions](!/algebra/roots/funct
     title: `Odd Index Radicals`,
     content: `Cube roots, fifth roots, seventh roots — any radical with an odd index — accept all real numbers as radicands.
 
-$$\\sqrt[3]{27} = 3, \\quad \\sqrt[3]{-27} = -3, \\quad \\sqrt[5]{-32} = -2$$
+@academic[formula_callout:Odd Index Radicals
+$$\\sqrt[3]{27} = 3, \\quad \\sqrt[3]{-27} = -3, \\quad \\sqrt[5]{-32} = -2$$]@
 
 A negative number raised to an odd power remains negative. Therefore every negative number has a real odd root.
 
-$$(-3)^3 = -27 \\quad \\Longrightarrow \\quad \\sqrt[3]{-27} = -3$$
+@academic[formula_callout:Odd Index Radicals
+$$(-3)^3 = -27 \\quad \\Longrightarrow \\quad \\sqrt[3]{-27} = -3$$]@
 
 Odd-index radicals preserve sign. Positive radicands yield positive roots. Negative radicands yield negative roots. Zero yields zero.
 
@@ -561,13 +567,15 @@ This means [radical functions](!/algebra/roots/functions) with odd index have do
 
 The principal root convention resolves this ambiguity: the radical symbol denotes the non-negative root.
 
-$$\\sqrt{16} = 4$$
+@academic[formula_callout:Principal Root Convention
+$$\\sqrt{16} = 4$$]@
 
 This is not a choice between equally valid answers. It is a definition that makes the radical symbol unambiguous. Without it, $\\sqrt{16}$ would have two values, and expressions like $\\sqrt{16} + 1$ would be meaningless — which value is intended?
 
 When both roots are needed, explicit notation indicates this:
 
-$$x^2 = 16 \\quad \\Longrightarrow \\quad x = \\pm\\sqrt{16} = \\pm 4$$
+@academic[formula_callout:Principal Root Convention
+$$x^2 = 16 \\quad \\Longrightarrow \\quad x = \\pm\\sqrt{16} = \\pm 4$$]@
 
 The $\\pm$ symbol signals that both positive and negative roots apply. This notation appears frequently when [solving radical equations](!/algebra/roots/equations).
 
@@ -583,7 +591,8 @@ The [root calculator](!/calculators/root-calculator) returns the principal root,
     title: `The Identity for Even Roots`,
     content: `A critical identity governs even-index radicals of powers:
 
-         $$\\sqrt{x^2} = |x|$$
+@academic[formula_callout:The Identity for Even Roots
+         $$\\sqrt{x^2} = |x|$$]@
 
 This is not $x$. It is the absolute value of $x$.
 
@@ -604,11 +613,13 @@ $$\\sqrt[n]{a^n} = |a| \\quad (n \\text{ even})$$
 
 This absolute value appears when [simplifying radicals](!/algebra/roots/simplifying) with variables. Whenever an even root extracts a variable raised to an odd power, absolute value may be required.
 
-$$\\sqrt{x^6} = |x^3| = |x|^3$$
+@academic[formula_callout:The Identity for Even Roots
+$$\\sqrt{x^6} = |x^3| = |x|^3$$]@
 
 When the resulting exponent is even, the absolute value is unnecessary since even powers are already non-negative:
 
-$$\\sqrt{x^4} = x^2 \\quad \\text{(no absolute value needed)}$$`,
+@academic[formula_callout:The Identity for Even Roots
+$$\\sqrt{x^4} = x^2 \\quad \\text{(no absolute value needed)}$$]@`,
     before: ``,
     after: ``,
     link: '',
@@ -627,15 +638,19 @@ $$\\sqrt[n]{a^n} = a \\quad (n \\text{ odd})$$
 
 No absolute value appears. The odd root returns the original value, preserving sign.
 
-$$\\sqrt[3]{8} = 2, \\quad \\sqrt[3]{-8} = -2$$
+@academic[formula_callout:The Identity for Odd Roots
+$$\\sqrt[3]{8} = 2, \\quad \\sqrt[3]{-8} = -2$$]@
 
-$$\\sqrt[3]{x^3} = x \\quad \\text{for all real } x$$
+@academic[formula_callout:The Identity for Odd Roots
+$$\\sqrt[3]{x^3} = x \\quad \\text{for all real } x$$]@
 
 This makes [simplifying radicals](!/algebra/roots/simplifying) with odd index more straightforward. Variables come out without absolute value concerns.
 
-$$\\sqrt[3]{x^9} = x^3$$
+@academic[formula_callout:The Identity for Odd Roots
+$$\\sqrt[3]{x^9} = x^3$$]@
 
-$$\\sqrt[5]{y^{15}} = y^3$$
+@academic[formula_callout:The Identity for Odd Roots
+$$\\sqrt[5]{y^{15}} = y^3$$]@
 
 The distinction between even and odd indices is essential when variables are involved. Assuming all variables are positive removes the absolute value issue for even indices — a common simplifying assumption stated explicitly in problems. Without that assumption, absolute values must be tracked.`,
     before: ``,
@@ -649,7 +664,8 @@ The distinction between even and odd indices is essential when variables are inv
 
 For even index $n$:
 
-$$f(x) = \\sqrt[n]{x}$$
+@academic[formula_callout:Domain and Range by Index
+$$f(x) = \\sqrt[n]{x}$$]@
 
 Domain: $[0, \\infty)$ — only non-negative inputs allowed.
 
@@ -657,7 +673,8 @@ Range: $[0, \\infty)$ — only non-negative outputs produced.
 
 For odd index $n$:
 
-$$f(x) = \\sqrt[n]{x}$$
+@academic[formula_callout:Domain and Range by Index
+$$f(x) = \\sqrt[n]{x}$$]@
 
 Domain: $(-\\infty, \\infty)$ — all real numbers allowed.
 
@@ -665,13 +682,15 @@ Range: $(-\\infty, \\infty)$ — all real numbers produced.
 
 When the radicand is an expression, solve for valid inputs:
 
-$$f(x) = \\sqrt{x - 3}$$
+@academic[formula_callout:Domain and Range by Index
+$$f(x) = \\sqrt{x - 3}$$]@
 
 The radicand $x - 3$ must be non-negative: $x - 3 \\geq 0$, so $x \\geq 3$.
 
 Domain: $[3, \\infty)$.
 
-$$g(x) = \\sqrt[3]{x - 3}$$
+@academic[formula_callout:Domain and Range by Index
+$$g(x) = \\sqrt[3]{x - 3}$$]@
 
 No restriction on the radicand for odd index.
 
@@ -689,25 +708,29 @@ These domain considerations carry into [operations](!/algebra/roots/operations) 
 
 When $a > 0$:
 
-$$\\sqrt[n]{a} > 0 \\quad \\text{for all } n$$
+@academic[formula_callout:Sign Behavior Summary
+$$\\sqrt[n]{a} > 0 \\quad \\text{for all } n$$]@
 
 Positive radicands always yield positive roots, regardless of index.
 
 When $a = 0$:
 
-$$\\sqrt[n]{0} = 0 \\quad \\text{for all } n$$
+@academic[formula_callout:Sign Behavior Summary
+$$\\sqrt[n]{0} = 0 \\quad \\text{for all } n$$]@
 
 Zero yields zero.
 
 When $a < 0$ and $n$ is odd:
 
-$$\\sqrt[n]{a} < 0$$
+@academic[formula_callout:Sign Behavior Summary
+$$\\sqrt[n]{a} < 0$$]@
 
 Negative radicands yield negative roots for odd indices.
 
 When $a < 0$ and $n$ is even:
 
-$$\\sqrt[n]{a} \\quad \\text{is not a real number}$$
+@academic[formula_callout:Sign Behavior Summary
+$$\\sqrt[n]{a} \\quad \\text{is not a real number}$$]@
 
 No real even root of a negative number exists. This is where [complex numbers](!/complex-numbers) enter.
 
@@ -721,19 +744,27 @@ Understanding sign behavior prevents errors in [simplifying](!/algebra/roots/sim
     title: `Connection to Rational Exponents`,
     content: `Every property of radicals translates to [rational exponents](!/algebra/roots/rational-exponents).
 
+@academic[formula_callout:Radical to Exponent Conversion
 $$\\sqrt[n]{a} = a^{1/n}$$
+/algebra/formulas#radical_to_exponent_conversion]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The domain restrictions are identical. For even $n$, the expression $a^{1/n}$ requires $a \\geq 0$. For odd $n$, any real $a$ is permitted.
 
 The absolute value identity becomes:
 
-$$(x^n)^{1/n} = |x| \\quad \\text{when } n \\text{ is even}$$
+@academic[formula_callout:Connection to Rational Exponents
+$$(x^n)^{1/n} = |x| \\quad \\text{when } n \\text{ is even}$$]@
 
-$$(x^n)^{1/n} = x \\quad \\text{when } n \\text{ is odd}$$
+@academic[formula_callout:Connection to Rational Exponents
+$$(x^n)^{1/n} = x \\quad \\text{when } n \\text{ is odd}$$]@
 
 The [radical rules](!/algebra/roots/radical-rules) correspond directly to exponent laws:
 
-$$\\sqrt[n]{ab} = (ab)^{1/n} = a^{1/n} \\cdot b^{1/n} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$$
+@academic[formula_callout:Connection to Rational Exponents
+$$\\sqrt[n]{ab} = (ab)^{1/n} = a^{1/n} \\cdot b^{1/n} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$$]@
 
 Working in exponent notation often simplifies algebraic manipulation, especially when combining expressions with different indices. Converting to a common denominator in the exponents enables operations that would be awkward in radical form.
 
@@ -906,8 +937,36 @@ const schemas = {
     }),
   };
 
+  const principalRootCases = {
+    prefaceTitle: 'Why a convention is needed',
+    preface: 'For even-index radicals, more than one real number satisfies the defining equation: both $4$ and $-4$ square to $16$. Odd-index radicals never have this problem.',
+    conclusionTitle: 'When both roots are needed',
+    conclusion: 'Write them explicitly: $x^2 = 16 \\Rightarrow x = \\pm\\sqrt{16} = \\pm 4$.',
+    parent: {
+      kicker: 'Principal root',
+      formula: '$\\sqrt[n]{a}$',
+      splitBy: 'whether the index $n$ is even or odd',
+    },
+    cases: [
+      {
+        id: 'even', condition: 'even index',
+        count: { n: '2', label: 'real roots' },
+        headline: 'Convention needed',
+        desc: 'the radical symbol denotes the non-negative root',
+        example: '$\\sqrt{16} = 4$, not $-4$',
+      },
+      {
+        id: 'odd', condition: 'odd index',
+        count: { n: '1', label: 'real root' },
+        headline: 'No convention needed',
+        desc: 'each real number has exactly one real odd root, so no ambiguity exists',
+      },
+    ],
+  };
+
 return {
   props: {
+    principalRootCases,
     sectionsContent,
     introContent,
     obj6Table,
@@ -928,7 +987,9 @@ return {
    }
 
 // export default function PropertiesPage({seoData,sectionsContent , introContent}) {
-export default function PropertiesPage({seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function PropertiesPage({principalRootCases, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -986,6 +1047,14 @@ export default function PropertiesPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="principal-root-index-cases"
+            title="The principal root: even or odd index"
+            source="/algebra/roots/properties"
+          >
+            <CaseSplit data={principalRootCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

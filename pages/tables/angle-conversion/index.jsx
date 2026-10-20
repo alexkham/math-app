@@ -133,13 +133,15 @@ $$\\text{deg} = \\text{rad} \\times \\frac{180}{\\pi}$$
 
 Both formulas follow from a single fact: a half-revolution measures 180° in degrees and $\\pi$ in radians. Setting these equal gives $180° = \\pi$ radians, which divides into the two conversion factors above.
 
-Worked example — converting 60° to radians:
+@academic[example:Worked example
+converting 60° to radians:
 
-$$60 \\times \\frac{\\pi}{180} = \\frac{60\\pi}{180} = \\frac{\\pi}{3}$$
+$$60 \\times \\frac{\\pi}{180} = \\frac{60\\pi}{180} = \\frac{\\pi}{3}$$]@
 
-Worked example — converting $\\pi/4$ radians to degrees:
+@academic[example:Worked example
+converting $\\pi/4$ radians to degrees:
 
-$$\\frac{\\pi}{4} \\times \\frac{180}{\\pi} = \\frac{180}{4} = 45°$$
+$$\\frac{\\pi}{4} \\times \\frac{180}{\\pi} = \\frac{180}{4} = 45°$$]@
 
 The $\\pi$ cancels cleanly whenever the radian value is a rational multiple of $\\pi$, which is why the π-form is the standard way to write exact angles in trigonometry and calculus.`,
       before:``, after:``, link:''

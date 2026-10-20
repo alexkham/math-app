@@ -186,15 +186,18 @@ An integral is improper if it involves:
 
 **Infinite limits of integration:** The interval extends to $\\infty$ or $-\\infty$
 
-$$\\int_1^{\\infty} \\frac{1}{x^2}\\, dx$$
+@academic[formula_callout:What Makes an Integral Improper?
+$$\\int_1^{\\infty} \\frac{1}{x^2}\\, dx$$]@
 
 **Unbounded integrand:** The function has a vertical asymptote within or at the boundary of the interval
 
-$$\\int_0^1 \\frac{1}{\\sqrt{x}}\\, dx$$
+@academic[formula_callout:What Makes an Integral Improper?
+$$\\int_0^1 \\frac{1}{\\sqrt{x}}\\, dx$$]@
 
 Both conditions can occur simultaneously. The integral
 
-$$\\int_0^{\\infty} \\frac{1}{\\sqrt{x}(1 + x)}\\, dx$$
+@academic[formula_callout:What Makes an Integral Improper?
+$$\\int_0^{\\infty} \\frac{1}{\\sqrt{x}(1 + x)}\\, dx$$]@
 
 has an infinite upper limit and an unbounded integrand at $x = 0$.
 `,
@@ -209,22 +212,22 @@ Replace the infinite limit with a finite variable and take a limit.
 
 **Type 1:** Upper limit infinite
 
-$$\\int_a^{\\infty} f(x)\\, dx = \\lim_{b \\to \\infty} \\int_a^b f(x)\\, dx$$
-
-**Type 2:** Lower limit infinite
-
-$$\\int_{-\\infty}^b f(x)\\, dx = \\lim_{a \\to -\\infty} \\int_a^b f(x)\\, dx$$
-
-**Type 3:** Both limits infinite
-
-$$\\int_{-\\infty}^{\\infty} f(x)\\, dx = \\int_{-\\infty}^c f(x)\\, dx + \\int_c^{\\infty} f(x)\\, dx$$
-
 @academic[formula_callout:Improper Integral (Infinite Limits)
 $$\\int_a^{\\infty} f(x)\\, dx = \\lim_{b \\to \\infty} \\int_a^b f(x)\\, dx$$
 /calculus/formulas#improper_integral_infinite_limits]@
 
 @academic[formulas_link:Browse all integral formulas
 /calculus/formulas]@
+
+**Type 2:** Lower limit infinite
+
+@academic[formula_callout:Infinite Limits of Integration
+$$\\int_{-\\infty}^b f(x)\\, dx = \\lim_{a \\to -\\infty} \\int_a^b f(x)\\, dx$$]@
+
+**Type 3:** Both limits infinite
+
+@academic[formula_callout:Infinite Limits of Integration
+$$\\int_{-\\infty}^{\\infty} f(x)\\, dx = \\int_{-\\infty}^c f(x)\\, dx + \\int_c^{\\infty} f(x)\\, dx$$]@
 
 Both integrals must converge independently. The choice of $c$ is arbitrary—any finite value works.
 `,
@@ -277,15 +280,18 @@ When $f$ has a vertical asymptote at $c$ within $[a, b]$, split the integral and
 
 **Asymptote at left endpoint:**
 
-$$\\int_a^b f(x)\\, dx = \\lim_{t \\to a^+} \\int_t^b f(x)\\, dx$$
+@academic[formula_callout:Discontinuous Integrands
+$$\\int_a^b f(x)\\, dx = \\lim_{t \\to a^+} \\int_t^b f(x)\\, dx$$]@
 
 **Asymptote at right endpoint:**
 
-$$\\int_a^b f(x)\\, dx = \\lim_{t \\to b^-} \\int_a^t f(x)\\, dx$$
+@academic[formula_callout:Discontinuous Integrands
+$$\\int_a^b f(x)\\, dx = \\lim_{t \\to b^-} \\int_a^t f(x)\\, dx$$]@
 
 **Asymptote at interior point:**
 
-$$\\int_a^b f(x)\\, dx = \\lim_{t \\to c^-} \\int_a^t f(x)\\, dx + \\lim_{s \\to c^+} \\int_s^b f(x)\\, dx$$
+@academic[formula_callout:Discontinuous Integrands
+$$\\int_a^b f(x)\\, dx = \\lim_{t \\to c^-} \\int_a^t f(x)\\, dx + \\lim_{s \\to c^+} \\int_s^b f(x)\\, dx$$]@
 
 @academic[formula_callout:Improper Integral (Discontinuous Integrand)
 $$\\int_a^b f(x)\\, dx = \\lim_{t \\to b^-} \\int_a^t f(x)\\, dx \\quad \\text{when } f \\text{ has an asymptote at } b$$
@@ -307,11 +313,13 @@ An improper integral **converges** if the defining limit exists and is finite. I
 
 **Convergent example:**
 
-$$\\int_1^{\\infty} \\frac{1}{x^2}\\, dx = \\lim_{b \\to \\infty} \\left[-\\frac{1}{x}\\right]_1^b = \\lim_{b \\to \\infty} \\left(-\\frac{1}{b} + 1\\right) = 1$$
+@academic[formula_callout:Convergence vs Divergence
+$$\\int_1^{\\infty} \\frac{1}{x^2}\\, dx = \\lim_{b \\to \\infty} \\left[-\\frac{1}{x}\\right]_1^b = \\lim_{b \\to \\infty} \\left(-\\frac{1}{b} + 1\\right) = 1$$]@
 
 **Divergent example:**
 
-$$\\int_1^{\\infty} \\frac{1}{x}\\, dx = \\lim_{b \\to \\infty} [\\ln x]_1^b = \\lim_{b \\to \\infty} \\ln b = \\infty$$
+@academic[formula_callout:Convergence vs Divergence
+$$\\int_1^{\\infty} \\frac{1}{x}\\, dx = \\lim_{b \\to \\infty} [\\ln x]_1^b = \\lim_{b \\to \\infty} \\ln b = \\infty$$]@
 
 Convergence depends on how fast the integrand decays. The $1/x^2$ decays fast enough; $1/x$ does not.
 `,
@@ -326,18 +334,17 @@ The integrals of $1/x^p$ serve as benchmarks.
 
 **At infinity:**
 
-$$\\int_1^{\\infty} \\frac{1}{x^p}\\, dx \\quad \\begin{cases} \\text{converges} & p > 1 \\\\ \\text{diverges} & p \\leq 1 \\end{cases}$$
-
-**At zero:**
-
-$$\\int_0^1 \\frac{1}{x^p}\\, dx \\quad \\begin{cases} \\text{converges} & p < 1 \\\\ \\text{diverges} & p \\geq 1 \\end{cases}$$
-
 @academic[formula_callout:p-Test for Improper Integrals
 $$\\int_1^{\\infty} \\frac{1}{x^p}\\, dx \\quad \\begin{cases} \\text{converges} & p > 1 \\\\ \\text{diverges} & p \\leq 1 \\end{cases}$$
-/calculus/formulas#p_test_for_improper_integrals]@
+/calculus/formulas#p-test_for_improper_integrals]@
 
 @academic[formulas_link:Browse all integral formulas
 /calculus/formulas]@
+
+**At zero:**
+
+@academic[formula_callout:The p-Test
+$$\\int_0^1 \\frac{1}{x^p}\\, dx \\quad \\begin{cases} \\text{converges} & p < 1 \\\\ \\text{diverges} & p \\geq 1 \\end{cases}$$]@
 
 The boundary case $p = 1$ always diverges—$\\int 1/x\\, dx = \\ln|x|$, which is unbounded both as $x \\to \\infty$ and as $x \\to 0^+$.
 `,
@@ -372,7 +379,8 @@ When direct comparison is awkward, use limits.
 
 For $f(x) > 0$ and $g(x) > 0$, if:
 
-$$\\lim_{x \\to \\infty} \\frac{f(x)}{g(x)} = L \\quad \\text{where } 0 < L < \\infty$$
+@academic[formula_callout:Limit Comparison Test
+$$\\lim_{x \\to \\infty} \\frac{f(x)}{g(x)} = L \\quad \\text{where } 0 < L < \\infty$$]@
 
 then $\\int f$ and $\\int g$ both converge or both diverge.
 

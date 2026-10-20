@@ -1448,29 +1448,36 @@ where $A_i$ is the matrix formed by replacing column $i$ of $A$ with the right-h
 
 For the system
 
-$$\\begin{pmatrix} 3 & 2 \\\\ 1 & 5 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\end{pmatrix} = \\begin{pmatrix} 8 \\\\ 7 \\end{pmatrix}$$
+@academic[formula_callout:Cramer's Rule
+$$\\begin{pmatrix} 3 & 2 \\\\ 1 & 5 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\end{pmatrix} = \\begin{pmatrix} 8 \\\\ 7 \\end{pmatrix}$$]@
 
 the coefficient determinant is $\\det(A) = 3 \\cdot 5 - 2 \\cdot 1 = 13$. Replacing column $1$ with $\\mathbf{b}$:
 
-$$\\det(A_1) = \\det\\begin{pmatrix} 8 & 2 \\\\ 7 & 5 \\end{pmatrix} = 40 - 14 = 26$$
+@academic[formula_callout:Cramer's Rule
+$$\\det(A_1) = \\det\\begin{pmatrix} 8 & 2 \\\\ 7 & 5 \\end{pmatrix} = 40 - 14 = 26$$]@
 
 Replacing column $2$ with $\\mathbf{b}$:
 
-$$\\det(A_2) = \\det\\begin{pmatrix} 3 & 8 \\\\ 1 & 7 \\end{pmatrix} = 21 - 8 = 13$$
+@academic[formula_callout:Cramer's Rule
+$$\\det(A_2) = \\det\\begin{pmatrix} 3 & 8 \\\\ 1 & 7 \\end{pmatrix} = 21 - 8 = 13$$]@
 
 So $x_1 = 26/13 = 2$ and $x_2 = 13/13 = 1$.
 
 ## 3×3 Example
 
-$$\\begin{pmatrix} 1 & 0 & 2 \\\\ -1 & 3 & 1 \\\\ 2 & 1 & 0 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\\\ x_3 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 0 \\\\ 3 \\end{pmatrix}$$
+@academic[formula_callout:Cramer's Rule
+$$\\begin{pmatrix} 1 & 0 & 2 \\\\ -1 & 3 & 1 \\\\ 2 & 1 & 0 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\\\ x_3 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 0 \\\\ 3 \\end{pmatrix}$$]@
 
 The coefficient determinant is $\\det(A) = 1(0 - 1) - 0 + 2(-1 - 6) = -1 - 14 = -15$. The three modified determinants are:
 
-$$\\det(A_1) = \\det\\begin{pmatrix} 5 & 0 & 2 \\\\ 0 & 3 & 1 \\\\ 3 & 1 & 0 \\end{pmatrix} = 5(0 - 1) - 0 + 2(0 - 9) = -5 - 18 = -23$$
+@academic[formula_callout:Cramer's Rule
+$$\\det(A_1) = \\det\\begin{pmatrix} 5 & 0 & 2 \\\\ 0 & 3 & 1 \\\\ 3 & 1 & 0 \\end{pmatrix} = 5(0 - 1) - 0 + 2(0 - 9) = -5 - 18 = -23$$]@
 
-$$\\det(A_2) = \\det\\begin{pmatrix} 1 & 5 & 2 \\\\ -1 & 0 & 1 \\\\ 2 & 3 & 0 \\end{pmatrix} = 1(0 - 3) - 5(0 - 2) + 2(-3 - 0) = -3 + 10 - 6 = 1$$
+@academic[formula_callout:Cramer's Rule
+$$\\det(A_2) = \\det\\begin{pmatrix} 1 & 5 & 2 \\\\ -1 & 0 & 1 \\\\ 2 & 3 & 0 \\end{pmatrix} = 1(0 - 3) - 5(0 - 2) + 2(-3 - 0) = -3 + 10 - 6 = 1$$]@
 
-$$\\det(A_3) = \\det\\begin{pmatrix} 1 & 0 & 5 \\\\ -1 & 3 & 0 \\\\ 2 & 1 & 3 \\end{pmatrix} = 1(9 - 0) - 0 + 5(-1 - 6) = 9 - 35 = -26$$
+@academic[formula_callout:Cramer's Rule
+$$\\det(A_3) = \\det\\begin{pmatrix} 1 & 0 & 5 \\\\ -1 & 3 & 0 \\\\ 2 & 1 & 3 \\end{pmatrix} = 1(9 - 0) - 0 + 5(-1 - 6) = 9 - 35 = -26$$]@
 
 The solution is $x_1 = -23/(-15) = 23/15$, $x_2 = 1/(-15) = -1/15$, $x_3 = -26/(-15) = 26/15$.
 
@@ -1539,7 +1546,12 @@ Cramer's rule proves that each solution component is a rational function of the 
     title: `The Inverse via the Adjugate`,
     content: `The [adjugate identity](!/linear-algebra/determinants/cofactors) $A \\cdot \\operatorname{adj}(A) = \\det(A) \\cdot I$ immediately gives an explicit formula for the inverse when $\\det(A) \\neq 0$:
 
+@academic[formula_callout:Inverse via Adjugate
 $$A^{-1} = \\frac{1}{\\det(A)} \\operatorname{adj}(A)$$
+/linear-algebra/formulas#inverse_via_adjugate]@
+
+@academic[formulas_link:/linear-algebra/formulas#cramers_rule]@
+/linear-algebra/formulas]@
 
 Every entry of $A^{-1}$ is expressed as a cofactor of $A$ divided by $\\det(A)$.
 
@@ -1547,7 +1559,8 @@ Every entry of $A^{-1}$ is expressed as a cofactor of $A$ divided by $\\det(A)$.
 
 For $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, the [cofactor](!/linear-algebra/determinants/cofactors) matrix is $\\begin{pmatrix} d & -c \\\\ -b & a \\end{pmatrix}$, and transposing gives $\\operatorname{adj}(A) = \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$. The inverse is
 
-$$A^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$
+@academic[formula_callout:The Inverse via the Adjugate
+$$A^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$]@
 
 This is the familiar swap-the-diagonal, negate-the-off-diagonal formula that appears in every introductory linear algebra course.
 
@@ -1555,19 +1568,24 @@ This is the familiar swap-the-diagonal, negate-the-off-diagonal formula that app
 
 For $A = \\begin{pmatrix} 1 & 2 & 0 \\\\ 0 & 1 & 3 \\\\ 2 & 0 & 1 \\end{pmatrix}$, first compute $\\det(A)$ by expanding along the first row:
 
-$$\\det(A) = 1(1 - 0) - 2(0 - 6) + 0 = 1 + 12 = 13$$
+@academic[formula_callout:The Inverse via the Adjugate
+$$\\det(A) = 1(1 - 0) - 2(0 - 6) + 0 = 1 + 12 = 13$$]@
 
 The nine cofactors are:
 
-$$C_{11} = +(1 \\cdot 1 - 3 \\cdot 0) = 1, \\quad C_{12} = -(0 \\cdot 1 - 3 \\cdot 2) = 6, \\quad C_{13} = +(0 \\cdot 0 - 1 \\cdot 2) = -2$$
+@academic[formula_callout:The Inverse via the Adjugate
+$$C_{11} = +(1 \\cdot 1 - 3 \\cdot 0) = 1, \\quad C_{12} = -(0 \\cdot 1 - 3 \\cdot 2) = 6, \\quad C_{13} = +(0 \\cdot 0 - 1 \\cdot 2) = -2$$]@
 
-$$C_{21} = -(2 \\cdot 1 - 0 \\cdot 0) = -2, \\quad C_{22} = +(1 \\cdot 1 - 0 \\cdot 2) = 1, \\quad C_{23} = -(1 \\cdot 0 - 2 \\cdot 2) = 4$$
+@academic[formula_callout:The Inverse via the Adjugate
+$$C_{21} = -(2 \\cdot 1 - 0 \\cdot 0) = -2, \\quad C_{22} = +(1 \\cdot 1 - 0 \\cdot 2) = 1, \\quad C_{23} = -(1 \\cdot 0 - 2 \\cdot 2) = 4$$]@
 
-$$C_{31} = +(2 \\cdot 3 - 0 \\cdot 1) = 6, \\quad C_{32} = -(1 \\cdot 3 - 0 \\cdot 0) = -3, \\quad C_{33} = +(1 \\cdot 1 - 2 \\cdot 0) = 1$$
+@academic[formula_callout:The Inverse via the Adjugate
+$$C_{31} = +(2 \\cdot 3 - 0 \\cdot 1) = 6, \\quad C_{32} = -(1 \\cdot 3 - 0 \\cdot 0) = -3, \\quad C_{33} = +(1 \\cdot 1 - 2 \\cdot 0) = 1$$]@
 
 The adjugate is the transpose of the cofactor matrix:
 
-$$\\operatorname{adj}(A) = \\begin{pmatrix} 1 & -2 & 6 \\\\ 6 & 1 & -3 \\\\ -2 & 4 & 1 \\end{pmatrix}$$
+@academic[formula_callout:The Inverse via the Adjugate
+$$\\operatorname{adj}(A) = \\begin{pmatrix} 1 & -2 & 6 \\\\ 6 & 1 & -3 \\\\ -2 & 4 & 1 \\end{pmatrix}$$]@
 
 So $A^{-1} = \\frac{1}{13} \\begin{pmatrix} 1 & -2 & 6 \\\\ 6 & 1 & -3 \\\\ -2 & 4 & 1 \\end{pmatrix}$.
 
@@ -1584,11 +1602,13 @@ The adjugate formula writes every entry of the inverse as an explicit ratio of c
     title: `The Cross Product as a Determinant`,
     content: `The [cross product](!/linear-algebra/vectors/cross-product) of two vectors $\\mathbf{a} = (a_1, a_2, a_3)$ and $\\mathbf{b} = (b_1, b_2, b_3)$ in $\\mathbb{R}^3$ can be computed as a symbolic $3 \\times 3$ determinant:
 
-$$\\mathbf{a} \\times \\mathbf{b} = \\det\\begin{pmatrix} \\hat{\\mathbf{i}} & \\hat{\\mathbf{j}} & \\hat{\\mathbf{k}} \\\\ a_1 & a_2 & a_3 \\\\ b_1 & b_2 & b_3 \\end{pmatrix}$$
+@academic[formula_callout:The Cross Product as a Determinant
+$$\\mathbf{a} \\times \\mathbf{b} = \\det\\begin{pmatrix} \\hat{\\mathbf{i}} & \\hat{\\mathbf{j}} & \\hat{\\mathbf{k}} \\\\ a_1 & a_2 & a_3 \\\\ b_1 & b_2 & b_3 \\end{pmatrix}$$]@
 
 Expanding along the first row using the cofactor formula:
 
-$$\\mathbf{a} \\times \\mathbf{b} = \\hat{\\mathbf{i}}(a_2 b_3 - a_3 b_2) - \\hat{\\mathbf{j}}(a_1 b_3 - a_3 b_1) + \\hat{\\mathbf{k}}(a_1 b_2 - a_2 b_1)$$
+@academic[formula_callout:The Cross Product as a Determinant
+$$\\mathbf{a} \\times \\mathbf{b} = \\hat{\\mathbf{i}}(a_2 b_3 - a_3 b_2) - \\hat{\\mathbf{j}}(a_1 b_3 - a_3 b_1) + \\hat{\\mathbf{k}}(a_1 b_2 - a_2 b_1)$$]@
 
 Each component of the resulting vector is a $2 \\times 2$ minor — the sub-determinant obtained by deleting the appropriate row and column from the lower two rows.
 
@@ -1598,11 +1618,14 @@ This is a formal rather than literal use of the determinant. The first row conta
 
 For $\\mathbf{a} = (2, -1, 3)$ and $\\mathbf{b} = (4, 0, -2)$:
 
-$$\\mathbf{a} \\times \\mathbf{b} = \\det\\begin{pmatrix} \\hat{\\mathbf{i}} & \\hat{\\mathbf{j}} & \\hat{\\mathbf{k}} \\\\ 2 & -1 & 3 \\\\ 4 & 0 & -2 \\end{pmatrix}$$
+@academic[formula_callout:The Cross Product as a Determinant
+$$\\mathbf{a} \\times \\mathbf{b} = \\det\\begin{pmatrix} \\hat{\\mathbf{i}} & \\hat{\\mathbf{j}} & \\hat{\\mathbf{k}} \\\\ 2 & -1 & 3 \\\\ 4 & 0 & -2 \\end{pmatrix}$$]@
 
-$$= \\hat{\\mathbf{i}}((-1)(-2) - (3)(0)) - \\hat{\\mathbf{j}}((2)(-2) - (3)(4)) + \\hat{\\mathbf{k}}((2)(0) - (-1)(4))$$
+@academic[formula_callout:The Cross Product as a Determinant
+$$= \\hat{\\mathbf{i}}((-1)(-2) - (3)(0)) - \\hat{\\mathbf{j}}((2)(-2) - (3)(4)) + \\hat{\\mathbf{k}}((2)(0) - (-1)(4))$$]@
 
-$$= \\hat{\\mathbf{i}}(2) - \\hat{\\mathbf{j}}(-16) + \\hat{\\mathbf{k}}(4) = (2, 16, 4)$$
+@academic[formula_callout:The Cross Product as a Determinant
+$$= \\hat{\\mathbf{i}}(2) - \\hat{\\mathbf{j}}(-16) + \\hat{\\mathbf{k}}(4) = (2, 16, 4)$$]@
 
 The magnitude is $|\\mathbf{a} \\times \\mathbf{b}| = \\sqrt{4 + 256 + 16} = \\sqrt{276} = 2\\sqrt{69}$. This equals the area of the parallelogram spanned by $\\mathbf{a}$ and $\\mathbf{b}$, connecting the cross product back to the [geometric interpretation](!/linear-algebra/determinants/geometry) of the determinant as an area measure.`,
     before: ``,
@@ -1613,7 +1636,12 @@ The magnitude is $|\\mathbf{a} \\times \\mathbf{b}| = \\sqrt{4 + 256 + 16} = \\s
     title: `The Characteristic Polynomial`,
     content: `For an $n \\times n$ matrix $A$, the characteristic polynomial is defined as
 
+@academic[formula_callout:Characteristic Polynomial
 $$p(\\lambda) = \\det(A - \\lambda I)$$
+/linear-algebra/formulas#characteristic_polynomial]@
+
+@academic[formulas_link:/linear-algebra/formulas#cramers_rule]@
+/linear-algebra/formulas]@
 
 This is a polynomial of degree $n$ in the variable $\\lambda$. Its roots are the [eigenvalues](!/linear-algebra/eigen) of $A$ — the scalars $\\lambda$ for which the matrix $A - \\lambda I$ becomes singular.
 
@@ -1621,9 +1649,11 @@ This is a polynomial of degree $n$ in the variable $\\lambda$. Its roots are the
 
 For $A = \\begin{pmatrix} 4 & 1 \\\\ 2 & 3 \\end{pmatrix}$:
 
-$$A - \\lambda I = \\begin{pmatrix} 4 - \\lambda & 1 \\\\ 2 & 3 - \\lambda \\end{pmatrix}$$
+@academic[formula_callout:The Characteristic Polynomial
+$$A - \\lambda I = \\begin{pmatrix} 4 - \\lambda & 1 \\\\ 2 & 3 - \\lambda \\end{pmatrix}$$]@
 
-$$p(\\lambda) = (4 - \\lambda)(3 - \\lambda) - 2 = \\lambda^2 - 7\\lambda + 10 = (\\lambda - 2)(\\lambda - 5)$$
+@academic[formula_callout:The Characteristic Polynomial
+$$p(\\lambda) = (4 - \\lambda)(3 - \\lambda) - 2 = \\lambda^2 - 7\\lambda + 10 = (\\lambda - 2)(\\lambda - 5)$$]@
 
 The eigenvalues are $\\lambda = 2$ and $\\lambda = 5$.
 
@@ -1633,7 +1663,8 @@ For $A = \\begin{pmatrix} 2 & 1 & 0 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & 1 \\end{pmatrix}
 
 This is upper triangular, so $A - \\lambda I$ is also upper triangular with diagonal entries $2 - \\lambda$, $3 - \\lambda$, $1 - \\lambda$. The determinant of a [triangular matrix](!/linear-algebra/determinants/properties) is the product of its diagonal entries:
 
-$$p(\\lambda) = (2 - \\lambda)(3 - \\lambda)(1 - \\lambda)$$
+@academic[formula_callout:The Characteristic Polynomial
+$$p(\\lambda) = (2 - \\lambda)(3 - \\lambda)(1 - \\lambda)$$]@
 
 The eigenvalues are $\\lambda = 1, 2, 3$ — they sit directly on the diagonal, which is always the case for triangular matrices.
 
@@ -1646,7 +1677,8 @@ Setting $\\lambda = 0$ in the characteristic polynomial gives $p(0) = \\det(A)$,
 
 The determinant equals the product of all eigenvalues, counted with algebraic multiplicity. A second identity connects the coefficient of $\\lambda^{n-1}$ to the [trace](!/linear-algebra/matrix/trace):
 
-$$\\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n = \\operatorname{tr}(A)$$
+@academic[formula_callout:The Characteristic Polynomial
+$$\\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n = \\operatorname{tr}(A)$$]@
 
 Together, these two identities link the determinant and trace to the eigenvalue spectrum of the matrix.`,
     before: ``,
@@ -1657,7 +1689,8 @@ Together, these two identities link the determinant and trace to the eigenvalue 
     title: `The Wronskian`,
     content: `The Wronskian extends the determinant's role as a linear independence test from vectors to functions. Given $n$ functions $f_1, f_2, \\dots, f_n$, each differentiable at least $n - 1$ times, the Wronskian is
 
-$$W(f_1, \\dots, f_n)(x) = \\det\\begin{pmatrix} f_1(x) & f_2(x) & \\cdots & f_n(x) \\\\ f_1'(x) & f_2'(x) & \\cdots & f_n'(x) \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & \\cdots & f_n^{(n-1)}(x) \\end{pmatrix}$$
+@academic[formula_callout:The Wronskian
+$$W(f_1, \\dots, f_n)(x) = \\det\\begin{pmatrix} f_1(x) & f_2(x) & \\cdots & f_n(x) \\\\ f_1'(x) & f_2'(x) & \\cdots & f_n'(x) \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & \\cdots & f_n^{(n-1)}(x) \\end{pmatrix}$$]@
 
 Each column corresponds to one function, and each row raises the order of differentiation by one. The result is a function of $x$, not a constant.
 
@@ -1671,11 +1704,13 @@ The converse requires care. A Wronskian that vanishes everywhere does not automa
 
 Take $f_1 = e^x$, $f_2 = e^{2x}$, $f_3 = e^{3x}$. The Wronskian matrix is
 
-$$\\begin{pmatrix} e^x & e^{2x} & e^{3x} \\\\ e^x & 2e^{2x} & 3e^{3x} \\\\ e^x & 4e^{2x} & 9e^{3x} \\end{pmatrix}$$
+@academic[formula_callout:The Wronskian
+$$\\begin{pmatrix} e^x & e^{2x} & e^{3x} \\\\ e^x & 2e^{2x} & 3e^{3x} \\\\ e^x & 4e^{2x} & 9e^{3x} \\end{pmatrix}$$]@
 
 Factoring $e^x$ from column $1$, $e^{2x}$ from column $2$, and $e^{3x}$ from column $3$:
 
-$$W = e^{6x} \\det\\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 3 \\\\ 1 & 4 & 9 \\end{pmatrix}$$
+@academic[formula_callout:The Wronskian
+$$W = e^{6x} \\det\\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 3 \\\\ 1 & 4 & 9 \\end{pmatrix}$$]@
 
 The remaining matrix is a Vandermonde matrix with nodes $1, 2, 3$. Its determinant is $(2 - 1)(3 - 1)(3 - 2) = 1 \\cdot 2 \\cdot 1 = 2$. So $W = 2e^{6x}$, which is nonzero for all $x$, confirming that $e^x, e^{2x}, e^{3x}$ are linearly independent.
 
@@ -1694,7 +1729,8 @@ The Wronskian arises most naturally in the theory of linear ordinary differentia
 
 An $n \\times n$ Vandermonde matrix is built from $n$ distinct nodes $x_1, x_2, \\dots, x_n$:
 
-$$V = \\begin{pmatrix} 1 & x_1 & x_1^2 & \\cdots & x_1^{n-1} \\\\ 1 & x_2 & x_2^2 & \\cdots & x_2^{n-1} \\\\ \\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\ 1 & x_n & x_n^2 & \\cdots & x_n^{n-1} \\end{pmatrix}$$
+@academic[formula_callout:Vandermonde and Structured Determinants
+$$V = \\begin{pmatrix} 1 & x_1 & x_1^2 & \\cdots & x_1^{n-1} \\\\ 1 & x_2 & x_2^2 & \\cdots & x_2^{n-1} \\\\ \\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\ 1 & x_n & x_n^2 & \\cdots & x_n^{n-1} \\end{pmatrix}$$]@
 
 Its determinant has the closed form
 
@@ -1707,7 +1743,8 @@ The product runs over all pairs with $j > i$, so it contains $\\binom{n}{2}$ fac
 
 For nodes $x_1 = 1$, $x_2 = 2$, $x_3 = 4$:
 
-$$V = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 4 \\\\ 1 & 4 & 16 \\end{pmatrix}$$
+@academic[formula_callout:Vandermonde and Structured Determinants
+$$V = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 4 \\\\ 1 & 4 & 16 \\end{pmatrix}$$]@
 
 Direct expansion: $\\det(V) = 1(32 - 16) - 1(16 - 4) + 1(4 - 2) = 16 - 12 + 2 = 6$.
 

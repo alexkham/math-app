@@ -394,7 +394,8 @@ $18 = 2^1 \\cdot 3^2$
 
 Every prime appearing in either factorization must appear in the LCM — otherwise the LCM would not be divisible by both. Take the larger exponent for each: $\\max(2, 1) = 2$ for the prime $2$, and $\\max(1, 2) = 2$ for the prime $3$.
 
-$$\\text{lcm}(12, 18) = 2^2 \\cdot 3^2 = 4 \\cdot 9 = 36$$`,
+@academic[formula_callout:Method 2: Prime Factorization
+$$\\text{lcm}(12, 18) = 2^2 \\cdot 3^2 = 4 \\cdot 9 = 36$$]@`,
   afterFigure: `The contrast with the [GCD](!/arithmetic/divisibility/gcd) is symmetric. The GCD takes the minimum exponent — the overlap. The LCM takes the maximum — the full coverage needed to accommodate both numbers.`,
   before: ``,
   after: ``,
@@ -405,7 +406,8 @@ obj5: {
   title: `Method 3: Using GCD`,
   content: `When the [GCD](!/arithmetic/divisibility/gcd) is known or easy to compute — particularly through the Euclidean algorithm — the LCM follows from a single formula:
 
-$$\\text{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$$
+@academic[formula_callout:Method 3: Using GCD
+$$\\text{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$$]@
 
 For $\\text{lcm}(12, 18)$: $\\gcd(12, 18) = 6$, so $\\text{lcm} = \\frac{12 \\cdot 18}{6} = \\frac{216}{6} = 36$.
 
@@ -425,7 +427,8 @@ obj6: {
   title: `The GCD–LCM Relationship`,
   content: `For any positive integers $a$ and $b$:
 
-$$a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$$
+@academic[formula_callout:The GCD–LCM Relationship
+$$a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$$]@
 
 The identity holds because the [GCD](!/arithmetic/divisibility/gcd) and LCM partition the prime structure of $a \\cdot b$ without overlap or omission.
 
@@ -445,7 +448,8 @@ The relationship is useful in both directions. Knowing the GCD gives the LCM, an
   title: `When $a$ and $b$ Are Coprime`,
   content: `If $\\gcd(a, b) = 1$, the GCD–LCM formula simplifies to:
 
-$$\\text{lcm}(a, b) = a \\cdot b$$
+@academic[formula_callout:When $a$ and $b$ Are Coprime
+$$\\text{lcm}(a, b) = a \\cdot b$$]@
 
 With no shared prime factors, nothing overlaps. Every prime in $a$ is absent from $b$, and every prime in $b$ is absent from $a$. The LCM must include all of them at full strength, which is exactly what the product provides.
 
@@ -481,7 +485,8 @@ obj9: {
   title: `LCM of More Than Two Numbers`,
   content: `Like the [GCD](!/arithmetic/divisibility/gcd), the LCM extends to more than two numbers by applying it pairwise:
 
-$$\\text{lcm}(a, b, c) = \\text{lcm}(\\text{lcm}(a, b), \\; c)$$
+@academic[formula_callout:LCM of More Than Two Numbers
+$$\\text{lcm}(a, b, c) = \\text{lcm}(\\text{lcm}(a, b), \\; c)$$]@
 
 For $\\text{lcm}(4, 6, 9)$:
 

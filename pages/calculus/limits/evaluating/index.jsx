@@ -207,7 +207,8 @@ const sectionsContent = {
     content: `
 Before attempting any technique, substitute $a$ into $f(x)$ directly. If the result is a finite number with no division by zero, that number is the limit:
 
-$$\\lim_{x \\to a} f(x) = f(a)$$
+@academic[formula_callout:Direct Substitution — Try This First
+$$\\lim_{x \\to a} f(x) = f(a)$$]@
 
 This works for:
 
@@ -229,7 +230,8 @@ Substitution fails when it produces an undefined or indeterminate expression. Th
 
 For example:
 
-$$\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$$
+@academic[formula_callout:When Direct Substitution Fails
+$$\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$$]@
 
 Substituting $x = 2$ gives $\\dfrac{0}{0}$. This does not mean the limit is zero, undefined, or nonexistent. It means the expression's behavior near $x = 2$ is not yet determined—more work is needed.
 
@@ -244,9 +246,11 @@ The $0/0$ form indicates that both numerator and denominator share a common fact
     content: `
 Several forms signal that [limit rules](!/calculus/limits/rules) cannot be applied directly:
 
-$$\\frac{0}{0} \\qquad \\frac{\\infty}{\\infty} \\qquad 0 \\cdot \\infty \\qquad \\infty - \\infty$$
+@academic[formula_callout:Indeterminate Forms
+$$\\frac{0}{0} \\qquad \\frac{\\infty}{\\infty} \\qquad 0 \\cdot \\infty \\qquad \\infty - \\infty$$]@
 
-$$0^0 \\qquad 1^\\infty \\qquad \\infty^0$$
+@academic[formula_callout:Indeterminate Forms
+$$0^0 \\qquad 1^\\infty \\qquad \\infty^0$$]@
 
 Each form represents a competition between opposing tendencies. In $0/0$, both numerator and denominator vanish—which vanishes faster determines the limit. In $\\infty - \\infty$, both terms grow without bound—their difference depends on relative growth rates.
 
@@ -306,15 +310,18 @@ Indeterminate forms require transformation. The goal is to rewrite the expressio
     content: `
 When substitution yields $0/0$, the numerator and denominator share a common factor. Factor both, cancel the shared factor, then substitute.
 
-$$\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$$
+@academic[formula_callout:Factoring and Canceling
+$$\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$$]@
 
 Factor the numerator:
 
-$$= \\lim_{x \\to 2} \\frac{(x - 2)(x + 2)}{x - 2}$$
+@academic[formula_callout:Factoring and Canceling
+$$= \\lim_{x \\to 2} \\frac{(x - 2)(x + 2)}{x - 2}$$]@
 
 Cancel $(x - 2)$:
 
-$$= \\lim_{x \\to 2} (x + 2) = 4$$
+@academic[formula_callout:Factoring and Canceling
+$$= \\lim_{x \\to 2} (x + 2) = 4$$]@
 
 The cancellation is valid because the limit considers $x$ near $2$, not at $2$. For $x \\neq 2$, the factor $(x - 2)$ is nonzero and cancels legitimately.
 `,
@@ -327,19 +334,23 @@ The cancellation is valid because the limit considers $x$ near $2$, not at $2$. 
     content: `
 When radicals appear and substitution fails, multiply by the conjugate to eliminate the radical.
 
-$$\\lim_{x \\to 0} \\frac{\\sqrt{x + 1} - 1}{x}$$
+@academic[formula_callout:Rationalizing — Conjugate Multiplication
+$$\\lim_{x \\to 0} \\frac{\\sqrt{x + 1} - 1}{x}$$]@
 
 Substituting gives $0/0$. Multiply numerator and denominator by $\\sqrt{x + 1} + 1$:
 
-$$= \\lim_{x \\to 0} \\frac{(\\sqrt{x + 1} - 1)(\\sqrt{x + 1} + 1)}{x(\\sqrt{x + 1} + 1)}$$
+@academic[formula_callout:Rationalizing — Conjugate Multiplication
+$$= \\lim_{x \\to 0} \\frac{(\\sqrt{x + 1} - 1)(\\sqrt{x + 1} + 1)}{x(\\sqrt{x + 1} + 1)}$$]@
 
 The numerator becomes a difference of squares:
 
-$$= \\lim_{x \\to 0} \\frac{(x + 1) - 1}{x(\\sqrt{x + 1} + 1)} = \\lim_{x \\to 0} \\frac{x}{x(\\sqrt{x + 1} + 1)}$$
+@academic[formula_callout:Rationalizing — Conjugate Multiplication
+$$= \\lim_{x \\to 0} \\frac{(x + 1) - 1}{x(\\sqrt{x + 1} + 1)} = \\lim_{x \\to 0} \\frac{x}{x(\\sqrt{x + 1} + 1)}$$]@
 
 Cancel $x$:
 
-$$= \\lim_{x \\to 0} \\frac{1}{\\sqrt{x + 1} + 1} = \\frac{1}{2}$$
+@academic[formula_callout:Rationalizing — Conjugate Multiplication
+$$= \\lim_{x \\to 0} \\frac{1}{\\sqrt{x + 1} + 1} = \\frac{1}{2}$$]@
 `,
     before: ``,
     after: ``,
@@ -350,15 +361,18 @@ $$= \\lim_{x \\to 0} \\frac{1}{\\sqrt{x + 1} + 1} = \\frac{1}{2}$$
     content: `
 Sometimes expanding a product or simplifying a complex fraction reveals the cancellation needed.
 
-$$\\lim_{x \\to 1} \\frac{(x + 1)^2 - 4}{x - 1}$$
+@academic[formula_callout:Expanding and Simplifying
+$$\\lim_{x \\to 1} \\frac{(x + 1)^2 - 4}{x - 1}$$]@
 
 Expand the numerator:
 
-$$= \\lim_{x \\to 1} \\frac{x^2 + 2x + 1 - 4}{x - 1} = \\lim_{x \\to 1} \\frac{x^2 + 2x - 3}{x - 1}$$
+@academic[formula_callout:Expanding and Simplifying
+$$= \\lim_{x \\to 1} \\frac{x^2 + 2x + 1 - 4}{x - 1} = \\lim_{x \\to 1} \\frac{x^2 + 2x - 3}{x - 1}$$]@
 
 Factor:
 
-$$= \\lim_{x \\to 1} \\frac{(x - 1)(x + 3)}{x - 1} = \\lim_{x \\to 1} (x + 3) = 4$$
+@academic[formula_callout:Expanding and Simplifying
+$$= \\lim_{x \\to 1} \\frac{(x - 1)(x + 3)}{x - 1} = \\lim_{x \\to 1} (x + 3) = 4$$]@
 
 The initial form obscured the factor of $(x - 1)$; expansion made it visible.
 `,
@@ -371,17 +385,21 @@ The initial form obscured the factor of $(x - 1)$; expansion made it visible.
     content: `
 When the expression involves a difference of fractions, combine them over a common denominator.
 
-$$\\lim_{x \\to 1} \\left( \\frac{1}{x - 1} - \\frac{2}{x^2 - 1} \\right)$$
+@academic[formula_callout:Combining Fractions
+$$\\lim_{x \\to 1} \\left( \\frac{1}{x - 1} - \\frac{2}{x^2 - 1} \\right)$$]@
 
 Note that $x^2 - 1 = (x - 1)(x + 1)$. Rewrite with common denominator:
 
-$$= \\lim_{x \\to 1} \\left( \\frac{x + 1}{(x - 1)(x + 1)} - \\frac{2}{(x - 1)(x + 1)} \\right)$$
+@academic[formula_callout:Combining Fractions
+$$= \\lim_{x \\to 1} \\left( \\frac{x + 1}{(x - 1)(x + 1)} - \\frac{2}{(x - 1)(x + 1)} \\right)$$]@
 
-$$= \\lim_{x \\to 1} \\frac{x + 1 - 2}{(x - 1)(x + 1)} = \\lim_{x \\to 1} \\frac{x - 1}{(x - 1)(x + 1)}$$
+@academic[formula_callout:Combining Fractions
+$$= \\lim_{x \\to 1} \\frac{x + 1 - 2}{(x - 1)(x + 1)} = \\lim_{x \\to 1} \\frac{x - 1}{(x - 1)(x + 1)}$$]@
 
 Cancel $(x - 1)$:
 
-$$= \\lim_{x \\to 1} \\frac{1}{x + 1} = \\frac{1}{2}$$
+@academic[formula_callout:Combining Fractions
+$$= \\lim_{x \\to 1} \\frac{1}{x + 1} = \\frac{1}{2}$$]@
 `,
     before: ``,
     after: ``,
@@ -392,15 +410,18 @@ $$= \\lim_{x \\to 1} \\frac{1}{x + 1} = \\frac{1}{2}$$
     content: `
 For [limits at infinity](!/calculus/limits/infinity), divide numerator and denominator by the highest power of $x$ in the denominator.
 
-$$\\lim_{x \\to \\infty} \\frac{3x^2 + 5x - 1}{2x^2 - 7}$$
+@academic[formula_callout:Multiplying by Strategic Forms of 1
+$$\\lim_{x \\to \\infty} \\frac{3x^2 + 5x - 1}{2x^2 - 7}$$]@
 
 Divide every term by $x^2$:
 
-$$= \\lim_{x \\to \\infty} \\frac{3 + \\frac{5}{x} - \\frac{1}{x^2}}{2 - \\frac{7}{x^2}}$$
+@academic[formula_callout:Multiplying by Strategic Forms of 1
+$$= \\lim_{x \\to \\infty} \\frac{3 + \\frac{5}{x} - \\frac{1}{x^2}}{2 - \\frac{7}{x^2}}$$]@
 
 As $x \\to \\infty$, terms with $x$ in the denominator vanish:
 
-$$= \\frac{3 + 0 - 0}{2 - 0} = \\frac{3}{2}$$
+@academic[formula_callout:Multiplying by Strategic Forms of 1
+$$= \\frac{3 + 0 - 0}{2 - 0} = \\frac{3}{2}$$]@
 
 This technique isolates the dominant terms that control behavior at infinity.
 `,
@@ -413,15 +434,18 @@ This technique isolates the dominant terms that control behavior at infinity.
     content: `
 Recognize when parts of an expression match [special limits](!/calculus/limits/special) and rewrite accordingly.
 
-$$\\lim_{x \\to 0} \\frac{\\sin 3x}{x}$$
+@academic[formula_callout:Using Known Limits
+$$\\lim_{x \\to 0} \\frac{\\sin 3x}{x}$$]@
 
 Rewrite to match the standard form $\\dfrac{\\sin u}{u}$:
 
-$$= \\lim_{x \\to 0} \\frac{\\sin 3x}{x} \\cdot \\frac{3}{3} = 3 \\cdot \\lim_{x \\to 0} \\frac{\\sin 3x}{3x}$$
+@academic[formula_callout:Using Known Limits
+$$= \\lim_{x \\to 0} \\frac{\\sin 3x}{x} \\cdot \\frac{3}{3} = 3 \\cdot \\lim_{x \\to 0} \\frac{\\sin 3x}{3x}$$]@
 
 Let $u = 3x$. As $x \\to 0$, $u \\to 0$:
 
-$$= 3 \\cdot \\lim_{u \\to 0} \\frac{\\sin u}{u} = 3 \\cdot 1 = 3$$
+@academic[formula_callout:Using Known Limits
+$$= 3 \\cdot \\lim_{u \\to 0} \\frac{\\sin u}{u} = 3 \\cdot 1 = 3$$]@
 `,
     before: ``,
     after: ``,
@@ -432,13 +456,15 @@ $$= 3 \\cdot \\lim_{u \\to 0} \\frac{\\sin u}{u} = 3 \\cdot 1 = 3$$
     content: `
 When [one-sided limits](!/calculus/limits/one-sided) differ, evaluate each separately.
 
-$$\\lim_{x \\to 0} \\frac{|x|}{x}$$
+@academic[formula_callout:One-Sided Evaluation
+$$\\lim_{x \\to 0} \\frac{|x|}{x}$$]@
 
 For $x > 0$: $|x| = x$, so $\\dfrac{|x|}{x} = 1$
 
 For $x < 0$: $|x| = -x$, so $\\dfrac{|x|}{x} = -1$
 
-$$\\lim_{x \\to 0^+} \\frac{|x|}{x} = 1 \\qquad \\lim_{x \\to 0^-} \\frac{|x|}{x} = -1$$
+@academic[formula_callout:One-Sided Evaluation
+$$\\lim_{x \\to 0^+} \\frac{|x|}{x} = 1 \\qquad \\lim_{x \\to 0^-} \\frac{|x|}{x} = -1$$]@
 
 The one-sided limits differ, so the two-sided limit does not exist.
 `,
@@ -451,7 +477,8 @@ The one-sided limits differ, so the two-sided limit does not exist.
     content: `
 When a limit involves potential division by zero with a nonzero numerator, determine the sign to identify $+\\infty$ or $-\\infty$.
 
-$$\\lim_{x \\to 3^+} \\frac{x + 1}{x - 3}$$
+@academic[formula_callout:Sign Analysis Near the Point
+$$\\lim_{x \\to 3^+} \\frac{x + 1}{x - 3}$$]@
 
 At $x = 3$: numerator $= 4 > 0$, denominator $\\to 0$.
 
@@ -459,11 +486,13 @@ For $x$ slightly greater than $3$: $x - 3 > 0$ (small positive).
 
 Positive divided by small positive gives large positive:
 
-$$\\lim_{x \\to 3^+} \\frac{x + 1}{x - 3} = +\\infty$$
+@academic[formula_callout:Sign Analysis Near the Point
+$$\\lim_{x \\to 3^+} \\frac{x + 1}{x - 3} = +\\infty$$]@
 
 From the left, $x - 3 < 0$, so:
 
-$$\\lim_{x \\to 3^-} \\frac{x + 1}{x - 3} = -\\infty$$
+@academic[formula_callout:Sign Analysis Near the Point
+$$\\lim_{x \\to 3^-} \\frac{x + 1}{x - 3} = -\\infty$$]@
 `,
     before: ``,
     after: ``,
@@ -474,21 +503,29 @@ $$\\lim_{x \\to 3^-} \\frac{x + 1}{x - 3} = -\\infty$$
     content: `
 ## Example 1: Factoring
 
-$$\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3} = \\lim_{x \\to 3} \\frac{(x-3)(x+3)}{x-3} = \\lim_{x \\to 3}(x + 3) = 6$$
+@academic[formula_callout:Worked Examples
+$$\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3} = \\lim_{x \\to 3} \\frac{(x-3)(x+3)}{x-3} = \\lim_{x \\to 3}(x + 3) = 6$$]@
 
 ## Example 2: Rationalizing
 
-$$\\lim_{x \\to 4} \\frac{\\sqrt{x} - 2}{x - 4} = \\lim_{x \\to 4} \\frac{(\\sqrt{x} - 2)(\\sqrt{x} + 2)}{(x - 4)(\\sqrt{x} + 2)} = \\lim_{x \\to 4} \\frac{x - 4}{(x - 4)(\\sqrt{x} + 2)} = \\frac{1}{4}$$
+@academic[formula_callout:Worked Examples
+$$\\lim_{x \\to 4} \\frac{\\sqrt{x} - 2}{x - 4} = \\lim_{x \\to 4} \\frac{(\\sqrt{x} - 2)(\\sqrt{x} + 2)}{(x - 4)(\\sqrt{x} + 2)} = \\lim_{x \\to 4} \\frac{x - 4}{(x - 4)(\\sqrt{x} + 2)} = \\frac{1}{4}$$]@
 
 ## Example 3: Using Special Limits
 
+@academic[formula_callout:Cosine Quadratic Limit at Zero
 $$\\lim_{x \\to 0} \\frac{1 - \\cos x}{x^2} = \\frac{1}{2}$$
+/calculus/formulas#cosine_quadratic_limit_at_zero]@
+
+@academic[formulas_link:Browse all calculus formulas
+/calculus/formulas]@
 
 This follows from the [special limit](!/calculus/limits/special) $\\lim_{x \\to 0} \\dfrac{1 - \\cos x}{x^2} = \\dfrac{1}{2}$.
 
 ## Example 4: Combining Fractions
 
-$$\\lim_{x \\to 2} \\left( \\frac{1}{x - 2} - \\frac{4}{x^2 - 4} \\right) = \\lim_{x \\to 2} \\frac{x + 2 - 4}{(x-2)(x+2)} = \\lim_{x \\to 2} \\frac{x - 2}{(x-2)(x+2)} = \\frac{1}{4}$$
+@academic[formula_callout:Worked Examples
+$$\\lim_{x \\to 2} \\left( \\frac{1}{x - 2} - \\frac{4}{x^2 - 4} \\right) = \\lim_{x \\to 2} \\frac{x + 2 - 4}{(x-2)(x+2)} = \\lim_{x \\to 2} \\frac{x - 2}{(x-2)(x+2)} = \\frac{1}{4}$$]@
 `,
     before: ``,
     after: ``,

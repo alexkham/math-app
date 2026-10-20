@@ -1162,7 +1162,12 @@ This raises a natural question: if $T$ has matrix $A$ in one basis and matrix $A
     title: `The Change-of-Basis Matrix`,
     content: `If $\\mathcal{B}$ and $\\mathcal{C}$ are two bases for $V$, the change-of-basis matrix $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ converts $\\mathcal{B}$-coordinates to $\\mathcal{C}$-coordinates:
 
+@academic[formula_callout:Change of Basis Formula
 $$[\\mathbf{v}]_\\mathcal{C} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}} \\, [\\mathbf{v}]_\\mathcal{B}$$
+/linear-algebra/formulas#change_of_basis_formula]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Column $j$ of $P$ is the $\\mathcal{C}$-coordinate vector of the $j$-th basis vector of $\\mathcal{B}$. The reverse conversion uses the [inverse](!/linear-algebra/matrix/inverse): $P_{\\mathcal{B} \\leftarrow \\mathcal{C}} = P^{-1}$.
 
@@ -1170,7 +1175,8 @@ Column $j$ of $P$ is the $\\mathcal{C}$-coordinate vector of the $j$-th basis ve
 
 In $\\mathbb{R}^2$, let $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$ and let $\\mathcal{C}$ be the standard basis. The $\\mathcal{C}$-coordinates of the $\\mathcal{B}$-basis vectors are just their components: $(1, 1)$ and $(1, -1)$. So
 
-$$P = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$$
+@academic[formula_callout:The Change-of-Basis Matrix
+$$P = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$$]@
 
 To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (5, 1)$: solve $P\\mathbf{c} = (5, 1)$. Using $P^{-1} = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}$, we get $\\mathbf{c} = (3, 2)$. So $\\mathbf{v} = 3(1, 1) + 2(1, -1)$.`,
     before: ``,
@@ -1269,7 +1275,8 @@ Individual matrix entries, symmetry, and sparsity are generally not preserved. A
     title: `Diagonalization as a Change of Basis`,
     content: `If $T$ has $n$ [linearly independent](!/linear-algebra/vector-spaces/linear-independence) eigenvectors $\\mathbf{v}_1, \\dots, \\mathbf{v}_n$ with eigenvalues $\\lambda_1, \\dots, \\lambda_n$, use them as the basis $\\mathcal{B}$. In this eigenvector basis, $T$ acts by scaling each basis vector:
 
-$$T(\\mathbf{v}_i) = \\lambda_i \\mathbf{v}_i$$
+@academic[formula_callout:Diagonalization as a Change of Basis
+$$T(\\mathbf{v}_i) = \\lambda_i \\mathbf{v}_i$$]@
 
 The matrix of $T$ in this basis is diagonal: $D = \\text{diag}(\\lambda_1, \\dots, \\lambda_n)$.
 
@@ -1321,7 +1328,8 @@ For $\\lambda_1 = 2$: $(A - 2I)\\mathbf{v} = \\mathbf{0}$ gives $\\begin{pmatrix
 
 For $\\lambda_2 = 5$: $(A - 5I)\\mathbf{v} = \\mathbf{0}$ gives $\\begin{pmatrix} -1 & 1 \\\\ 2 & -2 \\end{pmatrix}\\mathbf{v} = \\mathbf{0}$, so $\\mathbf{v}_2 = (1, 1)$.
 
-$$P = \\begin{pmatrix} 1 & 1 \\\\ -2 & 1 \\end{pmatrix}, \\quad D = \\begin{pmatrix} 2 & 0 \\\\ 0 & 5 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: Full Basis Change
+$$P = \\begin{pmatrix} 1 & 1 \\\\ -2 & 1 \\end{pmatrix}, \\quad D = \\begin{pmatrix} 2 & 0 \\\\ 0 & 5 \\end{pmatrix}$$]@
 
 Verification: $P^{-1} = \\frac{1}{3}\\begin{pmatrix} 1 & -1 \\\\ 2 & 1 \\end{pmatrix}$, and $PDP^{-1} = \\begin{pmatrix} 1 & 1 \\\\ -2 & 1 \\end{pmatrix}\\begin{pmatrix} 2 & 0 \\\\ 0 & 5 \\end{pmatrix}\\frac{1}{3}\\begin{pmatrix} 1 & -1 \\\\ 2 & 1 \\end{pmatrix} = \\begin{pmatrix} 4 & 1 \\\\ 2 & 3 \\end{pmatrix} = A$.
 

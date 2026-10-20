@@ -387,8 +387,8 @@ z = a + bi where a is real part, b is imaginary part
 • Add imaginary parts together
 • Combine the results
 
-@academic[example:Example
-(3 + 2i) + (1 + 4i) = 4 + 6i]@
+**Example:**
+(3 + 2i) + (1 + 4i) = 4 + 6i
 [Learn more about adding](!#adding-complex-numbers) · [All four operations](!#how-complex-number-operations-work)
 `,
     subtract: `
@@ -400,8 +400,8 @@ z = a + bi where a is real part, b is imaginary part
 • Subtract imaginary parts
 • Combine the results
 
-@academic[example:Example
-(5 + 3i) - (2 + 1i) = 3 + 2i]@
+**Example:**
+(5 + 3i) - (2 + 1i) = 3 + 2i
 [Learn more about subtracting](!#subtracting-complex-numbers) · [All four operations](!#how-complex-number-operations-work)
 `,
     multiply: `
@@ -413,9 +413,9 @@ z = a + bi where a is real part, b is imaginary part
 • Remember: i² = -1
 • Combine like terms
 
-@academic[example:Example
+**Example:**
 (2 + 3i)(1 + 4i) = 2 + 8i + 3i + 12i²
-= 2 + 11i - 12 = -10 + 11i]@
+= 2 + 11i - 12 = -10 + 11i
 [Learn more about multiplying](!#multiplying-complex-numbers) · [All four operations](!#how-complex-number-operations-work)
 `,
     divide: `

@@ -195,7 +195,8 @@ $$F_1 = 1, \\quad F_2 = 1, \\quad F_n = F_{n-1} + F_{n-2} \\quad (n \\geq 3)$$
 
 The first terms are:
 
-$$1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, \\ldots$$
+@academic[formula_callout:Definition
+$$1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, \\ldots$$]@
 
 Each term after the second is the sum of its two immediate predecessors: $2 = 1 + 1$, $3 = 1 + 2$, $5 = 2 + 3$, $8 = 3 + 5$, and so on. Growth accelerates because each new term absorbs the size of both parents.
 
@@ -212,7 +213,8 @@ To compute any Fibonacci number or list a range of terms, use the [Fibonacci seq
     title: `The Golden Ratio`,
     content: `The ratio of consecutive Fibonacci numbers $\\frac{F_{n+1}}{F_n}$ settles toward a fixed value as $n$ grows:
 
-$$\\frac{F_2}{F_1} = 1, \\quad \\frac{F_3}{F_2} = 2, \\quad \\frac{F_4}{F_3} = 1.5, \\quad \\frac{F_5}{F_4} = 1.\\overline{6}, \\quad \\frac{F_6}{F_5} = 1.6, \\quad \\ldots$$
+@academic[formula_callout:The Golden Ratio
+$$\\frac{F_2}{F_1} = 1, \\quad \\frac{F_3}{F_2} = 2, \\quad \\frac{F_4}{F_3} = 1.5, \\quad \\frac{F_5}{F_4} = 1.\\overline{6}, \\quad \\frac{F_6}{F_5} = 1.6, \\quad \\ldots$$]@
 
 The limit is the **golden ratio**:
 
@@ -289,7 +291,10 @@ $$\\gcd(F_m, F_n) = F_{\\gcd(m,n)}$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
-**Zeckendorf's theorem:** every positive integer can be represented as a sum of non-consecutive Fibonacci numbers, and this representation is unique. For example, $30 = 21 + 8 + 1 = F_8 + F_6 + F_1$.`,
+@academic[rule_theorem:Zeckendorf's theorem
+every positive integer can be represented as a sum of non-consecutive Fibonacci numbers, and this representation is unique.]@
+
+For example, $30 = 21 + 8 + 1 = F_8 + F_6 + F_1$.`,
     before: ``,
     after: ``,
     link: '',
@@ -308,7 +313,7 @@ The two sequences are tightly linked. The relationship $L_n = F_{n-1} + F_{n+1}$
 
 @academic[formula_callout:Lucas-Fibonacci Relation
 $$L_n = F_{n-1} + F_{n+1}$$
-/algebra/formulas#lucas_fibonacci_relation]@
+/algebra/formulas#lucas-fibonacci_relation]@
 
 The Binet analogue for Lucas numbers is:
 

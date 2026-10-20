@@ -905,8 +905,7 @@ The degree and the standard form are defined in [definition and degree](!/algebr
 
 **Consequence.** The set of candidate rational roots is finite. List all divisors $p$ of $|a_0|$ and all divisors $q$ of $|a_n|$, then enumerate $\\pm p/q$. Every rational root must appear in this list. Test each candidate by plugging it in: if $P(p/q) = 0$, it is a root.
 
-@academic[example:Example
-For $2x^3 - 3x^2 - 8x + 12 = 0$, divisors of 12 are $\\{1, 2, 3, 4, 6, 12\\}$ and divisors of 2 are $\\{1, 2\\}$. Candidates are $\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm 1/2, \\pm 3/2$. Testing reveals $x = 3/2$, $x = 2$, $x = -2$ as the three roots.]@
+**Example.** For $2x^3 - 3x^2 - 8x + 12 = 0$, divisors of 12 are $\\{1, 2, 3, 4, 6, 12\\}$ and divisors of 2 are $\\{1, 2\\}$. Candidates are $\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm 1/2, \\pm 3/2$. Testing reveals $x = 3/2$, $x = 2$, $x = -2$ as the three roots.
 
 **Limitations.** The theorem says nothing about irrational roots. If a polynomial has only irrational or complex roots, the candidate list returns no hits and a numerical method is needed.
 
@@ -1162,12 +1161,11 @@ If every candidate turns out to be extraneous, the equation has no solution and 
 
 **Construction.** If the unique denominators in the equation are $d_1, d_2, \\ldots, d_k$, the solver builds the LCD as their product $d_1 \\cdot d_2 \\cdots d_k$ (factoring out common factors when feasible). For each fraction $n_i / d_i$, multiplying by the LCD leaves $n_i \\cdot (\\text{LCD} / d_i)$ &mdash; a polynomial.
 
-@academic[example:Example
-For $\\frac{1}{x} + \\frac{1}{x + 2} = \\frac{3}{4}$, the unique denominators are $x$, $x + 2$, and $4$, so $\\text{LCD} = 4x(x + 2)$. Multiplying every term by $4x(x + 2)$:
+**Example.** For $\\frac{1}{x} + \\frac{1}{x + 2} = \\frac{3}{4}$, the unique denominators are $x$, $x + 2$, and $4$, so $\\text{LCD} = 4x(x + 2)$. Multiplying every term by $4x(x + 2)$:
 
 $$4(x + 2) + 4x = 3x(x + 2)$$
 
-This is a polynomial equation, solvable by standard methods.]@
+This is a polynomial equation, solvable by standard methods.
 
 **The catch.** Multiplying by an expression that can equal zero is not an equivalence operation. If the LCD evaluates to zero at some candidate solution, that candidate was created by the multiplication and is not a true solution of the original equation. This is why the extraneous-check step matters.
 
@@ -2407,13 +2405,12 @@ $$|A| = \\begin{cases} A & \\text{if } A \\geq 0 \\\\ -A & \\text{if } A < 0 \\e
 
 So $|A| = c$ does not determine the sign of $A$. Both $A = c$ and $A = -c$ satisfy the equation. The solver must consider both possibilities and produce both solutions (or whichever turns out to be valid).
 
-@academic[example:Example
-$|x - 4| = 7$. The expression inside is $x - 4$. Two cases:
+**Example.** $|x - 4| = 7$. The expression inside is $x - 4$. Two cases:
 
 &bull; **Case 1**: $x - 4 = 7$, so $x = 11$.
 &bull; **Case 2**: $x - 4 = -7$, so $x = -3$.
 
-Check: $|11 - 4| = |7| = 7$ ✓ and $|{-3} - 4| = |{-7}| = 7$ ✓. Both solutions are valid.]@
+Check: $|11 - 4| = |7| = 7$ ✓ and $|{-3} - 4| = |{-7}| = 7$ ✓. Both solutions are valid.
 
 **Edge cases the solver detects automatically.**
 

@@ -1129,17 +1129,24 @@ obj2: {
   before: ``,
   content: `Every complex number can be written in [algebraic form](!/complex-numbers/algebraic-form) (also called **standard form**):
 
+@academic[formula_callout:Algebraic Form
 $$z = a + bi$$
+/complex-numbers/formulas#algebraic_form]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 The variables $a$ and $b$ represent ordinary real numbers, while $i$ is the imaginary unit satisfying:
 
-$$i^2 = -1$$
+@academic[formula_callout:Algebraic Representation and the Complex Conjugate
+$$i^2 = -1$$]@
 
 The letters $a$ and $b$ are conventional choices — using $x$ and $y$ or any other symbols works equally well. The symbols this section builds on — $i$, $Re(z)$, $Im(z)$, $\\bar{z}$ and the rest — are catalogued among the [complex number symbols](!/math-symbols/complex-numbers) with the [LaTeX](!/latex) code for each, and the [mathematical keyboard](!/keyboard) lets you type them directly.
 
 Mathematicians assigned names to these components. The value $a$ is called the **real part**, and the value $b$ is called the **imaginary part**:
 
-$$Re(z) = a \\quad \\text{and} \\quad Im(z) = b$$
+@academic[formula_callout:Algebraic Representation and the Complex Conjugate
+$$Re(z) = a \\quad \\text{and} \\quad Im(z) = b$$]@
 
 Note that the imaginary part is $b$ itself — a real number — not $bi$. The term "imaginary part" indicates which component of the number the value describes, not the nature of $b$ as a quantity.
 

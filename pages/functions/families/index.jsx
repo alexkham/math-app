@@ -1638,6 +1638,7 @@ import functionTypesDiagrams from '@/app/components/functions/types/functionType
 import functionPiecewiseDiagrams from '@/app/components/functions/piecewise/functionPiecewiseDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
 
 
 export async function getStaticProps(){
@@ -2513,7 +2514,8 @@ Cubic functions are one-to-one only when they have no turning points (monotonic 
     title: `Higher-Degree Polynomial Functions`,
     content: `Polynomial functions of degree $n \\geq 4$ extend the patterns established by quadratics and cubics.
 
-$$f(x) = a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0, \\quad a_n \\neq 0$$
+@academic[formula_callout:Higher-Degree Polynomial Functions
+$$f(x) = a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0, \\quad a_n \\neq 0$$]@
 
 [Domain](!/functions/domain): all real numbers.
 
@@ -2539,7 +2541,8 @@ Higher-degree polynomials are covered in detail in the algebra section on polyno
     title: `Rational Functions`,
     content: `A rational function is a ratio of two polynomials:
 
-$$f(x) = \\frac{P(x)}{Q(x)}$$
+@academic[formula_callout:Rational Functions
+$$f(x) = \\frac{P(x)}{Q(x)}$$]@
 
 The [domain](!/functions/domain) excludes values where $Q(x) = 0$. These exclusions create vertical asymptotes or holes.
 
@@ -2659,7 +2662,8 @@ The table below sets the even-n and odd-n cases side by side with their domains,
 
 The [piecewise](!/functions/piecewise) definition:
 
-$$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$$
+@academic[formula_callout:Absolute Value Function
+$$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$$]@
 
 [Domain](!/functions/domain): all real numbers.
 
@@ -2683,11 +2687,13 @@ Equations with absolute values often split into cases: $|x - 3| = 5$ means $x - 
 
 The floor function $\\lfloor x \\rfloor$ returns the greatest integer less than or equal to $x$:
 
-$$\\lfloor 2.7 \\rfloor = 2, \\quad \\lfloor -0.3 \\rfloor = -1, \\quad \\lfloor 4 \\rfloor = 4$$
+@academic[formula_callout:Step Functions
+$$\\lfloor 2.7 \\rfloor = 2, \\quad \\lfloor -0.3 \\rfloor = -1, \\quad \\lfloor 4 \\rfloor = 4$$]@
 
 The ceiling function $\\lceil x \\rceil$ returns the least integer greater than or equal to $x$:
 
-$$\\lceil 2.7 \\rceil = 3, \\quad \\lceil -0.3 \\rceil = 0, \\quad \\lceil 4 \\rceil = 4$$
+@academic[formula_callout:Step Functions
+$$\\lceil 2.7 \\rceil = 3, \\quad \\lceil -0.3 \\rceil = 0, \\quad \\lceil 4 \\rceil = 4$$]@
 
 [Domain](!/functions/domain): all real numbers.
 
@@ -2731,7 +2737,8 @@ Detailed treatment appears in the algebra section on exponential functions.`,
 
 The logarithm answers: to what power must $b$ be raised to produce $x$?
 
-$$\\log_b(x) = y \\iff b^y = x$$
+@academic[formula_callout:Logarithmic Functions
+$$\\log_b(x) = y \\iff b^y = x$$]@
 
 [Domain](!/functions/domain): $(0, \\infty)$ — only positive inputs.
 
@@ -3043,8 +3050,26 @@ const faqQuestions = {
     ],
   };
 
+  const familyGrowthLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Growth for large $x$',
+    preface: 'The function families on this page grow at very different speeds. From the top down, each family eventually outgrows every family below it.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'The two overtakes to remember',
+    conclusion: 'Eventually, exponentials overtake any polynomial, and polynomials overtake any logarithm.',
+    axis: { top: 'fastest', label: 'growth for large x', bottom: 'slowest' },
+    levels: [
+      { id: 'exp', name: 'Exponential', sub: '$2^x$, $e^x$ — fastest' },
+      { id: 'poly', name: 'Polynomial', sub: '$x^2$, $x^3$' },
+      { id: 'lin', name: 'Linear', sub: '$x$' },
+      { id: 'root', name: 'Root', sub: '$\\sqrt{x}$, $\\sqrt[3]{x}$' },
+      { id: 'log', name: 'Logarithmic', sub: '$\\ln x$ — slowest' },
+    ],
+  };
+
    return {
       props:{
+    familyGrowthLevels,
     rationalAsymptoteCases,
     demoUnits,
          sectionsContent,
@@ -3068,7 +3093,9 @@ const faqQuestions = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function FamiliesPage({rationalAsymptoteCases, 
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function FamiliesPage({familyGrowthLevels, rationalAsymptoteCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -3268,6 +3295,14 @@ export default function FamiliesPage({rationalAsymptoteCases,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj17Table }}
           />,
+          <DiagramFrame
+            key={'obj17-diagram'}
+            id="function-family-growth-pyramid"
+            title="Function families by growth"
+            source="/functions/families"
+          >
+            <Hierarchy data={familyGrowthLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+          </DiagramFrame>,
         ]
     },
     {

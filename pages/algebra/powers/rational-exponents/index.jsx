@@ -213,11 +213,13 @@ obj2: {
   title: `Roots as Powers`,
   content: `The argument for $a^{1/2}$ generalizes immediately. If $a^{1/n}$ is multiplied by itself $n$ times, the product rule gives:
 
-$$\\underbrace{a^{1/n} \\cdot a^{1/n} \\cdots a^{1/n}}_{n \\text{ times}} = a^{n \\cdot (1/n)} = a^1 = a$$
+@academic[formula_callout:Roots as Powers
+$$\\underbrace{a^{1/n} \\cdot a^{1/n} \\cdots a^{1/n}}_{n \\text{ times}} = a^{n \\cdot (1/n)} = a^1 = a$$]@
 
 So $a^{1/n}$ must be the number whose $n$th power is $a$ — that is, the $n$th root of $a$:
 
-$$a^{1/n} = \\sqrt[n]{a}$$
+@academic[formula_callout:Roots as Powers
+$$a^{1/n} = \\sqrt[n]{a}$$]@
 
 Root notation and exponent notation are two ways of writing the same thing. The expression $\\sqrt[3]{8}$ and $8^{1/3}$ both equal $2$, because $2^3 = 8$. The expression $\\sqrt[4]{16}$ and $16^{1/4}$ both equal $2$, because $2^4 = 16$. The expression $27^{1/3} = \\sqrt[3]{27} = 3$, because $3^3 = 27$.
 
@@ -231,9 +233,11 @@ obj3: {
   title: `Fractional Exponents`,
   content: `A rational exponent with a numerator other than $1$ combines a root and a power. The expression $a^{m/n}$ can be interpreted in two equivalent ways:
 
-$$a^{m/n} = \\left(a^{1/n}\\right)^m = \\left(\\sqrt[n]{a}\\right)^m$$
+@academic[formula_callout:Fractional Exponents
+$$a^{m/n} = \\left(a^{1/n}\\right)^m = \\left(\\sqrt[n]{a}\\right)^m$$]@
 
-$$a^{m/n} = \\left(a^m\\right)^{1/n} = \\sqrt[n]{a^m}$$
+@academic[formula_callout:Fractional Exponents
+$$a^{m/n} = \\left(a^m\\right)^{1/n} = \\sqrt[n]{a^m}$$]@
 
 Both routes produce the same result — the power of a power rule guarantees this — but one path may be computationally easier than the other.
 
@@ -291,7 +295,8 @@ obj4: {
   title: `Negative Rational Exponents`,
   content: `A negative rational exponent combines the reciprocal interpretation from [negative exponents](!/algebra/powers/negative-exponents) with the root-and-power interpretation of fractional exponents. The expression $a^{-m/n}$ means:
 
-$$a^{-m/n} = \\frac{1}{a^{m/n}}$$
+@academic[formula_callout:Negative Rational Exponents
+$$a^{-m/n} = \\frac{1}{a^{m/n}}$$]@
 
 The negative sign takes the reciprocal; the fraction $m/n$ handles the root and power.
 

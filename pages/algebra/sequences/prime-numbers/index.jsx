@@ -199,7 +199,8 @@ const sectionsContent = {
 
 The first primes are:
 
-$$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, \\ldots$$
+@academic[formula_callout:Definition
+$$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, \\ldots$$]@
 
 The number $2$ is the only even prime — every other even number is divisible by $2$ and therefore composite. The number $1$ is neither prime nor composite: it has exactly one positive divisor (itself), while primes are required to have exactly two.
 
@@ -214,7 +215,8 @@ The exclusion of $1$ is not arbitrary. If $1$ were prime, the fundamental theore
 
 Assume, for contradiction, that only finitely many primes exist: $p_1, p_2, \\ldots, p_k$. Form the number:
 
-$$N = p_1 \\cdot p_2 \\cdot p_3 \\cdots p_k + 1$$
+@academic[formula_callout:Infinitude of Primes
+$$N = p_1 \\cdot p_2 \\cdot p_3 \\cdots p_k + 1$$]@
 
 Dividing $N$ by any prime $p_i$ on the list leaves a remainder of $1$, so $N$ is not divisible by any of the listed primes. Either $N$ is itself prime (a prime missing from the list) or $N$ has a prime factor not on the list. In either case, the original list is incomplete.
 
@@ -261,7 +263,8 @@ Trial division works well for numbers up to several digits. For very large numbe
     title: `Prime Factorization`,
     content: `The **fundamental theorem of arithmetic** states that every integer greater than $1$ can be expressed as a product of prime numbers, and this factorization is unique up to the order of the factors.
 
-$$60 = 2^2 \\cdot 3 \\cdot 5, \\quad 360 = 2^3 \\cdot 3^2 \\cdot 5, \\quad 1001 = 7 \\cdot 11 \\cdot 13$$
+@academic[formula_callout:Prime Factorization
+$$60 = 2^2 \\cdot 3 \\cdot 5, \\quad 360 = 2^3 \\cdot 3^2 \\cdot 5, \\quad 1001 = 7 \\cdot 11 \\cdot 13$$]@
 
 No matter how the factorization is carried out — whether starting by dividing out $2$s or by noticing that $1001 = 7 \\times 143$ — the final set of prime factors and their multiplicities is always the same.
 

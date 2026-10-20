@@ -813,6 +813,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 import reflectionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/reflection/reflectionDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1136,11 +1137,11 @@ For the matrix above, this evaluates to $ad - bc = \\det(A)$.
 
 The sign encodes orientation. When $\\det(A) > 0$, the pair $(\\mathbf{u}, \\mathbf{v})$ follows the standard counterclockwise ordering — rotating from $\\mathbf{u}$ toward $\\mathbf{v}$ sweeps counterclockwise. When $\\det(A) < 0$, the pair is clockwise. When $\\det(A) = 0$, the two vectors are parallel and the parallelogram degenerates to a line segment with zero area.
 
-## Example
+@academic[example:Example
 
 For $A = \\begin{pmatrix} 3 & 1 \\\\ 0 & 4 \\end{pmatrix}$, the columns are $(3, 0)$ and $(1, 4)$. The determinant is $3 \\cdot 4 - 1 \\cdot 0 = 12$. The parallelogram has area $12$, and since the sign is positive, the columns are counterclockwise-ordered.
 
-For $A = \\begin{pmatrix} 1 & 3 \\\\ 4 & 0 \\end{pmatrix}$, the determinant is $1 \\cdot 0 - 3 \\cdot 4 = -12$. The area is still $12$, but the negative sign means the columns are clockwise-ordered — swapping the columns reversed the orientation.`,
+For $A = \\begin{pmatrix} 1 & 3 \\\\ 4 & 0 \\end{pmatrix}$, the determinant is $1 \\cdot 0 - 3 \\cdot 4 = -12$. The area is still $12$, but the negative sign means the columns are clockwise-ordered — swapping the columns reversed the orientation.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1198,11 +1199,11 @@ The [dot product](!/linear-algebra/vectors/dot-product) projects $\\mathbf{a}$ o
 
 The sign reflects handedness. When $\\det(A) > 0$, the three column vectors form a right-handed system — the same orientation as the standard basis $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_3$. When $\\det(A) < 0$, they form a left-handed system. When $\\det(A) = 0$, the three vectors are coplanar and the parallelepiped is flat.
 
-## Example
+@academic[example:Example
 
 Let $\\mathbf{a} = (1, 0, 0)$, $\\mathbf{b} = (0, 2, 0)$, $\\mathbf{c} = (0, 0, 3)$. The matrix $A = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 3 \\end{pmatrix}$ has $\\det(A) = 6$. The parallelepiped is an axis-aligned box with side lengths $1, 2, 3$ and volume $6$, oriented right-handedly.
 
-Swapping two columns — say placing $\\mathbf{b}$ first and $\\mathbf{a}$ second — gives $\\det = -6$. The volume is unchanged, but the orientation flips to left-handed.`,
+Swapping two columns — say placing $\\mathbf{b}$ first and $\\mathbf{a}$ second — gives $\\det = -6$. The volume is unchanged, but the orientation flips to left-handed.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1257,7 +1258,8 @@ A singular matrix ($\\det = 0$) is a transformation that is not bijective. It ma
     title: `The Change-of-Variables Formula`,
     content: `The geometric interpretation of the determinant extends beyond linear maps through the change-of-variables formula in multivariable integration. Given a differentiable transformation $T: \\mathbb{R}^n \\to \\mathbb{R}^n$, the formula reads
 
-$$\\int f(\\mathbf{y}) \\, d\\mathbf{y} = \\int f(T(\\mathbf{x})) \\, |\\det(J_T(\\mathbf{x}))| \\, d\\mathbf{x}$$
+@academic[formula_callout:The Change-of-Variables Formula
+$$\\int f(\\mathbf{y}) \\, d\\mathbf{y} = \\int f(T(\\mathbf{x})) \\, |\\det(J_T(\\mathbf{x}))| \\, d\\mathbf{x}$$]@
 
 where $J_T(\\mathbf{x})$ is the Jacobian matrix of $T$ at the point $\\mathbf{x}$ — the $n \\times n$ matrix of all partial derivatives $\\frac{\\partial T_i}{\\partial x_j}$.
 
@@ -1521,8 +1523,43 @@ const schemas = {
     ],
   };
 
+  const signedAreaCases = {
+    prefaceTitle: 'What the sign says',
+    preface: 'The columns $\\mathbf{u}$ and $\\mathbf{v}$ of a $2 \\times 2$ matrix span a parallelogram, and $\\det(A) = ad - bc$ is its signed area. The sign encodes orientation.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'The size is the area, the sign is the orientation: $\\det = 12$ and $\\det = -12$ give the same area, and swapping the columns reverses the orientation.',
+    parent: {
+      kicker: 'Signed area',
+      formula: '$\\det(A) = ad - bc$',
+      splitBy: 'the sign of $\\det(A)$',
+    },
+    cases: [
+      {
+        id: 'ccw', condition: '$\\det(A) > 0$',
+        count: { n: '+' },
+        headline: 'Counterclockwise',
+        desc: 'rotating from $\\mathbf{u}$ toward $\\mathbf{v}$ sweeps counterclockwise',
+        example: 'columns $(3, 0)$, $(1, 4)$: $\\det = 12$',
+      },
+      {
+        id: 'cw', condition: '$\\det(A) < 0$',
+        count: { n: '−' },
+        headline: 'Clockwise',
+        desc: 'the pair is clockwise-ordered',
+        example: 'columns $(1, 4)$, $(3, 0)$: $\\det = -12$',
+      },
+      {
+        id: 'flat', condition: '$\\det(A) = 0$',
+        count: { n: '0' },
+        headline: 'Parallel',
+        desc: 'the parallelogram degenerates to a line segment with zero area',
+      },
+    ],
+  };
+
    return {
   props: {
+    signedAreaCases,
     detSignCases,
     detScaleCases,
     demoUnits,
@@ -1546,7 +1583,7 @@ const schemas = {
 
  const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DeterminantGeometryPage({detSignCases, detScaleCases, 
+export default function DeterminantGeometryPage({signedAreaCases, detSignCases, detScaleCases, 
    seoData,
    sectionsContent,
    introContent,
@@ -1566,6 +1603,14 @@ export default function DeterminantGeometryPage({detSignCases, detScaleCases,
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <DiagramFrameV2
+            key={'obj1-diagram'}
+            id="determinant-signed-area-cases"
+            title="The sign of a 2×2 determinant"
+            source="/linear-algebra/determinants/geometry"
+          >
+            <CaseSplit data={signedAreaCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrameV2>,
                   <div key={'unit-signedarea'} dangerouslySetInnerHTML={{ __html: demoUnits.signedarea }} />,
           `The sign of that number, set aside for now, is what the orientation section below is about.`,
         ]
@@ -1595,14 +1640,14 @@ export default function DeterminantGeometryPage({detSignCases, detScaleCases,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <DiagramFrame
+          <DiagramFrameV2
             key={'obj2-diagram'}
             id="determinant-sign-volume-cases"
             title="The sign of the determinant in three dimensions"
             source="/linear-algebra/determinants/geometry"
           >
             <CaseSplit data={detSignCases} variant="poster" proseStyle="cards" theme={figureTheme} />
-          </DiagramFrame>,
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -1611,14 +1656,14 @@ export default function DeterminantGeometryPage({detSignCases, detScaleCases,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <DiagramFrame
+          <DiagramFrameV2
             key={'obj3-diagram'}
             id="determinant-volume-scaling-cases"
             title="The size of the determinant: four regimes"
             source="/linear-algebra/determinants/geometry"
           >
             <CaseSplit data={detScaleCases} variant="poster" proseStyle="cards" theme={figureTheme} />
-          </DiagramFrame>,
+          </DiagramFrameV2>,
         ]
     },
     {

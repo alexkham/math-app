@@ -799,6 +799,8 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1075,7 +1077,8 @@ const sectionsContent = {
     title: `Magnitude`,
     content: `Every vector has a magnitude — a single non-negative number that measures its size. For a vector $\\mathbf{v} = (v_1, v_2, \\ldots, v_n)$ in $\\mathbb{R}^n$, the magnitude is given by the Euclidean norm:
 
-$$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$
+@academic[formula_callout:Magnitude
+$$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$]@
 
 Magnitude is an intrinsic property: it belongs to the vector and does not depend on any other vector or operation. It is always non-negative, and the only vector with magnitude zero is the zero vector $\\mathbf{0}$. This makes magnitude a reliable indicator of whether a vector is trivial — a vector is the zero vector if and only if its magnitude vanishes.
 
@@ -1167,8 +1170,7 @@ Dimension is fixed by the space, not by the vector. Every vector in $\\mathbb{R}
     content: `Two vectors are equal when every one of their corresponding components matches. For $\\mathbf{a} = (a_1, a_2, \\ldots, a_n)$ and $\\mathbf{b} = (b_1, b_2, \\ldots, b_n)$:
 
 @academic[formula_callout:Vector Equality
-$$\\mathbf{a} = \\mathbf{b} \\iff a_i = b_i \\text{ for every } i = 1, 2, \\ldots, n$$
-/linear-algebra/formulas#vector_equality]@
+$$\\mathbf{a} = \\mathbf{b} \\iff a_i = b_i \\text{ for every } i = 1, 2, \\ldots, n$$]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
@@ -1185,8 +1187,7 @@ For free vectors — vectors defined by magnitude and direction alone, without a
     content: `Two vectors are parallel when one is a scalar multiple of the other. For $\\mathbf{a}$ and $\\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$:
 
 @academic[formula_callout:Parallel Vectors
-$$\\mathbf{a} \\parallel \\mathbf{b} \\iff \\mathbf{a} = c\\mathbf{b} \\text{ for some } c \\in \\mathbb{R}$$
-/linear-algebra/formulas#parallel_vectors]@
+$$\\mathbf{a} \\parallel \\mathbf{b} \\iff \\mathbf{a} = c\\mathbf{b} \\text{ for some } c \\in \\mathbb{R}$$]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
@@ -1206,7 +1207,8 @@ Parallelism is the simplest instance of linear dependence. Two vectors are linea
     title: `Orthogonality`,
     content: `Two vectors are orthogonal when their [dot product](!/linear-algebra/vectors/dot-product) equals zero:
 
-$$\\mathbf{a} \\perp \\mathbf{b} \\quad \\Longleftrightarrow \\quad \\mathbf{a} \\cdot \\mathbf{b} = 0$$
+@academic[formula_callout:Orthogonality
+$$\\mathbf{a} \\perp \\mathbf{b} \\quad \\Longleftrightarrow \\quad \\mathbf{a} \\cdot \\mathbf{b} = 0$$]@
 
 In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, orthogonality corresponds to perpendicularity — the two vectors meet at a right angle. The algebraic condition $a_1b_1 + a_2b_2 + \\cdots + a_nb_n = 0$ translates the geometric concept of a $90°$ angle into a computation that works in any dimension, including those beyond visualization.
 
@@ -1357,8 +1359,41 @@ const schemas = {
   };
 
 
+  const parallelCases = {
+    prefaceTitle: 'Same line, three ways',
+    preface: 'Two vectors are parallel when one is a scalar multiple of the other: $\\mathbf{a} = c\\mathbf{b}$. The value of $c$ says how they lie along that line.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'For a pair of vectors, being parallel and being linearly dependent are the same thing.',
+    parent: {
+      kicker: 'Parallel vectors',
+      formula: '$\\mathbf{a} = c\\mathbf{b}$',
+      splitBy: 'the scalar $c$',
+    },
+    cases: [
+      {
+        id: 'same', condition: '$c > 0$',
+        count: { n: '+' },
+        headline: 'Same direction',
+        desc: 'parallel in the strict sense',
+      },
+      {
+        id: 'anti', condition: '$c < 0$',
+        count: { n: '−' },
+        headline: 'Opposite directions',
+        desc: 'anti-parallel',
+      },
+      {
+        id: 'zero', condition: '$c = 0$',
+        count: { n: '0' },
+        headline: 'The zero vector',
+        desc: 'by convention $\\mathbf{0} = 0\\mathbf{b}$ is parallel to every vector',
+      },
+    ],
+  };
+
    return {
   props: {
+    parallelCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1376,7 +1411,9 @@ const schemas = {
   }
 }
    }
-export default function VectorPropertiesPage({seoData, sectionsContent, introContent, obj6Table, vectorProperties, faqQuestions, schemas, demoUnits}) {
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function VectorPropertiesPage({parallelCases, seoData, sectionsContent, introContent, obj6Table, vectorProperties, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1438,6 +1475,14 @@ export default function VectorPropertiesPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrameV2
+            key={'obj5-diagram'}
+            id="parallel-vectors-scalar-cases"
+            title="Parallel vectors: the sign of c"
+            source="/linear-algebra/vectors/properties"
+          >
+            <CaseSplit data={parallelCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrameV2>,
                   <div key={'unit-parallel'} dangerouslySetInnerHTML={{ __html: demoUnits.parallel }} />,
           `This is the first appearance of an idea the vector-spaces pages return to constantly: what matters is not how many vectors you have but how many directions they supply.`,
         ]

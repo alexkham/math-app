@@ -2573,6 +2573,8 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -2723,7 +2725,8 @@ For finite sets, cardinality is determined by counting. If $A = \\{a, b, c\\}$, 
 
 The empty set contains no elements:
 
-$$|\\emptyset| = 0$$
+@academic[formula_callout:Definition of Cardinality
+$$|\\emptyset| = 0$$]@
 
 Two sets have the same cardinality when a bijection (one-to-one correspondence) exists between them. For finite sets, this simply means they have the same count. For infinite sets, this definition becomes the primary tool for comparing sizes.
     `,
@@ -2736,7 +2739,8 @@ Two sets have the same cardinality when a bijection (one-to-one correspondence) 
     content: `
 A set is finite if its elements can be counted with a natural number. Formally, a set $A$ is finite if there exists some $n \\in \\mathbb{N}$ such that:
 
-$$|A| = n$$
+@academic[formula_callout:Finite Sets
+$$|A| = n$$]@
 
 This means a bijection exists between $A$ and the set $\\{1, 2, 3, \\ldots, n\\}$.
 
@@ -2807,13 +2811,15 @@ Not all infinite sets have the same cardinality. The integers and rationals turn
     content: `
 A set is countably infinite if its elements can be put in one-to-one correspondence with the natural numbers $\\mathbb{N}$. Such a set can be listed as a sequence:
 
-$$a_1, a_2, a_3, \\ldots$$
+@academic[formula_callout:Countable Sets
+$$a_1, a_2, a_3, \\ldots$$]@
 
 where every element appears exactly once.
 
 The integers $\\mathbb{Z}$ are countable. The listing:
 
-$$0, 1, -1, 2, -2, 3, -3, \\ldots$$
+@academic[formula_callout:Countable Sets
+$$0, 1, -1, 2, -2, 3, -3, \\ldots$$]@
 
 establishes a bijection with $\\mathbb{N}$.
 
@@ -3085,8 +3091,26 @@ const schemas = {
     }),
   };
 
+  const cardinalityLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'A strict hierarchy of sizes',
+    preface: 'The sets on this page arrange themselves by size, from the empty set up through the finite sets, the countable infinity, the continuum, and beyond.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'The tower never ends',
+    conclusion: 'Cantor\'s theorem guarantees it: for every set, its power set is strictly larger, so $\\mathcal{P}(\\mathbb{R})$, $\\mathcal{P}(\\mathcal{P}(\\mathbb{R}))$, … keep climbing without end.',
+    axis: { top: 'largest', label: 'cardinality', bottom: 'smallest' },
+    levels: [
+      { id: 'beyond', name: 'Beyond the continuum', sub: '$2^{\\mathfrak{c}}$: $\\mathcal{P}(\\mathbb{R})$' },
+      { id: 'c', name: 'The continuum', sub: '$\\mathfrak{c} = 2^{\\aleph_0}$: $\\mathbb{R}$, any interval' },
+      { id: 'aleph0', name: 'Countably infinite', sub: '$\\aleph_0$: $\\mathbb{N}$, $\\mathbb{Z}$, $\\mathbb{Q}$' },
+      { id: 'finite', name: 'Finite', sub: '$n$: $\\{1, 2, \\ldots, n\\}$' },
+      { id: 'empty', name: 'Empty', sub: '$0$: $\\varnothing$' },
+    ],
+  };
+
   return {
   props: {
+    cardinalityLevels,
     sectionsContent,
     introContent,
     obj5Table,
@@ -3107,7 +3131,9 @@ const schemas = {
    }
 
 
-export default function CardinalityPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function CardinalityPage({cardinalityLevels, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3223,6 +3249,14 @@ export default function CardinalityPage({seoData, sectionsContent, introContent,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="cardinality-hierarchy-pyramid"
+            title="A hierarchy of cardinalities"
+            source="/set-theory/cardinality"
+          >
+            <Hierarchy data={cardinalityLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+          </DiagramFrame>,
         ]
     },
 

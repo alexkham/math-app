@@ -661,6 +661,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
 import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gaussEliminationDiagrams'
 import matrixProductDiagrams from '@/app/components/linear-algebra/multiplication/matrixProductDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -803,10 +805,14 @@ const sectionsContent = {
     title: `What a Linear System Is`,
     content: `A linear system is a set of $m$ equations in $n$ unknowns where each equation is a linear combination of the unknowns equal to a constant:
 
-$$a_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n = b_1$$
-$$a_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n = b_2$$
-$$\\vdots$$
-$$a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m$$
+@academic[formula_callout:What a Linear System Is
+$$a_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n = b_1$$]@
+@academic[formula_callout:What a Linear System Is
+$$a_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n = b_2$$]@
+@academic[formula_callout:What a Linear System Is
+$$\\vdots$$]@
+@academic[formula_callout:What a Linear System Is
+$$a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m$$]@
 
 "Linear" means no products of unknowns, no powers higher than $1$, and no transcendental functions of unknowns. The expression $3x_1 - 2x_2 + x_3 = 7$ is linear; the expression $x_1 x_2 + x_3^2 = 1$ is not.
 
@@ -830,7 +836,12 @@ where $A$ is the $m \\times n$ coefficient matrix with entry $a_{ij}$ in row $i$
 
 Each row of $A$ corresponds to one equation. Each column corresponds to one unknown. The matrix-vector product $A\\mathbf{x}$ is a [linear combination](!/linear-algebra/vectors/linear-combinations) of the columns of $A$ weighted by the entries of $\\mathbf{x}$:
 
+@academic[formula_callout:Matrix-Vector Product (Column Form)
 $$A\\mathbf{x} = x_1 \\mathbf{a}_1 + x_2 \\mathbf{a}_2 + \\cdots + x_n \\mathbf{a}_n$$
+/linear-algebra/formulas#matrix-vector_product_column_form]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Asking whether $A\\mathbf{x} = \\mathbf{b}$ has a solution is therefore equivalent to asking whether $\\mathbf{b}$ lies in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ — whether $\\mathbf{b}$ can be assembled from the columns using some choice of weights.`,
     before: ``,
@@ -1088,8 +1099,41 @@ const schemas = {
     }),
   };
 
+  const linesGeometryCases = {
+    prefaceTitle: 'Two lines in the plane',
+    preface: 'Each equation of a linear system is a hyperplane, and the solution set is where they all meet. For two equations in two unknowns each equation is a line in $\\mathbb{R}^2$, and how the two lines lie decides the outcome.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'The same classification persists in higher dimensions: three planes in $\\mathbb{R}^3$ can meet in a point, along a line, or not at all, including the triangular prism arrangement where each pair meets but no point lies on all three.',
+    parent: {
+      kicker: 'Two equations, two unknowns',
+      formula: 'two lines in $\\mathbb{R}^2$',
+      splitBy: 'how the two lines lie',
+    },
+    cases: [
+      {
+        id: 'cross', condition: 'distinct, not parallel',
+        count: { n: '1', label: 'solution' },
+        headline: 'Meet at one point',
+        desc: 'a unique solution',
+      },
+      {
+        id: 'parallel', condition: 'parallel',
+        count: { n: '0', label: 'solutions' },
+        headline: 'Never meet',
+        desc: 'no solution',
+      },
+      {
+        id: 'same', condition: 'coincident',
+        count: { n: '∞', label: 'solutions' },
+        headline: 'Overlap entirely',
+        desc: 'the same line described twice: infinitely many solutions',
+      },
+    ],
+  };
+
 return {
   props:{
+    linesGeometryCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1109,7 +1153,9 @@ return {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function LinearSystemsPage({
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function LinearSystemsPage({linesGeometryCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1171,6 +1217,14 @@ export default function LinearSystemsPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="two-lines-solution-cases"
+            title="Two equations, two unknowns: how the lines meet"
+            source="/linear-algebra/linear-systems"
+          >
+            <CaseSplit data={linesGeometryCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

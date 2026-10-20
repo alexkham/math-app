@@ -227,7 +227,8 @@ A limit answers the question: what value does $f(x)$ approach as $x$ approaches 
 
 The notation
 
-$$\\lim_{x \\to a} f(x) = L$$
+@academic[formula_callout:The Central Idea of a Limit
+$$\\lim_{x \\to a} f(x) = L$$]@
 
 states that $f(x)$ gets arbitrarily close to $L$ as $x$ gets sufficiently close to $a$. "Arbitrarily close" means closer than any positive distance you specify. "Sufficiently close" means there exists some neighborhood around $a$ where this closeness holds.
 
@@ -252,7 +253,8 @@ A function may bounce between values without settling. Consider $\\sin(1/x)$ as 
 
 A function may grow without bound rather than approach a finite value. When
 
-$$\\lim_{x \\to a} f(x) = \\infty$$
+@academic[formula_callout:Limits That Fail to Exist
+$$\\lim_{x \\to a} f(x) = \\infty$$]@
 
 we say the function has an [infinite limit](!/calculus/limits/infinity), but this means the limit in the usual finite sense does not exist. The notation describes unbounded growth, not convergence to a number.
 
@@ -271,13 +273,15 @@ Recognizing these failure modes is as important as computing limits that do exis
     content: `
 The standard limit notation
 
-$$\\lim_{x \\to a} f(x) = L$$
+@academic[formula_callout:Two-Sided Limits
+$$\\lim_{x \\to a} f(x) = L$$]@
 
 requires $x$ to approach $a$ from both directions simultaneously. Values less than $a$ must yield function outputs approaching $L$, and values greater than $a$ must do the same. This is the [two-sided limit](!/calculus/limits/two-sided).
 
 The existence condition is precise: a two-sided limit exists if and only if both one-sided limits exist and are equal. If
 
-$$\\lim_{x \\to a^-} f(x) = L \\quad \\text{and} \\quad \\lim_{x \\to a^+} f(x) = L$$
+@academic[formula_callout:Two-Sided Limits
+$$\\lim_{x \\to a^-} f(x) = L \\quad \\text{and} \\quad \\lim_{x \\to a^+} f(x) = L$$]@
 
 then the two-sided limit equals $L$. If the one-sided limits differ, or if either fails to exist, the two-sided limit does not exist.
 
@@ -296,11 +300,13 @@ Sometimes only one direction of approach matters—or the two directions behave 
 
 The left-hand limit uses a minus superscript:
 
-$$\\lim_{x \\to a^-} f(x)$$
+@academic[formula_callout:One-Sided Limits
+$$\\lim_{x \\to a^-} f(x)$$]@
 
 Here $x$ approaches $a$ through values less than $a$ only. The right-hand limit uses a plus superscript:
 
-$$\\lim_{x \\to a^+} f(x)$$
+@academic[formula_callout:One-Sided Limits
+$$\\lim_{x \\to a^+} f(x)$$]@
 
 Here $x$ approaches $a$ through values greater than $a$ only.
 
@@ -319,11 +325,15 @@ Computing limits directly from definitions is tedious. [Limit rules](!/calculus/
 
 If both $\\lim_{x \\to a} f(x)$ and $\\lim_{x \\to a} g(x)$ exist, then:
 
-$$\\lim_{x \\to a} [f(x) + g(x)] = \\lim_{x \\to a} f(x) + \\lim_{x \\to a} g(x)$$
+@academic[formula_callout:Limit Rules
+$$\\lim_{x \\to a} [f(x) + g(x)] = \\lim_{x \\to a} f(x) + \\lim_{x \\to a} g(x)$$]@
 
+@academic[formula_callout:Product Rule (Limits)
 $$\\lim_{x \\to a} [f(x) \\cdot g(x)] = \\lim_{x \\to a} f(x) \\cdot \\lim_{x \\to a} g(x)$$
+/calculus/formulas#product_rule_limits]@
 
-$$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\frac{\\lim_{x \\to a} f(x)}{\\lim_{x \\to a} g(x)} \\quad \\text{provided } \\lim_{x \\to a} g(x) \\neq 0$$
+@academic[formula_callout:Limit Rules
+$$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\frac{\\lim_{x \\to a} f(x)}{\\lim_{x \\to a} g(x)} \\quad \\text{provided } \\lim_{x \\to a} g(x) \\neq 0$$]@
 
 Similar rules hold for differences, constant multiples, and powers. The critical requirement: the component limits must exist. When they don't—when you encounter indeterminate forms like $0/0$—these rules cannot be applied directly.
 
@@ -344,7 +354,8 @@ When substitution yields an indeterminate form—most commonly $0/0$—the expre
 
 If both numerator and denominator vanish at $a$, they share a common factor of $(x - a)$. Factor it out, cancel, and substitute again:
 
-$$\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2} = \\lim_{x \\to 2} \\frac{(x-2)(x+2)}{x-2} = \\lim_{x \\to 2} (x + 2) = 4$$
+@academic[formula_callout:Evaluating Limits
+$$\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2} = \\lim_{x \\to 2} \\frac{(x-2)(x+2)}{x-2} = \\lim_{x \\to 2} (x + 2) = 4$$]@
 
 ## Rationalizing
 
@@ -363,19 +374,34 @@ Certain limits appear so frequently that memorizing them pays dividends. These [
 
 The fundamental trigonometric limit:
 
+@academic[formula_callout:Sine Limit at Zero
 $$\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$$
+/calculus/formulas#sine_limit_at_zero]@
+
+@academic[formulas_link:Browse all calculus formulas
+/calculus/formulas]@
 
 This holds when $x$ is measured in radians. It underlies the derivatives of sine and cosine.
 
 The fundamental exponential limit:
 
+@academic[formula_callout:Exponential Limit at Zero
 $$\\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1$$
+/calculus/formulas#exponential_limit_at_zero]@
+
+@academic[formulas_link:Browse all calculus formulas
+/calculus/formulas]@
 
 This defines the derivative of $e^x$ at $x = 0$.
 
 The definition of $e$ itself emerges from a limit:
 
+@academic[formula_callout:Definition of e as a Limit
 $$\\lim_{x \\to \\infty} \\left(1 + \\frac{1}{x}\\right)^x = e$$
+/calculus/formulas#definition_of_e_as_a_limit]@
+
+@academic[formulas_link:Browse all calculus formulas
+/calculus/formulas]@
 
 These results serve as building blocks for evaluating more complex expressions.
 `,
@@ -388,13 +414,15 @@ These results serve as building blocks for evaluating more complex expressions.
     content: `
 Infinity enters limits in two distinct ways. [Limits at infinity](!/calculus/limits/infinity) ask what happens to $f(x)$ as $x$ grows without bound:
 
-$$\\lim_{x \\to \\infty} f(x) \\quad \\text{or} \\quad \\lim_{x \\to -\\infty} f(x)$$
+@academic[formula_callout:Limits and Infinity
+$$\\lim_{x \\to \\infty} f(x) \\quad \\text{or} \\quad \\lim_{x \\to -\\infty} f(x)$$]@
 
 These describe end behavior. When such a limit equals a finite value $L$, the line $y = L$ is a horizontal asymptote.
 
 [Infinite limits](!/calculus/limits/infinity) describe functions that grow without bound as $x$ approaches a finite value:
 
-$$\\lim_{x \\to a} f(x) = \\infty \\quad \\text{or} \\quad \\lim_{x \\to a} f(x) = -\\infty$$
+@academic[formula_callout:Limits and Infinity
+$$\\lim_{x \\to a} f(x) = \\infty \\quad \\text{or} \\quad \\lim_{x \\to a} f(x) = -\\infty$$]@
 
 When this occurs, the line $x = a$ is a vertical asymptote.
 
@@ -409,7 +437,8 @@ For rational functions, dominant term analysis determines behavior at infinity. 
     content: `
 A function is [continuous](!/calculus/limits/continuity) at $x = a$ when the limit equals the function value:
 
-$$\\lim_{x \\to a} f(x) = f(a)$$
+@academic[formula_callout:Continuity
+$$\\lim_{x \\to a} f(x) = f(a)$$]@
 
 This single equation encodes three requirements. First, $f(a)$ must be defined—the function must have a value at $a$. Second, the limit must exist—$f(x)$ must approach some definite value as $x \\to a$. Third, these two values must match.
 
@@ -442,7 +471,8 @@ Calculus begins with a deceptively simple question: what value does a function a
 
 Limits formalize the intuition of "getting arbitrarily close." The notation
 
-$$\\lim_{x \\to a} f(x) = L$$
+@academic[formula_callout:Summary: Navigating the Limits Subtree
+$$\\lim_{x \\to a} f(x) = L$$]@
 
 means that $f(x)$ can be made as close to $L$ as desired by taking $x$ sufficiently close to $a$. The function need not be defined at $a$, and even if it is, the value $f(a)$ plays no role in determining the limit. Only the approach matters.
 

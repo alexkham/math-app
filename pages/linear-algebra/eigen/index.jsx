@@ -588,6 +588,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiagrams'
 import eigenVectorsDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -737,7 +739,12 @@ These are the vectors that the [linear transformation](!/linear-algebra/transfor
     title: `Definition`,
     content: `For an $n \\times n$ matrix $A$, a nonzero vector $\\mathbf{v}$ is an eigenvector of $A$ if
 
+@academic[formula_callout:Eigenvalue Definition
 $$A\\mathbf{v} = \\lambda\\mathbf{v}$$
+/linear-algebra/formulas#eigenvalue_definition]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 for some scalar $\\lambda$. The scalar $\\lambda$ is the corresponding eigenvalue.
 
@@ -754,11 +761,17 @@ Only square matrices have eigenvalues. The equation $A\\mathbf{v} = \\lambda\\ma
     title: `Rewriting as a Homogeneous System`,
     content: `The eigenvalue equation $A\\mathbf{v} = \\lambda\\mathbf{v}$ rearranges to
 
-$$(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$$
+@academic[formula_callout:Rewriting as a Homogeneous System
+$$(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$$]@
 
 This is a [homogeneous](!/linear-algebra/linear-systems/homogeneous) linear system with coefficient matrix $A - \\lambda I$. Eigenvectors are its nontrivial solutions. Such solutions exist if and only if $A - \\lambda I$ is singular — that is, if and only if
 
+@academic[formula_callout:Characteristic Equation
 $$\\det(A - \\lambda I) = 0$$
+/linear-algebra/formulas#characteristic_equation]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 This [determinant](!/linear-algebra/determinants) condition is the [characteristic equation](!/linear-algebra/eigen/characteristic-equation). It converts the eigenvalue problem from a geometric question ("which directions survive?") into an algebraic one ("which values of $\\lambda$ make this determinant vanish?"). The characteristic equation is a polynomial of degree $n$ in $\\lambda$, and its roots are the eigenvalues.`,
     before: ``,
@@ -769,7 +782,12 @@ This [determinant](!/linear-algebra/determinants) condition is the [characterist
     title: `Eigenspaces`,
     content: `For a given eigenvalue $\\lambda$, the eigenspace is the set of all vectors satisfying $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$, together with the zero vector:
 
+@academic[formula_callout:Eigenspace
 $$E_\\lambda = \\text{Null}(A - \\lambda I)$$
+/linear-algebra/formulas#eigenspace]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The eigenspace is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$. It contains the zero vector and is closed under addition and scalar multiplication — any linear combination of eigenvectors for the same eigenvalue is again an eigenvector for that eigenvalue (or the zero vector).
 
@@ -797,13 +815,13 @@ For the matrix $\\begin{pmatrix} 3 & 0 \\\\ 0 & -2 \\end{pmatrix}$, the standard
 
 For a [triangular](!/linear-algebra/matrix/types) matrix, the eigenvalues are still the diagonal entries (since $\\det(A - \\lambda I)$ is the product of the diagonal entries of $A - \\lambda I$), but the eigenvectors generally require computation.
 
-## Worked Example
+@academic[example:Worked Example
 
 For $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$, the characteristic equation is $\\det(A - \\lambda I) = (4 - \\lambda)(3 - \\lambda) - 2 = \\lambda^2 - 7\\lambda + 10 = (\\lambda - 2)(\\lambda - 5) = 0$. The eigenvalues are $\\lambda_1 = 2$ and $\\lambda_2 = 5$.
 
 For $\\lambda_1 = 2$: $(A - 2I)\\mathbf{v} = \\begin{pmatrix} 2 & 2 \\\\ 1 & 1 \\end{pmatrix}\\mathbf{v} = \\mathbf{0}$ gives $\\mathbf{v}_1 = (-1, 1)^T$.
 
-For $\\lambda_2 = 5$: $(A - 5I)\\mathbf{v} = \\begin{pmatrix} -1 & 2 \\\\ 1 & -2 \\end{pmatrix}\\mathbf{v} = \\mathbf{0}$ gives $\\mathbf{v}_2 = (2, 1)^T$.
+For $\\lambda_2 = 5$: $(A - 5I)\\mathbf{v} = \\begin{pmatrix} -1 & 2 \\\\ 1 & -2 \\end{pmatrix}\\mathbf{v} = \\mathbf{0}$ gives $\\mathbf{v}_2 = (2, 1)^T$.]@
 
 Rotation by $90°$ in $\\mathbb{R}^2$ has matrix $\\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$ and characteristic polynomial $\\lambda^2 + 1 = 0$. No real direction survives a quarter-turn — the eigenvalues are $\\pm i$, which are [complex](!/linear-algebra/eigen/complex).`,
     before: ``,
@@ -946,8 +964,38 @@ const schemas = {
     }),
   };
 
+  const eigenGrowthCases = {
+    prefaceTitle: 'Long-term behavior',
+    preface: 'In dynamical systems, eigenvalues determine long-term behavior. For the discrete system $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$ the deciding number is the absolute value of the eigenvalues.',
+    conclusionTitle: 'Continuous time',
+    conclusion: 'For $\\mathbf{x}\' = A\\mathbf{x}$ the solutions involve $e^{\\lambda t}$, so the real parts of the eigenvalues decide growth or decay and the imaginary parts decide the oscillation frequency.',
+    parent: {
+      kicker: 'Discrete dynamical system',
+      formula: '$\\mathbf{x}_{n+1} = A\\mathbf{x}_n$',
+      splitBy: '$|\\lambda|$ compared with $1$',
+    },
+    cases: [
+      {
+        id: 'grow', condition: '$|\\lambda| > 1$',
+        count: { n: '↑' },
+        headline: 'Grows',
+      },
+      {
+        id: 'decay', condition: '$|\\lambda| < 1$',
+        count: { n: '↓' },
+        headline: 'Decays',
+      },
+      {
+        id: 'osc', condition: '$|\\lambda| = 1$',
+        count: { n: '~' },
+        headline: 'Oscillates',
+      },
+    ],
+  };
+
    return {
   props: {
+    eigenGrowthCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -967,7 +1015,9 @@ const schemas = {
    }
 
 
-   export default function EigenvaluesPage({
+   const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function EigenvaluesPage({eigenGrowthCases, 
      seoData,
      sectionsContent,
      introContent,
@@ -1056,6 +1106,14 @@ const schemas = {
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="eigenvalue-long-term-behavior-cases"
+            title="Discrete systems: what |λ| decides"
+            source="/linear-algebra/eigen"
+          >
+            <CaseSplit data={eigenGrowthCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

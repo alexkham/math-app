@@ -1114,13 +1114,15 @@ const sectionsContent = {
     title: `Magnitude in Two and Three Dimensions`,
     content: `In $\\mathbb{R}^2$, the magnitude of a vector $\\mathbf{v} = (v_1, v_2)$ is the length of the hypotenuse of the right triangle formed by its components:
 
-$$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2}$$
+@academic[formula_callout:Magnitude in Two and Three Dimensions
+$$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2}$$]@
 
 This is a direct application of the Pythagorean theorem — the horizontal component $v_1$ and the vertical component $v_2$ form the two legs, and the vector itself is the hypotenuse.
 
 In $\\mathbb{R}^3$, the same reasoning applies in two stages. A vector $\\mathbf{v} = (v_1, v_2, v_3)$ can be decomposed into a component in the $xy$-plane with length $\\sqrt{v_1^2 + v_2^2}$ and a vertical component $v_3$. Applying the Pythagorean theorem a second time gives:
 
-$$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + v_3^2}$$
+@academic[formula_callout:Magnitude in Two and Three Dimensions
+$$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + v_3^2}$$]@
 
 The geometric intuition is the same in both cases: the magnitude is the straight-line distance from the tail of the vector to its tip. The only difference is the number of perpendicular components being combined.
 
@@ -1173,7 +1175,7 @@ To compute the magnitude of a specific vector, use the [vector calculator](!/lin
 
 @academic[formula_callout:Vector Norm
 $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2} = \\sqrt{\\sum_{i=1}^{n} v_i^2}$$
-/linear-algebra/formulas#vector_norm]@
+/linear-algebra/formulas#euclidean_norm]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
@@ -1193,7 +1195,8 @@ In dimensions beyond three, the formula cannot be visualized as a geometric leng
 
 ## Non-Negativity
 
-$$\\|\\mathbf{v}\\| \\geq 0, \\quad \\text{with equality if and only if } \\mathbf{v} = \\mathbf{0}$$
+@academic[formula_callout:Properties of the Norm
+$$\\|\\mathbf{v}\\| \\geq 0, \\quad \\text{with equality if and only if } \\mathbf{v} = \\mathbf{0}$$]@
 
 The sum of squared components is never negative, and its square root is zero only when every component is zero. Length is always non-negative, and the only vector with zero length is the zero vector itself.
 
@@ -1228,7 +1231,7 @@ The length of a sum never exceeds the sum of the individual lengths. Geometrical
 
 @academic[formula_callout:Distance Between Vectors
 $$d(\\mathbf{a}, \\mathbf{b}) = \\|\\mathbf{a} - \\mathbf{b}\\| = \\sqrt{(a_1 - b_1)^2 + (a_2 - b_2)^2 + \\cdots + (a_n - b_n)^2}$$
-/linear-algebra/formulas#distance_between_vectors]@
+/linear-algebra/formulas#distance_formula]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
@@ -1244,13 +1247,15 @@ Distance inherits its behavior from the norm. It is always non-negative, equals 
     title: `Unit Vectors`,
     content: `A unit vector is a vector whose norm equals exactly $1$:
 
-$$\\|\\hat{\\mathbf{u}}\\| = 1$$
+@academic[formula_callout:Unit Vectors
+$$\\|\\hat{\\mathbf{u}}\\| = 1$$]@
 
 A unit vector retains all the directional information of the original vector while discarding any notion of scale. It answers the question "which way?" without saying "how far."
 
 The standard basis vectors are the most immediate examples. In $\\mathbb{R}^3$:
 
-$$\\mathbf{e}_1 = (1, 0, 0), \\quad \\mathbf{e}_2 = (0, 1, 0), \\quad \\mathbf{e}_3 = (0, 0, 1)$$
+@academic[formula_callout:Unit Vectors
+$$\\mathbf{e}_1 = (1, 0, 0), \\quad \\mathbf{e}_2 = (0, 1, 0), \\quad \\mathbf{e}_3 = (0, 0, 1)$$]@
 
 Each has exactly one component equal to $1$ and the rest equal to $0$, giving a norm of $1$. These unit vectors point along the coordinate axes, and any vector can be decomposed as a [linear combination](!/linear-algebra/vectors/linear-combinations) of them: $\\mathbf{v} = v_1\\mathbf{e}_1 + v_2\\mathbf{e}_2 + v_3\\mathbf{e}_3$.
 
@@ -1265,14 +1270,15 @@ But unit vectors are not confined to the coordinate directions. Any direction in
 
 @academic[formula_callout:Normalization
 $$\\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|} = \\frac{1}{\\|\\mathbf{v}\\|}(v_1, v_2, \\ldots, v_n)$$
-/linear-algebra/formulas#normalization]@
+/linear-algebra/formulas#vector_normalization]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
 This divides every component by the same positive scalar $\\|\\mathbf{v}\\|$, which is a special case of scalar multiplication by $\\frac{1}{\\|\\mathbf{v}\\|}$. The scaling property of the norm guarantees that the result has magnitude $1$:
 
-$$\\left\\|\\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|}\\right\\| = \\frac{\\|\\mathbf{v}\\|}{\\|\\mathbf{v}\\|} = 1$$
+@academic[formula_callout:Normalization
+$$\\left\\|\\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|}\\right\\| = \\frac{\\|\\mathbf{v}\\|}{\\|\\mathbf{v}\\|} = 1$$]@
 
 Because the scalar $\\frac{1}{\\|\\mathbf{v}\\|}$ is positive, the direction of $\\mathbf{v}$ is preserved — the normalized vector $\\hat{\\mathbf{v}}$ points exactly the same way as $\\mathbf{v}$, just with unit length.
 

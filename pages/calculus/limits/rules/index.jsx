@@ -619,7 +619,8 @@ Repeated application of the product rule yields this result. The limit of a powe
 
 For rational exponents:
 
-$$\\lim_{x \\to a} [f(x)]^{m/n} = L^{m/n}$$
+@academic[formula_callout:Power Rule
+$$\\lim_{x \\to a} [f(x)]^{m/n} = L^{m/n}$$]@
 
 provided $L > 0$ (or $L \\geq 0$ when $n$ is odd). Root functions require care with domain restrictions.
 `,
@@ -732,11 +733,13 @@ Continuity of $f$ at $L$ is essential. Without it, the behavior of $f$ near $L$ 
     content: `
 Suppose $g(x) \\leq f(x) \\leq h(x)$ for all $x$ near $a$ (except possibly at $a$ itself). If:
 
-$$\\lim_{x \\to a} g(x) = L \\quad \\text{and} \\quad \\lim_{x \\to a} h(x) = L$$
+@academic[formula_callout:The Squeeze Theorem
+$$\\lim_{x \\to a} g(x) = L \\quad \\text{and} \\quad \\lim_{x \\to a} h(x) = L$$]@
 
 then:
 
-$$\\lim_{x \\to a} f(x) = L$$
+@academic[formula_callout:The Squeeze Theorem
+$$\\lim_{x \\to a} f(x) = L$$]@
 
 @academic[formula_callout:Squeeze Theorem
 $$g(x) \\leq f(x) \\leq h(x) \\text{ near } a, \\; \\lim_{x \\to a} g(x) = \\lim_{x \\to a} h(x) = L \\implies \\lim_{x \\to a} f(x) = L$$

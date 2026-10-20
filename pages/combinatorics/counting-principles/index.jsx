@@ -1385,11 +1385,11 @@ The linguistic marker for the addition rule is the word **or** — pick method 1
  
 In the language of [set theory](!/set-theory), the rule is the cardinality identity $|A \\cup B| = |A| + |B|$ when $A \\cap B = \\emptyset$, generalized to any number of pairwise disjoint sets.
  
-## Example
+@academic[example:Example
  
 A traveller can reach the city by 2 bus routes, by 3 train routes, or by 4 taxi routes. Since these options are mutually exclusive — one trip uses one mode of transport — the total number of route choices is
  
-$$2 + 3 + 4 = 9.$$
+$$2 + 3 + 4 = 9.$$]@
  
 ## The Mutual-Exclusion Condition
  
@@ -1419,13 +1419,13 @@ The linguistic marker for the multiplication rule is the word **and** — choose
  
 In set-theoretic terms, the rule is the cardinality of the Cartesian product, $|A \\times B| = |A| \\cdot |B|$, extended to any finite number of factors.
  
-## Example
+@academic[example:Example
  
 A lunch combo is built from 3 main courses, 2 drinks, and 4 desserts. Each main can be paired with each drink, and each pairing with each dessert, giving
  
 $$3 \\times 2 \\times 4 = 24$$
  
-possible meals.
+possible meals.]@
  
 ## The Independence Condition
  
@@ -1455,9 +1455,9 @@ $$|A| = |U| - |U \\setminus A| = |U| - |A^c|.$$
  
 The strategy is to count the total, count the complement, and subtract.
  
-## Example
+@academic[example:Example
  
-The number of arrangements of $n$ distinct items in which at least one item ends up in a specific designated position is awkward to count directly — multiple items can satisfy the condition independently, and the cases overlap. The complementary count — arrangements in which no item is in that position — partitions cleanly: the designated position holds one of the $n-1$ non-designated items, and the remaining $n-1$ items fill the rest. Subtracting this count from $n!$ gives the desired number.
+The number of arrangements of $n$ distinct items in which at least one item ends up in a specific designated position is awkward to count directly — multiple items can satisfy the condition independently, and the cases overlap. The complementary count — arrangements in which no item is in that position — partitions cleanly: the designated position holds one of the $n-1$ non-designated items, and the remaining $n-1$ items fill the rest. Subtracting this count from $n!$ gives the desired number.]@
  
 ## Structural Note
  
@@ -1559,13 +1559,15 @@ Count the number of 3-digit positive integers whose digits are all distinct.
  
 The first digit cannot be 0 (or the number would not be a 3-digit number), so it has 9 choices. The second digit can be any digit except the one already used, giving 9 remaining choices (now including 0). The third digit can be any digit except the two already used, giving 8 choices. By the multiplication rule:
  
-$$9 \\times 9 \\times 8 = 648.$$
+@academic[formula_callout:Putting the Principles Together
+$$9 \\times 9 \\times 8 = 648.$$]@
  
 Now consider the complementary question: how many 3-digit positive integers contain at least one repeated digit?
  
 The total number of 3-digit positive integers is $9 \\times 10 \\times 10 = 900$ — 9 choices for the first digit and 10 each for the other two. Subtracting the 648 with all-distinct digits gives
  
-$$900 - 648 = 252$$
+@academic[formula_callout:Putting the Principles Together
+$$900 - 648 = 252$$]@
  
 with at least one repetition.
  

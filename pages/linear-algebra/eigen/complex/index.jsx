@@ -1997,7 +1997,8 @@ When $r = 1$ (equivalently, $\\det(A) = a^2 + b^2 = 1$), the transformation is a
 
 For $A = \\begin{pmatrix} 3 & -2 \\\\ 1 & 1 \\end{pmatrix}$: $\\text{tr}(A) = 4$, $\\det(A) = 5$, discriminant $= 16 - 20 = -4$. The eigenvalues are
 
-$$\\lambda = \\frac{4 \\pm \\sqrt{-4}}{2} = 2 \\pm i$$
+@academic[formula_callout:The 2×2 Case in Detail
+$$\\lambda = \\frac{4 \\pm \\sqrt{-4}}{2} = 2 \\pm i$$]@
 
 The modulus is $r = \\sqrt{4 + 1} = \\sqrt{5}$ and the argument is $\\theta = \\arctan(1/2)$. The transformation rotates by $\\arctan(1/2) \\approx 26.6°$ while scaling distances by $\\sqrt{5} \\approx 2.24$. Since $r > 1$, repeated application spirals outward.`,
     before: ``,
@@ -2010,7 +2011,8 @@ The modulus is $r = \\sqrt{4 + 1} = \\sqrt{5}$ and the argument is $\\theta = \\
 
 Continuing the example with $A = \\begin{pmatrix} 3 & -2 \\\\ 1 & 1 \\end{pmatrix}$ and $\\lambda = 2 + i$:
 
-$$A - (2 + i)I = \\begin{pmatrix} 1 - i & -2 \\\\ 1 & -1 - i \\end{pmatrix}$$
+@academic[formula_callout:Complex Eigenvectors
+$$A - (2 + i)I = \\begin{pmatrix} 1 - i & -2 \\\\ 1 & -1 - i \\end{pmatrix}$$]@
 
 The second row gives $v_1 + (-1 - i)v_2 = 0$, so $v_1 = (1 + i)v_2$. Setting $v_2 = 1$: $\\mathbf{v} = (1 + i, 1)^T$.
 
@@ -2041,11 +2043,13 @@ This is the real alternative to diagonalization: instead of a diagonal matrix wi
 
 A $4 \\times 4$ matrix with eigenvalues $2 \\pm 3i$ and $-1 \\pm i$ has real canonical form
 
-$$\\begin{pmatrix} 2 & -3 & 0 & 0 \\\\ 3 & 2 & 0 & 0 \\\\ 0 & 0 & -1 & -1 \\\\ 0 & 0 & 1 & -1 \\end{pmatrix}$$
+@academic[formula_callout:Complex Eigenvalues in Larger Matrices
+$$\\begin{pmatrix} 2 & -3 & 0 & 0 \\\\ 3 & 2 & 0 & 0 \\\\ 0 & 0 & -1 & -1 \\\\ 0 & 0 & 1 & -1 \\end{pmatrix}$$]@
 
 A $3 \\times 3$ matrix with eigenvalues $5$ and $1 \\pm 2i$ has real canonical form
 
-$$\\begin{pmatrix} 5 & 0 & 0 \\\\ 0 & 1 & -2 \\\\ 0 & 2 & 1 \\end{pmatrix}$$
+@academic[formula_callout:Complex Eigenvalues in Larger Matrices
+$$\\begin{pmatrix} 5 & 0 & 0 \\\\ 0 & 1 & -2 \\\\ 0 & 2 & 1 \\end{pmatrix}$$]@
 
 The real canonical form is the real analogue of [diagonalization](!/linear-algebra/eigen/diagonalization): it achieves the simplest possible real matrix that is similar to $A$, with the block structure directly reflecting the eigenvalue spectrum.`,
     before: ``,

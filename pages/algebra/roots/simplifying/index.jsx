@@ -229,11 +229,14 @@ No fractions appear under the radical. A radical of a fraction should be rewritt
 
 No radicals appear in denominators. Denominators are rationalized — rewritten without radical signs.
 
-$$\\sqrt{72} \\quad \\text{is not simplified — 36 is a perfect square factor}$$
+@academic[formula_callout:What Simplest Form Means
+$$\\sqrt{72} \\quad \\text{is not simplified — 36 is a perfect square factor}$$]@
 
-$$\\sqrt{\\frac{3}{4}} \\quad \\text{is not simplified — fraction under radical}$$
+@academic[formula_callout:What Simplest Form Means
+$$\\sqrt{\\frac{3}{4}} \\quad \\text{is not simplified — fraction under radical}$$]@
 
-$$\\frac{5}{\\sqrt{3}} \\quad \\text{is not simplified — radical in denominator}$$
+@academic[formula_callout:What Simplest Form Means
+$$\\frac{5}{\\sqrt{3}} \\quad \\text{is not simplified — radical in denominator}$$]@
 
 These criteria define the target. The techniques that follow show how to reach it.
 
@@ -249,21 +252,25 @@ The table below collects the three criteria as a checklist for verifying simples
 
 For square roots, find perfect square factors:
 
-$$\\sqrt{72} = \\sqrt{36 \\cdot 2} = \\sqrt{36} \\cdot \\sqrt{2} = 6\\sqrt{2}$$
+@academic[formula_callout:Factoring Out Perfect Powers
+$$\\sqrt{72} = \\sqrt{36 \\cdot 2} = \\sqrt{36} \\cdot \\sqrt{2} = 6\\sqrt{2}$$]@
 
 For cube roots, find perfect cube factors:
 
-$$\\sqrt[3]{54} = \\sqrt[3]{27 \\cdot 2} = \\sqrt[3]{27} \\cdot \\sqrt[3]{2} = 3\\sqrt[3]{2}$$
+@academic[formula_callout:Factoring Out Perfect Powers
+$$\\sqrt[3]{54} = \\sqrt[3]{27 \\cdot 2} = \\sqrt[3]{27} \\cdot \\sqrt[3]{2} = 3\\sqrt[3]{2}$$]@
 
 For $n$th roots, find perfect $n$th power factors:
 
-$$\\sqrt[4]{48} = \\sqrt[4]{16 \\cdot 3} = \\sqrt[4]{16} \\cdot \\sqrt[4]{3} = 2\\sqrt[4]{3}$$
+@academic[formula_callout:Factoring Out Perfect Powers
+$$\\sqrt[4]{48} = \\sqrt[4]{16 \\cdot 3} = \\sqrt[4]{16} \\cdot \\sqrt[4]{3} = 2\\sqrt[4]{3}$$]@
 
 The process uses the product rule from [radical rules](!/algebra/roots/radical-rules). Factor the radicand, separate into two radicals, simplify the perfect power.
 
 When multiple perfect power factors exist, extract them all:
 
-$$\\sqrt{200} = \\sqrt{100 \\cdot 2} = 10\\sqrt{2}$$
+@academic[formula_callout:Factoring Out Perfect Powers
+$$\\sqrt{200} = \\sqrt{100 \\cdot 2} = 10\\sqrt{2}$$]@
 
 Recognizing perfect powers quickly — 4, 9, 16, 25, 36, 49, 64, 81, 100 for squares; 8, 27, 64, 125 for cubes — speeds the work.
 
@@ -277,21 +284,25 @@ The table below collects the perfect powers for each common index with a worked 
     title: `Simplifying with Variables`,
     content: `Variables under radicals follow the same process: extract perfect powers.
 
-$$\\sqrt{x^6} = x^3$$
+@academic[formula_callout:Simplifying with Variables
+$$\\sqrt{x^6} = x^3$$]@
 
 The exponent 6 divides evenly by the index 2, so the entire power extracts.
 
-$$\\sqrt{x^7} = \\sqrt{x^6 \\cdot x} = x^3\\sqrt{x}$$
+@academic[formula_callout:Simplifying with Variables
+$$\\sqrt{x^7} = \\sqrt{x^6 \\cdot x} = x^3\\sqrt{x}$$]@
 
 The exponent 7 does not divide evenly. Separate into the largest even power (6) and the remainder (1).
 
-$$\\sqrt[3]{y^{10}} = \\sqrt[3]{y^9 \\cdot y} = y^3\\sqrt[3]{y}$$
+@academic[formula_callout:Simplifying with Variables
+$$\\sqrt[3]{y^{10}} = \\sqrt[3]{y^9 \\cdot y} = y^3\\sqrt[3]{y}$$]@
 
 For cube roots, extract the largest multiple of 3.
 
 The general rule: divide the exponent by the index. The quotient is the extracted power; the remainder stays under the radical.
 
-$$\\sqrt[n]{x^m} = x^{\\lfloor m/n \\rfloor} \\cdot \\sqrt[n]{x^{m \\mod n}}$$
+@academic[formula_callout:Simplifying with Variables
+$$\\sqrt[n]{x^m} = x^{\\lfloor m/n \\rfloor} \\cdot \\sqrt[n]{x^{m \\mod n}}$$]@
 
 When the index is even, absolute values may be needed. The [properties of radicals](!/algebra/roots/properties) page explains when $\\sqrt{x^2} = |x|$ rather than $x$. A common convention assumes all variables are positive, avoiding absolute value complications.`,
     before: ``,
@@ -303,13 +314,16 @@ When the index is even, absolute values may be needed. The [properties of radica
     title: `Combined Numerical and Variable Simplification`,
     content: `Most expressions combine numbers and variables. Simplify each part.
 
-$$\\sqrt{50x^5} = \\sqrt{25 \\cdot 2 \\cdot x^4 \\cdot x} = 5x^2\\sqrt{2x}$$
+@academic[formula_callout:Combined Numerical and Variable Simplification
+$$\\sqrt{50x^5} = \\sqrt{25 \\cdot 2 \\cdot x^4 \\cdot x} = 5x^2\\sqrt{2x}$$]@
 
 Factor 50 into $25 \\cdot 2$. Factor $x^5$ into $x^4 \\cdot x$. Extract the perfect squares.
 
-$$\\sqrt[3]{-128a^7b^4} = \\sqrt[3]{-64 \\cdot 2 \\cdot a^6 \\cdot a \\cdot b^3 \\cdot b}$$
+@academic[formula_callout:Combined Numerical and Variable Simplification
+$$\\sqrt[3]{-128a^7b^4} = \\sqrt[3]{-64 \\cdot 2 \\cdot a^6 \\cdot a \\cdot b^3 \\cdot b}$$]@
 
-$$= -4a^2b\\sqrt[3]{2ab}$$
+@academic[formula_callout:Combined Numerical and Variable Simplification
+$$= -4a^2b\\sqrt[3]{2ab}$$]@
 
 The negative radicand is fine for odd index — cube roots handle negatives naturally, as explained in [properties](!/algebra/roots/properties).
 
@@ -325,13 +339,15 @@ Organize work systematically: factor the coefficient, factor each variable's pow
 
 For a square root denominator, multiply by that square root over itself:
 
-$$\\frac{5}{\\sqrt{3}} = \\frac{5}{\\sqrt{3}} \\cdot \\frac{\\sqrt{3}}{\\sqrt{3}} = \\frac{5\\sqrt{3}}{3}$$
+@academic[formula_callout:Rationalizing Monomial Denominators
+$$\\frac{5}{\\sqrt{3}} = \\frac{5}{\\sqrt{3}} \\cdot \\frac{\\sqrt{3}}{\\sqrt{3}} = \\frac{5\\sqrt{3}}{3}$$]@
 
 The denominator becomes $\\sqrt{3} \\cdot \\sqrt{3} = \\sqrt{9} = 3$, a rational number.
 
 For higher roots, multiply to create a perfect power under the radical:
 
-$$\\frac{2}{\\sqrt[3]{5}} = \\frac{2}{\\sqrt[3]{5}} \\cdot \\frac{\\sqrt[3]{25}}{\\sqrt[3]{25}} = \\frac{2\\sqrt[3]{25}}{\\sqrt[3]{125}} = \\frac{2\\sqrt[3]{25}}{5}$$
+@academic[formula_callout:Rationalizing Monomial Denominators
+$$\\frac{2}{\\sqrt[3]{5}} = \\frac{2}{\\sqrt[3]{5}} \\cdot \\frac{\\sqrt[3]{25}}{\\sqrt[3]{25}} = \\frac{2\\sqrt[3]{25}}{\\sqrt[3]{125}} = \\frac{2\\sqrt[3]{25}}{5}$$]@
 
 The cube root of 5 needs two more factors of 5 to become $\\sqrt[3]{125} = 5$.
 
@@ -347,17 +363,21 @@ General principle: multiply by $\\sqrt[n]{a^{n-k}}$ where $k$ is the current pow
 
 The conjugate of $a + \\sqrt{b}$ is $a - \\sqrt{b}$. Their product eliminates the radical:
 
-$$(a + \\sqrt{b})(a - \\sqrt{b}) = a^2 - b$$
+@academic[formula_callout:Rationalizing Binomial Denominators
+$$(a + \\sqrt{b})(a - \\sqrt{b}) = a^2 - b$$]@
 
 This is the difference of squares pattern.
 
-$$\\frac{3}{2 + \\sqrt{5}} = \\frac{3}{2 + \\sqrt{5}} \\cdot \\frac{2 - \\sqrt{5}}{2 - \\sqrt{5}} = \\frac{3(2 - \\sqrt{5})}{4 - 5} = \\frac{3(2 - \\sqrt{5})}{-1}$$
+@academic[formula_callout:Rationalizing Binomial Denominators
+$$\\frac{3}{2 + \\sqrt{5}} = \\frac{3}{2 + \\sqrt{5}} \\cdot \\frac{2 - \\sqrt{5}}{2 - \\sqrt{5}} = \\frac{3(2 - \\sqrt{5})}{4 - 5} = \\frac{3(2 - \\sqrt{5})}{-1}$$]@
 
-$$= -3(2 - \\sqrt{5}) = -6 + 3\\sqrt{5}$$
+@academic[formula_callout:Rationalizing Binomial Denominators
+$$= -3(2 - \\sqrt{5}) = -6 + 3\\sqrt{5}$$]@
 
 When both terms are radicals:
 
-$$\\frac{1}{\\sqrt{7} + \\sqrt{3}} = \\frac{\\sqrt{7} - \\sqrt{3}}{(\\sqrt{7})^2 - (\\sqrt{3})^2} = \\frac{\\sqrt{7} - \\sqrt{3}}{4}$$
+@academic[formula_callout:Rationalizing Binomial Denominators
+$$\\frac{1}{\\sqrt{7} + \\sqrt{3}} = \\frac{\\sqrt{7} - \\sqrt{3}}{(\\sqrt{7})^2 - (\\sqrt{3})^2} = \\frac{\\sqrt{7} - \\sqrt{3}}{4}$$]@
 
 Conjugates also appear in [operations with radicals](!/algebra/roots/operations) for simplifying products and in [radical equations](!/algebra/roots/equations) for isolating terms.`,
     before: ``,
@@ -371,21 +391,26 @@ Conjugates also appear in [operations with radicals](!/algebra/roots/operations)
 
 For cube roots, use the sum or difference of cubes:
 
-$$(a + b)(a^2 - ab + b^2) = a^3 + b^3$$
+@academic[formula_callout:Rationalizing Higher-Index Denominators
+$$(a + b)(a^2 - ab + b^2) = a^3 + b^3$$]@
 
-$$(a - b)(a^2 + ab + b^2) = a^3 - b^3$$
+@academic[formula_callout:Rationalizing Higher-Index Denominators
+$$(a - b)(a^2 + ab + b^2) = a^3 - b^3$$]@
 
 To rationalize $\\frac{1}{\\sqrt[3]{2} + 1}$, let $a = \\sqrt[3]{2}$ and $b = 1$:
 
-$$\\frac{1}{\\sqrt[3]{2} + 1} \\cdot \\frac{\\sqrt[3]{4} - \\sqrt[3]{2} + 1}{\\sqrt[3]{4} - \\sqrt[3]{2} + 1}$$
+@academic[formula_callout:Rationalizing Higher-Index Denominators
+$$\\frac{1}{\\sqrt[3]{2} + 1} \\cdot \\frac{\\sqrt[3]{4} - \\sqrt[3]{2} + 1}{\\sqrt[3]{4} - \\sqrt[3]{2} + 1}$$]@
 
 The denominator becomes:
 
-$$(\\sqrt[3]{2})^3 + 1^3 = 2 + 1 = 3$$
+@academic[formula_callout:Rationalizing Higher-Index Denominators
+$$(\\sqrt[3]{2})^3 + 1^3 = 2 + 1 = 3$$]@
 
 The result:
 
-$$\\frac{\\sqrt[3]{4} - \\sqrt[3]{2} + 1}{3}$$
+@academic[formula_callout:Rationalizing Higher-Index Denominators
+$$\\frac{\\sqrt[3]{4} - \\sqrt[3]{2} + 1}{3}$$]@
 
 These patterns are algebraically intensive. Converting to [rational exponents](!/algebra/roots/rational-exponents) sometimes offers a cleaner path.
 
@@ -399,17 +424,20 @@ The table below collects every rationalization pattern covered above — monomia
     title: `Reducing the Index`,
     content: `Sometimes the index of a radical can be reduced by finding common factors with the radicand's exponent.
 
-$$\\sqrt[6]{x^4} = x^{4/6} = x^{2/3} = \\sqrt[3]{x^2}$$
+@academic[formula_callout:Reducing the Index
+$$\\sqrt[6]{x^4} = x^{4/6} = x^{2/3} = \\sqrt[3]{x^2}$$]@
 
 The index dropped from 6 to 3 because 4 and 6 share a common factor of 2.
 
-$$\\sqrt[4]{a^2} = a^{2/4} = a^{1/2} = \\sqrt{a}$$
+@academic[formula_callout:Reducing the Index
+$$\\sqrt[4]{a^2} = a^{2/4} = a^{1/2} = \\sqrt{a}$$]@
 
 The fourth root of a square is just a square root.
 
 Converting to [rational exponents](!/algebra/roots/rational-exponents) makes this process mechanical: write the exponent as a fraction, reduce it, convert back if desired.
 
-$$\\sqrt[8]{y^6} = y^{6/8} = y^{3/4} = \\sqrt[4]{y^3}$$
+@academic[formula_callout:Reducing the Index
+$$\\sqrt[8]{y^6} = y^{6/8} = y^{3/4} = \\sqrt[4]{y^3}$$]@
 
 Index reduction is a form of simplification — smaller indices are generally preferred when mathematically equivalent.`,
     before: ``,

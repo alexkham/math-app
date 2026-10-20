@@ -1367,7 +1367,8 @@ The choice of restriction interval is a convention, universally agreed upon. Dif
     title: `The Arcsine Function`,
     content: `The sine function is restricted to $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$, where it is strictly increasing and maps onto its full range $[-1, 1]$. The inverse of this restricted sine is called arcsine:
 
-$$\\arcsin(x) = \\theta \\quad \\text{means} \\quad \\sin(\\theta) = x \\quad \\text{with} \\quad \\theta \\in \\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$$
+@academic[formula_callout:The Arcsine Function
+$$\\arcsin(x) = \\theta \\quad \\text{means} \\quad \\sin(\\theta) = x \\quad \\text{with} \\quad \\theta \\in \\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$$]@
 
 **Domain of  ** $\\arcsin$: $[-1, 1]$ — the range of sine. Inputs outside this interval have no corresponding angle.
 
@@ -1403,7 +1404,8 @@ The graph of $y = \\arcsin(x)$ is obtained by reflecting the restricted sine gra
     title: `The Arccosine Function`,
     content: `The cosine function is restricted to $[0, \\pi]$, where it is strictly decreasing and maps onto $[-1, 1]$. The inverse is arccosine:
 
-$$\\arccos(x) = \\theta \\quad \\text{means} \\quad \\cos(\\theta) = x \\quad \\text{with} \\quad \\theta \\in [0, \\pi]$$
+@academic[formula_callout:The Arccosine Function
+$$\\arccos(x) = \\theta \\quad \\text{means} \\quad \\cos(\\theta) = x \\quad \\text{with} \\quad \\theta \\in [0, \\pi]$$]@
 
 **Domain of ** $\\arccos$: $[-1, 1]$.
 
@@ -1448,7 +1450,8 @@ The graph of $y = \\arccos(x)$ is a decreasing curve from $(−1, \\pi)$ to $(1,
     title: `The Arctangent Function`,
     content: `The tangent function is restricted to $\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$, where it is strictly increasing and maps onto $(-\\infty, \\infty)$. The inverse is arctangent:
 
-$$\\arctan(x) = \\theta \\quad \\text{means} \\quad \\tan(\\theta) = x \\quad \\text{with} \\quad \\theta \\in \\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$$
+@academic[formula_callout:The Arctangent Function
+$$\\arctan(x) = \\theta \\quad \\text{means} \\quad \\tan(\\theta) = x \\quad \\text{with} \\quad \\theta \\in \\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$$]@
 
 **Domain of** $\\arctan$: $(-\\infty, \\infty)$ — all real numbers, since tangent's range is unbounded.
 
@@ -1580,15 +1583,19 @@ The standard arcsine and arccosine values across the shared input domain $[-1, 1
 
 **Direct compositions** (function applied to its own inverse):
 
-$$\\sin(\\arcsin(x)) = x \\quad \\text{for all } x \\in [-1, 1]$$
-$$\\cos(\\arccos(x)) = x \\quad \\text{for all } x \\in [-1, 1]$$
-$$\\tan(\\arctan(x)) = x \\quad \\text{for all } x \\in (-\\infty, \\infty)$$
+@academic[formula_callout:Compositions of Trigonometric and Inverse Trigonometric Functions
+$$\\sin(\\arcsin(x)) = x \\quad \\text{for all } x \\in [-1, 1]$$]@
+@academic[formula_callout:Compositions of Trigonometric and Inverse Trigonometric Functions
+$$\\cos(\\arccos(x)) = x \\quad \\text{for all } x \\in [-1, 1]$$]@
+@academic[formula_callout:Compositions of Trigonometric and Inverse Trigonometric Functions
+$$\\tan(\\arctan(x)) = x \\quad \\text{for all } x \\in (-\\infty, \\infty)$$]@
 
 These hold universally within the domain — applying a function to its inverse always recovers the input.
 
 **Reverse compositions** (inverse applied to its own function):
 
-$$\\arcsin(\\sin(x)) = x \\quad \\text{only if } x \\in \\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$$
+@academic[formula_callout:Compositions of Trigonometric and Inverse Trigonometric Functions
+$$\\arcsin(\\sin(x)) = x \\quad \\text{only if } x \\in \\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$$]@
 
 If $x$ is outside this range, the arcsine "folds" the result back into the restricted range. For example, $\\arcsin\\left(\\sin\\left(\\frac{5\\pi}{6}\\right)\\right) = \\arcsin\\left(\\frac{1}{2}\\right) = \\frac{\\pi}{6}$, not $\\frac{5\\pi}{6}$. The same caution applies to $\\arccos(\\cos(x))$ (valid only on $[0, \\pi]$) and $\\arctan(\\tan(x))$ (valid only on $(-\\frac{\\pi}{2}, \\frac{\\pi}{2})$).
 
@@ -1598,13 +1605,15 @@ $\\sin(\\arccos(x))$, $\\cos(\\arctan(x))$, $\\tan(\\arcsin(x))$, etc. These are
 
 To evaluate $\\sin(\\arccos(x))$: let $\\theta = \\arccos(x)$, so $\\cos\\theta = x = \\frac{x}{1}$. Construct a right triangle with adjacent side $x$ and hypotenuse $1$. The opposite side is $\\sqrt{1 - x^2}$ (by the Pythagorean theorem). Therefore:
 
-$$\\sin(\\arccos(x)) = \\frac{\\text{opposite}}{\\text{hypotenuse}} = \\sqrt{1 - x^2}$$
+@academic[formula_callout:Compositions of Trigonometric and Inverse Trigonometric Functions
+$$\\sin(\\arccos(x)) = \\frac{\\text{opposite}}{\\text{hypotenuse}} = \\sqrt{1 - x^2}$$]@
 
 This is valid for $x \\in [-1, 1]$, and the result is always non-negative because $\\arccos(x) \\in [0, \\pi]$, where sine is non-negative.
 
 To evaluate $\\cos(\\arctan(x))$: let $\\theta = \\arctan(x)$, so $\\tan\\theta = x = \\frac{x}{1}$. Opposite $= x$, adjacent $= 1$, hypotenuse $= \\sqrt{1 + x^2}$. Therefore:
 
-$$\\cos(\\arctan(x)) = \\frac{1}{\\sqrt{1 + x^2}}$$
+@academic[formula_callout:Compositions of Trigonometric and Inverse Trigonometric Functions
+$$\\cos(\\arctan(x)) = \\frac{1}{\\sqrt{1 + x^2}}$$]@
 
 The triangle method works for every mixed composition. It converts the problem from inverse trigonometric territory back to [right triangle](!/trigonometry/right-triangle) ratios, using the Pythagorean [identity](!/trigonometry/identities) implicitly to find the missing side.
 

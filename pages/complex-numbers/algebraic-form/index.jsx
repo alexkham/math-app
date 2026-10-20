@@ -1209,6 +1209,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
 import complexExplorerDiagrams from '@/app/components/calculators/complex-numbers/complexExplorerDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -1940,7 +1942,12 @@ Additional identities and applications appear in the [complex conjugate](!/compl
   before: ``,
   content: `The real part of a complex number extracts its horizontal component. For any number written in algebraic form:
 
+@academic[formula_callout:Algebraic Form
 $$z = a + bi$$
+/complex-numbers/formulas#algebraic_form]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 the real part is the value $a$, denoted:
 
@@ -1957,7 +1964,8 @@ On the [complex plane](!/complex-numbers/geometric-representation), the real par
 
 A useful identity connects the real part to the [conjugate](!/complex-numbers/complex-conjugate):
 
-$$Re(z) = \\frac{z + \\bar{z}}{2}$$
+@academic[formula_callout:The Real Part
+$$Re(z) = \\frac{z + \\bar{z}}{2}$$]@
 
 Adding a number to its conjugate cancels the imaginary terms, leaving twice the real part. This identity often simplifies calculations where extracting the real component matters.
 
@@ -1971,11 +1979,17 @@ obj22: {
   before: ``,
   content: `Given a complex number in algebraic form:
 
+@academic[formula_callout:Algebraic Form
 $$z = a + bi$$
+/complex-numbers/formulas#algebraic_form]@
+
+@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@
 
 the imaginary part captures the coefficient multiplying $i$:
 
-$$Im(z) = b$$
+@academic[formula_callout:The Imaginary Part
+$$Im(z) = b$$]@
 
 Students frequently misunderstand this definition. The output is $b$ — a real number — not the product $bi$. When $z = 7 + 4i$, the imaginary part equals $4$, an ordinary real value. The word "imaginary" in the name refers to the role this component plays within $z$, not to any special nature of $b$ itself.
 
@@ -1983,7 +1997,8 @@ Geometrically, $Im(z)$ specifies how far the point lies above or below the horiz
 
 The [conjugate](!/complex-numbers/complex-conjugate) provides an algebraic route to isolate this component:
 
-$$Im(z) = \\frac{z - \\bar{z}}{2i}$$
+@academic[formula_callout:The Imaginary Part
+$$Im(z) = \\frac{z - \\bar{z}}{2i}$$]@
 
 Taking the difference $z - \\bar{z}$ eliminates the real terms entirely, leaving only the imaginary contribution.
 
@@ -2131,8 +2146,41 @@ const schemas = {
     }),
   };
 
+  const conjugateClassCases = {
+    prefaceTitle: 'A test without evaluating',
+    preface: 'The conjugate classifies a complex number $z = a + bi$: compare $\\bar{z}$ with $z$. The two existence theorems give the first two outcomes.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'To check whether an expression yields a real result, simply check whether it equals its own conjugate.',
+    parent: {
+      kicker: 'Existence theorems',
+      formula: '$\\bar{z}$ compared with $z$',
+      splitBy: 'what conjugation does to $z$',
+    },
+    cases: [
+      {
+        id: 'real', condition: '$\\bar{z} = z$',
+        count: { n: 'ℝ' },
+        headline: 'Real',
+        desc: 'conjugation leaves it fixed: $b = 0$, it lives on the real axis',
+      },
+      {
+        id: 'imag', condition: '$\\bar{z} = -z$',
+        count: { n: 'i' },
+        headline: 'Pure imaginary',
+        desc: 'conjugation negates it: $a = 0$, it lives on the imaginary axis; see [pure imaginary numbers](!/complex-numbers/imaginary-numbers)',
+      },
+      {
+        id: 'neither', condition: 'neither',
+        count: { n: '·' },
+        headline: 'Off both axes',
+        desc: 'nonzero real and imaginary parts: the interior of the complex plane',
+      },
+    ],
+  };
+
   return {
   props:{
+    conjugateClassCases,
     demoUnits,
     sectionsContent,
     introContent,
@@ -2154,7 +2202,9 @@ const schemas = {
    }
 
 
-export default function AlgebraicFormPage({
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function AlgebraicFormPage({conjugateClassCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -2272,6 +2322,14 @@ export default function AlgebraicFormPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-diagram'}
+            id="conjugate-classification-cases"
+            title="Classifying z with its conjugate"
+            source="/complex-numbers/algebraic-form"
+          >
+            <CaseSplit data={conjugateClassCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

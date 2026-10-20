@@ -442,7 +442,8 @@ Common multiples arise naturally in problems involving synchronization. If one e
 
 If $n = p_1^{a_1} \\cdot p_2^{a_2} \\cdots p_k^{a_k}$, the number of positive divisors of $n$ is:
 
-$$(a_1 + 1)(a_2 + 1) \\cdots (a_k + 1)$$
+@academic[formula_callout:Counting Factors
+$$(a_1 + 1)(a_2 + 1) \\cdots (a_k + 1)$$]@
 
 Each prime factor $p_i$ can appear in a divisor $0, 1, 2, \\ldots, a_i$ times — that is $a_i + 1$ independent choices. The total number of divisors is the product of all these choices.
 

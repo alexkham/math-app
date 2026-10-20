@@ -1299,13 +1299,15 @@ const sectionsContent={
 
 For example, $\\sin(x) = \\frac{1}{2}$ has two solutions per period of $2\\pi$: $x = \\frac{\\pi}{6}$ and $x = \\frac{5\\pi}{6}$. The general solution is:
 
-$$x = \\frac{\\pi}{6} + 2n\\pi \\quad \\text{or} \\quad x = \\frac{5\\pi}{6} + 2n\\pi, \\quad n \\in \\mathbb{Z}$$
+@academic[formula_callout:General Solutions vs Restricted Solutions
+$$x = \\frac{\\pi}{6} + 2n\\pi \\quad \\text{or} \\quad x = \\frac{5\\pi}{6} + 2n\\pi, \\quad n \\in \\mathbb{Z}$$]@
 
 The condition $n \\in \\mathbb{Z}$ reads '$n$ ranges over the integers' — $\\mathbb{Z}$ is one of the standard [set symbols](!/math-symbols/set-theory) that appears in every general solution.
 
 For tangent, which has period $\\pi$ and only one solution per period, the general solution is more compact. If $\\tan(x) = 1$, the principal solution is $x = \\frac{\\pi}{4}$, and the general solution is:
 
-$$x = \\frac{\\pi}{4} + n\\pi, \\quad n \\in \\mathbb{Z}$$
+@academic[formula_callout:General Solutions vs Restricted Solutions
+$$x = \\frac{\\pi}{4} + n\\pi, \\quad n \\in \\mathbb{Z}$$]@
 
 A restricted solution lists only the solutions within a specified interval — most commonly $[0, 2\\pi)$ or $[0°, 360°)$. For $\\sin(x) = \\frac{1}{2}$ on $[0, 2\\pi)$, the answer is simply $x = \\frac{\\pi}{6}$ and $x = \\frac{5\\pi}{6}$.
 
@@ -1497,23 +1499,28 @@ This gives $\\sin(x) = 0$ or $\\cos(x) = -1$. On $[0, 2\\pi)$: $x = 0, \\pi$ fro
 
 The Pythagorean identity is the most common tool. Consider:
 
-$$\\sin^2(x) + \\cos(x) = 1$$
+@academic[formula_callout:Equations Requiring Identity Substitution
+$$\\sin^2(x) + \\cos(x) = 1$$]@
 
 Replace $\\sin^2(x)$ with $1 - \\cos^2(x)$:
 
-$$1 - \\cos^2(x) + \\cos(x) = 1 \\quad \\Rightarrow \\quad -\\cos^2(x) + \\cos(x) = 0$$
+@academic[formula_callout:Equations Requiring Identity Substitution
+$$1 - \\cos^2(x) + \\cos(x) = 1 \\quad \\Rightarrow \\quad -\\cos^2(x) + \\cos(x) = 0$$]@
 
-$$\\cos(x)[1 - \\cos(x)] = 0$$
+@academic[formula_callout:Equations Requiring Identity Substitution
+$$\\cos(x)[1 - \\cos(x)] = 0$$]@
 
 This gives $\\cos(x) = 0$ or $\\cos(x) = 1$. On $[0, 2\\pi)$: $x = \\frac{\\pi}{2}, \\frac{3\\pi}{2}$ from the first, and $x = 0$ from the second.
 
 Another common scenario involves the identity $\\sec^2(x) = 1 + \\tan^2(x)$:
 
-$$\\sec^2(x) - \\tan(x) = 3$$
+@academic[formula_callout:Equations Requiring Identity Substitution
+$$\\sec^2(x) - \\tan(x) = 3$$]@
 
 Replace $\\sec^2(x)$:
 
-$$1 + \\tan^2(x) - \\tan(x) = 3 \\quad \\Rightarrow \\quad \\tan^2(x) - \\tan(x) - 2 = 0$$
+@academic[formula_callout:Equations Requiring Identity Substitution
+$$1 + \\tan^2(x) - \\tan(x) = 3 \\quad \\Rightarrow \\quad \\tan^2(x) - \\tan(x) - 2 = 0$$]@
 
 This is a quadratic in $\\tan(x)$, solvable by factoring or the quadratic formula.
 
@@ -1530,7 +1537,8 @@ Not every identity substitution leads to a cleaner equation. If one substitution
 
 Let $u = \\sin(x)$. The equation becomes:
 
-$$2u^2 - u - 1 = 0$$
+@academic[formula_callout:Quadratic-Type Trigonometric Equations
+$$2u^2 - u - 1 = 0$$]@
 
 Factor: $(2u + 1)(u - 1) = 0$, giving $u = -\\frac{1}{2}$ or $u = 1$.
 
@@ -1543,7 +1551,8 @@ The complete solution set on $[0, 2\\pi)$ is $\\left\\{\\frac{\\pi}{2}, \\frac{7
 
 When factoring is not obvious, the quadratic formula applies:
 
-$$u = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
+@academic[formula_callout:Quadratic-Type Trigonometric Equations
+$$u = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$]@
 
 After finding the values of $u$, check whether each falls within the range of the relevant function. For sine and cosine, reject any $|u| > 1$ — these correspond to no solution. For tangent, any real value of $u$ is valid. This check is a consequence of [boundedness](!/trigonometry/properties) and prevents reporting nonexistent solutions.
 

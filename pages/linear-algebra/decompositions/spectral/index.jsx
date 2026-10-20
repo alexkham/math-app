@@ -2112,7 +2112,8 @@ const sectionsContent = {
     title: `What the Spectral Decomposition Is`,
     content: `Every real [symmetric](!/linear-algebra/matrix/types) [matrix](!/linear-algebra/matrix) $A$ factors as
 
-$$A = QDQ^T$$
+@academic[formula_callout:What the Spectral Decomposition Is
+$$A = QDQ^T$$]@
 
 where $Q$ is [orthogonal](!/linear-algebra/matrix/types) ($Q^TQ = QQ^T = I$) and $D = \\text{diag}(\\lambda_1, \\dots, \\lambda_n)$ is the diagonal matrix of [eigenvalues](!/linear-algebra/eigen). The columns of $Q$ are orthonormal eigenvectors: $Q = [\\mathbf{q}_1 \\; \\mathbf{q}_2 \\; \\cdots \\; \\mathbf{q}_n]$ with $A\\mathbf{q}_i = \\lambda_i\\mathbf{q}_i$ and $\\mathbf{q}_i \\cdot \\mathbf{q}_j = \\delta_{ij}$.
 
@@ -2194,7 +2195,8 @@ Together these three facts guarantee that $A = QDQ^T$ exists for every real symm
     title: `The Outer Product Form`,
     content: `Expanding $A = QDQ^T$ column by column produces the spectral decomposition in outer product form:
 
-$$A = \\lambda_1 \\mathbf{q}_1\\mathbf{q}_1^T + \\lambda_2 \\mathbf{q}_2\\mathbf{q}_2^T + \\cdots + \\lambda_n \\mathbf{q}_n\\mathbf{q}_n^T$$
+@academic[formula_callout:The Outer Product Form
+$$A = \\lambda_1 \\mathbf{q}_1\\mathbf{q}_1^T + \\lambda_2 \\mathbf{q}_2\\mathbf{q}_2^T + \\cdots + \\lambda_n \\mathbf{q}_n\\mathbf{q}_n^T$$]@
 
 Each term $\\lambda_i \\mathbf{q}_i\\mathbf{q}_i^T$ is a rank-one matrix. The matrix $\\mathbf{q}_i\\mathbf{q}_i^T$ is the [projection](!/linear-algebra/orthogonality/projections) matrix onto the line spanned by $\\mathbf{q}_i$: it sends any vector $\\mathbf{x}$ to $(\\mathbf{q}_i \\cdot \\mathbf{x})\\mathbf{q}_i$. Multiplying by $\\lambda_i$ scales the projection by the eigenvalue.
 
@@ -2215,9 +2217,9 @@ If an eigenvalue has multiplicity greater than $1$, apply [Gram-Schmidt](!/linea
 
 Assemble $Q$ (orthonormal eigenvectors as columns) and $D$ (eigenvalues on the diagonal in matching order).
 
-## Worked Example
+@academic[example:Worked Example
 
-For $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$: eigenvalues are $\\lambda_1 = 4$, $\\lambda_2 = 2$. Eigenvectors: $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 1)^T$, $\\mathbf{q}_2 = \\frac{1}{\\sqrt{2}}(1, -1)^T$. Then $A = 4 \\cdot \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix} + 2 \\cdot \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix} = \\begin{pmatrix} 2 & 2 \\\\ 2 & 2 \\end{pmatrix} + \\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix} = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$.`,
+For $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$: eigenvalues are $\\lambda_1 = 4$, $\\lambda_2 = 2$. Eigenvectors: $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 1)^T$, $\\mathbf{q}_2 = \\frac{1}{\\sqrt{2}}(1, -1)^T$. Then $A = 4 \\cdot \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix} + 2 \\cdot \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix} = \\begin{pmatrix} 2 & 2 \\\\ 2 & 2 \\end{pmatrix} + \\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix} = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$.]@`,
     before: ``,
     after: ``,
     link: ``,

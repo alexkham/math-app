@@ -903,7 +903,8 @@ const keyWords = [
     title: `Comparing Fractions with Same Denominator`,
     content: `When two fractions share a denominator, compare their numerators directly. The fraction with the larger numerator is the larger fraction.
 
-$$\\frac{5}{8} > \\frac{3}{8}$$
+@academic[formula_callout:Comparing Fractions with Same Denominator
+$$\\frac{5}{8} > \\frac{3}{8}$$]@
 
 The symbol $>$ reads "is greater than" and $<$ reads "is less than" — both belong to the [comparison symbols](!/math-symbols/arithmetic) of arithmetic.
 
@@ -919,7 +920,8 @@ This principle extends to any number of fractions with a common denominator. Arr
     title: `Comparing Fractions with Same Numerator`,
     content: `When two fractions share a numerator, compare their denominators inversely. The fraction with the smaller denominator is the larger fraction.
 
-$$\\frac{3}{4} > \\frac{3}{7}$$
+@academic[formula_callout:Comparing Fractions with Same Numerator
+$$\\frac{3}{4} > \\frac{3}{7}$$]@
 
 Both fractions take three parts, but fourths are larger pieces than sevenths. Three large pieces exceed three small pieces.
 
@@ -935,7 +937,8 @@ This inverse relationship often surprises at first. The key insight is that larg
 
 To compare $\\frac{3}{4}$ and $\\frac{5}{6}$, find a common denominator. The [LCM](!/arithmetic/divisibility/lcm) of 4 and 6 is 12.
 
-$$\\frac{3}{4} = \\frac{9}{12} \\quad \\text{and} \\quad \\frac{5}{6} = \\frac{10}{12}$$
+@academic[formula_callout:Common Denominator Method
+$$\\frac{3}{4} = \\frac{9}{12} \\quad \\text{and} \\quad \\frac{5}{6} = \\frac{10}{12}$$]@
 
 Since $10 > 9$, we have $\\frac{5}{6} > \\frac{3}{4}$.
 
@@ -951,7 +954,8 @@ This method always works and is the most reliable approach when other shortcuts 
 
 To compare $\\frac{3}{7}$ and $\\frac{4}{9}$:
 
-$$3 \\times 9 = 27 \\quad \\text{and} \\quad 7 \\times 4 = 28$$
+@academic[formula_callout:Cross-Multiplication Method
+$$3 \\times 9 = 27 \\quad \\text{and} \\quad 7 \\times 4 = 28$$]@
 
 Since $28 > 27$, we have $\\frac{4}{9} > \\frac{3}{7}$.
 
@@ -979,7 +983,8 @@ Other useful benchmarks include $\\frac{1}{4}$ and $\\frac{3}{4}$. With practice
 
 To compare $\\frac{5}{8}$ and $\\frac{7}{11}$:
 
-$$\\frac{5}{8} = 0.625 \\quad \\text{and} \\quad \\frac{7}{11} \\approx 0.636$$
+@academic[formula_callout:Decimal Conversion Method
+$$\\frac{5}{8} = 0.625 \\quad \\text{and} \\quad \\frac{7}{11} \\approx 0.636$$]@
 
 Since $0.636 > 0.625$, we have $\\frac{7}{11} > \\frac{5}{8}$.
 
@@ -995,7 +1000,8 @@ To convert fractions and decimals quickly, you can use the [fraction calculator]
     title: `Comparing Mixed Numbers`,
     content: `Compare [mixed numbers](!/arithmetic/fractions/mixed-numbers) by first examining the whole parts. The mixed number with the larger whole part is larger overall.
 
-$$5\\frac{1}{8} > 4\\frac{7}{8}$$
+@academic[formula_callout:Comparing Mixed Numbers
+$$5\\frac{1}{8} > 4\\frac{7}{8}$$]@
 
 Five wholes exceed four wholes regardless of the fractional parts.
 
@@ -1011,7 +1017,8 @@ When whole parts are equal, compare the fractional parts using any method from t
 
 Order $\\frac{2}{3}$, $\\frac{3}{4}$, $\\frac{5}{6}$, and $\\frac{7}{12}$ from least to greatest. The LCD of 3, 4, 6, and 12 is 12.
 
-$$\\frac{2}{3} = \\frac{8}{12}, \\quad \\frac{3}{4} = \\frac{9}{12}, \\quad \\frac{5}{6} = \\frac{10}{12}, \\quad \\frac{7}{12} = \\frac{7}{12}$$
+@academic[formula_callout:Ordering Multiple Fractions
+$$\\frac{2}{3} = \\frac{8}{12}, \\quad \\frac{3}{4} = \\frac{9}{12}, \\quad \\frac{5}{6} = \\frac{10}{12}, \\quad \\frac{7}{12} = \\frac{7}{12}$$]@
 
 Sorting by numerators: $7 < 8 < 9 < 10$. The order is $\\frac{7}{12} < \\frac{2}{3} < \\frac{3}{4} < \\frac{5}{6}$.`,
     before: ``,

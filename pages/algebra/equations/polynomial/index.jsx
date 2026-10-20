@@ -417,7 +417,7 @@ const sectionsContent = {
 
 ## Formulas Used on This Page
 
-- [Vieta's Formulas (General)](!/algebra/formulas#vietas_cubic) — $r_1 + r_2 + r_3 = -a_{n-1}$, $r_1 r_2 r_3 = (-1)^n a_0$
+- [Vieta's Formulas (General)](!/algebra/formulas#vietas_formulas_general) — $r_1 + r_2 + r_3 = -a_{n-1}$, $r_1 r_2 r_3 = (-1)^n a_0$
 `,
     before: ``,
     after: `
@@ -432,7 +432,8 @@ const sectionsContent = {
     title: `Definition and Degree`,
     content: `A polynomial equation in one variable has the general form
 
-$$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$$
+@academic[formula_callout:Definition and Degree
+$$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$$]@
 
 where $a_n \\neq 0$ and $n$ is a positive integer. The integer $n$ is the degree of the equation, and $a_n$ is the leading coefficient. The coefficients $a_0, a_1, \\dots, a_n$ are typically real numbers, though the theory extends naturally to complex coefficients.
 
@@ -450,7 +451,8 @@ The degree governs the maximum number of roots. A polynomial of degree $n$ has a
 
 The consequence for factoring is immediate. A degree-$n$ polynomial $P(x)$ with leading coefficient $a_n$ decomposes completely as
 
-$$P(x) = a_n(x - r_1)(x - r_2) \\cdots (x - r_n)$$
+@academic[formula_callout:The Fundamental Theorem of Algebra
+$$P(x) = a_n(x - r_1)(x - r_2) \\cdots (x - r_n)$$]@
 
 where $r_1, r_2, \\dots, r_n$ are the $n$ roots (not necessarily distinct). Over the complex numbers, every polynomial splits into linear factors. No irreducible quadratic or higher-degree factors remain.
 
@@ -462,9 +464,13 @@ Over the real numbers, the picture is slightly different. Complex roots of a pol
 
   obj3: {
     title: `The Factor Theorem and Remainder Theorem`,
-    content: `The Remainder Theorem connects evaluation and division: when a polynomial $P(x)$ is divided by the binomial $(x - r)$, the remainder equals $P(r)$. In symbols, $P(x) = (x - r)Q(x) + P(r)$, where $Q(x)$ is the quotient polynomial of degree one less than $P(x)$.
+    content: `@academic[rule_theorem:Remainder Theorem
+The Remainder Theorem connects evaluation and division: when a polynomial $P(x)$ is divided by the binomial $(x - r)$, the remainder equals $P(r)$. In symbols, $P(x) = (x - r)Q(x) + P(r)$, where $Q(x)$ is the quotient polynomial of degree one less than $P(x)$.]@
 
-The Factor Theorem is the special case where $P(r) = 0$. If substituting $r$ into $P(x)$ yields zero, then the remainder is zero, which means $(x - r)$ divides $P(x)$ evenly. Conversely, if $(x - r)$ is a factor, then $P(r) = 0$. Finding roots and finding factors are two expressions of the same problem.
+@academic[rule_theorem:Factor Theorem
+The Factor Theorem is the special case where $P(r) = 0$. If substituting $r$ into $P(x)$ yields zero, then the remainder is zero, which means $(x - r)$ divides $P(x)$ evenly. Conversely, if $(x - r)$ is a factor, then $P(r) = 0$.]@
+
+Finding roots and finding factors are two expressions of the same problem.
 
 This connection creates a degree-reduction strategy. Once a root $r$ is identified — by inspection, by the rational root theorem, or by other means — dividing $P(x)$ by $(x - r)$ produces a quotient $Q(x)$ of degree $n - 1$. The roots of $Q(x)$ are the remaining roots of $P(x)$. Repeating the process reduces the degree one step at a time until the quotient is quadratic, at which point the quadratic formula finishes the job.
 
@@ -480,7 +486,8 @@ This connection creates a degree-reduction strategy. Once a root $r$ is identifi
 
 This produces a finite, testable list of candidates. For the polynomial $2x^3 - 3x^2 - 8x + 12 = 0$, the constant term is $12$ and the leading coefficient is $2$. The divisors of $12$ are $\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12$, and the divisors of $2$ are $\\pm 1, \\pm 2$. The candidate rational roots are all fractions $\\frac{p}{q}$ formed from these:
 
-$$\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$$
+@academic[formula_callout:The Rational Root Theorem
+$$\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$$]@
 
 Testing $x = 2$: $P(2) = 2(8) - 3(4) - 8(2) + 12 = 16 - 12 - 16 + 12 = 0$. So $x = 2$ is a root, $(x - 2)$ is a factor, and dividing reduces the cubic to a quadratic $2x^2 + x - 6 = 0$, which the quadratic formula or further factoring can handle.
 
@@ -494,7 +501,8 @@ The theorem guarantees nothing about irrational or complex roots. A polynomial l
     title: `Solving Cubic Equations`,
     content: `A cubic equation $ax^3 + bx^2 + cx + d = 0$ can be transformed into a reduced (depressed) cubic by eliminating the $x^2$ term. The substitution $x = t - \\frac{b}{3a}$ produces an equation of the form
 
-$$t^3 + pt + q = 0$$
+@academic[formula_callout:Solving Cubic Equations
+$$t^3 + pt + q = 0$$]@
 
 where $p$ and $q$ depend on the original coefficients. This depressed form is the starting point for Cardano's formula, which expresses the roots through cube roots and square roots of expressions involving $p$ and $q$.
 
@@ -563,15 +571,19 @@ $$r_1 + r_2 + r_3 = -a_{n-1} \\qquad r_1 r_2 r_3 = (-1)^n a_0$$
 
 For the monic polynomial $x^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$ with roots $r_1, r_2, \\dots, r_n$, the coefficients encode symmetric combinations of the roots:
 
-$$r_1 + r_2 + \\cdots + r_n = -a_{n-1}$$
+@academic[formula_callout:Relationships Between Roots and Coefficients
+$$r_1 + r_2 + \\cdots + r_n = -a_{n-1}$$]@
 
-$$r_1 r_2 + r_1 r_3 + \\cdots + r_{n-1}r_n = a_{n-2}$$
+@academic[formula_callout:Relationships Between Roots and Coefficients
+$$r_1 r_2 + r_1 r_3 + \\cdots + r_{n-1}r_n = a_{n-2}$$]@
 
-$$r_1 r_2 r_3 + \\cdots = -a_{n-3}$$
+@academic[formula_callout:Relationships Between Roots and Coefficients
+$$r_1 r_2 r_3 + \\cdots = -a_{n-3}$$]@
 
 continuing with alternating signs down to
 
-$$r_1 \\cdot r_2 \\cdots r_n = (-1)^n a_0$$
+@academic[formula_callout:Relationships Between Roots and Coefficients
+$$r_1 \\cdot r_2 \\cdots r_n = (-1)^n a_0$$]@
 
 Each formula equates a coefficient to an elementary symmetric polynomial in the roots. The first gives the sum of all roots, the second the sum of all pairwise products, the third the sum of all triple products, and the last the product of all roots.
 

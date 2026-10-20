@@ -1578,7 +1578,7 @@ const sectionsContent = {
 
 @academic[formula_callout:Dot Product (Algebraic Form)
 $$\\mathbf{a} \\cdot \\mathbf{b} = a_1b_1 + a_2b_2 + \\cdots + a_nb_n = \\sum_{i=1}^{n} a_ib_i$$
-/linear-algebra/formulas#dot_product_algebraic_form]@
+/linear-algebra/formulas#dot_product_algebraic]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
@@ -1638,7 +1638,7 @@ To compute the dot product of two specific vectors, use the [vector calculator](
 
 @academic[formula_callout:Dot Product (Geometric Form)
 $$\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$$
-/linear-algebra/formulas#dot_product_geometric_form]@
+/linear-algebra/formulas#dot_product_geometric]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
@@ -1647,7 +1647,8 @@ The right-hand side multiplies the [magnitudes](!/linear-algebra/vectors/magnitu
 
 Why does this agree with the component-wise formula? Place $\\mathbf{a}$ and $\\mathbf{b}$ tail to tail and form the triangle completed by $\\mathbf{a} - \\mathbf{b}$. The law of cosines gives the squared length of the third side:
 
-$$\\|\\mathbf{a} - \\mathbf{b}\\|^2 = \\|\\mathbf{a}\\|^2 + \\|\\mathbf{b}\\|^2 - 2\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$$
+@academic[formula_callout:Geometric Definition
+$$\\|\\mathbf{a} - \\mathbf{b}\\|^2 = \\|\\mathbf{a}\\|^2 + \\|\\mathbf{b}\\|^2 - 2\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$$]@
 
 Now expand $\\|\\mathbf{a} - \\mathbf{b}\\|^2$ by writing it as $(\\mathbf{a} - \\mathbf{b}) \\cdot (\\mathbf{a} - \\mathbf{b})$ and distributing. The result is $\\|\\mathbf{a}\\|^2 - 2(\\mathbf{a} \\cdot \\mathbf{b}) + \\|\\mathbf{b}\\|^2$. Setting the two expressions equal and cancelling the squared norms leaves $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$. The component-based sum of products and the length-angle formula are two faces of a single quantity — one assembled from arithmetic on coordinates, the other encoding geometric information about orientation.`,
     before: ``,
@@ -1660,25 +1661,29 @@ Now expand $\\|\\mathbf{a} - \\mathbf{b}\\|^2$ by writing it as $(\\mathbf{a} - 
 
 ## Commutativity
 
-$$\\mathbf{a} \\cdot \\mathbf{b} = \\mathbf{b} \\cdot \\mathbf{a}$$
+@academic[formula_callout:Properties of the Dot Product
+$$\\mathbf{a} \\cdot \\mathbf{b} = \\mathbf{b} \\cdot \\mathbf{a}$$]@
 
 The order of the two vectors does not matter. This follows directly from commutativity of real number multiplication: $a_ib_i = b_ia_i$ for every component.
 
 ## Distributivity
 
-$$\\mathbf{a} \\cdot (\\mathbf{b} + \\mathbf{c}) = \\mathbf{a} \\cdot \\mathbf{b} + \\mathbf{a} \\cdot \\mathbf{c}$$
+@academic[formula_callout:Properties of the Dot Product
+$$\\mathbf{a} \\cdot (\\mathbf{b} + \\mathbf{c}) = \\mathbf{a} \\cdot \\mathbf{b} + \\mathbf{a} \\cdot \\mathbf{c}$$]@
 
 The dot product distributes over vector addition. This allows the dot product of a vector with a sum to be broken apart, a property used constantly when expanding expressions involving multiple vectors.
 
 ## Scalar Factoring
 
-$$(c\\mathbf{a}) \\cdot \\mathbf{b} = c(\\mathbf{a} \\cdot \\mathbf{b})$$
+@academic[formula_callout:Properties of the Dot Product
+$$(c\\mathbf{a}) \\cdot \\mathbf{b} = c(\\mathbf{a} \\cdot \\mathbf{b})$$]@
 
 A scalar multiplied into one of the vectors can be pulled out of the dot product entirely. Combined with commutativity, this also gives $\\mathbf{a} \\cdot (c\\mathbf{b}) = c(\\mathbf{a} \\cdot \\mathbf{b})$.
 
 ## Positive Definiteness
 
-$$\\mathbf{a} \\cdot \\mathbf{a} = \\|\\mathbf{a}\\|^2 \\geq 0, \\quad \\text{with equality if and only if } \\mathbf{a} = \\mathbf{0}$$
+@academic[formula_callout:Properties of the Dot Product
+$$\\mathbf{a} \\cdot \\mathbf{a} = \\|\\mathbf{a}\\|^2 \\geq 0, \\quad \\text{with equality if and only if } \\mathbf{a} = \\mathbf{0}$$]@
 
 The dot product of a vector with itself is the sum of squared components — always non-negative, and zero only for the zero vector. This property ties the dot product directly to the norm and ensures that the geometric notion of length is consistent with the algebraic framework.`,
     before: ``,
@@ -1691,7 +1696,7 @@ The dot product of a vector with itself is the sum of squared components — alw
 
 @academic[formula_callout:Dot Product Magnitude Relation
 $$\\mathbf{v} \\cdot \\mathbf{v} = \\|\\mathbf{v}\\|^2$$
-/linear-algebra/formulas#dot_product_magnitude_relation]@
+/linear-algebra/formulas#self_dot_product]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
@@ -1746,7 +1751,7 @@ This three-way classification is a fast diagnostic tool. Checking whether a dot 
 
 @academic[formula_callout:Orthogonality Test
 $$\\mathbf{a} \\cdot \\mathbf{b} = 0 \\iff \\mathbf{a} \\perp \\mathbf{b}$$
-/linear-algebra/formulas#orthogonality_test]@
+/linear-algebra/formulas#orthogonality_condition]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
@@ -1766,7 +1771,7 @@ Orthogonality is far more than a geometric curiosity. Orthogonal vectors are alg
 
 @academic[formula_callout:Cauchy-Schwarz Inequality
 $$|\\mathbf{a} \\cdot \\mathbf{b}| \\leq \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|$$
-/linear-algebra/formulas#cauchy_schwarz_inequality]@
+/linear-algebra/formulas#cauchy-schwarz_inequality]@
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
@@ -1814,11 +1819,17 @@ Equivalently, the denominator can be written $\\mathbf{b} \\cdot \\mathbf{b}$. T
 
 Removing the projected component from $\\mathbf{a}$ leaves behind the perpendicular part:
 
+@academic[formula_callout:Orthogonal Decomposition
 $$\\mathbf{a}_{\\perp} = \\mathbf{a} - \\text{proj}_{\\mathbf{b}}\\,\\mathbf{a}$$
+/linear-algebra/formulas#orthogonal_decomposition]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 Together, the two pieces reconstruct the original:
 
-$$\\mathbf{a} = \\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} + \\mathbf{a}_{\\perp}$$
+@academic[formula_callout:Orthogonal Projection
+$$\\mathbf{a} = \\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} + \\mathbf{a}_{\\perp}$$]@
 
 The parallel component lies along $\\mathbf{b}$; the perpendicular component satisfies $\\mathbf{a}_{\\perp} \\cdot \\mathbf{b} = 0$, a fact that follows by substituting the formula and simplifying. These two constituents are geometrically independent — adjusting one leaves the other unchanged, and each accounts for information the other entirely misses.
 

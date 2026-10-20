@@ -1391,11 +1391,13 @@ const sectionsContent = {
     content: `
 A set $A$ is a subset of a set $B$ if every element of $A$ is also an element of $B$. This relationship is written:
 
-$$A \\subseteq B$$
+@academic[formula_callout:Subsets
+$$A \\subseteq B$$]@
 
 The formal definition uses a universal quantifier:
 
-$$A \\subseteq B \\iff \\forall x\\,(x \\in A \\Rightarrow x \\in B)$$
+@academic[formula_callout:Subsets
+$$A \\subseteq B \\iff \\forall x\\,(x \\in A \\Rightarrow x \\in B)$$]@
 
 Consider $A = \\{2, 4\\}$ and $B = \\{1, 2, 3, 4, 5\\}$. Since both $2$ and $4$ appear in $B$, we have $A \\subseteq B$. However, $\\{2, 6\\} \\not\\subseteq B$ because $6 \\notin B$ — a single missing element breaks the subset relationship.
 
@@ -1416,11 +1418,13 @@ The first fact is immediate since every element of $A$ trivially belongs to $A$.
     content: `
 A set $A$ is a proper subset of $B$ if $A$ is a subset of $B$ but $A$ is not equal to $B$. This is written:
 
-$$A \\subset B$$
+@academic[formula_callout:Proper Subsets
+$$A \\subset B$$]@
 
 Equivalently:
 
-$$A \\subset B \\iff (A \\subseteq B) \\land (A \\neq B)$$
+@academic[formula_callout:Proper Subsets
+$$A \\subset B \\iff (A \\subseteq B) \\land (A \\neq B)$$]@
 
 The distinction matters: $\\{1, 2\\} \\subseteq \\{1, 2\\}$ is true, but $\\{1, 2\\} \\subset \\{1, 2\\}$ is false because the two sets are equal. For a proper subset, there must exist at least one element in $B$ that does not belong to $A$.
 
@@ -1437,17 +1441,20 @@ The empty set satisfies $\\emptyset \\subset A$ for every non-empty set $A$, sin
     content: `
 The superset relation is the inverse of the subset relation. If $A \\subseteq B$, then $B$ is a superset of $A$, written:
 
-$$B \\supseteq A$$
+@academic[formula_callout:Superset
+$$B \\supseteq A$$]@
 
 This is read as "$B$ contains $A$" or "$B$ is a superset of $A$." Similarly, if $A \\subset B$, then $B$ is a proper superset of $A$:
 
-$$B \\supset A$$
+@academic[formula_callout:Superset
+$$B \\supset A$$]@
 
 The superset notation simply reverses perspective. Whether to write $A \\subseteq B$ or $B \\supseteq A$ depends on which set you want to emphasize. Both statements convey the same relationship.
 
 The standard number sets provide a natural example of superset chains:
 
-$$\\mathbb{C} \\supset \\mathbb{R} \\supset \\mathbb{Q} \\supset \\mathbb{Z} \\supset \\mathbb{N}$$
+@academic[formula_callout:Superset
+$$\\mathbb{C} \\supset \\mathbb{R} \\supset \\mathbb{Q} \\supset \\mathbb{Z} \\supset \\mathbb{N}$$]@
 
 Each set properly contains the one to its right: the [complex numbers](!/complex-numbers) contain the reals, which contain the rationals, and so on.
     `,
@@ -1462,7 +1469,8 @@ A set with $n$ elements has exactly $2^n$ subsets. This count includes both the 
 
 The reasoning is straightforward: for each element, there are two choices — include it in the subset or exclude it. With $n$ elements, this gives:
 
-$$2 \\times 2 \\times \\cdots \\times 2 = 2^n$$
+@academic[formula_callout:Number of Subsets
+$$2 \\times 2 \\times \\cdots \\times 2 = 2^n$$]@
 
 independent choices, yielding $2^n$ distinct subsets.
 
@@ -1485,7 +1493,8 @@ Examples:
 
 This counting principle connects directly to the [binomial coefficients](!/probability/combinatorics): the number of subsets of size $k$ from a set of $n$ elements is $\\binom{n}{k}$, and summing over all possible sizes gives:
 
-$$\\sum_{k=0}^{n} \\binom{n}{k} = 2^n$$
+@academic[formula_callout:Number of Subsets
+$$\\sum_{k=0}^{n} \\binom{n}{k} = 2^n$$]@
     `,
     before: ``,
     after: ``,
@@ -1496,11 +1505,13 @@ $$\\sum_{k=0}^{n} \\binom{n}{k} = 2^n$$
     content: `
 The power set of a set $A$, denoted $\\mathcal{P}(A)$ or $2^A$, is the set of all subsets of $A$:
 
-$$\\mathcal{P}(A) = \\{S : S \\subseteq A\\}$$
+@academic[formula_callout:Power Set
+$$\\mathcal{P}(A) = \\{S : S \\subseteq A\\}$$]@
 
 For $A = \\{1, 2\\}$, the power set is:
 
-$$\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, \\{1\\}, \\{2\\}, \\{1, 2\\}\\}$$
+@academic[formula_callout:Power Set
+$$\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, \\{1\\}, \\{2\\}, \\{1, 2\\}\\}$$]@
 
 The empty set and $A$ itself are always elements of $\\mathcal{P}(A)$.
 
@@ -1515,7 +1526,8 @@ $$|\\mathcal{P}(A)| = 2^{|A|}$$
 
 The power set of the empty set deserves attention:
 
-$$\\mathcal{P}(\\emptyset) = \\{\\emptyset\\}$$
+@academic[formula_callout:Power Set
+$$\\mathcal{P}(\\emptyset) = \\{\\emptyset\\}$$]@
 
 This is not the empty set — it is a set containing one element (the empty set). The distinction matters: $|\\mathcal{P}(\\emptyset)| = 1$, not $0$.
 

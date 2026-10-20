@@ -2067,7 +2067,8 @@ Step 3: Solve for $y$.
 
 Step 4: Write $f^{-1}(x) = $ the result.
 
-Example: Find the inverse of $f(x) = 3x - 7$.
+@academic[example:Example
+Find the inverse of $f(x) = 3x - 7$.
 
 Step 1: $y = 3x - 7$
 
@@ -2075,9 +2076,10 @@ Step 2: $x = 3y - 7$
 
 Step 3: $x + 7 = 3y$, so $y = \\dfrac{x + 7}{3}$
 
-Step 4: $f^{-1}(x) = \\dfrac{x + 7}{3}$
+Step 4: $f^{-1}(x) = \\dfrac{x + 7}{3}$]@
 
-Example: Find the inverse of $f(x) = \\dfrac{2x + 1}{x - 3}$.
+@academic[example:Example
+Find the inverse of $f(x) = \\dfrac{2x + 1}{x - 3}$.
 
 Step 1: $y = \\dfrac{2x + 1}{x - 3}$
 
@@ -2085,7 +2087,7 @@ Step 2: $x = \\dfrac{2y + 1}{y - 3}$
 
 Step 3: $x(y - 3) = 2y + 1$, so $xy - 3x = 2y + 1$, thus $xy - 2y = 3x + 1$, giving $y(x - 2) = 3x + 1$, and $y = \\dfrac{3x + 1}{x - 2}$
 
-Step 4: $f^{-1}(x) = \\dfrac{3x + 1}{x - 2}$`,
+Step 4: $f^{-1}(x) = \\dfrac{3x + 1}{x - 2}$]@`,
     before: ``,
     after: ``,
     link: '',
@@ -2139,9 +2141,11 @@ The first equation holds for $x$ in the domain of $f^{-1}$; the second holds for
 
 Verify that $f(x) = 5x - 2$ and $g(x) = \\dfrac{x + 2}{5}$ are inverses.
 
-$$f(g(x)) = f\\left(\\frac{x + 2}{5}\\right) = 5 \\cdot \\frac{x + 2}{5} - 2 = (x + 2) - 2 = x \\checkmark$$
+@academic[formula_callout:Verifying Inverses via Composition
+$$f(g(x)) = f\\left(\\frac{x + 2}{5}\\right) = 5 \\cdot \\frac{x + 2}{5} - 2 = (x + 2) - 2 = x \\checkmark$$]@
 
-$$g(f(x)) = g(5x - 2) = \\frac{(5x - 2) + 2}{5} = \\frac{5x}{5} = x \\checkmark$$
+@academic[formula_callout:Verifying Inverses via Composition
+$$g(f(x)) = g(5x - 2) = \\frac{(5x - 2) + 2}{5} = \\frac{5x}{5} = x \\checkmark$$]@
 
 Both compositions return $x$, confirming that $g = f^{-1}$.
 

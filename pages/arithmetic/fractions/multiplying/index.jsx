@@ -830,7 +830,8 @@ export async function getStaticProps(){
     title: `Multiplying Fractions — Basic Rule`,
     content: `To multiply two fractions, multiply the numerators to get the new numerator and multiply the denominators to get the new denominator. For fractions $\\frac{a}{b}$ and $\\frac{c}{d}$:
 
-$$\\frac{a}{b} \\times \\frac{c}{d} = \\frac{a \\times c}{b \\times d}$$
+@academic[formula_callout:Multiplying Fractions — Basic Rule
+$$\\frac{a}{b} \\times \\frac{c}{d} = \\frac{a \\times c}{b \\times d}$$]@
 
 For example, $\\frac{2}{3} \\times \\frac{4}{5} = \\frac{2 \\times 4}{3 \\times 5} = \\frac{8}{15}$.
 
@@ -844,7 +845,8 @@ This rule makes sense geometrically. Taking $\\frac{2}{3}$ of $\\frac{4}{5}$ mea
     title: `Multiplying Fractions by Whole Numbers`,
     content: `A whole number can be written as a fraction with denominator 1. The number 5 is $\\frac{5}{1}$. This allows the same multiplication rule to apply.
 
-$$\\frac{3}{4} \\times 5 = \\frac{3}{4} \\times \\frac{5}{1} = \\frac{15}{4} = 3\\frac{3}{4}$$
+@academic[formula_callout:Multiplying Fractions by Whole Numbers
+$$\\frac{3}{4} \\times 5 = \\frac{3}{4} \\times \\frac{5}{1} = \\frac{15}{4} = 3\\frac{3}{4}$$]@
 
 Alternatively, think of multiplying a fraction by a whole number as repeated addition. The expression $4 \\times \\frac{2}{3}$ means $\\frac{2}{3} + \\frac{2}{3} + \\frac{2}{3} + \\frac{2}{3} = \\frac{8}{3}$.
 
@@ -860,7 +862,8 @@ Both interpretations yield the same result. The whole number multiplies the nume
 
 Consider $\\frac{4}{9} \\times \\frac{3}{8}$. The numerator 4 and denominator 8 share a factor of 4. The numerator 3 and denominator 9 share a factor of 3. Canceling both:
 
-$$\\frac{4}{9} \\times \\frac{3}{8} = \\frac{1}{3} \\times \\frac{1}{2} = \\frac{1}{6}$$
+@academic[formula_callout:Cross-Canceling Before Multiplying
+$$\\frac{4}{9} \\times \\frac{3}{8} = \\frac{1}{3} \\times \\frac{1}{2} = \\frac{1}{6}$$]@
 
 Without canceling first, the product is $\\frac{12}{72}$, which then requires finding the [GCD](!/arithmetic/divisibility/gcd) to reduce. Cross-canceling reaches the simplified answer directly.`,
     before: ``,
@@ -874,7 +877,8 @@ Without canceling first, the product is $\\frac{12}{72}$, which then requires fi
 
 To compute $2\\frac{1}{3} \\times 1\\frac{1}{2}$, first convert both to improper fractions. The value $2\\frac{1}{3}$ becomes $\\frac{7}{3}$ and $1\\frac{1}{2}$ becomes $\\frac{3}{2}$.
 
-$$\\frac{7}{3} \\times \\frac{3}{2} = \\frac{21}{6} = \\frac{7}{2} = 3\\frac{1}{2}$$
+@academic[formula_callout:Multiplying Mixed Numbers
+$$\\frac{7}{3} \\times \\frac{3}{2} = \\frac{21}{6} = \\frac{7}{2} = 3\\frac{1}{2}$$]@
 
 Cross-canceling applies here too. The 3 in the numerator and the 3 in the denominator cancel, leaving $\\frac{7}{1} \\times \\frac{1}{2} = \\frac{7}{2}$ immediately. See [mixed numbers](!/arithmetic/fractions/mixed-numbers) for conversion methods.
 
@@ -888,7 +892,8 @@ You can check any product of mixed numbers with the [fraction calculator](!/calc
     title: `Multiplying More Than Two Fractions`,
     content: `The multiplication rule extends to any number of fractions. Multiply all numerators together and all denominators together.
 
-$$\\frac{2}{3} \\times \\frac{3}{4} \\times \\frac{4}{5} = \\frac{2 \\times 3 \\times 4}{3 \\times 4 \\times 5} = \\frac{24}{60} = \\frac{2}{5}$$
+@academic[formula_callout:Multiplying More Than Two Fractions
+$$\\frac{2}{3} \\times \\frac{3}{4} \\times \\frac{4}{5} = \\frac{2 \\times 3 \\times 4}{3 \\times 4 \\times 5} = \\frac{24}{60} = \\frac{2}{5}$$]@
 
 Cross-canceling across all fractions before multiplying is particularly efficient here. In the example above, the 3 in the first denominator cancels with the 3 in the second numerator; the 4 in the second denominator cancels with the 4 in the third numerator. What remains is $\\frac{2}{5}$ with no multiplication needed.`,
     before: ``,
@@ -900,7 +905,8 @@ Cross-canceling across all fractions before multiplying is particularly efficien
     title: `The Word "Of" Means Multiply`,
     content: `In mathematical contexts, the word "of" signals multiplication. Finding $\\frac{2}{3}$ of 12 means computing $\\frac{2}{3} \\times 12$.
 
-$$\\frac{2}{3} \\times 12 = \\frac{2 \\times 12}{3} = \\frac{24}{3} = 8$$
+@academic[formula_callout:The Word "Of" Means Multiply
+$$\\frac{2}{3} \\times 12 = \\frac{2 \\times 12}{3} = \\frac{24}{3} = 8$$]@
 
 This interpretation appears constantly in applications. A recipe asks for $\\frac{3}{4}$ of a cup. A sale offers $\\frac{1}{3}$ off the original price. A problem states that $\\frac{2}{5}$ of the students are absent. Each "of" translates to multiplication.`,
     before: ``,

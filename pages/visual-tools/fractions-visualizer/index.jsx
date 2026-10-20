@@ -195,7 +195,8 @@ export default function FractionsVisualizerPage({seoData, explanationContent,
       {/* Right column - Table */}
       <div>
          <div style={{width:'100%',margin:'auto',marginLeft:'-50px'}}>
-          <div style={{transform:'scale(0.99)'}}>
+          {/* zoom, not transform: scale keeps the full layout height and leaves empty space above and below the tool */}
+          <div style={{ zoom: 0.99}}>
         <FractionCircleApp  explanationContent={explanationContent}/>
       </div> 
           

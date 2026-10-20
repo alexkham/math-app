@@ -180,7 +180,8 @@ obj0: {
     title: `Definition`,
     content: `A rational equation is any equation containing at least one fraction in which the variable appears in the denominator. The equation
 
-$$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$$
+@academic[formula_callout:Definition
+$$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$$]@
 
 is rational because the variable $x$ sits inside two denominators. By contrast, the equation $\\frac{x + 1}{3} = 2$ is not rational — its denominator is a constant, and the equation is simply a [linear equation](!/algebra/equations/linear) with a fractional coefficient.
 
@@ -212,17 +213,21 @@ The domain is the set of all real numbers minus the excluded values. Only candid
 
 For the equation $\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$, the LCD is $(x - 1)(x + 4)$. Multiplying every term by this product:
 
-$$3(x + 4) + 2(x - 1) = (x - 1)(x + 4)$$
+@academic[formula_callout:Solving by Clearing Denominators
+$$3(x + 4) + 2(x - 1) = (x - 1)(x + 4)$$]@
 
 Expanding both sides:
 
-$$3x + 12 + 2x - 2 = x^2 + 3x - 4$$
+@academic[formula_callout:Solving by Clearing Denominators
+$$3x + 12 + 2x - 2 = x^2 + 3x - 4$$]@
 
-$$5x + 10 = x^2 + 3x - 4$$
+@academic[formula_callout:Solving by Clearing Denominators
+$$5x + 10 = x^2 + 3x - 4$$]@
 
 Rearranging into standard form:
 
-$$x^2 - 2x - 14 = 0$$
+@academic[formula_callout:Solving by Clearing Denominators
+$$x^2 - 2x - 14 = 0$$]@
 
 The [quadratic formula](!/algebra/equations/quadratic) gives $x = 1 \\pm \\sqrt{15}$. Neither value equals $1$ or $-4$, so both lie within the domain and both are genuine solutions.
 
@@ -240,15 +245,20 @@ To solve your own rational equation with each step shown, use the [rational equa
 
 Return to the equation $\\frac{x}{x - 3} = \\frac{9}{x - 3} + 2$. The domain excludes $x = 3$. Multiply both sides by $(x - 3)$:
 
-$$x = 9 + 2(x - 3)$$
+@academic[formula_callout:Extraneous Solutions
+$$x = 9 + 2(x - 3)$$]@
 
-$$x = 9 + 2x - 6$$
+@academic[formula_callout:Extraneous Solutions
+$$x = 9 + 2x - 6$$]@
 
-$$x = 2x + 3$$
+@academic[formula_callout:Extraneous Solutions
+$$x = 2x + 3$$]@
 
-$$-x = 3$$
+@academic[formula_callout:Extraneous Solutions
+$$-x = 3$$]@
 
-$$x = -3$$
+@academic[formula_callout:Extraneous Solutions
+$$x = -3$$]@
 
 Checking: $\\frac{-3}{-3 - 3} = \\frac{-3}{-6} = \\frac{1}{2}$ and $\\frac{9}{-3 - 3} + 2 = \\frac{9}{-6} + 2 = -\\frac{3}{2} + 2 = \\frac{1}{2}$. The value $x = -3$ checks out.
 
@@ -266,19 +276,24 @@ The rule is absolute: every candidate obtained after clearing denominators must 
 
 Consider $\\frac{5}{x} + 3 = \\frac{7}{x}$. The only denominator is $x$, so the domain excludes $x = 0$. Multiplying every term by $x$:
 
-$$5 + 3x = 7$$
+@academic[formula_callout:Equations with Monomial Denominators
+$$5 + 3x = 7$$]@
 
-$$3x = 2$$
+@academic[formula_callout:Equations with Monomial Denominators
+$$3x = 2$$]@
 
-$$x = \\frac{2}{3}$$
+@academic[formula_callout:Equations with Monomial Denominators
+$$x = \\frac{2}{3}$$]@
 
 Since $\\frac{2}{3} \\neq 0$, the solution is valid.
 
 When different powers of $x$ appear in the denominators, the LCD uses the highest power. The equation $\\frac{1}{x} + \\frac{1}{x^2} = \\frac{3}{4}$ has LCD $4x^2$. Multiplying through:
 
-$$4x + 4 = 3x^2$$
+@academic[formula_callout:Equations with Monomial Denominators
+$$4x + 4 = 3x^2$$]@
 
-$$3x^2 - 4x - 4 = 0$$
+@academic[formula_callout:Equations with Monomial Denominators
+$$3x^2 - 4x - 4 = 0$$]@
 
 The quadratic formula yields $x = \\frac{4 \\pm \\sqrt{16 + 48}}{6} = \\frac{4 \\pm 8}{6}$, giving $x = 2$ or $x = -\\frac{2}{3}$. Neither is zero, so both are valid solutions.
 
@@ -294,25 +309,32 @@ Monomial-denominator equations serve as the natural entry point for the techniqu
 
 Consider the equation $\\frac{2}{x^2 - 1} = \\frac{1}{x - 1}$. The left denominator factors as $(x - 1)(x + 1)$, so the domain excludes $x = 1$ and $x = -1$. The LCD is $(x - 1)(x + 1)$. Multiplying:
 
-$$2 = x + 1$$
+@academic[formula_callout:Equations with Polynomial Denominators
+$$2 = x + 1$$]@
 
-$$x = 1$$
+@academic[formula_callout:Equations with Polynomial Denominators
+$$x = 1$$]@
 
 But $x = 1$ is excluded from the domain. The candidate is extraneous, and the equation has no solution.
 
 More complex denominators require careful bookkeeping. For the equation
 
-$$\\frac{3}{x^2 + 5x + 6} + \\frac{1}{x + 2} = \\frac{2}{x + 3}$$
+@academic[formula_callout:Equations with Polynomial Denominators
+$$\\frac{3}{x^2 + 5x + 6} + \\frac{1}{x + 2} = \\frac{2}{x + 3}$$]@
 
 factor the quadratic: $x^2 + 5x + 6 = (x + 2)(x + 3)$. The domain excludes $x = -2$ and $x = -3$. The LCD is $(x + 2)(x + 3)$. Multiplying every term:
 
-$$3 + (x + 3) = 2(x + 2)$$
+@academic[formula_callout:Equations with Polynomial Denominators
+$$3 + (x + 3) = 2(x + 2)$$]@
 
-$$3 + x + 3 = 2x + 4$$
+@academic[formula_callout:Equations with Polynomial Denominators
+$$3 + x + 3 = 2x + 4$$]@
 
-$$6 + x = 2x + 4$$
+@academic[formula_callout:Equations with Polynomial Denominators
+$$6 + x = 2x + 4$$]@
 
-$$x = 2$$
+@academic[formula_callout:Equations with Polynomial Denominators
+$$x = 2$$]@
 
 Since $2 \\neq -2$ and $2 \\neq -3$, the solution $x = 2$ is valid.
 
@@ -326,7 +348,8 @@ The factoring step is not optional. Attempting to clear unfactored denominators 
     title: `Proportions and Cross-Multiplication`,
     content: `A proportion is a rational equation in which a single fraction on the left equals a single fraction on the right:
 
-$$\\frac{A}{B} = \\frac{C}{D}$$
+@academic[formula_callout:Proportions and Cross-Multiplication
+$$\\frac{A}{B} = \\frac{C}{D}$$]@
 
 Cross-multiplication converts this into the polynomial equation $AD = BC$, provided $B \\neq 0$ and $D \\neq 0$. This is a special case of clearing denominators — the LCD is $BD$, and multiplying both sides by $BD$ produces $AD = BC$ directly.
 

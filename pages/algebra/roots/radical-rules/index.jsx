@@ -453,15 +453,18 @@ $$\\sqrt[n]{ab} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$$
 
 This rule works in both directions. A single radical can split:
 
-$$\\sqrt{12} = \\sqrt{4 \\cdot 3} = \\sqrt{4} \\cdot \\sqrt{3} = 2\\sqrt{3}$$
+@academic[formula_callout:Product Rule
+$$\\sqrt{12} = \\sqrt{4 \\cdot 3} = \\sqrt{4} \\cdot \\sqrt{3} = 2\\sqrt{3}$$]@
 
 Or separate radicals can combine:
 
-$$\\sqrt{3} \\cdot \\sqrt{12} = \\sqrt{36} = 6$$
+@academic[formula_callout:Product Rule
+$$\\sqrt{3} \\cdot \\sqrt{12} = \\sqrt{36} = 6$$]@
 
 The rule derives from exponent laws. In [rational exponent](!/algebra/roots/rational-exponents) notation:
 
-$$(ab)^{1/n} = a^{1/n} \\cdot b^{1/n}$$
+@academic[formula_callout:Product Rule
+$$(ab)^{1/n} = a^{1/n} \\cdot b^{1/n}$$]@
 
 This is the power of a product rule from [powers](!/algebra/powers), applied to fractional exponents.
 
@@ -486,15 +489,18 @@ $$\\sqrt[n]{\\frac{a}{b}} = \\frac{\\sqrt[n]{a}}{\\sqrt[n]{b}}$$
 
 The rule requires $b \\neq 0$. A fraction under a radical splits into a radical over a radical:
 
-$$\\sqrt{\\frac{49}{16}} = \\frac{\\sqrt{49}}{\\sqrt{16}} = \\frac{7}{4}$$
+@academic[formula_callout:Quotient Rule
+$$\\sqrt{\\frac{49}{16}} = \\frac{\\sqrt{49}}{\\sqrt{16}} = \\frac{7}{4}$$]@
 
 The reverse direction combines:
 
-$$\\frac{\\sqrt{50}}{\\sqrt{2}} = \\sqrt{\\frac{50}{2}} = \\sqrt{25} = 5$$
+@academic[formula_callout:Quotient Rule
+$$\\frac{\\sqrt{50}}{\\sqrt{2}} = \\sqrt{\\frac{50}{2}} = \\sqrt{25} = 5$$]@
 
 The rule derives from exponents:
 
-$$\\left(\\frac{a}{b}\\right)^{1/n} = \\frac{a^{1/n}}{b^{1/n}}$$
+@academic[formula_callout:Quotient Rule
+$$\\left(\\frac{a}{b}\\right)^{1/n} = \\frac{a^{1/n}}{b^{1/n}}$$]@
 
 This is the power of a quotient rule from [powers](!/algebra/powers), extended to [rational exponents](!/algebra/roots/rational-exponents).
 
@@ -521,17 +527,21 @@ The exponent $m$ becomes the numerator; the index $n$ becomes the denominator. T
 
 The same result can be computed by taking the root first, then raising to the power:
 
-$$\\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$
+@academic[formula_callout:Power Rule
+$$\\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$]@
 
 Both approaches yield identical results:
 
-$$\\sqrt[3]{8^2} = 8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$$
+@academic[formula_callout:Power Rule
+$$\\sqrt[3]{8^2} = 8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$$]@
 
-$$\\sqrt{16^3} = 16^{3/2} = \\left(\\sqrt{16}\\right)^3 = 4^3 = 64$$
+@academic[formula_callout:Power Rule
+$$\\sqrt{16^3} = 16^{3/2} = \\left(\\sqrt{16}\\right)^3 = 4^3 = 64$$]@
 
 When the exponent and index share a common factor, the radical simplifies:
 
-$$\\sqrt[6]{a^4} = a^{4/6} = a^{2/3} = \\sqrt[3]{a^2}$$
+@academic[formula_callout:Power Rule
+$$\\sqrt[6]{a^4} = a^{4/6} = a^{2/3} = \\sqrt[3]{a^2}$$]@
 
 The index reduced from 6 to 3 by canceling the common factor 2. This technique appears frequently in [simplifying radicals](!/algebra/roots/simplifying).
 
@@ -554,17 +564,20 @@ $$\\sqrt[m]{\\sqrt[n]{a}} = \\sqrt[mn]{a}$$
 
 The nested structure collapses into a single radical whose index is the product.
 
-$$\\sqrt{\\sqrt{16}} = \\sqrt[2 \\cdot 2]{16} = \\sqrt[4]{16} = 2$$
+@academic[formula_callout:Radical of a Radical
+$$\\sqrt{\\sqrt{16}} = \\sqrt[2 \\cdot 2]{16} = \\sqrt[4]{16} = 2$$]@
 
 Verification: $\\sqrt{16} = 4$, and $\\sqrt{4} = 2$. The result matches.
 
-$$\\sqrt[3]{\\sqrt{64}} = \\sqrt[6]{64} = 2$$
+@academic[formula_callout:Radical of a Radical
+$$\\sqrt[3]{\\sqrt{64}} = \\sqrt[6]{64} = 2$$]@
 
 Verification: $\\sqrt{64} = 8$, and $\\sqrt[3]{8} = 2$. Correct.
 
 In exponent notation, this rule becomes transparent:
 
-$$\\left(a^{1/n}\\right)^{1/m} = a^{1/(mn)}$$
+@academic[formula_callout:Radical of a Radical
+$$\\left(a^{1/n}\\right)^{1/m} = a^{1/(mn)}$$]@
 
 This is the power of a power rule from [powers](!/algebra/powers) — multiply the exponents. Since $\\frac{1}{n} \\cdot \\frac{1}{m} = \\frac{1}{mn}$, the indices multiply.
 
@@ -580,7 +593,8 @@ Nested radicals sometimes appear in [simplifying](!/algebra/roots/simplifying) p
 
 The indices must match. The product and quotient rules require the same index on all radicals involved:
 
-$$\\sqrt{a} \\cdot \\sqrt[3]{b} \\neq \\sqrt[?]{ab}$$
+@academic[formula_callout:When Rules Apply
+$$\\sqrt{a} \\cdot \\sqrt[3]{b} \\neq \\sqrt[?]{ab}$$]@
 
 To multiply radicals with different indices, convert to [rational exponents](!/algebra/roots/rational-exponents), find a common denominator, then proceed.
 
@@ -588,7 +602,8 @@ For even indices, radicands must be non-negative in real numbers. The [propertie
 
 Odd roots, by contrast, accept negative radicands and preserve the sign:
 
-$$\\sqrt[n]{-a} = -\\sqrt[n]{a} \\quad (n \\text{ odd})$$
+@academic[formula_callout:When Rules Apply
+$$\\sqrt[n]{-a} = -\\sqrt[n]{a} \\quad (n \\text{ odd})$$]@
 
 For example, $\\sqrt[3]{-27} = -\\sqrt[3]{27} = -3$. The negative sign passes through the radical freely when the index is odd.
 
@@ -604,25 +619,29 @@ Violating the even-index restrictions does not merely give a wrong answer — it
 
 Distributing a radical over addition:
 
-$$\\sqrt{a + b} \\neq \\sqrt{a} + \\sqrt{b}$$
+@academic[formula_callout:Common Errors
+$$\\sqrt{a + b} \\neq \\sqrt{a} + \\sqrt{b}$$]@
 
 This is false. The radical of a sum is not the sum of radicals. Check with numbers: $\\sqrt{9 + 16} = \\sqrt{25} = 5$, but $\\sqrt{9} + \\sqrt{16} = 3 + 4 = 7$.
 
 Mishandling different indices:
 
-$$\\sqrt{2} \\cdot \\sqrt[3]{2} \\neq \\sqrt[5]{4}$$
+@academic[formula_callout:Common Errors
+$$\\sqrt{2} \\cdot \\sqrt[3]{2} \\neq \\sqrt[5]{4}$$]@
 
 Indices do not simply add. Converting to exponents: $2^{1/2} \\cdot 2^{1/3} = 2^{5/6} = \\sqrt[6]{2^5}$. The correct approach requires [rational exponent](!/algebra/roots/rational-exponents) techniques.
 
 Ignoring domain restrictions:
 
-$$\\sqrt{-3} \\cdot \\sqrt{-3} \\neq \\sqrt{9} = 3$$
+@academic[formula_callout:Common Errors
+$$\\sqrt{-3} \\cdot \\sqrt{-3} \\neq \\sqrt{9} = 3$$]@
 
 The left side has no real value. Each factor is non-real. The product rule cannot be applied because the restriction $a, b \\geq 0$ fails. This error is addressed in radicals and complex numbers.
 
 Dropping absolute values:
 
-$$\\sqrt{x^2} = |x|, \\quad \\text{not } x$$
+@academic[formula_callout:Common Errors
+$$\\sqrt{x^2} = |x|, \\quad \\text{not } x$$]@
 
 When $x$ might be negative, the absolute value is essential. The [properties of radicals](!/algebra/roots/properties) page explains why.`,
     before: ``,
@@ -634,7 +653,8 @@ When $x$ might be negative, the absolute value is essential. The [properties of 
     title: `Applying the Rules`,
     content: `The radical rules enable systematic simplification. Factoring a radicand and applying the product rule extracts values from under the radical:
 
-$$\\sqrt{72} = \\sqrt{36 \\cdot 2} = \\sqrt{36} \\cdot \\sqrt{2} = 6\\sqrt{2}$$
+@academic[formula_callout:Applying the Rules
+$$\\sqrt{72} = \\sqrt{36 \\cdot 2} = \\sqrt{36} \\cdot \\sqrt{2} = 6\\sqrt{2}$$]@
 
 Extracting perfect powers, rationalizing denominators, reducing indices, and combining like radicals all follow from the rules on this page. The complete toolkit for these techniques appears in [simplifying radicals](!/algebra/roots/simplifying), and methods for adding, subtracting, and multiplying radical expressions are covered in [operations with radicals](!/algebra/roots/operations). These rules also underpin solving [radical equations](!/algebra/roots/equations), where isolating and eliminating radicals requires systematic application of these identities.`,
     before: ``,

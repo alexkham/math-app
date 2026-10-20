@@ -101,7 +101,8 @@ This seems impossible. How can every individual outcome have zero probability, y
 
 The resolution: Probability for continuous variables lives in intervals, not points. A single point is infinitesimally thin—it has no width, so it captures no probability mass. Just as a geometric point on a line has zero length, a single value in a continuous distribution has zero probability.
 
-Example: Pick a random number between 0 and 1. What's $P(X = 0.5)$? Exactly zero. What's $P(0.49 < X < 0.51)$? Positive. Probability only exists across ranges.
+@academic[example:Example
+Pick a random number between 0 and 1. What's $P(X = 0.5)$? Exactly zero. What's $P(0.49 < X < 0.51)$? Positive. Probability only exists across ranges.]@
 
 ## Density ≠ Probability
 
@@ -116,7 +117,8 @@ $$P(a \\leq X \\leq b) = \\int_a^b f(x)dx$$
 
 Probability is the **area** under the curve, not the height. This means $f(x)$ can exceed 1, unlike a PMF where $p(x) \\leq 1$ always.
 
-Example: Uniform [distribution](!/probability/distributions) on $[0, 0.5]$ has $f(x) = 2$. The density is 2, but the total probability integrates to 1.
+@academic[example:Example
+Uniform [distribution](!/probability/distributions) on $[0, 0.5]$ has $f(x) = 2$. The density is 2, but the total probability integrates to 1.]@
 
 The PDF is the continuous analog of mass in the discrete case. Where mass concentrates at points, density spreads across regions.
     `,
@@ -255,13 +257,15 @@ The total area under the density curve must equal exactly 1.
 
 This is your total probability budget. The entire curve must integrate to 1—no more, no less.
 
-Example: [Uniform distribution](!/probability/distributions/continuous/uniform) on $[0, 2]$ has $f(x) = \\frac{1}{2}$ for $x \\in [0,2]$.
+@academic[example:Example
+[Uniform distribution](!/probability/distributions/continuous/uniform) on $[0, 2]$ has $f(x) = \\frac{1}{2}$ for $x \\in [0,2]$.
 
-Check: $\\int_0^2 \\frac{1}{2}dx = \\frac{1}{2} \\cdot 2 = 1$. ✓
+Check: $\\int_0^2 \\frac{1}{2}dx = \\frac{1}{2} \\cdot 2 = 1$. ✓]@
 
-Example: [Exponential distribution](!/probability/distributions/continuous/exponential) with $f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$.
+@academic[example:Example
+[Exponential distribution](!/probability/distributions/continuous/exponential) with $f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$.
 
-Check: $\\int_0^{\\infty} \\lambda e^{-\\lambda x}dx = \\lambda \\cdot \\frac{1}{\\lambda} = 1$. ✓
+Check: $\\int_0^{\\infty} \\lambda e^{-\\lambda x}dx = \\lambda \\cdot \\frac{1}{\\lambda} = 1$. ✓]@
 
 ## Validation Process
 
@@ -454,7 +458,8 @@ $$P(a < X < b) = P(a \\leq X \\leq b)$$]@
 
 Why? Because $P(X = a) = 0$ for any single point. Adding or removing a zero-probability point doesn't change the total.
 
-Example: $P(X < 5) = P(X \\leq 5)$ exactly. No approximation, no difference.
+@academic[example:Example
+$P(X < 5) = P(X \\leq 5)$ exactly. No approximation, no difference.]@
 
 ## Tail Probabilities
 
@@ -890,7 +895,8 @@ Don't say "the probability at $x = 5$ is 0.8" when $f(5) = 0.8$. Say "the densit
 
 Unlike PMF values which must satisfy $p(x) \\leq 1$, PDF values can be arbitrarily large. The constraint is that the total area integrates to 1, not that individual heights stay below 1.
 
-Example: [Uniform distribution](!/probability/distributions/continuous/uniform) on $[0, 0.1]$ has $f(x) = 10$. This is perfectly valid.
+@academic[example:Example
+[Uniform distribution](!/probability/distributions/continuous/uniform) on $[0, 0.1]$ has $f(x) = 10$. This is perfectly valid.]@
 
 Don't reject a PDF just because $f(x) > 1$ somewhere.
 

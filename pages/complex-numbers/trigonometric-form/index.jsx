@@ -2215,20 +2215,24 @@ This shift from rectangular to polar thinking unlocks powerful computational sho
   title: `Modulus (Radius)`,
   content: `The modulus of a complex number $z = a + bi$ measures its distance from the origin in the complex plane. This quantity is computed using the Pythagorean theorem:
 
-$$r = |z| = \\sqrt{a^2 + b^2}$$
+@academic[formula_callout:Modulus (Radius)
+$$r = |z| = \\sqrt{a^2 + b^2}$$]@
 
 The modulus is always a non-negative real number. It equals zero only when both $a = 0$ and $b = 0$, meaning $z = 0$ is the sole complex number with zero modulus.
 
 ## Examples
 
 For $z = 3 + 4i$:
-$$r = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$$
+@academic[formula_callout:Modulus (Radius)
+$$r = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$$]@
 
 For $z = -2 + 2i$:
-$$r = \\sqrt{(-2)^2 + 2^2} = \\sqrt{4 + 4} = \\sqrt{8} = 2\\sqrt{2}$$
+@academic[formula_callout:Modulus (Radius)
+$$r = \\sqrt{(-2)^2 + 2^2} = \\sqrt{4 + 4} = \\sqrt{8} = 2\\sqrt{2}$$]@
 
 For $z = -5i$:
-$$r = \\sqrt{0^2 + (-5)^2} = \\sqrt{25} = 5$$
+@academic[formula_callout:Modulus (Radius)
+$$r = \\sqrt{0^2 + (-5)^2} = \\sqrt{25} = 5$$]@
 
 The modulus represents the "size" of a complex number without regard to its direction. Two numbers with the same modulus lie on a circle of radius $r$ centered at the origin.`,
   before: ``,
@@ -2303,22 +2307,26 @@ The principal argument provides a canonical choice when a unique angle is requir
 ## Quadrant I: $a > 0$, $b > 0$
 
 The arctangent gives the correct angle directly:
-$$\\theta = \\arctan\\left(\\frac{b}{a}\\right)$$
+@academic[formula_callout:Quadrant Considerations
+$$\\theta = \\arctan\\left(\\frac{b}{a}\\right)$$]@
 
 ## Quadrant II: $a < 0$, $b > 0$
 
 Add $\\pi$ to the arctangent result:
-$$\\theta = \\arctan\\left(\\frac{b}{a}\\right) + \\pi$$
+@academic[formula_callout:Quadrant Considerations
+$$\\theta = \\arctan\\left(\\frac{b}{a}\\right) + \\pi$$]@
 
 ## Quadrant III: $a < 0$, $b < 0$
 
 Subtract $\\pi$ from the arctangent result (for principal argument in $(-\\pi, \\pi]$):
-$$\\theta = \\arctan\\left(\\frac{b}{a}\\right) - \\pi$$
+@academic[formula_callout:Quadrant Considerations
+$$\\theta = \\arctan\\left(\\frac{b}{a}\\right) - \\pi$$]@
 
 ## Quadrant IV: $a > 0$, $b < 0$
 
 The arctangent gives the correct angle directly (it will be negative):
-$$\\theta = \\arctan\\left(\\frac{b}{a}\\right)$$
+@academic[formula_callout:Quadrant Considerations
+$$\\theta = \\arctan\\left(\\frac{b}{a}\\right)$$]@
 
 ## Alternative: The atan2 Function
 
@@ -2335,28 +2343,32 @@ Many calculators and programming languages provide $\\text{atan2}(b, a)$, which 
 ## Positive Real Axis
 
 For $z = a$ where $a > 0$:
-$$\\theta = 0$$
+@academic[formula_callout:Special Angles on the Axes
+$$\\theta = 0$$]@
 
 The number points directly to the right.
 
 ## Positive Imaginary Axis
 
 For $z = bi$ where $b > 0$:
-$$\\theta = \\frac{\\pi}{2} \\quad (90°)$$
+@academic[formula_callout:Special Angles on the Axes
+$$\\theta = \\frac{\\pi}{2} \\quad (90°)$$]@
 
 The number points directly upward.
 
 ## Negative Real Axis
 
 For $z = a$ where $a < 0$:
-$$\\theta = \\pi \\quad (180°)$$
+@academic[formula_callout:Special Angles on the Axes
+$$\\theta = \\pi \\quad (180°)$$]@
 
 The number points directly to the left.
 
 ## Negative Imaginary Axis
 
 For $z = bi$ where $b < 0$:
-$$\\theta = -\\frac{\\pi}{2} \\quad (-90°) \\quad \\text{or equivalently} \\quad \\frac{3\\pi}{2} \\quad (270°)$$
+@academic[formula_callout:Special Angles on the Axes
+$$\\theta = -\\frac{\\pi}{2} \\quad (-90°) \\quad \\text{or equivalently} \\quad \\frac{3\\pi}{2} \\quad (270°)$$]@
 
 The number points directly downward. Which value you use depends on your chosen interval for the principal argument.
 
@@ -2385,11 +2397,13 @@ This formula encodes the relationship between polar and Cartesian coordinates. T
 
 Because the combination $\\cos\\theta + i\\sin\\theta$ appears constantly, an abbreviated notation exists:
 
-$$\\text{cis}\\,\\theta = \\cos\\theta + i\\sin\\theta$$
+@academic[formula_callout:The Trigonometric Form
+$$\\text{cis}\\,\\theta = \\cos\\theta + i\\sin\\theta$$]@
 
 Using this shorthand, the trigonometric form becomes:
 
-$$z = r\\,\\text{cis}\\,\\theta$$
+@academic[formula_callout:The Trigonometric Form
+$$z = r\\,\\text{cis}\\,\\theta$$]@
 
 The notation "cis" stands for "cosine + i sine." It appears frequently in precalculus and engineering contexts.
 
@@ -2397,7 +2411,8 @@ The notation "cis" stands for "cosine + i sine." It appears frequently in precal
 
 The trigonometric form leads directly to the [exponential form](!/complex-numbers/exponential-form) through Euler's formula:
 
-$$e^{i\\theta} = \\cos\\theta + i\\sin\\theta$$
+@academic[formula_callout:The Trigonometric Form
+$$e^{i\\theta} = \\cos\\theta + i\\sin\\theta$$]@
 
 This identity shows that $\\text{cis}\\,\\theta = e^{i\\theta}$, so the trigonometric and exponential forms are two notations for the same representation.`,
   before: ``,
@@ -2458,27 +2473,28 @@ notation: {
   content: `To convert $z = a + bi$ into trigonometric form $z = r\\,\\text{cis}\\,\\theta$:
 
 **Step 1:** Calculate the modulus.
-$$r = \\sqrt{a^2 + b^2}$$
+@academic[formula_callout:Converting Algebraic to Trigonometric
+$$r = \\sqrt{a^2 + b^2}$$]@
 
 **Step 2:** Determine the argument using $\\tan\\theta = \\frac{b}{a}$ with appropriate quadrant adjustment.
 
 **Step 3:** Write the result as $z = r\\,\\text{cis}\\,\\theta$ or $z = r(\\cos\\theta + i\\sin\\theta)$.
 
-## Example 1: Convert $z = 1 + \\sqrt{3}i$
+@academic[example:Example 1: Convert $z = 1 + \\sqrt{3}i$
 
 Step 1: $r = \\sqrt{1^2 + (\\sqrt{3})^2} = \\sqrt{1 + 3} = \\sqrt{4} = 2$
 
 Step 2: $\\tan\\theta = \\frac{\\sqrt{3}}{1} = \\sqrt{3}$. Since $a > 0$ and $b > 0$ (first quadrant), $\\theta = \\arctan(\\sqrt{3}) = \\frac{\\pi}{3}$.
 
-Step 3: $z = 2\\,\\text{cis}\\,\\frac{\\pi}{3}$
+Step 3: $z = 2\\,\\text{cis}\\,\\frac{\\pi}{3}$]@
 
-## Example 2: Convert $z = -3 - 3i$
+@academic[example:Example 2: Convert $z = -3 - 3i$
 
 Step 1: $r = \\sqrt{(-3)^2 + (-3)^2} = \\sqrt{9 + 9} = \\sqrt{18} = 3\\sqrt{2}$
 
 Step 2: $\\tan\\theta = \\frac{-3}{-3} = 1$. Since $a < 0$ and $b < 0$ (third quadrant), $\\theta = \\arctan(1) - \\pi = \\frac{\\pi}{4} - \\pi = -\\frac{3\\pi}{4}$.
 
-Step 3: $z = 3\\sqrt{2}\\,\\text{cis}\\left(-\\frac{3\\pi}{4}\\right)$`,
+Step 3: $z = 3\\sqrt{2}\\,\\text{cis}\\left(-\\frac{3\\pi}{4}\\right)$]@`,
   before: ``,
   after: ``,
   link: '',
@@ -2489,36 +2505,38 @@ Step 3: $z = 3\\sqrt{2}\\,\\text{cis}\\left(-\\frac{3\\pi}{4}\\right)$`,
   content: `To convert $z = r\\,\\text{cis}\\,\\theta$ into algebraic form $z = a + bi$:
 
 **Step 1:** Calculate the real part.
-$$a = r\\cos\\theta$$
+@academic[formula_callout:Converting Trigonometric to Algebraic
+$$a = r\\cos\\theta$$]@
 
 **Step 2:** Calculate the imaginary part.
-$$b = r\\sin\\theta$$
+@academic[formula_callout:Converting Trigonometric to Algebraic
+$$b = r\\sin\\theta$$]@
 
 **Step 3:** Write the result as $z = a + bi$.
 
-## Example 1: Convert $z = 4\\,\\text{cis}\\,60°$
+@academic[example:Example 1: Convert $z = 4\\,\\text{cis}\\,60°$
 
 Step 1: $a = 4\\cos 60° = 4 \\cdot \\frac{1}{2} = 2$
 
 Step 2: $b = 4\\sin 60° = 4 \\cdot \\frac{\\sqrt{3}}{2} = 2\\sqrt{3}$
 
-Step 3: $z = 2 + 2\\sqrt{3}i$
+Step 3: $z = 2 + 2\\sqrt{3}i$]@
 
-## Example 2: Convert $z = 5\\,\\text{cis}\\,\\frac{3\\pi}{2}$
+@academic[example:Example 2: Convert $z = 5\\,\\text{cis}\\,\\frac{3\\pi}{2}$
 
 Step 1: $a = 5\\cos\\frac{3\\pi}{2} = 5 \\cdot 0 = 0$
 
 Step 2: $b = 5\\sin\\frac{3\\pi}{2} = 5 \\cdot (-1) = -5$
 
-Step 3: $z = 0 + (-5)i = -5i$
+Step 3: $z = 0 + (-5)i = -5i$]@
 
-## Example 3: Convert $z = 2\\,\\text{cis}\\,\\frac{5\\pi}{6}$
+@academic[example:Example 3: Convert $z = 2\\,\\text{cis}\\,\\frac{5\\pi}{6}$
 
 Step 1: $a = 2\\cos\\frac{5\\pi}{6} = 2 \\cdot \\left(-\\frac{\\sqrt{3}}{2}\\right) = -\\sqrt{3}$
 
 Step 2: $b = 2\\sin\\frac{5\\pi}{6} = 2 \\cdot \\frac{1}{2} = 1$
 
-Step 3: $z = -\\sqrt{3} + i$`,
+Step 3: $z = -\\sqrt{3} + i$]@`,
   before: ``,
   after: ``,
   link: '',
@@ -2554,19 +2572,19 @@ $$\\frac{z_1}{z_2} = \\frac{r_1}{r_2}\\,\\text{cis}(\\theta_1 - \\theta_2)$$
 
 Divide the moduli and subtract the arguments.
 
-## Example: Multiplication
+@academic[example:Example: Multiplication
 
 Let $z_1 = 2\\,\\text{cis}\\,30°$ and $z_2 = 3\\,\\text{cis}\\,45°$.
 
-$$z_1 \\cdot z_2 = (2)(3)\\,\\text{cis}(30° + 45°) = 6\\,\\text{cis}\\,75°$$
+$$z_1 \\cdot z_2 = (2)(3)\\,\\text{cis}(30° + 45°) = 6\\,\\text{cis}\\,75°$$]@
 
-## Example: Division
+@academic[example:Example: Division
 
 Let $z_1 = 10\\,\\text{cis}\\,\\frac{2\\pi}{3}$ and $z_2 = 2\\,\\text{cis}\\,\\frac{\\pi}{6}$.
 
 $$\\frac{z_1}{z_2} = \\frac{10}{2}\\,\\text{cis}\\left(\\frac{2\\pi}{3} - \\frac{\\pi}{6}\\right) = 5\\,\\text{cis}\\,\\frac{\\pi}{2}$$
 
-These formulas extend naturally to [De Moivre's theorem](!/complex-numbers/demoivre-theorem), which handles powers and roots with equal elegance.`,
+These formulas extend naturally to [De Moivre's theorem](!/complex-numbers/demoivre-theorem), which handles powers and roots with equal elegance.]@`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[De Moivre's Theorem](!/complex-numbers/de-moivres-theorem) →@`,
   link: '',

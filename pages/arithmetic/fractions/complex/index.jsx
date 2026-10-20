@@ -880,7 +880,8 @@ export async function getStaticProps(){
 
 Examples include:
 
-$$\\frac{\\frac{1}{2}}{3} \\quad \\frac{4}{\\frac{2}{5}} \\quad \\frac{\\frac{3}{4}}{\\frac{5}{6}}$$
+@academic[formula_callout:What Is a Complex Fraction
+$$\\frac{\\frac{1}{2}}{3} \\quad \\frac{4}{\\frac{2}{5}} \\quad \\frac{\\frac{3}{4}}{\\frac{5}{6}}$$]@
 
 The first has a fraction only in the numerator. The second has a fraction only in the denominator. The third has fractions in both positions.
 
@@ -896,7 +897,8 @@ Complex fractions arise naturally in algebra, physics, and rate problems. Any di
 
 Apply the rule for [dividing fractions](!/arithmetic/fractions/dividing): multiply by the reciprocal.
 
-$$\\frac{\\frac{3}{4}}{\\frac{5}{6}} = \\frac{3}{4} \\div \\frac{5}{6} = \\frac{3}{4} \\times \\frac{6}{5} = \\frac{18}{20} = \\frac{9}{10}$$
+@academic[formula_callout:Simplifying — Method 1: Division
+$$\\frac{\\frac{3}{4}}{\\frac{5}{6}} = \\frac{3}{4} \\div \\frac{5}{6} = \\frac{3}{4} \\times \\frac{6}{5} = \\frac{18}{20} = \\frac{9}{10}$$]@
 
 When only the numerator or only the denominator contains a fraction, the same approach works. For $\\frac{\\frac{2}{3}}{4}$, rewrite 4 as $\\frac{4}{1}$ and proceed: $\\frac{2}{3} \\div \\frac{4}{1} = \\frac{2}{3} \\times \\frac{1}{4} = \\frac{2}{12} = \\frac{1}{6}$.`,
     before: ``,
@@ -910,7 +912,8 @@ When only the numerator or only the denominator contains a fraction, the same ap
 
 For $\\frac{\\frac{1}{2}}{\\frac{3}{4}}$, the internal denominators are 2 and 4. The LCD is 4.
 
-$$\\frac{\\frac{1}{2}}{\\frac{3}{4}} \\times \\frac{4}{4} = \\frac{\\frac{1}{2} \\times 4}{\\frac{3}{4} \\times 4} = \\frac{2}{3}$$
+@academic[formula_callout:Simplifying — Method 2: LCD
+$$\\frac{\\frac{1}{2}}{\\frac{3}{4}} \\times \\frac{4}{4} = \\frac{\\frac{1}{2} \\times 4}{\\frac{3}{4} \\times 4} = \\frac{2}{3}$$]@
 
 This method is especially efficient when the numerator or denominator contains sums or differences of fractions, avoiding multiple division steps.`,
     before: ``,
@@ -944,7 +947,8 @@ Simplify $\\frac{2\\frac{1}{2}}{1\\frac{1}{4}}$:
 
 Convert: $2\\frac{1}{2} = \\frac{5}{2}$ and $1\\frac{1}{4} = \\frac{5}{4}$.
 
-$$\\frac{\\frac{5}{2}}{\\frac{5}{4}} = \\frac{5}{2} \\times \\frac{4}{5} = \\frac{20}{10} = 2$$
+@academic[formula_callout:Complex Fractions with Mixed Numbers
+$$\\frac{\\frac{5}{2}}{\\frac{5}{4}} = \\frac{5}{2} \\times \\frac{4}{5} = \\frac{20}{10} = 2$$]@
 
 The 5s cancel during multiplication, leaving $\\frac{4}{2} = 2$ directly.`,
     before: ``,

@@ -653,7 +653,8 @@ The case $a = 0$ is excluded. The expression $0^0$ is not covered by this rule â
     title: `Rational Exponent Rule`,
     content: `A fractional exponent connects powers to roots:
 
-$$a^{m/n} = \\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$
+@academic[formula_callout:Rational Exponent Rule
+$$a^{m/n} = \\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$]@
 
 Both forms are equivalent. The expression $8^{2/3} = (\\sqrt[3]{8})^2 = 2^2 = 4$, and $27^{4/3} = (\\sqrt[3]{27})^4 = 3^4 = 81$.
 

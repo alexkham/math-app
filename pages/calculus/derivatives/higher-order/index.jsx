@@ -1228,6 +1228,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1717,7 +1719,8 @@ const sectionsContent = {
     content: `
 The second derivative of $f$ is the derivative of $f'$:
 
-$$f''(x) = \\frac{d}{dx}[f'(x)]$$
+@academic[formula_callout:Definition
+$$f''(x) = \\frac{d}{dx}[f'(x)]$$]@
 
 The third derivative is the derivative of $f''$, and so on. The $n$th derivative is obtained by differentiating $f$ a total of $n$ times.
 
@@ -1817,7 +1820,8 @@ Polynomials terminate under repeated differentiation. Each differentiation reduc
 
 For $f(x) = x^5$:
 
-$$f'(x) = 5x^4, \\quad f''(x) = 20x^3, \\quad f'''(x) = 60x^2, \\quad f^{(4)}(x) = 120x, \\quad f^{(5)}(x) = 120, \\quad f^{(6)}(x) = 0$$
+@academic[formula_callout:Patterns in Repeated Differentiation — Polynomials
+$$f'(x) = 5x^4, \\quad f''(x) = 20x^3, \\quad f'''(x) = 60x^2, \\quad f^{(4)}(x) = 120x, \\quad f^{(5)}(x) = 120, \\quad f^{(6)}(x) = 0$$]@
 
 The coefficient at the $n$th derivative of $x^n$ is $n! = n(n-1)(n-2) \\cdots 1$, accumulated from the [power rule](!/calculus/derivatives/rules) applied $n$ times. Specifically, $\\frac{d^n}{dx^n}[x^n] = n!$ and $\\frac{d^k}{dx^k}[x^n] = 0$ for all $k > n$.
 
@@ -1860,11 +1864,13 @@ For $a^x$ with arbitrary base: since $a^x = e^{x \\ln a}$, the $n$th derivative 
     content: `
 The derivatives of $\\sin x$ cycle with period four:
 
-$$\\sin x \\to \\cos x \\to -\\sin x \\to -\\cos x \\to \\sin x \\to \\cdots$$
+@academic[formula_callout:Patterns in Repeated Differentiation — Sine and Cosine
+$$\\sin x \\to \\cos x \\to -\\sin x \\to -\\cos x \\to \\sin x \\to \\cdots$$]@
 
 The $n$th derivative of $\\sin x$ depends on $n \\mod 4$:
 
-$$\\frac{d^n}{dx^n}[\\sin x] = \\begin{cases} \\sin x & n \\equiv 0 \\pmod{4} \\\\ \\cos x & n \\equiv 1 \\pmod{4} \\\\ -\\sin x & n \\equiv 2 \\pmod{4} \\\\ -\\cos x & n \\equiv 3 \\pmod{4} \\end{cases}$$
+@academic[formula_callout:Patterns in Repeated Differentiation — Sine and Cosine
+$$\\frac{d^n}{dx^n}[\\sin x] = \\begin{cases} \\sin x & n \\equiv 0 \\pmod{4} \\\\ \\cos x & n \\equiv 1 \\pmod{4} \\\\ -\\sin x & n \\equiv 2 \\pmod{4} \\\\ -\\cos x & n \\equiv 3 \\pmod{4} \\end{cases}$$]@
 
 A compact formula captures all four cases: $\\frac{d^n}{dx^n}[\\sin x] = \\sin\\left(x + \\frac{n\\pi}{2}\\right)$. The same holds for cosine: $\\frac{d^n}{dx^n}[\\cos x] = \\cos\\left(x + \\frac{n\\pi}{2}\\right)$.
 
@@ -2162,8 +2168,25 @@ const schemas = {
     }),
   };
 
+  const smoothnessLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Classes by number of continuous derivatives',
+    preface: 'A function is in $C^n$ when $f, f\', \\ldots, f^{(n)}$ all exist and are continuous. Each level up asks for more, so every class sits inside the one below it.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Smooth is not the top',
+    conclusion: 'Analytic is strictly stronger than $C^\\infty$: $e^{-1/x^2}$ (with $f(0) = 0$) is smooth, yet its Taylor series at $0$ is identically zero and does not represent it.',
+    axis: { top: 'strongest', label: 'smoothness', bottom: 'weakest' },
+    levels: [
+      { id: 'analytic', name: 'Analytic', sub: 'equal to its Taylor series' },
+      { id: 'cinf', name: '$C^\\infty$ — smooth', sub: 'derivatives of all orders: polynomials, $e^x$, $\\sin x$' },
+      { id: 'cn', name: '$C^n$', sub: '$n$ continuous derivatives: $x|x|$ is $C^1$, not $C^2$' },
+      { id: 'c0', name: '$C^0$', sub: '[continuous](!/calculus/limits/continuity) functions' },
+    ],
+  };
+
   return {
   props: {
+    smoothnessLevels,
     demoUnits,
     sectionsContent,
     introContent,
@@ -2185,7 +2208,9 @@ const schemas = {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function PageTemplate({
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function PageTemplate({smoothnessLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -2300,6 +2325,14 @@ export default function PageTemplate({
           <div key={'unit-xAbsX'} dangerouslySetInnerHTML={{ __html: demoUnits.xAbsX }} />,
           `Joining x² and −x² matches values and first derivatives at 0, but not second derivatives, 2 and −2.`,
           <div key={'obj9-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj9Table}}/>,
+          <DiagramFrame
+            key={'obj9-diagram'}
+            id="smoothness-class-pyramid"
+            title="Smoothness classes"
+            source="/calculus/derivatives/higher-order"
+          >
+            <Hierarchy data={smoothnessLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+          </DiagramFrame>,
         ]
     },
     {

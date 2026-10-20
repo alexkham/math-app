@@ -1789,6 +1789,8 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import choleskyDiagrams from '@/app/components/linear-algebra copy/matrix/choleskyDiagrams'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -2211,7 +2213,7 @@ For column $j$, the diagonal entry is
 and the sub-diagonal entries (for $i > j$) are
 
 @academic[formula_callout:cholesky_off_diagonal_formula|Cholesky Off-Diagonal Formula|$$l_{ij} = \\frac{1}{l_{jj}}\\left(a_{ij} - \\sum_{k=1}^{j-1} l_{ik}l_{jk}\\right)$$]@
-@academic[formulas_link:/linear-algebra/formulas#cholesky_off_diagonal_formula]@
+@academic[formulas_link:/linear-algebra/formulas#cholesky_off-diagonal_formula]@
 
 The square root in the diagonal formula is always real and positive because positive definiteness guarantees that the expression under the root is strictly positive at every step.
 
@@ -2225,7 +2227,8 @@ $l_{22} = \\sqrt{5 - 1^2} = \\sqrt{4} = 2$. $l_{32} = (1 - (-1)(1))/2 = 2/2 = 1$
 
 $l_{33} = \\sqrt{6 - (-1)^2 - 1^2} = \\sqrt{4} = 2$.
 
-$$L = \\begin{pmatrix} 2 & 0 & 0 \\\\ 1 & 2 & 0 \\\\ -1 & 1 & 2 \\end{pmatrix}$$
+@academic[formula_callout:The Algorithm
+$$L = \\begin{pmatrix} 2 & 0 & 0 \\\\ 1 & 2 & 0 \\\\ -1 & 1 & 2 \\end{pmatrix}$$]@
 
 Verification: $LL^T = \\begin{pmatrix} 4 & 2 & -2 \\\\ 2 & 5 & 1 \\\\ -2 & 1 & 6 \\end{pmatrix} = A$.`,
     before: ``,
@@ -2456,8 +2459,24 @@ const schemas = {
     }),
   };
 
+  const choleskyLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Each form specializes the one below',
+    preface: 'For a symmetric positive definite matrix, LU without pivoting always succeeds. Absorbing structure step by step leads from LU to Cholesky.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Why specialize',
+    conclusion: 'Cholesky exploits $A = A^T$ to halve the work and storage, and positive definiteness to remove pivoting. The $LDL^T$ form avoids square roots entirely.',
+    axis: { top: 'most specialized', label: 'specialization', bottom: 'most general' },
+    levels: [
+      { id: 'chol', name: 'Cholesky', sub: '$A = LL^T$' },
+      { id: 'ldl', name: '$LDL^T$', sub: 'symmetric positive definite, no pivoting' },
+      { id: 'lu', name: '[LU](!/linear-algebra/decompositions/lower-upper)', sub: 'general square matrices' },
+    ],
+  };
+
   return {
   props:{
+    choleskyLevels,
     demoUnits,
     sectionsContent,
     introContent,
@@ -2475,7 +2494,9 @@ const schemas = {
   }
 }
    }
-export default function PageTemplate({
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function PageTemplate({choleskyLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -2592,6 +2613,14 @@ export default function PageTemplate({
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrameV2
+            key={'obj9-diagram'}
+            id="lu-to-cholesky-ladder"
+            title="From LU to Cholesky"
+            source="/linear-algebra/decompositions/cholesky"
+          >
+            <Hierarchy data={choleskyLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+          </DiagramFrameV2>,
         ]
     },
     // obj10 was previously commented out in the source; uncommented so the

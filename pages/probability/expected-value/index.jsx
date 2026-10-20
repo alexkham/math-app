@@ -796,6 +796,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import weightedExpectedValueDiagrams from '@/app/components/probability/expected-value/weightedExpectedValueDiagrams'
 import discreteExpectedValueDiagrams from '@/app/components/probability/expected-value/discreteExpectedValueDiagrams'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1587,8 +1589,37 @@ const continuousExpectedValueFormulasData = {
     }),
   };
 
+  const expectedValueCases = {
+    prefaceTitle: 'Always a weighted average',
+    preface: 'Expected value is always computed the same way: each possible value is weighted by its probability and the weighted values are combined. Only the way of combining changes with the type of random variable.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'In both cases the idea is identical: the average of all possible outcomes, each weighted by how likely it is.',
+    parent: {
+      kicker: 'Expected value',
+      formula: '$E[X]$',
+      splitBy: 'the type of random variable',
+    },
+    cases: [
+      {
+        id: 'discrete', condition: 'discrete',
+        count: { n: 'Σ' },
+        headline: 'Weighted sum',
+        desc: 'multiply each value by its probability and add; works for a PMF or for tabulated probabilities',
+        formula: '$E[X] = \\sum_{i} x_i \\cdot P(X = x_i)$',
+      },
+      {
+        id: 'continuous', condition: 'continuous',
+        count: { n: '∫' },
+        headline: 'Weighted integral',
+        desc: 'multiply each $x$ by its density and integrate; probabilities come from area under the curve',
+        formula: '$E(X) = \\int x \\cdot f(x)\\,dx$',
+      },
+    ],
+  };
+
    return {
       props:{
+    expectedValueCases,
     demoUnits,
          sectionsContent,
          introContent,
@@ -1610,7 +1641,9 @@ const continuousExpectedValueFormulasData = {
     }
    }
 
-export default function ExpectedValuePage({
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function ExpectedValuePage({expectedValueCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1669,6 +1702,14 @@ export default function ExpectedValuePage({
         link:'',
         content:[
             sectionsContent.calculate.content,
+            <DiagramFrame
+              key={'calculate-diagram'}
+              id="expected-value-type-cases"
+              title="Expected value: sum or integral"
+              source="/probability/expected-value"
+            >
+              <CaseSplit data={expectedValueCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+            </DiagramFrame>,
         ]
     },
      {

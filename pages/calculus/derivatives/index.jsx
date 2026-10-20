@@ -235,19 +235,22 @@ const sectionsContent = {
     content: `
 Given a function $f$ and a point $x = a$, the difference quotient measures the average rate of change of $f$ over the interval from $a$ to $a + h$:
 
-$$\\frac{f(a + h) - f(a)}{h}$$
+@academic[formula_callout:The Difference Quotient and Its Limit
+$$\\frac{f(a + h) - f(a)}{h}$$]@
 
 Geometrically, this is the slope of the secant line connecting $(a, f(a))$ and $(a + h, f(a + h))$. As $h \\to 0$, the secant line rotates toward the tangent line at $x = a$.
 
 The derivative of $f$ at $a$ is defined as the limit of the difference quotient:
 
-$$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$
+@academic[formula_callout:The Difference Quotient and Its Limit
+$$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@
 
 When this limit exists, $f'(a)$ equals the slope of the tangent line to the graph of $f$ at the point $(a, f(a))$. When the limit does not exist—due to a corner, cusp, vertical tangent, or discontinuity—the derivative is undefined at that point.
 
 An equivalent form uses $x$ approaching $a$ directly:
 
-$$f'(a) = \\lim_{x \\to a} \\frac{f(x) - f(a)}{x - a}$$
+@academic[formula_callout:The Difference Quotient and Its Limit
+$$f'(a) = \\lim_{x \\to a} \\frac{f(x) - f(a)}{x - a}$$]@
 
 Both forms define the same quantity. The first emphasizes the increment $h$; the second emphasizes the point $x$ approaching $a$.
 `,

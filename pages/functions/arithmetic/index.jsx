@@ -1725,11 +1725,13 @@ At each input $x$, evaluate both functions and add their outputs.
 
 If $f(x) = x^2$ and $g(x) = 5x - 3$, then:
 
-$$(f + g)(x) = x^2 + 5x - 3$$
+@academic[formula_callout:Sum of Functions
+$$(f + g)(x) = x^2 + 5x - 3$$]@
 
 To evaluate at a specific point, say $x = 2$:
 
-$$(f + g)(2) = f(2) + g(2) = 4 + 7 = 11$$
+@academic[formula_callout:Sum of Functions
+$$(f + g)(2) = f(2) + g(2) = 4 + 7 = 11$$]@
 
 The same result comes from the combined formula: $4 + 10 - 3 = 11$.
 
@@ -1756,11 +1758,13 @@ At each input $x$, evaluate both functions and subtract the second from the firs
 
 If $f(x) = 3x + 7$ and $g(x) = x^2$, then:
 
-$$(f - g)(x) = 3x + 7 - x^2 = -x^2 + 3x + 7$$
+@academic[formula_callout:Difference of Functions
+$$(f - g)(x) = 3x + 7 - x^2 = -x^2 + 3x + 7$$]@
 
 Order matters. The function $f - g$ is not the same as $g - f$. If $(f - g)(x) = -x^2 + 3x + 7$, then $(g - f)(x) = x^2 - 3x - 7$. The outputs are negatives of each other:
 
-$$(g - f)(x) = -(f - g)(x)$$
+@academic[formula_callout:Difference of Functions
+$$(g - f)(x) = -(f - g)(x)$$]@
 
 Subtraction is neither commutative nor associative. Care with order and grouping is essential.
 
@@ -1785,7 +1789,8 @@ At each input $x$, evaluate both functions and multiply their outputs.
 
 If $f(x) = x + 2$ and $g(x) = x - 3$, then:
 
-$$(fg)(x) = (x + 2)(x - 3) = x^2 - x - 6$$
+@academic[formula_callout:Product of Functions
+$$(fg)(x) = (x + 2)(x - 3) = x^2 - x - 6$$]@
 
 The product of two linear functions is a quadratic. The product of two polynomials is a polynomial whose degree is the sum of the degrees.
 
@@ -1812,7 +1817,8 @@ At each input $x$, evaluate both functions and divide the first output by the se
 
 If $f(x) = x^2 - 1$ and $g(x) = x + 1$, then:
 
-$$\\left(\\frac{f}{g}\\right)(x) = \\frac{x^2 - 1}{x + 1} = \\frac{(x-1)(x+1)}{x+1} = x - 1$$
+@academic[formula_callout:Quotient of Functions
+$$\\left(\\frac{f}{g}\\right)(x) = \\frac{x^2 - 1}{x + 1} = \\frac{(x-1)(x+1)}{x+1} = x - 1$$]@
 
 provided $x \\neq -1$.
 
@@ -1836,13 +1842,17 @@ Method 1: Evaluate each function separately, then combine.
 
 For $(f - g)(4)$ where $f(x) = x^2$ and $g(x) = 2x + 1$:
 
-$$f(4) = 16, \\quad g(4) = 9$$
-$$(f - g)(4) = 16 - 9 = 7$$
+@academic[formula_callout:Notation and Evaluation at a Point
+$$f(4) = 16, \\quad g(4) = 9$$]@
+@academic[formula_callout:Notation and Evaluation at a Point
+$$(f - g)(4) = 16 - 9 = 7$$]@
 
 Method 2: Find the combined formula first, then evaluate.
 
-$$(f - g)(x) = x^2 - 2x - 1$$
-$$(f - g)(4) = 16 - 8 - 1 = 7$$
+@academic[formula_callout:Notation and Evaluation at a Point
+$$(f - g)(x) = x^2 - 2x - 1$$]@
+@academic[formula_callout:Notation and Evaluation at a Point
+$$(f - g)(4) = 16 - 8 - 1 = 7$$]@
 
 Both methods yield the same result. The first is often faster for a single evaluation; the second is necessary when working with the combined function repeatedly.
 
@@ -1871,7 +1881,8 @@ The intersection ensures both functions can be evaluated.
 
 If $f(x) = \\sqrt{x}$ with domain $[0, \\infty)$ and $g(x) = \\sqrt{4 - x}$ with domain $(-\\infty, 4]$, then:
 
-$$\\text{Domain of } f + g = [0, \\infty) \\cap (-\\infty, 4] = [0, 4]$$
+@academic[formula_callout:Domain of Combined Functions
+$$\\text{Domain of } f + g = [0, \\infty) \\cap (-\\infty, 4] = [0, 4]$$]@
 
 Only inputs from $0$ to $4$ lie in both domains.
 
@@ -1896,7 +1907,8 @@ Start with the intersection of domains, then remove any points where $g$ equals 
 
 If $f(x) = x + 3$ and $g(x) = x^2 - 4$, both have domain $(-\\infty, \\infty)$. The intersection is all real numbers. But $g(x) = 0$ when $x = 2$ or $x = -2$. So:
 
-$$\\text{Domain of } \\frac{f}{g} = (-\\infty, -2) \\cup (-2, 2) \\cup (2, \\infty)$$
+@academic[formula_callout:Additional Restrictions for Quotient
+$$\\text{Domain of } \\frac{f}{g} = (-\\infty, -2) \\cup (-2, 2) \\cup (2, \\infty)$$]@
 
 Even if the quotient simplifies algebraically to a function with no apparent restriction, the original domain exclusions remain. The quotient $\\dfrac{x^2 - 1}{x - 1} = x + 1$ simplifies, but the domain still excludes $x = 1$. The [graph](!/functions/graphs) has a hole at $(1, 2)$.
 
@@ -1930,15 +1942,18 @@ The table below sets sum and product behaviors side by side across the possible 
 
 For sums and differences, combine like terms:
 
-$$(3x^2 + 2x - 1) + (x^2 - 5x + 4) = 4x^2 - 3x + 3$$
+@academic[formula_callout:Algebraic Simplification
+$$(3x^2 + 2x - 1) + (x^2 - 5x + 4) = 4x^2 - 3x + 3$$]@
 
 For products, distribute and combine:
 
-$$(x + 3)(x - 2) = x^2 + x - 6$$
+@academic[formula_callout:Algebraic Simplification
+$$(x + 3)(x - 2) = x^2 + x - 6$$]@
 
 For quotients, factor and reduce when possible:
 
-$$\\frac{x^2 - 9}{x + 3} = \\frac{(x-3)(x+3)}{x+3} = x - 3 \\quad (x \\neq -3)$$
+@academic[formula_callout:Algebraic Simplification
+$$\\frac{x^2 - 9}{x + 3} = \\frac{(x-3)(x+3)}{x+3} = x - 3 \\quad (x \\neq -3)$$]@
 
 Simplification must respect domain restrictions. The reduced form $x - 3$ appears defined everywhere, but the original quotient excludes $x = -3$. The simplified function still has a hole at that point.
 
@@ -1970,13 +1985,15 @@ Revenue depends on price and quantity: $R = p \\cdot q$. If price is $p(x) = 50 
 
 Profit equals revenue minus cost. If $R(x)$ gives revenue from selling $x$ units and $C(x)$ gives the cost of producing them:
 
-$$P(x) = R(x) - C(x)$$
+@academic[formula_callout:Applications in Context
+$$P(x) = R(x) - C(x)$$]@
 
 Profit is positive when revenue exceeds cost, negative when cost exceeds revenue, and zero at break-even points where $R(x) = C(x)$.
 
 Average cost is total cost divided by quantity:
 
-$$\\bar{C}(x) = \\frac{C(x)}{x}$$
+@academic[formula_callout:Applications in Context
+$$\\bar{C}(x) = \\frac{C(x)}{x}$$]@
 
 This quotient is undefined at $x = 0$ (no items produced) and describes cost per unit at each production level.
 

@@ -1192,7 +1192,8 @@ export default function ChangeBasis2DPage({ instructions, demos,seoData, section
    </div>
    <br/>
    <br/>
-   <div style={{transform:'scale(0.9)'}}>
+   {/* zoom, not transform: scale keeps the full layout height and leaves empty space above and below the tool */}
+   <div style={{ zoom: 0.9}}>
    <ChangeBasis explanationOverride={explanationOverride}/>
    </div>
    <br/>

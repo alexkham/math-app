@@ -1195,7 +1195,8 @@ const sectionsContent = {
     title: `Orthogonal Sets`,
     content: `A set of vectors $\\{\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_k\\}$ is orthogonal if every pair has [dot product](!/linear-algebra/vectors/dot-product) zero:
 
-$$\\mathbf{v}_i \\cdot \\mathbf{v}_j = 0 \\quad \\text{for all } i \\neq j$$
+@academic[formula_callout:Orthogonal Sets
+$$\\mathbf{v}_i \\cdot \\mathbf{v}_j = 0 \\quad \\text{for all } i \\neq j$$]@
 
 The vectors in an orthogonal set must all be nonzero — the zero vector is excluded because including it would trivialize the structure (every vector is orthogonal to $\\mathbf{0}$, so $\\mathbf{0}$ carries no directional information).
 
@@ -1257,7 +1258,8 @@ The proof is short and reveals exactly why orthogonality is so powerful.
 
 Suppose $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$. Dot both sides with $\\mathbf{v}_j$:
 
-$$c_1(\\mathbf{v}_1 \\cdot \\mathbf{v}_j) + c_2(\\mathbf{v}_2 \\cdot \\mathbf{v}_j) + \\cdots + c_k(\\mathbf{v}_k \\cdot \\mathbf{v}_j) = 0$$
+@academic[formula_callout:Orthogonal Sets Are Independent
+$$c_1(\\mathbf{v}_1 \\cdot \\mathbf{v}_j) + c_2(\\mathbf{v}_2 \\cdot \\mathbf{v}_j) + \\cdots + c_k(\\mathbf{v}_k \\cdot \\mathbf{v}_j) = 0$$]@
 
 Every term with $i \\neq j$ vanishes because $\\mathbf{v}_i \\cdot \\mathbf{v}_j = 0$. Only the $j$-th term survives: $c_j \\|\\mathbf{v}_j\\|^2 = 0$. Since $\\mathbf{v}_j \\neq \\mathbf{0}$, $\\|\\mathbf{v}_j\\|^2 > 0$, so $c_j = 0$. This works for every $j$, so all coefficients are zero.
 
@@ -1297,7 +1299,8 @@ Orthonormal bases exist for every finite-dimensional [inner product](!/linear-al
 
 For an orthogonal basis $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$, the coordinate of $\\mathbf{x}$ along $\\mathbf{v}_i$ is
 
-$$c_i = \\frac{\\mathbf{x} \\cdot \\mathbf{v}_i}{\\mathbf{v}_i \\cdot \\mathbf{v}_i}$$
+@academic[formula_callout:Coordinates via Dot Products
+$$c_i = \\frac{\\mathbf{x} \\cdot \\mathbf{v}_i}{\\mathbf{v}_i \\cdot \\mathbf{v}_i}$$]@
 
 For an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$, the denominator is $1$, and the formula simplifies to
 
@@ -1306,13 +1309,13 @@ For an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$, the denom
 
 No [linear system](!/linear-algebra/linear-systems) needs to be solved. No [matrix](!/linear-algebra/matrix) needs to be inverted. Each coordinate is computed independently by a single dot product.
 
-## Worked Example
+@academic[example:Worked Example
 
 Let $\\{\\mathbf{q}_1, \\mathbf{q}_2, \\mathbf{q}_3\\}$ be an orthonormal basis for $\\mathbb{R}^3$ with $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 1, 0)$, $\\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(1, -1, 2)$, $\\mathbf{q}_3 = \\frac{1}{\\sqrt{3}}(-1, 1, 1)$.
 
 For $\\mathbf{x} = (3, 1, 2)$: $c_1 = \\mathbf{x} \\cdot \\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(3 + 1 + 0) = \\frac{4}{\\sqrt{2}} = 2\\sqrt{2}$, $c_2 = \\mathbf{x} \\cdot \\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(3 - 1 + 4) = \\frac{6}{\\sqrt{6}} = \\sqrt{6}$, $c_3 = \\mathbf{x} \\cdot \\mathbf{q}_3 = \\frac{1}{\\sqrt{3}}(-3 + 1 + 2) = 0$.
 
-So $\\mathbf{x} = 2\\sqrt{2}\\,\\mathbf{q}_1 + \\sqrt{6}\\,\\mathbf{q}_2 + 0 \\cdot \\mathbf{q}_3$. The zero third coordinate means $\\mathbf{x}$ has no component in the $\\mathbf{q}_3$ direction — it is orthogonal to $\\mathbf{q}_3$.`,
+So $\\mathbf{x} = 2\\sqrt{2}\\,\\mathbf{q}_1 + \\sqrt{6}\\,\\mathbf{q}_2 + 0 \\cdot \\mathbf{q}_3$. The zero third coordinate means $\\mathbf{x}$ has no component in the $\\mathbf{q}_3$ direction — it is orthogonal to $\\mathbf{q}_3$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1352,7 +1355,8 @@ The squared length of $\\mathbf{x}$ equals the sum of the squares of its coordin
 
 When the orthonormal set does not span — when $k < n$ — the sum accounts for only part of the length:
 
-$$\\sum_{i=1}^{k} (\\mathbf{x} \\cdot \\mathbf{q}_i)^2 \\leq \\|\\mathbf{x}\\|^2$$
+@academic[formula_callout:Parseval&apos;s Identity and Bessel&apos;s Inequality
+$$\\sum_{i=1}^{k} (\\mathbf{x} \\cdot \\mathbf{q}_i)^2 \\leq \\|\\mathbf{x}\\|^2$$]@
 
 This is Bessel&apos;s inequality. The left side is the squared length of the projection of $\\mathbf{x}$ onto $\\text{Span}\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_k\\}$. The deficit $\\|\\mathbf{x}\\|^2 - \\sum(\\mathbf{x} \\cdot \\mathbf{q}_i)^2$ is the squared length of the component orthogonal to the span. Equality holds if and only if $\\mathbf{x}$ is already in the span, leaving no perpendicular remainder.`,
     before: ``,
@@ -1370,7 +1374,8 @@ This is Bessel&apos;s inequality. The left side is the squared length of the pro
     title: `Isometries: Maps That Preserve Length`,
     content: `An [isometry](!/linear-algebra/definitions#isometry) is a linear map that preserves length: $\\|T\\mathbf{x}\\| = \\|\\mathbf{x}\\|$ for every $\\mathbf{x}$. Because the dot product can be recovered from lengths alone through the polarization identity
 
-$$\\mathbf{x} \\cdot \\mathbf{y} = \\tfrac{1}{2}\\left(\\|\\mathbf{x} + \\mathbf{y}\\|^2 - \\|\\mathbf{x}\\|^2 - \\|\\mathbf{y}\\|^2\\right)$$
+@academic[formula_callout:Isometries: Maps That Preserve Length
+$$\\mathbf{x} \\cdot \\mathbf{y} = \\tfrac{1}{2}\\left(\\|\\mathbf{x} + \\mathbf{y}\\|^2 - \\|\\mathbf{x}\\|^2 - \\|\\mathbf{y}\\|^2\\right)$$]@
 
 preserving every length forces $T$ to preserve every dot product, and with it every angle and every distance between points. Nothing is stretched, squashed or sheared.
 

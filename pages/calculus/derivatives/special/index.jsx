@@ -534,7 +534,8 @@ Two distinct algebraic forms appear: $\\sqrt{1 - x^2}$ for the sine/cosine pair,
     content: `
 The hyperbolic functions are defined through exponentials:
 
-$$\\sinh x = \\frac{e^x - e^{-x}}{2} \\qquad \\cosh x = \\frac{e^x + e^{-x}}{2} \\qquad \\tanh x = \\frac{\\sinh x}{\\cosh x}$$
+@academic[formula_callout:Hyperbolic Functions
+$$\\sinh x = \\frac{e^x - e^{-x}}{2} \\qquad \\cosh x = \\frac{e^x + e^{-x}}{2} \\qquad \\tanh x = \\frac{\\sinh x}{\\cosh x}$$]@
 
 Their derivatives parallel the trigonometric pattern:
 
@@ -623,21 +624,33 @@ If either continuity fails or the one-sided derivatives disagree, the function i
     content: `
 The complete set of special derivative formulas:
 
-$$\\frac{d}{dx}[\\arcsin x] = \\frac{1}{\\sqrt{1-x^2}} \\qquad \\frac{d}{dx}[\\arccos x] = -\\frac{1}{\\sqrt{1-x^2}}$$
+@academic[formula_callout:Summary of Special Derivatives
+$$\\frac{d}{dx}[\\arcsin x] = \\frac{1}{\\sqrt{1-x^2}} \\qquad \\frac{d}{dx}[\\arccos x] = -\\frac{1}{\\sqrt{1-x^2}}$$]@
 
-$$\\frac{d}{dx}[\\arctan x] = \\frac{1}{1+x^2} \\qquad \\frac{d}{dx}[\\text{arccot}\\, x] = -\\frac{1}{1+x^2}$$
+@academic[formula_callout:Summary of Special Derivatives
+$$\\frac{d}{dx}[\\arctan x] = \\frac{1}{1+x^2} \\qquad \\frac{d}{dx}[\\text{arccot}\\, x] = -\\frac{1}{1+x^2}$$]@
 
-$$\\frac{d}{dx}[\\text{arcsec}\\, x] = \\frac{1}{|x|\\sqrt{x^2-1}} \\qquad \\frac{d}{dx}[\\text{arccsc}\\, x] = -\\frac{1}{|x|\\sqrt{x^2-1}}$$
+@academic[formula_callout:Summary of Special Derivatives
+$$\\frac{d}{dx}[\\text{arcsec}\\, x] = \\frac{1}{|x|\\sqrt{x^2-1}} \\qquad \\frac{d}{dx}[\\text{arccsc}\\, x] = -\\frac{1}{|x|\\sqrt{x^2-1}}$$]@
 
-$$\\frac{d}{dx}[\\sinh x] = \\cosh x \\qquad \\frac{d}{dx}[\\cosh x] = \\sinh x$$
+@academic[formula_callout:Summary of Special Derivatives
+$$\\frac{d}{dx}[\\sinh x] = \\cosh x \\qquad \\frac{d}{dx}[\\cosh x] = \\sinh x$$]@
 
-$$\\frac{d}{dx}[\\tanh x] = \\text{sech}^2\\, x \\qquad \\frac{d}{dx}[\\coth x] = -\\text{csch}^2\\, x$$
+@academic[formula_callout:Summary of Special Derivatives
+$$\\frac{d}{dx}[\\tanh x] = \\text{sech}^2\\, x \\qquad \\frac{d}{dx}[\\coth x] = -\\text{csch}^2\\, x$$]@
 
-$$\\frac{d}{dx}[\\text{sech}\\, x] = -\\text{sech}\\, x\\tanh x \\qquad \\frac{d}{dx}[\\text{csch}\\, x] = -\\text{csch}\\, x\\coth x$$
+@academic[formula_callout:Summary of Special Derivatives
+$$\\frac{d}{dx}[\\text{sech}\\, x] = -\\text{sech}\\, x\\tanh x \\qquad \\frac{d}{dx}[\\text{csch}\\, x] = -\\text{csch}\\, x\\coth x$$]@
 
-$$\\frac{d}{dx}[\\text{arcsinh}\\, x] = \\frac{1}{\\sqrt{x^2+1}} \\qquad \\frac{d}{dx}[\\text{arccosh}\\, x] = \\frac{1}{\\sqrt{x^2-1}}$$
+@academic[formula_callout:Summary of Special Derivatives
+$$\\frac{d}{dx}[\\text{arcsinh}\\, x] = \\frac{1}{\\sqrt{x^2+1}} \\qquad \\frac{d}{dx}[\\text{arccosh}\\, x] = \\frac{1}{\\sqrt{x^2-1}}$$]@
 
+@academic[formula_callout:Derivative of Inverse Hyperbolic Tangent
 $$\\frac{d}{dx}[\\text{arctanh}\\, x] = \\frac{1}{1-x^2}$$
+/calculus/formulas#derivative_of_inverse_hyperbolic_tangent]@
+
+@academic[formulas_link:Browse all derivative formulas
+/calculus/formulas]@
 
 Together with the [common derivatives](!/calculus/derivatives/common), these formulas cover every standard function encountered in calculus. Recognizing the algebraic forms—$\\sqrt{1-x^2}$, $1+x^2$, $\\sqrt{x^2 \\pm 1}$, $1-x^2$—is equally important for integration, where these expressions signal inverse trigonometric or inverse hyperbolic antiderivatives. The table below assembles all 15 formulas as a single reference card, organized by category and including the domain on which each derivative is valid.
 `,

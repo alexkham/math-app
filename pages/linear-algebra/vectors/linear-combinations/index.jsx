@@ -1163,7 +1163,8 @@ The question of which vectors in a spanning set are genuinely needed and which a
     title: `Trivial and Non-Trivial Combinations`,
     content: `Among all possible linear combinations of a set of vectors, one always exists regardless of the vectors involved: the trivial combination. Setting every coefficient to zero gives:
 
-$$0\\mathbf{v}_1 + 0\\mathbf{v}_2 + \\cdots + 0\\mathbf{v}_k = \\mathbf{0}$$
+@academic[formula_callout:Trivial and Non-Trivial Combinations
+$$0\\mathbf{v}_1 + 0\\mathbf{v}_2 + \\cdots + 0\\mathbf{v}_k = \\mathbf{0}$$]@
 
 This produces the zero vector for any choice of $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$. It is called trivial because it carries no information about the vectors themselves — it works automatically, without engaging with the actual components.
 
@@ -1178,11 +1179,17 @@ This characterization is developed formally in the [linear independence](!/linea
     title: `Linear Combinations and Systems of Equations`,
     content: `The question "Is $\\mathbf{b}$ a linear combination of $\\mathbf{v}_1, \\mathbf{v}_2, \\ldots, \\mathbf{v}_k$?" is an algebraic question about the existence of coefficients. Writing it out component by component produces a system of linear equations:
 
-$$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{b}$$
+@academic[formula_callout:Linear Combinations and Systems of Equations
+$$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{b}$$]@
 
 Arranging the vectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$ as columns of a [matrix](!/linear-algebra/matrix) $A$ and the coefficients as an unknown vector $\\mathbf{x}$, the equation becomes:
 
+@academic[formula_callout:Linear System Matrix Form
 $$A\\mathbf{x} = \\mathbf{b}$$
+/linear-algebra/formulas#linear_system_matrix_form]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 The linear combination question and the system-of-equations question are identical — they are two descriptions of the same problem. The combination exists if and only if the system has a solution. Solving the system finds the coefficients; the coefficients reconstruct the combination.
 

@@ -329,7 +329,12 @@ This connection works in reverse too. Discovering a single root opens the door t
 
 A polynomial of degree $n$ has at most $n$ real roots. A quadratic can have at most two, a cubic at most three, a degree $10$ polynomial at most ten. This upper bound applies to real roots — the roots that appear on the number line.
 
-The Fundamental Theorem of Algebra sharpens this. Over the [complex numbers](!/complex-numbers), every polynomial of degree $n \\geq 1$ has exactly $n$ roots when counted with multiplicity. A degree $5$ polynomial always has exactly five complex roots — some may be real, some may involve $i$, and some may repeat, but the count is always five.
+The Fundamental Theorem of Algebra sharpens this.
+
+@academic[rule_theorem:Fundamental Theorem of Algebra
+Over the [complex numbers](!/complex-numbers), every polynomial of degree $n \\geq 1$ has exactly $n$ roots when counted with multiplicity.]@
+
+A degree $5$ polynomial always has exactly five complex roots — some may be real, some may involve $i$, and some may repeat, but the count is always five.
 
 The gap between "at most $n$ real roots" and "exactly $n$ complex roots" explains what happens when a polynomial appears to have fewer roots than its degree suggests. The polynomial $x^2 + 1$ has degree $2$ but no real roots. Its two roots, $x = i$ and $x = -i$, exist in the complex number system. The polynomial $x^3 - x$ has degree $3$ and three real roots: $0$, $1$, and $-1$. The number of real roots varies; the number of complex roots (counting multiplicity) never does.`,
   before: ``,
@@ -371,7 +376,12 @@ Factoring has limits. Not every polynomial factors neatly over the integers, and
   title: `Finding Roots — Quadratic Formula`,
   content: `For any quadratic polynomial $ax^2 + bx + c$ with $a \\neq 0$, the roots are given by:
 
+@academic[formula_callout:Quadratic Formula
 $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
+/algebra/formulas#quadratic_formula]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 This formula works universally — it finds roots whether the quadratic factors cleanly or not. For $x^2 - 5x + 6$, applying the formula with $a = 1$, $b = -5$, $c = 6$ gives $x = \\frac{5 \\pm \\sqrt{25 - 24}}{2} = \\frac{5 \\pm 1}{2}$, yielding $x = 3$ and $x = 2$.
 
@@ -453,15 +463,19 @@ Counting x-intercepts and observing crossing versus touching behavior can reveal
 
 For a quadratic $x^2 + bx + c$ with roots $r_1$ and $r_2$:
 
-$$r_1 + r_2 = -b \\qquad \\text{and} \\qquad r_1 \\cdot r_2 = c$$
+@academic[formula_callout:Sum and Product of Roots
+$$r_1 + r_2 = -b \\qquad \\text{and} \\qquad r_1 \\cdot r_2 = c$$]@
 
 The sum of the roots equals the negative of the coefficient of $x$, and the product equals the constant term. For $x^2 - 5x + 6$, the roots sum to $5$ and multiply to $6$ — confirmed by the actual roots $2$ and $3$.
 
 These relationships extend to higher degrees. For a cubic $x^3 + bx^2 + cx + d$ with roots $r_1, r_2, r_3$:
 
-$$r_1 + r_2 + r_3 = -b$$
-$$r_1r_2 + r_1r_3 + r_2r_3 = c$$
-$$r_1 \\cdot r_2 \\cdot r_3 = -d$$
+@academic[formula_callout:Sum and Product of Roots
+$$r_1 + r_2 + r_3 = -b$$]@
+@academic[formula_callout:Sum and Product of Roots
+$$r_1r_2 + r_1r_3 + r_2r_3 = c$$]@
+@academic[formula_callout:Sum and Product of Roots
+$$r_1 \\cdot r_2 \\cdot r_3 = -d$$]@
 
 The pattern generalizes to any degree $n$. The elementary symmetric polynomials of the roots correspond, with alternating signs, to the coefficients of the polynomial (assuming the leading coefficient is $1$).
 

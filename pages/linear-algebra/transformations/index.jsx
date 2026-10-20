@@ -1047,7 +1047,8 @@ These examples show that the concept reaches far beyond columns of numbers. When
 
 The reason is that every vector in $V$ has a unique expression $\\mathbf{v} = c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n$, and linearity forces
 
-$$T(\\mathbf{v}) = c_1T(\\mathbf{v}_1) + \\cdots + c_nT(\\mathbf{v}_n)$$
+@academic[formula_callout:Determined by Action on a Basis
+$$T(\\mathbf{v}) = c_1T(\\mathbf{v}_1) + \\cdots + c_nT(\\mathbf{v}_n)$$]@
 
 Conversely, any choice of images for the basis vectors — any $n$ vectors in $W$, with no constraints — defines a unique linear transformation. There are no compatibility conditions to satisfy; the basis images can be chosen freely.
 

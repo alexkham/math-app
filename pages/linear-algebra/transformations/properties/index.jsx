@@ -1218,13 +1218,19 @@ Both conditions must hold for every choice of vectors and scalars — not just f
     title: `The One-Step Test`,
     content: `The two conditions can be combined into a single check. $T$ is linear if and only if
 
+@academic[formula_callout:Linear Transformation Definition
 $$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$
+/linear-algebra/formulas#linear_transformation_definition]@
+
+@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@
 
 for all vectors $\\mathbf{u}, \\mathbf{v} \\in V$ and all scalars $c, d \\in \\mathbb{R}$. Setting $c = d = 1$ recovers additivity. Setting $\\mathbf{v} = \\mathbf{0}$ recovers homogeneity. So the combined condition implies both individual conditions, and the converse is straightforward.
 
 The one-step test extends to arbitrary linear combinations: if $T$ is linear, then
 
-$$T(c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k) = c_1T(\\mathbf{v}_1) + c_2T(\\mathbf{v}_2) + \\cdots + c_kT(\\mathbf{v}_k)$$
+@academic[formula_callout:The One-Step Test
+$$T(c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k) = c_1T(\\mathbf{v}_1) + c_2T(\\mathbf{v}_2) + \\cdots + c_kT(\\mathbf{v}_k)$$]@
 
 Linear transformations commute with linear combinations of any length. This is the operational content of linearity — it says that $T$ can be "pulled through" any finite sum of scaled vectors.`,
     before: ``,
@@ -1239,13 +1245,17 @@ Linear transformations commute with linear combinations of any length. This is t
 
 Let $T: \\mathbb{R}^3 \\to \\mathbb{R}^2$ be defined by $T(x, y, z) = (2x - y, x + 3z)$. Take $\\mathbf{u} = (u_1, u_2, u_3)$ and $\\mathbf{v} = (v_1, v_2, v_3)$:
 
-$$T(c\\mathbf{u} + d\\mathbf{v}) = T(cu_1 + dv_1, \\; cu_2 + dv_2, \\; cu_3 + dv_3)$$
+@academic[formula_callout:Proving Linearity
+$$T(c\\mathbf{u} + d\\mathbf{v}) = T(cu_1 + dv_1, \\; cu_2 + dv_2, \\; cu_3 + dv_3)$$]@
 
-$$= (2(cu_1 + dv_1) - (cu_2 + dv_2), \\; (cu_1 + dv_1) + 3(cu_3 + dv_3))$$
+@academic[formula_callout:Proving Linearity
+$$= (2(cu_1 + dv_1) - (cu_2 + dv_2), \\; (cu_1 + dv_1) + 3(cu_3 + dv_3))$$]@
 
-$$= (c(2u_1 - u_2) + d(2v_1 - v_2), \\; c(u_1 + 3u_3) + d(v_1 + 3v_3))$$
+@academic[formula_callout:Proving Linearity
+$$= (c(2u_1 - u_2) + d(2v_1 - v_2), \\; c(u_1 + 3u_3) + d(v_1 + 3v_3))$$]@
 
-$$= c(2u_1 - u_2, \\; u_1 + 3u_3) + d(2v_1 - v_2, \\; v_1 + 3v_3) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$
+@academic[formula_callout:Proving Linearity
+$$= c(2u_1 - u_2, \\; u_1 + 3u_3) + d(2v_1 - v_2, \\; v_1 + 3v_3) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$]@
 
 Linearity holds. The key observation is that every component of $T$ is a linear expression in the input coordinates — no products, powers, or constant terms appear.`,
     before: ``,
@@ -1304,7 +1314,8 @@ $$(S \\circ T)(\\mathbf{u}) = S(T(\\mathbf{u})), \\qquad [S \\circ T] = [S]\\,[T
 
 The linearity check:
 
-$$(S \\circ T)(c\\mathbf{u} + d\\mathbf{v}) = S(T(c\\mathbf{u} + d\\mathbf{v})) = S(cT(\\mathbf{u}) + dT(\\mathbf{v})) = cS(T(\\mathbf{u})) + dS(T(\\mathbf{v}))$$
+@academic[formula_callout:Composition
+$$(S \\circ T)(c\\mathbf{u} + d\\mathbf{v}) = S(T(c\\mathbf{u} + d\\mathbf{v})) = S(cT(\\mathbf{u}) + dT(\\mathbf{v})) = cS(T(\\mathbf{u})) + dS(T(\\mathbf{v}))$$]@
 
 The first equality applies $T$'s linearity inside $S$; the second applies $S$'s linearity.
 

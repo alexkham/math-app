@@ -1012,7 +1012,8 @@ const summaryTable = `
 
 The answer comes from the division equation that connects any integer $a$ to a divisor $n$:
 
-$$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$
+@academic[formula_callout:What is Modulo?
+$$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$]@
 
 The integer $q$ is the quotient — how many complete copies of $n$ fit inside $a$. The integer $r$ is the remainder — what remains after those copies are removed. Modulo gives $r$.
 
@@ -1102,7 +1103,8 @@ For $123 \\bmod 7$: divide $123 \\div 7 = 17.57\\ldots$. The integer part is $17
 
 The procedure has a compact formula using the floor function $\\lfloor x \\rfloor$, which gives the greatest integer less than or equal to $x$:
 
-$$a \\bmod n = a - n \\cdot \\left\\lfloor \\frac{a}{n} \\right\\rfloor$$
+@academic[formula_callout:How to Compute a Remainder
+$$a \\bmod n = a - n \\cdot \\left\\lfloor \\frac{a}{n} \\right\\rfloor$$]@
 
 This captures the three-step process in a single expression: divide, truncate to an integer, subtract the product.
 
@@ -1144,7 +1146,8 @@ obj5: {
   title: `Congruence`,
   content: `When two integers share the same remainder under division by $n$, they are called congruent modulo $n$. The notation is:
 
-$$a \\equiv b \\pmod{n}$$
+@academic[formula_callout:Congruence
+$$a \\equiv b \\pmod{n}$$]@
 
 This reads "a is congruent to b modulo n" and means $a \\bmod n = b \\bmod n$ — both numbers land on the same remainder.
 

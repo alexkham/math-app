@@ -580,11 +580,13 @@ The quotient rule can be derived from the product rule by writing $f/g = f \\cdo
     content: `
 If $g$ is differentiable at $x$ and $f$ is differentiable at $g(x)$, then the composite function $f \\circ g$ is differentiable at $x$ and
 
-$$\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)$$
+@academic[formula_callout:Chain Rule
+$$\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)$$]@
 
 Differentiate the outer function evaluated at the inner function, then multiply by the derivative of the inner function. In Leibniz notation, with $y = f(u)$ and $u = g(x)$:
 
-$$\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$$
+@academic[formula_callout:Chain Rule
+$$\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$$]@
 
 @academic[formula_callout:Chain Rule
 $$\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x) \\qquad \\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}$$
@@ -654,7 +656,7 @@ If $\\lim_{x \\to a} \\frac{f(x)}{g(x)}$ produces the indeterminate form $\\frac
 
 @academic[formula_callout:L&apos;Hôpital&apos;s Rule
 $$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)} \\quad \\text{for indeterminate forms } \\tfrac{0}{0} \\text{ or } \\tfrac{\\infty}{\\infty}$$
-/calculus/formulas#lhopitals_rule]@
+/calculus/formulas#lhôpitals_rule]@
 
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@

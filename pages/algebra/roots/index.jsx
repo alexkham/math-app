@@ -10,6 +10,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -247,19 +249,24 @@ obj0: {
     title: `What is a Root`,
     content: `A root reverses exponentiation. When a number $a$ is raised to power $n$ and produces $b$, the $n$th root of $b$ returns $a$.
 
-$$a^n = b \\quad \\Longleftrightarrow \\quad \\sqrt[n]{b} = a$$
+@academic[formula_callout:What is a Root
+$$a^n = b \\quad \\Longleftrightarrow \\quad \\sqrt[n]{b} = a$$]@
 
 The radical symbol $\\sqrt{\\phantom{x}}$ denotes a root. The small number tucked into the upper left is the index — it specifies which root. The expression under the radical is the radicand.
 
-$$\\sqrt[n]{b}$$
+@academic[formula_callout:What is a Root
+$$\\sqrt[n]{b}$$]@
 
 Here $n$ is the index and $b$ is the radicand. When no index appears, square root (index 2) is assumed.
 
-$$\\sqrt{25} = 5 \\quad \\text{because} \\quad 5^2 = 25$$
+@academic[formula_callout:What is a Root
+$$\\sqrt{25} = 5 \\quad \\text{because} \\quad 5^2 = 25$$]@
 
-$$\\sqrt[3]{8} = 2 \\quad \\text{because} \\quad 2^3 = 8$$
+@academic[formula_callout:What is a Root
+$$\\sqrt[3]{8} = 2 \\quad \\text{because} \\quad 2^3 = 8$$]@
 
-$$\\sqrt[4]{81} = 3 \\quad \\text{because} \\quad 3^4 = 81$$
+@academic[formula_callout:What is a Root
+$$\\sqrt[4]{81} = 3 \\quad \\text{because} \\quad 3^4 = 81$$]@
 
 Every root operation poses a question: what base, raised to this power, yields the radicand?`,
     before: ``,
@@ -273,15 +280,18 @@ Every root operation poses a question: what base, raised to this power, yields t
 
 A square root ($n = 2$) undoes squaring. It appears constantly — in the Pythagorean theorem, the quadratic formula, distance calculations, and anywhere area connects to length.
 
-$$\\sqrt{49} = 7, \\quad \\sqrt{144} = 12, \\quad \\sqrt{2} \\approx 1.414$$
+@academic[formula_callout:Square Roots, Cube Roots, and Beyond
+$$\\sqrt{49} = 7, \\quad \\sqrt{144} = 12, \\quad \\sqrt{2} \\approx 1.414$$]@
 
 A cube root ($n = 3$) undoes cubing. It arises in volume problems, certain equations, and throughout higher mathematics.
 
-$$\\sqrt[3]{27} = 3, \\quad \\sqrt[3]{-64} = -4, \\quad \\sqrt[3]{1000} = 10$$
+@academic[formula_callout:Square Roots, Cube Roots, and Beyond
+$$\\sqrt[3]{27} = 3, \\quad \\sqrt[3]{-64} = -4, \\quad \\sqrt[3]{1000} = 10$$]@
 
 Higher roots follow the same pattern. Fourth roots undo fourth powers, fifth roots undo fifth powers, and so on.
 
-$$\\sqrt[4]{16} = 2, \\quad \\sqrt[5]{32} = 2, \\quad \\sqrt[6]{64} = 2$$
+@academic[formula_callout:Square Roots, Cube Roots, and Beyond
+$$\\sqrt[4]{16} = 2, \\quad \\sqrt[5]{32} = 2, \\quad \\sqrt[6]{64} = 2$$]@
 
 The index matters greatly. Even indices behave differently from odd indices — a distinction explored fully in [properties of radicals](!/algebra/roots/properties). This difference affects domain, sign behavior, and how [simplification](!/algebra/roots/simplifying) proceeds.
 
@@ -297,7 +307,8 @@ To compute a square, cube or nth root of any number, use the [root calculator](!
 
 For square roots and all even-index roots, the principal root is the non-negative one.
 
-$$\\sqrt{25} = 5, \\quad \\text{not } -5, \\quad \\text{and not } \\pm 5$$
+@academic[formula_callout:Principal Roots
+$$\\sqrt{25} = 5, \\quad \\text{not } -5, \\quad \\text{and not } \\pm 5$$]@
 
 This convention exists so that $\\sqrt{x}$ is a function — one input, one output. Without it, $\\sqrt{25}$ would have two values, and expressions involving radicals would become ambiguous.
 
@@ -305,7 +316,8 @@ When both roots are needed, write $\\pm\\sqrt{25} = \\pm 5$ explicitly. This not
 
 Odd-index roots have no such ambiguity. Every real number has exactly one real cube root, one real fifth root, and so on. The principal root is simply that unique value.
 
-$$\\sqrt[3]{-27} = -3 \\quad \\text{(the only real cube root)}$$
+@academic[formula_callout:Principal Roots
+$$\\sqrt[3]{-27} = -3 \\quad \\text{(the only real cube root)}$$]@
 
 The principal root convention allows radicals to behave predictably in equations and as [functions](!/algebra/roots/functions).`,
     before: ``,
@@ -317,21 +329,33 @@ The principal root convention allows radicals to behave predictably in equations
     title: `Radical and Exponent Notation`,
     content: `Roots can be written two ways: as radicals or as fractional exponents. Both notations represent the same operation.
 
+@academic[formula_callout:Radical to Exponent Conversion
 $$\\sqrt[n]{a} = a^{1/n}$$
+/algebra/formulas#radical_to_exponent_conversion]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The index becomes the denominator of the exponent. Square root is $a^{1/2}$, cube root is $a^{1/3}$, fourth root is $a^{1/4}$.
 
 When the radicand itself has a power, the two exponents combine:
 
+@academic[formula_callout:Power Rule (Radicals)
 $$\\sqrt[n]{a^m} = a^{m/n}$$
+/algebra/formulas#power_rule_radicals]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 This can also be computed as:
 
-$$\\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$
+@academic[formula_callout:Radical and Exponent Notation
+$$\\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$]@
 
 For example:
 
-$$\\sqrt[3]{8^2} = 8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$$
+@academic[formula_callout:Radical and Exponent Notation
+$$\\sqrt[3]{8^2} = 8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$$]@
 
 Exponent notation often simplifies algebraic manipulation, while radical notation is clearer for computation. Converting between forms is a key technique in [simplifying radicals](!/algebra/roots/simplifying). The full treatment appears in [rational exponents](!/algebra/roots/rational-exponents).
 
@@ -347,15 +371,30 @@ The table below collects the two notations side by side with their direct corres
 
 The product rule allows a radical of a product to split:
 
+@academic[formula_callout:Product Rule (Radicals)
 $$\\sqrt[n]{ab} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$$
+/algebra/formulas#product_rule_radicals]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 The quotient rule does the same for division:
 
+@academic[formula_callout:Quotient Rule (Radicals)
 $$\\sqrt[n]{\\frac{a}{b}} = \\frac{\\sqrt[n]{a}}{\\sqrt[n]{b}}$$
+/algebra/formulas#quotient_rule_radicals]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 Nested radicals combine by multiplying indices:
 
+@academic[formula_callout:Nested Radicals
 $$\\sqrt[m]{\\sqrt[n]{a}} = \\sqrt[mn]{a}$$
+/algebra/formulas#nested_radicals]@
+
+@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@
 
 These rules work when the indices match and when the radicands satisfy certain conditions. Even-index roots require non-negative radicands in the real number system — a restriction detailed in [properties of radicals](!/algebra/roots/properties).
 
@@ -371,15 +410,18 @@ The table below collects these three rules in compact form; the dedicated rules 
     title: `Simplifying and Operating`,
     content: `A radical is in simplest form when no perfect power remains under the radical, no fractions appear under the radical, and no radicals appear in denominators.
 
-$$\\sqrt{72} = \\sqrt{36 \\cdot 2} = 6\\sqrt{2}$$
+@academic[formula_callout:Simplifying and Operating
+$$\\sqrt{72} = \\sqrt{36 \\cdot 2} = 6\\sqrt{2}$$]@
 
 The factor 36 is a perfect square and comes out; the factor 2 remains.
 
 Radicals can be added or subtracted only when they are like radicals — same index and same radicand.
 
-$$3\\sqrt{5} + 7\\sqrt{5} = 10\\sqrt{5}$$
+@academic[formula_callout:Simplifying and Operating
+$$3\\sqrt{5} + 7\\sqrt{5} = 10\\sqrt{5}$$]@
 
-$$\\sqrt{2} + \\sqrt{3} \\quad \\text{cannot be combined}$$
+@academic[formula_callout:Simplifying and Operating
+$$\\sqrt{2} + \\sqrt{3} \\quad \\text{cannot be combined}$$]@
 
 Multiplication and division follow the [radical rules](!/algebra/roots/radical-rules). Denominators with radicals are typically rationalized — rewritten so the radical moves to the numerator.
 
@@ -395,11 +437,14 @@ Detailed techniques for reducing radicals to simplest form appear in [simplifyin
 
 The standard approach: isolate the radical, then raise both sides to a power that eliminates it.
 
-$$\\sqrt{x + 3} = 5$$
+@academic[formula_callout:Equations with Radicals
+$$\\sqrt{x + 3} = 5$$]@
 
-$$x + 3 = 25$$
+@academic[formula_callout:Equations with Radicals
+$$x + 3 = 25$$]@
 
-$$x = 22$$
+@academic[formula_callout:Equations with Radicals
+$$x = 22$$]@
 
 This process can introduce extraneous solutions — values that satisfy the transformed equation but not the original. Checking solutions is essential, especially with even-index radicals.
 
@@ -417,7 +462,8 @@ To solve a specific equation, the [radical equation solver](!/algebra/calculator
     title: `Radicals as Functions`,
     content: `When the radicand contains a variable, the radical becomes a function.
 
-$$f(x) = \\sqrt{x}$$
+@academic[formula_callout:Radicals as Functions
+$$f(x) = \\sqrt{x}$$]@
 
 This function takes an input $x$ and returns its principal square root. Not every input works — the domain depends on the index.
 
@@ -439,17 +485,20 @@ Full treatment of graphs, domains, transformations, and inverses appears in [rad
     title: `When Radicands Are Negative`,
     content: `Odd roots handle negative radicands naturally. A negative number has a real cube root, fifth root, seventh root, and so on.
 
-$$\\sqrt[3]{-8} = -2, \\quad \\sqrt[5]{-32} = -2$$
+@academic[formula_callout:When Radicands Are Negative
+$$\\sqrt[3]{-8} = -2, \\quad \\sqrt[5]{-32} = -2$$]@
 
 Even roots of negative numbers do not exist in the real number system. No real number squares to $-4$.
 
-$$\\sqrt{-4} \\quad \\text{is not a real number}$$
+@academic[formula_callout:When Radicands Are Negative
+$$\\sqrt{-4} \\quad \\text{is not a real number}$$]@
 
 This distinction between even and odd indices is fundamental to [properties of radicals](!/algebra/roots/properties) and determines the domain of [radical functions](!/algebra/roots/functions).
 
 Mathematics extends beyond the reals. The imaginary unit $i$ is defined by $i^2 = -1$, and with it, even roots of negative numbers become expressible:
 
-$$\\sqrt{-4} = 2i$$
+@academic[formula_callout:When Radicands Are Negative
+$$\\sqrt{-4} = 2i$$]@
 
 This opens the door to complex numbers, where every polynomial has roots and the square root function extends to negative inputs.
 
@@ -467,7 +516,8 @@ The table below collects the even/odd index distinction in full — covering pri
 
 The [powers section](!/algebra/powers) develops exponentiation from natural exponents through negative, rational, and irrational exponents. Rational exponents — fractions as powers — are precisely where roots reappear.
 
-$$a^{1/2} = \\sqrt{a}, \\quad a^{1/3} = \\sqrt[3]{a}, \\quad a^{m/n} = \\sqrt[n]{a^m}$$
+@academic[formula_callout:Connection to Powers
+$$a^{1/2} = \\sqrt{a}, \\quad a^{1/3} = \\sqrt[3]{a}, \\quad a^{m/n} = \\sqrt[n]{a^m}$$]@
 
 The laws of exponents govern both operations. Product rules, quotient rules, and power rules translate directly between radical and exponent notation. These connections are explored in [radical rules](!/algebra/roots/radical-rules) and [rational exponents](!/algebra/roots/rational-exponents).
 
@@ -587,8 +637,37 @@ const schemas = {
     }),
   };
 
+  const radicalFunctionCases = {
+    prefaceTitle: 'The index decides the domain',
+    preface: 'When the radicand contains a variable, the radical becomes a function. Not every input works: the domain depends on whether the index is even or odd.',
+    conclusionTitle: 'Takeaway',
+    conclusion: 'Radical functions are inverses of power functions: the square root undoes squaring, the cube root undoes cubing. See [radical functions](!/algebra/roots/functions).',
+    parent: {
+      kicker: 'Radical function',
+      formula: '$f(x) = \\sqrt[n]{x}$',
+      splitBy: 'whether the index $n$ is even or odd',
+    },
+    cases: [
+      {
+        id: 'even', condition: 'even index',
+        count: { n: '≥0' },
+        headline: 'Non-negative radicands only',
+        desc: 'starts at a point and rises gradually',
+        example: '$\\sqrt{x}$: domain $x \\geq 0$',
+      },
+      {
+        id: 'odd', condition: 'odd index',
+        count: { n: 'ℝ' },
+        headline: 'All real inputs',
+        desc: 'passes through the origin with an S-curve',
+        example: '$\\sqrt[3]{x}$: domain all real numbers',
+      },
+    ],
+  };
+
    return {
   props: {
+    radicalFunctionCases,
     sectionsContent,
     introContent,
     obj4Table,
@@ -610,7 +689,9 @@ const schemas = {
    }
 
 
-export default function RootsAndRadicalsPage({
+const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function RootsAndRadicalsPage({radicalFunctionCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -701,6 +782,14 @@ export default function RootsAndRadicalsPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="radical-function-index-cases"
+            title="Radical functions: even or odd index"
+            source="/algebra/roots"
+          >
+            <CaseSplit data={radicalFunctionCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
         ]
     },
     {

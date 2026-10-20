@@ -1342,15 +1342,18 @@ where $A^{(i,j)}$ denotes the submatrix of $A$ with row $i$ and column $j$ remov
 
 For a $3 \\times 3$ matrix
 
-$$A = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix}$$
+@academic[formula_callout:Minors
+$$A = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix}$$]@
 
 there are nine minors, one for each entry. Deleting row $1$ and column $1$ leaves $\\begin{pmatrix} 3 & -2 \\\\ 1 & 6 \\end{pmatrix}$, so $M_{11} = 3 \\cdot 6 - (-2) \\cdot 1 = 20$. Deleting row $1$ and column $2$ leaves $\\begin{pmatrix} 0 & -2 \\\\ 4 & 6 \\end{pmatrix}$, so $M_{12} = 0 \\cdot 6 - (-2) \\cdot 4 = 8$. Deleting row $1$ and column $3$ leaves $\\begin{pmatrix} 0 & 3 \\\\ 4 & 1 \\end{pmatrix}$, so $M_{13} = 0 \\cdot 1 - 3 \\cdot 4 = -12$.
 
 Continuing this way produces all nine values:
 
-$$M_{21} = 5 \\cdot 6 - 1 \\cdot 1 = 29, \\quad M_{22} = 2 \\cdot 6 - 1 \\cdot 4 = 8, \\quad M_{23} = 2 \\cdot 1 - 5 \\cdot 4 = -18$$
+@academic[formula_callout:Minors
+$$M_{21} = 5 \\cdot 6 - 1 \\cdot 1 = 29, \\quad M_{22} = 2 \\cdot 6 - 1 \\cdot 4 = 8, \\quad M_{23} = 2 \\cdot 1 - 5 \\cdot 4 = -18$$]@
 
-$$M_{31} = 5 \\cdot (-2) - 1 \\cdot 3 = -13, \\quad M_{32} = 2 \\cdot (-2) - 1 \\cdot 0 = -4, \\quad M_{33} = 2 \\cdot 3 - 5 \\cdot 0 = 6$$
+@academic[formula_callout:Minors
+$$M_{31} = 5 \\cdot (-2) - 1 \\cdot 3 = -13, \\quad M_{32} = 2 \\cdot (-2) - 1 \\cdot 0 = -4, \\quad M_{33} = 2 \\cdot 3 - 5 \\cdot 0 = 6$$]@
 
 For a $4 \\times 4$ matrix, each minor is a $3 \\times 3$ determinant. For a $5 \\times 5$ matrix, each minor is $4 \\times 4$. The recursive chain continues until reaching $1 \\times 1$ sub-determinants, where the minor is simply the lone entry.`,
     before: ``,
@@ -1404,17 +1407,21 @@ For a $4 \\times 4$ matrix, each minor is a $3 \\times 3$ determinant. For a $5 
 
 The exponent $i + j$ determines whether the sign is positive or negative. When $i + j$ is even, the cofactor equals the minor; when $i + j$ is odd, the cofactor is the negative of the minor. This produces a checkerboard of signs across the matrix:
 
-$$\\begin{pmatrix} + & - & + & - \\\\ - & + & - & + \\\\ + & - & + & - \\\\ - & + & - & + \\end{pmatrix}$$
+@academic[formula_callout:Cofactors and the Sign Pattern
+$$\\begin{pmatrix} + & - & + & - \\\\ - & + & - & + \\\\ + & - & + & - \\\\ - & + & - & + \\end{pmatrix}$$]@
 
 The pattern always starts with $+$ at position $(1,1)$ and alternates from there. The sign depends entirely on the position — the actual entries of the matrix play no role in determining it.
 
 Using the $3 \\times 3$ matrix from the previous section, the cofactors are:
 
-$$C_{11} = (+1)(20) = 20, \\quad C_{12} = (-1)(8) = -8, \\quad C_{13} = (+1)(-12) = -12$$
+@academic[formula_callout:Cofactors and the Sign Pattern
+$$C_{11} = (+1)(20) = 20, \\quad C_{12} = (-1)(8) = -8, \\quad C_{13} = (+1)(-12) = -12$$]@
 
-$$C_{21} = (-1)(29) = -29, \\quad C_{22} = (+1)(8) = 8, \\quad C_{23} = (-1)(-18) = 18$$
+@academic[formula_callout:Cofactors and the Sign Pattern
+$$C_{21} = (-1)(29) = -29, \\quad C_{22} = (+1)(8) = 8, \\quad C_{23} = (-1)(-18) = 18$$]@
 
-$$C_{31} = (+1)(-13) = -13, \\quad C_{32} = (-1)(-4) = 4, \\quad C_{33} = (+1)(6) = 6$$
+@academic[formula_callout:Cofactors and the Sign Pattern
+$$C_{31} = (+1)(-13) = -13, \\quad C_{32} = (-1)(-4) = 4, \\quad C_{33} = (+1)(6) = 6$$]@
 
 Comparing cofactors to minors, entries at even-sum positions are unchanged while entries at odd-sum positions flip sign.`,
     before: ``,
@@ -1434,23 +1441,29 @@ The remarkable fact is that every row produces the same number. Expanding along 
 
 ## Worked Example: 4×4 Matrix
 
-$$A = \\begin{pmatrix} 1 & 3 & 0 & 2 \\\\ -1 & 0 & 2 & 1 \\\\ 0 & 4 & -1 & 3 \\\\ 2 & 1 & 0 & -2 \\end{pmatrix}$$
+@academic[formula_callout:Laplace Expansion Along a Row
+$$A = \\begin{pmatrix} 1 & 3 & 0 & 2 \\\\ -1 & 0 & 2 & 1 \\\\ 0 & 4 & -1 & 3 \\\\ 2 & 1 & 0 & -2 \\end{pmatrix}$$]@
 
 Expanding along row $1$:
 
-$$\\det(A) = 1 \\cdot C_{11} + 3 \\cdot C_{12} + 0 \\cdot C_{13} + 2 \\cdot C_{14}$$
+@academic[formula_callout:Laplace Expansion Along a Row
+$$\\det(A) = 1 \\cdot C_{11} + 3 \\cdot C_{12} + 0 \\cdot C_{13} + 2 \\cdot C_{14}$$]@
 
 The zero entry at position $(1,3)$ eliminates one $3 \\times 3$ determinant entirely. The three remaining cofactors require expanding the sub-determinants:
 
-$$M_{11} = \\det\\begin{pmatrix} 0 & 2 & 1 \\\\ 4 & -1 & 3 \\\\ 1 & 0 & -2 \\end{pmatrix} = 0(2 - 0) - 2(-8 - 3) + 1(0 + 1) = 0 + 22 + 1 = 23$$
+@academic[formula_callout:Laplace Expansion Along a Row
+$$M_{11} = \\det\\begin{pmatrix} 0 & 2 & 1 \\\\ 4 & -1 & 3 \\\\ 1 & 0 & -2 \\end{pmatrix} = 0(2 - 0) - 2(-8 - 3) + 1(0 + 1) = 0 + 22 + 1 = 23$$]@
 
-$$M_{12} = \\det\\begin{pmatrix} -1 & 2 & 1 \\\\ 0 & -1 & 3 \\\\ 2 & 0 & -2 \\end{pmatrix} = -1(2 - 0) - 2(0 - 6) + 1(0 + 2) = -2 + 12 + 2 = 12$$
+@academic[formula_callout:Laplace Expansion Along a Row
+$$M_{12} = \\det\\begin{pmatrix} -1 & 2 & 1 \\\\ 0 & -1 & 3 \\\\ 2 & 0 & -2 \\end{pmatrix} = -1(2 - 0) - 2(0 - 6) + 1(0 + 2) = -2 + 12 + 2 = 12$$]@
 
-$$M_{14} = \\det\\begin{pmatrix} -1 & 0 & 2 \\\\ 0 & 4 & -1 \\\\ 2 & 1 & 0 \\end{pmatrix} = -1(0 + 1) - 0(0 + 2) + 2(0 - 8) = -1 + 0 - 16 = -17$$
+@academic[formula_callout:Laplace Expansion Along a Row
+$$M_{14} = \\det\\begin{pmatrix} -1 & 0 & 2 \\\\ 0 & 4 & -1 \\\\ 2 & 1 & 0 \\end{pmatrix} = -1(0 + 1) - 0(0 + 2) + 2(0 - 8) = -1 + 0 - 16 = -17$$]@
 
 Applying the signs: $C_{11} = +23$, $C_{12} = -12$, $C_{14} = +(-17) = -17$. The determinant is
 
-$$\\det(A) = 1(23) + 3(-12) + 0 + 2(-17) = 23 - 36 - 34 = -47$$
+@academic[formula_callout:Laplace Expansion Along a Row
+$$\\det(A) = 1(23) + 3(-12) + 0 + 2(-17) = 23 - 36 - 34 = -47$$]@
 
 ## Verification via a Different Row
 
@@ -1474,15 +1487,18 @@ The practical consequence is that before starting any cofactor expansion, the fi
 
 ## Worked Example
 
-$$B = \\begin{pmatrix} 3 & 0 & 0 \\\\ 1 & -2 & 5 \\\\ 4 & 0 & 7 \\end{pmatrix}$$
+@academic[formula_callout:Laplace Expansion Along a Column
+$$B = \\begin{pmatrix} 3 & 0 & 0 \\\\ 1 & -2 & 5 \\\\ 4 & 0 & 7 \\end{pmatrix}$$]@
 
 Column $2$ has two zeros. Expanding along column $2$:
 
-$$\\det(B) = 0 \\cdot C_{12} + (-2) \\cdot C_{22} + 0 \\cdot C_{32} = (-2) \\cdot C_{22}$$
+@academic[formula_callout:Laplace Expansion Along a Column
+$$\\det(B) = 0 \\cdot C_{12} + (-2) \\cdot C_{22} + 0 \\cdot C_{32} = (-2) \\cdot C_{22}$$]@
 
 The minor $M_{22}$ is the $2 \\times 2$ determinant from deleting row $2$ and column $2$:
 
-$$M_{22} = \\det\\begin{pmatrix} 3 & 0 \\\\ 4 & 7 \\end{pmatrix} = 21$$
+@academic[formula_callout:Laplace Expansion Along a Column
+$$M_{22} = \\det\\begin{pmatrix} 3 & 0 \\\\ 4 & 7 \\end{pmatrix} = 21$$]@
 
 Since $C_{22} = (-1)^{2+2}(21) = 21$, we get $\\det(B) = (-2)(21) = -42$.
 
@@ -1502,11 +1518,13 @@ It is not the matrix of minors — the sign factors $(-1)^{i+j}$ are already inc
 
 For the $3 \\times 3$ matrix used earlier,
 
-$$A = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix}$$
+@academic[formula_callout:The Cofactor Matrix
+$$A = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix}$$]@
 
 the cofactor matrix is
 
-$$\\text{cof}(A) = \\begin{pmatrix} 20 & -8 & -12 \\\\ -29 & 8 & 18 \\\\ -13 & 4 & 6 \\end{pmatrix}$$
+@academic[formula_callout:The Cofactor Matrix
+$$\\text{cof}(A) = \\begin{pmatrix} 20 & -8 & -12 \\\\ -29 & 8 & 18 \\\\ -13 & 4 & 6 \\end{pmatrix}$$]@
 
 where each entry was computed in the earlier sections. As a check, the Laplace expansion along row $1$ should give $\\det(A) = 2(20) + 5(-8) + 1(-12) = 40 - 40 - 12 = -12$. Along row $2$: $0(-29) + 3(8) + (-2)(18) = 0 + 24 - 36 = -12$. Along row $3$: $4(-13) + 1(4) + 6(6) = -52 + 4 + 36 = -12$. All three rows agree.
 
@@ -1524,7 +1542,8 @@ The cofactor matrix encodes every possible cofactor expansion simultaneously —
 
 For the running example:
 
-$$\\operatorname{adj}(A) = \\begin{pmatrix} 20 & -29 & -13 \\\\ -8 & 8 & 4 \\\\ -12 & 18 & 6 \\end{pmatrix}$$
+@academic[formula_callout:The Adjugate
+$$\\operatorname{adj}(A) = \\begin{pmatrix} 20 & -29 & -13 \\\\ -8 & 8 & 4 \\\\ -12 & 18 & 6 \\end{pmatrix}$$]@
 
 ## The Fundamental Identity
 
@@ -1539,7 +1558,8 @@ To see why, consider the $(i,k)$ entry of the product $A \\cdot \\operatorname{a
 
 With $\\det(A) = -12$:
 
-$$A \\cdot \\operatorname{adj}(A) = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix} \\begin{pmatrix} 20 & -29 & -13 \\\\ -8 & 8 & 4 \\\\ -12 & 18 & 6 \\end{pmatrix} = \\begin{pmatrix} -12 & 0 & 0 \\\\ 0 & -12 & 0 \\\\ 0 & 0 & -12 \\end{pmatrix} = -12 \\, I$$
+@academic[formula_callout:The Adjugate
+$$A \\cdot \\operatorname{adj}(A) = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix} \\begin{pmatrix} 20 & -29 & -13 \\\\ -8 & 8 & 4 \\\\ -12 & 18 & 6 \\end{pmatrix} = \\begin{pmatrix} -12 & 0 & 0 \\\\ 0 & -12 & 0 \\\\ 0 & 0 & -12 \\end{pmatrix} = -12 \\, I$$]@
 
 This identity is the foundation of the [adjugate inverse formula](!/linear-algebra/determinants/applications): dividing both sides by $\\det(A)$ gives $A^{-1} = \\frac{1}{\\det(A)} \\operatorname{adj}(A)$, valid whenever $\\det(A) \\neq 0$.`,
     before: ``,

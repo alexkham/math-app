@@ -389,7 +389,8 @@ const sectionsContent = {
     title: `Definition of Absolute Value`,
     content: `The absolute value of a real number $x$, written $|x|$, is defined piecewise:
 
-$$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$$
+@academic[formula_callout:Definition of Absolute Value
+$$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$$]@
 
 The notation $-x$ in the second case does not mean "a negative number." It means "the opposite of $x$." When $x$ is already negative, $-x$ is positive. The absolute value function takes any input and returns a non-negative output: $|x| \\geq 0$ for every real $x$, with equality only when $x = 0$.
 
@@ -467,7 +468,8 @@ Checking the sign of the right-hand side before proceeding is not a shortcut —
     title: `Solving Equations of the Form |f(x)| = k`,
     content: `When the expression inside the absolute value is a function of $x$ rather than $x$ alone, the case-splitting method applies in the same way. The equation $|f(x)| = k$ (with $k > 0$) generates two separate equations:
 
-$$f(x) = k \\quad \\text{and} \\quad f(x) = -k$$
+@academic[formula_callout:Solving Equations of the Form |f(x)| = k
+$$f(x) = k \\quad \\text{and} \\quad f(x) = -k$$]@
 
 Each equation is solved independently using whatever method the form of $f(x)$ requires. The union of both solution sets is the complete answer.
 
@@ -487,7 +489,8 @@ To solve your own absolute value equation with each case shown, use the [absolut
     title: `Equations with Absolute Value on Both Sides`,
     content: `When absolute value appears on both sides — $|f(x)| = |g(x)|$ — the equation asserts that two expressions are equal in magnitude, possibly differing in sign. This decomposes into two cases:
 
-$$f(x) = g(x) \\quad \\text{or} \\quad f(x) = -g(x)$$
+@academic[formula_callout:Equations with Absolute Value on Both Sides
+$$f(x) = g(x) \\quad \\text{or} \\quad f(x) = -g(x)$$]@
 
 Each case is solved separately, and the results are combined.
 

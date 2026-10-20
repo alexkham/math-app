@@ -375,7 +375,8 @@ To solve your own exponential equation with each step shown, use the [exponentia
     title: `Method: Matching Bases`,
     content: `The simplest exponential equations yield to a single principle: if two powers of the same base are equal and the base is positive and not equal to $1$, then their exponents must be equal.
 
-$$a^x = a^y \\implies x = y \\qquad (a > 0,\\; a \\neq 1)$$
+@academic[formula_callout:Method: Matching Bases
+$$a^x = a^y \\implies x = y \\qquad (a > 0,\\; a \\neq 1)$$]@
 
 This works because [exponential functions](!/algebra/powers/exponential-functions) with base $a > 0$, $a \\neq 1$ are one-to-one — different exponents always produce different outputs.
 
@@ -431,7 +432,8 @@ For $2^x = 3^{x-1}$, both sides are exponential with different bases. Take **log
 
 Since $4^x = (2^2)^x = (2^x)^2$ by the [power of a power rule](!/algebra/powers/exponent-rules/), let $t = 2^x$. The equation becomes:
 
-$$t^2 - 3t + 2 = 0$$
+@academic[formula_callout:Method: Substitution (Quadratic in Disguise)
+$$t^2 - 3t + 2 = 0$$]@
 
 This [factors](!/algebra/polynomials/factoring) as $(t - 1)(t - 2) = 0$, giving $t = 1$ or $t = 2$.
 
@@ -451,7 +453,8 @@ More complex examples follow the same pattern. The equation $9^x + 2 \\cdot 3^x 
 
 The equation $x^{2/3} = 4$ asks: what value of $x$, when raised to the power $\\frac{2}{3}$, gives $4$? To isolate $x$, raise both sides to the reciprocal power $\\frac{3}{2}$:
 
-$$x = 4^{3/2} = (\\sqrt{4})^3 = 2^3 = 8$$
+@academic[formula_callout:Equations with Rational and Negative Exponents
+$$x = 4^{3/2} = (\\sqrt{4})^3 = 2^3 = 8$$]@
 
 The equation $x^{-2} = 9$ translates to $\\frac{1}{x^2} = 9$ using the [negative exponent definition](!/algebra/powers/negative-exponents), so $x^2 = \\frac{1}{9}$, giving $x = \\pm\\frac{1}{3}$.
 

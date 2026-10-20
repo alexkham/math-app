@@ -1219,7 +1219,8 @@ The function remains a function — each input still produces exactly one output
 
 A simple example:
 
-$$f(x) = \\begin{cases} x + 1 & \\text{if } x < 0 \\\\ x^2 & \\text{if } x \\geq 0 \\end{cases}$$
+@academic[formula_callout:What is a Piecewise Function
+$$f(x) = \\begin{cases} x + 1 & \\text{if } x < 0 \\\\ x^2 & \\text{if } x \\geq 0 \\end{cases}$$]@
 
 For negative inputs, use $x + 1$. For non-negative inputs, use $x^2$. At $x = -3$, the output is $-3 + 1 = -2$. At $x = 2$, the output is $2^2 = 4$. At $x = 0$, the boundary, the condition $x \\geq 0$ applies, giving $0^2 = 0$.
 
@@ -1365,7 +1366,8 @@ Discontinuities can create gaps in the range if no piece produces certain values
 
 For continuity at $x = c$ where two pieces meet:
 
-$$\\lim_{x \\to c^-} f(x) = \\lim_{x \\to c^+} f(x) = f(c)$$
+@academic[formula_callout:Continuity of Piecewise Functions
+$$\\lim_{x \\to c^-} f(x) = \\lim_{x \\to c^+} f(x) = f(c)$$]@
 
 The left piece's limit, the right piece's limit, and the actual value at $c$ must all agree.
 
@@ -1391,7 +1393,8 @@ The table below collects both cases — the continuous example and the discontin
     title: `Absolute Value as Piecewise`,
     content: `The absolute value function is the most familiar piecewise function:
 
-$$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$$
+@academic[formula_callout:Absolute Value as Piecewise
+$$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$$]@
 
 For non-negative inputs, the output equals the input. For negative inputs, the output equals the negation of the input (making it positive).
 
@@ -1399,7 +1402,8 @@ The [graph](!/functions/graphs) is V-shaped with vertex at the origin. The right
 
 Transformed absolute value functions shift the V:
 
-$$f(x) = |x - 3| + 2 = \\begin{cases} (x - 3) + 2 & \\text{if } x \\geq 3 \\\\ -(x - 3) + 2 & \\text{if } x < 3 \\end{cases} = \\begin{cases} x - 1 & \\text{if } x \\geq 3 \\\\ -x + 5 & \\text{if } x < 3 \\end{cases}$$
+@academic[formula_callout:Absolute Value as Piecewise
+$$f(x) = |x - 3| + 2 = \\begin{cases} (x - 3) + 2 & \\text{if } x \\geq 3 \\\\ -(x - 3) + 2 & \\text{if } x < 3 \\end{cases} = \\begin{cases} x - 1 & \\text{if } x \\geq 3 \\\\ -x + 5 & \\text{if } x < 3 \\end{cases}$$]@
 
 The vertex moves to $(3, 2)$.
 
@@ -1415,13 +1419,15 @@ Equations involving absolute values often require piecewise analysis. Solving $|
 
 The floor function $\\lfloor x \\rfloor$ returns the greatest integer less than or equal to $x$:
 
-$$\\lfloor 2.7 \\rfloor = 2, \\quad \\lfloor -1.3 \\rfloor = -2, \\quad \\lfloor 5 \\rfloor = 5$$
+@academic[formula_callout:Step Functions
+$$\\lfloor 2.7 \\rfloor = 2, \\quad \\lfloor -1.3 \\rfloor = -2, \\quad \\lfloor 5 \\rfloor = 5$$]@
 
 The graph has horizontal segments at each integer height, jumping up at each integer input. The segment at height $n$ covers $[n, n+1)$ — closed on the left, open on the right.
 
 The ceiling function $\\lceil x \\rceil$ returns the least integer greater than or equal to $x$:
 
-$$\\lceil 2.7 \\rceil = 3, \\quad \\lceil -1.3 \\rceil = -1, \\quad \\lceil 5 \\rceil = 5$$
+@academic[formula_callout:Step Functions
+$$\\lceil 2.7 \\rceil = 3, \\quad \\lceil -1.3 \\rceil = -1, \\quad \\lceil 5 \\rceil = 5$$]@
 
 The segments cover $(n-1, n]$ — open on the left, closed on the right.
 
@@ -1439,7 +1445,8 @@ Step functions model situations with discrete jumps: postage rates by weight, ta
 
 Tax brackets: Income tax rates increase at certain income levels. Income below $\\$10{,}000$ might be taxed at $10\\%$, income from $\\$10{,}000$ to $\\$40{,}000$ at $20\\%$, and income above $\\$40{,}000$ at $30\\%$.
 
-$$T(x) = \\begin{cases} 0.10x & \\text{if } x \\leq 10000 \\\\ 1000 + 0.20(x - 10000) & \\text{if } 10000 < x \\leq 40000 \\\\ 7000 + 0.30(x - 40000) & \\text{if } x > 40000 \\end{cases}$$
+@academic[formula_callout:Real-World Applications
+$$T(x) = \\begin{cases} 0.10x & \\text{if } x \\leq 10000 \\\\ 1000 + 0.20(x - 10000) & \\text{if } 10000 < x \\leq 40000 \\\\ 7000 + 0.30(x - 40000) & \\text{if } x > 40000 \\end{cases}$$]@
 
 Shipping costs: Packages under $1$ pound cost $\\$5$. Packages from $1$ to $5$ pounds cost $\\$5$ plus $\\$2$ per additional pound. Packages over $5$ pounds cost $\\$13$ plus $\\$1.50$ per additional pound.
 
@@ -1479,11 +1486,13 @@ Example: "A plumber charges $\\$50$ for the first hour and $\\$30$ for each addi
 
 Let $C(t)$ be the cost for $t$ hours of work ($t > 0$):
 
-$$C(t) = \\begin{cases} 50 & \\text{if } 0 < t \\leq 1 \\\\ 50 + 30(t - 1) & \\text{if } t > 1 \\end{cases}$$
+@academic[formula_callout:Writing Piecewise Functions
+$$C(t) = \\begin{cases} 50 & \\text{if } 0 < t \\leq 1 \\\\ 50 + 30(t - 1) & \\text{if } t > 1 \\end{cases}$$]@
 
 Simplifying the second piece: $50 + 30t - 30 = 30t + 20$.
 
-$$C(t) = \\begin{cases} 50 & \\text{if } 0 < t \\leq 1 \\\\ 30t + 20 & \\text{if } t > 1 \\end{cases}$$`,
+@academic[formula_callout:Writing Piecewise Functions
+$$C(t) = \\begin{cases} 50 & \\text{if } 0 < t \\leq 1 \\\\ 30t + 20 & \\text{if } t > 1 \\end{cases}$$]@`,
     before: ``,
     after: ``,
     link: '',

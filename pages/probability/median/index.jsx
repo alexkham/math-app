@@ -2109,7 +2109,8 @@ Median: $\\frac{a+b}{2}$ when $a+b$ is even
 
 When $a+b$ is odd, both $\\frac{a+b-1}{2}$ and $\\frac{a+b+1}{2}$ satisfy the median conditions.
 
-Example: Uniform on $\\{1,2,3,4,5\\}$ has median $3$
+@academic[example:Example
+Uniform on $\\{1,2,3,4,5\\}$ has median $3$]@
 
 [Binomial](!/probability/distributions/discrete/binomial) with parameters $n$ and $p$
 
@@ -2117,13 +2118,15 @@ Median: No simple closed form. Approximation: median $\\approx np$ for large $n$
 
 Requires numerical computation or tables for exact values.
 
-Example: For $n=10, p=0.5$, numerical evaluation gives median $= 5$
+@academic[example:Example
+For $n=10, p=0.5$, numerical evaluation gives median $= 5$]@
 
 [Geometric](!/probability/distributions/discrete/geometric) with parameter $p$
 
 Median: $m = \\lceil \\frac{-\\ln(2)}{\\ln(1-p)} \\rceil$
 
-Example: For $p = 0.3$, median $= \\lceil 1.98 \\rceil = 2$
+@academic[example:Example
+For $p = 0.3$, median $= \\lceil 1.98 \\rceil = 2$]@
 
 [Negative Binomial](!/probability/distributions/discrete/negative-binomial) with parameters $r$ and $p$
 
@@ -2143,7 +2146,8 @@ For small $\\lambda$, numerical evaluation of the [CDF](!/probability/cdf) is ne
 
 Discrete distributions can have multiple medians when the CDF jumps from below 0.5 to above 0.5 in a single step, landing on exactly 0.5 at the jump point.
 
-Example: [Discrete Uniform](!/probability/distributions/discrete/uniform) on $\\{1, 2, 3, 4\\}$ has CDF values $0.25, 0.5, 0.75, 1.0$. Both $2$ and $3$ satisfy the median conditions. Either value is a valid median.
+@academic[example:Example
+[Discrete Uniform](!/probability/distributions/discrete/uniform) on $\\{1, 2, 3, 4\\}$ has CDF values $0.25, 0.5, 0.75, 1.0$. Both $2$ and $3$ satisfy the median conditions. Either value is a valid median.]@
 
 ## Visual Identification
 
@@ -2303,7 +2307,8 @@ The median behaves differently for discrete and continuous distributions due to 
 
 [Discrete distributions](!/probability/distributions/discrete): Multiple values may satisfy the median conditions when the CDF jumps from below 0.5 to above 0.5 in a single step.
 
-Example: Discrete uniform on $\\{1, 2, 3, 4\\}$ has both 2 and 3 as valid medians.
+@academic[example:Example
+Discrete uniform on $\\{1, 2, 3, 4\\}$ has both 2 and 3 as valid medians.]@
 
 ## Definition Complexity
 
@@ -2482,7 +2487,8 @@ $$\\text{median}(Y) = a \\cdot \\text{median}(X) + b$$]@
 
 Linear transformations shift and scale the median predictably. Multiply by $a$, add $b$—the middle point moves accordingly.
 
-Example: If $X$ has median $4$, then $Y = 3X - 2$ has median $3(4) - 2 = 10$.
+@academic[example:Example
+If $X$ has median $4$, then $Y = 3X - 2$ has median $3(4) - 2 = 10$.]@
 
 ## Invariance Under Monotonic Transformations
 
@@ -2493,7 +2499,8 @@ $$\\text{median}(g(X)) = g(\\text{median}(X))$$]@
 
 If $g$ is strictly increasing, it preserves the ordering of values, so the 50th percentile stays at the same relative position.
 
-Example: If $X$ has median $5$, then $Y = X^2$ has median $25$ (assuming $X > 0$).
+@academic[example:Example
+If $X$ has median $5$, then $Y = X^2$ has median $25$ (assuming $X > 0$).]@
 
 This property holds for the median and [mode](!/probability/mode) but fails for the [mean](!/probability/expected-value).
 
@@ -2526,7 +2533,8 @@ Skewed distributions separate median from [mean](!/probability/expected-value), 
 
 The median reveals nothing about [variance](!/probability/variance) or spread. Two distributions can share the same median while having vastly different variability.
 
-Example: [Normal distributions](!/probability/distributions/continuous/normal) $N(0, 1)$ and $N(0, 100)$ both have median $0$, yet spread differs by a factor of 100.
+@academic[example:Example
+[Normal distributions](!/probability/distributions/continuous/normal) $N(0, 1)$ and $N(0, 100)$ both have median $0$, yet spread differs by a factor of 100.]@
 
 The median operates independently of scale—it tracks the probability midpoint, not dispersion.
 
@@ -2842,7 +2850,8 @@ Lognormal: Highly right-skewed with median $< $ mean. The median is $e^\\mu$ whi
 
 [Discrete Uniform](!/probability/distributions/discrete/uniform) on even number of values has two medians.
 
-Example: Uniform on $\\{1,2,3,4\\}$ has medians at both $2$ and $3$ since the [CDF](!/probability/cdf) equals exactly $0.5$ at $2$.
+@academic[example:Example
+Uniform on $\\{1,2,3,4\\}$ has medians at both $2$ and $3$ since the [CDF](!/probability/cdf) equals exactly $0.5$ at $2$.]@
 
 [Binomial](!/probability/distributions/discrete/binomial) can have two medians when the CDF jumps from below $0.5$ to above $0.5$ while passing through exactly $0.5$.
 
@@ -2890,7 +2899,8 @@ The median falls near $5$ (the midpoint between the two [modes](!/probability/mo
 
 Distributions with gaps in the support (missing values) require careful [CDF](!/probability/cdf) evaluation.
 
-Example: Support $\\{1, 2, 5, 6\\}$ with equal probabilities. The CDF jumps from $0.5$ at $k=2$ to $0.75$ at $k=5$. The median is $2$ since it's the smallest value where $F(k) \\geq 0.5$.
+@academic[example:Example
+Support $\\{1, 2, 5, 6\\}$ with equal probabilities. The CDF jumps from $0.5$ at $k=2$ to $0.75$ at $k=5$. The median is $2$ since it's the smallest value where $F(k) \\geq 0.5$.]@
 
 ## When Median Analysis Fails
 
@@ -2981,7 +2991,8 @@ Always verify both conditions hold.
 
 [Discrete distributions](!/probability/distributions/discrete) can have multiple medians when the CDF lands exactly on 0.5.
 
-Example: [Discrete Uniform](!/probability/distributions/discrete/uniform) on $\\{1,2,3,4\\}$ has both $2$ and $3$ as valid medians.
+@academic[example:Example
+[Discrete Uniform](!/probability/distributions/discrete/uniform) on $\\{1,2,3,4\\}$ has both $2$ and $3$ as valid medians.]@
 
 Never assume exactly one median without checking the probability structure.
 

@@ -12,6 +12,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -467,8 +469,25 @@ const schemas = {
     }),
   };
 
+  const baseRestrictionLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Every extension tightens the base',
+    preface: 'Each time the exponent was extended, the restriction on the base got tighter. Irrational exponents tighten it once more.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'The price of completeness',
+    conclusion: 'The restriction $a > 0$ is what allows $a^x$ to be defined for the entire real number line. Zero is excluded as well: $0^x$ has no continuous extension to all real exponents.',
+    axis: { top: 'strictest', label: 'restriction on the base', bottom: 'any base' },
+    levels: [
+      { id: 'irrational', name: 'Irrational exponents', sub: 'base $a > 0$' },
+      { id: 'rational', name: '[Rational exponents](!/algebra/powers/rational-exponents)', sub: 'even roots: base $a \\geq 0$' },
+      { id: 'negative', name: '[Negative exponents](!/algebra/powers/negative-exponents)', sub: 'base $a \\neq 0$' },
+      { id: 'natural', name: '[Natural exponents](!/algebra/powers/natural-exponents)', sub: 'any real base' },
+    ],
+  };
+
 return {
   props: {
+    baseRestrictionLevels,
     sectionsContent,
     introContent,
     obj2Table,
@@ -490,7 +509,9 @@ return {
 // export default function IrrationalExponentsPage({seoData,sectionsContent , introContent}) {
 
 
-export default function IrrationalExponentsPage({seoData, sectionsContent, introContent, obj2Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function IrrationalExponentsPage({baseRestrictionLevels, seoData, sectionsContent, introContent, obj2Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -542,6 +563,14 @@ export default function IrrationalExponentsPage({seoData, sectionsContent, intro
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-diagram'}
+            id="exponent-base-restriction-ladder"
+            title="Each exponent extension tightens the base"
+            source="/algebra/powers/irrational-exponents"
+          >
+            <Hierarchy data={baseRestrictionLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+          </DiagramFrame>,
         ]
     },
     {

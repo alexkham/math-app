@@ -1053,11 +1053,14 @@ obj2: {
 
 This means large numbers can be replaced by their remainders at any stage of a calculation without affecting the outcome. The formal statement, in the [congruence notation](!/arithmetic/modulo#5) of the parent page: if $a \\equiv a' \\pmod{n}$ and $b \\equiv b' \\pmod{n}$, then:
 
-$$a + b \\equiv a' + b' \\pmod{n}$$
+@academic[formula_callout:The Core Principle
+$$a + b \\equiv a' + b' \\pmod{n}$$]@
 
-$$a - b \\equiv a' - b' \\pmod{n}$$
+@academic[formula_callout:The Core Principle
+$$a - b \\equiv a' - b' \\pmod{n}$$]@
 
-$$a \\cdot b \\equiv a' \\cdot b' \\pmod{n}$$
+@academic[formula_callout:The Core Principle
+$$a \\cdot b \\equiv a' \\cdot b' \\pmod{n}$$]@
 
 In words: replacing any number with a congruent one does not change the remainder of the result. The product $89 \\times 76$ modulo $9$ does not require computing $6{,}764$ first — replacing $89$ with $8$ and $76$ with $4$ gives $32$, and $32 \\bmod 9 = 5$. The answer is the same either way.
 
@@ -1072,7 +1075,8 @@ obj3: {
   title: `Addition`,
   content: `Modular addition reduces each operand, adds the results, and reduces once more if the sum reaches or exceeds $n$:
 
-$$(a + b) \\bmod n = ((a \\bmod n) + (b \\bmod n)) \\bmod n$$
+@academic[formula_callout:Addition
+$$(a + b) \\bmod n = ((a \\bmod n) + (b \\bmod n)) \\bmod n$$]@
 
 For $(47 + 38) \\bmod 10$: reduce $47$ to $7$ and $38$ to $8$. Add: $7 + 8 = 15$. Reduce: $15 \\bmod 10 = 5$.
 
@@ -1089,7 +1093,8 @@ obj4: {
   title: `Subtraction`,
   content: `Modular subtraction follows the same reduce-operate-reduce pattern, with one wrinkle: the intermediate result may be negative.
 
-$$(a - b) \\bmod n = ((a \\bmod n) - (b \\bmod n)) \\bmod n$$
+@academic[formula_callout:Subtraction
+$$(a - b) \\bmod n = ((a \\bmod n) - (b \\bmod n)) \\bmod n$$]@
 
 For $(23 - 47) \\bmod 10$: reduce $23$ to $3$ and $47$ to $7$. Subtract: $3 - 7 = -4$. The result is negative, so add $n$: $-4 + 10 = 6$.
 
@@ -1106,7 +1111,8 @@ obj5: {
   title: `Multiplication`,
   content: `Modular multiplication reduces each factor, multiplies the remainders, and reduces the product:
 
-$$(a \\cdot b) \\bmod n = ((a \\bmod n) \\cdot (b \\bmod n)) \\bmod n$$
+@academic[formula_callout:Multiplication
+$$(a \\cdot b) \\bmod n = ((a \\bmod n) \\cdot (b \\bmod n)) \\bmod n$$]@
 
 For $(23 \\cdot 17) \\bmod 5$: reduce $23$ to $3$ and $17$ to $2$. Multiply: $3 \\cdot 2 = 6$. Reduce: $6 \\bmod 5 = 1$.
 

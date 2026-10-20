@@ -1679,7 +1679,8 @@ Most of these identities admit both algebraic and combinatorial proofs. The comb
     content: `
 Pascal's rule arranges all binomial coefficients into a triangular array. Row $n$, indexed starting from row $0$, contains the $n+1$ values
 
-$$\\binom{n}{0}, \\binom{n}{1}, \\ldots, \\binom{n}{n}.$$
+@academic[formula_callout:Pascal's Triangle
+$$\\binom{n}{0}, \\binom{n}{1}, \\ldots, \\binom{n}{n}.$$]@
 
 Each interior entry equals the sum of the two entries directly above it — the visual form of Pascal's rule.
 
@@ -1726,7 +1727,8 @@ $$\\binom{n}{k_1, k_2, \\ldots, k_r} = \\frac{n!}{k_1! \\, k_2! \\cdots k_r!}, \
 
 The binomial coefficient is the case $r = 2$:
 
-$$\\binom{n}{k} = \\binom{n}{k, \\, n-k}.$$
+@academic[formula_callout:The Multinomial Coefficient
+$$\\binom{n}{k} = \\binom{n}{k, \\, n-k}.$$]@
 
 ## Combinatorial Interpretation
 

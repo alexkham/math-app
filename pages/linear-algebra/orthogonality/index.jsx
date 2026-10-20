@@ -911,7 +911,8 @@ const sectionsContent = {
     title: `What Orthogonality Means`,
     content: `Two vectors $\\mathbf{u}$ and $\\mathbf{v}$ in $\\mathbb{R}^n$ are orthogonal if their [dot product](!/linear-algebra/vectors/dot-product) is zero:
 
-$$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = 0$$
+@academic[formula_callout:What Orthogonality Means
+$$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = 0$$]@
 
 Geometrically, this means the angle between the two vectors is $90°$. The vectors are perpendicular — pointing in completely independent directions with no component of one lying along the other.
 
@@ -946,7 +947,8 @@ The orthogonal complement is itself a subspace. Its [dimension](!/linear-algebra
 
 The most important structural consequence is the orthogonal decomposition. Every vector $\\mathbf{v} \\in \\mathbb{R}^n$ can be written uniquely as
 
-$$\\mathbf{v} = \\mathbf{w} + \\mathbf{w}^\\perp$$
+@academic[formula_callout:Orthogonal Complements
+$$\\mathbf{v} = \\mathbf{w} + \\mathbf{w}^\\perp$$]@
 
 where $\\mathbf{w} \\in W$ and $\\mathbf{w}^\\perp \\in W^\\perp$. The two components are perpendicular to each other: $\\mathbf{w} \\cdot \\mathbf{w}^\\perp = 0$. This decomposition is the geometric heart of [projection](!/linear-algebra/orthogonality/projections): $\\mathbf{w}$ is the projection of $\\mathbf{v}$ onto $W$, and $\\mathbf{w}^\\perp$ is the residual.`,
     before: ``,
@@ -959,13 +961,15 @@ where $\\mathbf{w} \\in W$ and $\\mathbf{w}^\\perp \\in W^\\perp$. The two compo
 
 In $\\mathbb{R}^n$, the row space and the null space are orthogonal complements:
 
-$$\\text{Row}(A)^\\perp = \\text{Null}(A)$$
+@academic[formula_callout:The Four Fundamental Subspaces Revisited
+$$\\text{Row}(A)^\\perp = \\text{Null}(A)$$]@
 
 Every vector in the null space is perpendicular to every row of $A$, because $A\\mathbf{x} = \\mathbf{0}$ means the dot product of $\\mathbf{x}$ with each row is zero.
 
 In $\\mathbb{R}^m$, the column space and the left null space are orthogonal complements:
 
-$$\\text{Col}(A)^\\perp = \\text{Null}(A^T)$$
+@academic[formula_callout:The Four Fundamental Subspaces Revisited
+$$\\text{Col}(A)^\\perp = \\text{Null}(A^T)$$]@
 
 These two pairs of complements are the structural backbone of projection and [least squares](!/linear-algebra/orthogonality/least-squares). Projecting a vector $\\mathbf{b}$ onto the column space means decomposing $\\mathbf{b}$ into a column-space component (the best approximation $A\\hat{\\mathbf{x}}$) and a left-null-space component (the residual $\\mathbf{b} - A\\hat{\\mathbf{x}}$).`,
     before: ``,

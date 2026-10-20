@@ -303,7 +303,8 @@ const sectionsContent = {
     content: `
 A function $F$ is an antiderivative of $f$ if:
 
-$$F'(x) = f(x)$$
+@academic[formula_callout:Antiderivatives
+$$F'(x) = f(x)$$]@
 
 The antiderivative reverses differentiation. Given $f(x) = 2x$, the function $F(x) = x^2$ is an antiderivative because $(x^2)' = 2x$.
 
@@ -382,19 +383,31 @@ Several antiderivatives appear constantly and should be memorized.
 
 **Power rule** (for $n \\neq -1$):
 
-$$\\int x^n\\, dx = \\frac{x^{n+1}}{n+1} + C$$
+@academic[formula_callout:Basic Antiderivative Formulas
+$$\\int x^n\\, dx = \\frac{x^{n+1}}{n+1} + C$$]@
 
 **Reciprocal:**
 
+@academic[formula_callout:Reciprocal Antiderivative
 $$\\int \\frac{1}{x}\\, dx = \\ln|x| + C$$
+/calculus/formulas#reciprocal_antiderivative]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/formulas]@
 
 **Exponential:**
 
+@academic[formula_callout:Exponential Antiderivative
 $$\\int e^x\\, dx = e^x + C$$
+/calculus/formulas#exponential_antiderivative]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/formulas]@
 
 **Trigonometric:**
 
-$$\\int \\cos x\\, dx = \\sin x + C \\qquad \\int \\sin x\\, dx = -\\cos x + C$$
+@academic[formula_callout:Basic Antiderivative Formulas
+$$\\int \\cos x\\, dx = \\sin x + C \\qquad \\int \\sin x\\, dx = -\\cos x + C$$]@
 
 The [special integrals](!/calculus/integrals/special) page provides a more complete list.
 `,
@@ -409,15 +422,22 @@ Indefinite integrals obey the same [linearity rules](!/calculus/integrals/rules)
 
 **Sum rule:**
 
-$$\\int [f(x) + g(x)]\\, dx = \\int f(x)\\, dx + \\int g(x)\\, dx$$
+@academic[formula_callout:Linearity of Indefinite Integrals
+$$\\int [f(x) + g(x)]\\, dx = \\int f(x)\\, dx + \\int g(x)\\, dx$$]@
 
 **Constant multiple rule:**
 
+@academic[formula_callout:Constant Multiple Rule (Integrals)
 $$\\int c \\cdot f(x)\\, dx = c \\int f(x)\\, dx$$
+/calculus/formulas#constant_multiple_rule_integrals]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/formulas]@
 
 These rules reduce complex integrands to combinations of simpler ones. For example:
 
-$$\\int (3x^2 + 5x - 2)\\, dx = 3 \\cdot \\frac{x^3}{3} + 5 \\cdot \\frac{x^2}{2} - 2x + C = x^3 + \\frac{5x^2}{2} - 2x + C$$
+@academic[formula_callout:Linearity of Indefinite Integrals
+$$\\int (3x^2 + 5x - 2)\\, dx = 3 \\cdot \\frac{x^3}{3} + 5 \\cdot \\frac{x^2}{2} - 2x + C = x^3 + \\frac{5x^2}{2} - 2x + C$$]@
 `,
     before: ``,
     after: ``,
@@ -432,7 +452,12 @@ If $\\int f(x)\\, dx = F(x) + C$, then $F'(x)$ must equal $f(x)$. If it doesn't,
 
 For example, suppose you compute:
 
+@academic[formula_callout:Antiderivative of Secant Squared
 $$\\int \\sec^2 x\\, dx = \\tan x + C$$
+/calculus/formulas#antiderivative_of_secant_squared]@
+
+@academic[formulas_link:Browse all integral formulas
+/calculus/formulas]@
 
 Verify: $(\\tan x)' = \\sec^2 x$. Correct.
 
@@ -449,11 +474,13 @@ Indefinite and definite integrals serve different purposes but are linked by the
 
 The indefinite integral finds antiderivatives:
 
-$$\\int f(x)\\, dx = F(x) + C$$
+@academic[formula_callout:Connection to Definite Integrals
+$$\\int f(x)\\, dx = F(x) + C$$]@
 
 The definite integral uses an antiderivative to compute accumulated quantity:
 
-$$\\int_a^b f(x)\\, dx = F(b) - F(a)$$
+@academic[formula_callout:Connection to Definite Integrals
+$$\\int_a^b f(x)\\, dx = F(b) - F(a)$$]@
 
 The constant $C$ cancels when evaluating $F(b) - F(a)$, so any antiderivative works. This connection, detailed on the [rules](!/calculus/integrals/rules) page, is why mastering indefinite integration enables computation of definite integrals.
 `,
@@ -481,7 +508,8 @@ Differentiation takes a function and produces its rate of change. The indefinite
 
 If $F'(x) = f(x)$, then $F$ is an antiderivative of $f$. The indefinite integral collects all such antiderivatives:
 
-$$\\int f(x)\\, dx = F(x) + C$$
+@academic[formula_callout:Summary: The Indefinite-Integration Workflow
+$$\\int f(x)\\, dx = F(x) + C$$]@
 
 The constant $C$ reflects a fundamental ambiguity. Since the derivative of any constant is zero, functions differing by a constant share the same derivative. The family $F(x) + C$ captures every function whose derivative equals $f(x)$.
 

@@ -2381,23 +2381,28 @@ Together, the three row-operation rules form a complete toolkit. Row addition is
 
 ## Worked Example
 
-$$A = \\begin{pmatrix} 2 & 1 & -1 & 3 \\\\ 4 & 0 & 2 & 1 \\\\ -2 & 3 & 1 & 5 \\\\ 6 & 2 & 0 & -1 \\end{pmatrix}$$
+@academic[formula_callout:Computing Determinants via Row Reduction
+$$A = \\begin{pmatrix} 2 & 1 & -1 & 3 \\\\ 4 & 0 & 2 & 1 \\\\ -2 & 3 & 1 & 5 \\\\ 6 & 2 & 0 & -1 \\end{pmatrix}$$]@
 
 Subtract $2$ times row $1$ from row $2$, add row $1$ to row $3$, and subtract $3$ times row $1$ from row $4$. All three are row-addition operations, so the determinant is unchanged:
 
-$$\\begin{pmatrix} 2 & 1 & -1 & 3 \\\\ 0 & -2 & 4 & -5 \\\\ 0 & 4 & 0 & 8 \\\\ 0 & -1 & 3 & -10 \\end{pmatrix}$$
+@academic[formula_callout:Computing Determinants via Row Reduction
+$$\\begin{pmatrix} 2 & 1 & -1 & 3 \\\\ 0 & -2 & 4 & -5 \\\\ 0 & 4 & 0 & 8 \\\\ 0 & -1 & 3 & -10 \\end{pmatrix}$$]@
 
 Add $2$ times row $2$ to row $3$, and subtract $\\frac{1}{2}$ times row $2$ from row $4$:
 
-$$\\begin{pmatrix} 2 & 1 & -1 & 3 \\\\ 0 & -2 & 4 & -5 \\\\ 0 & 0 & 8 & -2 \\\\ 0 & 0 & 1 & -\\frac{15}{2} \\end{pmatrix}$$
+@academic[formula_callout:Computing Determinants via Row Reduction
+$$\\begin{pmatrix} 2 & 1 & -1 & 3 \\\\ 0 & -2 & 4 & -5 \\\\ 0 & 0 & 8 & -2 \\\\ 0 & 0 & 1 & -\\frac{15}{2} \\end{pmatrix}$$]@
 
 Subtract $\\frac{1}{8}$ times row $3$ from row $4$:
 
-$$\\begin{pmatrix} 2 & 1 & -1 & 3 \\\\ 0 & -2 & 4 & -5 \\\\ 0 & 0 & 8 & -2 \\\\ 0 & 0 & 0 & -\\frac{29}{4} \\end{pmatrix}$$
+@academic[formula_callout:Computing Determinants via Row Reduction
+$$\\begin{pmatrix} 2 & 1 & -1 & 3 \\\\ 0 & -2 & 4 & -5 \\\\ 0 & 0 & 8 & -2 \\\\ 0 & 0 & 0 & -\\frac{29}{4} \\end{pmatrix}$$]@
 
 No row swaps and no row scalings were used — only row additions. The determinant is the product of the diagonal:
 
-$$\\det(A) = 2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{4}\\right) = 2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{4}\\right) = 116$$
+@academic[formula_callout:Computing Determinants via Row Reduction
+$$\\det(A) = 2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{4}\\right) = 2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{4}\\right) = 116$$]@
 
 ## Complexity
 
@@ -2429,7 +2434,8 @@ For any positive integer $k$:
 
 And since multiplication of determinants is commutative even when matrix multiplication is not:
 
-$$\\det(AB) = \\det(A)\\det(B) = \\det(B)\\det(A) = \\det(BA)$$
+@academic[formula_callout:The Multiplicative Property
+$$\\det(AB) = \\det(A)\\det(B) = \\det(B)\\det(A) = \\det(BA)$$]@
 
 Note that $AB$ and $BA$ generally differ as matrices, yet their determinants always agree.
 
@@ -2460,7 +2466,7 @@ One way to see why the identity holds is through the permutation definition of t
     content: `For an upper triangular, lower triangular, or diagonal matrix, the determinant is simply the product of the diagonal entries:
 
 @academic[formula_callout:determinant_of_triangular|Determinant of Triangular|$$\\det(A) = a_{11} \\, a_{22} \\cdots a_{nn}$$]@
-@academic[formulas_link:/linear-algebra/formulas#determinant_of_triangular]@
+@academic[formulas_link:/linear-algebra/formulas#triangular_matrix_determinant]@
 
 This follows directly from cofactor expansion. For a lower triangular matrix, expanding along the first row leaves only the $(1,1)$ entry (all others in the first row are zero), paired with the minor obtained by deleting row $1$ and column $1$ — which is again lower triangular. Repeating this reduction peels off one diagonal entry at a time until only the last entry remains.
 
@@ -2478,7 +2484,8 @@ This property is what completes the row-reduction algorithm for computing determ
     title: `Block Triangular Matrices`,
     content: `A block triangular matrix is one that can be partitioned into square diagonal blocks with zero blocks either above or below:
 
-$$A = \\begin{pmatrix} A_{11} & A_{12} \\\\ 0 & A_{22} \\end{pmatrix} \\quad \\text{(block upper triangular)}$$
+@academic[formula_callout:Block Triangular Matrices
+$$A = \\begin{pmatrix} A_{11} & A_{12} \\\\ 0 & A_{22} \\end{pmatrix} \\quad \\text{(block upper triangular)}$$]@
 
 For such matrices, the determinant factors as $\\det(A) = \\det(A_{11}) \\cdot \\det(A_{22})$, and this extends to any number of diagonal blocks:
 
@@ -2489,7 +2496,8 @@ The off-diagonal blocks $A_{12}$, etc., can contain anything — only the triang
 
 ## Example
 
-$$A = \\begin{pmatrix} 3 & 1 & 0 & 0 & 0 \\\\ 2 & 5 & 0 & 0 & 0 \\\\ 0 & 0 & 1 & 4 & -2 \\\\ 0 & 0 & 0 & 3 & 1 \\\\ 0 & 0 & 0 & 0 & 7 \\end{pmatrix}$$
+@academic[formula_callout:Block Triangular Matrices
+$$A = \\begin{pmatrix} 3 & 1 & 0 & 0 & 0 \\\\ 2 & 5 & 0 & 0 & 0 \\\\ 0 & 0 & 1 & 4 & -2 \\\\ 0 & 0 & 0 & 3 & 1 \\\\ 0 & 0 & 0 & 0 & 7 \\end{pmatrix}$$]@
 
 This is block upper triangular with a $2 \\times 2$ block $A_{11} = \\begin{pmatrix} 3 & 1 \\\\ 2 & 5 \\end{pmatrix}$ and a $3 \\times 3$ upper triangular block $A_{22} = \\begin{pmatrix} 1 & 4 & -2 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & 7 \\end{pmatrix}$. The determinant is $\\det(A_{11}) \\cdot \\det(A_{22}) = (15 - 2)(1 \\cdot 3 \\cdot 7) = 13 \\cdot 21 = 273$.
 
@@ -2503,7 +2511,6 @@ This rule does not hold for general block matrices where the off-diagonal blocks
     content: `The determinant condenses the most fundamental structural question about a square matrix into a single test:
 
 @academic[formula_callout:determinant_invertibility_criterion|Determinant Invertibility Criterion|$$A \\text{ invertible} \\iff \\det(A) \\neq 0$$]@
-@academic[formulas_link:/linear-algebra/formulas#determinant_invertibility_criterion]@
 
 This equivalence sits at the center of a web of conditions that are all mutually equivalent for an $n \\times n$ matrix $A$ — the twelve below are either all true or all false.
 

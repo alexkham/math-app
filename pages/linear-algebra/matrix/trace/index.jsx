@@ -1385,11 +1385,13 @@ The trace of the $n \\times n$ [identity matrix](!/linear-algebra/matrix/types) 
     title: `Linearity`,
     content: `The trace is a linear function from the space of $n \\times n$ matrices to the real numbers. It satisfies additivity:
 
-$$\\text{tr}(A + B) = \\text{tr}(A) + \\text{tr}(B)$$
+@academic[formula_callout:Linearity
+$$\\text{tr}(A + B) = \\text{tr}(A) + \\text{tr}(B)$$]@
 
 and scalar homogeneity:
 
-$$\\text{tr}(cA) = c \\cdot \\text{tr}(A)$$
+@academic[formula_callout:Linearity
+$$\\text{tr}(cA) = c \\cdot \\text{tr}(A)$$]@
 
 Combined, these give the linearity identity:
 
@@ -1434,7 +1436,8 @@ The proof is a direct computation. The $(i,i)$ entry of $AB$ is $\\sum_k a_{ik} 
 
 For three matrices, the cyclic property extends to
 
-$$\\text{tr}(ABC) = \\text{tr}(BCA) = \\text{tr}(CAB)$$
+@academic[formula_callout:The Cyclic Property
+$$\\text{tr}(ABC) = \\text{tr}(BCA) = \\text{tr}(CAB)$$]@
 
 Only cyclic reorderings are permitted. The rearrangement $\\text{tr}(ABC) = \\text{tr}(ACB)$ is false in general — swapping two adjacent factors is not a cyclic permutation.`,
     before: ``,
@@ -1502,7 +1505,8 @@ The Frobenius inner product turns the space of $n \\times n$ matrices into an in
     title: `Trace of Commutators`,
     content: `The commutator of two $n \\times n$ matrices is the matrix
 
-$$[A, B] = AB - BA$$
+@academic[formula_callout:Trace of Commutators
+$$[A, B] = AB - BA$$]@
 
 The commutator measures how far $A$ and $B$ are from commuting — it is zero if and only if $AB = BA$.
 
@@ -1525,7 +1529,7 @@ The converse does not hold in general: a traceless matrix is not necessarily a c
 If $S$ is [symmetric](!/linear-algebra/matrix/types) and $K$ is [skew-symmetric](!/linear-algebra/matrix/types), then their product has trace zero:
 
 @academic[formula_callout:trace_symmetric_skew_zero|Trace Symmetric Skew Zero|$$S = S^T,\\ K = -K^T \\implies \\text{tr}(SK) = 0$$]@
-@academic[formulas_link:/linear-algebra/formulas#trace_symmetric_skew_zero]@
+@academic[formulas_link:/linear-algebra/formulas#trace_symmetric_skew_product]@
 
 The proof: $\\text{tr}(SK) = \\text{tr}((SK)^T) = \\text{tr}(K^T S^T) = \\text{tr}(-KS) = -\\text{tr}(KS) = -\\text{tr}(SK)$, where the last step uses the cyclic property. The only number equal to its own negative is zero.
 
@@ -1545,11 +1549,13 @@ The result is independent of which orthonormal basis is used — another manifes
 
 The simplest case is the linear function $f(X) = \\text{tr}(AX)$, where $A$ is a fixed matrix and $X$ is the variable. The derivative with respect to $X$ is
 
-$$\\frac{\\partial}{\\partial X} \\text{tr}(AX) = A^T$$
+@academic[formula_callout:Trace in Differentiation
+$$\\frac{\\partial}{\\partial X} \\text{tr}(AX) = A^T$$]@
 
 For the quadratic form $f(X) = \\text{tr}(X^T A X)$, the derivative is
 
-$$\\frac{\\partial}{\\partial X} \\text{tr}(X^T A X) = (A + A^T)X$$
+@academic[formula_callout:Trace in Differentiation
+$$\\frac{\\partial}{\\partial X} \\text{tr}(X^T A X) = (A + A^T)X$$]@
 
 When $A$ is symmetric, this simplifies to $2AX$.
 

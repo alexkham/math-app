@@ -3261,15 +3261,18 @@ Rearranging: $A = E_1^{-1} E_2^{-1} \\cdots E_k^{-1} U$. Each $E_i$ is a lower t
 
 ## Worked Example
 
-$$A = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \\end{pmatrix}$$
+@academic[formula_callout:Construction from Gaussian Elimination
+$$A = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \\end{pmatrix}$$]@
 
 Subtract $2$ times row $1$ from row $2$ (multiplier $m_{21} = 2$) and add row $1$ to row $3$ (multiplier $m_{31} = -1$):
 
-$$\\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 6 & 2 \\end{pmatrix}$$
+@academic[formula_callout:Construction from Gaussian Elimination
+$$\\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 6 & 2 \\end{pmatrix}$$]@
 
 Add $3$ times row $2$ to row $3$ (multiplier $m_{32} = -3$):
 
-$$U = \\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 0 & 14 \\end{pmatrix}$$
+@academic[formula_callout:Construction from Gaussian Elimination
+$$U = \\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 0 & 14 \\end{pmatrix}$$]@
 
 The multipliers fill $L$: $L = \\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & 1 & 0 \\\\ -1 & -3 & 1 \\end{pmatrix}$.
 
@@ -3369,11 +3372,13 @@ In practice, computing $A^{-1}$ explicitly is rarely the right approach. Solving
 
 The $(1,1)$ entry is zero — a row swap is needed. The largest entry in column $1$ is $3$ in row $3$. Swap rows $1$ and $3$:
 
-$$\\begin{pmatrix} 3 & 1 & 0 & 2 \\\\ 1 & 0 & 3 & -1 \\\\ 0 & 2 & 1 & 3 \\\\ 2 & 3 & 1 & 0 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: 4×4 with Pivoting
+$$\\begin{pmatrix} 3 & 1 & 0 & 2 \\\\ 1 & 0 & 3 & -1 \\\\ 0 & 2 & 1 & 3 \\\\ 2 & 3 & 1 & 0 \\end{pmatrix}$$]@
 
 Eliminate below the $(1,1)$ pivot. Multipliers: $m_{21} = 1/3$, $m_{31} = 0$, $m_{41} = 2/3$:
 
-$$\\begin{pmatrix} 3 & 1 & 0 & 2 \\\\ 0 & -1/3 & 3 & -5/3 \\\\ 0 & 2 & 1 & 3 \\\\ 0 & 7/3 & 1 & -4/3 \\end{pmatrix}$$
+@academic[formula_callout:Worked Example: 4×4 with Pivoting
+$$\\begin{pmatrix} 3 & 1 & 0 & 2 \\\\ 0 & -1/3 & 3 & -5/3 \\\\ 0 & 2 & 1 & 3 \\\\ 0 & 7/3 & 1 & -4/3 \\end{pmatrix}$$]@
 
 The largest entry in column $2$ below position $(2,2)$ is $7/3$ in row $4$. Swap rows $2$ and $4$. Continue elimination on columns $2$ and $3$ with the appropriate multipliers.
 
