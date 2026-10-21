@@ -278,7 +278,9 @@ $$\\lim_{x \\to a} f(x) = L$$]@
 
 requires $x$ to approach $a$ from both directions simultaneously. Values less than $a$ must yield function outputs approaching $L$, and values greater than $a$ must do the same. This is the [two-sided limit](!/calculus/limits/two-sided).
 
-The existence condition is precise: a two-sided limit exists if and only if both one-sided limits exist and are equal. If
+@academic[rule_theorem_plain:The existence condition is precise: a two-sided limit exists if and only if both one-sided limits exist and are equal.]@
+
+If
 
 @academic[formula_callout:Two-Sided Limits
 $$\\lim_{x \\to a^-} f(x) = L \\quad \\text{and} \\quad \\lim_{x \\to a^+} f(x) = L$$]@
@@ -337,7 +339,12 @@ $$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\frac{\\lim_{x \\to a} f(x)}{\\lim_{x \
 
 Similar rules hold for differences, constant multiples, and powers. The critical requirement: the component limits must exist. When they don't—when you encounter indeterminate forms like $0/0$—these rules cannot be applied directly.
 
-The [Squeeze Theorem](!/calculus/limits/rules) offers another approach. If $g(x) \\leq f(x) \\leq h(x)$ near $a$ and both $g$ and $h$ approach the same limit $L$, then $f$ must also approach $L$. The function is trapped between two bounds converging to the same value.
+The [Squeeze Theorem](!/calculus/limits/rules) offers another approach.
+
+@academic[rule_theorem:Squeeze Theorem
+If $g(x) \\leq f(x) \\leq h(x)$ near $a$ and both $g$ and $h$ approach the same limit $L$, then $f$ must also approach $L$.]@
+
+The function is trapped between two bounds converging to the same value.
 `,
     before: ``,
     after: ``,
@@ -444,7 +451,10 @@ This single equation encodes three requirements. First, $f(a)$ must be defined�
 
 Failure of any condition creates a discontinuity. A hole in the graph (removable discontinuity) occurs when the limit exists but differs from the function value or the function is undefined. A jump discontinuity occurs when left and right limits differ. An infinite discontinuity occurs when the function blows up.
 
-The Intermediate Value Theorem guarantees that continuous functions on closed intervals attain every value between their endpoints. This result has profound consequences for proving that equations have solutions.
+@academic[rule_theorem:Intermediate Value Theorem
+The Intermediate Value Theorem guarantees that continuous functions on closed intervals attain every value between their endpoints.]@
+
+This result has profound consequences for proving that equations have solutions.
 `,
     before: ``,
     after: ``,

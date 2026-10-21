@@ -2281,7 +2281,9 @@ The complementary matrix $I - P$ projects onto the orthogonal complement $W^\\pe
 
 It satisfies $(I - P)^T = I - P$ and $(I - P)^2 = I - P$, and for every $\\mathbf{b}$: $P\\mathbf{b} + (I - P)\\mathbf{b} = \\mathbf{b}$, decomposing $\\mathbf{b}$ into its $W$-component and its $W^\\perp$-component.
 
-The [eigenvalues](!/linear-algebra/eigen) of $P$ are $0$ and $1$: vectors in $W$ map to themselves (eigenvalue $1$) and vectors in $W^\\perp$ map to zero (eigenvalue $0$). The rank of $P$ equals the [trace](!/linear-algebra/matrix/trace) of $P$, which equals $\\dim(W)$.`,
+The [eigenvalues](!/linear-algebra/eigen) of $P$ are $0$ and $1$: vectors in $W$ map to themselves (eigenvalue $1$) and vectors in $W^\\perp$ map to zero (eigenvalue $0$).
+
+@academic[rule_plain:The rank of $P$ equals the [trace](!/linear-algebra/matrix/trace) of $P$, which equals $\\dim(W)$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2313,7 +2315,9 @@ $$A\\hat{\\mathbf{x}} = \\hat{\\mathbf{b}} = P\\mathbf{b}$$]@
 
 The least-squares solution does not solve $A\\mathbf{x} = \\mathbf{b}$. It solves $A\\mathbf{x} = \\hat{\\mathbf{b}}$, where $\\hat{\\mathbf{b}}$ is the closest reachable vector to $\\mathbf{b}$.
 
-The residual $\\mathbf{r} = \\mathbf{b} - A\\hat{\\mathbf{x}}$ lies in $\\text{Col}(A)^\\perp = \\text{Null}(A^T)$ — it is orthogonal to every column of $A$. The condition $A^T\\mathbf{r} = \\mathbf{0}$ is exactly the normal equation $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$.
+@academic[rule_plain:The residual $\\mathbf{r} = \\mathbf{b} - A\\hat{\\mathbf{x}}$ lies in $\\text{Col}(A)^\\perp = \\text{Null}(A^T)$ — it is orthogonal to every column of $A$.]@
+
+The condition $A^T\\mathbf{r} = \\mathbf{0}$ is exactly the normal equation $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$.
 
 Every least-squares problem is a projection problem. Solving least squares means projecting the target $\\mathbf{b}$ onto the column space and finding the input $\\hat{\\mathbf{x}}$ that produces the projected output.`,
     before: ``,

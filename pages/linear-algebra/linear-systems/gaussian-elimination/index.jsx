@@ -942,6 +942,8 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gaussEliminationDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1306,7 +1308,9 @@ Row scaling ($kR_i \\to R_i$, $k \\neq 0$): multiply every entry in a row by a n
 
 Row addition ($R_i + cR_j \\to R_i$): add $c$ times row $j$ to row $i$, replacing row $i$ with the result. This is the operation that actually eliminates entries — by choosing $c$ appropriately, a targeted entry becomes zero.
 
-Each operation is reversible: swapping the same pair undoes the swap, scaling by $1/k$ undoes scaling by $k$, and subtracting $c$ times row $j$ from row $i$ undoes the addition. Reversibility guarantees that no solutions are created or lost. Each operation also corresponds to left-multiplication by an [elementary matrix](!/linear-algebra/matrix/operations), connecting the algorithm to the theory of [matrix factorization](!/linear-algebra/decompositions).`,
+@academic[rule_theorem_plain:Each operation is reversible: swapping the same pair undoes the swap, scaling by $1/k$ undoes scaling by $k$, and subtracting $c$ times row $j$ from row $i$ undoes the addition. Reversibility guarantees that no solutions are created or lost.]@
+
+Each operation also corresponds to left-multiplication by an [elementary matrix](!/linear-algebra/matrix/operations), connecting the algorithm to the theory of [matrix factorization](!/linear-algebra/decompositions).`,
     before: ``,
     after: ``,
     link: ``,
@@ -1368,7 +1372,9 @@ The result is a matrix in row echelon form: a staircase of pivots descending fro
 
 The number of pivots equals the [rank](!/linear-algebra/matrix/rank) of the coefficient matrix. Pivot columns correspond to determined variables (pivot variables) whose values are fixed once the free variables are assigned. Free columns correspond to free variables (parameters) that can take any real value.
 
-If every column of $A$ is a pivot column, the system has no free variables and the solution (if it exists) is unique. If at least one column is free, the solution set (if nonempty) is infinite, parametrized by the free variables. The distinction between pivot and free columns is the structural core of the algorithm — it determines both the form and the dimension of the solution set.`,
+@academic[rule_theorem_plain:If every column of $A$ is a pivot column, the system has no free variables and the solution (if it exists) is unique. If at least one column is free, the solution set (if nonempty) is infinite, parametrized by the free variables.]@
+
+The distinction between pivot and free columns is the structural core of the algorithm — it determines both the form and the dimension of the solution set.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1651,8 +1657,27 @@ const schemas = {
     }),
   };
 
+  const rowOperationTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Three moves, all reversible',
+    preface: 'Gaussian elimination uses only three operations on rows. Each one changes the system without changing its solutions, and each can be undone.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Only one move eliminates',
+    conclusion: 'Swapping and scaling tidy the rows; adding a multiple of one row to another is the operation that actually creates the zeros.',
+    root: { name: 'Elementary row operations', sub: '3 operations' },
+    children: [
+      { id: 'swap', name: 'Swap', symbol: '$R_i \\leftrightarrow R_j$', items: [
+        { label: 'Does', text: 'reorders equations, fixes a zero pivot' }, { label: 'Undone by', text: 'the same swap' } ] },
+      { id: 'scale', name: 'Scaling', symbol: '$kR_i,\\ k \\neq 0$', flag: true, warn: '$k = 0$ is forbidden', items: [
+        { label: 'Undone by', text: 'scaling by $1/k$' } ] },
+      { id: 'add', name: 'Addition', symbol: '$R_i + cR_j$', items: [
+        { label: 'Does', text: 'eliminates entries' }, { label: 'Undone by', text: 'subtracting $cR_j$' } ] },
+    ],
+  };
+
 return {
   props:{
+    rowOperationTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1673,7 +1698,7 @@ return {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function GaussianEliminationPage({
+export default function GaussianEliminationPage({rowOperationTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -1706,6 +1731,14 @@ export default function GaussianEliminationPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
+          <DiagramFrameV2
+            key={'obj2-diagram'}
+            id="row-operations-tree"
+            title="The three elementary row operations"
+            source="/linear-algebra/linear-systems/gaussian-elimination"
+          >
+            <TopDownTree data={rowOperationTree} />
+          </DiagramFrameV2>,
         ]
     },
     {

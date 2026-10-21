@@ -954,7 +954,8 @@ The bound depends only on the variance and makes no assumptions about the form o
   
       title:`What the Inequality Is Saying`,
       content:`
-Chebyshev's inequality states that a random variable with small variance cannot stray far from its mean very often.
+@academic[rule_theorem:Chebyshev's inequality
+Chebyshev's inequality states that a random variable with small variance cannot stray far from its mean very often.]@
 
 The variance measures how spread out the values of the variable are. If this spread is limited, then large deviations from the mean must be rare. The inequality makes this idea precise by turning variability into a bound on deviation probabilities.
 

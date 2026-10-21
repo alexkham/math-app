@@ -1198,7 +1198,11 @@ Parallelism can be detected without computing the scalar $c$ explicitly. If the 
 
 By convention, the zero vector is considered parallel to every vector, since $\\mathbf{0} = 0\\mathbf{b}$ for any $\\mathbf{b}$. This convention avoids the need to exclude $\\mathbf{0}$ as a special case in statements about parallelism.
 
-Parallelism is the simplest instance of linear dependence. Two vectors are linearly dependent precisely when one is a scalar multiple of the other — precisely when they are parallel. The concept generalizes: for three or more vectors, dependence means at least one vector is a [linear combination](!/linear-algebra/vectors/linear-combinations) of the others, but for a pair, dependence reduces to parallelism.`,
+Parallelism is the simplest instance of linear dependence.
+
+@academic[rule_theorem_plain:Two vectors are linearly dependent precisely when one is a scalar multiple of the other — precisely when they are parallel.]@
+
+The concept generalizes: for three or more vectors, dependence means at least one vector is a [linear combination](!/linear-algebra/vectors/linear-combinations) of the others, but for a pair, dependence reduces to parallelism.`,
     before: ``,
     after: ``,
     link: '',

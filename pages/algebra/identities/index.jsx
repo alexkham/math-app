@@ -281,7 +281,9 @@ $$(a+b)^4 = a^4 + 4a^3b + 6a^2b^2 + 4ab^3 + b^4$$]@
 @academic[formula_callout:Higher Powers and the Binomial Theorem
 $$(a+b)^5 = a^5 + 5a^4b + 10a^3b^2 + 10a^2b^3 + 5ab^4 + b^5$$]@
 
-The coefficients $1,4,6,4,1$ and $1,5,10,10,5,1$ are the corresponding rows of Pascal's triangle. For a difference $(a-b)^n$, the same coefficients appear with alternating signs: every odd-indexed term (counting from $k=0$) flips sign, since $(-b)^k$ is negative when $k$ is odd.
+The coefficients $1,4,6,4,1$ and $1,5,10,10,5,1$ are the corresponding rows of Pascal's triangle.
+
+@academic[rule_corollary_plain:For a difference $(a-b)^n$, the same coefficients appear with alternating signs: every odd-indexed term (counting from $k=0$) flips sign, since $(-b)^k$ is negative when $k$ is odd.]@
 
 Memorizing every higher power is unnecessary. The formula handles them all. What matters is recognizing when the binomial theorem applies and being able to read off any specific term — the term containing $b^k$ is $\\binom{n}{k} a^{n-k} b^k$, no full expansion required.`,
       before: ``,
@@ -298,7 +300,9 @@ The square of a trinomial follows directly from term-by-term [multiplication](!/
 @academic[formula_callout:Trinomial Expansions
 $$(a+b+c)^2 = a^2 + b^2 + c^2 + 2ab + 2ac + 2bc$$]@
 
-Three squared terms and three doubled cross-products — one for each pair of original terms. The pattern generalizes: squaring a sum of $k$ terms produces $k$ squares plus $\\binom{k}{2}$ doubled cross-products.
+Three squared terms and three doubled cross-products — one for each pair of original terms.
+
+@academic[rule_corollary_plain:The pattern generalizes: squaring a sum of $k$ terms produces $k$ squares plus $\\binom{k}{2}$ doubled cross-products.]@
 
 The cube of a trinomial is heavier:
 
@@ -317,7 +321,9 @@ A useful identity hidden in the cubic case is $a^3 + b^3 + c^3 - 3abc = (a+b+c)(
       title: `Sums and Differences of Powers`,
       content: `These identities run in the opposite direction to the binomial expansions in obj1–obj3: they take a two-term expression and break it into factors. The two anchors are the [difference of squares](!/algebra/polynomials/factoring#6) and the [sum and difference of cubes](!/algebra/polynomials/factoring#8), but the pattern extends to every degree.
 
-The difference of squares $a^2 - b^2 = (a+b)(a-b)$ is the most-used factoring identity in algebra, appearing constantly in simplification, rationalization, and solving equations. Its sum counterpart $a^2 + b^2$ does not factor over the real numbers — but over the [complex numbers](!/complex-numbers) it splits as $(a+bi)(a-bi)$, with the imaginary unit supplying what the reals lack.
+The difference of squares $a^2 - b^2 = (a+b)(a-b)$ is the most-used factoring identity in algebra, appearing constantly in simplification, rationalization, and solving equations.
+
+@academic[rule_plain:Its sum counterpart $a^2 + b^2$ does not factor over the real numbers — but over the [complex numbers](!/complex-numbers) it splits as $(a+bi)(a-bi)$, with the imaginary unit supplying what the reals lack.]@
 
 The cubes split cleanly in both directions:
 

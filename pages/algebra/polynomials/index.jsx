@@ -307,7 +307,9 @@ The expression $3x^4 - 2x^2 + 5x - 7$ is a polynomial. So is $x^2 + 1$. So is th
 
 Certain expressions fail to qualify. The expression $x^{-2} + 3$ contains a negative exponent and is not a polynomial. The expression $\\sqrt{x} + 1$ involves a fractional exponent ($x^{1/2}$) and is not a polynomial. The expression $\\frac{1}{x} + 4$ places the variable in a denominator, equivalent to $x^{-1}$, and is not a polynomial. The expression $2^x$ has the variable in the exponent rather than the base and is not a polynomial. Each of these violates the requirement that exponents be non-negative integers.
 
-Polynomials are closed under addition, subtraction, and multiplication — combining two polynomials through these [operations](!/algebra/polynomials/operations) always produces another polynomial. Division, however, can break the pattern: $\\frac{x^2 + 1}{x}$ is not a polynomial.`,
+@academic[rule_theorem_plain:Polynomials are closed under addition, subtraction, and multiplication — combining two polynomials through these [operations](!/algebra/polynomials/operations) always produces another polynomial.]@
+
+Division, however, can break the pattern: $\\frac{x^2 + 1}{x}$ is not a polynomial.`,
     before: ``,
     after: ``,
     link: '',
@@ -478,7 +480,9 @@ The Fundamental Theorem of Algebra guarantees that every polynomial of degree $n
   title: `Graphing Polynomials`,
   content: `The graph of a polynomial $P(x)$ is the set of all points $(x, P(x))$ plotted in the coordinate plane. Every polynomial produces a smooth, continuous curve — no breaks, no sharp corners, no jumps.
 
-The shape of the curve depends on the polynomial's degree. Linear polynomials produce straight lines. Quadratics produce parabolas. Higher-degree polynomials develop additional bends called turning points. A polynomial of degree $n$ has at most $n - 1$ turning points, so a cubic can bend at most twice and a quartic at most three times.
+The shape of the curve depends on the polynomial's degree. Linear polynomials produce straight lines. Quadratics produce parabolas. Higher-degree polynomials develop additional bends called turning points.
+
+@academic[rule_theorem_plain:A polynomial of degree $n$ has at most $n - 1$ turning points, so a cubic can bend at most twice and a quartic at most three times.]@
 
 End behavior describes what happens as $x$ moves toward $\\infty$ or $-\\infty$. The leading term controls this — for large values of $x$, all other terms become negligible. A polynomial with a positive leading coefficient and even degree rises on both ends. An odd-degree polynomial with a positive leading coefficient falls to the left and rises to the right. The leading coefficient and degree together determine all four possible end behavior patterns.
 

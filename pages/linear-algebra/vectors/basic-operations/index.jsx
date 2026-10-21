@@ -1274,7 +1274,9 @@ $$c\\mathbf{a} = (ca_1,\\ ca_2,\\ \\ldots,\\ ca_n)$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The result is always a vector in the same $\\mathbb{R}^n$. Geometrically, scalar multiplication changes the length of the vector by a factor of $|c|$ while preserving or reversing its direction depending on the sign of $c$.
+The result is always a vector in the same $\\mathbb{R}^n$.
+
+@academic[rule_plain:Geometrically, scalar multiplication changes the length of the vector by a factor of $|c|$ while preserving or reversing its direction depending on the sign of $c$.]@
 
 When $c > 0$, the scaled vector $c\\mathbf{a}$ points in the same direction as $\\mathbf{a}$. If $c > 1$, the vector stretches; if $0 < c < 1$, it compresses. When $c < 0$, the direction flips — the scaled vector points opposite to $\\mathbf{a}$, with its length multiplied by $|c|$. The boundary case $c = 0$ collapses any vector to the zero vector: $0\\mathbf{a} = \\mathbf{0}$.
 

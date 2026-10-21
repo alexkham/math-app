@@ -1221,7 +1221,11 @@ Probability [distributions](!/probability/distributions) — whether discrete or
 
 The most fundamental difference lies in the **support structure**,or the set of values the underlying random variable can be equal to. Discrete distributions have countable values with gaps — $\{0, 1, 2, \\ldots\}$ or $\{1, 2, 3, 4, 5, 6\}$. You can enumerate every possible outcome, even if the list is infinite. [Continuous distributions](!/probability/distributions/continuous), on the other hand, have uncountable intervals where every point in $(a, b)$ is reachable, with no gaps between values.
 
-This structural difference directly affects how **probability is assigned at specific points**. For discrete distributions, $P(X = k)$ can be positive — probabilities are assigned to exact values. For continuous distributions, $P(X = x) = 0$ for all $x$. This happens because there are uncountably many points in any interval, so the probability must be spread infinitely thin across them. If any single point had positive probability, the total probability would exceed 1. Only intervals have positive probability in the continuous case.
+This structural difference directly affects how **probability is assigned at specific points**.
+
+@academic[rule_plain:For discrete distributions, $P(X = k)$ can be positive — probabilities are assigned to exact values. For continuous distributions, $P(X = x) = 0$ for all $x$.]@
+
+This happens because there are uncountably many points in any interval, so the probability must be spread infinitely thin across them. If any single point had positive probability, the total probability would exceed 1. Only intervals have positive probability in the continuous case.
 
 The mathematical tools used to describe probabilities also differ. Discrete distributions use the [probability mass function (PMF)](!/probability/probability-function), denoted $P(X = k)$, which directly gives the probability at each point. Continuous distributions use the [probability density function (PDF)](!/probability/probability-function), denoted $f(x)$, where $f(x) \\geq 0$ but importantly, $f(x)$ itself is not a probability — it's a density that must be integrated over an interval to yield probability.
 

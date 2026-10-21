@@ -967,7 +967,9 @@ export async function getStaticProps(){
 
 Here, the [random variable](!/probability/random-variables) counts the total number of trials, including both successes and failures. The number of successes is fixed in advance, while the number of failures — and thus the total length of the experiment — is random.
 
-This distribution is useful when success must occur multiple times before stopping, and the timing of those successes is uncertain. When the required number of successes is $1$, the negative binomial distribution reduces exactly to the [geometric distribution](!/probability/distributions/discrete/geometric).
+This distribution is useful when success must occur multiple times before stopping, and the timing of those successes is uncertain.
+
+@academic[rule_corollary_plain:When the required number of successes is $1$, the negative binomial distribution reduces exactly to the [geometric distribution](!/probability/distributions/discrete/geometric).]@
      
 `,
       before:``,
@@ -1177,7 +1179,7 @@ $(1-p) = q$ = probability of failure on each trial
 
 ### Derivation and Intuition
 
-The negative binomial random variable can be viewed as the sum of $r$ independent geometric random variables, each representing the trials needed for one additional success.
+@academic[rule_theorem_plain:The negative binomial random variable can be viewed as the sum of $r$ independent geometric random variables, each representing the trials needed for one additional success.]@
 
 Since each geometric variable has variance $\\frac{1-p}{p^2}$, and variances add for independent variables:
 

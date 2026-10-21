@@ -1100,7 +1100,7 @@ The distribution records the resulting probabilities.
     obj5:{
       title:`One Distribution, Many Models`,
       content:`
-A probability distribution does not uniquely identify how randomness was produced.
+@academic[rule_plain:A probability distribution does not uniquely identify how randomness was produced.]@
 
 The same distribution may arise from:
 • different outcome spaces

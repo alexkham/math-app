@@ -923,7 +923,9 @@ The zero vector is orthogonal to every vector, since $\\mathbf{0} \\cdot \\mathb
   },
   obj2: {
     title: `Orthogonality in R² and R³`,
-    content: `In $\\mathbb{R}^2$, the vectors $(a, b)$ and $(c, d)$ are orthogonal if and only if $ac + bd = 0$. The pair $(1, 2)$ and $(-2, 1)$ satisfies $1(-2) + 2(1) = 0$, so these vectors are perpendicular. Rotating any vector by $90°$ produces an orthogonal partner: $(a, b)$ is orthogonal to $(-b, a)$.
+    content: `In $\\mathbb{R}^2$, the vectors $(a, b)$ and $(c, d)$ are orthogonal if and only if $ac + bd = 0$. The pair $(1, 2)$ and $(-2, 1)$ satisfies $1(-2) + 2(1) = 0$, so these vectors are perpendicular.
+
+@academic[rule_plain:Rotating any vector by $90°$ produces an orthogonal partner: $(a, b)$ is orthogonal to $(-b, a)$.]@
 
 In $\\mathbb{R}^3$, the standard basis vectors $\\mathbf{e}_1 = (1, 0, 0)$, $\\mathbf{e}_2 = (0, 1, 0)$, $\\mathbf{e}_3 = (0, 0, 1)$ are mutually orthogonal — every pair has dot product zero. The [cross product](!/linear-algebra/vectors/cross-product) $\\mathbf{a} \\times \\mathbf{b}$ produces a vector orthogonal to both $\\mathbf{a}$ and $\\mathbf{b}$, constructing perpendicularity from any two non-parallel inputs.
 
@@ -943,7 +945,9 @@ $$W^\\perp = \\{\\mathbf{v} \\in \\mathbb{R}^n : \\mathbf{v} \\cdot \\mathbf{w} 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The orthogonal complement is itself a subspace. Its [dimension](!/linear-algebra/vector-spaces/dimension) satisfies $\\dim(W) + \\dim(W^\\perp) = n$, and taking the complement twice returns to the original: $(W^\\perp)^\\perp = W$.
+@academic[rule_theorem_plain:The orthogonal complement is itself a subspace.]@
+
+Its [dimension](!/linear-algebra/vector-spaces/dimension) satisfies $\\dim(W) + \\dim(W^\\perp) = n$, and taking the complement twice returns to the original: $(W^\\perp)^\\perp = W$.
 
 The most important structural consequence is the orthogonal decomposition. Every vector $\\mathbf{v} \\in \\mathbb{R}^n$ can be written uniquely as
 
@@ -997,7 +1001,9 @@ These two pairs of complements are the structural backbone of projection and [le
 
 A weighted inner product $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\mathbf{u}^T W \\mathbf{v}$ (with $W$ symmetric positive definite) distorts the geometry — circles become ellipses, and "perpendicular" means something different than in the standard dot product. On function spaces, the integral $\\langle f, g \\rangle = \\int_a^b f(x)g(x)\\,dx$ defines orthogonality for functions, leading to Fourier series and orthogonal polynomials.
 
-Every inner product induces a norm ($\\|\\mathbf{v}\\| = \\sqrt{\\langle \\mathbf{v}, \\mathbf{v} \\rangle}$), a distance ($d(\\mathbf{u}, \\mathbf{v}) = \\|\\mathbf{u} - \\mathbf{v}\\|$), and the Cauchy-Schwarz inequality ($|\\langle \\mathbf{u}, \\mathbf{v} \\rangle| \\leq \\|\\mathbf{u}\\|\\|\\mathbf{v}\\|$). The entire orthogonality framework — projections, Gram-Schmidt, least squares — works in any inner product space.`,
+@academic[rule_theorem_plain:Every inner product induces a norm ($\\|\\mathbf{v}\\| = \\sqrt{\\langle \\mathbf{v}, \\mathbf{v} \\rangle}$), a distance ($d(\\mathbf{u}, \\mathbf{v}) = \\|\\mathbf{u} - \\mathbf{v}\\|$), and the Cauchy-Schwarz inequality ($|\\langle \\mathbf{u}, \\mathbf{v} \\rangle| \\leq \\|\\mathbf{u}\\|\\|\\mathbf{v}\\|$).]@
+
+The entire orthogonality framework — projections, Gram-Schmidt, least squares — works in any inner product space.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1006,7 +1012,9 @@ Every inner product induces a norm ($\\|\\mathbf{v}\\| = \\sqrt{\\langle \\mathb
     title: `Orthogonal and Orthonormal Sets`,
     content: `An [orthogonal set](!/linear-algebra/orthogonality/orthogonal-sets) is a collection of vectors that are pairwise perpendicular: $\\mathbf{v}_i \\cdot \\mathbf{v}_j = 0$ whenever $i \\neq j$. An orthonormal set adds the requirement that each vector has unit length: $\\|\\mathbf{v}_i\\| = 1$.
 
-Orthogonal sets of nonzero vectors are automatically [linearly independent](!/linear-algebra/vector-spaces/linear-independence) — no independence check is needed. The proof is one line: if $\\sum c_i \\mathbf{v}_i = \\mathbf{0}$, dotting both sides with $\\mathbf{v}_j$ gives $c_j \\|\\mathbf{v}_j\\|^2 = 0$, forcing $c_j = 0$.
+@academic[rule_theorem_plain:Orthogonal sets of nonzero vectors are automatically [linearly independent](!/linear-algebra/vector-spaces/linear-independence) — no independence check is needed.]@
+
+The proof is one line: if $\\sum c_i \\mathbf{v}_i = \\mathbf{0}$, dotting both sides with $\\mathbf{v}_j$ gives $c_j \\|\\mathbf{v}_j\\|^2 = 0$, forcing $c_j = 0$.
 
 The computational advantage of an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$ is that coordinates are free: $c_i = \\mathbf{q}_i \\cdot \\mathbf{v}$. No system of equations, no [row reduction](!/linear-algebra/linear-systems/gaussian-elimination), no matrix inversion — just $n$ dot products.`,
     before: ``,
@@ -1019,7 +1027,9 @@ The computational advantage of an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \
 
 For projection onto a single vector $\\mathbf{a}$: $\\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}\\mathbf{a}$. For projection onto a subspace with basis matrix $A$: $\\hat{\\mathbf{b}} = A(A^TA)^{-1}A^T\\mathbf{b}$.
 
-The projection matrix $P = A(A^TA)^{-1}A^T$ is [symmetric](!/linear-algebra/matrix/types) and [idempotent](!/linear-algebra/matrix/types): $P^T = P$ and $P^2 = P$. The residual $\\mathbf{b} - P\\mathbf{b}$ is orthogonal to $W$ — this is the defining geometric property. And $I - P$ projects onto the orthogonal complement $W^\\perp$.`,
+@academic[rule_plain:The projection matrix $P = A(A^TA)^{-1}A^T$ is [symmetric](!/linear-algebra/matrix/types) and [idempotent](!/linear-algebra/matrix/types): $P^T = P$ and $P^2 = P$.]@
+
+The residual $\\mathbf{b} - P\\mathbf{b}$ is orthogonal to $W$ — this is the defining geometric property. And $I - P$ projects onto the orthogonal complement $W^\\perp$.`,
     before: ``,
     after: ``,
     link: ``,

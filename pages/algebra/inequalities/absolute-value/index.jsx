@@ -11,6 +11,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
 import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -79,6 +80,32 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 // ---------- TABLES ----------
 
 // obj3 — aggregation (reference): k-edge-cases matrix consolidating obj2 + obj3 content
+// Concept introduction (section 1) — template F, collapse. Running instance:
+// |x| < 3 (the section's demo frame uses k = 3; tool state abs-centered).
+// Old obj1 text is kept in sectionsContent.obj1, unused; every widget it held
+// is carried into the introduction unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciBothTable = ciTableOpen(['x', 'distance |x|', 'closer than 3?', 'between −3 and 3?']) +
+  ciRow(['−4', '4', 'no', 'no']) +
+  ciRow(['−3', '3', 'no', 'no'], { shade: true, color: '#B45309' }) +
+  ciRow(['−1', '1', 'yes', 'yes'], { color: '#2563EB' }) +
+  ciRow(['0', '0', 'yes', 'yes'], { shade: true, color: '#2563EB' }) +
+  ciRow(['2', '2', 'yes', 'yes'], { color: '#2563EB' }) +
+  ciRow(['3', '3', 'no', 'no'], { shade: true, color: '#B45309' }) +
+  ciRow(['4', '4', 'no', 'no'], { last: true }) +
+  '</tbody></table>'
+const ciSidesTable = ciTableOpen(['side of 0', '|x| is', '|x| &lt; 3 says', 'which means']) +
+  ciRow(['x ≥ 0', 'x', 'x &lt; 3', 'right part stops before 3']) +
+  ciRow(['x &lt; 0', '−x', '−x &lt; 3', 'x &gt; −3: left part stops after −3'], { shade: true }) +
+  ciRow(['both sides', '', '', '−3 &lt; x &lt; 3'], { last: true, color: '#2563EB' }) +
+  '</tbody></table>'
+
 const obj3Table = `
 <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
@@ -409,7 +436,9 @@ $$f(x) < -k \\quad \\text{or} \\quad f(x) > k$$]@
 
 At least one condition must hold. The solution is the set of $x$ values for which $f(x)$ falls outside the interval $[-k, k]$.
 
-The non-strict versions $\\leq$ and $\\geq$ work identically, with the boundary values included rather than excluded. The conversions are the same; only the inequality symbols change from strict to non-strict throughout.
+@academic[rule_corollary_plain:The non-strict versions $\\leq$ and $\\geq$ work identically, with the boundary values included rather than excluded.]@
+
+The conversions are the same; only the inequality symbols change from strict to non-strict throughout.
 
 These two translations — less-than becomes a conjunction, greater-than becomes a disjunction — are the entire method. Everything that follows is the application of this principle to increasingly complex expressions inside the absolute value.`,
     before: ``,
@@ -425,7 +454,7 @@ When $k > 0$, the double inequality defines a bounded region. The two inequaliti
 
 When $k = 0$, the inequality $|f(x)| < 0$ asks for the [absolute value](!/algebra/equations/absolute-value) to be strictly negative, which is impossible. The solution set is empty. The non-strict version $|f(x)| \\leq 0$ has a solution only at the roots of $f(x) = 0$, because zero is the only non-negative value that satisfies $\\leq 0$.
 
-When $k < 0$, both $|f(x)| < k$ and $|f(x)| \\leq k$ have empty solution sets. Absolute value is never negative, so it can never be less than a negative number.
+@academic[rule_corollary_plain:When $k < 0$, both $|f(x)| < k$ and $|f(x)| \\leq k$ have empty solution sets. Absolute value is never negative, so it can never be less than a negative number.]@
 
 For linear $f(x)$, the double inequality is a three-part chain solved by isolating $x$ in the middle. The inequality $|2x - 3| < 5$ becomes $-5 < 2x - 3 < 5$. Adding $3$ throughout: $-2 < 2x < 8$. Dividing by $2$: $-1 < x < 4$. The solution is the open interval $(-1, 4)$.`,
     before: ``,
@@ -441,7 +470,9 @@ When $k > 0$, each part contributes a separate region, and the union typically p
 
 When $k = 0$, the inequality $|f(x)| > 0$ asks where $f(x)$ is nonzero. The solution is all real numbers except the roots of $f(x) = 0$. The non-strict version $|f(x)| \\geq 0$ is satisfied by every real number, since absolute value is always non-negative.
 
-When $k < 0$, the inequality $|f(x)| > k$ is satisfied by every real number — absolute value is always at least zero, which exceeds any negative number. The solution is $(-\\infty, \\infty)$.
+@academic[rule_corollary_plain:When $k < 0$, the inequality $|f(x)| > k$ is satisfied by every real number — absolute value is always at least zero, which exceeds any negative number.]@
+
+The solution is $(-\\infty, \\infty)$.
 
 For a linear example: $|4x + 1| \\geq 7$ becomes $4x + 1 \\leq -7$ or $4x + 1 \\geq 7$. From the first: $4x \\leq -8$, so $x \\leq -2$. From the second: $4x \\geq 6$, so $x \\geq \\frac{3}{2}$. The solution is $(-\\infty, -2] \\cup [\\frac{3}{2}, \\infty)$.`,
     before: ``,
@@ -499,7 +530,9 @@ The absolute value conversion reduces the problem to standard inequality types. 
     title: `Inequalities with Absolute Value on Both Sides`,
     content: `When absolute value appears on both sides — $|f(x)| < |g(x)|$ or $|f(x)| > |g(x)|$ — the standard less-than/greater-than conversion does not apply directly because the right-hand side is not a constant. Two alternative approaches handle these cases.
 
-The squaring method exploits the fact that $|A| < |B|$ if and only if $A^2 < B^2$ (since both sides are non-negative). The inequality $|f(x)| < |g(x)|$ becomes $[f(x)]^2 < [g(x)]^2$, which rearranges to $[g(x)]^2 - [f(x)]^2 > 0$. Factoring the difference of squares:
+@academic[rule_plain:The squaring method exploits the fact that $|A| < |B|$ if and only if $A^2 < B^2$ (since both sides are non-negative).]@
+
+The inequality $|f(x)| < |g(x)|$ becomes $[f(x)]^2 < [g(x)]^2$, which rearranges to $[g(x)]^2 - [f(x)]^2 > 0$. Factoring the difference of squares:
 
 @academic[formula_callout:Inequalities with Absolute Value on Both Sides
 $$(g(x) - f(x))(g(x) + f(x)) > 0$$]@
@@ -648,6 +681,20 @@ const schemas = {
     ],
     caption: 'Distance from a point, or nearer of two points: 4 is the midpoint' };
 
+  // Concept introduction figures (section 1), one running instance: |x| < 3.
+  const fpCiDistance = { kind: 'domainOpen', svgTitle: '|x| < 3: the points less than 3 away from 0', range: [-5, 5],
+    rows: [
+      { label: '|x| < 3: closer than 3 to 0', color: 'f', segs: [[-3, 3, true, true]], tag: { text: '(−3, 3)', x: 4 } },
+    ],
+    caption: 'Every point less than 3 away from 0, on either side' };
+
+  const conceptIntroFigures = {
+    distance: renderFunctionPlotV2(fpCiDistance),
+    graph: inequalityVisualizerDiagrams['abs-centered'],
+    bothTable: ciBothTable,
+    sidesTable: ciSidesTable,
+  };
+
   const demoUnits = {
     lessThan: demoUnitFrame({
       svg: inequalityVisualizerDiagrams['abs-shifted'],
@@ -676,6 +723,7 @@ const schemas = {
   return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -700,10 +748,92 @@ export default function AbsoluteValueInequalitiesPage({
   obj3Table,
   obj6Table,
   summaryTable,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (collapse).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'distance',
+        lead: `Absolute value measures distance from zero.`,
+        content: `The number $|x|$ is how far $x$ is from $0$ on the number line, whichever side it is on: $|2| = 2$ and $|-2| = 2$. Read that way, $|x| < 3$ asks for every point closer than $3$ to zero. There are such points on both sides, and they form one unbroken stretch.`,
+        visual: ciSvg('distance'),
+        caption: `The bar is every point whose distance from $0$ is under $3$. The open dots at $-3$ and $3$ are exactly $3$ away, so they are left out.`,
+      },
+      {
+        id: 'second',
+        lead: `The same condition can also be written as two ordinary inequalities.`,
+        content: [
+          `Drop the picture and use the rule instead: $|x| < 3$ is the same as $-3 < x < 3$ — the number is above $-3$ and, at the same time, below $3$. In general, with any expression $f(x)$ inside the bars:`,
+          `@academic[formula_callout:Two Fundamental Forms
+$$-k < f(x) < k$$]@`,
+          `Both conditions must hold simultaneously. No distances are involved, only two comparisons joined by AND.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Both descriptions give the same answer on every value.`,
+        content: [
+          `Test the same values against each one: the distance reading in one column, the double inequality in the next.`,
+          ciTable('bothTable'),
+          `The two columns never disagree. Both accept $-1$, $0$ and $2$, both reject $\\pm 4$, and both reject the borders $\\pm 3$ for the same reason: a distance of exactly $3$ is not less than $3$.`,
+        ],
+        visual: ciSvg('graph'),
+        caption: `The graph of $|x| - 3$ is below the axis exactly where $|x| < 3$: on $(-3, 3)$, the "yes" rows of the table, with the open circles at $\\pm 3$. The same state is on the [inequality visual explorer](!/algebra/visual-tools/inequality).`,
+      },
+      {
+        id: 'agree',
+        lead: `The two descriptions were never separate, because each side of zero gives one half of the chain.`,
+        content: [
+          `On the right of zero the distance is $x$ itself; on the left it is $-x$. So "closer than $3$" turns into one ordinary inequality on each side.`,
+          ciTable('sidesTable'),
+          `The right side contributes $x < 3$, the left side contributes $x > -3$, and a point belongs if it satisfies its own side's condition. Put together that is $-3 < x < 3$: the double inequality is the distance picture, written one side at a time.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An [absolute value inequality](!/algebra/definitions#absolute_value_inequality) is an inequality in which the unknown appears inside absolute value bars, such as $|x| < 3$ or $|2x - 3| \\geq 5$. With one absolute value and a constant it takes one of two forms, each with its own conversion:`,
+        formula: `@academic[formula_callout:Absolute Value Inequalities
+$$|p| < b \\implies -b < p < b \\qquad |p| > b \\implies p < -b \\text{ or } p > b$$
+/algebra/formulas#absolute_value_inequalities]@`,
+        footer: `@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@`,
+      },
+      {
+        id: 'kind',
+        lead: `An absolute value inequality is a statement about distance, and its answer is a set.`,
+        content: [
+          `It is not a number and not a function. It is true for some values of $x$ and false for others, and its answer collects the values that make it true. Less-than keeps the points near the centre, so its answer is one interval. Greater-than keeps the points far away, so its answer is two rays pointing apart.`,
+          <div key={'unit-forms'} dangerouslySetInnerHTML={{ __html: demoUnits.forms }} />,
+          `Less-than becomes AND, greater-than becomes OR: the shape of the answer follows.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Read the distance when the inside is simple; convert when it is not.`,
+        content: [
+          `For $|x| < 3$ or $|x - 5| < 2$ the distance picture gives the answer at a glance. For $|2x - 3| < 5$ or $|x^2 - 4| > 1$ there is no single centre to read from, and the conversion does the work. The less-than form becomes the chain above. The greater-than form becomes a disjunction — two separate inequalities:`,
+          `@academic[formula_callout:Two Fundamental Forms
+$$f(x) < -k \\quad \\text{or} \\quad f(x) > k$$]@`,
+          `At least one condition must hold. The solution is the set of $x$ values for which $f(x)$ falls outside the interval $[-k, k]$.`,
+          `@academic[rule_corollary_plain:The non-strict versions $\\leq$ and $\\geq$ work identically, with the boundary values included rather than excluded.]@`,
+          `The conversions are the same; only the inequality symbols change from strict to non-strict throughout. One edge the conversion hides: a distance is never negative, so when $k$ is negative $|f(x)| < k$ has no solutions at all and $|f(x)| > k$ holds for every $x$.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page applies these two conversions: the less-than and greater-than forms in detail, worked linear examples, expressions with squares inside the bars, absolute value on both sides, and the distance reading again as a geometric interpretation.`,
+      },
+    ],
+  }
 
   const genericSections=[
     
@@ -723,9 +853,7 @@ export default function AbsoluteValueInequalitiesPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-forms'} dangerouslySetInnerHTML={{ __html: demoUnits.forms }} />,
-          `Less-than becomes AND, greater-than becomes OR: the shape of the answer follows.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

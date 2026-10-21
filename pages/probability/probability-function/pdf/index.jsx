@@ -777,7 +777,7 @@ Example: [Uniform distribution](!/probability/distributions/continuous/uniform) 
 @academic[formula_callout:Connection to CDF (The Fundamental Theorem)
 $$F_X(x) = \\int_0^x \\frac{1}{10}dt = \\frac{x}{10} \\text{ for } x \\in [0, 10]$$]@
 
-The CDF is continuous and always increasing (or at least non-decreasing) for continuous [random variables](!/probability/random-variables).
+@academic[rule_plain:The CDF is continuous and always increasing (or at least non-decreasing) for continuous [random variables](!/probability/random-variables).]@
 
 ## From CDF to PDF (Differentiation)
 

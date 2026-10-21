@@ -2219,7 +2219,9 @@ Stretch pulls the graph away from an axis, making it taller or wider.
 
 Compression pushes the graph toward an axis, making it shorter or narrower.
 
-These transformations arise from modifying the function's equation. Changes outside the function — operations applied to $f(x)$ — produce vertical effects. Changes inside the function — operations applied to $x$ — produce horizontal effects.
+These transformations arise from modifying the function's equation.
+
+@academic[rule_plain:Changes outside the function — operations applied to $f(x)$ — produce vertical effects. Changes inside the function — operations applied to $x$ — produce horizontal effects.]@
 
 The general transformed function takes the form:
 

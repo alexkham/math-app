@@ -1724,7 +1724,9 @@ $$f''(x) = \\frac{d}{dx}[f'(x)]$$]@
 
 The third derivative is the derivative of $f''$, and so on. The $n$th derivative is obtained by differentiating $f$ a total of $n$ times.
 
-Each order depends on the one below it: $f^{(n)}$ exists at a point only if $f^{(n-1)}$ exists in a neighbourhood of it and is [differentiable](!/calculus/derivatives/differentiability) there. The chain fails quickly for functions with corners, and the order at which it fails is what the [smoothness classes](!/calculus/derivatives/higher-order#9) below measure.
+@academic[rule_corollary_plain:Each order depends on the one below it: $f^{(n)}$ exists at a point only if $f^{(n-1)}$ exists in a neighbourhood of it and is [differentiable](!/calculus/derivatives/differentiability) there.]@
+
+The chain fails quickly for functions with corners, and the order at which it fails is what the [smoothness classes](!/calculus/derivatives/higher-order#9) below measure.
 `,
     before: ``,
     after: ``,
@@ -1816,7 +1818,7 @@ Beyond the third derivative, the terms snap ($s^{(4)}$), crackle ($s^{(5)}$), an
   obj4: {
     title: `Patterns in Repeated Differentiation — Polynomials`,
     content: `
-Polynomials terminate under repeated differentiation. Each differentiation reduces the degree by one, so a polynomial of degree $n$ reaches a constant after $n$ differentiations and becomes zero after $n + 1$.
+@academic[rule_corollary_plain:Polynomials terminate under repeated differentiation. Each differentiation reduces the degree by one, so a polynomial of degree $n$ reaches a constant after $n$ differentiations and becomes zero after $n + 1$.]@
 
 For $f(x) = x^5$:
 
@@ -1960,7 +1962,11 @@ The smoothness classes organize functions by how many continuous derivatives the
 
 Polynomials, $e^x$, $\\sin x$, $\\cos x$, and their compositions are all $C^\\infty$. [Piecewise functions](!/calculus/derivatives/special) typically belong to a finite $C^n$ class determined by how smoothly the pieces join at their boundaries: matching values gives $C^0$, matching first derivatives gives $C^1$, and so on.
 
-There exist functions that are $C^\\infty$ but not analytic—their Taylor series converges but not to the function itself. The standard example is $f(x) = e^{-1/x^2}$ for $x \\neq 0$ and $f(0) = 0$: every derivative at $x = 0$ is zero, so the Taylor series is identically zero, yet the function is not zero away from the origin. Smooth does not automatically mean representable by a power series. The table below lays out the main tiers — C⁰, the general C&#8319;, C&#8734;, and the strictly stronger analytic class — alongside what each requires and characteristic examples.
+There exist functions that are $C^\\infty$ but not analytic—their Taylor series converges but not to the function itself. The standard example is $f(x) = e^{-1/x^2}$ for $x \\neq 0$ and $f(0) = 0$: every derivative at $x = 0$ is zero, so the Taylor series is identically zero, yet the function is not zero away from the origin.
+
+@academic[rule_theorem_plain:Smooth does not automatically mean representable by a power series.]@
+
+The table below lays out the main tiers — C⁰, the general C&#8319;, C&#8734;, and the strictly stronger analytic class — alongside what each requires and characteristic examples.
 `,
     before: ``,
     after: ``,

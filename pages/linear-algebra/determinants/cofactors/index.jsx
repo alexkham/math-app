@@ -1460,14 +1460,14 @@ $$M_{12} = \\det\\begin{pmatrix} -1 & 2 & 1 \\\\ 0 & -1 & 3 \\\\ 2 & 0 & -2 \\en
 @academic[formula_callout:Laplace Expansion Along a Row
 $$M_{14} = \\det\\begin{pmatrix} -1 & 0 & 2 \\\\ 0 & 4 & -1 \\\\ 2 & 1 & 0 \\end{pmatrix} = -1(0 + 1) - 0(0 + 2) + 2(0 - 8) = -1 + 0 - 16 = -17$$]@
 
-Applying the signs: $C_{11} = +23$, $C_{12} = -12$, $C_{14} = +(-17) = -17$. The determinant is
+Applying the signs: $C_{11} = +23$, $C_{12} = -12$, $C_{14} = -(-17) = +17$. The determinant is
 
 @academic[formula_callout:Laplace Expansion Along a Row
-$$\\det(A) = 1(23) + 3(-12) + 0 + 2(-17) = 23 - 36 - 34 = -47$$]@
+$$\\det(A) = 1(23) + 3(-12) + 0 + 2(17) = 23 - 36 + 34 = 21$$]@
 
 ## Verification via a Different Row
 
-Expanding the same matrix along row $3$ (which has a zero in the first position) would produce the same value $-47$, confirming that the choice of row is purely a matter of computational convenience.`,
+Expanding the same matrix along row $3$ (which has a zero in the first position) would produce the same value $21$, confirming that the choice of row is purely a matter of computational convenience.`,
     before: ``,
     after: ``,
     link: ``,

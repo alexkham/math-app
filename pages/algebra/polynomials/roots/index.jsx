@@ -13,6 +13,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -311,7 +313,7 @@ To find the roots of a specific polynomial of degree four or less, use the [poly
   title: `Roots and Factors`,
   content: `Roots and factors encode the same information in different forms. The connection between them is one of the most important relationships in algebra.
 
-If $r$ is a root of $P(x)$, then $(x - r)$ is a [factor](!/algebra/polynomials/factoring) of $P(x)$. This means $P(x)$ can be written as $(x - r) \\cdot Q(x)$ for some polynomial $Q(x)$ of degree one less than $P(x)$. The converse holds as well — if $(x - r)$ divides $P(x)$ evenly, then $r$ is a root.
+@academic[rule_theorem_plain:If $r$ is a root of $P(x)$, then $(x - r)$ is a [factor](!/algebra/polynomials/factoring) of $P(x)$. This means $P(x)$ can be written as $(x - r) \\cdot Q(x)$ for some polynomial $Q(x)$ of degree one less than $P(x)$. The converse holds as well — if $(x - r)$ divides $P(x)$ evenly, then $r$ is a root.]@
 
 The polynomial $x^2 - 5x + 6$ factors as $(x - 2)(x - 3)$. The factors immediately reveal the roots: $x = 2$ and $x = 3$. No further calculation is needed. Factored form makes roots visible at a glance.
 
@@ -350,7 +352,11 @@ In $P(x) = (x - 2)^3(x + 1)$, the root $x = 2$ appears three times — it has mu
 
 A root with multiplicity $1$ is called a simple root. A root with multiplicity greater than $1$ is called a repeated root. The polynomial $(x - 5)^2(x + 3)^2$ has two repeated roots, each with multiplicity $2$, and no simple roots.
 
-Multiplicity carries geometric meaning. At a simple root (odd multiplicity $1$), the [graph](!/algebra/polynomials/graphing) crosses the x-axis. At a root with even multiplicity, the graph touches the x-axis but turns back without crossing. At a root with odd multiplicity $3$ or higher, the graph crosses but with a visible flattening near the intercept. The higher the multiplicity, the flatter the curve at that root.
+Multiplicity carries geometric meaning.
+
+@academic[rule_plain:At a simple root (odd multiplicity $1$), the [graph](!/algebra/polynomials/graphing) crosses the x-axis. At a root with even multiplicity, the graph touches the x-axis but turns back without crossing. At a root with odd multiplicity $3$ or higher, the graph crosses but with a visible flattening near the intercept.]@
+
+The higher the multiplicity, the flatter the curve at that root.
 
 Multiplicity also affects calculus and algebraic analysis. A root of multiplicity $k$ means not only that $P(r) = 0$, but that the first $k - 1$ derivatives also vanish at $r$. This deeper vanishing is what creates the flattening visible in the graph.`,
   before: ``,
@@ -385,7 +391,9 @@ $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
 
 This formula works universally — it finds roots whether the quadratic factors cleanly or not. For $x^2 - 5x + 6$, applying the formula with $a = 1$, $b = -5$, $c = 6$ gives $x = \\frac{5 \\pm \\sqrt{25 - 24}}{2} = \\frac{5 \\pm 1}{2}$, yielding $x = 3$ and $x = 2$.
 
-The expression under the square root, $\\Delta = b^2 - 4ac$, is called the discriminant. It determines the nature of the roots without computing them. When $\\Delta > 0$, the quadratic has two distinct real roots. When $\\Delta = 0$, it has one repeated real root — the parabola touches the x-axis at exactly one point. When $\\Delta < 0$, no real roots exist; the two roots are [complex conjugates](!/complex-numbers/complex-conjugate) of the form $a + bi$ and $a - bi$.
+The expression under the square root, $\\Delta = b^2 - 4ac$, is called the discriminant. It determines the nature of the roots without computing them.
+
+@academic[rule_theorem_plain:When $\\Delta > 0$, the quadratic has two distinct real roots. When $\\Delta = 0$, it has one repeated real root — the parabola touches the x-axis at exactly one point. When $\\Delta < 0$, no real roots exist; the two roots are [complex conjugates](!/complex-numbers/complex-conjugate) of the form $a + bi$ and $a - bi$.]@
 
 The discriminant provides a quick classification. Before solving, computing $\\Delta$ reveals whether to expect two real answers, one repeated answer, or a pair of complex numbers. For $x^2 + 2x + 5$, the discriminant is $4 - 20 = -16 < 0$, so the roots are complex: $x = -1 \\pm 2i$.`,
   before: ``,
@@ -397,7 +405,10 @@ The discriminant provides a quick classification. Before solving, computing $\\D
   title: `Finding Roots — Rational Root Theorem`,
   content: `When a polynomial has integer coefficients, the [Rational Root Theorem](!/algebra/polynomials/rules) narrows the search for rational roots to a finite list of candidates.
 
-If $P(x) = a_nx^n + \\cdots + a_1x + a_0$ has a rational root $\\frac{p}{q}$ in lowest terms, then $p$ divides the constant term $a_0$ and $q$ divides the leading coefficient $a_n$. This constraint produces a manageable set of possibilities.
+@academic[rule_theorem:Rational Root Theorem
+If $P(x) = a_nx^n + \\cdots + a_1x + a_0$ has a rational root $\\frac{p}{q}$ in lowest terms, then $p$ divides the constant term $a_0$ and $q$ divides the leading coefficient $a_n$.]@
+
+This constraint produces a manageable set of possibilities.
 
 Consider $2x^3 - 3x^2 - 8x + 12$. The constant term is $12$ with divisors $\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12$. The leading coefficient is $2$ with divisors $\\pm 1, \\pm 2$. The possible rational roots are all fractions $\\frac{p}{q}$ formed from these: $\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$.
 
@@ -429,7 +440,10 @@ Synthetic division is faster than long division for divisors of the form $(x - r
   title: `Real vs. Complex Roots`,
   content: `The roots of a polynomial fall into two categories: real roots, which lie on the number line, and complex roots, which involve the imaginary unit $i$.
 
-A polynomial with real coefficients may have complex roots, but they always arrive in [conjugate pairs](!/complex-numbers/complex-conjugate). If $a + bi$ is a root (with $b \\neq 0$), then $a - bi$ is also a root. This pairing is not optional — it follows directly from the algebra of conjugates applied to the polynomial's coefficients.
+@academic[rule_theorem:Conjugate pair rule
+A polynomial with real coefficients may have complex roots, but they always arrive in [conjugate pairs](!/complex-numbers/complex-conjugate). If $a + bi$ is a root (with $b \\neq 0$), then $a - bi$ is also a root.]@
+
+This pairing is not optional — it follows directly from the algebra of conjugates applied to the polynomial's coefficients.
 
 The polynomial $x^2 + 2x + 5$ illustrates this. The discriminant is $4 - 20 = -16 < 0$, so the roots are complex. Applying the quadratic formula gives $x = -1 + 2i$ and $x = -1 - 2i$ — a conjugate pair. The real parts match, and the imaginary parts differ only in sign.
 
@@ -686,8 +700,25 @@ const schemas = {
     }),
   };
 
+  const rootMethodTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Four ways to find roots',
+    preface: 'Root-finding methods differ in which polynomials they accept and which roots they can find.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Combine them',
+    conclusion: 'The Rational Root Theorem proposes candidates, synthetic division tests them and lowers the degree, and the quadratic formula finishes the last two roots.',
+    root: { name: 'Root-finding methods', sub: '4 methods' },
+    children: [
+      { id: 'fact', name: 'Factoring', items: [ { label: 'When', text: 'it factors cleanly over the integers' }, { label: 'Then', text: 'read the roots off the factors' } ] },
+      { id: 'qf', name: 'Quadratic formula', items: [ { label: 'When', text: 'degree 2 only' }, { label: 'Finds', text: 'real or complex roots' } ] },
+      { id: 'rrt', name: 'Rational Root Theorem', items: [ { label: 'When', text: 'integer coefficients' }, { label: 'Gives', text: 'candidates $\\pm p/q$' } ], flag: true, warn: 'misses irrational roots' },
+      { id: 'syn', name: 'Synthetic division', items: [ { label: 'Does', text: 'tests a candidate and lowers the degree' } ] },
+    ],
+  };
+
   return {
   props:{
+    rootMethodTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -708,7 +739,7 @@ const schemas = {
 }
    }
 
-export default function RootsPage({seoData, sectionsContent, introContent, obj4Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RootsPage({rootMethodTree, seoData, sectionsContent, introContent, obj4Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -882,6 +913,14 @@ export default function RootsPage({seoData, sectionsContent, introContent, obj4T
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj13-diagram'}
+            id="root-finding-methods-tree"
+            title="Root-finding methods"
+            source="/algebra/polynomials/roots"
+          >
+            <TopDownTree data={rootMethodTree} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

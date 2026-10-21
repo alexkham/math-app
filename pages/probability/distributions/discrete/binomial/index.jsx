@@ -364,7 +364,11 @@ $$\\mathrm{Var}(X) = np(1-p)$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
-The result $\\mathrm{Var}(X) = np(1-p)$ shows that variance depends on both the number of trials and the probability structure. The term $p(1-p)$ is maximized when $p = 0.5$ (a fair coin), meaning maximum variability occurs when success and failure are equally likely. As $p$ approaches 0 or 1, variance decreases because outcomes become more predictable.
+The result $\\mathrm{Var}(X) = np(1-p)$ shows that variance depends on both the number of trials and the probability structure.
+
+@academic[rule_corollary_plain:The term $p(1-p)$ is maximized when $p = 0.5$ (a fair coin), meaning maximum variability occurs when success and failure are equally likely.]@
+
+As $p$ approaches 0 or 1, variance decreases because outcomes become more predictable.
 
 ### Standard Deviation
 

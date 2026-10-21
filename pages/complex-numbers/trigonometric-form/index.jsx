@@ -2218,7 +2218,7 @@ This shift from rectangular to polar thinking unlocks powerful computational sho
 @academic[formula_callout:Modulus (Radius)
 $$r = |z| = \\sqrt{a^2 + b^2}$$]@
 
-The modulus is always a non-negative real number. It equals zero only when both $a = 0$ and $b = 0$, meaning $z = 0$ is the sole complex number with zero modulus.
+@academic[rule_plain:The modulus is always a non-negative real number. It equals zero only when both $a = 0$ and $b = 0$, meaning $z = 0$ is the sole complex number with zero modulus.]@
 
 ## Examples
 
@@ -2262,7 +2262,9 @@ However, the arctangent function alone does not determine $\\theta$ uniquely. Th
 
 ## The Argument Is Not Unique
 
-Adding any integer multiple of $2\\pi$ to an argument produces another valid argument for the same complex number. If $\\theta$ is an argument of $z$, then so is $\\theta + 2\\pi k$ for any integer $k$. The number $z = 1 + i$ has argument $\\frac{\\pi}{4}$, but also $\\frac{\\pi}{4} + 2\\pi = \\frac{9\\pi}{4}$, and $\\frac{\\pi}{4} - 2\\pi = -\\frac{7\\pi}{4}$, and infinitely many others.`,
+@academic[rule_plain:Adding any integer multiple of $2\\pi$ to an argument produces another valid argument for the same complex number.]@
+
+If $\\theta$ is an argument of $z$, then so is $\\theta + 2\\pi k$ for any integer $k$. The number $z = 1 + i$ has argument $\\frac{\\pi}{4}$, but also $\\frac{\\pi}{4} + 2\\pi = \\frac{9\\pi}{4}$, and $\\frac{\\pi}{4} - 2\\pi = -\\frac{7\\pi}{4}$, and infinitely many others.`,
   before: ``,
   after: ``,
   link: '',

@@ -842,7 +842,9 @@ const keyWords = [
     title: `Reciprocals`,
     content: `The reciprocal of a fraction is obtained by swapping its numerator and denominator. The reciprocal of $\\frac{3}{4}$ is $\\frac{4}{3}$. The reciprocal of $\\frac{7}{2}$ is $\\frac{2}{7}$.
 
-A number multiplied by its reciprocal always equals 1. The product $\\frac{3}{4} \\times \\frac{4}{3} = \\frac{12}{12} = 1$ demonstrates this property.
+@academic[rule_plain:A number multiplied by its reciprocal always equals 1.]@
+
+The product $\\frac{3}{4} \\times \\frac{4}{3} = \\frac{12}{12} = 1$ demonstrates this property.
 
 Whole numbers have reciprocals too. Since 5 equals $\\frac{5}{1}$, its reciprocal is $\\frac{1}{5}$. The product $5 \\times \\frac{1}{5} = 1$ confirms the relationship.
 

@@ -2039,7 +2039,7 @@ Not every function has an inverse. The function $f(x) = x^2$ on $(-\\infty, \\in
 
   obj3: {
     title: `Inverse as Reflection over y = x`,
-    content: `The [graph](!/functions/graphs) of $f^{-1}$ is the reflection of the graph of $f$ across the line $y = x$.
+    content: `@academic[rule_theorem_plain:The [graph](!/functions/graphs) of $f^{-1}$ is the reflection of the graph of $f$ across the line $y = x$.]@
 
 Every point $(a, b)$ on the graph of $f$ corresponds to a point $(b, a)$ on the graph of $f^{-1}$. The coordinates swap because input and output swap roles.
 
@@ -2157,7 +2157,12 @@ If either composition fails to simplify to $x$, the functions are not inverses. 
 
   obj7: {
     title: `The Horizontal Line Test`,
-    content: `The horizontal line test determines whether a function has an inverse. If every horizontal line intersects the [graph](!/functions/graphs) at most once, the function is one-to-one and has an inverse. If any horizontal line intersects the graph more than once, the function is not one-to-one and has no inverse (on that domain).
+    content: `The horizontal line test determines whether a function has an inverse.
+
+@academic[rule:Horizontal Line Test
+If every horizontal line intersects the [graph](!/functions/graphs) at most once, the function is one-to-one and has an inverse.]@
+
+If any horizontal line intersects the graph more than once, the function is not one-to-one and has no inverse (on that domain).
 
 The test works because horizontal lines represent constant outputs. If a horizontal line crosses the graph twice, two different inputs produce the same output. The inverse would need to send that output back to two different inputs simultaneously — impossible for a function.
 
@@ -2173,7 +2178,7 @@ Exponential functions pass. Logarithmic functions pass. Linear functions with no
 
   obj8: {
     title: `One-to-One Requirement`,
-    content: `A function has an inverse if and only if it is [one-to-one](!/functions/properties): each output comes from exactly one input.
+    content: `@academic[rule_theorem_plain:A function has an inverse if and only if it is [one-to-one](!/functions/properties): each output comes from exactly one input.]@
 
 One-to-one means: if $f(a) = f(b)$, then $a = b$. Different inputs always produce different outputs.
 
@@ -2195,7 +2200,7 @@ Monotonic functions — those that only increase or only decrease — are always
 
   obj9: {
     title: `Restricting Domain to Create Inverse`,
-    content: `A function that is not one-to-one on its natural [domain](!/functions/domain) can be made one-to-one by restricting the domain. On the smaller domain, an inverse exists.
+    content: `@academic[rule_plain:A function that is not one-to-one on its natural [domain](!/functions/domain) can be made one-to-one by restricting the domain. On the smaller domain, an inverse exists.]@
 
 The function $f(x) = x^2$ is not one-to-one on $(-\\infty, \\infty)$. But restricted to $[0, \\infty)$, it is one-to-one — the right half of the parabola passes the horizontal line test.
 

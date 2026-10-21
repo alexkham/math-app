@@ -211,7 +211,8 @@ To solve your own logarithmic equation with each step shown, use the [logarithmi
   },
   obj2: {
     title: `Logarithms on Both Sides`,
-    content: `When the same logarithm base appears on both sides, apply the one-to-one property: if $\\log_a(M) = \\log_a(N)$, then $M = N$.
+    content: `@academic[rule:One-to-one property
+When the same logarithm base appears on both sides, apply the one-to-one property: if $\\log_a(M) = \\log_a(N)$, then $M = N$.]@
 
 @academic[example:Example
 Solve $\\log_4(3x + 2) = \\log_4(x + 10)$.

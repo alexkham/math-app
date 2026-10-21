@@ -1233,7 +1233,10 @@ For $f(x) = x^2$, the graph includes $(0, 0)$, $(1, 1)$, $(2, 4)$, $(-1, 1)$, $(
 
 The graph is a visual encoding of the function's behavior. Inputs run along the horizontal axis; outputs are measured vertically. To find $f(3)$ from the graph, locate $x = 3$ on the horizontal axis, move vertically to the curve, and read the $y$-coordinate of that point.
 
-Because a function assigns exactly one output to each input, the graph has a definitive property: every vertical line intersects it at most once. This is the vertical line test — if a vertical line crosses a curve twice, that curve does not represent a function.
+@academic[rule:Vertical Line Test
+Because a function assigns exactly one output to each input, the graph has a definitive property: every vertical line intersects it at most once.]@
+
+This is the vertical line test — if a vertical line crosses a curve twice, that curve does not represent a function.
 
 The graph transforms abstract relationships into geometric objects. Increasing behavior appears as a rising curve. Decreasing behavior appears as a falling curve. Symmetry, periodicity, and boundedness become visible patterns.`,
     before: ``,
@@ -1351,7 +1354,9 @@ Graphs also answer qualitative questions directly. Is $f(3)$ positive or negativ
 
 The $y$-intercept is the point where the graph crosses the vertical axis. At this point, $x = 0$. To find it algebraically, evaluate $f(0)$. The $y$-intercept is $(0, f(0))$.
 
-A function has at most one $y$-intercept, since $x = 0$ produces at most one output. If $0$ is not in the domain, the function has no $y$-intercept.
+@academic[rule_plain:A function has at most one $y$-intercept, since $x = 0$ produces at most one output.]@
+
+If $0$ is not in the domain, the function has no $y$-intercept.
 
 The $x$-intercepts are points where the graph crosses the horizontal axis. At these points, $y = 0$. To find them algebraically, solve $f(x) = 0$. Each solution $x = c$ gives an $x$-intercept $(c, 0)$.
 

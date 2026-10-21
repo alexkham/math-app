@@ -895,6 +895,8 @@ import polarRectangularDiagrams from '@/app/components/calculators/complex-numbe
 import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoivreDiagrams'
 import eulerFormulaDiagrams from '@/app/components/calculators/complex-numbers/eulerFormulaDiagrams'
 import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1226,7 +1228,10 @@ This geometric perspective reveals structure invisible in pure algebra. The [con
 
 One fundamental difference separates $\\mathbb{C}$ from $\\mathbb{R}$: complex numbers cannot be ordered. We cannot say $3 + 2i$ is greater than $1 + 5i$ in any meaningful way. The real line has direction — numbers increase as we move right — but the complex plane extends in all directions equally. Only the modulus provides a sense of size, measuring how far each number lies from the origin.
 
-The [Triangle Inequality](!/complex-numbers/absolute-value) governs how distances combine: $|z_1 + z_2| \\leq |z_1| + |z_2|$. Geometrically, this says the direct path between two points never exceeds the detour through the origin. This inequality appears constantly in analysis and provides essential bounds for estimation and proof.`,
+@academic[rule_theorem:Triangle Inequality
+The [Triangle Inequality](!/complex-numbers/absolute-value) governs how distances combine: $|z_1 + z_2| \\leq |z_1| + |z_2|$.]@
+
+Geometrically, this says the direct path between two points never exceeds the detour through the origin. This inequality appears constantly in analysis and provides essential bounds for estimation and proof.`,
   after: ``,
   link: '/complex-numbers/geometric-representation',
 },
@@ -1260,7 +1265,11 @@ Converting from algebraic to [trigonometric form](!/complex-numbers/trigonometri
 
 Certain angles deserve memorization. Numbers on the positive real axis have argument $0°$. Pure positive imaginaries point straight up at $90°$. Negative reals aim backward at $180°$. Negative imaginaries point downward at $270°$ or equivalently $-90°$. Recognizing these special cases accelerates computation and builds geometric intuition for how arguments behave.
 
-The true power of trigonometric form reveals itself in multiplication and division. When two numbers multiply, their moduli multiply and their arguments add: $z_1 \\cdot z_2 = r_1 r_2 \\text{cis}(\\theta_1 + \\theta_2)$. Division works inversely — moduli divide, arguments subtract. These elegant rules transform tedious algebraic expansion into simple arithmetic on lengths and angles.`,
+The true power of trigonometric form reveals itself in multiplication and division.
+
+@academic[rule_plain:When two numbers multiply, their moduli multiply and their arguments add: $z_1 \\cdot z_2 = r_1 r_2 \\text{cis}(\\theta_1 + \\theta_2)$.]@
+
+Division works inversely — moduli divide, arguments subtract. These elegant rules transform tedious algebraic expansion into simple arithmetic on lengths and angles.`,
   after: ``,
   link: '/complex-numbers/trigonometric-form',
 },
@@ -1300,7 +1309,12 @@ The roots of unity — solutions to $z^n = 1$ — deserve special attention. Sin
     obj9: {
   title: `Complex Equations and Polynomial Theory`,
   before: ``,
-  content: `The complex number system achieves what no smaller number system can: it provides a home for every polynomial root. This completeness, formalized in the Fundamental Theorem of Algebra, states that every non-constant polynomial with complex coefficients possesses at least one complex root. The immediate consequence transforms our understanding of polynomials: a polynomial of degree $n$ factors completely into exactly $n$ linear terms over $\\mathbb{C}$, meaning it has precisely $n$ roots when counted with multiplicity.
+  content: `The complex number system achieves what no smaller number system can: it provides a home for every polynomial root.
+
+@academic[rule_theorem:Fundamental Theorem of Algebra
+This completeness, formalized in the Fundamental Theorem of Algebra, states that every non-constant polynomial with complex coefficients possesses at least one complex root.]@
+
+The immediate consequence transforms our understanding of polynomials: a polynomial of degree $n$ factors completely into exactly $n$ linear terms over $\\mathbb{C}$, meaning it has precisely $n$ roots when counted with multiplicity.
 
 Consider the equation $x^4 + 1 = 0$, which has no real solutions since $x^4$ is always non-negative. In $\\mathbb{C}$, four distinct roots exist, evenly spaced around the unit circle at arguments $45°$, $135°$, $225°$, and $315°$. The [geometric representation](!/complex-numbers/geometric-representation) reveals their symmetric arrangement, while [De Moivre's theorem](!/complex-numbers/demoivre-theorem) provides the computational machinery to find them.
 
@@ -1542,8 +1556,30 @@ const faqQuestions = {
     }),
   };
 
+  const complexFormTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'One number, three ways to write it',
+    preface: 'Every complex number can be written in three forms. Each makes a different set of operations easy.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Switch forms to fit the job',
+    conclusion: 'Add in algebraic form, multiply and divide in trigonometric form, and take powers and roots in exponential form.',
+    root: { name: 'Forms of a complex number', sub: '3 forms' },
+    children: [
+      { id: 'alg', name: '[Algebraic](!/complex-numbers/algebraic-form)', symbol: '$z = a + bi$', items: [
+        { label: 'Best for', text: 'addition, subtraction, equality' },
+        { label: 'Multiply', text: 'distribute, using $i^2 = -1$' } ] },
+      { id: 'trig', name: '[Trigonometric](!/complex-numbers/trigonometric-form)', symbol: '$z = r(\\cos\\theta + i\\sin\\theta)$', items: [
+        { label: 'Best for', text: 'multiplication, division, geometry' },
+        { label: 'From $a + bi$', text: '$r = \\sqrt{a^2 + b^2}$, $\\theta = \\arg z$' } ], flag: true, warn: 'mind the quadrant of $\\theta$' },
+      { id: 'exp', name: '[Exponential](!/complex-numbers/exponential-form)', symbol: '$z = re^{i\\theta}$', items: [
+        { label: 'Best for', text: 'powers, roots, calculus' },
+        { label: 'Powers', text: '$z^n = r^n e^{in\\theta}$' } ] },
+    ],
+  };
+
    return {
       props:{
+    complexFormTree,
     demoUnits,
          sectionsContent,
          introContent,
@@ -1567,7 +1603,7 @@ const faqQuestions = {
     }
    }
 
-export default function ComplexNumbersBasicsPage({seoData, sectionsContent, introContent, obj1Table, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function ComplexNumbersBasicsPage({complexFormTree, seoData, sectionsContent, introContent, obj1Table, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1712,6 +1748,14 @@ export default function ComplexNumbersBasicsPage({seoData, sectionsContent, intr
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj10-diagram'}
+            id="complex-forms-tree"
+            title="The three forms of a complex number"
+            source="/complex-numbers/basics"
+          >
+            <TopDownTree data={complexFormTree} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

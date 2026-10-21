@@ -275,7 +275,11 @@ A formula with many true rows produces a long DNF but a short CNF. A formula tha
 
     obj8: {
       title: `Minterms and Maxterms`,
-      content: `A **minterm** is a conjunction of literals where every variable appears exactly once, either positive or negated. Because each variable is fixed to a specific truth value, a minterm is true for exactly one row of the truth table and false for all others. DNF is the disjunction of all minterms corresponding to true rows.
+      content: `A **minterm** is a conjunction of literals where every variable appears exactly once, either positive or negated.
+
+@academic[rule_plain:Because each variable is fixed to a specific truth value, a minterm is true for exactly one row of the truth table and false for all others.]@
+
+DNF is the disjunction of all minterms corresponding to true rows.
 
 A **maxterm** is a disjunction of literals with the same completeness requirement. A maxterm is false for exactly one row and true for all others. CNF is the conjunction of all maxterms corresponding to false rows.
 

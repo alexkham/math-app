@@ -648,9 +648,9 @@ To evaluate a root numerically in either form, use the [root calculator](!/calcu
 
   obj5: {
     title: `Domain Restrictions`,
-    content: `Rational exponents inherit the domain restrictions of radicals.
+    content: `@academic[rule_plain:Rational exponents inherit the domain restrictions of radicals.
 
-When the denominator of the exponent is even, the base must be non-negative.
+When the denominator of the exponent is even, the base must be non-negative.]@
 
 @academic[formula_callout:Domain Restrictions
 $$(-4)^{1/2} \\quad \\text{is not real}$$]@
@@ -676,7 +676,7 @@ These domain considerations matter when [simplifying](!/algebra/roots/simplifyin
 
   obj6: {
     title: `Laws of Exponents with Rationals`,
-    content: `All exponent laws extend to rational exponents.
+    content: `@academic[rule_theorem_plain:All exponent laws extend to rational exponents.]@
 
 Product rule — same base, add exponents:
 

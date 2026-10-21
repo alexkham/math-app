@@ -325,7 +325,7 @@ When $a > 1$, the function grows. For large negative values of $x$, $a^x$ is clo
 
 When $0 < a < 1$, the function decays. The curve is a mirror image — high on the left, passing through $(0, 1)$, and falling toward zero on the right. Each step to the right multiplies by a fraction, shrinking the output.
 
-The point $(0, 1)$ lies on every exponential graph, regardless of the base. This is a direct consequence of the [zero exponent rule](!/algebra/powers/zero-powers): $a^0 = 1$ for any positive $a$.
+@academic[rule_corollary_plain:The point $(0, 1)$ lies on every exponential graph, regardless of the base. This is a direct consequence of the [zero exponent rule](!/algebra/powers/zero-powers): $a^0 = 1$ for any positive $a$.]@
 
 The larger the base (when $a > 1$), the steeper the growth. The function $10^x$ rises far more aggressively than $2^x$. The closer the base is to $1$ from either side, the flatter the curve — $1.01^x$ grows, but barely.`,
   before: ``,

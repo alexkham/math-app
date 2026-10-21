@@ -2422,7 +2422,9 @@ The $y$-intercept $b$ is the output when $x = 0$ — where the line crosses the 
 
 [Range](!/functions/range): all real numbers (when $m \\neq 0$).
 
-Linear functions have constant rate of change — the slope. Moving one unit right always changes the output by exactly $m$ units.
+@academic[rule_plain:Linear functions have constant rate of change — the slope.]@
+
+Moving one unit right always changes the output by exactly $m$ units.
 
 Every linear function with $m \\neq 0$ is one-to-one, passing the horizontal line test. Its [inverse](!/functions/inverse) is also linear: $f^{-1}(x) = \\dfrac{x - b}{m}$.
 
@@ -2480,7 +2482,9 @@ $$h = -\\frac{b}{2a}, \\quad k = f(h)$$
 
 Quadratics have axis of symmetry — the vertical line through the vertex. They are not one-to-one on their natural domain but become one-to-one when restricted to one side of the vertex.
 
-Zeros (if real) are found by factoring, completing the square, or the quadratic formula. The discriminant $b^2 - 4ac$ determines whether there are two, one, or no real zeros.
+Zeros (if real) are found by factoring, completing the square, or the quadratic formula.
+
+@academic[rule_plain:The discriminant $b^2 - 4ac$ determines whether there are two, one, or no real zeros.]@
 
 The parent quadratic function is $f(x) = x^2$ — vertex at the origin, opening upward.`,
     before: ``,
@@ -2498,7 +2502,9 @@ When $a > 0$, the function falls on the far left and rises on the far right. Whe
 
 [Range](!/functions/range): all real numbers.
 
-Every cubic has at least one real zero — the S-curve must cross the $x$-axis somewhere. It may have one, two, or three real zeros depending on its specific coefficients.
+@academic[rule_theorem_plain:Every cubic has at least one real zero — the S-curve must cross the $x$-axis somewhere.]@
+
+It may have one, two, or three real zeros depending on its specific coefficients.
 
 Cubics have at most two turning points (local maximum and minimum). Some cubics, like $f(x) = x^3$, have no turning points — they increase throughout.
 
@@ -2523,7 +2529,7 @@ $$f(x) = a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0, \\quad a_n \\neq 0$$]@
 
 End behavior depends on degree and leading coefficient. Even degree: both ends go the same direction (up if $a_n > 0$, down if $a_n < 0$). Odd degree: ends go opposite directions.
 
-A polynomial of degree $n$ has at most $n$ real zeros and at most $n - 1$ turning points.
+@academic[rule_theorem_plain:A polynomial of degree $n$ has at most $n$ real zeros and at most $n - 1$ turning points.]@
 
 Degree $4$ (quartic): up to four zeros, up to three turning points, W-shape or M-shape possible.
 
@@ -2577,7 +2583,7 @@ $$y = 0 \\quad \\text{when } \\deg P < \\deg Q$$
 @academic[formulas_link:Browse all functions formulas
 /functions/formulas]@
 
-When the numerator's degree exceeds the denominator's, there is no horizontal asymptote — an oblique asymptote appears when the degree difference is exactly $1$.
+@academic[rule_plain:When the numerator's degree exceeds the denominator's, there is no horizontal asymptote — an oblique asymptote appears when the degree difference is exactly $1$.]@
 
 The simplest rational function is $f(x) = \\dfrac{1}{x}$, with vertical asymptote at $x = 0$, horizontal asymptote at $y = 0$, and hyperbolic shape with branches in quadrants I and III.`,
     before: ``,
@@ -2611,7 +2617,9 @@ Transformations shift the starting point. For $f(x) = \\sqrt{x - h} + k$, the gr
     title: `Cube Root Function`,
     content: `The cube root function has the form $f(x) = \\sqrt[3]{x}$ or $f(x) = x^{1/3}$.
 
-Unlike the square root, the cube root accepts negative inputs. Every real number has a real cube root.
+Unlike the square root, the cube root accepts negative inputs.
+
+@academic[rule_plain:Every real number has a real cube root.]@
 
 [Domain](!/functions/domain): all real numbers $(-\\infty, \\infty)$.
 
@@ -2699,7 +2707,9 @@ $$\\lceil 2.7 \\rceil = 3, \\quad \\lceil -0.3 \\rceil = 0, \\quad \\lceil 4 \\r
 
 [Range](!/functions/range): all integers $\\mathbb{Z}$.
 
-Both functions have jump discontinuities at every integer. The floor function is continuous from the right; the ceiling function is continuous from the left.
+Both functions have jump discontinuities at every integer.
+
+@academic[rule_plain:The floor function is continuous from the right; the ceiling function is continuous from the left.]@
 
 Applications include rounding, pricing tiers (postage by weight), and converting continuous quantities to discrete categories. Any situation where values snap to fixed levels suggests a step function model.`,
     before: ``,
@@ -2750,7 +2760,9 @@ Key [properties](!/functions/properties): One-to-one. Continuous on its domain. 
 
 Common bases: $\\log_{10}(x) = \\log(x)$ (common logarithm), $\\log_e(x) = \\ln(x)$ (natural logarithm).
 
-Logarithms convert multiplication to addition: $\\log(ab) = \\log(a) + \\log(b)$. This property underlies their historical use in computation and their modern role in scaling (decibels, pH, Richter scale).
+@academic[rule_plain:Logarithms convert multiplication to addition: $\\log(ab) = \\log(a) + \\log(b)$.]@
+
+This property underlies their historical use in computation and their modern role in scaling (decibels, pH, Richter scale).
 
 Detailed treatment appears in the algebra section on logarithms.`,
     before: ``,

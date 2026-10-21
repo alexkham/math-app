@@ -2213,7 +2213,9 @@ $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) = n$: exactly one solutio
 
 $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) < n$: infinitely many solutions. The system is consistent but underdetermined, with $n - \\text{rank}(A)$ free parameters.
 
-There is no case with a finite number of solutions greater than one. If two distinct solutions exist, their difference lies in the null space, which is a [subspace](!/linear-algebra/vector-spaces/subspaces) — and a nontrivial subspace contains infinitely many vectors, generating infinitely many solutions.`,
+@academic[rule_theorem_plain:There is no case with a finite number of solutions greater than one.]@
+
+If two distinct solutions exist, their difference lies in the null space, which is a [subspace](!/linear-algebra/vector-spaces/subspaces) — and a nontrivial subspace contains infinitely many vectors, generating infinitely many solutions.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2236,7 +2238,9 @@ The theorem unifies the existence and dimension questions into a single rank com
     title: `Square Systems`,
     content: `When $A$ is $n \\times n$, the [determinant](!/linear-algebra/determinants) provides the sharpest diagnostic.
 
-If $\\det(A) \\neq 0$: the matrix is [invertible](!/linear-algebra/matrix/inverse), the rank is $n$, and the system $A\\mathbf{x} = \\mathbf{b}$ has exactly one solution for every $\\mathbf{b}$. The solution is $\\mathbf{x} = A^{-1}\\mathbf{b}$, or equivalently, the solution obtained by [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination). Existence and uniqueness both hold universally — the right-hand side does not matter.
+@academic[rule_theorem_plain:If $\\det(A) \\neq 0$: the matrix is [invertible](!/linear-algebra/matrix/inverse), the rank is $n$, and the system $A\\mathbf{x} = \\mathbf{b}$ has exactly one solution for every $\\mathbf{b}$.]@
+
+The solution is $\\mathbf{x} = A^{-1}\\mathbf{b}$, or equivalently, the solution obtained by [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination). Existence and uniqueness both hold universally — the right-hand side does not matter.
 
 If $\\det(A) = 0$: the matrix is singular, the rank is less than $n$, and the outcome depends on $\\mathbf{b}$. For some $\\mathbf{b}$ (those in the column space), infinitely many solutions exist. For other $\\mathbf{b}$ (those outside the column space), no solution exists. The determinant test determines whether the coefficient matrix is adequate; the rank comparison with the augmented matrix determines whether the specific $\\mathbf{b}$ is reachable.`,
     before: ``,
@@ -2258,7 +2262,7 @@ When no exact solution exists, the [least-squares](!/linear-algebra/orthogonalit
   },
   obj8: {
     title: `Underdetermined Systems`,
-    content: `When $m < n$ — fewer equations than unknowns — the system is underdetermined. If a solution exists, it is never unique: the rank cannot exceed $m$, which is less than $n$, so at least $n - m$ free variables remain.
+    content: `@academic[rule_corollary_plain:When $m < n$ — fewer equations than unknowns — the system is underdetermined. If a solution exists, it is never unique: the rank cannot exceed $m$, which is less than $n$, so at least $n - m$ free variables remain.]@
 
 The solution set, when nonempty, is an affine subspace of dimension at least $n - m$. Multiple vectors $\\mathbf{x}$ satisfy the equations, and additional criteria beyond the linear system itself are needed to select a preferred one.
 

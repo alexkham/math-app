@@ -2482,7 +2482,9 @@ $$\\text{Area} = \\|\\mathbf{a} \\times \\mathbf{b}\\|$$
 
 At $\\theta = \\frac{\\pi}{2}$ the sine reaches $1$ and the parallelogram attains its largest possible area for those two lengths — a rectangle. At $\\theta = 0$ or $\\theta = \\pi$ the sine vanishes, the two sides collapse onto the same line, and the enclosed area drops to zero.
 
-The direction of $\\mathbf{a} \\times \\mathbf{b}$ sits at a right angle to both $\\mathbf{a}$ and $\\mathbf{b}$ simultaneously. An algebraic confirmation is straightforward: evaluate $\\mathbf{a} \\cdot (\\mathbf{a} \\times \\mathbf{b})$ and $\\mathbf{b} \\cdot (\\mathbf{a} \\times \\mathbf{b})$ component by component, and both [dot products](!/linear-algebra/vectors/dot-product) reduce to zero. The cross product therefore solves a problem that no other operation in the section addresses — it constructs a direction that exits the plane spanned by two given vectors.`,
+@academic[rule_theorem_plain:The direction of $\\mathbf{a} \\times \\mathbf{b}$ sits at a right angle to both $\\mathbf{a}$ and $\\mathbf{b}$ simultaneously.]@
+
+An algebraic confirmation is straightforward: evaluate $\\mathbf{a} \\cdot (\\mathbf{a} \\times \\mathbf{b})$ and $\\mathbf{b} \\cdot (\\mathbf{a} \\times \\mathbf{b})$ component by component, and both [dot products](!/linear-algebra/vectors/dot-product) reduce to zero. The cross product therefore solves a problem that no other operation in the section addresses — it constructs a direction that exits the plane spanned by two given vectors.`,
     before: ``,
     after: ``,
     link: '',

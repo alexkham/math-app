@@ -18,6 +18,8 @@ import { renderPrimeFactorization } from '../../../../app/utils/illustrations/ar
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 import divisibilityTableDiagrams from '@/app/components/divisibility/divisibilityTableDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -498,7 +500,7 @@ So $\\text{lcm}(4, 6, 9) = 36$.
 
 Alternatively, factor all three numbers at once and take the maximum exponent for each prime across all factorizations. Here $4 = 2^2$, $6 = 2 \\cdot 3$, $9 = 3^2$. The primes present are $2$ and $3$, with maximums $2^2$ and $3^2$. The result is $36$ — the same answer by a more direct route.
 
-The order of pairing does not matter. The LCM is associative and commutative.`,
+@academic[rule_plain:The order of pairing does not matter. The LCM is associative and commutative.]@`,
   before: ``,
   after: ``,
   link: '',
@@ -727,8 +729,24 @@ const schemas = {
     }),
   };
 
+  const lcmMethodTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Three ways to find an LCM',
+    preface: 'All three methods give the same least common multiple. The last one reuses the GCD.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Borrow the GCD',
+    conclusion: 'Once the GCD is known, the LCM follows in one step: $\\operatorname{lcm}(a, b) = ab / \\gcd(a, b)$.',
+    root: { name: 'Least common multiple', sub: '3 methods' },
+    children: [
+      { id: 'list', name: 'Listing multiples', items: [ { label: 'How', text: 'list multiples until the first common one' } ] },
+      { id: 'pf', name: 'Prime factorization', items: [ { label: 'How', text: 'take each prime to its maximum exponent' } ] },
+      { id: 'gcd', name: '[GCD formula](!/arithmetic/divisibility/gcd)', symbol: '$\\dfrac{ab}{\\gcd(a,b)}$', items: [ { label: 'How', text: 'divide the product by the GCD' } ] },
+    ],
+  };
+
 return {
   props:{
+    lcmMethodTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -753,7 +771,7 @@ pfLcmObj4,
    }
 
 
-export default function LCMPage({seoData, sectionsContent,
+export default function LCMPage({lcmMethodTree, seoData, sectionsContent,
    introContent, obj2Table, obj8Table, summaryTable,
    faqQuestions, schemas,
   obj1SvgCommon,
@@ -1011,6 +1029,14 @@ obj10SvgBuses,pfLcmObj4, demoUnits}) {
           sectionsContent.obj12.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'obj12-diagram'}
+            id="lcm-methods-tree"
+            title="Three methods for the LCM"
+            source="/arithmetic/divisibility/lcm"
+          >
+            <TopDownTree data={lcmMethodTree} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

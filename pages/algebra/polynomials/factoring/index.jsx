@@ -612,7 +612,9 @@ What counts as "fully factored" depends on the number system in play. Over the i
 
 For $6x^3 + 9x^2 - 3x$, each term is divisible by $3x$. Factoring it out gives $3x(2x^2 + 3x - 1)$. The original three-term polynomial now appears as a product of a monomial and a simpler trinomial.
 
-When variables carry different exponents, the GCF takes the lowest power present across all terms. In $4x^2y + 8xy^2$, the numerical GCF is $4$, the lowest power of $x$ is $x^1$, and the lowest power of $y$ is $y^1$, so the GCF is $4xy$. Factoring yields $4xy(x + 2y)$.
+@academic[rule_plain:When variables carry different exponents, the GCF takes the lowest power present across all terms.]@
+
+In $4x^2y + 8xy^2$, the numerical GCF is $4$, the lowest power of $x$ is $x^1$, and the lowest power of $y$ is $y^1$, so the GCF is $4xy$. Factoring yields $4xy(x + 2y)$.
 
 Extracting the GCF should become automatic — it simplifies the remaining expression and often makes subsequent factoring steps far more manageable. A polynomial like $2x^3 + 8x^2 + 8x$ looks like a difficult cubic until the GCF of $2x$ is removed, leaving $2x(x^2 + 4x + 4)$, which is a recognizable perfect square trinomial: $2x(x + 2)^2$.`,
     before: ``,
@@ -651,7 +653,9 @@ For $x^2 + 7x + 12$, the task is to find two numbers that multiply to $12$ and a
 
 The signs of $b$ and $c$ guide the search. When $c$ is positive and $b$ is positive, both numbers are positive. When $c$ is positive and $b$ is negative, both numbers are negative — for instance, $x^2 - 9x + 20 = (x - 4)(x - 5)$ since $(-4)(-5) = 20$ and $(-4) + (-5) = -9$. When $c$ is negative, the two numbers have opposite signs: $x^2 + 2x - 15 = (x + 5)(x - 3)$ because $5 \\cdot (-3) = -15$ and $5 + (-3) = 2$.
 
-Not every trinomial of this form factors over the integers. The polynomial $x^2 + x + 1$ requires two integers that multiply to $1$ and add to $1$ — no such pair exists. The discriminant $b^2 - 4c$ determines factorability: when it is a perfect square, the trinomial factors over the integers.`,
+Not every trinomial of this form factors over the integers. The polynomial $x^2 + x + 1$ requires two integers that multiply to $1$ and add to $1$ — no such pair exists.
+
+@academic[rule_theorem_plain:The discriminant $b^2 - 4c$ determines factorability: when it is a perfect square, the trinomial factors over the integers.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -690,7 +694,9 @@ Recognizing perfect squares is the key skill. The term $9x^2$ is $(3x)^2$, the t
 
 The pattern extends to less obvious cases. The expression $x^2 - 5$ is a difference of squares if reals are permitted: $x^2 - (\\sqrt{5})^2 = (x + \\sqrt{5})(x - \\sqrt{5})$. Over the integers alone, $x^2 - 5$ does not factor.
 
-The sum of squares $a^2 + b^2$ has no factorization over the real numbers. No real values of $m$ and $n$ satisfy $(a + m)(a + n) = a^2 + b^2$. Over the [complex numbers](!/complex-numbers), however, the factorization exists: $a^2 + b^2 = (a + bi)(a - bi)$, using the fact that $i^2 = -1$.`,
+@academic[rule_theorem_plain:The sum of squares $a^2 + b^2$ has no factorization over the real numbers.]@
+
+No real values of $m$ and $n$ satisfy $(a + m)(a + n) = a^2 + b^2$. Over the [complex numbers](!/complex-numbers), however, the factorization exists: $a^2 + b^2 = (a + bi)(a - bi)$, using the fact that $i^2 = -1$.`,
     before: ``,
     after: ``,
     link: '',
@@ -739,7 +745,9 @@ For $x^3 + 8$, recognize $8 = 2^3$. The sum of cubes formula gives $x^3 + 2^3 = 
 
 For $27x^3 - 1$, recognize $27x^3 = (3x)^3$ and $1 = 1^3$. The difference of cubes formula gives $(3x - 1)(9x^2 + 3x + 1)$. The linear factor takes the minus sign (same as the original difference), the middle term is positive (opposite), and the constant remains positive.
 
-The quadratic factors $a^2 - ab + b^2$ and $a^2 + ab + b^2$ that arise from these formulas are irreducible over the reals. Their discriminants are $-3b^2$ and $-3b^2$ respectively — both negative — so neither factors further into real linear terms.
+@academic[rule_theorem_plain:The quadratic factors $a^2 - ab + b^2$ and $a^2 + ab + b^2$ that arise from these formulas are irreducible over the reals.]@
+
+Their discriminants are $-3b^2$ and $-3b^2$ respectively — both negative — so neither factors further into real linear terms.
 
 The three named patterns introduced across this and the preceding sections — difference of squares, perfect square trinomials, and sum and difference of cubes — together form the most heavily used factoring identities. The reference card below collects them in one place along with the recognition cue for each.`,
     before: ``,
@@ -809,7 +817,9 @@ The polynomial $x^2 - 2$ is irreducible over the integers because no pair of int
 
 The [Fundamental Theorem of Algebra](!/complex-numbers/equations-polynomials) settles the question at the deepest level: every polynomial of degree $n \\geq 1$ with complex coefficients factors completely into $n$ linear factors over the complex numbers. This means the only irreducible polynomials over the complex numbers are linear — degree $1$.
 
-Over the reals, the irreducible building blocks are linear polynomials and quadratic polynomials with negative discriminant ($b^2 - 4ac < 0$). Every real polynomial factors into a product of such pieces. Over the integers, identifying irreducibility is harder and no single test covers all cases, though the discriminant and the rational root theorem from the [rules](!/algebra/polynomials/rules) page offer useful starting points.`,
+@academic[rule_theorem_plain:Over the reals, the irreducible building blocks are linear polynomials and quadratic polynomials with negative discriminant ($b^2 - 4ac < 0$). Every real polynomial factors into a product of such pieces.]@
+
+Over the integers, identifying irreducibility is harder and no single test covers all cases, though the discriminant and the rational root theorem from the [rules](!/algebra/polynomials/rules) page offer useful starting points.`,
     before: ``,
     after: ``,
     link: '',

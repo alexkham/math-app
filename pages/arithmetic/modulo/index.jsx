@@ -1067,7 +1067,9 @@ obj3: {
   title: `Modulo and Divisibility`,
   content: `Modulo and [divisibility](!/arithmetic/divisibility) are two sides of the same coin. Divisibility asks whether one integer divides another exactly. Modulo computes the evidence.
 
-When $a \\bmod n = 0$, the remainder vanishes — $n$ divides $a$ with nothing left over. In divisibility notation, $n \\mid a$. The statement $24 \\bmod 6 = 0$ and the statement $6 \\mid 24$ express identical facts in different languages.
+@academic[rule_plain:When $a \\bmod n = 0$, the remainder vanishes — $n$ divides $a$ with nothing left over.]@
+
+In divisibility notation, $n \\mid a$. The statement $24 \\bmod 6 = 0$ and the statement $6 \\mid 24$ express identical facts in different languages.
 
 When $a \\bmod n \\neq 0$, the remainder is positive — $n$ does not divide $a$ exactly. The statement $25 \\bmod 6 = 1$ tells us $6 \\nmid 25$, and it tells us by how much the division misses.
 
@@ -1079,7 +1081,9 @@ Divisibility is the concept — the yes-or-no question of whether one number fit
 
 obj4: {
   title: `The Range of Remainders`,
-  content: `For a fixed divisor $n$, the remainder $a \\bmod n$ is always one of the values $\\{0, 1, 2, \\ldots, n-1\\}$. There are exactly $n$ possibilities, and no remainder can reach $n$ itself — if it did, another complete copy of $n$ could be extracted.
+  content: `@academic[rule_plain:For a fixed divisor $n$, the remainder $a \\bmod n$ is always one of the values $\\{0, 1, 2, \\ldots, n-1\\}$.]@
+
+There are exactly $n$ possibilities, and no remainder can reach $n$ itself — if it did, another complete copy of $n$ could be extracted.
 
 When $n = 2$, every integer produces a remainder of $0$ or $1$. This is the basis of even and odd: even numbers give $0$, odd numbers give $1$.
 

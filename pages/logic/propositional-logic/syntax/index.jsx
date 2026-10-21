@@ -355,6 +355,9 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 
 export async function getStaticProps() {
 
@@ -601,8 +604,47 @@ This section introduces the basic elements of propositional logic syntax, beginn
     }),
   };
 
+  const precedenceLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'A reading convention, not a rule',
+    preface: 'At the formation level every binary connective brings its own parentheses. Precedence comes later, as a shorthand for dropping brackets.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'When in doubt, bracket',
+    conclusion: 'A string like $P \\to Q \\to R$ has two incompatible readings until convention or brackets decide. The site\'s [tree builder](!/logic/propositional-logic/syntax/tree-builder) parses by exactly this order.',
+    axis: { top: 'binds tightest', label: 'precedence', bottom: 'binds loosest' },
+    levels: [
+      { id: 'not', name: '$\\neg$ negation' },
+      { id: 'and', name: '$\\wedge$ conjunction' },
+      { id: 'or', name: '$\\vee$ disjunction' },
+      { id: 'imp', name: '$\\to$ [implication](!/logic/propositional-logic/semantics/implication)' },
+      { id: 'iff', name: '$\\leftrightarrow$ [biconditional](!/logic/truth-tables/biconditionals)' },
+    ],
+  };
+
+  const normalFormTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Two standard shapes for a formula',
+    preface: 'Every formula of propositional logic can be rewritten in either normal form. They are mirror images of each other.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Same formula, different jobs',
+    conclusion: 'CNF is what SAT solvers take as input; DNF falls straight out of a truth table. See [normal forms](!/logic/propositional-logic/syntax/normal-forms).',
+    root: { name: 'Normal forms', sub: '2 forms' },
+    children: [
+      { id: 'cnf', name: 'CNF', sub: 'conjunctive normal form', items: [
+        { label: 'Shape', text: 'an AND of clauses, each an OR of literals' },
+        { label: 'Example', text: '$(P \\vee \\neg Q) \\wedge (R \\vee S \\vee T)$' },
+        { label: 'Used by', text: 'SAT solvers' } ] },
+      { id: 'dnf', name: 'DNF', sub: 'disjunctive normal form', items: [
+        { label: 'Shape', text: 'an OR of terms, each an AND of literals' },
+        { label: 'Example', text: '$(P \\wedge \\neg Q) \\vee (R \\wedge S)$' },
+        { label: 'Built from', text: 'truth tables' } ] },
+    ],
+  };
+
  return {
    props: {
+    normalFormTree,
+    precedenceLevels,
      demoUnits,
      sectionContent,
      pageTitle,
@@ -617,7 +659,9 @@ This section introduces the basic elements of propositional logic syntax, beginn
  }
 }
 
-export default function LogicPage({demoUnits, 
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function LogicPage({normalFormTree, precedenceLevels, demoUnits, 
  sectionContent,
  pageTitle,
  pageDescription,
@@ -686,6 +730,14 @@ boxed={true} color={'blue'} compact={true} type={'dot'} width={'650px'} />
         parentLabel={sectionContent.notation.parentLabel}
         theme={'navy'}
       />,
+        <DiagramFrame
+          key={'notation-diagram'}
+          id="connective-precedence-pyramid"
+          title="Precedence of the connectives"
+          source="/logic/propositional-logic/syntax"
+        >
+          <Hierarchy data={precedenceLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+        </DiagramFrame>,
     ]
    },
 
@@ -704,7 +756,15 @@ boxed={true} color={'blue'} compact={true} type={'dot'} width={'650px'} />
     title:'Normal Forms',
     content:[
      sectionContent.normal_forms.description
-
+,
+     <DiagramFrame
+       key={'normal_forms-diagram'}
+       id="normal-forms-tree"
+       title="CNF and DNF"
+       source="/logic/propositional-logic/syntax"
+     >
+       <TopDownTree data={normalFormTree} />
+     </DiagramFrame>,
     ]
    },
    // faq: rendered component — must be built here, not in getStaticProps

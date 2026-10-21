@@ -109,12 +109,61 @@
     ]
   },
   {
+    "id": "complex-forms-tree",
+    "title": null,
+    "source": "/complex-numbers/basics",
+    "section": "complex-numbers",
+    "width": 933,
+    "height": 664,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
     "id": "complex-inverse-modulus-cases",
     "title": null,
     "source": "/complex-numbers/multiplicative-inverse",
     "section": "complex-numbers",
     "width": 690,
     "height": 1258,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "complex-operations-tree",
+    "title": null,
+    "source": "/complex-numbers/operations",
+    "section": "complex-numbers",
+    "width": 933,
+    "height": 624,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "complex-properties-tree",
+    "title": null,
+    "source": "/complex-numbers/properties",
+    "section": "complex-numbers",
+    "width": 933,
+    "height": 626,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "conditional-forms-tree",
+    "title": null,
+    "source": "/logic/truth-tables/implications",
+    "section": "logic",
+    "width": 933,
+    "height": 690,
     "formats": [
       "png",
       "pdf"
@@ -146,6 +195,18 @@
     ]
   },
   {
+    "id": "connective-precedence-pyramid",
+    "title": null,
+    "source": "/logic/propositional-logic/syntax",
+    "section": "logic",
+    "width": 933,
+    "height": 833,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "covariance-sign-cases",
     "title": null,
     "source": "/probability/covariance",
@@ -164,6 +225,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 1412,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "decompositions-tree",
+    "title": null,
+    "source": "/linear-algebra/decompositions",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 730,
     "formats": [
       "png",
       "pdf"
@@ -243,6 +316,18 @@
     ]
   },
   {
+    "id": "determinant-row-operations-tree",
+    "title": null,
+    "source": "/linear-algebra/determinants",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 596,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "determinant-sign-volume-cases",
     "title": null,
     "source": "/linear-algebra/determinants/geometry",
@@ -315,6 +400,30 @@
     ]
   },
   {
+    "id": "differentiability-failure-tree",
+    "title": null,
+    "source": "/calculus/derivatives/differentiability",
+    "section": "calculus",
+    "width": 933,
+    "height": 690,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "differentiation-techniques-tree",
+    "title": null,
+    "source": "/calculus/derivatives/techniques",
+    "section": "calculus",
+    "width": 933,
+    "height": 648,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "discontinuity-types",
     "title": null,
     "source": "/calculus/limits/continuity",
@@ -357,6 +466,31 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 981,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "equation-families-tree",
+    "title": null,
+    "source": "/algebra/equations",
+    "section": "algebra",
+    "width": 933,
+    "height": 827,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "equations-beyond-algebra-tree",
+    "title": null,
+    "source": "/algebra/equations",
+    "section": "algebra",
+    "width": 933,
+    "height": 678,
     "formats": [
       "png",
       "pdf"
@@ -423,12 +557,36 @@
     ]
   },
   {
+    "id": "exponential-equation-methods-tree",
+    "title": null,
+    "source": "/algebra/powers/exponential-equations",
+    "section": "algebra",
+    "width": 933,
+    "height": 624,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "four-subspace-card",
     "title": "The four fundamental subspaces",
     "source": "/linear-algebra/vector-spaces/fundamental-spaces",
     "section": "linear-algebra",
     "width": 840,
     "height": 1108,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "fraction-operations-tree",
+    "title": null,
+    "source": "/arithmetic/fractions",
+    "section": "arithmetic",
+    "width": 933,
+    "height": 624,
     "formats": [
       "png",
       "pdf"
@@ -453,6 +611,30 @@
     "section": "functions",
     "width": 690,
     "height": 1717,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "fundamental-subspaces-tree",
+    "title": null,
+    "source": "/linear-algebra/vector-spaces/fundamental-spaces",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 651,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "gcd-methods-tree",
+    "title": null,
+    "source": "/arithmetic/divisibility/gcd",
+    "section": "arithmetic",
+    "width": 933,
+    "height": 625,
     "formats": [
       "png",
       "pdf"
@@ -507,12 +689,36 @@
     ]
   },
   {
+    "id": "improper-convergence-tests-tree",
+    "title": null,
+    "source": "/calculus/integrals/improper",
+    "section": "calculus",
+    "width": 933,
+    "height": 628,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "independence-properties",
     "title": "What operations do to an independent set",
     "source": "/linear-algebra/vector-spaces/linear-independence",
     "section": "linear-algebra",
     "width": 840,
     "height": 1454,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "inequality-families-tree",
+    "title": null,
+    "source": "/algebra/inequalities",
+    "section": "algebra",
+    "width": 933,
+    "height": 706,
     "formats": [
       "png",
       "pdf"
@@ -531,12 +737,36 @@
     ]
   },
   {
+    "id": "integration-techniques-tree",
+    "title": null,
+    "source": "/calculus/integrals/techniques",
+    "section": "calculus",
+    "width": 933,
+    "height": 663,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "inverse-properties",
     "title": "Properties of the inverse",
     "source": "/linear-algebra/matrix/inverse",
     "section": "linear-algebra",
     "width": 840,
     "height": 1518,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "inverse-reciprocal-tree",
+    "title": null,
+    "source": "/trigonometry/inverse-functions",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 651,
     "formats": [
       "png",
       "pdf"
@@ -562,6 +792,18 @@
     "section": "trigonometry",
     "width": 690,
     "height": 1173,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "lcm-methods-tree",
+    "title": null,
+    "source": "/arithmetic/divisibility/lcm",
+    "section": "arithmetic",
+    "width": 933,
+    "height": 590,
     "formats": [
       "png",
       "pdf"
@@ -634,6 +876,18 @@
     "section": "algebra",
     "width": 690,
     "height": 1038,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "logarithm-rules-tree",
+    "title": null,
+    "source": "/algebra/logarithms/rules",
+    "section": "algebra",
+    "width": 933,
+    "height": 595,
     "formats": [
       "png",
       "pdf"
@@ -785,6 +1039,18 @@
     ]
   },
   {
+    "id": "normal-forms-tree",
+    "title": null,
+    "source": "/logic/propositional-logic/syntax",
+    "section": "logic",
+    "width": 933,
+    "height": 679,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "number-system-ladder",
     "title": null,
     "source": "/complex-numbers/imaginary-numbers",
@@ -839,6 +1105,30 @@
     "section": "combinatorics",
     "width": 651,
     "height": 1034,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "pmf-pdf-tree",
+    "title": null,
+    "source": "/probability/probability-function",
+    "section": "probability",
+    "width": 933,
+    "height": 724,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "prime-types-tree",
+    "title": null,
+    "source": "/algebra/sequences/prime-numbers",
+    "section": "algebra",
+    "width": 933,
+    "height": 663,
     "formats": [
       "png",
       "pdf"
@@ -953,6 +1243,18 @@
     ]
   },
   {
+    "id": "quadratic-methods-tree",
+    "title": null,
+    "source": "/algebra/equations/quadratic",
+    "section": "algebra",
+    "width": 933,
+    "height": 605,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "radical-equation-index-cases",
     "title": null,
     "source": "/algebra/roots/equations",
@@ -977,6 +1279,18 @@
     ]
   },
   {
+    "id": "radical-rules-tree",
+    "title": null,
+    "source": "/algebra/roots/radical-rules",
+    "section": "algebra",
+    "width": 933,
+    "height": 572,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "rank-full-deficient-cases",
     "title": null,
     "source": "/linear-algebra/matrix/rank",
@@ -995,6 +1309,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 1711,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "rational-equation-subtypes-tree",
+    "title": null,
+    "source": "/algebra/equations/rational",
+    "section": "algebra",
+    "width": 933,
+    "height": 624,
     "formats": [
       "png",
       "pdf"
@@ -1037,12 +1363,36 @@
     ]
   },
   {
+    "id": "reciprocal-graphs-tree",
+    "title": null,
+    "source": "/trigonometry/graphs",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 651,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "reflection-cases",
     "title": "Reflections in the plane",
     "source": "/linear-algebra/transformations/geometric",
     "section": "linear-algebra",
     "width": 840,
     "height": 1009,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "root-finding-methods-tree",
+    "title": null,
+    "source": "/algebra/polynomials/roots",
+    "section": "algebra",
+    "width": 933,
+    "height": 664,
     "formats": [
       "png",
       "pdf"
@@ -1061,6 +1411,18 @@
     ]
   },
   {
+    "id": "row-operations-tree",
+    "title": null,
+    "source": "/linear-algebra/linear-systems/gaussian-elimination",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 650,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "rref-readings",
     "title": "Everything readable from the RREF",
     "source": "/linear-algebra/linear-systems/echelon-form",
@@ -1073,12 +1435,48 @@
     ]
   },
   {
+    "id": "sample-space-size-pyramid",
+    "title": null,
+    "source": "/probability/sample-space",
+    "section": "probability",
+    "width": 933,
+    "height": 691,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "set-size-dimension-pyramid",
+    "title": null,
+    "source": "/linear-algebra/vector-spaces/dimension",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 691,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "smoothness-class-pyramid",
     "title": null,
     "source": "/calculus/derivatives/higher-order",
     "section": "calculus",
     "width": 933,
     "height": 763,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "solution-methods-tree",
+    "title": null,
+    "source": "/linear-algebra/linear-systems",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 627,
     "formats": [
       "png",
       "pdf"
@@ -1367,6 +1765,30 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 1781,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "vector-space-ideas-pyramid",
+    "title": null,
+    "source": "/linear-algebra/vector-spaces",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 952,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "vector-types-tree",
+    "title": null,
+    "source": "/linear-algebra/vectors",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 670,
     "formats": [
       "png",
       "pdf"

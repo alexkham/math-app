@@ -663,6 +663,7 @@ import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gau
 import matrixProductDiagrams from '@/app/components/linear-algebra/multiplication/matrixProductDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 
 
 
@@ -876,7 +877,11 @@ Exactly one solution: the system is consistent and determined. There is a unique
 
 Infinitely many solutions: the system is consistent but underdetermined. The constraints do not pin down a single point — the solution set is a line, plane, or higher-dimensional flat parametrized by free variables.
 
-There is no fourth option. A linear system never has exactly two solutions, or ten, or any finite number greater than one. The proof is simple: if $\\mathbf{x}_1$ and $\\mathbf{x}_2$ are both solutions with $\\mathbf{x}_1 \\neq \\mathbf{x}_2$, then $\\mathbf{x}_1 + t(\\mathbf{x}_2 - \\mathbf{x}_1)$ is a solution for every $t \\in \\mathbb{R}$, producing infinitely many.`,
+There is no fourth option.
+
+@academic[rule_theorem_plain:A linear system never has exactly two solutions, or ten, or any finite number greater than one.]@
+
+The proof is simple: if $\\mathbf{x}_1$ and $\\mathbf{x}_2$ are both solutions with $\\mathbf{x}_1 \\neq \\mathbf{x}_2$, then $\\mathbf{x}_1 + t(\\mathbf{x}_2 - \\mathbf{x}_1)$ is a solution for every $t \\in \\mathbb{R}$, producing infinitely many.`,
     before: ``,
     after: ``,
     link: ``,
@@ -889,7 +894,9 @@ For two equations in two unknowns, each equation is a line in $\\mathbb{R}^2$. T
 
 For three equations in three unknowns, each equation is a plane in $\\mathbb{R}^3$. Three planes can intersect in a point, along a line, or not at all. They can also coincide or be arranged so that each pair intersects but no point lies on all three — a triangular prism configuration that yields no solution.
 
-In higher dimensions the geometry is harder to visualize but the classification persists. The rank of the coefficient matrix counts how many hyperplanes cut independently — each independent equation reduces the dimension of the intersection by one. If the rank is $r$ and the system is consistent, the solution set has dimension $n - r$.`,
+In higher dimensions the geometry is harder to visualize but the classification persists. The rank of the coefficient matrix counts how many hyperplanes cut independently — each independent equation reduces the dimension of the intersection by one.
+
+@academic[rule_theorem_plain:If the rank is $r$ and the system is consistent, the solution set has dimension $n - r$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -900,7 +907,7 @@ In higher dimensions the geometry is harder to visualize but the classification 
 
 Swapping two rows ($R_i \\leftrightarrow R_j$) reorders the equations. Multiplying a row by a nonzero scalar ($kR_i \\to R_i$) rescales an equation. Adding a multiple of one row to another ($R_i + cR_j \\to R_i$) replaces one equation with a combination of two equations.
 
-Each operation is reversible: a swap undoes itself, scaling by $k$ is reversed by scaling by $1/k$, and adding $c$ times row $j$ to row $i$ is reversed by subtracting $c$ times row $j$ from row $i$. Reversibility guarantees that the solution set is unchanged — no solutions are created or destroyed.
+@academic[rule_theorem_plain:Each operation is reversible: a swap undoes itself, scaling by $k$ is reversed by scaling by $1/k$, and adding $c$ times row $j$ to row $i$ is reversed by subtracting $c$ times row $j$ from row $i$. Reversibility guarantees that the solution set is unchanged — no solutions are created or destroyed.]@
 
 Each row operation corresponds to left-multiplication by an [elementary matrix](!/linear-algebra/matrix/operations). This algebraic interpretation connects the row-reduction algorithm to the theory of matrix factorization and [invertibility](!/linear-algebra/matrix/inverse). The full systematic application of row operations is [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination).`,
     before: ``,
@@ -915,7 +922,9 @@ Row echelon form (REF) has a staircase pattern: the leading entry of each row is
 
 Reduced row echelon form (RREF) goes further: each leading entry is $1$ and is the only nonzero entry in its column. In RREF, the solution is visible by inspection — each pivot variable is already isolated.
 
-The RREF of any matrix is unique. Different sequences of row operations always arrive at the same RREF. This uniqueness makes the pivot positions intrinsic to the matrix: the [rank](!/linear-algebra/matrix/rank), the free variables, and the solvability verdict all follow from the pivot structure. The full treatment of both forms, including how to read solutions from each, is on the [echelon form](!/linear-algebra/linear-systems/echelon-form) page.`,
+@academic[rule_theorem_plain:The RREF of any matrix is unique. Different sequences of row operations always arrive at the same RREF.]@
+
+This uniqueness makes the pivot positions intrinsic to the matrix: the [rank](!/linear-algebra/matrix/rank), the free variables, and the solvability verdict all follow from the pivot structure. The full treatment of both forms, including how to read solutions from each, is on the [echelon form](!/linear-algebra/linear-systems/echelon-form) page.`,
     before: ``,
     after: ``,
     link: ``,
@@ -926,7 +935,9 @@ The RREF of any matrix is unique. Different sequences of row operations always a
 
 Nontrivial solutions exist if and only if the rank of $A$ is less than $n$. If the system has more unknowns than equations ($n > m$), nontrivial solutions are guaranteed — the rank cannot exceed $m$, which is less than $n$.
 
-The solution set of a homogeneous system is the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$: a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$. The superposition principle holds — any linear combination of solutions is again a solution — which is why the solution set has the clean structure of a vector space rather than an arbitrary collection of points.`,
+@academic[rule_theorem_plain:The solution set of a homogeneous system is the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$: a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$.]@
+
+The superposition principle holds — any linear combination of solutions is again a solution — which is why the solution set has the clean structure of a vector space rather than an arbitrary collection of points.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1131,8 +1142,29 @@ const schemas = {
     ],
   };
 
+  const solutionMethodTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Other routes to the solution',
+    preface: 'Row reduction is not the only way to solve $A\\mathbf{x} = \\mathbf{b}$. Each alternative suits a different situation.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Size and structure decide',
+    conclusion: 'Small systems tolerate any method; many right-hand sides favour LU; large sparse systems favour iterative methods.',
+    root: { name: 'Solving A x = b', sub: 'beyond row reduction' },
+    children: [
+      { id: 'cramer', name: '[Cramer\'s rule](!/linear-algebra/determinants/applications)', items: [
+        { label: 'How', text: 'each unknown is a ratio of determinants' } ], flag: true, warn: 'impractical for large $n$' },
+      { id: 'inv', name: '[Inverse](!/linear-algebra/matrix/inverse)', symbol: '$\\mathbf{x} = A^{-1}\\mathbf{b}$', items: [
+        { label: 'Needs', text: '$A$ square and invertible' }, { label: 'Cost', text: 'about 3 times elimination' } ] },
+      { id: 'lu', name: '[LU](!/linear-algebra/decompositions/lower-upper)', items: [
+        { label: 'How', text: 'two triangular solves' }, { label: 'Best for', text: 'many right-hand sides' } ] },
+      { id: 'iter', name: 'Iterative', items: [
+        { label: 'Examples', text: 'Jacobi, Gauss-Seidel, conjugate gradient' }, { label: 'Best for', text: 'large sparse systems' } ] },
+    ],
+  };
+
 return {
   props:{
+    solutionMethodTree,
     linesGeometryCases,
     demoUnits,
     sectionsContent,
@@ -1155,7 +1187,7 @@ return {
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function LinearSystemsPage({linesGeometryCases, 
+export default function LinearSystemsPage({solutionMethodTree, linesGeometryCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1272,6 +1304,14 @@ export default function LinearSystemsPage({linesGeometryCases,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj10Table }}
           />,
+          <DiagramFrame
+            key={'obj10-diagram'}
+            id="solution-methods-tree"
+            title="Solving Ax = b beyond row reduction"
+            source="/linear-algebra/linear-systems"
+          >
+            <TopDownTree data={solutionMethodTree} />
+          </DiagramFrame>,
         ]
     },
     {

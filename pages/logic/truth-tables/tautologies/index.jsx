@@ -382,7 +382,9 @@ export async function getStaticProps() {
       title: `What Is a Tautology?`,
       content: `A [tautology](!/logic/propositional-logic/semantics/tautology) is a compound proposition that is true under every possible assignment of truth values to its variables. No matter what combination of true and false you assign, the formula always evaluates to true. In a truth table, the final column contains only T values.
 
-Tautologies are also called logically valid formulas. They represent logical truths — statements whose truth depends entirely on their logical structure, not on the meaning of their components. The negation of a tautology is a [contradiction](!/logic/propositional-logic/semantics/contradiction) (always false), and vice versa.
+Tautologies are also called logically valid formulas. They represent logical truths — statements whose truth depends entirely on their logical structure, not on the meaning of their components.
+
+@academic[rule_corollary_plain:The negation of a tautology is a [contradiction](!/logic/propositional-logic/semantics/contradiction) (always false), and vice versa.]@
 
 Tautologies play a central role in formal logic: they define the valid inference rules, establish equivalences between formulas, and serve as the axioms of many deductive systems. Recognizing tautologies is essential for constructing sound mathematical proofs.
 
@@ -414,7 +416,10 @@ These patterns are the building blocks of deductive reasoning. Each corresponds 
     },
     obj3: {
       title: `P ∨ ¬P: Law of Excluded Middle`,
-      content: `The formula P ∨ ¬P states that for any proposition P, either P is true or its negation ¬P is true. There is no third option. This is the law of excluded middle (tertium non datur), one of the three classical laws of thought alongside the law of non-[contradiction](!/logic/propositional-logic/semantics/contradiction) and the law of identity.
+      content: `@academic[rule:Law of excluded middle
+The formula P ∨ ¬P states that for any proposition P, either P is true or its negation ¬P is true. There is no third option.]@
+
+This is the law of excluded middle (tertium non datur), one of the three classical laws of thought alongside the law of non-[contradiction](!/logic/propositional-logic/semantics/contradiction) and the law of identity.
 
 The truth table has only two rows (P = T and P = F), and the result is T in both. When P is true, the first disjunct holds. When P is false, ¬P is true and the second disjunct holds.
 
@@ -436,7 +441,10 @@ This result does not mean that there is a meaningful logical relationship betwee
     },
     obj5: {
       title: `(P ∧ Q) → P: Conjunction Elimination`,
-      content: `The formula (P ∧ Q) → P states that if both P and Q are true, then P is true. This is the simplification rule (or conjunction elimination): from a conjunction, either conjunct can be inferred.
+      content: `@academic[rule:Conjunction elimination
+The formula (P ∧ Q) → P states that if both P and Q are true, then P is true.]@
+
+This is the simplification rule (or conjunction elimination): from a conjunction, either conjunct can be inferred.
 
 The [tautology](!/logic/propositional-logic/semantics/tautology) holds vacuously when the antecedent P ∧ Q is false (any row where P or Q is false), and it holds directly when the antecedent is true (the single row where both P and Q are true, in which case P is certainly true).
 
@@ -458,7 +466,10 @@ Hypothetical syllogism is the logical basis for chain reasoning in mathematics: 
     },
     obj7: {
       title: `((P → Q) ∧ P) → Q: Modus Ponens`,
-      content: `Modus ponens is the most fundamental rule of inference in deductive logic: if P → Q is true and P is true, then Q must be true. The Latin name means "method of affirming" — by affirming the antecedent, we affirm the consequent.
+      content: `@academic[rule:Modus Ponens
+Modus ponens is the most fundamental rule of inference in deductive logic: if P → Q is true and P is true, then Q must be true.]@
+
+The Latin name means "method of affirming" — by affirming the antecedent, we affirm the consequent.
 
 The truth table confirms this is a [tautology](!/logic/propositional-logic/semantics/tautology). The antecedent (P → Q) ∧ P is true only in one row: P = T, Q = T (since P → Q requires Q to be true when P is true). In that row, Q is indeed true. In all other rows, the antecedent is false and the outer implication holds vacuously.
 
@@ -491,7 +502,10 @@ This principle is valid in classical logic. In intuitionistic logic, the result 
     },
     obj10: {
       title: `((P ∨ Q) ∧ ¬P) → Q: Disjunctive Syllogism`,
-      content: `Disjunctive syllogism states: if at least one of P or Q is true, and P is false, then Q must be true. The disjunction guarantees one disjunct, the negation eliminates one, and the remaining disjunct is forced.
+      content: `@academic[rule:Disjunctive Syllogism
+Disjunctive syllogism states: if at least one of P or Q is true, and P is false, then Q must be true.]@
+
+The disjunction guarantees one disjunct, the negation eliminates one, and the remaining disjunct is forced.
 
 The truth table confirms that this formula is a [tautology](!/logic/propositional-logic/semantics/tautology). The antecedent (P ∨ Q) ∧ ¬P is true only when P is false and Q is true — and in that case Q is indeed true. In all other rows the antecedent is false, making the outer implication vacuously true.
 

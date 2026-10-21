@@ -212,9 +212,9 @@ const keyWords = [
   title: `Key Principle: Base Determines Direction`,
   content: `The behavior of an exponential inequality depends entirely on whether the base is greater than $1$ or between $0$ and $1$. This is the central idea on this page, and every solving method flows from it.
 
-When $a > 1$, the function $a^x$ is increasing — larger exponents produce larger values. So the inequality $a^x > a^y$ holds exactly when $x > y$. The direction of the inequality is preserved.
+@academic[rule_plain:When $a > 1$, the function $a^x$ is increasing — larger exponents produce larger values. So the inequality $a^x > a^y$ holds exactly when $x > y$. The direction of the inequality is preserved.
 
-When $0 < a < 1$, the function $a^x$ is decreasing — larger exponents produce smaller values. So the inequality $a^x > a^y$ holds exactly when $x < y$. The direction of the inequality flips.
+When $0 < a < 1$, the function $a^x$ is decreasing — larger exponents produce smaller values. So the inequality $a^x > a^y$ holds exactly when $x < y$. The direction of the inequality flips.]@
 
 The base $a = 1$ is excluded because $1^x = 1$ for all $x$ — no inequality between distinct powers is possible.
 
@@ -262,7 +262,7 @@ The algebraic manipulation happens before the directional rule is applied. Simpl
 
 obj4: {
   title: `Domain and Sign Considerations`,
-  content: `Exponential expressions with positive bases carry a property that constrains the solution space: $a^x > 0$ for every real $x$ when $a > 0$.
+  content: `@academic[rule_plain:Exponential expressions with positive bases carry a property that constrains the solution space: $a^x > 0$ for every real $x$ when $a > 0$.]@
 
 No real exponent can make a positive base produce zero or a negative result. The equation $2^x = 0$ has no solution. The inequality $3^x < 0$ has no solution. This fact is not just a technicality — it eliminates entire branches of potential answers.
 

@@ -322,7 +322,9 @@ The graph of $f'$ encodes the behavior of $f$: where $f$ climbs, $f'$ is positiv
     content: `
 Not every function has a derivative at every point. The limit definition requires the limit to exist and be finite, which fails at corners, cusps, vertical tangents, and discontinuities. Each failure mode has a distinct geometric signature on the graph.
 
-Differentiability implies [continuity](!/calculus/limits/continuity)—a function must be unbroken at a point to have a tangent line there. The converse is false: $f(x) = |x|$ is continuous at $x = 0$ but not differentiable, because the left-hand and right-hand slopes disagree.
+@academic[rule_theorem_plain:Differentiability implies [continuity](!/calculus/limits/continuity)—a function must be unbroken at a point to have a tangent line there.]@
+
+The converse is false: $f(x) = |x|$ is continuous at $x = 0$ but not differentiable, because the left-hand and right-hand slopes disagree.
 
 [Differentiability](!/calculus/derivatives/differentiability) examines when derivatives exist, one-sided derivatives, differentiability on intervals, and pathological cases where continuity holds everywhere but differentiability fails everywhere.
 `,

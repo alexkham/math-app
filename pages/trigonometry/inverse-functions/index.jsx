@@ -1027,6 +1027,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1354,7 +1356,9 @@ const sectionsContent={
 
      obj1: {
     title: `Why Restriction Is Necessary`,
-    content: `A function can have an inverse only if it is one-to-one: each output corresponds to exactly one input. The trigonometric functions, being periodic, are emphatically not one-to-one on their full domains. The equation $\\sin(x) = \\frac{1}{2}$ is satisfied by $\\frac{\\pi}{6}$, $\\frac{5\\pi}{6}$, $\\frac{\\pi}{6} + 2\\pi$, $\\frac{5\\pi}{6} + 2\\pi$, and infinitely many others. Defining "$\\sin^{-1}\\left(\\frac{1}{2}\\right)$" as all of these would not produce a function — a function must assign a single output to each input.
+    content: `@academic[rule_theorem_plain:A function can have an inverse only if it is one-to-one: each output corresponds to exactly one input.]@
+
+The trigonometric functions, being periodic, are emphatically not one-to-one on their full domains. The equation $\\sin(x) = \\frac{1}{2}$ is satisfied by $\\frac{\\pi}{6}$, $\\frac{5\\pi}{6}$, $\\frac{\\pi}{6} + 2\\pi$, $\\frac{5\\pi}{6} + 2\\pi$, and infinitely many others. Defining "$\\sin^{-1}\\left(\\frac{1}{2}\\right)$" as all of these would not produce a function — a function must assign a single output to each input.
 
 The solution is to restrict each trigonometric function to an interval where it is strictly monotonic — always increasing or always decreasing — and therefore one-to-one. On such an interval, the horizontal line test is passed, and an inverse function exists. The restricted function must still cover the entire range of the original, so that the inverse is defined for every relevant input.
 
@@ -1624,7 +1628,9 @@ All six mixed compositions — built from the right-triangle method demonstrated
   },
   obj9: {
     title: `Graphs of Inverse Trigonometric Functions`,
-    content: `The graph of each inverse trigonometric function is the reflection of the corresponding restricted trigonometric graph over the line $y = x$. This reflection swaps the roles of input and output — the domain of the original becomes the range of the inverse, and vice versa.
+    content: `@academic[rule_plain:The graph of each inverse trigonometric function is the reflection of the corresponding restricted trigonometric graph over the line $y = x$.]@
+
+This reflection swaps the roles of input and output — the domain of the original becomes the range of the inverse, and vice versa.
 
 $y = \\arcsin(x)$ : An increasing S-shaped curve.
 
@@ -1821,8 +1827,24 @@ The resulting functions — $\\arcsin$, $\\arccos$, $\\arctan$, and their recipr
     }),
   };
 
+  const inverseReciprocalTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Inverses of the reciprocal functions',
+    preface: 'Each inverse reciprocal function can be rewritten with an ordinary inverse function of $1/x$. Their domains and ranges come with gaps.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Reduce to arcsin, arccos, arctan',
+    conclusion: 'For computation, switch to $\\arcsin(1/x)$, $\\arccos(1/x)$ or $\\arctan(1/x)$, watching the domain each one needs.',
+    root: { name: 'Inverse reciprocal functions', sub: 'arccsc · arcsec · arccot' },
+    children: [
+      { id: 'acsc', name: 'arccsc', symbol: '$\\arcsin(1/x)$', items: [ { label: 'Domain', text: '$|x| \\geq 1$' }, { label: 'Range', text: '$[-\\pi/2, \\pi/2]$ without $0$' } ] },
+      { id: 'asec', name: 'arcsec', symbol: '$\\arccos(1/x)$', items: [ { label: 'Domain', text: '$|x| \\geq 1$' }, { label: 'Range', text: '$[0, \\pi]$ without $\\pi/2$' } ] },
+      { id: 'acot', name: 'arccot', symbol: '$\\arctan(1/x)$ for $x > 0$', items: [ { label: 'Domain', text: 'all reals' }, { label: 'Range', text: '$(0, \\pi)$' } ] },
+    ],
+  };
+
    return {
       props:{
+    inverseReciprocalTree,
     demoUnits,
          sectionsContent,
          introContent,
@@ -1844,7 +1866,7 @@ The resulting functions — $\\arcsin$, $\\arccos$, $\\arctan$, and their recipr
     }
    }
 
-export default function InverseFunctionsPage({
+export default function InverseFunctionsPage({inverseReciprocalTree, 
   seoData,
   demoUnits,
   sectionsContent,
@@ -1915,6 +1937,14 @@ export default function InverseFunctionsPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="inverse-reciprocal-tree"
+            title="Inverse reciprocal functions"
+            source="/trigonometry/inverse-functions"
+          >
+            <TopDownTree data={inverseReciprocalTree} />
+          </DiagramFrame>,
         ]
     },
     {

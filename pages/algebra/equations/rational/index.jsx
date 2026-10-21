@@ -10,6 +10,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -195,7 +197,9 @@ Rational equations arise naturally from rates, proportions, and any setting wher
 
   obj2: {
     title: `Domain Restrictions`,
-    content: `Before manipulating a rational equation in any way, the values that make any denominator zero must be identified and excluded from the domain. These excluded values are never solutions, regardless of what subsequent algebra might suggest.
+    content: `Before manipulating a rational equation in any way, the values that make any denominator zero must be identified and excluded from the domain.
+
+@academic[rule_plain:These excluded values are never solutions, regardless of what subsequent algebra might suggest.]@
 
 Consider the equation $\\frac{x}{x - 3} = \\frac{9}{x - 3} + 2$. The denominator $x - 3$ equals zero when $x = 3$, so $x = 3$ is excluded from the domain. This restriction is declared at the outset and carries through every step of the solution.
 
@@ -241,7 +245,9 @@ To solve your own rational equation with each step shown, use the [rational equa
 
   obj4: {
     title: `Extraneous Solutions`,
-    content: `Multiplying both sides of an equation by an expression containing the variable is not a reversible operation. When that expression equals zero for some value of $x$, the multiplication maps a false statement to a true one, potentially creating solutions that do not satisfy the original equation. These are extraneous solutions.
+    content: `@academic[rule_plain:Multiplying both sides of an equation by an expression containing the variable is not a reversible operation. When that expression equals zero for some value of $x$, the multiplication maps a false statement to a true one, potentially creating solutions that do not satisfy the original equation.]@
+
+These are extraneous solutions.
 
 Return to the equation $\\frac{x}{x - 3} = \\frac{9}{x - 3} + 2$. The domain excludes $x = 3$. Multiply both sides by $(x - 3)$:
 
@@ -351,7 +357,9 @@ The factoring step is not optional. Attempting to clear unfactored denominators 
 @academic[formula_callout:Proportions and Cross-Multiplication
 $$\\frac{A}{B} = \\frac{C}{D}$$]@
 
-Cross-multiplication converts this into the polynomial equation $AD = BC$, provided $B \\neq 0$ and $D \\neq 0$. This is a special case of clearing denominators — the LCD is $BD$, and multiplying both sides by $BD$ produces $AD = BC$ directly.
+@academic[rule_plain:Cross-multiplication converts this into the polynomial equation $AD = BC$, provided $B \\neq 0$ and $D \\neq 0$.]@
+
+This is a special case of clearing denominators — the LCD is $BD$, and multiplying both sides by $BD$ produces $AD = BC$ directly.
 
 For example, $\\frac{x + 1}{x - 2} = \\frac{3}{4}$ becomes $4(x + 1) = 3(x - 2)$, which simplifies to $4x + 4 = 3x - 6$, giving $x = -10$. Since $-10 \\neq 2$, the solution is valid.
 
@@ -535,8 +543,25 @@ const schemas = {
     }),
   };
 
+  const rationalSubtypeTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Four kinds of rational equation',
+    preface: 'Rational equations differ in what sits in the denominators. The kind decides how to clear them.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Every kind ends with a check',
+    conclusion: 'Whatever the method, a candidate that makes a denominator zero is excluded.',
+    root: { name: 'Rational equations', sub: '4 subtypes' },
+    children: [
+      { id: 'mono', name: 'Monomial denominators', items: [ { label: 'LCD', text: 'the highest power of $x$' } ], flag: true, warn: '$x \\neq 0$' },
+      { id: 'poly', name: 'Polynomial denominators', items: [ { label: 'First', text: 'factor every denominator' }, { label: 'LCD', text: 'product of the distinct factors' } ] },
+      { id: 'prop', name: 'Proportion', symbol: '$A/B = C/D$', items: [ { label: 'Method', text: 'cross-multiply to $AD = BC$' } ], flag: true, warn: '$B, D \\neq 0$' },
+      { id: 'red', name: 'Reducible', items: [ { label: 'Looks like', text: 'negative exponents or $x + 1/x$' }, { label: 'First', text: 'rewrite as a standard rational equation' } ] },
+    ],
+  };
+
    return {
   props: {
+    rationalSubtypeTree,
     sectionsContent,
     introContent,
     obj3Table,
@@ -556,7 +581,7 @@ const schemas = {
 }
    }
 
-export default function RationalEquationsPage({
+export default function RationalEquationsPage({rationalSubtypeTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -672,6 +697,14 @@ export default function RationalEquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj9-diagram'}
+            id="rational-equation-subtypes-tree"
+            title="Four kinds of rational equation"
+            source="/algebra/equations/rational"
+          >
+            <TopDownTree data={rationalSubtypeTree} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

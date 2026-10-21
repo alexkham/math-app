@@ -1235,7 +1235,11 @@ export async function getStaticProps(){
 
 This type of experiment arises when the only information available is that a value lies somewhere between two limits, and there is no mechanism that biases one sub-interval over another. The uncertainty is purely geometric: probability corresponds to relative length, not to isolated points. Because the outcomes form a continuum, individual values have zero probability; only ranges matter.
 
-The defining feature of this experiment is complete symmetry across the interval. If one interval is twice as long as another, it is twice as likely to contain the outcome. Nothing else distinguishes outcomes.
+The defining feature of this experiment is complete symmetry across the interval.
+
+@academic[rule_plain:If one interval is twice as long as another, it is twice as likely to contain the outcome.]@
+
+Nothing else distinguishes outcomes.
 
 Like the [discrete uniform distribution](!/probability/distributions/discrete/uniform), the continuous uniform distribution is built on the idea of complete symmetry, no outcome is favored over another. The difference lies only in how probability is assigned: [discrete uniform](!/probability/distributions/discrete/uniform) spreads probability across a finite set of distinct values, while continuous uniform spreads it evenly across an entire interval, with probability determined by length rather than individual points.
       `,

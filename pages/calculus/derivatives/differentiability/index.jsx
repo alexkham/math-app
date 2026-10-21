@@ -16,6 +16,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -452,7 +454,9 @@ A vertical tangent line has undefined slope, so the derivative does not exist in
   obj6: {
     title: `Discontinuities`,
     content: `
-If $f$ is not [continuous](!/calculus/limits/continuity) at $a$, then $f$ is not differentiable at $a$. Since differentiability implies continuity, any discontinuity automatically rules out differentiability.
+@academic[rule_corollary_plain:If $f$ is not [continuous](!/calculus/limits/continuity) at $a$, then $f$ is not differentiable at $a$.]@
+
+Since differentiability implies continuity, any discontinuity automatically rules out differentiability.
 
 At a jump discontinuity, the function leaps from one value to another. No tangent line can bridge the gap. At an infinite discontinuity (vertical asymptote), the function blows up—there is no point $(a, f(a))$ through which a tangent could pass. At a removable discontinuity, the limit exists but either $f(a)$ is undefined or differs from the limit; redefining $f(a)$ to equal the limit restores continuity and may restore differentiability.
 
@@ -482,7 +486,7 @@ $$f'_-(a) = \\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h} \\qquad f'_+(a) = \\li
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
-The two-sided derivative $f'(a)$ exists if and only if both one-sided derivatives exist, are finite, and are equal: $f'_-(a) = f'_+(a)$.
+@academic[rule_theorem_plain:The two-sided derivative $f'(a)$ exists if and only if both one-sided derivatives exist, are finite, and are equal: $f'_-(a) = f'_+(a)$.]@
 
 One-sided derivatives appear naturally at endpoints of closed intervals, where only one direction of approach is available. They also arise at boundaries of piecewise functions, where different formulas govern the left and right sides. Checking whether the one-sided derivatives match at a boundary is the standard test for differentiability of a piecewise-defined function.
 `,
@@ -696,8 +700,30 @@ const schemas = {
     }),
   };
 
+  const differentiabilityFailureTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Four ways a derivative can fail',
+    preface: 'A function can fail to be differentiable at a point in four distinct ways. Three of them keep the function continuous.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Continuity is not enough',
+    conclusion: 'A corner, a cusp or a vertical tangent can sit on a continuous graph. Only a discontinuity rules out differentiability before any derivative is computed.',
+    root: { name: 'Differentiability failure', sub: '4 types' },
+    children: [
+      { id: 'corner', name: 'Corner', symbol: '$|x|$ at $0$', items: [
+        { label: 'One-sided derivatives', text: 'finite but unequal' }, { label: 'Continuous', text: 'yes' } ] },
+      { id: 'cusp', name: 'Cusp', symbol: '$x^{2/3}$ at $0$', items: [
+        { label: 'One-sided derivatives', text: 'infinite, opposite signs' }, { label: 'Continuous', text: 'yes' } ] },
+      { id: 'vert', name: 'Vertical tangent', symbol: '$x^{1/3}$ at $0$', items: [
+        { label: 'Derivative limit', text: '$\\pm\\infty$ from both sides' }, { label: 'Continuous', text: 'yes, smooth graph' } ] },
+      { id: 'disc', name: 'Discontinuity', flag: true, warn: 'not continuous, so not differentiable', items: [
+        { label: 'Kinds', text: 'jump, infinite or removable' } ] },
+    ],
+    legend: [{ label: 'continuous but not differentiable' }, { label: 'not even continuous', tone: 'warn' }],
+  };
+
   return {
   props: {
+    differentiabilityFailureTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -717,7 +743,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({differentiabilityFailureTree, seoData, sectionsContent, introContent, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -833,6 +859,14 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj10.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'obj10-diagram'}
+            id="differentiability-failure-tree"
+            title="Four ways differentiability fails"
+            source="/calculus/derivatives/differentiability"
+          >
+            <TopDownTree data={differentiabilityFailureTree} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

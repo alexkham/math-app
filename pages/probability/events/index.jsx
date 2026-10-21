@@ -942,7 +942,11 @@ The relations above can be packaged with their meaning and the set-form they cor
       content:`
       Probabilities are attached to events, not to individual outcomes in isolation. Once events are understood as meaningful collections of outcomes, assigning probabilities becomes the way we measure how likely these situations are to occur.
 
-Larger events naturally represent more possibilities, and smaller events represent fewer. When two events cannot happen together, their chances simply add. When events overlap, their probabilities interact through the structure of that overlap.
+Larger events naturally represent more possibilities, and smaller events represent fewer.
+
+@academic[rule_axiom_plain:When two events cannot happen together, their chances simply add.]@
+
+When events overlap, their probabilities interact through the structure of that overlap.
 
 This section does not introduce formulas yet — only the intuitive idea that probability is a measure placed on events, and the structure of the events themselves determines how those probabilities behave.
 `,

@@ -12,6 +12,8 @@ import eratosthenesSieveDiagrams from '@/app/components/visualizations/arithmeti
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { renderFactorSet } from '@/app/utils/illustrations/arithmetic/divisibility/factorSet'
 import { renderPrimeFactorization } from '@/app/utils/illustrations/arithmetic/divisibility/primeFactorization'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -202,7 +204,9 @@ The first primes are:
 @academic[formula_callout:Definition
 $$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, \\ldots$$]@
 
-The number $2$ is the only even prime — every other even number is divisible by $2$ and therefore composite. The number $1$ is neither prime nor composite: it has exactly one positive divisor (itself), while primes are required to have exactly two.
+@academic[rule_theorem_plain:The number $2$ is the only even prime — every other even number is divisible by $2$ and therefore composite.]@
+
+The number $1$ is neither prime nor composite: it has exactly one positive divisor (itself), while primes are required to have exactly two.
 
 The exclusion of $1$ is not arbitrary. If $1$ were prime, the fundamental theorem of arithmetic would fail: $12$ could be factored as $2^2 \\cdot 3$ or $1 \\cdot 2^2 \\cdot 3$ or $1^5 \\cdot 2^2 \\cdot 3$, and uniqueness of prime factorization would be lost.`,
     before: ``,
@@ -211,7 +215,9 @@ The exclusion of $1$ is not arbitrary. If $1$ were prime, the fundamental theore
   },
   obj2: {
     title: `Infinitude of Primes`,
-    content: `There are infinitely many prime numbers. Euclid's proof, over two thousand years old, is one of the most celebrated arguments in all of mathematics.
+    content: `@academic[rule_theorem_plain:There are infinitely many prime numbers.]@
+
+Euclid's proof, over two thousand years old, is one of the most celebrated arguments in all of mathematics.
 
 Assume, for contradiction, that only finitely many primes exist: $p_1, p_2, \\ldots, p_k$. Form the number:
 
@@ -270,7 +276,9 @@ No matter how the factorization is carried out — whether starting by dividing 
 
 Finding the factorization uses repeated division by the smallest available prime. Divide $n$ by $2$ as many times as possible, then by $3$, then by $5$, and so on. For $252$: $252 \\div 2 = 126$, $126 \\div 2 = 63$, $63 \\div 3 = 21$, $21 \\div 3 = 7$, and $7$ is prime. So $252 = 2^2 \\cdot 3^2 \\cdot 7$.
 
-Prime factorization connects directly to the [GCD](!/arithmetic/divisibility/gcd) and [LCM](!/arithmetic/divisibility/lcm). Given the factorizations of two numbers, the GCD takes the minimum [power](!/algebra/powers) of each shared prime, and the LCM takes the maximum power of each prime that appears in either factorization.`,
+Prime factorization connects directly to the [GCD](!/arithmetic/divisibility/gcd) and [LCM](!/arithmetic/divisibility/lcm).
+
+@academic[rule_plain:Given the factorizations of two numbers, the GCD takes the minimum [power](!/algebra/powers) of each shared prime, and the LCM takes the maximum power of each prime that appears in either factorization.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -454,8 +462,29 @@ const schemas = {
     }),
   };
 
+  const primeTypeTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Named families of primes',
+    preface: 'Some primes follow a pattern special enough to earn a name. Four families come up again and again.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Patterns, not guarantees',
+    conclusion: 'A formula that produces primes for small inputs can fail later: $2^{11} - 1$ is composite, and Euler disproved the Fermat conjecture.',
+    root: { name: 'Types of primes', sub: '4 families' },
+    children: [
+      { id: 'mers', name: 'Mersenne', symbol: '$2^p - 1$, $p$ prime', items: [
+        { label: 'Examples', text: '3, 7, 31, 127' }, { label: 'Note', text: 'the largest known primes' } ], flag: true, warn: '$2^{11} - 1$ is composite' },
+      { id: 'ferm', name: 'Fermat', symbol: '$2^{2^n} + 1$', items: [
+        { label: 'Known', text: 'only five: 3 up to 65537' } ], flag: true, warn: 'Euler disproved the conjecture' },
+      { id: 'twin', name: 'Twin', symbol: '$p$, $p + 2$', items: [
+        { label: 'Open question', text: 'are there infinitely many?' } ] },
+      { id: 'sg', name: 'Sophie Germain', symbol: '$p$ and $2p + 1$ prime', items: [
+        { label: 'Used in', text: 'cryptography (safe primes)' } ] },
+    ],
+  };
+
    return {
   props:{
+    primeTypeTree,
      sectionsContent,
      introContent,
      faqQuestions,
@@ -472,7 +501,7 @@ description: "Learn prime numbers: definition, Euclid's infinitude proof, sieve 
 }
    }
 
-export default function PrimeNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
+export default function PrimeNumbersPage({primeTypeTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
     
   const genericSections=[
     // {
@@ -545,6 +574,14 @@ export default function PrimeNumbersPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="prime-types-tree"
+            title="Named families of primes"
+            source="/algebra/sequences/prime-numbers"
+          >
+            <TopDownTree data={primeTypeTree} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

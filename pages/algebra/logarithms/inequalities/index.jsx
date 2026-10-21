@@ -140,7 +140,9 @@ obj0: {
 },
   obj1: {
     title: `Base Greater Than One: Direction Preserved`,
-    content: `When $a > 1$, the function $f(x) = \\log_a(x)$ is strictly increasing. Larger inputs produce larger outputs, so inequality direction is preserved when converting between logarithmic and exponential forms.
+    content: `@academic[rule_theorem_plain:When $a > 1$, the function $f(x) = \\log_a(x)$ is strictly increasing.]@
+
+Larger inputs produce larger outputs, so inequality direction is preserved when converting between logarithmic and exponential forms.
 
 For $\\log_a(x) > k$ with $a > 1$:
 @academic[formula_callout:Base Greater Than One: Direction Preserved
@@ -171,7 +173,9 @@ To solve your own logarithmic inequality with each step shown, use the [logarith
   },
   obj2: {
     title: `Base Between Zero and One: Direction Reversed`,
-    content: `When $0 < a < 1$, the function $f(x) = \\log_a(x)$ is strictly decreasing. Larger inputs produce smaller outputs, so inequality direction reverses.
+    content: `@academic[rule_theorem_plain:When $0 < a < 1$, the function $f(x) = \\log_a(x)$ is strictly decreasing.]@
+
+Larger inputs produce smaller outputs, so inequality direction reverses.
 
 For $\\log_a(x) > k$ with $0 < a < 1$:
 @academic[formula_callout:Base Between Zero and One: Direction Reversed
@@ -249,7 +253,9 @@ Each logarithm in the original inequality carries its own argument, and each arg
   },
   obj4: {
     title: `Domain Considerations`,
-    content: `Every logarithmic argument must be positive. This constraint intersects with the algebraic solution, often restricting the answer.
+    content: `@academic[rule_plain:Every logarithmic argument must be positive.]@
+
+This constraint intersects with the algebraic solution, often restricting the answer.
 
 Two cases show how this plays out. In the first, the domain changes nothing; in the second, it cuts the answer down.
 

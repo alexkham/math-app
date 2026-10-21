@@ -574,6 +574,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1121,8 +1123,24 @@ Since "all possible outcomes" appears directly in the formula, it makes sense to
     }),
   };
 
+  const sampleSpaceSizeLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Sample spaces by size',
+    preface: 'Different scenarios produce sample spaces of different sizes: a list that ends, a list that never ends, and outcomes that fill a whole interval.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Why the size matters',
+    conclusion: 'The kind of sample space decides how probabilities are assigned and which tools are used: sums over listed outcomes, or [continuous](!/probability/distributions/continuous) densities over intervals.',
+    axis: { top: 'largest', label: 'size of the sample space', bottom: 'smallest' },
+    levels: [
+      { id: 'unc', name: 'Uncountable', sub: 'time or height: $\\Omega = [0, \\infty)$' },
+      { id: 'count', name: 'Countably infinite', sub: 'trials until first success: $\\{1, 2, 3, \\ldots\\}$' },
+      { id: 'fin', name: 'Finite', sub: 'a die: $\\{1, 2, 3, 4, 5, 6\\}$' },
+    ],
+  };
+
   return {
     props: {
+    sampleSpaceSizeLevels,
     demoUnits,
       sectionsContent,
       introContent,
@@ -1142,7 +1160,9 @@ Since "all possible outcomes" appears directly in the formula, it makes sense to
   }
 }
 
-export default function SampleSpacePage({
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function SampleSpacePage({sampleSpaceSizeLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -1200,6 +1220,14 @@ export default function SampleSpacePage({
         link:'',
         content:[
             sectionsContent.types.content,
+            <DiagramFrame
+              key={'types-diagram'}
+              id="sample-space-size-pyramid"
+              title="Sample spaces by size"
+              source="/probability/sample-space"
+            >
+              <Hierarchy data={sampleSpaceSizeLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+            </DiagramFrame>,
         ]
     },
     {

@@ -1286,7 +1286,9 @@ The standard [basis](!/linear-algebra/vector-spaces) $\\{\\mathbf{e}_1, \\mathbf
     title: `Orthogonal and Orthonormal Bases`,
     content: `An orthogonal basis is an orthogonal set that [spans](!/linear-algebra/vector-spaces/span) the space. An orthonormal basis is an orthonormal set that spans the space.
 
-In $\\mathbb{R}^n$, an orthogonal set of $n$ nonzero vectors is automatically a basis — independence is guaranteed by orthogonality, and $n$ independent vectors in an $n$-dimensional space automatically span. So the only check needed is: do I have $n$ pairwise-orthogonal nonzero vectors? If yes, they form a basis.
+@academic[rule_corollary_plain:In $\\mathbb{R}^n$, an orthogonal set of $n$ nonzero vectors is automatically a basis — independence is guaranteed by orthogonality, and $n$ independent vectors in an $n$-dimensional space automatically span.]@
+
+So the only check needed is: do I have $n$ pairwise-orthogonal nonzero vectors? If yes, they form a basis.
 
 Orthonormal bases exist for every finite-dimensional [inner product](!/linear-algebra/orthogonality/inner-product) space. The [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) constructs one from any given basis. This means the computational advantages of orthonormal bases are always available — any space that has a basis at all has an orthonormal one.`,
     before: ``,
@@ -1324,7 +1326,7 @@ So $\\mathbf{x} = 2\\sqrt{2}\\,\\mathbf{q}_1 + \\sqrt{6}\\,\\mathbf{q}_2 + 0 \\c
     title: `Orthogonal Matrices`,
     content: `An $n \\times n$ [matrix](!/linear-algebra/matrix) $Q$ is [orthogonal](!/linear-algebra/matrix/types) if its columns form an orthonormal set. This is equivalent to $Q^TQ = QQ^T = I$, which is equivalent to $Q^{-1} = Q^T$.
 
-The rows of an orthogonal matrix also form an orthonormal set — orthogonality of columns and rows go together.
+@academic[rule_theorem_plain:The rows of an orthogonal matrix also form an orthonormal set — orthogonality of columns and rows go together.]@
 
 The [determinant](!/linear-algebra/determinants) of an orthogonal matrix is $\\pm 1$, since $1 = \\det(I) = \\det(Q^TQ) = \\det(Q)^2$. When $\\det(Q) = +1$, the matrix represents a [rotation](!/linear-algebra/transformations/geometric). When $\\det(Q) = -1$, it represents a rotation composed with a reflection.
 
@@ -1379,7 +1381,9 @@ $$\\mathbf{x} \\cdot \\mathbf{y} = \\tfrac{1}{2}\\left(\\|\\mathbf{x} + \\mathbf
 
 preserving every length forces $T$ to preserve every dot product, and with it every angle and every distance between points. Nothing is stretched, squashed or sheared.
 
-For a matrix $Q$ this is exactly the orthogonality condition of the earlier sections. If $Q^TQ = I$ then $\\|Q\\mathbf{x}\\|^2 = \\mathbf{x}^TQ^TQ\\mathbf{x} = \\|\\mathbf{x}\\|^2$. Conversely, a $Q$ that preserves all dot products satisfies $(Q\\mathbf{e}_i) \\cdot (Q\\mathbf{e}_j) = \\mathbf{e}_i \\cdot \\mathbf{e}_j$, so its columns are orthonormal and $Q^TQ = I$. The linear isometries of $\\mathbb{R}^n$ are precisely the orthogonal matrices.
+For a matrix $Q$ this is exactly the orthogonality condition of the earlier sections. If $Q^TQ = I$ then $\\|Q\\mathbf{x}\\|^2 = \\mathbf{x}^TQ^TQ\\mathbf{x} = \\|\\mathbf{x}\\|^2$. Conversely, a $Q$ that preserves all dot products satisfies $(Q\\mathbf{e}_i) \\cdot (Q\\mathbf{e}_j) = \\mathbf{e}_i \\cdot \\mathbf{e}_j$, so its columns are orthonormal and $Q^TQ = I$.
+
+@academic[rule_theorem_plain:The linear isometries of $\\mathbb{R}^n$ are precisely the orthogonal matrices.]@
 
 They split into two families by the determinant. Those with $\\det Q = 1$ are [rotations](!/linear-algebra/transformations/geometric), which preserve orientation; those with $\\det Q = -1$ reverse it, and in the plane these are exactly the reflections in a line through the origin. In space an isometry is a rotation about an axis, a reflection in a plane, or a rotation combined with a reflection. Translations also preserve distance but move the origin, so they are not linear and fall outside this classification.
 

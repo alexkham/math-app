@@ -3028,7 +3028,7 @@ $$A \\setminus B = \\{1, 2\\}$$]@
 @academic[formula_callout:Set Difference
 $$B \\setminus A = \\{5\\}$$]@
 
-Unlike union and intersection, set difference is not commutative — the order of $A$ and $B$ matters.
+@academic[rule_plain:Unlike union and intersection, set difference is not commutative — the order of $A$ and $B$ matters.]@
 
 Set difference relates to complement: when $B \\subseteq U$, the complement $B^c$ equals $U \\setminus B$. More generally:
 

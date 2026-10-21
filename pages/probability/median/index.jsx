@@ -2269,7 +2269,9 @@ If $c < \\frac{a+b}{2}$: median $= b - \\sqrt{\\frac{(b-a)(b-c)}{2}}$
 
 ## Uniqueness
 
-Continuous distributions with strictly increasing CDFs have exactly one median. The smoothness of the CDF eliminates the ambiguity present in discrete cases.
+@academic[rule_plain:Continuous distributions with strictly increasing CDFs have exactly one median.]@
+
+The smoothness of the CDF eliminates the ambiguity present in discrete cases.
 
 If the CDF has flat regions (constant over an interval), any value in that interval satisfies the median definition, creating non-uniqueness.
 

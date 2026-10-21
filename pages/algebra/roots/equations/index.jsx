@@ -303,7 +303,7 @@ Isolation ensures that raising to a power actually eliminates the radical. The t
 
   obj4: {
     title: `Extraneous Solutions`,
-    content: `Squaring both sides can introduce false solutions — values that satisfy the squared equation but not the original.
+    content: `@academic[rule_plain:Squaring both sides can introduce false solutions — values that satisfy the squared equation but not the original.]@
 
 @academic[formula_callout:Extraneous Solutions
 $$\\sqrt{x} = -3$$]@

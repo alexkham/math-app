@@ -760,7 +760,8 @@ $$r_1r_2 + r_1r_3 + r_2r_3 = c$$]@
 @academic[formula_callout:Vieta's Formulas
 $$r_1 \\cdot r_2 \\cdot r_3 = -d$$]@
 
-The pattern extends to any degree: the $k$-th elementary symmetric polynomial of the roots equals $(-1)^k$ times the coefficient of $x^{n-k}$ in a monic degree-$n$ polynomial.
+@academic[rule_theorem:Vieta's Formulas
+The pattern extends to any degree: the $k$-th elementary symmetric polynomial of the roots equals $(-1)^k$ times the coefficient of $x^{n-k}$ in a monic degree-$n$ polynomial.]@
 
 These relationships are useful for verifying [factorizations](!/algebra/polynomials/factoring). After finding roots $1$, $2$, and $3$ for $x^3 - 6x^2 + 11x - 6$, Vieta's formulas confirm: $1 + 2 + 3 = 6 = -(-6)$, $1 \\cdot 2 + 1 \\cdot 3 + 2 \\cdot 3 = 11$, and $1 \\cdot 2 \\cdot 3 = 6 = -(-6)$. All three match the coefficients. They also allow solving problems where individual roots are not needed — for instance, finding the sum of the squares of the roots using $(r_1 + r_2 + r_3)^2 - 2(r_1r_2 + r_1r_3 + r_2r_3) = 36 - 22 = 14$.`,
     before: ``,

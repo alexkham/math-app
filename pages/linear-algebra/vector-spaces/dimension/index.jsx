@@ -2872,7 +2872,8 @@ By convention, the zero space $\\{\\mathbf{0}\\}$ has dimension $0$. Its only "b
 
   obj2: {
     title: `The Basis Size Theorem`,
-    content: `If a vector space $V$ has a basis with $n$ elements, then every basis for $V$ has exactly $n$ elements.
+    content: `@academic[rule_theorem:Basis Size Theorem
+If a vector space $V$ has a basis with $n$ elements, then every basis for $V$ has exactly $n$ elements.]@
 
 The proof rests on two supporting facts. First, in a space spanned by $n$ vectors, any set of more than $n$ vectors is [dependent](!/linear-algebra/vector-spaces/linear-independence). Second, any [spanning](!/linear-algebra/vector-spaces/span) set contains at least as many vectors as any independent set.
 
@@ -2935,7 +2936,9 @@ An independent set of fewer than $n$ vectors can always be extended to a basis b
     title: `Dimension and Spanning`,
     content: `Dimension also constrains spanning sets from the other direction.
 
-In an $n$-dimensional space, any set of fewer than $n$ vectors cannot [span](!/linear-algebra/vector-spaces/span) the space. The span has dimension at most $k < n$, so it is a proper [subspace](!/linear-algebra/vector-spaces/subspaces) — some vectors in $V$ are unreachable. In $\\mathbb{R}^3$, two vectors can span at most a plane, never all of $\\mathbb{R}^3$.
+@academic[rule_theorem_plain:In an $n$-dimensional space, any set of fewer than $n$ vectors cannot [span](!/linear-algebra/vector-spaces/span) the space.]@
+
+The span has dimension at most $k < n$, so it is a proper [subspace](!/linear-algebra/vector-spaces/subspaces) — some vectors in $V$ are unreachable. In $\\mathbb{R}^3$, two vectors can span at most a plane, never all of $\\mathbb{R}^3$.
 
 A spanning set of exactly $n$ vectors is automatically a basis. Independence comes for free once the count hits the dimension. This is the mirror image of the independence shortcut: to verify that $n$ vectors span an $n$-dimensional space, it suffices to check spanning alone, and independence follows.
 
@@ -2988,7 +2991,9 @@ $$V = W_1 \\oplus W_2 \\iff V = W_1 + W_2 \\text{ and } W_1 \\cap W_2 = \\{\\mat
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-Every vector in a direct sum has a unique decomposition as $\\mathbf{w}_1 + \\mathbf{w}_2$ with $\\mathbf{w}_1 \\in W_1$ and $\\mathbf{w}_2 \\in W_2$. For direct sums, the dimension formula collapses to plain addition:
+@academic[rule_theorem_plain:Every vector in a direct sum has a unique decomposition as $\\mathbf{w}_1 + \\mathbf{w}_2$ with $\\mathbf{w}_1 \\in W_1$ and $\\mathbf{w}_2 \\in W_2$.]@
+
+For direct sums, the dimension formula collapses to plain addition:
 
 @academic[formula_callout:Direct Sum Dimension
 $$V = W_1 \\oplus W_2 \\Rightarrow \\dim(V) = \\dim(W_1) + \\dim(W_2)$$
@@ -3024,7 +3029,7 @@ The rank-nullity theorem is the fundamental bridge between abstract dimension th
   },
   obj10: {
     title: `Dimension and Isomorphism`,
-    content: `Two finite-dimensional vector spaces over the same field are isomorphic — structurally identical as vector spaces — if and only if they have the same dimension.
+    content: `@academic[rule_theorem_plain:Two finite-dimensional vector spaces over the same field are isomorphic — structurally identical as vector spaces — if and only if they have the same dimension.]@
 
 The forward direction is straightforward: an isomorphism maps a [basis](!/linear-algebra/vector-spaces) to a basis, preserving the count. The reverse direction is the deeper fact: given any two $n$-dimensional spaces $V$ and $W$, choosing a basis for each creates coordinate maps $V \\to \\mathbb{R}^n$ and $W \\to \\mathbb{R}^n$. Composing one with the inverse of the other gives a direct isomorphism $V \\to W$.
 
@@ -3196,8 +3201,24 @@ const schemas = {
     ],
   };
 
+  const setSizeLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Dimension fixes the counts',
+    preface: 'In an $n$-dimensional space, dimension caps independent sets from above and spanning sets from below. A basis sits exactly at $n$.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'The two shortcuts',
+    conclusion: '$n$ independent vectors in an $n$-dimensional space form a basis, and so do $n$ spanning vectors: once the count reaches the dimension, the other property comes for free.',
+    axis: { top: 'most vectors', label: 'size of the set', bottom: 'fewest vectors' },
+    levels: [
+      { id: 'spanning', name: '[Spanning set](!/linear-algebra/vector-spaces/span)', sub: 'at least $n$ vectors; extras are redundant' },
+      { id: 'basis', name: '[Basis](!/linear-algebra/vector-spaces/basis)', sub: 'exactly $n = \\dim V$ vectors' },
+      { id: 'indep', name: '[Independent set](!/linear-algebra/vector-spaces/linear-independence)', sub: 'at most $n$ vectors; can be extended' },
+    ],
+  };
+
 return {
   props:{
+    setSizeLevels,
     subspaceDimLevels,
     demoUnits,
     sectionsContent,
@@ -3223,7 +3244,7 @@ return {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DimensionPage({subspaceDimLevels, seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function DimensionPage({setSizeLevels, subspaceDimLevels, seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3303,6 +3324,14 @@ export default function DimensionPage({subspaceDimLevels, seoData, sectionsConte
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrameV2
+            key={'obj6-diagram'}
+            id="set-size-dimension-pyramid"
+            title="Independent, basis, spanning: sizes fixed by dimension"
+            source="/linear-algebra/vector-spaces/dimension"
+          >
+            <Hierarchy data={setSizeLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+          </DiagramFrameV2>,
         ]
     },
     {

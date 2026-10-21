@@ -357,7 +357,11 @@ The [indefinite integral](!/calculus/integrals/indefinite) reverses differentiat
 @academic[formula_callout:Indefinite Integrals
 $$\\int f(x)\\, dx = F(x) + C$$]@
 
-The constant $C$ is essential. Since the derivative of any constant is zero, infinitely many functions share the same derivative. The "$+ C$" represents this entire family.
+The constant $C$ is essential.
+
+@academic[rule_corollary_plain:Since the derivative of any constant is zero, infinitely many functions share the same derivative.]@
+
+The "$+ C$" represents this entire family.
 
 Finding antiderivatives is the core skill of indefinite integration. Unlike differentiation, which follows systematic rules, integration often requires insight, technique, and pattern recognition.
 `,

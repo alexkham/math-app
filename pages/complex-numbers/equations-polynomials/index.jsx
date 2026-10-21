@@ -1316,7 +1316,9 @@ Now suppose $p(z_0) = 0$. Then $\\overline{p(z_0)} = \\bar{0} = 0$, so $p(\\bar{
 
 Consequences abound. A real quadratic with complex roots has the form $(z - z_0)(z - \\bar{z_0})$ with conjugate pair $z_0, \\bar{z_0}$. This product expands to $z^2 - 2\\text{Re}(z_0)z + |z_0|^2$, a real quadratic as expected.
 
-A real polynomial of odd degree must have at least one real root. Complex roots pair off, consuming an even number of the $n$ roots. With $n$ odd, at least one root remains unpaired — and an unpaired root of a real polynomial must be real (otherwise its conjugate would also be a root).
+@academic[rule_corollary_plain:A real polynomial of odd degree must have at least one real root.]@
+
+Complex roots pair off, consuming an even number of the $n$ roots. With $n$ odd, at least one root remains unpaired — and an unpaired root of a real polynomial must be real (otherwise its conjugate would also be a root).
 
 This explains why every real cubic crosses the real axis: it must have either three real roots or one real root plus a conjugate pair.`,
   after: ``,

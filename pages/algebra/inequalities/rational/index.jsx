@@ -11,6 +11,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -79,6 +81,32 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 // ---------- TABLES ----------
 
 // obj2 — comparison: numerator zero vs denominator zero
+// Concept introduction (section 1) — template C, failure first. Running
+// instance: (x − 2)/(x + 1) > 0, the section's own formula box and the sign
+// chart example of obj3. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its formula box and rule box are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciBreakTable = ciTableOpen(['x', '(x − 2)/(x + 1)', 'really &gt; 0?', 'the guess says']) +
+  ciRow(['−4', '2', 'yes', 'no ✗'], { color: '#a4243b', cols: [3] }) +
+  ciRow(['−3', '2.5', 'yes', 'no ✗'], { shade: true, color: '#a4243b', cols: [3] }) +
+  ciRow(['−1.5', '7', 'yes', 'no ✗'], { color: '#a4243b', cols: [3] }) +
+  ciRow(['−1', 'undefined', 'no', 'no'], { shade: true }) +
+  ciRow(['0', '−2', 'no', 'no']) +
+  ciRow(['2', '0', 'no', 'no'], { shade: true }) +
+  ciRow(['3', '0.25', 'yes', 'yes'], { last: true }) +
+  '</tbody></table>'
+const ciSignsTable = ciTableOpen(['piece of the line', 'x − 2', 'x + 1', '(x − 2)/(x + 1)']) +
+  ciRow(['left of −1', '−', '−', '+'], { color: '#a4243b', cols: [3] }) +
+  ciRow(['between −1 and 2', '−', '+', '−'], { shade: true }) +
+  ciRow(['right of 2', '+', '+', '+'], { last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+
 const obj2Table = `
 <table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
@@ -241,7 +269,11 @@ is rational because the variable $x$ sits inside the denominator $x + 1$. The in
 
 Rational inequalities ask where a rational expression is positive, negative, or zero. Unlike [rational equations](!/algebra/equations/rational), which ask only where the expression equals zero, inequalities require knowing the sign of the expression across the entire number line. This is a harder question, and it demands the full sign chart rather than just the roots of the numerator.
 
-The expression $\\frac{P(x)}{Q(x)}$ is a quotient of two [polynomials](!/algebra/polynomials). Its sign at any point where it is defined equals the sign of the product $P(x) \\cdot Q(x)$, because a fraction is positive when numerator and denominator share the same sign, and negative when they differ. This observation is what makes the sign chart — originally a tool for products — applicable to quotients as well.`,
+The expression $\\frac{P(x)}{Q(x)}$ is a quotient of two [polynomials](!/algebra/polynomials).
+
+@academic[rule_plain:Its sign at any point where it is defined equals the sign of the product $P(x) \\cdot Q(x)$, because a fraction is positive when numerator and denominator share the same sign, and negative when they differ.]@
+
+This observation is what makes the sign chart — originally a tool for products — applicable to quotients as well.`,
     before: ``,
     after: ``,
     link: '',
@@ -253,7 +285,11 @@ The expression $\\frac{P(x)}{Q(x)}$ is a quotient of two [polynomials](!/algebra
 
 Numerator zeros are values where $P(x) = 0$. At these points the rational expression equals zero: $\\frac{0}{Q(x)} = 0$ (provided $Q(x) \\neq 0$). These are candidates for inclusion in the solution set when the inequality is non-strict ($\\leq$ or $\\geq$), because zero satisfies $\\leq 0$ and $\\geq 0$.
 
-Denominator zeros are values where $Q(x) = 0$. At these points the expression is undefined — division by zero has no value. These are never part of the solution set, regardless of the inequality symbol. Even for $\\frac{P(x)}{Q(x)} \\leq 0$, a denominator zero is excluded because the expression does not exist there.
+Denominator zeros are values where $Q(x) = 0$.
+
+@academic[rule_plain:At these points the expression is undefined — division by zero has no value. These are never part of the solution set, regardless of the inequality symbol.]@
+
+Even for $\\frac{P(x)}{Q(x)} \\leq 0$, a denominator zero is excluded because the expression does not exist there.
 
 Both types of critical points go on the sign chart. Both create interval boundaries. The expression can change sign at either type. The difference appears only at the endpoint-inclusion step: numerator zeros may be included, denominator zeros are always excluded.
 
@@ -365,7 +401,9 @@ To solve your own rational inequality with each step shown, use the [rational in
     title: `Connection to Rational Equations`,
     content: `[Rational equations](!/algebra/equations/rational) and rational inequalities begin with the same kind of expression — a quotient $\\frac{P(x)}{Q(x)}$ — but ask different questions, and therefore require different tools.
 
-A rational equation $\\frac{P(x)}{Q(x)} = 0$ asks where the expression equals zero. The answer depends only on the numerator: $P(x) = 0$ (with denominator zeros excluded). The denominator determines the domain restrictions, but once those are enforced, only the numerator matters. Clearing the denominator by multiplying both sides is safe for equations because the target value is zero, and zero times anything is zero.
+@academic[rule_plain:A rational equation $\\frac{P(x)}{Q(x)} = 0$ asks where the expression equals zero. The answer depends only on the numerator: $P(x) = 0$ (with denominator zeros excluded).]@
+
+The denominator determines the domain restrictions, but once those are enforced, only the numerator matters. Clearing the denominator by multiplying both sides is safe for equations because the target value is zero, and zero times anything is zero.
 
 A rational inequality $\\frac{P(x)}{Q(x)} > 0$ asks where the expression is positive. This depends on both the numerator and the denominator — the sign of each matters in every interval. Clearing the denominator is not safe because the multiplication may need to flip the inequality in some intervals but not others.
 
@@ -512,6 +550,42 @@ const schemas = {
       { x: 3.6, y: 2.4, text: 'solution: −1 < x < 3 or x ≥ 7', pos: 'e', color: 'r' }],
     caption: 'Denominator zeros are walls; the numerator zero 7 joins ≤ 0' };
 
+  // Concept introduction figures (section 1), one running instance: (x − 2)/(x + 1) > 0.
+  const fpCiGuess = { kind: 'domainOpen', svgTitle: 'The guess: numerator positive, so x > 2', range: [-5, 5],
+    rows: [
+      { label: 'the guess: x − 2 > 0', color: 'g', segs: [[2, null, true]], tag: { text: '(2, ∞)', x: 3.7 } },
+    ],
+    caption: 'Treated like an equation: only the numerator decides' };
+  const fpCiBreak = { kind: 'pieces', svgTitle: '(x - 2)/(x + 1) is positive left of -1 and right of 2', xRange: [-6, 5], yRange: [-6, 8],
+    pieces: [
+      { fn: (x) => (x - 2) / (x + 1), from: -6, to: -1.02, ends: [null, null], color: 'f' },
+      { fn: (x) => (x - 2) / (x + 1), from: -0.98, to: 5, ends: [null, null], color: 'f', label: { text: 'y = (x − 2)/(x + 1)', x: 0.3, y: -4.5, pos: 'e' } },
+    ],
+    vlines: [{ x: -1 }],
+    notes: [{ x: -5.8, y: 6, text: 'positive here too', pos: 'e', color: 'r' },
+      { x: 2.4, y: 3, text: 'x > 2: positive', pos: 'e', color: 'f' }],
+    caption: 'Above the axis on two pieces; the guess found only one' };
+  const fpCiAnswer = { kind: 'domainOpen', svgTitle: 'The solution set of (x - 2)/(x + 1) > 0', range: [-5, 5],
+    rows: [
+      { label: '(x − 2)/(x + 1) > 0', color: 'f', segs: [[null, -1, false, true], [2, null, true]], tag: { text: '(−∞, −1) ∪ (2, ∞)', x: 2.6 } },
+    ],
+    caption: 'Two rays; −1 left out because the fraction does not exist there' };
+  const fpCiEnds = { kind: 'domainOpen', svgTitle: 'With >= the numerator zero joins; the denominator zero never does', range: [-5, 5],
+    rows: [
+      { label: '(x − 2)/(x + 1) > 0', color: 'f', segs: [[null, -1, false, true], [2, null, true]], tag: { text: '(−∞, −1) ∪ (2, ∞)', x: 2.6 } },
+      { label: '(x − 2)/(x + 1) ≥ 0', color: 'r', segs: [[null, -1, false, true], [2, null, false]], tag: { text: '(−∞, −1) ∪ [2, ∞)', x: 2.6 } },
+    ],
+    caption: 'With ≥ the dot at 2 fills in; the dot at −1 stays open' };
+
+  const conceptIntroFigures = {
+    guess: renderFunctionPlotV2(fpCiGuess),
+    break: renderFunctionPlotV4(fpCiBreak),
+    answer: renderFunctionPlotV2(fpCiAnswer),
+    ends: renderFunctionPlotV2(fpCiEnds),
+    breakTable: ciBreakTable,
+    signsTable: ciSignsTable,
+  };
+
   const demoUnits = {
     critical: demoUnitFrame({
       svg: inequalityVisualizerDiagrams['rat-simple'],
@@ -535,6 +609,7 @@ const schemas = {
 return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -562,10 +637,76 @@ export default function RationalInequalitiesPage({
   obj4Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'assumption',
+        lead: `For a fraction equation, only the numerator decides the answer.`,
+        content: `A fraction is zero exactly when its top is zero, so $\\frac{x - 2}{x + 1} = 0$ means $x - 2 = 0$, and $x = 2$. The denominator only rules out the value that would break the fraction, here $x = -1$. It is reasonable to expect the same of $\\frac{x - 2}{x + 1} > 0$: make the top positive, $x - 2 > 0$, and the answer is $x > 2$.`,
+        visual: ciSvg('guess'),
+        caption: `The guess: every $x$ greater than $2$, read off the numerator alone.`,
+      },
+      {
+        id: 'break',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Checking values shows the guess is wrong.`,
+        content: [
+          `Put actual numbers into the fraction and compare with what the guess predicts.`,
+          ciTable('breakTable'),
+          `Right of $2$ the guess holds. But at $x = -4$, $-3$ and $-1.5$ the fraction is positive and the guess says no. A whole stretch of answers is missing.`,
+        ],
+        visual: ciSvg('break'),
+        caption: `The curve is above the axis on two separate pieces: right of $2$, which the guess found, and left of the wall at $x = -1$, which it missed. Those are the three "✗" rows of the table.`,
+      },
+      {
+        id: 'diagnosis',
+        lead: `The miss was predictable: left of −1 the denominator is negative.`,
+        content: [
+          `A fraction's sign comes from both parts. A negative over a negative is positive, so wherever $x - 2$ and $x + 1$ are both negative, the fraction is positive even though the top is not. Recording the sign of each part on each piece of the line shows it in advance.`,
+          ciTable('signsTable'),
+          `The expression $\\frac{P(x)}{Q(x)}$ is a quotient of two [polynomials](!/algebra/polynomials).`,
+          `@academic[rule_plain:Its sign at any point where it is defined equals the sign of the product $P(x) \\cdot Q(x)$, because a fraction is positive when numerator and denominator share the same sign, and negative when they differ.]@`,
+          `This observation is what makes the sign chart — originally a tool for products — applicable to quotients as well.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [rational inequality](!/algebra/definitions#rational_inequality) is an inequality involving at least one fraction in which the variable appears in the denominator, such as`,
+        formula: `@academic[formula_callout:Definition
+$$\\frac{x - 2}{x + 1} > 0$$]@`,
+        footer: `Its equation counterpart: [rational equations](!/algebra/equations/rational).`,
+      },
+      {
+        id: 'kind',
+        lead: `A rational inequality is a statement about a fraction's sign, and its answer is a set.`,
+        content: `It is not a number and not a function. It asks where a fraction is positive, negative or zero, and its answer collects those values — for $\\frac{x - 2}{x + 1} > 0$, the two rays left of $-1$ and right of $2$. The variable has to be in the denominator: $\\frac{x + 3}{5} \\leq 1$ is not rational — its denominator is a constant, making it a [linear inequality](!/algebra/inequalities/linear) in disguise.`,
+        visual: ciSvg('answer'),
+        caption: `The two "yes" stretches of the table. The open dot at $2$ is where the fraction is $0$; the open dot at $-1$ is where it does not exist.`,
+      },
+      {
+        id: 'caveat',
+        lead: `The failure becomes the method: every zero of the denominator goes on the chart, and none of them is ever in the answer.`,
+        content: `Wherever the denominator can turn negative, clearing it by multiplying through is unsafe, so the sign chart takes its place. Its boundaries are the zeros of the numerator, where the fraction is $0$, and the zeros of the denominator, where it is undefined. The two behave differently at the end: with $\\geq$ or $\\leq$ a numerator zero joins the answer, but a denominator zero never does, because there is no value there to compare.`,
+        visual: ciSvg('ends'),
+        caption: `Switching $>$ to $\\geq$ fills the dot at $2$, where the fraction equals $0$. The dot at $-1$ stays open under every symbol.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page turns this into a procedure: the two kinds of critical points, the sign chart step by step, the endpoint rules, why cross-multiplication fails, getting an inequality into standard form, worked examples, and how all of this relates to rational equations.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -584,7 +725,7 @@ export default function RationalInequalitiesPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
 

@@ -175,7 +175,9 @@ const sectionsContent = {
     title: `The Basic Shape`,
     content: `The graph of $y = \\log_a(x)$ for $a > 1$ rises slowly from left to right. Starting from extreme negative $y$-values near the $y$-axis, the curve crosses through $(1, 0)$, continues through $(a, 1)$, and extends upward without bound as $x$ increases.
 
-The curve is concave down throughout — it bends toward the $x$-axis. Growth slows as $x$ increases: the gap between $\\log_a(10)$ and $\\log_a(100)$ equals the gap between $\\log_a(1)$ and $\\log_a(10)$. Each multiplication of $x$ by $a$ adds exactly $1$ to the output.
+The curve is concave down throughout — it bends toward the $x$-axis. Growth slows as $x$ increases: the gap between $\\log_a(10)$ and $\\log_a(100)$ equals the gap between $\\log_a(1)$ and $\\log_a(10)$.
+
+@academic[rule_plain:Each multiplication of $x$ by $a$ adds exactly $1$ to the output.]@
 
 For $0 < a < 1$, the shape mirrors vertically. The curve descends from upper left toward lower right, still passing through $(1, 0)$ but now through $(a, 1)$ where $a < 1$ means this point lies to the left of $x = 1$.`,
     before: ``,
@@ -188,7 +190,9 @@ For $0 < a < 1$, the shape mirrors vertically. The curve descends from upper lef
 
 The range $(-\\infty, \\infty)$ appears as the vertical extent. The curve spans all $y$-values, extending upward and downward without bound.
 
-No horizontal asymptote exists. As $x \\to \\infty$, the function continues increasing (for $a > 1$) or decreasing (for $0 < a < 1$), never leveling off. This contrasts with exponential functions, which have horizontal asymptotes.`,
+@academic[rule_plain:No horizontal asymptote exists. As $x \\to \\infty$, the function continues increasing (for $a > 1$) or decreasing (for $0 < a < 1$), never leveling off.]@
+
+This contrasts with exponential functions, which have horizontal asymptotes.`,
     before: ``,
     after: ``,
     link: '',
@@ -205,7 +209,7 @@ $$\\lim_{x \\to 0^+} \\log_a(x) = +\\infty \\quad \\text{for } 0 < a < 1$$]@
 
 The graph approaches the $y$-axis but never touches or crosses it. For $a > 1$, the curve plunges downward as it nears the asymptote. For $0 < a < 1$, the curve rises upward.
 
-Under horizontal transformations, the asymptote shifts. The function $y = \\log_a(x - h)$ has vertical asymptote at $x = h$.`,
+@academic[rule_plain:Under horizontal transformations, the asymptote shifts. The function $y = \\log_a(x - h)$ has vertical asymptote at $x = h$.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -328,7 +332,7 @@ Equation: $y = \\log_2(x - 2)$.]@`,
   },
   obj11: {
     title: `Inverse Relationship with Exponential Graphs`,
-    content: `The graphs of $y = \\log_a(x)$ and $y = a^x$ are reflections of each other across the line $y = x$.
+    content: `@academic[rule_theorem_plain:The graphs of $y = \\log_a(x)$ and $y = a^x$ are reflections of each other across the line $y = x$.]@
 
 Every point $(p, q)$ on the logarithmic curve corresponds to a point $(q, p)$ on the exponential curve. The curves intersect the line $y = x$ at the same location only if $a^c = c$ for some $c$.
 

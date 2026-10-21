@@ -1038,7 +1038,8 @@ Tree diagrams provide a direct visual interpretation of the Law of Total Probabi
 
 Each first-level branch of a tree represents a distinct case that cannot occur together with the others. These branches form a partition of all possible outcomes at that stage of the process.
 
-When a later event can occur through several different branches, its overall probability is obtained by accounting for **all paths** that lead to it. Each path contributes according to the probability values along that path, and the total probability is obtained by combining these contributions.
+@academic[rule:Law of Total Probability
+When a later event can occur through several different branches, its overall probability is obtained by accounting for **all paths** that lead to it. Each path contributes according to the probability values along that path, and the total probability is obtained by combining these contributions.]@
 
 In this way, the law of total probability is not an abstract rule added afterward.
 It is read directly from the structure of the tree: split the process into disjoint cases, follow the branches, and combine their contributions — the multiply-along-a-branch, add-across-branches reading that [total probability notation](!/probability/total-probability#notation) writes as marks.

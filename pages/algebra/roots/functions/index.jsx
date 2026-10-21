@@ -294,7 +294,9 @@ Key points:
 @academic[formula_callout:The Cube Root Function
 $$(-8, -2), \\quad (-1, -1), \\quad (0, 0), \\quad (1, 1), \\quad (8, 2)$$]@
 
-The graph passes through the origin and extends in both directions. Negative inputs yield negative outputs; positive inputs yield positive outputs. The function preserves sign, consistent with [properties](!/algebra/roots/properties) of odd-index radicals.
+The graph passes through the origin and extends in both directions.
+
+@academic[rule_plain:Negative inputs yield negative outputs; positive inputs yield positive outputs. The function preserves sign, consistent with [properties](!/algebra/roots/properties) of odd-index radicals.]@
 
 The cube root function is also one-to-one, with the cubing function as its inverse.`,
     before: ``,
@@ -355,7 +357,7 @@ Shape resembles the cube root — S-curve through origin, odd symmetry.
 
 Higher odd indices produce flatter curves. The fifth root is flatter than the cube root.
 
-All $n$th root functions are one-to-one and serve as inverses to the corresponding power functions, with domain restrictions for even indices.`,
+@academic[rule_theorem_plain:All $n$th root functions are one-to-one and serve as inverses to the corresponding power functions, with domain restrictions for even indices.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -451,7 +453,9 @@ $$f(g(x)) = \\sqrt[3]{x^3} = x \\quad \\text{for all real } x$$]@
 @academic[formula_callout:Inverse Relationship with Power Functions
 $$g(f(x)) = (\\sqrt[3]{x})^3 = x \\quad \\text{for all real } x$$]@
 
-Graphically, inverse functions reflect across the line $y = x$. The parabola $y = x^2$ and the square root curve are mirror images across this diagonal.
+@academic[rule_theorem_plain:Graphically, inverse functions reflect across the line $y = x$.]@
+
+The parabola $y = x^2$ and the square root curve are mirror images across this diagonal.
 
 The identity $\\sqrt{x^2} = |x|$ from [properties](!/algebra/roots/properties) explains why the restriction $x \\geq 0$ is needed for the square function. Without it, the square function is not one-to-one and has no inverse.`,
     before: ``,

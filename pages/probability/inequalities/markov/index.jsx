@@ -959,7 +959,8 @@ No additional assumptions on the distribution of $X$ are required.
   
       title:`What the Inequality Is Saying`,
       content:`
-Markov's inequality states that a non-negative random variable cannot take large values too frequently if its average size is small.
+@academic[rule_theorem:Markov's inequality
+Markov's inequality states that a non-negative random variable cannot take large values too frequently if its average size is small.]@
 
 If the expected value of a quantity is limited, then the probability of observing values far above that average must also be limited. The larger the threshold chosen, the smaller the guaranteed upper bound on the probability of exceeding it.
 

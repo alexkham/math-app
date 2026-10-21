@@ -1347,6 +1347,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
 import polarRectangularDiagrams from '@/app/components/calculators/complex-numbers/polarRectangularDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -2262,7 +2264,9 @@ For more on polynomial roots, see [equations and polynomials](!/complex-numbers/
 
 The real numbers are ordered. Given distinct $a, b \\in \\mathbb{R}$, either $a < b$ or $b < a$. This ordering respects arithmetic: if $a < b$, then $a + c < b + c$ for any $c$, and $ac < bc$ when $c > 0$.
 
-No such ordering exists for $\\mathbb{C}$. There is no way to define "$<$" on complex numbers that remains consistent with the field operations.
+No such ordering exists for $\\mathbb{C}$.
+
+@academic[rule_theorem_plain:There is no way to define "$<$" on complex numbers that remains consistent with the field operations.]@
 
 ## Why Ordering Fails
 
@@ -2478,8 +2482,25 @@ const schemas = {
     }),
   };
 
+  const complexPropertyTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'What the complex numbers have, and lack',
+    preface: 'The properties of $\\mathbb{C}$ fall into four groups: what it shares with the reals, what is new, what it guarantees, and what it gives up.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'A trade',
+    conclusion: '$\\mathbb{C}$ gains roots for every polynomial and loses the ability to compare numbers by size.',
+    root: { name: 'Properties of complex numbers', sub: '4 groups' },
+    children: [
+      { id: 'field', name: 'Arithmetic', items: [ { label: 'Status', text: 'a field: same rules as $\\mathbb{R}$ and $\\mathbb{Q}$' } ] },
+      { id: 'new', name: '[Conjugate](!/complex-numbers/complex-conjugate), [modulus](!/complex-numbers/absolute-value), argument', items: [ { label: 'Status', text: 'unique to $\\mathbb{C}$' }, { label: 'Meaning', text: 'reflection, distance, direction' } ] },
+      { id: 'closure', name: 'Algebraic closure', items: [ { label: 'Status', text: 'every polynomial has roots in $\\mathbb{C}$' } ] },
+      { id: 'order', name: 'Ordering', items: [ { label: 'Status', text: 'no $<$ or $>$' } ], flag: true, warn: 'lacking in $\\mathbb{C}$' },
+    ],
+  };
+
   return {
   props:{
+    complexPropertyTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -2500,7 +2521,7 @@ const schemas = {
    }
 
 
-export default function PropertiesPage({
+export default function PropertiesPage({complexPropertyTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -2529,6 +2550,14 @@ export default function PropertiesPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <DiagramFrame
+            key={'obj1-diagram'}
+            id="complex-properties-tree"
+            title="Properties of complex numbers"
+            source="/complex-numbers/properties"
+          >
+            <TopDownTree data={complexPropertyTree} />
+          </DiagramFrame>,
         ]
     },
     {

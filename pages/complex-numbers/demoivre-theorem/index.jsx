@@ -1488,7 +1488,9 @@ $$z_k = e^{i \\, 2\\pi k / n}, \\quad k = 0, 1, \\ldots, n-1$$
 @academic[formulas_link:Browse all complex numbers formulas
 /complex-numbers/formulas]@
 
-All roots of unity have modulus $1$ — they lie on the unit circle. Their arguments are multiples of $\\frac{360°}{n}$, dividing the circle into $n$ equal arcs.
+@academic[rule_plain:All roots of unity have modulus $1$ — they lie on the unit circle.]@
+
+Their arguments are multiples of $\\frac{360°}{n}$, dividing the circle into $n$ equal arcs.
 
 The root $z_0 = \\text{cis}(0°) = 1$ always appears. Every integer power of $1$ equals $1$, making $1$ an $n$-th root of unity for every $n$.
 

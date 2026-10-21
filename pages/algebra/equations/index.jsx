@@ -10,6 +10,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 export async function getStaticProps(){
 const keyWords = [
@@ -389,7 +391,9 @@ A contradiction is true for no value of the variable. The equation $x + 1 = x + 
     title: `Equivalent Equations`,
     content: `Two equations are equivalent when they share the same solution set. The equations $2x = 10$ and $x = 5$ are equivalent because every value satisfying one satisfies the other. Solving an equation amounts to transforming it, step by step, into a simpler equivalent equation from which the solution is obvious.
 
-Certain operations always produce equivalent equations. Adding or subtracting the same quantity on both sides preserves the solution set, as does multiplying or dividing both sides by any nonzero constant. These reversible operations are the backbone of algebraic manipulation.
+@academic[rule_plain:Certain operations always produce equivalent equations. Adding or subtracting the same quantity on both sides preserves the solution set, as does multiplying or dividing both sides by any nonzero constant.]@
+
+These reversible operations are the backbone of algebraic manipulation.
 
 Other operations carry risk. Multiplying both sides by an expression containing the variable may introduce values that were not solutions of the original equation. Squaring both sides can do the same. The equation $x = 3$ has one solution, but squaring gives $x^2 = 9$, whose solution set $\\{-3, 3\\}$ is larger. The extra value $x = -3$ is an extraneous solution — it satisfies the transformed equation but not the original. Any solving method that involves a non-reversible step demands verification: every candidate must be substituted back into the original equation to confirm it is genuine.`,
     before: ``,
@@ -446,7 +450,12 @@ To work through a specific equation, the [quadratic equation solver](!/algebra/c
     title: `Polynomial Equations`,
     content: `A [polynomial equation](!/algebra/equations/polynomial) of degree $n$ has the general form $a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$ with $a_n \\neq 0$. The Fundamental Theorem of Algebra guarantees exactly $n$ roots in $\\mathbb{C}$ when counted with multiplicity, but finding those roots grows sharply harder as the degree increases.
 
-For cubics and quartics, closed-form solutions exist — Cardano's formula for degree three and Ferrari's method for degree four — though both are cumbersome and rarely used in practice. The Abel–Ruffini theorem draws a hard boundary at degree five: no general formula built from radicals and arithmetic can solve every quintic or higher-degree polynomial. Specific equations beyond degree four may still yield to factoring, the rational root theorem, or substitution tricks, but there is no universal algebraic recipe.
+For cubics and quartics, closed-form solutions exist — Cardano's formula for degree three and Ferrari's method for degree four — though both are cumbersome and rarely used in practice.
+
+@academic[rule_theorem:Abel–Ruffini theorem
+The Abel–Ruffini theorem draws a hard boundary at degree five: no general formula built from radicals and arithmetic can solve every quintic or higher-degree polynomial.]@
+
+Specific equations beyond degree four may still yield to factoring, the rational root theorem, or substitution tricks, but there is no universal algebraic recipe.
 
 The practical strategy for polynomial equations of any degree begins with the [rational root theorem](!/algebra/polynomials/rules): test the finite list of candidate rational roots, and each confirmed root reduces the degree by one through polynomial division. Once the degree drops to two, the quadratic formula finishes the job. When no rational roots exist, numerical methods provide approximations to any desired accuracy.
 
@@ -655,8 +664,73 @@ const schemas = {
     }),
   };
 
+  const equationFamilyTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Five algebraic equation families',
+    preface: 'Each family below has its own form, its own count of solutions, and its own method. Two of them come with a check that cannot be skipped. Open an item for the longer explanation.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Verify where the method can mislead',
+    conclusion: 'Linear and quadratic equations need no checking beyond arithmetic. Rational equations must be checked against their excluded values, and absolute value equations split into cases that each need solving.',
+    root: { name: 'Algebraic equations', sub: '5 families' },
+    children: [
+      { id: 'linear', name: '[Linear](!/algebra/equations/linear)', symbol: '$ax + b = 0$', items: [
+        { label: 'Solutions', text: 'exactly one: $x = -b/a$' },
+        { label: 'Method', text: 'isolate the variable',
+          details: 'Undo the operations applied to the variable in reverse order. Parentheses are cleared with the distributive property; numerical denominators are cleared by multiplying through by the least common denominator.' },
+        { label: 'Edge case', text: 'variable cancels',
+          details: 'If the remaining statement is true, like $0 = 0$, the equation is an identity. If it is false, like $0 = 5$, it is a contradiction.' },
+      ] },
+      { id: 'quadratic', name: '[Quadratic](!/algebra/equations/quadratic)', symbol: '$ax^2 + bx + c = 0$', items: [
+        { label: 'Solutions', text: '2, 1 or none over $\\mathbb{R}$',
+          details: 'The discriminant $\\Delta = b^2 - 4ac$ decides: two real roots when $\\Delta > 0$, one repeated root when $\\Delta = 0$, none when $\\Delta < 0$ (two complex conjugate roots instead).' },
+        { label: 'Method', text: 'factor, complete the square, or the formula',
+          details: 'Factoring works when the quadratic splits into binomials with rational coefficients. Completing the square always works and produces the quadratic formula $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$.' },
+      ] },
+      { id: 'polynomial', name: '[Polynomial](!/algebra/equations/polynomial)', symbol: '$a_n x^n + \\cdots + a_0 = 0$', items: [
+        { label: 'Solutions', text: 'exactly $n$ in $\\mathbb{C}$, with multiplicity' },
+        { label: 'Method', text: 'rational roots, then divide',
+          details: 'Test the candidate rational roots; each confirmed root lowers the degree by one. At degree two the quadratic formula finishes. With no rational roots, numerical methods approximate.' },
+        { label: 'Limit', text: 'no general formula from degree 5',
+          details: 'Cardano (degree 3) and Ferrari (degree 4) give closed forms. The Abel–Ruffini theorem rules out a general radical formula for degree five and higher.' },
+      ] },
+      { id: 'rational', name: '[Rational](!/algebra/equations/rational)', symbol: '$P(x)/Q(x)$', flag: true, warn: 'Exclude every zero of a denominator', items: [
+        { label: 'Method', text: 'multiply by the LCD',
+          details: 'Clearing every denominator in one step leaves a polynomial equation, solvable by the methods of the earlier families.' },
+        { label: 'Then', text: 'check each candidate',
+          details: 'Multiplying by the LCD is not always reversible, so it can create extraneous solutions. A candidate that makes any original denominator zero is rejected.' },
+      ] },
+      { id: 'abs', name: '[Absolute value](!/algebra/equations/absolute-value)', symbol: '$|f(x)| = k$', flag: true, warn: 'No solution when $k < 0$', items: [
+        { label: '$k > 0$', text: '$f(x) = k$ or $f(x) = -k$' },
+        { label: '$k = 0$', text: '$f(x) = 0$' },
+        { label: 'More terms', text: 'split at critical points',
+          details: 'With several absolute values, find where each inside expression changes sign and solve on each interval with the piecewise definition. $|f(x)| = |g(x)|$ splits into $f(x) = g(x)$ and $f(x) = -g(x)$.' },
+      ] },
+    ],
+    legend: [{ label: 'equation family' }, { label: 'a restriction applies', tone: 'warn' }],
+  };
+
+  const beyondAlgebraTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Equations beyond the algebraic families',
+    preface: 'Once the unknown sits in an exponent, inside a logarithm, under a root or across several equations, new methods take over.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Same goal, new tools',
+    conclusion: 'Each kind still asks for every value that makes the statement true; the tools change with where the unknown hides.',
+    root: { name: 'Equations beyond algebra', sub: '6 kinds' },
+    children: [
+      { id: 'exp', name: '[Exponential](!/algebra/powers/exponential-equations)', items: [ { label: 'Unknown', text: 'in the exponent' }, { label: 'Method', text: 'match bases, otherwise take logs' } ] },
+      { id: 'log', name: '[Logarithmic](!/algebra/logarithms/equations)', items: [ { label: 'Unknown', text: 'inside a log' }, { label: 'Method', text: 'convert to exponential form' } ], flag: true, warn: 'argument must be positive' },
+      { id: 'rad', name: '[Radical](!/algebra/roots/equations)', items: [ { label: 'Unknown', text: 'under a root' }, { label: 'Method', text: 'isolate, then raise to a power' } ], flag: true, warn: 'check for extraneous roots' },
+      { id: 'sys', name: '[Linear systems](!/linear-algebra/linear-systems)', items: [ { label: 'Unknowns', text: 'several at once' }, { label: 'Method', text: 'Gaussian elimination or matrices' } ] },
+      { id: 'trig', name: 'Trigonometric', items: [ { label: 'Feature', text: 'periodic: infinitely many solutions' } ] },
+      { id: 'diff', name: 'Differential', items: [ { label: 'Relates', text: 'a function to its derivatives' } ] },
+    ],
+  };
+
    return {
   props: {
+    beyondAlgebraTree,
+    equationFamilyTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -680,7 +754,7 @@ const schemas = {
    }
 
 
-export default function EquationsPage({
+export default function EquationsPage({beyondAlgebraTree, equationFamilyTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -836,6 +910,14 @@ export default function EquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj11Table }}
           />,
+          <DiagramFrame
+            key={'obj11-diagram'}
+            id="equations-beyond-algebra-tree"
+            title="Equations beyond algebra"
+            source="/algebra/equations"
+          >
+            <TopDownTree data={beyondAlgebraTree} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -849,6 +931,14 @@ export default function EquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj12-diagram'}
+            id="equation-families-tree"
+            title="Five families of algebraic equations"
+            source="/algebra/equations"
+          >
+            <TopDownTree data={equationFamilyTree} />
+          </DiagramFrame>,
         ]
     },
 ]

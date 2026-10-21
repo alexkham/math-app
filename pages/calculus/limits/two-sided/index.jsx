@@ -415,7 +415,9 @@ $$\\lim_{x \\to a} f(x) = f(a)$$]@
 
 When this holds, the limit equals the function value. Polynomials, exponentials, sine, cosine, and many standard functions are continuous everywhere on their domains. For these, direct substitution yields the limit immediately.
 
-Rational functions are continuous wherever the denominator is nonzero. At points where the denominator vanishes, continuity fails and direct substitution does not apply—[other techniques](!/calculus/limits/evaluating) are needed.
+@academic[rule_plain:Rational functions are continuous wherever the denominator is nonzero.]@
+
+At points where the denominator vanishes, continuity fails and direct substitution does not apply—[other techniques](!/calculus/limits/evaluating) are needed.
 `,
     before: ``,
     after: ``,

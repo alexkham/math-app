@@ -725,6 +725,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1386,8 +1388,25 @@ The probability function is the mathematical core of any random variable. It is 
     }),
   };
 
+  const pmfPdfTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Two forms of a probability function',
+    preface: 'A random variable is described by a PMF when it is discrete and by a PDF when it is continuous. The two look alike but mean different things.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Heights mean different things',
+    conclusion: 'A PMF height is a probability; a PDF height is a density, and probability is the area under it.',
+    root: { name: 'Probability function', sub: '2 forms' },
+    children: [
+      { id: 'pmf', name: '[PMF](!/probability/probability-function/pmf)', symbol: '$p(x) = P(X = x)$', sub: 'discrete', items: [
+        { label: 'Meaning', text: 'each value has its own probability' }, { label: 'Total', text: 'values sum to 1' }, { label: 'Examples', text: 'a die, number of heads' } ] },
+      { id: 'pdf', name: '[PDF](!/probability/probability-function/pdf)', symbol: '$f(x)$', sub: 'continuous', items: [
+        { label: 'Meaning', text: 'a density, not a probability' }, { label: 'Total', text: 'area under the curve is 1' }, { label: 'Examples', text: 'waiting times, heights' } ] },
+    ],
+  };
+
   return {
     props: {
+    pmfPdfTree,
     demoUnits,
       sectionsContent,
       introContent,
@@ -1408,7 +1427,7 @@ The probability function is the mathematical core of any random variable. It is 
   }
 }
 
-export default function ProbabilityFunctionPage({
+export default function ProbabilityFunctionPage({pmfPdfTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -1452,6 +1471,14 @@ export default function ProbabilityFunctionPage({
           sectionsContent.pdf_pmf.content,
           <div key={'pdf-pmf-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: pdfPmfTable }} />,
+          <DiagramFrame
+            key={'pdf_pmf-diagram'}
+            id="pmf-pdf-tree"
+            title="PMF and PDF"
+            source="/probability/probability-function"
+          >
+            <TopDownTree data={pmfPdfTree} />
+          </DiagramFrame>,
         ]
     },
     {

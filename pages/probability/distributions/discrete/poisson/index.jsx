@@ -993,7 +993,9 @@ Counting the number of emails received by a support desk in one hour when emails
 
       It describes counts: $0, 1, 2, ...,$ with probabilities determined by how large or small $\\lambda$ is. 
 
-      The single parameter $\\lambda$ controls both the mean and the variance of the distribution.
+
+
+@academic[rule_plain:The single parameter $\\lambda$ controls both the mean and the variance of the distribution.]@
       `,
       before:``,
       after:``,

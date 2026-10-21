@@ -864,7 +864,9 @@ Every fraction belongs to an infinite family of equivalent fractions. The fracti
 
   obj2: {
     title: `Creating Equivalent Fractions`,
-    content: `Multiplying both the numerator and denominator by the same nonzero number produces an equivalent fraction. Starting with $\\frac{3}{5}$ and multiplying both parts by 2 gives $\\frac{6}{10}$. Multiplying by 3 gives $\\frac{9}{15}$. All three fractions are equivalent.
+    content: `@academic[rule_plain:Multiplying both the numerator and denominator by the same nonzero number produces an equivalent fraction.]@
+
+Starting with $\\frac{3}{5}$ and multiplying both parts by 2 gives $\\frac{6}{10}$. Multiplying by 3 gives $\\frac{9}{15}$. All three fractions are equivalent.
 
 This process works because multiplying by $\\frac{n}{n}$ is the same as multiplying by 1, which does not change a value. The equation $\\frac{3}{5} \\times \\frac{2}{2} = \\frac{6}{10}$ shows that the transformation preserves quantity.
 

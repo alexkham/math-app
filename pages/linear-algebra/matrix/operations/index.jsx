@@ -3693,7 +3693,9 @@ $$\\begin{pmatrix} 1 & 4 \\\\ -2 & 3 \\\\ 0 & 5 \\end{pmatrix} + \\begin{pmatrix
 
 If the dimensions do not match, the sum is undefined — there is no way to add a $2 \\times 3$ matrix to a $3 \\times 2$ matrix.
 
-Addition is commutative ($A + B = B + A$) and associative ($(A + B) + C = A + (B + C)$). The zero matrix $O$ of the same size serves as the additive identity ($A + O = A$), and the additive inverse of $A$ is $-A = (-a_{ij})$, so $A + (-A) = O$.`,
+@academic[rule_plain:Addition is commutative ($A + B = B + A$) and associative ($(A + B) + C = A + (B + C)$).]@
+
+The zero matrix $O$ of the same size serves as the additive identity ($A + O = A$), and the additive inverse of $A$ is $-A = (-a_{ij})$, so $A + (-A) = O$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3760,7 +3762,9 @@ For example,
 @academic[formula_callout:Scalar Multiplication
 $$-2 \\begin{pmatrix} 1 & 3 & -4 \\\\ 0 & 5 & 2 \\end{pmatrix} = \\begin{pmatrix} -2 & -6 & 8 \\\\ 0 & -10 & -4 \\end{pmatrix}$$]@
 
-Scalar multiplication distributes over matrix addition ($c(A + B) = cA + cB$), distributes over scalar addition ($(c + d)A = cA + dA$), associates with itself ($c(dA) = (cd)A$), and has $1$ as its identity ($1 \\cdot A = A$). Multiplying by $0$ produces the zero matrix.`,
+@academic[rule_plain:Scalar multiplication distributes over matrix addition ($c(A + B) = cA + cB$), distributes over scalar addition ($(c + d)A = cA + dA$), associates with itself ($c(dA) = (cd)A$), and has $1$ as its identity ($1 \\cdot A = A$).]@
+
+Multiplying by $0$ produces the zero matrix.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3772,7 +3776,11 @@ Scalar multiplication distributes over matrix addition ($c(A + B) = cA + cB$), d
 @academic[formula_callout:Linear Combinations of Matrices
 $$c_1 A_1 + c_2 A_2 + \\cdots + c_k A_k$$]@
 
-is a linear combination of matrices. Addition and scalar multiplication together give the set of all $m \\times n$ matrices the structure of a [vector space](!/linear-algebra/vector-spaces). The dimension of this space is $mn$ — one degree of freedom for each entry. The standard basis consists of the $mn$ matrices that have a single $1$ in one position and zeros everywhere else.`,
+is a linear combination of matrices.
+
+@academic[rule_theorem_plain:Addition and scalar multiplication together give the set of all $m \\times n$ matrices the structure of a [vector space](!/linear-algebra/vector-spaces).]@
+
+The dimension of this space is $mn$ — one degree of freedom for each entry. The standard basis consists of the $mn$ matrices that have a single $1$ in one position and zeros everywhere else.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3892,7 +3900,9 @@ The product rule reverses the order:
 
 This reversal is a frequent source of errors and is worth memorizing as a pattern: transposing a product is like reading it backward.
 
-A matrix satisfying $A = A^T$ is called [symmetric](!/linear-algebra/matrix/types). For any matrix $A$ of any shape, the products $A^T A$ and $AA^T$ are both symmetric — this is immediate from the product rule, since $(A^T A)^T = A^T (A^T)^T = A^T A$.`,
+A matrix satisfying $A = A^T$ is called [symmetric](!/linear-algebra/matrix/types).
+
+@academic[rule_corollary_plain:For any matrix $A$ of any shape, the products $A^T A$ and $AA^T$ are both symmetric — this is immediate from the product rule, since $(A^T A)^T = A^T (A^T)^T = A^T A$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -3904,7 +3914,9 @@ A matrix satisfying $A = A^T$ is called [symmetric](!/linear-algebra/matrix/type
 @academic[formula_callout:matrix_power|Matrix Power|$$A^0 = I, \\quad A^1 = A, \\quad A^k = \\underbrace{A \\cdot A \\cdots A}_{k \\text{ factors}}$$]@
 @academic[formulas_link:/linear-algebra/formulas#matrix_power]@
 
-The usual exponent laws hold: $A^j A^k = A^{j+k}$ and $(A^j)^k = A^{jk}$. When $A$ is invertible, negative powers are defined as $A^{-k} = (A^{-1})^k$, extending the exponent laws to all integers.
+@academic[rule_plain:The usual exponent laws hold: $A^j A^k = A^{j+k}$ and $(A^j)^k = A^{jk}$.]@
+
+When $A$ is invertible, negative powers are defined as $A^{-k} = (A^{-1})^k$, extending the exponent laws to all integers.
 
 One rule from scalar arithmetic does not carry over. Since matrix multiplication is not commutative, the identity $(AB)^k = A^k B^k$ is false in general. Expanding $(AB)^2 = ABAB$, there is no way to rearrange this into $A^2 B^2 = AABB$ without commutativity.
 
@@ -3919,7 +3931,7 @@ Powers of specific matrix types are particularly well-behaved. For a diagonal ma
 
 The key property is that left-multiplying a matrix $A$ by an elementary matrix $E$ performs the corresponding row operation on $A$. If $E$ swaps rows $2$ and $3$ of the identity, then $EA$ swaps rows $2$ and $3$ of $A$. If $E$ scales row $1$ of the identity by $5$, then $EA$ scales row $1$ of $A$ by $5$.
 
-Every elementary matrix is invertible, and its inverse is another elementary matrix of the same type: the inverse of a row swap is the same row swap, the inverse of scaling by $k$ is scaling by $1/k$, and the inverse of adding $c$ times row $i$ to row $j$ is subtracting $c$ times row $i$ from row $j$.
+@academic[rule_theorem_plain:Every elementary matrix is invertible, and its inverse is another elementary matrix of the same type: the inverse of a row swap is the same row swap, the inverse of scaling by $k$ is scaling by $1/k$, and the inverse of adding $c$ times row $i$ to row $j$ is subtracting $c$ times row $i$ from row $j$.]@
 
 This leads to a structural result: every invertible matrix can be written as a product of elementary matrices. Since [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) reduces an invertible matrix to the identity through a sequence of row operations, each operation corresponds to an elementary matrix, and reversing the sequence expresses the original matrix as their product. This factorization is more conceptual than computational, but it underpins the theoretical foundations of the [determinant](!/linear-algebra/determinants) and the inverse.`,
     before: ``,

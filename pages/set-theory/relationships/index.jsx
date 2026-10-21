@@ -1491,7 +1491,9 @@ $$|A| = |B|$$]@
 
 This means a bijection exists between $A$ and $B$ — a one-to-one correspondence pairing each element of $A$ with exactly one element of $B$.
 
-Equal sets are always equivalent: if $A = B$, then certainly $|A| = |B|$. However, equivalent sets need not be equal.
+@academic[rule_corollary_plain:Equal sets are always equivalent: if $A = B$, then certainly $|A| = |B|$.]@
+
+However, equivalent sets need not be equal.
 
 The sets $\\{a, b, c\\}$ and $\\{1, 2, 3\\}$ are equivalent (both have cardinality $3$) but not equal (they contain different elements). The sets $\\mathbb{N}$ and $\\mathbb{Z}$ are equivalent (both countably infinite) but not equal ($\\mathbb{Z}$ contains negative integers).
     `,
@@ -1548,7 +1550,7 @@ A partition of a set $S$ is a collection of non-empty, pairwise disjoint subsets
 @academic[formula_callout:Partitions
 $$\\{A_1, A_2, \\ldots, A_n\\} \\text{ partitions } S \\iff \\begin{cases} A_i \\neq \\emptyset & \\text{for all } i \\\\ A_i \\cap A_j = \\emptyset & \\text{for } i \\neq j \\\\ A_1 \\cup A_2 \\cup \\cdots \\cup A_n = S \\end{cases}$$]@
 
-Every element of $S$ belongs to exactly one subset in the partition.
+@academic[rule_corollary_plain:Every element of $S$ belongs to exactly one subset in the partition.]@
 
 Examples:
 

@@ -2311,7 +2311,9 @@ const sectionsContent = {
 
 Column $1$ is the image of $\\mathbf{e}_1 = (1, 0)$ in $\\mathbb{R}^2$ or $(1, 0, 0)$ in $\\mathbb{R}^3$. Column $2$ is the image of $\\mathbf{e}_2$. The matrix maps the standard grid to the parallelogram (or parallelepiped) spanned by these column vectors.
 
-The absolute value $|\\det(A)|$ measures how the transformation scales areas (in $\\mathbb{R}^2$) or volumes (in $\\mathbb{R}^3$). The sign of $\\det(A)$ indicates orientation: positive means the transformation preserves handedness, negative means it reverses it. An [orthogonal](!/linear-algebra/matrix/types) matrix ($\\det = \\pm 1$) preserves all lengths and angles — it is a rigid motion.`,
+@academic[rule_plain:The absolute value $|\\det(A)|$ measures how the transformation scales areas (in $\\mathbb{R}^2$) or volumes (in $\\mathbb{R}^3$).]@
+
+The sign of $\\det(A)$ indicates orientation: positive means the transformation preserves handedness, negative means it reverses it. An [orthogonal](!/linear-algebra/matrix/types) matrix ($\\det = \\pm 1$) preserves all lengths and angles — it is a rigid motion.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2384,7 +2386,9 @@ The first column $R_\\theta \\mathbf{e}_1 = (\\cos\\theta, \\sin\\theta)$ is the
 
 The determinant is $\\cos^2\\theta + \\sin^2\\theta = 1$ for every $\\theta$: rotations preserve areas and orientation. The matrix is [orthogonal](!/linear-algebra/matrix/types): $R_\\theta^T R_\\theta = I$, so lengths and angles are preserved. The inverse is $R_\\theta^{-1} = R_{-\\theta} = R_\\theta^T$ — rotating backward by the same angle.
 
-Rotations compose by adding angles: $R_\\alpha R_\\beta = R_{\\alpha + \\beta}$. This follows from the trigonometric addition formulas and corresponds to the fact that rotating by $\\beta$ then by $\\alpha$ is the same as rotating by $\\alpha + \\beta$.
+@academic[rule_plain:Rotations compose by adding angles: $R_\\alpha R_\\beta = R_{\\alpha + \\beta}$.]@
+
+This follows from the trigonometric addition formulas and corresponds to the fact that rotating by $\\beta$ then by $\\alpha$ is the same as rotating by $\\alpha + \\beta$.
 
 Common cases: $R_{90°} = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$, $R_{180°} = \\begin{pmatrix} -1 & 0 \\\\ 0 & -1 \\end{pmatrix}$, $R_{45°} = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & -1 \\\\ 1 & 1 \\end{pmatrix}$.`,
     before: ``,
@@ -2412,7 +2416,9 @@ Rotations about the $x$-axis and $y$-axis have the same $2 \\times 2$ rotation b
 @academic[formula_callout:Rotations in R³
 $$R_x(\\theta) = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & \\cos\\theta & -\\sin\\theta \\\\ 0 & \\sin\\theta & \\cos\\theta \\end{pmatrix}, \\quad R_y(\\theta) = \\begin{pmatrix} \\cos\\theta & 0 & \\sin\\theta \\\\ 0 & 1 & 0 \\\\ -\\sin\\theta & 0 & \\cos\\theta \\end{pmatrix}$$]@
 
-Every $3 \\times 3$ rotation matrix is orthogonal with determinant $+1$. The axis of rotation is the [eigenvector](!/linear-algebra/eigen) with eigenvalue $1$ — the direction that remains fixed. Any rotation in $\\mathbb{R}^3$ can be decomposed into rotations about the coordinate axes (Euler angles), though the decomposition is not unique.`,
+@academic[rule_plain:Every $3 \\times 3$ rotation matrix is orthogonal with determinant $+1$.]@
+
+The axis of rotation is the [eigenvector](!/linear-algebra/eigen) with eigenvalue $1$ — the direction that remains fixed. Any rotation in $\\mathbb{R}^3$ can be decomposed into rotations about the coordinate axes (Euler angles), though the decomposition is not unique.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2434,7 +2440,9 @@ $$H_\\alpha = \\begin{pmatrix} \\cos 2\\alpha & \\sin 2\\alpha \\\\ \\sin 2\\alp
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-All reflection matrices share the same properties: the determinant is $-1$ (orientation-reversing, area-preserving), the matrix is [orthogonal](!/linear-algebra/matrix/types) (lengths and angles preserved), and the matrix is [involutory](!/linear-algebra/matrix/types) ($H^2 = I$) — reflecting twice returns every vector to its starting point. The [eigenvalues](!/linear-algebra/eigen) are $+1$ (vectors on the mirror line) and $-1$ (vectors perpendicular to it).`,
+@academic[rule_plain:All reflection matrices share the same properties: the determinant is $-1$ (orientation-reversing, area-preserving), the matrix is [orthogonal](!/linear-algebra/matrix/types) (lengths and angles preserved), and the matrix is [involutory](!/linear-algebra/matrix/types) ($H^2 = I$) — reflecting twice returns every vector to its starting point.]@
+
+The [eigenvalues](!/linear-algebra/eigen) are $+1$ (vectors on the mirror line) and $-1$ (vectors perpendicular to it).`,
     before: ``,
     after: ``,
     link: ``,
@@ -2509,14 +2517,18 @@ $$T(x, y) = (x, \\; kx + y), \\quad \\text{matrix } \\begin{pmatrix} 1 & 0 \\\\ 
 
 Both are [triangular](!/linear-algebra/matrix/types) matrices with determinant $1$: shears are area-preserving and orientation-preserving. They are not orthogonal — angles are distorted. A square sheared horizontally becomes a parallelogram of the same area but with tilted sides.
 
-In $\\mathbb{R}^3$, there are six possible shear directions (each coordinate shifted by a multiple of each other coordinate). Each is represented by an identity matrix with one off-diagonal entry replaced by $k$. Shears are fundamental building blocks — any invertible matrix with determinant $1$ can be written as a product of shears.`,
+In $\\mathbb{R}^3$, there are six possible shear directions (each coordinate shifted by a multiple of each other coordinate). Each is represented by an identity matrix with one off-diagonal entry replaced by $k$.
+
+@academic[rule_theorem_plain:Shears are fundamental building blocks — any invertible matrix with determinant $1$ can be written as a product of shears.]@`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj9: {
     title: `Combining Transformations`,
-    content: `Composing transformations corresponds to [multiplying](!/linear-algebra/matrix/operations) their matrices. A rotation followed by a scaling is $SA$ where $S$ is the scaling matrix and $A$ is the rotation matrix. The product is applied right-to-left: $A$ acts first, then $S$.
+    content: `@academic[rule_plain:Composing transformations corresponds to [multiplying](!/linear-algebra/matrix/operations) their matrices.]@
+
+A rotation followed by a scaling is $SA$ where $S$ is the scaling matrix and $A$ is the rotation matrix. The product is applied right-to-left: $A$ acts first, then $S$.
 
 Order matters. Rotating then shearing produces a different result from shearing then rotating: $\\text{Shear} \\cdot \\text{Rotation} \\neq \\text{Rotation} \\cdot \\text{Shear}$ in general.
 

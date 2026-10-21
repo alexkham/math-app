@@ -310,7 +310,7 @@ The antiderivative reverses differentiation. Given $f(x) = 2x$, the function $F(
 
 But $F(x) = x^2 + 5$ is also an antiderivative—its derivative is likewise $2x$. So is $x^2 - 17$, or $x^2 + \\pi$. Any function of the form $x^2 + C$ differentiates to $2x$.
 
-Antiderivatives are not unique. They form a family of functions, all differing by constants.
+@academic[rule_plain:Antiderivatives are not unique. They form a family of functions, all differing by constants.]@
 `,
     before: ``,
     after: ``,
@@ -482,7 +482,9 @@ The definite integral uses an antiderivative to compute accumulated quantity:
 @academic[formula_callout:Connection to Definite Integrals
 $$\\int_a^b f(x)\\, dx = F(b) - F(a)$$]@
 
-The constant $C$ cancels when evaluating $F(b) - F(a)$, so any antiderivative works. This connection, detailed on the [rules](!/calculus/integrals/rules) page, is why mastering indefinite integration enables computation of definite integrals.
+@academic[rule_corollary_plain:The constant $C$ cancels when evaluating $F(b) - F(a)$, so any antiderivative works.]@
+
+This connection, detailed on the [rules](!/calculus/integrals/rules) page, is why mastering indefinite integration enables computation of definite integrals.
 `,
     before: ``,
     after: ``,

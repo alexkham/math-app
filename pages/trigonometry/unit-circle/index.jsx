@@ -1995,7 +1995,9 @@ At quadrantal angles, some trigonometric functions are undefined. Tangent and se
 
 The mnemonic ASTC — "All, Sine, Tangent, Cosine" — lists which group of functions is positive in each quadrant, starting from Quadrant I and moving counterclockwise. Various phrase mnemonics exist ("All Students Take Calculus" being the most common), but the underlying logic is more reliable than any mnemonic: $\\cos\\theta$ has the same sign as $x$, $\\sin\\theta$ has the same sign as $y$, and $\\tan\\theta$ is positive when $x$ and $y$ share the same sign.
 
-Knowing the quadrant of an angle immediately determines the sign of every trigonometric function at that angle. This information, combined with the magnitude obtained from a reference angle, is sufficient to evaluate any trigonometric function at any standard angle.
+@academic[rule_plain:Knowing the quadrant of an angle immediately determines the sign of every trigonometric function at that angle.]@
+
+This information, combined with the magnitude obtained from a reference angle, is sufficient to evaluate any trigonometric function at any standard angle.
 
 The sign distribution across all four quadrants, with the ASTC letter for each, collects into the table below.`,
     before: ``,
@@ -2135,7 +2137,11 @@ These are the three Pythagorean [identities](!/trigonometry/identities) — all 
     title: `Angles Beyond One Rotation and Negative Angles`,
     content: `The unit circle imposes no upper or lower bound on angles. An angle of $400°$ means a full counterclockwise rotation ($360°$) followed by an additional $40°$ — the terminal side lands at the same position as $40°$. An angle of $-150°$ means a clockwise rotation of $150°$. An angle of $1000°$ means two full rotations ($720°$) plus $280°$, so the terminal side coincides with that of $280°$.
 
-This is the geometric meaning of coterminal angles: different amounts of rotation that end at the same point on the circle. Since the trigonometric values depend only on the terminal point — not on how many times the terminal side wound around to get there — coterminal angles always produce identical function values. The angle $\\theta$, the angle $\\theta + 360°$, the angle $\\theta - 360°$, and the angle $\\theta + 720°$ all yield the same sine, the same cosine, and the same everything else.
+This is the geometric meaning of coterminal angles: different amounts of rotation that end at the same point on the circle.
+
+@academic[rule_plain:Since the trigonometric values depend only on the terminal point — not on how many times the terminal side wound around to get there — coterminal angles always produce identical function values.]@
+
+The angle $\\theta$, the angle $\\theta + 360°$, the angle $\\theta - 360°$, and the angle $\\theta + 720°$ all yield the same sine, the same cosine, and the same everything else.
 
 This wrapping behavior is the source of periodicity. The statement $\\sin(\\theta + 2\\pi) = \\sin\\theta$ is not an algebraic identity to be proved — it is a geometric inevitability. After a full rotation of $2\\pi$ radians, the point on the circle returns to its starting position, and the $y$-coordinate (sine) is unchanged. The same holds for cosine and for all functions derived from them. Tangent and cotangent repeat after just $\\pi$ radians because the ratio $\\frac{y}{x}$ returns to its original value after a half rotation (both $x$ and $y$ reverse sign, and the ratio of two negatives equals the ratio of the original positives).
 

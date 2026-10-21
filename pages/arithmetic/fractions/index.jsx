@@ -697,6 +697,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -951,7 +953,9 @@ const keyWords = [
     title: `What Is a Fraction`,
     content: `A fraction expresses a quantity as a ratio of two integers. The general form is $\\frac{a}{b}$, where $a$ is the numerator and $b$ is the denominator. The horizontal line separating them is called the fraction bar or vinculum. In running text the same fraction may be written with a slash, $a/b$ — both forms appear among the [arithmetic symbols](!/math-symbols/arithmetic).
 
-Every fraction represents a division operation. The expression $\\frac{a}{b}$ is equivalent to $a \\div b$, meaning the numerator divided by the denominator. For example, $\\frac{3}{4}$ equals $3 \\div 4 = 0.75$.
+@academic[rule_plain:Every fraction represents a division operation. The expression $\\frac{a}{b}$ is equivalent to $a \\div b$, meaning the numerator divided by the denominator.]@
+
+For example, $\\frac{3}{4}$ equals $3 \\div 4 = 0.75$.
 
 The denominator cannot equal zero. Division by zero is undefined in mathematics, so expressions like $\\frac{5}{0}$ have no meaning. Any integer $b \\neq 0$ can serve as a denominator.`,
     before: ``,
@@ -1045,7 +1049,9 @@ Improper fractions are not incorrect despite their name. They are essential in c
 
 Unit fractions serve as the building blocks of all fractions. Any fraction $\\frac{a}{b}$ can be understood as $a$ copies of the unit fraction $\\frac{1}{b}$. The fraction $\\frac{3}{5}$ equals $\\frac{1}{5} + \\frac{1}{5} + \\frac{1}{5}$, or three copies of one-fifth.
 
-An important property of unit fractions is that larger denominators produce smaller values. The fraction $\\frac{1}{8}$ is smaller than $\\frac{1}{4}$ because dividing something into eight parts creates smaller pieces than dividing it into four parts. This inverse relationship between denominator size and fraction value is essential when [comparing fractions](!/arithmetic/fractions/comparing).`,
+@academic[rule_plain:An important property of unit fractions is that larger denominators produce smaller values.]@
+
+The fraction $\\frac{1}{8}$ is smaller than $\\frac{1}{4}$ because dividing something into eight parts creates smaller pieces than dividing it into four parts. This inverse relationship between denominator size and fraction value is essential when [comparing fractions](!/arithmetic/fractions/comparing).`,
     before: ``,
     after: ``,
     link: '',
@@ -1283,8 +1289,29 @@ const schemas = {
     }),
   };
 
+  const fractionOpTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Four operations, four rules',
+    preface: 'Fractions follow different rules for each operation. Only addition and subtraction need a common denominator.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'The common denominator is not always needed',
+    conclusion: 'Multiplying and dividing work straight across; adding, subtracting and comparing first bring the fractions to the same denominator.',
+    root: { name: 'Operations with fractions', sub: '4 operations' },
+    children: [
+      { id: 'add', name: '[Add and subtract](!/arithmetic/fractions/adding-subtracting)', items: [
+        { label: 'Needs', text: 'a common denominator' }, { label: 'Example', text: '$\\frac{2}{7} + \\frac{3}{7} = \\frac{5}{7}$' } ] },
+      { id: 'mul', name: '[Multiply](!/arithmetic/fractions/multiplying)', items: [
+        { label: 'Rule', text: 'numerator × numerator over denominator × denominator' }, { label: 'Needs', text: 'no common denominator' } ] },
+      { id: 'div', name: '[Divide](!/arithmetic/fractions/dividing)', items: [
+        { label: 'Rule', text: 'multiply by the reciprocal' } ] },
+      { id: 'cmp', name: '[Compare](!/arithmetic/fractions/comparing)', items: [
+        { label: 'Ways', text: 'common denominator, cross-multiplying, or decimals' } ] },
+    ],
+  };
+
 return {
   props: {
+    fractionOpTree,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1305,7 +1332,7 @@ return {
    }
 
 
-export default function FractionsPage({seoData, sectionsContent, introContent, obj3Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function FractionsPage({fractionOpTree, seoData, sectionsContent, introContent, obj3Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1393,6 +1420,14 @@ export default function FractionsPage({seoData, sectionsContent, introContent, o
           sectionsContent.obj6.content,
           <div key={'obj6-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'obj6-diagram'}
+            id="fraction-operations-tree"
+            title="Operations with fractions"
+            source="/arithmetic/fractions"
+          >
+            <TopDownTree data={fractionOpTree} />
+          </DiagramFrame>,
         ]
     },
     {

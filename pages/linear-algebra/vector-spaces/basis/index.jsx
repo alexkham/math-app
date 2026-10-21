@@ -1091,7 +1091,11 @@ The set is [linearly independent](!/linear-algebra/vector-spaces/linear-independ
 
 The set [spans](!/linear-algebra/vector-spaces/span) $V$: every vector in $V$ can be expressed as some linear combination of $\\mathbf{v}_1, \\dots, \\mathbf{v}_n$.
 
-Independence means no vector in the basis is wasted. Spanning means no vector in $V$ is out of reach. A basis is a minimal spanning set — remove any element and the span shrinks. It is also a maximal independent set — add any vector from $V$ and independence breaks. These two characterizations are equivalent and place the basis at the exact boundary between "too few" and "too many."`,
+Independence means no vector in the basis is wasted. Spanning means no vector in $V$ is out of reach.
+
+@academic[rule_theorem_plain:A basis is a minimal spanning set — remove any element and the span shrinks.]@
+
+It is also a maximal independent set — add any vector from $V$ and independence breaks. These two characterizations are equivalent and place the basis at the exact boundary between "too few" and "too many."`,
     before: ``,
     after: ``,
     link: ``,
@@ -1275,7 +1279,11 @@ $$[\\mathbf{u} + \\mathbf{v}]_\\mathcal{B} = [\\mathbf{u}]_\\mathcal{B} + [\\mat
 
 Such a structure-preserving bijection is called an isomorphism. Its existence means that every $n$-dimensional real vector space — $\\mathbb{R}^n$, $\\mathcal{P}_{n-1}$, $\\mathbb{R}^{m \\times k}$ with $mk = n$, solution spaces of ODEs — behaves identically to $\\mathbb{R}^n$ in all algebraic respects. The objects differ, but the linear algebra is the same.
 
-[Dimension](!/linear-algebra/vector-spaces/dimension) is the single invariant that classifies finite-dimensional vector spaces up to isomorphism. Two spaces over the same field are isomorphic if and only if they have the same dimension. This is why dimension occupies such a central place in the theory.`,
+[Dimension](!/linear-algebra/vector-spaces/dimension) is the single invariant that classifies finite-dimensional vector spaces up to isomorphism.
+
+@academic[rule_theorem_plain:Two spaces over the same field are isomorphic if and only if they have the same dimension.]@
+
+This is why dimension occupies such a central place in the theory.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1288,7 +1296,9 @@ Independence is tested by checking whether the homogeneous system $A\\mathbf{c} 
 
 Span is tested by checking whether $A\\mathbf{c} = \\mathbf{b}$ is consistent for every $\\mathbf{b}$, or for a specific $\\mathbf{b}$ if the question is about membership. The span of a set is always a subspace, and its dimension equals the number of independent vectors in the set.
 
-A set of exactly $n$ vectors in an $n$-dimensional space is a basis if and only if it is independent (spanning follows automatically), and if and only if it spans the space (independence follows automatically). At the magic count $n = \\dim(V)$, the two conditions become equivalent.`,
+@academic[rule_theorem_plain:A set of exactly $n$ vectors in an $n$-dimensional space is a basis if and only if it is independent (spanning follows automatically), and if and only if it spans the space (independence follows automatically).]@
+
+At the magic count $n = \\dim(V)$, the two conditions become equivalent.`,
     before: ``,
     after: ``,
     link: ``,

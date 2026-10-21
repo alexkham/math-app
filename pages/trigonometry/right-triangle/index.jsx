@@ -3253,7 +3253,11 @@ Each ratio captures a different geometric relationship. Sine measures how much o
 
 Because the hypotenuse is always the longest side of a right triangle, both $\\sin(\\theta)$ and $\\cos(\\theta)$ are always between 0 and 1 for acute angles. Tangent has no such restriction — it can take any positive value, approaching infinity as $\\theta$ nears $90°$.
 
-A fundamental observation: these ratios do not depend on the size of the triangle. If two right triangles share the same acute angle $\\theta$, they are similar, and all corresponding side ratios are equal. A right triangle with legs 3 and 4 and hypotenuse 5 gives $\\sin(\\theta) = \\frac{3}{5}$ for the angle opposite the side of length 3 — and any similar triangle, no matter how large or small, produces the same value. The trigonometric functions are properties of the angle alone.
+A fundamental observation: these ratios do not depend on the size of the triangle.
+
+@academic[rule_theorem_plain:If two right triangles share the same acute angle $\\theta$, they are similar, and all corresponding side ratios are equal.]@
+
+A right triangle with legs 3 and 4 and hypotenuse 5 gives $\\sin(\\theta) = \\frac{3}{5}$ for the angle opposite the side of length 3 — and any similar triangle, no matter how large or small, produces the same value. The trigonometric functions are properties of the angle alone.
 
 The function names themselves are standardized abbreviations — sin, cos, tan and their companions are catalogued among the [trigonometry symbols](!/math-symbols/trigonometry) together with the [LaTeX](!/latex) code for each, and the [mathematical keyboard](!/keyboard) lets you type them directly.`,
     before: ``,
@@ -3375,7 +3379,7 @@ The solver patterns for the most common right-triangle problems — six scenario
   },
   obj6: {
     title: `The 45-45-90 Triangle`,
-    content: `An isosceles right triangle — two equal legs and a right angle — has acute angles of $45°$ each. Its side ratios are $1 : 1 : \\sqrt{2}$, meaning that if each leg has length $a$, the hypotenuse has length $a\\sqrt{2}$.
+    content: `@academic[rule_theorem_plain:An isosceles right triangle — two equal legs and a right angle — has acute angles of $45°$ each. Its side ratios are $1 : 1 : \\sqrt{2}$, meaning that if each leg has length $a$, the hypotenuse has length $a\\sqrt{2}$.]@
 
 This follows from the Pythagorean theorem: $a^2 + a^2 = c^2$ gives $c = a\\sqrt{2}$.
 
@@ -3395,7 +3399,7 @@ The reciprocal values are $\\csc(45°) = \\sqrt{2}$, $\\sec(45°) = \\sqrt{2}$, 
   },
   obj7: {
     title: `The 30-60-90 Triangle`,
-    content: `The 30-60-90 triangle has side ratios $1 : \\sqrt{3} : 2$, where the shortest side is opposite the $30°$ angle, the medium side (of length $\\sqrt{3}$ relative to the shortest) is opposite the $60°$ angle, and the hypotenuse is twice the shortest side.
+    content: `@academic[rule_theorem_plain:The 30-60-90 triangle has side ratios $1 : \\sqrt{3} : 2$, where the shortest side is opposite the $30°$ angle, the medium side (of length $\\sqrt{3}$ relative to the shortest) is opposite the $60°$ angle, and the hypotenuse is twice the shortest side.]@
 
 This triangle arises from bisecting an equilateral triangle. An equilateral triangle with side length 2 has all angles equal to $60°$. Dropping an altitude from one vertex to the opposite side bisects that side (creating a segment of length 1) and bisects the vertex angle (creating a $30°$ angle). The altitude has length $\\sqrt{2^2 - 1^2} = \\sqrt{3}$ by the Pythagorean theorem. The result is a right triangle with angles $30°$, $60°$, $90°$ and sides $1$, $\\sqrt{3}$, $2$.
 

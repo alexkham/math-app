@@ -1360,7 +1360,9 @@ The boxed entries are pivots. Each sits to the right of and below the previous o
 @academic[formula_callout:row_echelon_form_definition|Row Echelon Form Definition|$$\\text{REF: } \\begin{pmatrix} \\boxed{\\ast} & \\bullet & \\bullet & \\bullet & \\bullet \\\\ 0 & \\boxed{\\ast} & \\bullet & \\bullet & \\bullet \\\\ 0 & 0 & 0 & \\boxed{\\ast} & \\bullet \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$]@
 @academic[formulas_link:/linear-algebra/formulas#row_echelon_form_definition]@
 
-REF is not unique. Different sequences of row operations applied to the same matrix can produce different echelon forms — the pivots may have different values, and the non-pivot entries above the pivots may differ. What remains the same across all echelon forms of a given matrix is the set of pivot positions (which columns contain pivots).`,
+REF is not unique. Different sequences of row operations applied to the same matrix can produce different echelon forms — the pivots may have different values, and the non-pivot entries above the pivots may differ.
+
+@academic[rule_theorem_plain:What remains the same across all echelon forms of a given matrix is the set of pivot positions (which columns contain pivots).]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1411,7 +1413,7 @@ REF is not unique. Different sequences of row operations applied to the same mat
 Applying these conditions to the previous example:
 
 @academic[formula_callout:Reduced Row Echelon Form
-$$\\begin{pmatrix} 1 & 0 & -16 & 0 & \\frac{29}{4} \\\\ 0 & 1 & 5 & 0 & 2 \\\\ 0 & 0 & 0 & 1 & -\\frac{3}{4} \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$]@
+$$\\begin{pmatrix} 1 & 0 & -8 & 0 & 2 \\\\ 0 & 1 & 5 & 0 & 2 \\\\ 0 & 0 & 0 & 1 & -\\frac{3}{4} \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$]@
 
 Every pivot is $1$, and every other entry in a pivot column is $0$. The pivot columns are clean unit vectors within the matrix. The non-pivot columns (columns $3$ and $5$ in this example) can contain anything. In general schematic form:
 
@@ -1526,7 +1528,9 @@ $$[0 \\quad 0 \\quad \\cdots \\quad 0 \\mid d] \\qquad \\text{with } d \\neq 0$$
 
 This row represents the equation $0 = d$, which no values of the unknowns can satisfy.
 
-In terms of [rank](!/linear-algebra/matrix/rank), inconsistency occurs when $\\text{rank}([A \\mid \\mathbf{b}]) > \\text{rank}(A)$. The extra column $\\mathbf{b}$ introduces a new pivot that the coefficient matrix alone does not have — meaning $\\mathbf{b}$ is not in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$.
+@academic[rule_theorem_plain:In terms of [rank](!/linear-algebra/matrix/rank), inconsistency occurs when $\\text{rank}([A \\mid \\mathbf{b}]) > \\text{rank}(A)$.]@
+
+The extra column $\\mathbf{b}$ introduces a new pivot that the coefficient matrix alone does not have — meaning $\\mathbf{b}$ is not in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$.
 
 If no such contradictory row appears, the system is consistent. The distinction between unique and infinite solutions then depends on whether free variables exist: rank $= n$ gives a unique solution, rank $< n$ gives infinitely many.`,
     before: ``,
@@ -1552,7 +1556,9 @@ The zero matrix is in both REF and RREF. It has rank $0$, and the corresponding 
   },
   obj10: {
     title: `Echelon Form and Rank`,
-    content: `The [rank](!/linear-algebra/matrix/rank) of any matrix equals the number of pivots in any echelon form. This is the standard computational method for determining rank: row reduce and count pivots.
+    content: `@academic[rule_theorem_plain:The [rank](!/linear-algebra/matrix/rank) of any matrix equals the number of pivots in any echelon form.]@
+
+This is the standard computational method for determining rank: row reduce and count pivots.
 
 From the rank, everything else follows. The dimension of the column space is $r$. The dimension of the row space is $r$. The number of free variables is $n - r$. The dimension of the null space is $n - r$. The system $A\\mathbf{x} = \\mathbf{b}$ is consistent if and only if the augmented matrix has the same rank $r$ as $A$. The solution, when it exists, is unique if $r = n$ and infinite if $r < n$.
 

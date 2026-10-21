@@ -11,6 +11,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -468,7 +470,9 @@ $$(ab)^{1/n} = a^{1/n} \\cdot b^{1/n}$$]@
 
 This is the power of a product rule from [powers](!/algebra/powers), applied to fractional exponents.
 
-For even indices, both $a$ and $b$ must be non-negative when working in real numbers. Attempting to compute $\\sqrt{-2} \\cdot \\sqrt{-8}$ as $\\sqrt{16} = 4$ produces an error. Negative radicands under even roots require complex number treatment.
+@academic[rule_plain:For even indices, both $a$ and $b$ must be non-negative when working in real numbers.]@
+
+Attempting to compute $\\sqrt{-2} \\cdot \\sqrt{-8}$ as $\\sqrt{16} = 4$ produces an error. Negative radicands under even roots require complex number treatment.
 
 The product rule is essential for [simplifying radicals](!/algebra/roots/simplifying) — factoring out perfect powers relies on splitting the radical.`,
     before: ``,
@@ -506,7 +510,7 @@ This is the power of a quotient rule from [powers](!/algebra/powers), extended t
 
 The quotient rule is essential for rationalizing denominators in [simplifying radicals](!/algebra/roots/simplifying). When a radical appears in a denominator, this rule helps restructure the expression.
 
-For even indices, $a \\geq 0$ and $b > 0$ are required. The denominator must also be nonzero regardless of index.`,
+@academic[rule_plain:For even indices, $a \\geq 0$ and $b > 0$ are required. The denominator must also be nonzero regardless of index.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -877,8 +881,25 @@ const schemas = {
     }),
   };
 
+  const radicalRuleTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Four rules for radicals',
+    preface: 'Each radical rule is an exponent law in disguise: an $n$-th root is the power $1/n$.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Think in exponents',
+    conclusion: 'When a radical rule is in doubt, rewrite the roots as fractional powers and use the exponent laws.',
+    root: { name: 'Radical rules', sub: '4 rules' },
+    children: [
+      { id: 'prod', name: 'Product', symbol: '$\\sqrt[n]{ab} = \\sqrt[n]{a}\\sqrt[n]{b}$', items: [ { label: 'Example', text: '$\\sqrt{12} = 2\\sqrt{3}$' } ] },
+      { id: 'quot', name: 'Quotient', symbol: '$\\sqrt[n]{a/b} = \\sqrt[n]{a}/\\sqrt[n]{b}$', items: [ { label: 'Use', text: 'split a root of a fraction' } ] },
+      { id: 'pow', name: 'Power', symbol: '$\\sqrt[n]{a^m} = a^{m/n}$', items: [ { label: 'Use', text: 'switch to a fractional exponent' } ] },
+      { id: 'nest', name: 'Nested', symbol: '$\\sqrt[m]{\\sqrt[n]{a}} = \\sqrt[mn]{a}$', items: [ { label: 'Use', text: 'collapse a root of a root' } ] },
+    ],
+  };
+
    return {
   props: {
+    radicalRuleTree,
     sectionsContent,
     introContent,
     obj5Table,
@@ -898,7 +919,7 @@ const schemas = {
 }
    }
 
-export default function RadicalRulesPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RadicalRulesPage({radicalRuleTree, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -990,6 +1011,14 @@ export default function RadicalRulesPage({seoData, sectionsContent, introContent
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="radical-rules-tree"
+            title="The four radical rules"
+            source="/algebra/roots/radical-rules"
+          >
+            <TopDownTree data={radicalRuleTree} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

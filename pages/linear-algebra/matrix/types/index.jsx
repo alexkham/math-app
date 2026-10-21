@@ -1281,7 +1281,11 @@ Triangular matrices share several convenient properties with diagonal matrices. 
 @academic[formula_callout:triangular_matrix_determinant|Triangular Matrix Determinant|$$\\det(T) = \\prod_{i=1}^{n} t_{ii}$$]@
 @academic[formulas_link:/linear-algebra/formulas#triangular_matrix_determinant]@
 
-The eigenvalues are the diagonal entries. The product of two upper triangular matrices is upper triangular, and the same holds for lower triangular matrices. The inverse of an invertible upper triangular matrix is also upper triangular.
+The eigenvalues are the diagonal entries.
+
+@academic[rule_plain:The product of two upper triangular matrices is upper triangular, and the same holds for lower triangular matrices.]@
+
+The inverse of an invertible upper triangular matrix is also upper triangular.
 
 These properties make triangular matrices the natural endpoint of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination). Row reduction converts a general matrix into upper triangular form, and the LU [decomposition](!/linear-algebra/decompositions/lower-upper) factors a matrix into lower and upper triangular components, reducing system-solving to two simple back-substitution passes.`,
     before: ``,
@@ -1347,7 +1351,9 @@ The $P$ is exactly the bookkeeping of which rows were exchanged on the way to up
 
 The matrix is determined by its entries on and above the diagonal — everything below is a mirror image.
 
-Symmetric matrices arise constantly in practice. Covariance matrices, Hessians in optimization, adjacency matrices of undirected graphs, and distance matrices are all symmetric. Any product of the form $A^T A$ or $AA^T$ is symmetric regardless of the shape of $A$, since $(A^T A)^T = A^T (A^T)^T = A^T A$.
+Symmetric matrices arise constantly in practice. Covariance matrices, Hessians in optimization, adjacency matrices of undirected graphs, and distance matrices are all symmetric.
+
+@academic[rule_plain:Any product of the form $A^T A$ or $AA^T$ is symmetric regardless of the shape of $A$, since $(A^T A)^T = A^T (A^T)^T = A^T A$.]@
 
 The spectral properties of real symmetric matrices are exceptionally clean. Every eigenvalue is real — no complex eigenvalues can appear. Eigenvectors corresponding to distinct eigenvalues are automatically orthogonal. And the spectral theorem guarantees that every real symmetric matrix can be diagonalized by an orthogonal matrix: $A = Q D Q^T$ where $Q$ is orthogonal and $D$ is diagonal. This is a much stronger conclusion than ordinary diagonalizability, which requires only an invertible change-of-basis matrix.
 
@@ -1372,7 +1378,9 @@ Every square matrix admits a unique decomposition into a symmetric part and a sk
 
 The first term is symmetric, the second is skew-symmetric, and this splitting is unique.
 
-The eigenvalues of a real skew-symmetric matrix are either zero or purely imaginary — they come in conjugate pairs $\\pm bi$ with real eigenvalues restricted to zero. For matrices of odd order, the determinant is always zero: $\\det(A) = \\det(A^T) = \\det(-A) = (-1)^n \\det(A)$, and when $n$ is odd, this forces $\\det(A) = 0$. For even order, the determinant can be nonzero.
+@academic[rule_theorem_plain:The eigenvalues of a real skew-symmetric matrix are either zero or purely imaginary — they come in conjugate pairs $\\pm bi$ with real eigenvalues restricted to zero.]@
+
+For matrices of odd order, the determinant is always zero: $\\det(A) = \\det(A^T) = \\det(-A) = (-1)^n \\det(A)$, and when $n$ is odd, this forces $\\det(A) = 0$. For even order, the determinant can be nonzero.
 
 In $\\mathbb{R}^3$, the [cross product](!/linear-algebra/vectors/cross-product) $\\mathbf{a} \\times \\mathbf{b}$ can be written as $[\\mathbf{a}]_\\times \\mathbf{b}$, where $[\\mathbf{a}]_\\times$ is the $3 \\times 3$ skew-symmetric matrix
 
@@ -1400,7 +1408,9 @@ The determinant of an orthogonal matrix is $\\pm 1$, since $1 = \\det(I) = \\det
 
 When $\\det(Q) = +1$, the matrix is a rotation. When $\\det(Q) = -1$, it involves a reflection.
 
-The defining geometric property is that orthogonal matrices preserve lengths: $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$ for every vector $\\mathbf{x}$. They also preserve dot products ($Q\\mathbf{x} \\cdot Q\\mathbf{y} = \\mathbf{x} \\cdot \\mathbf{y}$) and therefore angles between vectors. A transformation that preserves all distances and angles is called an isometry, and the orthogonal matrices are precisely the linear isometries.
+@academic[rule_plain:The defining geometric property is that orthogonal matrices preserve lengths: $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$ for every vector $\\mathbf{x}$.]@
+
+They also preserve dot products ($Q\\mathbf{x} \\cdot Q\\mathbf{y} = \\mathbf{x} \\cdot \\mathbf{y}$) and therefore angles between vectors. A transformation that preserves all distances and angles is called an isometry, and the orthogonal matrices are precisely the linear isometries.
 
 Common examples include rotation matrices in $\\mathbb{R}^2$ and $\\mathbb{R}^3$, reflection matrices across any line or plane through the origin, and permutation matrices that reorder coordinates. The inverse of an orthogonal matrix is its transpose — making it the cheapest matrix inverse to compute.`,
     before: ``,
@@ -1414,7 +1424,9 @@ Common examples include rotation matrices in $\\mathbb{R}^2$ and $\\mathbb{R}^3$
 @academic[formula_callout:nilpotent_matrix_definition|Nilpotent Matrix Definition|$$A^k = O \\text{ for some integer } k \\geq 1$$]@
 @academic[formulas_link:/linear-algebra/formulas#nilpotent_matrix_definition]@
 
-The smallest such $k$ is called the index of nilpotency. Every eigenvalue of a nilpotent matrix is zero, which forces both the determinant and the trace to vanish.
+The smallest such $k$ is called the index of nilpotency.
+
+@academic[rule_theorem_plain:Every eigenvalue of a nilpotent matrix is zero, which forces both the determinant and the trace to vanish.]@
 
 Nilpotent matrices have a useful algebraic consequence: the matrix $I - A$ is always invertible, with inverse given by a finite geometric series:
 
@@ -1447,7 +1459,9 @@ Geometrically, idempotent matrices are [projections](!/linear-algebra/orthogonal
 @academic[formula_callout:involutory_matrix_definition|Involutory Matrix Definition|$$A^2 = I$$]@
 @academic[formulas_link:/linear-algebra/formulas#involutory_matrix_definition]@
 
-The eigenvalues of an involutory matrix must satisfy $\\lambda^2 = 1$, so they are restricted to $+1$ and $-1$. Reflections are the prototypical example: reflecting twice across the same line or plane returns every vector to its starting point. This is the third of the power conditions, and it constrains the spectrum the same way the other two do — by handing the eigenvalues a polynomial equation they cannot escape.
+@academic[rule_plain:The eigenvalues of an involutory matrix must satisfy $\\lambda^2 = 1$, so they are restricted to $+1$ and $-1$.]@
+
+Reflections are the prototypical example: reflecting twice across the same line or plane returns every vector to its starting point. This is the third of the power conditions, and it constrains the spectrum the same way the other two do — by handing the eigenvalues a polynomial equation they cannot escape.
 
 The matrix $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ is involutory — it swaps the two coordinates and swapping twice restores the original. It is also a [permutation matrix](!/linear-algebra/matrix/types#12), which is worth noting because the two conditions are independent: this matrix satisfies both, but most permutation matrices are not involutory and most involutory matrices are not permutations.
 

@@ -1320,7 +1320,9 @@ The number of solutions per period depends on the function and the value. Sine a
   },
 obj2: {
     title: `Solving Basic Sine Equations`,
-    content: `An equation of the form $\\sin(x) = a$ is solvable if and only if $-1 \\leq a \\leq 1$ — a consequence of the [bounded range](!/trigonometry/properties) of sine. If $|a| > 1$, there is no solution.
+    content: `@academic[rule_corollary_plain:An equation of the form $\\sin(x) = a$ is solvable if and only if $-1 \\leq a \\leq 1$ — a consequence of the [bounded range](!/trigonometry/properties) of sine.]@
+
+If $|a| > 1$, there is no solution.
 
 **Step 1: Find the reference angle.** Compute $\\alpha = \\arcsin(|a|)$ — the acute angle whose sine equals $|a|$. For standard values, this comes from the [unit circle](!/trigonometry/unit-circle) or special triangles. For non-standard values, use a calculator with the [inverse sine function](!/trigonometry/inverse-functions).
 
@@ -1400,7 +1402,9 @@ $$x = \\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3} \\quad \\text{or} \\quad x = \\p
   },
   obj4: {
     title: `Solving Basic Tangent Equations`,
-    content: `The equation $\\tan(x) = a$ has solutions for every real value of $a$ — tangent's range is $(-\\infty, \\infty)$, so boundedness is never a constraint. This makes tangent equations structurally simpler than sine or cosine equations.
+    content: `@academic[rule_plain:The equation $\\tan(x) = a$ has solutions for every real value of $a$ — tangent's range is $(-\\infty, \\infty)$, so boundedness is never a constraint.]@
+
+This makes tangent equations structurally simpler than sine or cosine equations.
 
 **Step 1: Principal value.** $\\alpha = \\arctan(a)$ — the unique angle in $\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$ whose tangent equals $a$. This is always well-defined, since [arctangent](!/trigonometry/inverse-functions) accepts any real input.
 
@@ -1583,7 +1587,11 @@ Now find which values fall in $[0, 2\\pi)$:
 
 Four solutions: $\\left\\{\\frac{\\pi}{6}, \\frac{\\pi}{3}, \\frac{7\\pi}{6}, \\frac{4\\pi}{3}\\right\\}$.]@
 
-The critical point: the factor of 2 in the argument doubles the number of solutions within a $2\\pi$ interval. A factor of 3 would triple it. In general, $\\sin(nx) = a$ on $[0, 2\\pi)$ can produce up to $2n$ solutions (for $|a| < 1$). This multiplication is the most common source of missed solutions — students who solve for $u$ but forget to generate all valid $x$ values within the target interval.
+The critical point: the factor of 2 in the argument doubles the number of solutions within a $2\\pi$ interval. A factor of 3 would triple it.
+
+@academic[rule_plain:In general, $\\sin(nx) = a$ on $[0, 2\\pi)$ can produce up to $2n$ solutions (for $|a| < 1$).]@
+
+This multiplication is the most common source of missed solutions — students who solve for $u$ but forget to generate all valid $x$ values within the target interval.
 
 When the interval for $x$ is $[0, 2\\pi)$ and the argument is $2x$, the effective interval for $u$ is $[0, 4\\pi)$. For $3x$, it becomes $[0, 6\\pi)$. Always determine the $u$-interval before listing solutions — otherwise, solutions from later periods will be overlooked.`,
     before: ``,

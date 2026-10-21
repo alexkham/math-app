@@ -238,7 +238,9 @@ obj0: {
 
     obj1: {
   title: `Zero as a Base — Positive Exponents`,
-  content: `Raising zero to any positive power gives zero. No amount of repetition changes the outcome:
+  content: `@academic[rule_plain:Raising zero to any positive power gives zero.]@
+
+No amount of repetition changes the outcome:
 
 @academic[formula_callout:Zero as a Base — Positive Exponents
 $$0^1 = 0 \\qquad 0^2 = 0 \\qquad 0^3 = 0 \\qquad 0^{100} = 0$$]@
@@ -270,7 +272,9 @@ At $a = 0$ the growth is not just large — it is undefined. There is no finite 
 
 obj3: {
   title: `Zero as an Exponent — Why $a^0 = 1$`,
-  content: `Setting the exponent to zero produces a result that surprises at first glance: $a^0 = 1$ for every nonzero $a$. The number $5^0 = 1$. The number $(-3)^0 = 1$. The number $(0.0001)^0 = 1$. The base is irrelevant — the answer is always $1$.
+  content: `@academic[rule_plain:Setting the exponent to zero produces a result that surprises at first glance: $a^0 = 1$ for every nonzero $a$.]@
+
+The number $5^0 = 1$. The number $(-3)^0 = 1$. The number $(0.0001)^0 = 1$. The base is irrelevant — the answer is always $1$.
 
 The quotient rule provides the algebraic proof. Dividing equal powers gives $\\frac{a^n}{a^n} = a^{n-n} = a^0$. But $\\frac{a^n}{a^n} = 1$ for any nonzero $a$. So $a^0 = 1$.
 

@@ -334,7 +334,9 @@ For large numbers, [divisibility rules](!/arithmetic/divisibility/rules) speed u
 
   obj3: {
     title: `Factor Pairs`,
-    content: `Every factor $a$ of $n$ has a partner: $\\frac{n}{a}$. Together they satisfy $a \\cdot \\frac{n}{a} = n$, and listing factor pairs ensures no divisor is overlooked.
+    content: `@academic[rule_plain:Every factor $a$ of $n$ has a partner: $\\frac{n}{a}$.]@
+
+Together they satisfy $a \\cdot \\frac{n}{a} = n$, and listing factor pairs ensures no divisor is overlooked.
 
 For $n = 24$, the pairs are: $(1, 24)$, $(2, 12)$, $(3, 8)$, $(4, 6)$. Each pair multiplies to $24$, and together they account for all eight factors.`,
     afterFigure: `For perfect squares, one pair collapses into a repeated value. The number $36$ has the pair $(6, 6)$ — the square root paired with itself. This is why perfect squares have an odd number of factors: every other factor appears in a pair of two distinct values, but the square root stands alone.
@@ -362,7 +364,9 @@ Perfect numbers are rare. The first four are $6, 28, 496$, and $8{,}128$. Every 
     title: `Multiples`,
     content: `A multiple of $a$ is any number $b$ such that $a \\mid b$ — meaning $b = a \\cdot k$ for some positive integer $k$. Where factors divide into a number, multiples are produced by multiplying out from it.
 
-The multiples of $7$ are $7, 14, 21, 28, 35, 42, \\ldots$ — an infinite sequence with no largest member. Every positive integer generates infinitely many multiples.`,
+The multiples of $7$ are $7, 14, 21, 28, 35, 42, \\ldots$ — an infinite sequence with no largest member.
+
+@academic[rule_plain:Every positive integer generates infinitely many multiples.]@`,
     afterFigure: `Zero is a multiple of every number, since $0 = a \\cdot 0$ for any $a$. It sits at the start of every multiple sequence, though it is often omitted when listing "the multiples of $a$" in contexts where only positive values are relevant.
 
 The [modulo](!/arithmetic/modulo) operation identifies which multiple of $n$ is closest to a given number $a$ without exceeding it: $a = n \\cdot q + r$, where $n \\cdot q$ is that nearest multiple and $r$ is the gap between it and $a$.`,

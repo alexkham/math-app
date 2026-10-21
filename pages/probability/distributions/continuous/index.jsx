@@ -863,7 +863,11 @@ The cumulative distribution function F(x) = P(X ≤ x) answers the question "wha
 
 **The Fundamental Relationship**
 
-The PDF and CDF are intimately connected: F(x) = ∫[-∞ to x] f(t)dt, and conversely, f(x) = dF(x)/dx. The CDF is the accumulated area under the PDF from the left, while the PDF is the rate of change of the CDF. This means if you have one, you can find the other through calculus.
+The PDF and CDF are intimately connected: F(x) = ∫[-∞ to x] f(t)dt, and conversely, f(x) = dF(x)/dx.
+
+@academic[rule_theorem_plain:The CDF is the accumulated area under the PDF from the left, while the PDF is the rate of change of the CDF.]@
+
+This means if you have one, you can find the other through calculus.
 
 **Practical Workflow**
 
@@ -936,7 +940,9 @@ The probability density function appears as a smooth curve when plotted. The sha
 
 **Probability as Area**
 
-The fundamental principle of continuous distributions is that probability equals area under the density curve. To find P(2 ≤ X ≤ 5), locate 2 and 5 on the horizontal axis and measure the area between them under the curve. A wider interval captures more area, hence higher probability. The total area under any PDF always equals 1, representing certainty that some outcome will occur. This visual interpretation makes integration meaningful—you're literally measuring regions under curves.
+@academic[rule_plain:The fundamental principle of continuous distributions is that probability equals area under the density curve.]@
+
+To find P(2 ≤ X ≤ 5), locate 2 and 5 on the horizontal axis and measure the area between them under the curve. A wider interval captures more area, hence higher probability. The total area under any PDF always equals 1, representing certainty that some outcome will occur. This visual interpretation makes integration meaningful—you're literally measuring regions under curves.
 
 **Parameter Effects on Shape and Spread**
 

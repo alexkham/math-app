@@ -1483,7 +1483,9 @@ The solution is $x_1 = -23/(-15) = 23/15$, $x_2 = 1/(-15) = -1/15$, $x_3 = -26/(
 
 ## Theoretical Significance
 
-Cramer's rule proves that each solution component is a rational function of the matrix entries and the right-hand side entries. This has consequences in pure algebra and in sensitivity analysis, where it shows how solutions respond to perturbations in the data. As a computational method, however, it requires $n + 1$ determinant evaluations, making it far more expensive than [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) for large systems.`,
+@academic[rule_corollary_plain:Cramer's rule proves that each solution component is a rational function of the matrix entries and the right-hand side entries.]@
+
+This has consequences in pure algebra and in sensitivity analysis, where it shows how solutions respond to perturbations in the data. As a computational method, however, it requires $n + 1$ determinant evaluations, making it far more expensive than [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) for large systems.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1696,7 +1698,10 @@ Each column corresponds to one function, and each row raises the order of differ
 
 ## The Independence Test
 
-If $W(f_1, \\dots, f_n)(x_0) \\neq 0$ at some point $x_0$, then the functions $f_1, \\dots, f_n$ are linearly independent on any interval containing $x_0$. The logic mirrors the matrix case: a nonzero determinant means the "columns" — here the function-derivative profiles — are not proportional.
+@academic[rule_theorem:Wronskian Test
+If $W(f_1, \\dots, f_n)(x_0) \\neq 0$ at some point $x_0$, then the functions $f_1, \\dots, f_n$ are linearly independent on any interval containing $x_0$.]@
+
+The logic mirrors the matrix case: a nonzero determinant means the "columns" — here the function-derivative profiles — are not proportional.
 
 The converse requires care. A Wronskian that vanishes everywhere does not automatically imply dependence unless the functions are known to be solutions of a single linear ordinary differential equation. Without that structural assumption, counterexamples exist.
 
@@ -1752,7 +1757,9 @@ The product formula: $(x_2 - x_1)(x_3 - x_1)(x_3 - x_2) = (2 - 1)(4 - 1)(4 - 2) 
 
 ## Why It Matters
 
-The Vandermonde determinant is nonzero precisely when all nodes are distinct. This guarantees that a polynomial of degree at most $n - 1$ is uniquely determined by its values at $n$ distinct points — the theoretical foundation of polynomial interpolation. It also appears in the theory of symmetric polynomials and in the derivation of various discrete orthogonality relations.
+@academic[rule_corollary_plain:The Vandermonde determinant is nonzero precisely when all nodes are distinct.]@
+
+This guarantees that a polynomial of degree at most $n - 1$ is uniquely determined by its values at $n$ distinct points — the theoretical foundation of polynomial interpolation. It also appears in the theory of symmetric polynomials and in the derivation of various discrete orthogonality relations.
 
 ## Other Structured Determinants
 

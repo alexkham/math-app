@@ -392,7 +392,9 @@ const sectionsContent = {
 @academic[formula_callout:Definition of Absolute Value
 $$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$$]@
 
-The notation $-x$ in the second case does not mean "a negative number." It means "the opposite of $x$." When $x$ is already negative, $-x$ is positive. The absolute value function takes any input and returns a non-negative output: $|x| \\geq 0$ for every real $x$, with equality only when $x = 0$.
+The notation $-x$ in the second case does not mean "a negative number." It means "the opposite of $x$." When $x$ is already negative, $-x$ is positive.
+
+@academic[rule_plain:The absolute value function takes any input and returns a non-negative output: $|x| \\geq 0$ for every real $x$, with equality only when $x = 0$.]@
 
 Geometrically, $|x|$ is the distance from $x$ to the origin on the number line. The number $-7$ sits $7$ units from zero, so $|-7| = 7$. The number $4$ sits $4$ units from zero, so $|4| = 4$. Distance is inherently non-negative, which is why absolute value never produces a negative result.
 
@@ -496,7 +498,9 @@ Each case is solved separately, and the results are combined.
 
 The equation $|2x - 1| = |x + 4|$ produces two equations. From $2x - 1 = x + 4$: $x = 5$. From $2x - 1 = -(x + 4)$: $2x - 1 = -x - 4$, so $3x = -3$ and $x = -1$. Both candidates should be verified: $|2(5) - 1| = |9| = 9$ and $|5 + 4| = |9| = 9$, confirming $x = 5$. Similarly, $|2(-1) - 1| = |-3| = 3$ and $|-1 + 4| = |3| = 3$, confirming $x = -1$. The solution set is $\\{-1, 5\\}$.
 
-An alternative approach uses the algebraic identity $|A| = |B|$ if and only if $A^2 = B^2$. Squaring both sides removes all absolute value bars at once, producing the equation $(2x - 1)^2 = (x + 4)^2$. Expanding and simplifying yields a polynomial equation. This method is algebraically equivalent to case-splitting but carries a risk: squaring can introduce extraneous solutions, so every candidate must be checked in the original equation.`,
+@academic[rule_plain:An alternative approach uses the algebraic identity $|A| = |B|$ if and only if $A^2 = B^2$.]@
+
+Squaring both sides removes all absolute value bars at once, producing the equation $(2x - 1)^2 = (x + 4)^2$. Expanding and simplifying yields a polynomial equation. This method is algebraically equivalent to case-splitting but carries a risk: squaring can introduce extraneous solutions, so every candidate must be checked in the original equation.`,
     before: ``,
     after: ``,
     link: '',
@@ -528,7 +532,11 @@ Extraneous solutions enter through a different route: squaring. The equation $|x
 
 For this equation, case-splitting gives two cases. From $x - 2 = 3x - 4$: $x = 1$. Check: $|1 - 2| = 1$ and $3(1) - 4 = -1$. Since $1 \\neq -1$, this candidate is extraneous. From $-(x - 2) = 3x - 4$: $-x + 2 = 3x - 4$, so $x = \\frac{3}{2}$. Check: $|\\frac{3}{2} - 2| = \\frac{1}{2}$ and $3(\\frac{3}{2}) - 4 = \\frac{1}{2}$. This one holds. The only solution is $x = \\frac{3}{2}$.
 
-The first candidate failed because the right-hand side $3x - 4$ was negative at $x = 1$. An absolute value equation $|A| = B$ requires $B \\geq 0$ at the solution point. This constraint is automatically enforced by careful case-splitting but easily missed when squaring.`,
+The first candidate failed because the right-hand side $3x - 4$ was negative at $x = 1$.
+
+@academic[rule_plain:An absolute value equation $|A| = B$ requires $B \\geq 0$ at the solution point.]@
+
+This constraint is automatically enforced by careful case-splitting but easily missed when squaring.`,
     before: ``,
     after: ``,
     link: '',
@@ -540,7 +548,11 @@ The first candidate failed because the right-hand side $3x - 4$ was negative at 
 
 The equation $|x - a| = d$ asks: which points on the number line are exactly $d$ units from $a$? There are two such points, one on each side: $x = a + d$ and $x = a - d$. The solutions are symmetric about $a$, and $a$ is their midpoint. The equation $|x - 5| = 3$ has solutions $x = 8$ and $x = 2$, both exactly $3$ units from $5$.
 
-The equation $|x - a| = |x - b|$ asks: which point is equidistant from $a$ and $b$? On the number line, exactly one point lies at equal distance from two distinct fixed points — the midpoint $x = \\frac{a + b}{2}$. The equation $|x - 1| = |x - 7|$ has the single solution $x = 4$, the midpoint of $1$ and $7$.
+The equation $|x - a| = |x - b|$ asks: which point is equidistant from $a$ and $b$?
+
+@academic[rule_theorem_plain:On the number line, exactly one point lies at equal distance from two distinct fixed points — the midpoint $x = \\frac{a + b}{2}$.]@
+
+The equation $|x - 1| = |x - 7|$ has the single solution $x = 4$, the midpoint of $1$ and $7$.
 
 The equation $|x - a| + |x - b| = d$ asks: which points have the property that their total distance to $a$ and $b$ equals $d$? The minimum possible value of $|x - a| + |x - b|$ is $|a - b|$ (achieved by any $x$ between $a$ and $b$). If $d < |a - b|$, no solution exists. If $d = |a - b|$, every point in the closed interval $[a, b]$ is a solution. If $d > |a - b|$, exactly two solutions exist, one beyond each endpoint.
 

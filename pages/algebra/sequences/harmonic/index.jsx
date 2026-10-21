@@ -187,7 +187,9 @@ A harmonic sequence is neither arithmetic nor [geometric](!/algebra/sequences/ge
 
 The terms approach zero as $n \\to \\infty$, since the denominators grow without bound. However, the rate of decrease slows — the gap between $\\frac{1}{n}$ and $\\frac{1}{n+1}$ is $\\frac{1}{n(n+1)}$, which itself shrinks as $n$ increases.
 
-Unlike arithmetic and geometric sequences, harmonic sequences have no closed-form expression for their partial sums. The sum $\\sum_{k=1}^{n} \\frac{1}{k}$ cannot be written as a simple formula in $n$. This absence is not a gap in technique — it is a fundamental property. The partial sums, known as harmonic numbers $H_n$, grow roughly as $\\ln n$ but involve no elementary closed form.`,
+@academic[rule_theorem_plain:Unlike arithmetic and geometric sequences, harmonic sequences have no closed-form expression for their partial sums.]@
+
+The sum $\\sum_{k=1}^{n} \\frac{1}{k}$ cannot be written as a simple formula in $n$. This absence is not a gap in technique — it is a fundamental property. The partial sums, known as harmonic numbers $H_n$, grow roughly as $\\ln n$ but involve no elementary closed form.`,
     before: ``,
     after: ``,
     link: '',
@@ -199,7 +201,7 @@ Unlike arithmetic and geometric sequences, harmonic sequences have no closed-for
 @academic[formula_callout:The Harmonic Series
 $$\\sum_{n=1}^{\\infty} \\frac{1}{n} = 1 + \\frac{1}{2} + \\frac{1}{3} + \\frac{1}{4} + \\cdots$$]@
 
-This series diverges — its partial sums grow without bound, even though the individual terms shrink to zero.
+@academic[rule_theorem_plain:This series diverges — its partial sums grow without bound, even though the individual terms shrink to zero.]@
 
 The proof by grouping (attributed to Oresme, 14th century) is among the most elegant in mathematics. Group the terms after the first as follows:
 
@@ -210,7 +212,9 @@ The first group contains $1$ term summing to at least $\\frac{1}{2}$. The next g
 
 The harmonic series grows slowly — its partial sums approximate $\\ln n + \\gamma$, where $\\gamma \\approx 0.5772$ is the Euler–Mascheroni constant. To reach a partial sum exceeding $10$, you need over $12{,}000$ terms. But slowly is not the same as bounded: the sum eventually surpasses any finite threshold.
 
-This stands in contrast to the [geometric series](!/algebra/sequences/geometric#6) $\\sum \\frac{1}{2^n}$, which converges to $1$. Both series have terms approaching zero, but geometric terms shrink fast enough (by a constant factor) to keep the total finite. Harmonic terms shrink too slowly. The lesson: terms approaching zero is necessary for convergence but not sufficient.`,
+This stands in contrast to the [geometric series](!/algebra/sequences/geometric#6) $\\sum \\frac{1}{2^n}$, which converges to $1$. Both series have terms approaching zero, but geometric terms shrink fast enough (by a constant factor) to keep the total finite. Harmonic terms shrink too slowly.
+
+@academic[rule_plain:The lesson: terms approaching zero is necessary for convergence but not sufficient.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -231,7 +235,9 @@ For two numbers, this simplifies to:
 @academic[formula_callout:Harmonic Mean
 $$H = \\frac{2ab}{a + b}$$]@
 
-In a harmonic sequence, every term (except the first and last) is the harmonic mean of its two neighbors. This follows from the fact that the reciprocals form an arithmetic sequence: the reciprocal of each term is the [arithmetic mean](!/algebra/sequences/arithmetic#6) of the reciprocals of its neighbors, and taking reciprocals back gives the harmonic mean relationship.
+@academic[rule_plain:In a harmonic sequence, every term (except the first and last) is the harmonic mean of its two neighbors.]@
+
+This follows from the fact that the reciprocals form an arithmetic sequence: the reciprocal of each term is the [arithmetic mean](!/algebra/sequences/arithmetic#6) of the reciprocals of its neighbors, and taking reciprocals back gives the harmonic mean relationship.
 
 Inserting $k$ harmonic means between two values $a$ and $b$ reduces to inserting $k$ arithmetic means between $\\frac{1}{a}$ and $\\frac{1}{b}$, then taking reciprocals of all inserted terms.`,
     before: ``,

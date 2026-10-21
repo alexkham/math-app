@@ -243,7 +243,9 @@ $$F_X(x) = \\mathbb{P}(X \\leq x)$$
 
 This function serves as a complete characterization of any [random variable](!/probability/random-variables), whether [discrete](!/probability/distributions/discrete) or [continuous](!/probability/distributions/continuous). In the discrete case, the CDF forms a step function that increases in jumps at each outcome. In the continuous case, it appears as a smooth, continuous curve that represents the integral of the density function from $-\\infty$ to $x$.
 
-The [CDF](!/probability/cdf) is universally applicable and mathematically powerful. It allows us to easily calculate the probability of intervals—simply by taking the difference $F(b) - F(a)$—and is the basis for defining **Quantiles** and **Percentiles**. Because probabilities cannot be negative and total probability must sum to one, every CDF fundamentally starts at 0 (at $-\\infty$) and monotonically increases to 1 (at $+\\infty$).`,
+The [CDF](!/probability/cdf) is universally applicable and mathematically powerful. It allows us to easily calculate the probability of intervals—simply by taking the difference $F(b) - F(a)$—and is the basis for defining **Quantiles** and **Percentiles**.
+
+@academic[rule_plain:Because probabilities cannot be negative and total probability must sum to one, every CDF fundamentally starts at 0 (at $-\\infty$) and monotonically increases to 1 (at $+\\infty$).]@`,
         before:``,
         after:``,
     

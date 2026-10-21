@@ -1698,7 +1698,10 @@ The normal distribution appears throughout nature and human activity whenever ma
 
 ### Why It Appears
 
-The [Central Limit Theorem](!/probability/central-limit-theorem) explains why the normal distribution is ubiquitous: when many independent random effects add together, their sum tends toward normal regardless of the individual distributions. This makes it the natural model for aggregate phenomena.
+@academic[rule_theorem:Central Limit Theorem
+The [Central Limit Theorem](!/probability/central-limit-theorem) explains why the normal distribution is ubiquitous: when many independent random effects add together, their sum tends toward normal regardless of the individual distributions.]@
+
+This makes it the natural model for aggregate phenomena.
 
 @academic[example:Example Application
 

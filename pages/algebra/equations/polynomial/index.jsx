@@ -439,7 +439,11 @@ where $a_n \\neq 0$ and $n$ is a positive integer. The integer $n$ is the degree
 
 [Linear equations](!/algebra/equations/linear) correspond to $n = 1$ and [quadratic equations](!/algebra/equations/quadratic) to $n = 2$. Both have complete, closed-form solutions and are treated on their own pages. This page addresses degree three and above, where new phenomena emerge: more roots, more intricate factorizations, and eventually the impossibility of a universal solving formula.
 
-The degree governs the maximum number of roots. A polynomial of degree $n$ has at most $n$ real roots, and when counted with multiplicity over the complex numbers, it has exactly $n$ roots. A cubic may have one or three real roots, a quartic may have zero, two, or four, and the possible counts depend on the specific coefficients involved.`,
+The degree governs the maximum number of roots.
+
+@academic[rule_theorem_plain:A polynomial of degree $n$ has at most $n$ real roots, and when counted with multiplicity over the complex numbers, it has exactly $n$ roots.]@
+
+A cubic may have one or three real roots, a quartic may have zero, two, or four, and the possible counts depend on the specific coefficients involved.`,
     before: ``,
     after: ``,
     link: '',
@@ -456,7 +460,11 @@ $$P(x) = a_n(x - r_1)(x - r_2) \\cdots (x - r_n)$$]@
 
 where $r_1, r_2, \\dots, r_n$ are the $n$ roots (not necessarily distinct). Over the complex numbers, every polynomial splits into linear factors. No irreducible quadratic or higher-degree factors remain.
 
-Over the real numbers, the picture is slightly different. Complex roots of a polynomial with real coefficients always appear in conjugate pairs: if $r = a + bi$ is a root, then $\\overline{r} = a - bi$ is also a root. Each conjugate pair combines into a quadratic factor $x^2 - 2ax + (a^2 + b^2)$ with real coefficients and negative discriminant. A real polynomial therefore factors into a product of linear factors (from real roots) and irreducible quadratic factors (from conjugate pairs).`,
+Over the real numbers, the picture is slightly different.
+
+@academic[rule_theorem_plain:Complex roots of a polynomial with real coefficients always appear in conjugate pairs: if $r = a + bi$ is a root, then $\\overline{r} = a - bi$ is also a root.]@
+
+Each conjugate pair combines into a quadratic factor $x^2 - 2ax + (a^2 + b^2)$ with real coefficients and negative discriminant. A real polynomial therefore factors into a product of linear factors (from real roots) and irreducible quadratic factors (from conjugate pairs).`,
     before: ``,
     after: ``,
     link: '',
@@ -510,7 +518,9 @@ Cardano's formula yields all three roots, but its practical use is limited. The 
 
 The practical approach to most cubics encountered in coursework begins with the rational root theorem. If a rational root exists, polynomial division reduces the cubic to a quadratic, and the remaining roots follow from the quadratic formula. When no rational root exists, numerical methods such as Newton's method or graphical estimation provide the real roots to any required precision.
 
-Every cubic with real coefficients has at least one real root. This is a consequence of the intermediate value theorem: a real cubic changes sign as $x$ ranges from $-\\infty$ to $+\\infty$, so it must cross zero somewhere.
+@academic[rule_corollary_plain:Every cubic with real coefficients has at least one real root.]@
+
+This is a consequence of the intermediate value theorem: a real cubic changes sign as $x$ ranges from $-\\infty$ to $+\\infty$, so it must cross zero somewhere.
 
 To solve a specific polynomial equation with each step shown, use the [polynomial equation solver](!/algebra/calculators/equations/polynomial).`,
     before: ``,
@@ -548,7 +558,9 @@ For equations of any degree, the practical toolkit consists of the rational root
     title: `Root Multiplicity`,
     content: `A root $r$ of the polynomial $P(x)$ has multiplicity $k$ if $(x - r)^k$ divides $P(x)$ but $(x - r)^{k+1}$ does not. A root of multiplicity $1$ is called a simple root, multiplicity $2$ a double root, multiplicity $3$ a triple root, and so on.
 
-The sum of all multiplicities across all roots equals the degree of the polynomial. The equation $x^3 - 3x^2 + 3x - 1 = 0$ factors as $(x - 1)^3 = 0$, so $x = 1$ is a triple root and the three roots (counted with multiplicity) are all equal to $1$.
+@academic[rule_plain:The sum of all multiplicities across all roots equals the degree of the polynomial.]@
+
+The equation $x^3 - 3x^2 + 3x - 1 = 0$ factors as $(x - 1)^3 = 0$, so $x = 1$ is a triple root and the three roots (counted with multiplicity) are all equal to $1$.
 
 Multiplicity has both algebraic and geometric significance. Algebraically, it affects how the root behaves under perturbation: a simple root of $P(x) = 0$ moves smoothly when the coefficients change slightly, while a multiple root tends to split into several nearby roots. Geometrically, multiplicity determines how the graph of $y = P(x)$ interacts with the $x$-axis at the root. At a simple root, the graph crosses the axis cleanly. At a double root, the graph touches the axis and turns back without crossing — the root is a local extremum. At a triple root, the graph crosses the axis but flattens as it does so, producing an inflection point on the axis.
 

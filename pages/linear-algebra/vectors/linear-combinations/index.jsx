@@ -1106,7 +1106,9 @@ is a linear combination of those vectors. The scalars $c_i$ are called the coeff
 
 The definition imposes no restrictions on the coefficients — they can be positive, negative, or zero. Setting all coefficients to $1$ reduces the linear combination to ordinary vector addition. Using a single vector with one coefficient gives scalar multiplication. Setting all coefficients to zero produces the zero vector. These familiar operations are not separate concepts; they are boundary cases of the same construction.
 
-A linear combination always produces a vector in the same $\\mathbb{R}^n$ as the inputs. Both scalar multiplication and addition preserve the dimension, so no matter how many vectors are combined or what coefficients are chosen, the result remains in the original space.`,
+@academic[rule_plain:A linear combination always produces a vector in the same $\\mathbb{R}^n$ as the inputs.]@
+
+Both scalar multiplication and addition preserve the dimension, so no matter how many vectors are combined or what coefficients are chosen, the result remains in the original space.`,
     before: ``,
     after: ``,
     link: '',

@@ -2043,7 +2043,9 @@ Without the conjugate, no systematic method converts complex quotients to standa
     obj8: {
   title: `Conjugate Pairs in Polynomials`,
   before: ``,
-  content: `Polynomials with real coefficients exhibit remarkable structure in their complex roots: non-real roots always appear in conjugate pairs. If $z_0$ solves the equation, so does $\\bar{z_0}$.
+  content: `@academic[rule_theorem_plain:Polynomials with real coefficients exhibit remarkable structure in their complex roots: non-real roots always appear in conjugate pairs.]@
+
+If $z_0$ solves the equation, so does $\\bar{z_0}$.
 
 The theorem states: let $p(z) = a_nz^n + a_{n-1}z^{n-1} + \\cdots + a_1z + a_0$ be a polynomial with all coefficients $a_k$ real. If $p(z_0) = 0$ for some complex number $z_0$, then $p(\\bar{z_0}) = 0$ as well.
 

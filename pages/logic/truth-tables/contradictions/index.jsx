@@ -414,7 +414,10 @@ The simplest contradiction is P ∧ ¬P — a proposition and its negation conjo
 
 Contradictions also serve as a diagnostic tool for consistency. If a set of premises conjoined produces a contradiction, the premises are mutually inconsistent — they cannot all be true simultaneously. Identifying the source of the contradiction reveals which premises conflict.
 
-In formal systems, the principle of explosion (ex falso quodlibet) states that from a contradiction, any statement can be derived. This makes contradictions maximally dangerous in a logical system: a single contradiction makes the entire system trivially provable and therefore useless.`,
+@academic[rule:Principle of explosion
+In formal systems, the principle of explosion (ex falso quodlibet) states that from a contradiction, any statement can be derived.]@
+
+This makes contradictions maximally dangerous in a logical system: a single contradiction makes the entire system trivially provable and therefore useless.`,
       before: ``,
       after: ``,
       link: ``,

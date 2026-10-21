@@ -148,7 +148,7 @@ obj0: {
 },
   obj1: {
     title: `Domain`,
-    content: `The domain of $f(x) = \\log_a(x)$ is the set of all positive real numbers: $(0, \\infty)$.
+    content: `@academic[rule_theorem_plain:The domain of $f(x) = \\log_a(x)$ is the set of all positive real numbers: $(0, \\infty)$.]@
 
 This restriction follows from the definition. The equation $\\log_a(x) = y$ means $a^y = x$. Since $a > 0$ and $a^y > 0$ for all real $y$, the output of any exponential with positive base is strictly positive. No real exponent produces zero or a negative number.
 
@@ -161,7 +161,7 @@ For composite arguments, the entire expression inside the logarithm must be posi
   },
   obj2: {
     title: `Range`,
-    content: `The range of $f(x) = \\log_a(x)$ is all real numbers: $(-\\infty, \\infty)$.
+    content: `@academic[rule_theorem_plain:The range of $f(x) = \\log_a(x)$ is all real numbers: $(-\\infty, \\infty)$.]@
 
 As $x$ increases from just above zero toward infinity, $\\log_a(x)$ takes every real value exactly once. Near zero, the logarithm plunges toward $-\\infty$. At $x = 1$, the logarithm equals zero. As $x$ grows large, the logarithm increases without bound, though slowly.
 
@@ -178,14 +178,17 @@ When $a > 1$, the function $f(x) = \\log_a(x)$ is strictly increasing. If $x_1 <
 
 When $0 < a < 1$, the function $f(x) = \\log_a(x)$ is strictly decreasing. If $x_1 < x_2$, then $\\log_a(x_1) > \\log_a(x_2)$. Larger inputs produce smaller outputs. The function $\\log_{1/2}(x)$ decreases.
 
-This property is critical for solving [inequalities](!/algebra/logarithms/inequalities). Taking logarithms preserves inequality direction when $a > 1$ and reverses it when $0 < a < 1$.`,
+This property is critical for solving [inequalities](!/algebra/logarithms/inequalities).
+
+@academic[rule_corollary_plain:Taking logarithms preserves inequality direction when $a > 1$ and reverses it when $0 < a < 1$.]@`,
     before: ``,
     after: ``,
     link: '',
   },
   obj4: {
     title: `One-to-One Property`,
-    content: `Logarithmic functions are one-to-one (injective): distinct inputs always produce distinct outputs.
+    content: `@academic[rule_theorem:One-to-one property
+Logarithmic functions are one-to-one (injective): distinct inputs always produce distinct outputs.]@
 
 Algebraically: if $\\log_a(x) = \\log_a(y)$, then $x = y$.
 
@@ -203,7 +206,7 @@ The [logarithmic equation solver](!/algebra/calculators/equations/logarithmic) u
   },
   obj5: {
     title: `Continuity`,
-    content: `The function $f(x) = \\log_a(x)$ is continuous on its entire domain $(0, \\infty)$.
+    content: `@academic[rule_theorem_plain:The function $f(x) = \\log_a(x)$ is continuous on its entire domain $(0, \\infty)$.]@
 
 There are no jumps, breaks, or holes in the graph for any $x > 0$. The function transitions smoothly from one value to the next. Small changes in input produce small changes in output.
 
@@ -214,7 +217,7 @@ At the boundary $x = 0$, continuity fails — the function is not defined there.
   },
   obj6: {
     title: `Asymptotic Behavior`,
-    content: `The line $x = 0$ (the $y$-axis) is a vertical asymptote for every logarithmic function.
+    content: `@academic[rule_theorem_plain:The line $x = 0$ (the $y$-axis) is a vertical asymptote for every logarithmic function.]@
 
 As $x \\to 0^+$ (approaching zero from the right):
 @academic[formula_callout:Asymptotic Behavior
@@ -245,7 +248,7 @@ $$f(g(x)) = \\log_a(a^x) = x \\quad \\text{for all real } x$$]@
 @academic[formula_callout:Inverse Relationship with Exponential Functions
 $$g(f(x)) = a^{\\log_a(x)} = x \\quad \\text{for all } x > 0$$]@
 
-Graphically, the curves $y = \\log_a(x)$ and $y = a^x$ are reflections of each other across the line $y = x$. Points $(p, q)$ on one curve correspond to points $(q, p)$ on the other.
+@academic[rule_theorem_plain:Graphically, the curves $y = \\log_a(x)$ and $y = a^x$ are reflections of each other across the line $y = x$. Points $(p, q)$ on one curve correspond to points $(q, p)$ on the other.]@
 
 Domain and range exchange:
 - $a^x$ has domain $(-\\infty, \\infty)$ and range $(0, \\infty)$

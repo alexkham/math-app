@@ -1212,7 +1212,9 @@ The implied domain is the natural domain assumed when no domain is explicitly st
 
   obj4: {
     title: `Finding Domain: Rational Functions`,
-    content: `A rational function is a ratio of two polynomials. The fundamental restriction is that the denominator cannot equal zero — division by zero is undefined.
+    content: `A rational function is a ratio of two polynomials.
+
+@academic[rule_plain:The fundamental restriction is that the denominator cannot equal zero — division by zero is undefined.]@
 
 To find the domain of a rational function, set the denominator equal to zero and solve. The solutions are the excluded values; everything else is in the domain.
 
@@ -1238,7 +1240,9 @@ The numerator does not affect domain. A zero in the numerator makes the function
     title: `Finding Domain: Radical Functions`,
     content: `Radical functions involve roots — square roots, cube roots, fourth roots, and so on. The domain restrictions depend on whether the root index is even or odd.
 
-Even roots (square root, fourth root, sixth root) require the radicand to be non-negative. Negative numbers have no real even roots. For $f(x) = \\sqrt{x - 5}$, the radicand $x - 5$ must satisfy $x - 5 \\geq 0$, giving $x \\geq 5$. The domain is $[5, \\infty)$.
+@academic[rule_plain:Even roots (square root, fourth root, sixth root) require the radicand to be non-negative.]@
+
+Negative numbers have no real even roots. For $f(x) = \\sqrt{x - 5}$, the radicand $x - 5$ must satisfy $x - 5 \\geq 0$, giving $x \\geq 5$. The domain is $[5, \\infty)$.
 
 Odd roots (cube root, fifth root) accept any real number. The cube root of $-8$ is $-2$, a perfectly valid real number. For $g(x) = \\sqrt[3]{x - 5}$, no restriction applies. The domain is $(-\\infty, \\infty)$.
 
@@ -1259,7 +1263,9 @@ Nested radicals compound the restrictions. For $f(x) = \\sqrt{\\sqrt{x} - 1}$, b
 
   obj6: {
     title: `Finding Domain: Logarithmic Functions`,
-    content: `Logarithmic functions require their argument to be strictly positive. The logarithm of zero is undefined, and the logarithm of a negative number has no real value.
+    content: `@academic[rule_plain:Logarithmic functions require their argument to be strictly positive.]@
+
+The logarithm of zero is undefined, and the logarithm of a negative number has no real value.
 
 For $f(x) = \\log(x)$ or $f(x) = \\ln(x)$, the domain is $(0, \\infty)$ — all positive real numbers.
 
@@ -1312,7 +1318,7 @@ The table below collects the six basic trigonometric functions with where each b
 
   obj8: {
     title: `Finding Domain: Combined Functions`,
-    content: `When multiple operations appear in a single function, every restriction applies simultaneously. The domain is the intersection of all individual requirements.
+    content: `@academic[rule_plain:When multiple operations appear in a single function, every restriction applies simultaneously. The domain is the intersection of all individual requirements.]@
 
 For $f(x) = \\dfrac{\\sqrt{x}}{x - 3}$, two restrictions arise. The square root requires $x \\geq 0$. The denominator requires $x \\neq 3$. Both must hold, so the domain is $[0, 3) \\cup (3, \\infty)$.
 

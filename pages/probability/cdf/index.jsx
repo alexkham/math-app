@@ -1107,7 +1107,9 @@ $$f_X(x) = \\frac{d}{dx} F_X(x)$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
-A key consequence is that a continuous random variable assigns zero probability to any single exact value. Probabilities are obtained only by looking at intervals, and the CDF provides a direct way to compute them.
+@academic[rule_corollary_plain:A key consequence is that a continuous random variable assigns zero probability to any single exact value.]@
+
+Probabilities are obtained only by looking at intervals, and the CDF provides a direct way to compute them.
 `,
       before:``,
       after:``,
@@ -1207,7 +1209,7 @@ Finally, it is easy to forget that every valid CDF must satisfy basic properties
     matters:{
       title:`Why the CDF Matters`,
       content:`
-The cumulative distribution function fully characterizes the distribution of a [random variable](!/probability/random-variables). Knowing the CDF is enough to recover all probability statements about the variable.
+@academic[rule_theorem_plain:The cumulative distribution function fully characterizes the distribution of a [random variable](!/probability/random-variables). Knowing the CDF is enough to recover all probability statements about the variable.]@
 
 It provides a single framework that works for [discrete](!/probability/distributions/discrete), [continuous](!/probability/distributions/continuous), and mixed distributions. This makes it a central object in probability theory and a natural bridge between different types of models.
 

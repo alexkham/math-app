@@ -2625,7 +2625,9 @@ When $A$ is square ($m = n$) and has full rank $n$, both conditions hold simulta
     title: `Rank and Linear Systems`,
     content: `The solvability of a [linear system](!/linear-algebra/linear-systems) $Ax = \\mathbf{b}$ is determined entirely by comparing the rank of the coefficient matrix $A$ with the rank of the augmented matrix $[A \\mid \\mathbf{b}]$.
 
-A solution exists if and only if $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}])$. This condition means that $\\mathbf{b}$ lies in the column space of $A$ — it can be expressed as a linear combination of the columns.
+@academic[rule_theorem_plain:A solution exists if and only if $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}])$.]@
+
+This condition means that $\\mathbf{b}$ lies in the column space of $A$ — it can be expressed as a linear combination of the columns.
 
 When solutions exist, uniqueness depends on whether the rank equals the number of unknowns $n$. If $\\text{rank}(A) = n$, there are no free variables and the solution is unique. If $\\text{rank}(A) < n$, there are $n - \\text{rank}(A)$ free variables, and the solution set is an infinite family parametrized by those free variables.
 
@@ -2729,7 +2731,11 @@ This follows from the fact that the null spaces of $A$ and $A^T A$ are identical
 
 The column space of $A$ is the span of the columns, a subspace of $\\mathbb{R}^m$ with dimension equal to $\\text{rank}(A)$. The row space of $A$ is the span of the rows, a subspace of $\\mathbb{R}^n$ also with dimension $\\text{rank}(A)$. The null space of $A$ consists of all solutions to $A\\mathbf{x} = \\mathbf{0}$, a subspace of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$. The left null space consists of all solutions to $A^T\\mathbf{y} = \\mathbf{0}$, a subspace of $\\mathbb{R}^m$ with dimension $m - \\text{rank}(A)$.
 
-These four subspaces split into two pairs of [orthogonal](!/linear-algebra/orthogonality) complements. In $\\mathbb{R}^n$, the row space and the null space are orthogonal complements: every vector in $\\mathbb{R}^n$ can be uniquely decomposed into a row-space component and a null-space component, and the two are perpendicular. In $\\mathbb{R}^m$, the column space and the left null space form the analogous pair.
+These four subspaces split into two pairs of [orthogonal](!/linear-algebra/orthogonality) complements.
+
+@academic[rule_theorem_plain:In $\\mathbb{R}^n$, the row space and the null space are orthogonal complements: every vector in $\\mathbb{R}^n$ can be uniquely decomposed into a row-space component and a null-space component, and the two are perpendicular.]@
+
+In $\\mathbb{R}^m$, the column space and the left null space form the analogous pair.
 
 The four dimensions add up correctly on both sides: $\\text{rank}(A) + (n - \\text{rank}(A)) = n$ in $\\mathbb{R}^n$, and $\\text{rank}(A) + (m - \\text{rank}(A)) = m$ in $\\mathbb{R}^m$. The rank is the single number that controls the entire structural decomposition.`,
     before: ``,

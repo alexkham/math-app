@@ -1723,7 +1723,9 @@ $$\\cos\\theta = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|\\,\\|\
 
 This formula is defined only when both vectors are nonzero, since division by zero is undefined. The angle $\\theta$ lies in the interval $[0, \\pi]$, covering all possibilities from vectors pointing in the same direction ($\\theta = 0$) to vectors pointing in exactly opposite directions ($\\theta = \\pi$).
 
-The right-hand side is the dot product of the two normalized vectors $\\hat{\\mathbf{a}} \\cdot \\hat{\\mathbf{b}}$. Normalization strips away the magnitudes, leaving only the directional relationship. The cosine of the angle between two vectors depends solely on their directions, not on how long they are.
+The right-hand side is the dot product of the two normalized vectors $\\hat{\\mathbf{a}} \\cdot \\hat{\\mathbf{b}}$. Normalization strips away the magnitudes, leaving only the directional relationship.
+
+@academic[rule_corollary_plain:The cosine of the angle between two vectors depends solely on their directions, not on how long they are.]@
 
 In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, this formula can be verified against the angle measured with a protractor. In higher dimensions, where geometric angles cannot be visualized, the formula serves as the definition of the angle between two vectors — extending a geometric concept into spaces where geometry alone cannot reach.`,
     before: ``,

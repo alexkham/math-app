@@ -1937,7 +1937,9 @@ obj4: {
   title: `Geometric Interpretation`,
   content: `In the [complex plane](!/complex-numbers/geometric-representation), a complex number $z = a + bi$ corresponds to the point $(a, b)$. Its additive inverse $-z = -a - bi$ corresponds to the point $(-a, -b)$. The relationship between these two points reveals a clean geometric picture.
 
-The additive inverse is the reflection of $z$ through the origin. Not across the real axis, not across the imaginary axis, but through the origin itself — the single point where both axes intersect. If $z$ lies in the first quadrant, $-z$ lies in the third. If $z$ lies in the second quadrant, $-z$ lies in the fourth. The origin sits exactly midway between any number and its additive inverse.
+@academic[rule_plain:The additive inverse is the reflection of $z$ through the origin.]@
+
+Not across the real axis, not across the imaginary axis, but through the origin itself — the single point where both axes intersect. If $z$ lies in the first quadrant, $-z$ lies in the third. If $z$ lies in the second quadrant, $-z$ lies in the fourth. The origin sits exactly midway between any number and its additive inverse.
 
 The [modulus](!/complex-numbers/absolute-value) remains unchanged under this reflection:
 
@@ -2080,7 +2082,9 @@ For detailed coverage of subtraction and other arithmetic, see [operations](!/co
 
 obj9: {
   title: `Uniqueness`,
-  content: `Every complex number has exactly one additive inverse. Not zero inverses, not two inverses — precisely one.
+  content: `@academic[rule_theorem_plain:Every complex number has exactly one additive inverse.]@
+
+Not zero inverses, not two inverses — precisely one.
 
 The existence is clear: for any $z = a + bi$, the number $-z = -a - bi$ satisfies the defining property $z + (-z) = 0$. An additive inverse always exists.
 

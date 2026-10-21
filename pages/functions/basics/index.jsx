@@ -1180,7 +1180,9 @@ Multiple inputs can share the same output — both $f(2)$ and $f(-2)$ equal $5$ 
 
   obj2: {
     title: `Functions vs Relations`,
-    content: `A relation is any set of ordered pairs — any collection of input-output associations, with no restrictions on how many outputs an input can have. Every function is a relation, but not every relation is a function.
+    content: `A relation is any set of ordered pairs — any collection of input-output associations, with no restrictions on how many outputs an input can have.
+
+@academic[rule_corollary_plain:Every function is a relation, but not every relation is a function.]@
 
 The relation $\\{(1, 2), (1, 3), (2, 5)\\}$ is not a function because the input $1$ is paired with two different outputs, $2$ and $3$. There is no single answer to "what output does $1$ produce?" The relation $\\{(1, 2), (2, 3), (3, 5)\\}$ is a function because each input appears exactly once.
 
@@ -1194,7 +1196,10 @@ The distinction matters because functions have predictable behavior that relatio
 
   obj3: {
     title: `The Vertical Line Test`,
-    content: `The vertical line test determines whether a graph represents a function. If every vertical line intersects the graph at most once, the graph is a function. If any vertical line intersects the graph more than once, the graph is not a function.
+    content: `The vertical line test determines whether a graph represents a function.
+
+@academic[rule:Vertical Line Test
+If every vertical line intersects the graph at most once, the graph is a function. If any vertical line intersects the graph more than once, the graph is not a function.]@
 
 The test works because a vertical line consists of all points with a fixed $x$-value. If the line crosses the graph twice, those two intersection points have the same $x$-coordinate but different $y$-coordinates — meaning the same input produces two different outputs, violating the definition of a function.
 
@@ -1324,7 +1329,9 @@ The table below collects the diagnostic in each representation along with an exa
 
 The zeros of a function are the input values where the output equals zero — the solutions to $f(x) = 0$. On a graph, zeros correspond to $x$-intercepts, the points where the curve crosses the horizontal axis. Finding zeros is central to solving equations: the equation $x^2 - 5x + 6 = 0$ asks for the zeros of $f(x) = x^2 - 5x + 6$.
 
-The $y$-intercept is the output when the input is zero, namely $f(0)$. On a graph, this is the point where the curve crosses the vertical axis. Not every function has a $y$-intercept — if $0$ is not in the domain, $f(0)$ does not exist.
+The $y$-intercept is the output when the input is zero, namely $f(0)$. On a graph, this is the point where the curve crosses the vertical axis.
+
+@academic[rule_plain:Not every function has a $y$-intercept — if $0$ is not in the domain, $f(0)$ does not exist.]@
 
 Undefined points are inputs where the function has no output. Division by zero, square roots of negative numbers, and logarithms of non-positive numbers all produce undefined results. The function $f(x) = 1/x$ is undefined at $x = 0$. The function $g(x) = \\sqrt{x}$ is undefined for $x < 0$ when restricted to real outputs.
 

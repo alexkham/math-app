@@ -1041,6 +1041,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1464,7 +1466,9 @@ Within the principal period $\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$, 
 - $\\left(\\frac{\\pi}{4}, 1\\right)$
 - As $x \\to \\frac{\\pi}{2}^-$: $\\tan(x) \\to +\\infty$
 
-The period of tangent is $\\pi$, not $2\\pi$. Each branch is an exact copy of the previous one, shifted $\\pi$ units to the right. This shorter period reflects the algebraic identity $\\tan(x + \\pi) = \\tan(x)$, which in turn reflects the geometry of the [unit circle](!/trigonometry/unit-circle): after a half rotation, both the $x$- and $y$-coordinates reverse sign, and their ratio is preserved.
+@academic[rule_plain:The period of tangent is $\\pi$, not $2\\pi$.]@
+
+Each branch is an exact copy of the previous one, shifted $\\pi$ units to the right. This shorter period reflects the algebraic identity $\\tan(x + \\pi) = \\tan(x)$, which in turn reflects the geometry of the [unit circle](!/trigonometry/unit-circle): after a half rotation, both the $x$- and $y$-coordinates reverse sign, and their ratio is preserved.
 
 The graph passes through the origin and is symmetric about it — tangent is an odd function. There is no amplitude in the usual sense, since tangent is unbounded. The concept of amplitude applies only to sine and cosine (and their transformations), not to functions whose range is $(-\\infty, \\infty)$.
 
@@ -1512,7 +1516,9 @@ For tangent and cotangent, the form is the same — $y = A\\tan(Bx - C) + D$ —
   },
   obj6: {
     title: `Amplitude`,
-    content: `The amplitude of a sinusoidal function is the maximum vertical distance from the midline to a peak (or valley). For $y = A\\sin(Bx - C) + D$, the amplitude is $|A|$.
+    content: `The amplitude of a sinusoidal function is the maximum vertical distance from the midline to a peak (or valley).
+
+@academic[rule_plain:For $y = A\\sin(Bx - C) + D$, the amplitude is $|A|$.]@
 
 When $|A| > 1$, the wave is stretched vertically — it oscillates over a larger range. When $0 < |A| < 1$, the wave is compressed — it oscillates over a smaller range. The maximum value of the function is $D + |A|$ and the minimum is $D - |A|$.
 
@@ -1900,8 +1906,24 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
     }),
   };
 
+  const reciprocalGraphTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'The three reciprocal graphs',
+    preface: 'Cosecant, secant and cotangent are reciprocals of sine, cosine and tangent. Their graphs blow up wherever the original function is zero.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Asymptotes come from zeros',
+    conclusion: 'Every vertical asymptote of a reciprocal function sits at a zero of the function it inverts.',
+    root: { name: 'Reciprocal function graphs', sub: 'csc · sec · cot' },
+    children: [
+      { id: 'csc', name: 'Cosecant', symbol: '$\\csc x = 1/\\sin x$', items: [ { label: 'Asymptotes', text: '$x = n\\pi$' }, { label: 'Shape', text: 'U-branches; never in $(-1, 1)$' } ] },
+      { id: 'sec', name: 'Secant', symbol: '$\\sec x = 1/\\cos x$', items: [ { label: 'Asymptotes', text: '$x = \\pi/2 + n\\pi$' }, { label: 'Shape', text: 'cosecant shifted by $\\pi/2$' } ] },
+      { id: 'cot', name: 'Cotangent', symbol: '$\\cot x = \\cos x/\\sin x$', items: [ { label: 'Asymptotes', text: '$x = n\\pi$' }, { label: 'Shape', text: 'strictly decreasing, period $\\pi$, odd' } ] },
+    ],
+  };
+
    return {
       props:{
+    reciprocalGraphTree,
     demoUnits,
          sectionsContent,
          introContent,
@@ -1923,7 +1945,7 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
     }
    }
 
-export default function GraphsPage({seoData,sectionsContent , introContent, obj4Table, obj9Table, obj10Table, obj11Table, faqQuestions, schemas, demoUnits}) {
+export default function GraphsPage({reciprocalGraphTree, seoData,sectionsContent , introContent, obj4Table, obj9Table, obj10Table, obj11Table, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1982,6 +2004,14 @@ export default function GraphsPage({seoData,sectionsContent , introContent, obj4
           />,
                   <div key={'unit-reciprocalGraphs'} dangerouslySetInnerHTML={{ __html: demoUnits.reciprocalGraphs }} />,
           `Inverting a function swaps its zeros for asymptotes and its extremes for turning points, and nothing else changes.`,
+          <DiagramFrame
+            key={'obj4-diagram'}
+            id="reciprocal-graphs-tree"
+            title="Graphs of csc, sec and cot"
+            source="/trigonometry/graphs"
+          >
+            <TopDownTree data={reciprocalGraphTree} />
+          </DiagramFrame>,
         ]
     },
     {

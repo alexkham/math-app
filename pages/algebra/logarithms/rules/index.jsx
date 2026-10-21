@@ -10,6 +10,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -412,7 +414,7 @@ Derivation: Let $\\log_a(x) = m$ and $\\log_a(y) = n$. Then $x = a^m$ and $y = a
 @academic[example:Example
 $\\log_3(81/9) = \\log_3(81) - \\log_3(9) = 4 - 2 = 2$. Verification: $81/9 = 9 = 3^2$.]@
 
-The quotient rule also yields: $\\log_a(1/x) = \\log_a(1) - \\log_a(x) = 0 - \\log_a(x) = -\\log_a(x)$.`,
+@academic[rule_corollary_plain:The quotient rule also yields: $\\log_a(1/x) = \\log_a(1) - \\log_a(x) = 0 - \\log_a(x) = -\\log_a(x)$.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -467,7 +469,7 @@ $$\\log_2(10) = \\frac{\\log(10)}{\\log(2)} = \\frac{1}{0.301} \\approx 3.322$$]
 @academic[formula_callout:The Change of Base Formula
 $$\\log_5(7) = \\frac{\\ln(7)}{\\ln(5)} = \\frac{1.946}{1.609} \\approx 1.209$$]@
 
-A useful special case: $\\log_a(b) = \\frac{1}{\\log_b(a)}$. The logarithms are reciprocals when arguments and bases swap.
+@academic[rule_corollary_plain:A useful special case: $\\log_a(b) = \\frac{1}{\\log_b(a)}$. The logarithms are reciprocals when arguments and bases swap.]@
 
 The four rules above all follow the same shape: name the logarithms, convert to exponential form, apply the matching exponent law, then read the result back as a logarithm. The table below sets the four derivations side by side so the shared pattern is visible at a glance.`,
     before: ``,
@@ -677,8 +679,25 @@ const schemas = {
     }),
   };
 
+  const logRuleTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Four rules for logarithms',
+    preface: 'Three rules turn multiplication, division and powers into addition, subtraction and multiplication. The fourth moves between bases.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Logarithms turn hard operations into easy ones',
+    conclusion: 'Each of the first three rules mirrors an exponent law; change of base lets any logarithm be computed with the one your calculator has.',
+    root: { name: 'Logarithm rules', sub: '4 rules' },
+    children: [
+      { id: 'prod', name: 'Product', symbol: '$\\log(xy) = \\log x + \\log y$', items: [ { label: 'Turns', text: 'multiplication into addition' } ] },
+      { id: 'quot', name: 'Quotient', symbol: '$\\log(x/y) = \\log x - \\log y$', items: [ { label: 'Turns', text: 'division into subtraction' } ] },
+      { id: 'pow', name: 'Power', symbol: '$\\log x^n = n \\log x$', items: [ { label: 'Turns', text: 'a power into a multiple' } ] },
+      { id: 'cob', name: 'Change of base', symbol: '$\\log_a x = \\log_b x / \\log_b a$', items: [ { label: 'Does', text: 'rewrites in any base' } ] },
+    ],
+  };
+
    return {
   props: {
+    logRuleTree,
     sectionsContent,
     introContent,
     derivationsTable,
@@ -698,7 +717,7 @@ const schemas = {
 }
    }
 
- export default function LogarithmRulesPage({
+ export default function LogarithmRulesPage({logRuleTree, 
    seoData,
    sectionsContent,
    introContent,
@@ -800,6 +819,14 @@ const schemas = {
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="logarithm-rules-tree"
+            title="The four logarithm rules"
+            source="/algebra/logarithms/rules"
+          >
+            <TopDownTree data={logRuleTree} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

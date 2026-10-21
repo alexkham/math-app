@@ -357,7 +357,9 @@ $$f'(x) = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} = \\lim_{t \\to x} \\frac{
 
 evaluated not at a single point $a$ but at a variable $x$. Wherever this limit produces a finite value, $f'(x)$ is defined. The result is a function $f'$ whose input is $x$ and whose output is the slope of $f$ at $x$.
 
-The domain of $f'$ is a subset of the domain of $f$. Every point where $f$ is [differentiable](!/calculus/derivatives/differentiability) belongs to the domain of $f'$; every point where the limit fails—corners, cusps, vertical tangents, discontinuities—is excluded. For a polynomial, the domains of $f$ and $f'$ coincide. For $f(x) = |x|$, the domain of $f$ is all reals, but $x = 0$ is missing from the domain of $f'$.
+@academic[rule_corollary_plain:The domain of $f'$ is a subset of the domain of $f$.]@
+
+Every point where $f$ is [differentiable](!/calculus/derivatives/differentiability) belongs to the domain of $f'$; every point where the limit fails—corners, cusps, vertical tangents, discontinuities—is excluded. For a polynomial, the domains of $f$ and $f'$ coincide. For $f(x) = |x|$, the domain of $f$ is all reals, but $x = 0$ is missing from the domain of $f'$.
 `,
     before: ``,
     after: ``,
@@ -444,7 +446,11 @@ Where $f'$ is positive, $f$ is rising. Where $f'$ is negative, $f$ is falling. W
 
 The magnitude of $f'$ controls steepness: large positive values of $f'$ mean $f$ is climbing steeply; values of $f'$ near zero mean $f$ is nearly flat. Where $f'$ is increasing, $f$ is concave up. Where $f'$ is decreasing, $f$ is concave down.
 
-The one piece of information $f'$ does not determine is the vertical position. The derivative of $f(x) = x^2$ and the derivative of $g(x) = x^2 + 5$ are identical: both equal $2x$. The graph of $f$ can be shifted vertically by any constant without changing $f'$. This ambiguity is resolved only when a specific function value is known—an initial condition.
+The one piece of information $f'$ does not determine is the vertical position. The derivative of $f(x) = x^2$ and the derivative of $g(x) = x^2 + 5$ are identical: both equal $2x$.
+
+@academic[rule_plain:The graph of $f$ can be shifted vertically by any constant without changing $f'$.]@
+
+This ambiguity is resolved only when a specific function value is known—an initial condition.
 `,
     before: ``,
     after: ``,
@@ -487,7 +493,12 @@ A natural question: if $f$ is differentiable everywhere, must $f'$ be continuous
 
 The answer is no. Consider $f(x) = x^2 \\sin(1/x)$ for $x \\neq 0$ and $f(0) = 0$. This function is differentiable at every real number, including $x = 0$, yet $f'$ oscillates near the origin and is discontinuous there. Differentiability of $f$ does not guarantee continuity of $f'$.
 
-However, derivatives satisfy a strong structural constraint. Darboux's theorem states that $f'$ always has the intermediate value property: if $f'$ takes values $A$ and $B$ on an interval, it takes every value between $A$ and $B$ somewhere on that interval. This means $f'$ cannot have jump discontinuities. The only discontinuities possible for a derivative are oscillatory ones—the kind seen in the example above.
+However, derivatives satisfy a strong structural constraint.
+
+@academic[rule_theorem:Darboux's theorem
+Darboux's theorem states that $f'$ always has the intermediate value property: if $f'$ takes values $A$ and $B$ on an interval, it takes every value between $A$ and $B$ somewhere on that interval.]@
+
+This means $f'$ cannot have jump discontinuities. The only discontinuities possible for a derivative are oscillatory ones—the kind seen in the example above.
 
 Functions whose derivatives are continuous everywhere form the class $C^1$. Most functions encountered in standard calculus belong to $C^1$ or higher smoothness classes, but the distinction matters in theoretical work and in the study of [differentiability](!/calculus/derivatives/differentiability).
 `,

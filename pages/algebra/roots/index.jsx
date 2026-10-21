@@ -314,7 +314,11 @@ This convention exists so that $\\sqrt{x}$ is a function — one input, one outp
 
 When both roots are needed, write $\\pm\\sqrt{25} = \\pm 5$ explicitly. This notation appears frequently when [solving radical equations](!/algebra/roots/equations).
 
-Odd-index roots have no such ambiguity. Every real number has exactly one real cube root, one real fifth root, and so on. The principal root is simply that unique value.
+Odd-index roots have no such ambiguity.
+
+@academic[rule_theorem_plain:Every real number has exactly one real cube root, one real fifth root, and so on.]@
+
+The principal root is simply that unique value.
 
 @academic[formula_callout:Principal Roots
 $$\\sqrt[3]{-27} = -3 \\quad \\text{(the only real cube root)}$$]@
@@ -396,7 +400,9 @@ $$\\sqrt[m]{\\sqrt[n]{a}} = \\sqrt[mn]{a}$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
-These rules work when the indices match and when the radicands satisfy certain conditions. Even-index roots require non-negative radicands in the real number system — a restriction detailed in [properties of radicals](!/algebra/roots/properties).
+These rules work when the indices match and when the radicands satisfy certain conditions.
+
+@academic[rule_plain:Even-index roots require non-negative radicands in the real number system — a restriction detailed in [properties of radicals](!/algebra/roots/properties).]@
 
 The complete set of rules, with their restrictions and derivations, appears in [radical rules](!/algebra/roots/radical-rules). Mastering these rules is essential for [operations with radicals](!/algebra/roots/operations).
 
@@ -415,7 +421,7 @@ $$\\sqrt{72} = \\sqrt{36 \\cdot 2} = 6\\sqrt{2}$$]@
 
 The factor 36 is a perfect square and comes out; the factor 2 remains.
 
-Radicals can be added or subtracted only when they are like radicals — same index and same radicand.
+@academic[rule_plain:Radicals can be added or subtracted only when they are like radicals — same index and same radicand.]@
 
 @academic[formula_callout:Simplifying and Operating
 $$3\\sqrt{5} + 7\\sqrt{5} = 10\\sqrt{5}$$]@

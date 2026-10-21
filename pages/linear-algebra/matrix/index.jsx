@@ -884,7 +884,11 @@ The entries can be real numbers, complex numbers, or elements of any algebraic f
 
 Row $i$ of $A$ is the horizontal slice $(a_{i1}, a_{i2}, \\dots, a_{in})$, a $1 \\times n$ vector. Column $j$ is the vertical slice $(a_{1j}, a_{2j}, \\dots, a_{mj})^T$, an $m \\times 1$ vector. The main diagonal consists of the entries where the row index equals the column index: $a_{11}, a_{22}, \\dots, a_{kk}$ with $k = \\min(m, n)$. The diagonal is defined for any matrix, not just square ones, though it is most prominent in the square case.
 
-A matrix with $m = n$ is called square, and square matrices occupy a special position. Only square matrices can have a [determinant](!/linear-algebra/determinants), an [inverse](!/linear-algebra/matrix/inverse), [eigenvalues](!/linear-algebra/eigen), or a [trace](!/linear-algebra/matrix/trace). A column [vector](!/linear-algebra/vectors) in $\\mathbb{R}^n$ is simply an $n \\times 1$ matrix, a row vector is a $1 \\times n$ matrix, and a scalar is a $1 \\times 1$ matrix. Matrices unify all of these objects under a single framework.`,
+A matrix with $m = n$ is called square, and square matrices occupy a special position.
+
+@academic[rule_plain:Only square matrices can have a [determinant](!/linear-algebra/determinants), an [inverse](!/linear-algebra/matrix/inverse), [eigenvalues](!/linear-algebra/eigen), or a [trace](!/linear-algebra/matrix/trace).]@
+
+A column [vector](!/linear-algebra/vectors) in $\\mathbb{R}^n$ is simply an $n \\times 1$ matrix, a row vector is a $1 \\times n$ matrix, and a scalar is a $1 \\times 1$ matrix. Matrices unify all of these objects under a single framework.`,
     before: ``,
     after: ``,
     link: ``,
@@ -931,7 +935,9 @@ Matrix multiplication is more involved. For $A$ of size $m \\times n$ and $B$ of
 
 The transpose $A^T$ swaps rows and columns: $(A^T)_{ij} = a_{ji}$. An $m \\times n$ matrix becomes $n \\times m$.
 
-One property that distinguishes matrix arithmetic from ordinary arithmetic is that multiplication is not commutative. In general, $AB \\neq BA$, even when both products are defined. This asymmetry has far-reaching consequences throughout linear algebra.`,
+@academic[rule_plain:One property that distinguishes matrix arithmetic from ordinary arithmetic is that multiplication is not commutative.]@
+
+In general, $AB \\neq BA$, even when both products are defined. This asymmetry has far-reaching consequences throughout linear algebra.`,
     before: ``,
     after: ``,
     link: ``,
@@ -953,7 +959,9 @@ These and several other [types](!/linear-algebra/matrix/types) — including ske
     title: `The Inverse of a Matrix`,
     content: `A square matrix $A$ is called invertible if there exists a matrix $A^{-1}$ satisfying $AA^{-1} = A^{-1}A = I$. When it exists, the [inverse](!/linear-algebra/matrix/inverse) is unique and effectively "undoes" the action of $A$: if $A$ maps $\\mathbf{x}$ to $\\mathbf{b}$, then $A^{-1}$ maps $\\mathbf{b}$ back to $\\mathbf{x}$.
 
-Not every square matrix has an inverse. The dividing line is the [determinant](!/linear-algebra/determinants): $A$ is invertible if and only if $\\det(A) \\neq 0$. For a $2 \\times 2$ matrix $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, the inverse has the explicit formula
+@academic[rule_theorem_plain:Not every square matrix has an inverse. The dividing line is the [determinant](!/linear-algebra/determinants): $A$ is invertible if and only if $\\det(A) \\neq 0$.]@
+
+For a $2 \\times 2$ matrix $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, the inverse has the explicit formula
 
 @academic[formula_callout:The Inverse of a Matrix
 $$A^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$]@

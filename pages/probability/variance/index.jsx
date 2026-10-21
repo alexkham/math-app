@@ -1659,7 +1659,9 @@ $$\\mathrm{Var}(X_1 + X_2 + \\cdots + X_n) = \\mathrm{Var}(X_1) + \\mathrm{Var}(
 @academic[formula_callout:Variance of a Sum
 $$\\mathrm{Var}(X + Y) = \\mathrm{Var}(X) + \\mathrm{Var}(Y) + 2\\mathrm{Cov}(X, Y)$$]@
 
-The quantity $\\mathrm{Cov}(X, Y)$ is the covariance between $X$ and $Y$, which measures how the two variables vary together. Positive covariance increases the variance of the sum, while negative covariance decreases it.
+The quantity $\\mathrm{Cov}(X, Y)$ is the covariance between $X$ and $Y$, which measures how the two variables vary together.
+
+@academic[rule_corollary_plain:Positive covariance increases the variance of the sum, while negative covariance decreases it.]@
 
 When variables are independent, their covariance is zero, recovering the simpler formula.
 

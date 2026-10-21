@@ -228,7 +228,7 @@ Historically, common logarithms enabled calculation before electronic computers.
 
 The number $e$ is not chosen arbitrarily. It emerges from the study of continuous growth: if a quantity grows at a rate proportional to its current size, $e$ appears in the formula describing that growth. Compound interest computed with infinitely many compounding periods, radioactive decay, population dynamics — all involve $e$ naturally.
 
-In calculus, $e$ has a unique property: the derivative of $e^x$ is $e^x$ itself. No other base produces this self-replicating behavior under differentiation. The natural logarithm inherits a corresponding property: the derivative of $\\ln(x)$ is $1/x$, the simplest possible form.
+@academic[rule_theorem_plain:In calculus, $e$ has a unique property: the derivative of $e^x$ is $e^x$ itself. No other base produces this self-replicating behavior under differentiation. The natural logarithm inherits a corresponding property: the derivative of $\\ln(x)$ is $1/x$, the simplest possible form.]@
 
 The values $\\ln(1) = 0$ and $\\ln(e) = 1$ follow from the general [properties](!/algebra/logarithms/properties). Additional reference points: $\\ln(2) \\approx 0.693$, $\\ln(10) \\approx 2.303$. These approximations appear frequently in applications.`,
     before: ``,
@@ -328,7 +328,9 @@ These conversions allow computation with any base using only the $\\log$ and $\\
 
 Both pass through $(1, 0)$ — all logarithms satisfy $\\log_a(1) = 0$. The common logarithm passes through $(10, 1)$; the natural logarithm passes through $(e, 1) \\approx (2.718, 1)$. Both have vertical asymptotes at $x = 0$ and extend to $+\\infty$ as $x$ increases.
 
-Since $e < 10$, the natural logarithm reaches $1$ at a smaller input value. This makes $\\ln(x)$ grow faster initially and appear steeper for small $x$. For any positive $x > 1$, $\\ln(x) > \\log(x)$ because the natural logarithm uses a smaller base.
+Since $e < 10$, the natural logarithm reaches $1$ at a smaller input value. This makes $\\ln(x)$ grow faster initially and appear steeper for small $x$.
+
+@academic[rule_plain:For any positive $x > 1$, $\\ln(x) > \\log(x)$ because the natural logarithm uses a smaller base.]@
 
 The ratio between them is constant: $\\ln(x) = \\ln(10) \\cdot \\log(x) \\approx 2.303 \\cdot \\log(x)$. The graphs are vertical stretches of each other. Multiplying every output of the common logarithm by $\\ln(10)$ produces the natural logarithm.`,
     before: ``,

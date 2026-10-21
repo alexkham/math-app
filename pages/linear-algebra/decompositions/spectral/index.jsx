@@ -2184,7 +2184,10 @@ All eigenvalues of a real symmetric matrix are real. No [complex](!/linear-algeb
 
 Eigenvectors corresponding to distinct eigenvalues are [orthogonal](!/linear-algebra/orthogonality). If $\\lambda_i \\neq \\lambda_j$, then $\\mathbf{q}_i \\cdot \\mathbf{q}_j = 0$ automatically — no [Gram-Schmidt](!/linear-algebra/orthogonality/gram-schmidt) is needed between different eigenspaces.
 
-Every real symmetric matrix is orthogonally diagonalizable. There always exist $n$ orthonormal eigenvectors forming a [basis](!/linear-algebra/vector-spaces) for $\\mathbb{R}^n$, even when eigenvalues are repeated. For a repeated eigenvalue with geometric multiplicity $k$, the eigenspace is $k$-dimensional, and Gram-Schmidt within that eigenspace produces $k$ orthonormal eigenvectors.
+@academic[rule_theorem:Spectral Theorem
+Every real symmetric matrix is orthogonally diagonalizable.]@
+
+There always exist $n$ orthonormal eigenvectors forming a [basis](!/linear-algebra/vector-spaces) for $\\mathbb{R}^n$, even when eigenvalues are repeated. For a repeated eigenvalue with geometric multiplicity $k$, the eigenspace is $k$-dimensional, and Gram-Schmidt within that eigenspace produces $k$ orthonormal eigenvectors.
 
 Together these three facts guarantee that $A = QDQ^T$ exists for every real symmetric $A$.`,
     before: ``,
@@ -2252,7 +2255,9 @@ In the eigenvector coordinate system, the quadratic form decouples into a sum of
 
 Positive definite ($f > 0$ for $\\mathbf{x} \\neq \\mathbf{0}$) means all $\\lambda_i > 0$ — the surface is an ellipsoid. Positive semi-definite ($f \\geq 0$) means all $\\lambda_i \\geq 0$. Indefinite (eigenvalues of both signs) means the surface is a hyperboloid — $f$ takes both positive and negative values.
 
-Classification of quadratic forms reduces entirely to checking the signs of the eigenvalues. The full taxonomy — including the negative-definite and negative-semi-definite cases — collects into the table below.`,
+@academic[rule_plain:Classification of quadratic forms reduces entirely to checking the signs of the eigenvalues.]@
+
+The full taxonomy — including the negative-definite and negative-semi-definite cases — collects into the table below.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2283,7 +2288,9 @@ The spectral decomposition exists only for [symmetric](!/linear-algebra/matrix/t
   },
   obj9: {
     title: `Spectral Decomposition and SVD`,
-    content: `For a symmetric positive semi-definite matrix $A$ (all eigenvalues $\\geq 0$), the spectral decomposition and the [singular value decomposition](!/linear-algebra/decompositions/svd) coincide. The singular values are the eigenvalues, and $U = V = Q$: $A = QDQ^T = Q\\Sigma Q^T$.
+    content: `@academic[rule_corollary_plain:For a symmetric positive semi-definite matrix $A$ (all eigenvalues $\\geq 0$), the spectral decomposition and the [singular value decomposition](!/linear-algebra/decompositions/svd) coincide.]@
+
+The singular values are the eigenvalues, and $U = V = Q$: $A = QDQ^T = Q\\Sigma Q^T$.
 
 For a general symmetric matrix with negative eigenvalues, the relationship requires a sign adjustment. The singular values are the absolute values $|\\lambda_i|$, and the signs are absorbed into $U$ or $V$. If $\\lambda_i < 0$, the corresponding column of $U$ is negated relative to the corresponding column of $V$.
 

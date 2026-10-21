@@ -1043,7 +1043,10 @@ Only [independence](!/probability/independence), identical distribution, and fin
 The Central Limit Theorem is not concerned with individual outcomes or single measurements.
 Instead, it describes the behavior of the **distribution of averages** formed from many observations.
 
-Even when the original [random variable](!/probability/random-variables) has a skewed, irregular, or discrete distribution, the distribution of the sample mean becomes approximately normal once the sample size is sufficiently large. As the number of observations increases, this distribution moves closer to the familiar bell-shaped curve.
+@academic[rule_theorem:Central Limit Theorem
+Even when the original [random variable](!/probability/random-variables) has a skewed, irregular, or discrete distribution, the distribution of the sample mean becomes approximately normal once the sample size is sufficiently large.]@
+
+As the number of observations increases, this distribution moves closer to the familiar bell-shaped curve.
 
 The theorem explains why normal patterns appear so often in aggregated data.  
 It shows that regularity emerges from the process of averaging itself, largely independent of the original source of randomness.

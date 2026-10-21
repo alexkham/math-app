@@ -1193,7 +1193,7 @@ To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (5, 1)$: solve $P\\math
         tex: `$A' = P^{-1}AP$`,
         read: `A prime equals P inverse A P`,
         means: `The prime says **same transformation, different basis**. It is not a derivative, not a transpose, and not a new matrix built from $A$ by some operation on its entries. $A$ and $A'$ are two descriptions of one object, and the prime is the only thing recording that they describe the same thing.`,
-        cases: `Which side $P^{-1}$ takes is decided by the direction $P$ converts, not by preference. With $P$ carrying $\\mathcal{B}$-coordinates into $\\mathcal{C}$-coordinates, the conversion has to undo itself on the way in and redo itself on the way out, which puts the inverse on the left. Reverse the direction of $P$ and the same relation is written $A = PA'P^{-1}$, with the letters unchanged and the sides swapped.`,
+        cases: `Which side $P^{-1}$ takes is decided by the direction $P$ converts, not by preference. With $P$ carrying $\\mathcal{C}$-coordinates into $\\mathcal{B}$-coordinates, $P$ on the right converts the input into $\\mathcal{B}$-coordinates, $A$ acts, and $P^{-1}$ on the left converts the result back, which puts the inverse on the left. Reverse the direction of $P$ and the same relation is written $A = PA'P^{-1}$, with the letters unchanged and the sides swapped.`,
         alsoWritten: `Both forms appear on this page: $A' = P^{-1}AP$ when a basis is being changed, and $A = PDP^{-1}$ when a matrix is being built out of eigen-data. They are one relation read in opposite directions.`,
         confusedWith: `Taking the visible symmetry of $P^{-1}AP$ — the same letter on both sides — for a promise that structure survives. Symmetry of $A$ does not: $P^{-1}AP$ is generally not symmetric unless $P$ is orthogonal, and entries, zeros and sparsity are lost as a matter of course.`,
         sameGlyphElsewhere: `A prime marks differentiation elsewhere on this site, including inside the Wronskian at [determinant applications](!/linear-algebra/determinants/applications). Nothing is being differentiated here.`,
@@ -1238,9 +1238,9 @@ $$A' = P^{-1}AP$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-where $P = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is the change-of-basis matrix from $\\mathcal{B}$ to $\\mathcal{C}$.
+where $P = P_{\\mathcal{B} \\leftarrow \\mathcal{C}}$ is the change-of-basis matrix from $\\mathcal{C}$ to $\\mathcal{B}$: $[\\mathbf{v}]_\\mathcal{B} = P[\\mathbf{v}]_\\mathcal{C}$, and its columns are the $\\mathcal{C}$ basis vectors written in $\\mathcal{B}$-coordinates.
 
-The derivation is direct. For any vector $\\mathbf{v}$, the transformation in $\\mathcal{B}$-coordinates reads $[T(\\mathbf{v})]_\\mathcal{B} = A[\\mathbf{v}]_\\mathcal{B}$. Converting to $\\mathcal{C}$-coordinates: $[T(\\mathbf{v})]_\\mathcal{C} = P^{-1}[T(\\mathbf{v})]_\\mathcal{B} = P^{-1}A[\\mathbf{v}]_\\mathcal{B} = P^{-1}AP[\\mathbf{v}]_\\mathcal{C}$. Since this holds for every $\\mathbf{v}$, the matrix of $T$ in basis $\\mathcal{C}$ is $P^{-1}AP$.
+The derivation is direct. For any vector $\\mathbf{v}$, the transformation in $\\mathcal{B}$-coordinates reads $[T(\\mathbf{v})]_\\mathcal{B} = A[\\mathbf{v}]_\\mathcal{B}$. Converting to $\\mathcal{C}$-coordinates with $P^{-1} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$: $[T(\\mathbf{v})]_\\mathcal{C} = P^{-1}[T(\\mathbf{v})]_\\mathcal{B} = P^{-1}A[\\mathbf{v}]_\\mathcal{B} = P^{-1}AP[\\mathbf{v}]_\\mathcal{C}$. Since this holds for every $\\mathbf{v}$, the matrix of $T$ in basis $\\mathcal{C}$ is $P^{-1}AP$.
 
 Two matrices related by $A' = P^{-1}AP$ for some invertible $P$ are called similar. Similarity is an equivalence relation: every matrix is similar to itself ($P = I$), similarity is symmetric ($A' = P^{-1}AP$ implies $A = PA'P^{-1}$), and it is transitive.`,
     before: ``,
@@ -1298,7 +1298,9 @@ Equivalently, $D = P^{-1}AP$.
   },
   obj6: {
     title: `When Diagonalization Fails`,
-    content: `Not every matrix is diagonalizable. A transformation may not have $n$ linearly independent eigenvectors — this happens when the geometric multiplicity of some eigenvalue is strictly less than its algebraic multiplicity.
+    content: `Not every matrix is diagonalizable.
+
+@academic[rule_theorem_plain:A transformation may not have $n$ linearly independent eigenvectors — this happens when the geometric multiplicity of some eigenvalue is strictly less than its algebraic multiplicity.]@
 
 For example, $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ has eigenvalue $\\lambda = 2$ with algebraic multiplicity $2$, but the eigenspace is one-dimensional (spanned by $(1, 0)$). There is no basis of eigenvectors, so $A$ cannot be diagonalized.
 
@@ -1313,7 +1315,10 @@ In such cases, the best achievable form under similarity is the Jordan normal fo
 
 Orthogonal similarity preserves more than ordinary similarity. If $A$ is [symmetric](!/linear-algebra/matrix/types), then $P^TAP$ is also symmetric — a property that ordinary similarity does not guarantee.
 
-The Spectral Theorem states that every real symmetric matrix is orthogonally similar to a diagonal matrix. The eigenvectors of a symmetric matrix can be chosen [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets), and the columns of $P$ form an orthonormal basis. This is a stronger conclusion than ordinary diagonalizability — the diagonalizing basis is not just independent but orthonormal, which simplifies [projections](!/linear-algebra/orthogonality/projections), [least squares](!/linear-algebra/orthogonality/least-squares), and numerical computation.`,
+@academic[rule_theorem:Spectral Theorem
+The Spectral Theorem states that every real symmetric matrix is orthogonally similar to a diagonal matrix.]@
+
+The eigenvectors of a symmetric matrix can be chosen [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets), and the columns of $P$ form an orthonormal basis. This is a stronger conclusion than ordinary diagonalizability — the diagonalizing basis is not just independent but orthonormal, which simplifies [projections](!/linear-algebra/orthogonality/projections), [least squares](!/linear-algebra/orthogonality/least-squares), and numerical computation.`,
     before: ``,
     after: ``,
     link: ``,

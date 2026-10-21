@@ -901,7 +901,7 @@ const keyWords = [
  
     obj1: {
     title: `Comparing Fractions with Same Denominator`,
-    content: `When two fractions share a denominator, compare their numerators directly. The fraction with the larger numerator is the larger fraction.
+    content: `@academic[rule_plain:When two fractions share a denominator, compare their numerators directly. The fraction with the larger numerator is the larger fraction.]@
 
 @academic[formula_callout:Comparing Fractions with Same Denominator
 $$\\frac{5}{8} > \\frac{3}{8}$$]@
@@ -918,7 +918,7 @@ This principle extends to any number of fractions with a common denominator. Arr
 
   obj2: {
     title: `Comparing Fractions with Same Numerator`,
-    content: `When two fractions share a numerator, compare their denominators inversely. The fraction with the smaller denominator is the larger fraction.
+    content: `@academic[rule_plain:When two fractions share a numerator, compare their denominators inversely. The fraction with the smaller denominator is the larger fraction.]@
 
 @academic[formula_callout:Comparing Fractions with Same Numerator
 $$\\frac{3}{4} > \\frac{3}{7}$$]@
@@ -998,7 +998,9 @@ To convert fractions and decimals quickly, you can use the [fraction calculator]
 
   obj7: {
     title: `Comparing Mixed Numbers`,
-    content: `Compare [mixed numbers](!/arithmetic/fractions/mixed-numbers) by first examining the whole parts. The mixed number with the larger whole part is larger overall.
+    content: `Compare [mixed numbers](!/arithmetic/fractions/mixed-numbers) by first examining the whole parts.
+
+@academic[rule_plain:The mixed number with the larger whole part is larger overall.]@
 
 @academic[formula_callout:Comparing Mixed Numbers
 $$5\\frac{1}{8} > 4\\frac{7}{8}$$]@

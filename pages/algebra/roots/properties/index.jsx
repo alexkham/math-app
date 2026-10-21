@@ -481,7 +481,7 @@ const sectionsContent = {
 
   obj1: {
     title: `Even Index Radicals`,
-    content: `Square roots, fourth roots, sixth roots — any radical with an even index — require non-negative radicands in the real number system.
+    content: `@academic[rule_plain:Square roots, fourth roots, sixth roots — any radical with an even index — require non-negative radicands in the real number system.]@
 
 @academic[formula_callout:Even Index Radicals
 $$\\sqrt{16} = 4, \\quad \\sqrt[4]{81} = 3, \\quad \\sqrt[6]{64} = 2$$]@
@@ -541,7 +541,7 @@ This restriction affects the domain of [radical functions](!/algebra/roots/funct
 
   obj2: {
     title: `Odd Index Radicals`,
-    content: `Cube roots, fifth roots, seventh roots — any radical with an odd index — accept all real numbers as radicands.
+    content: `@academic[rule_plain:Cube roots, fifth roots, seventh roots — any radical with an odd index — accept all real numbers as radicands.]@
 
 @academic[formula_callout:Odd Index Radicals
 $$\\sqrt[3]{27} = 3, \\quad \\sqrt[3]{-27} = -3, \\quad \\sqrt[5]{-32} = -2$$]@
@@ -751,7 +751,7 @@ $$\\sqrt[n]{a} = a^{1/n}$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
-The domain restrictions are identical. For even $n$, the expression $a^{1/n}$ requires $a \\geq 0$. For odd $n$, any real $a$ is permitted.
+@academic[rule_corollary_plain:The domain restrictions are identical. For even $n$, the expression $a^{1/n}$ requires $a \\geq 0$. For odd $n$, any real $a$ is permitted.]@
 
 The absolute value identity becomes:
 

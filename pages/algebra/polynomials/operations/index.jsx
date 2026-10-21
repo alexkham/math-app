@@ -456,7 +456,9 @@ Given $(2x^2 + 3x - 1) + (x^2 - 5x + 4)$, group the terms by degree: the $x^2$ t
 
 The process works identically for any number of terms and any degree. Align terms by matching exponents, add their coefficients, and write the result. Terms with no counterpart in the other polynomial pass through unchanged — adding $x^3 + 2x$ and $3x^2 - x + 5$ produces $x^3 + 3x^2 + x + 5$, where $x^3$ and $3x^2$ each carried over directly.
 
-The sum of two polynomials is always a polynomial. Its degree is at most the larger of the two input degrees — and in rare cases it can be less, if the leading terms cancel. Adding $2x^3 + x - 1$ and $-2x^3 + 4x + 7$ eliminates the cubic terms entirely, leaving $5x + 6$, a polynomial of degree $1$.`,
+@academic[rule_theorem_plain:The sum of two polynomials is always a polynomial. Its degree is at most the larger of the two input degrees — and in rare cases it can be less, if the leading terms cancel.]@
+
+Adding $2x^3 + x - 1$ and $-2x^3 + 4x + 7$ eliminates the cubic terms entirely, leaving $5x + 6$, a polynomial of degree $1$.`,
     before: ``,
     after: ``,
     link: '',
@@ -482,7 +484,9 @@ Like addition, subtraction always produces a polynomial. The degree of the resul
 
 For $(x + 2)(x^2 - 3x + 1)$, distribute each term of the binomial across the trinomial. The term $x$ produces $x \\cdot x^2 = x^3$, $x \\cdot (-3x) = -3x^2$, and $x \\cdot 1 = x$. The term $2$ produces $2 \\cdot x^2 = 2x^2$, $2 \\cdot (-3x) = -6x$, and $2 \\cdot 1 = 2$. Collecting everything: $x^3 - 3x^2 + x + 2x^2 - 6x + 2$. Combining like terms gives $x^3 - x^2 - 5x + 2$.
 
-The degree of a product equals the sum of the degrees of the factors — always, without exception. A degree-$2$ polynomial times a degree-$3$ polynomial produces a degree-$5$ polynomial. This follows from the fact that the highest-degree terms in each factor multiply to produce the highest-degree term in the product, and no other pair of terms can reach that degree.
+@academic[rule_theorem_plain:The degree of a product equals the sum of the degrees of the factors — always, without exception.]@
+
+A degree-$2$ polynomial times a degree-$3$ polynomial produces a degree-$5$ polynomial. This follows from the fact that the highest-degree terms in each factor multiply to produce the highest-degree term in the product, and no other pair of terms can reach that degree.
 
 The number of terms before combining can grow quickly. Multiplying an $m$-term polynomial by an $n$-term polynomial generates $m \\times n$ individual products. A binomial times a trinomial produces $6$ terms before simplification; two four-term polynomials produce $16$. Careful bookkeeping — and a systematic approach to distributing — prevents missed terms.`,
     before: ``,
@@ -524,7 +528,9 @@ $$(a - b)^3 = a^3 - 3a^2b + 3ab^2 - b^3$$
 
 The coefficients $1, 3, 3, 1$ are the fourth row of Pascal&apos;s triangle — a pattern that generalizes through the binomial theorem covered in [identities](!/algebra/identities).
 
-Multiplying conjugate binomials — a sum and a difference of the same two terms — eliminates the middle term entirely. The product $(a + b)(a - b)$ equals $a^2 - b^2$, a clean difference of squares. No linear term survives because the outer and inner products cancel.
+@academic[rule_plain:Multiplying conjugate binomials — a sum and a difference of the same two terms — eliminates the middle term entirely. The product $(a + b)(a - b)$ equals $a^2 - b^2$, a clean difference of squares.]@
+
+No linear term survives because the outer and inner products cancel.
 
 The cubic identities extend the same logic one degree further:
 
@@ -563,7 +569,9 @@ $$\\text{dividend} = (\\text{divisor} \\times \\text{quotient}) + \\text{remaind
 
 To divide $x^3 - 2x^2 + 5x - 3$ by $x - 1$, begin by dividing the leading term of the dividend by the leading term of the divisor: $x^3 \\div x = x^2$. Multiply $x^2$ by the entire divisor: $x^2(x - 1) = x^3 - x^2$. Subtract this from the dividend to get $-x^2 + 5x - 3$. Repeat: $-x^2 \\div x = -x$, multiply $-x(x - 1) = -x^2 + x$, subtract to get $4x - 3$. One more pass: $4x \\div x = 4$, multiply $4(x - 1) = 4x - 4$, subtract to get $1$. The quotient is $x^2 - x + 4$ with remainder $1$.
 
-The process terminates when the degree of what remains is less than the degree of the divisor. If the remainder is zero, the divisor divides the dividend evenly — meaning the divisor is a [factor](!/algebra/polynomials/factoring) of the dividend.
+The process terminates when the degree of what remains is less than the degree of the divisor.
+
+@academic[rule_plain:If the remainder is zero, the divisor divides the dividend evenly — meaning the divisor is a [factor](!/algebra/polynomials/factoring) of the dividend.]@
 
 Missing powers in the dividend require placeholder terms. Dividing $x^3 + 4$ by $x + 1$ requires writing the dividend as $x^3 + 0x^2 + 0x + 4$ to keep terms aligned through each subtraction step.
 
@@ -579,7 +587,12 @@ To divide your own polynomials by long or synthetic division with each step show
 
 To divide $x^3 - 2x^2 + 5x - 3$ by $(x - 1)$, write the coefficients $1, -2, 5, -3$ in a row and place $c = 1$ to the left. Bring down the first coefficient: $1$. Multiply by $c$: $1 \\cdot 1 = 1$. Add to the next coefficient: $-2 + 1 = -1$. Multiply by $c$: $-1 \\cdot 1 = -1$. Add: $5 + (-1) = 4$. Multiply: $4 \\cdot 1 = 4$. Add: $-3 + 4 = 1$. The bottom row reads $1, -1, 4, 1$ — giving a quotient of $x^2 - x + 4$ with remainder $1$, matching the long division result exactly.
 
-The connection to polynomial evaluation is immediate. The remainder produced by synthetic division equals $P(c)$, the value of the dividend evaluated at $x = c$. This is the Remainder Theorem in action, and it means synthetic division doubles as a fast way to compute $P(c)$ without substituting into every term. If $P(c) = 0$, then $(x - c)$ divides the polynomial evenly and $c$ is a [root](!/algebra/polynomials/roots).
+The connection to polynomial evaluation is immediate.
+
+@academic[rule_theorem:Remainder Theorem
+The remainder produced by synthetic division equals $P(c)$, the value of the dividend evaluated at $x = c$.]@
+
+This is the Remainder Theorem in action, and it means synthetic division doubles as a fast way to compute $P(c)$ without substituting into every term. If $P(c) = 0$, then $(x - c)$ divides the polynomial evenly and $c$ is a [root](!/algebra/polynomials/roots).
 
 The limitation is strict: synthetic division works only for divisors of the form $(x - c)$. Dividing by $x^2 + 1$, by $2x - 3$, or by any polynomial of degree two or higher requires the full long division procedure.`,
     before: ``,

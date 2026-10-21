@@ -1494,7 +1494,7 @@ The immediate consequence: a matrix with $n$ distinct eigenvalues has $n$ indepe
   },
   obj10: {
     title: `Similar Matrices and Spectral Invariants`,
-    content: `[Similar](!/linear-algebra/transformations/basis-change) matrices share every spectral property: eigenvalues, algebraic multiplicities, geometric multiplicities, and the characteristic polynomial are all identical.
+    content: `@academic[rule_theorem_plain:[Similar](!/linear-algebra/transformations/basis-change) matrices share every spectral property: eigenvalues, algebraic multiplicities, geometric multiplicities, and the characteristic polynomial are all identical.]@
 
 If $B = P^{-1}AP$ and $\\mathbf{v}$ is an eigenvector of $A$ with eigenvalue $\\lambda$, then $P^{-1}\\mathbf{v}$ is an eigenvector of $B$ with the same eigenvalue: $B(P^{-1}\\mathbf{v}) = P^{-1}AP(P^{-1}\\mathbf{v}) = P^{-1}A\\mathbf{v} = P^{-1}\\lambda\\mathbf{v} = \\lambda(P^{-1}\\mathbf{v})$.
 

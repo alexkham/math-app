@@ -1178,7 +1178,9 @@ $$\\text{Im}(T) = \\{T(\\mathbf{v}) : \\mathbf{v} \\in V\\} \\subseteq W$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The image is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $W$. It contains $T(\\mathbf{0}) = \\mathbf{0}$, and if $T(\\mathbf{u})$ and $T(\\mathbf{v})$ are in the image, then so is $cT(\\mathbf{u}) + dT(\\mathbf{v}) = T(c\\mathbf{u} + d\\mathbf{v})$ — closure under both operations follows from linearity.
+@academic[rule_theorem_plain:The image is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $W$.]@
+
+It contains $T(\\mathbf{0}) = \\mathbf{0}$, and if $T(\\mathbf{u})$ and $T(\\mathbf{v})$ are in the image, then so is $cT(\\mathbf{u}) + dT(\\mathbf{v}) = T(c\\mathbf{u} + d\\mathbf{v})$ — closure under both operations follows from linearity.
 
 When $T(\\mathbf{x}) = A\\mathbf{x}$ for a [matrix](!/linear-algebra/matrix) $A$, the image is the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$: the set of all vectors expressible as linear combinations of the columns. The [dimension](!/linear-algebra/vector-spaces/dimension) of the image equals the [rank](!/linear-algebra/matrix/rank) of $A$.
 
@@ -1198,7 +1200,9 @@ $$\\ker(T) = \\{\\mathbf{v} \\in V : T(\\mathbf{v}) = \\mathbf{0}\\} \\subseteq 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The kernel is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $V$. It contains $\\mathbf{0}$ (since $T(\\mathbf{0}) = \\mathbf{0}$), and if $T(\\mathbf{u}) = \\mathbf{0}$ and $T(\\mathbf{v}) = \\mathbf{0}$, then $T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v}) = \\mathbf{0}$, so $c\\mathbf{u} + d\\mathbf{v} \\in \\ker(T)$.
+@academic[rule_theorem_plain:The kernel is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $V$.]@
+
+It contains $\\mathbf{0}$ (since $T(\\mathbf{0}) = \\mathbf{0}$), and if $T(\\mathbf{u}) = \\mathbf{0}$ and $T(\\mathbf{v}) = \\mathbf{0}$, then $T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v}) = \\mathbf{0}$, so $c\\mathbf{u} + d\\mathbf{v} \\in \\ker(T)$.
 
 When $T(\\mathbf{x}) = A\\mathbf{x}$, the kernel is the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$: all solutions to the [homogeneous](!/linear-algebra/linear-systems/homogeneous) system $A\\mathbf{x} = \\mathbf{0}$. Its dimension is the nullity, equal to $n - \\text{rank}(A)$.
 
@@ -1260,7 +1264,9 @@ $$T \\text{ injective} \\iff \\ker(T) = \\{\\mathbf{0}\\}$$
 
 The proof is short. If $T(\\mathbf{u}) = T(\\mathbf{v})$, then $T(\\mathbf{u} - \\mathbf{v}) = T(\\mathbf{u}) - T(\\mathbf{v}) = \\mathbf{0}$, so $\\mathbf{u} - \\mathbf{v} \\in \\ker(T)$. If the kernel is trivial, $\\mathbf{u} - \\mathbf{v} = \\mathbf{0}$ and $\\mathbf{u} = \\mathbf{v}$.
 
-For matrix transformations, injectivity is equivalent to full column rank: $\\text{rank}(A) = n$. This means every column is a pivot column, no free variables exist in $A\\mathbf{x} = \\mathbf{0}$, the columns are [linearly independent](!/linear-algebra/vector-spaces/linear-independence), and the [determinant](!/linear-algebra/determinants) is nonzero (in the square case).
+@academic[rule_theorem_plain:For matrix transformations, injectivity is equivalent to full column rank: $\\text{rank}(A) = n$.]@
+
+This means every column is a pivot column, no free variables exist in $A\\mathbf{x} = \\mathbf{0}$, the columns are [linearly independent](!/linear-algebra/vector-spaces/linear-independence), and the [determinant](!/linear-algebra/determinants) is nonzero (in the square case).
 
 Injectivity means the transformation preserves distinctness — no two different inputs are confused with each other.`,
     before: ``,
@@ -1271,7 +1277,9 @@ Injectivity means the transformation preserves distinctness — no two different
     title: `Surjectivity`,
     content: `A linear transformation $T: V \\to W$ is surjective (onto) if $\\text{Im}(T) = W$ — every vector in the codomain is the image of some vector in the domain.
 
-For matrix transformations, surjectivity is equivalent to full row rank: $\\text{rank}(A) = m$. This means every row contains a pivot, the column space is all of $\\mathbb{R}^m$, and the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ has a solution for every right-hand side $\\mathbf{b}$.
+@academic[rule_theorem_plain:For matrix transformations, surjectivity is equivalent to full row rank: $\\text{rank}(A) = m$.]@
+
+This means every row contains a pivot, the column space is all of $\\mathbb{R}^m$, and the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ has a solution for every right-hand side $\\mathbf{b}$.
 
 Surjectivity means the transformation has no blind spots — every output is reachable from some input. Failure of surjectivity means the image is a proper subspace of the codomain: certain vectors in $W$ are inherently unreachable, no matter what input is chosen.`,
     before: ``,
@@ -1355,7 +1363,9 @@ For $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 1 \\\\ 1 & 3 & 4 \\end{pmatrix}
 @academic[formula_callout:The Fundamental Decomposition
 $$V = \\ker(T) \\oplus (\\text{a complement of } \\ker(T))$$]@
 
-The transformation $T$ kills everything in the kernel and maps the complement bijectively onto the image. Every vector $\\mathbf{v} \\in V$ splits as $\\mathbf{v} = \\mathbf{v}_k + \\mathbf{v}_c$ where $\\mathbf{v}_k \\in \\ker(T)$ and $\\mathbf{v}_c$ is in the complement. Then $T(\\mathbf{v}) = T(\\mathbf{v}_c)$, and the restriction of $T$ to the complement is a bijection onto $\\text{Im}(T)$.
+@academic[rule_theorem_plain:The transformation $T$ kills everything in the kernel and maps the complement bijectively onto the image.]@
+
+Every vector $\\mathbf{v} \\in V$ splits as $\\mathbf{v} = \\mathbf{v}_k + \\mathbf{v}_c$ where $\\mathbf{v}_k \\in \\ker(T)$ and $\\mathbf{v}_c$ is in the complement. Then $T(\\mathbf{v}) = T(\\mathbf{v}_c)$, and the restriction of $T$ to the complement is a bijection onto $\\text{Im}(T)$.
 
 For matrix transformations, the [four fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces) provide the natural complement: the row space of $A$ is the orthogonal complement of the null space in $\\mathbb{R}^n$, and $A$ maps the row space bijectively onto the column space. The null-space component is destroyed; the row-space component survives intact.`,
     before: ``,

@@ -14,6 +14,8 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 
 
 
@@ -83,6 +85,44 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 // ---------- TABLES ----------
 
 // obj2 — aggregation (reference): the properties of inequality and the flip rule
+// Concept introduction (section 1) — template E, widening. Running instance:
+// 3x − 2 > 4, the inequality built on the equation tool's lin-steep state
+// 3x − 2 = 4. Old obj1 text is kept in sectionsContent.obj1, unused.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciValuesTable = `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation} text-align: center;">x</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">3x − 2</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">greater than 4?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="${ciCell}">0</td><td style="${ciCell}">−2</td><td style="${ciCell}">no</td></tr>
+    <tr style="background: #f8f9fa;"><td style="${ciCell}">1</td><td style="${ciCell}">1</td><td style="${ciCell}">no</td></tr>
+    <tr><td style="${ciCell} color: #B45309; font-weight: bold;">2</td><td style="${ciCell} color: #B45309; font-weight: bold;">4</td><td style="${ciCell} color: #B45309; font-weight: bold;">no — equal: the border</td></tr>
+    <tr style="background: #f8f9fa;"><td style="${ciCell}">3</td><td style="${ciCell}">7</td><td style="${ciCell} color: #2563EB; font-weight: bold;">yes</td></tr>
+    <tr><td style="${ciCell} border-bottom: none;">4</td><td style="${ciCell} border-bottom: none;">10</td><td style="${ciCell} border-bottom: none; color: #2563EB; font-weight: bold;">yes</td></tr>
+  </tbody>
+</table>`
+const ciStepsTable = `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="${tableHeaders.aggregation}">Step</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">Equation</th>
+      <th style="${tableHeaders.aggregation} text-align: center;">Inequality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="${ciCell} text-align: left; font-weight: bold; color: #06357a;">start</td><td style="${ciCell}">3x − 2 = 4</td><td style="${ciCell}">3x − 2 &gt; 4</td></tr>
+    <tr style="background: #f8f9fa;"><td style="${ciCell} text-align: left; font-weight: bold; color: #06357a;">add 2</td><td style="${ciCell}">3x = 6</td><td style="${ciCell}">3x &gt; 6</td></tr>
+    <tr><td style="${ciCell} text-align: left; font-weight: bold; color: #06357a;">divide by 3</td><td style="${ciCell}">x = 2</td><td style="${ciCell}">x &gt; 2</td></tr>
+    <tr style="background: #f8f9fa;"><td style="${ciCell} border-bottom: none; text-align: left; font-weight: bold; color: #06357a;">answer</td><td style="${ciCell} border-bottom: none;">one number, 2</td><td style="${ciCell} border-bottom: none;">a ray, (2, ∞)</td></tr>
+  </tbody>
+</table>`
+
 const obj2Table = `
 <table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
@@ -350,7 +390,9 @@ For $x > 4$: place an open dot at $4$ (excluded because the inequality is strict
 
 For $x \\leq 9$: place a solid dot at $9$ (included because the inequality is non-strict) and shade to the left. The interval is $(-\\infty, 9]$.
 
-The boundary point is always the solution of the corresponding equation. The inequality $4x - 7 \\leq 2x + 11$ has the boundary at $x = 9$, the solution of $4x - 7 = 2x + 11$. The inequality symbol tells which side to shade, and whether the dot is solid or open.
+@academic[rule_plain:The boundary point is always the solution of the corresponding equation.]@
+
+The inequality $4x - 7 \\leq 2x + 11$ has the boundary at $x = 9$, the solution of $4x - 7 = 2x + 11$. The inequality symbol tells which side to shade, and whether the dot is solid or open.
 
 This connection is not a coincidence. The equation $ax + b = 0$ identifies the single value where the two sides of the inequality are equal. On one side of that value, $ax + b$ is positive; on the other, it is negative. The inequality selects the appropriate side.`,
     before: ``,
@@ -402,7 +444,7 @@ If the variable appeared in a denominator, the inequality would no longer be lin
 
   obj7: {
     title: `Special Cases`,
-    content: `When the variable terms cancel during simplification, the inequality reduces to a comparison between two constants. The result is either universally true or universally false.
+    content: `@academic[rule_corollary_plain:When the variable terms cancel during simplification, the inequality reduces to a comparison between two constants. The result is either universally true or universally false.]@
 
 An always-true inequality arises when the remaining statement is valid. The inequality $2(x + 4) > 2x + 3$ distributes to $2x + 8 > 2x + 3$. Subtracting $2x$ gives $8 > 3$, which holds regardless of $x$. Every real number satisfies the original inequality, and the solution set is $(-\\infty, \\infty)$.
 
@@ -555,6 +597,38 @@ const schemas = {
     ],
     caption: 'AND keeps the overlap, one interval; OR keeps either, two rays' };
 
+  // Concept introduction figures (section 1), one running instance: 3x − 2 > 4.
+  const fpCiWall = { kind: 'pieces', svgTitle: '3x - 2 is above 4 exactly when x > 2', xRange: [-1, 5], yRange: [-6, 14], yStep: 2,
+    pieces: [
+      { fn: (x) => 3 * x - 2, from: 2, to: 5, ends: ['open', null], color: 'f', ghost: [[-1, 2]], label: { text: 'y = 3x − 2', x: 3.6, y: 8.8, pos: 'nw' } },
+      { fn: () => 4, from: -1, to: 5, ends: [null, null], color: 'g', label: { text: 'y = 4', x: 4.3, y: 4, pos: 's' } },
+    ],
+    vlines: [{ x: 2, label: 'x = 2' }],
+    notes: [{ x: 2.2, y: -3, text: 'x > 2: line above 4', pos: 'e', color: 'r' }],
+    caption: 'Above the level y = 4 exactly where x is greater than 2' };
+  const fpCiRay = { kind: 'domainOpen', svgTitle: 'The solution set of 3x - 2 > 4 is the ray (2, infinity)', range: [-2, 6],
+    rows: [
+      { label: '3x − 2 > 4', color: 'f', segs: [[2, null, true]], tag: { text: '(2, ∞)', x: 4 } },
+    ],
+    caption: 'Every x greater than 2; the border itself left out' };
+  const fpCiFlip = { kind: 'pieces', svgTitle: '-3x + 2 is below -4 exactly when x > 2', xRange: [-1, 5], yRange: [-14, 6], yStep: 2,
+    pieces: [
+      { fn: (x) => -3 * x + 2, from: 2, to: 5, ends: ['open', null], color: 'f', ghost: [[-1, 2]], label: { text: 'y = −3x + 2', x: 3.5, y: -8.5, pos: 'ne' } },
+      { fn: () => -4, from: -1, to: 5, ends: [null, null], color: 'g', label: { text: 'y = −4', x: 4.3, y: -4, pos: 'n' } },
+    ],
+    vlines: [{ x: 2, label: 'x = 2' }],
+    notes: [{ x: 2.2, y: 3, text: 'x > 2: line below −4', pos: 'e', color: 'r' }],
+    caption: 'The same answer, x > 2, though the sign now reads <' };
+
+  const conceptIntroFigures = {
+    equation: equationVisualizerDiagrams['lin-steep'],
+    wall: renderFunctionPlotV4(fpCiWall),
+    ray: renderFunctionPlotV2(fpCiRay),
+    flip: renderFunctionPlotV4(fpCiFlip),
+    valuesTable: ciValuesTable,
+    stepsTable: ciStepsTable,
+  };
+
   const demoUnits = {
     boundary: demoUnitFrame({
       svg: renderFunctionPlotV4(fpLinBoundary),
@@ -606,6 +680,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Linear Inequalities: Solving & Graphing Step by Step | Learn Math Class",
       description: "Learn to solve linear inequalities in one variable: the flip rule for negatives, graphing on number lines, compound inequalities (AND/OR), fractions, special cases, and literal inequalities.",
@@ -631,9 +706,74 @@ export default function LinearInequalitiesPage({literalInequalityCases,
   faqQuestions,
   schemas,
   demoUnits,
+  conceptIntroFigures,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `You can already solve a linear equation.`,
+        content: `The equation $3x - 2 = 4$ has exactly one answer. Add $2$ to both sides, divide by $3$, and $x = 2$. The graph shows why there is only one: the line $y = 3x - 2$ reaches the level $4$ at a single point and never returns to it.`,
+        visual: ciSvg('equation'),
+        caption: `The line $y = 3x - 2$ meets the level $n = 4$ once, at $x = 2$: the one answer of $3x - 2 = 4$. The same state is on the [equation visualizer](!/algebra/visual-tools/equation).`,
+      },
+      {
+        id: 'wall',
+        kind: 'instance',
+        lead: `The equation cannot say where the left side is bigger.`,
+        content: [
+          `Change the question: for which $x$ is $3x - 2$ greater than $4$? The equation's method finds $x = 2$ and stops there. Trying values shows that $2$ is not the answer but the border between two kinds of value.`,
+          ciTable('valuesTable'),
+          `Every value above $2$ works, every value below fails, and $2$ itself fails because $4 > 4$ is false. The answer is not one number. It is everything to the right of $2$, and no equation can write that down.`,
+        ],
+        visual: ciSvg('wall'),
+        caption: `The solid part of the line is where $3x - 2$ is above the level $4$ — the "yes" rows of the table. The open dot at $x = 2$ is the "equal" row: on the level, not above it.`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [linear inequality](!/algebra/definitions#linear_inequality) in one variable is an inequality that can be written in the form below, with $<$ or any of $>$, $\\leq$, $\\geq$, where $a$ and $b$ are real constants and $a \\neq 0$.`,
+        formula: `@academic[formula_callout:Definition and Standard Form
+$$ax + b < 0$$]@`,
+        footer: `The equation it widens: [linear equations](!/algebra/equations/linear).`,
+      },
+      {
+        id: 'kind',
+        lead: `A linear inequality is a statement about x, and its answer is a set.`,
+        content: `It is not a number and not a function. Like an equation, it is a sentence that is true for some values of $x$ and false for others, and solving it means collecting the values that make it true. For $3x - 2 > 4$ that collection is the ray $(2, \\infty)$: a half-line that starts at the border and runs off to infinity. Every linear inequality has a ray for its answer.`,
+        visual: ciSvg('ray'),
+        caption: `The open dot at $2$ is the border, left out because $4 > 4$ is false. The arrow is "every $x$ greater than $2$" from the table.`,
+      },
+      {
+        id: 'survives',
+        lead: `Every move that solves the equation still works.`,
+        content: [
+          `Solve the equation and the inequality side by side and the steps are the same.`,
+          ciTable('stepsTable'),
+          `The border is always the answer of the matching equation $ax + b = 0$, which is $x = -\\frac{b}{a}$. In standard form our inequality is $3x - 6 > 0$, and $-\\frac{-6}{3} = 2$. Telling a linear inequality apart also works as for equations: $3x - 7 > 2x + 5$ is linear, because collecting terms turns it into $x - 12 > 0$.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        tone: 'break',
+        lead: `One move changes: multiplying or dividing by a negative number reverses the sign.`,
+        content: `Multiply both sides of $3x - 2 > 4$ by $-1$. The values of $x$ that work stay the same, but the statement now reads $-3x + 2 < -4$. Solving it, subtract $2$ to get $-3x < -6$, then divide by $-3$: the sign flips back, and $x > 2$. Keep the sign instead and the result is $x < 2$, exactly the wrong half of the line. The other loss is the check: the answer is no longer one number to substitute. Test one value from each side of the border instead — $x = 3$ gives $7 > 4$, true; $x = 0$ gives $-2 > 4$, false.`,
+        visual: ciSvg('flip'),
+        caption: `The line $y = -3x + 2$ falls, so it is below the level $-4$ to the right of $2$: the same ray as before, written with $<$.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page works with this one idea: the two properties of inequality and the flip, worked examples, graphing the ray, compound inequalities joined by AND and OR, fractions and decimals, the special cases where $a = 0$ and there is no border at all, and literal inequalities.`,
+      },
+    ],
+  }
 
   const genericSections=[
     
@@ -653,7 +793,7 @@ export default function LinearInequalitiesPage({literalInequalityCases,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

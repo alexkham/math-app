@@ -1282,7 +1282,9 @@ $$\\left\\|\\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|}\\right\\| = \\frac{\\|\\mathbf
 
 Because the scalar $\\frac{1}{\\|\\mathbf{v}\\|}$ is positive, the direction of $\\mathbf{v}$ is preserved — the normalized vector $\\hat{\\mathbf{v}}$ points exactly the same way as $\\mathbf{v}$, just with unit length.
 
-The zero vector cannot be normalized. It has $\\|\\mathbf{0}\\| = 0$, and dividing by zero is undefined. This is consistent with the geometric fact that the zero vector carries no directional information — there is no "way" it points, so extracting a direction from it is impossible.
+@academic[rule_plain:The zero vector cannot be normalized.]@
+
+It has $\\|\\mathbf{0}\\| = 0$, and dividing by zero is undefined. This is consistent with the geometric fact that the zero vector carries no directional information — there is no "way" it points, so extracting a direction from it is impossible.
 
 Normalization appears throughout the rest of this section. The angle formula on the [dot product](!/linear-algebra/vectors/dot-product) page involves the quantity $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|\\|\\mathbf{b}\\|}$, which is the dot product of the two normalized vectors $\\hat{\\mathbf{a}} \\cdot \\hat{\\mathbf{b}}$. Orthogonal projection decomposes a vector relative to a direction, and that direction is specified most cleanly through a unit vector. Whenever a formula isolates the directional component of a vector, normalization is doing the work underneath.`,
     before: ``,

@@ -11,6 +11,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -615,8 +617,29 @@ const schemas = {
     }),
   };
 
+  const expEquationTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Four ways in',
+    preface: 'Exponential equations put the unknown in the exponent. The structure of the equation decides which method gets it out.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Try matching bases first',
+    conclusion: 'Matching bases is the fastest when it works; logarithms always work and are the universal fallback.',
+    root: { name: 'Solving exponential equations', sub: '4 methods' },
+    children: [
+      { id: 'match', name: 'Matching bases', items: [
+        { label: 'When', text: 'bases equal or convertible' }, { label: 'Then', text: 'equate the exponents; fastest' } ] },
+      { id: 'laws', name: 'Exponent laws', items: [
+        { label: 'When', text: 'several terms with the same base' }, { label: 'Then', text: 'factor or combine' } ] },
+      { id: 'logs', name: 'Logarithms', items: [
+        { label: 'How', text: '$\\log(a^x) = x \\log a$' }, { label: 'Role', text: 'the universal fallback' } ] },
+      { id: 'subst', name: 'Substitution', items: [
+        { label: 'When', text: '$a^{2x}$ and $a^x$ together' }, { label: 'Then', text: '$t = a^x$ gives a quadratic' } ] },
+    ],
+  };
+
 return {
   props:{
+    expEquationTree,
     sectionsContent,
     introContent,
     obj4Table,
@@ -639,7 +662,7 @@ return {
    }
 
 // export default function ExponentialEquationsPage({seoData,sectionsContent , introContent}) {
-export default function ExponentialEquationsPage({seoData, sectionsContent, introContent, obj4Table, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function ExponentialEquationsPage({expEquationTree, seoData, sectionsContent, introContent, obj4Table, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -689,6 +712,14 @@ export default function ExponentialEquationsPage({seoData, sectionsContent, intr
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+          <DiagramFrame
+            key={'obj4-diagram'}
+            id="exponential-equation-methods-tree"
+            title="Methods for exponential equations"
+            source="/algebra/powers/exponential-equations"
+          >
+            <TopDownTree data={expEquationTree} />
+          </DiagramFrame>,
         ]
     },
     {

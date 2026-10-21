@@ -569,7 +569,9 @@ $$(ab)^n = a^n \\cdot b^n$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
-The expression $(3x)^4 = 3^4 \\cdot x^4 = 81x^4$. The rule extends to any number of factors: $(abc)^n = a^n b^n c^n$.
+The expression $(3x)^4 = 3^4 \\cdot x^4 = 81x^4$.
+
+@academic[rule_corollary_plain:The rule extends to any number of factors: $(abc)^n = a^n b^n c^n$.]@
 
 The distribution works because multiplication is commutative — the factors can be rearranged so that all copies of $a$ group together and all copies of $b$ group together.
 
@@ -611,7 +613,9 @@ $$a^{-n} = \\frac{1}{a^n}$$
 
 The rule requires $a \\neq 0$. The expression $4^{-2} = \\frac{1}{16}$, and $x^{-1} = \\frac{1}{x}$.
 
-The rule works in both directions. A negative exponent in the denominator moves the term to the numerator: $\\frac{1}{a^{-n}} = a^n$. An expression like $\\frac{x^{-3}}{y^{-2}}$ rewrites as $\\frac{y^2}{x^3}$ — each negative exponent crosses the fraction bar and becomes positive.
+@academic[rule_corollary_plain:The rule works in both directions. A negative exponent in the denominator moves the term to the numerator: $\\frac{1}{a^{-n}} = a^n$.]@
+
+An expression like $\\frac{x^{-3}}{y^{-2}}$ rewrites as $\\frac{y^2}{x^3}$ — each negative exponent crosses the fraction bar and becomes positive.
 
 Applied to an entire fraction, the negative exponent flips it:
 
@@ -658,7 +662,9 @@ $$a^{m/n} = \\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$]@
 
 Both forms are equivalent. The expression $8^{2/3} = (\\sqrt[3]{8})^2 = 2^2 = 4$, and $27^{4/3} = (\\sqrt[3]{27})^4 = 3^4 = 81$.
 
-The special case $m = 1$ gives the pure root: $a^{1/n} = \\sqrt[n]{a}$. Exponent notation and radical notation are interchangeable representations of the same operation.
+@academic[rule_corollary_plain:The special case $m = 1$ gives the pure root: $a^{1/n} = \\sqrt[n]{a}$.]@
+
+Exponent notation and radical notation are interchangeable representations of the same operation.
 
 When $m/n$ is negative, the [negative exponent](!/algebra/powers/negative-exponents) rule applies first: $a^{-m/n} = \\frac{1}{a^{m/n}}$. The full treatment, including domain considerations for even roots, appears on the [rational exponents](!/algebra/powers/rational-exponents) page.`,
     before: ``,

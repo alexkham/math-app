@@ -11,9 +11,11 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
-export default function ImplicationsTruthTablesPage({demoUnits,  seoData, keyWords, implicationExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {
+export default function ImplicationsTruthTablesPage({conditionalFormTree, demoUnits,  seoData, keyWords, implicationExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {
 
     const implicationOperators = {
         'P→Q': { symbol: 'P→Q', func: (a, b) => !a || b },
@@ -38,6 +40,14 @@ export default function ImplicationsTruthTablesPage({demoUnits,  seoData, keyWor
         content: [sectionsContent.obj2.content,
           <div key={'unit-conditionalSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.conditionalSquare }} />,
           `Proving ¬Q → ¬P proves P → Q; proving Q → P proves nothing about it.`,
+          <DiagramFrame
+            key={'obj2-diagram'}
+            id="conditional-forms-tree"
+            title="Converse, inverse and contrapositive"
+            source="/logic/truth-tables/implications"
+          >
+            <TopDownTree data={conditionalFormTree} />
+          </DiagramFrame>,
         ]
       },
       {
@@ -257,7 +267,9 @@ export async function getStaticProps() {
 
 The material conditional is false in exactly one case: when the antecedent is true and the consequent is false. In every other case — including when the antecedent is false — the implication is true. This is the defining property of material implication in classical logic, and it is equivalent to the disjunction ¬P ∨ Q.
 
-The "vacuous truth" cases — where P is false and the implication is true regardless of Q — are often counterintuitive at first but are essential for consistency in formal logic. A false hypothesis cannot invalidate a conditional statement.`,
+The "vacuous truth" cases — where P is false and the implication is true regardless of Q — are often counterintuitive at first but are essential for consistency in formal logic.
+
+@academic[rule_plain:A false hypothesis cannot invalidate a conditional statement.]@`,
       before: ``,
       after: ``,
       link: ``,
@@ -292,7 +304,9 @@ Material implication is used throughout mathematics to express theorems, definit
       title: `Q → P: The Converse`,
       content: `The converse Q → P reverses the roles of antecedent and consequent. If the original [implication](!/logic/propositional-logic/semantics/implication) says "if it rains then the ground is wet," the converse says "if the ground is wet then it rained."
 
-The converse is not logically equivalent to the original: P → Q and Q → P have different truth tables. The converse is false when Q is true and P is false — the opposite falsifying case from the original.
+@academic[rule_theorem_plain:The converse is not logically equivalent to the original: P → Q and Q → P have different truth tables.]@
+
+The converse is false when Q is true and P is false — the opposite falsifying case from the original.
 
 A common logical error is affirming the consequent: assuming that because P → Q is true, Q → P must also be true. The truth tables on this page show precisely why this reasoning fails. However, when both P → Q and Q → P hold, the result is the [biconditional](!/logic/truth-tables/biconditionals) P ↔ Q.`,
       before: ``,
@@ -323,7 +337,9 @@ The truth table shows that P → ¬Q is false only when both P and Q are true �
     },
     obj7: {
       title: `¬P → ¬Q: The Inverse`,
-      content: `The inverse ¬P → ¬Q reads "if not P then not Q." By material implication, ¬P → ¬Q ≡ P ∨ ¬Q. The inverse is not logically equivalent to the original [implication](!/logic/propositional-logic/semantics/implication) P → Q.
+      content: `The inverse ¬P → ¬Q reads "if not P then not Q." By material implication, ¬P → ¬Q ≡ P ∨ ¬Q.
+
+@academic[rule_theorem_plain:The inverse is not logically equivalent to the original [implication](!/logic/propositional-logic/semantics/implication) P → Q.]@
 
 However, the inverse is logically equivalent to the converse Q → P. This follows from the contrapositive relationship: the contrapositive of Q → P is ¬P → ¬Q, and contrapositives are always equivalent.
 
@@ -334,7 +350,9 @@ The inverse is false when P is false and Q is true. Confusing the inverse with t
     },
     obj8: {
       title: `¬Q → ¬P: The Contrapositive`,
-      content: `The contrapositive ¬Q → ¬P is logically equivalent to P → Q. Their truth tables are identical: both are false only when P is true and Q is false (equivalently, when ¬Q is true and ¬P is false).
+      content: `@academic[rule_theorem_plain:The contrapositive ¬Q → ¬P is logically equivalent to P → Q.]@
+
+Their truth tables are identical: both are false only when P is true and Q is false (equivalently, when ¬Q is true and ¬P is false).
 
 The equivalence P → Q ≡ ¬Q → ¬P is one of the most used results in mathematical proof. Proof by contrapositive works by proving ¬Q → ¬P instead of P → Q directly, which is often easier when the negated forms are simpler to work with.
 
@@ -466,8 +484,25 @@ For example, to prove "if n² is even then n is even," it is simpler to prove th
     }),
   };
 
+  const conditionalFormTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Three relatives of a conditional',
+    preface: 'Reversing or negating the parts of $P \\to Q$ gives three new conditionals. Only one of them says the same thing.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Only the contrapositive is safe',
+    conclusion: 'The contrapositive is logically equivalent to the original, which is why proof by contrapositive works. The converse and the inverse are not.',
+    root: { name: 'P → Q', sub: 'the original conditional' },
+    children: [
+      { id: 'conv', name: 'Converse', symbol: '$Q \\to P$', items: [ { label: 'Does', text: 'reverses the direction' } ], flag: true, warn: 'not equivalent' },
+      { id: 'inv', name: 'Inverse', symbol: '$\\neg P \\to \\neg Q$', items: [ { label: 'Does', text: 'negates both parts' } ], flag: true, warn: 'not equivalent' },
+      { id: 'contra', name: 'Contrapositive', symbol: '$\\neg Q \\to \\neg P$', items: [ { label: 'Does', text: 'reverses and negates' }, { label: 'Status', text: 'equivalent to $P \\to Q$' } ] },
+    ],
+    legend: [{ label: 'equivalent' }, { label: 'not equivalent', tone: 'warn' }],
+  };
+
   return {
     props: {
+    conditionalFormTree,
       demoUnits,
       keyWords,
       implicationExplanations,

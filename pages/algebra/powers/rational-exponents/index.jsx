@@ -318,7 +318,9 @@ Even roots require the base to be non-negative. The expression $(-4)^{1/2} = \\s
 
 Odd roots carry no such restriction. The expression $(-8)^{1/3} = \\sqrt[3]{-8} = -2$, because $(-2)^3 = -8$. Odd roots of negative numbers are negative, and the computation proceeds without difficulty.
 
-For a general rational exponent $a^{m/n}$, the domain depends on the denominator of the fraction when written in lowest terms. If $n$ is even, then $a \\geq 0$. If $n$ is odd, then $a$ can be any real number (with $a \\neq 0$ if $m$ is negative). This marks a tightening of restrictions that continues into [irrational exponents](!/algebra/powers/irrational-exponents), where the base must be strictly positive.`,
+@academic[rule_plain:For a general rational exponent $a^{m/n}$, the domain depends on the denominator of the fraction when written in lowest terms. If $n$ is even, then $a \\geq 0$. If $n$ is odd, then $a$ can be any real number (with $a \\neq 0$ if $m$ is negative).]@
+
+This marks a tightening of restrictions that continues into [irrational exponents](!/algebra/powers/irrational-exponents), where the base must be strictly positive.`,
   before: ``,
   after: ``,
   link: '',

@@ -3651,7 +3651,7 @@ $$\\begin{pmatrix} 1 & 0 & 0 & 6 & -3 & 1 \\\\ 0 & 1 & 0 & -3 & 2 & -1 \\\\ 0 & 
 
 So $A^{-1} = \\begin{pmatrix} 6 & -3 & 1 \\\\ -3 & 2 & -1 \\\\ 1 & -1 & 1 \\end{pmatrix}$.
 
-If at any point during reduction the left half develops a row of all zeros, $A$ is singular and no inverse exists.
+@academic[rule_plain:If at any point during reduction the left half develops a row of all zeros, $A$ is singular and no inverse exists.]@
 
 To compute the inverse of a specific matrix with each step shown, use the [matrix calculator](!/linear-algebra/calculators/matrix).`,
     before: ``,

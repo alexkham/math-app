@@ -1430,7 +1430,9 @@ The distinction matters: $\\{1, 2\\} \\subseteq \\{1, 2\\}$ is true, but $\\{1, 
 
 If $A = \\{a, b\\}$ and $B = \\{a, b, c\\}$, then $A \\subset B$ because $c \\in B$ but $c \\notin A$.
 
-The empty set satisfies $\\emptyset \\subset A$ for every non-empty set $A$, since $\\emptyset \\subseteq A$ and $\\emptyset \\neq A$. However, $\\emptyset \\subset \\emptyset$ is false because $\\emptyset = \\emptyset$.
+@academic[rule_corollary_plain:The empty set satisfies $\\emptyset \\subset A$ for every non-empty set $A$, since $\\emptyset \\subseteq A$ and $\\emptyset \\neq A$.]@
+
+However, $\\emptyset \\subset \\emptyset$ is false because $\\emptyset = \\emptyset$.
     `,
     before: ``,
     after: ``,
@@ -1513,7 +1515,7 @@ For $A = \\{1, 2\\}$, the power set is:
 @academic[formula_callout:Power Set
 $$\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, \\{1\\}, \\{2\\}, \\{1, 2\\}\\}$$]@
 
-The empty set and $A$ itself are always elements of $\\mathcal{P}(A)$.
+@academic[rule_corollary_plain:The empty set and $A$ itself are always elements of $\\mathcal{P}(A)$.]@
 
 The [cardinality](!/set-theory/cardinality) of the power set follows directly from subset counting:
 

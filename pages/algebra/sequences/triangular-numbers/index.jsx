@@ -225,7 +225,9 @@ $$T_n + T_{n-1} = \\frac{n(n+1)}{2} + \\frac{(n-1)n}{2} = n^2$$
 
 Geometrically, two triangles of consecutive sizes fit together to form a [square](!/algebra/sequences/square-numbers). This identity connects the two simplest figurate number sequences.
 
-A number $m$ is triangular if and only if $8m + 1$ is a perfect square. Solving $m = \\frac{n(n+1)}{2}$ for $n$ gives $n = \\frac{-1 + \\sqrt{1 + 8m}}{2}$, which is a positive integer precisely when $8m + 1$ is a perfect square. This provides a direct test: $m = 15$ gives $8(15) + 1 = 121 = 11^2$, so $15$ is triangular ($T_5 = 15$).
+@academic[rule_theorem_plain:A number $m$ is triangular if and only if $8m + 1$ is a perfect square.]@
+
+Solving $m = \\frac{n(n+1)}{2}$ for $n$ gives $n = \\frac{-1 + \\sqrt{1 + 8m}}{2}$, which is a positive integer precisely when $8m + 1$ is a perfect square. This provides a direct test: $m = 15$ gives $8(15) + 1 = 121 = 11^2$, so $15$ is triangular ($T_5 = 15$).
 
 The sum of the first $n$ triangular numbers produces the tetrahedral numbers:
 

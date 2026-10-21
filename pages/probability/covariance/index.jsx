@@ -1192,8 +1192,8 @@ variables deviate from their averages.
     obj4:{
       title:`Covariance and Independence`,
       content:`
-If two [random variables](!/probability/random-variables) are independent, their joint behavior separates into two
-unrelated components. As a result, their covariance evaluates to zero.
+@academic[rule_theorem_plain:If two [random variables](!/probability/random-variables) are independent, their joint behavior separates into two
+unrelated components. As a result, their covariance evaluates to zero.]@
 
 The converse does not hold. A covariance value of zero does not rule out dependence.
 Two variables may exhibit structured relationships that covariance does not capture.

@@ -1122,7 +1122,9 @@ $n$ = number of draws (sample size)
 
 The hypergeometric distribution describes sampling without replacement. Although the draws are not independent, the expected value has a remarkably simple form.
 
-The proportion of successes in the population is $\\frac{K}{N}$. When drawing $n$ items, each draw has the same marginal probability $\\frac{K}{N}$ of being a success (even though the draws are dependent).
+The proportion of successes in the population is $\\frac{K}{N}$.
+
+@academic[rule_theorem_plain:When drawing $n$ items, each draw has the same marginal probability $\\frac{K}{N}$ of being a success (even though the draws are dependent).]@
 
 By symmetry and linearity of expectation, the expected number of successes in $n$ draws is:
 

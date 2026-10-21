@@ -14,6 +14,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -691,8 +693,29 @@ const schemas = {
     }),
   };
 
+  const differentiationTechniqueTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Beyond the basic rules',
+    preface: 'Four techniques extend differentiation to functions the basic rules handle badly. Each fits a recognisable kind of problem.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Recognise the setting',
+    conclusion: 'Tangled $x$ and $y$ call for implicit differentiation; many factors or variable exponents call for logarithms; inverses and parametric curves each have their own route.',
+    root: { name: 'Differentiation techniques', sub: '4 methods' },
+    children: [
+      { id: 'imp', name: 'Implicit', items: [
+        { label: 'When', text: '$x$ and $y$ are tangled, as in a circle' }, { label: 'Also', text: 'related rates' } ] },
+      { id: 'log', name: 'Logarithmic', items: [
+        { label: 'When', text: 'many factors or quotients' }, { label: 'Also', text: 'variable exponents such as $x^x$' } ] },
+      { id: 'inv', name: 'Inverse function', items: [
+        { label: 'When', text: 'differentiating $f^{-1}$ with $f\'$ known' }, { label: 'Leads to', text: 'the inverse trig derivatives' } ] },
+      { id: 'par', name: 'Parametric', items: [
+        { label: 'When', text: 'curves given as $x(t)$, $y(t)$' }, { label: 'Examples', text: 'loops, cycloids, trajectories' } ] },
+    ],
+  };
+
   return {
   props:{
+    differentiationTechniqueTree,
     sectionsContent,
     introContent,
     obj1Table,
@@ -713,7 +736,7 @@ const schemas = {
 
    }
 
-export default function PageTemplate({
+export default function PageTemplate({differentiationTechniqueTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -807,6 +830,14 @@ export default function PageTemplate({
         content:[
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj7Table}}/>,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="differentiation-techniques-tree"
+            title="When to use which differentiation technique"
+            source="/calculus/derivatives/techniques"
+          >
+            <TopDownTree data={differentiationTechniqueTree} />
+          </DiagramFrame>,
         ]
     },
     {

@@ -1025,7 +1025,9 @@ In each case, linearity can be verified directly from the definition. The matrix
 
 The squaring function $T(x) = x^2$ from $\\mathbb{R}$ to $\\mathbb{R}$ fails additivity: $T(1 + 1) = 4$ but $T(1) + T(1) = 2$. The absolute value function $T(x) = |x|$ fails homogeneity: $T(-1 \\cdot 2) = 2$ but $-1 \\cdot T(2) = -2$. Norms $T(\\mathbf{v}) = \\|\\mathbf{v}\\|$ fail additivity by the triangle inequality.
 
-Affine maps $T(\\mathbf{v}) = A\\mathbf{v} + \\mathbf{b}$ are linear only when $\\mathbf{b} = \\mathbf{0}$. The matrix part preserves linearity; the constant shift breaks it. Affine maps are important in geometry and optimization, but they are not linear transformations in the sense used here.`,
+@academic[rule_plain:Affine maps $T(\\mathbf{v}) = A\\mathbf{v} + \\mathbf{b}$ are linear only when $\\mathbf{b} = \\mathbf{0}$.]@
+
+The matrix part preserves linearity; the constant shift breaks it. Affine maps are important in geometry and optimization, but they are not linear transformations in the sense used here.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1070,7 +1072,7 @@ A linear transformation is invertible if and only if it is bijective — both in
   },
   obj7: {
     title: `The Matrix Connection`,
-    content: `Every linear transformation $T: \\mathbb{R}^n \\to \\mathbb{R}^m$ can be written as $T(\\mathbf{x}) = A\\mathbf{x}$ for a unique $m \\times n$ [matrix](!/linear-algebra/matrix) $A$ whose columns are the images of the standard basis vectors: $A = [T(\\mathbf{e}_1) \\; T(\\mathbf{e}_2) \\; \\cdots \\; T(\\mathbf{e}_n)]$.
+    content: `@academic[rule_theorem_plain:Every linear transformation $T: \\mathbb{R}^n \\to \\mathbb{R}^m$ can be written as $T(\\mathbf{x}) = A\\mathbf{x}$ for a unique $m \\times n$ [matrix](!/linear-algebra/matrix) $A$ whose columns are the images of the standard basis vectors: $A = [T(\\mathbf{e}_1) \\; T(\\mathbf{e}_2) \\; \\cdots \\; T(\\mathbf{e}_n)]$.]@
 
 This gives a one-to-one correspondence between linear maps $\\mathbb{R}^n \\to \\mathbb{R}^m$ and $m \\times n$ matrices. Every property of the transformation — its [rank](!/linear-algebra/matrix/rank), [determinant](!/linear-algebra/determinants) (when square), [eigenvalues](!/linear-algebra/eigen), [image and kernel](!/linear-algebra/transformations/image-kernel) — can be read from the matrix. And every matrix operation — multiplication, inversion, decomposition — has a transformation-level interpretation.
 

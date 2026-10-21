@@ -345,7 +345,7 @@ The rules are shortcuts, not definitions. The definition of divisibility is $a \
 
 obj2: {
   title: `Divisibility by 2`,
-  content: `A number is divisible by $2$ if its last digit is even: $0, 2, 4, 6$, or $8$.
+  content: `@academic[rule_plain:A number is divisible by $2$ if its last digit is even: $0, 2, 4, 6$, or $8$.]@
 
 Since $10$ is divisible by $2$, every power of $10$ is also divisible by $2$. The contribution of each digit beyond the ones place — $d \\cdot 10^k$ for $k \\geq 1$ — is automatically a multiple of $2$. Only the final digit $d_0$ remains outside that guarantee, so $d_0$ alone determines divisibility.
 
@@ -413,7 +413,7 @@ The even numbers — $\\ldots, -4, -2, 0, 2, 4, 6, \\ldots$ — are precisely th
 
 obj3: {
   title: `Divisibility by 3`,
-  content: `A number is divisible by $3$ if the sum of its digits is divisible by $3$.
+  content: `@academic[rule_plain:A number is divisible by $3$ if the sum of its digits is divisible by $3$.]@
 
 The reason traces to a single congruence: $10 \\equiv 1 \\pmod{3}$. Every power of $10$ is also congruent to $1$ modulo $3$: $10^2 \\equiv 1$, $10^3 \\equiv 1$, and so on. A digit $d$ in the $k$th place contributes $d \\cdot 10^k \\equiv d \\cdot 1 = d \\pmod{3}$. The place value drops away entirely, and only the digit itself matters. The number is congruent to the sum of its digits modulo $3$.
 
@@ -428,7 +428,7 @@ The process can be repeated: if the digit sum is large, sum its digits again. Th
 
 obj4: {
   title: `Divisibility by 4`,
-  content: `A number is divisible by $4$ if its last two digits form a number divisible by $4$.
+  content: `@academic[rule_plain:A number is divisible by $4$ if its last two digits form a number divisible by $4$.]@
 
 The number $100$ is divisible by $4$, and so is every higher power of $10$. Every digit beyond the tens place contributes a multiple of $100$ — automatically a multiple of $4$. Only the last two digits affect the remainder when dividing by $4$.
 
@@ -443,7 +443,7 @@ For quick mental checks, it helps to know which two-digit endings are divisible 
 
 obj5: {
   title: `Divisibility by 5`,
-  content: `A number is divisible by $5$ if its last digit is $0$ or $5$.
+  content: `@academic[rule_plain:A number is divisible by $5$ if its last digit is $0$ or $5$.]@
 
 The logic is the same as for $2$: since $10$ is divisible by $5$, every digit beyond the ones place contributes a multiple of $5$. Only the last digit matters, and the only single digits divisible by $5$ are $0$ and $5$.
 
@@ -459,7 +459,7 @@ This is the second simplest rule after divisibility by $10$ — a single-digit c
 
 obj6: {
   title: `Divisibility by 6`,
-  content: `A number is divisible by $6$ if it is divisible by both $2$ and $3$.
+  content: `@academic[rule_plain:A number is divisible by $6$ if it is divisible by both $2$ and $3$.]@
 
 Since $6 = 2 \\times 3$ and $\\gcd(2, 3) = 1$, divisibility by $6$ requires passing both individual tests: the last digit must be even, and the digit sum must be divisible by $3$.
 
@@ -543,7 +543,7 @@ This approach generalizes. For any composite divisor $n = a \\times b$ where $a$
 
 obj7: {
   title: `Divisibility by 8`,
-  content: `A number is divisible by $8$ if its last three digits form a number divisible by $8$.
+  content: `@academic[rule_plain:A number is divisible by $8$ if its last three digits form a number divisible by $8$.]@
 
 The number $1{,}000$ is divisible by $8$ ($1000 = 8 \\times 125$), and so is every higher power of $10$. Digits beyond the hundreds place contribute multiples of $1{,}000$ — all divisible by $8$. Only the last three digits affect the outcome.
 
@@ -558,7 +558,7 @@ This rule is harder to apply mentally than the rules for $2$ or $5$, since it re
 
 obj8: {
   title: `Divisibility by 9`,
-  content: `A number is divisible by $9$ if the sum of its digits is divisible by $9$.
+  content: `@academic[rule_plain:A number is divisible by $9$ if the sum of its digits is divisible by $9$.]@
 
 The reasoning is identical to the rule for $3$: $10 \\equiv 1 \\pmod{9}$, so every power of $10$ is congruent to $1$ modulo $9$, and each digit contributes only its face value. The number is congruent to its digit sum modulo $9$.
 
@@ -573,7 +573,7 @@ Since $9 = 3^2$, every number divisible by $9$ is automatically divisible by $3$
 
 obj9: {
   title: `Divisibility by 10`,
-  content: `A number is divisible by $10$ if its last digit is $0$.
+  content: `@academic[rule_plain:A number is divisible by $10$ if its last digit is $0$.]@
 
 This is the simplest rule of all. The base of the number system is $10$, so a number has no remainder when divided by $10$ exactly when the ones place is empty.
 
@@ -588,7 +588,7 @@ Since $10 = 2 \\times 5$, divisibility by $10$ requires divisibility by both $2$
 
 obj10: {
   title: `Divisibility by 11`,
-  content: `A number is divisible by $11$ if the alternating sum of its digits (from right to left: add, subtract, add, subtract, $\\ldots$) is divisible by $11$.
+  content: `@academic[rule_plain:A number is divisible by $11$ if the alternating sum of its digits (from right to left: add, subtract, add, subtract, $\\ldots$) is divisible by $11$.]@
 
 The congruence behind the rule is $10 \\equiv -1 \\pmod{11}$. Successive [powers](!/algebra/powers) of $10$ alternate: $10^0 = 1$, $10^1 \\equiv -1$, $10^2 \\equiv 1$, $10^3 \\equiv -1$. Each digit's contribution to the remainder alternates in sign depending on its position.
 
@@ -604,7 +604,7 @@ If the alternating sum is negative, that is fine — a negative multiple of $11$
 
 obj11: {
   title: `Combining Rules`,
-  content: `Divisibility by a composite number can be tested by checking its coprime factors separately.
+  content: `@academic[rule_plain:Divisibility by a composite number can be tested by checking its coprime factors separately.]@
 
 Is $2{,}340$ divisible by $12$? Since $12 = 4 \\times 3$ and $\\gcd(4, 3) = 1$, check each factor independently. Last two digits: $40$, and $40 \\div 4 = 10$ exactly — divisible by $4$. Digit sum: $2 + 3 + 4 + 0 = 9$, divisible by $3$. Both conditions hold, so $12 \\mid 2340$.
 

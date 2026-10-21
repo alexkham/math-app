@@ -2697,7 +2697,9 @@ The table below collects these worked examples side by side so the two-condition
 
   obj6: {
     title: `Non-Commutativity`,
-    content: `Composition is not commutative: $f \\circ g$ does not generally equal $g \\circ f$. The order of the functions determines the result.
+    content: `@academic[rule_plain:Composition is not commutative: $f \\circ g$ does not generally equal $g \\circ f$.]@
+
+The order of the functions determines the result.
 
 Let $f(x) = x + 5$ and $g(x) = x^2$.
 
@@ -2836,7 +2838,9 @@ $$f^{-1}(f(x)) = f^{-1}(2x + 3) = \\frac{(2x + 3) - 3}{2} = \\frac{2x}{2} = x \\
 
 This verification method confirms that two functions are inverses. If either composition fails to produce $x$, the functions are not inverses.
 
-The identity function $I(x) = x$ is the compositional equivalent of the number $1$ in multiplication: $f \\circ I = I \\circ f = f$ for any function $f$. Inverses compose to produce this neutral element.`,
+@academic[rule_plain:The identity function $I(x) = x$ is the compositional equivalent of the number $1$ in multiplication: $f \\circ I = I \\circ f = f$ for any function $f$.]@
+
+Inverses compose to produce this neutral element.`,
     before: ``,
     after: ``,
     link: '',

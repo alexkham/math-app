@@ -1188,7 +1188,10 @@ The number $0$ is the only real number without a multiplicative inverse. The equ
     title: `Zero Property of Multiplication`,
     content: `$$a \\cdot 0 = 0$$
  
-Multiplying any number by zero gives zero. The property holds in both directions: $0 \\cdot a = 0$ as well.
+@academic[rule:Zero Property of Multiplication
+Multiplying any number by zero gives zero.]@
+
+The property holds in both directions: $0 \\cdot a = 0$ as well.
  
 This is sometimes treated as a separate axiom, but it is actually a consequence of the [distributive property](!/arithmetic/properties#5). Starting from $a \\cdot 0 = a \\cdot (0 + 0) = a \\cdot 0 + a \\cdot 0$, subtracting $a \\cdot 0$ from both sides leaves $0 = a \\cdot 0$. The result follows from the structure of arithmetic itself, not from a separate definition.
  

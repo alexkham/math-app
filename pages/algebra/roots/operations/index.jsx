@@ -214,7 +214,9 @@ const sectionsContent = {
 
   obj1: {
     title: `Like Radicals`,
-    content: `Like radicals share the same index and the same radicand. Only like radicals can be added or subtracted.
+    content: `Like radicals share the same index and the same radicand.
+
+@academic[rule_plain:Only like radicals can be added or subtracted.]@
 
 @academic[formula_callout:Like Radicals
 $$3\\sqrt{5} \\text{ and } 7\\sqrt{5} \\quad \\text{are like radicals}$$]@

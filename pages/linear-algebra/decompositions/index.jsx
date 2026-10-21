@@ -11,6 +11,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import svdDiagrams from '@/app/components/linear-algebra copy/matrix/svdDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -182,7 +184,9 @@ The QR algorithm for eigenvalues — an iterative scheme that repeatedly factors
 
 Cholesky exploits symmetry to achieve half the cost of LU: $\\frac{1}{3}n^3$ versus $\\frac{2}{3}n^3$. Only the lower triangle of $A$ is read, and only $L$ is computed — the upper factor $L^T$ is just the transpose.
 
-Cholesky requires no pivoting. Positive definiteness guarantees that every diagonal entry encountered during the algorithm is strictly positive, so no zero pivots can occur. If the algorithm breaks down (a non-positive value under the square root), the matrix is not positive definite — the decomposition doubles as a definiteness test.`,
+@academic[rule_theorem_plain:Cholesky requires no pivoting. Positive definiteness guarantees that every diagonal entry encountered during the algorithm is strictly positive, so no zero pivots can occur.]@
+
+If the algorithm breaks down (a non-positive value under the square root), the matrix is not positive definite — the decomposition doubles as a definiteness test.`,
     before: ``,
     after: ``,
     link: ``,
@@ -335,8 +339,35 @@ const schemas = {
     }),
   };
 
+  const decompositionTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Five ways to factor a matrix',
+    preface: 'Each decomposition writes a matrix as a product of simpler pieces. They differ in which matrices they accept and what they are used for.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Pick by the matrix you have',
+    conclusion: 'Cholesky and the spectral decomposition need symmetric matrices; the SVD accepts any matrix of any shape.',
+    root: { name: 'Matrix decompositions', sub: '5 factorizations' },
+    children: [
+      { id: 'lu', name: '[LU](!/linear-algebra/decompositions/lower-upper)', symbol: '$A = LU$', items: [
+        { label: 'What it is', text: 'Gaussian elimination recorded' },
+        { label: 'Cost', text: '$\\frac{2}{3}n^3$ once, then $O(n^2)$ per right-hand side' } ] },
+      { id: 'qr', name: '[QR](!/linear-algebra/decompositions/qr)', symbol: '$A = QR$', items: [
+        { label: 'Factors', text: '$Q$ orthonormal, $R$ upper triangular' },
+        { label: 'Used for', text: 'least squares, the QR eigenvalue algorithm' } ] },
+      { id: 'chol', name: '[Cholesky](!/linear-algebra/decompositions/cholesky)', symbol: '$A = LL^T$', flag: true, warn: 'symmetric positive definite only', items: [
+        { label: 'Cost', text: 'half of LU, no pivoting' } ] },
+      { id: 'spec', name: '[Spectral](!/linear-algebra/decompositions/spectral)', symbol: '$A = QDQ^T$', flag: true, warn: 'real symmetric only', items: [
+        { label: 'Meaning', text: 'a sum of rank-one projections' } ] },
+      { id: 'svd', name: '[SVD](!/linear-algebra/decompositions/svd)', symbol: '$A = U\\Sigma V^T$', items: [
+        { label: 'Accepts', text: 'any matrix of any shape' },
+        { label: 'Gives', text: 'rank, pseudoinverse, low-rank approximation' } ] },
+    ],
+    legend: [{ label: 'decomposition' }, { label: 'restricted to special matrices', tone: 'warn' }],
+  };
+
   return {
   props:{
+    decompositionTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -355,7 +386,7 @@ const schemas = {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function DecompositionsPage({
+export default function DecompositionsPage({decompositionTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -452,6 +483,14 @@ export default function DecompositionsPage({
           sectionsContent.obj10.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'obj10-diagram'}
+            id="decompositions-tree"
+            title="The five matrix decompositions"
+            source="/linear-algebra/decompositions"
+          >
+            <TopDownTree data={decompositionTree} />
+          </DiagramFrame>,
         ]
     },
     // {

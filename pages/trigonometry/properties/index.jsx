@@ -1818,7 +1818,9 @@ $$\\tan(-\\theta) = -\\tan\\theta$$
 
 Cosecant and cotangent inherit the odd symmetry of sine and tangent: $\\csc(-\\theta) = -\\csc(\\theta)$ and $\\cot(-\\theta) = -\\cot(\\theta)$.
 
-The geometric explanation is clean. On the [unit circle](!/trigonometry/unit-circle), the angle $-\\theta$ corresponds to reflecting $\\theta$ across the $x$-axis. This reflection negates the $y$-coordinate but preserves the $x$-coordinate. Since cosine is the $x$-coordinate, it is unchanged — even. Since sine is the $y$-coordinate, it is negated — odd. Tangent, being $\\frac{y}{x}$, is the ratio of an odd quantity to an even one, which is odd. The reciprocal functions inherit the parity of their parent functions: the reciprocal of an even function is even, and the reciprocal of an odd function is odd.
+The geometric explanation is clean. On the [unit circle](!/trigonometry/unit-circle), the angle $-\\theta$ corresponds to reflecting $\\theta$ across the $x$-axis. This reflection negates the $y$-coordinate but preserves the $x$-coordinate. Since cosine is the $x$-coordinate, it is unchanged — even. Since sine is the $y$-coordinate, it is negated — odd. Tangent, being $\\frac{y}{x}$, is the ratio of an odd quantity to an even one, which is odd.
+
+@academic[rule_plain:The reciprocal functions inherit the parity of their parent functions: the reciprocal of an even function is even, and the reciprocal of an odd function is odd.]@
 
 These symmetries are classified as the even/odd [identities](!/trigonometry/identities) and are used constantly in simplification. When a negative angle appears in an expression — say, $\\sin(-3x)$ — the odd identity converts it immediately to $-\\sin(3x)$, eliminating the negative argument. Similarly, $\\cos(-\\alpha) = \\cos(\\alpha)$ allows the sign to be dropped outright.
 
@@ -1894,7 +1896,9 @@ The zeros of sine and cosine are evenly spaced at intervals of $\\pi$ — a dire
   },
   obj5: {
     title: `Continuity and Discontinuities`,
-    content: `Sine and cosine are continuous on the entire real line — their graphs are unbroken curves with no jumps, gaps, or asymptotes. This follows from the geometry: as an angle increases smoothly, the point on the [unit circle](!/trigonometry/unit-circle) moves smoothly, and the coordinates change continuously. There is no angle at which the $x$- or $y$-coordinate suddenly jumps.
+    content: `@academic[rule_theorem_plain:Sine and cosine are continuous on the entire real line — their graphs are unbroken curves with no jumps, gaps, or asymptotes.]@
+
+This follows from the geometry: as an angle increases smoothly, the point on the [unit circle](!/trigonometry/unit-circle) moves smoothly, and the coordinates change continuously. There is no angle at which the $x$- or $y$-coordinate suddenly jumps.
 
 The remaining four functions all have vertical asymptotes — points where the function value grows without bound and the function is undefined.
 

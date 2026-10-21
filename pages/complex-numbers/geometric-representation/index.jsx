@@ -1103,7 +1103,9 @@ obj0: {
   before: ``,
   content: `The [algebraic form](!/complex-numbers/algebraic-form) $z = a + bi$ contains two real numbers: the real part $a$ and the imaginary part $b$. Two numbers naturally suggest two dimensions. Rather than confining complex numbers to a line, we grant them an entire plane — a flat surface where horizontal position encodes the real part and vertical position encodes the imaginary part.
 
-The correspondence is direct: the complex number $z = a + bi$ maps to the point with coordinates $(a, b)$. The number $4 + 3i$ becomes the point $(4, 3)$, located four units right of the origin and three units up. The number $-2 + i$ becomes $(-2, 1)$, sitting in the second quadrant. Every complex number finds a home at exactly one point, and every point in the plane represents exactly one complex number.
+The correspondence is direct: the complex number $z = a + bi$ maps to the point with coordinates $(a, b)$. The number $4 + 3i$ becomes the point $(4, 3)$, located four units right of the origin and three units up. The number $-2 + i$ becomes $(-2, 1)$, sitting in the second quadrant.
+
+@academic[rule_plain:Every complex number finds a home at exactly one point, and every point in the plane represents exactly one complex number.]@
 
 This visualization carries a historical name: the Argand diagram, honoring Jean-Robert Argand, who published the geometric interpretation in 1806. Other mathematicians including Caspar Wessel and Carl Friedrich Gauss developed similar ideas independently. The plane itself is called the complex plane, and its two axes receive names reflecting their contents — the real axis runs horizontally, the imaginary axis runs vertically.
 
@@ -1187,7 +1189,11 @@ The reflection perspective explains several algebraic facts geometrically. Takin
   before: ``,
   content: `Real numbers line up in sequence. Given any two distinct reals, one is larger and one is smaller. The relation "less than" totally orders $\\mathbb{R}$, allowing comparison between any pair of elements. This ordering underlies much of real analysis — limits approach from below or above, intervals have left and right endpoints, and functions increase or decrease.
 
-Complex numbers refuse such arrangement. No consistent definition of "less than" extends from $\\mathbb{R}$ to $\\mathbb{C}$ while preserving the essential properties we expect from an ordering. The question "Is $3 + 2i$ greater than $1 + 5i$?" has no meaningful answer. Neither number dominates the other in any standard sense.
+Complex numbers refuse such arrangement.
+
+@academic[rule_theorem_plain:No consistent definition of "less than" extends from $\\mathbb{R}$ to $\\mathbb{C}$ while preserving the essential properties we expect from an ordering.]@
+
+The question "Is $3 + 2i$ greater than $1 + 5i$?" has no meaningful answer. Neither number dominates the other in any standard sense.
 
 The geometry reveals why ordering fails. Real numbers occupy a one-dimensional line where direction determines comparison — rightward means greater, leftward means lesser. Complex numbers fill a two-dimensional plane where points spread in all directions. No single direction consistently represents "greater than" without privileging some numbers arbitrarily over others. Should $3 + 2i$ exceed $1 + 5i$ because it lies further right, or should $1 + 5i$ exceed $3 + 2i$ because it lies further up? Neither choice maintains logical consistency across all pairs.
 

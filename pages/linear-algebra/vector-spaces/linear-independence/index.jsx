@@ -1649,7 +1649,9 @@ Dependence means at least one vector in the set can be expressed as a linear com
 @academic[formula_callout:Definition
 $$\\mathbf{v}_j = -\\frac{c_1}{c_j}\\mathbf{v}_1 - \\cdots - \\frac{c_{j-1}}{c_j}\\mathbf{v}_{j-1} - \\frac{c_{j+1}}{c_j}\\mathbf{v}_{j+1} - \\cdots - \\frac{c_k}{c_j}\\mathbf{v}_k$$]@
 
-A single nonzero vector is always independent — the equation $c\\mathbf{v} = \\mathbf{0}$ with $\\mathbf{v} \\neq \\mathbf{0}$ forces $c = 0$. The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mathbf{0}$ is a nontrivial relation. Any set containing the zero vector is therefore dependent.`,
+@academic[rule_corollary_plain:A single nonzero vector is always independent — the equation $c\\mathbf{v} = \\mathbf{0}$ with $\\mathbf{v} \\neq \\mathbf{0}$ forces $c = 0$.]@
+
+The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mathbf{0}$ is a nontrivial relation. Any set containing the zero vector is therefore dependent.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1702,7 +1704,9 @@ Two vectors in $\\mathbb{R}^2$ are dependent if and only if they are parallel �
 
 Three vectors in $\\mathbb{R}^3$ are dependent if and only if they are coplanar — all three lie in a single plane through the origin. The third vector can be written as a combination of the first two, so it provides no new reach. Three non-coplanar vectors are independent and span all of $\\mathbb{R}^3$.
 
-In $\\mathbb{R}^n$, at most $n$ vectors can be independent. A set of $n + 1$ or more vectors in $\\mathbb{R}^n$ is automatically dependent, regardless of what the vectors are. This is because $\\mathbb{R}^n$ has [dimension](!/linear-algebra/vector-spaces/dimension) $n$, and no independent set can exceed the dimension.`,
+@academic[rule_theorem_plain:In $\\mathbb{R}^n$, at most $n$ vectors can be independent. A set of $n + 1$ or more vectors in $\\mathbb{R}^n$ is automatically dependent, regardless of what the vectors are.]@
+
+This is because $\\mathbb{R}^n$ has [dimension](!/linear-algebra/vector-spaces/dimension) $n$, and no independent set can exceed the dimension.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1804,7 +1808,8 @@ $$W(f_1, \\ldots, f_n)(x) = \\det\\begin{pmatrix} f_1(x) & \\cdots & f_n(x) \\\\
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-If $W(f_1, \\dots, f_n)(x_0) \\neq 0$ at any single point $x_0$, the functions are linearly independent.
+@academic[rule_theorem:Wronskian Test
+If $W(f_1, \\dots, f_n)(x_0) \\neq 0$ at any single point $x_0$, the functions are linearly independent.]@
 
 The converse requires caution. A Wronskian that vanishes identically does not always imply dependence unless the functions are known to be solutions of a single linear ordinary differential equation with continuous coefficients. Without that structural guarantee, counterexamples exist where the Wronskian is zero everywhere yet the functions are independent.`,
     before: ``,

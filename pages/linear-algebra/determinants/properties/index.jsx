@@ -2402,7 +2402,7 @@ $$\\begin{pmatrix} 2 & 1 & -1 & 3 \\\\ 0 & -2 & 4 & -5 \\\\ 0 & 0 & 8 & -2 \\\\ 
 No row swaps and no row scalings were used — only row additions. The determinant is the product of the diagonal:
 
 @academic[formula_callout:Computing Determinants via Row Reduction
-$$\\det(A) = 2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{4}\\right) = 2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{4}\\right) = 116$$]@
+$$\\det(A) = 2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{4}\\right) = (-32) \\cdot \\left(-\\frac{29}{4}\\right) = 232$$]@
 
 ## Complexity
 

@@ -1154,7 +1154,9 @@ At $3^6$, the remainder returns to $1$. From here: $3^{10} = 3^6 \\cdot 3^4 \\eq
 
 obj7: {
   title: `Detecting Cycles in Powers`,
-  content: `Because $\\bmod n$ confines remainders to a finite set, the sequence of remainders $a^1, a^2, a^3, \\ldots \\bmod n$ must eventually repeat. Once a remainder reappears, the entire pattern cycles from that point forward.
+  content: `@academic[rule_theorem_plain:Because $\\bmod n$ confines remainders to a finite set, the sequence of remainders $a^1, a^2, a^3, \\ldots \\bmod n$ must eventually repeat.]@
+
+Once a remainder reappears, the entire pattern cycles from that point forward.
 
 Powers of $2 \\bmod 7$ produce the sequence: $2, 4, 1, 2, 4, 1, 2, 4, 1, \\ldots$ The cycle $\\{2, 4, 1\\}$ has length $3$ and repeats indefinitely.
 
@@ -1185,7 +1187,9 @@ Modular division requires a different tool: the modular inverse. The inverse of 
 
 obj9: {
   title: `Last Digit Problems`,
-  content: `The last digit of any number is that number $\\bmod 10$. Finding the last digit of a large [power](!/algebra/powers) reduces to modular exponentiation with $n = 10$.
+  content: `@academic[rule_plain:The last digit of any number is that number $\\bmod 10$.]@
+
+Finding the last digit of a large [power](!/algebra/powers) reduces to modular exponentiation with $n = 10$.
 
 Find the last digit of $7^{100}$. The powers of $7 \\bmod 10$ cycle: $7, 9, 3, 1, 7, 9, 3, 1, \\ldots$ with period $4$.
 

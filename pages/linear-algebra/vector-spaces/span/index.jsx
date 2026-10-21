@@ -1392,7 +1392,9 @@ The pattern is consistent: the dimension of the span equals the number of indepe
     title: `Spanning Sets`,
     content: `A set of vectors spans a vector space $V$ if $\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\} = V$ — every vector in $V$ can be written as a linear combination of the set. When this holds, the set is called a spanning set for $V$.
 
-In $\\mathbb{R}^n$, a spanning set must contain at least $n$ vectors. Fewer than $n$ vectors cannot reach every direction — their span is a proper subspace of [dimension](!/linear-algebra/vector-spaces/dimension) less than $n$. A spanning set with exactly $n$ independent vectors is a [basis](!/linear-algebra/vector-spaces/basis). A spanning set with more than $n$ vectors contains redundancies that can be removed.
+@academic[rule_theorem_plain:In $\\mathbb{R}^n$, a spanning set must contain at least $n$ vectors.]@
+
+Fewer than $n$ vectors cannot reach every direction — their span is a proper subspace of [dimension](!/linear-algebra/vector-spaces/dimension) less than $n$. A spanning set with exactly $n$ independent vectors is a [basis](!/linear-algebra/vector-spaces/basis). A spanning set with more than $n$ vectors contains redundancies that can be removed.
 
 The standard basis $\\{\\mathbf{e}_1, \\dots, \\mathbf{e}_n\\}$ spans $\\mathbb{R}^n$ with no redundancy. The set $\\{\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_1 + \\mathbf{e}_2\\}$ also spans $\\mathbb{R}^2$, but the third vector is redundant — it lies in the span of the first two. Removing it leaves a basis.`,
     before: ``,

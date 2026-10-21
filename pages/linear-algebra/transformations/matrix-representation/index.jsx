@@ -1218,7 +1218,7 @@ The $2 \\times 3$ shape reflects $\\dim(\\mathcal{P}_1) = 2$ rows and $\\dim(\\m
   },
   obj6: {
     title: `Composition Corresponds to Matrix Multiplication`,
-    content: `If $T: U \\to V$ has matrix $A$ (relative to appropriate bases) and $S: V \\to W$ has matrix $B$, then the composition $S \\circ T: U \\to W$ has matrix $BA$.
+    content: `@academic[rule_theorem_plain:If $T: U \\to V$ has matrix $A$ (relative to appropriate bases) and $S: V \\to W$ has matrix $B$, then the composition $S \\circ T: U \\to W$ has matrix $BA$.]@
 
 The order matches the composition: $S$ acts after $T$, and $B$ multiplies from the left. This is why [matrix multiplication](!/linear-algebra/matrix/operations) is defined as it is — the row-times-column rule encodes function composition.
 
@@ -1233,7 +1233,9 @@ The identity transformation $I: V \\to V$ has the [identity matrix](!/linear-alg
     title: `The Identity and the Inverse`,
     content: `The identity transformation $I: V \\to V$ sends every vector to itself. In any basis, its matrix is $I_n$.
 
-If $T$ has matrix $A$ and $T$ is invertible, then $T^{-1}$ has matrix $A^{-1}$. The transformation $T$ is invertible if and only if $A$ is [invertible](!/linear-algebra/matrix/inverse) — the geometric and algebraic conditions coincide exactly. Composing $T$ with $T^{-1}$ gives the identity, and multiplying $A$ by $A^{-1}$ gives $I$. The [determinant](!/linear-algebra/determinants) test ($\\det(A) \\neq 0$) simultaneously answers whether the transformation is bijective and whether the matrix has an inverse.`,
+@academic[rule_theorem_plain:If $T$ has matrix $A$ and $T$ is invertible, then $T^{-1}$ has matrix $A^{-1}$. The transformation $T$ is invertible if and only if $A$ is [invertible](!/linear-algebra/matrix/inverse) — the geometric and algebraic conditions coincide exactly.]@
+
+Composing $T$ with $T^{-1}$ gives the identity, and multiplying $A$ by $A^{-1}$ gives $I$. The [determinant](!/linear-algebra/determinants) test ($\\det(A) \\neq 0$) simultaneously answers whether the transformation is bijective and whether the matrix has an inverse.`,
     before: ``,
     after: ``,
     link: ``,

@@ -308,7 +308,9 @@ The expression $\\left(\\frac{2}{5}\\right)^{-3} = \\left(\\frac{5}{2}\\right)^3
 
 The case $n = 1$ gives the simplest form of the reciprocal: $a^{-1} = \\frac{1}{a}$. This notation appears throughout algebra and beyond — $a^{-1}$ is the standard way to write the multiplicative inverse of $a$.
 
-A negative exponent in the denominator moves the expression to the numerator. The fraction $\\frac{1}{a^{-n}}$ equals $a^n$, since taking the reciprocal of a reciprocal returns the original. Similarly, $\\frac{a^{-2}}{b^{-3}} = \\frac{b^3}{a^2}$ — each negative exponent crosses the fraction bar and becomes positive.`,
+@academic[rule_corollary_plain:A negative exponent in the denominator moves the expression to the numerator. The fraction $\\frac{1}{a^{-n}}$ equals $a^n$, since taking the reciprocal of a reciprocal returns the original.]@
+
+Similarly, $\\frac{a^{-2}}{b^{-3}} = \\frac{b^3}{a^2}$ — each negative exponent crosses the fraction bar and becomes positive.`,
   before: ``,
   after: ``,
   link: '',
@@ -324,7 +326,9 @@ Mixed signs: $a^3 \\cdot a^{-5}$ should equal $a^{3+(-5)} = a^{-2}$. Computing d
 
 Power of a power: $(a^{-2})^3$ should equal $a^{(-2)(3)} = a^{-6}$. Computing directly: $(a^{-2})^3 = a^{-2} \\cdot a^{-2} \\cdot a^{-2} = \\frac{1}{a^2} \\cdot \\frac{1}{a^2} \\cdot \\frac{1}{a^2} = \\frac{1}{a^6} = a^{-6}$. The rule holds.
 
-This is the central point. Negative exponents were not defined by intuition or analogy — they were defined as the unique values that make the algebraic machinery work. Every law that held for [natural exponents](!/algebra/powers/natural-exponents) continues to hold for all integers, because the definition was engineered to guarantee exactly that.`,
+This is the central point. Negative exponents were not defined by intuition or analogy — they were defined as the unique values that make the algebraic machinery work.
+
+@academic[rule_theorem_plain:Every law that held for [natural exponents](!/algebra/powers/natural-exponents) continues to hold for all integers, because the definition was engineered to guarantee exactly that.]@`,
   before: ``,
   after: ``,
   link: '',

@@ -310,7 +310,7 @@ As $n \\to \\infty$ and the rectangles become infinitely thin, the Riemann sum a
 @academic[formula_callout:The Riemann Sum Construction
 $$\\int_a^b f(x)\\, dx = \\lim_{n \\to \\infty} \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$]@
 
-The choice of sample points—left endpoints, right endpoints, midpoints—affects individual Riemann sums but not the limit, provided $f$ is integrable.
+@academic[rule_theorem_plain:The choice of sample points—left endpoints, right endpoints, midpoints—affects individual Riemann sums but not the limit, provided $f$ is integrable.]@
 `,
     before: ``,
     after: ``,

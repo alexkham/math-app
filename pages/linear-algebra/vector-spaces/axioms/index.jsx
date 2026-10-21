@@ -1706,7 +1706,9 @@ $$c(v_1, \\dots, v_n) = (cv_1, \\dots, cv_n)$$]@
 
 All ten axioms hold. Closure is immediate — sums and scalar products of $n$-tuples are $n$-tuples. Commutativity and associativity of vector addition follow from commutativity and associativity of real number addition applied to each component. The zero vector is $(0, 0, \\dots, 0)$, and the additive inverse of $(v_1, \\dots, v_n)$ is $(-v_1, \\dots, -v_n)$. The scalar multiplication axioms all reduce to properties of real number arithmetic applied entry by entry.
 
-This is the vector space that underlies coordinate geometry, [matrix](!/linear-algebra/matrix) algebra, and nearly every computational method in linear algebra. Every finite-dimensional real vector space is isomorphic to $\\mathbb{R}^n$ for some $n$.`,
+This is the vector space that underlies coordinate geometry, [matrix](!/linear-algebra/matrix) algebra, and nearly every computational method in linear algebra.
+
+@academic[rule_theorem_plain:Every finite-dimensional real vector space is isomorphic to $\\mathbb{R}^n$ for some $n$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1748,7 +1750,9 @@ The zero vector is the function that is identically zero: $z(x) = 0$ for all $x 
 
 The axioms hold because the sum of two continuous functions is continuous (closure), real-number addition is commutative and associative (so pointwise addition inherits these properties), and the distributive laws follow from ordinary scalar arithmetic applied at each point $x$.
 
-This space is infinite-dimensional. A more structured example is the solution space of a homogeneous linear ordinary differential equation. The set of all solutions to $y'' + py' + qy = 0$ (with continuous coefficients $p, q$) forms a vector space of dimension $2$: the superposition principle guarantees that any linear combination of solutions is again a solution, and the existence-uniqueness theorem guarantees that two independent solutions suffice to generate every solution.`,
+This space is infinite-dimensional. A more structured example is the solution space of a homogeneous linear ordinary differential equation.
+
+@academic[rule_theorem_plain:The set of all solutions to $y'' + py' + qy = 0$ (with continuous coefficients $p, q$) forms a vector space of dimension $2$: the superposition principle guarantees that any linear combination of solutions is again a solution, and the existence-uniqueness theorem guarantees that two independent solutions suffice to generate every solution.]@`,
     before: ``,
     after: ``,
     link: ``,

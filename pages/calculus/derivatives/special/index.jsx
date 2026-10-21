@@ -609,7 +609,9 @@ Inverse hyperbolic derivatives appear in integration: $\\int \\frac{1}{\\sqrt{x^
     content: `
 A piecewise function uses different formulas on different intervals. On each interval's interior, standard [differentiation rules](!/calculus/derivatives/rules) apply to the governing formula. The derivative of the piecewise function is itself piecewise—computed piece by piece.
 
-The challenge lies at the boundaries. At a point $x = c$ where the formula changes, the derivative exists only if three conditions hold: the function is continuous at $c$ (the pieces connect), the left-hand derivative exists, and the right-hand derivative exists and equals the left-hand derivative.
+The challenge lies at the boundaries.
+
+@academic[rule_plain:At a point $x = c$ where the formula changes, the derivative exists only if three conditions hold: the function is continuous at $c$ (the pieces connect), the left-hand derivative exists, and the right-hand derivative exists and equals the left-hand derivative.]@
 
 Consider $f(x) = x^2$ for $x \\leq 1$ and $f(x) = 2x - 1$ for $x > 1$. Continuity at $x = 1$: $f(1) = 1$ from the left, $2(1) - 1 = 1$ from the right—they match. Left derivative at $1$: $\\frac{d}{dx}[x^2]\\big|_{x=1} = 2$. Right derivative at $1$: $\\frac{d}{dx}[2x - 1]\\big|_{x=1} = 2$. Both derivatives match, so $f'(1) = 2$.
 

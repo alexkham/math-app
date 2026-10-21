@@ -1332,7 +1332,9 @@ When both transformations are represented by [matrices](!/linear-algebra/transfo
 
 The inverse, when it exists, is itself linear. If $T^{-1}(\\mathbf{w}_1) = \\mathbf{v}_1$ and $T^{-1}(\\mathbf{w}_2) = \\mathbf{v}_2$, then $T(c\\mathbf{v}_1 + d\\mathbf{v}_2) = cT(\\mathbf{v}_1) + dT(\\mathbf{v}_2) = c\\mathbf{w}_1 + d\\mathbf{w}_2$, so $T^{-1}(c\\mathbf{w}_1 + d\\mathbf{w}_2) = c\\mathbf{v}_1 + d\\mathbf{v}_2 = cT^{-1}(\\mathbf{w}_1) + dT^{-1}(\\mathbf{w}_2)$.
 
-$T$ is invertible if and only if it is bijective: injective (trivial [kernel](!/linear-algebra/transformations/image-kernel)) and surjective (image equals $W$). When $\\dim(V) = \\dim(W)$, these two conditions are equivalent — checking either one establishes both. For [matrix](!/linear-algebra/matrix) transformations, invertibility of $T$ corresponds to [invertibility](!/linear-algebra/matrix/inverse) of the matrix $A$.
+@academic[rule_theorem_plain:$T$ is invertible if and only if it is bijective: injective (trivial [kernel](!/linear-algebra/transformations/image-kernel)) and surjective (image equals $W$).]@
+
+When $\\dim(V) = \\dim(W)$, these two conditions are equivalent — checking either one establishes both. For [matrix](!/linear-algebra/matrix) transformations, invertibility of $T$ corresponds to [invertibility](!/linear-algebra/matrix/inverse) of the matrix $A$.
 
 An invertible linear transformation between spaces of the same [dimension](!/linear-algebra/vector-spaces/dimension) is called an isomorphism. It establishes that the two spaces are structurally identical as vector spaces.`,
     before: ``,

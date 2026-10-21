@@ -18,6 +18,8 @@ import { renderRectangleTile } from '../../../../app/utils/illustrations/arithme
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -396,7 +398,9 @@ The largest is $12$, so $\\gcd(24, 36) = 12$.`,
 
 obj4: {
   title: `Method 2: Prime Factorization`,
-  content: `The prime factorization of each number reveals exactly which primes they share and in what quantities. The GCD takes the minimum exponent for each common prime.
+  content: `The prime factorization of each number reveals exactly which primes they share and in what quantities.
+
+@academic[rule_plain:The GCD takes the minimum exponent for each common prime.]@
 
 For $\\gcd(48, 180)$:
 
@@ -481,7 +485,11 @@ The numbers $9$ and $12$ are not coprime: $\\gcd(9, 12) = 3$.
 
 The numbers $7$ and $20$ are coprime: $7$ is prime and does not divide $20$.
 
-Two structural facts generate coprime pairs reliably. Any two consecutive integers are coprime — $\\gcd(n, n+1) = 1$ for all $n$ — because any common divisor of $n$ and $n+1$ would have to divide their difference, which is $1$. And a prime $p$ is coprime with every number it does not divide.`,
+Two structural facts generate coprime pairs reliably.
+
+@academic[rule_theorem_plain:Any two consecutive integers are coprime — $\\gcd(n, n+1) = 1$ for all $n$ — because any common divisor of $n$ and $n+1$ would have to divide their difference, which is $1$.]@
+
+And a prime $p$ is coprime with every number it does not divide.`,
   before: ``,
   after: ``,
   link: '',
@@ -528,7 +536,7 @@ $\\gcd(6, 42) = 6$.
 
 So $\\gcd(18, 30, 42) = 6$.
 
-The order of pairing does not matter — the GCD is associative and commutative, so any grouping produces the same result.`,
+@academic[rule_plain:The order of pairing does not matter — the GCD is associative and commutative, so any grouping produces the same result.]@`,
   before: ``,
   after: ``,
   link: '',
@@ -752,8 +760,24 @@ const schemas = {
     }),
   };
 
+  const gcdMethodTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Three ways to find a GCD',
+    preface: 'All three methods give the same greatest common divisor. They differ in how well they scale to large numbers.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Large numbers want Euclid',
+    conclusion: 'Listing and factorization are fine for small inputs; the Euclidean algorithm stays fast however large the numbers get.',
+    root: { name: 'Greatest common divisor', sub: '3 methods' },
+    children: [
+      { id: 'list', name: 'Listing factors', items: [ { label: 'How', text: 'list both sets of factors and intersect' }, { label: 'Best for', text: 'small inputs' } ] },
+      { id: 'pf', name: 'Prime factorization', items: [ { label: 'How', text: 'take each shared prime to its minimum exponent' } ] },
+      { id: 'euclid', name: 'Euclidean algorithm', items: [ { label: 'How', text: '$(a, b) \\to (b,\\ a \\bmod b)$ until the remainder is $0$' }, { label: 'Best for', text: 'large numbers' } ] },
+    ],
+  };
+
 return {
   props:{
+    gcdMethodTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -782,7 +806,7 @@ rtGcdObj10Tiles,
    }
 
 
-export default function GCDPage({seoData, sectionsContent, introContent, 
+export default function GCDPage({gcdMethodTree, seoData, sectionsContent, introContent, 
   obj2Table, obj8Table, summaryTable,
    faqQuestions, schemas,
   fsGcdObj1,
@@ -1011,6 +1035,14 @@ rtGcdObj10Tiles, demoUnits}) {
           sectionsContent.obj12.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'obj12-diagram'}
+            id="gcd-methods-tree"
+            title="Three methods for the GCD"
+            source="/arithmetic/divisibility/gcd"
+          >
+            <TopDownTree data={gcdMethodTree} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

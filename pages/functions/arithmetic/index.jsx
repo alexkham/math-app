@@ -1766,7 +1766,9 @@ Order matters. The function $f - g$ is not the same as $g - f$. If $(f - g)(x) =
 @academic[formula_callout:Difference of Functions
 $$(g - f)(x) = -(f - g)(x)$$]@
 
-Subtraction is neither commutative nor associative. Care with order and grouping is essential.
+@academic[rule_plain:Subtraction is neither commutative nor associative.]@
+
+Care with order and grouping is essential.
 
 Differences of functions model comparisons. Profit is revenue minus cost. Net change is final value minus initial value. The gap between two quantities is the difference of the functions measuring them.`,
     before: ``,
@@ -1792,7 +1794,9 @@ If $f(x) = x + 2$ and $g(x) = x - 3$, then:
 @academic[formula_callout:Product of Functions
 $$(fg)(x) = (x + 2)(x - 3) = x^2 - x - 6$$]@
 
-The product of two linear functions is a quadratic. The product of two polynomials is a polynomial whose degree is the sum of the degrees.
+The product of two linear functions is a quadratic.
+
+@academic[rule_theorem_plain:The product of two polynomials is a polynomial whose degree is the sum of the degrees.]@
 
 Multiplication is commutative: $fg = gf$. It is associative: $(fg)h = f(gh)$. It distributes over addition: $f(g + h) = fg + fh$.
 
@@ -1824,7 +1828,9 @@ provided $x \\neq -1$.
 
 Division introduces a critical restriction: the denominator cannot be zero. Even if the simplified form appears to have no restriction, the original quotient is undefined where $g(x) = 0$. The function $(f/g)$ has a hole at $x = -1$, not a continuous extension.
 
-Division is neither commutative nor associative. The quotient $f/g$ differs from $g/f$ unless both equal $1$.
+@academic[rule_plain:Division is neither commutative nor associative.]@
+
+The quotient $f/g$ differs from $g/f$ unless both equal $1$.
 
 Quotients of functions model rates and ratios. Average cost is total cost divided by quantity. Speed is distance divided by time. Efficiency is output divided by input.`,
     before: ``,
@@ -1910,7 +1916,9 @@ If $f(x) = x + 3$ and $g(x) = x^2 - 4$, both have domain $(-\\infty, \\infty)$. 
 @academic[formula_callout:Additional Restrictions for Quotient
 $$\\text{Domain of } \\frac{f}{g} = (-\\infty, -2) \\cup (-2, 2) \\cup (2, \\infty)$$]@
 
-Even if the quotient simplifies algebraically to a function with no apparent restriction, the original domain exclusions remain. The quotient $\\dfrac{x^2 - 1}{x - 1} = x + 1$ simplifies, but the domain still excludes $x = 1$. The [graph](!/functions/graphs) has a hole at $(1, 2)$.
+@academic[rule_plain:Even if the quotient simplifies algebraically to a function with no apparent restriction, the original domain exclusions remain.]@
+
+The quotient $\\dfrac{x^2 - 1}{x - 1} = x + 1$ simplifies, but the domain still excludes $x = 1$. The [graph](!/functions/graphs) has a hole at $(1, 2)$.
 
 The table below collects the domain rule for each of the four operations, making the quotient's extra restriction visible at a glance.`,
     before: ``,

@@ -2827,7 +2827,9 @@ The rationals $\\mathbb{Q}$ are countable despite appearing denser than $\\mathb
 
 A set is called countable if it is either finite or countably infinite. Some authors reserve "countable" for countably infinite sets only — context determines the convention.
 
-The union of countably many countable sets remains countable. This is why $\\mathbb{Q}$ is countable: it is a countable union of countable sets (rationals with each fixed denominator).
+@academic[rule_theorem_plain:The union of countably many countable sets remains countable.]@
+
+This is why $\\mathbb{Q}$ is countable: it is a countable union of countable sets (rationals with each fixed denominator).
     `,
     before: ``,
     after: ``,
@@ -2838,7 +2840,9 @@ The union of countably many countable sets remains countable. This is why $\\mat
     content: `
 A set is uncountable if it is infinite but not countable — its elements cannot be listed in a sequence that covers them all.
 
-The real numbers $\\mathbb{R}$ are uncountable. Cantor's diagonal argument proves this: assume a listing of all real numbers between $0$ and $1$ exists. Construct a new number by making its $n$-th decimal digit different from the $n$-th digit of the $n$-th number in the list. This new number differs from every listed number, contradicting the assumption that the list was complete.
+@academic[rule_theorem_plain:The real numbers $\\mathbb{R}$ are uncountable.]@
+
+Cantor's diagonal argument proves this: assume a listing of all real numbers between $0$ and $1$ exists. Construct a new number by making its $n$-th decimal digit different from the $n$-th digit of the $n$-th number in the list. This new number differs from every listed number, contradicting the assumption that the list was complete.
 
 Any interval $(a, b)$ with $a < b$ is uncountable. In fact, every such interval has the same cardinality as $\\mathbb{R}$ itself — a bijection exists between them.
 
@@ -2895,7 +2899,8 @@ Cardinalities are compared using functions between sets:
 
 - $|A| < |B|$ when $|A| \\leq |B|$ and $|A| \\neq |B|$
 
-The Cantor-Schröder-Bernstein theorem states: if $|A| \\leq |B|$ and $|B| \\leq |A|$, then $|A| = |B|$.
+@academic[rule_theorem:Cantor–Schröder–Bernstein Theorem
+The Cantor-Schröder-Bernstein theorem states: if $|A| \\leq |B|$ and $|B| \\leq |A|$, then $|A| = |B|$.]@
 
 Cantor's theorem establishes a fundamental inequality for any set $A$:
 

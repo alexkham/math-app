@@ -236,7 +236,9 @@ This page explores contradictions in detail, examining their properties, relatio
       description:`As discussed in previous [section](!/logic/propositional-logic/semantics/contradiction#definition), a contradiction is a proposition that always evaluates to false. Some contradictions are so fundamental that they represent core principles of propositional logic.
           
           ## Negations of Logical Laws as Contradictions
-          When we negate certain fundamental laws of propositional logic, we obtain expressions that are always false, making them **contradictions**.
+
+
+@academic[rule_corollary_plain:When we negate certain fundamental laws of propositional logic, we obtain expressions that are always false, making them **contradictions**.]@
           
           **Examples**:
           

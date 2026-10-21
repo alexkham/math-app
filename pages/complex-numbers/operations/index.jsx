@@ -881,6 +881,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import complexAddSubDiagrams from '@/app/components/calculators/complex-numbers/complexAddSubDiagrams'
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1257,7 +1259,9 @@ Multiplication distributes over sums, enabling expansion of products and factori
     obj6: {
   title: `The Multiplicative Inverse`,
   before: ``,
-  content: `Every nonzero complex number possesses a multiplicative inverse — a number that multiplies with it to produce $1$. Finding this inverse employs the same conjugate technique used for division.
+  content: `@academic[rule_theorem_plain:Every nonzero complex number possesses a multiplicative inverse — a number that multiplies with it to produce $1$.]@
+
+Finding this inverse employs the same conjugate technique used for division.
 
 For $z = a + bi \\neq 0$, the multiplicative inverse is:
 
@@ -1517,8 +1521,25 @@ const schemas = {
     }),
   };
 
+  const complexOpTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Four operations on $a + bi$',
+    preface: 'Complex arithmetic follows the rules of real algebra with one extra fact: $i^2 = -1$. Division needs one more trick.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Division is the only new idea',
+    conclusion: 'Adding, subtracting and multiplying are ordinary algebra; dividing clears $i$ from the denominator with the conjugate.',
+    root: { name: 'Complex arithmetic', sub: '4 operations' },
+    children: [
+      { id: 'add', name: 'Add', items: [ { label: 'Rule', text: 'componentwise' } ] },
+      { id: 'sub', name: 'Subtract', items: [ { label: 'Rule', text: 'distribute the minus, then componentwise' } ] },
+      { id: 'mul', name: 'Multiply', items: [ { label: 'Rule', text: 'FOIL, then $i^2 = -1$' } ] },
+      { id: 'div', name: 'Divide', items: [ { label: 'Rule', text: 'multiply by the conjugate of the denominator' }, { label: 'Then', text: 'divide by $c^2 + d^2$' } ] },
+    ],
+  };
+
   return {
   props:{
+    complexOpTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1541,7 +1562,7 @@ const schemas = {
 
 
 
-export default function OperationsPage({
+export default function OperationsPage({complexOpTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -1655,6 +1676,14 @@ export default function OperationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="complex-operations-tree"
+            title="The four operations on complex numbers"
+            source="/complex-numbers/operations"
+          >
+            <TopDownTree data={complexOpTree} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

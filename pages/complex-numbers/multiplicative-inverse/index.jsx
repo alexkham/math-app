@@ -2186,7 +2186,11 @@ The relationship between them is:
 @academic[formula_callout:Multiplicative Inverse vs. Complex Conjugate
 $$z^{-1} = \\frac{\\overline{z}}{|z|^2}$$]@
 
-When are they equal? Only when $|z|^2 = 1$, meaning $|z| = 1$. On the unit circle, $z^{-1} = \\overline{z}$. For $z = \\frac{3}{5} + \\frac{4}{5}i$, which has modulus $1$, the inverse and conjugate are both $\\frac{3}{5} - \\frac{4}{5}i$. Off the unit circle, they always differ.`,
+When are they equal? Only when $|z|^2 = 1$, meaning $|z| = 1$.
+
+@academic[rule_corollary_plain:On the unit circle, $z^{-1} = \\overline{z}$.]@
+
+For $z = \\frac{3}{5} + \\frac{4}{5}i$, which has modulus $1$, the inverse and conjugate are both $\\frac{3}{5} - \\frac{4}{5}i$. Off the unit circle, they always differ.`,
   before: ``,
   after: ``,
   link: '',
@@ -2195,7 +2199,9 @@ When are they equal? Only when $|z|^2 = 1$, meaning $|z| = 1$. On the unit circl
 
 obj8: {
   title: `Why Zero Has No Multiplicative Inverse`,
-  content: `Zero is the sole complex number without a multiplicative inverse. No complex number $w$ satisfies $0 \\cdot w = 1$.
+  content: `@academic[rule_theorem_plain:Zero is the sole complex number without a multiplicative inverse.]@
+
+No complex number $w$ satisfies $0 \\cdot w = 1$.
 
 The reason is fundamental: zero times any number equals zero, never one. Regardless of what $w$ might be, the product $0 \\cdot w$ vanishes. The equation $0 \\cdot w = 1$ has no solution.
 
@@ -2242,7 +2248,7 @@ For detailed coverage of division and other arithmetic, see [operations](!/compl
 
 obj10: {
   title: `Uniqueness`,
-  content: `Every nonzero complex number has exactly one multiplicative inverse.
+  content: `@academic[rule_theorem_plain:Every nonzero complex number has exactly one multiplicative inverse.]@
 
 Existence is established by the formula: for any $z = a + bi$ with $z \\neq 0$, the number $z^{-1} = \\frac{\\overline{z}}{|z|^2}$ satisfies $z \\cdot z^{-1} = 1$. Since $z \\neq 0$, at least one of $a$ or $b$ is nonzero, so $|z|^2 = a^2 + b^2 > 0$ and the formula is well-defined.
 

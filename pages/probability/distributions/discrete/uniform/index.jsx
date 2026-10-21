@@ -1240,7 +1240,7 @@ The [mode](!/probability/mode) is the value of $k$ with the highest probabilityâ
 
 For the discrete uniform distribution, all values have equal probability, so:
 
-**Every value in the range** $\\{a, a+1, a+2, \\ldots, b\\}$ **is a mode**
+@academic[rule_plain:**Every value in the range** $\\{a, a+1, a+2, \\ldots, b\\}$ **is a mode**]@
 
 The distribution is multimodal with $b - a + 1$ modes.
 

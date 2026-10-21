@@ -2197,7 +2197,9 @@ const sectionsContent = {
 
 Optionally, each $\\mathbf{u}_i$ is normalized to unit length, producing an orthonormal set $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_k\\}$.
 
-The process is the constructive proof that every finite-dimensional inner product space has an orthonormal [basis](!/linear-algebra/vector-spaces). Given any basis, Gram-Schmidt produces an orthonormal one for the same space.`,
+The process is the constructive proof that every finite-dimensional inner product space has an orthonormal [basis](!/linear-algebra/vector-spaces).
+
+@academic[rule_theorem_plain:Given any basis, Gram-Schmidt produces an orthonormal one for the same space.]@`,
     before: ``,
     after: ``,
     link: ``,

@@ -2310,7 +2310,7 @@ To test algebraically: substitute $-x$ for $x$, simplify, and compare to $f(x)$ 
 
 Most functions fall into the third category. The function $f(x) = x^2 + x$ satisfies $f(-x) = x^2 - x$, which equals neither $f(x)$ nor $-f(x)$.
 
-For a function to be even or odd, its domain must be symmetric about the origin — if $x$ is in the domain, so is $-x$.
+@academic[rule_plain:For a function to be even or odd, its domain must be symmetric about the origin — if $x$ is in the domain, so is $-x$.]@
 
 The table below collects the three possible outcomes with the algebraic test, the graphical symmetry it implies, and a few examples for each.`,
     before: ``,
@@ -2346,7 +2346,9 @@ The function $f(x) = x^2$ is not one-to-one on $(-\\infty, \\infty)$. Both $f(3)
 
 The horizontal line test identifies one-to-one functions graphically. If every horizontal line intersects the graph at most once, the function is one-to-one. If any horizontal line crosses twice or more, it is not.
 
-One-to-one functions are precisely those that have [inverse functions](!/functions/inverse). Because each output comes from a unique input, the process can be reversed — given an output, identify the input that produced it. This reversal defines the inverse.
+@academic[rule_theorem_plain:One-to-one functions are precisely those that have [inverse functions](!/functions/inverse).]@
+
+Because each output comes from a unique input, the process can be reversed — given an output, identify the input that produced it. This reversal defines the inverse.
 
 A function that is not one-to-one can become one-to-one by restricting its domain. The function $f(x) = x^2$ restricted to $[0, \\infty)$ is one-to-one: positive inputs produce distinct outputs. This restriction enables defining $\\sqrt{x}$ as its inverse.`,
     before: ``,
@@ -2382,7 +2384,9 @@ The function $f(x) = x^2$ from $\\mathbb{R}$ to $\\mathbb{R}$ is neither one-to-
 
 The function $f(x) = x^2$ from $[0, \\infty)$ to $[0, \\infty)$ is bijective. Restricting the domain made it one-to-one; restricting the codomain to match the range made it onto.
 
-Bijective functions have [inverses](!/functions/inverse) that are also bijective. The inverse reverses the pairing: if $f(a) = b$, then $f^{-1}(b) = a$. Both functions establish the same one-to-one correspondence, just read in opposite directions.
+@academic[rule_theorem_plain:Bijective functions have [inverses](!/functions/inverse) that are also bijective.]@
+
+The inverse reverses the pairing: if $f(a) = b$, then $f^{-1}(b) = a$. Both functions establish the same one-to-one correspondence, just read in opposite directions.
 
 Bijections are fundamental in counting arguments. Two sets have the same size if and only if there exists a bijection between them.
 
@@ -2478,7 +2482,10 @@ Absolute extrema are the overall champions — the highest peak and lowest valle
 
 Not every function has absolute extrema. The function $f(x) = x$ on $(-\\infty, \\infty)$ has no maximum or minimum — it extends without bound in both directions. The function $f(x) = 1/x$ on $(0, 1)$ approaches infinity as $x \\to 0^+$ and approaches $1$ as $x \\to 1^-$, but achieves neither limit.
 
-On a closed, bounded interval, a continuous function always achieves both an absolute maximum and an absolute minimum. This is the Extreme Value Theorem. The extrema occur either at local extrema within the interval or at the endpoints.
+@academic[rule_theorem:Extreme Value Theorem
+On a closed, bounded interval, a continuous function always achieves both an absolute maximum and an absolute minimum.]@
+
+This is the Extreme Value Theorem. The extrema occur either at local extrema within the interval or at the endpoints.
 
 To find absolute extrema on $[a, b]$: identify all local extrema in $(a, b)$, evaluate the function at these points and at the endpoints $a$ and $b$, and compare to find the largest and smallest values.
 
@@ -2590,7 +2597,9 @@ Finding zeros means solving the equation $f(x) = 0$. For $f(x) = x^2 - 5x + 6$, 
 
 The multiplicity of a zero refers to how many times the corresponding factor appears. If $f(x) = (x - 2)^3(x + 1)$, then $x = 2$ is a zero of multiplicity $3$ and $x = -1$ is a zero of multiplicity $1$.
 
-Multiplicity affects graph behavior. A zero of odd multiplicity crosses the axis — the graph passes through. A zero of even multiplicity touches the axis and turns back — the graph bounces off.
+Multiplicity affects graph behavior.
+
+@academic[rule_plain:A zero of odd multiplicity crosses the axis — the graph passes through. A zero of even multiplicity touches the axis and turns back — the graph bounces off.]@
 
 Zeros are fundamental in equation solving, factoring, and sign analysis. Knowing where the function equals zero divides the domain into intervals where the function is positive or negative.`,
     before: ``,

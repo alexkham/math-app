@@ -422,7 +422,7 @@ The sequence $12, 6, 3, 1.5$ has ratios $0.5, 0.5, 0.5$. Geometric with $r = \\f
 
 The sequence $1, 2, 4, 7$ has ratios $2, 2, 1.75$. The final ratio differs, so the sequence is not geometric.
 
-A constant sequence like $5, 5, 5, 5$ is both arithmetic (with $d = 0$) and geometric (with $r = 1$). This is the only type of sequence that belongs to both families.
+@academic[rule_theorem_plain:A constant sequence like $5, 5, 5, 5$ is both arithmetic (with $d = 0$) and geometric (with $r = 1$). This is the only type of sequence that belongs to both families.]@
 
 As with arithmetic sequences, a finite sample cannot confirm a geometric pattern with certainty. The sequence $2, 4, 8$ could continue as $16, 32, \\ldots$ (geometric with $r = 2$) or as $14, 22, \\ldots$ (not geometric). The defining rule, not the sample, is what settles the classification.`,
     before: ``,
@@ -524,7 +524,9 @@ The series $\\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + \\cdots$ has $a_1 = \\f
 
 Repeating decimals provide another illustration. The decimal $0.333\\ldots = \\frac{3}{10} + \\frac{3}{100} + \\frac{3}{1000} + \\cdots$ is a geometric series with $a_1 = \\frac{3}{10}$ and $r = \\frac{1}{10}$, summing to $\\frac{3/10}{9/10} = \\frac{1}{3}$.
 
-When $|r| \\geq 1$, the terms do not diminish (or grow in magnitude), and the partial sums grow without bound. The series diverges and no finite sum exists. The boundary case $r = -1$ produces partial sums that oscillate between $a_1$ and $0$ without settling — this too is divergent.`,
+@academic[rule_plain:When $|r| \\geq 1$, the terms do not diminish (or grow in magnitude), and the partial sums grow without bound. The series diverges and no finite sum exists.]@
+
+The boundary case $r = -1$ produces partial sums that oscillate between $a_1$ and $0$ without settling — this too is divergent.`,
     before: ``,
     after: ``,
     link: '',

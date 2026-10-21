@@ -11,6 +11,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -79,6 +81,28 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 // ---------- TABLES ----------
 
 // obj2 — comparison: discriminant cases and structural consequences
+// Concept introduction (section 1) — template A, definition last. Running
+// instance: x² < 3x + 10, the section's own demo frame (belowLine). Old obj1
+// text is kept in sectionsContent.obj1, unused; its formula box and the demo
+// frame with its closing line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciRaceTable = ciTableOpen(['x', 'x²', '3x + 10', 'x² smaller?']) +
+  ciRow(['−10', '100', '−20', 'no']) +
+  ciRow(['0', '0', '10', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['10', '100', '40', 'no'], { last: true }) +
+  '</tbody></table>'
+const ciFactorTable = ciTableOpen(['piece of the line', 'x + 2', 'x − 5', '(x + 2)(x − 5)']) +
+  ciRow(['left of −2', '−', '−', '+']) +
+  ciRow(['between −2 and 5', '+', '−', '− : the answer'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['right of 5', '+', '+', '+'], { last: true }) +
+  '</tbody></table>'
+
 const obj2Table = `
 <table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
@@ -232,7 +256,9 @@ When $\\Delta < 0$, no real roots exist. The quadratic never touches zero and ma
     title: `Solving When the Discriminant Is Positive`,
     content: `When $\\Delta > 0$, the two roots $r_1 < r_2$ create three intervals. The sign of the quadratic in these intervals follows a fixed pattern determined by the leading coefficient $a$.
 
-If $a > 0$, the parabola opens upward. The quadratic is positive on the outer intervals $(-\\infty, r_1)$ and $(r_2, \\infty)$, and negative on the inner interval $(r_1, r_2)$. The expression dips below zero between the roots and rises above zero outside them.
+@academic[rule_plain:If $a > 0$, the parabola opens upward. The quadratic is positive on the outer intervals $(-\\infty, r_1)$ and $(r_2, \\infty)$, and negative on the inner interval $(r_1, r_2)$.]@
+
+The expression dips below zero between the roots and rises above zero outside them.
 
 If $a < 0$, the parabola opens downward. The signs are reversed: the quadratic is negative on the outer intervals and positive on the inner interval $(r_1, r_2)$. The expression rises above zero only between the roots.
 
@@ -246,7 +272,9 @@ To solve $x^2 - 5x + 4 \\leq 0$ instead, select the interval where the expressio
 
   obj4: {
     title: `Solving When the Discriminant Is Zero`,
-    content: `When $\\Delta = 0$, the quadratic has a single repeated root $r = -\\frac{b}{2a}$, and the expression factors as $a(x - r)^2$. The square $(x - r)^2$ is non-negative for all real $x$ and equals zero only at $x = r$. The sign of the entire expression is therefore determined by $a$ alone, except at the single point $x = r$ where the expression is zero.
+    content: `When $\\Delta = 0$, the quadratic has a single repeated root $r = -\\frac{b}{2a}$, and the expression factors as $a(x - r)^2$.
+
+@academic[rule_plain:The square $(x - r)^2$ is non-negative for all real $x$ and equals zero only at $x = r$. The sign of the entire expression is therefore determined by $a$ alone, except at the single point $x = r$ where the expression is zero.]@
 
 If $a > 0$: the expression is positive everywhere except at $x = r$, where it is zero. The inequality $ax^2 + bx + c > 0$ is satisfied by all $x \\neq r$, and the solution is $(-\\infty, r) \\cup (r, \\infty)$. The non-strict version $ax^2 + bx + c \\geq 0$ is satisfied by every real number: $(-\\infty, \\infty)$.
 
@@ -260,7 +288,7 @@ Consider $x^2 - 6x + 9 > 0$. The discriminant is $36 - 36 = 0$, and the expressi
 
   obj5: {
     title: `Solving When the Discriminant Is Negative`,
-    content: `When $\\Delta < 0$, the quadratic has no real roots. It never equals zero and never changes sign. The sign of the expression for every real $x$ is the sign of the leading coefficient $a$.
+    content: `@academic[rule_plain:When $\\Delta < 0$, the quadratic has no real roots. It never equals zero and never changes sign. The sign of the expression for every real $x$ is the sign of the leading coefficient $a$.]@
 
 If $a > 0$: the expression is positive everywhere. The inequality $ax^2 + bx + c > 0$ (or $\\geq 0$) is satisfied by every real number, and the solution is $(-\\infty, \\infty)$. The inequality $ax^2 + bx + c < 0$ (or $\\leq 0$) has no solution.
 
@@ -457,6 +485,34 @@ const schemas = {
       { x: -2.2, y: 7.2, text: 'solution x < −2, −1 < x < 1, x > 2', pos: 'e', color: 'r' }],
     caption: 'x⁴ − 5x² + 4 > 0 on three pieces, found through u = x²' };
 
+  // Concept introduction figures (section 1), one running instance: x² − 3x − 10 < 0.
+  const fpCiForced = { kind: 'pieces', svgTitle: 'y = x^2 - 3x - 10 opens upward and is negative only between -2 and 5', xRange: [-4, 7], yRange: [-14, 20], yStep: 4,
+    pieces: [
+      { fn: (x) => x * x - 3 * x - 10, from: -4, to: 7, ends: [null, null], color: 'f', label: { text: 'y = x² − 3x − 10', x: 3.3, y: 12, pos: 'w' } },
+    ],
+    points: [{ x: -2, y: 0 }, { x: 5, y: 0 }],
+    notes: [{ x: 1.5, y: -3.5, text: 'below 0 only here', pos: 's', color: 'r' }],
+    caption: 'a = 1 > 0: opens upward, so negative only between the roots' };
+  const fpCiSet = { kind: 'domainOpen', svgTitle: 'The solution set of x^2 < 3x + 10 is (-2, 5)', range: [-4, 7],
+    rows: [
+      { label: 'x² − 3x − 10 < 0', color: 'f', segs: [[-2, 5, true, true]], tag: { text: '(−2, 5)', x: 6 } },
+    ],
+    caption: 'One interval; −2 and 5 left out because the inequality is strict' };
+  const fpCiCases = { kind: 'domainOpen', svgTitle: 'Same roots, opposite a: one interval or two rays', range: [-4, 7],
+    rows: [
+      { label: 'x² − 3x − 10 < 0   (a = 1)', color: 'f', segs: [[-2, 5, true, true]], tag: { text: '(−2, 5)', x: 6 } },
+      { label: '−x² + 3x + 10 < 0   (a = −1)', color: 'r', segs: [[null, -2, false, true], [5, null, true]], tag: { text: '(−∞, −2) ∪ (5, ∞)', x: 4.4 } },
+    ],
+    caption: 'Same roots; the sign of a decides inside or outside' };
+
+  const conceptIntroFigures = {
+    forced: renderFunctionPlotV4(fpCiForced),
+    set: renderFunctionPlotV2(fpCiSet),
+    cases: renderFunctionPlotV2(fpCiCases),
+    raceTable: ciRaceTable,
+    factorTable: ciFactorTable,
+  };
+
   const demoUnits = {
     positive: demoUnitFrame({
       svg: inequalityVisualizerDiagrams['quad-two'],
@@ -492,6 +548,7 @@ const schemas = {
   return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -518,10 +575,72 @@ const schemas = {
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A square beats a line far out, but not in the middle.`,
+        content: [
+          `Compare $x^2$ with $3x + 10$. Far to the right the square wins easily, and far to the left too, because squaring makes negatives positive. Near zero the line is ahead. So $x^2 < 3x + 10$ holds somewhere in the middle — but guessing values will never say exactly where it starts and stops.`,
+          ciTable('raceTable'),
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Working it out takes three moves.`,
+        content: [
+          `Move everything to one side, so the question becomes a sign: $x^2 - 3x - 10 < 0$. Factor it: $(x + 2)(x - 5) < 0$. A product is negative only when its two factors have opposite signs, and each factor changes sign at one point — $x + 2$ at $-2$, $x - 5$ at $5$.`,
+          ciTable('factorTable'),
+          `Only the middle piece gives a negative product, so the answer is $-2 < x < 5$. Check one value from inside and one from outside: at $x = 0$, $0 < 10$ is true; at $x = 6$, $36 < 28$ is false. At $x = 5$ both sides are $25$, which is not "smaller".`,
+          <div key={'unit-belowLine'} dangerouslySetInnerHTML={{ __html: demoUnits.belowLine }} />,
+          `Any inequality between two expressions can be read as one graph above or below another.`,
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `Nothing in that answer was chosen; each part was forced.`,
+        content: `The borders $-2$ and $5$ were forced by the equation $x^2 - 3x - 10 = 0$: they are its two roots, the only places the expression can change sign. Which side to keep was forced by the leading coefficient: $a = 1$ is positive, so the parabola opens upward, sits above the axis outside its roots and dips below only between them. Two roots and a sign — that is all the arithmetic was ever finding.`,
+        visual: ciSvg('forced'),
+        caption: `The dots are the roots $-2$ and $5$. Between them the upward parabola is below the axis: the "−" row of the table.`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [quadratic inequality](!/algebra/definitions#quadratic_inequality) in one variable is an inequality that can be written in the form below — or with $<$, $\\leq$ or $\\geq$ — where $a$, $b$, $c$ are real constants and $a \\neq 0$.`,
+        formula: `@academic[formula_callout:Definition and Standard Form
+$$ax^2 + bx + c > 0$$]@`,
+        footer: `Its equation counterpart: [quadratic equations](!/algebra/equations/quadratic).`,
+      },
+      {
+        id: 'kind',
+        lead: `A quadratic inequality is a statement about the sign of a quadratic, and its answer is a set.`,
+        content: `It is not a number and not a function. It asks where a quadratic polynomial is positive or negative, and its answer collects those values — for our example, the interval $(-2, 5)$. Depending on the roots and on $a$, the answer can be one interval, two rays, a single point, every real number or none at all.`,
+        visual: ciSvg('set'),
+        caption: `The bar is the middle piece of the table; the open dots are the two roots, left out because $<$ is strict.`,
+      },
+      {
+        id: 'caveat',
+        lead: `Two things carry over to every quadratic inequality, and two were peculiar to this one.`,
+        content: `What carries over: the borders are always the roots of the matching equation, and the sign of $a$ always decides between inside and outside. What was peculiar: the example had two different roots and an upward parabola. Turn the parabola over and the same roots give the opposite answer. With one repeated root, or none — $x^2 + 4 < 0$ has no solution at all — there are fewer borders or none, and the answer is a single point, everything or nothing.`,
+        visual: ciSvg('cases'),
+        caption: `The same roots $-2$ and $5$ with opposite $a$: an upward parabola keeps the inside, a downward one keeps the two outside rays.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page sorts quadratic inequalities by the discriminant — two roots, one root, no roots — then gives the sign chart method, the connection to the parabola, inequalities that reduce to quadratics, and a summary of every case.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -539,9 +658,7 @@ const schemas = {
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-belowLine'} dangerouslySetInnerHTML={{ __html: demoUnits.belowLine }} />,
-          `Any inequality between two expressions can be read as one graph above or below another.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
 

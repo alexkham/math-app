@@ -32,11 +32,11 @@ import { processContent } from '@/app/utils/contentProcessor'
   Fields, all optional except where a kind requires them:
 
     lead       string   bolded opening clause. Rendered on its own line.
-    content    string   the beat's prose.
+    content    rich     the beat's prose.
     visual     node     a component. Never raw SVG markup from the page file.
     caption    string   states the correspondence: what in the picture is what
                         quantity in the text.
-    note       string   a closing line under the whole beat — used on an
+    note       rich     a closing line under the whole beat — used on an
                         instance beat carrying both a table and a figure, where
                         the correspondence is about the pair.
 
@@ -45,8 +45,13 @@ import { processContent } from '@/app/utils/contentProcessor'
     kicker     string   defaults to 'The definition'.
     statement  string   answers 'what is this?', in the form 'this is that'.
                         Links the term to its definitions-page entry.
-    formula    string   the formula callout, after the statement.
+    formula    rich     the formula callout, after the statement.
     footer     string   formulas_link, or a related-page link.
+
+  rich = a string, a React node, or an array mixing both, rendered in order.
+  Strings go through processContent; nodes are rendered as given, with no
+  frame. This is how a section's existing table, widget or diagram is kept
+  as is inside the new content: pass it as a node at the point it belongs.
 
   What is deliberately NOT a definition field: gloss, and what kind of thing it
   is. Neither is a definition. 'What kind of thing it is' is its own obligatory
@@ -70,7 +75,7 @@ export default function ConceptIntro({ data }) {
   if (!data || !Array.isArray(data.beats) || data.beats.length === 0) return null
 
   return (
-    <div>
+    <div style={{ padding: '0 5%' }}>
       {data.beats.map((beat, i) => (
         <Beat key={beat.id || `beat-${i}`} beat={beat} />
       ))}
@@ -113,7 +118,7 @@ function Lead({ text, accent }) {
 /* ---------------------------------------------------------------------------
  * Figure — the chrome around a beat's visual.
  *
- * Light on purpose. DiagramFrame is the other thing: it carries an attribution
+ * Light on purpose. DiagramsFrame (DiagramsFrameV2) is the other thing: it carries an attribution
  * strip and a download rail pointing at build-generated files in
  * /public/diagrams/, which suits a standalone infographic and not six inline
  * pictures inside one section.
@@ -149,12 +154,29 @@ function Figure({ visual, caption }) {
   )
 }
 
+/* ---------------------------------------------------------------------------
+ * Rich — a string, a node, or an array of both, in order.
+ *
+ * Strings are processed; nodes pass through untouched and unframed, so a
+ * table or widget the section already had keeps its own look.
+ * ------------------------------------------------------------------------ */
+function Rich({ value }) {
+  if (value === null || value === undefined || value === '') return null
+  const parts = Array.isArray(value) ? value : [value]
+
+  return parts.map((part, i) => {
+    if (part === null || part === undefined || part === '') return null
+    if (typeof part === 'string') return <div key={i}>{processContent(part)}</div>
+    return <React.Fragment key={i}>{part}</React.Fragment>
+  })
+}
+
 function Body({ beat }) {
   return (
     <>
       {beat.content && (
         <div style={{ fontSize: '16.5px', marginBottom: beat.visual ? '18px' : '0' }}>
-          {processContent(beat.content)}
+          <Rich value={beat.content} />
         </div>
       )}
       <Figure visual={beat.visual} caption={beat.caption} />
@@ -169,7 +191,7 @@ function Body({ beat }) {
             margin: '4px 0 0',
           }}
         >
-          {processContent(beat.note)}
+          <Rich value={beat.note} />
         </div>
       )}
     </>
@@ -254,7 +276,11 @@ function DefinitionBeat({ beat }) {
         </div>
       )}
 
-      {beat.formula && <div style={{ margin: '16px 0 0' }}>{processContent(beat.formula)}</div>}
+      {beat.formula && (
+        <div style={{ margin: '16px 0 0', overflowX: 'auto' }}>
+          <Rich value={beat.formula} />
+        </div>
+      )}
 
       {beat.visual && (
         <div style={{ marginTop: '16px' }}>

@@ -372,7 +372,9 @@ The truth table for P ↔ Q has two true rows (TT and FF) and two false rows (TF
     },
     obj2: {
       title: `Biconditionals and Logical Equivalence`,
-      content: `A biconditional P ↔ Q that is a [tautology](!/logic/propositional-logic/semantics/tautology) — true in every row of its truth table — establishes that P and Q are logically equivalent. Logical equivalence means the two formulas have identical truth tables: they agree on every possible input.
+      content: `@academic[rule_theorem_plain:A biconditional P ↔ Q that is a [tautology](!/logic/propositional-logic/semantics/tautology) — true in every row of its truth table — establishes that P and Q are logically equivalent.]@
+
+Logical equivalence means the two formulas have identical truth tables: they agree on every possible input.
 
 Many of the formulas on this page are tautological biconditionals. For example, (P ↔ Q) ↔ ((P → Q) ∧ (Q → P)) is true in every row, confirming that "if and only if" and "mutual [implication](!/logic/propositional-logic/semantics/implication)" mean exactly the same thing.
 
@@ -394,7 +396,9 @@ The biconditional can also be expressed using other connectives: P ↔ Q ≡ (P 
     },
     obj4: {
       title: `(P ↔ Q) ↔ (¬P ↔ ¬Q): Negation Preservation`,
-      content: `This [tautology](!/logic/propositional-logic/semantics/tautology) states that if P is equivalent to Q, then ¬P is equivalent to ¬Q — and conversely. Negating both sides of an equivalence preserves the equivalence.
+      content: `This [tautology](!/logic/propositional-logic/semantics/tautology) states that if P is equivalent to Q, then ¬P is equivalent to ¬Q — and conversely.
+
+@academic[rule_plain:Negating both sides of an equivalence preserves the equivalence.]@
 
 The proof is direct: P ↔ Q means P and Q have the same truth value. If both are true, then ¬P and ¬Q are both false — still matching. If both are false, then ¬P and ¬Q are both true — still matching. In either case ¬P ↔ ¬Q holds.
 
@@ -405,7 +409,9 @@ This symmetry under negation is a distinctive feature of the biconditional. It d
     },
     obj5: {
       title: `(P ↔ Q) ↔ ((P → Q) ∧ (Q → P)): Mutual Implication`,
-      content: `This [tautology](!/logic/propositional-logic/semantics/tautology) formally establishes that the biconditional is identical to the conjunction of both directions of [implication](!/logic/propositional-logic/semantics/implication). P ↔ Q holds if and only if P → Q and Q → P both hold.
+      content: `This [tautology](!/logic/propositional-logic/semantics/tautology) formally establishes that the biconditional is identical to the conjunction of both directions of [implication](!/logic/propositional-logic/semantics/implication).
+
+@academic[rule_plain:P ↔ Q holds if and only if P → Q and Q → P both hold.]@
 
 This equivalence is the standard definition of the biconditional in many logic textbooks. It also provides the standard proof strategy for biconditional statements: prove the forward direction (P → Q) and the backward direction (Q → P) separately.
 
@@ -438,7 +444,10 @@ While section 5 shows the biconditional is the conjunction of both implications 
     },
     obj8: {
       title: `(P → Q) ↔ (¬Q → ¬P): Contrapositive Equivalence`,
-      content: `This [tautology](!/logic/propositional-logic/semantics/tautology) states that every conditional is logically equivalent to its contrapositive. P → Q and ¬Q → ¬P have identical truth tables — they are true and false in exactly the same rows.
+      content: `@academic[rule:Contrapositive equivalence
+This [tautology](!/logic/propositional-logic/semantics/tautology) states that every conditional is logically equivalent to its contrapositive.]@
+
+P → Q and ¬Q → ¬P have identical truth tables — they are true and false in exactly the same rows.
 
 The contrapositive equivalence is one of the most important results in propositional logic and one of the most used tools in mathematical proof. To prove "if P then Q," it is often easier to prove "if not Q then not P" — the two statements are logically identical.
 
@@ -449,7 +458,10 @@ Note that this is a biconditional [tautology](!/logic/propositional-logic/semant
     },
     obj9: {
       title: `P ↔ ¬¬P: Double Negation`,
-      content: `This [tautology](!/logic/propositional-logic/semantics/tautology) states that any proposition P is logically equivalent to its double negation ¬¬P. Negating a proposition twice returns it to its original truth value.
+      content: `@academic[rule:Double negation
+This [tautology](!/logic/propositional-logic/semantics/tautology) states that any proposition P is logically equivalent to its double negation ¬¬P.]@
+
+Negating a proposition twice returns it to its original truth value.
 
 The truth table is trivial: when P is true, ¬P is false and ¬¬P is true — matching P. When P is false, ¬P is true and ¬¬P is false — again matching P.
 

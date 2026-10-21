@@ -10,6 +10,10 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -116,6 +120,32 @@ const obj1Table = `
   </tbody>
 </table>
 `
+
+// Concept introduction (section 1) — template E, widening. Running instance:
+// (x + 2)(x − 3) < 0, the inequality tool's quad-two state. Old obj1 text is
+// kept in sectionsContent.obj1, unused; obj1Table is kept as is in the caveat.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center; white-space: nowrap;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciValuesTable = ciTableOpen(['x', '(x + 2)(x − 3)', 'negative?']) +
+  ciRow(['−3', '6', 'no']) +
+  ciRow(['−2', '0', 'no — zero: a border'], { shade: true, color: '#B45309' }) +
+  ciRow(['−1', '−4', 'yes'], { color: '#2563EB' }) +
+  ciRow(['0', '−6', 'yes'], { shade: true, color: '#2563EB' }) +
+  ciRow(['1', '−6', 'yes'], { color: '#2563EB' }) +
+  ciRow(['2', '−4', 'yes'], { shade: true, color: '#2563EB' }) +
+  ciRow(['3', '0', 'no — zero: a border'], { color: '#B45309' }) +
+  ciRow(['4', '6', 'no'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciPiecesTable = ciTableOpen(['piece of the line', 'test value', '(x + 2)(x − 3)', 'negative?']) +
+  ciRow(['left of −2', '−3', '6', 'no']) +
+  ciRow(['between −2 and 3', '0', '−6', 'yes'], { shade: true, color: '#2563EB' }) +
+  ciRow(['right of 3', '4', '6', 'no'], { last: true }) +
+  '</tbody></table>'
 
 // obj4 — aggregation (reference): interval notation + number line representation (merged from obj3 + obj4)
 const obj4Table = `
@@ -470,7 +500,9 @@ The distinction between AND and OR is structural, not cosmetic. AND narrows the 
     title: `Equivalent Inequalities`,
     content: `Two inequalities are equivalent when they have the same solution set. The inequalities $2x > 6$ and $x > 3$ are equivalent — every value satisfying one satisfies the other. Solving an inequality means transforming it, step by step, into a simpler equivalent inequality whose solution set is transparent.
 
-The operations that guarantee equivalence are: adding or subtracting any real number on both sides, and multiplying or dividing both sides by a positive constant. These are reversible operations that preserve both the solution set and the direction of the inequality.
+@academic[rule_plain:The operations that guarantee equivalence are: adding or subtracting any real number on both sides, and multiplying or dividing both sides by a positive constant.]@
+
+These are reversible operations that preserve both the solution set and the direction of the inequality.
 
 Operations that risk breaking equivalence include multiplying or dividing by an expression whose sign depends on the variable. The inequality $\\frac{x}{x - 1} > 0$ cannot be cleared by multiplying both sides by $(x - 1)$ without knowing whether $x - 1$ is positive or negative — the direction of the inequality would depend on the answer. This is why sign analysis, rather than algebraic clearing, is the standard method for non-linear inequalities.
 
@@ -532,7 +564,11 @@ To solve a specific inequality, the [quadratic inequality solver](!/algebra/calc
 
 The real roots of the polynomial are found first, partitioning the number line into intervals. The sign of the polynomial is determined in each interval by testing a single point or by tracking the signs of the individual factors. The intervals where the sign matches the inequality form the solution.
 
-Root multiplicity plays a decisive role. At a root of odd multiplicity the polynomial changes sign, so the boundary separates a positive interval from a negative one. At a root of even multiplicity the polynomial keeps its sign, merely touching zero without crossing — the boundary is a tangent point rather than a crossing. This distinction determines the shape of the solution set near each root.`,
+Root multiplicity plays a decisive role.
+
+@academic[rule_plain:At a root of odd multiplicity the polynomial changes sign, so the boundary separates a positive interval from a negative one. At a root of even multiplicity the polynomial keeps its sign, merely touching zero without crossing — the boundary is a tangent point rather than a crossing.]@
+
+This distinction determines the shape of the solution set near each root.`,
     before: ``,
     after: ``,
     link: '/algebra/inequalities/polynomial',
@@ -682,6 +718,34 @@ const schemas = {
     notes: [{ x: -7.8, y: 6, text: 'line on or above 12: x ≤ −4', pos: 'e', color: 'r' }],
     caption: 'Dividing by −3 flips ≥ to ≤: −3x ≥ 12 holds only left of −4' };
 
+  // Concept introduction figures (section 1), one running instance: (x + 2)(x − 3) < 0.
+  const fpCiRoots = { kind: 'pieces', svgTitle: 'y = (x + 2)(x - 3) meets the x-axis at -2 and 3', xRange: [-4, 5], yRange: [-8, 14], yStep: 2,
+    pieces: [
+      { fn: (x) => (x + 2) * (x - 3), from: -4, to: 5, ends: [null, null], color: 'f', label: { text: 'y = (x + 2)(x − 3)', x: -3.2, y: 7.4, pos: 'e' } },
+    ],
+    points: [{ x: -2, y: 0 }, { x: 3, y: 0 }],
+    caption: 'The equation\'s two answers: where the curve meets the axis' };
+  const fpCiSet = { kind: 'domainOpen', svgTitle: 'The solution set of (x + 2)(x - 3) < 0 is the interval (-2, 3)', range: [-5, 6],
+    rows: [
+      { label: '(x + 2)(x − 3) < 0', color: 'f', segs: [[-2, 3, true, true]], tag: { text: '(−2, 3)', x: 4.3 } },
+    ],
+    caption: 'Every x strictly between −2 and 3; both borders left out' };
+  const fpCiEnds = { kind: 'domainOpen', svgTitle: 'With < the borders are excluded; with <= they are included', range: [-5, 6],
+    rows: [
+      { label: '(x + 2)(x − 3) < 0', color: 'f', segs: [[-2, 3, true, true]], tag: { text: '(−2, 3)', x: 4.3 } },
+      { label: '(x + 2)(x − 3) ≤ 0', color: 'r', segs: [[-2, 3, false, false]], tag: { text: '[−2, 3]', x: 4.3 } },
+    ],
+    caption: 'Same stretch; the symbol decides whether the borders belong' };
+
+  const conceptIntroFigures = {
+    roots: renderFunctionPlotV4(fpCiRoots),
+    wall: inequalityVisualizerDiagrams['quad-two'],
+    set: renderFunctionPlotV2(fpCiSet),
+    ends: renderFunctionPlotV2(fpCiEnds),
+    valuesTable: ciValuesTable,
+    piecesTable: ciPiecesTable,
+  };
+
   const demoUnits = {
     sign: demoUnitFrame({
       svg: inequalityVisualizerDiagrams['poly-three'],
@@ -739,9 +803,36 @@ const schemas = {
     }),
   };
 
+  const inequalityFamilyTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Five families of algebraic inequalities',
+    preface: 'Each family has its own method and its own trap. The answer is always a set of numbers, usually written as intervals.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Signs decide everything',
+    conclusion: 'Linear inequalities flip when divided by a negative; the higher families are solved with a sign chart around their critical points.',
+    root: { name: 'Algebraic inequalities', sub: '5 families' },
+    children: [
+      { id: 'lin', name: '[Linear](!/algebra/inequalities/linear)', symbol: '$ax + b < 0$', items: [
+        { label: 'Solution', text: 'one ray' } ], flag: true, warn: 'flip the sign when dividing by a negative' },
+      { id: 'quad', name: '[Quadratic](!/algebra/inequalities/quadratic)', symbol: '$ax^2 + bx + c < 0$', items: [
+        { label: 'Method', text: 'discriminant plus a sign chart or the parabola' },
+        { label: 'Solution', text: 'an interval, two rays, all reals or empty' } ] },
+      { id: 'poly', name: '[Polynomial](!/algebra/inequalities/polynomial)', symbol: 'degree $\\geq 3$', items: [
+        { label: 'Method', text: 'sign chart on the factored form' },
+        { label: 'Crossing', text: 'root multiplicity decides' } ] },
+      { id: 'rat', name: '[Rational](!/algebra/inequalities/rational)', symbol: '$P/Q < 0$', items: [
+        { label: 'Critical points', text: 'zeros of numerator and denominator' } ], flag: true, warn: 'denominator zeros always excluded; never cross-multiply' },
+      { id: 'abs', name: '[Absolute value](!/algebra/inequalities/absolute-value)', symbol: '$|f| < k$, $|f| > k$', items: [
+        { label: '$|f| < k$', text: 'AND: one interval' }, { label: '$|f| > k$', text: 'OR: two rays' } ] },
+    ],
+    legend: [{ label: 'family' }, { label: 'a trap to watch', tone: 'warn' }],
+  };
+
    return {
   props: {
+    inequalityFamilyTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj1Table,
@@ -763,7 +854,7 @@ const schemas = {
 }
    }
 
-export default function InequalitiesPage({
+export default function InequalitiesPage({inequalityFamilyTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -774,10 +865,76 @@ export default function InequalitiesPage({
   obj8Table,
   obj13Table,
   summaryTable,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `You can already compare numbers and solve equations.`,
+        content: `Comparing two known numbers gives a plain yes or no: $3 < 7$ is true, $5 > 9$ is false. Solving an equation gives a short list of numbers: $(x + 2)(x - 3) = 0$ holds when one of the factors is zero, so $x = -2$ or $x = 3$. On the graph those are the two places where the curve meets the axis.`,
+        visual: ciSvg('roots'),
+        caption: `The two dots are the two answers of $(x + 2)(x - 3) = 0$: the curve is at height $0$ there and nowhere else.`,
+      },
+      {
+        id: 'wall',
+        kind: 'instance',
+        lead: `An equation cannot say where an expression is negative.`,
+        content: [
+          `Ask a different question about the same expression: for which $x$ is $(x + 2)(x - 3)$ less than $0$? The equation's two answers do not answer it. Trying values shows what they really are.`,
+          ciTable('valuesTable'),
+          `Every value between $-2$ and $3$ works and every value outside fails. The equation's answers are not the answer here; they are the borders of it. The answer is a whole stretch of the line, and an equation has no way to write a stretch down.`,
+        ],
+        visual: ciSvg('wall'),
+        caption: `The curve dips below the axis exactly between $-2$ and $3$ — the "yes" rows of the table — and the blue bar on the axis marks that stretch. The open circles are the two "zero" rows. The same state is on the [inequality visual explorer](!/algebra/visual-tools/inequality).`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An [inequality](!/algebra/definitions#inequality) is a statement that compares two expressions using one of the symbols $<$, $>$, $\\leq$, $\\geq$.`,
+        footer: `Its counterpart with an equals sign: [equations](!/algebra/equations).`,
+      },
+      {
+        id: 'kind',
+        lead: `An inequality is a statement, and its answer is a set.`,
+        content: `It is not a number and not a function. With known numbers it is simply true or false. With an unknown it is true for some values and false for others, and solving it means collecting every value that makes it true — its solution set. For $(x + 2)(x - 3) < 0$ that set is the interval $(-2, 3)$: a stretch of the line, not a list of points.`,
+        visual: ciSvg('set'),
+        caption: `The bar is the stretch of "yes" rows; the open dots at $-2$ and $3$ are the borders, left out because $0 < 0$ is false.`,
+      },
+      {
+        id: 'survives',
+        lead: `The equation still does half the work: it finds the borders.`,
+        content: [
+          `Solve the matching equation first. Its answers cut the line into pieces, and on each piece the expression keeps one sign, so one test value per piece decides the whole piece.`,
+          ciTable('piecesTable'),
+          `Only the middle piece passes, which gives $(-2, 3)$ again, now without trying every value. Adding or subtracting the same quantity on both sides also works exactly as it does for equations.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        tone: 'break',
+        lead: `Two things are new: the symbol decides whether a border belongs, and a negative multiplier flips the symbol.`,
+        content: [
+          `Change $<$ to $\\leq$ and the borders join the answer, because $0 \\leq 0$ is true: $(x + 2)(x - 3) \\leq 0$ gives $[-2, 3]$. Each of the four symbols makes that choice its own way.`,
+          <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          `And unlike an equation, an inequality reverses when both sides are multiplied or divided by a negative number: $-(x + 2)(x - 3) > 0$ describes the same stretch, with the symbol turned around.`,
+        ],
+        visual: ciSvg('ends'),
+        caption: `The same stretch both times. With $<$ the dots are open and the brackets round; with $\\leq$ the dots are filled and the brackets square.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page builds on this: what a solution set is, how to write it in interval notation and draw it on a number line, the properties that keep an inequality equivalent, compound inequalities, sign analysis, and then each type in turn — linear, quadratic, polynomial, rational and absolute value.`,
+      },
+    ],
+  }
 
   const genericSections=[
       {
@@ -796,12 +953,7 @@ export default function InequalitiesPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -972,6 +1124,14 @@ export default function InequalitiesPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj15-diagram'}
+            id="inequality-families-tree"
+            title="Five families of algebraic inequalities"
+            source="/algebra/inequalities"
+          >
+            <TopDownTree data={inequalityFamilyTree} />
+          </DiagramFrame>,
         ]
     },
     // {

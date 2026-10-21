@@ -149,7 +149,7 @@ The sum of a finite geometric series has its own closed form:
 @academic[formula_callout:Geometric Sequences
 $$S_n = a_1 \\cdot \\frac{1 - r^n}{1 - r} \\quad (r \\neq 1)$$]@
 
-When $|r| < 1$, the terms shrink toward zero fast enough that the infinite series converges to $S = \\frac{a_1}{1 - r}$. When $|r| \\geq 1$, the terms do not diminish and the series diverges.`,
+@academic[rule_plain:When $|r| < 1$, the terms shrink toward zero fast enough that the infinite series converges to $S = \\frac{a_1}{1 - r}$. When $|r| \\geq 1$, the terms do not diminish and the series diverges.]@`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Geometric Sequences](!/algebra/sequences/geometric) →@`,
@@ -170,7 +170,8 @@ The simplest example is $1, \\frac{1}{2}, \\frac{1}{3}, \\frac{1}{4}, \\ldots$ �
 
 The harmonic series $\\sum_{n=1}^{\\infty} \\frac{1}{n}$ diverges, even though its terms approach zero. This stands in sharp contrast to the geometric series $\\sum \\frac{1}{2^n}$, which converges. Approaching zero is necessary for convergence but not sufficient — the harmonic series is the most important illustration of this distinction.
 
-The harmonic sequence connects to the other two progressions through the inequality of means: for any set of positive numbers, the harmonic mean is never greater than the geometric mean, which is never greater than the arithmetic mean ($H \\leq G \\leq A$).`,
+@academic[rule_theorem:Inequality of means
+The harmonic sequence connects to the other two progressions through the inequality of means: for any set of positive numbers, the harmonic mean is never greater than the geometric mean, which is never greater than the arithmetic mean ($H \\leq G \\leq A$).]@`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Harmonic Sequences](!/algebra/sequences/harmonic) →@`,
@@ -185,7 +186,9 @@ $$F_1 = 1, \\quad F_2 = 1, \\quad F_n = F_{n-1} + F_{n-2} \\quad (n \\geq 3)$$]@
 
 This produces the sequence $1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, \\ldots$, where growth accelerates because each new term inherits the size of both its parents.
 
-The ratio of consecutive Fibonacci numbers $\\frac{F_{n+1}}{F_n}$ converges to the golden ratio $\\phi = \\frac{1 + \\sqrt{5}}{2} \\approx 1.618$, a number that satisfies $\\phi^2 = \\phi + 1$. Despite its recursive definition, the Fibonacci sequence has a closed-form expression known as Binet's formula:
+@academic[rule_theorem_plain:The ratio of consecutive Fibonacci numbers $\\frac{F_{n+1}}{F_n}$ converges to the golden ratio $\\phi = \\frac{1 + \\sqrt{5}}{2} \\approx 1.618$, a number that satisfies $\\phi^2 = \\phi + 1$.]@
+
+Despite its recursive definition, the Fibonacci sequence has a closed-form expression known as Binet's formula:
 
 @academic[formula_callout:Binet's Formula
 $$F_n = \\frac{\\phi^n - \\psi^n}{\\sqrt{5}}$$
@@ -208,7 +211,9 @@ The first terms are $1, 3, 6, 10, 15, 21, 28, 36, \\ldots$. Recursively, $T_n = 
 
 The formula $T_n = \\frac{n(n+1)}{2}$ also equals the binomial coefficient $\\binom{n+1}{2}$, the number of ways to choose $2$ items from $n + 1$. This connection places triangular numbers at the intersection of summation, geometry, and **combinatorics**.
 
-A key identity ties triangular and square numbers together: the sum of two consecutive triangular numbers is always a perfect square, $T_n + T_{n-1} = n^2$. Geometrically, two triangles of consecutive sizes fit together to form a square.`,
+@academic[rule_plain:A key identity ties triangular and square numbers together: the sum of two consecutive triangular numbers is always a perfect square, $T_n + T_{n-1} = n^2$.]@
+
+Geometrically, two triangles of consecutive sizes fit together to form a square.`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Triangular Numbers](!/algebra/sequences/triangular-numbers) →@`,
@@ -223,7 +228,9 @@ Recursively, the sequence satisfies $S_n = S_{n-1} + (2n - 1)$. Each new square 
 @academic[formula_callout:Square Numbers
 $$n^2 = 1 + 3 + 5 + \\cdots + (2n - 1)$$]@
 
-The difference between consecutive squares is always odd: $S_n - S_{n-1} = 2n - 1$. This connects square numbers to [arithmetic sequences](!/algebra/sequences/arithmetic), since the odd numbers $1, 3, 5, 7, \\ldots$ form an arithmetic progression with common difference $2$.
+@academic[rule_plain:The difference between consecutive squares is always odd: $S_n - S_{n-1} = 2n - 1$.]@
+
+This connects square numbers to [arithmetic sequences](!/algebra/sequences/arithmetic), since the odd numbers $1, 3, 5, 7, \\ldots$ form an arithmetic progression with common difference $2$.
 
 The sum of the first $n$ squares has its own closed form:
 
@@ -250,7 +257,12 @@ Unlike every other sequence on this page, the primes follow no algebraic pattern
 
 Euclid proved that the primes are infinite: no finite list can contain them all. The argument assumes finitely many primes $p_1, p_2, \\ldots, p_k$, forms the product $N = p_1 p_2 \\cdots p_k + 1$, and observes that $N$ is not divisible by any prime on the list — so either $N$ itself is prime or it has a prime factor missing from the list.
 
-Although primes never run out, they do thin out. The prime number theorem describes the rate: among integers near $n$, roughly one in every $\\ln n$ is prime. The primes become sparser as numbers grow, but they never vanish entirely.
+Although primes never run out, they do thin out.
+
+@academic[rule_theorem:Prime number theorem
+The prime number theorem describes the rate: among integers near $n$, roughly one in every $\\ln n$ is prime.]@
+
+The primes become sparser as numbers grow, but they never vanish entirely.
 
 The [prime numbers calculator](!/algebra/calculators/sequences/prime-numbers) lists the first 10,000 primes, tests whether a number is prime and finds the $n$-th prime.`,
     before: ``,

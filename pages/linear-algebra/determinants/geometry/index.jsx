@@ -1228,7 +1228,9 @@ When $\\det(A) = 0$, the map collapses at least one dimension entirely. The imag
   },
   obj4: {
     title: `Orientation`,
-    content: `The sign of the determinant carries information that the absolute value discards. A positive determinant means the linear map preserves the orientation of $\\mathbb{R}^n$; a negative determinant means it reverses orientation.
+    content: `The sign of the determinant carries information that the absolute value discards.
+
+@academic[rule_plain:A positive determinant means the linear map preserves the orientation of $\\mathbb{R}^n$; a negative determinant means it reverses orientation.]@
 
 In two dimensions, orientation is the sense of rotation. A positively oriented pair of vectors goes counterclockwise; a negatively oriented pair goes clockwise. A linear map with $\\det(A) > 0$ sends every counterclockwise pair to another counterclockwise pair. A map with $\\det(A) < 0$ flips counterclockwise to clockwise.
 
@@ -1245,7 +1247,11 @@ When $\\det(A) = 0$, orientation is undefined. The map crushes the space down to
     title: `Linear Transformations as Geometric Mappings`,
     content: `Every invertible $n \\times n$ matrix defines a bijective [linear transformation](!/linear-algebra/transformations) from $\\mathbb{R}^n$ to itself. The determinant captures the two essential geometric facts about this transformation in a single number: it scales all volumes by $|\\det(A)|$, and it either preserves or reverses orientation according to the sign.
 
-The [multiplicative property](!/linear-algebra/determinants/properties) $\\det(AB) = \\det(A)\\det(B)$ takes on a clean geometric reading in this context. Composing two linear maps multiplies their volume-scaling factors: if $A$ scales volumes by $|\\det(A)|$ and $B$ scales by $|\\det(B)|$, then $AB$ scales by $|\\det(A)| \\cdot |\\det(B)|$. The orientation effects compose as well — two orientation-reversing maps compose to an orientation-preserving one, matching the sign rule $(-1)(-1) = +1$.
+The [multiplicative property](!/linear-algebra/determinants/properties) $\\det(AB) = \\det(A)\\det(B)$ takes on a clean geometric reading in this context.
+
+@academic[rule_plain:Composing two linear maps multiplies their volume-scaling factors: if $A$ scales volumes by $|\\det(A)|$ and $B$ scales by $|\\det(B)|$, then $AB$ scales by $|\\det(A)| \\cdot |\\det(B)|$.]@
+
+The orientation effects compose as well — two orientation-reversing maps compose to an orientation-preserving one, matching the sign rule $(-1)(-1) = +1$.
 
 The inverse $A^{-1}$ undoes both effects. Its determinant is $\\det(A^{-1}) = 1/\\det(A)$, so it scales volumes by the reciprocal factor and restores whatever orientation $A$ may have flipped.
 

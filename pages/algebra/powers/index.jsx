@@ -972,7 +972,7 @@ $$a^{-n} = \\frac{1}{a^n}, \\quad a \\neq 0$$]@
 
 The definition extends the descending pattern below $a^0$. From $3^1 = 3$ and $3^0 = 1$, dividing by 3 once more gives $3^{-1} = 1/3$. Then $3^{-2} = 1/9$, $3^{-3} = 1/27$, and so on.
 
-The base cannot be zero — $0^{-n}$ would require dividing by $0^n = 0$, which is undefined.
+@academic[rule_plain:The base cannot be zero — $0^{-n}$ would require dividing by $0^n = 0$, which is undefined.]@
 
 Negative exponents rewrite fractions without denominators: $1/a^3 = a^{-3}$. This notational flexibility is essential when applying the laws of exponents. The [negative exponents](!/algebra/powers/negative-exponents) page covers the full treatment.`,
     before: ``,
@@ -989,7 +989,7 @@ $$a^{m/n} = \\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$]@
 
 This equivalence bridges exponents and [roots](!/algebra/roots). Computing $8^{2/3}$: the denominator 3 means cube root, the numerator 2 means square. So $8^{2/3} = (\\sqrt[3]{8})^2 = 2^2 = 4$.
 
-For even denominators, the base must be non-negative in real numbers — $(-4)^{1/2}$ has no real value. Odd denominators accept any real base.
+@academic[rule_plain:For even denominators, the base must be non-negative in real numbers — $(-4)^{1/2}$ has no real value. Odd denominators accept any real base.]@
 
 Rational exponents provide a single framework for roots and powers. The [rational exponents](!/algebra/powers/rational-exponents) page develops the notation, the domain restrictions, and the connection to radical form.`,
     before: ``,
@@ -1016,7 +1016,7 @@ The [irrational exponents](!/algebra/powers/irrational-exponents) page formalize
 
   obj8: {
     title: `Laws of Exponents`,
-    content: `A single set of rules governs all exponent types. The product rule $a^m \\cdot a^n = a^{m+n}$, the quotient rule $a^m / a^n = a^{m-n}$, the power-of-a-power rule $(a^m)^n = a^{mn}$, and the remaining laws hold whether the exponents are natural, zero, negative, rational, or irrational.
+    content: `@academic[rule_theorem_plain:A single set of rules governs all exponent types. The product rule $a^m \\cdot a^n = a^{m+n}$, the quotient rule $a^m / a^n = a^{m-n}$, the power-of-a-power rule $(a^m)^n = a^{mn}$, and the remaining laws hold whether the exponents are natural, zero, negative, rational, or irrational.]@
 
 These laws are first proved for natural exponents, where they follow from counting factors. The extensions to other exponent types are then defined so that the same laws remain valid — each new definition is chosen precisely to preserve these identities.
 
@@ -1048,9 +1048,9 @@ To solve a specific equation step by step, the [exponential equation solver](!/a
     title: `Exponential Inequalities`,
     content: `Inequalities involving powers require attention to the base. The expression $2^x > 8$ and $(1/3)^x \\leq 9$ are both exponential inequalities, but they behave differently.
 
-When the base satisfies $a > 1$, the exponential function is increasing: larger exponents produce larger values. The inequality direction is preserved when applying logarithms.
+@academic[rule_plain:When the base satisfies $a > 1$, the exponential function is increasing: larger exponents produce larger values. The inequality direction is preserved when applying logarithms.
 
-When $0 < a < 1$, the function is decreasing: larger exponents produce smaller values. The inequality reverses when solving.
+When $0 < a < 1$, the function is decreasing: larger exponents produce smaller values. The inequality reverses when solving.]@
 
 The [exponential inequalities](!/algebra/powers/exponential-inequalities) page develops the solving techniques and the role the base plays in determining direction.
 
@@ -1064,7 +1064,9 @@ The [exponential inequality solver](!/algebra/calculators/inequalities/exponenti
     title: `Exponential Functions`,
     content: `When the base is a fixed positive number and the exponent varies, the power $a^x$ becomes a [function](!/functions) of $x$. This is the conceptual shift from computing individual powers to studying how powers change.
 
-For $a > 1$, the function grows — each unit increase in $x$ multiplies the output by $a$. For $0 < a < 1$, the function decays. The number $e \\approx 2.718$ occupies a central role: the function $e^x$ is its own derivative, making it foundational in calculus.
+For $a > 1$, the function grows — each unit increase in $x$ multiplies the output by $a$. For $0 < a < 1$, the function decays.
+
+@academic[rule_theorem_plain:The number $e \\approx 2.718$ occupies a central role: the function $e^x$ is its own derivative, making it foundational in calculus.]@
 
 Exponential functions are the counterpart of [polynomial functions](!/algebra/polynomials). In a polynomial, the base varies and the exponent is fixed ($x^3$). In an exponential function, the base is fixed and the exponent varies ($3^x$). The behaviors are fundamentally different.
 

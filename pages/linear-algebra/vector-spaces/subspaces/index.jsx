@@ -1267,7 +1267,9 @@ Every other subspace lies strictly between these two extremes: it contains $\\ma
   },
   obj4: {
     title: `Subspaces of R² and R³`,
-    content: `The subspaces of $\\mathbb{R}^2$ are completely classified: $\\{\\mathbf{0}\\}$, lines through the origin, and $\\mathbb{R}^2$ itself. There is nothing else. Every line through the origin has the form $\\{t\\mathbf{v} : t \\in \\mathbb{R}\\}$ for some nonzero vector $\\mathbf{v}$, and it is straightforward to verify that this set is closed under addition and scalar multiplication.
+    content: `@academic[rule_theorem_plain:The subspaces of $\\mathbb{R}^2$ are completely classified: $\\{\\mathbf{0}\\}$, lines through the origin, and $\\mathbb{R}^2$ itself.]@
+
+There is nothing else. Every line through the origin has the form $\\{t\\mathbf{v} : t \\in \\mathbb{R}\\}$ for some nonzero vector $\\mathbf{v}$, and it is straightforward to verify that this set is closed under addition and scalar multiplication.
 
 The subspaces of $\\mathbb{R}^3$ are: $\\{\\mathbf{0}\\}$, lines through the origin (dimension $1$), planes through the origin (dimension $2$), and $\\mathbb{R}^3$ itself (dimension $3$).
 
@@ -1305,7 +1307,9 @@ It is the set of all possible outputs of the [linear transformation](!/linear-al
 
 The column space is a subspace because the span of any set of vectors is always a subspace. Its dimension equals the [rank](!/linear-algebra/matrix/rank) of $A$.
 
-The column space answers the solvability question: the system $A\\mathbf{x} = \\mathbf{b}$ has a solution if and only if $\\mathbf{b}$ lies in $\\text{Col}(A)$. If $\\mathbf{b}$ is a linear combination of the columns of $A$, the coefficients in that combination are a solution vector $\\mathbf{x}$. If $\\mathbf{b}$ is not in the column space, no solution exists.
+@academic[rule_theorem_plain:The column space answers the solvability question: the system $A\\mathbf{x} = \\mathbf{b}$ has a solution if and only if $\\mathbf{b}$ lies in $\\text{Col}(A)$.]@
+
+If $\\mathbf{b}$ is a linear combination of the columns of $A$, the coefficients in that combination are a solution vector $\\mathbf{x}$. If $\\mathbf{b}$ is not in the column space, no solution exists.
 
 To find a [basis](!/linear-algebra/vector-spaces/basis) for the column space, row reduce $A$ and identify the pivot columns. The corresponding columns of the original matrix $A$ — not the echelon form — form a basis for $\\text{Col}(A)$.`,
     before: ``,
@@ -1321,7 +1325,9 @@ $$\\text{Row}(A) = \\text{Col}(A^T)$$]@
 
 The row space lives in $\\mathbb{R}^n$ and has dimension equal to the rank of $A$ — the same dimension as the column space, despite the two spaces living in different ambient spaces.
 
-A key property is that elementary row operations do not change the row space. Each row operation replaces rows with linear combinations of existing rows, so every row of the echelon form lies in the span of the original rows, and vice versa. The nonzero rows of the echelon form therefore provide a basis for the row space.
+@academic[rule_theorem_plain:A key property is that elementary row operations do not change the row space.]@
+
+Each row operation replaces rows with linear combinations of existing rows, so every row of the echelon form lies in the span of the original rows, and vice versa. The nonzero rows of the echelon form therefore provide a basis for the row space.
 
 The row space and the null space together account for all of $\\mathbb{R}^n$. They are [orthogonal](!/linear-algebra/orthogonality) complements: every vector in the null space is perpendicular to every row of $A$ (since $A\\mathbf{x} = \\mathbf{0}$ means the dot product of $\\mathbf{x}$ with each row is zero), and their dimensions add up to $n$.`,
     before: ``,
@@ -1352,7 +1358,9 @@ When $W_1 \\cap W_2 = \\{\\mathbf{0}\\}$, the sum is called a direct sum, writte
   },
   obj9: {
     title: `Solution Sets and Subspaces`,
-    content: `The solution set of a [linear system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ is a subspace only when $\\mathbf{b} = \\mathbf{0}$. In that case, the solution set is the null space of $A$, which passes the subspace test as shown above.
+    content: `@academic[rule_theorem_plain:The solution set of a [linear system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ is a subspace only when $\\mathbf{b} = \\mathbf{0}$.]@
+
+In that case, the solution set is the null space of $A$, which passes the subspace test as shown above.
 
 When $\\mathbf{b} \\neq \\mathbf{0}$, the solution set is not a subspace. It does not contain $\\mathbf{0}$ (since $A\\mathbf{0} = \\mathbf{0} \\neq \\mathbf{b}$), and it is not closed under addition or scalar multiplication in general. However, the solution set has a clean geometric description in terms of subspaces.
 

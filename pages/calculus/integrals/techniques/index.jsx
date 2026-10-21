@@ -13,6 +13,8 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -174,7 +176,11 @@ const sectionsContent = {
     content: `
 Differentiation follows mechanical rules: the derivative of any elementary function can be computed by applying chain, product, and quotient rules systematically.
 
-Integration has no such universal algorithm. Some elementary functions have no elementary antiderivative. Others have antiderivatives that are difficult to find without insight.
+Integration has no such universal algorithm.
+
+@academic[rule_theorem_plain:Some elementary functions have no elementary antiderivative.]@
+
+Others have antiderivatives that are difficult to find without insight.
 
 Techniques bridge this gap. They transform integrands into forms matching [known formulas](!/calculus/integrals/special). The transformation might involve changing variables, splitting products, or decomposing fractions—whatever reveals the underlying structure.
 `,
@@ -524,8 +530,31 @@ const schemas = {
     }),
   };
 
+  const integrationTechniqueTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Read the integrand first',
+    preface: 'The shape of the integrand points to the technique. Each card names the pattern to look for.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Match the pattern, then commit',
+    conclusion: 'Substitution and parts cover most integrals; trigonometric methods and partial fractions handle the specialised shapes.',
+    root: { name: 'Integration techniques', sub: '5 methods' },
+    children: [
+      { id: 'sub', name: 'Substitution', items: [
+        { label: 'Look for', text: '$f(g(x)) \\cdot g\'(x)$' }, { label: 'Move', text: 'let $u = g(x)$' } ] },
+      { id: 'parts', name: 'Integration by parts', items: [
+        { label: 'Look for', text: 'products of different function types' }, { label: 'Examples', text: 'polynomial × exponential, polynomial × trig, log × polynomial' } ] },
+      { id: 'trig', name: 'Trigonometric integrals', items: [
+        { label: 'Look for', text: 'powers or products of $\\sin$ and $\\cos$' } ] },
+      { id: 'tsub', name: 'Trigonometric substitution', items: [
+        { label: 'Look for', text: '$\\sqrt{a^2 - x^2}$, $\\sqrt{a^2 + x^2}$, $\\sqrt{x^2 - a^2}$' } ] },
+      { id: 'pf', name: 'Partial fractions', items: [
+        { label: 'Look for', text: 'rational functions with a factorable denominator' } ] },
+    ],
+  };
+
   return {
   props: {
+    integrationTechniqueTree,
     sectionsContent,
     introContent,
     obj4Table,
@@ -545,7 +574,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({integrationTechniqueTree, seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -629,6 +658,14 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="integration-techniques-tree"
+            title="Choosing an integration technique"
+            source="/calculus/integrals/techniques"
+          >
+            <TopDownTree data={integrationTechniqueTree} />
+          </DiagramFrame>,
         ]
     },
     {

@@ -428,7 +428,8 @@ To test whether a specific number is prime, use the [prime number checker](!/ari
 
 obj8: {
   title: `Prime Factorization`,
-  content: `The Fundamental Theorem of Arithmetic guarantees that every integer greater than $1$ can be expressed as a product of primes, and that this expression is unique up to the order of the factors.
+  content: `@academic[rule_theorem:Fundamental Theorem of Arithmetic
+The Fundamental Theorem of Arithmetic guarantees that every integer greater than $1$ can be expressed as a product of primes, and that this expression is unique up to the order of the factors.]@
 
 The number $360$ factors as $2^3 \\cdot 3^2 \\cdot 5$. No other combination of primes produces $360$. The number $84$ factors as $2^2 \\cdot 3 \\cdot 7$. The factorization is a fingerprint — it identifies the number completely.
 

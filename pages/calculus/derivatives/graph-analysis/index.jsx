@@ -588,7 +588,12 @@ $$f'(c) = 0 \\quad \\text{or} \\quad f'(c) \\text{ undefined}$$
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
-Critical points are the only candidates for local extrema. If $f$ has a local maximum or minimum at $c$, then $c$ must be a critical point. This is Fermat's theorem: a local extremum at an interior point requires the derivative to vanish or fail to exist.
+Critical points are the only candidates for local extrema.
+
+@academic[rule_theorem:Fermat's Theorem
+If $f$ has a local maximum or minimum at $c$, then $c$ must be a critical point.]@
+
+This is Fermat's theorem: a local extremum at an interior point requires the derivative to vanish or fail to exist.
 
 The converse is false. The function $f(x) = x^3$ has $f'(0) = 0$, so $x = 0$ is a critical point, but $f$ has no extremum there—it increases through the origin. A critical point is a candidate that must be tested further.
 

@@ -1340,7 +1340,7 @@ The domain is determined by both the stated conditions and the natural restricti
 
   obj6: {
     title: `Range of Piecewise Functions`,
-    content: `The [range](!/functions/range) of a piecewise function is the union of the ranges of all pieces, restricted to their respective intervals.
+    content: `@academic[rule_plain:The [range](!/functions/range) of a piecewise function is the union of the ranges of all pieces, restricted to their respective intervals.]@
 
 Each piece contributes outputs from its portion of the domain. The combined range collects all these outputs.
 

@@ -622,6 +622,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vectorAdditionDiagrams from '@/app/components/linear-algebra copy/matrix/vectorAdditionDiagrams'
 import renderVectorArrows from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1080,8 +1082,31 @@ const schemas = {
   };
 
 
+  const vectorTypeTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Five kinds of vector',
+    preface: 'Vectors are classified by what is special about them: their size, where they start, or how they compare.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Position rarely matters',
+    conclusion: 'A free vector is fixed by magnitude and direction alone; two vectors are equal when their components match, wherever they are drawn.',
+    root: { name: 'Types of vectors', sub: '5 kinds' },
+    children: [
+      { id: 'zero', name: 'Zero', symbol: '$\\mathbf{0}$', items: [
+        { label: 'Components', text: 'all $0$' }, { label: 'Role', text: 'no direction; additive identity' } ] },
+      { id: 'unit', name: '[Unit](!/linear-algebra/vectors/magnitude)', symbol: '$\\|\\hat{\\mathbf{u}}\\| = 1$', items: [
+        { label: 'Role', text: 'pure direction' }, { label: 'Found by', text: 'normalizing' } ] },
+      { id: 'pos', name: 'Position', items: [
+        { label: 'Tail', text: 'at the origin' }, { label: 'Role', text: 'one-to-one with points' } ] },
+      { id: 'free', name: 'Free', items: [
+        { label: 'Defined by', text: 'magnitude and direction only' }, { label: 'Role', text: 'unchanged by translation' } ] },
+      { id: 'eq', name: 'Equal', items: [
+        { label: 'When', text: 'components match' }, { label: 'Position', text: 'irrelevant' } ] },
+    ],
+  };
+
    return {
   props: {
+    vectorTypeTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1098,7 +1123,7 @@ const schemas = {
   }
 }
    }
-export default function VectorsPage({seoData, sectionsContent, introContent, obj3Table, summaryTable, schemas, demoUnits}) {
+export default function VectorsPage({vectorTypeTree, seoData, sectionsContent, introContent, obj3Table, summaryTable, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1132,6 +1157,14 @@ export default function VectorsPage({seoData, sectionsContent, introContent, obj
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="vector-types-tree"
+            title="Types of vectors"
+            source="/linear-algebra/vectors"
+          >
+            <TopDownTree data={vectorTypeTree} />
+          </DiagramFrame>,
         ]
     },
     {

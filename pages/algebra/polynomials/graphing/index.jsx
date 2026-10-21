@@ -265,7 +265,9 @@ const keyWords = [
   title: `The Graph of a Polynomial`,
   content: `A polynomial $P(x)$ assigns a value $y = P(x)$ to every real number $x$. Plotting each pair $(x, y)$ produces a curve in the coordinate plane that represents the polynomial geometrically.
 
-The defining visual property of polynomial graphs is smoothness. The curve has no breaks, no jumps, no holes, and no sharp corners. It flows continuously from left to right, bending and turning but never snapping or creating an angle. This smoothness distinguishes polynomial graphs from those of piecewise functions, absolute value expressions, or rational functions with asymptotes.
+@academic[rule_theorem_plain:The defining visual property of polynomial graphs is smoothness. The curve has no breaks, no jumps, no holes, and no sharp corners.]@
+
+It flows continuously from left to right, bending and turning but never snapping or creating an angle. This smoothness distinguishes polynomial graphs from those of piecewise functions, absolute value expressions, or rational functions with asymptotes.
 
 The shape of the curve is governed by the polynomial's degree and coefficients. A degree-$1$ polynomial produces a straight line. A degree-$2$ polynomial produces a parabola. Higher degrees create progressively more complex curves with more potential bends, but every polynomial graph shares the same fundamental character — smooth, continuous, and defined for all real $x$.`,
   before: ``,
@@ -281,7 +283,9 @@ The y-intercept is the point where the graph crosses the vertical axis, found by
 
 The x-intercepts are the points where the graph crosses or touches the horizontal axis, found by solving $P(x) = 0$. These are the real [roots](!/algebra/polynomials/roots) of the polynomial, and finding them may require [factoring](!/algebra/polynomials/factoring), the [Rational Root Theorem](!/algebra/polynomials/rules), or numerical methods depending on the polynomial's complexity.
 
-A polynomial of degree $n$ has at most $n$ x-intercepts, since it can have at most $n$ real roots. It may have fewer — some roots may be complex — and it may have none at all. The polynomial $x^2 + 1$ never touches the x-axis because its only roots, $\\pm i$, are not real numbers.`,
+@academic[rule_theorem_plain:A polynomial of degree $n$ has at most $n$ x-intercepts, since it can have at most $n$ real roots.]@
+
+It may have fewer — some roots may be complex — and it may have none at all. The polynomial $x^2 + 1$ never touches the x-axis because its only roots, $\\pm i$, are not real numbers.`,
   before: ``,
   after: ``,
   link: '',
@@ -294,9 +298,13 @@ A polynomial of degree $n$ has at most $n$ x-intercepts, since it can have at mo
 
 Two properties control the outcome: the degree $n$ and the sign of the leading coefficient $a_n$.
 
-When the degree is even and $a_n > 0$, both ends of the graph rise — the curve heads upward as $x \\to +\\infty$ and as $x \\to -\\infty$. When the degree is even and $a_n < 0$, both ends fall. In either case, the two ends move in the same direction because an even power of $x$ is positive regardless of the sign of $x$.
+@academic[rule_plain:When the degree is even and $a_n > 0$, both ends of the graph rise — the curve heads upward as $x \\to +\\infty$ and as $x \\to -\\infty$. When the degree is even and $a_n < 0$, both ends fall.]@
 
-When the degree is odd and $a_n > 0$, the left end falls while the right end rises. When the degree is odd and $a_n < 0$, the left end rises and the right end falls. Odd powers preserve the sign of $x$, so the two ends always move in opposite directions.
+In either case, the two ends move in the same direction because an even power of $x$ is positive regardless of the sign of $x$.
+
+@academic[rule_plain:When the degree is odd and $a_n > 0$, the left end falls while the right end rises. When the degree is odd and $a_n < 0$, the left end rises and the right end falls.]@
+
+Odd powers preserve the sign of $x$, so the two ends always move in opposite directions.
 
 The polynomial $-2x^5 + 100x^4 - 3x + 7$ has odd degree and a negative leading coefficient, so its left end rises and its right end falls — regardless of how large the other coefficients are. At extreme values of $x$, the $-2x^5$ term overwhelms everything else.`,
   before: ``,
@@ -311,7 +319,9 @@ The polynomial $-2x^5 + 100x^4 - 3x + 7$ has odd degree and a negative leading c
   title: `Turning Points`,
   content: `A turning point is a location where the graph changes direction — shifting from increasing to decreasing or from decreasing to increasing. These correspond to local maxima and local minima of the polynomial.
 
-The maximum number of turning points for a polynomial of degree $n$ is $n - 1$. A linear polynomial ($n = 1$) has none — it is a straight line with no change in direction. A quadratic ($n = 2$) has exactly one — the vertex of the parabola. A cubic ($n = 3$) has at most two, a quartic at most three, and so on.
+@academic[rule_theorem_plain:The maximum number of turning points for a polynomial of degree $n$ is $n - 1$.]@
+
+A linear polynomial ($n = 1$) has none — it is a straight line with no change in direction. A quadratic ($n = 2$) has exactly one — the vertex of the parabola. A cubic ($n = 3$) has at most two, a quartic at most three, and so on.
 
 The actual number of turning points may be less than the maximum. The cubic $P(x) = x^3$ has no turning points at all — it increases steadily from left to right with an inflection point at the origin but no reversal of direction. The cubic $P(x) = x^3 - 3x$ has exactly two turning points, achieving the maximum for its degree.
 
@@ -326,9 +336,13 @@ Knowing the upper bound on turning points serves as a reality check when sketchi
   title: `Behavior at Roots`,
   content: `Not all x-intercepts look the same. The way a polynomial graph interacts with the x-axis at a root depends on the root's multiplicity — the number of times the corresponding factor appears in the [factorization](!/algebra/polynomials/factoring).
 
-A root with odd multiplicity causes the graph to cross the x-axis. At multiplicity $1$, the crossing is clean — the curve passes through at an angle, much like a line. At multiplicity $3$, the curve still crosses but flattens near the axis, creating an S-shaped inflection as it passes through.
+@academic[rule_plain:A root with odd multiplicity causes the graph to cross the x-axis.]@
 
-A root with even multiplicity causes the graph to touch the x-axis without crossing. At multiplicity $2$, the curve reaches the axis and turns back, resembling a parabola tangent to the x-axis. At multiplicity $4$, the same touch-and-turn occurs but with a flatter approach.
+At multiplicity $1$, the crossing is clean — the curve passes through at an angle, much like a line. At multiplicity $3$, the curve still crosses but flattens near the axis, creating an S-shaped inflection as it passes through.
+
+@academic[rule_plain:A root with even multiplicity causes the graph to touch the x-axis without crossing.]@
+
+At multiplicity $2$, the curve reaches the axis and turns back, resembling a parabola tangent to the x-axis. At multiplicity $4$, the same touch-and-turn occurs but with a flatter approach.
 
 The polynomial $(x - 1)(x + 2)^2(x - 3)^3$ illustrates all three behaviors. At $x = 1$ (multiplicity $1$), the graph crosses at an angle. At $x = -2$ (multiplicity $2$), the graph touches and bounces back. At $x = 3$ (multiplicity $3$), the graph crosses with a flattened inflection. Recognizing these patterns from the factored form allows accurate sketching without plotting dozens of points.`,
   before: ``,
@@ -341,9 +355,17 @@ The polynomial $(x - 1)(x + 2)^2(x - 3)^3$ illustrates all three behaviors. At $
   title: `Symmetry`,
   content: `Some polynomials exhibit symmetry that simplifies both analysis and graphing.
 
-An even function satisfies $P(-x) = P(x)$ for all $x$, making its graph symmetric about the y-axis. The left half is a mirror image of the right half. A polynomial is an even function when it contains only even powers of $x$ (including the constant term, which is $x^0$). The polynomial $P(x) = x^4 - 3x^2 + 2$ is even: replacing $x$ with $-x$ leaves every term unchanged.
+An even function satisfies $P(-x) = P(x)$ for all $x$, making its graph symmetric about the y-axis. The left half is a mirror image of the right half.
 
-An odd function satisfies $P(-x) = -P(x)$ for all $x$, making its graph symmetric about the origin. Rotating the graph $180°$ around the origin produces the same curve. A polynomial is an odd function when it contains only odd powers of $x$ — no constant term and no even-powered terms. The polynomial $P(x) = x^3 - 5x$ is odd: $P(-x) = -x^3 + 5x = -(x^3 - 5x) = -P(x)$.
+@academic[rule_plain:A polynomial is an even function when it contains only even powers of $x$ (including the constant term, which is $x^0$).]@
+
+The polynomial $P(x) = x^4 - 3x^2 + 2$ is even: replacing $x$ with $-x$ leaves every term unchanged.
+
+An odd function satisfies $P(-x) = -P(x)$ for all $x$, making its graph symmetric about the origin. Rotating the graph $180°$ around the origin produces the same curve.
+
+@academic[rule_plain:A polynomial is an odd function when it contains only odd powers of $x$ — no constant term and no even-powered terms.]@
+
+The polynomial $P(x) = x^3 - 5x$ is odd: $P(-x) = -x^3 + 5x = -(x^3 - 5x) = -P(x)$.
 
 Most polynomials have neither symmetry. The presence of both even and odd powers — as in $x^3 + x^2$ — breaks both conditions. Recognizing symmetry when it exists cuts the graphing work in half, since the behavior on one side of the axis determines the other.`,
   before: ``,
@@ -375,7 +397,7 @@ The sign of $a$ controls the orientation. When $a > 0$, the parabola opens upwar
 
 The vertex lies at $x = -\\frac{b}{2a}$, and the corresponding $y$-value is $P\\left(-\\frac{b}{2a}\\right)$. The vertical line $x = -\\frac{b}{2a}$ is the axis of symmetry — every point on the parabola has a mirror image across this line.
 
-The discriminant $b^2 - 4ac$ determines the number of x-intercepts. When it is positive, the parabola crosses the x-axis at two points. When it is zero, the vertex sits on the x-axis and the parabola touches it at exactly one point. When it is negative, the parabola has no real [roots](!/algebra/polynomials/roots) and floats entirely above or below the x-axis.`,
+@academic[rule_theorem_plain:The discriminant $b^2 - 4ac$ determines the number of x-intercepts. When it is positive, the parabola crosses the x-axis at two points. When it is zero, the vertex sits on the x-axis and the parabola touches it at exactly one point. When it is negative, the parabola has no real [roots](!/algebra/polynomials/roots) and floats entirely above or below the x-axis.]@`,
   before: ``,
   after: ``,
   link: '',
@@ -385,7 +407,11 @@ The discriminant $b^2 - 4ac$ determines the number of x-intercepts. When it is p
   title: `Graphing Cubic Polynomials`,
   content: `A cubic polynomial $P(x) = ax^3 + bx^2 + cx + d$ produces a curve whose two ends always move in opposite directions — one rising, one falling — determined by the sign of $a$.
 
-Unlike a parabola, a cubic is guaranteed to cross the x-axis at least once. An odd-degree polynomial must have at least one real root because its end behavior forces the curve to pass through the horizontal axis. It may cross once, twice, or three times, depending on the nature of its roots.
+Unlike a parabola, a cubic is guaranteed to cross the x-axis at least once.
+
+@academic[rule_theorem_plain:An odd-degree polynomial must have at least one real root because its end behavior forces the curve to pass through the horizontal axis.]@
+
+It may cross once, twice, or three times, depending on the nature of its roots.
 
 A cubic has at most two turning points. When both exist, the curve rises, turns, falls, turns again, and rises (or the reverse), creating an S-like profile. When no turning points exist — as with $P(x) = x^3$ — the curve increases or decreases monotonically, bending but never reversing direction.
 

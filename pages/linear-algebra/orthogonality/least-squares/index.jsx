@@ -1364,7 +1364,9 @@ The orthogonality condition $A^T\\mathbf{r} = \\mathbf{0}$ — the residual is p
 
 These are the normal equations. They form a square $n \\times n$ system regardless of the shape of $A$.
 
-The [matrix](!/linear-algebra/matrix) $A^TA$ is always [symmetric](!/linear-algebra/matrix/types) and positive semi-definite. When $A$ has full column rank (the columns are [linearly independent](!/linear-algebra/vector-spaces/linear-independence)), $A^TA$ is positive definite and [invertible](!/linear-algebra/matrix/inverse), giving a unique least-squares solution:
+@academic[rule_plain:The [matrix](!/linear-algebra/matrix) $A^TA$ is always [symmetric](!/linear-algebra/matrix/types) and positive semi-definite.]@
+
+When $A$ has full column rank (the columns are [linearly independent](!/linear-algebra/vector-spaces/linear-independence)), $A^TA$ is positive definite and [invertible](!/linear-algebra/matrix/inverse), giving a unique least-squares solution:
 
 @academic[formula_callout:least_squares_solution|Least Squares Solution|$$\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$$]@
 @academic[formulas_link:/linear-algebra/formulas#least-squares_solution]@
@@ -1423,7 +1425,9 @@ $$P = A(A^TA)^{-1}A^T$$]@
 
 When the columns of $A$ are [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) ($A = Q$ with $Q^TQ = I$), this simplifies to $P = QQ^T$.
 
-The projection matrix is [symmetric](!/linear-algebra/matrix/types) ($P^T = P$) and [idempotent](!/linear-algebra/matrix/types) ($P^2 = P$). The complementary matrix $I - P$ projects onto the orthogonal complement $\\text{Col}(A)^\\perp$ and extracts the residual: $\\mathbf{r} = (I - P)\\mathbf{b}$.
+@academic[rule_plain:The projection matrix is [symmetric](!/linear-algebra/matrix/types) ($P^T = P$) and [idempotent](!/linear-algebra/matrix/types) ($P^2 = P$).]@
+
+The complementary matrix $I - P$ projects onto the orthogonal complement $\\text{Col}(A)^\\perp$ and extracts the residual: $\\mathbf{r} = (I - P)\\mathbf{b}$.
 
 The minimum squared error is
 
@@ -1441,7 +1445,9 @@ by the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product), sinc
 
 The pseudoinverse satisfies $A^+A = I_n$ (it is a left inverse of $A$), but $AA^+ \\neq I_m$ in general — the product $AA^+$ equals the projection matrix $P$.
 
-When $A$ does not have full column rank, the Moore-Penrose pseudoinverse $A^+$ is defined through the [singular value decomposition](!/linear-algebra/decompositions/svd): if $A = U\\Sigma V^T$, then $A^+ = V\\Sigma^+ U^T$, where $\\Sigma^+$ inverts the nonzero singular values and transposes the shape. The Moore-Penrose pseudoinverse gives the minimum-norm least-squares solution — the $\\hat{\\mathbf{x}}$ of smallest length among all minimizers of $\\|A\\mathbf{x} - \\mathbf{b}\\|$.`,
+When $A$ does not have full column rank, the Moore-Penrose pseudoinverse $A^+$ is defined through the [singular value decomposition](!/linear-algebra/decompositions/svd): if $A = U\\Sigma V^T$, then $A^+ = V\\Sigma^+ U^T$, where $\\Sigma^+$ inverts the nonzero singular values and transposes the shape.
+
+@academic[rule_theorem_plain:The Moore-Penrose pseudoinverse gives the minimum-norm least-squares solution — the $\\hat{\\mathbf{x}}$ of smallest length among all minimizers of $\\|A\\mathbf{x} - \\mathbf{b}\\|$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1477,7 +1483,9 @@ The projection matrix $P = X(X^TX)^{-1}X^T$ is called the hat matrix in statisti
   },
   obj10: {
     title: `The Minimum Error`,
-    content: `The least-squares error $\\|\\mathbf{r}\\| = \\|\\mathbf{b} - A\\hat{\\mathbf{x}}\\|$ is the distance from $\\mathbf{b}$ to the column space of $A$. It is the length of the [orthogonal](!/linear-algebra/orthogonality) component of $\\mathbf{b}$ with respect to $\\text{Col}(A)$.
+    content: `@academic[rule_theorem_plain:The least-squares error $\\|\\mathbf{r}\\| = \\|\\mathbf{b} - A\\hat{\\mathbf{x}}\\|$ is the distance from $\\mathbf{b}$ to the column space of $A$.]@
+
+It is the length of the [orthogonal](!/linear-algebra/orthogonality) component of $\\mathbf{b}$ with respect to $\\text{Col}(A)$.
 
 By the Pythagorean theorem, since $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}}$ and $\\mathbf{r} = \\mathbf{b} - \\hat{\\mathbf{b}}$ are perpendicular:
 

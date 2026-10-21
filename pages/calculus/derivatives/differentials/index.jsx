@@ -1319,7 +1319,9 @@ The differential $dy$ depends on two things: the point $x$ (which determines the
 
 Geometrically, $dy$ is the vertical change along the tangent line at $x$ when the horizontal position shifts by $dx$. The tangent line rises (or falls) at rate $f'(x)$, so a horizontal shift of $dx$ produces a vertical shift of $f'(x) \\cdot dx$.
 
-For a linear function $f(x) = mx + b$, the differential $dy = m \\cdot dx$ equals the actual change in $f$ exactly, because the tangent line to a linear function is the function itself. For nonlinear functions, $dy$ is an approximation—exact in the limit as $dx \\to 0$, and increasingly approximate as $dx$ grows.
+@academic[rule_plain:For a linear function $f(x) = mx + b$, the differential $dy = m \\cdot dx$ equals the actual change in $f$ exactly, because the tangent line to a linear function is the function itself.]@
+
+For nonlinear functions, $dy$ is an approximation—exact in the limit as $dx \\to 0$, and increasingly approximate as $dx$ grows.
 `,
     before: ``,
     after: ``,
@@ -1338,7 +1340,9 @@ $$dy = f'(x) \\cdot dx \\qquad \\text{(tangent line estimate)}$$]@
 
 The actual change $\\Delta y$ follows the curve. The differential $dy$ follows the tangent line. The difference $\\Delta y - dy$ is the error introduced by the linear approximation.
 
-For small $dx$, the error $\\Delta y - dy$ is much smaller than $dx$ itself. Precisely, $\\lim_{dx \\to 0} \\frac{\\Delta y - dy}{dx} = 0$—the error shrinks faster than the increment. This is what makes the tangent line a good approximation near the point of tangency.
+@academic[rule_theorem_plain:For small $dx$, the error $\\Delta y - dy$ is much smaller than $dx$ itself. Precisely, $\\lim_{dx \\to 0} \\frac{\\Delta y - dy}{dx} = 0$—the error shrinks faster than the increment.]@
+
+This is what makes the tangent line a good approximation near the point of tangency.
 
 For larger $dx$, the gap between $\\Delta y$ and $dy$ widens. The tangent line is a local tool: reliable near $x$, increasingly unreliable far from it. The curvature of $f$—governed by the [second derivative](!/calculus/derivatives/higher-order)—determines how quickly the approximation deteriorates.
 `,

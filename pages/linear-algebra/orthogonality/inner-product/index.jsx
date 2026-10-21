@@ -1302,7 +1302,7 @@ $$\\|\\mathbf{v}\\| = \\sqrt{\\mathbf{v} \\cdot \\mathbf{v}} = \\sqrt{v_1^2 + v_
 
 This is the Euclidean norm — the generalization of the Pythagorean theorem to $n$ dimensions. In $\\mathbb{R}^2$, $\\|(3, 4)\\| = \\sqrt{9 + 16} = 5$. In $\\mathbb{R}^3$, $\\|(1, 2, 2)\\| = \\sqrt{1 + 4 + 4} = 3$.
 
-The norm satisfies $\\|\\mathbf{v}\\| \\geq 0$ with equality only for $\\mathbf{v} = \\mathbf{0}$, and $\\|c\\mathbf{v}\\| = |c|\\|\\mathbf{v}\\|$ — scaling a vector scales its length by the absolute value of the scalar.
+@academic[rule_plain:The norm satisfies $\\|\\mathbf{v}\\| \\geq 0$ with equality only for $\\mathbf{v} = \\mathbf{0}$, and $\\|c\\mathbf{v}\\| = |c|\\|\\mathbf{v}\\|$ — scaling a vector scales its length by the absolute value of the scalar.]@
 
 A unit vector has $\\|\\mathbf{v}\\| = 1$. Any nonzero vector can be normalized — replaced by $\\hat{\\mathbf{v}} = \\mathbf{v}/\\|\\mathbf{v}\\|$, which points in the same direction with length $1$. Normalization preserves direction and discards magnitude.`,
     before: ``,
@@ -1323,7 +1323,9 @@ $$d(\\mathbf{u}, \\mathbf{v}) = \\sqrt{(u_1 - v_1)^2 + (u_2 - v_2)^2 + \\cdots +
 
 the Euclidean distance — the straight-line separation between two points in $\\mathbb{R}^n$.
 
-Distance satisfies the properties of a metric: $d(\\mathbf{u}, \\mathbf{v}) \\geq 0$ with equality only when $\\mathbf{u} = \\mathbf{v}$; $d(\\mathbf{u}, \\mathbf{v}) = d(\\mathbf{v}, \\mathbf{u})$ (symmetry); and $d(\\mathbf{u}, \\mathbf{w}) \\leq d(\\mathbf{u}, \\mathbf{v}) + d(\\mathbf{v}, \\mathbf{w})$ (triangle inequality). Every inner product induces a distance through this formula, and the resulting distance always satisfies these metric properties.`,
+@academic[rule_plain:Distance satisfies the properties of a metric: $d(\\mathbf{u}, \\mathbf{v}) \\geq 0$ with equality only when $\\mathbf{u} = \\mathbf{v}$; $d(\\mathbf{u}, \\mathbf{v}) = d(\\mathbf{v}, \\mathbf{u})$ (symmetry); and $d(\\mathbf{u}, \\mathbf{w}) \\leq d(\\mathbf{u}, \\mathbf{v}) + d(\\mathbf{v}, \\mathbf{w})$ (triangle inequality).]@
+
+Every inner product induces a distance through this formula, and the resulting distance always satisfies these metric properties.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1385,7 +1387,9 @@ The triangle inequality is essential for the distance function $d(\\mathbf{u}, \
 @academic[formula_callout:inner_product_axioms|Inner Product Axioms|$$\\begin{aligned} \\text{Symmetry:} \\quad & \\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\langle \\mathbf{v}, \\mathbf{u} \\rangle \\\\ \\text{Linearity:} \\quad & \\langle c\\mathbf{u} + d\\mathbf{w}, \\mathbf{v} \\rangle = c\\langle \\mathbf{u}, \\mathbf{v} \\rangle + d\\langle \\mathbf{w}, \\mathbf{v} \\rangle \\\\ \\text{Positive definiteness:} \\quad & \\langle \\mathbf{v}, \\mathbf{v} \\rangle > 0 \\text{ for all } \\mathbf{v} \\neq \\mathbf{0} \\end{aligned}$$]@
 @academic[formulas_link:/linear-algebra/formulas#inner_product_axioms]@
 
-A vector space equipped with an inner product is called an inner product space. Every inner product induces a norm ($\\|\\mathbf{v}\\| = \\sqrt{\\langle \\mathbf{v}, \\mathbf{v} \\rangle}$), a distance ($d(\\mathbf{u}, \\mathbf{v}) = \\|\\mathbf{u} - \\mathbf{v}\\|$), and a notion of orthogonality ($\\mathbf{u} \\perp \\mathbf{v}$ iff $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = 0$). The Cauchy-Schwarz inequality, the triangle inequality, and the Pythagorean theorem all hold in any inner product space.
+A vector space equipped with an inner product is called an inner product space. Every inner product induces a norm ($\\|\\mathbf{v}\\| = \\sqrt{\\langle \\mathbf{v}, \\mathbf{v} \\rangle}$), a distance ($d(\\mathbf{u}, \\mathbf{v}) = \\|\\mathbf{u} - \\mathbf{v}\\|$), and a notion of orthogonality ($\\mathbf{u} \\perp \\mathbf{v}$ iff $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = 0$).
+
+@academic[rule_theorem_plain:The Cauchy-Schwarz inequality, the triangle inequality, and the Pythagorean theorem all hold in any inner product space.]@
 
 The standard dot product on $\\mathbb{R}^n$ is one inner product. But the definition admits many others, each defining a different geometry on the same set of vectors.`,
     before: ``,

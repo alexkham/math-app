@@ -2119,7 +2119,9 @@ const sectionsContent = {
 
 where $L$ is lower [triangular](!/linear-algebra/matrix/types) with strictly positive diagonal entries. The matrix $L$ is the Cholesky factor — the matrix "square root" of $A$ in the sense that $A$ is reconstructed by multiplying $L$ by its own [transpose](!/linear-algebra/matrix/operations).
 
-The factorization is unique: for a given symmetric positive definite $A$, there is exactly one lower triangular $L$ with positive diagonal satisfying $A = LL^T$. The convention can also be written $A = R^TR$ with $R = L^T$ upper triangular — the choice between lower and upper is a matter of convention.`,
+@academic[rule_theorem_plain:The factorization is unique: for a given symmetric positive definite $A$, there is exactly one lower triangular $L$ with positive diagonal satisfying $A = LL^T$.]@
+
+The convention can also be written $A = R^TR$ with $R = L^T$ upper triangular — the choice between lower and upper is a matter of convention.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2190,7 +2192,9 @@ The factorization is unique: for a given symmetric positive definite $A$, there 
   },
   obj2: {
     title: `Existence: Symmetric Positive Definite Matrices`,
-    content: `The Cholesky factorization exists if and only if $A$ is symmetric and positive definite. Symmetry means $A = A^T$. Positive definiteness means $\\mathbf{x}^TA\\mathbf{x} > 0$ for every nonzero vector $\\mathbf{x}$.
+    content: `@academic[rule_theorem_plain:The Cholesky factorization exists if and only if $A$ is symmetric and positive definite.]@
+
+Symmetry means $A = A^T$. Positive definiteness means $\\mathbf{x}^TA\\mathbf{x} > 0$ for every nonzero vector $\\mathbf{x}$.
 
 Several equivalent conditions characterize positive definiteness: all [eigenvalues](!/linear-algebra/eigen) of $A$ are strictly positive; all leading principal minors (the [determinants](!/linear-algebra/determinants) of the upper-left $k \\times k$ submatrices) are positive; all pivots in [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) (without pivoting) are positive.
 
@@ -2261,7 +2265,7 @@ For large symmetric positive definite systems, Cholesky is the fastest direct so
   },
   obj6: {
     title: `No Pivoting Needed`,
-    content: `Unlike LU, the Cholesky algorithm never requires row swaps. Positive definiteness guarantees that the quantity under the square root is strictly positive at every step — no zero or negative pivots can occur.
+    content: `@academic[rule_theorem_plain:Unlike LU, the Cholesky algorithm never requires row swaps. Positive definiteness guarantees that the quantity under the square root is strictly positive at every step — no zero or negative pivots can occur.]@
 
 This makes the algorithm simpler (no [permutation matrix](!/linear-algebra/matrix/types#12) to track), more stable (no near-zero pivots to amplify errors), and more predictable (the algorithm either runs to completion or breaks down, with no ambiguity).
 
@@ -2272,7 +2276,9 @@ If the algorithm encounters a non-positive value under the square root, the matr
   },
   obj7: {
     title: `Cholesky as a Positive Definiteness Test`,
-    content: `The Cholesky algorithm tests positive definiteness as a side effect of factoring. If $A = LL^T$ completes with all diagonal entries of $L$ strictly positive, $A$ is positive definite. If the algorithm breaks down at any step, $A$ is not positive definite.
+    content: `The Cholesky algorithm tests positive definiteness as a side effect of factoring.
+
+@academic[rule_theorem_plain:If $A = LL^T$ completes with all diagonal entries of $L$ strictly positive, $A$ is positive definite. If the algorithm breaks down at any step, $A$ is not positive definite.]@
 
 This is often more practical than computing all [eigenvalues](!/linear-algebra/eigen) (also $O(n^3)$ but with a larger constant) or checking all leading principal minors (which requires $n$ [determinant](!/linear-algebra/determinants) computations).
 
@@ -2296,7 +2302,9 @@ Stiffness matrices in finite element analysis are symmetric positive definite. N
   },
   obj9: {
     title: `Cholesky and LU: The Relationship`,
-    content: `For a symmetric positive definite matrix, [LU](!/linear-algebra/decompositions/lower-upper) factorization without pivoting always succeeds and produces $A = L_U D L_U^T$, where $L_U$ is unit lower triangular and $D$ is diagonal with positive entries. This is the $LDL^T$ decomposition.
+    content: `@academic[rule_theorem_plain:For a symmetric positive definite matrix, [LU](!/linear-algebra/decompositions/lower-upper) factorization without pivoting always succeeds and produces $A = L_U D L_U^T$, where $L_U$ is unit lower triangular and $D$ is diagonal with positive entries.]@
+
+This is the $LDL^T$ decomposition.
 
 The Cholesky factor is $L_{\\text{Chol}} = L_U D^{1/2}$ — the unit lower triangular factor with $\\sqrt{D}$ absorbed into it. Equivalently, $A = (L_U D^{1/2})(L_U D^{1/2})^T = LL^T$.
 

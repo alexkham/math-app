@@ -3217,7 +3217,9 @@ The constants $c_1, \\dots, c_n$ are determined by the initial condition $\\math
 @academic[formula_callout:Recurrence Relations
 $$\\mathbf{x}_n = PD^nP^{-1}\\mathbf{x}_0 = c_1 \\lambda_1^n \\mathbf{v}_1 + c_2 \\lambda_2^n \\mathbf{v}_2 + \\cdots + c_n \\lambda_n^n \\mathbf{v}_n$$]@
 
-The dominant eigenvalue — the eigenvalue with the largest absolute value — determines the long-term growth rate. As $n \\to \\infty$, the term $c_i \\lambda_i^n \\mathbf{v}_i$ with the largest $|\\lambda_i|$ dominates all others.
+@academic[rule_plain:The dominant eigenvalue — the eigenvalue with the largest absolute value — determines the long-term growth rate.]@
+
+As $n \\to \\infty$, the term $c_i \\lambda_i^n \\mathbf{v}_i$ with the largest $|\\lambda_i|$ dominates all others.
 
 The [Fibonacci sequence](!/algebra/sequences/fibonacci) provides a classic application. The recurrence $F_{n+1} = F_n + F_{n-1}$ translates to $\\begin{pmatrix} F_{n+1} \\\\ F_n \\end{pmatrix} = \\begin{pmatrix} 1 & 1 \\\\ 1 & 0 \\end{pmatrix}^n \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}$. The matrix has eigenvalues $\\phi = \\frac{1 + \\sqrt{5}}{2}$ and $\\hat{\\phi} = \\frac{1 - \\sqrt{5}}{2}$. Diagonalization gives the Binet formula: $F_n = \\frac{\\phi^n - \\hat{\\phi}^n}{\\sqrt{5}}$, a closed-form expression for the $n$-th Fibonacci number.`,
     before: ``,
@@ -3274,7 +3276,9 @@ $$J_k(\\lambda) = \\begin{pmatrix} \\lambda & 1 & 0 & \\cdots & 0 \\\\ 0 & \\lam
 
 A $k \\times k$ Jordan block has the eigenvalue $\\lambda$ on the diagonal and ones on the superdiagonal. A diagonalizable eigenvalue contributes $1 \\times 1$ Jordan blocks. A defective eigenvalue contributes blocks larger than $1 \\times 1$.
 
-The Jordan form is unique up to the ordering of blocks and is the canonical representative of the similarity class. Powers and exponentials of Jordan blocks can still be computed explicitly, but the formulas involve polynomial correction terms ($t^k e^{\\lambda t}$ instead of just $e^{\\lambda t}$) reflecting the defective structure. The full Jordan theory belongs to advanced linear algebra.`,
+@academic[rule_theorem_plain:The Jordan form is unique up to the ordering of blocks and is the canonical representative of the similarity class.]@
+
+Powers and exponentials of Jordan blocks can still be computed explicitly, but the formulas involve polynomial correction terms ($t^k e^{\\lambda t}$ instead of just $e^{\\lambda t}$) reflecting the defective structure. The full Jordan theory belongs to advanced linear algebra.`,
     before: ``,
     after: ``,
     link: ``,

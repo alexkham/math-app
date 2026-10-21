@@ -2453,7 +2453,9 @@ $$\\theta \\neq \\frac{\\pi}{2} + n\\pi, \\quad n \\in \\mathbb{Z}$$]@
 
 The range, by contrast, is the entire real line $(-\\infty, \\infty)$. As $\\theta$ approaches an excluded value, $\\cos(\\theta)$ approaches zero while $\\sin(\\theta)$ approaches $\\pm 1$, driving the ratio toward $+\\infty$ or $-\\infty$. On the [graph](!/trigonometry/graphs), these excluded points correspond to vertical asymptotes.
 
-Tangent is periodic with period $\\pi$ — half the period of sine and cosine. This shorter period arises because $\\tan(\\theta + \\pi) = \\frac{\\sin(\\theta + \\pi)}{\\cos(\\theta + \\pi)} = \\frac{-\\sin\\theta}{-\\cos\\theta} = \\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta$. A half rotation negates both coordinates, but their ratio is unchanged.
+@academic[rule_plain:Tangent is periodic with period $\\pi$ — half the period of sine and cosine.]@
+
+This shorter period arises because $\\tan(\\theta + \\pi) = \\frac{\\sin(\\theta + \\pi)}{\\cos(\\theta + \\pi)} = \\frac{-\\sin\\theta}{-\\cos\\theta} = \\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta$. A half rotation negates both coordinates, but their ratio is unchanged.
 
 Tangent is an odd function: $\\tan(-\\theta) = -\\tan(\\theta)$. On the interval $\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$ — a single period — tangent is strictly increasing, running from $-\\infty$ to $+\\infty$. This is the interval used to define the [inverse tangent function](!/trigonometry/inverse-functions).`,
     before: ``,
@@ -2476,7 +2478,11 @@ The right-triangle definition holds for $0 < \\theta < \\frac{\\pi}{2}$. Extende
 
 It is defined wherever $\\sin(\\theta) \\neq 0$ — that is, for all $\\theta$ except integer multiples of $\\pi$: $\\theta \\neq n\\pi$, $n \\in \\mathbb{Z}$. At these excluded points (where the terminal side lies on the $x$-axis and $\\sin\\theta = 0$), cosecant is undefined, and the [graph](!/trigonometry/graphs) has vertical asymptotes.
 
-The range of cosecant is $(-\\infty, -1] \\cup [1, \\infty)$. Since $|\\sin\\theta| \\leq 1$, the reciprocal $|\\csc\\theta| = \\frac{1}{|\\sin\\theta|} \\geq 1$. Cosecant can never take a value between $-1$ and $1$. It equals $1$ when $\\sin\\theta = 1$ (at $\\theta = \\frac{\\pi}{2} + 2n\\pi$) and equals $-1$ when $\\sin\\theta = -1$ (at $\\theta = \\frac{3\\pi}{2} + 2n\\pi$).
+The range of cosecant is $(-\\infty, -1] \\cup [1, \\infty)$. Since $|\\sin\\theta| \\leq 1$, the reciprocal $|\\csc\\theta| = \\frac{1}{|\\sin\\theta|} \\geq 1$.
+
+@academic[rule_corollary_plain:Cosecant can never take a value between $-1$ and $1$.]@
+
+It equals $1$ when $\\sin\\theta = 1$ (at $\\theta = \\frac{\\pi}{2} + 2n\\pi$) and equals $-1$ when $\\sin\\theta = -1$ (at $\\theta = \\frac{3\\pi}{2} + 2n\\pi$).
 
 Cosecant is an odd function, inheriting this property from sine: $\\csc(-\\theta) = \\frac{1}{\\sin(-\\theta)} = \\frac{1}{-\\sin\\theta} = -\\csc\\theta$. Its period is $2\\pi$, the same as sine.
 
@@ -2626,7 +2632,9 @@ $$\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}$$
 @academic[formulas_link:Browse all trigonometry formulas
 /trigonometry/formulas]@
 
-Combining reciprocal and quotient relationships, any expression involving the six functions can be rewritten purely in terms of $\\sin\\theta$ and $\\cos\\theta$. For example, $\\sec\\theta\\tan\\theta = \\frac{1}{\\cos\\theta} \\cdot \\frac{\\sin\\theta}{\\cos\\theta} = \\frac{\\sin\\theta}{\\cos^2\\theta}$. This conversion strategy — "write everything in sine and cosine" — is one of the most reliable first steps when simplifying trigonometric expressions or proving [identities](!/trigonometry/identities).
+@academic[rule_corollary_plain:Combining reciprocal and quotient relationships, any expression involving the six functions can be rewritten purely in terms of $\\sin\\theta$ and $\\cos\\theta$.]@
+
+For example, $\\sec\\theta\\tan\\theta = \\frac{1}{\\cos\\theta} \\cdot \\frac{\\sin\\theta}{\\cos\\theta} = \\frac{\\sin\\theta}{\\cos^2\\theta}$. This conversion strategy — "write everything in sine and cosine" — is one of the most reliable first steps when simplifying trigonometric expressions or proving [identities](!/trigonometry/identities).
 
 The relationships also imply that the six functions naturally pair off. Sine and cosecant are reciprocals. Cosine and secant are reciprocals. Tangent and cotangent are reciprocals. Within each pair, the product is always 1:
 

@@ -1622,7 +1622,9 @@ notation: {
 
 Consider $z = 5 + 3i$. The real part equals $5$, and the imaginary part equals $3$. Not $3i$ — just $3$. The coefficient standing before $i$ is what we extract and label as the imaginary part. When asked for $Im(z)$, the correct response is the real number $3$, stripped of its accompanying $i$. The imaginary unit indicates where the value lives within the complex structure; it does not become part of the value itself.
 
-Notation formalizes this distinction. For any complex number $z = a + bi$, we write $Re(z) = a$ for the real part and $Im(z) = b$ for the imaginary part. Both $Re(z)$ and $Im(z)$ produce real number outputs — they extract coordinates from the complex number, much like obtaining the $x$ and $y$ values from a point in the plane.
+Notation formalizes this distinction. For any complex number $z = a + bi$, we write $Re(z) = a$ for the real part and $Im(z) = b$ for the imaginary part.
+
+@academic[rule_plain:Both $Re(z)$ and $Im(z)$ produce real number outputs — they extract coordinates from the complex number, much like obtaining the $x$ and $y$ values from a point in the plane.]@
 
 The confusion intensifies with negative imaginary parts. Given $z = 2 - 7i$, students often struggle with whether the imaginary part is $-7$ or $7$. Writing the number in strict standard form as $z = 2 + (-7)i$ clarifies the situation: the coefficient multiplying $i$ is $-7$, so $Im(z) = -7$. The sign belongs to the imaginary part, not to the $i$.
 

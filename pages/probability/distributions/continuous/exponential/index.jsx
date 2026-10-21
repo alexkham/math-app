@@ -1511,7 +1511,7 @@ $$\\mathrm{Var}(X) = \\frac{2}{\\lambda^2} - \\left(\\frac{1}{\\lambda}\\right)^
 
 The result $\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$ shows that variance decreases rapidly as the rate increases. When events occur frequently (large $\\lambda$), waiting times are consistently short with little variability. When events are rare (small $\\lambda$), waiting times become both long and highly variable. The quadratic relationship means doubling the rate reduces variance by a factor of four.
 
-Notably, for the exponential distribution, the standard deviation equals the mean—a unique property that doesn't hold for most distributions.
+@academic[rule_corollary_plain:Notably, for the exponential distribution, the standard deviation equals the mean—a unique property that doesn't hold for most distributions.]@
 
 ### Standard Deviation
 

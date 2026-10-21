@@ -239,7 +239,7 @@ The base $a$ can be any real number — positive, negative, or zero. The exponen
 
 Concrete examples anchor the definition. $2^4 = 2 \\cdot 2 \\cdot 2 \\cdot 2 = 16$. $5^3 = 5 \\cdot 5 \\cdot 5 = 125$. $(-3)^2 = (-3)(-3) = 9$. $(-3)^3 = (-3)(-3)(-3) = -27$.
 
-Two special cases follow immediately. When $n = 1$, there is only one copy of the base: $a^1 = a$ for any $a$. When the base is $1$, repeated multiplication changes nothing: $1^n = 1$ for any $n$.
+@academic[rule_corollary_plain:Two special cases follow immediately. When $n = 1$, there is only one copy of the base: $a^1 = a$ for any $a$. When the base is $1$, repeated multiplication changes nothing: $1^n = 1$ for any $n$.]@
 
 A note on convention: whether the natural numbers include $0$ varies by source. In this section, natural exponents start at $n = 1$. The case $a^0$ arises naturally from the quotient rule and is addressed on the [negative exponents](!/algebra/powers/negative-exponents) page, where the extension below $n = 1$ is developed.`,
   before: ``,
@@ -296,7 +296,9 @@ A note on convention: whether the natural numbers include $0$ varies by source. 
   title: `Sign Behavior`,
   content: `The sign of $a^n$ depends on the sign of the base and on whether the exponent is even or odd.
 
-A positive base always produces a positive result, regardless of the exponent. $3^2 = 9$, $3^5 = 243$, $3^{100}$ is positive — no power of a positive number can be negative.
+@academic[rule_plain:A positive base always produces a positive result, regardless of the exponent.]@
+
+$3^2 = 9$, $3^5 = 243$, $3^{100}$ is positive — no power of a positive number can be negative.
 
 A negative base alternates. When $n$ is even, the negative signs pair off and cancel: $(-2)^4 = (-2)(-2)(-2)(-2) = 16$. When $n$ is odd, one negative sign remains unpaired: $(-2)^5 = (-2)(-2)(-2)(-2)(-2) = -32$. The rule is clean — even exponent yields positive, odd exponent yields negative.
 

@@ -3027,6 +3027,8 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -3521,14 +3523,16 @@ $$\\text{Col}(A) = \\{A\\mathbf{x} : \\mathbf{x} \\in \\mathbb{R}^n\\} = \\text{
 
 It is the set of all possible outputs of the [linear transformation](!/linear-algebra/transformations) $\\mathbf{x} \\mapsto A\\mathbf{x}$, and it lives in $\\mathbb{R}^m$. Its dimension is $r = \\text{rank}(A)$.
 
-The column space answers the solvability question: $A\\mathbf{x} = \\mathbf{b}$ has a solution if and only if $\\mathbf{b} \\in \\text{Col}(A)$. Vectors outside the column space are unreachable — no input $\\mathbf{x}$ can produce them.
+@academic[rule_theorem_plain:The column space answers the solvability question: $A\\mathbf{x} = \\mathbf{b}$ has a solution if and only if $\\mathbf{b} \\in \\text{Col}(A)$.]@
+
+Vectors outside the column space are unreachable — no input $\\mathbf{x}$ can produce them.
 
 To find a [basis](!/linear-algebra/vector-spaces) for the column space, row reduce $A$ and identify the pivot columns. The corresponding columns of the original matrix $A$ form the basis. The echelon form identifies which columns are [independent](!/linear-algebra/vector-spaces/linear-independence), but the original columns are the actual vectors in $\\mathbb{R}^m$ that span the column space.
 
 ## Worked Example
 
 @academic[formula_callout:The Column Space
-$$A = \\begin{pmatrix} 1 & 3 & 2 & -1 \\\\ 2 & 6 & 5 & 0 \\\\ -1 & -3 & 0 & 3 \\end{pmatrix}$$]@
+$$A = \\begin{pmatrix} 1 & 3 & 2 & -1 \\\\ 2 & 6 & 5 & -1 \\\\ -1 & -3 & 0 & 3 \\end{pmatrix}$$]@
 
 Row reduction gives pivots in columns $1$ and $3$. The column space basis consists of the first and third columns of the original $A$:
 
@@ -3569,7 +3573,11 @@ $$\\text{Null}(A) = \\{\\mathbf{x} \\in \\mathbb{R}^n : A\\mathbf{x} = \\mathbf{
 
 It lives in $\\mathbb{R}^n$ and has dimension $n - r$, where $r$ is the rank. This dimension is the nullity, and the identity $r + (n - r) = n$ is the [rank-nullity theorem](!/linear-algebra/matrix/rank).
 
-The null space measures the failure of injectivity. If $\\text{Null}(A) = \\{\\mathbf{0}\\}$, the map is injective — different inputs produce different outputs. If the null space is nontrivial, the map collapses some directions to zero, and distinct inputs can produce the same output: if $A\\mathbf{x}_1 = A\\mathbf{x}_2$, then $\\mathbf{x}_1 - \\mathbf{x}_2 \\in \\text{Null}(A)$.
+The null space measures the failure of injectivity.
+
+@academic[rule_plain:If $\\text{Null}(A) = \\{\\mathbf{0}\\}$, the map is injective — different inputs produce different outputs.]@
+
+If the null space is nontrivial, the map collapses some directions to zero, and distinct inputs can produce the same output: if $A\\mathbf{x}_1 = A\\mathbf{x}_2$, then $\\mathbf{x}_1 - \\mathbf{x}_2 \\in \\text{Null}(A)$.
 
 To find a basis, reduce $A$ to [RREF](!/linear-algebra/linear-systems/echelon-form) and identify the free variables. Each free variable is set to $1$ (with the others at $0$), and the corresponding solution is one basis vector for the null space.
 
@@ -3591,7 +3599,11 @@ Equivalently, it consists of all vectors $\\mathbf{y}$ satisfying $\\mathbf{y}^T
 
 It lives in $\\mathbb{R}^m$ and has dimension $m - r$.
 
-The left null space measures the failure of surjectivity. If $\\text{Null}(A^T) = \\{\\mathbf{0}\\}$, the column space is all of $\\mathbb{R}^m$ and $A\\mathbf{x} = \\mathbf{b}$ has a solution for every $\\mathbf{b}$. If the left null space is nontrivial, there are directions in $\\mathbb{R}^m$ that the column space misses.
+The left null space measures the failure of surjectivity.
+
+@academic[rule_plain:If $\\text{Null}(A^T) = \\{\\mathbf{0}\\}$, the column space is all of $\\mathbb{R}^m$ and $A\\mathbf{x} = \\mathbf{b}$ has a solution for every $\\mathbf{b}$.]@
+
+If the left null space is nontrivial, there are directions in $\\mathbb{R}^m$ that the column space misses.
 
 To find a basis, solve $A^T\\mathbf{y} = \\mathbf{0}$ by row reducing $A^T$. Alternatively, row reduce $[A^T \\mid I_m]$ — the identity block tracks the row operations, and the bottom portion of the result reveals the left null space.
 
@@ -3634,7 +3646,9 @@ For the running example ($3 \\times 4$ matrix, rank $2$): the row space and null
     title: `Orthogonal Complements`,
     content: `The four subspaces pair off into [orthogonal](!/linear-algebra/orthogonality) complements.
 
-In $\\mathbb{R}^n$, the row space and the null space are orthogonal complements. Every vector in the null space is perpendicular to every row of $A$, because $A\\mathbf{x} = \\mathbf{0}$ means the [dot product](!/linear-algebra/vectors/dot-product) of $\\mathbf{x}$ with each row is zero. Every vector in $\\mathbb{R}^n$ decomposes uniquely as the sum of a row-space component and a null-space component, and these two components are perpendicular.
+@academic[rule_theorem_plain:In $\\mathbb{R}^n$, the row space and the null space are orthogonal complements.]@
+
+Every vector in the null space is perpendicular to every row of $A$, because $A\\mathbf{x} = \\mathbf{0}$ means the [dot product](!/linear-algebra/vectors/dot-product) of $\\mathbf{x}$ with each row is zero. Every vector in $\\mathbb{R}^n$ decomposes uniquely as the sum of a row-space component and a null-space component, and these two components are perpendicular.
 
 In $\\mathbb{R}^m$, the column space and the left null space are orthogonal complements. Every vector in $\\text{Null}(A^T)$ is perpendicular to every column of $A$ (since $A^T\\mathbf{y} = \\mathbf{0}$ means $\\mathbf{y}$ dots to zero with each column). Every vector in $\\mathbb{R}^m$ decomposes uniquely as a column-space component plus a left-null-space component.
 
@@ -3647,7 +3661,9 @@ These orthogonality relationships are not incidental — they are the structural
     title: `The Big Picture`,
     content: `The four fundamental subspaces can be arranged in a single diagram with the domain $\\mathbb{R}^n$ on one side and the codomain $\\mathbb{R}^m$ on the other.
 
-The matrix $A$ maps the row space onto the column space. This restriction is a bijection — every vector in the row space has a unique image in the column space, and every vector in the column space comes from exactly one row-space vector. The rank $r$ is the dimension of both spaces, and this bijection is the "useful part" of the map.
+@academic[rule_theorem_plain:The matrix $A$ maps the row space onto the column space. This restriction is a bijection — every vector in the row space has a unique image in the column space, and every vector in the column space comes from exactly one row-space vector.]@
+
+The rank $r$ is the dimension of both spaces, and this bijection is the "useful part" of the map.
 
 The matrix $A$ sends the entire null space to $\\mathbf{0}$. These are the directions that the map annihilates — the information that is lost.
 
@@ -3829,8 +3845,29 @@ const schemas = {
     }),
   };
 
+  const fundamentalSpacesTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Four subspaces from one matrix',
+    preface: 'Every $m \\times n$ matrix $A$ of rank $r$ carries four subspaces: two live in $\\mathbb{R}^n$, two in $\\mathbb{R}^m$.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'They come in complementary pairs',
+    conclusion: 'The row space and the null space of $A$ complete each other in $\\mathbb{R}^n$; the column space and the null space of $A^T$ complete each other in $\\mathbb{R}^m$.',
+    root: { name: 'The four fundamental subspaces', sub: 'of an m × n matrix of rank r' },
+    children: [
+      { id: 'col', name: 'Column space', symbol: '$\\operatorname{Col}(A)$', items: [
+        { label: 'Lives in', text: '$\\mathbb{R}^m$' }, { label: 'Dimension', text: '$r$' } ] },
+      { id: 'row', name: 'Row space', symbol: '$\\operatorname{Row}(A)$', items: [
+        { label: 'Lives in', text: '$\\mathbb{R}^n$' }, { label: 'Dimension', text: '$r$' } ] },
+      { id: 'null', name: 'Null space', symbol: '$\\operatorname{Null}(A)$', items: [
+        { label: 'Lives in', text: '$\\mathbb{R}^n$' }, { label: 'Dimension', text: '$n - r$' } ] },
+      { id: 'lnull', name: 'Left null space', symbol: '$\\operatorname{Null}(A^T)$', items: [
+        { label: 'Lives in', text: '$\\mathbb{R}^m$' }, { label: 'Dimension', text: '$m - r$' } ] },
+    ],
+  };
+
 return {
   props:{
+    fundamentalSpacesTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -3850,7 +3887,7 @@ return {
 }
    }
 
-export default function FundamentalSubspacesPage({seoData, sectionsContent, introContent, obj7Table, subspacesByType, fourSubspaceCard, faqQuestions, schemas, demoUnits}) {
+export default function FundamentalSubspacesPage({fundamentalSpacesTree, seoData, sectionsContent, introContent, obj7Table, subspacesByType, fourSubspaceCard, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3861,6 +3898,14 @@ export default function FundamentalSubspacesPage({seoData, sectionsContent, intr
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <DiagramFrameV2
+            key={'obj1-diagram'}
+            id="fundamental-subspaces-tree"
+            title="The four fundamental subspaces"
+            source="/linear-algebra/vector-spaces/fundamental-spaces"
+          >
+            <TopDownTree data={fundamentalSpacesTree} />
+          </DiagramFrameV2>,
         ]
     },
     {

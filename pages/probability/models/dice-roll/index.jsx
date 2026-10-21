@@ -1025,7 +1025,9 @@ This richer event structure is one of the main differences between the dice roll
       content:`
 To complete the dice roll model, a probability is assigned to each outcome in the outcome space.
 
-Each outcome receives a non-negative number, and the total probability across all outcomes is equal to 1. These probabilities are part of the model definition and must be specified explicitly.
+@academic[rule_axiom_plain:Each outcome receives a non-negative number, and the total probability across all outcomes is equal to 1.]@
+
+These probabilities are part of the model definition and must be specified explicitly.
 
 In many introductory settings, all outcomes are assigned the same probability, producing a symmetric or "fair" model. This symmetry, however, is an assumption rather than a requirement. Unequal probabilities lead to a different, but equally valid, dice roll model.
 

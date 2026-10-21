@@ -584,7 +584,9 @@ Direct substitution gives $0/0$. This limit defines the derivative of $e^x$ at $
 @academic[formula_callout:The Natural Exponential Limit
 $$\\frac{d}{dx} e^x \\bigg|_{x=0} = \\lim_{h \\to 0} \\frac{e^{0+h} - e^0}{h} = \\lim_{h \\to 0} \\frac{e^h - 1}{h} = 1$$]@
 
-The exponential function is the unique function satisfying $f'(x) = f(x)$ with $f(0) = 1$. This limit is the cornerstone of that property.
+@academic[rule_theorem_plain:The exponential function is the unique function satisfying $f'(x) = f(x)$ with $f(0) = 1$.]@
+
+This limit is the cornerstone of that property.
 
 An equivalent form:
 

@@ -8838,7 +8838,7 @@ The matrix $\\Sigma^+$ is formed by reciprocating each nonzero singular value an
 
 The pseudoinverse satisfies four defining properties: $AA^+A = A$, $A^+AA^+ = A^+$, $(AA^+)^T = AA^+$, $(A^+A)^T = A^+A$.
 
-For a full-rank overdetermined system ($m > n$, rank $= n$), $A^+\\mathbf{b}$ gives the [least-squares](!/linear-algebra/orthogonality/least-squares) solution. For a rank-deficient system, $A^+\\mathbf{b}$ gives the minimum-norm least-squares solution — the solution of smallest length among all minimizers of $\\|A\\mathbf{x} - \\mathbf{b}\\|$.`,
+@academic[rule_theorem_plain:For a full-rank overdetermined system ($m > n$, rank $= n$), $A^+\\mathbf{b}$ gives the [least-squares](!/linear-algebra/orthogonality/least-squares) solution. For a rank-deficient system, $A^+\\mathbf{b}$ gives the minimum-norm least-squares solution — the solution of smallest length among all minimizers of $\\|A\\mathbf{x} - \\mathbf{b}\\|$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -8850,7 +8850,12 @@ For a full-rank overdetermined system ($m > n$, rank $= n$), $A^+\\mathbf{b}$ gi
 @academic[formula_callout:eckart_young_low_rank_approximation|Eckart-Young Low-Rank Approximation|$$A_k = \\sum_{i=1}^{k} \\sigma_i \\mathbf{u}_i \\mathbf{v}_i^T, \\qquad \\|A - A_k\\|_2 = \\sigma_{k+1}, \\quad \\|A - A_k\\|_F = \\sqrt{\\sum_{i=k+1}^{r}\\sigma_i^2}$$]@
 @academic[formulas_link:/linear-algebra/formulas#eckart-young_low-rank_approximation]@
 
-This is the Eckart-Young-Mirsky theorem. Among all matrices of rank at most $k$, $A_k$ is the closest to $A$. The approximation error equals $\\sigma_{k+1}$ (the first discarded singular value) in the operator norm, and $\\sqrt{\\sigma_{k+1}^2 + \\cdots + \\sigma_r^2}$ in the Frobenius norm.
+This is the Eckart-Young-Mirsky theorem.
+
+@academic[rule_theorem:Eckart–Young–Mirsky theorem
+Among all matrices of rank at most $k$, $A_k$ is the closest to $A$.]@
+
+The approximation error equals $\\sigma_{k+1}$ (the first discarded singular value) in the operator norm, and $\\sqrt{\\sigma_{k+1}^2 + \\cdots + \\sigma_r^2}$ in the Frobenius norm.
 
 When the singular values decay rapidly — $\\sigma_1 \\gg \\sigma_2 \\gg \\cdots$ — a small number of terms captures most of the matrix. This is the basis of image compression (store $k$ singular value triples instead of $mn$ entries), noise reduction (discard small singular values as noise), latent semantic analysis (retain the top-$k$ "concepts" in a document-term matrix), and dimensionality reduction more broadly.`,
     before: ``,
@@ -8889,7 +8894,9 @@ The singular values are the natural measuring tool for matrices, just as eigenva
   },
   obj10: {
     title: `SVD and the Spectral Decomposition`,
-    content: `For a symmetric positive semi-definite matrix $A$ with eigenvalues $\\lambda_1 \\geq \\cdots \\geq \\lambda_n \\geq 0$, the [spectral decomposition](!/linear-algebra/decompositions/spectral) $A = QDQ^T$ is also the SVD: $U = V = Q$ and $\\Sigma = D$. The singular values are the eigenvalues.
+    content: `@academic[rule_corollary_plain:For a symmetric positive semi-definite matrix $A$ with eigenvalues $\\lambda_1 \\geq \\cdots \\geq \\lambda_n \\geq 0$, the [spectral decomposition](!/linear-algebra/decompositions/spectral) $A = QDQ^T$ is also the SVD: $U = V = Q$ and $\\Sigma = D$.]@
+
+The singular values are the eigenvalues.
 
 For a general symmetric matrix with some negative eigenvalues, the singular values are $|\\lambda_i|$. The signs are absorbed into $U$ or $V$: if $\\lambda_i < 0$, one of the corresponding singular vectors is negated so that $\\sigma_i = |\\lambda_i| > 0$.
 

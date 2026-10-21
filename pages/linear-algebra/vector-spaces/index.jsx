@@ -992,6 +992,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
+import Hierarchy from '@/app/components/infographics/Hierarchy'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1231,14 +1233,18 @@ Checking a candidate set means testing each rule. Most failures happen at closur
     title: `Subspaces`,
     content: `A [subspace](!/linear-algebra/vector-spaces/subspaces) is a subset of a vector space that is a vector space in its own right, using the same operations. Commutativity, associativity and the distributive laws are inherited from the larger space, so only three things need checking: the subset contains the zero vector, it is closed under addition, and it is closed under scalar multiplication.
 
-In $\\mathbb{R}^3$ the subspaces are exactly four kinds of sets: the origin alone, lines through the origin, planes through the origin, and $\\mathbb{R}^3$ itself. A plane that misses the origin, such as $z = 1$, fails the first test. The solution set of a homogeneous system $A\\mathbf{x} = \\mathbf{0}$ is always a subspace, while the solution set of $A\\mathbf{x} = \\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$ never is.`,
+In $\\mathbb{R}^3$ the subspaces are exactly four kinds of sets: the origin alone, lines through the origin, planes through the origin, and $\\mathbb{R}^3$ itself. A plane that misses the origin, such as $z = 1$, fails the first test.
+
+@academic[rule_theorem_plain:The solution set of a homogeneous system $A\\mathbf{x} = \\mathbf{0}$ is always a subspace, while the solution set of $A\\mathbf{x} = \\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$ never is.]@`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj4: {
     title: `Span`,
-    content: `The [span](!/linear-algebra/vector-spaces/span) of a set of vectors is the collection of all their linear combinations $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$. The span is always a subspace, and it is the smallest subspace that contains the given vectors.
+    content: `The [span](!/linear-algebra/vector-spaces/span) of a set of vectors is the collection of all their linear combinations $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$.
+
+@academic[rule_theorem_plain:The span is always a subspace, and it is the smallest subspace that contains the given vectors.]@
 
 Span answers a reachability question: which vectors can be built from the ones you have? In $\\mathbb{R}^3$, one nonzero vector spans a line, two vectors that are not multiples of each other span a plane, and three vectors span all of $\\mathbb{R}^3$ only when none of them lies in the plane of the other two. Testing whether a vector $\\mathbf{b}$ is in the span of the columns of a matrix $A$ is the same as asking whether $A\\mathbf{x} = \\mathbf{b}$ has a solution.`,
     before: ``,
@@ -1249,7 +1255,9 @@ Span answers a reachability question: which vectors can be built from the ones y
     title: `Linear Independence`,
     content: `A set of vectors is [linearly independent](!/linear-algebra/vector-spaces/linear-independence) when the only way to combine them into the zero vector is with all coefficients zero: $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ forces $c_1 = \\cdots = c_k = 0$. If some other combination works, the set is dependent, and at least one vector can be written using the others.
 
-Independence measures redundancy. The vectors $(1, 0)$, $(0, 1)$ and $(1, 1)$ span $\\mathbb{R}^2$, but they are dependent, since $(1, 1) = (1, 0) + (0, 1)$; dropping any one of them leaves the span unchanged. To test vectors in $\\mathbb{R}^n$, place them as the columns of a matrix and row reduce: they are independent exactly when every column has a pivot. More than $n$ vectors in $\\mathbb{R}^n$ are always dependent.`,
+Independence measures redundancy. The vectors $(1, 0)$, $(0, 1)$ and $(1, 1)$ span $\\mathbb{R}^2$, but they are dependent, since $(1, 1) = (1, 0) + (0, 1)$; dropping any one of them leaves the span unchanged. To test vectors in $\\mathbb{R}^n$, place them as the columns of a matrix and row reduce: they are independent exactly when every column has a pivot.
+
+@academic[rule_corollary_plain:More than $n$ vectors in $\\mathbb{R}^n$ are always dependent.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1258,7 +1266,11 @@ Independence measures redundancy. The vectors $(1, 0)$, $(0, 1)$ and $(1, 1)$ sp
     title: `Basis`,
     content: `A [basis](!/linear-algebra/vector-spaces/basis) is a set of vectors that is linearly independent and spans the whole space. Spanning guarantees that every vector can be built; independence guarantees that there is only one way to build it. Together they give each vector a unique list of coefficients, its coordinates relative to that basis.
 
-The standard basis of $\\mathbb{R}^3$ is $\\mathbf{e}_1 = (1, 0, 0)$, $\\mathbf{e}_2 = (0, 1, 0)$, $\\mathbf{e}_3 = (0, 0, 1)$, but it is not the only one: $(1, 1, 0)$, $(0, 1, 1)$, $(1, 0, 1)$ is another basis. Every basis of a given space has the same number of vectors. A basis can be found from a spanning set by removing dependent vectors, or built from an independent set by adding vectors until the span is complete.`,
+The standard basis of $\\mathbb{R}^3$ is $\\mathbf{e}_1 = (1, 0, 0)$, $\\mathbf{e}_2 = (0, 1, 0)$, $\\mathbf{e}_3 = (0, 0, 1)$, but it is not the only one: $(1, 1, 0)$, $(0, 1, 1)$, $(1, 0, 1)$ is another basis.
+
+@academic[rule_theorem_plain:Every basis of a given space has the same number of vectors.]@
+
+A basis can be found from a spanning set by removing dependent vectors, or built from an independent set by adding vectors until the span is complete.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1267,7 +1279,11 @@ The standard basis of $\\mathbb{R}^3$ is $\\mathbf{e}_1 = (1, 0, 0)$, $\\mathbf{
     title: `Dimension`,
     content: `The [dimension](!/linear-algebra/vector-spaces/dimension) of a vector space is the number of vectors in any of its bases. It is well defined because all bases of the same space have the same size. $\\mathbb{R}^n$ has dimension $n$, the polynomials of degree at most $2$ have dimension $3$ (basis $1, x, x^2$), and the $2 \\times 2$ matrices have dimension $4$.
 
-Dimension turns many questions into counting. In a space of dimension $n$, any $n$ independent vectors automatically span, and any $n$ spanning vectors are automatically independent, so only one of the two conditions has to be checked. A subspace never has a larger dimension than the space that contains it, and it is the whole space when the dimensions match. Some spaces, such as the space of all polynomials, have no finite basis and are called infinite-dimensional.`,
+Dimension turns many questions into counting.
+
+@academic[rule_theorem_plain:In a space of dimension $n$, any $n$ independent vectors automatically span, and any $n$ spanning vectors are automatically independent, so only one of the two conditions has to be checked.]@
+
+A subspace never has a larger dimension than the space that contains it, and it is the whole space when the dimensions match. Some spaces, such as the space of all polynomials, have no finite basis and are called infinite-dimensional.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1292,7 +1308,11 @@ Moving between two bases takes a single invertible matrix, the change-of-basis m
   },
   obj10: {
     title: `Isomorphism: Why Every Space Looks Like Rⁿ`,
-    content: `Choosing a basis turns an abstract vector space into lists of numbers. The map that sends each vector to its coordinate vector is linear, one-to-one and onto, so it is an isomorphism. As a result, every real vector space of dimension $n$ behaves exactly like $\\mathbb{R}^n$.
+    content: `Choosing a basis turns an abstract vector space into lists of numbers.
+
+@academic[rule_theorem_plain:The map that sends each vector to its coordinate vector is linear, one-to-one and onto, so it is an isomorphism.]@
+
+As a result, every real vector space of dimension $n$ behaves exactly like $\\mathbb{R}^n$.
 
 For example, the polynomial $3 - x + 2x^2$ corresponds to the column $(3, -1, 2)$ in the basis $1, x, x^2$. Adding polynomials matches adding these columns, and scaling a polynomial matches scaling its column. Questions about polynomials, matrices or any other finite-dimensional space can therefore be answered with matrix methods in $\\mathbb{R}^n$.`,
     before: ``,
@@ -1420,8 +1440,28 @@ const schemas = {
     }),
   };
 
+  const vectorSpaceChainLevels = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Each idea builds on the one below',
+    preface: 'The topics of this section form one chain. Read the pyramid from the base up: each level needs the ones beneath it.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Where the chain leads',
+    conclusion: 'Coordinates and isomorphism reduce every finite-dimensional space to $\\mathbb{R}^n$, where matrices do the computing. At the top, the four fundamental subspaces describe what a single matrix does to the spaces it acts on.',
+    axis: { top: 'builds on the rest', label: 'dependence', bottom: 'foundation' },
+    levels: [
+      { id: 'fund', name: '[Four subspaces](!/linear-algebra/vector-spaces/fundamental-spaces)' },
+      { id: 'coord', name: 'Coordinates', sub: 'and isomorphism' },
+      { id: 'dim', name: '[Dimension](!/linear-algebra/vector-spaces/dimension)', sub: 'size of a basis' },
+      { id: 'basis', name: '[Basis](!/linear-algebra/vector-spaces/basis)', sub: 'spans and is independent at once' },
+      { id: 'span', name: '[Span](!/linear-algebra/vector-spaces/span) and [independence](!/linear-algebra/vector-spaces/linear-independence)', sub: 'what vectors reach, and what is redundant' },
+      { id: 'sub', name: '[Subspaces](!/linear-algebra/vector-spaces/subspaces)', sub: 'vector spaces inside a larger one' },
+      { id: 'axioms', name: '[Axioms](!/linear-algebra/vector-spaces/axioms)', sub: 'what a vector space is' },
+    ],
+  };
+
 return {
   props:{
+    vectorSpaceChainLevels,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1441,7 +1481,9 @@ return {
 }
    }
 
-export default function VectorSpacesPage({seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, schemas, demoUnits}) {
+const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+
+export default function VectorSpacesPage({vectorSpaceChainLevels, seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1540,6 +1582,14 @@ export default function VectorSpacesPage({seoData, sectionsContent, introContent
         link:sectionsContent.obj12.link,
         content:[
         sectionsContent.obj12.content,
+        <DiagramFrame
+          key={'obj12-diagram'}
+          id="vector-space-ideas-pyramid"
+          title="How the vector-space ideas build on each other"
+          source="/linear-algebra/vector-spaces"
+        >
+          <Hierarchy data={vectorSpaceChainLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+        </DiagramFrame>,
       ]
     },
     {

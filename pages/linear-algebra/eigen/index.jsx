@@ -752,7 +752,9 @@ The requirement that $\\mathbf{v} \\neq \\mathbf{0}$ is essential. The zero vect
 
 The eigenvalue $\\lambda$ can be any real number, including zero. When $\\lambda = 0$, the equation $A\\mathbf{v} = \\mathbf{0}$ says that $\\mathbf{v}$ is in the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ — the transformation annihilates that direction entirely.
 
-Only square matrices have eigenvalues. The equation $A\\mathbf{v} = \\lambda\\mathbf{v}$ requires $A\\mathbf{v}$ and $\\lambda\\mathbf{v}$ to live in the same space, which demands that $A$ maps $\\mathbb{R}^n$ to $\\mathbb{R}^n$.`,
+@academic[rule_plain:Only square matrices have eigenvalues.]@
+
+The equation $A\\mathbf{v} = \\lambda\\mathbf{v}$ requires $A\\mathbf{v}$ and $\\lambda\\mathbf{v}$ to live in the same space, which demands that $A$ maps $\\mathbb{R}^n$ to $\\mathbb{R}^n$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -789,7 +791,9 @@ $$E_\\lambda = \\text{Null}(A - \\lambda I)$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The eigenspace is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$. It contains the zero vector and is closed under addition and scalar multiplication — any linear combination of eigenvectors for the same eigenvalue is again an eigenvector for that eigenvalue (or the zero vector).
+@academic[rule_theorem_plain:The eigenspace is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$.]@
+
+It contains the zero vector and is closed under addition and scalar multiplication — any linear combination of eigenvectors for the same eigenvalue is again an eigenvector for that eigenvalue (or the zero vector).
 
 The [dimension](!/linear-algebra/vector-spaces/dimension) of the eigenspace is called the geometric multiplicity of $\\lambda$. Finding a [basis](!/linear-algebra/vector-spaces) for the eigenspace is a standard null-space computation: row reduce $A - \\lambda I$ and extract the general solution in parametric form. Each free variable contributes one basis vector to the eigenspace.`,
     before: ``,

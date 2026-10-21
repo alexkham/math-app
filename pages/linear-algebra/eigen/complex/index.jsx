@@ -2030,7 +2030,7 @@ This eigenvector splits into real and imaginary parts: $\\mathbf{v} = \\underbra
 
 where $r = \\sqrt{a^2 + b^2}$ and $\\theta = \\arctan(b/a)$. This is a rotation by $\\theta$ scaled by $r$.
 
-The similarity is achieved by the real matrix $P = [\\mathbf{u} \\; \\mathbf{w}]$, where $\\mathbf{v} = \\mathbf{u} + i\\mathbf{w}$ is the complex eigenvector. Then $P^{-1}AP = \\begin{pmatrix} a & -b \\\\ b & a \\end{pmatrix}$.
+The similarity is achieved by the real matrix $P = [\\mathbf{w} \\; \\mathbf{u}]$ — imaginary part first, then real part — where $\\mathbf{v} = \\mathbf{u} + i\\mathbf{w}$ is the complex eigenvector for $\\lambda = a + bi$. Then $P^{-1}AP = \\begin{pmatrix} a & -b \\\\ b & a \\end{pmatrix}$.
 
 This is the real alternative to diagonalization: instead of a diagonal matrix with complex entries (which is valid over $\\mathbb{C}$ but not over $\\mathbb{R}$), we get a real $2 \\times 2$ rotation-scaling block. The transformation is expressed in its simplest real form.`,
     before: ``,
@@ -2064,14 +2064,17 @@ In the discrete system $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$, an eigenvalue $\\la
 
 In the continuous system $\\mathbf{x}' = A\\mathbf{x}$, an eigenvalue $\\lambda = a + bi$ contributes a term $e^{at}(\\cos bt, \\sin bt)$ to the solution. The real part $a$ determines exponential growth ($a > 0$) or decay ($a < 0$). The imaginary part $b$ determines the oscillation frequency. When $a = 0$, the oscillation is sustained. When $a < 0$, it is damped. When $a > 0$, it grows without bound.
 
-Stability of a linear system reduces to eigenvalue analysis: the system is stable if and only if every eigenvalue has negative real part (continuous) or modulus less than $1$ (discrete).`,
+@academic[rule_theorem_plain:Stability of a linear system reduces to eigenvalue analysis: the system is stable if and only if every eigenvalue has negative real part (continuous) or modulus less than $1$ (discrete).]@`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj8: {
     title: `The Fundamental Theorem of Algebra Connection`,
-    content: `Over $\\mathbb{C}$, every polynomial of degree $n$ factors completely into $n$ linear factors. This means every $n \\times n$ matrix — real or complex — has exactly $n$ eigenvalues counted with algebraic multiplicity when the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation) is factored over $\\mathbb{C}$.
+    content: `@academic[rule_theorem:Fundamental Theorem of Algebra
+Over $\\mathbb{C}$, every polynomial of degree $n$ factors completely into $n$ linear factors.]@
+
+This means every $n \\times n$ matrix — real or complex — has exactly $n$ eigenvalues counted with algebraic multiplicity when the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation) is factored over $\\mathbb{C}$.
 
 Over $\\mathbb{R}$, some factors may be irreducible quadratics rather than linear, corresponding to conjugate pairs of complex eigenvalues. The characteristic polynomial of a real matrix factors into linear terms (real eigenvalues) and irreducible quadratic terms (complex conjugate pairs).
 

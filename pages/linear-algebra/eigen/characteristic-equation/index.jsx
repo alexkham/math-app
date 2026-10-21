@@ -1248,7 +1248,9 @@ It is a polynomial of degree $n$ in the variable $\\lambda$.
 
 For an $n \\times n$ matrix, $p(\\lambda)$ has degree $n$ with leading term $(-1)^n \\lambda^n$. The constant term is $p(0) = \\det(A)$ — the determinant of the matrix itself. The coefficient of $\\lambda^{n-1}$ is $(-1)^{n-1}\\text{tr}(A)$, connecting the next-to-leading term to the [trace](!/linear-algebra/matrix/trace).
 
-The eigenvalues are precisely the roots of $p(\\lambda) = 0$. Every root is an eigenvalue, and every eigenvalue is a root. The characteristic polynomial packages the entire eigenvalue structure of the matrix into a single algebraic expression.`,
+@academic[rule_theorem_plain:The eigenvalues are precisely the roots of $p(\\lambda) = 0$.]@
+
+Every root is an eigenvalue, and every eigenvalue is a root. The characteristic polynomial packages the entire eigenvalue structure of the matrix into a single algebraic expression.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1295,7 +1297,9 @@ For $A = \\begin{pmatrix} 2 & 1 & 0 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & 1 \\end{pmatrix}
 @academic[formula_callout:Computing the Characteristic Polynomial: 3×3
 $$p(\\lambda) = (2 - \\lambda)(3 - \\lambda)(1 - \\lambda)$$]@
 
-The eigenvalues are $\\lambda = 1, 2, 3$ — readable directly from the diagonal. For triangular matrices, the characteristic polynomial always factors as the product of the diagonal terms, making the eigenvalues visible by inspection.
+The eigenvalues are $\\lambda = 1, 2, 3$ — readable directly from the diagonal.
+
+@academic[rule_plain:For triangular matrices, the characteristic polynomial always factors as the product of the diagonal terms, making the eigenvalues visible by inspection.]@
 
 For non-triangular $3 \\times 3$ matrices, the cubic must be factored by finding rational roots (testing factors of the constant term), by inspection, or by the cubic formula.`,
     before: ``,
@@ -1304,7 +1308,10 @@ For non-triangular $3 \\times 3$ matrices, the cubic must be factored by finding
   },
   obj5: {
     title: `Larger Matrices`,
-    content: `For an $n \\times n$ matrix, the characteristic polynomial has degree $n$, and finding its roots becomes increasingly difficult as $n$ grows. There is no general closed-form formula for roots of polynomials of degree $5$ or higher (Abel-Ruffini theorem), so explicit factoring is limited to small matrices or matrices with special structure.
+    content: `For an $n \\times n$ matrix, the characteristic polynomial has degree $n$, and finding its roots becomes increasingly difficult as $n$ grows.
+
+@academic[rule_theorem:Abel–Ruffini theorem
+There is no general closed-form formula for roots of polynomials of degree $5$ or higher (Abel-Ruffini theorem), so explicit factoring is limited to small matrices or matrices with special structure.]@
 
 [Diagonal](!/linear-algebra/matrix/types) and [triangular](!/linear-algebra/matrix/types) matrices are immediate: the eigenvalues are the diagonal entries. Block triangular matrices factor block by block: the characteristic polynomial is the product of the characteristic polynomials of the diagonal blocks.
 
@@ -1319,7 +1326,9 @@ For general large matrices, eigenvalues are computed numerically by iterative al
 
 If $p(\\lambda) = (\\lambda - 2)^3(\\lambda + 1)$, then $\\lambda = 2$ has algebraic multiplicity $3$ and $\\lambda = -1$ has algebraic multiplicity $1$. The algebraic multiplicities of all eigenvalues sum to $n$ — the degree of the polynomial — when complex roots are included.
 
-The algebraic multiplicity is an upper bound for the geometric multiplicity: $1 \\leq m_g(\\lambda) \\leq m_a(\\lambda)$. The geometric multiplicity is the dimension of the eigenspace, and it can be strictly smaller than the algebraic multiplicity. When this gap occurs for any eigenvalue, the matrix is not [diagonalizable](!/linear-algebra/eigen/diagonalization).`,
+@academic[rule_theorem_plain:The algebraic multiplicity is an upper bound for the geometric multiplicity: $1 \\leq m_g(\\lambda) \\leq m_a(\\lambda)$.]@
+
+The geometric multiplicity is the dimension of the eigenspace, and it can be strictly smaller than the algebraic multiplicity. When this gap occurs for any eigenvalue, the matrix is not [diagonalizable](!/linear-algebra/eigen/diagonalization).`,
     before: ``,
     after: ``,
     link: ``,

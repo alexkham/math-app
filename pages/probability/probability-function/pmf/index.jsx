@@ -2154,7 +2154,7 @@ Fair die.
 - $F_X(3) = p_X(1) + p_X(2) + p_X(3) = \\frac{1}{6} + \\frac{1}{6} + \\frac{1}{6} = \\frac{1}{2}$
 - $F_X(5.7) = p_X(1) + \\cdots + p_X(5) = \\frac{5}{6}$]@
 
-The CDF is a step function for discrete variables—it jumps at each value in the support, with jump height equal to the PMF at that point.
+@academic[rule_plain:The CDF is a step function for discrete variables—it jumps at each value in the support, with jump height equal to the PMF at that point.]@
 
 ## From CDF to PMF
 

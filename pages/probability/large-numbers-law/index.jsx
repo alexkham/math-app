@@ -978,7 +978,10 @@ Instead, it describes the behavior of the **average** as more and more observati
 
 When you flip a coin once, the result is completely unpredictable. When you flip it ten times, the proportion of heads might be anywhere from 0 to 1. But when you flip it a thousand times, something remarkable happens: the proportion stabilizes near 0.5, and deviations become increasingly rare.
 
-This stabilization is not coincidence—it is mathematical necessity. The Law of Large Numbers guarantees that as the sample size grows, the sample mean gets arbitrarily close to the true [expected value](!/probability/expected-value), with probability approaching certainty.
+This stabilization is not coincidence—it is mathematical necessity.
+
+@academic[rule_theorem:Law of Large Numbers
+The Law of Large Numbers guarantees that as the sample size grows, the sample mean gets arbitrarily close to the true [expected value](!/probability/expected-value), with probability approaching certainty.]@
 
 The theorem explains why **averages are more reliable than individual observations**. A single measurement tells you little. The average of many measurements tells you almost everything about the underlying mean.
 
@@ -1068,7 +1071,9 @@ $$\\displaystyle \\bar X_n \\to \\mu \\text{ as } n \\to \\infty$$]@
 This says: for almost every sequence of observations, the sample mean actually converges to $\\mu$. This is **almost sure convergence**—a stronger form of convergence than the weak law provides. The set of sequences that fail to converge has probability zero.
 
 **Key Difference**  
-The weak law guarantees that large deviations become unlikely. The strong law guarantees that convergence actually happens for the sequence you observe. Almost sure convergence implies convergence in probability, but not vice versa.
+The weak law guarantees that large deviations become unlikely. The strong law guarantees that convergence actually happens for the sequence you observe.
+
+@academic[rule_theorem_plain:Almost sure convergence implies convergence in probability, but not vice versa.]@
 
 In practice, both versions lead to the same intuition: **averages stabilize at the true mean**. The distinction matters primarily in theoretical contexts and when analyzing sequences with [dependence](!/probability/independence) or unusual tail behavior.
 

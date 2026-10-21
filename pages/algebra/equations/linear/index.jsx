@@ -229,7 +229,9 @@ where $a$ and $b$ are real constants and $a \\neq 0$. The variable $x$ appears o
 
 Not every linear equation arrives in standard form. The equation $3x - 7 = 2x + 5$ is linear because, after collecting terms, it reduces to $x - 12 = 0$. The equation $\\frac{x}{4} + 1 = 3$ is also linear — the fraction involves only a numerical denominator, not a variable one. Recognition matters: any equation where the variable appears solely to the first power, with no products or compositions involving the variable, is linear regardless of how it is initially presented.
 
-The solution is immediate from standard form. Subtracting $b$ and dividing by $a$ gives $x = -\\frac{b}{a}$. This single value is the only solution, and it always exists when $a \\neq 0$. Linear equations never produce two solutions, infinitely many solutions, or no solutions — as long as the coefficient of $x$ is genuinely nonzero.`,
+The solution is immediate from standard form. Subtracting $b$ and dividing by $a$ gives $x = -\\frac{b}{a}$.
+
+@academic[rule_theorem_plain:This single value is the only solution, and it always exists when $a \\neq 0$. Linear equations never produce two solutions, infinitely many solutions, or no solutions — as long as the coefficient of $x$ is genuinely nonzero.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -324,7 +326,9 @@ $$x = \\frac{66}{7}$$]@
 
 The multiplication by $12$ is valid because $12$ is a nonzero constant — it does not depend on $x$. The solution set is preserved exactly. After clearing, the equation is a standard multi-step linear equation with integer coefficients.
 
-A crucial distinction separates these equations from [rational equations](!/algebra/equations/rational). When the denominators are numerical constants (like $3$, $4$, $12$), clearing them is safe and changes nothing about the solution set. When the variable itself appears in a denominator, the equation is no longer linear — it is rational, and clearing that denominator introduces domain restrictions and the possibility of extraneous solutions.`,
+A crucial distinction separates these equations from [rational equations](!/algebra/equations/rational).
+
+@academic[rule_plain:When the denominators are numerical constants (like $3$, $4$, $12$), clearing them is safe and changes nothing about the solution set. When the variable itself appears in a denominator, the equation is no longer linear — it is rational, and clearing that denominator introduces domain restrictions and the possibility of extraneous solutions.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -360,7 +364,7 @@ An identity arises when simplification eliminates the variable and leaves a true
 
 A contradiction arises when simplification eliminates the variable and leaves a false numerical statement. The equation $3(x + 1) = 3x + 8$ distributes to $3x + 3 = 3x + 8$. Subtracting $3x$ from both sides gives $3 = 8$, which is false for every value of $x$. No real number satisfies the equation, and the solution set is empty.
 
-Both situations are recognizable during solving: the variable terms cancel completely, and the remaining constant equation decides between identity and contradiction. If the constants match, every value works. If they clash, nothing does.`,
+@academic[rule_plain:Both situations are recognizable during solving: the variable terms cancel completely, and the remaining constant equation decides between identity and contradiction. If the constants match, every value works. If they clash, nothing does.]@`,
     before: ``,
     after: ``,
     link: '',

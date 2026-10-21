@@ -253,7 +253,9 @@ $$P(x) > 0$$]@
 
 [Linear](!/algebra/inequalities/linear) and [quadratic](!/algebra/inequalities/quadratic) inequalities are special cases corresponding to $n = 1$ and $n = 2$. At those low degrees, the structure is simple enough that dedicated methods suffice. From degree three onward, the number of roots and the variety of sign patterns increase, and a general method is needed. The sign chart provides that method.
 
-As with [polynomial equations](!/algebra/equations/polynomial), the degree $n$ sets an upper bound: a polynomial of degree $n$ has at most $n$ real roots, and these roots create at most $n + 1$ intervals on the number line. Within each interval, the polynomial maintains a constant sign. The task is to determine that sign in every interval and select those that satisfy the inequality.`,
+@academic[rule_theorem_plain:As with [polynomial equations](!/algebra/equations/polynomial), the degree $n$ sets an upper bound: a polynomial of degree $n$ has at most $n$ real roots, and these roots create at most $n + 1$ intervals on the number line. Within each interval, the polynomial maintains a constant sign.]@
+
+The task is to determine that sign in every interval and select those that satisfy the inequality.`,
     before: ``,
     after: ``,
     link: '',
@@ -303,9 +305,13 @@ This approach is faster than substituting test points into the expanded polynomi
     title: `Root Multiplicity and Sign Changes`,
     content: `Not every root causes the sign of the polynomial to change. Whether the sign flips at a root depends on the root's multiplicity.
 
-At a root of odd multiplicity (simple root, triple root, etc.), the polynomial changes sign. The graph crosses the $x$-axis, and the intervals on either side have opposite signs. A factor $(x - r)^1$ is negative to the left of $r$ and positive to the right, so crossing it flips the sign of the product.
+@academic[rule_plain:At a root of odd multiplicity (simple root, triple root, etc.), the polynomial changes sign. The graph crosses the $x$-axis, and the intervals on either side have opposite signs.]@
 
-At a root of even multiplicity (double root, quadruple root, etc.), the polynomial keeps its sign. The graph touches the $x$-axis and turns back without crossing. A factor $(x - r)^2$ is positive on both sides of $r$ (and zero at $r$ itself), so crossing it does not flip the sign of the product.
+A factor $(x - r)^1$ is negative to the left of $r$ and positive to the right, so crossing it flips the sign of the product.
+
+@academic[rule_plain:At a root of even multiplicity (double root, quadruple root, etc.), the polynomial keeps its sign. The graph touches the $x$-axis and turns back without crossing.]@
+
+A factor $(x - r)^2$ is positive on both sides of $r$ (and zero at $r$ itself), so crossing it does not flip the sign of the product.
 
 Consider $(x + 1)(x - 3)^2 > 0$. The roots are $x = -1$ (multiplicity $1$) and $x = 3$ (multiplicity $2$). In $(-\\infty, -1)$: $(x + 1)$ is negative and $(x - 3)^2$ is positive — product is negative. In $(-1, 3)$: $(x + 1)$ is positive and $(x - 3)^2$ is positive — product is positive. In $(3, \\infty)$: both are positive — product is positive. The sign changes at $x = -1$ (odd multiplicity) but not at $x = 3$ (even multiplicity). The solution is $(-1, 3) \\cup (3, \\infty)$, which simplifies to $(-1, \\infty) \\setminus \\{3\\}$ — all $x > -1$ except $x = 3$, where the expression equals zero.
 
@@ -317,7 +323,9 @@ This multiplicity rule eliminates the need to test points in every interval. Onc
 
   obj5: {
     title: `End Behavior`,
-    content: `The sign of a polynomial for very large values of $|x|$ is controlled entirely by the leading term $a_nx^n$. This provides a guaranteed starting point for the sign chart: the sign in the outermost intervals is known before any test points are evaluated.
+    content: `@academic[rule_plain:The sign of a polynomial for very large values of $|x|$ is controlled entirely by the leading term $a_nx^n$.]@
+
+This provides a guaranteed starting point for the sign chart: the sign in the outermost intervals is known before any test points are evaluated.
 
 For even degree with $a_n > 0$: the polynomial is positive for both very large positive and very large negative $x$. Both outer intervals are positive.
 

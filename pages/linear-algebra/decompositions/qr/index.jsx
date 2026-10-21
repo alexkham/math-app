@@ -2024,7 +2024,9 @@ const sectionsContent = {
 
 where $Q$ is $m \\times n$ with [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) columns and $R$ is $n \\times n$ upper [triangular](!/linear-algebra/matrix/types) with positive diagonal entries.
 
-The columns of $Q$ form an orthonormal [basis](!/linear-algebra/vector-spaces) for the column space of $A$. The matrix $R$ stores the coefficients: each column of $A$ is a linear combination of the columns of $Q$ with weights given by the corresponding column of $R$. The upper triangular structure of $R$ reflects the sequential nature of the orthogonalization — each column depends only on the columns that came before it.`,
+@academic[rule_corollary_plain:The columns of $Q$ form an orthonormal [basis](!/linear-algebra/vector-spaces) for the column space of $A$.]@
+
+The matrix $R$ stores the coefficients: each column of $A$ is a linear combination of the columns of $Q$ with weights given by the corresponding column of $R$. The upper triangular structure of $R$ reflects the sequential nature of the orthogonalization — each column depends only on the columns that came before it.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2142,7 +2144,7 @@ The two variants compare cleanly on the dimensions of their factors and what eac
   },
   obj5: {
     title: `Existence and Uniqueness`,
-    content: `Every $m \\times n$ matrix with $m \\geq n$ and linearly independent columns has a thin QR factorization. Every $m \\times n$ matrix (regardless of rank) has a full QR factorization.
+    content: `@academic[rule_theorem_plain:Every $m \\times n$ matrix with $m \\geq n$ and linearly independent columns has a thin QR factorization. Every $m \\times n$ matrix (regardless of rank) has a full QR factorization.]@
 
 The thin QR factorization with positive diagonal entries on $R$ is unique. If negative diagonal entries are permitted, the factorization is not unique — signs can be redistributed between $Q$ and $R$ (multiplying a column of $Q$ by $-1$ and the corresponding row of $R$ by $-1$ preserves the product). The convention of positive diagonal entries on $R$ resolves this ambiguity.`,
     before: ``,
@@ -2158,7 +2160,11 @@ $$R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$$]@
 
 The right-hand side $Q^T\\mathbf{b}$ is computed by $n$ [dot products](!/linear-algebra/vectors/dot-product). The system $R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$ is upper triangular, solved by back substitution in $O(n^2)$ operations.
 
-The critical advantage over the normal equations is numerical. Forming $A^TA$ squares the [condition number](!/linear-algebra/matrix/rank): $\\kappa(A^TA) = \\kappa(A)^2$. If $A$ has condition number $10^6$, the normal equations work with condition number $10^{12}$, losing $12$ digits of accuracy in double precision. QR avoids this squaring and works with the original condition number $10^6$.`,
+The critical advantage over the normal equations is numerical.
+
+@academic[rule_plain:Forming $A^TA$ squares the [condition number](!/linear-algebra/matrix/rank): $\\kappa(A^TA) = \\kappa(A)^2$.]@
+
+If $A$ has condition number $10^6$, the normal equations work with condition number $10^{12}$, losing $12$ digits of accuracy in double precision. QR avoids this squaring and works with the original condition number $10^6$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2170,7 +2176,9 @@ The critical advantage over the normal equations is numerical. Forming $A^TA$ sq
 @academic[formula_callout:qr_algorithm_for_eigenvalues|QR Algorithm for Eigenvalues|$$A_k = Q_k R_k, \\qquad A_{k+1} = R_k Q_k$$]@
 @academic[formulas_link:/linear-algebra/formulas#qr_algorithm_for_eigenvalues]@
 
-Under mild conditions, $A_k$ converges to an upper triangular matrix with the eigenvalues on the diagonal. The convergence is driven by the fact that $A_{k+1} = Q_k^T A_k Q_k$ — each iteration is a [similarity](!/linear-algebra/transformations/basis-change) transformation that preserves the eigenvalues while driving the sub-diagonal entries toward zero.
+@academic[rule_theorem_plain:Under mild conditions, $A_k$ converges to an upper triangular matrix with the eigenvalues on the diagonal.]@
+
+The convergence is driven by the fact that $A_{k+1} = Q_k^T A_k Q_k$ — each iteration is a [similarity](!/linear-algebra/transformations/basis-change) transformation that preserves the eigenvalues while driving the sub-diagonal entries toward zero.
 
 With shifts (replacing $A_k$ by $A_k - \\sigma_k I$ before factoring and adding $\\sigma_k I$ back), convergence accelerates dramatically — cubic convergence for symmetric matrices with the Wilkinson shift. The QR algorithm computes eigenvalues without ever forming the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation), avoiding the severe numerical instability of polynomial root-finding.`,
     before: ``,

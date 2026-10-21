@@ -679,6 +679,7 @@ import determinantDiagrams from '@/app/components/linear-algebra copy/determinan
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 
 
 
@@ -904,7 +905,11 @@ $$\\det(A) = \\sum_{j=1}^{n} (-1)^{1+j} \\, a_{1j} \\, M_{1j}$$]@
 
 where $M_{1j}$ is the determinant of the $(n-1) \\times (n-1)$ submatrix obtained by deleting row $1$ and column $j$. This is a recursive definition: each $n \\times n$ determinant reduces to $n$ determinants of size $(n-1) \\times (n-1)$, each of which reduces further, until reaching the base case of $1 \\times 1$ matrices where $\\det(a) = a$.
 
-A crucial fact is that the expansion need not use the first row. Expanding along any row or any column gives the same result. The signed sub-determinants $(-1)^{i+j} M_{ij}$ are called [cofactors](!/linear-algebra/determinants/cofactors), and the freedom to choose the expansion axis is what makes the formula practical: a row or column with many zeros dramatically reduces the number of terms.
+A crucial fact is that the expansion need not use the first row.
+
+@academic[rule_theorem_plain:Expanding along any row or any column gives the same result.]@
+
+The signed sub-determinants $(-1)^{i+j} M_{ij}$ are called [cofactors](!/linear-algebra/determinants/cofactors), and the freedom to choose the expansion axis is what makes the formula practical: a row or column with many zeros dramatically reduces the number of terms.
 
 The recursive nature of this definition means the computational cost grows factorially. An $n \\times n$ determinant via cofactor expansion requires on the order of $n!$ arithmetic operations. For $n = 5$ that is $120$ operations; for $n = 10$ it is over $3.6$ million. This explosion is what motivates the row-reduction approach, which accomplishes the same task in $O(n^3)$ operations by exploiting how [row operations](!/linear-algebra/determinants/properties) affect the determinant.`,
     before: ``,
@@ -915,7 +920,9 @@ The recursive nature of this definition means the computational cost grows facto
     title: `Singular and Nonsingular Matrices`,
     content: `The value $\\det(A) = 0$ marks a sharp dividing line. A square matrix with zero determinant is called singular; a square matrix with nonzero determinant is called nonsingular or invertible.
 
-When $\\det(A) = 0$, the columns of $A$ are [linearly dependent](!/linear-algebra/vector-spaces/linear-independence) — at least one column can be written as a linear combination of the others. The homogeneous system $Ax = \\mathbf{0}$ has nontrivial solutions, the rank of $A$ is strictly less than $n$, and the matrix maps $\\mathbb{R}^n$ onto a lower-dimensional subspace. Geometrically, the transformation collapses at least one dimension, flattening regions of positive volume down to zero volume.
+@academic[rule_theorem_plain:When $\\det(A) = 0$, the columns of $A$ are [linearly dependent](!/linear-algebra/vector-spaces/linear-independence) — at least one column can be written as a linear combination of the others.]@
+
+The homogeneous system $Ax = \\mathbf{0}$ has nontrivial solutions, the rank of $A$ is strictly less than $n$, and the matrix maps $\\mathbb{R}^n$ onto a lower-dimensional subspace. Geometrically, the transformation collapses at least one dimension, flattening regions of positive volume down to zero volume.
 
 When $\\det(A) \\neq 0$, everything works. The columns of $A$ form a [basis](!/linear-algebra/vector-spaces/basis) for $\\mathbb{R}^n$. The system $Ax = \\mathbf{b}$ has exactly one solution for every right-hand side $\\mathbf{b}$. The matrix has an inverse $A^{-1}$, and the linear map $x \\mapsto Ax$ is a bijection from $\\mathbb{R}^n$ to itself that stretches or compresses volumes by the factor $|\\det(A)|$ without collapsing any dimension.
 
@@ -1012,7 +1019,9 @@ The complete set of algebraic [properties](!/linear-algebra/determinants/propert
     title: `Area, Volume, and Orientation`,
     content: `The determinant has a direct geometric meaning: it measures how a matrix, viewed as a [linear transformation](!/linear-algebra/transformations), distorts size and orientation.
 
-In two dimensions, $|\\det(A)|$ equals the area of the parallelogram spanned by the columns of $A$. In three dimensions, $|\\det(A)|$ equals the volume of the parallelepiped spanned by the three column vectors, which also equals the scalar triple product $\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})$. In $n$ dimensions, $|\\det(A)|$ is the factor by which the map $x \\mapsto Ax$ scales $n$-dimensional volumes.
+In two dimensions, $|\\det(A)|$ equals the area of the parallelogram spanned by the columns of $A$. In three dimensions, $|\\det(A)|$ equals the volume of the parallelepiped spanned by the three column vectors, which also equals the scalar triple product $\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})$.
+
+@academic[rule_theorem_plain:In $n$ dimensions, $|\\det(A)|$ is the factor by which the map $x \\mapsto Ax$ scales $n$-dimensional volumes.]@
 
 The sign carries its own meaning. A positive determinant means the transformation preserves orientation — counterclockwise stays counterclockwise in $\\mathbb{R}^2$, right-handed stays right-handed in $\\mathbb{R}^3$. A negative determinant means orientation is reversed. A zero determinant means the image is lower-dimensional: a $3 \\times 3$ transformation with $\\det = 0$ maps all of $\\mathbb{R}^3$ onto a plane, a line, or a point.
 
@@ -1187,8 +1196,24 @@ const schemas = {
     ],
   };
 
+  const detRowOpTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Row operations change the determinant predictably',
+    preface: 'Each of the three row operations has a fixed effect on $\\det(A)$. That is what makes reduction to triangular form a fast way to compute it.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Track the swaps and the scalings',
+    conclusion: 'Reduce to triangular form with row additions, which leave the determinant alone, and account for every swap and scaling along the way. The cost is about $n^3$.',
+    root: { name: 'Row operations and the determinant', sub: '3 effects' },
+    children: [
+      { id: 'swap', name: '[Swap two rows](!/linear-algebra/determinants/properties)', items: [ { label: 'Effect', text: '$\\det$ changes sign' } ] },
+      { id: 'scale', name: '[Scale a row by k](!/linear-algebra/determinants/properties)', items: [ { label: 'Effect', text: '$\\det$ is multiplied by $k$' } ] },
+      { id: 'add', name: '[Add a multiple of a row](!/linear-algebra/determinants/properties)', items: [ { label: 'Effect', text: '$\\det$ unchanged' } ] },
+    ],
+  };
+
   return {
   props: {
+    detRowOpTree,
     singularCases,
     demoUnits,
     sectionsContent,
@@ -1209,7 +1234,7 @@ const schemas = {
    }
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DeterminantsPage({singularCases, 
+export default function DeterminantsPage({detRowOpTree, singularCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1300,6 +1325,14 @@ export default function DeterminantsPage({singularCases,
           sectionsContent.obj8.content,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="determinant-row-operations-tree"
+            title="How row operations change the determinant"
+            source="/linear-algebra/determinants"
+          >
+            <TopDownTree data={detRowOpTree} />
+          </DiagramFrame>,
         ]
     },
     {

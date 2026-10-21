@@ -523,7 +523,9 @@ The natural exponential function has the unique property of being its own deriva
 $$\\frac{d}{dx}[e^x] = e^x$$
 /calculus/formulas#derivative_of_natural_exponential]@
 
-No other function satisfies $f'(x) = f(x)$ except constant multiples $Ce^x$. This self-replicating property is what makes $e$ the natural base for exponential functions.
+@academic[rule_theorem_plain:No other function satisfies $f'(x) = f(x)$ except constant multiples $Ce^x$.]@
+
+This self-replicating property is what makes $e$ the natural base for exponential functions.
 
 The proof from the limit definition uses the [special limit](!/calculus/limits/special) $\\lim_{h \\to 0} \\frac{e^h - 1}{h} = 1$. The difference quotient for $e^x$ factors as $e^x \\cdot \\frac{e^h - 1}{h}$, and the limit gives $e^x \\cdot 1 = e^x$.
 
@@ -566,7 +568,9 @@ $$\\frac{d}{dx}[\\log_a x] = \\frac{1}{x \\ln a}$$
 
 This follows from the change of base formula $\\log_a x = \\frac{\\ln x}{\\ln a}$ and the constant multiple rule. The natural logarithm gives the simplest derivative—another reason $e$ is the preferred base.
 
-The function $\\ln|x|$ extends the domain to all $x \\neq 0$, and its derivative is $\\frac{1}{x}$ for both positive and negative $x$. This extended form appears frequently in [integration](!/calculus/integrals).
+@academic[rule_plain:The function $\\ln|x|$ extends the domain to all $x \\neq 0$, and its derivative is $\\frac{1}{x}$ for both positive and negative $x$.]@
+
+This extended form appears frequently in [integration](!/calculus/integrals).
 `,
     before: ``,
     after: ``,

@@ -239,7 +239,9 @@ obj5: {
 
 The product rule $a^m \\cdot a^n = a^{m+n}$ holds when $m$ and $n$ are irrational. The proof relies on the fact that the rule holds for all rational approximations, and the limiting process preserves algebraic identities.
 
-The same continuity argument extends every other law — quotient rule, power of a power, power of a product, power of a quotient. If a rule works for every rational exponent, and irrational exponents are defined as limits of rational ones, then the rule works for irrational exponents as well.
+The same continuity argument extends every other law — quotient rule, power of a power, power of a product, power of a quotient.
+
+@academic[rule_theorem_plain:If a rule works for every rational exponent, and irrational exponents are defined as limits of rational ones, then the rule works for irrational exponents as well.]@
 
 No separate derivation is needed. Three rounds of verification — natural, negative, rational — established the laws for all rational exponents. The continuous extension to irrationals carries those laws across the finish line automatically.`,
   before: ``,
@@ -259,7 +261,9 @@ obj6: {
 
 Irrational exponents defined $a^x$ for the remaining points through continuous extension, completing the real number line.
 
-The result: for any base $a > 0$ and any real exponent $x$, the expression $a^x$ is defined, positive, and obeys every law of exponents. This is the foundation on which [exponential functions](!/algebra/powers/exponential-functions) are built — functions where the base is fixed and $x$ becomes a variable free to range over all real numbers.`,
+@academic[rule_corollary_plain:The result: for any base $a > 0$ and any real exponent $x$, the expression $a^x$ is defined, positive, and obeys every law of exponents.]@
+
+This is the foundation on which [exponential functions](!/algebra/powers/exponential-functions) are built — functions where the base is fixed and $x$ becomes a variable free to range over all real numbers.`,
   before: ``,
   after: ``,
   link: '',

@@ -1443,7 +1443,9 @@ The function may oscillate without settling: $f(x)$ bounces between values witho
 
 To read end behavior from a graph, examine the far left and far right. Does the curve rise, fall, level off, or oscillate?
 
-For polynomials, end behavior depends on the leading term. The function $f(x) = -2x^3 + 5x^2 - x + 1$ behaves like $-2x^3$ for large $|x|$: rising on the left, falling on the right.
+@academic[rule_plain:For polynomials, end behavior depends on the leading term.]@
+
+The function $f(x) = -2x^3 + 5x^2 - x + 1$ behaves like $-2x^3$ for large $|x|$: rising on the left, falling on the right.
 
 For rational functions, end behavior depends on the degree comparison. A horizontal asymptote indicates a finite limit; no horizontal asymptote indicates unbounded behavior.
 

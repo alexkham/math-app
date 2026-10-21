@@ -1174,7 +1174,9 @@ Range answers the question: what values can this function actually produce? It i
 
   obj3: {
     title: `Range vs Codomain`,
-    content: `The codomain is the set where outputs are declared to live. The range is the set of outputs actually produced. The range is always a subset of the codomain, but they need not be equal.
+    content: `The codomain is the set where outputs are declared to live. The range is the set of outputs actually produced.
+
+@academic[rule_plain:The range is always a subset of the codomain, but they need not be equal.]@
 
 If a function $f: \\mathbb{R} \\to \\mathbb{R}$ is defined by $f(x) = x^2$, the codomain is all real numbers — that is where outputs are said to land. But the range is only $[0, \\infty)$, because negative numbers never actually appear as outputs.
 
@@ -1321,7 +1323,9 @@ Interpreting the range means translating mathematical bounds into real-world mea
 
   obj10: {
     title: `Range and Invertibility`,
-    content: `The range of a function becomes the [domain](!/functions/domain) of its [inverse](!/functions/inverse), and the domain of a function becomes the range of its inverse. This swap is fundamental to understanding inverse functions.
+    content: `@academic[rule_plain:The range of a function becomes the [domain](!/functions/domain) of its [inverse](!/functions/inverse), and the domain of a function becomes the range of its inverse.]@
+
+This swap is fundamental to understanding inverse functions.
 
 If $f(x) = x^2$ with domain $[0, \\infty)$ has range $[0, \\infty)$, then its inverse $f^{-1}(x) = \\sqrt{x}$ has domain $[0, \\infty)$ and range $[0, \\infty)$.
 

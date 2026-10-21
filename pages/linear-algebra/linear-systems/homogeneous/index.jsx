@@ -1172,7 +1172,9 @@ const sectionsContent = {
 @academic[formula_callout:Definition
 $$A\\mathbf{x} = \\mathbf{0}$$]@
 
-The augmented matrix is $[A \\mid \\mathbf{0}]$. Since the last column is all zeros, row operations on the augmented matrix never produce a contradictory row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$. A homogeneous system is always consistent.
+The augmented matrix is $[A \\mid \\mathbf{0}]$. Since the last column is all zeros, row operations on the augmented matrix never produce a contradictory row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$.
+
+@academic[rule_theorem_plain:A homogeneous system is always consistent.]@
 
 The vector $\\mathbf{x} = \\mathbf{0}$ satisfies every equation — this is the trivial solution. It always exists. The central question for a homogeneous system is never &quot;does a solution exist?&quot; but &quot;does a nontrivial solution exist?&quot;`,
     before: ``,
@@ -1221,7 +1223,9 @@ The vector $\\mathbf{x} = \\mathbf{0}$ satisfies every equation — this is the 
 
   obj2: {
     title: `When Do Nontrivial Solutions Exist?`,
-    content: `Nontrivial solutions to $A\\mathbf{x} = \\mathbf{0}$ exist if and only if the [rank](!/linear-algebra/matrix/rank) of $A$ is less than $n$, the number of unknowns. When $\\text{rank}(A) < n$, at least one free variable appears in the [echelon form](!/linear-algebra/linear-systems/echelon-form), and that free variable parametrizes a family of nonzero solutions.
+    content: `@academic[rule_theorem_plain:Nontrivial solutions to $A\\mathbf{x} = \\mathbf{0}$ exist if and only if the [rank](!/linear-algebra/matrix/rank) of $A$ is less than $n$, the number of unknowns.]@
+
+When $\\text{rank}(A) < n$, at least one free variable appears in the [echelon form](!/linear-algebra/linear-systems/echelon-form), and that free variable parametrizes a family of nonzero solutions.
 
 For a square $n \\times n$ matrix, nontrivial solutions exist if and only if $\\det(A) = 0$. A nonzero [determinant](!/linear-algebra/determinants) means full rank, which means no free variables, which means only the trivial solution.
 
@@ -1242,7 +1246,9 @@ The rank of an $m \\times n$ matrix cannot exceed $m$, and when $m < n$, the ran
 @academic[formula_callout:The Solution Set Is the Null Space
 $$\\text{Null}(A) = \\{\\mathbf{x} \\in \\mathbb{R}^n : A\\mathbf{x} = \\mathbf{0}\\}$$]@
 
-The null space is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$. It contains $\\mathbf{0}$, and it is closed under addition and scalar multiplication: if $A\\mathbf{u} = \\mathbf{0}$ and $A\\mathbf{v} = \\mathbf{0}$, then $A(\\mathbf{u} + \\mathbf{v}) = \\mathbf{0}$ and $A(c\\mathbf{u}) = \\mathbf{0}$.
+@academic[rule_theorem_plain:The null space is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$.]@
+
+It contains $\\mathbf{0}$, and it is closed under addition and scalar multiplication: if $A\\mathbf{u} = \\mathbf{0}$ and $A\\mathbf{v} = \\mathbf{0}$, then $A(\\mathbf{u} + \\mathbf{v}) = \\mathbf{0}$ and $A(c\\mathbf{u}) = \\mathbf{0}$.
 
 The [dimension](!/linear-algebra/vector-spaces/dimension) of the null space is the nullity:
 
@@ -1302,7 +1308,10 @@ $$A(c_1\\mathbf{x}_1 + c_2\\mathbf{x}_2) = c_1 A\\mathbf{x}_1 + c_2 A\\mathbf{x}
 
 This is precisely the statement that the solution set is a [subspace](!/linear-algebra/vector-spaces/subspaces) — it is closed under addition and scalar multiplication. The superposition principle is the reason the general solution is a linear combination of basis vectors, and it is the reason the null space has the clean structure of a [vector space](!/linear-algebra/vector-spaces) rather than an arbitrary collection of points.
 
-Superposition holds only for homogeneous systems. For a non-homogeneous system $A\\mathbf{x} = \\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$, the sum of two solutions is generally not a solution: $A(\\mathbf{x}_1 + \\mathbf{x}_2) = \\mathbf{b} + \\mathbf{b} = 2\\mathbf{b} \\neq \\mathbf{b}$.`,
+@academic[rule:Superposition principle
+Superposition holds only for homogeneous systems.]@
+
+For a non-homogeneous system $A\\mathbf{x} = \\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$, the sum of two solutions is generally not a solution: $A(\\mathbf{x}_1 + \\mathbf{x}_2) = \\mathbf{b} + \\mathbf{b} = 2\\mathbf{b} \\neq \\mathbf{b}$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1316,7 +1325,9 @@ $$\\mathbf{x} = \\mathbf{x}_p + \\mathbf{x}_h$$]@
 
 where $\\mathbf{x}_h \\in \\text{Null}(A)$ is a solution to the homogeneous system. The particular solution accounts for $\\mathbf{b}$; the null-space component accounts for the freedom.
 
-This decomposition has two immediate consequences. If the null space is trivial ($\\text{nullity} = 0$), the non-homogeneous system has at most one solution — either $\\mathbf{x}_p$ alone or nothing. If the null space is nontrivial ($\\text{nullity} > 0$), then either $A\\mathbf{x} = \\mathbf{b}$ has no solution or it has infinitely many — there is no middle ground.
+This decomposition has two immediate consequences.
+
+@academic[rule_corollary_plain:If the null space is trivial ($\\text{nullity} = 0$), the non-homogeneous system has at most one solution — either $\\mathbf{x}_p$ alone or nothing. If the null space is nontrivial ($\\text{nullity} > 0$), then either $A\\mathbf{x} = \\mathbf{b}$ has no solution or it has infinitely many — there is no middle ground.]@
 
 The [solution set](!/linear-algebra/linear-systems/solvability) of $A\\mathbf{x} = \\mathbf{b}$ is therefore a translated copy of the null space: the null space shifted by $\\mathbf{x}_p$. The homogeneous system determines the shape and dimension of the solution set; the particular solution determines its position.`,
     before: ``,
@@ -1325,7 +1336,7 @@ The [solution set](!/linear-algebra/linear-systems/solvability) of $A\\mathbf{x}
   },
   obj8: {
     title: `Homogeneous Systems and Linear Independence`,
-    content: `Testing whether vectors $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$ are [linearly independent](!/linear-algebra/vector-spaces/linear-independence) is equivalent to checking whether the homogeneous system $A\\mathbf{c} = \\mathbf{0}$ has only the trivial solution, where $A = [\\mathbf{v}_1 \\; \\mathbf{v}_2 \\; \\cdots \\; \\mathbf{v}_k]$.
+    content: `@academic[rule_theorem_plain:Testing whether vectors $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$ are [linearly independent](!/linear-algebra/vector-spaces/linear-independence) is equivalent to checking whether the homogeneous system $A\\mathbf{c} = \\mathbf{0}$ has only the trivial solution, where $A = [\\mathbf{v}_1 \\; \\mathbf{v}_2 \\; \\cdots \\; \\mathbf{v}_k]$.]@
 
 The equation $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ is literally the system $A\\mathbf{c} = \\mathbf{0}$. If the null space of $A$ is trivial, the only solution is $\\mathbf{c} = \\mathbf{0}$ and the vectors are independent. If the null space is nontrivial, some nonzero $\\mathbf{c}$ satisfies the equation, providing an explicit dependence relation — the entries of $\\mathbf{c}$ are the coefficients that express one vector as a combination of the others.
 

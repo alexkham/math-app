@@ -1168,7 +1168,9 @@ This shift from points to intervals is a consequence of continuity. Since sine i
 
 On a restricted interval like $[0, 2\\pi)$, the solution is a finite union of intervals. In general solution form, the pattern repeats: each interval shifts by $2\\pi$ (for sine, cosine, cosecant, secant) or $\\pi$ (for tangent, cotangent) to produce the complete solution set.
 
-Strict inequalities ($>$, $<$) produce open intervals at the boundary points — the boundary is not included. Non-strict inequalities ($\\geq$, $\\leq$) produce closed intervals at boundary points — the boundary is included (provided the function is defined there). At vertical asymptotes, the interval is always open, since the function is undefined. Open and closed endpoints are exactly what the brackets and parentheses of [interval notation](!/math-symbols/functions) record.
+@academic[rule_plain:Strict inequalities ($>$, $<$) produce open intervals at the boundary points — the boundary is not included. Non-strict inequalities ($\\geq$, $\\leq$) produce closed intervals at boundary points — the boundary is included (provided the function is defined there).]@
+
+At vertical asymptotes, the interval is always open, since the function is undefined. Open and closed endpoints are exactly what the brackets and parentheses of [interval notation](!/math-symbols/functions) record.
 
 The two regimes — equation and inequality — contrast on every structural attribute that matters for how the solution is built and written, as the comparison below makes explicit.`,
     before: ``,
@@ -1265,7 +1267,7 @@ The boundary cases ($a = \\pm 1$, $|a| > 1$) parallel those for sine.
 
 Since tangent is strictly increasing on each period interval, there is no ambiguity: the function is below $a$ to the left of $x_0$ and above $a$ to the right. The general solution adds $n\\pi$ to shift across periods.
 
-The asymptotes must always be excluded from the solution, regardless of whether the inequality is strict or non-strict — tangent is undefined there.`,
+@academic[rule_plain:The asymptotes must always be excluded from the solution, regardless of whether the inequality is strict or non-strict — tangent is undefined there.]@`,
     before: ``,
     after: ``,
     link: ``,

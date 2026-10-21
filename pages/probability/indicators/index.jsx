@@ -1026,7 +1026,8 @@ This identity connects events directly to expectation without introducing a full
     obj5:{
       title:`Linearity of Expectation and Indicators`,
       content:`
-Expectation is linear.
+@academic[rule:Linearity of expectation
+Expectation is linear.]@
 
 For indicator random variables, this means:
 
@@ -1062,7 +1063,9 @@ This approach converts counting questions into expectation calculations and allo
       content:`
 Indicator [random variables](!/probability/random-variables) may be dependent.
 
-Dependence does not affect the validity of linearity of expectation, so expectations of sums of indicators can still be computed term by term.  
+@academic[rule_plain:Dependence does not affect the validity of linearity of expectation, so expectations of sums of indicators can still be computed term by term.]@
+
+
 However, dependence becomes important when higher-order quantities such as variance are considered.
 
 This distinction explains why indicators are effective for expectation-based counting but require additional care in variance calculations.

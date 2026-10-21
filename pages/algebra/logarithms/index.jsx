@@ -960,7 +960,11 @@ The base sits as a subscript, the argument sits inside parentheses, and the outp
 
 The base $a$ must satisfy $a > 0$ and $a \\neq 1$. A negative base would produce complex or undefined values for most exponents — $(-2)^{1/2}$ is not a real number. A base of zero fails because $0^c = 0$ for positive $c$, meaning no exponent could produce any result other than zero. A base of one fails because $1^c = 1$ for all $c$, meaning every number would need the same logarithm, which is incoherent. Bases between zero and one are valid and produce decreasing logarithmic functions.
 
-The argument $b$ must satisfy $b > 0$. No real exponent applied to a positive base can produce zero or a negative number. Since $a^c$ is always positive when $a > 0$, logarithms of zero or negative numbers do not exist in the real number system. Attempting to compute $\\log_2(-4)$ or $\\log_3(0)$ has no solution.
+The argument $b$ must satisfy $b > 0$.
+
+@academic[rule_plain:No real exponent applied to a positive base can produce zero or a negative number. Since $a^c$ is always positive when $a > 0$, logarithms of zero or negative numbers do not exist in the real number system.]@
+
+Attempting to compute $\\log_2(-4)$ or $\\log_3(0)$ has no solution.
 
 These restrictions are not arbitrary conventions — they emerge directly from the behavior of exponential functions. The [properties](!/algebra/logarithms/properties) of logarithms and the shape of their [graphs](!/algebra/logarithms/graphs) all follow from these fundamental constraints.`,
   before: ``,
@@ -1003,7 +1007,11 @@ In practice, these identities simplify expressions and solve [equations](!/algeb
 
 The common logarithm uses base $10$ and is written $\\log(x)$ without a subscript, or sometimes $\\log_{10}(x)$ for clarity. Base $10$ aligns with the decimal system, making common logarithms natural for expressing orders of magnitude, pH calculations, and decibel scales.
 
-The natural logarithm uses base $e \\approx 2.71828$ and is written $\\ln(x)$. The number $e$ emerges from calculus — it is the unique base for which the derivative of $a^x$ equals $a^x$ itself. Natural logarithms dominate theoretical mathematics, physics, and any context involving continuous growth or decay.
+The natural logarithm uses base $e \\approx 2.71828$ and is written $\\ln(x)$.
+
+@academic[rule_theorem_plain:The number $e$ emerges from calculus — it is the unique base for which the derivative of $a^x$ equals $a^x$ itself.]@
+
+Natural logarithms dominate theoretical mathematics, physics, and any context involving continuous growth or decay.
 
 Both notations are shorthand. The statement $\\log(100) = 2$ means $\\log_{10}(100) = 2$. The statement $\\ln(e^3) = 3$ means $\\log_e(e^3) = 3$. Converting between bases uses a formula covered in [logarithm rules](!/algebra/logarithms/rules).
 
@@ -1018,7 +1026,11 @@ To evaluate log, ln or a logarithm in any other base directly, use the [log calc
 
 The domain of $\\log_a(x)$ is all positive real numbers — only positive arguments are permitted. The range is all real numbers — logarithms can produce any output, positive or negative. As $x$ approaches zero from the right, the logarithm decreases without bound. As $x$ increases without bound, the logarithm also increases, but slowly.
 
-Monotonicity depends on the base. When $a > 1$, the function is strictly increasing: larger inputs produce larger outputs. When $0 < a < 1$, the function is strictly decreasing: larger inputs produce smaller outputs. This property is critical when solving [inequalities](!/algebra/logarithms/inequalities).
+Monotonicity depends on the base.
+
+@academic[rule_plain:When $a > 1$, the function is strictly increasing: larger inputs produce larger outputs. When $0 < a < 1$, the function is strictly decreasing: larger inputs produce smaller outputs.]@
+
+This property is critical when solving [inequalities](!/algebra/logarithms/inequalities).
 
 The one-to-one property follows from monotonicity: if $\\log_a(x) = \\log_a(y)$, then $x = y$. No two distinct inputs can produce the same output. This property justifies a key technique in solving [equations](!/algebra/logarithms/equations) — when both sides of an equation are logarithms with the same base, the arguments must be equal.`,
   before: ``,

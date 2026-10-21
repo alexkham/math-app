@@ -1050,7 +1050,7 @@ At this level, the model organizes outcomes into meaningful groups without assig
       content:`
 To complete the coin toss model, probabilities are assigned to the two outcomes.
 
-Each outcome is given a number between 0 and 1, representing how likely it is to occur, with the total probability equal to 1.
+@academic[rule_axiom_plain:Each outcome is given a number between 0 and 1, representing how likely it is to occur, with the total probability equal to 1.]@
 
 In many cases, the probabilities are chosen symmetrically, assigning the same value to both outcomes.  
 However, the model does not require symmetry — unequal probabilities are equally valid and define a different model.

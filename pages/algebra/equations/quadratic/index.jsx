@@ -14,6 +14,8 @@ import completeTheSquareDiagrams from '@/app/components/algebra/visualizers/equa
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -479,7 +481,8 @@ The equation $x^2 = 5x - 6$, for instance, is not in standard form but is still 
 
   obj2: {
     title: `Solving by Factoring`,
-    content: `When the quadratic expression $ax^2 + bx + c$ can be decomposed into a product of two first-degree factors, the equation reduces to a pair of [linear equations](!/algebra/equations/linear) through the zero-product property: if a product of two factors equals zero, at least one of the factors must be zero.
+    content: `@academic[rule:Zero-product property
+When the quadratic expression $ax^2 + bx + c$ can be decomposed into a product of two first-degree factors, the equation reduces to a pair of [linear equations](!/algebra/equations/linear) through the zero-product property: if a product of two factors equals zero, at least one of the factors must be zero.]@
 
 Consider $x^2 - 5x + 6 = 0$. The left side factors as $(x - 2)(x - 3) = 0$. Setting each factor equal to zero gives $x - 2 = 0$ or $x - 3 = 0$, so $x = 2$ or $x = 3$. Both values satisfy the original equation.
 
@@ -600,7 +603,9 @@ These identities follow from factoring the quadratic as $a(x - x_1)(x - x_2) = 0
 
 Vieta's formulas serve three purposes. First, they verify solutions: after solving $x^2 - 7x + 10 = 0$ and obtaining $x_1 = 2$, $x_2 = 5$, check that $2 + 5 = 7 = -\\frac{-7}{1}$ and $2 \\cdot 5 = 10 = \\frac{10}{1}$. Both match, confirming the answers.
 
-Second, they construct equations from known roots. If a quadratic equation must have roots $x_1 = -3$ and $x_2 = 4$, then $x_1 + x_2 = 1$ and $x_1 \\cdot x_2 = -12$, so the equation is $x^2 - x - 12 = 0$ (taking $a = 1$). The roots determine the equation uniquely up to a constant multiple.
+Second, they construct equations from known roots. If a quadratic equation must have roots $x_1 = -3$ and $x_2 = 4$, then $x_1 + x_2 = 1$ and $x_1 \\cdot x_2 = -12$, so the equation is $x^2 - x - 12 = 0$ (taking $a = 1$).
+
+@academic[rule_corollary_plain:The roots determine the equation uniquely up to a constant multiple.]@
 
 Third — and often overlooked — they can be used to solve quadratic equations directly when the roots are simple integers. Instead of factoring or applying the formula, the question becomes: which two numbers sum to $-\\frac{b}{a}$ and multiply to $\\frac{c}{a}$? For $x^2 - 7x + 10 = 0$, this asks for two numbers summing to $7$ and multiplying to $10$ — namely $2$ and $5$. The roots are read off by inspection. This approach is fastest when applicable but limited: it works only when the roots are obvious enough to spot, which restricts it to quadratics with integer or simple rational solutions. For irrational or complex roots, the formula remains necessary. In practice, Vieta's inspection is essentially a special case of factoring — finding the factorization $(x - x_1)(x - x_2)$ by going through the roots rather than the trinomial — but it is fast enough on simple cases to deserve recognition as a method in its own right.`,
     before: ``,
@@ -624,7 +629,9 @@ The substitution pattern extends beyond powers of $x$. Any equation of the form 
 
   obj8: {
     title: `Connection to Graphing`,
-    content: `The solutions of $ax^2 + bx + c = 0$ correspond to the points where the parabola $y = ax^2 + bx + c$ meets the $x$-axis. At these points the output value is zero, which is precisely what the equation demands. The discriminant controls the geometry of this intersection.
+    content: `@academic[rule_plain:The solutions of $ax^2 + bx + c = 0$ correspond to the points where the parabola $y = ax^2 + bx + c$ meets the $x$-axis.]@
+
+At these points the output value is zero, which is precisely what the equation demands. The discriminant controls the geometry of this intersection.
 
 When $\\Delta > 0$, the parabola crosses the $x$-axis at two distinct points, and the equation has two real solutions. The horizontal distance between these crossing points is $\\frac{\\sqrt{\\Delta}}{|a|}$, so a larger discriminant means the roots are farther apart.
 
@@ -804,8 +811,29 @@ const schemas = {
     }),
   };
 
+  const quadMethodTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Four ways to solve a quadratic',
+    preface: 'Two methods always work; two are shortcuts that work only when the numbers cooperate.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Start fast, fall back safe',
+    conclusion: 'Try factoring or Vieta first; when they fail, completing the square or the formula always finish the job.',
+    root: { name: 'Solving quadratic equations', sub: '4 methods' },
+    children: [
+      { id: 'fact', name: 'Factoring', items: [
+        { label: 'Works', text: 'only if it factors over $\\mathbb{Q}$' }, { label: 'Then', text: 'zero-product property' } ] },
+      { id: 'cts', name: 'Completing the square', items: [
+        { label: 'Works', text: 'always' }, { label: 'Bonus', text: 'derives the formula' } ] },
+      { id: 'form', name: 'Quadratic formula', items: [
+        { label: 'Works', text: 'always' }, { label: 'Bonus', text: 'shows the discriminant' } ] },
+      { id: 'vieta', name: 'Vieta, by inspection', items: [
+        { label: 'How', text: 'guess roots from sum $-b/a$ and product $c/a$' } ] },
+    ],
+  };
+
    return {
   props: {
+    quadMethodTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -828,7 +856,7 @@ const schemas = {
    }
 
 
-export default function QuadraticEquationsPage({
+export default function QuadraticEquationsPage({quadMethodTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -980,6 +1008,14 @@ export default function QuadraticEquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj9-diagram'}
+            id="quadratic-methods-tree"
+            title="Four ways to solve a quadratic"
+            source="/algebra/equations/quadratic"
+          >
+            <TopDownTree data={quadMethodTree} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

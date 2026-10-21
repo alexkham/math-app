@@ -2118,7 +2118,9 @@ There is no restriction on the size of an angle. A rotation of $450°$ passes th
 
 Every angle has infinitely many coterminal partners. The angle $50°$ is coterminal with $410°$, $770°$, $-310°$, $-670°$, and so on. In radian terms, $\\frac{\\pi}{3}$ is coterminal with $\\frac{\\pi}{3} + 2\\pi = \\frac{7\\pi}{3}$, with $\\frac{\\pi}{3} - 2\\pi = -\\frac{5\\pi}{3}$, and with any expression of the form $\\frac{\\pi}{3} + 2\\pi n$.
 
-Coterminal angles produce identical trigonometric values. Since the terminal side determines the intersection point with the [unit circle](!/trigonometry/unit-circle), and the coordinates of that point define sine and cosine, all coterminal angles yield the same sine, cosine, tangent, and so on. This is the geometric source of periodicity: $\\sin(\\theta + 2\\pi) = \\sin(\\theta)$ because adding $2\\pi$ brings the terminal side back to where it started.
+@academic[rule_corollary_plain:Coterminal angles produce identical trigonometric values.]@
+
+Since the terminal side determines the intersection point with the [unit circle](!/trigonometry/unit-circle), and the coordinates of that point define sine and cosine, all coterminal angles yield the same sine, cosine, tangent, and so on. This is the geometric source of periodicity: $\\sin(\\theta + 2\\pi) = \\sin(\\theta)$ because adding $2\\pi$ brings the terminal side back to where it started.
 
 A standard task is finding the coterminal angle within $[0°, 360°)$ or $[0, 2\\pi)$. This amounts to dividing by $360°$ (or $2\\pi$) and taking the remainder. For example, $\\theta = 850°$: dividing $850$ by $360$ gives quotient 2 with remainder $130$, so the coterminal angle in $[0°, 360°)$ is $130°$. For negative angles, add full rotations until the result falls in the desired range: $\\theta = -200°$ becomes $-200° + 360° = 160°$.`,
     before: ``,
@@ -2129,7 +2131,9 @@ A standard task is finding the coterminal angle within $[0°, 360°)$ or $[0, 2\
     title: `Complementary and Supplementary Angles`,
     content: `Two angles are complementary if they sum to $90°$ (or $\\frac{\\pi}{2}$ radians). Two angles are supplementary if they sum to $180°$ (or $\\pi$ radians). These relationships appear constantly in trigonometry, geometry, and the analysis of triangles.
 
-In a right triangle, the two acute angles are always complementary — they must sum to $90°$ because the three angles of any triangle sum to $180°$ and one angle is already $90°$. This geometric fact is the origin of the cofunction relationships in [right triangle trigonometry](!/trigonometry/right-triangle): $\\sin(\\theta) = \\cos(90° - \\theta)$, $\\tan(\\theta) = \\cot(90° - \\theta)$, and $\\sec(\\theta) = \\csc(90° - \\theta)$. The complement of an angle swaps each trigonometric function with its cofunction — a pattern formalized in the cofunction [identities](!/trigonometry/identities).
+@academic[rule_corollary_plain:In a right triangle, the two acute angles are always complementary — they must sum to $90°$ because the three angles of any triangle sum to $180°$ and one angle is already $90°$.]@
+
+This geometric fact is the origin of the cofunction relationships in [right triangle trigonometry](!/trigonometry/right-triangle): $\\sin(\\theta) = \\cos(90° - \\theta)$, $\\tan(\\theta) = \\cot(90° - \\theta)$, and $\\sec(\\theta) = \\csc(90° - \\theta)$. The complement of an angle swaps each trigonometric function with its cofunction — a pattern formalized in the cofunction [identities](!/trigonometry/identities).
 
 Supplementary angles arise naturally in the context of the [unit circle](!/trigonometry/unit-circle). The angles $\\theta$ and $\\pi - \\theta$ are supplementary, and their reference angles are equal. This produces three companion identities — supplementary angles have equal sines, opposite cosines, and opposite tangents:
 

@@ -15,6 +15,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -575,8 +577,27 @@ const schemas = {
     }),
   };
 
+  const improperTestTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Three tests for improper integrals',
+    preface: 'Most improper integrals cannot be evaluated directly. These three tests decide convergence by comparing with integrals whose behaviour is known.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Start from the p-test',
+    conclusion: 'The p-test supplies the benchmarks; comparison and limit comparison carry a benchmark\'s verdict over to the integral you have.',
+    root: { name: 'Convergence tests', sub: 'for improper integrals' },
+    children: [
+      { id: 'p', name: 'p-test', symbol: '$\\int_1^\\infty \\frac{1}{x^p}\\,dx$', items: [
+        { label: 'Verdict', text: 'converges exactly when $p > 1$' } ] },
+      { id: 'comp', name: 'Comparison', items: [
+        { label: 'How', text: 'bound by a known integral' } ], flag: true, warn: 'works in one direction only' },
+      { id: 'lim', name: 'Limit comparison', items: [
+        { label: 'How', text: 'ratio limit finite and positive' }, { label: 'Verdict', text: 'both integrals behave the same' } ] },
+    ],
+  };
+
   return {
   props: {
+    improperTestTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -596,7 +617,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({improperTestTree, seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -694,6 +715,14 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj8.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="improper-convergence-tests-tree"
+            title="Convergence tests for improper integrals"
+            source="/calculus/integrals/improper"
+          >
+            <TopDownTree data={improperTestTree} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

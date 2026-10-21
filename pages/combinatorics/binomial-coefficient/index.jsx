@@ -1682,7 +1682,8 @@ Pascal's rule arranges all binomial coefficients into a triangular array. Row $n
 @academic[formula_callout:Pascal's Triangle
 $$\\binom{n}{0}, \\binom{n}{1}, \\ldots, \\binom{n}{n}.$$]@
 
-Each interior entry equals the sum of the two entries directly above it — the visual form of Pascal's rule.
+@academic[rule:Pascal's Rule
+Each interior entry equals the sum of the two entries directly above it — the visual form of Pascal's rule.]@
 
 ## What the Triangle Encodes
 
